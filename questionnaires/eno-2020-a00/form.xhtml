@@ -49,6 +49,19 @@
                   <Variable idVariable="CONFORT"/>
                   <Variable idVariable="SUPERFICIE"/>
                </k3ym4bwp>
+               <Groupe idGroupe="TCL_2">
+                  <Groupe typeGroupe="TCL" idGroupe="TCL-1">
+                     <k3ymch91>
+                        <Variable idVariable="PROPRIO"/>
+                     </k3ymch91>
+                     <k3ymch92>
+                        <Variable idVariable="DEMENAGEMENT"/>
+                     </k3ymch92>
+                     <k3ymch93>
+                        <Variable idVariable="TPSTRAJET"/>
+                     </k3ymch93>
+                  </Groupe>
+               </Groupe>
                <INSEE-BUSINESS-TEMPS>
                   <INSEE-BUSINESS-TEMPS-QI-1/>
                   <Variable idVariable="HEURE_REMPL"/>
@@ -62,6 +75,7 @@
                   <util>
                      <sectionCourante>1</sectionCourante>
                      <nomSectionCourante/>
+                     <CurrentLoopElement loop-name="TCL_2"/>
                      <expedie>non</expedie>
                      <extrait>non</extrait>
                      <dateHeure/>
@@ -76,6 +90,19 @@
                   <Groupe typeGroupe="TCL" idGroupe="">
                      <Variable idVariable="PRENOM"/>
                      <Variable idVariable="AGE"/>
+                  </Groupe>
+               </Groupe>
+               <Groupe idGroupe="TCL_2">
+                  <Groupe typeGroupe="TCL" idGroupe="">
+                     <k3ymch91>
+                        <Variable idVariable="PROPRIO"/>
+                     </k3ymch91>
+                     <k3ymch92>
+                        <Variable idVariable="DEMENAGEMENT"/>
+                     </k3ymch92>
+                     <k3ymch93>
+                        <Variable idVariable="TPSTRAJET"/>
+                     </k3ymch93>
                   </Groupe>
                </Groupe>
             </LoopModels>
@@ -141,6 +168,37 @@
                         name="SUPERFICIE"
                         ref="Variable[@idVariable='SUPERFICIE']">
                   <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=500 and xs:integer(.)&gt;=0) else (.='')"/>
+               </xf:bind>
+            </xf:bind>
+            <xf:bind id="TCL_2-bind"
+                     name="TCL_2"
+                     nodeset="instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL']"
+                     relevant="@idGroupe = instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][not(xs:integer(if (instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe='TCL']/@idGroupe]//Variable[@idVariable='AGE']/string()='') then 0 else instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe='TCL']/@idGroupe]//Variable[@idVariable='AGE']) &lt; 18)]/@idGroupe and @idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']">
+               <xf:bind id="k3ymch91-bind"
+                        name="k3ymch91"
+                        ref="k3ymch91"
+                        relevant="exists(ancestor::Groupe[@typeGroupe='TCL'][@idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']])">
+                  <xf:bind id="PROPRIO-bind"
+                           name="PROPRIO"
+                           ref="Variable[@idVariable='PROPRIO']"/>
+               </xf:bind>
+               <xf:bind id="k3ymch92-bind"
+                        name="k3ymch92"
+                        ref="k3ymch92"
+                        relevant="instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][@idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']]//Variable[@idVariable='PROPRIO'] = '1'">
+                  <xf:bind id="DEMENAGEMENT-bind"
+                           name="DEMENAGEMENT"
+                           ref="Variable[@idVariable='DEMENAGEMENT']"/>
+               </xf:bind>
+               <xf:bind id="k3ymch93-bind"
+                        name="k3ymch93"
+                        ref="k3ymch93"
+                        relevant="exists(ancestor::Groupe[@typeGroupe='TCL'][@idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']])">
+                  <xf:bind id="TPSTRAJET-bind"
+                           name="TPSTRAJET"
+                           ref="Variable[@idVariable='TPSTRAJET']">
+                     <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=180 and xs:integer(.)&gt;=0) else (.='')"/>
+                  </xf:bind>
                </xf:bind>
             </xf:bind>
             <xf:bind id="INSEE-BUSINESS-TEMPS-bind"
@@ -335,6 +393,41 @@
                      <label>➡ 2. Quelle est la superficie en m2 de votre logement ?</label>
                      <alert>Vous devez saisir un nombre entier compris entre 0 et 500</alert>
                   </SUPERFICIE>
+                  <k3ymch91>
+                     <label>III - Questionnaire individus 1</label>
+                  </k3ymch91>
+                  <PROPRIO>
+                     <label>➡ 1. ¤k3ylzyo4-QOP-k3yn76i5¤, êtes-vous propriétaire du logement ?</label>
+                     <item>
+                        <label>Oui</label>
+                        <value>1</value>
+                     </item>
+                     <item>
+                        <label>Non</label>
+                        <value>2</value>
+                     </item>
+                  </PROPRIO>
+                  <k3ymch92>
+                     <label>IV - Questionnaire individus 2</label>
+                  </k3ymch92>
+                  <DEMENAGEMENT>
+                     <label>➡ 1. ¤k3ylzyo4-QOP-k3yn76i5¤, envisagez-vous de déménager d'ici la fin de l'année civile en cours ?</label>
+                     <item>
+                        <label>Oui</label>
+                        <value>1</value>
+                     </item>
+                     <item>
+                        <label>Non</label>
+                        <value>2</value>
+                     </item>
+                  </DEMENAGEMENT>
+                  <k3ymch93>
+                     <label>V - Questionnaire individus 3</label>
+                  </k3ymch93>
+                  <TPSTRAJET>
+                     <label>➡ 1. ¤k3ylzyo4-QOP-k3yn76i5¤, quel temps vous faut-il pour aller de votre domicile à votre travail ou à votre lieu d'études (réponse en minutes) ?</label>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 180</alert>
+                  </TPSTRAJET>
                   <AddLine>
                      <label>Ajouter une ligne</label>
                   </AddLine>
@@ -463,6 +556,11 @@
                   <INSEE-BUSINESS-QUEST-DEBUT/>
                   <k3ym61vf/>
                   <k3ym4bwp/>
+                  <TCL_2>
+                     <k3ymch91/>
+                     <k3ymch92/>
+                     <k3ymch93/>                     
+                  </TCL_2>
                   <INSEE-BUSINESS-TEMPS/>
                   <VALIDATION/>
                   <CONFIRMATION/>
@@ -485,10 +583,10 @@
                      relevant="instance('fr-form-instance')/stromae/util/sectionCourante='1'"
                      ref="Start"/>
             <xf:bind id="previous-bind"
-                     relevant="not(instance('fr-form-instance')/stromae/util/sectionCourante='1' or number(instance('fr-form-instance')/stromae/util/sectionCourante)&gt; 6)"
+                     relevant="not(instance('fr-form-instance')/stromae/util/sectionCourante='1' or number(instance('fr-form-instance')/stromae/util/sectionCourante)&gt; 9)"
                      ref="Previous"/>
             <xf:bind id="next-bind"
-                     relevant="not(instance('fr-form-instance')/stromae/util/sectionCourante='1' or number(instance('fr-form-instance')/stromae/util/sectionCourante)&gt; 5)"
+                     relevant="not(instance('fr-form-instance')/stromae/util/sectionCourante='1' or number(instance('fr-form-instance')/stromae/util/sectionCourante)&gt; 8)"
                      ref="Next"/>
             <xf:bind id="send-bind"
                      ref="Send"
@@ -497,7 +595,7 @@
             <xf:bind id="progress-percent-bind"
                      name="progress-percent"
                      ref="ProgressPercent"
-                     calculate="if (number(instance('fr-form-instance')/stromae/util/sectionCourante)=1) then '0' else (if (number(instance('fr-form-instance')/stromae/util/sectionCourante)&gt;5) then '100' else round((number(instance('fr-form-instance')/stromae/util/sectionCourante) - 2) div (4)*100))"/>
+                     calculate="if (number(instance('fr-form-instance')/stromae/util/sectionCourante)=1) then '0' else (if (number(instance('fr-form-instance')/stromae/util/sectionCourante)&gt;8) then '100' else round((number(instance('fr-form-instance')/stromae/util/sectionCourante) - 2+ (if (number(instance('fr-form-instance')/stromae/util/sectionCourante) &lt;5) then 0 else (if (number(instance('fr-form-instance')/stromae/util/sectionCourante) &gt;7) then ((count(instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL']) -1)*3) else (count(instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][@idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']]/preceding::Groupe[@typeGroupe='TCL'][parent::Groupe[@idGroupe='TCL_2']])*3)))) div (7 + (count(instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL']) -1)*3)*100))"/>
             <xf:bind id="progress-bind" ref="Progress"/>
             <xf:bind id="page-top-bind" ref="PageTop"/>
             <xf:bind id="messageConfirmation-bind"
@@ -515,6 +613,19 @@
                </xf:bind>
                <xf:bind id="page-k3ym4bwp-bind" name="k3ym4bwp" ref="k3ym4bwp">
                   <xf:calculate value="xxf:evaluate-bind-property('k3ym4bwp-bind','relevant')"/>
+               </xf:bind>
+               <xf:bind id="page-TCL_2-bind"
+                  name="TCL_2"
+                  nodeset="instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL']">
+               <xf:bind id="page-k3ymch91-bind" name="k3ymch91" ref="k3ymch91">
+                  <xf:calculate value="xxf:evaluate-bind-property('k3ymch91-bind','relevant')"/>
+               </xf:bind>
+               <xf:bind id="page-k3ymch92-bind" name="k3ymch92" ref="k3ymch92">
+                  <xf:calculate value="xxf:evaluate-bind-property('k3ymch92-bind','relevant')"/>
+               </xf:bind>
+               <xf:bind id="page-k3ymch93-bind" name="k3ymch93" ref="k3ymch93">
+                  <xf:calculate value="xxf:evaluate-bind-property('k3ymch93-bind','relevant')"/>
+               </xf:bind>
                </xf:bind>
                <xf:bind id="page-INSEE-BUSINESS-TEMPS-bind"
                         name="INSEE-BUSINESS-TEMPS"
@@ -547,6 +658,8 @@
             <xf:action ev:event="xforms-submit-error">
                <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
                             value="string(number(instance('fr-form-instance')/stromae/util/sectionCourante)-1)"/>
+               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
+                            value="instance('fr-form-util')/Pages//*[not(descendant::*)][position()=number(instance('fr-form-instance')/stromae/util/sectionCourante)]/name()"/>
                <xf:setvalue ref="instance('fr-form-instance')/stromae/util/expedie"
                             value="string('non')"/>
                <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
@@ -562,6 +675,8 @@
                         replace="none"
                         resource="/expedier/eno-2020-a00/{xxf:get-request-parameter('unite-enquete')}?modele=loop"/>
          <xf:action ev:event="xforms-ready">
+            <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
+               value="instance('fr-form-util')/Pages//*[not(descendant::*)][number(instance('fr-form-instance')/stromae/util/sectionCourante)]/name()"/>
             <xf:action if="not(instance('fr-form-instance')//Groupe[@idGroupe='TCL']/*)                             or count(instance('fr-form-instance')//Groupe[@idGroupe='TCL']/Groupe[@typeGroupe='TCL']) &lt; instance('fr-form-instance')//TCL-Count">
                <xf:action while="count(instance('fr-form-instance')//Groupe[@idGroupe='TCL']/Groupe[@typeGroupe='TCL']) &lt; instance('fr-form-instance')//TCL-Count">
                   <xf:insert context="instance('fr-form-instance')//Groupe[@idGroupe='TCL']"
@@ -576,19 +691,29 @@
                <xf:setvalue ref="instance('fr-form-instance')//TCL-Count"
                             value="count(instance('fr-form-instance')//Groupe[@idGroupe='TCL']/Groupe[@typeGroupe='TCL'])"/>
             </xf:action>
+            <xf:action if="not(instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/*)                                     or count(instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL']) &lt; instance('fr-form-instance')//TCL-Count">
+               <xf:action while="count(instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL']) &lt; instance('fr-form-instance')//TCL-Count">
+                  <xf:insert context="instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']"
+                             nodeset="instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL']"
+                             position="after"
+                             origin="instance('fr-form-loop-model')/Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL']"/>
+                  <xf:setvalue ref="instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL'][last()]/@idGroupe"
+                               value="instance('fr-form-instance')//Groupe[@idGroupe='TCL']/Groupe[@typeGroupe='TCL'][position() = count(instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL'])]/@idGroupe"/>
+               </xf:action>
+            </xf:action>
             <xf:toggle case="{instance('fr-form-instance')/stromae/util/sectionCourante}"/>
             <xxf:show if="instance('fr-form-instance')/stromae/util/expedie='non' and not(instance('fr-form-instance')/stromae/util/sectionCourante='1')"
                       dialog="welcome-back"/>
          </xf:action>
          <xf:action ev:event="ChangementPage">
-            <xf:action iterate="instance('fr-form-instance')//*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*">
-               <xf:dispatch name="DOMFocusOut" target="{concat(context()/name(),'-control')}"/>
+            <xf:action iterate="instance('fr-form-instance')//*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*[@idVariable]">
+               <xf:dispatch name="DOMFocusOut" target="{concat(context()/@idVariable,'-control')}"/>
             </xf:action>
-            <xf:action iterate="instance('fr-form-instance')//*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*[ends-with(name(),'-Container')]/*">
+            <xf:action iterate="instance('fr-form-instance')//*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//Groupe[@typeGroupe]">
                <xf:var name="loop-index" value="position()"/>
-               <xf:setindex repeat="{context()/parent::*/name()}" index="$loop-index"/>
+               <xf:setindex repeat="{context()/parent::Groupe/@idGroupe}" index="$loop-index"/>
                <xf:action iterate="descendant::*">
-                  <xf:dispatch name="DOMFocusOut" target="{concat(context()/name(),'-control')}"/>
+                  <xf:dispatch name="DOMFocusOut" target="{concat(context()/@idVariable,'-control')}"/>
                </xf:action>
             </xf:action>
             <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
@@ -621,23 +746,95 @@
             <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
                          value="string('false')"/>
             <xf:action if="instance('fr-form-util')/PreviousNext='1'">
+               <xf:action if="number(instance('fr-form-instance')/stromae/util/sectionCourante)  &lt; 5">
+                  <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']"
+                               value="if (instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL' and @idGroupe = instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][not(xs:integer(if (instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe='TCL']/@idGroupe]//Variable[@idVariable='AGE']/string()='') then 0 else instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe='TCL']/@idGroupe]//Variable[@idVariable='AGE']) &lt; 18)]/@idGroupe]) then (instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL' and @idGroupe = instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][not(xs:integer(if (instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe='TCL']/@idGroupe]//Variable[@idVariable='AGE']/string()='') then 0 else instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe='TCL']/@idGroupe]//Variable[@idVariable='AGE']) &lt; 18)]/@idGroupe][1]/@idGroupe) else ''"/>
+                  <xf:action if="instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2'] != ''">
+                     <xf:setindex repeat="TCL_2"
+                                  index="instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL' and @idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']]/count(preceding-sibling::*) +1"/>
+                     <xf:dispatch name="DOMFocusOut" target="k3ymch91-control"/>
+                     <xf:dispatch name="DOMFocusOut" target="k3ymch92-control"/>
+                     <xf:dispatch name="DOMFocusOut" target="k3ymch93-control"/>
+                  </xf:action>
+               </xf:action>
+               <xf:action if="number(instance('fr-form-instance')/stromae/util/sectionCourante) &gt;= 5 and number(instance('fr-form-instance')/stromae/util/sectionCourante) &lt;= 7">
+                  <xf:action if="instance('fr-form-util')/changementPageEffectue='false' and instance('fr-form-util')/Pages//*[not(descendant::*)][name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]/following::*[not(descendant::*)][not(contains(text(),'false'))][1]/count(preceding::*[ancestor::Pages and not(descendant::*)]) &lt;= 6">
+                     <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
+                        value="instance('fr-form-util')/Pages//*[not(descendant::*)][name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]/following::*[ancestor::Pages and not(descendant::*)][not(contains(text(),'false'))][1]/name()"/>
+                     <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                                  value="string('true')"/>
+                  </xf:action>
+                  <xf:action if="instance('fr-form-util')/changementPageEffectue='false'">
+                     <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']"
+                                  value="if (instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL' and @idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']][following-sibling::Groupe[@typeGroupe='TCL'][@idGroupe = instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][not(xs:integer(if (instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe='TCL']/@idGroupe]//Variable[@idVariable='AGE']/string()='') then 0 else instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe='TCL']/@idGroupe]//Variable[@idVariable='AGE']) &lt; 18)]/@idGroupe]]) then (instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL' and @idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']]/following-sibling::Groupe[@typeGroupe='TCL'][@idGroupe = instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][not(xs:integer(if (instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe='TCL']/@idGroupe]//Variable[@idVariable='AGE']/string()='') then 0 else instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe='TCL']/@idGroupe]//Variable[@idVariable='AGE']) &lt; 18)]/@idGroupe][1]/@idGroupe) else ''"/>
+                     <xf:action if="instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2'] != ''">
+                        <xf:setindex repeat="TCL_2"
+                                     index="instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL' and @idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']]/count(preceding-sibling::*) +1"/>
+                        <xf:dispatch name="DOMFocusOut" target="k3ymch91-control"/>
+                        <xf:dispatch name="DOMFocusOut" target="k3ymch92-control"/>
+                        <xf:dispatch name="DOMFocusOut" target="k3ymch93-control"/>
+                     </xf:action>
+                     <xf:action if="instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2'] != ''">
+                        <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
+                           value="if (instance('fr-form-util')/Pages//k3ymch91[not(contains(text(),'false'))]) then 'k3ymch91' else instance('fr-form-util')/Pages//k3ymch91/following::*[not(descendant::*)][not(contains(text(),'false'))][1]/name()"/>
+                        <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                                     value="string('true')"/>
+                     </xf:action>
+                  </xf:action>
+               </xf:action>
                <xf:action if="instance('fr-form-util')/changementPageEffectue='false'">
                   <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
-                               value="instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]/following-sibling::*[not(text()='false')][1]/name()"/>
+                     value="instance('fr-form-util')/Pages//*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]/following::*[not(descendant::*) and not(contains(text(),'false'))][1]/name()"/>
                   <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
                                value="string('true')"/>
                </xf:action>
             </xf:action>
             <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
+               <xf:action if="number(instance('fr-form-instance')/stromae/util/sectionCourante)  &gt; 7">
+                  <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']"
+                               value="if (instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL' and @idGroupe = instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][not(xs:integer(if (instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe='TCL']/@idGroupe]//Variable[@idVariable='AGE']/string()='') then 0 else instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe='TCL']/@idGroupe]//Variable[@idVariable='AGE']) &lt; 18)]/@idGroupe]) then (instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL' and @idGroupe = instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][not(xs:integer(if (instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe='TCL']/@idGroupe]//Variable[@idVariable='AGE']/string()='') then 0 else instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe='TCL']/@idGroupe]//Variable[@idVariable='AGE']) &lt; 18)]/@idGroupe][last()]/@idGroupe) else ''"/>
+                  <xf:action if="instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2'] != ''">
+                     <xf:setindex repeat="TCL_2"
+                                  index="instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL' and @idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']]/count(preceding-sibling::*) +1"/>
+                     <xf:dispatch name="DOMFocusOut" target="k3ymch91-control"/>
+                     <xf:dispatch name="DOMFocusOut" target="k3ymch92-control"/>
+                     <xf:dispatch name="DOMFocusOut" target="k3ymch93-control"/>
+                  </xf:action>
+               </xf:action>
+               <xf:action if="number(instance('fr-form-instance')/stromae/util/sectionCourante) &gt;= 5 and number(instance('fr-form-instance')/stromae/util/sectionCourante) &lt;= 7">
+                  <xf:action if="instance('fr-form-util')/changementPageEffectue='false' and instance('fr-form-util')/Pages//*[not(descendant::*)][name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]/preceding::*[ancestor::Pages and not(descendant::*)][not(contains(text(),'false'))][1]/count(preceding-sibling::*) &gt;= 4">
+                     <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
+                        value="instance('fr-form-util')/Pages//*[not(descendant::*)][name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]/preceding::*[ancestor::Pages and not(descendant::*)][not(contains(text(),'false'))][1]/name()"/>
+                     <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                                  value="string('true')"/>
+                  </xf:action>
+                  <xf:action if="instance('fr-form-util')/changementPageEffectue='false'">
+                     <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']"
+                                  value="if (instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL' and @idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']][preceding-sibling::Groupe[@typeGroupe='TCL'][@idGroupe = instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][not(xs:integer(if (instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe='TCL']/@idGroupe]//Variable[@idVariable='AGE']/string()='') then 0 else instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe='TCL']/@idGroupe]//Variable[@idVariable='AGE']) &lt; 18)]/@idGroupe]]) then (instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL' and @idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']]/preceding-sibling::Groupe[@typeGroupe='TCL'][@idGroupe = instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][not(xs:integer(if (instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe='TCL']/@idGroupe]//Variable[@idVariable='AGE']/string()='') then 0 else instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe='TCL']/@idGroupe]//Variable[@idVariable='AGE']) &lt; 18)]/@idGroupe][1]/@idGroupe) else ''"/>
+                     <xf:action if="instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2'] != ''">
+                        <xf:setindex repeat="TCL_2"
+                                     index="instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL' and @idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']]/count(preceding-sibling::*) +1"/>
+                        <xf:dispatch name="DOMFocusOut" target="k3ymch91-control"/>
+                        <xf:dispatch name="DOMFocusOut" target="k3ymch92-control"/>
+                        <xf:dispatch name="DOMFocusOut" target="k3ymch93-control"/>
+                     </xf:action>
+                     <xf:action if="instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2'] != ''">
+                        <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
+                           value="if (instance('fr-form-util')/Pages//k3ymch93[not(contains(text(),'false'))]) then 'k3ymch93' else instance('fr-form-util')/Pages//k3ymch93/preceding::*[ancestor::Pages and not(descendant::*)][not(contains(text(),'false'))][1]/name()"/>
+                        <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                                     value="string('true')"/>
+                     </xf:action>
+                  </xf:action>
+               </xf:action>
                <xf:action if="instance('fr-form-util')/changementPageEffectue='false'">
                   <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
-                               value="instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]/preceding-sibling::*[not(text()='false')][1]/name()"/>
+                     value="instance('fr-form-util')/Pages//*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]/preceding::*[not(descendant::*) and not(contains(text(),'false'))][1]/name()"/>
                   <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
                                value="string('true')"/>
                </xf:action>
             </xf:action>
             <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
-                         value="count(instance('fr-form-util')/Pages/*[following-sibling::*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]) +1"/>
+                         value="count(instance('fr-form-util')/Pages//*[following::*[ancestor::Pages and name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]]) +1"/>
             <xf:setvalue ref="instance('fr-form-instance')/stromae/util/dateHeure"
                          value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
             <xf:toggle case="{instance('fr-form-instance')/stromae/util/sectionCourante}"/>
@@ -836,6 +1033,26 @@
                                                xxf:fraction-digits="0"
                                                xxf:non-negative="true()">
                                        <xf:alert ref="$form-resources/AGE/alert"/>
+                                       <xf:action ev:event="xforms-value-changed"
+                                                  if="not(xxf:evaluate-bind-property('k3ymch91-bind','relevant'))"
+                                                  iterate="instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor::Groupe[@typeGroupe='TCL']/@idGroupe]//k3ymch91//*[not(descendant::*) and not(ends-with(name(),'-Count'))]">
+                                          <xf:setvalue ref="." value="''"/>
+                                       </xf:action>
+                                       <xf:action ev:event="xforms-value-changed"
+                                                  if="not(xxf:evaluate-bind-property('k3ymch92-bind','relevant'))"
+                                                  iterate="instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor::Groupe[@typeGroupe='TCL']/@idGroupe]//k3ymch92//*[not(descendant::*) and not(ends-with(name(),'-Count'))]">
+                                          <xf:setvalue ref="." value="''"/>
+                                       </xf:action>
+                                       <xf:action ev:event="xforms-value-changed"
+                                                  if="not(xxf:evaluate-bind-property('k3ymch93-bind','relevant'))"
+                                                  iterate="instance('fr-form-instance')//Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor::Groupe[@typeGroupe='TCL']/@idGroupe]//k3ymch93//*[not(descendant::*) and not(ends-with(name(),'-Count'))]">
+                                          <xf:setvalue ref="." value="''"/>
+                                       </xf:action>
+                                       <xf:action ev:event="xforms-value-changed"
+                                                  if="not(xxf:evaluate-bind-property('TCL_2-bind','relevant'))"
+                                                  iterate="instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL' and @idGroupe = current()/ancestor::Groupe[@typeGroupe='TCL']/@idGroupe]//*[not(descendant::*) and not(ends-with(name(),'-Count'))]">
+                                          <xf:setvalue ref="." value="''"/>
+                                       </xf:action>
                                     </fr:number>
                                  </xhtml:td>
                               </xhtml:tr>
@@ -852,6 +1069,12 @@
                                       position="after"
                                       origin="instance('fr-form-loop-model')/Groupe[@idGroupe='TCL']/Groupe[@typeGroupe='TCL']"/>
                            <xf:setvalue ref="instance('fr-form-instance')//Groupe[@idGroupe='TCL']/Groupe[@typeGroupe='TCL'][last()]/@idGroupe"
+                                        value="concat('TCL-',instance('fr-form-instance')//TCL-Count)"/>
+                           <xf:insert context="instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']"
+                                      nodeset="instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL']"
+                                      position="after"
+                                      origin="instance('fr-form-loop-model')/Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL']"/>
+                           <xf:setvalue ref="instance('fr-form-instance')//Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL'][last()]/@idGroupe"
                                         value="concat('TCL-',instance('fr-form-instance')//TCL-Count)"/>
                         </xf:action>
                      </xf:trigger>
@@ -889,7 +1112,90 @@
                      </fr:number>
                   </fr:section>
                </xf:case>
+               <xf:var name="TCL_2-position"
+                       value="number(instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2'])"/>
                <xf:case id="5">
+                  <xf:repeat id="TCL_2-k3ymch91"
+                             bind="TCL_2-bind"
+                             nodeset="Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL']"
+                             relevant="@idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']">
+                     <xf:var name="TCL_2-position" value="position()"/>
+                     <fr:section id="k3ymch91-control" bind="k3ymch91-bind" name="k3ymch91">
+                        <xf:label ref="$form-resources/k3ymch91/label"/>
+                        <xf:select id="PROPRIO-control"
+                                   name="PROPRIO"
+                                   bind="PROPRIO-bind"
+                                   appearance="full"
+                                   class="question">
+                           <xf:label ref="replace($form-resources/PROPRIO/label,'¤k3ylzyo4-QOP-k3yn76i5¤',instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][@idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']]//Variable[@idVariable='PRENOM'])"/>
+                           <xf:itemset ref="$form-resources/PROPRIO/item">
+                              <xf:label ref="label"/>
+                              <xf:value ref="value"/>
+                           </xf:itemset>
+                           <xf:action ev:event="xforms-value-changed"
+                                      if="substring-after(instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][@idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']]//Variable[@idVariable='PROPRIO'],' ') ne ''">
+                              <xf:setvalue ref="instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][@idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']]//Variable[@idVariable='PROPRIO']"
+                                           value="substring-after(instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][@idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']]//Variable[@idVariable='PROPRIO'],' ')"/>
+                           </xf:action>
+                           <xf:action ev:event="xforms-value-changed"
+                                      if="not(xxf:evaluate-bind-property('k3ymch92-bind','relevant'))"
+                                      iterate="instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][@idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']]//k3ymch92//*[not(descendant::*) and not(ends-with(name(),'-Count'))]">
+                              <xf:setvalue ref="." value="''"/>
+                           </xf:action>
+                        </xf:select>
+                     </fr:section>
+                  </xf:repeat>
+               </xf:case>
+               <xf:case id="6">
+                  <xf:repeat id="TCL_2-k3ymch92"
+                             bind="TCL_2-bind"
+                             nodeset="Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL']"
+                             relevant="@idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']">
+                     <xf:var name="TCL_2-position" value="position()"/>
+                     <fr:section id="k3ymch92-control" bind="k3ymch92-bind" name="k3ymch92">
+                        <xf:label ref="$form-resources/k3ymch92/label"/>
+                        <xf:select id="DEMENAGEMENT-control"
+                                   name="DEMENAGEMENT"
+                                   bind="DEMENAGEMENT-bind"
+                                   appearance="full"
+                                   class="question">
+                           <xf:label ref="replace($form-resources/DEMENAGEMENT/label,'¤k3ylzyo4-QOP-k3yn76i5¤',instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][@idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']]//Variable[@idVariable='PRENOM'])"/>
+                           <xf:itemset ref="$form-resources/DEMENAGEMENT/item">
+                              <xf:label ref="label"/>
+                              <xf:value ref="value"/>
+                           </xf:itemset>
+                           <xf:action ev:event="xforms-value-changed"
+                                      if="substring-after(instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][@idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']]//Variable[@idVariable='DEMENAGEMENT'],' ') ne ''">
+                              <xf:setvalue ref="instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][@idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']]//Variable[@idVariable='DEMENAGEMENT']"
+                                           value="substring-after(instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][@idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']]//Variable[@idVariable='DEMENAGEMENT'],' ')"/>
+                           </xf:action>
+                        </xf:select>
+                     </fr:section>
+                  </xf:repeat>
+               </xf:case>
+               <xf:case id="7">
+                  <xf:repeat id="TCL_2-k3ymch93"
+                             bind="TCL_2-bind"
+                             nodeset="Groupe[@idGroupe='TCL_2']/Groupe[@typeGroupe='TCL']"
+                             relevant="@idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']">
+                     <xf:var name="TCL_2-position" value="position()"/>
+                     <fr:section id="k3ymch93-control" bind="k3ymch93-bind" name="k3ymch93">
+                        <xf:label ref="$form-resources/k3ymch93/label"/>
+                        <fr:number id="TPSTRAJET-control"
+                                   name="TPSTRAJET"
+                                   bind="TPSTRAJET-bind"
+                                   class="question number"
+                                   xxf:maxlength="3"
+                                   grouping-separator=" "
+                                   xxf:fraction-digits="0"
+                                   xxf:non-negative="true()">
+                           <xf:label ref="replace($form-resources/TPSTRAJET/label,'¤k3ylzyo4-QOP-k3yn76i5¤',instance('fr-form-instance')//Groupe[@typeGroupe='TCL'][@idGroupe = instance('fr-form-instance')/stromae/util/CurrentLoopElement[@loop-name='TCL_2']]//Variable[@idVariable='PRENOM'])"/>
+                           <xf:alert ref="$form-resources/TPSTRAJET/alert"/>
+                        </fr:number>
+                     </fr:section>
+                  </xf:repeat>
+               </xf:case>
+               <xf:case id="8">
                   <fr:section id="INSEE-BUSINESS-TEMPS-control"
                               bind="INSEE-BUSINESS-TEMPS-bind"
                               name="INSEE-BUSINESS-TEMPS">
@@ -928,7 +1234,7 @@
                      </xf:textarea>
                   </fr:section>
                </xf:case>
-               <xf:case id="6">
+               <xf:case id="9">
                   <fr:section id="VALIDATION-control" bind="VALIDATION-bind" name="VALIDATION">
                      <xf:label ref="$form-resources/VALIDATION/label"/>
                      <xhtml:div class="center">
@@ -967,7 +1273,7 @@
                      </xhtml:div>
                   </fr:section>
                </xf:case>
-               <xf:case id="7">
+               <xf:case id="10">
                   <fr:section id="CONFIRMATION-control"
                               bind="CONFIRMATION-bind"
                               name="CONFIRMATION">
@@ -1003,7 +1309,7 @@
                      </xhtml:div>
                   </fr:section>
                </xf:case>
-               <xf:case id="8">
+               <xf:case id="11">
                   <fr:section id="FIN-control" bind="FIN-bind" name="FIN">
                      <xf:label ref="$form-resources/FIN/label"/>
                      <xhtml:div class="center center-body">
@@ -1093,6 +1399,8 @@
                      <xxf:hide dialog="welcome-back"/>
                      <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
                                   value="'1'"/>
+                     <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
+                                  value="instance('fr-form-util')/Pages//*[not(descendant::*)][1]/name()"/>
                      <xf:toggle case="{instance('fr-form-instance')/stromae/util/sectionCourante}"/>
                   </xf:action>
                </xf:trigger>
