@@ -524,10 +524,6 @@
                      ref="CONFIRMATION"
                      relevant="instance('fr-form-instance')/stromae/util/expedie='non'"/>
             <xf:bind id="FIN-bind" name="FIN" ref="FIN"/>
-            <xf:bind id="nomSectionCourante-bind"
-                     name="nomSectionCourante"
-                     ref="stromae/util/nomSectionCourante"
-                     calculate="(instance('fr-form-util')/Pages/*)[position()=number(instance('fr-form-instance')/stromae/util/sectionCourante)]/name()"/>
          </xf:bind>
          <xf:instance id="donnees-pilotage">
             <InformationsQuestionnaire>
@@ -1174,6 +1170,8 @@
             <xf:action ev:event="xforms-submit-error">
                <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
                             value="string(number(instance('fr-form-instance')/stromae/util/sectionCourante)-1)"/>
+               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
+                            value="instance('fr-form-util')/Pages/*[position()=number(instance('fr-form-instance')/stromae/util/sectionCourante)]/name()"/>
                <xf:setvalue ref="instance('fr-form-instance')/stromae/util/expedie"
                             value="string('non')"/>
                <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
@@ -1197,6 +1195,8 @@
                              position="after"/>
                </xf:action>
             </xf:action>
+            <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
+                         value="instance('fr-form-util')/Pages/*[number(instance('fr-form-instance')/stromae/util/sectionCourante)]/name()"/>
             <xf:action if="not(instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']/*)                             or count(instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']/Groupe[@typeGroupe='REPARTITION_CA']) &lt; instance('fr-form-instance')//REPARTITION_CA-Count">
                <xf:action while="count(instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']/Groupe[@typeGroupe='REPARTITION_CA']) &lt; instance('fr-form-instance')//REPARTITION_CA-Count">
                   <xf:insert context="instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']"
@@ -1216,10 +1216,10 @@
                       dialog="welcome-back"/>
          </xf:action>
          <xf:action ev:event="ChangementPage">
-            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*[@idVariable and not(ancestor::Groupe[ancestor::*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]])]">
+            <xf:action iterate="instance('fr-form-instance')//*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*[@idVariable]">
                <xf:dispatch name="DOMFocusOut" target="{concat(context()/@idVariable,'-control')}"/>
             </xf:action>
-            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//Groupe[@typeGroupe]">
+            <xf:action iterate="instance('fr-form-instance')//*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//Groupe[@typeGroupe]">
                <xf:var name="loop-index" value="position()"/>
                <xf:setindex repeat="{context()/parent::Groupe/@idGroupe}" index="$loop-index"/>
                <xf:action iterate="descendant::*">
@@ -1228,7 +1228,7 @@
             </xf:action>
             <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
                          value="string('false')"/>
-            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                     and not(xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true()))">
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                     and not(xxf:valid(instance('fr-form-instance')//*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true()))">
                <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
                   <xxf:show ev:event="DOMActivate" dialog="errorPrevious"/>
                </xf:action>
@@ -1238,7 +1238,7 @@
                <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
                             value="string('true')"/>
             </xf:action>
-            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                            and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true())                            and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/stromae/util/nomSectionCourante,'-bind'),'constraint')=false()">
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                            and xxf:valid(instance('fr-form-instance')//*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true())                            and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/stromae/util/nomSectionCourante,'-bind'),'constraint')=false()">
                <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
                   <xxf:show ev:event="DOMActivate" dialog="warningPrevious"/>
                </xf:action>
@@ -1248,25 +1248,31 @@
                <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
                             value="string('true')"/>
             </xf:action>
-            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true())                     and not(xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/stromae/util/nomSectionCourante,'-bind'),'constraint')=false())">
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                     and xxf:valid(instance('fr-form-instance')//*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true())                     and not(xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/stromae/util/nomSectionCourante,'-bind'),'constraint')=false())">
                <xf:dispatch name="ChangementPageEffectif" targetid="fr-form-model"/>
             </xf:action>
          </xf:action>
          <xf:action ev:event="ChangementPageEffectif">
             <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
                          value="string('false')"/>
-            <xf:action if="instance('fr-form-util')/changementPageEffectue='false' and instance('fr-form-util')/PreviousNext='1'">
-               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
-                            value="count(instance('fr-form-util')/Pages/*[position()=instance('fr-form-instance')/stromae/util/sectionCourante]/following-sibling::*[not(text()='false')][1]/preceding-sibling::*)+1"/>
-               <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
-                            value="string('true')"/>
+            <xf:action if="instance('fr-form-util')/PreviousNext='1'">
+               <xf:action if="instance('fr-form-util')/changementPageEffectue='false'">
+                  <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
+                               value="instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]/following-sibling::*[not(text()='false')][1]/name()"/>
+                  <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                               value="string('true')"/>
+               </xf:action>
             </xf:action>
-            <xf:action if="instance('fr-form-util')/changementPageEffectue='false' and instance('fr-form-util')/PreviousNext='-1'">
-               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
-                            value="count(instance('fr-form-util')/Pages/*[position()=instance('fr-form-instance')/stromae/util/sectionCourante]/preceding-sibling::*[not(text()='false')][1]/preceding-sibling::*)+1"/>
-               <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
-                            value="string('true')"/>
+            <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
+               <xf:action if="instance('fr-form-util')/changementPageEffectue='false'">
+                  <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
+                               value="instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]/preceding-sibling::*[not(text()='false')][1]/name()"/>
+                  <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                               value="string('true')"/>
+               </xf:action>
             </xf:action>
+            <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
+                         value="count(instance('fr-form-util')/Pages/*[following-sibling::*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]]) +1"/>
             <xf:setvalue ref="instance('fr-form-instance')/stromae/util/dateHeure"
                          value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
             <xf:toggle case="{instance('fr-form-instance')/stromae/util/sectionCourante}"/>
@@ -1726,6 +1732,7 @@
                            </xhtml:thead>
                            <xhtml:tbody>
                               <xf:repeat id="REPARTITION_CA"
+                                         bind="REPARTITION_CA-bind"
                                          nodeset="instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']/Groupe[@typeGroupe='REPARTITION_CA']">
                                  <xf:var name="REPARTITION_CA-position" value="position()"/>
                                  <xhtml:tr>
@@ -2295,6 +2302,8 @@
                      <xxf:hide dialog="welcome-back"/>
                      <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
                                   value="'1'"/>
+                     <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
+                                  value="instance('fr-form-util')/Pages/*[1]/name()"/>
                      <xf:toggle case="{instance('fr-form-instance')/stromae/util/sectionCourante}"/>
                   </xf:action>
                </xf:trigger>
