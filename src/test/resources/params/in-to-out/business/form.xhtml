@@ -1104,46 +1104,27 @@
             <xf:bind id="pages-bind" ref="Pages">
                <xf:bind id="page-INSEE-BUSINESS-QUEST-DEBUT-bind"
                         name="INSEE-BUSINESS-QUEST-DEBUT"
-                        ref="INSEE-BUSINESS-QUEST-DEBUT">
-                  <xf:calculate value="xxf:evaluate-bind-property('INSEE-BUSINESS-QUEST-DEBUT-bind','relevant')"/>
-               </xf:bind>
-               <xf:bind id="page-ji5ozd1c-bind" name="ji5ozd1c" ref="ji5ozd1c">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji5ozd1c-bind','relevant')"/>
-               </xf:bind>
+                        ref="INSEE-BUSINESS-QUEST-DEBUT"/>
+               <xf:bind id="page-ji5ozd1c-bind" name="ji5ozd1c" ref="ji5ozd1c"/>
                <xf:bind id="page-ji5ra55r-bind" name="ji5ra55r" ref="ji5ra55r">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji5ra55r-bind','relevant')"/>
                   <xf:constraint value="(not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='EFF3112']/string()='') then 1 else instance('fr-form-instance')//Variable[@idVariable='EFF3112'])=0 and instance('fr-form-instance')//Variable[@idVariable='DIRIGEANT_SALARIE'] ='1'))"/>
                </xf:bind>
                <xf:bind id="page-ji5s5tl9-bind" name="ji5s5tl9" ref="ji5s5tl9">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji5s5tl9-bind','relevant')"/>
                   <xf:constraint value="(not(if (string(instance('fr-form-instance')//Variable[@idVariable='DATE_CLOTURE_EXERCICE']) != '') then (instance('fr-form-instance')//Variable[@idVariable='DATE_CLOTURE_EXERCICE']&gt;xs:date(concat(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='ANNEE_EXERCICE_PLUS_UN']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='ANNEE_EXERCICE_PLUS_UN']),'-06-30'))) else (1=0)))"/>
                </xf:bind>
                <xf:bind id="page-ji5s9w50-bind" name="ji5s9w50" ref="ji5s9w50">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji5s9w50-bind','relevant')"/>
                   <xf:constraint value="(not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='CA_MARCHANDISES']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CA_MARCHANDISES'])&gt; xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='CA']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CA'])))"/>
                   <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='UNITE_REPARTITION']='pourcent' and sum(instance('fr-form-instance')//xs:integer(Variable[@idVariable='REPARTITION_CA3'][string() castable as xs:decimal]), 0) != 100))"/>
                   <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='UNITE_REPARTITION'] = 'euro' and sum(instance('fr-form-instance')//xs:integer(Variable[@idVariable='REPARTITION_CA3'][string() castable as xs:decimal]), 0) != xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='CA']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CA']) and instance('fr-form-instance')//Variable[@idVariable='CA']/string()!=''))"/>
                </xf:bind>
-               <xf:bind id="page-ji5siius-bind" name="ji5siius" ref="ji5siius">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji5siius-bind','relevant')"/>
-               </xf:bind>
-               <xf:bind id="page-ji5sq5d2-bind" name="ji5sq5d2" ref="ji5sq5d2">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji5sq5d2-bind','relevant')"/>
-               </xf:bind>
-               <xf:bind id="page-ji5xdzvj-bind" name="ji5xdzvj" ref="ji5xdzvj">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji5xdzvj-bind','relevant')"/>
-               </xf:bind>
-               <xf:bind id="page-ji5yf1co-bind" name="ji5yf1co" ref="ji5yf1co">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji5yf1co-bind','relevant')"/>
-               </xf:bind>
-               <xf:bind id="page-ji5y7dai-bind" name="ji5y7dai" ref="ji5y7dai">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji5y7dai-bind','relevant')"/>
-               </xf:bind>
+               <xf:bind id="page-ji5siius-bind" name="ji5siius" ref="ji5siius"/>
+               <xf:bind id="page-ji5sq5d2-bind" name="ji5sq5d2" ref="ji5sq5d2"/>
+               <xf:bind id="page-ji5xdzvj-bind" name="ji5xdzvj" ref="ji5xdzvj"/>
+               <xf:bind id="page-ji5yf1co-bind" name="ji5yf1co" ref="ji5yf1co"/>
+               <xf:bind id="page-ji5y7dai-bind" name="ji5y7dai" ref="ji5y7dai"/>
                <xf:bind id="page-INSEE-BUSINESS-TEMPS-bind"
                         name="INSEE-BUSINESS-TEMPS"
-                        ref="INSEE-BUSINESS-TEMPS">
-                  <xf:calculate value="xxf:evaluate-bind-property('INSEE-BUSINESS-TEMPS-bind','relevant')"/>
-               </xf:bind>
+                        ref="INSEE-BUSINESS-TEMPS"/>
             </xf:bind>
             <xf:bind id="confirmationNon-bind" ref="confirmationNon"/>
             <xf:bind id="confirmationOui-bind" ref="confirmationOui"/>

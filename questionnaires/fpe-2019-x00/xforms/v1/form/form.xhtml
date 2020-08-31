@@ -6002,19 +6002,14 @@
                      calculate="concat('Votre questionnaire a bien été expédié le ',instance('fr-form-instance')/stromae/util/dateHeure)"/>
             <xf:bind id="pages-bind" ref="Pages">
                <xf:bind id="page-ji4d7eko-bind" name="ji4d7eko" ref="ji4d7eko">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji4d7eko-bind','relevant')"/>
                   <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='ACTADMIN'] != '1' and instance('fr-form-instance')//Variable[@idVariable='ACTADMIN']!= '2'))"/>
                   <xf:constraint value="(not(not(instance('fr-form-instance')//Variable[@idVariable='ACTADMIN'] != '2')) or (not(string(instance('fr-form-instance')//Variable[@idVariable='DATEDEP']) = '')))"/>
                </xf:bind>
                <xf:bind id="page-ji4d6ts5-bind" name="ji4d6ts5" ref="ji4d6ts5">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji4d6ts5-bind','relevant')"/>
                   <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='DIPL'] = ''))"/>
                </xf:bind>
-               <xf:bind id="page-ji4dejyu-bind" name="ji4dejyu" ref="ji4dejyu">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji4dejyu-bind','relevant')"/>
-               </xf:bind>
+               <xf:bind id="page-ji4dejyu-bind" name="ji4dejyu" ref="ji4dejyu"/>
                <xf:bind id="page-ji4dintd-bind" name="ji4dintd" ref="ji4dintd">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji4dintd-bind','relevant')"/>
                   <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='ANNEEFP'] &lt; instance('fr-form-instance')//Variable[@idVariable='ANNEEREM'] and instance('fr-form-instance')//Variable[@idVariable='ANNEEFP'] &gt; 0))"/>
                   <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='ANNEEFP']=''))"/>
                   <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='STATUTPP']!= '1' and instance('fr-form-instance')//Variable[@idVariable='STATUTPP']!= '2' and instance('fr-form-instance')//Variable[@idVariable='STATUTPP']!= '3'))"/>
@@ -6023,13 +6018,11 @@
                   <xf:constraint value="(not(not(instance('fr-form-instance')//Variable[@idVariable='STATUTPP']= '1' )) or (not(not(instance('fr-form-instance')//Variable[@idVariable='TITUL']= '2' )) or (not(instance('fr-form-instance')//Variable[@idVariable='ANNEE_FONC']=''))))"/>
                </xf:bind>
                <xf:bind id="page-jje9445l-bind" name="jje9445l" ref="jje9445l">
-                  <xf:calculate value="xxf:evaluate-bind-property('jje9445l-bind','relevant')"/>
                   <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='CATDEC'] !='1' and instance('fr-form-instance')//Variable[@idVariable='CATDEC'] !='2' and instance('fr-form-instance')//Variable[@idVariable='CATDEC'] !='3'))"/>
                   <xf:constraint value="(not(not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 1 else instance('fr-form-instance')//Variable[@idVariable='NBDPT'])=0 and instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()!='')) or (not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='CHGMT_SOUHAIT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CHGMT_SOUHAIT']) &gt; xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) and xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) &gt; 0)))"/>
                   <xf:constraint value="(not(not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 1 else instance('fr-form-instance')//Variable[@idVariable='NBDPT'])=0 and instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()!='')) or (not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='CHGMT_SUIVI']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CHGMT_SUIVI']) &gt; xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) and xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) &gt;0)))"/>
                </xf:bind>
                <xf:bind id="page-jjfrghoq-bind" name="jjfrghoq" ref="jjfrghoq">
-                  <xf:calculate value="xxf:evaluate-bind-property('jjfrghoq-bind','relevant')"/>
                   <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] != '1' and instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] != '2' and instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] != '3'))"/>
                   <xf:constraint value="(not(not(instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '2' or instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] ='3')) or (not((instance('fr-form-instance')//Variable[@idVariable='PLS_ETAB']='1' or instance('fr-form-instance')//Variable[@idVariable='PLS_ETAB']='2') and instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '')))"/>
                   <xf:constraint value="(not(not(instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '2' or instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] ='3')) or (not(string(instance('fr-form-instance')//Variable[@idVariable='NBHEURPROF']) ='')))"/>
@@ -6057,18 +6050,13 @@
                   <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()=''))"/>
                   <xf:constraint value="(not((instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '2' or instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] ='3') and (xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']) + xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']) )&gt; 365 and instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()!=''))"/>
                </xf:bind>
-               <xf:bind id="page-jj5q7j9i-bind" name="jj5q7j9i" ref="jj5q7j9i">
-                  <xf:calculate value="xxf:evaluate-bind-property('jj5q7j9i-bind','relevant')"/>
-               </xf:bind>
+               <xf:bind id="page-jj5q7j9i-bind" name="jj5q7j9i" ref="jj5q7j9i"/>
                <xf:bind id="page-ji4dnal1-bind" name="ji4dnal1" ref="ji4dnal1">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji4dnal1-bind','relevant')"/>
                   <xf:constraint value="(not(not(instance('fr-form-instance')//Variable[@idVariable='ENFANTS'] = '2')) or (not(not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBENFANTS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBENFANTS']) = 1)) or (not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='ANNEEAINE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='ANNEEAINE']) &gt; xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='ANNEEJEUNE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='ANNEEJEUNE'])))))"/>
                </xf:bind>
                <xf:bind id="page-INSEE-HOUSEHOLD-TEMPS-bind"
                         name="INSEE-HOUSEHOLD-TEMPS"
-                        ref="INSEE-HOUSEHOLD-TEMPS">
-                  <xf:calculate value="xxf:evaluate-bind-property('INSEE-HOUSEHOLD-TEMPS-bind','relevant')"/>
-               </xf:bind>
+                        ref="INSEE-HOUSEHOLD-TEMPS"/>
             </xf:bind>
          </xf:bind>
          <xf:submission id="enregistrer"
