@@ -825,10 +825,28 @@
         <xsl:param name="loop-ancestors"/>
         <xsl:param name="page-loop" as="node()" tunnel="yes"/>
 
+        <xsl:variable name="module-name" select="name()"/>
+        <xsl:variable name="relevant" select="//xf:bind[@name=$module-name]/@relevant"/>
+            
         <xf:bind id="page-{name()}-bind" name="{name()}" ref="{name()}">
-            <xf:calculate value="xxf:evaluate-bind-property('{name()}-bind','relevant')"/>
+            <xsl:if test="$relevant != ''">
+                <xsl:choose>
+                    <xsl:when test="$loop-ancestors != ''">
+                        <xf:calculate>
+                            <xsl:attribute name="value">
+                                <xsl:call-template name="bind-in-page-loop">
+                                    <xsl:with-param name="attribute" select="concat('xxf:evaluate(''',replace($relevant,'''',''''''),''')')"/>
+                                    <xsl:with-param name="page-loop" as="node()" select="$page-loop"/>
+                                </xsl:call-template>
+                            </xsl:attribute>
+                        </xf:calculate>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xf:calculate value="xxf:evaluate-bind-property('{name()}-bind','relevant')"/>            
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:if>
             <!-- Creating a constraint equals to the sum of warning-level constraints -->
-            <xsl:variable name="module-name" select="name()"/>
             <xsl:apply-templates select="//xf:bind[@name=$module-name]/*" mode="page-check">
                 <xsl:with-param name="parent-name" select="$module-name" tunnel="yes"/>
                 <xsl:with-param name="last-ancestor" select="tokenize($loop-ancestors,' ')[last()]" tunnel="yes"/>

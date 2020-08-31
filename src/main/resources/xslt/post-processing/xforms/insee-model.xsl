@@ -132,7 +132,7 @@
         </xf:action>
     </xsl:template>
 
-    <xsl:template match="*/@relevant | */@readonly | */@calculate | xf:var/@* | xf:constraint/@value | xf:calculate/@value | */@nodeset | *[@nodeset]/@*
+    <xsl:template match="*/@relevant | */@readonly | */@calculate | xf:var/@* | xf:constraint/@value | */@nodeset | *[@nodeset]/@*
         | xf:action/@if | xf:action/@iterate | xf:action/@while | xf:setvalue/@* | xf:insert/@* | xf:setindex/@*" priority="1">
         <xsl:variable name="content">
             <xsl:call-template name="replace-element">
@@ -144,6 +144,36 @@
             <xsl:value-of select="replace($content,'@occurrence-id','@idGroupe')"/>
         </xsl:attribute>
     </xsl:template>
+
+    <xsl:template match="xf:calculate/@value" priority="1">
+        <xsl:variable name="text" select="."/>
+        
+        <xsl:choose>
+            <xsl:when test="starts-with($text,'xxf:evaluate(')">
+                <xsl:variable name="content">
+                    <xsl:call-template name="replace-element">
+                        <xsl:with-param name="position" as="xs:integer" select="1"/>
+                        <xsl:with-param name="text" select="replace(substring($text,15,string-length($text)-17),'''''','''')"/>
+                    </xsl:call-template>
+                </xsl:variable>
+                <xsl:attribute name="{name()}">
+                    <xsl:value-of select="concat('xxf:evaluate(''',replace(replace($content,'@occurrence-id','@idGroupe'),'''',''''''),''')')"/>
+                </xsl:attribute>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="content">
+                    <xsl:call-template name="replace-element">
+                        <xsl:with-param name="position" as="xs:integer" select="1"/>
+                        <xsl:with-param name="text" select="$text"/>
+                    </xsl:call-template>
+                </xsl:variable>
+                <xsl:attribute name="{name()}">
+                    <xsl:value-of select="replace($content,'@occurrence-id','@idGroupe')"/>
+                </xsl:attribute>                
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
 
     <xsl:template match="xf:label/@ref | xf:alert/@ref">
         <xsl:attribute name="{name()}">
