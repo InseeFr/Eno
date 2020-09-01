@@ -156,7 +156,6 @@
                                     <xsl:with-param name="page-loop" as="node()" select="$page-loop"/>
                                 </xsl:call-template>
                             </xsl:attribute>
-<!--                            <xsl:attribute name="relevant" select="concat($ancestor-loop-relevant,@relevant)"/>-->
                         </xsl:when>
                         <xsl:when test="$ancestor-loop-relevant != ''">
                             <xsl:attribute name="relevant">
@@ -165,7 +164,6 @@
                                     <xsl:with-param name="page-loop" as="node()" select="$page-loop"/>
                                 </xsl:call-template>
                             </xsl:attribute>
-                            <!--<xsl:attribute name="relevant" select="substring($ancestor-loop-relevant,1,string-length($ancestor-loop-relevant)-5)"/>-->
                         </xsl:when>
                         <xsl:otherwise/>
                     </xsl:choose>
@@ -240,38 +238,6 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
-    <!--<xsl:template name="relative-address">
-        <xsl:param name="formula"/>
-        <xsl:param name="page-loop"/>
-        
-        <xsl:choose>
-            <xsl:when test="$page-loop//Loop">
-                <xsl:variable name="string-to-replace" as="xs:string">
-                    <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
-                    <xsl:for-each select="$page-loop//Loop">
-                        <xsl:value-of select="concat(@loop,'[@occurrence-id = current()/ancestor::',@loop,'/@occurrence-id]//')"/>
-                    </xsl:for-each>
-                </xsl:variable>
-                <xsl:call-template name="relative-address">
-                    <xsl:with-param name="formula"
-                        select="replace(replace($formula,
-                        concat('current\(\)/ancestor-or-self::',$page-loop//Loop[1]/@loop,'/@occurrence-id'),
-                        concat('instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$page-loop//Loop[1]/@container,''']')),
-                        concat('current\(\)/ancestor::',$page-loop//Loop[1]/@loop,'/@occurrence-id'),
-                        concat('instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$page-loop//Loop[1]/@container,''']'))"/>
-                    <xsl:with-param name="page-loop">
-                        <Loops>
-                            <xsl:copy-of select="$page-loop//Loop[position() != last()]"/>
-                        </Loops>
-                    </xsl:with-param>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$formula"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>-->
 
     <xd:doc>
         <xd:desc>
@@ -369,8 +335,8 @@
                                 <xsl:variable name="container" select="@id"/>
                                 <xsl:variable name="group-name" select="substring-after(@nodeset,concat($container,'/'))"/>
                                 <xsl:variable name="group-condition">
-                                    <xsl:if test="@relevant">
-                                        <xsl:value-of select="concat('[',@relevant,']')"/>
+                                    <xsl:if test="//xf:bind[@id=concat($container,'-bind')]/@relevant">
+                                        <xsl:value-of select="concat('[',//xf:bind[@id=concat($container,'-bind')]/@relevant,']')"/>
                                     </xsl:if>
                                 </xsl:variable>
                                 <xsl:variable name="group-pages-number" select="count(descendant::fr:section)"/>
@@ -389,8 +355,8 @@
                             <xsl:variable name="container" select="@id"/>
                             <xsl:variable name="repeat-name" select="substring-after(@nodeset,concat($container,'/'))"/>
                             <xsl:variable name="repeat-condition">
-                                <xsl:if test="@relevant">
-                                    <xsl:value-of select="concat('[',@relevant,']')"/>
+                                <xsl:if test="//xf:bind[@id=concat($container,'-bind')]/@relevant">
+                                    <xsl:value-of select="concat('[',//xf:bind[@id=concat($container,'-bind')]/@relevant,']')"/>
                                 </xsl:if>
                             </xsl:variable>
                             <xsl:variable name="repeat-pages-count" select="count(descendant::fr:section)"/>
@@ -727,7 +693,7 @@
                             <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
                                 value="instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/{$next-sibling}::*[not(text()='false')][1]/name()"/>
                             <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
-                        </xf:action>                        
+                        </xf:action>
                     </xsl:if>
                     <!-- find a next occurrence for the current repeat -->
                     <xf:action if="instance('fr-form-util')/PageChangeDone='false'">
@@ -827,7 +793,7 @@
 
         <xsl:variable name="module-name" select="name()"/>
         <xsl:variable name="relevant" select="//xf:bind[@name=$module-name]/@relevant"/>
-            
+
         <xf:bind id="page-{name()}-bind" name="{name()}" ref="{name()}">
             <xsl:if test="$relevant != ''">
                 <xsl:choose>
@@ -842,7 +808,7 @@
                         </xf:calculate>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xf:calculate value="xxf:evaluate-bind-property('{name()}-bind','relevant')"/>            
+                        <xf:calculate value="xxf:evaluate-bind-property('{name()}-bind','relevant')"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:if>

@@ -1045,6 +1045,7 @@
                                 <Variable><xsl:value-of select="."/></Variable>
                             </xsl:for-each>
                         </xsl:with-param>
+                        <xsl:with-param name="relative-address" select="true()"/>
                     </xsl:call-template>
                 </xsl:variable>
                 <xsl:attribute name="relevant" select="replace($relevant,'ancestor::','ancestor-or-self::')"/>
@@ -3137,6 +3138,7 @@
                                     </Variables>
                                 </xsl:with-param>
                                 <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                <xsl:with-param name="relative-address" select="false()"/>
                             </xsl:call-template>
                             <xsl:value-of select="')'"/>
                         </xsl:when>
@@ -3169,7 +3171,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Template named: replaceVariablesInFormula.</xd:p>
+            <xd:p>Named template : replaceVariablesInFormula.</xd:p>
             <xd:p>It replaces variables in a all formulas (Filter, ConsistencyCheck, CalculatedVariable, personalized text).</xd:p>
             <xd:p>"variable" -> "variableBusinessName"</xd:p>
             <xd:p>or more complicated for numeric variables</xd:p>
@@ -3180,23 +3182,31 @@
         <xsl:param name="formula"/>
         <xsl:param name="instance-ancestor"/>
         <xsl:param name="variables" as="node()"/>
+        <xsl:param name="relative-address" as="xs:boolean" required="no" select="false()"/>
 
         <xsl:variable name="instance-group" select="tokenize($instance-ancestor,' ')[last()]"/>
 
         <xsl:choose>
             <xsl:when test="$variables/Variable">
                 <xsl:variable name="current-variable" select="$variables/Variable[1]"/>
-                <xsl:variable name="variable-ancestry">
-                    <xsl:variable name="variable-ancestors" select="enoxforms:get-variable-business-ancestors($source-context,$current-variable)"/>
-                    <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
-                    <xsl:for-each select="tokenize($variable-ancestors,' ')">
-                        <xsl:if test=". = tokenize($instance-ancestor,' ')">
-                            <xsl:value-of select="concat(.,'[@occurrence-id = current()/ancestor::',.,'/@occurrence-id]//')"/>
-                        </xsl:if>
-                    </xsl:for-each>
-                </xsl:variable>
                 <xsl:variable name="variable-business-name" select="enoxforms:get-variable-business-name($source-context,$current-variable)"/>
                 <xsl:variable name="variable-representation" select="enoxforms:get-variable-representation($source-context,$current-variable)"/>
+                <xsl:variable name="variable-ancestry">
+                    <xsl:choose>
+                        <xsl:when test="$relative-address">
+                            <xsl:value-of select="concat('ancestor-or-self::*[descendant::',$variable-business-name,'][1]/descendant::')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:variable name="variable-ancestors" select="enoxforms:get-variable-business-ancestors($source-context,$current-variable)"/>
+                            <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
+                            <xsl:for-each select="tokenize($variable-ancestors,' ')">
+                                <xsl:if test=". = tokenize($instance-ancestor,' ')">
+                                    <xsl:value-of select="concat(.,'[@occurrence-id = current()/ancestor::',.,'/@occurrence-id]//')"/>
+                                </xsl:if>
+                            </xsl:for-each>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
                 <xsl:choose>
                     <xsl:when test="($variable-representation = 'integer' or $variable-representation = 'decimal') and contains($formula,concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end))">
                         <!-- former default formula for variableId : simplify before analyzing again -->
@@ -3206,6 +3216,7 @@
                                     <xsl:with-param name="formula" select="concat(regex-group(1),$conditioning-variable-begin,$current-variable,$conditioning-variable-end,regex-group(2))"/>
                                     <xsl:with-param name="variables" as="node()" select="$variables"/>
                                     <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                    <xsl:with-param name="relative-address" select="$relative-address"/>
                                 </xsl:call-template>
                             </xsl:matching-substring>
                             <xsl:non-matching-substring>
@@ -3217,12 +3228,14 @@
                                             <xsl:with-param name="formula" select="regex-group(1)"/>
                                             <xsl:with-param name="variables" as="node()" select="$variables"/>
                                             <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                            <xsl:with-param name="relative-address" select="$relative-address"/>
                                         </xsl:call-template>
                                         <xsl:value-of select="concat(regex-group(2),'(',$variable-ancestry,'xs:',$variable-representation,'(',$variable-business-name,'[string() castable as xs:decimal])')"/>
                                         <xsl:call-template name="replaceVariablesInFormula">
                                             <xsl:with-param name="formula" select="regex-group(3)"/>
                                             <xsl:with-param name="variables" as="node()" select="$variables"/>
                                             <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                            <xsl:with-param name="relative-address" select="$relative-address"/>
                                         </xsl:call-template>
                                         <xsl:choose>
                                             <xsl:when test="regex-group(2) = ('sum','mean','count')">
@@ -3238,6 +3251,7 @@
                                             <xsl:with-param name="formula" select="regex-group(4)"/>
                                             <xsl:with-param name="variables" as="node()" select="$variables"/>
                                             <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                            <xsl:with-param name="relative-address" select="$relative-address"/>
                                         </xsl:call-template>
                                     </xsl:matching-substring>
                                     <xsl:non-matching-substring>
@@ -3249,12 +3263,14 @@
                                                     <xsl:with-param name="formula" select="regex-group(1)"/>
                                                     <xsl:with-param name="variables" as="node()" select="$variables"/>
                                                     <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                                    <xsl:with-param name="relative-address" select="$relative-address"/>
                                                 </xsl:call-template>
                                                 <xsl:value-of select="concat($variable-ancestry,$variable-business-name,'/string()',regex-group(2),'=''''')"/>
                                                 <xsl:call-template name="replaceVariablesInFormula">
                                                     <xsl:with-param name="formula" select="regex-group(3)"/>
                                                     <xsl:with-param name="variables" as="node()" select="$variables"/>
                                                     <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                                    <xsl:with-param name="relative-address" select="$relative-address"/>
                                                 </xsl:call-template>
                                             </xsl:matching-substring>
                                             <xsl:non-matching-substring>
@@ -3266,12 +3282,14 @@
                                                             <xsl:with-param name="formula" select="regex-group(1)"/>
                                                             <xsl:with-param name="variables" as="node()" select="$variables"/>
                                                             <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                                            <xsl:with-param name="relative-address" select="$relative-address"/>
                                                         </xsl:call-template>
                                                         <xsl:value-of select="concat($variable-ancestry,$variable-business-name,'/string()',regex-group(2),'=''''')"/>
                                                         <xsl:call-template name="replaceVariablesInFormula">
                                                             <xsl:with-param name="formula" select="regex-group(3)"/>
                                                             <xsl:with-param name="variables" as="node()" select="$variables"/>
                                                             <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                                            <xsl:with-param name="relative-address" select="$relative-address"/>
                                                         </xsl:call-template>
                                                     </xsl:matching-substring>
                                                     <xsl:non-matching-substring>
@@ -3284,6 +3302,7 @@
                                                                     <xsl:with-param name="formula" select="regex-group(1)"/>
                                                                     <xsl:with-param name="variables" as="node()" select="$variables"/>
                                                                     <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                                                    <xsl:with-param name="relative-address" select="$relative-address"/>
                                                                 </xsl:call-template>
                                                                 <xsl:value-of select="concat('xs:',$variable-representation,'(if (',$variable-ancestry,$variable-business-name,'/string()='''') then ')"/>
                                                                 <xsl:if test="regex-group(2) = '&gt;'">
@@ -3294,6 +3313,7 @@
                                                                     <xsl:with-param name="formula" select="regex-group(3)"/>
                                                                     <xsl:with-param name="variables" as="node()" select="$variables"/>
                                                                     <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                                                    <xsl:with-param name="relative-address" select="$relative-address"/>
                                                                 </xsl:call-template>
                                                             </xsl:matching-substring>
                                                             <xsl:non-matching-substring>
@@ -3311,6 +3331,7 @@
                                                                             </Variables>
                                                                         </xsl:with-param>
                                                                         <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                                                        <xsl:with-param name="relative-address" select="$relative-address"/>
                                                                     </xsl:call-template>
                                                                 </xsl:for-each>
                                                             </xsl:non-matching-substring>
@@ -3337,6 +3358,7 @@
                                     </Variables>
                                 </xsl:with-param>
                                 <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                <xsl:with-param name="relative-address" select="$relative-address"/>
                             </xsl:call-template>
                         </xsl:for-each>
                     </xsl:otherwise>

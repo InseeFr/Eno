@@ -147,13 +147,13 @@
 
     <xsl:template match="xf:calculate/@value" priority="1">
         <xsl:variable name="text" select="."/>
-        
+
         <xsl:choose>
             <xsl:when test="starts-with($text,'xxf:evaluate(')">
                 <xsl:variable name="content">
                     <xsl:call-template name="replace-element">
                         <xsl:with-param name="position" as="xs:integer" select="1"/>
-                        <xsl:with-param name="text" select="replace(substring($text,15,string-length($text)-17),'''''','''')"/>
+                        <xsl:with-param name="text" select="replace(substring($text,15,string-length($text)-16),'''''','''')"/>
                     </xsl:call-template>
                 </xsl:variable>
                 <xsl:attribute name="{name()}">
@@ -169,11 +169,11 @@
                 </xsl:variable>
                 <xsl:attribute name="{name()}">
                     <xsl:value-of select="replace($content,'@occurrence-id','@idGroupe')"/>
-                </xsl:attribute>                
+                </xsl:attribute>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
 
     <xsl:template match="xf:label/@ref | xf:alert/@ref">
         <xsl:attribute name="{name()}">
