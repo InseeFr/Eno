@@ -54,26 +54,26 @@ public class TestValidator {
 		pipeline.getPreProcessing().addAll(preProcessings);
 		pipeline.getPostProcessing().addAll(postProcessings);
 		
-		List<PreProcessing> preProcessings2 = Arrays.asList(
-				PreProcessing.DDI_DEREFERENCING);
-		List<PostProcessing> postProcessings2 = Arrays.asList(
-				PostProcessing.XFORMS_BROWSING);
+		//List<PreProcessing> preProcessings2 = Arrays.asList(
+				//PreProcessing.DDI_DEREFERENCING);
+		//List<PostProcessing> postProcessings2 = Arrays.asList(
+				//PostProcessing.XFORMS_BROWSING);
 		
-		Pipeline pipeline2 = new Pipeline();
-		pipeline2.setInFormat(InFormat.DDI);
-		pipeline2.setOutFormat(OutFormat.POGUES_XML);
-		pipeline2.getPreProcessing().addAll(preProcessings2);
-		pipeline2.getPostProcessing().addAll(postProcessings2);
+		//Pipeline pipeline2 = new Pipeline();
+		//pipeline2.setInFormat(InFormat.DDI);
+		//pipeline2.setOutFormat(OutFormat.POGUES_XML);
+		//pipeline2.getPreProcessing().addAll(preProcessings2);
+		//pipeline2.getPostProcessing().addAll(postProcessings2);
 		
 		ValidationMessage valid = validator.validatePostProcessings(pipeline);
-		ValidationMessage valid2 = validator.validatePostProcessings(pipeline2);	
+		//ValidationMessage valid2 = validator.validatePostProcessings(pipeline2);	
 		
 		
 		
 		System.out.println(valid.getMessage());
 		Assert.assertTrue(valid.isValid());
-		System.out.println(valid2.getMessage());
-		Assert.assertFalse(valid2.isValid());
+		//System.out.println(valid2.getMessage());
+		//Assert.assertFalse(valid2.isValid());
 	}
 	
 	@Test
@@ -82,18 +82,18 @@ public class TestValidator {
 		ValidationMessage valid1 = validator.validateIn2Out(InFormat.POGUES_XML, OutFormat.XFORMS);
 		ValidationMessage valid2 = validator.validateIn2Out(InFormat.DDI, OutFormat.DDI);
 		ValidationMessage valid3 = validator.validateIn2Out(InFormat.POGUES_XML, OutFormat.DDI);
-		ValidationMessage valid4 = validator.validateIn2Out(InFormat.DDI, OutFormat.POGUES_XML);
+		//ValidationMessage valid4 = validator.validateIn2Out(InFormat.DDI, OutFormat.POGUES_XML);
 		
 		System.out.println(valid0.getMessage());
 		System.out.println(valid1.getMessage());
 		System.out.println(valid2.getMessage());
 		System.out.println(valid3.getMessage());
-		System.out.println(valid4.getMessage());
+		//System.out.println(valid4.getMessage());
 		
 		Assert.assertTrue(valid0.isValid());
 		Assert.assertFalse(valid1.isValid());
 		Assert.assertTrue(valid2.isValid());
 		Assert.assertTrue(valid3.isValid());
-		Assert.assertTrue(valid4.isValid());
+		//Assert.assertTrue(valid4.isValid());
 	}
 }
