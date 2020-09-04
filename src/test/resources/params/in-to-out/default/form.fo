@@ -2850,56 +2850,6 @@
                <fo:table-body>
 #foreach( ${FAVOURITE_CHARACTERS} in ${FAVOURITE_CHARACTERS-Container} ) 
 #set( $FAVOURITE_CHARACTERS.LoopPosition = $velocityCount)
-#if ($FAVOURITE_CHARACTERS.LoopPosition % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = $FAVOURITE_CHARACTERS.LoopPosition / 19)
-<fo:block page-break-inside="avoid"
-                   id="FAVOURITE_CHARACTERS-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Name</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Age</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
-#end 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -3223,56 +3173,6 @@
 #end 
 #set( $initializeInt = 0)
 #set( $FAVOURITE_CHARACTERS-TotalOccurrenceInt = $initializeInt.parseInt(${FAVOURITE_CHARACTERS-TotalOccurrenceCount}))
-#if (($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 1) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 1) / 19)
-<fo:block page-break-inside="avoid"
-                   id="FAVOURITE_CHARACTERS-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Name</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Age</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
-#end 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -3594,56 +3494,6 @@
                      </fo:table-cell>
                   </fo:table-row>
 #if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 8) 
-#if (($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 2) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 2) / 19)
-<fo:block page-break-inside="avoid"
-                   id="FAVOURITE_CHARACTERS-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Name</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Age</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
-#end 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -3967,56 +3817,6 @@
 #end 
 
 #if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 7) 
-#if (($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 3) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 3) / 19)
-<fo:block page-break-inside="avoid"
-                   id="FAVOURITE_CHARACTERS-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Name</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Age</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
-#end 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -4340,56 +4140,6 @@
 #end 
 
 #if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 6) 
-#if (($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 4) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 4) / 19)
-<fo:block page-break-inside="avoid"
-                   id="FAVOURITE_CHARACTERS-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Name</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Age</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
-#end 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -4713,56 +4463,6 @@
 #end 
 
 #if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 5) 
-#if (($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 5) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 5) / 19)
-<fo:block page-break-inside="avoid"
-                   id="FAVOURITE_CHARACTERS-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Name</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Age</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
-#end 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -5086,56 +4786,6 @@
 #end 
 
 #if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 4) 
-#if (($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 6) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 6) / 19)
-<fo:block page-break-inside="avoid"
-                   id="FAVOURITE_CHARACTERS-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Name</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Age</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
-#end 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -5459,56 +5109,6 @@
 #end 
 
 #if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 3) 
-#if (($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 7) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 7) / 19)
-<fo:block page-break-inside="avoid"
-                   id="FAVOURITE_CHARACTERS-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Name</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Age</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
-#end 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -5832,56 +5432,6 @@
 #end 
 
 #if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 2) 
-#if (($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 8) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 8) / 19)
-<fo:block page-break-inside="avoid"
-                   id="FAVOURITE_CHARACTERS-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Name</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Age</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
-#end 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -6205,56 +5755,6 @@
 #end 
 
 #if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 1) 
-#if (($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 9) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 9) / 19)
-<fo:block page-break-inside="avoid"
-                   id="FAVOURITE_CHARACTERS-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Name</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Age</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
-#end 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -6578,56 +6078,6 @@
 #end 
 
 #if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 0) 
-#if (($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 10) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 10) / 19)
-<fo:block page-break-inside="avoid"
-                   id="FAVOURITE_CHARACTERS-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Name</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Age</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
-#end 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"

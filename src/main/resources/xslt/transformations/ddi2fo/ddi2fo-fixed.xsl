@@ -74,6 +74,16 @@
     <xd:doc>
         <xd:desc>Variables from propertiers and parameters</xd:desc>
     </xd:doc>
+    <xsl:variable name="context">
+        <xsl:choose>
+            <xsl:when test="$parameters//Context != ''">
+                <xsl:value-of select="$parameters//Context"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//Context"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     <xsl:variable name="orientation">
         <xsl:choose>
             <xsl:when test="$parameters//fo-parameters/Format/Orientation != ''">
