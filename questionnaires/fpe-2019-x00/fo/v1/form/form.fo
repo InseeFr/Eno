@@ -700,7 +700,7 @@
             <fo:block line-height="14pt">au plus tard le <fo:inline font-weight="bold">${DATERETOUR} </fo:inline>
             </fo:block>
             <fo:block line-height="14pt"> dans l’enveloppe T ci-jointe</fo:block>
-            <fo:block line-height="14pt" start-indent="20mm"> à l’adresse suivante => </fo:block>
+            <fo:block line-height="14pt" start-indent="20mm"> à l’adresse suivante =&gt; </fo:block>
          </fo:block-container>
          <!--    Bloc adresse --><fo:block-container absolute-position="absolute"
                              left="95mm"

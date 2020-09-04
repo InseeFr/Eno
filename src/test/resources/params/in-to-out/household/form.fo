@@ -97,8 +97,7 @@
             La position peut être définie par rapport au hautou bas de la zone concernée et gauche ou droite.
                      
             Dans les zones before/after/start/end, les mesures se font par rapport au 0,0 de la zone concernée.
-            -->
-      <fo:simple-page-master master-name="page-odd-household"
+            --><fo:simple-page-master master-name="page-odd-household"
                              page-height="297mm"
                              page-width="210mm"
                              reference-orientation="0"
@@ -191,20 +190,18 @@
    </fo:layout-master-set>
    <fo:page-sequence font-family="Liberation Sans"
                      font-size="8pt"
-                     master-reference="relanceCOLEM"><!-- ZONE LIGNE TECHNIQUE -->
-      <fo:static-content flow-name="xsl-region-before-courrier">
+                     master-reference="relanceCOLEM"><!-- ZONE LIGNE TECHNIQUE --><fo:static-content flow-name="xsl-region-before-courrier">
          <fo:block position="absolute"
                    margin-top="5mm"
                    margin-left="10mm"
                    margin-right="10mm"
                    margin-bottom="10mm"
                    color="white">
-                &lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;DS${NumeroDocument}col${data-IdEdition}
+                <![CDATA[#]]><![CDATA[#]]><![CDATA[#]]>DS${NumeroDocument}col${data-IdEdition}
             </fo:block>
       </fo:static-content>
       <fo:flow flow-name="xsl-region-body">
-         <fo:block page-break-after="always"><!-- ZONE LOGOS -->
-            <fo:block-container absolute-position="absolute"
+         <fo:block page-break-after="always"><!-- ZONE LOGOS --><fo:block-container absolute-position="absolute"
                                 top="2mm"
                                 left="5mm"
                                 width="50mm"
@@ -246,8 +243,7 @@
                                        scaling="uniform"/>
                </fo:block>
             </fo:block-container>
-            <!-- ZONE RESERVE ADRESSE -->
-            <fo:block-container absolute-position="absolute"
+            <!-- ZONE RESERVE ADRESSE --><fo:block-container absolute-position="absolute"
                                 left="80mm"
                                 top="33mm"
                                 width="110mm"
@@ -255,8 +251,7 @@
                                 overflow="hidden">
                <fo:block/>
             </fo:block-container>
-            <!-- ZONE DATAMATRIX ALLIAGE -->
-            <fo:block-container absolute-position="absolute"
+            <!-- ZONE DATAMATRIX ALLIAGE --><fo:block-container absolute-position="absolute"
                                 left="100mm"
                                 top="37.8mm"
                                 width="11.88mm"
@@ -277,8 +272,7 @@
                   </fo:instream-foreign-object>
                </fo:block>
             </fo:block-container>
-            <!-- ZONE ADRESSE -->
-            <fo:block-container absolute-position="absolute"
+            <!-- ZONE ADRESSE --><fo:block-container absolute-position="absolute"
                                 left="100mm"
                                 top="50mm"
                                 width="82mm"
@@ -297,8 +291,7 @@
                   </fo:inline-container>
                </fo:block>
             </fo:block-container>
-            <!-- ZONE RESERVE INTEGRALITE -->
-            <fo:block-container absolute-position="absolute"
+            <!-- ZONE RESERVE INTEGRALITE --><fo:block-container absolute-position="absolute"
                                 left="187mm"
                                 top="75mm"
                                 width="13mm"
@@ -647,8 +640,7 @@
             </fo:block>
          </fo:block-container>
       </fo:static-content>
-      <fo:flow flow-name="region-body-first-household"><!--    Blocs Logos et Libellé -->
-         <fo:block-container absolute-position="absolute"
+      <fo:flow flow-name="region-body-first-household"><!--    Blocs Logos et Libellé --><fo:block-container absolute-position="absolute"
                              left="0mm"
                              top="0mm"
                              width="15mm"
@@ -694,8 +686,7 @@
                       font-weight="bold"
                       text-align="center"> ${LibelleEnquete} </fo:block>
          </fo:block-container>
-         <!--    Bloc Consignes retour -->
-         <fo:block-container absolute-position="absolute"
+         <!--    Bloc Consignes retour --><fo:block-container absolute-position="absolute"
                              left="0mm"
                              top="42mm"
                              width="60mm"
@@ -709,10 +700,9 @@
             <fo:block line-height="14pt">au plus tard le <fo:inline font-weight="bold">${DATERETOUR} </fo:inline>
             </fo:block>
             <fo:block line-height="14pt"> dans l’enveloppe T ci-jointe</fo:block>
-            <fo:block line-height="14pt" start-indent="20mm"> à l’adresse suivante => </fo:block>
+            <fo:block line-height="14pt" start-indent="20mm"> à l’adresse suivante =&gt; </fo:block>
          </fo:block-container>
-         <!--    Bloc adresse -->
-         <fo:block-container absolute-position="absolute"
+         <!--    Bloc adresse --><fo:block-container absolute-position="absolute"
                              left="95mm"
                              top="42mm"
                              width="75mm"
@@ -729,8 +719,7 @@
                </fo:inline-container>
             </fo:block>
          </fo:block-container>
-         <!--    Blocs Consignes -->
-         <fo:block-container absolute-position="absolute"
+         <!--    Blocs Consignes --><fo:block-container absolute-position="absolute"
                              left="0mm"
                              top="80mm"
                              width="15mm"
@@ -828,8 +817,7 @@
                <fo:block line-height="10pt">$!{Consigne3}</fo:block>
             </fo:block>
          </fo:block-container>
-         <!--    Bloc Qui répond -->
-         <fo:block-container absolute-position="absolute"
+         <!--    Bloc Qui répond --><fo:block-container absolute-position="absolute"
                              left="0mm"
                              top="155mm"
                              width="15mm"
@@ -858,8 +846,7 @@
                </fo:inline-container>
             </fo:block>
          </fo:block-container>
-         <!--    Bloc CNIS -->
-         <fo:block-container absolute-position="absolute"
+         <!--    Bloc CNIS --><fo:block-container absolute-position="absolute"
                              left="0mm"
                              top="210mm"
                              width="170mm"
@@ -5386,19 +5373,19 @@
                    border-style="solid"
                    page-break-inside="avoid"
                    keep-with-next="always">Commentaires</fo:block>
-            <fo:block color="black"
-                      font-weight="bold"
-                      font-size="10pt"
-                      margin-top="9pt"
-                      margin-bottom="3pt"
-                      page-break-inside="avoid"
-                      keep-with-next="always">➡ <fo:inline font-weight="bold">Commentaires et remarques éventuelles concernant l'enquête :</fo:inline>
-            </fo:block>
-            <fo:block id="COMMENT_QE" page-break-inside="avoid">
-               <fo:block-container height="30mm" border-color="black" border-style="solid">
-                  <fo:block> </fo:block>
-               </fo:block-container>
-            </fo:block>
+         <fo:block color="black"
+                   font-weight="bold"
+                   font-size="10pt"
+                   margin-top="9pt"
+                   margin-bottom="3pt"
+                   page-break-inside="avoid"
+                   keep-with-next="always">➡ <fo:inline font-weight="bold">Commentaires et remarques éventuelles concernant l'enquête :</fo:inline>
+         </fo:block>
+         <fo:block id="COMMENT_QE" page-break-inside="avoid">
+            <fo:block-container height="30mm" border-color="black" border-style="solid">
+               <fo:block> </fo:block>
+            </fo:block-container>
+         </fo:block>
          <fo:block id="TheVeryLastPage"/>
       </fo:flow>
    </fo:page-sequence>
