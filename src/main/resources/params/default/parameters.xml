@@ -31,15 +31,21 @@
         </xforms-parameters>
         
         <fo-parameters>
+        <InitializeAllVariables>false</InitializeAllVariables>
             <Format>
                 <Orientation>0</Orientation>
                 <Columns>1</Columns>
             </Format>
             <Roster>
                 <Row>
-                    <DefaultSize>15</DefaultSize>
+                    <MinimumEmpty>1</MinimumEmpty>
+                    <DefaultSize>10</DefaultSize>
                 </Row>
             </Roster>
+            <Loop>
+                <DefaultOccurrence>5</DefaultOccurrence>
+                <MinimumEmptyOccurrence>1</MinimumEmptyOccurrence>
+            </Loop>
             <TextArea>
                 <Row>
                     <DefaultSize>5</DefaultSize>
