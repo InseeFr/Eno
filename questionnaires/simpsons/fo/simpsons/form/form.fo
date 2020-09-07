@@ -7678,7 +7678,6 @@
                <fo:block> </fo:block>
             </fo:block-container>
          </fo:block>
-         <fo:block/>
          <fo:block id="TheVeryLastPage"/>
       </fo:flow>
    </fo:page-sequence>
