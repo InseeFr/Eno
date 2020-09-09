@@ -36,6 +36,11 @@
                 <Orientation>0</Orientation>
                 <Columns>1</Columns>
             </Format>
+            <Roster>
+                <Row>
+                    <DefaultSize>15</DefaultSize>
+                </Row>
+            </Roster>
             <TextArea>
                 <Row>
                     <DefaultSize>5</DefaultSize>

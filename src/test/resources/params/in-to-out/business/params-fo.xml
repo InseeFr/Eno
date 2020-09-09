@@ -37,16 +37,16 @@
         </EndQuestion>
         
         <fo-parameters>
-                     <Roster>
+            <Roster>
                 <Row>
-                    <DefaultSize>10</DefaultSize>
-                    <MinimumEmpty>1</MinimumEmpty>
+                    <DefaultSize>20</DefaultSize>
                 </Row>
             </Roster>
-            <Loop>
-                <DefaultOccurrence>5</DefaultOccurrence>
-                <MinimumEmptyOccurrence>1</MinimumEmptyOccurrence>
-            </Loop>
+            <Table>
+                <Row>
+                    <DefaultSize>15</DefaultSize>
+                </Row>
+            </Table>
             <Capture>
                 <Numeric>manual</Numeric>
             </Capture>

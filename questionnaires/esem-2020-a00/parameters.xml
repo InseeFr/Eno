@@ -1,17 +1,24 @@
 <ENOParameters>
+    
     <Parameters>
+        
         <Context>business</Context>
-        <Campagne>esem-2020-a00</Campagne>
+        
+        <Campagne>esem-2019-a00</Campagne>
+        
         <Languages>
             <Language>fr</Language>
         </Languages>
+        
         <BeginQuestion>
             <Identification>true</Identification>
         </BeginQuestion>
+        
         <EndQuestion>
             <ResponseTimeQuestion>true</ResponseTimeQuestion>
             <CommentQuestion>true</CommentQuestion>
         </EndQuestion>
+        
         <xforms-parameters>            
             <NumericExample>false</NumericExample>
             <Deblocage>false</Deblocage>
@@ -19,27 +26,20 @@
             <DecimalSeparator>.</DecimalSeparator>
         </xforms-parameters>
         <fo-parameters>
-            <!--<Roster>
+            <Roster>
                 <Row>
-                    <DefaultSize>10</DefaultSize>
-                    <MinimumEmpty>0</MinimumEmpty>
+                    <DefaultSize>20</DefaultSize>
                 </Row>
             </Roster>
-            <Loop>
-                <DefaultOccurrence>5</DefaultOccurrence>
-                <MinimumEmptyOccurrence>1</MinimumEmptyOccurrence>
-            </Loop>-->
-<!--            <Table>
+            <Table>
                 <Row>
                     <DefaultSize>15</DefaultSize>
                 </Row>
-            </Table>-->
+            </Table>
             <Capture>
                 <Numeric>manual</Numeric>
             </Capture>
-<!--            <AccompanyingMail>relanceCOL</AccompanyingMail>-->
             <AccompanyingMail>cnrCOL</AccompanyingMail>
-<!--            <AccompanyingMail>medCOL</AccompanyingMail>-->
         </fo-parameters>
         <Title>
             <!-- no-number ; template ; module ; submodule ; unnumbered-filter -->

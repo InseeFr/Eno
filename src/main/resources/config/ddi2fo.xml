@@ -7,72 +7,61 @@
 			<After>¤</After>
 		</ddi>
 	</TextConditioningVariable>
+	<Format>
+		<Columns>1</Columns>
+		<!-- Orientation : portrait= 0 ou paysage =90 -->
+		<Orientation>0</Orientation>
+	</Format>
+	
 	<!-- default /household / business -->
 	<Context>default</Context>
 	<!-- Modèle de première page -->
 	<FirstPage>
 		<Folder>xslt/post-processing/fo/page-first</Folder>
 	</FirstPage>
+	<AccompanyingMails>
+		<Folder>xslt/post-processing/fo/accompanying-mails</Folder>
+	</AccompanyingMails>
 	<EndQuestion>
 		<Folder>xslt/post-processing/fo/end-question</Folder>
 		<ResponseTimeQuestion>true</ResponseTimeQuestion>
 		<CommentQuestion>true</CommentQuestion>
 	</EndQuestion>
-	<AccompanyingMails>
-		<Folder>xslt/post-processing/fo/accompanying-mails</Folder>
-	</AccompanyingMails>
 	<PageModel>
 		<Folder>xslt/post-processing/fo/page-model</Folder>
 	</PageModel>
-
-	<fo-parameters>
-		<Format>
-			<Columns>1</Columns>
-			<!-- Orientation : portrait= 0 ou paysage =90 -->
-			<Orientation>0</Orientation>
-		</Format>
-		
-		<Style>
-			<Folder>styles</Folder>
-			<File>style.xsl</File>
-		</Style>
-		<Capture>
-			<!-- manual or optical -->
-			<Numeric>optical</Numeric>
-		</Capture>
-		<!-- Definit la taille par défaut des rosters -->
-		<Roster>
-			<Row>
-				<DefaultSize>10</DefaultSize>
-				<MinimumEmpty>1</MinimumEmpty>
-			</Row>
-		</Roster>
-		<Loop>
-			<DefaultOccurrence>5</DefaultOccurrence>
-			<MinimumEmptyOccurrence>1</MinimumEmptyOccurrence>
-		</Loop>
-		
-		<!-- Definit le nombre maximum de lignes dans une page pour un tableau ou un roster ; et le nombre de lignes en moins sur la première page du tableau -->
-		<Table>
-			<Row>
-				<DefaultSize>19</DefaultSize>
-				<NbRow>1</NbRow>
-			</Row>
-		</Table>
-		<TextArea>
-			<Row>
-				<DefaultSize>5</DefaultSize>
-			</Row>
-		</TextArea>
-		<InitializeAllVariables>false</InitializeAllVariables>
-		<!-- BarCode type: Datamatrix ou 2D -->
-		<BarCode>
-			<Type>Datamatrix</Type>
-		</BarCode>
-		
-	</fo-parameters>
+	<Style>
+		<Folder>styles</Folder>
+		<File>style.xsl</File>
+	</Style>
+	<Capture>
+		<!-- manual or optical -->
+		<Numeric>optical</Numeric>
+	</Capture>
 	<Images>
 	<!-- <Folder></Folder> for relative folder -->
 	<Folder></Folder>
     </Images>
+    <!-- Definit la taille par défaut des rosters -->
+    <Roster>
+    	<Row>
+    		<DefaultSize>15</DefaultSize>
+    	</Row>
+    </Roster>
+    <!-- Definit le nombre maximum de lignes dans une page pour un tableau ou un roster ; et le nombre de lignes en moins sur la première page du tableau -->
+    <Table>
+    	<Row>
+    		<DefaultSize>19</DefaultSize>
+    		<NbRow>1</NbRow>
+    	</Row>
+    </Table>
+    <TextArea>
+    	<Row>
+    		<DefaultSize>5</DefaultSize>
+    	</Row>
+    </TextArea>
+    <!-- BarCode type: Datamatrix ou 2D -->
+    <BarCode>
+    	<Type>Datamatrix</Type>
+    </BarCode>
 </Properties>

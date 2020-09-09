@@ -37,16 +37,6 @@
                 <Orientation>0</Orientation>
                 <Columns>2</Columns>
             </Format>
-            <Roster>
-                <Row>
-                    <DefaultSize>8</DefaultSize>
-                    <MinimumEmpty>0</MinimumEmpty>
-                </Row>
-            </Roster>
-            <Loop>
-                <DefaultOccurrence>8</DefaultOccurrence>
-                <MinimumEmptyOccurrence>0</MinimumEmptyOccurrence>
-            </Loop>
             <Capture>
                 <Numeric>optical</Numeric>
             </Capture>

@@ -36,16 +36,6 @@
         </EndQuestion>
         
         <fo-parameters>
-                   <Roster>
-                <Row>
-                    <DefaultSize>10</DefaultSize>
-                    <MinimumEmpty>1</MinimumEmpty>
-                </Row>
-            </Roster>
-            <Loop>
-                <DefaultOccurrence>5</DefaultOccurrence>
-                <MinimumEmptyOccurrence>1</MinimumEmptyOccurrence>
-            </Loop>
             <Format>
                 <Orientation>0</Orientation>
                 <Columns>1</Columns>
