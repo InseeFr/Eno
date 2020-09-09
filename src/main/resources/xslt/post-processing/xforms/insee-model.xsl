@@ -350,21 +350,6 @@
                                     </xsl:matching-substring>
                                 </xsl:analyze-string>
                             </xsl:when>
-                            <xsl:when test="matches($text,concat($current-group,'(_\d+)?-Container/',$current-group,'\[@occurrence-id = '))">
-                                <xsl:analyze-string select="$text" regex="^(.*){$current-group}(_\d+)?-Container/{$current-group}\[@occurrence-id = (.*)$">
-                                    <xsl:matching-substring>
-                                        <xsl:call-template name="replace-element">
-                                            <xsl:with-param name="position" select="$position"/>
-                                            <xsl:with-param name="text" select="regex-group(1)"/>
-                                        </xsl:call-template>
-                                        <xsl:value-of select="concat('Groupe[@idGroupe=''',$current-group,regex-group(2),''']/Groupe[@typeGroupe=''',$current-group,''' and @idGroupe = ')"/>
-                                        <xsl:call-template name="replace-element">
-                                            <xsl:with-param name="position" select="$position"/>
-                                            <xsl:with-param name="text" select="regex-group(3)"/>
-                                        </xsl:call-template>
-                                    </xsl:matching-substring>
-                                </xsl:analyze-string>
-                            </xsl:when>
                             <xsl:when test="matches($text,concat($current-group,'(_\d+)?-Container/',$current-group))">
                                 <xsl:analyze-string select="$text" regex="^(.*){$current-group}(_\d+)?-Container/{$current-group}(.*)$">
                                     <xsl:matching-substring>

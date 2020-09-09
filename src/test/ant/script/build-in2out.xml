@@ -77,17 +77,11 @@
         <basename file="${file}" property="file-name" suffix=".tmp"/>
         <propertyregex property="form-name" input="${file-name}" regexp="-final" replace="" global="true"/>
 
-        <if>
-            <equals arg1="${Properties.EnoBuild}" arg2="true"/>
-            <then>
-                <xslt in="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}.xsl"
-                    out="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}-debug.xsl"
-                    style="${xslt.home}/util/debug.xsl" force="true" classpath="${saxon.jar}">
-                    <param name="source-file" expression="${xslt-folder}/inputs/${Properties.InFormat}/source.xsl"/>
-                </xslt>
-            </then>
-        </if>
-        
+        <xslt in="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}.xsl"
+            out="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}-debug.xsl"
+            style="${xslt.home}/util/debug.xsl" force="true" classpath="${saxon.jar}">
+        </xslt>
+
         <!-- Generating out-format from the in-format : basic-form.tmp using the in2out-debug.xsl stylesheet -->
         <xslt in="${temp.home}/${survey-name}/${Properties.InFormat}/${file-name}.tmp"
             out="${target-folder}/${survey-name}/${Properties.OutFormat}/form-debug.${out-extension}"
@@ -137,6 +131,20 @@
             <param name="name" value="templates"/>
             <param name="format" value="InGetterImplementation"/>
         </antcall>
+        <!-- Generating debug model file (models-debug.xsl) if debug mode is enabled based on outGetters (in2out/functions.fods). -->
+        <if>
+            <equals arg1="${Properties.Debug}" arg2="true"/>
+            <then>
+                <antcall target="fods2xsl">
+                    <param name="dir"
+                        value="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}"/>
+                    <param name="name" value="functions"/>
+                    <param name="out-dir" value="${xslt.home}/outputs/${Properties.OutFormat}"/>
+                    <param name="out-name" value="models-debug"/>
+                    <param name="format" value="Debug"/>
+                </antcall>
+            </then>
+        </if>
 
         <!-- Using a sheet from the util folder in order to create a link-sheet from DDI to form-runner from the 
         generated sheet and the non-generated sheets.
@@ -221,6 +229,23 @@
             <param name="models-uri-for-debug-mode"
                 expression="../../outputs/${Properties.OutFormat}/models.xsl"/>
         </xslt>
+        <!--
+        <if>
+            <and>
+            <equals arg1="${Properties.Debug}" arg2="true"/>
+            <equals arg1="${process-debug}" arg2="true"/>
+            </and>
+            <then>                
+                <!-\- From xml to xsl using the generator -\->
+                <xslt in="${temp.home}/eno/xml.tmp" out="${xslt.home}/outputs/${Properties.OutFormat}/models-debug.xsl"
+                    style="${xslt.home}/transformations/xml2xsl.xsl" force="true" classpath="${saxon.jar}">
+                    <!-\- debug mode param -\->
+                    <param name="debug" expression="${Properties.Debug}"/>
+                    <!-\- needed for getting back the namespaces  -\->
+                    <param name="models-uri-for-debug-mode" expression="../../outputs/${Properties.OutFormat}/models.xsl"/>
+                </xslt>                                
+            </then>
+        </if>-->
     </target>
 
     <!--************************TARGETS : PREPROCESSING *****************************-->
