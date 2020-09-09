@@ -107,6 +107,7 @@
     </xsl:template>
     
     <xsl:template match="text()" mode="keep-cdata" priority="2">
+
         <xsl:choose>
             <xsl:when test="contains(.,'[CDATA[#]]')">
                 <xsl:value-of select="replace(.,'&amp;','&amp;amp;')" disable-output-escaping="yes"/>
@@ -117,5 +118,6 @@
                                               ,'&lt;','&amp;lt;')" disable-output-escaping="yes"/>                
             </xsl:otherwise>
         </xsl:choose>
+
     </xsl:template>
 </xsl:stylesheet>

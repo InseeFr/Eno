@@ -28,7 +28,8 @@
     <xs:simpleType name="OutFormat">
         <xs:restriction base="xs:token">
             <xs:enumeration value="ddi"/>
-            <!--  <xs:enumeration value="pogues-xml"/> -->
+
+          <!--  <xs:enumeration value="pogues-xml"/> -->
             <xs:enumeration value="xforms"/>
             <xs:enumeration value="fo"/>
             <xs:enumeration value="fodt"/>

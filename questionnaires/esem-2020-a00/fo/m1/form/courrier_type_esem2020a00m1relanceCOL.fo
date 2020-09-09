@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
    <fo:layout-master-set>
-      <fo:page-sequence-master master-name="cnrCOL">
+      <fo:page-sequence-master master-name="relanceCOL">
          <fo:repeatable-page-master-alternatives>
-            <fo:conditional-page-master-reference master-reference="cnrCOL-recto" odd-or-even="odd"/>
-            <fo:conditional-page-master-reference master-reference="cnrCOL-verso" odd-or-even="even"/>
+            <fo:conditional-page-master-reference master-reference="relanceCOL-recto" odd-or-even="odd"/>
+            <fo:conditional-page-master-reference master-reference="relanceCOL-verso" odd-or-even="even"/>
          </fo:repeatable-page-master-alternatives>
       </fo:page-sequence-master>
-      <fo:simple-page-master master-name="cnrCOL-recto"
+      <fo:simple-page-master master-name="relanceCOL-recto"
                              font-family="Liberation Sans"
                              font-size="10pt"
                              font-weight="normal"
@@ -30,7 +30,7 @@
          <fo:region-start extent="10mm" display-align="before"/>
          <fo:region-end extent="10mm" display-align="before"/>
       </fo:simple-page-master>
-      <fo:simple-page-master master-name="cnrCOL-verso"
+      <fo:simple-page-master master-name="relanceCOL-verso"
                              font-family="Liberation Sans"
                              font-size="10pt"
                              font-weight="normal"
@@ -164,14 +164,14 @@
    </fo:layout-master-set>
    <fo:page-sequence font-family="Liberation Sans"
                      font-size="8pt"
-                     master-reference="cnrCOL"><!-- ZONE LIGNE TECHNIQUE --><fo:static-content flow-name="xsl-region-before-courrier">
+                     master-reference="relanceCOL"><!-- ZONE LIGNE TECHNIQUE --><fo:static-content flow-name="xsl-region-before-courrier">
          <fo:block position="absolute"
                    margin-top="5mm"
                    margin-left="10mm"
                    margin-right="10mm"
                    margin-bottom="10mm"
                    color="white">
-                &lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;DS${NumeroDocument}col${data-IdEdition}
+                <![CDATA[#]]><![CDATA[#]]><![CDATA[#]]>DS${NumeroDocument}col${data-IdEdition}
             </fo:block>
       </fo:static-content>
       <fo:flow flow-name="xsl-region-body">
@@ -253,7 +253,7 @@
                                 height="6mm"
                                 overflow="hidden"
                                 font-size="10pt">
-               <fo:block line-height="10pt" font-weight="bold" text-align="center">CONSTAT DE NON-RÉPONSE #if($!{InitAccuseReception}=='oui')avec accusé de réception#end</fo:block>
+               <fo:block line-height="10pt" font-weight="bold" text-align="center">#if($!{BddTitreRelance}) $!{BddTitreRelance}#else RAPPEL #end</fo:block>
             </fo:block-container>
             <!-- ZONE CONTACT --><fo:block-container absolute-position="absolute"
                                 left="1mm"
@@ -285,44 +285,50 @@
                         Paris, le ${DateEdition}
                     </fo:block>
                <fo:block margin-top="5mm" font-weight="bold">
-                        Objet : Enquête statistique#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddFrequence}!='')) ${BddFrequence}#end ${BddLibelleLong} ${BddAnneeReference}
+                        Objet : Enquête statistique#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddFrequence}!='')) ${BddFrequence}#end ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddPeriode}!='')) ${BddPeriode}#end ${BddAnneeReference}
                     </fo:block>
                <fo:block font-weight="bold">
                         Ref. ${BddRaisonSociale} (Votre ${BddLabelUniteEnquetee} : ${BddIdentifiantUniteEnquetee})
                     </fo:block>
-               <fo:block margin-top="5mm" font-weight="bold">
-                        Madame la Directrice, Monsieur le Directeur,
-                    </fo:block>
-               <fo:block margin-top="5mm">
-                        Ma lettre de mise en demeure du ${BddDateEnvoiMiseEnDemeure} étant restée sans suite, je suis dans l’obligation aujourd’hui d’établir à votre encontre le constat suivant :
+               <fo:block margin-top="3mm">
+                        #if($!{BddNom} and $!{BddCivilite})$!{BddCivilite} $!{BddNom}, #elseif($!{BddNom}) Madame ou Monsieur $!{BddNom},#else Madame, Monsieur,#end
                     </fo:block>
                <fo:block margin-top="3mm">
-                        - de défaut de réponse à l'enquête statistique#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddFrequence}!='')) ${BddFrequence}#end ${BddLibelleLong} ${BddAnneeReference} ;
-                    </fo:block>
-               <fo:block>
-                        - et d’absence de justification à ce défaut de réponse.
-                    </fo:block>
-               <fo:block margin-top="3mm">
-                        Si vous venez de procéder à la transmission de votre réponse, je vous prie de ne pas tenir compte de ce courrier.
+                        Sauf erreur de ma part, mes services n’ont pas encore reçu votre réponse à l’<fo:inline font-weight="bold">enquête#if((${BddFrequence}!='annuelle') 
+                        and (${BddFrequence}!='pluriannuelle')) ${BddFrequence}#end ${BddLibelleLong}#if((${BddFrequence}!='annuelle')
+                        and (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end ${BddAnneeReference}</fo:inline>. 
+                        Si, toutefois, vous venez de procéder à cet envoi, je vous prie de ne pas tenir compte de ce rappel.
                     </fo:block>
                <fo:block margin-top="3mm">
-                        A défaut, <fo:inline font-weight="bold">je vous prie</fo:inline>#if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">de remplir le questionnaire par internet selon les modalités précisées au verso de cette lettre</fo:inline>,#else
-                        soit de répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre soit de compléter le questionnaire joint,#end dans un délai de 15 jours. 
-                        A l’expiration de ce délai, votre dossier sera soumis pour examen au <fo:inline font-weight="bold">Comité du contentieux</fo:inline> des enquêtes statistiques obligatoires 
-                        du Conseil national de l’information statistique (Cnis), conformément à la loi*.
+                        Dans le cas contraire, je regrette qu’il ne vous ait pas été possible de respecter les délais prévus (date de retour attendu : <fo:inline font-weight="bold">${BddDateEcheance})</fo:inline>. 
+                        Aussi, <fo:inline font-weight="bold">je vous prie</fo:inline>#if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">de remplir dans les meilleurs délais le questionnaire par internet 
+                        selon les modalités précisées au verso de cette lettre</fo:inline>. S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance 
+                        dont les coordonnées figurent dans l’en-tête de cette lettre. Ce dernier se tient également à votre disposition pour répondre à vos questions en cas de besoins.#else soit de répondre 
+                        à cette enquête par internet selon les modalités précisées au verso de cette lettre soit de compléter le questionnaire joint. Notre service d'assistance se tient à votre disposition 
+                        pour répondre à vos questions en cas de besoins.#end
                     </fo:block>
                <fo:block margin-top="3mm">
-                        S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre. 
-                        Ce dernier se tient également à votre disposition pour tout renseignement complémentaire sur ce courrier ou la procédure en cours.
+                        ${BddObjectifsLongs}
                     </fo:block>
                <fo:block margin-top="3mm">
-                        En vous remerciant par avance de votre collaboration, je vous prie de bien vouloir agréer, Madame, Monsieur, l'assurance de ma considération distinguée.
+                        Je vous rappelle que cette enquête#if(${BddCaractereObligatoire}=='oui')<fo:inline font-weight="bold"> à caractère obligatoire#end est reconnue d'${BddStatutEnquete}</fo:inline> par le 
+                        Conseil national de l'information statistique (Cnis). Conformément à la loi n° 51-711 du 7 juin 1951 modifiée, les données recueillies sont couvertes par le secret statistique 
+                        et ne sauraient en aucun cas être utilisées à des fins de contrôle fiscal ou de répression économique.
+                    </fo:block>
+               <fo:block margin-top="3mm">
+                        Des renseignements relatifs à l'enquête et à son calendrier sont disponibles sur le site internet du Cnis : <fo:inline text-decoration="underline">${BddURLCnis}</fo:inline>. #if($!{BddURLDiffusion})
+                        Les résultats de cette enquête ou des éditions antérieures sont disponibles sur le site de l'Insee : <fo:inline text-decoration="underline">$!{BddURLDiffusion}</fo:inline>.#end
+                    </fo:block>
+               <fo:block margin-top="3mm">
+                        En vous remerciant par avance de votre collaboration, je vous prie de bien vouloir agréer,
+                        #if($!{BddNom} and $!{BddCivilite})$!{BddCivilite} $!{BddNom}, #elseif($!{BddNom}) Madame ou Monsieur $!{BddNom},
+                        #else Madame, Monsieur,#end l'assurance de ma considération distinguée.
                     </fo:block>
                <fo:block margin-top="10mm" text-align="right">
-                        ${BddServiceProducteurSignataireFonction}
+                        ${BddServiceCollecteurSignataireFonction}
                     </fo:block>
                <fo:block text-align="right">
-                        ${BddServiceProducteurSignataireNom}
+                        ${BddServiceCollecteurSignataireNom}
                     </fo:block>
             </fo:block-container>
             <!-- ZONE NOTE DE BAS DE PAGE --><fo:block-container absolute-position="absolute"
@@ -331,9 +337,7 @@
                                 width="188mm"
                                 height="100%"
                                 overflow="hidden">
-               <fo:block>
-                        (*) Loi n°51-711 du 7 juin 1951 modifiée. Décret n° 2009-318 du 20 mars 2009.
-                    </fo:block>
+               <fo:block/>
             </fo:block-container>
          </fo:block>
          <fo:block page-break-after="always">
@@ -1492,72 +1496,8 @@
                    page-break-inside="avoid"
                    keep-with-next="always"
                    keep-together.within-column="always">Si vous déclarez en euros, la somme des CA ventilés doit être égale au CA total. Sinon, le total doit être égal à 100 %.</fo:block>
-         <fo:block page-break-inside="avoid" id="REPARTITION_CA">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Code activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">% ou montant en euros</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
-#foreach( ${REPARTITION_CA} in ${REPARTITION_CA-Container} ) 
-#set( $REPARTITION_CA.LoopPosition = $velocityCount)
-#if ($REPARTITION_CA.LoopPosition % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = $REPARTITION_CA.LoopPosition / 19)
-<fo:block page-break-inside="avoid"
-                   id="REPARTITION_CA-$DynamicArrayPage"
+         <fo:block page-break-inside="avoid"
+                   id="REPARTITION_CA"
                    page-break-after="always">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
@@ -1614,7 +1554,9 @@
                      </fo:table-cell>
                   </fo:table-row>
                </fo:table-header>
-               <fo:table-body>
+               <fo:table-body>#foreach( ${REPARTITION_CA} in ${REPARTITION_CA-Container} ) #set( $REPARTITION_CA.LoopPosition = $velocityCount)#if ($REPARTITION_CA.LoopPosition % 15 eq 0) </fo:table-body> </fo:table></fo:block>
+#set ($DynamicArrayPage = $REPARTITION_CA.LoopPosition / 15)
+<fo:block page-break-inside="avoid" id="REPARTITION_CA-$DynamicArrayPage" page-break-after="always"><fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm" text-align="center" margin-top="1mm" display-align="center" space-after="5mm"><fo:table-header><fo:table-row color="black" font-weight="normal" font-size="10pt" text-align="center"><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Code activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">% ou montant en euros</fo:block></fo:table-cell></fo:table-row></fo:table-header><fo:table-body>
 #end 
 <fo:table-row border-color="black" height="11mm">
                      <fo:table-cell text-align="left"
@@ -1653,74 +1595,14 @@
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
-                  </fo:table-row>
-#end 
+                  </fo:table-row>#end 
 #set( $initializeInt = 0)
 #set( $REPARTITION_CA-TotalOccurrenceInt = $initializeInt.parseInt(${REPARTITION_CA-TotalOccurrenceCount}))
-#if (($REPARTITION_CA-TotalOccurrenceInt + 1) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 1) / 19)
-<fo:block page-break-inside="avoid"
-                   id="REPARTITION_CA-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Code activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">% ou montant en euros</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
+
+#if ($REPARTITION_CA-TotalOccurrenceInt le 9) 
+#if (($REPARTITION_CA-TotalOccurrenceInt + 1) % 15 eq 0) </fo:table-body> </fo:table></fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 1) / 15)
+<fo:block page-break-inside="avoid" id="REPARTITION_CA-$DynamicArrayPage" page-break-after="always"><fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm" text-align="center" margin-top="1mm" display-align="center" space-after="5mm"><fo:table-header><fo:table-row color="black" font-weight="normal" font-size="10pt" text-align="center"><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Code activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">% ou montant en euros</fo:block></fo:table-cell></fo:table-row></fo:table-header><fo:table-body>
 #end 
 <fo:table-row border-color="black" height="11mm">
                      <fo:table-cell text-align="left"
@@ -1767,71 +1649,12 @@
                         </fo:block>
                      </fo:table-cell>
                   </fo:table-row>
+#end 
+
 #if ($REPARTITION_CA-TotalOccurrenceInt le 8) 
-#if (($REPARTITION_CA-TotalOccurrenceInt + 2) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 2) / 19)
-<fo:block page-break-inside="avoid"
-                   id="REPARTITION_CA-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Code activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">% ou montant en euros</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
+#if (($REPARTITION_CA-TotalOccurrenceInt + 2) % 15 eq 0) </fo:table-body> </fo:table></fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 2) / 15)
+<fo:block page-break-inside="avoid" id="REPARTITION_CA-$DynamicArrayPage" page-break-after="always"><fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm" text-align="center" margin-top="1mm" display-align="center" space-after="5mm"><fo:table-header><fo:table-row color="black" font-weight="normal" font-size="10pt" text-align="center"><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Code activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">% ou montant en euros</fo:block></fo:table-cell></fo:table-row></fo:table-header><fo:table-body>
 #end 
 <fo:table-row border-color="black" height="11mm">
                      <fo:table-cell text-align="left"
@@ -1881,70 +1704,9 @@
 #end 
 
 #if ($REPARTITION_CA-TotalOccurrenceInt le 7) 
-#if (($REPARTITION_CA-TotalOccurrenceInt + 3) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 3) / 19)
-<fo:block page-break-inside="avoid"
-                   id="REPARTITION_CA-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Code activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">% ou montant en euros</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
+#if (($REPARTITION_CA-TotalOccurrenceInt + 3) % 15 eq 0) </fo:table-body> </fo:table></fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 3) / 15)
+<fo:block page-break-inside="avoid" id="REPARTITION_CA-$DynamicArrayPage" page-break-after="always"><fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm" text-align="center" margin-top="1mm" display-align="center" space-after="5mm"><fo:table-header><fo:table-row color="black" font-weight="normal" font-size="10pt" text-align="center"><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Code activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">% ou montant en euros</fo:block></fo:table-cell></fo:table-row></fo:table-header><fo:table-body>
 #end 
 <fo:table-row border-color="black" height="11mm">
                      <fo:table-cell text-align="left"
@@ -1994,70 +1756,9 @@
 #end 
 
 #if ($REPARTITION_CA-TotalOccurrenceInt le 6) 
-#if (($REPARTITION_CA-TotalOccurrenceInt + 4) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 4) / 19)
-<fo:block page-break-inside="avoid"
-                   id="REPARTITION_CA-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Code activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">% ou montant en euros</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
+#if (($REPARTITION_CA-TotalOccurrenceInt + 4) % 15 eq 0) </fo:table-body> </fo:table></fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 4) / 15)
+<fo:block page-break-inside="avoid" id="REPARTITION_CA-$DynamicArrayPage" page-break-after="always"><fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm" text-align="center" margin-top="1mm" display-align="center" space-after="5mm"><fo:table-header><fo:table-row color="black" font-weight="normal" font-size="10pt" text-align="center"><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Code activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">% ou montant en euros</fo:block></fo:table-cell></fo:table-row></fo:table-header><fo:table-body>
 #end 
 <fo:table-row border-color="black" height="11mm">
                      <fo:table-cell text-align="left"
@@ -2107,70 +1808,9 @@
 #end 
 
 #if ($REPARTITION_CA-TotalOccurrenceInt le 5) 
-#if (($REPARTITION_CA-TotalOccurrenceInt + 5) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 5) / 19)
-<fo:block page-break-inside="avoid"
-                   id="REPARTITION_CA-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Code activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">% ou montant en euros</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
+#if (($REPARTITION_CA-TotalOccurrenceInt + 5) % 15 eq 0) </fo:table-body> </fo:table></fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 5) / 15)
+<fo:block page-break-inside="avoid" id="REPARTITION_CA-$DynamicArrayPage" page-break-after="always"><fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm" text-align="center" margin-top="1mm" display-align="center" space-after="5mm"><fo:table-header><fo:table-row color="black" font-weight="normal" font-size="10pt" text-align="center"><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Code activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">% ou montant en euros</fo:block></fo:table-cell></fo:table-row></fo:table-header><fo:table-body>
 #end 
 <fo:table-row border-color="black" height="11mm">
                      <fo:table-cell text-align="left"
@@ -2220,70 +1860,9 @@
 #end 
 
 #if ($REPARTITION_CA-TotalOccurrenceInt le 4) 
-#if (($REPARTITION_CA-TotalOccurrenceInt + 6) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 6) / 19)
-<fo:block page-break-inside="avoid"
-                   id="REPARTITION_CA-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Code activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">% ou montant en euros</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
+#if (($REPARTITION_CA-TotalOccurrenceInt + 6) % 15 eq 0) </fo:table-body> </fo:table></fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 6) / 15)
+<fo:block page-break-inside="avoid" id="REPARTITION_CA-$DynamicArrayPage" page-break-after="always"><fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm" text-align="center" margin-top="1mm" display-align="center" space-after="5mm"><fo:table-header><fo:table-row color="black" font-weight="normal" font-size="10pt" text-align="center"><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Code activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">% ou montant en euros</fo:block></fo:table-cell></fo:table-row></fo:table-header><fo:table-body>
 #end 
 <fo:table-row border-color="black" height="11mm">
                      <fo:table-cell text-align="left"
@@ -2333,70 +1912,9 @@
 #end 
 
 #if ($REPARTITION_CA-TotalOccurrenceInt le 3) 
-#if (($REPARTITION_CA-TotalOccurrenceInt + 7) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 7) / 19)
-<fo:block page-break-inside="avoid"
-                   id="REPARTITION_CA-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Code activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">% ou montant en euros</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
+#if (($REPARTITION_CA-TotalOccurrenceInt + 7) % 15 eq 0) </fo:table-body> </fo:table></fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 7) / 15)
+<fo:block page-break-inside="avoid" id="REPARTITION_CA-$DynamicArrayPage" page-break-after="always"><fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm" text-align="center" margin-top="1mm" display-align="center" space-after="5mm"><fo:table-header><fo:table-row color="black" font-weight="normal" font-size="10pt" text-align="center"><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Code activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">% ou montant en euros</fo:block></fo:table-cell></fo:table-row></fo:table-header><fo:table-body>
 #end 
 <fo:table-row border-color="black" height="11mm">
                      <fo:table-cell text-align="left"
@@ -2446,70 +1964,9 @@
 #end 
 
 #if ($REPARTITION_CA-TotalOccurrenceInt le 2) 
-#if (($REPARTITION_CA-TotalOccurrenceInt + 8) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 8) / 19)
-<fo:block page-break-inside="avoid"
-                   id="REPARTITION_CA-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Code activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">% ou montant en euros</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
+#if (($REPARTITION_CA-TotalOccurrenceInt + 8) % 15 eq 0) </fo:table-body> </fo:table></fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 8) / 15)
+<fo:block page-break-inside="avoid" id="REPARTITION_CA-$DynamicArrayPage" page-break-after="always"><fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm" text-align="center" margin-top="1mm" display-align="center" space-after="5mm"><fo:table-header><fo:table-row color="black" font-weight="normal" font-size="10pt" text-align="center"><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Code activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">% ou montant en euros</fo:block></fo:table-cell></fo:table-row></fo:table-header><fo:table-body>
 #end 
 <fo:table-row border-color="black" height="11mm">
                      <fo:table-cell text-align="left"
@@ -2559,70 +2016,9 @@
 #end 
 
 #if ($REPARTITION_CA-TotalOccurrenceInt le 1) 
-#if (($REPARTITION_CA-TotalOccurrenceInt + 9) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 9) / 19)
-<fo:block page-break-inside="avoid"
-                   id="REPARTITION_CA-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Code activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">% ou montant en euros</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
+#if (($REPARTITION_CA-TotalOccurrenceInt + 9) % 15 eq 0) </fo:table-body> </fo:table></fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 9) / 15)
+<fo:block page-break-inside="avoid" id="REPARTITION_CA-$DynamicArrayPage" page-break-after="always"><fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm" text-align="center" margin-top="1mm" display-align="center" space-after="5mm"><fo:table-header><fo:table-row color="black" font-weight="normal" font-size="10pt" text-align="center"><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Code activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">% ou montant en euros</fo:block></fo:table-cell></fo:table-row></fo:table-header><fo:table-body>
 #end 
 <fo:table-row border-color="black" height="11mm">
                      <fo:table-cell text-align="left"
@@ -2672,70 +2068,9 @@
 #end 
 
 #if ($REPARTITION_CA-TotalOccurrenceInt le 0) 
-#if (($REPARTITION_CA-TotalOccurrenceInt + 10) % 19 eq 0) 
-</fo:table-body>
-            </fo:table>
-         </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 10) / 19)
-<fo:block page-break-inside="avoid"
-                   id="REPARTITION_CA-$DynamicArrayPage"
-                   page-break-after="always">
-            <fo:table inline-progression-dimension="auto"
-                      table-layout="fixed"
-                      width="100%"
-                      font-size="10pt"
-                      border-width="0.35mm"
-                      text-align="center"
-                      margin-top="1mm"
-                      display-align="center"
-                      space-after="5mm">
-               <fo:table-header>
-                  <fo:table-row color="black"
-                                font-weight="normal"
-                                font-size="10pt"
-                                text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">Code activité</fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
-                        <fo:block color="black"
-                                  font-weight="normal"
-                                  font-size="10pt"
-                                  padding="1mm">% ou montant en euros</fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-header>
-               <fo:table-body>
+#if (($REPARTITION_CA-TotalOccurrenceInt + 10) % 15 eq 0) </fo:table-body> </fo:table></fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 10) / 15)
+<fo:block page-break-inside="avoid" id="REPARTITION_CA-$DynamicArrayPage" page-break-after="always"><fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm" text-align="center" margin-top="1mm" display-align="center" space-after="5mm"><fo:table-header><fo:table-row color="black" font-weight="normal" font-size="10pt" text-align="center"><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">Code activité</fo:block></fo:table-cell><fo:table-cell border-color="black" border-style="solid" text-align="center" padding-left="1mm" padding-right="1mm" number-rows-spanned="1" number-columns-spanned="1"><fo:block color="black" font-weight="normal" font-size="10pt" padding="1mm">% ou montant en euros</fo:block></fo:table-cell></fo:table-row></fo:table-header><fo:table-body>
 #end 
 <fo:table-row border-color="black" height="11mm">
                      <fo:table-cell text-align="left"

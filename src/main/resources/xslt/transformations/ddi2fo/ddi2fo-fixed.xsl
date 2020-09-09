@@ -90,17 +90,47 @@
                 <xsl:value-of select="$parameters//fo-parameters/Format/Columns"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//Format/Columns"/>
+                <xsl:value-of select="$properties//fo-parameters/Format/Columns"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    <xsl:variable name="roster-defaultsize">
+    <xsl:variable name="roster-minimum-empty-row" as="xs:integer">
+        <xsl:choose>
+            <xsl:when test="$parameters//fo-parameters/Roster/Row/MinimumEmpty != ''">
+                <xsl:value-of select="$parameters//fo-parameters/Roster/Row/MinimumEmpty"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//fo-parameters/Roster/Row/MinimumEmpty"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="roster-defaultsize" as="xs:integer">
         <xsl:choose>
             <xsl:when test="$parameters//fo-parameters/Roster/Row/DefaultSize != ''">
                 <xsl:value-of select="$parameters//fo-parameters/Roster/Row/DefaultSize"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//Roster/Row/DefaultSize"/>
+                <xsl:value-of select="$properties//fo-parameters/Roster/Row/DefaultSize"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="loop-default-occurrence" as="xs:integer">
+        <xsl:choose>
+            <xsl:when test="$parameters//fo-parameters/Loop/DefaultOccurrence != ''">
+                <xsl:value-of select="$parameters//fo-parameters/Loop/DefaultOccurrence"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//fo-parameters/Loop/DefaultOccurrence"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="loop-minimum-empty-occurrence" as="xs:integer">
+        <xsl:choose>
+            <xsl:when test="$parameters//fo-parameters/Loop/MinimumEmptyOccurrence != ''">
+                <xsl:value-of select="$parameters//fo-parameters/Loop/MinimumEmptyOccurrence"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//fo-parameters/Loop/MinimumEmptyOccurrence"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -120,7 +150,7 @@
                 <xsl:value-of select="$parameters//fo-parameters/TextArea/Row/DefaultSize"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//TextArea/Row/DefaultSize"/>
+                <xsl:value-of select="$properties//fo-parameters/TextArea/Row/DefaultSize"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -136,21 +166,31 @@
     </xsl:variable>
     <xsl:variable name="numeric-capture">
         <xsl:choose>
-            <xsl:when test="$parameters//Capture/Numeric != ''">
-                <xsl:value-of select="$parameters//Capture/Numeric"/>
+            <xsl:when test="$parameters//fo-parameters/Capture/Numeric != ''">
+                <xsl:value-of select="$parameters//fo-parameters/Capture/Numeric"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//Capture/Numeric"/>
+                <xsl:value-of select="$properties//fo-parameters/Capture/Numeric"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
     <xsl:variable name="page-break-between">
         <xsl:choose>
-            <xsl:when test="$parameters//PageBreakBetween/pdf != ''">
-                <xsl:value-of select="$parameters//PageBreakBetween/pdf"/>
+            <xsl:when test="$parameters//fo-parameters/PageBreakBetween/pdf != ''">
+                <xsl:value-of select="$parameters//fo-parameters/PageBreakBetween/pdf"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//PageBreakBetween/pdf"/>
+                <xsl:value-of select="$properties//fo-parameters/PageBreakBetween/pdf"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="initialize-all-variables">
+        <xsl:choose>
+            <xsl:when test="$parameters//fo-parameters/InitializeAllVariables  != ''">
+                <xsl:value-of select="$parameters//fo-parameters/InitializeAllVariables "/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//fo-parameters/InitializeAllVariables "/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -220,23 +260,27 @@
         </xsl:choose>
     </xsl:function>
 
-    <xsl:function name="enofo:get-formatted-label">
+    <xsl:function name="enofo:get-label">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
+        <xsl:param name="loop-navigation" as="node()"/>
         <xsl:variable name="tempLabel">
             <xsl:apply-templates select="enoddi:get-label($context,$language)" mode="enofo:format-label">
                 <xsl:with-param name="label-variables" select="enoddi:get-label-conditioning-variables($context,$language)" tunnel="yes"/>
+                <xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()" tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:variable>
         <xsl:sequence select="$tempLabel"/>
     </xsl:function>
     
-    <xsl:function name="enofo:get-formatted-fixed-value">
+    <xsl:function name="enofo:get-fixed-value">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
+        <xsl:param name="loop-navigation" as="node()"/>
         <xsl:variable name="tempLabel">
             <xsl:apply-templates select="enoddi:get-cell-value($context)" mode="enofo:format-label">
                 <xsl:with-param name="label-variables" select="enoddi:get-cell-value-variables($context)" tunnel="yes"/>
+                <xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()" tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:variable>
         <xsl:sequence select="$tempLabel"/>
@@ -244,7 +288,7 @@
 
     <xsl:template match="*" mode="enofo:format-label" priority="-1">
         <xsl:copy>
-            <xsl:apply-templates select="node()|@*" mode="enofo:format-label"/>      
+            <xsl:apply-templates select="node()|@*" mode="enofo:format-label"/>
         </xsl:copy>
     </xsl:template>
      
@@ -267,32 +311,55 @@
 
     <xsl:template match="text()" mode="enofo:format-label">
         <xsl:param name="label-variables" tunnel="yes"/>
+        <xsl:param name="loop-navigation" tunnel="yes" as="node()"/>
         
         <xsl:if test="substring(.,1,1)=' '">
             <xsl:text xml:space="preserve"> </xsl:text>
         </xsl:if>
-        <xsl:call-template name="vtl-label">
+        <xsl:call-template name="velocity-label">
             <xsl:with-param name="label" select="normalize-space(.)"/>
             <xsl:with-param name="variables" select="$label-variables"/>
+            <xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
         </xsl:call-template>
         <xsl:if test="substring(.,string-length(.),1)=' ' and string-length(.) &gt; 1">
             <xsl:text xml:space="preserve"> </xsl:text>
         </xsl:if>
     </xsl:template>
 
-    <xsl:template name="vtl-label">
+    <xsl:template name="velocity-label">
         <xsl:param name="label"/>
         <xsl:param name="variables"/>
+        <xsl:param name="loop-navigation" as="node()"/>
         
         <xsl:choose>
             <xsl:when test="contains($label,$conditioning-variable-begin) and contains(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)">
                 <xsl:value-of select="substring-before($label,$conditioning-variable-begin)"/>
+                <xsl:variable name="variable-name" select="substring-before(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)"/>
                 <xsl:variable name="variable-type">
                     <xsl:call-template name="enoddi:get-variable-type">
-                        <xsl:with-param name="variable" select="substring-before(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)"/>
-                    </xsl:call-template>                    
+                        <xsl:with-param name="variable" select="$variable-name"/>
+                    </xsl:call-template>
+                </xsl:variable>
+                <xsl:variable name="variable-ancestors" as="xs:string *">
+                    <xsl:call-template name="enoddi:get-business-ancestors">
+                        <xsl:with-param name="variable" select="$variable-name"/>
+                    </xsl:call-template>
                 </xsl:variable>
                 <xsl:choose>
+                    <xsl:when test="$variable-ancestors != ''">
+                        <xsl:variable name="current-ancestor" select="$variable-ancestors[last()]"/>
+                        <xsl:choose>
+                            <xsl:when test="$loop-navigation//Loop[@name=$current-ancestor]/text() != ''">
+                                <xsl:value-of select="concat('$!{',$current-ancestor,'-0-')"/>
+                            </xsl:when>
+                            <xsl:when test="$variable-type = 'external'">
+                                <xsl:value-of select="concat('${',$current-ancestor,'.')"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="concat('$!{',$current-ancestor,'.')"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:when>
                     <xsl:when test="$variable-type = 'external'">
                         <xsl:value-of select="'${'"/>
                     </xsl:when>
@@ -301,12 +368,13 @@
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:call-template name="enoddi:get-business-name">
-                    <xsl:with-param name="variable" select="substring-before(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)"/>
+                    <xsl:with-param name="variable" select="$variable-name"/>
                 </xsl:call-template>
                 <xsl:value-of select="'}'"/>
-                <xsl:call-template name="vtl-label">
+                <xsl:call-template name="velocity-label">
                     <xsl:with-param name="label" select="substring-after(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)"/>
                     <xsl:with-param name="variables" select="$variables"/>
+                    <xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
@@ -392,7 +460,7 @@
     </xd:doc>
     <xsl:function name="enofo:get-style">
         <xsl:param name="context" as="item()"/>
-        <xsl:sequence select="if(enoddi:get-style($context) = 'question multiple-choice-question') then ('no-border') else()"/>
+        <xsl:sequence select="if(enoddi:get-style($context) = 'question multiple-choice-question') then ('no-border') else(if(enoddi:get-style($context) = 'image') then ('image') else())"/>
     </xsl:function>
 
     <xd:doc>
@@ -405,5 +473,22 @@
         <xsl:sequence select="enoddi:get-instruction-index($context,'footnote,tooltip')"/>
     </xsl:function>
 
-
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Function that returns if a variable is initializable or not</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enofo:is-initializable-variable" as="xs:boolean">
+        <xsl:param name="context" as="item()"/>
+        <xsl:choose>
+            <xsl:when test="lower-case($initialize-all-variables) = 'true'">
+                <xsl:value-of select="true()"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- TODO : improve DDI content -->
+                <xsl:value-of select="enoddi:get-variable-type($context,enoddi:get-id($context)) = 'external'"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
 </xsl:stylesheet>
+
