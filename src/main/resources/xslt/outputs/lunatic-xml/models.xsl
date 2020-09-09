@@ -145,7 +145,8 @@
 				<xsl:with-param name="filterCondition" select="enolunatic:get-global-filter($source-context)" tunnel="yes"/>
 			</xsl:apply-templates>
 		</components>
-	</xsl:template>
+		
+		</xsl:template>
 
 	<xd:doc>
 		<xd:desc>Table / TableLoop drivers create a Table component</xd:desc>
@@ -187,7 +188,8 @@
 				</cells>
 			</xsl:for-each>
 		</components>
-	</xsl:template>
+		
+		</xsl:template>
 
 	<xd:doc>
 		<xd:desc>

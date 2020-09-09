@@ -10,7 +10,9 @@
 
 	<xsl:include href="../../../styles/style.xsl"/>
 	
-	<!-- Remove all the ConsistencyCheck messages from the pdf -->
+	<xd:doc>
+		<xd:desc>Remove all the ConsistencyCheck messages from the pdf</xd:desc>
+	</xd:doc>
 	<xsl:template match="main//ConsistencyCheck" mode="model"/>
 	
 	
