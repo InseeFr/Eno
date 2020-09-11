@@ -446,6 +446,7 @@
             <xsl:apply-templates select="@*"/>
             <!-- Decrease the index by 1 -->
             <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection" value="string(number(instance('fr-form-instance')/Util/CurrentSection)-1)"/>
+            <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName" value="instance('fr-form-util')/Pages/*[position()=number(instance('fr-form-instance')/Util/CurrentSection)]/name()"/>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
     </xsl:template>

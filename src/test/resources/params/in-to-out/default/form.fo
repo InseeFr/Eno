@@ -44,8 +44,7 @@
             La position peut être définie par rapport au hautou bas de la zone concernée et gauche ou droite.
                      
             Dans les zones before/after/start/end, les mesures se font par rapport au 0,0 de la zone concernée.
-            -->
-      <fo:simple-page-master master-name="page-even-default"
+            --><fo:simple-page-master master-name="page-even-default"
                              page-height="297mm"
                              page-width="210mm"
                              reference-orientation="0"
