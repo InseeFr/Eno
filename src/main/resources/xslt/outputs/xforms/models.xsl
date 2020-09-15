@@ -1524,21 +1524,20 @@
         <xsl:param name="language" tunnel="yes"/>
 
         <xsl:variable name="image" select="enoxforms:get-image($source-context)"/>
-        <xsl:variable name="labelImage" select="eno:serialize(enoxforms:get-label($source-context, $language))"/>
 
         <item>
             <label>
                 <xsl:choose>
                     <xsl:when test="$image = ''">
-                        <xsl:value-of select="$labelImage"/>
+                        <xsl:value-of select="eno:serialize(enoxforms:get-label($source-context, $language))"/>
                     </xsl:when>
                     <xsl:when test="starts-with($image,'http')">
                         <xsl:value-of select="concat('&lt;img src=&quot;',$image,
-                            '&quot; alt=&quot;',$labelImage,'&quot; /&gt;')"/>
+                            '&quot; title=&quot;',eno:serialize(enoxforms:get-label($source-context, $language)),'&quot; /&gt;')"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="concat('&lt;img src=&quot;/',$properties//Images/Folder,'/',$image,
-                            '&quot; alt=&quot;',$labelImage,'&quot; /&gt;')"/>
+                            '&quot; title=&quot;',eno:serialize(enoxforms:get-label($source-context, $language)),'&quot; /&gt;')"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </label>
