@@ -89,6 +89,10 @@
 		<components xsi:type="Loop" componentType="Loop" id="{$id}">
 			<xsl:attribute name="min" select="$minimumOccurrences"/>
 			<xsl:attribute name="iterations" select="enolunatic:replace-all-variables-with-business-name($source-context,$maximumOccurrences)"/>
+			<xsl:variable name="rosterDependencies" as="xs:string*"/>
+			<xsl:for-each select="$rosterDependencies">
+				<rosterDependencies><xsl:value-of select="."/></rosterDependencies>
+			</xsl:for-each>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 				<xsl:with-param name="loopDepth" select="$loopDepth + 1" tunnel="yes"/>
