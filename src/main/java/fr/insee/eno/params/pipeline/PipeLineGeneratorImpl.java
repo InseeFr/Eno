@@ -189,9 +189,9 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 			case FO:
 				generator = ddi2foGenerator;
 				break;
-			case POGUES_XML:
-				generator = ddi2poguesXmlGenerator;
-				break;
+//			case POGUES_XML:
+//				generator = ddi2poguesXmlGenerator;
+//				break;
 			}
 			break;
 		case POGUES_XML:

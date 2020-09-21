@@ -30,9 +30,14 @@
             </Capture>
             <Roster>
                 <Row>
-                    <DefaultSize>15</DefaultSize>
+                    <DefaultSize>8</DefaultSize>
+                    <MinimumEmpty>0</MinimumEmpty>
                 </Row>
             </Roster>
+            <Loop>
+                <DefaultOccurrence>8</DefaultOccurrence>
+                <MinimumEmptyOccurrence>0</MinimumEmptyOccurrence>
+            </Loop>
             <TextArea>
                 <Row>
                     <DefaultSize>5</DefaultSize>
