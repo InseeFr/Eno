@@ -476,6 +476,17 @@
                                     </xsl:call-template>
                                 </xsl:for-each>
                             </xsl:when>
+                            <xsl:when test="contains($text,concat($current-group,'-AddOccurrence'))">
+                                <xsl:for-each select="tokenize($text,concat($current-group,'-AddOccurrence'))">
+                                    <xsl:if test="not(position()=1)">
+                                        <xsl:value-of select="concat($current-group,'-AddOccurrence')"/>
+                                    </xsl:if>
+                                    <xsl:call-template name="replace-element">
+                                        <xsl:with-param name="position" select="$position"/>
+                                        <xsl:with-param name="text" select="current()"/>
+                                    </xsl:call-template>
+                                </xsl:for-each>
+                            </xsl:when>
                             <xsl:when test="contains($text,concat('concat(''',$current-group,'-'',instance(''fr-form-instance'')//',$current-group,'-Count'))">
                                 <xsl:for-each select="tokenize($text,concat('concat\(''',$current-group,'-'',instance\(''fr-form-instance''\)//',$current-group,'-Count'))">
                                     <xsl:if test="not(position()=1)">

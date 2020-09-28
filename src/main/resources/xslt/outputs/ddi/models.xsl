@@ -901,7 +901,7 @@
                 <xsl:when test="enoddi33:get-loop-filter($source-context) != ''">
                     <d:ControlConstructReference>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                        <r:ID><xsl:value-of select="concat(enoddi33:get-id($source-context),'-ITE-THEN')"/></r:ID>
+                        <r:ID><xsl:value-of select="concat(enoddi33:get-id($source-context),'-ITE')"/></r:ID>
                         <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                         <r:TypeOfObject>IfThenElse</r:TypeOfObject>
                     </d:ControlConstructReference>
