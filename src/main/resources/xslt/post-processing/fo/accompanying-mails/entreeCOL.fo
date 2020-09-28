@@ -138,7 +138,7 @@
                         ${BddArticleServiceProducteur}${BddNomServiceProducteur} réalise l’<fo:inline font-weight="bold">enquête #if(${BddFrequence}!='')${BddFrequence}#end ${BddLibelleLong}.</fo:inline> ${BddObjectifsLongs}
                     </fo:block>
                     <fo:block margin-top="3mm">
-                        Cette enquête<fo:inline font-weight="bold">#if(${BddCaractereObligatoire}=='oui') à caractère obligatoire#end est reconnue d'${BddStatutEnquete}</fo:inline> par le
+                        Cette enquête<fo:inline font-weight="bold">#if(${BddCaractereObligatoire}=='oui') à caractère obligatoire#end est reconnue d'${BddStatutEnquete}</fo:inline> par le 
                         Conseil national de l’information statistique (Cnis). Conformément à la loi n° 51-711 du 7 juin 1951 modifiée, les données recueillies sont couvertes par le secret statistique 
                         et ne sauraient en aucun cas être utilisées à des fins de contrôle fiscal ou de répression économique.
                     </fo:block>
@@ -148,9 +148,9 @@
                         et il est important que nous puissions recueillir votre réponse afin que la diversité des caractéristiques des entreprises soit prise en compte.
                     </fo:block>
                     <fo:block margin-top="3mm">
-                        <fo:inline font-weight="bold">Je vous invite donc #if(${BddQuestionnaire}==0) à répondre à cette enquête 
+                        <fo:inline font-weight="bold">Je vous invite donc</fo:inline>#if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">à répondre à cette enquête  
                         selon les modalités précisées au verso de cette lettre</fo:inline>. S’il vous est matériellement impossible de répondre en ligne, 
-                        merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette
+                        merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette 
                         lettre.#else soit à répondre à cette enquête <fo:inline font-weight="bold">par internet selon les modalités précisées au verso de cette lettre</fo:inline>
                         soit à compléter le questionnaire joint.#end
                     </fo:block>

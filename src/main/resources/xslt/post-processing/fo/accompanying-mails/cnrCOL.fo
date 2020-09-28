@@ -148,7 +148,7 @@
                         Si vous venez de procéder à la transmission de votre réponse, je vous prie de ne pas tenir compte de ce courrier.
                     </fo:block>
                     <fo:block margin-top="3mm">
-                        A défaut, <fo:inline font-weight="bold">je vous prie#if(${BddQuestionnaire}==0) de remplir le questionnaire par internet selon les modalités précisées au verso de cette lettre</fo:inline>,#else
+                        A défaut, <fo:inline font-weight="bold">je vous prie</fo:inline>#if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">de remplir le questionnaire par internet selon les modalités précisées au verso de cette lettre</fo:inline>,#else
                         soit de répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre soit de compléter le questionnaire joint,#end dans un délai de 15 jours. 
                         A l’expiration de ce délai, votre dossier sera soumis pour examen au <fo:inline font-weight="bold">Comité du contentieux</fo:inline> des enquêtes statistiques obligatoires 
                         du Conseil national de l’information statistique (Cnis), conformément à la loi*.

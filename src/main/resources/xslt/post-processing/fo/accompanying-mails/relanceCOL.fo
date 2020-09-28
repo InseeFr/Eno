@@ -168,10 +168,11 @@
                         Si vous êtes en mesure de répondre à cette enquête, nous vous en serions donc extrêmement reconnaissants.
                     </fo:block>
                     <fo:block margin-top="3mm">
-                        Dans ce cas, <fo:inline font-weight="bold">je vous prie#if(${BddQuestionnaire}==0) de remplir le questionnaire par internet selon les modalités précisées au verso de cette lettre</fo:inline>. 
-                        S'il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l'en-tête de cette lettre, 
-                        en privilégiant le contact par courriel. Ce dernier se tient également à votre disposition pour répondre à vos questions en cas de besoin.#else soit de répondre à cette enquête par internet selon 
-                        les modalités précisées au verso de cette lettre soit de compléter le questionnaire joint. Notre service d'assistance se tient à votre disposition pour répondre à vos questions en cas de besoin.#end
+                        Dans ce cas, <fo:inline font-weight="bold">je vous prie</fo:inline>#if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">de remplir le questionnaire par internet 
+                        selon les modalités précisées au verso de cette lettre</fo:inline>. S'il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance 
+                        dont les coordonnées figurent dans l'en-tête de cette lettre, en privilégiant le contact par courriel. Ce dernier se tient également à votre disposition pour répondre à vos questions en cas de besoin.#else soit de répondre 
+                        à cette enquête par internet selon les modalités précisées au verso de cette lettre soit de compléter le questionnaire joint. Notre service d'assistance se tient à votre disposition 
+                        pour répondre à vos questions en cas de besoin.#end
                     </fo:block>
                     -->
                     
@@ -179,7 +180,7 @@
                         ${BddObjectifsLongs}
                     </fo:block>
                     <fo:block margin-top="3mm">
-                        Je vous rappelle que cette enquête#if(${BddCaractereObligatoire}=='oui')<fo:inline font-weight="bold"> à caractère obligatoire#end est reconnue d'${BddStatutEnquete}</fo:inline> par le 
+                        Je vous rappelle que cette enquête<fo:inline font-weight="bold">#if(${BddCaractereObligatoire}=='oui') à caractère obligatoire#end est reconnue d'${BddStatutEnquete}</fo:inline> par le 
                         Conseil national de l'information statistique (Cnis). Conformément à la loi n° 51-711 du 7 juin 1951 modifiée, les données recueillies sont couvertes par le secret statistique 
                         et ne sauraient en aucun cas être utilisées à des fins de contrôle fiscal ou de répression économique.
                     </fo:block>

@@ -170,9 +170,9 @@
                     -->
                     
                     <fo:block margin-top="3mm">
-                        <fo:inline font-weight="bold">Je vous invite donc#if(${BddQuestionnaire}==0) à remplir le questionnaire par internet 
+                        <fo:inline font-weight="bold">Je vous invite donc</fo:inline>#if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">à remplir le questionnaire par internet 
                         selon les modalités précisées au verso de cette lettre</fo:inline>. S’il vous est matériellement impossible de répondre en ligne, 
-                        merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre.
+                        merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre. 
                         Ce dernier se tient également à votre disposition pour répondre à vos questions en cas de besoin.#else soit à répondre à cette enquête 
                         par internet selon les modalités précisées au verso de cette lettre soit à compléter le questionnaire joint.#end
                     </fo:block>
