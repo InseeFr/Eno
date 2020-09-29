@@ -45,7 +45,7 @@
       <fo:static-content flow-name="xsl-region-before-courrier">
          <fo:block position="absolute" margin-top="5mm" margin-left="10mm" margin-right="10mm"
             margin-bottom="10mm" color="white">
-            <![CDATA[#]]><![CDATA[#]]><![CDATA[#]]>DS${NumeroDocument}col${data-IdEdition}
+            &lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;DS${NumeroDocument}col${data-IdEdition}
          </fo:block>
       </fo:static-content>
 
