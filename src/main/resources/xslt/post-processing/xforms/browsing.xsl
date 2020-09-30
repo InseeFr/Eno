@@ -385,7 +385,6 @@
                     relevant="instance('fr-form-instance')/Util/Send='true'"/>
                 <xf:bind id="pages-bind" ref="Pages">
                     <xsl:apply-templates select="//xf:instance[@id='fr-form-instance']/form/*[child::*]" mode="page-bind">
-                        <xsl:with-param name="loop-ancestors"/>
                         <xsl:with-param name="page-loop" as="node()" tunnel="yes">
                             <Loops/>
                         </xsl:with-param>
@@ -756,12 +755,10 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="*[ends-with(name(),'-Container')]" mode="page-bind">
-        <xsl:param name="loop-ancestors"/>
         <xsl:param name="page-loop" as="node()" tunnel="yes"/>
         <xsl:variable name="container" select="name()"/>
         <xsl:variable name="loop-name" select="child::*/name()"/>
         <xsl:apply-templates select="child::*/child::*[child::*]" mode="page-bind">
-            <xsl:with-param name="loop-ancestors" select="if ($loop-ancestors='') then $container else concat($loop-ancestors,' ',$container)"/>
             <xsl:with-param name="page-loop" tunnel="yes">
                 <Loops>
                     <xsl:copy-of select="$page-loop//Loop"/>
@@ -777,7 +774,6 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="*[not(ends-with(name(),'-Container'))]" mode="page-bind">
-        <xsl:param name="loop-ancestors"/>
         <xsl:param name="page-loop" as="node()" tunnel="yes"/>
 
         <xsl:variable name="module-name" select="name()"/>
@@ -786,7 +782,7 @@
         <xf:bind id="page-{name()}-bind" name="{name()}" ref="{name()}">
             <xsl:if test="$relevant != ''">
                 <xsl:choose>
-                    <xsl:when test="$loop-ancestors != ''">
+                    <xsl:when test="$page-loop//Loop">
                         <xf:calculate>
                             <xsl:attribute name="value">
                                 <xsl:call-template name="bind-in-page-loop">
@@ -804,11 +800,10 @@
             <!-- Creating a constraint equals to the sum of warning-level constraints -->
             <xsl:apply-templates select="//xf:bind[@name=$module-name]/*" mode="page-check">
                 <xsl:with-param name="parent-name" select="$module-name" tunnel="yes"/>
-                <xsl:with-param name="last-ancestor" select="tokenize($loop-ancestors,' ')[last()]" tunnel="yes"/>
+                <xsl:with-param name="is-in-loop" select="true()" as="xs:boolean" tunnel="yes"/>
                 <xsl:with-param name="level" select="'warning'" tunnel="yes"/>
                 <xsl:with-param name="constraint-begin" select="''" as="xs:string" tunnel="yes"/>
                 <xsl:with-param name="constraint-end" select="''" as="xs:string" tunnel="yes"/>
-                <xsl:with-param name="page-loop" select="$page-loop" as="node()" tunnel="yes"/>
             </xsl:apply-templates>
         </xf:bind>
     </xsl:template>
@@ -825,7 +820,6 @@
     </xd:doc>
     <xsl:template match="xf:constraint" mode="page-check" priority="1">
         <xsl:param name="parent-name" tunnel="yes"/>
-        <xsl:param name="last-ancestor" tunnel="yes"/>
         <xsl:param name="level" tunnel="yes"/>
         <xsl:param name="constraint-begin" as="xs:string" tunnel="yes"/>
         <xsl:param name="constraint-end" as="xs:string" tunnel="yes"/>
@@ -862,7 +856,7 @@
     </xd:doc>
     <xsl:template match="xf:bind[@nodeset]" mode="page-check">
         <xsl:param name="parent-name" tunnel="yes"/>
-        <xsl:param name="last-ancestor" tunnel="yes"/>
+        <xsl:param name="is-in-loop" as="xs:boolean" tunnel="yes"/>
         <xsl:param name="level" tunnel="yes"/>
         <xsl:param name="constraint-begin" as="xs:string" tunnel="yes"/>
         <xsl:param name="constraint-end" as="xs:string" tunnel="yes"/>
@@ -870,10 +864,10 @@
         <xsl:variable name="loop-name" select="substring-after(@nodeset,'-Container/')"/>
         <xsl:apply-templates select="*" mode="page-check">
             <xsl:with-param name="parent-name" select="@name" tunnel="yes"/>
-            <xsl:with-param name="last-ancestor" select="$loop-name" tunnel="yes"/>
+            <xsl:with-param name="is-in-loop" select="true()" as="xs:boolean" tunnel="yes"/>
             <xsl:with-param name="constraint-begin" as="xs:string" tunnel="yes">
                 <xsl:choose>
-                    <xsl:when test="$last-ancestor != ''">
+                    <xsl:when test="$is-in-loop">
                         <xsl:value-of select="concat($constraint-begin,'not(descendant::',$loop-name,'[not(')"/>
                     </xsl:when>
                     <xsl:otherwise>
