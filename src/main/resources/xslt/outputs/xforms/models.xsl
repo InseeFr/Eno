@@ -359,7 +359,7 @@
             <xd:p>It goes down the tree to check if there are no other loops.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Model//RowLoop | Model//QuestionLoop" mode="model">
+    <xsl:template match="Model//RowLoop[not(ancestor::Instance)] | Model//QuestionLoop[not(ancestor::Instance)]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <!-- create element with same name and acts like what is done for the instance part -->
         <xsl:element name="{enoxforms:get-container-name($source-context)}">
@@ -377,6 +377,48 @@
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Template for RowLoop and QuestionLoop into a QuestionLoop.</xd:p>
+            <xd:p>An element is created and we copy the Instance part into this model.</xd:p>
+            <xd:p>It goes down the tree to check if there are no other loops.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="Model//QuestionLoop//Instance//RowLoop | Model//QuestionLoop//Instance//QuestionLoop" mode="model" priority="1">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+
+        <xsl:variable name="name" select="enoxforms:get-name($source-context)"/>
+        <xsl:variable name="minimum-count">
+            <xsl:choose>
+                <xsl:when test="self::RowLoop">
+                    <xsl:value-of select="enoxforms:get-minimum-lines($source-context)"/>
+                </xsl:when>
+                <xsl:when test="self::QuestionLoop">
+                    <xsl:value-of select="enoxforms:get-minimum-occurrences($source-context)"/>
+                </xsl:when>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="container-name" select="enoxforms:get-container-name($source-context)"/>
+        <xsl:variable name="descendant-content" as="node() *">
+            <xsl:apply-templates select="enoxforms:get-external-variables($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+            </xsl:apply-templates>            
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+            </xsl:apply-templates>
+        </xsl:variable>
+        <xsl:if test="$minimum-count != '' and $minimum-count != '0'">
+            <xsl:for-each select="1 to xs:integer($minimum-count)">
+                <xsl:element name="{$container-name}">
+                    <xsl:element name="{$name}">
+                        <xsl:attribute name="occurrence-id" select="concat($name,'-',position())"/>
+                        <xsl:copy-of select="$descendant-content"/>
+                    </xsl:element>
+                </xsl:element>                
+            </xsl:for-each>
+        </xsl:if>
     </xsl:template>
 
     <xd:doc>
@@ -2325,8 +2367,16 @@
                         <xf:insert context="{$instance-ancestor-label}{$linked-loop-name}"
                             nodeset="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}" position="after"
                             origin="instance('fr-form-loop-model')/{$linked-loop-name}/{$loop-name}"/>
-                        <xf:setvalue ref="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}[last()]/@occurrence-id"
-                            value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>
+                        <xsl:choose>
+                            <xsl:when test="ancestor::QuestionLoop">
+                                <xf:setvalue ref="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}[last()]/@occurrence-id"
+                                    value="concat('{$loop-name}-',substring-after(current()/ancestor::*[@occurrence-id][1]/@occurrence-id,'-'),'-',{$instance-ancestor-label}{$loop-name}-Count)"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xf:setvalue ref="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}[last()]/@occurrence-id"
+                                    value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:for-each>
                 </xf:action>
             </xf:trigger>
@@ -2467,6 +2517,7 @@
                 <xsl:value-of select="concat(.,'[@occurrence-id = current()/ancestor::',.,'/@occurrence-id]//')"/>
             </xsl:for-each>
         </xsl:variable>
+        <xsl:variable name="has-ancestor-loop" select="if (ancestor::QuestionLoop) then true() else false()" as="xs:boolean"/>
 
         <xf:repeat id="{$container-name}" bind="{$container-name}-bind" nodeset="{$instance-ancestor-label}{$container-name}/{$loop-name}">
             <xf:var name="{$container-name}-position" value="position()"/>
@@ -2488,8 +2539,37 @@
                         <xf:insert context="{$instance-ancestor-label}{$linked-loop-name}"
                             nodeset="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}" position="after"
                             origin="instance('fr-form-loop-model')/{$linked-loop-name}/{$loop-name}"/>
-                        <xf:setvalue ref="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}[last()]/@occurrence-id"
-                            value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>
+                        <xsl:choose>
+                            <xsl:when test="$has-ancestor-loop">
+                                <xf:setvalue ref="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}[last()]/@occurrence-id"
+                                    value="concat('{$loop-name}-',substring-after(current()/ancestor::*[@occurrence-id][1]/@occurrence-id,'-'),'-',{$instance-ancestor-label}{$loop-name}-Count)"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xf:setvalue ref="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}[last()]/@occurrence-id"
+                                    value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:for-each select="enoxforms:get-descendant-loop(.) | enoxforms:get-descendant-dynamic-array(.)">
+                            <xsl:variable name="descendant-loop-name" select="enoxforms:get-name(.)"/>
+                            <xsl:variable name="descendant-loop-container-name" select="enoxforms:get-container-name(.)"/>
+                            <!-- manage loop and dynamic array at the same time -->
+                            <xsl:variable name="descendant-minimum-occurrence" select="concat(enoxforms:get-minimum-occurrences(.),enoxforms:get-minimum-lines(.))"/>
+                            <xsl:if test="$descendant-minimum-occurrence != '' and $descendant-minimum-occurrence != '0' and $descendant-minimum-occurrence != '00'">
+                                <xsl:for-each select="1 to xs:integer($descendant-minimum-occurrence)">
+                                    <xsl:variable name="occurrence-position" select="position()"/>
+                                    <xsl:choose>
+                                        <xsl:when test="$has-ancestor-loop">
+                                            <xf:setvalue ref="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}[last()]//{$descendant-loop-container-name}/{$descendant-loop-name}[{$occurrence-position}]/@occurrence-id"
+                                                value="concat('{$descendant-loop-name}-',substring-after(current()/ancestor::*[@occurrence-id][1]/@occurrence-id,'-'),'-',{$instance-ancestor-label}{$loop-name}-Count,'-{$occurrence-position}')"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xf:setvalue ref="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}[last()]//{$descendant-loop-container-name}/{$descendant-loop-name}[{$occurrence-position}]/@occurrence-id"
+                                                value="concat('{$descendant-loop-name}-',{$instance-ancestor-label}{$loop-name}-Count,'-{$occurrence-position}')"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:for-each>
+                            </xsl:if>
+                        </xsl:for-each>
                     </xsl:for-each>
                 </xf:action>
             </xf:trigger>

@@ -469,8 +469,16 @@
                                     nodeset="instance('fr-form-instance')//{$container}/{$dynamic-array}"
                                     position="after"
                                     origin="instance('fr-form-loop-model')/{$container}/{$dynamic-array}"/>
-                                <xf:setvalue ref="instance('fr-form-instance')//{$container}/{$dynamic-array}[last()]/@occurrence-id"
-                                    value="concat('{$dynamic-array}-',count(instance('fr-form-instance')//{$container}/{$dynamic-array}))"/>
+                                <xsl:choose>
+                                    <xsl:when test="ancestor::xf:repeat">
+                                        <xf:setvalue ref="instance('fr-form-instance')//{$container}/{$dynamic-array}[last()]/@occurrence-id"
+                                            value="concat('{$dynamic-array}-',substring-after(ancestor::*[@occurrence-id][1]/@occurrence-id,'-'),'-',count(instance('fr-form-instance')//{$container}/{$dynamic-array}))"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xf:setvalue ref="instance('fr-form-instance')//{$container}/{$dynamic-array}[last()]/@occurrence-id"
+                                            value="concat('{$dynamic-array}-',count(instance('fr-form-instance')//{$container}/{$dynamic-array}))"/>                                        
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </xf:action>
                         </xf:action>
                         <xf:action if="count(instance('fr-form-instance')//{$container}/{$dynamic-array}) &gt; instance('fr-form-instance')//{$dynamic-array}-Count">

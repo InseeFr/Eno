@@ -141,7 +141,8 @@
             </xsl:call-template>
         </xsl:variable>
         <xsl:attribute name="{name()}">
-            <xsl:value-of select="replace($content,'@occurrence-id','@idGroupe')"/>
+            <xsl:value-of select="replace(replace($content,'ancestor::\*\[@occurrence-id\]\[1\]/@occurrence-id','ancestor::Groupe[@typeGroupe][1]/@idGroupe'),
+                                          '@occurrence-id','@idGroupe')"/>
         </xsl:attribute>
     </xsl:template>
 
