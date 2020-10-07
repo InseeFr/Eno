@@ -2312,6 +2312,7 @@
                 <xsl:value-of select="concat(.,'[@occurrence-id = current()/ancestor::',.,'/@occurrence-id]//')"/>
             </xsl:for-each>
         </xsl:variable>
+        <xsl:variable name="has-ancestor-loop" select="if (ancestor::QuestionLoop) then true() else false()" as="xs:boolean"/>
 
         <xsl:apply-templates select="$table-title//xf-output" mode="model"/>
         <xhtml:table name="{$table-name}">
@@ -2368,7 +2369,7 @@
                             nodeset="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}" position="after"
                             origin="instance('fr-form-loop-model')/{$linked-loop-name}/{$loop-name}"/>
                         <xsl:choose>
-                            <xsl:when test="ancestor::QuestionLoop">
+                            <xsl:when test="$has-ancestor-loop">
                                 <xf:setvalue ref="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}[last()]/@occurrence-id"
                                     value="concat('{$loop-name}-',substring-after(current()/ancestor::*[@occurrence-id][1]/@occurrence-id,'-'),'-',{$instance-ancestor-label}{$loop-name}-Count)"/>
                             </xsl:when>
