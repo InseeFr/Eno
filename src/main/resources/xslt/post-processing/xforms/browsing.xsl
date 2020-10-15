@@ -143,7 +143,7 @@
             <xsl:when test="not($bind-in-page) and //fr:body//*[@bind=current()/@id]/name()='fr:section'">
                 <xsl:variable name="ancestor-loop-relevant">
                     <xsl:for-each select="$ancestor-loops//Loop">
-                        <xsl:value-of select="concat('ancestor::',@loop,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',@container,''']] and ')"/>
+                        <xsl:value-of select="concat('instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',@container,'''] != '''' and ancestor::',@loop,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',@container,''']] and ')"/>
                     </xsl:for-each>
                 </xsl:variable>
                 <xsl:copy>
