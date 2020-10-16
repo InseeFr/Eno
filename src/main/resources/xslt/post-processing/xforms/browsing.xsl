@@ -62,9 +62,9 @@
     <xsl:variable name="loops-of-pages-with-addButton" as="node()">
         <Loops>
             <xsl:for-each select="//fr:body//xf:repeat[descendant::fr:section]">
-                <xsl:variable name="loop-name" select="@id"/>
-                <xsl:if test="following::xf:trigger[@id = concat($loop-name,'-AddOccurrence')]">
-                    <Loop button="{$loop-name}-AddOccurrence" section="{descendant::fr:section[last()]/@name}"/>
+                <xsl:variable name="loop-name" select="substring-before(@id,'-Container')"/>
+                <xsl:if test="following::xf:trigger[@id = concat($loop-name,'-add-occurrence')]">
+                    <Loop loop="{$loop-name}" section="{descendant::fr:section[last()]/@name}"/>
                 </xsl:if>
             </xsl:for-each>
         </Loops>
@@ -76,7 +76,11 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="/">
-        <xsl:apply-templates select="xhtml:html"/>
+        <xsl:apply-templates select="xhtml:html">
+            <xsl:with-param name="ancestor-loops" as="node()" tunnel="yes">
+                <Loops/>
+            </xsl:with-param>
+        </xsl:apply-templates>
     </xsl:template>
 
     <xd:doc>
@@ -124,12 +128,12 @@
     <xd:doc>
         <xd:desc>templates to move -addOccurrence at the end of the last page when loop of pages in instance and loop-model</xd:desc>
     </xd:doc>
-    <xsl:template match="xf:instance[@id='fr-form-instance']//*[ends-with(name(),'-AddOccurrence') and name()=$loops-of-pages-with-addButton//Loop/@button]"/>
+    <xsl:template match="xf:instance[@id='fr-form-instance']//*[ends-with(name(),'-AddOccurrence') and substring-before(name(),'-AddOccurrence')=$loops-of-pages-with-addButton//Loop/@loop]"/>
     <xsl:template match="xf:instance[@id='fr-form-instance' or @id='fr-form-loop-model']//*[name()=$loops-of-pages-with-addButton//Loop/@section]">
         <xsl:variable name="section-name" select="name()"/>
         <xsl:copy>
             <xsl:apply-templates select="node() | @*" mode="#current"/>
-            <xsl:copy-of select="//xf:instance[@id='fr-form-instance']//*[name()=$loops-of-pages-with-addButton//Loop[@section=$section-name]/@button]"/>
+            <xsl:copy-of select="//xf:instance[@id='fr-form-instance']//*[name()=concat($loops-of-pages-with-addButton//Loop[@section=$section-name]/@loop,'-AddOccurrence')]"/>
         </xsl:copy>
     </xsl:template>
 
@@ -147,9 +151,6 @@
             </xf:bind>
             <xsl:apply-templates select="node()">
                 <xsl:with-param name="bind-in-page" as="xs:boolean" select="false()" tunnel="yes"/>
-                <xsl:with-param name="ancestor-loops" as="node()" tunnel="yes">
-                    <Loops/>
-                </xsl:with-param>
             </xsl:apply-templates>
             <xf:bind id="end-bind" name="end" ref="End">
                 <xf:bind id="generic-end-text-bind" name="generic-end-text" ref="GenericEndText"/>
@@ -166,7 +167,7 @@
 
         <xsl:choose>
             <!-- remove the addOccurrence button when out of page -->
-            <xsl:when test="not($bind-in-page) and @ref=$loops-of-pages-with-addButton//Loop/@button"/>
+            <xsl:when test="not($bind-in-page) and ends-with(@id,'-add-occurrence-bind') and substring-before(@id,'-add-occurrence-bind')=$loops-of-pages-with-addButton//Loop/@loop"/>
             <!-- when enterring into a page -->
             <xsl:when test="not($bind-in-page) and //fr:body//*[@bind=current()/@id]/name()='fr:section'">
                 <xsl:variable name="ancestor-loop-relevant">
@@ -200,11 +201,11 @@
                     </xsl:apply-templates>
                     <xsl:if test="@name = $loops-of-pages-with-addButton//Loop/@section">
                         <xsl:variable name="addoccurrence-bind" as="node()">
-                            <xsl:copy-of select="//xf:bind[@name = $loops-of-pages-with-addButton//Loop[@section = current()/@name]/@button]"/>
+                            <xsl:copy-of select="//xf:bind[@id = concat($loops-of-pages-with-addButton//Loop[@section = current()/@name]/@loop,'-add-occurrence-bind')]"/>
                         </xsl:variable>
                         <xf:bind>
                             <xsl:copy-of select="$addoccurrence-bind/@id"/>
-                            <xsl:copy-of select="$addoccurrence-bind/@name"/>
+                            <xsl:copy-of select="$addoccurrence-bind/@ref"/>
                             <xsl:attribute name="relevant">
                                 <xsl:choose>
                                     <xsl:when test="$addoccurrence-bind/@relevant">
@@ -214,7 +215,6 @@
                                         <xsl:value-of select="concat('not(ancestor::',$ancestor-loops//Loop[last()]/@loop,'/following-sibling::',$ancestor-loops//Loop[last()]/@loop,')')"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
-                                
                             </xsl:attribute>
                         </xf:bind>
                     </xsl:if>
@@ -277,8 +277,6 @@
                             </xsl:for-each>
                         </xsl:variable>
                         <xsl:variable name="ancestor-label-to-change" select="replace(replace(replace(replace($ancestor-label,'\(','\\('),'\)','\\)'),'\[','\\['),'\]','\\]')"/>
-                        <xsl:message select="$ancestor-label"></xsl:message>
-                        <xsl:message select="$attribute"></xsl:message>
                         <!-- Perhaps there will be a problem with loop in loop inside page where a formula in the child loop uses variables from its parent loop -->
                         <xsl:call-template name="improve-bind-formula">
                             <xsl:with-param name="attribute" select="replace($attribute,$ancestor-label-to-change,'descendant::')"/>
@@ -467,11 +465,7 @@
                 <xf:bind id="confirmation-message-bind" ref="ConfirmationMessage" name="confirmation-message"
                     relevant="instance('fr-form-instance')/Util/Send='true'"/>
                 <xf:bind id="pages-bind" ref="Pages">
-                    <xsl:apply-templates select="//xf:instance[@id='fr-form-instance']/form/*[child::*]" mode="page-bind">
-                        <xsl:with-param name="ancestor-loops" as="node()" tunnel="yes">
-                            <Loops/>
-                        </xsl:with-param>
-                    </xsl:apply-templates>
+                    <xsl:apply-templates select="//xf:instance[@id='fr-form-instance']/form/*[child::*]" mode="page-bind"/>
                 </xf:bind>
             </xf:bind>
 
@@ -1054,11 +1048,7 @@
                         </xhtml:div>
                     </fr:section>
                 </xf:case>
-                <xsl:apply-templates select="*[name()='fr:section' or name()='xf:repeat']">
-                    <xsl:with-param name="ancestor-loops" as="node()" tunnel="yes">
-                        <Loops/>
-                    </xsl:with-param>
-                </xsl:apply-templates>
+                <xsl:apply-templates select="*[name()='fr:section' or name()='xf:repeat']"/>
                 <xf:case id="{string(number($number-of-pages)+2)}">
                     <fr:section id="end-control" bind="end-bind" name="end">
                         <xf:label ref="$form-resources/End/label"/>
@@ -1207,7 +1197,7 @@
             <xsl:copy>
                 <xsl:apply-templates select="node() | @*"/>
                 <xsl:if test="@name = $loops-of-pages-with-addButton//Loop/@section">
-                    <xsl:copy-of select="//xf:trigger[@id = $loops-of-pages-with-addButton//Loop[@section = current()/@name]/@button]"/>
+                    <xsl:copy-of select="//xf:trigger[@id = concat($loops-of-pages-with-addButton//Loop[@section = current()/@name]/@loop,'-add-occurrence')]"/>
                 </xsl:if>
             </xsl:copy>
             <xsl:for-each select="$ancestor-loops//Loop">
@@ -1216,7 +1206,7 @@
         </xf:case>
     </xsl:template>
     
-    <xsl:template match="xf:trigger[@id=$loops-of-pages-with-addButton//Loop/@button]"/>
+    <xsl:template match="xf:trigger[ends-with(@id,'-add-occurrence') and substring-before(@id,'-add-occurrence')=$loops-of-pages-with-addButton//Loop/@loop]"/>
 
     <xsl:template match="xf:label/@ref | xf:alert/@ref | xf:action/@* |xf:setvalue/@*">
         <xsl:param name="ancestor-loops" as="node()" tunnel="yes"/>
