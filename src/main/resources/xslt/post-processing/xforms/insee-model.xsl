@@ -554,8 +554,8 @@
                                     </xsl:matching-substring>
                                 </xsl:analyze-string>
                             </xsl:when>
-                            <xsl:when test="matches($text,concat($current-group,'_\d+-Container-'))">
-                                <xsl:analyze-string select="$text" regex="^(.*){$current-group}(_\d+)-Container-(.*)$">
+                            <xsl:when test="matches($text,concat($current-group,'(_\d+)?-Container-'))">
+                                <xsl:analyze-string select="$text" regex="^(.*){$current-group}(_\d+)?-Container-(.*)$">
                                     <xsl:matching-substring>
                                         <xsl:call-template name="replace-element">
                                             <xsl:with-param name="position" select="$position"/>
@@ -602,8 +602,8 @@
                                     </xsl:call-template>
                                 </xsl:for-each>
                             </xsl:when>
-                            <xsl:when test="matches($text,concat('parent::',$current-group,'_\d+-Container'))">
-                                <xsl:analyze-string select="$text" regex="^(.*)parent::{$current-group}(_\d+)-Container(.*)$">
+                            <xsl:when test="matches($text,concat('parent::',$current-group,'(_\d+)?-Container'))">
+                                <xsl:analyze-string select="$text" regex="^(.*)parent::{$current-group}(_\d+)?-Container(.*)$">
                                     <xsl:matching-substring>
                                         <xsl:call-template name="replace-element">
                                             <xsl:with-param name="position" select="$position"/>
