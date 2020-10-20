@@ -55,10 +55,10 @@
             <xsl:for-each select="//*[@id]">
                 <xsl:sort select="position()"/>
                 <!-- TODO : IfThenElse : add IfThenElse with their Expression -->
-                <xsl:if test="local-name(.)='Child' or local-name(.)='Questionnaire'">
+                <xsl:if test="local-name(.)='Child' or local-name(.)='Questionnaire' or local-name()='IfThenElse'">
                     <poguesGoto:idElement id="{./@id}" position="{position()}">
                         <poguesGoto:childrenId>
-                            <xsl:for-each select="pogues:Child">
+                            <xsl:for-each select="pogues:Child | pogues:IfThenElse">
                                 <poguesGoto:childId>
                                     <xsl:value-of select="./@id"/>
                                 </poguesGoto:childId>
@@ -105,7 +105,7 @@
     </xd:doc>
     <xsl:variable name="list_goto" as="node()">
         <poguesGoto:GotoList>
-            <xsl:for-each select="//pogues:FlowControl[not(@flowControlType)]">
+            <xsl:for-each select="//pogues:FlowControl[not(@flowControlType) and not(contains(pogues:IfTrue,'-'))]">
                 <xsl:variable name="official-To" select="pogues:IfTrue"/>
                 
                 <poguesGoto:gotoValue start="after" flowid="{@id}">
@@ -429,11 +429,12 @@
     </xsl:template>
 
     <xd:doc>
+        <xd:desc>
         Child : Sequence or Question
         parameters :
         - stop-position : first Child not to take
         - goto-style (none, before, after) : with stop-position, identifies the last Goto already inserted
-        <xd:desc/>
+        </xd:desc>
     </xd:doc>
     <!-- TODO : pogues:Child | pogues:IfThenElse -->
     <xsl:template match="pogues:Child" priority="1" mode="first-child-next-brother">

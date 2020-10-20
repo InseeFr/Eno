@@ -145,12 +145,6 @@
                     <xsl:otherwise>
                         <xsl:variable name="current-filter-to-position" as="xs:double"
                             select="number($list-loop-filter//poguesFilter:Filter[@id = $current-filter]/poguesFilter:To/@position)"/>
-                        <xsl:message>
-                            <xsl:copy-of select="$list-loop-filter//poguesFilter:Filter[poguesFilter:From/@id = $current-id]"/>
-                            tata
-                            <xsl:value-of select="concat('toto',$current-filter,'titi',$current-id,'tete')"/>
-                            tutu
-                        </xsl:message>
                         <xsl:copy-of select="$list-loop-filter//poguesFilter:Filter[poguesFilter:From/@id = $current-id and number(poguesFilter:To/@position) &lt; $current-filter-to-position]"/>
                     </xsl:otherwise>
                 </xsl:choose>
