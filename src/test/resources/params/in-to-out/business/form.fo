@@ -174,8 +174,7 @@
                 <![CDATA[#]]><![CDATA[#]]><![CDATA[#]]>DS${NumeroDocument}col${data-IdEdition}
             </fo:block>
       </fo:static-content>
-      <fo:flow flow-name="xsl-region-body">
-         <fo:block page-break-after="always"><!-- ZONE LOGOS --><fo:block-container absolute-position="absolute"
+      <fo:flow flow-name="xsl-region-body"><!-- PAGE COURRIER RECTO --><fo:block page-break-after="always"><!-- ZONE LOGOS --><fo:block-container absolute-position="absolute"
                                 left="5mm"
                                 top="2mm"
                                 width="180mm"
@@ -197,7 +196,9 @@
                                 overflow="hidden">
                <fo:block/>
             </fo:block-container>
-            <!-- ZONE DATAMATRIX ALLIAGE --><fo:block-container absolute-position="absolute"
+            <!-- ZONE DATAMATRIX ALLIAGE -->
+                #if($!{InitAccuseReception}!='' and $!{InitAccuseReception}!='oui')
+                <fo:block-container absolute-position="absolute"
                                 left="100mm"
                                 top="37.8mm"
                                 width="11.88mm"
@@ -218,13 +219,16 @@
                   </fo:instream-foreign-object>
                </fo:block>
             </fo:block-container>
+                #end
+                
             <!-- ZONE ADRESSE --><fo:block-container absolute-position="absolute"
                                 left="100mm"
                                 top="50mm"
                                 width="82mm"
                                 height="25.5mm"
                                 overflow="hidden"
-                                font-size="10pt">
+                                font-size="10pt"
+                                display-align="after">
                <fo:block font-family="Lucida Console">
                   <fo:inline-container margin="0mm">
                      <fo:block line-height="10pt">${BddAdressePosteeL1}</fo:block>
@@ -246,14 +250,23 @@
                                 font-size="10pt">
                <fo:block/>
             </fo:block-container>
+            <!-- ZONE DATAMATRIX MODE LIVRET --><fo:block-container absolute-position="absolute"
+                                right="182mm"
+                                top="237mm"
+                                width="16mm"
+                                height="16mm"
+                                overflow="hidden"
+                                font-size="10pt">
+               <fo:block/>
+            </fo:block-container>
             <!-- ZONE TITRE COURRIER --><fo:block-container absolute-position="absolute"
                                 left="1mm"
                                 top="38mm"
                                 width="78mm"
-                                height="6mm"
+                                height="100%"
                                 overflow="hidden"
                                 font-size="10pt">
-               <fo:block line-height="10pt" font-weight="bold" text-align="center">CONSTAT DE NON-RÉPONSE #if($!{InitAccuseReception}=='oui')avec accusé de réception#end</fo:block>
+               <fo:block line-height="12pt" font-weight="bold" text-align="center">CONSTAT DE NON-RÉPONSE #if($!{InitAccuseReception}=='oui')avec accusé de réception#end</fo:block>
             </fo:block-container>
             <!-- ZONE CONTACT --><fo:block-container absolute-position="absolute"
                                 left="1mm"
@@ -274,9 +287,9 @@
                </fo:block>
             </fo:block-container>
             <!-- ZONE COURRIER --><fo:block-container absolute-position="absolute"
-                                left="1mm"
+                                left="9mm"
                                 top="98mm"
-                                width="188mm"
+                                width="179mm"
                                 height="100%"
                                 overflow="hidden"
                                 text-align="justify"
@@ -287,17 +300,20 @@
                <fo:block margin-top="5mm" font-weight="bold">
                         Objet : Enquête statistique#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddFrequence}!='')) ${BddFrequence}#end ${BddLibelleLong} ${BddAnneeReference}
                     </fo:block>
-               <fo:block font-weight="bold">
-                        Ref. ${BddRaisonSociale} (Votre ${BddLabelUniteEnquetee} : ${BddIdentifiantUniteEnquetee})
+               <fo:block>
+                        Unité enquêtée : ${BddRaisonSociale} (Votre ${BddLabelUniteEnquetee} : ${BddIdentifiantUniteEnquetee})
                     </fo:block>
-               <fo:block margin-top="5mm" font-weight="bold">
+               <fo:block margin-top="3mm">
+                        Identifiant de connexion : <fo:inline font-weight="bold">${BddIdentifiantContact}</fo:inline> (voir modalités au verso de ce courrier)
+                    </fo:block>
+               <fo:block margin-top="8mm" font-weight="bold">
                         Madame la Directrice, Monsieur le Directeur,
                     </fo:block>
                <fo:block margin-top="5mm">
                         Ma lettre de mise en demeure du ${BddDateEnvoiMiseEnDemeure} étant restée sans suite, je suis dans l’obligation aujourd’hui d’établir à votre encontre le constat suivant :
                     </fo:block>
                <fo:block margin-top="3mm">
-                        - de défaut de réponse à l'enquête statistique#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddFrequence}!='')) ${BddFrequence}#end ${BddLibelleLong} ${BddAnneeReference} ;
+                        - de défaut de réponse à l'<fo:inline font-weight="bold">enquête statistique#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddFrequence}!='')) ${BddFrequence}#end ${BddLibelleLong} ${BddAnneeReference} </fo:inline>;
                     </fo:block>
                <fo:block>
                         - et d’absence de justification à ce défaut de réponse.
@@ -310,6 +326,13 @@
                         soit de répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre soit de compléter le questionnaire joint,#end dans un délai de 15 jours. 
                         A l’expiration de ce délai, votre dossier sera soumis pour examen au <fo:inline font-weight="bold">Comité du contentieux</fo:inline> des enquêtes statistiques obligatoires 
                         du Conseil national de l’information statistique (Cnis), conformément à la loi*.
+                        Nous avons plus que jamais besoin de votre participation pour assurer la qualité des statistiques sur 2019. 
+                        Pour tenir compte de la crise sanitaire actuelle, l’Insee a redéfini ses priorités et adapté ses travaux. 
+                        Les délais de réponse à certaines enquêtes auprès des entreprises ont ainsi été allongés de plusieurs mois. 
+                        Nous sommes conscients des difficultés que la crise fait peser sur vous et de ses conséquences pendant les mois à venir. 
+                        Cependant, pour mieux évaluer son impact, il est particulièrement important de suivre l’activité économique en France. 
+                        Ceci permettra de disposer d’un point de référence solide pour calculer des évolutions correctes entre 2020 et 2019 dans chaque secteur, 
+                        et ainsi estimer précisément l’impact économique de la crise vécue aujourd’hui.
                     </fo:block>
                <fo:block margin-top="3mm">
                         S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre. 
@@ -326,9 +349,9 @@
                     </fo:block>
             </fo:block-container>
             <!-- ZONE NOTE DE BAS DE PAGE --><fo:block-container absolute-position="absolute"
-                                left="1mm"
-                                top="250mm"
-                                width="188mm"
+                                left="9mm"
+                                top="273mm"
+                                width="179mm"
                                 height="100%"
                                 overflow="hidden">
                <fo:block>
@@ -336,11 +359,11 @@
                     </fo:block>
             </fo:block-container>
          </fo:block>
-         <fo:block page-break-after="always">
+         <!-- PAGE COURRIER VERSO --><fo:block page-break-after="always">
             <fo:block/>
             <!-- ZONE NOTICE --><fo:block-container absolute-position="absolute"
                                 left="20mm"
-                                top="20mm"
+                                top="5mm"
                                 width="150mm"
                                 height="100%"
                                 overflow="hidden"
@@ -352,7 +375,7 @@
                <fo:block text-align="center" font-weight="bold" font-size="10pt">
                         Comment répondre à l'enquête par internet ?
                     </fo:block>
-               <fo:block margin-top="3.5mm">
+               <fo:block margin-top="5mm">
                         Pour répondre à l'enquête statistique#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle'))
                         ${BddFrequence}#end ${BddLibelleLong}, il convient de vous connecter sur le site sécurisé de réponse aux enquêtes entreprises de la Statistique 
                         publique : <fo:inline text-decoration="underline">http://<fo:inline font-size="0.1pt"> </fo:inline>entreprises.stat-<fo:inline font-size="0.1pt"> </fo:inline>publique.fr/</fo:inline>. 
@@ -373,7 +396,7 @@
                     </fo:block>
                <fo:block margin-top="3.5mm">
                         En cas de perte ou d'oubli de votre mot de passe, vous pouvez demander son renouvellement en ligne sur le site de réponse aux enquêtes entreprises 
-                        de la Statistique publique (rubrique « Mot de passe oublié » du site <fo:inline text-decoration="underline">http://entreprises.stat-publique.fr/ </fo:inline>).
+                        de la Statistique publique (rubrique « Mot de passe oublié » du site <fo:inline font-weight="bold" text-decoration="underline">http://entreprises.stat-publique.fr/</fo:inline> ).
                     </fo:block>
                <fo:block margin-top="3.5mm">
                         En cas de trop nombreuses tentatives d’authentification, votre compte peut être momentanément  bloqué, pour des raisons de sécurité. Dans ce cas, avant de 
@@ -399,7 +422,7 @@
                                 border="solid black 0.5pt"
                                 padding="1mm">
                <fo:block>
-                        Vu l'avis favorable du Conseil national de l'information statistique, cette enquête <fo:inline font-weight="bold">est reconnue d'intérêt général et de qualité statistique</fo:inline>, 
+                        Vu l'avis favorable du Conseil national de l'information statistique, cette enquête est <fo:inline font-weight="bold">reconnue d'intérêt général et de qualité statistique</fo:inline>, 
                         en application de la loi n<fo:inline font-size="0.1pt"> </fo:inline>° 51-711 du 7 juin 1951 sur l'obligation, la coordination et le secret en matière de statistiques. 
                         Elle a obtenu le visa n°${BddNumeroVisa} du ${BddMinistereTutelle}, valable pour l'année ${BddAnneeCollecte}.
                     </fo:block>
@@ -416,14 +439,15 @@
                         ou à des travaux de recherche scientifique ou historique.
                     </fo:block>
                <fo:block>
-                        Le règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD) ainsi que la loi n<fo:inline font-size="0.1pt"> </fo:inline>° 78-17 du 6 janvier 1978 relative à l'informatique, 
+                        #if(${BddDonneesPerso}=='oui')Le règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD) ainsi que la loi 
+                        n<fo:inline font-size="0.1pt"> </fo:inline>° 78-17 du 6 janvier 1978 relative à l'informatique, 
                         aux fichiers et aux libertés s'appliquent à la présente enquête. Pour les données à caractère personnel, un droit d'accès, de rectification, 
                         d’effacement ou de limitation de traitement peut être exercé pendant la période de conservation des données d’identification. 
                         Ces droits peuvent être exercés auprès de ${AdresseRetourL1} que vous pouvez contacter à l’adresse ${BddServiceCollecteurAdresseMessagerie}. 
                         Pour toute question relative au traitement de vos données, vous pouvez contacter le délégué à la protection des données des ministères économique 
                         et financier à l’adresse <fo:inline text-decoration="underline">le-delegue-a-la-protection-des-donnees-personnelles@finances.gouv.fr</fo:inline> 
                         ou son correspondant à l’Insee : <fo:inline text-decoration="underline">contact-rgpd@insee.fr</fo:inline>. 
-                        Vous pouvez si vous l’estimez nécessaire adresser une réclamation à la Cnil.
+                        Vous pouvez si vous l’estimez nécessaire adresser une réclamation à la Cnil.#end
                     </fo:block>
             </fo:block-container>
          </fo:block>
