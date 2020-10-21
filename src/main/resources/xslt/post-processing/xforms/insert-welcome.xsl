@@ -105,6 +105,27 @@
     <!-- Value for which the fact that the survey is mandatory is displayed -->
     <xsl:variable name="CaractereObligatoireEnqueteReference" select="string('oui')" />
     <xsl:variable name="SimplificationEntreprisesReference" select="string('oui')" />
+    <!-- Values for household  updates           -->
+    <xsl:variable name="Enq_LibelleEnquete" select="$metadata//Enq_LibelleEnquete" />
+    <xsl:variable name="Enq_ObjectifsCourts" select="$metadata//Enq_ObjectifsCourts" />
+    <xsl:variable name="Enq_ObjectifsEnquete" select="$metadata//Enq_ObjectifsEnquete" />
+    <xsl:variable name="Enq_CaractereObligatoire" select="$metadata//Enq_CaractereObligatoire" />
+    <xsl:variable name="Enq_RespTraitement" select="$metadata//Enq_RespTraitement" />
+    <xsl:variable name="Enq_NumeroVisa" select="$metadata//Enq_NumeroVisa" />
+    <xsl:variable name="Enq_MinistereTutelle" select="$metadata//Enq_MinistereTutelle" />
+    <xsl:variable name="Enq_AnneeVisa" select="$metadata//Enq_AnneeVisa" />
+    <xsl:variable name="Enq_ParutionJO" select="$metadata//Enq_ParutionJO" />
+    <xsl:variable name="Enq_DateParutionJO" select="$metadata//Enq_DateParutionJO" />
+    <xsl:variable name="Enq_RespOperationnel" select="$metadata//Enq_RespOperationnel" />
+    <xsl:variable name="Enq_NomServiceRecours" select="$metadata//Enq_NomServiceRecours" />
+    <xsl:variable name="Enq_Notice" select="$metadata//Enq_Notice" />
+    <xsl:variable name="Enq_Specimen" select="$metadata//Enq_Specimen" />
+    <xsl:variable name="Enq_Diffusion" select="$metadata//Enq_Diffusion" />
+    <xsl:variable name="Enq_AnneeCollecte" select="$metadata//Enq_AnneeCollecte" />
+    <xsl:variable name="Enq_NomServiceProducteurCourt" select="$metadata//Enq_NomServiceProducteurCourt" />
+
+
+
 
     <xsl:template match="/">
         <xsl:apply-templates select="xhtml:html" />
@@ -125,9 +146,9 @@
     <!-- The generic start page is replaced by a coltrane home page. -->
     <xsl:template match="Beginning[parent::form[parent::xf:instance[@id='fr-form-instance']]]">
         <xsl:if test="$context=$household">
-            <Variable idVariable="QuiRepond1" />
-            <Variable idVariable="QuiRepond2" />
-            <Variable idVariable="QuiRepond3" />
+            <Variable idVariable="Ue_QuiRepond1" />
+            <Variable idVariable="Ue_QuiRepond2" />
+            <Variable idVariable="Ue_QuiRepond3" />
         </xsl:if>
         <ACCUEIL>
             <ACCUEIL-1 />
@@ -161,10 +182,10 @@
         <ACCUEIL-1>
             <label>
                 <xsl:text>&lt;p&gt;Bienvenue sur le questionnaire de réponse à l'enquête &lt;b&gt;</xsl:text>
-                <xsl:value-of select="$LibelleEnquete" />
+                <xsl:value-of select="$Enq_LibelleEnquete" />
                 <xsl:text>&lt;/b&gt;</xsl:text>
                 <xsl:text>&lt;span title="</xsl:text>
-                <xsl:value-of select="$ObjectifsEnquete" />
+                <xsl:value-of select="$Enq_ObjectifsEnquete" />
                 <xsl:text>"&gt;&#160;&lt;img src="/img/Help-browser.svg.png"/&gt;&#160;&lt;/span&gt;</xsl:text>
                 <xsl:text>&lt;/p&gt;</xsl:text>
             </label>
@@ -173,14 +194,14 @@
             <label>
                 <xsl:if test="$context=$household">
                     <xsl:text>&lt;div class="frame"&gt;&lt;p&gt;&lt;b&gt;Qui doit répondre à ce questionnaire ?&lt;/b&gt;&lt;/p&gt;</xsl:text>
-                    <xsl:text>&lt;p&gt;¤QuiRepond1¤&lt;/p&gt;</xsl:text>
-                    <xsl:text>&lt;p&gt;¤QuiRepond2¤&lt;/p&gt;</xsl:text>
-                    <xsl:text>&lt;p&gt;¤QuiRepond3¤&lt;/p&gt;</xsl:text>
+                    <xsl:text>&lt;p&gt;¤Ue_QuiRepond1¤&lt;/p&gt;</xsl:text>
+                    <xsl:text>&lt;p&gt;¤Ue_QuiRepond2¤&lt;/p&gt;</xsl:text>
+                    <xsl:text>&lt;p&gt;¤Ue_QuiRepond3¤&lt;/p&gt;</xsl:text>
                     <xsl:text>&lt;/div&gt;</xsl:text>
                 </xsl:if>
                 <xsl:if test="$context=$business">
                     <xsl:text>&lt;div class="frame"&gt;&lt;p&gt;Cette enquête</xsl:text>
-                    <xsl:if test="$CaractereObligatoire=$CaractereObligatoireEnqueteReference">
+                    <xsl:if test="$Enq_CaractereObligatoire=$CaractereObligatoireEnqueteReference">
                         <xsl:text>,
                         à &lt;b&gt;&lt;span style="text-decoration:underline"&gt;caractère
                         obligatoire&lt;/span&gt;&lt;/b&gt;,</xsl:text>
@@ -235,7 +256,7 @@
                     <xsl:text>&lt;div class="frame"&gt;&lt;p&gt;Vu l'avis favorable du Conseil national de
                     l'information statistique, cette enquête</xsl:text>
                     <xsl:choose>
-                        <xsl:when test="$CaractereObligatoire=$CaractereObligatoireEnqueteReference">
+                        <xsl:when test="$Enq_CaractereObligatoire=$CaractereObligatoireEnqueteReference">
                             <xsl:text>, reconnue d’intérêt général et de qualité statistique, est obligatoire</xsl:text>
                         </xsl:when>
                         <xsl:otherwise>
@@ -247,26 +268,26 @@
                     <xsl:text>" target="_blank"&gt;loi n° 51-711 du 7 juin 1951&lt;/a&gt; sur l’obligation, la coordination et le secret en matière de statistiques.</xsl:text>
 
                     <xsl:text>&lt;/p&gt;&lt;p&gt;Visa n°</xsl:text>
-                    <xsl:value-of select="$NumeroVisa" />
+                    <xsl:value-of select="$Enq_NumeroVisa" />
                     <xsl:text> </xsl:text>
-                    <xsl:for-each select="$MinistereTutelle">
+                    <xsl:for-each select="$Enq_MinistereTutelle">
                         <xsl:text>du </xsl:text>
                         <xsl:value-of select="." />
                         <xsl:text>, </xsl:text>
                     </xsl:for-each>
                     <xsl:text>valable pour l'année </xsl:text>
-                    <xsl:value-of select="$AnneeCollecte" />
+                    <xsl:value-of select="$Enq_AnneeCollecte" />
                     <xsl:choose>
-                        <xsl:when test="$ParutionJO = 'oui'">
+                        <xsl:when test="$Enq_ParutionJO = 'oui'">
                             <xsl:text> - Arrêté en date du </xsl:text>
-                            <xsl:value-of select="$DateParutionJO" />
+                            <xsl:value-of select="$Enq_DateParutionJO" />
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:text> - Arrêté en cours de parution</xsl:text>
                         </xsl:otherwise>
                     </xsl:choose>
                     <xsl:text>.&lt;/p&gt;&lt;p&gt;Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à </xsl:text>
-                    <xsl:value-of select="$NomServiceProducteurCourt" />
+                    <xsl:value-of select="$Enq_NomServiceProducteurCourt" />
                     <xsl:text>. Le  &lt;a href="</xsl:text>
                     <xsl:value-of select="$properties//lois/rgpd" />
                     <xsl:text>" target="_blank"&gt;règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD)&lt;/a&gt; ainsi </xsl:text>
@@ -274,7 +295,7 @@
                     <xsl:value-of select="$properties//lois/informatique" />
                     <xsl:text>" target="_blank"&gt;loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés&lt;/a&gt;, s'appliquent à la présente enquête. </xsl:text>
                     <xsl:text>Les droits des personnes, rappelés dans la lettre-avis, peuvent être exercés auprès de </xsl:text>
-                    <xsl:value-of select="$NomServiceRecours" />
+                    <xsl:value-of select="$Enq_NomServiceRecours" />
                     <xsl:text>.&lt;/p&gt;&lt;/div&gt;</xsl:text>
                 </xsl:if>
                 <xsl:if test="$context=$business">
@@ -351,7 +372,7 @@
             </xf:output>
             <xf:output id="ACCUEIL-2-control" name="ACCUEIL-2" bind="ACCUEIL-2-bind">
                 <xsl:if test="$context=$household">
-                    <xf:label ref="replace(replace(replace($form-resources/ACCUEIL-2/label,'¤QuiRepond1¤',instance('fr-form-instance')//Variable[@idVariable='QuiRepond1']),'¤QuiRepond2¤',instance('fr-form-instance')//Variable[@idVariable='QuiRepond2']),'¤QuiRepond3¤',instance('fr-form-instance')//Variable[@idVariable='QuiRepond3'])" mediatype="text/html" />
+                    <xf:label ref="replace(replace(replace($form-resources/ACCUEIL-2/label,'¤Ue_QuiRepond1¤',instance('fr-form-instance')//Variable[@idVariable='Ue_QuiRepond1']),'¤Ue_QuiRepond2¤',instance('fr-form-instance')//Variable[@idVariable='Ue_QuiRepond2']),'¤Ue_QuiRepond3¤',instance('fr-form-instance')//Variable[@idVariable='Ue_QuiRepond3'])" mediatype="text/html" />
                 </xsl:if>
                 <xsl:if test="$context=$business">
                     <xf:label ref="$form-resources/ACCUEIL-2/label" mediatype="text/html" />
