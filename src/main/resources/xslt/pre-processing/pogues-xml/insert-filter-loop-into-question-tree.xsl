@@ -181,10 +181,20 @@
                     </xsl:element>
                 </xsl:element>
                 <xsl:if test="$stop-position != $chosen-next-filter//poguesFilter:To/@id">
-                    <xsl:apply-templates select="following-sibling::pogues:Child[@id = $chosen-next-filter//poguesFilter:To/@id]/following-sibling::*[1]" mode="first-child-next-brother">
-                        <xsl:with-param name="stop-position" select="$stop-position"/>
-                        <xsl:with-param name="current-filter" select="''"/>
-                    </xsl:apply-templates>
+                    <xsl:choose>
+                        <xsl:when test="$chosen-next-filter//poguesFilter:To/@id = $current-id">
+                            <xsl:apply-templates select="following-sibling::*[1]" mode="first-child-next-brother">
+                                <xsl:with-param name="stop-position" select="$stop-position"/>
+                                <xsl:with-param name="current-filter" select="''"/>
+                            </xsl:apply-templates>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:apply-templates select="following-sibling::pogues:Child[@id = $chosen-next-filter//poguesFilter:To/@id]/following-sibling::*[1]" mode="first-child-next-brother">
+                                <xsl:with-param name="stop-position" select="$stop-position"/>
+                                <xsl:with-param name="current-filter" select="''"/>
+                            </xsl:apply-templates>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:if>
             </xsl:when>
             <xsl:otherwise>
