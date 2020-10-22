@@ -58,7 +58,7 @@
                 <xsl:if test="local-name(.)='Child' or local-name(.)='Questionnaire' or local-name()='IfThenElse'">
                     <poguesGoto:idElement id="{./@id}" position="{position()}">
                         <poguesGoto:childrenId>
-                            <xsl:for-each select="pogues:Child | pogues:IfThenElse">
+                            <xsl:for-each select="pogues:Child | pogues:IfThenElse | pogues:IfTrue/pogues:Child | pogues:IfTrue/pogues:IfThenElse">
                                 <poguesGoto:childId>
                                     <xsl:value-of select="./@id"/>
                                 </poguesGoto:childId>
