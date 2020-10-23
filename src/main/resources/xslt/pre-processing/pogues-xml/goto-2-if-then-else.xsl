@@ -8,9 +8,7 @@
     exclude-result-prefixes="xs" version="2.0">
     <xsl:output indent="yes"/>
     <xsl:strip-space elements="*"/>
-    <xsl:param name="debug" select="false()"/>
-    <!-- xsi:schemaLocation="Pogues.xsd"-->
-    <!--xmlns:xs="http://www.w3.org/2001/XMLSchema"-->
+    <xsl:param name="debug" select="true()"/>
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p><xd:b>Created on:</xd:b> Jun 15, 2017</xd:p>
@@ -54,11 +52,10 @@
         <poguesGoto:IdList>
             <xsl:for-each select="//*[@id]">
                 <xsl:sort select="position()"/>
-                <!-- TODO : IfThenElse : add IfThenElse with their Expression -->
-                <xsl:if test="local-name(.)='Child' or local-name(.)='Questionnaire' or local-name()='IfThenElse'">
+                <xsl:if test="local-name(.)='Child' or local-name(.)='Questionnaire' or local-name()='IfThenElse' or local-name()='Loop'">
                     <poguesGoto:idElement id="{./@id}" position="{position()}">
                         <poguesGoto:childrenId>
-                            <xsl:for-each select="pogues:Child | pogues:IfThenElse | pogues:IfTrue/pogues:Child | pogues:IfTrue/pogues:IfThenElse">
+                            <xsl:for-each select="pogues:Child | pogues:IfThenElse | pogues:Loop | pogues:IfTrue/pogues:Child | pogues:IfTrue/pogues:IfThenElse">
                                 <poguesGoto:childId>
                                     <xsl:value-of select="./@id"/>
                                 </poguesGoto:childId>
@@ -291,7 +288,7 @@
     <xd:doc>
         <xd:desc>Splits Gotos which go outside a sequence or inside a sequence
         Each split goto goes from an element to one of its following-sibling</xd:desc>
-        <xd:desc>TODO : go outside an existing IfThenElse ; forbid go inside an existing IfThenElse (nonsense)</xd:desc>
+        <xd:desc>TODO : go inside / outside an existing IfThenElse ; forbid go inside an existing Loop (nonsense)</xd:desc>
     </xd:doc>
     <xsl:variable name="split_goto">
         <poguesGoto:GotoList>
@@ -374,6 +371,7 @@
         <xsl:copy>
             <xsl:copy-of select="@* | text() | processing-instruction()"/>
             <xsl:if test="$debug">
+                <xsl:copy-of select="$child-position-list"/>
                 <xsl:copy-of select="$child-tree"/>
                 <xsl:copy-of select="$list_goto"/>
                 <xsl:copy-of select="$list_distinct_goto"/>
