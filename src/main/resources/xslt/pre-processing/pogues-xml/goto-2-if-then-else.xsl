@@ -8,7 +8,7 @@
     exclude-result-prefixes="xs" version="2.0">
     <xsl:output indent="yes"/>
     <xsl:strip-space elements="*"/>
-    <xsl:param name="debug" select="true()"/>
+    <xsl:param name="debug" select="false()"/>
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p><xd:b>Created on:</xd:b> Jun 15, 2017</xd:p>
