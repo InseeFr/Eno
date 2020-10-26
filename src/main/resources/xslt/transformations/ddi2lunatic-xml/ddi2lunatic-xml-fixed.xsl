@@ -80,6 +80,8 @@
         </xsl:choose>
     </xsl:variable>
     
+    <xsl:variable name="enoVersion" select="$properties//EnoVersion"/>
+    
     <xd:doc>
         <xd:desc>
             <xd:p>Characters used to surround variables in conditioned text.</xd:p>

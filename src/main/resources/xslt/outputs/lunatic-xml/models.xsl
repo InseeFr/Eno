@@ -53,7 +53,7 @@
 		<xsl:variable name="languages" select="enolunatic:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="id" select="replace(enolunatic:get-name($source-context),'Sequence-','')"/>
 		<xsl:variable name="label" select="enolunatic:get-label($source-context, $languages[1])"/>
-		<Questionnaire id="{$id}" modele="{enolunatic:get-form-model($source-context)}">
+		<Questionnaire id="{$id}" modele="{enolunatic:get-form-model($source-context)}" enoCoreVersion="{$enoVersion}">
 			<label><xsl:value-of select="$label"/></label>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
