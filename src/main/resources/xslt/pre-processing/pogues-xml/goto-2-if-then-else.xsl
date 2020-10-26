@@ -12,7 +12,7 @@
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p><xd:b>Created on:</xd:b> Jun 15, 2017</xd:p>
-            <xd:p><xd:b>Modified on:</xd:b> Feb, 2018</xd:p>
+            <xd:p><xd:b>Modified on:</xd:b> Feb, 2018 ; Oct, 2020</xd:p>
             <xd:p><xd:b>Authors:</xd:b>Antoine Dreyer + François Bulot</xd:p>
             <xd:p>This program works with 2 steps :</xd:p>
             <xd:p>- the first step creates this list ($split_goto) of the Gotos to insert</xd:p>
@@ -44,6 +44,11 @@
             <xd:p>and, inside the ITE, the elements are called with a stop-position = (4)</xd:p>
         </xd:desc>
     </xd:doc>
+
+    <xd:doc>
+        <xd:desc>The whole input file</xd:desc>
+    </xd:doc>
+    <xsl:variable name="root" select="." as="node()"/>
 
     <xd:doc>
         <xd:desc>List of the Child (Sequence ; Question ; Loop), with position</xd:desc>
@@ -368,6 +373,29 @@
         <xd:desc>the root element</xd:desc>
     </xd:doc>
     <xsl:template match="/pogues:Questionnaire" priority="1">
+        <xsl:for-each select="//pogues:Loop">
+            <xsl:variable name="loop-id" select="@id"/>
+            <xsl:variable name="loop-name" select="pogues:Name"/>
+            <xsl:variable name="loop-position" select="$child-tree//poguesGoto:idElement[@id=$loop-id]/number(@position)"/>
+            <xsl:variable name="after-loop-position-text" select="$child-position-list//poguesGoto:idElement[@id=$loop-id]/following::poguesGoto:idElement[1]/@position"/>
+            <xsl:variable name="after-loop-position" select="if ($after-loop-position-text = '') then number($last) else number($after-loop-position-text)"/>
+            <xsl:for-each select="$list_goto//poguesGoto:gotoValue">
+                <xsl:if test="(poguesGoto:From/number(@position) &gt;= $loop-position
+                           and poguesGoto:From/number(@position) &lt; $after-loop-position
+                           and poguesGoto:To/number(@position) &gt;= $after-loop-position)
+                       or (poguesGoto:From/number(@position) &lt; $loop-position
+                       and poguesGoto:To/number(@position) &gt;= $loop-position
+                       and poguesGoto:To/number(@position) &lt; $after-loop-position)">
+                    <xsl:variable name="current-id" select="@id"/>
+                    <xsl:message terminate="yes">
+                        <xsl:value-of select="'Problème de chevauchement entre '"/>
+                        <xsl:value-of select="concat('la boucle &quot;',$loop-name,'&quot;')"/>
+                        <xsl:value-of select="' et '"/>
+                        <xsl:value-of select="concat('le renvoi &quot;',$root//*[(local-name()='FlowControl') and @id = $current-id]/pogues:Description,'&quot;')"/>
+                    </xsl:message>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:for-each>
         <xsl:copy>
             <xsl:copy-of select="@* | text() | processing-instruction()"/>
             <xsl:if test="$debug">

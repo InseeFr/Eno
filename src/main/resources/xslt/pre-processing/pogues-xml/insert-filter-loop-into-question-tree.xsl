@@ -17,6 +17,11 @@
     </xd:doc>
 
     <xd:doc>
+        <xd:desc>The whole input file</xd:desc>
+    </xd:doc>
+    <xsl:variable name="root" select="." as="node()"/>
+
+    <xd:doc>
         <xd:desc>List of the Child (Sequence ; Question), with position</xd:desc>
     </xd:doc>
     <xsl:variable name="child-position-list" as="node()">
@@ -105,6 +110,39 @@
         <xd:desc>the root element</xd:desc>
     </xd:doc>
     <xsl:template match="/pogues:Questionnaire" priority="1">
+        <!-- raise errors -->
+        <xsl:for-each select="$list-loop-filter//poguesFilterLoop:FilterLoop">
+            <xsl:variable name="from-position" select="poguesFilterLoop:From/number(@position)"/>
+            <xsl:variable name="to-position" select="poguesFilterLoop:To/number(@position)"/>
+            <xsl:variable name="main-id" select="@id"/>
+            <xsl:for-each select="$list-loop-filter//poguesFilterLoop:FilterLoop">
+                <xsl:if test="poguesFilterLoop:From/number(@position) &gt; $from-position
+                          and poguesFilterLoop:From/number(@position) &lt; $to-position
+                          and poguesFilterLoop:To/number(@position) &gt; $to-position">
+                    <xsl:variable name="current-id" select="@id"/>
+                    <xsl:message terminate="yes">
+                        <xsl:value-of select="'Problème de chevauchement entre '"/>
+                        <xsl:choose>
+                            <xsl:when test="$list-loop-filter//poguesFilterLoop:FilterLoop[@id=$main-id]/@type='loop'">
+                                <xsl:value-of select="concat('la boucle &quot;',$root//pogues:Iteration[@id = $main-id]/pogues:Name,'&quot;')"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="concat('le filtre &quot;',$root//*[(local-name()='FlowControl' or local-name()='Next') and @id = $main-id]/pogues:Description,'&quot;')"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:value-of select="' et '"/>
+                        <xsl:choose>
+                            <xsl:when test="$list-loop-filter//poguesFilterLoop:FilterLoop[@id=$current-id]/@type='loop'">
+                                <xsl:value-of select="concat('la boucle &quot;',$root//pogues:Iteration[@id = $current-id]/pogues:Name,'&quot;')"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="concat('le filtre &quot;',$root//*[(local-name()='FlowControl' or local-name()='Next') and @id = $current-id]/pogues:Description,'&quot;')"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:message>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:for-each>
         <xsl:copy>
             <xsl:copy-of select="@* | text() | processing-instruction()"/>
             <xsl:apply-templates select="node()[1]" mode="first-child-next-brother">
