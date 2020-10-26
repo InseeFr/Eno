@@ -1107,6 +1107,26 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>Defining getter get-descendant-loop.</xd:p>
+            <xd:p>Function that returns the list of the descendant loops of the current loop.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:Loop" mode="enoddi:get-descendant-loop">
+        <xsl:copy-of select="descendant::d:loop"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-descendant-dynamic-array.</xd:p>
+            <xd:p>Function that returns the list of the descendant dynamic arrays of the current loop.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:Loop" mode="enoddi:get-descendant-dynamic-array">
+        <xsl:copy-of select="descendant::d:QuestionGrid[d:GridDimension/d:Roster]"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Defining the boolean getter is-linked-loop.</xd:p>
             <xd:p>Function that returns if a loop is not a leader one...</xd:p>
         </xd:desc>
