@@ -1229,7 +1229,8 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template name="ControlConstructReference" match="*[name()=('Sequence','IfThenElse','Loop')]//*[name() =('Sequence','IfThenElse','Loop','QuestionMultipleChoice','QuestionSingleChoice','QuestionOtherDetails','QuestionTable','QuestionDynamicTable','QuestionSimple','Control') and not(ancestor::driver-ManagedRepresentationScheme)]" mode="model" priority="1">
+    <xsl:template name="ControlConstructReference" match="*[name()=('Sequence','IfThenElse','Loop')]//*[name() =('Sequence','IfThenElse','Loop','QuestionMultipleChoice','QuestionSingleChoice','QuestionOtherDetails','QuestionTable','QuestionDynamicTable','QuestionSimple','Control')
+        and not(ancestor::driver-ManagedRepresentationScheme) and not(ancestor::driver-VariableGroup)]" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="driver" select="."/>
