@@ -42,6 +42,11 @@
             <xd:p>By default, each element calls its first child and its first following sibling</xd:p>
             <xd:p>When an ITE is inserted, another following sibling (4) is called as ITE's first following sibling</xd:p>
             <xd:p>and, inside the ITE, the elements are called with a stop-position = (4)</xd:p>
+            <xd:p/>
+            <xd:p>Condition on the IfThenElse generated from a GoTo :</xd:p>
+            <xd:p>- the condition of the GoTo is false</xd:p>
+            <xd:p>or</xd:p>
+            <xd:p>- the question it leaves from is filtered by a filter or another GoTo (which condition depends on its question filter, recursively)</xd:p>
         </xd:desc>
     </xd:doc>
 
@@ -111,7 +116,7 @@
                 
                 <poguesGoto:gotoValue start="after" flowid="{@id}">
                     <poguesGoto:Expression>
-                        <xsl:value-of select="pogues:Expression"/>
+                        <xsl:value-of select="concat('not(',pogues:Expression,')')"/>
                     </poguesGoto:Expression>
                     <poguesGoto:From id="{../@id}"
                         position="{$child-tree//poguesGoto:idElement[@id = current()/parent::pogues:Child/@id]/@position}"/>
@@ -161,14 +166,14 @@
                                     <xsl:value-of select="poguesGoto:Expression"/>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <!-- when merge is needed : concatenation of the Expressions with 'or' between them -->
-                                    <xsl:value-of select="concat('((',poguesGoto:Expression,')')"/>
+                                    <!-- when merge is needed : concatenation of the Expressions with 'and' between them : the result filter works if ALL the conditions are wrong -->
+                                    <xsl:value-of select="concat('(',poguesGoto:Expression)"/>
                                     <xsl:for-each select="following-sibling::poguesGoto:gotoValue[poguesGoto:From/@id = current()/poguesGoto:From/@id
                                                                                               and poguesGoto:To/@id = current()/poguesGoto:To/@id]">
                                         <xsl:if test="not(preceding-sibling::poguesGoto:gotoValue[poguesGoto:From/@id = current()/poguesGoto:From/@id
                                                                                               and poguesGoto:To/@id = current()/poguesGoto:To/@id
                                                                                               and poguesGoto:Expression = current()/poguesGoto:Expression])">
-                                            <xsl:value-of select="concat(' or (',poguesGoto:Expression,')')"/>
+                                            <xsl:value-of select="concat(' and ',poguesGoto:Expression)"/>
                                         </xsl:if>
                                     </xsl:for-each>
                                     <xsl:value-of select="')'"/>
@@ -187,20 +192,21 @@
     <xd:doc>
         <xd:desc>This variable deals with lapping gotos:
             When there are :
-                Goto1 : Expression : condition1 ; From : 1 ; To : 6
-                Goto2 : Expression : condition2 ; From : 2 ; To : 9
+                Goto1 : Expression : not(condition1) ; From : 1 ; To : 6
+                Goto2 : Expression : not(condition2) ; From : 2 ; To : 9
             They become 2 Gotos and a gotoLap :
-            Goto1 : Expression : condition1 ; From : 1 ; To : 6
-            Goto2 : Expression : condition2 ; From : 2 ; To : 6 (the same as the previous Goto)
-            gotoLap : Expression : ((condition2) or not(condition1)) ; lap From : 6 ; To : 9
+            Goto1 : Expression : not(condition1) ; From : 1 ; To : 6
+            Goto2 : Expression : not(condition2) ; From : 2 ; To : 6 (the same as the previous Goto)
+            GoTo2 has no effect if and only if : its condition is false OR its question is filtered (due to a filter or another GoTo, which question may filtered by... etc. resursively)
+            gotoLap : Expression : (not(condition2) or not(not(condition1))) ; lap From : 6 ; To : 9
         </xd:desc>
         <xd:desc>
             When Goto1.To (6 here) is a child inside a sequence (sequence 4 includes questions 5 to 7) and Goto2.From and Goto2.To (2 and 9 here) are out of the sequence
             then the gotoLap.From is not the child (6), but the sequence (4), because Goto2 leaps over the whole sequence.
             new-Goto2.To is the same value (4 instead of 6)
-            Goto1 : Expression : condition1 ; From : 1 ; To : 6
-            Goto2 : Expression : condition2 ; From : 2 ; To : 6 (no longer the same as the previous Goto : the split point has changed)
-            gotoLap : Expression : ((condition2) or not(condition1)) ; lap From : 4 ; To : 9            
+            Goto1 : Expression : not(condition1) ; From : 1 ; To : 6
+            Goto2 : Expression : not(condition2) ; From : 2 ; To : 6 (no longer the same as the previous Goto : the split point has changed)
+            gotoLap : Expression : (not(condition2) or not(not(condition1))) ; lap From : 4 ; To : 9            
         </xd:desc>
     </xd:doc>
     <xsl:variable name="list_no_overlap_goto" as="node()">
@@ -238,14 +244,20 @@
                             <poguesGoto:gotoValues>
                                 <xsl:for-each select="$overlapping-goto/poguesGoto:gotoValue">
                                     <poguesGoto:gotoValue flowid="{@flowid}">
-                                        <!-- New expression : Goto2's and not one of the Goto1's -->
+                                        <!-- New expression : not(Goto2's) OR one of the question filters : each filter that is no longer active or not(not(Goto1's)) -->
                                         <!-- TODO : recursive calculation -->
                                         <poguesGoto:Expression>
-                                            <xsl:value-of select="concat('(',$initial-condition,') and not (')"/>
+                                            <xsl:value-of select="$initial-condition"/>
+                                            <xsl:call-template name="get-split-goto-question-condition">
+                                                <xsl:with-param name="from" select="number($initial-from/@position)"/>
+                                                <xsl:with-param name="position" select="number(poguesGoto:To/@position)"/>
+                                            </xsl:call-template>
+                                            <!-- former version -->
+                                            <!--<xsl:value-of select="concat('(',$initial-condition,') or not (')"/>
                                             <xsl:for-each select="preceding::poguesGoto:gotoValue">
-                                                <xsl:value-of select="concat('(',poguesGoto:Expression,') or ')"/>
+                                                <xsl:value-of select="concat('(',poguesGoto:Expression,') and ')"/>
                                             </xsl:for-each>
-                                            <xsl:value-of select="concat('(',poguesGoto:Expression,'))')"/>
+                                            <xsl:value-of select="concat('(',poguesGoto:Expression,'))')"/>-->
                                         </poguesGoto:Expression>
                                         <!-- When a Goto stops inside a Child that is overlapped by another, the overlap must include the Child's label -->
                                         <!-- The point where to start the split is replaced by 
@@ -300,6 +312,26 @@
             </xsl:for-each>
         </poguesGoto:GotoList>
     </xsl:variable>
+
+    <xsl:template name="get-split-goto-question-condition">
+        <xsl:param name="from" as="xs:double"/>
+        <xsl:param name="position" as="xs:double"/>
+        <!-- each filter which has an effect on $from and not on $position -->
+        <xsl:for-each select="$child-tree//poguesGoto:idElement[@type='IfThenElse' and number(@position) &gt; $from and number(@position) &lt; $position]">
+            <xsl:value-of select="concat(' or (',$root//pogues:IfThenElse[@id = current()/@id]/pogues:Expression,')')"/>
+        </xsl:for-each>
+        <!-- each GoTo which has an effect on $from and not on $position -->
+        <xsl:for-each select="$list_distinct_goto//poguesGoto:gotoValue[poguesGoto:From/number(@position) &lt; $from
+                                                                    and poguesGoto:To/number(@position) &gt; $from
+                                                                    and poguesGoto:To/number(@position) &lt; $position]">
+            <xsl:value-of select="concat(' or not(',poguesGoto:Expression)"/>
+            <xsl:call-template name="get-split-goto-question-condition">
+                <xsl:with-param name="from" select="poguesGoto:From/number(@position)"/>
+                <xsl:with-param name="position" select="$position"/>
+            </xsl:call-template>
+            <xsl:value-of select="')'"/>
+        </xsl:for-each>
+    </xsl:template>
 
     <xd:doc>
         <xd:desc>Splits Gotos which go outside a sequence or inside a sequence
@@ -616,7 +648,7 @@
                     <xsl:element name="IfThenElse" namespace="http://xml.insee.fr/schema/applis/pogues">
                         <xsl:attribute name="id" select="concat($chosen-goto-flowid,'-b-',$current-id)"/>
                         <xsl:element name="Expression" namespace="http://xml.insee.fr/schema/applis/pogues">
-                            <xsl:value-of select="concat('not(',$chosen-goto-condition,')')"/>
+                            <xsl:value-of select="$chosen-goto-condition"/>
                         </xsl:element>
                         <xsl:element name="IfTrue" namespace="http://xml.insee.fr/schema/applis/pogues">
                             <xsl:apply-templates select="." mode="first-child-next-brother">
@@ -671,7 +703,7 @@
                             <xsl:element name="IfThenElse" namespace="http://xml.insee.fr/schema/applis/pogues">
                                 <xsl:attribute name="id" select="concat($chosen-goto-flowid,'-a-',$current-id)"/>
                                 <xsl:element name="Expression" namespace="http://xml.insee.fr/schema/applis/pogues">
-                                    <xsl:value-of select="concat('not(',$chosen-goto-condition,')')"/>
+                                    <xsl:value-of select="$chosen-goto-condition"/>
                                 </xsl:element>
                                 <xsl:element name="IfTrue" namespace="http://xml.insee.fr/schema/applis/pogues">
                                     <xsl:apply-templates select="." mode="first-child-next-brother">
