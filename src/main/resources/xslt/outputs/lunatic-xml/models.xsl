@@ -766,7 +766,7 @@
 	
 	<xsl:template name="enolunatic:add-response-dependencies">
 		<xsl:param name="responseName"/>
-		<dependencies><xsl:value-of select="$responseName"/></dependencies>
+		<responseDependencies><xsl:value-of select="$responseName"/></responseDependencies>
 	</xsl:template>
 
 	<xd:doc>

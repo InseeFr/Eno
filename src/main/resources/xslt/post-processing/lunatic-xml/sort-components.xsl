@@ -53,7 +53,10 @@
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
             <xsl:variable name="dependencies" select="distinct-values(h:dependencies)" as="xs:string*"/>
-            <xsl:for-each select="$dependencies">                
+            <xsl:variable name="allDependencies" as="xs:string*">
+                <xsl:copy-of select="$dependencies"/>
+            </xsl:variable>
+            <xsl:for-each select="distinct-values($allDependencies)">                
                 <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
             </xsl:for-each>
             <xsl:apply-templates select="h:components"/>
@@ -67,7 +70,12 @@
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
             <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
-            <xsl:for-each select="$dependencies">                
+            <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
+            <xsl:variable name="allDependencies" as="xs:string*">
+                <xsl:copy-of select="$dependencies"/>
+                <xsl:copy-of select="$responseDependencies"/>
+            </xsl:variable>
+            <xsl:for-each select="distinct-values($allDependencies)">                
                 <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
             </xsl:for-each>
             <xsl:apply-templates select="h:components"/>
@@ -81,7 +89,12 @@
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
             <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
-            <xsl:for-each select="$dependencies">                
+            <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
+            <xsl:variable name="allDependencies" as="xs:string*">
+                <xsl:copy-of select="$dependencies"/>
+                <xsl:copy-of select="$responseDependencies"/>
+            </xsl:variable>
+            <xsl:for-each select="distinct-values($allDependencies)">                
                 <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
             </xsl:for-each>
             <xsl:apply-templates select="*[not(self::h:variables or self::h:cells[@type='line'] or self::h:label or self::h:declarations or self::h:conditionFilter)]"/>
@@ -123,7 +136,12 @@
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
             <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
-            <xsl:for-each select="$dependencies">
+            <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
+            <xsl:variable name="allDependencies" as="xs:string*">
+                <xsl:copy-of select="$dependencies"/>
+                <xsl:copy-of select="$responseDependencies"/>
+            </xsl:variable>
+            <xsl:for-each select="distinct-values($allDependencies)">                
                 <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
             </xsl:for-each>
             <xsl:apply-templates select="*[not(self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter)]"/>
@@ -164,6 +182,7 @@
     </xsl:template>
 
     <xsl:template match="h:dependencies"/>
+    <xsl:template match="h:responseDependencies"/>
 
     <xsl:template match="h:label">
         <label><xsl:value-of select="normalize-space(.)"/></label>
