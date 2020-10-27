@@ -59,6 +59,20 @@
             <xsl:apply-templates select="h:components"/>
         </components>
     </xsl:template>
+    
+    <xsl:template match="h:components[@xsi:type='Loop']">
+        <components>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates select="h:label"/>
+            <xsl:apply-templates select="h:declarations"/>
+            <xsl:apply-templates select="h:conditionFilter"/>
+            <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
+            <xsl:for-each select="$dependencies">                
+                <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
+            </xsl:for-each>
+            <xsl:apply-templates select="h:components"/>
+        </components>
+    </xsl:template>
 
     <xsl:template match="h:components[@xsi:type='Table']">
         <components>
@@ -81,11 +95,13 @@
                             <xsl:apply-templates mode="roster" select="$cell">
                                 <xsl:with-param name="idLine" select="1" tunnel="yes"/>
                                 <xsl:with-param name="ancestor" select="'table'" tunnel="yes"/>
+                                <xsl:with-param name="tableId" select="@id" tunnel="yes"/>
                             </xsl:apply-templates>
                             <xsl:call-template name="enojs:addLinesForRoster">
                                 <xsl:with-param name="currentLigne" select="2"/>
                                 <xsl:with-param name="nbLigneMax" select="$nbLinesExpected"/>
                                 <xsl:with-param name="lineToCopy" select="$cell"/>
+                                <xsl:with-param name="tableId" select="@id"/>
                             </xsl:call-template>
                         </xsl:when>
                         <xsl:otherwise>
@@ -99,7 +115,7 @@
             </xsl:choose>
         </components>
     </xsl:template>
-
+    
     <xsl:template match="h:components">
         <components>
             <xsl:copy-of select="@*"/>
@@ -107,7 +123,7 @@
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
             <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
-            <xsl:for-each select="$dependencies">                
+            <xsl:for-each select="$dependencies">
                 <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
             </xsl:for-each>
             <xsl:apply-templates select="*[not(self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter)]"/>
@@ -117,8 +133,8 @@
     <xsl:template match="h:response">
         <xsl:param name="idLine" tunnel="yes"/>
         <xsl:param name="ancestor" tunnel="yes"/>
+        <xsl:param name="tableId" tunnel="yes"/>
         <xsl:variable name="idColumn" select="ancestor::h:cells/@idColumn"/>
-        <xsl:variable name="tableId" select="ancestor::h:components[@xsi:type='Table']/@id"/>
         <xsl:choose>
             <xsl:when test="$ancestor='table'">
                 <response>
@@ -162,10 +178,13 @@
 
     <xsl:template match="h:cells" mode="roster">
         <xsl:param name="column" tunnel="yes"/>
+        <xsl:param name="tableId" tunnel="yes"/>
         <cells>
             <xsl:copy-of select="@*"/>
             <xsl:if test="string($column)!=''"><xsl:attribute name="idColumn" select="$column"/></xsl:if>
-            <xsl:apply-templates select="*[not(self::h:variables)]"/>
+            <xsl:apply-templates select="*[not(self::h:variables)]">
+                <xsl:with-param name="tableId" select="$tableId" tunnel="yes"/>
+            </xsl:apply-templates>
         </cells>
     </xsl:template>
 
@@ -191,17 +210,20 @@
         <xsl:param name="currentLigne"/>
         <xsl:param name="nbLigneMax"/>
         <xsl:param name="lineToCopy" as="node()"/>
+        <xsl:param name="tableId"/>
         <xsl:if test="$currentLigne&lt;=$nbLigneMax">
 
             <xsl:apply-templates select="$lineToCopy" mode="roster">
                 <xsl:with-param name="idLine" select="$currentLigne" tunnel="yes"/>
                 <xsl:with-param name="ancestor" select="'table'" tunnel="yes"/>
+                <xsl:with-param name="tableId" select="$tableId" tunnel="yes"/>
             </xsl:apply-templates>
 
             <xsl:call-template name="enojs:addLinesForRoster">
                 <xsl:with-param name="currentLigne" select="$currentLigne +1"/>
                 <xsl:with-param name="nbLigneMax" select="$nbLigneMax"/>
                 <xsl:with-param name="lineToCopy" select="$lineToCopy" as="node()"/>
+                <xsl:with-param name="tableId" select="$tableId"/>
             </xsl:call-template>
         </xsl:if>
     </xsl:template>

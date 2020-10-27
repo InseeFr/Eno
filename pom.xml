@@ -1,6 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.insee.eno</groupId>
 	<artifactId>eno-core</artifactId>
@@ -55,12 +54,12 @@
 		<slf4j.version>1.7.25</slf4j.version>
 		<eclipse.version>2.6.0</eclipse.version>
 		<jaxb-api.version>2.3.1</jaxb-api.version>
-		
+
 		<apache-commons.version>3.5</apache-commons.version>
 		<junit.version>4.12</junit.version>
 		<xmlunit.version>2.3.0</xmlunit.version>
 		<log4j-slf4j.version>2.11.0</log4j-slf4j.version>
-		
+
 		<source.plugin.version>3.0.1</source.plugin.version>
 		<javadoc.plugin.version>3.0.0</javadoc.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -130,7 +129,7 @@
 			<version>${log4j-slf4j.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- Jaxb -->
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
@@ -194,8 +193,7 @@
 					<encoding>UTF-8</encoding>
 					<inputEncoding>UTF-8</inputEncoding>
 					<outputEncoding>UTF-8</outputEncoding>
-					<argLine>-Dfile.encoding=UTF-8
-						-Djavax.xml.bind.JAXBContextFactory=org.eclipse.persistence.jaxb.JAXBContextFactory</argLine>
+					<argLine>-Dfile.encoding=UTF-8 -Djavax.xml.bind.JAXBContextFactory=org.eclipse.persistence.jaxb.JAXBContextFactory</argLine>
 				</configuration>
 			</plugin>
 			<plugin>

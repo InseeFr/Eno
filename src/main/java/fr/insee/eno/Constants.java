@@ -296,7 +296,7 @@ public final class Constants {
 	public static String tEMP_POGUES_XML_FOLDER(String sUB_TEMP_FOLDER){
 		return sUB_TEMP_FOLDER + "/pogues-xml";
 	}
-	public static final String BASIC_FORM_TMP_FILENAME = "basic-form.tmp";
+	public static final String BASIC_FORM_TMP_FILENAME = "basic-form.xml";
 	
 	
 	
