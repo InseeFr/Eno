@@ -413,11 +413,9 @@
 				<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
 				
 				<xsl:copy-of select="$dependencies"/>
-				<xsl:if test="$loopDepth &gt; 0">
-					<xsl:call-template name="enolunatic:add-response-dependencies">
-						<xsl:with-param name="responseName" select="$responseName"/>
-					</xsl:call-template>
-				</xsl:if>
+				<xsl:call-template name="enolunatic:add-response-dependencies">
+					<xsl:with-param name="responseName" select="$responseName"/>
+				</xsl:call-template>
 				
 				<xsl:if test="$unit!=''">
 					<unit><xsl:value-of select="$unit"/></unit>
@@ -499,11 +497,10 @@
 			<xsl:if test="$minimumResponse!=''"><xsl:attribute name="min" select="$minimumResponse"/></xsl:if>
 			<xsl:if test="$maximumResponse!=''"><xsl:attribute name="max" select="$maximumResponse"/></xsl:if>
 			<xsl:if test="$numberOfDecimals!=''"><xsl:attribute name="decimals" select="$numberOfDecimals"/></xsl:if>
-			<xsl:if test="$loopDepth &gt; 0">
-				<xsl:call-template name="enolunatic:add-response-dependencies">
-					<xsl:with-param name="responseName" select="$responseName"/>
-				</xsl:call-template>
-			</xsl:if>
+			<xsl:call-template name="enolunatic:add-response-dependencies">
+				<xsl:with-param name="responseName" select="$responseName"/>
+			</xsl:call-template>
+			
 			<xsl:if test="$unit!=''">
 				<unit><xsl:value-of select="$unit"/></unit>
 			</xsl:if>
@@ -546,11 +543,10 @@
 				<xsl:with-param name="responseName" select="$responseName"/>
 			</xsl:call-template>
 		</responses>
-		<xsl:if test="$loopDepth &gt; 0">
-			<xsl:call-template name="enolunatic:add-response-dependencies">
-				<xsl:with-param name="responseName" select="$responseName"/>
-			</xsl:call-template>
-		</xsl:if>
+		<xsl:call-template name="enolunatic:add-response-dependencies">
+			<xsl:with-param name="responseName" select="$responseName"/>
+		</xsl:call-template>
+		
 		<xsl:call-template name="enolunatic:add-collected-variable-to-components">
 			<xsl:with-param name="responseName" select="$responseName"/>
 			<xsl:with-param name="componentRef" select="$idQuestion"/>
