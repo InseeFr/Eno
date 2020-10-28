@@ -2,7 +2,8 @@
 <Questionnaire xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                id="i6vwi0"
-               modele="SIMPSONS">
+               modele="SIMPSONS"
+               enoCoreVersion="">
    <label>Questionnaire SIMPSONS</label>
    <components xsi:type="Sequence" componentType="Sequence" id="j6p0ti5h">
       <label>"I - Introduction"</label>
@@ -19,6 +20,7 @@
                   mandatory="false">
          <label>"➡ 1. Before starting, do you have any comments about the Simpsons family?"</label>
          <conditionFilter>"normal"</conditionFilter>
+         <bindingDependencies>COMMENT</bindingDependencies>
          <response name="COMMENT"/>
       </components>
       <components xsi:type="CheckboxBoolean"
@@ -27,6 +29,7 @@
                   mandatory="false">
          <label>"➡ 2. Are you ready?"</label>
          <conditionFilter>"normal"</conditionFilter>
+         <bindingDependencies>READY</bindingDependencies>
          <response name="READY"/>
       </components>
       <components xsi:type="FilterDescription"
@@ -45,6 +48,7 @@
                      mandatory="false">
             <label>"➡ 3. Who is the producer?"</label>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+            <bindingDependencies>PRODUCER</bindingDependencies>
             <response name="PRODUCER"/>
          </components>
          <components xsi:type="InputNumber"
@@ -56,6 +60,7 @@
                      decimals="0">
             <label>"➡ 4. What is the current season number?"</label>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+            <bindingDependencies>SEASON_NUMBER</bindingDependencies>
             <response name="SEASON_NUMBER"/>
          </components>
          <components xsi:type="Datepicker"
@@ -72,6 +77,7 @@
             </declarations>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
             <bindingDependencies>LAST_BROADCAST</bindingDependencies>
+            <bindingDependencies>DATEFIRST</bindingDependencies>
             <dateFormat>YYYY-MM-DD</dateFormat>
             <response name="DATEFIRST"/>
          </components>
@@ -84,6 +90,7 @@
                      decimals="1">
             <label>"➡ 6. In your opinion, how much is the part of audience share in US for the 2016 season?"</label>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+            <bindingDependencies>AUDIENCE_SHARE</bindingDependencies>
             <response name="AUDIENCE_SHARE"/>
          </components>
       </components>
@@ -107,6 +114,7 @@
             <label>"One possible answer"</label>
          </declarations>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <bindingDependencies>CITY</bindingDependencies>
          <options>
             <value>00001</value>
             <label>"Springfield"</label>
@@ -132,6 +140,7 @@
             <label>"Only one possible answer"</label>
          </declarations>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <bindingDependencies>MAYOR</bindingDependencies>
          <options>
             <value>1</value>
             <label>"Constance Harm"</label>
@@ -156,6 +165,7 @@
                   mandatory="false">
          <label>"➡ 3. In which state do The Simpsons reside?"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <bindingDependencies>STATE</bindingDependencies>
          <options>
             <value>1</value>
             <label>"Washington"</label>
@@ -224,6 +234,10 @@
             <label>"Several possible answers"</label>
          </declarations>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <bindingDependencies>PET1</bindingDependencies>
+         <bindingDependencies>PET2</bindingDependencies>
+         <bindingDependencies>PET3</bindingDependencies>
+         <bindingDependencies>PET4</bindingDependencies>
          <responses id="j334akov-QOP-jbgd8qmn">
             <label>"Santa's Little Helper"</label>
             <response name="PET1"/>
@@ -253,6 +267,10 @@
             <label>"Now we are going to know if you think that Jay is a gluton."</label>
          </declarations>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <bindingDependencies>ICE_FLAVOUR1</bindingDependencies>
+         <bindingDependencies>ICE_FLAVOUR2</bindingDependencies>
+         <bindingDependencies>ICE_FLAVOUR3</bindingDependencies>
+         <bindingDependencies>ICE_FLAVOUR4</bindingDependencies>
          <cells type="line">
             <cells>
                <value>1</value>
@@ -329,6 +347,10 @@
                   mandatory="false">
          <label>"➡ 3. Which character works in the nuclear power plant?"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <bindingDependencies>NUCLEAR_CHARACTER1</bindingDependencies>
+         <bindingDependencies>NUCLEAR_CHARACTER2</bindingDependencies>
+         <bindingDependencies>NUCLEAR_CHARACTER3</bindingDependencies>
+         <bindingDependencies>NUCLEAR_CHARACTER4</bindingDependencies>
          <cells type="line">
             <cells>
                <value>1</value>
@@ -405,6 +427,11 @@
                   mandatory="false">
          <label>"➡ 4. In which city each character was born?"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <bindingDependencies>BIRTH_CHARACTER1</bindingDependencies>
+         <bindingDependencies>BIRTH_CHARACTER2</bindingDependencies>
+         <bindingDependencies>BIRTH_CHARACTER3</bindingDependencies>
+         <bindingDependencies>BIRTH_CHARACTER4</bindingDependencies>
+         <bindingDependencies>BIRTH_CHARACTER5</bindingDependencies>
          <cells type="line">
             <cells>
                <value>1</value>
@@ -565,6 +592,13 @@
                      mandatory="false">
             <label>"➡ 1. Please, specify the percentage of Jay's expenses in the Kwik-E-Mart for each product?"</label>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+            <bindingDependencies>PERCENTAGE_EXPENSES11</bindingDependencies>
+            <bindingDependencies>PERCENTAGE_EXPENSES21</bindingDependencies>
+            <bindingDependencies>PERCENTAGE_EXPENSES31</bindingDependencies>
+            <bindingDependencies>PERCENTAGE_EXPENSES41</bindingDependencies>
+            <bindingDependencies>PERCENTAGE_EXPENSES51</bindingDependencies>
+            <bindingDependencies>PERCENTAGE_EXPENSES61</bindingDependencies>
+            <bindingDependencies>PERCENTAGE_EXPENSES71</bindingDependencies>
             <cells type="header">
                <cells headerCell="true" colspan="2">
                   <label/>
@@ -695,6 +729,14 @@
                      mandatory="false">
             <label>"➡ 2. Who did these clownings and tell us what you remember?"</label>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+            <bindingDependencies>CLOWNING11</bindingDependencies>
+            <bindingDependencies>CLOWNING12</bindingDependencies>
+            <bindingDependencies>CLOWNING21</bindingDependencies>
+            <bindingDependencies>CLOWNING22</bindingDependencies>
+            <bindingDependencies>CLOWNING31</bindingDependencies>
+            <bindingDependencies>CLOWNING32</bindingDependencies>
+            <bindingDependencies>CLOWNING41</bindingDependencies>
+            <bindingDependencies>CLOWNING42</bindingDependencies>
             <cells type="header">
                <cells headerCell="true">
                   <label/>
@@ -835,6 +877,30 @@
                <label>"Several answers possible: check off all the relevant boxes"</label>
             </declarations>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+            <bindingDependencies>TRAVEL11</bindingDependencies>
+            <bindingDependencies>TRAVEL12</bindingDependencies>
+            <bindingDependencies>TRAVEL13</bindingDependencies>
+            <bindingDependencies>TRAVEL14</bindingDependencies>
+            <bindingDependencies>TRAVEL15</bindingDependencies>
+            <bindingDependencies>TRAVEL16</bindingDependencies>
+            <bindingDependencies>TRAVEL21</bindingDependencies>
+            <bindingDependencies>TRAVEL22</bindingDependencies>
+            <bindingDependencies>TRAVEL23</bindingDependencies>
+            <bindingDependencies>TRAVEL24</bindingDependencies>
+            <bindingDependencies>TRAVEL25</bindingDependencies>
+            <bindingDependencies>TRAVEL26</bindingDependencies>
+            <bindingDependencies>TRAVEL31</bindingDependencies>
+            <bindingDependencies>TRAVEL32</bindingDependencies>
+            <bindingDependencies>TRAVEL33</bindingDependencies>
+            <bindingDependencies>TRAVEL34</bindingDependencies>
+            <bindingDependencies>TRAVEL35</bindingDependencies>
+            <bindingDependencies>TRAVEL36</bindingDependencies>
+            <bindingDependencies>TRAVEL41</bindingDependencies>
+            <bindingDependencies>TRAVEL42</bindingDependencies>
+            <bindingDependencies>TRAVEL43</bindingDependencies>
+            <bindingDependencies>TRAVEL44</bindingDependencies>
+            <bindingDependencies>TRAVEL45</bindingDependencies>
+            <bindingDependencies>TRAVEL46</bindingDependencies>
             <cells type="header">
                <cells headerCell="true">
                   <label/>
@@ -967,6 +1033,26 @@
                   mandatory="false">
          <label>"➡ 1. Please, complete the following grid with your favourite characters"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <bindingDependencies>FAVOURITE_CHARACTERS11</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS12</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS21</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS22</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS31</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS32</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS41</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS42</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS51</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS52</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS61</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS62</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS71</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS72</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS81</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS82</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS91</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS92</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS101</bindingDependencies>
+         <bindingDependencies>FAVOURITE_CHARACTERS102</bindingDependencies>
          <lines min="1" max="10"/>
          <cells type="header">
             <cells headerCell="true">
@@ -1108,6 +1194,7 @@
                   mandatory="false">
          <label>"➡ 1. Do you have any comment about the survey?"</label>
          <conditionFilter>"normal"</conditionFilter>
+         <bindingDependencies>SURVEY_COMMENT</bindingDependencies>
          <response name="SURVEY_COMMENT"/>
       </components>
    </components>
