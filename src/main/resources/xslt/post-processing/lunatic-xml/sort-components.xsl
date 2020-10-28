@@ -18,6 +18,8 @@
             <xd:p>The real input is mapped with the drivers.</xd:p>
         </xd:desc>
     </xd:doc>
+    
+    <xsl:variable name="root" select="root(.)"/>
 
     <xsl:template match="@*|node()">
         <xsl:copy>
@@ -64,6 +66,42 @@
     </xsl:template>
     
     <xsl:template match="h:components[@xsi:type='Loop']">
+        <xsl:variable name="idGenerator" select="h:idGenerator" as="xs:string"/>
+        <xsl:variable name="rosterDependencies" select="$root//h:components[@id=$idGenerator]//h:responseDependencies" as="item()*"/>
+        <components>
+            <xsl:copy-of select="@*[name(.)!='iterations' or name(.)!='min']"/>
+            <xsl:attribute name="min">
+                <xsl:choose>
+                    <xsl:when test="string-length(@min) &gt; 0"><xsl:value-of select="@min"/></xsl:when>
+                    <xsl:otherwise><xsl:value-of select="'0'"/></xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:attribute name="iterations">
+                <xsl:choose>
+                    <xsl:when test="string-length(@iterations) &gt; 0"><xsl:value-of select="@iterations"/></xsl:when>
+                    <xsl:otherwise><xsl:value-of select="concat('count(',$rosterDependencies[1],')')"/></xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:apply-templates select="h:label"/>
+            <xsl:apply-templates select="h:declarations"/>
+            <xsl:apply-templates select="h:conditionFilter"/>
+            <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
+            <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
+            <xsl:variable name="allDependencies" as="xs:string*">
+                <xsl:copy-of select="$dependencies"/>
+                <xsl:copy-of select="$responseDependencies"/>
+            </xsl:variable>
+            <xsl:for-each select="distinct-values($allDependencies)">                
+                <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
+            </xsl:for-each>
+            <xsl:for-each select="distinct-values($rosterDependencies)">                
+                <rosterDependencies><xsl:value-of select="."/></rosterDependencies>
+            </xsl:for-each>
+            <xsl:apply-templates select="h:components"/>
+        </components>
+    </xsl:template>
+
+    <xsl:template match="h:components[@xsi:type='RosterForLoop']">
         <components>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="h:label"/>
@@ -78,10 +116,9 @@
             <xsl:for-each select="distinct-values($allDependencies)">                
                 <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
             </xsl:for-each>
-            <xsl:apply-templates select="h:components"/>
+            <xsl:apply-templates select="*[not(self::h:label or self::h:declarations or self::h:conditionFilter)]"/>
         </components>
     </xsl:template>
-
     <xsl:template match="h:components[@xsi:type='Table']">
         <components>
             <xsl:copy-of select="@*"/>

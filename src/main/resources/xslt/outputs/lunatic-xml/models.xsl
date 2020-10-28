@@ -58,7 +58,6 @@
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 				<xsl:with-param name="languages" select="$languages" tunnel="yes"/>
-				<!--<xsl:with-param name="isInSurvey" select="'yes'" tunnel="yes"/>-->
 			</xsl:apply-templates>
 		</Questionnaire>
 	</xsl:template>
@@ -86,10 +85,12 @@
 				<xsl:with-param name="formula" select="enolunatic:get-maximum-occurrences($source-context)"/>
 			</xsl:call-template>
 		</xsl:variable>
+		
 		<components xsi:type="Loop" componentType="Loop" id="{$id}">
 			<xsl:attribute name="min" select="$minimumOccurrences"/>
 			<xsl:attribute name="iterations" select="enolunatic:replace-all-variables-with-business-name($source-context,$maximumOccurrences)"/>
 			<xsl:variable name="rosterDependencies" as="xs:string*"/>
+			<idGenerator><xsl:value-of select="enolunatic:get-loop-generator-id($source-context)"/></idGenerator>
 			<xsl:for-each select="$rosterDependencies">
 				<rosterDependencies><xsl:value-of select="."/></rosterDependencies>
 			</xsl:for-each>
@@ -237,7 +238,12 @@
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
-		<xsl:variable name="componentType" select="'Table'"/>
+		<xsl:variable name="componentType">
+			<xsl:choose>
+				<xsl:when test="name(.) = 'TableLoop' and enolunatic:is-generating-loop($source-context)"><xsl:value-of select="'RosterForLoop'"/></xsl:when>
+				<xsl:otherwise><xsl:value-of select="'Table'"/></xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>		
 		<xsl:variable name="mandatory" select="enolunatic:is-required($source-context)" as="xs:boolean"/>
 		<xsl:variable name="nbMinimumLines" select="enolunatic:get-minimum-lines($source-context)"/>
 		<xsl:variable name="nbMaximumLines" select="enolunatic:get-maximum-lines($source-context)"/>
@@ -252,23 +258,49 @@
 			</xsl:if>
 
 			<xsl:for-each select="enolunatic:get-header-lines($source-context)">
-				<cells type="header">
-					<xsl:apply-templates select="enolunatic:get-header-line($source-context,position())" mode="source">
-						<xsl:with-param name="ancestorTable" select="'headerLine'" tunnel="yes"/>
-						<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
-					</xsl:apply-templates>
-				</cells>
+				<xsl:choose>
+					<xsl:when test="$componentType = 'Table'">
+						<cells type="header">
+							<xsl:apply-templates select="enolunatic:get-header-line($source-context,position())" mode="source">
+								<xsl:with-param name="lineType" select="'headerLine'" tunnel="yes"/>
+								<xsl:with-param name="elementName" select="'cells'" tunnel="yes"/>
+								<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
+							</xsl:apply-templates>
+						</cells>
+					</xsl:when>
+					<xsl:when test="$componentType = 'RosterForLoop'">
+						<xsl:apply-templates select="enolunatic:get-header-line($source-context,position())" mode="source">
+							<xsl:with-param name="lineType" select="'headerLine'" tunnel="yes"/>
+							<xsl:with-param name="elementName" select="'headers'" tunnel="yes"/>
+							<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
+						</xsl:apply-templates>						
+					</xsl:when>
+				</xsl:choose>				
 			</xsl:for-each>
 
 			<xsl:for-each select="enolunatic:get-body-lines($source-context)">
-				<cells type="line">
-					<xsl:apply-templates select="enolunatic:get-body-line($source-context,position())" mode="source">
-						<xsl:with-param name="ancestorTable" select="'bodyLine'" tunnel="yes"/>
-						<xsl:with-param name="position" select="position()" tunnel="yes"/>
-						<xsl:with-param name="questionName" select="enolunatic:get-question-name($source-context,$languages[1])" tunnel="yes"/>
-						<xsl:with-param name="idQuestion" select="$idQuestion" tunnel="yes"/>
-					</xsl:apply-templates>
-				</cells>
+				<xsl:choose>
+					<xsl:when test="$componentType = 'Table'">
+						<cells type="line">
+							<xsl:apply-templates select="enolunatic:get-body-line($source-context,position())" mode="source">
+								<xsl:with-param name="lineType" select="'bodyLine'" tunnel="yes"/>
+								<xsl:with-param name="elementName" select="'cells'" tunnel="yes"/>
+								<xsl:with-param name="position" select="position()" tunnel="yes"/>
+								<xsl:with-param name="questionName" select="enolunatic:get-question-name($source-context,$languages[1])" tunnel="yes"/>
+								<xsl:with-param name="idQuestion" select="$idQuestion" tunnel="yes"/>
+							</xsl:apply-templates>
+						</cells>
+					</xsl:when>
+					<xsl:when test="$componentType = 'RosterForLoop'">
+						<xsl:apply-templates select="enolunatic:get-body-line($source-context,position())" mode="source">
+							<xsl:with-param name="lineType" select="'bodyLine'" tunnel="yes"/>
+							<xsl:with-param name="elementName" select="'components'" tunnel="yes"/>
+							<xsl:with-param name="position" select="position()" tunnel="yes"/>
+							<xsl:with-param name="questionName" select="enolunatic:get-question-name($source-context,$languages[1])" tunnel="yes"/>
+							<xsl:with-param name="idQuestion" select="$idQuestion" tunnel="yes"/>
+						</xsl:apply-templates>						
+					</xsl:when>
+				</xsl:choose>				
 			</xsl:for-each>
 		</components>
 		
@@ -286,7 +318,8 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="idColumn" tunnel="yes"/>
-		<xsl:param name="ancestorTable" tunnel="yes"/>
+		<xsl:param name="lineType" tunnel="yes"/>
+		<xsl:param name="elementName" tunnel="yes"/>
 
 		<xsl:variable name="col-span" select="number(enolunatic:get-colspan($source-context))"/>
 		<xsl:variable name="row-span" select="number(enolunatic:get-rowspan($source-context))"/>
@@ -294,17 +327,17 @@
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($labelDependencies)"/>
-		<cells>
-			<xsl:if test="$ancestorTable='headerLine'">
+		<xsl:element name="{$elementName}">
+			<xsl:if test="$lineType='headerLine'">
 				<xsl:attribute name="headerCell" select="true()"/>
 			</xsl:if>
 			<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 			<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
-			<xsl:if test="$label!='' and $ancestorTable='bodyLine'">
+			<xsl:if test="$label!='' and $lineType='bodyLine'">
 				<value><xsl:value-of select="enolunatic:get-value($source-context)"/></value>
 			</xsl:if>
 			<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/></label>
-		</cells>
+		</xsl:element>
 		<xsl:copy-of select="$dependencies"/>
 	</xsl:template>
 
@@ -330,7 +363,8 @@
 	</xd:doc>
 	<xsl:template match="EmptyCell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="ancestorTable" tunnel="yes"/>
+		<xsl:param name="lineType" tunnel="yes"/>
+		<xsl:param name="elementName" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="idColumn" tunnel="yes"/>
 
@@ -338,18 +372,20 @@
 		<xsl:variable name="row-span" select="number(enolunatic:get-rowspan($source-context))"/>
 
 		<xsl:choose>
-			<xsl:when test="$ancestorTable='headerLine'">
-				<cells headerCell="true">
+			<xsl:when test="$lineType='headerLine'">
+				<xsl:element name="{$elementName}">
+					<xsl:attribute name="headerCell" select="true()"/>
 					<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 					<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
 					<label/>
-				</cells>
+				</xsl:element>
 			</xsl:when>
 			<xsl:otherwise>
-				<cells headerCell="false">
+				<xsl:element name="{$elementName}">
+					<xsl:attribute name="headerCell" select="false()"/>
 					<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
-					<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
-				</cells>
+					<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>				
+				</xsl:element>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
@@ -457,7 +493,8 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="col-span" tunnel="yes"/>
 		<xsl:param name="row-span" tunnel="yes"/>
-		<xsl:param name="ancestorTable" tunnel="yes"/>
+		<xsl:param name="lineType" tunnel="yes"/>
+		<xsl:param name="elementName" tunnel="yes"/>
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
 
 		<xsl:variable name="responseName" select="enolunatic:get-business-name($source-context)"/>
@@ -489,8 +526,10 @@
 		<xsl:variable name="lengthResponse" select="enolunatic:get-length($source-context)"/>
 		<!-- DateTimeDomain getters -->
 		<xsl:variable name="dateFormat" select="enolunatic:get-format($source-context)"/>
-
-		<cells id="{enolunatic:get-name($source-context)}" componentType="{$componentType}">
+		
+		<xsl:element name="{$elementName}">
+			<xsl:attribute name="id" select="enolunatic:get-name($source-context)"/>
+			<xsl:attribute name="componentType" select="$componentType"/>
 			<xsl:if test="$lengthResponse!='' and (self::TextDomain or self::TextareaDomain)"><xsl:attribute name="maxLength" select="$lengthResponse"/></xsl:if>
 			<xsl:if test="$col-span &gt; 1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 			<xsl:if test="$row-span &gt; 1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
@@ -513,7 +552,7 @@
 			<xsl:call-template name="enolunatic:add-response-to-components">
 				<xsl:with-param name="responseName" select="$responseName"/>
 			</xsl:call-template>
-		</cells>
+		</xsl:element>
 		<xsl:call-template name="enolunatic:add-collected-variable-to-components">
 			<xsl:with-param name="responseName" select="$responseName"/>
 			<xsl:with-param name="componentRef" select="$idQuestion"/>
