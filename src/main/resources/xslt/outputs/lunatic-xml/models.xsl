@@ -72,6 +72,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
+		<xsl:param name="idLoop" select="''" tunnel="yes"/>
 		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
 		<xsl:variable name="minimumOccurrences">
 			<xsl:call-template name="enolunatic:replace-variables-in-formula">
@@ -86,6 +87,14 @@
 			</xsl:call-template>
 		</xsl:variable>
 		
+		<!-- keep idLoop of the parent Loop if exists -->
+		<xsl:variable name="newIdLoop">
+			<xsl:choose>
+				<xsl:when test="$idLoop!=''"><xsl:value-of select="$idLoop"/></xsl:when>
+				<xsl:otherwise><xsl:value-of select="$id"/></xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		
 		<components xsi:type="Loop" componentType="Loop" id="{$id}">
 			<xsl:attribute name="min" select="$minimumOccurrences"/>
 			<xsl:attribute name="iterations" select="enolunatic:replace-all-variables-with-business-name($source-context,$maximumOccurrences)"/>
@@ -97,6 +106,7 @@
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 				<xsl:with-param name="loopDepth" select="$loopDepth + 1" tunnel="yes"/>
+				<xsl:with-param name="idLoop" select="$newIdLoop" tunnel="yes"/>
 			</xsl:apply-templates>
 		</components>
 
@@ -227,6 +237,7 @@
 	<xsl:template match="Table | TableLoop" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
 
 		<xsl:variable name="idQuestion" select="enolunatic:get-name($source-context)"/>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
@@ -273,6 +284,7 @@
 							<xsl:with-param name="lineType" select="'headerLine'" tunnel="yes"/>
 							<xsl:with-param name="elementName" select="'headers'" tunnel="yes"/>
 							<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
+							<xsl:with-param name="loopDepth" select="$loopDepth + 1" tunnel="yes"/>
 						</xsl:apply-templates>						
 					</xsl:when>
 				</xsl:choose>				
@@ -298,6 +310,7 @@
 							<xsl:with-param name="position" select="position()" tunnel="yes"/>
 							<xsl:with-param name="questionName" select="enolunatic:get-question-name($source-context,$languages[1])" tunnel="yes"/>
 							<xsl:with-param name="idQuestion" select="$idQuestion" tunnel="yes"/>
+							<xsl:with-param name="loopDepth" select="$loopDepth + 1" tunnel="yes"/>
 						</xsl:apply-templates>						
 					</xsl:when>
 				</xsl:choose>				
@@ -405,6 +418,7 @@
 		<xsl:param name="filterCondition" tunnel="yes"/>
 		<xsl:param name="dependencies" tunnel="yes"/>
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
+		<xsl:param name="idLoop" select="''" tunnel="yes"/>
 
 		<xsl:variable name="responseName" select="enolunatic:get-business-name($source-context)"/>
 		<xsl:variable name="code-appearance" select="enolunatic:get-appearance($source-context)"/>
@@ -479,6 +493,7 @@
 			<xsl:with-param name="responseName" select="$responseName"/>
 			<xsl:with-param name="componentRef" select="$idQuestion"/>
 			<xsl:with-param name="loopDepth" select="$loopDepth"/>
+			<xsl:with-param name="idLoop" select="$idLoop"/>
 		</xsl:call-template>
 	</xsl:template>
 
@@ -496,6 +511,7 @@
 		<xsl:param name="lineType" tunnel="yes"/>
 		<xsl:param name="elementName" tunnel="yes"/>
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
+		<xsl:param name="idLoop" select="''" tunnel="yes"/>
 
 		<xsl:variable name="responseName" select="enolunatic:get-business-name($source-context)"/>
 		<xsl:variable name="code-appearance" select="enolunatic:get-appearance($source-context)"/>
@@ -557,6 +573,7 @@
 			<xsl:with-param name="responseName" select="$responseName"/>
 			<xsl:with-param name="componentRef" select="$idQuestion"/>
 			<xsl:with-param name="loopDepth" select="$loopDepth"/>
+			<xsl:with-param name="idLoop" select="$idLoop"/>
 		</xsl:call-template>
 	</xsl:template>
 
@@ -570,6 +587,7 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="idQuestion" tunnel="yes"/>
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
+		<xsl:param name="idLoop" select="''" tunnel="yes"/>
 
 		<xsl:variable name="responseName" select="enolunatic:get-business-name($source-context)"/>
 
@@ -590,6 +608,7 @@
 			<xsl:with-param name="responseName" select="$responseName"/>
 			<xsl:with-param name="componentRef" select="$idQuestion"/>
 			<xsl:with-param name="loopDepth" select="$loopDepth"/>
+			<xsl:with-param name="idLoop" select="$idLoop"/>
 		</xsl:call-template>
 	</xsl:template>
 
@@ -818,6 +837,7 @@
 		<xsl:param name="responseName"/>
 		<xsl:param name="componentRef"/>
 		<xsl:param name="loopDepth" select="0"/>
+		<xsl:param name="idLoop" select="''"/>
 		<xsl:variable name="ResponseTypeEnum" select="'PREVIOUS,COLLECTED,FORCED,EDITED,INPUTED'" as="xs:string"/>
 		<xsl:variable name="variableType">
 			<xsl:choose>
@@ -829,9 +849,15 @@
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
+		<xsl:variable name="newComponentRef">
+			<xsl:choose>
+				<xsl:when test="$idLoop!=''"><xsl:value-of select="$idLoop"/></xsl:when>
+				<xsl:otherwise><xsl:value-of select="$componentRef"/></xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
 		<variables variableType="COLLECTED" xsi:type="{$variableType}">
 			<name><xsl:value-of select="$responseName"/></name>
-			<componentRef><xsl:value-of select="$componentRef"/></componentRef>
+			<componentRef><xsl:value-of select="$newComponentRef"/></componentRef>
 			<values>
 				<xsl:for-each select="tokenize($ResponseTypeEnum,',')">
 					<xsl:call-template name="enolunatic:add-collected-value">
