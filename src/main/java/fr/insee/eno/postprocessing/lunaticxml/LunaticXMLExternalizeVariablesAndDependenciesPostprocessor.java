@@ -31,7 +31,7 @@ public class LunaticXMLExternalizeVariablesAndDependenciesPostprocessor implemen
 				Constants.EXTERNALIZE_VARIABLES_LUNATIC_XML_EXTENSION);
 		logger.debug("Output folder for basic-form : " + outputForJSFile.getAbsolutePath());
 
-		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_EXTERNALIZE_VARIABLES_LUNATIC_XML);
+		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_EXTERNALIZE_VARIABLES_AND_DEPENDENCIES_LUNATIC_XML);
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForJSFile);
 

@@ -169,7 +169,7 @@ public final class Constants {
 	
 	/********************* JS/XML-Lunatic - Post-processing ******************/
 	public static final String TRANSFORMATIONS_SORT_COMPONENTS_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/sort-components.xsl";
-	public static final String TRANSFORMATIONS_EXTERNALIZE_VARIABLES_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/externalize-variables.xsl";
+	public static final String TRANSFORMATIONS_EXTERNALIZE_VARIABLES_AND_DEPENDENCIES_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/externalize-variables-and-dependencies.xsl";
 	public static final String TRANSFORMATIONS_INSERT_GENERIC_QUESTIONS_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/insert-generic-questions.xsl";
 	
 	/********************* FR/Xform Post-processing ******************/
