@@ -17,9 +17,9 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * Customization of JS postprocessor.
  */
-public class LunaticXMLExternalizeVariablesPostprocessor implements Postprocessor {
+public class LunaticXMLExternalizeVariablesAndDependenciesPostprocessor implements Postprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(LunaticXMLExternalizeVariablesPostprocessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(LunaticXMLExternalizeVariablesAndDependenciesPostprocessor.class);
 
 	private XslTransformation saxonService = new XslTransformation();
 
@@ -46,7 +46,7 @@ public class LunaticXMLExternalizeVariablesPostprocessor implements Postprocesso
 		inputStream.close();
 		outputStream.close();
 		JS_XSL.close();
-		logger.info("End JS externalize codeLists post-processing");
+		logger.info("End JS externalize variables post-processing");
 
 		return outputForJSFile;
 	}
