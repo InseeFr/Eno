@@ -286,6 +286,7 @@
                   <label>"No"</label>
                </options>
                <response name="ICE_FLAVOUR1"/>
+               <bindingDependencies>ICE_FLAVOUR1</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
@@ -303,6 +304,7 @@
                   <label>"No"</label>
                </options>
                <response name="ICE_FLAVOUR2"/>
+               <bindingDependencies>ICE_FLAVOUR2</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
@@ -320,6 +322,7 @@
                   <label>"No"</label>
                </options>
                <response name="ICE_FLAVOUR3"/>
+               <bindingDependencies>ICE_FLAVOUR3</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
@@ -337,6 +340,7 @@
                   <label>"No"</label>
                </options>
                <response name="ICE_FLAVOUR4"/>
+               <bindingDependencies>ICE_FLAVOUR4</bindingDependencies>
             </cells>
          </cells>
       </components>
@@ -366,6 +370,7 @@
                   <label>"No"</label>
                </options>
                <response name="NUCLEAR_CHARACTER1"/>
+               <bindingDependencies>NUCLEAR_CHARACTER1</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
@@ -383,6 +388,7 @@
                   <label>"No"</label>
                </options>
                <response name="NUCLEAR_CHARACTER2"/>
+               <bindingDependencies>NUCLEAR_CHARACTER2</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
@@ -400,6 +406,7 @@
                   <label>"No"</label>
                </options>
                <response name="NUCLEAR_CHARACTER3"/>
+               <bindingDependencies>NUCLEAR_CHARACTER3</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
@@ -417,6 +424,7 @@
                   <label>"No"</label>
                </options>
                <response name="NUCLEAR_CHARACTER4"/>
+               <bindingDependencies>NUCLEAR_CHARACTER4</bindingDependencies>
             </cells>
          </cells>
       </components>
@@ -459,6 +467,7 @@
                   <label>"Dagstuhl"</label>
                </options>
                <response name="BIRTH_CHARACTER1"/>
+               <bindingDependencies>BIRTH_CHARACTER1</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
@@ -488,6 +497,7 @@
                   <label>"Dagstuhl"</label>
                </options>
                <response name="BIRTH_CHARACTER2"/>
+               <bindingDependencies>BIRTH_CHARACTER2</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
@@ -517,6 +527,7 @@
                   <label>"Dagstuhl"</label>
                </options>
                <response name="BIRTH_CHARACTER3"/>
+               <bindingDependencies>BIRTH_CHARACTER3</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
@@ -546,6 +557,7 @@
                   <label>"Dagstuhl"</label>
                </options>
                <response name="BIRTH_CHARACTER4"/>
+               <bindingDependencies>BIRTH_CHARACTER4</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
@@ -575,6 +587,7 @@
                   <label>"Dagstuhl"</label>
                </options>
                <response name="BIRTH_CHARACTER5"/>
+               <bindingDependencies>BIRTH_CHARACTER5</bindingDependencies>
             </cells>
          </cells>
       </components>
@@ -623,6 +636,7 @@
                       decimals="1">
                   <unit>%</unit>
                   <response name="PERCENTAGE_EXPENSES11"/>
+                  <bindingDependencies>PERCENTAGE_EXPENSES11</bindingDependencies>
                </cells>
             </cells>
             <cells type="line">
@@ -637,6 +651,7 @@
                       decimals="1">
                   <unit>%</unit>
                   <response name="PERCENTAGE_EXPENSES21"/>
+                  <bindingDependencies>PERCENTAGE_EXPENSES21</bindingDependencies>
                </cells>
             </cells>
             <cells type="line">
@@ -655,6 +670,7 @@
                       decimals="1">
                   <unit>%</unit>
                   <response name="PERCENTAGE_EXPENSES31"/>
+                  <bindingDependencies>PERCENTAGE_EXPENSES31</bindingDependencies>
                </cells>
             </cells>
             <cells type="line">
@@ -669,6 +685,7 @@
                       decimals="1">
                   <unit>%</unit>
                   <response name="PERCENTAGE_EXPENSES41"/>
+                  <bindingDependencies>PERCENTAGE_EXPENSES41</bindingDependencies>
                </cells>
             </cells>
             <cells type="line">
@@ -683,6 +700,7 @@
                       decimals="1">
                   <unit>%</unit>
                   <response name="PERCENTAGE_EXPENSES51"/>
+                  <bindingDependencies>PERCENTAGE_EXPENSES51</bindingDependencies>
                </cells>
             </cells>
             <cells type="line">
@@ -701,6 +719,7 @@
                       decimals="1">
                   <unit>%</unit>
                   <response name="PERCENTAGE_EXPENSES61"/>
+                  <bindingDependencies>PERCENTAGE_EXPENSES61</bindingDependencies>
                </cells>
             </cells>
             <cells type="line">
@@ -715,6 +734,7 @@
                       decimals="1">
                   <unit>%</unit>
                   <response name="PERCENTAGE_EXPENSES71"/>
+                  <bindingDependencies>PERCENTAGE_EXPENSES71</bindingDependencies>
                </cells>
             </cells>
          </components>
@@ -771,9 +791,11 @@
                      <label>"Maggie"</label>
                   </options>
                   <response name="CLOWNING11"/>
+                  <bindingDependencies>CLOWNING11</bindingDependencies>
                </cells>
                <cells id="j4nw0rr6-QOP-jbgdit3o" componentType="Textarea" maxLength="255">
                   <response name="CLOWNING12"/>
+                  <bindingDependencies>CLOWNING12</bindingDependencies>
                </cells>
             </cells>
             <cells type="line">
@@ -799,9 +821,11 @@
                      <label>"Maggie"</label>
                   </options>
                   <response name="CLOWNING21"/>
+                  <bindingDependencies>CLOWNING21</bindingDependencies>
                </cells>
                <cells id="j4nw0rr6-QOP-jbgd366k" componentType="Textarea" maxLength="255">
                   <response name="CLOWNING22"/>
+                  <bindingDependencies>CLOWNING22</bindingDependencies>
                </cells>
             </cells>
             <cells type="line">
@@ -827,9 +851,11 @@
                      <label>"Maggie"</label>
                   </options>
                   <response name="CLOWNING31"/>
+                  <bindingDependencies>CLOWNING31</bindingDependencies>
                </cells>
                <cells id="j4nw0rr6-QOP-jbgdax06" componentType="Textarea" maxLength="255">
                   <response name="CLOWNING32"/>
+                  <bindingDependencies>CLOWNING32</bindingDependencies>
                </cells>
             </cells>
             <cells type="line">
@@ -855,9 +881,11 @@
                      <label>"Maggie"</label>
                   </options>
                   <response name="CLOWNING41"/>
+                  <bindingDependencies>CLOWNING41</bindingDependencies>
                </cells>
                <cells id="j4nw0rr6-QOP-jbgdfo1j" componentType="Textarea" maxLength="255">
                   <response name="CLOWNING42"/>
+                  <bindingDependencies>CLOWNING42</bindingDependencies>
                </cells>
             </cells>
          </components>
@@ -931,21 +959,27 @@
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd92mb" componentType="CheckboxBoolean">
                   <response name="TRAVEL11"/>
+                  <bindingDependencies>TRAVEL11</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdnxkt" componentType="CheckboxBoolean">
                   <response name="TRAVEL12"/>
+                  <bindingDependencies>TRAVEL12</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdcppc" componentType="CheckboxBoolean">
                   <response name="TRAVEL13"/>
+                  <bindingDependencies>TRAVEL13</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd4r2a" componentType="CheckboxBoolean">
                   <response name="TRAVEL14"/>
+                  <bindingDependencies>TRAVEL14</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd9cff" componentType="CheckboxBoolean">
                   <response name="TRAVEL15"/>
+                  <bindingDependencies>TRAVEL15</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdiva0" componentType="CheckboxBoolean">
                   <response name="TRAVEL16"/>
+                  <bindingDependencies>TRAVEL16</bindingDependencies>
                </cells>
             </cells>
             <cells type="line">
@@ -955,21 +989,27 @@
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdgsat" componentType="CheckboxBoolean">
                   <response name="TRAVEL21"/>
+                  <bindingDependencies>TRAVEL21</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd3ef5" componentType="CheckboxBoolean">
                   <response name="TRAVEL22"/>
+                  <bindingDependencies>TRAVEL22</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd4cm6" componentType="CheckboxBoolean">
                   <response name="TRAVEL23"/>
+                  <bindingDependencies>TRAVEL23</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdkfpq" componentType="CheckboxBoolean">
                   <response name="TRAVEL24"/>
+                  <bindingDependencies>TRAVEL24</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgddwsp" componentType="CheckboxBoolean">
                   <response name="TRAVEL25"/>
+                  <bindingDependencies>TRAVEL25</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd7dqf" componentType="CheckboxBoolean">
                   <response name="TRAVEL26"/>
+                  <bindingDependencies>TRAVEL26</bindingDependencies>
                </cells>
             </cells>
             <cells type="line">
@@ -979,21 +1019,27 @@
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdaxk2" componentType="CheckboxBoolean">
                   <response name="TRAVEL31"/>
+                  <bindingDependencies>TRAVEL31</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd8p1v" componentType="CheckboxBoolean">
                   <response name="TRAVEL32"/>
+                  <bindingDependencies>TRAVEL32</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdd2lo" componentType="CheckboxBoolean">
                   <response name="TRAVEL33"/>
+                  <bindingDependencies>TRAVEL33</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd7u52" componentType="CheckboxBoolean">
                   <response name="TRAVEL34"/>
+                  <bindingDependencies>TRAVEL34</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdncn8" componentType="CheckboxBoolean">
                   <response name="TRAVEL35"/>
+                  <bindingDependencies>TRAVEL35</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdnous" componentType="CheckboxBoolean">
                   <response name="TRAVEL36"/>
+                  <bindingDependencies>TRAVEL36</bindingDependencies>
                </cells>
             </cells>
             <cells type="line">
@@ -1003,21 +1049,27 @@
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd7myn" componentType="CheckboxBoolean">
                   <response name="TRAVEL41"/>
+                  <bindingDependencies>TRAVEL41</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdgm0c" componentType="CheckboxBoolean">
                   <response name="TRAVEL42"/>
+                  <bindingDependencies>TRAVEL42</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdo0ay" componentType="CheckboxBoolean">
                   <response name="TRAVEL43"/>
+                  <bindingDependencies>TRAVEL43</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdgfwl" componentType="CheckboxBoolean">
                   <response name="TRAVEL44"/>
+                  <bindingDependencies>TRAVEL44</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdnz6b" componentType="CheckboxBoolean">
                   <response name="TRAVEL45"/>
+                  <bindingDependencies>TRAVEL45</bindingDependencies>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdkfcz" componentType="CheckboxBoolean">
                   <response name="TRAVEL46"/>
+                  <bindingDependencies>TRAVEL46</bindingDependencies>
                </cells>
             </cells>
          </components>
@@ -1065,6 +1117,7 @@
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgdl5jb" componentType="Textarea" maxLength="255">
                <response name="FAVOURITE_CHARACTERS11"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS11</bindingDependencies>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgdfndq"
                    componentType="InputNumber"
@@ -1072,11 +1125,13 @@
                    max="120"
                    decimals="0">
                <response name="FAVOURITE_CHARACTERS12"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS12</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgd8lwo" componentType="Textarea" maxLength="255">
                <response name="FAVOURITE_CHARACTERS21"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS21</bindingDependencies>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgd7osi"
                    componentType="InputNumber"
@@ -1084,11 +1139,13 @@
                    max="120"
                    decimals="0">
                <response name="FAVOURITE_CHARACTERS22"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS22</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgdbfag" componentType="Textarea" maxLength="255">
                <response name="FAVOURITE_CHARACTERS31"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS31</bindingDependencies>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgd7bnw"
                    componentType="InputNumber"
@@ -1096,11 +1153,13 @@
                    max="120"
                    decimals="0">
                <response name="FAVOURITE_CHARACTERS32"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS32</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgdlgja" componentType="Textarea" maxLength="255">
                <response name="FAVOURITE_CHARACTERS41"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS41</bindingDependencies>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgd9k71"
                    componentType="InputNumber"
@@ -1108,11 +1167,13 @@
                    max="120"
                    decimals="0">
                <response name="FAVOURITE_CHARACTERS42"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS42</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgd745y" componentType="Textarea" maxLength="255">
                <response name="FAVOURITE_CHARACTERS51"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS51</bindingDependencies>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgdimks"
                    componentType="InputNumber"
@@ -1120,11 +1181,13 @@
                    max="120"
                    decimals="0">
                <response name="FAVOURITE_CHARACTERS52"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS52</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgdjkts" componentType="Textarea" maxLength="255">
                <response name="FAVOURITE_CHARACTERS61"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS61</bindingDependencies>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgdjquz"
                    componentType="InputNumber"
@@ -1132,11 +1195,13 @@
                    max="120"
                    decimals="0">
                <response name="FAVOURITE_CHARACTERS62"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS62</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgdcax7" componentType="Textarea" maxLength="255">
                <response name="FAVOURITE_CHARACTERS71"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS71</bindingDependencies>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgdd2w3"
                    componentType="InputNumber"
@@ -1144,11 +1209,13 @@
                    max="120"
                    decimals="0">
                <response name="FAVOURITE_CHARACTERS72"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS72</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgdjye1" componentType="Textarea" maxLength="255">
                <response name="FAVOURITE_CHARACTERS81"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS81</bindingDependencies>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgdkosc"
                    componentType="InputNumber"
@@ -1156,11 +1223,13 @@
                    max="120"
                    decimals="0">
                <response name="FAVOURITE_CHARACTERS82"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS82</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgd5jet" componentType="Textarea" maxLength="255">
                <response name="FAVOURITE_CHARACTERS91"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS91</bindingDependencies>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgdk0x4"
                    componentType="InputNumber"
@@ -1168,11 +1237,13 @@
                    max="120"
                    decimals="0">
                <response name="FAVOURITE_CHARACTERS92"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS92</bindingDependencies>
             </cells>
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgdjw90" componentType="Textarea" maxLength="255">
                <response name="FAVOURITE_CHARACTERS101"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS101</bindingDependencies>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgd2wgf"
                    componentType="InputNumber"
@@ -1180,6 +1251,7 @@
                    max="120"
                    decimals="0">
                <response name="FAVOURITE_CHARACTERS102"/>
+               <bindingDependencies>FAVOURITE_CHARACTERS102</bindingDependencies>
             </cells>
          </cells>
       </components>
@@ -1198,7 +1270,7 @@
          <response name="SURVEY_COMMENT"/>
       </components>
    </components>
-    <components xsi:type="Sequence" componentType="Sequence" id="COMMENT-SEQ">
+   <components xsi:type="Sequence" componentType="Sequence" id="COMMENT-SEQ">
       <label>"Commentaire"</label>
       <conditionFilter>"normal"</conditionFilter>
       <components xsi:type="Textarea"

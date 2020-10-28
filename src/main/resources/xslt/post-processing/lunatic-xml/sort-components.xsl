@@ -90,6 +90,7 @@
             <xsl:variable name="allDependencies" as="xs:string*">
                 <xsl:copy-of select="$dependencies"/>
                 <xsl:copy-of select="$responseDependencies"/>
+                <xsl:copy-of select="$responseDependencies[1]"/>
             </xsl:variable>
             <xsl:for-each select="distinct-values($allDependencies)">                
                 <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
@@ -116,7 +117,7 @@
             <xsl:for-each select="distinct-values($allDependencies)">                
                 <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
             </xsl:for-each>
-            <xsl:apply-templates select="*[not(self::h:label or self::h:declarations or self::h:conditionFilter)]"/>
+            <xsl:apply-templates select="*[not(self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter)]"/>
         </components>
     </xsl:template>
     <xsl:template match="h:components[@xsi:type='Table']">
@@ -227,8 +228,19 @@
 
     <xsl:template match="h:cells">
         <cells>
-            <xsl:copy-of select="@*"/>
+            <xsl:copy-of select="@*"/>            
+            <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
+            <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
+            <xsl:variable name="allDependencies" as="xs:string*">
+                <xsl:copy-of select="$dependencies"/>
+                <xsl:copy-of select="$responseDependencies"/>
+            </xsl:variable>
             <xsl:apply-templates select="*[not(self::h:variables)]"/>
+            <xsl:if test="string-length(@type)=0">
+                <xsl:for-each select="distinct-values($allDependencies)">                
+                    <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
+                </xsl:for-each>
+            </xsl:if>            
         </cells>
     </xsl:template>
 
