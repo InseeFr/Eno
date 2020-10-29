@@ -536,17 +536,14 @@
     <xsl:function name="enolunatic:is-generating-loop" as="xs:boolean">
         <xsl:param name="context" as="item()"/>
         <xsl:variable name="isLinkedLoop" select="enoddi:is-linked-loop($context)" as="xs:boolean"/>
-        <xsl:variable name="nbLinkedContainers">
-            <xsl:variable name="linkedContainers" select="enoddi:get-linked-containers($context)"/>
-            <xsl:value-of select="count($linkedContainers)"/>
-        </xsl:variable>
-        <xsl:value-of select="not($isLinkedLoop) and $nbLinkedContainers &gt; 1"/>
+        <xsl:variable name="linkedContainers" select="enoddi:get-linked-containers($context)"/>
+        <xsl:value-of select="not($isLinkedLoop) and count($linkedContainers) &gt; 1 and enoddi:get-id($context)=enoddi:get-id($linkedContainers[1])"/>
     </xsl:function>
     
     <xsl:function name="enolunatic:get-loop-generator-id">
         <xsl:param name="context" as="item()"/>
         <xsl:variable name="linkedContainers" select="enoddi:get-linked-containers($context)" as="item()*"/>
-        <xsl:value-of select="enolunatic:get-name($linkedContainers[1])"/>
+        <xsl:value-of select="enoddi:get-id($linkedContainers[1])"/>
     </xsl:function>
     
 </xsl:stylesheet>
