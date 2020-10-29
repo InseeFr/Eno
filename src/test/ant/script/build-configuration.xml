@@ -8,6 +8,7 @@
     <!-- Getting the path to the folders (that will be passed to xsl files) -->
     <dirname property="root-folder" file="${root}/dummy"/>
     <dirname property="temp-folder" file="${temp.home}/dummy"/>
+    <dirname property="xslt-folder" file="${xslt.home}/dummy"/>
     <dirname property="xml-folder" file="${xml.home}/dummy"/>
     <dirname property="lang-folder" file="${languages.home}/dummy"/>
     <dirname property="config-folder" file="${config.home}/dummy"/>
