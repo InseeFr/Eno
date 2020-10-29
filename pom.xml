@@ -127,7 +127,7 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
 			<version>${log4j-slf4j.version}</version>
-			<scope>test</scope>
+			<scope>compile</scope>
 		</dependency>
 
 		<!-- Jaxb -->
@@ -261,7 +261,12 @@
 									<key>dest</key>
 									<value>${project.basedir}/src/main/resources</value>
 								</property>
+								<property>
+									<key>log4j2.level</key>
+									<value>DEBUG</value>
+								</property>
 							</systemProperties>
+
 						</configuration>
 					</execution>
 				</executions>
