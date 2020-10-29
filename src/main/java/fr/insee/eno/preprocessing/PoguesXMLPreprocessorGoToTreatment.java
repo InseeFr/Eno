@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
@@ -23,6 +24,8 @@ public class PoguesXMLPreprocessorGoToTreatment implements Preprocessor {
 
 	private XslTransformation saxonService = new XslTransformation();
 
+	private static final String styleSheetPath = Constants.UTIL_POGUES_XML_GOTO_ITE_XSL;
+
 	@Override
 	public File process(File inputFile, byte[] parametersFile, String surveyName, String in2out) throws Exception {
 
@@ -34,18 +37,21 @@ public class PoguesXMLPreprocessorGoToTreatment implements Preprocessor {
 				+ Constants.TEMP_EXTENSION;
 
 		logger.debug("GOTO 2 ITE : -Input : " + inputFile + " -Output : " + outputPreprocessGOT2ITE + " -Stylesheet : "
-				+ Constants.UTIL_POGUES_XML_GOTO_ITE_XSL + " -Parameters : "
+				+ styleSheetPath + " -Parameters : "
 				+ (parametersFile == null ? "Default parameters" : "Provided parameters"));
 
 		InputStream isInputFile = FileUtils.openInputStream(inputFile);
 		InputStream isUTIL_POGUES_XML_GOTO_ITE_XSL = Constants
-				.getInputStreamFromPath(Constants.UTIL_POGUES_XML_GOTO_ITE_XSL);
+				.getInputStreamFromPath(styleSheetPath);
 		OutputStream osGOTO2ITE = FileUtils.openOutputStream(new File(outputPreprocessGOT2ITE));
 
 		try {
 			saxonService.transform(isInputFile, isUTIL_POGUES_XML_GOTO_ITE_XSL, osGOTO2ITE);
 		}catch(Exception e) {
-			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
+					toString(),
+					e.getMessage(),
+					Utils.getErrorLocation(styleSheetPath,e));
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}

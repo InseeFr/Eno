@@ -19,6 +19,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 
+import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +36,8 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 	
 	private XslTransformation saxonService = new XslTransformation();
 
+	private static final String styleSheetPath = Constants.MERGE_PARAMETERS_XSL;
+
 
 	@Override
 	public ByteArrayOutputStream mergeParameters(ENOParameters enoParameters) throws JAXBException, IllegalArgumentException, IllegalAccessException, IOException   {
@@ -47,7 +50,7 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		jaxbMarshaller.marshal(enoParameters, tempByteArrayOutputStream);
 		
-		InputStream PARAM_XSL = Constants.getInputStreamFromPath(Constants.MERGE_PARAMETERS_XSL);
+		InputStream PARAM_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 		InputStream inputStream = new ByteArrayInputStream(tempByteArrayOutputStream.toByteArray());
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		
@@ -70,14 +73,16 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 	public File mergeParameters(File enoParameters) throws JAXBException, IllegalArgumentException, IllegalAccessException, IOException   {
 		File finalParam = Constants.TEMP_FILE_PARAMS("new-params.xml");
 		
-		InputStream PARAM_XSL = Constants.getInputStreamFromPath(Constants.MERGE_PARAMETERS_XSL);
+		InputStream PARAM_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 		InputStream inputStream = FileUtils.openInputStream(enoParameters);
 		OutputStream outputStream = FileUtils.openOutputStream(finalParam);
 		
 		try {
 			saxonService.mergeEnoParameters(inputStream, outputStream, PARAM_XSL);
 		}catch(Exception e) {
-			String errorMessage = "An error was occured during the valorisation of parameters. "+e.getMessage();
+			String errorMessage = String.format("An error was occured during the valorisation of parameters. %s : %s",
+					e.getMessage(),
+					Utils.getErrorLocation(styleSheetPath,e));
 			LOGGER.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}

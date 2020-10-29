@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,15 +25,17 @@ public class DDISplittingPreprocessor  {
 
 	private XslTransformation saxonService = new XslTransformation();
 
+	private static final String styleSheetPath = Constants.UTIL_DDI_SPLITTING_XSL;
+
 	public List<File> splitDDI(File inputFile, String survey) throws Exception {
 		LOGGER.info("DDI splitting preprocessing Target : START");
 
 		String sUB_TEMP_FOLDER = Constants.sUB_TEMP_FOLDER(survey);
 		// ----- Dereferencing
 		LOGGER.debug("Dereferencing : -Input : " + inputFile + " -Output : " + Constants.tEMP_NULL_TMP(sUB_TEMP_FOLDER)
-		+ " -Stylesheet : " + Constants.UTIL_DDI_SPLITTING_XSL + " -Parameters : " + sUB_TEMP_FOLDER);
+		+ " -Stylesheet : " + styleSheetPath + " -Parameters : " + sUB_TEMP_FOLDER);
 
-		InputStream isDDI_DEREFERENCING_XSL = Constants.getInputStreamFromPath(Constants.UTIL_DDI_SPLITTING_XSL);
+		InputStream isDDI_DEREFERENCING_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 		InputStream isInputFile = FileUtils.openInputStream(inputFile);
 		OutputStream osTEMP_NULL_TMP = FileUtils.openOutputStream(Constants.tEMP_NULL_TMP(sUB_TEMP_FOLDER));
 		
@@ -40,7 +43,12 @@ public class DDISplittingPreprocessor  {
 			saxonService.transformDereferencing(isInputFile, isDDI_DEREFERENCING_XSL, osTEMP_NULL_TMP,
 					Constants.SUB_TEMP_FOLDER_FILE(survey));
 		}catch(Exception e) {
-			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
+					toString(),
+					e.getMessage(),
+					Utils.getErrorLocation(styleSheetPath,e));
+			LOGGER.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
 		}
 
 		isInputFile.close();

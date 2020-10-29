@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
@@ -23,15 +24,18 @@ public class DDIMarkdown2XhtmlPostprocessor implements Postprocessor {
 
 	private XslTransformation saxonService = new XslTransformation();
 
+	private static final String styleSheetPath = Constants.UTIL_DDI_MW2XHTML_XSL;
+
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
+
 		logger.info("DDIMarkdown2XhtmlPostprocessor Target : START");
 		String mw2xhtmlOutput = FilenameUtils.removeExtension(input.getPath()) + Constants.MW_EXTENSION;
 		// ----- mw2xhtml
 		logger.debug("Markdown to XHTML : -Input : " + input + " -Output : " + mw2xhtmlOutput + " -Stylesheet : "
 				+ Constants.UTIL_DDI_MW2XHTML_XSL + " -Parameters : " + Constants.sUB_TEMP_FOLDER(survey));
 
-		InputStream isDDI_MW2XHTML_XSL = Constants.getInputStreamFromPath(Constants.UTIL_DDI_MW2XHTML_XSL);
+		InputStream isDDI_MW2XHTML_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 		InputStream isInputFile = FileUtils.openInputStream(input);
 
 		OutputStream osTEMP_NULL_TMP = FileUtils.openOutputStream(new File(mw2xhtmlOutput));
@@ -40,7 +44,11 @@ public class DDIMarkdown2XhtmlPostprocessor implements Postprocessor {
 			saxonService.transformMw2XHTML(isInputFile, isDDI_MW2XHTML_XSL, osTEMP_NULL_TMP,
 					Constants.SUB_TEMP_FOLDER_FILE(survey));
 		}catch(Exception e) {
-			throw new EnoGenerationException("An error was occured during the Markdown2Xhtml transformation. "+e.getMessage());
+			String errorMessage = String.format("An error was occured during the Markdown2Xhtml transformation. %s : %s",
+					e.getMessage(),
+					Utils.getErrorLocation(styleSheetPath,e));
+			logger.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
 		}
 		isInputFile.close();
 		isDDI_MW2XHTML_XSL.close();

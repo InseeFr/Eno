@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
@@ -23,6 +24,8 @@ public class DDICleaningPreprocessor implements Preprocessor {
 
 	private XslTransformation saxonService = new XslTransformation();
 
+	private static final String styleSheetPath = Constants.UTIL_DDI_CLEANING_XSL;
+
 	@Override
 	public File process(File inputFile, byte[] parametersFile, String survey, String in2out) throws Exception {
 		logger.info("DDIPreprocessing Target : START");
@@ -33,16 +36,19 @@ public class DDICleaningPreprocessor implements Preprocessor {
 
 		logger.debug("Cleaned output file to be created : " + cleaningOutput);
 		logger.debug("Cleaning : -Input : " + cleaningInput + " -Output : " + cleaningOutput + " -Stylesheet : "
-				+ Constants.UTIL_DDI_CLEANING_XSL);
+				+ styleSheetPath);
 
 		InputStream isCleaningIn = FileUtils.openInputStream(new File(cleaningInput));
 		OutputStream osCleaning = FileUtils.openOutputStream(new File(cleaningOutput));
-		InputStream isUTIL_DDI_CLEANING_XSL = Constants.getInputStreamFromPath(Constants.UTIL_DDI_CLEANING_XSL);
+		InputStream isUTIL_DDI_CLEANING_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 
 		try {
 			saxonService.transformCleaning(isCleaningIn, isUTIL_DDI_CLEANING_XSL, osCleaning, in2out);
 		}catch(Exception e) {
-			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
+					toString(),
+					e.getMessage(),
+					Utils.getErrorLocation(styleSheetPath,e));
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}

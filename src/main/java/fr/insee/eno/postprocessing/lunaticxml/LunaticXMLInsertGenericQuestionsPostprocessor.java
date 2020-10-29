@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,8 @@ public class LunaticXMLInsertGenericQuestionsPostprocessor implements Postproces
 
 	private XslTransformation saxonService = new XslTransformation();
 
+	private static final String styleSheetPath = Constants.TRANSFORMATIONS_INSERT_GENERIC_QUESTIONS_LUNATIC_XML;
+
 	@Override
 	public File process(File input, byte[] parameters, String surveyName) throws Exception {
 
@@ -32,11 +35,14 @@ public class LunaticXMLInsertGenericQuestionsPostprocessor implements Postproces
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForJSFile);
 
-		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_INSERT_GENERIC_QUESTIONS_LUNATIC_XML);
+		InputStream JS_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 		try {
 			saxonService.transformLunaticXMLToLunaticXMLSimplePost(inputStream,outputStream, JS_XSL,parameters);
 		}catch(Exception e) {
-			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
+					toString(),
+					e.getMessage(),
+					Utils.getErrorLocation(styleSheetPath,e));
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}

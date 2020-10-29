@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +53,10 @@ public class FOSpecificTreatmentPostprocessor implements Postprocessor {
 			try {
 				saxonService.transformWithPDFSpecificTreatment(inputStream, outputStream, specificTreatmentXslIS, parametersFile);
 			}catch(Exception e) {
-				String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+				String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
+						toString(),
+						e.getMessage(),
+						Utils.getErrorLocation("specific file passed in params",e));
 				logger.error(errorMessage);
 				throw new EnoGenerationException(errorMessage);
 			}
