@@ -376,16 +376,20 @@
         <xsl:for-each select="//pogues:Loop">
             <xsl:variable name="loop-id" select="@id"/>
             <xsl:variable name="loop-name" select="pogues:Name"/>
-            <xsl:variable name="loop-position" select="$child-tree//poguesGoto:idElement[@id=$loop-id]/number(@position)"/>
-            <xsl:variable name="after-loop-position-text" select="$child-position-list//poguesGoto:idElement[@id=$loop-id]/following::poguesGoto:idElement[1]/@position"/>
+            <xsl:variable name="loop-first-final-descendant-position" select="$child-tree//poguesGoto:idElement[@id=$loop-id]//poguesGoto:idElement[not(descendant::poguesGoto:idElement)][1]/number(@position)"/>
+            <xsl:variable name="after-loop-position-text" select="$child-position-list//poguesGoto:idElement[@id=$loop-id]/following::poguesGoto:idElement[not(descendant::poguesGoto:idElement)][1]/@position"/>
             <xsl:variable name="after-loop-position" select="if ($after-loop-position-text = '') then number($last) else number($after-loop-position-text)"/>
+            <xsl:variable name="after-loop-first-final-descendant-position" select="if ($after-loop-position-text = '') then number($last)
+                else $child-position-list//poguesGoto:idElement[@position=$after-loop-position-text]/descendant-or-self::poguesGoto:idElement[not(descendant::poguesGoto:idElement)][1]/number(@position)"/>
             <xsl:for-each select="$list_goto//poguesGoto:gotoValue">
-                <xsl:if test="(poguesGoto:From/number(@position) &gt;= $loop-position
+                <!-- From inside the loop and To an element after the next element : GoTo the first next element means to the end of the loop  -->
+                <!-- From before the loop and To an element inside the loop -->
+                <xsl:if test="(poguesGoto:From/number(@position) &gt;= $loop-first-final-descendant-position
                            and poguesGoto:From/number(@position) &lt; $after-loop-position
-                           and poguesGoto:To/number(@position) &gt;= $after-loop-position)
-                       or (poguesGoto:From/number(@position) &lt; $loop-position
-                       and poguesGoto:To/number(@position) &gt;= $loop-position
-                       and poguesGoto:To/number(@position) &lt; $after-loop-position)">
+                           and poguesGoto:To/number(@position) &gt; $after-loop-position)
+                       or (poguesGoto:From/number(@position) &lt; $loop-first-final-descendant-position
+                           and poguesGoto:To/number(@position) &gt; $loop-first-final-descendant-position
+                           and poguesGoto:To/number(@position) &lt; $after-loop-position)">
                     <xsl:variable name="current-id" select="@id"/>
                     <xsl:message terminate="yes">
                         <xsl:value-of select="'Problème de chevauchement entre '"/>
