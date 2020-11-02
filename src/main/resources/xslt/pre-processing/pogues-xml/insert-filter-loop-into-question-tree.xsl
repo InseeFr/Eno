@@ -228,6 +228,7 @@
         </xsl:variable>
 
         <xsl:choose>
+            <!-- Neither filter nor loop -->
             <xsl:when test="not($chosen-next-filter//poguesFilterLoop:FilterLoop)">
                 <xsl:choose>
                     <xsl:when test="descendant::pogues:Child">
@@ -251,47 +252,29 @@
                 </xsl:if>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:choose>
-                    <xsl:when test="not($chosen-next-filter//poguesFilterLoop:FilterLoop[@type='loop'])">
-                        <xsl:element name="IfThenElse" namespace="http://xml.insee.fr/schema/applis/pogues">
-                            <xsl:attribute name="id" select="$chosen-next-filter//poguesFilterLoop:FilterLoop/@id"/>
-                            <xsl:copy-of select="/pogues:Questionnaire//*[@id = $chosen-next-filter//poguesFilterLoop:FilterLoop/@id]/*[local-name()='Expression' or local-name()='Description']"/>
-                            <xsl:element name="IfTrue" namespace="http://xml.insee.fr/schema/applis/pogues">
+                <!-- Allow filter of filter of loop of loop -->
+                <xsl:call-template name="include-IfThenElse">
+                    <xsl:with-param name="filters" as="node()">
+                        <poguesFilterLoop:FilterList>
+                            <xsl:copy-of select="$chosen-next-filter//poguesFilterLoop:FilterLoop[@type='filter']"/>
+                        </poguesFilterLoop:FilterList>
+                    </xsl:with-param>
+                    <xsl:with-param name="content" as="node()">
+                        <xsl:call-template name="include-Loop">
+                            <xsl:with-param name="loops" as="node()">
+                                <poguesFilterLoop:LoopList>
+                                    <xsl:copy-of select="$chosen-next-filter//poguesFilterLoop:FilterLoop[@type='loop']"/>
+                                </poguesFilterLoop:LoopList>                                
+                            </xsl:with-param>
+                            <xsl:with-param name="content" as="node()">
                                 <xsl:apply-templates select="." mode="first-child-next-brother">
-                                    <xsl:with-param name="stop-position" select="$chosen-next-filter//poguesFilterLoop:To/@id"/>
-                                    <xsl:with-param name="current-filter" select="$chosen-next-filter//poguesFilterLoop:FilterLoop/@id"/>
-                                </xsl:apply-templates>
-                            </xsl:element>
-                        </xsl:element>
-                    </xsl:when>
-                    <xsl:when test="not($chosen-next-filter//poguesFilterLoop:FilterLoop[@type='filter'])">
-                        <xsl:element name="Loop" namespace="http://xml.insee.fr/schema/applis/pogues">
-                            <xsl:attribute name="id" select="$chosen-next-filter//poguesFilterLoop:FilterLoop/@id"/>
-                            <xsl:copy-of select="/pogues:Questionnaire/pogues:Iterations/pogues:Iteration[@id = $chosen-next-filter//poguesFilterLoop:FilterLoop/@id]/*[not(local-name()='MemberReference')]"/>
-                            <xsl:apply-templates select="." mode="first-child-next-brother">
-                                <xsl:with-param name="stop-position" select="$chosen-next-filter//poguesFilterLoop:To/@id"/>
-                                <xsl:with-param name="current-filter" select="$chosen-next-filter//poguesFilterLoop:FilterLoop/@id"/>
-                            </xsl:apply-templates>
-                        </xsl:element>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <!-- both -->
-                        <xsl:element name="IfThenElse" namespace="http://xml.insee.fr/schema/applis/pogues">
-                            <xsl:attribute name="id" select="$chosen-next-filter//poguesFilterLoop:FilterLoop[@type='filter']/@id"/>
-                            <xsl:copy-of select="/pogues:Questionnaire//*[@id = $chosen-next-filter//poguesFilterLoop:FilterLoop[@type='filter']/@id]/*[local-name()='Expression' or local-name()='Description']"/>
-                            <xsl:element name="IfTrue" namespace="http://xml.insee.fr/schema/applis/pogues">
-                                <xsl:element name="Loop" namespace="http://xml.insee.fr/schema/applis/pogues">
-                                    <xsl:attribute name="id" select="$chosen-next-filter//poguesFilterLoop:FilterLoop[@type='loop']/@id"/>
-                                    <xsl:copy-of select="/pogues:Questionnaire/pogues:Iterations/pogues:Iteration[@id = $chosen-next-filter//poguesFilterLoop:FilterLoop[@type='loop']/@id]/*[not(local-name()='MemberReference')]"/>
-                                    <xsl:apply-templates select="." mode="first-child-next-brother">
-                                        <xsl:with-param name="stop-position" select="$chosen-next-filter//poguesFilterLoop:To[1]/@id"/>
-                                        <xsl:with-param name="current-filter" select="$chosen-next-filter//poguesFilterLoop:FilterLoop[1]/@id"/>
-                                    </xsl:apply-templates>
-                                </xsl:element>
-                            </xsl:element>
-                        </xsl:element>
-                    </xsl:otherwise>
-                </xsl:choose>
+                                    <xsl:with-param name="stop-position" select="$chosen-next-filter//poguesFilterLoop:To[1]/@id"/>
+                                    <xsl:with-param name="current-filter" select="$chosen-next-filter//poguesFilterLoop:FilterLoop[1]/@id"/>
+                                </xsl:apply-templates>                                
+                            </xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:with-param>
+                </xsl:call-template>
                 <xsl:if test="$stop-position != $chosen-next-filter//poguesFilterLoop:To[1]/@id">
                     <xsl:choose>
                         <xsl:when test="$chosen-next-filter//poguesFilterLoop:To[1]/@id = $current-id">
@@ -312,4 +295,61 @@
         </xsl:choose>
     </xsl:template>
 
+    <xsl:template name="include-IfThenElse">
+        <xsl:param name="content" as="node()"/>
+        <xsl:param name="filters" as="node()"/>
+        
+        <xsl:choose>
+            <xsl:when test="$filters//poguesFilterLoop:FilterLoop">
+                <xsl:call-template name="include-IfThenElse">
+                    <xsl:with-param name="content" as="node()">
+                        <xsl:element name="IfThenElse" namespace="http://xml.insee.fr/schema/applis/pogues">
+                            <xsl:attribute name="id" select="$filters//poguesFilterLoop:FilterLoop[1]/@id"/>
+                            <xsl:copy-of select="/pogues:Questionnaire//*[@id = $filters//poguesFilterLoop:FilterLoop[1]/@id]/*[local-name()='Expression' or local-name()='Description']"/>
+                            <xsl:element name="IfTrue" namespace="http://xml.insee.fr/schema/applis/pogues">
+                                <xsl:copy-of select="$content"/>
+                            </xsl:element>
+                        </xsl:element>
+                    </xsl:with-param>
+                    <xsl:with-param name="filters" as="node()">
+                        <poguesFilterLoop:FilterList>
+                            <xsl:copy-of select="$filters//poguesFilterLoop:FilterLoop[position() != 1]"/>
+                        </poguesFilterLoop:FilterList>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="$content"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="include-Loop">
+        <xsl:param name="content" as="node()"/>
+        <xsl:param name="loops" as="node()"/>
+        
+        <xsl:choose>
+            <xsl:when test="$loops//poguesFilterLoop:FilterLoop">
+                <xsl:variable name="chosen-loop" select="$loops//poguesFilterLoop:FilterLoop[1]/@id"/>
+                <xsl:call-template name="include-Loop">
+                    <xsl:with-param name="content" as="node()">
+                        <xsl:element name="Loop" namespace="http://xml.insee.fr/schema/applis/pogues">
+                            <xsl:attribute name="id" select="$chosen-loop"/>
+                            <xsl:copy-of select="/pogues:Questionnaire/pogues:Iterations/pogues:Iteration[@id = $chosen-loop]/*[not(local-name()='MemberReference')]"/>
+                            <xsl:copy-of select="$content"/>
+                        </xsl:element>
+                    </xsl:with-param>
+                    <xsl:with-param name="loops" as="node()">
+                        <poguesFilterLoop:LoopList>
+                            <xsl:copy-of select="$loops//poguesFilterLoop:FilterLoop[@id != $chosen-loop]"/>
+                        </poguesFilterLoop:LoopList>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="$content"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
 </xsl:stylesheet>
