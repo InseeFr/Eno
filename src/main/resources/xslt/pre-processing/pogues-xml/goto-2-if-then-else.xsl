@@ -123,8 +123,7 @@
                     <poguesGoto:To id="{$child-tree//poguesGoto:idElement[@id = $official-To]
                                                                          /ancestor-or-self::poguesGoto:idElement[preceding-sibling::poguesGoto:idElement][1]/@id}"
                              position="{$child-tree//poguesGoto:idElement[@id = $official-To]
-                                                                         /ancestor-or-self::poguesGoto:idElement[preceding-sibling::poguesGoto:idElement][1]/@position}">
-                    </poguesGoto:To>
+                                                                         /ancestor-or-self::poguesGoto:idElement[preceding-sibling::poguesGoto:idElement][1]/@position}"/>
                     <xsl:for-each select="ancestor::pogues:IfThenElse">
                         <poguesGoto:QuestionFilter id="{@id}"/>
                     </xsl:for-each>
@@ -245,19 +244,12 @@
                                 <xsl:for-each select="$overlapping-goto/poguesGoto:gotoValue">
                                     <poguesGoto:gotoValue flowid="{@flowid}">
                                         <!-- New expression : not(Goto2's) OR one of the question filters : each filter that is no longer active or not(not(Goto1's)) -->
-                                        <!-- TODO : recursive calculation -->
                                         <poguesGoto:Expression>
                                             <xsl:value-of select="$initial-condition"/>
                                             <xsl:call-template name="get-split-goto-question-condition">
                                                 <xsl:with-param name="from" select="number($initial-from/@position)"/>
                                                 <xsl:with-param name="position" select="number(poguesGoto:To/@position)"/>
                                             </xsl:call-template>
-                                            <!-- former version -->
-                                            <!--<xsl:value-of select="concat('(',$initial-condition,') or not (')"/>
-                                            <xsl:for-each select="preceding::poguesGoto:gotoValue">
-                                                <xsl:value-of select="concat('(',poguesGoto:Expression,') and ')"/>
-                                            </xsl:for-each>
-                                            <xsl:value-of select="concat('(',poguesGoto:Expression,'))')"/>-->
                                         </poguesGoto:Expression>
                                         <!-- When a Goto stops inside a Child that is overlapped by another, the overlap must include the Child's label -->
                                         <!-- The point where to start the split is replaced by 
