@@ -45,6 +45,7 @@
             <xs:enumeration value="ddi-cleaning"/>
             <xs:enumeration value="ddi-titling"/>
             
+            <xs:enumeration value="pogues-xml-insert-filter-loop-into-question-tree"/>            
             <xs:enumeration value="pogues-xml-goto-2-ite"/>
             <xs:enumeration value="pogues-xml-suppression-goto"/>
             <xs:enumeration value="pogues-xml-tweak-to-merge-equivalent-ite"/>
