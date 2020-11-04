@@ -252,7 +252,7 @@
 				<version>1.2.1</version>
 				<executions>
 					<execution>
-						<phase>package</phase>
+						<phase>process-classes</phase>
 						<goals>
 							<goal>java</goal>
 						</goals>
