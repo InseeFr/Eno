@@ -451,16 +451,20 @@
                                     </xsl:call-template>
                                 </xsl:for-each>
                             </xsl:when>
-                            <xsl:when test="contains($text,concat($current-group,'-position'))">
-                                <xsl:for-each select="tokenize($text,concat($current-group,'-position'))">
-                                    <xsl:if test="not(position()=1)">
-                                        <xsl:value-of select="concat($current-group,'-position')"/>
-                                    </xsl:if>
-                                    <xsl:call-template name="replace-element">
-                                        <xsl:with-param name="position" select="$position"/>
-                                        <xsl:with-param name="text" select="current()"/>
-                                    </xsl:call-template>
-                                </xsl:for-each>
+                            <xsl:when test="matches($text,concat($current-group,'(_\d+)?-position'))">
+                                <xsl:analyze-string select="$text" regex="^(.*){$current-group}(_\d+)?-position(.*)$">
+                                    <xsl:matching-substring>
+                                        <xsl:call-template name="replace-element">
+                                            <xsl:with-param name="position" select="$position"/>
+                                            <xsl:with-param name="text" select="regex-group(1)"/>
+                                        </xsl:call-template>
+                                        <xsl:value-of select="concat($current-group,regex-group(2),'-position')"/>
+                                        <xsl:call-template name="replace-element">
+                                            <xsl:with-param name="position" select="$position"/>
+                                            <xsl:with-param name="text" select="regex-group(3)"/>
+                                        </xsl:call-template>
+                                    </xsl:matching-substring>
+                                </xsl:analyze-string>
                             </xsl:when>
                             <xsl:when test="contains($text,concat($current-group,'-AddLine'))">
                                 <xsl:for-each select="tokenize($text,concat($current-group,'-AddLine'))">

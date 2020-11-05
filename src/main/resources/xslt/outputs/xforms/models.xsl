@@ -3207,6 +3207,10 @@
                         <xsl:when test="ends-with($conditioning-variable,'-position') and substring-before($conditioning-variable,'-position') = $list-of-groups//Group/@name">
                             <xsl:value-of select="concat('string($',$conditioning-variable,')')"/>
                         </xsl:when>
+                        <xsl:when test="ends-with($conditioning-variable,'-position') and contains($conditioning-variable,'_')  and substring-before($conditioning-variable,'_') = $list-of-groups//Group/@name
+                            and string(number(substring-after(substring-before($conditioning-variable,'-position'),'_'))) != 'NaN'">
+                            <xsl:value-of select="concat('string($',$conditioning-variable,')')"/>
+                        </xsl:when>
                         <xsl:when test="enoxforms:get-conditioning-variable-formula($source-context,$conditioning-variable) != ''">
                             <xsl:value-of select="'string('"/>
                             <xsl:call-template name="replaceVariablesInFormula">
