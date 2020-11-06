@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8"/>
@@ -24,61 +24,72 @@
 			<td>Heïdi Koumarianos</td>
 			<td>Creation</td>
         </tr>
+		<tr>
+			<td>0.2</td>
+			<td>21/10/2020</td>
+			<td>Anne Husseini-Skalitz</td>
+			<td>Update</td>
+        </tr>
     </table>
     <p>Status: work in progress</p>
 
-    <h1 id="general-overview">Contents</h1>
+    <h2 id="general-overview">Contents</h2>
 
 	<ul>
 		<li><p>Offer of services</p></li>
 		<li><p>Objectives: standardization, industrialization, reuse</p></li>
+		<li><p>Roadmap</p></li>
 		<li><p>How to get it?</p></li>
 		<li><p>How to use it?</p></li>
 		<li><p>Find more about it</p></li>
 	</ul>
 
-	<h1>Offer of services</h1>
+	<h2>Offer of services</h2>
 
-	<h2>Introduction</h2>
+	<h3>Introduction</h3>
 
-    <p>Eno is a tool that generates survey questionnaires starting from their formal description, i.e. from metadata describing the questionnaire. Eno is used by Insee since 2015, to produce web questionnaires for business surveys, from their description in <a href="http://ddialliance.org/">DDI</a> 3.2. Nearly 15 surveys are already using Eno for their web questionnaires.</p>
-	<p>Due to its modular design, Eno can create questionnaires in different formats from the same DDI description. Currently, Eno generates XForms web questionnaires that can be executed on <a href="http://www.orbeon.com/">Orbeon Forms Runner</a>. PDF questionnaires is under development.</p>
+	<p>Eno is a tool that generates survey questionnaires starting from their formal description in <a href="http://ddialliance.org/">DDI</a>. It automates the production of “collection instruments” (paper or web forms, collection modules for surveyors, etc.) based on a formal and abstract description of the questionnaire as standardised metadata. These models are then used to produce the collection media, in different modes, within production collection infrastructures. Eno is used by Insee since 2015 : more than 30 business surveys are using Eno for their web and paper questionnaires, and the offer for household surveys is growing.</p>
+	
+    <h3>A metadata driven tool</h3>
+	<p>The use of standard description in DDI provides and enforces structured information (and consequently leads to well structured questionnaire). This choice of DDI as a modelling format for questionnaire specification was motivated by :
+	- A strong need for a precise modelisation of the questionnaire in order to be able to render its content and logical flow in different collection modes (i.e a semantically rich model) 
+	- DDI being an open standard
+	- DDI being serialised in XML, and thus easily processable.</p>
+	<p>Since 2015, Eno takes as input the formal description of the questionnaire complying with the DDI standard and executes a completely automated chain of transformations to produce the current survey questionnaire (web and paper questionnaires).</p>
 
-	<h2>Eno produces survey questionnaires</h2>
-
-	<p>The use of standard description in DDI provides structured information and consequently well structured questionnaire.</p>
+	<h3>Eno produces survey questionnaires</h2>
 	<p>DDI description enables to identify clearly the different components of a questionnaire, such as sequences of questions, questions, instructions, different formats of response.</p>
 	<p>Common used response formats are available : simple text, number, date, single choice question, multiple choice question, grid question.</p>
-	<p>This type of questionnaire also allows us to incorporate dynamic layout : filters and questionnaire logic flow, loops, controls to check the format of the input fields, consistency between the different input fields and, where necessary, with previous collected data. Controls are emphasized by probing messages to invite respondent to correct or fulfill his response.</p>
-	<p>Labels can be customized with informations on the respondent, already known before data collection (from a register eg), as well as collected previously in the form. </p>
-	<p>Forms can be pre-filled with previously collected data as well.</p>
-	<p>The distinction between questionnaire's elements allows to show them in different ways and styles, and to create a coherent layout for questionnaires produced.</p>
-	<p>Eno is developped in an international perspective, codes and comments are in english. Data can be collected in any langage.</p>
+	<p>It is possible to incorporate dynamic layout : filters and questionnaire logic flow, loops, controls to check the format of the input fields, consistency between the different input fields and, where necessary, with previous collected data. Controls are emphasized by probing messages to invite respondent to correct or fulfill his response.</p>
+	<p>Outputs of Eno : the questionnaires can be created in different formats from the same description : XForms web questionnaires (executed on <a href="http://www.orbeon.com/">Orbeon Forms Runner</a>), fo output format for paper questionnaires (the FO is transformed into PDF by a module based on Apache FOP), or questionnaires in a dedicated format which will be used for face-to-face or telephone collection.</p>
+	<p>When they are personalized, the "collection instruments" can be pre-filled with previously collected data or from a register by instance, and labels can be customized with informations on the respondent, already known before data collection as well as collected previously in the form.</p>
 
-	<h1>Objectives: standardization, industrialization, reuse</h1>
+	<h2>Objectives: standardization, industrialization, reuse</h2>
 
-	<h2>Eno is a generator and meets the need of standardisation and industrialisation</h2>
-
-	<p>The development of one tool, based on standardised description in DDI leads to a standardized design. It ensures that questionnaires comply with standards and recommendations on survey design.</p>
-	<p>Display choices are shared between surveys within the NSI, improvements are available/profitable for every users at the same time.</p>
-	<p>Using a generator lightens the burden of work for the survey departments.</p>
-	<p>The generation of different data collection formats from the same questionnaire description supports unimode design for mixed mode surveys.</p>
+	<h3>Eno is a generator and meets the need of standardization and industrialization</h3>
+	<p>The development of one tool, based on standardised description in DDI leads to a standardized design. It ensures that questionnaires comply with standards and recommendations on survey design. The distinction between questionnaire's elements allows to show them in different ways and styles, and to create a coherent layout for questionnaires produced.</p>
+	<p>Display choices are also shared between surveys within the NSI, improvements are available/profitable for every users at the same time. For the household or business surveyed,it enables them to better identify surveys that are indeed within the official statistics remit.<p>
+	<p>The generation of different data collection formats from the same questionnaire description supports unimode design for mixed mode surveys. The description is done once : the use of the generator lightens the burden of work for the survey departments.</p>
+	
+	<h3>Reuse</h3>
 	<p>The questionnaire documentation can be stored and reused, in a global NSI context, or for a similar survey from year to year. Classifications are shared between different surveys teams.</p>
-	<p>Eno is a stakeholder in active metadata: the questionnaire description can be reused for dissemination or documentation of surveys.</p>
-
-	<h1>How to get it?</h1>
-
-	<p>Eno is published as open source on a GitHub <a href="https://github.com/InseeFr/Eno">repository</a>. It is available under the MIT license, and contributions as well as suggestions for improvements are welcome.</p>
-
-	<h1><p>How to use it?</h1>
-
-	<p>Eno comes packaged in various ways: as a command-line tool, a REST web service and a Docker image.</p>
-
-	<h1>Find more about it</h1>
+	<p>Eno is a stakeholder in active metadata : as the end of the "survey process", the questionnaire description can also (and will) be reused for dissemination or documentation of surveys.</p>
 
 	<h2>Roadmap</h2>
 
-	<p>Eno was built, tested and run on business surveys only at the moment. Future work will allow to perform significantly more surveys by providing new output formats for Eno (paper very soon) and a bigger functional coverage for household surveys (for example: more complex logic flows that can be found in household surveys).</p>
+	<p>Eno is very widely, even systematically, used in business surveys (web questionnaire, paper questionnaire, takeover and management tool). Household surveys have also started to use it and work is underway to increase the functional coverage required for these surveys (e.g. description of filters, possibility to loop or select occurrences of a loop, interviewer questionnaire).</p>
+
+	<h2>How to get it?</h2>
+
+	<p>Eno is published as open source on a GitHub <a href="https://github.com/InseeFr/Eno">repository</a>. It is available under the MIT license, and contributions as well as suggestions for improvements are welcome.</p>
+	<p>It is developped in an international perspective, codes and comments are in english. Data of course can be collected in any langage.</p>
+
+	<h2><p>How to use it?</h2>
+
+	<p>Eno comes packaged in various ways: as a command-line tool, a REST web service and a Docker image.</p>
+	<p>ENO is often associated with Pogues. This is is an additional module to Eno, a questionnaire design user interface, that connects with the generation process. Pogues produces the DDI description of the questionnaire : using this tool, a questionnaire designer can specify his web questionnaire in a friendly way and visualize the generated result in one click.</p>
+
+	<h2>Find more about it</h2>
 
   </body>
 </html>
