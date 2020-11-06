@@ -303,7 +303,7 @@
                         </xsl:if>
                         <xsl:if test="$end-comment-question">
                             <COMMENT_QE>
-                                <label>➡ Commentaires et remarques éventuelles concernant l’enquête :</label>
+                                <label>➡ Avez-vous des remarques concernant l'enquête ou des commentaires ?</label>
                             </COMMENT_QE>
                         </xsl:if>
                     </xsl:if>
