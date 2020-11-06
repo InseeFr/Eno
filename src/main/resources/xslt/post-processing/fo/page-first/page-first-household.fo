@@ -48,7 +48,7 @@
             <fo:block-container absolute-position="absolute" left="90mm" top="5mm" width="33mm" height="10mm"
                 font-family="Liberation Sans" font-size="10pt">
                 <fo:block text-align="center">
-                    <fo:page-number-citation ref-id="TheVeryLastPage"/>
+                    1 / <fo:page-number-citation ref-id="TheVeryLastPage"/>
                 </fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute" left="120mm" top="2mm" width="80mm" height="7mm">
