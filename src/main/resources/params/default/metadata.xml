@@ -33,6 +33,23 @@
   <RapprochementDonnees>oui</RapprochementDonnees>
   <LibelleEnquete>Enquête de test - [Surchargeable] - </LibelleEnquete>
   <ObjectifsCourts>L’enquête auprès des individus a pour objectif de recueillir des informations. - [Surchargeable] -</ObjectifsCourts>
+  <Enq_LibelleEnquete>Enquête Vie Quot Santé année</Enq_LibelleEnquete>
+  <Enq_ObjectifsCourts>Obj courts Cette enquête doit permettre de blablablba</Enq_ObjectifsCourts>
+  <Enq_ObjectifsEnquete>Obj courts Cette enquête doit permettre de blablablba</Enq_ObjectifsEnquete>
+  <Enq_CaractereObligatoire>oui</Enq_CaractereObligatoire>
+  <Enq_RespTraitement>la Direction de la recherche, des études, de l’évaluation et des statistiques (Drees) représentée par M. Fabrice Lenglart, directeur (14 avenue Duquesne, 75350 Paris 07 SP)</Enq_RespTraitement>
+  <Enq_NumeroVisa>2021XXXXXXX</Enq_NumeroVisa>
+  <Enq_MinistereTutelle>de l’économie et des finances</Enq_MinistereTutelle>
+  <Enq_AnneeVisa>2020</Enq_AnneeVisa>
+  <Enq_ParutionJO>oui</Enq_ParutionJO>
+  <Enq_DateParutionJO>44197</Enq_DateParutionJO>
+  <Enq_RespOperationnel>la Drees</Enq_RespOperationnel>
+  <Enq_NomServiceRecours>Qui-est-service recours</Enq_NomServiceRecours>
+  <Enq_Notice>www.insee.fr</Enq_Notice>
+  <Enq_Specimen>www.insee.fr</Enq_Specimen>
+  <Enq_Diffusion>www.insee.fr</Enq_Diffusion>
+  <Enq_AnneeCollecte>2021</Enq_AnneeCollecte>
+  <Enq_NomServiceProducteurCourt>Insee</Enq_NomServiceProducteurCourt>
   <URLNotice>https://www.insee.fr/notice</URLNotice>
   <URLSpecimen>https://www.insee.fr/specimen</URLSpecimen>
   <URLDiffusion>https://www.insee.fr/diffusion</URLDiffusion>
