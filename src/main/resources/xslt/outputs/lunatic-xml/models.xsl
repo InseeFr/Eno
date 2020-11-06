@@ -73,7 +73,8 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
 		<xsl:param name="idLoop" select="''" tunnel="yes"/>
-		<xsl:variable name="componentType" select="if(enolunatic:is-generating-loop($source-context)) then 'BlockForLoop' else 'Loop'"/>
+		<xsl:variable name="componentType" select="'Loop'"/>
+		<xsl:variable name="isGeneratingLoop" select="enolunatic:is-generating-loop($source-context)" as="xs:boolean"/>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
 		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
 		<xsl:variable name="minimumOccurrences">
@@ -93,7 +94,7 @@
 		<xsl:variable name="newIdLoop" select="if($idLoop!='') then $idLoop else $id"/>
 		
 		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$id}">
-			<xsl:if test="$componentType='Loop'">
+			<xsl:if test="not($isGeneratingLoop)">
 				<xsl:attribute name="min" select="if ($minimumOccurrences!='') then $minimumOccurrences else 0"  />
 				<xsl:if test="$maximumOccurrences!=''">
 					<xsl:attribute name="iterations" select="enolunatic:replace-all-variables-with-business-name($source-context,$maximumOccurrences)"/>
@@ -102,13 +103,6 @@
 			</xsl:if>
 			<xsl:if test="$label!=''">
 				<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/></label>
-			</xsl:if>
-			<xsl:if test="$componentType='BlockForLoop'">
-				<lines min="{if ($minimumOccurrences!='') then $minimumOccurrences else 0}">
-					<xsl:if test="$maximumOccurrences!=''">						
-						<xsl:attribute name="max" select="$maximumOccurrences"/>
-					</xsl:if>
-				</lines>
 			</xsl:if>
 			
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">

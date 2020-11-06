@@ -66,22 +66,24 @@
     </xsl:template>
     
     <xsl:template match="h:components[@xsi:type='Loop']">
-        <xsl:variable name="idGenerator" select="h:idGenerator" as="xs:string"/>
-        <xsl:variable name="rosterDependencies" select="$root//h:components[@id=$idGenerator]//h:responseDependencies" as="item()*"/>
+        <xsl:variable name="idGenerator" select="h:idGenerator"/>
+        <xsl:variable name="loopDependencies" select="$root//h:components[@id=$idGenerator]//h:responseDependencies" as="item()*"/>
         <components>
             <xsl:copy-of select="@*[name(.)!='iterations' or name(.)!='min']"/>
-            <xsl:attribute name="min">
-                <xsl:choose>
-                    <xsl:when test="string-length(@min) &gt; 0"><xsl:value-of select="@min"/></xsl:when>
-                    <xsl:otherwise><xsl:value-of select="'0'"/></xsl:otherwise>
-                </xsl:choose>
-            </xsl:attribute>
-            <xsl:attribute name="iterations">
-                <xsl:choose>
-                    <xsl:when test="string-length(@iterations) &gt; 0"><xsl:value-of select="@iterations"/></xsl:when>
-                    <xsl:otherwise><xsl:value-of select="concat('count(',$rosterDependencies[1],')')"/></xsl:otherwise>
-                </xsl:choose>
-            </xsl:attribute>
+            <xsl:if test="$idGenerator!=''">
+                <xsl:attribute name="min">
+                    <xsl:choose>
+                        <xsl:when test="string-length(@min) &gt; 0"><xsl:value-of select="@min"/></xsl:when>
+                        <xsl:otherwise><xsl:value-of select="'0'"/></xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
+                <xsl:attribute name="iterations">
+                    <xsl:choose>
+                        <xsl:when test="string-length(@iterations) &gt; 0"><xsl:value-of select="@iterations"/></xsl:when>
+                        <xsl:otherwise><xsl:value-of select="concat('count(',$loopDependencies[1],')')"/></xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
+            </xsl:if>            
             <xsl:apply-templates select="h:label"/>
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
@@ -92,11 +94,11 @@
                 <xsl:copy-of select="$responseDependencies"/>
                 <xsl:copy-of select="$responseDependencies[1]"/>
             </xsl:variable>
-            <xsl:for-each select="distinct-values($allDependencies)">                
+            <xsl:for-each select="distinct-values($allDependencies)">
                 <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
             </xsl:for-each>
-            <xsl:for-each select="distinct-values($rosterDependencies)">                
-                <rosterDependencies><xsl:value-of select="."/></rosterDependencies>
+            <xsl:for-each select="distinct-values($loopDependencies)">
+                <loopDependencies><xsl:value-of select="."/></loopDependencies>
             </xsl:for-each>
             <xsl:apply-templates select="h:components"/>
         </components>
