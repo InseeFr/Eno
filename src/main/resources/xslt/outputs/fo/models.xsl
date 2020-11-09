@@ -684,7 +684,9 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="isTable" tunnel="yes"/>
 		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
-
+		<xsl:param name="other-give-details" tunnel="yes" select="false()"/>
+		<xsl:variable name="label" select="enofo:get-label($source-context, $languages[1],$loop-navigation)"/>
+		
 		<xsl:variable name="height" select="8*number($textarea-defaultsize)"/>
 		<xsl:variable name="variable-name" as="xs:string">
 			<xsl:call-template name="variable-velocity-name">
@@ -692,7 +694,26 @@
 				<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
 			</xsl:call-template>
 		</xsl:variable>
-
+		
+		<xsl:if test="$label != ''">
+			<xsl:choose>
+				<xsl:when test="$other-give-details">
+					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+						<fo:inline>
+							<xsl:call-template name="insert-image">
+								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
+							</xsl:call-template>
+							<xsl:copy-of select="$label"/>
+						</fo:inline>
+					</fo:block>
+				</xsl:when>
+				<xsl:otherwise>
+					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+						<xsl:copy-of select="$label"/>
+					</fo:block>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
 		<fo:block-container height="{$height}mm">
 			<xsl:if test="not($isTable = 'YES')">
 				<xsl:attribute name="border-color" select="'black'"/>
