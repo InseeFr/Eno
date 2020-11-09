@@ -123,6 +123,7 @@
     <xsl:variable name="Enq_Diffusion" select="$metadata//Enq_Diffusion" />
     <xsl:variable name="Enq_AnneeCollecte" select="$metadata//Enq_AnneeCollecte" />
     <xsl:variable name="Enq_NomServiceProducteurCourt" select="$metadata//Enq_NomServiceProducteurCourt" />
+    <xsl:variable name="Enq_DateRetour" select="$metadata//Enq_DateRetour" />
     <xsl:template match="/">
         <xsl:apply-templates select="xhtml:html" />
     </xsl:template>
@@ -216,8 +217,9 @@
                     </xsl:if>
                     <xsl:text> est reconnue d'&lt;b&gt;</xsl:text>
                     <xsl:value-of select="$StatutEnquete" />
-                    <xsl:text>&lt;/b&gt;.&lt;/p&gt;&lt;p&gt;Merci de répondre avant le :
-                        &lt;b&gt;øDATE_RETOUR_SOUHAITEEø&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;</xsl:text>
+                    <xsl:text>&lt;/b&gt;.&lt;/p&gt;&lt;p&gt;Merci de répondre avant le : &lt;b&gt;</xsl:text>
+                    <xsl:value-of select="$Enq_DateRetour"/>
+                    <xsl:text>&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;</xsl:text>
                 </xsl:if>
                 <xsl:if test="$context=$business">
                     <xsl:text>&lt;div class="frame"&gt;&lt;p&gt;Cette enquête</xsl:text>
@@ -291,8 +293,8 @@
                     <xsl:value-of select="$Enq_NumeroVisa" />
                     <xsl:text> </xsl:text>
                     <xsl:for-each select="$Enq_MinistereTutelle">
-                        <xsl:text>du </xsl:text>
-                        <xsl:value-of select="." />
+                        <xsl:text>du Ministère </xsl:text>
+                        <xsl:value-of select="."/>
                         <xsl:text>, </xsl:text>
                     </xsl:for-each>
                     <xsl:text>valable pour l'année </xsl:text>
