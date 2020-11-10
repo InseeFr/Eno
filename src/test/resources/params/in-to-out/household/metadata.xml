@@ -28,10 +28,29 @@
     <ParutionJO>oui</ParutionJO>
     <DateParutionJO>25 juillet 2019</DateParutionJO>
     <NomServiceRecours>Insee Grand Est – établissement de Nancy – PENM – 15 rue du Général Hulot – CS 54229 – 54042 Nancy cedex </NomServiceRecours>
-    <StatutEnquete>vous</StatutEnquete>
+    <StatutEnquete>intérêt général et de qualité statistique</StatutEnquete>
     <Metropole>non</Metropole>
     <TypeUniteEnquetee>de 33 000 personnes</TypeUniteEnquetee>
     <RapprochementDonnees>oui</RapprochementDonnees>
     <LibelleEnquete>Enquête auprès des salariés de l’État en 2018</LibelleEnquete>
     <ObjectifsCourts>L’enquête auprès des salariés de l’État a pour objectif de recueillir des informations sur les salariés de la Fonction publique d’État</ObjectifsCourts>
+    
+    <Enq_LibelleEnquete>Enquête auprès des salariés de l’État en 2018</Enq_LibelleEnquete>
+    <Enq_ObjectifsCourts>L’enquête auprès des salariés de l’État a pour objectif de recueillir des informations sur les salariés de la Fonction publique d’État</Enq_ObjectifsCourts>
+    <Enq_ObjectifsEnquete>L’enquête auprès des salariés de l’État a pour objectif de recueillir des informations sur les salariés de la Fonction publique d’État</Enq_ObjectifsEnquete>
+    <Enq_CaractereObligatoire>non</Enq_CaractereObligatoire>
+    <Enq_RespTraitement>la Direction de la recherche, des études, de l’évaluation et des statistiques (Drees) représentée par M. Fabrice Lenglart, directeur (14 avenue Duquesne, 75350 Paris 07 SP)</Enq_RespTraitement>
+    <Enq_NumeroVisa>2021XXXXXXX</Enq_NumeroVisa>
+    <Enq_MinistereTutelle>de l’économie et des finances</Enq_MinistereTutelle>
+    <Enq_AnneeVisa>2020</Enq_AnneeVisa>
+    <Enq_ParutionJO>oui</Enq_ParutionJO>
+    <Enq_DateParutionJO>25 juillet 2019</Enq_DateParutionJO>
+    <Enq_RespOperationnel>la Drees</Enq_RespOperationnel>
+    <Enq_NomServiceRecours>Insee Grand Est – établissement de Nancy – PENM – 15 rue du Général Hulot – CS 54229 – 54042 Nancy cedex </Enq_NomServiceRecours>
+    <Enq_Notice>www.insee.fr</Enq_Notice>
+    <Enq_Specimen>www.insee.fr</Enq_Specimen>
+    <Enq_Diffusion>www.insee.fr</Enq_Diffusion>
+    <Enq_AnneeCollecte>2021</Enq_AnneeCollecte>
+    <Enq_NomServiceProducteurCourt>Insee</Enq_NomServiceProducteurCourt>
+    <Enq_DateRetour>21/21/2021</Enq_DateRetour>
 </metadata>

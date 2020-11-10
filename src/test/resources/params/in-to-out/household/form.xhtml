@@ -14,9 +14,9 @@
                 xxf:noscript-support="true">
          <xf:instance id="fr-form-instance">
             <form modele="v1">
-               <Variable idVariable="QuiRepond1"/>
-               <Variable idVariable="QuiRepond2"/>
-               <Variable idVariable="QuiRepond3"/>
+               <Variable idVariable="Ue_QuiRepond1"/>
+               <Variable idVariable="Ue_QuiRepond2"/>
+               <Variable idVariable="Ue_QuiRepond3"/>
                <ACCUEIL>
                   <ACCUEIL-1/>
                   <ACCUEIL-2/>
@@ -1082,10 +1082,6 @@
                      ref="VALIDATION"
                      relevant="instance('fr-form-instance')/stromae/util/expedie='non'"/>
             <xf:bind id="FIN-bind" name="FIN" ref="FIN"/>
-            <xf:bind id="nomSectionCourante-bind"
-                     name="nomSectionCourante"
-                     ref="stromae/util/nomSectionCourante"
-                     calculate="(instance('fr-form-util')/Pages/*)[position()=number(instance('fr-form-instance')/stromae/util/sectionCourante)]/name()"/>
          </xf:bind>
          <xf:instance id="donnees-pilotage">
             <InformationsQuestionnaire/>
@@ -1114,7 +1110,7 @@
                      <label>&lt;p&gt;Bienvenue sur le questionnaire de réponse à l'enquête &lt;b&gt;Enquête auprès des salariés de l’État en 2018&lt;/b&gt;&lt;span title="L’enquête auprès des salariés de l’État a pour objectif de recueillir des informations sur les salariés de la Fonction publique d’État"&gt; &lt;img src="/img/Help-browser.svg.png"/&gt; &lt;/span&gt;&lt;/p&gt;</label>
                   </ACCUEIL-1>
                   <ACCUEIL-2>
-                     <label>&lt;div class="frame"&gt;&lt;p&gt;&lt;b&gt;Qui doit répondre à ce questionnaire ?&lt;/b&gt;&lt;/p&gt;&lt;p&gt;¤QuiRepond1¤&lt;/p&gt;&lt;p&gt;¤QuiRepond2¤&lt;/p&gt;&lt;p&gt;¤QuiRepond3¤&lt;/p&gt;&lt;/div&gt;</label>
+                     <label>&lt;div class="frame"&gt;&lt;p&gt;&lt;b&gt;Qui doit répondre à ce questionnaire ?&lt;/b&gt;&lt;/p&gt;&lt;p&gt;¤Ue_QuiRepond1¤&lt;/p&gt;&lt;p&gt;¤Ue_QuiRepond2¤&lt;/p&gt;&lt;p&gt;¤Ue_QuiRepond3¤&lt;/p&gt;&lt;/div&gt;&lt;div class="frame"&gt;&lt;p&gt;Cette enquête est reconnue d'&lt;b&gt;intérêt général et de qualité statistique&lt;/b&gt;.&lt;/p&gt;&lt;p&gt;Merci de répondre avant le : &lt;b&gt;21/21/2021&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;</label>
                   </ACCUEIL-2>
                   <ACCUEIL-3>
                      <label>&lt;p&gt; &lt;/p&gt;</label>
@@ -1125,13 +1121,13 @@
                   </ACCUEIL-4>
                   <ACCUEIL-5>
                      <label>&lt;div class="frameAvertissement"&gt;&lt;p&gt;&lt;b&gt;Pensez à enregistrer
-                    régulièrement votre questionnaire.&lt;/b&gt; Au bout de 30 minutes sans
-                    activité, pour des raisons de sécurité, vous serez en effet automatiquement
-                    déconnecté. Les données saisies depuis la dernière sauvegarde seront perdues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Veuillez
-                    utiliser les boutons &lt;button class="btn txt" type="button" style="cursor: default;" tabIndex="-1"&gt;Retour &lt;/button&gt; et &lt;button class="btn txt" type="button" style="cursor: default;" tabIndex="-1"&gt;Enregistrer et continuer &lt;/button&gt; pour naviguer dans le
-                    questionnaire&lt;/b&gt; et non pas les boutons "Précédent" et "Suivant" de votre
-                    navigateur.&lt;/p&gt;&lt;p&gt;Pour visualiser le contenu des info-bulles, il faut survoler le 
-                    symbole &lt;span title="Les symboles similaires contiennent une aide sur la question ou ses mots-clefs"&gt; &lt;img src="/img/Help-browser.svg.png"/&gt; &lt;/span&gt;&lt;/p&gt;&lt;/div&gt;
+                        régulièrement votre questionnaire.&lt;/b&gt; Au bout de 30 minutes sans
+                        activité, pour des raisons de sécurité, vous serez en effet automatiquement
+                        déconnecté. Les données saisies depuis la dernière sauvegarde seront perdues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Veuillez
+                        utiliser les boutons &lt;button class="btn txt" type="button" style="cursor: default;" tabIndex="-1"&gt;Retour &lt;/button&gt; et &lt;button class="btn txt" type="button" style="cursor: default;" tabIndex="-1"&gt;Enregistrer et continuer &lt;/button&gt; pour naviguer dans le
+                        questionnaire&lt;/b&gt; et non pas les boutons "Précédent" et "Suivant" de votre
+                        navigateur.&lt;/p&gt;&lt;p&gt;Pour visualiser le contenu des info-bulles, il faut survoler le 
+                        symbole &lt;span title="Les symboles similaires contiennent une aide sur la question ou ses mots-clefs"&gt; &lt;img src="/img/Help-browser.svg.png"/&gt; &lt;/span&gt;&lt;/p&gt;&lt;/div&gt;
                     </label>
                   </ACCUEIL-5>
                   <ACCUEIL-6>
@@ -1139,7 +1135,7 @@
                   </ACCUEIL-6>
                   <ACCUEIL-7>
                      <label>&lt;div class="frame"&gt;&lt;p&gt;Vu l'avis favorable du Conseil national de
-                    l'information statistique, cette enquête est reconnue d’intérêt général et de qualité statistique sans avoir de caractère obligatoire, en application de la &lt;a href="https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000888573" target="_blank"&gt;loi n° 51-711 du 7 juin 1951&lt;/a&gt; sur l’obligation, la coordination et le secret en matière de statistiques.&lt;/p&gt;&lt;p&gt;Visa n°2019X081EC du Ministre de l’économie et des finances, valable pour l'année 2019 - Arrêté en date du 25 juillet 2019.&lt;/p&gt;&lt;p&gt;Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à l’Insee. Le  &lt;a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX%3A32016R0679" target="_blank"&gt;règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD)&lt;/a&gt; ainsi que la  &lt;a href="https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000886460" target="_blank"&gt;loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés&lt;/a&gt;, s'appliquent à la présente enquête. Les droits des personnes, rappelés dans la lettre-avis, peuvent être exercés auprès de Insee Grand Est – établissement de Nancy – PENM – 15 rue du Général Hulot – CS 54229 – 54042 Nancy cedex .&lt;/p&gt;&lt;/div&gt;</label>
+                        l'information statistique, cette enquête est reconnue d’intérêt général et de qualité statistique sans avoir de caractère obligatoire, en application de la &lt;a href="https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000888573" target="_blank"&gt;loi n° 51-711 du 7 juin 1951&lt;/a&gt; sur l’obligation, la coordination et le secret en matière de statistiques.&lt;/p&gt;&lt;p&gt;Visa n°2021XXXXXXX du Ministère de l’économie et des finances, valable pour l'année 2021 - Arrêté en date du 25 juillet 2019.&lt;/p&gt;&lt;p&gt;Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à Insee. Le  &lt;a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX%3A32016R0679" target="_blank"&gt;règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD)&lt;/a&gt; ainsi que la  &lt;a href="https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000886460" target="_blank"&gt;loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés&lt;/a&gt;, s'appliquent à la présente enquête. Les droits des personnes, rappelés dans la lettre-avis, peuvent être exercés auprès de Insee Grand Est – établissement de Nancy – PENM – 15 rue du Général Hulot – CS 54229 – 54042 Nancy cedex .&lt;/p&gt;&lt;/div&gt;</label>
                   </ACCUEIL-7>
                   <ji4d7eko>
                      <label>I - VOTRE SITUATION PROFESSIONNELLE ACTUELLE</label>
@@ -5856,7 +5852,7 @@
                      <label>Commentaires</label>
                   </INSEE-HOUSEHOLD-TEMPS>
                   <COMMENT_QE>
-                     <label>➡ Commentaires et remarques éventuelles concernant l’enquête :</label>
+                     <label>➡ Avez-vous des remarques concernant l'enquête ou des commentaires ?</label>
                   </COMMENT_QE>
                   <VALIDATION>
                      <label>VALIDATION</label>
@@ -6006,19 +6002,14 @@
                      calculate="concat('Votre questionnaire a bien été expédié le ',instance('fr-form-instance')/stromae/util/dateHeure)"/>
             <xf:bind id="pages-bind" ref="Pages">
                <xf:bind id="page-ji4d7eko-bind" name="ji4d7eko" ref="ji4d7eko">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji4d7eko-bind','relevant')"/>
                   <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='ACTADMIN'] != '1' and instance('fr-form-instance')//Variable[@idVariable='ACTADMIN']!= '2'))"/>
                   <xf:constraint value="(not(not(instance('fr-form-instance')//Variable[@idVariable='ACTADMIN'] != '2')) or (not(string(instance('fr-form-instance')//Variable[@idVariable='DATEDEP']) = '')))"/>
                </xf:bind>
                <xf:bind id="page-ji4d6ts5-bind" name="ji4d6ts5" ref="ji4d6ts5">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji4d6ts5-bind','relevant')"/>
                   <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='DIPL'] = ''))"/>
                </xf:bind>
-               <xf:bind id="page-ji4dejyu-bind" name="ji4dejyu" ref="ji4dejyu">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji4dejyu-bind','relevant')"/>
-               </xf:bind>
+               <xf:bind id="page-ji4dejyu-bind" name="ji4dejyu" ref="ji4dejyu"/>
                <xf:bind id="page-ji4dintd-bind" name="ji4dintd" ref="ji4dintd">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji4dintd-bind','relevant')"/>
                   <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='ANNEEFP'] &lt; instance('fr-form-instance')//Variable[@idVariable='ANNEEREM'] and instance('fr-form-instance')//Variable[@idVariable='ANNEEFP'] &gt; 0))"/>
                   <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='ANNEEFP']=''))"/>
                   <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='STATUTPP']!= '1' and instance('fr-form-instance')//Variable[@idVariable='STATUTPP']!= '2' and instance('fr-form-instance')//Variable[@idVariable='STATUTPP']!= '3'))"/>
@@ -6027,13 +6018,11 @@
                   <xf:constraint value="(not(not(instance('fr-form-instance')//Variable[@idVariable='STATUTPP']= '1' )) or (not(not(instance('fr-form-instance')//Variable[@idVariable='TITUL']= '2' )) or (not(instance('fr-form-instance')//Variable[@idVariable='ANNEE_FONC']=''))))"/>
                </xf:bind>
                <xf:bind id="page-jje9445l-bind" name="jje9445l" ref="jje9445l">
-                  <xf:calculate value="xxf:evaluate-bind-property('jje9445l-bind','relevant')"/>
                   <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='CATDEC'] !='1' and instance('fr-form-instance')//Variable[@idVariable='CATDEC'] !='2' and instance('fr-form-instance')//Variable[@idVariable='CATDEC'] !='3'))"/>
                   <xf:constraint value="(not(not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 1 else instance('fr-form-instance')//Variable[@idVariable='NBDPT'])=0 and instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()!='')) or (not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='CHGMT_SOUHAIT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CHGMT_SOUHAIT']) &gt; xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) and xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) &gt; 0)))"/>
                   <xf:constraint value="(not(not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 1 else instance('fr-form-instance')//Variable[@idVariable='NBDPT'])=0 and instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()!='')) or (not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='CHGMT_SUIVI']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CHGMT_SUIVI']) &gt; xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) and xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) &gt;0)))"/>
                </xf:bind>
                <xf:bind id="page-jjfrghoq-bind" name="jjfrghoq" ref="jjfrghoq">
-                  <xf:calculate value="xxf:evaluate-bind-property('jjfrghoq-bind','relevant')"/>
                   <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] != '1' and instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] != '2' and instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] != '3'))"/>
                   <xf:constraint value="(not(not(instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '2' or instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] ='3')) or (not((instance('fr-form-instance')//Variable[@idVariable='PLS_ETAB']='1' or instance('fr-form-instance')//Variable[@idVariable='PLS_ETAB']='2') and instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '')))"/>
                   <xf:constraint value="(not(not(instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '2' or instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] ='3')) or (not(string(instance('fr-form-instance')//Variable[@idVariable='NBHEURPROF']) ='')))"/>
@@ -6061,18 +6050,13 @@
                   <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()=''))"/>
                   <xf:constraint value="(not((instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '2' or instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] ='3') and (xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']) + xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']) )&gt; 365 and instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()!=''))"/>
                </xf:bind>
-               <xf:bind id="page-jj5q7j9i-bind" name="jj5q7j9i" ref="jj5q7j9i">
-                  <xf:calculate value="xxf:evaluate-bind-property('jj5q7j9i-bind','relevant')"/>
-               </xf:bind>
+               <xf:bind id="page-jj5q7j9i-bind" name="jj5q7j9i" ref="jj5q7j9i"/>
                <xf:bind id="page-ji4dnal1-bind" name="ji4dnal1" ref="ji4dnal1">
-                  <xf:calculate value="xxf:evaluate-bind-property('ji4dnal1-bind','relevant')"/>
                   <xf:constraint value="(not(not(instance('fr-form-instance')//Variable[@idVariable='ENFANTS'] = '2')) or (not(not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBENFANTS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBENFANTS']) = 1)) or (not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='ANNEEAINE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='ANNEEAINE']) &gt; xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='ANNEEJEUNE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='ANNEEJEUNE'])))))"/>
                </xf:bind>
                <xf:bind id="page-INSEE-HOUSEHOLD-TEMPS-bind"
                         name="INSEE-HOUSEHOLD-TEMPS"
-                        ref="INSEE-HOUSEHOLD-TEMPS">
-                  <xf:calculate value="xxf:evaluate-bind-property('INSEE-HOUSEHOLD-TEMPS-bind','relevant')"/>
-               </xf:bind>
+                        ref="INSEE-HOUSEHOLD-TEMPS"/>
             </xf:bind>
          </xf:bind>
          <xf:submission id="enregistrer"
@@ -6097,6 +6081,8 @@
             <xf:action ev:event="xforms-submit-error">
                <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
                             value="string(number(instance('fr-form-instance')/stromae/util/sectionCourante)-1)"/>
+               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
+                            value="instance('fr-form-util')/Pages/*[position()=number(instance('fr-form-instance')/stromae/util/sectionCourante)]/name()"/>
                <xf:setvalue ref="instance('fr-form-instance')/stromae/util/expedie"
                             value="string('non')"/>
                <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
@@ -6112,15 +6098,17 @@
                         replace="none"
                         resource="/expedier/fpe-2019-x00/{xxf:get-request-parameter('unite-enquete')}?modele=v1"/>
          <xf:action ev:event="xforms-ready">
+            <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
+                         value="instance('fr-form-util')/Pages/*[number(instance('fr-form-instance')/stromae/util/sectionCourante)]/name()"/>
             <xf:toggle case="{instance('fr-form-instance')/stromae/util/sectionCourante}"/>
             <xxf:show if="instance('fr-form-instance')/stromae/util/expedie='non' and not(instance('fr-form-instance')/stromae/util/sectionCourante='1')"
                       dialog="welcome-back"/>
          </xf:action>
          <xf:action ev:event="ChangementPage">
-            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*[@idVariable and not(ancestor::Groupe[ancestor::*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]])]">
+            <xf:action iterate="instance('fr-form-instance')//*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*[@idVariable]">
                <xf:dispatch name="DOMFocusOut" target="{concat(context()/@idVariable,'-control')}"/>
             </xf:action>
-            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//Groupe[@typeGroupe]">
+            <xf:action iterate="instance('fr-form-instance')//*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//Groupe[@typeGroupe]">
                <xf:var name="loop-index" value="position()"/>
                <xf:setindex repeat="{context()/parent::Groupe/@idGroupe}" index="$loop-index"/>
                <xf:action iterate="descendant::*">
@@ -6129,7 +6117,7 @@
             </xf:action>
             <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
                          value="string('false')"/>
-            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                     and not(xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true()))">
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                     and not(xxf:valid(instance('fr-form-instance')//*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true()))">
                <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
                   <xxf:show ev:event="DOMActivate" dialog="errorPrevious"/>
                </xf:action>
@@ -6139,7 +6127,7 @@
                <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
                             value="string('true')"/>
             </xf:action>
-            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                            and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true())                            and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/stromae/util/nomSectionCourante,'-bind'),'constraint')=false()">
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                            and xxf:valid(instance('fr-form-instance')//*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true())                            and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/stromae/util/nomSectionCourante,'-bind'),'constraint')=false()">
                <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
                   <xxf:show ev:event="DOMActivate" dialog="warningPrevious"/>
                </xf:action>
@@ -6149,25 +6137,31 @@
                <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
                             value="string('true')"/>
             </xf:action>
-            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true())                     and not(xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/stromae/util/nomSectionCourante,'-bind'),'constraint')=false())">
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                     and xxf:valid(instance('fr-form-instance')//*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true())                     and not(xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/stromae/util/nomSectionCourante,'-bind'),'constraint')=false())">
                <xf:dispatch name="ChangementPageEffectif" targetid="fr-form-model"/>
             </xf:action>
          </xf:action>
          <xf:action ev:event="ChangementPageEffectif">
             <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
                          value="string('false')"/>
-            <xf:action if="instance('fr-form-util')/changementPageEffectue='false' and instance('fr-form-util')/PreviousNext='1'">
-               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
-                            value="count(instance('fr-form-util')/Pages/*[position()=instance('fr-form-instance')/stromae/util/sectionCourante]/following-sibling::*[not(text()='false')][1]/preceding-sibling::*)+1"/>
-               <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
-                            value="string('true')"/>
+            <xf:action if="instance('fr-form-util')/PreviousNext='1'">
+               <xf:action if="instance('fr-form-util')/changementPageEffectue='false'">
+                  <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
+                               value="instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]/following-sibling::*[not(text()='false')][1]/name()"/>
+                  <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                               value="string('true')"/>
+               </xf:action>
             </xf:action>
-            <xf:action if="instance('fr-form-util')/changementPageEffectue='false' and instance('fr-form-util')/PreviousNext='-1'">
-               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
-                            value="count(instance('fr-form-util')/Pages/*[position()=instance('fr-form-instance')/stromae/util/sectionCourante]/preceding-sibling::*[not(text()='false')][1]/preceding-sibling::*)+1"/>
-               <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
-                            value="string('true')"/>
+            <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
+               <xf:action if="instance('fr-form-util')/changementPageEffectue='false'">
+                  <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
+                               value="instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]/preceding-sibling::*[not(text()='false')][1]/name()"/>
+                  <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                               value="string('true')"/>
+               </xf:action>
             </xf:action>
+            <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
+                         value="count(instance('fr-form-util')/Pages/*[following-sibling::*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]]) +1"/>
             <xf:setvalue ref="instance('fr-form-instance')/stromae/util/dateHeure"
                          value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
             <xf:toggle case="{instance('fr-form-instance')/stromae/util/sectionCourante}"/>
@@ -6203,7 +6197,7 @@
                         <xf:help ref="$form-resources/ACCUEIL-1/help" mediatype="text/html"/>
                      </xf:output>
                      <xf:output id="ACCUEIL-2-control" name="ACCUEIL-2" bind="ACCUEIL-2-bind">
-                        <xf:label ref="replace(replace(replace($form-resources/ACCUEIL-2/label,'¤QuiRepond1¤',instance('fr-form-instance')//Variable[@idVariable='QuiRepond1']),'¤QuiRepond2¤',instance('fr-form-instance')//Variable[@idVariable='QuiRepond2']),'¤QuiRepond3¤',instance('fr-form-instance')//Variable[@idVariable='QuiRepond3'])"
+                        <xf:label ref="replace(replace(replace($form-resources/ACCUEIL-2/label,'¤Ue_QuiRepond1¤',instance('fr-form-instance')//Variable[@idVariable='Ue_QuiRepond1']),'¤Ue_QuiRepond2¤',instance('fr-form-instance')//Variable[@idVariable='Ue_QuiRepond2']),'¤Ue_QuiRepond3¤',instance('fr-form-instance')//Variable[@idVariable='Ue_QuiRepond3'])"
                                   mediatype="text/html"/>
                      </xf:output>
                      <xf:output id="ACCUEIL-3-control" name="ACCUEIL-3" bind="ACCUEIL-3-bind">
@@ -6218,7 +6212,7 @@
                      <xf:output id="ACCUEIL-6-control" name="ACCUEIL-6" bind="ACCUEIL-6-bind">
                         <xf:label ref="$form-resources/ACCUEIL-6/label" mediatype="text/html"/>
                      </xf:output>
-                     <xf:trigger id="cadreLegal" appearance="minimal">
+                     <xf:trigger id="cadreLegal" appearance="info">
                         <xf:label>
                            <xf:output value="concat(if (instance('fr-form-util')/cadreLegal/text()!='') then ('-') else ('+'),' Connaître le cadre légal de l''enquête ?')"/>
                         </xf:label>
@@ -8457,6 +8451,8 @@
                      <xxf:hide dialog="welcome-back"/>
                      <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
                                   value="'1'"/>
+                     <xf:setvalue ref="instance('fr-form-instance')/stromae/util/nomSectionCourante"
+                                  value="instance('fr-form-util')/Pages/*[1]/name()"/>
                      <xf:toggle case="{instance('fr-form-instance')/stromae/util/sectionCourante}"/>
                   </xf:action>
                </xf:trigger>

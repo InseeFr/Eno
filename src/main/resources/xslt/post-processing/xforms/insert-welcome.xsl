@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xf="http://www.w3.org/2002/xforms" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:fr="http://orbeon.org/oxf/xml/form-runner" xmlns:xxf="http://orbeon.org/oxf/xml/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-
+    
     <xsl:output method="xml" indent="no" encoding="UTF-8" />
-
+    
     <!-- Eno properties file -->
     <xsl:param name="properties-file" />
     <!-- Eno parameters file -->
@@ -10,13 +10,13 @@
     <xsl:param name="parameters-node" as="node()" required="no">
         <empty />
     </xsl:param>
-
-    <!-- metadata file coming from database "Pilotageé) -->
+    
+    <!-- metadata file coming from database "Pilotage") -->
     <xsl:param name="metadata-file" />
     <xsl:param name="metadata-node" as="node()" required="no">
         <empty />
     </xsl:param>
-
+    
     <xsl:variable name="metadata">
         <xsl:choose>
             <xsl:when test="$metadata-node/*">
@@ -27,10 +27,10 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-
+    
     <xsl:variable name="business" select="'business'" />
     <xsl:variable name="household" select="'household'" />
-
+    
     <xsl:variable name="properties" select="doc($properties-file)" />
     <xsl:variable name="parameters">
         <xsl:choose>
@@ -42,7 +42,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-
+    
     <xsl:variable name="context">
         <xsl:choose>
             <xsl:when test="$parameters//Context != ''">
@@ -53,7 +53,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-
+    
     <!-- Retrieving metadata -->
     <xsl:variable name="Identifiant" select="$metadata//Identifiant" />
     <xsl:variable name="LibelleCourtEnquete" select="$metadata//LibelleCourtEnquete" />
@@ -105,11 +105,29 @@
     <!-- Value for which the fact that the survey is mandatory is displayed -->
     <xsl:variable name="CaractereObligatoireEnqueteReference" select="string('oui')" />
     <xsl:variable name="SimplificationEntreprisesReference" select="string('oui')" />
-
+    <!-- Values for household updates -->
+    <xsl:variable name="Enq_LibelleEnquete" select="$metadata//Enq_LibelleEnquete" />
+    <xsl:variable name="Enq_ObjectifsCourts" select="$metadata//Enq_ObjectifsCourts" />
+    <xsl:variable name="Enq_ObjectifsEnquete" select="$metadata//Enq_ObjectifsEnquete" />
+    <xsl:variable name="Enq_CaractereObligatoire" select="$metadata//Enq_CaractereObligatoire" />
+    <xsl:variable name="Enq_RespTraitement" select="$metadata//Enq_RespTraitement" />
+    <xsl:variable name="Enq_NumeroVisa" select="$metadata//Enq_NumeroVisa" />
+    <xsl:variable name="Enq_MinistereTutelle" select="$metadata//Enq_MinistereTutelle" />
+    <xsl:variable name="Enq_AnneeVisa" select="$metadata//Enq_AnneeVisa" />
+    <xsl:variable name="Enq_ParutionJO" select="$metadata//Enq_ParutionJO" />
+    <xsl:variable name="Enq_DateParutionJO" select="$metadata//Enq_DateParutionJO" />
+    <xsl:variable name="Enq_RespOperationnel" select="$metadata//Enq_RespOperationnel" />
+    <xsl:variable name="Enq_NomServiceRecours" select="$metadata//Enq_NomServiceRecours" />
+    <xsl:variable name="Enq_Notice" select="$metadata//Enq_Notice" />
+    <xsl:variable name="Enq_Specimen" select="$metadata//Enq_Specimen" />
+    <xsl:variable name="Enq_Diffusion" select="$metadata//Enq_Diffusion" />
+    <xsl:variable name="Enq_AnneeCollecte" select="$metadata//Enq_AnneeCollecte" />
+    <xsl:variable name="Enq_NomServiceProducteurCourt" select="$metadata//Enq_NomServiceProducteurCourt" />
+    <xsl:variable name="Enq_DateRetour" select="$metadata//Enq_DateRetour" />
     <xsl:template match="/">
         <xsl:apply-templates select="xhtml:html" />
     </xsl:template>
-
+    
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
             <xd:p>Template de base pour tous les éléments et tous les attributs, on recopie
@@ -121,13 +139,13 @@
             <xsl:apply-templates select="node() | @*" />
         </xsl:copy>
     </xsl:template>
-
+    
     <!-- The generic start page is replaced by a coltrane home page. -->
     <xsl:template match="Beginning[parent::form[parent::xf:instance[@id='fr-form-instance']]]">
         <xsl:if test="$context=$household">
-            <Variable idVariable="QuiRepond1" />
-            <Variable idVariable="QuiRepond2" />
-            <Variable idVariable="QuiRepond3" />
+            <Variable idVariable="Ue_QuiRepond1" />
+            <Variable idVariable="Ue_QuiRepond2" />
+            <Variable idVariable="Ue_QuiRepond3" />
         </xsl:if>
         <ACCUEIL>
             <ACCUEIL-1 />
@@ -139,7 +157,7 @@
             <ACCUEIL-7 />
         </ACCUEIL>
     </xsl:template>
-
+    
     <!-- The corresponding bind -->
     <xsl:template match="xf:bind[@name='beginning']">
         <xf:bind id="ACCUEIL-bind" name="ACCUEIL" ref="ACCUEIL">
@@ -152,7 +170,7 @@
             <xf:bind id="ACCUEIL-7-bind" name="ACCUEIL-7" ref="ACCUEIL-7" relevant="if (instance('fr-form-util')/cadreLegal/text()!='') then (true()) else (false())" />
         </xf:bind>
     </xsl:template>
-
+    
     <!-- The corresponding resources -->
     <xsl:template match="Beginning[ancestor::xf:instance[@id='fr-form-resources']]">
         <ACCUEIL>
@@ -160,35 +178,60 @@
         </ACCUEIL>
         <ACCUEIL-1>
             <label>
-                <xsl:text>&lt;p&gt;Bienvenue sur le questionnaire de réponse à l'enquête &lt;b&gt;</xsl:text>
-                <xsl:value-of select="$LibelleEnquete" />
-                <xsl:text>&lt;/b&gt;</xsl:text>
-                <xsl:text>&lt;span title="</xsl:text>
-                <xsl:value-of select="$ObjectifsEnquete" />
-                <xsl:text>"&gt;&#160;&lt;img src="/img/Help-browser.svg.png"/&gt;&#160;&lt;/span&gt;</xsl:text>
-                <xsl:text>&lt;/p&gt;</xsl:text>
+                <xsl:choose>
+                    <xsl:when test="$context=$household">
+                        <xsl:text>&lt;p&gt;Bienvenue sur le questionnaire de réponse à l'enquête &lt;b&gt;</xsl:text>
+                        <xsl:value-of select="$Enq_LibelleEnquete" />
+                        <xsl:text>&lt;/b&gt;</xsl:text>
+                        <xsl:text>&lt;span title="</xsl:text>
+                        <xsl:value-of select="$Enq_ObjectifsEnquete" />
+                        <xsl:text>"&gt;&#160;&lt;img src="/img/Help-browser.svg.png"/&gt;&#160;&lt;/span&gt;</xsl:text>
+                        <xsl:text>&lt;/p&gt;</xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text>&lt;p&gt;Bienvenue sur le questionnaire de réponse à l'enquête &lt;b&gt;</xsl:text>
+                        <xsl:value-of select="$LibelleEnquete" />
+                        <xsl:text>&lt;/b&gt;</xsl:text>
+                        <xsl:text>&lt;span title="</xsl:text>
+                        <xsl:value-of select="$ObjectifsEnquete" />
+                        <xsl:text>"&gt;&#160;&lt;img src="/img/Help-browser.svg.png"/&gt;&#160;&lt;/span&gt;</xsl:text>
+                        <xsl:text>&lt;/p&gt;</xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>                
             </label>
         </ACCUEIL-1>
         <ACCUEIL-2>
             <label>
                 <xsl:if test="$context=$household">
                     <xsl:text>&lt;div class="frame"&gt;&lt;p&gt;&lt;b&gt;Qui doit répondre à ce questionnaire ?&lt;/b&gt;&lt;/p&gt;</xsl:text>
-                    <xsl:text>&lt;p&gt;¤QuiRepond1¤&lt;/p&gt;</xsl:text>
-                    <xsl:text>&lt;p&gt;¤QuiRepond2¤&lt;/p&gt;</xsl:text>
-                    <xsl:text>&lt;p&gt;¤QuiRepond3¤&lt;/p&gt;</xsl:text>
+                    <xsl:text>&lt;p&gt;¤Ue_QuiRepond1¤&lt;/p&gt;</xsl:text>
+                    <xsl:text>&lt;p&gt;¤Ue_QuiRepond2¤&lt;/p&gt;</xsl:text>
+                    <xsl:text>&lt;p&gt;¤Ue_QuiRepond3¤&lt;/p&gt;</xsl:text>
                     <xsl:text>&lt;/div&gt;</xsl:text>
+                    
+                    <xsl:text>&lt;div class="frame"&gt;&lt;p&gt;Cette enquête</xsl:text>
+                    <xsl:if test="$Enq_CaractereObligatoire=$CaractereObligatoireEnqueteReference">
+                        <xsl:text>,
+                            à &lt;b&gt;&lt;span style="text-decoration:underline"&gt;caractère
+                            obligatoire&lt;/span&gt;&lt;/b&gt;,</xsl:text>
+                    </xsl:if>
+                    <xsl:text> est reconnue d'&lt;b&gt;</xsl:text>
+                    <xsl:value-of select="$StatutEnquete" />
+                    <xsl:text>&lt;/b&gt;.&lt;/p&gt;&lt;p&gt;Merci de répondre avant le : &lt;b&gt;</xsl:text>
+                    <xsl:value-of select="$Enq_DateRetour"/>
+                    <xsl:text>&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;</xsl:text>
                 </xsl:if>
                 <xsl:if test="$context=$business">
                     <xsl:text>&lt;div class="frame"&gt;&lt;p&gt;Cette enquête</xsl:text>
                     <xsl:if test="$CaractereObligatoire=$CaractereObligatoireEnqueteReference">
                         <xsl:text>,
-                        à &lt;b&gt;&lt;span style="text-decoration:underline"&gt;caractère
-                        obligatoire&lt;/span&gt;&lt;/b&gt;,</xsl:text>
+                            à &lt;b&gt;&lt;span style="text-decoration:underline"&gt;caractère
+                            obligatoire&lt;/span&gt;&lt;/b&gt;,</xsl:text>
                     </xsl:if>
                     <xsl:text> est reconnue d'&lt;b&gt;</xsl:text>
                     <xsl:value-of select="$StatutEnquete" />
                     <xsl:text>&lt;/b&gt;.&lt;/p&gt;&lt;p&gt;Merci de répondre avant le :
-                    &lt;b&gt;øDATE_RETOUR_SOUHAITEEø&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;</xsl:text>
+                        &lt;b&gt;øDATE_RETOUR_SOUHAITEEø&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;</xsl:text>
                 </xsl:if>
             </label>
         </ACCUEIL-2>
@@ -203,25 +246,25 @@
             <label>
                 <xsl:if test="$context=$household">
                     <xsl:text>&lt;div class="frameAvertissement"&gt;&lt;p&gt;&lt;b&gt;Pensez à enregistrer
-                    régulièrement votre questionnaire.&lt;/b&gt; Au bout de 30 minutes sans
-                    activité, pour des raisons de sécurité, vous serez en effet automatiquement
-                    déconnecté. Les données saisies depuis la dernière sauvegarde seront perdues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Veuillez
-                    utiliser les boutons &lt;button class="btn txt" type="button" style="cursor: default;" tabIndex="-1"&gt;Retour &lt;/button&gt; et &lt;button class="btn txt" type="button" style="cursor: default;" tabIndex="-1"&gt;Enregistrer et continuer &lt;/button&gt; pour naviguer dans le
-                    questionnaire&lt;/b&gt; et non pas les boutons "Précédent" et "Suivant" de votre
-                    navigateur.&lt;/p&gt;&lt;p&gt;Pour visualiser le contenu des info-bulles, il faut survoler le 
-                    symbole &lt;span title="Les symboles similaires contiennent une aide sur la question ou ses mots-clefs"&gt;&#160;&lt;img src="/img/Help-browser.svg.png"/&gt;&#160;&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;
+                        régulièrement votre questionnaire.&lt;/b&gt; Au bout de 30 minutes sans
+                        activité, pour des raisons de sécurité, vous serez en effet automatiquement
+                        déconnecté. Les données saisies depuis la dernière sauvegarde seront perdues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Veuillez
+                        utiliser les boutons &lt;button class="btn txt" type="button" style="cursor: default;" tabIndex="-1"&gt;Retour &lt;/button&gt; et &lt;button class="btn txt" type="button" style="cursor: default;" tabIndex="-1"&gt;Enregistrer et continuer &lt;/button&gt; pour naviguer dans le
+                        questionnaire&lt;/b&gt; et non pas les boutons "Précédent" et "Suivant" de votre
+                        navigateur.&lt;/p&gt;&lt;p&gt;Pour visualiser le contenu des info-bulles, il faut survoler le 
+                        symbole &lt;span title="Les symboles similaires contiennent une aide sur la question ou ses mots-clefs"&gt;&#160;&lt;img src="/img/Help-browser.svg.png"/&gt;&#160;&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;
                     </xsl:text>
                 </xsl:if>
                 <xsl:if test="$context=$business">
                     <xsl:text>&lt;div class="frameAvertissement"&gt;&lt;p&gt;&lt;b&gt;Pensez à enregistrer
-                    régulièrement votre questionnaire.&lt;/b&gt; Au bout de 30 minutes sans
-                    activité, pour des raisons de sécurité, vous serez en effet automatiquement
-                    déconnecté. La sauvegarde des données vous incombant, les données saisies depuis
-                    la dernière sauvegarde seront perdues.&lt;/p&gt;
-                    &lt;p&gt;Lorsque vous quitterez ce questionnaire, privilégiez la fermeture par le bouton &lt;b&gt;Déconnexion&lt;/b&gt; afin d'éviter d'éventuels problèmes de navigation ultérieurs.&lt;/p&gt;
-                    &lt;p&gt;&lt;b&gt;Veuillez utiliser les boutons &lt;button class="btn txt" type="button" style="cursor: default;" tabIndex="-1"&gt;Retour &lt;/button&gt; et &lt;button class="btn txt" type="button" style="cursor: default;" tabIndex="-1"&gt;Enregistrer et continuer &lt;/button&gt; pour naviguer dans le
-                    questionnaire&lt;/b&gt; et non pas les boutons "Précédent" et "Suivant" de votre
-                    navigateur.&lt;/p&gt;&lt;/div&gt;
+                        régulièrement votre questionnaire.&lt;/b&gt; Au bout de 30 minutes sans
+                        activité, pour des raisons de sécurité, vous serez en effet automatiquement
+                        déconnecté. La sauvegarde des données vous incombant, les données saisies depuis
+                        la dernière sauvegarde seront perdues.&lt;/p&gt;
+                        &lt;p&gt;Lorsque vous quitterez ce questionnaire, privilégiez la fermeture par le bouton &lt;b&gt;Déconnexion&lt;/b&gt; afin d'éviter d'éventuels problèmes de navigation ultérieurs.&lt;/p&gt;
+                        &lt;p&gt;&lt;b&gt;Veuillez utiliser les boutons &lt;button class="btn txt" type="button" style="cursor: default;" tabIndex="-1"&gt;Retour &lt;/button&gt; et &lt;button class="btn txt" type="button" style="cursor: default;" tabIndex="-1"&gt;Enregistrer et continuer &lt;/button&gt; pour naviguer dans le
+                        questionnaire&lt;/b&gt; et non pas les boutons "Précédent" et "Suivant" de votre
+                        navigateur.&lt;/p&gt;&lt;/div&gt;
                     </xsl:text>
                 </xsl:if>
             </label>
@@ -233,9 +276,9 @@
             <label>
                 <xsl:if test="$context=$household">
                     <xsl:text>&lt;div class="frame"&gt;&lt;p&gt;Vu l'avis favorable du Conseil national de
-                    l'information statistique, cette enquête</xsl:text>
+                        l'information statistique, cette enquête</xsl:text>
                     <xsl:choose>
-                        <xsl:when test="$CaractereObligatoire=$CaractereObligatoireEnqueteReference">
+                        <xsl:when test="$Enq_CaractereObligatoire=$CaractereObligatoireEnqueteReference">
                             <xsl:text>, reconnue d’intérêt général et de qualité statistique, est obligatoire</xsl:text>
                         </xsl:when>
                         <xsl:otherwise>
@@ -245,28 +288,28 @@
                     <xsl:text>, en application de la &lt;a href="</xsl:text>
                     <xsl:value-of select="$properties//lois/statistique" />
                     <xsl:text>" target="_blank"&gt;loi n° 51-711 du 7 juin 1951&lt;/a&gt; sur l’obligation, la coordination et le secret en matière de statistiques.</xsl:text>
-
+                    
                     <xsl:text>&lt;/p&gt;&lt;p&gt;Visa n°</xsl:text>
-                    <xsl:value-of select="$NumeroVisa" />
+                    <xsl:value-of select="$Enq_NumeroVisa" />
                     <xsl:text> </xsl:text>
-                    <xsl:for-each select="$MinistereTutelle">
-                        <xsl:text>du </xsl:text>
-                        <xsl:value-of select="." />
+                    <xsl:for-each select="$Enq_MinistereTutelle">
+                        <xsl:text>du Ministère </xsl:text>
+                        <xsl:value-of select="."/>
                         <xsl:text>, </xsl:text>
                     </xsl:for-each>
                     <xsl:text>valable pour l'année </xsl:text>
-                    <xsl:value-of select="$AnneeCollecte" />
+                    <xsl:value-of select="$Enq_AnneeCollecte" />
                     <xsl:choose>
-                        <xsl:when test="$ParutionJO = 'oui'">
+                        <xsl:when test="$Enq_ParutionJO = 'oui'">
                             <xsl:text> - Arrêté en date du </xsl:text>
-                            <xsl:value-of select="$DateParutionJO" />
+                            <xsl:value-of select="$Enq_DateParutionJO" />
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:text> - Arrêté en cours de parution</xsl:text>
                         </xsl:otherwise>
                     </xsl:choose>
                     <xsl:text>.&lt;/p&gt;&lt;p&gt;Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à </xsl:text>
-                    <xsl:value-of select="$NomServiceProducteurCourt" />
+                    <xsl:value-of select="$Enq_NomServiceProducteurCourt" />
                     <xsl:text>. Le  &lt;a href="</xsl:text>
                     <xsl:value-of select="$properties//lois/rgpd" />
                     <xsl:text>" target="_blank"&gt;règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD)&lt;/a&gt; ainsi </xsl:text>
@@ -274,20 +317,20 @@
                     <xsl:value-of select="$properties//lois/informatique" />
                     <xsl:text>" target="_blank"&gt;loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés&lt;/a&gt;, s'appliquent à la présente enquête. </xsl:text>
                     <xsl:text>Les droits des personnes, rappelés dans la lettre-avis, peuvent être exercés auprès de </xsl:text>
-                    <xsl:value-of select="$NomServiceRecours" />
+                    <xsl:value-of select="$Enq_NomServiceRecours" />
                     <xsl:text>.&lt;/p&gt;&lt;/div&gt;</xsl:text>
                 </xsl:if>
                 <xsl:if test="$context=$business">
                     <xsl:text>&lt;div class="frame"&gt;&lt;p&gt;Vu l'avis favorable du Conseil national de
-                    l'information statistique, cette enquête</xsl:text>
+                        l'information statistique, cette enquête</xsl:text>
                     <xsl:choose>
                         <xsl:when
                             test="$CaractereObligatoire=$CaractereObligatoireEnqueteReference">
                             <xsl:text>, reconnue d'&lt;b&gt;</xsl:text>
                             <xsl:value-of select="$StatutEnquete"/>
                             <xsl:text>, est
-                            obligatoire, &lt;/b&gt;en application de la &lt;a
-                    href="</xsl:text>
+                                obligatoire, &lt;/b&gt;en application de la &lt;a
+                                href="</xsl:text>
                             <xsl:value-of select="$properties//lois/statistique"/>
                             <xsl:text>" target="_blank"&gt;loi n° 51-711 du 7 juin 1951 modifiée&lt;/a&gt; sur l’obligation, la coordination et le secret en matière de statistiques.</xsl:text>
                         </xsl:when>
@@ -295,7 +338,7 @@
                             <xsl:text> est reconnue d'&lt;b&gt;</xsl:text>
                             <xsl:value-of select="$StatutEnquete"/>
                             <xsl:text>&lt;/b&gt; sans avoir de caractère obligatoire, en application de la &lt;a
-                    href="</xsl:text>
+                                href="</xsl:text>
                             <xsl:value-of select="$properties//lois/statistique"/>
                             <xsl:text>" target="_blank"&gt;loi n° 51-711 du 7 juin 1951 modifiée&lt;/a&gt; sur l’obligation, la coordination et le secret en matière de statistiques.</xsl:text>
                         </xsl:otherwise>
@@ -329,18 +372,18 @@
                     <xsl:text>.&lt;/p&gt;</xsl:text>
                     <xsl:text>&lt;/div&gt;</xsl:text>                    
                 </xsl:if>
-
+                
             </label>
         </ACCUEIL-7>
     </xsl:template>
-
+    
     <xsl:template match="GenericBeginningText[ancestor::xf:instance[@id='fr-form-resources']]" />
-
+    
     <!-- Replace the page in the instance that is used to manage the questionnaire -->
     <xsl:template match="Beginning[ancestor::xf:instance[@id='fr-form-util']]">
         <ACCUEIL />
     </xsl:template>
-
+    
     <!-- We place the html body here -->
     <xsl:template match="fr:section[@name='beginning']">
         <fr:section id="ACCUEIL-control" bind="ACCUEIL-bind" name="ACCUEIL">
@@ -351,7 +394,7 @@
             </xf:output>
             <xf:output id="ACCUEIL-2-control" name="ACCUEIL-2" bind="ACCUEIL-2-bind">
                 <xsl:if test="$context=$household">
-                    <xf:label ref="replace(replace(replace($form-resources/ACCUEIL-2/label,'¤QuiRepond1¤',instance('fr-form-instance')//Variable[@idVariable='QuiRepond1']),'¤QuiRepond2¤',instance('fr-form-instance')//Variable[@idVariable='QuiRepond2']),'¤QuiRepond3¤',instance('fr-form-instance')//Variable[@idVariable='QuiRepond3'])" mediatype="text/html" />
+                    <xf:label ref="replace(replace(replace($form-resources/ACCUEIL-2/label,'¤Ue_QuiRepond1¤',instance('fr-form-instance')//Variable[@idVariable='Ue_QuiRepond1']),'¤Ue_QuiRepond2¤',instance('fr-form-instance')//Variable[@idVariable='Ue_QuiRepond2']),'¤Ue_QuiRepond3¤',instance('fr-form-instance')//Variable[@idVariable='Ue_QuiRepond3'])" mediatype="text/html" />
                 </xsl:if>
                 <xsl:if test="$context=$business">
                     <xf:label ref="$form-resources/ACCUEIL-2/label" mediatype="text/html" />
@@ -369,7 +412,7 @@
             <xf:output id="ACCUEIL-6-control" name="ACCUEIL-6" bind="ACCUEIL-6-bind">
                 <xf:label ref="$form-resources/ACCUEIL-6/label" mediatype="text/html" />
             </xf:output>
-            <xf:trigger id="cadreLegal" appearance="minimal">
+            <xf:trigger id="cadreLegal" appearance="info">
                 <xf:label>
                     <xf:output value="concat(if (instance('fr-form-util')/cadreLegal/text()!='') then ('-') else ('+'),' Connaître le cadre légal de l''enquête ?')" />
                 </xf:label>
@@ -380,7 +423,7 @@
             </xf:output>
         </fr:section>
     </xsl:template>
-
+    
     <!-- The legal framework of the homepage is displayed/displayed by means of a link. -->
     <xsl:template match="xf:instance [@id='fr-form-util']/Util">
         <xsl:copy>
@@ -388,7 +431,7 @@
             <xsl:apply-templates select="node() | @*" />
         </xsl:copy>
     </xsl:template>
-
+    
     <xsl:template match="xf:bind[@id='current-section-name-bind']/@calculate | xf:action[@ev:event='page-change']/xf:action/@if">
         <xsl:attribute name="{name()}">
             <xsl:for-each select="tokenize(., '''')">
@@ -406,7 +449,7 @@
             </xsl:for-each>
         </xsl:attribute>
     </xsl:template>
-
+    
     <xsl:template match="xf:bind[@id='progress-percent-bind']">
         <xsl:copy>
             <xsl:apply-templates select="@*" />
@@ -431,7 +474,7 @@
             <xsl:apply-templates select="node()" />
         </xsl:copy>
     </xsl:template>
-
+    
     <xsl:template match="xf:action[@ev:event='page-change-done']/xf:action/@if">
         <xsl:attribute name="if">
             <xsl:for-each select="tokenize(.,' ')">
@@ -449,6 +492,6 @@
             </xsl:for-each>
         </xsl:attribute>
     </xsl:template>
-
-
+    
+    
 </xsl:stylesheet>
