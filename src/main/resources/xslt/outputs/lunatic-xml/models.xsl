@@ -356,6 +356,44 @@
 		<xsl:copy-of select="$dependencies"/>
 	</xsl:template>
 
+
+	<xsl:template match="FixedCell" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="idColumn" tunnel="yes"/>
+		<xsl:param name="lineType" tunnel="yes"/>
+		<xsl:param name="elementName" tunnel="yes"/>
+		
+		<xsl:variable name="col-span" select="number(enolunatic:get-colspan($source-context))"/>
+		<xsl:variable name="row-span" select="number(enolunatic:get-rowspan($source-context))"/>
+		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
+		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
+		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
+		<xsl:variable name="value" select="enolunatic:get-cell-value($source-context)"/>
+		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($labelDependencies)"/>
+		<xsl:element name="{$elementName}">
+			<xsl:if test="$lineType='headerLine'">
+				<xsl:attribute name="headerCell" select="true()"/>
+			</xsl:if>
+			<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
+			<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
+			<label>
+				<xsl:choose>
+					<xsl:when test="$label != '' and $value !=''">
+						<xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,concat($label,' || &quot; &quot; || &quot;',$value,'&quot;'))"/>
+					</xsl:when>
+					<xsl:when test="$label != '' and $value = ''">
+						<xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,concat('&quot;',$value,'&quot;'))"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</label>
+		</xsl:element>
+		<xsl:copy-of select="$dependencies"/>
+	</xsl:template>
+	
 	<xd:doc>
 		<xd:desc>
 			<xd:p>The Cell driver gives the colspan and the rowspan to the Response, which creates the cell.</xd:p>
