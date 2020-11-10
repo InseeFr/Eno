@@ -23,7 +23,7 @@
     <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
     
-   
+    
     <xsl:strip-space elements="*"/>
     
     <xd:doc>
@@ -80,6 +80,8 @@
         </xsl:choose>
     </xsl:variable>
     
+    <xsl:variable name="enoVersion" select="$properties//EnoVersion"/>
+    
     <xd:doc>
         <xd:desc>
             <xd:p>Characters used to surround variables in conditioned text.</xd:p>
@@ -89,7 +91,7 @@
     <xsl:variable name="conditioning-variable-end" select="$properties//TextConditioningVariable/ddi/After"/>
     
     <xsl:variable name="filter-type" select="$properties//Filter"/>
-
+    
     <xsl:variable name="regex-var" select="'[a-zA-Z0-9\-_]*'"/>
     <xsl:variable name="regex-var-surrounded" select="concat($conditioning-variable-begin,$regex-var,$conditioning-variable-end)"/>
     <xsl:variable name="regex-var-large-surrounded" select="concat('number\(if\s+\(',$regex-var-surrounded,'=''''\)\sthen\s+''0''\s+else\s+',$regex-var-surrounded,'\)')"/>
@@ -152,7 +154,7 @@
         <xsl:param name="context" as="item()"/>
         <xsl:sequence select="enoddi:get-instructions-by-format($context,'footnote') | enoddi:get-next-filter-description($context)"/>
     </xsl:function>
-
+    
     <xd:doc>
         <xd:desc>
             <xd:p>Function for retrieving instructions based on the location they need to be outputted</xd:p>
@@ -168,7 +170,7 @@
         
         <xsl:variable name="formulaReadOnly" select="enoddi:get-deactivatable-ancestors($context)" as="xs:string*"/>
         <xsl:variable name="formulaRelevant" select="enoddi:get-hideable-ancestors($context)" as="xs:string*"/>		
-
+        
         <xsl:choose>
             <xsl:when test="$filter-type='sdmx'">
                 <xsl:copy-of select="normalize-space(enolunatic:get-vtl-sdmx-filter($context,$formulaReadOnly,$formulaRelevant))"/>
@@ -176,7 +178,7 @@
         </xsl:choose>
         
     </xsl:function>
-        
+    
     <xsl:function name="enolunatic:get-vtl-label">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
@@ -336,7 +338,7 @@
     <xsl:function name="enolunatic:replace-variable-with-collected-and-external-variables-formula">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="variable"/>
-
+        
         <xsl:variable name="temp" select="enoddi:get-generation-instruction($context,enolunatic:get-variable-business-name($variable))"/>
         <xsl:choose>
             <xsl:when test="$temp!=''">
@@ -347,11 +349,11 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
-
+    
     <xsl:function name="enolunatic:replace-all-variables-with-business-name">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="formula"/>
-
+        
         <xsl:variable name="temp-formula">
             <xsl:choose>
                 <xsl:when test="$formula">
@@ -391,7 +393,7 @@
         </xsl:variable>
         <xsl:value-of select="$final-formula"/>
     </xsl:function>
-
+    
     <xd:doc>
         <xd:desc>
             <xd:p>Function: enolunatic:get-cast-variable.</xd:p>
@@ -419,7 +421,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
-
+    
     <xsl:function name="enolunatic:find-variables-in-formula">
         <xsl:param name="formula"/>
         <xsl:if test="$formula">
@@ -427,8 +429,8 @@
                 <xsl:analyze-string select="$formula" regex="{$regex-var-large-surrounded}">
                     <xsl:matching-substring>
                         <xsl:variable name="temp" select="replace(replace(.,
-                                concat('number\(if\s+\(',$regex-var-surrounded,'=''''\)\sthen\s+''0''\s+else\s+',$conditioning-variable-begin),''),
-                                concat($conditioning-variable-end,'\)'),'')"/>
+                            concat('number\(if\s+\(',$regex-var-surrounded,'=''''\)\sthen\s+''0''\s+else\s+',$conditioning-variable-begin),''),
+                            concat($conditioning-variable-end,'\)'),'')"/>
                         <xsl:variable name="var" select="replace(replace($temp,$conditioning-variable-begin,''),$conditioning-variable-end,'')"/>
                         <xsl:copy-of select="$var"/>
                     </xsl:matching-substring>
@@ -440,13 +442,13 @@
                     </xsl:matching-substring>
                 </xsl:analyze-string>
             </xsl:variable>
-
+            
             <xsl:for-each select="distinct-values($variables)">
                 <xsl:sequence select="."/>
             </xsl:for-each>
         </xsl:if>
     </xsl:function>
-
+    
     <xd:doc>
         <xd:desc>
             <xd:p>Recursive named template: enolunatic:replace-variables-in-formula.</xd:p>
@@ -458,19 +460,19 @@
     <xsl:template name="enolunatic:replace-variables-in-formula">
         <xsl:param name="source-context" as="item()"/>
         <xsl:param name="formula"/>
-
+        
         <xsl:variable name="variablesFound" as="xs:string*" select="enolunatic:find-variables-in-formula($formula)"/>
-
+        
         <xsl:variable name="conditions" as="xs:boolean*">
             <xsl:for-each select="$variablesFound">
                 <xsl:value-of select=".!=enolunatic:replace-variable-with-collected-and-external-variables-formula($source-context,.)"/>
             </xsl:for-each>
         </xsl:variable>
-
+        
         <xsl:variable name="conditionToContinue" as="xs:boolean">
             <xsl:value-of select="count($conditions[.=true()])=count($conditions) and count($conditions)!=0"/>
         </xsl:variable>
-
+        
         <xsl:choose>
             <xsl:when test="$conditionToContinue">
                 <xsl:variable name="temp-formula">
@@ -530,5 +532,18 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
+    
+    <xsl:function name="enolunatic:is-generating-loop" as="xs:boolean">
+        <xsl:param name="context" as="item()"/>
+        <xsl:variable name="isLinkedLoop" select="enoddi:is-linked-loop($context)" as="xs:boolean"/>
+        <xsl:variable name="linkedContainers" select="enoddi:get-linked-containers($context)"/>
+        <xsl:value-of select="not($isLinkedLoop) and count($linkedContainers) &gt; 1 and enoddi:get-id($context)=enoddi:get-id($linkedContainers[1])"/>
+    </xsl:function>
+    
+    <xsl:function name="enolunatic:get-loop-generator-id">
+        <xsl:param name="context" as="item()"/>
+        <xsl:variable name="linkedContainers" select="enoddi:get-linked-containers($context)" as="item()*"/>
+        <xsl:value-of select="enoddi:get-id($linkedContainers[1])"/>
+    </xsl:function>
+    
 </xsl:stylesheet>

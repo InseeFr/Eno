@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.insee.eno</groupId>
 	<artifactId>eno-core</artifactId>
-	<version>2.1.0-rc3</version>
+	<version>2.1.0-ddixmllunatic-loop</version>
 	<packaging>jar</packaging>
 
 	<name>Eno – Questionnaire generator</name>
@@ -127,7 +127,7 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
 			<version>${log4j-slf4j.version}</version>
-			<scope>test</scope>
+			<scope>compile</scope>
 		</dependency>
 
 		<!-- Jaxb -->
@@ -250,7 +250,7 @@
 				<version>1.2.1</version>
 				<executions>
 					<execution>
-						<phase>package</phase>
+						<phase>process-classes</phase>
 						<goals>
 							<goal>java</goal>
 						</goals>
@@ -261,12 +261,33 @@
 									<key>dest</key>
 									<value>${project.basedir}/src/main/resources</value>
 								</property>
+								<property>
+									<key>log4j2.level</key>
+									<value>INFO</value>
+								</property>
 							</systemProperties>
+
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/config/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/config/*.xml</exclude>
+				</excludes>
+			</resource>
+		</resources>
 	</build>
 
 	<profiles>

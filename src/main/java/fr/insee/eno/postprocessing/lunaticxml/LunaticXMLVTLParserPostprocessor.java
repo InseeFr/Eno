@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,9 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 		try {
 			FileUtils.writeStringToFile(outputCustomFOFile, parseToVTLInNodes(inputString), StandardCharsets.UTF_8);
 		}catch(Exception e) {
-			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+			String errorMessage = String.format("An error was occured during the %s transformation. %s",
+					toString(),
+					e.getMessage());
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}

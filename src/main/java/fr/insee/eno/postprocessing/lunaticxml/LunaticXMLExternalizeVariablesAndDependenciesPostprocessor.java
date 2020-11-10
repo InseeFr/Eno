@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +18,13 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * Customization of JS postprocessor.
  */
-public class LunaticXMLExternalizeVariablesPostprocessor implements Postprocessor {
+public class LunaticXMLExternalizeVariablesAndDependenciesPostprocessor implements Postprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(LunaticXMLExternalizeVariablesPostprocessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(LunaticXMLExternalizeVariablesAndDependenciesPostprocessor.class);
 
 	private XslTransformation saxonService = new XslTransformation();
+
+	private static final String styleSheetPath = Constants.TRANSFORMATIONS_EXTERNALIZE_VARIABLES_AND_DEPENDENCIES_LUNATIC_XML;
 
 	@Override
 	public File process(File input, byte[] parameters, String surveyName) throws Exception {
@@ -31,14 +34,17 @@ public class LunaticXMLExternalizeVariablesPostprocessor implements Postprocesso
 				Constants.EXTERNALIZE_VARIABLES_LUNATIC_XML_EXTENSION);
 		logger.debug("Output folder for basic-form : " + outputForJSFile.getAbsolutePath());
 
-		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_EXTERNALIZE_VARIABLES_LUNATIC_XML);
+		InputStream JS_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForJSFile);
 
 		try {
 			saxonService.transformLunaticXMLToLunaticXMLPost(inputStream,outputStream, JS_XSL);
 		}catch(Exception e) {
-			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
+					toString(),
+					e.getMessage(),
+					Utils.getErrorLocation(styleSheetPath,e));
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
@@ -46,7 +52,7 @@ public class LunaticXMLExternalizeVariablesPostprocessor implements Postprocesso
 		inputStream.close();
 		outputStream.close();
 		JS_XSL.close();
-		logger.info("End JS externalize codeLists post-processing");
+		logger.info("End JS externalize variables post-processing");
 
 		return outputForJSFile;
 	}

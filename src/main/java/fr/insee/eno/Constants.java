@@ -59,8 +59,7 @@ public final class Constants {
 	public static final String PRE_PROCESSING_FOLDER = "/xslt/pre-processing";
 	public static final String UTIL_DDI_SPLITTING_XSL = UTIL_FOLDER_PATH + "/ddi/splitting.xsl";
 	/******************* DDI - Pre-processing ****************/
-	public static final String DDI_DEREFERENCING_XSL = PRE_PROCESSING_FOLDER + "/ddi/dereferencing.xsl";
-	public static final String UTIL_DDI_DEREFERENCING_XSL = UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl";
+	public static final String UTIL_DDI_DEREFERENCING_XSL = PRE_PROCESSING_FOLDER + "/ddi/dereferencing.xsl";
 	public static final String UTIL_DDI_TITLING_XSL = PRE_PROCESSING_FOLDER + "/ddi/titling.xsl";
 	public static final String UTIL_DDI_MAPPING_XSL = PRE_PROCESSING_FOLDER + "/ddi/mapping.xsl";
 	public static final String UTIL_DDI_CLEANING_XSL = PRE_PROCESSING_FOLDER + "/ddi/cleaning.xsl";
@@ -169,7 +168,7 @@ public final class Constants {
 	
 	/********************* JS/XML-Lunatic - Post-processing ******************/
 	public static final String TRANSFORMATIONS_SORT_COMPONENTS_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/sort-components.xsl";
-	public static final String TRANSFORMATIONS_EXTERNALIZE_VARIABLES_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/externalize-variables.xsl";
+	public static final String TRANSFORMATIONS_EXTERNALIZE_VARIABLES_AND_DEPENDENCIES_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/externalize-variables-and-dependencies.xsl";
 	public static final String TRANSFORMATIONS_INSERT_GENERIC_QUESTIONS_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/insert-generic-questions.xsl";
 	
 	/********************* FR/Xform Post-processing ******************/

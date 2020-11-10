@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,8 @@ public class DDIMappingPreprocessor implements Preprocessor {
 
 	private XslTransformation saxonService = new XslTransformation();
 
+	private static final String styleSheetPath = Constants.UTIL_DDI_MAPPING_XSL;
+
 	@Override
 	public File process(File inputFile, byte[] parametersFile, String survey, String in2out) throws Exception {
 		logger.info("DDIPreprocessing Target : START");
@@ -32,16 +35,19 @@ public class DDIMappingPreprocessor implements Preprocessor {
 		File mappingFile =Constants.tEMP_MAPPING_TMP(sUB_TEMP_FOLDER);
 		// ----- Dereferencing
 		logger.debug("Mapping : -Input : " + inputFile + " -Output : " + mappingFile
-				+ " -Stylesheet : " + Constants.UTIL_DDI_DEREFERENCING_XSL + " -Parameters : " + sUB_TEMP_FOLDER);
+				+ " -Stylesheet : " + styleSheetPath + " -Parameters : " + sUB_TEMP_FOLDER);
 
-		InputStream isDDI_MAPPING_XSL = Constants.getInputStreamFromPath(Constants.UTIL_DDI_MAPPING_XSL);
+		InputStream isDDI_MAPPING_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 		InputStream isInputFile = FileUtils.openInputStream(inputFile);
 		OutputStream osTEMP_MAPPING_TMP = FileUtils.openOutputStream(mappingFile);
 		
 		try {
 			saxonService.transformMapping(isInputFile, isDDI_MAPPING_XSL, osTEMP_MAPPING_TMP,parametersFile);
 		}catch(Exception e) {
-			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
+					toString(),
+					e.getMessage(),
+					Utils.getErrorLocation(styleSheetPath,e));
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
