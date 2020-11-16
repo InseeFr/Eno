@@ -312,6 +312,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 			break;
 		case POGUES_XML_INSERT_FILTER_LOOP_INTO_QUESTION_TREE:
 			preprocessor = poguesXmlFilterLoopIntoQuestionTree;
+			break;
 		case POGUES_XML_GOTO_2_ITE:
 			preprocessor = poguesXmlGoTo;
 			break;
