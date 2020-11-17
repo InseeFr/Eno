@@ -849,7 +849,7 @@
     <xsl:template match="driver-ControlConstructScheme//Loop" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <xsl:variable name="maxVal" select="enoddi33:get-high($source-context)"/>
+        <xsl:variable name="maxVal" select="enoddi33:get-maximum-occurrences($source-context)"/>
         <xsl:variable name="minVal" select="enoddi33:get-low($source-context)"/>
         <xsl:variable name="labelVal" select="enoddi33:get-label($source-context)"/>
         <xsl:variable name="stepVal" select="enoddi33:get-loop-step($source-context)"/>
@@ -872,10 +872,9 @@
             </xsl:if>
             <xsl:if test="$maxVal != ''">
                 <d:LoopWhile>
-                    <!-- Call Command template if Maximum contains a formula-->
-                    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-LoopWhile', .)" tunnel="yes"/>
-                    </xsl:apply-templates>
+                    <xsl:call-template name="Command">
+                        <xsl:with-param name="source-context" tunnel="yes" select="enoddi33:get-maximum-occurrences($source-context)"/>
+                    </xsl:call-template>                            
                 </d:LoopWhile>
             </xsl:if>
             <xsl:if test="$stepVal != ''">
@@ -998,13 +997,6 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="driver-LoopWhile/Command | driver-LoopIfThenElse/Command" mode="model" priority="3">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:call-template name="Command">
-            <xsl:with-param name="source-context" select="$source-context" tunnel="yes"/>
-        </xsl:call-template>
-    </xsl:template>
-
     <!-- This specific template is needed because for IfInstruction Command no CommandCode is required (driver missing ?) -->
     <xsl:template name="Command">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -1105,7 +1097,7 @@
                             <xsl:value-of select="concat('if ',$related-variables-with-id/*[1]/ip-id,'=&apos;'''')"/>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:message>Only madatory Response with unique answer is supported.</xsl:message>
+                            <xsl:message>Only mandatory Response with unique answer is supported.</xsl:message>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:variable>
@@ -1187,6 +1179,7 @@
                 <xsl:otherwise><xsl:value-of select="enoddi33:get-then-sequence-id($source-context)"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
+
         <xsl:if test="name()='IfThenElse' or (name()='Loop' and enoddi33:get-loop-filter($source-context) != '')">
             <d:IfThenElse>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
@@ -1202,9 +1195,18 @@
                 </r:Description>
                 <d:TypeOfIfThenElse controlledVocabularyID="INSEE-TOITE-CL-1">hideable</d:TypeOfIfThenElse>
                 <d:IfCondition>
-                    <xsl:call-template name="Command">
-                        <xsl:with-param name="source-context" select="enoddi33:get-command($source-context)" tunnel="yes"/>
-                    </xsl:call-template>
+                    <xsl:choose>
+                        <xsl:when test="name()='Loop'">
+                            <xsl:call-template name="Command">
+                                <xsl:with-param name="source-context" select="enoddi33:get-loop-filter($source-context)" tunnel="yes"/>
+                            </xsl:call-template>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:call-template name="Command">
+                                <xsl:with-param name="source-context" select="enoddi33:get-command($source-context)" tunnel="yes"/>
+                            </xsl:call-template>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </d:IfCondition>
                 <d:ThenConstructReference>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
