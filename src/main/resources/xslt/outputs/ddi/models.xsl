@@ -989,6 +989,15 @@
                 <xsl:with-param name="source-context" select="$source-context" tunnel="yes"/>
             </xsl:call-template>
         </r:CommandCode>
+        <!-- Define the scope of the Variable, because of loop. Outside loops, it's the main sequence which is referenced. -->
+        <xsl:if test="ancestor::driver-ProcessingInstructionScheme">
+            <d:ControlConstructReference>
+                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                <r:ID><xsl:value-of select="enoddi33:get-referenced-sequence-id($source-context)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+        </xsl:if>
     </xsl:template>
 
     <!-- This specific template is needed because for IfInstruction Command no CommandCode is required (driver missing ?) -->
