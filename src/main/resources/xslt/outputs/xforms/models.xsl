@@ -2339,7 +2339,7 @@
             <xhtml:tbody>
                 <!-- if the loop is in a loop, instance-ancestor helps choosing the good ancestor loop instance -->
                 <xf:repeat id="{$container-name}" bind="{$container-name}-bind" nodeset="{$instance-ancestor-label}{$container-name}/{$loop-name}">
-                    <xf:var name="{$container-name}-position" value="position()"/>
+                    <xf:var name="{replace($container-name,'-Container','-position')}" value="position()"/>
                     <!-- the table has a repeated zone that may have more than one line -->
                     <xsl:for-each select="enoxforms:get-body-lines($source-context)">
                         <xhtml:tr>
@@ -2521,7 +2521,7 @@
         <xsl:variable name="has-ancestor-loop" select="if (ancestor::QuestionLoop) then true() else false()" as="xs:boolean"/>
 
         <xf:repeat id="{$container-name}" bind="{$container-name}-bind" nodeset="{$instance-ancestor-label}{$container-name}/{$loop-name}">
-            <xf:var name="{$container-name}-position" value="position()"/>
+            <xf:var name="{replace($container-name,'-Container','-position')}" value="position()"/>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <!-- the absolute address of the element in enriched for Loops, for which several instances are possible -->
