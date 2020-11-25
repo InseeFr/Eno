@@ -1139,13 +1139,16 @@
         <xsl:variable name="related-questions" as="node()">
             <Questions>
                 <xsl:if test="$related-variables//*">
-                    <xsl:for-each select="enoddi33:get-related-response($related-variables)">
-                        <Question>
-                            <xsl:attribute name="id" select="enoddi33:get-question-id(.)"/>
-                            <xsl:attribute name="type">
-                                <xsl:value-of select="if(enoddi33:get-question-type(.) = ('MULTIPLE_CHOICE','TABLE','DYNAMIC_TABLE')) then('QuestionGrid') else('QuestionItem')"/>
-                            </xsl:attribute>
-                        </Question>
+                    <xsl:for-each select="$related-variables">
+                        <xsl:variable name="response" select="enoddi33:get-related-response(.)"/>
+                        <xsl:if test="$response//*">
+                            <Question>
+                                <xsl:attribute name="id" select="enoddi33:get-question-id($response)"/>
+                                <xsl:attribute name="type">
+                                    <xsl:value-of select="if(enoddi33:get-question-type($response) = ('MULTIPLE_CHOICE','TABLE','DYNAMIC_TABLE')) then('QuestionGrid') else('QuestionItem')"/>
+                                </xsl:attribute>
+                            </Question>                            
+                        </xsl:if>
                     </xsl:for-each>
                 </xsl:if>
             </Questions>
