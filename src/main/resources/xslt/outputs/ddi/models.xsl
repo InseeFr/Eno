@@ -874,7 +874,7 @@
                 <d:LoopWhile>
                     <xsl:call-template name="Command">
                         <xsl:with-param name="source-context" tunnel="yes" select="enoddi33:get-maximum-occurrences($source-context)"/>
-                    </xsl:call-template>                            
+                    </xsl:call-template>
                 </d:LoopWhile>
             </xsl:if>
             <xsl:if test="$stepVal != ''">
@@ -986,15 +986,6 @@
                 <xsl:with-param name="source-context" select="$source-context" tunnel="yes"/>
             </xsl:call-template>
         </r:CommandCode>
-        <!-- Define the scope of the Variable, because of loop. Outside loops, it's the main sequence which is referenced. -->
-        <xsl:if test="ancestor::driver-ProcessingInstructionScheme">
-            <d:ControlConstructReference>
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi33:get-referenced-sequence-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
-                <r:TypeOfObject>Sequence</r:TypeOfObject>
-            </d:ControlConstructReference>
-        </xsl:if>
     </xsl:template>
 
     <!-- This specific template is needed because for IfInstruction Command no CommandCode is required (driver missing ?) -->
@@ -1143,24 +1134,46 @@
     <xsl:template match="driver-ProcessingInstructionScheme//Variable" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+
+        <xsl:variable name="related-variables" select="enoddi33:get-related-variable($source-context)" as="node() *"/>
+        <xsl:variable name="variable-group" select="enoddi33:get-variable-group($source-context)"/>
+        <xsl:variable name="main-sequence" select="enoddi33:get-main-sequence-id($source-context)"/>
+
         <d:GenerationInstruction>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi33:get-gi-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
-            <xsl:variable name="related-variables" select="enoddi33:get-related-variable($source-context)"/>
             <xsl:comment><![CDATA[<d:SourceQuestion>Not implemented.</d:SourceQuestion>]]></xsl:comment>
             <xsl:for-each select="$related-variables">
-            <d:SourceVariable>
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi33:get-id(.)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
-                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+                <d:SourceVariable>
+                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                    <r:ID><xsl:value-of select="enoddi33:get-id(.)"/></r:ID>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                    <r:TypeOfObject>Variable</r:TypeOfObject>
+                </d:SourceVariable>
             </xsl:for-each>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <xsl:with-param name="related-variables" select="$related-variables" tunnel="yes"/>
             </xsl:apply-templates>
+            <xsl:choose>
+                <xsl:when test="$main-sequence = concat('Sequence-',$variable-group)">
+                    <d:ControlConstructReference>
+                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                        <r:ID><xsl:value-of select="$main-sequence"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                        <r:TypeOfObject>Sequence</r:TypeOfObject>
+                    </d:ControlConstructReference>
+                </xsl:when>
+                <xsl:otherwise>
+                    <d:ControlConstructReference>
+                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                        <r:ID><xsl:value-of select="$variable-group"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                        <r:TypeOfObject>Loop</r:TypeOfObject>
+                    </d:ControlConstructReference>
+                </xsl:otherwise>
+            </xsl:choose>
         </d:GenerationInstruction>
     </xsl:template>
 
