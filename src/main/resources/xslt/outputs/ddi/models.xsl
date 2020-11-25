@@ -1136,6 +1136,20 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
 
         <xsl:variable name="related-variables" select="enoddi33:get-related-variable($source-context)" as="node() *"/>
+        <xsl:variable name="related-questions" as="node()">
+            <Questions>
+                <xsl:if test="$related-variables//*">
+                    <xsl:for-each select="enoddi33:get-related-response($related-variables)">
+                        <Question>
+                            <xsl:attribute name="id" select="enoddi33:get-question-id(.)"/>
+                            <xsl:attribute name="type">
+                                <xsl:value-of select="if(enoddi33:get-question-type(.) = ('MULTIPLE_CHOICE','TABLE','DYNAMIC_TABLE')) then('QuestionGrid') else('QuestionItem')"/>
+                            </xsl:attribute>
+                        </Question>
+                    </xsl:for-each>
+                </xsl:if>
+            </Questions>
+        </xsl:variable>
         <xsl:variable name="variable-group" select="enoddi33:get-variable-group($source-context)"/>
         <xsl:variable name="main-sequence" select="enoddi33:get-main-sequence-id($source-context)"/>
 
@@ -1143,7 +1157,16 @@
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi33:get-gi-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
-            <xsl:comment><![CDATA[<d:SourceQuestion>Not implemented.</d:SourceQuestion>]]></xsl:comment>
+            <xsl:for-each select="$related-questions//Question">
+                <xsl:if test="not(preceding-sibling::Question[@id = current()/@id])">
+                    <d:SourceQuestion>
+                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                        <r:ID><xsl:value-of select="@id"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                        <r:TypeOfObject><xsl:value-of select="@type"/></r:TypeOfObject>
+                    </d:SourceQuestion>
+                </xsl:if>
+            </xsl:for-each>
             <xsl:for-each select="$related-variables">
                 <d:SourceVariable>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
