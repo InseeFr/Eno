@@ -448,12 +448,12 @@
                             <xsl:value-of select="concat(' else (if (number(instance(''fr-form-instance'')/Util/CurrentSection) &gt;',$last-page-position,')')"/>
                             <xsl:value-of select="concat(' then ((count(instance(''fr-form-instance'')//',$container,'/',$repeat-name,$repeat-condition,') -1)*',$repeat-pages-count,')')"/>
                             <!-- inside the repeat : (number of previous relevant occurrences) * number of pages  -->
-                            <xsl:value-of select="' else (count(instance(''fr-form-instance'')//'"/>
+                            <xsl:value-of select="' else (count(instance(''fr-form-instance'')'"/>
                             <xsl:for-each select="ancestor-or-self::xf:repeat">
                                 <xsl:sort order="descending"/>
                                 <xsl:variable name="ancestor-container" select="@id"/>
                                 <xsl:variable name="ancestor-group-name" select="substring-after(@nodeset,concat($ancestor-container,'/'))"/>
-                                <xsl:value-of select="concat($ancestor-group-name,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']]')"/>
+                                <xsl:value-of select="concat('//',$ancestor-group-name,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']]')"/>
                             </xsl:for-each>
                             <xsl:value-of select="concat('/preceding::',$repeat-name,'[parent::',$container,']',$repeat-condition,')*',$repeat-pages-count,')))')"/>
                         </xsl:for-each>
@@ -968,7 +968,16 @@
     <xsl:template match="xf:var[@value='position()' and parent::xf:repeat/descendant::fr:section]">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:attribute name="value" select="concat('number(instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',parent::xf:repeat/@id,'''])')"/>
+            <xsl:attribute name="value">
+                <xsl:value-of select="'instance(''fr-form-instance'')'"/>
+                <xsl:for-each select="ancestor::xf:repeat">
+                    <xsl:sort order="descending"/>
+                    <xsl:variable name="ancestor-container" select="@id"/>
+                    <xsl:variable name="ancestor-group-name" select="substring-after(@nodeset,concat($ancestor-container,'/'))"/>
+                    <xsl:value-of select="concat('//',$ancestor-group-name,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']]')"/>
+                </xsl:for-each>
+                <xsl:value-of select="'/count(preceding-sibling::*)+1'"/>
+            </xsl:attribute>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
     </xsl:template>
@@ -1192,7 +1201,6 @@
                     nodeset=&quot;',@container,'/',@loop,'&quot;
                     relevant=&quot;@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',@container,''']&quot;&gt;')"
                     disable-output-escaping="yes"/>
-                <xf:var name="{@container}-position" value="position()"/>
             </xsl:for-each>
             <xsl:copy>
                 <xsl:apply-templates select="node() | @*"/>
