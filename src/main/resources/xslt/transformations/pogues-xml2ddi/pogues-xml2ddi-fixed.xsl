@@ -191,16 +191,6 @@
         <xsl:value-of select="concat('Sequence-',enopogues:get-questionnaire-id(.))"/>
     </xsl:template>
 
-    <!--TODO The implementation building id should be done with "rich" outGetter mechanism =>@v2.0 -->
-    <xsl:function name="enoddi33:get-referenced-sequence-id">
-        <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="enoddi33:get-referenced-sequence-id"/>
-    </xsl:function>
-
-    <xsl:template match="pogues:Formula" mode="enoddi33:get-referenced-sequence-id">
-        <xsl:value-of select="enoddi33:get-main-sequence-id(.)"/>
-    </xsl:template>
-
     <!--TODO The implementation of ComputationItem type should be done with "rich" outGetter mechanism =>@v2.0 -->
     <xsl:function name="enoddi33:get-ci-type">
         <xsl:param name="context" as="item()"/>
