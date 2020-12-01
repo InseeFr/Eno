@@ -969,14 +969,14 @@
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="value">
-                <xsl:value-of select="'instance(''fr-form-instance'')'"/>
+                <xsl:value-of select="'count(instance(''fr-form-instance'')'"/>
                 <xsl:for-each select="ancestor::xf:repeat">
                     <xsl:sort order="descending"/>
                     <xsl:variable name="ancestor-container" select="@id"/>
                     <xsl:variable name="ancestor-group-name" select="substring-after(@nodeset,concat($ancestor-container,'/'))"/>
-                    <xsl:value-of select="concat('//',$ancestor-group-name,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']]')"/>
+                    <xsl:value-of select="concat('//',$ancestor-container,'/',$ancestor-group-name,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']]')"/>
                 </xsl:for-each>
-                <xsl:value-of select="'/count(preceding-sibling::*)+1'"/>
+                <xsl:value-of select="'/preceding-sibling::*)+1'"/>
             </xsl:attribute>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
