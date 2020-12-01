@@ -868,14 +868,13 @@
             <xsl:if test="$relevant != ''">
                 <xsl:choose>
                     <xsl:when test="$ancestor-loops//Loop">
-                        <xf:calculate>
-                            <xsl:attribute name="value">
-                                <xsl:call-template name="improve-bind-formula">
-                                    <xsl:with-param name="attribute" select="concat('xxf:evaluate(''',replace($relevant,'''',''''''),''')')"/>
-                                    <xsl:with-param name="ancestor-loops" as="node()" select="$ancestor-loops"/>
-                                </xsl:call-template>
-                            </xsl:attribute>
-                        </xf:calculate>
+                        <xsl:variable name="relevant-text">
+                            <xsl:call-template name="improve-bind-formula">
+                                <xsl:with-param name="attribute" select="$relevant"/>
+                                <xsl:with-param name="ancestor-loops" as="node()" select="$ancestor-loops"/>
+                            </xsl:call-template>
+                        </xsl:variable>
+                        <xf:calculate value="xxf:evaluate('{replace($relevant-text,'''','''''')}')"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xf:calculate value="xxf:evaluate-bind-property('{name()}-bind','relevant')"/>
