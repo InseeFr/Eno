@@ -865,21 +865,8 @@
         <xsl:variable name="relevant" select="//xf:bind[@name=$module-name]/@relevant"/>
 
         <xf:bind id="page-{name()}-bind" name="{name()}" ref="{name()}">
-            <xsl:if test="$relevant != ''">
-                <xsl:choose>
-                    <xsl:when test="$ancestor-loops//Loop">
-                        <xsl:variable name="relevant-text">
-                            <xsl:call-template name="improve-bind-formula">
-                                <xsl:with-param name="attribute" select="$relevant"/>
-                                <xsl:with-param name="ancestor-loops" as="node()" select="$ancestor-loops"/>
-                            </xsl:call-template>
-                        </xsl:variable>
-                        <xf:calculate value="xxf:evaluate('{replace($relevant-text,'''','''''')}')"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xf:calculate value="xxf:evaluate-bind-property('{name()}-bind','relevant')"/>
-                    </xsl:otherwise>
-                </xsl:choose>
+            <xsl:if test="$relevant != '' or $ancestor-loops//Loop">
+                <xf:calculate value="xxf:evaluate-bind-property('{name()}-bind','relevant')"/>
             </xsl:if>
             <!-- Creating a constraint for each warning-level constraint -->
             <xsl:apply-templates select="//xf:bind[@name=$module-name]/*" mode="page-check">
