@@ -217,6 +217,9 @@
                 <xsl:when test=". = $list//Variable/@name">
                     <xsl:value-of select="concat('Variable[@idVariable=''',.,''']')"/>
                 </xsl:when>
+                <xsl:when test="not(starts-with(.,'replace'))">
+                    <xsl:value-of select="."/>
+                </xsl:when>
                 <xsl:otherwise>
                     <xsl:variable name="content">
                         <xsl:call-template name="replace-element">
