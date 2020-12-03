@@ -85,6 +85,9 @@
     <xsl:variable name="URLNotice" select="$metadata//URLNotice"/>
     <xsl:variable name="URLSpecimen" select="$metadata//URLSpecimen"/>
     <xsl:variable name="URLDiffusion" select="$metadata//URLDiffusion"/>
+    <xsl:variable name="Enq_UrlNotice" select="$metadata//Enq_UrlNotice"/>
+    <xsl:variable name="Enq_UrlSpecimen" select="$metadata//Enq_UrlSpecimen"/>
+    <xsl:variable name="Enq_UrlDiffusion" select="$metadata//Enq_UrlDiffusion"/>
 
     <xsl:template match="/">
         <xsl:apply-templates select="xhtml:html"/>
@@ -204,14 +207,14 @@
     <!-- We enter this information in the personal section. They will be reorganized in Orbeon. -->
     <xsl:template match="fr:body/xf:switch[@id='section-body']">
         <xhtml:div class="perso-formulaire">
-            <xsl:if test="$URLNotice/text()">
-                <xhtml:a href="{$URLNotice}" id="URLNotice"/>
+            <xsl:if test="$URLNotice/text() or $Enq_UrlNotice/text()">
+                <xhtml:a href="{if($context=$household) then $Enq_UrlNotice else $URLNotice}" id="URLNotice"/>
             </xsl:if>
-            <xsl:if test="$URLSpecimen/text()">
-                <xhtml:a href="{$URLSpecimen}" id="URLSpecimen"/>
+            <xsl:if test="$URLSpecimen/text() or $Enq_UrlSpecimen/text()">
+                <xhtml:a href="{if($context=$household) then $Enq_UrlSpecimen else $URLSpecimen}" id="URLSpecimen"/>
             </xsl:if>
-            <xsl:if test="$URLDiffusion/text()">
-                <xhtml:a href="{$URLDiffusion}" id="URLDiffusion"/>
+            <xsl:if test="$URLDiffusion/text() or $Enq_UrlDiffusion/text()">
+                <xhtml:a href="{if($context=$household) then $Enq_UrlDiffusion else $URLDiffusion}" id="URLDiffusion"/>
             </xsl:if>
         </xhtml:div>
         <xsl:copy>

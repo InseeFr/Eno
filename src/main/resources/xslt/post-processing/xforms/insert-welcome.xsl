@@ -291,13 +291,9 @@
                     
                     <xsl:text>&lt;/p&gt;&lt;p&gt;Visa n°</xsl:text>
                     <xsl:value-of select="$Enq_NumeroVisa" />
-                    <xsl:text> </xsl:text>
-                    <xsl:for-each select="$Enq_MinistereTutelle">
-                        <xsl:text>du Ministère </xsl:text>
-                        <xsl:value-of select="."/>
-                        <xsl:text>, </xsl:text>
-                    </xsl:for-each>
-                    <xsl:text>valable pour l'année </xsl:text>
+                    <xsl:text> du Ministre </xsl:text>
+                    <xsl:value-of select="$Enq_MinistereTutelle"/>
+                    <xsl:text>, valable pour l'année </xsl:text>
                     <xsl:value-of select="$Enq_AnneeCollecte" />
                     <xsl:choose>
                         <xsl:when test="$Enq_ParutionJO = 'oui'">
