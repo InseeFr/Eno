@@ -45,9 +45,9 @@
   <Enq_DateParutionJO>44197</Enq_DateParutionJO>
   <Enq_RespOperationnel>la Drees</Enq_RespOperationnel>
   <Enq_NomServiceRecours>Qui-est-service recours</Enq_NomServiceRecours>
-  <Enq_Notice>www.insee.fr</Enq_Notice>
-  <Enq_Specimen>www.insee.fr</Enq_Specimen>
-  <Enq_Diffusion>www.insee.fr</Enq_Diffusion>
+  <Enq_UrlNotice>www.insee.fr</Enq_UrlNotice>
+  <Enq_UrlSpecimen>www.insee.fr</Enq_UrlSpecimen>
+  <Enq_UrlDiffusion>www.insee.fr</Enq_UrlDiffusion>
   <Enq_AnneeCollecte>2021</Enq_AnneeCollecte>
   <Enq_NomServiceProducteurCourt>Insee</Enq_NomServiceProducteurCourt>
   <Enq_DateRetour>21/21/2021</Enq_DateRetour>
