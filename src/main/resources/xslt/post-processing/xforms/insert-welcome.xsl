@@ -110,19 +110,17 @@
     <xsl:variable name="Enq_ObjectifsCourts" select="$metadata//Enq_ObjectifsCourts" />
     <xsl:variable name="Enq_ObjectifsEnquete" select="$metadata//Enq_ObjectifsEnquete" />
     <xsl:variable name="Enq_CaractereObligatoire" select="$metadata//Enq_CaractereObligatoire" />
-    <xsl:variable name="Enq_RespTraitement" select="$metadata//Enq_RespTraitement" />
     <xsl:variable name="Enq_NumeroVisa" select="$metadata//Enq_NumeroVisa" />
     <xsl:variable name="Enq_MinistereTutelle" select="$metadata//Enq_MinistereTutelle" />
     <xsl:variable name="Enq_AnneeVisa" select="$metadata//Enq_AnneeVisa" />
     <xsl:variable name="Enq_ParutionJo" select="$metadata//Enq_ParutionJo" />
     <xsl:variable name="Enq_DateParutionJo" select="$metadata//Enq_DateParutionJo" />
     <xsl:variable name="Enq_RespOperationnel" select="$metadata//Enq_RespOperationnel" />
-    <xsl:variable name="Enq_NomServiceRecours" select="$metadata//Enq_NomServiceRecours" />
+    <xsl:variable name="Enq_RespTraitement" select="$metadata//Enq_RespTraitement" />
     <xsl:variable name="Enq_Notice" select="$metadata//Enq_Notice" />
     <xsl:variable name="Enq_Specimen" select="$metadata//Enq_Specimen" />
     <xsl:variable name="Enq_Diffusion" select="$metadata//Enq_Diffusion" />
     <xsl:variable name="Enq_AnneeCollecte" select="$metadata//Enq_AnneeCollecte" />
-    <xsl:variable name="Enq_NomServiceProducteurCourt" select="$metadata//Enq_NomServiceProducteurCourt" />
     <xsl:variable name="Enq_DateRetour" select="$metadata//Enq_DateRetour" />
     <xsl:template match="/">
         <xsl:apply-templates select="xhtml:html" />
@@ -293,7 +291,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                     <xsl:text>.&lt;/p&gt;&lt;p&gt;Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à </xsl:text>
-                    <xsl:value-of select="$Enq_NomServiceProducteurCourt" />
+                    <xsl:value-of select="$Enq_RespOperationnel" />
                     <xsl:text>. Le  &lt;a href="</xsl:text>
                     <xsl:value-of select="$properties//lois/rgpd" />
                     <xsl:text>" target="_blank"&gt;règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD)&lt;/a&gt; ainsi </xsl:text>
@@ -301,7 +299,7 @@
                     <xsl:value-of select="$properties//lois/informatique" />
                     <xsl:text>" target="_blank"&gt;loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés&lt;/a&gt;, s'appliquent à la présente enquête. </xsl:text>
                     <xsl:text>Les droits des personnes, rappelés dans la lettre-avis, peuvent être exercés auprès de </xsl:text>
-                    <xsl:value-of select="$Enq_NomServiceRecours" />
+                    <xsl:value-of select="$Enq_RespTraitement" />
                     <xsl:text>.&lt;/p&gt;&lt;/div&gt;</xsl:text>
                 </xsl:if>
                 <xsl:if test="$context=$business">

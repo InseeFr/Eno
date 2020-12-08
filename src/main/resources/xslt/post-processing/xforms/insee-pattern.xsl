@@ -73,8 +73,8 @@
 
     <xsl:variable name="LibelleEnquete">
         <xsl:choose>
-            <xsl:when test="$metadata//LibelleEnquete!=''">
-                <xsl:value-of select="$metadata//LibelleEnquete"/>
+            <xsl:when test="$metadata//Enq_LibelleEnquete!=''">
+                <xsl:value-of select="$metadata//Enq_LibelleEnquete"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$metadata//Campagne/Libelle"/>
