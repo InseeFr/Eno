@@ -114,8 +114,8 @@
     <xsl:variable name="Enq_NumeroVisa" select="$metadata//Enq_NumeroVisa" />
     <xsl:variable name="Enq_MinistereTutelle" select="$metadata//Enq_MinistereTutelle" />
     <xsl:variable name="Enq_AnneeVisa" select="$metadata//Enq_AnneeVisa" />
-    <xsl:variable name="Enq_ParutionJO" select="$metadata//Enq_ParutionJO" />
-    <xsl:variable name="Enq_DateParutionJO" select="$metadata//Enq_DateParutionJO" />
+    <xsl:variable name="Enq_ParutionJo" select="$metadata//Enq_ParutionJo" />
+    <xsl:variable name="Enq_DateParutionJo" select="$metadata//Enq_DateParutionJo" />
     <xsl:variable name="Enq_RespOperationnel" select="$metadata//Enq_RespOperationnel" />
     <xsl:variable name="Enq_NomServiceRecours" select="$metadata//Enq_NomServiceRecours" />
     <xsl:variable name="Enq_Notice" select="$metadata//Enq_Notice" />
@@ -296,9 +296,9 @@
                     <xsl:text>, valable pour l'année </xsl:text>
                     <xsl:value-of select="$Enq_AnneeCollecte" />
                     <xsl:choose>
-                        <xsl:when test="$Enq_ParutionJO = 'oui'">
+                        <xsl:when test="$Enq_ParutionJo = 'oui'">
                             <xsl:text> - Arrêté en date du </xsl:text>
-                            <xsl:value-of select="$Enq_DateParutionJO" />
+                            <xsl:value-of select="$Enq_DateParutionJo" />
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:text> - Arrêté en cours de parution</xsl:text>
