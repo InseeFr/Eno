@@ -208,18 +208,6 @@
                     <xsl:text>&lt;p&gt;¤Ue_QuiRepond2¤&lt;/p&gt;</xsl:text>
                     <xsl:text>&lt;p&gt;¤Ue_QuiRepond3¤&lt;/p&gt;</xsl:text>
                     <xsl:text>&lt;/div&gt;</xsl:text>
-                    
-                    <xsl:text>&lt;div class="frame"&gt;&lt;p&gt;Cette enquête</xsl:text>
-                    <xsl:if test="$Enq_CaractereObligatoire=$CaractereObligatoireEnqueteReference">
-                        <xsl:text>,
-                            à &lt;b&gt;&lt;span style="text-decoration:underline"&gt;caractère
-                            obligatoire&lt;/span&gt;&lt;/b&gt;,</xsl:text>
-                    </xsl:if>
-                    <xsl:text> est reconnue d'&lt;b&gt;</xsl:text>
-                    <xsl:value-of select="$StatutEnquete" />
-                    <xsl:text>&lt;/b&gt;.&lt;/p&gt;&lt;p&gt;Merci de répondre avant le : &lt;b&gt;</xsl:text>
-                    <xsl:value-of select="$Enq_DateRetour"/>
-                    <xsl:text>&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;</xsl:text>
                 </xsl:if>
                 <xsl:if test="$context=$business">
                     <xsl:text>&lt;div class="frame"&gt;&lt;p&gt;Cette enquête</xsl:text>
