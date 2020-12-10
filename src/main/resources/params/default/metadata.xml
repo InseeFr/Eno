@@ -33,23 +33,26 @@
   <RapprochementDonnees>oui</RapprochementDonnees>
   <LibelleEnquete>Enquête de test - [Surchargeable] - </LibelleEnquete>
   <ObjectifsCourts>L’enquête auprès des individus a pour objectif de recueillir des informations. - [Surchargeable] -</ObjectifsCourts>
-  <Enq_LibelleEnquete>Enquête Vie Quot Santé année</Enq_LibelleEnquete>
-  <Enq_ObjectifsCourts>Obj courts Cette enquête doit permettre de blablablba</Enq_ObjectifsCourts>
-  <Enq_ObjectifsEnquete>Obj courts Cette enquête doit permettre de blablablba</Enq_ObjectifsEnquete>
-  <Enq_CaractereObligatoire>oui</Enq_CaractereObligatoire>
-  <Enq_RespTraitement>la Direction de la recherche, à l'Insee.</Enq_RespTraitement>
-  <Enq_RespOperationnel>l'Insee</Enq_RespOperationnel>
-  <Enq_NumeroVisa>2021XXXXXXX</Enq_NumeroVisa>
-  <Enq_MinistereTutelle>de l’économie et des finances</Enq_MinistereTutelle>
-  <Enq_AnneeVisa>2020</Enq_AnneeVisa>
-  <Enq_ParutionJo>oui</Enq_ParutionJo>
-  <Enq_DateParutionJo>44197</Enq_DateParutionJo>
-  <Enq_UrlNotice>www.insee.fr</Enq_UrlNotice>
-  <Enq_UrlSpecimen>www.insee.fr</Enq_UrlSpecimen>
-  <Enq_UrlDiffusion>www.insee.fr</Enq_UrlDiffusion>
-  <Enq_AnneeCollecte>2021</Enq_AnneeCollecte>
-  <Enq_DateRetour>21/21/2021</Enq_DateRetour>
   <URLNotice>https://www.insee.fr/notice</URLNotice>
   <URLSpecimen>https://www.insee.fr/specimen</URLSpecimen>
   <URLDiffusion>https://www.insee.fr/diffusion</URLDiffusion>
+  
+  <!-- household context -->
+  <Enq_UrlNotice>www.insee.fr</Enq_UrlNotice>
+  <Enq_UrlSpecimen>www.insee.fr</Enq_UrlSpecimen>
+  <Enq_UrlDiffusion>www.insee.fr</Enq_UrlDiffusion>
+  
+  <Enq_LibelleEnquete>Enquête Vie Quot Santé année</Enq_LibelleEnquete>
+  <Enq_ObjectifsCourts>Obj courts Cette enquête doit permettre de blablablba</Enq_ObjectifsCourts>
+  
+  <Enq_CaractereObligatoire>oui</Enq_CaractereObligatoire>
+  <Enq_RespTraitement>la Direction de la recherche, à l'Insee.</Enq_RespTraitement>
+  <Enq_NumeroVisa>2021XXXXXXX</Enq_NumeroVisa>
+  <Enq_MinistereTutelle>de l’économie et des finances</Enq_MinistereTutelle>
+  <Enq_AnneeVisa>2020</Enq_AnneeVisa>
+  
+  <Enq_ParutionJo>oui</Enq_ParutionJo>
+  <Enq_DateParutionJo>44197</Enq_DateParutionJo>
+  
+  <Enq_RespOperationnel>l'Insee</Enq_RespOperationnel>
 </metadata>

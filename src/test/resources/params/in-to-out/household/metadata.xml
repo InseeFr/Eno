@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<metadata>
-    <Enq_LibelleEnquete>Enquête auprès des salariés de l’État en 2018</Enq_LibelleEnquete>
-    <Enq_ObjectifsCourts>L’enquête auprès des salariés de l’État a pour objectif de recueillir des informations sur les salariés de la Fonction publique d’État</Enq_ObjectifsCourts>
-    <Enq_ObjectifsEnquete>L’enquête auprès des salariés de l’État a pour objectif de recueillir des informations sur les salariés de la Fonction publique d’État</Enq_ObjectifsEnquete>
-    <Enq_CaractereObligatoire>non</Enq_CaractereObligatoire>
-    <Enq_RespTraitement>Insee Grand Est – établissement de Nancy – PENM – 15 rue du Général Hulot – CS 54229 – 54042 Nancy cedex</Enq_RespTraitement>
-    <Enq_RespOperationnel>l'Insee</Enq_RespOperationnel>
-    <Enq_NumeroVisa>2021XXXXXXX</Enq_NumeroVisa>
-    <Enq_MinistereTutelle>de l’économie et des finances</Enq_MinistereTutelle>
-    <Enq_AnneeVisa>2020</Enq_AnneeVisa>
-    <Enq_ParutionJo>oui</Enq_ParutionJo>
-    <Enq_DateParutionJo>25 juillet 2019</Enq_DateParutionJo>
-    <Enq_RespTraitement></Enq_RespTraitement>
+<metadata>    
     <Enq_UrlNotice>www.insee.fr</Enq_UrlNotice>
     <Enq_UrlSpecimen>www.insee.fr</Enq_UrlSpecimen>
     <Enq_UrlDiffusion>www.insee.fr</Enq_UrlDiffusion>
-    <Enq_AnneeCollecte>2021</Enq_AnneeCollecte>
-    <Enq_DateRetour>21/21/2021</Enq_DateRetour>
+    
+    <Enq_LibelleEnquete>Enquête auprès des salariés de l’État en 2018</Enq_LibelleEnquete>
+    <Enq_ObjectifsCourts>L’enquête auprès des salariés de l’État a pour objectif de recueillir des informations sur les salariés de la Fonction publique d’État</Enq_ObjectifsCourts>
+    
+    <Enq_CaractereObligatoire>non</Enq_CaractereObligatoire>
+    <Enq_RespTraitement>Insee Grand Est – établissement de Nancy – PENM – 15 rue du Général Hulot – CS 54229 – 54042 Nancy cedex </Enq_RespTraitement>
+    <Enq_NumeroVisa>2021XXXXXXX</Enq_NumeroVisa>
+    <Enq_MinistereTutelle>de l’économie et des finances</Enq_MinistereTutelle>
+    <Enq_AnneeVisa>2021</Enq_AnneeVisa>
+    
+    <Enq_ParutionJo>oui</Enq_ParutionJo>
+    <Enq_DateParutionJo>25 juillet 2019</Enq_DateParutionJo>
+    
+    <Enq_RespOperationnel>l'Insee</Enq_RespOperationnel>
 </metadata>

@@ -108,20 +108,14 @@
     <!-- Values for household updates -->
     <xsl:variable name="Enq_LibelleEnquete" select="$metadata//Enq_LibelleEnquete" />
     <xsl:variable name="Enq_ObjectifsCourts" select="$metadata//Enq_ObjectifsCourts" />
-    <xsl:variable name="Enq_ObjectifsEnquete" select="$metadata//Enq_ObjectifsEnquete" />
     <xsl:variable name="Enq_CaractereObligatoire" select="$metadata//Enq_CaractereObligatoire" />
     <xsl:variable name="Enq_NumeroVisa" select="$metadata//Enq_NumeroVisa" />
     <xsl:variable name="Enq_MinistereTutelle" select="$metadata//Enq_MinistereTutelle" />
-    <xsl:variable name="Enq_AnneeVisa" select="$metadata//Enq_AnneeVisa" />
     <xsl:variable name="Enq_ParutionJo" select="$metadata//Enq_ParutionJo" />
     <xsl:variable name="Enq_DateParutionJo" select="$metadata//Enq_DateParutionJo" />
     <xsl:variable name="Enq_RespOperationnel" select="$metadata//Enq_RespOperationnel" />
     <xsl:variable name="Enq_RespTraitement" select="$metadata//Enq_RespTraitement" />
-    <xsl:variable name="Enq_Notice" select="$metadata//Enq_Notice" />
-    <xsl:variable name="Enq_Specimen" select="$metadata//Enq_Specimen" />
-    <xsl:variable name="Enq_Diffusion" select="$metadata//Enq_Diffusion" />
-    <xsl:variable name="Enq_AnneeCollecte" select="$metadata//Enq_AnneeCollecte" />
-    <xsl:variable name="Enq_DateRetour" select="$metadata//Enq_DateRetour" />
+    <xsl:variable name="Enq_AnneeVisa" select="$metadata//Enq_AnneeVisa" />
     <xsl:template match="/">
         <xsl:apply-templates select="xhtml:html" />
     </xsl:template>
@@ -182,7 +176,7 @@
                         <xsl:value-of select="$Enq_LibelleEnquete" />
                         <xsl:text>&lt;/b&gt;</xsl:text>
                         <xsl:text>&lt;span title="</xsl:text>
-                        <xsl:value-of select="$Enq_ObjectifsEnquete" />
+                        <xsl:value-of select="$Enq_ObjectifsCourts" />
                         <xsl:text>"&gt;&#160;&lt;img src="/img/Help-browser.svg.png"/&gt;&#160;&lt;/span&gt;</xsl:text>
                         <xsl:text>&lt;/p&gt;</xsl:text>
                     </xsl:when>
@@ -280,7 +274,7 @@
                     <xsl:text> du Ministre </xsl:text>
                     <xsl:value-of select="$Enq_MinistereTutelle"/>
                     <xsl:text>, valable pour l'année </xsl:text>
-                    <xsl:value-of select="$Enq_AnneeCollecte" />
+                    <xsl:value-of select="$Enq_AnneeVisa" />
                     <xsl:choose>
                         <xsl:when test="$Enq_ParutionJo = 'oui'">
                             <xsl:text> - Arrêté en date du </xsl:text>
