@@ -9,12 +9,10 @@
     <xsl:output indent="yes"/>
     <xsl:strip-space elements="*"/>
     <xsl:param name="debug" select="false()"/>
-    <!-- xsi:schemaLocation="Pogues.xsd"-->
-    <!--xmlns:xs="http://www.w3.org/2001/XMLSchema"-->
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p><xd:b>Created on:</xd:b> Jun 15, 2017</xd:p>
-            <xd:p><xd:b>Modified on:</xd:b> Feb, 2018</xd:p>
+            <xd:p><xd:b>Modified on:</xd:b> Feb, 2018 ; Oct, 2020</xd:p>
             <xd:p><xd:b>Authors:</xd:b>Antoine Dreyer + François Bulot</xd:p>
             <xd:p>This program works with 2 steps :</xd:p>
             <xd:p>- the first step creates this list ($split_goto) of the Gotos to insert</xd:p>
@@ -48,17 +46,21 @@
     </xd:doc>
 
     <xd:doc>
+        <xd:desc>The whole input file</xd:desc>
+    </xd:doc>
+    <xsl:variable name="root" select="." as="node()"/>
+
+    <xd:doc>
         <xd:desc>List of the Child (Sequence ; Question ; Loop), with position</xd:desc>
     </xd:doc>
     <xsl:variable name="child-position-list" as="node()">
         <poguesGoto:IdList>
             <xsl:for-each select="//*[@id]">
                 <xsl:sort select="position()"/>
-                <!-- TODO : IfThenElse : add IfThenElse with their Expression -->
-                <xsl:if test="local-name(.)='Child' or local-name(.)='Questionnaire'">
+                <xsl:if test="local-name(.)='Child' or local-name(.)='Questionnaire' or local-name()='IfThenElse' or local-name()='Loop'">
                     <poguesGoto:idElement id="{./@id}" position="{position()}">
                         <poguesGoto:childrenId>
-                            <xsl:for-each select="pogues:Child">
+                            <xsl:for-each select="pogues:Child | pogues:IfThenElse | pogues:Loop | pogues:IfTrue/pogues:Child | pogues:IfTrue/pogues:IfThenElse">
                                 <poguesGoto:childId>
                                     <xsl:value-of select="./@id"/>
                                 </poguesGoto:childId>
@@ -105,7 +107,7 @@
     </xd:doc>
     <xsl:variable name="list_goto" as="node()">
         <poguesGoto:GotoList>
-            <xsl:for-each select="//pogues:FlowControl[not(@flowControlType)]">
+            <xsl:for-each select="//pogues:FlowControl[not(@flowControlType) and not(contains(pogues:IfTrue,'-'))]">
                 <xsl:variable name="official-To" select="pogues:IfTrue"/>
                 
                 <poguesGoto:gotoValue start="after" flowid="{@id}">
@@ -291,7 +293,7 @@
     <xd:doc>
         <xd:desc>Splits Gotos which go outside a sequence or inside a sequence
         Each split goto goes from an element to one of its following-sibling</xd:desc>
-        <xd:desc>TODO : go outside an existing IfThenElse ; forbid go inside an existing IfThenElse (nonsense)</xd:desc>
+        <xd:desc>TODO : go inside / outside an existing IfThenElse ; forbid go inside an existing Loop (nonsense)</xd:desc>
     </xd:doc>
     <xsl:variable name="split_goto">
         <poguesGoto:GotoList>
@@ -371,9 +373,37 @@
         <xd:desc>the root element</xd:desc>
     </xd:doc>
     <xsl:template match="/pogues:Questionnaire" priority="1">
+        <xsl:for-each select="//pogues:Loop">
+            <xsl:variable name="loop-id" select="@id"/>
+            <xsl:variable name="loop-name" select="pogues:Name"/>
+            <xsl:variable name="loop-first-final-descendant-position" select="$child-tree//poguesGoto:idElement[@id=$loop-id]//poguesGoto:idElement[not(descendant::poguesGoto:idElement)][1]/number(@position)"/>
+            <xsl:variable name="after-loop-position-text" select="$child-position-list//poguesGoto:idElement[@id=$loop-id]/following::poguesGoto:idElement[not(descendant::poguesGoto:idElement)][1]/@position"/>
+            <xsl:variable name="after-loop-position" select="if ($after-loop-position-text = '') then number($last) else number($after-loop-position-text)"/>
+            <xsl:variable name="after-loop-first-final-descendant-position" select="if ($after-loop-position-text = '') then number($last)
+                else $child-position-list//poguesGoto:idElement[@position=$after-loop-position-text]/descendant-or-self::poguesGoto:idElement[not(descendant::poguesGoto:idElement)][1]/number(@position)"/>
+            <xsl:for-each select="$list_goto//poguesGoto:gotoValue">
+                <!-- From inside the loop and To an element after the next element : GoTo the first next element means to the end of the loop  -->
+                <!-- From before the loop and To an element inside the loop -->
+                <xsl:if test="(poguesGoto:From/number(@position) &gt;= $loop-first-final-descendant-position
+                           and poguesGoto:From/number(@position) &lt; $after-loop-position
+                           and poguesGoto:To/number(@position) &gt; $after-loop-position)
+                       or (poguesGoto:From/number(@position) &lt; $loop-first-final-descendant-position
+                           and poguesGoto:To/number(@position) &gt; $loop-first-final-descendant-position
+                           and poguesGoto:To/number(@position) &lt; $after-loop-position)">
+                    <xsl:variable name="current-id" select="@id"/>
+                    <xsl:message terminate="yes">
+                        <xsl:value-of select="'Problème de chevauchement entre '"/>
+                        <xsl:value-of select="concat('la boucle &quot;',$loop-name,'&quot;')"/>
+                        <xsl:value-of select="' et '"/>
+                        <xsl:value-of select="concat('le renvoi &quot;',$root//*[(local-name()='FlowControl') and @id = $current-id]/pogues:Description,'&quot;')"/>
+                    </xsl:message>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:for-each>
         <xsl:copy>
             <xsl:copy-of select="@* | text() | processing-instruction()"/>
             <xsl:if test="$debug">
+                <xsl:copy-of select="$child-position-list"/>
                 <xsl:copy-of select="$child-tree"/>
                 <xsl:copy-of select="$list_goto"/>
                 <xsl:copy-of select="$list_distinct_goto"/>
@@ -429,11 +459,12 @@
     </xsl:template>
 
     <xd:doc>
+        <xd:desc>
         Child : Sequence or Question
         parameters :
         - stop-position : first Child not to take
         - goto-style (none, before, after) : with stop-position, identifies the last Goto already inserted
-        <xd:desc/>
+        </xd:desc>
     </xd:doc>
     <!-- TODO : pogues:Child | pogues:IfThenElse -->
     <xsl:template match="pogues:Child" priority="1" mode="first-child-next-brother">

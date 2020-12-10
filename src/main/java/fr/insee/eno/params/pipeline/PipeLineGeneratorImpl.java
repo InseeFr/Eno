@@ -7,11 +7,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.insee.eno.generation.DDI2XFORMSGenerator;
-import fr.insee.eno.generation.DDI2LunaticXMLGenerator;
 import fr.insee.eno.generation.DDI2FODTGenerator;
 import fr.insee.eno.generation.DDI2FOGenerator;
-import fr.insee.eno.generation.DDI2PoguesXMLGenerator;
+import fr.insee.eno.generation.DDI2LunaticXMLGenerator;
+import fr.insee.eno.generation.DDI2XFORMSGenerator;
 import fr.insee.eno.generation.Generator;
 import fr.insee.eno.generation.IdentityGenerator;
 import fr.insee.eno.generation.PoguesXML2DDIGenerator;
@@ -35,19 +34,20 @@ import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLInsertGenericQuestionsPo
 import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLSortComponentsPostprocessor;
 import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLVTLParserPostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSBrowsingPostprocessor;
-import fr.insee.eno.postprocessing.xforms.XFORMSInseePatternPostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSFixAdherencePostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSIdentificationPostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSInseeModelPostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSInseePatternPostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSInsertEndPostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSInsertGenericQuestionsPostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSInsertWelcomePostprocessor;
-import fr.insee.eno.postprocessing.xforms.XFORMSInseeModelPostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSSpecificTreatmentPostprocessor;
 import fr.insee.eno.preprocessing.DDI32ToDDI33Preprocessor;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
 import fr.insee.eno.preprocessing.DDIMappingPreprocessor;
 import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
+import fr.insee.eno.preprocessing.PoguesXmlInsertFilterLoopIntoQuestionTree;
 import fr.insee.eno.preprocessing.PoguesXMLPreprocessorGoToTreatment;
 import fr.insee.eno.preprocessing.Preprocessor;
 import fr.insee.eno.service.GenerationService;
@@ -67,8 +67,6 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 
 	private DDI2FOGenerator ddi2foGenerator = new DDI2FOGenerator();
 
-	private DDI2PoguesXMLGenerator ddi2poguesXmlGenerator = new DDI2PoguesXMLGenerator();
-
 	private PoguesXML2DDIGenerator poguesXml2ddiGenerator = new PoguesXML2DDIGenerator();
 	
 	// PreProcessing
@@ -81,6 +79,8 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	private DDIMappingPreprocessor ddiMapping = new DDIMappingPreprocessor();
 
 	private PoguesXMLPreprocessorGoToTreatment poguesXmlGoTo = new PoguesXMLPreprocessorGoToTreatment();
+	
+	private PoguesXmlInsertFilterLoopIntoQuestionTree poguesXmlFilterLoopIntoQuestionTree = new PoguesXmlInsertFilterLoopIntoQuestionTree();
 	
 	private DDI32ToDDI33Preprocessor ddi32ToDDI33Preprocessor = new DDI32ToDDI33Preprocessor();
 	
@@ -310,10 +310,13 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 		case DDI_MAPPING:
 			preprocessor = ddiMapping;
 			break;
+		case POGUES_XML_INSERT_FILTER_LOOP_INTO_QUESTION_TREE:
+			preprocessor = poguesXmlFilterLoopIntoQuestionTree;
+			break;
 		case POGUES_XML_GOTO_2_ITE:
 			preprocessor = poguesXmlGoTo;
 			break;
-		case POGUES_XML_SUPPRESSION_GOTO:
+			case POGUES_XML_SUPPRESSION_GOTO:
 			break;
 		case POGUES_XML_TWEAK_TO_MERGE_EQUIVALENT_ITE:
 			break;

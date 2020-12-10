@@ -67,6 +67,7 @@ public final class Constants {
 	public static final String UTIL_DDI32_TO_DDI33_XSL = UTIL_FOLDER_PATH + "/ddi/ddi32toddi33.xsl";
 	
 	/*************** PoguesXML - Pre-processing **************/
+	public static final String UTIL_POGUES_XML_LOOP_FILTER_INTO_QUESTION_TREE_XSL = PRE_PROCESSING_FOLDER + "/pogues-xml/insert-filter-loop-into-question-tree.xsl";
 	public static final String UTIL_POGUES_XML_SUPP_GOTO_XSL = PRE_PROCESSING_FOLDER + "/pogues-xml/2suppressionGoto.xsl";
 	public static final String UTIL_POGUES_XML_MERGE_ITE_XSL = PRE_PROCESSING_FOLDER + "/pogues-xml/tweak-to-merge-equivalent-ite.xsl";
 	public static final String UTIL_POGUES_XML_GOTO_ITE_XSL = PRE_PROCESSING_FOLDER + "/pogues-xml/goto-2-if-then-else.xsl";
