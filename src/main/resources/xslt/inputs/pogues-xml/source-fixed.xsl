@@ -148,11 +148,11 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="pogues:Expression | pogues:Formula | pogues:Response | pogues:Maximum[parent::pogues:Iteration] | pogues:Filter[parent::pogues:Iteration]" mode="enopogues:get-ip-id">
+    <xsl:template match="pogues:Expression | pogues:Formula | pogues:Response | pogues:Maximum[parent::pogues:Loop] | pogues:Filter[parent::pogues:Loop]" mode="enopogues:get-ip-id">
         <xsl:param name="index" tunnel="yes"/>
         <xsl:choose>
-            <xsl:when test="name() = 'Maximum'"><xsl:value-of select="concat(enopogues:get-id(parent::pogues:Iteration), '-IP-', $index)"/></xsl:when>
-            <xsl:when test="name() = 'Filter'"><xsl:value-of select="concat(enopogues:get-id(parent::pogues:Iteration), '-ITE-IP-', $index)"/></xsl:when>
+            <xsl:when test="name() = 'Maximum'"><xsl:value-of select="concat(enopogues:get-id(parent::pogues:Loop), '-IP-', $index)"/></xsl:when>
+            <xsl:when test="name() = 'Filter'"><xsl:value-of select="concat(enopogues:get-id(parent::pogues:Loop), '-ITE-IP-', $index)"/></xsl:when>
             <xsl:otherwise><xsl:value-of select="concat(enopogues:get-id(.), '-IP-', $index)"/></xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -168,7 +168,7 @@
         <xsl:sequence select="//pogues:Variable[@id = $idVariable]"/>
     </xsl:template>
 
-    <xsl:template match="pogues:Expression | pogues:Formula | pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label | pogues:Maximum[parent::pogues:Iteration] | pogues:Filter[parent::pogues:Iteration]" mode="enopogues:get-related-variable">
+    <xsl:template match="pogues:Expression | pogues:Formula | pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label | pogues:Maximum[parent::pogues:Loop] | pogues:Filter[parent::pogues:Loop]" mode="enopogues:get-related-variable">
         <xsl:variable name="expressionVariable" select="tokenize(., '\$')"/>
         <xsl:variable name="variables" select="//pogues:Variables"/>
 

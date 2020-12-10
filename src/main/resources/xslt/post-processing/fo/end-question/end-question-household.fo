@@ -13,7 +13,7 @@
         <fo:flow flow-name="xsl-region-body">
             <fo:block id="COMMENT_QUESTION_TITLE" background-color="#666666" color="white" font-weight="bold" margin-bottom="9pt" margin-top="3pt" font-size="14pt" border-color="black" border-style="solid" page-break-inside="avoid" keep-with-next="always">Commentaires</fo:block>
             <fo:wrapper id="COMMENT_QUESTION">
-                <fo:block color="black" font-weight="bold" font-size="10pt" margin-top="9pt" margin-bottom="3pt" page-break-inside="avoid" keep-with-next="always">➡ <fo:inline font-weight="bold">Commentaires et remarques éventuelles concernant l'enquête :</fo:inline>
+                <fo:block color="black" font-weight="bold" font-size="10pt" margin-top="9pt" margin-bottom="3pt" page-break-inside="avoid" keep-with-next="always">➡ <fo:inline font-weight="bold">Avez-vous des remarques concernant l'enquête ou des commentaires ?</fo:inline>
                 </fo:block>
                 <fo:block id="COMMENT_QE" page-break-inside="avoid">
                     <fo:block-container height="30mm" border-color="black" border-style="solid">

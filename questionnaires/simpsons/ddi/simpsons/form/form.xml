@@ -11086,7 +11086,13 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>jbcggtca-GI</r:ID>
             <r:Version>1</r:Version>
-            <!--<d:SourceQuestion>Not implemented.</d:SourceQuestion>--><d:SourceVariable>
+            <d:SourceQuestion>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nwc63q</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </d:SourceQuestion>
+            <d:SourceVariable>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>jbgdnfk7</r:ID>
                <r:Version>1</r:Version>

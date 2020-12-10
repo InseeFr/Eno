@@ -417,6 +417,32 @@
                             <xsl:when test="contains($text,concat('*[name()=''',$current-group,''''))">
                                 <xsl:for-each select="tokenize($text,concat('\*\[name\(\)=''',$current-group,''''))">
                                     <xsl:if test="not(position()=1)">
+                                        <xsl:value-of select="concat('following-sibling::Groupe[@typeGroupe=''',$current-group,''' and @idGroupe = current()/ancestor::Groupe[@typeGroupe=''',$current-group,''']/@idGroupe]')"/>
+                                    </xsl:if>
+                                    <xsl:call-template name="replace-element">
+                                        <xsl:with-param name="position" select="$position"/>
+                                        <xsl:with-param name="text" select="current()"/>
+                                    </xsl:call-template>
+                                </xsl:for-each>
+                            </xsl:when>
+                            <xsl:when test="matches($text,concat('CurrentLoopElement\[@loop-name=''',$current-group,'(_\d+)?-Container''\]'))">
+                                <xsl:analyze-string select="$text" regex="^(.*)CurrentLoopElement\[@loop-name='{$current-group}(_\d+)?-Container'\](.*)$">
+                                    <xsl:matching-substring>
+                                        <xsl:call-template name="replace-element">
+                                            <xsl:with-param name="position" select="$position"/>
+                                            <xsl:with-param name="text" select="regex-group(1)"/>
+                                        </xsl:call-template>
+                                        <xsl:value-of select="concat('CurrentLoopElement[@loop-name=''',$current-group,regex-group(2),''']')"/>
+                                        <xsl:call-template name="replace-element">
+                                            <xsl:with-param name="position" select="$position"/>
+                                            <xsl:with-param name="text" select="regex-group(3)"/>
+                                        </xsl:call-template>
+                                    </xsl:matching-substring>
+                                </xsl:analyze-string>
+                            </xsl:when>
+                            <xsl:when test="contains($text,concat('*[name()=''',$current-group,''''))">
+                                <xsl:for-each select="tokenize($text,concat('\*\[name\(\)=''',$current-group,''''))">
+                                    <xsl:if test="not(position()=1)">
                                         <xsl:value-of select="concat('Groupe[@typeGroupe=''',$current-group,'''')"/>
                                     </xsl:if>
                                     <xsl:call-template name="replace-element">
@@ -425,8 +451,8 @@
                                     </xsl:call-template>
                                 </xsl:for-each>
                             </xsl:when>
-                            <xsl:when test="matches($text,concat('/',$current-group,'_\d+-Container'))">
-                                <xsl:analyze-string select="$text" regex="^(.*){$current-group}(_\d+)-Container(.*)$">
+                            <xsl:when test="matches($text,concat($current-group,'(_\d+)?-position'))">
+                                <xsl:analyze-string select="$text" regex="^(.*){$current-group}(_\d+)?-position(.*)$">
                                     <xsl:matching-substring>
                                         <xsl:call-template name="replace-element">
                                             <xsl:with-param name="position" select="$position"/>
