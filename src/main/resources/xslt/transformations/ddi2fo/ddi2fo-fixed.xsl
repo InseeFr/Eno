@@ -205,8 +205,9 @@
         </xsl:choose>
     </xsl:variable>
     
-    
-    <!--New style variables... LONG-->
+   <xd:doc>
+      <xd:desc>Variables from propertiers and parameters : style attributes // VERY LONG</xd:desc>
+   </xd:doc>
    <xsl:variable name="Titre-sequence-background-color">
       <xsl:choose>
          <xsl:when test="$parameters//fo-parameters/Style/Titre-sequence/background-color != ''">
