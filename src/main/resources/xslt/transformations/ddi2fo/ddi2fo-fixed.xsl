@@ -206,8 +206,9 @@
     </xsl:variable>
     
    <xd:doc>
-      <xd:desc>Variables from propertiers and parameters : copying style xml tree structure and 
-         overloading properties with parameters when provided by the study  </xd:desc>
+      <xd:desc>Variables from propertiers and parameters : copying style xml tree structure with two changes : 
+         - style attributes become attributes of the style-set tag
+         - overloading properties with parameters when provided by the study  </xd:desc>
    </xd:doc>
    <xsl:variable name="style-parameters">
       <xsl:choose>
@@ -219,10 +220,10 @@
                      <xsl:variable name="style-set-attribute" select="name(.)"/>
                      <xsl:choose>
                         <xsl:when test="$parameters//fo-parameters/Style/*[name() = $style-set]/*[name() = $style-set-attribute] != ''">
-                           <xsl:copy-of select="$parameters//fo-parameters/Style/*[name() = $style-set]/*[name() = $style-set-attribute]"/>
+                           <xsl:attribute name="{$style-set-attribute}" select="$parameters//fo-parameters/Style/*[name() = $style-set]/*[name() = $style-set-attribute]"/>
                         </xsl:when>
                         <xsl:otherwise>
-                           <xsl:copy-of select="."/>
+                           <xsl:attribute name="{$style-set-attribute}" select="."/>
                         </xsl:otherwise>
                      </xsl:choose>
                   </xsl:for-each>
