@@ -33,7 +33,7 @@
 		</Format>
 		
 		<Style>
-			<Titre-sequence>
+			<Sequence-title>
 				<background-color>#666666</background-color>
 				<color>white</color>
 				<font-weight>bold</font-weight>
@@ -44,8 +44,8 @@
 				<space-before>10mm</space-before>
 				<space-before.conditionality>discard</space-before.conditionality>
 				<text-align>left</text-align>
-			</Titre-sequence>
-			<Titre-paragraphe>
+			</Sequence-title>
+			<Paragraph-title>
 				<background-color>#CCCCCC</background-color>
 				<color>black</color>
 				<font-weight>bold</font-weight>
@@ -54,7 +54,7 @@
 				<text-align>left</text-align>
 				<space-before>6mm</space-before>
 				<space-before.conditionality>discard</space-before.conditionality>
-			</Titre-paragraphe>
+			</Paragraph-title>
 			<general-style>
 				<color>black</color>
 				<font-weight>normal</font-weight>
@@ -76,19 +76,19 @@
 				<margin-bottom>3pt</margin-bottom>
 				<text-align>justify</text-align>
 			</label-question>
-			<entete-ligne>
+			<row-header-line>
 				<color>black</color>
 				<font-weight>normal</font-weight>
 				<font-size>10pt</font-size>
-				<text-align>left</text-align>
-			</entete-ligne>
-			<colonne-tableau>
+				<text-align>center</text-align>
+			</row-header-line>
+			<table-column>
 				<border-color>black</border-color>
 				<border-style>solid</border-style>
 				<text-align>left</text-align>
 				<padding-left>1mm</padding-left>
 				<padding-right>1mm</padding-right>
-			</colonne-tableau>
+			</table-column>
 			<data-cell>
 				<text-align>left</text-align>
 				<border-color>black</border-color>
