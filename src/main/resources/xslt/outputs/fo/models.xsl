@@ -59,16 +59,9 @@
 		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 
 		<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-			<xsl:attribute name="background-color"><xsl:value-of select="$Titre-sequence-background-color"/></xsl:attribute>
-			<xsl:attribute name="color"><xsl:value-of select="$Titre-sequence-color"/></xsl:attribute>
-			<xsl:attribute name="font-weight"><xsl:value-of select="$Titre-sequence-font-weight"/></xsl:attribute>
-			<xsl:attribute name="margin-bottom"><xsl:value-of select="$Titre-sequence-margin-bottom"/></xsl:attribute>
-			<xsl:attribute name="font-size"><xsl:value-of select="$Titre-sequence-font-size"/></xsl:attribute>
-			<xsl:attribute name="border-color"><xsl:value-of select="$Titre-sequence-border-color"/></xsl:attribute>
-			<xsl:attribute name="border-style"><xsl:value-of select="$Titre-sequence-border-style"/></xsl:attribute>
-			<xsl:attribute name="space-before"><xsl:value-of select="$Titre-sequence-space-before"/></xsl:attribute>
-			<xsl:attribute name="space-before.conditionality"><xsl:value-of select="$Titre-sequence-space-before.conditionality"/></xsl:attribute>
-			<xsl:attribute name="text-align"><xsl:value-of select="$Titre-sequence-text-align"/></xsl:attribute>
+			<xsl:for-each select="$style-parameters/Sequence-title/@*">
+				<xsl:attribute name="{name(.)}" select="."/>
+			</xsl:for-each>
 			<xsl:if test="lower-case($page-break-between) = 'module' or lower-case($page-break-between) = 'submodule'">
 				<xsl:attribute name="page-break-before" select="'always'"/>
 			</xsl:if>
@@ -88,14 +81,9 @@
 		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 
 		<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-			<xsl:attribute name="background-color"><xsl:value-of select="$Titre-paragraphe-background-color"/></xsl:attribute>
-			<xsl:attribute name="color"><xsl:value-of select="$Titre-paragraphe-color"/></xsl:attribute>
-			<xsl:attribute name="font-weight"><xsl:value-of select="$Titre-paragraphe-font-weight"/></xsl:attribute>
-			<xsl:attribute name="margin-bottom"><xsl:value-of select="$Titre-paragraphe-margin-bottom"/></xsl:attribute>
-			<xsl:attribute name="font-size"><xsl:value-of select="$Titre-paragraphe-font-size"/></xsl:attribute>
-			<xsl:attribute name="text-align"><xsl:value-of select="$Titre-paragraphe-text-align"/></xsl:attribute>
-			<xsl:attribute name="space-before"><xsl:value-of select="$Titre-paragraphe-space-before"/></xsl:attribute>
-			<xsl:attribute name="space-before.conditionality"><xsl:value-of select="$Titre-paragraphe-space-before.conditionality"/></xsl:attribute>
+			<xsl:for-each select="$style-parameters/Paragraph-title/@*">
+				<xsl:attribute name="{name(.)}" select="."/>
+			</xsl:for-each>
 			<xsl:copy-of select="enofo:get-label($source-context, $languages[1],$loop-navigation)"/>
 		</fo:block>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -116,11 +104,9 @@
 		<xsl:variable name="label" select="enofo:get-flowcontrol-label($source-context,$languages[1])"/>
 		<xsl:if test="$label != ''">
 			<fo:block page-break-inside="avoid" keep-with-previous="always">
-				<xsl:attribute name="space-before"><xsl:value-of select="$filter-block-space-before"/></xsl:attribute>
-				<xsl:attribute name="space-after"><xsl:value-of select="$filter-block-space-after"/></xsl:attribute>
-				<xsl:attribute name="start-indent"><xsl:value-of select="$filter-block-start-indent"/></xsl:attribute>
-				<xsl:attribute name="end-indent"><xsl:value-of select="$filter-block-end-indent"/></xsl:attribute>
-				<xsl:attribute name="background-color"><xsl:value-of select="$filter-block-background-color"/></xsl:attribute>
+				<xsl:for-each select="$style-parameters/filter-block/@*">
+					<xsl:attribute name="{name(.)}" select="."/>
+				</xsl:for-each>
 				<fo:inline-container start-indent="0%" end-indent="0%" width="9%" vertical-align="middle">
 					<fo:block margin="2pt">
 						<xsl:call-template name="insert-image">
@@ -129,17 +115,13 @@
 					</fo:block>
 				</fo:inline-container>
 				<fo:inline-container>
-					<xsl:attribute name="width"><xsl:value-of select="$filter-inline-container-width"/></xsl:attribute>
-					<xsl:attribute name="vertical-align"><xsl:value-of select="$filter-inline-container-vertical-align"/></xsl:attribute>
-					<xsl:attribute name="padding-top"><xsl:value-of select="$filter-inline-container-padding-top"/></xsl:attribute>
-					<xsl:attribute name="start-indent"><xsl:value-of select="$filter-inline-container-start-indent"/></xsl:attribute>
-					<xsl:attribute name="end-indent"><xsl:value-of select="$filter-inline-container-end-indent"/></xsl:attribute>
+					<xsl:for-each select="$style-parameters/filter-inline-container/@*">
+						<xsl:attribute name="{name(.)}" select="."/>
+					</xsl:for-each>
 					<fo:block>
-						<xsl:attribute name="width"><xsl:value-of select="$filter-alternative-width"/></xsl:attribute>
-						<xsl:attribute name="margin"><xsl:value-of select="$filter-alternative-margin"/></xsl:attribute>
-						<xsl:attribute name="font-size"><xsl:value-of select="$filter-alternative-font-size"/></xsl:attribute>
-						<xsl:attribute name="font-weight"><xsl:value-of select="$filter-alternative-font-weight"/></xsl:attribute>
-						<xsl:attribute name="text-align"><xsl:value-of select="$filter-alternative-text-align"/></xsl:attribute>
+						<xsl:for-each select="$style-parameters/filter-alternative/@*">
+							<xsl:attribute name="{name(.)}" select="."/>
+						</xsl:for-each>
 						<xsl:copy-of select="$label"/>
 					</fo:block>
 				</fo:inline-container>
@@ -179,10 +161,9 @@
 					<fo:footnote>
 						<fo:inline></fo:inline>
 						<fo:footnote-body>
-							<xsl:attribute name="font-size"><xsl:value-of select="$footnote-font-size"/></xsl:attribute>
-							<xsl:attribute name="font-weight"><xsl:value-of select="$footnote-font-weight"/></xsl:attribute>
-							<xsl:attribute name="margin-bottom"><xsl:value-of select="$footnote-margin-bottom"/></xsl:attribute>
-							<xsl:attribute name="margin-left"><xsl:value-of select="$footnote-margin-left"/></xsl:attribute>
+							<xsl:for-each select="$style-parameters/footnote/@*">
+								<xsl:attribute name="{name(.)}" select="."/>
+							</xsl:for-each>
 							<fo:block>
 								<fo:inline font-size="75%" baseline-shift="super">
 									<xsl:copy-of select="enofo:get-end-question-instructions-index($source-context)"/>
@@ -197,34 +178,26 @@
 			</xsl:when>
 			<xsl:when test="$format = 'comment' or $format = 'help' or $format = 'instruction'">
 				<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-					<xsl:attribute name="font-size"><xsl:value-of select="$instruction-font-size"/></xsl:attribute>
-					<xsl:attribute name="font-weight"><xsl:value-of select="$instruction-font-weight"/></xsl:attribute>
-					<xsl:attribute name="font-style"><xsl:value-of select="$instruction-font-style"/></xsl:attribute>
-					<xsl:attribute name="margin-bottom"><xsl:value-of select="$instruction-margin-bottom"/></xsl:attribute>
-					<xsl:attribute name="margin-left"><xsl:value-of select="$instruction-margin-left"/></xsl:attribute>
-					<xsl:attribute name="text-align"><xsl:value-of select="$instruction-text-align"/></xsl:attribute>
+					<xsl:for-each select="$style-parameters/instruction/@*">
+						<xsl:attribute name="{name(.)}" select="."/>
+					</xsl:for-each>
 					<xsl:copy-of select="$label"/>
 				</fo:block>
 			</xsl:when>
 			<xsl:when test="$format = 'statement'">
 				<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-					<xsl:attribute name="font-size"><xsl:value-of select="$statement-font-size"/></xsl:attribute>
-					<xsl:attribute name="font-weight"><xsl:value-of select="$statement-font-weight"/></xsl:attribute>
-					<xsl:attribute name="font-style"><xsl:value-of select="$statement-font-style"/></xsl:attribute>
-					<xsl:attribute name="space-before"><xsl:value-of select="$statement-space-before"/></xsl:attribute>
-					<xsl:attribute name="margin-bottom"><xsl:value-of select="$statement-margin-bottom"/></xsl:attribute>
-					<xsl:attribute name="text-align"><xsl:value-of select="$statement-text-align"/></xsl:attribute>
+					<xsl:for-each select="$style-parameters/statement/@*">
+						<xsl:attribute name="{name(.)}" select="."/>
+					</xsl:for-each>
 					<xsl:copy-of select="$label"/>
 				</fo:block>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:message select="concat('unknown xf-output : ',enofo:get-name($source-context),$label)"/>
 				<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-					<xsl:attribute name="color"><xsl:value-of select="$general-style-color"/></xsl:attribute>
-					<xsl:attribute name="font-weight"><xsl:value-of select="$general-style-font-weight"/></xsl:attribute>
-					<xsl:attribute name="font-size"><xsl:value-of select="$general-style-font-size"/></xsl:attribute>
-					<xsl:attribute name="padding"><xsl:value-of select="$general-style-padding"/></xsl:attribute>
-					<xsl:attribute name="text-align"><xsl:value-of select="$general-style-text-align"/></xsl:attribute>
+					<xsl:for-each select="$style-parameters/general-style/@*">
+						<xsl:attribute name="{name(.)}" select="."/>
+					</xsl:for-each>
 					<xsl:if test="$isTable = 'YES'">
 						<xsl:attribute name="margin-left">1mm</xsl:attribute>
 					</xsl:if>
@@ -249,11 +222,9 @@
 
 		<xsl:if test="$label != ''">
 			<fo:block page-break-inside="avoid" keep-with-previous="always">
-				<xsl:attribute name="space-before"><xsl:value-of select="$filter-block-space-before"/></xsl:attribute>
-				<xsl:attribute name="space-after"><xsl:value-of select="$filter-block-space-after"/></xsl:attribute>
-				<xsl:attribute name="start-indent"><xsl:value-of select="$filter-block-start-indent"/></xsl:attribute>
-				<xsl:attribute name="end-indent"><xsl:value-of select="$filter-block-end-indent"/></xsl:attribute>
-				<xsl:attribute name="background-color"><xsl:value-of select="$filter-block-background-color"/></xsl:attribute>
+				<xsl:for-each select="$style-parameters/filter-block/@*">
+					<xsl:attribute name="{name(.)}" select="."/>
+				</xsl:for-each>
 				<fo:inline-container start-indent="0%" end-indent="0%" width="9%" vertical-align="middle">
 					<fo:block margin="2pt">
 						<xsl:call-template name="insert-image">
@@ -262,17 +233,13 @@
 					</fo:block>
 				</fo:inline-container>
 				<fo:inline-container>
-					<xsl:attribute name="width"><xsl:value-of select="$filter-inline-container-width"/></xsl:attribute>
-					<xsl:attribute name="vertical-align"><xsl:value-of select="$filter-inline-container-vertical-align"/></xsl:attribute>
-					<xsl:attribute name="padding-top"><xsl:value-of select="$filter-inline-container-padding-top"/></xsl:attribute>
-					<xsl:attribute name="start-indent"><xsl:value-of select="$filter-inline-container-start-indent"/></xsl:attribute>
-					<xsl:attribute name="end-indent"><xsl:value-of select="$filter-inline-container-end-indent"/></xsl:attribute>
+					<xsl:for-each select="$style-parameters/filter-inline-container/@*">
+						<xsl:attribute name="{name(.)}" select="."/>
+					</xsl:for-each>
 					<fo:block>
-						<xsl:attribute name="width"><xsl:value-of select="$filter-alternative-width"/></xsl:attribute>
-						<xsl:attribute name="margin"><xsl:value-of select="$filter-alternative-margin"/></xsl:attribute>
-						<xsl:attribute name="font-size"><xsl:value-of select="$filter-alternative-font-size"/></xsl:attribute>
-						<xsl:attribute name="font-weight"><xsl:value-of select="$filter-alternative-font-weight"/></xsl:attribute>
-						<xsl:attribute name="text-align"><xsl:value-of select="$filter-alternative-text-align"/></xsl:attribute>
+						<xsl:for-each select="$style-parameters/filter-alternative/@*">
+							<xsl:attribute name="{name(.)}" select="."/>
+						</xsl:for-each>
 						<xsl:copy-of select="$label"/>
 					</fo:block>
 				</fo:inline-container>
@@ -387,11 +354,9 @@
 		<xsl:choose>
 			<xsl:when test="$other-give-details">
 				<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-					<xsl:attribute name="color"><xsl:value-of select="$details-color"/></xsl:attribute>
-					<xsl:attribute name="font-weight"><xsl:value-of select="$details-font-weight"/></xsl:attribute>
-					<xsl:attribute name="font-size"><xsl:value-of select="$details-font-size"/></xsl:attribute>
-					<xsl:attribute name="padding"><xsl:value-of select="$details-padding"/></xsl:attribute>
-					<xsl:attribute name="text-align"><xsl:value-of select="$details-text-align"/></xsl:attribute>
+					<xsl:for-each select="$style-parameters/details/@*">
+						<xsl:attribute name="{name(.)}" select="."/>
+					</xsl:for-each>
 					<fo:inline>
 						<xsl:call-template name="insert-image">
 							<xsl:with-param name="image-name" select="'arrow_details.png'"/>
@@ -402,12 +367,9 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-					<xsl:attribute name="color"><xsl:value-of select="$label-question-color"/></xsl:attribute>
-					<xsl:attribute name="font-weight"><xsl:value-of select="$label-question-font-weight"/></xsl:attribute>
-					<xsl:attribute name="font-size"><xsl:value-of select="$label-question-font-size"/></xsl:attribute>
-					<xsl:attribute name="margin-top"><xsl:value-of select="$label-question-margin-top"/></xsl:attribute>
-					<xsl:attribute name="margin-bottom"><xsl:value-of select="$label-question-margin-bottom"/></xsl:attribute>
-					<xsl:attribute name="text-align"><xsl:value-of select="$label-question-text-align"/></xsl:attribute>
+					<xsl:for-each select="$style-parameters/label-question/@*">
+						<xsl:attribute name="{name(.)}" select="."/>
+					</xsl:for-each>
 					<xsl:copy-of select="enofo:get-label($source-context, $languages[1],$loop-navigation)"/>
 				</fo:block>
 			</xsl:otherwise>
@@ -442,12 +404,9 @@
 			<xsl:with-param name="driver" select="."/>
 		</xsl:apply-templates>-->
 		<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-			<xsl:attribute name="color"><xsl:value-of select="$label-question-color"/></xsl:attribute>
-			<xsl:attribute name="font-weight"><xsl:value-of select="$label-question-font-weight"/></xsl:attribute>
-			<xsl:attribute name="font-size"><xsl:value-of select="$label-question-font-size"/></xsl:attribute>
-			<xsl:attribute name="margin-top"><xsl:value-of select="$label-question-margin-top"/></xsl:attribute>
-			<xsl:attribute name="margin-bottom"><xsl:value-of select="$label-question-margin-bottom"/></xsl:attribute>
-			<xsl:attribute name="text-align"><xsl:value-of select="$label-question-text-align"/></xsl:attribute>
+			<xsl:for-each select="$style-parameters/label-question/@*">
+				<xsl:attribute name="{name(.)}" select="."/>
+			</xsl:for-each>
 			<xsl:copy-of select="enofo:get-label($source-context, $languages[1],$loop-navigation)"/>
 		</fo:block>
 		<xsl:apply-templates select="enofo:get-after-question-title-instructions($source-context)" mode="source">
@@ -470,11 +429,10 @@
 					<xsl:if test="count(enofo:get-header-lines($source-context)) != 0">
 						<fo:table-header>
 							<xsl:for-each select="enofo:get-header-lines($source-context)">
-								<fo:table-row text-align="center">
-									<xsl:attribute name="color"><xsl:value-of select="$entete-ligne-color"/></xsl:attribute>
-									<xsl:attribute name="font-weight"><xsl:value-of select="$entete-ligne-font-weight"/></xsl:attribute>
-									<xsl:attribute name="font-size"><xsl:value-of select="$entete-ligne-font-size"/></xsl:attribute>
-									<xsl:attribute name="text-align"><xsl:value-of select="$entete-ligne-text-align"/></xsl:attribute>
+								<fo:table-row>
+									<xsl:for-each select="$style-parameters/row-header-line/@*">
+										<xsl:attribute name="{name(.)}" select="."/>
+									</xsl:for-each>
 									<xsl:apply-templates select="enofo:get-header-line($source-context, position())" mode="source">
 										<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
 										<xsl:with-param name="header" select="'YES'" tunnel="yes"/>
@@ -540,11 +498,10 @@
 
 		<xsl:variable name="table-header" as="node()*">
 			<xsl:for-each select="enofo:get-header-lines($source-context)">
-				<fo:table-row text-align="center">
-					<xsl:attribute name="color"><xsl:value-of select="$entete-ligne-color"/></xsl:attribute>
-					<xsl:attribute name="font-weight"><xsl:value-of select="$entete-ligne-font-weight"/></xsl:attribute>
-					<xsl:attribute name="font-size"><xsl:value-of select="$entete-ligne-font-size"/></xsl:attribute>
-					<xsl:attribute name="text-align"><xsl:value-of select="$entete-ligne-text-align"/></xsl:attribute>
+				<fo:table-row>
+					<xsl:for-each select="$style-parameters/row-header-line/@*">
+						<xsl:attribute name="{name(.)}" select="."/>
+					</xsl:for-each>
 					<xsl:apply-templates select="enofo:get-header-line($source-context, position())" mode="source">
 						<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
 						<xsl:with-param name="header" select="'YES'" tunnel="yes"/>
@@ -585,12 +542,9 @@
 			<xsl:with-param name="driver" select="."/>
 		</xsl:apply-templates>-->
 		<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-			<xsl:attribute name="color"><xsl:value-of select="$label-question-color"/></xsl:attribute>
-			<xsl:attribute name="font-weight"><xsl:value-of select="$label-question-font-weight"/></xsl:attribute>
-			<xsl:attribute name="font-size"><xsl:value-of select="$label-question-font-size"/></xsl:attribute>
-			<xsl:attribute name="margin-top"><xsl:value-of select="$label-question-margin-top"/></xsl:attribute>
-			<xsl:attribute name="margin-bottom"><xsl:value-of select="$label-question-margin-bottom"/></xsl:attribute>
-			<xsl:attribute name="text-align"><xsl:value-of select="$label-question-text-align"/></xsl:attribute>
+			<xsl:for-each select="$style-parameters/label-question/@*">
+				<xsl:attribute name="{name(.)}" select="."/>
+			</xsl:for-each>
 			<xsl:copy-of select="enofo:get-label($source-context, $languages[1],$loop-navigation)"/>
 		</fo:block>
 		<xsl:apply-templates select="enofo:get-after-question-title-instructions($source-context)" mode="source">
@@ -702,11 +656,9 @@
 		<fo:table-cell
 			number-rows-spanned="{enofo:get-rowspan($source-context,$table-first-line,$table-last-line)}"
 			number-columns-spanned="{enofo:get-colspan($source-context)}">
-			<xsl:attribute name="border-color"><xsl:value-of select="$colonne-tableau-border-color"/></xsl:attribute>
-			<xsl:attribute name="border-style"><xsl:value-of select="$colonne-tableau-border-style"/></xsl:attribute>
-			<xsl:attribute name="text-align"><xsl:value-of select="$colonne-tableau-text-align"/></xsl:attribute>
-			<xsl:attribute name="padding-left"><xsl:value-of select="$colonne-tableau-padding-left"/></xsl:attribute>
-			<xsl:attribute name="padding-right"><xsl:value-of select="$colonne-tableau-padding-right"/></xsl:attribute>
+			<xsl:for-each select="$style-parameters/table-column/@*">
+				<xsl:attribute name="{name(.)}" select="."/>
+			</xsl:for-each>
 			<xsl:if test="$header">
 				<xsl:attribute name="text-align">center</xsl:attribute>
 			</xsl:if>
@@ -715,10 +667,9 @@
 				<xsl:attribute name="padding" select="'0mm'"/>
 			</xsl:if>
 			<fo:block>
-				<xsl:attribute name="color"><xsl:value-of select="$label-cell-color"/></xsl:attribute>
-				<xsl:attribute name="font-weight"><xsl:value-of select="$label-cell-font-weight"/></xsl:attribute>
-				<xsl:attribute name="font-size"><xsl:value-of select="$label-cell-font-size"/></xsl:attribute>
-				<xsl:attribute name="padding"><xsl:value-of select="$label-cell-padding"/></xsl:attribute>
+				<xsl:for-each select="$style-parameters/label-cell/@*">
+					<xsl:attribute name="{name(.)}" select="."/>
+				</xsl:for-each>
 				<xsl:if test="not($header)">
 					<xsl:attribute name="margin-left" select="'1mm'"/>
 				</xsl:if>
@@ -733,10 +684,9 @@
 		<xsl:param name="languages" tunnel="yes"/>
 
 		<fo:table-cell>
-			<xsl:attribute name="text-align"><xsl:value-of select="$data-cell-text-align"/></xsl:attribute>
-			<xsl:attribute name="border-color"><xsl:value-of select="$data-cell-border-color"/></xsl:attribute>
-			<xsl:attribute name="border-style"><xsl:value-of select="$data-cell-border-style"/></xsl:attribute>
-			<xsl:attribute name="padding"><xsl:value-of select="$data-cell-padding"/></xsl:attribute>
+			<xsl:for-each select="$style-parameters/data-cell/@*">
+				<xsl:attribute name="{name(.)}" select="."/>
+			</xsl:for-each>
 			<xsl:if test="$no-border = 'no-border'">
 				<xsl:attribute name="border">0mm</xsl:attribute>
 				<xsl:attribute name="padding-top">0mm</xsl:attribute>
@@ -810,11 +760,9 @@
 			<xsl:choose>
 				<xsl:when test="$other-give-details">
 					<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-						<xsl:attribute name="color"><xsl:value-of select="$details-color"/></xsl:attribute>
-						<xsl:attribute name="font-weight"><xsl:value-of select="$details-font-weight"/></xsl:attribute>
-						<xsl:attribute name="font-size"><xsl:value-of select="$details-font-size"/></xsl:attribute>
-						<xsl:attribute name="padding"><xsl:value-of select="$details-padding"/></xsl:attribute>
-						<xsl:attribute name="text-align"><xsl:value-of select="$details-text-align"/></xsl:attribute>
+						<xsl:for-each select="$style-parameters/details/@*">
+							<xsl:attribute name="{name(.)}" select="."/>
+						</xsl:for-each>
 						<fo:inline>
 							<xsl:call-template name="insert-image">
 								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
@@ -825,12 +773,9 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-						<xsl:attribute name="color"><xsl:value-of select="$label-question-color"/></xsl:attribute>
-						<xsl:attribute name="font-weight"><xsl:value-of select="$label-question-font-weight"/></xsl:attribute>
-						<xsl:attribute name="font-size"><xsl:value-of select="$label-question-font-size"/></xsl:attribute>
-						<xsl:attribute name="margin-top"><xsl:value-of select="$label-question-margin-top"/></xsl:attribute>
-						<xsl:attribute name="margin-bottom"><xsl:value-of select="$label-question-margin-bottom"/></xsl:attribute>
-						<xsl:attribute name="text-align"><xsl:value-of select="$label-question-text-align"/></xsl:attribute>
+						<xsl:for-each select="$style-parameters/label-question/@*">
+							<xsl:attribute name="{name(.)}" select="."/>
+						</xsl:for-each>
 						<xsl:copy-of select="$label"/>
 					</fo:block>
 				</xsl:otherwise>
@@ -879,11 +824,9 @@
 			<xsl:choose>
 				<xsl:when test="$other-give-details">
 					<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-						<xsl:attribute name="color"><xsl:value-of select="$details-color"/></xsl:attribute>
-						<xsl:attribute name="font-weight"><xsl:value-of select="$details-font-weight"/></xsl:attribute>
-						<xsl:attribute name="font-size"><xsl:value-of select="$details-font-size"/></xsl:attribute>
-						<xsl:attribute name="padding"><xsl:value-of select="$details-padding"/></xsl:attribute>
-						<xsl:attribute name="text-align"><xsl:value-of select="$details-text-align"/></xsl:attribute>
+						<xsl:for-each select="$style-parameters/details/@*">
+							<xsl:attribute name="{name(.)}" select="."/>
+						</xsl:for-each>
 						<fo:inline>
 							<xsl:call-template name="insert-image">
 								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
@@ -894,12 +837,9 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-						<xsl:attribute name="color"><xsl:value-of select="$label-question-color"/></xsl:attribute>
-						<xsl:attribute name="font-weight"><xsl:value-of select="$label-question-font-weight"/></xsl:attribute>
-						<xsl:attribute name="font-size"><xsl:value-of select="$label-question-font-size"/></xsl:attribute>
-						<xsl:attribute name="margin-top"><xsl:value-of select="$label-question-margin-top"/></xsl:attribute>
-						<xsl:attribute name="margin-bottom"><xsl:value-of select="$label-question-margin-bottom"/></xsl:attribute>
-						<xsl:attribute name="text-align"><xsl:value-of select="$label-question-text-align"/></xsl:attribute>
+						<xsl:for-each select="$style-parameters/label-question/@*">
+							<xsl:attribute name="{name(.)}" select="."/>
+						</xsl:for-each>
 						<xsl:copy-of select="$label"/>
 					</fo:block>
 				</xsl:otherwise>
@@ -909,10 +849,9 @@
 			<xsl:choose>
 				<xsl:when test="(enofo:get-format($source-context) or ($length !='' and number($length) &lt;= 20)) and ancestor::Cell">
 					<fo:block>
-						<xsl:attribute name="color"><xsl:value-of select="$label-cell-color"/></xsl:attribute>
-						<xsl:attribute name="font-weight"><xsl:value-of select="$label-cell-font-weight"/></xsl:attribute>
-						<xsl:attribute name="font-size"><xsl:value-of select="$label-cell-font-size"/></xsl:attribute>
-						<xsl:attribute name="padding"><xsl:value-of select="$label-cell-padding"/></xsl:attribute>
+						<xsl:for-each select="$style-parameters/label-cell/@*">
+							<xsl:attribute name="{name(.)}" select="."/>
+						</xsl:for-each>
 						<xsl:if test="enofo:is-initializable-variable($source-context)">
 							<xsl:value-of select="$variable-personalization-begin"/>
 						</xsl:if>
@@ -928,11 +867,9 @@
 				</xsl:when>
 				<xsl:when test="enofo:get-format($source-context) or ($length !='' and number($length) &lt;= 20)">
 					<fo:block>
-						<xsl:attribute name="color"><xsl:value-of select="$general-style-color"/></xsl:attribute>
-						<xsl:attribute name="font-weight"><xsl:value-of select="$general-style-font-weight"/></xsl:attribute>
-						<xsl:attribute name="font-size"><xsl:value-of select="$general-style-font-size"/></xsl:attribute>
-						<xsl:attribute name="padding"><xsl:value-of select="$general-style-padding"/></xsl:attribute>
-						<xsl:attribute name="text-align"><xsl:value-of select="$general-style-text-align"/></xsl:attribute>
+						<xsl:for-each select="$style-parameters/general-style/@*">
+							<xsl:attribute name="{name(.)}" select="."/>
+						</xsl:for-each>
 						<xsl:if test="enofo:is-initializable-variable($source-context)">
 							<xsl:value-of select="$variable-personalization-begin"/>
 						</xsl:if>
@@ -1018,11 +955,9 @@
 			<xsl:choose>
 				<xsl:when test="$other-give-details">
 					<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-						<xsl:attribute name="color"><xsl:value-of select="$details-color"/></xsl:attribute>
-						<xsl:attribute name="font-weight"><xsl:value-of select="$details-font-weight"/></xsl:attribute>
-						<xsl:attribute name="font-size"><xsl:value-of select="$details-font-size"/></xsl:attribute>
-						<xsl:attribute name="padding"><xsl:value-of select="$details-padding"/></xsl:attribute>
-						<xsl:attribute name="text-align"><xsl:value-of select="$details-text-align"/></xsl:attribute>
+						<xsl:for-each select="$style-parameters/details/@*">
+							<xsl:attribute name="{name(.)}" select="."/>
+						</xsl:for-each>
 						<fo:inline>
 							<xsl:call-template name="insert-image">
 								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
@@ -1033,12 +968,9 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-						<xsl:attribute name="color"><xsl:value-of select="$label-question-color"/></xsl:attribute>
-						<xsl:attribute name="font-weight"><xsl:value-of select="$label-question-font-weight"/></xsl:attribute>
-						<xsl:attribute name="font-size"><xsl:value-of select="$label-question-font-size"/></xsl:attribute>
-						<xsl:attribute name="margin-top"><xsl:value-of select="$label-question-margin-top"/></xsl:attribute>
-						<xsl:attribute name="margin-bottom"><xsl:value-of select="$label-question-margin-bottom"/></xsl:attribute>
-						<xsl:attribute name="text-align"><xsl:value-of select="$label-question-text-align"/></xsl:attribute>
+						<xsl:for-each select="$style-parameters/label-question/@*">
+							<xsl:attribute name="{name(.)}" select="."/>
+						</xsl:for-each>
 						<xsl:copy-of select="$label"/>
 					</fo:block>
 				</xsl:otherwise>
@@ -1079,10 +1011,9 @@
 					<xsl:choose>
 						<xsl:when test="ancestor::Cell">
 							<fo:block padding-bottom="0mm" padding-top="0mm">
-								<xsl:attribute name="color"><xsl:value-of select="$label-cell-color"/></xsl:attribute>
-								<xsl:attribute name="font-weight"><xsl:value-of select="$label-cell-font-weight"/></xsl:attribute>
-								<xsl:attribute name="font-size"><xsl:value-of select="$label-cell-font-size"/></xsl:attribute>
-								<xsl:attribute name="padding"><xsl:value-of select="$label-cell-padding"/></xsl:attribute>
+								<xsl:for-each select="$style-parameters/label-cell/@*">
+									<xsl:attribute name="{name(.)}" select="."/>
+								</xsl:for-each>
 								<xsl:choose>
 									<xsl:when test="enofo:is-initializable-variable($source-context)">
 										<xsl:value-of select="$variable-personalization-begin"/>
@@ -1098,11 +1029,9 @@
 						</xsl:when>
 						<xsl:otherwise>
 							<fo:block padding-bottom="0mm" padding-top="0mm">
-								<xsl:attribute name="color"><xsl:value-of select="$general-style-color"/></xsl:attribute>
-								<xsl:attribute name="font-weight"><xsl:value-of select="$general-style-font-weight"/></xsl:attribute>
-								<xsl:attribute name="font-size"><xsl:value-of select="$general-style-font-size"/></xsl:attribute>
-								<xsl:attribute name="padding"><xsl:value-of select="$general-style-padding"/></xsl:attribute>
-								<xsl:attribute name="text-align"><xsl:value-of select="$general-style-text-align"/></xsl:attribute>
+								<xsl:for-each select="$style-parameters/general-style/@*">
+									<xsl:attribute name="{name(.)}" select="."/>
+								</xsl:for-each>
 								<xsl:choose>
 									<xsl:when test="enofo:is-initializable-variable($source-context)">
 										<xsl:value-of select="$variable-personalization-begin"/>
@@ -1147,10 +1076,9 @@
 					<xsl:choose>
 						<xsl:when test="ancestor::Cell">
 							<fo:block padding-bottom="0mm" padding-top="0mm">
-								<xsl:attribute name="color"><xsl:value-of select="$label-cell-color"/></xsl:attribute>
-								<xsl:attribute name="font-weight"><xsl:value-of select="$label-cell-font-weight"/></xsl:attribute>
-								<xsl:attribute name="font-size"><xsl:value-of select="$label-cell-font-size"/></xsl:attribute>
-								<xsl:attribute name="padding"><xsl:value-of select="$label-cell-padding"/></xsl:attribute>
+								<xsl:for-each select="$style-parameters/label-cell/@*">
+									<xsl:attribute name="{name(.)}" select="."/>
+								</xsl:for-each>
 								<xsl:choose>
 									<xsl:when test="enofo:is-initializable-variable($source-context)">
 										<xsl:copy-of select="concat($variable-personalization-begin,$manual-content,'#{end}')"/>
@@ -1164,11 +1092,9 @@
 						</xsl:when>
 						<xsl:otherwise>
 							<fo:block padding-bottom="0mm" padding-top="0mm">
-								<xsl:attribute name="color"><xsl:value-of select="$general-style-color"/></xsl:attribute>
-								<xsl:attribute name="font-weight"><xsl:value-of select="$general-style-font-weight"/></xsl:attribute>
-								<xsl:attribute name="font-size"><xsl:value-of select="$general-style-font-size"/></xsl:attribute>
-								<xsl:attribute name="padding"><xsl:value-of select="$general-style-padding"/></xsl:attribute>
-								<xsl:attribute name="text-align"><xsl:value-of select="$general-style-text-align"/></xsl:attribute>
+								<xsl:for-each select="$style-parameters/general-style/@*">
+									<xsl:attribute name="{name(.)}" select="."/>
+								</xsl:for-each>
 								<xsl:choose>
 									<xsl:when test="enofo:is-initializable-variable($source-context)">
 										<xsl:copy-of select="concat($variable-personalization-begin,$manual-content,'#{end}')"/>
@@ -1224,11 +1150,9 @@
 			<xsl:choose>
 				<xsl:when test="$other-give-details">
 					<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-						<xsl:attribute name="color"><xsl:value-of select="$details-color"/></xsl:attribute>
-						<xsl:attribute name="font-weight"><xsl:value-of select="$details-font-weight"/></xsl:attribute>
-						<xsl:attribute name="font-size"><xsl:value-of select="$details-font-size"/></xsl:attribute>
-						<xsl:attribute name="padding"><xsl:value-of select="$details-padding"/></xsl:attribute>
-						<xsl:attribute name="text-align"><xsl:value-of select="$details-text-align"/></xsl:attribute>
+						<xsl:for-each select="$style-parameters/details/@*">
+							<xsl:attribute name="{name(.)}" select="."/>
+						</xsl:for-each>
 						<fo:inline>
 							<xsl:call-template name="insert-image">
 								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
@@ -1239,12 +1163,9 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-						<xsl:attribute name="color"><xsl:value-of select="$label-question-color"/></xsl:attribute>
-						<xsl:attribute name="font-weight"><xsl:value-of select="$label-question-font-weight"/></xsl:attribute>
-						<xsl:attribute name="font-size"><xsl:value-of select="$label-question-font-size"/></xsl:attribute>
-						<xsl:attribute name="margin-top"><xsl:value-of select="$label-question-margin-top"/></xsl:attribute>
-						<xsl:attribute name="margin-bottom"><xsl:value-of select="$label-question-margin-bottom"/></xsl:attribute>
-						<xsl:attribute name="text-align"><xsl:value-of select="$label-question-text-align"/></xsl:attribute>
+						<xsl:for-each select="$style-parameters/label-question/@*">
+							<xsl:attribute name="{name(.)}" select="."/>
+						</xsl:for-each>
 						<xsl:copy-of select="$label"/>
 					</fo:block>
 				</xsl:otherwise>
@@ -1253,10 +1174,9 @@
 		<xsl:choose>
 			<xsl:when test="$isTable = 'YES'">
 				<fo:block>
-					<xsl:attribute name="color"><xsl:value-of select="$label-cell-color"/></xsl:attribute>
-					<xsl:attribute name="font-weight"><xsl:value-of select="$label-cell-font-weight"/></xsl:attribute>
-					<xsl:attribute name="font-size"><xsl:value-of select="$label-cell-font-size"/></xsl:attribute>
-					<xsl:attribute name="padding"><xsl:value-of select="$label-cell-padding"/></xsl:attribute>
+					<xsl:for-each select="$style-parameters/label-cell/@*">
+						<xsl:attribute name="{name(.)}" select="."/>
+					</xsl:for-each>
 					<xsl:attribute name="text-align">right</xsl:attribute>
 					<xsl:attribute name="padding-top">0mm</xsl:attribute>
 					<xsl:attribute name="padding-bottom">0mm</xsl:attribute>
@@ -1273,11 +1193,9 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<fo:block>
-					<xsl:attribute name="color"><xsl:value-of select="$general-style-color"/></xsl:attribute>
-					<xsl:attribute name="font-weight"><xsl:value-of select="$general-style-font-weight"/></xsl:attribute>
-					<xsl:attribute name="font-size"><xsl:value-of select="$general-style-font-size"/></xsl:attribute>
-					<xsl:attribute name="padding"><xsl:value-of select="$general-style-padding"/></xsl:attribute>
-					<xsl:attribute name="text-align"><xsl:value-of select="$general-style-text-align"/></xsl:attribute>
+					<xsl:for-each select="$style-parameters/general-style/@*">
+						<xsl:attribute name="{name(.)}" select="."/>
+					</xsl:for-each>
 					<xsl:if test="enofo:is-initializable-variable($source-context)">
 						<xsl:value-of select="$variable-personalization-begin"/>
 					</xsl:if>
@@ -1403,10 +1321,9 @@
 			<xsl:choose>
 				<xsl:when test="ancestor::Cell">
 					<fo:block>
-						<xsl:attribute name="color"><xsl:value-of select="$label-cell-color"/></xsl:attribute>
-						<xsl:attribute name="font-weight"><xsl:value-of select="$label-cell-font-weight"/></xsl:attribute>
-						<xsl:attribute name="font-size"><xsl:value-of select="$label-cell-font-size"/></xsl:attribute>
-						<xsl:attribute name="padding"><xsl:value-of select="$label-cell-padding"/></xsl:attribute>
+						<xsl:for-each select="$style-parameters/label-cell/@*">
+							<xsl:attribute name="{name(.)}" select="."/>
+						</xsl:for-each>
 						<xsl:choose>
 							<xsl:when test="enofo:is-initializable-variable($source-context)">
 								<xsl:value-of select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}')"/>
@@ -1421,11 +1338,9 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<fo:block>
-						<xsl:attribute name="color"><xsl:value-of select="$general-style-color"/></xsl:attribute>
-						<xsl:attribute name="font-weight"><xsl:value-of select="$general-style-font-weight"/></xsl:attribute>
-						<xsl:attribute name="font-size"><xsl:value-of select="$general-style-font-size"/></xsl:attribute>
-						<xsl:attribute name="padding"><xsl:value-of select="$general-style-padding"/></xsl:attribute>
-						<xsl:attribute name="text-align"><xsl:value-of select="$general-style-text-align"/></xsl:attribute>
+						<xsl:for-each select="$style-parameters/general-style/@*">
+							<xsl:attribute name="{name(.)}" select="."/>
+						</xsl:for-each>
 						<xsl:choose>
 							<xsl:when test="enofo:is-initializable-variable($source-context)">
 								<xsl:value-of select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}')"/>
@@ -1566,10 +1481,9 @@
 						</xsl:when>
 						<xsl:otherwise>
 							<fo:inline>
-								<xsl:attribute name="color"><xsl:value-of select="$label-cell-color"/></xsl:attribute>
-								<xsl:attribute name="font-weight"><xsl:value-of select="$label-cell-font-weight"/></xsl:attribute>
-								<xsl:attribute name="font-size"><xsl:value-of select="$label-cell-font-size"/></xsl:attribute>
-								<xsl:attribute name="padding"><xsl:value-of select="$label-cell-padding"/></xsl:attribute>
+								<xsl:for-each select="$style-parameters/label-cell/@*">
+									<xsl:attribute name="{name(.)}" select="."/>
+								</xsl:for-each>
 								<xsl:copy-of select="enofo:get-label($source-context, $languages[1],$loop-navigation)"/>
 							</fo:inline>
 						</xsl:otherwise>
@@ -1600,11 +1514,9 @@
 					</fo:list-item-label>
 					<fo:list-item-body start-indent="body-start()">
 						<fo:block>
-							<xsl:attribute name="color"><xsl:value-of select="$answer-item-color"/></xsl:attribute>
-							<xsl:attribute name="font-weight"><xsl:value-of select="$answer-item-font-weight"/></xsl:attribute>
-							<xsl:attribute name="font-size"><xsl:value-of select="$answer-item-font-size"/></xsl:attribute>
-							<xsl:attribute name="padding-left"><xsl:value-of select="$answer-item-padding-left"/></xsl:attribute>
-							<xsl:attribute name="text-align"><xsl:value-of select="$answer-item-text-align"/></xsl:attribute>
+							<xsl:for-each select="$style-parameters/answer-item/@*">
+								<xsl:attribute name="{name(.)}" select="."/>
+							</xsl:for-each>
 							<xsl:choose>
 								<xsl:when test="$image != ''">
 									<xsl:call-template name="insert-image">
