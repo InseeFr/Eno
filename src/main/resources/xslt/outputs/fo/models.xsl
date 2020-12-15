@@ -468,7 +468,7 @@
 			<xsl:value-of select="'&lt;/fo:table&gt;'"/>
 			<xsl:value-of select="'&lt;/fo:block&gt;'"/>
 			<xsl:text>&#xa;</xsl:text>
-			<xsl:value-of select="concat('#set ($DynamicArrayPage = PositionInTheLoop / ',$maxlines-by-page,')')"/>
+			<xsl:value-of select="concat('#set ($DynamicArrayPage = 1 + PositionInTheLoop / ',$maxlines-by-page,')')"/>
 			<xsl:text>&#xa;</xsl:text>
 			<xsl:variable name="table-begin" as="node()">
 				<fo:block page-break-inside="avoid">
