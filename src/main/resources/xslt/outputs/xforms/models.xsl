@@ -409,16 +409,16 @@
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:variable>
-        <xsl:if test="$minimum-count != '' and $minimum-count != '0'">
-            <xsl:for-each select="1 to xs:integer($minimum-count)">
-                <xsl:element name="{$container-name}">
+        <xsl:element name="{$container-name}">
+            <xsl:if test="$minimum-count != '' and $minimum-count != '0'">
+                <xsl:for-each select="1 to xs:integer($minimum-count)">
                     <xsl:element name="{$name}">
                         <xsl:attribute name="occurrence-id" select="concat($name,'-',position())"/>
                         <xsl:copy-of select="$descendant-content"/>
                     </xsl:element>
-                </xsl:element>                
-            </xsl:for-each>
-        </xsl:if>
+                </xsl:for-each>
+            </xsl:if>
+        </xsl:element>
     </xsl:template>
 
     <xd:doc>
