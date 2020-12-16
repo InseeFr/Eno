@@ -557,7 +557,7 @@
             <!-- Page changing action -->
             <xf:action ev:event="page-change">
                 <!-- Iterating on every field of the current page and doing a DOMFocusOut in order to display potential error messages -->
-                <xf:action iterate="instance('fr-form-instance')//*[name()=instance('fr-form-instance')/Util/CurrentSectionName]//*">
+                <xf:action iterate="instance('fr-form-instance')//*[name()=instance('fr-form-instance')/Util/CurrentSectionName]//*[not(ancestor::*[@idOccurrence and ancestor::*[name()=instance('fr-form-instance')/Util/CurrentSectionName]])]">
                     <xf:dispatch name="DOMFocusOut">
                         <xsl:attribute name="target">
                             <xsl:value-of select="'{concat(context()/name(),''-control'')}'"/>
