@@ -537,6 +537,7 @@
                                             nodeset="instance('fr-form-instance')//{@id}/{$dynamic-array}"
                                             position="after"
                                             origin="instance('fr-form-loop-model')/{@id}/{$dynamic-array}"/>
+                                        <!-- TODO : manage linked loops inside another loop : the value does not come from the occurence's ancestor -->
                                         <xf:setvalue ref="instance('fr-form-instance')//{@id}/{$dynamic-array}[last()]/@occurrence-id"
                                             value="instance('fr-form-instance')//{$container}/{$dynamic-array}[position() = count(instance('fr-form-instance')//{@id}/{$dynamic-array})]/@occurrence-id"/>
                                     </xf:action>
