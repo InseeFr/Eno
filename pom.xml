@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.insee.eno</groupId>
 	<artifactId>eno-core</artifactId>
-	<version>2.0.5</version>
+	<version>2.1.0</version>
 	<packaging>jar</packaging>
 
 	<name>Eno – Questionnaire generator</name>
@@ -57,7 +57,7 @@
 		<jaxb-api.version>2.3.1</jaxb-api.version>
 		
 		<apache-commons.version>3.5</apache-commons.version>
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13.1</junit.version>
 		<xmlunit.version>2.3.0</xmlunit.version>
 		<log4j-slf4j.version>2.11.0</log4j-slf4j.version>
 		
@@ -252,7 +252,7 @@
 				<version>1.2.1</version>
 				<executions>
 					<execution>
-						<phase>package</phase>
+						<phase>process-classes</phase>
 						<goals>
 							<goal>java</goal>
 						</goals>
