@@ -637,7 +637,7 @@
                   <fo:block>
                      <fo:instream-foreign-object>
                         <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                                         message="Code Bar"
+                                         message="${BddIdentifiantUniteEnquetee} - ${BddLibelleCourt} -  ${BddAnneeReference} - ${BddPeriode}"
                                          orientation="0">
                            <barcode:code39>
                               <barcode:height>10mm</barcode:height>
