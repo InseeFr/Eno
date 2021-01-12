@@ -15,6 +15,7 @@
             <label>"Combien de temps avez-vous mis en tout pour répondre à cette enquête (recherche des données + remplissage du questionnaire) ?"</label>
             <unit>heures</unit>
             <conditionFilter>"normal"</conditionFilter>
+            <bindingsDependencies>HEURE_REMPL</bindingsDependencies>
             <response name="HEURE_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>HEURE_REMPL</name>
@@ -38,6 +39,7 @@
             <label></label>
             <unit>minutes</unit>
             <conditionFilter>"normal"</conditionFilter>
+            <bindingsDependencies>MIN_REMPL</bindingsDependencies>
             <response name="MIN_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>MIN_REMPL</name>
@@ -58,6 +60,7 @@
                     mandatory="false">
             <label>"Commentaires et remarques éventuelles concernant l’enquête :"</label>
             <conditionFilter>"normal"</conditionFilter>
+            <bindingsDependencies>COMMENT_QE</bindingsDependencies>
             <response name="COMMENT_QE"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>COMMENT_QE</name>
@@ -83,6 +86,7 @@
                     mandatory="false">
             <label>"Commentaires et remarques éventuelles concernant l’enquête :"</label>
             <conditionFilter>"normal"</conditionFilter>
+            <bindingsDependencies>COMMENT_QE</bindingsDependencies>
             <response name="COMMENT_QE"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>COMMENT_QE</name>
@@ -111,6 +115,7 @@
             <label>"Combien de temps avez-vous mis en tout pour répondre à cette enquête (recherche des données + remplissage du questionnaire) ?"</label>
             <unit>heures</unit>
             <conditionFilter>"normal"</conditionFilter>
+            <bindingsDependencies>HEURE_REMPL</bindingsDependencies>
             <response name="HEURE_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>HEURE_REMPL</name>
@@ -134,6 +139,7 @@
             <label></label>
             <unit>minutes</unit>
             <conditionFilter>"normal"</conditionFilter>
+            <bindingsDependencies>MIN_REMPL</bindingsDependencies>
             <response name="MIN_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>MIN_REMPL</name>

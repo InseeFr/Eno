@@ -1280,6 +1280,7 @@
                   mandatory="false">
          <label>"Commentaires et remarques éventuelles concernant l’enquête :"</label>
          <conditionFilter>"normal"</conditionFilter>
+         <bindingsDependencies>COMMENT_QE</bindingsDependencies>
          <response name="COMMENT_QE"/>
       </components>
    </components>
