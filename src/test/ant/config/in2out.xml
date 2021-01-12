@@ -2,7 +2,7 @@
 <!-- This file contains common properties used by the build-in2out transformation -->
 <Properties>
     <!-- The name of the survey, conditionning the name of the input file processed. -->
-    <SurveyName>comg-2020-b04</SurveyName>
+    <SurveyName>fpe-2019-x00</SurveyName>
     
     <!-- The in-format to be read : ddi / pogues-xml -->
     <InFormat>ddi</InFormat>

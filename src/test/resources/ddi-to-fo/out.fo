@@ -2847,10 +2847,7 @@
                      </fo:table-cell>
                   </fo:table-row>
                </fo:table-header>
-               <fo:table-body>
-#foreach( ${FAVOURITE_CHARACTERS} in ${FAVOURITE_CHARACTERS-Container} ) 
-#set( $FAVOURITE_CHARACTERS.LoopPosition = $velocityCount)
-<fo:table-row border-color="black">
+               <fo:table-body>#foreach( ${FAVOURITE_CHARACTERS} in ${FAVOURITE_CHARACTERS-Container} ) #set( $FAVOURITE_CHARACTERS.LoopPosition = $velocityCount)<fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
                                     border-style="solid"
@@ -3169,8 +3166,7 @@
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
-                  </fo:table-row>
-#end 
+                  </fo:table-row>#end 
 #set( $initializeInt = 0)
 #set( $FAVOURITE_CHARACTERS-TotalOccurrenceInt = $initializeInt.parseInt(${FAVOURITE_CHARACTERS-TotalOccurrenceCount}))
 <fo:table-row border-color="black">
