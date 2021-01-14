@@ -1576,7 +1576,7 @@
 </fo:table-body>
             </fo:table>
          </fo:block>
-#set ($DynamicArrayPage = $REPARTITION_CA.LoopPosition / 19)
+#set ($DynamicArrayPage = 1 + $REPARTITION_CA.LoopPosition / 19)
 <fo:block page-break-inside="avoid"
                    id="REPARTITION_CA-$DynamicArrayPage"
                    page-break-after="always">
@@ -1681,7 +1681,7 @@
 </fo:table-body>
             </fo:table>
          </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 1) / 19)
+#set ($DynamicArrayPage = 1 + ($REPARTITION_CA-TotalOccurrenceInt + 1) / 19)
 <fo:block page-break-inside="avoid"
                    id="REPARTITION_CA-$DynamicArrayPage"
                    page-break-after="always">
@@ -1792,7 +1792,7 @@
 </fo:table-body>
             </fo:table>
          </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 2) / 19)
+#set ($DynamicArrayPage = 1 + ($REPARTITION_CA-TotalOccurrenceInt + 2) / 19)
 <fo:block page-break-inside="avoid"
                    id="REPARTITION_CA-$DynamicArrayPage"
                    page-break-after="always">
@@ -1905,7 +1905,7 @@
 </fo:table-body>
             </fo:table>
          </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 3) / 19)
+#set ($DynamicArrayPage = 1 + ($REPARTITION_CA-TotalOccurrenceInt + 3) / 19)
 <fo:block page-break-inside="avoid"
                    id="REPARTITION_CA-$DynamicArrayPage"
                    page-break-after="always">
@@ -2018,7 +2018,7 @@
 </fo:table-body>
             </fo:table>
          </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 4) / 19)
+#set ($DynamicArrayPage = 1 + ($REPARTITION_CA-TotalOccurrenceInt + 4) / 19)
 <fo:block page-break-inside="avoid"
                    id="REPARTITION_CA-$DynamicArrayPage"
                    page-break-after="always">
@@ -2131,7 +2131,7 @@
 </fo:table-body>
             </fo:table>
          </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 5) / 19)
+#set ($DynamicArrayPage = 1 + ($REPARTITION_CA-TotalOccurrenceInt + 5) / 19)
 <fo:block page-break-inside="avoid"
                    id="REPARTITION_CA-$DynamicArrayPage"
                    page-break-after="always">
@@ -2244,7 +2244,7 @@
 </fo:table-body>
             </fo:table>
          </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 6) / 19)
+#set ($DynamicArrayPage = 1 + ($REPARTITION_CA-TotalOccurrenceInt + 6) / 19)
 <fo:block page-break-inside="avoid"
                    id="REPARTITION_CA-$DynamicArrayPage"
                    page-break-after="always">
@@ -2357,7 +2357,7 @@
 </fo:table-body>
             </fo:table>
          </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 7) / 19)
+#set ($DynamicArrayPage = 1 + ($REPARTITION_CA-TotalOccurrenceInt + 7) / 19)
 <fo:block page-break-inside="avoid"
                    id="REPARTITION_CA-$DynamicArrayPage"
                    page-break-after="always">
@@ -2470,7 +2470,7 @@
 </fo:table-body>
             </fo:table>
          </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 8) / 19)
+#set ($DynamicArrayPage = 1 + ($REPARTITION_CA-TotalOccurrenceInt + 8) / 19)
 <fo:block page-break-inside="avoid"
                    id="REPARTITION_CA-$DynamicArrayPage"
                    page-break-after="always">
@@ -2583,7 +2583,7 @@
 </fo:table-body>
             </fo:table>
          </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 9) / 19)
+#set ($DynamicArrayPage = 1 + ($REPARTITION_CA-TotalOccurrenceInt + 9) / 19)
 <fo:block page-break-inside="avoid"
                    id="REPARTITION_CA-$DynamicArrayPage"
                    page-break-after="always">
@@ -2696,7 +2696,7 @@
 </fo:table-body>
             </fo:table>
          </fo:block>
-#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 10) / 19)
+#set ($DynamicArrayPage = 1 + ($REPARTITION_CA-TotalOccurrenceInt + 10) / 19)
 <fo:block page-break-inside="avoid"
                    id="REPARTITION_CA-$DynamicArrayPage"
                    page-break-after="always">

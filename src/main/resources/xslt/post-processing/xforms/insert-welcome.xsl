@@ -172,7 +172,7 @@
             <label>
                 <xsl:choose>
                     <xsl:when test="$context=$household">
-                        <xsl:text>&lt;p&gt;Bienvenue sur le questionnaire de réponse à l'enquête &lt;b&gt;</xsl:text>
+                        <xsl:text>&lt;p&gt;Bienvenue sur le questionnaire de réponse à l'&lt;b&gt;</xsl:text>
                         <xsl:value-of select="$Enq_LibelleEnquete" />
                         <xsl:text>&lt;/b&gt;</xsl:text>
                         <xsl:text>&lt;span title="</xsl:text>
