@@ -14,7 +14,21 @@
             <xs:element name="PageBreakBetween" type="PageBreakBetween" minOccurs="0" maxOccurs="1"/>
             <xs:element name="AccompanyingMail" type="AccompanyingMail" minOccurs="0" maxOccurs="1"
                 default=""/>
+            <xs:element name="Style" type="Style" minOccurs="0" maxOccurs="1"/>
+</xs:all>
+    </xs:complexType>
+
+
+    <xs:complexType name="Style">
+        <xs:all>
+            <xs:element name="Sequence-title" type="SequenceTitle"  minOccurs="0" maxOccurs="1"/>
         </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="SequenceTitle">
+        <xs:sequence>
+            <xs:element name="background-color" type="xs:string" minOccurs="0" maxOccurs="1" default="#E60B0B"/>
+        </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="Format">
