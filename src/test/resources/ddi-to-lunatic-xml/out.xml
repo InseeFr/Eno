@@ -37,6 +37,7 @@
                   id="j6p6my1d"
                   filterDescription="false">
          <label>"If you are not ready, please go to the end of the questionnaire"</label>
+         <conditionFilter>"normal"</conditionFilter>
       </components>
       <components xsi:type="Subsequence" componentType="Subsequence" id="j6p0s7o5">
          <label>"General knowledge of the series"</label>
