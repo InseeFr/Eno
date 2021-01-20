@@ -218,7 +218,7 @@
                   <fo:block>
                      <fo:instream-foreign-object>
                         <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                           message="${BddIdentifiantUniteEnquetee} - ${BddLibelleCourt} -  ${BddAnneeReference} - ${BddPeriode}" orientation="0">
+                           message="${BddIdentifiantUniteEnquetee}-${BddLibelleCourt}-${BddAnneeReference}-${BddPeriode}" orientation="0">
                            <barcode:datamatrix>
                               <barcode:module-width>0.53mm</barcode:module-width>
                               <barcode:quiet-zone enabled="false">0mw</barcode:quiet-zone>
