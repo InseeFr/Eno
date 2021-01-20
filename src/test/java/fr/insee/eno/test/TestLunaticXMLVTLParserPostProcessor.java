@@ -35,14 +35,14 @@ public class TestLunaticXMLVTLParserPostProcessor {
 		String expected4 = "x / y";
 		
 		String test5 = "x != '1'";
-		String expected5 ="x  &lt;&gt;  '1'";
+		String expected5 ="x  &lt;&gt;  \"1\"";
 		
 		String test6 = "\"x != '1'\"";
 		String expected6 ="\"x != '1'\"";
 		
 		String test7 = "concat(substring(x,y,z),a,concat(x,substring(x1,y1,z1)),b)!='abc'";
-		String expected7 = "substr(x,y,z) || a || x || substr(x1,y1,z1) || b &lt;&gt; 'abc'";
-		
+		String expected7 = "substr(x,y,z) || a || x || substr(x1,y1,z1) || b &lt;&gt; \"abc\"";
+
 		String test8 = "cast(cast(ABCD,integer),string) = '3'";
 		String expected8 = "cast(cast(ABCD,integer),string) = \"3\"";
 		

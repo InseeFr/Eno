@@ -106,8 +106,9 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 	 *  	x div y -> x / y
 	 *  	substring(A,1,2) -> substr(A,1,2)
 	 *  	concat(A,B,C) -> A || B || C
-	 *  	cast(ABCD,string) = '1' -> cast(ABCD,string) = \"1\"
 	 *  	cast(ABCD,integer) = '1' -> cast(ABCD,integer) = 1
+	 *  	'ABCD' -> "ABCD"
+	 *  	\"hello I'm very happy to be 'here' \" || cast('2021',string) -> \" hello I'm very happy to be 'here' \" || cast("2021",string)
 	 *    
 	 * @param input : the string to parse
 	 * @return finalString : the result of parsing
@@ -163,8 +164,8 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 					isBetweenRealSimpleQuote=!isBetweenRealSimpleQuote;
 					if(isNumeric(contentBetweenSimpleQuote) && isCastingToIntegerOrNumber(lastCastType)) {
 						finalString = replaceLast(finalString, "'"+contentBetweenSimpleQuote+"'", contentBetweenSimpleQuote);
-					} 
-					else if(isCastingToString(lastCastType)) {
+					}
+					else {
 						finalString = replaceLast(finalString, "'"+contentBetweenSimpleQuote+"'", "\""+contentBetweenSimpleQuote+"\"");
 					}
 					contentBetweenSimpleQuote="";
