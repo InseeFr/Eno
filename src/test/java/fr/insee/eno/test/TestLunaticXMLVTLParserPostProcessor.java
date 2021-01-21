@@ -48,6 +48,9 @@ public class TestLunaticXMLVTLParserPostProcessor {
 		
 		String test9 = "cast(cast(ABCD,string),integer) = '3'";
 		String expected9 = "cast(cast(ABCD,string),integer) = 3";
+
+		String test10 = "cast(cast(ABCD,string),integer) = null";
+		String expected10 = "isnull(cast(cast(ABCD,string),integer))";
 		
 		Assert.assertEquals(expected1, lunaticXMLVtlParserPostprocessor.parseToVTL(test1));
 		Assert.assertEquals(expected2, lunaticXMLVtlParserPostprocessor.parseToVTL(test2));
@@ -58,6 +61,7 @@ public class TestLunaticXMLVTLParserPostProcessor {
 		Assert.assertEquals(expected7, lunaticXMLVtlParserPostprocessor.parseToVTL(test7));
 		Assert.assertEquals(expected8, lunaticXMLVtlParserPostprocessor.parseToVTL(test8));
 		Assert.assertEquals(expected9, lunaticXMLVtlParserPostprocessor.parseToVTL(test9));
+		Assert.assertEquals(expected10, lunaticXMLVtlParserPostprocessor.parseToVTL(test10));
 	}
 	
 	@Test

@@ -54,12 +54,14 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 	public static final String XPATH_CAST_FUNCTION = "cast";
 	public static final String XPATH_DIVISION_FUNCTION = " div ";
 	public static final String XPATH_NOT_EQUAL_TO = "!=";
+	public static final String FAKE_XPATH_EQUAL_TO_NULL = "= null";
 
 	public static final String VTL_CONCAT_FUNCTION = "||";
 	public static final String VTL_SUBSTRING_FUNCTION = "substr";
 	public static final String VTL_CAST_FUNCTION = "cast";
 	public static final String VTL_DIVISION_FUNCTION = " / ";
 	public static final String VTL_NOT_EQUAL_TO = " &lt;&gt; ";
+	public static final String VTL_EQUAL_TO_NULL_FUNCTION = "isnull";
 
 	public static final String XML_NODE_LABEL = "label";
 	public static final String XML_NODE_CONDITIONFILTER = "conditionFilter";
@@ -109,7 +111,8 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 	 *  	cast(ABCD,integer) = '1' -> cast(ABCD,integer) = 1
 	 *  	'ABCD' -> "ABCD"
 	 *  	\"hello I'm very happy to be 'here' \" || cast('2021',string) -> \" hello I'm very happy to be 'here' \" || cast("2021",string)
-	 *    
+	 * 		cast(A,string) = null -> isnull(cast(A,string))
+	 *
 	 * @param input : the string to parse
 	 * @return finalString : the result of parsing
 	 */
@@ -130,6 +133,13 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 			}
 			else if(context.contains(XPATH_DIVISION_FUNCTION) && !isBetweenRealDoubleQuote) {
 				finalString = replaceLast(finalString, XPATH_DIVISION_FUNCTION, VTL_DIVISION_FUNCTION);
+			}
+			else if(context.contains(FAKE_XPATH_EQUAL_TO_NULL) && !isBetweenRealDoubleQuote){
+				finalString+=c;
+				Pattern pattern = Pattern.compile("(cast\\((.)*,(\\w+)\\)) "+FAKE_XPATH_EQUAL_TO_NULL);
+				Matcher m = pattern.matcher(finalString);
+				if(m.find()) finalString = m.replaceAll(VTL_EQUAL_TO_NULL_FUNCTION+"($1)");
+				continue;
 			}
 			
 			switch (c) {
