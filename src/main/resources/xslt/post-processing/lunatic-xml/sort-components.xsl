@@ -144,16 +144,10 @@
                     <xsl:variable name="nbLinesExpected" select="h:lines/@max"/>
                     <xsl:choose>
                         <xsl:when test="$nbLines = 1">
-                            <xsl:variable name="cell" select="enolunatic:prepareCellsForRoster(h:cells[@type='line'])"/>
-                            <xsl:apply-templates mode="roster" select="$cell">
-                                <xsl:with-param name="idLine" select="1" tunnel="yes"/>
-                                <xsl:with-param name="ancestor" select="'table'" tunnel="yes"/>
-                                <xsl:with-param name="tableId" select="@id" tunnel="yes"/>
-                            </xsl:apply-templates>
                             <xsl:call-template name="enolunatic:addLinesForRoster">
-                                <xsl:with-param name="currentLigne" select="2"/>
+                                <xsl:with-param name="currentLigne" select="1"/>
                                 <xsl:with-param name="nbLigneMax" select="$nbLinesExpected"/>
-                                <xsl:with-param name="lineToCopy" select="$cell"/>
+                                <xsl:with-param name="lineToCopy" select="h:cells[@type='line']"/>
                                 <xsl:with-param name="tableId" select="@id"/>
                             </xsl:call-template>
                         </xsl:when>
@@ -192,7 +186,7 @@
         <xsl:param name="idLine" tunnel="yes"/>
         <xsl:param name="ancestor" tunnel="yes"/>
         <xsl:param name="tableId" tunnel="yes"/>
-        <xsl:variable name="idColumn" select="ancestor::h:cells/@idColumn"/>
+        <xsl:param name="idColumn" tunnel="yes"/>
         <xsl:choose>
             <xsl:when test="$ancestor='table'">
                 <response>
@@ -232,32 +226,47 @@
     </xsl:template>
 
     <xsl:template match="h:cells">
+        <xsl:param name="idLine" tunnel="yes"/>        
+        <xsl:param name="idColumn" tunnel="yes"/>
         <cells>
-            <xsl:copy-of select="@*"/>            
+            <xsl:if test="@id">
+                <xsl:attribute name="id">
+                    <xsl:choose>
+                        <xsl:when test="$idColumn">
+                            <xsl:value-of select="concat(@id,'_',$idLine,'_',$idColumn)"></xsl:value-of>        
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="@id"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:copy-of select="@*[not(name(.)='id')]"/>            
             <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
             <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
             <xsl:variable name="allDependencies" as="xs:string*">
                 <xsl:copy-of select="$dependencies"/>
-                <xsl:copy-of select="$responseDependencies"/>
+                <xsl:if test="not($idColumn)"><xsl:copy-of select="$responseDependencies"/></xsl:if>
             </xsl:variable>
             <xsl:apply-templates select="*[not(self::h:variables)]"/>
             <xsl:if test="string-length(@type)=0">
                 <xsl:for-each select="distinct-values($allDependencies)">                
                     <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
                 </xsl:for-each>
-            </xsl:if>            
+            </xsl:if>
         </cells>
     </xsl:template>
 
     <xsl:template match="h:cells" mode="roster">
-        <xsl:param name="column" tunnel="yes"/>
         <xsl:param name="tableId" tunnel="yes"/>
         <cells>
             <xsl:copy-of select="@*"/>
-            <xsl:if test="string($column)!=''"><xsl:attribute name="idColumn" select="$column"/></xsl:if>
-            <xsl:apply-templates select="*[not(self::h:variables)]">
-                <xsl:with-param name="tableId" select="$tableId" tunnel="yes"/>
-            </xsl:apply-templates>
+            <xsl:for-each select="h:cells">
+                <xsl:apply-templates select=".">
+                    <xsl:with-param name="tableId" select="$tableId" tunnel="yes"/>
+                    <xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
+                </xsl:apply-templates>
+            </xsl:for-each>
         </cells>
     </xsl:template>
 
@@ -300,18 +309,6 @@
             </xsl:call-template>
         </xsl:if>
     </xsl:template>
-
-    <xsl:function name="enolunatic:prepareCellsForRoster">
-        <xsl:param name="cell" as="node()"/>
-        <cells>
-            <xsl:copy-of select="$cell/@*"/>
-            <xsl:for-each select="$cell/h:cells">
-                <xsl:apply-templates select="." mode="roster">
-                    <xsl:with-param name="column" select="position()" tunnel="yes"/>
-                </xsl:apply-templates>
-            </xsl:for-each>
-        </cells>
-    </xsl:function>
     
     <xsl:template name="enolunatic:add-dependencies">
         <xsl:param name="responseName"/>
