@@ -5,94 +5,45 @@
 [![Build Status](https://travis-ci.org/InseeFr/Eno.svg?branch=master)](https://travis-ci.org/InseeFr/Eno)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/fr.insee.eno/eno-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/fr.insee.eno/eno-core)
 
+[Release description](https://github.com/InseeFr/Eno/tree/master/docs/release.md)
+
+## What is it ?
+
+**Eno** is a tool that **generates survey questionnaires starting from their formal description** in [DDI](http://ddialliance.org). 
+It automates the production of **“collection instruments”** (paper or web forms, collection modules for surveyors, etc.) based on a formal and abstract description of the questionnaire as standardised metadata. 
+These models are then used to produce the collection media, in **different modes**, within production collection infrastructures. 
+
+Starting DDI, Eno generates  : 
+- **an Xforms output format**, viewable with [Orbeon](https://www.orbeon.com/), and intended for web collection. Insee has developed an data collection services for XForms questionnaires powered by Orbeon : [Stromae](https://github.com/InseeFr/Stromae).
+- **an FO output format**, which can be transformed into PDF with the Apache FOP engine, and intended for paper collection.
+- **a Lunatic XML output format**, which is transformed into Json with the [Lunatic-model](https://github.com/InseeFr/Lunatic-model), which is associated with the library of javascript components [Lunatic](https://github.com/InseeFr/Lunatic), and encapsulated in a JS application (orchestrator) deployable. [An Example of orchestrator](https://github.com/InseeFr/Queen)
+- **An fodt output format**, which is a specification in fod format, for documentation, or questionnaire design purposes.
+
+Eno is used by Insee since 2015 : more than 30 business surveys are using Eno for their web and paper questionnaires, and the offer for household surveys is growing.
+
+ENO is often associated with [**Pogues**](https://github.com/InseeFr/Pogues). This is is an additional module to Eno, **a questionnaire design user interface**, that connects with the generation process. Pogues produces the DDI description of the questionnaire : using this tool, a questionnaire designer can specify his web questionnaire in a friendly way and visualize the generated result in one click.
 
 
-## Introduction
 
-Eno is a tool that generates survey questionnaires starting from their formal description in [DDI](http://ddialliance.org/).
+## How to get it ?
 
-Due to its modular design, Eno can create questionnaires in different formats from the same DDI description. Currently, Eno generates XForms web questionnaires that can be executed on [Orbeon Forms Runner](http://www.orbeon.com/). PDF questionnaires is under development.
+Eno is published as open source on GitHub. It is available under the **MIT license**, and contributions as well as suggestions for improvements are welcome.
 
-## Principles : 
- 
-The generation of XForms forms is performed using a number of XSLT transformations from a DDI input managed by a Ant script.
- 
+It is developped in an international perspective, codes and comments are in english. Data of course can be collected in any langage.
 
-### With Java
+## How to use it ?
 
-Use the maven dependency to provide the Jar from maven central
-
-`
-	
-	<dependency>
-
-		<groupId>fr.insee.eno</groupId>
-		
-		<artifactId>eno-core</artifactId>
-		
-		<version>1.0.0</version>
-	
-	</dependency>
-`
+Eno comes packaged in a **REST web service using [Eno-WS](https://github.com/InseeFr/Eno-WS)** and a Docker image. 
 
 
-See examples in `src/test/resources`
-
-
-### With Ant
-
-The main Ant build file is [/src/main/scripts/build_non_regression.xml] and its main target is "full".
-
- 
-This file includes the name forms to generate.
-
- 
-The DDI input and configuration are found in a subdirectory of [/questionnaire/] with the same name.
-
- 
-Generic Ant properties which drive the transformations are stored in [/src/main/scripts/build_configuration.xml]
-
- 
-The generated XForms output will be located in a subdirectory of [/questionnaire/].
-
-
-## Getting Started
- 
-### Prior for Ant usage: 
- 
- * Apache Ant. You can download Ant from Apache, see also : [Ant Apache](http://ant.apache.org/)
- 
- * Source code from github.com.
- 
-Then you have to donwload Java Libraries : 
-
-* Ant-Contrib 0.6 or higher (collection of tasks for Apache Ant), see also : [Ant contrib](http://ant-contrib.sourceforge.net/)
-* Saxon HE 9.X or higher (The XSLT and XQuery Processor), see also : [Saxon](https://mvnrepository.com/artifact/net.sf.saxon/Saxon-HE)
-* Saxon-unpack, included as standard in each Saxon edition
-* Common lang 3 or higher (for the non regression test only), see also : [Apache Commons lang](https://commons.apache.org/proper/commons-lang/)
-
-Paste the ".jar" file in a "/lib/" folder at the Eno project root.
-
-
-### Example : 
+## Example : 
  
 You can find on the subdirectory [/questionnaire/], the questionnaire example "Simpsons" specified in the DDI format.
 
-
-To generate the XForms form, execute the main ant build file [/src/main/scripts/build_non_regression.xml]
-
-
-The generated XForms form should be created in [/questionnaire/simpsons/Xforms/v1/] folder.
- 
-
-### Non regression test : 
- 
-The expected XForms form file for the Simpsons questionnaire is present in [/questionnaire/simpsons/] folder, a specific ant target : "full-with-test" generates Xform file and calculates the difference with the expected Xforms file.
-
-
-The difference file [questionnaire/simpsons/Xforms/v1/diff.txt] specifed, if there has, index at which the file begins to differ and the difference beetwen the generated Xform file and the expected Xform file.
+You can find a platform of demonstration on [Docker image](https://eno.dev.insee.io).
 
 ## Road Map
 
+Eno is very widely, even systematically, used in business surveys (web questionnaire, paper questionnaire, takeover and management tool). 
 
-New output format : PDF for paper questionnaire
+Household surveys have also started to use it and work is underway to increase the functional coverage required for these surveys (e.g. description of filters, possibility to loop or select occurrences of a loop, interviewer questionnaire).
