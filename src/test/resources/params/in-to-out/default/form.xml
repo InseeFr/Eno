@@ -2247,6 +2247,78 @@
          </values>
       </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
+         <name>FILTER_RESULT_COMMENT</name>
+         <expression>"normal"</expression>
+      </variables>
+   <variables variableType="CALCULATED" xsi:type="VariableType">
+         <name>FILTER_RESULT_READY</name>
+         <expression>"normal"</expression>
+      </variables>
+   <variables variableType="CALCULATED" xsi:type="VariableType">
+            <name>FILTER_RESULT_PRODUCER</name>
+            <expression>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</expression>
+         </variables>
+   <variables variableType="CALCULATED" xsi:type="VariableType">
+            <name>FILTER_RESULT_SEASON_NUMBER</name>
+            <expression>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</expression>
+         </variables>
+   <variables variableType="CALCULATED" xsi:type="VariableType">
+            <name>FILTER_RESULT_DATEFIRST</name>
+            <expression>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</expression>
+         </variables>
+   <variables variableType="CALCULATED" xsi:type="VariableType">
+            <name>FILTER_RESULT_AUDIENCE_SHARE</name>
+            <expression>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</expression>
+         </variables>
+   <variables variableType="CALCULATED" xsi:type="VariableType">
+         <name>FILTER_RESULT_CITY</name>
+         <expression>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</expression>
+      </variables>
+   <variables variableType="CALCULATED" xsi:type="VariableType">
+         <name>FILTER_RESULT_MAYOR</name>
+         <expression>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</expression>
+      </variables>
+   <variables variableType="CALCULATED" xsi:type="VariableType">
+         <name>FILTER_RESULT_STATE</name>
+         <expression>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</expression>
+      </variables>
+   <variables variableType="CALCULATED" xsi:type="VariableType">
+         <name>FILTER_RESULT_PET</name>
+         <expression>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</expression>
+      </variables>
+   <variables variableType="CALCULATED" xsi:type="VariableType">
+         <name>FILTER_RESULT_ICE_FLAVOUR</name>
+         <expression>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</expression>
+      </variables>
+   <variables variableType="CALCULATED" xsi:type="VariableType">
+         <name>FILTER_RESULT_NUCLEAR_CHARACTER</name>
+         <expression>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</expression>
+      </variables>
+   <variables variableType="CALCULATED" xsi:type="VariableType">
+         <name>FILTER_RESULT_BIRTH_CHARACTER</name>
+         <expression>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</expression>
+      </variables>
+   <variables variableType="CALCULATED" xsi:type="VariableType">
+            <name>FILTER_RESULT_PERCENTAGE_EXPENSES</name>
+            <expression>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</expression>
+         </variables>
+   <variables variableType="CALCULATED" xsi:type="VariableType">
+            <name>FILTER_RESULT_CLOWNING</name>
+            <expression>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</expression>
+         </variables>
+   <variables variableType="CALCULATED" xsi:type="VariableType">
+            <name>FILTER_RESULT_TRAVEL</name>
+            <expression>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</expression>
+         </variables>
+   <variables variableType="CALCULATED" xsi:type="VariableType">
+         <name>FILTER_RESULT_FAVOURITE_CHARACTERS</name>
+         <expression>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</expression>
+      </variables>
+   <variables variableType="CALCULATED" xsi:type="VariableType">
+         <name>FILTER_RESULT_SURVEY_COMMENT</name>
+         <expression>"normal"</expression>
+      </variables>
+   <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>SUM_EXPENSES</name>
       <expression>cast(PERCENTAGE_EXPENSES11,number) + cast(PERCENTAGE_EXPENSES21,number) + cast(PERCENTAGE_EXPENSES31,number)+ cast(PERCENTAGE_EXPENSES41,number)+ cast(PERCENTAGE_EXPENSES51,number)+ cast(PERCENTAGE_EXPENSES61,number)+ cast(PERCENTAGE_EXPENSES71,number)+ cast(PERCENTAGE_EXPENSES81,number)+ cast(PERCENTAGE_EXPENSES91,number)+ cast(PERCENTAGE_EXPENSES101,number)</expression>
    </variables>
