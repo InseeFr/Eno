@@ -79,7 +79,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    <xsl:variable name="addFilterResult">
+    <xsl:variable name="addFilterResult" as="xs:boolean">
         <xsl:choose>
             <xsl:when test="$parameters//AddFilterResult != ''">
                 <xsl:value-of select="$parameters//AddFilterResult"/>
