@@ -981,7 +981,6 @@
 	<xsl:template name="enolunatic:add-calculated-variable-filter-result">
 		<xsl:param name="name"/>
 		<xsl:param name="expression"/>
-		<xsl:message>Create calculated variables</xsl:message>
 		<variables variableType="CALCULATED" xsi:type="VariableType">
 			<name><xsl:value-of select="concat('FILTER_RESULT_',$name)"/></name>
 			<expression><xsl:value-of select="$expression"/></expression>
