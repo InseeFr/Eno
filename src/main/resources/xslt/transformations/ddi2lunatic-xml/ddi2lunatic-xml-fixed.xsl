@@ -79,6 +79,16 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
+    <xsl:variable name="addFilterResult">
+        <xsl:choose>
+            <xsl:when test="$parameters//AddFilterResult != ''">
+                <xsl:value-of select="$parameters//AddFilterResult"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//AddFilterResult"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     
     <xsl:variable name="enoVersion" select="$properties//EnoVersion"/>
     
