@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
@@ -19,6 +20,8 @@ public class PoguesXML2DDIGenerator implements Generator {
 	private static final Logger logger = LoggerFactory.getLogger(PoguesXML2DDIGenerator.class);
 
 	private XslTransformation saxonService = new XslTransformation();
+
+	private static final String styleSheetPath = Constants.TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL;
 
 	@Override
 	public File generate(File finalInput, byte[] parameters, String surveyName) throws Exception {
@@ -36,7 +39,7 @@ public class PoguesXML2DDIGenerator implements Generator {
 		logger.debug("Output folder for basic-form : " + outputBasicFormPath);
 
 		InputStream isTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL = Constants
-				.getInputStreamFromPath(Constants.TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL);
+				.getInputStreamFromPath(styleSheetPath);
 		InputStream isFinalInput = FileUtils.openInputStream(finalInput);
 		OutputStream osOutputBasicForm = FileUtils.openOutputStream(new File(outputBasicFormPath));
 
@@ -44,7 +47,10 @@ public class PoguesXML2DDIGenerator implements Generator {
 			saxonService.transformPoguesXML2DDI(isFinalInput, osOutputBasicForm,
 					isTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL, parameters);
 		}catch(Exception e) {
-			String errorMessage = "An error was occured during the "+in2out()+" transformation. "+e.getMessage();
+			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
+					in2out(),
+					e.getMessage(),
+					Utils.getErrorLocation(styleSheetPath,e));
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}

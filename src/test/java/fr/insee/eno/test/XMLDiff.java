@@ -26,6 +26,7 @@ public class XMLDiff {
         	
             return DiffBuilder
                     .compare(expectedStream)
+                    .withAttributeFilter(attr -> !attr.getName().equals("enoCoreVersion"))
                     .withTest(inputStream)
                     .ignoreWhitespace()
                     .normalizeWhitespace()

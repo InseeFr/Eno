@@ -9,7 +9,7 @@ import org.xmlunit.diff.Diff;
 
 import fr.insee.eno.generation.DDI2LunaticXMLGenerator;
 import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLExternalizeVariablesPostprocessor;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLExternalizeVariablesAndDependenciesPostprocessor;
 import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLInsertGenericQuestionsPostprocessor;
 import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLSortComponentsPostprocessor;
 import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLVTLParserPostprocessor;
@@ -37,7 +37,7 @@ public class TestDDI2LunaticXML {
 			Postprocessor[] postprocessors =  {
 					new LunaticXMLSortComponentsPostprocessor(),
 					new LunaticXMLInsertGenericQuestionsPostprocessor(),
-					new LunaticXMLExternalizeVariablesPostprocessor(),
+					new LunaticXMLExternalizeVariablesAndDependenciesPostprocessor(),
 					new LunaticXMLVTLParserPostprocessor()};
 			GenerationService genService = new GenerationService(preprocessors, ddi2lunaticXML, postprocessors);
 			

@@ -5,10 +5,10 @@
     xmlns:fn="http://www.w3.org/2005/xpath-functions" 
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:eno="http://xml.insee.fr/apps/eno" 
-    xmlns:enojs="http://xml.insee.fr/apps/eno/out/js"
+    xmlns:enolunatic="http://xml.insee.fr/apps/eno/out/js"
     xmlns:h="http://xml.insee.fr/schema/applis/lunatic-h"
     xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
-    exclude-result-prefixes="xs fn xd eno enojs h" version="2.0">	
+    exclude-result-prefixes="xs fn xd eno enolunatic h" version="2.0">	
     
     <xsl:output indent="yes"/>
     
@@ -33,24 +33,24 @@
         </Questionnaire>
     </xsl:template>
     
-    <xsl:template match="h:components">
+    <xsl:template match="h:components[@xsi:type='Table']">
+        <components>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates select="h:label"/>
+            <xsl:apply-templates select="h:declarations"/>
+            <xsl:apply-templates select="h:conditionFilter"/>
+            <xsl:variable name="dependencies" select="distinct-values(descendant::h:bindingDependencies)" as="xs:string*"/>            
+            <xsl:for-each select="$dependencies">                
+                <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
+            </xsl:for-each>
+            <xsl:apply-templates select="*[not(self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter or self::h:bindingDependencies)]"/>            
+        </components>
+    </xsl:template>
+    
+    <xsl:template match="h:components | h:cells">
         <xsl:copy>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="*[not(self::h:variables)]"/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template match="h:cells">
-        <xsl:copy>
-            <xsl:copy-of select="@*"/>
-            <xsl:apply-templates select="*[not(self::h:variables)]"/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template match="h:variables">
-        <xsl:copy>
-            <xsl:copy-of select="@*"/>
-            <xsl:copy-of select="./*"/>
         </xsl:copy>
     </xsl:template>
 </xsl:stylesheet>

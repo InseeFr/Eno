@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,9 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 		try {
 			FileUtils.writeStringToFile(outputCustomFOFile, parseToVTLInNodes(inputString), StandardCharsets.UTF_8);
 		}catch(Exception e) {
-			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+			String errorMessage = String.format("An error was occured during the %s transformation. %s",
+					toString(),
+					e.getMessage());
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
@@ -51,12 +54,14 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 	public static final String XPATH_CAST_FUNCTION = "cast";
 	public static final String XPATH_DIVISION_FUNCTION = " div ";
 	public static final String XPATH_NOT_EQUAL_TO = "!=";
+	public static final String FAKE_XPATH_EQUAL_TO_NULL = "= null";
 
 	public static final String VTL_CONCAT_FUNCTION = "||";
 	public static final String VTL_SUBSTRING_FUNCTION = "substr";
 	public static final String VTL_CAST_FUNCTION = "cast";
 	public static final String VTL_DIVISION_FUNCTION = " / ";
 	public static final String VTL_NOT_EQUAL_TO = " &lt;&gt; ";
+	public static final String VTL_EQUAL_TO_NULL_FUNCTION = "isnull";
 
 	public static final String XML_NODE_LABEL = "label";
 	public static final String XML_NODE_CONDITIONFILTER = "conditionFilter";
@@ -103,9 +108,11 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 	 *  	x div y -> x / y
 	 *  	substring(A,1,2) -> substr(A,1,2)
 	 *  	concat(A,B,C) -> A || B || C
-	 *  	cast(ABCD,string) = '1' -> cast(ABCD,string) = \"1\"
 	 *  	cast(ABCD,integer) = '1' -> cast(ABCD,integer) = 1
-	 *    
+	 *  	'ABCD' -> "ABCD"
+	 *  	\"hello I'm very happy to be 'here' \" || cast('2021',string) -> \" hello I'm very happy to be 'here' \" || cast("2021",string)
+	 * 		cast(A,string) = null -> isnull(cast(A,string))
+	 *
 	 * @param input : the string to parse
 	 * @return finalString : the result of parsing
 	 */
@@ -126,6 +133,13 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 			}
 			else if(context.contains(XPATH_DIVISION_FUNCTION) && !isBetweenRealDoubleQuote) {
 				finalString = replaceLast(finalString, XPATH_DIVISION_FUNCTION, VTL_DIVISION_FUNCTION);
+			}
+			else if(context.contains(FAKE_XPATH_EQUAL_TO_NULL) && !isBetweenRealDoubleQuote){
+				finalString+=c;
+				Pattern pattern = Pattern.compile("(cast\\((.)*,(\\w+)\\)) "+FAKE_XPATH_EQUAL_TO_NULL);
+				Matcher m = pattern.matcher(finalString);
+				if(m.find()) finalString = m.replaceAll(VTL_EQUAL_TO_NULL_FUNCTION+"($1)");
+				continue;
 			}
 			
 			switch (c) {
@@ -160,8 +174,8 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 					isBetweenRealSimpleQuote=!isBetweenRealSimpleQuote;
 					if(isNumeric(contentBetweenSimpleQuote) && isCastingToIntegerOrNumber(lastCastType)) {
 						finalString = replaceLast(finalString, "'"+contentBetweenSimpleQuote+"'", contentBetweenSimpleQuote);
-					} 
-					else if(isCastingToString(lastCastType)) {
+					}
+					else {
 						finalString = replaceLast(finalString, "'"+contentBetweenSimpleQuote+"'", "\""+contentBetweenSimpleQuote+"\"");
 					}
 					contentBetweenSimpleQuote="";

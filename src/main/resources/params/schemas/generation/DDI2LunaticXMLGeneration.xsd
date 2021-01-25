@@ -4,6 +4,7 @@
     <xs:complexType name="LunaticXMLParameters">
         <xs:all>
             <xs:element name="FilterDescription" type="xs:boolean" default="false" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="AddFilterResult" type="xs:boolean" default="false" minOccurs="0" maxOccurs="1"/>
         </xs:all>
     </xs:complexType>
     

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,8 @@ public class XFORMSInsertGenericQuestionsPostprocessor implements Postprocessor 
 
 	private XslTransformation saxonService = new XslTransformation();
 
+	private static final String styleSheetPath = Constants.UTIL_XFORMS_INSERT_GENERIC_QUESTIONS_XSL;
+
 	@Override
 	public File process(File input, byte[] parameters, String surveyName) throws Exception {
 
@@ -32,11 +35,14 @@ public class XFORMSInsertGenericQuestionsPostprocessor implements Postprocessor 
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
 
-		InputStream FR_XSL = Constants.getInputStreamFromPath(Constants.UTIL_XFORMS_INSERT_GENERIC_QUESTIONS_XSL);
+		InputStream FR_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 		try {
 			saxonService.transformXformsToXformsSimplePost(inputStream,outputStream, FR_XSL,parameters);
 		}catch(Exception e) {
-			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
+					toString(),
+					e.getMessage(),
+					Utils.getErrorLocation(styleSheetPath,e));
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}

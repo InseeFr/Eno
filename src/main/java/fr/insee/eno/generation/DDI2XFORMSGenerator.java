@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
@@ -19,6 +20,8 @@ public class DDI2XFORMSGenerator implements Generator {
 	private static final Logger logger = LoggerFactory.getLogger(DDI2XFORMSGenerator.class);
 
 	private XslTransformation saxonService = new XslTransformation();
+
+	private static final String styleSheetPath = Constants.TRANSFORMATIONS_DDI2XFORMS_DDI2XFORMS_XSL;
 
 	@Override
 	public File generate(File finalInput, byte[] parameters, String surveyName) throws Exception {
@@ -38,14 +41,17 @@ public class DDI2XFORMSGenerator implements Generator {
 		
 		try (
 			InputStream isTRANSFORMATIONS_DDI2XFORMS_DDI2XFORMS_XSL = Constants
-				.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2XFORMS_DDI2XFORMS_XSL);
+				.getInputStreamFromPath(styleSheetPath);
 			InputStream isFinalInput = FileUtils.openInputStream(finalInput);
 			OutputStream osOutputBasicForm = FileUtils.openOutputStream(new File(outputBasicFormPath));){
 			
 			saxonService.transformDDI2XFORMS(isFinalInput, osOutputBasicForm, isTRANSFORMATIONS_DDI2XFORMS_DDI2XFORMS_XSL,
 					parameters);
 		}catch(Exception e) {
-			String errorMessage = "An error was occured during the "+in2out()+" transformation. "+e.getMessage();
+			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
+					in2out(),
+					e.getMessage(),
+					Utils.getErrorLocation(styleSheetPath,e));
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}

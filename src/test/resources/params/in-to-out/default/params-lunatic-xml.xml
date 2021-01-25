@@ -32,6 +32,7 @@
         
         <lunatic-xml-parameters>            
             <FilterDescription>true</FilterDescription>
+            <AddFilterResult>true</AddFilterResult>
         </lunatic-xml-parameters>
     </Parameters>
     

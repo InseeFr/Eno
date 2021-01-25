@@ -29,7 +29,7 @@ import fr.insee.eno.postprocessing.fo.FOInsertEndQuestionPostprocessor;
 import fr.insee.eno.postprocessing.fo.FOMailingPostprocessor;
 import fr.insee.eno.postprocessing.fo.FOSpecificTreatmentPostprocessor;
 import fr.insee.eno.postprocessing.fo.FOTableColumnPostprocessorFake;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLExternalizeVariablesPostprocessor;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLExternalizeVariablesAndDependenciesPostprocessor;
 import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLInsertGenericQuestionsPostprocessor;
 import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLSortComponentsPostprocessor;
 import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLVTLParserPostprocessor;
@@ -121,7 +121,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	
 	private LunaticXMLInsertGenericQuestionsPostprocessor lunaticXmlInsertGenericQuestions = new LunaticXMLInsertGenericQuestionsPostprocessor();
 	
-	private LunaticXMLExternalizeVariablesPostprocessor lunaticXmlExternalizeVariables = new LunaticXMLExternalizeVariablesPostprocessor();
+	private LunaticXMLExternalizeVariablesAndDependenciesPostprocessor lunaticXMLExternalizeVariablesAndDependencies = new LunaticXMLExternalizeVariablesAndDependenciesPostprocessor();
 	
 	private LunaticXMLSortComponentsPostprocessor lunaticXmlSortComponents = new LunaticXMLSortComponentsPostprocessor();
 	
@@ -267,7 +267,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 			postprocessor = foTableColumn;
 			break;
 		case LUNATIC_XML_EXTERNALIZE_VARIABLES:
-			postprocessor = lunaticXmlExternalizeVariables;
+			postprocessor = lunaticXMLExternalizeVariablesAndDependencies;
 			break;
 		case LUNATIC_XML_INSERT_GENERIC_QUESTIONS:
 			postprocessor= lunaticXmlInsertGenericQuestions;

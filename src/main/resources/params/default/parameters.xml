@@ -65,6 +65,7 @@
         
         <lunatic-xml-parameters>
             <FilterDescription>false</FilterDescription>
+            <AddFilterResult>false</AddFilterResult>
         </lunatic-xml-parameters>
         
         <fodt-parameters/>

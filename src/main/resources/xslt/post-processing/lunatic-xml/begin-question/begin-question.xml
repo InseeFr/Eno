@@ -5,38 +5,33 @@
     <components xsi:type="Sequence" componentType="Sequence" id="BEGIN-QUESTION-SEQ">
         <label>"Identification"</label>      
         <conditionFilter>"normal"</conditionFilter>
+        <bindingsDependency>false</bindingsDependency>
         <components xsi:type="Subsequence" componentType="Subsequence" id="BEGIN-QUESTION-SUBSEQ">
             <label>"Identification de votre " || cast(LABEL_UNITE_ENQUETEE,string)</label>
             <conditionFilter>"normal"</conditionFilter>
+            <bindingsDependencies>LABEL_UNITE_ENQUETEE</bindingsDependencies>
             <components xsi:type="Textarea"
                 componentType="Textarea"
                 id="COMMENT-UE-QUESTION"
                 maxLength="2000"
                 mandatory="false">
                 <label>"Remarque, commentaire sur un changement concernant votre " || cast(LABEL_UNITE_ENQUETEE,string) || " :"</label>
-                <response name="COMMENT_UE" xsi:type="ResponseContainerString">
-                    <valueState valueType="PREVIOUS">
-                        <value xsi:nil="true"/>
-                    </valueState>
-                    <valueState valueType="COLLECTED">
-                        <value xsi:nil="true"/>
-                    </valueState>
-                    <valueState valueType="FORCED">
-                        <value xsi:nil="true"/>
-                    </valueState>
-                    <valueState valueType="EDITED">
-                        <value xsi:nil="true"/>
-                    </valueState>
-                    <valueState valueType="INPUTED">
-                        <value xsi:nil="true"/>
-                    </valueState>
-                </response>
                 <conditionFilter>"normal"</conditionFilter>
-                <variables variableType="COLLECTED">
+                <bindingsDependencies>LABEL_UNITE_ENQUETEE</bindingsDependencies>
+                <bindingDependencies>COMMENT_UE</bindingDependencies>
+                <response name="COMMENT_UE"/>
+                <variables variableType="COLLECTED" xsi:type="VariableType">
                     <name>COMMENT_UE</name>
-                    <responseRef>COMMENT_UE</responseRef>
+                    <componentRef>COMMENT-UE-QUESTION</componentRef>
+                    <values>
+                        <PREVIOUS xsi:nil="true"/>
+                        <COLLECTED xsi:nil="true"/>
+                        <FORCED xsi:nil="true"/>
+                        <EDITED xsi:nil="true"/>
+                        <INPUTED xsi:nil="true"/>
+                    </values>
                 </variables>
-                <variables variableType="EXTERNAL">
+                <variables variableType="EXTERNAL" xsi:type="VariableType">
                     <name>LABEL_UNITE_ENQUETEE</name>
                     <value xsi:nil="true"/>
                 </variables>
