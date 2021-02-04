@@ -32,6 +32,7 @@ import fr.insee.eno.postprocessing.fo.FOTableColumnPostprocessorFake;
 import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLExternalizeVariablesAndDependenciesPostprocessor;
 import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLInsertGenericQuestionsPostprocessor;
 import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLSortComponentsPostprocessor;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLSpecificTreatmentPostprocessor;
 import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLVTLParserPostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSBrowsingPostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSFixAdherencePostprocessor;
@@ -118,6 +119,8 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	private FOSpecificTreatmentPostprocessor foSpecificTreatment = new FOSpecificTreatmentPostprocessor();
 	
 	private FOTableColumnPostprocessorFake foTableColumn = new FOTableColumnPostprocessorFake();
+	
+	private LunaticXMLSpecificTreatmentPostprocessor lunaticXmlSpecificTreatment = new LunaticXMLSpecificTreatmentPostprocessor();
 	
 	private LunaticXMLInsertGenericQuestionsPostprocessor lunaticXmlInsertGenericQuestions = new LunaticXMLInsertGenericQuestionsPostprocessor();
 	
@@ -279,7 +282,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 			postprocessor = lunaticXmlvtlParser;
 			break;
 		case LUNATIC_XML_SPECIFIC_TREATMENT:
-			postprocessor = noop;
+			postprocessor = lunaticXmlSpecificTreatment;
 			break;
 		case DDI_SPECIFIC_TREATMENT:
 			postprocessor = noop;
