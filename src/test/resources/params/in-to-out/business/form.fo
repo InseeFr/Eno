@@ -390,7 +390,7 @@
                <fo:block margin-top="5mm">
                         Pour répondre à l'enquête statistique#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle'))
                         ${BddFrequence}#end ${BddLibelleLong}, il convient de vous connecter sur le site sécurisé de réponse aux enquêtes entreprises de la Statistique 
-                        publique : <fo:inline text-decoration="underline">http://<fo:inline font-size="0.1pt"> </fo:inline>entreprises.stat-<fo:inline font-size="0.1pt"> </fo:inline>publique.fr/</fo:inline>. 
+                        publique : <fo:inline text-decoration="underline">https://<fo:inline font-size="0.1pt"> </fo:inline>entreprises.stat-<fo:inline font-size="0.1pt"> </fo:inline>publique.fr/</fo:inline>. 
                         Cette adresse est à inscrire dans la barre de navigation de votre navigateur.
                     </fo:block>
                <fo:block margin-top="3.5mm">
@@ -408,7 +408,7 @@
                     </fo:block>
                <fo:block margin-top="3.5mm">
                         En cas de perte ou d'oubli de votre mot de passe, vous pouvez demander son renouvellement en ligne sur le site de réponse aux enquêtes entreprises 
-                        de la Statistique publique (rubrique « Mot de passe oublié » du site <fo:inline font-weight="bold" text-decoration="underline">http://entreprises.stat-publique.fr/</fo:inline> ).
+                        de la Statistique publique (rubrique « Mot de passe oublié » du site <fo:inline font-weight="bold" text-decoration="underline">https://entreprises.stat-publique.fr/</fo:inline> ).
                     </fo:block>
                <fo:block margin-top="3.5mm">
                         En cas de trop nombreuses tentatives d’authentification, votre compte peut être momentanément  bloqué, pour des raisons de sécurité. Dans ce cas, avant de 
