@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!-- This file contains common properties used by the pogues-xml2ddi transformation  -->
 <Properties>
+    <EnoVersion>${project.version}</EnoVersion>
 </Properties>

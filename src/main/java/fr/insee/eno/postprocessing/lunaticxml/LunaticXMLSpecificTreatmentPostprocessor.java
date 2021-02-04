@@ -1,4 +1,5 @@
-package fr.insee.eno.postprocessing.fo;
+package fr.insee.eno.postprocessing.lunaticxml;
+
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -16,12 +17,11 @@ import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
-/**
- * A PDF post processing
- */
-public class FOSpecificTreatmentPostprocessor implements Postprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(FOSpecificTreatmentPostprocessor.class);
+
+public class LunaticXMLSpecificTreatmentPostprocessor implements Postprocessor {
+
+	private static final Logger logger = LoggerFactory.getLogger(LunaticXMLSpecificTreatmentPostprocessor.class);
 
 	private XslTransformation saxonService = new XslTransformation();
 
@@ -38,20 +38,20 @@ public class FOSpecificTreatmentPostprocessor implements Postprocessor {
 	@Override
 	public File process(File input, byte[] parametersFile, byte[] metadata, byte[] specificTreatmentXsl, String survey) throws Exception {
 
-		File outputForFOFile = new File(input.getParent(),
+		File outputForLunaticXMLFile = new File(input.getParent(),
 				Constants.BASE_NAME_FORM_FILE +
-				Constants.SPECIFIC_TREAT_PDF_EXTENSION);
-		logger.debug("Output folder for basic-form : " + outputForFOFile.getAbsolutePath());
+				Constants.SPECIFIC_TREAT_LUNATIC_XML_EXTENSION);
+		logger.debug("Output folder for basic-form : " + outputForLunaticXMLFile.getAbsolutePath());
 
 		InputStream specificTreatmentXslIS = null;
 
 		if(specificTreatmentXsl!=null) {
 			specificTreatmentXslIS = new ByteArrayInputStream(specificTreatmentXsl);
 			InputStream inputStream = FileUtils.openInputStream(input);
-			OutputStream outputStream = FileUtils.openOutputStream(outputForFOFile);
+			OutputStream outputStream = FileUtils.openOutputStream(outputForLunaticXMLFile);
 
 			try {
-				saxonService.transformWithPDFSpecificTreatment(inputStream, outputStream, specificTreatmentXslIS, parametersFile);
+				saxonService.transformWithLunaticXMLSpecificTreatment(inputStream, outputStream, specificTreatmentXslIS, parametersFile);
 			}catch(Exception e) {
 				String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 						toString(),
@@ -67,15 +67,16 @@ public class FOSpecificTreatmentPostprocessor implements Postprocessor {
 		}
 		else {
 			logger.info("Not specific treatment in params : simply copying this file" + input.getAbsolutePath());
-			FileUtils.copyFile(input, outputForFOFile);
+			FileUtils.copyFile(input, outputForLunaticXMLFile);
 		}
-		logger.info("End of specific treatment post-processing " + outputForFOFile.getAbsolutePath());
+		logger.info("End of specific treatment post-processing " + outputForLunaticXMLFile.getAbsolutePath());
 
-		return outputForFOFile;
+		return outputForLunaticXMLFile;
 	}
 
 	public String toString() {
-		return PostProcessing.FO_SPECIFIC_TREATMENT.name();
+		return PostProcessing.LUNATIC_XML_SPECIFIC_TREATMENT.name();
 	}
 
 }
+

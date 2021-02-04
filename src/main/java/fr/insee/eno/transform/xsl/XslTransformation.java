@@ -448,6 +448,26 @@ public class XslTransformation {
 		xslTransform(transformer, inputFile, outputFile);
 	}
 	
+	public void transformWithLunaticXMLSpecificTreatment(InputStream inputFile, OutputStream outputFile,
+			InputStream specificTreatmentXsl, byte[] parameters) throws Exception {
+		InputStream parametersIS = null;
+		LOGGER.info("Specific treatment as post-processing for Lunatic XML transformation with parameter file");
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
+		Transformer transformer = tFactory.newTransformer(new StreamSource(specificTreatmentXsl));
+		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2LUNATIC_XML);
+		transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_FILE, Constants.PARAMETERS_DEFAULT);
+
+		if (parameters != null) {
+			parametersIS = new ByteArrayInputStream(parameters);
+			Source source = new StreamSource(parametersIS);
+			transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_NODE, source);
+		}
+		transformer.setErrorListener(new EnoErrorListener());
+		xslTransform(transformer, inputFile, outputFile);
+	}
+	
+	
 	public void transformWithPDFSpecificTreatment(InputStream inputFile, OutputStream outputFile,
 			InputStream specificTreatmentXsl, byte[] parameters) throws Exception {
 		InputStream parametersIS = null;

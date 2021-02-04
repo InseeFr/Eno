@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,8 @@ public class FOMailingPostprocessor implements Postprocessor {
 
 	private XslTransformation saxonService = new XslTransformation();
 
+	private static final String styleSheetPath = Constants.TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF_2;
+
 	@Override
 	public File process(File input, byte[] parameters, String surveyName) throws Exception {
 
@@ -32,14 +35,17 @@ public class FOMailingPostprocessor implements Postprocessor {
 		logger.debug("Output folder for basic-form : " + outputForFOFile.getAbsolutePath());	
 		
 
-		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF_2);
+		InputStream FO_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 		
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForFOFile);
 		try {
 			saxonService.transformFOToStep1FO(inputStream, outputStream, FO_XSL);
 		}catch(Exception e) {
-			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
+					toString(),
+					e.getMessage(),
+					Utils.getErrorLocation(styleSheetPath,e));
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}

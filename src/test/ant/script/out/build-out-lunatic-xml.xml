@@ -19,7 +19,7 @@
 		
 		<xslt in="${target-folder}/${survey-name}/${form-name}/form/form-end-questions.${out-extension}"
 			out="${target-folder}/${survey-name}/${form-name}/form/form-externalize.${out-extension}"
-			style="${xslt.home}/post-processing/lunatic-xml/externalize-variables.xsl" force="true" classpath="${saxon.jar}">
+			style="${xslt.home}/post-processing/lunatic-xml/externalize-variables-and-dependencies.xsl" force="true" classpath="${saxon.jar}">
 		</xslt>
 		
 		<copy file="${target-folder}/${survey-name}/${form-name}/form/form-externalize.${out-extension}"

@@ -86,7 +86,7 @@ public class MultiModelService {
 
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
-			throw new EnoGenerationException("An error was occured during thread execution");
+			throw new EnoGenerationException("An error was occured during thread execution" + e.getMessage());
 		} finally {
 			if(generationThreadsService != null) {
 				generationThreadsService.shutdown();

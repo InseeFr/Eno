@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
@@ -24,6 +25,8 @@ public class FOInsertCoverPagePostprocessor implements Postprocessor {
 
 	private XslTransformation saxonService = new XslTransformation();
 
+	private static final String styleSheetPath = Constants.TRANSFORMATIONS_COVER_PAGE_FO_4PDF;
+
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 
@@ -34,7 +37,7 @@ public class FOInsertCoverPagePostprocessor implements Postprocessor {
 		String surveyName = survey;
 		String formName = getFormName(input);
 
-		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_COVER_PAGE_FO_4PDF);
+		InputStream FO_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForFOFile);
@@ -42,7 +45,10 @@ public class FOInsertCoverPagePostprocessor implements Postprocessor {
 		try {
 			saxonService.transformFOToStep4FO(inputStream, outputStream, FO_XSL, surveyName, formName, parameters);
 		}catch(Exception e) {
-			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
+					toString(),
+					e.getMessage(),
+					Utils.getErrorLocation(styleSheetPath,e));
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}

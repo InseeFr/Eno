@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <!-- This file contains common properties used by the ddi2fr transformation  -->
 <Properties>
+    <EnoVersion>${project.version}</EnoVersion>
     <Css>
         <Folder>css</Folder>
 		<Common>commonEnglish.css</Common>

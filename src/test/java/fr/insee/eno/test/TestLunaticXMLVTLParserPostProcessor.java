@@ -35,19 +35,22 @@ public class TestLunaticXMLVTLParserPostProcessor {
 		String expected4 = "x / y";
 		
 		String test5 = "x != '1'";
-		String expected5 ="x  &lt;&gt;  '1'";
+		String expected5 ="x  &lt;&gt;  \"1\"";
 		
 		String test6 = "\"x != '1'\"";
 		String expected6 ="\"x != '1'\"";
 		
 		String test7 = "concat(substring(x,y,z),a,concat(x,substring(x1,y1,z1)),b)!='abc'";
-		String expected7 = "substr(x,y,z) || a || x || substr(x1,y1,z1) || b &lt;&gt; 'abc'";
-		
+		String expected7 = "substr(x,y,z) || a || x || substr(x1,y1,z1) || b &lt;&gt; \"abc\"";
+
 		String test8 = "cast(cast(ABCD,integer),string) = '3'";
 		String expected8 = "cast(cast(ABCD,integer),string) = \"3\"";
 		
 		String test9 = "cast(cast(ABCD,string),integer) = '3'";
 		String expected9 = "cast(cast(ABCD,string),integer) = 3";
+
+		String test10 = "cast(cast(ABCD,string),integer) = null";
+		String expected10 = "isnull(cast(cast(ABCD,string),integer))";
 		
 		Assert.assertEquals(expected1, lunaticXMLVtlParserPostprocessor.parseToVTL(test1));
 		Assert.assertEquals(expected2, lunaticXMLVtlParserPostprocessor.parseToVTL(test2));
@@ -58,6 +61,7 @@ public class TestLunaticXMLVTLParserPostProcessor {
 		Assert.assertEquals(expected7, lunaticXMLVtlParserPostprocessor.parseToVTL(test7));
 		Assert.assertEquals(expected8, lunaticXMLVtlParserPostprocessor.parseToVTL(test8));
 		Assert.assertEquals(expected9, lunaticXMLVtlParserPostprocessor.parseToVTL(test9));
+		Assert.assertEquals(expected10, lunaticXMLVtlParserPostprocessor.parseToVTL(test10));
 	}
 	
 	@Test
