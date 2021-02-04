@@ -218,11 +218,13 @@
                   <fo:block>
                      <fo:instream-foreign-object>
                         <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                                         message="Code Bar"
-                                         orientation="0">
-                           <barcode:code39>
-                              <barcode:height>10mm</barcode:height>
-                           </barcode:code39>
+                           message="${BddIdentifiantUniteEnquetee}-${BddLibelleCourt}-${BddAnneeReference}-${BddPeriode}" orientation="0">
+                           <barcode:datamatrix>
+                              <barcode:module-width>0.53mm</barcode:module-width>
+                              <barcode:quiet-zone enabled="false">0mw</barcode:quiet-zone>
+                              <barcode:min-symbol-size>22x22</barcode:min-symbol-size>
+                              <barcode:max-symbol-size>22x22</barcode:max-symbol-size>
+                           </barcode:datamatrix>
                         </barcode:barcode>
                      </fo:instream-foreign-object>
                   </fo:block>

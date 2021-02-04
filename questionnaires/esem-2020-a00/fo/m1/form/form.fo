@@ -164,7 +164,8 @@
    </fo:layout-master-set>
    <fo:page-sequence font-family="Liberation Sans"
                      font-size="8pt"
-                     master-reference="cnrCOL"><!-- ZONE LIGNE TECHNIQUE --><fo:static-content flow-name="xsl-region-before-courrier">
+                     master-reference="cnrCOL"><!-- ZONE LIGNE TECHNIQUE -->
+      <fo:static-content flow-name="xsl-region-before-courrier">
          <fo:block position="absolute"
                    margin-top="5mm"
                    margin-left="10mm"
@@ -174,7 +175,9 @@
                 <![CDATA[#]]><![CDATA[#]]><![CDATA[#]]>DS${NumeroDocument}col${data-IdEdition}
             </fo:block>
       </fo:static-content>
-      <fo:flow flow-name="xsl-region-body"><!-- PAGE COURRIER RECTO --><fo:block page-break-after="always"><!-- ZONE LOGOS --><fo:block-container absolute-position="absolute"
+      <fo:flow flow-name="xsl-region-body"><!-- PAGE COURRIER RECTO -->
+         <fo:block page-break-after="always"><!-- ZONE LOGOS -->
+            <fo:block-container absolute-position="absolute"
                                 left="5mm"
                                 top="2mm"
                                 width="180mm"
@@ -188,7 +191,8 @@
                                        scaling="uniform"/>
                </fo:block>
             </fo:block-container>
-            <!-- ZONE RESERVE ADRESSE --><fo:block-container absolute-position="absolute"
+            <!-- ZONE RESERVE ADRESSE -->
+            <fo:block-container absolute-position="absolute"
                                 left="80mm"
                                 top="33mm"
                                 width="110mm"
@@ -241,7 +245,8 @@
                   </fo:inline-container>
                </fo:block>
             </fo:block-container>
-            <!-- ZONE RESERVE INTEGRALITE --><fo:block-container absolute-position="absolute"
+            <!-- ZONE RESERVE INTEGRALITE -->
+            <fo:block-container absolute-position="absolute"
                                 left="187mm"
                                 top="75mm"
                                 width="13mm"
@@ -250,7 +255,8 @@
                                 font-size="10pt">
                <fo:block/>
             </fo:block-container>
-            <!-- ZONE DATAMATRIX MODE LIVRET --><fo:block-container absolute-position="absolute"
+            <!-- ZONE DATAMATRIX MODE LIVRET -->
+            <fo:block-container absolute-position="absolute"
                                 right="182mm"
                                 top="237mm"
                                 width="16mm"
@@ -259,7 +265,8 @@
                                 font-size="10pt">
                <fo:block/>
             </fo:block-container>
-            <!-- ZONE TITRE COURRIER --><fo:block-container absolute-position="absolute"
+            <!-- ZONE TITRE COURRIER -->
+            <fo:block-container absolute-position="absolute"
                                 left="1mm"
                                 top="38mm"
                                 width="78mm"
@@ -268,7 +275,8 @@
                                 font-size="10pt">
                <fo:block line-height="12pt" font-weight="bold" text-align="center">CONSTAT DE NON-RÉPONSE #if($!{InitAccuseReception}=='oui')avec accusé de réception#end</fo:block>
             </fo:block-container>
-            <!-- ZONE CONTACT --><fo:block-container absolute-position="absolute"
+            <!-- ZONE CONTACT -->
+            <fo:block-container absolute-position="absolute"
                                 left="1mm"
                                 top="50.5mm"
                                 width="78mm"
@@ -286,7 +294,8 @@
                   </fo:inline-container>
                </fo:block>
             </fo:block-container>
-            <!-- ZONE COURRIER --><fo:block-container absolute-position="absolute"
+            <!-- ZONE COURRIER -->
+            <fo:block-container absolute-position="absolute"
                                 left="9mm"
                                 top="98mm"
                                 width="179mm"
@@ -348,7 +357,8 @@
                         ${BddServiceProducteurSignataireNom}
                     </fo:block>
             </fo:block-container>
-            <!-- ZONE NOTE DE BAS DE PAGE --><fo:block-container absolute-position="absolute"
+            <!-- ZONE NOTE DE BAS DE PAGE -->
+            <fo:block-container absolute-position="absolute"
                                 left="9mm"
                                 top="273mm"
                                 width="179mm"
@@ -359,9 +369,11 @@
                     </fo:block>
             </fo:block-container>
          </fo:block>
-         <!-- PAGE COURRIER VERSO --><fo:block page-break-after="always">
+         <!-- PAGE COURRIER VERSO -->
+         <fo:block page-break-after="always">
             <fo:block/>
-            <!-- ZONE NOTICE --><fo:block-container absolute-position="absolute"
+            <!-- ZONE NOTICE -->
+            <fo:block-container absolute-position="absolute"
                                 left="20mm"
                                 top="5mm"
                                 width="150mm"
@@ -411,7 +423,8 @@
                         réponse aux enquêtes entreprises de la Statistique publique.
                     </fo:block>
             </fo:block-container>
-            <!-- ZONE CADRE LEGAL --><fo:block-container absolute-position="absolute"
+            <!-- ZONE CADRE LEGAL -->
+            <fo:block-container absolute-position="absolute"
                                 left="5mm"
                                 top="210mm"
                                 width="180mm"
@@ -637,11 +650,14 @@
                   <fo:block>
                      <fo:instream-foreign-object>
                         <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                                         message="Code Bar"
+                                         message="${BddIdentifiantUniteEnquetee} - ${BddLibelleCourt} -  ${BddAnneeReference} - ${BddPeriode}"
                                          orientation="0">
-                           <barcode:code39>
-                              <barcode:height>10mm</barcode:height>
-                           </barcode:code39>
+                           <barcode:datamatrix>
+                              <barcode:module-width>0.53mm</barcode:module-width>
+                              <barcode:quiet-zone enabled="false">0mw</barcode:quiet-zone>
+                              <barcode:min-symbol-size>22x22</barcode:min-symbol-size>
+                              <barcode:max-symbol-size>22x22</barcode:max-symbol-size>
+                           </barcode:datamatrix>
                         </barcode:barcode>
                      </fo:instream-foreign-object>
                   </fo:block>
@@ -1572,7 +1588,10 @@
                      </fo:table-cell>
                   </fo:table-row>
                </fo:table-header>
-               <fo:table-body>#foreach( ${REPARTITION_CA} in ${REPARTITION_CA-Container} ) #set( $REPARTITION_CA.LoopPosition = $velocityCount)#if ($REPARTITION_CA.LoopPosition % 19 eq 0) 
+               <fo:table-body>
+#foreach( ${REPARTITION_CA} in ${REPARTITION_CA-Container} ) 
+#set( $REPARTITION_CA.LoopPosition = $velocityCount)
+#if ($REPARTITION_CA.LoopPosition % 19 eq 0) 
 </fo:table-body>
             </fo:table>
          </fo:block>
@@ -1674,7 +1693,8 @@
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
-                  </fo:table-row>#end 
+                  </fo:table-row>
+#end 
 #set( $initializeInt = 0)
 #set( $REPARTITION_CA-TotalOccurrenceInt = $initializeInt.parseInt(${REPARTITION_CA-TotalOccurrenceCount}))
 #if (($REPARTITION_CA-TotalOccurrenceInt + 1) % 19 eq 0) 
