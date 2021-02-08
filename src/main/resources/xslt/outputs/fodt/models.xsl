@@ -17,7 +17,7 @@
 	
 	<xd:doc scope="stylesheet">
 		<xd:desc>
-			<xd:p>An xslt stylesheet who transforms an input into Odt through generic driver
+			<xd:p>An xslt stylesheet that transforms an input into Odt through generic driver
 				templates.</xd:p>
 			<xd:p>The real input is mapped with the drivers.</xd:p>
 		</xd:desc>
