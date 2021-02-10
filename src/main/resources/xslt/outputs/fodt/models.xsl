@@ -98,10 +98,18 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<text:section text:name="Module-{enofodt:get-name($source-context)}">
-			<text:p text:style-name="Module">
-				<xsl:value-of select="enofodt:get-label($source-context, $languages[1])"/>
-			</text:p>
-			
+			<xsl:choose>
+				<xsl:when test="parent::QuestionLoop and count(preceding-sibling::Module)=0">
+					<text:p text:style-name="ModuleFirstInLoop">
+						<xsl:value-of select="enofodt:get-label($source-context, $languages[1])"/>
+					</text:p>
+				</xsl:when>
+				<xsl:otherwise>
+					<text:p text:style-name="Module">
+						<xsl:value-of select="enofodt:get-label($source-context, $languages[1])"/>
+					</text:p>
+				</xsl:otherwise>
+			</xsl:choose>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
@@ -816,4 +824,94 @@
 			<xsl:with-param name="driver" select="$driver"/>
 		</xsl:apply-templates>
 	</xsl:template>
+	
+	
+	<xd:doc>
+		<xd:desc>Template for (Question) Loops</xd:desc>
+	</xd:doc>
+	<xsl:template match="QuestionLoop" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		
+		<xsl:variable name="label" select="enofodt:get-label($source-context, $languages[1])"
+			as="node()"/>
+		<xsl:variable name="nameOfVariable" select="enofodt:get-flowcontrol-target($source-context)"/>
+		
+			<text:section text:name="QuestionLoop-{enofodt:get-name($source-context)}">
+				<text:p text:style-name="QuestionLoop">
+					<text:span text:style-name="Standard">
+						<xsl:value-of select="'Début de la boucle ID '"/>
+						<xsl:copy-of select="enofodt:get-name($source-context)"/>
+					</text:span>
+				</text:p>
+				
+				<xsl:if test="enofodt:get-minimum-occurrences($source-context)!=''">
+					<text:p text:style-name="Format">
+						<text:span text:style-name="Standard">
+							<xsl:value-of select="'Nombre d''occurences minimum : '"/>
+						</text:span>
+						<xsl:call-template name="replaceVariablesInFormula">
+							<xsl:with-param name="formula" select="enofodt:get-minimum-occurrences($source-context)"/>
+							<xsl:with-param name="variables" select="enofodt:get-minimum-occurrences-variables($source-context)"/>
+						</xsl:call-template>
+					</text:p>
+				</xsl:if>
+				
+				<xsl:if test="enofodt:get-maximum-occurrences($source-context)!=''">
+					<text:p text:style-name="Format">
+						<text:span text:style-name="Standard">
+							<xsl:value-of select="'Nombre d''occurences maximum : '"/>
+						</text:span>
+						<xsl:call-template name="replaceVariablesInFormula">
+							<xsl:with-param name="formula" select="enofodt:get-maximum-occurrences($source-context)"/>
+							<xsl:with-param name="variables" select="enofodt:get-maximum-occurrences-variables($source-context)"/>
+						</xsl:call-template>
+					</text:p>
+				</xsl:if>
+				
+				<xsl:if test="enofodt:get-loop-filter($source-context)!=''">
+					<text:p text:style-name="Format">
+						<text:span text:style-name="Standard">
+							<xsl:value-of select="'Condition de la boucle : '"/>
+						</text:span>
+						<xsl:call-template name="replaceVariablesInFormula">
+							<xsl:with-param name="formula" select="enofodt:get-loop-filter($source-context)"/>
+							<xsl:with-param name="variables" select="enofodt:get-loop-filter-variables($source-context)"/>
+						</xsl:call-template>
+					</text:p>
+				</xsl:if>
+				
+				
+				
+<!--				<text:p text:style-name="Format">
+					<text:span text:style-name="GotoTitle">
+						<xsl:value-of select="'Cible : '"/>
+					</text:span>
+					<text:span text:style-name="NameOfVariable">
+						<xsl:value-of select="concat('[', $nameOfVariable, ']')"/>
+					</text:span>
+				</text:p>-->
+				
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+				</xsl:apply-templates>
+				
+				
+				<text:p text:style-name="QuestionLoop">
+					<text:span text:style-name="Standard">
+						<xsl:value-of select="'Fin de la boucle :'"/>
+						<xsl:copy-of select="$label"/>
+					</text:span>
+				</text:p>
+				
+				
+			</text:section>
+		
+		
+
+	</xsl:template>
+	
+	
+	
+	
 </xsl:stylesheet>
