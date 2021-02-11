@@ -4,7 +4,8 @@
 
     <xs:complexType name="FOParameters">
         <xs:all>
-            <xs:element name="InitializeAllVariables" type="xs:boolean" minOccurs="0" maxOccurs="1" default="false"/>
+            <xs:element name="InitializeAllVariables" type="xs:boolean" minOccurs="0" maxOccurs="1"
+                default="false"/>
             <xs:element name="Format" type="Format" minOccurs="0" maxOccurs="1"/>
             <xs:element name="Roster" type="Roster" minOccurs="0" maxOccurs="1"/>
             <xs:element name="TextArea" type="TextArea" minOccurs="0" maxOccurs="1"/>
@@ -14,8 +15,249 @@
             <xs:element name="PageBreakBetween" type="PageBreakBetween" minOccurs="0" maxOccurs="1"/>
             <xs:element name="AccompanyingMail" type="AccompanyingMail" minOccurs="0" maxOccurs="1"
                 default=""/>
+            <xs:element name="Style" type="Style" minOccurs="0" maxOccurs="1"/>
         </xs:all>
     </xs:complexType>
+
+
+    <xs:complexType name="Style">
+        <xs:all>
+            <xs:element name="Sequence-title" type="Sequence-title" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Paragraph-title" type="Paragraph-title" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="general-style" type="general-style" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="label-cell" type="label-cell" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="label-question" type="label-question" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="row-header-line" type="row-header-line" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="table-column" type="table-column" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="data-cell" type="data-cell" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Line-drawing" type="Line-drawing" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Line-drawing-Garde" type="Line-drawing-Garde" minOccurs="0"
+                maxOccurs="1"/>
+            <xs:element name="filter-block" type="filter-block" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="filter-inline-container" type="filter-inline-container" minOccurs="0"
+                maxOccurs="1"/>
+            <xs:element name="filter-alternative" type="filter-alternative" minOccurs="0"
+                maxOccurs="1"/>
+            <xs:element name="footnote" type="footnote" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="instruction" type="instruction" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="statement" type="statement" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="answer-item" type="answer-item" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="details" type="details" minOccurs="0" maxOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="Sequence-title">
+      <xs:sequence>
+         <xs:element name="background-color" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="#666666"/>
+         <xs:element name="color" type="xs:string" minOccurs="0" maxOccurs="1" default="white"/>
+         <xs:element name="font-weight" type="xs:string" minOccurs="0" maxOccurs="1" default="bold"/>
+         <xs:element name="margin-bottom" type="xs:string" minOccurs="0" maxOccurs="1" default="9pt"/>
+         <xs:element name="font-size" type="xs:string" minOccurs="0" maxOccurs="1" default="14pt"/>
+         <xs:element name="border-color" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="black"/>
+         <xs:element name="border-style" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="solid"/>
+         <xs:element name="space-before" type="xs:string" minOccurs="0" maxOccurs="1" default="10mm"/>
+         <xs:element name="space-before.conditionality" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="discard"/>
+         <xs:element name="text-align" type="xs:string" minOccurs="0" maxOccurs="1" default="left"/>
+      </xs:sequence>
+   </xs:complexType>
+   
+   <xs:complexType name="Paragraph-title">
+      <xs:sequence>
+         <xs:element name="background-color" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="#CCCCCC"/>
+         <xs:element name="color" type="xs:string" minOccurs="0" maxOccurs="1" default="black"/>
+         <xs:element name="font-weight" type="xs:string" minOccurs="0" maxOccurs="1" default="bold"/>
+         <xs:element name="margin-bottom" type="xs:string" minOccurs="0" maxOccurs="1" default="9pt"/>
+         <xs:element name="font-size" type="xs:string" minOccurs="0" maxOccurs="1" default="12pt"/>
+         <xs:element name="text-align" type="xs:string" minOccurs="0" maxOccurs="1" default="left"/>
+         <xs:element name="space-before" type="xs:string" minOccurs="0" maxOccurs="1" default="6mm"/>
+         <xs:element name="space-before.conditionality" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="discard"/>
+      </xs:sequence>
+   </xs:complexType>
+   
+   <xs:complexType name="general-style">
+      <xs:sequence>
+         <xs:element name="color" type="xs:string" minOccurs="0" maxOccurs="1" default="black"/>
+         <xs:element name="font-weight" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="normal"/>
+         <xs:element name="font-size" type="xs:string" minOccurs="0" maxOccurs="1" default="10pt"/>
+         <xs:element name="padding" type="xs:string" minOccurs="0" maxOccurs="1" default="1mm"/>
+         <xs:element name="text-align" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="justify"/>
+      </xs:sequence>
+   </xs:complexType>
+   
+   <xs:complexType name="label-cell">
+      <xs:sequence>
+         <xs:element name="color" type="xs:string" minOccurs="0" maxOccurs="1" default="black"/>
+         <xs:element name="font-weight" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="normal"/>
+         <xs:element name="font-size" type="xs:string" minOccurs="0" maxOccurs="1" default="10pt"/>
+         <xs:element name="padding" type="xs:string" minOccurs="0" maxOccurs="1" default="1mm"/>
+      </xs:sequence>
+   </xs:complexType>
+    
+   <xs:complexType name="label-question">
+      <xs:sequence>
+         <xs:element name="color" type="xs:string" minOccurs="0" maxOccurs="1" default="black"/>
+         <xs:element name="font-weight" type="xs:string" minOccurs="0" maxOccurs="1" default="bold"/>
+         <xs:element name="font-size" type="xs:string" minOccurs="0" maxOccurs="1" default="10pt"/>
+         <xs:element name="margin-top" type="xs:string" minOccurs="0" maxOccurs="1" default="9pt"/>
+         <xs:element name="margin-bottom" type="xs:string" minOccurs="0" maxOccurs="1" default="3pt"/>
+         <xs:element name="text-align" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="justify"/>
+      </xs:sequence>
+   </xs:complexType>
+    
+   <xs:complexType name="row-header-line">
+      <xs:sequence>
+         <xs:element name="color" type="xs:string" minOccurs="0" maxOccurs="1" default="black"/>
+         <xs:element name="font-weight" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="normal"/>
+         <xs:element name="font-size" type="xs:string" minOccurs="0" maxOccurs="1" default="10pt"/>
+         <xs:element name="text-align" type="xs:string" minOccurs="0" maxOccurs="1" default="center"
+         />
+      </xs:sequence>
+   </xs:complexType>
+    
+   <xs:complexType name="table-column">
+      <xs:sequence>
+         <xs:element name="border-color" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="black"/>
+         <xs:element name="border-style" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="solid"/>
+         <xs:element name="text-align" type="xs:string" minOccurs="0" maxOccurs="1" default="left"/>
+         <xs:element name="padding-left" type="xs:string" minOccurs="0" maxOccurs="1" default="1mm"/>
+         <xs:element name="padding-right" type="xs:string" minOccurs="0" maxOccurs="1" default="1mm"
+         />
+      </xs:sequence>
+   </xs:complexType>
+    
+   <xs:complexType name="data-cell">
+      <xs:sequence>
+         <xs:element name="text-align" type="xs:string" minOccurs="0" maxOccurs="1" default="left"/>
+         <xs:element name="border-color" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="black"/>
+         <xs:element name="border-style" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="solid"/>
+         <xs:element name="padding" type="xs:string" minOccurs="0" maxOccurs="1" default="1mm"/>
+      </xs:sequence>
+   </xs:complexType>
+    
+   <xs:complexType name="Line-drawing">
+      <xs:sequence>
+         <xs:element name="width" type="xs:string" minOccurs="0" maxOccurs="1" default="100%"/>
+         <xs:element name="height" type="xs:string" minOccurs="0" maxOccurs="1" default="10mm"/>
+         <xs:element name="position" type="xs:string" minOccurs="0" maxOccurs="1" default="relative"/>
+         <xs:element name="border-bottom" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="1px dashed black"/>
+      </xs:sequence>
+   </xs:complexType>
+    
+   <xs:complexType name="Line-drawing-Garde">
+      <xs:sequence>
+         <xs:element name="position" type="xs:string" minOccurs="0" maxOccurs="1" default="relative"/>
+         <xs:element name="border-bottom" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="1px dotted black"/>
+      </xs:sequence>
+   </xs:complexType>
+    
+   <xs:complexType name="filter-block">
+      <xs:sequence>
+         <xs:element name="space-before" type="xs:string" minOccurs="0" maxOccurs="1" default="2pt"/>
+         <xs:element name="space-after" type="xs:string" minOccurs="0" maxOccurs="1" default="2pt"/>
+         <xs:element name="start-indent" type="xs:string" minOccurs="0" maxOccurs="1" default="5%"/>
+         <xs:element name="end-indent" type="xs:string" minOccurs="0" maxOccurs="1" default="0%"/>
+         <xs:element name="background-color" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="#f0f0f0"/>
+      </xs:sequence>
+   </xs:complexType>
+    
+   <xs:complexType name="filter-inline-container">
+      <xs:sequence>
+         <xs:element name="width" type="xs:string" minOccurs="0" maxOccurs="1" default="85%"/>
+         <xs:element name="vertical-align" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="middle"/>
+         <xs:element name="padding-top" type="xs:string" minOccurs="0" maxOccurs="1" default="0pt"/>
+         <xs:element name="start-indent" type="xs:string" minOccurs="0" maxOccurs="1" default="0%"/>
+         <xs:element name="end-indent" type="xs:string" minOccurs="0" maxOccurs="1" default="0%"/>
+      </xs:sequence>
+   </xs:complexType>
+    
+   <xs:complexType name="filter-alternative">
+      <xs:sequence>
+         <xs:element name="width" type="xs:string" minOccurs="0" maxOccurs="1" default="100%"/>
+         <xs:element name="margin" type="xs:string" minOccurs="0" maxOccurs="1" default="2pt"/>
+         <xs:element name="font-size" type="xs:string" minOccurs="0" maxOccurs="1" default="10pt"/>
+         <xs:element name="font-weight" type="xs:string" minOccurs="0" maxOccurs="1" default="bold"/>
+         <xs:element name="text-align" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="justify"/>
+      </xs:sequence>
+   </xs:complexType>
+    
+   <xs:complexType name="footnote">
+      <xs:sequence>
+         <xs:element name="font-size" type="xs:string" minOccurs="0" maxOccurs="1" default="9pt"/>
+         <xs:element name="font-weight" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="normal"/>
+         <xs:element name="margin-bottom" type="xs:string" minOccurs="0" maxOccurs="1" default="3pt"/>
+         <xs:element name="margin-left" type="xs:string" minOccurs="0" maxOccurs="1" default="3pt"/>
+      </xs:sequence>
+   </xs:complexType>
+    
+   <xs:complexType name="instruction">
+      <xs:sequence>
+         <xs:element name="font-size" type="xs:string" minOccurs="0" maxOccurs="1" default="10pt"/>
+         <xs:element name="font-weight" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="normal"/>
+         <xs:element name="font-style" type="xs:string" minOccurs="0" maxOccurs="1" default="italic"/>
+         <xs:element name="margin-bottom" type="xs:string" minOccurs="0" maxOccurs="1" default="3pt"/>
+         <xs:element name="margin-left" type="xs:string" minOccurs="0" maxOccurs="1" default="3pt"/>
+         <xs:element name="text-align" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="justify"/>
+      </xs:sequence>
+   </xs:complexType>
+    
+   <xs:complexType name="statement">
+      <xs:sequence>
+         <xs:element name="font-size" type="xs:string" minOccurs="0" maxOccurs="1" default="10pt"/>
+         <xs:element name="font-weight" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="normal"/>
+         <xs:element name="font-style" type="xs:string" minOccurs="0" maxOccurs="1" default="italic"/>
+         <xs:element name="space-before" type="xs:string" minOccurs="0" maxOccurs="1" default="20pt"/>
+         <xs:element name="margin-bottom" type="xs:string" minOccurs="0" maxOccurs="1" default="3pt"/>
+         <xs:element name="text-align" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="justify"/>
+      </xs:sequence>
+   </xs:complexType>
+    
+   <xs:complexType name="answer-item">
+      <xs:sequence>
+         <xs:element name="color" type="xs:string" minOccurs="0" maxOccurs="1" default="black"/>
+         <xs:element name="font-weight" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="normal"/>
+         <xs:element name="font-size" type="xs:string" minOccurs="0" maxOccurs="1" default="10pt"/>
+         <xs:element name="padding-left" type="xs:string" minOccurs="0" maxOccurs="1" default="1mm"/>
+         <xs:element name="text-align" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="justify"/>
+      </xs:sequence>
+   </xs:complexType>
+    
+   <xs:complexType name="details">
+      <xs:sequence>
+         <xs:element name="color" type="xs:string" minOccurs="0" maxOccurs="1" default="black"/>
+         <xs:element name="font-weight" type="xs:string" minOccurs="0" maxOccurs="1" default="bold"/>
+         <xs:element name="font-size" type="xs:string" minOccurs="0" maxOccurs="1" default="10pt"/>
+         <xs:element name="padding" type="xs:string" minOccurs="0" maxOccurs="1" default="1mm"/>
+         <xs:element name="text-align" type="xs:string" minOccurs="0" maxOccurs="1"
+            default="justify"/>
+      </xs:sequence>
+   </xs:complexType>
 
     <xs:complexType name="Format">
         <xs:all>

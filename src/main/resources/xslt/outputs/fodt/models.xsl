@@ -11,7 +11,6 @@
 	xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0"
 	exclude-result-prefixes="xs fn xd eno enofodt" version="2.0">
 	
-	<xsl:import href="../../../styles/style.xsl"/>
 	<xsl:include href="../../../xslt/outputs/fodt/office-styles.xsl"/>
 	
 	

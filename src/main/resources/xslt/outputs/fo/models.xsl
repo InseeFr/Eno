@@ -7,8 +7,6 @@
 	exclude-result-prefixes="xd xs eno enofo fox"
 	version="2.0">
 
-	<xsl:include href="../../../styles/style.xsl"/>
-
 	<xd:doc>
 		<xd:desc>Remove all the ConsistencyCheck messages from the pdf</xd:desc>
 	</xd:doc>
@@ -60,7 +58,8 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 
-		<fo:block xsl:use-attribute-sets="Titre-sequence" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+		<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+			<xsl:copy-of select="$style-parameters/Sequence-title/@*"/>
 			<xsl:if test="lower-case($page-break-between) = 'module' or lower-case($page-break-between) = 'submodule'">
 				<xsl:attribute name="page-break-before" select="'always'"/>
 			</xsl:if>
@@ -79,7 +78,8 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 
-		<fo:block xsl:use-attribute-sets="Titre-paragraphe" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+		<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+			<xsl:copy-of select="$style-parameters/Paragraph-title/@*"/>
 			<xsl:copy-of select="enofo:get-label($source-context, $languages[1],$loop-navigation)"/>
 		</fo:block>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -99,7 +99,8 @@
 
 		<xsl:variable name="label" select="enofo:get-flowcontrol-label($source-context,$languages[1])"/>
 		<xsl:if test="$label != ''">
-			<fo:block page-break-inside="avoid" keep-with-previous="always" xsl:use-attribute-sets="filter-block">
+			<fo:block page-break-inside="avoid" keep-with-previous="always">
+				<xsl:copy-of select="$style-parameters/filter-block/@*"/>
 				<fo:inline-container start-indent="0%" end-indent="0%" width="9%" vertical-align="middle">
 					<fo:block margin="2pt">
 						<xsl:call-template name="insert-image">
@@ -107,8 +108,10 @@
 						</xsl:call-template>
 					</fo:block>
 				</fo:inline-container>
-				<fo:inline-container xsl:use-attribute-sets="filter-inline-container">
-					<fo:block xsl:use-attribute-sets="filter-alternative">
+				<fo:inline-container>
+					<xsl:copy-of select="$style-parameters/filter-inline-container/@*"/>
+					<fo:block>
+						<xsl:copy-of select="$style-parameters/filter-alternative/@*"/>
 						<xsl:copy-of select="$label"/>
 					</fo:block>
 				</fo:inline-container>
@@ -147,7 +150,8 @@
 				<fo:block>
 					<fo:footnote>
 						<fo:inline></fo:inline>
-						<fo:footnote-body xsl:use-attribute-sets="footnote">
+						<fo:footnote-body>
+							<xsl:copy-of select="$style-parameters/footnote/@*"/>
 							<fo:block>
 								<fo:inline font-size="75%" baseline-shift="super">
 									<xsl:copy-of select="enofo:get-end-question-instructions-index($source-context)"/>
@@ -161,18 +165,21 @@
 			<xsl:when test="$format = 'tooltip'">
 			</xsl:when>
 			<xsl:when test="$format = 'comment' or $format = 'help' or $format = 'instruction'">
-				<fo:block xsl:use-attribute-sets="instruction" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+				<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+					<xsl:copy-of select="$style-parameters/instruction/@*"/>
 					<xsl:copy-of select="$label"/>
 				</fo:block>
 			</xsl:when>
 			<xsl:when test="$format = 'statement'">
-				<fo:block xsl:use-attribute-sets="statement" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+				<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+					<xsl:copy-of select="$style-parameters/statement/@*"/>
 					<xsl:copy-of select="$label"/>
 				</fo:block>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:message select="concat('unknown xf-output : ',enofo:get-name($source-context),$label)"/>
-				<fo:block xsl:use-attribute-sets="general-style" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+				<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+					<xsl:copy-of select="$style-parameters/general-style/@*"/>
 					<xsl:if test="$isTable = 'YES'">
 						<xsl:attribute name="margin-left">1mm</xsl:attribute>
 					</xsl:if>
@@ -196,7 +203,8 @@
 		<xsl:variable name="label" select="enofo:get-label($source-context, $languages[1],$loop-navigation)" as="node()"/>
 
 		<xsl:if test="$label != ''">
-			<fo:block page-break-inside="avoid" keep-with-previous="always" xsl:use-attribute-sets="filter-block">
+			<fo:block page-break-inside="avoid" keep-with-previous="always">
+				<xsl:copy-of select="$style-parameters/filter-block/@*"/>
 				<fo:inline-container start-indent="0%" end-indent="0%" width="9%" vertical-align="middle">
 					<fo:block margin="2pt">
 						<xsl:call-template name="insert-image">
@@ -204,8 +212,10 @@
 						</xsl:call-template>
 					</fo:block>
 				</fo:inline-container>
-				<fo:inline-container xsl:use-attribute-sets="filter-inline-container">
-					<fo:block xsl:use-attribute-sets="filter-alternative">
+				<fo:inline-container>
+					<xsl:copy-of select="$style-parameters/filter-inline-container/@*"/>
+					<fo:block>
+						<xsl:copy-of select="$style-parameters/filter-alternative/@*"/>
 						<xsl:copy-of select="$label"/>
 					</fo:block>
 				</fo:inline-container>
@@ -319,7 +329,8 @@
 		</xsl:apply-templates>-->
 		<xsl:choose>
 			<xsl:when test="$other-give-details">
-				<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+				<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+					<xsl:copy-of select="$style-parameters/details/@*"/>
 					<fo:inline>
 						<xsl:call-template name="insert-image">
 							<xsl:with-param name="image-name" select="'arrow_details.png'"/>
@@ -329,7 +340,8 @@
 				</fo:block>
 			</xsl:when>
 			<xsl:otherwise>
-				<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+				<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+					<xsl:copy-of select="$style-parameters/label-question/@*"/>
 					<xsl:copy-of select="enofo:get-label($source-context, $languages[1],$loop-navigation)"/>
 				</fo:block>
 			</xsl:otherwise>
@@ -363,7 +375,8 @@
 		<!--<xsl:apply-templates select="enofo:get-before-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="."/>
 		</xsl:apply-templates>-->
-		<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+		<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+			<xsl:copy-of select="$style-parameters/label-question/@*"/>
 			<xsl:copy-of select="enofo:get-label($source-context, $languages[1],$loop-navigation)"/>
 		</fo:block>
 		<xsl:apply-templates select="enofo:get-after-question-title-instructions($source-context)" mode="source">
@@ -386,7 +399,8 @@
 					<xsl:if test="count(enofo:get-header-lines($source-context)) != 0">
 						<fo:table-header>
 							<xsl:for-each select="enofo:get-header-lines($source-context)">
-								<fo:table-row xsl:use-attribute-sets="entete-ligne" text-align="center">
+								<fo:table-row>
+									<xsl:copy-of select="$style-parameters/row-header-line/@*"/>
 									<xsl:apply-templates select="enofo:get-header-line($source-context, position())" mode="source">
 										<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
 										<xsl:with-param name="header" select="'YES'" tunnel="yes"/>
@@ -452,7 +466,8 @@
 
 		<xsl:variable name="table-header" as="node()*">
 			<xsl:for-each select="enofo:get-header-lines($source-context)">
-				<fo:table-row xsl:use-attribute-sets="entete-ligne" text-align="center">
+				<fo:table-row>
+					<xsl:copy-of select="$style-parameters/row-header-line/@*"/>
 					<xsl:apply-templates select="enofo:get-header-line($source-context, position())" mode="source">
 						<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
 						<xsl:with-param name="header" select="'YES'" tunnel="yes"/>
@@ -492,7 +507,8 @@
 		<!--<xsl:apply-templates select="enofo:get-before-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="."/>
 		</xsl:apply-templates>-->
-		<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+		<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+			<xsl:copy-of select="$style-parameters/label-question/@*"/>
 			<xsl:copy-of select="enofo:get-label($source-context, $languages[1],$loop-navigation)"/>
 		</fo:block>
 		<xsl:apply-templates select="enofo:get-after-question-title-instructions($source-context)" mode="source">
@@ -601,9 +617,10 @@
 		<xsl:param name="table-first-line" tunnel="yes"/>
 		<xsl:param name="table-last-line" tunnel="yes"/>
 
-		<fo:table-cell xsl:use-attribute-sets="colonne-tableau"
+		<fo:table-cell
 			number-rows-spanned="{enofo:get-rowspan($source-context,$table-first-line,$table-last-line)}"
 			number-columns-spanned="{enofo:get-colspan($source-context)}">
+			<xsl:copy-of select="$style-parameters/table-column/@*"/>
 			<xsl:if test="$header">
 				<xsl:attribute name="text-align">center</xsl:attribute>
 			</xsl:if>
@@ -611,7 +628,8 @@
 				<xsl:attribute name="border" select="'0mm'"/>
 				<xsl:attribute name="padding" select="'0mm'"/>
 			</xsl:if>
-			<fo:block xsl:use-attribute-sets="label-cell">
+			<fo:block>
+				<xsl:copy-of select="$style-parameters/label-cell/@*"/>
 				<xsl:if test="not($header)">
 					<xsl:attribute name="margin-left" select="'1mm'"/>
 				</xsl:if>
@@ -625,7 +643,8 @@
 		<xsl:param name="no-border" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 
-		<fo:table-cell xsl:use-attribute-sets="data-cell">
+		<fo:table-cell>
+			<xsl:copy-of select="$style-parameters/data-cell/@*"/>
 			<xsl:if test="$no-border = 'no-border'">
 				<xsl:attribute name="border">0mm</xsl:attribute>
 				<xsl:attribute name="padding-top">0mm</xsl:attribute>
@@ -698,7 +717,8 @@
 		<xsl:if test="$label != ''">
 			<xsl:choose>
 				<xsl:when test="$other-give-details">
-					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+					<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+						<xsl:copy-of select="$style-parameters/details/@*"/>
 						<fo:inline>
 							<xsl:call-template name="insert-image">
 								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
@@ -708,7 +728,8 @@
 					</fo:block>
 				</xsl:when>
 				<xsl:otherwise>
-					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+					<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+						<xsl:copy-of select="$style-parameters/label-question/@*"/>
 						<xsl:copy-of select="$label"/>
 					</fo:block>
 				</xsl:otherwise>
@@ -756,7 +777,8 @@
 		<xsl:if test="$label != ''">
 			<xsl:choose>
 				<xsl:when test="$other-give-details">
-					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+					<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+						<xsl:copy-of select="$style-parameters/details/@*"/>
 						<fo:inline>
 							<xsl:call-template name="insert-image">
 								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
@@ -766,7 +788,8 @@
 					</fo:block>
 				</xsl:when>
 				<xsl:otherwise>
-					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+					<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+						<xsl:copy-of select="$style-parameters/label-question/@*"/>
 						<xsl:copy-of select="$label"/>
 					</fo:block>
 				</xsl:otherwise>
@@ -775,7 +798,8 @@
 		<fo:block>
 			<xsl:choose>
 				<xsl:when test="(enofo:get-format($source-context) or ($length !='' and number($length) &lt;= 20)) and ancestor::Cell">
-					<fo:block xsl:use-attribute-sets="label-cell">
+					<fo:block>
+						<xsl:copy-of select="$style-parameters/label-cell/@*"/>
 						<xsl:if test="enofo:is-initializable-variable($source-context)">
 							<xsl:value-of select="$variable-personalization-begin"/>
 						</xsl:if>
@@ -790,7 +814,8 @@
 					</fo:block>
 				</xsl:when>
 				<xsl:when test="enofo:get-format($source-context) or ($length !='' and number($length) &lt;= 20)">
-					<fo:block xsl:use-attribute-sets="general-style">
+					<fo:block>
+						<xsl:copy-of select="$style-parameters/general-style/@*"/>
 						<xsl:if test="enofo:is-initializable-variable($source-context)">
 							<xsl:value-of select="$variable-personalization-begin"/>
 						</xsl:if>
@@ -875,7 +900,8 @@
 		<xsl:if test="$label != ''">
 			<xsl:choose>
 				<xsl:when test="$other-give-details">
-					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+					<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+						<xsl:copy-of select="$style-parameters/details/@*"/>
 						<fo:inline>
 							<xsl:call-template name="insert-image">
 								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
@@ -885,7 +911,8 @@
 					</fo:block>
 				</xsl:when>
 				<xsl:otherwise>
-					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+					<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+						<xsl:copy-of select="$style-parameters/label-question/@*"/>
 						<xsl:copy-of select="$label"/>
 					</fo:block>
 				</xsl:otherwise>
@@ -925,7 +952,8 @@
 					</xsl:variable>
 					<xsl:choose>
 						<xsl:when test="ancestor::Cell">
-							<fo:block xsl:use-attribute-sets="label-cell" padding-bottom="0mm" padding-top="0mm">
+							<fo:block padding-bottom="0mm" padding-top="0mm">
+								<xsl:copy-of select="$style-parameters/label-cell/@*"/>
 								<xsl:choose>
 									<xsl:when test="enofo:is-initializable-variable($source-context)">
 										<xsl:value-of select="$variable-personalization-begin"/>
@@ -940,7 +968,8 @@
 							</fo:block>
 						</xsl:when>
 						<xsl:otherwise>
-							<fo:block xsl:use-attribute-sets="general-style" padding-bottom="0mm" padding-top="0mm">
+							<fo:block padding-bottom="0mm" padding-top="0mm">
+								<xsl:copy-of select="$style-parameters/general-style/@*"/>
 								<xsl:choose>
 									<xsl:when test="enofo:is-initializable-variable($source-context)">
 										<xsl:value-of select="$variable-personalization-begin"/>
@@ -984,7 +1013,8 @@
 					</xsl:variable>
 					<xsl:choose>
 						<xsl:when test="ancestor::Cell">
-							<fo:block xsl:use-attribute-sets="label-cell" padding-bottom="0mm" padding-top="0mm">
+							<fo:block padding-bottom="0mm" padding-top="0mm">
+								<xsl:copy-of select="$style-parameters/label-cell/@*"/>
 								<xsl:choose>
 									<xsl:when test="enofo:is-initializable-variable($source-context)">
 										<xsl:copy-of select="concat($variable-personalization-begin,$manual-content,'#{end}')"/>
@@ -997,7 +1027,8 @@
 							</fo:block>
 						</xsl:when>
 						<xsl:otherwise>
-							<fo:block xsl:use-attribute-sets="general-style" padding-bottom="0mm" padding-top="0mm">
+							<fo:block padding-bottom="0mm" padding-top="0mm">
+								<xsl:copy-of select="$style-parameters/general-style/@*"/>
 								<xsl:choose>
 									<xsl:when test="enofo:is-initializable-variable($source-context)">
 										<xsl:copy-of select="concat($variable-personalization-begin,$manual-content,'#{end}')"/>
@@ -1052,7 +1083,8 @@
 		<xsl:if test="$label != ''">
 			<xsl:choose>
 				<xsl:when test="$other-give-details">
-					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+					<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+						<xsl:copy-of select="$style-parameters/details/@*"/>
 						<fo:inline>
 							<xsl:call-template name="insert-image">
 								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
@@ -1062,7 +1094,8 @@
 					</fo:block>
 				</xsl:when>
 				<xsl:otherwise>
-					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+					<fo:block page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+						<xsl:copy-of select="$style-parameters/label-question/@*"/>
 						<xsl:copy-of select="$label"/>
 					</fo:block>
 				</xsl:otherwise>
@@ -1070,7 +1103,8 @@
 		</xsl:if>
 		<xsl:choose>
 			<xsl:when test="$isTable = 'YES'">
-				<fo:block xsl:use-attribute-sets="label-cell">
+				<fo:block>
+					<xsl:copy-of select="$style-parameters/label-cell/@*"/>
 					<xsl:attribute name="text-align">right</xsl:attribute>
 					<xsl:attribute name="padding-top">0mm</xsl:attribute>
 					<xsl:attribute name="padding-bottom">0mm</xsl:attribute>
@@ -1086,7 +1120,8 @@
 				</fo:block>
 			</xsl:when>
 			<xsl:otherwise>
-				<fo:block xsl:use-attribute-sets="general-style">
+				<fo:block>
+					<xsl:copy-of select="$style-parameters/general-style/@*"/>
 					<xsl:if test="enofo:is-initializable-variable($source-context)">
 						<xsl:value-of select="$variable-personalization-begin"/>
 					</xsl:if>
@@ -1211,7 +1246,8 @@
 			</xsl:variable>
 			<xsl:choose>
 				<xsl:when test="ancestor::Cell">
-					<fo:block xsl:use-attribute-sets="label-cell">
+					<fo:block>
+						<xsl:copy-of select="$style-parameters/label-cell/@*"/>
 						<xsl:choose>
 							<xsl:when test="enofo:is-initializable-variable($source-context)">
 								<xsl:value-of select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}')"/>
@@ -1225,7 +1261,8 @@
 					</fo:block>
 				</xsl:when>
 				<xsl:otherwise>
-					<fo:block xsl:use-attribute-sets="general-style">
+					<fo:block>
+						<xsl:copy-of select="$style-parameters/general-style/@*"/>
 						<xsl:choose>
 							<xsl:when test="enofo:is-initializable-variable($source-context)">
 								<xsl:value-of select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}')"/>
@@ -1365,7 +1402,8 @@
 							</xsl:call-template>
 						</xsl:when>
 						<xsl:otherwise>
-							<fo:inline xsl:use-attribute-sets="label-cell">
+							<fo:inline>
+								<xsl:copy-of select="$style-parameters/label-cell/@*"/>
 								<xsl:copy-of select="enofo:get-label($source-context, $languages[1],$loop-navigation)"/>
 							</fo:inline>
 						</xsl:otherwise>
@@ -1395,7 +1433,8 @@
 						</fo:block>
 					</fo:list-item-label>
 					<fo:list-item-body start-indent="body-start()">
-						<fo:block xsl:use-attribute-sets="answer-item">
+						<fo:block>
+							<xsl:copy-of select="$style-parameters/answer-item/@*"/>
 							<xsl:choose>
 								<xsl:when test="$image != ''">
 									<xsl:call-template name="insert-image">

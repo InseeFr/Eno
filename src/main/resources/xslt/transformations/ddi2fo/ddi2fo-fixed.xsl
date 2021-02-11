@@ -204,6 +204,46 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
+    
+   <xd:doc>
+      <xd:desc>Variables from propertiers and parameters : copying style xml tree structure with two changes : 
+         - style attributes become attributes of the style-set tag
+         - overloading properties with parameters when provided by the study  </xd:desc>
+   </xd:doc>
+    <xsl:variable name="style-parameters">
+        <xsl:choose>
+            <xsl:when test="$parameters//fo-parameters/Style != ''">
+                <xsl:for-each select="$properties//fo-parameters/Style/*">
+                    <xsl:variable name="style-set" select="name(.)"/>
+                    <xsl:element name="{$style-set}">
+                        <xsl:for-each select="./*">
+                            <xsl:variable name="style-set-attribute" select="name(.)"/>
+                            <xsl:choose>
+                                <xsl:when
+                                    test="$parameters//fo-parameters/Style/*[name() = $style-set]/*[name() = $style-set-attribute] != ''">
+                                    <xsl:attribute name="{$style-set-attribute}"
+                                        select="$parameters//fo-parameters/Style/*[name() = $style-set]/*[name() = $style-set-attribute]"
+                                    />
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:attribute name="{$style-set-attribute}" select="."/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:for-each>
+                    </xsl:element>
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:for-each select="$properties//fo-parameters/Style/*">
+                    <xsl:element name="{name(.)}">
+                        <xsl:for-each select="./*">
+                            <xsl:attribute name="{name(.)}" select="."/>
+                        </xsl:for-each>
+                    </xsl:element>
+                </xsl:for-each>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
 
     <xd:doc>
         <xd:desc>
