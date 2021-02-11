@@ -833,15 +833,14 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		
-		<xsl:variable name="label" select="enofodt:get-label($source-context, $languages[1])"
-			as="node()"/>
+		<xsl:variable name="label" select="enofodt:get-label($source-context, $languages[1])"/>
 		<xsl:variable name="nameOfVariable" select="enofodt:get-flowcontrol-target($source-context)"/>
 		
 			<text:section text:name="QuestionLoop-{enofodt:get-name($source-context)}">
 				<text:p text:style-name="QuestionLoop">
 					<text:span text:style-name="Standard">
-						<xsl:value-of select="'Début de la boucle ID '"/>
-						<xsl:copy-of select="enofodt:get-name($source-context)"/>
+						<xsl:value-of select="'Début de la boucle '"/>
+						<xsl:copy-of select="$label"/>
 					</text:span>
 				</text:p>
 				
@@ -897,7 +896,7 @@
 				</xsl:apply-templates>
 				
 				
-				<text:p text:style-name="QuestionLoop">
+				<text:p text:style-name="Format">
 					<text:span text:style-name="Standard">
 						<xsl:value-of select="'Fin de la boucle :'"/>
 						<xsl:copy-of select="$label"/>
