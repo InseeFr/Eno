@@ -836,8 +836,8 @@
 		<xsl:variable name="label" select="enofodt:get-label($source-context, $languages[1])"/>
 		<xsl:variable name="nameOfVariable" select="enofodt:get-flowcontrol-target($source-context)"/>
 		
-			<text:section text:name="QuestionLoop-{enofodt:get-name($source-context)}">
-				<text:p text:style-name="QuestionLoop">
+			<text:section text:name="Loop-{enofodt:get-name($source-context)}">
+				<text:p text:style-name="LoopStart">
 					<text:span text:style-name="Standard">
 						<xsl:value-of select="'Début de la boucle '"/>
 						<xsl:copy-of select="$label"/>
@@ -896,7 +896,7 @@
 				</xsl:apply-templates>
 				
 				
-				<text:p text:style-name="Format">
+				<text:p text:style-name="LoopEnd">
 					<text:span text:style-name="Standard">
 						<xsl:value-of select="'Fin de la boucle :'"/>
 						<xsl:copy-of select="$label"/>

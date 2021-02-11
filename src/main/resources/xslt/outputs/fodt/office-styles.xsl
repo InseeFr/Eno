@@ -20,10 +20,15 @@
                 style:justify-single-word="false"/>
             <style:text-properties fo:font-size="22pt" fo:font-weight="bold"/>
         </style:style>
-        <style:style style:name="QuestionLoop" style:family="paragraph" style:default-outline-level="1"
+        <style:style style:name="LoopStart" style:family="paragraph" style:default-outline-level="1"
             style:class="text">
-            <style:paragraph-properties fo:text-align="center" fo:break-before="page"/>
-            <style:text-properties fo:font-size="14pt" fo:font-weight="bold"/>
+            <style:paragraph-properties fo:text-align="center" fo:break-before="page" fo:background-color=" #ffff00"/>
+            <style:text-properties fo:color="#ff3333 " fo:font-size="14pt" fo:font-weight="bold"/>
+        </style:style>
+        <style:style style:name="LoopEnd" style:family="paragraph" style:default-outline-level="1"
+            style:class="text">
+            <style:paragraph-properties fo:text-align="center" fo:background-color=" #ffff00"/>
+            <style:text-properties fo:color="#ff3333" fo:font-size="14pt" fo:font-weight="bold"/>
         </style:style>
         <style:style style:name="Module" style:family="paragraph" style:default-outline-level="1"
             style:class="text">
