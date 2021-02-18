@@ -639,14 +639,18 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:ExternalAid>
 			<r:OtherMaterial>
-	            <xsl:variable name="ID" select="enoddi33:get-id($source-context)"/>
+			    <xsl:variable name="ID" select="enoddi33:get-id($source-context)"/>
 	            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
 	            <r:ID><xsl:value-of select="$ID"/></r:ID>
 	            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
 	            <r:Description>
 	                <r:Content>
 	                    <xhtml:div class="FlowControl" id="{$ID}">
-	                        <xhtml:div class="Description"><xsl:value-of select="enoddi33:get-description($source-context)"/></xhtml:div>
+	                        <xhtml:div class="Description">
+	                            <!-- Variables referenced in the description of a FlowControl must be with the character ¤ (entered in Pogues with the character $)  -->
+	                            <!-- WARNING : A dollar currency entry which is also changed to ¤...  -->
+	                            <xsl:value-of select="replace(enoddi33:get-description($source-context),'\$','¤')"/> 
+	                        </xhtml:div>
 	                        <xhtml:div class="Expression"><xsl:value-of select="enoddi33:get-expression($source-context)"/></xhtml:div>
 	                        <xhtml:div class="IfTrue"><xsl:value-of select="enoddi33:get-if-true($source-context)"/></xhtml:div>
 	                    </xhtml:div>
