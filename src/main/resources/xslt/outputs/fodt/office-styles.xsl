@@ -20,27 +20,47 @@
                 style:justify-single-word="false"/>
             <style:text-properties fo:font-size="22pt" fo:font-weight="bold"/>
         </style:style>
-<!--        <style:style style:name="LoopOfLoopStart" style:family="paragraph" style:default-outline-level="1"
-            style:class="text">
-            <style:paragraph-properties fo:text-align="center" fo:break-before="page" fo:break-after="page" fo:background-color="#c3ff00"/>
-        </style:style>
-        <style:style style:name="LoopOfLoopEnd" style:family="paragraph" style:default-outline-level="1"
-            style:class="text">
-            <style:paragraph-properties fo:text-align="center" fo:break-before="page" fo:break-after="page" fo:background-color="#c3ff00"/>
-        </style:style>-->
-        <style:style style:name="LoopStart" style:family="paragraph" style:default-outline-level="1"
+        <style:style style:name="MultiModuleLoopStart" style:family="paragraph" style:default-outline-level="1"
             style:class="text">
             <style:paragraph-properties fo:text-align="center" fo:break-before="page" fo:background-color="#c3ff00"/>
+        </style:style>
+        <style:style style:name="MultiModuleLoopType" style:family="paragraph" style:default-outline-level="1"
+            style:class="text">
+            <style:paragraph-properties fo:text-align="center" fo:break-after="page" fo:background-color="#c3ff00"/>
+        </style:style>
+        <style:style style:name="MultiModuleLoopEnd" style:family="paragraph" style:default-outline-level="1"
+            style:class="text">
+            <style:paragraph-properties fo:text-align="center" fo:break-before="page" fo:background-color="#c3ff00"/>
+        </style:style>
+        <style:style style:name="OnlyModuleLoopStart" style:family="paragraph" style:default-outline-level="1"
+            style:class="text">
+            <style:paragraph-properties fo:text-align="center" fo:break-before="page" fo:background-color="#c3ff00"/>
+        </style:style>
+        <style:style style:name="OnlyModuleLoopType" style:family="paragraph" style:default-outline-level="1"
+            style:class="text">
+            <style:paragraph-properties fo:text-align="center" fo:background-color="#c3ff00"/>
+        </style:style>
+        <style:style style:name="OnlyModuleLoopEnd" style:family="paragraph" style:default-outline-level="1"
+            style:class="text">
+            <style:paragraph-properties fo:text-align="center" fo:background-color="#c3ff00"/>
+        </style:style>
+        <style:style style:name="InsideModuleLoopStart" style:family="paragraph" style:default-outline-level="1"
+            style:class="text">
+            <style:paragraph-properties fo:text-align="center" fo:background-color="#c3ff00"/>
+        </style:style>
+        <style:style style:name="InsideModuleLoopEnd" style:family="paragraph" style:default-outline-level="1"
+            style:class="text">
+            <style:paragraph-properties fo:text-align="center" fo:background-color="#c3ff00"/>
+        </style:style>
+        <style:style style:name="InsideModuleLoopType" style:family="paragraph" style:default-outline-level="1"
+            style:class="text">
+            <style:paragraph-properties fo:text-align="center" fo:background-color="#c3ff00"/>
         </style:style>
         <style:style style:name="LoopStandard" style:family="paragraph" style:default-outline-level="1"
             style:class="text">
             <style:paragraph-properties fo:text-align="center" fo:background-color="#c3ff00"/>
         </style:style>
-        <style:style style:name="LoopContent" style:family="paragraph" style:default-outline-level="1"
-            style:class="text">
-            <style:paragraph-properties fo:text-align="center" fo:background-color="#c3ff00"/>
-        </style:style>
-        <style:style style:name="LoopEnd" style:family="paragraph" style:default-outline-level="1"
+        <style:style style:name="LoopType" style:family="paragraph" style:default-outline-level="1"
             style:class="text">
             <style:paragraph-properties fo:text-align="center" fo:background-color="#c3ff00"/>
         </style:style>
@@ -55,7 +75,7 @@
             <style:paragraph-properties fo:text-align="center" fo:break-before="page"/>
             <style:text-properties fo:font-size="14pt" fo:font-weight="bold"/>
         </style:style>
-        <style:style style:name="ModuleFirstInLoop" style:family="paragraph" style:default-outline-level="1"
+        <style:style style:name="FirstModuleInLoop" style:family="paragraph" style:default-outline-level="1"
             style:class="text">
             <style:paragraph-properties fo:margin-top="0.6cm" fo:text-align="center"/>
             <style:text-properties fo:font-size="14pt" fo:font-weight="bold"/>

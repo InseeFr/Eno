@@ -1112,7 +1112,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="d:Loop" mode="enoddi:get-descendant-loop">
-        <xsl:copy-of select="descendant::d:loop"/>
+        <xsl:copy-of select="descendant::d:Loop"/>
     </xsl:template>
 
     <xd:doc>
@@ -1543,5 +1543,23 @@
         <xsl:sequence select="//l:VariableScheme//l:VariableGroup[r:BasedOnObject/r:BasedOnReference[1]/r:ID=current()/parent::d:QuestionGrid/r:ID]
             /r:VariableReference/l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]"/>
     </xsl:template>
+<!--
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The list of the ID of the loops contained in a loop</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:Loop" mode="enoddi:get-external-variables">
+        <xsl:sequence select="descendant::d:Loop/r:ID"/>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The list of the ID of the loops contained in a loop</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:Loop" mode="enoddi:get-external-variables">
+        <xsl:sequence select="descendant::d:Loop/r:ID"/>
+    </xsl:template>-->
 
 </xsl:stylesheet>
