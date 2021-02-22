@@ -148,6 +148,11 @@
             <style:paragraph-properties fo:text-align="left" fo:margin-left="1cm" fo:margin-top="0.1cm"/>
             <style:text-properties fo:font-size="10pt"/>
         </style:style>
+        <style:style style:name="OpeningCalculatedVariableSection" style:family="paragraph"
+            style:default-outline-level="2" style:class="text">
+            <style:paragraph-properties fo:text-align="center" fo:break-before="page" fo:margin-top="0.7cm"/>
+            <style:text-properties fo:font-size="12pt" fo:font-weight="bold"/>
+        </style:style>
         <style:style style:name="CalculatedVariableTitle" style:family="paragraph"
             style:default-outline-level="2" style:class="text">
             <style:paragraph-properties fo:text-align="left" fo:margin-top="0.7cm"/>

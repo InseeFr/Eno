@@ -670,10 +670,19 @@
 		<xsl:variable name="variableCalculation"
 			select="enofodt:get-variable-calculation($source-context)"/>
 		
+		<xsl:variable name="isFirst" select="enofodt:is-first-calculated-variable($source-context)"/>
+		
 		<!--<xsl:variable name="outVariable" select="enofodt:get-name($source-context)"/>-->
 		<xsl:variable name="nameOutVariable" select="enofodt:get-business-name($source-context)"/>
 		<xsl:variable name="idVariables"
 			select="tokenize(enofodt:get-variable-calculation-variables($source-context), '\s')"/>
+		
+		<xsl:if test="$isFirst">
+			<text:p text:style-name="OpeningCalculatedVariableSection">
+				<xsl:value-of select="'Liste des variables calculées'"/>
+			</text:p>
+		</xsl:if>
+		
 		<text:section text:name="CalculatedVariable-{$nameOutVariable}">
 			<text:p text:style-name="CalculatedVariableTitle">
 				<xsl:value-of
