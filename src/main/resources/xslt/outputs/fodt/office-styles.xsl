@@ -80,6 +80,10 @@
             <style:paragraph-properties fo:margin-top="0.6cm" fo:text-align="center"/>
             <style:text-properties fo:font-size="14pt" fo:font-weight="bold"/>
         </style:style>
+        <style:style style:name="ModuleName" style:family="text">
+            <style:text-properties fo:font-size="10pt" fo:font-style="italic" fo:font-weight="bold"
+                fo:color="#a5106c"/>
+        </style:style>
         <style:style style:name="SubModule" style:family="paragraph" style:default-outline-level="2"
             style:class="text">
             <style:paragraph-properties fo:margin-top="0.6cm" fo:text-align="left"/>

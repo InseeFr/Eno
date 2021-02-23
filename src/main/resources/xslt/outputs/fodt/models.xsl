@@ -98,15 +98,28 @@
 	<xsl:template match="Module" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:variable name="moduleName"
+			select="enofodt:get-module-name($source-context, $languages[1])"/>
+		
 		<text:section text:name="Module-{enofodt:get-name($source-context)}">
 			<xsl:choose>
 				<xsl:when test="enofodt:is-first-module-in-loop($source-context)">
 					<text:p text:style-name="FirstModuleInLoop">
+						<xsl:if test="$moduleName != ''">
+							<text:span text:style-name="ModuleName">
+								<xsl:value-of select="concat('[', $moduleName, '] ')"/>
+							</text:span>
+						</xsl:if>
 						<xsl:value-of select="enofodt:get-label($source-context, $languages[1])"/>
 					</text:p>
 				</xsl:when>
 				<xsl:otherwise>
 					<text:p text:style-name="Module">
+						<xsl:if test="$moduleName != ''">
+							<text:span text:style-name="ModuleName">
+								<xsl:value-of select="concat('[', $moduleName, '] ')"/>
+							</text:span>
+						</xsl:if>
 						<xsl:value-of select="enofodt:get-label($source-context, $languages[1])"/>
 					</text:p>
 				</xsl:otherwise>
@@ -126,8 +139,15 @@
 	<xsl:template match="SubModule" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:variable name="submoduleName"
+			select="enofodt:get-submodule-name($source-context, $languages[1])"/>
 		<text:section text:name="SubModule-{enofodt:get-name($source-context)}">
 			<text:p text:style-name="SubModule">
+				<xsl:if test="$submoduleName != ''">
+					<text:span text:style-name="ModuleName">
+						<xsl:value-of select="concat('[', $submoduleName, '] ')"/>
+					</text:span>
+				</xsl:if>
 				<xsl:value-of select="enofodt:get-label($source-context, $languages[1])"/>
 			</text:p>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
