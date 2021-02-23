@@ -9,6 +9,7 @@
 	xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
 	xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"
 	xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0"
+	xmlns:xhtml="http://www.w3.org/1999/xhtml"
 	exclude-result-prefixes="xs fn xd eno enofodt" version="2.0">
 	
 	<xsl:import href="../../../styles/style.xsl"/>
@@ -822,10 +823,27 @@
 			mode="source">
 			<xsl:with-param name="driver" select="$driver"/>
 		</xsl:apply-templates>
-		<xsl:if test="enofodt:get-label($source-context, $languages[1]) != ''">
-			<text:p text:style-name="Question">
-				<xsl:value-of select="enofodt:get-label($source-context, $languages[1])"/>
-			</text:p>
+		<xsl:variable name="questionContent" select="enofodt:get-question-label($source-context, $languages[1])"/>
+		<xsl:if test="$questionContent != ''">
+			<xsl:choose>
+				<xsl:when test="exists($questionContent//xhtml:span[@class='block'])">
+					<xsl:for-each select="$questionContent//xhtml:span[@class='block']">
+						<text:p text:style-name="Question">
+							<xsl:apply-templates select="."
+								mode="enofodt:format-label">
+								<xsl:with-param name="label-variables"
+									select="enofodt:get-label-conditioning-variables($source-context, $languages[1])"
+									tunnel="yes"/>
+							</xsl:apply-templates>
+						</text:p>
+					</xsl:for-each>
+				</xsl:when>
+				<xsl:otherwise>
+					<text:p text:style-name="Question">
+						<xsl:value-of select="enofodt:get-label($source-context, $languages[1])"/>
+					</text:p>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:if>
 		<!-- The enoddi:get-instructions-by-format getter produces in-language fragments, on which templates must be applied in "source" mode. -->
 		<xsl:apply-templates select="enofodt:get-after-question-title-instructions($source-context)"
@@ -834,6 +852,7 @@
 		</xsl:apply-templates>
 	</xsl:template>
 	
+
 	
 	<xd:doc>
 		<xd:desc>Template for (Question) Loops</xd:desc>
