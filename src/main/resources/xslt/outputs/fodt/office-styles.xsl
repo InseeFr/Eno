@@ -100,6 +100,11 @@
             <style:paragraph-properties fo:margin-top="0.1cm" fo:text-align="left"/>
             <style:text-properties fo:font-size="10pt"/>
         </style:style>
+        <style:style style:name="Tooltip" style:family="paragraph" style:default-outline-level="2"
+            style:class="text">
+            <style:paragraph-properties fo:margin-top="0.1cm" fo:text-align="left"/>
+            <style:text-properties fo:font-size="10pt" fo:color="#018442"/>
+        </style:style>
         <style:style style:name="Format" style:family="paragraph" style:default-outline-level="2"
             style:class="text">
             <style:text-properties fo:font-size="10pt"/>

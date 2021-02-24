@@ -179,6 +179,14 @@
 				<xsl:with-param name="typeOfAncestor" select="'question'" tunnel="yes"/>
 			</xsl:apply-templates>
 			
+			<xsl:if test="enofodt:get-question-tooltip($source-context,$languages[1]) != ''">
+				<text:p text:style-name="Tooltip">
+					<xsl:value-of select="'(*) Question Level Tooltip : ['"/>
+					<xsl:value-of select="enofodt:get-question-tooltip($source-context,$languages[1])"/>
+					<xsl:value-of select="']'"/>
+				</text:p>
+			</xsl:if>
+			
 			<xsl:apply-templates select="enofodt:get-end-question-instructions($source-context)"
 				mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
