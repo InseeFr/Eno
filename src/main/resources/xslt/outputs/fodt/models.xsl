@@ -197,6 +197,14 @@
 				</xsl:for-each>
 			</xsl:if>
 			
+			<xsl:if test="enofodt:get-question-instruction-tooltip($source-context,$languages[1]) != ''">
+				<text:p text:style-name="Tooltip">
+					<xsl:value-of select="'(*) Instruction Level Tooltip : ['"/>
+					<xsl:value-of select="enofodt:get-question-instruction-tooltip($source-context,$languages[1])"/>
+					<xsl:value-of select="']'"/>
+				</text:p>
+			</xsl:if>
+			
 			<xsl:apply-templates select="enofodt:get-end-question-instructions($source-context)"
 				mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
