@@ -910,12 +910,13 @@
 		<xsl:variable name="label" select="enofodt:get-label($source-context, $languages[1])"/>
 		<xsl:variable name="nameOfVariable" select="enofodt:get-flowcontrol-target($source-context)"/>
 		<xsl:variable name="descendantLoop" select="enofodt:get-descendant-loop-ids($source-context)"/>
-		<xsl:variable name="descendantModules" select="enofodt:get-descendant-module-ids($source-context)"/>
+		<xsl:variable name="descendantModules" select="enofodt:get-descendant-module-names($source-context,$languages[1])"/>
 		<!--	The typeOfLoop variable is useful to differentiate the behaviour whether the loop contains multiple modules (in which case we want to skip pages) or not
 		The test in xsl:when is meant to check if there are multiple modules in the loop by counting the number of spaces in the variable descendantModules -->
+		<xsl:message><xsl:for-each select="$descendantModules"><xsl:value-of select="concat(.,'_')"/></xsl:for-each></xsl:message>
 		<xsl:variable name="typeOfLoop">	
 			<xsl:choose>
-				<xsl:when test="count(tokenize($descendantModules,' ')) > 1">
+				<xsl:when test="count($descendantModules) > 1">
 					<xsl:value-of select="'MultiModuleLoop'"/>
 				</xsl:when>
 				<xsl:otherwise>
@@ -982,14 +983,14 @@
 					</text:p>
 				</xsl:if>
 				
-				<xsl:if test="count(tokenize($descendantModules,' ')) >= 1">
+				<xsl:if test="$descendantModules != ''">
 					<text:p text:style-name="LoopStandard">
 						<text:span text:style-name="LoopInfo">
 							<xsl:value-of select="'Modules inside the loop : '"/>
 						</text:span>
 					</text:p>
 					
-					<xsl:for-each select="tokenize($descendantModules,' ')">
+					<xsl:for-each select="$descendantModules">
 						<text:p text:style-name="LoopStandard">
 							<text:span text:style-name="LoopInfo">
 								<xsl:copy-of select="."/>
@@ -1019,7 +1020,7 @@
 						<xsl:choose>
 							<xsl:when test="$typeOfLoop='MultiModuleLoop'">
 								<xsl:value-of select="'Type of loop : multi-module with '"/>
-								<xsl:value-of select="count(tokenize($descendantModules,' '))"/>
+								<xsl:value-of select="count($descendantModules)"/>
 								<xsl:value-of select="' modules'"/>
 							</xsl:when>
 							<xsl:otherwise>
