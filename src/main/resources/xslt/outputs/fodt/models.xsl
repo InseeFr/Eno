@@ -913,7 +913,6 @@
 		<xsl:variable name="descendantModules" select="enofodt:get-descendant-module-names($source-context,$languages[1])"/>
 		<!--	The typeOfLoop variable is useful to differentiate the behaviour whether the loop contains multiple modules (in which case we want to skip pages) or not
 		The test in xsl:when is meant to check if there are multiple modules in the loop by counting the number of spaces in the variable descendantModules -->
-		<xsl:message><xsl:for-each select="$descendantModules"><xsl:value-of select="concat(.,'_')"/></xsl:for-each></xsl:message>
 		<xsl:variable name="typeOfLoop">	
 			<xsl:choose>
 				<xsl:when test="count($descendantModules) > 1">
