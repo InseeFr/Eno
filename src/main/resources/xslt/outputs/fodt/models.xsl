@@ -181,7 +181,7 @@
 			
 			<xsl:if test="enofodt:get-question-tooltip($source-context,$languages[1]) != ''">
 				<text:p text:style-name="Tooltip">
-					<xsl:value-of select="'(*) Question Level Tooltip : ['"/>
+					<xsl:value-of select="'(*) Infobulle au niveau de la question : ['"/>
 					<xsl:value-of select="enofodt:get-question-tooltip($source-context,$languages[1])"/>
 					<xsl:value-of select="']'"/>
 				</text:p>
@@ -190,7 +190,7 @@
 			<xsl:if test="enofodt:get-question-response-tooltip($source-context,$languages[1]) != ''">
 				<xsl:for-each select="enofodt:get-question-response-tooltip($source-context,$languages[1])">
 					<text:p text:style-name="Tooltip">
-						<xsl:value-of select="'(*) Response Level Tooltip : ['"/>
+						<xsl:value-of select="'(*) Infobulle au niveau des modalités de réponse : ['"/>
 						<xsl:value-of select="."/>
 						<xsl:value-of select="']'"/>
 					</text:p>
@@ -199,7 +199,7 @@
 			
 			<xsl:if test="enofodt:get-question-instruction-tooltip($source-context,$languages[1]) != ''">
 				<text:p text:style-name="Tooltip">
-					<xsl:value-of select="'(*) Instruction Level Tooltip : ['"/>
+					<xsl:value-of select="'(*) Infobulle au niveau d''une consigne : ['"/>
 					<xsl:value-of select="enofodt:get-question-instruction-tooltip($source-context,$languages[1])"/>
 					<xsl:value-of select="']'"/>
 				</text:p>
@@ -931,7 +931,7 @@
 
 				<text:p text:style-name="{concat($typeOfLoop,'Start')}">
 					<text:span text:style-name="LoopIdentifier">
-						<xsl:value-of select="'Start of loop with ID ['"/>
+						<xsl:value-of select="'Début de la boucle ID ['"/>
 						<xsl:copy-of select="enofodt:get-name($source-context)"/>
 						<xsl:value-of select="']'"/>
 					</text:span>
@@ -940,7 +940,7 @@
 				<xsl:if test="$label!=''">
 					<text:p text:style-name="LoopStandard">
 						<text:span text:style-name="LoopInfo">
-							<xsl:value-of select="'Name of the loop : '"/>
+							<xsl:value-of select="'Nom de la boucle : '"/>
 							<xsl:copy-of select="$label"/>
 						</text:span>
 					</text:p>
@@ -949,7 +949,7 @@
 				<xsl:if test="enofodt:get-minimum-occurrences($source-context)!=''">
 					<text:p text:style-name="LoopStandard">
 						<text:span text:style-name="LoopInfo">
-							<xsl:value-of select="'Minimum number of occurences : '"/>
+							<xsl:value-of select="'Nombre d''occurrences minimum : '"/>
 						</text:span>
 						<xsl:call-template name="replaceVariablesInFormula">
 							<xsl:with-param name="formula" select="enofodt:get-minimum-occurrences($source-context)"/>
@@ -961,7 +961,7 @@
 				<xsl:if test="enofodt:get-maximum-occurrences($source-context)!=''">
 					<text:p text:style-name="LoopStandard">
 						<text:span text:style-name="LoopInfo">
-							<xsl:value-of select="'Maximum number of occurrences : '"/>
+							<xsl:value-of select="'Nombre d''occurrences maximum : '"/>
 						</text:span>
 						<xsl:call-template name="replaceVariablesInFormula">
 							<xsl:with-param name="formula" select="enofodt:get-maximum-occurrences($source-context)"/>
@@ -973,7 +973,7 @@
 				<xsl:if test="enofodt:get-loop-filter($source-context)!=''">
 					<text:p text:style-name="LoopStandard">
 						<text:span text:style-name="LoopInfo">
-							<xsl:value-of select="'Condition of the loop : '"/>
+							<xsl:value-of select="'Condition de la boucle: '"/>
 						</text:span>
 						<xsl:call-template name="replaceVariablesInFormula">
 							<xsl:with-param name="formula" select="enofodt:get-loop-filter($source-context)"/>
@@ -985,7 +985,7 @@
 				<xsl:if test="$descendantModules != ''">
 					<text:p text:style-name="LoopStandard">
 						<text:span text:style-name="LoopInfo">
-							<xsl:value-of select="'Modules inside the loop : '"/>
+							<xsl:value-of select="'Modules à l''intérieur de la boucle : '"/>
 						</text:span>
 					</text:p>
 					
@@ -1001,7 +1001,7 @@
 				<xsl:if test="count(tokenize($descendantLoop,' ')) >= 1">
 					<text:p text:style-name="LoopStandard">
 						<text:span text:style-name="LoopInfo">
-							<xsl:value-of select="'Loops inside the loop : '"/>
+							<xsl:value-of select="'Boucles à l''intérieur de la boucle : '"/>
 						</text:span>
 					</text:p>
 					
@@ -1018,14 +1018,14 @@
 					<text:span text:style-name="Standard">
 						<xsl:choose>
 							<xsl:when test="$typeOfLoop='MultiModuleLoop'">
-								<xsl:value-of select="'Type of loop : multi-module with '"/>
+								<xsl:value-of select="'Type de boucle : multi-module avec '"/>
 								<xsl:value-of select="count($descendantModules)"/>
 								<xsl:value-of select="' modules'"/>
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:choose>
-									<xsl:when test="$typeOfLoop='OnlyModuleLoop'"><xsl:value-of select="'Type of loop : one module'"/></xsl:when>
-									<xsl:otherwise><xsl:value-of select="'Type of loop : inside a module'"/></xsl:otherwise>
+									<xsl:when test="$typeOfLoop='OnlyModuleLoop'"><xsl:value-of select="'Type de boucle : un module'"/></xsl:when>
+									<xsl:otherwise><xsl:value-of select="'Type de boucle : à l''intérieur d''un module'"/></xsl:otherwise>
 								</xsl:choose>
 							</xsl:otherwise>
 						</xsl:choose>
@@ -1047,7 +1047,7 @@
 					
 				<text:p text:style-name="{concat($typeOfLoop,'End')}">
 					<text:span text:style-name="LoopIdentifier">
-						<xsl:value-of select="'End of loop with ID ['"/>
+						<xsl:value-of select="'Fin de la boucle ID ['"/>
 						<xsl:copy-of select="enofodt:get-name($source-context)"/>
 						<xsl:value-of select="']'"/>
 					</text:span>
