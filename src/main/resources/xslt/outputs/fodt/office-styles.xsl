@@ -112,6 +112,16 @@
         <style:style style:name="NameOfVariable" style:family="text">
             <style:text-properties fo:color="#0000ff" fo:font-style="italic" fo:font-weight="bold"/>
         </style:style>
+        <style:style style:name="Filter" style:family="paragraph" style:default-outline-level="1"
+            style:class="text">
+            <style:paragraph-properties fo:text-align="center" fo:background-color="#7acda4"/>
+            <style:text-properties fo:font-weight="bold" fo:font-size="12pt"/>
+        </style:style>
+        <style:style style:name="FilterInfo" style:family="paragraph" style:default-outline-level="1"
+            style:class="text">
+            <style:paragraph-properties fo:text-align="left" fo:background-color="#7acda4"/>
+            <style:text-properties fo:font-size="10pt"/>
+        </style:style>
         <style:style style:name="GotoBlock" style:family="paragraph"
             style:class="text">
             <style:text-properties fo:color="#0000ff" fo:font-weight="bold"/>

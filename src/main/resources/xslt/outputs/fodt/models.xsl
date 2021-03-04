@@ -655,6 +655,49 @@
 		</xsl:apply-templates>
 	</xsl:template>
 	
+	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on the Filter driver : a better option than using xf-group to deal with IfThenElse and filters for fodt spec</xd:p>
+		</xd:desc>
+	</xd:doc>
+	<xsl:template match="Filter" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:variable name="filter" select="enofodt:get-relevant($source-context)"/>
+		<xsl:variable name="idVariables"
+			select="tokenize(enofodt:get-hideable-command-variables($source-context), '\s')"/>
+		
+		<text:section text:name="Filter-{enofodt:get-name($source-context)}">
+			<text:p text:style-name="Filter">
+				<xsl:value-of select="'Filtre'"/>
+			</text:p>
+			
+			<text:p text:style-name="FilterInfo">
+				<xsl:value-of select="'Condition du filtre : '"/>
+				<xsl:call-template name="replaceVariablesInFormula">
+					<xsl:with-param name="formula" select="$filter"/>
+					<xsl:with-param name="variables" select="$idVariables"/>
+				</xsl:call-template>
+			</text:p>
+			
+		</text:section>
+		
+		
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+		
+		<text:section text:name="FilterEnd-{enofodt:get-name($source-context)}">
+			<text:p text:style-name="Filter">
+				<xsl:value-of select="'Fin du filtre'"/>
+			</text:p>
+			
+		</text:section>
+		
+	</xsl:template>
+	
+	
 	<xd:doc>
 		<xd:desc>template for the GoTo</xd:desc>
 	</xd:doc>
