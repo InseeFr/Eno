@@ -117,6 +117,11 @@
             <style:paragraph-properties fo:text-align="center" fo:background-color="#7acda4"/>
             <style:text-properties fo:font-weight="bold" fo:font-size="12pt"/>
         </style:style>
+        <style:style style:name="ModuleFilter" style:family="paragraph" style:default-outline-level="1"
+            style:class="text">
+            <style:paragraph-properties fo:text-align="center" fo:background-color="#7acda4" fo:break-before="page"/>
+            <style:text-properties fo:font-weight="bold" fo:font-size="12pt"/>
+        </style:style>
         <style:style style:name="FilterInfo" style:family="paragraph" style:default-outline-level="1"
             style:class="text">
             <style:paragraph-properties fo:text-align="left" fo:background-color="#7acda4"/>

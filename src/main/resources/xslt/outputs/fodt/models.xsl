@@ -667,10 +667,25 @@
 		<xsl:variable name="filter" select="enofodt:get-relevant($source-context)"/>
 		<xsl:variable name="idVariables"
 			select="tokenize(enofodt:get-hideable-command-variables($source-context), '\s')"/>
+		<xsl:variable name="filterType">
+			<xsl:choose>
+				<xsl:when test="enofodt:is-module-filter($source-context)">
+					<xsl:value-of select="'ModuleFilter'"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="'Filter'"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
 		
 		<text:section text:name="Filter-{enofodt:get-name($source-context)}">
-			<text:p text:style-name="Filter">
+			<text:p text:style-name="{$filterType}">
 				<xsl:value-of select="'Filtre'"/>
+			</text:p>
+			
+			<text:p text:style-name="FilterInfo">
+				<xsl:value-of select="'Description du filtre : '"/>
+				<xsl:value-of select="enofodt:get-filter-description($source-context, $languages[1])"/>
 			</text:p>
 			
 			<text:p text:style-name="FilterInfo">
@@ -680,6 +695,7 @@
 					<xsl:with-param name="variables" select="$idVariables"/>
 				</xsl:call-template>
 			</text:p>
+			
 			
 		</text:section>
 		
@@ -692,7 +708,10 @@
 			<text:p text:style-name="Filter">
 				<xsl:value-of select="'Fin du filtre'"/>
 			</text:p>
-			
+			<text:p text:style-name="FilterInfo">
+				<xsl:value-of select="'Description du filtre : '"/>
+				<xsl:value-of select="enofodt:get-filter-description($source-context, $languages[1])"/>
+			</text:p>
 		</text:section>
 		
 	</xsl:template>
