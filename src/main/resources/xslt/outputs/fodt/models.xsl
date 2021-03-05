@@ -970,7 +970,6 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		
 		<xsl:variable name="label" select="enofodt:get-label($source-context, $languages[1])"/>
-		<xsl:variable name="nameOfVariable" select="enofodt:get-flowcontrol-target($source-context)"/>
 		<xsl:variable name="descendantLoop" select="enofodt:get-descendant-loop-ids($source-context)"/>
 		<xsl:variable name="descendantModules" select="enofodt:get-descendant-module-names($source-context,$languages[1])"/>
 		<!--	The typeOfLoop variable is useful to differentiate the behaviour whether the loop contains multiple modules (in which case we want to skip pages) or not
@@ -1093,15 +1092,6 @@
 						</xsl:choose>
 					</text:span>
 				</text:p>
-				
-<!--				<text:p text:style-name="Format">
-					<text:span text:style-name="GotoTitle">
-						<xsl:value-of select="'Cible : '"/>
-					</text:span>
-					<text:span text:style-name="NameOfVariable">
-						<xsl:value-of select="concat('[', $nameOfVariable, ']')"/>
-					</text:span>
-				</text:p>-->
 				
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 					<xsl:with-param name="driver" select="." tunnel="yes"/>
