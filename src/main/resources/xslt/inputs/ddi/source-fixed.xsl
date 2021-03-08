@@ -1392,6 +1392,9 @@
             <xsl:when test="$target/d:QuestionGridName/r:String!=''">
                 <xsl:copy-of select="$target/d:QuestionGridName/r:String"/>
             </xsl:when>
+            <xsl:when test="$idTarget='idendquest'">
+                <xsl:copy-of select="'End of questionnaire'"/>
+            </xsl:when>
         </xsl:choose>
     </xsl:template>
     

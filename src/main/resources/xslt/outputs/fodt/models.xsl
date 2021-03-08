@@ -754,7 +754,14 @@
 						<xsl:value-of select="'Cible : '"/>
 					</text:span>
 					<text:span text:style-name="NameOfVariable">
-						<xsl:value-of select="concat('[', $nameOfVariable, ']')"/>
+						<xsl:choose>
+							<xsl:when test="$nameOfVariable='End of questionnaire'">
+								<xsl:value-of select="'[Fin du questionnaire]'"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="concat('[', $nameOfVariable, ']')"/>
+							</xsl:otherwise>
+						</xsl:choose>
 					</text:span>
 				</text:p>
 				
