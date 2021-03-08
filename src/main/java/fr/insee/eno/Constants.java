@@ -330,6 +330,7 @@ public final class Constants {
 	public static final String INSERT_GENERIC_QUESTIONS_LUNATIC_XML_EXTENSION = "-insert-questions.xml";
 	public static final String EXTERNALIZE_VARIABLES_LUNATIC_XML_EXTENSION = "-ext-variables.xml";
 	public static final String VTL_PARSER_LUNATIC_XML_EXTENSION = "-vtl-parsed.xml";
+	public static final String SPECIFIC_TREAT_LUNATIC_XML_EXTENSION = "-specific-form.xml";
 	public static final String FINAL_LUNATIC_XML_EXTENSION = "-lunatic.xml";
 
 	/******************** fr/xform extension ******************/
