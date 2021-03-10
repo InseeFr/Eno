@@ -1066,7 +1066,7 @@
 					</xsl:for-each>
 				</xsl:if>
 				
-				<xsl:if test="count(tokenize($descendantLoop,' ')) >= 1">
+<!--				<xsl:if test="count(tokenize($descendantLoop,' ')) >= 1">
 					<text:p text:style-name="LoopStandard">
 						<text:span text:style-name="LoopInfo">
 							<xsl:value-of select="'Boucles à l''intérieur de la boucle : '"/>
@@ -1080,7 +1080,7 @@
 							</text:span>
 						</text:p>
 					</xsl:for-each>
-				</xsl:if>
+				</xsl:if>-->
 				
 				<text:p text:style-name="{concat($typeOfLoop,'Type')}">
 					<text:span text:style-name="Standard">
