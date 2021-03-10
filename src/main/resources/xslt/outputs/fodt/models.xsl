@@ -680,7 +680,7 @@
 		
 		<text:section text:name="Filter-{enofodt:get-name($source-context)}">
 			<text:p text:style-name="{$filterType}">
-				<xsl:value-of select="'Filtre'"/>
+				<xsl:value-of select="'&#128772; Filtre'"/>
 			</text:p>
 			
 			<xsl:if test="enofodt:get-filter-description($source-context, $languages[1]) != ''">
@@ -1006,7 +1006,7 @@
 
 				<text:p text:style-name="{concat($typeOfLoop,'Start')}">
 					<text:span text:style-name="LoopIdentifier">
-						<xsl:value-of select="'Début de la boucle'"/>
+						<xsl:value-of select="'&#10160; Boucle'"/>
 <!--						<xsl:copy-of select="enofodt:get-name($source-context)"/>-->
 <!--						<xsl:value-of select="']'"/>-->
 					</text:span>
