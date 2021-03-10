@@ -683,9 +683,32 @@
 				<xsl:value-of select="'Filtre'"/>
 			</text:p>
 			
+			<xsl:if test="enofodt:get-filter-description($source-context, $languages[1]) != ''">
+				<text:p text:style-name="FilterInfo">
+					<xsl:value-of select="'Description du filtre : '"/>
+					<xsl:value-of select="enofodt:get-filter-description($source-context, $languages[1])"/>
+				</text:p>
+			</xsl:if>
+			
 			<text:p text:style-name="FilterInfo">
-				<xsl:value-of select="'Description du filtre : '"/>
-				<xsl:value-of select="enofodt:get-filter-description($source-context, $languages[1])"/>
+				<xsl:value-of select="'Condition du filtre : '"/>
+				<xsl:call-template name="replaceVariablesInFormula">
+					<xsl:with-param name="formula" select="$filter"/>
+					<xsl:with-param name="variables" select="$idVariables"/>
+				</xsl:call-template>
+			</text:p>
+			
+		</text:section>
+		
+		
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+		
+		<text:section text:name="FilterEnd-{enofodt:get-name($source-context)}">
+			
+			<text:p text:style-name="Filter">
+				<xsl:value-of select="'Fin du filtre'"/>
 			</text:p>
 			
 			<text:p text:style-name="FilterInfo">
@@ -696,22 +719,6 @@
 				</xsl:call-template>
 			</text:p>
 			
-			
-		</text:section>
-		
-		
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>
-		
-		<text:section text:name="FilterEnd-{enofodt:get-name($source-context)}">
-			<text:p text:style-name="Filter">
-				<xsl:value-of select="'Fin du filtre'"/>
-			</text:p>
-			<text:p text:style-name="FilterInfo">
-				<xsl:value-of select="'Description du filtre : '"/>
-				<xsl:value-of select="enofodt:get-filter-description($source-context, $languages[1])"/>
-			</text:p>
 		</text:section>
 		
 	</xsl:template>
