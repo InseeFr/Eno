@@ -999,16 +999,16 @@
 
 				<text:p text:style-name="{concat($typeOfLoop,'Start')}">
 					<text:span text:style-name="LoopIdentifier">
-						<xsl:value-of select="'Début de la boucle ID ['"/>
-						<xsl:copy-of select="enofodt:get-name($source-context)"/>
-						<xsl:value-of select="']'"/>
+						<xsl:value-of select="'Début de la boucle'"/>
+<!--						<xsl:copy-of select="enofodt:get-name($source-context)"/>-->
+<!--						<xsl:value-of select="']'"/>-->
 					</text:span>
 				</text:p>
 				
 				<xsl:if test="$label!=''">
 					<text:p text:style-name="LoopStandard">
 						<text:span text:style-name="LoopInfo">
-							<xsl:value-of select="'Nom de la boucle : '"/>
+							<xsl:value-of select="'Nom du bouton d''ajout : '"/>
 							<xsl:copy-of select="$label"/>
 						</text:span>
 					</text:p>
@@ -1053,7 +1053,7 @@
 				<xsl:if test="$descendantModules != ''">
 					<text:p text:style-name="LoopStandard">
 						<text:span text:style-name="LoopInfo">
-							<xsl:value-of select="'Modules à l''intérieur de la boucle : '"/>
+							<xsl:value-of select="'Séquences à l''intérieur de la boucle : '"/>
 						</text:span>
 					</text:p>
 					
@@ -1106,9 +1106,9 @@
 					
 				<text:p text:style-name="{concat($typeOfLoop,'End')}">
 					<text:span text:style-name="LoopIdentifier">
-						<xsl:value-of select="'Fin de la boucle ID ['"/>
-						<xsl:copy-of select="enofodt:get-name($source-context)"/>
-						<xsl:value-of select="']'"/>
+						<xsl:value-of select="'Fin de la boucle'"/>
+<!--						<xsl:copy-of select="enofodt:get-name($source-context)"/>-->
+<!--						<xsl:value-of select="']'"/>-->
 					</text:span>
 				</text:p>
 				
