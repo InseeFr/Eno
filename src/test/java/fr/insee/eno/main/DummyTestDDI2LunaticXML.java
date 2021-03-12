@@ -2,14 +2,11 @@ package fr.insee.eno.main;
 
 import java.io.File;
 
+import fr.insee.eno.postprocessing.lunaticxml.*;
 import org.junit.Test;
 
 import fr.insee.eno.generation.DDI2LunaticXMLGenerator;
 import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLExternalizeVariablesAndDependenciesPostprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLInsertGenericQuestionsPostprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLSortComponentsPostprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLVTLParserPostprocessor;
 import fr.insee.eno.service.GenerationService;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
@@ -33,6 +30,7 @@ public class DummyTestDDI2LunaticXML {
 		Postprocessor[] postprocessors =  {
 				new LunaticXMLSortComponentsPostprocessor(),
 				new LunaticXMLInsertGenericQuestionsPostprocessor(),
+				new LunaticXMLPaginationPostprocessor(),
 				new LunaticXMLExternalizeVariablesAndDependenciesPostprocessor(),
 				new LunaticXMLVTLParserPostprocessor()};
 		
