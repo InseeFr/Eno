@@ -24,4 +24,5 @@
         <Folder>xslt/post-processing/lunatic-xml/begin-question</Folder>
         <Identification>false</Identification>
     </BeginQuestion>
+    <Pagination>none</Pagination>
 </Properties>
