@@ -73,6 +73,7 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
 		<xsl:param name="idLoop" select="''" tunnel="yes"/>
+		<xsl:param name="sequenceParent" tunnel="yes"/>
 		<xsl:variable name="componentType" select="'Loop'"/>
 		<xsl:variable name="isGeneratingLoop" select="enolunatic:is-generating-loop($source-context)" as="xs:boolean"/>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
@@ -113,6 +114,11 @@
 				<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/></label>
 			</xsl:if>
 			<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
+			<xsl:if test="$sequenceParent">
+				<hierarchy>
+					<xsl:copy-of select="$sequenceParent"/>
+				</hierarchy>
+			</xsl:if>			
 			<xsl:copy-of select="$dependencies"/>
 			
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -132,6 +138,7 @@
 	<xsl:template match="Module | SubModule" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="sequenceParent" tunnel="yes"/>
 
 		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
 		<xsl:variable name="componentType-Sequence">
@@ -140,7 +147,7 @@
 				<xsl:when test="self::SubModule"><xsl:value-of select="'Subsequence'"/></xsl:when>
 			</xsl:choose>
 		</xsl:variable>
-		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
+		<xsl:variable name="label" select="enolunatic:replace-all-variables-with-business-name($source-context,enolunatic:get-vtl-label($source-context,$languages[1]))"/>
 		<xsl:variable name="filterCondition" select="enolunatic:get-global-filter($source-context)"/>
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
 		<xsl:variable name="dependenciesVariables" as="xs:string*">
@@ -149,14 +156,40 @@
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
+		
+		<xsl:variable name="sequence">
+			<xsl:choose>
+				<xsl:when test="self::Module">
+					<sequence id="{$id}">
+						<label><xsl:value-of select="$label"/></label>
+					</sequence>
+				</xsl:when>
+				<xsl:when test="self::SubModule"><xsl:copy-of select="$sequenceParent"/></xsl:when>
+			</xsl:choose>
+		</xsl:variable>
+		<xsl:variable name="subSequence">
+			<xsl:choose>
+				<xsl:when test="self::SubModule">
+					<subSequence id="{$id}">
+						<label><xsl:value-of select="$label"/></label>
+					</subSequence>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:variable>
 
 		<components xsi:type="{$componentType-Sequence}" componentType="{$componentType-Sequence}" id="{$id}">
-			<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/></label>
+			<label><xsl:value-of select="$label"/></label>
 			<xsl:copy-of select="enolunatic:getInstructionForQuestion($source-context,.)"/>
 			<conditionFilter><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$filterCondition)"/></conditionFilter>
+			<hierarchy>				
+				<xsl:copy-of select="$sequence"/>
+				<xsl:copy-of select="$subSequence"/>
+			</hierarchy>
 			<xsl:copy-of select="$dependencies"/>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
+				<xsl:with-param name="sequenceParent" select="$sequence" tunnel="yes"/>
+				<xsl:with-param name="subSequenceParent" select="$subSequence" tunnel="yes"/>
 			</xsl:apply-templates>
 		</components>
 	</xsl:template>
@@ -210,6 +243,8 @@
 	<xsl:template match="MultipleChoiceQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="sequenceParent" tunnel="yes"/>
+		<xsl:param name="subSequenceParent" tunnel="yes"/>
 
 		<xsl:variable name="idQuestion" select="enolunatic:get-name($source-context)"/>
 		<xsl:variable name="questionName" select="enolunatic:get-question-name($source-context,$languages[1])"/>
@@ -227,6 +262,10 @@
 			<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context, $label)"/></label>
 			<xsl:copy-of select="enolunatic:getInstructionForQuestion($source-context,.)"/>
 			<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
+			<hierarchy>
+				<xsl:copy-of select="$sequenceParent"/>
+				<xsl:copy-of select="$subSequenceParent"/>
+			</hierarchy>
 			<xsl:copy-of select="$dependencies"/>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -258,6 +297,8 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
+		<xsl:param name="sequenceParent" tunnel="yes"/>
+		<xsl:param name="subSequenceParent" tunnel="yes"/>
 
 		<xsl:variable name="idQuestion" select="enolunatic:get-name($source-context)"/>
 		<xsl:variable name="questionName" select="enolunatic:get-question-name($source-context,$languages[1])"/>
@@ -284,6 +325,10 @@
 			<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context, $label)"/></label>
 			<xsl:copy-of select="enolunatic:getInstructionForQuestion($source-context,.)"/>
 			<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
+			<hierarchy>
+				<xsl:copy-of select="$sequenceParent"/>
+				<xsl:copy-of select="$subSequenceParent"/>
+			</hierarchy>
 			<xsl:copy-of select="$dependencies"/>
 			<xsl:if test="$nbMinimumLines!='' and $nbMaximumLines!=''">
 				<lines min="{$nbMinimumLines}" max="{$nbMaximumLines}"/>
@@ -485,6 +530,8 @@
 		<xsl:param name="dependencies" tunnel="yes"/>
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
 		<xsl:param name="idLoop" select="''" tunnel="yes"/>
+		<xsl:param name="sequenceParent" tunnel="yes"/>
+		<xsl:param name="subSequenceParent" tunnel="yes"/>
 
 		<xsl:variable name="responseName" select="enolunatic:get-business-name($source-context)"/>
 		<xsl:variable name="code-appearance" select="enolunatic:get-appearance($source-context)"/>
@@ -527,6 +574,10 @@
 
 				<xsl:copy-of select="$declarations"/>
 				<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
+				<hierarchy>
+					<xsl:copy-of select="$sequenceParent"/>
+					<xsl:copy-of select="$subSequenceParent"/>
+				</hierarchy>
 				
 				<xsl:copy-of select="$dependencies"/>
 				<xsl:call-template name="enolunatic:add-response-dependencies">
@@ -792,6 +843,8 @@
 	<xsl:template match="GoTo" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="sequenceParent" tunnel="yes"/>
+		<xsl:param name="subSequenceParent" tunnel="yes"/>
 
 		<xsl:variable name="componentType" select="'FilterDescription'"/>
 		<xsl:variable name="idGoTo" select="enolunatic:get-name($source-context)"/>
@@ -804,6 +857,10 @@
 		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idGoTo}" filterDescription="{$filterDescription}">
 			<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/></label>
 			<conditionFilter><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$filterCondition)"/></conditionFilter>
+			<hierarchy>
+				<xsl:copy-of select="$sequenceParent"/>
+				<xsl:copy-of select="$subSequenceParent"/>
+			</hierarchy>
 			<xsl:copy-of select="$dependencies"/>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
