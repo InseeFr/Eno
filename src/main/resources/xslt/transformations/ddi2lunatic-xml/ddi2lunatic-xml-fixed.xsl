@@ -199,7 +199,7 @@
             <xsl:when test="$label!=''">
                 <xsl:call-template name="enolunatic:replace-variables-in-formula">
                     <xsl:with-param name="source-context" select="$context"/>
-                    <xsl:with-param name="formula" select="enolunatic:surround-label-with-quote(enolunatic:replace-double-quote-by-simple-quote($label))"/>
+                    <xsl:with-param name="formula" select="enolunatic:surround-label-with-quote(enolunatic:encode-special-char-in-js($label))"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise/>
@@ -222,10 +222,51 @@
         <xsl:value-of select="$final-label"/>
     </xsl:function>
     
-    <xsl:function name="enolunatic:replace-double-quote-by-simple-quote">        
+    
+    <xsl:function name="enolunatic:encode-special-char-in-js">
         <xsl:param name="label"/>
-        <xsl:value-of select="replace($label,'&quot;','''')"/>
+        <xsl:value-of select="enolunatic:special-treatment-for-tooltip($label)"/>
     </xsl:function>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This function replace [Data](. "example of tooltip") by [Data](. 'example of tooltip')</xd:p>
+            <xd:p>The goal is to prevent quotes from interfering with VTL</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enolunatic:special-treatment-for-tooltip">
+        <xsl:param name="label"/>        
+        <xsl:variable name="listChar" select="$properties//JSEncoding/char"/>
+        <xsl:analyze-string select="$label" regex="(\[([^\]]+)\])\(\. &quot;([^&quot;]+)&quot;\)">
+            <xsl:matching-substring>
+                <xsl:value-of select="concat(regex-group(1),'(. ''',regex-group(3),''')')"/>
+            </xsl:matching-substring>
+            <xsl:non-matching-substring>
+                <!-- replace special JS character by their encoded value-->
+                <xsl:value-of select="enolunatic:recursive-replace(.,$listChar)"/>
+            </xsl:non-matching-substring>
+        </xsl:analyze-string>
+    </xsl:function>
+    
+    <xsl:function name="enolunatic:recursive-replace">
+        <xsl:param name="label"/>
+        <xsl:param name="listChar"/>
+        <xsl:choose>
+            <xsl:when test="count($listChar) &gt; 0">
+                <xsl:variable name="newLabel">
+                    <xsl:variable name="in" select="$listChar[1]/in"/>           
+                    <xsl:variable name="out" select="$listChar[1]/out"/>
+                    <xsl:value-of select="replace($label,$in,$out)"/>
+                </xsl:variable>
+                <xsl:value-of select="enolunatic:recursive-replace($newLabel,$listChar[position() &gt; 1])"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$label"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+    
+    
     
     <xsl:function name="enolunatic:get-vtl-sdmx-filter">
         <xsl:param name="context" as="item()"/>

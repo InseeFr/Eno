@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- This file contains common properties used by the ddi2fr transformation  -->
+<!-- This file contains common properties used by the ddi2lunatic-xml transformation  -->
 <Properties>
     <EnoVersion>${project.version}</EnoVersion>
     <Images>
@@ -25,4 +25,16 @@
         <Identification>false</Identification>
     </BeginQuestion>
     <Pagination>none</Pagination>
+    
+    <!-- https://outils-javascript.aliasdmc.fr/encodage-caracteres-speciaux/encode-caractere-2019-html-css-js-autre.html -->
+    <JSEncoding>
+        <char>
+            <in>"</in>
+            <out>\\u2033</out>
+        </char>
+        <char>
+            <in>'</in>
+            <out>\\u2019</out>
+        </char>
+    </JSEncoding>
 </Properties>
