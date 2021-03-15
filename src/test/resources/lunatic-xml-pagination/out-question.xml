@@ -4,7 +4,8 @@
                id="i6vwi2506qf2mms"
                modele="SIMPSONS"
                enoCoreVersion=""
-               pagination="question">
+               pagination="question"
+               maxPage="37">
    <label>Questionnaire SIMPSONS 20201215</label>
    <components xsi:type="Sequence"
                componentType="Sequence"
@@ -2259,7 +2260,11 @@
          <bindingDependencies>NB_CHAR</bindingDependencies>
          <response name="NB_CHAR"/>
       </components>
-      <components xsi:type="Loop" componentType="Loop" id="kiq7bjam" page="34">
+      <components xsi:type="Loop"
+                  componentType="Loop"
+                  id="kiq7bjam"
+                  page="34"
+                  maxPage="34.2">
          <label>"Add a character"</label>
          <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
          <hierarchy>
@@ -2316,7 +2321,8 @@
                id="kiq7cbgo"
                min="0"
                iterations="count(NAME_CHAR)"
-               page="35">
+               page="35"
+               maxPage="35.3">
       <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
       <bindingDependencies>NAME_CHAR</bindingDependencies>
       <bindingDependencies>FAVCHAR</bindingDependencies>

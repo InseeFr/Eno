@@ -16,6 +16,8 @@ import org.xmlunit.diff.Diff;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class TestLunaticXMLPaginationPostProcessor {
 
@@ -64,7 +66,7 @@ public class TestLunaticXMLPaginationPostProcessor {
 			GenerationService genService = new GenerationService(preprocessors, identityGenerator, postprocessors);
 			genService.setParameters(parametersBAOS);
 			File in = new File(String.format("%s/in.xml", basePath));
-			File outputFile = genService.generateQuestionnaire(in, "ddi-2-lunatic-xml-test");
+			File outputFile = genService.generateQuestionnaire(in, "ddi-2-lunatic-xml-test/"+pagination.value());
 			File expectedFile = new File(String.format("%s/out-"+ pagination.value() +".xml", basePath));
 
 
