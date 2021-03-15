@@ -67,6 +67,7 @@
                 <xsl:copy>
                     <xsl:copy-of select="@*"/>
                     <xsl:attribute name="pagination" select="$pagination"/>
+                    <xsl:attribute name="maxPage" select="count(child::h:components[@componentType='Sequence' or @componentType='Loop'])"/>
                     <xsl:apply-templates mode="sequence"/>
                 </xsl:copy>
             </xsl:when>
@@ -74,8 +75,7 @@
                 <!-- Remove subsequence with no declaration -->
                 <xsl:variable name="step1">
                     <xsl:copy>
-                        <xsl:copy-of select="@*"/>                        
-                        <xsl:attribute name="pagination" select="$pagination"/>
+                        <xsl:copy-of select="@*"/>
                         <xsl:apply-templates mode="clean-subsequence"/>
                     </xsl:copy>
                 </xsl:variable>
@@ -96,8 +96,16 @@
                     <xsl:apply-templates/>
                 </xsl:copy>
             </xsl:otherwise>
-        </xsl:choose>
-        
+        </xsl:choose>        
+    </xsl:template>
+    
+    <xsl:template match="h:Questionnaire" mode="question">
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:attribute name="pagination" select="$pagination"/>
+            <xsl:attribute name="maxPage" select="count(descendant::h:components[not(ancestor::h:components[@componentType='Loop'])][@componentType!='FilterDescription'])"/>
+            <xsl:apply-templates mode="question"/>
+        </xsl:copy>
     </xsl:template>
     
     <!-- sequence pagination -->
@@ -124,9 +132,11 @@
                 <xsl:otherwise><xsl:value-of select="$newPage"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
+        <xsl:variable name="maxPage" select="count(child::h:components[@componentType='Sequence' or @componentType='Loop'])"/>
         <xsl:copy>
             <xsl:copy-of select="@*"/>
             <xsl:attribute name="page" select="$page"/>
+            <xsl:attribute name="maxPage" select="if($maxPage = 0) then $page else concat($page,'.',$maxPage)"/>
             <xsl:apply-templates mode="#current">
                 <xsl:with-param name="loopPage" select="$page" tunnel="yes"/>
             </xsl:apply-templates>
@@ -205,9 +215,11 @@
                 <xsl:otherwise><xsl:value-of select="$newPage"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
+        <xsl:variable name="maxPage" select="count(descendant::h:components[@componentType!='FilterDescription'])"/>
         <xsl:copy>
             <xsl:copy-of select="@*"/>
             <xsl:attribute name="page" select="$page"/>
+            <xsl:attribute name="maxPage" select="if($maxPage = 0) then $page else concat($page,'.',$maxPage)"/>
             <xsl:apply-templates mode="#current">
                 <xsl:with-param name="container" select="." tunnel="yes"/>
                 <xsl:with-param name="loopPage" select="$page" tunnel="yes"/>
