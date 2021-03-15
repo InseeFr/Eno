@@ -521,7 +521,7 @@
         </xsl:variable>
         
         <xsl:variable name="conditionToContinue" as="xs:boolean">
-            <xsl:value-of select="count($conditions[.=true()])=count($conditions) and count($conditions)!=0"/>
+            <xsl:value-of select="count($conditions[.=true()]) &gt;0 and count($conditions)!=0"/>
         </xsl:variable>
         
         <xsl:choose>
