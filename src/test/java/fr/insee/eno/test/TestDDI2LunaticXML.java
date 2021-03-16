@@ -34,9 +34,9 @@ public class TestDDI2LunaticXML {
 			Postprocessor[] postprocessors =  {
 					new LunaticXMLSortComponentsPostprocessor(),
 					new LunaticXMLInsertGenericQuestionsPostprocessor(),
-					new LunaticXMLPaginationPostprocessor(),
 					new LunaticXMLExternalizeVariablesAndDependenciesPostprocessor(),
-					new LunaticXMLVTLParserPostprocessor()};
+					new LunaticXMLVTLParserPostprocessor(),
+					new LunaticXMLPaginationPostprocessor(),};
 			GenerationService genService = new GenerationService(preprocessors, ddi2lunaticXML, postprocessors);
 			
 			File in = new File(String.format("%s/in.xml", basePath));

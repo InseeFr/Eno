@@ -70,9 +70,9 @@
             
             <xs:enumeration value="lunatic-xml-sortComponents"/>
             <xs:enumeration value="lunatic-xml-insert-generic-questions"/>
-            <xs:enumeration value="lunatic-xml-pagination"/>
             <xs:enumeration value="lunatic-xml-externalizeVariables"/>
             <xs:enumeration value="lunatic-xml-vtlParser"/>
+            <xs:enumeration value="lunatic-xml-pagination"/>
             <xs:enumeration value="lunatic-xml-specificTreatment"/>
             
             <xs:enumeration value="xforms-insert-generic-questions"/>
