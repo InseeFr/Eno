@@ -31,7 +31,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="languages" select="enoxforms:get-form-languages($source-context)" as="xs:string +"/>
         <xhtml:html>
-            <xsl:comment><xsl:value-of select="concat('Eno version : ',$enoVersion,'. Generation date : ',current-dateTime())"/></xsl:comment>
+            <xsl:comment><xsl:value-of select="concat('Eno version : ',$enoVersion,'. Generation date : ',format-dateTime(current-dateTime(), '[D01]/[M01]/[Y0001] - [H1]:[m01]:[s01]'))"/></xsl:comment>
             <xhtml:head>
                 <xhtml:title>
                     <xsl:value-of select="enoxforms:get-label($source-context, $languages[1])"/>

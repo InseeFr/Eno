@@ -77,8 +77,11 @@
 						<xsl:value-of select="enofodt:get-label($source-context, $languages[1])"/>
 					</text:p>
 					<text:p text:style-name="TitleComment">
-						<!--  <xsl:value-of select="concat('Specification generated on: ',format-dateTime(current-dateTime(), '[D01]/[M01]/[Y0001] - [H1]:[m01]:[s01]'))"/>-->
-						Specification generated from Eno </text:p>
+						<xsl:value-of select="concat('Specification generated with Eno ',$enoVersion)"/>
+					</text:p>
+					<text:p text:style-name="TitleComment">
+						<xsl:value-of select="concat('Date of generation : ',format-dateTime(current-dateTime(), '[D01]/[M01]/[Y0001] - [H1]:[m01]:[s01]'))"/>
+					</text:p>
 					<!-- Go to the children -->
 					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 						<xsl:with-param name="driver" select="." tunnel="yes"/>
