@@ -30,9 +30,9 @@ public class DummyTestDDI2LunaticXML {
 		Postprocessor[] postprocessors =  {
 				new LunaticXMLSortComponentsPostprocessor(),
 				new LunaticXMLInsertGenericQuestionsPostprocessor(),
-				new LunaticXMLPaginationPostprocessor(),
 				new LunaticXMLExternalizeVariablesAndDependenciesPostprocessor(),
-				new LunaticXMLVTLParserPostprocessor()};
+				new LunaticXMLVTLParserPostprocessor(),
+				new LunaticXMLPaginationPostprocessor(),};
 		
 		GenerationService genServiceDDI2JS = new GenerationService(preprocessors, ddi2lunaticXmlGenerator,postprocessors);
 		File in = new File(String.format("%s/in.xml", basePathDDI2JS));
