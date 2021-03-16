@@ -30,11 +30,11 @@
     <JSEncoding>
         <char>
             <in>"</in>
-            <out>\\u2033</out>
+            <out>’’</out>
         </char>
         <char>
             <in>'</in>
-            <out>\\u2019</out>
+            <out>’</out>
         </char>
     </JSEncoding>
 </Properties>
