@@ -74,7 +74,7 @@
 			-->
 			<office:body>
 				<office:text>
-					<text:p text:style-name="Title">
+					<text:p text:style-name="Title">	
 						<xsl:value-of select="enofodt:get-label($source-context, $languages[1])"/>
 					</text:p>
 					<text:p text:style-name="TitleComment">
