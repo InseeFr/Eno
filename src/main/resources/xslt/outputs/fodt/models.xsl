@@ -57,6 +57,7 @@
 			xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"
 			xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"
 			xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0">
+			<xsl:comment><xsl:value-of select="concat('Eno version : ',$enoVersion,'. Generation date : ',format-dateTime(current-dateTime(), '[D01]/[M01]/[Y0001] - [H1]:[m01]:[s01]'))"/></xsl:comment>
 			<office:font-face-decls>
 				<style:font-face style:name="Arial" svg:font-family="Arial"
 					style:font-family-generic="system" style:font-pitch="variable"/>
@@ -77,11 +78,14 @@
 						<xsl:value-of select="enofodt:get-label($source-context, $languages[1])"/>
 					</text:p>
 					<text:p text:style-name="TitleComment">
+						<xsl:value-of select="'Specification generated with Eno'"/>
+					</text:p>
+<!--					<text:p text:style-name="TitleComment">
 						<xsl:value-of select="concat('Specification generated with Eno ',$enoVersion)"/>
 					</text:p>
 					<text:p text:style-name="TitleComment">
 						<xsl:value-of select="concat('Date of generation : ',format-dateTime(current-dateTime(), '[D01]/[M01]/[Y0001] - [H1]:[m01]:[s01]'))"/>
-					</text:p>
+					</text:p>-->
 					<!-- Go to the children -->
 					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 						<xsl:with-param name="driver" select="." tunnel="yes"/>
