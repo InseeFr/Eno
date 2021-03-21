@@ -2264,7 +2264,7 @@
                   componentType="Loop"
                   id="kiq7bjam"
                   page="34"
-                  maxPage="34.2">
+                  maxPage="34">
          <label>"Add a character"</label>
          <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
          <hierarchy>
@@ -2274,46 +2274,61 @@
          </hierarchy>
          <bindingDependencies>NAME_CHAR</bindingDependencies>
          <bindingDependencies>AGE_CHAR</bindingDependencies>
-         <components xsi:type="Input"
-                     componentType="Input"
-                     id="kiq66gtw"
-                     maxLength="30"
-                     mandatory="false"
-                     page="34.1">
+         <components xsi:type="Subsequence"
+                     componentType="Subsequence"
+                     id="kiq5u8d5"
+                     page="34">
+            <label>"Description of each character"</label>
+            <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
+            <hierarchy>
+               <sequence id="kiq5mr0b" page="32">
+                  <label>"VI - Favourite characters (Loop)"</label>
+               </sequence>
+               <subSequence id="kiq5u8d5" page="34">
+                  <label>"Description of each character"</label>
+               </subSequence>
+            </hierarchy>
+            <components xsi:type="Input"
+                        componentType="Input"
+                        id="kiq66gtw"
+                        maxLength="30"
+                        mandatory="false"
+                        page="34">
                <label>"➡ 2. What is the first name of this character?"</label>
                <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
                <hierarchy>
                   <sequence id="kiq5mr0b" page="32">
                      <label>"VI - Favourite characters (Loop)"</label>
                   </sequence>
-                  <subSequence id="kiq5u8d5" page="34.1">
+                  <subSequence id="kiq5u8d5" page="34">
                      <label>"Description of each character"</label>
                   </subSequence>
                </hierarchy>
                <bindingDependencies>NAME_CHAR</bindingDependencies>
                <response name="NAME_CHAR"/>
             </components>
-         <components xsi:type="InputNumber"
-                     componentType="InputNumber"
-                     id="kiq5r8wu"
-                     mandatory="false"
-                     min="0"
-                     max="120"
-                     decimals="0"
-                     page="34.2">
+            <components xsi:type="InputNumber"
+                        componentType="InputNumber"
+                        id="kiq5r8wu"
+                        mandatory="false"
+                        min="0"
+                        max="120"
+                        decimals="0"
+                        page="34">
                <label>"➡ 3. How old is this character in the first episode of the Simpsons family?"</label>
                <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
                <hierarchy>
                   <sequence id="kiq5mr0b" page="32">
                      <label>"VI - Favourite characters (Loop)"</label>
                   </sequence>
-                  <subSequence id="kiq5u8d5" page="34.1">
+                  <subSequence id="kiq5u8d5" page="34">
                      <label>"Description of each character"</label>
                   </subSequence>
                </hierarchy>
                <bindingDependencies>AGE_CHAR</bindingDependencies>
                <response name="AGE_CHAR"/>
             </components>
+         </components>
       </components>
    </components>
    <components xsi:type="Loop"

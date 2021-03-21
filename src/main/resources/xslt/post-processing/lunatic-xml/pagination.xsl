@@ -184,10 +184,20 @@
         </xsl:copy>
     </xsl:template>
     
+    <xsl:template match="h:components[@componentType='Loop']" mode="clean-subsequence">
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates mode="#current">
+                <xsl:with-param name="isFromLinkedLoop" select="boolean(@iterations != '')" tunnel="yes"/>
+            </xsl:apply-templates>
+        </xsl:copy>
+    </xsl:template>
+    
     <!-- This template "delete" subsequence without declaration -->
     <xsl:template match="h:components[@componentType='Subsequence']" mode="clean-subsequence">
+        <xsl:param name="isFromLinkedLoop" select="true()" as="xs:boolean" tunnel="yes"/>
         <xsl:choose>
-            <xsl:when test="h:declarations">
+            <xsl:when test="h:declarations or not($isFromLinkedLoop)">
                 <xsl:copy>
                     <xsl:copy-of select="@*"/>
                     <xsl:apply-templates mode="#current"/>
@@ -215,7 +225,8 @@
                 <xsl:otherwise><xsl:value-of select="$newPage"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:variable name="maxPage" select="count(descendant::h:components[@componentType!='FilterDescription'])"/>
+        <xsl:variable name="isLinkedLoop" select="boolean(@iterations != '')"/>
+        <xsl:variable name="maxPage" select="if($isLinkedLoop) then count(descendant::h:components[@componentType!='FilterDescription']) else 0"/>
         <xsl:copy>
             <xsl:copy-of select="@*"/>
             <xsl:attribute name="page" select="$page"/>
@@ -223,12 +234,14 @@
             <xsl:apply-templates mode="#current">
                 <xsl:with-param name="container" select="." tunnel="yes"/>
                 <xsl:with-param name="loopPage" select="$page" tunnel="yes"/>
+                <xsl:with-param name="isFromLinkedLoop" select="$isLinkedLoop" tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:copy>
     </xsl:template>
     
     <xsl:template match="h:components[not(@componentType='Loop')]" mode="question">
         <xsl:param name="loopPage" tunnel="yes"/>
+        <xsl:param name="isFromLinkedLoop" as="xs:boolean" select="true()" tunnel="yes"/>
         <xsl:variable name="container" select="ancestor::h:*[@componentType='Loop' or local-name(.)='Questionnaire'][1]"/>
         <xsl:variable name="firstComponentId" select="$container/h:components[1]/@id"/>
         <xsl:variable name="page">
@@ -238,7 +251,8 @@
                     from="h:components[@id = $firstComponentId]"/>
             </xsl:variable>            
             <xsl:choose>
-                <xsl:when test="$loopPage != ''"><xsl:value-of select="concat($loopPage,'.',$newPage)"/></xsl:when>
+                <xsl:when test="$loopPage != '' and $isFromLinkedLoop"><xsl:value-of select="concat($loopPage,'.',$newPage)"/></xsl:when>
+                <xsl:when test="$loopPage != '' and not($isFromLinkedLoop)"><xsl:value-of select="$loopPage"/></xsl:when>                
                 <xsl:otherwise><xsl:value-of select="$newPage"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
