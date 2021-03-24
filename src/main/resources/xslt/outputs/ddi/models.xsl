@@ -861,6 +861,9 @@
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+            <d:ConstructName>
+                <r:String xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="enoddi33:get-name($source-context)"></xsl:value-of></r:String>
+            </d:ConstructName>
             <xsl:if test="$labelVal != ''">
                 <r:Label>
                     <r:Content xml:lang="fr-FR"><xsl:value-of select="$labelVal"/></r:Content>
