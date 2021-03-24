@@ -1,5 +1,10 @@
 # Eno Releases 
 
+## 2.2.3 - 24/03/2021
+
+- **[poguesXML2ddi][core]** hotfix : The referenced variables must be framed by ¤ and not $.
+- **[poguesXML2ddi][core]** hotfix : Adding support of filtered loops in pogues-xml.
+
 ## 2.2.2 - 16/03/2021
 
 - **[poguesXML2ddi][core]** Allowing a ControlConstructReference to point to a QuestionConstruct (for dynamic tables). Until now, it was wrongly pointing as a Loop (in r:TypeOfObject).
