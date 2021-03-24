@@ -1195,6 +1195,14 @@
                         <r:TypeOfObject>Sequence</r:TypeOfObject>
                     </d:ControlConstructReference>
                 </xsl:when>
+                <xsl:when test="enoddi33:is-question-construct($source-context)">
+                    <d:ControlConstructReference>
+                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                        <r:ID><xsl:value-of select="concat($variable-group,'-QC')"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                        <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+                    </d:ControlConstructReference>
+                </xsl:when>
                 <xsl:otherwise>
                     <d:ControlConstructReference>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>
