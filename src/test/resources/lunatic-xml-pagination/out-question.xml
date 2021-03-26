@@ -2334,6 +2334,7 @@
    <components xsi:type="Loop"
                componentType="Loop"
                id="kiq7cbgo"
+               depth="1"
                min="0"
                iterations="count(NAME_CHAR)"
                page="35"

@@ -101,9 +101,11 @@
 		
 		<!-- keep idLoop of the parent Loop if exists -->
 		<xsl:variable name="newIdLoop" select="if($idLoop!='') then $idLoop else $id"/>
+		<xsl:variable name="newLoopDepth" select="$loopDepth + 1"/>
 		
 		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$id}">
 			<xsl:if test="not($isGeneratingLoop)">
+				<xsl:attribute name="depth" select="$newLoopDepth"/>
 				<xsl:attribute name="min" select="if ($minimumOccurrences!='') then $minimumOccurrences else 0"  />
 				<xsl:if test="$maximumOccurrences!=''">
 					<xsl:attribute name="iterations" select="enolunatic:replace-all-variables-with-business-name($source-context,$maximumOccurrences)"/>
@@ -123,7 +125,7 @@
 			
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
-				<xsl:with-param name="loopDepth" select="$loopDepth + 1" tunnel="yes"/>
+				<xsl:with-param name="loopDepth" select="$newLoopDepth" tunnel="yes"/>
 				<xsl:with-param name="idLoop" select="$newIdLoop" tunnel="yes"/>
 			</xsl:apply-templates>
 		</components>

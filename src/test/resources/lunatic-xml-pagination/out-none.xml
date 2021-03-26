@@ -2326,6 +2326,7 @@
    <components xsi:type="Loop"
                componentType="Loop"
                id="kiq7cbgo"
+               depth="1"
                min="0"
                iterations="count(NAME_CHAR)">
       <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
