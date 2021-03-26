@@ -10,7 +10,7 @@
       <declarations declarationType="COMMENT"
                     id="j6p0ti5h-d1"
                     position="AFTER_QUESTION_TEXT">
-         <label>"We're going to test your knowledge about the simpsons series.Welcome in the simpsons world!"</label>
+         <label>"We’re going to test your knowledge about the simpsons series.Welcome in the simpsons world!"</label>
       </declarations>
       <conditionFilter>"normal"</conditionFilter>
       <hierarchy>
@@ -295,7 +295,7 @@
       </components>
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="j3341528">
-      <label>"II - Simpsons' city"</label>
+      <label>"II - Simpsons’ city"</label>
       <declarations declarationType="COMMENT"
                     id="j3341528-d2"
                     position="AFTER_QUESTION_TEXT">
@@ -304,7 +304,7 @@
       <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
       <hierarchy>
          <sequence id="j3341528">
-            <label>"II - Simpsons' city"</label>
+            <label>"II - Simpsons’ city"</label>
          </sequence>
       </hierarchy>
       <components xsi:type="Radio"
@@ -320,7 +320,7 @@
          <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
          <hierarchy>
             <sequence id="j3341528">
-               <label>"II - Simpsons' city"</label>
+               <label>"II - Simpsons’ city"</label>
             </sequence>
          </hierarchy>
          <bindingDependencies>CITY</bindingDependencies>
@@ -351,7 +351,7 @@
          <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
          <hierarchy>
             <sequence id="j3341528">
-               <label>"II - Simpsons' city"</label>
+               <label>"II - Simpsons’ city"</label>
             </sequence>
          </hierarchy>
          <bindingDependencies>MAYOR</bindingDependencies>
@@ -381,7 +381,7 @@
          <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
          <hierarchy>
             <sequence id="j3341528">
-               <label>"II - Simpsons' city"</label>
+               <label>"II - Simpsons’ city"</label>
             </sequence>
          </hierarchy>
          <bindingDependencies>STATE</bindingDependencies>
@@ -468,7 +468,7 @@
          <bindingDependencies>PET3</bindingDependencies>
          <bindingDependencies>PET4</bindingDependencies>
          <responses id="j334akov-QOP-khokqjtw">
-            <label>"Santa's Little Helper"</label>
+            <label>"Santa’s Little Helper"</label>
             <response name="PET1"/>
          </responses>
          <responses id="j334akov-QOP-khokur7a">
@@ -860,7 +860,7 @@
                      id="j4nwc63q"
                      positioning="HORIZONTAL"
                      mandatory="false">
-            <label>"➡ 1. Please, specify the percentage of Jay's expenses in the Kwik-E-Mart for each product?"</label>
+            <label>"➡ 1. Please, specify the percentage of Jay’s expenses in the Kwik-E-Mart for each product?"</label>
             <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
             <hierarchy>
                <sequence id="j4nw88h2">
@@ -2342,6 +2342,7 @@
                <label>"VII - Other details about character named " || cast(cast(NAME_CHAR,string),string) || " "</label>
             </sequence>
          </hierarchy>
+         <bindingDependencies>NAME_CHAR</bindingDependencies>
          <components xsi:type="CheckboxOne"
                      componentType="CheckboxOne"
                      id="kiq65x3c"
