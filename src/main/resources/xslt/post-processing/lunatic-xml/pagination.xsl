@@ -89,7 +89,7 @@
             <xsl:otherwise>
                 <xsl:if test="$pagination = $SUBSEQUENCE">
                     <xsl:message><xsl:value-of select="concat('Pagination : ',$pagination,' is not yet implemented.')"/></xsl:message>
-                </xsl:if>                
+                </xsl:if>
                 <xsl:copy>
                     <xsl:copy-of select="@*"/>
                     <xsl:attribute name="pagination" select="$pagination"/>
@@ -99,14 +99,6 @@
         </xsl:choose>        
     </xsl:template>
     
-    <xsl:template match="h:Questionnaire" mode="question">
-        <xsl:copy>
-            <xsl:copy-of select="@*"/>
-            <xsl:attribute name="pagination" select="$pagination"/>
-            <xsl:attribute name="maxPage" select="count(descendant::h:components[not(ancestor::h:components[@componentType='Loop'])][@componentType!='FilterDescription'])"/>
-            <xsl:apply-templates mode="question"/>
-        </xsl:copy>
-    </xsl:template>
     
     <!-- sequence pagination -->
     <xsl:template match="h:components[@componentType='Loop']" mode="sequence">
@@ -132,11 +124,14 @@
                 <xsl:otherwise><xsl:value-of select="$newPage"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:variable name="maxPage" select="count(child::h:components[@componentType='Sequence' or @componentType='Loop'])"/>
+        
         <xsl:copy>
             <xsl:copy-of select="@*"/>
-            <xsl:attribute name="page" select="$page"/>
-            <xsl:attribute name="maxPage" select="if($maxPage = 0) then $page else concat($page,'.',$maxPage)"/>
+            <xsl:attribute name="page" select="$page"/>            
+            <xsl:if test="not($parent/@componentType='Sequence')">                
+                <xsl:attribute name="maxPage" select="count(child::h:components[@componentType='Sequence' or @componentType='Loop'])"/>
+            </xsl:if>
+            <xsl:attribute name="paginatedLoop" select="not($parent/@componentType='Sequence')"/>
             <xsl:apply-templates mode="#current">
                 <xsl:with-param name="loopPage" select="$page" tunnel="yes"/>
             </xsl:apply-templates>
@@ -182,7 +177,8 @@
                 <xsl:otherwise><xsl:apply-templates mode="#current"/></xsl:otherwise>
             </xsl:choose>            
         </xsl:copy>
-    </xsl:template>
+    </xsl:template>   
+    
     
     <xsl:template match="h:components[@componentType='Loop']" mode="clean-subsequence">
         <xsl:copy>
@@ -210,6 +206,16 @@
     </xsl:template>
     
     <!-- question pagination -->
+    
+    <xsl:template match="h:Questionnaire" mode="question">
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:attribute name="pagination" select="$pagination"/>
+            <xsl:attribute name="maxPage" select="count(descendant::h:components[not(ancestor::h:components[@componentType='Loop'])][@componentType!='FilterDescription'])"/>
+            <xsl:apply-templates mode="question"/>
+        </xsl:copy>
+    </xsl:template>
+    
     <xsl:template match="h:components[@componentType='Loop']" mode="question">
         <xsl:param name="loopPage" tunnel="yes"/>
         <xsl:variable name="container" select="ancestor::h:*[@componentType='Loop' or local-name(.)='Questionnaire'][1]"/>
@@ -226,11 +232,14 @@
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="isLinkedLoop" select="boolean(@iterations != '')"/>
-        <xsl:variable name="maxPage" select="if($isLinkedLoop) then count(descendant::h:components[@componentType!='FilterDescription']) else 0"/>
+        
         <xsl:copy>
             <xsl:copy-of select="@*"/>
-            <xsl:attribute name="page" select="$page"/>
-            <xsl:attribute name="maxPage" select="if($maxPage = 0) then $page else concat($page,'.',$maxPage)"/>
+            <xsl:attribute name="page" select="$page"/>            
+            <xsl:if test="$isLinkedLoop">                
+                <xsl:attribute name="maxPage" select="count(descendant::h:components[@componentType!='FilterDescription'])"/>
+            </xsl:if>
+            <xsl:attribute name="paginatedLoop" select="$isLinkedLoop"/>
             <xsl:apply-templates mode="#current">
                 <xsl:with-param name="container" select="." tunnel="yes"/>
                 <xsl:with-param name="loopPage" select="$page" tunnel="yes"/>

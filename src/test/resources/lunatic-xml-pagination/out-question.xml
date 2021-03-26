@@ -2264,7 +2264,7 @@
                   componentType="Loop"
                   id="kiq7bjam"
                   page="34"
-                  maxPage="34">
+                  paginatedLoop="false">
          <label>"Add a character"</label>
          <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
          <hierarchy>
@@ -2338,7 +2338,8 @@
                min="0"
                iterations="count(NAME_CHAR)"
                page="35"
-               maxPage="35.3">
+               maxPage="3"
+               paginatedLoop="true">
       <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
       <bindingDependencies>NAME_CHAR</bindingDependencies>
       <bindingDependencies>FAVCHAR</bindingDependencies>
