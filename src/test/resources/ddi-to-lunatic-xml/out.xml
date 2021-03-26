@@ -2342,6 +2342,7 @@
                <label>"VII - Other details about character named " || cast(cast(NAME_CHAR,string),string) || " "</label>
             </sequence>
          </hierarchy>
+         <bindingDependencies>NAME_CHAR</bindingDependencies>
          <components xsi:type="CheckboxOne"
                      componentType="CheckboxOne"
                      id="kiq65x3c"

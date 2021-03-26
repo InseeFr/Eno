@@ -38,7 +38,7 @@
 			<variables variableType="EXTERNAL" xsi:type="VariableType">
 				<name><xsl:value-of select="enolunatic:get-name($source-context)"/></name>
 				<value xsi:nil="true"/>
-			</variables>			
+			</variables>
 		</xsl:if>
 	</xsl:template>
 
@@ -147,7 +147,8 @@
 				<xsl:when test="self::SubModule"><xsl:value-of select="'Subsequence'"/></xsl:when>
 			</xsl:choose>
 		</xsl:variable>
-		<xsl:variable name="label" select="enolunatic:replace-all-variables-with-business-name($source-context,enolunatic:get-vtl-label($source-context,$languages[1]))"/>
+		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
+		<xsl:variable name="finalLabel" select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/>
 		<xsl:variable name="filterCondition" select="enolunatic:get-global-filter($source-context)"/>
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
 		<xsl:variable name="dependenciesVariables" as="xs:string*">
@@ -161,7 +162,7 @@
 			<xsl:choose>
 				<xsl:when test="self::Module">
 					<sequence id="{$id}">
-						<label><xsl:value-of select="$label"/></label>
+						<label><xsl:value-of select="$finalLabel"/></label>
 					</sequence>
 				</xsl:when>
 				<xsl:when test="self::SubModule"><xsl:copy-of select="$sequenceParent"/></xsl:when>
@@ -171,14 +172,14 @@
 			<xsl:choose>
 				<xsl:when test="self::SubModule">
 					<subSequence id="{$id}">
-						<label><xsl:value-of select="$label"/></label>
+						<label><xsl:value-of select="$finalLabel"/></label>
 					</subSequence>
 				</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
 
 		<components xsi:type="{$componentType-Sequence}" componentType="{$componentType-Sequence}" id="{$id}">
-			<label><xsl:value-of select="$label"/></label>
+			<label><xsl:value-of select="$finalLabel"/></label>
 			<xsl:copy-of select="enolunatic:getInstructionForQuestion($source-context,.)"/>
 			<conditionFilter><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$filterCondition)"/></conditionFilter>
 			<hierarchy>				
