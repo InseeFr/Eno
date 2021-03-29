@@ -1112,7 +1112,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="d:Loop" mode="enoddi:get-descendant-loop">
-        <xsl:copy-of select="descendant::d:loop"/>
+        <xsl:copy-of select="descendant::d:Loop"/>
     </xsl:template>
 
     <xd:doc>
@@ -1392,6 +1392,9 @@
             <xsl:when test="$target/d:QuestionGridName/r:String!=''">
                 <xsl:copy-of select="$target/d:QuestionGridName/r:String"/>
             </xsl:when>
+            <xsl:when test="$idTarget='idendquest'">
+                <xsl:copy-of select="'End of questionnaire'"/>
+            </xsl:when>
         </xsl:choose>
     </xsl:template>
     
@@ -1543,5 +1546,6 @@
         <xsl:sequence select="//l:VariableScheme//l:VariableGroup[r:BasedOnObject/r:BasedOnReference[1]/r:ID=current()/parent::d:QuestionGrid/r:ID]
             /r:VariableReference/l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]"/>
     </xsl:template>
+
 
 </xsl:stylesheet>

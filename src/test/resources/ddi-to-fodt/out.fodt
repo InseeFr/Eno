@@ -5,6 +5,7 @@
                  xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0"
                  xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"
                  xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
+                 xmlns:xhtml="http://www.w3.org/1999/xhtml"
                  office:version="1.2"
                  office:mimetype="application/vnd.oasis.opendocument.text">
    <office:font-face-decls>
@@ -27,6 +28,86 @@
                                      style:justify-single-word="false"/>
          <style:text-properties fo:font-size="22pt" fo:font-weight="bold"/>
       </style:style>
+      <style:style style:name="MultiModuleLoopStart"
+                   style:family="paragraph"
+                   style:default-outline-level="1"
+                   style:class="text">
+         <style:paragraph-properties fo:text-align="center"
+                                     fo:break-before="page"
+                                     fo:background-color="#c0c0c0"/>
+      </style:style>
+      <style:style style:name="MultiModuleLoopType"
+                   style:family="paragraph"
+                   style:default-outline-level="1"
+                   style:class="text">
+         <style:paragraph-properties fo:text-align="center"
+                                     fo:break-after="page"
+                                     fo:background-color="#c0c0c0"/>
+      </style:style>
+      <style:style style:name="MultiModuleLoopEnd"
+                   style:family="paragraph"
+                   style:default-outline-level="1"
+                   style:class="text">
+         <style:paragraph-properties fo:text-align="center"
+                                     fo:break-before="page"
+                                     fo:background-color="#c0c0c0"/>
+      </style:style>
+      <style:style style:name="OnlyModuleLoopStart"
+                   style:family="paragraph"
+                   style:default-outline-level="1"
+                   style:class="text">
+         <style:paragraph-properties fo:text-align="center"
+                                     fo:break-before="page"
+                                     fo:background-color="#c0c0c0"/>
+      </style:style>
+      <style:style style:name="OnlyModuleLoopType"
+                   style:family="paragraph"
+                   style:default-outline-level="1"
+                   style:class="text">
+         <style:paragraph-properties fo:text-align="center" fo:background-color="#c0c0c0"/>
+      </style:style>
+      <style:style style:name="OnlyModuleLoopEnd"
+                   style:family="paragraph"
+                   style:default-outline-level="1"
+                   style:class="text">
+         <style:paragraph-properties fo:text-align="center" fo:background-color="#c0c0c0"/>
+      </style:style>
+      <style:style style:name="InsideModuleLoopStart"
+                   style:family="paragraph"
+                   style:default-outline-level="1"
+                   style:class="text">
+         <style:paragraph-properties fo:text-align="center" fo:background-color="#c0c0c0"/>
+      </style:style>
+      <style:style style:name="InsideModuleLoopEnd"
+                   style:family="paragraph"
+                   style:default-outline-level="1"
+                   style:class="text">
+         <style:paragraph-properties fo:text-align="center" fo:background-color="#c0c0c0"/>
+      </style:style>
+      <style:style style:name="InsideModuleLoopType"
+                   style:family="paragraph"
+                   style:default-outline-level="1"
+                   style:class="text">
+         <style:paragraph-properties fo:text-align="center" fo:background-color="#c0c0c0"/>
+      </style:style>
+      <style:style style:name="LoopStandard"
+                   style:family="paragraph"
+                   style:default-outline-level="1"
+                   style:class="text">
+         <style:paragraph-properties fo:text-align="center" fo:background-color="#c0c0c0"/>
+      </style:style>
+      <style:style style:name="LoopType"
+                   style:family="paragraph"
+                   style:default-outline-level="1"
+                   style:class="text">
+         <style:paragraph-properties fo:text-align="center" fo:background-color="#c0c0c0"/>
+      </style:style>
+      <style:style style:name="LoopIdentifier" style:family="text">
+         <style:text-properties fo:font-size="12pt" fo:font-weight="bold"/>
+      </style:style>
+      <style:style style:name="LoopInfo" style:family="text">
+         <style:text-properties fo:text-align="left" fo:font-size="10pt" fo:color="#000000"/>
+      </style:style>
       <style:style style:name="Module"
                    style:family="paragraph"
                    style:default-outline-level="1"
@@ -34,12 +115,25 @@
          <style:paragraph-properties fo:text-align="center" fo:break-before="page"/>
          <style:text-properties fo:font-size="14pt" fo:font-weight="bold"/>
       </style:style>
+      <style:style style:name="FirstModuleInLoop"
+                   style:family="paragraph"
+                   style:default-outline-level="1"
+                   style:class="text">
+         <style:paragraph-properties fo:margin-top="0.6cm" fo:text-align="center"/>
+         <style:text-properties fo:font-size="14pt" fo:font-weight="bold"/>
+      </style:style>
+      <style:style style:name="ModuleName" style:family="text">
+         <style:text-properties fo:font-size="10pt"
+                                fo:font-style="italic"
+                                fo:font-weight="bold"
+                                fo:color="#a5106c"/>
+      </style:style>
       <style:style style:name="SubModule"
                    style:family="paragraph"
                    style:default-outline-level="2"
                    style:class="text">
          <style:paragraph-properties fo:margin-top="0.6cm" fo:text-align="left"/>
-         <style:text-properties fo:font-size="14pt" fo:font-weight="bold"/>
+         <style:text-properties fo:font-size="12pt" fo:font-weight="bold"/>
       </style:style>
       <style:style style:name="QuestionName"
                    style:family="paragraph"
@@ -58,6 +152,13 @@
          <style:paragraph-properties fo:margin-top="0.1cm" fo:text-align="left"/>
          <style:text-properties fo:font-size="10pt"/>
       </style:style>
+      <style:style style:name="Tooltip"
+                   style:family="paragraph"
+                   style:default-outline-level="2"
+                   style:class="text">
+         <style:paragraph-properties fo:margin-top="0.1cm" fo:text-align="left"/>
+         <style:text-properties fo:font-size="10pt" fo:color="#018442"/>
+      </style:style>
       <style:style style:name="Format"
                    style:family="paragraph"
                    style:default-outline-level="2"
@@ -66,6 +167,29 @@
       </style:style>
       <style:style style:name="NameOfVariable" style:family="text">
          <style:text-properties fo:color="#0000ff" fo:font-style="italic" fo:font-weight="bold"/>
+      </style:style>
+      <style:style style:name="Filter"
+                   style:family="paragraph"
+                   style:default-outline-level="1"
+                   style:class="text">
+         <style:paragraph-properties fo:text-align="center" fo:background-color="#c0c0c0"/>
+         <style:text-properties fo:font-weight="bold" fo:font-size="12pt"/>
+      </style:style>
+      <style:style style:name="ModuleFilter"
+                   style:family="paragraph"
+                   style:default-outline-level="1"
+                   style:class="text">
+         <style:paragraph-properties fo:text-align="center"
+                                     fo:background-color="#c0c0c0"
+                                     fo:break-before="page"/>
+         <style:text-properties fo:font-weight="bold" fo:font-size="12pt"/>
+      </style:style>
+      <style:style style:name="FilterInfo"
+                   style:family="paragraph"
+                   style:default-outline-level="1"
+                   style:class="text">
+         <style:paragraph-properties fo:text-align="left" fo:background-color="#c0c0c0"/>
+         <style:text-properties fo:font-size="10pt"/>
       </style:style>
       <style:style style:name="GotoBlock" style:family="paragraph" style:class="text">
          <style:text-properties fo:color="#0000ff" fo:font-weight="bold"/>
@@ -117,6 +241,13 @@
                    style:class="text">
          <style:paragraph-properties fo:text-align="left" fo:margin-left="1cm" fo:margin-top="0.1cm"/>
          <style:text-properties fo:font-size="10pt"/>
+      </style:style>
+      <style:style style:name="OpeningCalculatedVariableSection"
+                   style:family="paragraph"
+                   style:default-outline-level="2"
+                   style:class="text">
+         <style:paragraph-properties fo:text-align="center" fo:break-before="page" fo:margin-top="0.7cm"/>
+         <style:text-properties fo:font-size="12pt" fo:font-weight="bold"/>
       </style:style>
       <style:style style:name="CalculatedVariableTitle"
                    style:family="paragraph"
@@ -217,11 +348,13 @@
 						
 						Specification generated from Eno </text:p>
          <text:section text:name="Module-j6p0ti5h">
-            <text:p text:style-name="Module">I - Introduction</text:p>
+            <text:p text:style-name="Module">
+               <text:span text:style-name="ModuleName">[MODULE1] </text:span>I - Introduction</text:p>
             <text:p text:style-name="Comment">We're going to test your knowledge about the simpsons series.Welcome in the simspons world!</text:p>
             <text:section text:name="Question-j6p3dkx6">
                <text:p text:style-name="QuestionName">[COMMENT]</text:p>
-               <text:p text:style-name="Question">➡ 1. Before starting, do you have any comments about the Simpsons family?</text:p>
+               <text:p text:style-name="Question">➡ 1. Before starting, do you have any comments about the Simpsons</text:p>
+               <text:p text:style-name="Question"> family?</text:p>
                <text:p text:style-name="Format">
                   <text:span text:style-name="NameOfVariable">[COMMENT] - </text:span>Car 500</text:p>
             </text:section>
@@ -247,8 +380,13 @@
                   </text:p>
                </text:section>
             </text:section>
+            <text:section text:name="Filter-j6p6my1d-a-j6p0np9q-THEN">
+               <text:p text:style-name="Filter">🜄 Filtre</text:p>
+               <text:p text:style-name="FilterInfo">Condition du filtre : not(^READY!= '1') </text:p>
+            </text:section>
             <text:section text:name="SubModule-j6p0s7o5">
-               <text:p text:style-name="SubModule">General knowledge of the series</text:p>
+               <text:p text:style-name="SubModule">
+                  <text:span text:style-name="ModuleName">[MODULE11] </text:span>General knowledge of the series</text:p>
                <text:section text:name="Question-j3343qhx">
                   <text:p text:style-name="QuestionName">[PRODUCER]</text:p>
                   <text:p text:style-name="Question">➡ 3. Who is the producer?</text:p>
@@ -275,9 +413,18 @@
                      <text:span text:style-name="NameOfVariable">[AUDIENCE_SHARE] - </text:span>num 0..99 - 1 chiffre(s) après la virgule</text:p>
                </text:section>
             </text:section>
+            <text:section text:name="FilterEnd-j6p6my1d-a-j6p0np9q-THEN">
+               <text:p text:style-name="Filter">Fin du filtre</text:p>
+               <text:p text:style-name="FilterInfo">Condition du filtre : not(^READY!= '1') </text:p>
+            </text:section>
+         </text:section>
+         <text:section text:name="Filter-j6p6my1d-a-j6p0ti5h-THEN">
+            <text:p text:style-name="ModuleFilter">🜄 Filtre</text:p>
+            <text:p text:style-name="FilterInfo">Condition du filtre : not(^READY!= '1') </text:p>
          </text:section>
          <text:section text:name="Module-j3341528">
-            <text:p text:style-name="Module">II - Simpsons' city</text:p>
+            <text:p text:style-name="FirstModuleInLoop">
+               <text:span text:style-name="ModuleName">[MODULE2] </text:span>II - Simpsons' city</text:p>
             <text:p text:style-name="Comment">This module asks about your general knowledge of the Simpsons city</text:p>
             <text:section text:name="Question-j3343clt">
                <text:p text:style-name="QuestionName">[CITY]</text:p>
@@ -321,7 +468,8 @@
             </text:section>
          </text:section>
          <text:section text:name="Module-j6qe0h9q">
-            <text:p text:style-name="Module">III - Characters</text:p>
+            <text:p text:style-name="Module">
+               <text:span text:style-name="ModuleName">[MODULE3] </text:span>III - Characters</text:p>
             <text:section text:name="Table-j334akov">
                <text:p text:style-name="QuestionName">[PET]</text:p>
                <text:p text:style-name="Question">➡ 1. What are the pet names that the Simpsons family had?</text:p>
@@ -620,9 +768,11 @@
             </text:section>
          </text:section>
          <text:section text:name="Module-j4nw88h2">
-            <text:p text:style-name="Module">IV - General questions</text:p>
+            <text:p text:style-name="Module">
+               <text:span text:style-name="ModuleName">[MODULE4] </text:span>IV - General questions</text:p>
             <text:section text:name="SubModule-j6qe237q">
-               <text:p text:style-name="SubModule">Kwik-E-Mart</text:p>
+               <text:p text:style-name="SubModule">
+                  <text:span text:style-name="ModuleName">[MODULE41] </text:span>Kwik-E-Mart</text:p>
                <text:section text:name="Table-j4nwc63q">
                   <text:p text:style-name="QuestionName">[PERCENTAGE_EXPENSES]</text:p>
                   <text:p text:style-name="Question">➡ 1. Please, specify the percentage of Jay's expenses in the Kwik-E-Mart for each product?</text:p>
@@ -760,7 +910,8 @@
                </text:section>
             </text:section>
             <text:section text:name="SubModule-j6qejudb">
-               <text:p text:style-name="SubModule">Clowning</text:p>
+               <text:p text:style-name="SubModule">
+                  <text:span text:style-name="ModuleName">[MODULE42] </text:span>Clowning</text:p>
                <text:section text:name="Table-j4nw0rr6">
                   <text:p text:style-name="QuestionName">[CLOWNING]</text:p>
                   <text:p text:style-name="Question">➡ 2. Who did these clownings and tell us what you remember?</text:p>
@@ -879,7 +1030,8 @@
                </text:section>
             </text:section>
             <text:section text:name="SubModule-j6qeh91y">
-               <text:p text:style-name="SubModule">Transport</text:p>
+               <text:p text:style-name="SubModule">
+                  <text:span text:style-name="ModuleName">[MODULE43] </text:span>Transport</text:p>
                <text:section text:name="Table-j6p2lwuj">
                   <text:p text:style-name="QuestionName">[TRAVEL]</text:p>
                   <text:p text:style-name="Question">➡ 3. Which of the following means of transport were used by the hero and in which country?</text:p>
@@ -1104,7 +1256,8 @@
             </text:section>
          </text:section>
          <text:section text:name="Module-j6qfx9qe">
-            <text:p text:style-name="Module">V - Favourite characters</text:p>
+            <text:p text:style-name="Module">
+               <text:span text:style-name="ModuleName">[MODULE5] </text:span>V - Favourite characters</text:p>
             <text:section text:name="Table-j6qg8rc6">
                <text:p text:style-name="QuestionName">[FAVOURITE_CHARACTERS]</text:p>
                <text:p text:style-name="Question">➡ 1. Please, complete the following grid with your favourite characters</text:p>
@@ -1268,8 +1421,13 @@
                <text:p>Nb line(s) maximum allowed : 10</text:p>
             </text:section>
          </text:section>
+         <text:section text:name="FilterEnd-j6p6my1d-a-j6p0ti5h-THEN">
+            <text:p text:style-name="Filter">Fin du filtre</text:p>
+            <text:p text:style-name="FilterInfo">Condition du filtre : not(^READY!= '1') </text:p>
+         </text:section>
          <text:section text:name="Module-j6z12s2d">
-            <text:p text:style-name="Module">VI - Comment</text:p>
+            <text:p text:style-name="Module">
+               <text:span text:style-name="ModuleName">[MODULE6] </text:span>VI - Comment</text:p>
             <text:section text:name="Question-j6z0z3us">
                <text:p text:style-name="QuestionName">[SURVEY_COMMENT]</text:p>
                <text:p text:style-name="Question">➡ 1. Do you have any comment about the survey?</text:p>
@@ -1277,6 +1435,7 @@
                   <text:span text:style-name="NameOfVariable">[SURVEY_COMMENT] - </text:span>Car 255</text:p>
             </text:section>
          </text:section>
+         <text:p text:style-name="OpeningCalculatedVariableSection">Liste des variables calculées</text:p>
          <text:section text:name="CalculatedVariable-SUM_EXPENSES">
             <text:p text:style-name="CalculatedVariableTitle">Calcul de la variable SUM_EXPENSES Label : [SUM_EXPENSES]</text:p>
             <text:p text:style-name="CalculatedVariableContent">Formule de calcul : SUM_EXPENSES = ^PERCENTAGE_EXPENSES11 + ^PERCENTAGE_EXPENSES21 + ^PERCENTAGE_EXPENSES31+

@@ -136,7 +136,7 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 			}
 			else if(context.contains(FAKE_XPATH_EQUAL_TO_NULL) && !isBetweenRealDoubleQuote){
 				finalString+=c;
-				Pattern pattern = Pattern.compile("(cast\\((.)*,(\\w+)\\)) "+FAKE_XPATH_EQUAL_TO_NULL);
+				Pattern pattern = Pattern.compile("(cast\\((.)*,(\\s)*(\\w+)\\)) "+FAKE_XPATH_EQUAL_TO_NULL);
 				Matcher m = pattern.matcher(finalString);
 				if(m.find()) finalString = m.replaceAll(VTL_EQUAL_TO_NULL_FUNCTION+"($1)");
 				continue;

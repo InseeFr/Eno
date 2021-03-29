@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/InseeFr/Eno.svg?branch=master)](https://travis-ci.org/InseeFr/Eno)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/fr.insee.eno/eno-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/fr.insee.eno/eno-core)
 
-[Release description](https://github.com/InseeFr/Eno/tree/master/docs/releases.md)
+[Release description](https://github.com/InseeFr/Eno/tree/master/doc/releases.md)
 
 ## What is it ?
 
