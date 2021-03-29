@@ -152,7 +152,7 @@
         <xsl:param name="index" tunnel="yes"/>
         <xsl:choose>
             <xsl:when test="name() = 'Minimum'"><xsl:value-of select="concat(enopogues:get-id(parent::pogues:Loop), '-MIN-IP-', $index)"/></xsl:when>
-            <xsl:when test="name() = 'Maximum'"><xsl:value-of select="concat(enopogues:get-id(parent::pogues:Loop), '-MAX-IP-', $index)"/></xsl:when>
+            <xsl:when test="name() = 'Maximum'"><xsl:value-of select="concat(enopogues:get-id(parent::pogues:Loop), '-IP-', $index)"/></xsl:when>
             <xsl:when test="name() = 'Filter'"><xsl:value-of select="concat(enopogues:get-id(parent::pogues:Loop), '-ITE-IP-', $index)"/></xsl:when>
             <xsl:otherwise><xsl:value-of select="concat(enopogues:get-id(.), '-IP-', $index)"/></xsl:otherwise>
         </xsl:choose>
