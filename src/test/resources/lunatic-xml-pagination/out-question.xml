@@ -72,12 +72,26 @@
             </sequence>
          </hierarchy>
       </components>
-      <components xsi:type="Input"
-                  componentType="Input"
-                  id="j3343qhx"
-                  maxLength="30"
-                  mandatory="false"
-                  page="4">
+      <components xsi:type="Subsequence"
+                  componentType="Subsequence"
+                  id="j6p0s7o5"
+                  goToPage="4">
+         <label>"General knowledge of the series"</label>
+         <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
+         <hierarchy>
+            <sequence id="j6p0ti5h" page="1">
+               <label>"I - Introduction"</label>
+            </sequence>
+            <subSequence id="j6p0s7o5" page="4">
+               <label>"General knowledge of the series"</label>
+            </subSequence>
+         </hierarchy>
+         <components xsi:type="Input"
+                     componentType="Input"
+                     id="j3343qhx"
+                     maxLength="30"
+                     mandatory="false"
+                     page="4">
             <label>"➡ 3. Who is the producer?"</label>
             <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
             <hierarchy>
@@ -91,14 +105,14 @@
             <bindingDependencies>PRODUCER</bindingDependencies>
             <response name="PRODUCER"/>
          </components>
-      <components xsi:type="InputNumber"
-                  componentType="InputNumber"
-                  id="j6q9h8tj"
-                  mandatory="true"
-                  min="0"
-                  max="99"
-                  decimals="0"
-                  page="5">
+         <components xsi:type="InputNumber"
+                     componentType="InputNumber"
+                     id="j6q9h8tj"
+                     mandatory="true"
+                     min="0"
+                     max="99"
+                     decimals="0"
+                     page="5">
             <label>"➡ 4. What is the current season number?"</label>
             <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
             <hierarchy>
@@ -112,17 +126,17 @@
             <bindingDependencies>SEASON_NUMBER</bindingDependencies>
             <response name="SEASON_NUMBER"/>
          </components>
-      <components xsi:type="Datepicker"
-                  componentType="Datepicker"
-                  id="kiq71eoi"
-                  mandatory="false"
-                  min="1900-01-01"
-                  max="format-date(current-date(),'[Y0001]-[M01]-[D01]')"
-                  page="6">
+         <components xsi:type="Datepicker"
+                     componentType="Datepicker"
+                     id="kiq71eoi"
+                     mandatory="false"
+                     min="1900-01-01"
+                     max="format-date(current-date(),'[Y0001]-[M01]-[D01]')"
+                     page="6">
             <label>"➡ 5. When was the first episode of Simpsons? (format YYYY-MM-DD)"</label>
             <declarations declarationType="INSTRUCTION"
-                       id="kiq71eoi-kiq7dsy2"
-                       position="AFTER_QUESTION_TEXT">
+                          id="kiq71eoi-kiq7dsy2"
+                          position="AFTER_QUESTION_TEXT">
                <label>"Please answer with YYYY-MM-DD format"</label>
             </declarations>
             <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
@@ -138,16 +152,16 @@
             <dateFormat>YYYY-MM-DD</dateFormat>
             <response name="DATEFIRST"/>
          </components>
-      <components xsi:type="Datepicker"
-                  componentType="Datepicker"
-                  id="k5nvty2o"
-                  mandatory="false"
-                  min="1980-05"
-                  page="7">
+         <components xsi:type="Datepicker"
+                     componentType="Datepicker"
+                     id="k5nvty2o"
+                     mandatory="false"
+                     min="1980-05"
+                     page="7">
             <label>"➡ 6. When was the first episode of the Simpsons? (format YYYY-MM)"</label>
             <declarations declarationType="COMMENT"
-                       id="k5nvty2o-k5nvxld8"
-                       position="AFTER_QUESTION_TEXT">
+                          id="k5nvty2o-k5nvxld8"
+                          position="AFTER_QUESTION_TEXT">
                <label>"Please answer with YYYY-MM format"</label>
             </declarations>
             <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
@@ -163,17 +177,17 @@
             <dateFormat>YYYY-MM</dateFormat>
             <response name="DATEYYYYMM"/>
          </components>
-      <components xsi:type="Datepicker"
-                  componentType="Datepicker"
-                  id="k5nw1fir"
-                  mandatory="false"
-                  min="1900"
-                  max="year-from-date(current-date())"
-                  page="8">
+         <components xsi:type="Datepicker"
+                     componentType="Datepicker"
+                     id="k5nw1fir"
+                     mandatory="false"
+                     min="1900"
+                     max="year-from-date(current-date())"
+                     page="8">
             <label>"➡ 7. When was the first episode of the Simpsons? (format YYYY)"</label>
             <declarations declarationType="COMMENT"
-                       id="k5nw1fir-k5nvmx3n"
-                       position="AFTER_QUESTION_TEXT">
+                          id="k5nw1fir-k5nvmx3n"
+                          position="AFTER_QUESTION_TEXT">
                <label>"Please answer with YYYY format"</label>
             </declarations>
             <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
@@ -189,14 +203,14 @@
             <dateFormat>YYYY</dateFormat>
             <response name="DATEYYYY"/>
          </components>
-      <components xsi:type="InputNumber"
-                  componentType="InputNumber"
-                  id="k5nw0w05"
-                  mandatory="false"
-                  min="0.00"
-                  max="70.00"
-                  decimals="2"
-                  page="9">
+         <components xsi:type="InputNumber"
+                     componentType="InputNumber"
+                     id="k5nw0w05"
+                     mandatory="false"
+                     min="0.00"
+                     max="70.00"
+                     decimals="2"
+                     page="9">
             <label>"➡ 8. How long does an episode last?"</label>
             <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
             <hierarchy>
@@ -211,14 +225,14 @@
             <unit>heures</unit>
             <response name="DURATIONH"/>
          </components>
-      <components xsi:type="InputNumber"
-                  componentType="InputNumber"
-                  id="k5nvu98z"
-                  mandatory="false"
-                  min="0.0"
-                  max="366.0"
-                  decimals="1"
-                  page="10">
+         <components xsi:type="InputNumber"
+                     componentType="InputNumber"
+                     id="k5nvu98z"
+                     mandatory="false"
+                     min="0.0"
+                     max="366.0"
+                     decimals="1"
+                     page="10">
             <label>"➡ 9. How long does it take to write a new episode?"</label>
             <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
             <hierarchy>
@@ -233,14 +247,14 @@
             <unit>jours</unit>
             <response name="DURATIOND"/>
          </components>
-      <components xsi:type="InputNumber"
-                  componentType="InputNumber"
-                  id="k5nw8ei1"
-                  mandatory="false"
-                  min="0"
-                  max="12"
-                  decimals="0"
-                  page="11">
+         <components xsi:type="InputNumber"
+                     componentType="InputNumber"
+                     id="k5nw8ei1"
+                     mandatory="false"
+                     min="0"
+                     max="12"
+                     decimals="0"
+                     page="11">
             <label>"➡ 10. How long will it take you to watch all the existing episodes?"</label>
             <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
             <hierarchy>
@@ -255,14 +269,14 @@
             <unit>mois</unit>
             <response name="DURATIONM"/>
          </components>
-      <components xsi:type="InputNumber"
-                  componentType="InputNumber"
-                  id="k5nw9dk4"
-                  mandatory="false"
-                  min="0"
-                  max="100"
-                  decimals="0"
-                  page="12">
+         <components xsi:type="InputNumber"
+                     componentType="InputNumber"
+                     id="k5nw9dk4"
+                     mandatory="false"
+                     min="0"
+                     max="100"
+                     decimals="0"
+                     page="12">
             <label>"➡ 11. For how long have you known the Simpsons family?"</label>
             <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
             <hierarchy>
@@ -277,14 +291,14 @@
             <unit>années</unit>
             <response name="DURATIONY"/>
          </components>
-      <components xsi:type="InputNumber"
-                  componentType="InputNumber"
-                  id="j6z06z1e"
-                  mandatory="false"
-                  min="0.0"
-                  max="99.0"
-                  decimals="1"
-                  page="13">
+         <components xsi:type="InputNumber"
+                     componentType="InputNumber"
+                     id="j6z06z1e"
+                     mandatory="false"
+                     min="0.0"
+                     max="99.0"
+                     decimals="1"
+                     page="13">
             <label>"➡ 15. In your opinion, how much is the part of audience share in US for the 2016 season?"</label>
             <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
             <hierarchy>
@@ -299,6 +313,7 @@
             <unit>%</unit>
             <response name="AUDIENCE_SHARE"/>
          </components>
+      </components>
    </components>
    <components xsi:type="Sequence"
                componentType="Sequence"
@@ -866,12 +881,26 @@
             <label>"IV - General questions"</label>
          </sequence>
       </hierarchy>
-      <components xsi:type="Table"
-                  componentType="Table"
-                  id="j4nwc63q"
-                  positioning="HORIZONTAL"
-                  mandatory="false"
-                  page="24">
+      <components xsi:type="Subsequence"
+                  componentType="Subsequence"
+                  id="j6qe237q"
+                  goToPage="24">
+         <label>"Kwik-E-Mart"</label>
+         <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
+         <hierarchy>
+            <sequence id="j4nw88h2" page="23">
+               <label>"IV - General questions"</label>
+            </sequence>
+            <subSequence id="j6qe237q" page="24">
+               <label>"Kwik-E-Mart"</label>
+            </subSequence>
+         </hierarchy>
+         <components xsi:type="Table"
+                     componentType="Table"
+                     id="j4nwc63q"
+                     positioning="HORIZONTAL"
+                     mandatory="false"
+                     page="24">
             <label>"➡ 1. Please, specify the percentage of Jay’s expenses in the Kwik-E-Mart for each product?"</label>
             <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
             <hierarchy>
@@ -907,10 +936,10 @@
                   <label>"Ice creams"</label>
                </cells>
                <cells id="j4nwc63q-QOP-kewv2h3o"
-                   componentType="InputNumber"
-                   min="0.0"
-                   max="100.0"
-                   decimals="1">
+                      componentType="InputNumber"
+                      min="0.0"
+                      max="100.0"
+                      decimals="1">
                   <unit>%</unit>
                   <response name="PERCENTAGE_EXPENSES11"/>
                   <bindingDependencies>PERCENTAGE_EXPENSES11</bindingDependencies>
@@ -922,10 +951,10 @@
                   <label>"Jasper Beardly"</label>
                </cells>
                <cells id="j4nwc63q-QOP-kewvka2j"
-                   componentType="InputNumber"
-                   min="0.0"
-                   max="100.0"
-                   decimals="1">
+                      componentType="InputNumber"
+                      min="0.0"
+                      max="100.0"
+                      decimals="1">
                   <unit>%</unit>
                   <response name="PERCENTAGE_EXPENSES21"/>
                   <bindingDependencies>PERCENTAGE_EXPENSES21</bindingDependencies>
@@ -941,10 +970,10 @@
                   <label>"Bacon"</label>
                </cells>
                <cells id="j4nwc63q-QOP-kewv1f2a"
-                   componentType="InputNumber"
-                   min="0.0"
-                   max="100.0"
-                   decimals="1">
+                      componentType="InputNumber"
+                      min="0.0"
+                      max="100.0"
+                      decimals="1">
                   <unit>%</unit>
                   <response name="PERCENTAGE_EXPENSES31"/>
                   <bindingDependencies>PERCENTAGE_EXPENSES31</bindingDependencies>
@@ -956,10 +985,10 @@
                   <label>"Pork chop"</label>
                </cells>
                <cells id="j4nwc63q-QOP-kewvb2ql"
-                   componentType="InputNumber"
-                   min="0.0"
-                   max="100.0"
-                   decimals="1">
+                      componentType="InputNumber"
+                      min="0.0"
+                      max="100.0"
+                      decimals="1">
                   <unit>%</unit>
                   <response name="PERCENTAGE_EXPENSES41"/>
                   <bindingDependencies>PERCENTAGE_EXPENSES41</bindingDependencies>
@@ -971,10 +1000,10 @@
                   <label>"Chicken"</label>
                </cells>
                <cells id="j4nwc63q-QOP-kewvbxla"
-                   componentType="InputNumber"
-                   min="0.0"
-                   max="100.0"
-                   decimals="1">
+                      componentType="InputNumber"
+                      min="0.0"
+                      max="100.0"
+                      decimals="1">
                   <unit>%</unit>
                   <response name="PERCENTAGE_EXPENSES51"/>
                   <bindingDependencies>PERCENTAGE_EXPENSES51</bindingDependencies>
@@ -990,10 +1019,10 @@
                   <label>"Powersauce"</label>
                </cells>
                <cells id="j4nwc63q-QOP-kewvkjp0"
-                   componentType="InputNumber"
-                   min="0.0"
-                   max="100.0"
-                   decimals="1">
+                      componentType="InputNumber"
+                      min="0.0"
+                      max="100.0"
+                      decimals="1">
                   <unit>%</unit>
                   <response name="PERCENTAGE_EXPENSES61"/>
                   <bindingDependencies>PERCENTAGE_EXPENSES61</bindingDependencies>
@@ -1005,10 +1034,10 @@
                   <label>"Other"</label>
                </cells>
                <cells id="j4nwc63q-QOP-kewv2cyx"
-                   componentType="InputNumber"
-                   min="0.0"
-                   max="100.0"
-                   decimals="1">
+                      componentType="InputNumber"
+                      min="0.0"
+                      max="100.0"
+                      decimals="1">
                   <unit>%</unit>
                   <response name="PERCENTAGE_EXPENSES71"/>
                   <bindingDependencies>PERCENTAGE_EXPENSES71</bindingDependencies>
@@ -1022,12 +1051,12 @@
                <cells headerCell="false"/>
             </cells>
          </components>
-      <components xsi:type="Table"
-                  componentType="Table"
-                  id="k9cg2q5t"
-                  positioning="HORIZONTAL"
-                  mandatory="false"
-                  page="25">
+         <components xsi:type="Table"
+                     componentType="Table"
+                     id="k9cg2q5t"
+                     positioning="HORIZONTAL"
+                     mandatory="false"
+                     page="25">
             <label>"➡ 2. Please specify if Jay has bought each product in his last food shopping"</label>
             <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
             <hierarchy>
@@ -1243,12 +1272,27 @@
                </cells>
             </cells>
          </components>
-      <components xsi:type="Table"
-                  componentType="Table"
-                  id="kbkjvgel"
-                  positioning="HORIZONTAL"
-                  mandatory="false"
-                  page="26">
+      </components>
+      <components xsi:type="Subsequence"
+                  componentType="Subsequence"
+                  id="j6qejudb"
+                  goToPage="26">
+         <label>"Clowning"</label>
+         <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
+         <hierarchy>
+            <sequence id="j4nw88h2" page="23">
+               <label>"IV - General questions"</label>
+            </sequence>
+            <subSequence id="j6qejudb" page="26">
+               <label>"Clowning"</label>
+            </subSequence>
+         </hierarchy>
+         <components xsi:type="Table"
+                     componentType="Table"
+                     id="kbkjvgel"
+                     positioning="HORIZONTAL"
+                     mandatory="false"
+                     page="26">
             <label>"➡ 3. Who did these clownings and tell us what you remember?"</label>
             <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
             <hierarchy>
@@ -1399,16 +1443,31 @@
                </cells>
             </cells>
          </components>
-      <components xsi:type="Table"
-                  componentType="Table"
-                  id="j6p2lwuj"
-                  positioning="HORIZONTAL"
-                  mandatory="false"
-                  page="27">
+      </components>
+      <components xsi:type="Subsequence"
+                  componentType="Subsequence"
+                  id="j6qeh91y"
+                  goToPage="27">
+         <label>"Transport"</label>
+         <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
+         <hierarchy>
+            <sequence id="j4nw88h2" page="23">
+               <label>"IV - General questions"</label>
+            </sequence>
+            <subSequence id="j6qeh91y" page="27">
+               <label>"Transport"</label>
+            </subSequence>
+         </hierarchy>
+         <components xsi:type="Table"
+                     componentType="Table"
+                     id="j6p2lwuj"
+                     positioning="HORIZONTAL"
+                     mandatory="false"
+                     page="27">
             <label>"➡ 4. Which of the following means of transport were used by the hero and in which country?"</label>
             <declarations declarationType="INSTRUCTION"
-                       id="j6p2lwuj-d10"
-                       position="AFTER_QUESTION_TEXT">
+                          id="j6p2lwuj-d10"
+                          position="AFTER_QUESTION_TEXT">
                <label>"Several answers possible: check off all the relevant boxes"</label>
             </declarations>
             <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
@@ -1588,6 +1647,7 @@
                </cells>
             </cells>
          </components>
+      </components>
    </components>
    <components xsi:type="Sequence"
                componentType="Sequence"
@@ -2277,7 +2337,8 @@
          <components xsi:type="Subsequence"
                      componentType="Subsequence"
                      id="kiq5u8d5"
-                     page="34">
+                     page="34"
+                     goToPage="34">
             <label>"Description of each character"</label>
             <conditionFilter>if ((not(cast(READY,integer)  &lt;&gt;  1))) then "normal" else "hidden"</conditionFilter>
             <hierarchy>
