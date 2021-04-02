@@ -8,7 +8,6 @@ import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.postprocessing.lunaticxml.*;
 import fr.insee.eno.preprocessing.*;
 import fr.insee.eno.service.GenerationService;
-import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.xmlunit.diff.Diff;
