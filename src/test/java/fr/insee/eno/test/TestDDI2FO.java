@@ -1,26 +1,19 @@
 package fr.insee.eno.test;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.xmlunit.diff.Diff;
-
 import fr.insee.eno.generation.DDI2FOGenerator;
-import fr.insee.eno.postprocessing.fo.FOEditStructurePagesPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOInsertAccompanyingMailsPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOInsertCoverPagePostprocessor;
-import fr.insee.eno.postprocessing.fo.FOInsertEndQuestionPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOMailingPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOSpecificTreatmentPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOTableColumnPostprocessorFake;
 import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.service.GenerationService;
+import fr.insee.eno.postprocessing.fo.*;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
 import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
 import fr.insee.eno.preprocessing.Preprocessor;
+import fr.insee.eno.service.GenerationService;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.xmlunit.diff.Diff;
+
+import java.io.File;
+import java.io.IOException;
 
 public class TestDDI2FO {
 		
@@ -33,7 +26,6 @@ public class TestDDI2FO {
 		try {
 			String basePath = "src/test/resources/ddi-to-fo";
 			File in = new File(String.format("%s/in.xml", basePath));
-			Diff diff = null;
 
 			// Without plugins
 			Preprocessor[] preprocessors = {
@@ -53,7 +45,7 @@ public class TestDDI2FO {
 			GenerationService genService = new GenerationService(preprocessors, ddi2fo, postprocessors);
 			File outputFile = genService.generateQuestionnaire(in, "simpsons");
 			File expectedFile = new File(String.format("%s/out.fo", basePath));
-			diff = xmlDiff.getDiff(outputFile, expectedFile);
+			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 
 			// With plugins
 			// GenerationService genServiceWithPlugins = new
@@ -66,18 +58,18 @@ public class TestDDI2FO {
 			// diff =
 			// xmlDiff.getDiff(outputFileWithPlugins,expectedFileWithPlugins);
 
-			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());
+			Assertions.assertFalse(diff::hasDifferences, ()->getDiffMessage(diff, basePath));
 
 		} catch (IOException e) {
 			e.printStackTrace();
-			Assert.fail();
+			Assertions.fail();
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-			Assert.fail();
+			Assertions.fail();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-			Assert.fail();
+			Assertions.fail();
 		}
 	}
 
