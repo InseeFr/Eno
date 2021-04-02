@@ -3,8 +3,8 @@ package fr.insee.eno.params;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import fr.insee.eno.parameters.InFormat;
 import fr.insee.eno.parameters.OutFormat;
@@ -35,7 +35,7 @@ public class TestValidator {
 		ValidationMessage valid = validator.validatePreProcessings(pipeline);
 		
 		System.out.println(valid.getMessage());
-		Assert.assertFalse(valid.isValid());
+		Assertions.assertFalse(valid.isValid());
 		
 	}
 	
@@ -71,9 +71,9 @@ public class TestValidator {
 		
 		
 		System.out.println(valid.getMessage());
-		Assert.assertTrue(valid.isValid());
+		Assertions.assertTrue(valid.isValid());
 		//System.out.println(valid2.getMessage());
-		//Assert.assertFalse(valid2.isValid());
+		//Assertions.assertFalse(valid2.isValid());
 	}
 	
 	@Test
@@ -90,10 +90,10 @@ public class TestValidator {
 		System.out.println(valid3.getMessage());
 		//System.out.println(valid4.getMessage());
 		
-		Assert.assertTrue(valid0.isValid());
-		Assert.assertFalse(valid1.isValid());
-		Assert.assertTrue(valid2.isValid());
-		Assert.assertTrue(valid3.isValid());
-		//Assert.assertTrue(valid4.isValid());
+		Assertions.assertTrue(valid0.isValid());
+		Assertions.assertFalse(valid1.isValid());
+		Assertions.assertTrue(valid2.isValid());
+		Assertions.assertTrue(valid3.isValid());
+		//Assertions.assertTrue(valid4.isValid());
 	}
 }

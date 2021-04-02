@@ -19,7 +19,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import fr.insee.eno.generation.DDI2FOGenerator;
 import fr.insee.eno.postprocessing.Postprocessor;
