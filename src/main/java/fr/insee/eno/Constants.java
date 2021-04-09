@@ -171,6 +171,7 @@ public final class Constants {
 	public static final String TRANSFORMATIONS_SORT_COMPONENTS_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/sort-components.xsl";
 	public static final String TRANSFORMATIONS_EXTERNALIZE_VARIABLES_AND_DEPENDENCIES_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/externalize-variables-and-dependencies.xsl";
 	public static final String TRANSFORMATIONS_INSERT_GENERIC_QUESTIONS_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/insert-generic-questions.xsl";
+	public static final String TRANSFORMATIONS_PAGINATION_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/pagination.xsl";
 	
 	/********************* FR/Xform Post-processing ******************/
 	public static final String UTIL_XFORMS_BROWSING_XSL = POST_PROCESSING_FOLDER_XFORMS + "/browsing.xsl";
@@ -331,6 +332,7 @@ public final class Constants {
 	public static final String EXTERNALIZE_VARIABLES_LUNATIC_XML_EXTENSION = "-ext-variables.xml";
 	public static final String VTL_PARSER_LUNATIC_XML_EXTENSION = "-vtl-parsed.xml";
 	public static final String SPECIFIC_TREAT_LUNATIC_XML_EXTENSION = "-specific-form.xml";
+	public static final String PAGINATION_LUNATIC_XML_EXTENSION = "-sorted.xml";
 	public static final String FINAL_LUNATIC_XML_EXTENSION = "-lunatic.xml";
 
 	/******************** fr/xform extension ******************/
