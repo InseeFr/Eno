@@ -4,7 +4,6 @@
 	<groupId>fr.insee.eno</groupId>
 	<artifactId>eno-core</artifactId>
 	<version>2.2.4</version>
-
 	<packaging>jar</packaging>
 
 	<name>Eno – Questionnaire generator</name>
