@@ -1,5 +1,9 @@
 # Eno Releases 
 
+## 2.2.4 - 31/03/2021
+
+- **[ddi2fo][post-processing]** Updating fo accompanying mails cnrCOL and medCOL.
+
 ## 2.2.3 - 24/03/2021
 
 - **[poguesXML2ddi][core]** hotfix : The referenced variables must be framed by ¤ and not $.
