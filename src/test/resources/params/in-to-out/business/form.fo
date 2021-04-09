@@ -319,13 +319,7 @@
                         Madame la Directrice, Monsieur le Directeur,
                     </fo:block>
                <fo:block margin-top="5mm">
-                        Ma lettre de mise en demeure du ${BddDateEnvoiMiseEnDemeure} étant restée sans suite, je suis dans l’obligation aujourd’hui d’établir à votre encontre le constat suivant :
-                    </fo:block>
-               <fo:block margin-top="3mm">
-                        - de défaut de réponse à l'<fo:inline font-weight="bold">enquête statistique#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddFrequence}!='')) ${BddFrequence}#end ${BddLibelleLong} ${BddAnneeReference} </fo:inline>;
-                    </fo:block>
-               <fo:block>
-                        - et d’absence de justification à ce défaut de réponse.
+                        Ma lettre de mise en demeure du ${BddDateEnvoiMiseEnDemeure} étant restée sans suite, je suis dans l’obligation aujourd’hui d’établir à votre encontre le constat de défaut de réponse à l'<fo:inline font-weight="bold">enquête statistique#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddFrequence}!='')) ${BddFrequence}#end ${BddLibelleLong} ${BddAnneeReference}</fo:inline>.
                     </fo:block>
                <fo:block margin-top="3mm">
                         Si vous venez de procéder à la transmission de votre réponse, je vous prie de ne pas tenir compte de ce courrier.
@@ -335,13 +329,9 @@
                         soit de répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre soit de compléter le questionnaire joint,#end dans un délai de 15 jours. 
                         A l’expiration de ce délai, votre dossier sera soumis pour examen au <fo:inline font-weight="bold">Comité du contentieux</fo:inline> des enquêtes statistiques obligatoires 
                         du Conseil national de l’information statistique (Cnis), conformément à la loi*.
-                        Nous avons plus que jamais besoin de votre participation pour assurer la qualité des statistiques sur 2019. 
-                        Pour tenir compte de la crise sanitaire actuelle, l’Insee a redéfini ses priorités et adapté ses travaux. 
-                        Les délais de réponse à certaines enquêtes auprès des entreprises ont ainsi été allongés de plusieurs mois. 
-                        Nous sommes conscients des difficultés que la crise fait peser sur vous et de ses conséquences pendant les mois à venir. 
-                        Cependant, pour mieux évaluer son impact, il est particulièrement important de suivre l’activité économique en France. 
-                        Ceci permettra de disposer d’un point de référence solide pour calculer des évolutions correctes entre 2020 et 2019 dans chaque secteur, 
-                        et ainsi estimer précisément l’impact économique de la crise vécue aujourd’hui.
+                        Dans le contexte actuel, nous avons plus que jamais besoin de votre participation pour assurer la qualité des statistiques publiques. 
+                        Nous sommes conscients des difficultés que la crise fait peser sur les entreprises.  
+                        Cependant, pour mieux évaluer son impact et plus généralement suivre l’activité économique en France, l’Insee s’efforce de poursuivre la diffusion de ses principaux indicateurs.
                     </fo:block>
                <fo:block margin-top="3mm">
                         S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre. 
