@@ -3,16 +3,13 @@ package fr.insee.eno.test;
 import java.io.File;
 import java.io.IOException;
 
+import fr.insee.eno.postprocessing.lunaticxml.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.xmlunit.diff.Diff;
 
 import fr.insee.eno.generation.DDI2LunaticXMLGenerator;
 import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLExternalizeVariablesAndDependenciesPostprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLInsertGenericQuestionsPostprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLSortComponentsPostprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLVTLParserPostprocessor;
 import fr.insee.eno.service.GenerationService;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
@@ -38,7 +35,8 @@ public class TestDDI2LunaticXML {
 					new LunaticXMLSortComponentsPostprocessor(),
 					new LunaticXMLInsertGenericQuestionsPostprocessor(),
 					new LunaticXMLExternalizeVariablesAndDependenciesPostprocessor(),
-					new LunaticXMLVTLParserPostprocessor()};
+					new LunaticXMLVTLParserPostprocessor(),
+					new LunaticXMLPaginationPostprocessor(),};
 			GenerationService genService = new GenerationService(preprocessors, ddi2lunaticXML, postprocessors);
 			
 			File in = new File(String.format("%s/in.xml", basePath));

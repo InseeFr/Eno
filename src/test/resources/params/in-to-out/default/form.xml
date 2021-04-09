@@ -10,9 +10,14 @@
       <declarations declarationType="COMMENT"
                     id="j6p0ti5h-d1"
                     position="AFTER_QUESTION_TEXT">
-         <label>"We're going to test your knowledge about the simpsons series.Welcome in the simspons world!"</label>
+         <label>"We’re going to test your knowledge about the simpsons series.Welcome in the simspons world!"</label>
       </declarations>
       <conditionFilter>"normal"</conditionFilter>
+      <hierarchy>
+         <sequence id="j6p0ti5h">
+            <label>"I - Introduction"</label>
+         </sequence>
+      </hierarchy>
       <components xsi:type="Textarea"
                   componentType="Textarea"
                   id="j6p3dkx6"
@@ -20,6 +25,11 @@
                   mandatory="false">
          <label>"➡ 1. Before starting, do you have any comments about the Simpsons family?"</label>
          <conditionFilter>"normal"</conditionFilter>
+         <hierarchy>
+            <sequence id="j6p0ti5h">
+               <label>"I - Introduction"</label>
+            </sequence>
+         </hierarchy>
          <bindingDependencies>COMMENT</bindingDependencies>
          <response name="COMMENT"/>
       </components>
@@ -29,6 +39,11 @@
                   mandatory="false">
          <label>"➡ 2. Are you ready?"</label>
          <conditionFilter>"normal"</conditionFilter>
+         <hierarchy>
+            <sequence id="j6p0ti5h">
+               <label>"I - Introduction"</label>
+            </sequence>
+         </hierarchy>
          <bindingDependencies>READY</bindingDependencies>
          <response name="READY"/>
       </components>
@@ -38,10 +53,23 @@
                   filterDescription="true">
          <label>"If you are not ready, please go to the end of the questionnaire"</label>
          <conditionFilter>"normal"</conditionFilter>
+         <hierarchy>
+            <sequence id="j6p0ti5h">
+               <label>"I - Introduction"</label>
+            </sequence>
+         </hierarchy>
       </components>
       <components xsi:type="Subsequence" componentType="Subsequence" id="j6p0s7o5">
          <label>"General knowledge of the series"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <hierarchy>
+            <sequence id="j6p0ti5h">
+               <label>"I - Introduction"</label>
+            </sequence>
+            <subSequence id="j6p0s7o5">
+               <label>"General knowledge of the series"</label>
+            </subSequence>
+         </hierarchy>
          <components xsi:type="Input"
                      componentType="Input"
                      id="j3343qhx"
@@ -49,6 +77,14 @@
                      mandatory="false">
             <label>"➡ 3. Who is the producer?"</label>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+            <hierarchy>
+               <sequence id="j6p0ti5h">
+                  <label>"I - Introduction"</label>
+               </sequence>
+               <subSequence id="j6p0s7o5">
+                  <label>"General knowledge of the series"</label>
+               </subSequence>
+            </hierarchy>
             <bindingDependencies>PRODUCER</bindingDependencies>
             <response name="PRODUCER"/>
          </components>
@@ -61,6 +97,14 @@
                      decimals="0">
             <label>"➡ 4. What is the current season number?"</label>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+            <hierarchy>
+               <sequence id="j6p0ti5h">
+                  <label>"I - Introduction"</label>
+               </sequence>
+               <subSequence id="j6p0s7o5">
+                  <label>"General knowledge of the series"</label>
+               </subSequence>
+            </hierarchy>
             <bindingDependencies>SEASON_NUMBER</bindingDependencies>
             <response name="SEASON_NUMBER"/>
          </components>
@@ -77,6 +121,14 @@
                <label>"For your information, the date of the last broadcast was on " || cast(cast(LAST_BROADCAST,string),string) || " "</label>
             </declarations>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+            <hierarchy>
+               <sequence id="j6p0ti5h">
+                  <label>"I - Introduction"</label>
+               </sequence>
+               <subSequence id="j6p0s7o5">
+                  <label>"General knowledge of the series"</label>
+               </subSequence>
+            </hierarchy>
             <bindingDependencies>LAST_BROADCAST</bindingDependencies>
             <bindingDependencies>DATEFIRST</bindingDependencies>
             <dateFormat>YYYY-MM-DD</dateFormat>
@@ -91,19 +143,32 @@
                      decimals="1">
             <label>"➡ 6. In your opinion, how much is the part of audience share in US for the 2016 season?"</label>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+            <hierarchy>
+               <sequence id="j6p0ti5h">
+                  <label>"I - Introduction"</label>
+               </sequence>
+               <subSequence id="j6p0s7o5">
+                  <label>"General knowledge of the series"</label>
+               </subSequence>
+            </hierarchy>
             <bindingDependencies>AUDIENCE_SHARE</bindingDependencies>
             <response name="AUDIENCE_SHARE"/>
          </components>
       </components>
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="j3341528">
-      <label>"II - Simpsons' city"</label>
+      <label>"II - Simpsons’ city"</label>
       <declarations declarationType="COMMENT"
                     id="j3341528-d2"
                     position="AFTER_QUESTION_TEXT">
          <label>"This module asks about your general knowledge of the Simpsons city"</label>
       </declarations>
       <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+      <hierarchy>
+         <sequence id="j3341528">
+            <label>"II - Simpsons’ city"</label>
+         </sequence>
+      </hierarchy>
       <components xsi:type="Radio"
                   componentType="Radio"
                   id="j3343clt"
@@ -115,6 +180,11 @@
             <label>"One possible answer"</label>
          </declarations>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <hierarchy>
+            <sequence id="j3341528">
+               <label>"II - Simpsons’ city"</label>
+            </sequence>
+         </hierarchy>
          <bindingDependencies>CITY</bindingDependencies>
          <options>
             <value>00001</value>
@@ -141,6 +211,11 @@
             <label>"Only one possible answer"</label>
          </declarations>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <hierarchy>
+            <sequence id="j3341528">
+               <label>"II - Simpsons’ city"</label>
+            </sequence>
+         </hierarchy>
          <bindingDependencies>MAYOR</bindingDependencies>
          <options>
             <value>1</value>
@@ -166,6 +241,11 @@
                   mandatory="false">
          <label>"➡ 3. In which state do The Simpsons reside?"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <hierarchy>
+            <sequence id="j3341528">
+               <label>"II - Simpsons’ city"</label>
+            </sequence>
+         </hierarchy>
          <bindingDependencies>STATE</bindingDependencies>
          <options>
             <value>1</value>
@@ -225,6 +305,11 @@
    <components xsi:type="Sequence" componentType="Sequence" id="j6qe0h9q">
       <label>"III - Characters"</label>
       <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+      <hierarchy>
+         <sequence id="j6qe0h9q">
+            <label>"III - Characters"</label>
+         </sequence>
+      </hierarchy>
       <components xsi:type="CheckboxGroup"
                   componentType="CheckboxGroup"
                   id="j334akov">
@@ -235,12 +320,17 @@
             <label>"Several possible answers"</label>
          </declarations>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <hierarchy>
+            <sequence id="j6qe0h9q">
+               <label>"III - Characters"</label>
+            </sequence>
+         </hierarchy>
          <bindingDependencies>PET1</bindingDependencies>
          <bindingDependencies>PET2</bindingDependencies>
          <bindingDependencies>PET3</bindingDependencies>
          <bindingDependencies>PET4</bindingDependencies>
          <responses id="j334akov-QOP-jbgd8qmn">
-            <label>"Santa's Little Helper"</label>
+            <label>"Santa’s Little Helper"</label>
             <response name="PET1"/>
          </responses>
          <responses id="j334akov-QOP-jbgd60vl">
@@ -268,6 +358,11 @@
             <label>"Now we are going to know if you think that Jay is a gluton."</label>
          </declarations>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <hierarchy>
+            <sequence id="j6qe0h9q">
+               <label>"III - Characters"</label>
+            </sequence>
+         </hierarchy>
          <bindingDependencies>ICE_FLAVOUR1</bindingDependencies>
          <bindingDependencies>ICE_FLAVOUR2</bindingDependencies>
          <bindingDependencies>ICE_FLAVOUR3</bindingDependencies>
@@ -352,6 +447,11 @@
                   mandatory="false">
          <label>"➡ 3. Which character works in the nuclear power plant?"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <hierarchy>
+            <sequence id="j6qe0h9q">
+               <label>"III - Characters"</label>
+            </sequence>
+         </hierarchy>
          <bindingDependencies>NUCLEAR_CHARACTER1</bindingDependencies>
          <bindingDependencies>NUCLEAR_CHARACTER2</bindingDependencies>
          <bindingDependencies>NUCLEAR_CHARACTER3</bindingDependencies>
@@ -436,6 +536,11 @@
                   mandatory="false">
          <label>"➡ 4. In which city each character was born?"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <hierarchy>
+            <sequence id="j6qe0h9q">
+               <label>"III - Characters"</label>
+            </sequence>
+         </hierarchy>
          <bindingDependencies>BIRTH_CHARACTER1</bindingDependencies>
          <bindingDependencies>BIRTH_CHARACTER2</bindingDependencies>
          <bindingDependencies>BIRTH_CHARACTER3</bindingDependencies>
@@ -596,16 +701,37 @@
    <components xsi:type="Sequence" componentType="Sequence" id="j4nw88h2">
       <label>"IV - General questions"</label>
       <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+      <hierarchy>
+         <sequence id="j4nw88h2">
+            <label>"IV - General questions"</label>
+         </sequence>
+      </hierarchy>
       <components xsi:type="Subsequence" componentType="Subsequence" id="j6qe237q">
          <label>"Kwik-E-Mart"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <hierarchy>
+            <sequence id="j4nw88h2">
+               <label>"IV - General questions"</label>
+            </sequence>
+            <subSequence id="j6qe237q">
+               <label>"Kwik-E-Mart"</label>
+            </subSequence>
+         </hierarchy>
          <components xsi:type="Table"
                      componentType="Table"
                      id="j4nwc63q"
                      positioning="HORIZONTAL"
                      mandatory="false">
-            <label>"➡ 1. Please, specify the percentage of Jay's expenses in the Kwik-E-Mart for each product?"</label>
+            <label>"➡ 1. Please, specify the percentage of Jay’s expenses in the Kwik-E-Mart for each product?"</label>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+            <hierarchy>
+               <sequence id="j4nw88h2">
+                  <label>"IV - General questions"</label>
+               </sequence>
+               <subSequence id="j6qe237q">
+                  <label>"Kwik-E-Mart"</label>
+               </subSequence>
+            </hierarchy>
             <bindingDependencies>PERCENTAGE_EXPENSES11</bindingDependencies>
             <bindingDependencies>PERCENTAGE_EXPENSES21</bindingDependencies>
             <bindingDependencies>PERCENTAGE_EXPENSES31</bindingDependencies>
@@ -743,6 +869,14 @@
       <components xsi:type="Subsequence" componentType="Subsequence" id="j6qejudb">
          <label>"Clowning"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <hierarchy>
+            <sequence id="j4nw88h2">
+               <label>"IV - General questions"</label>
+            </sequence>
+            <subSequence id="j6qejudb">
+               <label>"Clowning"</label>
+            </subSequence>
+         </hierarchy>
          <components xsi:type="Table"
                      componentType="Table"
                      id="j4nw0rr6"
@@ -750,6 +884,14 @@
                      mandatory="false">
             <label>"➡ 2. Who did these clownings and tell us what you remember?"</label>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+            <hierarchy>
+               <sequence id="j4nw88h2">
+                  <label>"IV - General questions"</label>
+               </sequence>
+               <subSequence id="j6qejudb">
+                  <label>"Clowning"</label>
+               </subSequence>
+            </hierarchy>
             <bindingDependencies>CLOWNING11</bindingDependencies>
             <bindingDependencies>CLOWNING12</bindingDependencies>
             <bindingDependencies>CLOWNING21</bindingDependencies>
@@ -894,6 +1036,14 @@
       <components xsi:type="Subsequence" componentType="Subsequence" id="j6qeh91y">
          <label>"Transport"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <hierarchy>
+            <sequence id="j4nw88h2">
+               <label>"IV - General questions"</label>
+            </sequence>
+            <subSequence id="j6qeh91y">
+               <label>"Transport"</label>
+            </subSequence>
+         </hierarchy>
          <components xsi:type="Table"
                      componentType="Table"
                      id="j6p2lwuj"
@@ -906,6 +1056,14 @@
                <label>"Several answers possible: check off all the relevant boxes"</label>
             </declarations>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+            <hierarchy>
+               <sequence id="j4nw88h2">
+                  <label>"IV - General questions"</label>
+               </sequence>
+               <subSequence id="j6qeh91y">
+                  <label>"Transport"</label>
+               </subSequence>
+            </hierarchy>
             <bindingDependencies>TRAVEL11</bindingDependencies>
             <bindingDependencies>TRAVEL12</bindingDependencies>
             <bindingDependencies>TRAVEL13</bindingDependencies>
@@ -1079,6 +1237,11 @@
    <components xsi:type="Sequence" componentType="Sequence" id="j6qfx9qe">
       <label>"V - Favourite characters"</label>
       <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+      <hierarchy>
+         <sequence id="j6qfx9qe">
+            <label>"V - Favourite characters"</label>
+         </sequence>
+      </hierarchy>
       <components xsi:type="Table"
                   componentType="Table"
                   id="j6qg8rc6"
@@ -1086,6 +1249,11 @@
                   mandatory="false">
          <label>"➡ 1. Please, complete the following grid with your favourite characters"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <hierarchy>
+            <sequence id="j6qfx9qe">
+               <label>"V - Favourite characters"</label>
+            </sequence>
+         </hierarchy>
          <bindingDependencies>FAVOURITE_CHARACTERS11</bindingDependencies>
          <bindingDependencies>FAVOURITE_CHARACTERS12</bindingDependencies>
          <bindingDependencies>FAVOURITE_CHARACTERS21</bindingDependencies>
@@ -1260,6 +1428,11 @@
    <components xsi:type="Sequence" componentType="Sequence" id="j6z12s2d">
       <label>"VI - Comment"</label>
       <conditionFilter>"normal"</conditionFilter>
+      <hierarchy>
+         <sequence id="j6z12s2d">
+            <label>"VI - Comment"</label>
+         </sequence>
+      </hierarchy>
       <components xsi:type="Textarea"
                   componentType="Textarea"
                   id="j6z0z3us"
@@ -1267,6 +1440,11 @@
                   mandatory="false">
          <label>"➡ 1. Do you have any comment about the survey?"</label>
          <conditionFilter>"normal"</conditionFilter>
+         <hierarchy>
+            <sequence id="j6z12s2d">
+               <label>"VI - Comment"</label>
+            </sequence>
+         </hierarchy>
          <bindingDependencies>SURVEY_COMMENT</bindingDependencies>
          <response name="SURVEY_COMMENT"/>
       </components>
@@ -1274,6 +1452,11 @@
    <components xsi:type="Sequence" componentType="Sequence" id="COMMENT-SEQ">
       <label>"Commentaire"</label>
       <conditionFilter>"normal"</conditionFilter>
+      <hierarchy>
+            <sequence id="COMMENT-SEQ">
+                <label>"Commentaire"</label>
+            </sequence>
+        </hierarchy>
       <components xsi:type="Textarea"
                   componentType="Textarea"
                   id="COMMENT-QUESTION"
@@ -1281,6 +1464,11 @@
                   mandatory="false">
          <label>"Commentaires et remarques éventuelles concernant l’enquête :"</label>
          <conditionFilter>"normal"</conditionFilter>
+         <hierarchy>
+                <sequence id="COMMENT-SEQ">
+                    <label>"Commentaire"</label>
+                </sequence>
+            </hierarchy>
          <bindingsDependencies>COMMENT_QE</bindingsDependencies>
          <response name="COMMENT_QE"/>
       </components>
