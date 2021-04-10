@@ -39,11 +39,12 @@
             <xsl:apply-templates select="h:label"/>
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
+            <xsl:apply-templates select="h:hierarchy"/>
             <xsl:variable name="dependencies" select="distinct-values(descendant::h:bindingDependencies)" as="xs:string*"/>            
             <xsl:for-each select="$dependencies">                
                 <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
             </xsl:for-each>
-            <xsl:apply-templates select="*[not(self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter or self::h:bindingDependencies)]"/>            
+            <xsl:apply-templates select="*[not(self::h:hierarchy or self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter or self::h:bindingDependencies)]"/>            
         </components>
     </xsl:template>
     

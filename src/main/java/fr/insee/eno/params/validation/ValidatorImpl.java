@@ -53,6 +53,7 @@ public class ValidatorImpl implements Validator {
 				break;
 			case XFORMS:
 				isValid = outFormat.equals(OutFormat.XFORMS);
+				break;
 			default:
 				isValid=false;
 				break;
