@@ -1,4 +1,4 @@
-# Eno Releases 
+# Eno Releases note
 
 ## 2.2.5 - 12/04/2021
 
