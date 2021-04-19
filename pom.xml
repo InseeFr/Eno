@@ -55,7 +55,7 @@
 		<eclipse.version>2.6.0</eclipse.version>
 		<jaxb-api.version>2.3.1</jaxb-api.version>
 
-		<apache-commons.version>3.5</apache-commons.version>
+		<apache-commons.version>3.12.0</apache-commons.version>
 		<junit.version>5.7.1</junit.version>
 		<xmlunit.version>2.3.0</xmlunit.version>
 		<log4j-slf4j.version>2.11.0</log4j-slf4j.version>
