@@ -107,7 +107,8 @@
     
     <xd:doc>
         <xd:desc>The list of Gotos directly from the source file</xd:desc>
-        <xd:desc>Goto's targets that are first child are replace by their parent (or first ancestor that has a preeding-sibling</xd:desc>
+        <xd:desc>Goto's targets that are first child are replaced by their parent (or first ancestor that has a preeding-sibling)</xd:desc>
+        <xd:desc>Rationale : consider the case of a Goto pointing to the first question (of the first module) in a loop, the target is changed to the loop</xd:desc>
     </xd:doc>
     <xsl:variable name="list_goto" as="node()">
         <poguesGoto:GotoList>
@@ -134,7 +135,7 @@
 
     <xd:doc>
         <xd:desc>list of the gotos :
-            - without the Gotos goning backward (it would be loops)
+            - without the Gotos going backward (it would be loops)
             - with distinct From and To : the first one takes the conditions of its following-siblings
             So 2 Gotos going forward with the same From and the same To become 1 with 'or' between the 2 Expressions
             If 2 Gotos have the same From, To and Expression, the 2nd one is removed
@@ -196,7 +197,7 @@
             They become 2 Gotos and a gotoLap :
             Goto1 : Expression : not(condition1) ; From : 1 ; To : 6
             Goto2 : Expression : not(condition2) ; From : 2 ; To : 6 (the same as the previous Goto)
-            GoTo2 has no effect if and only if : its condition is false OR its From question is filtered (due to a filter or another GoTo, which question may filtered by... etc. resursively)
+            GoTo2 has no effect if and only if : its condition is false OR its From question is filtered (due to a filter or another GoTo, which question may be filtered by... etc. resursively)
             gotoLap : Expression : (not(condition2) or not(not(condition1))) ; lap From : 6 ; To : 9
         </xd:desc>
         <xd:desc>
