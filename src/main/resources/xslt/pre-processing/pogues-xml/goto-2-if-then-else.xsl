@@ -440,7 +440,7 @@
             <xsl:variable name="loop-id" select="@id"/>
             <xsl:variable name="loop-name" select="pogues:Name"/>
             <xsl:variable name="loop-first-final-descendant-position" select="min($child-tree//poguesGoto:idElement[@id=$loop-id]//poguesGoto:idElement[not(descendant::poguesGoto:idElement)][1]/number(@position))"/>
-            <xsl:variable name="after-loop-position-text" select="$child-position-list//poguesGoto:idElement[@id=$loop-id]/following::poguesGoto:idElement[not(descendant::poguesGoto:idElement)][1]/@position"/>
+            <xsl:variable name="after-loop-position-text" select="$child-tree//poguesGoto:idElement[@id=$loop-id]/following::poguesGoto:idElement[not(descendant::poguesGoto:idElement)][1]/@position"/>
             <xsl:variable name="after-loop-position" select="if ($after-loop-position-text = '') then number($last) else number($after-loop-position-text)"/>
             <xsl:variable name="after-loop-first-final-descendant-position" select="if ($after-loop-position-text = '') then number($last)
                 else $child-position-list//poguesGoto:idElement[@position=$after-loop-position-text]/descendant-or-self::poguesGoto:idElement[not(descendant::poguesGoto:idElement)][1]/number(@position)"/>
