@@ -2,6 +2,7 @@ package fr.insee.eno.postprocessing;
 
 import java.io.File;
 
+import fr.insee.eno.parameters.PostProcessing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +18,11 @@ public class NoopPostprocessor implements Postprocessor {
 		logger.info("No-op postprocessor, simply returning generated file.");
 		// Identity
 		return input;
+	}
+
+	@Override
+	public String toString() {
+		return "No-op postprocessor";
 	}
 
 }

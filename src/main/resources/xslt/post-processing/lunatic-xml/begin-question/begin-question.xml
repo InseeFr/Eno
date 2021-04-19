@@ -5,10 +5,22 @@
     <components xsi:type="Sequence" componentType="Sequence" id="BEGIN-QUESTION-SEQ">
         <label>"Identification"</label>      
         <conditionFilter>"normal"</conditionFilter>
-        <bindingsDependency>false</bindingsDependency>
+        <hierarchy>
+            <sequence id="BEGIN-QUESTION-SEQ">
+                <label>"Identification"</label>
+            </sequence>
+        </hierarchy> 
         <components xsi:type="Subsequence" componentType="Subsequence" id="BEGIN-QUESTION-SUBSEQ">
             <label>"Identification de votre " || cast(LABEL_UNITE_ENQUETEE,string)</label>
             <conditionFilter>"normal"</conditionFilter>
+            <hierarchy>
+                <sequence id="BEGIN-QUESTION-SEQ">
+                    <label>"Identification"</label>
+                </sequence>
+                <subSequence id="BEGIN-QUESTION-SUBSEQ">
+                    <label>"Identification de votre " || cast(LABEL_UNITE_ENQUETEE,string)</label>
+                </subSequence>
+            </hierarchy> 
             <bindingsDependencies>LABEL_UNITE_ENQUETEE</bindingsDependencies>
             <components xsi:type="Textarea"
                 componentType="Textarea"
@@ -17,6 +29,14 @@
                 mandatory="false">
                 <label>"Remarque, commentaire sur un changement concernant votre " || cast(LABEL_UNITE_ENQUETEE,string) || " :"</label>
                 <conditionFilter>"normal"</conditionFilter>
+                <hierarchy>
+                    <sequence id="BEGIN-QUESTION-SEQ">
+                        <label>"Identification"</label>
+                    </sequence>
+                    <subSequence id="BEGIN-QUESTION-SUBSEQ">
+                        <label>"Identification de votre " || cast(LABEL_UNITE_ENQUETEE,string)</label>
+                    </subSequence>
+                </hierarchy> 
                 <bindingsDependencies>LABEL_UNITE_ENQUETEE</bindingsDependencies>
                 <bindingDependencies>COMMENT_UE</bindingDependencies>
                 <response name="COMMENT_UE"/>
