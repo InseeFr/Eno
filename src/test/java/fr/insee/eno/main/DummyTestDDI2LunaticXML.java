@@ -1,20 +1,16 @@
 package fr.insee.eno.main;
 
-import java.io.File;
-
-import org.junit.Test;
-
 import fr.insee.eno.generation.DDI2LunaticXMLGenerator;
 import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLExternalizeVariablesAndDependenciesPostprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLInsertGenericQuestionsPostprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLSortComponentsPostprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLVTLParserPostprocessor;
-import fr.insee.eno.service.GenerationService;
+import fr.insee.eno.postprocessing.lunaticxml.*;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
 import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
 import fr.insee.eno.preprocessing.Preprocessor;
+import fr.insee.eno.service.GenerationService;
+import org.junit.jupiter.api.Test;
+
+import java.io.File;
 
 public class DummyTestDDI2LunaticXML {
 	
@@ -34,7 +30,9 @@ public class DummyTestDDI2LunaticXML {
 				new LunaticXMLSortComponentsPostprocessor(),
 				new LunaticXMLInsertGenericQuestionsPostprocessor(),
 				new LunaticXMLExternalizeVariablesAndDependenciesPostprocessor(),
-				new LunaticXMLVTLParserPostprocessor()};
+				new LunaticXMLVTLParserPostprocessor(),
+				new LunaticXMLVTLParserPostprocessor(),
+				new LunaticXMLPaginationPostprocessor(),};
 		
 		GenerationService genServiceDDI2JS = new GenerationService(preprocessors, ddi2lunaticXmlGenerator,postprocessors);
 		File in = new File(String.format("%s/in.xml", basePathDDI2JS));

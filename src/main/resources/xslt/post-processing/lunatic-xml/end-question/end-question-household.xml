@@ -5,6 +5,11 @@
     <components xsi:type="Sequence" componentType="Sequence" id="TIME-COMMENT-SEQ">
         <label>"Temps de réponse et commentaires"</label>
         <conditionFilter>"normal"</conditionFilter>
+        <hierarchy>
+            <sequence id="TIME-COMMENT-SEQ">
+                <label>"Temps de réponse et commentaires"</label>
+            </sequence>
+        </hierarchy>
         <components xsi:type="InputNumber"
                     componentType="InputNumber"
                     id="TIME-QUESTION-HEURE-REMPL"
@@ -15,6 +20,11 @@
             <label>"Combien de temps avez-vous mis en tout pour répondre à cette enquête (recherche des données + remplissage du questionnaire) ?"</label>
             <unit>heures</unit>
             <conditionFilter>"normal"</conditionFilter>
+            <hierarchy>
+                <sequence id="TIME-COMMENT-SEQ">
+                    <label>"Temps de réponse et commentaires"</label>
+                </sequence>
+            </hierarchy>
             <bindingsDependencies>HEURE_REMPL</bindingsDependencies>
             <response name="HEURE_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
@@ -39,6 +49,11 @@
             <label></label>
             <unit>minutes</unit>
             <conditionFilter>"normal"</conditionFilter>
+            <hierarchy>
+                <sequence id="TIME-COMMENT-SEQ">
+                    <label>"Temps de réponse et commentaires"</label>
+                </sequence>
+            </hierarchy>
             <bindingsDependencies>MIN_REMPL</bindingsDependencies>
             <response name="MIN_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
@@ -60,6 +75,11 @@
                     mandatory="false">
             <label>"Avez-vous des remarques concernant l'enquête ou des commentaires ?"</label>
             <conditionFilter>"normal"</conditionFilter>
+            <hierarchy>
+                <sequence id="TIME-COMMENT-SEQ">
+                    <label>"Temps de réponse et commentaires"</label>
+                </sequence>
+            </hierarchy>
             <bindingsDependencies>COMMENT_QE</bindingsDependencies>
             <response name="COMMENT_QE"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
@@ -79,6 +99,11 @@
     <components xsi:type="Sequence" componentType="Sequence" id="COMMENT-SEQ">
         <label>"Commentaire"</label>
         <conditionFilter>"normal"</conditionFilter>
+        <hierarchy>
+            <sequence id="COMMENT-SEQ">
+                <label>"Commentaire"</label>
+            </sequence>
+        </hierarchy>
         <components xsi:type="Textarea"
                     componentType="Textarea"
                     id="COMMENT-QUESTION"
@@ -86,6 +111,11 @@
                     mandatory="false">
             <label>"Avez-vous des remarques concernant l'enquête ou des commentaires ?"</label>
             <conditionFilter>"normal"</conditionFilter>
+            <hierarchy>
+                <sequence id="COMMENT-SEQ">
+                    <label>"Commentaire"</label>
+                </sequence>
+            </hierarchy>
             <bindingsDependencies>COMMENT_QE</bindingsDependencies>
             <response name="COMMENT_QE"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
@@ -105,6 +135,11 @@
     <components xsi:type="Sequence" componentType="Sequence" id="TIME-SEQ">
         <label>"Temps de réponse"</label>
         <conditionFilter>"normal"</conditionFilter>
+        <hierarchy>
+            <sequence id="TIME-SEQ">
+                <label>"Temps de réponse"</label>
+            </sequence>
+        </hierarchy>
         <components xsi:type="InputNumber"
                     componentType="InputNumber"
                     id="TIME-QUESTION-HEURE-REMPL"
@@ -115,6 +150,11 @@
             <label>"Combien de temps avez-vous mis en tout pour répondre à cette enquête (recherche des données + remplissage du questionnaire) ?"</label>
             <unit>heures</unit>
             <conditionFilter>"normal"</conditionFilter>
+            <hierarchy>
+                <sequence id="TIME-SEQ">
+                    <label>"Temps de réponse"</label>
+                </sequence>
+            </hierarchy>
             <bindingsDependencies>HEURE_REMPL</bindingsDependencies>
             <response name="HEURE_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
@@ -139,6 +179,11 @@
             <label></label>
             <unit>minutes</unit>
             <conditionFilter>"normal"</conditionFilter>
+            <hierarchy>
+                <sequence id="TIME-SEQ">
+                    <label>"Temps de réponse"</label>
+                </sequence>
+            </hierarchy>
             <bindingsDependencies>MIN_REMPL</bindingsDependencies>
             <response name="MIN_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
