@@ -1,4 +1,16 @@
-# Eno Releases 
+# Eno Releases note
+
+## 2.2.5 - 12/04/2021
+
+- **[ddi2xforms][core]** Fixing issue for Insee data collection platform when specifying variable type in xforms bind for external variables when they were not initialized : now type is not specified for external variables. 
+- **[poguesXML2ddi][core]** Adding support of formulas in loop minimum for ddi from pogues-xml format.
+- **[ddi2lunaticXML][post-processing]** Adding lunatic post-processing to manage pagination.
+- **[test]** Upgrading to unit test version : junit 5.
+
+
+## 2.2.4 - 31/03/2021
+
+- **[ddi2fo][post-processing]** Updating fo accompanying mails cnrCOL and medCOL.
 
 ## 2.2.3 - 24/03/2021
 

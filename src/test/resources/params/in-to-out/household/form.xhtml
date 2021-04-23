@@ -285,6 +285,7 @@
                   </util>
                   <perso/>
                </stromae>
+               
             </form>
          </xf:instance>
          <xf:instance id="fr-form-loop-model">
@@ -305,12 +306,10 @@
             </xf:bind>
             <xf:bind id="ADMINISTRATION1-bind"
                      name="ADMINISTRATION1"
-                     ref="Variable[@idVariable='ADMINISTRATION1']"
-                     type="xs:string"/>
+                     ref="Variable[@idVariable='ADMINISTRATION1']"/>
             <xf:bind id="ADMINISTRATION2-bind"
                      name="ADMINISTRATION2"
-                     ref="Variable[@idVariable='ADMINISTRATION2']"
-                     type="xs:string"/>
+                     ref="Variable[@idVariable='ADMINISTRATION2']"/>
             <xf:bind id="ji4d7eko-bind" name="ji4d7eko" ref="ji4d7eko">
                <xf:bind id="ji5pfex8-SI-bind" name="ji5pfex8-SI" ref="ji5pfex8-SI"/>
                <xf:bind id="ACTADMIN-bind"
@@ -6059,6 +6058,7 @@
                         ref="INSEE-HOUSEHOLD-TEMPS"/>
             </xf:bind>
          </xf:bind>
+         
          <xf:submission id="enregistrer"
                         method="post"
                         ref="instance('fr-form-instance')"
@@ -6072,6 +6072,7 @@
                <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override">true</xf:setvalue>
             </xf:action>
          </xf:submission>
+         
          <xf:submission id="expedier"
                         method="post"
                         ref="instance('fr-form-instance')"
@@ -6168,6 +6169,7 @@
             <xf:send submission="enregistrer"/>
             <xf:setfocus control="page-top-control"/>
          </xf:action>
+         
       </xf:model>
    </xhtml:head>
    <xhtml:body>
