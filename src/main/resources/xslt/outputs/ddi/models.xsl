@@ -582,6 +582,11 @@
                     <xsl:value-of select="enoddi33:get-instruction-name($source-context)"/>
                 </r:String>
             </d:InstructionName>
+            <d:InstructionName>
+                <r:String xml:lang="{enoddi33:get-lang($source-context)}">
+                    <xsl:value-of select="enoddi33:get-mode($source-context)"/>
+                </r:String>
+            </d:InstructionName>
             <d:InstructionText>
                 <d:LiteralText>
                     <d:Text xml:lang="{enoddi33:get-lang($source-context)}">
