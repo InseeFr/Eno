@@ -1,45 +1,23 @@
 package fr.insee.eno.params;
 
+import fr.insee.eno.Constants;
+import fr.insee.eno.parameters.*;
+import fr.insee.eno.parameters.Parameters.Languages;
+import fr.insee.eno.parameters.Table.Row;
+import fr.insee.eno.test.XMLDiff;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.xmlunit.diff.Diff;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.xmlunit.diff.Diff;
-
-import fr.insee.eno.Constants;
-import fr.insee.eno.parameters.AccompanyingMail;
-import fr.insee.eno.parameters.BrowsingEnum;
-import fr.insee.eno.parameters.ENOParameters;
-import fr.insee.eno.parameters.XFORMSParameters;
-import fr.insee.eno.parameters.Format;
-import fr.insee.eno.parameters.GlobalNumbering;
-import fr.insee.eno.parameters.InFormat;
-import fr.insee.eno.parameters.LunaticXMLParameters;
-import fr.insee.eno.parameters.Language;
-import fr.insee.eno.parameters.LevelEnum;
-import fr.insee.eno.parameters.LevelQuestion;
-import fr.insee.eno.parameters.NumberingQuestion;
-import fr.insee.eno.parameters.Orientation;
-import fr.insee.eno.parameters.OutFormat;
-import fr.insee.eno.parameters.FOParameters;
-import fr.insee.eno.parameters.Parameters;
-import fr.insee.eno.parameters.Parameters.Languages;
-import fr.insee.eno.parameters.Pipeline;
-import fr.insee.eno.parameters.PostProcessing;
-import fr.insee.eno.parameters.PreProcessing;
-import fr.insee.eno.parameters.Context;
-import fr.insee.eno.parameters.Table;
-import fr.insee.eno.parameters.Table.Row;
-import fr.insee.eno.test.XMLDiff;
 
 public class TestValorizatorParametersImpl {
 
@@ -49,12 +27,12 @@ public class TestValorizatorParametersImpl {
 
 	private XMLDiff xmlDiff = new XMLDiff();
 
-	@Before
+	@BeforeEach
 	public void setValorizator() {
 		valorizatorParametersImpl = new ValorizatorParametersImpl();
 	}
 
-	@Before
+	@BeforeEach
 	public void setComplexeEnoParameters() {
 		complexeEnoParameters = new ENOParameters();
 
@@ -120,7 +98,7 @@ public class TestValorizatorParametersImpl {
 		complexeEnoParameters.setParameters(parameters);
 	}
 
-	@Before
+	@BeforeEach
 	public void setSimpleEnoParameters() {
 		simpleEnoParameters = new ENOParameters();
 		Pipeline pipeline = new Pipeline();
@@ -144,19 +122,19 @@ public class TestValorizatorParametersImpl {
 			ENOParameters enoParametersFinal = valorizatorParametersImpl.mergeEnoParameters(complexeEnoParameters);
 			System.out.println("Merging time : "+(System.currentTimeMillis()-debut)+" ms");
 			// Pipeline
-			Assert.assertEquals(InFormat.DDI, enoParametersFinal.getPipeline().getInFormat());
-			Assert.assertEquals(OutFormat.FO, enoParametersFinal.getPipeline().getOutFormat());
+			Assertions.assertEquals(InFormat.DDI, enoParametersFinal.getPipeline().getInFormat());
+			Assertions.assertEquals(OutFormat.FO, enoParametersFinal.getPipeline().getOutFormat());
 			// New value
-			Assert.assertEquals(Arrays.asList(PostProcessing.FO_INSERT_ACCOMPANYING_MAILS), enoParametersFinal.getPipeline().getPostProcessing());
+			Assertions.assertEquals(Arrays.asList(PostProcessing.FO_INSERT_ACCOMPANYING_MAILS), enoParametersFinal.getPipeline().getPostProcessing());
 
 			// Browsing
-			Assert.assertEquals(BrowsingEnum.NO_NUMBER, enoParametersFinal.getParameters().getTitle().getBrowsing());
+			Assertions.assertEquals(BrowsingEnum.NO_NUMBER, enoParametersFinal.getParameters().getTitle().getBrowsing());
 
 			//Context 
-			Assert.assertEquals(Context.HOUSEHOLD, enoParametersFinal.getParameters().getContext());
+			Assertions.assertEquals(Context.HOUSEHOLD, enoParametersFinal.getParameters().getContext());
 
 			//AccompanyingMail
-			Assert.assertEquals(AccompanyingMail.CNR_COL, enoParametersFinal.getParameters().getFoParameters().getAccompanyingMail());
+			Assertions.assertEquals(AccompanyingMail.CNR_COL, enoParametersFinal.getParameters().getFoParameters().getAccompanyingMail());
 			
 			
 			debut = System.currentTimeMillis();
@@ -174,11 +152,11 @@ public class TestValorizatorParametersImpl {
 
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-			Assert.fail();
+			Assertions.fail();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-			Assert.fail();
+			Assertions.fail();
 		}
 	}
 
@@ -208,33 +186,33 @@ public class TestValorizatorParametersImpl {
 			System.out.println("Write output to "+outPath);
 
 			// Pipeline
-			Assert.assertEquals(InFormat.DDI, enoParametersFinal.getPipeline().getInFormat());
-			Assert.assertEquals(OutFormat.XFORMS, enoParametersFinal.getPipeline().getOutFormat());
+			Assertions.assertEquals(InFormat.DDI, enoParametersFinal.getPipeline().getInFormat());
+			Assertions.assertEquals(OutFormat.XFORMS, enoParametersFinal.getPipeline().getOutFormat());
 			//PreProcessing value
-			Assert.assertEquals(
+			Assertions.assertEquals(
 					Arrays.asList(PreProcessing.DDI_DEREFERENCING,PreProcessing.DDI_CLEANING,PreProcessing.DDI_TITLING),
 					enoParametersFinal.getPipeline().getPreProcessing());
 			// PostProcessing value
-			Assert.assertEquals(
+			Assertions.assertEquals(
 					Arrays.asList(PostProcessing.XFORMS_BROWSING,PostProcessing.XFORMS_FIX_ADHERENCE),
 					enoParametersFinal.getPipeline().getPostProcessing());
 
 
 			//Other params 
-			Assert.assertEquals(
+			Assertions.assertEquals(
 					enoParametersDefault.getParameters().getContext(), 
 					enoParametersFinal.getParameters().getContext());
-			Assert.assertEquals(
+			Assertions.assertEquals(
 					enoParametersDefault.getParameters().getXformsParameters().getDecimalSeparator(), 
 					enoParametersFinal.getParameters().getXformsParameters().getDecimalSeparator());
 
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-			Assert.fail();
+			Assertions.fail();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-			Assert.fail();
+			Assertions.fail();
 		}
 	}
 
@@ -247,15 +225,15 @@ public class TestValorizatorParametersImpl {
 			File expectedFile = new File(String.format("%s/parameters-expected.xml", basePath));			
 			Diff diff = xmlDiff.getDiff(outputFile,expectedFile);
 
-			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());
+			Assertions.assertFalse(diff::hasDifferences, ()->getDiffMessage(diff, basePath));
 
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-			Assert.fail();
+			Assertions.fail();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-			Assert.fail();
+			Assertions.fail();
 		}
 
 	}
@@ -266,21 +244,21 @@ public class TestValorizatorParametersImpl {
 		try {
 			ENOParameters enoParameters = valorizatorParametersImpl.getDefaultParameters();			
 
-			Assert.assertEquals(enoParameters.getPipeline().getInFormat(), InFormat.DDI);
-			Assert.assertEquals(enoParameters.getPipeline().getOutFormat(), OutFormat.XFORMS);
-			Assert.assertEquals(enoParameters.getPipeline().getOutFormat(), OutFormat.XFORMS);
-			Assert.assertEquals(enoParameters.getParameters().getContext(), Context.DEFAULT);
+			Assertions.assertEquals(enoParameters.getPipeline().getInFormat(), InFormat.DDI);
+			Assertions.assertEquals(enoParameters.getPipeline().getOutFormat(), OutFormat.XFORMS);
+			Assertions.assertEquals(enoParameters.getPipeline().getOutFormat(), OutFormat.XFORMS);
+			Assertions.assertEquals(enoParameters.getParameters().getContext(), Context.DEFAULT);
 
 		} catch (IOException e) {
 			e.printStackTrace();
-			Assert.fail();
+			Assertions.fail();
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-			Assert.fail();
+			Assertions.fail();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-			Assert.fail();
+			Assertions.fail();
 		}
 	}
 

@@ -5,18 +5,17 @@ import fr.insee.eno.parameters.*;
 import fr.insee.eno.params.ValorizatorParameters;
 import fr.insee.eno.params.ValorizatorParametersImpl;
 import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.*;
-import fr.insee.eno.preprocessing.*;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLPaginationPostprocessor;
+import fr.insee.eno.preprocessing.NoopPreprocessor;
+import fr.insee.eno.preprocessing.Preprocessor;
 import fr.insee.eno.service.GenerationService;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.xmlunit.diff.Diff;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class TestLunaticXMLPaginationPostProcessor {
 
@@ -64,24 +63,24 @@ public class TestLunaticXMLPaginationPostProcessor {
 			parametersBAOS = valorizatorParameters.mergeParameters(enoParameters);
 			GenerationService genService = new GenerationService(preprocessors, identityGenerator, postprocessors);
 			genService.setParameters(parametersBAOS);
-			File in = new File(String.format("%s/in.xml", basePath));
+		File in = new File(String.format("%s/in.xml", basePath));
 			File outputFile = genService.generateQuestionnaire(in, "ddi-2-lunatic-xml-test/"+pagination.value());
 			File expectedFile = new File(String.format("%s/out-"+ pagination.value() +".xml", basePath));
 
 
 			Diff diff = xmlDiff.getDiff(outputFile,expectedFile);
-			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());
+			Assertions.assertFalse(diff::hasDifferences, ()->getDiffMessage(diff, basePath));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
-			Assert.fail();
+			Assertions.fail();
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-			Assert.fail();
+			Assertions.fail();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-			Assert.fail();
+			Assertions.fail();
 		} finally {
 			if(parametersBAOS != null) parametersBAOS.close();
 		}
