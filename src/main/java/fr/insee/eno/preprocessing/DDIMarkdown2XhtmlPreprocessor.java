@@ -1,4 +1,4 @@
-package fr.insee.eno.postprocessing.ddi;
+package fr.insee.eno.preprocessing;
 
 import java.io.File;
 import java.io.InputStream;
@@ -18,9 +18,9 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * DDI postprocessor.
  */
-public class DDIMarkdown2XhtmlPostprocessor implements Postprocessor {
+public class DDIMarkdown2XhtmlPreprocessor implements Postprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(DDIMarkdown2XhtmlPostprocessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(DDIMarkdown2XhtmlPreprocessor.class);
 
 	private XslTransformation saxonService = new XslTransformation();
 
