@@ -5,22 +5,22 @@
     <target name="ddiPreprocessing">
         
         <!-- md2whtml : modifying the DDI file to transform markdown formatting -->
-        <!-- Only for formats that need it (all except lunatic) --> 
-        <if>
+        <!-- Only for formats that need it (target is all except lunatic, right now we keep doing it for all) --> 
+        <!-- <if>
             <not>
                 <equals arg1="${Properties.OutFormat}" arg2="lunatic-xml"/>
             </not>
-            <then>
+            <then> -->
                 <antcall target="md2xhtml">
                     <param name="input-file" value="${preprocessing-input-file}"/>
                 </antcall>
-            </then>
-            <else>
+        <!--</then>
+             <else>
                 <antcall target="md2md">
                     <param name="input-file" value="${preprocessing-input-file}"/>
                 </antcall>
             </else>
-        </if>
+        </if> -->
         
         <!-- Mapping : the input DDI files (ccs, qb...) -->
         <!-- Creates a mapping.tmp file in the temp folder-->
