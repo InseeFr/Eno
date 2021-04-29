@@ -40,6 +40,7 @@
         <xs:restriction base="xs:token">
             <xs:enumeration value="ddi-32-to-ddi-33"/>
             
+            <xs:enumeration value="ddi-markdownToXhtml"/>
             <xs:enumeration value="ddi-mapping"/>
             <xs:enumeration value="ddi-dereferencing"/>
             <xs:enumeration value="ddi-cleaning"/>
@@ -54,7 +55,6 @@
     
     <xs:simpleType name="PostProcessing">
         <xs:restriction base="xs:token">
-            <xs:enumeration value="ddi-markdownToXhtml"/>
             
             <xs:enumeration value="ddi-specificTreatment"/>
             
