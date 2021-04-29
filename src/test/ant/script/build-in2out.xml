@@ -244,11 +244,11 @@
     <!-- Cleaning everything : -->
     <!-- Deleting the content of the temporary folders : temp, test and survey -->
     <target name="clean">
-<!--        <delete>
+        <delete>
             <fileset dir="${target-folder}/${survey-name}" includes="**/*" erroronmissingdir="false"/>
             <fileset dir="${temp.home}/${survey-name}" includes="**/*" erroronmissingdir="false"/>
             <fileset dir="${target-folder}/test" includes="**/*" erroronmissingdir="false"/>
-        </delete>-->
+        </delete>
     </target>
 
     <!--************************TARGETS WITH NON REGRESSION TEST *****************************-->
