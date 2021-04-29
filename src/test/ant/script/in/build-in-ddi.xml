@@ -3,6 +3,20 @@
     <!-- This target will call 1+3 sub targets : mapping ; dereferencing / cleaning / titling -->
     <!-- It expects an 'input-file' param for the beginning file uri of the pipeline.  -->
     <target name="ddiPreprocessing">
+        
+        <!-- md2whtml : modifying the DDI file to transform markdown formatting -->
+        <!-- Only for formats that need it (all except lunatic) --> 
+        <if>
+            <not>
+                <equals arg1="${Properties.OutFormat}" arg2="lunatic-xml"/>
+            </not>
+            <then>
+                <antcall target="md2xhtml">
+                    <param name="input-file" value="${preprocessing-input-file}"/>
+                </antcall>
+            </then>
+        </if>
+        
         <!-- Mapping : the input DDI files (ccs, qb...) -->
         <!-- Creates a mapping.tmp file in the temp folder-->
         <if>
@@ -27,7 +41,7 @@
         <!-- Creating a -cleaned suffixed file -->
         <foreach target="cleaning" param="file" inheritall="true">
             <path>
-                <fileset dir="${temp.home}/${survey-name}/${Properties.InFormat}" excludes="*-dereferenced.tmp, null.tmp"/>
+                <fileset dir="${temp.home}/${survey-name}/${Properties.InFormat}" excludes="*-xhtml.tmp, *-dereferenced.tmp, null.tmp"/>
             </path>
         </foreach>
         <!-- Then adding titles to the created file below -->
@@ -44,6 +58,20 @@
                 </foreach>                
             </then>
         </if>
+    </target>
+    
+    
+    <!-- Markdown to xhtml -->
+    <target name="md2xhtml">		
+        <xslt in="${input-file}"
+            out="${temp.home}/${survey-name}/${Properties.InFormat}/form-xhtml.tmp"
+            style="${xslt.home}/pre-processing/ddi/md2xhtml.xsl" classpath="${saxon.jar}" force="true">
+        </xslt>
+        
+        <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-xhtml.tmp"
+            out="${temp.home}/${survey-name}/${Properties.InFormat}/form_tweak-xhtml.tmp"
+            style="${xslt.home}/pre-processing/ddi/tweak-xhtml-for-ddi.xsl" force="true" classpath="${saxon.jar}">
+        </xslt>
     </target>
     
     <!-- Dereferencing -->
