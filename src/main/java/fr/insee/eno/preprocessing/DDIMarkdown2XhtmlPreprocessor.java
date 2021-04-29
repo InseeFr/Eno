@@ -16,7 +16,7 @@ import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
 /**
- * DDI postprocessor.
+ * DDI preprocessor.
  */
 public class DDIMarkdown2XhtmlPreprocessor implements Postprocessor {
 
