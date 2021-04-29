@@ -23,7 +23,7 @@ public class DDIMarkdown2XhtmlPreprocessor implements Preprocessor {
 
 	private XslTransformation saxonService = new XslTransformation();
 
-	private static final String styleSheetPath = Constants.UTIL_DDI_MW2XHTML_XSL;
+	private static final String styleSheetPath = Constants.UTIL_DDI_MD2XHTML_XSL;
 
 	@Override
 	public File process(File input, byte[] parameters, String survey, String in2out) throws Exception {
@@ -32,7 +32,7 @@ public class DDIMarkdown2XhtmlPreprocessor implements Preprocessor {
 		String mw2xhtmlOutput = FilenameUtils.removeExtension(input.getPath()) + Constants.MW_EXTENSION;
 		// ----- mw2xhtml
 		logger.debug("Markdown to XHTML : -Input : " + input + " -Output : " + mw2xhtmlOutput + " -Stylesheet : "
-				+ Constants.UTIL_DDI_MW2XHTML_XSL + " -Parameters : " + Constants.sUB_TEMP_FOLDER(survey));
+				+ Constants.UTIL_DDI_MD2XHTML_XSL + " -Parameters : " + Constants.sUB_TEMP_FOLDER(survey));
 
 		InputStream isDDI_MW2XHTML_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 		InputStream isInputFile = FileUtils.openInputStream(input);

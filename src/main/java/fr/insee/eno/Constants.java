@@ -59,7 +59,7 @@ public final class Constants {
 	public static final String PRE_PROCESSING_FOLDER = "/xslt/pre-processing";
 	public static final String UTIL_DDI_SPLITTING_XSL = UTIL_FOLDER_PATH + "/ddi/splitting.xsl";
 	/******************* DDI - Pre-processing ****************/
-	public static final String UTIL_DDI_MW2XHTML_XSL = PRE_PROCESSING_FOLDER + "/ddi/mw2xhtml.xsl";
+	public static final String UTIL_DDI_MD2XHTML_XSL = PRE_PROCESSING_FOLDER + "/ddi/md2xhtml.xsl";
 	public static final String UTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL = PRE_PROCESSING_FOLDER + "/ddi/tweak-xhtml-for-ddi.xsl";
 	public static final String UTIL_DDI_DEREFERENCING_XSL = PRE_PROCESSING_FOLDER + "/ddi/dereferencing.xsl";
 	public static final String UTIL_DDI_TITLING_XSL = PRE_PROCESSING_FOLDER + "/ddi/titling.xsl";
