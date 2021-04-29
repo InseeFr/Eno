@@ -59,6 +59,8 @@ public final class Constants {
 	public static final String PRE_PROCESSING_FOLDER = "/xslt/pre-processing";
 	public static final String UTIL_DDI_SPLITTING_XSL = UTIL_FOLDER_PATH + "/ddi/splitting.xsl";
 	/******************* DDI - Pre-processing ****************/
+	public static final String UTIL_DDI_MW2XHTML_XSL = PRE_PROCESSING_FOLDER + "/ddi/mw2xhtml.xsl";
+	public static final String UTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL = PRE_PROCESSING_FOLDER + "/ddi/tweak-xhtml-for-ddi.xsl";
 	public static final String UTIL_DDI_DEREFERENCING_XSL = PRE_PROCESSING_FOLDER + "/ddi/dereferencing.xsl";
 	public static final String UTIL_DDI_TITLING_XSL = PRE_PROCESSING_FOLDER + "/ddi/titling.xsl";
 	public static final String UTIL_DDI_MAPPING_XSL = PRE_PROCESSING_FOLDER + "/ddi/mapping.xsl";
@@ -79,8 +81,6 @@ public final class Constants {
 	public static final String POST_PROCESSING_FOLDER = "/xslt/post-processing";
 	
 	/********************* DDI - Post-processing ******************/
-	public static final String UTIL_DDI_MW2XHTML_XSL = POST_PROCESSING_FOLDER + "/ddi/mw2xhtml.xsl";
-	public static final String UTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL = POST_PROCESSING_FOLDER + "/ddi/tweak-xhtml-for-ddi.xsl";
 	
 	public static final String UTIL_FODS_PREFORMATTING_XSL = UTIL_FOLDER_PATH + "/fods/preformatting.xsl";
 	public static final String UTIL_XSL_INCORPORATION_XSL = UTIL_FOLDER_PATH + "/xsl/incorporation.xsl";
