@@ -12,13 +12,12 @@ import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
-import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
 /**
  * DDI preprocessor.
  */
-public class DDIMarkdown2XhtmlPreprocessor implements Postprocessor {
+public class DDIMarkdown2XhtmlPreprocessor implements Preprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(DDIMarkdown2XhtmlPreprocessor.class);
 
@@ -27,9 +26,9 @@ public class DDIMarkdown2XhtmlPreprocessor implements Postprocessor {
 	private static final String styleSheetPath = Constants.UTIL_DDI_MW2XHTML_XSL;
 
 	@Override
-	public File process(File input, byte[] parameters, String survey) throws Exception {
+	public File process(File input, byte[] parameters, String survey, String in2out) throws Exception {
 
-		logger.info("DDIMarkdown2XhtmlPostprocessor Target : START");
+		logger.info("DDIMarkdown2XhtmlPreprocessor Target : START");
 		String mw2xhtmlOutput = FilenameUtils.removeExtension(input.getPath()) + Constants.MW_EXTENSION;
 		// ----- mw2xhtml
 		logger.debug("Markdown to XHTML : -Input : " + input + " -Output : " + mw2xhtmlOutput + " -Stylesheet : "
@@ -79,7 +78,7 @@ public class DDIMarkdown2XhtmlPreprocessor implements Postprocessor {
 		isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL.close();
 		osTweakXhtmlForDdi.close();
 
-		logger.debug("DDIMarkdown2XhtmlPostprocessor : END");
+		logger.debug("DDIMarkdown2XhtmlPreprocessor : END");
 		return new File(outputTweakXhtmlForDdi);
 
 	}
