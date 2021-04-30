@@ -310,7 +310,8 @@ public final class Constants {
 
 	/************ DDI and pogues-xml extension ***************/
 	public static final String CLEANED_EXTENSION = "-cleaned.tmp";
-	public static final String MW_EXTENSION = "-mw.tmp";
+	public static final String MD_EXTENSION = "-md.tmp";
+	public static final String MD2_EXTENSION = "-md2.tmp";
 	public static final String FINAL_EXTENSION = "-final.tmp";
 	public static final String TEMP_EXTENSION = "-temp.xml";
 	public static final String FINAL_DDI_EXTENSION = "-final.xml";
