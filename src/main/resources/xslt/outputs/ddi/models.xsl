@@ -868,10 +868,9 @@
             </xsl:if>
             <xsl:if test="$minVal != ''">
                 <d:InitialValue>
-                    <r:Command>
-                        <r:ProgramLanguage>xpath</r:ProgramLanguage>
-                        <r:CommandContent><xsl:value-of select="$minVal"/></r:CommandContent>
-                    </r:Command>
+                    <xsl:call-template name="Command">
+                        <xsl:with-param name="source-context" tunnel="yes" select="enoddi33:get-minimum-occurrences($source-context)"/>
+                    </xsl:call-template>
                 </d:InitialValue>
             </xsl:if>
             <xsl:if test="$maxVal != ''">

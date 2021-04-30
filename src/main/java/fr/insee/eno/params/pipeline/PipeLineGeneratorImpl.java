@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import fr.insee.eno.postprocessing.lunaticxml.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,11 +30,6 @@ import fr.insee.eno.postprocessing.fo.FOInsertEndQuestionPostprocessor;
 import fr.insee.eno.postprocessing.fo.FOMailingPostprocessor;
 import fr.insee.eno.postprocessing.fo.FOSpecificTreatmentPostprocessor;
 import fr.insee.eno.postprocessing.fo.FOTableColumnPostprocessorFake;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLExternalizeVariablesAndDependenciesPostprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLInsertGenericQuestionsPostprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLSortComponentsPostprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLSpecificTreatmentPostprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLVTLParserPostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSBrowsingPostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSFixAdherencePostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSIdentificationPostprocessor;
@@ -123,6 +119,8 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	private LunaticXMLSpecificTreatmentPostprocessor lunaticXmlSpecificTreatment = new LunaticXMLSpecificTreatmentPostprocessor();
 	
 	private LunaticXMLInsertGenericQuestionsPostprocessor lunaticXmlInsertGenericQuestions = new LunaticXMLInsertGenericQuestionsPostprocessor();
+
+	private LunaticXMLPaginationPostprocessor lunaticXMLPaginationPostprocessor = new LunaticXMLPaginationPostprocessor();
 	
 	private LunaticXMLExternalizeVariablesAndDependenciesPostprocessor lunaticXMLExternalizeVariablesAndDependencies = new LunaticXMLExternalizeVariablesAndDependenciesPostprocessor();
 	
@@ -268,6 +266,9 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 			break;
 		case FO_TABLE_COLUMN:
 			postprocessor = foTableColumn;
+			break;
+		case LUNATIC_XML_PAGINATION:
+			postprocessor = lunaticXMLPaginationPostprocessor;
 			break;
 		case LUNATIC_XML_EXTERNALIZE_VARIABLES:
 			postprocessor = lunaticXMLExternalizeVariablesAndDependencies;
