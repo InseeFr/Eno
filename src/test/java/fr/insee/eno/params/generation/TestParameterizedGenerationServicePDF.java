@@ -1,13 +1,12 @@
 package fr.insee.eno.params.generation;
 
-import java.io.File;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.xmlunit.diff.Diff;
-
 import fr.insee.eno.service.ParameterizedGenerationService;
 import fr.insee.eno.test.XMLDiff;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.xmlunit.diff.Diff;
+
+import java.io.File;
 
 public class TestParameterizedGenerationServicePDF {
 
@@ -26,9 +25,9 @@ public class TestParameterizedGenerationServicePDF {
 			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, null, null);
 			File expectedFile = new File(String.format("%s/form.fo", basePathDDI));
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
-			Assert.assertFalse(getDiffMessage(diff, basePathDDI), diff.hasDifferences());
+			Assertions.assertFalse(diff::hasDifferences, ()->getDiffMessage(diff, basePathDDI));
 		} catch (Exception e) {
-			Assert.fail();
+			Assertions.fail();
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -46,9 +45,9 @@ public class TestParameterizedGenerationServicePDF {
 			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, specificTreatment, null);
 			File expectedFile = new File(String.format("%s/form.fo", basePathDDI));
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
-			Assert.assertFalse(getDiffMessage(diff, basePathDDI), diff.hasDifferences());
+			Assertions.assertFalse(diff::hasDifferences, ()->getDiffMessage(diff, basePathDDI));
 		} catch (Exception e) {
-			Assert.fail();
+			Assertions.fail();
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -66,9 +65,9 @@ public class TestParameterizedGenerationServicePDF {
 			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, specificTreatment, null);
 			File expectedFile = new File(String.format("%s/form.fo", basePathDDI));
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
-			Assert.assertFalse(getDiffMessage(diff, basePathDDI), diff.hasDifferences());
+			Assertions.assertFalse(diff::hasDifferences, ()->getDiffMessage(diff, basePathDDI));
 		} catch (Exception e) {
-			Assert.fail();
+			Assertions.fail();
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

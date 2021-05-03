@@ -2,7 +2,7 @@ package fr.insee.eno.main;
 
 import java.io.File;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import fr.insee.eno.generation.DDI2FODTGenerator;
 import fr.insee.eno.postprocessing.NoopPostprocessor;

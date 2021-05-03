@@ -3,8 +3,8 @@ package fr.insee.eno.test;
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.xmlunit.diff.Diff;
 
 import fr.insee.eno.generation.PoguesXML2DDIGenerator;
@@ -32,17 +32,17 @@ public class TestPoguesXMLToDDI {
 			File outputFile = genService.generateQuestionnaire(in, "xml-pogues-2-ddi-test");
 			File expectedFile = new File(String.format("%s/out.xml", basePath));
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
-			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());
+			Assertions.assertFalse(diff::hasDifferences, ()->getDiffMessage(diff, basePath));
 
 		} catch (IOException e) {
 			e.printStackTrace();
-			Assert.fail();
+			Assertions.fail();
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-			Assert.fail();
+			Assertions.fail();
 		} catch (Exception e) {
 			e.printStackTrace();
-			Assert.fail();
+			Assertions.fail();
 		}
 	}
 
