@@ -48,10 +48,10 @@
 	<properties>
 		<guice.version>4.1.0</guice.version>
 		<commons-io.version>2.5</commons-io.version>
-		<saxon.version>9.7.0-8</saxon.version>
+		<saxon.version>9.9.1-8</saxon.version>
 		<fop.version>2.2</fop.version>
-		<xalan.version>2.7.1</xalan.version>
-		<slf4j.version>1.7.25</slf4j.version>
+		<xalan.version>2.7.2</xalan.version>
+		<slf4j.version>1.7.30</slf4j.version>
 		<eclipse.version>2.6.0</eclipse.version>
 		<jaxb-api.version>2.3.1</jaxb-api.version>
 
@@ -60,11 +60,12 @@
 		<xmlunit.version>2.3.0</xmlunit.version>
 		<log4j-slf4j.version>2.11.0</log4j-slf4j.version>
 
-		<source.plugin.version>3.0.1</source.plugin.version>
+
+		<source.plugin.version>3.2.1</source.plugin.version>
 		<javadoc.plugin.version>3.2.0</javadoc.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
 	</properties>
 
 	<dependencies>
@@ -226,7 +227,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.7</version>
+				<version>3.2.0</version>
 				<executions>
 					<execution>
 						<id>add-source</id>
