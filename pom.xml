@@ -127,7 +127,7 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
 			<version>${log4j-slf4j.version}</version>
-			<scope>compile</scope>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- Jaxb -->
@@ -264,6 +264,7 @@
 									<value>INFO</value>
 								</property>
 							</systemProperties>
+							<classpathScope>test</classpathScope>
 
 						</configuration>
 					</execution>
