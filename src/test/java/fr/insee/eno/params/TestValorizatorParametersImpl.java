@@ -105,6 +105,7 @@ public class TestValorizatorParametersImpl {
 		pipeline.setInFormat(InFormat.DDI);
 		pipeline.setOutFormat(OutFormat.XFORMS);
 		pipeline.getPreProcessing().addAll(Arrays.asList(
+				PreProcessing.DDI_MULTIMODAL_SELECTION,
 				PreProcessing.DDI_DEREFERENCING,
 				PreProcessing.DDI_CLEANING,
 				PreProcessing.DDI_TITLING));

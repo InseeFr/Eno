@@ -23,6 +23,7 @@ public class TestValidator {
 	public void testValidatePreProcessings() {
 		
 		List<PreProcessing> preProcessings = Arrays.asList(
+				PreProcessing.DDI_MULTIMODAL_SELECTION,
 				PreProcessing.DDI_DEREFERENCING,
 				PreProcessing.DDI_CLEANING,
 				PreProcessing.DDI_TITLING,
