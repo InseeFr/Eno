@@ -191,7 +191,7 @@ public class TestValorizatorParametersImpl {
 			Assertions.assertEquals(OutFormat.XFORMS, enoParametersFinal.getPipeline().getOutFormat());
 			//PreProcessing value
 			Assertions.assertEquals(
-					Arrays.asList(PreProcessing.DDI_DEREFERENCING,PreProcessing.DDI_CLEANING,PreProcessing.DDI_TITLING),
+					Arrays.asList(PreProcessing.DDI_MULTIMODAL_SELECTION,PreProcessing.DDI_DEREFERENCING,PreProcessing.DDI_CLEANING,PreProcessing.DDI_TITLING),
 					enoParametersFinal.getPipeline().getPreProcessing());
 			// PostProcessing value
 			Assertions.assertEquals(
