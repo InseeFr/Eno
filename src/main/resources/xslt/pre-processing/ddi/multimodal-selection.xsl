@@ -77,32 +77,27 @@
   </xd:doc>
   <xsl:template match="d:Instruction">
     <xsl:choose>
-      <xsl:when
-        test=".[d:InstructionName/r:String = 'SelfAdministeredQuestionnaire.WebBased'] and $properties//OutFormat = 'xforms'">
+      <xsl:when test=".[d:InstructionName/r:String = 'SelfAdministeredQuestionnaire.WebBased'] and $properties//OutFormat = 'xforms'">
         <xsl:copy>
           <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
       </xsl:when>
-      <xsl:when
-        test=".[d:InstructionName/r:String = 'SelfAdministeredQuestionnaire.Paper'] and $properties//OutFormat = 'fo'">
+      <xsl:when test=".[d:InstructionName/r:String = 'SelfAdministeredQuestionnaire.Paper'] and $properties//OutFormat = 'fo'">
         <xsl:copy>
           <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
       </xsl:when>
-      <xsl:when
-        test="count(d:InstructionName[matches(r:String, 'SelfAdministeredQuestionnaire.WebBased|Interview')]) > 0 and $properties//OutFormat = 'lunatic-xml'">
+      <xsl:when test="count(d:InstructionName[matches(r:String, 'SelfAdministeredQuestionnaire.WebBased|Interview')]) > 0 and $properties//OutFormat = 'lunatic-xml'">
         <xsl:copy>
           <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
       </xsl:when>
-      <xsl:when
-        test="$properties//OutFormat = 'fodt'">
+      <xsl:when test="$properties//OutFormat = 'fodt'">
         <xsl:copy>
           <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
       </xsl:when>
-      <xsl:when
-        test="count(d:InstructionName[matches(r:String, 'SelfAdministeredQuestionnaire|Interview')]) = 0">
+      <xsl:when test="count(d:InstructionName[matches(r:String, 'SelfAdministeredQuestionnaire|Interview')]) = 0">
         <xsl:copy>
           <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
@@ -119,14 +114,17 @@
     </xd:desc>
   </xd:doc>
   <xsl:template match="d:InstructionName">
-    <xsl:if
-      test="$properties//OutFormat = ('xforms', 'fo') and not(matches(r:String, 'SelfAdministeredQuestionnaire|Interview'))">
+    <xsl:if test="$properties//OutFormat = ('xforms', 'fo') and not(matches(r:String, 'SelfAdministeredQuestionnaire|Interview'))">
       <xsl:copy>
         <xsl:apply-templates select="node() | @*"/>
       </xsl:copy>
     </xsl:if>
-    <xsl:if
-      test="$properties//OutFormat = 'lunatic-xml' and not(r:String = 'SelfAdministeredQuestionnaire.Paper')">
+    <xsl:if test="$properties//OutFormat = 'lunatic-xml' and not(r:String = 'SelfAdministeredQuestionnaire.Paper')">
+      <xsl:copy>
+        <xsl:apply-templates select="node() | @*"/>
+      </xsl:copy>
+    </xsl:if>
+    <xsl:if test="$properties//OutFormat = 'fodt'">
       <xsl:copy>
         <xsl:apply-templates select="node() | @*"/>
       </xsl:copy>
