@@ -33,6 +33,7 @@ import fr.insee.eno.postprocessing.fo.FOTableColumnPostprocessorFake;
 import fr.insee.eno.service.GenerationService;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
+import fr.insee.eno.preprocessing.DDIMultimodalSelectionPreprocessor;
 import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
 import fr.insee.eno.preprocessing.Preprocessor;
 
@@ -47,6 +48,7 @@ public class DummyTestDDI2PDF {
 		String basePathImg = "src/test/resources/examples/img/";
 
 		Preprocessor[] preprocessors = {
+				new DDIMultimodalSelectionPreprocessor(),
 				new DDIDereferencingPreprocessor(),
 				new DDICleaningPreprocessor(),
 				new DDITitlingPreprocessor()};
