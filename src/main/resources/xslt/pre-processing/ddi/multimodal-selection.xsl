@@ -65,6 +65,7 @@
       <xd:p> - Fo output only keeps SelfAdministeredQuestionnaire.Paper</xd:p>
       <xd:p> - Xforms output only keeps SelfAdministeredQuestionnaire.WebBased</xd:p>
       <xd:p> - Lunatic-XML output keeps everything except SelfAdministeredQuestionnaire.Paper</xd:p>
+      <xd:p> - Fodt output keeps everything so it can be valorized in specification document</xd:p>
       <xd:p>Since Fo and Xforms keep only one type of Instruction, the InstructionName items
         describing the collcetion mode can be deleted</xd:p>
       <xd:p>Since Lunatic keeps everything but SelfAdministeredQuestionnaire.Paper, InstructionName
@@ -90,6 +91,12 @@
       </xsl:when>
       <xsl:when
         test="count(d:InstructionName[matches(r:String, 'SelfAdministeredQuestionnaire.WebBased|Interview')]) > 0 and $properties//OutFormat = 'lunatic-xml'">
+        <xsl:copy>
+          <xsl:apply-templates select="node() | @*"/>
+        </xsl:copy>
+      </xsl:when>
+      <xsl:when
+        test="$properties//OutFormat = 'fodt'">
         <xsl:copy>
           <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
