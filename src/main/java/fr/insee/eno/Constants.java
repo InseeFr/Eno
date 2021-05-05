@@ -63,6 +63,7 @@ public final class Constants {
 	public static final String UTIL_DDI_TITLING_XSL = PRE_PROCESSING_FOLDER + "/ddi/titling.xsl";
 	public static final String UTIL_DDI_MAPPING_XSL = PRE_PROCESSING_FOLDER + "/ddi/mapping.xsl";
 	public static final String UTIL_DDI_CLEANING_XSL = PRE_PROCESSING_FOLDER + "/ddi/cleaning.xsl";
+	public static final String UTIL_DDI_MULTIMODAL_SELECTION_XSL = PRE_PROCESSING_FOLDER + "/ddi/multimodal-selection.xsl";
 	public static final String UTIL_DDI32_TO_DDI33_XSL = UTIL_FOLDER_PATH + "/ddi/ddi32toddi33.xsl";
 	
 	/*************** PoguesXML - Pre-processing **************/
@@ -315,6 +316,7 @@ public final class Constants {
 	public static final String TEMP_EXTENSION = "-temp.xml";
 	public static final String FINAL_DDI_EXTENSION = "-final.xml";
 	public static final String DDI32_DDI33_EXTENSION = "-ddi33.xml";
+	public static final String MULTIMODAL_EXTENSION = "-modal.tmp";
 
 	/********************* pdf/fo extension *******************/
 	public static final String ACCOMPANYING_MAILS_FO_EXTENSION = "-accompanying-mails.fo";
