@@ -5,7 +5,11 @@ import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.postprocessing.lunaticxml.*;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
+<<<<<<< HEAD
 import fr.insee.eno.preprocessing.DDIMarkdown2XhtmlPreprocessor;
+=======
+import fr.insee.eno.preprocessing.DDIMultimodalSelectionPreprocessor;
+>>>>>>> dev-multi-decla_multimode
 import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
 import fr.insee.eno.preprocessing.Preprocessor;
 import fr.insee.eno.service.GenerationService;
@@ -23,6 +27,8 @@ public class DummyTestDDI2LunaticXML {
 		String basePathDDI2JS = "src/test/resources/ddi-to-lunatic-xml";
 		
 		Preprocessor[] preprocessors = {
+
+				new DDIMultimodalSelectionPreprocessor(),
 				new DDIMarkdown2XhtmlPreprocessor(),
 				new DDIDereferencingPreprocessor(),
 				new DDICleaningPreprocessor(),

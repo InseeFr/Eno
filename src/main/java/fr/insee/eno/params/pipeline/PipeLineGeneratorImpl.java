@@ -43,6 +43,7 @@ import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
 import fr.insee.eno.preprocessing.DDIMappingPreprocessor;
 import fr.insee.eno.preprocessing.DDIMarkdown2XhtmlPreprocessor;
+import fr.insee.eno.preprocessing.DDIMultimodalSelectionPreprocessor;
 import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
 import fr.insee.eno.preprocessing.PoguesXmlInsertFilterLoopIntoQuestionTree;
 import fr.insee.eno.preprocessing.PoguesXMLPreprocessorGoToTreatment;
@@ -74,6 +75,8 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	private DDITitlingPreprocessor ddiTitling = new DDITitlingPreprocessor();
 
 	private DDIMappingPreprocessor ddiMapping = new DDIMappingPreprocessor();
+	
+	private DDIMultimodalSelectionPreprocessor ddiMultimodal = new DDIMultimodalSelectionPreprocessor();
 	
 	private DDIMarkdown2XhtmlPreprocessor ddiMW2XHTML = new DDIMarkdown2XhtmlPreprocessor();
 
@@ -313,6 +316,9 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 			break;
 		case DDI_MAPPING:
 			preprocessor = ddiMapping;
+			break;
+		case DDI_MULTIMODAL_SELECTION:
+			preprocessor = ddiMultimodal;
 			break;
 		case POGUES_XML_INSERT_FILTER_LOOP_INTO_QUESTION_TREE:
 			preprocessor = poguesXmlFilterLoopIntoQuestionTree;
