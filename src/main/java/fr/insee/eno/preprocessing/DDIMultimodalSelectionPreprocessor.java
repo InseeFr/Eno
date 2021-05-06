@@ -31,20 +31,21 @@ public class DDIMultimodalSelectionPreprocessor implements Preprocessor {
 	public File process(File inputFile, byte[] parametersFile, String survey, String in2out) throws Exception {
 		logger.info("DDIPreprocessing Target : START");
 
+		String sUB_TEMP_FOLDER = Constants.sUB_TEMP_FOLDER(survey);
 		String modalSelectionOutput=null;
 		String multimodalInput = inputFile.getAbsolutePath();
-		modalSelectionOutput = FilenameUtils.removeExtension(multimodalInput) + Constants.MULTIMODAL_EXTENSION;
+		modalSelectionOutput = sUB_TEMP_FOLDER + "\\" + FilenameUtils.getBaseName(multimodalInput) + Constants.MULTIMODAL_EXTENSION;
 
 		logger.debug("Modal DDI output file to be created : " + modalSelectionOutput);
 		logger.debug("Multimodal Selection : -Input : " + multimodalInput + " -Output : " + modalSelectionOutput + " -Stylesheet : "
-				+ styleSheetPath);
+				+ styleSheetPath + " -Parameters : " + (parametersFile == null ? "Default parameters" : "Provided parameters"));
 
 		InputStream isMultimodalIn = FileUtils.openInputStream(new File(multimodalInput));
 		OutputStream osModalSelection = FileUtils.openOutputStream(new File(modalSelectionOutput));
 		InputStream isUTIL_DDI_MULTIMODAL_SELECTION_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 
 		try {
-			saxonService.transformCleaning(isMultimodalIn, isUTIL_DDI_MULTIMODAL_SELECTION_XSL, osModalSelection, in2out);
+			saxonService.transformModalSelection(isMultimodalIn, isUTIL_DDI_MULTIMODAL_SELECTION_XSL, osModalSelection, in2out);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error has occurred during the %s transformation. %s : %s",
 					toString(),
