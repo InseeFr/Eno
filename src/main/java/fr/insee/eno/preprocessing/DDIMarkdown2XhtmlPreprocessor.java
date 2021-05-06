@@ -1,4 +1,4 @@
-package fr.insee.eno.postprocessing.ddi;
+package fr.insee.eno.preprocessing;
 
 import java.io.File;
 import java.io.InputStream;
@@ -12,33 +12,32 @@ import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
-import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
 /**
- * DDI postprocessor.
+ * DDI preprocessor.
  */
-public class DDIMarkdown2XhtmlPostprocessor implements Postprocessor {
+public class DDIMarkdown2XhtmlPreprocessor implements Preprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(DDIMarkdown2XhtmlPostprocessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(DDIMarkdown2XhtmlPreprocessor.class);
 
 	private XslTransformation saxonService = new XslTransformation();
 
-	private static final String styleSheetPath = Constants.UTIL_DDI_MW2XHTML_XSL;
+	private static final String styleSheetPath = Constants.UTIL_DDI_MD2XHTML_XSL;
 
 	@Override
-	public File process(File input, byte[] parameters, String survey) throws Exception {
+	public File process(File input, byte[] parameters, String survey, String in2out) throws Exception {
 
-		logger.info("DDIMarkdown2XhtmlPostprocessor Target : START");
-		String mw2xhtmlOutput = FilenameUtils.removeExtension(input.getPath()) + Constants.MW_EXTENSION;
+		logger.info("DDIMarkdown2XhtmlPreprocessor Target : START");
+		String md2xhtmlOutput = FilenameUtils.removeExtension(input.getPath()) + Constants.MD_EXTENSION;
 		// ----- mw2xhtml
-		logger.debug("Markdown to XHTML : -Input : " + input + " -Output : " + mw2xhtmlOutput + " -Stylesheet : "
-				+ Constants.UTIL_DDI_MW2XHTML_XSL + " -Parameters : " + Constants.sUB_TEMP_FOLDER(survey));
+		logger.debug("Markdown to XHTML : -Input : " + input + " -Output : " + md2xhtmlOutput + " -Stylesheet : "
+				+ Constants.UTIL_DDI_MD2XHTML_XSL + " -Parameters : " + Constants.sUB_TEMP_FOLDER(survey));
 
 		InputStream isDDI_MW2XHTML_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 		InputStream isInputFile = FileUtils.openInputStream(input);
 
-		OutputStream osTEMP_NULL_TMP = FileUtils.openOutputStream(new File(mw2xhtmlOutput));
+		OutputStream osTEMP_NULL_TMP = FileUtils.openOutputStream(new File(md2xhtmlOutput));
 
 		try {
 			saxonService.transformMw2XHTML(isInputFile, isDDI_MW2XHTML_XSL, osTEMP_NULL_TMP,
@@ -57,13 +56,13 @@ public class DDIMarkdown2XhtmlPostprocessor implements Postprocessor {
 		// ----- tweak-xhtml-for-ddi
 		// tweak-xhtml-for-ddi-input = mw2xhtml-output
 
-		String outputTweakXhtmlForDdi = FilenameUtils.removeExtension(input.getPath()) + Constants.FINAL_DDI_EXTENSION;
+		String outputTweakXhtmlForDdi = FilenameUtils.removeExtension(input.getPath()) + Constants.MD2_EXTENSION;
 
-		logger.debug("Tweak-xhtml-for-ddi : -Input : " + mw2xhtmlOutput + " -Output : " + outputTweakXhtmlForDdi
+		logger.debug("Tweak-xhtml-for-ddi : -Input : " + md2xhtmlOutput + " -Output : " + outputTweakXhtmlForDdi
 				+ " -Stylesheet : " + Constants.UTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL + " -Parameters : "
 				+ (parameters == null ? "Default parameters" : "Provided parameters"));
 
-		InputStream isTweakXhtmlForDdi = FileUtils.openInputStream(new File(mw2xhtmlOutput));
+		InputStream isTweakXhtmlForDdi = FileUtils.openInputStream(new File(md2xhtmlOutput));
 		InputStream isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL = Constants
 				.getInputStreamFromPath(Constants.UTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL);
 		OutputStream osTweakXhtmlForDdi = FileUtils.openOutputStream(new File(outputTweakXhtmlForDdi));
@@ -79,7 +78,7 @@ public class DDIMarkdown2XhtmlPostprocessor implements Postprocessor {
 		isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL.close();
 		osTweakXhtmlForDdi.close();
 
-		logger.debug("DDIMarkdown2XhtmlPostprocessor : END");
+		logger.debug("DDIMarkdown2XhtmlPreprocessor : END");
 		return new File(outputTweakXhtmlForDdi);
 
 	}

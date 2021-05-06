@@ -10,6 +10,7 @@ import fr.insee.eno.service.GenerationService;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
+import fr.insee.eno.preprocessing.DDIMarkdown2XhtmlPreprocessor;
 import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
 import fr.insee.eno.preprocessing.Preprocessor;
 
@@ -23,6 +24,7 @@ public class DummyTestDDI2FODT {
 		String basePathDDI2ODT = "src/test/resources/ddi-to-fodt";
 		
 		Preprocessor[] preprocessors = {
+				new DDIMarkdown2XhtmlPreprocessor(),
 				new DDIDereferencingPreprocessor(),
 				new DDICleaningPreprocessor(),
 				new DDITitlingPreprocessor()};	

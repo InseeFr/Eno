@@ -22,7 +22,6 @@ import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.parameters.PreProcessing;
 import fr.insee.eno.postprocessing.NoopPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.postprocessing.ddi.DDIMarkdown2XhtmlPostprocessor;
 import fr.insee.eno.postprocessing.fo.FOEditStructurePagesPostprocessor;
 import fr.insee.eno.postprocessing.fo.FOInsertAccompanyingMailsPostprocessor;
 import fr.insee.eno.postprocessing.fo.FOInsertCoverPagePostprocessor;
@@ -43,6 +42,7 @@ import fr.insee.eno.preprocessing.DDI32ToDDI33Preprocessor;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
 import fr.insee.eno.preprocessing.DDIMappingPreprocessor;
+import fr.insee.eno.preprocessing.DDIMarkdown2XhtmlPreprocessor;
 import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
 import fr.insee.eno.preprocessing.PoguesXmlInsertFilterLoopIntoQuestionTree;
 import fr.insee.eno.preprocessing.PoguesXMLPreprocessorGoToTreatment;
@@ -74,6 +74,8 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	private DDITitlingPreprocessor ddiTitling = new DDITitlingPreprocessor();
 
 	private DDIMappingPreprocessor ddiMapping = new DDIMappingPreprocessor();
+	
+	private DDIMarkdown2XhtmlPreprocessor ddiMW2XHTML = new DDIMarkdown2XhtmlPreprocessor();
 
 	private PoguesXMLPreprocessorGoToTreatment poguesXmlGoTo = new PoguesXMLPreprocessorGoToTreatment();
 	
@@ -82,8 +84,6 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	private DDI32ToDDI33Preprocessor ddi32ToDDI33Preprocessor = new DDI32ToDDI33Preprocessor();
 	
 	// PostProcessing
-	private DDIMarkdown2XhtmlPostprocessor ddiMW2XHTML = new DDIMarkdown2XhtmlPostprocessor();
-
 	private XFORMSBrowsingPostprocessor xformsBrowsing = new XFORMSBrowsingPostprocessor();
 
 	private XFORMSInseePatternPostprocessor xformsInseePattern = new XFORMSInseePatternPostprocessor();
@@ -216,9 +216,6 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	public Postprocessor getPostPorcessor(PostProcessing postProcessing) {
 		Postprocessor postprocessor = null;
 		switch (postProcessing) {
-		case DDI_MARKDOWN_TO_XHTML:
-			postprocessor = ddiMW2XHTML;
-			break;
 		case XFORMS_BROWSING:
 			postprocessor = xformsBrowsing;
 			break;
@@ -301,6 +298,9 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 		switch (preProcessing) {
 		case DDI_32_TO_DDI_33:
 			preprocessor = ddi32ToDDI33Preprocessor;
+			break;
+		case DDI_MARKDOWN_TO_XHTML:
+			preprocessor = ddiMW2XHTML;
 			break;
 		case DDI_DEREFERENCING:
 			preprocessor = ddiDereferencing;
