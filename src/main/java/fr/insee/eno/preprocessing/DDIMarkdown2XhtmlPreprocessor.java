@@ -70,7 +70,7 @@ public class DDIMarkdown2XhtmlPreprocessor implements Preprocessor {
 			saxonService.transformTweakXhtmlForDdi(isTweakXhtmlForDdi, isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL,
 					osTweakXhtmlForDdi, Constants.SUB_TEMP_FOLDER_FILE(survey));
 		}catch(Exception e) {
-			String errorMessage = "An error was occured during the Markdown2Xhtml transformation. "+e.getMessage();
+			String errorMessage = "An error has occurred during the Markdown2Xhtml transformation. "+e.getMessage();
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
