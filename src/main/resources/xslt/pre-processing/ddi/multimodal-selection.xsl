@@ -22,18 +22,11 @@
 
   <xd:doc>
     <xd:desc>
-      <xd:p>The properties file used by the stylesheet.</xd:p>
-      <xd:p>It's on a transformation level.</xd:p>
+      <xd:p>The output format if provided by the transformation. It's either this or the previous param (the properties file)</xd:p>
     </xd:desc>
   </xd:doc>
-  <xsl:param name="properties-file"/>
+  <xsl:param name="output-format"/>
 
-  <xd:doc>
-    <xd:desc>
-      <xd:p>The properties file is charged as an xml tree.</xd:p>
-    </xd:desc>
-  </xd:doc>
-  <xsl:variable name="properties" select="$properties-file"/>
 
   <xd:doc>
     <xd:desc>
@@ -77,22 +70,22 @@
   </xd:doc>
   <xsl:template match="d:Instruction">
     <xsl:choose>
-      <xsl:when test=".[d:InstructionName/r:String = 'SelfAdministeredQuestionnaire.WebBased'] and $properties//OutFormat = 'xforms'">
+      <xsl:when test=".[d:InstructionName/r:String = 'SelfAdministeredQuestionnaire.WebBased'] and $output-format = 'xforms'">
         <xsl:copy>
           <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
       </xsl:when>
-      <xsl:when test=".[d:InstructionName/r:String = 'SelfAdministeredQuestionnaire.Paper'] and $properties//OutFormat = 'fo'">
+      <xsl:when test=".[d:InstructionName/r:String = 'SelfAdministeredQuestionnaire.Paper'] and $output-format = 'fo'">
         <xsl:copy>
           <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
       </xsl:when>
-      <xsl:when test="count(d:InstructionName[matches(r:String, 'SelfAdministeredQuestionnaire.WebBased|Interview')]) > 0 and $properties//OutFormat = 'lunatic-xml'">
+      <xsl:when test="count(d:InstructionName[matches(r:String, 'SelfAdministeredQuestionnaire.WebBased|Interview')]) > 0 and $output-format = 'lunatic-xml'">
         <xsl:copy>
           <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
       </xsl:when>
-      <xsl:when test="$properties//OutFormat = 'fodt'">
+      <xsl:when test="$output-format = 'fodt'">
         <xsl:copy>
           <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
@@ -114,17 +107,22 @@
     </xd:desc>
   </xd:doc>
   <xsl:template match="d:InstructionName">
-    <xsl:if test="$properties//OutFormat = ('xforms', 'fo') and not(matches(r:String, 'SelfAdministeredQuestionnaire|Interview'))">
+    <xsl:if test="$output-format = ('xforms', 'fo') and not(matches(r:String, 'SelfAdministeredQuestionnaire|Interview'))">
       <xsl:copy>
         <xsl:apply-templates select="node() | @*"/>
       </xsl:copy>
     </xsl:if>
-    <xsl:if test="$properties//OutFormat = 'lunatic-xml' and not(r:String = 'SelfAdministeredQuestionnaire.Paper')">
+    <xsl:if test="$output-format = 'lunatic-xml' and not(r:String = 'SelfAdministeredQuestionnaire.Paper')">
       <xsl:copy>
         <xsl:apply-templates select="node() | @*"/>
       </xsl:copy>
     </xsl:if>
-    <xsl:if test="$properties//OutFormat = 'fodt'">
+    <xsl:if test="$output-format = 'fodt'">
+      <xsl:copy>
+        <xsl:apply-templates select="node() | @*"/>
+      </xsl:copy>
+    </xsl:if>
+    <xsl:if test="$output-format = ''">
       <xsl:copy>
         <xsl:apply-templates select="node() | @*"/>
       </xsl:copy>
