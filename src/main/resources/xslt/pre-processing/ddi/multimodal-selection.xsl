@@ -22,7 +22,7 @@
 
   <xd:doc>
     <xd:desc>
-      <xd:p>The output format if provided by the transformation. It's either this or the previous param (the properties file)</xd:p>
+      <xd:p>The output format provided by the call to the transformation</xd:p>
     </xd:desc>
   </xd:doc>
   <xsl:param name="output-format"/>
