@@ -112,17 +112,12 @@
         <xsl:apply-templates select="node() | @*"/>
       </xsl:copy>
     </xsl:if>
-    <xsl:if test="$output-format = 'lunatic-xml' and not(r:String = 'SelfAdministeredQuestionnaire.Paper')">
+    <xsl:if test="$output-format = 'lunatic-xml' and not(matches(r:String, 'SelfAdministeredQuestionnaire|Interview'))">
       <xsl:copy>
         <xsl:apply-templates select="node() | @*"/>
       </xsl:copy>
     </xsl:if>
     <xsl:if test="$output-format = 'fodt'">
-      <xsl:copy>
-        <xsl:apply-templates select="node() | @*"/>
-      </xsl:copy>
-    </xsl:if>
-    <xsl:if test="$output-format = ''">
       <xsl:copy>
         <xsl:apply-templates select="node() | @*"/>
       </xsl:copy>
