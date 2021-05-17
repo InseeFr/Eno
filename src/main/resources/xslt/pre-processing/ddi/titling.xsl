@@ -31,9 +31,8 @@
             <xd:p>Numbering style configuration (Eno configuration)</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:variable name="style">
-        <xsl:copy-of select="document(../../../config/style-numerotation.xml)/Numerotation"/>
-    </xsl:variable>
+
+    <xsl:variable name="style" select="doc('../../../config/style-numerotation.xml')/Numerotation"/>
 
     <xd:doc>
         <xd:desc>
@@ -63,15 +62,15 @@
     <xsl:variable name="numbering-browser">
         <xsl:choose>
             <xsl:when test="$params/Numerotation/QuestNum">
-                <xsl:if test="$params/Numerotation/QuestNum = 'questionnaire'">
-                    <xsl:value-of select="'template'"/>
+                <xsl:if test="$params/Numerotation/QuestNum = 'all'">
+                    <xsl:copy-of select="'template'"/>
                 </xsl:if>
-                <xsl:if test="$params/Numerotation/QuestNum != 'questionnaire'">
+                <xsl:if test="$params/Numerotation/QuestNum != 'all'">
                     <xsl:value-of select="$params/Numerotation/QuestNum"/>
                 </xsl:if>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="'all'"/>
+                <xsl:value-of select="'template'"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -100,33 +99,24 @@
     <xd:doc>
         <xd:desc>
             <xd:p>Template used to add numbers to sequences.</xd:p>
-            <xd:p>For every 'module', 'submodule' or 'group' type d:Sequence, prefixing the
-                title.</xd:p>
+            <xd:p>For every 'module' type d:Sequence, prefixing the title.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template
-        match="d:Sequence[d:TypeOfSequence = 'module' or d:TypeOfSequence = 'submodule' or d:TypeOfSequence = 'group']/r:Label">
-        <xsl:variable name="level" select="parent::d:Sequence/d:TypeOfSequence"/>
-        <xsl:variable name="seq-style" select="$style/Numerotation/Sequence/Level[@name = $level]"/>
-        <xsl:variable name="parent-level"
-            select="$style/Numerotation/Sequence/Level[following-sibling::Level[1]/@name = $level]/@name"/>
-        <xsl:variable name="gd-parent-level"
-            select="$style/Numerotation/Sequence/Level[following-sibling::Level[2]/@name = $level]/@name"/>
+    <xsl:template match="d:Sequence[d:TypeOfSequence = 'module']/r:Label">
 
         <xsl:variable name="number">
-            <xsl:apply-templates select="parent::d:Sequence" mode="calculate-number"/>
+            <!-- If the SeqNum into parameters is true --> 
+            <xsl:if test="boolean($params//SeqNum/text())">
+                <xsl:apply-templates select="parent::d:Sequence" mode="calculate-number"/>
+            </xsl:if>
         </xsl:variable>
 
         <xsl:variable name="prefix">
-            <xsl:choose>
-                <xsl:when test="$number = ''">
-                    <xsl:value-of select="$seq-style/PreSeq"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="concat($seq-style/PreSeq, $number, $seq-style/PostNumSeq)"
+                <xsl:if test="$number != ''">
+                    <xsl:value-of
+                        select="concat($number, $style//Sequence/PostNumSeq)"
                     />
-                </xsl:otherwise>
-            </xsl:choose>
+                </xsl:if>
         </xsl:variable>
 
         <xsl:copy>
@@ -134,6 +124,7 @@
                 <xsl:with-param name="prefix" select="$prefix" tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:copy>
+
     </xsl:template>
 
     <xd:doc>
@@ -145,64 +136,30 @@
     <!--  -->
     <xsl:template match="d:QuestionText/d:LiteralText">
         <!-- The goal is to calculate the prefix, concatenation of element's numbers -->
-        <xsl:variable name="question-seq-level">
-            <xsl:choose>
-                <xsl:when test="ancestor::d:Sequence[d:TypeOfSequence = 'group']">group</xsl:when>
-                <xsl:when test="ancestor::d:Sequence[d:TypeOfSequence = 'submodule']">submodule</xsl:when>
-                <xsl:otherwise>module</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="parent-level"
-            select="$style/Numerotation/Sequence/Level[following-sibling::Level[1]/@name = $question-seq-level]/@name"/>
-        <xsl:variable name="styleQuest"
-            select="$style/Numerotation/Question/Level[@name = $question-seq-level]"/>
-
-        <xsl:variable name="parent-number">
-            <xsl:if test="not(boolean($styleQuest/NumParent))">
-                <xsl:apply-templates
-                    select="
-                        ancestor::d:Sequence[d:TypeOfSequence = 'module' or d:TypeOfSequence = 'submodule' or d:TypeOfSequence = 'group']
-                        [1]"
-                    mode="calculate-number"/>
-            </xsl:if>
-        </xsl:variable>
 
         <xsl:variable name="number">
             <xsl:choose>
                 <xsl:when test="$numbering-browser = 'no-number'"/>
                 <xsl:otherwise>
-                    <xsl:variable name="levels">
-                        <Levels>
-                            <Level>template</Level>
-                            <Level>module</Level>
-                            <Level>submodule</Level>
-                            <Level>group</Level>
-                        </Levels>
-                    </xsl:variable>
-                    <xsl:variable name="numbering-start"
-                        select="$levels//Level[text() = $numbering-browser or following-sibling::Level = $numbering-browser]/text()"/>
                     <xsl:number count="*[(name() = 'd:QuestionItem' or name() = 'd:QuestionGrid')]"
-                        level="any" format="{$styleQuest/StyleNumQuest}"
-                        from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence = $numbering-start]]"
+                        level="any" format="{$style/Question/StyleNumQuest}"
+                        from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence = $numbering-browser/text()]]"
                     />
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
 
-        <!--Question number by concatenation: PreQuest + (($parent-number + PostNumParentQuest) + $number + PostNumQuest)-->
+        <!--Question number by concatenation: PreQuest + (($sequence-number + PostNumParentQuest) + $number + PostNumQuest)-->
         <xsl:variable name="prefix">
 
             <!-- Depending on a pre-question symbol is requested in the customer settings.  -->
 
-            <xsl:if test="boolean($params/Numerotation/PreQuestSymbol)">
-                <xsl:value-of select="$styleQuest/PreQuest"/>
+            <xsl:if test="boolean($params/Numerotation/PreQuestSymbol/text())">
+                <xsl:value-of select="$style/Question/PreQuest"/>
             </xsl:if>
 
             <xsl:if test="$number != ''">
-                <xsl:if test="$parent-number != ''">
-                    <xsl:value-of select="concat($parent-number, $styleQuest/PostNumParentQuest)"/>
-                </xsl:if>
-                <xsl:value-of select="concat($number, $styleQuest/PostNumQuest)"/>
+                <xsl:value-of select="concat($number, $style/Question/PostNumQuest)"/>
             </xsl:if>
         </xsl:variable>
 
@@ -219,26 +176,10 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="d:Sequence" mode="calculate-number">
-        <xsl:variable name="level" select="d:TypeOfSequence"/>
-        <xsl:variable name="seq-style" select="$style/Numerotation/Sequence/Level[@name = $level]"/>
-        <xsl:variable name="parent-level"
-            select="$style/Numerotation/Sequence/Level[following-sibling::Level[1]/@name = $level]/@name"/>
 
-        <xsl:variable name="parent-number">
-            <xsl:if test="not(boolean($seq-style/NumParent))">
-                <xsl:apply-templates
-                    select="ancestor::d:Sequence[d:TypeOfSequence/text() = $parent-level]"
-                    mode="calculate-number"/>
-            </xsl:if>
-        </xsl:variable>
-
-        <xsl:if test="$parent-number != ''">
-            <xsl:value-of select="concat($parent-number, $seq-style/PostNumParentSeq)"/>
-        </xsl:if>
-
-        <xsl:number count="d:Sequence[d:TypeOfSequence/text() = $level]" level="any"
-            format="{$seq-style/StyleNumSeq}"
-            from="d:Sequence[d:TypeOfSequence/text() = $parent-level]"/>
+        <xsl:number count="d:Sequence[d:TypeOfSequence/text() = 'module']" level="any"
+            format="{$style/Sequence/StyleNumSeq}"
+            from="d:Sequence[d:TypeOfSequence/text() = 'template']"/>
 
     </xsl:template>
 

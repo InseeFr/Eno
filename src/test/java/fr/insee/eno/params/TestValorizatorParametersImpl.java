@@ -64,23 +64,22 @@ public class TestValorizatorParametersImpl {
 
 		foParameters.setAccompanyingMail(AccompanyingMail.CNR_COL);
 
-		GlobalNumbering globalNumerotation = new GlobalNumbering();
-		globalNumerotation.setBrowsing(BrowsingEnum.NO_NUMBER);
-
-		NumberingQuestion question = new NumberingQuestion();
-		LevelQuestion levelQuestion2 = new LevelQuestion();
-		levelQuestion2.setPostNumQuest("%***%");
-		levelQuestion2.setName(LevelEnum.SUBMODULE);
-		levelQuestion2.setPostNumParentQuest("yolyo");
-		LevelQuestion levelQuestion = new LevelQuestion();
-		levelQuestion.setPostNumQuest("%***%");
-		levelQuestion.setName(LevelEnum.MODULE);
-		levelQuestion.setPostNumParentQuest("yolyo");
-		question.getLevel().add(levelQuestion);
-		//question.getLevel().add(levelQuestion2);
-
-		globalNumerotation.setQuestion(question);
-		parameters.setTitle(globalNumerotation);
+//		GlobalNumbering globalNumerotation = new GlobalNumbering();
+//		globalNumerotation.setBrowsing(BrowsingEnum.NO_NUMBER);
+//
+//		NumberingQuestion question = new NumberingQuestion();
+//		LevelQuestion levelQuestion2 = new LevelQuestion();
+//		levelQuestion2.setPostNumQuest("%***%");
+//		levelQuestion2.setName(LevelEnum.SUBMODULE);
+//		levelQuestion2.setPostNumParentQuest("yolyo");
+//		LevelQuestion levelQuestion = new LevelQuestion();
+//		levelQuestion.setPostNumQuest("%***%");
+//		levelQuestion.setName(LevelEnum.MODULE);
+//		levelQuestion.setPostNumParentQuest("yolyo");
+//		question.getLevel().add(levelQuestion);
+//
+//		globalNumerotation.setQuestion(question);
+//		parameters.setTitle(globalNumerotation);
 		parameters.setFoParameters(foParameters);
 
 		XFORMSParameters xformsParameters = new XFORMSParameters();
@@ -128,7 +127,7 @@ public class TestValorizatorParametersImpl {
 			Assertions.assertEquals(Arrays.asList(PostProcessing.FO_INSERT_ACCOMPANYING_MAILS), enoParametersFinal.getPipeline().getPostProcessing());
 
 			// Browsing
-			Assertions.assertEquals(BrowsingEnum.NO_NUMBER, enoParametersFinal.getParameters().getTitle().getBrowsing());
+//			Assertions.assertEquals(BrowsingEnum.NO_NUMBER, enoParametersFinal.getParameters().getTitle().getBrowsing());
 
 			//Context 
 			Assertions.assertEquals(Context.HOUSEHOLD, enoParametersFinal.getParameters().getContext());

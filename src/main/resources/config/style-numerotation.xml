@@ -1,30 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Numerotation>
     <Sequence>
-        <Level name="template"/>
-        <Level name="module">
-            <PreSeq></PreSeq>
-            <NumParent>false</NumParent>
-            <PostNumParentSeq></PostNumParentSeq>
             <StyleNumSeq>I</StyleNumSeq>
             <PostNumSeq> - </PostNumSeq>
-        </Level>
-        <Level name="submodule"/>
     </Sequence>
     <Question>
-        <Level name="module">
             <PreQuest>➡ </PreQuest>
-            <NumParent>false</NumParent>
             <PostNumParentQuest></PostNumParentQuest>
             <StyleNumQuest>1</StyleNumQuest>
             <PostNumQuest>. </PostNumQuest>
-        </Level>
-        <Level name="submodule">
-            <PreQuest>➡ </PreQuest>
-            <NumParent>false</NumParent>
-            <PostNumParentQuest></PostNumParentQuest>
-            <StyleNumQuest>1</StyleNumQuest>
-            <PostNumQuest>. </PostNumQuest>
-        </Level>
     </Question>
 </Numerotation>

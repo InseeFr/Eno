@@ -59,24 +59,9 @@
             </PageBreakBetween>
             <AccompanyingMail>cnrCOL</AccompanyingMail>            
         </fo-parameters>
-        <Title>
-            <Browsing>no-number</Browsing>
-            <Sequence>
-                <Level name="template"/>
-                <Level name="module">
-                    <PreSeq/>
-                    <NumParent>false</NumParent>
-                    <PostNumParentSeq/>
-                    <StyleNumSeq>I</StyleNumSeq>
-                    <PostNumSeq> - </PostNumSeq>
-                </Level>
-                <Level name="submodule"/>
-            </Sequence>
-            <Question>
-                <Level name="module">
-                    <PostNumQuest>%***%</PostNumQuest>
-                </Level>
-            </Question>
-        </Title>
+        
+        <Numerotation>
+            <SeqNum>false</SeqNum>
+        </Numerotation>
     </Parameters>
 </ENOParameters>

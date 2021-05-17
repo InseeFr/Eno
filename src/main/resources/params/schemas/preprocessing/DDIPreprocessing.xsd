@@ -7,18 +7,18 @@
     <xs:element name="Numerotation" type="GlobalNumbering"/>
     
     <xs:complexType name="GlobalNumbering">
-        <xs:sequence>
-            <xs:element name="QuestNum" type="BrowsingEnum" minOccurs="0" maxOccurs="1" default="questionnaire"/>
-            <xs:element name="SeqNum" type="xs:boolean" default="true"/>
-            <xs:element name="PreQuestSymbol" type="xs:boolean" default="true"/>
-        </xs:sequence>
+        <xs:all>
+            <xs:element name="QuestNum" type="BrowsingEnum" minOccurs="0" maxOccurs="1" default="module"/>
+            <xs:element name="SeqNum" type="xs:boolean" minOccurs="0" maxOccurs="1" default="true"/>
+            <xs:element name="PreQuestSymbol" type="xs:boolean" minOccurs="0" maxOccurs="1" default="true"/>
+        </xs:all>
     </xs:complexType>       
     
     <xs:simpleType name="BrowsingEnum">
         <xs:restriction base="xs:token">
-            <xs:enumeration value="questionnaire"/>
+            <xs:enumeration value="all"/>
             <xs:enumeration value="module"/>
-            <xs:enumeration value="submodule"/>
+            <xs:enumeration value="no-number"/>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>

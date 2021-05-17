@@ -72,8 +72,8 @@
         <fodt-parameters/>
 
         <Numerotation>
-            <QuestNum>all</QuestNum>
-            <SeqNum>false</SeqNum>
+            <QuestNum>module</QuestNum>
+            <SeqNum>true</SeqNum>
             <PreQuestSymbol>true</PreQuestSymbol>
         </Numerotation>
 

@@ -1,14 +1,14 @@
 <ENOParameters>
-    
+
     <Pipeline>
         <InFormat>ddi</InFormat>
         <OutFormat>xforms</OutFormat>
-        
+
         <PreProcessing>ddi-mapping</PreProcessing>
         <PreProcessing>ddi-dereferencing</PreProcessing>
         <PreProcessing>ddi-cleaning</PreProcessing>
         <PreProcessing>ddi-titling</PreProcessing>
-        
+
         <PostProcessing>xforms-insert-generic-questions</PostProcessing>
         <PostProcessing>xforms-browsing</PostProcessing>
         <PostProcessing>xforms-insee-model</PostProcessing>
@@ -17,32 +17,32 @@
         <PostProcessing>xforms-insert-end</PostProcessing>
         <PostProcessing>xforms-fix-adherence</PostProcessing>
     </Pipeline>
-    
+
     <Parameters>
-        
+
         <Context>household</Context>
-        
+
         <Campagne>fpe-2019-x00</Campagne>
-        
+
         <Languages>
             <Language>fr</Language>
         </Languages>
-        
+
         <EndQuestion>
             <ResponseTimeQuestion>false</ResponseTimeQuestion>
             <CommentQuestion>true</CommentQuestion>
         </EndQuestion>
-        
-        <xforms-parameters>            
+
+        <xforms-parameters>
             <NumericExample>false</NumericExample>
             <Deblocage>false</Deblocage>
             <Satisfaction>true</Satisfaction>
             <LengthOfLongTable>7</LengthOfLongTable>
         </xforms-parameters>
-        
-        <Title>
-            <Browsing>template</Browsing>
-        </Title>
+
+        <Numerotation>
+            <QuestNum>all</QuestNum>
+        </Numerotation>
     </Parameters>
-    
+
 </ENOParameters>
