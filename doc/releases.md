@@ -1,5 +1,9 @@
 # Eno Releases note
 
+## 2.2.6 - 10/05/2021
+
+- **[dependencies]** Upgrading Saxon version to 9.9.1-8 to solve some performance issues.
+
 ## 2.2.5 - 12/04/2021
 
 - **[ddi2xforms][core]** Fixing issue for Insee data collection platform when specifying variable type in xforms bind for external variables when they were not initialized : now type is not specified for external variables. 
