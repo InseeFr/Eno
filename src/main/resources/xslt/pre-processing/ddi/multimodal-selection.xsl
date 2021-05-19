@@ -117,7 +117,7 @@
         <xsl:apply-templates select="node() | @*"/>
       </xsl:copy>
     </xsl:if>
-    <xsl:if test="$output-format = 'fodt'">
+    <xsl:if test="$output-format = 'fodt' and not(matches(r:String, 'SelfAdministeredQuestionnaire|Interview'))">
       <xsl:copy>
         <xsl:apply-templates select="node() | @*"/>
       </xsl:copy>
