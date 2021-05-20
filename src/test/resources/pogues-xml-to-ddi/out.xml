@@ -858,6 +858,9 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>kiq7bjam</r:ID>
             <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Loop1</r:String>
+            </d:ConstructName>
             <r:Label>
                <r:Content xml:lang="fr-FR">Add a character</r:Content>
             </r:Label>
@@ -912,6 +915,9 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>kiq7cbgo</r:ID>
             <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Loop2</r:String>
+            </d:ConstructName>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>kiq5xw5p</r:ID>
