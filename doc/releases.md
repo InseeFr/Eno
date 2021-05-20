@@ -1,5 +1,11 @@
 # Eno Releases note
 
+## 2.2.7 - XX/XX/2021
+
+- **[ddi2fo][core]** Fixing issue where the message related to a Filter would not be displayed in fo/pdf output
+- **[poguesXML2ddi][core]** Fixing an issue with pogues2ddi transformation not preventing a GoTo that would point to a loop. It now crashes with an error
+- **[poguesXML2ddi][core]** Retrieving name of loops from Pogues-XML into DDI
+
 ## 2.2.6 - 10/05/2021
 
 - **[dependencies]** Upgrading Saxon version to 9.9.1-8 to solve some performance issues.
