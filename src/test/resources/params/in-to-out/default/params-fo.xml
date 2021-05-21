@@ -4,6 +4,7 @@
         <InFormat>ddi</InFormat>
         <OutFormat>fo</OutFormat>
         
+        <PreProcessing>ddi-multimodal-selection</PreProcessing>
         <PreProcessing>ddi-dereferencing</PreProcessing>
         <PreProcessing>ddi-cleaning</PreProcessing>
         <PreProcessing>ddi-titling</PreProcessing>

@@ -228,6 +228,42 @@ public class XslTransformation {
 			parametersIS.close();
 		}
 	}
+	
+	/**
+	 * Multimodal Selection Transformer initialization with its parameters
+	 * 
+	 * @param input          : the input xml file
+	 * @param xslSheet       : the xsl stylesheet that will be used
+	 * @param output         : the xml output that will be created
+	 * @param parametersFile : Titling xsl parameter
+	 * @throws Exception : if the factory couldn't be found or if the paths are
+	 *                   incorrect
+	 */
+	public void transformModalSelection(InputStream input, InputStream xslSheet, OutputStream output, String in2out)
+			throws Exception {
+		String outputFormat = "";
+		if (in2out.equals("ddi2xforms")) {
+			outputFormat = "xforms";
+		}
+		if (in2out.equals("ddi2fodt")) {
+			outputFormat = "fodt";
+		}
+		if (in2out.equals("ddi2fo")) {
+			outputFormat = "fo";
+		}
+		if (in2out.equals("ddi2lunatic-xml")) {
+			outputFormat = "lunatic-xml";
+		}
+
+		LOGGER.debug("Using the multimodal selection transformer");
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
+		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
+		transformer.setParameter(XslParameters.MULTIMODAL_SELECTION_OUTPUT_FORMAT, outputFormat);
+		xslTransform(transformer, input, output);
+
+	}
 
 	private void transformIn2Out(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			byte[] parameters, String propertiesFile) throws Exception {

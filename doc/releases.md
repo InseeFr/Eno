@@ -1,5 +1,14 @@
 # Eno Releases note
 
+## 2.2.7 - 20/05/2021
+
+- **[ddi2fo][core]** Fixing issue where the message related to a Filter would not be displayed in fo/pdf output
+- **[poguesXML2ddi][core]** Fixing an issue with pogues2ddi transformation not preventing a GoTo that would point to a loop. It now crashes with an error
+- **[poguesXML2ddi][core]** Retrieving name of loops from Pogues-XML into DDI
+- **[ddi][pre-processing]** The transformation markdown to xhtml (md2xhtml) is no longer a post-processing for poguesXML2ddi but now a pre-processing for ddi2output. For now, all output formats use it, but should change soon with Lunatic
+- **[poguesXML2ddi][core]** When Pogues defines the collection mode for Instructions, they are now correctly transcribed into DDI
+- **[ddi2output][core]** When DDI defines the collection mode for Instructions, they are now kept for the right output formats based on the collection mode that has been specified
+
 ## 2.2.6 - 10/05/2021
 
 - **[dependencies]** Upgrading Saxon version to 9.9.1-8 to solve some performance issues.

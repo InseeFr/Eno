@@ -41,17 +41,14 @@
 
     <xsl:template match="pogues:Declaration/@declarationType" mode="conversion-table">
         <xsl:choose>
-            <xsl:when test=". = 'COMMENT'">
-                <xsl:value-of select="'comment'"/>
+            <xsl:when test=". = 'CODECARD'">
+                <xsl:value-of select="'codecard'"/>
             </xsl:when>
             <xsl:when test=". = 'INSTRUCTION'">
                 <xsl:value-of select="'instruction'"/>
             </xsl:when>
             <xsl:when test=". = 'HELP'">
                 <xsl:value-of select="'help'"/>
-            </xsl:when>
-            <xsl:when test=". = 'WARNING'">
-                <xsl:value-of select="'warning'"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:apply-templates select="." mode="conversion-table-error-message"/>

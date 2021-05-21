@@ -582,6 +582,27 @@
                     <xsl:value-of select="enoddi33:get-instruction-name($source-context)"/>
                 </r:String>
             </d:InstructionName>
+            <!-- Adding instruction modes -->
+            <xsl:if test="contains(enoddi33:get-instruction-modes($source-context),'CAWI')">
+                <d:InstructionName>
+                    <r:String xml:lang="{enoddi33:get-lang($source-context)}">SelfAdministeredQuestionnaire.WebBased</r:String>
+                </d:InstructionName>
+            </xsl:if>
+            <xsl:if test="contains(enoddi33:get-instruction-modes($source-context),'PAPI')">
+                <d:InstructionName>
+                    <r:String xml:lang="{enoddi33:get-lang($source-context)}">SelfAdministeredQuestionnaire.Paper</r:String>
+                </d:InstructionName>
+            </xsl:if>
+            <xsl:if test="contains(enoddi33:get-instruction-modes($source-context),'CATI')">
+                <d:InstructionName>
+                    <r:String xml:lang="{enoddi33:get-lang($source-context)}">Interview.Telephone.CATI</r:String>
+                </d:InstructionName>
+            </xsl:if>
+            <xsl:if test="contains(enoddi33:get-instruction-modes($source-context),'CAPI')">
+                <d:InstructionName>
+                    <r:String xml:lang="{enoddi33:get-lang($source-context)}">Interview.FaceToFace.CAPIorCAMI</r:String>
+                </d:InstructionName>
+            </xsl:if>
             <d:InstructionText>
                 <d:LiteralText>
                     <d:Text xml:lang="{enoddi33:get-lang($source-context)}">
@@ -861,6 +882,9 @@
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+            <d:ConstructName>
+                <r:String xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="enoddi33:get-name($source-context)"></xsl:value-of></r:String>
+            </d:ConstructName>
             <xsl:if test="$labelVal != ''">
                 <r:Label>
                     <r:Content xml:lang="fr-FR"><xsl:value-of select="$labelVal"/></r:Content>
