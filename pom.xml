@@ -3,7 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.insee.eno</groupId>
 	<artifactId>eno-core</artifactId>
-	<version>2.2.5-dev-saxon10_5</version>
+
+	<version>2.2.6</version>
+
 	<packaging>jar</packaging>
 
 	<name>Eno – Questionnaire generator</name>
@@ -48,7 +50,11 @@
 	<properties>
 		<guice.version>4.1.0</guice.version>
 		<commons-io.version>2.5</commons-io.version>
+<<<<<<< HEAD
 		<saxon.version>10.5</saxon.version>
+=======
+		<saxon.version>9.9.1-8</saxon.version>
+>>>>>>> master
 		<fop.version>2.2</fop.version>
 		<xalan.version>2.7.2</xalan.version>
 		<slf4j.version>1.7.30</slf4j.version>
@@ -128,7 +134,7 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
 			<version>${log4j-slf4j.version}</version>
-			<scope>compile</scope>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- Jaxb -->
@@ -265,6 +271,7 @@
 									<value>INFO</value>
 								</property>
 							</systemProperties>
+							<classpathScope>test</classpathScope>
 
 						</configuration>
 					</execution>
