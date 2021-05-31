@@ -20,7 +20,7 @@ public class NamingFileService {
 			name = String.format(XFORMS_ZIP_ENTRY_PATH_FORMAT, surveyName, absolutePath.getParent().getFileName(),absolutePath.getFileName());
 			break;
 		case FO:
-			name = String.format(FO_ZIP_ENTRY_PATH_FORMAT, surveyName.replace("-",""),absolutePath.getParent().getParent().getFileName(),params.getParameters().getFoParameters().getAccompanyingMail());
+			name = String.format(FO_ZIP_ENTRY_PATH_FORMAT, surveyName.replace("-",""),absolutePath.getParent().getParent().getFileName(),params.getParameters().getFoParameters().getAccompanyingMail().value());
 			break;
 		default:
 			name = String.format(DEFAULT_ZIP_ENTRY_PATH_FORMAT, surveyName, absolutePath.getParent().getParent().getFileName(),absolutePath.getFileName());
