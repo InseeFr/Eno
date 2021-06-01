@@ -68,9 +68,25 @@
     
     <xsl:template match="h:components[@xsi:type='Loop']">
         <xsl:variable name="idGenerator" select="h:idGenerator"/>
-        <xsl:variable name="loopDependencies" select="$root//h:components[@id=$idGenerator]//h:responseDependencies" as="item()*"/>
+        <xsl:variable name="minimum" select="@min"/>
+        <xsl:variable name="iterations" select="@iterations"/>
+        <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
+        <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
+        <xsl:variable name="loopDependencies">
+            <xsl:copy-of select="$root//h:components[@id=$idGenerator]//h:responseDependencies"/>
+            <xsl:for-each select="$dependencies">
+                <xsl:if test="contains($minimum,.) or contains($iterations,.)">
+                    <xsl:copy-of select="."/>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:variable> 
+        <xsl:variable name="allDependencies" as="xs:string*">
+            <xsl:copy-of select="$dependencies"/>
+            <xsl:copy-of select="$responseDependencies"/>
+            <xsl:copy-of select="$responseDependencies[1]"/>
+        </xsl:variable>
         <components>
-            <xsl:copy-of select="@*[name(.)!='iterations' or name(.)!='min']"/>
+            <xsl:copy-of select="@*"/>
             <xsl:if test="$idGenerator!=''">
                 <xsl:attribute name="min">
                     <xsl:choose>
@@ -89,13 +105,6 @@
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
             <xsl:apply-templates select="h:hierarchy"/>
-            <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
-            <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
-            <xsl:variable name="allDependencies" as="xs:string*">
-                <xsl:copy-of select="$dependencies"/>
-                <xsl:copy-of select="$responseDependencies"/>
-                <xsl:copy-of select="$responseDependencies[1]"/>
-            </xsl:variable>
             <xsl:for-each select="distinct-values($allDependencies)">
                 <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
             </xsl:for-each>

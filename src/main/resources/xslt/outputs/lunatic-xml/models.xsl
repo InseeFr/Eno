@@ -75,17 +75,10 @@
 		<xsl:param name="idLoop" select="''" tunnel="yes"/>
 		<xsl:param name="sequenceParent" tunnel="yes"/>
 		<xsl:variable name="componentType" select="'Loop'"/>
-		<xsl:variable name="isGeneratingLoop" select="enolunatic:is-generating-loop($source-context)" as="xs:boolean"/>
+		<xsl:variable name="isGeneratedLoop" select="enolunatic:is-linked-loop($source-context)" as="xs:boolean"/>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
 		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context,enolunatic:get-global-filter($source-context))"/>
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
-		<xsl:variable name="dependenciesVariables" as="xs:string*">
-			<xsl:for-each select="$labelDependencies">
-				<xsl:sequence select="."/>
-			</xsl:for-each>
-		</xsl:variable>
-		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
-		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
 		<xsl:variable name="minimumOccurrences">
 			<xsl:call-template name="enolunatic:replace-variables-in-formula">
 				<xsl:with-param name="source-context" select="$source-context"/>
@@ -98,18 +91,34 @@
 				<xsl:with-param name="formula" select="enolunatic:get-maximum-occurrences($source-context)"/>
 			</xsl:call-template>
 		</xsl:variable>
+		<xsl:variable name="minDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($minimumOccurrences)"/>
+		<xsl:variable name="maxDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($maximumOccurrences)"/>
+		<xsl:variable name="dependenciesVariables" as="xs:string*">
+			<xsl:for-each select="$labelDependencies">
+				<xsl:sequence select="."/>
+			</xsl:for-each>
+			<xsl:for-each select="$minDependencies">
+				<xsl:sequence select="."/>
+			</xsl:for-each>
+			<xsl:for-each select="$maxDependencies">
+				<xsl:sequence select="."/>
+			</xsl:for-each>
+		</xsl:variable>
+		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
+		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
+
 		
 		<!-- keep idLoop of the parent Loop if exists -->
 		<xsl:variable name="newIdLoop" select="if($idLoop!='') then $idLoop else $id"/>
 		<xsl:variable name="newLoopDepth" select="$loopDepth + 1"/>
 		
 		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$id}">
-			<xsl:if test="not($isGeneratingLoop)">
-				<xsl:attribute name="depth" select="$newLoopDepth"/>
-				<xsl:attribute name="min" select="if ($minimumOccurrences!='') then $minimumOccurrences else 0"  />
-				<xsl:if test="$maximumOccurrences!=''">
-					<xsl:attribute name="iterations" select="enolunatic:replace-all-variables-with-business-name($source-context,$maximumOccurrences)"/>
-				</xsl:if>
+			<xsl:attribute name="depth" select="$newLoopDepth"/>
+			<xsl:attribute name="min" select="if ($minimumOccurrences!='') then enolunatic:replace-all-variables-with-business-name($source-context,$minimumOccurrences) else 0"  />
+			<xsl:if test="$maximumOccurrences!=''">
+				<xsl:attribute name="iterations" select="enolunatic:replace-all-variables-with-business-name($source-context,$maximumOccurrences)"/>
+			</xsl:if>
+			<xsl:if test="$isGeneratedLoop">
 				<idGenerator><xsl:value-of select="enolunatic:get-loop-generator-id($source-context)"/></idGenerator>
 			</xsl:if>
 			<xsl:if test="$label!=''">
