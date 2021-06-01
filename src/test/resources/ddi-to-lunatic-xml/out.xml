@@ -13,7 +13,7 @@
                     position="AFTER_QUESTION_TEXT">
          <label>"We’re going to test your knowledge about the simpsons series.Welcome in the simpsons world!"</label>
       </declarations>
-      <conditionFilter>"normal"</conditionFilter>
+      <conditionFilter>true</conditionFilter>
       <hierarchy>
          <sequence id="j6p0ti5h">
             <label>"I - Introduction"</label>
@@ -25,7 +25,7 @@
                   maxLength="500"
                   mandatory="true">
          <label>"➡ 1. Before starting, do you have any comments about the Simpsons family?"</label>
-         <conditionFilter>"normal"</conditionFilter>
+         <conditionFilter>true</conditionFilter>
          <hierarchy>
             <sequence id="j6p0ti5h">
                <label>"I - Introduction"</label>
@@ -44,7 +44,7 @@
                        position="AFTER_QUESTION_TEXT">
             <label>"If not, this is unfortunately the end of this questionnaire."</label>
          </declarations>
-         <conditionFilter>"normal"</conditionFilter>
+         <conditionFilter>true</conditionFilter>
          <hierarchy>
             <sequence id="j6p0ti5h">
                <label>"I - Introduction"</label>
@@ -58,7 +58,7 @@
                   id="j6p6my1d"
                   filterDescription="false">
          <label>"If you are not ready, please go to the end of the questionnaire"</label>
-         <conditionFilter>"normal"</conditionFilter>
+         <conditionFilter>true</conditionFilter>
          <hierarchy>
             <sequence id="j6p0ti5h">
                <label>"I - Introduction"</label>
@@ -2387,7 +2387,7 @@
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="j6z12s2d">
       <label>"VIII - Comment"</label>
-      <conditionFilter>"normal"</conditionFilter>
+      <conditionFilter>true</conditionFilter>
       <hierarchy>
          <sequence id="j6z12s2d">
             <label>"VIII - Comment"</label>
@@ -2399,7 +2399,7 @@
                   maxLength="255"
                   mandatory="false">
          <label>"➡ 1. Do you have any comment about the survey?"</label>
-         <conditionFilter>"normal"</conditionFilter>
+         <conditionFilter>true</conditionFilter>
          <hierarchy>
             <sequence id="j6z12s2d">
                <label>"VIII - Comment"</label>

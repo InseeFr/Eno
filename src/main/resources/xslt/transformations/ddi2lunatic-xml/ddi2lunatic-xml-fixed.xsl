@@ -285,6 +285,7 @@
         <xsl:variable name="not-equal" select="' &lt;&gt; '"/>
         
         <xsl:variable name="readonly" select="'&quot;readonly&quot;'"/>
+        <xsl:variable name="true" select="'true'"/>
         <xsl:variable name="normal" select="'&quot;normal&quot;'"/>
         <xsl:variable name="hidden" select="'&quot;hidden&quot;'"/>
         
@@ -309,7 +310,7 @@
                     <xsl:value-of select="$returned-relevant-condition"/>                    
                 </xsl:when>                
                 <xsl:otherwise>
-                    <xsl:value-of select="$normal"/>
+                    <xsl:value-of select="$true"/>
                 </xsl:otherwise>
             </xsl:choose>
         </conditionFilter>

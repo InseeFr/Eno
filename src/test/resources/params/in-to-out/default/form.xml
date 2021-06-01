@@ -12,7 +12,7 @@
                     position="AFTER_QUESTION_TEXT">
          <label>"We’re going to test your knowledge about the simpsons series.Welcome in the simspons world!"</label>
       </declarations>
-      <conditionFilter>"normal"</conditionFilter>
+      <conditionFilter>true</conditionFilter>
       <hierarchy>
          <sequence id="j6p0ti5h">
             <label>"I - Introduction"</label>
@@ -24,7 +24,7 @@
                   maxLength="500"
                   mandatory="false">
          <label>"➡ 1. Before starting, do you have any comments about the Simpsons family?"</label>
-         <conditionFilter>"normal"</conditionFilter>
+         <conditionFilter>true</conditionFilter>
          <hierarchy>
             <sequence id="j6p0ti5h">
                <label>"I - Introduction"</label>
@@ -38,7 +38,7 @@
                   id="j6p0np9q"
                   mandatory="false">
          <label>"➡ 2. Are you ready?"</label>
-         <conditionFilter>"normal"</conditionFilter>
+         <conditionFilter>true</conditionFilter>
          <hierarchy>
             <sequence id="j6p0ti5h">
                <label>"I - Introduction"</label>
@@ -52,7 +52,7 @@
                   id="j6p6my1d"
                   filterDescription="true">
          <label>"If you are not ready, please go to the end of the questionnaire"</label>
-         <conditionFilter>"normal"</conditionFilter>
+         <conditionFilter>true</conditionFilter>
          <hierarchy>
             <sequence id="j6p0ti5h">
                <label>"I - Introduction"</label>
@@ -1427,7 +1427,7 @@
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="j6z12s2d">
       <label>"VI - Comment"</label>
-      <conditionFilter>"normal"</conditionFilter>
+      <conditionFilter>true</conditionFilter>
       <hierarchy>
          <sequence id="j6z12s2d">
             <label>"VI - Comment"</label>
@@ -1439,7 +1439,7 @@
                   maxLength="255"
                   mandatory="false">
          <label>"➡ 1. Do you have any comment about the survey?"</label>
-         <conditionFilter>"normal"</conditionFilter>
+         <conditionFilter>true</conditionFilter>
          <hierarchy>
             <sequence id="j6z12s2d">
                <label>"VI - Comment"</label>
@@ -2436,11 +2436,11 @@
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_COMMENT</name>
-      <expression>"normal"</expression>
+      <expression>true</expression>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_READY</name>
-      <expression>"normal"</expression>
+      <expression>true</expression>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_PRODUCER</name>
@@ -2519,7 +2519,7 @@
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_SURVEY_COMMENT</name>
-      <expression>"normal"</expression>
+      <expression>true</expression>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>SUM_EXPENSES</name>
