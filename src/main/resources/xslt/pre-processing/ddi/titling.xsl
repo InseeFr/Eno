@@ -3,6 +3,7 @@
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:d="ddi:datacollection:3_3"
     xmlns:r="ddi:reusable:3_3" xmlns:l="ddi:logicalproduct:3_3"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi" xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     version="2.0">
 
     <xd:doc scope="stylesheet">
@@ -106,7 +107,7 @@
 
         <xsl:variable name="number">
             <!-- If the SeqNum into parameters is true --> 
-            <xsl:if test="boolean($params//SeqNum/text())">
+            <xsl:if test="xs:boolean($params//SeqNum/text()='true')">
                 <xsl:apply-templates select="parent::d:Sequence" mode="calculate-number"/>
             </xsl:if>
         </xsl:variable>
@@ -154,7 +155,7 @@
 
             <!-- Depending on a pre-question symbol is requested in the customer settings.  -->
 
-            <xsl:if test="boolean($params/Numerotation/PreQuestSymbol/text())">
+            <xsl:if test="xs:boolean($params/Numerotation/PreQuestSymbol/text())">
                 <xsl:value-of select="$style/Question/PreQuest"/>
             </xsl:if>
 
