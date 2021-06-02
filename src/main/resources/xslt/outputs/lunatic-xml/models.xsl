@@ -121,7 +121,7 @@
 			<xsl:if test="$isGeneratedLoop">
 				<idGenerator><xsl:value-of select="enolunatic:get-loop-generator-id($source-context)"/></idGenerator>
 			</xsl:if>
-			<xsl:if test="$label!=''">
+			<xsl:if test="$minimumOccurrences!=$maximumOccurrences and $label!=''">
 				<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/></label>
 			</xsl:if>
 			<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
