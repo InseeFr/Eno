@@ -554,7 +554,7 @@
 		<xsl:variable name="minimumResponse" select="enolunatic:get-minimum($source-context)"/>
 		<xsl:variable name="maximumResponse" select="enolunatic:get-maximum($source-context)"/>
 		<xsl:variable name="numberOfDecimals">
-			<xsl:variable name="dec" select="enolunatic:get-number-of-decimals($source-context)"/>
+			<xsl:variable name="dec" select="string(enolunatic:get-number-of-decimals($source-context))"/>
 			<xsl:choose>
 				<xsl:when test="$dec!=''"><xsl:value-of select="$dec"/></xsl:when>
 				<xsl:when test="$dec='' and $minimumResponse!='' and self::NumericDomain">0</xsl:when>
@@ -658,7 +658,7 @@
 		<xsl:variable name="minimumResponse" select="enolunatic:get-minimum($source-context)"/>
 		<xsl:variable name="maximumResponse" select="enolunatic:get-maximum($source-context)"/>
 		<xsl:variable name="numberOfDecimals">
-			<xsl:variable name="dec" select="enolunatic:get-number-of-decimals($source-context)"/>
+			<xsl:variable name="dec" select="string(enolunatic:get-number-of-decimals($source-context))"/>
 			<xsl:choose>
 				<xsl:when test="$dec!=''"><xsl:value-of select="$dec"/></xsl:when>
 				<xsl:when test="$dec='' and $minimumResponse!=''">0</xsl:when>

@@ -3,7 +3,7 @@
     <Pipeline>
         <InFormat>ddi</InFormat>
         <OutFormat>xforms</OutFormat>
-
+        <PreProcessing>ddi-multimodal-selection</PreProcessing>
         <PreProcessing>ddi-mapping</PreProcessing>
         <PreProcessing>ddi-dereferencing</PreProcessing>
         <PreProcessing>ddi-cleaning</PreProcessing>
