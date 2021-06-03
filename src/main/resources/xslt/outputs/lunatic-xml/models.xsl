@@ -125,6 +125,7 @@
 				</hierarchy>
 			</xsl:if>			
 			<xsl:copy-of select="$dependencies"/>
+			<!-- ToDo : add <lines min="" max=""/>  only if min and max are interger -->
 			
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
