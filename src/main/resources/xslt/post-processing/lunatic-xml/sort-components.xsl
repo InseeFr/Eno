@@ -71,13 +71,7 @@
         <xsl:variable name="loopDependencies" select="$root//h:components[@id=$idGenerator]//h:responseDependencies" as="item()*"/>
         <components>
             <xsl:copy-of select="@*[name(.)!='iterations' or name(.)!='min']"/>
-            <xsl:if test="$idGenerator!=''">
-                <xsl:attribute name="min">
-                    <xsl:choose>
-                        <xsl:when test="string-length(@min) &gt; 0"><xsl:value-of select="@min"/></xsl:when>
-                        <xsl:otherwise><xsl:value-of select="'0'"/></xsl:otherwise>
-                    </xsl:choose>
-                </xsl:attribute>
+            <xsl:if test="$idGenerator!='' and not(h:lines)">
                 <xsl:attribute name="iterations">
                     <xsl:choose>
                         <xsl:when test="string-length(@iterations) &gt; 0"><xsl:value-of select="@iterations"/></xsl:when>
