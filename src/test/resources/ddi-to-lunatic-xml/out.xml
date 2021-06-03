@@ -2449,7 +2449,6 @@
                componentType="Loop"
                id="kiq7cbgo"
                depth="1"
-               min="0"
                iterations="count(NAME_CHAR)">
       <conditionFilter>
          <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
