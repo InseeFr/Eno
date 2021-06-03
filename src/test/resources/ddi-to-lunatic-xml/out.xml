@@ -13,7 +13,9 @@
                     position="AFTER_QUESTION_TEXT">
          <label>"We’re going to test your knowledge about the simpsons series.Welcome in the simpsons world!"</label>
       </declarations>
-      <conditionFilter>true</conditionFilter>
+      <conditionFilter>
+         <value>true</value>
+      </conditionFilter>
       <hierarchy>
          <sequence id="j6p0ti5h">
             <label>"I - Introduction"</label>
@@ -25,7 +27,9 @@
                   maxLength="500"
                   mandatory="true">
          <label>"➡ 1. Before starting, do you have any comments about the Simpsons family?"</label>
-         <conditionFilter>true</conditionFilter>
+         <conditionFilter>
+            <value>true</value>
+         </conditionFilter>
          <hierarchy>
             <sequence id="j6p0ti5h">
                <label>"I - Introduction"</label>
@@ -44,7 +48,9 @@
                        position="AFTER_QUESTION_TEXT">
             <label>"If not, this is unfortunately the end of this questionnaire."</label>
          </declarations>
-         <conditionFilter>true</conditionFilter>
+         <conditionFilter>
+            <value>true</value>
+         </conditionFilter>
          <hierarchy>
             <sequence id="j6p0ti5h">
                <label>"I - Introduction"</label>
@@ -58,7 +64,9 @@
                   id="j6p6my1d"
                   filterDescription="false">
          <label>"If you are not ready, please go to the end of the questionnaire"</label>
-         <conditionFilter>true</conditionFilter>
+         <conditionFilter>
+            <value>true</value>
+         </conditionFilter>
          <hierarchy>
             <sequence id="j6p0ti5h">
                <label>"I - Introduction"</label>
@@ -67,7 +75,10 @@
       </components>
       <components xsi:type="Subsequence" componentType="Subsequence" id="j6p0s7o5">
          <label>"General knowledge of the series"</label>
-         <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+         <conditionFilter>
+            <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+            <bindingDependencies>READY</bindingDependencies>
+         </conditionFilter>
          <hierarchy>
             <sequence id="j6p0ti5h">
                <label>"I - Introduction"</label>
@@ -82,7 +93,10 @@
                      maxLength="30"
                      mandatory="false">
             <label>"➡ 3. Who is the producer?"</label>
-            <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+            <conditionFilter>
+               <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+               <bindingDependencies>READY</bindingDependencies>
+            </conditionFilter>
             <hierarchy>
                <sequence id="j6p0ti5h">
                   <label>"I - Introduction"</label>
@@ -102,7 +116,10 @@
                      max="99"
                      decimals="0">
             <label>"➡ 4. What is the current season number?"</label>
-            <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+            <conditionFilter>
+               <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+               <bindingDependencies>READY</bindingDependencies>
+            </conditionFilter>
             <hierarchy>
                <sequence id="j6p0ti5h">
                   <label>"I - Introduction"</label>
@@ -126,7 +143,10 @@
                           position="AFTER_QUESTION_TEXT">
                <label>"Please answer with YYYY-MM-DD format"</label>
             </declarations>
-            <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+            <conditionFilter>
+               <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+               <bindingDependencies>READY</bindingDependencies>
+            </conditionFilter>
             <hierarchy>
                <sequence id="j6p0ti5h">
                   <label>"I - Introduction"</label>
@@ -150,7 +170,10 @@
                           position="AFTER_QUESTION_TEXT">
                <label>"Please answer with YYYY-MM format"</label>
             </declarations>
-            <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+            <conditionFilter>
+               <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+               <bindingDependencies>READY</bindingDependencies>
+            </conditionFilter>
             <hierarchy>
                <sequence id="j6p0ti5h">
                   <label>"I - Introduction"</label>
@@ -175,7 +198,10 @@
                           position="AFTER_QUESTION_TEXT">
                <label>"Please answer with YYYY format"</label>
             </declarations>
-            <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+            <conditionFilter>
+               <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+               <bindingDependencies>READY</bindingDependencies>
+            </conditionFilter>
             <hierarchy>
                <sequence id="j6p0ti5h">
                   <label>"I - Introduction"</label>
@@ -196,7 +222,10 @@
                      max="70.00"
                      decimals="2">
             <label>"➡ 8. How long does an episode last?"</label>
-            <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+            <conditionFilter>
+               <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+               <bindingDependencies>READY</bindingDependencies>
+            </conditionFilter>
             <hierarchy>
                <sequence id="j6p0ti5h">
                   <label>"I - Introduction"</label>
@@ -217,7 +246,10 @@
                      max="366.0"
                      decimals="1">
             <label>"➡ 9. How long does it take to write a new episode?"</label>
-            <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+            <conditionFilter>
+               <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+               <bindingDependencies>READY</bindingDependencies>
+            </conditionFilter>
             <hierarchy>
                <sequence id="j6p0ti5h">
                   <label>"I - Introduction"</label>
@@ -238,7 +270,10 @@
                      max="12"
                      decimals="0">
             <label>"➡ 10. How long will it take you to watch all the existing episodes?"</label>
-            <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+            <conditionFilter>
+               <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+               <bindingDependencies>READY</bindingDependencies>
+            </conditionFilter>
             <hierarchy>
                <sequence id="j6p0ti5h">
                   <label>"I - Introduction"</label>
@@ -259,7 +294,10 @@
                      max="100"
                      decimals="0">
             <label>"➡ 11. For how long have you known the Simpsons family?"</label>
-            <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+            <conditionFilter>
+               <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+               <bindingDependencies>READY</bindingDependencies>
+            </conditionFilter>
             <hierarchy>
                <sequence id="j6p0ti5h">
                   <label>"I - Introduction"</label>
@@ -280,7 +318,10 @@
                      max="99.0"
                      decimals="1">
             <label>"➡ 15. In your opinion, how much is the part of audience share in US for the 2016 season?"</label>
-            <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+            <conditionFilter>
+               <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+               <bindingDependencies>READY</bindingDependencies>
+            </conditionFilter>
             <hierarchy>
                <sequence id="j6p0ti5h">
                   <label>"I - Introduction"</label>
@@ -302,7 +343,10 @@
                     position="AFTER_QUESTION_TEXT">
          <label>"This module asks about your general knowledge of the Simpsons city"</label>
       </declarations>
-      <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+      <conditionFilter>
+         <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+         <bindingDependencies>READY</bindingDependencies>
+      </conditionFilter>
       <hierarchy>
          <sequence id="j3341528">
             <label>"II - Simpsons’ city"</label>
@@ -318,7 +362,10 @@
                        position="AFTER_QUESTION_TEXT">
             <label>"One possible answer"</label>
          </declarations>
-         <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+         <conditionFilter>
+            <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+            <bindingDependencies>READY</bindingDependencies>
+         </conditionFilter>
          <hierarchy>
             <sequence id="j3341528">
                <label>"II - Simpsons’ city"</label>
@@ -349,7 +396,10 @@
                        position="AFTER_QUESTION_TEXT">
             <label>"Only one possible answer"</label>
          </declarations>
-         <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+         <conditionFilter>
+            <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+            <bindingDependencies>READY</bindingDependencies>
+         </conditionFilter>
          <hierarchy>
             <sequence id="j3341528">
                <label>"II - Simpsons’ city"</label>
@@ -379,7 +429,10 @@
                   id="j4nw5cqz"
                   mandatory="false">
          <label>"➡ 3. In which state do The Simpsons reside?"</label>
-         <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+         <conditionFilter>
+            <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+            <bindingDependencies>READY</bindingDependencies>
+         </conditionFilter>
          <hierarchy>
             <sequence id="j3341528">
                <label>"II - Simpsons’ city"</label>
@@ -443,7 +496,10 @@
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="j6qe0h9q">
       <label>"III - Characters"</label>
-      <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+      <conditionFilter>
+         <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+         <bindingDependencies>READY</bindingDependencies>
+      </conditionFilter>
       <hierarchy>
          <sequence id="j6qe0h9q">
             <label>"III - Characters"</label>
@@ -458,7 +514,10 @@
                        position="AFTER_QUESTION_TEXT">
             <label>"Several possible answers"</label>
          </declarations>
-         <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+         <conditionFilter>
+            <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+            <bindingDependencies>READY</bindingDependencies>
+         </conditionFilter>
          <hierarchy>
             <sequence id="j6qe0h9q">
                <label>"III - Characters"</label>
@@ -496,7 +555,10 @@
                        position="BEFORE_QUESTION_TEXT">
             <label>"Now we are going to know if you think that Jay is a gluton."</label>
          </declarations>
-         <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+         <conditionFilter>
+            <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+            <bindingDependencies>READY</bindingDependencies>
+         </conditionFilter>
          <hierarchy>
             <sequence id="j6qe0h9q">
                <label>"III - Characters"</label>
@@ -585,7 +647,10 @@
                   positioning="HORIZONTAL"
                   mandatory="false">
          <label>"➡ 3. Which character works in the nuclear power plant?"</label>
-         <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+         <conditionFilter>
+            <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+            <bindingDependencies>READY</bindingDependencies>
+         </conditionFilter>
          <hierarchy>
             <sequence id="j6qe0h9q">
                <label>"III - Characters"</label>
@@ -674,7 +739,10 @@
                   positioning="HORIZONTAL"
                   mandatory="false">
          <label>"➡ 4. In which city each character was born?"</label>
-         <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+         <conditionFilter>
+            <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+            <bindingDependencies>READY</bindingDependencies>
+         </conditionFilter>
          <hierarchy>
             <sequence id="j6qe0h9q">
                <label>"III - Characters"</label>
@@ -839,7 +907,10 @@
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="j4nw88h2">
       <label>"IV - General questions"</label>
-      <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+      <conditionFilter>
+         <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+         <bindingDependencies>READY</bindingDependencies>
+      </conditionFilter>
       <hierarchy>
          <sequence id="j4nw88h2">
             <label>"IV - General questions"</label>
@@ -847,7 +918,10 @@
       </hierarchy>
       <components xsi:type="Subsequence" componentType="Subsequence" id="j6qe237q">
          <label>"Kwik-E-Mart"</label>
-         <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+         <conditionFilter>
+            <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+            <bindingDependencies>READY</bindingDependencies>
+         </conditionFilter>
          <hierarchy>
             <sequence id="j4nw88h2">
                <label>"IV - General questions"</label>
@@ -862,7 +936,10 @@
                      positioning="HORIZONTAL"
                      mandatory="false">
             <label>"➡ 1. Please, specify the percentage of Jay’s expenses in the Kwik-E-Mart for each product?"</label>
-            <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+            <conditionFilter>
+               <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+               <bindingDependencies>READY</bindingDependencies>
+            </conditionFilter>
             <hierarchy>
                <sequence id="j4nw88h2">
                   <label>"IV - General questions"</label>
@@ -1017,7 +1094,10 @@
                      positioning="HORIZONTAL"
                      mandatory="false">
             <label>"➡ 2. Please specify if Jay has bought each product in his last food shopping"</label>
-            <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+            <conditionFilter>
+               <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+               <bindingDependencies>READY</bindingDependencies>
+            </conditionFilter>
             <hierarchy>
                <sequence id="j4nw88h2">
                   <label>"IV - General questions"</label>
@@ -1234,7 +1314,10 @@
       </components>
       <components xsi:type="Subsequence" componentType="Subsequence" id="j6qejudb">
          <label>"Clowning"</label>
-         <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+         <conditionFilter>
+            <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+            <bindingDependencies>READY</bindingDependencies>
+         </conditionFilter>
          <hierarchy>
             <sequence id="j4nw88h2">
                <label>"IV - General questions"</label>
@@ -1249,7 +1332,10 @@
                      positioning="HORIZONTAL"
                      mandatory="false">
             <label>"➡ 3. Who did these clownings and tell us what you remember?"</label>
-            <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+            <conditionFilter>
+               <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+               <bindingDependencies>READY</bindingDependencies>
+            </conditionFilter>
             <hierarchy>
                <sequence id="j4nw88h2">
                   <label>"IV - General questions"</label>
@@ -1401,7 +1487,10 @@
       </components>
       <components xsi:type="Subsequence" componentType="Subsequence" id="j6qeh91y">
          <label>"Transport"</label>
-         <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+         <conditionFilter>
+            <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+            <bindingDependencies>READY</bindingDependencies>
+         </conditionFilter>
          <hierarchy>
             <sequence id="j4nw88h2">
                <label>"IV - General questions"</label>
@@ -1421,7 +1510,10 @@
                           position="AFTER_QUESTION_TEXT">
                <label>"Several answers possible: check off all the relevant boxes"</label>
             </declarations>
-            <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+            <conditionFilter>
+               <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+               <bindingDependencies>READY</bindingDependencies>
+            </conditionFilter>
             <hierarchy>
                <sequence id="j4nw88h2">
                   <label>"IV - General questions"</label>
@@ -1602,7 +1694,10 @@
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="j6qfx9qe">
       <label>"V - Favourite characters (dynamic table)"</label>
-      <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+      <conditionFilter>
+         <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+         <bindingDependencies>READY</bindingDependencies>
+      </conditionFilter>
       <hierarchy>
          <sequence id="j6qfx9qe">
             <label>"V - Favourite characters (dynamic table)"</label>
@@ -1614,7 +1709,10 @@
                   positioning="HORIZONTAL"
                   mandatory="false">
          <label>"➡ 1. Please, complete the following grid with your favourite characters"</label>
-         <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+         <conditionFilter>
+            <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+            <bindingDependencies>READY</bindingDependencies>
+         </conditionFilter>
          <hierarchy>
             <sequence id="j6qfx9qe">
                <label>"V - Favourite characters (dynamic table)"</label>
@@ -1972,7 +2070,10 @@
                   positioning="HORIZONTAL"
                   mandatory="false">
          <label>"➡ 2. How has your feeling about the following characters evolved over time?"</label>
-         <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+         <conditionFilter>
+            <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+            <bindingDependencies>READY</bindingDependencies>
+         </conditionFilter>
          <hierarchy>
             <sequence id="j6qfx9qe">
                <label>"V - Favourite characters (dynamic table)"</label>
@@ -2077,7 +2178,10 @@
                   positioning="HORIZONTAL"
                   mandatory="false">
          <label>"➡ 3. Can you tell how long Bart Simpson has been on leave for each type and whether there has been another type?"</label>
-         <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+         <conditionFilter>
+            <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+            <bindingDependencies>READY</bindingDependencies>
+         </conditionFilter>
          <hierarchy>
             <sequence id="j6qfx9qe">
                <label>"V - Favourite characters (dynamic table)"</label>
@@ -2238,7 +2342,10 @@
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="kiq5mr0b">
       <label>"VI - Favourite characters (Loop)"</label>
-      <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+      <conditionFilter>
+         <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+         <bindingDependencies>READY</bindingDependencies>
+      </conditionFilter>
       <hierarchy>
          <sequence id="kiq5mr0b">
             <label>"VI - Favourite characters (Loop)"</label>
@@ -2252,7 +2359,10 @@
                   max="20"
                   decimals="0">
          <label>"➡ 1. How many characters from the Simpsons family could you precisely describe?"</label>
-         <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+         <conditionFilter>
+            <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+            <bindingDependencies>READY</bindingDependencies>
+         </conditionFilter>
          <hierarchy>
             <sequence id="kiq5mr0b">
                <label>"VI - Favourite characters (Loop)"</label>
@@ -2263,7 +2373,10 @@
       </components>
       <components xsi:type="Loop" componentType="Loop" id="kiq7bjam">
          <label>"Add a character"</label>
-         <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+         <conditionFilter>
+            <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+            <bindingDependencies>READY</bindingDependencies>
+         </conditionFilter>
          <hierarchy>
             <sequence id="kiq5mr0b">
                <label>"VI - Favourite characters (Loop)"</label>
@@ -2273,7 +2386,10 @@
          <bindingDependencies>AGE_CHAR</bindingDependencies>
          <components xsi:type="Subsequence" componentType="Subsequence" id="kiq5u8d5">
             <label>"Description of each character"</label>
-            <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+            <conditionFilter>
+               <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+               <bindingDependencies>READY</bindingDependencies>
+            </conditionFilter>
             <hierarchy>
                <sequence id="kiq5mr0b">
                   <label>"VI - Favourite characters (Loop)"</label>
@@ -2288,7 +2404,10 @@
                         maxLength="30"
                         mandatory="false">
                <label>"➡ 2. What is the first name of this character?"</label>
-               <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+               <conditionFilter>
+                  <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+                  <bindingDependencies>READY</bindingDependencies>
+               </conditionFilter>
                <hierarchy>
                   <sequence id="kiq5mr0b">
                      <label>"VI - Favourite characters (Loop)"</label>
@@ -2308,7 +2427,10 @@
                         max="120"
                         decimals="0">
                <label>"➡ 3. How old is this character in the first episode of the Simpsons family?"</label>
-               <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+               <conditionFilter>
+                  <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+                  <bindingDependencies>READY</bindingDependencies>
+               </conditionFilter>
                <hierarchy>
                   <sequence id="kiq5mr0b">
                      <label>"VI - Favourite characters (Loop)"</label>
@@ -2329,7 +2451,10 @@
                depth="1"
                min="0"
                iterations="count(NAME_CHAR)">
-      <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+      <conditionFilter>
+         <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+         <bindingDependencies>READY</bindingDependencies>
+      </conditionFilter>
       <bindingDependencies>NAME_CHAR</bindingDependencies>
       <bindingDependencies>FAVCHAR</bindingDependencies>
       <bindingDependencies>MEMORY_CHAR</bindingDependencies>
@@ -2337,7 +2462,10 @@
       <loopDependencies>AGE_CHAR</loopDependencies>
       <components xsi:type="Sequence" componentType="Sequence" id="kiq5xw5p">
          <label>"VII - Other details about character named " || cast(cast(NAME_CHAR,string),string) || " "</label>
-         <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+         <conditionFilter>
+            <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+            <bindingDependencies>READY</bindingDependencies>
+         </conditionFilter>
          <hierarchy>
             <sequence id="kiq5xw5p">
                <label>"VII - Other details about character named " || cast(cast(NAME_CHAR,string),string) || " "</label>
@@ -2349,7 +2477,10 @@
                      id="kiq65x3c"
                      mandatory="false">
             <label>"➡ 1. Is character named " || cast(cast(NAME_CHAR,string),string) || " your favourite one ? "</label>
-            <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+            <conditionFilter>
+               <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+               <bindingDependencies>READY</bindingDependencies>
+            </conditionFilter>
             <hierarchy>
                <sequence id="kiq5xw5p">
                   <label>"VII - Other details about character named " || cast(cast(NAME_CHAR,string),string) || " "</label>
@@ -2373,7 +2504,10 @@
                      maxLength="255"
                      mandatory="false">
             <label>"➡ 2. What is your best memory about character named " || cast(cast(NAME_CHAR,string),string) || " ? "</label>
-            <conditionFilter>(not(cast(READY,integer)  &lt;&gt;  1))</conditionFilter>
+            <conditionFilter>
+               <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
+               <bindingDependencies>READY</bindingDependencies>
+            </conditionFilter>
             <hierarchy>
                <sequence id="kiq5xw5p">
                   <label>"VII - Other details about character named " || cast(cast(NAME_CHAR,string),string) || " "</label>
@@ -2387,7 +2521,9 @@
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="j6z12s2d">
       <label>"VIII - Comment"</label>
-      <conditionFilter>true</conditionFilter>
+      <conditionFilter>
+         <value>true</value>
+      </conditionFilter>
       <hierarchy>
          <sequence id="j6z12s2d">
             <label>"VIII - Comment"</label>
@@ -2399,7 +2535,9 @@
                   maxLength="255"
                   mandatory="false">
          <label>"➡ 1. Do you have any comment about the survey?"</label>
-         <conditionFilter>true</conditionFilter>
+         <conditionFilter>
+            <value>true</value>
+         </conditionFilter>
          <hierarchy>
             <sequence id="j6z12s2d">
                <label>"VIII - Comment"</label>
