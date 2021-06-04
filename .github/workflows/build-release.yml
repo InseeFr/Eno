@@ -18,7 +18,7 @@ jobs:
         java-version: 11
         
     - name: Build with Maven
-      run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Djar.finalName="eno-core" -B -V --file pom.xml
+      run: mvn clean process-classes package install -DskipTests=true -Dmaven.javadoc.skip=true -Djar.finalName="eno-core" -B -V --file pom.xml
       
     - name: Test with Maven
       run: mvn test -B --file pom.xml
