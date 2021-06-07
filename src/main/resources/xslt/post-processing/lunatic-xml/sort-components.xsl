@@ -87,8 +87,8 @@
         <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
         <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
         <!-- The loopDependencies consist of the reponseDependencies of the generating loop if linked loop, and the variables used in formula of minimum and maximum -->
-        <xsl:variable name="loopDependencies">
-            <xsl:copy-of select="$root//h:components[@id=$idGenerator]//h:responseDependencies"/>
+        <xsl:variable name="loopDependencies" as="xs:string*">
+            <xsl:copy-of select="distinct-values($root//h:components[@id=$idGenerator]//h:responseDependencies)"/>
             <xsl:for-each select="$dependencies">
                 <xsl:if test="contains($minimum,.) or contains($maximum,.)">
                     <xsl:copy-of select="."/>
