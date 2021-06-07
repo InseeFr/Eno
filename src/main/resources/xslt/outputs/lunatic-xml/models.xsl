@@ -106,7 +106,6 @@
 		</xsl:variable>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
 		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
-
 		
 		<!-- keep idLoop of the parent Loop if exists -->
 		<xsl:variable name="newIdLoop" select="if($idLoop!='') then $idLoop else $id"/>
@@ -114,13 +113,23 @@
 		
 		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$id}">
 			<xsl:attribute name="depth" select="$newLoopDepth"/>
-			<xsl:attribute name="min" select="if ($minimumOccurrences!='') then enolunatic:replace-all-variables-with-business-name($source-context,$minimumOccurrences) else 0"  />
-			<xsl:if test="$maximumOccurrences!=''">
-				<xsl:attribute name="iterations" select="enolunatic:replace-all-variables-with-business-name($source-context,$maximumOccurrences)"/>
-			</xsl:if>
-			<xsl:if test="$isGeneratedLoop">
-				<idGenerator><xsl:value-of select="enolunatic:get-loop-generator-id($source-context)"/></idGenerator>
-			</xsl:if>
+			<xsl:choose>
+				<xsl:when test="$isGeneratedLoop">
+					<xsl:if test="$maximumOccurrences!=''">
+						<xsl:attribute name="iterations" select="enolunatic:replace-all-variables-with-business-name($source-context,$maximumOccurrences)"/>
+					</xsl:if>
+					<idGenerator><xsl:value-of select="enolunatic:get-loop-generator-id($source-context)"/></idGenerator>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:if test="$minimumOccurrences!=$maximumOccurrences and $label!=''">
+						<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/></label>
+					</xsl:if>
+					<lines>
+						<xsl:attribute name="min" select="if ($minimumOccurrences!='') then enolunatic:replace-all-variables-with-business-name($source-context,$minimumOccurrences) else 0"  />
+						<xsl:attribute name="max" select="enolunatic:replace-all-variables-with-business-name($source-context,$maximumOccurrences)"/>
+					</lines>
+				</xsl:otherwise>
+			</xsl:choose>
 			<xsl:if test="$minimumOccurrences!=$maximumOccurrences and $label!=''">
 				<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/></label>
 			</xsl:if>
