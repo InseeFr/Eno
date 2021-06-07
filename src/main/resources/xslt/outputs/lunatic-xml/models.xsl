@@ -77,7 +77,10 @@
 		<xsl:variable name="componentType" select="'Loop'"/>
 		<xsl:variable name="isGeneratedLoop" select="enolunatic:is-linked-loop($source-context)" as="xs:boolean"/>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
-		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context,enolunatic:get-global-filter($source-context))"/>
+		
+		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
+		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
+		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context,$filter)"/>
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
 		<xsl:variable name="minimumOccurrences">
 			<xsl:call-template name="enolunatic:replace-variables-in-formula">
@@ -133,7 +136,7 @@
 			<xsl:if test="$minimumOccurrences!=$maximumOccurrences and $label!=''">
 				<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/></label>
 			</xsl:if>
-			<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
+			<xsl:copy-of select="enolunatic:add-condition-filter($filterCondition,$filterDependencies)"/>
 			<xsl:if test="$sequenceParent">
 				<hierarchy>
 					<xsl:copy-of select="$sequenceParent"/>
@@ -169,7 +172,9 @@
 		</xsl:variable>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
 		<xsl:variable name="finalLabel" select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/>
-		<xsl:variable name="filterCondition" select="enolunatic:get-global-filter($source-context)"/>
+		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
+		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
+		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context, $filter)"/>
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
 		<xsl:variable name="dependenciesVariables" as="xs:string*">
 			<xsl:for-each select="$labelDependencies">
@@ -201,7 +206,7 @@
 		<components xsi:type="{$componentType-Sequence}" componentType="{$componentType-Sequence}" id="{$id}">
 			<label><xsl:value-of select="$finalLabel"/></label>
 			<xsl:copy-of select="enolunatic:getInstructionForQuestion($source-context,.)"/>
-			<conditionFilter><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$filterCondition)"/></conditionFilter>
+			<xsl:copy-of select="enolunatic:add-condition-filter($filterCondition,$filterDependencies)"/>
 			<hierarchy>				
 				<xsl:copy-of select="$sequence"/>
 				<xsl:copy-of select="$subSequence"/>
@@ -233,7 +238,9 @@
 		<xsl:param name="languages" tunnel="yes"/>
 
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
-		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context, enolunatic:get-global-filter($source-context))"/>
+		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
+		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
+		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context, $filter)"/>
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
 		<xsl:variable name="dependenciesVariables" as="xs:string*">
 			<xsl:for-each select="$labelDependencies">
@@ -250,6 +257,7 @@
 			<xsl:with-param name="typeOfQuestion" select="self::*/name()" tunnel="yes"/>
 			<xsl:with-param name="declarations" select="enolunatic:getInstructionForQuestion($source-context,.)" as="node()*" tunnel="yes"/>
 			<xsl:with-param name="filterCondition" select="$filterCondition" tunnel="yes"/>
+			<xsl:with-param name="filterConditionDependencies" select="$filterDependencies" tunnel="yes"/>
 			<xsl:with-param name="dependencies" select="$dependencies" tunnel="yes"/>
 		</xsl:apply-templates>
 
@@ -266,11 +274,14 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="sequenceParent" tunnel="yes"/>
 		<xsl:param name="subSequenceParent" tunnel="yes"/>
+		
+		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
+		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
+		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context,$filter)"/>
 
 		<xsl:variable name="idQuestion" select="enolunatic:get-name($source-context)"/>
 		<xsl:variable name="questionName" select="enolunatic:get-question-name($source-context,$languages[1])"/>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
-		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context, enolunatic:get-global-filter($source-context))"/>
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
 		<xsl:variable name="dependenciesVariables" as="xs:string*">
 			<xsl:for-each select="$labelDependencies">
@@ -282,7 +293,7 @@
 		<components xsi:type="CheckboxGroup" componentType="CheckboxGroup" id="{$idQuestion}">
 			<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context, $label)"/></label>
 			<xsl:copy-of select="enolunatic:getInstructionForQuestion($source-context,.)"/>
-			<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
+			<xsl:copy-of select="enolunatic:add-condition-filter($filterCondition,$filterDependencies)"/>
 			<hierarchy>
 				<xsl:copy-of select="$sequenceParent"/>
 				<xsl:copy-of select="$subSequenceParent"/>
@@ -295,7 +306,7 @@
 				<xsl:with-param name="labelQuestion" select="enolunatic:replace-all-variables-with-business-name($source-context, $label)" tunnel="yes"/>
 				<xsl:with-param name="typeOfQuestion" select="self::*/name()" tunnel="yes"/>
 				<xsl:with-param name="declarations" select="enolunatic:getInstructionForQuestion($source-context,.)" as="node()*" tunnel="yes"/>
-				<xsl:with-param name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context, $filterCondition)" tunnel="yes"/>
+				<xsl:with-param name="filterCondition" select="$filterCondition" tunnel="yes"/>
 			</xsl:apply-templates>
 		</components>
 		
@@ -303,6 +314,7 @@
 			<xsl:call-template name="enolunatic:add-calculated-variable-filter-result">
 				<xsl:with-param name="name" select="$questionName"/>
 				<xsl:with-param name="expression" select="$filterCondition"/>
+				<xsl:with-param name="dependencies" select="enolunatic:find-variables-in-formula($filter)" as="xs:string*"/>
 			</xsl:call-template>
 		</xsl:if>
 		
@@ -324,7 +336,9 @@
 		<xsl:variable name="idQuestion" select="enolunatic:get-name($source-context)"/>
 		<xsl:variable name="questionName" select="enolunatic:get-question-name($source-context,$languages[1])"/>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
-		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context, enolunatic:get-global-filter($source-context))"/>
+		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
+		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
+		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context,$filter)"/>
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
 		<xsl:variable name="dependenciesVariables" as="xs:string*">
 			<xsl:for-each select="$labelDependencies">
@@ -345,7 +359,7 @@
 		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idQuestion}" positioning="HORIZONTAL" mandatory="{$mandatory}">
 			<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context, $label)"/></label>
 			<xsl:copy-of select="enolunatic:getInstructionForQuestion($source-context,.)"/>
-			<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
+			<xsl:copy-of select="enolunatic:add-condition-filter($filterCondition,$filterDependencies)"/>
 			<hierarchy>
 				<xsl:copy-of select="$sequenceParent"/>
 				<xsl:copy-of select="$subSequenceParent"/>
@@ -408,6 +422,7 @@
 			<xsl:call-template name="enolunatic:add-calculated-variable-filter-result">
 				<xsl:with-param name="name" select="$questionName"/>
 				<xsl:with-param name="expression" select="$filterCondition"/>
+				<xsl:with-param name="dependencies" select="enolunatic:find-variables-in-formula($filter)" as="xs:string*"/>
 			</xsl:call-template>
 		</xsl:if>
 		
@@ -548,6 +563,7 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="declarations" as="node()*" tunnel="yes"/>
 		<xsl:param name="filterCondition" tunnel="yes"/>
+		<xsl:param name="filterConditionDependencies" as="xs:string*" tunnel="yes"/>
 		<xsl:param name="dependencies" tunnel="yes"/>
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
 		<xsl:param name="idLoop" select="''" tunnel="yes"/>
@@ -572,7 +588,7 @@
 		<xsl:variable name="minimumResponse" select="enolunatic:get-minimum($source-context)"/>
 		<xsl:variable name="maximumResponse" select="enolunatic:get-maximum($source-context)"/>
 		<xsl:variable name="numberOfDecimals">
-			<xsl:variable name="dec" select="enolunatic:get-number-of-decimals($source-context)"/>
+			<xsl:variable name="dec" select="string(enolunatic:get-number-of-decimals($source-context))"/>
 			<xsl:choose>
 				<xsl:when test="$dec!=''"><xsl:value-of select="$dec"/></xsl:when>
 				<xsl:when test="$dec='' and $minimumResponse!='' and self::NumericDomain">0</xsl:when>
@@ -594,7 +610,7 @@
 				<label><xsl:value-of select="$labelQuestion"/></label>
 
 				<xsl:copy-of select="$declarations"/>
-				<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
+				<xsl:copy-of select="enolunatic:add-condition-filter($filterCondition,$filterConditionDependencies)"/>
 				<hierarchy>
 					<xsl:copy-of select="$sequenceParent"/>
 					<xsl:copy-of select="$subSequenceParent"/>
@@ -631,6 +647,7 @@
 				<xsl:call-template name="enolunatic:add-calculated-variable-filter-result">
 					<xsl:with-param name="name" select="$questionName"/>
 					<xsl:with-param name="expression" select="$filterCondition"/>
+					<xsl:with-param name="dependencies" select="$filterConditionDependencies" as="xs:string*"/>
 				</xsl:call-template>
 			</xsl:if>
 		</xsl:if>
@@ -676,7 +693,7 @@
 		<xsl:variable name="minimumResponse" select="enolunatic:get-minimum($source-context)"/>
 		<xsl:variable name="maximumResponse" select="enolunatic:get-maximum($source-context)"/>
 		<xsl:variable name="numberOfDecimals">
-			<xsl:variable name="dec" select="enolunatic:get-number-of-decimals($source-context)"/>
+			<xsl:variable name="dec" select="string(enolunatic:get-number-of-decimals($source-context))"/>
 			<xsl:choose>
 				<xsl:when test="$dec!=''"><xsl:value-of select="$dec"/></xsl:when>
 				<xsl:when test="$dec='' and $minimumResponse!=''">0</xsl:when>
@@ -842,16 +859,23 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="nameOutVariable" select="enolunatic:get-business-name($source-context)"/>
+		<xsl:variable name="expression" select="enolunatic:replace-variable-with-collected-and-external-variables-formula($source-context,$nameOutVariable)"/>
+		<xsl:variable name="finalExpression">
+			<xsl:call-template name="enolunatic:replace-variables-in-formula">
+				<xsl:with-param name="source-context" select="$source-context"/>
+				<xsl:with-param name="formula" select="$expression"/>
+			</xsl:call-template>
+		</xsl:variable>		
+		<xsl:variable name="expressionDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($finalExpression)"/>
 
 		<variables variableType="CALCULATED" xsi:type="VariableType">
-			<name>
-				<xsl:value-of select="$nameOutVariable"/>
-			</name>
-			<expression>
-				<xsl:value-of select="normalize-space(
-					enolunatic:replace-all-variables-with-business-name($source-context,
-					enolunatic:replace-variable-with-collected-and-external-variables-formula($source-context,$nameOutVariable)))"/>
+			<name><xsl:value-of select="$nameOutVariable"/></name>
+			<expression>				
+				<xsl:value-of select="normalize-space(enolunatic:replace-all-variables-with-business-name($source-context,$finalExpression))"/>
 			</expression>
+			<xsl:for-each select="distinct-values($expressionDependencies)">
+				<bindingDependencies><xsl:value-of select="enolunatic:get-variable-business-name(.)"/></bindingDependencies>
+			</xsl:for-each>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
@@ -870,14 +894,16 @@
 		<xsl:variable name="componentType" select="'FilterDescription'"/>
 		<xsl:variable name="idGoTo" select="enolunatic:get-name($source-context)"/>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
-		<xsl:variable name="filterCondition" select="enolunatic:get-global-filter($source-context)"/>
+		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
+		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
+		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context,$filter)"/>
 
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($labelDependencies)"/>
 
 		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idGoTo}" filterDescription="{$filterDescription}">
 			<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/></label>
-			<conditionFilter><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$filterCondition)"/></conditionFilter>
+			<xsl:copy-of select="enolunatic:add-condition-filter($filterCondition,$filterDependencies)"/>
 			<hierarchy>
 				<xsl:copy-of select="$sequenceParent"/>
 				<xsl:copy-of select="$subSequenceParent"/>
@@ -1033,6 +1059,22 @@
 			<dependencies><xsl:value-of select="enolunatic:get-variable-business-name(.)"/></dependencies>
 		</xsl:for-each>
 	</xsl:function>
+	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Named function: enolunatic:add-conditionFilter</xd:p>
+		</xd:desc>
+	</xd:doc>
+	<xsl:function name="enolunatic:add-condition-filter">
+		<xsl:param name="value" as="xs:string"/>
+		<xsl:param name="dependencies" as="xs:string*"/>
+		<conditionFilter>
+			<value><xsl:value-of select="$value"/></value>
+			<xsl:for-each select="distinct-values($dependencies)">
+				<bindingDependencies><xsl:value-of select="enolunatic:get-variable-business-name(.)"/></bindingDependencies>
+			</xsl:for-each>
+		</conditionFilter>
+	</xsl:function>
 
 	<xsl:template name="enolunatic:add-collected-value">
 		<xsl:param name="valueType"/>
@@ -1059,9 +1101,13 @@
 	<xsl:template name="enolunatic:add-calculated-variable-filter-result">
 		<xsl:param name="name"/>
 		<xsl:param name="expression"/>
+		<xsl:param name="dependencies" as="xs:string*"/>
 		<variables variableType="CALCULATED" xsi:type="VariableType">
 			<name><xsl:value-of select="concat('FILTER_RESULT_',$name)"/></name>
 			<expression><xsl:value-of select="$expression"/></expression>
+			<xsl:for-each select="distinct-values($dependencies)">
+				<bindingDependencies><xsl:value-of select="enolunatic:get-variable-business-name(.)"/></bindingDependencies>
+			</xsl:for-each>
 		</variables>
 	</xsl:template>
 	

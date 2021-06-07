@@ -1,5 +1,10 @@
 # Eno Releases note
 
+## 2.2.8 - 04/06/2021
+
+- **[dependencies]** Upgrading dependencies versions (in particular Saxon version to 10.5, maven compiler to 11). 
+- **[ddi2fo][post-processing]** Renaming the fo file in the zip intended for Insee integrators. 
+
 ## 2.2.7 - 20/05/2021
 
 - **[ddi2fo][core]** Fixing issue where the message related to a Filter would not be displayed in fo/pdf output
