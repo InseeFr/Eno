@@ -128,7 +128,7 @@
             <xsl:for-each select="distinct-values($loopDependencies)">
                 <loopDependencies><xsl:value-of select="."/></loopDependencies>
             </xsl:for-each>
-            <!-- ToDo apply-templates select="h:lines" -->
+
             <xsl:apply-templates select="h:components"/>
         </components>
     </xsl:template>
