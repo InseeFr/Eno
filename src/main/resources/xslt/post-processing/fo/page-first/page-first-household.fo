@@ -132,13 +132,13 @@
                             <fo:block line-height="12pt">Utilisez l'enveloppe T pour envoyer ${Enq_PapierNombreQuest} à l'adresse suivante :</fo:block>
                         </fo:block>
                         <fo:block line-height="10pt" margin-top="2mm">
-                            <fo:block line-height="10pt">$!{Enq_AdresseRetourQL1}</fo:block>
-                            <fo:block line-height="10pt">$!{Enq_AdresseRetourQL2}</fo:block>
-                            <fo:block line-height="10pt">$!{Enq_AdresseRetourQL3}</fo:block>
-                            <fo:block line-height="10pt">$!{Enq_AdresseRetourQL4}</fo:block>
-                            <fo:block line-height="10pt">$!{Enq_AdresseRetourQL5}</fo:block>
-                            <fo:block line-height="10pt">$!{Enq_AdresseRetourQL6}</fo:block>
-                            <fo:block line-height="10pt">$!{Enq_AdresseRetourQL7}</fo:block>
+                            <fo:block line-height="12pt">$!{Enq_AdresseRetourQL1}</fo:block>
+                            <fo:block line-height="12pt">$!{Enq_AdresseRetourQL2}</fo:block>
+                            <fo:block line-height="12pt">$!{Enq_AdresseRetourQL3}</fo:block>
+                            <fo:block line-height="12pt">$!{Enq_AdresseRetourQL4}</fo:block>
+                            <fo:block line-height="12pt">$!{Enq_AdresseRetourQL5}</fo:block>
+                            <fo:block line-height="12pt">$!{Enq_AdresseRetourQL6}</fo:block>
+                            <fo:block line-height="12pt">$!{Enq_AdresseRetourQL7}</fo:block>
                         </fo:block>
                     </fo:inline-container>
                 </fo:block>
@@ -158,9 +158,9 @@
                 <fo:block margin-top="5mm" font-size="10pt">
                     <fo:inline-container margin="0mm">
                         <fo:block line-height="10pt">
-                            <fo:block line-height="10pt">${Ue_QuiRepond1}</fo:block>
-                            <fo:block line-height="10pt">$!{Ue_QuiRepond2}</fo:block>
-                            <fo:block line-height="10pt">$!{Ue_QuiRepond3}</fo:block>
+                            <fo:block line-height="12pt">${Ue_QuiRepond1}</fo:block>
+                            <fo:block line-height="12pt">$!{Ue_QuiRepond2}</fo:block>
+                            <fo:block line-height="12pt">$!{Ue_QuiRepond3}</fo:block>
                         </fo:block>
                     </fo:inline-container>
                 </fo:block>
@@ -237,9 +237,9 @@
                 height="40mm" font-family="Liberation Sans" font-size="10pt" text-align="justify">
                 <fo:block margin-top="5mm" >
                     <fo:inline-container margin="0mm">
-                        <fo:block line-height="10pt">$!{Enq_Consigne1}</fo:block>
-                        <fo:block line-height="10pt">$!{Enq_Consigne2}</fo:block>
-                        <fo:block line-height="10pt">$!{Enq_Consigne3}</fo:block>
+                        <fo:block line-height="12pt">$!{Enq_Consigne1}</fo:block>
+                        <fo:block line-height="12pt">$!{Enq_Consigne2}</fo:block>
+                        <fo:block line-height="12pt">$!{Enq_Consigne3}</fo:block>
                     </fo:inline-container>
                 </fo:block>
             </fo:block-container>
