@@ -236,11 +236,54 @@
             <fo:block-container absolute-position="absolute" left="20mm" top="172mm" width="150mm"
                 height="40mm" font-family="Liberation Sans" font-size="10pt" text-align="justify">
                 <fo:block margin-top="5mm" >
+                    #if (${Enq_Consigne1} != '')
                     <fo:inline-container margin="0mm">
-                        <fo:block line-height="12pt">$!{Enq_Consigne1}</fo:block>
-                        <fo:block line-height="12pt">$!{Enq_Consigne2}</fo:block>
-                        <fo:block line-height="12pt">$!{Enq_Consigne3}</fo:block>
+                        <fo:list-block>
+                            <fo:list-item>
+                                <fo:list-item-label start-indent="5mm" line-height="8mm">
+                                    <fo:block>
+                                        <fo:inline>&#8226;</fo:inline>
+                                    </fo:block>
+                                </fo:list-item-label>
+                                <fo:list-item-body start-indent="10mm" line-height="5mm">
+                                    <fo:block line-height="12pt">${Enq_Consigne1}</fo:block>
+                                </fo:list-item-body>
+                            </fo:list-item>
+                        </fo:list-block>
                     </fo:inline-container>
+                    #end
+                    #if (${Enq_Consigne2} != '')
+                    <fo:inline-container margin="0mm">
+                        <fo:list-block>
+                            <fo:list-item>
+                                <fo:list-item-label start-indent="5mm" line-height="8mm">
+                                    <fo:block>
+                                        <fo:inline>&#8226;</fo:inline>
+                                    </fo:block>
+                                </fo:list-item-label>
+                                <fo:list-item-body start-indent="10mm" line-height="5mm">
+                                    <fo:block line-height="12pt">${Enq_Consigne2}</fo:block>
+                                </fo:list-item-body>
+                            </fo:list-item>
+                        </fo:list-block>
+                    </fo:inline-container>
+                    #end
+                    #if (${Enq_Consigne3} != '')
+                    <fo:inline-container margin="0mm">
+                        <fo:list-block>
+                            <fo:list-item>
+                                <fo:list-item-label start-indent="5mm" line-height="8mm">
+                                    <fo:block>
+                                        <fo:inline>&#8226;</fo:inline>
+                                    </fo:block>
+                                </fo:list-item-label>
+                                <fo:list-item-body start-indent="10mm" line-height="5mm">
+                                    <fo:block line-height="12pt">${Enq_Consigne3}</fo:block>
+                                </fo:list-item-body>
+                            </fo:list-item>
+                        </fo:list-block>
+                    </fo:inline-container>
+                    #end
                 </fo:block>
             </fo:block-container>
             
