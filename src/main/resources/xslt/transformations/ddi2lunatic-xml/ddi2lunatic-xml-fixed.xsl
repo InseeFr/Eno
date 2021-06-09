@@ -195,15 +195,9 @@
         <xsl:variable name="label">
             <xsl:sequence select="enoddi:get-label($context,$language)"/>
         </xsl:variable>
-        <xsl:choose>
-            <xsl:when test="$label!=''">
-                <xsl:call-template name="enolunatic:replace-variables-in-formula">
-                    <xsl:with-param name="source-context" select="$context"/>
-                    <xsl:with-param name="formula" select="enolunatic:surround-label-with-quote(enolunatic:encode-special-char-in-js($label))"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise/>
-        </xsl:choose>
+        <xsl:if test="$label!=''">
+            <xsl:value-of select="enolunatic:surround-label-with-quote(enolunatic:encode-special-char-in-js($label))"/>
+        </xsl:if>
     </xsl:function>
     
     <xsl:function name="enolunatic:surround-label-with-quote">
@@ -514,7 +508,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+        
     <xsl:function name="enolunatic:is-generating-loop" as="xs:boolean">
         <xsl:param name="context" as="item()"/>
         <xsl:variable name="isLinkedLoop" select="enoddi:is-linked-loop($context)" as="xs:boolean"/>

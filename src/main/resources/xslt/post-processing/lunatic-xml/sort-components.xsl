@@ -207,9 +207,9 @@
                 <xsl:copy-of select="$dependencies"/>
                 <xsl:copy-of select="$responseDependencies"/>
             </xsl:variable>
-            <xsl:for-each select="distinct-values($allDependencies)">                
-                <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
-            </xsl:for-each>
+            <xsl:call-template name="enolunatic:add-all-dependencies">
+                <xsl:with-param name="dependencies" select="$allDependencies"/>
+            </xsl:call-template>
             <xsl:apply-templates select="*[not(self::h:hierarchy or self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter)]"/>
         </components>
     </xsl:template>
@@ -341,6 +341,30 @@
             </xsl:call-template>
         </xsl:if>
     </xsl:template>
+    
+    <xsl:template name="enolunatic:add-all-dependencies">
+        <xsl:param name="dependencies" as="xs:string*"/>
+        <xsl:variable name="results" as="xs:string*">
+            <xsl:for-each select="$dependencies">
+                <xsl:copy-of select="enolunatic:get-all-dependencies(.)"/>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:for-each select="distinct-values($results)">                
+            <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
+        </xsl:for-each>
+    </xsl:template>
+    
+    <xsl:function name="enolunatic:get-all-dependencies">
+        <xsl:param name="variableName"/>
+        <xsl:choose>
+            <xsl:when test="$root//h:variables[@variableType='CALCULATED' and h:name=$variableName]">
+                <xsl:copy-of select="$root//h:variables[@variableType='CALCULATED' and h:name=$variableName]/h:bindingDependencies"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <bindingDependencies><xsl:value-of select="$variableName"/></bindingDependencies>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
     
     <xsl:template name="enolunatic:add-dependencies">
         <xsl:param name="responseName"/>
