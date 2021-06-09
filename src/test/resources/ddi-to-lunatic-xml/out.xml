@@ -2374,7 +2374,7 @@
       <components xsi:type="Loop" componentType="Loop" id="kiq7bjam" depth="1">
          <label>"Add a character"</label>
          <label>"Add a character"</label>
-         <lines min="1" max="cast(NB_CHAR,number)"/>
+         <lines min="1" max="cast(NB_CHAR,integer)"/>
          <conditionFilter>
             <value>(not(cast(READY,integer)  &lt;&gt;  1))</value>
             <bindingDependencies>READY</bindingDependencies>
