@@ -390,7 +390,10 @@
             <xsl:when test="$type='text'">
                 <xsl:value-of select="concat('cast(',$variable,',','string)')"/>
             </xsl:when>
-            <xsl:when test="$type='integer' or $type='decimal'">
+            <xsl:when test="$type='integer'">
+                <xsl:value-of select="concat('cast(',$variable,',','integer)')"/>
+            </xsl:when>
+            <xsl:when test="$type='decimal'">
                 <xsl:value-of select="concat('cast(',$variable,',','number)')"/>
             </xsl:when>
             <xsl:when test="$type='boolean'">
