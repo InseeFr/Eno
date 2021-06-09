@@ -128,7 +128,7 @@
                     <fo:inline-container margin="0mm">
                         <fo:block line-height="10pt">
                             <fo:block line-height="12pt">Au plus tard le <fo:inline font-weight="bold">${Enq_DateRetour}.</fo:inline></fo:block>
-                            <fo:block line-height="12pt">Remplissez un questionnaire papier ${Enq_PapierNombre}. ${Enq_PapierConsigne}.</fo:block>
+                            <fo:block line-height="12pt">Remplissez un questionnaire papier ${Enq_PapierNombre}. #if(${Enq_PapierConsigne}!='') ${Enq_PapierConsigne}.#end</fo:block>
                             <fo:block line-height="12pt">Utilisez l'enveloppe T pour envoyer ${Enq_PapierNombreQuest} à l'adresse suivante :</fo:block>
                         </fo:block>
                         <fo:block line-height="10pt" margin-top="2mm">
