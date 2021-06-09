@@ -214,7 +214,7 @@
                             </fo:block>
                         </fo:list-item-label>
                         <fo:list-item-body start-indent="10mm" line-height="5mm">
-                            <fo:block> Suivez les instructions des renvois.  
+                            <fo:block> Suivez les instructions des renvois. Exemple :
                                 <fo:external-graphic src="filter_example.png" 
                                     padding-right="3pt" padding-left="3pt" vertical-align="middle" content-width="40mm" width="70mm"
                                     scaling="uniform"   />
