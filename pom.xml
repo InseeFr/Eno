@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.insee.eno</groupId>
 	<artifactId>eno-core</artifactId>
-	<version>2.2.8</version>
+	<version>2.2.8-dev-fo-pagefirsthousehold</version>
 	<packaging>jar</packaging>
 
 	<name>Eno – Questionnaire generator</name>
