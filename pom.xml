@@ -47,7 +47,7 @@
 
 	<properties>
 		<guice.version>4.1.0</guice.version>
-		<commons-io.version>2.5</commons-io.version>
+		<commons-io.version>2.10.0</commons-io.version>
 		<saxon.version>10.5</saxon.version>
 		<fop.version>2.2</fop.version>
 		<xalan.version>2.7.2</xalan.version>
