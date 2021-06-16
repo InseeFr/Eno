@@ -196,10 +196,12 @@
             <xsl:sequence select="enoddi:get-label($context,$language)"/>
         </xsl:variable>
         <xsl:if test="$label!=''">
+            <!-- WARNING : if all the label is in VTL (not xpath) : replace by enolunatic:encode-special-char-in-js($label) -->
             <xsl:value-of select="enolunatic:surround-label-with-quote(enolunatic:encode-special-char-in-js($label))"/>
         </xsl:if>
     </xsl:function>
     
+    <!-- WARNING : if all the label is in VTL, this function is useless, you have to delete this -->
     <xsl:function name="enolunatic:surround-label-with-quote">
         <xsl:param name="label"/>
         <xsl:variable name="labelSimple" select="concat('&quot;',$label,'&quot;')"/>
@@ -275,13 +277,11 @@
         
         <xsl:variable name="and-logic" select="' and '"/>
         <xsl:variable name="or-logic" select="' or '"/>
-        <xsl:variable name="not-logic" select="' not '"/>            
+        <xsl:variable name="not-logic" select="' not '"/>
         <xsl:variable name="not-equal" select="' &lt;&gt; '"/>
         
         <xsl:variable name="readonly" select="'&quot;readonly&quot;'"/>
         <xsl:variable name="true" select="'true'"/>
-        <xsl:variable name="normal" select="'&quot;normal&quot;'"/>
-        <xsl:variable name="hidden" select="'&quot;hidden&quot;'"/>
         
         <conditionFilter>
             <xsl:choose>
@@ -294,12 +294,7 @@
                             </xsl:if>
                         </xsl:for-each>
                     </xsl:variable>
-                    <xsl:variable name="relevant-condition">
-                        <xsl:call-template name="enolunatic:replace-variables-in-formula">
-                            <xsl:with-param name="source-context" select="$context"/>
-                            <xsl:with-param name="formula" select="$initial-relevant-ancestors"/>
-                        </xsl:call-template>
-                    </xsl:variable>
+                    <xsl:variable name="relevant-condition" select="$initial-relevant-ancestors"/>
                     <xsl:variable name="returned-relevant-condition" select="$relevant-condition"/>                    
                     <xsl:value-of select="$returned-relevant-condition"/>                    
                 </xsl:when>                
@@ -432,8 +427,8 @@
         <xd:desc>
             <xd:p>Recursive named template: enolunatic:replace-variables-in-formula.</xd:p>
             <xd:p>It replaces variables in a all formula (filter, control, personalized text, calculated variable).</xd:p>
-            <xd:p>"number(if (¤idVariable¤='') then '0' else ¤idVariable¤)" -> "variableName"</xd:p>
-            <xd:p>"¤idVariable¤" -> "variableName"</xd:p>
+            <xd:p>"number(if (¤idVariable¤='') then '0' else ¤idVariable¤)" -> ¤idVariable¤</xd:p>
+            <xd:p>"¤idVariableCalculatedVar¤" -> formula</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template name="enolunatic:replace-variables-in-formula">

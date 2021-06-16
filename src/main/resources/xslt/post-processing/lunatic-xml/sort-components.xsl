@@ -59,9 +59,9 @@
             <xsl:variable name="allDependencies" as="xs:string*">
                 <xsl:copy-of select="$dependencies"/>
             </xsl:variable>
-            <xsl:for-each select="distinct-values($allDependencies)">                
-                <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
-            </xsl:for-each>
+            <xsl:call-template name="enolunatic:add-all-dependencies">
+                <xsl:with-param name="dependencies" select="$allDependencies"/>
+            </xsl:call-template>
             <xsl:apply-templates select="h:components"/>
         </components>
     </xsl:template>
@@ -84,7 +84,7 @@
             </xsl:choose>
         </xsl:variable>
         
-        <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
+        <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies[not(parent::h:conditionFilter)])" as="xs:string*"/>
         <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
         <!-- The loopDependencies consist of the reponseDependencies of the generating loop if linked loop, and the variables used in formula of minimum and maximum -->
         <xsl:variable name="loopDependencies" as="xs:string*">
@@ -122,9 +122,9 @@
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
             <xsl:apply-templates select="h:hierarchy"/>
-            <xsl:for-each select="distinct-values($allDependencies)">
-                <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
-            </xsl:for-each>
+            <xsl:call-template name="enolunatic:add-all-dependencies">
+                <xsl:with-param name="dependencies" select="$allDependencies"/>
+            </xsl:call-template>
             <xsl:for-each select="distinct-values($loopDependencies)">
                 <loopDependencies><xsl:value-of select="."/></loopDependencies>
             </xsl:for-each>
@@ -140,15 +140,15 @@
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
             <xsl:apply-templates select="h:hierarchy"/>
-            <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
+            <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies[not(parent::h:conditionFilter)])" as="xs:string*"/>
             <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
             <xsl:variable name="allDependencies" as="xs:string*">
                 <xsl:copy-of select="$dependencies"/>
                 <xsl:copy-of select="$responseDependencies"/>
             </xsl:variable>
-            <xsl:for-each select="distinct-values($allDependencies)">                
-                <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
-            </xsl:for-each>
+            <xsl:call-template name="enolunatic:add-all-dependencies">
+                <xsl:with-param name="dependencies" select="$allDependencies"/>
+            </xsl:call-template>
             <xsl:apply-templates select="*[not(self::h:hierarchy or self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter)]"/>
         </components>
     </xsl:template>
@@ -159,15 +159,15 @@
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
             <xsl:apply-templates select="h:hierarchy"/>
-            <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
+            <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies[not(parent::h:conditionFilter)])" as="xs:string*"/>
             <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
             <xsl:variable name="allDependencies" as="xs:string*">
                 <xsl:copy-of select="$dependencies"/>
                 <xsl:copy-of select="$responseDependencies"/>
             </xsl:variable>
-            <xsl:for-each select="distinct-values($allDependencies)">                
-                <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
-            </xsl:for-each>
+            <xsl:call-template name="enolunatic:add-all-dependencies">
+                <xsl:with-param name="dependencies" select="$allDependencies"/>
+            </xsl:call-template>
             <xsl:apply-templates select="*[not(self::h:variables or self::h:cells[@type='line'] or self::h:hierarchy or self::h:label or self::h:declarations or self::h:conditionFilter)]"/>
             <xsl:choose>
                 <xsl:when test="h:lines">
@@ -201,7 +201,7 @@
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
             <xsl:apply-templates select="h:hierarchy"/>
-            <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
+            <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies[not(parent::h:conditionFilter)])" as="xs:string*"/>
             <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
             <xsl:variable name="allDependencies" as="xs:string*">
                 <xsl:copy-of select="$dependencies"/>
@@ -238,7 +238,7 @@
                         <xsl:with-param name="componentRef" select="$tableId"/>
                     </xsl:call-template>
                     <xsl:call-template name="enolunatic:add-dependencies">
-                        <xsl:with-param name="responseName" select="concat(@name,'_',$idLine,'_',$idColumn)"/>
+                        <xsl:with-param name="name" select="concat(@name,'_',$idLine,'_',$idColumn)"/>
                     </xsl:call-template>
                 </xsl:if>
             </xsl:when>
@@ -282,9 +282,9 @@
             </xsl:variable>
             <xsl:apply-templates select="*[not(self::h:variables)]"/>
             <xsl:if test="string-length(@type)=0">
-                <xsl:for-each select="distinct-values($allDependencies)">                
-                    <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
-                </xsl:for-each>
+                <xsl:call-template name="enolunatic:add-all-dependencies">
+                    <xsl:with-param name="dependencies" select="$allDependencies"/>
+                </xsl:call-template>
             </xsl:if>
         </cells>
     </xsl:template>
@@ -300,6 +300,17 @@
                 </xsl:apply-templates>
             </xsl:for-each>
         </cells>
+    </xsl:template>
+
+    <xsl:template match="h:conditionFilter">
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+            <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
+            <xsl:call-template name="enolunatic:add-all-dependencies">
+                <xsl:with-param name="dependencies" select="$dependencies"/>
+            </xsl:call-template>
+        </xsl:copy>
     </xsl:template>
 
     <xsl:template name="enolunatic:addVariableCollected">
@@ -350,7 +361,9 @@
             </xsl:for-each>
         </xsl:variable>
         <xsl:for-each select="distinct-values($results)">                
-            <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
+            <xsl:call-template name="enolunatic:add-dependencies">
+                <xsl:with-param name="name" select="."/>
+            </xsl:call-template>
         </xsl:for-each>
     </xsl:template>
     
@@ -361,13 +374,15 @@
                 <xsl:copy-of select="$root//h:variables[@variableType='CALCULATED' and h:name=$variableName]/h:bindingDependencies"/>
             </xsl:when>
             <xsl:otherwise>
-                <bindingDependencies><xsl:value-of select="$variableName"/></bindingDependencies>
+                <xsl:call-template name="enolunatic:add-dependencies">
+                    <xsl:with-param name="name" select="$variableName"/>
+                </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
     
     <xsl:template name="enolunatic:add-dependencies">
-        <xsl:param name="responseName"/>
-        <bindingDependencies><xsl:value-of select="$responseName"/></bindingDependencies>
+        <xsl:param name="name"/>
+        <bindingDependencies><xsl:value-of select="$name"/></bindingDependencies>
     </xsl:template>
 </xsl:stylesheet>
