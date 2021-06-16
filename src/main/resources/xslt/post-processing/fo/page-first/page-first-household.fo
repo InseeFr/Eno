@@ -106,25 +106,36 @@
                         width="10mm" scaling="uniform"/>
                 </fo:block>
             </fo:block-container>
-            <fo:block-container absolute-position="absolute" left="10mm" top="23mm" width="150mm"
+            <fo:block-container margin-left="10mm" margin-top="23mm" width="150mm"
                 height="7mm">
                 <fo:block font-family="Liberation Sans" font-size="16pt" font-weight="bold"
                     text-align="center"> ${Enq_LibelleEnquete} </fo:block>
             </fo:block-container>
             
             <!--    Bloc Quand et comment répondre  -->
-            <fo:block-container absolute-position="absolute" left="0mm" top="42mm" width="15mm"
-                height="15mm">
-                <fo:block margin="2pt">
-                    <fo:external-graphic src="Insee_formulaire-qui_repond.png"
-                        content-width="scale-to-fit" width="15mm" scaling="uniform"/>
+            <fo:block-container>
+                <fo:block>
+                    <fo:table>
+                        <fo:table-column/>
+                        <fo:table-column/>
+                        <fo:table-body>
+                            <fo:table-row>
+                                <fo:table-cell width="20mm">
+                                    <fo:block>
+                                        <fo:external-graphic src="Insee_formulaire-qui_repond.png"
+                                            content-width="scale-to-fit" width="15mm" scaling="uniform"/>
+                                    </fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell display-align="center">
+                                    <fo:block line-height="10pt" font-weight="bold" font-size="12pt">Quand et comment répondre ?</fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+                        </fo:table-body>
+                    </fo:table>
                 </fo:block>
             </fo:block-container>
-            <fo:block-container absolute-position="absolute" left="20mm" top="47mm" font-size="12pt">
-                <fo:block line-height="10pt" font-weight="bold">Quand et comment répondre ?</fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute" left="20mm" top="50mm">
-                <fo:block margin-top="5mm" font-size="10pt">
+            <fo:block-container margin-left="10mm">
+                <fo:block font-size="10pt">
                     <fo:inline-container margin="0mm">
                         <fo:block line-height="10pt">
                             <fo:block line-height="12pt">Au plus tard le <fo:inline font-weight="bold">${Enq_DateRetour}.</fo:inline></fo:block>
@@ -145,17 +156,29 @@
             </fo:block-container>
             
             <!--    Bloc Qui répond -->
-            <fo:block-container absolute-position="absolute" left="0mm" top="97mm" width="15mm" height="15mm">
-                <fo:block margin="2pt">
-                    <fo:external-graphic src="Insee_hommes-recensement-bleunuance2.png"
-                        content-width="scale-to-fit" width="15mm" scaling="uniform"/>
+            <fo:block-container>
+                <fo:block font-weight="bold" font-size="12pt">
+                    <fo:table>
+                        <fo:table-column/>
+                        <fo:table-column/>
+                        <fo:table-body>
+                            <fo:table-row>
+                                <fo:table-cell width="20mm">
+                                    <fo:block>
+                                        <fo:external-graphic src="Insee_hommes-recensement-bleunuance2.png"
+                                            content-width="scale-to-fit" width="15mm" scaling="uniform"/>
+                                    </fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell display-align="center">
+                                    <fo:block line-height="10pt" font-weight="bold" font-size="12pt">Qui doit répondre ?</fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+                        </fo:table-body>
+                    </fo:table>
                 </fo:block>
             </fo:block-container>
-            <fo:block-container absolute-position="absolute" left="20mm" top="102mm" font-size="12pt">
-                <fo:block line-height="10pt" font-weight="bold"> Qui doit répondre ?</fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute" left="20mm" top="105mm" width="150mm" text-align="justify">
-                <fo:block margin-top="5mm" font-size="10pt">
+            <fo:block-container text-align="justify" margin-left="10mm">
+                <fo:block font-size="10pt">
                     <fo:inline-container margin="0mm">
                         <fo:block line-height="10pt">
                             <fo:block line-height="12pt">${Ue_QuiRepond1}</fo:block>
@@ -167,19 +190,28 @@
             </fo:block-container>
             
             <!--    Blocs Consignes -->
-            <fo:block-container absolute-position="absolute" left="0mm" top="140mm" width="15mm" height="15mm">
-                <fo:block margin="2pt">
-                    <fo:external-graphic src="Insee_formulaire-recensement-bleunuance2.png"
-                        content-width="scale-to-fit" width="15mm" scaling="uniform"/>
+            <fo:block-container>
+                <fo:block font-weight="bold" font-size="12pt">
+                    <fo:table width="100mm">
+                        <fo:table-column/>
+                        <fo:table-column/>
+                        <fo:table-body>
+                            <fo:table-row>
+                                <fo:table-cell width="20mm">
+                                    <fo:block>
+                                        <fo:external-graphic src="Insee_formulaire-recensement-bleunuance2.png"
+                                            content-width="scale-to-fit" width="15mm" scaling="uniform"/>
+                                    </fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell display-align="center" width="80mm">
+                                    <fo:block line-height="10pt" font-weight="bold" font-size="12pt">Comment remplir le questionnaire ?</fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+                        </fo:table-body>
+                    </fo:table>
                 </fo:block>
             </fo:block-container>
-            
-            <fo:block-container absolute-position="absolute" left="20mm" top="145mm" font-size="12pt" >
-                <fo:block line-height="10pt" font-weight="bold">Comment remplir le questionnaire ?</fo:block>
-            </fo:block-container>
-            
-            <fo:block-container absolute-position="absolute" left="20mm" top="149mm" width="150mm"
-                height="40mm" font-family="Liberation Sans" font-size="10pt" text-align="justify">
+            <fo:block-container margin-left="15mm" font-family="Liberation Sans" font-size="10pt" text-align="justify">
                 <fo:list-block>
                     <fo:list-item>
                         <fo:list-item-label start-indent="5mm" line-height="5mm">
@@ -225,17 +257,26 @@
             </fo:block-container>
             
             <!--    Bloc Consignes spécifiques enquête  -->
-            <fo:block-container absolute-position="absolute" left="20mm" top="170mm" width="150mm"
-                height="30mm" font-family="Liberation Sans" font-size="12pt">
-                <fo:block line-height="10pt">
-                    <fo:inline font-weight="bold">Consignes spécifiques</fo:inline>
+            <fo:block-container>
+                <fo:block font-weight="bold" font-size="12pt">
+                    <fo:table width="100mm">
+                        <fo:table-column/>
+                        <fo:table-column/>
+                        <fo:table-body>
+                            <fo:table-row>
+                                <fo:table-cell width="20mm">
+                                    <fo:block/>
+                                </fo:table-cell>
+                                <fo:table-cell display-align="center" width="60mm">
+                                    <fo:block line-height="10pt" font-weight="bold" font-size="12pt">Consignes spécifiques</fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+                        </fo:table-body>
+                    </fo:table>
                 </fo:block>
             </fo:block-container>
-            
-            
-            <fo:block-container absolute-position="absolute" left="20mm" top="172mm" width="150mm"
-                height="40mm" font-family="Liberation Sans" font-size="10pt" text-align="justify">
-                <fo:block margin-top="5mm" >
+            <fo:block-container margin-left="15mm" font-family="Liberation Sans" font-size="10pt" text-align="justify">
+                <fo:block>
                     #if (${Enq_Consigne1} != '')
                     <fo:inline-container margin="0mm">
                         <fo:list-block>
