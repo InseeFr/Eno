@@ -82,18 +82,8 @@
 		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
 		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context,$filter)"/>
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
-		<xsl:variable name="minimumOccurrences">
-			<xsl:call-template name="enolunatic:replace-variables-in-formula">
-				<xsl:with-param name="source-context" select="$source-context"/>
-				<xsl:with-param name="formula" select="enolunatic:get-minimum-occurrences($source-context)"/>
-			</xsl:call-template>
-		</xsl:variable>
-		<xsl:variable name="maximumOccurrences">
-			<xsl:call-template name="enolunatic:replace-variables-in-formula">
-				<xsl:with-param name="source-context" select="$source-context"/>
-				<xsl:with-param name="formula" select="enolunatic:get-maximum-occurrences($source-context)"/>
-			</xsl:call-template>
-		</xsl:variable>
+		<xsl:variable name="minimumOccurrences" select="enolunatic:get-minimum-occurrences($source-context)"/>
+		<xsl:variable name="maximumOccurrences" select="enolunatic:get-maximum-occurrences($source-context)"/>
 		<xsl:variable name="minDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($minimumOccurrences)"/>
 		<xsl:variable name="maxDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($maximumOccurrences)"/>
 		<xsl:variable name="dependenciesVariables" as="xs:string*">
@@ -927,17 +917,11 @@
 
 		<xsl:variable name="nameOfControl" select="enolunatic:get-check-name($source-context,$languages[1])"/>
 		<xsl:variable name="control" select="enolunatic:get-constraint($source-context)"/>
-		<xsl:variable name="final-control">
-			<xsl:call-template name="enolunatic:replace-variables-in-formula">
-				<xsl:with-param name="source-context" select="$source-context"/>
-				<xsl:with-param name="formula" select="$control"/>
-			</xsl:call-template>
-		</xsl:variable>
 		<xsl:variable name="instructionFormat" select="enolunatic:get-css-class($source-context)"/>
 		<xsl:variable name="instructionLabel" select="enolunatic:get-vtl-label($source-context, $languages[1])"/>
 		<xsl:variable name="alertLevel" select="enolunatic:get-alert-level($source-context)"/>
 
-		<xsl:variable name="controlDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($final-control)"/>
+		<xsl:variable name="controlDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($control)"/>
 		<xsl:variable name="instructionDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($instructionLabel)"/>
 		<xsl:variable name="dependenciesVariables" as="xs:string*">
 			<xsl:for-each select="$controlDependencies">
@@ -956,7 +940,7 @@
 			<xsl:if test="$control!=''">
 				<title><xsl:value-of select="concat(upper-case($alertLevel),' control : ',$nameOfControl)"/></title>
 				<value>
-					<xsl:value-of select="normalize-space(enolunatic:replace-all-variables-with-business-name($source-context,$final-control))"/>
+					<xsl:value-of select="normalize-space(enolunatic:replace-all-variables-with-business-name($source-context,$control))"/>
 				</value>
 			</xsl:if>
 
@@ -1070,9 +1054,7 @@
 		<xsl:param name="dependencies" as="xs:string*"/>
 		<conditionFilter>
 			<value><xsl:value-of select="$value"/></value>
-			<xsl:for-each select="distinct-values($dependencies)">
-				<bindingDependencies><xsl:value-of select="enolunatic:get-variable-business-name(.)"/></bindingDependencies>
-			</xsl:for-each>
+			<xsl:copy-of select="enolunatic:add-dependencies($dependencies)"/>
 		</conditionFilter>
 	</xsl:function>
 
