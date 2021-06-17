@@ -103,19 +103,26 @@
         <components>
             <xsl:copy-of select="@*"/>
             <!-- In case of linked loop, we put @iterations attribute with specified value or count of the generator loop response-->
-            <xsl:if test="$idGenerator!=''">
-                <xsl:attribute name="iterations">
-                    <xsl:choose>
-                        <xsl:when test="string-length(@iterations) &gt; 0"><xsl:value-of select="@iterations"/></xsl:when>
-                        <xsl:otherwise><xsl:value-of select="concat('count(',$loopDependencies[1],')')"/></xsl:otherwise>
-                    </xsl:choose>
-                </xsl:attribute>
-            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="$idGenerator!=''">
+                    <xsl:attribute name="iterations">
+                        <xsl:choose>
+                            <xsl:when test="string-length(@iterations) &gt; 0"><xsl:value-of select="@iterations"/></xsl:when>
+                            <xsl:otherwise><xsl:value-of select="concat('count(',$loopDependencies[1],')')"/></xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:when test="$minimum=$maximum">
+                    <xsl:attribute name="iterations">
+                        <xsl:value-of select="$maximum"/>
+                    </xsl:attribute>
+                </xsl:when>
+            </xsl:choose>
             
             <xsl:apply-templates select="h:label"/>
 
             <!-- If not linked loop, we have to copy the lines node -->
-            <xsl:if test="$idGenerator='' or not(exists($idGenerator))">
+            <xsl:if test="($idGenerator='' or not(exists($idGenerator))) and $minimum!=$maximum">
                 <xsl:apply-templates select="h:lines"/>
             </xsl:if>
             
