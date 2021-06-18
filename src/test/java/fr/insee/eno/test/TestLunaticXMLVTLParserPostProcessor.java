@@ -18,40 +18,55 @@ public class TestLunaticXMLVTLParserPostProcessor {
 
 	private LunaticXMLVTLParserPostprocessor lunaticXMLVtlParserPostprocessor = new LunaticXMLVTLParserPostprocessor();
 	private XMLDiff xmlDiff = new XMLDiff();
+	
+	// concat
+	private String test1 = "concat(x,y,z, \"concat(a,b,c)\")";
+	private String expected1 = "x || y || z ||  \"concat(a,b,c)\"";		
+
+	private String test2 = "substring(x,y,z)";
+	private String expected2 = "substr(x,y,z)";
+	
+	// different
+	private String test3 = "x!=y";
+	private String expected3 = "x &lt;&gt; y"; // x <> y
+
+	// division
+	private String test4 = "x div y";
+	private String expected4 = "x / y";
+	
+	private String test5 = "x != '1'";
+	private String expected5 ="x  &lt;&gt;  \"1\"";
+	
+	private String test6 = "\"x != '1'\"";
+	private String expected6 ="\"x != '1'\"";
+	
+	//substring - concat
+	private String test7 = "concat(substring(x,y,z),a,concat(x,substring(x1,y1,z1)),b)!='abc'";
+	private String expected7 = "substr(x,y,z) || a || x || substr(x1,y1,z1) || b &lt;&gt; \"abc\"";
+
+	private String test8 = "cast(cast(ABCD,integer),string) = '3'";
+	private String expected8 = "cast(cast(ABCD,integer),string) = \"3\"";
+	
+	private String test9 = "cast(cast(ABCD,string),integer) = '3'";
+	private String expected9 = "cast(cast(ABCD,string),integer) = 3";
+
+	private String test10 = "cast(cast(ABCD,string),integer) = null";
+	private String expected10 = "isnull(cast(cast(ABCD,string),integer))";
+
+	// modulo
+	private String test11 = "10 mod 2";
+	private String expected11 = "mod(10,2)";
+
+	// current date
+	private String test12 = "current-date()";
+	private String expected12 = "current_date()";
+
+	// string length
+	private String test13 = "string-length()";
+	private String expected13 = "length()";
 		
 	@Test
-	public void simpleTest() {
-		
-		String test1 = "concat(x,y,z, \"concat(a,b,c)\")";
-		String expected1 = "x || y || z ||  \"concat(a,b,c)\"";		
-
-		String test2 = "substring(x,y,z)";
-		String expected2 = "substr(x,y,z)";
-		
-		String test3 = "x!=y";
-		String expected3 = "x &lt;&gt; y";
-		
-		String test4 = "x div y";
-		String expected4 = "x / y";
-		
-		String test5 = "x != '1'";
-		String expected5 ="x  &lt;&gt;  \"1\"";
-		
-		String test6 = "\"x != '1'\"";
-		String expected6 ="\"x != '1'\"";
-		
-		String test7 = "concat(substring(x,y,z),a,concat(x,substring(x1,y1,z1)),b)!='abc'";
-		String expected7 = "substr(x,y,z) || a || x || substr(x1,y1,z1) || b &lt;&gt; \"abc\"";
-
-		String test8 = "cast(cast(ABCD,integer),string) = '3'";
-		String expected8 = "cast(cast(ABCD,integer),string) = \"3\"";
-		
-		String test9 = "cast(cast(ABCD,string),integer) = '3'";
-		String expected9 = "cast(cast(ABCD,string),integer) = 3";
-
-		String test10 = "cast(cast(ABCD,string),integer) = null";
-		String expected10 = "isnull(cast(cast(ABCD,string),integer))";
-		
+	public void simpleTestXpath2VTL() {
 		Assertions.assertEquals(expected1, lunaticXMLVtlParserPostprocessor.parseToVTL(test1));
 		Assertions.assertEquals(expected2, lunaticXMLVtlParserPostprocessor.parseToVTL(test2));
 		Assertions.assertEquals(expected3, lunaticXMLVtlParserPostprocessor.parseToVTL(test3));
@@ -62,6 +77,27 @@ public class TestLunaticXMLVTLParserPostProcessor {
 		Assertions.assertEquals(expected8, lunaticXMLVtlParserPostprocessor.parseToVTL(test8));
 		Assertions.assertEquals(expected9, lunaticXMLVtlParserPostprocessor.parseToVTL(test9));
 		Assertions.assertEquals(expected10, lunaticXMLVtlParserPostprocessor.parseToVTL(test10));
+		//Assertions.assertEquals(expected11, lunaticXMLVtlParserPostprocessor.parseToVTL(test11));
+		//Assertions.assertEquals(expected12, lunaticXMLVtlParserPostprocessor.parseToVTL(test12));
+		//Assertions.assertEquals(expected13, lunaticXMLVtlParserPostprocessor.parseToVTL(test13));
+
+	}
+	@Test
+	public void simpleTestVTL2VTL() {
+		Assertions.assertEquals(expected1, lunaticXMLVtlParserPostprocessor.parseToVTL(expected1));
+		Assertions.assertEquals(expected2, lunaticXMLVtlParserPostprocessor.parseToVTL(expected2));
+		Assertions.assertEquals(expected3, lunaticXMLVtlParserPostprocessor.parseToVTL(expected3));
+		Assertions.assertEquals(expected4, lunaticXMLVtlParserPostprocessor.parseToVTL(expected4));
+		Assertions.assertEquals(expected5, lunaticXMLVtlParserPostprocessor.parseToVTL(expected5));
+		Assertions.assertEquals(expected6, lunaticXMLVtlParserPostprocessor.parseToVTL(expected6));
+		Assertions.assertEquals(expected7, lunaticXMLVtlParserPostprocessor.parseToVTL(expected7));
+		Assertions.assertEquals(expected8, lunaticXMLVtlParserPostprocessor.parseToVTL(expected8));
+		Assertions.assertEquals(expected9, lunaticXMLVtlParserPostprocessor.parseToVTL(expected9));
+		Assertions.assertEquals(expected10, lunaticXMLVtlParserPostprocessor.parseToVTL(expected10));
+		//Assertions.assertEquals(expected11, lunaticXMLVtlParserPostprocessor.parseToVTL(expected11));
+		//Assertions.assertEquals(expected12, lunaticXMLVtlParserPostprocessor.parseToVTL(expected12));
+		//Assertions.assertEquals(expected13, lunaticXMLVtlParserPostprocessor.parseToVTL(expected13));
+	
 	}
 	
 	@Test
