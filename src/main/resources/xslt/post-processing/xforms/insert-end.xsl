@@ -145,7 +145,7 @@
             <xsl:value-of select="number(@id)"/>
         </xsl:variable>
         <xsl:variable name="link">
-            <xsl:value-of select="'{concat(xxf:property(''url-orbeon''),xxf:property(''lien-deconnexion''))}'"/>
+            <xsl:value-of select="'{concat(xxf:property(''url-orbeon''),xxf:property(''logout-uri''))}'"/>
         </xsl:variable>
 
         <xf:case id="{$index}">
