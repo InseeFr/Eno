@@ -3,7 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.insee.eno</groupId>
 	<artifactId>eno-core</artifactId>
-	<version>2.2.8-dev-xforms-closesurveybutton</version>
+
+	<version>2.2.9</version>
 
 	<packaging>jar</packaging>
 
