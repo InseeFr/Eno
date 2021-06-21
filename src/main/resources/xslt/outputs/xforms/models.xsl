@@ -1613,11 +1613,11 @@
                     </xsl:when>
                     <xsl:when test="starts-with($image,'http')">
                         <xsl:value-of select="concat('&lt;img src=&quot;',$image,
-                            '&quot; alt=&quot;',$labelImage,'&quot; /&gt;')"/>
+                            '&quot; title=&quot;',$labelImage,'&quot; alt=&quot;',$labelImage,'&quot; /&gt;')"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="concat('&lt;img src=&quot;/',$properties//Images/Folder,'/',$image,
-                            '&quot; alt=&quot;',$labelImage,'&quot; /&gt;')"/>
+                            '&quot; title=&quot;',$labelImage,'&quot; alt=&quot;',$labelImage,'&quot; /&gt;')"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </label>

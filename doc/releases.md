@@ -1,5 +1,11 @@
 # Eno Releases note
 
+## 2.2.9 - 21/06/21
+
+- **[ddi2out][pre-processing]** Redesigning of the numbering (titling.xsl). From now on, there are only 3 parameters which are: choice of the numbering of the questions (number the questions or not, and, if so, to number them in sequence or on the whole questionnaire), choice of sequence numbering (number or not the sequences), display of the symbol in front of the numbering (display or not the "arrow" symbol before the questions)
+- **[ddi2xforms][post-processing]** Replacing 'lien-deconnexion' by 'logout-uri' for the property of the close button (insert-end.xsl) (internationalization)
+- **[ddi2xforms][core]** adding a title attribute to img (digital accessibility)
+
 ## 2.2.8 - 04/06/2021
 
 - **[dependencies]** Upgrading dependencies versions (in particular Saxon version to 10.5, maven compiler to 11). 
@@ -10,9 +16,9 @@
 - **[ddi2fo][core]** Fixing issue where the message related to a Filter would not be displayed in fo/pdf output
 - **[poguesXML2ddi][core]** Fixing an issue with pogues2ddi transformation not preventing a GoTo that would point to a loop. It now crashes with an error
 - **[poguesXML2ddi][core]** Retrieving name of loops from Pogues-XML into DDI
-- **[ddi][pre-processing]** The transformation markdown to xhtml (md2xhtml) is no longer a post-processing for poguesXML2ddi but now a pre-processing for ddi2output. For now, all output formats use it, but should change soon with Lunatic
+- **[ddi2out][pre-processing]** The transformation markdown to xhtml (md2xhtml) is no longer a post-processing for poguesXML2ddi but now a pre-processing for ddi2output. For now, all output formats use it, but should change soon with Lunatic
 - **[poguesXML2ddi][core]** When Pogues defines the collection mode for Instructions, they are now correctly transcribed into DDI
-- **[ddi2output][core]** When DDI defines the collection mode for Instructions, they are now kept for the right output formats based on the collection mode that has been specified
+- **[ddi2out][core]** When DDI defines the collection mode for Instructions, they are now kept for the right output formats based on the collection mode that has been specified
 
 ## 2.2.6 - 10/05/2021
 
