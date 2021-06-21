@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Numerotation>
+    <Sequence>
+            <StyleNumSeq>I</StyleNumSeq>
+            <PostNumSeq> - </PostNumSeq>
+    </Sequence>
+    <Question>
+            <PreQuest>➡ </PreQuest>
+            <PostNumParentQuest></PostNumParentQuest>
+            <StyleNumQuest>1</StyleNumQuest>
+            <PostNumQuest>. </PostNumQuest>
+    </Question>
+</Numerotation>

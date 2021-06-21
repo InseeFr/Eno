@@ -1,37 +1,37 @@
 <ENOParameters>
-    
+
     <Pipeline/>
 
     <Parameters>
         <Context>default</Context>
-        
+
         <Campagne>test-2020-x00</Campagne>
-        
+
         <Languages>
             <Language>fr</Language>
             <Language>en</Language>
         </Languages>
-        
+
         <BeginQuestion>
             <Identification>false</Identification>
         </BeginQuestion>
-        
+
         <EndQuestion>
             <ResponseTimeQuestion>false</ResponseTimeQuestion>
             <CommentQuestion>false</CommentQuestion>
         </EndQuestion>
-        
+
         <xforms-parameters>
             <NumericExample>false</NumericExample>
             <Deblocage>false</Deblocage>
             <Satisfaction>false</Satisfaction>
             <LengthOfLongTable>7</LengthOfLongTable>
             <DecimalSeparator>,</DecimalSeparator>
-            <Css></Css>
+            <Css/>
         </xforms-parameters>
-        
+
         <fo-parameters>
-        <InitializeAllVariables>false</InitializeAllVariables>
+            <InitializeAllVariables>false</InitializeAllVariables>
             <Format>
                 <Orientation>0</Orientation>
                 <Columns>1</Columns>
@@ -62,45 +62,21 @@
             <PageBreakBetween/>
             <AccompanyingMail/>
         </fo-parameters>
-        
+
         <lunatic-xml-parameters>
             <FilterDescription>false</FilterDescription>
             <AddFilterResult>false</AddFilterResult>
             <Pagination>none</Pagination>
         </lunatic-xml-parameters>
-        
+
         <fodt-parameters/>
-    
-        <Title>
-            <Browsing>module</Browsing>
-            <Sequence>
-                <Level name="template"/>
-                <Level name="module">
-                    <PreSeq></PreSeq>
-                    <NumParent>false</NumParent>
-                    <PostNumParentSeq></PostNumParentSeq>
-                    <StyleNumSeq>I</StyleNumSeq>
-                    <PostNumSeq> - </PostNumSeq>
-                </Level>
-                <Level name="submodule"/>
-            </Sequence>
-            <Question>
-                <Level name="module">
-                    <PreQuest>➡ </PreQuest>
-                    <NumParent>false</NumParent>
-                    <PostNumParentQuest></PostNumParentQuest>
-                    <StyleNumQuest>1</StyleNumQuest>
-                    <PostNumQuest>. </PostNumQuest>
-                </Level>
-                <Level name="submodule">
-                    <PreQuest>➡ </PreQuest>
-                    <NumParent>false</NumParent>
-                    <PostNumParentQuest></PostNumParentQuest>
-                    <StyleNumQuest>1</StyleNumQuest>
-                    <PostNumQuest>. </PostNumQuest>
-                </Level>
-            </Question>
-        </Title>
+
+        <Numerotation>
+            <QuestNum>module</QuestNum>
+            <SeqNum>true</SeqNum>
+            <PreQuestSymbol>true</PreQuestSymbol>
+        </Numerotation>
+
     </Parameters>
-    
+
 </ENOParameters>
