@@ -28,35 +28,10 @@
         </EndQuestion>
  
           <fodt-parameters/>
-        <Title>
-            <Browsing>no-number</Browsing>
-            <Sequence>
-                <Level name="template"/>
-                <Level name="module">
-                    <PreSeq/>
-                    <NumParent>false</NumParent>
-                    <PostNumParentSeq/>
-                    <StyleNumSeq>I</StyleNumSeq>
-                    <PostNumSeq> - </PostNumSeq>
-                </Level>
-                <Level name="submodule"/>
-            </Sequence>
-            <Question>
-                <Level name="module">
-                    <PreQuest>➡ </PreQuest>
-                    <NumParent>false</NumParent>
-                    <PostNumParentQuest></PostNumParentQuest>
-                    <StyleNumQuest>1</StyleNumQuest>
-                    <PostNumQuest>%***%</PostNumQuest>
-                </Level>
-                <Level name="submodule">
-                    <PreQuest>➡ </PreQuest>
-                    <NumParent>false</NumParent>
-                    <PostNumParentQuest/>
-                    <StyleNumQuest>1</StyleNumQuest>
-                    <PostNumQuest>. </PostNumQuest>
-                </Level>
-            </Question>
-        </Title>
+        <Numerotation>
+            <QuestNum>module</QuestNum>
+            <SeqNum>false</SeqNum>
+            <PreQuestSymbol>true</PreQuestSymbol>
+        </Numerotation>
     </Parameters>
 </ENOParameters>

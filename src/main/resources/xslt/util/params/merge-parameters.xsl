@@ -31,26 +31,7 @@
         </xsl:choose>
     </xsl:template>
     
-    <xsl:template match="Level" priority="3">
-        <xsl:variable name="parent" select="name(..)"/>
-        <xsl:variable name="levelName" select="@name"/>
-        <xsl:copy>
-            <xsl:copy-of select="@name"/>
-            <xsl:for-each select="*">
-                <xsl:variable name="name" select="name(.)"/>
-                <xsl:choose>
-                    <xsl:when test="$root//.[name(.)=$name and ../@name = $levelName and name(../..) = $parent]/text() != ''">
-                        <xsl:copy-of
-                            select="$root//.[name(.)=$name and ../@name = $levelName and name(../..) = $parent]"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:copy-of select="."/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:for-each>
-        </xsl:copy>
-    </xsl:template>
-    
+     
     <xsl:template
         match="*[ends-with(name(), '-parameters') and not(starts-with(name(), concat($out-format, '-')))]"
         priority="2"/>
