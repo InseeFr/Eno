@@ -42,17 +42,35 @@ public class TestXpath2VTLParser {
 	private String expected10 = "isnull(cast(cast(ABCD,string),integer))";
 
 	// modulo
-	//private String test11 = "10 mod 2";
-	//private String expected11 = "mod(10,2)";
+	private String test11 = "10 mod 2";
+	private String test11bis = "10mod2";
+	private String expected11 = "mod(10,2)";
 
 	// current date
-	//private String test12 = "current-date()";
-	//private String expected12 = "current_date()";
+	private String test12 = "current-date()";
+	private String expected12 = "current_date()";
 
 	// string length
-	//private String test13 = "string-length()";
-	//private String expected13 = "length()";
-		
+	private String test13 = "string-length()";
+	private String expected13 = "length()";
+
+	// inclusion and not inclusion
+	private String expected14 = "cast(VAR,number) in {\"1\", \"2\"}";
+	private String expected15 = "cast(VAR,number) not_in {\"1\", \"2\"}";
+
+	// null condition
+	//private String test16 = "if ($SEXE$= \"2\") then \"elle\" else \"il\"";
+	private String expected16 = "if isnull($SEXE$) then \"il\" else if ($SEXE$= \"2\") then \"elle\" else \"il\"";	
+
+	// conversion d’une date AAAA-MM-JJ en nombre
+    private String expected17 = "cast(substr(cast($DATENAIS$,string),1,4)||substr(cast($DATENAIS$,string),6,2)||substr(cast($DATENAIS$,string),9,2),number)";
+
+	// âge en différence de millésime ($AGEMILLESIME$)
+	private String expected18 = "cast(substr(cast(current_date(),string),1,4),number)  - cast(substr(cast($DATENAIS$,string),1,4),number)";
+
+	// Booléen anniversaire à venir dans l’année ($FUTURANNIVERSAIRE$)
+	private String expected19 = "cast(substr(cast(current_date(),string),6,2) || substr(cast(current_date(),string),9,2),number) < cast(substr(cast($DATENAIS$,string),6,2) || substr(cast($DATENAIS$,string),9,2),number)";
+
 	@Test
 	public void simpleTestXpath2VTL() {
 		Assertions.assertEquals(expected1, Xpath2VTLParser.parseToVTL(test1));
@@ -65,9 +83,10 @@ public class TestXpath2VTLParser {
 		Assertions.assertEquals(expected8, Xpath2VTLParser.parseToVTL(test8));
 		Assertions.assertEquals(expected9, Xpath2VTLParser.parseToVTL(test9));
 		Assertions.assertEquals(expected10, Xpath2VTLParser.parseToVTL(test10));
-		//Assertions.assertEquals(expected11, Xpath2VTLParser.parseToVTL(test11));
-		//Assertions.assertEquals(expected12, Xpath2VTLParser.parseToVTL(test12));
-		//Assertions.assertEquals(expected13, Xpath2VTLParser.parseToVTL(test13));
+		Assertions.assertEquals(expected11, Xpath2VTLParser.parseToVTL(test11));
+		Assertions.assertEquals(expected11, Xpath2VTLParser.parseToVTL(test11bis));
+		Assertions.assertEquals(expected12, Xpath2VTLParser.parseToVTL(test12));
+		Assertions.assertEquals(expected13, Xpath2VTLParser.parseToVTL(test13));
 
 	}
 	@Test
@@ -82,10 +101,15 @@ public class TestXpath2VTLParser {
 		Assertions.assertEquals(expected8, Xpath2VTLParser.parseToVTL(expected8));
 		Assertions.assertEquals(expected9, Xpath2VTLParser.parseToVTL(expected9));
 		Assertions.assertEquals(expected10, Xpath2VTLParser.parseToVTL(expected10));
-		//Assertions.assertEquals(expected11, Xpath2VTLParser.parseToVTL(expected11));
-		//Assertions.assertEquals(expected12, Xpath2VTLParser.parseToVTL(expected12));
-		//Assertions.assertEquals(expected13, Xpath2VTLParser.parseToVTL(expected13));
-	
+		Assertions.assertEquals(expected11, Xpath2VTLParser.parseToVTL(expected11));
+		Assertions.assertEquals(expected12, Xpath2VTLParser.parseToVTL(expected12));
+		Assertions.assertEquals(expected13, Xpath2VTLParser.parseToVTL(expected13));
+		Assertions.assertEquals(expected14, Xpath2VTLParser.parseToVTL(expected14));
+		Assertions.assertEquals(expected15, Xpath2VTLParser.parseToVTL(expected15));
+		Assertions.assertEquals(expected16, Xpath2VTLParser.parseToVTL(expected16));
+		Assertions.assertEquals(expected17, Xpath2VTLParser.parseToVTL(expected17));	
+		Assertions.assertEquals(expected18, Xpath2VTLParser.parseToVTL(expected18));
+		Assertions.assertEquals(expected19, Xpath2VTLParser.parseToVTL(expected19));
 	}
 	
 

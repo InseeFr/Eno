@@ -13,14 +13,20 @@ public class Xpath2VTLParser {
 	public static final String XPATH_DIVISION_FUNCTION = " div ";
 	public static final String XPATH_NOT_EQUAL_TO = "!=";
 	public static final String FAKE_XPATH_EQUAL_TO_NULL = "= null";
-
+	public static final String XPATH_CURRENT_DATE = "current-date";
+	public static final String XPATH_LENGTH_FUNCTION = "string-length";
+	public static final String XPATH_MOD = "mod";
+	
 	public static final String VTL_CONCAT_FUNCTION = "||";
 	public static final String VTL_SUBSTRING_FUNCTION = "substr";
 	public static final String VTL_CAST_FUNCTION = "cast";
 	public static final String VTL_DIVISION_FUNCTION = " / ";
 	public static final String VTL_NOT_EQUAL_TO = " &lt;&gt; ";
 	public static final String VTL_EQUAL_TO_NULL_FUNCTION = "isnull";
-
+	public static final String VTL_CURRENT_DATE = "current_date";
+	public static final String VTL_LENGTH_FUNCTION = "length";
+	public static final String VTL_MOD = "mod";
+	
 	public static String parseToVTLInNodes(String input, String possibleNodes) {
 		Pattern pattern = Pattern.compile("(<"+possibleNodes+">)((.|\n)*?)(</"+possibleNodes+">)");
 
@@ -80,7 +86,16 @@ public class Xpath2VTLParser {
 			context = (c==',') ? "" : context+c;
 			
 			// order functions by descending length
-			if(context.contains(XPATH_NOT_EQUAL_TO) && !isBetweenRealDoubleQuote) {
+			if(context.contains(XPATH_MOD) && !isBetweenRealDoubleQuote) {
+				finalString+=c;
+				Pattern patternMod = Pattern.compile("(\\d+)"+ "(\\s*"+XPATH_MOD+"\\s*)" + "(\\d+)");
+				Matcher m = patternMod.matcher(finalString);
+				if(m.find()) finalString = m.replaceAll(VTL_MOD + "(" + m.group(1) + "," + m.group(3) + ")") ;
+				continue;			}				
+			else if(context.contains(XPATH_CURRENT_DATE) && !isBetweenRealDoubleQuote) {
+				finalString = replaceLast(finalString, XPATH_CURRENT_DATE, VTL_CURRENT_DATE);
+			}			
+			else if(context.contains(XPATH_NOT_EQUAL_TO) && !isBetweenRealDoubleQuote) {
 				finalString = replaceLast(finalString, XPATH_NOT_EQUAL_TO, VTL_NOT_EQUAL_TO);
 			}
 			else if(context.contains(XPATH_DIVISION_FUNCTION) && !isBetweenRealDoubleQuote) {
@@ -101,6 +116,9 @@ public class Xpath2VTLParser {
 					finalString = replaceLast(finalString, XPATH_CONCAT_FUNCTION, "");
 					listContext.add(XPATH_CONCAT_FUNCTION);
 				}
+				else if(context.contains(XPATH_LENGTH_FUNCTION) && !isBetweenRealDoubleQuote) {
+					finalString = replaceLast(finalString, XPATH_LENGTH_FUNCTION, VTL_LENGTH_FUNCTION)+c;
+					listContext.add(XPATH_LENGTH_FUNCTION);}
 				else if(context.contains(XPATH_SUBSTRING_FUNCTION) && !isBetweenRealDoubleQuote) {
 					finalString = replaceLast(finalString, XPATH_SUBSTRING_FUNCTION, VTL_SUBSTRING_FUNCTION)+c;
 					listContext.add(XPATH_SUBSTRING_FUNCTION);
