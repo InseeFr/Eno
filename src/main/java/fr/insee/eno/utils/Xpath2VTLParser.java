@@ -88,9 +88,9 @@ public class Xpath2VTLParser {
 			// order functions by descending length
 			if(context.contains(XPATH_MOD) && !isBetweenRealDoubleQuote) {
 				finalString+=c;
-				Pattern patternMod = Pattern.compile("(\\d+)"+ "(\\s*"+XPATH_MOD+"\\s*)" + "(\\d+)");
+				Pattern patternMod = Pattern.compile("((\\w|\\$)+)"+ "(\\s*"+XPATH_MOD+"\\s*)" + "((\\w|\\$)+)");
 				Matcher m = patternMod.matcher(finalString);
-				if(m.find()) finalString = m.replaceAll(VTL_MOD + "(" + m.group(1) + "," + m.group(3) + ")") ;
+				if(m.find()) finalString = m.replaceAll(VTL_MOD + "(" + m.group(1) + "," + m.group(4) + ")") ;
 				continue;			}				
 			else if(context.contains(XPATH_CURRENT_DATE) && !isBetweenRealDoubleQuote) {
 				finalString = replaceLast(finalString, XPATH_CURRENT_DATE, VTL_CURRENT_DATE);

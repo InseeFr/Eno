@@ -45,7 +45,9 @@ public class TestXpath2VTLParser {
 	private String test11 = "10 mod 2";
 	private String test11bis = "10mod2";
 	private String expected11 = "mod(10,2)";
-
+	private String test20 ="kiki $VAR1$ mod $VAR2$ lolo";
+	private String expected20 ="kiki mod($VAR1$,$VAR2$) lolo";
+	
 	// current date
 	private String test12 = "current-date()";
 	private String expected12 = "current_date()";
@@ -87,6 +89,7 @@ public class TestXpath2VTLParser {
 		Assertions.assertEquals(expected11, Xpath2VTLParser.parseToVTL(test11bis));
 		Assertions.assertEquals(expected12, Xpath2VTLParser.parseToVTL(test12));
 		Assertions.assertEquals(expected13, Xpath2VTLParser.parseToVTL(test13));
+		Assertions.assertEquals(expected20, Xpath2VTLParser.parseToVTL(test20));
 
 	}
 	@Test
@@ -110,6 +113,7 @@ public class TestXpath2VTLParser {
 		Assertions.assertEquals(expected17, Xpath2VTLParser.parseToVTL(expected17));	
 		Assertions.assertEquals(expected18, Xpath2VTLParser.parseToVTL(expected18));
 		Assertions.assertEquals(expected19, Xpath2VTLParser.parseToVTL(expected19));
+		Assertions.assertEquals(expected20, Xpath2VTLParser.parseToVTL(expected20));
 	}
 	
 
