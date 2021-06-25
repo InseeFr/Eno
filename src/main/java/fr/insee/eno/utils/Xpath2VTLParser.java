@@ -89,17 +89,17 @@ public class Xpath2VTLParser {
 			correctedInput=input;
 		}
 		StringBuilder finalString=new StringBuilder();
-		String context="";
+		StringBuilder context=new StringBuilder();
 		List<String> listContext = new ArrayList<>();
 		boolean isBetweenRealDoubleQuote=false;
 		boolean isBetweenRealSimpleQuote=false;
 		String contentBetweenSimpleQuote="";
 		String lastCastType=""; // number, string or integer TODO:date/duration/etc
 		for(char c : correctedInput.toCharArray()) {
-			context = (c==',') ? "" : context+c;
+			context.append( (c==',') ? "" : c);
 			
 			// order functions by descending length
-			if(context.contains(XPATH_MOD) && !isBetweenRealDoubleQuote) {
+			if(context.indexOf(XPATH_MOD)>=0 && !isBetweenRealDoubleQuote) {
 				finalString.append(c);
 				Matcher m = patternMod.matcher(finalString);
 				boolean result = m.find();
@@ -112,16 +112,16 @@ public class Xpath2VTLParser {
 				}
 				continue;
 			}
-			else if(context.contains(XPATH_CURRENT_DATE) && !isBetweenRealDoubleQuote) {
+			else if(context.indexOf(XPATH_CURRENT_DATE)>=0 && !isBetweenRealDoubleQuote) {
 				finalString = replaceLast(finalString, XPATH_CURRENT_DATE, VTL_CURRENT_DATE);
 			}			
-			else if(context.contains(XPATH_NOT_EQUAL_TO) && !isBetweenRealDoubleQuote) {
+			else if(context.indexOf(XPATH_NOT_EQUAL_TO)>=0 && !isBetweenRealDoubleQuote) {
 				finalString = replaceLast(finalString, XPATH_NOT_EQUAL_TO, VTL_NOT_EQUAL_TO);
 			}
-			else if(context.contains(XPATH_DIVISION_FUNCTION) && !isBetweenRealDoubleQuote) {
+			else if(context.indexOf(XPATH_DIVISION_FUNCTION)>=0 && !isBetweenRealDoubleQuote) {
 				finalString = replaceLast(finalString, XPATH_DIVISION_FUNCTION, VTL_DIVISION_FUNCTION);
 			}
-			else if(context.contains(FAKE_XPATH_EQUAL_TO_NULL) && !isBetweenRealDoubleQuote){
+			else if(context.indexOf(FAKE_XPATH_EQUAL_TO_NULL)>=0 && !isBetweenRealDoubleQuote){
 				finalString.append(c);
 
 				Matcher m = patternEqualsNull.matcher(finalString);
@@ -135,23 +135,24 @@ public class Xpath2VTLParser {
 			switch (c) {
 			case '(':
 				// order functions by descending length
-				if(context.contains(XPATH_CONCAT_FUNCTION) && !isBetweenRealDoubleQuote) {
+
+				if(context.indexOf(XPATH_CONCAT_FUNCTION)>=0 && !isBetweenRealDoubleQuote) {
 					finalString = replaceLast(finalString, XPATH_CONCAT_FUNCTION, "");
 					listContext.add(XPATH_CONCAT_FUNCTION);
 				}
-				else if(context.contains(XPATH_LENGTH_FUNCTION) && !isBetweenRealDoubleQuote) {
+				else if(context.indexOf(XPATH_LENGTH_FUNCTION)>=0 && !isBetweenRealDoubleQuote) {
 					finalString = replaceLast(finalString, XPATH_LENGTH_FUNCTION, VTL_LENGTH_FUNCTION).append(c);
 					listContext.add(XPATH_LENGTH_FUNCTION);}
-				else if(context.contains(XPATH_SUBSTRING_FUNCTION) && !isBetweenRealDoubleQuote) {
+				else if(context.indexOf(XPATH_SUBSTRING_FUNCTION)>=0 && !isBetweenRealDoubleQuote) {
 					finalString = replaceLast(finalString, XPATH_SUBSTRING_FUNCTION, VTL_SUBSTRING_FUNCTION).append(c);
 					listContext.add(XPATH_SUBSTRING_FUNCTION);
 				}
 				else {
 					finalString.append(c);
-					listContext.add(context.replace("(", ""));
+					listContext.add(context.toString().replace("(", ""));
 				}
 				contentBetweenSimpleQuote+=isBetweenRealSimpleQuote ? c:"";
-				context="";
+				context=new StringBuilder();
 				break;
 			case '\"':
 				if(getLastChar(finalString)!='\\') {
@@ -181,11 +182,11 @@ public class Xpath2VTLParser {
 			case ')':
 				finalString.append(getLastElement(listContext).equals(XPATH_CONCAT_FUNCTION) ? "" : c);
 				if(getLastElement(listContext).contains(XPATH_CAST_FUNCTION)) {
-					lastCastType=context.replace(")", "");
+					lastCastType=context.toString().replace(")", "");
 				}
 				removeLast(listContext);
 				contentBetweenSimpleQuote+=isBetweenRealSimpleQuote ? c:"";
-				context="";
+				context=new StringBuilder();
 				break;
 			default:
 				contentBetweenSimpleQuote+=isBetweenRealSimpleQuote ? c:"";
