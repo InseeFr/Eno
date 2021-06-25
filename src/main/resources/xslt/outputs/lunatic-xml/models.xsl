@@ -837,6 +837,11 @@
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
+			<xsl:if test="enolunatic:is-scope-questionconstruct($source-context)">
+			<scope>
+				toto
+			</scope>
+			</xsl:if>
 		</variables>
 	</xsl:template>
 
