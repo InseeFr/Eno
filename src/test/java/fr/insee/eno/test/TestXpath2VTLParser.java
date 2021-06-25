@@ -4,7 +4,7 @@ import fr.insee.eno.utils.Xpath2VTLParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestXpath2VTLParser {
 
@@ -66,6 +66,14 @@ public class TestXpath2VTLParser {
 	}
 
 	@Test
+	@DisplayName("cast(cast(ABCD,integer),string) = '3' (space)")
+	public void parseToVTLTest_cast_string_withSpace() {
+		String xpathExpression = "cast(cast(ABCD,integer),string) = '3'"+" ";
+		String vtlExpected = "cast(cast(ABCD,integer),string) = \"3\"";
+		assertEquals(vtlExpected, Xpath2VTLParser.parseToVTL(xpathExpression));
+	}
+
+	@Test
 	@DisplayName("cast(cast(ABCD,string),integer) = '3'")
 	public void parseToVTLTest_cast_integer() {
 		String xpathExpression = "cast(cast(ABCD,string),integer) = '3'";
@@ -90,10 +98,10 @@ public class TestXpath2VTLParser {
 	}
 
 	@Test
-	@DisplayName("10 mod 2")
+	@DisplayName("121 mod 11")
 	public void parseToVTLTest_mod_space() {
-		String xpathExpression = "10 mod 2";
-		String vtlExpected = "mod(10,2)";
+		String xpathExpression = "121 mod 11";
+		String vtlExpected = "mod(121,11)";
 		assertEquals(vtlExpected, Xpath2VTLParser.parseToVTL(xpathExpression));
 	}
 
@@ -289,8 +297,5 @@ public class TestXpath2VTLParser {
 		String vtl = "cast(substr(cast(current_date(),string),6,2) || substr(cast(current_date(),string),9,2),number) < cast(substr(cast($DATENAIS$,string),6,2) || substr(cast($DATENAIS$,string),9,2),number)";
 		assertEquals(vtl, Xpath2VTLParser.parseToVTL(vtl));
 	}
-
-	
-
-	
 }
+
