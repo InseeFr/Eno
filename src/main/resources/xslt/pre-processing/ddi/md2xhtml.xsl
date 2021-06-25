@@ -58,7 +58,7 @@
     </xsl:template>
 
     <!-- Parsing is done on the text nodes for the default mode only -->
-    <xsl:template match="text()[matches(normalize-space(replace(.,'&amp;#xd;', 'xhtml:br')),'[*]|xhtml:br|\[.*\]\(\. &quot;.*&quot;\)')]">
+    <xsl:template match="text()[matches(normalize-space(replace(.,'&amp;#xd;', 'xhtml:br')),'[*]|xhtml:br|\[.*\]\(\. &quot;.*&quot;\)|(\[([^\]]+)\]\(([^\)]+)\))')]">
         <xhtml:p>
             <xsl:call-template name="parse-tags">
               <xsl:with-param name="expression" select="normalize-space(replace(.,'&amp;#xd;', 'xhtml:br'))"/>
