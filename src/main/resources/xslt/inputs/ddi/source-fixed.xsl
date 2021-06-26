@@ -1546,6 +1546,28 @@
         <xsl:sequence select="//l:VariableScheme//l:VariableGroup[r:BasedOnObject/r:BasedOnReference[1]/r:ID=current()/parent::d:QuestionGrid/r:ID]
             /r:VariableReference/l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]"/>
     </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Name template get-controlconstructreference-name that returns the business name of the variable linked to the DDI ID of the ControlConstructReference.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template name="enoddi:get-controlconstructreference-name">
+        <xsl:param name="id"/>
+        <xsl:param name="type"/>
+        <xsl:param name="language"/>
+
+        <xsl:choose>
+            <!-- TypeOfObject is QuestionConstruct -->
+            <xsl:when test="$type = 'QuestionConstruct'">
+                <xsl:value-of select="$root//d:QuestionConstruct[r:ID=$id]/d:ConstructName/r:String"/>
+            </xsl:when>
+            <!-- TypeOfObject is Loop -->
+            <xsl:when test="$type = 'Loop'">
+                <xsl:value-of select="$root//d:Loop[r:ID=$id]//d:ControlConstructReference/d:QuestionConstruct[1]/d:ConstructName/r:String[@xml:lang=$language]"/>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
 
 
 </xsl:stylesheet>

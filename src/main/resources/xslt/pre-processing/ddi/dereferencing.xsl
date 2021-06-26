@@ -282,7 +282,9 @@
             <xd:p>Not to dereference templates.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:GenerationInstruction/d:ControlConstructReference" mode="output-DDI" priority="1"/>
+    <xsl:template match="d:GenerationInstruction/d:ControlConstructReference" mode="output-DDI" priority="1">
+        <xsl:copy-of select="."/>
+    </xsl:template>
 
     <xsl:template match="l:Variable" mode="output-DDI" priority="1">
         <xsl:copy-of select="."/>

@@ -869,6 +869,16 @@
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
+			<xsl:if test="enolunatic:is-scope-questionconstruct($source-context)">
+			<scope>
+				<xsl:value-of select="enolunatic:get-shapeFrom-name(enolunatic:get-scope-id($source-context),'QuestionConstruct',$languages)"/>
+			</scope>
+			</xsl:if>
+			<xsl:if test="enolunatic:is-scope-loop($source-context)">
+				<scope>
+					<xsl:value-of select="enolunatic:get-shapeFrom-name(enolunatic:get-scope-id($source-context),'Loop',$languages)"/>
+				</scope>
+			</xsl:if>
 		</variables>
 	</xsl:template>
 

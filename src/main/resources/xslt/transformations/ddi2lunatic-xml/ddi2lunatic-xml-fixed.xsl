@@ -520,4 +520,15 @@
         <xsl:value-of select="enoddi:get-id($linkedContainers[1])"/>
     </xsl:function>
     
+    <xsl:function name="enolunatic:get-shapeFrom-name">
+        <xsl:param name="id"/>
+        <xsl:param name="type"/>
+        <xsl:param name="language"/>
+        <xsl:call-template name="enoddi:get-controlconstructreference-name">
+            <xsl:with-param name="id" select="$id"/>
+            <xsl:with-param name="type" select="$type"/>
+            <xsl:with-param name="language" select="$language"/>
+        </xsl:call-template>
+    </xsl:function>
+    
 </xsl:stylesheet>
