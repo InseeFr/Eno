@@ -870,14 +870,14 @@
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
 			<xsl:if test="enolunatic:is-scope-questionconstruct($source-context)">
-			<scope>
+			<shapeFrom>
 				<xsl:value-of select="enolunatic:get-shapeFrom-name(enolunatic:get-scope-id($source-context),'QuestionConstruct',$languages)"/>
-			</scope>
+			</shapeFrom>
 			</xsl:if>
 			<xsl:if test="enolunatic:is-scope-loop($source-context)">
-				<scope>
+				<shapeFrom>
 					<xsl:value-of select="enolunatic:get-shapeFrom-name(enolunatic:get-scope-id($source-context),'Loop',$languages)"/>
-				</scope>
+				</shapeFrom>
 			</xsl:if>
 		</variables>
 	</xsl:template>
