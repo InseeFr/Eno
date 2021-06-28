@@ -1,9 +1,20 @@
 package fr.insee.eno.utils;
 
-import java.util.ArrayList;
-import java.util.List;
+import fr.insee.eno.exception.UnsupportedPatternException;
+import org.apache.commons.lang3.tuple.Pair;
+
+import javax.xml.namespace.QName;
+import javax.xml.stream.*;
+import javax.xml.stream.events.XMLEvent;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class Xpath2VTLParser {
 	
@@ -21,18 +32,92 @@ public class Xpath2VTLParser {
 	public static final String VTL_SUBSTRING_FUNCTION = "substr";
 	public static final String VTL_CAST_FUNCTION = "cast";
 	public static final String VTL_DIVISION_FUNCTION = " / ";
-	public static final String VTL_NOT_EQUAL_TO = " &lt;&gt; ";
+	public static final String VTL_NOT_EQUAL_TO = " <> ";
 	public static final String VTL_EQUAL_TO_NULL_FUNCTION = "isnull";
 	public static final String VTL_CURRENT_DATE = "current_date";
 	public static final String VTL_LENGTH_FUNCTION = "length";
 	public static final String VTL_MOD = "mod";
 
-	private static final Pattern patternMod = Pattern.compile("((\\w|\\$)+)"+ "(\\s*"+XPATH_MOD+"\\s*)" + "((\\w|\\$)+)\\s+");
+	public static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
+
+	private static final Pattern patternMod = Pattern.compile("(\\$?\\w*(?:\\d|(?:[a-zA-Z] )|\\$))(?:\\s*"+XPATH_MOD+"\\s*)((?:\\d|(?: [a-zA-Z])|\\$)\\w*\\$?)\\s+");
 	private static final Pattern patternEqualsNull = Pattern.compile("(cast\\((.)*,(\\s)*(\\w+)\\)) "+FAKE_XPATH_EQUAL_TO_NULL);
 	private static final Pattern patternNumerique=Pattern.compile("-?[0-9]+\\.?[0-9]*|-?[0-9]*\\.?[0-9]+");
+	private static final Pattern patternCommaParenthesis=Pattern.compile(".*,\\s*\\(");
 
+
+	private final Set<String> nodes;
+	private final Charset charset;
+	private final XMLEventFactory eventFactory = XMLEventFactory.newInstance();
+
+	public Xpath2VTLParser(Set<String> nodes, Charset charset){
+		this.nodes=Objects.requireNonNull(nodes);
+		this.charset=charset==null?DEFAULT_CHARSET:charset;
+	}
+
+	private Stream<Pair<QName, XMLEvent>> streamOfXmlEventsWithTagNames(XMLEventReader eventReader){
+		return StreamSupport.stream(Spliterators.spliteratorUnknownSize(new Iterator<>() {
+
+			private final Deque<QName> stack = new LinkedList<>(Collections.singleton(new QName("ROOT")));
+
+			@Override
+			public boolean hasNext() {
+				return eventReader.hasNext();
+			}
+
+			@Override
+			public Pair<QName, XMLEvent> next() {
+				XMLEvent xmlEvent = (XMLEvent) Objects.requireNonNull(eventReader.next());
+				if (xmlEvent.isStartElement()) {
+					stack.push(xmlEvent.asStartElement().getName());
+				}
+				if (xmlEvent.isEndElement()) {
+					stack.pop();
+				}
+				return Pair.of(stack.getFirst(), xmlEvent);
+			}
+		},0), false);
+	}
+
+	private XMLEvent parseXPath2VTLInLegitimatePairs(Pair<QName, XMLEvent> xmlEventWithTagName){
+		XMLEvent retour;
+		if (nodes.contains(xmlEventWithTagName.getLeft().getLocalPart())
+				&& xmlEventWithTagName.getRight().isCharacters()
+				&& !xmlEventWithTagName.getRight().asCharacters().isWhiteSpace()) {
+			retour = eventFactory.createCharacters(Xpath2VTLParser.parseToVTL(xmlEventWithTagName.getRight().asCharacters().getData()));
+		} else {
+			retour = xmlEventWithTagName.getRight();
+		}
+		return retour;
+	}
+
+	public OutputStream parseXPathToVTLFromInputStreamInNodes(InputStream inputStream, OutputStream outputStream) throws XMLStreamException {
+
+		XMLEventReader eventReader = XMLInputFactory.newFactory()
+				.createXMLEventReader(Objects.requireNonNull(inputStream), this.charset.name());
+		XMLEventWriter eventWriter = XMLOutputFactory.newFactory()
+				.createXMLEventWriter(Objects.requireNonNull(outputStream), this.charset.name());
+
+		streamOfXmlEventsWithTagNames(eventReader)
+				.map(this::parseXPath2VTLInLegitimatePairs)
+				.forEach(e -> {
+					try {
+						eventWriter.add(e);
+					} catch (XMLStreamException xmlStreamException) {
+						throw new RuntimeException(xmlStreamException);
+					}
+				});
+		eventWriter.close();
+		eventReader.close();
+
+		return outputStream;
+	}
+
+	// TODO iter over a stream of subsequences of the file instead of a String with the whole file content
+	// the method should iter over all subsequences and filter the ones which are legitimate to parse (cf. possibleNodes)
 	public static String parseToVTLInNodes(String input, String possibleNodes) {
-		Pattern pattern = Pattern.compile("(<"+possibleNodes+">)((.|\\R)*?)(</"+possibleNodes+">)");
+
+		Pattern pattern = Pattern.compile("(<"+possibleNodes+">)((.)*?)(</"+possibleNodes+">)");
 
 		Matcher matcher = pattern.matcher(input);
 		StringBuilder stringBuilder = new StringBuilder();
@@ -66,7 +151,7 @@ public class Xpath2VTLParser {
 	 *  - lastCastType is a string which defines what is the type fo the cast function (example : cast(ABCD,string) -> string)
 	 *  
 	 *  Transformations: 
-	 *  	x!=y -> x &lt;&gt; y (x <> y)
+	 *  	x!=y -> x <> y
 	 *  	x div y -> x / y
 	 *  	substring(A,1,2) -> substr(A,1,2)
 	 *  	concat(A,B,C) -> A || B || C
@@ -81,6 +166,9 @@ public class Xpath2VTLParser {
 	public static String parseToVTL(String input) {
 		if (input ==null){
 			throw new NullPointerException("parameter input in Xpath2VTLParser.parseToVTL shouldn't be null");
+		}
+		if (patternCommaParenthesis.matcher(input).matches() ){
+			throw new UnsupportedPatternException("\""+input+"\" matches .*,\\s*\\(");
 		}
 		String correctedInput;
 		if (!endWithWhitespaceCharacter(input)){
@@ -104,7 +192,7 @@ public class Xpath2VTLParser {
 				Matcher m = patternMod.matcher(finalString);
 				boolean result = m.find();
 				if (result) {
-					String replacement=VTL_MOD + "(" + m.group(1) + "," + m.group(4) + ") ";
+					String replacement=VTL_MOD + "(" + m.group(1) + "," + m.group(2) + ") ";
 					do {
 						finalString.replace(m.start(),m.end(),replacement);
 						result = m.find();
@@ -152,7 +240,7 @@ public class Xpath2VTLParser {
 					listContext.add(context.toString().replace("(", ""));
 				}
 				contentBetweenSimpleQuote+=isBetweenRealSimpleQuote ? c:"";
-				context=new StringBuilder();
+				context.delete(0, context.length());
 				break;
 			case '\"':
 				if(getLastChar(finalString)!='\\') {
@@ -178,6 +266,7 @@ public class Xpath2VTLParser {
 			case ',':
 				finalString.append(getLastElement(listContext).equals(XPATH_CONCAT_FUNCTION) && !isBetweenRealDoubleQuote ? " "+VTL_CONCAT_FUNCTION+" " : c);
 				contentBetweenSimpleQuote+=isBetweenRealSimpleQuote ? c:"";
+				context.delete(0, context.length());
 				break;
 			case ')':
 				finalString.append(getLastElement(listContext).equals(XPATH_CONCAT_FUNCTION) ? "" : c);
@@ -186,7 +275,7 @@ public class Xpath2VTLParser {
 				}
 				removeLast(listContext);
 				contentBetweenSimpleQuote+=isBetweenRealSimpleQuote ? c:"";
-				context=new StringBuilder();
+				context.delete(0, context.length());
 				break;
 			default:
 				contentBetweenSimpleQuote+=isBetweenRealSimpleQuote ? c:"";

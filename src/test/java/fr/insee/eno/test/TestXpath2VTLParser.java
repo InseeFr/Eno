@@ -4,7 +4,7 @@ import fr.insee.eno.utils.Xpath2VTLParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestXpath2VTLParser {
 
@@ -29,7 +29,7 @@ public class TestXpath2VTLParser {
 	@DisplayName("x!=y")
 	public void parseToVTLTest_different() {
 		String xpathExpression = "x!=y";
-		String vtlExpected = "x &lt;&gt; y"; // x <> y
+		String vtlExpected = "x <> y"; // x <> y
 		assertEquals(vtlExpected, Xpath2VTLParser.parseToVTL(xpathExpression));
 	}
 
@@ -45,7 +45,7 @@ public class TestXpath2VTLParser {
 	@DisplayName("x != '1'")
 	public void parseToVTLTest_different_litteral() {
 		String xpathExpression = "x != '1'";
-		String vtlExpected ="x  &lt;&gt;  \"1\"";
+		String vtlExpected ="x  <>  \"1\"";
 		assertEquals(vtlExpected, Xpath2VTLParser.parseToVTL(xpathExpression));
 	}
 
@@ -53,7 +53,7 @@ public class TestXpath2VTLParser {
 	@DisplayName("concat(substring(x,y,z),a,concat(x,substring(x1,y1,z1)),b)!='abc'")
 	public void parseToVTLTest_substring_concat() {
 		String xpathExpression = "concat(substring(x,y,z),a,concat(x,substring(x1,y1,z1)),b)!='abc'";
-		String vtlExpected = "substr(x,y,z) || a || x || substr(x1,y1,z1) || b &lt;&gt; \"abc\"";
+		String vtlExpected = "substr(x,y,z) || a || x || substr(x1,y1,z1) || b <> \"abc\"";
 		assertEquals(vtlExpected, Xpath2VTLParser.parseToVTL(xpathExpression));
 	}
 
@@ -78,6 +78,30 @@ public class TestXpath2VTLParser {
 	public void parseToVTLTest_cast_integer() {
 		String xpathExpression = "cast(cast(ABCD,string),integer) = '3'";
 		String vtlExpected = "cast(cast(ABCD,string),integer) = 3";
+		assertEquals(vtlExpected, Xpath2VTLParser.parseToVTL(xpathExpression));
+	}
+
+	@Test
+	@DisplayName("cast(NATIO1N3,integer) = '1'")
+	public void parseToVTLTest_strangeQuotes(){
+		String xpathExpression = "cast(NATIO1N3,integer) = '1'";
+		String vtlExpected = "cast(NATIO1N3,integer) = 1";
+		assertEquals(vtlExpected, Xpath2VTLParser.parseToVTL(xpathExpression));
+	}
+
+	@Test
+	@DisplayName("if (((cast(CADR,string) != '3' and cast(CADR,string) != '4') or isnull(cast(CADR,string))) and (cast(NATIO1N3,integer) = '1')) then \"normal\" else \"hidden\"")
+	public void parseToVTLTest_integerAndQuotes() {
+		String xpathExpression = "if (((cast(CADR,string) != '3' and cast(CADR,string) != '4') or isnull(cast(CADR,string))) and (cast(NATIO1N3,integer) = '1')) then \"normal\" else \"hidden\"";
+		String vtlExpected = "if (((cast(CADR,string)  <>  \"3\" and cast(CADR,string)  <>  \"4\") or isnull(cast(CADR,string))) and (cast(NATIO1N3,integer) = 1)) then \"normal\" else \"hidden\"";
+		assertEquals(vtlExpected, Xpath2VTLParser.parseToVTL(xpathExpression));
+	}
+
+	@Test
+	@DisplayName("cast(CADR,string) != '3' and (cast(CADR,string) != '4' or cast(NATIO1N3,integer) = '1')")
+	public void parseToVTLTest_logical() {
+		String xpathExpression = "cast(CADR,string) != '3' and (cast(CADR,string) != '4' or cast(NATIO1N3,integer) = '1')";
+		String vtlExpected = "cast(CADR,string)  <>  \"3\" and (cast(CADR,string)  <>  \"4\" or cast(NATIO1N3,integer) = 1)";
 		assertEquals(vtlExpected, Xpath2VTLParser.parseToVTL(xpathExpression));
 	}
 
@@ -146,12 +170,28 @@ public class TestXpath2VTLParser {
 		assertEquals(vtlExpected, Xpath2VTLParser.parseToVTL(xpathExpression));
 	}
 
+	@Test
+	@DisplayName("if (((cast(CADR,string) != '3' and cast(CADR,string) != '4') or isnull(cast(CADR,string)))) then \"normal\" else \"hidden\"")
+	public void parseTOVTLTest_xss(){
+		String xpathExpression = "if (((cast(CADR,string) != '3' and cast(CADR,string) != '4') or isnull(cast(CADR,string)))) then \"normal\" else \"hidden\"";
+		String vtlExpected = "if (((cast(CADR,string)  <>  \"3\" and cast(CADR,string)  <>  \"4\") or isnull(cast(CADR,string)))) then \"normal\" else \"hidden\"";
+		assertEquals(vtlExpected, Xpath2VTLParser.parseToVTL(xpathExpression));
+	}
+
 
 	// null condition
 	// String xpathExpression16 = "if ($SEXE$= \"2\") then \"elle\" else \"il\"";
 	 //String vtlExpected = "if isnull($SEXE$) then \"il\" else if ($SEXE$= \"2\") then \"elle\" else \"il\"";
 
 	// conversion d’une date AAAA-MM-JJ en nombre
+
+
+	@Test
+	@DisplayName("\"➡ 8. Pouvez-vous modifier ses coordonnées ?Civilité du destinataire : \" || cast(cast(cast(CIV_D1,string),string),string) || \"\"")
+	public void parseToVTLTest_vtlIsUnchanged_modInWord(){
+		String vtl = "\"➡ 8. Pouvez-vous modifier ses coordonnées ?Civilité du destinataire : \" || cast(cast(cast(CIV_D1,string),string),string) || \"\"";
+		assertEquals(vtl, Xpath2VTLParser.parseToVTL(vtl));
+	}
 
 
 	@Test
