@@ -264,6 +264,8 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="sequenceParent" tunnel="yes"/>
 		<xsl:param name="subSequenceParent" tunnel="yes"/>
+		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
+		<xsl:param name="idLoop" select="''" tunnel="yes"/>
 		
 		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
 		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
@@ -279,6 +281,7 @@
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
+		
 
 		<components xsi:type="CheckboxGroup" componentType="CheckboxGroup" id="{$idQuestion}">
 			<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context, $label)"/></label>
@@ -312,6 +315,8 @@
 		<xsl:call-template name="enolunatic:add-collected-variable-to-components">
 			<xsl:with-param name="responseName" select="concat($questionName,'_MISSING')"/>
 			<xsl:with-param name="componentRef" select="$idQuestion"/>
+			<xsl:with-param name="loopDepth" select="$loopDepth"/>
+			<xsl:with-param name="idLoop" select="$idLoop"/>
 		</xsl:call-template>
 		
 		<xsl:apply-templates select="enolunatic:get-end-question-instructions($source-context)" mode="source">
@@ -326,6 +331,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
+		<xsl:param name="idLoop" select="''" tunnel="yes"/>
 		<xsl:param name="sequenceParent" tunnel="yes"/>
 		<xsl:param name="subSequenceParent" tunnel="yes"/>
 
@@ -370,6 +376,7 @@
 				<xsl:with-param name="responseName" select="concat($questionName,'_MISSING')"/>
 				<xsl:with-param name="componentRef" select="$idQuestion"/>
 				<xsl:with-param name="loopDepth" select="$loopDepth"/>
+				<xsl:with-param name="idLoop" select="$idLoop"/>
 			</xsl:call-template>
 
 			<xsl:for-each select="enolunatic:get-header-lines($source-context)">
