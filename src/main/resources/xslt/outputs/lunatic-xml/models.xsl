@@ -288,6 +288,7 @@
 				<xsl:copy-of select="$sequenceParent"/>
 				<xsl:copy-of select="$subSequenceParent"/>
 			</hierarchy>
+			<missingResponse><xsl:value-of select="concat($questionName,'_MISSING')"/></missingResponse>
 			<xsl:copy-of select="$dependencies"/>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -307,6 +308,11 @@
 				<xsl:with-param name="dependencies" select="enolunatic:find-variables-in-formula($filter)" as="xs:string*"/>
 			</xsl:call-template>
 		</xsl:if>
+		
+		<xsl:call-template name="enolunatic:add-collected-variable-to-components">
+			<xsl:with-param name="responseName" select="concat($questionName,'_MISSING')"/>
+			<xsl:with-param name="componentRef" select="$idQuestion"/>
+		</xsl:call-template>
 		
 		<xsl:apply-templates select="enolunatic:get-end-question-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -354,10 +360,17 @@
 				<xsl:copy-of select="$sequenceParent"/>
 				<xsl:copy-of select="$subSequenceParent"/>
 			</hierarchy>
+			<missingResponse><xsl:value-of select="concat($questionName,'_MISSING')"/></missingResponse>
 			<xsl:copy-of select="$dependencies"/>
 			<xsl:if test="$nbMinimumLines!='' and $nbMaximumLines!=''">
 				<lines min="{$nbMinimumLines}" max="{$nbMaximumLines}"/>
 			</xsl:if>
+			
+			<xsl:call-template name="enolunatic:add-collected-variable-to-components">
+				<xsl:with-param name="responseName" select="concat($questionName,'_MISSING')"/>
+				<xsl:with-param name="componentRef" select="$idQuestion"/>
+				<xsl:with-param name="loopDepth" select="$loopDepth"/>
+			</xsl:call-template>
 
 			<xsl:for-each select="enolunatic:get-header-lines($source-context)">
 				<xsl:choose>
@@ -631,6 +644,7 @@
 				<xsl:call-template name="enolunatic:add-response-to-components">
 					<xsl:with-param name="responseName" select="$responseName"/>
 				</xsl:call-template>
+				<missingResponse><xsl:value-of select="concat($questionName,'_MISSING')"/></missingResponse>
 			</components>
 			
 			<xsl:if test="$addFilterResult">
@@ -643,6 +657,12 @@
 		</xsl:if>
 		<xsl:call-template name="enolunatic:add-collected-variable-to-components">
 			<xsl:with-param name="responseName" select="$responseName"/>
+			<xsl:with-param name="componentRef" select="$idQuestion"/>
+			<xsl:with-param name="loopDepth" select="$loopDepth"/>
+			<xsl:with-param name="idLoop" select="$idLoop"/>
+		</xsl:call-template>
+		<xsl:call-template name="enolunatic:add-collected-variable-to-components">
+			<xsl:with-param name="responseName" select="concat($questionName,'_MISSING')"/>
 			<xsl:with-param name="componentRef" select="$idQuestion"/>
 			<xsl:with-param name="loopDepth" select="$loopDepth"/>
 			<xsl:with-param name="idLoop" select="$idLoop"/>
