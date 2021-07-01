@@ -291,7 +291,11 @@
 				<xsl:copy-of select="$sequenceParent"/>
 				<xsl:copy-of select="$subSequenceParent"/>
 			</hierarchy>
-			<missingResponse><xsl:value-of select="concat($questionName,'_MISSING')"/></missingResponse>
+			<missingResponse>
+				<xsl:attribute name="name">
+					<xsl:value-of select="concat($questionName,'_MISSING')"/>
+				</xsl:attribute>
+			</missingResponse>
 			<xsl:copy-of select="$dependencies"/>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -366,7 +370,11 @@
 				<xsl:copy-of select="$sequenceParent"/>
 				<xsl:copy-of select="$subSequenceParent"/>
 			</hierarchy>
-			<missingResponse><xsl:value-of select="concat($questionName,'_MISSING')"/></missingResponse>
+			<missingResponse>
+				<xsl:attribute name="name">
+					<xsl:value-of select="concat($questionName,'_MISSING')"/>
+				</xsl:attribute>
+			</missingResponse>
 			<xsl:copy-of select="$dependencies"/>
 			<xsl:if test="$nbMinimumLines!='' and $nbMaximumLines!=''">
 				<lines min="{$nbMinimumLines}" max="{$nbMaximumLines}"/>
@@ -651,7 +659,11 @@
 				<xsl:call-template name="enolunatic:add-response-to-components">
 					<xsl:with-param name="responseName" select="$responseName"/>
 				</xsl:call-template>
-				<missingResponse><xsl:value-of select="concat($questionName,'_MISSING')"/></missingResponse>
+				<missingResponse>
+					<xsl:attribute name="name">
+						<xsl:value-of select="concat($questionName,'_MISSING')"/>
+					</xsl:attribute>
+				</missingResponse>
 			</components>
 			
 			<xsl:if test="$addFilterResult">
