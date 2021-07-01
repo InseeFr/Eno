@@ -196,28 +196,9 @@
             <xsl:sequence select="enoddi:get-label($context,$language)"/>
         </xsl:variable>
         <xsl:if test="$label!=''">
-            <!-- WARNING : if all the label is in VTL (not xpath) : replace by enolunatic:encode-special-char-in-js($label) -->
-            <xsl:value-of select="enolunatic:surround-label-with-quote(enolunatic:encode-special-char-in-js($label))"/>
+            <xsl:value-of select="enolunatic:encode-special-char-in-js($label)"/>
         </xsl:if>
     </xsl:function>
-    
-    <!-- WARNING : if all the label is in VTL, this function is useless, you have to delete this -->
-    <xsl:function name="enolunatic:surround-label-with-quote">
-        <xsl:param name="label"/>
-        <xsl:variable name="labelSimple" select="concat('&quot;',$label,'&quot;')"/>
-        <xsl:variable name="final-label">
-            <xsl:analyze-string select="$labelSimple" regex="{$regex-var-surrounded}">
-                <xsl:matching-substring>
-                    <xsl:value-of select="concat('&quot; || ','cast(',.,',string)',' || &quot;')"/>
-                </xsl:matching-substring>
-                <xsl:non-matching-substring>
-                    <xsl:value-of select="."/>
-                </xsl:non-matching-substring>
-            </xsl:analyze-string>
-        </xsl:variable>
-        <xsl:value-of select="$final-label"/>
-    </xsl:function>
-    
     
     <xsl:function name="enolunatic:encode-special-char-in-js">
         <xsl:param name="label"/>
