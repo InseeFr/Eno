@@ -37,7 +37,7 @@
          </hierarchy>
          <bindingDependencies>COMMENT</bindingDependencies>
          <response name="COMMENT"/>
-         <missingResponse>COMMENT_MISSING</missingResponse>
+         <missingResponse name="COMMENT_MISSING"/>
       </components>
       <components xsi:type="CheckboxBoolean"
                   componentType="CheckboxBoolean"
@@ -59,7 +59,7 @@
          </hierarchy>
          <bindingDependencies>READY</bindingDependencies>
          <response name="READY"/>
-         <missingResponse>READY_MISSING</missingResponse>
+         <missingResponse name="READY_MISSING"/>
       </components>
       <components xsi:type="FilterDescription"
                   componentType="FilterDescription"
@@ -109,7 +109,7 @@
             </hierarchy>
             <bindingDependencies>PRODUCER</bindingDependencies>
             <response name="PRODUCER"/>
-            <missingResponse>PRODUCER_MISSING</missingResponse>
+            <missingResponse name="PRODUCER_MISSING"/>
          </components>
          <components xsi:type="InputNumber"
                      componentType="InputNumber"
@@ -133,7 +133,7 @@
             </hierarchy>
             <bindingDependencies>SEASON_NUMBER</bindingDependencies>
             <response name="SEASON_NUMBER"/>
-            <missingResponse>SEASON_NUMBER_MISSING</missingResponse>
+            <missingResponse name="SEASON_NUMBER_MISSING"/>
          </components>
          <components xsi:type="Datepicker"
                      componentType="Datepicker"
@@ -162,7 +162,7 @@
             <bindingDependencies>DATEFIRST</bindingDependencies>
             <dateFormat>YYYY-MM-DD</dateFormat>
             <response name="DATEFIRST"/>
-            <missingResponse>DATEFIRST_MISSING</missingResponse>
+            <missingResponse name="DATEFIRST_MISSING"/>
          </components>
          <components xsi:type="Datepicker"
                      componentType="Datepicker"
@@ -190,7 +190,7 @@
             <bindingDependencies>DATEYYYYMM</bindingDependencies>
             <dateFormat>YYYY-MM</dateFormat>
             <response name="DATEYYYYMM"/>
-            <missingResponse>DATEYYYYMM_MISSING</missingResponse>
+            <missingResponse name="DATEYYYYMM_MISSING"/>
          </components>
          <components xsi:type="Datepicker"
                      componentType="Datepicker"
@@ -219,7 +219,7 @@
             <bindingDependencies>DATEYYYY</bindingDependencies>
             <dateFormat>YYYY</dateFormat>
             <response name="DATEYYYY"/>
-            <missingResponse>DATEYYYY_MISSING</missingResponse>
+            <missingResponse name="DATEYYYY_MISSING"/>
          </components>
          <components xsi:type="InputNumber"
                      componentType="InputNumber"
@@ -244,7 +244,7 @@
             <bindingDependencies>DURATIONH</bindingDependencies>
             <unit>heures</unit>
             <response name="DURATIONH"/>
-            <missingResponse>DURATIONH_MISSING</missingResponse>
+            <missingResponse name="DURATIONH_MISSING"/>
          </components>
          <components xsi:type="InputNumber"
                      componentType="InputNumber"
@@ -269,7 +269,7 @@
             <bindingDependencies>DURATIOND</bindingDependencies>
             <unit>jours</unit>
             <response name="DURATIOND"/>
-            <missingResponse>DURATIOND_MISSING</missingResponse>
+            <missingResponse name="DURATIOND_MISSING"/>
          </components>
          <components xsi:type="InputNumber"
                      componentType="InputNumber"
@@ -294,7 +294,7 @@
             <bindingDependencies>DURATIONM</bindingDependencies>
             <unit>mois</unit>
             <response name="DURATIONM"/>
-            <missingResponse>DURATIONM_MISSING</missingResponse>
+            <missingResponse name="DURATIONM_MISSING"/>
          </components>
          <components xsi:type="InputNumber"
                      componentType="InputNumber"
@@ -319,7 +319,7 @@
             <bindingDependencies>DURATIONY</bindingDependencies>
             <unit>années</unit>
             <response name="DURATIONY"/>
-            <missingResponse>DURATIONY_MISSING</missingResponse>
+            <missingResponse name="DURATIONY_MISSING"/>
          </components>
          <components xsi:type="InputNumber"
                      componentType="InputNumber"
@@ -344,7 +344,7 @@
             <bindingDependencies>AUDIENCE_SHARE</bindingDependencies>
             <unit>%</unit>
             <response name="AUDIENCE_SHARE"/>
-            <missingResponse>AUDIENCE_SHARE_MISSING</missingResponse>
+            <missingResponse name="AUDIENCE_SHARE_MISSING"/>
          </components>
       </components>
    </components>
@@ -397,7 +397,7 @@
             <label>"Seinfeld"</label>
          </options>
          <response name="CITY"/>
-         <missingResponse>CITY_MISSING</missingResponse>
+         <missingResponse name="CITY_MISSING"/>
       </components>
       <components xsi:type="CheckboxOne"
                   componentType="CheckboxOne"
@@ -436,7 +436,7 @@
             <label>"Other name"</label>
          </options>
          <response name="MAYOR"/>
-         <missingResponse>MAYOR_MISSING</missingResponse>
+         <missingResponse name="MAYOR_MISSING"/>
       </components>
       <components xsi:type="Dropdown"
                   componentType="Dropdown"
@@ -506,7 +506,7 @@
             <label>"Not in any state, you fool!"</label>
          </options>
          <response name="STATE"/>
-         <missingResponse>STATE_MISSING</missingResponse>
+         <missingResponse name="STATE_MISSING"/>
       </components>
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="j6qe0h9q">
@@ -542,7 +542,7 @@
          <bindingDependencies>PET2</bindingDependencies>
          <bindingDependencies>PET3</bindingDependencies>
          <bindingDependencies>PET4</bindingDependencies>
-         <missingResponse>PET_MISSING</missingResponse>
+         <missingResponse name="PET_MISSING"/>
          <responses id="j334akov-QOP-khokqjtw">
             <label>"Santa’s Little Helper"</label>
             <response name="PET1"/>
@@ -584,7 +584,7 @@
          <bindingDependencies>ICE_FLAVOUR2</bindingDependencies>
          <bindingDependencies>ICE_FLAVOUR3</bindingDependencies>
          <bindingDependencies>ICE_FLAVOUR4</bindingDependencies>
-         <missingResponse>ICE_FLAVOUR_MISSING</missingResponse>
+         <missingResponse name="ICE_FLAVOUR_MISSING"/>
          <cells type="line">
             <cells>
                <value>1</value>
@@ -677,7 +677,7 @@
          <bindingDependencies>NUCLEAR_CHARACTER2</bindingDependencies>
          <bindingDependencies>NUCLEAR_CHARACTER3</bindingDependencies>
          <bindingDependencies>NUCLEAR_CHARACTER4</bindingDependencies>
-         <missingResponse>NUCLEAR_CHARACTER_MISSING</missingResponse>
+         <missingResponse name="NUCLEAR_CHARACTER_MISSING"/>
          <cells type="line">
             <cells>
                <value>1</value>
@@ -771,7 +771,7 @@
          <bindingDependencies>BIRTH_CHARACTER3</bindingDependencies>
          <bindingDependencies>BIRTH_CHARACTER4</bindingDependencies>
          <bindingDependencies>BIRTH_CHARACTER5</bindingDependencies>
-         <missingResponse>BIRTH_CHARACTER_MISSING</missingResponse>
+         <missingResponse name="BIRTH_CHARACTER_MISSING"/>
          <cells type="line">
             <cells>
                <value>1</value>
@@ -974,7 +974,7 @@
             <bindingDependencies>PERCENTAGE_EXPENSES51</bindingDependencies>
             <bindingDependencies>PERCENTAGE_EXPENSES61</bindingDependencies>
             <bindingDependencies>PERCENTAGE_EXPENSES71</bindingDependencies>
-            <missingResponse>PERCENTAGE_EXPENSES_MISSING</missingResponse>
+            <missingResponse name="PERCENTAGE_EXPENSES_MISSING"/>
             <cells type="header">
                <cells headerCell="true" colspan="2">
                   <label/>
@@ -1134,7 +1134,7 @@
             <bindingDependencies>LAST_FOOD_SHOPPING61</bindingDependencies>
             <bindingDependencies>LAST_FOOD_SHOPPING71</bindingDependencies>
             <bindingDependencies>LAST_FOOD_SHOPPING81</bindingDependencies>
-            <missingResponse>LAST_FOOD_SHOPPING_MISSING</missingResponse>
+            <missingResponse name="LAST_FOOD_SHOPPING_MISSING"/>
             <cells type="header">
                <cells headerCell="true" colspan="2">
                   <label/>
@@ -1373,7 +1373,7 @@
             <bindingDependencies>CLOWNING32</bindingDependencies>
             <bindingDependencies>CLOWNING41</bindingDependencies>
             <bindingDependencies>CLOWNING42</bindingDependencies>
-            <missingResponse>CLOWNING_MISSING</missingResponse>
+            <missingResponse name="CLOWNING_MISSING"/>
             <cells type="header">
                <cells headerCell="true">
                   <label/>
@@ -1568,7 +1568,7 @@
             <bindingDependencies>TRAVEL44</bindingDependencies>
             <bindingDependencies>TRAVEL45</bindingDependencies>
             <bindingDependencies>TRAVEL46</bindingDependencies>
-            <missingResponse>TRAVEL_MISSING</missingResponse>
+            <missingResponse name="TRAVEL_MISSING"/>
             <cells type="header">
                <cells headerCell="true">
                   <label/>
@@ -1774,7 +1774,7 @@
          <bindingDependencies>FAVOURITE_CHAR1_10_1</bindingDependencies>
          <bindingDependencies>FAVOURITE_CHAR2_10_2</bindingDependencies>
          <bindingDependencies>FAVOURITE_CHAR3_10_3</bindingDependencies>
-         <missingResponse>FAVOURITE_CHAR_MISSING</missingResponse>
+         <missingResponse name="FAVOURITE_CHAR_MISSING"/>
          <lines min="1" max="10"/>
          <cells type="header">
             <cells headerCell="true">
@@ -2107,7 +2107,7 @@
          <bindingDependencies>FEELCHAREV2</bindingDependencies>
          <bindingDependencies>FEELCHAREV3</bindingDependencies>
          <bindingDependencies>FEELCHAREV4</bindingDependencies>
-         <missingResponse>FEELCHAREV_MISSING</missingResponse>
+         <missingResponse name="FEELCHAREV_MISSING"/>
          <cells type="line">
             <cells>
                <value>1</value>
@@ -2222,7 +2222,7 @@
          <bindingDependencies>LEAVDURATION42</bindingDependencies>
          <bindingDependencies>LEAVDURATION51</bindingDependencies>
          <bindingDependencies>LEAVDURATION52</bindingDependencies>
-         <missingResponse>LEAVDURATION_MISSING</missingResponse>
+         <missingResponse name="LEAVDURATION_MISSING"/>
          <cells type="header">
             <cells headerCell="true">
                <label/>
@@ -2396,7 +2396,7 @@
          </hierarchy>
          <bindingDependencies>NB_CHAR</bindingDependencies>
          <response name="NB_CHAR"/>
-         <missingResponse>NB_CHAR_MISSING</missingResponse>
+         <missingResponse name="NB_CHAR_MISSING"/>
       </components>
       <components xsi:type="Loop" componentType="Loop" id="kiq7bjam" depth="1">
          <label>"Add a character"</label>
@@ -2449,7 +2449,7 @@
                </hierarchy>
                <bindingDependencies>NAME_CHAR</bindingDependencies>
                <response name="NAME_CHAR"/>
-               <missingResponse>NAME_CHAR_MISSING</missingResponse>
+               <missingResponse name="NAME_CHAR_MISSING"/>
             </components>
             <components xsi:type="InputNumber"
                         componentType="InputNumber"
@@ -2473,7 +2473,7 @@
                </hierarchy>
                <bindingDependencies>AGE_CHAR</bindingDependencies>
                <response name="AGE_CHAR"/>
-               <missingResponse>AGE_CHAR_MISSING</missingResponse>
+               <missingResponse name="AGE_CHAR_MISSING"/>
             </components>
          </components>
       </components>
@@ -2529,7 +2529,7 @@
                <label>"No"</label>
             </options>
             <response name="FAVCHAR"/>
-            <missingResponse>FAVCHAR_MISSING</missingResponse>
+            <missingResponse name="FAVCHAR_MISSING"/>
          </components>
          <components xsi:type="Textarea"
                      componentType="Textarea"
@@ -2549,7 +2549,7 @@
             <bindingDependencies>NAME_CHAR</bindingDependencies>
             <bindingDependencies>MEMORY_CHAR</bindingDependencies>
             <response name="MEMORY_CHAR"/>
-            <missingResponse>MEMORY_CHAR_MISSING</missingResponse>
+            <missingResponse name="MEMORY_CHAR_MISSING"/>
          </components>
       </components>
    </components>
@@ -2579,7 +2579,7 @@
          </hierarchy>
          <bindingDependencies>SURVEY_COMMENT</bindingDependencies>
          <response name="SURVEY_COMMENT"/>
-         <missingResponse>SURVEY_COMMENT_MISSING</missingResponse>
+         <missingResponse name="SURVEY_COMMENT_MISSING"/>
       </components>
    </components>
    <variables variableType="COLLECTED" xsi:type="VariableType">
