@@ -140,6 +140,7 @@
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
             <xsl:apply-templates select="h:hierarchy"/>
+            <xsl:apply-templates select="h:missingResponse"/>
             <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies[not(parent::h:conditionFilter)])" as="xs:string*"/>
             <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
             <xsl:variable name="allDependencies" as="xs:string*">
@@ -149,7 +150,7 @@
             <xsl:call-template name="enolunatic:add-all-dependencies">
                 <xsl:with-param name="dependencies" select="$allDependencies"/>
             </xsl:call-template>
-            <xsl:apply-templates select="*[not(self::h:hierarchy or self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter)]"/>
+            <xsl:apply-templates select="*[not(self::h:hierarchy or self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter or self::h:missingResponse)]"/>
         </components>
     </xsl:template>
     <xsl:template match="h:components[@xsi:type='Table']">
@@ -159,6 +160,7 @@
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
             <xsl:apply-templates select="h:hierarchy"/>
+            <xsl:apply-templates select="h:missingResponse"/>
             <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies[not(parent::h:conditionFilter)])" as="xs:string*"/>
             <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
             <xsl:variable name="allDependencies" as="xs:string*">
@@ -168,7 +170,7 @@
             <xsl:call-template name="enolunatic:add-all-dependencies">
                 <xsl:with-param name="dependencies" select="$allDependencies"/>
             </xsl:call-template>
-            <xsl:apply-templates select="*[not(self::h:variables or self::h:cells[@type='line'] or self::h:hierarchy or self::h:label or self::h:declarations or self::h:conditionFilter)]"/>
+            <xsl:apply-templates select="*[not(self::h:variables or self::h:cells[@type='line'] or self::h:hierarchy or self::h:label or self::h:declarations or self::h:conditionFilter or self::h:missingResponse)]"/>
             <xsl:choose>
                 <xsl:when test="h:lines">
                     <xsl:variable name="nbLines" select="count(h:cells[@type='line'])"/>
@@ -201,6 +203,7 @@
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
             <xsl:apply-templates select="h:hierarchy"/>
+            <xsl:apply-templates select="h:missingResponse"/>
             <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies[not(parent::h:conditionFilter)])" as="xs:string*"/>
             <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
             <xsl:variable name="allDependencies" as="xs:string*">
@@ -210,7 +213,7 @@
             <xsl:call-template name="enolunatic:add-all-dependencies">
                 <xsl:with-param name="dependencies" select="$allDependencies"/>
             </xsl:call-template>
-            <xsl:apply-templates select="*[not(self::h:hierarchy or self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter)]"/>
+            <xsl:apply-templates select="*[not(self::h:hierarchy or self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter or self::h:missingResponse)]"/>
         </components>
     </xsl:template>
 

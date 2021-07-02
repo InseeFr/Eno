@@ -40,11 +40,12 @@
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
             <xsl:apply-templates select="h:hierarchy"/>
+            <xsl:apply-templates select="h:missingResponse"/>
             <xsl:variable name="dependencies" select="distinct-values(descendant::h:bindingDependencies[not(parent::h:conditionFilter)])" as="xs:string*"/>            
             <xsl:for-each select="$dependencies">                
                 <bindingDependencies><xsl:value-of select="."/></bindingDependencies>
             </xsl:for-each>
-            <xsl:apply-templates select="*[not(self::h:hierarchy or self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter or self::h:bindingDependencies)]"/>            
+            <xsl:apply-templates select="*[not(self::h:hierarchy or self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter or self::h:bindingDependencies or self::h:missingResponse)]"/>            
         </components>
     </xsl:template>
     
