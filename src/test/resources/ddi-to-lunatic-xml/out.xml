@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Questionnaire xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
+<Questionnaire xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                id="i6vwi2506qf2mms"
                modele="SIMPSONS"
                enoCoreVersion=""
@@ -35,9 +35,10 @@
                <label>"I - Introduction"</label>
             </sequence>
          </hierarchy>
+         <missingResponse name="COMMENT_MISSING"/>
+         <bindingDependencies>COMMENT_MISSING</bindingDependencies>
          <bindingDependencies>COMMENT</bindingDependencies>
          <response name="COMMENT"/>
-         <missingResponse name="COMMENT_MISSING"/>
       </components>
       <components xsi:type="CheckboxBoolean"
                   componentType="CheckboxBoolean"
@@ -57,9 +58,10 @@
                <label>"I - Introduction"</label>
             </sequence>
          </hierarchy>
+         <missingResponse name="READY_MISSING"/>
+         <bindingDependencies>READY_MISSING</bindingDependencies>
          <bindingDependencies>READY</bindingDependencies>
          <response name="READY"/>
-         <missingResponse name="READY_MISSING"/>
       </components>
       <components xsi:type="FilterDescription"
                   componentType="FilterDescription"
@@ -107,9 +109,10 @@
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
+            <missingResponse name="PRODUCER_MISSING"/>
+            <bindingDependencies>PRODUCER_MISSING</bindingDependencies>
             <bindingDependencies>PRODUCER</bindingDependencies>
             <response name="PRODUCER"/>
-            <missingResponse name="PRODUCER_MISSING"/>
          </components>
          <components xsi:type="InputNumber"
                      componentType="InputNumber"
@@ -131,9 +134,10 @@
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
+            <missingResponse name="SEASON_NUMBER_MISSING"/>
+            <bindingDependencies>SEASON_NUMBER_MISSING</bindingDependencies>
             <bindingDependencies>SEASON_NUMBER</bindingDependencies>
             <response name="SEASON_NUMBER"/>
-            <missingResponse name="SEASON_NUMBER_MISSING"/>
          </components>
          <components xsi:type="Datepicker"
                      componentType="Datepicker"
@@ -159,10 +163,11 @@
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
+            <missingResponse name="DATEFIRST_MISSING"/>
+            <bindingDependencies>DATEFIRST_MISSING</bindingDependencies>
             <bindingDependencies>DATEFIRST</bindingDependencies>
             <dateFormat>YYYY-MM-DD</dateFormat>
             <response name="DATEFIRST"/>
-            <missingResponse name="DATEFIRST_MISSING"/>
          </components>
          <components xsi:type="Datepicker"
                      componentType="Datepicker"
@@ -187,10 +192,11 @@
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
+            <missingResponse name="DATEYYYYMM_MISSING"/>
+            <bindingDependencies>DATEYYYYMM_MISSING</bindingDependencies>
             <bindingDependencies>DATEYYYYMM</bindingDependencies>
             <dateFormat>YYYY-MM</dateFormat>
             <response name="DATEYYYYMM"/>
-            <missingResponse name="DATEYYYYMM_MISSING"/>
          </components>
          <components xsi:type="Datepicker"
                      componentType="Datepicker"
@@ -216,10 +222,11 @@
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
+            <missingResponse name="DATEYYYY_MISSING"/>
+            <bindingDependencies>DATEYYYY_MISSING</bindingDependencies>
             <bindingDependencies>DATEYYYY</bindingDependencies>
             <dateFormat>YYYY</dateFormat>
             <response name="DATEYYYY"/>
-            <missingResponse name="DATEYYYY_MISSING"/>
          </components>
          <components xsi:type="InputNumber"
                      componentType="InputNumber"
@@ -241,10 +248,11 @@
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
+            <missingResponse name="DURATIONH_MISSING"/>
+            <bindingDependencies>DURATIONH_MISSING</bindingDependencies>
             <bindingDependencies>DURATIONH</bindingDependencies>
             <unit>heures</unit>
             <response name="DURATIONH"/>
-            <missingResponse name="DURATIONH_MISSING"/>
          </components>
          <components xsi:type="InputNumber"
                      componentType="InputNumber"
@@ -266,10 +274,11 @@
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
+            <missingResponse name="DURATIOND_MISSING"/>
+            <bindingDependencies>DURATIOND_MISSING</bindingDependencies>
             <bindingDependencies>DURATIOND</bindingDependencies>
             <unit>jours</unit>
             <response name="DURATIOND"/>
-            <missingResponse name="DURATIOND_MISSING"/>
          </components>
          <components xsi:type="InputNumber"
                      componentType="InputNumber"
@@ -291,10 +300,11 @@
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
+            <missingResponse name="DURATIONM_MISSING"/>
+            <bindingDependencies>DURATIONM_MISSING</bindingDependencies>
             <bindingDependencies>DURATIONM</bindingDependencies>
             <unit>mois</unit>
             <response name="DURATIONM"/>
-            <missingResponse name="DURATIONM_MISSING"/>
          </components>
          <components xsi:type="InputNumber"
                      componentType="InputNumber"
@@ -316,10 +326,11 @@
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
+            <missingResponse name="DURATIONY_MISSING"/>
+            <bindingDependencies>DURATIONY_MISSING</bindingDependencies>
             <bindingDependencies>DURATIONY</bindingDependencies>
             <unit>années</unit>
             <response name="DURATIONY"/>
-            <missingResponse name="DURATIONY_MISSING"/>
          </components>
          <components xsi:type="InputNumber"
                      componentType="InputNumber"
@@ -341,10 +352,11 @@
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
+            <missingResponse name="AUDIENCE_SHARE_MISSING"/>
+            <bindingDependencies>AUDIENCE_SHARE_MISSING</bindingDependencies>
             <bindingDependencies>AUDIENCE_SHARE</bindingDependencies>
             <unit>%</unit>
             <response name="AUDIENCE_SHARE"/>
-            <missingResponse name="AUDIENCE_SHARE_MISSING"/>
          </components>
       </components>
    </components>
@@ -383,6 +395,8 @@
                <label>"II - Simpsons’ city"</label>
             </sequence>
          </hierarchy>
+         <missingResponse name="CITY_MISSING"/>
+         <bindingDependencies>CITY_MISSING</bindingDependencies>
          <bindingDependencies>CITY</bindingDependencies>
          <options>
             <value>00001</value>
@@ -397,7 +411,6 @@
             <label>"Seinfeld"</label>
          </options>
          <response name="CITY"/>
-         <missingResponse name="CITY_MISSING"/>
       </components>
       <components xsi:type="CheckboxOne"
                   componentType="CheckboxOne"
@@ -418,6 +431,8 @@
                <label>"II - Simpsons’ city"</label>
             </sequence>
          </hierarchy>
+         <missingResponse name="MAYOR_MISSING"/>
+         <bindingDependencies>MAYOR_MISSING</bindingDependencies>
          <bindingDependencies>MAYOR</bindingDependencies>
          <options>
             <value>1</value>
@@ -436,7 +451,6 @@
             <label>"Other name"</label>
          </options>
          <response name="MAYOR"/>
-         <missingResponse name="MAYOR_MISSING"/>
       </components>
       <components xsi:type="Dropdown"
                   componentType="Dropdown"
@@ -452,6 +466,8 @@
                <label>"II - Simpsons’ city"</label>
             </sequence>
          </hierarchy>
+         <missingResponse name="STATE_MISSING"/>
+         <bindingDependencies>STATE_MISSING</bindingDependencies>
          <bindingDependencies>STATE</bindingDependencies>
          <options>
             <value>1</value>
@@ -506,7 +522,6 @@
             <label>"Not in any state, you fool!"</label>
          </options>
          <response name="STATE"/>
-         <missingResponse name="STATE_MISSING"/>
       </components>
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="j6qe0h9q">
@@ -538,11 +553,12 @@
                <label>"III - Characters"</label>
             </sequence>
          </hierarchy>
+         <missingResponse name="PET_MISSING"/>
+         <bindingDependencies>PET_MISSING</bindingDependencies>
          <bindingDependencies>PET1</bindingDependencies>
          <bindingDependencies>PET2</bindingDependencies>
          <bindingDependencies>PET3</bindingDependencies>
          <bindingDependencies>PET4</bindingDependencies>
-         <missingResponse name="PET_MISSING"/>
          <responses id="j334akov-QOP-khokqjtw">
             <label>"Santa’s Little Helper"</label>
             <response name="PET1"/>
@@ -580,11 +596,12 @@
                <label>"III - Characters"</label>
             </sequence>
          </hierarchy>
+         <missingResponse name="ICE_FLAVOUR_MISSING"/>
+         <bindingDependencies>ICE_FLAVOUR_MISSING</bindingDependencies>
          <bindingDependencies>ICE_FLAVOUR1</bindingDependencies>
          <bindingDependencies>ICE_FLAVOUR2</bindingDependencies>
          <bindingDependencies>ICE_FLAVOUR3</bindingDependencies>
          <bindingDependencies>ICE_FLAVOUR4</bindingDependencies>
-         <missingResponse name="ICE_FLAVOUR_MISSING"/>
          <cells type="line">
             <cells>
                <value>1</value>
@@ -673,11 +690,12 @@
                <label>"III - Characters"</label>
             </sequence>
          </hierarchy>
+         <missingResponse name="NUCLEAR_CHARACTER_MISSING"/>
+         <bindingDependencies>NUCLEAR_CHARACTER_MISSING</bindingDependencies>
          <bindingDependencies>NUCLEAR_CHARACTER1</bindingDependencies>
          <bindingDependencies>NUCLEAR_CHARACTER2</bindingDependencies>
          <bindingDependencies>NUCLEAR_CHARACTER3</bindingDependencies>
          <bindingDependencies>NUCLEAR_CHARACTER4</bindingDependencies>
-         <missingResponse name="NUCLEAR_CHARACTER_MISSING"/>
          <cells type="line">
             <cells>
                <value>1</value>
@@ -766,12 +784,13 @@
                <label>"III - Characters"</label>
             </sequence>
          </hierarchy>
+         <missingResponse name="BIRTH_CHARACTER_MISSING"/>
+         <bindingDependencies>BIRTH_CHARACTER_MISSING</bindingDependencies>
          <bindingDependencies>BIRTH_CHARACTER1</bindingDependencies>
          <bindingDependencies>BIRTH_CHARACTER2</bindingDependencies>
          <bindingDependencies>BIRTH_CHARACTER3</bindingDependencies>
          <bindingDependencies>BIRTH_CHARACTER4</bindingDependencies>
          <bindingDependencies>BIRTH_CHARACTER5</bindingDependencies>
-         <missingResponse name="BIRTH_CHARACTER_MISSING"/>
          <cells type="line">
             <cells>
                <value>1</value>
@@ -967,6 +986,8 @@
                   <label>"Kwik-E-Mart"</label>
                </subSequence>
             </hierarchy>
+            <missingResponse name="PERCENTAGE_EXPENSES_MISSING"/>
+            <bindingDependencies>PERCENTAGE_EXPENSES_MISSING</bindingDependencies>
             <bindingDependencies>PERCENTAGE_EXPENSES11</bindingDependencies>
             <bindingDependencies>PERCENTAGE_EXPENSES21</bindingDependencies>
             <bindingDependencies>PERCENTAGE_EXPENSES31</bindingDependencies>
@@ -974,7 +995,6 @@
             <bindingDependencies>PERCENTAGE_EXPENSES51</bindingDependencies>
             <bindingDependencies>PERCENTAGE_EXPENSES61</bindingDependencies>
             <bindingDependencies>PERCENTAGE_EXPENSES71</bindingDependencies>
-            <missingResponse name="PERCENTAGE_EXPENSES_MISSING"/>
             <cells type="header">
                <cells headerCell="true" colspan="2">
                   <label/>
@@ -1126,6 +1146,8 @@
                   <label>"Kwik-E-Mart"</label>
                </subSequence>
             </hierarchy>
+            <missingResponse name="LAST_FOOD_SHOPPING_MISSING"/>
+            <bindingDependencies>LAST_FOOD_SHOPPING_MISSING</bindingDependencies>
             <bindingDependencies>LAST_FOOD_SHOPPING11</bindingDependencies>
             <bindingDependencies>LAST_FOOD_SHOPPING21</bindingDependencies>
             <bindingDependencies>LAST_FOOD_SHOPPING31</bindingDependencies>
@@ -1134,7 +1156,6 @@
             <bindingDependencies>LAST_FOOD_SHOPPING61</bindingDependencies>
             <bindingDependencies>LAST_FOOD_SHOPPING71</bindingDependencies>
             <bindingDependencies>LAST_FOOD_SHOPPING81</bindingDependencies>
-            <missingResponse name="LAST_FOOD_SHOPPING_MISSING"/>
             <cells type="header">
                <cells headerCell="true" colspan="2">
                   <label/>
@@ -1365,6 +1386,8 @@
                   <label>"Clowning"</label>
                </subSequence>
             </hierarchy>
+            <missingResponse name="CLOWNING_MISSING"/>
+            <bindingDependencies>CLOWNING_MISSING</bindingDependencies>
             <bindingDependencies>CLOWNING11</bindingDependencies>
             <bindingDependencies>CLOWNING12</bindingDependencies>
             <bindingDependencies>CLOWNING21</bindingDependencies>
@@ -1373,7 +1396,6 @@
             <bindingDependencies>CLOWNING32</bindingDependencies>
             <bindingDependencies>CLOWNING41</bindingDependencies>
             <bindingDependencies>CLOWNING42</bindingDependencies>
-            <missingResponse name="CLOWNING_MISSING"/>
             <cells type="header">
                <cells headerCell="true">
                   <label/>
@@ -1544,6 +1566,8 @@
                   <label>"Transport"</label>
                </subSequence>
             </hierarchy>
+            <missingResponse name="TRAVEL_MISSING"/>
+            <bindingDependencies>TRAVEL_MISSING</bindingDependencies>
             <bindingDependencies>TRAVEL11</bindingDependencies>
             <bindingDependencies>TRAVEL12</bindingDependencies>
             <bindingDependencies>TRAVEL13</bindingDependencies>
@@ -1568,7 +1592,6 @@
             <bindingDependencies>TRAVEL44</bindingDependencies>
             <bindingDependencies>TRAVEL45</bindingDependencies>
             <bindingDependencies>TRAVEL46</bindingDependencies>
-            <missingResponse name="TRAVEL_MISSING"/>
             <cells type="header">
                <cells headerCell="true">
                   <label/>
@@ -1741,6 +1764,8 @@
                <label>"V - Favourite characters (dynamic table)"</label>
             </sequence>
          </hierarchy>
+         <missingResponse name="FAVOURITE_CHAR_MISSING"/>
+         <bindingDependencies>FAVOURITE_CHAR_MISSING</bindingDependencies>
          <bindingDependencies>FAVOURITE_CHAR1</bindingDependencies>
          <bindingDependencies>FAVOURITE_CHAR2</bindingDependencies>
          <bindingDependencies>FAVOURITE_CHAR3</bindingDependencies>
@@ -1774,7 +1799,6 @@
          <bindingDependencies>FAVOURITE_CHAR1_10_1</bindingDependencies>
          <bindingDependencies>FAVOURITE_CHAR2_10_2</bindingDependencies>
          <bindingDependencies>FAVOURITE_CHAR3_10_3</bindingDependencies>
-         <missingResponse name="FAVOURITE_CHAR_MISSING"/>
          <lines min="1" max="10"/>
          <cells type="header">
             <cells headerCell="true">
@@ -2103,11 +2127,12 @@
                <label>"V - Favourite characters (dynamic table)"</label>
             </sequence>
          </hierarchy>
+         <missingResponse name="FEELCHAREV_MISSING"/>
+         <bindingDependencies>FEELCHAREV_MISSING</bindingDependencies>
          <bindingDependencies>FEELCHAREV1</bindingDependencies>
          <bindingDependencies>FEELCHAREV2</bindingDependencies>
          <bindingDependencies>FEELCHAREV3</bindingDependencies>
          <bindingDependencies>FEELCHAREV4</bindingDependencies>
-         <missingResponse name="FEELCHAREV_MISSING"/>
          <cells type="line">
             <cells>
                <value>1</value>
@@ -2212,6 +2237,8 @@
                <label>"V - Favourite characters (dynamic table)"</label>
             </sequence>
          </hierarchy>
+         <missingResponse name="LEAVDURATION_MISSING"/>
+         <bindingDependencies>LEAVDURATION_MISSING</bindingDependencies>
          <bindingDependencies>LEAVDURATION11</bindingDependencies>
          <bindingDependencies>LEAVDURATION12</bindingDependencies>
          <bindingDependencies>LEAVDURATION21</bindingDependencies>
@@ -2222,7 +2249,6 @@
          <bindingDependencies>LEAVDURATION42</bindingDependencies>
          <bindingDependencies>LEAVDURATION51</bindingDependencies>
          <bindingDependencies>LEAVDURATION52</bindingDependencies>
-         <missingResponse name="LEAVDURATION_MISSING"/>
          <cells type="header">
             <cells headerCell="true">
                <label/>
@@ -2394,9 +2420,10 @@
                <label>"VI - Favourite characters (Loop)"</label>
             </sequence>
          </hierarchy>
+         <missingResponse name="NB_CHAR_MISSING"/>
+         <bindingDependencies>NB_CHAR_MISSING</bindingDependencies>
          <bindingDependencies>NB_CHAR</bindingDependencies>
          <response name="NB_CHAR"/>
-         <missingResponse name="NB_CHAR_MISSING"/>
       </components>
       <components xsi:type="Loop" componentType="Loop" id="kiq7bjam" depth="1">
          <label>"Add a character"</label>
@@ -2412,6 +2439,8 @@
             </sequence>
          </hierarchy>
          <bindingDependencies>NB_CHAR</bindingDependencies>
+         <bindingDependencies>NAME_CHAR_MISSING</bindingDependencies>
+         <bindingDependencies>AGE_CHAR_MISSING</bindingDependencies>
          <bindingDependencies>NAME_CHAR</bindingDependencies>
          <bindingDependencies>AGE_CHAR</bindingDependencies>
          <loopDependencies>NB_CHAR</loopDependencies>
@@ -2447,9 +2476,10 @@
                      <label>"Description of each character"</label>
                   </subSequence>
                </hierarchy>
+               <missingResponse name="NAME_CHAR_MISSING"/>
+               <bindingDependencies>NAME_CHAR_MISSING</bindingDependencies>
                <bindingDependencies>NAME_CHAR</bindingDependencies>
                <response name="NAME_CHAR"/>
-               <missingResponse name="NAME_CHAR_MISSING"/>
             </components>
             <components xsi:type="InputNumber"
                         componentType="InputNumber"
@@ -2471,9 +2501,10 @@
                      <label>"Description of each character"</label>
                   </subSequence>
                </hierarchy>
+               <missingResponse name="AGE_CHAR_MISSING"/>
+               <bindingDependencies>AGE_CHAR_MISSING</bindingDependencies>
                <bindingDependencies>AGE_CHAR</bindingDependencies>
                <response name="AGE_CHAR"/>
-               <missingResponse name="AGE_CHAR_MISSING"/>
             </components>
          </components>
       </components>
@@ -2488,6 +2519,8 @@
          <bindingDependencies>READY</bindingDependencies>
       </conditionFilter>
       <bindingDependencies>NAME_CHAR</bindingDependencies>
+      <bindingDependencies>FAVCHAR_MISSING</bindingDependencies>
+      <bindingDependencies>MEMORY_CHAR_MISSING</bindingDependencies>
       <bindingDependencies>FAVCHAR</bindingDependencies>
       <bindingDependencies>MEMORY_CHAR</bindingDependencies>
       <loopDependencies>NAME_CHAR</loopDependencies>
@@ -2518,7 +2551,9 @@
                   <label>"VII - Other details about character named " || cast(cast(NAME_CHAR,string),string) || " "</label>
                </sequence>
             </hierarchy>
+            <missingResponse name="FAVCHAR_MISSING"/>
             <bindingDependencies>NAME_CHAR</bindingDependencies>
+            <bindingDependencies>FAVCHAR_MISSING</bindingDependencies>
             <bindingDependencies>FAVCHAR</bindingDependencies>
             <options>
                <value>1</value>
@@ -2529,7 +2564,6 @@
                <label>"No"</label>
             </options>
             <response name="FAVCHAR"/>
-            <missingResponse name="FAVCHAR_MISSING"/>
          </components>
          <components xsi:type="Textarea"
                      componentType="Textarea"
@@ -2546,10 +2580,11 @@
                   <label>"VII - Other details about character named " || cast(cast(NAME_CHAR,string),string) || " "</label>
                </sequence>
             </hierarchy>
+            <missingResponse name="MEMORY_CHAR_MISSING"/>
             <bindingDependencies>NAME_CHAR</bindingDependencies>
+            <bindingDependencies>MEMORY_CHAR_MISSING</bindingDependencies>
             <bindingDependencies>MEMORY_CHAR</bindingDependencies>
             <response name="MEMORY_CHAR"/>
-            <missingResponse name="MEMORY_CHAR_MISSING"/>
          </components>
       </components>
    </components>
@@ -2577,9 +2612,10 @@
                <label>"VIII - Comment"</label>
             </sequence>
          </hierarchy>
+         <missingResponse name="SURVEY_COMMENT_MISSING"/>
+         <bindingDependencies>SURVEY_COMMENT_MISSING</bindingDependencies>
          <bindingDependencies>SURVEY_COMMENT</bindingDependencies>
          <response name="SURVEY_COMMENT"/>
-         <missingResponse name="SURVEY_COMMENT_MISSING"/>
       </components>
    </components>
    <variables variableType="COLLECTED" xsi:type="VariableType">

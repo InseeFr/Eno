@@ -230,19 +230,23 @@
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
 		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
 		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
+		<xsl:variable name="questionName" select="enolunatic:get-question-name($source-context,$languages[1])"/>
+		<xsl:variable name="missingResponseName" select="concat($questionName,'_MISSING')"/>
 		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context, $filter)"/>
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
 		<xsl:variable name="dependenciesVariables" as="xs:string*">
 			<xsl:for-each select="$labelDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
+			<xsl:value-of select="$missingResponseName"/>
 		</xsl:variable>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
 
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 			<xsl:with-param name="idQuestion" select="enolunatic:get-name($source-context)" tunnel="yes"/>
-			<xsl:with-param name="questionName" select="enolunatic:get-question-name($source-context,$languages[1])" tunnel="yes"/>
+			<xsl:with-param name="questionName" select="$questionName" tunnel="yes"/>
+			<xsl:with-param name="missingResponseName" select="$missingResponseName" tunnel="yes"/>
 			<xsl:with-param name="labelQuestion" select="enolunatic:replace-all-variables-with-business-name($source-context, $label)" tunnel="yes"/>
 			<xsl:with-param name="typeOfQuestion" select="self::*/name()" tunnel="yes"/>
 			<xsl:with-param name="declarations" select="enolunatic:getInstructionForQuestion($source-context,.)" as="node()*" tunnel="yes"/>
@@ -273,12 +277,14 @@
 
 		<xsl:variable name="idQuestion" select="enolunatic:get-name($source-context)"/>
 		<xsl:variable name="questionName" select="enolunatic:get-question-name($source-context,$languages[1])"/>
+		<xsl:variable name="missingResponseName" select="concat($questionName,'_MISSING')"/>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
 		<xsl:variable name="dependenciesVariables" as="xs:string*">
 			<xsl:for-each select="$labelDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
+			<xsl:value-of select="$missingResponseName"/>
 		</xsl:variable>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
 		
@@ -292,9 +298,7 @@
 				<xsl:copy-of select="$subSequenceParent"/>
 			</hierarchy>
 			<missingResponse>
-				<xsl:attribute name="name">
-					<xsl:value-of select="concat($questionName,'_MISSING')"/>
-				</xsl:attribute>
+				<xsl:attribute name="name" select="$missingResponseName"/>
 			</missingResponse>
 			<xsl:copy-of select="$dependencies"/>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -341,6 +345,7 @@
 
 		<xsl:variable name="idQuestion" select="enolunatic:get-name($source-context)"/>
 		<xsl:variable name="questionName" select="enolunatic:get-question-name($source-context,$languages[1])"/>
+		<xsl:variable name="missingResponseName" select="concat($questionName,'_MISSING')"/>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
 		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
 		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
@@ -350,6 +355,7 @@
 			<xsl:for-each select="$labelDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
+			<xsl:value-of select="$missingResponseName"/>
 		</xsl:variable>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
 		<xsl:variable name="componentType">
@@ -371,9 +377,7 @@
 				<xsl:copy-of select="$subSequenceParent"/>
 			</hierarchy>
 			<missingResponse>
-				<xsl:attribute name="name">
-					<xsl:value-of select="concat($questionName,'_MISSING')"/>
-				</xsl:attribute>
+				<xsl:attribute name="name" select="$missingResponseName"/>
 			</missingResponse>
 			<xsl:copy-of select="$dependencies"/>
 			<xsl:if test="$nbMinimumLines!='' and $nbMaximumLines!=''">
@@ -577,6 +581,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="idQuestion" tunnel="yes"/>
 		<xsl:param name="questionName" tunnel="yes"/>
+		<xsl:param name="missingResponseName" tunnel="yes"/>
 		<xsl:param name="labelQuestion" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="declarations" as="node()*" tunnel="yes"/>
@@ -660,9 +665,7 @@
 					<xsl:with-param name="responseName" select="$responseName"/>
 				</xsl:call-template>
 				<missingResponse>
-					<xsl:attribute name="name">
-						<xsl:value-of select="concat($questionName,'_MISSING')"/>
-					</xsl:attribute>
+					<xsl:attribute name="name" select="$missingResponseName"/>
 				</missingResponse>
 			</components>
 			
