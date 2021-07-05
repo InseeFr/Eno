@@ -98,7 +98,6 @@
         <xsl:variable name="allDependencies" as="xs:string*">
             <xsl:copy-of select="$dependencies"/>
             <xsl:copy-of select="$responseDependencies"/>
-            <xsl:copy-of select="$responseDependencies[1]"/>
         </xsl:variable>
         <components>
             <xsl:copy-of select="@*"/>

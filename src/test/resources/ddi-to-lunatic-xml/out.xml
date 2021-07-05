@@ -2439,8 +2439,7 @@
             </sequence>
          </hierarchy>
          <bindingDependencies>NB_CHAR</bindingDependencies>
-         <bindingDependencies>NAME_CHAR_MISSING</bindingDependencies>
-         <bindingDependencies>AGE_CHAR_MISSING</bindingDependencies>
+         <bindingDependencies>LOOP_kiq7bjam_MISSING</bindingDependencies>
          <bindingDependencies>NAME_CHAR</bindingDependencies>
          <bindingDependencies>AGE_CHAR</bindingDependencies>
          <loopDependencies>NB_CHAR</loopDependencies>
@@ -2476,8 +2475,6 @@
                      <label>"Description of each character"</label>
                   </subSequence>
                </hierarchy>
-               <missingResponse name="NAME_CHAR_MISSING"/>
-               <bindingDependencies>NAME_CHAR_MISSING</bindingDependencies>
                <bindingDependencies>NAME_CHAR</bindingDependencies>
                <response name="NAME_CHAR"/>
             </components>
@@ -2501,8 +2498,6 @@
                      <label>"Description of each character"</label>
                   </subSequence>
                </hierarchy>
-               <missingResponse name="AGE_CHAR_MISSING"/>
-               <bindingDependencies>AGE_CHAR_MISSING</bindingDependencies>
                <bindingDependencies>AGE_CHAR</bindingDependencies>
                <response name="AGE_CHAR"/>
             </components>
@@ -4317,6 +4312,27 @@
       </values>
    </variables>
    <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
+      <name>LOOP_kiq7bjam_MISSING</name>
+      <componentRef>kiq7bjam</componentRef>
+      <values>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
+      </values>
+   </variables>
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>NAME_CHAR</name>
       <componentRef>kiq7bjam</componentRef>
       <values>
@@ -4338,49 +4354,7 @@
       </values>
    </variables>
    <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
-      <name>NAME_CHAR_MISSING</name>
-      <componentRef>kiq7bjam</componentRef>
-      <values>
-         <PREVIOUS xsi:type="PREVIOUSArray">
-            <PREVIOUS xsi:nil="true"/>
-         </PREVIOUS>
-         <COLLECTED xsi:type="COLLECTEDArray">
-            <COLLECTED xsi:nil="true"/>
-         </COLLECTED>
-         <FORCED xsi:type="FORCEDArray">
-            <FORCED xsi:nil="true"/>
-         </FORCED>
-         <EDITED xsi:type="EDITEDArray">
-            <EDITED xsi:nil="true"/>
-         </EDITED>
-         <INPUTED xsi:type="INPUTEDArray">
-            <INPUTED xsi:nil="true"/>
-         </INPUTED>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>AGE_CHAR</name>
-      <componentRef>kiq7bjam</componentRef>
-      <values>
-         <PREVIOUS xsi:type="PREVIOUSArray">
-            <PREVIOUS xsi:nil="true"/>
-         </PREVIOUS>
-         <COLLECTED xsi:type="COLLECTEDArray">
-            <COLLECTED xsi:nil="true"/>
-         </COLLECTED>
-         <FORCED xsi:type="FORCEDArray">
-            <FORCED xsi:nil="true"/>
-         </FORCED>
-         <EDITED xsi:type="EDITEDArray">
-            <EDITED xsi:nil="true"/>
-         </EDITED>
-         <INPUTED xsi:type="INPUTEDArray">
-            <INPUTED xsi:nil="true"/>
-         </INPUTED>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
-      <name>AGE_CHAR_MISSING</name>
       <componentRef>kiq7bjam</componentRef>
       <values>
          <PREVIOUS xsi:type="PREVIOUSArray">

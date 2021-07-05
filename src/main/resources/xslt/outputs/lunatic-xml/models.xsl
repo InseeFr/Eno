@@ -73,10 +73,17 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
 		<xsl:param name="idLoop" select="''" tunnel="yes"/>
+		<xsl:param name="shouldHaveMissingVars" tunnel="yes"/>
 		<xsl:param name="sequenceParent" tunnel="yes"/>
 		<xsl:variable name="componentType" select="'Loop'"/>
 		<xsl:variable name="isGeneratedLoop" select="enolunatic:is-linked-loop($source-context)" as="xs:boolean"/>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
+		
+		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
+		<!-- keep idLoop of the parent Loop if exists -->
+		<xsl:variable name="newIdLoop" select="if($idLoop!='') then $idLoop else $id"/>
+		<xsl:variable name="newLoopDepth" select="$loopDepth + 1"/>		
+		<xsl:variable name="newShouldHaveMissingVars" select="if(string($shouldHaveMissingVars)!='') then $shouldHaveMissingVars else $isGeneratedLoop"/>
 		
 		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
 		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
@@ -96,13 +103,12 @@
 			<xsl:for-each select="$maxDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
+			<xsl:if test="not($newShouldHaveMissingVars)">
+				<xsl:value-of select="concat('LOOP_',$newIdLoop,'_MISSING')"/>
+			</xsl:if>
 		</xsl:variable>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
-		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
 		
-		<!-- keep idLoop of the parent Loop if exists -->
-		<xsl:variable name="newIdLoop" select="if($idLoop!='') then $idLoop else $id"/>
-		<xsl:variable name="newLoopDepth" select="$loopDepth + 1"/>
 		
 		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$id}">
 			<xsl:attribute name="depth" select="$newLoopDepth"/>
@@ -134,10 +140,19 @@
 			</xsl:if>			
 			<xsl:copy-of select="$dependencies"/>
 			
+			<xsl:if test="not($newShouldHaveMissingVars)">
+				<xsl:call-template name="enolunatic:add-collected-variable-to-components">
+					<xsl:with-param name="responseName" select="concat('LOOP_',$newIdLoop,'_MISSING')"/>
+					<xsl:with-param name="loopDepth" select="$newLoopDepth"/>
+					<xsl:with-param name="idLoop" select="$newIdLoop"/>
+				</xsl:call-template>
+			</xsl:if>
+			
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 				<xsl:with-param name="loopDepth" select="$newLoopDepth" tunnel="yes"/>
 				<xsl:with-param name="idLoop" select="$newIdLoop" tunnel="yes"/>
+				<xsl:with-param name="shouldHaveMissingVars" select="$newShouldHaveMissingVars" as="xs:boolean" tunnel="yes"/>
 			</xsl:apply-templates>
 		</components>
 
@@ -226,6 +241,7 @@
 	<xsl:template match="SingleResponseQuestion | MultipleQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="shouldHaveMissingVars" select="true()" tunnel="yes"/>
 
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
 		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
@@ -238,7 +254,9 @@
 			<xsl:for-each select="$labelDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
-			<xsl:value-of select="$missingResponseName"/>
+			<xsl:if test="$shouldHaveMissingVars">				
+				<xsl:value-of select="$missingResponseName"/>
+			</xsl:if>
 		</xsl:variable>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
 
@@ -270,6 +288,7 @@
 		<xsl:param name="subSequenceParent" tunnel="yes"/>
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
 		<xsl:param name="idLoop" select="''" tunnel="yes"/>
+		<xsl:param name="shouldHaveMissingVars" select="true()" tunnel="yes"/>
 		
 		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
 		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
@@ -284,7 +303,9 @@
 			<xsl:for-each select="$labelDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
-			<xsl:value-of select="$missingResponseName"/>
+			<xsl:if test="$shouldHaveMissingVars">
+				<xsl:value-of select="$missingResponseName"/>
+			</xsl:if>
 		</xsl:variable>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
 		
@@ -297,9 +318,11 @@
 				<xsl:copy-of select="$sequenceParent"/>
 				<xsl:copy-of select="$subSequenceParent"/>
 			</hierarchy>
-			<missingResponse>
-				<xsl:attribute name="name" select="$missingResponseName"/>
-			</missingResponse>
+			<xsl:if test="$shouldHaveMissingVars">
+				<missingResponse>
+					<xsl:attribute name="name" select="$missingResponseName"/>
+				</missingResponse>	
+			</xsl:if>
 			<xsl:copy-of select="$dependencies"/>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -319,13 +342,14 @@
 				<xsl:with-param name="dependencies" select="enolunatic:find-variables-in-formula($filter)" as="xs:string*"/>
 			</xsl:call-template>
 		</xsl:if>
-		
-		<xsl:call-template name="enolunatic:add-collected-variable-to-components">
-			<xsl:with-param name="responseName" select="concat($questionName,'_MISSING')"/>
-			<xsl:with-param name="componentRef" select="$idQuestion"/>
-			<xsl:with-param name="loopDepth" select="$loopDepth"/>
-			<xsl:with-param name="idLoop" select="$idLoop"/>
-		</xsl:call-template>
+		<xsl:if test="$shouldHaveMissingVars">
+			<xsl:call-template name="enolunatic:add-collected-variable-to-components">
+				<xsl:with-param name="responseName" select="concat($questionName,'_MISSING')"/>
+				<xsl:with-param name="componentRef" select="$idQuestion"/>
+				<xsl:with-param name="loopDepth" select="$loopDepth"/>
+				<xsl:with-param name="idLoop" select="$idLoop"/>
+			</xsl:call-template>
+		</xsl:if>
 		
 		<xsl:apply-templates select="enolunatic:get-end-question-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -340,6 +364,7 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
 		<xsl:param name="idLoop" select="''" tunnel="yes"/>
+		<xsl:param name="shouldHaveMissingVars" select="true()" tunnel="yes"/>
 		<xsl:param name="sequenceParent" tunnel="yes"/>
 		<xsl:param name="subSequenceParent" tunnel="yes"/>
 
@@ -355,7 +380,9 @@
 			<xsl:for-each select="$labelDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
-			<xsl:value-of select="$missingResponseName"/>
+			<xsl:if test="$shouldHaveMissingVars">
+				<xsl:value-of select="$missingResponseName"/>				
+			</xsl:if>
 		</xsl:variable>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
 		<xsl:variable name="componentType">
@@ -376,20 +403,23 @@
 				<xsl:copy-of select="$sequenceParent"/>
 				<xsl:copy-of select="$subSequenceParent"/>
 			</hierarchy>
-			<missingResponse>
-				<xsl:attribute name="name" select="$missingResponseName"/>
-			</missingResponse>
+			<xsl:if test="$shouldHaveMissingVars">
+				<missingResponse>
+					<xsl:attribute name="name" select="$missingResponseName"/>
+				</missingResponse>
+			</xsl:if>
 			<xsl:copy-of select="$dependencies"/>
 			<xsl:if test="$nbMinimumLines!='' and $nbMaximumLines!=''">
 				<lines min="{$nbMinimumLines}" max="{$nbMaximumLines}"/>
 			</xsl:if>
-			
-			<xsl:call-template name="enolunatic:add-collected-variable-to-components">
-				<xsl:with-param name="responseName" select="concat($questionName,'_MISSING')"/>
-				<xsl:with-param name="componentRef" select="$idQuestion"/>
-				<xsl:with-param name="loopDepth" select="$loopDepth"/>
-				<xsl:with-param name="idLoop" select="$idLoop"/>
-			</xsl:call-template>
+			<xsl:if test="$shouldHaveMissingVars">
+				<xsl:call-template name="enolunatic:add-collected-variable-to-components">
+					<xsl:with-param name="responseName" select="concat($questionName,'_MISSING')"/>
+					<xsl:with-param name="componentRef" select="$idQuestion"/>
+					<xsl:with-param name="loopDepth" select="$loopDepth"/>
+					<xsl:with-param name="idLoop" select="$idLoop"/>
+				</xsl:call-template>
+			</xsl:if>
 
 			<xsl:for-each select="enolunatic:get-header-lines($source-context)">
 				<xsl:choose>
@@ -590,6 +620,7 @@
 		<xsl:param name="dependencies" tunnel="yes"/>
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
 		<xsl:param name="idLoop" select="''" tunnel="yes"/>
+		<xsl:param name="shouldHaveMissingVars" select="true()" tunnel="yes"/>
 		<xsl:param name="sequenceParent" tunnel="yes"/>
 		<xsl:param name="subSequenceParent" tunnel="yes"/>
 
@@ -664,9 +695,11 @@
 				<xsl:call-template name="enolunatic:add-response-to-components">
 					<xsl:with-param name="responseName" select="$responseName"/>
 				</xsl:call-template>
-				<missingResponse>
-					<xsl:attribute name="name" select="$missingResponseName"/>
-				</missingResponse>
+				<xsl:if test="$shouldHaveMissingVars">
+					<missingResponse>
+						<xsl:attribute name="name" select="$missingResponseName"/>
+					</missingResponse>
+				</xsl:if>				
 			</components>
 			
 			<xsl:if test="$addFilterResult">
@@ -683,12 +716,14 @@
 			<xsl:with-param name="loopDepth" select="$loopDepth"/>
 			<xsl:with-param name="idLoop" select="$idLoop"/>
 		</xsl:call-template>
-		<xsl:call-template name="enolunatic:add-collected-variable-to-components">
-			<xsl:with-param name="responseName" select="concat($questionName,'_MISSING')"/>
-			<xsl:with-param name="componentRef" select="$idQuestion"/>
-			<xsl:with-param name="loopDepth" select="$loopDepth"/>
-			<xsl:with-param name="idLoop" select="$idLoop"/>
-		</xsl:call-template>
+		<xsl:if test="$shouldHaveMissingVars">
+			<xsl:call-template name="enolunatic:add-collected-variable-to-components">
+				<xsl:with-param name="responseName" select="concat($questionName,'_MISSING')"/>
+				<xsl:with-param name="componentRef" select="$idQuestion"/>
+				<xsl:with-param name="loopDepth" select="$loopDepth"/>
+				<xsl:with-param name="idLoop" select="$idLoop"/>
+			</xsl:call-template>
+		</xsl:if>
 	</xsl:template>
 
 	<xd:doc>
