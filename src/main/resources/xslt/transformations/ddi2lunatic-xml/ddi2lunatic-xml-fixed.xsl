@@ -358,7 +358,32 @@
     <xsl:function name="enolunatic:get-cast-variable">
         <xsl:param name="type"/>
         <xsl:param name="variable"/>
-        <xsl:value-of select="$variable"/>
+        <xsl:choose>
+            <xsl:when test="$is-xpath">
+                <xsl:choose>
+                    <xsl:when test="$type='text'">
+                        <xsl:value-of select="concat('cast(',$variable,',','string)')"/>
+                    </xsl:when>
+                    <xsl:when test="$type='integer'">
+                        <xsl:value-of select="concat('cast(',$variable,',','integer)')"/>
+                    </xsl:when>
+                    <xsl:when test="$type='decimal'">
+                        <xsl:value-of select="concat('cast(',$variable,',','number)')"/>
+                    </xsl:when>
+                    <xsl:when test="$type='boolean'">
+                        <xsl:value-of select="concat('cast(',$variable,',','integer)')"/>
+                    </xsl:when>
+                    <xsl:when test="$type='date'"></xsl:when>
+                    <xsl:when test="$type='duration'"></xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="concat('cast(',$variable,',','string)')"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$variable"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:function>
     
     <xsl:function name="enolunatic:find-variables-in-formula">
