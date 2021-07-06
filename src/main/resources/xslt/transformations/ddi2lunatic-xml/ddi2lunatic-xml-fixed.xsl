@@ -106,6 +106,8 @@
     <xsl:variable name="regex-var-surrounded" select="concat($conditioning-variable-begin,$regex-var,$conditioning-variable-end)"/>
     <xsl:variable name="regex-var-large-surrounded" select="concat('number\(if\s+\(',$regex-var-surrounded,'=''''\)\sthen\s+''0''\s+else\s+',$regex-var-surrounded,'\)')"/>
     
+    <xsl:variable name="is-xpath" select="enoddi:is-programlanguage-xpath(/)"/>
+    
     <xsl:function name="enolunatic:get-variable-business-name">
         <xsl:param name="variable"/>        
         <xsl:call-template name="enoddi:get-business-name">
