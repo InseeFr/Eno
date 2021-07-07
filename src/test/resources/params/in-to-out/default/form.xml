@@ -34,8 +34,6 @@
                <label>"I - Introduction"</label>
             </sequence>
          </hierarchy>
-         <missingResponse name="COMMENT_MISSING"/>
-         <bindingDependencies>COMMENT_MISSING</bindingDependencies>
          <bindingDependencies>COMMENT</bindingDependencies>
          <response name="COMMENT"/>
       </components>
@@ -52,8 +50,6 @@
                <label>"I - Introduction"</label>
             </sequence>
          </hierarchy>
-         <missingResponse name="READY_MISSING"/>
-         <bindingDependencies>READY_MISSING</bindingDependencies>
          <bindingDependencies>READY</bindingDependencies>
          <response name="READY"/>
       </components>
@@ -103,8 +99,6 @@
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
-            <missingResponse name="PRODUCER_MISSING"/>
-            <bindingDependencies>PRODUCER_MISSING</bindingDependencies>
             <bindingDependencies>PRODUCER</bindingDependencies>
             <response name="PRODUCER"/>
          </components>
@@ -128,8 +122,6 @@
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
-            <missingResponse name="SEASON_NUMBER_MISSING"/>
-            <bindingDependencies>SEASON_NUMBER_MISSING</bindingDependencies>
             <bindingDependencies>SEASON_NUMBER</bindingDependencies>
             <response name="SEASON_NUMBER"/>
          </components>
@@ -157,9 +149,7 @@
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
-            <missingResponse name="DATEFIRST_MISSING"/>
             <bindingDependencies>LAST_BROADCAST</bindingDependencies>
-            <bindingDependencies>DATEFIRST_MISSING</bindingDependencies>
             <bindingDependencies>DATEFIRST</bindingDependencies>
             <dateFormat>YYYY-MM-DD</dateFormat>
             <response name="DATEFIRST"/>
@@ -184,8 +174,6 @@
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
-            <missingResponse name="AUDIENCE_SHARE_MISSING"/>
-            <bindingDependencies>AUDIENCE_SHARE_MISSING</bindingDependencies>
             <bindingDependencies>AUDIENCE_SHARE</bindingDependencies>
             <response name="AUDIENCE_SHARE"/>
          </components>
@@ -226,8 +214,6 @@
                <label>"II - Simpsons’ city"</label>
             </sequence>
          </hierarchy>
-         <missingResponse name="CITY_MISSING"/>
-         <bindingDependencies>CITY_MISSING</bindingDependencies>
          <bindingDependencies>CITY</bindingDependencies>
          <options>
             <value>00001</value>
@@ -262,8 +248,6 @@
                <label>"II - Simpsons’ city"</label>
             </sequence>
          </hierarchy>
-         <missingResponse name="MAYOR_MISSING"/>
-         <bindingDependencies>MAYOR_MISSING</bindingDependencies>
          <bindingDependencies>MAYOR</bindingDependencies>
          <options>
             <value>1</value>
@@ -297,8 +281,6 @@
                <label>"II - Simpsons’ city"</label>
             </sequence>
          </hierarchy>
-         <missingResponse name="STATE_MISSING"/>
-         <bindingDependencies>STATE_MISSING</bindingDependencies>
          <bindingDependencies>STATE</bindingDependencies>
          <options>
             <value>1</value>
@@ -384,8 +366,6 @@
                <label>"III - Characters"</label>
             </sequence>
          </hierarchy>
-         <missingResponse name="PET_MISSING"/>
-         <bindingDependencies>PET_MISSING</bindingDependencies>
          <bindingDependencies>PET1</bindingDependencies>
          <bindingDependencies>PET2</bindingDependencies>
          <bindingDependencies>PET3</bindingDependencies>
@@ -427,8 +407,6 @@
                <label>"III - Characters"</label>
             </sequence>
          </hierarchy>
-         <missingResponse name="ICE_FLAVOUR_MISSING"/>
-         <bindingDependencies>ICE_FLAVOUR_MISSING</bindingDependencies>
          <bindingDependencies>ICE_FLAVOUR1</bindingDependencies>
          <bindingDependencies>ICE_FLAVOUR2</bindingDependencies>
          <bindingDependencies>ICE_FLAVOUR3</bindingDependencies>
@@ -521,8 +499,6 @@
                <label>"III - Characters"</label>
             </sequence>
          </hierarchy>
-         <missingResponse name="NUCLEAR_CHARACTER_MISSING"/>
-         <bindingDependencies>NUCLEAR_CHARACTER_MISSING</bindingDependencies>
          <bindingDependencies>NUCLEAR_CHARACTER1</bindingDependencies>
          <bindingDependencies>NUCLEAR_CHARACTER2</bindingDependencies>
          <bindingDependencies>NUCLEAR_CHARACTER3</bindingDependencies>
@@ -615,8 +591,6 @@
                <label>"III - Characters"</label>
             </sequence>
          </hierarchy>
-         <missingResponse name="BIRTH_CHARACTER_MISSING"/>
-         <bindingDependencies>BIRTH_CHARACTER_MISSING</bindingDependencies>
          <bindingDependencies>BIRTH_CHARACTER1</bindingDependencies>
          <bindingDependencies>BIRTH_CHARACTER2</bindingDependencies>
          <bindingDependencies>BIRTH_CHARACTER3</bindingDependencies>
@@ -817,8 +791,6 @@
                   <label>"Kwik-E-Mart"</label>
                </subSequence>
             </hierarchy>
-            <missingResponse name="PERCENTAGE_EXPENSES_MISSING"/>
-            <bindingDependencies>PERCENTAGE_EXPENSES_MISSING</bindingDependencies>
             <bindingDependencies>PERCENTAGE_EXPENSES11</bindingDependencies>
             <bindingDependencies>PERCENTAGE_EXPENSES21</bindingDependencies>
             <bindingDependencies>PERCENTAGE_EXPENSES31</bindingDependencies>
@@ -985,8 +957,6 @@
                   <label>"Clowning"</label>
                </subSequence>
             </hierarchy>
-            <missingResponse name="CLOWNING_MISSING"/>
-            <bindingDependencies>CLOWNING_MISSING</bindingDependencies>
             <bindingDependencies>CLOWNING11</bindingDependencies>
             <bindingDependencies>CLOWNING12</bindingDependencies>
             <bindingDependencies>CLOWNING21</bindingDependencies>
@@ -1165,8 +1135,6 @@
                   <label>"Transport"</label>
                </subSequence>
             </hierarchy>
-            <missingResponse name="TRAVEL_MISSING"/>
-            <bindingDependencies>TRAVEL_MISSING</bindingDependencies>
             <bindingDependencies>TRAVEL11</bindingDependencies>
             <bindingDependencies>TRAVEL12</bindingDependencies>
             <bindingDependencies>TRAVEL13</bindingDependencies>
@@ -1363,8 +1331,6 @@
                <label>"V - Favourite characters"</label>
             </sequence>
          </hierarchy>
-         <missingResponse name="FAVOURITE_CHARACTERS_MISSING"/>
-         <bindingDependencies>FAVOURITE_CHARACTERS_MISSING</bindingDependencies>
          <bindingDependencies>FAVOURITE_CHARACTERS11</bindingDependencies>
          <bindingDependencies>FAVOURITE_CHARACTERS12</bindingDependencies>
          <bindingDependencies>FAVOURITE_CHARACTERS21</bindingDependencies>
@@ -1560,8 +1526,6 @@
                <label>"VI - Comment"</label>
             </sequence>
          </hierarchy>
-         <missingResponse name="SURVEY_COMMENT_MISSING"/>
-         <bindingDependencies>SURVEY_COMMENT_MISSING</bindingDependencies>
          <bindingDependencies>SURVEY_COMMENT</bindingDependencies>
          <response name="SURVEY_COMMENT"/>
       </components>
@@ -1621,29 +1585,7 @@
       </values>
    </variables>
    <variables variableType="COLLECTED" xsi:type="VariableType">
-      <name>COMMENT_MISSING</name>
-      <componentRef>j6p3dkx6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
       <name>READY</name>
-      <componentRef>j6p0np9q</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
-      <name>READY_MISSING</name>
       <componentRef>j6p0np9q</componentRef>
       <values>
          <PREVIOUS xsi:nil="true"/>
@@ -1665,29 +1607,7 @@
       </values>
    </variables>
    <variables variableType="COLLECTED" xsi:type="VariableType">
-      <name>PRODUCER_MISSING</name>
-      <componentRef>j3343qhx</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
       <name>SEASON_NUMBER</name>
-      <componentRef>j6q9h8tj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
-      <name>SEASON_NUMBER_MISSING</name>
       <componentRef>j6q9h8tj</componentRef>
       <values>
          <PREVIOUS xsi:nil="true"/>
@@ -1709,29 +1629,7 @@
       </values>
    </variables>
    <variables variableType="COLLECTED" xsi:type="VariableType">
-      <name>DATEFIRST_MISSING</name>
-      <componentRef>j334cyqb</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
       <name>AUDIENCE_SHARE</name>
-      <componentRef>j6z06z1e</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
-      <name>AUDIENCE_SHARE_MISSING</name>
       <componentRef>j6z06z1e</componentRef>
       <values>
          <PREVIOUS xsi:nil="true"/>
@@ -1753,17 +1651,6 @@
       </values>
    </variables>
    <variables variableType="COLLECTED" xsi:type="VariableType">
-      <name>CITY_MISSING</name>
-      <componentRef>j3343clt</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
       <name>MAYOR</name>
       <componentRef>j6qdfhvw</componentRef>
       <values>
@@ -1775,29 +1662,7 @@
       </values>
    </variables>
    <variables variableType="COLLECTED" xsi:type="VariableType">
-      <name>MAYOR_MISSING</name>
-      <componentRef>j6qdfhvw</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
       <name>STATE</name>
-      <componentRef>j4nw5cqz</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
-      <name>STATE_MISSING</name>
       <componentRef>j4nw5cqz</componentRef>
       <values>
          <PREVIOUS xsi:nil="true"/>
@@ -1852,28 +1717,6 @@
       </values>
    </variables>
    <variables variableType="COLLECTED" xsi:type="VariableType">
-      <name>PET_MISSING</name>
-      <componentRef>j334akov</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
-      <name>ICE_FLAVOUR_MISSING</name>
-      <componentRef>j6p29i81</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
       <name>ICE_FLAVOUR1</name>
       <componentRef>j6p29i81</componentRef>
       <values>
@@ -1918,17 +1761,6 @@
       </values>
    </variables>
    <variables variableType="COLLECTED" xsi:type="VariableType">
-      <name>NUCLEAR_CHARACTER_MISSING</name>
-      <componentRef>j6qefnga</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
       <name>NUCLEAR_CHARACTER1</name>
       <componentRef>j6qefnga</componentRef>
       <values>
@@ -1964,17 +1796,6 @@
    <variables variableType="COLLECTED" xsi:type="VariableType">
       <name>NUCLEAR_CHARACTER4</name>
       <componentRef>j6qefnga</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
-      <name>BIRTH_CHARACTER_MISSING</name>
-      <componentRef>j6yzoc6g</componentRef>
       <values>
          <PREVIOUS xsi:nil="true"/>
          <COLLECTED xsi:nil="true"/>
@@ -2030,17 +1851,6 @@
    <variables variableType="COLLECTED" xsi:type="VariableType">
       <name>BIRTH_CHARACTER5</name>
       <componentRef>j6yzoc6g</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
-      <name>PERCENTAGE_EXPENSES_MISSING</name>
-      <componentRef>j4nwc63q</componentRef>
       <values>
          <PREVIOUS xsi:nil="true"/>
          <COLLECTED xsi:nil="true"/>
@@ -2118,17 +1928,6 @@
    <variables variableType="COLLECTED" xsi:type="VariableType">
       <name>PERCENTAGE_EXPENSES71</name>
       <componentRef>j4nwc63q</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
-      <name>CLOWNING_MISSING</name>
-      <componentRef>j4nw0rr6</componentRef>
       <values>
          <PREVIOUS xsi:nil="true"/>
          <COLLECTED xsi:nil="true"/>
@@ -2217,17 +2016,6 @@
    <variables variableType="COLLECTED" xsi:type="VariableType">
       <name>CLOWNING42</name>
       <componentRef>j4nw0rr6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
-      <name>TRAVEL_MISSING</name>
-      <componentRef>j6p2lwuj</componentRef>
       <values>
          <PREVIOUS xsi:nil="true"/>
          <COLLECTED xsi:nil="true"/>
@@ -2501,17 +2289,6 @@
       </values>
    </variables>
    <variables variableType="COLLECTED" xsi:type="VariableType">
-      <name>FAVOURITE_CHARACTERS_MISSING</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
       <name>FAVOURITE_CHARACTERS11</name>
       <componentRef>j6qg8rc6</componentRef>
       <values>
@@ -2733,17 +2510,6 @@
    </variables>
    <variables variableType="COLLECTED" xsi:type="VariableType">
       <name>SURVEY_COMMENT</name>
-      <componentRef>j6z0z3us</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
-   </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
-      <name>SURVEY_COMMENT_MISSING</name>
       <componentRef>j6z0z3us</componentRef>
       <values>
          <PREVIOUS xsi:nil="true"/>
