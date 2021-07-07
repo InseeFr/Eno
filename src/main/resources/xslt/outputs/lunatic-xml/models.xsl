@@ -103,7 +103,7 @@
 			<xsl:for-each select="$maxDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
-			<xsl:if test="not($newShouldHaveMissingVars)">
+			<xsl:if test="not($newShouldHaveMissingVars) and $missingVar">
 				<xsl:value-of select="concat('LOOP_',$newIdLoop,'_MISSING')"/>
 			</xsl:if>
 		</xsl:variable>
@@ -140,7 +140,7 @@
 			</xsl:if>			
 			<xsl:copy-of select="$dependencies"/>
 			
-			<xsl:if test="not($newShouldHaveMissingVars)">
+			<xsl:if test="not($newShouldHaveMissingVars) and $missingVar">
 				<xsl:call-template name="enolunatic:add-collected-variable-to-components">
 					<xsl:with-param name="responseName" select="concat('LOOP_',$newIdLoop,'_MISSING')"/>
 					<xsl:with-param name="loopDepth" select="$newLoopDepth"/>
@@ -254,7 +254,7 @@
 			<xsl:for-each select="$labelDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
-			<xsl:if test="$shouldHaveMissingVars">				
+			<xsl:if test="$shouldHaveMissingVars and $missingVar">				
 				<xsl:value-of select="$missingResponseName"/>
 			</xsl:if>
 		</xsl:variable>
@@ -303,7 +303,7 @@
 			<xsl:for-each select="$labelDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
-			<xsl:if test="$shouldHaveMissingVars">
+			<xsl:if test="$shouldHaveMissingVars and $missingVar">
 				<xsl:value-of select="$missingResponseName"/>
 			</xsl:if>
 		</xsl:variable>
@@ -318,7 +318,7 @@
 				<xsl:copy-of select="$sequenceParent"/>
 				<xsl:copy-of select="$subSequenceParent"/>
 			</hierarchy>
-			<xsl:if test="$shouldHaveMissingVars">
+			<xsl:if test="$shouldHaveMissingVars and $missingVar">
 				<missingResponse>
 					<xsl:attribute name="name" select="$missingResponseName"/>
 				</missingResponse>	
@@ -342,7 +342,7 @@
 				<xsl:with-param name="dependencies" select="enolunatic:find-variables-in-formula($filter)" as="xs:string*"/>
 			</xsl:call-template>
 		</xsl:if>
-		<xsl:if test="$shouldHaveMissingVars">
+		<xsl:if test="$shouldHaveMissingVars and $missingVar">
 			<xsl:call-template name="enolunatic:add-collected-variable-to-components">
 				<xsl:with-param name="responseName" select="concat($questionName,'_MISSING')"/>
 				<xsl:with-param name="componentRef" select="$idQuestion"/>
@@ -380,7 +380,7 @@
 			<xsl:for-each select="$labelDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
-			<xsl:if test="$shouldHaveMissingVars">
+			<xsl:if test="$shouldHaveMissingVars and $missingVar">
 				<xsl:value-of select="$missingResponseName"/>				
 			</xsl:if>
 		</xsl:variable>
@@ -403,7 +403,7 @@
 				<xsl:copy-of select="$sequenceParent"/>
 				<xsl:copy-of select="$subSequenceParent"/>
 			</hierarchy>
-			<xsl:if test="$shouldHaveMissingVars">
+			<xsl:if test="$shouldHaveMissingVars and $missingVar">
 				<missingResponse>
 					<xsl:attribute name="name" select="$missingResponseName"/>
 				</missingResponse>
@@ -412,7 +412,7 @@
 			<xsl:if test="$nbMinimumLines!='' and $nbMaximumLines!=''">
 				<lines min="{$nbMinimumLines}" max="{$nbMaximumLines}"/>
 			</xsl:if>
-			<xsl:if test="$shouldHaveMissingVars">
+			<xsl:if test="$shouldHaveMissingVars and $missingVar">
 				<xsl:call-template name="enolunatic:add-collected-variable-to-components">
 					<xsl:with-param name="responseName" select="concat($questionName,'_MISSING')"/>
 					<xsl:with-param name="componentRef" select="$idQuestion"/>
@@ -695,7 +695,7 @@
 				<xsl:call-template name="enolunatic:add-response-to-components">
 					<xsl:with-param name="responseName" select="$responseName"/>
 				</xsl:call-template>
-				<xsl:if test="$shouldHaveMissingVars">
+				<xsl:if test="$shouldHaveMissingVars and $missingVar">
 					<missingResponse>
 						<xsl:attribute name="name" select="$missingResponseName"/>
 					</missingResponse>
@@ -716,7 +716,7 @@
 			<xsl:with-param name="loopDepth" select="$loopDepth"/>
 			<xsl:with-param name="idLoop" select="$idLoop"/>
 		</xsl:call-template>
-		<xsl:if test="$shouldHaveMissingVars">
+		<xsl:if test="$shouldHaveMissingVars and $missingVar">
 			<xsl:call-template name="enolunatic:add-collected-variable-to-components">
 				<xsl:with-param name="responseName" select="concat($questionName,'_MISSING')"/>
 				<xsl:with-param name="componentRef" select="$idQuestion"/>
