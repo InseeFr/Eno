@@ -89,6 +89,16 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
+    <xsl:variable name="missingVar" as="xs:boolean">
+        <xsl:choose>
+            <xsl:when test="$parameters//MissingVar != ''">
+                <xsl:value-of select="$parameters//MissingVar"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//MissingVar"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     
     <xsl:variable name="enoVersion" select="$properties//EnoVersion"/>
     
