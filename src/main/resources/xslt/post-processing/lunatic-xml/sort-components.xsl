@@ -309,7 +309,9 @@
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates/>
             <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
-            <xsl:call-template name="enolunatic:add-all-dependencies">
+            <!-- for filter dependencies, we need all dependencies (dependencies of calculated variables) -->
+            <!-- for each calculated variables, we retrieve its dependencies -->
+            <xsl:call-template name="enolunatic:add-all-recursive-dependencies">
                 <xsl:with-param name="dependencies" select="$dependencies"/>
             </xsl:call-template>
         </xsl:copy>
@@ -353,6 +355,20 @@
                 <xsl:with-param name="tableId" select="$tableId"/>
             </xsl:call-template>
         </xsl:if>
+    </xsl:template>
+    
+    <xsl:template name="enolunatic:add-all-recursive-dependencies">
+        <xsl:param name="dependencies" as="xs:string*"/>
+        <xsl:variable name="results" as="xs:string*">
+            <xsl:for-each select="$dependencies">
+                <xsl:copy-of select="enolunatic:get-all-dependencies(.)"/>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:for-each select="distinct-values($results)">                
+            <xsl:call-template name="enolunatic:add-dependencies">
+                <xsl:with-param name="name" select="."/>
+            </xsl:call-template>
+        </xsl:for-each>
     </xsl:template>
     
     <xsl:template name="enolunatic:add-all-dependencies">
