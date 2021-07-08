@@ -340,6 +340,8 @@
 				<xsl:with-param name="name" select="$questionName"/>
 				<xsl:with-param name="expression" select="$filterCondition"/>
 				<xsl:with-param name="dependencies" select="enolunatic:find-variables-in-formula($filter)" as="xs:string*"/>
+				<xsl:with-param name="idLoop" select="$idLoop"/>
+				<xsl:with-param name="languages" select="$languages"/>
 			</xsl:call-template>
 		</xsl:if>
 		<xsl:if test="$shouldHaveMissingVars and $missingVar">
@@ -475,6 +477,8 @@
 				<xsl:with-param name="name" select="$questionName"/>
 				<xsl:with-param name="expression" select="$filterCondition"/>
 				<xsl:with-param name="dependencies" select="enolunatic:find-variables-in-formula($filter)" as="xs:string*"/>
+				<xsl:with-param name="idLoop" select="$idLoop"/>
+				<xsl:with-param name="languages" select="$languages"/>
 			</xsl:call-template>
 		</xsl:if>
 		
@@ -707,6 +711,8 @@
 					<xsl:with-param name="name" select="$questionName"/>
 					<xsl:with-param name="expression" select="$filterCondition"/>
 					<xsl:with-param name="dependencies" select="$filterConditionDependencies" as="xs:string*"/>
+					<xsl:with-param name="idLoop" select="$idLoop"/>
+					<xsl:with-param name="languages" select="$languages"/>
 				</xsl:call-template>
 			</xsl:if>
 		</xsl:if>
@@ -1171,12 +1177,19 @@
 		<xsl:param name="name"/>
 		<xsl:param name="expression"/>
 		<xsl:param name="dependencies" as="xs:string*"/>
+		<xsl:param name="idLoop"/>
+		<xsl:param name="languages"/>
 		<variables variableType="CALCULATED" xsi:type="VariableType">
 			<name><xsl:value-of select="concat('FILTER_RESULT_',$name)"/></name>
 			<expression><xsl:value-of select="$expression"/></expression>
 			<xsl:for-each select="distinct-values($dependencies)">
 				<bindingDependencies><xsl:value-of select="enolunatic:get-variable-business-name(.)"/></bindingDependencies>
 			</xsl:for-each>
+			<xsl:if test="$idLoop!=''">
+				<shapeFrom>
+					<xsl:value-of select="enolunatic:get-shapeFrom-name($idLoop,'Loop',$languages)"/>
+				</shapeFrom>
+			</xsl:if>
 		</variables>
 	</xsl:template>
 	
