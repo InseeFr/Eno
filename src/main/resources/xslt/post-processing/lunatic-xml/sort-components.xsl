@@ -309,6 +309,8 @@
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates/>
             <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
+            <!-- for filter dependencies, we need all dependencies (dependencies of calculated variables) -->
+            <!-- for each calculated variables, we retrieve its dependencies -->
             <xsl:call-template name="enolunatic:add-all-recursive-dependencies">
                 <xsl:with-param name="dependencies" select="$dependencies"/>
             </xsl:call-template>
