@@ -1556,15 +1556,14 @@
         <xsl:param name="id"/>
         <xsl:param name="type"/>
         <xsl:param name="language"/>
-
         <xsl:choose>
-            <!-- TypeOfObject is QuestionConstruct -->
+            <!-- TypeOfObject is QuestionConstruct, we get its name -->
             <xsl:when test="$type = 'QuestionConstruct'">
                 <xsl:value-of select="$root//d:QuestionConstruct[r:ID=$id]/d:ConstructName/r:String"/>
             </xsl:when>
-            <!-- TypeOfObject is Loop -->
+            <!-- TypeOfObject is Loop, we get the name of one of its collected variables (the first) -->
             <xsl:when test="$type = 'Loop'">
-                <xsl:value-of select="$root//d:Loop[r:ID=$id]//d:ControlConstructReference/d:QuestionConstruct[1]/d:ConstructName/r:String[@xml:lang=$language]"/>
+                <xsl:value-of select="$root//d:Loop[r:ID=$id]//d:ControlConstructReference[1]/d:QuestionConstruct[1]/d:ConstructName/r:String[@xml:lang=$language]"/>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
