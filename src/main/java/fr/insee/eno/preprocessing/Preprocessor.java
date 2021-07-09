@@ -15,7 +15,7 @@ public interface Preprocessor {
 	 *            The file to preprocess
 	 * @param parameters
 	 *            An optional parameters file
-	 * @param surveyName
+	 * @param survey
 	 *            An optional parameters file
 	 * @return the preprocessed file
 	 * @throws Exception
