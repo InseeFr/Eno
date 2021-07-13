@@ -1,5 +1,8 @@
 # Eno Releases note
 
+## 2.2.10 - 09/07/2021
+- **[javadoc]** Corrections of errors.
+
 ## 2.2.9 - 21/06/21
 
 - **[ddi2out][pre-processing]** Redesigning of the numbering (titling.xsl). From now on, there are only 3 parameters which are: choice of the numbering of the questions (number the questions or not, and, if so, to number them in sequence or on the whole questionnaire), choice of sequence numbering (number or not the sequences), display of the symbol in front of the numbering (display or not the "arrow" symbol before the questions)
