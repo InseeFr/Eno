@@ -4,6 +4,7 @@
                id="i6vwi2506qf2mms"
                modele="SIMPSONS"
                enoCoreVersion=""
+               missing="false"
                pagination="none">
    <label>Questionnaire SIMPSONS 20201215</label>
    <components xsi:type="Sequence" componentType="Sequence" id="j6p0ti5h">

@@ -3,7 +3,8 @@
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                id="i6vwi0"
                modele="SIMPSONS"
-               enoCoreVersion="">
+               enoCoreVersion=""
+               missing="false">
    <label>Questionnaire SIMPSONS</label>
    <components xsi:type="Sequence" componentType="Sequence" id="j6p0ti5h">
       <label>"I - Introduction"</label>
