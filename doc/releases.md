@@ -1,7 +1,10 @@
 # Eno Releases note
 
-## 2.2.10 - 09/07/2021
+## 2.2.10 - 13/07/2021
 - **[javadoc]** Corrections of errors.
+- **[ddi2out][pre-processing]** Pre-processing md2xhtml : adding support of markdown links (only specific cases were supported so far)
+- **[ddi2out][pre-processing]** Pre-processing tweak-xhtml-for-ddi : not using xsl:key (does not work) but matches in conditions for footnote pattern recognition
+- - **[ddi2fo][post-processing]** Revert to non informative barcode in first page of ***business*** fo forms (released in Eno v2.2.1).
 
 ## 2.2.9 - 21/06/21
 
