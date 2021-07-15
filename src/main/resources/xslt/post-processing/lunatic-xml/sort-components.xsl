@@ -49,6 +49,7 @@
     </xsl:template>
 
     <xsl:template match="h:components[@xsi:type='Sequence' or @xsi:type='Subsequence']">
+        <xsl:param name="loopDependencies" as="xs:string*" tunnel="yes"/>
         <components>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="h:label"/>
@@ -58,6 +59,7 @@
             <xsl:variable name="dependencies" select="distinct-values(h:dependencies)" as="xs:string*"/>
             <xsl:variable name="allDependencies" as="xs:string*">
                 <xsl:copy-of select="$dependencies"/>
+                <xsl:copy-of select="$loopDependencies"/>
             </xsl:variable>
             <xsl:call-template name="enolunatic:add-all-dependencies">
                 <xsl:with-param name="dependencies" select="$allDependencies"/>
@@ -67,6 +69,7 @@
     </xsl:template>
     
     <xsl:template match="h:components[@xsi:type='Loop']">
+        <xsl:param name="loopDependencies" as="xs:string*" tunnel="yes"/>
         <!-- Value of idGenerator, may be empty -->
         <xsl:variable name="idGenerator" select="h:idGenerator"/>
         <!-- minimum is @min attribute of components if linked loop, else it is @min attributes of lines -->
@@ -87,7 +90,7 @@
         <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies[not(parent::h:conditionFilter)])" as="xs:string*"/>
         <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
         <!-- The loopDependencies consist of the reponseDependencies of the generating loop if linked loop, and the variables used in formula of minimum and maximum -->
-        <xsl:variable name="loopDependencies" as="xs:string*">
+        <xsl:variable name="localLoopDependencies" as="xs:string*">
             <xsl:copy-of select="distinct-values($root//h:components[@id=$idGenerator]//h:responseDependencies)"/>
             <xsl:for-each select="$dependencies">
                 <xsl:if test="contains($minimum,.) or contains($maximum,.)">
@@ -98,6 +101,7 @@
         <xsl:variable name="allDependencies" as="xs:string*">
             <xsl:copy-of select="$dependencies"/>
             <xsl:copy-of select="$responseDependencies"/>
+            <xsl:copy-of select="$loopDependencies"/>
         </xsl:variable>
         <components>
             <xsl:copy-of select="@*"/>
@@ -106,7 +110,7 @@
                 <xsl:attribute name="iterations">
                     <xsl:choose>
                         <xsl:when test="string-length(@iterations) &gt; 0"><xsl:value-of select="@iterations"/></xsl:when>
-                        <xsl:otherwise><xsl:value-of select="concat('count(',$loopDependencies[1],')')"/></xsl:otherwise>
+                        <xsl:otherwise><xsl:value-of select="concat('count(',$localLoopDependencies[1],')')"/></xsl:otherwise>
                     </xsl:choose>
                 </xsl:attribute>
             </xsl:if>
@@ -124,15 +128,23 @@
             <xsl:call-template name="enolunatic:add-all-dependencies">
                 <xsl:with-param name="dependencies" select="$allDependencies"/>
             </xsl:call-template>
-            <xsl:for-each select="distinct-values($loopDependencies)">
+            <xsl:for-each select="distinct-values($localLoopDependencies)">
                 <loopDependencies><xsl:value-of select="."/></loopDependencies>
             </xsl:for-each>
+            
+            <xsl:variable name="allLoopDependencies" as="xs:string*">
+                <xsl:copy-of select="$loopDependencies"/>
+                <xsl:copy-of select="$localLoopDependencies"/>
+            </xsl:variable>
 
-            <xsl:apply-templates select="h:components"/>
+            <xsl:apply-templates select="h:components">
+                <xsl:with-param name="loopDependencies" select="$allLoopDependencies" as="xs:string*" tunnel="yes"/>
+            </xsl:apply-templates>
         </components>
     </xsl:template>
 
     <xsl:template match="h:components[@xsi:type='RosterForLoop']">
+        <xsl:param name="loopDependencies" as="xs:string*" tunnel="yes" />
         <components>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="h:label"/>
@@ -145,6 +157,7 @@
             <xsl:variable name="allDependencies" as="xs:string*">
                 <xsl:copy-of select="$dependencies"/>
                 <xsl:copy-of select="$responseDependencies"/>
+                <xsl:copy-of select="$loopDependencies"/>
             </xsl:variable>
             <xsl:call-template name="enolunatic:add-all-dependencies">
                 <xsl:with-param name="dependencies" select="$allDependencies"/>
@@ -153,6 +166,7 @@
         </components>
     </xsl:template>
     <xsl:template match="h:components[@xsi:type='Table']">
+        <xsl:param name="loopDependencies" as="xs:string*" tunnel="yes" />
         <components>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="h:label"/>
@@ -165,6 +179,7 @@
             <xsl:variable name="allDependencies" as="xs:string*">
                 <xsl:copy-of select="$dependencies"/>
                 <xsl:copy-of select="$responseDependencies"/>
+                <xsl:copy-of select="$loopDependencies"/>
             </xsl:variable>
             <xsl:call-template name="enolunatic:add-all-dependencies">
                 <xsl:with-param name="dependencies" select="$allDependencies"/>
@@ -196,6 +211,7 @@
     </xsl:template>
     
     <xsl:template match="h:components">
+        <xsl:param name="loopDependencies" as="xs:string*" tunnel="yes" />
         <components>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="h:label"/>
@@ -208,6 +224,7 @@
             <xsl:variable name="allDependencies" as="xs:string*">
                 <xsl:copy-of select="$dependencies"/>
                 <xsl:copy-of select="$responseDependencies"/>
+                <xsl:copy-of select="$loopDependencies"/>
             </xsl:variable>
             <xsl:call-template name="enolunatic:add-all-dependencies">
                 <xsl:with-param name="dependencies" select="$allDependencies"/>
