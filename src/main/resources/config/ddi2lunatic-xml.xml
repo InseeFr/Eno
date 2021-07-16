@@ -28,5 +28,9 @@
     
     <!-- https://outils-javascript.aliasdmc.fr/encodage-caracteres-speciaux/encode-caractere-2019-html-css-js-autre.html -->
     <JSEncoding>
+        <char>
+            <in>'</in>
+            <out>’</out>
+        </char>
     </JSEncoding>
 </Properties>
