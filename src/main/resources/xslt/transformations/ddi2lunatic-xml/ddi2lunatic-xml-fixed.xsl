@@ -205,7 +205,14 @@
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
         <xsl:variable name="label">
-            <xsl:sequence select="enoddi:get-label($context,$language)"/>
+            <xsl:choose>
+                <xsl:when test="$is-xpath">
+                    <xsl:sequence select="enoddi:get-label($context,$language)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="enolunatic:surround-question-number(enoddi:get-label($context,$language))"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:variable>
         <xsl:if test="$label!=''">
             <!-- If the programming language is xpath : we call surround-label-with-quote -->
@@ -218,6 +225,26 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:if>
+    </xsl:function>
+    
+    <xsl:function name="enolunatic:surround-question-number">
+        <xsl:param name="label"/>
+        <xsl:variable name="final">
+            <xsl:choose>
+                <xsl:when test="count($label) &gt; 1">
+                    <xsl:variable name="number" select="$label[1]"/>
+                    <xsl:variable name="other" select="$label[position() &gt; 1]"/>
+                    <xsl:value-of select="concat('&quot;',$number,'&quot; || ')"/>
+                    <xsl:for-each select="$other">
+                        <xsl:value-of select="."/>
+                    </xsl:for-each>
+                </xsl:when>
+                <xsl:when test="$label != ''">
+                    <xsl:value-of select="$label"/>
+                </xsl:when>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:value-of select="$final"/>
     </xsl:function>
     
     <!-- This function is used for labels when programming language is xpath -->
