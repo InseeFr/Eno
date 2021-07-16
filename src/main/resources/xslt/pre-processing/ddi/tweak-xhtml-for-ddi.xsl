@@ -12,10 +12,10 @@
         All other elements not matching this syntax is simply copied untouched.               
     -->
     
-    
+    <!--  Using xsl:key DOES NOT SEEM TO WORK, as it recognizes every xhtml:a/href that I input...Thus I'd rather use "matches" in the xpath condition  -->
     <!-- Defining what is an xhtml:a 'footnote'. -->
-   <!-- <xsl:key name="is-footnote" match="xhtml:a" use="if(@href) then(matches(@href,'^\.\s\\&quot;.+\\&quot;')) else(false())"/>-->
-    <xsl:key name="is-footnote" match="xhtml:a" use="if(@href) then(matches(@href,'^\.\s&quot;.+&quot;')) else(false())"/>
+    <!-- <xsl:key name="is-footnote" match="xhtml:a" use="if(@href) then(matches(@href,'^\.\s\\&quot;.+\\&quot;')) else(false())"/>-->
+    <!--    <xsl:key name="is-footnote" match="xhtml:a" use="if(@href) then(matches(@href,'^\.\s&quot;.+&quot;')) else(false())"/>-->
     
     <!-- Standard identity pattern. -->
     <xsl:template match="*">
@@ -24,27 +24,27 @@
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
     </xsl:template>
-
+    
     <xsl:template match="text()">
         <xsl:value-of select="."/>
     </xsl:template>
-
+    
     <!-- Keep comment and pi as well. -->
     <xsl:template match="comment() | processing-instruction()">
         <xsl:copy-of select="."/>
     </xsl:template>
-
+    
     <!-- xhtml:a 'footnote' will have a generic href and its content outputted just before. -->
-    <xsl:template match="xhtml:a[key('is-footnote',true())]">
+    <xsl:template match="xhtml:a[matches(@href,'^\.\s&quot;.+&quot;')]">
         <!-- Output its content -->
         <xsl:value-of select="."/>
         <xsl:element name="xhtml:a">
             <!-- Building an href=#ftn{index}, index is based on the number of xhtml:a footnote -->
             <xsl:attribute name="href"
-                select="concat('#ftn', 1 + count(preceding::xhtml:a[key('is-footnote',true())]))"/>
+                select="concat('#ftn', 1 + count(preceding::xhtml:a[matches(@href,'^\.\s&quot;.+&quot;')]))"/>
         </xsl:element>
     </xsl:template>
-
+    
     <!-- For each xhtml:a 'footnote', an Instruction needs to be generated. -->
     <xsl:template match="d:InterviewerInstructionScheme">
         <!-- First all the Scheme is processed. -->
@@ -52,7 +52,7 @@
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="node()"/>
             <!-- Then an instruction is generated for each xhmtl:a "footnote". -->
-            <xsl:for-each select="//xhtml:a[key('is-footnote',true())]">
+            <xsl:for-each select="//xhtml:a[matches(@href,'^\.\s&quot;.+&quot;')]">
                 <!-- Calculating the variables needed. -->
                 <!-- For r:Agency, r:Version and xml:lang, the closest ancestor whith equivalent is used -->
                 <xsl:variable name="agency" select="ancestor-or-self::*[r:Agency][1]/r:Agency"/>
@@ -60,7 +60,7 @@
                 <xsl:variable name="lang" select="ancestor-or-self::*[@xml:lang][1]/@xml:lang"/>
                 <!-- The id is build with the pattern ftn{index}, index is based on the number of xhtml:a 'footnote'. -->
                 <xsl:variable name="id"
-                    select="concat('ftn', 1 + count(preceding::xhtml:a[key('is-footnote',true())]))"/>
+                    select="concat('ftn', 1 + count(preceding::xhtml:a[matches(@href,'^\.\s&quot;.+&quot;')]))"/>
                 <d:Instruction>
                     <r:Agency>
                         <xsl:value-of select="$agency"/>
@@ -94,5 +94,5 @@
             </xsl:for-each>
         </xsl:copy>
     </xsl:template>
-
+    
 </xsl:stylesheet>

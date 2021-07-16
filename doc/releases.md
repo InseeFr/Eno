@@ -1,5 +1,12 @@
 # Eno Releases note
 
+## 2.2.10 - 13/07/2021
+- **[dependencies]** Upgrading dependencies versions. 
+- **[javadoc]** Corrections of errors.
+- **[ddi2out][pre-processing]** Pre-processing md2xhtml : adding support of markdown links (only specific cases were supported so far)
+- **[ddi2out][pre-processing]** Pre-processing tweak-xhtml-for-ddi : not using xsl:key (does not work) but matches in conditions for footnote pattern recognition
+- **[ddi2fo][post-processing]** Revert to non informative barcode in first page of ***business*** fo forms (released in Eno v2.2.1).
+
 ## 2.2.9 - 21/06/21
 
 - **[ddi2out][pre-processing]** Redesigning of the numbering (titling.xsl). From now on, there are only 3 parameters which are: choice of the numbering of the questions (number the questions or not, and, if so, to number them in sequence or on the whole questionnaire), choice of sequence numbering (number or not the sequences), display of the symbol in front of the numbering (display or not the "arrow" symbol before the questions)

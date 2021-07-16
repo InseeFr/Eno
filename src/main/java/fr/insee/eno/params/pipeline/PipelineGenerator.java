@@ -31,7 +31,7 @@ public interface PipelineGenerator {
 	
 	/**
 	 * 
-	 * @param a list of Preprocessor (Java class) according to a List of PreProcessing (Enum)
+	 * @param preProcessings : a list of Preprocessor (Java class) according to a List of PreProcessing (Enum)
 	 * @return
 	 */
 	public Preprocessor[] setPreProcessors(List<PreProcessing> preProcessings);
@@ -53,7 +53,7 @@ public interface PipelineGenerator {
 	
 	/**
 	 * Linking function : Preprocessor with PreProcessing
-	 * @param postProcessing
+	 * @param preProcessing
 	 * @return the Preprocessor java class according to PreProcessing(Enum)
 	 */
 	public Preprocessor getPreProcessor(PreProcessing preProcessing);
