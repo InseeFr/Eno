@@ -4,6 +4,7 @@
     xmlns:r="ddi:reusable:3_3" xmlns:l="ddi:logicalproduct:3_3"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi" xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    exclude-result-prefixes="enoddi xd"
     version="2.0">
 
     <xd:doc scope="stylesheet">
@@ -120,9 +121,16 @@
                 </xsl:if>
         </xsl:variable>
 
+        <xsl:variable name="languages" select="r:Content/@xml:lang"/>
+        <xsl:variable name="prefixAdded" select="not(descendant::xhtml:p) and not(descendant::xhtml:span)" as="xs:boolean"/>
         <xsl:copy>
+            <xsl:if test="$prefixAdded">
+                <xsl:for-each select="$languages">
+                    <d:Text xml:lang="{.}"><xsl:value-of select="$prefix"/></d:Text>     
+                </xsl:for-each>
+            </xsl:if>
             <xsl:apply-templates select="node() | @*" mode="modif-title">
-                <xsl:with-param name="prefix" select="$prefix" tunnel="yes"/>
+                <xsl:with-param name="prefix" select="if($prefixAdded) then '' else $prefix" tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:copy>
 
@@ -163,10 +171,16 @@
                 <xsl:value-of select="concat($number, $style/Question/PostNumQuest)"/>
             </xsl:if>
         </xsl:variable>
-
+        <xsl:variable name="languages" select="d:Text/@xml:lang"/>
+        <xsl:variable name="prefixAdded" select="not(descendant::xhtml:p) and not(descendant::xhtml:span)" as="xs:boolean"/>
         <xsl:copy>
+            <xsl:if test="$prefixAdded">
+                <xsl:for-each select="$languages">
+                    <d:Text xml:lang="{.}"><xsl:value-of select="$prefix"/></d:Text>     
+                </xsl:for-each>
+            </xsl:if>
             <xsl:apply-templates select="node() | @*" mode="modif-title">
-                <xsl:with-param name="prefix" select="$prefix" tunnel="yes"/>
+                <xsl:with-param name="prefix" select="if($prefixAdded) then '' else $prefix" tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:copy>
     </xsl:template>
