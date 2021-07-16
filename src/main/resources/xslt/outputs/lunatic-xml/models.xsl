@@ -954,12 +954,12 @@
 			</xsl:apply-templates>
 			<xsl:if test="enolunatic:is-scope-questionconstruct($source-context)">
 			<shapeFrom>
-				<xsl:value-of select="enolunatic:get-shapeFrom-name(enolunatic:get-scope-id($source-context),'QuestionConstruct',$languages)"/>
+				<xsl:value-of select="enolunatic:get-shapeFrom-name(enolunatic:get-scope-id($source-context),'QuestionConstruct',$languages[1])"/>
 			</shapeFrom>
 			</xsl:if>
 			<xsl:if test="enolunatic:is-scope-loop($source-context)">
 				<shapeFrom>
-					<xsl:value-of select="enolunatic:get-shapeFrom-name(enolunatic:get-scope-id($source-context),'Loop',$languages)"/>
+					<xsl:value-of select="enolunatic:get-shapeFrom-name(enolunatic:get-scope-id($source-context),'Loop',$languages[1])"/>
 				</shapeFrom>
 			</xsl:if>
 		</variables>
@@ -1186,9 +1186,7 @@
 				<bindingDependencies><xsl:value-of select="enolunatic:get-variable-business-name(.)"/></bindingDependencies>
 			</xsl:for-each>
 			<xsl:if test="$idLoop!=''">
-				<shapeFrom>
-					<xsl:value-of select="enolunatic:get-shapeFrom-name($idLoop,'Loop',$languages)"/>
-				</shapeFrom>
+				<shapeFrom><xsl:value-of select="enolunatic:get-shapeFrom-name($idLoop,'Loop',$languages[1])"/></shapeFrom>
 			</xsl:if>
 		</variables>
 	</xsl:template>
