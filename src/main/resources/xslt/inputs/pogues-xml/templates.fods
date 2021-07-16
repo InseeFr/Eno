@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:rpt="http://openoffice.org/2005/report" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:css3t="http://www.w3.org/TR/css3-text/" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>P13DT5H49M34S</meta:editing-duration><meta:editing-cycles>766</meta:editing-cycles><meta:generator>LibreOffice/6.4.7.2$Windows_X86_64 LibreOffice_project/639b8ac485750d5696d7590a72ef1b496725cfb5</meta:generator><dc:date>2021-07-16T12:34:00.956000000</dc:date><dc:creator>Ophélie Rogel</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="463" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
+ <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>P13DT5H51M1S</meta:editing-duration><meta:editing-cycles>767</meta:editing-cycles><meta:generator>LibreOffice/6.4.7.2$Windows_X86_64 LibreOffice_project/639b8ac485750d5696d7590a72ef1b496725cfb5</meta:generator><dc:date>2021-07-16T14:26:07.746000000</dc:date><dc:creator>Ophélie Rogel</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="463" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaWidth" config:type="int">61044</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">69772</config:config-item>
+   <config:config-item config:name="VisibleAreaHeight" config:type="int">69751</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
      <config:config-item-map-named config:name="Tables">
       <config:config-item-map-entry config:name="Sheet1">
        <config:config-item config:name="CursorPositionX" config:type="int">2</config:config-item>
-       <config:config-item config:name="CursorPositionY" config:type="int">7</config:config-item>
+       <config:config-item config:name="CursorPositionY" config:type="int">6</config:config-item>
        <config:config-item config:name="HorizontalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="VerticalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="HorizontalSplitPosition" config:type="int">0</config:config-item>
        <config:config-item config:name="VerticalSplitPosition" config:type="int">0</config:config-item>
        <config:config-item config:name="ActiveSplitRange" config:type="short">2</config:config-item>
-       <config:config-item config:name="PositionLeft" config:type="int">0</config:config-item>
+       <config:config-item config:name="PositionLeft" config:type="int">1</config:config-item>
        <config:config-item config:name="PositionRight" config:type="int">0</config:config-item>
        <config:config-item config:name="PositionTop" config:type="int">0</config:config-item>
        <config:config-item config:name="PositionBottom" config:type="int">0</config:config-item>
@@ -126,13 +126,11 @@
   </office:script>
  </office:scripts>
  <office:font-face-decls>
-  <style:font-face style:name="F" svg:font-family="" style:font-family-generic="roman"/>
   <style:font-face style:name="Arial" svg:font-family="Arial" style:font-family-generic="swiss" style:font-pitch="variable"/>
   <style:font-face style:name="Liberation Sans" svg:font-family="&apos;Liberation Sans&apos;" style:font-family-generic="swiss" style:font-pitch="variable"/>
   <style:font-face style:name="Andale Sans UI" svg:font-family="&apos;Andale Sans UI&apos;" style:font-family-generic="system" style:font-pitch="variable"/>
   <style:font-face style:name="Arial1" svg:font-family="Arial" style:font-family-generic="system" style:font-pitch="variable"/>
   <style:font-face style:name="Microsoft YaHei" svg:font-family="&apos;Microsoft YaHei&apos;" style:font-family-generic="system" style:font-pitch="variable"/>
-  <style:font-face style:name="Segoe UI" svg:font-family="&apos;Segoe UI&apos;" style:font-family-generic="system" style:font-pitch="variable"/>
   <style:font-face style:name="Tahoma" svg:font-family="Tahoma" style:font-family-generic="system" style:font-pitch="variable"/>
  </office:font-face-decls>
  <office:styles>
@@ -547,9 +545,6 @@
    <style:table-row-properties style:row-height="0.452cm" fo:break-before="auto" style:use-optimal-row-height="true"/>
   </style:style>
   <style:style style:name="ro2" style:family="table-row">
-   <style:table-row-properties style:row-height="0.473cm" fo:break-before="auto" style:use-optimal-row-height="true"/>
-  </style:style>
-  <style:style style:name="ro3" style:family="table-row">
    <style:table-row-properties style:row-height="0.579cm" fo:break-before="auto" style:use-optimal-row-height="false"/>
   </style:style>
   <style:style style:name="ta1" style:family="table" style:master-page-name="Default">
@@ -607,7 +602,7 @@
      <text:p><text:sheet-name>???</text:sheet-name><text:s/>(<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2021-07-16">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="12:33:02.468000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2021-07-16">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="14:24:41.466000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -888,21 +883,22 @@
       <text:p>Documentation</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro2">
+    <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-formulas-language</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string"><text:p>ancestor-or-self::pogues:<text:a xlink:href="mailto:Questionnaire/@formulasLanguage" xlink:type="simple">Questionnaire/@formulasLanguage</text:a></text:p>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>ancestor-or-self::pogues:Questionnaire/@formulasLanguage</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Return the language of formulas : XPATH or VTL</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Questionnaire</text:p>
      </table:table-cell>
@@ -917,7 +913,7 @@
       <text:p>This is used to implement the code of booleans if this return something</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -932,7 +928,7 @@
       <text:p>Return the agency that created the survey</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -947,7 +943,7 @@
      </table:table-cell>
      <table:table-cell/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Response[@mandatory=&apos;true&apos;]</text:p>
      </table:table-cell>
@@ -959,7 +955,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Control</text:p>
      </table:table-cell>
@@ -971,7 +967,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Datatype</text:p>
      </table:table-cell>
@@ -983,7 +979,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*[pogues:Response]</text:p>
      </table:table-cell>
@@ -995,7 +991,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -1007,7 +1003,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -1022,7 +1018,7 @@
      </table:table-cell>
      <table:table-cell/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Questionnaire</text:p>
      </table:table-cell>
@@ -1039,7 +1035,7 @@
       <text:p>Return all the controls of the Survey.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Datatype</text:p>
      </table:table-cell>
@@ -1054,7 +1050,7 @@
       <text:p>Return the number of decimals of the data type.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -1066,7 +1062,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Dimension</text:p>
      </table:table-cell>
@@ -1081,7 +1077,7 @@
       <text:p>Return the dynamic attribute of the pogues:Dimension. This value is used to compute positions in grids</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:*</text:p>
      </table:table-cell>
@@ -1096,7 +1092,7 @@
       <text:p>Expression is the default element for expressions in Pogues.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -1111,7 +1107,7 @@
      </table:table-cell>
      <table:table-cell/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Control</text:p>
      </table:table-cell>
@@ -1123,7 +1119,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Child[@xsi:type=&apos;SequenceType&apos;]</text:p>
      </table:table-cell>
@@ -1140,7 +1136,7 @@
       <text:p>Return the attribut coding the level of the sequence (QUESTIONNAIRE, MODULE, SUBMODULE,...)</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -1155,7 +1151,7 @@
       <text:p>Return the ID attribute of the element</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Dimension</text:p>
      </table:table-cell>
@@ -1167,7 +1163,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:CodeListReference</text:p>
      </table:table-cell>
@@ -1182,7 +1178,7 @@
       <text:p>The CodeListRefence element contains the ID of the CodeList it reference. It doesn&apos;t have an ID attribute</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Expression</text:p>
      </table:table-cell>
@@ -1197,7 +1193,7 @@
       <text:p>Using the patent&apos;s id for pogues:Expression&apos;s id. Because of a tweak to escape from Goto, pogues:IfThenElse could contain pogues:Expression so a parent::* is needed in the Xpath instead of a parent::pogues:Control.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Formula</text:p>
      </table:table-cell>
@@ -1209,7 +1205,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Control</text:p>
      </table:table-cell>
@@ -1221,7 +1217,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Code</text:p>
      </table:table-cell>
@@ -1236,7 +1232,7 @@
       <text:p>The id for a l:Code is build upon the CodeList id and the rank index of the current l:Code in the CodeList</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:MemberReference</text:p>
      </table:table-cell>
@@ -1248,7 +1244,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:FlowControl[not(@flowControlType)]</text:p>
      </table:table-cell>
@@ -1263,7 +1259,7 @@
       <text:p>Return the ID to which the GoTo aim</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -1280,7 +1276,7 @@
       <text:p>Return all IfThenElses elements of the survey. <text:s/>The with-tag of the Match_Mode column means that this template is hard-coded in the src\main\resources\xslt\inputs\pogues-xml\source-fixed.xml. This is to keep the tags as well as their content by makig a sequence instead of a value-of</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Declaration</text:p>
      </table:table-cell>
@@ -1292,7 +1288,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Control</text:p>
      </table:table-cell>
@@ -1304,7 +1300,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Declaration</text:p>
      </table:table-cell>
@@ -1316,7 +1312,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Control</text:p>
      </table:table-cell>
@@ -1328,7 +1324,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Declaration</text:p>
      </table:table-cell>
@@ -1340,7 +1336,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Declaration</text:p>
      </table:table-cell>
@@ -1355,7 +1351,7 @@
      </table:table-cell>
      <table:table-cell/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Control</text:p>
      </table:table-cell>
@@ -1370,7 +1366,7 @@
      </table:table-cell>
      <table:table-cell/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Child</text:p>
      </table:table-cell>
@@ -1385,7 +1381,7 @@
      </table:table-cell>
      <table:table-cell/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Questionnaire</text:p>
      </table:table-cell>
@@ -1402,7 +1398,7 @@
       <text:p>Return all Declarations of the survey</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Questionnaire</text:p>
      </table:table-cell>
@@ -1417,7 +1413,7 @@
      </table:table-cell>
      <table:table-cell/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -1434,7 +1430,7 @@
       <text:p>Label is the default element for labels in Pogues.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -1449,7 +1445,7 @@
       <text:p>Return a lang for the survey. As this information in not available in PoguesXML, it is hard-coded in this document</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Response</text:p>
      </table:table-cell>
@@ -1464,7 +1460,7 @@
       <text:p>Return the attribut coding if the anwser is mandatory. This part is not implemented</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Datatype</text:p>
      </table:table-cell>
@@ -1479,7 +1475,7 @@
       <text:p>Return the maximum length of the data type</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -1494,7 +1490,7 @@
       <text:p>Return the maximal value of the data type</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Datatype[not(@visualizationHint) and @xsi:type=&apos;NumericDatatypeType&apos;]</text:p>
      </table:table-cell>
@@ -1509,7 +1505,7 @@
       <text:p>Return the maximal value of the data type</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Loop</text:p>
      </table:table-cell>
@@ -1526,7 +1522,7 @@
       <text:p>Return the formula of the maximum number of occurrences of a loop</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Loop</text:p>
      </table:table-cell>
@@ -1543,7 +1539,7 @@
       <text:p>Return the formula of the minimum number of occurrences of a loop</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -1558,7 +1554,7 @@
       <text:p>Return the minimal value of the data type</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Datatype[not(@visualizationHint) and @xsi:type=&apos;NumericDatatypeType&apos;]</text:p>
      </table:table-cell>
@@ -1573,7 +1569,7 @@
       <text:p>Return the minimal value of the data type</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -1588,7 +1584,7 @@
       <text:p>Name is the default element for names in Pogues.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Declaration</text:p>
      </table:table-cell>
@@ -1605,7 +1601,7 @@
       <text:p>The &lt;d:InstructionName&gt; of ddi InterviwerInstruction is equal to the Declaration@declarationType of PoguesXML</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -1620,7 +1616,7 @@
       <text:p>Return the ID of the parent of the current element</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Declaration</text:p>
      </table:table-cell>
@@ -1635,7 +1631,7 @@
       <text:p>Return the position for a Declaration.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Child[@xsi:type=&apos;QuestionType&apos;]</text:p>
      </table:table-cell>
@@ -1647,7 +1643,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Response</text:p>
      </table:table-cell>
@@ -1659,7 +1655,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Variable[@xsi:type=&apos;CalculatedVariableType&apos;]/pogues:Formula</text:p>
      </table:table-cell>
@@ -1671,7 +1667,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Variable[@xsi:type=&apos;CalculatedVariableType&apos;]</text:p>
      </table:table-cell>
@@ -1683,7 +1679,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Variable[@xsi:type=&apos;ExternalVariableType&apos;]/pogues:Formula</text:p>
      </table:table-cell>
@@ -1695,7 +1691,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Variable[@xsi:type=&apos;ExternalVariableType&apos;]</text:p>
      </table:table-cell>
@@ -1707,7 +1703,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Variable[@xsi:type=&apos;CollectedVariableType&apos;]</text:p>
      </table:table-cell>
@@ -1719,7 +1715,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Control</text:p>
      </table:table-cell>
@@ -1731,7 +1727,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*[ancestor-or-self::pogues:Child[@xsi:type=&apos;QuestionType&apos;]]</text:p>
      </table:table-cell>
@@ -1743,7 +1739,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*[ancestor-or-self::pogues:Child[@xsi:type=&apos;QuestionType&apos;]]</text:p>
      </table:table-cell>
@@ -1755,7 +1751,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -1767,7 +1763,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -1784,7 +1780,7 @@
       <text:p>Return all Questions elements of the survey. The with-tag of the Match_Mode column means that this template is hard-coded in the src\main\resources\xslt\inputs\pogues-xml\source-fixed.xml. This is to keep the tags as well as their content by makig a sequence instead of a value-of</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -1801,7 +1797,7 @@
       <text:p>Return all the simple Question of the survey (needed to drive the output order)</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -1818,7 +1814,7 @@
       <text:p>Return all the table Question of the survey (needed to drive the output order)</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Dimension[@dimensionType=&apos;PRIMARY&apos;]</text:p>
      </table:table-cell>
@@ -1830,7 +1826,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Dimension[@dimensionType=&apos;SECONDARY&apos;]</text:p>
      </table:table-cell>
@@ -1842,7 +1838,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Response</text:p>
      </table:table-cell>
@@ -1854,7 +1850,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Datatype</text:p>
      </table:table-cell>
@@ -1866,7 +1862,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Child</text:p>
      </table:table-cell>
@@ -1883,7 +1879,7 @@
       <text:p>Return the controls related to an element, mandatory Response are equivalent to Controls.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Variable</text:p>
      </table:table-cell>
@@ -1898,7 +1894,7 @@
      </table:table-cell>
      <table:table-cell/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Variable</text:p>
      </table:table-cell>
@@ -1915,7 +1911,7 @@
       <text:p>From a Variable, you need to get related response to have Question Out Parameters.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Response[@mandatory=&apos;true&apos;]</text:p>
      </table:table-cell>
@@ -1932,7 +1928,7 @@
       <text:p>From a Response (in the context of a mandatory Response), the related response is itself (the Expression is induced by the Response itself).</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*[pogues:Text | pogues:FailMessage]</text:p>
      </table:table-cell>
@@ -1947,7 +1943,7 @@
      </table:table-cell>
      <table:table-cell/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -1964,7 +1960,7 @@
       <text:p>Return all Sequenses elements of the survey. <text:s/>The with-tag of the Match_Mode column means that this template is hard-coded in the src\main\resources\xslt\inputs\pogues-xml\source-fixed.xml. This is to keep the tags as well as their content by makig a sequence instead of a value-of</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -1976,7 +1972,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:IfThenElse</text:p>
      </table:table-cell>
@@ -1991,7 +1987,7 @@
       <text:p>Return the ID of the element that result a true condition.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Response</text:p>
      </table:table-cell>
@@ -2006,7 +2002,7 @@
       <text:p>Return the type of data of a response (NUMERIC, TEXT, DATE,...)</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Child[@xsi:type=&apos;QuestionType&apos; and @questionType!=&apos;TABLE&apos;]</text:p>
      </table:table-cell>
@@ -2021,7 +2017,7 @@
       <text:p>Return the type of the question (SIMPLE, SINGLE_CHOICE, MULTIPLE_CHOICE)</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Child[@questionType=&apos;TABLE&apos; and not(pogues:ResponseStructure/pogues:Dimension[@dimensionType=&quot;PRIMARY&quot; and @dynamic != &apos;0&apos;])]</text:p>
      </table:table-cell>
@@ -2036,7 +2032,7 @@
       <text:p>Return the type of the question : TABLE</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Child[@questionType=&apos;TABLE&apos; and pogues:ResponseStructure/pogues:Dimension[@dimensionType=&quot;PRIMARY&quot; and @dynamic != &apos;0&apos;]]</text:p>
      </table:table-cell>
@@ -2048,7 +2044,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Control</text:p>
      </table:table-cell>
@@ -2063,7 +2059,7 @@
      </table:table-cell>
      <table:table-cell/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Variable</text:p>
      </table:table-cell>
@@ -2075,7 +2071,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Response</text:p>
      </table:table-cell>
@@ -2090,7 +2086,7 @@
       <text:p>Return the name of the type of data of a response (TEXT, NUMERIC,...)</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Unit</text:p>
      </table:table-cell>
@@ -2105,7 +2101,7 @@
      </table:table-cell>
      <table:table-cell/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -2120,7 +2116,7 @@
       <text:p>Value is the default element for values in Pogues.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -2135,7 +2131,7 @@
       <text:p>Return a version for the survey. As this information in not available in PoguesXML, it is hard-coded in this document</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Response</text:p>
      </table:table-cell>
@@ -2152,7 +2148,7 @@
       <text:p>Return the type of visualisation of a response (checkbox, radio-button,..)</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Datatype</text:p>
      </table:table-cell>
@@ -2167,7 +2163,7 @@
      </table:table-cell>
      <table:table-cell/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Code</text:p>
      </table:table-cell>
@@ -2182,7 +2178,7 @@
       <text:p>Return the string expected as value of the isDiscrete attribut of l:code in ddi3.2 . If the Code has child codes = false, else true.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -2194,7 +2190,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Child[@xsi:type=&apos;QuestionType&apos;]</text:p>
      </table:table-cell>
@@ -2206,7 +2202,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -2218,7 +2214,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Child[@xsi:type=&apos;SequenceType&apos;]</text:p>
      </table:table-cell>
@@ -2230,7 +2226,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:IfThenElse</text:p>
      </table:table-cell>
@@ -2242,7 +2238,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Loop</text:p>
      </table:table-cell>
@@ -2254,7 +2250,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*[pogues:Text or pogues:FailMessage]</text:p>
      </table:table-cell>
@@ -2266,7 +2262,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Text | pogues:FailMessage</text:p>
      </table:table-cell>
@@ -2278,7 +2274,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -2290,7 +2286,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Variable | pogues:Response</text:p>
      </table:table-cell>
@@ -2302,7 +2298,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -2314,7 +2310,7 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:ClarificationQuestion</text:p>
      </table:table-cell>
@@ -2329,7 +2325,7 @@
       <text:p>Expression is the default element for expressions in Pogues for clarification question</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Variable[@xsi:type=&apos;CalculatedVariableType&apos; and (not(pogues:Scope) or pogues:Scope=&apos;&apos;)]</text:p>
      </table:table-cell>
@@ -2344,7 +2340,7 @@
       <text:p>Return questionnaire id</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Variable[@xsi:type=&apos;ExternalVariableType&apos; and (not(pogues:Scope) or pogues:Scope=&apos;&apos;)]</text:p>
      </table:table-cell>
@@ -2359,7 +2355,7 @@
       <text:p>Return questionnaire id</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Variable[@xsi:type=&apos;CollectedVariableType&apos; and (not(pogues:Scope) or pogues:Scope=&apos;&apos;) and //pogues:Child[pogues:Response/pogues:CollectedVariableReference=current()/@id][pogues:ResponseStructure/pogues:Dimension[@dimensionType=&quot;PRIMARY&quot; and @dynamic != &apos;0&apos;]]]</text:p>
      </table:table-cell>
@@ -2374,7 +2370,7 @@
       <text:p>Return question of type table id</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Variable[@xsi:type=&apos;CollectedVariableType&apos; and (not(pogues:Scope) or pogues:Scope=&apos;&apos;) and //pogues:Child[pogues:Response/pogues:CollectedVariableReference=current()/@id][not(pogues:ResponseStructure/pogues:Dimension[@dimensionType=&quot;PRIMARY&quot; and @dynamic != &apos;0&apos;])]]</text:p>
      </table:table-cell>
@@ -2389,7 +2385,7 @@
       <text:p>Return questionnaire id</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Variable[@xsi:type=&apos;CollectedVariableType&apos; and (not(pogues:Scope) or pogues:Scope=&apos;&apos;) and //pogues:Child[pogues:ClarificationQuestion//pogues:CollectedVariableReference=current()/@id][not(pogues:ResponseStructure/pogues:Dimension[@dimensionType=&quot;PRIMARY&quot; and @dynamic != &apos;0&apos;])]]</text:p>
      </table:table-cell>
@@ -2404,7 +2400,7 @@
       <text:p>Return questionnaire id</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Variable[pogues:Scope!=&apos;&apos;]</text:p>
      </table:table-cell>
@@ -2419,7 +2415,7 @@
       <text:p>Return id of Table or Loop (the other function by the same name are kept just for compatibility, they must be replaced in the future by pogues:Variable[not(pogues:Scope) or pogues:Scope=&apos;&apos;])</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Loop</text:p>
      </table:table-cell>
@@ -2434,7 +2430,7 @@
       <text:p>Return loop step</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Questionnaire</text:p>
      </table:table-cell>
@@ -2451,7 +2447,7 @@
       <text:p>Return all loops which don&apos;t have a link to a Table or another Loop by IterableReference</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Questionnaire</text:p>
      </table:table-cell>
@@ -2468,7 +2464,7 @@
       <text:p>Return all loops</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Loop | pogues:Child[@xsi:type=&apos;QuestionType&apos; and @questionType=&apos;TABLE&apos;]</text:p>
      </table:table-cell>
@@ -2485,7 +2481,7 @@
       <text:p>Return all variables linked to the table or loop by scope</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Loop</text:p>
      </table:table-cell>
@@ -2502,7 +2498,7 @@
       <text:p>Return all loops linked to the Table (Scope)</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Child[@xsi:type=&apos;QuestionType&apos; and @questionType=&apos;TABLE&apos; and pogues:ResponseStructure/pogues:Dimension[@dimensionType=&apos;PRIMARY&apos; and @dynamic != &apos;0&apos;]]</text:p>
      </table:table-cell>
@@ -2519,7 +2515,7 @@
       <text:p>Return all loops linked to the Table (Scope)</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Loop</text:p>
      </table:table-cell>
@@ -2536,7 +2532,7 @@
       <text:p>Return Filter value for the loop</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Questionnaire</text:p>
      </table:table-cell>
@@ -2553,7 +2549,7 @@
       <text:p>Return all loops with a filter</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Response</text:p>
      </table:table-cell>
@@ -2568,7 +2564,7 @@
       <text:p>Return true if the element match the NoDataByDefinition</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Variable</text:p>
      </table:table-cell>
@@ -2583,7 +2579,7 @@
       <text:p>Return true if the element match the NoDataByDefinition</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Variable[pogues:Scope!=&apos;&apos;]</text:p>
      </table:table-cell>
@@ -2598,10 +2594,10 @@
       <text:p>Returns true if the content of Scope refers to a question (necessary for cases of caclulated variables referring to a table)</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3" table:number-rows-repeated="43">
+    <table:table-row table:style-name="ro2" table:number-rows-repeated="43">
      <table:table-cell table:number-columns-repeated="5"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:number-columns-repeated="5"/>
     </table:table-row>
    </table:table>
