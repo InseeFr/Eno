@@ -64,6 +64,8 @@
         </fo-parameters>
 
         <lunatic-xml-parameters>
+            <Control>true</Control>
+            <Tooltip>true</Tooltip>
             <FilterDescription>false</FilterDescription>
             <AddFilterResult>false</AddFilterResult>
             <MissingVar>false</MissingVar>
