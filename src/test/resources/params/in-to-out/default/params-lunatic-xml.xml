@@ -14,6 +14,7 @@
         <PostProcessing>lunatic-xml-externalizeVariables</PostProcessing>
         <PostProcessing>lunatic-xml-vtlParser</PostProcessing>
     </Pipeline>
+	<Mode>cawi</Mode>
     
     <Parameters>
         
