@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import fr.insee.eno.parameters.InFormat;
+import fr.insee.eno.parameters.Mode;
 import fr.insee.eno.parameters.OutFormat;
 import fr.insee.eno.parameters.Pipeline;
 import fr.insee.eno.parameters.PostProcessing;
@@ -39,6 +40,8 @@ public class TestValidator {
 		Assertions.assertFalse(valid.isValid());
 		
 	}
+	
+
 	
 	@Test
 	public void testValidatePostProcessings() {
@@ -96,5 +99,103 @@ public class TestValidator {
 		Assertions.assertTrue(valid2.isValid());
 		Assertions.assertTrue(valid3.isValid());
 		//Assertions.assertTrue(valid4.isValid());
+	}
+	
+	
+	@Test
+	public void validateModeLunatic() {
+		ValidationMessage valid0 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.CAWI);
+		ValidationMessage valid1 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.PAPI);
+		ValidationMessage valid2 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.CAPI_CATI);
+		ValidationMessage valid3 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.NONE);
+		ValidationMessage valid4 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.PROCESS);
+		ValidationMessage valid5 = validator.validateMode(OutFormat.LUNATIC_XML,null);	
+		
+		
+		Assertions.assertTrue(valid0.isValid());
+		Assertions.assertFalse(valid1.isValid());
+		Assertions.assertTrue(valid2.isValid());
+		Assertions.assertFalse(valid3.isValid());
+		Assertions.assertTrue(valid4.isValid());
+		Assertions.assertFalse(valid5.isValid());
+		
+	}
+	
+	
+	@Test
+	public void validateModeDDI() {
+		
+		ValidationMessage valida0 = validator.validateMode(OutFormat.DDI,Mode.CAWI);
+		ValidationMessage valida1 = validator.validateMode(OutFormat.DDI,Mode.PAPI);
+		ValidationMessage valida2 = validator.validateMode(OutFormat.DDI,Mode.CAPI_CATI);
+		ValidationMessage valida3 = validator.validateMode(OutFormat.DDI,Mode.NONE);
+		ValidationMessage valida4 = validator.validateMode(OutFormat.DDI,Mode.PROCESS);
+		ValidationMessage valida5 = validator.validateMode(OutFormat.DDI,null);	
+		
+		
+		Assertions.assertFalse(valida0.isValid());
+		Assertions.assertFalse(valida1.isValid());
+		Assertions.assertFalse(valida2.isValid());
+		Assertions.assertTrue(valida3.isValid());
+		Assertions.assertFalse(valida4.isValid());
+		Assertions.assertTrue(valida5.isValid());
+		
+	}
+	
+	@Test
+	public void validateModeFO() {
+
+		
+		ValidationMessage validb0 = validator.validateMode(OutFormat.FO,Mode.CAWI);
+		ValidationMessage validb1 = validator.validateMode(OutFormat.FO,Mode.PAPI);
+		ValidationMessage validb2 = validator.validateMode(OutFormat.FO,Mode.CAPI_CATI);
+		ValidationMessage validb3 = validator.validateMode(OutFormat.FO,Mode.NONE);
+		ValidationMessage validb4 = validator.validateMode(OutFormat.FO,Mode.PROCESS);
+		ValidationMessage validb5 = validator.validateMode(OutFormat.FO,null);	
+	
+		
+		Assertions.assertFalse(validb0.isValid());
+		Assertions.assertTrue(validb1.isValid());
+		Assertions.assertFalse(validb2.isValid());
+		Assertions.assertFalse(validb3.isValid());
+		Assertions.assertFalse(validb4.isValid());
+		Assertions.assertTrue(validb5.isValid());
+	}
+	
+	@Test
+	public void validateModeFODT() {
+		
+		ValidationMessage validc0 = validator.validateMode(OutFormat.FODT,Mode.CAWI);
+		ValidationMessage validc1 = validator.validateMode(OutFormat.FODT,Mode.PAPI);
+		ValidationMessage validc2 = validator.validateMode(OutFormat.FODT,Mode.CAPI_CATI);
+		ValidationMessage validc3 = validator.validateMode(OutFormat.FODT,Mode.NONE);
+		ValidationMessage validc4 = validator.validateMode(OutFormat.FODT,Mode.PROCESS);
+		ValidationMessage validc5 = validator.validateMode(OutFormat.FODT,null);
+		
+		Assertions.assertFalse(validc0.isValid());
+		Assertions.assertFalse(validc1.isValid());
+		Assertions.assertFalse(validc2.isValid());
+		Assertions.assertTrue(validc3.isValid());
+		Assertions.assertFalse(validc4.isValid());
+		Assertions.assertTrue(validc5.isValid());
+		
+	}
+	
+	@Test
+	public void validateMode() {
+		
+		ValidationMessage validd0 = validator.validateMode(OutFormat.XFORMS,Mode.CAWI);
+		ValidationMessage validd1 = validator.validateMode(OutFormat.XFORMS,Mode.PAPI);
+		ValidationMessage validd2 = validator.validateMode(OutFormat.XFORMS,Mode.CAPI_CATI);
+		ValidationMessage validd3 = validator.validateMode(OutFormat.XFORMS,Mode.NONE);
+		ValidationMessage validd4 = validator.validateMode(OutFormat.XFORMS,Mode.PROCESS);
+		ValidationMessage validd5 = validator.validateMode(OutFormat.XFORMS,null);	
+		
+		Assertions.assertTrue(validd0.isValid());
+		Assertions.assertFalse(validd1.isValid());
+		Assertions.assertFalse(validd2.isValid());
+		Assertions.assertFalse(validd3.isValid());
+		Assertions.assertFalse(validd4.isValid());
+		Assertions.assertTrue(validd5.isValid());
 	}
 }

@@ -19,7 +19,7 @@
         <xs:complexType>
             <xs:all>
                 <xs:element name="Pipeline" type="Pipeline" minOccurs="1" maxOccurs="1"/>
-                <xs:element name="Mode" type="Mode" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="Mode" type="Mode" minOccurs="0" maxOccurs="1"/>
                 <xs:element name="Parameters" type="Parameters" minOccurs="1" maxOccurs="1"/>
             </xs:all>
         </xs:complexType>
@@ -78,7 +78,7 @@
     
     <xs:simpleType name="Mode">
         <xs:restriction base="xs:token">
-            <xs:enumeration value="capi"/>
+            <xs:enumeration value="cawi"/>
             <xs:enumeration value="capi-cati"/>
             <xs:enumeration value="none"/>    
             <xs:enumeration value="papi"/>
