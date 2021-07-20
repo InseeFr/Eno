@@ -236,7 +236,14 @@
                     <xsl:variable name="other" select="$label[position() &gt; 1]"/>
                     <xsl:value-of select="concat('&quot;',$number,'&quot; || ')"/>
                     <xsl:for-each select="$other">
-                        <xsl:value-of select="."/>
+                        <xsl:choose>
+                            <xsl:when test="matches($other,'^&quot;.*&quot;$|.*\|\|.*|cast\(.*,string\)')">
+                                <xsl:value-of select="."/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="concat('&quot;',.,'&quot;')"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:for-each>
                 </xsl:when>
                 <xsl:when test="$label != ''">
