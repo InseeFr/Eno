@@ -237,7 +237,7 @@
                     <xsl:value-of select="concat('&quot;',$number,'&quot; || ')"/>
                     <xsl:for-each select="$other">
                         <xsl:choose>
-                            <xsl:when test="matches($other,'^&quot;.*&quot;$')">
+                            <xsl:when test="matches($other,'^&quot;.*&quot;$|.*\|\|.*|cast\(.*,string\)')">
                                 <xsl:message select="concat('Quotes trouvées dans : ',.)"/>
                                 <xsl:value-of select="."/>
                             </xsl:when>
