@@ -236,7 +236,16 @@
                     <xsl:variable name="other" select="$label[position() &gt; 1]"/>
                     <xsl:value-of select="concat('&quot;',$number,'&quot; || ')"/>
                     <xsl:for-each select="$other">
-                        <xsl:value-of select="."/>
+                        <xsl:choose>
+                            <xsl:when test="matches($other,'^&quot;.*&quot;$')">
+                                <xsl:message select="concat('Quotes trouvées dans : ',.)"/>
+                                <xsl:value-of select="."/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:message select="concat('Quotes non trouvées dans : ',.)"/>
+                                <xsl:value-of select="concat('&quot;',.,'&quot;')"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:for-each>
                 </xsl:when>
                 <xsl:when test="$label != ''">
