@@ -19,7 +19,7 @@
         <xsl:apply-templates select="$default-parameters/*"/>
     </xsl:template>
     
-    <xsl:template match="Pipeline | Languages" priority="3">
+    <xsl:template match="Pipeline | Languages | Mode" priority="3">
         <xsl:variable name="name" select="name(.)"/>
         <xsl:choose>
             <xsl:when test="$root//.[name(.) = $name]">

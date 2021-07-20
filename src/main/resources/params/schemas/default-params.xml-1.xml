@@ -2,8 +2,6 @@
 
     <Pipeline/>
 
-    <Mode/>
-
     <Parameters>
         <Context>default</Context>
 
@@ -71,7 +69,7 @@
             <FilterDescription>false</FilterDescription>
             <AddFilterResult>false</AddFilterResult>
             <MissingVar>false</MissingVar>
-            <Pagination>question</Pagination>
+            <Pagination>none</Pagination>
         </lunatic-xml-parameters>
 
         <fodt-parameters/>

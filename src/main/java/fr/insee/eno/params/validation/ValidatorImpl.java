@@ -62,7 +62,7 @@ public class ValidatorImpl implements Validator {
 				isValid=false;
 				break;
 			}
-			message += isValid ? "" : "The combination (in:'"+inFormat.value()+"'/out:'"+ outFormat.value() +"')"+" format is not valid"; 
+			message += isValid ? "" : "The combination (in:'"+inFormat.value()+"'/out:'"+ outFormat.value() +"')"+" is not valid"; 
 		}
 		else {
 			message = "One of In/Out format doesn't exist in Eno. ";
@@ -147,32 +147,6 @@ public class ValidatorImpl implements Validator {
 		return new ValidationMessage(message, isValid);
 	}
 	
-//	@Override
-//	public ValidationMessage validateModeLunatic(Mode mode) {
-//		boolean isValid = mode!=null;
-//		String message = "";
-//		if(isValid) {
-//			switch (mode) {
-//			case PAPI:
-//				isValid = false;
-//				break;
-//			case NONE:
-//				isValid = false;
-//				break;
-//			default:
-//				isValid=true;
-//				break;
-//			}
-//			message += isValid ? "" : "The mode:'"+mode.value()+"' is not valid for lunatic"; 
-//		}
-//		else {
-//			message = "The mode is mandatory for lunatic or the mode doesn't exist in Eno. ";
-//		}
-//
-//		message += isValid ? "The mode is valid" : "";
-//		LOGGER.info(message);
-//		return new ValidationMessage(message, isValid);
-//	}
 	
 	@Override
 	public ValidationMessage validateMode(OutFormat outFormat, Mode mode) {
@@ -205,7 +179,7 @@ public class ValidatorImpl implements Validator {
 
 		}
 		else {
-			message = "The mode null is not authorized only for Lunatic. ";
+			message = "The mode is null (error if output = Lunatic). ";
 		}
 
 		message += isValid ? "The combination (out:'"+outFormat.value()+"'/mode:'"+ (mode!=null? mode.value() : "null") +"')"+" format is valid":"";
