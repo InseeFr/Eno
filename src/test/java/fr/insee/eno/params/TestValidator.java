@@ -107,7 +107,7 @@ public class TestValidator {
 		ValidationMessage valid0 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.CAWI);
 		ValidationMessage valid1 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.PAPI);
 		ValidationMessage valid2 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.CAPI_CATI);
-		ValidationMessage valid3 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.NONE);
+		ValidationMessage valid3 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.ALL);
 		ValidationMessage valid4 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.PROCESS);
 		ValidationMessage valid5 = validator.validateMode(OutFormat.LUNATIC_XML,null);	
 		
@@ -128,7 +128,7 @@ public class TestValidator {
 		ValidationMessage valida0 = validator.validateMode(OutFormat.DDI,Mode.CAWI);
 		ValidationMessage valida1 = validator.validateMode(OutFormat.DDI,Mode.PAPI);
 		ValidationMessage valida2 = validator.validateMode(OutFormat.DDI,Mode.CAPI_CATI);
-		ValidationMessage valida3 = validator.validateMode(OutFormat.DDI,Mode.NONE);
+		ValidationMessage valida3 = validator.validateMode(OutFormat.DDI,Mode.ALL);
 		ValidationMessage valida4 = validator.validateMode(OutFormat.DDI,Mode.PROCESS);
 		ValidationMessage valida5 = validator.validateMode(OutFormat.DDI,null);	
 		
@@ -149,7 +149,7 @@ public class TestValidator {
 		ValidationMessage validb0 = validator.validateMode(OutFormat.FO,Mode.CAWI);
 		ValidationMessage validb1 = validator.validateMode(OutFormat.FO,Mode.PAPI);
 		ValidationMessage validb2 = validator.validateMode(OutFormat.FO,Mode.CAPI_CATI);
-		ValidationMessage validb3 = validator.validateMode(OutFormat.FO,Mode.NONE);
+		ValidationMessage validb3 = validator.validateMode(OutFormat.FO,Mode.ALL);
 		ValidationMessage validb4 = validator.validateMode(OutFormat.FO,Mode.PROCESS);
 		ValidationMessage validb5 = validator.validateMode(OutFormat.FO,null);	
 	
@@ -168,7 +168,7 @@ public class TestValidator {
 		ValidationMessage validc0 = validator.validateMode(OutFormat.FODT,Mode.CAWI);
 		ValidationMessage validc1 = validator.validateMode(OutFormat.FODT,Mode.PAPI);
 		ValidationMessage validc2 = validator.validateMode(OutFormat.FODT,Mode.CAPI_CATI);
-		ValidationMessage validc3 = validator.validateMode(OutFormat.FODT,Mode.NONE);
+		ValidationMessage validc3 = validator.validateMode(OutFormat.FODT,Mode.ALL);
 		ValidationMessage validc4 = validator.validateMode(OutFormat.FODT,Mode.PROCESS);
 		ValidationMessage validc5 = validator.validateMode(OutFormat.FODT,null);
 		
@@ -187,7 +187,7 @@ public class TestValidator {
 		ValidationMessage validd0 = validator.validateMode(OutFormat.XFORMS,Mode.CAWI);
 		ValidationMessage validd1 = validator.validateMode(OutFormat.XFORMS,Mode.PAPI);
 		ValidationMessage validd2 = validator.validateMode(OutFormat.XFORMS,Mode.CAPI_CATI);
-		ValidationMessage validd3 = validator.validateMode(OutFormat.XFORMS,Mode.NONE);
+		ValidationMessage validd3 = validator.validateMode(OutFormat.XFORMS,Mode.ALL);
 		ValidationMessage validd4 = validator.validateMode(OutFormat.XFORMS,Mode.PROCESS);
 		ValidationMessage validd5 = validator.validateMode(OutFormat.XFORMS,null);	
 		

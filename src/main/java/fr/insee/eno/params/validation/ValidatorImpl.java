@@ -155,10 +155,10 @@ public class ValidatorImpl implements Validator {
 		if(mode!=null) {
 			switch (outFormat) {
 			case DDI:
-				isValid = mode.equals(Mode.NONE);
+				isValid = mode.equals(Mode.ALL);
 				break;
 			case FODT:
-				isValid = mode.equals(Mode.NONE);
+				isValid = mode.equals(Mode.ALL);
 				break;
 			case FO:
 				isValid = mode.equals(Mode.PAPI);
