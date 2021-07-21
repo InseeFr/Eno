@@ -235,7 +235,7 @@ public class XslTransformation {
 	 * @param input          : the input xml file
 	 * @param xslSheet       : the xsl stylesheet that will be used
 	 * @param output         : the xml output that will be created
-	 * @param in2out         : main transformation
+	 * @param parameters :  parameters
 	 * @throws Exception : if the factory couldn't be found or if the paths are
 	 *                   incorrect
 	 */
