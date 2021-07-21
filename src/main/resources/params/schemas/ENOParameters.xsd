@@ -80,7 +80,7 @@
         <xs:restriction base="xs:token">
             <xs:enumeration value="cawi"/>
             <xs:enumeration value="capi-cati"/>
-            <xs:enumeration value="none"/>    
+            <xs:enumeration value="all"/>    
             <xs:enumeration value="papi"/>
             <!-- process is a phase of gsbpm and not a mode but the case being unique for the moment 
                 (the others being all of the collection phase), we treat it for the moment as a mode for simplicity. 

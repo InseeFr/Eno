@@ -40,8 +40,8 @@
         <xsl:otherwise>
             <xsl:choose>
                 <xsl:when test="$root/ENOParameters/Pipeline/OutFormat = 'xforms'"><xsl:value-of select="'cawi'"/></xsl:when>
-                <xsl:when test="$root/ENOParameters/Pipeline/OutFormat = 'ddi'"><xsl:value-of select="'none'"/></xsl:when>
-                <xsl:when test="$root/ENOParameters/Pipeline/OutFormat = 'fodt'"><xsl:value-of select="'none'"/></xsl:when>
+                <xsl:when test="$root/ENOParameters/Pipeline/OutFormat = 'ddi'"><xsl:value-of select="'all'"/></xsl:when>
+                <xsl:when test="$root/ENOParameters/Pipeline/OutFormat = 'fodt'"><xsl:value-of select="'all'"/></xsl:when>
                 <xsl:when test="$root/ENOParameters/Pipeline/OutFormat = 'fo'"><xsl:value-of select="'papi'"/></xsl:when>
             </xsl:choose>
         </xsl:otherwise>
