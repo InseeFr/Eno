@@ -269,7 +269,7 @@
 			<xsl:with-param name="typeOfQuestion" select="self::*/name()" tunnel="yes"/>
 			<xsl:with-param name="declarations" select="enolunatic:getInstructionForQuestion($source-context,.)" as="node()*" tunnel="yes"/>
 			<xsl:with-param name="filterCondition" select="$filterCondition" tunnel="yes"/>
-			<xsl:with-param name="filterConditionDependencies" select="$filterDependencies" tunnel="yes"/>
+			<xsl:with-param name="filterConditionDependencies" select="$filterDependencies" as="xs:string*" tunnel="yes"/>
 			<xsl:with-param name="dependencies" select="$dependencies" tunnel="yes"/>
 		</xsl:apply-templates>
 
@@ -339,7 +339,7 @@
 			<xsl:call-template name="enolunatic:add-calculated-variable-filter-result">
 				<xsl:with-param name="name" select="$questionName"/>
 				<xsl:with-param name="expression" select="$filterCondition"/>
-				<xsl:with-param name="dependencies" select="enolunatic:find-variables-in-formula($filter)" as="xs:string*"/>
+				<xsl:with-param name="dependencies" select="$filterDependencies" as="xs:string*"/>
 				<xsl:with-param name="idLoop" select="$idLoop"/>
 				<xsl:with-param name="languages" select="$languages"/>
 			</xsl:call-template>
@@ -476,7 +476,7 @@
 			<xsl:call-template name="enolunatic:add-calculated-variable-filter-result">
 				<xsl:with-param name="name" select="$questionName"/>
 				<xsl:with-param name="expression" select="$filterCondition"/>
-				<xsl:with-param name="dependencies" select="enolunatic:find-variables-in-formula($filter)" as="xs:string*"/>
+				<xsl:with-param name="dependencies" select="$filterDependencies" as="xs:string*"/>
 				<xsl:with-param name="idLoop" select="$idLoop"/>
 				<xsl:with-param name="languages" select="$languages"/>
 			</xsl:call-template>

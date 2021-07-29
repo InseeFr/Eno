@@ -378,14 +378,15 @@
         <xsl:param name="dependencies" as="xs:string*"/>
         <xsl:variable name="results" as="xs:string*">
             <xsl:for-each select="$dependencies">
+                <xsl:call-template name="enolunatic:add-dependencies">
+                    <xsl:with-param name="name" select="."/>
+                </xsl:call-template>
                 <xsl:copy-of select="enolunatic:get-all-dependencies(.)"/>
             </xsl:for-each>
         </xsl:variable>
-        <xsl:for-each select="distinct-values($results)">                
-            <xsl:call-template name="enolunatic:add-dependencies">
-                <xsl:with-param name="name" select="."/>
-            </xsl:call-template>
-        </xsl:for-each>
+        <xsl:call-template name="enolunatic:add-all-dependencies">
+            <xsl:with-param name="dependencies" select="$results"/>
+        </xsl:call-template>
     </xsl:template>
     
     <xsl:template name="enolunatic:add-all-dependencies">
