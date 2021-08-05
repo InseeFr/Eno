@@ -1,4 +1,4 @@
-name: Test on PR
+name: Test on push or PR
 
 on:
   pull_request:
@@ -17,7 +17,6 @@ jobs:
         with:
           java-version: 11
       - name: Build with Maven Eno
-        working-directory: ./Eno
         run: mvn clean process-classes package install -DskipTests=true -Dmaven.javadoc.skip=true -Djar.finalName="eno-core" -B -V --file pom.xml
       - name: Test, package and analyze with maven & SonarCloud
         run: mvn -e verify sonar:sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr -Dsonar.host.url=https://sonarcloud.io
