@@ -2,7 +2,7 @@
 
 # Eno – Questionnaire generator
 
-[![Eno CI](https://github.com/InseeFr/Eno/actions/workflows/build-release.yml/badge.svg)](https://github.com/InseeFr/Eno/actions/workflows/build-release.yml)
+[![Eno CI](https://github.com/InseeFr/Eno/actions/workflows/test.yml/badge.svg)](https://github.com/InseeFr/Eno/actions/workflows/test.yml)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/fr.insee.eno/eno-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/fr.insee.eno/eno-core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
