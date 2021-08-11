@@ -33,8 +33,8 @@
 	</issueManagement>
 
 	<ciManagement>
-		<system>Travis</system>
-		<url>https://travis-ci.org/InseeFr/Eno</url>
+		<system>Github Worflow</system>
+		<url>https://github.com/InseeFr/Eno/actions</url>
 	</ciManagement>
 
 	<distributionManagement>
