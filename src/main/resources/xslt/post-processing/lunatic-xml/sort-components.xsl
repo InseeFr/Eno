@@ -214,9 +214,15 @@
         <xsl:param name="loopDependencies" as="xs:string*" tunnel="yes" />
         <components>
             <xsl:copy-of select="@*"/>
+            <xsl:variable name="component-id" select="@id"/>
             <xsl:apply-templates select="h:label"/>
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
+            <xsl:for-each select="$root//h:controls[matches(@id,$component-id)]">
+                <controls>
+                    <xsl:copy-of select="node() | @*"/>
+                </controls>
+            </xsl:for-each>
             <xsl:apply-templates select="h:hierarchy"/>
             <xsl:apply-templates select="h:missingResponse"/>
             <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies[not(parent::h:conditionFilter)])" as="xs:string*"/>
