@@ -1030,7 +1030,11 @@
 				<xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
 			</xsl:if>
 			<xsl:if test="$criticality != ''">
-				<xsl:attribute name="criticality"><xsl:value-of select="$criticality"/></xsl:attribute>
+				<xsl:choose>
+					<xsl:when test="$criticality='warning'"><xsl:attribute name="criticality"><xsl:value-of select="'WARN'"/></xsl:attribute></xsl:when>
+					<xsl:when test="$criticality='stumblingblock'"><xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute></xsl:when>
+					<xsl:otherwise><xsl:attribute name="criticality"><xsl:value-of select="'INFO'"/></xsl:attribute></xsl:otherwise>
+				</xsl:choose>
 			</xsl:if>
 			<xsl:if test="$control!=''">
 				<control><xsl:value-of select="normalize-space(enolunatic:replace-all-variables-with-business-name($source-context,$control))"/></control>
