@@ -124,7 +124,7 @@
             <controls id="j6q9h8tj-CI-0" criticality="WARN">
                <control>not(SEASON_NUMBER = 0)</control>
                <errorMessage>"Please enter a season number"</errorMessage>
-               <dependencies>SEASON_NUMBER</dependencies>
+               <bindingDependencies>SEASON_NUMBER</bindingDependencies>
             </controls>
             <hierarchy>
                <sequence id="j6p0ti5h">

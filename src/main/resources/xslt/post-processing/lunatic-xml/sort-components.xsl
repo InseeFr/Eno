@@ -220,7 +220,10 @@
             <xsl:apply-templates select="h:conditionFilter"/>
             <xsl:for-each select="$root//h:controls[matches(@id,$component-id)]">
                 <controls>
-                    <xsl:copy-of select="node() | @*"/>
+                    <xsl:copy-of select="*[not(self::h:dependencies)] | @*"/>
+                    <xsl:call-template name="enolunatic:add-all-dependencies">
+                        <xsl:with-param name="dependencies" select="distinct-values(descendant::h:dependencies)"/>
+                    </xsl:call-template>
                 </controls>
             </xsl:for-each>
             <xsl:apply-templates select="h:hierarchy"/>
