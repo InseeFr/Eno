@@ -1008,14 +1008,13 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 
-		<xsl:variable name="nameOfControl" select="enolunatic:get-check-name($source-context,$languages[1])"/>
+		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
 		<xsl:variable name="control" select="enolunatic:get-constraint($source-context)"/>
-		<xsl:variable name="instructionFormat" select="enolunatic:get-css-class($source-context)"/>
-		<xsl:variable name="instructionLabel" select="enolunatic:get-vtl-label($source-context, $languages[1])"/>
-		<xsl:variable name="alertLevel" select="enolunatic:get-alert-level($source-context)"/>
+		<xsl:variable name="errorMessage" select="enolunatic:get-vtl-label($source-context, $languages[1])"/>
+		<xsl:variable name="criticality" select="enolunatic:get-alert-level($source-context)"/>
 
 		<xsl:variable name="controlDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($control)"/>
-		<xsl:variable name="instructionDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($instructionLabel)"/>
+		<xsl:variable name="instructionDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($errorMessage)"/>
 		<xsl:variable name="dependenciesVariables" as="xs:string*">
 			<xsl:for-each select="$controlDependencies">
 				<xsl:sequence select="."/>
@@ -1026,19 +1025,18 @@
 		</xsl:variable>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
 
-		<control>
-			<xsl:if test="$alertLevel != ''">
-				<xsl:attribute name="level" select="$alertLevel"/>
+		<controls>
+			<xsl:if test="$id != ''">
+				<xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
+			</xsl:if>
+			<xsl:if test="$criticality != ''">
+				<xsl:attribute name="criticality"><xsl:value-of select="$criticality"/></xsl:attribute>
 			</xsl:if>
 			<xsl:if test="$control!=''">
-				<title><xsl:value-of select="concat(upper-case($alertLevel),' control : ',$nameOfControl)"/></title>
-				<value>
-					<xsl:value-of select="normalize-space(enolunatic:replace-all-variables-with-business-name($source-context,$control))"/>
-				</value>
+				<control><xsl:value-of select="normalize-space(enolunatic:replace-all-variables-with-business-name($source-context,$control))"/></control>
 			</xsl:if>
-
-			<xsl:if test="$instructionLabel!=''">
-				<instruction><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$instructionLabel)"/></instruction>
+			<xsl:if test="$errorMessage!=''">
+				<errorMessage><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$errorMessage)"/></errorMessage>
 			</xsl:if>
 			<xsl:copy-of select="$dependencies"/>
 
@@ -1046,7 +1044,8 @@
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
-		</control>
+		</controls>
+		
 	</xsl:template>
 
 	<xd:doc>
