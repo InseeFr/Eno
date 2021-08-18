@@ -4,6 +4,9 @@
     <!-- It expects an 'input-file' param for the beginning file uri of the pipeline.  -->
     <target name="ddiPreprocessing">
         
+        <antcall target="multimodal-selection">
+            <param name="input-file" value="${preprocessing-input-file}"/>
+        </antcall>
         <!-- md2whtml : modifying the DDI file to transform markdown formatting -->
         <!-- Only for formats that need it (target is all except lunatic, right now we keep doing it for all) --> 
         <!-- <if>
@@ -12,7 +15,7 @@
             </not>
             <then> -->
                 <antcall target="md2xhtml">
-                    <param name="input-file" value="${preprocessing-input-file}"/>
+                    <param name="input-file" value="${temp.home}/${survey-name}/${Properties.InFormat}/multimodal-selected.tmp"/>
                 </antcall>
         <!--</then>
              <else>
@@ -46,7 +49,7 @@
         <!-- Creating a -cleaned suffixed file -->
         <foreach target="cleaning" param="file" inheritall="true">
             <path>
-                <fileset dir="${temp.home}/${survey-name}/${Properties.InFormat}" excludes="*-md.tmp, *-dereferenced.tmp, null.tmp"/>
+                <fileset dir="${temp.home}/${survey-name}/${Properties.InFormat}" excludes="multimodal-selected.tmp, *-md.tmp, *-dereferenced.tmp, null.tmp"/>
             </path>
         </foreach>
         <!-- Then adding titles to the created file below -->
@@ -65,6 +68,14 @@
         </if>
     </target>
     
+    
+    <!-- Markdown to xhtml -->
+    <target name="multimodal-selection">		
+        <xslt in="${input-file}"
+            out="${temp.home}/${survey-name}/${Properties.InFormat}/multimodal-selected.tmp"
+            style="${xslt.home}/pre-processing/ddi/multimodal-selection.xsl" classpath="${saxon.jar}" force="true">
+        </xslt>
+    </target>
     
     <!-- Markdown to xhtml -->
     <target name="md2xhtml">		
