@@ -3,6 +3,28 @@
     <!-- This target will call 1+3 sub targets : mapping ; dereferencing / cleaning / titling -->
     <!-- It expects an 'input-file' param for the beginning file uri of the pipeline.  -->
     <target name="ddiPreprocessing">
+        
+        <antcall target="multimodal-selection">
+            <param name="input-file" value="${preprocessing-input-file}"/>
+        </antcall>
+        <!-- md2whtml : modifying the DDI file to transform markdown formatting -->
+        <!-- Only for formats that need it (target is all except lunatic, right now we keep doing it for all) --> 
+        <!-- <if>
+            <not>
+                <equals arg1="${Properties.OutFormat}" arg2="lunatic-xml"/>
+            </not>
+            <then> -->
+                <antcall target="md2xhtml">
+                    <param name="input-file" value="${temp.home}/${survey-name}/${Properties.InFormat}/multimodal-selected.tmp"/>
+                </antcall>
+        <!--</then>
+             <else>
+                <antcall target="md2md">
+                    <param name="input-file" value="${preprocessing-input-file}"/>
+                </antcall>
+            </else>
+        </if> -->
+        
         <!-- Mapping : the input DDI files (ccs, qb...) -->
         <!-- Creates a mapping.tmp file in the temp folder-->
         <if>
@@ -21,13 +43,13 @@
         <!-- Dereferencing : the input DDI files (ccs, qb...) -->
         <!-- Creates multiple files with a -dereferenced suffix in the temp folder-->
         <antcall target="dereferencing">
-            <param name="input-file" value="${preprocessing-input-file}"/>
+            <param name="input-file" value="${temp.home}/${survey-name}/${Properties.InFormat}/final-md.tmp"/>
         </antcall>
         <!-- For each created file (one by model), we clean. -->
         <!-- Creating a -cleaned suffixed file -->
         <foreach target="cleaning" param="file" inheritall="true">
             <path>
-                <fileset dir="${temp.home}/${survey-name}/${Properties.InFormat}" excludes="*-dereferenced.tmp, null.tmp"/>
+                <fileset dir="${temp.home}/${survey-name}/${Properties.InFormat}" excludes="multimodal-selected.tmp, *-md.tmp, *-dereferenced.tmp, null.tmp"/>
             </path>
         </foreach>
         <!-- Then adding titles to the created file below -->
@@ -44,6 +66,34 @@
                 </foreach>                
             </then>
         </if>
+    </target>
+    
+    
+    <!-- Markdown to xhtml -->
+    <target name="multimodal-selection">		
+        <xslt in="${input-file}"
+            out="${temp.home}/${survey-name}/${Properties.InFormat}/multimodal-selected.tmp"
+            style="${xslt.home}/pre-processing/ddi/multimodal-selection.xsl" classpath="${saxon.jar}" force="true">
+        </xslt>
+    </target>
+    
+    <!-- Markdown to xhtml -->
+    <target name="md2xhtml">		
+        <xslt in="${input-file}"
+            out="${temp.home}/${survey-name}/${Properties.InFormat}/first-md.tmp"
+            style="${xslt.home}/pre-processing/ddi/md2xhtml.xsl" classpath="${saxon.jar}" force="true">
+        </xslt>
+        
+        <xslt in="${temp.home}/${survey-name}/${Properties.InFormat}/first-md.tmp"
+            out="${temp.home}/${survey-name}/${Properties.InFormat}/final-md.tmp"
+            style="${xslt.home}/pre-processing/ddi/tweak-xhtml-for-ddi.xsl" force="true" classpath="${saxon.jar}">
+        </xslt>
+    </target>
+    
+    <!-- Markdown to markdown (just copying to keep coherent naming for later input) -->
+    <target name="md2md">
+        <copy file="${input-file}"
+            tofile="${temp.home}/${survey-name}/${Properties.InFormat}/final-md.tmp"/>
     </target>
     
     <!-- Dereferencing -->

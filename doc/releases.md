@@ -1,11 +1,65 @@
-# Eno Releases 
+# Eno Releases note
+
+## 2.2.10 - 13/07/2021
+- **[dependencies]** Upgrading dependencies versions. 
+- **[javadoc]** Corrections of errors.
+- **[ddi2out][pre-processing]** Pre-processing md2xhtml : adding support of markdown links (only specific cases were supported so far)
+- **[ddi2out][pre-processing]** Pre-processing tweak-xhtml-for-ddi : not using xsl:key (does not work) but matches in conditions for footnote pattern recognition
+- **[ddi2fo][post-processing]** Revert to non informative barcode in first page of ***business*** fo forms (released in Eno v2.2.1).
+
+## 2.2.9 - 21/06/21
+
+- **[ddi2out][pre-processing]** Redesigning of the numbering (titling.xsl). From now on, there are only 3 parameters which are: choice of the numbering of the questions (number the questions or not, and, if so, to number them in sequence or on the whole questionnaire), choice of sequence numbering (number or not the sequences), display of the symbol in front of the numbering (display or not the "arrow" symbol before the questions)
+- **[ddi2xforms][post-processing]** Replacing 'lien-deconnexion' by 'logout-uri' for the property of the close button (insert-end.xsl) (internationalization)
+- **[ddi2xforms][core]** adding a title attribute to img (digital accessibility)
+
+## 2.2.8 - 04/06/2021
+
+- **[dependencies]** Upgrading dependencies versions (in particular Saxon version to 10.5, maven compiler to 11). 
+- **[ddi2fo][post-processing]** Renaming the fo file in the zip intended for Insee integrators. 
+
+## 2.2.7 - 20/05/2021
+
+- **[ddi2fo][core]** Fixing issue where the message related to a Filter would not be displayed in fo/pdf output
+- **[poguesXML2ddi][core]** Fixing an issue with pogues2ddi transformation not preventing a GoTo that would point to a loop. It now crashes with an error
+- **[poguesXML2ddi][core]** Retrieving name of loops from Pogues-XML into DDI
+- **[ddi2out][pre-processing]** The transformation markdown to xhtml (md2xhtml) is no longer a post-processing for poguesXML2ddi but now a pre-processing for ddi2output. For now, all output formats use it, but should change soon with Lunatic
+- **[poguesXML2ddi][core]** When Pogues defines the collection mode for Instructions, they are now correctly transcribed into DDI
+- **[ddi2out][core]** When DDI defines the collection mode for Instructions, they are now kept for the right output formats based on the collection mode that has been specified
+
+## 2.2.6 - 10/05/2021
+
+- **[dependencies]** Upgrading Saxon version to 9.9.1-8 to solve some performance issues.
+
+## 2.2.5 - 12/04/2021
+
+- **[ddi2xforms][core]** Fixing issue for Insee data collection platform when specifying variable type in xforms bind for external variables when they were not initialized : now type is not specified for external variables. 
+- **[poguesXML2ddi][core]** Adding support of formulas in loop minimum for ddi from pogues-xml format.
+- **[ddi2lunaticXML][post-processing]** Adding lunatic post-processing to manage pagination.
+- **[test]** Upgrading to unit test version : junit 5.
+
+
+## 2.2.4 - 31/03/2021
+
+- **[ddi2fo][post-processing]** Updating fo accompanying mails cnrCOL and medCOL.
+
+## 2.2.3 - 24/03/2021
+
+- **[poguesXML2ddi][core]** hotfix : The referenced variables must be framed by ¤ and not $.
+- **[poguesXML2ddi][core]** hotfix : Adding support of filtered loops in pogues-xml.
+
+## 2.2.2 - 16/03/2021
+
+- **[poguesXML2ddi][core]** Allowing a ControlConstructReference to point to a QuestionConstruct (for dynamic tables). Until now, it was wrongly pointing as a Loop (in r:TypeOfObject).
+- **[ddi2fodt][core]** Adding support of loops and filters for display in fodt format (the format used to produce the questionnaires' specifications).
+- **[ddi2lunaticXML][post-processing]** Fixing vtl parser : (space after ',').
 
 ## 2.2.1 - 10/02/2021
 
-- **[ddi2xforms][core] Hotfix xforms calculated var in dynamic array
+- **[ddi2xforms][core]** Hotfix xforms calculated var in dynamic array
 - **[ddi2fo][post-processing]** Adding meaningful barcode for the cover page of ***business*** fo forms in portrait format. The barcode is of the datamatrix kind and contains {Identifier of surveyed unit} - {Short label of survey} - {Year of the survey} - {Period of the survey}.
 - **[ddi2fo][post-processing]** Updating ***business*** fo accompanying mails.
-- **[ddi2lunaticXML][post-processing]** Adding specific treatment for DDI2lunaticXML pipeline.
+- **[ddi2lunaticXML][post-processing]** Adding specific treatment for ddi2lunaticXML pipeline.
 
 ## 2.2.0 - 22/01/2021
 

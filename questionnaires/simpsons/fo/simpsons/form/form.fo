@@ -215,7 +215,7 @@
                    text-align="left"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">I - Introduction</fo:block>
+                   keep-together.within-column="always">Introduction</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -240,7 +240,7 @@
                    page-break-inside="avoid"
                    keep-with-next="always"
                    keep-together.within-column="always">
-            <fo:block>➡ 1. Before starting, do you have any comments about the Simpsons</fo:block>
+            <fo:block>1. Before starting, do you have any comments about the Simpsons</fo:block>
             <fo:block> family?</fo:block>
          </fo:block>
          <fo:block id="COMMENT" page-break-inside="avoid">
@@ -256,7 +256,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 2. Are you ready?</fo:block>
+                   keep-together.within-column="always">2. Are you ready?</fo:block>
          <fo:block id="READY" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -321,7 +321,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 3. Who is the producer?</fo:block>
+                   keep-together.within-column="always">3. Who is the producer?</fo:block>
          <fo:block id="PRODUCER" page-break-inside="avoid">
             <fo:block>
                <fo:block-container height="8mm"
@@ -340,7 +340,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 4. What is the current season number?</fo:block>
+                   keep-together.within-column="always">4. What is the current season number?</fo:block>
          <fo:block id="SEASON_NUMBER" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -364,7 +364,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 5. When was the first episode of the Simpsons?</fo:block>
+                   keep-together.within-column="always">5. When was the first episode of the Simpsons?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -391,7 +391,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 6. In your opinion, how much is the part of audience share in US for the 2016 season?</fo:block>
+                   keep-together.within-column="always">6. In your opinion, how much is the part of audience share in US for the 2016 season?</fo:block>
          <fo:block id="AUDIENCE_SHARE" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -421,7 +421,7 @@
                    text-align="left"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">II - Simpsons' city</fo:block>
+                   keep-together.within-column="always">Simpsons' city</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -439,7 +439,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 1. In which city do the Simpsons reside?</fo:block>
+                   keep-together.within-column="always">7. In which city do the Simpsons reside?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -503,7 +503,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 2. Who is the Simpsons city mayor?</fo:block>
+                   keep-together.within-column="always">8. Who is the Simpsons city mayor?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -581,7 +581,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 3. In which state do The Simpsons reside?</fo:block>
+                   keep-together.within-column="always">9. In which state do The Simpsons reside?</fo:block>
          <fo:block id="STATE" page-break-inside="avoid">
             <fo:block-container height="8mm"
                                 border-color="black"
@@ -602,7 +602,7 @@
                    text-align="left"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">III - Characters</fo:block>
+                   keep-together.within-column="always">Characters</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -611,7 +611,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 1. What are the pet names that the Simpsons family had?</fo:block>
+                   keep-together.within-column="always">10. What are the pet names that the Simpsons family had?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -708,7 +708,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 2. Does Jay like the following ice cream flavours?</fo:block>
+                   keep-together.within-column="always">11. Does Jay like the following ice cream flavours?</fo:block>
          <fo:block page-break-inside="avoid" id="ICE_FLAVOUR">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
@@ -911,7 +911,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 3. Which character works in the nuclear power plant?</fo:block>
+                   keep-together.within-column="always">12. Which character works in the nuclear power plant?</fo:block>
          <fo:block page-break-inside="avoid" id="NUCLEAR_CHARACTER">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
@@ -1054,7 +1054,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 4. In which city each character was born?</fo:block>
+                   keep-together.within-column="always">13. In which city each character was born?</fo:block>
          <fo:block page-break-inside="avoid" id="BIRTH_CHARACTER">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
@@ -1441,7 +1441,7 @@
                    text-align="left"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">IV - General questions</fo:block>
+                   keep-together.within-column="always">General questions</fo:block>
          <fo:block background-color="#CCCCCC"
                    color="black"
                    font-weight="bold"
@@ -1461,7 +1461,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 1. Please, specify the percentage of Jay's expenses in the Kwik-E-Mart for each product?</fo:block>
+                   keep-together.within-column="always">14. Please, specify the percentage of Jay's expenses in the Kwik-E-Mart for each product?</fo:block>
          <fo:block page-break-inside="avoid" id="PERCENTAGE_EXPENSES">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
@@ -1824,7 +1824,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 2. Who did these clownings and tell us what you remember?</fo:block>
+                   keep-together.within-column="always">15. Who did these clownings and tell us what you remember?</fo:block>
          <fo:block page-break-inside="avoid" id="CLOWNING">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
@@ -2057,7 +2057,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 3. Which of the following means of transport were used by the hero and in which country?</fo:block>
+                   keep-together.within-column="always">16. Which of the following means of transport were used by the hero and in which country?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2796,7 +2796,7 @@
                    text-align="left"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">V - Favourite characters</fo:block>
+                   keep-together.within-column="always">Favourite characters</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -2805,7 +2805,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 1. Please, complete the following grid with your favourite characters</fo:block>
+                   keep-together.within-column="always">17. Please, complete the following grid with your favourite characters</fo:block>
          <fo:block page-break-inside="avoid" id="FAVOURITE_CHARACTERS">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
@@ -6410,7 +6410,7 @@
                    text-align="left"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">VI - Comment</fo:block>
+                   keep-together.within-column="always">Comment</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -6419,7 +6419,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 1. Do you have any comment about the survey?</fo:block>
+                   keep-together.within-column="always">18. Do you have any comment about the survey?</fo:block>
          <fo:block id="SURVEY_COMMENT" page-break-inside="avoid">
             <fo:block-container height="40mm" border-color="black" border-style="solid">
                <fo:block> </fo:block>

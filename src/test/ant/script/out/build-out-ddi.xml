@@ -4,17 +4,11 @@
 	<property name="out-extension" value="xml"/>
 	<property name="out-folder" value="ddi"/>
 
-	<!-- jsPostProcessing : sort elements ; add generic questions ; put variables to the end -->
-	<target name="ddiPostProcessing">		
-		<xslt in="${postprocessing-input-file}"
-			out="${target-folder}/${survey-name}/${form-name}/form/form-xhtml.${out-extension}"
-			style="${xslt.home}/post-processing/ddi/mw2xhtml.xsl" classpath="${saxon.jar}" force="true">
-		</xslt>
-		
-		<xslt in="${target-folder}/${survey-name}/${form-name}/form/form-xhtml.${out-extension}"
-			out="${target-folder}/${survey-name}/${form-name}/form/form.${out-extension}"
-			style="${xslt.home}/post-processing/ddi/tweak-xhtml-for-ddi.xsl" force="true" classpath="${saxon.jar}">
-		</xslt>
-		
+	<!-- ddiPostProcessing : only copying the file basic-form.tmp to the target folder and renaming as form-->
+	<!-- The previous step of markdown to xhtml is now ddi pre-processing for the outputs that need it-->
+	<target name="ddiPostProcessing">	
+		<copy file="${postprocessing-input-file}"
+			tofile="${target-folder}/${survey-name}/${form-name}/form/form.${out-extension}"/>
 	</target>
+
 </project>

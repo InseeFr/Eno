@@ -1,14 +1,14 @@
 <ENOParameters>
-    
+
     <Pipeline>
         <InFormat>ddi</InFormat>
         <OutFormat>xforms</OutFormat>
-        
+        <PreProcessing>ddi-multimodal-selection</PreProcessing>
         <PreProcessing>ddi-mapping</PreProcessing>
         <PreProcessing>ddi-dereferencing</PreProcessing>
         <PreProcessing>ddi-cleaning</PreProcessing>
         <PreProcessing>ddi-titling</PreProcessing>
-        
+
         <PostProcessing>xforms-insert-generic-questions</PostProcessing>
         <PostProcessing>xforms-browsing</PostProcessing>
         <PostProcessing>xforms-insee-model</PostProcessing>
@@ -19,36 +19,33 @@
         <PostProcessing>xforms-specificTreatment</PostProcessing>
         <PostProcessing>xforms-fix-adherence</PostProcessing>
     </Pipeline>
-    
+
     <Parameters>
-        
+
         <Context>business</Context>
-        
+
         <Campagne>esem-2020-a00</Campagne>
-        
+
         <Languages>
             <Language>fr</Language>
         </Languages>
-        
+
         <BeginQuestion>
             <Identification>true</Identification>
         </BeginQuestion>
-        
+
         <EndQuestion>
             <ResponseTimeQuestion>true</ResponseTimeQuestion>
             <CommentQuestion>true</CommentQuestion>
         </EndQuestion>
-        
-        <xforms-parameters>            
+
+        <xforms-parameters>
             <NumericExample>false</NumericExample>
             <Deblocage>false</Deblocage>
             <Satisfaction>false</Satisfaction>
             <DecimalSeparator>.</DecimalSeparator>
         </xforms-parameters>
-        
-        <Title>
-            <Browsing>module</Browsing>
-        </Title>
+
     </Parameters>
-    
+
 </ENOParameters>

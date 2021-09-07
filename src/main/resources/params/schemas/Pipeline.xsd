@@ -40,6 +40,8 @@
         <xs:restriction base="xs:token">
             <xs:enumeration value="ddi-32-to-ddi-33"/>
             
+			<xs:enumeration value="ddi-multimodal-selection"/>
+            <xs:enumeration value="ddi-markdownToXhtml"/>
             <xs:enumeration value="ddi-mapping"/>
             <xs:enumeration value="ddi-dereferencing"/>
             <xs:enumeration value="ddi-cleaning"/>
@@ -54,7 +56,6 @@
     
     <xs:simpleType name="PostProcessing">
         <xs:restriction base="xs:token">
-            <xs:enumeration value="ddi-markdownToXhtml"/>
             
             <xs:enumeration value="ddi-specificTreatment"/>
             
@@ -69,10 +70,11 @@
             <xs:enumeration value="fo-insertAccompanyingMails"/>
             
             <xs:enumeration value="lunatic-xml-sortComponents"/>
-            <xs:enumeration value="lunatic-xml-specificTreatment"/>
             <xs:enumeration value="lunatic-xml-insert-generic-questions"/>
             <xs:enumeration value="lunatic-xml-externalizeVariables"/>
             <xs:enumeration value="lunatic-xml-vtlParser"/>
+            <xs:enumeration value="lunatic-xml-pagination"/>
+            <xs:enumeration value="lunatic-xml-specificTreatment"/>
             
             <xs:enumeration value="xforms-insert-generic-questions"/>
             <xs:enumeration value="xforms-browsing"/>

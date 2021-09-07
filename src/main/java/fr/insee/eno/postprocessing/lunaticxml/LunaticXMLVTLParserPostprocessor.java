@@ -101,17 +101,17 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 	 *  - listContext is the list which contains all context (the last context corresponds to the function wrote before '(' )
 	 *  - isBetweenRealDoubleQuote : boolean, true if the current char is between the char \" literally (and not " char), so if true, the current char is plain text
 	 *  - isBetweenRealSimpleQuote : boolean, true if the current char is between ' literally 
-	 *  - lastCastType is a string which defines what is the type fo the cast function (example : cast(ABCD,string) -> string)
+	 *  - lastCastType is a string which defines what is the type fo the cast function (example : cast(ABCD,string) return string)
 	 *  
 	 *  Transformations: 
-	 *  	x!=y -> x &lt;&gt; y (x <> y)
-	 *  	x div y -> x / y
-	 *  	substring(A,1,2) -> substr(A,1,2)
-	 *  	concat(A,B,C) -> A || B || C
-	 *  	cast(ABCD,integer) = '1' -> cast(ABCD,integer) = 1
-	 *  	'ABCD' -> "ABCD"
-	 *  	\"hello I'm very happy to be 'here' \" || cast('2021',string) -> \" hello I'm very happy to be 'here' \" || cast("2021",string)
-	 * 		cast(A,string) = null -> isnull(cast(A,string))
+	 *  	x!=y return x &lt;&gt; y (x &lt;&gt; y)
+	 *  	x div y return x / y
+	 *  	substring(A,1,2) return substr(A,1,2)
+	 *  	concat(A,B,C) return A || B || C
+	 *  	cast(ABCD,integer) = '1' return cast(ABCD,integer) = 1
+	 *  	'ABCD' return "ABCD"
+	 *  	\"hello I'm very happy to be 'here' \" || cast('2021',string) return \" hello I'm very happy to be 'here' \" || cast("2021",string)
+	 * 		cast(A,string) = null return isnull(cast(A,string))
 	 *
 	 * @param input : the string to parse
 	 * @return finalString : the result of parsing
@@ -136,7 +136,7 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 			}
 			else if(context.contains(FAKE_XPATH_EQUAL_TO_NULL) && !isBetweenRealDoubleQuote){
 				finalString+=c;
-				Pattern pattern = Pattern.compile("(cast\\((.)*,(\\w+)\\)) "+FAKE_XPATH_EQUAL_TO_NULL);
+				Pattern pattern = Pattern.compile("(cast\\((.)*,(\\s)*(\\w+)\\)) "+FAKE_XPATH_EQUAL_TO_NULL);
 				Matcher m = pattern.matcher(finalString);
 				if(m.find()) finalString = m.replaceAll(VTL_EQUAL_TO_NULL_FUNCTION+"($1)");
 				continue;

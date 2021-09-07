@@ -7,8 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.xmlunit.diff.Diff;
 
 import fr.insee.eno.Constants;
@@ -52,16 +52,16 @@ public class TestLunaticXMLVTLParserPostProcessor {
 		String test10 = "cast(cast(ABCD,string),integer) = null";
 		String expected10 = "isnull(cast(cast(ABCD,string),integer))";
 		
-		Assert.assertEquals(expected1, lunaticXMLVtlParserPostprocessor.parseToVTL(test1));
-		Assert.assertEquals(expected2, lunaticXMLVtlParserPostprocessor.parseToVTL(test2));
-		Assert.assertEquals(expected3, lunaticXMLVtlParserPostprocessor.parseToVTL(test3));
-		Assert.assertEquals(expected4, lunaticXMLVtlParserPostprocessor.parseToVTL(test4));
-		Assert.assertEquals(expected5, lunaticXMLVtlParserPostprocessor.parseToVTL(test5));
-		Assert.assertEquals(expected6, lunaticXMLVtlParserPostprocessor.parseToVTL(test6));
-		Assert.assertEquals(expected7, lunaticXMLVtlParserPostprocessor.parseToVTL(test7));
-		Assert.assertEquals(expected8, lunaticXMLVtlParserPostprocessor.parseToVTL(test8));
-		Assert.assertEquals(expected9, lunaticXMLVtlParserPostprocessor.parseToVTL(test9));
-		Assert.assertEquals(expected10, lunaticXMLVtlParserPostprocessor.parseToVTL(test10));
+		Assertions.assertEquals(expected1, lunaticXMLVtlParserPostprocessor.parseToVTL(test1));
+		Assertions.assertEquals(expected2, lunaticXMLVtlParserPostprocessor.parseToVTL(test2));
+		Assertions.assertEquals(expected3, lunaticXMLVtlParserPostprocessor.parseToVTL(test3));
+		Assertions.assertEquals(expected4, lunaticXMLVtlParserPostprocessor.parseToVTL(test4));
+		Assertions.assertEquals(expected5, lunaticXMLVtlParserPostprocessor.parseToVTL(test5));
+		Assertions.assertEquals(expected6, lunaticXMLVtlParserPostprocessor.parseToVTL(test6));
+		Assertions.assertEquals(expected7, lunaticXMLVtlParserPostprocessor.parseToVTL(test7));
+		Assertions.assertEquals(expected8, lunaticXMLVtlParserPostprocessor.parseToVTL(test8));
+		Assertions.assertEquals(expected9, lunaticXMLVtlParserPostprocessor.parseToVTL(test9));
+		Assertions.assertEquals(expected10, lunaticXMLVtlParserPostprocessor.parseToVTL(test10));
 	}
 	
 	@Test
@@ -78,18 +78,18 @@ public class TestLunaticXMLVTLParserPostProcessor {
 			FileUtils.forceDelete(outPostProcessing);
 			File expectedFile = new File(String.format("%s/out.xml", basePath));
 			Diff diff = xmlDiff.getDiff(outputFilePath.toFile(),expectedFile);
-			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());
+			Assertions.assertFalse(diff::hasDifferences, ()->getDiffMessage(diff, basePath));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
-			Assert.fail();
+			Assertions.fail();
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-			Assert.fail();
+			Assertions.fail();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-			Assert.fail();
+			Assertions.fail();
 		} 
 	}
 	

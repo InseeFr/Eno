@@ -9,14 +9,15 @@ public interface Validator {
 	
 	/**
 	 * It validates all ENOParameters and it is based on the following function
-	 * @param pipeline
+	 * @param parametersType
 	 * @return a ValidationMessage with a message and the boolean if it is valid.
 	 */
 	ValidationMessage validate(ENOParameters parametersType);
 
 	/**
 	 * It validates the combination of InFormat/OutFormat.
-	 * @param pipeline
+	 * @param inFormat
+	 * @param outFormat
 	 * @return a ValidationMessage with a message and the boolean if it is valid.
 	 */
 	ValidationMessage validateIn2Out(InFormat inFormat, OutFormat outFormat);

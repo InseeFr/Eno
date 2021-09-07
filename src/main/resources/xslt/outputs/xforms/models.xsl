@@ -31,6 +31,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="languages" select="enoxforms:get-form-languages($source-context)" as="xs:string +"/>
         <xhtml:html>
+            <xsl:comment><xsl:value-of select="concat('Eno version : ',$enoVersion,'. Generation date : ',format-dateTime(current-dateTime(), '[D01]/[M01]/[Y0001] - [H1]:[m01]:[s01]'))"/></xsl:comment>
             <xhtml:head>
                 <xhtml:title>
                     <xsl:value-of select="enoxforms:get-label($source-context, $languages[1])"/>
@@ -440,7 +441,7 @@
         <xsl:variable name="format-constraint" select="enoxforms:get-format-constraint($source-context)"/>
 
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
-            <xsl:if test="$type != '' and (self::CalculatedVariable or self::Variable)">
+            <xsl:if test="$type != '' and (self::CalculatedVariable or self::Variable) and not(enoxforms:is-external-variable($source-context))">
                 <xsl:attribute name="type">
                     <xsl:choose>
                         <xsl:when test="$type = 'text' or $type = 'code' or $type = 'boolean'">
@@ -1613,11 +1614,11 @@
                     </xsl:when>
                     <xsl:when test="starts-with($image,'http')">
                         <xsl:value-of select="concat('&lt;img src=&quot;',$image,
-                            '&quot; alt=&quot;',$labelImage,'&quot; /&gt;')"/>
+                            '&quot; title=&quot;',$labelImage,'&quot; alt=&quot;',$labelImage,'&quot; /&gt;')"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="concat('&lt;img src=&quot;/',$properties//Images/Folder,'/',$image,
-                            '&quot; alt=&quot;',$labelImage,'&quot; /&gt;')"/>
+                            '&quot; title=&quot;',$labelImage,'&quot; alt=&quot;',$labelImage,'&quot; /&gt;')"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </label>
