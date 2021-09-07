@@ -12,7 +12,6 @@
 	xmlns:xhtml="http://www.w3.org/1999/xhtml"
 	exclude-result-prefixes="xs fn xd eno enofodt" version="2.0">
 	
-	<xsl:import href="../../../styles/style.xsl"/>
 	<xsl:include href="../../../xslt/outputs/fodt/office-styles.xsl"/>
 	
 	
