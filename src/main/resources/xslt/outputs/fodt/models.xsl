@@ -858,7 +858,7 @@
 				<xsl:variable name="idVariables"
 					select="tokenize(enofodt:get-control-variables($source-context), '\s')"/>
 				<text:p text:style-name="Control">
-					<xsl:value-of select="'Expression du contrôle : '"/>
+					<xsl:value-of select="'Vérification à réaliser : '"/>
 					<xsl:call-template name="replaceVariablesInFormula">
 						<xsl:with-param name="formula" select="$control"/>
 						<xsl:with-param name="variables" select="$idVariables"/>
