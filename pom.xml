@@ -5,7 +5,7 @@
 	<groupId>fr.insee.eno</groupId>
 	<artifactId>eno-core</artifactId>
 
-	<version>2.2.10-dev-lunatic-logement</version>
+	<version>2.2.11</version>
 
 
 	<packaging>jar</packaging>
