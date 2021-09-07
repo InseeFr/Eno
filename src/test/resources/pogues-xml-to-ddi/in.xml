@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <Questionnaire xmlns="http://xml.insee.fr/schema/applis/pogues" id="i6vwi2506prod" genericName="QUESTIONNAIRE" agency="fr.insee" final="false" flowLogic="REDIRECTION">
+  <Questionnaire xmlns="http://xml.insee.fr/schema/applis/pogues" id="i6vwi2506prod" genericName="QUESTIONNAIRE" agency="fr.insee" final="false" flowLogic="REDIRECTION" formulasLanguage="XPATH">
     <Name>m1</Name>
     <Label>Questionnaire SIMPSONS</Label>
     <TargetMode>CAWI</TargetMode>

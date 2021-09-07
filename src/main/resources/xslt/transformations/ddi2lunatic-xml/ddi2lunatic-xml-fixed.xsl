@@ -89,6 +89,16 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
+    <xsl:variable name="missingVar" as="xs:boolean">
+        <xsl:choose>
+            <xsl:when test="$parameters//MissingVar != ''">
+                <xsl:value-of select="$parameters//MissingVar"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//MissingVar"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     
     <xsl:variable name="enoVersion" select="$properties//EnoVersion"/>
     
@@ -105,6 +115,8 @@
     <xsl:variable name="regex-var" select="'[a-zA-Z0-9\-_]*'"/>
     <xsl:variable name="regex-var-surrounded" select="concat($conditioning-variable-begin,$regex-var,$conditioning-variable-end)"/>
     <xsl:variable name="regex-var-large-surrounded" select="concat('number\(if\s+\(',$regex-var-surrounded,'=''''\)\sthen\s+''0''\s+else\s+',$regex-var-surrounded,'\)')"/>
+    
+    <xsl:variable name="is-xpath" select="enoddi:is-programlanguage-xpath(/)"/>
     
     <xsl:function name="enolunatic:get-variable-business-name">
         <xsl:param name="variable"/>        
@@ -193,19 +205,56 @@
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
         <xsl:variable name="label">
-            <xsl:sequence select="enoddi:get-label($context,$language)"/>
+            <xsl:choose>
+                <xsl:when test="$is-xpath">
+                    <xsl:sequence select="enoddi:get-label($context,$language)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="enolunatic:surround-question-number(enoddi:get-label($context,$language))"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:variable>
-        <xsl:choose>
-            <xsl:when test="$label!=''">
-                <xsl:call-template name="enolunatic:replace-variables-in-formula">
-                    <xsl:with-param name="source-context" select="$context"/>
-                    <xsl:with-param name="formula" select="enolunatic:surround-label-with-quote(enolunatic:encode-special-char-in-js($label))"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise/>
-        </xsl:choose>
+        <xsl:if test="$label!=''">
+            <!-- If the programming language is xpath : we call surround-label-with-quote -->
+            <xsl:choose>
+                <xsl:when test="$is-xpath">
+                    <xsl:value-of select="enolunatic:surround-label-with-quote(enolunatic:encode-special-char-in-js($label))"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="enolunatic:encode-special-char-in-js($label)"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:if>
     </xsl:function>
     
+    <xsl:function name="enolunatic:surround-question-number">
+        <xsl:param name="label"/>
+        <xsl:variable name="final">
+            <xsl:choose>
+                <xsl:when test="count($label) &gt; 1">
+                    <xsl:variable name="number" select="$label[1]"/>
+                    <xsl:variable name="other" select="$label[position() &gt; 1]"/>
+                    <xsl:value-of select="concat('&quot;',$number,'&quot; || ')"/>
+                    <xsl:for-each select="$other">
+                        <xsl:choose>
+                            <xsl:when test="matches($other,'^&quot;.*&quot;$|.*\|\|.*|cast\(.*,string\)')">
+                                <xsl:value-of select="."/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="concat('&quot;',.,'&quot;')"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:for-each>
+                </xsl:when>
+                <xsl:when test="$label != ''">
+                    <xsl:value-of select="$label"/>
+                </xsl:when>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:value-of select="$final"/>
+    </xsl:function>
+    
+    <!-- This function is used for labels when programming language is xpath -->
     <xsl:function name="enolunatic:surround-label-with-quote">
         <xsl:param name="label"/>
         <xsl:variable name="labelSimple" select="concat('&quot;',$label,'&quot;')"/>
@@ -221,7 +270,6 @@
         </xsl:variable>
         <xsl:value-of select="$final-label"/>
     </xsl:function>
-    
     
     <xsl:function name="enolunatic:encode-special-char-in-js">
         <xsl:param name="label"/>
@@ -281,66 +329,14 @@
         
         <xsl:variable name="and-logic" select="' and '"/>
         <xsl:variable name="or-logic" select="' or '"/>
-        <xsl:variable name="not-logic" select="' not '"/>            
+        <xsl:variable name="not-logic" select="' not '"/>
         <xsl:variable name="not-equal" select="' &lt;&gt; '"/>
         
         <xsl:variable name="readonly" select="'&quot;readonly&quot;'"/>
-        <xsl:variable name="normal" select="'&quot;normal&quot;'"/>
-        <xsl:variable name="hidden" select="'&quot;hidden&quot;'"/>
+        <xsl:variable name="true" select="'true'"/>
         
         <conditionFilter>
             <xsl:choose>
-                <xsl:when test="$formulaRelevant!='' and $formulaReadOnly!=''">
-                    <xsl:variable name="initial-relevant-ancestors">
-                        <xsl:for-each select="$formulaRelevant">
-                            <xsl:value-of select="concat('(',.,')')"/>
-                            <xsl:if test="position()!=last()">
-                                <xsl:value-of select="$and-logic"/>
-                            </xsl:if>
-                        </xsl:for-each>
-                    </xsl:variable>
-                    <xsl:variable name="relevant-condition">
-                        <xsl:call-template name="enolunatic:replace-variables-in-formula">
-                            <xsl:with-param name="source-context" select="$context"/>
-                            <xsl:with-param name="formula" select="$initial-relevant-ancestors"/>
-                        </xsl:call-template>
-                    </xsl:variable>
-                    <xsl:variable name="initial-readonly-ancestors">
-                        <xsl:for-each select="$formulaReadOnly">
-                            <xsl:value-of select="concat('(',.,')')"/>
-                            <xsl:if test="position()!=last()">
-                                <xsl:value-of select="$or-logic"/>
-                            </xsl:if>
-                        </xsl:for-each>
-                    </xsl:variable>
-                    <xsl:variable name="readonly-condition">
-                        <xsl:call-template name="enolunatic:replace-variables-in-formula">
-                            <xsl:with-param name="source-context" select="$context"/>
-                            <xsl:with-param name="formula" select="$initial-readonly-ancestors"/>
-                        </xsl:call-template>
-                    </xsl:variable>
-                    <xsl:variable name="returned-relevant-condition" select="$relevant-condition"/>
-                    <xsl:variable name="returned-readonly-condition" select="$readonly-condition"/>                    
-                    
-                    <!-- three cases : caché (hidden) , gris (readOnly), affiché (normal) -->
-                    <!--	
-                        if relevant
-                        then 
-                        if readonly,
-                        then readonly
-                        else normal
-                        else hidden-->
-                    <xsl:value-of select="concat(
-                        $if,'(',$returned-relevant-condition,')',
-                        $then,
-                        '(',$if,'(',$returned-readonly-condition,')',
-                        $then,$readonly,
-                        $else,$normal,
-                        $ifEnd,')',
-                        $else,$hidden,
-                        $ifEnd
-                        )"/>
-                </xsl:when>
                 <xsl:when test="$formulaRelevant!=''">
                     <xsl:variable name="initial-relevant-ancestors">
                         <xsl:for-each select="$formulaRelevant">
@@ -350,36 +346,12 @@
                             </xsl:if>
                         </xsl:for-each>
                     </xsl:variable>
-                    <xsl:variable name="relevant-condition">
-                        <xsl:call-template name="enolunatic:replace-variables-in-formula">
-                            <xsl:with-param name="source-context" select="$context"/>
-                            <xsl:with-param name="formula" select="$initial-relevant-ancestors"/>
-                        </xsl:call-template>
-                    </xsl:variable>
+                    <xsl:variable name="relevant-condition" select="$initial-relevant-ancestors"/>
                     <xsl:variable name="returned-relevant-condition" select="$relevant-condition"/>                    
-                    <xsl:value-of select="concat($if,'(', $returned-relevant-condition,')',$then,$normal,$else,$hidden,$ifEnd)"/>                    
-                </xsl:when>
-                <xsl:when test="$formulaReadOnly!=''">
-                    <xsl:variable name="initial-readonly-ancestors">
-                        <xsl:for-each select="$formulaReadOnly">
-                            <xsl:value-of select="concat('(',.,')')"/>
-                            <xsl:if test="position()!=last()">
-                                <xsl:value-of select="$or-logic"/>
-                            </xsl:if>
-                        </xsl:for-each>
-                    </xsl:variable>
-                    <xsl:variable name="readonly-condition">
-                        <xsl:call-template name="enolunatic:replace-variables-in-formula">
-                            <xsl:with-param name="source-context" select="$context"/>
-                            <xsl:with-param name="formula" select="$initial-readonly-ancestors"/>
-                        </xsl:call-template>
-                    </xsl:variable>
-                    <xsl:variable name="returned-readonly-condition" select="$readonly-condition"/>
-                    <xsl:value-of select="concat($if,'(',$returned-readonly-condition,')',$then,$readonly,$else,$normal,$ifEnd)"/>
-                </xsl:when>
-                
+                    <xsl:value-of select="$returned-relevant-condition"/>                    
+                </xsl:when>                
                 <xsl:otherwise>
-                    <xsl:value-of select="$normal"/>
+                    <xsl:value-of select="$true"/>
                 </xsl:otherwise>
             </xsl:choose>
         </conditionFilter>
@@ -456,19 +428,29 @@
         <xsl:param name="type"/>
         <xsl:param name="variable"/>
         <xsl:choose>
-            <xsl:when test="$type='text'">
-                <xsl:value-of select="concat('cast(',$variable,',','string)')"/>
+            <xsl:when test="$is-xpath">
+                <xsl:choose>
+                    <xsl:when test="$type='text'">
+                        <xsl:value-of select="concat('cast(',$variable,',','string)')"/>
+                    </xsl:when>
+                    <xsl:when test="$type='integer'">
+                        <xsl:value-of select="concat('cast(',$variable,',','integer)')"/>
+                    </xsl:when>
+                    <xsl:when test="$type='decimal'">
+                        <xsl:value-of select="concat('cast(',$variable,',','number)')"/>
+                    </xsl:when>
+                    <xsl:when test="$type='boolean'">
+                        <xsl:value-of select="concat('cast(',$variable,',','integer)')"/>
+                    </xsl:when>
+                    <xsl:when test="$type='date'"></xsl:when>
+                    <xsl:when test="$type='duration'"></xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="concat('cast(',$variable,',','string)')"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
-            <xsl:when test="$type='integer' or $type='decimal'">
-                <xsl:value-of select="concat('cast(',$variable,',','number)')"/>
-            </xsl:when>
-            <xsl:when test="$type='boolean'">
-                <xsl:value-of select="concat('cast(',$variable,',','integer)')"/>
-            </xsl:when>
-            <xsl:when test="$type='date'"></xsl:when>
-            <xsl:when test="$type='duration'"></xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="concat('cast(',$variable,',','string)')"/>
+                <xsl:value-of select="$variable"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
@@ -504,8 +486,8 @@
         <xd:desc>
             <xd:p>Recursive named template: enolunatic:replace-variables-in-formula.</xd:p>
             <xd:p>It replaces variables in a all formula (filter, control, personalized text, calculated variable).</xd:p>
-            <xd:p>"number(if (¤idVariable¤='') then '0' else ¤idVariable¤)" -> "variableName"</xd:p>
-            <xd:p>"¤idVariable¤" -> "variableName"</xd:p>
+            <xd:p>"number(if (¤idVariable¤='') then '0' else ¤idVariable¤)" -> ¤idVariable¤</xd:p>
+            <xd:p>"¤idVariableCalculatedVar¤" -> formula</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template name="enolunatic:replace-variables-in-formula">
@@ -583,7 +565,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+        
     <xsl:function name="enolunatic:is-generating-loop" as="xs:boolean">
         <xsl:param name="context" as="item()"/>
         <xsl:variable name="isLinkedLoop" select="enoddi:is-linked-loop($context)" as="xs:boolean"/>
@@ -595,6 +577,17 @@
         <xsl:param name="context" as="item()"/>
         <xsl:variable name="linkedContainers" select="enoddi:get-linked-containers($context)" as="item()*"/>
         <xsl:value-of select="enoddi:get-id($linkedContainers[1])"/>
+    </xsl:function>
+    
+    <xsl:function name="enolunatic:get-shapeFrom-name">
+        <xsl:param name="id"/>
+        <xsl:param name="type"/>
+        <xsl:param name="language"/>
+        <xsl:call-template name="enoddi:get-controlconstructreference-name">
+            <xsl:with-param name="id" select="$id"/>
+            <xsl:with-param name="type" select="$type"/>
+            <xsl:with-param name="language" select="$language"/>
+        </xsl:call-template>
     </xsl:function>
     
 </xsl:stylesheet>

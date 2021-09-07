@@ -907,7 +907,7 @@
             <xsl:if test="$stepVal != ''">
                 <d:StepValue>
                     <r:Command>
-                        <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                        <r:ProgramLanguage><xsl:value-of select="lower-case(enoddi33:get-formulas-language($source-context))"/></r:ProgramLanguage>
                         <r:CommandContent><xsl:value-of select="$stepVal"/></r:CommandContent>
                     </r:Command>
                 </d:StepValue>
@@ -1046,7 +1046,7 @@
             </xsl:for-each>
         </xsl:variable>
         <r:Command>
-            <r:ProgramLanguage>xpath</r:ProgramLanguage>
+            <r:ProgramLanguage><xsl:value-of select="lower-case(enoddi33:get-formulas-language($source-context))"/></r:ProgramLanguage>
             <xsl:for-each select="$related-variables-with-id/*">
                 <r:InParameter isArray="false">
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
