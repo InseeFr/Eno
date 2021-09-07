@@ -153,8 +153,7 @@
         <style:style style:name="Help" style:family="paragraph" style:default-outline-level="2"
             style:class="text">
             <style:paragraph-properties fo:margin-top="0.1cm" fo:text-align="left"/>
-            <style:text-properties fo:font-size="10pt" fo:color="#0000ff" style:text-underline-style="solid"
-            />
+            <style:text-properties fo:font-size="10pt" fo:color="#0000ff"/>
         </style:style>
         <style:style style:name="Instruction" style:family="paragraph" style:default-outline-level="2"
             style:class="text">
