@@ -1093,14 +1093,14 @@
 					<text:span text:style-name="Standard">
 						<xsl:choose>
 							<xsl:when test="$typeOfLoop='MultiModuleLoop'">
-								<xsl:value-of select="'Type de boucle : multi-module avec '"/>
+								<xsl:value-of select="'Type de boucle : multi-séquences avec '"/>
 								<xsl:value-of select="count($descendantModules)"/>
-								<xsl:value-of select="' modules'"/>
+								<xsl:value-of select="' séquences'"/>
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:choose>
-									<xsl:when test="$typeOfLoop='OnlyModuleLoop'"><xsl:value-of select="'Type de boucle : un module'"/></xsl:when>
-									<xsl:otherwise><xsl:value-of select="'Type de boucle : à l''intérieur d''un module'"/></xsl:otherwise>
+									<xsl:when test="$typeOfLoop='OnlyModuleLoop'"><xsl:value-of select="'Type de boucle : une séquence'"/></xsl:when>
+									<xsl:otherwise><xsl:value-of select="'Type de boucle : à l''intérieur d''une séquence'"/></xsl:otherwise>
 								</xsl:choose>
 							</xsl:otherwise>
 						</xsl:choose>
