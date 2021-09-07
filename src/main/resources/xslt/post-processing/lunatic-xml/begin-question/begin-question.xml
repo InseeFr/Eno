@@ -4,11 +4,27 @@
     
     <components xsi:type="Sequence" componentType="Sequence" id="BEGIN-QUESTION-SEQ">
         <label>"Identification"</label>      
-        <conditionFilter>"normal"</conditionFilter>
-        <bindingsDependency>false</bindingsDependency>
+        <conditionFilter>
+            <value>true</value>
+        </conditionFilter>
+        <hierarchy>
+            <sequence id="BEGIN-QUESTION-SEQ">
+                <label>"Identification"</label>
+            </sequence>
+        </hierarchy> 
         <components xsi:type="Subsequence" componentType="Subsequence" id="BEGIN-QUESTION-SUBSEQ">
             <label>"Identification de votre " || cast(LABEL_UNITE_ENQUETEE,string)</label>
-            <conditionFilter>"normal"</conditionFilter>
+            <conditionFilter>
+                <value>true</value>
+            </conditionFilter>
+            <hierarchy>
+                <sequence id="BEGIN-QUESTION-SEQ">
+                    <label>"Identification"</label>
+                </sequence>
+                <subSequence id="BEGIN-QUESTION-SUBSEQ">
+                    <label>"Identification de votre " || cast(LABEL_UNITE_ENQUETEE,string)</label>
+                </subSequence>
+            </hierarchy> 
             <bindingsDependencies>LABEL_UNITE_ENQUETEE</bindingsDependencies>
             <components xsi:type="Textarea"
                 componentType="Textarea"
@@ -16,8 +32,18 @@
                 maxLength="2000"
                 mandatory="false">
                 <label>"Remarque, commentaire sur un changement concernant votre " || cast(LABEL_UNITE_ENQUETEE,string) || " :"</label>
-                <conditionFilter>"normal"</conditionFilter>
-                <bindingsDependencies>LABEL_UNITE_ENQUETEE</bindingsDependencies>
+                <conditionFilter>
+                    <value>true</value>
+                </conditionFilter>
+                <hierarchy>
+                    <sequence id="BEGIN-QUESTION-SEQ">
+                        <label>"Identification"</label>
+                    </sequence>
+                    <subSequence id="BEGIN-QUESTION-SUBSEQ">
+                        <label>"Identification de votre " || cast(LABEL_UNITE_ENQUETEE,string)</label>
+                    </subSequence>
+                </hierarchy> 
+                <bindingDependencies>LABEL_UNITE_ENQUETEE</bindingDependencies>
                 <bindingDependencies>COMMENT_UE</bindingDependencies>
                 <response name="COMMENT_UE"/>
                 <variables variableType="COLLECTED" xsi:type="VariableType">

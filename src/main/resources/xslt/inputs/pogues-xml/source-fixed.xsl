@@ -41,17 +41,14 @@
 
     <xsl:template match="pogues:Declaration/@declarationType" mode="conversion-table">
         <xsl:choose>
-            <xsl:when test=". = 'COMMENT'">
-                <xsl:value-of select="'comment'"/>
+            <xsl:when test=". = 'CODECARD'">
+                <xsl:value-of select="'codecard'"/>
             </xsl:when>
             <xsl:when test=". = 'INSTRUCTION'">
                 <xsl:value-of select="'instruction'"/>
             </xsl:when>
             <xsl:when test=". = 'HELP'">
                 <xsl:value-of select="'help'"/>
-            </xsl:when>
-            <xsl:when test=". = 'WARNING'">
-                <xsl:value-of select="'warning'"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:apply-templates select="." mode="conversion-table-error-message"/>
@@ -148,9 +145,10 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="pogues:Expression | pogues:Formula | pogues:Response | pogues:Maximum[parent::pogues:Loop] | pogues:Filter[parent::pogues:Loop]" mode="enopogues:get-ip-id">
+    <xsl:template match="pogues:Expression | pogues:Formula | pogues:Response | pogues:Maximum[parent::pogues:Loop] | pogues:Minimum[parent::pogues:Loop] | pogues:Filter[parent::pogues:Loop]" mode="enopogues:get-ip-id">
         <xsl:param name="index" tunnel="yes"/>
         <xsl:choose>
+            <xsl:when test="name() = 'Minimum'"><xsl:value-of select="concat(enopogues:get-id(parent::pogues:Loop), '-MIN-IP-', $index)"/></xsl:when>
             <xsl:when test="name() = 'Maximum'"><xsl:value-of select="concat(enopogues:get-id(parent::pogues:Loop), '-IP-', $index)"/></xsl:when>
             <xsl:when test="name() = 'Filter'"><xsl:value-of select="concat(enopogues:get-id(parent::pogues:Loop), '-ITE-IP-', $index)"/></xsl:when>
             <xsl:otherwise><xsl:value-of select="concat(enopogues:get-id(.), '-IP-', $index)"/></xsl:otherwise>
@@ -168,7 +166,7 @@
         <xsl:sequence select="//pogues:Variable[@id = $idVariable]"/>
     </xsl:template>
 
-    <xsl:template match="pogues:Expression | pogues:Formula | pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label | pogues:Maximum[parent::pogues:Loop] | pogues:Filter[parent::pogues:Loop]" mode="enopogues:get-related-variable">
+    <xsl:template match="pogues:Expression | pogues:Formula | pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label | pogues:Maximum[parent::pogues:Loop] | pogues:Minimum[parent::pogues:Loop] | pogues:Filter[parent::pogues:Loop]" mode="enopogues:get-related-variable">
         <xsl:variable name="expressionVariable" select="tokenize(., '\$')"/>
         <xsl:variable name="variables" select="//pogues:Variables"/>
 

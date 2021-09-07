@@ -19,7 +19,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import fr.insee.eno.generation.DDI2FOGenerator;
 import fr.insee.eno.postprocessing.Postprocessor;
@@ -33,6 +33,8 @@ import fr.insee.eno.postprocessing.fo.FOTableColumnPostprocessorFake;
 import fr.insee.eno.service.GenerationService;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
+import fr.insee.eno.preprocessing.DDIMarkdown2XhtmlPreprocessor;
+import fr.insee.eno.preprocessing.DDIMultimodalSelectionPreprocessor;
 import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
 import fr.insee.eno.preprocessing.Preprocessor;
 
@@ -59,6 +61,9 @@ public class DummyTestDDI2PDFExamples {
 			URI imgFolderUri = new File(basePathImg).toURI();
 			
 			Preprocessor[] preprocessors = {
+					
+					new DDIMultimodalSelectionPreprocessor(),
+					new DDIMarkdown2XhtmlPreprocessor(),
 					new DDIDereferencingPreprocessor(),
 					new DDICleaningPreprocessor(),
 					new DDITitlingPreprocessor()};

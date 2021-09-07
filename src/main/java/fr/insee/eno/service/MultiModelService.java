@@ -14,6 +14,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FileUtils;
@@ -24,7 +25,9 @@ import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
+import fr.insee.eno.parameters.AccompanyingMail;
 import fr.insee.eno.parameters.ENOParameters;
+import fr.insee.eno.parameters.OutFormat;
 import fr.insee.eno.params.ValorizatorParameters;
 import fr.insee.eno.params.ValorizatorParametersImpl;
 import fr.insee.eno.preprocessing.DDISplittingPreprocessor;
@@ -78,7 +81,10 @@ public class MultiModelService {
 			LOGGER.info("Archive file initalized to :"+outputZip.getAbsolutePath());
 
 			for(Future<File> future : outputsFutureFile) {
-				FileArchiver.writeToZipFile(surveyName, future.get().getAbsolutePath(), zipOutputStream, params.getPipeline().getOutFormat());
+				
+				String fileName = NamingFileService.intoOutputZipFilename(surveyName,future.get().toPath(),params);
+
+				FileArchiver.writeToZipFile(fileName, future.get().getAbsolutePath(), zipOutputStream);
 			}
 
 			zipOutputStream.close();
@@ -101,6 +107,7 @@ public class MultiModelService {
 
 	}
 
+	
 	/**
 	 * It generates a Zip file using parameterizedGenerationService
 	 * @param inputFile : the xml input File which contains multiple ddi instrument in the same file (required)
@@ -146,8 +153,13 @@ public class MultiModelService {
 			LOGGER.info("Archive file initalized to :"+outputZip.getAbsolutePath());
 
 			for(Future<File> future : outputsFutureFile) {
-				FileArchiver.writeToZipFile(surveyName, future.get().getAbsolutePath(), zipOutputStream, enoParameters.getPipeline().getOutFormat());
-			}
+				
+				
+				String fileName = NamingFileService.intoOutputZipFilename(surveyName,future.get().toPath(),enoParameters);
+
+				FileArchiver.writeToZipFile(fileName, future.get().getAbsolutePath(), zipOutputStream);
+
+							}
 
 			zipOutputStream.close();
 			fileOutputStream.close();

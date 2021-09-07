@@ -1,6 +1,10 @@
-name: Test on PR
+name: Test on push or PR
 
-on: pull_request
+on:
+  pull_request:
+  push:
+    branches:
+      - "**"
 
 jobs:
   build:
@@ -12,7 +16,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Install with Maven
-        run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V --file pom.xml
-      - name: Test with Maven
-        run: mvn test -B --file pom.xml
+      - name: Build with Maven Eno
+        run: mvn clean process-classes package install -DskipTests=true -Dmaven.javadoc.skip=true -Djar.finalName="eno-core" -B -V --file pom.xml
+      - name: Test
+        run: mvn test

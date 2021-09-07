@@ -59,10 +59,13 @@ public final class Constants {
 	public static final String PRE_PROCESSING_FOLDER = "/xslt/pre-processing";
 	public static final String UTIL_DDI_SPLITTING_XSL = UTIL_FOLDER_PATH + "/ddi/splitting.xsl";
 	/******************* DDI - Pre-processing ****************/
+	public static final String UTIL_DDI_MD2XHTML_XSL = PRE_PROCESSING_FOLDER + "/ddi/md2xhtml.xsl";
+	public static final String UTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL = PRE_PROCESSING_FOLDER + "/ddi/tweak-xhtml-for-ddi.xsl";
 	public static final String UTIL_DDI_DEREFERENCING_XSL = PRE_PROCESSING_FOLDER + "/ddi/dereferencing.xsl";
 	public static final String UTIL_DDI_TITLING_XSL = PRE_PROCESSING_FOLDER + "/ddi/titling.xsl";
 	public static final String UTIL_DDI_MAPPING_XSL = PRE_PROCESSING_FOLDER + "/ddi/mapping.xsl";
 	public static final String UTIL_DDI_CLEANING_XSL = PRE_PROCESSING_FOLDER + "/ddi/cleaning.xsl";
+	public static final String UTIL_DDI_MULTIMODAL_SELECTION_XSL = PRE_PROCESSING_FOLDER + "/ddi/multimodal-selection.xsl";
 	public static final String UTIL_DDI32_TO_DDI33_XSL = UTIL_FOLDER_PATH + "/ddi/ddi32toddi33.xsl";
 	
 	/*************** PoguesXML - Pre-processing **************/
@@ -79,8 +82,6 @@ public final class Constants {
 	public static final String POST_PROCESSING_FOLDER = "/xslt/post-processing";
 	
 	/********************* DDI - Post-processing ******************/
-	public static final String UTIL_DDI_MW2XHTML_XSL = POST_PROCESSING_FOLDER + "/ddi/mw2xhtml.xsl";
-	public static final String UTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL = POST_PROCESSING_FOLDER + "/ddi/tweak-xhtml-for-ddi.xsl";
 	
 	public static final String UTIL_FODS_PREFORMATTING_XSL = UTIL_FOLDER_PATH + "/fods/preformatting.xsl";
 	public static final String UTIL_XSL_INCORPORATION_XSL = UTIL_FOLDER_PATH + "/xsl/incorporation.xsl";
@@ -171,6 +172,7 @@ public final class Constants {
 	public static final String TRANSFORMATIONS_SORT_COMPONENTS_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/sort-components.xsl";
 	public static final String TRANSFORMATIONS_EXTERNALIZE_VARIABLES_AND_DEPENDENCIES_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/externalize-variables-and-dependencies.xsl";
 	public static final String TRANSFORMATIONS_INSERT_GENERIC_QUESTIONS_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/insert-generic-questions.xsl";
+	public static final String TRANSFORMATIONS_PAGINATION_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/pagination.xsl";
 	
 	/********************* FR/Xform Post-processing ******************/
 	public static final String UTIL_XFORMS_BROWSING_XSL = POST_PROCESSING_FOLDER_XFORMS + "/browsing.xsl";
@@ -309,11 +311,13 @@ public final class Constants {
 
 	/************ DDI and pogues-xml extension ***************/
 	public static final String CLEANED_EXTENSION = "-cleaned.tmp";
-	public static final String MW_EXTENSION = "-mw.tmp";
+	public static final String MD_EXTENSION = "-md.tmp";
+	public static final String MD2_EXTENSION = "-md2.tmp";
 	public static final String FINAL_EXTENSION = "-final.tmp";
 	public static final String TEMP_EXTENSION = "-temp.xml";
 	public static final String FINAL_DDI_EXTENSION = "-final.xml";
 	public static final String DDI32_DDI33_EXTENSION = "-ddi33.xml";
+	public static final String MULTIMODAL_EXTENSION = "-modal.tmp";
 
 	/********************* pdf/fo extension *******************/
 	public static final String ACCOMPANYING_MAILS_FO_EXTENSION = "-accompanying-mails.fo";
@@ -331,6 +335,7 @@ public final class Constants {
 	public static final String EXTERNALIZE_VARIABLES_LUNATIC_XML_EXTENSION = "-ext-variables.xml";
 	public static final String VTL_PARSER_LUNATIC_XML_EXTENSION = "-vtl-parsed.xml";
 	public static final String SPECIFIC_TREAT_LUNATIC_XML_EXTENSION = "-specific-form.xml";
+	public static final String PAGINATION_LUNATIC_XML_EXTENSION = "-sorted.xml";
 	public static final String FINAL_LUNATIC_XML_EXTENSION = "-lunatic.xml";
 
 	/******************** fr/xform extension ******************/

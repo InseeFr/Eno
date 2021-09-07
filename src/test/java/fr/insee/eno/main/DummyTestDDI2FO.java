@@ -2,7 +2,7 @@ package fr.insee.eno.main;
 
 import java.io.File;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import fr.insee.eno.generation.DDI2FOGenerator;
 import fr.insee.eno.postprocessing.Postprocessor;
@@ -16,6 +16,8 @@ import fr.insee.eno.postprocessing.fo.FOTableColumnPostprocessorFake;
 import fr.insee.eno.service.GenerationService;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
+import fr.insee.eno.preprocessing.DDIMarkdown2XhtmlPreprocessor;
+import fr.insee.eno.preprocessing.DDIMultimodalSelectionPreprocessor;
 import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
 import fr.insee.eno.preprocessing.Preprocessor;
 
@@ -28,6 +30,9 @@ public class DummyTestDDI2FO {
 		String basePathDDI2FO = "src/test/resources/ddi-to-fo";
 		
 		Preprocessor[] preprocessors = {
+
+				new DDIMultimodalSelectionPreprocessor(),
+				new DDIMarkdown2XhtmlPreprocessor(),
 				new DDIDereferencingPreprocessor(),
 				new DDICleaningPreprocessor(),
 				new DDITitlingPreprocessor()};

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import fr.insee.eno.postprocessing.lunaticxml.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +22,6 @@ import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.parameters.PreProcessing;
 import fr.insee.eno.postprocessing.NoopPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.postprocessing.ddi.DDIMarkdown2XhtmlPostprocessor;
 import fr.insee.eno.postprocessing.fo.FOEditStructurePagesPostprocessor;
 import fr.insee.eno.postprocessing.fo.FOInsertAccompanyingMailsPostprocessor;
 import fr.insee.eno.postprocessing.fo.FOInsertCoverPagePostprocessor;
@@ -29,11 +29,6 @@ import fr.insee.eno.postprocessing.fo.FOInsertEndQuestionPostprocessor;
 import fr.insee.eno.postprocessing.fo.FOMailingPostprocessor;
 import fr.insee.eno.postprocessing.fo.FOSpecificTreatmentPostprocessor;
 import fr.insee.eno.postprocessing.fo.FOTableColumnPostprocessorFake;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLExternalizeVariablesAndDependenciesPostprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLInsertGenericQuestionsPostprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLSortComponentsPostprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLSpecificTreatmentPostprocessor;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLVTLParserPostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSBrowsingPostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSFixAdherencePostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSIdentificationPostprocessor;
@@ -47,6 +42,8 @@ import fr.insee.eno.preprocessing.DDI32ToDDI33Preprocessor;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
 import fr.insee.eno.preprocessing.DDIMappingPreprocessor;
+import fr.insee.eno.preprocessing.DDIMarkdown2XhtmlPreprocessor;
+import fr.insee.eno.preprocessing.DDIMultimodalSelectionPreprocessor;
 import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
 import fr.insee.eno.preprocessing.PoguesXmlInsertFilterLoopIntoQuestionTree;
 import fr.insee.eno.preprocessing.PoguesXMLPreprocessorGoToTreatment;
@@ -78,6 +75,10 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	private DDITitlingPreprocessor ddiTitling = new DDITitlingPreprocessor();
 
 	private DDIMappingPreprocessor ddiMapping = new DDIMappingPreprocessor();
+	
+	private DDIMultimodalSelectionPreprocessor ddiMultimodal = new DDIMultimodalSelectionPreprocessor();
+	
+	private DDIMarkdown2XhtmlPreprocessor ddiMW2XHTML = new DDIMarkdown2XhtmlPreprocessor();
 
 	private PoguesXMLPreprocessorGoToTreatment poguesXmlGoTo = new PoguesXMLPreprocessorGoToTreatment();
 	
@@ -86,8 +87,6 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	private DDI32ToDDI33Preprocessor ddi32ToDDI33Preprocessor = new DDI32ToDDI33Preprocessor();
 	
 	// PostProcessing
-	private DDIMarkdown2XhtmlPostprocessor ddiMW2XHTML = new DDIMarkdown2XhtmlPostprocessor();
-
 	private XFORMSBrowsingPostprocessor xformsBrowsing = new XFORMSBrowsingPostprocessor();
 
 	private XFORMSInseePatternPostprocessor xformsInseePattern = new XFORMSInseePatternPostprocessor();
@@ -123,6 +122,8 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	private LunaticXMLSpecificTreatmentPostprocessor lunaticXmlSpecificTreatment = new LunaticXMLSpecificTreatmentPostprocessor();
 	
 	private LunaticXMLInsertGenericQuestionsPostprocessor lunaticXmlInsertGenericQuestions = new LunaticXMLInsertGenericQuestionsPostprocessor();
+
+	private LunaticXMLPaginationPostprocessor lunaticXMLPaginationPostprocessor = new LunaticXMLPaginationPostprocessor();
 	
 	private LunaticXMLExternalizeVariablesAndDependenciesPostprocessor lunaticXMLExternalizeVariablesAndDependencies = new LunaticXMLExternalizeVariablesAndDependenciesPostprocessor();
 	
@@ -218,9 +219,6 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	public Postprocessor getPostPorcessor(PostProcessing postProcessing) {
 		Postprocessor postprocessor = null;
 		switch (postProcessing) {
-		case DDI_MARKDOWN_TO_XHTML:
-			postprocessor = ddiMW2XHTML;
-			break;
 		case XFORMS_BROWSING:
 			postprocessor = xformsBrowsing;
 			break;
@@ -269,6 +267,9 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 		case FO_TABLE_COLUMN:
 			postprocessor = foTableColumn;
 			break;
+		case LUNATIC_XML_PAGINATION:
+			postprocessor = lunaticXMLPaginationPostprocessor;
+			break;
 		case LUNATIC_XML_EXTERNALIZE_VARIABLES:
 			postprocessor = lunaticXMLExternalizeVariablesAndDependencies;
 			break;
@@ -301,6 +302,9 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 		case DDI_32_TO_DDI_33:
 			preprocessor = ddi32ToDDI33Preprocessor;
 			break;
+		case DDI_MARKDOWN_TO_XHTML:
+			preprocessor = ddiMW2XHTML;
+			break;
 		case DDI_DEREFERENCING:
 			preprocessor = ddiDereferencing;
 			break;
@@ -312,6 +316,9 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 			break;
 		case DDI_MAPPING:
 			preprocessor = ddiMapping;
+			break;
+		case DDI_MULTIMODAL_SELECTION:
+			preprocessor = ddiMultimodal;
 			break;
 		case POGUES_XML_INSERT_FILTER_LOOP_INTO_QUESTION_TREE:
 			preprocessor = poguesXmlFilterLoopIntoQuestionTree;

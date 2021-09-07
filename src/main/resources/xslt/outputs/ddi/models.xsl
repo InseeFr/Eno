@@ -583,6 +583,27 @@
                     <xsl:value-of select="enoddi33:get-instruction-name($source-context)"/>
                 </r:String>
             </d:InstructionName>
+            <!-- Adding instruction modes -->
+            <xsl:if test="contains(enoddi33:get-instruction-modes($source-context),'CAWI')">
+                <d:InstructionName>
+                    <r:String xml:lang="{enoddi33:get-lang($source-context)}">SelfAdministeredQuestionnaire.WebBased</r:String>
+                </d:InstructionName>
+            </xsl:if>
+            <xsl:if test="contains(enoddi33:get-instruction-modes($source-context),'PAPI')">
+                <d:InstructionName>
+                    <r:String xml:lang="{enoddi33:get-lang($source-context)}">SelfAdministeredQuestionnaire.Paper</r:String>
+                </d:InstructionName>
+            </xsl:if>
+            <xsl:if test="contains(enoddi33:get-instruction-modes($source-context),'CATI')">
+                <d:InstructionName>
+                    <r:String xml:lang="{enoddi33:get-lang($source-context)}">Interview.Telephone.CATI</r:String>
+                </d:InstructionName>
+            </xsl:if>
+            <xsl:if test="contains(enoddi33:get-instruction-modes($source-context),'CAPI')">
+                <d:InstructionName>
+                    <r:String xml:lang="{enoddi33:get-lang($source-context)}">Interview.FaceToFace.CAPIorCAMI</r:String>
+                </d:InstructionName>
+            </xsl:if>
             <d:InstructionText>
                 <d:LiteralText>
                     <d:Text xml:lang="{enoddi33:get-lang($source-context)}">
@@ -640,14 +661,18 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:ExternalAid>
 			<r:OtherMaterial>
-	            <xsl:variable name="ID" select="enoddi33:get-id($source-context)"/>
+			    <xsl:variable name="ID" select="enoddi33:get-id($source-context)"/>
 	            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
 	            <r:ID><xsl:value-of select="$ID"/></r:ID>
 	            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
 	            <r:Description>
 	                <r:Content>
 	                    <xhtml:div class="FlowControl" id="{$ID}">
-	                        <xhtml:div class="Description"><xsl:value-of select="enoddi33:get-description($source-context)"/></xhtml:div>
+	                        <xhtml:div class="Description">
+	                            <!-- Variables referenced in the description of a FlowControl must be with the character ¤ (entered in Pogues with the character $)  -->
+	                            <!-- WARNING : A dollar currency entry which is also changed to ¤...  -->
+	                            <xsl:value-of select="replace(enoddi33:get-description($source-context),'\$','¤')"/> 
+	                        </xhtml:div>
 	                        <xhtml:div class="Expression"><xsl:value-of select="enoddi33:get-expression($source-context)"/></xhtml:div>
 	                        <xhtml:div class="IfTrue"><xsl:value-of select="enoddi33:get-if-true($source-context)"/></xhtml:div>
 	                    </xhtml:div>
@@ -858,6 +883,9 @@
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+            <d:ConstructName>
+                <r:String xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="enoddi33:get-name($source-context)"></xsl:value-of></r:String>
+            </d:ConstructName>
             <xsl:if test="$labelVal != ''">
                 <r:Label>
                     <r:Content xml:lang="fr-FR"><xsl:value-of select="$labelVal"/></r:Content>
@@ -865,10 +893,9 @@
             </xsl:if>
             <xsl:if test="$minVal != ''">
                 <d:InitialValue>
-                    <r:Command>
-                        <r:ProgramLanguage>xpath</r:ProgramLanguage>
-                        <r:CommandContent><xsl:value-of select="$minVal"/></r:CommandContent>
-                    </r:Command>
+                    <xsl:call-template name="Command">
+                        <xsl:with-param name="source-context" tunnel="yes" select="enoddi33:get-minimum-occurrences($source-context)"/>
+                    </xsl:call-template>
                 </d:InitialValue>
             </xsl:if>
             <xsl:if test="$maxVal != ''">
@@ -881,7 +908,7 @@
             <xsl:if test="$stepVal != ''">
                 <d:StepValue>
                     <r:Command>
-                        <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                        <r:ProgramLanguage><xsl:value-of select="lower-case(enoddi33:get-formulas-language($source-context))"/></r:ProgramLanguage>
                         <r:CommandContent><xsl:value-of select="$stepVal"/></r:CommandContent>
                     </r:Command>
                 </d:StepValue>
@@ -1020,7 +1047,7 @@
             </xsl:for-each>
         </xsl:variable>
         <r:Command>
-            <r:ProgramLanguage>xpath</r:ProgramLanguage>
+            <r:ProgramLanguage><xsl:value-of select="lower-case(enoddi33:get-formulas-language($source-context))"/></r:ProgramLanguage>
             <xsl:for-each select="$related-variables-with-id/*">
                 <r:InParameter isArray="false">
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
