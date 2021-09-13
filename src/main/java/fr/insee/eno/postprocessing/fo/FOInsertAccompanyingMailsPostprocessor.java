@@ -21,51 +21,14 @@ import fr.insee.eno.transform.xsl.XslTransformation;
  */
 public class FOInsertAccompanyingMailsPostprocessor implements Postprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(FOInsertAccompanyingMailsPostprocessor.class);
-
-	private XslTransformation saxonService = new XslTransformation();
-
 	private static final String styleSheetPath = Constants.TRANSFORMATIONS_ACCOMPANYING_MAILS_FO_4PDF;
+	private FOPostProcessor foPostProcessor = new FOPostProcessor();
 
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
-
-		File outputForFOFile = new File(input.getParent(),
-				Constants.BASE_NAME_FORM_FILE +
-				Constants.FINAL_PDF_EXTENSION);
-		logger.debug("Output folder for basic-form : " + outputForFOFile.getAbsolutePath());
-
-		String surveyName = survey;
-		String formName = getFormName(input);
-
-		InputStream FO_XSL = Constants.getInputStreamFromPath(styleSheetPath);
-
-		InputStream inputStream = FileUtils.openInputStream(input);
-		OutputStream outputStream = FileUtils.openOutputStream(outputForFOFile);
-
-		try {
-			saxonService.transformFOToStep4FO(inputStream, outputStream, FO_XSL, surveyName, formName, parameters);
-		}catch(Exception e) {
-			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
-					toString(),
-					e.getMessage(),
-					Utils.getErrorLocation(styleSheetPath,e));
-			logger.error(errorMessage);
-			throw new EnoGenerationException(errorMessage);
-		}
-
-		inputStream.close();
-		outputStream.close();
-		FO_XSL.close();
-		logger.info("End of InsertAccompanyingMails post-processing " + outputForFOFile.getAbsolutePath());
-
-		return outputForFOFile;
+		return foPostProcessor.process(input, parameters, survey, styleSheetPath, Constants.FINAL_PDF_EXTENSION);
 	}
-
-	private String getFormName(File input) {
-		return FilenameUtils.getBaseName(input.getParentFile().getParent());
-	}
-
+	
 	public String toString() {
 		return PostProcessing.FO_INSERT_ACCOMPANYING_MAILS.name();
 	}
