@@ -265,7 +265,7 @@ public class XslTransformation {
 
 	}
 
-	private void transformIn2Out(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+	public void transformIn2Out(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			byte[] parameters, String propertiesFile) throws Exception {
 		InputStream parametersIS = null;
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
@@ -291,42 +291,6 @@ public class XslTransformation {
 		}
 	}
 
-	public void transformDDI2XFORMS(InputStream inputFile, OutputStream outputFile, InputStream xslSheet, byte[] parameters)
-			throws Exception {
-		LOGGER.info("Producing a basic XForms from the DDI spec");
-		transformIn2Out(inputFile, outputFile, xslSheet, parameters, Constants.CONFIG_DDI2XFORMS);
-
-	}
-
-	public void transformDDI2FODT(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
-			byte[] parameters) throws Exception {
-		LOGGER.info("Producing a basic ODT from the DDI spec");
-		transformIn2Out(inputFile, outputFile, xslSheet, parameters, Constants.CONFIG_DDI2FODT);
-
-	}
-
-	public void transformDDI2FO(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
-			byte[] parameters) throws Exception {
-		LOGGER.info("Producing a basic PDF (Fo) from the DDI spec");
-
-		transformIn2Out(inputFile, outputFile, xslSheet, parameters, Constants.CONFIG_DDI2FO);
-
-	}
-
-	public void transformDDI2LunaticXML(InputStream inputFile, OutputStream outputFile, InputStream xslSheet, byte[] parameters)
-			throws Exception {
-		LOGGER.info("Producing a JS (xml file) from the DDI spec");
-
-		transformIn2Out(inputFile, outputFile, xslSheet, parameters, Constants.CONFIG_DDI2LUNATIC_XML);
-
-	}
-
-	public void transformPoguesXML2DDI(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
-			byte[] parameters) throws Exception {
-		LOGGER.info("Producing a basic DDI from the PoguesXML spec");
-		transformIn2Out(inputFile, outputFile, xslSheet, parameters, Constants.CONFIG_POGUES_XML2DDI);
-
-	}
 
 	private void transformBrowsingin2Out(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			File labelFolder) throws Exception {
