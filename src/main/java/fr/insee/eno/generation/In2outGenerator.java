@@ -16,7 +16,7 @@ import fr.insee.eno.parameters.OutFormat;
 import fr.insee.eno.transform.xsl.XslParameters;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
-public class In2outGenerator{
+public abstract class In2outGenerator implements Generator{
 
 	private static final Logger logger = LoggerFactory.getLogger(In2outGenerator.class);
 

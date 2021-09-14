@@ -4,13 +4,11 @@ import java.io.File;
 
 import fr.insee.eno.parameters.OutFormat;
 
-public class DDI2FOGenerator implements Generator {
+public class DDI2FOGenerator extends In2outGenerator {
 
-	private In2outGenerator in2outGenerator = new In2outGenerator();
-	
 	@Override
 	public File generate(File finalInput, byte[] parameters, String surveyName) throws Exception {
-		return in2outGenerator.in2outGenerate(finalInput, parameters, surveyName, OutFormat.FO);
+		return this.in2outGenerate(finalInput, parameters, surveyName, OutFormat.FO);
 	}
 
 
