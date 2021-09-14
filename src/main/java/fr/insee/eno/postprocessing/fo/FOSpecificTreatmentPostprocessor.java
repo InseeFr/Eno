@@ -51,7 +51,7 @@ public class FOSpecificTreatmentPostprocessor implements Postprocessor {
 			OutputStream outputStream = FileUtils.openOutputStream(outputForFOFile);
 
 			try {
-				saxonService.transformWithPDFSpecificTreatment(inputStream, outputStream, specificTreatmentXslIS, parametersFile);
+				saxonService.transformSimplePost(inputStream, outputStream, specificTreatmentXslIS, parametersFile,"ddi2fo");
 			}catch(Exception e) {
 				String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 						toString(),

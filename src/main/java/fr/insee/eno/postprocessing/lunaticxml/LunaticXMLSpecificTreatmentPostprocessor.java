@@ -51,7 +51,7 @@ public class LunaticXMLSpecificTreatmentPostprocessor implements Postprocessor {
 			OutputStream outputStream = FileUtils.openOutputStream(outputForLunaticXMLFile);
 
 			try {
-				saxonService.transformWithLunaticXMLSpecificTreatment(inputStream, outputStream, specificTreatmentXslIS, parametersFile);
+				saxonService.transformSimplePost(inputStream, outputStream, specificTreatmentXslIS, parametersFile,"ddi2lunaticXML");
 			}catch(Exception e) {
 				String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 						toString(),

@@ -37,7 +37,7 @@ public class XFORMSInsertGenericQuestionsPostprocessor implements Postprocessor 
 
 		InputStream FR_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 		try {
-			saxonService.transformXformsToXformsSimplePost(inputStream,outputStream, FR_XSL,parameters);
+			saxonService.transformSimplePost(inputStream,outputStream, FR_XSL,parameters,"ddi2xforms");
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),

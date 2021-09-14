@@ -47,7 +47,7 @@ public class XFORMSSpecificTreatmentPostprocessor implements Postprocessor {
 			InputStream inputStream = FileUtils.openInputStream(input);
 			OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
 			try {
-				saxonService.transformWithFRSpecificTreatment(inputStream, outputStream, specificTreatmentXslIS, parametersFile);
+				saxonService.transformSimplePost(inputStream, outputStream, specificTreatmentXslIS, parametersFile,"ddi2xforms");
 			}catch(Exception e) {
 				String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 						toString(),

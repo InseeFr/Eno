@@ -37,7 +37,7 @@ public class LunaticXMLPaginationPostprocessor implements Postprocessor {
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForJSFile);
 		try {
-			saxonService.transformLunaticXMLToLunaticXMLSimplePost(inputStream, outputStream, JS_XSL, parameters);
+			saxonService.transformSimplePost(inputStream, outputStream, JS_XSL, parameters,"ddi2lunaticXML");
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),
