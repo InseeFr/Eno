@@ -160,6 +160,7 @@
 	<xsl:template match="SingleResponseQuestion | MultipleQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="other-give-details" tunnel="yes" select="false()"/>
 		<xsl:variable name="questionName"
 			select="enofodt:get-question-name($source-context, $languages[1])"/>
 		<text:section text:name="Question-{enofodt:get-name($source-context)}">
@@ -188,30 +189,14 @@
 				</text:p>
 			</xsl:if>
 			
-			<xsl:if test="enofodt:get-question-response-tooltip($source-context,$languages[1]) != ''">
-				<xsl:for-each select="enofodt:get-question-response-tooltip($source-context,$languages[1])">
-					<text:p text:style-name="Tooltip">
-						<xsl:value-of select="'(*) Infobulle au niveau des modalités de réponse : ['"/>
-						<xsl:value-of select="."/>
-						<xsl:value-of select="']'"/>
-					</text:p>
-				</xsl:for-each>
-			</xsl:if>
-			
-			<xsl:if test="enofodt:get-question-instruction-tooltip($source-context,$languages[1]) != ''">
-				<text:p text:style-name="Tooltip">
-					<xsl:value-of select="'(*) Infobulle au niveau d''une consigne : ['"/>
-					<xsl:value-of select="enofodt:get-question-instruction-tooltip($source-context,$languages[1])"/>
-					<xsl:value-of select="']'"/>
-				</text:p>
-			</xsl:if>
-			
 			<xsl:apply-templates select="enofodt:get-end-question-instructions($source-context)"
 				mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
+			
 		</text:section>
 	</xsl:template>
+	
 	
 	<xd:doc>
 		<xd:desc>
