@@ -865,11 +865,14 @@
 				<xsl:variable name="idVariables"
 					select="tokenize(enofodt:get-control-variables($source-context), '\s')"/>
 				<text:p text:style-name="Control">
-					<xsl:value-of select="'Vérification à réaliser : '"/>
-					<xsl:call-template name="replaceVariablesInFormula">
-						<xsl:with-param name="formula" select="$control"/>
-						<xsl:with-param name="variables" select="$idVariables"/>
-					</xsl:call-template>
+					<xsl:value-of select="'Condition d''affichage du contrôle : '"/>
+					<xsl:variable name="condition">
+						<xsl:call-template name="replaceVariablesInFormula">
+							<xsl:with-param name="formula" select="$control"/>
+							<xsl:with-param name="variables" select="$idVariables"/>
+						</xsl:call-template>
+					</xsl:variable>
+					<xsl:value-of select="replace($condition,'^not\((.*)\)$','$1')"/>
 				</text:p>
 			</xsl:if>
 			
