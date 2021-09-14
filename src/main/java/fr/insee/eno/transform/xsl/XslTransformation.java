@@ -36,6 +36,12 @@ public class XslTransformation {
 	 * @throws Exception : if the factory couldn't be found or if the paths are
 	 *                   incorrect
 	 */
+	
+	public void xslTransform(Transformer transformer, InputStream xmlInput, OutputStream xmlOutput) throws Exception {
+		LOGGER.debug("Starting xsl transformation -Input : " + xmlInput + " -Output : " + xmlOutput);
+		transformer.transform(new StreamSource(xmlInput), new StreamResult(xmlOutput));
+	}
+	
 	public void transform(InputStream input, InputStream xslSheet, OutputStream output) throws Exception {
 		LOGGER.debug("Using the basic transformer");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();

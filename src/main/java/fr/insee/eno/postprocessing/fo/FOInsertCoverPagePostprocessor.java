@@ -19,15 +19,11 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * A PDF post processing
  */
-public class FOInsertCoverPagePostprocessor implements Postprocessor {
-
-	private static final String styleSheetPath = Constants.TRANSFORMATIONS_COVER_PAGE_FO_4PDF;
-
-	private FOPostProcessor foPostProcessor = new FOPostProcessor();
+public class FOInsertCoverPagePostprocessor extends FOPostProcessor {
 
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
-		return foPostProcessor.process(input, parameters, survey, styleSheetPath, Constants.COVER_PAGE_FO_EXTENSION);
+		return this.process(input, parameters, survey, Constants.TRANSFORMATIONS_COVER_PAGE_FO_4PDF, Constants.COVER_PAGE_FO_EXTENSION);
 	}
 
 	public String toString() {

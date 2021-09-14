@@ -9,15 +9,11 @@ import fr.insee.eno.postprocessing.Postprocessor;
 /**
  * A PDF post processing
  */
-public class FOEditStructurePagesPostprocessor implements Postprocessor {
-
-	private static final String styleSheetPath = Constants.TRANSFORMATIONS_EDIT_STRUCTURE_PAGES_FO_4PDF;
-
-	private FOPostProcessor foPostProcessor = new FOPostProcessor();
+public class FOEditStructurePagesPostprocessor extends FOPostProcessor {
 
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
-		return foPostProcessor.process(input, parameters, survey, styleSheetPath, Constants.EDIT_STRUCTURE_FO_EXTENSION);
+		return this.process(input, parameters, survey, Constants.TRANSFORMATIONS_EDIT_STRUCTURE_PAGES_FO_4PDF, Constants.EDIT_STRUCTURE_FO_EXTENSION);
 	}
 
 	public String toString() {

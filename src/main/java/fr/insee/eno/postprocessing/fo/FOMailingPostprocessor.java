@@ -9,15 +9,11 @@ import fr.insee.eno.postprocessing.Postprocessor;
 /**
  * Customization of FO postprocessor.
  */
-public class FOMailingPostprocessor implements Postprocessor {
-
-	private static final String styleSheetPath = Constants.TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF_2;
-	
-	private FOPostProcessor foPostProcessor = new FOPostProcessor();
+public class FOMailingPostprocessor extends FOPostProcessor {
 
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
-		return foPostProcessor.process(input, parameters, survey, styleSheetPath, Constants.MAILING_FO_EXTENSION);
+		return this.process(input, parameters, survey, Constants.TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF_2, Constants.MAILING_FO_EXTENSION);
 	}
 
 	public String toString() {

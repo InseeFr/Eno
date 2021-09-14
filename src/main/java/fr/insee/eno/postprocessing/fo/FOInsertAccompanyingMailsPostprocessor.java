@@ -19,14 +19,11 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * A PDF post processing
  */
-public class FOInsertAccompanyingMailsPostprocessor implements Postprocessor {
-
-	private static final String styleSheetPath = Constants.TRANSFORMATIONS_ACCOMPANYING_MAILS_FO_4PDF;
-	private FOPostProcessor foPostProcessor = new FOPostProcessor();
+public class FOInsertAccompanyingMailsPostprocessor extends FOPostProcessor {
 
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
-		return foPostProcessor.process(input, parameters, survey, styleSheetPath, Constants.FINAL_PDF_EXTENSION);
+		return this.process(input, parameters, survey, Constants.TRANSFORMATIONS_ACCOMPANYING_MAILS_FO_4PDF, Constants.FINAL_PDF_EXTENSION);
 	}
 	
 	public String toString() {

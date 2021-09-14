@@ -9,14 +9,10 @@ import fr.insee.eno.postprocessing.Postprocessor;
 /**
  * A PDF post processing
  */
-public class FOInsertEndQuestionPostprocessor implements Postprocessor {
-	
-	private FOPostProcessor foPostProcessor = new FOPostProcessor();
-
-	private static final String styleSheetPath = Constants.TRANSFORMATIONS_END_QUESTION_FO_4PDF;
+public class FOInsertEndQuestionPostprocessor extends FOPostProcessor {
 
 	public File process(File input, byte[] parameters, String survey) throws Exception {
-		return foPostProcessor.process(input, parameters, survey, styleSheetPath, Constants.END_QUESTION_FO_EXTENSION);
+		return this.process(input, parameters, survey, Constants.TRANSFORMATIONS_END_QUESTION_FO_4PDF, Constants.END_QUESTION_FO_EXTENSION);
 	}
 
 	public String toString() {

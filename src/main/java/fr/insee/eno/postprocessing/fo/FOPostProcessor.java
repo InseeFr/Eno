@@ -12,9 +12,10 @@ import org.slf4j.LoggerFactory;
 import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.exception.Utils;
+import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
-public class FOPostProcessor  {
+public abstract class FOPostProcessor implements Postprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(FOPostProcessor.class);
 
