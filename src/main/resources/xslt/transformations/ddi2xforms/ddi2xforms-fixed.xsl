@@ -84,6 +84,13 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>The current version of Eno, to display the info in the questionnaires that are produced.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:variable name="enoVersion" select="$properties//EnoVersion"/>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Characters used to surround variables in conditioned text.</xd:p>
         </xd:desc>
     </xd:doc>

@@ -115,8 +115,7 @@
                 <xsl:value-of select="eno:text-modification($old-identifiers,$new-identifiers,$command,1)"/>
             </xsl:variable>
             
-            <!-- In the end, some other strings are replaced to have a generic way of describing the empty/null value -->
-            <xsl:value-of select="replace(replace($modified-text,'&quot;',''''),'∅','''''')"/>
+            <xsl:value-of select="$modified-text"/>
         </xsl:copy>
     </xsl:template>
     

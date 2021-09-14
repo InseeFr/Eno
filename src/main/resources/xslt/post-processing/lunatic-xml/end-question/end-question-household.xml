@@ -4,7 +4,9 @@
 
     <components xsi:type="Sequence" componentType="Sequence" id="TIME-COMMENT-SEQ">
         <label>"Temps de réponse et commentaires"</label>
-        <conditionFilter>"normal"</conditionFilter>
+        <conditionFilter>
+            <value>true</value>
+        </conditionFilter>
         <hierarchy>
             <sequence id="TIME-COMMENT-SEQ">
                 <label>"Temps de réponse et commentaires"</label>
@@ -19,13 +21,15 @@
                     decimals="0">
             <label>"Combien de temps avez-vous mis en tout pour répondre à cette enquête (recherche des données + remplissage du questionnaire) ?"</label>
             <unit>heures</unit>
-            <conditionFilter>"normal"</conditionFilter>
+            <conditionFilter>
+                <value>true</value>
+            </conditionFilter>
             <hierarchy>
                 <sequence id="TIME-COMMENT-SEQ">
                     <label>"Temps de réponse et commentaires"</label>
                 </sequence>
             </hierarchy>
-            <bindingsDependencies>HEURE_REMPL</bindingsDependencies>
+            <bindingDependencies>HEURE_REMPL</bindingDependencies>
             <response name="HEURE_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>HEURE_REMPL</name>
@@ -48,13 +52,15 @@
                     decimals="0">
             <label></label>
             <unit>minutes</unit>
-            <conditionFilter>"normal"</conditionFilter>
+            <conditionFilter>
+                <value>true</value>
+            </conditionFilter>
             <hierarchy>
                 <sequence id="TIME-COMMENT-SEQ">
                     <label>"Temps de réponse et commentaires"</label>
                 </sequence>
             </hierarchy>
-            <bindingsDependencies>MIN_REMPL</bindingsDependencies>
+            <bindingDependencies>MIN_REMPL</bindingDependencies>
             <response name="MIN_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>MIN_REMPL</name>
@@ -74,13 +80,15 @@
                     maxLength="2000"
                     mandatory="false">
             <label>"Avez-vous des remarques concernant l'enquête ou des commentaires ?"</label>
-            <conditionFilter>"normal"</conditionFilter>
+            <conditionFilter>
+                <value>true</value>
+            </conditionFilter>
             <hierarchy>
                 <sequence id="TIME-COMMENT-SEQ">
                     <label>"Temps de réponse et commentaires"</label>
                 </sequence>
             </hierarchy>
-            <bindingsDependencies>COMMENT_QE</bindingsDependencies>
+            <bindingDependencies>COMMENT_QE</bindingDependencies>
             <response name="COMMENT_QE"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>COMMENT_QE</name>
@@ -98,7 +106,9 @@
 
     <components xsi:type="Sequence" componentType="Sequence" id="COMMENT-SEQ">
         <label>"Commentaire"</label>
-        <conditionFilter>"normal"</conditionFilter>
+        <conditionFilter>
+            <value>true</value>
+        </conditionFilter>
         <hierarchy>
             <sequence id="COMMENT-SEQ">
                 <label>"Commentaire"</label>
@@ -110,13 +120,15 @@
                     maxLength="2000"
                     mandatory="false">
             <label>"Avez-vous des remarques concernant l'enquête ou des commentaires ?"</label>
-            <conditionFilter>"normal"</conditionFilter>
+            <conditionFilter>
+                <value>true</value>
+            </conditionFilter>
             <hierarchy>
                 <sequence id="COMMENT-SEQ">
                     <label>"Commentaire"</label>
                 </sequence>
             </hierarchy>
-            <bindingsDependencies>COMMENT_QE</bindingsDependencies>
+            <bindingDependencies>COMMENT_QE</bindingDependencies>
             <response name="COMMENT_QE"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>COMMENT_QE</name>
@@ -134,7 +146,9 @@
 
     <components xsi:type="Sequence" componentType="Sequence" id="TIME-SEQ">
         <label>"Temps de réponse"</label>
-        <conditionFilter>"normal"</conditionFilter>
+        <conditionFilter>
+            <value>true</value>
+        </conditionFilter>
         <hierarchy>
             <sequence id="TIME-SEQ">
                 <label>"Temps de réponse"</label>
@@ -149,13 +163,15 @@
                     decimals="0">
             <label>"Combien de temps avez-vous mis en tout pour répondre à cette enquête (recherche des données + remplissage du questionnaire) ?"</label>
             <unit>heures</unit>
-            <conditionFilter>"normal"</conditionFilter>
+            <conditionFilter>
+                <value>true</value>
+            </conditionFilter>
             <hierarchy>
                 <sequence id="TIME-SEQ">
                     <label>"Temps de réponse"</label>
                 </sequence>
             </hierarchy>
-            <bindingsDependencies>HEURE_REMPL</bindingsDependencies>
+            <bindingDependencies>HEURE_REMPL</bindingDependencies>
             <response name="HEURE_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>HEURE_REMPL</name>
@@ -178,13 +194,15 @@
                     decimals="0">
             <label></label>
             <unit>minutes</unit>
-            <conditionFilter>"normal"</conditionFilter>
+            <conditionFilter>
+                <value>true</value>
+            </conditionFilter>
             <hierarchy>
                 <sequence id="TIME-SEQ">
                     <label>"Temps de réponse"</label>
                 </sequence>
             </hierarchy>
-            <bindingsDependencies>MIN_REMPL</bindingsDependencies>
+            <bindingDependencies>MIN_REMPL</bindingDependencies>
             <response name="MIN_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>MIN_REMPL</name>
