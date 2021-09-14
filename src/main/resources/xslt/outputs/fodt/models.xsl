@@ -566,6 +566,15 @@
 			</text:p>
 		</xsl:if>
 		
+		<!-- Call the tooltip getter for question responses -->
+		<xsl:if test="enofodt:get-question-response-tooltip($source-context,$languages[1]) != ''">
+					<text:p text:style-name="Tooltip">
+						<xsl:value-of select="'(*) Infobulle au niveau de la modalité de réponse : ['"/>
+						<xsl:value-of select="."/>
+						<xsl:value-of select="']'"/>
+					</text:p>
+		</xsl:if>
+		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
