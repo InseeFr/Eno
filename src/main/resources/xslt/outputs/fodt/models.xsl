@@ -1016,9 +1016,9 @@
 
 				<text:p text:style-name="{concat($typeOfLoop,'Start')}">
 					<text:span text:style-name="LoopIdentifier">
-						<xsl:value-of select="'&#10160; Boucle'"/>
-<!--						<xsl:copy-of select="enofodt:get-name($source-context)"/>-->
-<!--						<xsl:value-of select="']'"/>-->
+						<xsl:value-of select="'&#10160; Boucle ['"/>
+						<xsl:copy-of select="enofodt:get-name($source-context)"/>
+						<xsl:value-of select="']'"/>
 					</text:span>
 				</text:p>
 				
@@ -1123,9 +1123,9 @@
 					
 				<text:p text:style-name="{concat($typeOfLoop,'End')}">
 					<text:span text:style-name="LoopIdentifier">
-						<xsl:value-of select="'Fin de la boucle'"/>
-<!--						<xsl:copy-of select="enofodt:get-name($source-context)"/>-->
-<!--						<xsl:value-of select="']'"/>-->
+						<xsl:value-of select="'Fin de la boucle ['"/>
+						<xsl:copy-of select="enofodt:get-name($source-context)"/>
+						<xsl:value-of select="']'"/>
 					</text:span>
 				</text:p>
 				
