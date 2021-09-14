@@ -40,7 +40,7 @@ public class DDIMarkdown2XhtmlPreprocessor implements Preprocessor {
 		OutputStream osTEMP_NULL_TMP = FileUtils.openOutputStream(new File(md2xhtmlOutput));
 
 		try {
-			saxonService.transformMw2XHTML(isInputFile, isDDI_MW2XHTML_XSL, osTEMP_NULL_TMP,
+			saxonService.transformOutFolder(isInputFile, isDDI_MW2XHTML_XSL, osTEMP_NULL_TMP,
 					Constants.SUB_TEMP_FOLDER_FILE(survey));
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the Markdown2Xhtml transformation. %s : %s",
@@ -67,7 +67,7 @@ public class DDIMarkdown2XhtmlPreprocessor implements Preprocessor {
 				.getInputStreamFromPath(Constants.UTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL);
 		OutputStream osTweakXhtmlForDdi = FileUtils.openOutputStream(new File(outputTweakXhtmlForDdi));
 		try {
-			saxonService.transformTweakXhtmlForDdi(isTweakXhtmlForDdi, isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL,
+			saxonService.transformOutFolder(isTweakXhtmlForDdi, isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL,
 					osTweakXhtmlForDdi, Constants.SUB_TEMP_FOLDER_FILE(survey));
 		}catch(Exception e) {
 			String errorMessage = "An error has occurred during the Markdown2Xhtml transformation. "+e.getMessage();

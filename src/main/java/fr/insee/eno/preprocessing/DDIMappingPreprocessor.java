@@ -42,7 +42,7 @@ public class DDIMappingPreprocessor implements Preprocessor {
 		OutputStream osTEMP_MAPPING_TMP = FileUtils.openOutputStream(mappingFile);
 		
 		try {
-			saxonService.transformMapping(isInputFile, isDDI_MAPPING_XSL, osTEMP_MAPPING_TMP,parametersFile);
+			saxonService.transformWithParameters(isInputFile, isDDI_MAPPING_XSL, osTEMP_MAPPING_TMP,parametersFile);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),

@@ -55,7 +55,7 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		
 		try {
-			saxonService.mergeEnoParameters(inputStream, outputStream, PARAM_XSL);
+			saxonService.transformSimple(inputStream, outputStream, PARAM_XSL);
 		}catch(Exception e) {
 			String errorMessage = "An error was occured during the valorisation of parameters. "+e.getMessage();
 			LOGGER.error(errorMessage);
@@ -78,7 +78,7 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		OutputStream outputStream = FileUtils.openOutputStream(finalParam);
 		
 		try {
-			saxonService.mergeEnoParameters(inputStream, outputStream, PARAM_XSL);
+			saxonService.transformSimple(inputStream, outputStream, PARAM_XSL);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the valorisation of parameters. %s : %s",
 					e.getMessage(),

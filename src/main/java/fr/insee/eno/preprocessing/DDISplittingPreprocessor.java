@@ -40,7 +40,7 @@ public class DDISplittingPreprocessor  {
 		OutputStream osTEMP_NULL_TMP = FileUtils.openOutputStream(Constants.tEMP_NULL_TMP(sUB_TEMP_FOLDER));
 		
 		try {
-			saxonService.transformDereferencing(isInputFile, isDDI_DEREFERENCING_XSL, osTEMP_NULL_TMP,
+			saxonService.transformOutFolder(isInputFile, isDDI_DEREFERENCING_XSL, osTEMP_NULL_TMP,
 					Constants.SUB_TEMP_FOLDER_FILE(survey));
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",

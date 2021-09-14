@@ -43,7 +43,7 @@ public class DDITitlingPreprocessor implements Preprocessor {
 		OutputStream osTitling = FileUtils.openOutputStream(new File(outputTitling));
 
 		try {
-			saxonService.transformTitling(isCleaningTitling, isUTIL_DDI_TITLING_XSL, osTitling, parametersFile);
+			saxonService.transformWithParameters(isCleaningTitling, isUTIL_DDI_TITLING_XSL, osTitling, parametersFile);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),

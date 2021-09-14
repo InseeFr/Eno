@@ -38,7 +38,7 @@ public class LunaticXMLSortComponentsPostprocessor implements Postprocessor {
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForJSFile);
 		try {
-			saxonService.transformLunaticXMLToLunaticXMLPost(inputStream,outputStream, JS_XSL);
+			saxonService.transformSimple(inputStream,outputStream, JS_XSL);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),
