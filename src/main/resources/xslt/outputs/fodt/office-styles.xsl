@@ -100,7 +100,7 @@
             <style:paragraph-properties fo:margin-top="0.1cm" fo:text-align="left"/>
             <style:text-properties fo:font-size="10pt"/>
         </style:style>
-        <style:style style:name="Tooltip" style:family="paragraph" style:default-outline-level="2"
+        <style:style style:name="QuestionTooltip" style:family="paragraph" style:default-outline-level="2"
             style:class="text">
             <style:paragraph-properties fo:margin-top="0.1cm" fo:text-align="left"/>
             <style:text-properties fo:font-size="10pt" fo:color="#018442"/>
@@ -170,6 +170,11 @@
             style:class="text">
             <style:paragraph-properties fo:text-align="left" fo:margin-left="1cm" fo:margin-top="0.1cm"/>
             <style:text-properties fo:font-size="10pt"/>
+        </style:style>
+        <style:style style:name="CodeTooltip" style:family="paragraph" style:default-outline-level="2"
+            style:class="text">
+            <style:paragraph-properties fo:text-align="left" fo:margin-left="1cm" fo:margin-top="0.1cm"/>
+            <style:text-properties fo:font-size="10pt" fo:color="#018442"/>
         </style:style>
         <style:style style:name="OpeningCalculatedVariableSection" style:family="paragraph"
             style:default-outline-level="2" style:class="text">
