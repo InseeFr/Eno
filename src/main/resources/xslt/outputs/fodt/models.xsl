@@ -160,7 +160,6 @@
 	<xsl:template match="SingleResponseQuestion | MultipleQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		<xsl:param name="other-give-details" tunnel="yes" select="false()"/>
 		<xsl:variable name="questionName"
 			select="enofodt:get-question-name($source-context, $languages[1])"/>
 		<text:section text:name="Question-{enofodt:get-name($source-context)}">
@@ -243,15 +242,38 @@
 	<xsl:template match="TextDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="other-give-details" tunnel="yes" select="false()"/>
+		
 		<xsl:variable name="lengthResponse" select="enofodt:get-length($source-context)"/>
 		<xsl:variable name="nameOfVariable" select="enofodt:get-business-name($source-context)"/>
 		
-		<text:p text:style-name="Format">
-			<text:span text:style-name="NameOfVariable">
-				<xsl:value-of select="concat('[', $nameOfVariable, '] - ')"/>
-			</text:span>
-			<xsl:value-of select="concat('Car ', $lengthResponse)"/>
-		</text:p>
+		<xsl:choose>
+			
+			<xsl:when test="$other-give-details">
+				<xsl:variable name="label" select="enofodt:get-label($source-context,$languages[1])"/>
+				<text:p text:style-name="Format">
+					<xsl:value-of select="'Autre - précisez : '"/>
+					<xsl:value-of select="$label"/>
+				</text:p>
+				<text:p text:style-name="Format">
+					<text:span text:style-name="NameOfVariable">
+						<xsl:value-of select="concat('[', $nameOfVariable, '] - ')"/>
+					</text:span>
+					<xsl:value-of select="concat('Car ', $lengthResponse)"/>
+				</text:p>
+			</xsl:when>
+			
+			<xsl:otherwise>
+				<text:p text:style-name="Format">
+					<text:span text:style-name="NameOfVariable">
+						<xsl:value-of select="concat('[', $nameOfVariable, '] - ')"/>
+					</text:span>
+					<xsl:value-of select="concat('Car ', $lengthResponse)"/>
+				</text:p>
+			</xsl:otherwise>
+			
+		</xsl:choose>
+		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
@@ -657,6 +679,20 @@
 		</xsl:apply-templates>
 	</xsl:template>
 	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on Clarification driver.</xd:p>
+			<xd:p>It calls children template with other-give-details param at true (so it is processed as Other - Give details by response drivers)</xd:p>
+		</xd:desc>
+	</xd:doc>
+	<xsl:template match="Clarification" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+			<xsl:with-param name="other-give-details" select="true()" tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
 	
 	<xd:doc>
 		<xd:desc>
