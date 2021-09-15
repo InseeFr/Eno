@@ -1793,6 +1793,18 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>d12-SI</r:ID>
             <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">SelfAdministeredQuestionnaire.WebBased</r:String>
+            </d:ConstructName>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">SelfAdministeredQuestionnaire.Paper</r:String>
+            </d:ConstructName>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Interview.Telephone.CATI</r:String>
+            </d:ConstructName>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Interview.FaceToFace.CAPIorCAMI</r:String>
+            </d:ConstructName>				 	  
             <d:DisplayText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">**Now we are going to know if you think that Jay is a gluton.**</d:Text>
