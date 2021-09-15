@@ -160,6 +160,11 @@
             <style:paragraph-properties fo:margin-top="0.1cm" fo:text-align="left"/>
             <style:text-properties fo:font-size="10pt" fo:color="#0000ff"/>
         </style:style>
+        <style:style style:name="InstructionTooltip" style:family="paragraph" style:default-outline-level="2"
+            style:class="text">
+            <style:paragraph-properties fo:margin-top="0.1cm" fo:text-align="left"/>
+            <style:text-properties fo:font-size="10pt" fo:color="#018442"/>
+        </style:style>
         <style:style style:name="Warning" style:family="paragraph" style:default-outline-level="2"
             style:class="text">
             <style:paragraph-properties fo:text-align="left" fo:border="0.05pt solid #000000"
