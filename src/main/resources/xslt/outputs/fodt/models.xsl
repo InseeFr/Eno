@@ -635,11 +635,13 @@
 				<text:p text:style-name="Instruction">
 					<xsl:value-of select="$instructionLabel"/>
 				</text:p>
-				<text:p text:style-name="InstructionTooltip">
-					<xsl:value-of select="'(*) Infobulle au niveau d''une consigne : ['"/>
-					<xsl:value-of select="enofodt:get-question-instruction-tooltip($source-context,$languages[1])"/>
-					<xsl:value-of select="']'"/>
-				</text:p>
+				<xsl:if test="enofodt:get-question-instruction-tooltip($source-context,$languages[1]) != ''">
+					<text:p text:style-name="InstructionTooltip">
+						<xsl:value-of select="'(*) Infobulle au niveau d''une consigne : ['"/>
+						<xsl:value-of select="enofodt:get-question-instruction-tooltip($source-context,$languages[1])"/>
+						<xsl:value-of select="']'"/>
+					</text:p>
+				</xsl:if>
 			</xsl:when>
 			<xsl:when test="$instructionFormat = 'warning'">
 				<text:p text:style-name="Warning">
