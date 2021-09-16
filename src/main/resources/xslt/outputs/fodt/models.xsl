@@ -880,6 +880,7 @@
 		<xsl:variable name="nameOfControl"
 			select="enofodt:get-check-name($source-context, $languages)"/>
 		<xsl:variable name="control" select="enofodt:get-constraint($source-context)"/>
+		<xsl:variable name="criticality" select="enofodt:get-control-criticality($source-context)"/>
 		<xsl:variable name="instructionFormat" select="enofodt:get-css-class($source-context)"/>
 		<xsl:variable name="vars"
 			select="enofodt:get-label-conditioning-variables($source-context, $languages)"/>
@@ -893,7 +894,7 @@
 		<text:section text:name="ConsistencyCheck-{enofodt:get-name($source-context)}">
 			<xsl:if test="$control != ''">
 				<text:p text:style-name="Control">
-					<xsl:value-of select="concat('Contrôle bloquant : ', $nameOfControl)"/>
+					<xsl:value-of select="concat('Contrôle (',$criticality,') : ',$nameOfControl)"/>
 				</text:p>
 				<xsl:variable name="idVariables"
 					select="tokenize(enofodt:get-control-variables($source-context), '\s')"/>
@@ -913,7 +914,7 @@
 				<xsl:when test="$instructionFormat = ''">
 					<text:p text:style-name="Warning">
 						<xsl:value-of
-							select="concat('Message d', '''', 'erreur : ', $instructionLabel)"/>
+							select="concat('Message affiché : ', $instructionLabel)"/>
 					</text:p>
 				</xsl:when>
 				<xsl:when test="$instructionFormat = 'hint'">
