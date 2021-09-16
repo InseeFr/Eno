@@ -914,9 +914,9 @@
                   </table:table>
                </text:section>
                <text:section text:name="ConsistencyCheck-j4nwc63q-CI-0">
-                  <text:p text:style-name="Control">Contrôle bloquant : Total of percentages</text:p>
+                  <text:p text:style-name="Control">Contrôle (erreur) : Total of percentages</text:p>
                   <text:p text:style-name="Control">Condition d'affichage du contrôle : ^PERCENTAGE_EXPENSES11 + ^PERCENTAGE_EXPENSES21 + ^PERCENTAGE_EXPENSES31+ ^PERCENTAGE_EXPENSES41+ ^PERCENTAGE_EXPENSES51+ ^PERCENTAGE_EXPENSES61+ ^PERCENTAGE_EXPENSES71+ ^PERCENTAGE_EXPENSES81+ ^PERCENTAGE_EXPENSES91+ ^PERCENTAGE_EXPENSES101!= 100</text:p>
-                  <text:p text:style-name="Warning">Message d'erreur : The sum of percentages is: $!{SUM_EXPENSES} %. The total of percentages must be equal to 100%. </text:p>
+                  <text:p text:style-name="Warning">Message affiché : The sum of percentages is: $!{SUM_EXPENSES} %. The total of percentages must be equal to 100%. </text:p>
                </text:section>
             </text:section>
             <text:section text:name="SubModule-j6qejudb">

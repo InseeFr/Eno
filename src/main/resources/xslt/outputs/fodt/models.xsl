@@ -884,7 +884,7 @@
 		<xsl:variable name="criticalityfr">
 			<xsl:choose>
 				<xsl:when test="$criticality='warning'"><xsl:value-of select="'avertissement'"/></xsl:when>
-				<xsl:when test="$criticality='stumblingblock'"><xsl:value-of select="'ereur'"/></xsl:when>
+				<xsl:when test="$criticality='stumblingblock'"><xsl:value-of select="'erreur'"/></xsl:when>
 				<xsl:otherwise><xsl:value-of select="'information'"/></xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
