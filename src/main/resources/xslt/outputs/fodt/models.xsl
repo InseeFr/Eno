@@ -881,6 +881,13 @@
 			select="enofodt:get-check-name($source-context, $languages)"/>
 		<xsl:variable name="control" select="enofodt:get-constraint($source-context)"/>
 		<xsl:variable name="criticality" select="enofodt:get-control-criticality($source-context)"/>
+		<xsl:variable name="criticalityfr">
+			<xsl:choose>
+				<xsl:when test="$criticality='warning'"><xsl:value-of select="'avertissement'"/></xsl:when>
+				<xsl:when test="$criticality='stumblingblock'"><xsl:value-of select="'ereur'"/></xsl:when>
+				<xsl:otherwise><xsl:value-of select="'information'"/></xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
 		<xsl:variable name="instructionFormat" select="enofodt:get-css-class($source-context)"/>
 		<xsl:variable name="vars"
 			select="enofodt:get-label-conditioning-variables($source-context, $languages)"/>
@@ -894,7 +901,7 @@
 		<text:section text:name="ConsistencyCheck-{enofodt:get-name($source-context)}">
 			<xsl:if test="$control != ''">
 				<text:p text:style-name="Control">
-					<xsl:value-of select="concat('Contrôle (',$criticality,') : ',$nameOfControl)"/>
+					<xsl:value-of select="concat('Contrôle (',$criticalityfr,') : ',$nameOfControl)"/>
 				</text:p>
 				<xsl:variable name="idVariables"
 					select="tokenize(enofodt:get-control-variables($source-context), '\s')"/>
