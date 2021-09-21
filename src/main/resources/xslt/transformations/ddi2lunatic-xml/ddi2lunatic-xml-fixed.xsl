@@ -210,7 +210,7 @@
                     <xsl:sequence select="enoddi:get-label($context,$language)"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="enolunatic:surround-question-number(enoddi:get-label($context,$language))"/>
+                    <xsl:value-of select="enolunatic:tidy-label(enoddi:get-label($context,$language))"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
@@ -227,7 +227,7 @@
         </xsl:if>
     </xsl:function>
     
-    <xsl:function name="enolunatic:surround-question-number">
+    <xsl:function name="enolunatic:tidy-label">
         <xsl:param name="label"/>
         <xsl:variable name="final">
             <xsl:choose>
@@ -247,7 +247,14 @@
                     </xsl:for-each>
                 </xsl:when>
                 <xsl:when test="$label != ''">
-                    <xsl:value-of select="$label"/>
+                    <xsl:choose>
+                        <xsl:when test="matches($label,'^[0-9\-]')">
+                            <xsl:value-of select="concat('\&quot;',$label,'\&quot;')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="$label"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:when>
             </xsl:choose>
         </xsl:variable>
