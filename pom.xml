@@ -5,7 +5,7 @@
 	<groupId>fr.insee.eno</groupId>
 	<artifactId>eno-core</artifactId>
 
-	<version>2.2.11</version>
+	<version>2.2.11-hotfix-lunatic-label_strating_w_num</version>
 
 
 	<packaging>jar</packaging>
