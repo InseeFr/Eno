@@ -249,7 +249,7 @@
                 <xsl:when test="$label != ''">
                     <xsl:choose>
                         <xsl:when test="matches($label,'^[0-9\-]')">
-                            <xsl:value-of select="concat('\&quot;',$label,'\&quot;')"/>
+                            <xsl:value-of select="concat('&quot;',$label,'&quot; || &quot;&quot;')"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of select="$label"/>
