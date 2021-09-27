@@ -5,7 +5,7 @@
 	<groupId>fr.insee.eno</groupId>
 	<artifactId>eno-core</artifactId>
 
-	<version>2.2.11-dev-fodt-evo_logement</version>
+	<version>2.2.11-multi-fodtevo_labelnum_foendquestion</version>
 
 	<packaging>jar</packaging>
 
