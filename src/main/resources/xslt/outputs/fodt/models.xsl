@@ -593,7 +593,7 @@
 		<xsl:if test="enofodt:get-question-response-tooltip($source-context,$languages[1]) != ''">
 			<text:p text:style-name="CodeTooltip">
 				<xsl:value-of select="'(*) Infobulle au niveau de la modalité de réponse : ['"/>
-				<xsl:value-of select="."/>
+				<xsl:value-of select="enofodt:get-question-response-tooltip($source-context,$languages[1])"/>
 				<xsl:value-of select="']'"/>
 			</text:p>
 		</xsl:if>
