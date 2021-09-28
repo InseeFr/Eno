@@ -477,11 +477,27 @@
 						<text:p text:style-name="Question">
 							<xsl:value-of select="$label"/>
 						</text:p>
+						<!-- Call the tooltip getter for question responses -->
+						<xsl:if test="enofodt:get-question-response-tooltip($source-context,$languages[1]) != ''">
+							<text:p text:style-name="CodeTooltip">
+								<xsl:value-of select="'(*) Infobulle au niveau de la modalité QCM : ['"/>
+								<xsl:value-of select="enofodt:get-question-response-tooltip($source-context,$languages[1])"/>
+								<xsl:value-of select="']'"/>
+							</text:p>
+						</xsl:if>
 					</xsl:when>
 					<xsl:when test="$label != '' and $ancestorTable = 'headerLine'">
 						<text:p text:style-name="ColumnHeader">
 							<xsl:value-of select="$label"/>
 						</text:p>
+						<!-- Call the tooltip getter for question responses -->
+						<xsl:if test="enofodt:get-question-response-tooltip($source-context,$languages[1]) != ''">
+							<text:p text:style-name="CodeTooltip">
+								<xsl:value-of select="'(*) Infobulle au niveau de la modalité QCM : ['"/>
+								<xsl:value-of select="enofodt:get-question-response-tooltip($source-context,$languages[1])"/>
+								<xsl:value-of select="']'"/>
+							</text:p>
+						</xsl:if>
 					</xsl:when>
 				</xsl:choose>
 			</table:table-cell>
