@@ -1082,6 +1082,7 @@
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="ColumnHeader">Other country (*)</text:p>
+                           <text:p text:style-name="CodeTooltip">(*) Infobulle au niveau de la modalité QCM : [Included principalities]</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
