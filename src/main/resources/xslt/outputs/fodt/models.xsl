@@ -990,6 +990,7 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		
 		<xsl:variable name="label" select="enofodt:get-label($source-context, $languages[1])"/>
+		<xsl:variable name="loopName" select="enofodt:get-loop-name($source-context,$languages[1])"/>
 		<xsl:variable name="descendantLoop" select="enofodt:get-descendant-loop-ids($source-context)"/>
 		<xsl:variable name="descendantModules" select="enofodt:get-descendant-module-names($source-context,$languages[1])"/>
 		<xsl:variable name="minimum" select="enofodt:get-minimum-occurrences($source-context)"/>
@@ -1018,9 +1019,9 @@
 
 				<text:p text:style-name="{concat($typeOfLoop,'Start')}">
 					<text:span text:style-name="LoopIdentifier">
-						<xsl:value-of select="'&#10160; Boucle'"/>
-<!--						<xsl:copy-of select="enofodt:get-name($source-context)"/>-->
-<!--						<xsl:value-of select="']'"/>-->
+						<xsl:value-of select="'&#10160; Boucle ['"/>
+						<xsl:copy-of select="$loopName"/>
+						<xsl:value-of select="']'"/>
 					</text:span>
 				</text:p>
 				
@@ -1125,9 +1126,9 @@
 					
 				<text:p text:style-name="{concat($typeOfLoop,'End')}">
 					<text:span text:style-name="LoopIdentifier">
-						<xsl:value-of select="'Fin de la boucle'"/>
-<!--						<xsl:copy-of select="enofodt:get-name($source-context)"/>-->
-<!--						<xsl:value-of select="']'"/>-->
+						<xsl:value-of select="'Fin de la boucle ['"/>
+						<xsl:copy-of select="$loopName"/>
+						<xsl:value-of select="']'"/>
 					</text:span>
 				</text:p>
 				
