@@ -97,7 +97,7 @@
             </fo:block-container>
             
             <!--    Bloc Quand et comment répondre  -->
-            <fo:block-container>
+            <fo:block-container margin-top="5mm">
                 <fo:block>
                     <fo:table>
                         <fo:table-column/>
