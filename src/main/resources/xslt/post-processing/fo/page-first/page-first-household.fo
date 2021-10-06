@@ -241,7 +241,7 @@
             </fo:block-container>
             
             <!--    Bloc Consignes spécifiques enquête  -->
-            <fo:block-container>
+            <fo:block-container margin-top="5mm">
                 <fo:block font-weight="bold" font-size="12pt">
                     <fo:table width="100mm">
                         <fo:table-column/>
@@ -259,18 +259,18 @@
                     </fo:table>
                 </fo:block>
             </fo:block-container>
-            <fo:block-container margin-left="15mm" font-family="Liberation Sans" font-size="10pt" text-align="justify">
+            <fo:block-container margin-top="5mm" margin-left="10mm" font-family="Liberation Sans" font-size="10pt" text-align="justify">
                 <fo:block>
                     #if (${Enq_Consigne1} != '')
                     <fo:inline-container margin="0mm">
                         <fo:list-block>
                             <fo:list-item>
-                                <fo:list-item-label start-indent="5mm" line-height="8mm">
+                                <fo:list-item-label line-height="8mm">
                                     <fo:block>
                                         <fo:inline>&#8226;</fo:inline>
                                     </fo:block>
                                 </fo:list-item-label>
-                                <fo:list-item-body start-indent="10mm" line-height="5mm">
+                                <fo:list-item-body start-indent="5mm" line-height="5mm">
                                     <fo:block line-height="12pt">${Enq_Consigne1}</fo:block>
                                 </fo:list-item-body>
                             </fo:list-item>
@@ -281,12 +281,12 @@
                     <fo:inline-container margin="0mm">
                         <fo:list-block>
                             <fo:list-item>
-                                <fo:list-item-label start-indent="5mm" line-height="8mm">
+                                <fo:list-item-label line-height="8mm">
                                     <fo:block>
                                         <fo:inline>&#8226;</fo:inline>
                                     </fo:block>
                                 </fo:list-item-label>
-                                <fo:list-item-body start-indent="10mm" line-height="5mm">
+                                <fo:list-item-body start-indent="5mm" line-height="5mm">
                                     <fo:block line-height="12pt">${Enq_Consigne2}</fo:block>
                                 </fo:list-item-body>
                             </fo:list-item>
@@ -297,12 +297,12 @@
                     <fo:inline-container margin="0mm">
                         <fo:list-block>
                             <fo:list-item>
-                                <fo:list-item-label start-indent="5mm" line-height="8mm">
+                                <fo:list-item-label line-height="8mm">
                                     <fo:block>
                                         <fo:inline>&#8226;</fo:inline>
                                     </fo:block>
                                 </fo:list-item-label>
-                                <fo:list-item-body start-indent="10mm" line-height="5mm">
+                                <fo:list-item-body start-indent="5mm" line-height="5mm">
                                     <fo:block line-height="12pt">${Enq_Consigne3}</fo:block>
                                 </fo:list-item-body>
                             </fo:list-item>
