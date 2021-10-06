@@ -640,14 +640,11 @@
                   <fo:block>
                      <fo:instream-foreign-object>
                         <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                                         message="${BddIdentifiantUniteEnquetee}-${BddLibelleCourt}-${BddAnneeReference}-${BddPeriode}"
+                                         message="Code Bar"
                                          orientation="0">
-                           <barcode:datamatrix>
-                              <barcode:module-width>0.53mm</barcode:module-width>
-                              <barcode:quiet-zone enabled="false">0mw</barcode:quiet-zone>
-                              <barcode:min-symbol-size>22x22</barcode:min-symbol-size>
-                              <barcode:max-symbol-size>22x22</barcode:max-symbol-size>
-                           </barcode:datamatrix>
+                           <barcode:code39>
+                              <barcode:height>10mm</barcode:height>
+                           </barcode:code39>
                         </barcode:barcode>
                      </fo:instream-foreign-object>
                   </fo:block>
@@ -1909,7 +1906,6 @@
                      </fo:table-cell>
                   </fo:table-row>
 #end 
-
 #if ($REPARTITION_CA-TotalOccurrenceInt le 7) 
 #if (($REPARTITION_CA-TotalOccurrenceInt + 3) % 19 eq 0) 
 </fo:table-body>
@@ -2022,7 +2018,6 @@
                      </fo:table-cell>
                   </fo:table-row>
 #end 
-
 #if ($REPARTITION_CA-TotalOccurrenceInt le 6) 
 #if (($REPARTITION_CA-TotalOccurrenceInt + 4) % 19 eq 0) 
 </fo:table-body>
@@ -2135,7 +2130,6 @@
                      </fo:table-cell>
                   </fo:table-row>
 #end 
-
 #if ($REPARTITION_CA-TotalOccurrenceInt le 5) 
 #if (($REPARTITION_CA-TotalOccurrenceInt + 5) % 19 eq 0) 
 </fo:table-body>
@@ -2248,7 +2242,6 @@
                      </fo:table-cell>
                   </fo:table-row>
 #end 
-
 #if ($REPARTITION_CA-TotalOccurrenceInt le 4) 
 #if (($REPARTITION_CA-TotalOccurrenceInt + 6) % 19 eq 0) 
 </fo:table-body>
@@ -2361,7 +2354,6 @@
                      </fo:table-cell>
                   </fo:table-row>
 #end 
-
 #if ($REPARTITION_CA-TotalOccurrenceInt le 3) 
 #if (($REPARTITION_CA-TotalOccurrenceInt + 7) % 19 eq 0) 
 </fo:table-body>
@@ -2474,7 +2466,6 @@
                      </fo:table-cell>
                   </fo:table-row>
 #end 
-
 #if ($REPARTITION_CA-TotalOccurrenceInt le 2) 
 #if (($REPARTITION_CA-TotalOccurrenceInt + 8) % 19 eq 0) 
 </fo:table-body>
@@ -2587,7 +2578,6 @@
                      </fo:table-cell>
                   </fo:table-row>
 #end 
-
 #if ($REPARTITION_CA-TotalOccurrenceInt le 1) 
 #if (($REPARTITION_CA-TotalOccurrenceInt + 9) % 19 eq 0) 
 </fo:table-body>
@@ -2700,7 +2690,6 @@
                      </fo:table-cell>
                   </fo:table-row>
 #end 
-
 #if ($REPARTITION_CA-TotalOccurrenceInt le 0) 
 #if (($REPARTITION_CA-TotalOccurrenceInt + 10) % 19 eq 0) 
 </fo:table-body>

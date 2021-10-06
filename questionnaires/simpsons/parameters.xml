@@ -61,52 +61,7 @@
         
         <fodt-parameters/>
         
-        <Title>
-            <!-- no-number ; template ; module ; submodule ; unnumbered-filter -->
-            <Browsing>module</Browsing>
-            <Sequence>
-                <!-- niveau template utile car permet de définir la hiérarchie des séquences, alors même qu'il n'est pas numéroté -->
-                <Level name="template"/>
-                <Level name="module">
-                    <!-- toujours affiché -->
-                    <PreSeq></PreSeq>
-                    <!-- true ; false -->
-                    <NumParent>false</NumParent>
-                    <!-- Affiché seulement si un numéro est affiché pour le parent -->
-                    <PostNumParentSeq></PostNumParentSeq>
-                    <!-- 1 ; A ; a ; I ; i -->
-                    <StyleNumSeq>I</StyleNumSeq>
-                    <!-- Affiché seulement si un numéro est affiché pour la séquence -->
-                    <PostNumSeq> - </PostNumSeq>
-                </Level>
-                <!-- pas de numérotation au niveau submodule = pas d'élément -->
-                <Level name="submodule"/>
-            </Sequence>
-            <Question>
-                <!-- Question niveau module -->
-                <Level name="module">
-                    <!-- toujours affiché -->
-                    <PreQuest>➡ </PreQuest>
-                    <!-- true ; false -->
-                    <NumParent>false</NumParent>
-                    <!-- Affiché seulement si un numéro est affiché pour le parent -->
-                    <PostNumParentQuest></PostNumParentQuest>
-                    <!-- 1 ; A ; a ; I ; i -->
-                    <StyleNumQuest>1</StyleNumQuest>
-                    <!-- Affiché seulement si un numéro est affiché pour la question -->
-                    <PostNumQuest>. </PostNumQuest>
-                </Level>
-                <!-- La présentation des questions de niveau module et submodule doit être précisée si les deux sont présents ; elle peut être distincte -->
-                <!-- Question niveau sous-module -->
-                <Level name="submodule">
-                    <PreQuest>➡ </PreQuest>
-                    <NumParent>false</NumParent>
-                    <PostNumParentQuest></PostNumParentQuest>
-                    <StyleNumQuest>1</StyleNumQuest>
-                    <PostNumQuest>. </PostNumQuest>
-                </Level>
-            </Question>
-        </Title>
+ 
     </Parameters>
     
 </ENOParameters>

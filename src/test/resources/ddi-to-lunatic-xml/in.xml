@@ -16,7 +16,7 @@
          <r:ID>InterviewerInstructionScheme-i6vwi2506qf2mms</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">A définir</r:Content>
+            <r:Content xml:lang="fr-FR">"A définir"</r:Content>
          </r:Label>
          <d:Instruction>
             <r:Agency>fr.insee</r:Agency>
@@ -27,7 +27,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR"><xhtml:p>We're going to test your knowledge about the simpsons series.<xhtml:br/><xhtml:b>Welcome in the simpsons world!</xhtml:b></xhtml:p></d:Text>
+                  <d:Text xml:lang="fr-FR">"We're going to test your knowledge about the simpsons series. Welcome in the simpsons world !"</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -40,7 +40,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">If not, this is unfortunately the end of this questionnaire.</d:Text>
+                  <d:Text xml:lang="fr-FR">"If not, this is unfortunately the end of this questionnaire."</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -53,7 +53,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Please enter a season number</d:Text>
+                  <d:Text xml:lang="fr-FR">"Please enter a season number"</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -66,7 +66,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Please answer with YYYY-MM-DD format</d:Text>
+                  <d:Text xml:lang="fr-FR">"Please answer with YYYY-MM-DD format"</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -79,7 +79,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Please answer with YYYY-MM format</d:Text>
+                  <d:Text xml:lang="fr-FR">"Please answer with YYYY-MM format"</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -92,7 +92,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Please answer with YYYY format</d:Text>
+                  <d:Text xml:lang="fr-FR">"Please answer with YYYY format"</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -105,7 +105,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Please answer in years months</d:Text>
+                  <d:Text xml:lang="fr-FR">"Please answer in years months"</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -118,7 +118,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Please answer in hours-minutes</d:Text>
+                  <d:Text xml:lang="fr-FR">"Please answer in hours-minutes"</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -131,7 +131,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Please answer in hours hundredths</d:Text>
+                  <d:Text xml:lang="fr-FR">"Please answer in hours hundredths"</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -144,7 +144,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">This module asks about your general knowledge of the Simpsons city</d:Text>
+                  <d:Text xml:lang="fr-FR">"This module asks about your general knowledge of the Simpsons city"</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -157,7 +157,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">One possible answer</d:Text>
+                  <d:Text xml:lang="fr-FR">"One possible answer"</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -170,7 +170,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Only one possible answer</d:Text>
+                  <d:Text xml:lang="fr-FR">"Only one possible answer"</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -183,7 +183,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR"><xhtml:p><xhtml:i>Several possible answers</xhtml:i></xhtml:p></d:Text>
+                  <d:Text xml:lang="fr-FR">"Several possible answers"</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -196,7 +196,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">The sum of percentages is: ¤jbcggtca-GOP¤ %. The total of percentages must be equal to 100%. </d:Text>
+                  <d:Text xml:lang="fr-FR">"The sum of percentages is: " || ¤jbcggtca-GOP¤ || " %. The total of percentages must be equal to 100%. "</d:Text>
                </d:LiteralText>
                <d:ConditionalText>
                   <r:SourceParameterReference>
@@ -217,11 +217,11 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Several answers possible: check off all the relevant boxes</d:Text>
+                  <d:Text xml:lang="fr-FR">"Several answers possible: check off all the relevant boxes"</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
-      <d:Instruction><r:Agency>fr.insee</r:Agency><r:ID>FTN-INSTRUCTION-1</r:ID><r:Version>1</r:Version><d:InstructionName><r:String xml:lang="fr-FR">tooltip</r:String></d:InstructionName><d:InstructionText><d:LiteralText><d:Text xml:lang="fr-FR"><xhtml:p id="ftn1">Included principalities</xhtml:p></d:Text></d:LiteralText></d:InstructionText></d:Instruction></d:InterviewerInstructionScheme>
+      <d:Instruction><r:Agency>fr.insee</r:Agency><r:ID>FTN-INSTRUCTION-1</r:ID><r:Version>1</r:Version><d:InstructionName><r:String xml:lang="fr-FR">tooltip</r:String></d:InstructionName><d:InstructionText><d:LiteralText><d:Text xml:lang="fr-FR">"Included principalities"</d:Text></d:LiteralText></d:InstructionText></d:Instruction></d:InterviewerInstructionScheme>
       <d:ControlConstructScheme>
          <r:Agency>fr.insee</r:Agency>
          <r:ID>ControlConstructScheme-i6vwi2506qf2mms</r:ID>
@@ -231,7 +231,7 @@
             <r:ID>Sequence-i6vwi2506qf2mms</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Questionnaire SIMPSONS 20201215</r:Content>
+               <r:Content xml:lang="fr-FR">"Questionnaire SIMPSONS 20201215"</r:Content>
             </r:Label>
             <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">template</d:TypeOfSequence>
             <d:ControlConstructReference>
@@ -261,7 +261,7 @@
                <r:String xml:lang="fr-FR">MODULE1</r:String>
             </d:ConstructName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Introduction</r:Content>
+               <r:Content xml:lang="fr-FR">"Introduction"</r:Content>
             </r:Label>
             <d:InterviewerInstructionReference>
                <r:Agency>fr.insee</r:Agency>
@@ -297,7 +297,7 @@
                <r:String xml:lang="fr-FR">MODULE11</r:String>
             </d:ConstructName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">General knowledge of the series</r:Content>
+               <r:Content xml:lang="fr-FR">"General knowledge of the series"</r:Content>
             </r:Label>
             <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
             <d:ControlConstructReference>
@@ -393,7 +393,7 @@
                <r:String xml:lang="fr-FR">MODULE2</r:String>
             </d:ConstructName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Simpsons' city</r:Content>
+               <r:Content xml:lang="fr-FR">"Simpsons' city"</r:Content>
             </r:Label>
             <d:InterviewerInstructionReference>
                <r:Agency>fr.insee</r:Agency>
@@ -429,7 +429,7 @@
                <r:String xml:lang="fr-FR">MODULE3</r:String>
             </d:ConstructName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Characters</r:Content>
+               <r:Content xml:lang="fr-FR">"Characters"</r:Content>
             </r:Label>
             <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
             <d:ControlConstructReference>
@@ -471,7 +471,7 @@
                <r:String xml:lang="fr-FR">MODULE4</r:String>
             </d:ConstructName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">General questions</r:Content>
+               <r:Content xml:lang="fr-FR">"General questions"</r:Content>
             </r:Label>
             <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
             <d:ControlConstructReference>
@@ -501,7 +501,7 @@
                <r:String xml:lang="fr-FR">MODULE41</r:String>
             </d:ConstructName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Kwik-E-Mart</r:Content>
+               <r:Content xml:lang="fr-FR">"Kwik-E-Mart"</r:Content>
             </r:Label>
             <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
             <d:ControlConstructReference>
@@ -531,7 +531,7 @@
                <r:String xml:lang="fr-FR">MODULE42</r:String>
             </d:ConstructName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Clowning</r:Content>
+               <r:Content xml:lang="fr-FR">"Clowning"</r:Content>
             </r:Label>
             <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
             <d:ControlConstructReference>
@@ -549,7 +549,7 @@
                <r:String xml:lang="fr-FR">MODULE43</r:String>
             </d:ConstructName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Transport</r:Content>
+               <r:Content xml:lang="fr-FR">"Transport"</r:Content>
             </r:Label>
             <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
             <d:ControlConstructReference>
@@ -567,7 +567,7 @@
                <r:String xml:lang="fr-FR">MODULE5</r:String>
             </d:ConstructName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Favourite characters (dynamic table)</r:Content>
+               <r:Content xml:lang="fr-FR">"Favourite characters (dynamic table)"</r:Content>
             </r:Label>
             <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
             <d:ControlConstructReference>
@@ -597,7 +597,7 @@
                <r:String xml:lang="fr-FR">MODULE6</r:String>
             </d:ConstructName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Favourite characters (Loop)</r:Content>
+               <r:Content xml:lang="fr-FR">"Favourite characters (Loop)"</r:Content>
             </r:Label>
             <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
             <d:ControlConstructReference>
@@ -621,7 +621,7 @@
                <r:String xml:lang="fr-FR">DESCRIPTIO</r:String>
             </d:ConstructName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Description of each character</r:Content>
+               <r:Content xml:lang="fr-FR">"Description of each character"</r:Content>
             </r:Label>
             <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
             <d:ControlConstructReference>
@@ -645,7 +645,7 @@
                <r:String xml:lang="fr-FR">MODULE6BIS</r:String>
             </d:ConstructName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Other details about character named ¤kiq66gtw-QOP-kiq62m5b¤  </r:Content>
+               <r:Content xml:lang="fr-FR">"Other details about character named " || ¤kiq66gtw-QOP-kiq62m5b¤ || " "</r:Content>
             </r:Label>
             <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
             <d:ControlConstructReference>
@@ -669,7 +669,7 @@
                <r:String xml:lang="fr-FR">MODULE7</r:String>
             </d:ConstructName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Comment</r:Content>
+               <r:Content xml:lang="fr-FR">"Comment"</r:Content>
             </r:Label>
             <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
             <d:ControlConstructReference>
@@ -684,17 +684,17 @@
             <r:ID>kiq7bjam</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Add a character</r:Content>
+               <r:Content xml:lang="fr-FR">"Add a character"</r:Content>
             </r:Label>
             <d:InitialValue>
                <r:Command>
-                  <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
                   <r:CommandContent>1</r:CommandContent>
                </r:Command>
             </d:InitialValue>
             <d:LoopWhile>
                <r:Command>
-                  <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
                   <r:InParameter isArray="false">
                      <r:Agency>fr.insee</r:Agency>
                      <r:ID>kiq7bjam-IP-1</r:ID>
@@ -722,7 +722,7 @@
             </d:LoopWhile>
             <d:StepValue>
                <r:Command>
-                  <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
                   <r:CommandContent>1</r:CommandContent>
                </r:Command>
             </d:StepValue>
@@ -749,7 +749,7 @@
             <r:ID>j6p6my1d-a-j6p0np9q</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">A définir</r:Content>
+               <r:Content xml:lang="fr-FR">"A définir"</r:Content>
             </r:Label>
             <r:Description>
                <r:Content xml:lang="fr-FR"/>
@@ -757,7 +757,7 @@
             <d:TypeOfIfThenElse controlledVocabularyID="INSEE-TOITE-CL-1">hideable</d:TypeOfIfThenElse>
             <d:IfCondition>
                <r:Command>
-                  <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
                   <r:InParameter isArray="false">
                      <r:Agency>fr.insee</r:Agency>
                      <r:ID>j6p6my1d-a-j6p0np9q-IP-1</r:ID>
@@ -780,7 +780,7 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>not(j6p6my1d-a-j6p0np9q-IP-1 != '1')</r:CommandContent>
+                  <r:CommandContent>j6p6my1d-a-j6p0np9q-IP-1</r:CommandContent>
                </r:Command>
             </d:IfCondition>
             <d:ThenConstructReference>
@@ -809,7 +809,7 @@
             <r:ID>j6p6my1d-a-j6p0ti5h</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">A définir</r:Content>
+               <r:Content xml:lang="fr-FR">"A définir"</r:Content>
             </r:Label>
             <r:Description>
                <r:Content xml:lang="fr-FR"/>
@@ -817,7 +817,7 @@
             <d:TypeOfIfThenElse controlledVocabularyID="INSEE-TOITE-CL-1">hideable</d:TypeOfIfThenElse>
             <d:IfCondition>
                <r:Command>
-                  <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
                   <r:InParameter isArray="false">
                      <r:Agency>fr.insee</r:Agency>
                      <r:ID>j6p6my1d-a-j6p0ti5h-IP-1</r:ID>
@@ -840,7 +840,7 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>not(j6p6my1d-a-j6p0ti5h-IP-1 != '1')</r:CommandContent>
+                  <r:CommandContent>j6p6my1d-a-j6p0ti5h-IP-1</r:CommandContent>
                </r:Command>
             </d:IfCondition>
             <d:ThenConstructReference>
@@ -1392,7 +1392,7 @@
                <r:String xml:lang="fr-FR">Control that a numeric variable is not null</r:String>
             </d:ConstructName>
             <r:Description>
-               <r:Content xml:lang="fr-FR">Control that a numeric variable is not null</r:Content>
+               <r:Content xml:lang="fr-FR">"Control that a numeric variable is not null"</r:Content>
             </r:Description>
             <d:InterviewerInstructionReference>
                <r:Agency>fr.insee</r:Agency>
@@ -1403,7 +1403,7 @@
             <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
-                  <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
                   <r:InParameter isArray="false">
                      <r:Agency>fr.insee</r:Agency>
                      <r:ID>j6q9h8tj-CI-0-IP-1</r:ID>
@@ -1438,7 +1438,7 @@
                <r:String xml:lang="fr-FR">Total of percentages</r:String>
             </d:ConstructName>
             <r:Description>
-               <r:Content xml:lang="fr-FR">Total of percentages</r:Content>
+               <r:Content xml:lang="fr-FR">"Total of percentages"</r:Content>
             </r:Description>
             <d:InterviewerInstructionReference>
                <r:Agency>fr.insee</r:Agency>
@@ -1449,7 +1449,7 @@
             <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-3">stumblingblock</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
-                  <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
                   <r:InParameter isArray="false">
                      <r:Agency>fr.insee</r:Agency>
                      <r:ID>j4nwc63q-CI-0-IP-1</r:ID>
@@ -1614,7 +1614,7 @@
             <r:Version>1</r:Version>
             <d:DisplayText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR"><xhtml:p><xhtml:b>Now we are going to know if you think that Jay is a gluton.</xhtml:b></xhtml:p></d:Text>
+                  <d:Text xml:lang="fr-FR">"Now we are going to know if you think that Jay is a gluton."</d:Text>
                </d:LiteralText>
             </d:DisplayText>
          </d:StatementItem>
@@ -1624,7 +1624,7 @@
          <r:ID>QuestionScheme-i6vwi2506qf2mms</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">A définir</r:Content>
+            <r:Content xml:lang="fr-FR">"A définir"</r:Content>
          </r:Label>
          <d:QuestionItem>
             <r:Agency>fr.insee</r:Agency>
@@ -1657,7 +1657,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Before starting, do you have any comments about the Simpsons family?</d:Text>
+                  <d:Text xml:lang="fr-FR">"Before starting, do you have any comments about the Simpsons family?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:TextDomain maxLength="500">
@@ -1701,7 +1701,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">If you agree to answer this questionnaire, please check the box</d:Text>
+                  <d:Text xml:lang="fr-FR">"If you agree to answer this questionnaire, please check the box"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:NominalDomain>
@@ -1733,12 +1733,12 @@
                   <r:Description>
                      <r:Content>
                         <xhtml:div class="FlowControl" id="j6p6my1d">
-                           <xhtml:div class="Description">If you are not ready, please go to the end of
-          the questionnaire</xhtml:div>
-                           <xhtml:div class="Expression">$READY$ != '1'</xhtml:div>
+                           <xhtml:div class="Description">"If you are not ready, please go to the end of
+          the questionnaire"</xhtml:div>
+                           <xhtml:div class="Expression">$READY$</xhtml:div>
                            <xhtml:div class="IfTrue">j6z12s2d</xhtml:div>
                         </xhtml:div>
-                     </r:Content>
+                     "</r:Content>
                   </r:Description>
                </r:OtherMaterial>
             </d:ExternalAid>
@@ -1780,7 +1780,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Who is the producer?</d:Text>
+                  <d:Text xml:lang="fr-FR">"Who is the producer?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:TextDomain maxLength="30">
@@ -1823,7 +1823,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">What is the current season number?</d:Text>
+                  <d:Text xml:lang="fr-FR">"What is the current season number?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:NumericDomain>
@@ -1871,7 +1871,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">When was the first episode of Simpsons? (format YYYY-MM-DD)</d:Text>
+                  <d:Text xml:lang="fr-FR">"When was the first episode of Simpsons? (format YYYY-MM-DD)"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:DateTimeDomainReference>
@@ -1929,7 +1929,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">When was the first episode of the Simpsons? (format YYYY-MM)</d:Text>
+                  <d:Text xml:lang="fr-FR">"When was the first episode of the Simpsons? (format YYYY-MM)"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:DateTimeDomain>
@@ -1982,7 +1982,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">When was the first episode of the Simpsons? (format YYYY)</d:Text>
+                  <d:Text xml:lang="fr-FR">"When was the first episode of the Simpsons? (format YYYY)"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:DateTimeDomainReference>
@@ -2040,7 +2040,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">How long does an episode last?</d:Text>
+                  <d:Text xml:lang="fr-FR">"How long does an episode last?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:NumericDomain decimalPositions="2">
@@ -2087,7 +2087,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">How long does it take to write a new episode?</d:Text>
+                  <d:Text xml:lang="fr-FR">"How long does it take to write a new episode?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:NumericDomain decimalPositions="1">
@@ -2134,7 +2134,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">How long will it take you to watch all the existing episodes?</d:Text>
+                  <d:Text xml:lang="fr-FR">"How long will it take you to watch all the existing episodes?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:NumericDomain>
@@ -2181,7 +2181,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">For how long have you known the Simpsons family?</d:Text>
+                  <d:Text xml:lang="fr-FR">"For how long have you known the Simpsons family?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:NumericDomain>
@@ -2228,7 +2228,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">For how long have you known the Simpsons family? (format years-months)</d:Text>
+                  <d:Text xml:lang="fr-FR">"For how long have you known the Simpsons family? (format years-months)"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:DateTimeDomain>
@@ -2282,7 +2282,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">How long did it take you to complete this questionnaire? (format hours-minutes)</d:Text>
+                  <d:Text xml:lang="fr-FR">"How long did it take you to complete this questionnaire? (format hours-minutes)"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:DateTimeDomainReference>
@@ -2340,7 +2340,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">How long did it take you to complete this questionnaire? (format hours hundredths)</d:Text>
+                  <d:Text xml:lang="fr-FR">"How long did it take you to complete this questionnaire? (format hours hundredths)"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:DateTimeDomainReference>
@@ -2398,7 +2398,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">In your opinion, how much is the part of audience share in US for the 2016 season?</d:Text>
+                  <d:Text xml:lang="fr-FR">"In your opinion, how much is the part of audience share in US for the 2016 season?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:NumericDomain decimalPositions="1">
@@ -2445,7 +2445,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">In which city do the Simpsons reside?</d:Text>
+                  <d:Text xml:lang="fr-FR">"In which city do the Simpsons reside?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:CodeDomain>
@@ -2531,7 +2531,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Who is the Simpsons city mayor?</d:Text>
+                  <d:Text xml:lang="fr-FR">"Who is the Simpsons city mayor?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:StructuredMixedResponseDomain>
@@ -2563,11 +2563,7 @@
                <d:ResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">"Please specify:"</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -2627,7 +2623,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">In which state do The Simpsons reside?</d:Text>
+                  <d:Text xml:lang="fr-FR">"In which state do The Simpsons reside?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:CodeDomain>
@@ -2685,7 +2681,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">How many characters from the Simpsons family could you precisely describe?</d:Text>
+                  <d:Text xml:lang="fr-FR">"How many characters from the Simpsons family could you precisely describe?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:NumericDomain>
@@ -2732,7 +2728,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">What is the first name of this character?</d:Text>
+                  <d:Text xml:lang="fr-FR">"What is the first name of this character?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:TextDomain maxLength="30">
@@ -2775,7 +2771,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">How old is this character in the first episode of the Simpsons family?</d:Text>
+                  <d:Text xml:lang="fr-FR">"How old is this character in the first episode of the Simpsons family?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:NumericDomain>
@@ -2822,7 +2818,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Is character named ¤kiq66gtw-QOP-kiq62m5b¤ your favourite one ? </d:Text>
+                  <d:Text xml:lang="fr-FR">"Is character named " || ¤kiq66gtw-QOP-kiq62m5b¤ || " your favourite one ? "</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:CodeDomain>
@@ -2880,7 +2876,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">What is your best memory about character named ¤kiq66gtw-QOP-kiq62m5b¤ ? </d:Text>
+                  <d:Text xml:lang="fr-FR">"What is your best memory about character named " || ¤kiq66gtw-QOP-kiq62m5b¤ || " ? "</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:TextDomain maxLength="255">
@@ -2923,7 +2919,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Do you have any comment about the survey?</d:Text>
+                  <d:Text xml:lang="fr-FR">"Do you have any comment about the survey?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:TextDomain maxLength="255">
@@ -3054,7 +3050,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">What are the pet names that the Simpsons family had?</d:Text>
+                  <d:Text xml:lang="fr-FR">"What are the pet names that the Simpsons family had?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
@@ -3183,11 +3179,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">">Please specify: "</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -3335,7 +3327,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Does Jay like the following ice cream flavours?</d:Text>
+                  <d:Text xml:lang="fr-FR">"Does Jay like the following ice cream flavours?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
@@ -3472,11 +3464,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">"Please specify:"</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -3596,7 +3584,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Which character works in the nuclear power plant?</d:Text>
+                  <d:Text xml:lang="fr-FR">"Which character works in the nuclear power plant?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
@@ -3851,7 +3839,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">In which city each character was born?</d:Text>
+                  <d:Text xml:lang="fr-FR">"In which city each character was born?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
@@ -4180,7 +4168,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Please, specify the percentage of Jay's expenses in the Kwik-E-Mart for each product?</d:Text>
+                  <d:Text xml:lang="fr-FR">"Please, specify the percentage of Jay's expenses in the Kwik-E-Mart for each product?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
@@ -4713,7 +4701,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Please specify if Jay has bought each product in his last food shopping</d:Text>
+                  <d:Text xml:lang="fr-FR">"Please specify if Jay has bought each product in his last food shopping"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
@@ -4988,11 +4976,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">"Please specify:"</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5016,11 +5000,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">"Please specify:"</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5044,11 +5024,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">"Please specify:"</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5072,11 +5048,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">"Please specify:"</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5100,11 +5072,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">"Please specify:"</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5128,11 +5096,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">"Please specify:"</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5156,11 +5120,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">"Please specify:"</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5184,11 +5144,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">"Please specify:"</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5396,7 +5352,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Who did these clownings and tell us what you remember?</d:Text>
+                  <d:Text xml:lang="fr-FR">"Who did these clownings and tell us what you remember?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
@@ -6147,7 +6103,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Which of the following means of transport were used by the hero and in which country?</d:Text>
+                  <d:Text xml:lang="fr-FR">"Which of the following means of transport were used by the hero and in which country?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
@@ -6972,7 +6928,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Please, complete the following grid with your favourite characters</d:Text>
+                  <d:Text xml:lang="fr-FR">"Please, complete the following grid with your favourite characters"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
@@ -7055,11 +7011,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please clarify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">"Please clarify:"</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -7179,7 +7131,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">How has your feeling about the following characters evolved over time?</d:Text>
+                  <d:Text xml:lang="fr-FR">"How has your feeling about the following characters evolved over time?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
@@ -7544,7 +7496,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Can you tell how long Bart Simpson has been on leave for each type and whether there has been another type?</d:Text>
+                  <d:Text xml:lang="fr-FR">"Can you tell how long Bart Simpson has been on leave for each type and whether there has been another type?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
@@ -7831,14 +7783,14 @@
          <r:ID>CategoryScheme-j334iumu</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">TOWN</r:Content>
+            <r:Content xml:lang="fr-FR">"TOWN"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-j334iumu-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Springfield</r:Content>
+               <r:Content xml:lang="fr-FR">"Springfield"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -7846,7 +7798,7 @@
             <r:ID>CA-j334iumu-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Shelbyville</r:Content>
+               <r:Content xml:lang="fr-FR">"Shelbyville"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -7854,7 +7806,7 @@
             <r:ID>CA-j334iumu-3</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Seinfeld</r:Content>
+               <r:Content xml:lang="fr-FR">"Seinfeld"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -7863,14 +7815,14 @@
          <r:ID>CategoryScheme-j6qdqoen</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">MAYOR </r:Content>
+            <r:Content xml:lang="fr-FR">"MAYOR "</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-j6qdqoen-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Constance Harm</r:Content>
+               <r:Content xml:lang="fr-FR">"Constance Harm"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -7878,7 +7830,7 @@
             <r:ID>CA-j6qdqoen-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Timothy Lovejoy</r:Content>
+               <r:Content xml:lang="fr-FR">"Timothy Lovejoy"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -7886,7 +7838,7 @@
             <r:ID>CA-j6qdqoen-3</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Joe Quimby</r:Content>
+               <r:Content xml:lang="fr-FR">"Joe Quimby"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -7894,7 +7846,7 @@
             <r:ID>CA-j6qdqoen-4</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Other name</r:Content>
+               <r:Content xml:lang="fr-FR">"Other name"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -7903,14 +7855,14 @@
          <r:ID>CategoryScheme-j4nwo00f</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">State</r:Content>
+            <r:Content xml:lang="fr-FR">"State"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-j4nwo00f-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Washington</r:Content>
+               <r:Content xml:lang="fr-FR">"Washington"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -7918,7 +7870,7 @@
             <r:ID>CA-j4nwo00f-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Kentucky</r:Content>
+               <r:Content xml:lang="fr-FR">"Kentucky"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -7926,7 +7878,7 @@
             <r:ID>CA-j4nwo00f-3</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Ohio</r:Content>
+               <r:Content xml:lang="fr-FR">"Ohio"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -7934,7 +7886,7 @@
             <r:ID>CA-j4nwo00f-4</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Maine</r:Content>
+               <r:Content xml:lang="fr-FR">"Maine"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -7942,7 +7894,7 @@
             <r:ID>CA-j4nwo00f-5</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">North Dakota</r:Content>
+               <r:Content xml:lang="fr-FR">"North Dakota"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -7950,7 +7902,7 @@
             <r:ID>CA-j4nwo00f-6</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Florida</r:Content>
+               <r:Content xml:lang="fr-FR">"Florida"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -7958,7 +7910,7 @@
             <r:ID>CA-j4nwo00f-7</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">North Takoma</r:Content>
+               <r:Content xml:lang="fr-FR">"North Takoma"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -7966,7 +7918,7 @@
             <r:ID>CA-j4nwo00f-8</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">California</r:Content>
+               <r:Content xml:lang="fr-FR">"California"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -7974,7 +7926,7 @@
             <r:ID>CA-j4nwo00f-9</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Texas</r:Content>
+               <r:Content xml:lang="fr-FR">"Texas"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -7982,7 +7934,7 @@
             <r:ID>CA-j4nwo00f-10</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Massachusetts</r:Content>
+               <r:Content xml:lang="fr-FR">"Massachusetts"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -7990,7 +7942,7 @@
             <r:ID>CA-j4nwo00f-11</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Nevada</r:Content>
+               <r:Content xml:lang="fr-FR">"Nevada"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -7998,7 +7950,7 @@
             <r:ID>CA-j4nwo00f-12</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Illinois</r:Content>
+               <r:Content xml:lang="fr-FR">"Illinois"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8006,7 +7958,7 @@
             <r:ID>CA-j4nwo00f-13</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Not in any state, you fool!</r:Content>
+               <r:Content xml:lang="fr-FR">"Not in any state, you fool!"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8015,14 +7967,14 @@
          <r:ID>CategoryScheme-j335cu3c</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">ANIMALS</r:Content>
+            <r:Content xml:lang="fr-FR">"ANIMALS"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-j335cu3c-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Santa's Little Helper</r:Content>
+               <r:Content xml:lang="fr-FR">"Santa's Little Helper"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8030,7 +7982,7 @@
             <r:ID>CA-j335cu3c-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Snowball I</r:Content>
+               <r:Content xml:lang="fr-FR">"Snowball I"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8038,7 +7990,7 @@
             <r:ID>CA-j335cu3c-3</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Coltrane</r:Content>
+               <r:Content xml:lang="fr-FR">"Coltrane"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8046,7 +7998,7 @@
             <r:ID>CA-j335cu3c-4</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Other name</r:Content>
+               <r:Content xml:lang="fr-FR">"Other name"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8055,14 +8007,14 @@
          <r:ID>CategoryScheme-j6p2mvca</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">Flavours</r:Content>
+            <r:Content xml:lang="fr-FR">"Flavours"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-j6p2mvca-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Vanilla</r:Content>
+               <r:Content xml:lang="fr-FR">"Vanilla"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8070,7 +8022,7 @@
             <r:ID>CA-j6p2mvca-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Strawberry</r:Content>
+               <r:Content xml:lang="fr-FR">"Strawberry"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8078,7 +8030,7 @@
             <r:ID>CA-j6p2mvca-3</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Apple</r:Content>
+               <r:Content xml:lang="fr-FR">"Apple"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8086,7 +8038,7 @@
             <r:ID>CA-j6p2mvca-4</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Other flavour</r:Content>
+               <r:Content xml:lang="fr-FR">"Other flavour"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8095,14 +8047,14 @@
          <r:ID>CategoryScheme-jbdxh138</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">YESNO</r:Content>
+            <r:Content xml:lang="fr-FR">"YESNO"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-jbdxh138-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Yes</r:Content>
+               <r:Content xml:lang="fr-FR">"Yes"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8110,7 +8062,7 @@
             <r:ID>CA-jbdxh138-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">No</r:Content>
+               <r:Content xml:lang="fr-FR">"No"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8119,14 +8071,14 @@
          <r:ID>CategoryScheme-j6qeytgc</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">NUCLEAR_CHARACTERS</r:Content>
+            <r:Content xml:lang="fr-FR">"NUCLEAR_CHARACTERS"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-j6qeytgc-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Charles Montgomery Burns</r:Content>
+               <r:Content xml:lang="fr-FR">"Charles Montgomery Burns"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8134,7 +8086,7 @@
             <r:ID>CA-j6qeytgc-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Carl Carlson</r:Content>
+               <r:Content xml:lang="fr-FR">"Carl Carlson"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8142,7 +8094,7 @@
             <r:ID>CA-j6qeytgc-3</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Otto Mann</r:Content>
+               <r:Content xml:lang="fr-FR">"Otto Mann"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8150,7 +8102,7 @@
             <r:ID>CA-j6qeytgc-4</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Lenny Leonard</r:Content>
+               <r:Content xml:lang="fr-FR">"Lenny Leonard"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8159,14 +8111,14 @@
          <r:ID>CategoryScheme-j6z087mq</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">BIRTH_CHARACTER</r:Content>
+            <r:Content xml:lang="fr-FR">"BIRTH_CHARACTER"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-j6z087mq-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Selma Bouvier</r:Content>
+               <r:Content xml:lang="fr-FR">"Selma Bouvier"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8174,7 +8126,7 @@
             <r:ID>CA-j6z087mq-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Kent Brockman</r:Content>
+               <r:Content xml:lang="fr-FR">"Kent Brockman"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8182,7 +8134,7 @@
             <r:ID>CA-j6z087mq-3</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Milhouse Van Houten</r:Content>
+               <r:Content xml:lang="fr-FR">"Milhouse Van Houten"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8190,7 +8142,7 @@
             <r:ID>CA-j6z087mq-4</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Nelson Muntz</r:Content>
+               <r:Content xml:lang="fr-FR">"Nelson Muntz"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8198,7 +8150,7 @@
             <r:ID>CA-j6z087mq-5</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Crazy Cat Lady</r:Content>
+               <r:Content xml:lang="fr-FR">"Crazy Cat Lady"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8207,14 +8159,14 @@
          <r:ID>CategoryScheme-jbdxricm</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">CITY_BIRTH</r:Content>
+            <r:Content xml:lang="fr-FR">"CITY_BIRTH"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-jbdxricm-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Albuquerque</r:Content>
+               <r:Content xml:lang="fr-FR">"Albuquerque"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8222,7 +8174,7 @@
             <r:ID>CA-jbdxricm-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Springfield</r:Content>
+               <r:Content xml:lang="fr-FR">"Springfield"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8230,7 +8182,7 @@
             <r:ID>CA-jbdxricm-3</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Portland</r:Content>
+               <r:Content xml:lang="fr-FR">"Portland"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8238,7 +8190,7 @@
             <r:ID>CA-jbdxricm-4</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Shelbyville</r:Content>
+               <r:Content xml:lang="fr-FR">"Shelbyville"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8246,7 +8198,7 @@
             <r:ID>CA-jbdxricm-5</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Dagstuhl</r:Content>
+               <r:Content xml:lang="fr-FR">"Dagstuhl"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8255,14 +8207,14 @@
          <r:ID>CategoryScheme-j4nwh16i</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">Products</r:Content>
+            <r:Content xml:lang="fr-FR">"Products"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-j4nwh16i-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Frozen products</r:Content>
+               <r:Content xml:lang="fr-FR">"Frozen products"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8270,7 +8222,7 @@
             <r:ID>CA-j4nwh16i-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Ice creams</r:Content>
+               <r:Content xml:lang="fr-FR">"Ice creams"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8278,7 +8230,7 @@
             <r:ID>CA-j4nwh16i-3</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Jasper Beardly</r:Content>
+               <r:Content xml:lang="fr-FR">"Jasper Beardly"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8286,7 +8238,7 @@
             <r:ID>CA-j4nwh16i-4</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Meat</r:Content>
+               <r:Content xml:lang="fr-FR">"Meat"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8294,7 +8246,7 @@
             <r:ID>CA-j4nwh16i-5</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Bacon</r:Content>
+               <r:Content xml:lang="fr-FR">"Bacon"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8302,7 +8254,7 @@
             <r:ID>CA-j4nwh16i-6</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Pork chop</r:Content>
+               <r:Content xml:lang="fr-FR">"Pork chop"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8310,7 +8262,7 @@
             <r:ID>CA-j4nwh16i-7</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Chicken</r:Content>
+               <r:Content xml:lang="fr-FR">"Chicken"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8318,7 +8270,7 @@
             <r:ID>CA-j4nwh16i-8</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Compote</r:Content>
+               <r:Content xml:lang="fr-FR">"Compote"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8326,7 +8278,7 @@
             <r:ID>CA-j4nwh16i-9</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Powersauce</r:Content>
+               <r:Content xml:lang="fr-FR">"Powersauce"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8334,7 +8286,7 @@
             <r:ID>CA-j4nwh16i-10</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Other</r:Content>
+               <r:Content xml:lang="fr-FR">"Other"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8342,7 +8294,7 @@
             <r:ID>CA-j4nwh16i-11</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Total</r:Content>
+               <r:Content xml:lang="fr-FR">"Total"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8351,14 +8303,14 @@
          <r:ID>CategoryScheme-kiq6nvuw</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">YESNO_Other</r:Content>
+            <r:Content xml:lang="fr-FR">"YESNO_Other"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-kiq6nvuw-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Yes</r:Content>
+               <r:Content xml:lang="fr-FR">"Yes"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8366,7 +8318,7 @@
             <r:ID>CA-kiq6nvuw-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">No</r:Content>
+               <r:Content xml:lang="fr-FR">"No"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8374,7 +8326,7 @@
             <r:ID>CA-kiq6nvuw-3</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Other</r:Content>
+               <r:Content xml:lang="fr-FR">"Other"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8383,14 +8335,14 @@
          <r:ID>CategoryScheme-j77dav9b</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">Clownings</r:Content>
+            <r:Content xml:lang="fr-FR">"Clownings"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-j77dav9b-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR"><xhtml:p><xhtml:b><xhtml:i>Break the windows of the whole city</xhtml:i></xhtml:b></xhtml:p></r:Content>
+               <r:Content xml:lang="fr-FR">"Break the windows of the whole city"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8398,7 +8350,7 @@
             <r:ID>CA-j77dav9b-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR"><xhtml:p><xhtml:b><xhtml:i>Loose the violin of his daughter playing poker</xhtml:i></xhtml:b></xhtml:p></r:Content>
+               <r:Content xml:lang="fr-FR">"Loose the violin of his daughter playing poker"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8406,7 +8358,7 @@
             <r:ID>CA-j77dav9b-3</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR"><xhtml:p><xhtml:b><xhtml:i>Kill Mr Burns</xhtml:i></xhtml:b></xhtml:p></r:Content>
+               <r:Content xml:lang="fr-FR">"Kill Mr Burns"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8414,7 +8366,7 @@
             <r:ID>CA-j77dav9b-4</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR"><xhtml:p><xhtml:b><xhtml:i>Leaving a mechanical object to control the nuclear power plant</xhtml:i></xhtml:b></xhtml:p></r:Content>
+               <r:Content xml:lang="fr-FR">"Leaving a mechanical object to control the nuclear power plant"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8423,14 +8375,14 @@
          <r:ID>CategoryScheme-jbdyh6b5</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">Clowning_Characters</r:Content>
+            <r:Content xml:lang="fr-FR">"Clowning_Characters"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-jbdyh6b5-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Jay</r:Content>
+               <r:Content xml:lang="fr-FR">"Jay"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8438,7 +8390,7 @@
             <r:ID>CA-jbdyh6b5-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Bart</r:Content>
+               <r:Content xml:lang="fr-FR">"Bart"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8446,7 +8398,7 @@
             <r:ID>CA-jbdyh6b5-3</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Krusty the clown</r:Content>
+               <r:Content xml:lang="fr-FR">"Krusty the clown"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8454,7 +8406,7 @@
             <r:ID>CA-jbdyh6b5-4</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Other</r:Content>
+               <r:Content xml:lang="fr-FR">"Other"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8463,14 +8415,14 @@
          <r:ID>CategoryScheme-j6p2kivg</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">Means of transport</r:Content>
+            <r:Content xml:lang="fr-FR">"Means of transport"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-j6p2kivg-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Car</r:Content>
+               <r:Content xml:lang="fr-FR">"Car"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8478,7 +8430,7 @@
             <r:ID>CA-j6p2kivg-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Bike</r:Content>
+               <r:Content xml:lang="fr-FR">"Bike"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8486,7 +8438,7 @@
             <r:ID>CA-j6p2kivg-3</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Skateboard</r:Content>
+               <r:Content xml:lang="fr-FR">"Skateboard"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8494,7 +8446,7 @@
             <r:ID>CA-j6p2kivg-4</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Plane</r:Content>
+               <r:Content xml:lang="fr-FR">"Plane"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8503,14 +8455,14 @@
          <r:ID>CategoryScheme-jbdye1wa</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">Country</r:Content>
+            <r:Content xml:lang="fr-FR">"Country"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-jbdye1wa-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Brazil</r:Content>
+               <r:Content xml:lang="fr-FR">"Brazil"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8518,7 +8470,7 @@
             <r:ID>CA-jbdye1wa-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Canada</r:Content>
+               <r:Content xml:lang="fr-FR">"Canada"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8526,7 +8478,7 @@
             <r:ID>CA-jbdye1wa-3</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Japan</r:Content>
+               <r:Content xml:lang="fr-FR">"Japan"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8534,7 +8486,7 @@
             <r:ID>CA-jbdye1wa-4</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">France</r:Content>
+               <r:Content xml:lang="fr-FR">"France"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8542,7 +8494,7 @@
             <r:ID>CA-jbdye1wa-5</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR"><xhtml:p>Other country<xhtml:a href="#ftn1"/></xhtml:p></r:Content>
+               <r:Content xml:lang="fr-FR">"Other country"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8550,7 +8502,7 @@
             <r:ID>CA-jbdye1wa-6</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Other planet</r:Content>
+               <r:Content xml:lang="fr-FR">"Other planet"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8559,14 +8511,14 @@
          <r:ID>CategoryScheme-kiq7ditg</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">Yes-No-Other-Family</r:Content>
+            <r:Content xml:lang="fr-FR">"Yes-No-Other-Family"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-kiq7ditg-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Yes</r:Content>
+               <r:Content xml:lang="fr-FR">"Yes"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8574,7 +8526,7 @@
             <r:ID>CA-kiq7ditg-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">No</r:Content>
+               <r:Content xml:lang="fr-FR">"No"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8582,7 +8534,7 @@
             <r:ID>CA-kiq7ditg-3</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Other</r:Content>
+               <r:Content xml:lang="fr-FR">"Other"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8591,14 +8543,14 @@
          <r:ID>CategoryScheme-jvxv1ko0</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">Evolution</r:Content>
+            <r:Content xml:lang="fr-FR">"Evolution"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-jvxv1ko0-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Up</r:Content>
+               <r:Content xml:lang="fr-FR">"Up"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8606,7 +8558,7 @@
             <r:ID>CA-jvxv1ko0-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Down</r:Content>
+               <r:Content xml:lang="fr-FR">"Down"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8614,7 +8566,7 @@
             <r:ID>CA-jvxv1ko0-3</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Steady</r:Content>
+               <r:Content xml:lang="fr-FR">"Steady"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8623,14 +8575,14 @@
          <r:ID>CategoryScheme-jvxx60bh</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">TypeOfLeave</r:Content>
+            <r:Content xml:lang="fr-FR">"TypeOfLeave"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-jvxx60bh-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Leave with pay</r:Content>
+               <r:Content xml:lang="fr-FR">"Leave with pay"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8638,7 +8590,7 @@
             <r:ID>CA-jvxx60bh-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Public holiday</r:Content>
+               <r:Content xml:lang="fr-FR">"Public holiday"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8646,7 +8598,7 @@
             <r:ID>CA-jvxx60bh-3</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Sick leave</r:Content>
+               <r:Content xml:lang="fr-FR">"Sick leave"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8654,7 +8606,7 @@
             <r:ID>CA-jvxx60bh-4</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Maternity/paternity leave</r:Content>
+               <r:Content xml:lang="fr-FR">"Maternity/paternity leave"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8662,7 +8614,7 @@
             <r:ID>CA-jvxx60bh-5</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Other type</r:Content>
+               <r:Content xml:lang="fr-FR">"Other type"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8671,14 +8623,14 @@
          <r:ID>CategoryScheme-jvxulmed</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">Unit</r:Content>
+            <r:Content xml:lang="fr-FR">"Unit"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-jvxulmed-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Working Days</r:Content>
+               <r:Content xml:lang="fr-FR">"Working Days"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8686,7 +8638,7 @@
             <r:ID>CA-jvxulmed-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Calendar days</r:Content>
+               <r:Content xml:lang="fr-FR">"Calendar days"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8695,14 +8647,14 @@
          <r:ID>CategoryScheme-j4nwc63q-secondDimension-fakeCL-1</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">FAKE-CODELIST-j4nwc63q-secondDimension-fakeCL-1</r:Content>
+            <r:Content xml:lang="fr-FR">"FAKE-CODELIST-j4nwc63q-secondDimension-fakeCL-1"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-j4nwc63q-secondDimension-fakeCL-1-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Percentage</r:Content>
+               <r:Content xml:lang="fr-FR">"Percentage"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8711,14 +8663,14 @@
          <r:ID>CategoryScheme-k9cg2q5t-secondDimension-fakeCL-1</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">FAKE-CODELIST-k9cg2q5t-secondDimension-fakeCL-1</r:Content>
+            <r:Content xml:lang="fr-FR">"FAKE-CODELIST-k9cg2q5t-secondDimension-fakeCL-1"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-k9cg2q5t-secondDimension-fakeCL-1-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">In his last food shopping</r:Content>
+               <r:Content xml:lang="fr-FR">"In his last food shopping"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8727,14 +8679,14 @@
          <r:ID>CategoryScheme-kbkjvgel-secondDimension-fakeCL-1</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">FAKE-CODELIST-kbkjvgel-secondDimension-fakeCL-1</r:Content>
+            <r:Content xml:lang="fr-FR">"FAKE-CODELIST-kbkjvgel-secondDimension-fakeCL-1"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-kbkjvgel-secondDimension-fakeCL-1-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Clowning</r:Content>
+               <r:Content xml:lang="fr-FR">"Clowning"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8742,7 +8694,7 @@
             <r:ID>CA-kbkjvgel-secondDimension-fakeCL-1-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Remember?</r:Content>
+               <r:Content xml:lang="fr-FR">"Remember?"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8751,14 +8703,14 @@
          <r:ID>CategoryScheme-j6qg8rc6-secondDimension-fakeCL-1</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">FAKE-CODELIST-j6qg8rc6-secondDimension-fakeCL-1</r:Content>
+            <r:Content xml:lang="fr-FR">"FAKE-CODELIST-j6qg8rc6-secondDimension-fakeCL-1"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-j6qg8rc6-secondDimension-fakeCL-1-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Name</r:Content>
+               <r:Content xml:lang="fr-FR">"Name"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8766,7 +8718,7 @@
             <r:ID>CA-j6qg8rc6-secondDimension-fakeCL-1-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Age</r:Content>
+               <r:Content xml:lang="fr-FR">"Age"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8774,7 +8726,7 @@
             <r:ID>CA-j6qg8rc6-secondDimension-fakeCL-1-3</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Member of the Simpsons family</r:Content>
+               <r:Content xml:lang="fr-FR">"Member of the Simpsons family"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8783,14 +8735,14 @@
          <r:ID>CategoryScheme-jvxwy68n-secondDimension-fakeCL-1</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">FAKE-CODELIST-jvxwy68n-secondDimension-fakeCL-1</r:Content>
+            <r:Content xml:lang="fr-FR">"FAKE-CODELIST-jvxwy68n-secondDimension-fakeCL-1"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-jvxwy68n-secondDimension-fakeCL-1-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Days</r:Content>
+               <r:Content xml:lang="fr-FR">"Days"</r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -8798,7 +8750,7 @@
             <r:ID>CA-jvxwy68n-secondDimension-fakeCL-1-2</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Unit</r:Content>
+               <r:Content xml:lang="fr-FR">"Unit"</r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -8807,7 +8759,7 @@
          <r:ID>CategoryScheme-i6vwi2506qf2mms</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">A définir</r:Content>
+            <r:Content xml:lang="fr-FR">"A définir"</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
@@ -8830,7 +8782,7 @@
             <r:ID>j334iumu</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">TOWN</r:Content>
+               <r:Content xml:lang="fr-FR">"TOWN"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -8878,7 +8830,7 @@
             <r:ID>j6qdqoen</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">MAYOR </r:Content>
+               <r:Content xml:lang="fr-FR">"MAYOR "</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -8938,7 +8890,7 @@
             <r:ID>j4nwo00f</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">State</r:Content>
+               <r:Content xml:lang="fr-FR">"State"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -9106,7 +9058,7 @@
             <r:ID>j335cu3c</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">ANIMALS</r:Content>
+               <r:Content xml:lang="fr-FR">"ANIMALS"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -9166,7 +9118,7 @@
             <r:ID>j6p2mvca</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Flavours</r:Content>
+               <r:Content xml:lang="fr-FR">"Flavours"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -9226,7 +9178,7 @@
             <r:ID>jbdxh138</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">YESNO</r:Content>
+               <r:Content xml:lang="fr-FR">"YESNO"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -9262,7 +9214,7 @@
             <r:ID>j6qeytgc</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">NUCLEAR_CHARACTERS</r:Content>
+               <r:Content xml:lang="fr-FR">"NUCLEAR_CHARACTERS"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -9322,7 +9274,7 @@
             <r:ID>j6z087mq</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">BIRTH_CHARACTER</r:Content>
+               <r:Content xml:lang="fr-FR">"BIRTH_CHARACTER"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -9394,7 +9346,7 @@
             <r:ID>jbdxricm</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">CITY_BIRTH</r:Content>
+               <r:Content xml:lang="fr-FR">"CITY_BIRTH"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -9466,7 +9418,7 @@
             <r:ID>j4nwh16i</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Products</r:Content>
+               <r:Content xml:lang="fr-FR">"Products"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -9610,7 +9562,7 @@
             <r:ID>kiq6nvuw</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">YESNO_Other</r:Content>
+               <r:Content xml:lang="fr-FR">"YESNO_Other"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -9658,7 +9610,7 @@
             <r:ID>j77dav9b</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Clownings</r:Content>
+               <r:Content xml:lang="fr-FR">"Clownings"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -9718,7 +9670,7 @@
             <r:ID>jbdyh6b5</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Clowning_Characters</r:Content>
+               <r:Content xml:lang="fr-FR">"Clowning_Characters"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -9778,7 +9730,7 @@
             <r:ID>j6p2kivg</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Means of transport</r:Content>
+               <r:Content xml:lang="fr-FR">"Means of transport"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -9838,7 +9790,7 @@
             <r:ID>jbdye1wa</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Country</r:Content>
+               <r:Content xml:lang="fr-FR">"Country"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -9922,7 +9874,7 @@
             <r:ID>kiq7ditg</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Yes-No-Other-Family</r:Content>
+               <r:Content xml:lang="fr-FR">"Yes-No-Other-Family"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -9970,7 +9922,7 @@
             <r:ID>jvxv1ko0</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Evolution</r:Content>
+               <r:Content xml:lang="fr-FR">"Evolution"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -10018,7 +9970,7 @@
             <r:ID>jvxx60bh</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">TypeOfLeave</r:Content>
+               <r:Content xml:lang="fr-FR">"TypeOfLeave"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -10090,7 +10042,7 @@
             <r:ID>jvxulmed</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Unit</r:Content>
+               <r:Content xml:lang="fr-FR">"Unit"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -10126,7 +10078,7 @@
             <r:ID>j4nwc63q-secondDimension-fakeCL-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">FAKE-CODELIST-j4nwc63q-secondDimension-fakeCL-1</r:Content>
+               <r:Content xml:lang="fr-FR">"FAKE-CODELIST-j4nwc63q-secondDimension-fakeCL-1"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -10150,7 +10102,7 @@
             <r:ID>k9cg2q5t-secondDimension-fakeCL-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">FAKE-CODELIST-k9cg2q5t-secondDimension-fakeCL-1</r:Content>
+               <r:Content xml:lang="fr-FR">"FAKE-CODELIST-k9cg2q5t-secondDimension-fakeCL-1"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -10174,7 +10126,7 @@
             <r:ID>kbkjvgel-secondDimension-fakeCL-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">FAKE-CODELIST-kbkjvgel-secondDimension-fakeCL-1</r:Content>
+               <r:Content xml:lang="fr-FR">"FAKE-CODELIST-kbkjvgel-secondDimension-fakeCL-1"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -10210,7 +10162,7 @@
             <r:ID>j6qg8rc6-secondDimension-fakeCL-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">FAKE-CODELIST-j6qg8rc6-secondDimension-fakeCL-1</r:Content>
+               <r:Content xml:lang="fr-FR">"FAKE-CODELIST-j6qg8rc6-secondDimension-fakeCL-1"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -10258,7 +10210,7 @@
             <r:ID>jvxwy68n-secondDimension-fakeCL-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">FAKE-CODELIST-jvxwy68n-secondDimension-fakeCL-1</r:Content>
+               <r:Content xml:lang="fr-FR">"FAKE-CODELIST-jvxwy68n-secondDimension-fakeCL-1"</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -10319,7 +10271,7 @@
          <r:ID>VariableScheme-i6vwi2506qf2mms</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">Variable Scheme for the survey</r:Content>
+            <r:Content xml:lang="fr-FR">"Variable Scheme for the survey"</r:Content>
          </r:Label>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -10329,7 +10281,7 @@
                <r:String xml:lang="fr-FR">SUM_EXPENSES</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">SUM_EXPENSES label </r:Content>
+               <r:Content xml:lang="fr-FR">"SUM_EXPENSES label "</r:Content>
             </r:Label>
             <r:OutParameter>
                <r:Agency>fr.insee</r:Agency>
@@ -10375,7 +10327,7 @@
                <r:String xml:lang="fr-FR">YEAR</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">YEAR label </r:Content>
+               <r:Content xml:lang="fr-FR">"YEAR label "</r:Content>
             </r:Label>
             <r:OutParameter>
                <r:Agency>fr.insee</r:Agency>
@@ -10414,7 +10366,7 @@
                <r:String xml:lang="fr-FR">LAST_BROADCAST</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">LAST_BROADCAST label </r:Content>
+               <r:Content xml:lang="fr-FR">"LAST_BROADCAST label "</r:Content>
             </r:Label>
             <l:VariableRepresentation>
                <r:DateTimeRepresentationReference>
@@ -10433,7 +10385,7 @@
                <r:String xml:lang="fr-FR">COMMENT</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">COMMENT label </r:Content>
+               <r:Content xml:lang="fr-FR">"COMMENT label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10459,7 +10411,7 @@
                <r:String xml:lang="fr-FR">READY</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">READY label </r:Content>
+               <r:Content xml:lang="fr-FR">"READY label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10496,7 +10448,7 @@
                <r:String xml:lang="fr-FR">PRODUCER</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">PRODUCER label </r:Content>
+               <r:Content xml:lang="fr-FR">"PRODUCER label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10522,7 +10474,7 @@
                <r:String xml:lang="fr-FR">SEASON_NUMBER</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">SEASON_NUMBER label </r:Content>
+               <r:Content xml:lang="fr-FR">"SEASON_NUMBER label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10554,7 +10506,7 @@
                <r:String xml:lang="fr-FR">DATEFIRST</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">DATEFIRST label </r:Content>
+               <r:Content xml:lang="fr-FR">"DATEFIRST label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10585,7 +10537,7 @@
                <r:String xml:lang="fr-FR">DATEYYYYMM</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">DATEYYYYMM label </r:Content>
+               <r:Content xml:lang="fr-FR">"DATEYYYYMM label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10617,7 +10569,7 @@
                <r:String xml:lang="fr-FR">DATEYYYY</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">DATEYYYY label </r:Content>
+               <r:Content xml:lang="fr-FR">"DATEYYYY label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10648,7 +10600,7 @@
                <r:String xml:lang="fr-FR">DURATIONH</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">DURATIONH label </r:Content>
+               <r:Content xml:lang="fr-FR">"DURATIONH label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10681,7 +10633,7 @@
                <r:String xml:lang="fr-FR">DURATIOND</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">DURATIOND label </r:Content>
+               <r:Content xml:lang="fr-FR">"DURATIOND label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10714,7 +10666,7 @@
                <r:String xml:lang="fr-FR">DURATIONM</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">DURATIONM label </r:Content>
+               <r:Content xml:lang="fr-FR">"DURATIONM label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10747,7 +10699,7 @@
                <r:String xml:lang="fr-FR">DURATIONY</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">DURATIONY label </r:Content>
+               <r:Content xml:lang="fr-FR">"DURATIONY label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10780,7 +10732,7 @@
                <r:String xml:lang="fr-FR">DURATIONYM</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">DURATIONYM label </r:Content>
+               <r:Content xml:lang="fr-FR">"DURATIONYM label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10812,7 +10764,7 @@
                <r:String xml:lang="fr-FR">DURATIONHM</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">DURATIONHM label </r:Content>
+               <r:Content xml:lang="fr-FR">"DURATIONHM label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10843,7 +10795,7 @@
                <r:String xml:lang="fr-FR">DURATIONHH</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">DURATIONHH label </r:Content>
+               <r:Content xml:lang="fr-FR">"DURATIONHH label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10874,7 +10826,7 @@
                <r:String xml:lang="fr-FR">AUDIENCE_SHARE</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">AUDIENCE_SHARE label </r:Content>
+               <r:Content xml:lang="fr-FR">"AUDIENCE_SHARE label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10907,7 +10859,7 @@
                <r:String xml:lang="fr-FR">CITY</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">CITY label </r:Content>
+               <r:Content xml:lang="fr-FR">"CITY label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10940,7 +10892,7 @@
                <r:String xml:lang="fr-FR">MAYOR</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">MAYOR label </r:Content>
+               <r:Content xml:lang="fr-FR">"MAYOR label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10973,7 +10925,7 @@
                <r:String xml:lang="fr-FR">MAYOROTCL</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">MAYOROTCL label </r:Content>
+               <r:Content xml:lang="fr-FR">"MAYOROTCL label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10999,7 +10951,7 @@
                <r:String xml:lang="fr-FR">STATE</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">STATE label </r:Content>
+               <r:Content xml:lang="fr-FR">"STATE label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11032,7 +10984,7 @@
                <r:String xml:lang="fr-FR">PET1</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">1 - Santa's Little Helper</r:Content>
+               <r:Content xml:lang="fr-FR">"1 - Santa's Little Helper"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11069,7 +11021,7 @@
                <r:String xml:lang="fr-FR">PET2</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">2 - Snowball I</r:Content>
+               <r:Content xml:lang="fr-FR">"2 - Snowball I"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11106,7 +11058,7 @@
                <r:String xml:lang="fr-FR">PET3</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">3 - Coltrane</r:Content>
+               <r:Content xml:lang="fr-FR">"3 - Coltrane"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11143,7 +11095,7 @@
                <r:String xml:lang="fr-FR">PET4</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">O - Other name</r:Content>
+               <r:Content xml:lang="fr-FR">"O - Other name"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11180,7 +11132,7 @@
                <r:String xml:lang="fr-FR">PETOCL</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">PETOCL label </r:Content>
+               <r:Content xml:lang="fr-FR">"PETOCL label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11206,7 +11158,7 @@
                <r:String xml:lang="fr-FR">ICE_FLAVOUR1</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">1 - Vanilla</r:Content>
+               <r:Content xml:lang="fr-FR">"1 - Vanilla"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11239,7 +11191,7 @@
                <r:String xml:lang="fr-FR">ICE_FLAVOUR2</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">2 - Strawberry</r:Content>
+               <r:Content xml:lang="fr-FR">"2 - Strawberry"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11272,7 +11224,7 @@
                <r:String xml:lang="fr-FR">ICE_FLAVOUR3</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">3 - Apple</r:Content>
+               <r:Content xml:lang="fr-FR">"3 - Apple"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11305,7 +11257,7 @@
                <r:String xml:lang="fr-FR">ICE_FLAVOUR4</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">OT - Other flavour</r:Content>
+               <r:Content xml:lang="fr-FR">"OT - Other flavour"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11338,7 +11290,7 @@
                <r:String xml:lang="fr-FR">ICE_FLAVOUROTCL</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">ICE_FLAVOUROTCL label </r:Content>
+               <r:Content xml:lang="fr-FR">"ICE_FLAVOUROTCL label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11364,7 +11316,7 @@
                <r:String xml:lang="fr-FR">NUCLEAR_CHARACTER1</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">1 - Charles Montgomery Burns</r:Content>
+               <r:Content xml:lang="fr-FR">"1 - Charles Montgomery Burns"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11397,7 +11349,7 @@
                <r:String xml:lang="fr-FR">NUCLEAR_CHARACTER2</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">2 - Carl Carlson</r:Content>
+               <r:Content xml:lang="fr-FR">"2 - Carl Carlson"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11430,7 +11382,7 @@
                <r:String xml:lang="fr-FR">NUCLEAR_CHARACTER3</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">3 - Otto Mann</r:Content>
+               <r:Content xml:lang="fr-FR">"3 - Otto Mann"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11463,7 +11415,7 @@
                <r:String xml:lang="fr-FR">NUCLEAR_CHARACTER4</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">4 - Carl Carlson</r:Content>
+               <r:Content xml:lang="fr-FR">"4 - Carl Carlson"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11496,7 +11448,7 @@
                <r:String xml:lang="fr-FR">BIRTH_CHARACTER1</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">1 - Selma Bouvier</r:Content>
+               <r:Content xml:lang="fr-FR">"1 - Selma Bouvier"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11529,7 +11481,7 @@
                <r:String xml:lang="fr-FR">BIRTH_CHARACTER2</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">2 - Kent Brockman</r:Content>
+               <r:Content xml:lang="fr-FR">"2 - Kent Brockman"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11562,7 +11514,7 @@
                <r:String xml:lang="fr-FR">BIRTH_CHARACTER3</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">3 - Milhouse Van Houten</r:Content>
+               <r:Content xml:lang="fr-FR">"3 - Milhouse Van Houten"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11595,7 +11547,7 @@
                <r:String xml:lang="fr-FR">BIRTH_CHARACTER4</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">4 - Nelson Muntz</r:Content>
+               <r:Content xml:lang="fr-FR">"4 - Nelson Muntz"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11628,7 +11580,7 @@
                <r:String xml:lang="fr-FR">BIRTH_CHARACTER5</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">5 - Crazy Cat Lady</r:Content>
+               <r:Content xml:lang="fr-FR">"5 - Crazy Cat Lady"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11661,7 +11613,7 @@
                <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES11</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Ice creams-Percentage</r:Content>
+               <r:Content xml:lang="fr-FR">"Ice creams-Percentage"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11694,7 +11646,7 @@
                <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES21</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Jasper Beardly-Percentage</r:Content>
+               <r:Content xml:lang="fr-FR">"Jasper Beardly-Percentage"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11727,7 +11679,7 @@
                <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES31</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Bacon-Percentage</r:Content>
+               <r:Content xml:lang="fr-FR">"Bacon-Percentage"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11760,7 +11712,7 @@
                <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES41</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Pork chop-Percentage</r:Content>
+               <r:Content xml:lang="fr-FR">"Pork chop-Percentage"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11793,7 +11745,7 @@
                <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES51</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Chicken-Percentage</r:Content>
+               <r:Content xml:lang="fr-FR">"Chicken-Percentage"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11826,7 +11778,7 @@
                <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES61</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Powersauce-Percentage</r:Content>
+               <r:Content xml:lang="fr-FR">"Powersauce-Percentage"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11859,7 +11811,7 @@
                <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES71</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Other-Percentage</r:Content>
+               <r:Content xml:lang="fr-FR">"Other-Percentage"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11892,7 +11844,7 @@
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING11</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Ice creams-In his last food shopping</r:Content>
+               <r:Content xml:lang="fr-FR">"Ice creams-In his last food shopping"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11925,7 +11877,7 @@
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING21</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Jasper Beardly-In his last food shopping</r:Content>
+               <r:Content xml:lang="fr-FR">"Jasper Beardly-In his last food shopping"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11958,7 +11910,7 @@
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING31</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Bacon-In his last food shopping</r:Content>
+               <r:Content xml:lang="fr-FR">"Bacon-In his last food shopping"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -11991,7 +11943,7 @@
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING41</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Pork chop-In his last food shopping</r:Content>
+               <r:Content xml:lang="fr-FR">"Pork chop-In his last food shopping"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12024,7 +11976,7 @@
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING51</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Chicken-In his last food shopping</r:Content>
+               <r:Content xml:lang="fr-FR">"Chicken-In his last food shopping"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12057,7 +12009,7 @@
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING61</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Powersauce-In his last food shopping</r:Content>
+               <r:Content xml:lang="fr-FR">"Powersauce-In his last food shopping"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12090,7 +12042,7 @@
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING71</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Other-In his last food shopping</r:Content>
+               <r:Content xml:lang="fr-FR">"Other-In his last food shopping"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12123,7 +12075,7 @@
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING81</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Total-In his last food shopping</r:Content>
+               <r:Content xml:lang="fr-FR">"Total-In his last food shopping"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12156,7 +12108,7 @@
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING113CL</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">LAST_FOOD_SHOPPING113CL label </r:Content>
+               <r:Content xml:lang="fr-FR">"LAST_FOOD_SHOPPING113CL label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12182,7 +12134,7 @@
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING213CL</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">LAST_FOOD_SHOPPING213CL label </r:Content>
+               <r:Content xml:lang="fr-FR">"LAST_FOOD_SHOPPING213CL label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12208,7 +12160,7 @@
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING313CL</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">LAST_FOOD_SHOPPING313CL label </r:Content>
+               <r:Content xml:lang="fr-FR">"LAST_FOOD_SHOPPING313CL label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12234,7 +12186,7 @@
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING413CL</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">LAST_FOOD_SHOPPING413CL label </r:Content>
+               <r:Content xml:lang="fr-FR">"LAST_FOOD_SHOPPING413CL label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12260,7 +12212,7 @@
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING513CL</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">LAST_FOOD_SHOPPING513CL label </r:Content>
+               <r:Content xml:lang="fr-FR">"LAST_FOOD_SHOPPING513CL label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12286,7 +12238,7 @@
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING613CL</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">LAST_FOOD_SHOPPING613CL label </r:Content>
+               <r:Content xml:lang="fr-FR">"LAST_FOOD_SHOPPING613CL label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12312,7 +12264,7 @@
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING713CL</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">LAST_FOOD_SHOPPING713CL label </r:Content>
+               <r:Content xml:lang="fr-FR">"LAST_FOOD_SHOPPING713CL label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12338,7 +12290,7 @@
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING813CL</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">LAST_FOOD_SHOPPING813CL label </r:Content>
+               <r:Content xml:lang="fr-FR">"LAST_FOOD_SHOPPING813CL label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12364,7 +12316,7 @@
                <r:String xml:lang="fr-FR">CLOWNING11</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Break the windows of the whole city-Clowning</r:Content>
+               <r:Content xml:lang="fr-FR">"Break the windows of the whole city-Clowning"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12397,7 +12349,7 @@
                <r:String xml:lang="fr-FR">CLOWNING21</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Loose the violin of his daughter playing poker-Clowning</r:Content>
+               <r:Content xml:lang="fr-FR">"Loose the violin of his daughter playing poker-Clowning"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12430,7 +12382,7 @@
                <r:String xml:lang="fr-FR">CLOWNING31</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Kill Mr Burns-Clowning</r:Content>
+               <r:Content xml:lang="fr-FR">"Kill Mr Burns-Clowning"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12463,7 +12415,7 @@
                <r:String xml:lang="fr-FR">CLOWNING41</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Leaving a mechanical object to control the nuclear power plant-Clowning</r:Content>
+               <r:Content xml:lang="fr-FR">"Leaving a mechanical object to control the nuclear power plant-Clowning"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12496,7 +12448,7 @@
                <r:String xml:lang="fr-FR">CLOWNING12</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Break the windows of the whole city-Remember?</r:Content>
+               <r:Content xml:lang="fr-FR">"Break the windows of the whole city-Remember?"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12522,7 +12474,7 @@
                <r:String xml:lang="fr-FR">CLOWNING22</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Loose the violin of his daughter playing poker-Remember?</r:Content>
+               <r:Content xml:lang="fr-FR">"Loose the violin of his daughter playing poker-Remember?"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12548,7 +12500,7 @@
                <r:String xml:lang="fr-FR">CLOWNING32</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Kill Mr Burns-Remember?</r:Content>
+               <r:Content xml:lang="fr-FR">"Kill Mr Burns-Remember?"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12574,7 +12526,7 @@
                <r:String xml:lang="fr-FR">CLOWNING42</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Leaving a mechanical object to control the nuclear power plant-Remember?</r:Content>
+               <r:Content xml:lang="fr-FR">"Leaving a mechanical object to control the nuclear power plant-Remember?"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12600,7 +12552,7 @@
                <r:String xml:lang="fr-FR">TRAVEL11</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Car-Brazil-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Car-Brazil-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12637,7 +12589,7 @@
                <r:String xml:lang="fr-FR">TRAVEL21</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Bike-Brazil-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Bike-Brazil-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12674,7 +12626,7 @@
                <r:String xml:lang="fr-FR">TRAVEL31</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Skateboard-Brazil-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Skateboard-Brazil-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12711,7 +12663,7 @@
                <r:String xml:lang="fr-FR">TRAVEL41</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Plane-Brazil-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Plane-Brazil-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12748,7 +12700,7 @@
                <r:String xml:lang="fr-FR">TRAVEL12</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Car-Canada-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Car-Canada-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12785,7 +12737,7 @@
                <r:String xml:lang="fr-FR">TRAVEL22</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Bike-Canada-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Bike-Canada-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12822,7 +12774,7 @@
                <r:String xml:lang="fr-FR">TRAVEL32</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Skateboard-Canada-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Skateboard-Canada-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12859,7 +12811,7 @@
                <r:String xml:lang="fr-FR">TRAVEL42</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Plane-Canada-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Plane-Canada-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12896,7 +12848,7 @@
                <r:String xml:lang="fr-FR">TRAVEL13</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Car-Japan-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Car-Japan-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12933,7 +12885,7 @@
                <r:String xml:lang="fr-FR">TRAVEL23</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Bike-Japan-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Bike-Japan-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -12970,7 +12922,7 @@
                <r:String xml:lang="fr-FR">TRAVEL33</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Skateboard-Japan-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Skateboard-Japan-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13007,7 +12959,7 @@
                <r:String xml:lang="fr-FR">TRAVEL43</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Plane-Japan-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Plane-Japan-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13044,7 +12996,7 @@
                <r:String xml:lang="fr-FR">TRAVEL14</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Car-France-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Car-France-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13081,7 +13033,7 @@
                <r:String xml:lang="fr-FR">TRAVEL24</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Bike-France-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Bike-France-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13118,7 +13070,7 @@
                <r:String xml:lang="fr-FR">TRAVEL34</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Skateboard-France-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Skateboard-France-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13155,7 +13107,7 @@
                <r:String xml:lang="fr-FR">TRAVEL44</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Plane-France-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Plane-France-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13192,7 +13144,7 @@
                <r:String xml:lang="fr-FR">TRAVEL15</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Car-Other country-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Car-Other country-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13229,7 +13181,7 @@
                <r:String xml:lang="fr-FR">TRAVEL25</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Bike-Other country-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Bike-Other country-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13266,7 +13218,7 @@
                <r:String xml:lang="fr-FR">TRAVEL35</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Skateboard-Other country-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Skateboard-Other country-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13303,7 +13255,7 @@
                <r:String xml:lang="fr-FR">TRAVEL45</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Plane-Other country-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Plane-Other country-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13340,7 +13292,7 @@
                <r:String xml:lang="fr-FR">TRAVEL16</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Car-Other Planet-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Car-Other Planet-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13377,7 +13329,7 @@
                <r:String xml:lang="fr-FR">TRAVEL26</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Bike-Other Planet-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Bike-Other Planet-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13414,7 +13366,7 @@
                <r:String xml:lang="fr-FR">TRAVEL36</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Skateboard-Other Planet-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Skateboard-Other Planet-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13451,7 +13403,7 @@
                <r:String xml:lang="fr-FR">TRAVEL46</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Plane-Other Planet-Means</r:Content>
+               <r:Content xml:lang="fr-FR">"Plane-Other Planet-Means"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13488,7 +13440,7 @@
                <r:String xml:lang="fr-FR">FAVOURITE_CHAR1</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Name</r:Content>
+               <r:Content xml:lang="fr-FR">"Name"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13514,7 +13466,7 @@
                <r:String xml:lang="fr-FR">FAVOURITE_CHAR2</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Age</r:Content>
+               <r:Content xml:lang="fr-FR">"Age"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13540,7 +13492,7 @@
                <r:String xml:lang="fr-FR">FAVOURITE_CHAR3</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Member of the Simpsons family</r:Content>
+               <r:Content xml:lang="fr-FR">"Member of the Simpsons family"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13573,7 +13525,7 @@
                <r:String xml:lang="fr-FR">FAVOURITE_CHAR33CL</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">FAVOURITE_CHAR33CL label </r:Content>
+               <r:Content xml:lang="fr-FR">"FAVOURITE_CHAR33CL label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13599,7 +13551,7 @@
                <r:String xml:lang="fr-FR">FEELCHAREV1</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">1 - Jay</r:Content>
+               <r:Content xml:lang="fr-FR">"1 - Jay"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13632,7 +13584,7 @@
                <r:String xml:lang="fr-FR">FEELCHAREV2</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">2 - Bart</r:Content>
+               <r:Content xml:lang="fr-FR">"2 - Bart"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13665,7 +13617,7 @@
                <r:String xml:lang="fr-FR">FEELCHAREV3</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">3 - Krusty the clown</r:Content>
+               <r:Content xml:lang="fr-FR">"3 - Krusty the clown"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13698,7 +13650,7 @@
                <r:String xml:lang="fr-FR">FEELCHAREV4</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">O - Other</r:Content>
+               <r:Content xml:lang="fr-FR">"O - Other"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13731,7 +13683,7 @@
                <r:String xml:lang="fr-FR">LEAVDURATION11</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Leave with pay-Days</r:Content>
+               <r:Content xml:lang="fr-FR">"Leave with pay-Days"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13763,7 +13715,7 @@
                <r:String xml:lang="fr-FR">LEAVDURATION21</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Public holiday-Days</r:Content>
+               <r:Content xml:lang="fr-FR">"Public holiday-Days"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13795,7 +13747,7 @@
                <r:String xml:lang="fr-FR">LEAVDURATION31</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Sick leave-Days</r:Content>
+               <r:Content xml:lang="fr-FR">"Sick leave-Days"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13827,7 +13779,7 @@
                <r:String xml:lang="fr-FR">LEAVDURATION41</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Maternity/paternity leave-Days</r:Content>
+               <r:Content xml:lang="fr-FR">"Maternity/paternity leave-Days"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13859,7 +13811,7 @@
                <r:String xml:lang="fr-FR">LEAVDURATION51</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Other type-Days</r:Content>
+               <r:Content xml:lang="fr-FR">"Other type-Days"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13891,7 +13843,7 @@
                <r:String xml:lang="fr-FR">LEAVDURATION12</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Leave with pay-Unit</r:Content>
+               <r:Content xml:lang="fr-FR">"Leave with pay-Unit"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13924,7 +13876,7 @@
                <r:String xml:lang="fr-FR">LEAVDURATION22</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Public holiday-Unit</r:Content>
+               <r:Content xml:lang="fr-FR">"Public holiday-Unit"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13957,7 +13909,7 @@
                <r:String xml:lang="fr-FR">LEAVDURATION32</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Sick leave-Unit</r:Content>
+               <r:Content xml:lang="fr-FR">"Sick leave-Unit"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -13990,7 +13942,7 @@
                <r:String xml:lang="fr-FR">LEAVDURATION42</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Maternity/paternity leave-Unit</r:Content>
+               <r:Content xml:lang="fr-FR">"Maternity/paternity leave-Unit"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -14023,7 +13975,7 @@
                <r:String xml:lang="fr-FR">LEAVDURATION52</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Other type-Unit</r:Content>
+               <r:Content xml:lang="fr-FR">"Other type-Unit"</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -14056,7 +14008,7 @@
                <r:String xml:lang="fr-FR">NB_CHAR</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">NB_CHAR label </r:Content>
+               <r:Content xml:lang="fr-FR">"NB_CHAR label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -14088,7 +14040,7 @@
                <r:String xml:lang="fr-FR">NAME_CHAR</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">NAME_CHAR label </r:Content>
+               <r:Content xml:lang="fr-FR">"NAME_CHAR label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -14114,7 +14066,7 @@
                <r:String xml:lang="fr-FR">AGE_CHAR</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">AGE_CHAR label </r:Content>
+               <r:Content xml:lang="fr-FR">"AGE_CHAR label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -14146,7 +14098,7 @@
                <r:String xml:lang="fr-FR">FAVCHAR</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">FAVCHAR label </r:Content>
+               <r:Content xml:lang="fr-FR">"FAVCHAR label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -14179,7 +14131,7 @@
                <r:String xml:lang="fr-FR">MEMORY_CHAR</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">MEMORY_CHAR label </r:Content>
+               <r:Content xml:lang="fr-FR">"MEMORY_CHAR label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -14205,7 +14157,7 @@
                <r:String xml:lang="fr-FR">SURVEY_COMMENT</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">SURVEY_COMMENT label </r:Content>
+               <r:Content xml:lang="fr-FR">"SURVEY_COMMENT label "</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -15021,7 +14973,7 @@
             <r:String xml:lang="en-IE">SIMPSONS</r:String>
          </d:ProcessingInstructionSchemeName>
          <r:Label>
-            <r:Content xml:lang="en-IE">Processing instructions of the Simpsons questionnaire</r:Content>
+            <r:Content xml:lang="en-IE">Processing instructions of the Simpsons questionnaire"</r:Content>
          </r:Label>
          <d:GenerationInstruction>
             <r:Agency>fr.insee</r:Agency>
@@ -15077,7 +15029,7 @@
             </d:SourceVariable>
             <r:CommandCode>
                <r:Command>
-                  <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
                   <r:InParameter isArray="false">
                      <r:Agency>fr.insee</r:Agency>
                      <r:ID>jbcggtca-IP-1</r:ID>
@@ -15253,7 +15205,7 @@
             <r:Version>1</r:Version>
             <r:CommandCode>
                <r:Command>
-                  <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
                   <r:OutParameter>
                      <r:Agency>fr.insee</r:Agency>
                      <r:ID>k5c7bg4m-GOP</r:ID>
@@ -15276,8 +15228,8 @@
          <r:Version>1</r:Version>
          <r:Label>
             <r:Content xml:lang="en-IE">Liste de formats numériques et dates de
-                            l'enquête</r:Content>
-            <r:Content xml:lang="en-IE">Numeric and DateTime list for the survey</r:Content>
+                            l'enquête"</r:Content>
+            <r:Content xml:lang="en-IE">Numeric and DateTime list for the survey"</r:Content>
          </r:Label>
          <r:ManagedDateTimeRepresentation>
             <r:Agency>fr.insee</r:Agency>
@@ -15375,7 +15327,7 @@
                   <r:String>SIMPSONS</r:String>
                </d:InstrumentName>
                <r:Label>
-                  <r:Content xml:lang="fr-FR">Questionnaire SIMPSONS 20201215 questionnaire</r:Content>
+                  <r:Content xml:lang="fr-FR">"Questionnaire SIMPSONS 20201215 questionnaire"</r:Content>
                </r:Label>
                <d:TypeOfInstrument>A définir</d:TypeOfInstrument>
                <d:ControlConstructReference>

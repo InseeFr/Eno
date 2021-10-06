@@ -30,17 +30,26 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>The parameter file used by the stylesheet.</xd:p>
+            <xd:p>The parameters and properties file used by the stylesheet.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:param name="parameters-file"/>
+    <xsl:param name="properties-file"/>
 
     <xd:doc>
         <xd:desc>
-            <xd:p>The parameters are charged as an xml tree.</xd:p>
+            <xd:p>The parameters and properties are charged as an xml tree.</xd:p>
         </xd:desc>
     </xd:doc>
+    <xsl:variable name="properties" select="doc($properties-file)"/>
     <xsl:variable name="parameters" select="doc($parameters-file)"/>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The current version of Eno, to display the info in the questionnaires that are produced.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:variable name="enoVersion" select="$properties//EnoVersion"/>
 
     <xd:doc>
         <xd:desc>
