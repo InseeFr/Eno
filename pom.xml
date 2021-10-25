@@ -5,7 +5,7 @@
 	<groupId>fr.insee.eno</groupId>
 	<artifactId>eno-core</artifactId>
 
-	<version>2.2.10-dev-mode-parameters</version>
+	<version>2.3.0</version>
 
 	<packaging>jar</packaging>
 
@@ -33,8 +33,8 @@
 	</issueManagement>
 
 	<ciManagement>
-		<system>Travis</system>
-		<url>https://travis-ci.org/InseeFr/Eno</url>
+		<system>Github Worflow</system>
+		<url>https://github.com/InseeFr/Eno/actions</url>
 	</ciManagement>
 
 	<distributionManagement>
@@ -50,25 +50,34 @@
 
 	<properties>
 		<guice.version>5.0.1</guice.version>
-		<commons-io.version>2.10.0</commons-io.version>
-		<saxon.version>10.5</saxon.version>
+		<commons-io.version>2.11.0</commons-io.version>
+		<saxon.version>10.6</saxon.version>
 		<fop.version>2.2</fop.version>
 		<xalan.version>2.7.2</xalan.version>
-		<slf4j.version>1.7.31</slf4j.version>
+		<slf4j.version>1.7.32</slf4j.version>
 		<eclipse.version>2.6.0</eclipse.version>
 		<jaxb-api.version>2.3.1</jaxb-api.version>
 
 		<apache-commons.version>3.5</apache-commons.version>
-		<junit.version>5.7.2</junit.version>
-		<xmlunit.version>2.3.0</xmlunit.version>
+		<junit.version>5.8.1</junit.version>
+		<xmlunit.version>2.8.3</xmlunit.version>
 		<log4j-slf4j.version>2.11.0</log4j-slf4j.version>
 
 
 		<source.plugin.version>3.2.1</source.plugin.version>
-		<javadoc.plugin.version>3.2.0</javadoc.plugin.version>
+		<javadoc.plugin.version>3.3.1</javadoc.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
+
+					<!-- Configuration Sonar -->
+		<jacoco.version>0.8.7</jacoco.version>	
+		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+		<sonar.projectName>Eno-WS</sonar.projectName>
+        <sonar.language>java</sonar.language>
+		<argLine>-Xms256m -Xmx512m -XX:MaxPermSize=128m -ea -Dfile.encoding=UTF-8</argLine>
 	</properties>
 
 	<dependencies>
@@ -354,6 +363,39 @@
 							<autoReleaseAfterClose>true</autoReleaseAfterClose>
 						</configuration>
 					</plugin>
+										 <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <!-- Prepare the property pointing to the JaCoCo runtime agent which is
+                         passed as VM argument when the Maven Surefire plugin is executed. -->
+                    <execution>
+                        <id>pre-unit-test</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Set the name of the property containing the settings for JaCoCo
+                                 runtime agent. -->
+                            <propertyName>surefireArgLine</propertyName>
+                            <append>true</append>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>post-unit-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.9.0.2155</version>
+            </plugin>
 				</plugins>
 			</build>
 		</profile>
@@ -375,6 +417,12 @@
 		<developer>
 			<name>Laurent Caouissin</name>
 		</developer>
+		<developer>
+			<name>Ophélie Rogel</name>
+		</developer>
+		<developer>
+			<name>Athémane Dahmouh</name>
+		</developer>
 	</developers>
 
 	<contributors>
@@ -386,6 +434,12 @@
 		</contributor>
 		<contributor>
 			<name>Heïdi Koumarianos</name>
+		</contributor>
+		<contributor>
+			<name>Anne Husseini-Skalitz</name>
+		</contributor>
+		<contributor>
+			<name>Fabienne Perray-Gibert</name>
 		</contributor>
 	</contributors>
 

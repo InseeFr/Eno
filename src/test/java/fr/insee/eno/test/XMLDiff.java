@@ -6,6 +6,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
+import org.xmlunit.input.CommentLessSource;
 
 /**
  * Created by I6VWID on 15/01/18.
@@ -18,11 +19,11 @@ public class XMLDiff {
       
     public Diff getDiff(File input, File expected) throws Exception {
         System.out.println(String.format("Diff  %s with %s", input.getAbsolutePath(), expected.getAbsolutePath()));
-        StreamSource inputStream = null;
-        StreamSource expectedStream = null; 
+        CommentLessSource inputStream = null;
+        CommentLessSource expectedStream = null; 
         try {
-        	inputStream = new StreamSource(input);
-        	expectedStream = new StreamSource(expected);
+        	inputStream = new CommentLessSource(new StreamSource(input));
+        	expectedStream = new CommentLessSource(new StreamSource(expected));
         	
             return DiffBuilder
                     .compare(expectedStream)

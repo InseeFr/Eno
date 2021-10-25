@@ -1,5 +1,15 @@
 # Eno Releases note
 
+## 2.2.11 - 07/09/2021
+- **[dependencies]** Upgrading dependencies versions. 
+- **[ddi2lunaticXML][core]** Adding support of calculated variables scope (shapeFrom) to allow better VTL support
+- **[ddi2lunaticXML][core]** Fixing various quoting problems for labels in lunatic-xml
+- **[ddi2lunaticXML][core]** Preparing missing variables support with missingResponse field in relevant components
+- **[ddi2lunaticXML][core]** Preparing controls support with controls field for simple question component
+- **[poguesXML2ddi][core]** Adding formulas language choice : XPATH or VTL
+- **[poguesXML2ddi][ddi2fodt][ddi2xforms][core]** Adding metadata generation : Eno version and generation date
+- **[ddi2fo][post-processing]** Adding support of custom styles parameters for fo output
+
 ## 2.2.10 - 13/07/2021
 - **[dependencies]** Upgrading dependencies versions. 
 - **[javadoc]** Corrections of errors.

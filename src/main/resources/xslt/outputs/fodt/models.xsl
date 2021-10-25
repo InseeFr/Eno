@@ -12,7 +12,6 @@
 	xmlns:xhtml="http://www.w3.org/1999/xhtml"
 	exclude-result-prefixes="xs fn xd eno enofodt" version="2.0">
 	
-	<xsl:import href="../../../styles/style.xsl"/>
 	<xsl:include href="../../../xslt/outputs/fodt/office-styles.xsl"/>
 	
 	
@@ -57,6 +56,7 @@
 			xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"
 			xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"
 			xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0">
+			<xsl:comment><xsl:value-of select="concat('Eno version : ',$enoVersion,'. Generation date : ',format-dateTime(current-dateTime(), '[D01]/[M01]/[Y0001] - [H1]:[m01]:[s01]'))"/></xsl:comment>
 			<office:font-face-decls>
 				<style:font-face style:name="Arial" svg:font-family="Arial"
 					style:font-family-generic="system" style:font-pitch="variable"/>
@@ -73,12 +73,19 @@
 			-->
 			<office:body>
 				<office:text>
-					<text:p text:style-name="Title">
+					<text:p text:style-name="Title">	
 						<xsl:value-of select="enofodt:get-label($source-context, $languages[1])"/>
 					</text:p>
 					<text:p text:style-name="TitleComment">
 						<!--  <xsl:value-of select="concat('Specification generated on: ',format-dateTime(current-dateTime(), '[D01]/[M01]/[Y0001] - [H1]:[m01]:[s01]'))"/>-->
 						Specification generated from Eno </text:p>
+					<!--	For later use, when tests are tailored to not diff the content of this field-->
+					<!--					<text:p text:style-name="TitleComment">
+						<xsl:value-of select="concat('Specification generated with Eno ',$enoVersion)"/>
+					</text:p>
+					<text:p text:style-name="TitleComment">
+						<xsl:value-of select="concat('Date of generation : ',format-dateTime(current-dateTime(), '[D01]/[M01]/[Y0001] - [H1]:[m01]:[s01]'))"/>
+					</text:p>-->
 					<!-- Go to the children -->
 					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 						<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -697,7 +704,6 @@
 					<xsl:with-param name="variables" select="$idVariables"/>
 				</xsl:call-template>
 			</text:p>
-			
 		</text:section>
 		
 		
@@ -984,8 +990,15 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		
 		<xsl:variable name="label" select="enofodt:get-label($source-context, $languages[1])"/>
+		<xsl:variable name="loopName" select="enofodt:get-loop-name($source-context,$languages[1])"/>
 		<xsl:variable name="descendantLoop" select="enofodt:get-descendant-loop-ids($source-context)"/>
 		<xsl:variable name="descendantModules" select="enofodt:get-descendant-module-names($source-context,$languages[1])"/>
+		<xsl:variable name="minimum" select="enofodt:get-minimum-occurrences($source-context)"/>
+		<xsl:variable name="maximum" select="enofodt:get-maximum-occurrences($source-context)"/>
+		<xsl:variable name="filter" select="enofodt:get-loop-filter($source-context)"/>
+		<xsl:variable name="minIdVariables" select="tokenize(enofodt:get-minimum-occurrences-variables($source-context),'\s')"/>
+		<xsl:variable name="maxIdVariables" select="tokenize(enofodt:get-maximum-occurrences-variables($source-context),'\s')"/>
+		<xsl:variable name="filterIdVariables" select="tokenize(enofodt:get-loop-filter-variables($source-context),'\s')"/>
 		<!--	The typeOfLoop variable is useful to differentiate the behaviour whether the loop contains multiple modules (in which case we want to skip pages) or not
 		The test in xsl:when is meant to check if there are multiple modules in the loop by counting the number of spaces in the variable descendantModules -->
 		<xsl:variable name="typeOfLoop">	
@@ -1006,9 +1019,9 @@
 
 				<text:p text:style-name="{concat($typeOfLoop,'Start')}">
 					<text:span text:style-name="LoopIdentifier">
-						<xsl:value-of select="'&#10160; Boucle'"/>
-<!--						<xsl:copy-of select="enofodt:get-name($source-context)"/>-->
-<!--						<xsl:value-of select="']'"/>-->
+						<xsl:value-of select="'&#10160; Boucle ['"/>
+						<xsl:copy-of select="$loopName"/>
+						<xsl:value-of select="']'"/>
 					</text:span>
 				</text:p>
 				
@@ -1021,38 +1034,38 @@
 					</text:p>
 				</xsl:if>
 				
-				<xsl:if test="enofodt:get-minimum-occurrences($source-context)!=''">
+				<xsl:if test="$minimum!=''">
 					<text:p text:style-name="LoopStandard">
 						<text:span text:style-name="LoopInfo">
 							<xsl:value-of select="'Nombre d''occurrences minimum : '"/>
 						</text:span>
 						<xsl:call-template name="replaceVariablesInFormula">
-							<xsl:with-param name="formula" select="enofodt:get-minimum-occurrences($source-context)"/>
-							<xsl:with-param name="variables" select="enofodt:get-minimum-occurrences-variables($source-context)"/>
+							<xsl:with-param name="formula" select="$minimum"/>
+							<xsl:with-param name="variables" select="$minIdVariables"/>
 						</xsl:call-template>
 					</text:p>
 				</xsl:if>
 				
-				<xsl:if test="enofodt:get-maximum-occurrences($source-context)!=''">
+				<xsl:if test="$maximum!=''">
 					<text:p text:style-name="LoopStandard">
 						<text:span text:style-name="LoopInfo">
 							<xsl:value-of select="'Nombre d''occurrences maximum : '"/>
 						</text:span>
 						<xsl:call-template name="replaceVariablesInFormula">
-							<xsl:with-param name="formula" select="enofodt:get-maximum-occurrences($source-context)"/>
-							<xsl:with-param name="variables" select="enofodt:get-maximum-occurrences-variables($source-context)"/>
+							<xsl:with-param name="formula" select="$maximum"/>
+							<xsl:with-param name="variables" select="$maxIdVariables"/>
 						</xsl:call-template>
 					</text:p>
 				</xsl:if>
 				
-				<xsl:if test="enofodt:get-loop-filter($source-context)!=''">
+				<xsl:if test="$filter!=''">
 					<text:p text:style-name="LoopStandard">
 						<text:span text:style-name="LoopInfo">
 							<xsl:value-of select="'Condition de la boucle: '"/>
 						</text:span>
 						<xsl:call-template name="replaceVariablesInFormula">
-							<xsl:with-param name="formula" select="enofodt:get-loop-filter($source-context)"/>
-							<xsl:with-param name="variables" select="enofodt:get-loop-filter-variables($source-context)"/>
+							<xsl:with-param name="formula" select="$filter"/>
+							<xsl:with-param name="variables" select="$filterIdVariables"/>
 						</xsl:call-template>
 					</text:p>
 				</xsl:if>
@@ -1113,9 +1126,9 @@
 					
 				<text:p text:style-name="{concat($typeOfLoop,'End')}">
 					<text:span text:style-name="LoopIdentifier">
-						<xsl:value-of select="'Fin de la boucle'"/>
-<!--						<xsl:copy-of select="enofodt:get-name($source-context)"/>-->
-<!--						<xsl:value-of select="']'"/>-->
+						<xsl:value-of select="'Fin de la boucle ['"/>
+						<xsl:copy-of select="$loopName"/>
+						<xsl:value-of select="']'"/>
 					</text:span>
 				</text:p>
 				
