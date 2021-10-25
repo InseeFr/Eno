@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.parameters.ENOParameters;
 import fr.insee.eno.parameters.InFormat;
+import fr.insee.eno.parameters.Mode;
 import fr.insee.eno.parameters.OutFormat;
 import fr.insee.eno.parameters.Pipeline;
 import fr.insee.eno.parameters.PostProcessing;
@@ -28,12 +29,15 @@ public class ValidatorImpl implements Validator {
 		ValidationMessage validationIn2Out = validateIn2Out(pipeline.getInFormat(), pipeline.getOutFormat());
 		ValidationMessage validationPreProcessings = validatePreProcessings(pipeline);
 		ValidationMessage validationPostProcessings = validatePostProcessings(pipeline);
-
+		ValidationMessage validationMode = validateMode(pipeline.getOutFormat(), parametersType.getMode());
+		
 		boolean isValid = validationIn2Out.isValid()
 				&& validationPreProcessings.isValid()
-				&& validationPostProcessings.isValid();
+				&& validationPostProcessings.isValid()
+				&& validationMode.isValid();
 		String message = validationIn2Out.getMessage() +", "+
 				validationPreProcessings.getMessage() +", "+
+				validationMode.getMessage() +", "+
 				validationPostProcessings.getMessage();
 
 		return new ValidationMessage(message,isValid);
@@ -58,7 +62,7 @@ public class ValidatorImpl implements Validator {
 				isValid=false;
 				break;
 			}
-			message += isValid ? "" : "The combination (in:'"+inFormat.value()+"'/out:'"+ outFormat.value() +"')"+" format is not valid"; 
+			message += isValid ? "" : "The combination (in:'"+inFormat.value()+"'/out:'"+ outFormat.value() +"')"+" is not valid"; 
 		}
 		else {
 			message = "One of In/Out format doesn't exist in Eno. ";
@@ -139,6 +143,46 @@ public class ValidatorImpl implements Validator {
 		}
 
 		message += isValid ? "PostProcessing are valid" : "";
+		LOGGER.info(message);
+		return new ValidationMessage(message, isValid);
+	}
+	
+	
+	@Override
+	public ValidationMessage validateMode(OutFormat outFormat, Mode mode) {
+		boolean isValid = mode==null && outFormat !=OutFormat.LUNATIC_XML;
+		String message = "";
+		if(mode!=null) {
+			switch (outFormat) {
+			case DDI:
+				isValid = mode.equals(Mode.ALL);
+				break;
+			case FODT:
+				isValid = mode.equals(Mode.ALL);
+				break;
+			case FO:
+				isValid = mode.equals(Mode.PAPI);
+				break;
+			case XFORMS:
+				isValid = mode.equals(Mode.CAWI);
+				break;
+			case LUNATIC_XML:
+				isValid = mode.equals(Mode.CAPI_CATI)
+				||mode.equals(Mode.CAWI)
+				||mode.equals(Mode.PROCESS);
+				break;
+			default:
+				isValid=false;
+				break;
+			}
+			message += isValid ? "" : "The combination (out:'"+outFormat.value()+"'/mode:'"+ mode.value() +"')"+" format is not valid"; 
+
+		}
+		else {
+			message = "The mode is null (error if output = Lunatic). ";
+		}
+
+		message += isValid ? "The combination (out:'"+outFormat.value()+"'/mode:'"+ (mode!=null? mode.value() : "null") +"')"+" format is valid":"";
 		LOGGER.info(message);
 		return new ValidationMessage(message, isValid);
 	}

@@ -45,7 +45,7 @@ public class DDIMultimodalSelectionPreprocessor implements Preprocessor {
 		InputStream isUTIL_DDI_MULTIMODAL_SELECTION_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 
 		try {
-			saxonService.transformModalSelection(isMultimodalIn, isUTIL_DDI_MULTIMODAL_SELECTION_XSL, osModalSelection, in2out);
+			saxonService.transformModalSelection(isMultimodalIn, isUTIL_DDI_MULTIMODAL_SELECTION_XSL, osModalSelection, parametersFile);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error has occurred during the %s transformation. %s : %s",
 					toString(),
