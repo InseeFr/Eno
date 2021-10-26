@@ -938,13 +938,16 @@
 				<xsl:with-param name="source-context" select="$source-context"/>
 				<xsl:with-param name="formula" select="$expression"/>
 			</xsl:call-template>
-		</xsl:variable>		
-		<xsl:variable name="expressionDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($finalExpression)"/>
+		</xsl:variable>
+		<xsl:variable name="expressionDependencies" as="xs:string*">
+			<xsl:copy-of select="enolunatic:find-variables-in-formula($expression)"/>
+			<xsl:copy-of select="enolunatic:find-variables-in-formula($finalExpression)"/>
+		</xsl:variable>
 
 		<variables variableType="CALCULATED" xsi:type="VariableType">
 			<name><xsl:value-of select="$nameOutVariable"/></name>
 			<expression>				
-				<xsl:value-of select="normalize-space(enolunatic:replace-all-variables-with-business-name($source-context,$finalExpression))"/>
+				<xsl:value-of select="normalize-space(enolunatic:replace-all-variables-with-business-name($source-context,$expression))"/>
 			</expression>
 			<xsl:for-each select="distinct-values($expressionDependencies)">
 				<bindingDependencies><xsl:value-of select="enolunatic:get-variable-business-name(.)"/></bindingDependencies>
