@@ -9,6 +9,7 @@
         <PreProcessing>ddi-titling</PreProcessing>
         <PostProcessing>ddi-markdownToXhtml</PostProcessing>
     </Pipeline>
+    <Mode>all</Mode>
     <Parameters>
         <Context>household</Context>
         <Campagne>test</Campagne>

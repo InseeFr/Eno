@@ -164,7 +164,7 @@
     </xd:doc>
     <xsl:function name="enolunatic:get-after-question-title-instructions">
         <xsl:param name="context" as="item()"/>
-        <xsl:sequence select="enoddi:get-instructions-by-format($context,'instruction,comment,help')"/>
+        <xsl:sequence select="enoddi:get-instructions-by-format($context,'instruction,comment,help,codecard')"/>
     </xsl:function>
     
     <xd:doc>
