@@ -66,19 +66,12 @@
 				<xsl:copy-of select="eno:Office-styles($source-context)"/>
 			</office:automatic-styles>
 			
-			
-			<!--
-				<xsl:copy-of select="$header-content/office:document/@*"/>
-				<xsl:copy-of select="$header-content/office:document/node()[not(name()='office:body')]"/>
-			-->
 			<office:body>
 				<office:text>
 					<text:p text:style-name="Title">	
 						<xsl:value-of select="enofodt:get-label($source-context, $languages[1])"/>
 					</text:p>
-					<text:p text:style-name="TitleComment">
-						<!--  <xsl:value-of select="concat('Specification generated on: ',format-dateTime(current-dateTime(), '[D01]/[M01]/[Y0001] - [H1]:[m01]:[s01]'))"/>-->
-						Specification generated from Eno </text:p>
+					<text:p text:style-name="TitleComment">Specification generated from Eno</text:p>
 					<!--	For later use, when tests are tailored to not diff the content of this field-->
 					<!--					<text:p text:style-name="TitleComment">
 						<xsl:value-of select="concat('Specification generated with Eno ',$enoVersion)"/>
@@ -86,6 +79,7 @@
 					<text:p text:style-name="TitleComment">
 						<xsl:value-of select="concat('Date of generation : ',format-dateTime(current-dateTime(), '[D01]/[M01]/[Y0001] - [H1]:[m01]:[s01]'))"/>
 					</text:p>-->
+					<!--					-->
 					<!-- Go to the children -->
 					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 						<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -187,27 +181,9 @@
 			</xsl:apply-templates>
 			
 			<xsl:if test="enofodt:get-question-tooltip($source-context,$languages[1]) != ''">
-				<text:p text:style-name="Tooltip">
+				<text:p text:style-name="QuestionTooltip">
 					<xsl:value-of select="'(*) Infobulle au niveau de la question : ['"/>
 					<xsl:value-of select="enofodt:get-question-tooltip($source-context,$languages[1])"/>
-					<xsl:value-of select="']'"/>
-				</text:p>
-			</xsl:if>
-			
-			<xsl:if test="enofodt:get-question-response-tooltip($source-context,$languages[1]) != ''">
-				<xsl:for-each select="enofodt:get-question-response-tooltip($source-context,$languages[1])">
-					<text:p text:style-name="Tooltip">
-						<xsl:value-of select="'(*) Infobulle au niveau des modalités de réponse : ['"/>
-						<xsl:value-of select="."/>
-						<xsl:value-of select="']'"/>
-					</text:p>
-				</xsl:for-each>
-			</xsl:if>
-			
-			<xsl:if test="enofodt:get-question-instruction-tooltip($source-context,$languages[1]) != ''">
-				<text:p text:style-name="Tooltip">
-					<xsl:value-of select="'(*) Infobulle au niveau d''une consigne : ['"/>
-					<xsl:value-of select="enofodt:get-question-instruction-tooltip($source-context,$languages[1])"/>
 					<xsl:value-of select="']'"/>
 				</text:p>
 			</xsl:if>
@@ -216,8 +192,10 @@
 				mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
+			
 		</text:section>
 	</xsl:template>
+	
 	
 	<xd:doc>
 		<xd:desc>
@@ -264,15 +242,38 @@
 	<xsl:template match="TextDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="other-give-details" tunnel="yes" select="false()"/>
+		
 		<xsl:variable name="lengthResponse" select="enofodt:get-length($source-context)"/>
 		<xsl:variable name="nameOfVariable" select="enofodt:get-business-name($source-context)"/>
 		
-		<text:p text:style-name="Format">
-			<text:span text:style-name="NameOfVariable">
-				<xsl:value-of select="concat('[', $nameOfVariable, '] - ')"/>
-			</text:span>
-			<xsl:value-of select="concat('Car ', $lengthResponse)"/>
-		</text:p>
+		<xsl:choose>
+			
+			<xsl:when test="$other-give-details">
+				<xsl:variable name="label" select="enofodt:get-label($source-context,$languages[1])"/>
+				<text:p text:style-name="Format">
+					<xsl:value-of select="'Autre - précisez : '"/>
+					<xsl:value-of select="$label"/>
+				</text:p>
+				<text:p text:style-name="Format">
+					<text:span text:style-name="NameOfVariable">
+						<xsl:value-of select="concat('[', $nameOfVariable, '] - ')"/>
+					</text:span>
+					<xsl:value-of select="concat('Car ', $lengthResponse)"/>
+				</text:p>
+			</xsl:when>
+			
+			<xsl:otherwise>
+				<text:p text:style-name="Format">
+					<text:span text:style-name="NameOfVariable">
+						<xsl:value-of select="concat('[', $nameOfVariable, '] - ')"/>
+					</text:span>
+					<xsl:value-of select="concat('Car ', $lengthResponse)"/>
+				</text:p>
+			</xsl:otherwise>
+			
+		</xsl:choose>
+		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
@@ -476,11 +477,27 @@
 						<text:p text:style-name="Question">
 							<xsl:value-of select="$label"/>
 						</text:p>
+						<!-- Call the tooltip getter for question responses -->
+						<xsl:if test="enofodt:get-question-response-tooltip($source-context,$languages[1]) != ''">
+							<text:p text:style-name="CodeTooltip">
+								<xsl:value-of select="'(*) Infobulle au niveau de la modalité QCM : ['"/>
+								<xsl:value-of select="enofodt:get-question-response-tooltip($source-context,$languages[1])"/>
+								<xsl:value-of select="']'"/>
+							</text:p>
+						</xsl:if>
 					</xsl:when>
 					<xsl:when test="$label != '' and $ancestorTable = 'headerLine'">
 						<text:p text:style-name="ColumnHeader">
 							<xsl:value-of select="$label"/>
 						</text:p>
+						<!-- Call the tooltip getter for question responses -->
+						<xsl:if test="enofodt:get-question-response-tooltip($source-context,$languages[1]) != ''">
+							<text:p text:style-name="CodeTooltip">
+								<xsl:value-of select="'(*) Infobulle au niveau de la modalité QCM : ['"/>
+								<xsl:value-of select="enofodt:get-question-response-tooltip($source-context,$languages[1])"/>
+								<xsl:value-of select="']'"/>
+							</text:p>
+						</xsl:if>
 					</xsl:when>
 				</xsl:choose>
 			</table:table-cell>
@@ -587,6 +604,17 @@
 			</text:p>
 		</xsl:if>
 		
+		
+		<!-- Call the tooltip getter for question responses -->
+		<xsl:if test="enofodt:get-question-response-tooltip($source-context,$languages[1]) != ''">
+			<text:p text:style-name="CodeTooltip">
+				<xsl:value-of select="'(*) Infobulle au niveau de la modalité de réponse : ['"/>
+				<xsl:value-of select="enofodt:get-question-response-tooltip($source-context,$languages[1])"/>
+				<xsl:value-of select="']'"/>
+			</text:p>
+		</xsl:if>
+		
+
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
@@ -623,6 +651,13 @@
 				<text:p text:style-name="Instruction">
 					<xsl:value-of select="$instructionLabel"/>
 				</text:p>
+				<xsl:if test="enofodt:get-question-instruction-tooltip($source-context,$languages[1]) != ''">
+					<text:p text:style-name="InstructionTooltip">
+						<xsl:value-of select="'(*) Infobulle au niveau d''une consigne : ['"/>
+						<xsl:value-of select="enofodt:get-question-instruction-tooltip($source-context,$languages[1])"/>
+						<xsl:value-of select="']'"/>
+					</text:p>
+				</xsl:if>
 			</xsl:when>
 			<xsl:when test="$instructionFormat = 'warning'">
 				<text:p text:style-name="Warning">
@@ -662,6 +697,20 @@
 		</xsl:apply-templates>
 	</xsl:template>
 	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on Clarification driver.</xd:p>
+			<xd:p>It calls children template with other-give-details param at true (so it is processed as Other - Give details by response drivers)</xd:p>
+		</xd:desc>
+	</xd:doc>
+	<xsl:template match="Clarification" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+			<xsl:with-param name="other-give-details" select="true()" tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
 	
 	<xd:doc>
 		<xd:desc>
@@ -846,6 +895,14 @@
 		<xsl:variable name="nameOfControl"
 			select="enofodt:get-check-name($source-context, $languages)"/>
 		<xsl:variable name="control" select="enofodt:get-constraint($source-context)"/>
+		<xsl:variable name="criticality" select="enofodt:get-control-criticality($source-context)"/>
+		<xsl:variable name="criticalityfr">
+			<xsl:choose>
+				<xsl:when test="$criticality='warning'"><xsl:value-of select="'avertissement'"/></xsl:when>
+				<xsl:when test="$criticality='stumblingblock'"><xsl:value-of select="'erreur'"/></xsl:when>
+				<xsl:otherwise><xsl:value-of select="'information'"/></xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
 		<xsl:variable name="instructionFormat" select="enofodt:get-css-class($source-context)"/>
 		<xsl:variable name="vars"
 			select="enofodt:get-label-conditioning-variables($source-context, $languages)"/>
@@ -859,16 +916,19 @@
 		<text:section text:name="ConsistencyCheck-{enofodt:get-name($source-context)}">
 			<xsl:if test="$control != ''">
 				<text:p text:style-name="Control">
-					<xsl:value-of select="concat('Contrôle bloquant : ', $nameOfControl)"/>
+					<xsl:value-of select="concat('Contrôle (',$criticalityfr,') : ',$nameOfControl)"/>
 				</text:p>
 				<xsl:variable name="idVariables"
 					select="tokenize(enofodt:get-control-variables($source-context), '\s')"/>
 				<text:p text:style-name="Control">
-					<xsl:value-of select="'Expression du contrôle : '"/>
-					<xsl:call-template name="replaceVariablesInFormula">
-						<xsl:with-param name="formula" select="$control"/>
-						<xsl:with-param name="variables" select="$idVariables"/>
-					</xsl:call-template>
+					<xsl:value-of select="'Condition d''affichage du contrôle : '"/>
+					<xsl:variable name="condition">
+						<xsl:call-template name="replaceVariablesInFormula">
+							<xsl:with-param name="formula" select="$control"/>
+							<xsl:with-param name="variables" select="$idVariables"/>
+						</xsl:call-template>
+					</xsl:variable>
+					<xsl:value-of select="replace($condition,'^not\((.*)\)$','$1')"/>
 				</text:p>
 			</xsl:if>
 			
@@ -876,7 +936,7 @@
 				<xsl:when test="$instructionFormat = ''">
 					<text:p text:style-name="Warning">
 						<xsl:value-of
-							select="concat('Message d', '''', 'erreur : ', $instructionLabel)"/>
+							select="concat('Message affiché : ', $instructionLabel)"/>
 					</text:p>
 				</xsl:when>
 				<xsl:when test="$instructionFormat = 'hint'">
@@ -896,6 +956,141 @@
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
 		</text:section>
+	</xsl:template>
+	
+	<xsl:template match="QuestionLoop" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		
+		<xsl:variable name="label" select="enofodt:get-label($source-context, $languages[1])"/>
+		<xsl:variable name="loopName" select="enofodt:get-loop-name($source-context,$languages[1])"/>
+		<xsl:variable name="descendantLoop" select="enofodt:get-descendant-loop-ids($source-context)"/>
+		<xsl:variable name="descendantModules" select="enofodt:get-descendant-module-names($source-context,$languages[1])"/>
+		<xsl:variable name="minimum" select="enofodt:get-minimum-occurrences($source-context)"/>
+		<xsl:variable name="maximum" select="enofodt:get-maximum-occurrences($source-context)"/>
+		<xsl:variable name="filter" select="enofodt:get-loop-filter($source-context)"/>
+		<xsl:variable name="minIdVariables" select="tokenize(enofodt:get-minimum-occurrences-variables($source-context),'\s')"/>
+		<xsl:variable name="maxIdVariables" select="tokenize(enofodt:get-maximum-occurrences-variables($source-context),'\s')"/>
+		<xsl:variable name="filterIdVariables" select="tokenize(enofodt:get-loop-filter-variables($source-context),'\s')"/>
+		<!--	The typeOfLoop variable is useful to differentiate the behaviour whether the loop contains multiple modules (in which case we want to skip pages) or not
+		The test in xsl:when is meant to check if there are multiple modules in the loop by counting the number of spaces in the variable descendantModules -->
+		<xsl:variable name="typeOfLoop">	
+			<xsl:choose>
+				<xsl:when test="count($descendantModules) > 1">
+					<xsl:value-of select="'MultiModuleLoop'"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:choose>
+						<xsl:when test="string-length($descendantModules) > 1"><xsl:value-of select="'OnlyModuleLoop'"/></xsl:when>
+						<xsl:otherwise><xsl:value-of select="'InsideModuleLoop'"/></xsl:otherwise>
+					</xsl:choose>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		
+		<text:section text:name="Loop-{enofodt:get-name($source-context)}">
+			
+			<text:p text:style-name="{concat($typeOfLoop,'Start')}">
+				<text:span text:style-name="LoopIdentifier">
+					<xsl:value-of select="'&#10160; Boucle ['"/>
+					<xsl:copy-of select="$loopName"/>
+					<xsl:value-of select="']'"/>
+				</text:span>
+			</text:p>
+			
+			<xsl:if test="$label!=''">
+				<text:p text:style-name="LoopStandard">
+					<text:span text:style-name="LoopInfo">
+						<xsl:value-of select="'Nom du bouton d''ajout : '"/>
+						<xsl:copy-of select="$label"/>
+					</text:span>
+				</text:p>
+			</xsl:if>
+			
+			<xsl:if test="$minimum!=''">
+				<text:p text:style-name="LoopStandard">
+					<text:span text:style-name="LoopInfo">
+						<xsl:value-of select="'Nombre d''occurrences minimum : '"/>
+					</text:span>
+					<xsl:call-template name="replaceVariablesInFormula">
+						<xsl:with-param name="formula" select="$minimum"/>
+						<xsl:with-param name="variables" select="$minIdVariables"/>
+					</xsl:call-template>
+				</text:p>
+			</xsl:if>
+			
+			<xsl:if test="$maximum!=''">
+				<text:p text:style-name="LoopStandard">
+					<text:span text:style-name="LoopInfo">
+						<xsl:value-of select="'Nombre d''occurrences maximum : '"/>
+					</text:span>
+					<xsl:call-template name="replaceVariablesInFormula">
+						<xsl:with-param name="formula" select="$maximum"/>
+						<xsl:with-param name="variables" select="$maxIdVariables"/>
+					</xsl:call-template>
+				</text:p>
+			</xsl:if>
+			
+			<xsl:if test="$filter!=''">
+				<text:p text:style-name="LoopStandard">
+					<text:span text:style-name="LoopInfo">
+						<xsl:value-of select="'Condition de la boucle: '"/>
+					</text:span>
+					<xsl:call-template name="replaceVariablesInFormula">
+						<xsl:with-param name="formula" select="$filter"/>
+						<xsl:with-param name="variables" select="$filterIdVariables"/>
+					</xsl:call-template>
+				</text:p>
+			</xsl:if>
+			
+			<xsl:if test="$descendantModules != ''">
+				<text:p text:style-name="LoopStandard">
+					<text:span text:style-name="LoopInfo">
+						<xsl:value-of select="'Séquences à l''intérieur de la boucle : '"/>
+					</text:span>
+				</text:p>
+				
+				<xsl:for-each select="$descendantModules">
+					<text:p text:style-name="LoopStandard">
+						<text:span text:style-name="LoopInfo">
+							<xsl:copy-of select="."/>
+						</text:span>
+					</text:p>
+				</xsl:for-each>
+			</xsl:if>
+			
+			<text:p text:style-name="{concat($typeOfLoop,'Type')}">
+				<text:span text:style-name="Standard">
+					<xsl:choose>
+						<xsl:when test="$typeOfLoop='MultiModuleLoop'">
+							<xsl:value-of select="'Type de boucle : multi-séquences avec '"/>
+							<xsl:value-of select="count($descendantModules)"/>
+							<xsl:value-of select="' séquences'"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:choose>
+								<xsl:when test="$typeOfLoop='OnlyModuleLoop'"><xsl:value-of select="'Type de boucle : une séquence'"/></xsl:when>
+								<xsl:otherwise><xsl:value-of select="'Type de boucle : à l''intérieur d''une séquence'"/></xsl:otherwise>
+							</xsl:choose>
+						</xsl:otherwise>
+					</xsl:choose>
+				</text:span>
+			</text:p>
+			
+			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<xsl:with-param name="driver" select="." tunnel="yes"/>
+			</xsl:apply-templates>
+			
+			<text:p text:style-name="{concat($typeOfLoop,'End')}">
+				<text:span text:style-name="LoopIdentifier">
+					<xsl:value-of select="'Fin de la boucle ['"/>
+					<xsl:copy-of select="$loopName"/>
+					<xsl:value-of select="']'"/>
+				</text:span>
+			</text:p>
+			
+		</text:section>
+		
 	</xsl:template>
 	
 	<xd:doc>
@@ -979,166 +1174,5 @@
 			<xsl:with-param name="driver" select="$driver"/>
 		</xsl:apply-templates>
 	</xsl:template>
-	
-
-	
-	<xd:doc>
-		<xd:desc>Template for (Question) Loops</xd:desc>
-	</xd:doc>
-	<xsl:template match="QuestionLoop" mode="model">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="languages" tunnel="yes"/>
-		
-		<xsl:variable name="label" select="enofodt:get-label($source-context, $languages[1])"/>
-		<xsl:variable name="loopName" select="enofodt:get-loop-name($source-context,$languages[1])"/>
-		<xsl:variable name="descendantLoop" select="enofodt:get-descendant-loop-ids($source-context)"/>
-		<xsl:variable name="descendantModules" select="enofodt:get-descendant-module-names($source-context,$languages[1])"/>
-		<xsl:variable name="minimum" select="enofodt:get-minimum-occurrences($source-context)"/>
-		<xsl:variable name="maximum" select="enofodt:get-maximum-occurrences($source-context)"/>
-		<xsl:variable name="filter" select="enofodt:get-loop-filter($source-context)"/>
-		<xsl:variable name="minIdVariables" select="tokenize(enofodt:get-minimum-occurrences-variables($source-context),'\s')"/>
-		<xsl:variable name="maxIdVariables" select="tokenize(enofodt:get-maximum-occurrences-variables($source-context),'\s')"/>
-		<xsl:variable name="filterIdVariables" select="tokenize(enofodt:get-loop-filter-variables($source-context),'\s')"/>
-		<!--	The typeOfLoop variable is useful to differentiate the behaviour whether the loop contains multiple modules (in which case we want to skip pages) or not
-		The test in xsl:when is meant to check if there are multiple modules in the loop by counting the number of spaces in the variable descendantModules -->
-		<xsl:variable name="typeOfLoop">	
-			<xsl:choose>
-				<xsl:when test="count($descendantModules) > 1">
-					<xsl:value-of select="'MultiModuleLoop'"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:choose>
-						<xsl:when test="string-length($descendantModules) > 1"><xsl:value-of select="'OnlyModuleLoop'"/></xsl:when>
-						<xsl:otherwise><xsl:value-of select="'InsideModuleLoop'"/></xsl:otherwise>
-					</xsl:choose>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
-		
-			<text:section text:name="Loop-{enofodt:get-name($source-context)}">
-
-				<text:p text:style-name="{concat($typeOfLoop,'Start')}">
-					<text:span text:style-name="LoopIdentifier">
-						<xsl:value-of select="'&#10160; Boucle ['"/>
-						<xsl:copy-of select="$loopName"/>
-						<xsl:value-of select="']'"/>
-					</text:span>
-				</text:p>
-				
-				<xsl:if test="$label!=''">
-					<text:p text:style-name="LoopStandard">
-						<text:span text:style-name="LoopInfo">
-							<xsl:value-of select="'Nom du bouton d''ajout : '"/>
-							<xsl:copy-of select="$label"/>
-						</text:span>
-					</text:p>
-				</xsl:if>
-				
-				<xsl:if test="$minimum!=''">
-					<text:p text:style-name="LoopStandard">
-						<text:span text:style-name="LoopInfo">
-							<xsl:value-of select="'Nombre d''occurrences minimum : '"/>
-						</text:span>
-						<xsl:call-template name="replaceVariablesInFormula">
-							<xsl:with-param name="formula" select="$minimum"/>
-							<xsl:with-param name="variables" select="$minIdVariables"/>
-						</xsl:call-template>
-					</text:p>
-				</xsl:if>
-				
-				<xsl:if test="$maximum!=''">
-					<text:p text:style-name="LoopStandard">
-						<text:span text:style-name="LoopInfo">
-							<xsl:value-of select="'Nombre d''occurrences maximum : '"/>
-						</text:span>
-						<xsl:call-template name="replaceVariablesInFormula">
-							<xsl:with-param name="formula" select="$maximum"/>
-							<xsl:with-param name="variables" select="$maxIdVariables"/>
-						</xsl:call-template>
-					</text:p>
-				</xsl:if>
-				
-				<xsl:if test="$filter!=''">
-					<text:p text:style-name="LoopStandard">
-						<text:span text:style-name="LoopInfo">
-							<xsl:value-of select="'Condition de la boucle: '"/>
-						</text:span>
-						<xsl:call-template name="replaceVariablesInFormula">
-							<xsl:with-param name="formula" select="$filter"/>
-							<xsl:with-param name="variables" select="$filterIdVariables"/>
-						</xsl:call-template>
-					</text:p>
-				</xsl:if>
-				
-				<xsl:if test="$descendantModules != ''">
-					<text:p text:style-name="LoopStandard">
-						<text:span text:style-name="LoopInfo">
-							<xsl:value-of select="'Séquences à l''intérieur de la boucle : '"/>
-						</text:span>
-					</text:p>
-					
-					<xsl:for-each select="$descendantModules">
-						<text:p text:style-name="LoopStandard">
-							<text:span text:style-name="LoopInfo">
-								<xsl:copy-of select="."/>
-							</text:span>
-						</text:p>
-					</xsl:for-each>
-				</xsl:if>
-				
-<!--				<xsl:if test="count(tokenize($descendantLoop,' ')) >= 1">
-					<text:p text:style-name="LoopStandard">
-						<text:span text:style-name="LoopInfo">
-							<xsl:value-of select="'Boucles à l''intérieur de la boucle : '"/>
-						</text:span>
-					</text:p>
-					
-					<xsl:for-each select="tokenize($descendantLoop,' ')">
-						<text:p text:style-name="LoopStandard">
-							<text:span text:style-name="LoopInfo">
-								<xsl:copy-of select="."/>
-							</text:span>
-						</text:p>
-					</xsl:for-each>
-				</xsl:if>-->
-				
-				<text:p text:style-name="{concat($typeOfLoop,'Type')}">
-					<text:span text:style-name="Standard">
-						<xsl:choose>
-							<xsl:when test="$typeOfLoop='MultiModuleLoop'">
-								<xsl:value-of select="'Type de boucle : multi-module avec '"/>
-								<xsl:value-of select="count($descendantModules)"/>
-								<xsl:value-of select="' modules'"/>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:choose>
-									<xsl:when test="$typeOfLoop='OnlyModuleLoop'"><xsl:value-of select="'Type de boucle : un module'"/></xsl:when>
-									<xsl:otherwise><xsl:value-of select="'Type de boucle : à l''intérieur d''un module'"/></xsl:otherwise>
-								</xsl:choose>
-							</xsl:otherwise>
-						</xsl:choose>
-					</text:span>
-				</text:p>
-				
-				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-					<xsl:with-param name="driver" select="." tunnel="yes"/>
-				</xsl:apply-templates>
-					
-				<text:p text:style-name="{concat($typeOfLoop,'End')}">
-					<text:span text:style-name="LoopIdentifier">
-						<xsl:value-of select="'Fin de la boucle ['"/>
-						<xsl:copy-of select="$loopName"/>
-						<xsl:value-of select="']'"/>
-					</text:span>
-				</text:p>
-				
-			</text:section>
-		
-		
-
-	</xsl:template>
-	
-	
-	
 	
 </xsl:stylesheet>

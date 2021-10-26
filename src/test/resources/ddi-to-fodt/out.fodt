@@ -152,7 +152,7 @@
          <style:paragraph-properties fo:margin-top="0.1cm" fo:text-align="left"/>
          <style:text-properties fo:font-size="10pt"/>
       </style:style>
-      <style:style style:name="Tooltip"
+      <style:style style:name="QuestionTooltip"
                    style:family="paragraph"
                    style:default-outline-level="2"
                    style:class="text">
@@ -215,9 +215,7 @@
                    style:default-outline-level="2"
                    style:class="text">
          <style:paragraph-properties fo:margin-top="0.1cm" fo:text-align="left"/>
-         <style:text-properties fo:font-size="10pt"
-                                fo:color="#0000ff"
-                                style:text-underline-style="solid"/>
+         <style:text-properties fo:font-size="10pt" fo:color="#0000ff"/>
       </style:style>
       <style:style style:name="Instruction"
                    style:family="paragraph"
@@ -225,6 +223,13 @@
                    style:class="text">
          <style:paragraph-properties fo:margin-top="0.1cm" fo:text-align="left"/>
          <style:text-properties fo:font-size="10pt" fo:color="#0000ff"/>
+      </style:style>
+      <style:style style:name="InstructionTooltip"
+                   style:family="paragraph"
+                   style:default-outline-level="2"
+                   style:class="text">
+         <style:paragraph-properties fo:margin-top="0.1cm" fo:text-align="left"/>
+         <style:text-properties fo:font-size="10pt" fo:color="#018442"/>
       </style:style>
       <style:style style:name="Warning"
                    style:family="paragraph"
@@ -241,6 +246,13 @@
                    style:class="text">
          <style:paragraph-properties fo:text-align="left" fo:margin-left="1cm" fo:margin-top="0.1cm"/>
          <style:text-properties fo:font-size="10pt"/>
+      </style:style>
+      <style:style style:name="CodeTooltip"
+                   style:family="paragraph"
+                   style:default-outline-level="2"
+                   style:class="text">
+         <style:paragraph-properties fo:text-align="left" fo:margin-left="1cm" fo:margin-top="0.1cm"/>
+         <style:text-properties fo:font-size="10pt" fo:color="#018442"/>
       </style:style>
       <style:style style:name="OpeningCalculatedVariableSection"
                    style:family="paragraph"
@@ -344,9 +356,7 @@
    <office:body>
       <office:text>
          <text:p text:style-name="Title">Questionnaire SIMPSONS</text:p>
-         <text:p text:style-name="TitleComment">
-						
-						Specification generated from Eno </text:p>
+         <text:p text:style-name="TitleComment">Specification generated from Eno</text:p>
          <text:section text:name="Module-j6p0ti5h">
             <text:p text:style-name="Module">
                <text:span text:style-name="ModuleName">[MODULE1] </text:span>I - Introduction</text:p>
@@ -904,9 +914,9 @@
                   </table:table>
                </text:section>
                <text:section text:name="ConsistencyCheck-j4nwc63q-CI-0">
-                  <text:p text:style-name="Control">Contrôle bloquant : Total of percentages</text:p>
-                  <text:p text:style-name="Control">Expression du contrôle : not(^PERCENTAGE_EXPENSES11 + ^PERCENTAGE_EXPENSES21 + ^PERCENTAGE_EXPENSES31+ ^PERCENTAGE_EXPENSES41+ ^PERCENTAGE_EXPENSES51+ ^PERCENTAGE_EXPENSES61+ ^PERCENTAGE_EXPENSES71+ ^PERCENTAGE_EXPENSES81+ ^PERCENTAGE_EXPENSES91+ ^PERCENTAGE_EXPENSES101!= 100)</text:p>
-                  <text:p text:style-name="Warning">Message d'erreur : The sum of percentages is: $!{SUM_EXPENSES} %. The total of percentages must be equal to 100%. </text:p>
+                  <text:p text:style-name="Control">Contrôle (erreur) : Total of percentages</text:p>
+                  <text:p text:style-name="Control">Condition d'affichage du contrôle : ^PERCENTAGE_EXPENSES11 + ^PERCENTAGE_EXPENSES21 + ^PERCENTAGE_EXPENSES31+ ^PERCENTAGE_EXPENSES41+ ^PERCENTAGE_EXPENSES51+ ^PERCENTAGE_EXPENSES61+ ^PERCENTAGE_EXPENSES71+ ^PERCENTAGE_EXPENSES81+ ^PERCENTAGE_EXPENSES91+ ^PERCENTAGE_EXPENSES101!= 100</text:p>
+                  <text:p text:style-name="Warning">Message affiché : The sum of percentages is: $!{SUM_EXPENSES} %. The total of percentages must be equal to 100%. </text:p>
                </text:section>
             </text:section>
             <text:section text:name="SubModule-j6qejudb">
@@ -1072,6 +1082,7 @@
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="ColumnHeader">Other country (*)</text:p>
+                           <text:p text:style-name="CodeTooltip">(*) Infobulle au niveau de la modalité QCM : [Included principalities]</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"

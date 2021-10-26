@@ -3710,6 +3710,10 @@
          </fo:block>
          <fo:block id="HEURE_MIN_REMPL" page-break-inside="avoid">
             <fo:inline color="black"
+               font-size="10pt"
+               font-weight="normal"
+               padding="1mm"/>
+            <fo:inline color="black"
                        font-size="10pt"
                        font-weight="normal"
                        padding="1mm">
