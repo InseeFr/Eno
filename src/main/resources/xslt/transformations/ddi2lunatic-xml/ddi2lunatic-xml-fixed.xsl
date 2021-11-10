@@ -294,7 +294,7 @@
         <xsl:variable name="listChar" select="$properties//JSEncoding/char"/>
         <xsl:analyze-string select="$label" regex="(\[([^\]]+)\])\(\. &quot;([^&quot;]+)&quot;\)">
             <xsl:matching-substring>
-                <xsl:value-of select="concat(regex-group(1),'(. ''',regex-group(3),''')')"/>
+                <xsl:value-of select="concat(regex-group(1),'(. ''',enolunatic:recursive-replace(regex-group(3),$listChar),''')')"/>
             </xsl:matching-substring>
             <xsl:non-matching-substring>
                 <!-- replace special JS character by their encoded value-->
