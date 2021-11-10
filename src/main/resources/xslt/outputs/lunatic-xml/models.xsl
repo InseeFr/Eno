@@ -933,15 +933,13 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="nameOutVariable" select="enolunatic:get-business-name($source-context)"/>
 		<xsl:variable name="expression" select="enolunatic:replace-variable-with-collected-and-external-variables-formula($source-context,$nameOutVariable)"/>
-		<xsl:variable name="finalExpression">
-			<xsl:call-template name="enolunatic:replace-variables-in-formula">
-				<xsl:with-param name="source-context" select="$source-context"/>
-				<xsl:with-param name="formula" select="$expression"/>
-			</xsl:call-template>
-		</xsl:variable>
+
 		<xsl:variable name="expressionDependencies" as="xs:string*">
 			<xsl:copy-of select="enolunatic:find-variables-in-formula($expression)"/>
-			<xsl:copy-of select="enolunatic:find-variables-in-formula($finalExpression)"/>
+				<xsl:call-template name="enolunatic:resolve-variables-to-collected-and-external-variables">
+					<xsl:with-param name="source-context" select="$source-context"/>
+					<xsl:with-param name="listVar" select="enolunatic:find-variables-in-formula($expression)"/>
+				</xsl:call-template>
 		</xsl:variable>
 
 		<variables variableType="CALCULATED" xsi:type="VariableType">
