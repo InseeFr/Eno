@@ -1,5 +1,8 @@
 # Eno Releases note
 
+## 2.3.1 - 15/11/2021
+- **[ddi2lunaticXML][core]** improving performance (in terms of the resolution of variables in formulas)
+
 ## 2.3.0 - 27/10/2021
 - **[dependencies]** Upgrading dependencies versions. 
 - **[parameters][core]** Adding in Eno settings survey mode choice (particularly for the Lunatic output which generates questionnaires for several modes). 
