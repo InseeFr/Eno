@@ -572,6 +572,128 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Recursive named template: enolunatic:resolve-variables-to-collected-and-external-variables.</xd:p>
+            <xd:p>It searches variables until collected and external in all formula for caculated variables.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template name="enolunatic:resolve-variables-to-collected-and-external-variables">
+        <xsl:param name="source-context" as="item()"/>
+        
+        <!-- We track 3 lists : 
+            - listvar : complete list of variables encountered that we want to resolve 
+            - listVarResolved : list of variables which have already been resolved
+            - listVarFinal : list of variables which are collected or external (so no need to go further, those will be the variables we will return in the end)
+        -->
+        <xsl:param name="listVar" as="xs:string*"/>
+        <xsl:param name="listVarResolved" select="''" as="xs:string*"/>
+        <xsl:param name="listVarFinal" select="''" as="xs:string*"/>
+        
+        <!-- I create a flat list from listVar, that way I can easily tokenize elements later : needed because it seems the format returned by function find-variables is inconsistent -->
+        <xsl:variable name="listVarFlat">
+            <xsl:value-of select="$listVar"/>
+        </xsl:variable>
+        
+        <!-- We check if there are still variables which need to be resolved, e.g. that are not in the listVarResolved -->
+        <xsl:variable name="unresolvedVars" as="xs:string*">
+            <xsl:for-each select="tokenize($listVarFlat,' ')">
+                <xsl:variable name="currentVar" select="."/>
+                <xsl:if test="not(contains($listVarResolved,$currentVar))">
+                    <xsl:value-of select="$currentVar"/>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:variable>
+        
+        <xsl:variable name="existsUnresolvedVars" as="xs:boolean">
+            <xsl:value-of select="$unresolvedVars != ''"/>
+        </xsl:variable>
+
+        <!-- We check the value of existsUnresolvedVars, which is true if there are still variables to resolve. If there are not, it is our stop condition and we will return the listVarFinal -->
+        <xsl:choose>
+            <xsl:when test="$existsUnresolvedVars">
+                <!-- If there are still unresolved variables, we will resolve the first one (it could be any, really, as it will become resolved in the next step) -->
+                <xsl:variable name="var" select="$unresolvedVars[1]"/>
+                <xsl:variable name="typeVariable" select="enoddi:get-variable-representation($source-context,$var)"/>
+                <xsl:variable name="value-var" select="enolunatic:replace-variable-with-collected-and-external-variables-formula(
+                    $source-context,
+                    $var)"/>
+                
+                <!-- There are 2 cases :
+                    
+                    - var!=value-var means that the variable is calculated and we need further resolution. Thus :
+                        - We add the variables encountered in the current calculated variable to the complete list of variables (listToResolve)
+                        - We add the current calculated variable in the list of resolved variables (listResolved)
+                        - The list of final variables remains unchanged, as our current variable was not collected or external (listFinal)
+                        
+                    - var=value-var means that the variable is collected or external, so the resolution stops here. Thus :
+                        - The complete list of variables remains unchanged : no new variables (listToResolve)
+                        - We add the current variable to the list of resolved variables (listResolved)
+                        - We add the current variable to the list of final variables (listFinal)
+                        
+                   I create the variable newListSet containing the new lists to use according to each case
+                -->
+                <xsl:variable name="newListSet">
+                    <xsl:choose>
+                        <xsl:when test="$var!=$value-var">
+                            <xsl:variable name="variablesFound" as="xs:string*" select="enolunatic:find-variables-in-formula($value-var)"/>
+                            <!-- Since I have a hard time knowing which type of value I have, the simplest thing is a dirty concatenate using xsl:value -->
+                            <listToResolve>
+                                <xsl:value-of select="$listVar"/>
+                                <xsl:value-of select="' '"/>
+                                <xsl:value-of select="$variablesFound"/>
+                            </listToResolve>
+                            <listResolved>
+                                <xsl:value-of select="$listVarResolved"/>
+                                <xsl:value-of select="' '"/>
+                                <xsl:value-of select="$var"/>
+                            </listResolved>
+                            <listFinal>
+                                <xsl:value-of select="$listVarFinal"/>
+                            </listFinal>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <listToResolve>
+                                <xsl:value-of select="$listVar"/>
+                            </listToResolve>
+                            <listResolved>
+                                <xsl:value-of select="$listVarResolved"/>
+                                <xsl:value-of select="' '"/>
+                                <xsl:value-of select="$var"/>
+                            </listResolved>
+                            <listFinal>
+                                <xsl:value-of select="$listVarFinal"/>
+                                <xsl:value-of select="' '"/>
+                                <xsl:value-of select="$var"/>
+                            </listFinal>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+
+                <!-- Based on the newListSet containing the different new lists (complete, resolved and final) we recursively call the function with those new lists -->
+                <!-- I normalize-space since I fear unexpected behaviour with the dirty concatenate -->
+                <xsl:call-template name="enolunatic:resolve-variables-to-collected-and-external-variables">
+                    <xsl:with-param name="source-context" select="$source-context"/>
+                    <xsl:with-param name="listVar" select="normalize-space($newListSet//listToResolve)"/>
+                    <xsl:with-param name="listVarResolved" select="normalize-space($newListSet//listResolved)"/>
+                    <xsl:with-param name="listVarFinal" select="normalize-space($newListSet//listFinal)"/>
+                </xsl:call-template>
+                
+            </xsl:when>
+            
+            <!-- If there are no more unresolved variables, we can return the list of final variables, which are all collected and external -->
+            <xsl:otherwise>
+                <!-- To have the expected format for the expressionDependencies, we need to return a sequence of variables, similarly to find-variables-in-formula -->
+                <xsl:for-each select="distinct-values(tokenize($listVarFinal,' '))">
+                    <xsl:sequence select="."/>
+                </xsl:for-each>
+            </xsl:otherwise>
+            
+        </xsl:choose>
+        
+    </xsl:template>
         
     <xsl:function name="enolunatic:is-generating-loop" as="xs:boolean">
         <xsl:param name="context" as="item()"/>
