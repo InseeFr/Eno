@@ -24,11 +24,12 @@
     <!-- This variable retrieves all the dependencies (variables) used in filters
     Useful later to check if calculated variables are used in filters-->
     <xsl:variable name="variablesInFilter">
-        <xsl:for-each select="$root//h:conditionFilter/h:bindingDependencies">
+        <xsl:for-each select="$root//h:conditionFilter/h:dependencies">
             <xsl:value-of select="concat(.,' ')"/>
         </xsl:for-each>
-        <xsl:for-each select="$root//h:components/h:loopDependencies">
-            <xsl:value-of select="concat(.,' ')"/>
+        <xsl:for-each select="$root//h:components/h:lines">
+            <xsl:value-of select="concat(@min,' ')"/>
+            <xsl:value-of select="concat(@max,' ')"/>
         </xsl:for-each>
     </xsl:variable>
 
