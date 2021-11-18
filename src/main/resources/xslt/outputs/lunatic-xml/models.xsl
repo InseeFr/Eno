@@ -1009,47 +1009,49 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 
-		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
-		<xsl:variable name="control" select="enolunatic:get-constraint($source-context)"/>
-		<xsl:variable name="errorMessage" select="enolunatic:get-vtl-label($source-context, $languages[1])"/>
-		<xsl:variable name="criticality" select="enolunatic:get-alert-level($source-context)"/>
-
-		<xsl:variable name="controlDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($control)"/>
-		<xsl:variable name="instructionDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($errorMessage)"/>
-		<xsl:variable name="dependenciesVariables" as="xs:string*">
-			<xsl:for-each select="$controlDependencies">
-				<xsl:sequence select="."/>
-			</xsl:for-each>
-			<xsl:for-each select="$instructionDependencies">
-				<xsl:sequence select="."/>
-			</xsl:for-each>
-		</xsl:variable>
-		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
-
-		<controls>
-			<xsl:if test="$id != ''">
-				<xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
-			</xsl:if>
-			<xsl:if test="$criticality != ''">
-				<xsl:choose>
-					<xsl:when test="$criticality='warning'"><xsl:attribute name="criticality"><xsl:value-of select="'WARN'"/></xsl:attribute></xsl:when>
-					<xsl:when test="$criticality='stumblingblock'"><xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute></xsl:when>
-					<xsl:otherwise><xsl:attribute name="criticality"><xsl:value-of select="'INFO'"/></xsl:attribute></xsl:otherwise>
-				</xsl:choose>
-			</xsl:if>
-			<xsl:if test="$control!=''">
-				<control><xsl:value-of select="normalize-space(enolunatic:replace-all-variables-with-business-name($source-context,$control))"/></control>
-			</xsl:if>
-			<xsl:if test="$errorMessage!=''">
-				<errorMessage><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$errorMessage)"/></errorMessage>
-			</xsl:if>
-			<xsl:copy-of select="$dependencies"/>
-
-			<!-- Go to the Calculated Variable -->
-			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-				<xsl:with-param name="driver" select="." tunnel="yes"/>
-			</xsl:apply-templates>
-		</controls>
+		<xsl:if test="$control">
+			<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
+			<xsl:variable name="control" select="enolunatic:get-constraint($source-context)"/>
+			<xsl:variable name="errorMessage" select="enolunatic:get-vtl-label($source-context, $languages[1])"/>
+			<xsl:variable name="criticality" select="enolunatic:get-alert-level($source-context)"/>
+	
+			<xsl:variable name="controlDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($control)"/>
+			<xsl:variable name="instructionDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($errorMessage)"/>
+			<xsl:variable name="dependenciesVariables" as="xs:string*">
+				<xsl:for-each select="$controlDependencies">
+					<xsl:sequence select="."/>
+				</xsl:for-each>
+				<xsl:for-each select="$instructionDependencies">
+					<xsl:sequence select="."/>
+				</xsl:for-each>
+			</xsl:variable>
+			<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
+	
+			<controls>
+				<xsl:if test="$id != ''">
+					<xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
+				</xsl:if>
+				<xsl:if test="$criticality != ''">
+					<xsl:choose>
+						<xsl:when test="$criticality='warning'"><xsl:attribute name="criticality"><xsl:value-of select="'WARN'"/></xsl:attribute></xsl:when>
+						<xsl:when test="$criticality='stumblingblock'"><xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute></xsl:when>
+						<xsl:otherwise><xsl:attribute name="criticality"><xsl:value-of select="'INFO'"/></xsl:attribute></xsl:otherwise>
+					</xsl:choose>
+				</xsl:if>
+				<xsl:if test="$control!=''">
+					<control><xsl:value-of select="normalize-space(enolunatic:replace-all-variables-with-business-name($source-context,$control))"/></control>
+				</xsl:if>
+				<xsl:if test="$errorMessage!=''">
+					<errorMessage><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$errorMessage)"/></errorMessage>
+				</xsl:if>
+				<xsl:copy-of select="$dependencies"/>
+	
+				<!-- Go to the Calculated Variable -->
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+				</xsl:apply-templates>
+			</controls>
+		</xsl:if>
 		
 	</xsl:template>
 
