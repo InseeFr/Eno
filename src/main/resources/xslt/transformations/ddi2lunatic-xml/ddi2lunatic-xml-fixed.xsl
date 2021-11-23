@@ -99,7 +99,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    <xsl:variable name="control" as="xs:boolean">
+    <xsl:variable name="controlParam" as="xs:boolean">
         <xsl:choose>
             <xsl:when test="$parameters//Control != ''">
                 <xsl:value-of select="$parameters//Control"/>

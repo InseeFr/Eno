@@ -1009,7 +1009,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 
-		<xsl:if test="$control">
+		<xsl:if test="$controlParam">
 			<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
 			<xsl:variable name="control" select="enolunatic:get-constraint($source-context)"/>
 			<xsl:variable name="errorMessage" select="enolunatic:get-vtl-label($source-context, $languages[1])"/>
