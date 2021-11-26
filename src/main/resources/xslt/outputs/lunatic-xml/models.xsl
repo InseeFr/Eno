@@ -106,7 +106,6 @@
 				<xsl:sequence select="."/>
 			</xsl:for-each>
 			<xsl:if test="not($newShouldHaveMissingVars) and $missingVar">
-				<xsl:value-of select="concat('LOOP_',$newIdLoop,'_MISSING')"/>
 				<xsl:value-of select="concat($firstDescendantResponse,'_MISSING')"/>
 			</xsl:if>
 		</xsl:variable>
@@ -153,11 +152,6 @@
 				which should be the variable used as the iterator for linked loops
 				loopDepth is not passed on, as it should be 0 to instantiate a single null instead of an array with null-->
 			<xsl:if test="not($newShouldHaveMissingVars) and $missingVar">
-				<xsl:call-template name="enolunatic:add-collected-variable-to-components">
-					<xsl:with-param name="responseName" select="concat('LOOP_',$newIdLoop,'_MISSING')"/>
-					<xsl:with-param name="loopDepth" select="$newLoopDepth"/>
-					<xsl:with-param name="idLoop" select="$newIdLoop"/>
-				</xsl:call-template>
 				<xsl:call-template name="enolunatic:add-collected-variable-to-components">
 					<xsl:with-param name="responseName" select="concat($firstDescendantResponse,'_MISSING')"/>
 					<xsl:with-param name="idLoop" select="$newIdLoop"/>
