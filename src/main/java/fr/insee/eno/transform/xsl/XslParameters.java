@@ -8,7 +8,6 @@ public class XslParameters {
 
 	public static final String INCORPORATION_GENERATED_FILE = "generated-file";
 	public static final String DEREFERENCING_OUTPUT_FOLDER = "output-folder";
-	public static final String MULTIMODAL_SELECTION_OUTPUT_FORMAT = "output-format";
 	public static final String MW2XHTML_OUTPUT_FOLDER = "output-folder";
 	public static final String TWEAK_XHTML_FOR_DDI_OUTPUT_FOLDER = "output-folder";
 	public static final String TITLING_PARAMETERS_FILE = "parameters-file";

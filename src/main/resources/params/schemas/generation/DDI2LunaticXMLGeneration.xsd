@@ -6,6 +6,8 @@
             <xs:element name="FilterDescription" type="xs:boolean" default="false" minOccurs="0" maxOccurs="1"/>
             <xs:element name="AddFilterResult" type="xs:boolean" default="false" minOccurs="0" maxOccurs="1"/>
             <xs:element name="MissingVar" type="xs:boolean" default="false" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Tooltip" type="xs:boolean" default="false" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Control" type="xs:boolean" default="false" minOccurs="0" maxOccurs="1"/>
             <xs:element name="Pagination" type="Pagination" minOccurs="0" maxOccurs="1"/>
         </xs:all>
     </xs:complexType>
