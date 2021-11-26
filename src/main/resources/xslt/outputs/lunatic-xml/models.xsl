@@ -79,6 +79,7 @@
 		<xsl:variable name="isGeneratedLoop" select="enolunatic:is-linked-loop($source-context)" as="xs:boolean"/>
 		<xsl:variable name="isGeneratingLoop" select="enolunatic:is-generating-loop($source-context)" as="xs:boolean"/>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
+		<xsl:variable name="firstDescendantResponse" select="enolunatic:get-loop-first-descendant-question($source-context,$languages[1])"/>
 		
 		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
 		<!-- keep idLoop of the parent Loop if exists -->
@@ -106,6 +107,7 @@
 			</xsl:for-each>
 			<xsl:if test="not($newShouldHaveMissingVars) and $missingVar">
 				<xsl:value-of select="concat('LOOP_',$newIdLoop,'_MISSING')"/>
+				<xsl:value-of select="concat($firstDescendantResponse,'_MISSING')"/>
 			</xsl:if>
 		</xsl:variable>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
@@ -130,6 +132,11 @@
 					</lines>
 				</xsl:otherwise>
 			</xsl:choose>
+			<xsl:if test="not($newShouldHaveMissingVars) and $missingVar">
+				<missingResponse>
+					<xsl:attribute name="name" select="concat($firstDescendantResponse,'_MISSING')"/>
+				</missingResponse>
+			</xsl:if>
 			<xsl:if test="$minimumOccurrences!=$maximumOccurrences and $label!=''">
 				<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/></label>
 			</xsl:if>
@@ -141,10 +148,18 @@
 			</xsl:if>			
 			<xsl:copy-of select="$dependencies"/>
 			
+			<!-- In the case of not shouldHaveMissingVars, it means it is a generating loop
+				Thus I want to generate a simple missing collected variable, based on the name of the first descendant response of the loop
+				which should be the variable used as the iterator for linked loops
+				loopDepth is not passed on, as it should be 0 to instantiate a single null instead of an array with null-->
 			<xsl:if test="not($newShouldHaveMissingVars) and $missingVar">
 				<xsl:call-template name="enolunatic:add-collected-variable-to-components">
 					<xsl:with-param name="responseName" select="concat('LOOP_',$newIdLoop,'_MISSING')"/>
 					<xsl:with-param name="loopDepth" select="$newLoopDepth"/>
+					<xsl:with-param name="idLoop" select="$newIdLoop"/>
+				</xsl:call-template>
+				<xsl:call-template name="enolunatic:add-collected-variable-to-components">
+					<xsl:with-param name="responseName" select="concat($firstDescendantResponse,'_MISSING')"/>
 					<xsl:with-param name="idLoop" select="$newIdLoop"/>
 				</xsl:call-template>
 			</xsl:if>
@@ -255,7 +270,7 @@
 			<xsl:for-each select="$labelDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
-			<xsl:if test="$missingVar">				
+			<xsl:if test="$shouldHaveMissingVars and $missingVar">				
 				<xsl:value-of select="$missingResponseName"/>
 			</xsl:if>
 		</xsl:variable>
@@ -272,7 +287,6 @@
 			<xsl:with-param name="filterCondition" select="$filterCondition" tunnel="yes"/>
 			<xsl:with-param name="filterConditionDependencies" select="$filterDependencies" as="xs:string*" tunnel="yes"/>
 			<xsl:with-param name="dependencies" select="$dependencies" tunnel="yes"/>
-			<xsl:with-param name="shouldHaveMissingVars" select="$shouldHaveMissingVars" tunnel="yes"/>
 		</xsl:apply-templates>
 
 		<xsl:apply-templates select="enolunatic:get-end-question-instructions($source-context)" mode="source">
@@ -701,7 +715,7 @@
 				<xsl:call-template name="enolunatic:add-response-to-components">
 					<xsl:with-param name="responseName" select="$responseName"/>
 				</xsl:call-template>
-				<xsl:if test="$missingVar">
+				<xsl:if test="$shouldHaveMissingVars and $missingVar">
 					<missingResponse>
 						<xsl:attribute name="name" select="$missingResponseName"/>
 					</missingResponse>
@@ -729,15 +743,6 @@
 				<xsl:with-param name="responseName" select="concat($questionName,'_MISSING')"/>
 				<xsl:with-param name="componentRef" select="$idQuestion"/>
 				<xsl:with-param name="loopDepth" select="$loopDepth"/>
-				<xsl:with-param name="idLoop" select="$idLoop"/>
-			</xsl:call-template>
-		</xsl:if>
-		<!-- In the case of not shouldHaveMissingVars, it means it is a generating loop, thus I want to generate a simple missing collected variable, not an array-->
-		<!-- That's why I bypass normal call and do not give a loopDepth so it is 0 and does not instantiate a null array but a simple null-->
-		<xsl:if test="not($shouldHaveMissingVars) and $missingVar">
-			<xsl:call-template name="enolunatic:add-collected-variable-to-components">
-				<xsl:with-param name="responseName" select="concat($questionName,'_MISSING')"/>
-				<xsl:with-param name="componentRef" select="$idQuestion"/>
 				<xsl:with-param name="idLoop" select="$idLoop"/>
 			</xsl:call-template>
 		</xsl:if>
