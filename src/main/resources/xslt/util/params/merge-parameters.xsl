@@ -31,6 +31,23 @@
         </xsl:choose>
     </xsl:template>
     
+    <xsl:template match="Mode" priority="3">
+        <Mode>
+    <xsl:choose>
+        <xsl:when test="$root/ENOParameters/Mode/text() != ''">
+            <xsl:copy-of select="$root/ENOParameters/Mode/text()"/>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:choose>
+                <xsl:when test="$root/ENOParameters/Pipeline/OutFormat = 'xforms'"><xsl:value-of select="'cawi'"/></xsl:when>
+                <xsl:when test="$root/ENOParameters/Pipeline/OutFormat = 'ddi'"><xsl:value-of select="'all'"/></xsl:when>
+                <xsl:when test="$root/ENOParameters/Pipeline/OutFormat = 'fodt'"><xsl:value-of select="'all'"/></xsl:when>
+                <xsl:when test="$root/ENOParameters/Pipeline/OutFormat = 'fo'"><xsl:value-of select="'papi'"/></xsl:when>
+            </xsl:choose>
+        </xsl:otherwise>
+    </xsl:choose>
+        </Mode>
+    </xsl:template>
      
     <xsl:template
         match="*[ends-with(name(), '-parameters') and not(starts-with(name(), concat($out-format, '-')))]"

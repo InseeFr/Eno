@@ -5,9 +5,13 @@
                modele="SIMPSONS"
                enoCoreVersion=""
                missing="false"
-               pagination="none">
+               pagination="question"
+               maxPage="37">
    <label>"Questionnaire SIMPSONS 20201215"</label>
-   <components xsi:type="Sequence" componentType="Sequence" id="j6p0ti5h">
+   <components xsi:type="Sequence"
+               componentType="Sequence"
+               id="j6p0ti5h"
+               page="1">
       <label>"I - " || "Introduction"</label>
       <declarations declarationType="COMMENT"
                     id="j6p0ti5h-d1"
@@ -18,7 +22,7 @@
          <value>true</value>
       </conditionFilter>
       <hierarchy>
-         <sequence id="j6p0ti5h">
+         <sequence id="j6p0ti5h" page="1">
             <label>"I - " || "Introduction"</label>
          </sequence>
       </hierarchy>
@@ -26,13 +30,14 @@
                   componentType="Textarea"
                   id="j6p3dkx6"
                   maxLength="500"
-                  mandatory="true">
+                  mandatory="true"
+                  page="2">
          <label>"➡ 1. " || "Before starting, do you have any comments about the Simpsons family?"</label>
          <conditionFilter>
             <value>true</value>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j6p0ti5h">
+            <sequence id="j6p0ti5h" page="1">
                <label>"I - " || "Introduction"</label>
             </sequence>
          </hierarchy>
@@ -42,7 +47,8 @@
       <components xsi:type="CheckboxBoolean"
                   componentType="CheckboxBoolean"
                   id="j6p0np9q"
-                  mandatory="false">
+                  mandatory="false"
+                  page="3">
          <label>"➡ 2. " || "If you agree to answer this questionnaire, please check the box"</label>
          <declarations declarationType="COMMENT"
                        id="j6p0np9q-kir6xl1e"
@@ -53,7 +59,7 @@
             <value>true</value>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j6p0ti5h">
+            <sequence id="j6p0ti5h" page="1">
                <label>"I - " || "Introduction"</label>
             </sequence>
          </hierarchy>
@@ -63,28 +69,32 @@
       <components xsi:type="FilterDescription"
                   componentType="FilterDescription"
                   id="j6p6my1d"
-                  filterDescription="false">
+                  filterDescription="false"
+                  page="3">
          <label>"If you are not ready, please go to the end of the questionnaire"</label>
          <conditionFilter>
             <value>true</value>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j6p0ti5h">
+            <sequence id="j6p0ti5h" page="1">
                <label>"I - " || "Introduction"</label>
             </sequence>
          </hierarchy>
       </components>
-      <components xsi:type="Subsequence" componentType="Subsequence" id="j6p0s7o5">
+      <components xsi:type="Subsequence"
+                  componentType="Subsequence"
+                  id="j6p0s7o5"
+                  goToPage="4">
          <label>"General knowledge of the series"</label>
          <conditionFilter>
             <value>(READY)</value>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j6p0ti5h">
+            <sequence id="j6p0ti5h" page="1">
                <label>"I - " || "Introduction"</label>
             </sequence>
-            <subSequence id="j6p0s7o5">
+            <subSequence id="j6p0s7o5" page="4">
                <label>"General knowledge of the series"</label>
             </subSequence>
          </hierarchy>
@@ -92,17 +102,18 @@
                      componentType="Input"
                      id="j3343qhx"
                      maxLength="30"
-                     mandatory="false">
+                     mandatory="false"
+                     page="4">
             <label>"➡ 3. " || "Who is the producer?"</label>
             <conditionFilter>
                <value>(READY)</value>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="j6p0ti5h">
+               <sequence id="j6p0ti5h" page="1">
                   <label>"I - " || "Introduction"</label>
                </sequence>
-               <subSequence id="j6p0s7o5">
+               <subSequence id="j6p0s7o5" page="4">
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
@@ -115,7 +126,8 @@
                      mandatory="true"
                      min="0"
                      max="99"
-                     decimals="0">
+                     decimals="0"
+                     page="5">
             <label>"➡ 4. " || "What is the current season number?"</label>
             <conditionFilter>
                <value>(READY)</value>
@@ -127,10 +139,10 @@
                <bindingDependencies>SEASON_NUMBER</bindingDependencies>
             </controls>
             <hierarchy>
-               <sequence id="j6p0ti5h">
+               <sequence id="j6p0ti5h" page="1">
                   <label>"I - " || "Introduction"</label>
                </sequence>
-               <subSequence id="j6p0s7o5">
+               <subSequence id="j6p0s7o5" page="4">
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
@@ -142,7 +154,8 @@
                      id="kiq71eoi"
                      mandatory="false"
                      min="1900-01-01"
-                     max="format-date(current-date(),'[Y0001]-[M01]-[D01]')">
+                     max="format-date(current-date(),'[Y0001]-[M01]-[D01]')"
+                     page="6">
             <label>"➡ 5. " || "When was the first episode of Simpsons? (format YYYY-MM-DD)"</label>
             <declarations declarationType="INSTRUCTION"
                           id="kiq71eoi-kiq7dsy2"
@@ -154,10 +167,10 @@
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="j6p0ti5h">
+               <sequence id="j6p0ti5h" page="1">
                   <label>"I - " || "Introduction"</label>
                </sequence>
-               <subSequence id="j6p0s7o5">
+               <subSequence id="j6p0s7o5" page="4">
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
@@ -169,7 +182,8 @@
                      componentType="Datepicker"
                      id="k5nvty2o"
                      mandatory="false"
-                     min="1980-05">
+                     min="1980-05"
+                     page="7">
             <label>"➡ 6. " || "When was the first episode of the Simpsons? (format YYYY-MM)"</label>
             <declarations declarationType="COMMENT"
                           id="k5nvty2o-k5nvxld8"
@@ -181,10 +195,10 @@
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="j6p0ti5h">
+               <sequence id="j6p0ti5h" page="1">
                   <label>"I - " || "Introduction"</label>
                </sequence>
-               <subSequence id="j6p0s7o5">
+               <subSequence id="j6p0s7o5" page="4">
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
@@ -197,7 +211,8 @@
                      id="k5nw1fir"
                      mandatory="false"
                      min="1900"
-                     max="year-from-date(current-date())">
+                     max="year-from-date(current-date())"
+                     page="8">
             <label>"➡ 7. " || "When was the first episode of the Simpsons? (format YYYY)"</label>
             <declarations declarationType="COMMENT"
                           id="k5nw1fir-k5nvmx3n"
@@ -209,10 +224,10 @@
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="j6p0ti5h">
+               <sequence id="j6p0ti5h" page="1">
                   <label>"I - " || "Introduction"</label>
                </sequence>
-               <subSequence id="j6p0s7o5">
+               <subSequence id="j6p0s7o5" page="4">
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
@@ -226,17 +241,18 @@
                      mandatory="false"
                      min="0.00"
                      max="70.00"
-                     decimals="2">
+                     decimals="2"
+                     page="9">
             <label>"➡ 8. " || "How long does an episode last?"</label>
             <conditionFilter>
                <value>(READY)</value>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="j6p0ti5h">
+               <sequence id="j6p0ti5h" page="1">
                   <label>"I - " || "Introduction"</label>
                </sequence>
-               <subSequence id="j6p0s7o5">
+               <subSequence id="j6p0s7o5" page="4">
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
@@ -250,17 +266,18 @@
                      mandatory="false"
                      min="0.0"
                      max="366.0"
-                     decimals="1">
+                     decimals="1"
+                     page="10">
             <label>"➡ 9. " || "How long does it take to write a new episode?"</label>
             <conditionFilter>
                <value>(READY)</value>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="j6p0ti5h">
+               <sequence id="j6p0ti5h" page="1">
                   <label>"I - " || "Introduction"</label>
                </sequence>
-               <subSequence id="j6p0s7o5">
+               <subSequence id="j6p0s7o5" page="4">
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
@@ -274,17 +291,18 @@
                      mandatory="false"
                      min="0"
                      max="12"
-                     decimals="0">
+                     decimals="0"
+                     page="11">
             <label>"➡ 10. " || "How long will it take you to watch all the existing episodes?"</label>
             <conditionFilter>
                <value>(READY)</value>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="j6p0ti5h">
+               <sequence id="j6p0ti5h" page="1">
                   <label>"I - " || "Introduction"</label>
                </sequence>
-               <subSequence id="j6p0s7o5">
+               <subSequence id="j6p0s7o5" page="4">
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
@@ -298,17 +316,18 @@
                      mandatory="false"
                      min="0"
                      max="100"
-                     decimals="0">
+                     decimals="0"
+                     page="12">
             <label>"➡ 11. " || "For how long have you known the Simpsons family?"</label>
             <conditionFilter>
                <value>(READY)</value>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="j6p0ti5h">
+               <sequence id="j6p0ti5h" page="1">
                   <label>"I - " || "Introduction"</label>
                </sequence>
-               <subSequence id="j6p0s7o5">
+               <subSequence id="j6p0s7o5" page="4">
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
@@ -322,17 +341,18 @@
                      mandatory="false"
                      min="0.0"
                      max="99.0"
-                     decimals="1">
+                     decimals="1"
+                     page="13">
             <label>"➡ 15. " || "In your opinion, how much is the part of audience share in US for the 2016 season?"</label>
             <conditionFilter>
                <value>(READY)</value>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="j6p0ti5h">
+               <sequence id="j6p0ti5h" page="1">
                   <label>"I - " || "Introduction"</label>
                </sequence>
-               <subSequence id="j6p0s7o5">
+               <subSequence id="j6p0s7o5" page="4">
                   <label>"General knowledge of the series"</label>
                </subSequence>
             </hierarchy>
@@ -342,7 +362,10 @@
          </components>
       </components>
    </components>
-   <components xsi:type="Sequence" componentType="Sequence" id="j3341528">
+   <components xsi:type="Sequence"
+               componentType="Sequence"
+               id="j3341528"
+               page="14">
       <label>"II - " || "Simpsons’ city"</label>
       <declarations declarationType="COMMENT"
                     id="j3341528-d2"
@@ -354,14 +377,15 @@
          <bindingDependencies>READY</bindingDependencies>
       </conditionFilter>
       <hierarchy>
-         <sequence id="j3341528">
+         <sequence id="j3341528" page="14">
             <label>"II - " || "Simpsons’ city"</label>
          </sequence>
       </hierarchy>
       <components xsi:type="Radio"
                   componentType="Radio"
                   id="j3343clt"
-                  mandatory="true">
+                  mandatory="true"
+                  page="15">
          <label>"➡ 1. " || "In which city do the Simpsons reside?"</label>
          <declarations declarationType="INSTRUCTION"
                        id="j3343clt-d3"
@@ -373,7 +397,7 @@
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j3341528">
+            <sequence id="j3341528" page="14">
                <label>"II - " || "Simpsons’ city"</label>
             </sequence>
          </hierarchy>
@@ -395,7 +419,8 @@
       <components xsi:type="CheckboxOne"
                   componentType="CheckboxOne"
                   id="j6qdfhvw"
-                  mandatory="false">
+                  mandatory="false"
+                  page="16">
          <label>"➡ 2. " || "Who is the Simpsons city mayor?"</label>
          <declarations declarationType="INSTRUCTION"
                        id="j6qdfhvw-d4"
@@ -407,7 +432,7 @@
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j3341528">
+            <sequence id="j3341528" page="14">
                <label>"II - " || "Simpsons’ city"</label>
             </sequence>
          </hierarchy>
@@ -433,14 +458,15 @@
       <components xsi:type="Dropdown"
                   componentType="Dropdown"
                   id="j4nw5cqz"
-                  mandatory="false">
+                  mandatory="false"
+                  page="17">
          <label>"➡ 3. " || "In which state do The Simpsons reside?"</label>
          <conditionFilter>
             <value>(READY)</value>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j3341528">
+            <sequence id="j3341528" page="14">
                <label>"II - " || "Simpsons’ city"</label>
             </sequence>
          </hierarchy>
@@ -500,20 +526,24 @@
          <response name="STATE"/>
       </components>
    </components>
-   <components xsi:type="Sequence" componentType="Sequence" id="j6qe0h9q">
+   <components xsi:type="Sequence"
+               componentType="Sequence"
+               id="j6qe0h9q"
+               page="18">
       <label>"III - " || "Characters"</label>
       <conditionFilter>
          <value>(READY)</value>
          <bindingDependencies>READY</bindingDependencies>
       </conditionFilter>
       <hierarchy>
-         <sequence id="j6qe0h9q">
+         <sequence id="j6qe0h9q" page="18">
             <label>"III - " || "Characters"</label>
          </sequence>
       </hierarchy>
       <components xsi:type="CheckboxGroup"
                   componentType="CheckboxGroup"
-                  id="j334akov">
+                  id="j334akov"
+                  page="19">
          <label>"➡ 1. " || "What are the pet names that the Simpsons family had?"</label>
          <declarations declarationType="INSTRUCTION"
                        id="j334akov-d5"
@@ -525,7 +555,7 @@
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j6qe0h9q">
+            <sequence id="j6qe0h9q" page="18">
                <label>"III - " || "Characters"</label>
             </sequence>
          </hierarchy>
@@ -554,7 +584,8 @@
                   componentType="Table"
                   id="j6p29i81"
                   positioning="HORIZONTAL"
-                  mandatory="false">
+                  mandatory="false"
+                  page="20">
          <label>"➡ 2. " || "Does Jay like the following ice cream flavours?"</label>
          <declarations declarationType="STATEMENT"
                        id="d12-SI"
@@ -566,7 +597,7 @@
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j6qe0h9q">
+            <sequence id="j6qe0h9q" page="18">
                <label>"III - " || "Characters"</label>
             </sequence>
          </hierarchy>
@@ -651,14 +682,15 @@
                   componentType="Table"
                   id="j6qefnga"
                   positioning="HORIZONTAL"
-                  mandatory="false">
+                  mandatory="false"
+                  page="21">
          <label>"➡ 3. " || "Which character works in the nuclear power plant?"</label>
          <conditionFilter>
             <value>(READY)</value>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j6qe0h9q">
+            <sequence id="j6qe0h9q" page="18">
                <label>"III - " || "Characters"</label>
             </sequence>
          </hierarchy>
@@ -743,14 +775,15 @@
                   componentType="Table"
                   id="j6yzoc6g"
                   positioning="HORIZONTAL"
-                  mandatory="false">
+                  mandatory="false"
+                  page="22">
          <label>"➡ 4. " || "In which city each character was born?"</label>
          <conditionFilter>
             <value>(READY)</value>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j6qe0h9q">
+            <sequence id="j6qe0h9q" page="18">
                <label>"III - " || "Characters"</label>
             </sequence>
          </hierarchy>
@@ -911,28 +944,34 @@
          </cells>
       </components>
    </components>
-   <components xsi:type="Sequence" componentType="Sequence" id="j4nw88h2">
+   <components xsi:type="Sequence"
+               componentType="Sequence"
+               id="j4nw88h2"
+               page="23">
       <label>"IV - " || "General questions"</label>
       <conditionFilter>
          <value>(READY)</value>
          <bindingDependencies>READY</bindingDependencies>
       </conditionFilter>
       <hierarchy>
-         <sequence id="j4nw88h2">
+         <sequence id="j4nw88h2" page="23">
             <label>"IV - " || "General questions"</label>
          </sequence>
       </hierarchy>
-      <components xsi:type="Subsequence" componentType="Subsequence" id="j6qe237q">
+      <components xsi:type="Subsequence"
+                  componentType="Subsequence"
+                  id="j6qe237q"
+                  goToPage="24">
          <label>"Kwik-E-Mart"</label>
          <conditionFilter>
             <value>(READY)</value>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j4nw88h2">
+            <sequence id="j4nw88h2" page="23">
                <label>"IV - " || "General questions"</label>
             </sequence>
-            <subSequence id="j6qe237q">
+            <subSequence id="j6qe237q" page="24">
                <label>"Kwik-E-Mart"</label>
             </subSequence>
          </hierarchy>
@@ -940,17 +979,18 @@
                      componentType="Table"
                      id="j4nwc63q"
                      positioning="HORIZONTAL"
-                     mandatory="false">
+                     mandatory="false"
+                     page="24">
             <label>"➡ 1. " || "Please, specify the percentage of Jay’s expenses in the Kwik-E-Mart for each product?"</label>
             <conditionFilter>
                <value>(READY)</value>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="j4nw88h2">
+               <sequence id="j4nw88h2" page="23">
                   <label>"IV - " || "General questions"</label>
                </sequence>
-               <subSequence id="j6qe237q">
+               <subSequence id="j6qe237q" page="24">
                   <label>"Kwik-E-Mart"</label>
                </subSequence>
             </hierarchy>
@@ -1098,17 +1138,18 @@
                      componentType="Table"
                      id="k9cg2q5t"
                      positioning="HORIZONTAL"
-                     mandatory="false">
+                     mandatory="false"
+                     page="25">
             <label>"➡ 2. " || "Please specify if Jay has bought each product in his last food shopping"</label>
             <conditionFilter>
                <value>(READY)</value>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="j4nw88h2">
+               <sequence id="j4nw88h2" page="23">
                   <label>"IV - " || "General questions"</label>
                </sequence>
-               <subSequence id="j6qe237q">
+               <subSequence id="j6qe237q" page="24">
                   <label>"Kwik-E-Mart"</label>
                </subSequence>
             </hierarchy>
@@ -1318,17 +1359,20 @@
             </cells>
          </components>
       </components>
-      <components xsi:type="Subsequence" componentType="Subsequence" id="j6qejudb">
+      <components xsi:type="Subsequence"
+                  componentType="Subsequence"
+                  id="j6qejudb"
+                  goToPage="26">
          <label>"Clowning"</label>
          <conditionFilter>
             <value>(READY)</value>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j4nw88h2">
+            <sequence id="j4nw88h2" page="23">
                <label>"IV - " || "General questions"</label>
             </sequence>
-            <subSequence id="j6qejudb">
+            <subSequence id="j6qejudb" page="26">
                <label>"Clowning"</label>
             </subSequence>
          </hierarchy>
@@ -1336,17 +1380,18 @@
                      componentType="Table"
                      id="kbkjvgel"
                      positioning="HORIZONTAL"
-                     mandatory="false">
+                     mandatory="false"
+                     page="26">
             <label>"➡ 3. " || "Who did these clownings and tell us what you remember?"</label>
             <conditionFilter>
                <value>(READY)</value>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="j4nw88h2">
+               <sequence id="j4nw88h2" page="23">
                   <label>"IV - " || "General questions"</label>
                </sequence>
-               <subSequence id="j6qejudb">
+               <subSequence id="j6qejudb" page="26">
                   <label>"Clowning"</label>
                </subSequence>
             </hierarchy>
@@ -1491,17 +1536,20 @@
             </cells>
          </components>
       </components>
-      <components xsi:type="Subsequence" componentType="Subsequence" id="j6qeh91y">
+      <components xsi:type="Subsequence"
+                  componentType="Subsequence"
+                  id="j6qeh91y"
+                  goToPage="27">
          <label>"Transport"</label>
          <conditionFilter>
             <value>(READY)</value>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j4nw88h2">
+            <sequence id="j4nw88h2" page="23">
                <label>"IV - " || "General questions"</label>
             </sequence>
-            <subSequence id="j6qeh91y">
+            <subSequence id="j6qeh91y" page="27">
                <label>"Transport"</label>
             </subSequence>
          </hierarchy>
@@ -1509,7 +1557,8 @@
                      componentType="Table"
                      id="j6p2lwuj"
                      positioning="HORIZONTAL"
-                     mandatory="false">
+                     mandatory="false"
+                     page="27">
             <label>"➡ 4. " || "Which of the following means of transport were used by the hero and in which country?"</label>
             <declarations declarationType="INSTRUCTION"
                           id="j6p2lwuj-d10"
@@ -1521,10 +1570,10 @@
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="j4nw88h2">
+               <sequence id="j4nw88h2" page="23">
                   <label>"IV - " || "General questions"</label>
                </sequence>
-               <subSequence id="j6qeh91y">
+               <subSequence id="j6qeh91y" page="27">
                   <label>"Transport"</label>
                </subSequence>
             </hierarchy>
@@ -1698,14 +1747,17 @@
          </components>
       </components>
    </components>
-   <components xsi:type="Sequence" componentType="Sequence" id="j6qfx9qe">
+   <components xsi:type="Sequence"
+               componentType="Sequence"
+               id="j6qfx9qe"
+               page="28">
       <label>"V - " || "Favourite characters (dynamic table)"</label>
       <conditionFilter>
          <value>(READY)</value>
          <bindingDependencies>READY</bindingDependencies>
       </conditionFilter>
       <hierarchy>
-         <sequence id="j6qfx9qe">
+         <sequence id="j6qfx9qe" page="28">
             <label>"V - " || "Favourite characters (dynamic table)"</label>
          </sequence>
       </hierarchy>
@@ -1713,14 +1765,15 @@
                   componentType="Table"
                   id="j6qg8rc6"
                   positioning="HORIZONTAL"
-                  mandatory="false">
+                  mandatory="false"
+                  page="29">
          <label>"➡ 1. " || "Please, complete the following grid with your favourite characters"</label>
          <conditionFilter>
             <value>(READY)</value>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j6qfx9qe">
+            <sequence id="j6qfx9qe" page="28">
                <label>"V - " || "Favourite characters (dynamic table)"</label>
             </sequence>
          </hierarchy>
@@ -2074,14 +2127,15 @@
                   componentType="Table"
                   id="jvxux0mi"
                   positioning="HORIZONTAL"
-                  mandatory="false">
+                  mandatory="false"
+                  page="30">
          <label>"➡ 2. " || "How has your feeling about the following characters evolved over time?"</label>
          <conditionFilter>
             <value>(READY)</value>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j6qfx9qe">
+            <sequence id="j6qfx9qe" page="28">
                <label>"V - " || "Favourite characters (dynamic table)"</label>
             </sequence>
          </hierarchy>
@@ -2182,14 +2236,15 @@
                   componentType="Table"
                   id="jvxwy68n"
                   positioning="HORIZONTAL"
-                  mandatory="false">
+                  mandatory="false"
+                  page="31">
          <label>"➡ 3. " || "Can you tell how long Bart Simpson has been on leave for each type and whether there has been another type?"</label>
          <conditionFilter>
             <value>(READY)</value>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j6qfx9qe">
+            <sequence id="j6qfx9qe" page="28">
                <label>"V - " || "Favourite characters (dynamic table)"</label>
             </sequence>
          </hierarchy>
@@ -2346,14 +2401,17 @@
          </cells>
       </components>
    </components>
-   <components xsi:type="Sequence" componentType="Sequence" id="kiq5mr0b">
+   <components xsi:type="Sequence"
+               componentType="Sequence"
+               id="kiq5mr0b"
+               page="32">
       <label>"VI - " || "Favourite characters (Loop)"</label>
       <conditionFilter>
          <value>(READY)</value>
          <bindingDependencies>READY</bindingDependencies>
       </conditionFilter>
       <hierarchy>
-         <sequence id="kiq5mr0b">
+         <sequence id="kiq5mr0b" page="32">
             <label>"VI - " || "Favourite characters (Loop)"</label>
          </sequence>
       </hierarchy>
@@ -2363,21 +2421,27 @@
                   mandatory="false"
                   min="0"
                   max="20"
-                  decimals="0">
+                  decimals="0"
+                  page="33">
          <label>"➡ 1. " || "How many characters from the Simpsons family could you precisely describe?"</label>
          <conditionFilter>
             <value>(READY)</value>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="kiq5mr0b">
+            <sequence id="kiq5mr0b" page="32">
                <label>"VI - " || "Favourite characters (Loop)"</label>
             </sequence>
          </hierarchy>
          <bindingDependencies>NB_CHAR</bindingDependencies>
          <response name="NB_CHAR"/>
       </components>
-      <components xsi:type="Loop" componentType="Loop" id="kiq7bjam" depth="1">
+      <components xsi:type="Loop"
+                  componentType="Loop"
+                  id="kiq7bjam"
+                  depth="1"
+                  page="34"
+                  paginatedLoop="false">
          <label>"Add a character"</label>
          <label>"Add a character"</label>
          <lines min="1" max="NB_CHAR"/>
@@ -2386,7 +2450,7 @@
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="kiq5mr0b">
+            <sequence id="kiq5mr0b" page="32">
                <label>"VI - " || "Favourite characters (Loop)"</label>
             </sequence>
          </hierarchy>
@@ -2394,17 +2458,21 @@
          <bindingDependencies>NAME_CHAR</bindingDependencies>
          <bindingDependencies>AGE_CHAR</bindingDependencies>
          <loopDependencies>NB_CHAR</loopDependencies>
-         <components xsi:type="Subsequence" componentType="Subsequence" id="kiq5u8d5">
+         <components xsi:type="Subsequence"
+                     componentType="Subsequence"
+                     id="kiq5u8d5"
+                     page="34"
+                     goToPage="34">
             <label>"Description of each character"</label>
             <conditionFilter>
                <value>(READY)</value>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="kiq5mr0b">
+               <sequence id="kiq5mr0b" page="32">
                   <label>"VI - " || "Favourite characters (Loop)"</label>
                </sequence>
-               <subSequence id="kiq5u8d5">
+               <subSequence id="kiq5u8d5" page="34">
                   <label>"Description of each character"</label>
                </subSequence>
             </hierarchy>
@@ -2413,17 +2481,18 @@
                         componentType="Input"
                         id="kiq66gtw"
                         maxLength="30"
-                        mandatory="false">
+                        mandatory="false"
+                        page="34">
                <label>"➡ 2. " || "What is the first name of this character?"</label>
                <conditionFilter>
                   <value>(READY)</value>
                   <bindingDependencies>READY</bindingDependencies>
                </conditionFilter>
                <hierarchy>
-                  <sequence id="kiq5mr0b">
+                  <sequence id="kiq5mr0b" page="32">
                      <label>"VI - " || "Favourite characters (Loop)"</label>
                   </sequence>
-                  <subSequence id="kiq5u8d5">
+                  <subSequence id="kiq5u8d5" page="34">
                      <label>"Description of each character"</label>
                   </subSequence>
                </hierarchy>
@@ -2437,17 +2506,18 @@
                         mandatory="false"
                         min="0"
                         max="120"
-                        decimals="0">
+                        decimals="0"
+                        page="34">
                <label>"➡ 3. " || "How old is this character in the first episode of the Simpsons family?"</label>
                <conditionFilter>
                   <value>(READY)</value>
                   <bindingDependencies>READY</bindingDependencies>
                </conditionFilter>
                <hierarchy>
-                  <sequence id="kiq5mr0b">
+                  <sequence id="kiq5mr0b" page="32">
                      <label>"VI - " || "Favourite characters (Loop)"</label>
                   </sequence>
-                  <subSequence id="kiq5u8d5">
+                  <subSequence id="kiq5u8d5" page="34">
                      <label>"Description of each character"</label>
                   </subSequence>
                </hierarchy>
@@ -2462,7 +2532,10 @@
                componentType="Loop"
                id="kiq7cbgo"
                depth="1"
-               iterations="count(NAME_CHAR)">
+               iterations="count(NAME_CHAR)"
+               page="35"
+               maxPage="3"
+               paginatedLoop="true">
       <conditionFilter>
          <value>(READY)</value>
          <bindingDependencies>READY</bindingDependencies>
@@ -2472,14 +2545,17 @@
       <bindingDependencies>MEMORY_CHAR</bindingDependencies>
       <loopDependencies>NAME_CHAR</loopDependencies>
       <loopDependencies>AGE_CHAR</loopDependencies>
-      <components xsi:type="Sequence" componentType="Sequence" id="kiq5xw5p">
+      <components xsi:type="Sequence"
+                  componentType="Sequence"
+                  id="kiq5xw5p"
+                  page="35.1">
          <label>"VII - " || "Other details about character named " || NAME_CHAR || " "</label>
          <conditionFilter>
             <value>(READY)</value>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="kiq5xw5p">
+            <sequence id="kiq5xw5p" page="35.1">
                <label>"VII - " || "Other details about character named " || NAME_CHAR || " "</label>
             </sequence>
          </hierarchy>
@@ -2488,14 +2564,15 @@
          <components xsi:type="CheckboxOne"
                      componentType="CheckboxOne"
                      id="kiq65x3c"
-                     mandatory="false">
+                     mandatory="false"
+                     page="35.2">
             <label>"➡ 1. " || "Is character named " || NAME_CHAR || " your favourite one ? "</label>
             <conditionFilter>
                <value>(READY)</value>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="kiq5xw5p">
+               <sequence id="kiq5xw5p" page="35.1">
                   <label>"VII - " || "Other details about character named " || NAME_CHAR || " "</label>
                </sequence>
             </hierarchy>
@@ -2516,14 +2593,15 @@
                      componentType="Textarea"
                      id="kiq651zv"
                      maxLength="255"
-                     mandatory="false">
+                     mandatory="false"
+                     page="35.3">
             <label>"➡ 2. " || "What is your best memory about character named " || NAME_CHAR || " ? "</label>
             <conditionFilter>
                <value>(READY)</value>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="kiq5xw5p">
+               <sequence id="kiq5xw5p" page="35.1">
                   <label>"VII - " || "Other details about character named " || NAME_CHAR || " "</label>
                </sequence>
             </hierarchy>
@@ -2534,13 +2612,16 @@
          </components>
       </components>
    </components>
-   <components xsi:type="Sequence" componentType="Sequence" id="j6z12s2d">
+   <components xsi:type="Sequence"
+               componentType="Sequence"
+               id="j6z12s2d"
+               page="36">
       <label>"VIII - " || "Comment"</label>
       <conditionFilter>
          <value>true</value>
       </conditionFilter>
       <hierarchy>
-         <sequence id="j6z12s2d">
+         <sequence id="j6z12s2d" page="36">
             <label>"VIII - " || "Comment"</label>
          </sequence>
       </hierarchy>
@@ -2548,13 +2629,14 @@
                   componentType="Textarea"
                   id="j6z0z3us"
                   maxLength="255"
-                  mandatory="false">
+                  mandatory="false"
+                  page="37">
          <label>"➡ 1. " || "Do you have any comment about the survey?"</label>
          <conditionFilter>
             <value>true</value>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j6z12s2d">
+            <sequence id="j6z12s2d" page="36">
                <label>"VIII - " || "Comment"</label>
             </sequence>
          </hierarchy>

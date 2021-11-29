@@ -941,6 +941,27 @@
                 <!--<xsl:apply-templates select="$source-context" mode="source">
                     <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionReference',.)" tunnel="yes"/>
                 </xsl:apply-templates>-->
+            <!-- Adding instruction modes -->
+            <xsl:if test="contains(enoddi33:get-instruction-modes($source-context),'CAWI')">
+                <d:ConstructName>
+                    <r:String xml:lang="{enoddi33:get-lang($source-context)}">SelfAdministeredQuestionnaire.WebBased</r:String>
+                </d:ConstructName>
+            </xsl:if>
+            <xsl:if test="contains(enoddi33:get-instruction-modes($source-context),'PAPI')">
+                <d:ConstructName>
+                    <r:String xml:lang="{enoddi33:get-lang($source-context)}">SelfAdministeredQuestionnaire.Paper</r:String>
+                </d:ConstructName>
+            </xsl:if>
+            <xsl:if test="contains(enoddi33:get-instruction-modes($source-context),'CATI')">
+                <d:ConstructName>
+                    <r:String xml:lang="{enoddi33:get-lang($source-context)}">Interview.Telephone.CATI</r:String>
+                </d:ConstructName>
+            </xsl:if>
+            <xsl:if test="contains(enoddi33:get-instruction-modes($source-context),'CAPI')">
+                <d:ConstructName>
+                    <r:String xml:lang="{enoddi33:get-lang($source-context)}">Interview.FaceToFace.CAPIorCAMI</r:String>
+                </d:ConstructName>
+            </xsl:if>
             <d:DisplayText>
                 <d:LiteralText>
                     <d:Text xml:lang="{enoddi33:get-lang($source-context)}">
