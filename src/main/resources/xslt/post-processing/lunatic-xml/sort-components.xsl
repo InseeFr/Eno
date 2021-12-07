@@ -20,6 +20,31 @@
     </xd:doc>
     
     <xsl:variable name="root" select="root(.)"/>
+    
+    
+    <!-- This variable retrieves all the dependencies (variables) used somewhere in components
+    Useful later to check if calculated variables are used somewhere in the questionnaire-->
+    <xsl:variable name="variablesUsed">
+        <xsl:for-each select="$root//h:components//h:dependencies">
+            <xsl:value-of select="concat(.,' ')"/>
+        </xsl:for-each>
+        <xsl:for-each select="$root//h:components/h:lines">
+            <xsl:value-of select="concat(@min,' ')"/>
+            <xsl:value-of select="concat(@max,' ')"/>
+        </xsl:for-each>
+    </xsl:variable>
+    
+    <!-- This variable retrieves all the dependencies (variables) used in filters
+    Useful later to check if calculated variables are used in filters-->
+    <xsl:variable name="variablesInFilter">
+        <xsl:for-each select="$root//h:conditionFilter/h:dependencies">
+            <xsl:value-of select="concat(.,' ')"/>
+        </xsl:for-each>
+        <xsl:for-each select="$root//h:components/h:lines">
+            <xsl:value-of select="concat(@min,' ')"/>
+            <xsl:value-of select="concat(@max,' ')"/>
+        </xsl:for-each>
+    </xsl:variable>
 
     <xsl:template match="@*|node()">
         <xsl:copy>
@@ -342,6 +367,17 @@
             </xsl:call-template>
         </xsl:copy>
     </xsl:template>
+    
+    <xsl:template match="h:variables[@variableType='CALCULATED']">
+        <xsl:variable name="varName" select="h:name"/>
+        <xsl:variable name="searchTerm" select="concat('[\W]', $varName, '[\W]')"/>
+        <xsl:if test="enolunatic:is-var-used-in-list-of-dependencies($varName,'',$variablesUsed,$searchTerm)='true' or contains($varName,'FILTER_RESULT')">
+            <xsl:copy>
+                <xsl:apply-templates select="@*|node()"/>
+                <inFilter><xsl:value-of select="enolunatic:is-var-used-in-list-of-dependencies($varName,'',$variablesInFilter,$searchTerm)"/></inFilter>
+            </xsl:copy>
+        </xsl:if>
+    </xsl:template>
 
     <xsl:template name="enolunatic:addVariableCollected">
         <xsl:param name="responseName"/>
@@ -425,4 +461,95 @@
         <xsl:param name="name"/>
         <bindingDependencies><xsl:value-of select="$name"/></bindingDependencies>
     </xsl:template>
+    
+    
+    <!-- This function checks if the variable given in parameter is used as part of a given list of dependencies (by itself or by another calculated variable using it) -->
+    <xsl:function name="enolunatic:is-var-used-in-list-of-dependencies">
+        <xsl:param name="varName"/>
+        <xsl:param name="varList"/>
+        <xsl:param name="dependenciesToSearch"/>
+        <xsl:param name="termToSearch"/>
+        <xsl:choose>
+            <xsl:when test="matches($dependenciesToSearch, $termToSearch)">
+                <xsl:value-of select="'true'"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="callingVars">
+                    <xsl:value-of select="enolunatic:get-vars-using-var($varName)"/>
+                </xsl:variable>
+                <xsl:choose>
+                    <xsl:when test="$callingVars != '' or $varList != ''">
+                        <xsl:variable name="listToFeed" select="normalize-space(concat($varList,' ',$callingVars))"/>
+                        <xsl:variable name="newVar">
+                            <xsl:choose>
+                                <xsl:when test="contains($listToFeed,' ')">
+                                    <xsl:value-of select="substring-before($listToFeed,' ')"/> 
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="$listToFeed"/> 
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <xsl:variable name="newSearch" select="concat('[\W]', $newVar, '[\W]')"/>
+                        <xsl:value-of select="enolunatic:is-var-used-in-list-of-dependencies($newVar,normalize-space(replace($listToFeed,$newVar,'')),$dependenciesToSearch,$newSearch)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="'false'"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+    
+    
+    
+<!--    <!-\- This function checks if the variable given in parameter is used as part of a filter (by itself or by another calculated variable using it) -\->
+    <xsl:function name="enolunatic:is-var-used-in-filter">
+        <xsl:param name="varName"/>
+        <xsl:param name="varList"/>
+        <xsl:param name="toSearchFilter"/>
+        <xsl:param name="toSearch"/>
+        <xsl:choose>
+            <xsl:when test="matches($toSearchFilter, $toSearch)">
+                <xsl:value-of select="'true'"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="callingVars">
+                    <xsl:value-of select="enolunatic:get-vars-using-var($varName)"/>
+                </xsl:variable>
+                <xsl:choose>
+                    <xsl:when test="$callingVars != '' or $varList != ''">
+                        <xsl:variable name="listToFeed" select="normalize-space(concat($varList,' ',$callingVars))"/>
+                        <xsl:variable name="newVar">
+                            <xsl:choose>
+                                <xsl:when test="contains($listToFeed,' ')">
+                                    <xsl:value-of select="substring-before($listToFeed,' ')"/> 
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="$listToFeed"/> 
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <xsl:variable name="newSearch" select="concat('[\W]', $newVar, '[\W]')"/>
+                        <xsl:value-of select="enolunatic:is-var-used-in-filter($newVar,normalize-space(replace($listToFeed,$newVar,'')),$toSearchFilter,$newSearch)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="'false'"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>-->
+    
+    <!-- This function returns for the (calculated) variable given in parameter all the names of other calculated variables using it -->
+    <xsl:function name="enolunatic:get-vars-using-var">
+        <xsl:param name="varName"/>
+        <xsl:for-each select="$root//h:variables[@variableType='CALCULATED']">
+            <xsl:variable name="node" select="."/>
+            <xsl:if test="$node/h:bindingDependencies=$varName">
+                <xsl:sequence select="$node/h:name"/>
+            </xsl:if>
+        </xsl:for-each>
+    </xsl:function>
+    
 </xsl:stylesheet>

@@ -2523,89 +2523,107 @@
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_COMMENT</name>
       <expression>true</expression>
+      <inFilter>false</inFilter>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_READY</name>
       <expression>true</expression>
+      <inFilter>false</inFilter>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_PRODUCER</name>
       <expression>(not(cast(READY,integer) &lt;&gt;  1) )</expression>
       <bindingDependencies>READY</bindingDependencies>
+      <inFilter>false</inFilter>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_SEASON_NUMBER</name>
       <expression>(not(cast(READY,integer) &lt;&gt;  1) )</expression>
       <bindingDependencies>READY</bindingDependencies>
+      <inFilter>false</inFilter>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_DATEFIRST</name>
       <expression>(not(cast(READY,integer) &lt;&gt;  1) )</expression>
       <bindingDependencies>READY</bindingDependencies>
+      <inFilter>false</inFilter>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_AUDIENCE_SHARE</name>
       <expression>(not(cast(READY,integer) &lt;&gt;  1) )</expression>
       <bindingDependencies>READY</bindingDependencies>
+      <inFilter>false</inFilter>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_CITY</name>
       <expression>(not(cast(READY,integer) &lt;&gt;  1) )</expression>
       <bindingDependencies>READY</bindingDependencies>
+      <inFilter>false</inFilter>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_MAYOR</name>
       <expression>(not(cast(READY,integer) &lt;&gt;  1) )</expression>
       <bindingDependencies>READY</bindingDependencies>
+      <inFilter>false</inFilter>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_STATE</name>
       <expression>(not(cast(READY,integer) &lt;&gt;  1) )</expression>
       <bindingDependencies>READY</bindingDependencies>
+      <inFilter>false</inFilter>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_PET</name>
       <expression>(not(cast(READY,integer) &lt;&gt;  1) )</expression>
       <bindingDependencies>READY</bindingDependencies>
+      <inFilter>false</inFilter>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_ICE_FLAVOUR</name>
       <expression>(not(cast(READY,integer) &lt;&gt;  1) )</expression>
       <bindingDependencies>READY</bindingDependencies>
+      <inFilter>false</inFilter>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_NUCLEAR_CHARACTER</name>
       <expression>(not(cast(READY,integer) &lt;&gt;  1) )</expression>
       <bindingDependencies>READY</bindingDependencies>
+      <inFilter>false</inFilter>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_BIRTH_CHARACTER</name>
       <expression>(not(cast(READY,integer) &lt;&gt;  1) )</expression>
       <bindingDependencies>READY</bindingDependencies>
+      <inFilter>false</inFilter>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_PERCENTAGE_EXPENSES</name>
       <expression>(not(cast(READY,integer) &lt;&gt;  1) )</expression>
       <bindingDependencies>READY</bindingDependencies>
+      <inFilter>false</inFilter>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_CLOWNING</name>
       <expression>(not(cast(READY,integer) &lt;&gt;  1) )</expression>
       <bindingDependencies>READY</bindingDependencies>
+      <inFilter>false</inFilter>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_TRAVEL</name>
       <expression>(not(cast(READY,integer) &lt;&gt;  1) )</expression>
       <bindingDependencies>READY</bindingDependencies>
+      <inFilter>false</inFilter>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_FAVOURITE_CHARACTERS</name>
       <expression>(not(cast(READY,integer) &lt;&gt;  1) )</expression>
       <bindingDependencies>READY</bindingDependencies>
+      <inFilter>false</inFilter>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>FILTER_RESULT_SURVEY_COMMENT</name>
       <expression>true</expression>
+      <inFilter>false</inFilter>
    </variables>
    <variables variableType="CALCULATED" xsi:type="VariableType">
       <name>SUM_EXPENSES</name>
@@ -2620,5 +2638,6 @@
       <bindingDependencies>PERCENTAGE_EXPENSES81</bindingDependencies>
       <bindingDependencies>PERCENTAGE_EXPENSES91</bindingDependencies>
       <bindingDependencies>PERCENTAGE_EXPENSES101</bindingDependencies>
+      <inFilter>false</inFilter>
    </variables>
 </Questionnaire>
