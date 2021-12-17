@@ -24,7 +24,8 @@
     
     <!-- This variable retrieves all the dependencies (variables) used somewhere in components
     Useful later to check if calculated variables are used somewhere in the questionnaire-->
-    <xsl:variable name="variablesUsed">
+    <!-- There will be a final unwanted space with the way I concatenate, so I normalize-space in hte final variable -->
+    <xsl:variable name="variablesUsedTemp">
         <xsl:for-each select="$root//h:components//h:dependencies">
             <xsl:value-of select="concat(.,' ')"/>
         </xsl:for-each>
@@ -33,6 +34,7 @@
             <xsl:value-of select="concat(@max,' ')"/>
         </xsl:for-each>
     </xsl:variable>
+    <xsl:variable name="variablesUsed" select="normalize-space($variablesUsedTemp)"/>
     
     <!-- This variable retrieves all the dependencies (variables) used in filters
     Useful later to check if calculated variables are used in filters-->
@@ -470,7 +472,17 @@
         <xsl:param name="dependenciesToSearch"/>
         <xsl:param name="termToSearch"/>
         <xsl:choose>
-            <xsl:when test="matches($dependenciesToSearch, $termToSearch)">
+            <!-- If I find the variable in the dependencies to search, we can stop here, it is true and the variable must be kept -->
+            <!-- First matches is general case, the termToSearch surrounds the variable with [\W] to search among a space separated list of variables -->
+            <!-- Second match treats the case of two variables in dependencies and the one to search is in first place -->
+            <!-- Third match is same as above, but the var to search is in second place -->
+            <!-- The last match is used when there is only one dependency to search -->
+            <!-- I may have been able to get away with one match with searchTerm being : ^(.*[\W])?(VARIABLE)([\W].*)?$ -->
+            <!-- But it has not been battle tested so I preferred to be as specific as possible to avoid side effects... -->
+            <xsl:when test="matches($dependenciesToSearch, $termToSearch)
+                            or matches($dependenciesToSearch,concat('^',$varName,' '))
+                            or matches($dependenciesToSearch,concat(' ',$varName,'$'))
+                            or matches($dependenciesToSearch,concat('^',$varName,'$'))">
                 <xsl:value-of select="'true'"/>
             </xsl:when>
             <xsl:otherwise>
