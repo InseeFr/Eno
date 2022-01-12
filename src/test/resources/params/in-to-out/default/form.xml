@@ -799,6 +799,26 @@
             <bindingDependencies>PERCENTAGE_EXPENSES51</bindingDependencies>
             <bindingDependencies>PERCENTAGE_EXPENSES61</bindingDependencies>
             <bindingDependencies>PERCENTAGE_EXPENSES71</bindingDependencies>
+            <bindingDependencies>PERCENTAGE_EXPENSES81</bindingDependencies>
+            <bindingDependencies>PERCENTAGE_EXPENSES91</bindingDependencies>
+            <bindingDependencies>PERCENTAGE_EXPENSES101</bindingDependencies>
+            <bindingDependencies>SUM_EXPENSES</bindingDependencies>
+            <controls id="j4nwc63q-CI-0" criticality="INFO">
+               <control>not(cast(PERCENTAGE_EXPENSES11,number) + cast(PERCENTAGE_EXPENSES21,number) + cast(PERCENTAGE_EXPENSES31,number)+ cast(PERCENTAGE_EXPENSES41,number)+ cast(PERCENTAGE_EXPENSES51,number)+ cast(PERCENTAGE_EXPENSES61,number)+ cast(PERCENTAGE_EXPENSES71,number)+ cast(PERCENTAGE_EXPENSES81,number)+ cast(PERCENTAGE_EXPENSES91,number)+ cast(PERCENTAGE_EXPENSES101,number)!= 100)</control>
+               <errorMessage>"The sum of percentages is: " || cast(cast(SUM_EXPENSES,number),string) || " %. The total of
+                        percentages must be equal to 100%. "</errorMessage>
+               <bindingDependencies>PERCENTAGE_EXPENSES11</bindingDependencies>
+               <bindingDependencies>PERCENTAGE_EXPENSES21</bindingDependencies>
+               <bindingDependencies>PERCENTAGE_EXPENSES31</bindingDependencies>
+               <bindingDependencies>PERCENTAGE_EXPENSES41</bindingDependencies>
+               <bindingDependencies>PERCENTAGE_EXPENSES51</bindingDependencies>
+               <bindingDependencies>PERCENTAGE_EXPENSES61</bindingDependencies>
+               <bindingDependencies>PERCENTAGE_EXPENSES71</bindingDependencies>
+               <bindingDependencies>PERCENTAGE_EXPENSES81</bindingDependencies>
+               <bindingDependencies>PERCENTAGE_EXPENSES91</bindingDependencies>
+               <bindingDependencies>PERCENTAGE_EXPENSES101</bindingDependencies>
+               <bindingDependencies>SUM_EXPENSES</bindingDependencies>
+            </controls>
             <cells type="header">
                <cells headerCell="true" colspan="2">
                   <label/>
