@@ -190,22 +190,16 @@
             <xsl:apply-templates select="*[not(self::h:hierarchy or self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter or self::h:missingResponse)]"/>
         </components>
     </xsl:template>
+    
     <xsl:template match="h:components[@xsi:type='Table']">
         <xsl:param name="loopDependencies" as="xs:string*" tunnel="yes" />
         <components>
             <xsl:copy-of select="@*"/>
-            <xsl:variable name="component-id" select="@id"/>
+            <xsl:variable name="componentId" select="@id"/>
             <xsl:apply-templates select="h:label"/>
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
-            <xsl:for-each select="$root//h:controls[matches(@id,$component-id)]">
-                <controls>
-                    <xsl:copy-of select="*[not(self::h:dependencies)] | @*"/>
-                    <xsl:call-template name="enolunatic:add-all-dependencies">
-                        <xsl:with-param name="dependencies" select="distinct-values(descendant::h:dependencies)"/>
-                    </xsl:call-template>
-                </controls>
-            </xsl:for-each>
+            <xsl:copy-of select="enolunatic:get-all-controls($componentId)"/>
             <xsl:apply-templates select="h:hierarchy"/>
             <xsl:apply-templates select="h:missingResponse"/>
             <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies[not(parent::h:conditionFilter)])" as="xs:string*"/>
@@ -248,18 +242,11 @@
         <xsl:param name="loopDependencies" as="xs:string*" tunnel="yes" />
         <components>
             <xsl:copy-of select="@*"/>
-            <xsl:variable name="component-id" select="@id"/>
+            <xsl:variable name="componentId" select="@id"/>
             <xsl:apply-templates select="h:label"/>
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
-            <xsl:for-each select="$root//h:controls[matches(@id,$component-id)]">
-                <controls>
-                    <xsl:copy-of select="*[not(self::h:dependencies)] | @*"/>
-                    <xsl:call-template name="enolunatic:add-all-dependencies">
-                        <xsl:with-param name="dependencies" select="distinct-values(descendant::h:dependencies)"/>
-                    </xsl:call-template>
-                </controls>
-            </xsl:for-each>
+            <xsl:copy-of select="enolunatic:get-all-controls($componentId)"/>
             <xsl:apply-templates select="h:hierarchy"/>
             <xsl:apply-templates select="h:missingResponse"/>
             <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies[not(parent::h:conditionFilter)])" as="xs:string*"/>
@@ -471,6 +458,17 @@
         <bindingDependencies><xsl:value-of select="$name"/></bindingDependencies>
     </xsl:template>
     
+    <xsl:function name="enolunatic:get-all-controls">
+        <xsl:param name="componentId"/>
+        <xsl:for-each select="$root//h:controls[matches(@id,$componentId)]">
+            <controls>
+                <xsl:copy-of select="*[not(self::h:dependencies)] | @*"/>
+                <xsl:call-template name="enolunatic:add-all-dependencies">
+                    <xsl:with-param name="dependencies" select="distinct-values(descendant::h:dependencies)"/>
+                </xsl:call-template>
+            </controls>
+        </xsl:for-each>
+    </xsl:function>
     
     <!-- This function checks if the variable given in parameter is used as part of a given list of dependencies (by itself or by another calculated variable using it) -->
     <xsl:function name="enolunatic:is-var-used-in-list-of-dependencies">
