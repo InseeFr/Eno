@@ -458,6 +458,7 @@
         <bindingDependencies><xsl:value-of select="$name"/></bindingDependencies>
     </xsl:template>
     
+    <!-- This function is used to retrieve all controls linked to a given component, which ID is given in parameter -->
     <xsl:function name="enolunatic:get-all-controls">
         <xsl:param name="componentId"/>
         <xsl:for-each select="$root//h:controls[matches(@id,$componentId)]">
