@@ -1001,6 +1001,19 @@
             <bindingDependencies>PERCENTAGE_EXPENSES51</bindingDependencies>
             <bindingDependencies>PERCENTAGE_EXPENSES61</bindingDependencies>
             <bindingDependencies>PERCENTAGE_EXPENSES71</bindingDependencies>
+            <bindingDependencies>SUM_EXPENSES</bindingDependencies>
+            <controls id="j4nwc63q-CI-0" criticality="INFO">
+               <control>not(PERCENTAGE_EXPENSES11 + PERCENTAGE_EXPENSES21 + PERCENTAGE_EXPENSES31 + PERCENTAGE_EXPENSES41 + PERCENTAGE_EXPENSES51 + PERCENTAGE_EXPENSES61 + PERCENTAGE_EXPENSES71 != 100)</control>
+               <errorMessage>"The sum of percentages is: " || SUM_EXPENSES || " %. The total of percentages must be equal to 100%. "</errorMessage>
+               <bindingDependencies>PERCENTAGE_EXPENSES11</bindingDependencies>
+               <bindingDependencies>PERCENTAGE_EXPENSES21</bindingDependencies>
+               <bindingDependencies>PERCENTAGE_EXPENSES31</bindingDependencies>
+               <bindingDependencies>PERCENTAGE_EXPENSES41</bindingDependencies>
+               <bindingDependencies>PERCENTAGE_EXPENSES51</bindingDependencies>
+               <bindingDependencies>PERCENTAGE_EXPENSES61</bindingDependencies>
+               <bindingDependencies>PERCENTAGE_EXPENSES71</bindingDependencies>
+               <bindingDependencies>SUM_EXPENSES</bindingDependencies>
+            </controls>
             <cells type="header">
                <cells headerCell="true" colspan="2">
                   <label/>
