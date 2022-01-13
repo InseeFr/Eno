@@ -1,5 +1,13 @@
 # Eno Releases note
 
+## 2.3.5 - 13/12/21
+- **[dependencies]** Upgrading dependancies. 
+- **[ddi2lunaticXML][core]** : Fixing function checking if calculated variables are used.
+- **[ddi2lunaticXML][core]** : Fixing absence of the control field in the Table component
+
+## 2.3.4 - 22/12/21
+- **[dependencies]** Upgrading log4j version. 
+
 ## 2.3.3 - 14/12/21
 - **[dependencies]** Upgrading log4j version. 
 
