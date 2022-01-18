@@ -85,7 +85,7 @@
         
         <fo:flow flow-name="region-body-first-household">
             <!--    Blocs Logos et Libellé -->
-            <fo:block-container absolute-position="absolute" left="15mm" top="12mm" width="180mm" height="25mm">
+            <fo:block-container absolute-position="absolute" left="0mm" top="0mm" width="180mm" height="25mm">
                 <fo:block>
                     <fo:external-graphic src="coleman/${Enq_ImageLogos}" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
                 </fo:block>
