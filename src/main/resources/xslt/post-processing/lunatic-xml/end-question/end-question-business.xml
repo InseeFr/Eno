@@ -29,7 +29,7 @@
                     <label>"Temps de réponse et commentaires"</label>
                 </sequence>
             </hierarchy>
-            <bindingsDependencies>HEURE_REMPL</bindingsDependencies>
+            <bindingDependencies>HEURE_REMPL</bindingDependencies>
             <response name="HEURE_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>HEURE_REMPL</name>

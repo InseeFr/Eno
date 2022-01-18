@@ -116,31 +116,67 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="pogues:Unit" mode="conversion-table">
+        <xsl:template match="pogues:Unit" mode="conversion-table">
         <xsl:choose>
-            <xsl:when test=". = 'http://id.insee.fr/unit/euro'">
-                <xsl:value-of select="'€'"/>
+            <xsl:when test=". = 'http://id.insee.fr/unit/euro'">   
+                <xsl:value-of select="'€'" />
             </xsl:when>
-            <xsl:when test=". = 'http://id.insee.fr/unit/keuro'">
-                <xsl:value-of select="'k€'"/>
+            <xsl:when test=". = 'http://id.insee.fr/unit/keuro'">  
+                <xsl:value-of select="'k€'" />
             </xsl:when>
             <xsl:when test=". = 'http://id.insee.fr/unit/percent'">
-                <xsl:value-of select="'%'"/>
+                <xsl:value-of select="'%'" />
             </xsl:when>
-            <xsl:when test=". = 'http://id.insee.fr/unit/heure'">
-                <xsl:value-of select="'heures'"/>
+            <xsl:when test=". = 'http://id.insee.fr/unit/heure'">  
+                <xsl:value-of select="'heures'" />
             </xsl:when>
-            <xsl:when test=". = 'http://id.insee.fr/unit/jour'">
-                <xsl:value-of select="'jours'"/>
+            <xsl:when test=". = 'http://id.insee.fr/unit/jour'">   
+                <xsl:value-of select="'jours'" />
             </xsl:when>
             <xsl:when test=". = 'http://id.insee.fr/unit/semaine'">
-                <xsl:value-of select="'semaines'"/>
+                <xsl:value-of select="'semaines'" />
             </xsl:when>
-            <xsl:when test=". = 'http://id.insee.fr/unit/mois'">
-                <xsl:value-of select="'mois'"/>
+            <xsl:when test=". = 'http://id.insee.fr/unit/mois'">   
+                <xsl:value-of select="'mois'" />
             </xsl:when>
             <xsl:when test=". = 'http://id.insee.fr/unit/annee'">
-                <xsl:value-of select="'années'"/>
+                <xsl:value-of select="'années'" />
+            </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/watt'">
+                <xsl:value-of select="'W'" />
+            </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/kilowatt'">
+                <xsl:value-of select="'kW'" />
+            </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/megawatt'">
+                <xsl:value-of select="'MW'" />
+            </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/megawattpcs'">
+                <xsl:value-of select="'MW PCS'" />
+            </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/kilowattthermique'">
+                <xsl:value-of select="'kWth'" />
+            </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/tonne'">
+                <xsl:value-of select="'tonnes'" />
+            </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/tonnematiereseche'">
+                <xsl:value-of select="'tonnes matières sèches'" />
+            </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/degrecelsius'">
+                <xsl:value-of select="'°C'" />
+            </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/bar'">
+                <xsl:value-of select="'bars'" />
+            </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/litre'">
+                <xsl:value-of select="'litres'" />
+            </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/metre'">
+                <xsl:value-of select="'mètres'" />
+            </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/metrecarre'">
+                <xsl:value-of select="'mètres carrés'" />
             </xsl:when>
         </xsl:choose>
     </xsl:template>

@@ -1,5 +1,24 @@
 # Eno Releases note
 
+## 2.3.5 - 13/12/21
+- **[dependencies]** Upgrading dependancies. 
+- **[ddi2lunaticXML][core]** : Fixing function checking if calculated variables are used.
+- **[ddi2lunaticXML][core]** : Fixing absence of the control field in the Table component
+
+## 2.3.4 - 22/12/21
+- **[dependencies]** Upgrading log4j version. 
+
+## 2.3.3 - 14/12/21
+- **[dependencies]** Upgrading log4j version. 
+
+## 2.3.2 - 07/12/21
+- **[dependencies]** Upgrading dependencies versions. 
+- **[poguesXML2ddi]** Adding units.
+- **[xforms2xforms]** Fixing the noopPreprocessing.
+- **[ddi2lunaticXML][core]** Adding support of the "Control" parameter (in lunatic-xml parameters fed to Eno) : if false, controls are not added to the resulting questionnaire.
+- **[ddi2lunaticXML][core]** Adding a field inFilter, specifying if a calculated variable is used for a filter or a loop condition. A function is-used-in-filter supports this feature by, for a given variable, searching up for its possible use in a condition (in all variables that may call it) for a given variable.
+- **[ddi2lunaticXML][post-processing]** ***business*** Fixing the bindingDependencies tag for HEURE_REMPL
+
 ## 2.3.1 - 15/11/2021
 - **[ddi2lunaticXML][core]** improving performance (in terms of the resolution of variables in formulas)
 
