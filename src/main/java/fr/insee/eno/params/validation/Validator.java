@@ -2,6 +2,7 @@ package fr.insee.eno.params.validation;
 
 import fr.insee.eno.parameters.ENOParameters;
 import fr.insee.eno.parameters.InFormat;
+import fr.insee.eno.parameters.Mode;
 import fr.insee.eno.parameters.OutFormat;
 import fr.insee.eno.parameters.Pipeline;
 
@@ -35,6 +36,9 @@ public interface Validator {
 	 * @return a ValidationMessage with a message and the boolean if it is valid.
 	 */
 	ValidationMessage validatePostProcessings(Pipeline pipeline);
+
+	ValidationMessage validateMode(OutFormat outFormat, Mode mode);
+
 	
 
 }

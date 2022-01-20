@@ -1,5 +1,40 @@
 # Eno Releases note
 
+## 2.3.5 - 13/12/21
+- **[dependencies]** Upgrading dependancies. 
+- **[ddi2lunaticXML][core]** : Fixing function checking if calculated variables are used.
+- **[ddi2lunaticXML][core]** : Fixing absence of the control field in the Table component
+
+## 2.3.4 - 22/12/21
+- **[dependencies]** Upgrading log4j version. 
+
+## 2.3.3 - 14/12/21
+- **[dependencies]** Upgrading log4j version. 
+
+## 2.3.2 - 07/12/21
+- **[dependencies]** Upgrading dependencies versions. 
+- **[poguesXML2ddi]** Adding units.
+- **[xforms2xforms]** Fixing the noopPreprocessing.
+- **[ddi2lunaticXML][core]** Adding support of the "Control" parameter (in lunatic-xml parameters fed to Eno) : if false, controls are not added to the resulting questionnaire.
+- **[ddi2lunaticXML][core]** Adding a field inFilter, specifying if a calculated variable is used for a filter or a loop condition. A function is-used-in-filter supports this feature by, for a given variable, searching up for its possible use in a condition (in all variables that may call it) for a given variable.
+- **[ddi2lunaticXML][post-processing]** ***business*** Fixing the bindingDependencies tag for HEURE_REMPL
+
+## 2.3.1 - 15/11/2021
+- **[ddi2lunaticXML][core]** improving performance (in terms of the resolution of variables in formulas)
+
+## 2.3.0 - 27/10/2021
+- **[dependencies]** Upgrading dependencies versions. 
+- **[parameters][core]** Adding in Eno settings survey mode choice (particularly for the Lunatic output which generates questionnaires for several modes). 
+- **[ddi2out][preprocessing]** Implementing declaration retrieval according to the mode (during multimodal selection pre-processing step)
+- **[ddi2fo][core]** Correction of the display of the time response
+- **[ddi2fo][post-processing]** ***business*** end questions : Adding  an empty inline before hour png fields, to fix old behaviour with boxes not being spaced out.
+- **[ddi2fodt][core]** Several evolutionn of fodt output (among which Loop names are displayed and variables in filter condition are correctly resolved)
+- **[ddi2lunaticXML][core]** Not unfolding calculated variables until the collected variables 
+- **[ddi2lunaticXML][core]** Revising binding dependencies
+- **[ddi2lunaticXML][core]** Adding the recursive-replace step for content of tooltips that allows to replace the ' symbol (U+0027) by ’ (U+2019) -> needed for correct interpretation by VTL/orchestrators
+- **[ddi2lunaticXML][core]** sum on vectors
+- **[ddi2lunaticXML][core]** Correction for lunatic labels with number or dash at the beginning
+
 ## 2.2.11 - 07/09/2021
 - **[dependencies]** Upgrading dependencies versions. 
 - **[ddi2lunaticXML][core]** Adding support of calculated variables scope (shapeFrom) to allow better VTL support

@@ -158,33 +158,28 @@ public class XslTransformation {
 	 * @param input          : the input xml file
 	 * @param xslSheet       : the xsl stylesheet that will be used
 	 * @param output         : the xml output that will be created
-	 * @param in2out         : main transformation
+	 * @param parameters :  parameters
 	 * @throws Exception : if the factory couldn't be found or if the paths are
 	 *                   incorrect
 	 */
-	public void transformModalSelection(InputStream input, InputStream xslSheet, OutputStream output, String in2out)
+	public void transformModalSelection(InputStream input, InputStream xslSheet, OutputStream output, byte[] parameters)
 			throws Exception {
-		String outputFormat = "";
-		if (in2out.equals("ddi2xforms")) {
-			outputFormat = "xforms";
-		}
-		if (in2out.equals("ddi2fodt")) {
-			outputFormat = "fodt";
-		}
-		if (in2out.equals("ddi2fo")) {
-			outputFormat = "fo";
-		}
-		if (in2out.equals("ddi2lunatic-xml")) {
-			outputFormat = "lunatic-xml";
-		}
-
+		InputStream parametersIS = null;
 		LOGGER.debug("Using the multimodal selection transformer");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
 		transformer.setErrorListener(new EnoErrorListener());
-		transformer.setParameter(XslParameters.MULTIMODAL_SELECTION_OUTPUT_FORMAT, outputFormat);
+		transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_FILE, Constants.PARAMETERS_DEFAULT);
+		if (parameters != null) {
+			parametersIS = new ByteArrayInputStream(parameters);
+			Source source = new StreamSource(parametersIS);
+			transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_NODE, source);
+		}
 		xslTransform(transformer, input, output);
+		if (parameters != null) {
+			parametersIS.close();
+		}
 
 	}
 

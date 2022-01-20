@@ -45,6 +45,7 @@ import fr.insee.eno.preprocessing.DDIMappingPreprocessor;
 import fr.insee.eno.preprocessing.DDIMarkdown2XhtmlPreprocessor;
 import fr.insee.eno.preprocessing.DDIMultimodalSelectionPreprocessor;
 import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
+import fr.insee.eno.preprocessing.NoopPreprocessor;
 import fr.insee.eno.preprocessing.PoguesXmlInsertFilterLoopIntoQuestionTree;
 import fr.insee.eno.preprocessing.PoguesXMLPreprocessorGoToTreatment;
 import fr.insee.eno.preprocessing.Preprocessor;
@@ -68,6 +69,9 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	private PoguesXML2DDIGenerator poguesXml2ddiGenerator = new PoguesXML2DDIGenerator();
 	
 	// PreProcessing
+	
+	private NoopPreprocessor noopPreprocessor = new NoopPreprocessor();
+	
 	private DDIDereferencingPreprocessor ddiDereferencing = new DDIDereferencingPreprocessor();
 
 	private DDICleaningPreprocessor ddiCleaning = new DDICleaningPreprocessor();
@@ -165,9 +169,11 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	@Override
 	public Preprocessor[] setPreProcessors(List<PreProcessing> preProcessings) {
 		List<Preprocessor> preprocessors = new ArrayList<Preprocessor>();
+		if(preProcessings.isEmpty()) {preprocessors.add(noopPreprocessor);}
+		else {
 		for(PreProcessing preProcessing : preProcessings) {
 			preprocessors.add(getPreProcessor(preProcessing));
-		}
+		} }
 		return preprocessors.toArray(new Preprocessor[preprocessors.size()]);
 	}
 	
@@ -298,6 +304,11 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	@Override
 	public Preprocessor getPreProcessor(PreProcessing preProcessing) {
 		Preprocessor preprocessor = null;
+		
+		if(preProcessing==null) {
+			preprocessor = noopPreprocessor;
+			}
+		else {
 		switch (preProcessing) {
 		case DDI_32_TO_DDI_33:
 			preprocessor = ddi32ToDDI33Preprocessor;
@@ -330,7 +341,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 			break;
 		case POGUES_XML_TWEAK_TO_MERGE_EQUIVALENT_ITE:
 			break;
-		}
+		}}
 		return preprocessor;
 	}
 	
