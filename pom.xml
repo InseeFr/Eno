@@ -53,7 +53,6 @@
 		<commons-io.version>2.11.0</commons-io.version>
 		<saxon.version>10.6</saxon.version>
 		<fop.version>2.2</fop.version>
-		<xalan.version>2.7.2</xalan.version>
 		<slf4j.version>1.7.32</slf4j.version>
 		<eclipse.version>2.6.0</eclipse.version>
 		<jaxb-api.version>2.3.1</jaxb-api.version>
@@ -87,11 +86,7 @@
 			<artifactId>Saxon-HE</artifactId>
 			<version>${saxon.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>xalan</groupId>
-			<artifactId>xalan</artifactId>
-			<version>${xalan.version}</version>
-		</dependency>
+
 		<dependency>
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
@@ -108,6 +103,12 @@
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>fop</artifactId>
 			<version>${fop.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- LOG4j and SL4J dependancies -->
