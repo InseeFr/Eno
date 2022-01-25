@@ -1,20 +1,9 @@
 package fr.insee.eno.postprocessing.fo;
 
 import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import fr.insee.eno.exception.Utils;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
-import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PostProcessing;
-import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.transform.xsl.XslTransformation;
 
 /**
  * A PDF post processing

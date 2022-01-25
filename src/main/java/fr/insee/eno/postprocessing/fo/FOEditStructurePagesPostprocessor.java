@@ -4,7 +4,6 @@ import java.io.File;
 
 import fr.insee.eno.Constants;
 import fr.insee.eno.parameters.PostProcessing;
-import fr.insee.eno.postprocessing.Postprocessor;
 
 /**
  * A PDF post processing
