@@ -135,8 +135,8 @@ public class XslTransformation {
 			throws Exception {
 		InputStream parametersIS = null;
 		LOGGER.debug("Using transformer with parameters");
-		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
-
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();  
+        tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
 		transformer.setErrorListener(new EnoErrorListener());
 		transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_FILE, Constants.PARAMETERS_DEFAULT);
@@ -293,7 +293,13 @@ public class XslTransformation {
 		xslTransform(transformer, inputFile, outputFile);
 	}
 
-
+	public void transformSimplePostorSimple(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+			byte[] parameters, String in2out) throws Exception {
+		if(parameters != null) {transformSimplePost(inputFile, outputFile, xslSheet,parameters, in2out);}
+		else {transformSimple(inputFile, outputFile, xslSheet);}
+		
+	}
+	
 	public void transformSimplePost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			byte[] parameters, String in2out) throws Exception {
 		String config = null;
