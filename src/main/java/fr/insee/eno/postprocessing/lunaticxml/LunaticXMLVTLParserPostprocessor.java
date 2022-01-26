@@ -202,9 +202,6 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 		return finalString;
 	}
 
-	private boolean isCastingToString(String castType) {
-		return castType.equals("string");
-	}
 
 	private boolean isCastingToIntegerOrNumber(String castType) {
 		return castType.equals("integer") || castType.equals("number");

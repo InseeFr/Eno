@@ -18,43 +18,16 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * Customization of JS postprocessor.
  */
-public class LunaticXMLExternalizeVariablesAndDependenciesPostprocessor implements Postprocessor {
+public class LunaticXMLExternalizeVariablesAndDependenciesPostprocessor extends LunaticXMLPostProcessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(LunaticXMLExternalizeVariablesAndDependenciesPostprocessor.class);
-
-	private XslTransformation saxonService = new XslTransformation();
 
 	private static final String styleSheetPath = Constants.TRANSFORMATIONS_EXTERNALIZE_VARIABLES_AND_DEPENDENCIES_LUNATIC_XML;
 
 	@Override
 	public File process(File input, byte[] parameters, String surveyName) throws Exception {
-
-		File outputForJSFile = new File(input.getParent(),
-				Constants.BASE_NAME_FORM_FILE +
-				Constants.EXTERNALIZE_VARIABLES_LUNATIC_XML_EXTENSION);
-		logger.debug("Output folder for basic-form : " + outputForJSFile.getAbsolutePath());
-
-		InputStream JS_XSL = Constants.getInputStreamFromPath(styleSheetPath);
-		InputStream inputStream = FileUtils.openInputStream(input);
-		OutputStream outputStream = FileUtils.openOutputStream(outputForJSFile);
-
-		try {
-			saxonService.transformSimple(inputStream,outputStream, JS_XSL);
-		}catch(Exception e) {
-			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
-					toString(),
-					e.getMessage(),
-					Utils.getErrorLocation(styleSheetPath,e));
-			logger.error(errorMessage);
-			throw new EnoGenerationException(errorMessage);
-		}
+		return this.process(input, parameters, surveyName,  styleSheetPath, Constants.EXTERNALIZE_VARIABLES_LUNATIC_XML_EXTENSION);
 		
-		inputStream.close();
-		outputStream.close();
-		JS_XSL.close();
-		logger.info("End JS externalize variables post-processing");
-
-		return outputForJSFile;
 	}
 
 	public String toString() {

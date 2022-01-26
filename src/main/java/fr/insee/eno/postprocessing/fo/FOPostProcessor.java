@@ -51,7 +51,7 @@ public abstract class FOPostProcessor implements Postprocessor {
 		inputStream.close();
 		outputStream.close();
 		FO_XSL.close();
-		logger.info("End of EditStructurePages post-processing " + outputForFOFile.getAbsolutePath());
+		logger.info("End of FO post-processing " + outputForFOFile.getAbsolutePath());
 
 		return outputForFOFile;
 	}
