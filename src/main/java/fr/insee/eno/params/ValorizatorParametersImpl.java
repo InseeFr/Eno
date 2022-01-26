@@ -27,14 +27,14 @@ import org.slf4j.LoggerFactory;
 import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.ENOParameters;
-import fr.insee.eno.transform.xsl.XslTransformation;
+import fr.insee.eno.transform.xsl.UglyXslTransformation;
 
 
 public class ValorizatorParametersImpl implements ValorizatorParameters {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ValorizatorParametersImpl.class);
 	
-	private XslTransformation saxonService = new XslTransformation();
+	private UglyXslTransformation saxonService = new UglyXslTransformation();
 
 	private static final String styleSheetPath = Constants.MERGE_PARAMETERS_XSL;
 

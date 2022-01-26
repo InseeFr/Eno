@@ -14,13 +14,13 @@ import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.transform.xsl.XslTransformation;
+import fr.insee.eno.transform.xsl.UglyXslTransformation;
 
 public class XFORMSSpecificTreatmentPostprocessor implements Postprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(XFORMSSpecificTreatmentPostprocessor.class);
 
-	private XslTransformation saxonService = new XslTransformation();
+	private UglyXslTransformation saxonService = new UglyXslTransformation();
 
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {

@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PreProcessing;
-import fr.insee.eno.transform.xsl.XslTransformation;
+import fr.insee.eno.transform.xsl.UglyXslTransformation;
 
 /**
  * A PoguesXML specific preprocessor : other goto2ite (rc version).
@@ -22,7 +22,7 @@ public class PoguesXMLPreprocessorGoToTreatment implements Preprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(PoguesXMLPreprocessorGoToTreatment.class);
 
-	private XslTransformation saxonService = new XslTransformation();
+	private UglyXslTransformation saxonService = new UglyXslTransformation();
 
 	private static final String styleSheetPath = Constants.UTIL_POGUES_XML_GOTO_ITE_XSL;
 

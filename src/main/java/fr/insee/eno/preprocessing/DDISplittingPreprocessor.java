@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
-import fr.insee.eno.transform.xsl.XslTransformation;
+import fr.insee.eno.transform.xsl.UglyXslTransformation;
 
 /**
  * A DDI specific preprocessor.
@@ -23,7 +23,7 @@ public class DDISplittingPreprocessor  {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DDISplittingPreprocessor.class);
 
-	private XslTransformation saxonService = new XslTransformation();
+	private UglyXslTransformation saxonService = new UglyXslTransformation();
 
 	private static final String styleSheetPath = Constants.UTIL_DDI_SPLITTING_XSL;
 

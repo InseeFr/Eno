@@ -16,13 +16,6 @@ public class LunaticXMLInsertGenericQuestionsPostprocessor extends LunaticXMLPos
 
 	@Override
 	public File process(File input, byte[] parameters, String surveyName) throws Exception {
-		return this.process(input, parameters, surveyName,  styleSheetPath, Constants.INSERT_GENERIC_QUESTIONS_LUNATIC_XML_EXTENSION);
-		
+		return this.process(input, parameters, surveyName,  styleSheetPath, Constants.INSERT_GENERIC_QUESTIONS_LUNATIC_XML_EXTENSION);		
 	}
-	
-	@Override
-	public String toString() {
-		return PostProcessing.LUNATIC_XML_INSERT_GENERIC_QUESTIONS.name();
-	}
-
 }

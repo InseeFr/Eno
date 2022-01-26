@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
-import fr.insee.eno.transform.xsl.XslTransformation;
+import fr.insee.eno.transform.xsl.UglyXslTransformation;
 import fr.insee.eno.utils.FolderCleaner;
 
 /**
@@ -24,7 +24,7 @@ public class FodsToXSLCompiler {
 	
 	final static Logger logger = LoggerFactory.getLogger(FodsToXSLCompiler.class);
 
-	private static XslTransformation saxonService = new XslTransformation();
+	private static UglyXslTransformation saxonService = new UglyXslTransformation();
 	private static FolderCleaner cleanService = new FolderCleaner();
 
 	/**

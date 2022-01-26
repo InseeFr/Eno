@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PreProcessing;
-import fr.insee.eno.transform.xsl.XslTransformation;
+import fr.insee.eno.transform.xsl.UglyXslTransformation;
 
 /**
  * A DDI preprocessor to select only relevant components for the target output.
@@ -23,7 +23,7 @@ public class DDIMultimodalSelectionPreprocessor implements Preprocessor {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DDIMultimodalSelectionPreprocessor.class);
 
-	private XslTransformation saxonService = new XslTransformation();
+	private UglyXslTransformation saxonService = new UglyXslTransformation();
 
 	private static final String styleSheetPath = Constants.UTIL_DDI_MULTIMODAL_SELECTION_XSL;
 

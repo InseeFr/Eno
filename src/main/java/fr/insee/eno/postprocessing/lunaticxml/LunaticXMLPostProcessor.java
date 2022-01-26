@@ -12,7 +12,10 @@ import org.slf4j.LoggerFactory;
 import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.exception.Utils;
+import fr.insee.eno.parameters.OutFormat;
+import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
+import fr.insee.eno.transform.xsl.XslTransformSimplePost;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
 	/**
@@ -22,8 +25,6 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 		
 		private static final Logger logger = LoggerFactory.getLogger(LunaticXMLPostProcessor.class);
 
-		private XslTransformation saxonService = new XslTransformation();
-
 		public File process(File input, byte[] parameters, String survey, String styleSheetPath, String extension) throws Exception {
 
 			File outputForJSFile = new File(input.getParent(),
@@ -31,12 +32,14 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 					extension);
 			
 			logger.debug("Output folder for basic-form : " + outputForJSFile.getAbsolutePath());
+			
+			XslTransformation saxonService = new XslTransformSimplePost(parameters,this.outPreprocessing());
 
 			InputStream JS_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 			InputStream inputStream = FileUtils.openInputStream(input);
 			OutputStream outputStream = FileUtils.openOutputStream(outputForJSFile);
 
-			try {saxonService.transformSimplePost(inputStream,outputStream, JS_XSL,parameters,"ddi2lunaticXML");}
+			try {saxonService.transform(inputStream,outputStream, JS_XSL);}
 			catch(Exception e) {
 				String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 						toString(),
@@ -52,6 +55,10 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 			logger.info("End JS externalize variables post-processing");
 
 			return outputForJSFile;
+		}
+		
+		public OutFormat outPreprocessing() {
+			return OutFormat.LUNATIC_XML;
 		}
 
 	}

@@ -23,9 +23,4 @@ public class LunaticXMLSortComponentsPostprocessor extends LunaticXMLPostProcess
 		
 	}
 
-
-	public String toString() {
-		return PostProcessing.LUNATIC_XML_SORT_COMPONENTS.name();
-	}
-
 }

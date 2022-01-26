@@ -13,13 +13,12 @@ import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.exception.Utils;
 import fr.insee.eno.postprocessing.Postprocessor;
+import fr.insee.eno.transform.xsl.XslTransformFo;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
 public abstract class FOPostProcessor implements Postprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(FOPostProcessor.class);
-
-	private XslTransformation saxonService = new XslTransformation();
 
 	public File process(File input, byte[] parameters, String survey, String styleSheetPath, String extension) throws Exception {
 
@@ -28,9 +27,12 @@ public abstract class FOPostProcessor implements Postprocessor {
 				Constants.BASE_NAME_FORM_FILE +
 				extension);
 		logger.debug("Output folder for basic-form : " + outputForFOFile.getAbsolutePath());
-
-		String surveyName = survey;
+		
 		String formName = getFormName(input);
+		
+		XslTransformation saxonService = new XslTransformFo(parameters,survey,formName);
+
+
 
 		InputStream FO_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 
@@ -38,7 +40,7 @@ public abstract class FOPostProcessor implements Postprocessor {
 		OutputStream outputStream = FileUtils.openOutputStream(outputForFOFile);
 
 		try {
-			saxonService.transformFOToStep4FO(inputStream, outputStream, FO_XSL, surveyName, formName, parameters);
+			saxonService.transform(inputStream, outputStream, FO_XSL);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),

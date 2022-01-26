@@ -18,8 +18,4 @@ public class LunaticXMLPaginationPostprocessor extends LunaticXMLPostProcessor {
 		
 	}
 
-	public String toString() {
-		return PostProcessing.LUNATIC_XML_PAGINATION.name();
-	}
-
 }

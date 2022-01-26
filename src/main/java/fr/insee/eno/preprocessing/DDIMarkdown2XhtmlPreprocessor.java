@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
-import fr.insee.eno.transform.xsl.XslTransformation;
+import fr.insee.eno.transform.xsl.UglyXslTransformation;
 
 /**
  * DDI preprocessor.
@@ -21,7 +21,7 @@ public class DDIMarkdown2XhtmlPreprocessor implements Preprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(DDIMarkdown2XhtmlPreprocessor.class);
 
-	private XslTransformation saxonService = new XslTransformation();
+	private UglyXslTransformation saxonService = new UglyXslTransformation();
 
 	private static final String styleSheetPath = Constants.UTIL_DDI_MD2XHTML_XSL;
 
