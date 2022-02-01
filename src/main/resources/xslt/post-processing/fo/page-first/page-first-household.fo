@@ -91,7 +91,7 @@
                 </fo:block>
             </fo:block-container>
             <fo:block-container margin-left="10mm" margin-top="23mm" width="150mm"
-                height="7mm">
+                height="10mm">
                 <fo:block font-family="Liberation Sans" font-size="16pt" font-weight="bold"
                     text-align="center"> ${Enq_LibelleEnquete} </fo:block>
             </fo:block-container>
