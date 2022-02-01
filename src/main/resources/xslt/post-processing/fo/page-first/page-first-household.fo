@@ -265,7 +265,7 @@
                     <fo:inline-container margin="0mm">
                         <fo:list-block>
                             <fo:list-item>
-                                <fo:list-item-label line-height="8mm">
+                                <fo:list-item-label line-height="5mm">
                                     <fo:block>
                                         <fo:inline>&#8226;</fo:inline>
                                     </fo:block>
@@ -281,7 +281,7 @@
                     <fo:inline-container margin="0mm">
                         <fo:list-block>
                             <fo:list-item>
-                                <fo:list-item-label line-height="8mm">
+                                <fo:list-item-label line-height="5mm">
                                     <fo:block>
                                         <fo:inline>&#8226;</fo:inline>
                                     </fo:block>
@@ -297,7 +297,7 @@
                     <fo:inline-container margin="0mm">
                         <fo:list-block>
                             <fo:list-item>
-                                <fo:list-item-label line-height="8mm">
+                                <fo:list-item-label line-height="5mm">
                                     <fo:block>
                                         <fo:inline>&#8226;</fo:inline>
                                     </fo:block>
