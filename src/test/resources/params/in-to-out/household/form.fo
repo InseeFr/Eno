@@ -662,7 +662,10 @@
                                     scaling="uniform"/>
             </fo:block>
          </fo:block-container>
-         <fo:block-container margin-left="10mm" margin-top="23mm" width="150mm" height="7mm">
+         <fo:block-container margin-left="10mm"
+                             margin-top="23mm"
+                             width="150mm"
+                             height="10mm">
             <fo:block font-family="Liberation Sans"
                       font-size="16pt"
                       font-weight="bold"
@@ -860,7 +863,7 @@
                     <fo:inline-container margin="0mm">
                   <fo:list-block>
                      <fo:list-item>
-                        <fo:list-item-label line-height="8mm">
+                        <fo:list-item-label line-height="5mm">
                            <fo:block>
                               <fo:inline>•</fo:inline>
                            </fo:block>
@@ -876,7 +879,7 @@
                     <fo:inline-container margin="0mm">
                   <fo:list-block>
                      <fo:list-item>
-                        <fo:list-item-label line-height="8mm">
+                        <fo:list-item-label line-height="5mm">
                            <fo:block>
                               <fo:inline>•</fo:inline>
                            </fo:block>
@@ -892,7 +895,7 @@
                     <fo:inline-container margin="0mm">
                   <fo:list-block>
                      <fo:list-item>
-                        <fo:list-item-label line-height="8mm">
+                        <fo:list-item-label line-height="5mm">
                            <fo:block>
                               <fo:inline>•</fo:inline>
                            </fo:block>
@@ -919,7 +922,7 @@
                              text-align="justify">
             <fo:block margin="2mm">
                <fo:inline-container margin="0mm">
-                  <fo:block line-height="10pt">Vu l'avis favorable du Conseil national de l'information statistique, cette enquête#if(${Enq_CaractereObligatoire}=='oui'), reconnue <fo:inline font-weight="bold">d'intérêt général et de qualité statistique</fo:inline>, est <fo:inline font-weight="bold">obligatoire</fo:inline>#else est reconnue d'<fo:inline font-weight="bold">intérêt général et de qualité statistique</fo:inline> sans avoir de caractère obligatoire#end, en application de la loi n° 51-711 du 7 juin 1951 sur l'obligation, la coordination et le secret en matière de statistiques.</fo:block>
+                  <fo:block line-height="10pt">Vu l'avis favorable du Conseil national de l'information statistique, cette enquête#if(${Enq_CaractereObligatoire}=='oui'), reconnue <fo:inline font-weight="bold">d'intérêt général#if(${Enq_QualiteStatistique}=='oui') et de qualité statistique#end</fo:inline>, est <fo:inline font-weight="bold">obligatoire</fo:inline>#else est reconnue d'<fo:inline font-weight="bold">intérêt général#if(${Enq_QualiteStatistique}=='oui') et de qualité statistique#end</fo:inline> sans avoir de caractère obligatoire#end, en application de la loi n° 51-711 du 7 juin 1951 sur l'obligation, la coordination et le secret en matière de statistiques.</fo:block>
                   <fo:block line-height="10pt">Visa n°${Enq_NumeroVisa} du Ministre ${Enq_MinistereTutelle}, valable pour l'année ${Enq_AnneeVisa} – #if(${Enq_ParutionJo}=='oui') Arrêté en date du ${Enq_DateParutionJo}#else Arrêté en cours de parution#end.</fo:block>
                   <fo:block line-height="10pt">Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à ${Enq_RespTraitement}. Le règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD) ainsi que la loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés s'appliquent à la présente enquête. Les droits des personnes, rappelés dans la lettre-avis, peuvent être exercés auprès de ${Enq_RespOperationnel}.</fo:block>
                </fo:inline-container>
