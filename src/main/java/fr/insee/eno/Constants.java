@@ -212,39 +212,38 @@ public final class Constants {
 	}
 	public static final File TEMP_PREFORMATE_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/preformate.tmp");
 	public static final File TEMP_XML_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/xml.tmp");
-	public static final File TEMP_TEMP_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/temp.tmp");
-	public static final File TEMP_TEMP_BIS_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/temp-bis.tmp");
+	public static final String TEMP_TEMP_TMP = TEMP_FOLDER_PATH + "/temp/temp.tmp";
+	public static final String TEMP_TEMP_BIS_TMP = TEMP_FOLDER_PATH + "/temp/temp-bis.tmp";
 
-	// Those files holds the XSL generated from FODS ; they will be then copied to resource directory when packaging to JAR
-	public static final File TRANSFORMATIONS_DDI2XFORMS_DDI2XFORMS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2xforms/ddi2xforms.xsl");
-	public static final File TRANSFORMATIONS_DDI2FODT_DDI2FODT_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fodt/ddi2fodt.xsl");
-	public static final File TRANSFORMATIONS_DDI2FO_DDI2FO_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fo/ddi2fo.xsl");
-	public static final File TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/pogues-xml2ddi.xsl");
-	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_DDI2LUNATIC_XML_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2lunatic-xml/ddi2lunatic-xml.xsl");
-	public static final File TRANSFORMATIONS_DDI2XFORMS_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2xforms/drivers.xsl");
-	public static final File TRANSFORMATIONS_DDI2FODT_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fodt/drivers.xsl");
-	public static final File TRANSFORMATIONS_DDI2FO_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fo/drivers.xsl");
-	public static final File TRANSFORMATIONS_POGUES_XML2DDI_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/drivers.xsl");
-	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2lunatic-xml/drivers.xsl");
-	public static final File TRANSFORMATIONS_DDI2XFORMS_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2xforms/functions.xsl");
-	public static final File TRANSFORMATIONS_DDI2FODT_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fodt/functions.xsl");
-	public static final File TRANSFORMATIONS_DDI2FO_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fo/functions.xsl");
-	public static final File TRANSFORMATIONS_POGUES_XML2DDI_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/functions.xsl");
-	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2lunatic-xml/functions.xsl");
-	public static final File TRANSFORMATIONS_DDI2XFORMS_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2xforms/tree-navigation.xsl");
-	public static final File TRANSFORMATIONS_DDI2FODT_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fodt/tree-navigation.xsl");
-	public static final File TRANSFORMATIONS_DDI2FO_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fo/tree-navigation.xsl");
-	public static final File TRANSFORMATIONS_POGUES_XML2DDI_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/tree-navigation.xsl");
-	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2lunatic-xml/tree-navigation.xsl");
+	// Those Strings holds the XSL generated from FODS ; they will be then copied to resource directory when packaging to JAR
+	public static final String TRANSFORMATIONS_DDI2XFORMS_DDI2XFORMS_XSL_TMP = TEMP_FOLDER_PATH + "/ddi2xforms/ddi2xforms.xsl";
+	public static final String TRANSFORMATIONS_DDI2FODT_DDI2FODT_XSL_TMP = TEMP_FOLDER_PATH + "/ddi2fodt/ddi2fodt.xsl";
+	public static final String TRANSFORMATIONS_DDI2FO_DDI2FO_XSL_TMP = TEMP_FOLDER_PATH + "/ddi2fo/ddi2fo.xsl";
+	public static final String TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL_TMP = TEMP_FOLDER_PATH + "/pogues-xml2ddi/pogues-xml2ddi.xsl";
+	public static final String TRANSFORMATIONS_DDI2LUNATIC_XML_DDI2LUNATIC_XML_XSL_TMP = TEMP_FOLDER_PATH + "/ddi2lunatic-xml/ddi2lunatic-xml.xsl";
+	public static final String TRANSFORMATIONS_DDI2XFORMS_DRIVERS_XSL_TMP = TEMP_FOLDER_PATH + "/ddi2xforms/drivers.xsl";
+	public static final String TRANSFORMATIONS_DDI2FODT_DRIVERS_XSL_TMP = TEMP_FOLDER_PATH + "/ddi2fodt/drivers.xsl";
+	public static final String TRANSFORMATIONS_DDI2FO_DRIVERS_XSL_TMP = TEMP_FOLDER_PATH + "/ddi2fo/drivers.xsl";
+	public static final String TRANSFORMATIONS_POGUES_XML2DDI_DRIVERS_XSL_TMP = TEMP_FOLDER_PATH + "/pogues-xml2ddi/drivers.xsl";
+	public static final String TRANSFORMATIONS_DDI2LUNATIC_XML_DRIVERS_XSL_TMP = TEMP_FOLDER_PATH + "/ddi2lunatic-xml/drivers.xsl";
+	public static final String TRANSFORMATIONS_DDI2XFORMS_FUNCTIONS_XSL_TMP = TEMP_FOLDER_PATH + "/ddi2xforms/functions.xsl";
+	public static final String TRANSFORMATIONS_DDI2FODT_FUNCTIONS_XSL_TMP = TEMP_FOLDER_PATH + "/ddi2fodt/functions.xsl";
+	public static final String TRANSFORMATIONS_DDI2FO_FUNCTIONS_XSL_TMP = TEMP_FOLDER_PATH + "/ddi2fo/functions.xsl";
+	public static final String TRANSFORMATIONS_POGUES_XML2DDI_FUNCTIONS_XSL_TMP = TEMP_FOLDER_PATH + "/pogues-xml2ddi/functions.xsl";
+	public static final String TRANSFORMATIONS_DDI2LUNATIC_XML_FUNCTIONS_XSL_TMP = TEMP_FOLDER_PATH + "/ddi2lunatic-xml/functions.xsl";
+	public static final String TRANSFORMATIONS_DDI2XFORMS_TREE_NAVIGATION_XSL_TMP = TEMP_FOLDER_PATH + "/ddi2xforms/tree-navigation.xsl";
+	public static final String TRANSFORMATIONS_DDI2FODT_TREE_NAVIGATION_XSL_TMP = TEMP_FOLDER_PATH + "/ddi2fodt/tree-navigation.xsl";
+	public static final String TRANSFORMATIONS_DDI2FO_TREE_NAVIGATION_XSL_TMP = TEMP_FOLDER_PATH + "/ddi2fo/tree-navigation.xsl";
+	public static final String TRANSFORMATIONS_POGUES_XML2DDI_TREE_NAVIGATION_XSL_TMP = TEMP_FOLDER_PATH + "/pogues-xml2ddi/tree-navigation.xsl";
+	public static final String TRANSFORMATIONS_DDI2LUNATIC_XML_TREE_NAVIGATION_XSL_TMP = TEMP_FOLDER_PATH + "/ddi2lunatic-xml/tree-navigation.xsl";
 
-	public static final File INPUTS_DDI_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi/functions.xsl");
-	public static final File INPUTS_DDI_TEMPLATES_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi/templates.xsl");
-	public static final File INPUTS_DDI_SOURCE_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi/source.xsl");
+	public static final String INPUTS_DDI_FUNCTIONS_XSL_TMP = TEMP_FOLDER_PATH + "/ddi/functions.xsl";
+	public static final String INPUTS_DDI_TEMPLATES_XSL_TMP = TEMP_FOLDER_PATH + "/ddi/templates.xsl";
+	public static final String INPUTS_DDI_SOURCE_XSL_TMP = TEMP_FOLDER_PATH + "/ddi/source.xsl";
 
-	public static final File INPUTS_POGUES_XML_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml/functions.xsl");
-	public static final File INPUTS_POGUES_XML_TEMPLATES_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml/templates.xsl");
-	public static final File INPUTS_POGUES_XML_SOURCE_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml/source.xsl");
-
+	public static final String INPUTS_POGUES_XML_FUNCTIONS_XSL_TMP = TEMP_FOLDER_PATH + "/pogues-xml/functions.xsl";
+	public static final String INPUTS_POGUES_XML_TEMPLATES_XSL_TMP = TEMP_FOLDER_PATH + "/pogues-xml/templates.xsl";
+	public static final String INPUTS_POGUES_XML_SOURCE_XSL_TMP = TEMP_FOLDER_PATH + "/pogues-xml/source.xsl";
 	// ---------- Utilies
 	/** Generic file getter from classpath 
 	 * @return the file or null when not found.

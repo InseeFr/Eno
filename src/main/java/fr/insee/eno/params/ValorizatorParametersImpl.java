@@ -28,19 +28,23 @@ import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.ENOParameters;
 import fr.insee.eno.transform.xsl.UglyXslTransformation;
+import fr.insee.eno.transform.xsl.XslTransformation;
 
 
 public class ValorizatorParametersImpl implements ValorizatorParameters {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ValorizatorParametersImpl.class);
 	
-	private UglyXslTransformation saxonService = new UglyXslTransformation();
+	 
 
 	private static final String styleSheetPath = Constants.MERGE_PARAMETERS_XSL;
 
-
+	private XslTransformation saxonService = new XslTransformation() {
+	};
+	
 	@Override
 	public ByteArrayOutputStream mergeParameters(ENOParameters enoParameters) throws JAXBException, IllegalArgumentException, IllegalAccessException, IOException   {
+		
 		
 		ByteArrayOutputStream tempByteArrayOutputStream = new ByteArrayOutputStream();
 		
@@ -55,7 +59,7 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		
 		try {
-			saxonService.transformSimple(inputStream, outputStream, PARAM_XSL);
+			saxonService.transform(inputStream, outputStream, PARAM_XSL);
 		}catch(Exception e) {
 			String errorMessage = "An error was occured during the valorisation of parameters. "+e.getMessage();
 			LOGGER.error(errorMessage);
@@ -78,7 +82,7 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		OutputStream outputStream = FileUtils.openOutputStream(finalParam);
 		
 		try {
-			saxonService.transformSimple(inputStream, outputStream, PARAM_XSL);
+			saxonService.transform(inputStream, outputStream, PARAM_XSL);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the valorisation of parameters. %s : %s",
 					e.getMessage(),

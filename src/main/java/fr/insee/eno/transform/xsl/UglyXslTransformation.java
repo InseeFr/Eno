@@ -183,72 +183,6 @@ public class UglyXslTransformation {
 
 	}
 
-	public void transformIn2Out(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
-			byte[] parameters, String propertiesFile) throws Exception {
-		InputStream parametersIS = null;
-		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
-		tFactory.setURIResolver(new ClasspathURIResolver());
-		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
-		transformer.setErrorListener(new EnoErrorListener());
-		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, propertiesFile);
-		transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_FILE, Constants.PARAMETERS_DEFAULT);
-		if (parameters != null) {
-			LOGGER.info("Using specifics parameters");
-			parametersIS = new ByteArrayInputStream(parameters);
-			Source source = new StreamSource(parametersIS);
-			transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_NODE, source);
-		}
-		transformer.setParameter(XslParameters.IN2OUT_LABELS_FOLDER, Constants.LABELS_FOLDER);
-		LOGGER.debug(String.format("Transformer parameters are: %s, %s",
-				transformer.getParameter(XslParameters.IN2OUT_PROPERTIES_FILE),
-				transformer.getParameter(XslParameters.IN2OUT_PARAMETERS_FILE),
-				transformer.getParameter(XslParameters.IN2OUT_LABELS_FOLDER)));
-		xslTransform(transformer, inputFile, outputFile);
-		if (parameters != null) {
-			parametersIS.close();
-		}
-	}
-
-
-	public void transformFOToStep4FO(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
-			String surveyName, String formName, byte[] parameters) throws Exception {
-
-		InputStream parametersIS = null;
-		LOGGER.info("Inserting generic pages in the FO from survey's parameters");
-		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
-		tFactory.setURIResolver(new ClasspathURIResolver());
-		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
-		transformer.setErrorListener(new EnoErrorListener());
-		transformer.setParameter(XslParameters.IN2OUT_SURVEY_NAME, surveyName);
-		transformer.setParameter(XslParameters.IN2OUT_FORM_NAME, formName);
-		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2FO);
-		transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_FILE, Constants.PARAMETERS_DEFAULT);
-		if (parameters != null) {
-			parametersIS = new ByteArrayInputStream(parameters);
-			Source source = new StreamSource(parametersIS);
-			transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_NODE, source);
-		}
-		xslTransform(transformer, inputFile, outputFile);
-		if (parameters != null) {
-			parametersIS.close();
-		}
-	}
-
-	/* POST transformations */
-	// FR
-
-	public void transformBrowsingXforms(InputStream inputFile, OutputStream outputFile, InputStream xslSheet)
-			throws Exception {
-		LOGGER.info("Post-processing browsing for FR transformation.");
-		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
-		tFactory.setURIResolver(new ClasspathURIResolver());
-		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
-		transformer.setErrorListener(new EnoErrorListener());
-		transformer.setParameter(XslParameters.IN2OUT_LABELS_FOLDER, Constants.LABELS_FOLDER);
-		LOGGER.debug(String.format("Transformer parameter is: %s",
-				transformer.getParameter(XslParameters.IN2OUT_LABELS_FOLDER)));
-		xslTransform(transformer, inputFile, outputFile);
-	}
 
 	public void transformInseeModelXforms(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			InputStream mappingFile) throws Exception {
@@ -266,30 +200,6 @@ public class UglyXslTransformation {
 				transformer.getParameter(XslParameters.IN2OUT_MAPPING_FILE_NODE)));
 		xslTransform(transformer, inputFile, outputFile);
 
-	}
-	public void transformWithMetadata(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
-			byte[] parameters, byte[] metadata) throws Exception {
-		InputStream parametersIS = null;
-		InputStream metadataIS = null;
-		LOGGER.info("Post-processing for FR transformation with parameter file and metadata file");
-		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
-		tFactory.setURIResolver(new ClasspathURIResolver());
-		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
-		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2XFORMS);
-		transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_FILE, Constants.PARAMETERS_DEFAULT);
-		transformer.setParameter(XslParameters.IN2OUT_METADATA_FILE, Constants.METADATA_DEFAULT);
-		if (metadata != null) {
-			metadataIS = new ByteArrayInputStream(metadata);
-			Source source = new StreamSource(metadataIS);
-			transformer.setParameter(XslParameters.IN2OUT_METADATA_NODE, source);
-		}
-		if (parameters != null) {
-			parametersIS = new ByteArrayInputStream(parameters);
-			Source source = new StreamSource(parametersIS);
-			transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_NODE, source);
-		}
-		transformer.setErrorListener(new EnoErrorListener());
-		xslTransform(transformer, inputFile, outputFile);
 	}
 
 	public void transformSimplePost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
@@ -324,16 +234,6 @@ public class UglyXslTransformation {
 			Source source = new StreamSource(parametersIS);
 			transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_NODE, source);
 		}
-		transformer.setErrorListener(new EnoErrorListener());
-		xslTransform(transformer, inputFile, outputFile);
-	}
-
-
-	public void transformSimple(InputStream inputFile, OutputStream outputFile, InputStream xslSheet) throws Exception {
-		LOGGER.info("Simple transformation");
-		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
-		tFactory.setURIResolver(new ClasspathURIResolver());
-		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
 		transformer.setErrorListener(new EnoErrorListener());
 		xslTransform(transformer, inputFile, outputFile);
 	}

@@ -78,28 +78,6 @@ public abstract class In2outGenerator implements Generator{
 	}
 	
 
-	public String config(OutFormat outFormat) {
-		
-		String configuration= null;
-					switch (outFormat) {
-			case DDI:
-				configuration = Constants.CONFIG_POGUES_XML2DDI;
-				break;
-			case XFORMS:
-				configuration = Constants.CONFIG_DDI2XFORMS;
-				break;
-			case LUNATIC_XML:
-				configuration = Constants.CONFIG_DDI2LUNATIC_XML;
-				break;
-			case FODT:
-				configuration = Constants.CONFIG_DDI2FODT;
-				break;
-			case FO:
-				configuration = Constants.CONFIG_DDI2FO;
-				break;
-			}
-	return configuration;
-	}
 					
 	
 	public String outputName(OutFormat outFormat) {
