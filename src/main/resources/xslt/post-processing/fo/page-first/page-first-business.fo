@@ -39,46 +39,10 @@
       
       <fo:flow flow-name="region-body-first-business">
          <fo:block page-break-inside="avoid">
-            <fo:block-container absolute-position="absolute"
-                                top="15mm"
-                                left="15mm"
-                                width="50mm"
-                                height="20mm">
+            <!-- ZONE LOGOS -->
+            <fo:block-container absolute-position="absolute" left="15mm" top="12mm" width="180mm" height="25mm">
                <fo:block>
-                  <fo:external-graphic src="logo_INSEE.png"
-                                       width="100%"
-                                       height="100%"
-                                       content-height="scale-to-fit"
-                                       content-width="scale-to-fit"
-                                       scaling="uniform"/>
-               </fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute"
-                                top="15mm"
-                                left="85.3mm"
-                                width="32mm"
-                                height="18.7mm">
-               <fo:block>
-                  <fo:external-graphic src="marianne.png"
-                                       width="100%"
-                                       height="100%"
-                                       content-height="scale-to-fit"
-                                       content-width="scale-to-fit"
-                                       scaling="uniform"/>
-               </fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute"
-                                top="15mm"
-                                right="15mm"
-                                width="11.1mm"
-                                height="19.9mm">
-               <fo:block>
-                  <fo:external-graphic src="statPub.png"
-                                       width="100%"
-                                       height="100%"
-                                       content-height="scale-to-fit"
-                                       content-width="scale-to-fit"
-                                       scaling="uniform"/>
+                  <fo:external-graphic src="logo_INSEE_M_SP.png" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
                </fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute"

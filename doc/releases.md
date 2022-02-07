@@ -1,5 +1,9 @@
 # Eno Releases note
 
+## 2.3.6 - 03/02/21
+- **[ddi2fo][post-processing]** Various changes to ***household*** first page in fo format
+- **[ddi2fo][post-processing]** Changing the logo zone of business first page
+
 ## 2.3.5 - 13/12/21
 - **[dependencies]** Upgrading dependancies. 
 - **[ddi2lunaticXML][core]** : Fixing function checking if calculated variables are used.
