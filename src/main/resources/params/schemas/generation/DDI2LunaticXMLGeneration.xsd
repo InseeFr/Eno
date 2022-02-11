@@ -9,6 +9,7 @@
             <xs:element name="Tooltip" type="xs:boolean" default="false" minOccurs="0" maxOccurs="1"/>
             <xs:element name="Control" type="xs:boolean" default="false" minOccurs="0" maxOccurs="1"/>
             <xs:element name="Pagination" type="Pagination" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="UnusedVars" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
         </xs:all>
     </xs:complexType>
 

@@ -12,6 +12,38 @@
 
     <xsl:output indent="yes"/>
 
+
+
+    <xsl:param name="properties-file"/>
+    <xsl:param name="parameters-file"/>
+    <xsl:param name="parameters-node" as="node()" required="no">
+        <empty/>
+    </xsl:param>
+    
+    <xsl:variable name="properties" select="doc($properties-file)"/>
+    <xsl:variable name="parameters">
+        <xsl:choose>
+            <xsl:when test="$parameters-node/*">
+                <xsl:copy-of select="$parameters-node"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="doc($parameters-file)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    
+    <xsl:variable name="unusedVars" as="xs:boolean">
+        <xsl:choose>
+            <xsl:when test="$parameters//UnusedVars != ''">
+                <xsl:value-of select="$parameters//UnusedVars" />
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//UnusedVars" />
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+
+
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p>An xslt stylesheet who transforms an input into js through generic driver templates.</xd:p>
@@ -66,6 +98,7 @@
     </xsl:template>
 
     <xsl:template match="h:Questionnaire">
+        <xsl:message>UnusedVars = <xsl:value-of select="$unusedVars"/></xsl:message>
         <Questionnaire>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="*[not(self::h:variables)]"/>
@@ -369,7 +402,7 @@
     <xsl:template match="h:variables[@variableType='CALCULATED']">
         <xsl:variable name="varName" select="h:name"/>
         <xsl:variable name="searchTerm" select="concat('[\W]', $varName, '[\W]')"/>
-        <xsl:if test="enolunatic:is-var-used-in-list-of-dependencies($varName,'',$variablesUsed,$searchTerm)='true' or contains($varName,'FILTER_RESULT')">
+        <xsl:if test="$unusedVars or contains($varName,'FILTER_RESULT') or enolunatic:is-var-used-in-list-of-dependencies($varName,'',$variablesUsed,$searchTerm)='true'">
             <xsl:copy>
                 <xsl:apply-templates select="@*|node()"/>
                 <inFilter><xsl:value-of select="enolunatic:is-var-used-in-list-of-dependencies($varName,'',$variablesInFilter,$searchTerm)"/></inFilter>
