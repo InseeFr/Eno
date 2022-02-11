@@ -98,7 +98,6 @@
     </xsl:template>
 
     <xsl:template match="h:Questionnaire">
-        <xsl:message>UnusedVars = <xsl:value-of select="$unusedVars"/></xsl:message>
         <Questionnaire>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="*[not(self::h:variables)]"/>
