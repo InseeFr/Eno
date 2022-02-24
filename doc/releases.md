@@ -1,5 +1,10 @@
 # Eno Releases note
 
+## 2.3.7 - 24/02/21
+- **[dependencies]** Upgrading dependancies.
+- **[ddi2lunaticXML][post-processing]** fixing the identification of first and last sequence id, which was wrong and could previously return multiple ids (insert-generic-questions).
+- **[ddi2lunaticXML][params]** Adding param 'UnusedVars' specifying if calculated variables that are not used inside the Questionnaire should be output or not. By default, is false.
+
 ## 2.3.6 - 03/02/21
 - **[ddi2fo][post-processing]** Various changes to ***household*** first page in fo format
 - **[ddi2fo][post-processing]** Changing the logo zone of business first page
@@ -112,4 +117,4 @@
 
 ## 2.2.0 - 22/01/2021
 
-- **[ddi2lunaticXML][eno-core]** Changing the lunatic-model, using v.2.0.0.
+- **[ddi2lunaticXML][core]** Changing the lunatic-model, using v.2.0.0.
