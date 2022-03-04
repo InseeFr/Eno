@@ -28,14 +28,14 @@
   
   <xsl:template match="h:Questionnaire">
     <xsl:copy>
-      <xsl:apply-templates select="@*|node()/>
+      <xsl:apply-templates select="@*|node()"/>
     </xsl:copy>
   </xsl:template>
   
   <!-- When encountering the last variable, we copy the variable and add the cleaning block -->
   <xsl:template match="h:variables[last()]">
     <xsl:copy>
-      <xsl:apply-templates select="@*|node()/>
+      <xsl:apply-templates select="@*|node()"/>
     </xsl:copy>
     <cleaning>
     </cleaning>
