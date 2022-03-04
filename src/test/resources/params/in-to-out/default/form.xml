@@ -2660,4 +2660,15 @@
       <bindingDependencies>PERCENTAGE_EXPENSES101</bindingDependencies>
       <inFilter>false</inFilter>
    </variables>
+<cleaning>
+      <READY>
+         <PRODUCER>(not(cast(READY,integer)!= '1') )</PRODUCER>
+         <SEASON_NUMBER>(not(cast(READY,integer)!= '1') )</SEASON_NUMBER>
+         <DATEFIRST>(not(cast(READY,integer)!= '1') )</DATEFIRST>
+         <AUDIENCE_SHARE>(not(cast(READY,integer)!= '1') )</AUDIENCE_SHARE>
+         <CITY>(not(cast(READY,integer)!= '1') )</CITY>
+         <MAYOR>(not(cast(READY,integer)!= '1') )</MAYOR>
+         <STATE>(not(cast(READY,integer)!= '1') )</STATE>
+      </READY>
+   </cleaning>
 </Questionnaire>
