@@ -47,16 +47,45 @@
   <xsl:function name="enolunatic:construct-cleaning-list">
     <!-- We search in every component which has a collected response associated -->
     <!-- (We don't care about components without responses because they don't need cleaning) -->
-    <xsl:for-each select="$root//h:components[h:response]">
-      <xsl:if test="h:conditionFilter/h:bindingDependencies">
-        <xsl:element name="{h:conditionFilter/h:bindingDependencies}">
-          <xsl:element name="{h:response/@name}">
-            <xsl:value-of select="h:conditionFilter/h:value"/>
+    <xsl:variable name="untidiedList">
+      <xsl:for-each select="$root//h:components[h:response]">
+        <xsl:if test="h:conditionFilter/h:bindingDependencies">
+          <xsl:element name="{h:conditionFilter/h:bindingDependencies}">
+            <xsl:element name="{h:response/@name}">
+              <xsl:value-of select="h:conditionFilter/h:value"/>
+            </xsl:element>
           </xsl:element>
-        </xsl:element>
-      </xsl:if>
-    </xsl:for-each>
+        </xsl:if>
+      </xsl:for-each>
+    </xsl:variable>
+    <xsl:copy-of select="enolunatic:tidying-cleaning-list($untidiedList)"/>
   </xsl:function>
   
+  <!-- Function tidying the list produced by first step of enolunatic:construct-cleaning-list -->
+  <!-- The idea is simply to regroup under a unique variable launching cleaning -->
+  <!-- This is a naive approach using only XSL 1.0 functionality -->
+  <!-- It seems a more direct approach could be used in XSL 2.0 with for-each-group -->
+  <!-- But I couldn't manage to make it work -->
+  <xsl:function name="enolunatic:tidying-cleaning-list">
+    <xsl:param name="untidiedList"/>
+    <xsl:variable name="tidiedList">
+      <xsl:for-each select="$untidiedList/*">
+        <!-- For each name that is encountered -->
+        <xsl:variable name="name" select="local-name()"/>
+        <!-- If that name does not already exist before (so the first time we encounter it) -->
+        <xsl:if test="not(preceding-sibling::*[local-name() = $name])">
+          <!-- We copy that node -->
+          <xsl:copy>
+            <xsl:copy-of select="node()"/>
+            <!-- And we go fetch every sibling node with the same name to put its content inside -->
+            <xsl:for-each select="following-sibling::*[local-name() = $name]">
+              <xsl:copy-of select="node()"/>
+            </xsl:for-each>
+          </xsl:copy>
+        </xsl:if>
+      </xsl:for-each>
+    </xsl:variable>
+    <xsl:copy-of select="$tidiedList"></xsl:copy-of>
+  </xsl:function>
   
 </xsl:stylesheet>
