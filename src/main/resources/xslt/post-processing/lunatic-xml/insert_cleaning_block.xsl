@@ -38,7 +38,25 @@
       <xsl:apply-templates select="@*|node()"/>
     </xsl:copy>
     <cleaning>
+      <xsl:copy-of select="enolunatic:construct-cleaning-list()"/>
     </cleaning>
   </xsl:template>
+  
+  <!-- Function constructing a list containing cleaning relations, with structure : -->
+  <!-- <VAR_LAUNCHING_CLEANING><VAR_NEEDING_CLEANING>expression</VAR_NEEDING_CLEANING></VAR_LAUNCHING_CLEANING>-->
+  <xsl:function name="enolunatic:construct-cleaning-list">
+    <!-- We search in every component which has a collected response associated -->
+    <!-- (We don't care about components without responses because they don't need cleaning) -->
+    <xsl:for-each select="$root//h:components[h:response]">
+      <xsl:if test="h:conditionFilter/h:bindingDependencies">
+        <xsl:element name="{h:conditionFilter/h:bindingDependencies}">
+          <xsl:element name="{h:response/@name}">
+            <xsl:value-of select="h:conditionFilter/h:value"/>
+          </xsl:element>
+        </xsl:element>
+      </xsl:if>
+    </xsl:for-each>
+  </xsl:function>
+  
   
 </xsl:stylesheet>
