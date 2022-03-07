@@ -49,12 +49,18 @@
     <!-- (We don't care about components without responses because they don't need cleaning) -->
     <xsl:variable name="untidiedList">
       <xsl:for-each select="$root//h:components[h:response]">
+        <!-- If there are no bindingDependencies in the conditionFilter, we don't care -->
         <xsl:if test="h:conditionFilter/h:bindingDependencies">
-          <xsl:element name="{h:conditionFilter/h:bindingDependencies}">
-            <xsl:element name="{h:response/@name}">
-              <xsl:value-of select="h:conditionFilter/h:value"/>
+          <!-- We need to go through each bindingDependencies to add it as a variable lauching cleaning for our response -->
+          <xsl:for-each select="h:conditionFilter/h:bindingDependencies">
+            <xsl:element name="{.}">
+              <!-- We get the name of the response that needs cleaning -->
+              <xsl:element name="{../../h:response/@name}">
+                <!-- We get the expression of the filter, so we can know when to activate cleaning -->
+                <xsl:value-of select="../h:value"/>
+              </xsl:element>
             </xsl:element>
-          </xsl:element>
+          </xsl:for-each>
         </xsl:if>
       </xsl:for-each>
     </xsl:variable>
