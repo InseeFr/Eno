@@ -91,8 +91,8 @@
         <xsl:apply-templates select="*"/>
     </xsl:template>
 
-    <xsl:variable name="first-sequence-id" select="//h:components[@componentType='Sequence'][1]/@id"/>
-    <xsl:variable name="last-sequence-id" select="//h:components[@componentType='Sequence'][last()]/@id"/>
+    <xsl:variable name="first-sequence-id" select="(//h:components[@componentType='Sequence'])[1]/@id"/>
+    <xsl:variable name="last-sequence-id" select="(//h:components[@componentType='Sequence'])[last()]/@id"/>
 
     <xd:doc>
         <xd:desc>

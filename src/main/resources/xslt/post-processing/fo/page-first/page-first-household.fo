@@ -85,101 +85,117 @@
         
         <fo:flow flow-name="region-body-first-household">
             <!--    Blocs Logos et Libellé -->
-            <fo:block-container absolute-position="absolute" left="0mm" top="0mm" width="15mm"
-                height="15mm">
+            <fo:block-container absolute-position="absolute" left="0mm" top="0mm" width="180mm" height="25mm">
                 <fo:block>
-                    <fo:external-graphic src="logo4.png" content-width="scale-to-fit" width="15mm"
-                        scaling="uniform"/>
+                    <fo:external-graphic src="coleman/${Enq_ImageLogos}" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
                 </fo:block>
             </fo:block-container>
-            <fo:block-container absolute-position="absolute" left="72mm" top="0mm" width="26mm"
-                height="15mm">
-                <fo:block>
-                    <fo:external-graphic src="marianne.png" content-width="scale-to-fit"
-                        width="26mm" scaling="uniform"/>
-                </fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute" left="160mm" top="0mm" width="10mm"
-                height="15mm">
-                <fo:block>
-                    <fo:external-graphic src="logo_statpub.png" content-width="scale-to-fit"
-                        width="10mm" scaling="uniform"/>
-                </fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute" left="10mm" top="23mm" width="150mm"
-                height="7mm">
+            <fo:block-container margin-left="10mm" margin-top="23mm" width="150mm"
+                height="10mm">
                 <fo:block font-family="Liberation Sans" font-size="16pt" font-weight="bold"
                     text-align="center"> ${Enq_LibelleEnquete} </fo:block>
             </fo:block-container>
             
             <!--    Bloc Quand et comment répondre  -->
-            <fo:block-container absolute-position="absolute" left="0mm" top="42mm" width="15mm"
-                height="15mm">
-                <fo:block margin="2pt">
-                    <fo:external-graphic src="Insee_formulaire-qui_repond.png"
-                        content-width="scale-to-fit" width="15mm" scaling="uniform"/>
+            <fo:block-container margin-top="5mm">
+                <fo:block>
+                    <fo:table>
+                        <fo:table-column/>
+                        <fo:table-column/>
+                        <fo:table-body>
+                            <fo:table-row>
+                                <fo:table-cell width="20mm">
+                                    <fo:block>
+                                        <fo:external-graphic src="Insee_formulaire-qui_repond.png"
+                                            content-width="scale-to-fit" width="15mm" scaling="uniform"/>
+                                    </fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell display-align="center">
+                                    <fo:block line-height="10pt" font-weight="bold" font-size="12pt">Quand et comment répondre ?</fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+                        </fo:table-body>
+                    </fo:table>
                 </fo:block>
             </fo:block-container>
-            <fo:block-container absolute-position="absolute" left="20mm" top="47mm" font-size="12pt">
-                <fo:block line-height="10pt" font-weight="bold">Quand et comment répondre ?</fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute" left="20mm" top="50mm">
-                <fo:block margin-top="5mm" font-size="10pt">
+            <fo:block-container margin-left="10mm">
+                <fo:block font-size="10pt">
                     <fo:inline-container margin="0mm">
                         <fo:block line-height="10pt">
                             <fo:block line-height="12pt">Au plus tard le <fo:inline font-weight="bold">${Enq_DateRetour}.</fo:inline></fo:block>
-                            <fo:block line-height="12pt">Remplissez un questionnaire papier ${Enq_PapierNombre}. ${Enq_PapierConsigne}.</fo:block>
+                            <fo:block line-height="12pt">Remplissez un questionnaire papier ${Enq_PapierNombre}. #if(${Enq_PapierConsigne}!='') ${Enq_PapierConsigne}.#end</fo:block>
                             <fo:block line-height="12pt">Utilisez l'enveloppe T pour envoyer ${Enq_PapierNombreQuest} à l'adresse suivante :</fo:block>
                         </fo:block>
                         <fo:block line-height="10pt" margin-top="2mm">
-                            <fo:block line-height="10pt">$!{Enq_AdresseRetourQL1}</fo:block>
-                            <fo:block line-height="10pt">$!{Enq_AdresseRetourQL2}</fo:block>
-                            <fo:block line-height="10pt">$!{Enq_AdresseRetourQL3}</fo:block>
-                            <fo:block line-height="10pt">$!{Enq_AdresseRetourQL4}</fo:block>
-                            <fo:block line-height="10pt">$!{Enq_AdresseRetourQL5}</fo:block>
-                            <fo:block line-height="10pt">$!{Enq_AdresseRetourQL6}</fo:block>
-                            <fo:block line-height="10pt">$!{Enq_AdresseRetourQL7}</fo:block>
+                            <fo:block line-height="12pt">$!{Enq_AdresseRetourQL1}</fo:block>
+                            <fo:block line-height="12pt">$!{Enq_AdresseRetourQL2}</fo:block>
+                            <fo:block line-height="12pt">$!{Enq_AdresseRetourQL3}</fo:block>
+                            <fo:block line-height="12pt">$!{Enq_AdresseRetourQL4}</fo:block>
+                            <fo:block line-height="12pt">$!{Enq_AdresseRetourQL5}</fo:block>
+                            <fo:block line-height="12pt">$!{Enq_AdresseRetourQL6}</fo:block>
+                            <fo:block line-height="12pt">$!{Enq_AdresseRetourQL7}</fo:block>
                         </fo:block>
                     </fo:inline-container>
                 </fo:block>
             </fo:block-container>
             
             <!--    Bloc Qui répond -->
-            <fo:block-container absolute-position="absolute" left="0mm" top="97mm" width="15mm" height="15mm">
-                <fo:block margin="2pt">
-                    <fo:external-graphic src="Insee_hommes-recensement-bleunuance2.png"
-                        content-width="scale-to-fit" width="15mm" scaling="uniform"/>
+            <fo:block-container>
+                <fo:block font-weight="bold" font-size="12pt">
+                    <fo:table>
+                        <fo:table-column/>
+                        <fo:table-column/>
+                        <fo:table-body>
+                            <fo:table-row>
+                                <fo:table-cell width="20mm">
+                                    <fo:block>
+                                        <fo:external-graphic src="Insee_hommes-recensement-bleunuance2.png"
+                                            content-width="scale-to-fit" width="15mm" scaling="uniform"/>
+                                    </fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell display-align="center">
+                                    <fo:block line-height="10pt" font-weight="bold" font-size="12pt">Qui doit répondre ?</fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+                        </fo:table-body>
+                    </fo:table>
                 </fo:block>
             </fo:block-container>
-            <fo:block-container absolute-position="absolute" left="20mm" top="102mm" font-size="12pt">
-                <fo:block line-height="10pt" font-weight="bold"> Qui doit répondre ?</fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute" left="20mm" top="105mm" width="150mm" text-align="justify">
-                <fo:block margin-top="5mm" font-size="10pt">
+            <fo:block-container text-align="justify" margin-left="10mm">
+                <fo:block font-size="10pt">
                     <fo:inline-container margin="0mm">
                         <fo:block line-height="10pt">
-                            <fo:block line-height="10pt">${Ue_QuiRepond1}</fo:block>
-                            <fo:block line-height="10pt">$!{Ue_QuiRepond2}</fo:block>
-                            <fo:block line-height="10pt">$!{Ue_QuiRepond3}</fo:block>
+                            <fo:block line-height="12pt">${Ue_QuiRepond1}</fo:block>
+                            <fo:block line-height="12pt">$!{Ue_QuiRepond2}</fo:block>
+                            <fo:block line-height="12pt">$!{Ue_QuiRepond3}</fo:block>
                         </fo:block>
                     </fo:inline-container>
                 </fo:block>
             </fo:block-container>
             
             <!--    Blocs Consignes -->
-            <fo:block-container absolute-position="absolute" left="0mm" top="140mm" width="15mm" height="15mm">
-                <fo:block margin="2pt">
-                    <fo:external-graphic src="Insee_formulaire-recensement-bleunuance2.png"
-                        content-width="scale-to-fit" width="15mm" scaling="uniform"/>
+            <fo:block-container>
+                <fo:block font-weight="bold" font-size="12pt">
+                    <fo:table width="100mm">
+                        <fo:table-column/>
+                        <fo:table-column/>
+                        <fo:table-body>
+                            <fo:table-row>
+                                <fo:table-cell width="20mm">
+                                    <fo:block>
+                                        <fo:external-graphic src="Insee_formulaire-recensement-bleunuance2.png"
+                                            content-width="scale-to-fit" width="15mm" scaling="uniform"/>
+                                    </fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell display-align="center" width="80mm">
+                                    <fo:block line-height="10pt" font-weight="bold" font-size="12pt">Comment remplir le questionnaire ?</fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+                        </fo:table-body>
+                    </fo:table>
                 </fo:block>
             </fo:block-container>
-            
-            <fo:block-container absolute-position="absolute" left="20mm" top="145mm" font-size="12pt" >
-                <fo:block line-height="10pt" font-weight="bold">Comment remplir le questionnaire ?</fo:block>
-            </fo:block-container>
-            
-            <fo:block-container absolute-position="absolute" left="20mm" top="149mm" width="150mm"
-                height="40mm" font-family="Liberation Sans" font-size="10pt" text-align="justify">
+            <fo:block-container margin-left="15mm" font-family="Liberation Sans" font-size="10pt" text-align="justify">
                 <fo:list-block>
                     <fo:list-item>
                         <fo:list-item-label start-indent="5mm" line-height="5mm">
@@ -214,7 +230,7 @@
                             </fo:block>
                         </fo:list-item-label>
                         <fo:list-item-body start-indent="10mm" line-height="5mm">
-                            <fo:block> Suivez les instructions des renvois.  
+                            <fo:block> Suivez les instructions des renvois. Exemple :
                                 <fo:external-graphic src="filter_example.png" 
                                     padding-right="3pt" padding-left="3pt" vertical-align="middle" content-width="40mm" width="70mm"
                                     scaling="uniform"   />
@@ -225,22 +241,74 @@
             </fo:block-container>
             
             <!--    Bloc Consignes spécifiques enquête  -->
-            <fo:block-container absolute-position="absolute" left="20mm" top="170mm" width="150mm"
-                height="30mm" font-family="Liberation Sans" font-size="12pt">
-                <fo:block line-height="10pt">
-                    <fo:inline font-weight="bold">Consignes spécifiques</fo:inline>
+            <fo:block-container margin-top="5mm">
+                <fo:block font-weight="bold" font-size="12pt">
+                    <fo:table width="100mm">
+                        <fo:table-column/>
+                        <fo:table-column/>
+                        <fo:table-body>
+                            <fo:table-row>
+                                <fo:table-cell width="20mm">
+                                    <fo:block/>
+                                </fo:table-cell>
+                                <fo:table-cell display-align="center" width="60mm">
+                                    <fo:block line-height="10pt" font-weight="bold" font-size="12pt">Consignes spécifiques</fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+                        </fo:table-body>
+                    </fo:table>
                 </fo:block>
             </fo:block-container>
-            
-            
-            <fo:block-container absolute-position="absolute" left="20mm" top="172mm" width="150mm"
-                height="40mm" font-family="Liberation Sans" font-size="10pt" text-align="justify">
-                <fo:block margin-top="5mm" >
+            <fo:block-container margin-top="5mm" margin-left="10mm" font-family="Liberation Sans" font-size="10pt" text-align="justify">
+                <fo:block>
+                    #if (${Enq_Consigne1} != '')
                     <fo:inline-container margin="0mm">
-                        <fo:block line-height="10pt">$!{Enq_Consigne1}</fo:block>
-                        <fo:block line-height="10pt">$!{Enq_Consigne2}</fo:block>
-                        <fo:block line-height="10pt">$!{Enq_Consigne3}</fo:block>
+                        <fo:list-block>
+                            <fo:list-item>
+                                <fo:list-item-label line-height="5mm">
+                                    <fo:block>
+                                        <fo:inline>&#8226;</fo:inline>
+                                    </fo:block>
+                                </fo:list-item-label>
+                                <fo:list-item-body start-indent="5mm" line-height="5mm">
+                                    <fo:block line-height="12pt">${Enq_Consigne1}</fo:block>
+                                </fo:list-item-body>
+                            </fo:list-item>
+                        </fo:list-block>
                     </fo:inline-container>
+                    #end
+                    #if (${Enq_Consigne2} != '')
+                    <fo:inline-container margin="0mm">
+                        <fo:list-block>
+                            <fo:list-item>
+                                <fo:list-item-label line-height="5mm">
+                                    <fo:block>
+                                        <fo:inline>&#8226;</fo:inline>
+                                    </fo:block>
+                                </fo:list-item-label>
+                                <fo:list-item-body start-indent="5mm" line-height="5mm">
+                                    <fo:block line-height="12pt">${Enq_Consigne2}</fo:block>
+                                </fo:list-item-body>
+                            </fo:list-item>
+                        </fo:list-block>
+                    </fo:inline-container>
+                    #end
+                    #if (${Enq_Consigne3} != '')
+                    <fo:inline-container margin="0mm">
+                        <fo:list-block>
+                            <fo:list-item>
+                                <fo:list-item-label line-height="5mm">
+                                    <fo:block>
+                                        <fo:inline>&#8226;</fo:inline>
+                                    </fo:block>
+                                </fo:list-item-label>
+                                <fo:list-item-body start-indent="5mm" line-height="5mm">
+                                    <fo:block line-height="12pt">${Enq_Consigne3}</fo:block>
+                                </fo:list-item-body>
+                            </fo:list-item>
+                        </fo:list-block>
+                    </fo:inline-container>
+                    #end
                 </fo:block>
             </fo:block-container>
             
@@ -253,8 +321,8 @@
                 border-top-style="solid" text-align="justify">
                 <fo:block margin="2mm">
                     <fo:inline-container margin="0mm">
-                        <fo:block line-height="10pt">Vu l'avis favorable du Conseil national de l'information statistique, cette enquête#if(${Enq_CaractereObligatoire}=='oui'), reconnue <fo:inline font-weight="bold">d'intérêt général et de qualité statistique</fo:inline>, est <fo:inline font-weight="bold">obligatoire</fo:inline>#else est reconnue d'<fo:inline font-weight="bold">intérêt général et de qualité statistique</fo:inline> sans avoir de caractère obligatoire#end, en application de la loi n° 51-711 du 7 juin 1951 sur l'obligation, la coordination et le secret en matière de statistiques.</fo:block>
-                        <fo:block line-height="10pt">Visa n°${Enq_NumeroVisa} du Ministre ${Enq_MinistereTutelle}, valable pour l'année ${Enq_AnneeVisa} – #if(${Enq_ParutionJo}=='oui') Arrêté en date du ${Enq_DateParutionJo} #else Arrêté en cours de parution #end.</fo:block>
+                        <fo:block line-height="10pt">Vu l'avis favorable du Conseil national de l'information statistique, cette enquête#if(${Enq_CaractereObligatoire}=='oui'), reconnue <fo:inline font-weight="bold">d'intérêt général#if(${Enq_QualiteStatistique}=='oui') et de qualité statistique#end</fo:inline>, est <fo:inline font-weight="bold">obligatoire</fo:inline>#else est reconnue d'<fo:inline font-weight="bold">intérêt général#if(${Enq_QualiteStatistique}=='oui') et de qualité statistique#end</fo:inline> sans avoir de caractère obligatoire#end, en application de la loi n° 51-711 du 7 juin 1951 sur l'obligation, la coordination et le secret en matière de statistiques.</fo:block>
+                        <fo:block line-height="10pt">Visa n°${Enq_NumeroVisa} du Ministre ${Enq_MinistereTutelle}, valable pour l'année ${Enq_AnneeVisa} – #if(${Enq_ParutionJo}=='oui') Arrêté en date du ${Enq_DateParutionJo}#else Arrêté en cours de parution#end.</fo:block>
                         <fo:block line-height="10pt">Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à ${Enq_RespTraitement}. Le règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD) ainsi que la loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés s'appliquent à la présente enquête. Les droits des personnes, rappelés dans la lettre-avis, peuvent être exercés auprès de ${Enq_RespOperationnel}.</fo:block>
                     </fo:inline-container>
                 </fo:block>

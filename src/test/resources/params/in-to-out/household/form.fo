@@ -97,7 +97,8 @@
             La position peut être définie par rapport au hautou bas de la zone concernée et gauche ou droite.
                      
             Dans les zones before/after/start/end, les mesures se font par rapport au 0,0 de la zone concernée.
-            --><fo:simple-page-master master-name="page-odd-household"
+            -->
+      <fo:simple-page-master master-name="page-odd-household"
                              page-height="297mm"
                              page-width="210mm"
                              reference-orientation="0"
@@ -190,7 +191,8 @@
    </fo:layout-master-set>
    <fo:page-sequence font-family="Liberation Sans"
                      font-size="8pt"
-                     master-reference="relanceCOLEM"><!-- ZONE LIGNE TECHNIQUE --><fo:static-content flow-name="xsl-region-before-courrier">
+                     master-reference="relanceCOLEM"><!-- ZONE LIGNE TECHNIQUE -->
+      <fo:static-content flow-name="xsl-region-before-courrier">
          <fo:block position="absolute"
                    margin-top="5mm"
                    margin-left="10mm"
@@ -201,7 +203,8 @@
             </fo:block>
       </fo:static-content>
       <fo:flow flow-name="xsl-region-body">
-         <fo:block page-break-after="always"><!-- ZONE LOGOS --><fo:block-container absolute-position="absolute"
+         <fo:block page-break-after="always"><!-- ZONE LOGOS -->
+            <fo:block-container absolute-position="absolute"
                                 top="2mm"
                                 left="5mm"
                                 width="50mm"
@@ -243,7 +246,8 @@
                                        scaling="uniform"/>
                </fo:block>
             </fo:block-container>
-            <!-- ZONE RESERVE ADRESSE --><fo:block-container absolute-position="absolute"
+            <!-- ZONE RESERVE ADRESSE -->
+            <fo:block-container absolute-position="absolute"
                                 left="80mm"
                                 top="33mm"
                                 width="110mm"
@@ -251,7 +255,8 @@
                                 overflow="hidden">
                <fo:block/>
             </fo:block-container>
-            <!-- ZONE DATAMATRIX ALLIAGE --><fo:block-container absolute-position="absolute"
+            <!-- ZONE DATAMATRIX ALLIAGE -->
+            <fo:block-container absolute-position="absolute"
                                 left="100mm"
                                 top="37.8mm"
                                 width="11.88mm"
@@ -272,7 +277,8 @@
                   </fo:instream-foreign-object>
                </fo:block>
             </fo:block-container>
-            <!-- ZONE ADRESSE --><fo:block-container absolute-position="absolute"
+            <!-- ZONE ADRESSE -->
+            <fo:block-container absolute-position="absolute"
                                 left="100mm"
                                 top="50mm"
                                 width="82mm"
@@ -291,7 +297,8 @@
                   </fo:inline-container>
                </fo:block>
             </fo:block-container>
-            <!-- ZONE RESERVE INTEGRALITE --><fo:block-container absolute-position="absolute"
+            <!-- ZONE RESERVE INTEGRALITE -->
+            <fo:block-container absolute-position="absolute"
                                 left="187mm"
                                 top="75mm"
                                 width="13mm"
@@ -640,147 +647,135 @@
             </fo:block>
          </fo:block-container>
       </fo:static-content>
-      <fo:flow flow-name="region-body-first-household"><!--    Blocs Logos et Libellé --><fo:block-container absolute-position="absolute"
+      <fo:flow flow-name="region-body-first-household"><!--    Blocs Logos et Libellé -->
+         <fo:block-container absolute-position="absolute"
                              left="0mm"
                              top="0mm"
-                             width="15mm"
-                             height="15mm">
+                             width="180mm"
+                             height="25mm">
             <fo:block>
-               <fo:external-graphic src="logo4.png"
+               <fo:external-graphic src="coleman/${Enq_ImageLogos}"
+                                    width="100%"
+                                    height="100%"
+                                    content-height="scale-to-fit"
                                     content-width="scale-to-fit"
-                                    width="15mm"
                                     scaling="uniform"/>
             </fo:block>
          </fo:block-container>
-         <fo:block-container absolute-position="absolute"
-                             left="72mm"
-                             top="0mm"
-                             width="26mm"
-                             height="15mm">
-            <fo:block>
-               <fo:external-graphic src="marianne.png"
-                                    content-width="scale-to-fit"
-                                    width="26mm"
-                                    scaling="uniform"/>
-            </fo:block>
-         </fo:block-container>
-         <fo:block-container absolute-position="absolute"
-                             left="160mm"
-                             top="0mm"
-                             width="10mm"
-                             height="15mm">
-            <fo:block>
-               <fo:external-graphic src="logo_statpub.png"
-                                    content-width="scale-to-fit"
-                                    width="10mm"
-                                    scaling="uniform"/>
-            </fo:block>
-         </fo:block-container>
-         <fo:block-container absolute-position="absolute"
-                             left="10mm"
-                             top="23mm"
+         <fo:block-container margin-left="10mm"
+                             margin-top="23mm"
                              width="150mm"
-                             height="7mm">
+                             height="10mm">
             <fo:block font-family="Liberation Sans"
                       font-size="16pt"
                       font-weight="bold"
                       text-align="center"> ${Enq_LibelleEnquete} </fo:block>
          </fo:block-container>
-         <!--    Bloc Quand et comment répondre  --><fo:block-container absolute-position="absolute"
-                             left="0mm"
-                             top="42mm"
-                             width="15mm"
-                             height="15mm">
-            <fo:block margin="2pt">
-               <fo:external-graphic src="Insee_formulaire-qui_repond.png"
-                                    content-width="scale-to-fit"
-                                    width="15mm"
-                                    scaling="uniform"/>
+         <!--    Bloc Quand et comment répondre  -->
+         <fo:block-container margin-top="5mm">
+            <fo:block>
+               <fo:table>
+                  <fo:table-column/>
+                  <fo:table-column/>
+                  <fo:table-body>
+                     <fo:table-row>
+                        <fo:table-cell width="20mm">
+                           <fo:block>
+                              <fo:external-graphic src="Insee_formulaire-qui_repond.png"
+                                                   content-width="scale-to-fit"
+                                                   width="15mm"
+                                                   scaling="uniform"/>
+                           </fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell display-align="center">
+                           <fo:block line-height="10pt" font-weight="bold" font-size="12pt">Quand et comment répondre ?</fo:block>
+                        </fo:table-cell>
+                     </fo:table-row>
+                  </fo:table-body>
+               </fo:table>
             </fo:block>
          </fo:block-container>
-         <fo:block-container absolute-position="absolute"
-                             left="20mm"
-                             top="47mm"
-                             font-size="12pt">
-            <fo:block line-height="10pt" font-weight="bold">Quand et comment répondre ?</fo:block>
-         </fo:block-container>
-         <fo:block-container absolute-position="absolute" left="20mm" top="50mm">
-            <fo:block margin-top="5mm" font-size="10pt">
+         <fo:block-container margin-left="10mm">
+            <fo:block font-size="10pt">
                <fo:inline-container margin="0mm">
                   <fo:block line-height="10pt">
                      <fo:block line-height="12pt">Au plus tard le <fo:inline font-weight="bold">${Enq_DateRetour}.</fo:inline>
                      </fo:block>
-                     <fo:block line-height="12pt">Remplissez un questionnaire papier ${Enq_PapierNombre}. ${Enq_PapierConsigne}.</fo:block>
+                     <fo:block line-height="12pt">Remplissez un questionnaire papier ${Enq_PapierNombre}. #if(${Enq_PapierConsigne}!='') ${Enq_PapierConsigne}.#end</fo:block>
                      <fo:block line-height="12pt">Utilisez l'enveloppe T pour envoyer ${Enq_PapierNombreQuest} à l'adresse suivante :</fo:block>
                   </fo:block>
                   <fo:block line-height="10pt" margin-top="2mm">
-                     <fo:block line-height="10pt">$!{Enq_AdresseRetourQL1}</fo:block>
-                     <fo:block line-height="10pt">$!{Enq_AdresseRetourQL2}</fo:block>
-                     <fo:block line-height="10pt">$!{Enq_AdresseRetourQL3}</fo:block>
-                     <fo:block line-height="10pt">$!{Enq_AdresseRetourQL4}</fo:block>
-                     <fo:block line-height="10pt">$!{Enq_AdresseRetourQL5}</fo:block>
-                     <fo:block line-height="10pt">$!{Enq_AdresseRetourQL6}</fo:block>
-                     <fo:block line-height="10pt">$!{Enq_AdresseRetourQL7}</fo:block>
+                     <fo:block line-height="12pt">$!{Enq_AdresseRetourQL1}</fo:block>
+                     <fo:block line-height="12pt">$!{Enq_AdresseRetourQL2}</fo:block>
+                     <fo:block line-height="12pt">$!{Enq_AdresseRetourQL3}</fo:block>
+                     <fo:block line-height="12pt">$!{Enq_AdresseRetourQL4}</fo:block>
+                     <fo:block line-height="12pt">$!{Enq_AdresseRetourQL5}</fo:block>
+                     <fo:block line-height="12pt">$!{Enq_AdresseRetourQL6}</fo:block>
+                     <fo:block line-height="12pt">$!{Enq_AdresseRetourQL7}</fo:block>
                   </fo:block>
                </fo:inline-container>
             </fo:block>
          </fo:block-container>
-         <!--    Bloc Qui répond --><fo:block-container absolute-position="absolute"
-                             left="0mm"
-                             top="97mm"
-                             width="15mm"
-                             height="15mm">
-            <fo:block margin="2pt">
-               <fo:external-graphic src="Insee_hommes-recensement-bleunuance2.png"
-                                    content-width="scale-to-fit"
-                                    width="15mm"
-                                    scaling="uniform"/>
+         <!--    Bloc Qui répond -->
+         <fo:block-container>
+            <fo:block font-weight="bold" font-size="12pt">
+               <fo:table>
+                  <fo:table-column/>
+                  <fo:table-column/>
+                  <fo:table-body>
+                     <fo:table-row>
+                        <fo:table-cell width="20mm">
+                           <fo:block>
+                              <fo:external-graphic src="Insee_hommes-recensement-bleunuance2.png"
+                                                   content-width="scale-to-fit"
+                                                   width="15mm"
+                                                   scaling="uniform"/>
+                           </fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell display-align="center">
+                           <fo:block line-height="10pt" font-weight="bold" font-size="12pt">Qui doit répondre ?</fo:block>
+                        </fo:table-cell>
+                     </fo:table-row>
+                  </fo:table-body>
+               </fo:table>
             </fo:block>
          </fo:block-container>
-         <fo:block-container absolute-position="absolute"
-                             left="20mm"
-                             top="102mm"
-                             font-size="12pt">
-            <fo:block line-height="10pt" font-weight="bold"> Qui doit répondre ?</fo:block>
-         </fo:block-container>
-         <fo:block-container absolute-position="absolute"
-                             left="20mm"
-                             top="105mm"
-                             width="150mm"
-                             text-align="justify">
-            <fo:block margin-top="5mm" font-size="10pt">
+         <fo:block-container text-align="justify" margin-left="10mm">
+            <fo:block font-size="10pt">
                <fo:inline-container margin="0mm">
                   <fo:block line-height="10pt">
-                     <fo:block line-height="10pt">${Ue_QuiRepond1}</fo:block>
-                     <fo:block line-height="10pt">$!{Ue_QuiRepond2}</fo:block>
-                     <fo:block line-height="10pt">$!{Ue_QuiRepond3}</fo:block>
+                     <fo:block line-height="12pt">${Ue_QuiRepond1}</fo:block>
+                     <fo:block line-height="12pt">$!{Ue_QuiRepond2}</fo:block>
+                     <fo:block line-height="12pt">$!{Ue_QuiRepond3}</fo:block>
                   </fo:block>
                </fo:inline-container>
             </fo:block>
          </fo:block-container>
-         <!--    Blocs Consignes --><fo:block-container absolute-position="absolute"
-                             left="0mm"
-                             top="140mm"
-                             width="15mm"
-                             height="15mm">
-            <fo:block margin="2pt">
-               <fo:external-graphic src="Insee_formulaire-recensement-bleunuance2.png"
-                                    content-width="scale-to-fit"
-                                    width="15mm"
-                                    scaling="uniform"/>
+         <!--    Blocs Consignes -->
+         <fo:block-container>
+            <fo:block font-weight="bold" font-size="12pt">
+               <fo:table width="100mm">
+                  <fo:table-column/>
+                  <fo:table-column/>
+                  <fo:table-body>
+                     <fo:table-row>
+                        <fo:table-cell width="20mm">
+                           <fo:block>
+                              <fo:external-graphic src="Insee_formulaire-recensement-bleunuance2.png"
+                                                   content-width="scale-to-fit"
+                                                   width="15mm"
+                                                   scaling="uniform"/>
+                           </fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell display-align="center" width="80mm">
+                           <fo:block line-height="10pt" font-weight="bold" font-size="12pt">Comment remplir le questionnaire ?</fo:block>
+                        </fo:table-cell>
+                     </fo:table-row>
+                  </fo:table-body>
+               </fo:table>
             </fo:block>
          </fo:block-container>
-         <fo:block-container absolute-position="absolute"
-                             left="20mm"
-                             top="145mm"
-                             font-size="12pt">
-            <fo:block line-height="10pt" font-weight="bold">Comment remplir le questionnaire ?</fo:block>
-         </fo:block-container>
-         <fo:block-container absolute-position="absolute"
-                             left="20mm"
-                             top="149mm"
-                             width="150mm"
-                             height="40mm"
+         <fo:block-container margin-left="15mm"
                              font-family="Liberation Sans"
                              font-size="10pt"
                              text-align="justify">
@@ -826,7 +821,7 @@
                      </fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="10mm" line-height="5mm">
-                     <fo:block> Suivez les instructions des renvois.  
+                     <fo:block> Suivez les instructions des renvois. Exemple :
                                 <fo:external-graphic src="filter_example.png"
                                              padding-right="3pt"
                                              padding-left="3pt"
@@ -839,34 +834,83 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block-container>
-         <!--    Bloc Consignes spécifiques enquête  --><fo:block-container absolute-position="absolute"
-                             left="20mm"
-                             top="170mm"
-                             width="150mm"
-                             height="30mm"
-                             font-family="Liberation Sans"
-                             font-size="12pt">
-            <fo:block line-height="10pt">
-               <fo:inline font-weight="bold">Consignes spécifiques</fo:inline>
+         <!--    Bloc Consignes spécifiques enquête  -->
+         <fo:block-container margin-top="5mm">
+            <fo:block font-weight="bold" font-size="12pt">
+               <fo:table width="100mm">
+                  <fo:table-column/>
+                  <fo:table-column/>
+                  <fo:table-body>
+                     <fo:table-row>
+                        <fo:table-cell width="20mm">
+                           <fo:block/>
+                        </fo:table-cell>
+                        <fo:table-cell display-align="center" width="60mm">
+                           <fo:block line-height="10pt" font-weight="bold" font-size="12pt">Consignes spécifiques</fo:block>
+                        </fo:table-cell>
+                     </fo:table-row>
+                  </fo:table-body>
+               </fo:table>
             </fo:block>
          </fo:block-container>
-         <fo:block-container absolute-position="absolute"
-                             left="20mm"
-                             top="172mm"
-                             width="150mm"
-                             height="40mm"
+         <fo:block-container margin-top="5mm"
+                             margin-left="10mm"
                              font-family="Liberation Sans"
                              font-size="10pt"
                              text-align="justify">
-            <fo:block margin-top="5mm">
-               <fo:inline-container margin="0mm">
-                  <fo:block line-height="10pt">$!{Enq_Consigne1}</fo:block>
-                  <fo:block line-height="10pt">$!{Enq_Consigne2}</fo:block>
-                  <fo:block line-height="10pt">$!{Enq_Consigne3}</fo:block>
+            <fo:block>
+                    #if (${Enq_Consigne1} != '')
+                    <fo:inline-container margin="0mm">
+                  <fo:list-block>
+                     <fo:list-item>
+                        <fo:list-item-label line-height="5mm">
+                           <fo:block>
+                              <fo:inline>•</fo:inline>
+                           </fo:block>
+                        </fo:list-item-label>
+                        <fo:list-item-body start-indent="5mm" line-height="5mm">
+                           <fo:block line-height="12pt">${Enq_Consigne1}</fo:block>
+                        </fo:list-item-body>
+                     </fo:list-item>
+                  </fo:list-block>
                </fo:inline-container>
-            </fo:block>
+                    #end
+                    #if (${Enq_Consigne2} != '')
+                    <fo:inline-container margin="0mm">
+                  <fo:list-block>
+                     <fo:list-item>
+                        <fo:list-item-label line-height="5mm">
+                           <fo:block>
+                              <fo:inline>•</fo:inline>
+                           </fo:block>
+                        </fo:list-item-label>
+                        <fo:list-item-body start-indent="5mm" line-height="5mm">
+                           <fo:block line-height="12pt">${Enq_Consigne2}</fo:block>
+                        </fo:list-item-body>
+                     </fo:list-item>
+                  </fo:list-block>
+               </fo:inline-container>
+                    #end
+                    #if (${Enq_Consigne3} != '')
+                    <fo:inline-container margin="0mm">
+                  <fo:list-block>
+                     <fo:list-item>
+                        <fo:list-item-label line-height="5mm">
+                           <fo:block>
+                              <fo:inline>•</fo:inline>
+                           </fo:block>
+                        </fo:list-item-label>
+                        <fo:list-item-body start-indent="5mm" line-height="5mm">
+                           <fo:block line-height="12pt">${Enq_Consigne3}</fo:block>
+                        </fo:list-item-body>
+                     </fo:list-item>
+                  </fo:list-block>
+               </fo:inline-container>
+                    #end
+                </fo:block>
          </fo:block-container>
-         <!--    Bloc CNIS --><fo:block-container absolute-position="absolute"
+         <!--    Bloc CNIS -->
+         <fo:block-container absolute-position="absolute"
                              left="0mm"
                              top="220mm"
                              width="170mm"
@@ -878,8 +922,8 @@
                              text-align="justify">
             <fo:block margin="2mm">
                <fo:inline-container margin="0mm">
-                  <fo:block line-height="10pt">Vu l'avis favorable du Conseil national de l'information statistique, cette enquête#if(${Enq_CaractereObligatoire}=='oui'), reconnue <fo:inline font-weight="bold">d'intérêt général et de qualité statistique</fo:inline>, est <fo:inline font-weight="bold">obligatoire</fo:inline>#else est reconnue d'<fo:inline font-weight="bold">intérêt général et de qualité statistique</fo:inline> sans avoir de caractère obligatoire#end, en application de la loi n° 51-711 du 7 juin 1951 sur l'obligation, la coordination et le secret en matière de statistiques.</fo:block>
-                  <fo:block line-height="10pt">Visa n°${Enq_NumeroVisa} du Ministre ${Enq_MinistereTutelle}, valable pour l'année ${Enq_AnneeVisa} – #if(${Enq_ParutionJo}=='oui') Arrêté en date du ${Enq_DateParutionJo} #else Arrêté en cours de parution #end.</fo:block>
+                  <fo:block line-height="10pt">Vu l'avis favorable du Conseil national de l'information statistique, cette enquête#if(${Enq_CaractereObligatoire}=='oui'), reconnue <fo:inline font-weight="bold">d'intérêt général#if(${Enq_QualiteStatistique}=='oui') et de qualité statistique#end</fo:inline>, est <fo:inline font-weight="bold">obligatoire</fo:inline>#else est reconnue d'<fo:inline font-weight="bold">intérêt général#if(${Enq_QualiteStatistique}=='oui') et de qualité statistique#end</fo:inline> sans avoir de caractère obligatoire#end, en application de la loi n° 51-711 du 7 juin 1951 sur l'obligation, la coordination et le secret en matière de statistiques.</fo:block>
+                  <fo:block line-height="10pt">Visa n°${Enq_NumeroVisa} du Ministre ${Enq_MinistereTutelle}, valable pour l'année ${Enq_AnneeVisa} – #if(${Enq_ParutionJo}=='oui') Arrêté en date du ${Enq_DateParutionJo}#else Arrêté en cours de parution#end.</fo:block>
                   <fo:block line-height="10pt">Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à ${Enq_RespTraitement}. Le règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD) ainsi que la loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés s'appliquent à la présente enquête. Les droits des personnes, rappelés dans la lettre-avis, peuvent être exercés auprès de ${Enq_RespOperationnel}.</fo:block>
                </fo:inline-container>
             </fo:block>
@@ -1035,7 +1079,10 @@
       <fo:flow flow-name="xsl-region-body"
                border-collapse="collapse"
                font-size="10pt">
-         <fo:block background-color="#666666"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   background-color="#666666"
                    color="white"
                    font-weight="bold"
                    margin-bottom="9pt"
@@ -1044,32 +1091,29 @@
                    border-style="solid"
                    space-before="10mm"
                    space-before.conditionality="discard"
-                   text-align="left"
-                   page-break-inside="avoid"
+                   text-align="left">I - VOTRE SITUATION PROFESSIONNELLE ACTUELLE</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">I - VOTRE SITUATION PROFESSIONNELLE ACTUELLE</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    space-before="20pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:block>En 2018, vous avez exercé un emploi salarié dans l'administration désignée ci-dessous :</fo:block>
             <fo:block>${ADMINISTRATION1}</fo:block>
             <fo:block>${ADMINISTRATION2}</fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 1. Êtes-vous toujours en activité au sein de cette administration ?</fo:block>
+                   text-align="justify">➡ 1. Êtes-vous toujours en activité au sein de cette administration ?</fo:block>
          <fo:block id="ACTADMIN" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -1102,13 +1146,13 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -1129,24 +1173,24 @@
                          text-align="justify">Si oui, passez à la question 4.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 2. Si vous n'êtes plus en activité dans cette administration, quand l'avez-vous quittée ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 2. Si vous n'êtes plus en activité dans cette administration, quand l'avez-vous quittée ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Indiquez le mois et l'année.</fo:inline>
          </fo:block>
          <fo:block id="DATEDEP" page-break-inside="avoid">
@@ -1158,24 +1202,24 @@
                <fo:external-graphic src="date-o-fr-YYYYMM.png"/>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 3. Pour quelle raison avez-vous quitté cette administration ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 3. Pour quelle raison avez-vous quitté cette administration ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Une seule réponse possible.</fo:inline>
          </fo:block>
          <fo:block id="RAISONDEP" page-break-inside="avoid">
@@ -1252,7 +1296,10 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block background-color="#666666"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   background-color="#666666"
                    color="white"
                    font-weight="bold"
                    margin-bottom="9pt"
@@ -1261,28 +1308,25 @@
                    border-style="solid"
                    space-before="10mm"
                    space-before.conditionality="discard"
-                   text-align="left"
-                   page-break-inside="avoid"
+                   text-align="left">II - VOTRE FORMATION </fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">II - VOTRE FORMATION </fo:block>
-         <fo:block color="black"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 4. En quelle année avez-vous cessé de fréquenter régulièrement l'école ou l'université dans le cadre de vos études ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 4. En quelle année avez-vous cessé de fréquenter régulièrement l'école ou l'université dans le cadre de vos études ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Si vous avez repris vos études, année de la première</fo:inline>
             <fo:inline font-style="italic">sortie</fo:inline>.* </fo:block>
          <fo:block id="ANNEEFORM" page-break-inside="avoid">
@@ -1294,35 +1338,35 @@
                <fo:external-graphic src="date-o-fr-YYYY.png"/>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 5. Quel est votre diplôme le plus élevé ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 5. Quel est votre diplôme le plus élevé ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Y compris parmi ceux acquis par la formation professionnelle.</fo:inline>
          </fo:block>
-         <fo:block font-size="10pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Une seule réponse possible.</fo:inline>
          </fo:block>
          <fo:block id="DIPL" page-break-inside="avoid">
@@ -1449,7 +1493,10 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block background-color="#666666"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   background-color="#666666"
                    color="white"
                    font-weight="bold"
                    margin-bottom="9pt"
@@ -1458,48 +1505,45 @@
                    border-style="solid"
                    space-before="10mm"
                    space-before.conditionality="discard"
-                   text-align="left"
-                   page-break-inside="avoid"
+                   text-align="left">III - VOTRE ENTRÉE DANS LA VIE ACTIVE</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">III - VOTRE ENTRÉE DANS LA VIE ACTIVE</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">Dans cette partie, nous allons décrire votre premier emploi rémunéré, qu'il soit dans la fonction publique ou dans le privé, ainsi que les éventuelles périodes de chômage que vous avez connues.</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">Dans cette partie, nous allons décrire votre premier emploi rémunéré, qu'il soit dans la fonction publique ou dans le privé, ainsi que les éventuelles périodes de chômage que vous avez connues.</fo:block>
-         <fo:block background-color="#CCCCCC"
+                   keep-together.within-column="always"
+                   background-color="#CCCCCC"
                    color="black"
                    font-weight="bold"
                    margin-bottom="9pt"
                    font-size="12pt"
                    text-align="left"
                    space-before="6mm"
-                   space-before.conditionality="discard"
-                   page-break-inside="avoid"
+                   space-before.conditionality="discard">III.A - VOTRE PREMIER EMPLOI RÉMUNÉRÉ</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">III.A - VOTRE PREMIER EMPLOI RÉMUNÉRÉ</fo:block>
-         <fo:block color="black"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 6. En quelle année avez-vous commencé à exercer un emploi rémunéré ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 6. En quelle année avez-vous commencé à exercer un emploi rémunéré ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Ne prenez pas en compte l’apprentissage, les petits boulots ou jobs d’été ou la période de formation initiale (exemples : élèves fonctionnaires, doctorants rémunérés pour leur thèse, etc.)</fo:inline>.* </fo:block>
          <fo:block id="ANNEEREM" page-break-inside="avoid">
             <fo:block color="black"
@@ -1510,15 +1554,15 @@
                <fo:external-graphic src="date-o-fr-YYYY.png"/>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 7. Dans quel secteur se situait votre premier emploi rémunéré ?</fo:block>
+                   text-align="justify">➡ 7. Dans quel secteur se situait votre premier emploi rémunéré ?</fo:block>
          <fo:block id="SECTEUR" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -1551,13 +1595,13 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -1578,48 +1622,48 @@
                          text-align="justify">Si vous avez répondu dans le secteur public, passez à la question 10.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 8. Combien d’employeurs différents avez-vous eu dans le secteur privé, avant votre entrée dans la fonction publique ?* </fo:block>
+                   text-align="justify">➡ 8. Combien d’employeurs différents avez-vous eu dans le secteur privé, avant votre entrée dans la fonction publique ?* </fo:block>
          <fo:block id="NBEMPL" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 9. Combien de temps avez-vous travaillé dans le secteur privé, même approximativement ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 9. Combien de temps avez-vous travaillé dans le secteur privé, même approximativement ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Répondez en nombre d'années et de mois. Exemple : 3 ans et 6 mois.</fo:inline>
          </fo:block>
          <fo:block id="DUREEPRIV" page-break-inside="avoid">
@@ -1638,26 +1682,26 @@
                </fo:block>
             </fo:inline>
          </fo:block>
-         <fo:block background-color="#CCCCCC"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   background-color="#CCCCCC"
                    color="black"
                    font-weight="bold"
                    margin-bottom="9pt"
                    font-size="12pt"
                    text-align="left"
                    space-before="6mm"
-                   space-before.conditionality="discard"
-                   page-break-inside="avoid"
+                   space-before.conditionality="discard">III.B - PÉRIODES DE CHÔMAGE</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">III.B - PÉRIODES DE CHÔMAGE</fo:block>
-         <fo:block color="black"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 10. Au cours de votre carrière, avez-vous connu des périodes de chômage supérieures à 6 mois ?</fo:block>
+                   text-align="justify">➡ 10. Au cours de votre carrière, avez-vous connu des périodes de chômage supérieures à 6 mois ?</fo:block>
          <fo:block id="PERIODCHOM" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -1690,13 +1734,13 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -1717,59 +1761,59 @@
                          text-align="justify">Si non, passez à la question 13.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 11. Combien de périodes de chômage de plus de 6 mois avez-vous connues ?</fo:block>
+                   text-align="justify">➡ 11. Combien de périodes de chômage de plus de 6 mois avez-vous connues ?</fo:block>
          <fo:block id="NBCHOM" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 12. Quelle a été la durée totale de ces périodes de chômage ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 12. Quelle a été la durée totale de ces périodes de chômage ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Répondez en nombre de mois.</fo:inline>
          </fo:block>
          <fo:block id="DUREECHOM" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
@@ -1777,7 +1821,10 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block background-color="#666666"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   background-color="#666666"
                    color="white"
                    font-weight="bold"
                    margin-bottom="9pt"
@@ -1786,37 +1833,34 @@
                    border-style="solid"
                    space-before="10mm"
                    space-before.conditionality="discard"
-                   text-align="left"
-                   page-break-inside="avoid"
+                   text-align="left">IV - VOTRE PREMIER POSTE DANS LA FONCTION PUBLIQUE</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">IV - VOTRE PREMIER POSTE DANS LA FONCTION PUBLIQUE</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">Les questions qui vont suivre portent sur votre premier poste dans la fonction publique, y compris si celui-ci était dans la fonction publique hospitalière ou territoriale.</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">Les questions qui vont suivre portent sur votre premier poste dans la fonction publique, y compris si celui-ci était dans la fonction publique hospitalière ou territoriale.</fo:block>
-         <fo:block color="black"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 13. En quelle année avez-vous commencé à travailler dans la fonction publique ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 13. En quelle année avez-vous commencé à travailler dans la fonction publique ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Il s’agit de la prise effective du premier poste y compris en tant que contractuel mais hors période de formation initiale (exemples : élèves fonctionnaires, doctorants rémunérés pour leur thèse, etc.)</fo:inline>.* </fo:block>
          <fo:block id="ANNEEFP" page-break-inside="avoid">
             <fo:block color="black"
@@ -1827,15 +1871,15 @@
                <fo:external-graphic src="date-o-fr-YYYY.png"/>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 14. Dans quelle fonction publique avez-vous débuté ?</fo:block>
+                   text-align="justify">➡ 14. Dans quelle fonction publique avez-vous débuté ?</fo:block>
          <fo:block id="FPDEBUT" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -1882,24 +1926,24 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 15. Comment êtes-vous entré dans la fonction publique ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 15. Comment êtes-vous entré dans la fonction publique ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Une seule réponse possible.</fo:inline>
          </fo:block>
          <fo:block id="MOYENENTREE" page-break-inside="avoid">
@@ -1962,24 +2006,24 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 16. À la prise de votre premier poste dans la fonction publique, vous étiez :</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 16. À la prise de votre premier poste dans la fonction publique, vous étiez :</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Une seule réponse possible.</fo:inline>
          </fo:block>
          <fo:block id="STATUTPP" page-break-inside="avoid">
@@ -2028,13 +2072,13 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -2055,15 +2099,15 @@
                          text-align="justify">Si vous avez répondu fonctionnaire titulaire ou militaire, passez à la question 20.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 17. Êtes-vous devenu fonctionnaire titulaire depuis votre entrée dans la fonction publique ?</fo:block>
+                   text-align="justify">➡ 17. Êtes-vous devenu fonctionnaire titulaire depuis votre entrée dans la fonction publique ?</fo:block>
          <fo:block id="TITUL" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -2096,13 +2140,13 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -2123,15 +2167,15 @@
                          text-align="justify">Si non, passez à la question 20.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 18. Par quel moyen êtes-vous devenu fonctionnaire titulaire depuis votre entrée dans la fonction publique ?</fo:block>
+                   text-align="justify">➡ 18. Par quel moyen êtes-vous devenu fonctionnaire titulaire depuis votre entrée dans la fonction publique ?</fo:block>
          <fo:block id="MOYTIT" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -2174,14 +2218,14 @@
                                font-size="10pt"
                                padding-left="1mm"
                                text-align="justify">Par un autre moyen</fo:block>
-                     <fo:block color="black"
+                     <fo:block page-break-inside="avoid"
+                               keep-with-next="always"
+                               keep-together.within-column="always"
+                               color="black"
                                font-weight="bold"
                                font-size="10pt"
                                padding="1mm"
-                               text-align="justify"
-                               page-break-inside="avoid"
-                               keep-with-next="always"
-                               keep-together.within-column="always">
+                               text-align="justify">
                         <fo:inline>
                            <fo:external-graphic src="arrow_details.png"/>
                            <fo:inline font-weight="bold">Précisez :</fo:inline>
@@ -2199,15 +2243,15 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 19. En quelle année êtes-vous devenu fonctionnaire titulaire ?</fo:block>
+                   text-align="justify">➡ 19. En quelle année êtes-vous devenu fonctionnaire titulaire ?</fo:block>
          <fo:block id="ANNEE_FONC" page-break-inside="avoid">
             <fo:block color="black"
                       font-weight="normal"
@@ -2217,24 +2261,24 @@
                <fo:external-graphic src="date-o-fr-YYYY.png"/>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 20. Pour votre premier poste dans la fonction publique, quelle était votre catégorie ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 20. Pour votre premier poste dans la fonction publique, quelle était votre catégorie ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Indiquez le niveau du poste occupé si vous n'étiez pas fonctionnaire. Si vous étiez enseignant-chercheur, cochez A.</fo:inline>
          </fo:block>
          <fo:block id="CATPP" page-break-inside="avoid">
@@ -2297,24 +2341,24 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 21. Où avez-vous commencé à travailler dans la fonction publique ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 21. Où avez-vous commencé à travailler dans la fonction publique ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Indiquez le lieu de la première prise de poste et non celui de la période de formation pour les fonctionnaires stagiaires.</fo:inline>
          </fo:block>
          <fo:block id="LIEUFP" page-break-inside="avoid">
@@ -2349,13 +2393,13 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -2376,24 +2420,24 @@
                          text-align="justify">Si vous avez commencé à travailler dans la fonction publique à l'étranger, dans une COM, un TOM ou dans un autre territoire, passez à la question 23.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 22. Si vous avez commencé en France, précisez dans quel département :</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 22. Si vous avez commencé en France, précisez dans quel département :</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Par exemple : 971 pour la Guadeloupe, 86 pour la Vienne.</fo:inline>
          </fo:block>
          <fo:block id="DEPTFP" page-break-inside="avoid">
@@ -2406,7 +2450,10 @@
                <fo:external-graphic src="mask_number.png"/>
             </fo:block>
          </fo:block>
-         <fo:block background-color="#666666"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   background-color="#666666"
                    color="white"
                    font-weight="bold"
                    margin-bottom="9pt"
@@ -2415,48 +2462,45 @@
                    border-style="solid"
                    space-before="10mm"
                    space-before.conditionality="discard"
-                   text-align="left"
-                   page-break-inside="avoid"
+                   text-align="left">V - VOTRE PARCOURS PROFESSIONNEL DANS LA FONCTION PUBLIQUE</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">V - VOTRE PARCOURS PROFESSIONNEL DANS LA FONCTION PUBLIQUE</fo:block>
-         <fo:block background-color="#CCCCCC"
+                   keep-together.within-column="always"
+                   background-color="#CCCCCC"
                    color="black"
                    font-weight="bold"
                    margin-bottom="9pt"
                    font-size="12pt"
                    text-align="left"
                    space-before="6mm"
-                   space-before.conditionality="discard"
-                   page-break-inside="avoid"
+                   space-before.conditionality="discard">V.A - VOTRE POSTE ACTUEL</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">V.A - VOTRE POSTE ACTUEL</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">Si vous êtes retraité, avez quitté la fonction publique ou si vous êtes actuellement en formation professionnelle, pour les questions sur le poste actuel, répondez sur votre dernier poste.</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">Si vous êtes retraité, avez quitté la fonction publique ou si vous êtes actuellement en formation professionnelle, pour les questions sur le poste actuel, répondez sur votre dernier poste.</fo:block>
-         <fo:block color="black"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 23. Au 31 décembre 2018, quelle était votre catégorie ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 23. Au 31 décembre 2018, quelle était votre catégorie ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Indiquez le niveau du poste occupé si vous n'êtes pas fonctionnaire. Si vous êtes enseignant-chercheur, cochez A.</fo:inline>
          </fo:block>
          <fo:block id="CATDEC" page-break-inside="avoid">
@@ -2505,15 +2549,15 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 24. Votre poste actuel est-il dans le même ministère ou dans la même institution que celui de votre premier poste dans la fonction publique ?</fo:block>
+                   text-align="justify">➡ 24. Votre poste actuel est-il dans le même ministère ou dans la même institution que celui de votre premier poste dans la fonction publique ?</fo:block>
          <fo:block id="MINPOSTE" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -2546,15 +2590,15 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 25. Votre poste actuel correspond-il au même métier que celui de votre premier poste dans la fonction publique ?</fo:block>
+                   text-align="justify">➡ 25. Votre poste actuel correspond-il au même métier que celui de votre premier poste dans la fonction publique ?</fo:block>
          <fo:block id="FILIEREPOSTE" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -2587,15 +2631,15 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 26. Avez-vous une autre activité professionnelle en dehors de votre poste actuel ?</fo:block>
+                   text-align="justify">➡ 26. Avez-vous une autre activité professionnelle en dehors de votre poste actuel ?</fo:block>
          <fo:block id="AUTRE_ACT" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -2628,69 +2672,69 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block background-color="#CCCCCC"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   background-color="#CCCCCC"
                    color="black"
                    font-weight="bold"
                    margin-bottom="9pt"
                    font-size="12pt"
                    text-align="left"
                    space-before="6mm"
-                   space-before.conditionality="discard"
-                   page-break-inside="avoid"
+                   space-before.conditionality="discard">V.B - MOBILITÉ GÉOGRAPHIQUE ET PROMOTION</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">V.B - MOBILITÉ GÉOGRAPHIQUE ET PROMOTION</fo:block>
-         <fo:block color="black"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 27. Combien de fois avez-vous changé de département depuis votre entrée dans la fonction publique ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 27. Combien de fois avez-vous changé de département depuis votre entrée dans la fonction publique ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Comptez le nombre de changements de département du lieu de travail</fo:inline>.* </fo:block>
-         <fo:block font-size="10pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Ne comptez pas la mobilité liée à la formation des fonctionnaires stagiaires.</fo:inline>
          </fo:block>
          <fo:block id="NBDPT" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -2711,72 +2755,72 @@
                          text-align="justify">Si vous n'avez jamais changé de département, passez à la question 30.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 28. Parmi ce(s) changement(s), combien en avez-vous souhaité(s)?</fo:block>
+                   text-align="justify">➡ 28. Parmi ce(s) changement(s), combien en avez-vous souhaité(s)?</fo:block>
          <fo:block id="CHGMT_SOUHAIT" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 29. Parmi ce(s) changement(s), combien sont lié(s) au suivi de votre conjoint ?</fo:block>
+                   text-align="justify">➡ 29. Parmi ce(s) changement(s), combien sont lié(s) au suivi de votre conjoint ?</fo:block>
          <fo:block id="CHGMT_SUIVI" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 30. Depuis votre entrée dans la fonction publique, avez-vous bénéficié d'une ou plusieurs promotions par le biais d'un changement de corps (ou assimilé) ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 30. Depuis votre entrée dans la fonction publique, avez-vous bénéficié d'une ou plusieurs promotions par le biais d'un changement de corps (ou assimilé) ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Par exemple, passage de catégorie B en catégorie A. Ne prenez pas en compte les changements de grade ou d'échelon.</fo:inline>
          </fo:block>
          <fo:block id="PROMOTION" page-break-inside="avoid">
@@ -2811,13 +2855,13 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -2838,24 +2882,24 @@
                          text-align="justify">Si non, passez à la question 32.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 31. Lorsque vous avez bénéficié d'une ou plusieurs promotions, comment avez-vous obtenu ce(s) changement(s) de corps ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 31. Lorsque vous avez bénéficié d'une ou plusieurs promotions, comment avez-vous obtenu ce(s) changement(s) de corps ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Plusieurs réponses possibles.</fo:inline>
          </fo:block>
          <fo:block id="RAISPROMO" page-break-inside="avoid">
@@ -2936,14 +2980,14 @@
                                font-size="10pt"
                                padding-left="1mm"
                                text-align="justify">Autre</fo:block>
-                     <fo:block color="black"
+                     <fo:block page-break-inside="avoid"
+                               keep-with-next="always"
+                               keep-together.within-column="always"
+                               color="black"
                                font-weight="bold"
                                font-size="10pt"
                                padding="1mm"
-                               text-align="justify"
-                               page-break-inside="avoid"
-                               keep-with-next="always"
-                               keep-together.within-column="always">
+                               text-align="justify">
                         <fo:inline>
                            <fo:external-graphic src="arrow_details.png"/>Précisez :</fo:inline>
                      </fo:block>
@@ -2959,26 +3003,26 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block background-color="#CCCCCC"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   background-color="#CCCCCC"
                    color="black"
                    font-weight="bold"
                    margin-bottom="9pt"
                    font-size="12pt"
                    text-align="left"
                    space-before="6mm"
-                   space-before.conditionality="discard"
-                   page-break-inside="avoid"
+                   space-before.conditionality="discard">V.C - ORGANISATION DU TRAVAIL ET INTERRUPTIONS DE CARRIÈRE</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">V.C - ORGANISATION DU TRAVAIL ET INTERRUPTIONS DE CARRIÈRE</fo:block>
-         <fo:block color="black"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 32. Depuis votre entrée dans la fonction publique, avez-vous déjà travaillé à temps partiel ou non complet ?* </fo:block>
+                   text-align="justify">➡ 32. Depuis votre entrée dans la fonction publique, avez-vous déjà travaillé à temps partiel ou non complet ?* </fo:block>
          <fo:block id="TPSPART" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -3011,13 +3055,13 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -3038,24 +3082,24 @@
                          text-align="justify">Si non, passez à la question 35.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 33. Qui a été à l'initiative de cette demande de temps partiel ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 33. Qui a été à l'initiative de cette demande de temps partiel ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Plusieurs réponses possibles si plusieurs temps partiels ou non complets pendant la carrière.</fo:inline>
          </fo:block>
          <fo:block id="RAISON_TP" page-break-inside="avoid">
@@ -3092,24 +3136,24 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 34. Indiquez la durée totale de travail à temps partiel ou non complet, même approximativement :</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 34. Indiquez la durée totale de travail à temps partiel ou non complet, même approximativement :</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Répondez en nombre d'années et de mois. Exemple : 3 ans et 6 mois.</fo:inline>
          </fo:block>
          <fo:block id="DUREETP" page-break-inside="avoid">
@@ -3128,24 +3172,24 @@
                </fo:block>
             </fo:inline>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 35. Sur votre poste actuel, êtes-vous en télétravail ?* </fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 35. Sur votre poste actuel, êtes-vous en télétravail ?* </fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Les enseignants ne sont pas concernés par cette question.</fo:inline>
          </fo:block>
          <fo:block id="TELETRAV" page-break-inside="avoid">
@@ -3222,15 +3266,15 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 36. Depuis votre entrée dans la fonction publique, avez-vous déjà interrompu votre carrière sur une période d’au moins 6 mois consécutifs ?* </fo:block>
+                   text-align="justify">➡ 36. Depuis votre entrée dans la fonction publique, avez-vous déjà interrompu votre carrière sur une période d’au moins 6 mois consécutifs ?* </fo:block>
          <fo:block page-break-inside="avoid" id="INTERRUPTION">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
@@ -3243,13 +3287,13 @@
                       space-after="5mm">
                <fo:table-body>
                   <fo:table-row border-color="black">
-                     <fo:table-cell border-color="black"
+                     <fo:table-cell number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    border-color="black"
                                     border-style="solid"
                                     text-align="left"
                                     padding-left="1mm"
                                     padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
                                     border="0mm"
                                     padding="0mm">
                         <fo:block color="black"
@@ -3289,13 +3333,13 @@
                      </fo:table-cell>
                   </fo:table-row>
                   <fo:table-row border-color="black">
-                     <fo:table-cell border-color="black"
+                     <fo:table-cell number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    border-color="black"
                                     border-style="solid"
                                     text-align="left"
                                     padding-left="1mm"
                                     padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
                                     border="0mm"
                                     padding="0mm">
                         <fo:block color="black"
@@ -3334,13 +3378,13 @@
                      </fo:table-cell>
                   </fo:table-row>
                   <fo:table-row border-color="black">
-                     <fo:table-cell border-color="black"
+                     <fo:table-cell number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    border-color="black"
                                     border-style="solid"
                                     text-align="left"
                                     padding-left="1mm"
                                     padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
                                     border="0mm"
                                     padding="0mm">
                         <fo:block color="black"
@@ -3381,13 +3425,13 @@
                </fo:table-body>
             </fo:table>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -3408,24 +3452,24 @@
                          text-align="justify">Si vous avez interrompu votre carrière pour une des raisons ci-dessus, précisez la durée de cette ou de ces interruptions, sinon passez à la question 40.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 37. Pendant combien de temps avez-vous interrompu votre carrière pour vous occuper de vos enfants ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 37. Pendant combien de temps avez-vous interrompu votre carrière pour vous occuper de vos enfants ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Répondez en nombre d'années et de mois. Exemple : 3 ans et 6 mois</fo:inline>.</fo:block>
          <fo:block id="DUREEINTERR_1" page-break-inside="avoid">
             <fo:inline>
@@ -3443,24 +3487,24 @@
                </fo:block>
             </fo:inline>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 38. Pendant combien de temps avez-vous interrompu votre carrière pour travailler hors de la fonction publique ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 38. Pendant combien de temps avez-vous interrompu votre carrière pour travailler hors de la fonction publique ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Répondez en nombre d'années et de mois. Exemple : 3 ans et 6 mois.</fo:inline>
          </fo:block>
          <fo:block id="DUREEINTERR_2" page-break-inside="avoid">
@@ -3479,24 +3523,24 @@
                </fo:block>
             </fo:inline>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 39. Pendant combien de temps avez-vous interrompu votre carrière pour une autre raison (hors formations) ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 39. Pendant combien de temps avez-vous interrompu votre carrière pour une autre raison (hors formations) ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Répondez en nombre d'années et de mois. Exemple : 3 ans et 6 mois.</fo:inline>
          </fo:block>
          <fo:block id="DUREEINTERR_3" page-break-inside="avoid">
@@ -3515,7 +3559,10 @@
                </fo:block>
             </fo:inline>
          </fo:block>
-         <fo:block background-color="#666666"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   background-color="#666666"
                    color="white"
                    font-weight="bold"
                    margin-bottom="9pt"
@@ -3524,19 +3571,16 @@
                    border-style="solid"
                    space-before="10mm"
                    space-before.conditionality="discard"
-                   text-align="left"
-                   page-break-inside="avoid"
+                   text-align="left">VI - VOTRE TEMPS DE TRAVAIL, VOS CONGÉS ET ABSENCES EN 2018</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">VI - VOTRE TEMPS DE TRAVAIL, VOS CONGÉS ET ABSENCES EN 2018</fo:block>
-         <fo:block color="black"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 40. Êtes-vous enseignant du primaire ou du secondaire ?</fo:block>
+                   text-align="justify">➡ 40. Êtes-vous enseignant du primaire ou du secondaire ?</fo:block>
          <fo:block id="INDIC_ENSEIGN" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -3583,13 +3627,13 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -3610,35 +3654,35 @@
                          text-align="justify">Si non ou si vous bénéficiez d'une décharge totale, passez à la question 48.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block background-color="#CCCCCC"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   background-color="#CCCCCC"
                    color="black"
                    font-weight="bold"
                    margin-bottom="9pt"
                    font-size="12pt"
                    text-align="left"
                    space-before="6mm"
-                   space-before.conditionality="discard"
-                   page-break-inside="avoid"
+                   space-before.conditionality="discard">VI.A - VOUS ÊTES ENSEIGNANT DU PRIMAIRE OU DU SECONDAIRE (SANS DÉCHARGE TOTALE)</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">VI.A - VOUS ÊTES ENSEIGNANT DU PRIMAIRE OU DU SECONDAIRE (SANS DÉCHARGE TOTALE)</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">Les questions 41 à 47 portent sur l'année scolaire 2018-2019.</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">Les questions 41 à 47 portent sur l'année scolaire 2018-2019.</fo:block>
-         <fo:block color="black"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 41. Étiez-vous affecté sur plusieurs établissements en même temps ?</fo:block>
+                   text-align="justify">➡ 41. Étiez-vous affecté sur plusieurs établissements en même temps ?</fo:block>
          <fo:block id="PLS_ETAB" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -3671,15 +3715,15 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 42. En tenant compte de tous vos postes occupés, quel était votre temps de travail ?* </fo:block>
+                   text-align="justify">➡ 42. En tenant compte de tous vos postes occupés, quel était votre temps de travail ?* </fo:block>
          <fo:block id="TPS_TRAV" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -3712,26 +3756,26 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block font-size="10pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    space-before="20pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-weight="bold">Durant une semaine type de travail (semaine sans absence ou jour férié), hors vacances scolaires :</fo:inline>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 43. Combien de temps avez-vous consacré à l'enseignement ?</fo:block>
+                   text-align="justify">➡ 43. Combien de temps avez-vous consacré à l'enseignement ?</fo:block>
          <fo:block id="NBHEURPROF" page-break-inside="avoid">
             <fo:inline>
                <fo:block color="black"
@@ -3748,15 +3792,15 @@
                </fo:block>
             </fo:inline>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 44. Combien de temps approximativement avez-vous consacré à la préparation des cours et à la correction des copies ?</fo:block>
+                   text-align="justify">➡ 44. Combien de temps approximativement avez-vous consacré à la préparation des cours et à la correction des copies ?</fo:block>
          <fo:block id="NBHEURPREP" page-break-inside="avoid">
             <fo:inline>
                <fo:block color="black"
@@ -3773,15 +3817,15 @@
                </fo:block>
             </fo:inline>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 45. Combien de temps approximativement avez-vous consacré à d’autres tâches liées à votre métier d’enseignant (réunions avec les parents, conseils des professeurs, activités périscolaires, formation, décharge partielle…) ?</fo:block>
+                   text-align="justify">➡ 45. Combien de temps approximativement avez-vous consacré à d’autres tâches liées à votre métier d’enseignant (réunions avec les parents, conseils des professeurs, activités périscolaires, formation, décharge partielle…) ?</fo:block>
          <fo:block id="NBHEURAUTRE" page-break-inside="avoid">
             <fo:inline>
                <fo:block color="black"
@@ -3798,46 +3842,46 @@
                </fo:block>
             </fo:inline>
          </fo:block>
-         <fo:block font-size="10pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    space-before="20pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-weight="bold">Pendant les vacances scolaires, combien de temps avez-vous consacré à des activités en rapport avec l'exercice de votre métier d'enseignant :</fo:inline>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 46. En moyenne, pendant une semaine de vacances hors congés d'été ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 46. En moyenne, pendant une semaine de vacances hors congés d'été ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Si vous y avez consacré une demi-journée, indiquez 0.5</fo:inline>
          </fo:block>
          <fo:block id="TPS_PREP_VAC" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline> , </fo:inline>
                   <fo:external-graphic src="mask_number.png"/>
@@ -3845,35 +3889,35 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 47. En moyenne, pendant les congés d'été ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 47. En moyenne, pendant les congés d'été ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Si vous y avez consacré une demi-journée, indiquez 0.5</fo:inline>
          </fo:block>
          <fo:block id="TPS_PREP_ETE" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline> , </fo:inline>
@@ -3882,13 +3926,13 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -3909,57 +3953,57 @@
                          text-align="justify">Passez à la question 57.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block background-color="#CCCCCC"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   background-color="#CCCCCC"
                    color="black"
                    font-weight="bold"
                    margin-bottom="9pt"
                    font-size="12pt"
                    text-align="left"
                    space-before="6mm"
-                   space-before.conditionality="discard"
-                   page-break-inside="avoid"
+                   space-before.conditionality="discard">VI.B - VOUS N'ÊTES PAS ENSEIGNANT DU PRIMAIRE OU DU SECONDAIRE (OU EN CAS DE DÉCHARGE TOTALE)</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">VI.B - VOUS N'ÊTES PAS ENSEIGNANT DU PRIMAIRE OU DU SECONDAIRE (OU EN CAS DE DÉCHARGE TOTALE)</fo:block>
-         <fo:block color="black"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 48. Quelle est votre durée hebdomadaire de travail habituelle ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 48. Quelle est votre durée hebdomadaire de travail habituelle ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Indiquez ici le temps de travail réel effectif (et non le nombre d'heures légales).</fo:inline>
          </fo:block>
-         <fo:block font-size="10pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">En cas de cycle ou de modulation, indiquez la durée moyenne.</fo:inline>
          </fo:block>
-         <fo:block font-size="10pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Répondez en nombre d'heures et minutes par semaine.</fo:inline>
          </fo:block>
          <fo:block id="NBHEURHEBDO" page-break-inside="avoid">
@@ -3978,33 +4022,33 @@
                </fo:block>
             </fo:inline>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 49. Combien de jours travaillez-vous habituellement par semaine ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 49. Combien de jours travaillez-vous habituellement par semaine ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Répondez en nombre de jours travaillés par semaine (exemple : 3 ou 3.5)</fo:block>
+                   text-align="justify">Répondez en nombre de jours travaillés par semaine (exemple : 3 ou 3.5)</fo:block>
          <fo:block id="NBJOURHEBDO" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline> , </fo:inline>
                   <fo:external-graphic src="mask_number.png"/>
@@ -4012,15 +4056,15 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block font-size="10pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    space-before="20pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:block>
                <fo:inline font-weight="bold">
                   <fo:inline font-style="italic">Les questions suivantes portent sur vos congés (Questions 50 à 56).</fo:inline>
@@ -4042,45 +4086,45 @@
             </fo:block>
             <fo:block>​ </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 50. En 2018, à combien de jours de congés payés aviez-vous droit au total (congés annuels, RTT, jours de fractionnement) ?* </fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 50. En 2018, à combien de jours de congés payés aviez-vous droit au total (congés annuels, RTT, jours de fractionnement) ?* </fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Ne comptez pas les jours de récupération pour horaires variables.</fo:inline>
          </fo:block>
-         <fo:block font-size="10pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Répondez en nombre de jours ouvrés</fo:inline> (exemple : 25 ou 25.5)</fo:block>
          <fo:block id="NBCGE" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
@@ -4090,34 +4134,34 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 51. Parmi ces jours de congés payés, à combien de jours de RTT aviez-vous droit en 2018 ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 51. Parmi ces jours de congés payés, à combien de jours de RTT aviez-vous droit en 2018 ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Répondez en nombre de jours ouvrés</fo:inline> (exemple : 9 ou 9.5)</fo:block>
          <fo:block id="NBRTT" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline> , </fo:inline>
@@ -4126,45 +4170,45 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 52. Parmi ces jours de congés payés, combien en avez-vous effectivement pris en 2018 (congés annuels, RTT, jours de fractionnement) ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 52. Parmi ces jours de congés payés, combien en avez-vous effectivement pris en 2018 (congés annuels, RTT, jours de fractionnement) ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Ne comptez pas les jours en provenance d'un compte épargne-temps.</fo:inline>
          </fo:block>
-         <fo:block font-size="10pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Répondez en nombre de jours ouvrés</fo:inline> (exemple : 22 ou 22.5)</fo:block>
          <fo:block id="NBCONGPRIS" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
@@ -4174,34 +4218,34 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 53. Parmi ces jours de congés payés, combien de jours avez-vous déposés sur un compte épargne-temps ?* </fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 53. Parmi ces jours de congés payés, combien de jours avez-vous déposés sur un compte épargne-temps ?* </fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Répondez en nombre de jours ouvrés</fo:inline> (exemple : 3 ou 3.5)</fo:block>
          <fo:block id="NBCET" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline> , </fo:inline>
@@ -4210,35 +4254,35 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 54. En 2018, combien de jours avez-vous pris en provenance d'un compte épargne-temps ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 54. En 2018, combien de jours avez-vous pris en provenance d'un compte épargne-temps ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Répondez en nombre de jours ouvrés (exemple : 3 ou 3.5)</fo:inline>
          </fo:block>
          <fo:block id="NBCET_PRIS" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
@@ -4248,45 +4292,45 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 55. Au 31 décembre 2018, au total, combien de jours avez-vous en stock sur votre (vos) compte(s) épargne-temps ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 55. Au 31 décembre 2018, au total, combien de jours avez-vous en stock sur votre (vos) compte(s) épargne-temps ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Tenez compte des jours déposés en 2019 au titre de l'année 2018.</fo:inline>
          </fo:block>
-         <fo:block font-size="10pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Répondez en nombre de jours ouvrés</fo:inline> (exemple : 10 ou 10.5)</fo:block>
          <fo:block id="STOCK_CET" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
@@ -4296,34 +4340,34 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 56. En 2018, combien avez-vous pris de jours de récupération pour horaires variables ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 56. En 2018, combien avez-vous pris de jours de récupération pour horaires variables ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Répondez en nombre de jours ouvrés</fo:inline> (exemple : 4 ou 4.5)</fo:block>
          <fo:block id="JOURSRECUP" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline> , </fo:inline>
@@ -4332,57 +4376,57 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block background-color="#CCCCCC"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   background-color="#CCCCCC"
                    color="black"
                    font-weight="bold"
                    margin-bottom="9pt"
                    font-size="12pt"
                    text-align="left"
                    space-before="6mm"
-                   space-before.conditionality="discard"
-                   page-break-inside="avoid"
+                   space-before.conditionality="discard">VI.C - POUR TOUS - ABSENCES</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">VI.C - POUR TOUS - ABSENCES</fo:block>
-         <fo:block color="black"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 57. En 2018, à l'exclusion des congés annuels, RTT et jours de fractionnement, combien de jours avez-vous été absent (exemples : pour maladie, congés maternité ou paternité, accident ou maladie professionnelle, raisons familiales ou personnelles, garde d’enfants, jours de grève, etc.) ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 57. En 2018, à l'exclusion des congés annuels, RTT et jours de fractionnement, combien de jours avez-vous été absent (exemples : pour maladie, congés maternité ou paternité, accident ou maladie professionnelle, raisons familiales ou personnelles, garde d’enfants, jours de grève, etc.) ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Indiquez le nombre de jours même approximativement.</fo:inline>
          </fo:block>
-         <fo:block font-size="10pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Répondez en nombre de jours ouvrés (exemple : 4 ou 4.5)</fo:inline>
          </fo:block>
          <fo:block id="NBJOURSABS" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
@@ -4392,7 +4436,10 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block background-color="#666666"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   background-color="#666666"
                    color="white"
                    font-weight="bold"
                    margin-bottom="9pt"
@@ -4401,19 +4448,16 @@
                    border-style="solid"
                    space-before="10mm"
                    space-before.conditionality="discard"
-                   text-align="left"
-                   page-break-inside="avoid"
+                   text-align="left">VII - VOTRE FORMATION CONTINUE</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">VII - VOTRE FORMATION CONTINUE</fo:block>
-         <fo:block color="black"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 58. Depuis que vous avez commencé à exercer un emploi rémunéré, avez-vous suivi une période de formation à temps plein qui s’étalait sur 6 mois consécutifs ou plus ?</fo:block>
+                   text-align="justify">➡ 58. Depuis que vous avez commencé à exercer un emploi rémunéré, avez-vous suivi une période de formation à temps plein qui s’étalait sur 6 mois consécutifs ou plus ?</fo:block>
          <fo:block id="FORMATION" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -4446,13 +4490,13 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -4473,15 +4517,15 @@
                          text-align="justify">Si non, passez à la question 61.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 59. Ces formations préparaient-elles, ou étaient-elles consécutives à un concours, à un examen professionnel, à un diplôme (ou à un titre homologué qui a favorisé une promotion personnelle ou une reconversion) ?</fo:block>
+                   text-align="justify">➡ 59. Ces formations préparaient-elles, ou étaient-elles consécutives à un concours, à un examen professionnel, à un diplôme (ou à un titre homologué qui a favorisé une promotion personnelle ou une reconversion) ?</fo:block>
          <fo:block id="FORMRAISON" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -4514,13 +4558,13 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -4541,24 +4585,24 @@
                          text-align="justify">Si non, passez à la question 61.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 60. Indiquez la durée cumulée de ces formations à temps plein*, même approximativement :</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 60. Indiquez la durée cumulée de ces formations à temps plein*, même approximativement :</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Répondez en nombre d'années et de mois. Exemple : 3 ans et 6 mois.</fo:inline>
          </fo:block>
          <fo:block id="DUREEFORM" page-break-inside="avoid">
@@ -4577,7 +4621,10 @@
                </fo:block>
             </fo:inline>
          </fo:block>
-         <fo:block background-color="#666666"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   background-color="#666666"
                    color="white"
                    font-weight="bold"
                    margin-bottom="9pt"
@@ -4586,19 +4633,16 @@
                    border-style="solid"
                    space-before="10mm"
                    space-before.conditionality="discard"
-                   text-align="left"
-                   page-break-inside="avoid"
+                   text-align="left">VIII - VOTRE SITUATION FAMILIALE, VOS ORIGINES GÉOGRAPHIQUES ET FAMILIALES</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">VIII - VOTRE SITUATION FAMILIALE, VOS ORIGINES GÉOGRAPHIQUES ET FAMILIALES</fo:block>
-         <fo:block color="black"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 61. Êtes-vous en couple ?</fo:block>
+                   text-align="justify">➡ 61. Êtes-vous en couple ?</fo:block>
          <fo:block id="COUPLE" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -4631,13 +4675,13 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -4658,15 +4702,15 @@
                          text-align="justify">Si non, passez à la question 63.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 62. Votre conjoint(e) ou partenaire travaille-t-il (elle) dans la fonction publique actuellement ?</fo:block>
+                   text-align="justify">➡ 62. Votre conjoint(e) ou partenaire travaille-t-il (elle) dans la fonction publique actuellement ?</fo:block>
          <fo:block id="EMPLOI_CONJ" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -4713,15 +4757,15 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 63. Avez-vous des enfants à charge ?</fo:block>
+                   text-align="justify">➡ 63. Avez-vous des enfants à charge ?</fo:block>
          <fo:block id="ENFANTS" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -4754,13 +4798,13 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -4781,48 +4825,48 @@
                          text-align="justify">Si non, passez à la question 67.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 64. Combien avez-vous d'enfants à charge ?</fo:block>
+                   text-align="justify">➡ 64. Combien avez-vous d'enfants à charge ?</fo:block>
          <fo:block id="NBENFANTS" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 65. Quelle est l'année de naissance du plus jeune (ou de l'enfant s'il n'y en a qu'un) ?</fo:block>
+                   text-align="justify">➡ 65. Quelle est l'année de naissance du plus jeune (ou de l'enfant s'il n'y en a qu'un) ?</fo:block>
          <fo:block id="ANNEEJEUNE" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
@@ -4831,13 +4875,13 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -4858,24 +4902,24 @@
                          text-align="justify">Si vous n'avez qu'un enfant à charge, passez à la question 67.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 66. Quelle est l'année de naissance du plus âgé ?</fo:block>
+                   text-align="justify">➡ 66. Quelle est l'année de naissance du plus âgé ?</fo:block>
          <fo:block id="ANNEEAINE" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
+               <fo:block padding-bottom="0mm"
+                         padding-top="0mm"
+                         color="black"
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+                         text-align="justify">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
@@ -4884,24 +4928,24 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 67. Quelle est votre nationalité ?</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 67. Quelle est votre nationalité ?</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Une seule réponse possible. En cas de double nationalité, cochez en priorité "né français" ou "devenu français".</fo:inline>
          </fo:block>
          <fo:block id="NATIONALITE" page-break-inside="avoid">
@@ -4950,13 +4994,13 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -4977,24 +5021,24 @@
                          text-align="justify">Si vous êtes né(e) français(e), passez à la question 69.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 68. Si vous n’êtes pas Français de naissance, précisez votre nationalité à la naissance :</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 68. Si vous n’êtes pas Français de naissance, précisez votre nationalité à la naissance :</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Exemples : Italienne, Japonaise, Algérienne ...</fo:inline>
          </fo:block>
          <fo:block id="NATIONAISS" page-break-inside="avoid">
@@ -5032,15 +5076,15 @@
                <fo:external-graphic src="mask_number.png"/>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 69. Où êtes-vous né ?</fo:block>
+                   text-align="justify">➡ 69. Où êtes-vous né ?</fo:block>
          <fo:block id="LIEUNAISS" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -5087,13 +5131,13 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block space-before="2pt"
+         <fo:block page-break-inside="avoid"
+                   keep-with-previous="always"
+                   space-before="2pt"
                    space-after="2pt"
                    start-indent="5%"
                    end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+                   background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -5114,24 +5158,24 @@
                          text-align="justify">Si vous êtes né(e) en France, passez à la question 71.</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
+                   text-align="justify">➡ 70. Si vous n'êtes pas né en France, précisez votre pays de naissance :</fo:block>
+         <fo:block page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 70. Si vous n'êtes pas né en France, précisez votre pays de naissance :</fo:block>
-         <fo:block font-size="10pt"
+                   keep-together.within-column="always"
+                   font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
                    margin-bottom="3pt"
                    margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+                   text-align="justify">
             <fo:inline font-style="italic">Exemples : Italie, Japon, Algérie...</fo:inline>
          </fo:block>
          <fo:block id="PAYSNAISS" page-break-inside="avoid">
@@ -5169,15 +5213,15 @@
                <fo:external-graphic src="mask_number.png"/>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 71. Où sont nés vos parents ?</fo:block>
+                   text-align="justify">➡ 71. Où sont nés vos parents ?</fo:block>
          <fo:block id="LIEUNAISSPAR" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -5238,15 +5282,15 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block color="black"
+         <fo:block page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always"
+                   color="black"
                    font-weight="bold"
                    font-size="10pt"
                    margin-top="9pt"
                    margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 72. Est-ce que vos parents travaillent ou ont travaillé dans la fonction publique ?* </fo:block>
+                   text-align="justify">➡ 72. Est-ce que vos parents travaillent ou ont travaillé dans la fonction publique ?* </fo:block>
          <fo:block page-break-inside="avoid" id="EMPL_PAR">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
@@ -5260,13 +5304,13 @@
                <fo:table-body>
                   <fo:table-row height="20mm" border-color="black">
                      <fo:table-cell width="25mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
                                     border-color="black"
                                     border-style="solid"
                                     text-align="left"
                                     padding-left="1mm"
                                     padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
                                     border="0mm"
                                     padding="0mm">
                         <fo:block color="black"
@@ -5321,13 +5365,13 @@
                   </fo:table-row>
                   <fo:table-row height="20mm" border-color="black">
                      <fo:table-cell width="25mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
                                     border-color="black"
                                     border-style="solid"
                                     text-align="left"
                                     padding-left="1mm"
                                     padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
                                     border="0mm"
                                     padding="0mm">
                         <fo:block color="black"

@@ -203,6 +203,7 @@
             <AddFilterResult>false</AddFilterResult>
             <MissingVar>false</MissingVar>
             <Pagination>question</Pagination>
+            <UnusedVars>false</UnusedVars>
         </lunatic-xml-parameters>
 
         <fodt-parameters/>
