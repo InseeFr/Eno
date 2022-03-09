@@ -1,13 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.insee.eno</groupId>
 	<artifactId>eno-core</artifactId>
 
 
 	<version>2.3.7-dev-refactoring</version>
-
 
 
 	<packaging>jar</packaging>
@@ -57,7 +54,7 @@
 
 		<saxon.version>11.2</saxon.version>
 		<fop.version>2.7</fop.version>
-		<xalan.version>2.7.2</xalan.version>
+
 		<slf4j.version>1.7.36</slf4j.version>
 
 		<eclipse.version>2.6.0</eclipse.version>
@@ -75,13 +72,13 @@
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 
-					<!-- Configuration Sonar -->
-		<jacoco.version>0.8.7</jacoco.version>	
+		<!-- Configuration Sonar -->
+		<jacoco.version>0.8.7</jacoco.version>
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 		<sonar.projectName>Eno-WS</sonar.projectName>
-        <sonar.language>java</sonar.language>
+		<sonar.language>java</sonar.language>
 		<argLine>-Xms256m -Xmx512m -XX:MaxPermSize=128m -ea -Dfile.encoding=UTF-8</argLine>
 	</properties>
 
@@ -91,6 +88,12 @@
 			<groupId>net.sf.saxon</groupId>
 			<artifactId>Saxon-HE</artifactId>
 			<version>${saxon.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -370,39 +373,39 @@
 							<autoReleaseAfterClose>true</autoReleaseAfterClose>
 						</configuration>
 					</plugin>
-										 <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.version}</version>
-                <executions>
-                    <!-- Prepare the property pointing to the JaCoCo runtime agent which is
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>${jacoco.version}</version>
+						<executions>
+							<!-- Prepare the property pointing to the JaCoCo runtime agent which is
                          passed as VM argument when the Maven Surefire plugin is executed. -->
-                    <execution>
-                        <id>pre-unit-test</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                        <configuration>
-                            <!-- Set the name of the property containing the settings for JaCoCo
+							<execution>
+								<id>pre-unit-test</id>
+								<goals>
+									<goal>prepare-agent</goal>
+								</goals>
+								<configuration>
+									<!-- Set the name of the property containing the settings for JaCoCo
                                  runtime agent. -->
-                            <propertyName>surefireArgLine</propertyName>
-                            <append>true</append>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>post-unit-test</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.9.1.2184</version>
-            </plugin>
+									<propertyName>surefireArgLine</propertyName>
+									<append>true</append>
+								</configuration>
+							</execution>
+							<execution>
+								<id>post-unit-test</id>
+								<phase>test</phase>
+								<goals>
+									<goal>report</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.sonarsource.scanner.maven</groupId>
+						<artifactId>sonar-maven-plugin</artifactId>
+						<version>3.9.1.2184</version>
+					</plugin>
 				</plugins>
 			</build>
 		</profile>
