@@ -337,7 +337,10 @@
     <xsl:template match="h:responseDependencies"/>
 
     <xsl:template match="h:label">
-        <label><xsl:value-of select="normalize-space(.)"/></label>
+        <label>
+            <value><xsl:value-of select="normalize-space(./h:value)"/></value>
+            <type><xsl:value-of select="h:type"/></type>
+        </label>
     </xsl:template>
 
     <xsl:template match="h:cells">
