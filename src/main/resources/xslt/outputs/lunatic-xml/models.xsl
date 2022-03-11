@@ -319,7 +319,7 @@
 		<xsl:variable name="questionName" select="enolunatic:get-question-name($source-context,$languages[1])"/>
 		<xsl:variable name="missingResponseName" select="concat($questionName,'_MISSING')"/>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
-		<xsl:variable name="labelType" select="enolunatic:get-variable-type()"/>
+		<xsl:variable name="labelType" select="enolunatic:get-label-type()"/>
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
 		<xsl:variable name="dependenciesVariables" as="xs:string*">
 			<xsl:for-each select="$labelDependencies">
