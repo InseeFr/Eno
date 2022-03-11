@@ -729,4 +729,14 @@
         </xsl:call-template>
     </xsl:function>
     
+    <!-- This function will return for a given label its type : 
+    STRING : if it is a plain text string needing no treatment 
+    VTL : if it contains a VTL expression that needs to be evaluated
+    MD : if it contains markdown that needs to be evaluated
+    VTL|MD : if it contains both a VTL expression and markdown that need to be evaluated-->
+    <!-- Right now, it is simply a stub always returning VTL|MD until we decide how to implement the type information -->
+    <xsl:function name="enolunatic:get-label-type">
+        <xsl:value-of select="'VTL|MD'"/>
+    </xsl:function>
+    
 </xsl:stylesheet>

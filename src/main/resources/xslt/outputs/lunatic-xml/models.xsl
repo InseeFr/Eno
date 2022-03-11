@@ -78,6 +78,7 @@
 		<xsl:variable name="componentType" select="'Loop'"/>
 		<xsl:variable name="isGeneratedLoop" select="enolunatic:is-linked-loop($source-context)" as="xs:boolean"/>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
+		<xsl:variable name="labelType" select="enolunatic:get-label-type()"/>
 		
 		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
 		<!-- keep idLoop of the parent Loop if exists -->
@@ -121,7 +122,10 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:if test="$minimumOccurrences!=$maximumOccurrences and $label!=''">
-						<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/></label>
+						<label>
+							<value><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/></value>
+							<type><xsl:value-of select="$labelType"/></type>
+						</label>
 					</xsl:if>
 					<lines>
 						<xsl:attribute name="min" select="if ($minimumOccurrences!='') then enolunatic:replace-all-variables-with-business-name($source-context,$minimumOccurrences) else 0"  />
@@ -130,7 +134,10 @@
 				</xsl:otherwise>
 			</xsl:choose>
 			<xsl:if test="$minimumOccurrences!=$maximumOccurrences and $label!=''">
-				<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/></label>
+				<label>
+					<value><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/></value>
+					<type><xsl:value-of select="$labelType"/></type>
+				</label>
 			</xsl:if>
 			<xsl:copy-of select="enolunatic:add-condition-filter($filterCondition,$filterDependencies)"/>
 			<xsl:if test="$sequenceParent">
@@ -177,6 +184,7 @@
 		</xsl:variable>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
 		<xsl:variable name="finalLabel" select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/>
+		<xsl:variable name="labelType" select="enolunatic:get-label-type()"/>
 		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
 		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
 		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context, $filter)"/>
@@ -192,7 +200,10 @@
 			<xsl:choose>
 				<xsl:when test="self::Module">
 					<sequence id="{$id}">
-						<label><xsl:value-of select="$finalLabel"/></label>
+						<label>
+							<value><xsl:value-of select="$finalLabel"/></value>
+							<type><xsl:value-of select="$labelType"/></type>
+						</label>
 					</sequence>
 				</xsl:when>
 				<xsl:when test="self::SubModule"><xsl:copy-of select="$sequenceParent"/></xsl:when>
@@ -202,14 +213,20 @@
 			<xsl:choose>
 				<xsl:when test="self::SubModule">
 					<subSequence id="{$id}">
-						<label><xsl:value-of select="$finalLabel"/></label>
+						<label>
+							<value><xsl:value-of select="$finalLabel"/></value>
+							<type><xsl:value-of select="$labelType"/></type>
+						</label>
 					</subSequence>
 				</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
 
 		<components xsi:type="{$componentType-Sequence}" componentType="{$componentType-Sequence}" id="{$id}">
-			<label><xsl:value-of select="$finalLabel"/></label>
+			<label>
+				<value><xsl:value-of select="$finalLabel"/></value>
+				<type><xsl:value-of select="$labelType"/></type>
+			</label>
 			<xsl:copy-of select="enolunatic:getInstructionForQuestion($source-context,.)"/>
 			<xsl:copy-of select="enolunatic:add-condition-filter($filterCondition,$filterDependencies)"/>
 			<hierarchy>				
