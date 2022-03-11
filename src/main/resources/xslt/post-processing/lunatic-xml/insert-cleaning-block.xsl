@@ -48,6 +48,7 @@
     <!-- We search in every component which has a collected response associated -->
     <!-- (We don't care about components without responses because they don't need cleaning) -->
     <xsl:variable name="untidiedList">
+      <!-- 1) First we take care of the basic components which have one response (e.g. RadioButton, Input etc.) -->
       <xsl:for-each select="$root//h:components[h:response]">
         <!-- If there are no bindingDependencies in the conditionFilter, we don't care -->
         <xsl:if test="h:conditionFilter/h:bindingDependencies">
@@ -62,6 +63,23 @@
             </xsl:element>
           </xsl:for-each>
         </xsl:if>
+      </xsl:for-each>
+      <!-- 2) Then we take care of the components containg cells with multiple responses (e.g. Tables) -->
+      <xsl:for-each select="$root//h:components[h:cells]">
+        <!-- We need to go through each bindingDependencies to add it as a variable lauching cleaning for our response -->
+        <xsl:for-each select="h:conditionFilter/h:bindingDependencies">
+          <!-- We get the expression of the filter that activates cleaning in a variable for later use -->
+          <xsl:variable name="filterValue" select="../h:value"/>
+          <xsl:element name="{.}">
+            <!-- We iterate through the cells with responses that need cleaning to create elements -->
+            <xsl:for-each select="../../h:cells//h:response">
+              <xsl:element name="{@name}">
+                <!-- We retrieve the expression -->
+                <xsl:value-of select="$filterValue"/>
+              </xsl:element>
+            </xsl:for-each>
+          </xsl:element>
+        </xsl:for-each>
       </xsl:for-each>
     </xsl:variable>
     <xsl:copy-of select="enolunatic:tidying-cleaning-list($untidiedList)"/>
