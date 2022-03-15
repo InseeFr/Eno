@@ -29,6 +29,7 @@
       </declarations>
       <conditionFilter>
          <value>true</value>
+         <type>VTL|MD</type>
       </conditionFilter>
       <hierarchy>
          <sequence id="j6p0ti5h" page="1">
@@ -50,6 +51,7 @@
          </label>
          <conditionFilter>
             <value>true</value>
+            <type>VTL|MD</type>
          </conditionFilter>
          <hierarchy>
             <sequence id="j6p0ti5h" page="1">
@@ -81,6 +83,7 @@
          </declarations>
          <conditionFilter>
             <value>true</value>
+            <type>VTL|MD</type>
          </conditionFilter>
          <hierarchy>
             <sequence id="j6p0ti5h" page="1">
@@ -104,6 +107,7 @@
          </label>
          <conditionFilter>
             <value>true</value>
+            <type>VTL|MD</type>
          </conditionFilter>
          <hierarchy>
             <sequence id="j6p0ti5h" page="1">
@@ -124,6 +128,7 @@
          </label>
          <conditionFilter>
             <value>(READY)</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -152,6 +157,7 @@
             </label>
             <conditionFilter>
                <value>(READY)</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -185,11 +191,18 @@
             </label>
             <conditionFilter>
                <value>(READY)</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <controls id="j6q9h8tj-CI-0" criticality="WARN">
-               <control>not(SEASON_NUMBER = 0)</control>
-               <errorMessage>"Please enter a season number"</errorMessage>
+               <control>
+                  <value>not(SEASON_NUMBER = 0)</value>
+                  <type>VTL|MD</type>
+               </control>
+               <errorMessage>
+                  <value>"Please enter a season number"</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
                <bindingDependencies>SEASON_NUMBER</bindingDependencies>
             </controls>
             <hierarchy>
@@ -230,6 +243,7 @@
             </declarations>
             <conditionFilter>
                <value>(READY)</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -270,6 +284,7 @@
             </declarations>
             <conditionFilter>
                <value>(READY)</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -311,6 +326,7 @@
             </declarations>
             <conditionFilter>
                <value>(READY)</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -345,6 +361,7 @@
             </label>
             <conditionFilter>
                <value>(READY)</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -379,6 +396,7 @@
             </label>
             <conditionFilter>
                <value>(READY)</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -413,6 +431,7 @@
             </label>
             <conditionFilter>
                <value>(READY)</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -447,6 +466,7 @@
             </label>
             <conditionFilter>
                <value>(READY)</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -481,6 +501,7 @@
             </label>
             <conditionFilter>
                <value>(READY)</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -521,6 +542,7 @@
       </declarations>
       <conditionFilter>
          <value>(READY)</value>
+         <type>VTL|MD</type>
          <bindingDependencies>READY</bindingDependencies>
       </conditionFilter>
       <hierarchy>
@@ -550,6 +572,7 @@
          </declarations>
          <conditionFilter>
             <value>(READY)</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -603,6 +626,7 @@
          </declarations>
          <conditionFilter>
             <value>(READY)</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -655,6 +679,7 @@
          </label>
          <conditionFilter>
             <value>(READY)</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -770,6 +795,7 @@
       </label>
       <conditionFilter>
          <value>(READY)</value>
+         <type>VTL|MD</type>
          <bindingDependencies>READY</bindingDependencies>
       </conditionFilter>
       <hierarchy>
@@ -798,6 +824,7 @@
          </declarations>
          <conditionFilter>
             <value>(READY)</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -861,6 +888,7 @@
          </declarations>
          <conditionFilter>
             <value>(READY)</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -996,6 +1024,7 @@
          </label>
          <conditionFilter>
             <value>(READY)</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -1131,6 +1160,7 @@
          </label>
          <conditionFilter>
             <value>(READY)</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -1398,6 +1428,7 @@
       </label>
       <conditionFilter>
          <value>(READY)</value>
+         <type>VTL|MD</type>
          <bindingDependencies>READY</bindingDependencies>
       </conditionFilter>
       <hierarchy>
@@ -1418,6 +1449,7 @@
          </label>
          <conditionFilter>
             <value>(READY)</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -1446,6 +1478,7 @@
             </label>
             <conditionFilter>
                <value>(READY)</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -1471,8 +1504,14 @@
             <bindingDependencies>PERCENTAGE_EXPENSES71</bindingDependencies>
             <bindingDependencies>SUM_EXPENSES</bindingDependencies>
             <controls id="j4nwc63q-CI-0" criticality="INFO">
-               <control>not(PERCENTAGE_EXPENSES11 + PERCENTAGE_EXPENSES21 + PERCENTAGE_EXPENSES31 + PERCENTAGE_EXPENSES41 + PERCENTAGE_EXPENSES51 + PERCENTAGE_EXPENSES61 + PERCENTAGE_EXPENSES71 != 100)</control>
-               <errorMessage>"The sum of percentages is: " || SUM_EXPENSES || " %. The total of percentages must be equal to 100%. "</errorMessage>
+               <control>
+                  <value>not(PERCENTAGE_EXPENSES11 + PERCENTAGE_EXPENSES21 + PERCENTAGE_EXPENSES31 + PERCENTAGE_EXPENSES41 + PERCENTAGE_EXPENSES51 + PERCENTAGE_EXPENSES61 + PERCENTAGE_EXPENSES71  &lt;&gt;  100)</value>
+                  <type>VTL|MD</type>
+               </control>
+               <errorMessage>
+                  <value>"The sum of percentages is: " || SUM_EXPENSES || " %. The total of percentages must be equal to 100%. "</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
                <bindingDependencies>PERCENTAGE_EXPENSES11</bindingDependencies>
                <bindingDependencies>PERCENTAGE_EXPENSES21</bindingDependencies>
                <bindingDependencies>PERCENTAGE_EXPENSES31</bindingDependencies>
@@ -1666,6 +1705,7 @@
             </label>
             <conditionFilter>
                <value>(READY)</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -2009,6 +2049,7 @@
          </label>
          <conditionFilter>
             <value>(READY)</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -2037,6 +2078,7 @@
             </label>
             <conditionFilter>
                <value>(READY)</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -2273,6 +2315,7 @@
          </label>
          <conditionFilter>
             <value>(READY)</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -2309,6 +2352,7 @@
             </declarations>
             <conditionFilter>
                <value>(READY)</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -2538,6 +2582,7 @@
       </label>
       <conditionFilter>
          <value>(READY)</value>
+         <type>VTL|MD</type>
          <bindingDependencies>READY</bindingDependencies>
       </conditionFilter>
       <hierarchy>
@@ -2560,6 +2605,7 @@
          </label>
          <conditionFilter>
             <value>(READY)</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -2603,7 +2649,16 @@
          <bindingDependencies>FAVOURITE_CHAR1_10_1</bindingDependencies>
          <bindingDependencies>FAVOURITE_CHAR2_10_2</bindingDependencies>
          <bindingDependencies>FAVOURITE_CHAR3_10_3</bindingDependencies>
-         <lines min="1" max="10"/>
+         <lines>
+            <min>
+               <value>1</value>
+               <type>VTL|MD</type>
+            </min>
+            <max>
+               <value>10</value>
+               <type>VTL|MD</type>
+            </max>
+         </lines>
          <cells type="header">
             <cells headerCell="true">
                <label>
@@ -3027,6 +3082,7 @@
          </label>
          <conditionFilter>
             <value>(READY)</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -3190,6 +3246,7 @@
          </label>
          <conditionFilter>
             <value>(READY)</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -3417,6 +3474,7 @@
       </label>
       <conditionFilter>
          <value>(READY)</value>
+         <type>VTL|MD</type>
          <bindingDependencies>READY</bindingDependencies>
       </conditionFilter>
       <hierarchy>
@@ -3441,6 +3499,7 @@
          </label>
          <conditionFilter>
             <value>(READY)</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -3468,9 +3527,19 @@
             <value>"Add a character"</value>
             <type>VTL|MD</type>
          </label>
-         <lines min="1" max="NB_CHAR"/>
+         <lines>
+            <min>
+               <value>1</value>
+               <type>VTL|MD</type>
+            </min>
+            <max>
+               <value>NB_CHAR</value>
+               <type>VTL|MD</type>
+            </max>
+         </lines>
          <conditionFilter>
             <value>(READY)</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -3496,6 +3565,7 @@
             </label>
             <conditionFilter>
                <value>(READY)</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -3525,6 +3595,7 @@
                </label>
                <conditionFilter>
                   <value>(READY)</value>
+                  <type>VTL|MD</type>
                   <bindingDependencies>READY</bindingDependencies>
                </conditionFilter>
                <hierarchy>
@@ -3559,6 +3630,7 @@
                </label>
                <conditionFilter>
                   <value>(READY)</value>
+                  <type>VTL|MD</type>
                   <bindingDependencies>READY</bindingDependencies>
                </conditionFilter>
                <hierarchy>
@@ -3586,12 +3658,16 @@
                 componentType="Loop"
                 id="kiq7cbgo"
                 depth="1"
-                iterations="count(NAME_CHAR)"
                 page="35"
                 maxPage="3"
                 paginatedLoop="true">
+      <iterations>
+         <value>count(NAME_CHAR)</value>
+         <type>VTL|MD</type>
+      </iterations>
       <conditionFilter>
          <value>(READY)</value>
+         <type>VTL|MD</type>
          <bindingDependencies>READY</bindingDependencies>
       </conditionFilter>
       <bindingDependencies>NAME_CHAR</bindingDependencies>
@@ -3609,6 +3685,7 @@
          </label>
          <conditionFilter>
             <value>(READY)</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -3632,6 +3709,7 @@
             </label>
             <conditionFilter>
                <value>(READY)</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -3673,6 +3751,7 @@
             </label>
             <conditionFilter>
                <value>(READY)</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -3700,6 +3779,7 @@
       </label>
       <conditionFilter>
          <value>true</value>
+         <type>VTL|MD</type>
       </conditionFilter>
       <hierarchy>
          <sequence id="j6z12s2d" page="36">
@@ -3721,6 +3801,7 @@
          </label>
          <conditionFilter>
             <value>true</value>
+            <type>VTL|MD</type>
          </conditionFilter>
          <hierarchy>
             <sequence id="j6z12s2d" page="36">
@@ -5230,7 +5311,7 @@
          <INPUTED xsi:nil="true"/>
       </values>
    </variables>
-<cleaning>
+   <cleaning>
       <READY>
          <PRODUCER>(READY)</PRODUCER>
          <SEASON_NUMBER>(READY)</SEASON_NUMBER>
@@ -5357,3 +5438,4 @@
       </READY>
    </cleaning>
 </Questionnaire>
+

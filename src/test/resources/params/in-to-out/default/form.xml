@@ -24,6 +24,7 @@
       </declarations>
       <conditionFilter>
          <value>true</value>
+         <type>VTL|MD</type>
       </conditionFilter>
       <hierarchy>
          <sequence id="j6p0ti5h">
@@ -44,6 +45,7 @@
          </label>
          <conditionFilter>
             <value>true</value>
+            <type>VTL|MD</type>
          </conditionFilter>
          <hierarchy>
             <sequence id="j6p0ti5h">
@@ -66,6 +68,7 @@
          </label>
          <conditionFilter>
             <value>true</value>
+            <type>VTL|MD</type>
          </conditionFilter>
          <hierarchy>
             <sequence id="j6p0ti5h">
@@ -88,6 +91,7 @@
          </label>
          <conditionFilter>
             <value>true</value>
+            <type>VTL|MD</type>
          </conditionFilter>
          <hierarchy>
             <sequence id="j6p0ti5h">
@@ -105,6 +109,7 @@
          </label>
          <conditionFilter>
             <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -132,6 +137,7 @@
             </label>
             <conditionFilter>
                <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -164,6 +170,7 @@
             </label>
             <conditionFilter>
                <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -203,6 +210,7 @@
             </declarations>
             <conditionFilter>
                <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -237,6 +245,7 @@
             </label>
             <conditionFilter>
                <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -273,6 +282,7 @@
       </declarations>
       <conditionFilter>
          <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+         <type>VTL|MD</type>
          <bindingDependencies>READY</bindingDependencies>
       </conditionFilter>
       <hierarchy>
@@ -301,6 +311,7 @@
          </declarations>
          <conditionFilter>
             <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -353,6 +364,7 @@
          </declarations>
          <conditionFilter>
             <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -404,6 +416,7 @@
          </label>
          <conditionFilter>
             <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -516,6 +529,7 @@
       </label>
       <conditionFilter>
          <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+         <type>VTL|MD</type>
          <bindingDependencies>READY</bindingDependencies>
       </conditionFilter>
       <hierarchy>
@@ -543,6 +557,7 @@
          </declarations>
          <conditionFilter>
             <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -605,6 +620,7 @@
          </declarations>
          <conditionFilter>
             <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -739,6 +755,7 @@
          </label>
          <conditionFilter>
             <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -873,6 +890,7 @@
          </label>
          <conditionFilter>
             <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -1137,6 +1155,7 @@
       </label>
       <conditionFilter>
          <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+         <type>VTL|MD</type>
          <bindingDependencies>READY</bindingDependencies>
       </conditionFilter>
       <hierarchy>
@@ -1154,6 +1173,7 @@
          </label>
          <conditionFilter>
             <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -1181,6 +1201,7 @@
             </label>
             <conditionFilter>
                <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -1209,9 +1230,15 @@
             <bindingDependencies>PERCENTAGE_EXPENSES101</bindingDependencies>
             <bindingDependencies>SUM_EXPENSES</bindingDependencies>
             <controls id="j4nwc63q-CI-0" criticality="INFO">
-               <control>not(cast(PERCENTAGE_EXPENSES11,number) + cast(PERCENTAGE_EXPENSES21,number) + cast(PERCENTAGE_EXPENSES31,number)+ cast(PERCENTAGE_EXPENSES41,number)+ cast(PERCENTAGE_EXPENSES51,number)+ cast(PERCENTAGE_EXPENSES61,number)+ cast(PERCENTAGE_EXPENSES71,number)+ cast(PERCENTAGE_EXPENSES81,number)+ cast(PERCENTAGE_EXPENSES91,number)+ cast(PERCENTAGE_EXPENSES101,number)!= 100)</control>
-               <errorMessage>"The sum of percentages is: " || cast(cast(SUM_EXPENSES,number),string) || " %. The total of
-                        percentages must be equal to 100%. "</errorMessage>
+               <control>
+                  <value>not(cast(PERCENTAGE_EXPENSES11,number) + cast(PERCENTAGE_EXPENSES21,number) + cast(PERCENTAGE_EXPENSES31,number)+ cast(PERCENTAGE_EXPENSES41,number)+ cast(PERCENTAGE_EXPENSES51,number)+ cast(PERCENTAGE_EXPENSES61,number)+ cast(PERCENTAGE_EXPENSES71,number)+ cast(PERCENTAGE_EXPENSES81,number)+ cast(PERCENTAGE_EXPENSES91,number)+ cast(PERCENTAGE_EXPENSES101,number) &lt;&gt;  100)</value>
+                  <type>VTL|MD</type>
+               </control>
+               <errorMessage>
+                  <value>"The sum of percentages is: " || cast(cast(SUM_EXPENSES,number),string) || " %. The total of
+                        percentages must be equal to 100%. "</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
                <bindingDependencies>PERCENTAGE_EXPENSES11</bindingDependencies>
                <bindingDependencies>PERCENTAGE_EXPENSES21</bindingDependencies>
                <bindingDependencies>PERCENTAGE_EXPENSES31</bindingDependencies>
@@ -1394,6 +1421,7 @@
          </label>
          <conditionFilter>
             <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -1421,6 +1449,7 @@
             </label>
             <conditionFilter>
                <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -1654,6 +1683,7 @@
          </label>
          <conditionFilter>
             <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -1689,6 +1719,7 @@
             </declarations>
             <conditionFilter>
                <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+               <type>VTL|MD</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
@@ -1915,6 +1946,7 @@
       </label>
       <conditionFilter>
          <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+         <type>VTL|MD</type>
          <bindingDependencies>READY</bindingDependencies>
       </conditionFilter>
       <hierarchy>
@@ -1936,6 +1968,7 @@
          </label>
          <conditionFilter>
             <value>(not(cast(READY,integer) &lt;&gt;  1) )</value>
+            <type>VTL|MD</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
@@ -1966,7 +1999,16 @@
          <bindingDependencies>FAVOURITE_CHARACTERS92</bindingDependencies>
          <bindingDependencies>FAVOURITE_CHARACTERS101</bindingDependencies>
          <bindingDependencies>FAVOURITE_CHARACTERS102</bindingDependencies>
-         <lines min="1" max="10"/>
+         <lines>
+            <min>
+               <value>1</value>
+               <type>VTL|MD</type>
+            </min>
+            <max>
+               <value>10</value>
+               <type>VTL|MD</type>
+            </max>
+         </lines>
          <cells type="header">
             <cells headerCell="true">
                <label>
@@ -2130,6 +2172,7 @@
       </label>
       <conditionFilter>
          <value>true</value>
+         <type>VTL|MD</type>
       </conditionFilter>
       <hierarchy>
          <sequence id="j6z12s2d">
@@ -2150,6 +2193,7 @@
          </label>
          <conditionFilter>
             <value>true</value>
+            <type>VTL|MD</type>
          </conditionFilter>
          <hierarchy>
             <sequence id="j6z12s2d">
