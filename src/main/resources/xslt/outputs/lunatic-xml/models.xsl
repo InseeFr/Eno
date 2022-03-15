@@ -120,7 +120,10 @@
 			<xsl:choose>
 				<xsl:when test="$isGeneratedLoop">
 					<xsl:if test="$maximumOccurrences!=''">
-						<xsl:attribute name="iterations" select="enolunatic:replace-all-variables-with-business-name($source-context,$maximumOccurrences)"/>
+						<iterations>
+							<value><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$maximumOccurrences)"/></value>
+							<type><xsl:value-of select="enolunatic:get-label-type()"/></type>
+						</iterations>
 					</xsl:if>
 					<idGenerator><xsl:value-of select="enolunatic:get-loop-generator-id($source-context)"/></idGenerator>
 				</xsl:when>
@@ -132,8 +135,14 @@
 						</label>
 					</xsl:if>
 					<lines>
-						<xsl:attribute name="min" select="if ($minimumOccurrences!='') then enolunatic:replace-all-variables-with-business-name($source-context,$minimumOccurrences) else 0"  />
-						<xsl:attribute name="max" select="enolunatic:replace-all-variables-with-business-name($source-context,$maximumOccurrences)"/>
+						<min>
+							<value><xsl:value-of select="if ($minimumOccurrences!='') then enolunatic:replace-all-variables-with-business-name($source-context,$minimumOccurrences) else 0"  /></value>
+							<type><xsl:value-of select="enolunatic:get-label-type()"/></type>
+						</min>
+						<max>
+							<value><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$maximumOccurrences)"/></value>
+							<type><xsl:value-of select="enolunatic:get-label-type()"/></type>
+						</max>
 					</lines>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -441,7 +450,16 @@
 			</xsl:if>
 			<xsl:copy-of select="$dependencies"/>
 			<xsl:if test="$nbMinimumLines!='' and $nbMaximumLines!=''">
-				<lines min="{$nbMinimumLines}" max="{$nbMaximumLines}"/>
+				<lines>
+					<min>
+						<value><xsl:value-of select="$nbMinimumLines"/></value>
+						<type><xsl:value-of select="enolunatic:get-label-type()"/></type>
+					</min>
+					<max>
+						<value><xsl:value-of select="$nbMaximumLines"/></value>
+						<type><xsl:value-of select="enolunatic:get-label-type()"/></type>
+					</max>
+				</lines>
 			</xsl:if>
 			<xsl:if test="$shouldHaveMissingVars and $missingVar">
 				<xsl:call-template name="enolunatic:add-collected-variable-to-components">
@@ -1096,10 +1114,16 @@
 					</xsl:choose>
 				</xsl:if>
 				<xsl:if test="$control!=''">
-					<control><xsl:value-of select="normalize-space(enolunatic:replace-all-variables-with-business-name($source-context,$control))"/></control>
+					<control>
+						<value><xsl:value-of select="normalize-space(enolunatic:replace-all-variables-with-business-name($source-context,$control))"/></value>
+						<type><xsl:value-of select="enolunatic:get-label-type()"/></type>
+					</control>
 				</xsl:if>
 				<xsl:if test="$errorMessage!=''">
-					<errorMessage><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$errorMessage)"/></errorMessage>
+					<errorMessage>
+						<value><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$errorMessage)"/></value>
+						<type><xsl:value-of select="enolunatic:get-label-type()"/></type>
+					</errorMessage>
 				</xsl:if>
 				<xsl:copy-of select="$dependencies"/>
 	
@@ -1210,6 +1234,7 @@
 		<xsl:param name="dependencies" as="xs:string*"/>
 		<conditionFilter>
 			<value><xsl:value-of select="$value"/></value>
+			<type><xsl:value-of select="enolunatic:get-label-type()"/></type>
 			<xsl:copy-of select="enolunatic:add-dependencies($dependencies)"/>
 		</conditionFilter>
 	</xsl:function>

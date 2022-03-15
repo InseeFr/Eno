@@ -62,8 +62,8 @@
             <xsl:value-of select="concat(.,' ')"/>
         </xsl:for-each>
         <xsl:for-each select="$root//h:components/h:lines">
-            <xsl:value-of select="concat(@min,' ')"/>
-            <xsl:value-of select="concat(@max,' ')"/>
+            <xsl:value-of select="concat(h:min,' ')"/>
+            <xsl:value-of select="concat(h:max,' ')"/>
         </xsl:for-each>
     </xsl:variable>
     <xsl:variable name="variablesUsed" select="normalize-space($variablesUsedTemp)"/>
@@ -75,8 +75,8 @@
             <xsl:value-of select="concat(.,' ')"/>
         </xsl:for-each>
         <xsl:for-each select="$root//h:components/h:lines">
-            <xsl:value-of select="concat(@min,' ')"/>
-            <xsl:value-of select="concat(@max,' ')"/>
+            <xsl:value-of select="concat(h:min,' ')"/>
+            <xsl:value-of select="concat(h:max,' ')"/>
         </xsl:for-each>
     </xsl:variable>
 
@@ -131,18 +131,15 @@
         <xsl:param name="loopDependencies" as="xs:string*" tunnel="yes"/>
         <!-- Value of idGenerator, may be empty -->
         <xsl:variable name="idGenerator" select="h:idGenerator"/>
-        <!-- minimum is @min attribute of components if linked loop, else it is @min attributes of lines -->
+        <!-- minimum is value of min element of lines (may not exist)-->
         <xsl:variable name="minimum">
-            <xsl:choose>
-                <xsl:when test="$idGenerator!=''"><xsl:value-of select="@min"/></xsl:when>
-                <xsl:otherwise><xsl:value-of select="h:lines/@min"/></xsl:otherwise>
-            </xsl:choose>
+            <xsl:value-of select="h:lines/h:min/h:value"/>
         </xsl:variable>
-        <!-- maximum is @iterations attribute of components if linked loop, else it is @max attributes of lines -->
+        <!-- maximum is value of iterations element of components if linked loop, else it is value of max element of lines -->
         <xsl:variable name="maximum">
             <xsl:choose>
-                <xsl:when test="$idGenerator!=''"><xsl:value-of select="@iterations"/></xsl:when>
-                <xsl:otherwise><xsl:value-of select="h:lines/@max"/></xsl:otherwise>
+                <xsl:when test="$idGenerator!=''"><xsl:value-of select="h:iterations/h:value"/></xsl:when>
+                <xsl:otherwise><xsl:value-of select="h:lines/h:max/h:value"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         
@@ -164,14 +161,22 @@
         </xsl:variable>
         <components>
             <xsl:copy-of select="@*"/>
-            <!-- In case of linked loop, we put @iterations attribute with specified value or count of the generator loop response-->
+            <!-- In case of linked loop, we put iterations element with specified value or count of the generator loop response-->
             <xsl:if test="$idGenerator!=''">
-                <xsl:attribute name="iterations">
-                    <xsl:choose>
-                        <xsl:when test="string-length(@iterations) &gt; 0"><xsl:value-of select="@iterations"/></xsl:when>
-                        <xsl:otherwise><xsl:value-of select="concat('count(',$localLoopDependencies[1],')')"/></xsl:otherwise>
-                    </xsl:choose>
-                </xsl:attribute>
+                <iterations>
+                    <value>
+                        <xsl:choose>
+                            <xsl:when test="string-length(h:iterations/h:value) &gt; 0"><xsl:value-of select="h:iterations/h:value"/></xsl:when>
+                            <xsl:otherwise><xsl:value-of select="concat('count(',$localLoopDependencies[1],')')"/></xsl:otherwise>
+                        </xsl:choose>
+                    </value>
+                    <type>                      
+                        <xsl:choose>
+                            <xsl:when test="string-length(h:iterations/h:type) &gt; 0"><xsl:value-of select="h:iterations/h:type"/></xsl:when>
+                            <xsl:otherwise><xsl:value-of select="'VTL|MD'"/></xsl:otherwise>
+                        </xsl:choose>
+                    </type>
+                </iterations>
             </xsl:if>
             
             <xsl:apply-templates select="h:label"/>
@@ -250,7 +255,7 @@
             <xsl:choose>
                 <xsl:when test="h:lines">
                     <xsl:variable name="nbLines" select="count(h:cells[@type='line'])"/>
-                    <xsl:variable name="nbLinesExpected" select="h:lines/@max"/>
+                    <xsl:variable name="nbLinesExpected" select="h:lines/h:max/h:value"/>
                     <xsl:choose>
                         <xsl:when test="$nbLines = 1">
                             <xsl:call-template name="enolunatic:addLinesForRoster">
