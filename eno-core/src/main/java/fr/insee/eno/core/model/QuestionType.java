@@ -1,0 +1,11 @@
+package fr.insee.eno.core.model;
+
+public enum QuestionType {
+
+    SINGLE_RESPONSE_QUESTION,
+    MULTIPLE_QUESTION,
+    MULTIPLE_CHOICE_QUESTION,
+    BATTERY_OF_QUESTION,
+    TABLE_QUESTION,
+    DYNAMIC_ARRAY_QUESTION
+}
