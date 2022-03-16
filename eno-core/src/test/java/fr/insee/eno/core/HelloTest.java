@@ -1,4 +1,4 @@
-package fr.insee.eno;
+package fr.insee.eno.core;
 
 import org.junit.jupiter.api.Test;
 
