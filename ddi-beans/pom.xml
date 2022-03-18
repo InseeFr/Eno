@@ -9,6 +9,39 @@
 	    <version>3.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>ddi-beans</artifactId>
+	<packaging>jar</packaging>
 	<name>ddi-beans</name>
+	
+	<dependencies>
+	    <dependency>
+            <groupId>org.apache.xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>5.0.3</version>
+        </dependency>
+    </dependencies>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>org.apache.xmlbeans.impl.tool.SchemaCompiler</mainClass>
+					<arguments>
+						<argument>-srconly</argument>
+						<argument>-src</argument>
+						<argument>src/main/java</argument>
+						<argument>src/main/resources</argument>
+					</arguments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
 </project>
