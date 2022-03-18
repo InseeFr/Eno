@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Copyright (c) 2020 DDI Alliance, DDI 3.3 release, 2020-04-15
+
+This file is part of DDI 3.3 XML Schema.
+
+DDI 3.3 XML Schema is licenced under the terms of the Creative Commons Attribution 4.0 International (CC BY 4.0) License.
+
+This is a human-readable summary of (and not a substitute for) the license (https://creativecommons.org/licenses/by/4.0/legalcode) 
+
+You are free to:
+
+    Share — copy and redistribute the material in any medium or format
+	
+    Adapt — remix, transform, and build upon the material
+    for any purpose, even commercially.
+
+    The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+
+    Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. 
+	You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+    No additional restrictions — You may not apply legal terms or technological measures that legally restrict others 
+	from doing anything the license permits.
+
+Notices:
+
+    You do not have to comply with the license for elements of the material in the public domain or where your use is permitted 
+	by an applicable exception or limitation.
+    
+	No warranties are given. The license may not give you all of the permissions necessary for your intended use. 
+	For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="ddi:ddiprofile:3_3" xmlns:r="ddi:reusable:3_3" targetNamespace="ddi:ddiprofile:3_3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="ddi:reusable:3_3" schemaLocation="reusable.xsd"/>
+	<xs:element name="DDIProfile" type="DDIProfileType">
+		<xs:annotation>
+			<xs:documentation>Describes the subset of valid DDI objects used by an agency for a specified purpose.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="DDIProfileType">
+		<xs:annotation>
+			<xs:documentation>Describes the subset of valid DDI objects used by an agency for a specified purpose. This may be the required and supported objects for a specific system, a profile for deposit in an archive, requirements at different points of production, etc. In addition to the standard name, label, and description the DDI Profile describes the intended application of the profile, its purpose, the version of XPath used in describing the supported objects, the DDI namespace (major and minor version numbers), a mapping of schema to prefixes (if different from the standard DDI model), a set of instructions for use of the profile, and a listing of used and unsupported objects. These objects may be constrained (i.e., change from optional to required), provided a fixed value, or provided a local name.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:MaintainableType">
+				<xs:sequence>
+					<xs:element ref="DDIProfileName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the profile. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the profile. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the content and purpose of the profile. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="ApplicationOfProfile" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A brief description of the intended applications of the profile. Supports the use of an external controlled vocabulary.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Purpose" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Purpose describes the purpose of creating the profile such as describing the coverage of a distribution software system.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="XPathVersion" type="xs:decimal" default="1.0">
+						<xs:annotation>
+							<xs:documentation>Provides the version of XPath used. Values are 1.0, 2.0 at this time.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DDINamespace" type="xs:decimal" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Provides the version of DDI schemas used. Values are 2.5, 3.0, 3.1, etc. Note that only the Major.Minor portion of the version number is used.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="XMLPrefixMap" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If you are not using the standard DDI prefix or the full DDI name then provide mapping. For each XML namespace used in the profile's XPath expressions, the XML namespaces must have their prefix specified using this element.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="Instructions" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Instructions for use of the profile. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="Used">
+							<xs:annotation>
+								<xs:documentation>Indicates an element in the DDI which is used by the profile expressed as an XPath. Note that including a complex element will include all of its component parts.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="NotUsed">
+							<xs:annotation>
+								<xs:documentation>Indicates an element in the DDI which is not used by the profile expressed as an XPath. You cannot list anything which is required in the DDI schemas, as this would produce invalid XML instances.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DDIProfileName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the DDI Profile using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="XMLPrefixMap" type="XMLPrefixMapType">
+		<xs:annotation>
+			<xs:documentation>Maps a specified prefix to a namespace.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Instructions" type="r:StructuredStringType">
+		<xs:annotation>
+			<xs:documentation>Instructions for use of the profile. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AlternateName" type="r:InternationalStringType">
+		<xs:annotation>
+			<xs:documentation>An alternate name for the object expressed using an International String to support multiple language versions of the same content.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="ApplicationOfProfile" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>Allows for the use of a controlled vocabulary to designate intended applications of the profile.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="XMLPrefixMapType">
+		<xs:annotation>
+			<xs:documentation>Maps a specified prefix to a namespace. For each XML namespace used in the profile's XPath expressions, the XML namespaces must have their prefix specified using this element.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="XMLPrefix" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Specify the exact prefix used.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="XMLNamespace" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Specify the namespace which the prefix represents.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UsedType">
+		<xs:annotation>
+			<xs:documentation>Specifies a DDI object and all its sub-objects supported by the DDIProfile. May specify an alternate local name and description of an object, instructions for its use, and set limits on its allowed usage.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="AlternateName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides an alternate name for the element, for presentation purposes (not for use in the XML instance). It may be supplied in several language-versions.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="r:Description" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A description of the content and purpose of the object. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="Instructions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Instructions for the use of the object within the context of the profile. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="r:DefaultValue" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field provides a default value for the specified element or attribute if it holds simple content, and the value must be a valid one per the DDI schemas. This assumes that the value is not specified in the DDI instance itself, which would override the default. The value should also be provided as part of the XPath expression supplied for the field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="isRequired" type="xs:boolean" default="false">
+			<xs:annotation>
+				<xs:documentation>If true indicates that an element described as optional in DDI is required by the profile.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="xpath" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Contains an XPath which points to an element or attribute in DDI instances which is used by the profile. All subelements of a used element are assumed to be supported unless explicitly addressed by the profile. The number of supported repetitions may be included in the XPath expression.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="limitMaxOccurs" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>This field allows for limiting the maximum occurrences of this field. If the number is greater than the maxOccurs value in DDI it will be ignored and the DDI specification will remain in use.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="fixedValue" type="xs:boolean" default="false">
+			<xs:annotation>
+				<xs:documentation>This field, if set to true, provides an indication that the default value supplied in the fixedValue attribute is the only one which is allowed for the profile - other values will be overridden with the default (a warning should be issued to the creator of the instance); the value must be a valid one per the DDI schemas.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="NotUsedType">
+		<xs:annotation>
+			<xs:documentation>Identifies DDI objects expressed as an XPath that are not supported by the system or agency using this profile.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="xpath" type="xs:string" use="required">
+					<xs:annotation>
+						<xs:documentation>Contains an XPath which points to an element or attribute in DDI instances which is not used by the profile. All subelements of an unused element are assumed to be included unless explicitly addressed by the profile. The number of supported repetitions may be included in the XPath expression.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:element name="Used" type="UsedType">
+		<xs:annotation>
+			<xs:documentation>Specifies a DDI object and all its sub-objects supported by the DDIProfile.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NotUsed" type="NotUsedType">
+		<xs:annotation>
+			<xs:documentation>Identifies DDI objects expressed as an XPath that are not supported by the system or agency using this profile.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

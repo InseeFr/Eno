@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Copyright (c) 2020 DDI Alliance, DDI 3.3 release, 2020-04-15
+
+This file is part of DDI 3.3 XML Schema.
+
+DDI 3.3 XML Schema is licenced under the terms of the Creative Commons Attribution 4.0 International (CC BY 4.0) License.
+
+This is a human-readable summary of (and not a substitute for) the license (https://creativecommons.org/licenses/by/4.0/legalcode) 
+
+You are free to:
+
+    Share — copy and redistribute the material in any medium or format
+	
+    Adapt — remix, transform, and build upon the material
+    for any purpose, even commercially.
+
+    The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+
+    Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. 
+	You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+    No additional restrictions — You may not apply legal terms or technological measures that legally restrict others 
+	from doing anything the license permits.
+
+Notices:
+
+    You do not have to comply with the license for elements of the material in the public domain or where your use is permitted 
+	by an applicable exception or limitation.
+    
+	No warranties are given. The license may not give you all of the permissions necessary for your intended use. 
+	For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="ddi:physicaldataproduct_proprietary:3_3" xmlns:r="ddi:reusable:3_3" xmlns:p="ddi:physicaldataproduct:3_3" targetNamespace="ddi:physicaldataproduct_proprietary:3_3" elementFormDefault="qualified">
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+	<xs:import namespace="ddi:reusable:3_3" schemaLocation="reusable.xsd"/>
+	<xs:import namespace="ddi:physicaldataproduct:3_3" schemaLocation="physicaldataproduct.xsd"/>
+	<xs:element name="RecordLayout" type="RecordLayoutType" substitutionGroup="p:BaseRecordLayout">
+		<xs:annotation>
+			<xs:documentation>A member of the BaseRecordLayout substitution group intended for use when the data items are stored in an external proprietary format.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="RecordLayoutType">
+		<xs:annotation>
+			<xs:documentation>A member of the BaseRecordLayout substitution group intended for use when the data items are stored in an external proprietary format. In addition to the link to the PhysicalStructure provided by BaseRecordLayout, the record layout is this namespace (m4) identifies the character set and array base for the external data, identifies the software of the proprietary system, provides a description of how the data item is addressed within the system, provides default values for numeric data types, text data types, dateTime data types, whether coded data should be treated as numeric or text, a default variable scheme, proprietary information, and a full description of each data item including its link to the variable description and system address.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="p:BaseRecordLayoutType">
+				<xs:sequence>
+					<xs:element ref="r:CharacterSet" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Character set used in the data file (e.g., US ASCII, EBCDIC, UTF-8). This is a required field. The DDI Alliance has provided a controlled vocabulary (CharacterSet) to support this element at http://www.ddialliance.org/controlled-vocabularies.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:ArrayBase" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Sets the array base for any arrays used in the definition (that is, whether the first value is in position 0 or 1, etc.). This may be the data array in a delimited data file or the measure array for measures that are bundled and stored in a single location. Array base is generally set to either 0 or 1. There is no override provided as systems processing a record would use a consistent array base.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="SystemSoftware">
+						<xs:annotation>
+							<xs:documentation>Specification of a software package used to instantiate a data collection method.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="DataItemAddress" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Provides minimum information on data item address system, such as variable ID or Name, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="DefaultNumericDataTypeReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Declares the most common data type used for numeric data.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="DefaultTextDataTypeReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Declares the most common data type used for textual data.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="DefaultDateTimeDataTypeReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Declares the most common data type used for date-time data.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0">
+						<xs:element ref="CodedDataAsNumeric">
+							<xs:annotation>
+								<xs:documentation>Indicates that coded data should be treated as numeric, and defines the numeric type.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="CodedDataAsText">
+							<xs:annotation>
+								<xs:documentation>Indicates that coded data should be treated as text, and defines the text type.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:element ref="r:DefaultVariableSchemeReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>References a variable scheme for the RecordLayout. This can be overridden by individual data items if they are from a different variable scheme.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:ProprietaryInfo" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Contains information proprietary to the software package which produced the data file. This is expressed as a set of key(name)/ value pairs.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="DataItem" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Describes a single data item within the file including its variable reference, information on the data type, and any item specific proprietary information.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DataItemAddressType">
+		<xs:annotation>
+			<xs:documentation>Provides minimum information on data item address system, such as variable ID or Name, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="r:Description" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Description of the data item address. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DataItemType">
+		<xs:annotation>
+			<xs:documentation>Describes a single data item within the record, linking it to its description in a variable and providing information on its data type and any item specific proprietary information.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="r:VariableReference" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Reference to a Variable describing the content of the data item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ProprietaryDataType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Allows an override of the default data type, using the language of the proprietary software. A controlled vocabulary is recommended.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ProprietaryOutputFormat" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates the proprietary output format.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="r:ProprietaryInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Contains proprietary information specific to the data item. This is expressed as a set of key (name)-value pairs.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DataItemAddress" type="DataItemAddressType">
+		<xs:annotation>
+			<xs:documentation>Provides minimum information on data item address system.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DefaultNumericDataTypeReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing ManagedNumericRepresentation using the Reference structure. TypeOfObject should be set to  ManagedNumericRepresentation.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DefaultTextDataTypeReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing ManagedTextRepresentation using the Reference structure. TypeOfObject should be set to ManagedTextRepresentation.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DefaultDateTimeDataTypeReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing ManagedDateTimeRepresentation using the Reference structure. TypeOfObject should be set to ManagedDateTimeRepresentation.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CodedDataAsNumeric" type="CodedDataAsNumericType">
+		<xs:annotation>
+			<xs:documentation>Indicates that coded data should be treated as numeric.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="CodedDataAsNumericType">
+		<xs:annotation>
+			<xs:documentation>Indicates that coded data should be treated as numeric, and references the definition of the numeric type as described in ManagedNumericRepresentation. TypeOfObject should be set to ManagedNumericRepresentation.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:ReferenceType">
+				<xs:attribute name="treatCodedDataAsNumeric" type="xs:boolean" fixed="true">
+					<xs:annotation>
+						<xs:documentation>Fixed attribute indicating that coded data should be treated as a numeric of the referenced type.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CodedDataAsText" type="CodedDataAsTextType">
+		<xs:annotation>
+			<xs:documentation>Indicates that coded data should be treated as text.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="CodedDataAsTextType">
+		<xs:annotation>
+			<xs:documentation>Indicates that coded data should be treated as text, and references the definition of the text type as described in ManagedTextRepresentation. TypeOfObject should be set to ManagedTextRepresentation.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:ReferenceType">
+				<xs:attribute name="treatCodedDataAsText" type="xs:boolean" fixed="true">
+					<xs:annotation>
+						<xs:documentation>Fixed attribute indicating that coded data should be treated as a text/character string of the referenced type.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ProprietaryDataType" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>A brief textual description of the of proprietary data being provided. Supports the use of an external controlled vocabulary.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ProprietaryOutputFormat" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>A brief textual description or classification of the proprietary output format of the data. Supports the use of an external controlled vocabulary.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DataItem" type="DataItemType">
+		<xs:annotation>
+			<xs:documentation>Describes a single data item within the record.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SystemSoftware" type="r:SoftwareType">
+		<xs:annotation>
+			<xs:documentation>Specification of the software used by the proprietary system.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

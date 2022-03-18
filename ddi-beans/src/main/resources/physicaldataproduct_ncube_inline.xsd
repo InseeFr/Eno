@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Copyright (c) 2020 DDI Alliance, DDI 3.3 release, 2020-04-15
+
+This file is part of DDI 3.3 XML Schema.
+
+DDI 3.3 XML Schema is licenced under the terms of the Creative Commons Attribution 4.0 International (CC BY 4.0) License.
+
+This is a human-readable summary of (and not a substitute for) the license (https://creativecommons.org/licenses/by/4.0/legalcode) 
+
+You are free to:
+
+    Share — copy and redistribute the material in any medium or format
+	
+    Adapt — remix, transform, and build upon the material
+    for any purpose, even commercially.
+
+    The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+
+    Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. 
+	You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+    No additional restrictions — You may not apply legal terms or technological measures that legally restrict others 
+	from doing anything the license permits.
+
+Notices:
+
+    You do not have to comply with the license for elements of the material in the public domain or where your use is permitted 
+	by an applicable exception or limitation.
+    
+	No warranties are given. The license may not give you all of the permissions necessary for your intended use. 
+	For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="ddi:physicaldataproduct_ncube_inline:3_3" xmlns:r="ddi:reusable:3_3" xmlns:p="ddi:physicaldataproduct:3_3" targetNamespace="ddi:physicaldataproduct_ncube_inline:3_3"
+           elementFormDefault="qualified">
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+	<xs:import namespace="ddi:reusable:3_3" schemaLocation="reusable.xsd"/>
+	<xs:import namespace="ddi:physicaldataproduct:3_3" schemaLocation="physicaldataproduct.xsd"/>
+	<!-- COMMON RECORD LAYOUT - CUBED - MODULE 3 -->
+	<xs:element name="RecordLayout" type="RecordLayoutType" substitutionGroup="p:BaseRecordLayout">
+		<xs:annotation>
+			<xs:documentation>A member of the BaseRecordLayout substitution group intended for use when the data items of an NCube Instances are captured in-line within the metadata instance.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="RecordLayoutType">
+		<xs:annotation>
+			<xs:documentation>A member of the BaseRecordLayout substitution group intended for use when the data items of an NCube Instances are captured in-line within the metadata instance. In addition to the link to the PhysicalStructure provided by BaseRecordLayout, the record layout is this namespace (m2) identifies the array base for the in-line data, a full description of each data item contained within an NCube Instance including a link to its description (matrix address) and contained values.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="p:BaseRecordLayoutType">
+				<xs:sequence>
+					<xs:element ref="r:ArrayBase" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Sets the array base for any arrays used in the definition (that is, whether the first value is in position 0 or 1, etc.). This may be the data array in a delimited data file or the measure array for measures that are bundled and stored in a single location. Array base is generally set to either 0 or 1. There is no override provided as systems processing a record would use a consistent array base.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="NCubeInstance">
+							<xs:annotation>
+								<xs:documentation>A container for defining an instance of an NCube, indicating the matrix address of each cell and capturing the data for each measure within a cell of the NCube is stored. Allows specifying the values of the attributes attached to a NCube.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:NCubeInstanceReference">
+							<xs:annotation>
+								<xs:documentation>Reference to an NCubeInstance as expressed in a RecordLayout. TypeOfObject should be NCubeInstance. A container for defining an instance of an NCube, indicating the matrix address of each cell and capturing the data for each measure within a cell of the NCube is stored. Allows specifying the values of the attributes attached to a NCube.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NCubeInstanceType">
+		<xs:annotation>
+			<xs:documentation>A container for defining an instance of an NCube, indicating the matrix address of each cell and capturing the data for each measure within a cell of the NCube is stored. Allows specifying the values of the attributes attached to a NCube.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:VersionableType">
+				<xs:sequence>
+					<xs:element ref="r:NCubeReference">
+						<xs:annotation>
+							<xs:documentation>Reference to the logical NCube description.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:MeasureDimension" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>This element defines the structure of a measure dimension for the NCube Instance. A value along the MeasureDimension is defined by a stack of references to one or more MeasureDefinitions found in the logical description of the NCube with each containing an attribute of orderValue which provides its value for use in the cell address (similar to the use of a CodeRepresentation of a Variable used as a conceptual dimension. This allows measures (whether one or several) to be handled in the same way as the conceptual dimension of the NCube in declaring a cell address. It is assumed that the value of the MeasureDimension is the last value in the address array. For example, for an NCube with 3 conceptual dimensions of rank 1 = Sex, rank 2 = Age, and rank 3 = Educational Attainment, plus a MeasureDimension. The cell address of 1,4,2,2 would indicate Code value of 1 for Sex, 4 for Age, 2 for Educational Attainment, and 2 for MeasureDimension. For systems translating to SDMX or an OLap structure DDI assumes that the MeasureDefinitionReference with the orderValue="1" is the equivalent of the PrimaryMeasure.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="AttachedAttribute" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>This is an attribute attached to the NCube as a whole or a region of the NCube as defined in the logical description as a CoordinateRegion. The content of the attribute can be provided as a single value or reference a location in the data store where the attribute value will be found. This may be in addition to attribute information described in the logical structure.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="DataItem" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Describes a single data item or cell within an NCube Instance. It defines its location within the NCube by its coordinate (matrix) address which is its intersect point on each dimension. Allows for the specification of data item specific attributes, and identifies the value of each measure for the data item. May optionally indicate the language of the data contents.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:DefaultDataType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>An explicit definition of the data type that is applied to the majority of the data items reducing the amount of repetitive markup required. It can be overridden at the data item level. This field is necessary in the case of some numeric data formats where the format definition would allow real values, but the values are integer values. Allowed values are: integer (default), real, string.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:DefaultDelimiter" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Delimiter definition for delimited (free field) data that is applied to the majority of the data items reducing the amount of repetitive markup required. It can be overridden at the data item level. Allowed values are: Empty (default), Tab, Blank, AnyString. If a delimiter is used, free field (delimited data) is assumed; binary formats are not allowed.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:DefaultDecimalPositions" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Number of decimal places for data with an implied decimal separator that is applied to the majority of the data items reducing the amount of repetitive markup required. It can be overridden at the data item level. Another expression is the decimal scaling factor (SAS). Default: 0.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:DefaultDecimalSeparator" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The character used to separate the integer and the fraction part of a number (if an explicit separator is used in the data) that is applied to the majority of the data items reducing the amount of repetitive markup required. It can be overridden at the data item level. Allowed values are: None (default), Dot, Comma, Other. On the basis of the data definition in DDI documents, data processing tools could compute the necessary precision width on the basis of the format width and the existence of separators. Appropriate data types could be used, i.e. float or double, short or long. The decimal separator definition only makes sense with some XML Schema primitives. This is a default which may be overridden in specific cases.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:DefaultDigitGroupSeparator" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The character used to separate groups of digits (if an explicit separator is used in the data) that is applied to the majority of the data items reducing the amount of repetitive markup required. It can be overridden at the data item level. Allowed values are: None (default), Dot, Comma, Other. The decimal separator definition makes only sense with some XML Schema primitives. This is a default which may be overridden in specific cases.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:NumberOfCases" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Total number of cases represented by the contents of the NCube. This is normally the sum of the cell contents when the NCube contains counts and sub-totals are not included.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DataItemType">
+		<xs:annotation>
+			<xs:documentation>Describes a single data item or cell within an NCube Instance. It defines its location within the NCube by its coordinate (matrix) address which is its intersect point on each dimension. Allows for the specification of data item specific attributes, and identifies the value of each measure for the data item. May optionally indicate the language of the data contents.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="r:DimensionRankValue" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A dimension describes the rank or order of the dimension within the NCube structure and provides the specific coordinate value of the dimension for the data item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="AttachedAttribute" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This is an attribute attached to the specified Data Item. The content of the attribute can be provided as a single value or reference a location in the data store where the attribute value will be found. This may be in addition to attribute information described in the logical structure.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="Measure" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Identifies the specific measure of the cell by noting the order value of the measure within the MeasureDimension and the value for the measure.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute ref="xml:lang" use="optional">
+			<xs:annotation>
+				<xs:documentation>Use to indicate the language of the data values for this item.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="MeasureType">
+		<xs:annotation>
+			<xs:documentation>Identifies the specific measure of the cell designating the order value of the Measure within the MeasureDimension and the value of the measure. It is recommended to repeat Measure to define each measure definition and value separately. When Value contains multiple measures expressed as an ordered array list each measure in the array as a MeasureDimensionValue with its specified arrayOrder within a single Measure definition.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="r:MeasureDimensionValue" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the orderValue of the Measure in the MeasureDimension described in the NCubeInstance along with its arrayOrder if multiple measures are provided as an array in a single storage location.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="r:Value">
+				<xs:annotation>
+					<xs:documentation>Value of the Measure expressed as a single value or ordered array.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="NCubeInstance" type="NCubeInstanceType">
+		<xs:annotation>
+			<xs:documentation>A container for defining an instance of an NCube, indicating the matrix address of each cell and capturing the data for each measure within a cell of the NCube is stored.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DataItem" type="DataItemType">
+		<xs:annotation>
+			<xs:documentation>Describes a single data item or cell within an NCube Instance.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Measure" type="MeasureType">
+		<xs:annotation>
+			<xs:documentation>Identifies the specific measure of the cell by noting the order value of the measure within the MeasureDimension and the value for the measure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AttachedAttribute" type="AttachedAttributeType">
+		<xs:annotation>
+			<xs:documentation>References the attribute description or provides a value.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name="AttachedAttributeType">
+		<xs:annotation>
+			<xs:documentation>References the attribute description or provides a value.</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="r:AttributeReference">
+				<xs:annotation>
+					<xs:documentation>Reference to the attribute described in an NCube.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="r:Value">
+				<xs:annotation>
+					<xs:documentation>Contains the value for the attribute.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+</xs:schema>

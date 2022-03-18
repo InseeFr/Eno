@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Copyright (c) 2020 DDI Alliance, DDI 3.3 release, 2020-04-15
+
+This file is part of DDI 3.3 XML Schema.
+
+DDI 3.3 XML Schema is licenced under the terms of the Creative Commons Attribution 4.0 International (CC BY 4.0) License.
+
+This is a human-readable summary of (and not a substitute for) the license (https://creativecommons.org/licenses/by/4.0/legalcode) 
+
+You are free to:
+
+    Share — copy and redistribute the material in any medium or format
+	
+    Adapt — remix, transform, and build upon the material
+    for any purpose, even commercially.
+
+    The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+
+    Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. 
+	You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+    No additional restrictions — You may not apply legal terms or technological measures that legally restrict others 
+	from doing anything the license permits.
+
+Notices:
+
+    You do not have to comply with the license for elements of the material in the public domain or where your use is permitted 
+	by an applicable exception or limitation.
+    
+	No warranties are given. The license may not give you all of the permissions necessary for your intended use. 
+	For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="ddi:studyunit:3_3" xmlns:r="ddi:reusable:3_3" xmlns:a="ddi:archive:3_3" xmlns:c="ddi:conceptualcomponent:3_3" xmlns:d="ddi:datacollection:3_3" xmlns:l="ddi:logicalproduct:3_3"
+           xmlns:p="ddi:physicaldataproduct:3_3" xmlns:pi="ddi:physicalinstance:3_3" xmlns:pr="ddi:ddiprofile:3_3" targetNamespace="ddi:studyunit:3_3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="ddi:reusable:3_3" schemaLocation="reusable.xsd"/>
+	<xs:import namespace="ddi:archive:3_3" schemaLocation="archive.xsd"/>
+	<xs:import namespace="ddi:conceptualcomponent:3_3" schemaLocation="conceptualcomponent.xsd"/>
+	<xs:import namespace="ddi:datacollection:3_3" schemaLocation="datacollection.xsd"/>
+	<xs:import namespace="ddi:logicalproduct:3_3" schemaLocation="logicalproduct.xsd"/>
+	<xs:import namespace="ddi:physicaldataproduct:3_3" schemaLocation="physicaldataproduct.xsd"/>
+	<xs:import namespace="ddi:physicalinstance:3_3" schemaLocation="physicalinstance.xsd"/>
+	<xs:import namespace="ddi:ddiprofile:3_3" schemaLocation="ddiprofile.xsd"/>
+	<xs:element name="StudyUnit" type="StudyUnitType">
+		<xs:annotation>
+			<xs:documentation>A primary packaging and publication module within DDI representing the purpose, background, development, data capture, and data products related to a study. In DDI a study is defined as a single coordinated set of data collection/capture activities, such as a one-time survey or a single iteration of a multi-year repeated study (such as one year of a longitudinal survey). The StudyUnit brings together all of the components of the study including the description of its purpose, funding, quality statements, data collection and capture methods and activities, processing activities, and a description of the resulting data (description of its intellectual or logical content plus a description of its physical store).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="StudyUnitType">
+		<xs:annotation>
+			<xs:documentation>A primary packaging and publication module within DDI representing the purpose, background, development, data capture, and data products related to a study. In DDI a study is defined as a single coordinated set of data collection/capture activities, such as a one-time survey or a single iteration of a multi-year repeated study (such as one year of a longitudinal survey). The StudyUnit brings together all of the components of the study including the description of its purpose, funding, quality statements, data collection and capture methods and activities, processing activities, and a description of the resulting data (description of its intellectual or logical content plus a description of its physical store). A study unit may have only a single data collection or capture process resulting in one or more data products (i.e., Census). A complex study unit may contain multiple means of data capture that are integrated into one or more data products (i.e., a medical study collecting bio-markers, patient background, health care service information, etc.). A longitudinal study with multiple waves or iterations of data collection is considered to be a group of studies, each wave or iteration captured as a single study unit. As a primary packaging module, the Study Unit contains a full citation, abstract, authorization information, a universe reference, series statement, quality statement, information on post study evaluation, funding information, budget, purpose, coverage, type of analysis units covered, kind of data, other materials, a list of required resource packages, embargoes,  the conceptual components (universe, concept, data element, geographic structure and locations), data collection, logical products, physical data products, physical instance, archive, and DDI profile. The maintainable elements within a Study Unit may be included in-line or by reference.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:MaintainableType">
+				<xs:sequence>
+					<xs:element ref="TypeOfStudyUnit" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A brief textual identification of the StudyUnit. Supports the use of an external controlled vocabulary.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Citation" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The citation for the study. DDI strongly recommends that at minimum a Title be provided.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Abstract" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>An abstract of the study unit describing the nature and scope of the data collection, special characteristics of its content. Note that detailed information on the purpose of the study and structured coverage information are to be entered in Purpose and Coverage. Abstract supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:AuthorizationSource" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Identifies the authorizing agency for the study and allows for the full text of the authorization (law, regulation, or other form of authorization). May be used to list authorizations from oversight committees and other regulatory agencies.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0">
+						<xs:element ref="r:ApprovalReview">
+							<xs:annotation>
+								<xs:documentation>Provides information about the Approval Review undertaken in relation to the activity. Identifies the organization processing the review, the role of the approval review organization, case number, description, and related dates. Allows the inclusion of a reference to an external source detailing the approval review.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ApprovalReviewReference">
+							<xs:annotation>
+								<xs:documentation>Reference to an object that provides information about the Approval Review undertaken in relation to the activity. Identifies the organization processing the review, the role of the approval review organization, case number, description, and related dates. Allows the inclusion of a reference to an external source detailing the approval review. TypeOfObject should be set to ApprovalReview.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:element ref="r:DefiningConceptReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A concept that defines or aids in understanding the content of the study unit.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:UniverseReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to the universe statement from the universe scheme, describing the group of persons or other elements that are the object of research and to which any analytic results refer. Age, nationality, and residence commonly help to delineate a given universe, but any of a number of factors may be involved, such as sex, race, income, veteran status, criminal convictions, etc. The universe may consist of elements other than persons, such as housing units, court cases, deaths, countries, etc. In general, it should be possible to tell from the description of the universe whether a given individual or element (hypothetical or real) is a member of the population under study. A universe may be described as "inclusive" or "exclusive". This StudyUnit level reference is normally to the top level of the UniverseScheme.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:SeriesStatement" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A study, particularly one in a series, may be the result of two series merging into a single study. The new study belongs to both series. For example, Niger now fields the UNICEF Multiple Indicators Cluster Survey (MICS) and the Demographic and Health Survey as a single merged instrument.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:InformationClassification">
+							<xs:annotation>
+								<xs:documentation>Used to describe the rules and guidelines on how the data is allowed to be handled, transferred, stored and disposed. These confidentiality policies are often dictated by national laws and/or data owners on handling of personal, proprietary, and other sensitive information.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:InformationClassificationReference">
+							<xs:annotation>
+								<xs:documentation>Reference InformationClassification used to describe the rules and guidelines on how the data is allowed to be handled, transferred, stored and disposed. Uses the Reference structure. TypeOfObject should be set to InformationClassification.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:element ref="r:QualityStatementReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A reference to a Quality Statement pertaining to the quality of the study overall, metadata, or data to which it is associated. Quality statements may be related to external quality standards.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:QualityScheme" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>A scheme containing statements of quality related to the quality of methodologies, metadata, or data. Quality statements and standards may be related to external quality standards.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:QualitySchemeReference" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>A reference to a QualityScheme containing statements of quality related to the quality of the study methodology, metadata, or data. Quality statements and standards may be related to external quality standards.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:element ref="r:ExPostEvaluation" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>An evaluation of the study process, often taking place after the completion of the study. These may include issues such as timing of the study, sequencing issues, cost/budget issues, relevance, institutional or legal arrangements etc. of the study. If the study is part of a series or group (i.e., a single wave in a longitudinal study) this may include evaluation of earlier waves which resulted in changes to the current wave.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:FundingInformation" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Contains details of the study unit's funding, including information about grants, agencies, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="StudyBudget" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>This describes the overall budget of the study. It can be repeated for distinct budget activities. It contains a structured description and one or more budget documents described by an OtherMaterial type.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Purpose" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The purpose of the study, why the study took place. This should include detailed information on the investigator's primary study questions or hypotheses as well as information on any legal basis for the data collection, such as laws requiring the collection of census data for apportionment purposes. Legal or other authorization should be provided in detail within AuthorizationSource. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Coverage" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Describes the coverage of the study unit. Detailed information on Topical, Temporal, and Spatial Coverage is contained here. Note that Coverage at this level should be inclusive all lower level modules or section. Lower level descriptions serve to constrain coverage within the scope described here.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:AnalysisUnit" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Allows the use of a controlled vocabulary to list all of the units of analysis used in the study. Should be repeated to describe multiple units of analysis. The DDI Alliance has provided a controlled vocabulary (AnalysisUnit) to support this element at http://www.ddialliance.org/controlled-vocabularies.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:AnalysisUnitsCovered" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A narrative of the units of analysis in the study unit. Uses an InternationalString to support multiple languages.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:KindOfData" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Briefly describes the kind of data documented in a study unit. Examples include survey data, census/enumeration data, administrative data, measurement data, assessment data, demographic data, voting data, etc. Supports the use of an external controlled vocabulary.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:GeneralDataFormat" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Briefly describes the data formats documented in the logical product(s) of a study unit. Examples include Numeric, Text, Audio, Visual, Geospatial, StillImage, Software, 3D, etc. Supports the use of an external controlled vocabulary. The DDI Alliance has provided a controlled vocabulary (GeneralDataFormat) to support this element at http://www.ddialliance.org/controlled-vocabularies.</xs:documentation>
+						</xs:annotation>
+					</xs:element>					
+					<xs:element ref="r:RequiredResourcePackages" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Specifies by reference the ResourcePackages required to resolve the Study. This list is informational and assists in creating full transmissions of metadata or creating archival packages. Primarily used after the instance is relatively stable and published.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Embargo" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Embargo information about the study unit. References to embargo information in this section can be made from individual variables.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:OtherMaterialScheme">
+							<xs:annotation>
+								<xs:documentation>This scheme contains a set of other materials referenced by the metadata.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:OtherMaterialSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of an existing Other Material Scheme by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="c:ConceptualComponent">
+							<xs:annotation>
+								<xs:documentation>Documents the content and relational structure of the concepts, universes, data elements, geographic structures and geographic locations used by the study unit.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ConceptualComponentReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of an existing Conceptual Component module by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="d:DataCollection">
+							<xs:annotation>
+								<xs:documentation>Documents the content of the Data Collection activities used in this study; development of data collection processes, questions, question flows (control constructs), data collection instrument, instructions, processing events and instructions, methodology, etc.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:DataCollectionReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of an existing Data Collection module by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="l:BaseLogicalProduct">
+							<xs:annotation>
+								<xs:documentation>Documents the logical (intellectual) content of the data produced by the study unit. Note that l:BaseLogicalProduct is the head of a substitution group and is replaced by the appropriate member of that substitution group.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:LogicalProductReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of an existing Logical Product module by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="p:PhysicalDataProduct">
+							<xs:annotation>
+								<xs:documentation>Documents the physical structure of the data produced by the study unit.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:PhysicalDataProductReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of an existing Physical Data Product module by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="pi:PhysicalInstance">
+							<xs:annotation>
+								<xs:documentation>Documents the link to a specific external data file produced by the study unit. May contain summary and category level statistics on the variables contained in the data file.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:PhysicalInstanceReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of an existing Physical Instance module by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="pi:PhysicalInstanceGroup">
+							<xs:annotation>
+								<xs:documentation>Allows physical instance modules to be grouped with or without hierarchical structure.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:PhysicalInstanceGroupReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a PhysicalInstanceGroup that allows categories to be grouped with or without hierarchical structure by reference. TypeOfObject should be set to PhysicalInstanceGroup.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="a:Archive">
+							<xs:annotation>
+								<xs:documentation>Archive serves as a packet containing both persistent and transient information. Describes archive-specific material including item record information as well as lifecycle information. The metadata in the package is divided into elements that are persistent (should remain with the Study Unit through its life-cycle), and transient (pertinent only to the Study Unit as held by that archive).</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ArchiveReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of an existing Archive module by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="l:ClassificationFamily">
+							<xs:annotation>
+								<xs:documentation>Allows for in-line entry of a Classification Family.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ClassificationFamilyReference">
+							<xs:annotation>
+								<xs:documentation>Allows for inclusion of a Classification Family by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="pr:DDIProfile">
+							<xs:annotation>
+								<xs:documentation>Contains a DDI Profile which is used by the study unit.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:DDIProfileReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of an existing DDIProfile by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="TypeOfStudyUnit" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>A brief textual description or classification of the StudyUnit. Supports the use of an external controlled vocabulary. DDI recommends the use of a controlled vocabulary.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="StudyBudget" type="r:BudgetType">
+		<xs:annotation>
+			<xs:documentation>A description of the budget that can contain a reference to an external budget document.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

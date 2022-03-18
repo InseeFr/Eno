@@ -1,0 +1,813 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Copyright (c) 2020 DDI Alliance, DDI 3.3 release, 2020-04-15
+
+This file is part of DDI 3.3 XML Schema.
+
+DDI 3.3 XML Schema is licenced under the terms of the Creative Commons Attribution 4.0 International (CC BY 4.0) License.
+
+This is a human-readable summary of (and not a substitute for) the license (https://creativecommons.org/licenses/by/4.0/legalcode) 
+
+You are free to:
+
+    Share — copy and redistribute the material in any medium or format
+	
+    Adapt — remix, transform, and build upon the material
+    for any purpose, even commercially.
+
+    The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+
+    Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. 
+	You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+    No additional restrictions — You may not apply legal terms or technological measures that legally restrict others 
+	from doing anything the license permits.
+
+Notices:
+
+    You do not have to comply with the license for elements of the material in the public domain or where your use is permitted 
+	by an applicable exception or limitation.
+    
+	No warranties are given. The license may not give you all of the permissions necessary for your intended use. 
+	For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="ddi:physicaldataproduct:3_3" xmlns:r="ddi:reusable:3_3" xmlns:ds="ddi:dataset:3_3" targetNamespace="ddi:physicaldataproduct:3_3" elementFormDefault="qualified">
+	<xs:import namespace="ddi:reusable:3_3" schemaLocation="reusable.xsd"/>
+	<!-- PHYSICAL DATA PRODUCT -->
+	<xs:element name="PhysicalDataProduct" type="PhysicalDataProductType">
+		<xs:annotation>
+			<xs:documentation>A module describing the physical storage structures of data files and the relationship of their internal objects to the logical (intellectual) description of the objects found in LogicalProduct. This describes the physical aspects of data files which may be common between one or more data files as described by physical structure of the file and the structure of data items within a record. The PhysicalDataProduct contains the critical links between the physical data store identified by a PhysicalInstance and the logical (intellectual) description of the data as found in the LogicalProduct.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="PhysicalDataProductType">
+		<xs:annotation>
+			<xs:documentation>A module describing the physical storage structures of data files and the relationship of their internal objects to the logical (intellectual) description of the objects found in LogicalProduct. This describes the physical aspects of data files which may be common between one or more data files as described by physical structure of the file and the structure of data items within a record. The PhysicalDataProduct contains the critical links between the physical data store identified by a PhysicalInstance and the logical (intellectual) description of the data as found in the LogicalProduct. In addition to the standard name, label, and description, the module allows for OtherMaterial, and descriptions of PhysicalStructureSchemes and RecordLayoutSchemes in-line or by reference.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:MaintainableType">
+				<xs:sequence>
+					<xs:element ref="PhysicalDataProductName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the PhysicalDataProduct module. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the PhysicalDataProduct module. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the PhysicalDataProduct module. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="PhysicalStructureScheme">
+							<xs:annotation>
+								<xs:documentation>A scheme containing a set of PhysicalStructures containing descriptions of overall structure of a physical data storage format. These descriptions provide the primary link to the LogicalRecord found in the data file, general structural information such as use of proprietary storage structures, division of logical records into physical segment, and default values for decimal separators, etc. Each description can apply to one or more data files containing the same logical records in the same overall structure.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:PhysicalStructureSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Reference to an existing PhysicalStructureScheme for inclusion.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>	
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="RecordLayoutScheme">
+							<xs:annotation>
+								<xs:documentation>A scheme containing a set of RecordLayouts describing the location of individual data items within the physical record and how to address them (locate and retrieve). RecordLayouts provide a link to the PhysicalStructure description and to individual variables or NCubes describing the data items.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:RecordLayoutSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Reference to an existing RecordLayoutScheme for inclusion.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>	
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="PhysicalDataProductName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Physical Data Product using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="PhysicalStructureSchemeType">
+		<xs:annotation>
+			<xs:documentation>A scheme containing a set of PhysicalStructures containing descriptions of overall structure of a physical data storage format. These descriptions provide the primary link to the LogicalRecord found in the data file, general structural information such as use of proprietary storage structures, division of logical records into physical segment, and default values for decimal separators, etc. Each description can apply to one or more data files containing the same logical records in the same overall structure. In addition to the standard name, label, and description, it allows for inclusion of an existing PhysicalStructureScheme by reference, and PhysicalStructure or PhysicalStructureGroup descriptions in-line or by reference.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:MaintainableType">
+				<xs:sequence>
+					<xs:element ref="PhysicalStructureSchemeName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the PhysicalStructureScheme. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the PhysicalStructureScheme. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the PhysicalStructureScheme. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:PhysicalStructureSchemeReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to an existing PhysicalStructureScheme for inclusion.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="PhysicalStructure" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>A PhysicalStructure description providing the primary link to the LogicalRecord and general structural information. Each description can apply to one or more data files containing the same logical records in the same overall structure.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="PhysicalStructureReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a PhysicalStructure by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="PhysicalStructureGroup">
+							<xs:annotation>
+								<xs:documentation>A group of PhysicalStructure descriptions for administrative or conceptual purposes.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="PhysicalStructureGroupReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a PhysicalStructureGroup by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="PhysicalStructureGroupReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing PhysicalStructureGroup using the Reference structure. TypeOfObject should be set to PhysicalStructureGroup.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PhysicalStructureSchemeName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Physical Structure Scheme using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="PhysicalStructureType">
+		<xs:annotation>
+			<xs:documentation>Description of a PhysicalStructure providing the primary link to the LogicalRecord and general structural information. Each description can apply to one or more data files containing the same logical records in the same overall structure.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:VersionableType">
+				<xs:sequence>
+					<xs:element ref="PhysicalStructureName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the PhysicalStructure. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the PhysicalStructure. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the content and purpose of the PhysicalStructure. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="FileFormat" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A brief textual description or classification of the format of the file (e.g., SAS save file, Delimited file, Fixed format file, DDI DataSet). Supports the use of an external controlled vocabulary. DDI recommends the use of a controlled vocabulary.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:DefaultDataType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Defines the data type to use unless otherwise specified. Supports the use of an external controlled vocabulary. Similar content to RecommendedDataType.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:DefaultDelimiter" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Delimiter definition for delimited (free field) data that is applied to the majority of the data items reducing the amount of repetitive markup required. It can be overridden at the data item level. Allowed values are: Empty (default), Tab, Blank, AnyString. If a delimiter is used, free field (delimited data) is assumed; binary formats are not allowed..</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:DefaultDecimalPositions" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Number of decimal places (expressed as an integer) for data with an implied decimal separator that is applied to the majority of the data items reducing the amount of repetitive markup required. It can be overridden at the data item level. Another expression is the decimal scaling factor (SAS). Default: 0.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:DefaultDecimalSeparator" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The character used to separate the integer and the fraction part of a number (if an explicit separator is used in the data) that is applied to the majority of the data items reducing the amount of repetitive markup required. It can be overridden at the data item level. Allowed values are: None (default), Dot, Comma, Other. On the basis of the data definition in DDI documents, data processing tools could compute the necessary precision width on the basis of the format width and the existence of separators. Appropriate data types could be used, i.e. float or double, short or long. The decimal separator definition only makes sense with some XML Schema primitives. This is a default which may be overridden in specific cases.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:DefaultDigitGroupSeparator" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The character used to separate groups of digits (if an explicit separator is used in the data) that is applied to the majority of the data items reducing the amount of repetitive markup required. It can be overridden at the data item level. Allowed values are: None (default), Dot, Comma, Other. The decimal separator definition makes only sense with some XML Schema primitives. This is a default which may be overridden in specific cases.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="GrossRecordStructure" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>The gross or macro level structures of the record structure including the link to the LogicalRecord and information on the number and ordering of each Physical Segment of the LogicalRecord as stored in the data file.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="PhysicalStructureName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Physical Structure using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="PhysicalStructureGroupType">
+		<xs:annotation>
+			<xs:documentation>A group of PhysicalStructure descriptions for administrative or conceptual purposes. May be hierarchical. In addition to the standard name, label, and description, allows for a brief classification of the group type, reference to an applicable Universe and Concept, inclusion of PhysicalStructures and PhysicalStructureGroups by reference and an indicator which can be set to "true" if the group is ordered.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:VersionableType">
+				<xs:sequence>
+					<xs:element ref="TypeOfPhysicalStructureGroup" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A generic element for specifying a reason for a PhysicalStructureGroup. Note that this element can contain either a term from a controlled vocabulary list or a textual description.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="PhysicalStructureGroupName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the PhysicalStructureGroup. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the PhysicalStructureGroup. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the PhysicalStructureGroup. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:UniverseReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to the universe statement describing the persons or other objects to which the contents of this group pertain.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:ConceptReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to the concept expressed by the objects in this group.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Subject" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If subjects are listed for this group, it is strongly recommended that the subjects listed also be found in the TopicalCoverage element for the parent packaging element when this group is included directly or by reference in a module containing a coverage element. Use of subject at the group level allows for associating objects as a type of subject based group or to identify subject characteristics of a reusable group of objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Keyword" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If keywords are listed for this group, it is strongly recommended that the keywords listed also be found in the TopicalCoverage element for the parent packaging element when this group is included directly or by reference in a module containing a coverage element. Use of keyword at the group level allows for associating objects as a type of keyword based group or to identify keyword characteristics of a reusable group of objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="PhysicalStructureReference">
+							<xs:annotation>
+								<xs:documentation>Reference to constituent PhysicalStructure.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="PhysicalStructureGroupReference">
+							<xs:annotation>
+								<xs:documentation>Reference to constituent PhysicalStructureGroup. This allows for nesting of PhysicalStructureGroups.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+				<xs:attribute name="isOrdered" type="xs:boolean" default="false">
+					<xs:annotation>
+						<xs:documentation>If set to "true" indicates that the content of the group is ordered as it appears within the XML structure.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="PhysicalStructureGroupName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Physical Structure Group using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PhysicalStructureGroup" type="PhysicalStructureGroupType">
+		<xs:annotation>
+			<xs:documentation>A group of PhysicalStructure descriptions for administrative or conceptual purposes.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TypeOfPhysicalStructureGroup" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>A brief textual description of the type of group created to associate a number of physical structure descriptions. Supports the use of an external controlled vocabulary.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name="RecordLayoutSchemeType">
+		<xs:annotation>
+			<xs:documentation>A scheme containing a set of RecordLayouts describing the location of individual data items within the physical record and how to address them (locate and retrieve). RecordLayouts provide a link to the PhysicalStructure description and to individual variables or NCubes describing the data items.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:MaintainableType">
+				<xs:sequence>
+					<xs:element ref="RecordLayoutSchemeName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the RecordLayoutScheme. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the RecordLayoutScheme. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the RecordLayoutScheme. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:RecordLayoutSchemeReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to an existing RecordLayoutScheme for inclusion.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="BaseRecordLayout">
+							<xs:annotation>
+								<xs:documentation>This is the head of a substitution group and may be replaced by any member of the group. Describes the contents and physical layout of a record of data. Different members of the substitution group support different storage formats as well as data records with and without NCube structures.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:RecordLayoutReference">
+							<xs:annotation>
+								<xs:documentation>Allows for the inclusion of a RecordLayout by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="RecordLayoutGroup">
+							<xs:annotation>
+								<xs:documentation>Describes a group of RecordLayout descriptions for administrative or conceptual purposes.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="RecordLayoutGroupReference">
+							<xs:annotation>
+								<xs:documentation>Allows for the inclusion of a RecordLayoutGroup by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="RecordLayoutSchemeName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Record Layout Scheme using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RecordLayoutGroupReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing RecordLayoutGroup using the Reference structure. TypeOfObject should be set to RecordLayoutGroup.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RecordLayoutGroupName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Record Layout Group using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="RecordLayoutGroupType">
+		<xs:annotation>
+			<xs:documentation>Contains a group of RecordLayout descriptions for administrative or conceptual purposes, which may be hierarchical. In addition to the standard name, label, and description, allows for a classification of the type of group, a reference to a Universe and Concept and inclusion of RecordLayouts and RecordLayoutGroups by reference, plus a flag indicating if the group is ordered.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:VersionableType">
+				<xs:sequence>
+					<xs:element ref="TypeOfRecordLayoutGroup" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A generic element for specifying a reason for a RecordLayoutGroup. Note that this element can contain either a term from a controlled vocabulary list or a textual description.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="RecordLayoutGroupName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the RecordLayoutGroup. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the RecordLayoutGroup. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the RecordLayoutGroup. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:UniverseReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to the universe statement describing the persons or other elements that the data refer to, and to which any analytic results refer.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:ConceptReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to the concept represented by the record layout in this group.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Subject" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If subjects are listed for this group, it is strongly recommended that the subjects listed also be found in the TopicalCoverage element for the parent packaging element when this group is included directly or by reference in a module containing a coverage element. Use of subject at the group level allows for associating objects as a type of subject based group or to identify subject characteristics of a reusable group of objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Keyword" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If keywords are listed for this group, it is strongly recommended that the keywords listed also be found in the TopicalCoverage element for the parent packaging element when this group is included directly or by reference in a module containing a coverage element. Use of keyword at the group level allows for associating objects as a type of keyword based group or to identify keyword characteristics of a reusable group of objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:RecordLayoutReference">
+							<xs:annotation>
+								<xs:documentation>Reference to constituent RecordLayout.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="RecordLayoutGroupReference">
+							<xs:annotation>
+								<xs:documentation>Reference to constituent RecordLayoutGroup. This allows for nesting of variable RecordLayoutGroups.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+				<xs:attribute name="isOrdered" type="xs:boolean" default="false">
+					<xs:annotation>
+						<xs:documentation>If set to "true" indicates that the content of the group is ordered as it appears within the XML structure.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="RecordLayoutGroup" type="RecordLayoutGroupType">
+		<xs:annotation>
+			<xs:documentation>Contains a group of RecordLayout descriptions for administrative or conceptual purposes, which may be hierarchical.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TypeOfRecordLayoutGroup" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>A brief textual description of the type of group created to associate a number of record layout descriptions. Supports the use of an external controlled vocabulary.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GrossRecordStructure" type="GrossRecordStructureType">
+		<xs:annotation>
+			<xs:documentation>The gross or macro level structures of the record structure including the link to the LogicalRecord.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="GrossRecordStructureType">
+		<xs:annotation>
+			<xs:documentation>The gross or macro level structures of the record structure including the link to the LogicalRecord and information on the number and ordering of each Physical Segment of the LogicalRecord as stored in the data file. Provides an attribute stating the number of physical segments with a default value of "1".</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:IdentifiableType">
+				<xs:sequence>
+					<xs:element ref="LogicalRecordReference">
+						<xs:annotation>
+							<xs:documentation>Reference to the LogicalRecord that describes the record type and intellectual content of the record within the physical data file.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="PhysicalRecordSegment" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A description of each physical storage segment required to completely cover the logical record. A logical record may be stored in one or more segments housed hierarchically in a single file or in separate data files. All logical records have at least one segment.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="numberOfPhysicalSegments" type="xs:nonNegativeInteger" default="1">
+					<xs:annotation>
+						<xs:documentation>Number of physical records segments each logical record (case) is divided into. Express as an integer. Caution in using checksums is recommended. Conflict between checksums and the items being counted can cause problems with warning flags during processing. If using checksum to capture information for internal processing purposes, the use of automatically generated check sums is strongly urged.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- RECORD LAYOUT -->
+	<xs:element name="BaseRecordLayout" type="BaseRecordLayoutType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This type structures an abstract element which is used only as the head of a substitution group.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="BaseRecordLayoutType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This type structures an abstract element which is used only as the head of a substitution group. It contains a reference to the Physical Structure that is available for use in all of the substitute RecordLayout structures.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:VersionableType">
+				<xs:sequence>
+					<xs:element ref="PhysicalStructureLinkReference">
+						<xs:annotation>
+							<xs:documentation>Reference to the PhysicalStructure and the PhysicalSegment used by this Record Layout.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="EndOfLineMarker" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Specifies the end-of-line (EOL) marker used in the file as produced. If no value is provided assume the use of a CRLF (carriage return and line feed). This is the common EOL for PC's. The common EOL in a Unix environment is LF. Some systems will automatically translate EOLs when a file is moved across systems. Common EOLs include: CR (carriage return), LF (line feed), CRLF, NEL (next line), VT (vertical tab), FF (form feed), LS (line separator) and PS (paragraph separator). See Part I documentation for more detailed information. This object supports the use of a controlled vocabulary. Use of a common controlled vocabulary is strongly recommended.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="textQualifier" type="TextQualifierType" use="optional">
+					<xs:annotation>
+						<xs:documentation>Use for delimited files to designate the which text qualifier, if any, was used. Valid values include: singleQuote, doubleQuote, and none.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="PhysicalStructureLinkReference" type="PhysicalStructureLinkReferenceType">
+		<xs:annotation>
+			<xs:documentation>References a PhysicalStructure description and the ID of the physical record segment from that is described by this record layout. TypeOfObject should be set to PhysicalStructure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="PhysicalStructureLinkReferenceType">
+		<xs:annotation>
+			<xs:documentation>References a PhysicalStructure description and the ID of the physical record segment from that is described by this record layout. TypeOfObject should be set to PhysicalStructure.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:ReferenceType">
+				<xs:sequence>
+					<xs:element name="PhysicalRecordSegmentUsed" type="r:IDType">
+						<xs:annotation>
+							<xs:documentation>References the ID of PhysicalRecordSegment that describes the coverage of the record contents. The ID of the PhysicalRecordSegment must be contained within the referenced PhysicalStructure.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="PhysicalStructureReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing PhysicalStructure using the Reference structure. TypeOfObject should be set to PhysicalStructure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- COMMON RECORD LAYOUT - NON-NCUBE -->
+	<xs:element name="RecordLayout" type="RecordLayoutType" substitutionGroup="BaseRecordLayout">
+		<xs:annotation>
+			<xs:documentation>A RecordLayout intended for use with archival formats of microdata held in an external file with fixed or delimited locations for data items.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="RecordLayoutType">
+		<xs:annotation>
+			<xs:documentation>A member of the BaseRecordLayout substitution group intended for use with archival formats of microdata held in an external file with fixed or delimited locations for data items. In addition to the link to the PhysicalStructure provided by BaseRecordLayout, the record layout is this namespace (p) identifies the character set and array base for the stored data, an optional reference to the default VariableScheme for the data items, a flag indicating that the variable names are provided on the first row of the data file, and a full description of each data item including a link to its description and its physical location in the record.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="BaseRecordLayoutType">
+				<xs:sequence>
+					<xs:element ref="r:CharacterSet" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Character set used in the data file (e.g., US ASCII, EBCDIC, UTF-8). This is a required field. The DDI Alliance has provided a controlled vocabulary (CharacterSet) to support this element at http://www.ddialliance.org/controlled-vocabularies.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:ArrayBase">
+						<xs:annotation>
+							<xs:documentation>Sets the array base for any arrays used in the definition (that is, whether the first value is in position 0 or 1, etc.). This may be the data array in a delimited data file or the measure array for measures that are bundled and stored in a single location. Array base is generally set to either 0 or 1. There is no override provided as systems processing a record would use a consistent array base.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:DefaultVariableSchemeReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>References a variable scheme for the RecordLayout. This can be overridden by individual data items if they are from a different variable scheme.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="DataItem" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Includes a reference to a variable, and information about its data item location and its data type/format.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="namesOnFirstRow" type="xs:boolean" default="false">
+					<xs:annotation>
+						<xs:documentation>Set this item to "true" if the first row of the file contains the names of the variables (data items).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PhysicalRecordSegmentType">
+		<xs:annotation>
+			<xs:documentation>A description of the physical record segment as found in the data store. A logical record may be stored in one or more segments housed hierarchically in a single file or in separate data files. All logical records have at least one segment. Identifies the Key variable identifying the segment if the identifier exists in the record, a file name identifier if the segment identification is expressed as part of the file name (used when each segment is stored in a separate file), the order of this segment in relation to other physical segments as part of the logical record, and a flag indicating whether or not the physical segment contains a key.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:IdentifiableType">
+				<xs:sequence>
+					<xs:sequence>
+						<xs:element ref="KeyVariableReference" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Reference to the Unique key variable for segment identification.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="FileNameIdentification" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>If the file containing this segment has a standard section of its file name, include it here. For example a segment number. For example, in the files 2000SF10001.csv and 2000SF10002.csv the last 4 digits contain the segment number. There is no standard means of specifying this information in a machine-actionable way. This statement is informational but in some legacy files may be the only location where the segment identification is found.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:sequence>
+				<xs:attribute name="segmentOrder" type="xs:nonNegativeInteger" default="1">
+					<xs:annotation>
+						<xs:documentation>Indicates the position of this physical record segment within the logical record expressed as an integer.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="hasSegmentKey" type="xs:boolean" default="false">
+					<xs:annotation>
+						<xs:documentation>Set to "true" if there is a variable identifying the segment order. If true a segment key should be declared in a KeyVariableReference. Set to "false" if there are multiple segments and the identification of a particular segment is based on the order of the records within the file.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="KeyVariableReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to the Unique key variable for segment identification and the value it contains for the specific segment. TypeOfObject should be set to Variable.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:ReferenceType">
+				<xs:sequence>
+					<xs:element ref="r:Value">
+						<xs:annotation>
+							<xs:documentation>Value of the variable for this segment.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DataItemType">
+		<xs:annotation>
+			<xs:documentation>Describes a single data item within the record, linking its description in a variable to its physical location in the stored record.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="r:VariableReference">
+				<xs:annotation>
+					<xs:documentation>Reference to the Variable describing this data item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="PhysicalLocation" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Description of the physical location of the value of the object in the data file.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PhysicalLocationType">
+		<xs:annotation>
+			<xs:documentation>Description of the physical location of the value of the object in the data file. Includes information about the data item location and its data type/format if other than the default.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="StorageFormat" type="r:CodeValueType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>An explicit definition of the data storage format. This field is necessary in the case of some numeric data formats where the format definition would allow real values, but the values are integer values. Supports the use of an external controlled vocabulary. Use of a controlled vocabulary is strongly recommended.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="Delimiter" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Defines the delimiter used to separate variables in a delimited record. The attribute treatConsecutiveDelimiterAsOne indicates how consecutive delimiters should be handed by the software.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:sequence>
+				<xs:element name="StartPosition" type="xs:nonNegativeInteger" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Position of the first character of the data item in fixed format file.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ArrayPosition" type="xs:nonNegativeInteger" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Array number of the data item for delimited files.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="EndPosition" type="xs:nonNegativeInteger" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Position of the last character of the data item in fixed format. Must be specified if a value for Width is not provided.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Width" type="xs:nonNegativeInteger" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Data item width for fixed format file, maximum width for delimited file. Must be specified if a value for EndPosition is not provided.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:element name="DecimalPositions" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Number of decimal places for data with an implied decimal separator. Another expression is the decimal scaling factor (SAS). Default: 0.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="DecimalSeparator" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The character used to separate the integer and the fraction part of a number (if an explicit separator is used in the data). Allowed values are: None (default), Dot, Comma, Other. On the basis of the data definition in DDI documents, data processing tools could compute the necessary precision width on the basis of the format width and the existence of separators. Appropriate data types could be used, i.e. float or double, short or long. The decimal separator definition only makes sense with some XML Schema primitives.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="DigitGroupSeparator" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The character used to separate groups of digits (if an explicit separator is used in the data). Allowed values are: None (default), Dot, Comma, Other. The decimal separator definition makes only sense with some XML Schema primitives.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LanguageOfData" type="r:LanguageList" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Language of the data file expressed as a delimited list of language codes.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LocaleOfData" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A two-character ISO country code, to supplement the LanguageOfData value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="PhysicalStructureScheme" type="PhysicalStructureSchemeType">
+		<xs:annotation>
+			<xs:documentation>A scheme containing a set of PhysicalStructures containing descriptions of overall structure of a physical data storage format.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PhysicalStructure" type="PhysicalStructureType">
+		<xs:annotation>
+			<xs:documentation>Description of a PhysicalStructure providing the primary link to the LogicalRecord and general structural information.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RecordLayoutScheme" type="RecordLayoutSchemeType">
+		<xs:annotation>
+			<xs:documentation>A scheme containing a set of RecordLayouts describing the location of individual data items within the physical record and how to address them (locate and retrieve).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DataItem" type="DataItemType">
+		<xs:annotation>
+			<xs:documentation>Describes a single data item within the record, linking its description in a variable to its physical location in the stored record.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PhysicalLocation" type="PhysicalLocationType">
+		<xs:annotation>
+			<xs:documentation>Description of the physical location of the value of the object in the data file.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DecimalSeparator" type="r:OneCharStringType">
+		<xs:annotation>
+			<xs:documentation>The character used to separate whole numbers from decimals expressed as a one character string.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DigitGroupSeparator" type="r:OneCharStringType">
+		<xs:annotation>
+			<xs:documentation>The character used to separate the component of whole numbers (thousands, millions, etc.) expressed as a one character string.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PhysicalRecordSegment" type="PhysicalRecordSegmentType">
+		<xs:annotation>
+			<xs:documentation>A description of the physical record segment as found in the data store.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="KeyVariableReference" type="KeyVariableReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to the Unique key variable for segment identification and the value it contains for the specific segment. TypeOfObject should be set to Variable.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LogicalRecordReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing LogicalRecord using the Reference structure. TypeOfObject should be set to LogicalRecord.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FileFormat" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>A brief textual description or classification of the format of the file. Supports the use of an external controlled vocabulary. DDI recommends the use of a controlled vocabulary.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Delimiter" type="r:DelimiterType">
+		<xs:annotation>
+			<xs:documentation>Defines the delimiter used to separate variables in a delimited record. The attribute treatConsecutiveDelimiterAsOne indicates how consecutive delimiters should be handed by the software.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="EndOfLineMarker" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>Specifies the end-of-line (EOL) marker used in the file as produced. If no value is provided assume the use of a CRLF (carriage return and line feed). This is the common EOL for PC's. The common EOL in a Unix environment is LF. Some systems will automatically translate the EOL when a file is moved across systems. Common EOL markers include: CR (carriage return), LF (line feed), CRLF, NEL (next line), VT (vertical tab), FF (form feed), LS (line separator) and PS (paragraph separator). See Part I documentation for more detailed information. This object supports the use of a controlled vocabulary. Use of a common controlled vocabulary is strongly recommended.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:simpleType name="TextQualifierType">
+		<xs:annotation>
+			<xs:documentation>Use for delimited files to designate the which text qualifier, if any, was used. Valid values include: singleQuote, doubleQuote, and none.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="singleQuote">
+				<xs:annotation>
+					<xs:documentation>Text strings are identified by the use of a single quote (') at each end of the string.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="doubleQuote">
+				<xs:annotation>
+					<xs:documentation>Text strings are identified by the use of a double quote (") at each end of the string.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="none">
+				<xs:annotation>
+					<xs:documentation>Text strings are not identified as such.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,1516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Copyright (c) 2020 DDI Alliance, DDI 3.3 release, 2020-04-15
+
+This file is part of DDI 3.3 XML Schema.
+
+DDI 3.3 XML Schema is licenced under the terms of the Creative Commons Attribution 4.0 International (CC BY 4.0) License.
+
+This is a human-readable summary of (and not a substitute for) the license (https://creativecommons.org/licenses/by/4.0/legalcode) 
+
+You are free to:
+
+    Share — copy and redistribute the material in any medium or format
+	
+    Adapt — remix, transform, and build upon the material
+    for any purpose, even commercially.
+
+    The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+
+    Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. 
+	You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+    No additional restrictions — You may not apply legal terms or technological measures that legally restrict others 
+	from doing anything the license permits.
+
+Notices:
+
+    You do not have to comply with the license for elements of the material in the public domain or where your use is permitted 
+	by an applicable exception or limitation.
+    
+	No warranties are given. The license may not give you all of the permissions necessary for your intended use. 
+	For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="ddi:conceptualcomponent:3_3" xmlns:r="ddi:reusable:3_3" targetNamespace="ddi:conceptualcomponent:3_3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="ddi:reusable:3_3" schemaLocation="reusable.xsd"/>
+	<xs:element name="ConceptualComponent" type="ConceptualComponentType">
+		<xs:annotation>
+			<xs:documentation>A maintainable module for the conceptual components of the study or group of studies. Conceptual components include the objects used to describe the concepts the study is examining, the universe (population) and sub-universes those concepts to which they are related, and the geographic structures and locations wherein those populations reside. Concepts, and ConceptualVariables (containing a concept linked to a universe) provide an abstract view of what is being measured by questions or other forms of data capture, and the variables which are used to describe the data that will be collected. Universe describes the populations (objects) about whom information is sought. GeographicStructure and GeographicLocation specify the geographical locations of those objects and the structural relationships between locations of different types, e.g. the relationship of a city to the state that contains it. In addition to the standard name, label, and description, ConceptualComponent contains ConceptSchemes, ConceptualVariableSchemes, UniverseSchemes, GeographicStructureSchemes, and GeographicLocationSchemes both in-line and by reference.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ConceptualComponentType">
+		<xs:annotation>
+			<xs:documentation>A maintainable module for the conceptual components of the study or group of studies. Conceptual components include the objects used to describe the concepts the study is examining, the universe (population) and sub-universes those concepts to which they are related, and the geographic structures and locations wherein those populations reside. Concepts, and ConceptualVariables (containing a concept linked to a universe) provide an abstract view of what is being measured by questions or other forms of data capture, and the variables which are used to describe the data that will be collected. Universe describes the populations (objects) about whom information is sought. GeographicStructure and GeographicLocation specify the geographical locations of those objects and the structural relationships between locations of different types, e.g. the relationship of a city to the state that contains it. In addition to the standard name, label, and description, ConceptualComponent contains ConceptSchemes, ConceptualVariableSchemes, UniverseSchemes, GeographicStructureSchemes, and GeographicLocationSchemes both in-line and by reference.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:MaintainableType">
+				<xs:sequence>
+					<xs:element ref="ConceptualComponentModuleName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the ConceptualComponentModule. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the ConceptualComponentModule. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the ConceptualComponentModule. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Coverage" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Provides information about the topical, spatial, and temporal coverage of the conceptual components included in this module.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="ConceptScheme">
+							<xs:annotation>
+								<xs:documentation>Contains a set of the concepts measured by the data that are being documented.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ConceptSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Allows for inclusion by reference of an external concept scheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="UniverseScheme">
+							<xs:annotation>
+								<xs:documentation>Contains a set of the Universes and sub-universes of the data that are being documented.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:UniverseSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Allows for inclusion by reference of an external universe scheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="ConceptualVariableScheme">
+							<xs:annotation>
+								<xs:documentation>Contains a set of ConceptualVariables.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ConceptualVariableSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Allows for inclusion by reference of an external ConceptualVariableScheme. TypeOfObject should be set to ConceptualVariableScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice maxOccurs="unbounded" minOccurs="0">
+						<xs:element ref="GeographicStructureScheme">
+							<xs:annotation>
+								<xs:documentation>Contains a collection of geographic structures.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:GeographicStructureSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Allows for inclusion by reference of a previously defined geographic structure scheme, either internal to, or external to the DDI instance.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice maxOccurs="unbounded" minOccurs="0">
+						<xs:element ref="GeographicLocationScheme">
+							<xs:annotation>
+								<xs:documentation>Contains a collection of geographic locations.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:GeographicLocationSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Allows for inclusion by reference of a previously defined geographic location scheme, either internal to or external to the DDI instance.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice maxOccurs="unbounded" minOccurs="0">
+						<xs:element ref="UnitTypeScheme">
+							<xs:annotation>
+								<xs:documentation>Contains a collection of unit types.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:UnitTypeSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Allows for inclusion by reference of a previously defined unit type scheme, either internal to or external to the DDI instance.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ConceptualComponentModuleName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Conceptual Component using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ConceptSchemeType">
+		<xs:annotation>
+			<xs:documentation>A comprehensive list of the concepts measured by the data that are being documented that is maintained by an agency. In addition to the standard name, label, and description, allows for the inclusion of an existing ConceptScheme by reference, assignment of a controlled vocabulary for the scheme, inclusion of descriptions for Concepts and ConceptGroups in-line or by reference.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:MaintainableType">
+				<xs:sequence>
+					<xs:element ref="ConceptSchemeName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the ConceptScheme. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the ConceptScheme. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the ConceptScheme. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:ConceptSchemeReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to an existing ConceptScheme for inclusion.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="Vocabulary" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Identifies and describes the vocabulary used to create the concept scheme.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="Concept">
+							<xs:annotation>
+								<xs:documentation>Describes an individual concept.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ConceptReference">
+							<xs:annotation>
+								<xs:documentation>Includes a description of an individual concept by reference. TypeOfObject should be set to Concept.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="ConceptGroup">
+							<xs:annotation>
+								<xs:documentation>Allows for grouping of concepts for administrative or conceptual purposes; groups may have a hierarchical structure.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="ConceptGroupReference">
+							<xs:annotation>
+								<xs:documentation>Reference to a ConceptGroup that allows for grouping of concepts for administrative or conceptual purposes; groups may have a hierarchical structure. TypeOfObject should be set to ConceptGroup</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ConceptSchemeName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Concept Scheme using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="UniverseSchemeType">
+		<xs:annotation>
+			<xs:documentation>Contains a set of Universe descriptions that may be organized into sub-universe structures. A Universe may also be known as a population. A Universe describes the "object" of a Data Element Concept or Data Element as defined by ISO/IEC 11179.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:MaintainableType">
+				<xs:sequence>
+					<xs:element ref="UniverseSchemeName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the UniverseScheme. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the UniverseScheme. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the content and purpose of the UniverseScheme. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:UniverseSchemeReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Allows the inclusion of a UniverseScheme by reference.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="Universe">
+							<xs:annotation>
+								<xs:documentation>Describes a universe (population, object). A universe may be organized into hierarchical sub-universe classes.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:UniverseReference">
+							<xs:annotation>
+								<xs:documentation>Reference to a Universe to include in this scheme that is described elsewhere.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="UniverseGroup">
+							<xs:annotation>
+								<xs:documentation>Describes a group of universes (populations, objects) for administrative purposes.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="UniverseGroupReference">
+							<xs:annotation>
+								<xs:documentation>Reference to a UniverseGroup to include in this scheme that is described elsewhere.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="UniverseSchemeName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Universe Scheme using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="UniverseGroupReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to a UniverseGroup using the r:Reference structure. TypeOfObject should be set to UniverseGroup.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GroupingUniverseReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to a Universe using the r:Reference structure. Reference to the universe statement describing the persons or other objects to which the contents of this group pertain. This is not a university contained by the group but one that helps define the purpose and application of the group. TypeOfObject should be set to Universe.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GroupingConceptReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to the concept expressed by the objects in this group using the r:Reference structure. TypeOfObject should be set to Concept.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="UniverseGroup" type="UniverseGroupType">
+		<xs:annotation>
+			<xs:documentation>Contains a group of Universes. Use primarily for administrative purposes. If structuring nesting of Universes to represent a hierarchical set of universes use the SubUniverseClass found in Universe.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="UniverseGroupType">
+		<xs:annotation>
+			<xs:documentation>Contains a group of Universes, which may describe an ordered or hierarchical relationship structure. Specifies the purpose of the group, a name, label, and description of the group, its relationship to a specific universe or concept, and lists the members of the group. Use primarily for administrative purposes. If structuring nesting of Universes to represent a hierarchical set of universes use the SubUniverseClass found in Universe.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:VersionableType">
+				<xs:sequence>
+					<xs:element ref="TypeOfUniverseGroup" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A generic element for specifying a reason for a UniverseGroup. Note that this element can contain either a term from a controlled vocabulary list or a textual description.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="UniverseGroupName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the UniverseGroup. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the UniverseGroup. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the content and purpose of the UniverseGroup. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="GroupingUniverseReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to the universe statement describing the persons or other objects to which the contents of this group pertain. This is not a university contained by the group but one that helps define the purpose and application of the group.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="GroupingConceptReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to the concept expressed by the objects in this group. Note that this is not a formal linking of a concept to a university such as found in a ConceptualVariable. It is a means of helping to define the context within which this ConceptGroup is relevant.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Subject" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If subjects are listed for this group, it is strongly recommended that the subjects listed also be found in the TopicalCoverage element for the parent packaging element when this group is included directly or by reference in a module containing a coverage element. Use of subject at the group level allows for associating objects as a type of subject based group or to identify subject characteristics of a reusable group of objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Keyword" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If keywords are listed for this group, it is strongly recommended that the keywords listed also be found in the TopicalCoverage element for the parent packaging element when this group is included directly or by reference in a module containing a coverage element. Use of keyword at the group level allows for associating objects as a type of keyword based group or to identify keyword characteristics of a reusable group of objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:UniverseReference">
+							<xs:annotation>
+								<xs:documentation>Reference to constituent Universe (from the substitution group). TypeOfObject should be set to Universe.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="UniverseGroupReference">
+							<xs:annotation>
+								<xs:documentation>Reference to constituent UniverseGroup. This allows for nesting of UniverseGroups. TypeOfObject should be set to UniverseGroup.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+				<xs:attribute name="isOrdered" type="xs:boolean" default="false">
+					<xs:annotation>
+						<xs:documentation>If set to "true" indicates that the content of the group is ordered as it appears within the XML structure.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="UniverseGroupName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the InstructionGroup using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TypeOfUniverseGroup" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>A brief textual description of the type of group created to associate a number of Instructions. Supports the use of an external controlled vocabulary.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name="ConceptGroupType">
+		<xs:annotation>
+			<xs:documentation>Allows for grouping of concepts; groups may have a hierarchical structure. This structure should not be used to model semantic concept hierarchies - for this purpose, use the SubclassOfReference element within Concept.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:VersionableType">
+				<xs:sequence>
+					<xs:element ref="TypeOfConceptGroup" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Specifies the purpose of the ConceptGroup. If conceptual the GroupingConceptReference or GroupingUniverseReference should be used to further define the group. The object allows for specification of the purpose using a brief string or term. Supports the use of an external controlled vocabulary.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="ConceptGroupName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the ConceptGroup. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the ConceptGroup. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the ConceptGroup. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="GroupingUniverseReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to the universe statement describing the persons or other objects to which the contents of this group pertain. Note that this is not a formal linking of a concept to a university such as found in a ConceptualVariable. It is a means of helping to define the context within which this ConceptGroup is relevant.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="GroupingConceptReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to the concept expressed by the objects in this group. Expresses a conceptual basis for grouping the concepts. Note that this is not a formal linking of a concept to a university such as found in a ConceptualVariable. It is a means of helping to define the context within which this ConceptGroup is relevant.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Subject" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If subjects are listed for this group, it is strongly recommended that the subjects listed also be found in the TopicalCoverage element for the parent packaging element when this group is included directly or by reference in a module containing a coverage element. Use of subject at the group level allows for associating objects as a type of subject based group or to identify subject characteristics of a reusable group of objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Keyword" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If keywords are listed for this group, it is strongly recommended that the keywords listed also be found in the TopicalCoverage element for the parent packaging element when this group is included directly or by reference in a module containing a coverage element. Use of keyword at the group level allows for associating objects as a type of keyword based group or to identify keyword characteristics of a reusable group of objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:ConceptReference">
+							<xs:annotation>
+								<xs:documentation>Reference to a concept included in the concept group. A concept can be referenced internally, from the concept scheme included in the same conceptual components module, or externally, from another scheme. This element is recursive to allow for the description of hierarchical relationships within the concept group.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="ConceptGroupReference">
+							<xs:annotation>
+								<xs:documentation>Reference to a subordinate concept group included in the concept group. A concept group can be referenced internally, from the concept scheme included in the same conceptual components module, or externally, from another scheme. This element is recursive to allow for the description of hierarchical relationships within the concept group.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+				<xs:attribute name="isOrdered" type="xs:boolean" default="false">
+					<xs:annotation>
+						<xs:documentation>If set to "true" indicates that the content of the group is ordered as it appears within the XML structure.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="isAdministrativeOnly" type="xs:boolean" default="false">
+					<xs:annotation>
+						<xs:documentation>Indicates the purpose of a concept group.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="isConcept" type="xs:boolean" use="optional" default="false">
+					<xs:annotation>
+						<xs:documentation>A value of true indicates that there is a concept which defines the group, and which is comprised of the concepts contained in the group. A group can be conceptual in purpose (that is, have a value of "concept" for the purpose attribute), but not itself have a defining concept.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ConceptGroupName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Concept Group using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ConceptGroupReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing ConceptGroup using the Reference structure. TypeOfObject should be set to ConceptGroup.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TypeOfConceptGroup" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>A brief textual description of the reason that a group was formed. Supports the use of an external controlled vocabulary. The DDI Alliance has provided a controlled vocabulary (TypeOfConceptGroup) to support this element at http://www.ddialliance.org/controlled-vocabularies.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="VocabularyType">
+		<xs:annotation>
+			<xs:documentation>Provides information about the vocabulary used to create a concept scheme.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="VocabularyTitle" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Full title of vocabulary.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="r:Abbreviation" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Abbreviation of vocabulary title.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="r:Keyword" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Keywords that describe the vocabulary.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="r:Description" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A description of the content and purpose of the Vocabulary. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="r:URI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>URI to external resource providing information about the vocabulary (general description, main web page).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="XML-URI" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>URI to the vocabulary represented as an XML document.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Scheme" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Textual description of the XML scheme in which the classification is written.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SchemeURI" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>URI to the XML scheme used in the vocabulary (DTD or XML Schema for the XML document above; schemes like DDI, Claset, Neuchatel, and DocBook). Typically, this will be an XML namespace.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="Comments" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Information regarding the selection and usage of the vocabulary including appropriate usage constraints. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Concept" type="ConceptType">
+		<xs:annotation>
+			<xs:documentation>Describes a concept per ISO/IEC 11179.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ConceptType">
+		<xs:annotation>
+			<xs:documentation>Describes a concept per ISO/IEC 11179. In addition to the standard name, label, and description, can identify similar concepts, the concept which this concept is a subclass of, a concept that is used to characterize this concept, and a reference to the Universe associated with this concept. It is the linking of a concept to a specific universe (object) that defines this as a data element concept.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:VersionableType">
+				<xs:sequence>
+					<xs:element ref="ConceptName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the Concept. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the Concept. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the content and purpose of the Concept. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="SimilarConcept" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A reference to a concept expressing a similar idea plus a description of the differences. Used to assist in disambiguation of concepts.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="SubclassOfReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to a Concept that is used for qualifying this data element concept. The referenced Concept should have its isCharacteristic attribute set to true.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="ExcludesConceptReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to a Concept that is used for qualifying what is excluded from the Concept's definition.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="IncludesConceptReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to a Concept that is used for qualifying this is included in the Concept's definition.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="isCharacteristic" type="xs:boolean" default="false">
+					<xs:annotation>
+						<xs:documentation>If set to "true" this concept is used to describe a characteristic of another concept.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="SubclassOfReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing Concept using the Reference structure. TypeOfObject should be set to Concept.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ExcludesConceptReference"  type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to a Concept that is used for qualifying what is excluded from the Concept's definition. TypeOfObject should be set to Concept.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IncludesConceptReference"  type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to a Concept that is used for qualifying this is included in the Concept's definition. TypeOfObject should be set to Concept.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ConceptName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Concept using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ConceptualVariableType">
+		<xs:annotation>
+			<xs:documentation>Describes a ConceptualVariable which provides the link between a concept to a specific unit type (object) that defines this as a ConceptualVariable. In addition to the standard name, label, and description, it provides the two primary components of a ConceptualVariable by referencing a concept and its related unit type. Note that the concept referenced may itself contain sub-concepts and/or references to similar concepts. This maps to the GSIM ConceptualVariable and has a basis in the ISO/IEC 11179 RepresentedVariableConcept.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:VersionableType">
+				<xs:sequence>
+					<xs:element ref="ConceptualVariableName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the ConceptualVariable. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the ConceptualVariable. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the content and purpose of the ConceptualVariable. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:ConceptReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to a Concept that is being linked to a UnitType identified by the UnitTypeReference. TypeOfObject should be set to Concept.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:UnitTypeReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to a unit type being associated with this conceptual variable. TypeOfObject should be set to UnitType.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:CategorySchemeReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to a previously created category scheme that represents the conceptual variable's enumerated conceptual domain.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ConceptualVariableSchemeType">
+		<xs:annotation>
+			<xs:documentation>A comprehensive list of the ConceptualVariables measured by the data that are being documented and/or maintained by an agency. In addition to the standard name, label, and description, allows for the inclusion of an existing ConceptualVariableScheme by reference, the inclusion of descriptions for ConceptualVariables and ConceptualVariableGroups in-line or by reference.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:MaintainableType">
+				<xs:sequence>
+					<xs:element ref="ConceptualVariableSchemeName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the ConceptualVariableScheme. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the ConceptualVariableScheme. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the ConceptualVariableScheme. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:ConceptualVariableSchemeReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to an existing ConceptualVariableScheme for inclusion. TypeOfObject should be set to a ConceptualVariableScheme.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="ConceptualVariable">
+							<xs:annotation>
+								<xs:documentation>Describes a ConceptualVariable which provides the link between a concept to a specific unit type (object) that defines this as a ConceptualVariable.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ConceptualVariableReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of an existing ConceptualVariable by reference. TypeOfObject should be set to a ConceptualVariable.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="ConceptualVariableGroup">
+							<xs:annotation>
+								<xs:documentation>Allows for grouping of ConceptualVariables for administrative or conceptual purposes; groups may have a hierarchical structure.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="ConceptualVariableGroupReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of an existing ConceptualVariableGroup by reference. TypeOfObject should be set to ConceptualVariableGroup</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ConceptualVariableName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the ConceptualVariable using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ConceptualVariableSchemeName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the ConceptualVariableScheme using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ConceptualVariableGroupReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing ConceptualVariableGroup using the Reference structure. TypeOfObject should be ConceptualVariableGroup.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ConceptualVariableGroup" type="ConceptualVariableGroupType">
+		<xs:annotation>
+			<xs:documentation>Contains a group of ConceptualVariables.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ConceptualVariableGroupType">
+		<xs:annotation>
+			<xs:documentation>Contains a group of ConceptualVariables, which may describe an ordered or hierarchical relationship structure. ConceptualVariables may be grouped for a wide range of reasons including conceptual or universe grouping, usage, subject or keyword relationships, or other grouping reason that will assist in the management of a group of ConceptualVariables. Specifies the purpose of the group, a name, label, and description of the group, its relationship to a specific universe or concept, and lists the members of the group.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:VersionableType">
+				<xs:sequence>
+					<xs:element ref="TypeOfConceptualVariableGroup" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A generic element for specifying a reason for a ConceptualVariableGroup. Note that this element can contain either a term from a controlled vocabulary list or a textual description.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="ConceptualVariableGroupName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the ConceptualVariableGroup. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the ConceptualVariableGroup. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the content and purpose of the ConceptualVariableGroup. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:UniverseReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to the universe statement describing the persons or other objects to which the contents of this group pertain. TypeOfObject should be set to Universe.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:ConceptReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to the concept expressed by the objects in this group. TypeOfObject should be set to Concept.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Subject" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If subjects are listed for this group, it is strongly recommended that the subjects listed also be found in the TopicalCoverage element for the parent packaging element when this group is included directly or by reference in a module containing a coverage element. Use of subject at the group level allows for associating objects as a type of subject based group or to identify subject characteristics of a reusable group of objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Keyword" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If keywords are listed for this group, it is strongly recommended that the keywords listed also be found in the TopicalCoverage element for the parent packaging element when this group is included directly or by reference in a module containing a coverage element. Use of keyword at the group level allows for associating objects as a type of keyword based group or to identify keyword characteristics of a reusable group of objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:ConceptualVariableReference">
+							<xs:annotation>
+								<xs:documentation>Reference to constituent ConceptualVariable (from the substitution group). TypeOfObject should be set to ConceptualVariable.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="ConceptualVariableGroupReference">
+							<xs:annotation>
+								<xs:documentation>Reference to constituent ConceptualVariableGroup. This allows for nesting of ConceptualVariableGroups. TypeOfObject should be set to ConceptualVariableGroup.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+				<xs:attribute name="isOrdered" type="xs:boolean" default="false">
+					<xs:annotation>
+						<xs:documentation>If set to "true" indicates that the content of the group is ordered as it appears within the XML structure.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ConceptualVariableGroupName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the ConceptualVariableGroup using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TypeOfConceptualVariableGroup" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>A brief textual description of the type of group created to associate a number of Instructions. Supports the use of an external controlled vocabulary.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+
+	<xs:element name="ConceptualVariableScheme" type="ConceptualVariableSchemeType">
+		<xs:annotation>
+			<xs:documentation>A comprehensive list of the ConceptualVariables measured by the data that are being documented and/or maintained by an agency.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ConceptualVariable" type="ConceptualVariableType">
+		<xs:annotation>
+			<xs:documentation>Describes a ConceptualVariable which provides the link between a concept to a specific unit type (object) that defines this as a ConceptualVariable. In addition to the standard name, label, and description, it provides the two primary components of a ConceptualVariable by referencing a concept and its related unit type. Note that the concept referenced may itself contain sub-concepts and/or references to similar concepts.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="SimilarConceptType">
+		<xs:annotation>
+			<xs:documentation>A reference to a concept with similar meaning and a description of their differences. Formal comparison is done using a ConceptMap. The similar concept structure allows specification of similar concepts to address cases where confusion may affect the appropriate use of the concept.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="SimilarConceptReference">
+				<xs:annotation>
+					<xs:documentation>Reference to a concept with a similar definition.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="r:Difference" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Description of the difference between the two concepts.  Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SimilarConceptReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing Concept using the Reference structure. TypeOfObject should be set to Concept.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="UniverseType">
+		<xs:annotation>
+			<xs:documentation>A Universe contextualizes a Unit Type by providing additional restriction characteristics. The class Universe covers both the GSIM 1.2 obects of Universe and Population, conflating them into a single class. A universe may be organized into hierarchical sub-universes. In addition to the standard name, label, and description, the universe may provide a generation code (how the universe is differentiated or split out from another universe), a definition of hierarchical sub-settings for the universe, and an attribute that indicates if the description of the universe is stated in terms of what the universe includes. DDI Lifecycle does not have a Population class as found in GSIM 1.2. It extends the definition of a Universe to include specification of time and geography in contextualizing a Unit Type. In GSIM 1.2 a Universe is a defined class of people, entities, events, or objects with no specification of time and geography, contextualizing a Unit Type. A Population refines a Universe by specifying time and/or geography.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:VersionableType">
+				<xs:sequence>
+					<xs:element ref="UniverseName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the Universe. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the Universe. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the content and purpose of the Universe. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:DefiningConceptReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A concept that defines or aids in understanding the content of the universe. For example the Universe "Males" may link to the concept of "Male".</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:UnitTypeReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to a unit type being associated with this conceptual variable. TypeOfObject should be set to UnitType.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="TypeOfUnit" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The entity type associated with this conceptual variable. For example, individuals, families or households, groups, institutions/organizations, administrative units, etc. Supports the use of an external controlled vocabulary.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:LocationValueReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to specific LocationValue for the Universe as described in a GeographicLocation.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="GeographyOfUniverse" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the content and purpose of the Universe. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="TimePeriod" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to specific time period for the Universe. Repeat for non-continuous time periods.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="UniverseGenerationCode" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>An expression of the universe in terms of the code used to generate or define it. For example how a given universe may be differentiated within a parent universe.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="SubUniverseClass">
+							<xs:annotation>
+								<xs:documentation>A sub-universe class provides a definition to the universes contained within it. For example the Sub-Universe Class of Gender for the Universe Resident Population may contain the Universe Males and the Universe Females</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="SubUniverseClassReference">
+							<xs:annotation>
+								<xs:documentation>The inclusion of a SubUniverseClass by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>	
+				</xs:sequence>
+				<xs:attribute name="isInclusive" type="xs:boolean" default="true">
+					<xs:annotation>
+						<xs:documentation>The default value is "true". The description statement of a universe is generally stated in inclusive terms such as "All persons residing in Europe". Occasionally a universe is defined by what it excludes, i.e., "All persons residing in Europe except for those residing on U.S. Military bases". In this case the value would be changed to "false".</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="UniverseName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Universe using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GeographyOfUniverse" type="r:StructuredStringType">
+		<xs:annotation>
+			<xs:documentation>A description of the geography that this universe represents.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TimePeriod" type="r:DateType">
+		<xs:annotation>
+			<xs:documentation>Reference to specific time period for the Universe. Repeat for non-continuous time periods.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SubUniverseClass" type="SubUniverseClassType">
+		<xs:annotation>
+			<xs:documentation>A sub-universe group provides a definition to the universes contained within it. For example the Sub-Universe Group of Gender for the Universe Resident Population may contain the Universe Males and the Universe Females</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="SubUniverseClassType">
+		<xs:annotation>
+			<xs:documentation>A sub-universe group provides a definition to the universes contained within it. For example the Sub-Universe Group of Gender for the Universe Resident Population may contain the Universe Males and the Universe Females. In addition to the standard name, label, and description, the SubUniverseClass references a concept which defines it, and references to the universes and or other sub-universe groups it contains. The contents of the SubUniverseClass may be designated as ordered.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:VersionableType">
+				<xs:sequence>
+					<xs:element ref="SubUniverseClassName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the SubUniverseClass. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A display label for the SubUniverseClass. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the content and purpose of the SubUniverseClass. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:DefiningConceptReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A concept that provides a grouping factor for the universes contained by the SubUniverseClass. For example if the parent Universe is Population of the World and the two universes in the group are Male and Female the defining concept may be Sex.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:UniverseReference">
+							<xs:annotation>
+								<xs:documentation>A reference to a universe contained in this SubUniverseClass. Note that two different parent universes may contain references to the same universe within a sub-universe group. For example, the Universe "Population of Europe" and the Universe "Population of the United States" may both have a reference to the SubUniverseClass with the defining concept of Gender and member Universes "Males" and "Females". The SubUniverseClass is ALWAYS a restriction of its parent universe so that in one case it would be "Males within the Population of Europe" and in the other usage "Males within the Population of the United States". A question or variable should reference each relevant universe to define the appropriate intersect group.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="SubUniverseClassReference">
+							<xs:annotation>
+								<xs:documentation>A reference to a SubUniverseClass contained in this SubUniverseClass (a means of nesting hierarchies).</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+				<xs:attribute name="isOrdered" type="xs:boolean" default="false">
+					<xs:annotation>
+						<xs:documentation>If set to "true" indicates that the content of the group is ordered as it appears within the XML structure.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="SubUniverseClassReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing SubUniverseClass using the Reference structure. TypeOfObject should be set to SubUniverseClass.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SubUniverseClassName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the SubUniverse Class using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TypeOfUnit" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>A brief textual description or classification of the class of object of interest. Supports the use of an external controlled vocabulary.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- GEOGRAPHY -->
+	<xs:complexType name="GeographicStructureSchemeType">
+		<xs:annotation>
+			<xs:documentation>Contains information on the hierarchy of the geographic structure. In addition to the standard name, label, and description identifies one or more AuthorizedSources for the level codes/descriptions provided and a set of GeographicLevels in-line or by reference.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:MaintainableType">
+				<xs:sequence>
+					<xs:element ref="GeographicStructureSchemeName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the GeographicStructureScheme. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the GeographicStructureScheme. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the GeographicStructureScheme. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:GeographicStructureSchemeReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>The inclusion of an existing GeographicStructureScheme in the parent scheme by reference.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:GeographicStructure">
+							<xs:annotation>
+								<xs:documentation>Used to describe any level of geography, including overall coverage and each of the lower levels.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:GeographicStructureReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of an existing GeographicLevel description by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="GeographicStructureGroup">
+							<xs:annotation>
+								<xs:documentation>In-line description of a group of GeographicStructure.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="GeographicStructureGroupReference">
+							<xs:annotation>
+								<xs:documentation>The inclusion of an existing GeographicStructureGroup by reference. TypeOfObject should be set to GeographicStructureGroup.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GeographicStructureSchemeName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Geographic Structure Scheme using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GeographicStructureGroupReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing GeographicStructureGroup using the Reference structure. TypeOfObject should be set to GeographicStructureGroup.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GeographicStructureGroup" type="GeographicStructureGroupType">
+		<xs:annotation>
+			<xs:documentation>Contains a group of GeographicStructures.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="GeographicStructureGroupType">
+		<xs:annotation>
+			<xs:documentation>Contains a group of GeographicStructures, which may describe an ordered or hierarchical relationship structure. Specifies the purpose of the group, a name, label, and description of the group, its relationship to a specific universe or concept, and lists the members of the group.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:VersionableType">
+				<xs:sequence>
+					<xs:element ref="TypeOfGeographicStructureGroup" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A generic element for specifying a reason for a GeographicStructureGroup. Note that this element can contain either a term from a controlled vocabulary list or a textual description.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="GeographicStructureGroupName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the GeographicStructureGroup. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the GeographicStructureGroup. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the content and purpose of the GeographicStructureGroup. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:UniverseReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to the universe statement describing the persons or other objects to which the contents of this group pertain.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:ConceptReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to the concept expressed by the objects in this group.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Subject" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If subjects are listed for this group, it is strongly recommended that the subjects listed also be found in the TopicalCoverage element for the parent packaging element when this group is included directly or by reference in a module containing a coverage element. Use of subject at the group level allows for associating objects as a type of subject based group or to identify subject characteristics of a reusable group of objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Keyword" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If keywords are listed for this group, it is strongly recommended that the keywords listed also be found in the TopicalCoverage element for the parent packaging element when this group is included directly or by reference in a module containing a coverage element. Use of keyword at the group level allows for associating objects as a type of keyword based group or to identify keyword characteristics of a reusable group of objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:GeographicStructureReference">
+							<xs:annotation>
+								<xs:documentation>Reference to constituent GeographicStructure (from the substitution group). TypeOfObject should be set to GeographicStructure.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="GeographicStructureGroupReference">
+							<xs:annotation>
+								<xs:documentation>Reference to constituent GeographicStructureGroup. This allows for nesting of GeographicStructureGroups. TypeOfObject should be set to GeographicStructureGroup.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+				<xs:attribute name="isOrdered" type="xs:boolean" default="false">
+					<xs:annotation>
+						<xs:documentation>If set to "true" indicates that the content of the group is ordered as it appears within the XML structure.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GeographicStructureGroupName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the InstructionGroup using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TypeOfGeographicStructureGroup" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>A brief textual description of the type of group created to associate a number of Instructions. Supports the use of an external controlled vocabulary.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="GeographicLocationSchemeType">
+		<xs:annotation>
+			<xs:documentation>A Scheme containing a set of geographic locations, each for a single Geography type, e.g., States, OR Counties, OR Countries, etc. The geographic location element has to be repeated for each geography. In addition to the standard name, label, and description, allows for the inclusion of an existing GeographicLocationScheme by reference and GeographicLocation descriptions either in-line or by reference.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:MaintainableType">
+				<xs:sequence>
+					<xs:element ref="GeographicLocationSchemeName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the GeographicLocationScheme. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the GeographicLocationScheme. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the GeographicLocationScheme. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:GeographicLocationSchemeReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Inclusion of an existing GeographicLocationScheme by reference.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:GeographicLocation">
+							<xs:annotation>
+								<xs:documentation>Description of a GeographicLocation.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:GeographicLocationReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of an existing GeographicLocation by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="GeographicLocationGroup">
+							<xs:annotation>
+								<xs:documentation>In-line description of a group of GeographicLocation.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="GeographicLocationGroupReference">
+							<xs:annotation>
+								<xs:documentation>The inclusion of an existing GeographicLocationGroup by reference. TypeOfObject should be set to GeographicLocationGroup.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GeographicLocationSchemeName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Geographic Location Scheme using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GeographicLocationGroupReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing GeographicLocationGroup using the Reference structure. TypeOfObject should be set to GeographicLocationGroup.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GeographicLocationGroup" type="GeographicLocationGroupType">
+		<xs:annotation>
+			<xs:documentation>Contains a group of GeographicLocations.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="GeographicLocationGroupType">
+		<xs:annotation>
+			<xs:documentation>Contains a group of GeographicLocations, which may describe an ordered or hierarchical relationship structure. Specifies the purpose of the group, a name, label, and description of the group, its relationship to a specific universe or concept, and lists the members of the group.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:VersionableType">
+				<xs:sequence>
+					<xs:element ref="TypeOfGeographicLocationGroup" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A generic element for specifying a reason for a GeographicLocationGroup. Note that this element can contain either a term from a controlled vocabulary list or a textual description.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="GeographicLocationGroupName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the GeographicLocationGroup. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the GeographicLocationGroup. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the content and purpose of the GeographicLocationGroup. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:UniverseReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to the universe statement describing the persons or other objects to which the contents of this group pertain.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:ConceptReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to the concept expressed by the objects in this group.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Subject" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If subjects are listed for this group, it is strongly recommended that the subjects listed also be found in the TopicalCoverage element for the parent packaging element when this group is included directly or by reference in a module containing a coverage element. Use of subject at the group level allows for associating objects as a type of subject based group or to identify subject characteristics of a reusable group of objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Keyword" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If keywords are listed for this group, it is strongly recommended that the keywords listed also be found in the TopicalCoverage element for the parent packaging element when this group is included directly or by reference in a module containing a coverage element. Use of keyword at the group level allows for associating objects as a type of keyword based group or to identify keyword characteristics of a reusable group of objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:GeographicLocationReference">
+							<xs:annotation>
+								<xs:documentation>Reference to constituent GeographicLocation (from the substitution group). TypeOfObject should be set to GeographicLocation.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="GeographicLocationGroupReference">
+							<xs:annotation>
+								<xs:documentation>Reference to constituent GeographicLocationGroup. This allows for nesting of GeographicLocationGroups. TypeOfObject should be set to GeographicLocationGroup.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+				<xs:attribute name="isOrdered" type="xs:boolean" default="false">
+					<xs:annotation>
+						<xs:documentation>If set to "true" indicates that the content of the group is ordered as it appears within the XML structure.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GeographicLocationGroupName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the InstructionGroup using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TypeOfGeographicLocationGroup" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>A brief textual description of the type of group created to associate a number of Instructions. Supports the use of an external controlled vocabulary.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="VocabularyTitle" type="r:InternationalStringType">
+		<xs:annotation>
+			<xs:documentation>The title of the vocabulary expressed using an International String to support multiple language versions of the same content.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ConceptScheme" type="ConceptSchemeType">
+		<xs:annotation>
+			<xs:documentation>A comprehensive list of the concepts measured by the data that are being documented that is maintained by an agency.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="UniverseScheme" type="UniverseSchemeType">
+		<xs:annotation>
+			<xs:documentation>Contains a set of Universe descriptions that may be organized into sub-universe structures.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Universe" type="UniverseType">
+		<xs:annotation>
+			<xs:documentation>A Universe contextualizes a Unit Type by providing additional restriction characteristics. The class Universe covers both the GSIM 1.2 objects of Universe and Population, conflating them into a single class.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="UniverseGenerationCode" type="r:CommandCodeType">
+		<xs:annotation>
+			<xs:documentation>Information on the command used for generating the definition of the coverage of the universe.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Vocabulary" type="VocabularyType">
+		<xs:annotation>
+			<xs:documentation>Provides information about the vocabulary used to create a concept scheme.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ConceptGroup" type="ConceptGroupType">
+		<xs:annotation>
+			<xs:documentation>Allows for grouping of concepts; groups may have a hierarchical structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Comments" type="r:StructuredStringType">
+		<xs:annotation>
+			<xs:documentation>Information regarding the selection and usage of the vocabulary including appropriate usage constraints. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SimilarConcept" type="SimilarConceptType">
+		<xs:annotation>
+			<xs:documentation>A reference to a concept with similar meaning and a description of their differences.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GeographicStructureScheme" type="GeographicStructureSchemeType">
+		<xs:annotation>
+			<xs:documentation>A Scheme containing a set of geographic structure types and their relationship to each other.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GeographicLocationScheme" type="GeographicLocationSchemeType">
+		<xs:annotation>
+			<xs:documentation>A Scheme containing a set of geographic locations, each for a single Geography type, e.g., States, OR Counties, OR Countries, etc.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:complexType name="UnitTypeSchemeType">
+		<xs:annotation>
+			<xs:documentation>This scheme contains a set of Unit Types referenced by the metadata at different points in the lifecycle. In addition to the name, label, and description of the scheme, the structure supports the inclusion of another UnitTypeScheme by reference and a set of UnitType descriptions either in-line or by reference.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:MaintainableType">
+				<xs:sequence>
+					<xs:element ref="UnitTypeSchemeName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the scheme. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the scheme. May be expressed in multiple languages. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the content and purpose of the scheme. May be expressed in multiple languages and supports the use of structured content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:UnitTypeSchemeReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Inclusion of an existing UnitTypeScheme by reference.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="UnitType">
+							<xs:annotation>
+								<xs:documentation>In-line description of a UnitType. These are used by reference at various points in the lifecycle.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:UnitTypeReference">
+							<xs:annotation>
+								<xs:documentation>The inclusion of an existing UnitType by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="UnitTypeGroup">
+							<xs:annotation>
+								<xs:documentation>In-line description of a group of UnitTypes.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="UnitTypeGroupReference">
+							<xs:annotation>
+								<xs:documentation>The inclusion of an existing UnitTypeGroup by reference. TypeOfObject should be set to UnitTypeGroup.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="UnitTypeScheme" type="UnitTypeSchemeType">
+		<xs:annotation>
+			<xs:documentation>This scheme contains a set of Unit Types referenced by the metadata at different points in the lifecycle.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="UnitTypeSchemeName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Unit Type using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="UnitTypeGroupReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing UnitTypeGroup using the Reference structure. TypeOfObject should be set to UnitTypeGroup.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="UnitTypeGroup" type="UnitTypeGroupType">
+		<xs:annotation>
+			<xs:documentation>Contains a group of UnitTypes.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="UnitTypeGroupType">
+		<xs:annotation>
+			<xs:documentation>Contains a group of UnitTypes, which may describe an ordered or hierarchical relationship structure. Specifies the purpose of the group, a name, label, and description of the group, its relationship to a specific universe or concept, and lists the members of the group.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:VersionableType">
+				<xs:sequence>
+					<xs:element ref="TypeOfUnitTypeGroup" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A generic element for specifying a reason for a UnitTypeGroup. Note that this element can contain either a term from a controlled vocabulary list or a textual description.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="UnitTypeGroupName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the group. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the UnitTypeGroup. May be expressed in multiple languages. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the content and purpose of the UnitTypeGroup. May be expressed in multiple languages and supports the use of structured content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:UniverseReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to the universe statement describing the persons or other objects to which the contents of this group pertain.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:ConceptReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to the concept expressed by the objects in this group.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Subject" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If subjects are listed for this group, it is strongly recommended that the subjects listed also be found in the TopicalCoverage element for the parent packaging element when this group is included directly or by reference in a module containing a coverage element. Use of subject at the group level allows for associating objects as a type of subject based group or to identify subject characteristics of a reusable group of objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Keyword" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If keywords are listed for this group, it is strongly recommended that the keywords listed also be found in the TopicalCoverage element for the parent packaging element when this group is included directly or by reference in a module containing a coverage element. Use of keyword at the group level allows for associating objects as a type of keyword based group or to identify keyword characteristics of a reusable group of objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:UnitTypeReference">
+							<xs:annotation>
+								<xs:documentation>Reference to constituent UnitType. TypeOfObject should be set to UnitType.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="UnitTypeGroupReference">
+							<xs:annotation>
+								<xs:documentation>Reference to constituent UnitTypeGroup. This allows for nesting of UnitTypeGroups.  TypeOfObject should be set to UnitTypeGroup.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+				<xs:attribute name="isOrdered" type="xs:boolean" default="false">
+					<xs:annotation>
+						<xs:documentation>If set to "true" indicates that the content of the group is ordered as it appears within the XML structure.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="UnitTypeGroupName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the UnitTypeGroup using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TypeOfUnitTypeGroup" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>A brief textual description of the type of group created to associate a number of unit types. Supports the use of an external controlled vocabulary.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="UnitType" type="UnitTypeType">
+		<xs:annotation>
+			<xs:documentation>A Unit Type is a class of objects of interest. A Unit Type is used to describe a class or group of Units based on a single characteristic with no specification of time and geography.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="UnitTypeType">
+		<xs:annotation>
+			<xs:documentation>A Unit Type is a class of objects of interest. A Unit Type is used to describe a class or group of Units based on a single characteristic with no specification of time and geography. For example, the Unit Type of "Person" groups together a set of Units based on the characteristic that they are "Persons". It concerns not only Unit Types used in dissemination, but anywhere in the statistical process. For example, using administrative data might involve the use of a fiscal unit. "Object class (ISO 11179)" is a synonym of UnitType. [GSIM 1.2]</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:DescribableType">
+				<xs:sequence>
+					<xs:element ref="r:ConceptReference">
+						<xs:annotation>
+							<xs:documentation>Reference to the Concept that defines the UnitType. TypeOfObject should be set to Concept.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>	
+</xs:schema>

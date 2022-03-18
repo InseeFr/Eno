@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Copyright (c) 2020 DDI Alliance, DDI 3.3 release, 2020-04-15
+
+This file is part of DDI 3.3 XML Schema.
+
+DDI 3.3 XML Schema is licenced under the terms of the Creative Commons Attribution 4.0 International (CC BY 4.0) License.
+
+This is a human-readable summary of (and not a substitute for) the license (https://creativecommons.org/licenses/by/4.0/legalcode) 
+
+You are free to:
+
+    Share — copy and redistribute the material in any medium or format
+	
+    Adapt — remix, transform, and build upon the material
+    for any purpose, even commercially.
+
+    The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+
+    Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. 
+	You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+    No additional restrictions — You may not apply legal terms or technological measures that legally restrict others 
+	from doing anything the license permits.
+
+Notices:
+
+    You do not have to comply with the license for elements of the material in the public domain or where your use is permitted 
+	by an applicable exception or limitation.
+    
+	No warranties are given. The license may not give you all of the permissions necessary for your intended use. 
+	For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+	
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="ddi:dataset:3_3" xmlns:r="ddi:reusable:3_3" xmlns:p="ddi:physicaldataproduct:3_3" targetNamespace="ddi:dataset:3_3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="ddi:reusable:3_3" schemaLocation="reusable.xsd"/>
+	<xs:import namespace="ddi:physicaldataproduct:3_3" schemaLocation="physicaldataproduct.xsd"/>
+	<xs:element name="DataSet" type="DataSetType" substitutionGroup="p:BaseRecordLayout">
+		<xs:annotation>
+			<xs:documentation>DataSet is a substitution for a BaseRecordLayout and allows for in-line inclusion of micro or unit level data in the metadata file. Data may be organized as a Record Set, Item Set, or Variable Set.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="DataSetType">
+		<xs:annotation>
+			<xs:documentation>DataSet is a substitution for a BaseRecordLayout and allows for in-line inclusion of micro or unit level data in the metadata file. This is valuable for small datasets or cases where there is a need to combine the metadata and data within a single file. In addition to the PhysicalStructureReference the DataSet indicates the ArrayBase if applicable, a name for the DataSet, a reference to the default Variable Scheme used by the data set, a reference to an Identifying Variable (e.g. case number), and a choice of organization order for the data: Record Set, Item Set, or Variable Set. RecordSet describes records of data which contain the same variables in the same order, ItemSet describes individual items of a dataset in any order. VariableSet describes the values for a given variable in record order.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="p:BaseRecordLayoutType">
+				<xs:sequence>
+					<xs:element ref="r:ArrayBase" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Sets the array base for any arrays used in the definition (that is, whether the first value is in position 0 or 1, etc.).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="DataSetName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the data set. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="IdentifyingVariableReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to the variable used to identify a specific record within the data set (unique identifier or key).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:DefaultVariableSchemeReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A reference to the Variable Scheme containing all or a majority of the variables in the data set. May be overridden by an individual VariableReference.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0">
+						<xs:element ref="RecordSet">
+							<xs:annotation>
+								<xs:documentation>Storage format arranged record by record. A RecordSet requires a list of variables to appear in a specified order.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="ItemSet">
+							<xs:annotation>
+								<xs:documentation>Storage format for random order item variables. Each ItemValue references it's defining variable, it's record identifier, and the it's value.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="VariableSet">
+							<xs:annotation>
+								<xs:documentation>Storage format arranged variable by variable. Item values are listed in record order with the assumption that each record will occupy the position in each array.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RecordSetType">
+		<xs:annotation>
+			<xs:documentation>Storage format arranged record by record. A RecordSet requires a list of variables to appear in a specified order. Provides a consistent order for the variables and a set of values for each record displayed in variable order.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="VariableOrder" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides the sequence of variables representing the order of storage within each record.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="Record" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>For each record, contains the values for the items in order by the specified variable sequence.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="RecordSet" type="RecordSetType">
+		<xs:annotation>
+			<xs:documentation>Storage format arranged record by record. A RecordSet requires a list of variables to appear in a specified order.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="VariableOrderType">
+		<xs:annotation>
+			<xs:documentation>A set of References to Variable found in the record in storage order.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="r:VariableReference" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>References variables in storage order. One reference per variable.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="VariableOrder" type="VariableOrderType">
+		<xs:annotation>
+			<xs:documentation>A set of References to Variable found in the record in storage order.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="RecordType">
+		<xs:annotation>
+			<xs:documentation>For each record, contains the values for the items in order by the specified variable sequence.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="r:Value" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>An individual item value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Record" type="RecordType">
+		<xs:annotation>
+			<xs:documentation>For each record, contains the values for the items in order by the specified variable sequence.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ItemSetType">
+		<xs:annotation>
+			<xs:documentation>Storage format for random order item variables. Each ItemValue references it's defining variable, it's record identifier, and the it's value.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ItemValue" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Each value in the data set linked to it's variable and record identification.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ItemValueType">
+		<xs:annotation>
+			<xs:documentation>Each value in the data set linked to it's variable and record identification.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="r:VariableReference" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Reference to the variable describing the item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RecordReference" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The value of the record identifier or key. This is the value found in the item linked to the variable identified by the DataSet in the IdentifyingVariableReference.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="r:Value" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The value of the item for the specified variable and record.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DataSetName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Data Set using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdentifyingVariableReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing Variable using the Reference structure. TypeOfObject should be set to Variable.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ItemSet" type="ItemSetType">
+		<xs:annotation>
+			<xs:documentation>Storage form for random order item variables.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ItemValue" type="ItemValueType">
+		<xs:annotation>
+			<xs:documentation>Each value in the data set linked to it's variable and record identification.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="VariableSetType">
+		<xs:annotation>
+			<xs:documentation>Storage format arranged variable by variable. Item values are listed in record order with the assumption that each record will occupy the position in each array.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="VariableItem" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The set of values associated with a single variable (one for each record in storage order of records).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="VariableSet" type="VariableSetType">
+		<xs:annotation>
+			<xs:documentation>Storage form arranged variable by variable.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="VariableItemType">
+		<xs:annotation>
+			<xs:documentation>The set of values associated with a single variable (one for each record in storage order of records).</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="r:VariableReference" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Reference to the variable associated with the values given.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="r:Value" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Value associated with the referenced variable in record storage order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="VariableItem" type="VariableItemType">
+		<xs:annotation>
+			<xs:documentation>The set of values associated with a single variable (one for each record in storage order of records).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

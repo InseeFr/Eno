@@ -1,0 +1,1403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Copyright (c) 2020 DDI Alliance, DDI 3.3 release, 2020-04-15
+
+This file is part of DDI 3.3 XML Schema.
+
+DDI 3.3 XML Schema is licenced under the terms of the Creative Commons Attribution 4.0 International (CC BY 4.0) License.
+
+This is a human-readable summary of (and not a substitute for) the license (https://creativecommons.org/licenses/by/4.0/legalcode) 
+
+You are free to:
+
+    Share — copy and redistribute the material in any medium or format
+	
+    Adapt — remix, transform, and build upon the material
+    for any purpose, even commercially.
+
+    The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+
+    Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. 
+	You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+    No additional restrictions — You may not apply legal terms or technological measures that legally restrict others 
+	from doing anything the license permits.
+
+Notices:
+
+    You do not have to comply with the license for elements of the material in the public domain or where your use is permitted 
+	by an applicable exception or limitation.
+    
+	No warranties are given. The license may not give you all of the permissions necessary for your intended use. 
+	For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="ddi:group:3_3" xmlns:r="ddi:reusable:3_3" xmlns:a="ddi:archive:3_3" xmlns:c="ddi:conceptualcomponent:3_3" xmlns:cm="ddi:comparative:3_3" xmlns:d="ddi:datacollection:3_3" xmlns:l="ddi:logicalproduct:3_3" xmlns:p="ddi:physicaldataproduct:3_3" xmlns:pi="ddi:physicalinstance:3_3" xmlns:m1="ddi:physicaldataproduct_ncube_normal:3_3" xmlns:m2="ddi:physicaldataproduct_ncube_tabular:3_3" xmlns:m3="ddi:physicaldataproduct_ncube_inline:3_3" xmlns:s="ddi:studyunit:3_3" xmlns:pr="ddi:ddiprofile:3_3" targetNamespace="ddi:group:3_3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="ddi:reusable:3_3" schemaLocation="reusable.xsd"/>
+	<xs:import namespace="ddi:archive:3_3" schemaLocation="archive.xsd"/>
+	<xs:import namespace="ddi:comparative:3_3" schemaLocation="comparative.xsd"/>
+	<xs:import namespace="ddi:conceptualcomponent:3_3" schemaLocation="conceptualcomponent.xsd"/>
+	<xs:import namespace="ddi:datacollection:3_3" schemaLocation="datacollection.xsd"/>
+	<xs:import namespace="ddi:logicalproduct:3_3" schemaLocation="logicalproduct.xsd"/>
+	<xs:import namespace="ddi:physicaldataproduct:3_3" schemaLocation="physicaldataproduct.xsd"/>
+	<xs:import namespace="ddi:physicalinstance:3_3" schemaLocation="physicalinstance.xsd"/>
+	<xs:import namespace="ddi:studyunit:3_3" schemaLocation="studyunit.xsd"/>
+	<xs:import namespace="ddi:ddiprofile:3_3" schemaLocation="ddiprofile.xsd"/>
+	<xs:element name="Group" type="GroupType">
+		<xs:annotation>
+			<xs:documentation>A primary packaging and publication module within DDI containing a Group of StudyUnits. The Group structure allows metadata regarding multiple study units to be published as a structured entity. Studies may be grouped "by design" such as a repeated study with intended areas of commonality between each study, or "ad hoc" where studies are grouped for applied or administrative reasons.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ResourcePackage" type="ResourcePackageType">
+		<xs:annotation>
+			<xs:documentation>The Resource Package is a specialized structure which is intended to hold reusable metadata outside of the structures of a single StudyUnit or Group. This may be common methodological approaches bound in a DataCollection module, DataRelationship information bound in a LogicalProduct, or any maintainable scheme. The ResourcePackage is often used to manage and publish metadata that is used by StudyUnits or Groups by reference. Any maintainable object with the exception of a Group, StudyUnit or LocalHoldingPackage may be published in a Resource Package.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LocalHoldingPackage" type="LocalHoldingPackageType">
+		<xs:annotation>
+			<xs:documentation>Allows a depository to hold the contents of a DDI StudyUnit, Group, or ResourcePackage as received while providing locally created value added material and processing information without having to alter the maintenance agency or version of the original material. Contains the depository object by reference plus local added content including the objects added and a link to the location of the addition or change in the deposited object.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ResourcePackageType">
+		<xs:annotation>
+			<xs:documentation>The Resource Package is a specialized structure which is intended to hold reusable metadata outside of the structures of a single StudyUnit or Group. For example this may be common methodological approaches bound in a DataCollection module, DataRelationship information bound in a LogicalProduct, or any maintainable scheme. The ResourcePackage is often used to manage and publish metadata that is used by StudyUnits or Groups by reference. Any maintainable object with the exception of a Group, StudyUnit or LocalHoldingPackage may be published in a Resource Package. Each maintainable object may be entered as either an in-line representation or by reference. Within each maintainable type the ordering of in-line or referenced content may be mixed. In addition the ResourcePackage contains self identifying information including: a citation, abstract, authorization source, a universe reference, series statement, references to applicable quality statements, funding and budget information, purpose, coverage, other material, embargo, and the resource package archive (as opposed to an Archive module intended as the part of the published reusable content).</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:MaintainableType">
+				<xs:sequence>
+					<xs:element ref="r:Citation" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The citation for the ResourcePackage. DDI strongly recommends that at minimum a Title be provided.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="TypeOfResourcePackage" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A brief description of the resource package type. Supports the use of a controlled vocabulary.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Abstract" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>An abstract of the ResourcePackage unit describing the nature and scope of the data collection, special characteristics of its content. Note that detailed information on the purpose of the ResourcePackage and structured coverage information are to be entered in Purpose and Coverage. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:AuthorizationSource" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Identifies the authorizing agency for the ResourcePackage and allows for the full text of the authorization (law, regulation, or other form of authorization). May be used to list authorizations from oversight committees and other regulatory agencies.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0">
+						<xs:element ref="r:ApprovalReview">
+							<xs:annotation>
+								<xs:documentation>Provides information about the Approval Review undertaken in relation to the activity. Identifies the organization processing the review, the role of the approval review organization, case number, description, and related dates. Allows the inclusion of a reference to an external source detailing the approval review.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ApprovalReviewReference">
+							<xs:annotation>
+								<xs:documentation>Reference to an object that provides information about the Approval Review undertaken in relation to the activity. Identifies the organization processing the review, the role of the approval review organization, case number, description, and related dates. Allows the inclusion of a reference to an external source detailing the approval review. TypeOfObject should be set to ApprovalReview.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:element ref="r:DefiningConceptReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A concept that defines or aids in understanding the content of the resource package.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:UniverseReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to the universe statement from the universe scheme, describing the ResourcePackage of persons or other elements that are the object of research and to which any analytic results refer. Age, nationality, and residence commonly help to delineate a given universe, but any of a number of factors may be involved, such as sex, race, income, veteran status, criminal convictions, etc. The universe may consist of elements other than persons, such as housing units, court cases, deaths, countries, etc. In general, it should be possible to tell from the description of the universe whether a given individual or element (hypothetical or real) is a member of the population under ResourcePackage. A universe may be described as "inclusive" or "exclusive". This ResourcePackage level reference is normally to the top level of the UniverseScheme.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:SeriesStatement" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A ResourcePackage, particularly one in a series, may be the result of two series merging into a single ResourcePackage. The new ResourcePackage belongs to both series. For example, Niger now fields the UNICEF Multiple Indicators Cluster Survey (MICS) and the Demographic and Health Survey as a single merged instrument.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:InformationClassification">
+							<xs:annotation>
+								<xs:documentation>Used to describe the rules and guidelines on how the data is allowed to be handled, transferred, stored and disposed. These confidentiality policies are often dictated by national laws and/or data owners on handling of personal, proprietary, and other sensitive information.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:InformationClassificationReference">
+							<xs:annotation>
+								<xs:documentation>Reference InformationClassification used to describe the rules and guidelines on how the data is allowed to be handled, transferred, stored and disposed. Uses the Reference structure. TypeOfObject should be set to InformationClassification.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:element ref="r:QualityStatementReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A reference to a QualityScheme containing statements of quality related to the quality of the ResourcePackage methodology, metadata, or data. Quality statements may be related to external quality standards.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:FundingInformation" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Contains details of the ResourcePackage unit's funding, including information about grants, agencies, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="ProjectBudget" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>This describes the overall budget of the ResourcePackage. It can be repeated for distinct budget activities. It contains a structured description and one or more budget documents described by an OtherMaterial type.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Purpose" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The purpose of the ResourcePackage, why the ResourcePackage took place. This should include detailed information on the investigator's primary ResourcePackage questions or hypotheses as well as information on any legal basis for the data collection, such as laws requiring the collection of census data for apportionment purposes. Legal or other authorization should be provided in detail within AuthorizationSource. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Coverage" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Describes the coverage of the ResourcePackage unit. Detailed information on Topical, Temporal, and Spatial Coverage is contained here. Note that Coverage at this level should be inclusive all lower level modules or section. Lower level descriptions serve to constrain coverage within the scope described here.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Embargo" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Embargo information about the ResourcePackage unit. References to embargo information in this section can be made from individual variables.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:OtherMaterialScheme">
+							<xs:annotation>
+								<xs:documentation>This scheme contains a set of other materials referenced by the metadata.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:OtherMaterialSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of an existing Other Material Scheme by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:element ref="ResourcePackageArchive" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>This is archive information specific to the creation, maintenance, and archiving of the ResourcePackage provided either in-line or by reference. This packaging element differentiates this "Archive" from one being published as a product within a ResourcePackage.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="c:ConceptualComponent">
+							<xs:annotation>
+								<xs:documentation>Allows for in-line entry of an ConceptualComponent.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ConceptualComponentReference">
+							<xs:annotation>
+								<xs:documentation>Allows for inclusion of an ConceptualComponent by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="d:DataCollection">
+							<xs:annotation>
+								<xs:documentation>Allows for in-line entry of an DataCollection.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:DataCollectionReference">
+							<xs:annotation>
+								<xs:documentation>Allows for inclusion of an DataCollection by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="l:BaseLogicalProduct">
+							<xs:annotation>
+								<xs:documentation>Allows for in-line entry of any LogicalProduct. l:BaseLogicalProduct is a substitution group base.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:LogicalProductReference">
+							<xs:annotation>
+								<xs:documentation>Allows for inclusion of an LogicalProduct by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="p:PhysicalDataProduct">
+							<xs:annotation>
+								<xs:documentation>Allows for in-line entry of an PhysicalDataProduct.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:PhysicalDataProductReference">
+							<xs:annotation>
+								<xs:documentation>Allows for inclusion of an PhysicalDataProduct by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="pi:PhysicalInstance">
+							<xs:annotation>
+								<xs:documentation>Allows for in-line entry of an PhysicalInstance.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:PhysicalInstanceReference">
+							<xs:annotation>
+								<xs:documentation>Allows for inclusion of an PhysicalInstance by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="pi:PhysicalInstanceGroup">
+							<xs:annotation>
+								<xs:documentation>Allows physical instance modules to be grouped with or without hierarchical structure.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:PhysicalInstanceGroupReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a PhysicalInstanceGroup that allows categories to be grouped with or without hierarchical structure by reference. TypeOfObject should be set to PhysicalInstanceGroup.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="a:Archive">
+							<xs:annotation>
+								<xs:documentation>Allows for in-line entry of an Archive.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ArchiveReference">
+							<xs:annotation>
+								<xs:documentation>Allows for inclusion of an Archive by reference</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="pr:DDIProfile">
+							<xs:annotation>
+								<xs:documentation>Allows for in-line entry of an DDIProfile.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:DDIProfileReference">
+							<xs:annotation>
+								<xs:documentation>Allows for inclusion of an DDIProfile by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="cm:Comparison">
+							<xs:annotation>
+								<xs:documentation>Allows for in-line entry of an Comparison.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ComparisonReference">
+							<xs:annotation>
+								<xs:documentation>Allows for inclusion of an Comparison by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="l:ClassificationFamily">
+							<xs:annotation>
+								<xs:documentation>Allows for in-line entry of a Classification Family.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ClassificationFamilyReference">
+							<xs:annotation>
+								<xs:documentation>Allows for inclusion of a Classification Family by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="l:ClassificationCorrespondenceTable">
+							<xs:annotation>
+								<xs:documentation>Allows for in-line entry of a Classification Correspondence Table.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ClassificationCorrespondenceTableReference">
+							<xs:annotation>
+								<xs:documentation>Allows for inclusion of a Classification Correspondence Table by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<!-- INDIVIDUAL SCHEMES -->
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="a:OrganizationScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a OrganizationScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:OrganizationSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a OrganizationScheme by reference. TypeOfObject should be set to OrganizationScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="c:ConceptScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a ConceptScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ConceptSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a ConceptScheme by reference. TypeOfObject should be set to ConceptScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="c:UniverseScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a UniverseScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:UniverseSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a UniverseScheme by reference. TypeOfObject should be set to UniverseScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="c:ConceptualVariableScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a ConceptualVariableScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ConceptualVariableSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a ConceptualVariableScheme by reference. TypeOfObject should be set to ConceptualVariableScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="l:RepresentedVariableScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a RepresentedVariableScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:RepresentedVariableSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a RepresentedVariableScheme by reference. TypeOfObject should be set to RepresentedVariableScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="c:GeographicStructureScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a GeographicStructureScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:GeographicStructureSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a GeographicStructureScheme by reference. TypeOfObject should be set to GeographicStructureScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="c:GeographicLocationScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a GeographicLocationScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:GeographicLocationSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a GeographicLocationScheme by reference. TypeOfObject should be set to GeographicLocationScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="d:InterviewerInstructionScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a InterviewerInstructionScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:InterviewerInstructionSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a InterviewerInstructionScheme by reference. TypeOfObject should be set to InterviewerInstructionScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="d:ControlConstructScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a ControlConstructScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ControlConstructSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a ControlConstructScheme by reference. TypeOfObject should be set to ControlConstructScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="d:QuestionScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a QuestionScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:QuestionSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a QuestionScheme by reference. TypeOfObject should be set to QuestionScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="d:MeasurementScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a MeasurementScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:MeasurementSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a MeasurementScheme by reference. TypeOfObject should be set to MeasurementScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="l:CategoryScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a CategoryScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:CategorySchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a CategoryScheme by reference. TypeOfObject should be set to CategoryScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="l:CodeListScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a CodeListScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:CodeListSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a CodeListScheme by reference. TypeOfObject should be set to CodeListScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="l:NCubeScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a NCubeScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:NCubeSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a NCubeScheme by reference. TypeOfObject should be set to NCubeScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="l:VariableScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a VariableScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:VariableSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a VariableScheme by reference. TypeOfObject should be set to VariableScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="p:PhysicalStructureScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a PhysicalStructureScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:PhysicalStructureSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a PhysicalStructureScheme by reference. TypeOfObject should be set to PhysicalStructureScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="p:RecordLayoutScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a RecordLayoutScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:RecordLayoutSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a RecordLayoutScheme by reference. TypeOfObject should be set to RecordLayoutScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:QualityScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a QualityScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:QualitySchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a QualityScheme by reference. TypeOfObject should be set to QualityScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="d:InstrumentScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a InstrumentScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:InstrumentSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a InstrumentScheme by reference. TypeOfObject should be set to InstrumentScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="d:ProcessingEventScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a ProcessingEventScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="d:ProcessingEventSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a ProcessingEventScheme by reference. TypeOfObject should be set to ProcessingEventScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="d:ProcessingInstructionScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a ProcessingInstructionScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="d:ProcessingInstructionSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a ProcessingInstructionScheme by reference. TypeOfObject should be set to ProcessingInstructionScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:ManagedRepresentationScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a ManagedRepresentationScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ManagedRepresentationSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a ManagedRepresentationScheme by reference. TypeOfObject should be set to ManagedRepresentationScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="c:UnitTypeScheme">
+							<xs:annotation>
+								<xs:documentation>In-line inclusion of a UnitTypeScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:UnitTypeSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a UnitTypeScheme by reference. TypeOfObject should be set to UnitTypeScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="d:SamplingInformationScheme">
+							<xs:annotation>
+								<xs:documentation>A set of sample frames maintained by an agency, and used in the instrument.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:SamplingInformationSchemeReference">
+							<xs:annotation>
+								<xs:documentation>References to a set of sample frames maintained by an agency, and used in the instrument.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="d:DevelopmentActivityScheme">
+							<xs:annotation>
+								<xs:documentation>A set of development activities maintained by an agency, and used in the development, review, or creation of a question, measurement, data capture flow (control construct), or instrument.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:DevelopmentActivitySchemeReference">
+							<xs:annotation>
+								<xs:documentation>References to a set of development activities maintained by an agency, and used in the development, review, or creation of a question, measurement, data capture flow (control construct), or instrument. TypeOfObject should be DevelopmentActivityScheme.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GroupType">
+		<xs:annotation>
+			<xs:documentation>A primary packaging and publication module within DDI containing a Group of StudyUnits. The Group structure allows metadata regarding multiple study units to be published as a structured entity. Studies may be grouped "by design" such as a repeated study with intended areas of commonality between each study, or "ad hoc" where studies are grouped for applied or administrative reasons. When grouping is done "by design", such as within a longitudinal study, common metadata such as shared methodology, common category schemes, etc. may be moved up from the individual studies into the Group and inherited by all the members of the group. Inherited metadata may be over-ridden at the lower levels. Inheritance may be turned "off" for groups of study units done on an ad-hoc basis, such as a set of studies used for a particular activity such as instruction. The purpose of groups is described using the attributes which summarize relationships along the dimensions of time, panel, geography, instrument and language. These attributes allow the purpose to be machine-actionable, while the group also includes an element for describing the purpose in human-readable format. As a publication package Group contains a Citation, Abstract, information on authorization, the universe of the group, series statement, quality statements, ex-post evaluation material, funding and budget, purpose, coverage, analysis units covered, kind of data, other materials, a list of required resource packages and embargo information. It then allows all maintainable structures within the StudyUnit to be expressed at the Group level along with individual StudyUnits. StudyUnits may also be grouped into subordinate Groups allowing for infinite nesting of StudyUnits.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:MaintainableType">
+				<xs:sequence>
+					<xs:element ref="TypeOfGroup" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A brief textual identification of the StudyUnit. Supports the use of an external controlled vocabulary.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Citation" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The citation for the group. DDI strongly recommends that at minimum a Title be provided.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Abstract" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>An abstract of the group unit describing the nature and scope of the data collection, special characteristics of its content. Note that detailed information on the purpose of the group and structured coverage information are to be entered in Purpose and Coverage. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:AuthorizationSource" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Identifies the authorizing agency for the group and allows for the full text of the authorization (law, regulation, or other form of authorization). May be used to list authorizations from oversight committees and other regulatory agencies.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0">
+						<xs:element ref="r:ApprovalReview">
+							<xs:annotation>
+								<xs:documentation>Provides information about the Approval Review undertaken in relation to the activity. Identifies the organization processing the review, the role of the approval review organization, case number, description, and related dates. Allows the inclusion of a reference to an external source detailing the approval review.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ApprovalReviewReference">
+							<xs:annotation>
+								<xs:documentation>Reference to an object that provides information about the Approval Review undertaken in relation to the activity. Identifies the organization processing the review, the role of the approval review organization, case number, description, and related dates. Allows the inclusion of a reference to an external source detailing the approval review. TypeOfObject should be set to ApprovalReview.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:element ref="r:DefiningConceptReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A concept that defines or aids in understanding the content of the group.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:UniverseReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to the universe statement from the universe scheme, describing the group of persons or other elements that are the object of research and to which any analytic results refer. Age, nationality, and residence commonly help to delineate a given universe, but any of a number of factors may be involved, such as sex, race, income, veteran status, criminal convictions, etc. The universe may consist of elements other than persons, such as housing units, court cases, deaths, countries, etc. In general, it should be possible to tell from the description of the universe whether a given individual or element (hypothetical or real) is a member of the population under group. A universe may be described as "inclusive" or "exclusive". This group level reference is normally to the top level of the UniverseScheme.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:SeriesStatement" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A group, particularly one in a series, may be the result of two series merging into a single group. The new group belongs to both series. For example, Niger now fields the UNICEF Multiple Indicators Cluster Survey (MICS) and the Demographic and Health Survey as a single merged instrument.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:InformationClassification">
+							<xs:annotation>
+								<xs:documentation>Used to describe the rules and guidelines on how the data is allowed to be handled, transferred, stored and disposed. These confidentiality policies are often dictated by national laws and/or data owners on handling of personal, proprietary, and other sensitive information.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:InformationClassificationReference">
+							<xs:annotation>
+								<xs:documentation>Reference InformationClassification used to describe the rules and guidelines on how the data is allowed to be handled, transferred, stored and disposed. Uses the Reference structure. TypeOfObject should be set to InformationClassification.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:element ref="r:QualityStatementReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A reference to a Quality Statement pertaining to the quality of the group overall, metadata, or data to which it is associated. Quality statements may be related to external quality standards.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:QualityScheme" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>A scheme containing statements of quality related to the quality of methodologies, metadata, or data. Quality statements and standards may be related to external quality standards.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:QualitySchemeReference" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>A reference to a QualityScheme containing statements of quality related to the quality of the group methodology, metadata, or data. Quality statements and standards may be related to external quality standards.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:element ref="r:ExPostEvaluation" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>An evaluation of the group process, often taking place after the completion of the group. These may include issues such as timing of the group, sequencing issues, cost/budget issues, relevance, institutional or legal arrangements etc. of the group. If the group is part of a series or group (i.e., a single wave in a longitudinal group) this may include evaluation of earlier waves which resulted in changes to the current wave.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:FundingInformation" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Contains details of the group unit's funding, including information about grants, agencies, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="ProjectBudget" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>This describes the overall budget of the group. It can be repeated for distinct budget activities. It contains a structured description and one or more budget documents described by an OtherMaterial type.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Purpose" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The purpose of the group, why the group took place. This should include detailed information on the investigator's primary group questions or hypotheses as well as information on any legal basis for the data collection, such as laws requiring the collection of census data for apportionment purposes. Legal or other authorization should be provided in detail within AuthorizationSource. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Coverage" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Describes the coverage of the group unit. Detailed information on Topical, Temporal, and Spatial Coverage is contained here. Note that Coverage at this level should be inclusive all lower level modules or section. Lower level descriptions serve to constrain coverage within the scope described here.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:AnalysisUnit" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Allows the use of a controlled vocabulary to list all of the units of analysis used in the group. Should be repeated to describe multiple units of analysis. The DDI Alliance has provided a controlled vocabulary (AnalysisUnit) to support this element at http://www.ddialliance.org/controlled-vocabularies.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:AnalysisUnitsCovered" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A narrative of the units of analysis in the group unit. Uses an InternationalString to support multiple languages.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:KindOfData" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Briefly describes the kind of data documented in the logical product(s) of a group unit. Examples include survey data, census/enumeration data, administrative data, measurement data, assessment data, demographic data, voting data, etc. Supports the use of an external controlled vocabulary.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:GeneralDataFormat" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Briefly describes the data formats documented in the logical product(s) of a group unit. Examples include Numeric, Text, Audio, Visual, Geospatial, StillImage, Software, 3D, etc. Supports the use of an external controlled vocabulary. The DDI Alliance has provided a controlled vocabulary (GeneralDataFormat) to support this element at http://www.ddialliance.org/controlled-vocabularies.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:RequiredResourcePackages" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Specifies by reference the ResourcePackages required to resolve the group. This list is informational and assists in creating full transmissions of metadata or creating archival packages. Primarily used after the instance is relatively stable and published.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Embargo" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Embargo information about the group unit. References to embargo information in this section can be made from individual variables.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:OtherMaterialScheme">
+							<xs:annotation>
+								<xs:documentation>This scheme contains a set of other materials referenced by the metadata.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:OtherMaterialSchemeReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of an existing Other Material Scheme by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="c:ConceptualComponent">
+							<xs:annotation>
+								<xs:documentation>ConceptualComponent applying to the group as a whole.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ConceptualComponentReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of ConceptualComponent applying to the group as a whole by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="d:DataCollection">
+							<xs:annotation>
+								<xs:documentation>DataCollection applying to the group as a whole.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:DataCollectionReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of DataCollection applying to the group as a whole by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="l:BaseLogicalProduct">
+							<xs:annotation>
+								<xs:documentation>LogicalProduct applying to the group as a whole.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:LogicalProductReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of LogicalProduct applying to the group as a whole by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="p:PhysicalDataProduct">
+							<xs:annotation>
+								<xs:documentation>PhysicalDataProduct applying to the group as a whole.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:PhysicalDataProductReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of PhysicalDataProduct applying to the group as a whole by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="pi:PhysicalInstance">
+							<xs:annotation>
+								<xs:documentation>PhysicalInstance applying to the group as a whole.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:PhysicalInstanceReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of PhysicalInstance applying to the group as a whole by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="pi:PhysicalInstanceGroup">
+							<xs:annotation>
+								<xs:documentation>Allows physical instance modules to be grouped with or without hierarchical structure.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:PhysicalInstanceGroupReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a PhysicalInstanceGroup that allows categories to be grouped with or without hierarchical structure by reference. TypeOfObject should be set to PhysicalInstanceGroup.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="a:Archive">
+							<xs:annotation>
+								<xs:documentation>Archive applying to the group as a whole.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ArchiveReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of Archive applying to the group as a whole by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="l:ClassificationFamily">
+							<xs:annotation>
+								<xs:documentation>Allows for in-line entry of a Classification Family.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ClassificationFamilyReference">
+							<xs:annotation>
+								<xs:documentation>Allows for inclusion of a Classification Family by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="pr:DDIProfile">
+							<xs:annotation>
+								<xs:documentation>DDIProfile applying to the group as a whole.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:DDIProfileReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of DDIProfile applying to the group as a whole by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="cm:Comparison">
+							<xs:annotation>
+								<xs:documentation>In-line Comparison of differences between related objects in different study units or due to versioning.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:ComparisonReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of Comparison by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="s:StudyUnit">
+							<xs:annotation>
+								<xs:documentation>A StudyUnit within the Group provided in-line.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:StudyUnitReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a StudyUnit within the Group by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="Group">
+							<xs:annotation>
+								<xs:documentation>A description of study units comprising a subordinate Group within the main Group.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:GroupReference">
+							<xs:annotation>
+								<xs:documentation>Inclusion of a subordinate Group by reference.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+				<xs:attribute name="time" type="TimeGroupCodeType" default="T0">
+					<xs:annotation>
+						<xs:documentation>Indicates how all members of the group are related along the dimension of time (for example single occurrence, multiple occurrence, etc.).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="captureInstrument" type="InstrumentGroupCodeType" default="I0">
+					<xs:annotation>
+						<xs:documentation>Indicates how all members of the group are related in terms of the instruments used to collect data (single, multiple, etc.).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="panel" type="PanelGroupCodeType" default="P0">
+					<xs:annotation>
+						<xs:documentation>Indicates how all members of the group are related in terms of type of panel (single, rolling, etc.).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="geography" type="GeographyGroupCodeType" default="G0">
+					<xs:annotation>
+						<xs:documentation>Indicates how all members of the group are related along the dimension of geography.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="dataProduct" type="DataProductGroupCodeType" default="D0">
+					<xs:annotation>
+						<xs:documentation>Indicates how all members of the group are related in terms of physical data products in relation to data collection efforts.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="languageRelationship" type="LanguageGroupCodeType" default="L0">
+					<xs:annotation>
+						<xs:documentation>Indicates how all members of the group are related in terms of language relationships such as parallel content in multiple languages, translations (full or partial), etc.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="userDefinedGroupProperty" type="xs:string" use="optional">
+					<xs:annotation>
+						<xs:documentation>Provides a user-defined grouping property, different from those supplied in other attributes.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="userDefinedGroupPropertyValue" type="xs:string" use="optional">
+					<xs:annotation>
+						<xs:documentation>Provides a value for the user-defined group property supplied in userDefinedGroupProperty.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="isInheritable" type="xs:boolean" default="true">
+					<xs:annotation>
+						<xs:documentation>Default is true, and allows for inheritance of all properties and modules, and the use of lower-level over-rides. If set to false, inheritance is switched off for specific groups.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="TypeOfGroup" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>A brief textual description or classification of the Group. Supports the use of an external controlled vocabulary. DDI recommends the use of a controlled vocabulary.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="LocalHoldingPackageType">
+		<xs:annotation>
+			<xs:documentation>Allows a depository to hold the contents of a DDI StudyUnit, Group, or ResourcePackage as received while providing locally created value added material and processing information without having to alter the maintenance agency or version of the original material. Contains the depository object by reference plus local added content including the objects added and a link to the location of the addition or change in the deposited object.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:MaintainableType">
+				<xs:sequence>
+					<xs:choice maxOccurs="unbounded">
+						<xs:element ref="DepositoryStudyUnitReference">
+							<xs:annotation>
+								<xs:documentation>A reference to the StudyUnit as deposited.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="DepositoryGroupReference">
+							<xs:annotation>
+								<xs:documentation>A reference to the Group as deposited.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="DepositoryResourcePackageReference">
+							<xs:annotation>
+								<xs:documentation>A reference to a ResourcePackage as deposited.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:element ref="r:DefiningConceptReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A concept that defines or aids in understanding the content of the local holding package.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="LocalAddedContent" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A reference to the ResourcePackage as deposited.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DepositoryStudyUnitReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing StudyUnit using the Reference structure. TypeOfObject should be set to StudyUnit.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DepositoryGroupReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing Group using the Reference structure. TypeOfObject should be set to Group.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="LocalAddedContentType">
+		<xs:annotation>
+			<xs:documentation>Allows a depository to provide locally created value added material and processing information in the appropriate packaging structure and to designate the relationship of added material to the original by means of a content map. The content maps indicates if the added material should Override, act as AddedContent, or DeleteContent in the original deposited material. The material is expressed in the structure of either a StudyUnit, Group, or ResourcePackage within a local content structure.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ContentLinkingMap">
+				<xs:annotation>
+					<xs:documentation>Contains a stack of links from the LocalAddedContent to the Depository content and provides instructions regarding the relationship between the local added content and the deposited content.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="LocalStudyUnitContent">
+					<xs:annotation>
+						<xs:documentation>Local Content using the StudyUnit structure.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="LocalStudyUnitContentReference">
+					<xs:annotation>
+						<xs:documentation>Reference to Local Content using the StudyUnit structure. TypeOfObject should be set to StudyUnit.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="LocalGroupContent">
+					<xs:annotation>
+						<xs:documentation>Local Content using the Group structure.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="LocalGroupContentReference">
+					<xs:annotation>
+						<xs:documentation>Reference to Local Content using the Group structure. TypeOfObject should be set to Group.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="LocalResourcePackageContent">
+					<xs:annotation>
+						<xs:documentation>Local Content using the ResourcePackage structure.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="LocalResourcePackageContentReference">
+					<xs:annotation>
+						<xs:documentation>Reference to Local Content using the ResourcePackage structure. TypeOfObject should be set to ResourcePackage.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContentLinkingMapType">
+		<xs:annotation>
+			<xs:documentation>Contains a stack of links from the LocalAddedContent to the Depository content and provides instructions regarding the relationship between the local added content and the deposited content.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="LinkingMap" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Provides a link from a local object to a deposited object via reference and designates if the added material should Override, act as AddedContent, or DeleteContent in the original deposited material.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LinkingMapType">
+		<xs:annotation>
+			<xs:documentation>Provides a link from a local object to a deposited object via reference and designates if the added material should Override, act as AddedContent, or DeleteContent in the original deposited material. A description of the link or reason for new material may be provided.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="LocalObjectReference" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A reference to the local object that is to be related to a depository object. If the relationship action is set to delete then no local object needs to be designated.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="DepositoryObjectReference">
+				<xs:annotation>
+					<xs:documentation>A reference to the deposited object.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="RelationshipAction">
+				<xs:annotation>
+					<xs:documentation>Provides a structured means of stating if the local object overrides (replaces) the depository object, adds information to the deposited object, deletes the content of the depository object without replacing it. or restricts access the deposited object by attaching an embargo or access restriction to it. Supports the use of a controlled vocabulary.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="r:Description">
+				<xs:annotation>
+					<xs:documentation>A description of the link such as the reason for adding or changing local content. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DepositoryResourcePackageReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing ResourcePackage using the Reference structure. TypeOfObject should be set to ResourcePackage.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LocalAddedContent" type="LocalAddedContentType">
+		<xs:annotation>
+			<xs:documentation>Allows a depository to provide locally created value added material and processing information in the appropriate packaging structure and to designate the relationship of added material to the original.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LocalStudyUnitContent" type="s:StudyUnitType">
+		<xs:annotation>
+			<xs:documentation>A StudyUnit structure used to hold local extensions to the metadata related to a deposited study.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LocalGroupContent" type="GroupType">
+		<xs:annotation>
+			<xs:documentation>A publication of local additions to a deposited group of StudyUnits.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LocalResourcePackageContent" type="ResourcePackageType">
+		<xs:annotation>
+			<xs:documentation>The Resource Package structure used to hold local extensions to reusable metadata such as Category Schemes, Variable Schemes, or modules etc.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ContentLinkingMap" type="ContentLinkingMapType">
+		<xs:annotation>
+			<xs:documentation>Contains a stack of links from the LocalAddedContent to the Depository content.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LinkingMap" type="LinkingMapType">
+		<xs:annotation>
+			<xs:documentation>Provides a link from a local object to a deposited object via reference and designates if the added material should Override, act as AddedContent, or DeleteContent in the original deposited material.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DepositoryObjectReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing object in the depository item using the Reference structure. TypeOfObject should be set to any Identifiable, Versionable or Maintainable object.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LocalObjectReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing object in the local added content metadata using the Reference structure. TypeOfObject should be set to any Identifiable, Versionable or Maintainable object.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RelationshipAction" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>Provides a structured means of stating if the local object overrides (replaces) the depository object, adds information to the deposited object, deletes the content of the depository object without replacing it. or restricts access the deposited object by attaching an embargo or access restriction to it. Supports the use of a controlled vocabulary.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:simpleType name="TimeGroupCodeType">
+		<xs:annotation>
+			<xs:documentation>Indicates how all members of the group are related along the dimension of time. These relationships are inferred by the markup author, and should be considered as her/his own interpretation of the data.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="T0">
+				<xs:annotation>
+					<xs:documentation>No specified relationship</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="T1">
+				<xs:annotation>
+					<xs:documentation>Single Occurrence</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="T2">
+				<xs:annotation>
+					<xs:documentation>Multiple Occurrence: Regular Occurrence: Continuing</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="T3">
+				<xs:annotation>
+					<xs:documentation>Multiple Occurrence: Regular Occurrence: Limited time</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="T4">
+				<xs:annotation>
+					<xs:documentation>Multiple Occurrence: Irregular Occurrence: Continuing</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="T5">
+				<xs:annotation>
+					<xs:documentation>Multiple Occurrence: Irregular Occurrence: Limited time</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InstrumentGroupCodeType">
+		<xs:annotation>
+			<xs:documentation>Indicates how all members of the group are related in terms of the instruments used to collect data. These relationships are inferred by the markup author, and should be considered as her/his own interpretation of the data.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="I0">
+				<xs:annotation>
+					<xs:documentation>No specified relationship</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="I1">
+				<xs:annotation>
+					<xs:documentation>Single</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="I2">
+				<xs:annotation>
+					<xs:documentation>Multiple: Integrated set of 2 or more instruments used for different subpopulations</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="I3">
+				<xs:annotation>
+					<xs:documentation>Multiple: Base with Topical changes</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PanelGroupCodeType">
+		<xs:annotation>
+			<xs:documentation>Indicates how all members of the group are related in terms of type of panel. These relationships are inferred by the markup author, and should be considered as her/his own interpretation of the data.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="P0">
+				<xs:annotation>
+					<xs:documentation>No specified relationship</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="P1">
+				<xs:annotation>
+					<xs:documentation>Single panel surveyed multiple times</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="P2">
+				<xs:annotation>
+					<xs:documentation>Single panel surveyed once</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="P3">
+				<xs:annotation>
+					<xs:documentation>Rolling panel</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="P4">
+				<xs:annotation>
+					<xs:documentation>Different panel each survey</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GeographyGroupCodeType">
+		<xs:annotation>
+			<xs:documentation>Indicates how all members of the group are related along the dimension of geography. These relationships are inferred by the markup author, and should be considered as her/his own interpretation of the data.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="G0">
+				<xs:annotation>
+					<xs:documentation>No specified relationship</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="G1">
+				<xs:annotation>
+					<xs:documentation>Single geography surveyed multiple times</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="G2">
+				<xs:annotation>
+					<xs:documentation>Single geography surveyed once</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="G3">
+				<xs:annotation>
+					<xs:documentation>Rolling geography</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="G4">
+				<xs:annotation>
+					<xs:documentation>Different geography each survey</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DataProductGroupCodeType">
+		<xs:annotation>
+			<xs:documentation>Indicates how all members of the group are related in terms of physical data products in relation to data collection efforts. These relationships are inferred by the markup author, and should be considered as her/his own interpretation of the data.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="D0">
+				<xs:annotation>
+					<xs:documentation>No specified relationship</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="D1">
+				<xs:annotation>
+					<xs:documentation>Single data file from a data collection</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="D2">
+				<xs:annotation>
+					<xs:documentation>Multiple data products from a single data collection</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="D3">
+				<xs:annotation>
+					<xs:documentation>Integration of multiple data sets into a single integrated structure</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="D4">
+				<xs:annotation>
+					<xs:documentation>Multiple data files each from a different data collection</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LanguageGroupCodeType">
+		<xs:annotation>
+			<xs:documentation>Indicates the panel relationships among all Study Units within the group and its sub-groups. This is an assertion of the relationship, and it is incumbent on the creating user or application to make sure that the assertion is true.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="L0">
+				<xs:annotation>
+					<xs:documentation>No formal relationship - not a factor of grouping</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="L1">
+				<xs:annotation>
+					<xs:documentation>Single language</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="L2">
+				<xs:annotation>
+					<xs:documentation>All original languages with full language equivalence</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="L3">
+				<xs:annotation>
+					<xs:documentation>Original language(s) plus translation(s) with full language equivalence</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="L4">
+				<xs:annotation>
+					<xs:documentation>Translations from external original; full language equivalence</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="L5">
+				<xs:annotation>
+					<xs:documentation>Translations from a non-included original and have full language equivalence</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="L6">
+				<xs:annotation>
+					<xs:documentation>Original languages(s) plus translation(s) with partial relationship</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="L7">
+				<xs:annotation>
+					<xs:documentation>Translations from external original; partial relationships</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="ResourcePackageArchive" type="ResourcePackageArchiveType">
+		<xs:annotation>
+			<xs:documentation>This is archive information specific to the creation, maintenance, and archiving of the ResourcePackage provided either in-line or by reference.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ResourcePackageArchiveType">
+		<xs:annotation>
+			<xs:documentation>This is archive information specific to the creation, maintenance, and archiving of the ResourcePackage provided either in-line or by reference. This packaging element differentiates this "Archive" from one being published as a product within a ResourcePackage.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="a:Archive">
+					<xs:annotation>
+						<xs:documentation>Allows for in-line entry of an Archive related to the creation and maintenance of the ResourcePackage.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="r:ArchiveReference">
+					<xs:annotation>
+						<xs:documentation>Allows for inclusion of an Archive by reference.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ProjectBudget" type="r:BudgetType">
+		<xs:annotation>
+			<xs:documentation>A description of the budget that can contain a reference to an external budget document.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TypeOfResourcePackage" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>A brief textual description of the resource package package. Supports the use of an external controlled vocabulary.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LocalStudyUnitContentReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to Local Content using the StudyUnit structure. TypeOfObject should be set to LocalStudyUnit.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LocalGroupContentReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to Local Content using the Group structure. TypeOfObject should be set to Group. TypeOfObject should be set to LocalGroupContent.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LocalResourcePackageContentReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to Local Content using the ResourcePackage structure. TypeOfObject should be set to LocalResourcePackage.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

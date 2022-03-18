@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Copyright (c) 2020 DDI Alliance, DDI 3.3 release, 2020-04-15
+
+This file is part of DDI 3.3 XML Schema.
+
+DDI 3.3 XML Schema is licenced under the terms of the Creative Commons Attribution 4.0 International (CC BY 4.0) License.
+
+This is a human-readable summary of (and not a substitute for) the license (https://creativecommons.org/licenses/by/4.0/legalcode) 
+
+You are free to:
+
+    Share — copy and redistribute the material in any medium or format
+	
+    Adapt — remix, transform, and build upon the material
+    for any purpose, even commercially.
+
+    The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+
+    Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. 
+	You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+    No additional restrictions — You may not apply legal terms or technological measures that legally restrict others 
+	from doing anything the license permits.
+
+Notices:
+
+    You do not have to comply with the license for elements of the material in the public domain or where your use is permitted 
+	by an applicable exception or limitation.
+    
+	No warranties are given. The license may not give you all of the permissions necessary for your intended use. 
+	For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="ddi:physicalinstance:3_3" xmlns:r="ddi:reusable:3_3" targetNamespace="ddi:physicalinstance:3_3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="ddi:reusable:3_3" schemaLocation="reusable.xsd"/>
+	<xs:element name="PhysicalInstance" type="PhysicalInstanceType">
+		<xs:annotation>
+			<xs:documentation>Includes information about the physical instance of a data product (an actual data file). It completes the documentation contained in the Physical Data Product module that is specific to the individual file and serves as a descriptive record of the external data file. Physical Instance provides a citation for the data file, a link to the RecordLayout(s) used by the files records, a description of it coverage (as a constraint if different from the study), check figures for quality control (e.g. digital fingerprint, record count, etc.), and a statistical summary of the data in the file at both the variable and category level.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="PhysicalInstanceType">
+		<xs:annotation>
+			<xs:documentation>Includes information about the physical instance of a data product (an actual data file). It completes the documentation contained in the Physical Data Product module that is specific to the individual file and serves as a descriptive record of the external data file. Physical Instance provides a citation for the data file, a link to the RecordLayout(s) used by the files records, a description of it coverage (as a constraint if different from the study), check figures for quality control (e.g. digital fingerprint, record count, etc.), and a statistical summary of the data in the file at both the variable and category level.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:MaintainableType">
+				<xs:sequence>
+					<xs:element ref="r:Citation" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A citation for the physical instance of a data set. Note that a DOI or similar unique identifier for the data file should be placed in InternationalIdentifier. It is strongly recommended that use of a Citation in this location includes the use of the optional sub-element Title.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="DataFingerprint" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Allows for assigning a hash value (digital fingerprint) to the data or data file. Set the attribute flag to "data" when the hash value provides a digital fingerprint to the data contained in the file regardless of the storage format (ASCII, SAS, binary, etc.). One approach to compute a data fingerprint is the Universal Numerical Fingerprint (UNF). Set the attribute flag to "dataFile" if the digital fingerprint is only for the data file in its current storage format.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Coverage" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Includes information about the topical, spatial, and temporal coverage of the physical instance. May be expressed as a restriction of the parent study coverage.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:DataRelationshipReference" minOccurs="0" maxOccurs="unbounded">
+					     <xs:annotation>		
+					         <xs:documentation>Reference to the DataRelationship containing the LogicalRecord to which the RecordLayout refers. Repeat for cases where LogicalRecords are described in multiple DataRelationship structures. Note that this does not imply that all of the LogicalRecords described in the DataRelationship are contained, wholly or in part in the PhysicalInstance. This reference allows for a direct path between the PhysicalInstance and the related content found in a LogicalProduct.</xs:documentation>
+					     </xs:annotation> 
+					</xs:element>
+					<xs:element ref="r:VariableGroupReference" minOccurs="0" maxOccurs="unbounded">
+					     <xs:annotation>		
+					         <xs:documentation>Reference to a grouping of variables that are included in the PhysicalInstance. Variable Groups may represent hierarchical relationships of variables, topical groupings, or administrative groupings.</xs:documentation>
+					     </xs:annotation> 
+					</xs:element>
+					<xs:element ref="r:RecordLayoutReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>References the record layout of the data documented in the physical instance.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="DefaultMissingValuesReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>References the content of the default missing values used in the file. The content of this file overrides default missing value information provided in the LogicalRecord. Allows for the specification that is a Systems Missing Value.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="DataFileIdentification" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Identifies the data file documented in the physical instance and provides information about its location.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="DataFileVersion" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Provides the version information for the data file related to this physical instance. Note that while Physical Instance allows for multiple copies of the same data file (such as backup copies) the assumption is that they are identical in terms of content, layout, format and version.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:InformationClassification">
+							<xs:annotation>
+								<xs:documentation>Used to describe the rules and guidelines on how the data is allowed to be handled, transferred, stored and disposed. These confidentiality policies are often dictated by national laws and/or data owners on handling of personal, proprietary, and other sensitive information.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:InformationClassificationReference">
+							<xs:annotation>
+								<xs:documentation>Reference InformationClassification used to describe the rules and guidelines on how the data is allowed to be handled, transferred, stored and disposed. Uses the Reference structure. TypeOfObject should be set to InformationClassification.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:element ref="r:QualityStatementReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A reference to a Quality Statement pertaining to the quality of the study methodology, metadata, or data to which it is associated. Quality statements may be related to external quality standards.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="GrossFileStructure" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Includes information about the file structure, as well as other characteristics that are specific to the physical instance.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:ProprietaryInfo" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Contains information proprietary to the software package which produced the data file. This is expressed as a set of name-value pairs. The value may be taken from a controlled vocabulary.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="StatisticalSummary" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Includes variable and category statistics data documented in the physical instance, or a reference to a physical instance where the statistics are described or located in line.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="ByteOrder" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Contains a term from a controlled vocabulary indicating the byte ordering.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+<xs:element name="DataFileVersion" type="DataFileVersionType">
+	<xs:annotation>
+		<xs:documentation>Provides the version information for the data file related to this physical instance. Note that while Physical Instance allows for multiple copies of the same data file (such as backup copies) the assumption is that they are identical in terms of content, layout, format and version.</xs:documentation>
+	</xs:annotation>
+</xs:element>
+<xs:complexType name="DataFileVersionType">
+	<xs:annotation>
+		<xs:documentation>Provides the version information for the data file related to this physical instance. Note that while Physical Instance allows for multiple copies of the same data file (such as backup copies) the assumption is that they are identical in terms of content, layout, format and version. The minimum information required is the versionNumber. Additional information on the versionDate, the type of version number when multiple types are supported by an agency, as well as information on VersionResponsibility (inline or by reference) and VersionRationale are available to provide additional information for process tracking and/or informing users of the differences between this and the previous version of the file.</xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+		<xs:element name="TypeOfVersionNumber" type="xs:string" minOccurs="0">
+			<xs:annotation>
+				<xs:documentation>This is the name of the versioning scheme as defined by the user's system, in cases where the user's system employs more than one versioning scheme.</xs:documentation>
+			</xs:annotation>
+		</xs:element>
+		<xs:choice minOccurs="0">
+			<xs:annotation>
+				<xs:documentation>Allows for identification of the person or organization within the maintenance agency responsible for the new version.  This is primarily intended for internal use.</xs:documentation>
+			</xs:annotation>
+			<xs:element ref="r:VersionResponsibility">
+				<xs:annotation>
+					<xs:documentation>Person or organization within the MaintenanceAgency responsible for the version change. If it is important to retain the affiliation between and individual responsible for the version and his/her agency, it may be included in this notation. This is primarily intended for internal use.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="r:VersionResponsibilityReference">
+				<xs:annotation>
+					<xs:documentation>Reference person or organization within the MaintenanceAgency responsible for the version change, as described in an OrganizationScheme. If it is important to retain the affiliation between and individual responsible for the version and his/her agency, a Relation should be created between the individual referenced here and his/her organization. This is primarily intended for internal use.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+		<xs:element ref="r:VersionRationale" minOccurs="0">
+			<xs:annotation>
+				<xs:documentation>Textual description of the rationale/purpose for a version change.</xs:documentation>
+			</xs:annotation>
+		</xs:element>
+	</xs:sequence>
+	<xs:attribute name="versionNumber" type="xs:string" use="required">
+		<xs:annotation>
+			<xs:documentation>The version number of the data file identified by this physical instance.</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="versionDate" type="r:BaseDateType" use="optional">
+		<xs:annotation>
+			<xs:documentation>Date of version using the union set BaseDateType. Duration should not be used in this field, even though allowed by the ISO format enforced by the parser.</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+</xs:complexType>
+	<xs:element name="ByteOrder" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>Contains a term indicating the byte ordering. Supports the use of a controlled vocabulary. DDI strongly recommends the use of a controlled vocabulary.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="DataFingerprint" type="DataFingerprintType">
+		<xs:annotation>
+			<xs:documentation>Allows for assigning a hash value (digital fingerprint) to the data or data file.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="DataFingerprintType">
+		<xs:annotation>
+			<xs:documentation>Allows for assigning a hash value (digital fingerprint) to the data or data file. Set the attribute flag to "data" when the hash value provides a digital fingerprint to the data contained in the file regardless of the storage format (ASCII, SAS, binary, etc.). One approach to compute a data fingerprint is the Universal Numerical Fingerprint (UNF). Set the attribute flag to "dataFile" if the digital fingerprint is only for the data file in its current storage format.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="DigitalFingerprintValue">
+				<xs:annotation>
+					<xs:documentation>Contains the value of the specified digital fingerprint.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AlgorithmSpecification" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the type of the fingerprint (what algorithm or scheme).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AlgorithmVersion" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Contains the version of the algorithm.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="type" type="DataFingerprintObjectType" use="required">
+			<xs:annotation>
+				<xs:documentation>Brief identification of the type of data fingerprint used. The data fingerprint may be for the data file (storage format specific) or data (format neutral).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="DataFingerprintObjectType">
+		<xs:annotation>
+			<xs:documentation>Declares if the DataFingerprint is for a data file or for the data content.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="data">
+				<xs:annotation>
+					<xs:documentation>The data fingerprint applies to the data content(format neutral).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="dataFile">
+				<xs:annotation>
+					<xs:documentation>The data fingerprint applies to a specific file format of the data.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="GrossFileStructureType">
+		<xs:annotation>
+			<xs:documentation>Includes information about the file structure, as well as other characteristics that are specific to the physical instance. Information includes place of production, processing checks to validate the content, processing status, the software used to create the data file, and check sums for the number of cases and overall record count.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:IdentifiableType">
+				<xs:sequence>
+					<xs:element name="PlaceOfProduction" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Indicates the place where the physical instance was produced expressed as a simple string.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="ProcessingCheck" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Documents processing checks and other operations performed on the data file. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ProcessingStatus" type="r:CodeValueType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Processing status of the data file. Supports the use of an external controlled vocabulary.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="CreationSoftware" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Indicates the software that was used to create the data file.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CaseQuantity" type="xs:nonNegativeInteger" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Number of cases or observations in the data file. Caution in using optional checksums is recommended. Conflict between checksums and the items being counted can cause problems with warning flags during processing. If using checksum to capture information for internal processing purposes, the use of automatically generated check sums is strongly urged.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="OverallRecordCount" type="xs:nonNegativeInteger" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Overall record count in the data file. Caution in using optional checksums is recommended. Conflict between checksums and the items being counted can cause problems with warning flags during processing. If using checksum to capture information for internal processing purposes, the use of automatically generated check sums is strongly urged.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DataFileIdentificationType">
+		<xs:annotation>
+			<xs:documentation>Identifies the data file documented in the physical instance and provides information about its location.</xs:documentation>
+		</xs:annotation>
+				<xs:sequence>
+					<xs:element ref="r:Location" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Documents the location of the data file as a description. Supports the multi-language content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="DataFileURI">
+						<xs:annotation>
+							<xs:documentation>A URN or URL for the data file with a flag to indicate if it is a public copy.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:SizeInBytes" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Specifies the size of the file in bytes.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="isMaster" type="xs:boolean" use="optional">
+					<xs:annotation>
+						<xs:documentation>Set to "true" when this file is the master file (in the case that there are multiple, i.e. backup, copies).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+	</xs:complexType>
+	<xs:element name="DataFileURI" type="URIType">
+		<xs:annotation>
+			<xs:documentation>A URN or URL for the data file with a flag to indicate if it is a public copy.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="URIType">
+		<xs:annotation>
+			<xs:documentation>A URN or URL for a file with a flag to indicate if it is a public copy.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:anyURI">
+				<xs:attribute name="isPublic" type="xs:boolean" default="true">
+					<xs:annotation>
+						<xs:documentation>Set to "true" (default value) if this file is publicly available. This does not imply that there are not restrictions to access. Set to "false" if this is not publicly available, such as a backup copy, an internal processing data file, etc.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+   <xs:complexType name="StatisticalSummaryType">
+      <xs:annotation>
+         <xs:documentation>Provides a statistical summary of the data in the related file as a set of variable level and category level statistics. May refer to a set of statistics provided in another physical instance (for example if the same data is held in multiple storage formats) or if the summary statistics are held as a separate data set.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="StatisticalDataLocation" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Reference to a PhysicalInstance that describes a data file containing the summary and/or category statistics OR contains the statistics in-line as in the case of the same data stored as an ASCII file and as an ORACLE file where the summary and category statistics are listed only in one of the physical instance files.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:choice minOccurs="0" maxOccurs="unbounded">
+         	<xs:element ref="VariableStatistics">
+            		<xs:annotation>
+               			<xs:documentation>One or more statistical measures that describe the responses to a particular variable. Include both variable and category level statistics.</xs:documentation>
+            		</xs:annotation>
+         	</xs:element>
+         	<xs:element ref="VariableStatisticsReference">
+            		<xs:annotation>
+               			<xs:documentation>Inclusion of a VariableStatistics by reference.</xs:documentation>
+            		</xs:annotation>
+         	</xs:element>
+         </xs:choice>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="StatisticalDataLocationType">
+      <xs:annotation>
+         <xs:documentation>References a PhysicalInstance module that describes a data file containing the summary and/or category statistics OR contains the statistics in-line.  For example, when the same data are stored as an ASCII file and as an ORACLE file, the summary and category statistics would only be listed in one of the physical instance files, and referenced in the other(s).</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="r:PhysicalInstanceReference">
+            <xs:annotation>
+               <xs:documentation>References a physical instance containing the statistics inline or that identifies the data file which contains the statistics.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="isInline" type="xs:boolean" use="required">
+         <xs:annotation>
+            <xs:documentation>Set to "true" if the summary/category statistics are found inline in the referenced physical instance. Set to "false" if they are in the data file associated with the physical instance.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
+   <xs:complexType name="VariableStatisticsType">
+      <xs:annotation>
+         <xs:documentation>Contains summary and category level statistics for the referenced variable. Includes information on the total number of responses, the weights in calculating the statistics, variable level summary statistics, and category statistics. The category statistics may be provided as unfiltered values or filtered through a single variable. For example the category statistics for Sex filtered by the variable Country for a multi-national data file. Note that if no weighting factor is identified, all of the statistics provided are unweighted. </xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+      <xs:extension base="r:VersionableType">
+      <xs:sequence>
+         <xs:element ref="r:VariableReference">
+            <xs:annotation>
+               <xs:documentation>Reference to the variable to which the statistics apply.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="TotalResponses" type="xs:nonNegativeInteger" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>The total number of responses to this variable. This element is especially useful if the number of responses does not match added case counts. It may also be used to sum the frequencies for variable categories.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:choice minOccurs="0">
+            <xs:element ref="StandardWeightReference">
+               <xs:annotation>
+                  <xs:documentation>Reference to the StandardWeight value provided in Weighting.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+            <xs:element ref="r:WeightVariableReference">
+               <xs:annotation>
+                  <xs:documentation>Reference to a variable to use for weight in calculating the statistic.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+         </xs:choice>
+         <xs:element ref="MissingValuesReference" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Indicates the missing values that were excluded from the statistic by referencing the ManagedMissingValuesRepresentation used by the Variable.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="SummaryStatistic" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>A summary statistic for the referenced variable.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="UnfilteredCategoryStatistics" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>The unfiltered values of any number of statistics by category value representing the full response distribution of the variable.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="FilteredCategoryStatistics" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Includes category-level statistic for the referenced variable using another variable to filter the categories through. For example, the Eurobarometer may filter its category statistics by country as represented in a variable "CountryCode".</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="UnfilteredCategoryStatisticsType">
+      <xs:annotation>
+         <xs:documentation>The unfiltered values of any number of statistics by category value representing the full response distribution of the variable.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="VariableCategory" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>A structure that is repeated for each category value for which one or more statistics are recorded. Each VariableCategory has one category value and any number of associated statistics.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="VariableCategoryType">
+      <xs:annotation>
+         <xs:documentation>A category value for which one or more statistics are recorded. Each VariableCategory has one category value and any number of associated statistics.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="CategoryValue">
+            <xs:annotation>
+               <xs:documentation>The value of the category.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="CategoryStatistic" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>The value of a statistic associated with the category value indicated in the sibling CategoryValue element.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+<xs:element name="CategoryValue" type="CategoryValueType">
+    <xs:annotation>
+        <xs:documentation>References a specific Code within the variable if using a CodeRepresentation. May alternately provide the Value of the Category.</xs:documentation>
+    </xs:annotation>
+</xs:element>
+<xs:element name="FilterCategoryValue" type="CategoryValueType">
+    <xs:annotation>
+        <xs:documentation>Provides the specific value of the variable being used as a filter. References a specific Code within the variable if using a CodeRepresentation. May alternately provide the Value of the Category.</xs:documentation>
+    </xs:annotation>
+</xs:element>
+   <xs:complexType name="CategoryValueType">
+      <xs:annotation>
+         <xs:documentation>A category value for which one or more statistics are recorded. Each VariableCategory has one category value and any number of associated statistics.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:choice>
+            <xs:element ref="r:CodeReference">
+               <xs:annotation>
+                  <xs:documentation>A reference to the coded value of the category as used by a CodeRepresentation.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+            <xs:element ref="r:Value">
+               <xs:annotation>
+                  <xs:documentation>The value of the category.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+         </xs:choice>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="CategoryStatisticType">
+      <xs:annotation>
+         <xs:documentation>The value of a statistic associated with the category value.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="TypeOfCategoryStatistic">
+            <xs:annotation>
+               <xs:documentation>Type of category statistic. Supports the use of an external controlled vocabulary. DDI strongly recommends the use of a controlled vocabulary.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:choice>
+         	<xs:element ref="Statistic">
+         	   <xs:annotation>
+         	      <xs:documentation>The value (expressed as a decimal) of the statistics and whether it is weighted and/or includes missing values.</xs:documentation>
+         	   </xs:annotation>
+         	</xs:element>
+         	<xs:element ref="StatisticDouble">
+         	   <xs:annotation>
+         	      <xs:documentation>The value (expressed as a double) of the statistics and whether it is weighted and/or includes missing values.</xs:documentation>
+         	   </xs:annotation>
+         	</xs:element>
+         </xs:choice>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="TypeOfCategoryStatistic" type="r:CodeValueType">
+      <xs:annotation>
+         <xs:documentation>A classification of the type of category statistic provided. Supports the use of an external controlled vocabulary. DDI strongly recommends the use of a widely shared controlled vocabulary to support interoperability.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="FilteredCategoryStatisticsType">
+      <xs:annotation>
+         <xs:documentation>Category statistics filtered by the value of a second variable. Essentially a cross tabulation of one variable by another. For example variable may be crossed with country as is done in the Eurobarometer when reporting category statistics. For example, the Eurobarometer may filter its category statistics by country as represented in a variable "CountryCode".</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="FilterVariableReference" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Reference to the variable used to filter the category level statistics. </xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="FilterVariableCategory" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Provides filtered category statistics for the specified filter variable category.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+      <xs:complexType name="FilterVariableCategoryType">
+         <xs:annotation>
+            <xs:documentation>Category statistics for the variable when the filter variable contains the specified value.</xs:documentation>
+         </xs:annotation>
+         <xs:sequence>
+            <xs:element ref="FilterCategoryValue">
+               <xs:annotation>
+                  <xs:documentation>Provides the specific value of the variable being used as a filter. References a specific Code within the variable if using a CodeRepresentation. May alternately provide the Value of the Category.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+            <xs:element ref="VariableCategory" minOccurs="0" maxOccurs="unbounded">
+               <xs:annotation>
+                  <xs:documentation>Category statistics for the specified value of the variable (when the filter variable contains the specified value). Repeat for each value of the variable.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   <xs:complexType name="SummaryStatisticType">
+      <xs:annotation>
+         <xs:documentation>Describes a summary statistic for a variable.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="TypeOfSummaryStatistic">
+            <xs:annotation>
+               <xs:documentation>Type of summary statistic, such as count, mean, mode, median, etc. Supports the use of an external controlled vocabulary. DDI strongly recommends the use of a controlled vocabulary. The DDI Alliance has provided a controlled vocabulary (SummaryStatisticType) to support this element at http://www.ddialliance.org/controlled-vocabularies.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:choice>
+         	<xs:element ref="Statistic">
+         	   <xs:annotation>
+         	      <xs:documentation>The value (expressed as a decimal) of the statistics and whether it is weighted and/or includes missing values.</xs:documentation>
+         	   </xs:annotation>
+         	</xs:element>
+         	<xs:element ref="StatisticDouble">
+         	   <xs:annotation>
+         	      <xs:documentation>The value (expressed as a double) of the statistics and whether it is weighted and/or includes missing values.</xs:documentation>
+         	   </xs:annotation>
+         	</xs:element>
+         </xs:choice>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="StatisticType">
+      <xs:annotation>
+         <xs:documentation>The value (expressed as a decimal) of the statistics and whether it is weighted and/or includes missing values.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleContent>
+        <xs:extension base="xs:decimal">
+         <xs:attribute name="isWeighted" type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Set to "true" if the statistic is weighted using the weight designated in VariableStatistics.</xs:documentation>
+            </xs:annotation>
+         </xs:attribute>
+         <xs:attribute name="computationBase" type="ComputationBaseType">
+             <xs:annotation>
+                <xs:documentation>Defines the cases included in determining the statistic. The options are total=all cases, valid and missing (invalid); validOnly=Only valid values, missing (invalid) are not included in the calculation; missingOnly=Only missing (invalid) cases included in the calculation.</xs:documentation>
+             </xs:annotation>
+          </xs:attribute>
+       </xs:extension>  
+     </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="StatisticDoubleType">
+      <xs:annotation>
+         <xs:documentation>The value (expressed as a double) of the statistics and whether it is weighted and/or includes missing values.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleContent>
+        <xs:extension base="xs:double">
+         <xs:attribute name="isWeighted" type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Set to "true" if the statistic is weighted using the weight designated in VariableStatistics.</xs:documentation>
+            </xs:annotation>
+         </xs:attribute>
+         <xs:attribute name="computationBase" type="ComputationBaseType">
+             <xs:annotation>
+                <xs:documentation>Defines the cases included in determining the statistic. The options are total=all cases, valid and missing (invalid); validOnly=Only valid values, missing (invalid) are not included in the calculation; missingOnly=Only missing (invalid) cases included in the calculation.</xs:documentation>
+             </xs:annotation>
+          </xs:attribute>
+       </xs:extension>  
+     </xs:simpleContent>
+   </xs:complexType>
+   <xs:element name="TypeOfSummaryStatistic" type="r:CodeValueType">
+      <xs:annotation>
+         <xs:documentation>A classification of the type of summary statistic provided. Supports the use of an external controlled vocabulary. DDI strongly recommends the use of a widely shared controlled vocabulary to support interoperability. The DDI Alliance has provided a controlled vocabulary (SummaryStatisticType) to support this element at http://www.ddialliance.org/controlled-vocabularies.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Statistic" type="StatisticType">
+      <xs:annotation>
+         <xs:documentation>The value of the statistics and whether it is weighted and/or includes missing values.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="StatisticDouble" type="StatisticDoubleType">
+      <xs:annotation>
+         <xs:documentation>The value of the statistics and whether it is weighted and/or includes missing values.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="StatisticalSummary" type="StatisticalSummaryType">
+      <xs:annotation>
+         <xs:documentation>Provides a statistical summary of the data in the related file as a set of variable level and category level statistics.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SummaryStatistic" type="SummaryStatisticType">
+      <xs:annotation>
+         <xs:documentation>Describes a summary statistic for a variable.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="UnfilteredCategoryStatistics" type="UnfilteredCategoryStatisticsType">
+      <xs:annotation>
+         <xs:documentation>The unfiltered values of any number of statistics by category value representing the full response distribution of the variable.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="FilteredCategoryStatistics" type="FilteredCategoryStatisticsType">
+      <xs:annotation>
+         <xs:documentation>Category statistics filtered by the value of a second variable.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CategoryStatistic" type="CategoryStatisticType">
+      <xs:annotation>
+         <xs:documentation>The value of a statistic associated with the category value indicated in the sibling CategoryValue element.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="StandardWeightReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to an existing StandardWeight using the Reference structure. TypeOfObject should be set to StandardWeight.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="MissingValuesReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to an existing MissingValuesRepresentation using the Reference structure. TypeOfObject should be set to ManagedMissingValuesRepresentation.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+	<xs:element name="DataFileIdentification" type="DataFileIdentificationType">
+		<xs:annotation>
+			<xs:documentation>Identifies the data file documented in the physical instance and provides information about its location.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GrossFileStructure" type="GrossFileStructureType">
+		<xs:annotation>
+			<xs:documentation>Includes information about the file structure, as well as other characteristics that are specific to the physical instance.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CreationSoftware" type="r:SoftwareType">
+		<xs:annotation>
+			<xs:documentation>Describes a specific software package.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="VariableStatistics" type="VariableStatisticsType">
+		<xs:annotation>
+			<xs:documentation>Contains summary and category level statistics for the referenced variable.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FilterVariableReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing Variable using the Reference structure. TypeOfObject should be set to Variable.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ProcessingCheck" type="r:StructuredStringType">
+		<xs:annotation>
+			<xs:documentation>Documents processing checks and other operations performed on the data file. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DigitalFingerprintValue" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The DigitalFingerprintValue expressed as an xs:string.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FilterVariableCategory" type="FilterVariableCategoryType">
+		<xs:annotation>
+			<xs:documentation>Category statistics for the variable when the filter variable contains the specified value.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="VariableCategory" type="VariableCategoryType">
+		<xs:annotation>
+			<xs:documentation>A category value for which one or more statistics are recorded.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="StatisticalDataLocation" type="StatisticalDataLocationType">
+		<xs:annotation>
+			<xs:documentation>References a PhysicalInstance module that describes a data file containing the summary and/or category statistics OR contains the statistics in-line.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DefaultMissingValuesReference" type="DefaultMissingValuesReferenceType">
+		<xs:annotation>
+			<xs:documentation>Identifies the default missing value parameter for the this physical instance by referencing a ManagedMissingValuesRepresentation plus flag to identify it as a system missing value. TypeOfObject should be set to ManagedMissingValuesRepresentation.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="VariableStatisticsReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Inclusion of a VariableStatistics by reference TypeOfObject should be set to VariableStatistics.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="DefaultMissingValuesReferenceType">
+		<xs:annotation>
+			<xs:documentation>Identifies the default missing value parameter for the this physical instance by referencing a ManagedMissingValuesRepresentation. Note that this MissingValues declaration overrides the value found in the LogicalRecord if it conflicts. The assumption is that this is a System Missing Value declaration, specific to the storage format of the file. If not, change the value of isSystemMissingValue to "false". TypeOfObject should be set to ManagedMissingValuesRepresentation.</xs:documentation>
+		</xs:annotation>
+	  <xs:complexContent>
+	    <xs:extension base="r:ReferenceType">
+		  <xs:attribute name="isSystemMissingValue" type="xs:boolean" default="true">
+		  	<xs:annotation>
+				<xs:documentation>The assumption is that this is a System Missing Value declaration, specific to the storage format of the file (default value of "true"). If not, change the value to "false".</xs:documentation>
+			</xs:annotation>
+		  </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+    <xs:simpleType name="ComputationBaseType">
+         <xs:annotation>
+             <xs:documentation>Defines the cases included in determining the statistic.</xs:documentation>
+         </xs:annotation>
+         <xs:restriction base="xs:string">
+             <xs:enumeration value="total">
+                 <xs:annotation>
+                     <xs:documentation>All cases, both valid and missing (invalid).</xs:documentation>
+                 </xs:annotation>
+             </xs:enumeration>
+             <xs:enumeration value="validOnly">
+                 <xs:annotation>
+                     <xs:documentation>Only valid values, missing (invalid) are not included in the calculation.</xs:documentation>
+                 </xs:annotation>
+             </xs:enumeration>
+             <xs:enumeration value="missingOnly">
+                 <xs:annotation>
+                     <xs:documentation>Only missing (invalid) cases included in the calculation.</xs:documentation>
+                 </xs:annotation>
+             </xs:enumeration>
+         </xs:restriction>
+     </xs:simpleType>
+	<xs:element name="PhysicalInstanceGroup" type="PhysicalInstanceGroupType">
+		<xs:annotation>
+			<xs:documentation>Contains a group of PhysicalInstance descriptions, which may be ordered or hierarchical. In addition to the name, label, and description of the group, the structure allows for defining the group by reference to a DefiningConcept.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="PhysicalInstanceGroupType">
+		<xs:annotation>
+			<xs:documentation>Contains a group of PhysicalInstance descriptions, which may be ordered or hierarchical. In addition to the name, label, and description of the group, the structure allows for defining the group by reference to a DefiningConcept.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:MaintainableType">
+				<xs:sequence>
+					<xs:element ref="TypeOfPhysicalInstanceGroup" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A brief textual identification of the group type. Supports the use of an external controlled vocabulary.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="PhysicalInstanceGroupName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the group. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the PhysicalInstanceGroup. May be expressed in multiple languages. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the content and purpose of the PhysicalInstanceGroup. May be expressed in multiple languages and supports the use of structured content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:UniverseReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to the universe statement describing the persons or other objects to which the contents of this group pertain.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:ConceptReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to the concept expressed by the objects in this group.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Subject" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If subjects are listed for this group, it is strongly recommended that the subjects listed also be found in the TopicalCoverage element for the parent packaging element when this group is included directly or by reference in a module containing a coverage element. Use of subject at the group level allows for associating objects as a type of subject based group or to identify subject characteristics of a reusable group of objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Keyword" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>If keywords are listed for this group, it is strongly recommended that the keywords listed also be found in the TopicalCoverage element for the parent packaging element when this group is included directly or by reference in a module containing a coverage element. Use of keyword at the group level allows for associating objects as a type of keyword based group or to identify keyword characteristics of a reusable group of objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="r:PhysicalInstanceReference">
+							<xs:annotation>
+								<xs:documentation>A PhysicalInstance defined as a member of this group.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="r:PhysicalInstanceGroupReference">
+							<xs:annotation>
+								<xs:documentation>A PhysicalInstanceGroup that is a member of this group (nesting structure).</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+				<xs:attribute name="isOrdered" type="xs:boolean" default="false">
+					<xs:annotation>
+						<xs:documentation>If set to "true" indicates that the content of the group is ordered as it appears within the XML structure.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="TypeOfPhysicalInstanceGroup" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>A brief textual description of the type of group created to associate a number of physical instance modules. Supports the use of an external controlled vocabulary.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PhysicalInstanceGroupName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the PhysicalInstanceGroup using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Copyright (c) 2020 DDI Alliance, DDI 3.3 release, 2020-04-15
+
+This file is part of DDI 3.3 XML Schema.
+
+DDI 3.3 XML Schema is licenced under the terms of the Creative Commons Attribution 4.0 International (CC BY 4.0) License.
+
+This is a human-readable summary of (and not a substitute for) the license (https://creativecommons.org/licenses/by/4.0/legalcode) 
+
+You are free to:
+
+    Share — copy and redistribute the material in any medium or format
+	
+    Adapt — remix, transform, and build upon the material
+    for any purpose, even commercially.
+
+    The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+
+    Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. 
+	You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+    No additional restrictions — You may not apply legal terms or technological measures that legally restrict others 
+	from doing anything the license permits.
+
+Notices:
+
+    You do not have to comply with the license for elements of the material in the public domain or where your use is permitted 
+	by an applicable exception or limitation.
+    
+	No warranties are given. The license may not give you all of the permissions necessary for your intended use. 
+	For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="ddi:comparative:3_3" xmlns:d="ddi:datacollection:3_3" xmlns:r="ddi:reusable:3_3" targetNamespace="ddi:comparative:3_3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="ddi:datacollection:3_3" schemaLocation="datacollection.xsd"/>
+	<xs:import namespace="ddi:reusable:3_3" schemaLocation="reusable.xsd"/>
+	<xs:element name="Comparison" type="ComparisonType">
+		<xs:annotation>
+			<xs:documentation>A maintainable module containing maps between objects of the same or similar type. Maps allow for pair-wise mapping of two objects by describing their similarities and differences in order to make assertions regarding their comparability. Currently maps allow for the comparison of concepts, variables, questions, categories, universes, and representations that have managed content (code, category, numeric, text, datetime and scale).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ComparisonType">
+		<xs:annotation>
+			<xs:documentation>A maintainable module containing maps between objects of the same or similar type. Maps allow for pair-wise mapping of two objects by describing their similarities and differences in order to make assertions regarding their comparability. Currently maps allow for the comparison of concepts, variables, questions, categories, universes, and representations that have managed content (code, category, numeric, text, datetime and scale). These mapping(s) inform users on the comparability of two objects and facilitate automation. Note that all maps are pairwise, identifying two schemes and the correlation between two items in those schemes. Due to the complexity of some objects, multiple mappings may be required to cover details of the comparison of component parts, e.g. a QuestionMap may also have a related RepresentationMap. By using a set of pairwise comparisons, it is possible to describe complex correspondences - pairwise comparisons are easier to process. In addition to providing a standard name, label, and description, Comparison consists of a simple stack of comparison maps. Comparison maps are currently limited to those objects that can be referenced and are sufficiently structured to support a clear comparison.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:MaintainableType">
+				<xs:sequence>
+					<xs:element ref="ComparisonName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the comparison. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the comparison. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the content and purpose of the comparison. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="ConceptMap">
+							<xs:annotation>
+								<xs:documentation>Maps the content of two different concept schemes of objects of the same type providing detail for the comparable items within those two schemes.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="ConceptMapReference">
+							<xs:annotation>
+								<xs:documentation>Reference to a mapping of the content of two different concept schemes of objects of the same type providing detail for the comparable items within those two schemes. TypeOfObject should be set to ConceptMap.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="VariableMap">
+							<xs:annotation>
+								<xs:documentation>Maps the content of two different variable schemes of objects of the same type providing detail for the comparable items within those two schemes.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="VariableMapReference">
+							<xs:annotation>
+								<xs:documentation>Reference to a mapping of the content of two different variable schemes of objects of the same type providing detail for the comparable items within those two schemes. TypeOfObject should be set to VariableMap.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="QuestionMap">
+							<xs:annotation>
+								<xs:documentation>Maps the content of two different question schemes of objects of the same type providing detail for the comparable items within those two schemes.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="QuestionMapReference">
+							<xs:annotation>
+								<xs:documentation>Reference to a mapping of the content of two different question schemes of objects of the same type providing detail for the comparable items within those two schemes. TypeOfObject should be set to QuestionMap.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="CategoryMap">
+							<xs:annotation>
+								<xs:documentation>Maps the content of two different category schemes of objects of the same type providing detail for the comparable items within those two schemes.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="CategoryMapReference">
+							<xs:annotation>
+								<xs:documentation>Reference to a mapping of the content of two different category schemes of objects of the same type providing detail for the comparable items within those two schemes. TypeOfObject should be set to CategoryMap.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="RepresentationMap">
+							<xs:annotation>
+								<xs:documentation>Maps between any two managed representations. In addition to representation types held in a ManagedRepresentationScheme, managed representations include CategoryScheme and coded representations which include CodeList, GeographicStructureCode or GeographicLocationCode. Note that the source can be any managed representation including a CodeList, GeographicStructure or GeographicLocation. Note that comparisons between two category schemes is best handled by CategoryMap.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="RepresentationMapReference">
+							<xs:annotation>
+								<xs:documentation>Reference to a mapping between any two managed representations using the Reference structure. TypeOfObject should be set to RepresentationMap.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="UniverseMap">
+							<xs:annotation>
+								<xs:documentation>Maps the content of two different universe schemes of objects of the same type providing detail for the comparable items within those two schemes.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="UniverseMapReference">
+							<xs:annotation>
+								<xs:documentation>Reference to a mapping of the content of two different universe schemes of objects of the same type providing detail for the comparable items within those two schemes. TypeOfObject should be set to UniverseMap.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="ManagedItemMap">
+							<xs:annotation>
+								<xs:documentation>Maps the items managed within different schemes of objects of the same type providing detail for the comparable items within those two schemes.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="ManagedItemMapReference">
+							<xs:annotation>
+								<xs:documentation>Reference to a mapping of the items managed within two different schemes of objects of the same type providing detail for the comparable items within those two schemes. TypeOfObject should be set to ItemMap.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ComparisonName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Comparison using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="GenericMapType">
+		<xs:annotation>
+			<xs:documentation>Maps the content of two different schemes of objects of the same type providing detail for the comparable items within those two schemes. Note that comparisons can be made between multiple items in the same scheme or two versions of the same scheme. In addition to the standard name, label, and description of the map, identifies the source scheme and target scheme containing those objects, describes the correspondence between the source and target schemes, and provides detailed comparison of the items within those two schemes.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:VersionableType">
+				<xs:sequence>
+					<xs:element ref="TypeOfMappedItem" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The type of item being mapped. The use of a controlled vocabulary is strongly recommended. </xs:documentation>
+						</xs:annotation>
+					</xs:element>		
+					<xs:element ref="MapName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the Map. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the Map. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the content and purpose of the Map. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="SourceSchemeReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Mappings are unidirectional. The scheme referenced as the source is the scheme contents that would be transformed into the scheme contents identified as the target scheme contents.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="TargetSchemeReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to the scheme containing the target structure.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="Correspondence" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Describe the level of similarity and difference between the Source and the Target schemes.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="ItemMap" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Contains the mappings for individual items within the Source and Target schemes.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MapName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Map using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="CorrespondenceType">
+		<xs:annotation>
+			<xs:documentation>Describes the commonalities and differences between two items using a textual description of both commonalities and differences plus an optional coding of the type of commonality, a commonality expresses as a 0 to 1 weighting factor (expressing degree of comparability) and a user defined correspondence property which is specific to an organization or community of use.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="Commonality" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Common features of the compared objects.  Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="r:Difference" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Description of the difference between the compared objects.  Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="CommonalityTypeCoded" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A brief description describing the commonality of the two schemes/items, i.e., "Identical", "High", "Medium", "Low", "None". Supports the use of an external controlled vocabulary. The DDI Alliance has provided a controlled vocabulary (CommonalityType) to support this element at http://www.ddialliance.org/controlled-vocabularies.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CommonalityWeight" type="CommonalityWeightType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A value between 0 and 1 expressing the degree of commonality (0 indicates none, 1 indicates that they are identical).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="r:UserDefinedCorrespondenceProperty" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>An alternate means of expressing commonality within a specific system. A system specific user defined correspondence expressed as a key/value pair. As this is specific to an individual system the use of controlled vocabularies for the key is strongly recommended.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="CommonalityWeightType">
+		<xs:annotation>
+			<xs:documentation>A value between 0 and 1 expressing the degree of commonality (0 indicates none, 1 indicates that they are identical).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float">
+			<xs:minInclusive value="0">
+				<xs:annotation>
+					<xs:documentation>No commonality</xs:documentation>
+				</xs:annotation>
+			</xs:minInclusive>
+			<xs:maxInclusive value="1">
+				<xs:annotation>
+					<xs:documentation>Identical</xs:documentation>
+				</xs:annotation>
+			</xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="RepresentationMapType">
+		<xs:annotation>
+			<xs:documentation>Maps between any two managed representations. In addition to representation types held in a ManagagedRepresentationScheme, managed representations include CategoryScheme and coded representations which include CodeList, GeographicStructureCode or GeographicLocationCode. Note that the source can be any managed representation including a CodeList, GeographicStructure or GeographicLocation. Note that comparisons between two category schemes is best handled by CategoryMap. In addition to the standard name, label, and description of the RepresentationMap, identifies the source representation and target representation (which should be a CodeList, GeographicStructure, or GeographicLocation), describes the correspondence between the source and target, allows for the use of a GenerationInstruction to describe the recoding process, and indicates if this a general mapping or a mapping for a specific purpose.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:VersionableType">
+				<xs:sequence>
+					<xs:element ref="RepresentationMapName" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A name for the RepresentationMap. May be expressed in multiple languages. Repeat the element to express names with different content, for example different names for different systems.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A display label for the RepresentationMap. Supports multiple language versions of the same content as well as optional formatting of the content. Repeat for labels with different content, for example, labels with differing length limitations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:Description" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A description of the content and purpose of the RepresentationMap. Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="SourceRepresentation">
+						<xs:annotation>
+							<xs:documentation>Provides a reference to the managed content of a representation which acts as the source object in the Source/Target comparison pair. May be a ManagedRepresentation or a specific CategoryScheme, CodeList, GeographicRepresentation, or GeographicLocation. Allows for the optional reference to a Concept when context is important. For example, a ManagedNumericRepresentation within the context of Age.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="TargetRepresentation">
+						<xs:annotation>
+							<xs:documentation>Provides a reference to the managed content of a representation which acts as the target object in the Source/Target comparison pair. May be a ManagedRepresentation or a specific CategoryScheme, CodeList, GeographicRepresentation, or GeographicLocation. Supports the ability to limit code coverage as appropriate for the coding structure referenced.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="Correspondence" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Describe the level of similarity and difference between the Source and the Target contents.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:ProcessingInstructionReference">
+						<xs:annotation>
+							<xs:documentation>Allows for use of programmatic logic to construct a detailed comparison map between individual codes in the source and target structures by reference. TypeOfObject should be set to GenerationInstruction or GeneralInstruction. This reference allows for specifying ParameterLinkages at point of use.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="contextSpecificComparison" type="xs:boolean" use="optional">
+					<xs:annotation>
+						<xs:documentation>Set to "true" when a Concept has been identified in the SourceRepresentation.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="SourceRepresentation" type="SourceRepresentationType">
+		<xs:annotation>
+			<xs:documentation>Provides a reference to the managed content of a representation which acts as the source object in the Source/Target comparison pair. May be a ManagedRepresentation or a specific CategoryScheme, CodeList, GeographicRepresentation, or GeographicLocation. Allows for the optional reference to a Concept when context is important. For example, a ManagedNumericRepresentation within the context of Age.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TargetRepresentation" type="TargetRepresentationType">
+		<xs:annotation>
+			<xs:documentation>Provides a reference to the managed content of a representation which acts as the target object in the Source/Target comparison pair. May be a ManagedRepresentation or a specific CategoryScheme, CodeList, GeographicRepresentation, or GeographicLocation. Supports the ability to limit code coverage as appropriate for the coding structure referenced.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name="SourceRepresentationType">
+		<xs:annotation>
+			<xs:documentation>Provides a reference to the managed content of a representation which may be a ManagedRepresentation or a specific CodeList, GeographicRepresentation, or GeographicLocation. Allows for the optional reference to a Concept when context is important. For example, a ManagedNumericRepresentation within the context of Age.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:element ref="r:ManagedRepresentationReference">
+					<xs:annotation>
+						<xs:documentation>Substitution group head for referencing Managed Representations. For example, ManagedTextRepresentationReference, ManagedNumericRepresentationReference, etc.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="r:CategorySchemeReference">
+					<xs:annotation>
+						<xs:documentation>A reference to a CategoryScheme as the managed component of a representation.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="r:CodeListReference">
+					<xs:annotation>
+						<xs:documentation>A reference to a CodeList as the managed component of a representation.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="r:GeographicStructureReference">
+					<xs:annotation>
+						<xs:documentation>A reference to a GeographicStructure as the managed component of a representation.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="r:GeographicLocationReference">
+					<xs:annotation>
+						<xs:documentation>A reference to a GeographicLocation as the managed component of a representation.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element ref="r:ConceptReference" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Reference to a Concept which provides a context for the representation, e.g. Age for a numeric representation.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="TargetRepresentationType">
+		<xs:annotation>
+			<xs:documentation>Provides a reference to a codified representation. Supports the ability to limit code coverage as appropriate for the coding structure referenced.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:element ref="r:ManagedRepresentationReference">
+					<xs:annotation>
+						<xs:documentation>Substitution group head for referencing Managed Representations. For example, ManagedTextRepresentationReference, ManagedNumericRepresentationReference, etc.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="r:CategorySchemeReference">
+					<xs:annotation>
+						<xs:documentation>A reference to a CategoryScheme as the managed component of a representation.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:sequence>
+					<xs:element ref="r:CodeListReference">
+						<xs:annotation>
+							<xs:documentation>A reference to a CodeList as the managed component of a representation.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="r:CodeSubsetInformation" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Allows further specification of the codes to use from the CodeList.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:element ref="r:IncludedGeographicStructureCodes">
+					<xs:annotation>
+						<xs:documentation>Identifies the Geographic Structure codes included by the Authorized source of the code, the geographic location being used and the locations to exclude.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="r:IncludedGeographicLocationCodes">
+					<xs:annotation>
+						<xs:documentation>Identifies the Geographic Location codes included by the Authorized source of the code, the geographic location being used and the locations to exclude.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="RepresentationMapName" type="r:NameType">
+		<xs:annotation>
+			<xs:documentation>Name of the Representation Map using the DDI Name structure.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ItemMapType">
+		<xs:annotation>
+			<xs:documentation>Maps a Source and one or more Target items of the same type within the Source and Target Schemes identified.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="r:IdentifiableType">
+				<xs:sequence>
+					<xs:element ref="SourceItemReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A reference to the source object in the source scheme already identified. TypeOfObject dependent on object of comparison.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="TargetItemReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A reference the target object or objects in the target scheme already identified. TypeOfObject dependent on object of comparison. Note that if multiple target items are identified the correspondence between the source and ALL target items must be identical.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="Correspondence" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Describe the level of similarity and difference between the Source and the Target objects.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="RelatedMapReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Identifies related maps for example an ItemMap of two questions may point to the CodeMap defining the comparison of the two response domains.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="alias" type="xs:NMTOKEN" use="optional">
+					<xs:annotation>
+						<xs:documentation>Allows for an alias to be assigned to the correspondence between two items, so that it can be referred to with a single name, that would include both related items.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ConceptMap" type="GenericMapType">
+		<xs:annotation>
+			<xs:documentation>Maps the content of two different concept schemes of objects of the same type providing detail for the comparable items within those two schemes.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="VariableMap" type="GenericMapType">
+		<xs:annotation>
+			<xs:documentation>Maps the content of two different variable schemes of objects of the same type providing detail for the comparable items within those two schemes.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="QuestionMap" type="GenericMapType">
+		<xs:annotation>
+			<xs:documentation>Maps the content of two different question schemes of objects of the same type providing detail for the comparable items within those two schemes.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CategoryMap" type="GenericMapType">
+		<xs:annotation>
+			<xs:documentation>Maps the content of two different category schemes of objects of the same type providing detail for the comparable items within those two schemes.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RepresentationMap" type="RepresentationMapType">
+		<xs:annotation>
+			<xs:documentation>Maps between any managed representation and a coded representation. The coded representation can be a CodeList, GeographicStructureCode or GeographicLocationCode. Note that the source can be any managed representation including a CodeList, GeographicStructure or GeographicLocation.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="UniverseMap" type="GenericMapType">
+		<xs:annotation>
+			<xs:documentation>Maps the content of two different universe schemes of objects of the same type providing detail for the comparable items within those two schemes.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SourceSchemeReference" type="r:SchemeReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to any Scheme using SchemeReference which allows for the specification of objects to exclude. TypeOfObject should be set to OrganizationScheme, ConceptScheme, UniverseScheme, ConceptualVariableScheme, GeographicStructureScheme, GeographicLocationScheme, UnitTypeScheme, ProcessingEventScheme, ProcessingInstructionScheme, InterviewerInstructionScheme, InstrumentScheme, ControlConstructScheme, QuestionScheme, MeasurementScheme, SampleFrameScheme, SamplingPlanScheme, DevelopmentActivityScheme, CategoryScheme, CodeListScheme, VariableScheme, NCubeScheme, RepresentedVariableScheme, PhysicalStructureScheme, RecordLayoutScheme, OtherMaterialScheme, QualityScheme, or ManagedRepresentationScheme.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SourceItemReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>A reference to the source object in the source scheme already identified. TypeOfObject dependent on object of comparison.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TargetItemReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>A reference the target object or objects in the target scheme already identified. TypeOfObject dependent on object of comparison. Note that if multiple target items are identified the correspondence between the source and ALL target items must be identical.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TargetSchemeReference" type="r:SchemeReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to any Scheme using SchemeReference which allows for the specification of objects to exclude. TypeOfObject should be set to OrganizationScheme, ConceptScheme, UniverseScheme, ConceptualVariableScheme, GeographicStructureScheme, GeographicLocationScheme, UnitTypeScheme, ProcessingEventScheme, ProcessingInstructionScheme, InterviewerInstructionScheme, InstrumentScheme, ControlConstructScheme, QuestionScheme, MeasurementScheme, SampleFrameScheme, SamplingPlanScheme, DevelopmentActivityScheme, CategoryScheme, CodeListScheme, VariableScheme, NCubeScheme, RepresentedVariableScheme, PhysicalStructureScheme, RecordLayoutScheme, OtherMaterialScheme, QualityScheme, or ManagedRepresentationScheme.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RelatedMapReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing Concept, Variable, Question, Category, Representation, or Universe Map using the Reference structure. TypeOfObject should be set to CategoryMap, ConceptMap, QuestionMap ,UniverseMap, VariableMap, ManagedItemMap or RepresentationMap.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Correspondence" type="CorrespondenceType">
+		<xs:annotation>
+			<xs:documentation>Describes the commonalities and differences between two items.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ItemMap" type="ItemMapType">
+		<xs:annotation>
+			<xs:documentation>Maps two items of the same type within the Source and Target Schemes identified.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Commonality" type="r:StructuredStringType">
+		<xs:annotation>
+			<xs:documentation>Common features of the compared objects.  Supports multiple language versions of the same content as well as optional formatting of the content.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CommonalityTypeCoded" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>A brief description describing the commonality of the two schemes/items, i.e., "Identical", "High", "Medium", "Low", "None". Supports the use of an external controlled vocabulary. The DDI Alliance has provided a controlled vocabulary (CommonalityType) to support this element at http://www.ddialliance.org/controlled-vocabularies.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ConceptMapReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing ConceptMap using the Reference structure. TypeOfObject should be set to ConceptMap.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="VariableMapReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing VariableMap using the Reference structure. TypeOfObject should be set to VariableMap.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="QuestionMapReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing QuestionMap using the Reference structure. TypeOfObject should be set to QuestionMap.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CategoryMapReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing CategoryMap using the Reference structure. TypeOfObject should be set to CategoryMap.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RepresentationMapReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to a mapping between any two managed representations using the Reference structure. TypeOfObject should be set to RepresentationMap.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="UniverseMapReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing UniverseMap using the Reference structure. TypeOfObject should be set to UniverseMap.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TypeOfMappedItem" type="r:CodeValueType">
+		<xs:annotation>
+			<xs:documentation>The type of item being mapped. Supports the use of a controlled vocabulary.</xs:documentation>
+		</xs:annotation>
+	</xs:element>	
+	<xs:element name="ManagedItemMap" type="GenericMapType">
+		<xs:annotation>
+			<xs:documentation>Maps the items managed within different schemes of objects of objects of the same type providing detail for the comparable items within those two schemes. Note that several specific maps are available and should be used for the following items: All representations, concept, universe, variable, question, and category. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ManagedItemMapReference" type="r:ReferenceType">
+		<xs:annotation>
+			<xs:documentation>Reference to an existing ManagedItemMap using the Reference structure. TypeOfObject should be set to ManagedItemMap.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>
