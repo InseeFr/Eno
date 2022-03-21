@@ -29,4 +29,19 @@
 		<module>eno-core</module>
 	</modules>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>fr.insee.eno</groupId>
+				<artifactId>ddi-beans</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>fr.insee.eno</groupId>
+				<artifactId>eno-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 </project>

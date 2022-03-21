@@ -21,7 +21,7 @@
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>2.17.2</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
@@ -44,8 +44,10 @@
 					<arguments>
 						<argument>-srconly</argument>
 						<argument>-src</argument>
-						<argument>src/main/java</argument>
-						<argument>src/main/resources</argument>
+						<argument>${project.basedir}/src/main/java</argument>
+						<argument>-d</argument>
+						<argument>${project.basedir}/src/main/resources</argument>
+						<argument>${project.basedir}/src/main/resources</argument>
 					</arguments>
 				</configuration>
 			</plugin>
