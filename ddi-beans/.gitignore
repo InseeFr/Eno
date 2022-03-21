@@ -1,2 +1,3 @@
 src/main/java/*
 !src/main/java/fr/insee/eno
+src/main/resources/org/*
