@@ -5,6 +5,7 @@ dependencies {
     implementation enforcedPlatform('org.springframework.boot:spring-boot-dependencies:2.6.4')
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.apache.xmlbeans:xmlbeans:5.0.3'
     testRuntimeOnly 'org.apache.logging.log4j:log4j-core'
     implementation 'org.projectlombok:lombok'
     implementation 'org.springframework:spring-core'
