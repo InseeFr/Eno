@@ -1,0 +1,18 @@
+description = 'ddi-beans'
+
+dependencies {
+    implementation enforcedPlatform('org.springframework.boot:spring-boot-dependencies:2.6.4')
+    implementation 'org.apache.xmlbeans:xmlbeans:5.0.3'
+    compileOnly 'org.apache.logging.log4j:log4j-core'
+}
+
+task generateSources(type: JavaExec) {
+    group 'build'
+    description 'Generate java sources from DDI xsd'
+    classpath = sourceSets.main.compileClasspath
+
+    mainClass = 'org.apache.xmlbeans.impl.tool.SchemaCompiler'
+    args = ['-srconly', '-src', sourceSets.main.java.sourceDirectories.asPath, '-d', sourceSets.main.resources.sourceDirectories.asPath, sourceSets.main.resources.sourceDirectories.asPath]
+}
+
+compileJava.dependsOn generateSources

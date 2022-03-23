@@ -7,3 +7,7 @@
 ## Java version
 
 V3 project : change of technology from XSLT to Java.
+
+## Make sustainable clones !
+
+`git clone --no-tags --single-branch --depth=1  --branch=v3-develop https://github.com/InseeFr/Eno.git`
