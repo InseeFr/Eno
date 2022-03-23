@@ -473,18 +473,14 @@
 			<xsl:for-each select="enolunatic:get-header-lines($source-context)">
 				<xsl:choose>
 					<xsl:when test="$componentType = 'Table'">
-						<cells type="header">
-							<xsl:apply-templates select="enolunatic:get-header-line($source-context,position())" mode="source">
-								<xsl:with-param name="lineType" select="'headerLine'" tunnel="yes"/>
-								<xsl:with-param name="elementName" select="'cells'" tunnel="yes"/>
-								<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
-							</xsl:apply-templates>
-						</cells>
+						<xsl:apply-templates select="enolunatic:get-header-line($source-context,position())" mode="source">
+							<xsl:with-param name="elementName" select="'header'" tunnel="yes"/>
+							<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
+						</xsl:apply-templates>
 					</xsl:when>
 					<xsl:when test="$componentType = 'RosterForLoop'">
 						<xsl:apply-templates select="enolunatic:get-header-line($source-context,position())" mode="source">
-							<xsl:with-param name="lineType" select="'headerLine'" tunnel="yes"/>
-							<xsl:with-param name="elementName" select="'headers'" tunnel="yes"/>
+							<xsl:with-param name="elementName" select="'header'" tunnel="yes"/>
 							<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
 							<xsl:with-param name="loopDepth" select="$loopDepth + 1" tunnel="yes"/>
 						</xsl:apply-templates>						
@@ -495,19 +491,17 @@
 			<xsl:for-each select="enolunatic:get-body-lines($source-context)">
 				<xsl:choose>
 					<xsl:when test="$componentType = 'Table'">
-						<cells type="line">
+						<body>
 							<xsl:apply-templates select="enolunatic:get-body-line($source-context,position())" mode="source">
-								<xsl:with-param name="lineType" select="'bodyLine'" tunnel="yes"/>
-								<xsl:with-param name="elementName" select="'cells'" tunnel="yes"/>
+								<xsl:with-param name="elementName" select="'bodyLine'" tunnel="yes"/>
 								<xsl:with-param name="position" select="position()" tunnel="yes"/>
 								<xsl:with-param name="questionName" select="enolunatic:get-question-name($source-context,$languages[1])" tunnel="yes"/>
 								<xsl:with-param name="idQuestion" select="$idQuestion" tunnel="yes"/>
 							</xsl:apply-templates>
-						</cells>
+						</body>
 					</xsl:when>
 					<xsl:when test="$componentType = 'RosterForLoop'">
 						<xsl:apply-templates select="enolunatic:get-body-line($source-context,position())" mode="source">
-							<xsl:with-param name="lineType" select="'bodyLine'" tunnel="yes"/>
 							<xsl:with-param name="elementName" select="'components'" tunnel="yes"/>
 							<xsl:with-param name="position" select="position()" tunnel="yes"/>
 							<xsl:with-param name="questionName" select="enolunatic:get-question-name($source-context,$languages[1])" tunnel="yes"/>
@@ -543,7 +537,6 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="idColumn" tunnel="yes"/>
-		<xsl:param name="lineType" tunnel="yes"/>
 		<xsl:param name="elementName" tunnel="yes"/>
 
 		<xsl:variable name="col-span" select="number(enolunatic:get-colspan($source-context))"/>
@@ -554,12 +547,9 @@
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($labelDependencies)"/>
 		<xsl:element name="{$elementName}">
-			<xsl:if test="$lineType='headerLine'">
-				<xsl:attribute name="headerCell" select="true()"/>
-			</xsl:if>
 			<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 			<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
-			<xsl:if test="$label!='' and $lineType='bodyLine'">
+			<xsl:if test="$label!='' and $elementName!='header'">
 				<value><xsl:value-of select="enolunatic:get-value($source-context)"/></value>
 			</xsl:if>
 			<label>
@@ -575,7 +565,6 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="idColumn" tunnel="yes"/>
-		<xsl:param name="lineType" tunnel="yes"/>
 		<xsl:param name="elementName" tunnel="yes"/>
 		
 		<xsl:variable name="col-span" select="number(enolunatic:get-colspan($source-context))"/>
@@ -587,9 +576,6 @@
 		<xsl:variable name="value" select="enolunatic:get-cell-value($source-context)"/>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($labelDependencies)"/>
 		<xsl:element name="{$elementName}">
-			<xsl:if test="$lineType='headerLine'">
-				<xsl:attribute name="headerCell" select="true()"/>
-			</xsl:if>
 			<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 			<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
 			<label>
@@ -634,7 +620,6 @@
 	</xd:doc>
 	<xsl:template match="EmptyCell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="lineType" tunnel="yes"/>
 		<xsl:param name="elementName" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="idColumn" tunnel="yes"/>
@@ -643,9 +628,8 @@
 		<xsl:variable name="row-span" select="number(enolunatic:get-rowspan($source-context))"/>
 
 		<xsl:choose>
-			<xsl:when test="$lineType='headerLine'">
+			<xsl:when test="$elementName='header'">
 				<xsl:element name="{$elementName}">
-					<xsl:attribute name="headerCell" select="true()"/>
 					<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 					<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
 					<label/>
@@ -653,7 +637,6 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:element name="{$elementName}">
-					<xsl:attribute name="headerCell" select="false()"/>
 					<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 					<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>				
 				</xsl:element>
@@ -802,7 +785,6 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="col-span" tunnel="yes"/>
 		<xsl:param name="row-span" tunnel="yes"/>
-		<xsl:param name="lineType" tunnel="yes"/>
 		<xsl:param name="elementName" tunnel="yes"/>
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
 		<xsl:param name="idLoop" select="''" tunnel="yes"/>
