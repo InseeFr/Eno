@@ -72,7 +72,7 @@
           <xsl:variable name="filterValue" select="../h:value"/>
           <xsl:element name="{.}">
             <!-- We iterate through the cells with responses that need cleaning to create elements -->
-            <xsl:for-each select="../../h:bodyLine//h:response">
+            <xsl:for-each select="../../h:body//h:response">
               <xsl:element name="{@name}">
                 <!-- We retrieve the expression -->
                 <xsl:value-of select="$filterValue"/>
