@@ -49,7 +49,7 @@
         </components>
     </xsl:template>
     
-    <xsl:template match="h:components | h:body">
+    <xsl:template match="h:components | h:bodyLine">
         <xsl:copy>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="*[not(self::h:variables)]"/>
