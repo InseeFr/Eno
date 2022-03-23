@@ -251,27 +251,27 @@
             <xsl:call-template name="enolunatic:add-all-dependencies">
                 <xsl:with-param name="dependencies" select="$allDependencies"/>
             </xsl:call-template>
-            <xsl:apply-templates select="*[not(self::h:variables or self::h:cells[@type='line'] or self::h:hierarchy or self::h:label or self::h:declarations or self::h:conditionFilter or self::h:missingResponse)]"/>
+            <xsl:apply-templates select="*[not(self::h:variables or self::h:body or self::h:hierarchy or self::h:label or self::h:declarations or self::h:conditionFilter or self::h:missingResponse)]"/>
             <xsl:choose>
                 <xsl:when test="h:lines">
-                    <xsl:variable name="nbLines" select="count(h:cells[@type='line'])"/>
+                    <xsl:variable name="nbLines" select="count(h:body)"/>
                     <xsl:variable name="nbLinesExpected" select="h:lines/h:max/h:value"/>
                     <xsl:choose>
                         <xsl:when test="$nbLines = 1">
                             <xsl:call-template name="enolunatic:addLinesForRoster">
                                 <xsl:with-param name="currentLigne" select="1"/>
                                 <xsl:with-param name="nbLigneMax" select="$nbLinesExpected"/>
-                                <xsl:with-param name="lineToCopy" select="h:cells[@type='line']"/>
+                                <xsl:with-param name="lineToCopy" select="h:body"/>
                                 <xsl:with-param name="tableId" select="@id"/>
                             </xsl:call-template>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:apply-templates select="*[not(self::h:variables) and self::h:cells[@type='line']]"/>
+                            <xsl:apply-templates select="*[not(self::h:variables) and self::h:body]"/>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:apply-templates select="*[not(self::h:variables) and self::h:cells[@type='line']]"/>
+                    <xsl:apply-templates select="*[not(self::h:variables) and self::h:body]"/>
                 </xsl:otherwise>
             </xsl:choose>
         </components>
@@ -348,10 +348,13 @@
         </label>
     </xsl:template>
 
-    <xsl:template match="h:cells">
+    <!-- Due to confusing previous behaviour when everything was named "cells", this part has been fixed to handle
+    body and bodyLine elements with probable redundancy in some treatment. 
+    Would deserve to be reviewed thoroughly-->
+    <xsl:template match="h:body">
         <xsl:param name="idLine" tunnel="yes"/>        
         <xsl:param name="idColumn" tunnel="yes"/>
-        <cells>
+        <body>
             <xsl:if test="@id">
                 <xsl:attribute name="id">
                     <xsl:choose>
@@ -372,25 +375,40 @@
                 <xsl:if test="not($idColumn)"><xsl:copy-of select="$responseDependencies"/></xsl:if>
             </xsl:variable>
             <xsl:apply-templates select="*[not(self::h:variables)]"/>
+        </body>
+    </xsl:template>
+    
+    <xsl:template match="h:bodyLine">
+        <xsl:param name="idLine" tunnel="yes"/>        
+        <xsl:param name="idColumn" tunnel="yes"/>
+        <bodyLine>
+            <xsl:copy-of select="@*"/>
+            <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
+            <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
+            <xsl:variable name="allDependencies" as="xs:string*">
+                <xsl:copy-of select="$dependencies"/>
+                <xsl:if test="not($idColumn)"><xsl:copy-of select="$responseDependencies"/></xsl:if>
+            </xsl:variable>
+            <xsl:apply-templates select="*[not(self::h:variables)]"/>
             <xsl:if test="string-length(@type)=0">
                 <xsl:call-template name="enolunatic:add-all-dependencies">
                     <xsl:with-param name="dependencies" select="$allDependencies"/>
                 </xsl:call-template>
             </xsl:if>
-        </cells>
+        </bodyLine>
     </xsl:template>
 
-    <xsl:template match="h:cells" mode="roster">
+    <xsl:template match="h:body" mode="roster">
         <xsl:param name="tableId" tunnel="yes"/>
-        <cells>
+        <body>
             <xsl:copy-of select="@*"/>
-            <xsl:for-each select="h:cells">
+            <xsl:for-each select="h:bodyLine">
                 <xsl:apply-templates select=".">
                     <xsl:with-param name="tableId" select="$tableId" tunnel="yes"/>
                     <xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
                 </xsl:apply-templates>
             </xsl:for-each>
-        </cells>
+        </body>
     </xsl:template>
 
     <xsl:template match="h:conditionFilter">

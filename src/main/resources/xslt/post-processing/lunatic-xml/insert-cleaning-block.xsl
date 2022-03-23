@@ -65,14 +65,14 @@
         </xsl:if>
       </xsl:for-each>
       <!-- 2) Then we take care of the components containg cells with multiple responses (e.g. Tables) -->
-      <xsl:for-each select="$root//h:components[h:cells]">
+      <xsl:for-each select="$root//h:components[h:body]">
         <!-- We need to go through each bindingDependencies to add it as a variable lauching cleaning for our response -->
         <xsl:for-each select="h:conditionFilter/h:bindingDependencies">
           <!-- We get the expression of the filter that activates cleaning in a variable for later use -->
           <xsl:variable name="filterValue" select="../h:value"/>
           <xsl:element name="{.}">
             <!-- We iterate through the cells with responses that need cleaning to create elements -->
-            <xsl:for-each select="../../h:cells//h:response">
+            <xsl:for-each select="../../h:bodyLine//h:response">
               <xsl:element name="{@name}">
                 <!-- We retrieve the expression -->
                 <xsl:value-of select="$filterValue"/>
