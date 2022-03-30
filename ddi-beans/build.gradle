@@ -1,5 +1,17 @@
 description = 'ddi-beans'
 
+sourceSets {
+    main {
+        java {
+            srcDirs= ["src/main/java"]
+        }
+        resources {
+            srcDirs= ["src/main/resources",
+            "src/main/ddi-sources"]
+        }
+    }
+}
+
 dependencies {
     implementation enforcedPlatform('org.springframework.boot:spring-boot-dependencies:2.6.4')
     implementation 'org.apache.xmlbeans:xmlbeans:5.0.3'
@@ -10,9 +22,13 @@ task generateSources(type: JavaExec) {
     group 'build'
     description 'Generate java sources from DDI xsd'
     classpath = sourceSets.main.compileClasspath
-
     mainClass = 'org.apache.xmlbeans.impl.tool.SchemaCompiler'
-    args = ['-srconly', '-src', sourceSets.main.java.sourceDirectories.asPath, '-d', sourceSets.main.resources.sourceDirectories.asPath, sourceSets.main.resources.sourceDirectories.asPath]
+    args = ['-srconly',
+            '-src',
+            sourceSets.main.java.sourceDirectories.asPath,
+            '-d',
+            sourceSets.main.resources.sourceDirectories[0].path,
+            sourceSets.main.resources.sourceDirectories[1].path]
 }
 
 compileJava.dependsOn generateSources
