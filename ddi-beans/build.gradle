@@ -33,4 +33,12 @@ task generateSources(type: JavaExec) {
             sourceSets.main.resources.sourceDirectories[1].path]
 }
 
+generateSources.configure {
+    onlyIf {
+        fileTree(sourceSets.main.resources.sourceDirectories[0]) {
+            include '**/*.xsb'
+        }.isEmpty()
+    }
+}
+
 compileJava.dependsOn generateSources
