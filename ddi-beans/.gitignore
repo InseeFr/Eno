@@ -1,3 +1,6 @@
+# Generated sources
 src/main/java/*
 !src/main/java/fr/insee/eno
-src/main/resources/org/*
+
+# Generated resources
+src/main/resources/org/apache/xmlbeans/*
