@@ -1,0 +1,23 @@
+pluginManagement {
+    repositories {
+        maven {
+            url System.properties['urlMavenRepo']
+        }
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'demo'
+
+dependencyResolutionManagement {
+    repositories {
+	    maven{
+		    url System.properties['urlMavenRepo']
+    	}
+    }
+}
+
+rootProject.name = 'eno'  
+
+include(':eno-core')
+include(':ddi-beans')
