@@ -6,8 +6,10 @@ sourceSets {
             srcDirs= ["src/main/java"]
         }
         resources {
-            srcDirs= ["src/main/resources",
-            "src/main/ddi-sources"]
+            srcDirs= [
+                    "src/main/resources",
+                    "src/main/ddi-sources"
+            ]
         }
     }
 }
