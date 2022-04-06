@@ -230,6 +230,26 @@
 	</xd:doc>
 	<xsl:template match="xf-group" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="sequenceParent" tunnel="yes"/>
+		<xsl:param name="subSequenceParent" tunnel="yes"/>
+		
+		<xsl:variable name="componentType" select="'FilterDescription'"/>
+		<xsl:variable name="idFilter" select="enolunatic:get-name($source-context)"/>
+		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
+		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
+		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context,$filter)"/>
+		
+		<xsl:if test="not(tokenize($idFilter,'-')[1]=enolunatic:get-goto-id($source-context))">
+			<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idFilter}" filterDescription="{$filterDescription}">
+				<label><xsl:value-of select="concat('Condition ', tokenize($idFilter,'-')[last()])"/></label>
+				<xsl:copy-of select="enolunatic:add-condition-filter($filterCondition,$filterDependencies)"/>
+				<hierarchy>
+					<xsl:copy-of select="$sequenceParent"/>
+					<xsl:copy-of select="$subSequenceParent"/>
+				</hierarchy>
+			</components>
+		</xsl:if>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
