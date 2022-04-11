@@ -1,6 +1,9 @@
 package fr.insee.eno.core.model;
 
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.lunatic.model.flat.Questionnaire;
+import fr.insee.lunatic.model.flat.VariableType;
 import instance33.DDIInstanceDocument;
 
 import java.util.ArrayList;
@@ -13,6 +16,7 @@ public class EnoQuestionnaire {
 
     @DDI(contextType = DDIInstanceDocument.class,
             field = "getDDIInstance().getIDArray(0).getStringValue()")
+    @Lunatic(contextType = Questionnaire.class, field ="setId(#param)")
     private String id;
 
     @DDI(contextType = DDIInstanceDocument.class,
@@ -26,6 +30,7 @@ public class EnoQuestionnaire {
 
     @DDI(contextType = DDIInstanceDocument.class,
             field = "getDDIInstance().getResourcePackageArray(0).getVariableSchemeArray(0).getVariableArray()")
+    @Lunatic(contextType = Questionnaire.class, field ="getVariables()", instanceType = VariableType.class)
     private final List<Variable> variables = new ArrayList<>();
 
     @DDI(contextType = DDIInstanceDocument.class,

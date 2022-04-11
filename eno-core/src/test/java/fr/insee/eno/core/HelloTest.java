@@ -65,5 +65,49 @@ public class HelloTest {
                 .anyMatch(name -> name.equals("DOCSIMPLE")));
     }
 
+    @Test
+    public void modelToLunaticTest() {
+        //
+        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
+        enoQuestionnaire.setId("TEST-ID");
+        Variable v1 = new Variable();
+        v1.setName("foo1");
+        enoQuestionnaire.getVariables().add(v1);
+        Variable v2 = new Variable();
+        v2.setName("foo2");
+        enoQuestionnaire.getVariables().add(v2);
+        //
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
+        LunaticMapper.map(enoQuestionnaire, lunaticQuestionnaire);
+        //
+        assertEquals("TEST-ID", lunaticQuestionnaire.getId());
+        assertEquals("foo1", lunaticQuestionnaire.getVariables().get(0).getName());
+        assertEquals("foo2", lunaticQuestionnaire.getVariables().get(1).getName());
+    }
+
+    @Test
+    public void hello2() {
+        var questionnaire = new fr.insee.lunatic.model.flat.Questionnaire();
+        List<IVariableType> lunaticVariables = questionnaire.getVariables();
+        IVariableType lunaticVariable = new VariableType();
+        lunaticVariable.setName("foo");
+        assertNotNull(lunaticVariables);
+    }
+
+    @Test
+    public void hello3() {
+        var q = new EnoQuestionnaire();
+        q.setId("hello");
+
+        Object value = q.getId();
+
+        var lunaticQuestionnaire = new fr.insee.lunatic.model.flat.Questionnaire();
+
+        EvaluationContext context = new StandardEvaluationContext();
+        context.setVariable("value", value);
+
+        (new SpelExpressionParser().parseExpression("setId(#value)")).getValue(context, lunaticQuestionnaire);
+
+        assertEquals("hello", lunaticQuestionnaire.getId());
     }
 }
