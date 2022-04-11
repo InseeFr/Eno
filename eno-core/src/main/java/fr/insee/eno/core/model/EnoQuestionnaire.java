@@ -28,6 +28,10 @@ public class EnoQuestionnaire {
             field = "getDDIInstance().getResourcePackageArray(0).getVariableSchemeArray(0).getVariableArray()")
     private final List<Variable> variables = new ArrayList<>();
 
+    @DDI(contextType = DDIInstanceDocument.class,
+            field = "getDDIInstance().getResourcePackageArray(0).getVariableSchemeArray(0).getVariableGroupArray()")
+    private final List<VariableGroup> variableGroups = new ArrayList<>();
+
 
     public String getId() {
         return id;
@@ -52,5 +56,9 @@ public class EnoQuestionnaire {
 
     public List<Variable> getVariables() {
         return variables;
+    }
+
+    public List<VariableGroup> getVariableGroups() {
+        return variableGroups;
     }
 }

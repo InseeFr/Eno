@@ -4,6 +4,7 @@ import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.Variable;
+import fr.insee.eno.core.model.VariableGroup;
 import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.lunatic.model.flat.IVariableType;
 import fr.insee.lunatic.model.flat.Questionnaire;
@@ -60,6 +61,8 @@ public class HelloTest {
         assertEquals("COCHECASE", enoQuestionnaire.getFirstVariable().getName());
         assertTrue(enoQuestionnaire.getVariables().stream().map(Variable::getName)
                 .anyMatch(name -> name.equals("COCHECASE")));
+        assertTrue(enoQuestionnaire.getVariableGroups().stream().map(VariableGroup::getName)
+                .anyMatch(name -> name.equals("DOCSIMPLE")));
     }
 
     }
