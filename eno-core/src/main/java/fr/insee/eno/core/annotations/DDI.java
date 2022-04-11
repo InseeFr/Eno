@@ -1,7 +1,5 @@
 package fr.insee.eno.core.annotations;
 
-import instance33.DDIInstanceDocument;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
@@ -14,6 +12,6 @@ public @interface DDI {
 
     Class<?> contextType();
 
-    String field() ;
+    String field();
 
 }
