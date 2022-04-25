@@ -64,20 +64,7 @@
                <fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
             </fo:block>
          </fo:block-container>
-      </fo:static-content>
-      
-      <fo:static-content flow-name="region-after-even-business">
-         <fo:block-container absolute-position="absolute" left="5mm" bottom="5mm" width="5mm" height="5mm">
-            <fo:block position="absolute" text-align="left">
-               <fo:external-graphic src="encoche-bottom-left.png"/>
-            </fo:block>
-         </fo:block-container>
-         <fo:block-container absolute-position="absolute" left="90mm" top="5mm" width="33mm" height="10mm">
-            <fo:block text-align="center">
-               <fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
-            </fo:block>
-         </fo:block-container>
-         <fo:block-container absolute-position="absolute"
+		<fo:block-container absolute-position="absolute"
             left="120mm"
             top="2mm"
             width="80mm"
@@ -95,6 +82,22 @@
                </fo:instream-foreign-object>
             </fo:block>
          </fo:block-container>
+		 
+		 
+      </fo:static-content>
+      
+      <fo:static-content flow-name="region-after-even-business">
+         <fo:block-container absolute-position="absolute" left="5mm" bottom="5mm" width="5mm" height="5mm">
+            <fo:block position="absolute" text-align="left">
+               <fo:external-graphic src="encoche-bottom-left.png"/>
+            </fo:block>
+         </fo:block-container>
+         <fo:block-container absolute-position="absolute" left="90mm" top="5mm" width="33mm" height="10mm">
+            <fo:block text-align="center">
+               <fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
+            </fo:block>
+         </fo:block-container>
+
       </fo:static-content>
       
       <fo:static-content flow-name="region-end-odd-business">
