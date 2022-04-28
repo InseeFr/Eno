@@ -32,14 +32,21 @@
     </xsl:copy>
   </xsl:template>
   
-  <!-- When encountering the last variable, we copy the variable and add the cleaning block -->
+  <!-- When encountering the last variable, we copy the variable and add the cleaning and missing block -->
   <xsl:template match="h:variables[last()]">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
     </xsl:copy>
+    <!-- Adding the cleaning block -->
     <cleaning>
       <xsl:copy-of select="enolunatic:construct-cleaning-list()"/>
     </cleaning>
+    <!-- Adding the missing block only if missing option is true, under Questionnaire -->
+    <xsl:if test="$root//@missing='true'">
+      <missingBlock>
+        <xsl:value-of select="'TODO'"/>
+      </missingBlock>
+    </xsl:if>
   </xsl:template>
   
   <!-- Function constructing a list containing cleaning relations, with structure : -->
@@ -110,6 +117,22 @@
       </xsl:for-each>
     </xsl:variable>
     <xsl:copy-of select="$tidiedList"></xsl:copy-of>
+  </xsl:function>
+  
+  <!-- Function constructing a list containing missing relations, with structure : -->
+  <!--  <VAR_MISSING>VAR_1</VAR_MISSING>
+        <VAR_MISSING>VAR_2</VAR_MISSING>
+        ...
+        <VAR_MISSING>VAR_N</VAR_MISSING> -->
+  <!-- But also the other way around : -->
+  <!--  <VAR_1>VAR_MISSING</VAR_1>
+        <VAR_2>VAR_MISSING</VAR_2>
+        ...
+        <VAR_N>VAR_MISSING</VAR_N>-->
+  <xsl:function name="enolunatic:construct-missing-list">
+    <xsl:variable name="listMissing"/>
+      
+    
   </xsl:function>
   
 </xsl:stylesheet>
