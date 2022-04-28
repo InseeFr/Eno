@@ -1,54 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-  xmlns:fn="http://www.w3.org/2005/xpath-functions" 
-  xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-  xmlns:eno="http://xml.insee.fr/apps/eno" 
-  xmlns:enolunatic="http://xml.insee.fr/apps/eno/out/js"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+  xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:enolunatic="http://xml.insee.fr/apps/eno/out/js"
   xmlns:h="http://xml.insee.fr/schema/applis/lunatic-h"
   xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
-  exclude-result-prefixes="xs fn xd eno enolunatic h" version="2.0">	
-  
+  exclude-result-prefixes="xs fn xd eno enolunatic h" version="2.0">
+
   <xsl:output indent="yes"/>
-  
+
   <xsl:variable name="root" select="root(.)"/>
-  
+
   <xd:doc scope="stylesheet">
     <xd:desc>
-      <xd:p>An xslt stylesheet aimed at adding the block "cleaning" to the Lunatic-XML output.</xd:p>
+      <xd:p>An xslt stylesheet aimed at adding the blocks "cleaning" and "missingBlock" to the Lunatic-XML
+        output.</xd:p>
     </xd:desc>
   </xd:doc>
-  
-  <xsl:template match="@*|node()">
+
+  <xsl:template match="@* | node()">
     <xsl:copy>
-      <xsl:apply-templates select="@*|node()"/>
+      <xsl:apply-templates select="@* | node()"/>
     </xsl:copy>
   </xsl:template>
-  
+
   <xsl:template match="h:Questionnaire">
     <xsl:copy>
-      <xsl:apply-templates select="@*|node()"/>
+      <xsl:apply-templates select="@* | node()"/>
     </xsl:copy>
   </xsl:template>
-  
+
   <!-- When encountering the last variable, we copy the variable and add the cleaning and missing block -->
   <xsl:template match="h:variables[last()]">
     <xsl:copy>
-      <xsl:apply-templates select="@*|node()"/>
+      <xsl:apply-templates select="@* | node()"/>
     </xsl:copy>
     <!-- Adding the cleaning block -->
     <cleaning>
       <xsl:copy-of select="enolunatic:construct-cleaning-list()"/>
     </cleaning>
     <!-- Adding the missing block only if missing option is true, under Questionnaire -->
-    <xsl:if test="$root//@missing='true'">
+    <xsl:if test="$root//@missing = 'true'">
       <missingBlock>
-        <xsl:value-of select="'TODO'"/>
+        <xsl:copy-of select="enolunatic:construct-missing-list()"/>
       </missingBlock>
     </xsl:if>
   </xsl:template>
-  
+
   <!-- Function constructing a list containing cleaning relations, with structure : -->
   <!-- <VAR_LAUNCHING_CLEANING><VAR_NEEDING_CLEANING>expression</VAR_NEEDING_CLEANING></VAR_LAUNCHING_CLEANING>-->
   <xsl:function name="enolunatic:construct-cleaning-list">
@@ -91,7 +89,7 @@
     </xsl:variable>
     <xsl:copy-of select="enolunatic:tidying-cleaning-list($untidiedList)"/>
   </xsl:function>
-  
+
   <!-- Function tidying the list produced by first step of enolunatic:construct-cleaning-list -->
   <!-- The idea is simply to regroup under a unique variable launching cleaning -->
   <!-- This is a naive approach using only XSL 1.0 functionality -->
@@ -116,9 +114,9 @@
         </xsl:if>
       </xsl:for-each>
     </xsl:variable>
-    <xsl:copy-of select="$tidiedList"></xsl:copy-of>
+    <xsl:copy-of select="$tidiedList"/>
   </xsl:function>
-  
+
   <!-- Function constructing a list containing missing relations, with structure : -->
   <!--  <VAR_MISSING>VAR_1</VAR_MISSING>
         <VAR_MISSING>VAR_2</VAR_MISSING>
@@ -130,9 +128,35 @@
         ...
         <VAR_N>VAR_MISSING</VAR_N>-->
   <xsl:function name="enolunatic:construct-missing-list">
-    <xsl:variable name="listMissing"/>
-      
+    <xsl:variable name="missingList">
+
+      <!-- We iterate on all the missingResponse we find in any component -->
+      <xsl:for-each select="$root//h:components[h:missingResponse]">
+        <xsl:variable name="missingName" select="h:missingResponse/@name"/>
+        <!-- We iterate on all the responses linked to that missing response -->
+        <xsl:for-each select=".//h:response">
+          <!-- We put the name of the missing response as the element name -->
+          <xsl:element name="{$missingName}">
+            <!-- We get the name of the response that needs cleaning -->
+            <xsl:value-of select="@name"/>
+          </xsl:element>
+        </xsl:for-each>
+
+        <!-- We iterate a second time to reverse element name and content -->
+        <!-- I do it on a separate loop because I want all elements of a same missing variable
+      to be adjacent : that way when transformed to JSON it should become an array -->
+        <xsl:for-each select=".//h:response">
+          <!-- We put the name of the missing response as the element name -->
+          <xsl:element name="{@name}">
+            <!-- We get the name of the response that needs cleaning -->
+            <xsl:value-of select="$missingName"/>
+          </xsl:element>
+        </xsl:for-each>
+        </xsl:for-each>
     
+    </xsl:variable>
+
+    <xsl:copy-of select="$missingList"/>
   </xsl:function>
-  
+
 </xsl:stylesheet>
