@@ -227,6 +227,7 @@
 
 	<xd:doc>
 		<xd:desc>filters do not create a component because their condition is borne by each of their descendants</xd:desc>
+		<xd:desc>Revisited : filters create a FilterDescription component (as do GoTos)</xd:desc>
 	</xd:doc>
 	<xsl:template match="xf-group" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -240,9 +241,10 @@
 		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
 		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context,$filter)"/>
 		
+		<!-- Checking if the xf-group is part of a GoTo : in which case, the FilterDescription has already been added by the GoTo and should not be added here -->
 		<xsl:if test="not(tokenize($idFilter,'-')[1]=enolunatic:get-goto-id($source-context))">
 			<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idFilter}" filterDescription="{$filterDescription}">
-				<label><xsl:value-of select="concat('Condition ', tokenize($idFilter,'-')[last()])"/></label>
+				<label><xsl:value-of select="concat('(Condition ', tokenize($idFilter,'-')[last()],') ',enolunatic:get-hideable-description($source-context,$languages[1]))"/></label>
 				<xsl:copy-of select="enolunatic:add-condition-filter($filterCondition,$filterDependencies)"/>
 				<hierarchy>
 					<xsl:copy-of select="$sequenceParent"/>
