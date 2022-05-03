@@ -172,22 +172,71 @@
   <!-- Where size is how VAR_RESIZING is used to generate a number of iterations 
   (e.g. count(PRENOM), cast(NHAB,integer) or simply the variable itself -->
   <!-- Where the N variables which should be resized are in their own variables element (so it becomes an array later in JSON) -->
+  
+  <!-- PARTICULAR ATTENTION SHOULD BE GIVEN TO THIS FUNCTION, SHOULD FURTHER LOOP DEPTHS
+  BE EMPLOYED IN QUESTIONNAIRES (LOOPS OF LOOP...) -->
+  <!-- IT SHOULD BE EVOLUTION FRIENDLY WITH THE ACCOUNTING OF DEPTH FOR LINKED/GENERATED LOOPS, BUT STILL -->
   <xsl:function name="enolunatic:construct-resizing-list">
     <xsl:variable name="resizingList">
       
       <!-- We iterate on all the loop components we find -->
       <xsl:for-each select="$root//h:components[@componentType='Loop']">
-        <!-- We store the name of the resizing variable (which should be in the loopDependencies) -->
-        <xsl:variable name="resizingName" select="h:loopDependencies"/>
+        <xsl:variable name="curLoopDependency" select="h:loopDependencies"/>
+        <xsl:variable name="curLoopDepth" select="@depth"/>
+        <!-- We store the name of the resizing variable -->
+        <xsl:variable name="resizingName">
+          <!-- Two cases : 
+            - the loop is generated and we'll try to go back to the generating loop if possible 
+            - the loop is not generated or we can't go back to the generating loop -->
+          <xsl:choose>
+            <!-- If the loop is generated and we can go back to the generating loop, we 
+            get the name of the loopDependency of the generating loop -->
+            <!-- There are two conditions : we must find a loop that contains our current dependency as a response
+            AND it must be at the same depth level than our current loop -->
+            <xsl:when test="$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]">
+              <xsl:value-of select="$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]/h:loopDependencies"/>
+            </xsl:when>
+            <!-- If not, we just retrieve our current loop dependency -->
+            <xsl:otherwise>
+              <xsl:value-of select="$curLoopDependency"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
         <!-- We store the expression of the resizing variable (which should be iterations OR lines-min=lines-max OR defaulting to the name of the variable...) -->
         <xsl:variable name="resizingExpr">
           <xsl:choose>
             <xsl:when test="h:iterations/h:value">
-              <xsl:value-of select="h:iterations/h:value"/>
+              <!-- When iterations, generated loop in some cases so same routine as the name to try to get back to the generating loop -->
+              <xsl:variable name="curValue" select="h:iterations/h:value"/>
+              <xsl:choose>
+                <!-- When we can go back to a generating loop -->
+                <xsl:when test="$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]">
+                  <xsl:choose>
+                    <!-- We store the iterations/value if we can find that -->
+                    <xsl:when test="$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]/h:iterations/h:value">
+                      <xsl:value-of select="$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]/h:iterations/h:value"/>
+                    </xsl:when>
+                    <!-- We store the lines/min=lines/max if we can find that -->
+                    <xsl:when test="$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]/h:lines/h:min/h:value=$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]/h:lines/h:max/h:value">
+                      <xsl:value-of select="$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]/h:lines/h:max/h:value"/>
+                    </xsl:when>
+                    <!-- Else we store the resizingName (which should correctly be the generating loop dependency) -->
+                    <xsl:otherwise>
+                      <xsl:value-of select="$resizingName"/>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </xsl:when>
+                <!-- When we can't go back to a generating loop, we store the iterations/value initially found -->
+                <xsl:otherwise>
+                  <xsl:value-of select="$curValue"/>
+                </xsl:otherwise>
+              </xsl:choose>
             </xsl:when>
+            <!-- When we find h:lines/h:min=h:lines/h:max, shall not be a generated loop so we get that -->
             <xsl:when test="h:lines/h:min/h:value=h:lines/h:max/h:value">
               <xsl:value-of select="h:lines/h:max/h:value"/>
             </xsl:when>
+            <!-- Defaulting case should simply be the name of the resizing variable-->
             <xsl:otherwise>
               <xsl:value-of select="$resizingName"/>
             </xsl:otherwise>
@@ -207,7 +256,37 @@
       
     </xsl:variable>
     
-    <xsl:copy-of select="$resizingList"/>
+    <xsl:copy-of select="enolunatic:tidying-resizing-list($resizingList)"/>
+  </xsl:function>
+
+  <!-- Function tidying the list produced by first step of enolunatic:construct-resizing-list -->
+  <!-- The idea is simply to regroup under a unique variable resizing when multiple loops -->
+  <!-- This is a naive approach using only XSL 1.0 functionality -->
+  <!-- It seems a more direct approach could be used in XSL 2.0 with for-each-group -->
+  <!-- But I couldn't manage to make it work -->
+  <xsl:function name="enolunatic:tidying-resizing-list">
+    <xsl:param name="untidiedList"/>
+    <xsl:variable name="tidiedList">
+      <xsl:for-each select="$untidiedList/*">
+        <!-- For each name that is encountered -->
+        <xsl:variable name="name" select="local-name()"/>
+        <!-- We also retrieve the size content -->
+        <xsl:variable name="sizeContent" select="h:size"/>
+        <!-- If that name and that size content do not already exist before (so the first time we encounter it) -->
+        <xsl:if test="not(preceding-sibling::*[local-name() = $name and h:size=$sizeContent] )">
+          <!-- We copy that node -->
+          <xsl:copy>
+            <xsl:copy-of select="node()"/>
+            <!-- And we go fetch every sibling node with the same name and same size content to put its content inside -->
+            <xsl:for-each select="following-sibling::*[local-name() = $name]">
+              <!-- But we don't copy the content of size, since it has already been put the first time -->
+              <xsl:copy-of select="node()[not(local-name()='size')]"/>
+            </xsl:for-each>
+          </xsl:copy>
+        </xsl:if>
+      </xsl:for-each>
+    </xsl:variable>
+    <xsl:copy-of select="$tidiedList"/>
   </xsl:function>
 
 </xsl:stylesheet>
