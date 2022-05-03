@@ -13,8 +13,7 @@
 
   <xd:doc scope="stylesheet">
     <xd:desc>
-      <xd:p>An xslt stylesheet aimed at adding the blocks "cleaning" and "missingBlock" to the Lunatic-XML
-        output.</xd:p>
+      <xd:p>An xslt stylesheet aimed at adding the blocks "cleaning", "missingBlock" and "resizing" to the Lunatic-XML output.</xd:p>
     </xd:desc>
   </xd:doc>
 
@@ -45,6 +44,9 @@
         <xsl:copy-of select="enolunatic:construct-missing-list()"/>
       </missingBlock>
     </xsl:if>
+    <resizing>
+      <xsl:copy-of select="enolunatic:construct-resizing-list()"/>
+    </resizing>
   </xsl:template>
 
   <!-- Function constructing a list containing cleaning relations, with structure : -->
@@ -157,6 +159,55 @@
     </xsl:variable>
 
     <xsl:copy-of select="$missingList"/>
+  </xsl:function>
+
+
+  <!-- Function constructing a list containing resizing relations, with structure : -->
+  <!--  <VAR_RESIZING>
+          <size>expression(VAR_RESIZING)</size>
+          <variables>VAR_1</variables>
+          <variables>VAR_2</variables>
+          ...
+          <variables>VAR_N</variables> -->
+  <!-- Where size is how VAR_RESIZING is used to generate a number of iterations 
+  (e.g. count(PRENOM), cast(NHAB,integer) or simply the variable itself -->
+  <!-- Where the N variables which should be resized are in their own variables element (so it becomes an array later in JSON) -->
+  <xsl:function name="enolunatic:construct-resizing-list">
+    <xsl:variable name="resizingList">
+      
+      <!-- We iterate on all the loop components we find -->
+      <xsl:for-each select="$root//h:components[@componentType='Loop']">
+        <!-- We store the name of the resizing variable (which should be in the loopDependencies) -->
+        <xsl:variable name="resizingName" select="h:loopDependencies"/>
+        <!-- We store the expression of the resizing variable (which should be iterations OR lines-min=lines-max OR defaulting to the name of the variable...) -->
+        <xsl:variable name="resizingExpr">
+          <xsl:choose>
+            <xsl:when test="h:iterations/h:value">
+              <xsl:value-of select="h:iterations/h:value"/>
+            </xsl:when>
+            <xsl:when test="h:lines/h:min/h:value=h:lines/h:max/h:value">
+              <xsl:value-of select="h:lines/h:max/h:value"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$resizingName"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        <!-- We put the name of the resizing variable as the element name -->
+        <xsl:element name="{$resizingName}">
+          <!-- We put the resizing expression as the content of size element -->
+          <size><xsl:value-of select="$resizingExpr"/></size>
+          <!-- We iterate on all the responses linked to that loop -->
+          <xsl:for-each select=".//h:response">
+              <!-- We get the name of the response that needs resizing inside a variables element -->
+            <variables><xsl:value-of select="@name"/></variables>
+          </xsl:for-each>
+        </xsl:element>
+      </xsl:for-each>
+      
+    </xsl:variable>
+    
+    <xsl:copy-of select="$resizingList"/>
   </xsl:function>
 
 </xsl:stylesheet>
