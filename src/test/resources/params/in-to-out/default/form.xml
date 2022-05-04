@@ -3391,4 +3391,5 @@
          <FAVOURITE_CHARACTERS102>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS102>
       </READY>
    </cleaning>
+<resizing/>
 </Questionnaire>
