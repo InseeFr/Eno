@@ -38,7 +38,7 @@ public class LunaticMapper {
                             expression.getValue(context, lunaticInstance);
                         }
 
-                        else if (List.class.isAssignableFrom(classType)) {
+                        else if (Collection.class.isAssignableFrom(classType)) {
                             Collection<Object> lunaticCollection = expression.getValue(lunaticInstance, Collection.class);
                             Collection<Object> enoCollection = null;
                             // pb ici : par exemple: getVariables() renvoie une liste de IVariableType (type abstrait)
@@ -71,7 +71,7 @@ public class LunaticMapper {
                         }
 
                         else {
-                            //TODO
+                            throw new RuntimeException("Not implemented"); //TODO: text
                         }
                     }
                 });
