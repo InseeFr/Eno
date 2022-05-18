@@ -12,6 +12,11 @@ public class Variable {
     @Lunatic(contextType = IVariableType.class, field = "setName(#param)")
     String name;
 
+    /** Considering that a variable corresponds to a single question. (!) */
+    @DDI(contextType = VariableType.class,
+            field = "#index.get(getQuestionReferenceArray(0).getIDArray(0).getStringValue())")
+    Question question;
+
     public String getName() {
         return name;
     }
@@ -19,4 +24,10 @@ public class Variable {
         this.name = name;
     }
 
+    public Question getQuestion() {
+        return question;
+    }
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
 }
