@@ -21,8 +21,9 @@ public class DDIMapperTest {
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
                 HelloTest.class.getClassLoader().getResourceAsStream("l10xmg2l.xml"));
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-        DDIMapper.map(enoQuestionnaire, ddiInstanceDocument);
         //
+        DDIMapper ddiMapper = new DDIMapper(ddiInstanceDocument);
+        ddiMapper.mapDDI(enoQuestionnaire);
         assertEquals("INSEE-l10xmg2l", enoQuestionnaire.getId());
         assertEquals("COCHECASE", enoQuestionnaire.getFirstVariableName());
         assertEquals("COCHECASE", enoQuestionnaire.getFirstVariable().getName());
