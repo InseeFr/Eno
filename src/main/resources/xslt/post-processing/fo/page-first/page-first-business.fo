@@ -62,8 +62,8 @@
             <fo:block-container absolute-position="absolute"
                                 left="15mm"
                                 top="80mm"
-                                width="95mm"
-                                height="70mm"
+                                width="160mm"
+                                height="80mm"
                                 overflow="hidden">
                <fo:block margin-top="3mm" margin-left="1mm">
                   <fo:inline-container>
@@ -73,9 +73,8 @@
                      <fo:block>Nom : $!{BddNom} $!{BddPrenom}</fo:block>
                      <fo:block>Téléphone : $!{BddTelContact}</fo:block>
                      <fo:block>Courriel : $!{BddMailContact}</fo:block>
-                     <fo:block font-weight="bold" margin-top="3mm">Si vous n'êtes pas cette personne, </fo:block>
-                     <fo:block font-weight="bold">merci de compléter vos coordonnées :</fo:block>
-                      <fo:block>Nom : <fo:external-graphic src="mask_number.png"/>
+                     <fo:block font-weight="bold" margin-top="3mm">Si vos coordonnées sont erronées, </fo:block>
+                     <fo:block font-weight="bold">merci de compléter :</fo:block>                      <fo:block>Nom : <fo:external-graphic src="mask_number.png"/>
                           <fo:external-graphic src="mask_number.png"/>
                           <fo:external-graphic src="mask_number.png"/>
                           <fo:external-graphic src="mask_number.png"/>
@@ -127,7 +126,34 @@
                         <fo:external-graphic src="mask_number.png"/>
                         <fo:external-graphic src="mask_number.png"/>
                      </fo:block>
-                     <fo:block margin-top="2mm">Courriel : ................................................................</fo:block>
+                     <fo:block margin-top="2mm">Courriel : <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/></fo:block>
                   </fo:inline-container>
                </fo:block>
             </fo:block-container>
@@ -169,7 +195,7 @@
                  top="160mm"
                  width="180mm"
                  height="5mm">
-                 <fo:block font-weight="bold">Commentaires et remarques :</fo:block>
+                 <fo:block font-weight="bold">Commentaires et remarques (ne pas mentionner de données à caractère personnel)</fo:block>
              </fo:block-container>
              <fo:block-container absolute-position="absolute"
                  left="18mm"
