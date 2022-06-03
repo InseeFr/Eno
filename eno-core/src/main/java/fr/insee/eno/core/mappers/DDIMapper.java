@@ -35,7 +35,7 @@ public class DDIMapper extends Mapper {
         recursiveMapping(enoQuestionnaire, ddiInstanceDocument);
     }
 
-    public void recursiveMapping(Object modelItemInstance, Object ddiItemInstance) {
+    private void recursiveMapping(Object modelItemInstance, Object ddiItemInstance) {
 
         BeanWrapper beanWrapper = new BeanWrapperImpl(modelItemInstance);
 
