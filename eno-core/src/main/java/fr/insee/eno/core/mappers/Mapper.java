@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 public class Mapper {
 
-    static Iterator<PropertyDescriptor> propertyDescriptorIterator(BeanWrapper beanWrapper) {
+    public static Iterator<PropertyDescriptor> propertyDescriptorIterator(BeanWrapper beanWrapper) {
         return Arrays.stream(beanWrapper.getPropertyDescriptors())
                 .filter(propertyDescriptor -> !propertyDescriptor.getName().equals("class"))
                 .iterator();
