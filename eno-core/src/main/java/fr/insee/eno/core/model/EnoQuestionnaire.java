@@ -29,7 +29,7 @@ public class EnoQuestionnaire {
     private Variable firstVariable;
 
     @DDI(contextType = DDIInstanceDocument.class,
-            field = "getDDIInstance().getResourcePackageArray(0).getVariableSchemeArray(0).getVariableArray()")
+            field = "getDDIInstance().getResourcePackageArray(0).getVariableSchemeArray(0).getVariableList()")
     @Lunatic(contextType = Questionnaire.class, field ="getVariables()", instanceType = VariableType.class)
     private final List<Variable> variables = new ArrayList<>();
 
