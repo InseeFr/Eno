@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DDIParserTest {
 
     @Test
-    public void parserDDITest() throws XmlException, IOException {
+    public void parserDDITest() throws IOException {
         //
-        DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
-                DDIParserTest.class.getClassLoader().getResourceAsStream("l10xmg2l.xml"));
+        DDIInstanceDocument ddiInstanceDocument = DDIParser.parse( // FIXME: https://stackoverflow.com/questions/45718145/intellij-errorjava-java-lang-exceptionininitializererror
+                this.getClass().getClassLoader().getResource("l10xmg2l.xml"));
 
         //
         assertNotNull(ddiInstanceDocument);

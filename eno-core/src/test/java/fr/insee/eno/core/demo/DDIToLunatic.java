@@ -22,10 +22,10 @@ public class DDIToLunatic {
             "l10xmg2l",
             "questionnaire-avec-filtre-eno-java",
     })
-    public void writeJsonLunaticFromDDI(String fileName) throws XmlException, IOException, JAXBException {
+    public void writeJsonLunaticFromDDI(String fileName) throws IOException, JAXBException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
-                this.getClass().getClassLoader().getResourceAsStream("in/ddi/" + fileName + ".xml"));
+                this.getClass().getClassLoader().getResource("in/ddi/" + fileName + ".xml"));
         //
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         //

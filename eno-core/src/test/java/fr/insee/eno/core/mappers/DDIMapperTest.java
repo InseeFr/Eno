@@ -24,11 +24,11 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DDIMapperTest {
 
     @Test
-    public void getDDIIndexUsingSpel() throws XmlException, IOException {
+    public void getDDIIndexUsingSpel() throws IOException {
         //
         DDIIndex ddiIndex = new DDIIndex();
         ddiIndex.indexDDI(DDIParser.parse(
-                DDIMapperTest.class.getClassLoader().getResourceAsStream("l10xmg2l.xml")));
+                DDIMapperTest.class.getClassLoader().getResource("l10xmg2l.xml")));
         //
         Expression expression = new SpelExpressionParser()
                 .parseExpression("#index.get(\"kzwoti00\")");
@@ -43,10 +43,10 @@ public class DDIMapperTest {
     }
 
     @Test
-    public void ddiMappingTest() throws XmlException, IOException {
+    public void ddiMappingTest() throws IOException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
-                DDIMapperTest.class.getClassLoader().getResourceAsStream("l10xmg2l.xml"));
+                DDIMapperTest.class.getClassLoader().getResource("l10xmg2l.xml"));
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         //
         DDIMapper ddiMapper = new DDIMapper(ddiInstanceDocument);

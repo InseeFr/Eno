@@ -26,7 +26,9 @@ public class DDIIndex extends HashMap<String, Object> {
      */
     public void indexDDI(DDIInstanceDocument ddiInstanceDocument) {
         if (this.isEmpty()) {
+            log.info("Indexing objects of DDI document");
             recursiveIndexing(ddiInstanceDocument.getDDIInstance());
+            log.info("Finished indexing of DDI document");
         } else {
             log.debug("Indexing already done.");
         }

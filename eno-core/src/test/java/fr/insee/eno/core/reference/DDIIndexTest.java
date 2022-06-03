@@ -24,10 +24,10 @@ public class DDIIndexTest {
     }
 
     @Test
-    public void indexDDITest() throws XmlException, IOException {
+    public void indexDDITest() throws IOException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
-                DDIIndexTest.class.getClassLoader().getResourceAsStream("l10xmg2l.xml"));
+                DDIIndexTest.class.getClassLoader().getResource("l10xmg2l.xml"));
         //
         DDIIndex ddiIndex = new DDIIndex();
         ddiIndex.indexDDI(ddiInstanceDocument);

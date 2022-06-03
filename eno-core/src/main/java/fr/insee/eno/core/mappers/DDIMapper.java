@@ -4,6 +4,7 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.reference.DDIIndex;
 import instance33.DDIInstanceDocument;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.core.convert.TypeDescriptor;
@@ -18,6 +19,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+@Slf4j
 public class DDIMapper extends Mapper {
 
     private final DDIInstanceDocument ddiInstanceDocument;
@@ -32,7 +34,9 @@ public class DDIMapper extends Mapper {
     }
 
     public void mapDDI(EnoQuestionnaire enoQuestionnaire) {
+        log.info("Starting mapping between DDI document and Eno model");
         recursiveMapping(enoQuestionnaire, ddiInstanceDocument);
+        log.info("Finished mapping between DDI document and Eno model");
     }
 
     private void recursiveMapping(Object modelItemInstance, Object ddiItemInstance) {
