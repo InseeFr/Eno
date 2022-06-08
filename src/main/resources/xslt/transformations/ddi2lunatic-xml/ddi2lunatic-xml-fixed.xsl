@@ -734,9 +734,25 @@
     VTL : if it contains a VTL expression that needs to be evaluated
     MD : if it contains markdown that needs to be evaluated
     VTL|MD : if it contains both a VTL expression and markdown that need to be evaluated-->
-    <!-- Right now, it is simply a stub always returning VTL|MD until we decide how to implement the type information -->
+    <!-- Right now, it is simply a mapping between the location of the label in the Lunatic questionnaire and STRING, VTL and/or MD -->
+    <!-- It is possibly meant to be an information item to retrieve from the DDI, in which case it should become a proper Eno getter -->
     <xsl:function name="enolunatic:get-label-type">
-        <xsl:value-of select="'VTL|MD'"/>
+        <xsl:param name="locationOfLabel"/>
+        <xsl:choose>
+            <xsl:when test="$locationOfLabel='label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
+            <xsl:when test="$locationOfLabel='responses.label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
+            <xsl:when test="$locationOfLabel='hierarchy.label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
+            <xsl:when test="$locationOfLabel='hierarchy.subSequence.label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
+            <xsl:when test="$locationOfLabel='hierarchy.sequence.label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
+            <xsl:when test="$locationOfLabel='declarations.label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
+            <xsl:when test="$locationOfLabel='controls.control'"><xsl:value-of select="'VTL'"/></xsl:when>
+            <xsl:when test="$locationOfLabel='controls.errorMessage'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
+            <xsl:when test="$locationOfLabel='options.label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
+            <xsl:when test="$locationOfLabel='lines.min'"><xsl:value-of select="'VTL'"/></xsl:when>
+            <xsl:when test="$locationOfLabel='lines.max'"><xsl:value-of select="'VTL'"/></xsl:when>
+            <xsl:when test="$locationOfLabel='iterations'"><xsl:value-of select="'VTL'"/></xsl:when>
+            <xsl:otherwise><xsl:value-of select="'VTL|MD'"/></xsl:otherwise>
+        </xsl:choose>
     </xsl:function>
     
 </xsl:stylesheet>
