@@ -75,6 +75,77 @@ public class HelloTest {
     }
 
     @Test
+    public void chainedSpelExpression() {
+        Variable variable = new Variable();
+        variable.setName("hello");
+        SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
+        String hello = spelExpressionParser.parseExpression("getName()").getValue(variable, String.class);
+        assertNotNull(hello);
+        assertEquals(hello, "hello");
+        spelExpressionParser.parseExpression("setName(\"foo\")").getValue(variable);
+        assertEquals("foo", variable.getName());
+        spelExpressionParser.parseExpression("setName(\"bar\")").getValue(variable);
+        assertEquals("bar", variable.getName());
+    }
+
+    @Test
+    public void modifyListContentWithSpel() {
+        // Idea : convert a list of something (e.g. Variable) into a list of something else (e.g. String)
+        //
+        Variable v1 = new Variable();
+        v1.setName("foo");
+        Variable v2 = new Variable();
+        v2.setName("bar");
+        List<Variable> variableList = new ArrayList<>();
+        variableList.add(v1);
+        variableList.add(v2);
+        // desired output
+        List<String> stringList1 = variableList.stream().map(Variable::getName).toList();
+        // do it with spel
+        String stringExpression = "![getName()]";
+        @SuppressWarnings("unchecked")
+        List<String> stringList = new SpelExpressionParser().parseExpression(stringExpression)
+                .getValue(variableList, List.class);
+        //
+        assertNotNull(stringList);
+        assertEquals(stringList1, stringList);
+    }
+
+    @Test
+    public void usingIndexOnListWithSpel() {
+        // Idea : convert a list of something (e.g. Variable) into a list of something else (e.g. String)
+        //
+        Variable v1 = new Variable();
+        v1.setName("foo");
+        Variable v2 = new Variable();
+        v2.setName("bar");
+        //
+        Map<String, Variable> indexMap = new HashMap<>();
+        indexMap.put("id1", v1);
+        indexMap.put("id2", v2);
+        //
+        Variable variableReference1 = new Variable();
+        variableReference1.setName("id1");
+        Variable variableReference2 = new Variable();
+        variableReference2.setName("id2");
+        List<Variable> referenceList = new ArrayList<>();
+        referenceList.add(variableReference1);
+        referenceList.add(variableReference2);
+        //
+        List<Variable> expected = referenceList.stream().map(referenceVariable -> indexMap.get(referenceVariable.getName())).toList();
+        //
+        EvaluationContext context = new StandardEvaluationContext();
+        context.setVariable("index", indexMap);
+        String stringExpression = "![#index.get(#this.getName())]";
+        @SuppressWarnings("unchecked")
+        List<Variable> result = new SpelExpressionParser().parseExpression(stringExpression)
+                .getValue(context, referenceList, List.class);
+        //
+        assertNotNull(result);
+        assertEquals(expected, result);
+    }
+
+    @Test
     public void helloSpel() {
         // Given a Eno questionnaire
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
