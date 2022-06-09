@@ -1,19 +1,27 @@
 package fr.insee.eno.core;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.lunatic.model.flat.IVariableType;
-import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.VariableType;
+import fr.insee.eno.core.model.Variable;
+import fr.insee.eno.core.parsers.DDIParser;
+import fr.insee.lunatic.model.flat.*;
 import instance33.DDIInstanceDocument;
+import logicalproduct33.VariableGroupType;
+import logicalproduct33.impl.VariableGroupTypeImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import reusable33.IDType;
+import reusable33.ReferenceType;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Sandbox
@@ -25,6 +33,18 @@ public class HelloTest {
         //
         DDIInstanceDocument newInstance = DDIInstanceDocument.Factory.newInstance();
         System.out.println("Hello !");
+    }
+
+    @Test
+    public void ddiObjects() throws IOException {
+        //
+        DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
+                this.getClass().getClassLoader().getResource("l10xmg2l.xml"));
+        //
+        VariableGroupType firstVariableGroupType = ddiInstanceDocument.getDDIInstance().getResourcePackageArray(0)
+                .getVariableSchemeArray(0).getVariableGroupArray(0);
+        List<ReferenceType> referenceList = firstVariableGroupType.getVariableGroupReferenceList();
+        referenceList.get(0).getIDArray(0).getStringValue();
     }
 
     @Test
