@@ -65,6 +65,9 @@ public class HelloTest {
         IVariableType lunaticVariable = new VariableType();
         lunaticVariable.setName("foo");
         lunaticVariables.add(lunaticVariable);
+        //
+        List<ComponentType> components = lunaticQuestionnaire.getComponents();
+        ComponentType componentType;
 
         //
         assertEquals(1, lunaticQuestionnaire.getVariables().size());
