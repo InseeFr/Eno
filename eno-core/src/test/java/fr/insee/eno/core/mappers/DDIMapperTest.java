@@ -66,6 +66,13 @@ public class DDIMapperTest {
         // Group
         assertTrue(enoQuestionnaire.getVariableGroups().stream().map(VariableGroup::getName)
                 .anyMatch(name -> name.equals("DOCSIMPLE")));
+        // Variables in a group
+        VariableGroup testedVariableGroup = enoQuestionnaire.getVariableGroups().stream()
+                .filter(variableGroup -> variableGroup.getName().equals("DOCSIMPLE"))
+                .findAny().orElse(null);
+        assertNotNull(testedVariableGroup);
+        assertTrue(testedVariableGroup.getGroupVariables().stream().map(Variable::getName)
+                .anyMatch(name -> name.equals("COCHECASE")));
         // Question
         assertNotNull(testedVariable.getQuestion());
         assertEquals("COCHECASE", testedVariable.getQuestion().getName());
