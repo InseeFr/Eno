@@ -34,7 +34,7 @@ public class EnoQuestionnaire {
     private final List<Variable> variables = new ArrayList<>();
 
     @DDI(contextType = DDIInstanceDocument.class,
-            field = "getDDIInstance().getResourcePackageArray(0).getVariableSchemeArray(0).getVariableGroupArray()")
+            field = "getDDIInstance().getResourcePackageArray(0).getVariableSchemeArray(0).getVariableGroupList()")
     private final List<VariableGroup> variableGroups = new ArrayList<>();
 
 
