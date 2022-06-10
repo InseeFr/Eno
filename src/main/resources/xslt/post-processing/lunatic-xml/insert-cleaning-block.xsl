@@ -252,7 +252,9 @@
             <xsl:when test="$root//h:variables[h:name=$resizingName]/@variableType='CALCULATED'">
               <xsl:sequence select="$root//h:variables[h:name=$resizingName]/h:bindingDependencies"/>
             </xsl:when>
-            <xsl:otherwise><xsl:value-of select="$resizingName"/></xsl:otherwise>
+            <!-- Little trick : I encapsulate in a bindingDependency the original name when it is already a collected vraiable 
+            It's an easy way to keep a consistent behaviour with the following for-each, without a painful tokenizing step for calculated variables -->
+            <xsl:otherwise><h:bindingDependencies><xsl:value-of select="$resizingName"/></h:bindingDependencies></xsl:otherwise>
           </xsl:choose>
         </xsl:variable>
         
