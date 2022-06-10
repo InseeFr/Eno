@@ -13,7 +13,7 @@ public class VariableGroup {
     private String name;
 
     @DDI(contextType = VariableGroupType.class,
-            field = "getVariableGroupReferenceList().![#index.get(#this.getIDArray(0).getStringValue())]")
+            field = "getVariableReferenceList().![#index.get(#this.getIDArray(0).getStringValue())]")
     private final List<Variable> groupVariables = new ArrayList<>();
 
     public String getName() {
