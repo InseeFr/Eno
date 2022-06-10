@@ -5,6 +5,7 @@ import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.VariableType;
 import instance33.DDIInstanceDocument;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * Root class for Eno model.
  */
+@ToString(of={"id", "firstVariableName"})
 public class EnoQuestionnaire {
 
     @DDI(contextType = DDIInstanceDocument.class,

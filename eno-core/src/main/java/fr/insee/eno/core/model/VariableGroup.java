@@ -2,10 +2,14 @@ package fr.insee.eno.core.model;
 
 import fr.insee.eno.core.annotations.DDI;
 import logicalproduct33.VariableGroupType;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class VariableGroup {
 
     @DDI(contextType = VariableGroupType.class,
@@ -16,14 +20,11 @@ public class VariableGroup {
             field = "getVariableGroupReferenceList().![#index.get(#this.getIDArray(0).getStringValue())]")
     private final List<Variable> variables = new ArrayList<>();
 
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Variable> getVariables() {
-        return variables;
+    @Override
+    public String toString() {
+        return """
+    VariableGroup[name=%s,
+    size=%s]
+    """.formatted(name, variables.size());
     }
 }

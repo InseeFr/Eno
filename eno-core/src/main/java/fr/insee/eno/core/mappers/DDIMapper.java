@@ -4,6 +4,7 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.reference.DDIIndex;
 import instance33.DDIInstanceDocument;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
@@ -12,6 +13,7 @@ import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
+import reusable33.AbstractIdentifiableType;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
@@ -25,15 +27,16 @@ public class DDIMapper extends Mapper {
     private final DDIInstanceDocument ddiInstanceDocument;
     private final DDIIndex ddiIndex;
 
-    public DDIMapper(DDIInstanceDocument ddiInstanceDocument) {
-        //
+    public DDIMapper(@NonNull DDIInstanceDocument ddiInstanceDocument) {
+
         this.ddiInstanceDocument = ddiInstanceDocument;
         //
         ddiIndex = new DDIIndex();
         ddiIndex.indexDDI(ddiInstanceDocument);
+        log.debug(this+ " instanciated");
     }
 
-    public void mapDDI(EnoQuestionnaire enoQuestionnaire) {
+    public void mapDDI(@NonNull EnoQuestionnaire enoQuestionnaire) {
         log.info("Starting mapping between DDI document and Eno model");
         recursiveMapping(enoQuestionnaire, ddiInstanceDocument);
         log.info("Finished mapping between DDI document and Eno model");
@@ -41,6 +44,7 @@ public class DDIMapper extends Mapper {
 
     private void recursiveMapping(Object modelItemInstance, Object ddiItemInstance) {
 
+        log.debug("Start mapping for "+DDIToString(ddiItemInstance)+" to "+modelItemInstance);
         BeanWrapper beanWrapper = new BeanWrapperImpl(modelItemInstance);
 
         for (Iterator<PropertyDescriptor> iterator = propertyDescriptorIterator(beanWrapper); iterator.hasNext();) {
@@ -113,4 +117,24 @@ public class DDIMapper extends Mapper {
 
     }
 
+    private String DDIToString(@NonNull Object ddiItemInstance) {
+        return ddiItemInstance.getClass().getSimpleName()+"["
+                +((ddiItemInstance instanceof AbstractIdentifiableType)?"id="+((AbstractIdentifiableType)ddiItemInstance).getIDArray(0).getStringValue():"")
+                +"]";
+    }
+
+    @Override
+    public String toString() {
+        return "DDIMapper[" +
+                "ddiInstanceDocument=" + toString(ddiInstanceDocument) +
+                ", ddiIndex=" + ddiIndex +
+                ']';
+    }
+
+    private String toString(DDIInstanceDocument ddiInstanceDocument){
+        return """
+    DDIInstanceDocument[id=%s]
+    """.formatted(ddiInstanceDocument.getDDIInstance().getIDArray(0).getStringValue());
+
+    }
 }
