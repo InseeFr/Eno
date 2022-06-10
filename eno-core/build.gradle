@@ -19,6 +19,10 @@ dependencies {
     implementation 'org.springframework:spring-core'
     implementation 'org.springframework:spring-beans'
     implementation 'org.springframework:spring-expression'
+
+    // Jackson
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+
     // Logging
     implementation 'org.slf4j:slf4j-api'
     testRuntimeOnly 'ch.qos.logback:logback-classic'
