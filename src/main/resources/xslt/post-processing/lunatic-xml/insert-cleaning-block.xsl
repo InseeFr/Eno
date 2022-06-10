@@ -181,6 +181,7 @@
       
       <!-- We iterate on all the loop components we find -->
       <xsl:for-each select="$root//h:components[@componentType='Loop']">
+        <xsl:variable name="curLoop" select="."/>
         <xsl:variable name="curLoopDependency" select="h:loopDependencies"/>
         <xsl:variable name="curLoopDepth" select="@depth"/>
         <!-- We store the name of the resizing variable -->
@@ -242,16 +243,32 @@
             </xsl:otherwise>
           </xsl:choose>
         </xsl:variable>
-        <!-- We put the name of the resizing variable as the element name -->
-        <xsl:element name="{$resizingName}">
-          <!-- We put the resizing expression as the content of size element -->
-          <size><xsl:value-of select="$resizingExpr"/></size>
-          <!-- We iterate on all the responses linked to that loop -->
-          <xsl:for-each select=".//h:response">
-              <!-- We get the name of the response that needs resizing inside a variables element -->
-            <variables><xsl:value-of select="@name"/></variables>
-          </xsl:for-each>
-        </xsl:element>
+        <!-- Some times, the loop dependecy (so what we stored in resizingName) might be a calculated variable.
+        For Lunatic to process correctly the resizing of variables, we need to specifiy the collected variables which impact the resizing.
+        Thus we must resolve the calculated variable until all collected variables which are involved in its construction.
+        It has already been done in the core transformation, so we just need to retrieve the bindingDependencies of the calculated variable-->
+        <xsl:variable name="resizingNameResolved">
+          <xsl:choose>
+            <xsl:when test="$root//h:variables[h:name=$resizingName]/@variableType='CALCULATED'">
+              <xsl:sequence select="$root//h:variables[h:name=$resizingName]/h:bindingDependencies"/>
+            </xsl:when>
+            <xsl:otherwise><xsl:value-of select="$resizingName"/></xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        
+        <!-- We loop over all resizing variables (typically if the calculated variable is impacted by many collected variables) -->
+        <xsl:for-each select="$resizingNameResolved/h:bindingDependencies">
+          <!-- We put the name of the resizing variable as the element name -->
+          <xsl:element name="{.}">
+            <!-- We put the resizing expression as the content of size element -->
+            <size><xsl:value-of select="$resizingExpr"/></size>
+            <!-- We iterate on all the responses linked to the current loop -->
+            <xsl:for-each select="$curLoop//h:response">
+                <!-- We get the name of the response that needs resizing inside a variables element -->
+              <variables><xsl:value-of select="@name"/></variables>
+            </xsl:for-each>
+          </xsl:element>
+        </xsl:for-each>
       </xsl:for-each>
       
     </xsl:variable>
