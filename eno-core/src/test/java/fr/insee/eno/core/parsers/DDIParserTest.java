@@ -15,12 +15,12 @@ public class DDIParserTest {
     public void parserDDITest() throws IOException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse( // FIXME: https://stackoverflow.com/questions/45718145/intellij-errorjava-java-lang-exceptionininitializererror
-                this.getClass().getClassLoader().getResource("l10xmg2l.xml"));
+                this.getClass().getClassLoader().getResource("in/ddi/l10xmg2l.xml"));
 
         //
         assertNotNull(ddiInstanceDocument);
         //
-        assertFalse( ddiInstanceDocument.getDDIInstance().getIDList().isEmpty());
+        assertFalse(ddiInstanceDocument.getDDIInstance().getIDList().isEmpty());
         assertEquals("INSEE-l10xmg2l", ddiInstanceDocument.getDDIInstance().getIDList().get(0).getStringValue());
     }
 
