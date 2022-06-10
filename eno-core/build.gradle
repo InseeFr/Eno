@@ -11,6 +11,8 @@ dependencies {
     }
     // Lunatic
     implementation 'fr.insee.lunatic:lunatic-model:2.2.10'
+    // Pogues
+    implementation 'fr.insee.pogues:pogues-model:1.0.1'
 
     // Spring libraries
     implementation enforcedPlatform('org.springframework.boot:spring-boot-dependencies:2.6.4')
