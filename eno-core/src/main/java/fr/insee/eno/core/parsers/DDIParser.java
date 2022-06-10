@@ -25,6 +25,6 @@ public class DDIParser {
         } catch (XmlException e) {
             throw new RuntimeException("Unable to parse DDI document from URL " + ddiUrl, e);
         }
-
     }
+
 }
