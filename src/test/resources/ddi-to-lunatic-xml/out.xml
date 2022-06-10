@@ -5385,5 +5385,13 @@
          <LEAVDURATION52>(READY)</LEAVDURATION52>
       </READY>
    </cleaning>
-<resizing/>
+<resizing>
+      <NB_CHAR>
+         <size>NB_CHAR</size>
+         <variables>NAME_CHAR</variables>
+         <variables>AGE_CHAR</variables>
+         <variables>FAVCHAR</variables>
+         <variables>MEMORY_CHAR</variables>
+      </NB_CHAR>
+   </resizing>
 </Questionnaire>
