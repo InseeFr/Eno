@@ -1122,7 +1122,7 @@
 				<xsl:if test="$errorMessage!=''">
 					<errorMessage>
 						<value><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$errorMessage)"/></value>
-						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessge')"/></type>
+						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
 					</errorMessage>
 				</xsl:if>
 				<xsl:copy-of select="$dependencies"/>
