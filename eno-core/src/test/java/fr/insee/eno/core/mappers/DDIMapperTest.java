@@ -76,6 +76,8 @@ public class DDIMapperTest {
         // Question
         assertNotNull(testedVariable.getQuestion());
         assertEquals("COCHECASE", testedVariable.getQuestion().getName());
+        // Sequences
+        assertEquals(8, enoQuestionnaire.getSequences().size());
     }
 
 }

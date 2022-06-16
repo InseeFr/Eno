@@ -37,6 +37,11 @@ public class EnoQuestionnaire {
             field = "getDDIInstance().getResourcePackageArray(0).getVariableSchemeArray(0).getVariableGroupList()")
     private final List<VariableGroup> variableGroups = new ArrayList<>();
 
+    @DDI(contextType = DDIInstanceDocument.class,
+            field = "getDDIInstance().getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
+                    ".?[#this instanceof T(datacollection33.SequenceType)]")
+    private final List<Sequence> sequences = new ArrayList<>();
+
 
     public String getId() {
         return id;
@@ -65,5 +70,9 @@ public class EnoQuestionnaire {
 
     public List<VariableGroup> getVariableGroups() {
         return variableGroups;
+    }
+
+    public List<Sequence> getSequences() {
+        return sequences;
     }
 }
