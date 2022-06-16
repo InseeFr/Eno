@@ -58,36 +58,4 @@ public class EnoQuestionnaire {
             instanceType = fr.insee.lunatic.model.flat.Subsequence.class)
     private final List<Subsequence> subsequences = new ArrayList<>();
 
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getFirstVariableName() {
-        return firstVariableName;
-    }
-    public void setFirstVariableName(String firstVariableName) {
-        this.firstVariableName = firstVariableName;
-    }
-
-    public Variable getFirstVariable() {
-        return firstVariable;
-    }
-    public void setFirstVariable(Variable firstVariable) {
-        this.firstVariable = firstVariable;
-    }
-
-    public List<Variable> getVariables() {
-        return variables;
-    }
-
-    public List<VariableGroup> getVariableGroups() {
-        return variableGroups;
-    }
-
-    public List<Sequence> getSequences() {
-        return sequences;
-    }
 }
