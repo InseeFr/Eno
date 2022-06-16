@@ -321,8 +321,8 @@
                   </fo:inline-container>
                </fo:block>
             </fo:block-container>
-            <fo:block-container absolute-position="absolute" left="15mm" top="60mm" width="100mm"
-               height="70mm" overflow="hidden">
+            <fo:block-container absolute-position="absolute" left="15mm" top="60mm" width="110mm"
+               height="80mm" overflow="hidden">
                <fo:block margin-top="3mm" margin-left="1mm">
                   <fo:inline-container>
                      <fo:block font-weight="bold">Coordonnées de la personne
