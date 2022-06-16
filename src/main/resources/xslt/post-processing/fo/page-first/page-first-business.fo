@@ -195,7 +195,7 @@
                  top="160mm"
                  width="180mm"
                  height="5mm">
-                 <fo:block font-weight="bold">Commentaires et remarques (ne pas mentionner de données à caractère personnel)</fo:block>
+                 <fo:block font-weight="bold">Commentaires et remarques (ne pas mentionner de données à caractère personnel)</fo:block>
              </fo:block-container>
              <fo:block-container absolute-position="absolute"
                  left="18mm"
@@ -211,7 +211,7 @@
                  width="180mm"
                  height="5mm">
                  <fo:block font-weight="bold" font-size="12pt">Votre réponse était attendue pour le ${BddDateEcheance}. Merci de nous retourner ce questionnaire dans les meilleurs délais, à l’adresse
-                     suivante :</fo:block>
+                     suivante :</fo:block>
              </fo:block-container>
             <fo:block-container absolute-position="absolute"
                                 left="20mm"
@@ -331,11 +331,34 @@
                      <fo:block>Nom : $!{BddNom} $!{BddPrenom}</fo:block>
                      <fo:block>Téléphone : $!{BddTelContact}</fo:block>
                      <fo:block>Courriel : $!{BddMailContact}</fo:block>
-                     <fo:block font-weight="bold" margin-top="3mm">Si vous n'êtes pas cette personne,</fo:block>
-                     <fo:block font-weight="bold">merci de compléter vos coordonnées :</fo:block>
-                     <fo:block>Nom : ....................</fo:block>
-                     <fo:block>Prénom : ....................</fo:block>
-                     <fo:block>Fonction : ....................</fo:block>
+                     <fo:block font-weight="bold" margin-top="3mm">Si vos coordonnées sont erronées, </fo:block>
+                     <fo:block font-weight="bold">merci de compléter :</fo:block>                      <fo:block>Nom : <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/></fo:block>
+                      <fo:block>Prénom : <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/>
+                          <fo:external-graphic src="mask_number.png"/></fo:block>
                      <fo:block>Tél : <fo:external-graphic src="mask_number.png"/>
                         <fo:external-graphic src="mask_number.png"/>
                         <fo:external-graphic src="mask_number.png"/>
@@ -347,7 +370,48 @@
                         <fo:external-graphic src="mask_number.png"/>
                         <fo:external-graphic src="mask_number.png"/>
                      </fo:block>
-                     <fo:block>Courriel : ....................</fo:block>
+                     <fo:block margin-top="2mm">Fonction : <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                     </fo:block>
+                     <fo:block margin-top="2mm">Courriel : <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/></fo:block>
                   </fo:inline-container>
                </fo:block>
             </fo:block-container>
@@ -372,19 +436,19 @@
                   </fo:inline-container>
                </fo:block>
             </fo:block-container>
-            <fo:block-container absolute-position="absolute" left="25mm" top="135mm"
-               width="100mm" height="50mm" padding="2mm" border="solid black 1pt">
-               <fo:block font-weight="bold">Commentaires et remarques :</fo:block>
+            <fo:block-container absolute-position="absolute" left="20mm" top="150mm"
+               width="100mm" height="35mm" padding="2mm" border="solid black 1pt">
+               <fo:block font-weight="bold">Commentaires et remarques (ne pas mentionner de données à caractère personnel)</fo:block>
             </fo:block-container>
-            <fo:block-container absolute-position="absolute" left="110mm" top="120mm"
-               width="170mm" height="10mm">
+            <fo:block-container absolute-position="absolute" left="140mm" top="120mm"
+               width="140mm" height="10mm">
                <fo:block font-weight="bold" font-size="12pt">Votre réponse était attendue 
                   pour le : ${BddDateEcheance}. Merci de nous retourner ce questionnaire 
                   dans les meilleurs délais.</fo:block>
             </fo:block-container>
-            <fo:block-container absolute-position="absolute" left="150mm" top="135mm"
-               width="120mm" height="50mm" padding="2mm"
-               border="solid black 0.5pt" text-align="justify">
+            <fo:block-container absolute-position="absolute" left="140mm" top="150mm"
+               width="140mm" height="35mm" padding="2mm"
+               border="solid black 1pt" text-align="justify">
                <fo:block font-size="7pt">Vu l'avis favorable du Conseil national de
                   l'information statistique, cette enquête
                   #if(${BddCaractereObligatoire}=='oui') reconnue d'${BddStatutEnquete}, est
