@@ -3,9 +3,11 @@ package fr.insee.eno.core.model;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.lunatic.model.flat.Questionnaire;
+import fr.insee.lunatic.model.flat.SequenceType;
 import fr.insee.lunatic.model.flat.VariableType;
 import instance33.DDIInstanceDocument;
-import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,8 @@ import java.util.List;
 /**
  * Root class for Eno model.
  */
-@ToString(of={"id", "firstVariableName"})
+@Getter
+@Setter
 public class EnoQuestionnaire {
 
     @DDI(contextType = DDIInstanceDocument.class,
@@ -39,33 +42,20 @@ public class EnoQuestionnaire {
             field = "getDDIInstance().getResourcePackageArray(0).getVariableSchemeArray(0).getVariableGroupList()")
     private final List<VariableGroup> variableGroups = new ArrayList<>();
 
+    @DDI(contextType = DDIInstanceDocument.class,
+            field = "getDDIInstance().getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
+                    ".?[#this instanceof T(datacollection33.SequenceType) " +
+                    "and #this.getTypeOfSequenceArray(0).getStringValue() == 'module']")
+    @Lunatic(contextType = Questionnaire.class, field = "getComponents()",
+            instanceType = SequenceType.class)
+    private final List<Sequence> sequences = new ArrayList<>();
 
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
+    @DDI(contextType = DDIInstanceDocument.class,
+            field = "getDDIInstance().getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
+                    ".?[#this instanceof T(datacollection33.SequenceType) " +
+                    "and #this.getTypeOfSequenceArray(0).getStringValue() == 'submodule']")
+    @Lunatic(contextType = Questionnaire.class, field = "getComponents()",
+            instanceType = fr.insee.lunatic.model.flat.Subsequence.class)
+    private final List<Subsequence> subsequences = new ArrayList<>();
 
-    public String getFirstVariableName() {
-        return firstVariableName;
-    }
-    public void setFirstVariableName(String firstVariableName) {
-        this.firstVariableName = firstVariableName;
-    }
-
-    public Variable getFirstVariable() {
-        return firstVariable;
-    }
-    public void setFirstVariable(Variable firstVariable) {
-        this.firstVariable = firstVariable;
-    }
-
-    public List<Variable> getVariables() {
-        return variables;
-    }
-
-    public List<VariableGroup> getVariableGroups() {
-        return variableGroups;
-    }
 }

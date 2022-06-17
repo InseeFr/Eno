@@ -4,9 +4,11 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.lunatic.model.flat.IVariableType;
 import logicalproduct33.VariableType;
-import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
 
-@ToString(of="name")
+@Getter
+@Setter
 public class Variable {
 
     @DDI(contextType = VariableType.class,
@@ -19,17 +21,4 @@ public class Variable {
             field = "#index.get(getQuestionReferenceArray(0).getIDArray(0).getStringValue())")
     private Question question;
 
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Question getQuestion() {
-        return question;
-    }
-    public void setQuestion(Question question) {
-        this.question = question;
-    }
 }

@@ -1,5 +1,7 @@
 package fr.insee.eno.core.mappers;
 
+import datacollection33.SequenceType;
+import fr.insee.eno.core.HelloTest;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.Variable;
 import fr.insee.eno.core.model.VariableGroup;
@@ -72,6 +74,11 @@ public class DDIMapperTest {
         // Question
         assertNotNull(testedVariable.getQuestion());
         assertEquals("COCHECASE", testedVariable.getQuestion().getName());
+        // Sequences
+        assertEquals(2, enoQuestionnaire.getSequences().size());
+        assertEquals("jfaz9kv9", enoQuestionnaire.getSequences().get(0).getId());
+        // Subsequences
+        assertEquals(5, enoQuestionnaire.getSubsequences().size());
     }
 
 }

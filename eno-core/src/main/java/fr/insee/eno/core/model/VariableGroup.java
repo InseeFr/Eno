@@ -20,11 +20,4 @@ public class VariableGroup {
             field = "getVariableReferenceList().![#index.get(#this.getIDArray(0).getStringValue())]")
     private final List<Variable> variables = new ArrayList<>();
 
-    @Override
-    public String toString() {
-        return """
-    VariableGroup[name=%s,
-    size=%s]
-    """.formatted(name, variables.size());
-    }
 }
