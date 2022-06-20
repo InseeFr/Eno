@@ -630,7 +630,7 @@
                                  top="160mm"
                                  width="180mm"
                                  height="5mm">
-               <fo:block font-weight="bold">Commentaires et remarques (ne pas mentionner de données à caractère personnel)</fo:block>
+               <fo:block font-weight="bold">Commentaires et remarques (ne pas mentionner de données à caractère personnel)</fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute"
                                  left="18mm"
@@ -646,7 +646,7 @@
                                  width="180mm"
                                  height="5mm">
                <fo:block font-weight="bold" font-size="12pt">Votre réponse était attendue pour le ${BddDateEcheance}. Merci de nous retourner ce questionnaire dans les meilleurs délais, à l’adresse
-                        suivante :</fo:block>
+                        suivante :</fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute"
                                  left="20mm"
