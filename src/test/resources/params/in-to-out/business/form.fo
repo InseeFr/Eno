@@ -485,16 +485,17 @@
                   <fo:inline-container>
                      <fo:block font-weight="bold">Unité enquêtée</fo:block>
                      <fo:block>Identifiant : ${BddIdentifiantUniteEnquetee}</fo:block>
-                     <fo:block>Raison sociale : ${BddRaisonSociale}</fo:block>
+                     <fo:block>Raison sociale :  </fo:block>
+                  <fo:block>${BddRaisonSociale}</fo:block>
                   </fo:inline-container>
                </fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute"
-                                left="15mm"
-                                top="80mm"
-                                width="75mm"
-                                height="60mm"
-                                overflow="hidden">
+                                 left="15mm"
+                                 top="80mm"
+                                 width="160mm"
+                                 height="80mm"
+                                 overflow="hidden">
                <fo:block margin-top="3mm" margin-left="1mm">
                   <fo:inline-container>
                      <fo:block font-weight="bold">Coordonnées de la personne
@@ -503,11 +504,37 @@
                      <fo:block>Nom : $!{BddNom} $!{BddPrenom}</fo:block>
                      <fo:block>Téléphone : $!{BddTelContact}</fo:block>
                      <fo:block>Courriel : $!{BddMailContact}</fo:block>
-                     <fo:block font-weight="bold" margin-top="3mm">Si vous n'êtes pas cette personne, </fo:block>
-                     <fo:block font-weight="bold">merci de compléter vos coordonnées :</fo:block>
-                     <fo:block>Nom : ....................</fo:block>
-                     <fo:block>Prénom : ....................</fo:block>
-                     <fo:block>Fonction : ....................</fo:block>
+                     <fo:block font-weight="bold" margin-top="3mm">Si vos coordonnées sont erronées, </fo:block>
+                     <fo:block font-weight="bold">merci de compléter :</fo:block>
+                     <fo:block>Nom : <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                     </fo:block>
+                     <fo:block>Prénom : <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                     </fo:block>
                      <fo:block>Tél : <fo:external-graphic src="mask_number.png"/>
                         <fo:external-graphic src="mask_number.png"/>
                         <fo:external-graphic src="mask_number.png"/>
@@ -519,7 +546,49 @@
                         <fo:external-graphic src="mask_number.png"/>
                         <fo:external-graphic src="mask_number.png"/>
                      </fo:block>
-                     <fo:block>Courriel : ....................</fo:block>
+                     <fo:block margin-top="2mm">Fonction : <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                     </fo:block>
+                  <fo:block margin-top="2mm">Courriel : <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                     </fo:block>
                   </fo:inline-container>
                </fo:block>
             </fo:block-container>
@@ -552,36 +621,42 @@
                      <fo:block>#if ($!{InitNumeroSVI}||$!{InitGestionnaireTel})<fo:inline>Téléphone</fo:inline> : #end #if
                                 ($!{InitNumeroSVI})09-69-32-97-47 #elseif($!{InitGestionnaireTel})
                                 $!{InitGestionnaireTel}#end </fo:block>
-                     <fo:block>#if ($!{InitNumeroSVI})<fo:inline>Code enquête</fo:inline> : $!{InitNumeroSVI} #end</fo:block>
+                     <fo:block>#if ($!{InitNumeroSVI})<fo:inline>Code enquête</fo:inline> : $!{InitNumeroSVI} #end</fo:block>
                   </fo:inline-container>
                </fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute"
-                                left="15mm"
-                                top="145mm"
-                                width="180mm"
-                                height="25mm"
-                                padding="2mm"
-                                border="solid black 1pt">
-               <fo:block font-weight="bold">Commentaires et remarques :</fo:block>
+                                 left="18mm"
+                                 top="160mm"
+                                 width="180mm"
+                                 height="5mm">
+               <fo:block font-weight="bold">Commentaires et remarques (ne pas mentionner de données à caractère personnel)</fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute"
-                                left="15mm"
-                                top="175mm"
-                                width="180mm"
-                                height="10mm">
+                                 left="18mm"
+                                 top="165mm"
+                                 width="175mm"
+                                 height="20mm"
+                                 border="solid black 1pt">
+               <fo:block font-weight="bold"/>
+            </fo:block-container>
+            <fo:block-container absolute-position="absolute"
+                                 left="18mm"
+                                 top="190mm"
+                                 width="180mm"
+                                 height="5mm">
                <fo:block font-weight="bold" font-size="12pt">Votre réponse était attendue pour le ${BddDateEcheance}. Merci de nous retourner ce questionnaire dans les meilleurs délais, à l’adresse
-                        suivante :</fo:block>
+                        suivante :</fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute"
-                                left="15mm"
-                                top="210mm"
-                                width="80mm"
-                                height="65mm"
-                                padding="2mm"
-                                padding-top="10mm"
-                                border="solid black 0.5pt"
-                                text-align="justify">
+                                 left="20mm"
+                                 top="220mm"
+                                 width="80mm"
+                                 height="60mm"
+                                 padding="2mm"
+                                 padding-top="10mm"
+                                 border="solid black 0.5pt"
+                                 text-align="justify">
                <fo:block font-size="7pt">Vu l'avis favorable du Conseil national de
                         l'information statistique, cette enquête
                         #if(${BddCaractereObligatoire}=='oui') reconnue d'${BddStatutEnquete}, est
@@ -604,25 +679,6 @@
                         ${BddArticleServiceProducteur}${BddNomServiceProducteur}.</fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute"
-                                left="100mm"
-                                top="195mm"
-                                width="97mm"
-                                height="10mm">
-               <fo:block text-align="left">
-                  <fo:block>
-                     <fo:instream-foreign-object>
-                        <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                                         message="Code Bar"
-                                         orientation="0">
-                           <barcode:code39>
-                              <barcode:height>10mm</barcode:height>
-                           </barcode:code39>
-                        </barcode:barcode>
-                     </fo:instream-foreign-object>
-                  </fo:block>
-               </fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute"
                                 left="105mm"
                                 top="215mm"
                                 width="107mm"
@@ -638,6 +694,25 @@
                      <fo:block>${AdresseRetourL6}</fo:block>
                      <fo:block>${AdresseRetourL7}</fo:block>
                   </fo:inline-container>
+               </fo:block>
+            </fo:block-container>
+         <fo:block-container absolute-position="absolute"
+                                 left="115mm"
+                                 top="265mm"
+                                 width="97mm"
+                                 height="10mm">
+               <fo:block text-align="left">
+                  <fo:block>
+                     <fo:instream-foreign-object>
+                        <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
+                                          message="${BddIdentifiantUniteEnquetee}"
+                                          orientation="0">
+                           <barcode:code39>
+                              <barcode:height>10mm</barcode:height>
+                           </barcode:code39>
+                        </barcode:barcode>
+                     </fo:instream-foreign-object>
+                  </fo:block>
                </fo:block>
             </fo:block-container>
          </fo:block>
@@ -686,6 +761,25 @@
                              height="10mm">
             <fo:block text-align="center">
                <fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
+            </fo:block>
+         </fo:block-container>
+      <fo:block-container absolute-position="absolute"
+                              left="120mm"
+                              top="2mm"
+                              width="80mm"
+                              height="7mm">
+            <fo:block>
+               <fo:instream-foreign-object>
+                  <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
+                                    message="${BddIdentifiantUniteEnquetee}">
+                     <barcode:code128>
+                        <barcode:height>10mm</barcode:height>
+                        <barcode:human-readable>
+                           <barcode:placement>bottom</barcode:placement>
+                        </barcode:human-readable>
+                     </barcode:code128>
+                  </barcode:barcode>
+               </fo:instream-foreign-object>
             </fo:block>
          </fo:block-container>
       </fo:static-content>
