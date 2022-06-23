@@ -2,7 +2,11 @@ package fr.insee.eno.core.model;
 
 import datacollection33.QuestionItemType;
 import fr.insee.eno.core.annotations.DDI;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Question {
 
     @DDI(contextType = QuestionItemType.class,
@@ -11,10 +15,4 @@ public class Question {
 
     QuestionType type;
 
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
 }
