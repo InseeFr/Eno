@@ -24,7 +24,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind'
 
     // Logging
-    implementation 'org.slf4j:slf4j-api'
+    implementation 'org.slf4j:slf4j-api:2.0.0-alpha7'
     testRuntimeOnly 'ch.qos.logback:logback-classic'
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter'
@@ -33,6 +33,9 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     testCompileOnly 'org.projectlombok:lombok:1.18.24'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+    constraints{
+        implementation 'org.slf4j:slf4j-api:2.0.0-alpha7'
+    }
 }
 
 tasks.named('test') {

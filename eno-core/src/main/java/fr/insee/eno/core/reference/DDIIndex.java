@@ -86,4 +86,9 @@ public class DDIIndex extends HashMap<String, Object> {
         }
 
     }
+
+    @Override
+    public String toString() {
+        return "DDIIndex["+size()+" elements]";
+    }
 }

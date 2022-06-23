@@ -9,7 +9,6 @@ import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.reference.DDIIndex;
 import instance33.DDIInstanceDocument;
 import logicalproduct33.VariableType;
-import org.apache.xmlbeans.XmlException;
 import org.junit.jupiter.api.Test;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
@@ -17,8 +16,6 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -72,7 +69,7 @@ public class DDIMapperTest {
                 .filter(variableGroup -> variableGroup.getName().equals("DOCSIMPLE"))
                 .findAny().orElse(null);
         assertNotNull(testedVariableGroup);
-        assertTrue(testedVariableGroup.getGroupVariables().stream().map(Variable::getName)
+        assertTrue(testedVariableGroup.getVariables().stream().map(Variable::getName)
                 .anyMatch(name -> name.equals("COCHECASE")));
         // Question
         assertNotNull(testedVariable.getQuestion());

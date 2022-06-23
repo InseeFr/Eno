@@ -18,6 +18,6 @@ public class VariableGroup {
 
     @DDI(contextType = VariableGroupType.class,
             field = "getVariableReferenceList().![#index.get(#this.getIDArray(0).getStringValue())]")
-    private final List<Variable> groupVariables = new ArrayList<>();
+    private final List<Variable> variables = new ArrayList<>();
 
 }

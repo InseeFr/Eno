@@ -14,7 +14,7 @@ public class Variable {
     @DDI(contextType = VariableType.class,
             field = "getVariableNameArray(0).getStringArray(0).getStringValue()")
     @Lunatic(contextType = IVariableType.class, field = "setName(#param)")
-    String name;
+    private String name;
 
     @DDI(contextType = VariableType.class, field = "getQuestionReferenceArray(0).getIDArray(0).getStringValue()")
     @Lunatic(contextType = IVariableType.class, field = "setComponentRef(#param)")
@@ -23,7 +23,7 @@ public class Variable {
     /** Considering that a variable corresponds to a single question. (!) */
     @DDI(contextType = VariableType.class,
             field = "#index.get(getQuestionReferenceArray(0).getIDArray(0).getStringValue())")
-    Question question;
+    private Question question;
 
 
 }

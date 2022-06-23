@@ -4,10 +4,9 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.reference.DDIIndex;
 import instance33.DDIInstanceDocument;
-import logicalproduct33.VariableGroupType;
-import logicalproduct33.impl.VariableGroupTypeImpl;
-import logicalproduct33.impl.VariableTypeImpl;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.core.convert.TypeDescriptor;
@@ -15,6 +14,7 @@ import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
+import reusable33.AbstractIdentifiableType;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
@@ -28,15 +28,16 @@ public class DDIMapper extends Mapper {
     private final DDIInstanceDocument ddiInstanceDocument;
     private final DDIIndex ddiIndex;
 
-    public DDIMapper(DDIInstanceDocument ddiInstanceDocument) {
-        //
+    public DDIMapper(@NonNull DDIInstanceDocument ddiInstanceDocument) {
+
         this.ddiInstanceDocument = ddiInstanceDocument;
         //
         ddiIndex = new DDIIndex();
         ddiIndex.indexDDI(ddiInstanceDocument);
+        log.atDebug().log(()->this+ " instanciated");
     }
 
-    public void mapDDI(EnoQuestionnaire enoQuestionnaire) {
+    public void mapDDI(@NonNull EnoQuestionnaire enoQuestionnaire) {
         log.info("Starting mapping between DDI document and Eno model");
         recursiveMapping(enoQuestionnaire, ddiInstanceDocument);
         log.info("Finished mapping between DDI document and Eno model");
@@ -44,6 +45,7 @@ public class DDIMapper extends Mapper {
 
     private void recursiveMapping(Object modelItemInstance, Object ddiItemInstance) {
 
+        log.atDebug().log(()->"Start mapping for "+DDIToString(ddiItemInstance)+" to "+modelItemInstance);
         // Use Spring BeanWrapper to iterate on property descriptors of the model object
         BeanWrapper beanWrapper = new BeanWrapperImpl(modelItemInstance);
         for (Iterator<PropertyDescriptor> iterator = propertyDescriptorIterator(beanWrapper); iterator.hasNext();) {
@@ -61,6 +63,8 @@ public class DDIMapper extends Mapper {
             DDI ddiAnnotation = typeDescriptor.getAnnotation(DDI.class);
             if (ddiAnnotation != null) {
 
+                log.atDebug().log(()->"  Processing property "+propertyDescriptor.getName() +" for annotation "+ddiAnnotation);
+
                 // Instantiate a Spring expression with the annotation content
                 Expression expression = new SpelExpressionParser().parseExpression(ddiAnnotation.field());
 
@@ -68,11 +72,12 @@ public class DDIMapper extends Mapper {
                 EvaluationContext context = new StandardEvaluationContext();
                 context.setVariable("index", ddiIndex);
 
-                // Simple types // TODO: only String nom but other simple types later (probably)
+                // Simple types // TODO: only String now but other simple types later (probably)
                 if (String.class.isAssignableFrom(classType)) {
                     // Simply set the value in the field // TODO: control that result of expression is not null
                     beanWrapper.setPropertyValue(propertyDescriptor.getName(),
                             expression.getValue(context, ddiItemInstance, classType));
+                    log.atDebug().log(()->"  Value "+beanWrapper.getPropertyValue(propertyDescriptor.getName())+" setted");
                 }
 
                 // Lists (of complex objects) // TODO: manage the case of simple type lists (if the case occurs)
@@ -80,7 +85,7 @@ public class DDIMapper extends Mapper {
                     // Get the DDI collection instance by evaluating the expression
                     Collection<?> ddiCollection = expression.getValue(context, ddiItemInstance, Collection.class);
                     if (ddiCollection == null) {
-                        log.debug(String.format(
+                        log.warn(String.format(
                                 "Incoherent expression in field of DDI annotation on property '%s' in class %s.",
                                 propertyDescriptor.getName(), modelItemInstance.getClass()));
                         throw new RuntimeException(String.format(
@@ -104,7 +109,7 @@ public class DDIMapper extends Mapper {
                                 // Recursive call on these instances
                                 recursiveMapping(modelItemInstance2, ddiItemInstance2);
                             } catch (NoSuchMethodException | InstantiationException e) {
-                                log.debug("Default constructor may be missing in class " + modelTargetType);
+                                log.warn("Default constructor may be missing in class " + modelTargetType);
                                 throw new RuntimeException("Unable to create instance for class " + modelTargetType);
                             }
                         }
@@ -136,4 +141,25 @@ public class DDIMapper extends Mapper {
 
     }
 
+
+    private String DDIToString(@NonNull Object ddiItemInstance) {
+        return ddiItemInstance.getClass().getSimpleName()+"["
+                +((ddiItemInstance instanceof AbstractIdentifiableType)?"id="+((AbstractIdentifiableType)ddiItemInstance).getIDArray(0).getStringValue():"")
+                +"]";
+    }
+
+    @Override
+    public String toString() {
+        return "DDIMapper[" +
+                "ddiInstanceDocument=" + toString(ddiInstanceDocument) +
+                ", ddiIndex=" + ddiIndex +
+                ']';
+    }
+
+    private String toString(DDIInstanceDocument ddiInstanceDocument){
+        return """
+    DDIInstanceDocument[id=%s]
+    """.formatted(ddiInstanceDocument.getDDIInstance().getIDArray(0).getStringValue());
+
+    }
 }

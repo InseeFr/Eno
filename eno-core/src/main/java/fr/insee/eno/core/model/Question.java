@@ -4,7 +4,9 @@ import datacollection33.QuestionItemType;
 import fr.insee.eno.core.annotations.DDI;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
+@ToString(of="name")
 @Getter
 @Setter
 public class Question {
