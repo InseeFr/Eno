@@ -62,7 +62,7 @@
 		<apache-commons.version>3.5</apache-commons.version>
 		<junit.version>5.8.2</junit.version>
 		<xmlunit.version>2.9.0</xmlunit.version>
-		<log4j-slf4j.version>2.17.1</log4j-slf4j.version>
+		<log4j-slf4j.version>2.17.2</log4j-slf4j.version>
 
 
 		<source.plugin.version>3.2.1</source.plugin.version>
@@ -168,7 +168,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.10.0</version>
+				<version>3.10.1</version>
 				<configuration>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
@@ -356,7 +356,7 @@
 					<plugin>
 						<groupId>org.sonatype.plugins</groupId>
 						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>1.6.12</version>
+						<version>1.6.13</version>
 						<extensions>true</extensions>
 						<configuration>
 							<serverId>ossrh</serverId>
