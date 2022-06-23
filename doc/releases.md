@@ -2,7 +2,7 @@
 
 ## 2.3.8 - 23/06/22
 - **[dependencies]** Upgrading dependancies.
-- **[ddi2lunaticXML][post-processing]** fixing the identification of first and last sequence id, which was wrong and could previously return multiple ids (insert-generic-questions).
+- **[poguesXML2ddi][core]** Add some measurement units
 - **[ddi2fo][post-processing]** ***business*** Various changes to first page in fo format
 
 ## 2.3.7 - 24/02/22
