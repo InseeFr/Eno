@@ -58,4 +58,8 @@ public class EnoQuestionnaire {
             instanceType = fr.insee.lunatic.model.flat.Subsequence.class)
     private final List<Subsequence> subsequences = new ArrayList<>();
 
+    @DDI(contextType = DDIInstanceDocument.class,
+            field = "getDDIInstance().getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionItemList()")
+    private final List<Question> questions = new ArrayList<>();
+
 }
