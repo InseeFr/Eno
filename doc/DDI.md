@@ -9,6 +9,9 @@ https://ddialliance.org/Specification/DDI-Lifecycle/3.3/
 
 Doc of some types:
 
+- https://ddialliance.github.io/ddimodel-web/DDI-L-3.3/item-types/Question/
+  - https://ddialliance.github.io/ddimodel-web/DDI-L-3.3/item-types/QuestionGrid/
+  - https://ddialliance.github.io/ddimodel-web/DDI-L-3.3/item-types/QuestionItem/
 - https://ddialliance.github.io/ddimodel-web/DDI-L-3.3/composite-types/DynamicTextType/
 - https://ddialliance.github.io/ddimodel-web/DDI-L-3.3/composite-types/TextContentType/
   - https://ddialliance.github.io/ddimodel-web/DDI-L-3.3/composite-types/LiteralTextType/
