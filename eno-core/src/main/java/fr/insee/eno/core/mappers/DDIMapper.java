@@ -1,6 +1,7 @@
 package fr.insee.eno.core.mappers;
 
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.converter.DDIConverter;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.reference.DDIIndex;
 import instance33.DDIInstanceDocument;
@@ -12,12 +13,14 @@ import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
+import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import reusable33.AbstractIdentifiableType;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -34,18 +37,18 @@ public class DDIMapper extends Mapper {
         //
         ddiIndex = new DDIIndex();
         ddiIndex.indexDDI(ddiInstanceDocument);
-        log.atDebug().log(()->this+ " instanciated");
+        //log.atDebug().log(()->this+ " instantiated"); //FIXME
     }
 
     public void mapDDI(@NonNull EnoQuestionnaire enoQuestionnaire) {
         log.info("Starting mapping between DDI document and Eno model");
-        recursiveMapping(enoQuestionnaire, ddiInstanceDocument);
+        recursiveMapping(enoQuestionnaire, ddiInstanceDocument.getDDIInstance());
         log.info("Finished mapping between DDI document and Eno model");
     }
 
     private void recursiveMapping(Object modelItemInstance, Object ddiItemInstance) {
 
-        log.atDebug().log(()->"Start mapping for "+DDIToString(ddiItemInstance)+" to "+modelItemInstance);
+        //log.atDebug().log(()->"Start mapping for "+DDIToString(ddiItemInstance)+" to "+modelItemInstance); // FIXME
         // Use Spring BeanWrapper to iterate on property descriptors of the model object
         BeanWrapper beanWrapper = new BeanWrapperImpl(modelItemInstance);
         for (Iterator<PropertyDescriptor> iterator = propertyDescriptorIterator(beanWrapper); iterator.hasNext();) {
@@ -63,7 +66,7 @@ public class DDIMapper extends Mapper {
             DDI ddiAnnotation = typeDescriptor.getAnnotation(DDI.class);
             if (ddiAnnotation != null) {
 
-                log.atDebug().log(()->"  Processing property "+propertyDescriptor.getName() +" for annotation "+ddiAnnotation);
+                //log.atDebug().log(()->"  Processing property "+propertyDescriptor.getName() +" for annotation "+ddiAnnotation); //FIXME
 
                 // Instantiate a Spring expression with the annotation content
                 Expression expression = new SpelExpressionParser().parseExpression(ddiAnnotation.field());
@@ -72,12 +75,14 @@ public class DDIMapper extends Mapper {
                 EvaluationContext context = new StandardEvaluationContext();
                 context.setVariable("index", ddiIndex);
 
-                // Simple types // TODO: only String now but other simple types later (probably)
-                if (String.class.isAssignableFrom(classType)) {
-                    // Simply set the value in the field // TODO: control that result of expression is not null
-                    beanWrapper.setPropertyValue(propertyDescriptor.getName(),
-                            expression.getValue(context, ddiItemInstance, classType));
-                    log.atDebug().log(()->"  Value "+beanWrapper.getPropertyValue(propertyDescriptor.getName())+" setted");
+                // Simple types
+                if (isSimpleType(classType)) {
+                    // Simply set the value in the field
+                    Object ddiValue = expression.getValue(context, ddiItemInstance);
+                    if (ddiValue != null) {
+                        beanWrapper.setPropertyValue(propertyDescriptor.getName(), ddiValue);
+                    }
+                    //log.atDebug().log(()->"  Value "+beanWrapper.getPropertyValue(propertyDescriptor.getName())+" setted"); //FIXME
                 }
 
                 // Lists (of complex objects) // TODO: manage the case of simple type lists (if the case occurs)
@@ -103,15 +108,25 @@ public class DDIMapper extends Mapper {
                             Class<?> modelTargetType = typeDescriptor.getResolvableType()
                                     .getGeneric(0).getRawClass();
                             assert modelTargetType != null;
-                            try {
-                                Object modelItemInstance2 = modelTargetType.getDeclaredConstructor().newInstance();
-                                modelCollection.add(modelItemInstance2);
-                                // Recursive call on these instances
-                                recursiveMapping(modelItemInstance2, ddiItemInstance2);
-                            } catch (NoSuchMethodException | InstantiationException e) {
-                                log.warn("Default constructor may be missing in class " + modelTargetType);
-                                throw new RuntimeException("Unable to create instance for class " + modelTargetType);
+                            Object modelItemInstance2;
+                            // If the list content type is abstract call the converter
+                            if (Modifier.isAbstract(modelTargetType.getModifiers())) {
+                                modelItemInstance2 = DDIConverter.instantiateFromDDIObject(ddiItemInstance2);
                             }
+                            // Else, call class constructor
+                            else {
+                                try {
+                                    modelItemInstance2 = modelTargetType.getDeclaredConstructor().newInstance();
+                                } catch (NoSuchMethodException | InstantiationException e) {
+                                    log.warn("Default constructor may be missing in class " + modelTargetType);
+                                    throw new RuntimeException("Unable to create instance for class " + modelTargetType);
+                                }
+                            }
+                            // Add the created instance in the model list
+                            modelCollection.add(modelItemInstance2);
+                            // Recursive call on these instances
+                            recursiveMapping(modelItemInstance2, ddiItemInstance2);
+
                         }
                     } catch (IllegalAccessException | InvocationTargetException e) {
                         throw new RuntimeException(String.format(

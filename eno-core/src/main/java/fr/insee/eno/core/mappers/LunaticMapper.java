@@ -1,6 +1,7 @@
 package fr.insee.eno.core.mappers;
 
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.converter.LunaticConverter;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import lombok.extern.slf4j.Slf4j;
@@ -50,19 +51,18 @@ public class LunaticMapper extends Mapper {
             if(lunaticAnnotation != null) {
                 Expression expression = new SpelExpressionParser().parseExpression(lunaticAnnotation.field());
 
-                if (String.class.isAssignableFrom(classType)) {
-                    EvaluationContext context = new StandardEvaluationContext();
-                    context.setVariable("param",
-                            beanWrapper.getPropertyValue(propertyDescriptor.getName()));
-                    expression.getValue(context, lunaticInstance);
+                if (isSimpleType(classType)) {
+                    Object modelValue = beanWrapper.getPropertyValue(propertyDescriptor.getName());
+                    if (modelValue != null) {
+                        EvaluationContext context = new StandardEvaluationContext();
+                        context.setVariable("param", modelValue);
+                        expression.getValue(context, lunaticInstance);
+                    }
                 }
 
                 else if (Collection.class.isAssignableFrom(classType)) {
                     Collection<Object> lunaticCollection = expression.getValue(lunaticInstance, Collection.class);
                     Collection<Object> enoCollection = null;
-                    // pb ici : par exemple: getVariables() renvoie une liste de IVariableType (type abstrait)
-                    //Class<?> lunaticCollectionType = expression.getValueTypeDescriptor(lunaticInstance)
-                    //        .getResolvableType().getGeneric(0).getRawClass();*/
                     try {
                         enoCollection = (Collection<Object>) propertyDescriptor.getReadMethod().invoke(enoInstance);
                     } catch (IllegalAccessException e) {
@@ -71,30 +71,30 @@ public class LunaticMapper extends Mapper {
                         e.printStackTrace();
                     }
                     for (Object enoInstance2 : enoCollection) {
-                        Object lunaticInstance2 = null;
-                        try {
-                            lunaticInstance2 = lunaticAnnotation.instanceType().getDeclaredConstructor().newInstance();
-                            //lunaticInstance2 = lunaticCollectionType.getDeclaredConstructor().newInstance();
-                        } catch (InstantiationException e) {
-                            e.printStackTrace();
-                        } catch (IllegalAccessException e) {
-                            e.printStackTrace();
-                        } catch (InvocationTargetException e) {
-                            e.printStackTrace();
-                        } catch (NoSuchMethodException e) {
-                            e.printStackTrace();
-                        }
+                        //Object lunaticInstance2 = lunaticAnnotation.instanceType().getDeclaredConstructor().newInstance();
+                        Object lunaticInstance2 = LunaticConverter.instantiateFromEnoObject(enoInstance2);
                         lunaticCollection.add(lunaticInstance2);
                         recursiveMapping(enoInstance2, lunaticInstance2);
                     }
                 }
 
                 else {
-                    throw new RuntimeException("Not implemented"); //TODO: text
+                    //
+                    Object enoInstance2 = beanWrapper.getPropertyValue(propertyDescriptor.getName());
+                    if (enoInstance2 != null) {
+                        //
+                        Object lunaticInstance2 = LunaticConverter.instantiateFromEnoObject(enoInstance2);
+                        //
+                        EvaluationContext context = new StandardEvaluationContext();
+                        context.setVariable("param", lunaticInstance2); //TODO: other keyword for new instances setter?
+                        expression.getValue(context, lunaticInstance);
+                        //
+                        recursiveMapping(enoInstance2, lunaticInstance2);
+                    }
                 }
 
             }
         }
-
     }
+
 }

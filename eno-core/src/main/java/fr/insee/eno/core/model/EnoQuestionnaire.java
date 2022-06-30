@@ -59,7 +59,11 @@ public class EnoQuestionnaire {
     private final List<Subsequence> subsequences = new ArrayList<>();
 
     @DDI(contextType = DDIInstanceDocument.class,
-            field = "getDDIInstance().getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionItemList()")
     private final List<Question> questions = new ArrayList<>();
+            field = "getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionItemList()")
+    @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "getComponents()")
+    private final List<SingleResponseQuestion> singleResponseQuestions = new ArrayList<>();
+
+    private final List<MultipleResponseQuestion> multipleResponseQuestions = new ArrayList<>();
 
 }
