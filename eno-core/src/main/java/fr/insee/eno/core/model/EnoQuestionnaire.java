@@ -1,6 +1,7 @@
 package fr.insee.eno.core.model;
 
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.SequenceType;
@@ -12,11 +13,16 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static fr.insee.eno.core.annotations.Contexts.Context;
+
 /**
  * Root class for Eno model.
  */
 @Getter
 @Setter
+@Context(format = Format.POGUES, type = fr.insee.pogues.model.Questionnaire.class)
+@Context(format = Format.DDI, type = DDIInstanceType.class)
+@Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.Questionnaire.class)
 public class EnoQuestionnaire {
 
     @DDI(contextType = DDIInstanceDocument.class,
