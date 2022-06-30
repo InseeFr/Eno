@@ -21,5 +21,8 @@ public class Variable {
     String questionReference;
 
     @DDI(contextType = VariableType.class,
+            field = "#this instanceof T(reusable33.NumericRepresentationBaseType) ? " +
+                    "getVariableRepresentation()?.getMeasurementUnit()?.getStringValue() : null")
+    String unit;
 
 }
