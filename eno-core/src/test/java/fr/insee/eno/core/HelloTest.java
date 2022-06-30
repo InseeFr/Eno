@@ -1,27 +1,33 @@
 package fr.insee.eno.core;
 
+import datacollection33.*;
+import datacollection33.SequenceType;
+import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.mappers.DDIMapperTest;
+import fr.insee.eno.core.mappers.Mapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.Variable;
 import fr.insee.eno.core.parsers.DDIParser;
+import fr.insee.eno.core.reference.DDIIndex;
 import fr.insee.lunatic.model.flat.*;
 import instance33.DDIInstanceDocument;
 import logicalproduct33.VariableGroupType;
-import logicalproduct33.impl.VariableGroupTypeImpl;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.expression.EvaluationContext;
+import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import reusable33.IDType;
 import reusable33.ReferenceType;
 
+import java.beans.PropertyDescriptor;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Sandbox
@@ -41,10 +47,41 @@ public class HelloTest {
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
                 this.getClass().getClassLoader().getResource("l10xmg2l.xml"));
         //
+        ddiInstanceDocument.getDDIInstance().getCitation().getTitle().getStringArray(0).getStringValue();
+        //
+        logicalproduct33.VariableType v;
+        //
         VariableGroupType firstVariableGroupType = ddiInstanceDocument.getDDIInstance().getResourcePackageArray(0)
                 .getVariableSchemeArray(0).getVariableGroupArray(0);
         List<ReferenceType> referenceList = firstVariableGroupType.getVariableGroupReferenceList();
         referenceList.get(0).getIDArray(0).getStringValue();
+        //
+        ddiInstanceDocument.getDDIInstance().getResourcePackageArray(0)
+                .getInterviewerInstructionSchemeArray(0).getInstructionArray(0)
+                .getInstructionNameArray(0).getStringArray(0).getStringValue();
+        InstructionType instructionType;
+        QuestionItemType questionItemType;
+        //
+        ddiInstanceDocument.getDDIInstance().getResourcePackageArray(0).getQuestionSchemeArray(0);
+    }
+
+    @Test
+    public void getDDIIndexUsingSpel() throws IOException {
+        //
+        DDIIndex ddiIndex = new DDIIndex();
+        ddiIndex.indexDDI(DDIParser.parse(
+                DDIMapperTest.class.getClassLoader().getResource("l10xmg2l.xml")));
+        //
+        Expression expression = new SpelExpressionParser()
+                .parseExpression("#index.get(\"kzwoti00\")");
+        EvaluationContext context = new StandardEvaluationContext();
+        context.setVariable("index", ddiIndex);
+
+        //
+        logicalproduct33.VariableType ddiVariable = expression.getValue(context, logicalproduct33.VariableType.class);
+        assertNotNull(ddiVariable);
+        assertEquals("COCHECASE",
+                ddiVariable.getVariableNameArray(0).getStringArray(0).getStringValue());
     }
 
     @Test
@@ -59,15 +96,23 @@ public class HelloTest {
     public void helloLunaticQuestionnaire() {
         // New Lunatic questionnaire
         Questionnaire lunaticQuestionnaire = new Questionnaire();
+        //
+        lunaticQuestionnaire.setLabel("i'm a Lunatic questionnaire :)))))");
+        //
+        //lunaticQuestionnaire.setGeneratingDate("");
         // Variables list
         List<IVariableType> lunaticVariables = lunaticQuestionnaire.getVariables();
         // Add a variable
         IVariableType lunaticVariable = new VariableType();
         lunaticVariable.setName("foo");
+        lunaticVariable.setComponentRef("azerty");
         lunaticVariables.add(lunaticVariable);
         //
         List<ComponentType> components = lunaticQuestionnaire.getComponents();
-        ComponentType componentType;
+        DeclarationPositionEnum foo = DeclarationPositionEnum.valueOf("AFTER_QUESTION_TEXT");
+        DeclarationType foo2;
+        ComponentTypeEnum sequence = ComponentTypeEnum.valueOf("SEQUENCE");
+        InputNumber ff3;
 
         //
         assertEquals(1, lunaticQuestionnaire.getVariables().size());
@@ -163,4 +208,48 @@ public class HelloTest {
         //
         assertEquals("hello", lunaticQuestionnaire.getId());
     }
+
+    @Test
+    public void spelInlineVariable() {
+        String fooString = new SpelExpressionParser().parseExpression("true ? 'hello' : 'goodbye'").getValue(String.class);
+        assertEquals("hello", fooString);
+    }
+
+    public void runtimeCast() {
+        Class<EnoQuestionnaire> clazz = EnoQuestionnaire.class;
+        SequenceType foo;
+    }
+
+    @Test
+    public void intType() {
+        assertTrue(int.class.isAssignableFrom(int.class));
+    }
+
+    @Test
+    public void intConversion() {
+        int expected = 10;
+        int converted = Integer.parseInt("10");
+        assertEquals(expected, Integer.parseInt("10"));
+    }
+
+    @Test
+    public void introspectionAndAbstract() {
+        FooSuper foo = new FooSuper();
+        foo.setA(1);
+        foo.setS(7);
+        //
+        BeanWrapper beanWrapper = new BeanWrapperImpl(foo);
+        for (Iterator<PropertyDescriptor> iterator = Mapper.propertyDescriptorIterator(beanWrapper); iterator.hasNext();) {
+            System.out.println(iterator.next().getName());
+        }
+        //
+        System.out.println(foo.getClass().getSuperclass());
+        //
+        TypeDescriptor sTypeDescriptor = beanWrapper.getPropertyTypeDescriptor("a");
+        assertNotNull(sTypeDescriptor);
+        DDI ddiAnnotation = sTypeDescriptor.getAnnotation(DDI.class);
+        assertNotNull(ddiAnnotation);
+        assertEquals("hello", ddiAnnotation.field());
+    }
+
 }

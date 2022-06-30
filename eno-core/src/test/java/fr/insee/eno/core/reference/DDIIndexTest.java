@@ -1,5 +1,6 @@
 package fr.insee.eno.core.reference;
 
+import datacollection33.ControlConstructSchemeType;
 import datacollection33.InstructionType;
 import datacollection33.QuestionItemType;
 import fr.insee.eno.core.parsers.DDIParser;
@@ -49,9 +50,14 @@ public class DDIIndexTest {
         assertTrue(ddiIndex.containsKey("INSEE-Instrument-l10xmg2l-vg"));
         assertEquals("DOCSIMPLE",
                 ((VariableGroupType) ddiIndex.get("INSEE-Instrument-l10xmg2l-vg")).getVariableGroupNameArray(0).getStringArray(0).getStringValue());
-        // Question item
+        // SingleResponseQuestion item
         assertTrue(ddiIndex.containsKey("jfazk91m"));
         assertEquals("COCHECASE",
                 ((QuestionItemType) ddiIndex.get("jfazk91m")).getQuestionItemNameArray(0).getStringArray(0).getStringValue());
+
+
+        //
+        ControlConstructSchemeType foo = (ControlConstructSchemeType) ddiIndex.get("ControlConstructScheme-l10xmg2l");
+        assertNotNull(foo);
     }
 }
