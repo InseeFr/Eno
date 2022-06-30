@@ -16,33 +16,51 @@ to the project.
 
 ## SpEL functionalities / syntax
 
+_Reference:_ 
+
+https://docs.spring.io/spring-framework/docs/current/reference/html/core.html
+
 ### SpEL keywords
 
-- ``this``
-- ``root``
+- ``#this``
+- ``#root``
 
 ### Logical operators
 
-- ``==``
-- ``!=``
+- ``==``, ``!=``
+- ``<``, ``<=``, ``>``, ``>=``
+- ``and``, ``or``
 - ``instanceof``
 
 ### Projection
 
-``.!``
+``someList.![<condition on each element using #this>]``
 
 ### Selection
 
-``.?``
+``someList.?[<condition on each element using #this>]``
+
+### Safe navigation operator
+
+``somethingThatMightBeNull?.getSomething()``
+
+### Ternary operator
+
+``<condition> ? <value if true> : <value if false>``
+
+### Elvis operator
+
+``<expression> ?: <value if null>``
 
 ### Types
 
 ``T()``
 
-### Enums
+### Enums / static method calls
 
 ``T(fully.qualified.name.SomeEnum).SOME_VALUE``
 ``T(fully.qualified.name.SomeEnum).valueOf('SOME_VALUE')``
+``T(fully.qualified.name.SomeClass).someStaticMethod(...)``
 
 ### Inheritance
 
