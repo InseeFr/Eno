@@ -14,5 +14,4 @@ public @interface Lunatic {
 
     String field();
 
-    Class<?> instanceType() default Object.class;
 }
