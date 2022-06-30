@@ -29,8 +29,7 @@ public class Subsequence {
 
     @DDI(contextType = SequenceType.class,
             field = "getInterviewerInstructionReferenceList().![#index.get(#this.getIDArray(0).getStringValue())]")
-    @Lunatic(contextType = fr.insee.lunatic.model.flat.Subsequence.class, field = "getDeclarations()",
-            instanceType = DeclarationType.class)
+    @Lunatic(contextType = fr.insee.lunatic.model.flat.Subsequence.class, field = "getDeclarations()")
     private final List<Instruction> instructions = new ArrayList<>();
 
     private final List<Declaration> declarations = new ArrayList<>();

@@ -3,10 +3,9 @@ package fr.insee.eno.core.model;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.SequenceType;
-import fr.insee.lunatic.model.flat.VariableType;
-import instance33.DDIInstanceDocument;
+import fr.insee.eno.core.model.question.MultipleResponseQuestion;
+import fr.insee.eno.core.model.question.SingleResponseQuestion;
+import instance33.DDIInstanceType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,47 +24,47 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.Questionnaire.class)
 public class EnoQuestionnaire {
 
-    @DDI(contextType = DDIInstanceDocument.class,
-            field = "getDDIInstance().getIDArray(0).getStringValue()")
-    @Lunatic(contextType = Questionnaire.class, field ="setId(#param)")
+    @DDI(contextType = DDIInstanceType.class, field = "getIDArray(0).getStringValue()")
+    @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field ="setId(#param)")
     private String id;
 
-    @DDI(contextType = DDIInstanceDocument.class,
-            field = "getDDIInstance().getResourcePackageArray(0).getVariableSchemeArray(0)" +
+    @DDI(contextType = DDIInstanceType.class, field = "getCitation().getTitle().getStringArray(0).getStringValue()")
+    @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "setLabel(#param)")
+    private String label;
+
+    @DDI(contextType = DDIInstanceType.class,
+            field = "getResourcePackageArray(0).getVariableSchemeArray(0)" +
                     ".getVariableArray(0).getVariableNameArray(0).getStringArray(0).getStringValue()")
     private String firstVariableName;
 
-    @DDI(contextType = DDIInstanceDocument.class,
-            field = "getDDIInstance().getResourcePackageArray(0).getVariableSchemeArray(0).getVariableArray(0)")
+    @DDI(contextType = DDIInstanceType.class,
+            field = "getResourcePackageArray(0).getVariableSchemeArray(0).getVariableArray(0)")
     private Variable firstVariable;
 
-    @DDI(contextType = DDIInstanceDocument.class,
-            field = "getDDIInstance().getResourcePackageArray(0).getVariableSchemeArray(0).getVariableList()")
-    @Lunatic(contextType = Questionnaire.class, field ="getVariables()", instanceType = VariableType.class)
+    @DDI(contextType = DDIInstanceType.class,
+            field = "getResourcePackageArray(0).getVariableSchemeArray(0).getVariableList()")
+    @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field ="getVariables()")
     private final List<Variable> variables = new ArrayList<>();
 
-    @DDI(contextType = DDIInstanceDocument.class,
-            field = "getDDIInstance().getResourcePackageArray(0).getVariableSchemeArray(0).getVariableGroupList()")
+    @DDI(contextType = DDIInstanceType.class,
+            field = "getResourcePackageArray(0).getVariableSchemeArray(0).getVariableGroupList()")
     private final List<VariableGroup> variableGroups = new ArrayList<>();
 
-    @DDI(contextType = DDIInstanceDocument.class,
-            field = "getDDIInstance().getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
+    @DDI(contextType = DDIInstanceType.class,
+            field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
                     ".?[#this instanceof T(datacollection33.SequenceType) " +
                     "and #this.getTypeOfSequenceArray(0).getStringValue() == 'module']")
-    @Lunatic(contextType = Questionnaire.class, field = "getComponents()",
-            instanceType = SequenceType.class)
+    @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "getComponents()")
     private final List<Sequence> sequences = new ArrayList<>();
 
-    @DDI(contextType = DDIInstanceDocument.class,
-            field = "getDDIInstance().getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
+    @DDI(contextType = DDIInstanceType.class,
+            field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
                     ".?[#this instanceof T(datacollection33.SequenceType) " +
                     "and #this.getTypeOfSequenceArray(0).getStringValue() == 'submodule']")
-    @Lunatic(contextType = Questionnaire.class, field = "getComponents()",
-            instanceType = fr.insee.lunatic.model.flat.Subsequence.class)
+    @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "getComponents()")
     private final List<Subsequence> subsequences = new ArrayList<>();
 
-    @DDI(contextType = DDIInstanceDocument.class,
-    private final List<Question> questions = new ArrayList<>();
+    @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionItemList()")
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "getComponents()")
     private final List<SingleResponseQuestion> singleResponseQuestions = new ArrayList<>();

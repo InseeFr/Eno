@@ -14,5 +14,4 @@ public @interface DDI {
 
     String field();
 
-
 }

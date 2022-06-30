@@ -16,11 +16,12 @@ public class Instruction {
             field = "getIDArray(0).getStringValue()")
     @Lunatic(contextType = DeclarationType.class, field = "setId(#param)")
     String id;
-    // TODO: why does Lunatic concatenate sequence id and declaration id ?
+    // TODO: why does Lunatic concatenate sequence id and declaration id ? -> no concrete reason, ok
 
     /**
      * In DDI, the declaration type (instruction / help / warning / ...) is written in the first
      * InstructionName element.
+     * TODO: warning: not intended to be the first element (even if it actually is in practice), the element to get is the one that does not correspond to an enum that concerns the collection mode.
      * Warning: the value in DDI is lower case.
      */
     @DDI(contextType = InstructionType.class,
