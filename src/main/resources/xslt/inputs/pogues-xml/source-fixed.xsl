@@ -116,7 +116,7 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="pogues:Unit" mode="conversion-table">
+<xsl:template match="pogues:Unit" mode="conversion-table">
         <xsl:choose>
             <xsl:when test=". = 'http://id.insee.fr/unit/euro'">
                 <xsl:value-of select="'€'" />
@@ -141,6 +141,9 @@
             </xsl:when>
             <xsl:when test=". = 'http://id.insee.fr/unit/annee'">
                 <xsl:value-of select="'années'" />
+            </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/an'">
+                <xsl:value-of select="'ans'" />
             </xsl:when>
             <xsl:when test=". = 'http://id.insee.fr/unit/watt'">
                 <xsl:value-of select="'W'" />
