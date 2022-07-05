@@ -284,7 +284,7 @@
                             <xsl:text> - Arrêté en cours de parution</xsl:text>
                         </xsl:otherwise>
                     </xsl:choose>
-                    <xsl:text>.&lt;/p&gt;&lt;p&gt;Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à </xsl:text>
+                    <xsl:text>.&lt;/p&gt;&lt;p&gt;Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à : </xsl:text>
                     <xsl:value-of select="$Enq_RespOperationnel" />
                     <xsl:text>. Le  &lt;a href="</xsl:text>
                     <xsl:value-of select="$properties//lois/rgpd" />
@@ -343,7 +343,7 @@
                     <xsl:text>" target="_blank"&gt;règlement général 2016/679 du 27 avril 2016&lt;/a&gt; sur la protection des données (RGPD)</xsl:text>
                     <xsl:text> ainsi que la &lt;a href="</xsl:text>
                     <xsl:value-of select="$properties//lois/informatique"/>
-                    <xsl:text>" target="_blank"&gt;loi n°78-17 du 6 janvier 1978 modifiée&lt;/a&gt; relative à l'informatique, aux fichiers et aux libertés s'appliquent à la présente enquête pour les données à caractère personnel. Ces droits, rappelés dans la lettre-avis, peuvent être exercés auprès de </xsl:text>
+                    <xsl:text>" target="_blank"&gt;loi n°78-17 du 6 janvier 1978 modifiée&lt;/a&gt; relative à l'informatique, aux fichiers et aux libertés s'appliquent à la présente enquête pour les données à caractère personnel. Ces droits, rappelés dans la lettre-avis, peuvent être exercés auprès de : </xsl:text>
                     <xsl:value-of select="$LibelleServiceProducteur"/>
                     <xsl:text>.&lt;/p&gt;</xsl:text>
                     <xsl:text>&lt;/div&gt;</xsl:text>                    
