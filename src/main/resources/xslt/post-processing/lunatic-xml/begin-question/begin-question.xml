@@ -48,7 +48,7 @@
                 <response name="COMMENT_UE"/>
                 <variables variableType="COLLECTED" xsi:type="VariableType">
                     <name>COMMENT_UE</name>
-                    <componentRef>COMMENT-UE-QUESTION</componentRef>
+                    <!--<componentRef>COMMENT-UE-QUESTION</componentRef>-->
                     <values>
                         <PREVIOUS xsi:nil="true"/>
                         <COLLECTED xsi:nil="true"/>

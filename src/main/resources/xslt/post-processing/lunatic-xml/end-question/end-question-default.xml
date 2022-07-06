@@ -33,7 +33,7 @@
             <response name="HEURE_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>HEURE_REMPL</name>
-                <componentRef>TIME-QUESTION-HEURE-REMPL</componentRef>
+                <!--<componentRef>TIME-QUESTION-HEURE-REMPL</componentRef>-->
                 <values>
                     <PREVIOUS xsi:nil="true"/>
                     <COLLECTED xsi:nil="true"/>
@@ -64,7 +64,7 @@
             <response name="MIN_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>MIN_REMPL</name>
-                <componentRef>TIME-QUESTION-MIN-REMPL</componentRef>
+                <!--<componentRef>TIME-QUESTION-MIN-REMPL</componentRef>-->
                 <values>
                     <PREVIOUS xsi:nil="true"/>
                     <COLLECTED xsi:nil="true"/>
@@ -92,7 +92,7 @@
             <response name="COMMENT_QE"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>COMMENT_QE</name>
-                <componentRef>COMMENT-QUESTION</componentRef>
+                <!--<componentRef>COMMENT-QUESTION</componentRef>-->
                 <values>
                     <PREVIOUS xsi:nil="true"/>
                     <COLLECTED xsi:nil="true"/>
@@ -132,7 +132,7 @@
             <response name="COMMENT_QE"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>COMMENT_QE</name>
-                <componentRef>COMMENT-QUESTION</componentRef>
+                <!--<componentRef>COMMENT-QUESTION</componentRef>-->
                 <values>
                     <PREVIOUS xsi:nil="true"/>
                     <COLLECTED xsi:nil="true"/>
@@ -175,7 +175,7 @@
             <response name="HEURE_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>HEURE_REMPL</name>
-                <componentRef>TIME-QUESTION-HEURE-REMPL</componentRef>
+                <!--<componentRef>TIME-QUESTION-HEURE-REMPL</componentRef>-->
                 <values>
                     <PREVIOUS xsi:nil="true"/>
                     <COLLECTED xsi:nil="true"/>
@@ -206,7 +206,7 @@
             <response name="MIN_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>MIN_REMPL</name>
-                <componentRef>TIME-QUESTION-MIN-REMPL</componentRef>
+                <!--<componentRef>TIME-QUESTION-MIN-REMPL</componentRef>-->
                 <values>
                     <PREVIOUS xsi:nil="true"/>
                     <COLLECTED xsi:nil="true"/>

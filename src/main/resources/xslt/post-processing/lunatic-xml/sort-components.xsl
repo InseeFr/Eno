@@ -442,7 +442,7 @@
         <!-- responseType="{$responseType}" -->
         <variables variableType="COLLECTED" xsi:type="VariableType">
             <name><xsl:value-of select="$responseName"/></name>
-            <componentRef><xsl:value-of select="$componentRef"/></componentRef>
+            <!-- <componentRef><xsl:value-of select="$componentRef"/></componentRef> -->
             <values>
                 <xsl:for-each select="tokenize($ResponseTypeEnum,',')">
                     <xsl:element name="{.}">
