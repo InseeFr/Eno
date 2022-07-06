@@ -998,7 +998,8 @@
 		<variables variableType="CALCULATED" xsi:type="VariableType">
 			<name><xsl:value-of select="$nameOutVariable"/></name>
 			<expression>				
-				<xsl:value-of select="normalize-space(enolunatic:replace-all-variables-with-business-name($source-context,$expression))"/>
+				<value><xsl:value-of select="normalize-space(enolunatic:replace-all-variables-with-business-name($source-context,$expression))"/></value>
+				<type><xsl:value-of select="enolunatic:get-label-type('expression')"/></type>
 			</expression>
 			<xsl:for-each select="distinct-values($expressionDependencies)">
 				<bindingDependencies><xsl:value-of select="enolunatic:get-variable-business-name(.)"/></bindingDependencies>
@@ -1251,7 +1252,10 @@
 		<xsl:param name="languages"/>
 		<variables variableType="CALCULATED" xsi:type="VariableType">
 			<name><xsl:value-of select="concat('FILTER_RESULT_',$name)"/></name>
-			<expression><xsl:value-of select="$expression"/></expression>
+			<expression>
+				<value><xsl:value-of select="$expression"/></value>
+				<type><xsl:value-of select="enolunatic:get-label-type('expression')"/></type>
+			</expression>
 			<xsl:for-each select="distinct-values($dependencies)">
 				<bindingDependencies><xsl:value-of select="enolunatic:get-variable-business-name(.)"/></bindingDependencies>
 			</xsl:for-each>
