@@ -752,6 +752,7 @@
             <xsl:when test="$locationOfLabel='lines.max'"><xsl:value-of select="'VTL'"/></xsl:when>
             <xsl:when test="$locationOfLabel='iterations'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
             <xsl:when test="$locationOfLabel='conditionFilter'"><xsl:value-of select="'VTL'"/></xsl:when>
+            <xsl:when test="$locationOfLabel='expression'"><xsl:value-of select="'VTL'"/></xsl:when>
             <xsl:otherwise><xsl:value-of select="'VTL|MD'"/></xsl:otherwise>
         </xsl:choose>
     </xsl:function>
