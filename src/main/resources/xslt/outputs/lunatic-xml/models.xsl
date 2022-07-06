@@ -1182,7 +1182,7 @@
 		</xsl:variable>
 		<variables variableType="COLLECTED" xsi:type="{$variableType}">
 			<name><xsl:value-of select="$responseName"/></name>
-			<componentRef><xsl:value-of select="$newComponentRef"/></componentRef>
+			<!-- <componentRef><xsl:value-of select="$newComponentRef"/></componentRef>  -->
 			<values>
 				<xsl:for-each select="tokenize($ResponseTypeEnum,',')">
 					<xsl:call-template name="enolunatic:add-collected-value">
