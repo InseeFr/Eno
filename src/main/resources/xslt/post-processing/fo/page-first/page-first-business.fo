@@ -222,26 +222,11 @@
                                 padding-top="10mm"
                                 border="solid black 0.5pt"
                                 text-align="justify">
-               <fo:block font-size="7pt">Vu l'avis favorable du Conseil national de
-                        l'information statistique, cette enquête
-                        #if(${BddCaractereObligatoire}=='oui') reconnue d'${BddStatutEnquete}, est
-                        obligatoire#else est reconnue d'${BddStatutEnquete} sans avoir de caractère
-                        obligatoire#end.</fo:block>
-               <fo:block font-size="7pt">Visa n°${BddNumeroVisa} du ${BddMinistereTutelle},
-                        valable pour l’année ${BddAnneeCollecte}.</fo:block>
-               <fo:block font-size="7pt">Aux termes de l'article 6 de la loi n° 51-711 du 7
-                        juin 1951 modifiée sur l'obligation, la coordination et le secret en matière
-                        de statistiques, les renseignements transmis en réponse au présent
-                        questionnaire ne sauraient en aucun cas être utilisés à des fins de contrôle
-                        fiscal ou de répression économique.</fo:block>
-               <fo:block font-size="7pt">Questionnaire confidentiel destiné à
-                        ${BddArticleServiceProducteur}${BddNomServiceProducteur}. La loi n° 78-17 du
-                        6 janvier 1978 modifiée, relative à l'informatique, aux fichiers et aux
-                        libertés, s'applique aux réponses faites à la présente enquête par les
-                        entreprises individuelles. Elle leur garantit un droit d'accès et de
-                        rectification pour les données les concernant. Ce droit peut être exercé
-                        auprès de
-                        ${BddArticleServiceProducteur}${BddNomServiceProducteur}.</fo:block>
+<fo:block font-size="7pt">Vu l'avis favorable du Conseil national de l'information statistique, cette enquête #if(${BddCaractereObligatoire}=='oui') reconnue d'${BddStatutEnquete}, est obligatoire, en application de la loi n° 51-711 du 7 juin 1951 modifiée sur l’obligation, la coordination et le secret en matière de statistiques#else est reconnue d'${BddStatutEnquete} sans avoir de caractère
+                  obligatoire, en application de la loi n° 51-711 du 7 juin 1951 modifiée sur l’obligation, la coordination et le secret en matière de statistiques#end.</fo:block>
+                <fo:block font-size="7pt">Visa n°${BddNumeroVisa} du ${BddMinistereTutelle}, valable pour l’année ${BddAnneeCollecte}.</fo:block>
+                <fo:block font-size="7pt">Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à : ${BddArticleServiceProducteur}${BddNomServiceProducteur}.</fo:block>
+                <fo:block font-size="7pt"> Le règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD) ainsi que la loi n° 78-17 du 6 janvier 1978 modifiée, relative à l'informatique, aux fichiers et aux libertés, s'appliquent à la présente enquête pour les données à caractère personnel. Ces droits, rappelés dans la lettre-avis, peuvent être exercés auprès de : ${BddArticleServiceProducteur}${BddNomServiceProducteur}.</fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute"
                                 left="105mm"
@@ -449,26 +434,11 @@
             <fo:block-container absolute-position="absolute" left="140mm" top="150mm"
                width="140mm" height="35mm" padding="2mm"
                border="solid black 1pt" text-align="justify">
-               <fo:block font-size="7pt">Vu l'avis favorable du Conseil national de
-                  l'information statistique, cette enquête
-                  #if(${BddCaractereObligatoire}=='oui') reconnue d'${BddStatutEnquete}, est
-                  obligatoire#else est reconnue d'${BddStatutEnquete} sans avoir de caractère
-                  obligatoire#end.</fo:block>
-               <fo:block font-size="7pt">Visa n°${BddNumeroVisa} du ${BddMinistereTutelle},
-                  valable pour l’année ${BddAnneeCollecte}.</fo:block>
-               <fo:block font-size="7pt">Aux termes de l'article 6 de la loi n° 51-711 du 7
-                  juin 1951 modifiée sur l'obligation, la coordination et le secret en matière
-                  de statistiques, les renseignements transmis en réponse au présent
-                  questionnaire ne sauraient en aucun cas être utilisés à des fins de contrôle
-                  fiscal ou de répression économique.</fo:block>
-               <fo:block font-size="7pt">Questionnaire confidentiel destiné à
-                  ${BddArticleServiceProducteur}${BddNomServiceProducteur}. La loi n° 78-17 du
-                  6 janvier 1978 modifiée, relative à l'informatique, aux fichiers et aux
-                  libertés, s'applique aux réponses faites à la présente enquête par les
-                  entreprises individuelles. Elle leur garantit un droit d'accès et de
-                  rectification pour les données les concernant. Ce droit peut être exercé
-                  auprès de
-                  ${BddArticleServiceProducteur}${BddNomServiceProducteur}.</fo:block>
+                <fo:block font-size="7pt">Vu l'avis favorable du Conseil national de l'information statistique, cette enquête #if(${BddCaractereObligatoire}=='oui') reconnue d'${BddStatutEnquete}, est obligatoire, en application de la loi n° 51-711 du 7 juin 1951 modifiée sur l’obligation, la coordination et le secret en matière de statistiques#else est reconnue d'${BddStatutEnquete} sans avoir de caractère
+                  obligatoire, en application de la loi n° 51-711 du 7 juin 1951 modifiée sur l’obligation, la coordination et le secret en matière de statistiques#end.</fo:block>
+                <fo:block font-size="7pt">Visa n°${BddNumeroVisa} du ${BddMinistereTutelle}, valable pour l’année ${BddAnneeCollecte}.</fo:block>
+                <fo:block font-size="7pt">Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à : ${BddArticleServiceProducteur}${BddNomServiceProducteur}.</fo:block>
+                <fo:block font-size="7pt"> Le règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD) ainsi que la loi n° 78-17 du 6 janvier 1978 modifiée, relative à l'informatique, aux fichiers et aux libertés, s'appliquent à la présente enquête pour les données à caractère personnel. Ces droits, rappelés dans la lettre-avis, peuvent être exercés auprès de : ${BddArticleServiceProducteur}${BddNomServiceProducteur}.</fo:block>
             </fo:block-container>
          </fo:block>
       </fo:flow>
