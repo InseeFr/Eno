@@ -334,7 +334,7 @@
                     <xsl:text>valable pour l'année </xsl:text>
                     <xsl:value-of select="$AnneeCollecte"/>
                     
-                    <xsl:text>.&lt;/p&gt;&lt;p&gt;Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à </xsl:text>
+                    <xsl:text>.&lt;/p&gt;&lt;p&gt;Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à : </xsl:text>
                     <xsl:value-of select="$LibelleServiceProducteur"/>
                     <xsl:text>.&lt;/p&gt;</xsl:text>
                     
