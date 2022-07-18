@@ -49,8 +49,8 @@ public abstract class SingleResponseQuestion {
     Response response;
 
     @DDI(contextType = QuestionItemType.class,
-            field = "getResponseCardinality()?.getMinimumResponses() != null ? " +
-                    "getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
+            field = "getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
+                    "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
     @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class},
             field = "setMandatory(#param)")
     boolean mandatory;
