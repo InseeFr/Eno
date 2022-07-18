@@ -67,6 +67,11 @@ public class EnoQuestionnaire {
     private final List<Subsequence> subsequences = new ArrayList<>();
 
     @DDI(contextType = DDIInstanceType.class,
+            field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
+                    ".?[#this instanceof T(datacollection33.IfThenElseTextType)]")
+    private final List<Filter> filters = new ArrayList<>();
+
+    @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionItemList()")
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "getComponents()")
     private final List<SingleResponseQuestion> singleResponseQuestions = new ArrayList<>();
