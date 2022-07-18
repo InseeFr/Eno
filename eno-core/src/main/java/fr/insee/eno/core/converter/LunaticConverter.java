@@ -38,6 +38,8 @@ public class LunaticConverter {
             return instantiateFrom((MultipleResponseQuestion) enoObject);
         else if (enoObject instanceof Response)
             return new ResponseType();
+        else if (enoObject instanceof CodeItem)
+            return new Options();
         else
             throw new RuntimeException(unimplementedMessage(enoObject));
     }
@@ -60,7 +62,7 @@ public class LunaticConverter {
             }
             return switch (((UniqueChoiceQuestion) enoQuestion).getDisplayFormat()) {
                 case RADIO -> new Radio();
-                case CHECKBOX -> new CheckboxBoolean();
+                case CHECKBOX -> new CheckboxOne();
                 case DROPDOWN -> new Dropdown();
             };
         }
