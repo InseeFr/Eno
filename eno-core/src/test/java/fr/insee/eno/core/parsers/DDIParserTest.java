@@ -75,6 +75,9 @@ public class DDIParserTest {
         assertNotNull(ddiInstance);
 
         //
+        List<QuestionGridType> questionGridList = ddiInstance.getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionGridList();
+
+        //
         String codeListId = ((CodeDomainType) ddiInstance.getResourcePackageArray(0).getQuestionSchemeArray(0)
                 .getQuestionItemList().get(13).getResponseDomain())
                 .getCodeListReference().getIDArray(0).getStringValue();

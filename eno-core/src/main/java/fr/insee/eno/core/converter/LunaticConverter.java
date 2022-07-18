@@ -40,6 +40,8 @@ public class LunaticConverter {
             return new ResponseType();
         else if (enoObject instanceof CodeItem)
             return new Options();
+        else if (enoObject instanceof CodeResponse)
+            return new ResponsesCheckboxGroup();
         else
             throw new RuntimeException(unimplementedMessage(enoObject));
     }

@@ -13,16 +13,21 @@ import lombok.Setter;
 public abstract class MultipleResponseQuestion {
 
     @DDI(contextType = QuestionItemType.class, field = "getIDArray(0).getStringValue()")
+    @Lunatic(contextType = {CheckboxGroup.class, Table.class},
+            field = "setId(#param)")
     String id;
 
     @DDI(contextType = QuestionItemType.class,
-            field = "getQuestionItemNameArray(0).getStringArray(0).getStringValue()")
+            field = "getQuestionGridNameArray(0).getStringArray(0).getStringValue()")
     String name;
 
     @DDI(contextType = QuestionItemType.class,
             field = "getQuestionTextArray(0).getTextContentArray(0).getText().getStringValue()") //TODO: unsafe superclass method call
+    @Lunatic(contextType = {CheckboxGroup.class, Table.class},
+            field = "setLabel(#param)")
     String label;
 
+    /*
     @DDI(contextType = QuestionItemType.class, field = "getResponseCardinality()?.getMinimumResponses()?.intValue()")
     @Lunatic(contextType = {CheckboxGroup.class, Table.class},
             field = "setMandatory(#param > 0)")
@@ -30,5 +35,6 @@ public abstract class MultipleResponseQuestion {
 
     @DDI(contextType = QuestionItemType.class, field = "getResponseCardinality()?.getMaximumResponses()?.intValue()")
     int maxResponse;
+    */
 
 }
