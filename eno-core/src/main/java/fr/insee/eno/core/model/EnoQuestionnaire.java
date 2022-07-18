@@ -53,14 +53,16 @@ public class EnoQuestionnaire {
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
                     ".?[#this instanceof T(datacollection33.SequenceType) " +
-                    "and #this.getTypeOfSequenceArray(0).getStringValue() == 'module']")
+                    "and not #this.getTypeOfSequenceList().isEmpty()]" +
+                    ".?[#this.getTypeOfSequenceArray(0).getStringValue() == 'module']")
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "getComponents()")
     private final List<Sequence> sequences = new ArrayList<>();
 
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
                     ".?[#this instanceof T(datacollection33.SequenceType) " +
-                    "and #this.getTypeOfSequenceArray(0).getStringValue() == 'submodule']")
+                    "and not #this.getTypeOfSequenceList().isEmpty()]" +
+                    ".?[#this.getTypeOfSequenceArray(0).getStringValue() == 'submodule']")
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "getComponents()")
     private final List<Subsequence> subsequences = new ArrayList<>();
 
