@@ -1,5 +1,6 @@
 package fr.insee.eno.core.reference;
 
+import datacollection33.CodeDomainType;
 import datacollection33.ControlConstructSchemeType;
 import datacollection33.InstructionType;
 import datacollection33.QuestionItemType;
@@ -59,5 +60,12 @@ public class DDIIndexTest {
         //
         ControlConstructSchemeType foo = (ControlConstructSchemeType) ddiIndex.get("ControlConstructScheme-l10xmg2l");
         assertNotNull(foo);
+
+        //
+        Object codeList = ddiIndex.get("jfjevykh");
+        assertNotNull(codeList);
+        //
+        Object code = ddiIndex.get("CA-jfjevykh-1");
+        assertNotNull(code);
     }
 }

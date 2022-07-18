@@ -5,6 +5,7 @@ import datacollection33.impl.LiteralTextTypeImpl;
 import datacollection33.impl.TextTypeImpl;
 import fr.insee.eno.core.HelloTest;
 import instance33.DDIInstanceDocument;
+import instance33.DDIInstanceType;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.impl.schema.SchemaTypeImpl;
 import org.junit.jupiter.api.Test;
@@ -41,7 +42,6 @@ public class DDIParserTest {
         List<QuestionItemType> questionItemList = ddiInstanceDocument.getDDIInstance().getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionItemList();
         List<QuestionGridType> questionGridList = ddiInstanceDocument.getDDIInstance().getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionGridList();
         questionItemList.get(0).getOutParameterArray(0).getParameterNameArray(0).getStringArray(0).getStringValue();
-        ((NumericDomainType) questionItemList.get(0)).getDecimalPositions();
 
         //
         String firstInstructionLabel = ((TextTypeImpl) ((LiteralTextType) ddiInstanceDocument.getDDIInstance()
@@ -49,6 +49,37 @@ public class DDIParserTest {
                 .getInterviewerInstructionSchemeArray(0).getInstructionArray(0)
                 .getInstructionTextArray(0).getTextContentArray(0))
                 .getText()).getStringValue();
+    }
+
+    @Test
+    public void parserDDIWithFilter() throws IOException {
+        //
+        DDIInstanceType ddiInstance = DDIParser.parse(
+                        this.getClass().getClassLoader().getResource("in/ddi/questionnaire-avec-filtre-eno-java.xml"))
+                .getDDIInstance();
+        //
+        assertNotNull(ddiInstance);
+        //
+        List<ControlConstructType> controlConstructList = ddiInstance.getResourcePackageArray(0)
+                .getControlConstructSchemeArray(0).getControlConstructList();
+        assertNotNull(controlConstructList);
+    }
+
+    @Test
+    public void parserDDIWithMcq() throws IOException {
+        //
+        DDIInstanceType ddiInstance = DDIParser.parse(
+                        this.getClass().getClassLoader().getResource("in/ddi/l10xmg2l_avec_qcm_et_obligatoires.xml"))
+                .getDDIInstance();
+        //
+        assertNotNull(ddiInstance);
+
+        //
+        String codeListId = ((CodeDomainType) ddiInstance.getResourcePackageArray(0).getQuestionSchemeArray(0)
+                .getQuestionItemList().get(13).getResponseDomain())
+                .getCodeListReference().getIDArray(0).getStringValue();
+        //
+        assertEquals("jfjevykh", codeListId);
     }
 
 }

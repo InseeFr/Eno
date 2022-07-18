@@ -20,7 +20,7 @@ public class DDIToLunatic {
 
     @ParameterizedTest
     @ValueSource(strings = {
-            "l10xmg2l",
+            "l10xmg2l_avec_qcm_et_obligatoires",
             //"questionnaire-avec-filtre-eno-java",
     })
     public void writeJsonLunaticFromDDI(String fileName) throws IOException, JAXBException {
