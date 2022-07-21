@@ -31,13 +31,17 @@ public class DDIMapper extends Mapper {
 
     private final DDIInstanceDocument ddiInstanceDocument;
     private final DDIIndex ddiIndex;
+    private final EvaluationContext context;
 
     public DDIMapper(@NonNull DDIInstanceDocument ddiInstanceDocument) {
-
         this.ddiInstanceDocument = ddiInstanceDocument;
-        //
+        // Index DDI
         ddiIndex = new DDIIndex();
         ddiIndex.indexDDI(ddiInstanceDocument);
+        // Put the DDI index in the context
+        context = new StandardEvaluationContext();
+        context.setVariable("index", ddiIndex);
+        //
         //log.atDebug().log(()->this+ " instantiated"); //FIXME
     }
 
@@ -72,10 +76,6 @@ public class DDIMapper extends Mapper {
                 // Instantiate a Spring expression with the annotation content
                 Expression expression = new SpelExpressionParser().parseExpression(ddiAnnotation.field());
 
-                // Put the DDI index in the context
-                EvaluationContext context = new StandardEvaluationContext();
-                context.setVariable("index", ddiIndex);
-
                 // Simple types
                 if (isSimpleType(classType)) {
                     // Simply set the value in the field
@@ -89,7 +89,7 @@ public class DDIMapper extends Mapper {
                 // Lists (of complex objects) // TODO: manage the case of simple type lists (if the case occurs)
                 else if (List.class.isAssignableFrom(classType)) {
                     // Get the DDI collection instance by evaluating the expression
-                    Collection<?> ddiCollection = expression.getValue(context, ddiItemInstance, Collection.class);
+                    List<?> ddiCollection = expression.getValue(context, ddiItemInstance, List.class);
                     if (ddiCollection == null) {
                         log.warn(String.format(
                                 "Incoherent expression in field of DDI annotation on property '%s' in class %s.",
@@ -104,7 +104,10 @@ public class DDIMapper extends Mapper {
                         Collection<EnoObject> modelCollection = (Collection<EnoObject>) propertyDescriptor.getReadMethod()
                                 .invoke(modelItemInstance);
                         // Iterate on the DDI collection
-                        for (Object ddiItemInstance2 : ddiCollection) {
+                        for (int i=0; i<ddiCollection.size(); i++) {
+                            Object ddiItemInstance2 = ddiCollection.get(i);
+                            // Put current list index in context TODO: I don't really like this but... :(((
+                            context.setVariable("listIndex", i);
                             // Instantiate a model object per DDI object and add it in the model collection
                             Class<?> modelTargetType = typeDescriptor.getResolvableType()
                                     .getGeneric(0).getRawClass();
