@@ -195,9 +195,12 @@
           <xsl:choose>
             <!-- If the loop is generated and we can go back to the generating loop, we 
             get the name of the loopDependency of the generating loop -->
-            <!-- There are two conditions : we must find a loop that contains our current dependency as a response
-            AND it must be at the same depth level than our current loop -->
-            <xsl:when test="$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]">
+            <!-- There are three conditions : 
+              - there must be a loop that contains our current dependency as a response
+              - it must be at the same depth level than our current loop
+              - it must be deterministic upon the generating loop loopDependencies (i.e. fixed iterations or min=max, if min!=max
+                then it is not always necessary to resize upon the generating loop and we should not change the dependency) -->
+            <xsl:when test="$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]/h:iterations">
               <xsl:value-of select="$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]/h:loopDependencies"/>
             </xsl:when>
             <!-- If not, we just retrieve our current loop dependency -->
@@ -220,13 +223,13 @@
                     <xsl:when test="$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]/h:iterations/h:value">
                       <xsl:value-of select="$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]/h:iterations/h:value"/>
                     </xsl:when>
-                    <!-- We store the lines/min=lines/max if we can find that -->
-                    <xsl:when test="$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]/h:lines/h:min/h:value=$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]/h:lines/h:max/h:value">
+                    <!-- We store the lines/max if we can find that and that min=max -->
+                    <xsl:when test="$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]/h:lines/h:min/h:value = $root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]/h:lines/h:max/h:value">
                       <xsl:value-of select="$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]/h:lines/h:max/h:value"/>
                     </xsl:when>
-                    <!-- Else we store the resizingName (which should correctly be the generating loop dependency) -->
+                    <!-- Else we store the curValue (which should correctly be the expression) -->
                     <xsl:otherwise>
-                      <xsl:value-of select="$resizingName"/>
+                      <xsl:value-of select="$curValue"/>
                     </xsl:otherwise>
                   </xsl:choose>
                 </xsl:when>
@@ -236,8 +239,8 @@
                 </xsl:otherwise>
               </xsl:choose>
             </xsl:when>
-            <!-- When we find h:lines/h:min=h:lines/h:max, shall not be a generated loop so we get that -->
-            <xsl:when test="h:lines/h:min/h:value=h:lines/h:max/h:value">
+            <!-- When we find h:lines/h:max, shall not be a generated loop so we get that -->
+            <xsl:when test="h:lines/h:max/h:value">
               <xsl:value-of select="h:lines/h:max/h:value"/>
             </xsl:when>
             <!-- Defaulting case should simply be the name of the resizing variable-->
@@ -263,6 +266,9 @@
         
         <!-- We loop over all resizing variables (typically if the calculated variable is impacted by many collected variables) -->
         <xsl:for-each select="$resizingNameResolved/h:bindingDependencies">
+          <!-- We first check if the name in bindingDependecies is not an empty string
+          (will happen if there is actually no dependency to a variable, e.g. min and max are integers)-->
+          <xsl:if test=". != ''">
           <!-- We put the name of the resizing variable as the element name -->
           <xsl:element name="{.}">
             <!-- We put the resizing expression as the content of size element -->
@@ -273,6 +279,7 @@
               <variables><xsl:value-of select="@name"/></variables>
             </xsl:for-each>
           </xsl:element>
+          </xsl:if>
         </xsl:for-each>
       </xsl:for-each>
       
