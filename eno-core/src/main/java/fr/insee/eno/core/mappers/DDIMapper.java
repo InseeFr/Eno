@@ -2,6 +2,7 @@ package fr.insee.eno.core.mappers;
 
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.converter.DDIConverter;
+import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.reference.DDIIndex;
 import instance33.DDIInstanceDocument;
@@ -46,7 +47,7 @@ public class DDIMapper extends Mapper {
         log.info("Finished mapping between DDI document and Eno model");
     }
 
-    private void recursiveMapping(Object modelItemInstance, Object ddiItemInstance) {
+    private void recursiveMapping(EnoObject modelItemInstance, Object ddiItemInstance) {
 
         //log.atDebug().log(()->"Start mapping for "+DDIToString(ddiItemInstance)+" to "+modelItemInstance); // FIXME
         // Use Spring BeanWrapper to iterate on property descriptors of the model object
@@ -100,7 +101,7 @@ public class DDIMapper extends Mapper {
                     // Get the model collection instance
                     try {
                         @SuppressWarnings("unchecked")
-                        Collection<Object> modelCollection = (Collection<Object>) propertyDescriptor.getReadMethod()
+                        Collection<EnoObject> modelCollection = (Collection<EnoObject>) propertyDescriptor.getReadMethod()
                                 .invoke(modelItemInstance);
                         // Iterate on the DDI collection
                         for (Object ddiItemInstance2 : ddiCollection) {
@@ -108,7 +109,7 @@ public class DDIMapper extends Mapper {
                             Class<?> modelTargetType = typeDescriptor.getResolvableType()
                                     .getGeneric(0).getRawClass();
                             assert modelTargetType != null;
-                            Object modelItemInstance2;
+                            EnoObject modelItemInstance2;
                             // If the list content type is abstract call the converter
                             if (Modifier.isAbstract(modelTargetType.getModifiers())) {
                                 modelItemInstance2 = DDIConverter.instantiateFromDDIObject(ddiItemInstance2);
@@ -116,7 +117,7 @@ public class DDIMapper extends Mapper {
                             // Else, call class constructor
                             else {
                                 try {
-                                    modelItemInstance2 = modelTargetType.getDeclaredConstructor().newInstance();
+                                    modelItemInstance2 = (EnoObject) modelTargetType.getDeclaredConstructor().newInstance();
                                 } catch (NoSuchMethodException | InstantiationException e) {
                                     log.warn("Default constructor may be missing in class " + modelTargetType);
                                     throw new RuntimeException("Unable to create instance for class " + modelTargetType);
@@ -140,7 +141,7 @@ public class DDIMapper extends Mapper {
                 else {
                     try {
                         // Instantiate the model object
-                        Object modelInstance2 = typeDescriptor.getType().getDeclaredConstructor().newInstance();
+                        EnoObject modelInstance2 = (EnoObject) typeDescriptor.getType().getDeclaredConstructor().newInstance();
                         // Attach it the parent object
                         beanWrapper.setPropertyValue(propertyDescriptor.getName(), modelInstance2);
                         // Recursive call of the mapper to dive into this object // TODO: control that result of expression is not null

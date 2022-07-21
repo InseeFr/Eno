@@ -1,6 +1,7 @@
 package fr.insee.eno.core.converter;
 
 import datacollection33.*;
+import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.question.*;
 import lombok.extern.slf4j.Slf4j;
 import reusable33.RepresentationType;
@@ -17,9 +18,10 @@ public class DDIConverter {
 
     /**
      * Return an Eno instance corresponding to the given DDI object.
+     *
      * @return A Eno model object.
      */
-    public static Object instantiateFromDDIObject(Object ddiObject) {
+    public static EnoObject instantiateFromDDIObject(Object ddiObject) {
         if (ddiObject instanceof QuestionItemType)
             return instantiateFrom((QuestionItemType) ddiObject);
         else if (ddiObject instanceof QuestionGridType)
@@ -28,7 +30,7 @@ public class DDIConverter {
             throw new RuntimeException("Eno conversion for DDI type " + ddiObject.getClass() + " not implemented.");
     }
 
-    private static Object instantiateFrom(QuestionItemType questionItemType) {
+    private static EnoObject instantiateFrom(QuestionItemType questionItemType) {
         RepresentationType representationType = questionItemType.getResponseDomain();
         if (representationType instanceof NominalDomainType) {
             return new BooleanQuestion();
@@ -73,7 +75,7 @@ public class DDIConverter {
         }
     }
 
-    private static Object instantiateFrom(QuestionGridType questionGridType) {
+    private static EnoObject instantiateFrom(QuestionGridType questionGridType) {
         RepresentationType representationType = questionGridType.getStructuredMixedGridResponseDomain()
                 .getGridResponseDomainInMixedArray(0) // supposing that it is the same for all modalities
                 .getResponseDomain();
