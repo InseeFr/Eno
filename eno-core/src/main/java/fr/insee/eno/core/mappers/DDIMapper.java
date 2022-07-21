@@ -123,6 +123,8 @@ public class DDIMapper extends Mapper {
                                     throw new RuntimeException("Unable to create instance for class " + modelTargetType);
                                 }
                             }
+                            // Keep parent reference
+                            modelItemInstance2.setParent(modelItemInstance);
                             // Add the created instance in the model list
                             modelCollection.add(modelItemInstance2);
                             // Recursive call on these instances
@@ -144,6 +146,8 @@ public class DDIMapper extends Mapper {
                         EnoObject modelInstance2 = (EnoObject) typeDescriptor.getType().getDeclaredConstructor().newInstance();
                         // Attach it the parent object
                         beanWrapper.setPropertyValue(propertyDescriptor.getName(), modelInstance2);
+                        // Keep parent reference
+                        modelInstance2.setParent(modelItemInstance);
                         // Recursive call of the mapper to dive into this object // TODO: control that result of expression is not null
                         recursiveMapping(modelInstance2, expression.getValue(context, ddiItemInstance));
                     } catch (InvocationTargetException | NoSuchMethodException |
