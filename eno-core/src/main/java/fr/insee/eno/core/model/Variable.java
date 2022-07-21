@@ -21,8 +21,7 @@ public class Variable extends EnoObject {
     String questionReference;
 
     @DDI(contextType = VariableType.class,
-            field = "#this instanceof T(reusable33.NumericRepresentationBaseType) ? " +
-                    "getVariableRepresentation()?.getMeasurementUnit()?.getStringValue() : null")
+            field = "getVariableRepresentation().getValueRepresentation()?.getMeasurementUnit()?.getStringValue()")
     String unit;
 
 }
