@@ -15,13 +15,13 @@ public class CodeResponse extends EnoObject {
     @Lunatic(contextType = ResponsesCheckboxGroup.class, field = "setId(#param)")
     private String id;
 
-    /*
     @DDI(contextType = ParameterType.class,
-            field = "#index.get(#parent.getId())" +
-                    ".getLabelArray(0).getContentArray(0).getStringValue()")
+            field = "#index.get(#index.get(#index.getParent(#this.getIDArray(0).getStringValue())" +
+                    ".getGridDimensionArray(0).getCodeDomain().getCodeListReference().getIDArray(0).getStringValue())" +
+                    ".getCodeArray(#listIndex).getCategoryReference().getIDArray(0).getStringValue())" +
+                    ".getLabelArray(0).getContentArray(0).getStringValue()") //TODO: >_< see todo in DDIMapper....
     @Lunatic(contextType = ResponsesCheckboxGroup.class, field = "setLabel(#param)")
     private String label;
-    */ //TODO: AbstractEnoObject with a 'parent' field?
 
     @DDI(contextType = ParameterType.class, field = "#this")
     @Lunatic(contextType = ResponsesCheckboxGroup.class, field = "setResponse(#param)")
