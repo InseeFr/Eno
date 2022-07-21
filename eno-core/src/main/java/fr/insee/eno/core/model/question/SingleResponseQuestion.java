@@ -3,6 +3,7 @@ package fr.insee.eno.core.model.question;
 import datacollection33.QuestionItemType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.Instruction;
 import fr.insee.eno.core.model.Response;
 import fr.insee.lunatic.model.flat.*;
@@ -17,7 +18,7 @@ import java.util.List;
 @ToString(of="name")
 @Getter
 @Setter
-public abstract class SingleResponseQuestion {
+public abstract class SingleResponseQuestion extends EnoObject {
 
     @DDI(contextType = QuestionItemType.class, field = "getIDArray(0).getStringValue()")
     @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class},

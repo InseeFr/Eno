@@ -5,7 +5,7 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.lunatic.model.flat.ComponentType;
 
-public class Filter {
+public class Filter extends EnoObject {
 
 
     private String componentReference;

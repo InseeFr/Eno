@@ -22,7 +22,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @Context(format = Format.POGUES, type = fr.insee.pogues.model.Questionnaire.class)
 @Context(format = Format.DDI, type = DDIInstanceType.class)
 @Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.Questionnaire.class)
-public class EnoQuestionnaire {
+public class EnoQuestionnaire extends EnoObject {
 
     @DDI(contextType = DDIInstanceType.class, field = "getIDArray(0).getStringValue()")
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field ="setId(#param)")

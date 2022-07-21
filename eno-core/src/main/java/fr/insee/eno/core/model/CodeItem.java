@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CodeItem {
+public class CodeItem extends EnoObject {
 
     @DDI(contextType = CodeType.class,
             field = "#index.get(#this.getCategoryReference().getIDArray(0).getStringValue())" +

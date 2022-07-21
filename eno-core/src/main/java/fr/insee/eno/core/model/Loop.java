@@ -1,4 +1,4 @@
 package fr.insee.eno.core.model;
 
-public class Loop {
+public class Loop extends EnoObject {
 }

@@ -9,7 +9,7 @@ import reusable33.ParameterType;
 
 @Getter
 @Setter
-public class Response {
+public class Response extends EnoObject {
 
     /** Variable name corresponding to the response. */
     @DDI(contextType = ParameterType.class, field = "getParameterNameArray(0).getStringArray(0).getStringValue()")

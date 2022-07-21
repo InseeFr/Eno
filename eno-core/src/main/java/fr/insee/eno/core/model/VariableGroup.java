@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class VariableGroup {
+public class VariableGroup extends EnoObject {
 
     @DDI(contextType = VariableGroupType.class,
             field = "getVariableGroupNameArray(0).getStringArray(0).getStringValue()")

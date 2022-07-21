@@ -10,7 +10,7 @@ import lombok.Setter;
 /** Text displayed after a question or sequence. */
 @Getter
 @Setter
-public class Instruction {
+public class Instruction extends EnoObject {
 
     @DDI(contextType = InstructionType.class,
             field = "getIDArray(0).getStringValue()")

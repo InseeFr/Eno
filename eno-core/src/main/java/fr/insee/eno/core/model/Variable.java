@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Variable {
+public class Variable extends EnoObject {
 
     @DDI(contextType = VariableType.class,
             field = "getVariableNameArray(0).getStringArray(0).getStringValue()")

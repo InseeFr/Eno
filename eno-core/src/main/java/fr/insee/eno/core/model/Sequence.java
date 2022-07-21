@@ -12,7 +12,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class Sequence {
+public class Sequence extends EnoObject {
 
     @DDI(contextType = SequenceType.class, field = "getIDArray(0).getStringValue()")
     @Lunatic(contextType = fr.insee.lunatic.model.flat.SequenceType.class, field = "setId(#param)")

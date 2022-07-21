@@ -10,7 +10,7 @@ import lombok.Setter;
 /** Text displayed before a question or sequence. */
 @Getter
 @Setter
-public class Declaration {
+public class Declaration extends EnoObject {
 
     //@DDI(contextType = StatementItemType.class, field = "") //TODO
     String id;

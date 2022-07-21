@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class Subsequence {
+public class Subsequence extends EnoObject {
 
     @DDI(contextType = SequenceType.class, field = "getIDArray(0).getStringValue()")
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Subsequence.class, field = "setId(#param)")
