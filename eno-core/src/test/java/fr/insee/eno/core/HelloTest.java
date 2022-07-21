@@ -56,6 +56,11 @@ public class HelloTest {
         List<ReferenceType> referenceList = firstVariableGroupType.getVariableGroupReferenceList();
         referenceList.get(0).getIDArray(0).getStringValue();
         //
+        SequenceType s;
+        ReferenceType r;
+        //
+        QuestionConstructType q;
+        //
         ddiInstanceDocument.getDDIInstance().getResourcePackageArray(0)
                 .getInterviewerInstructionSchemeArray(0).getInstructionArray(0)
                 .getInstructionNameArray(0).getStringArray(0).getStringValue();

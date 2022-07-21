@@ -6,6 +6,7 @@ import datacollection33.impl.TextTypeImpl;
 import fr.insee.eno.core.HelloTest;
 import instance33.DDIInstanceDocument;
 import instance33.DDIInstanceType;
+import logicalproduct33.VariableType;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.impl.schema.SchemaTypeImpl;
 import org.junit.jupiter.api.Test;
@@ -49,6 +50,13 @@ public class DDIParserTest {
                 .getInterviewerInstructionSchemeArray(0).getInstructionArray(0)
                 .getInstructionTextArray(0).getTextContentArray(0))
                 .getText()).getStringValue();
+
+        //
+        VariableType unitVariable = ddiInstanceDocument.getDDIInstance().getResourcePackageArray(0)
+                .getVariableSchemeArray(0).getVariableList()
+                .stream().filter(variableType -> variableType.getIDArray(0).getStringValue().equals("kyis3r6p"))
+                .findAny().orElse(null);
+        assertNotNull(unitVariable);
     }
 
     @Test
