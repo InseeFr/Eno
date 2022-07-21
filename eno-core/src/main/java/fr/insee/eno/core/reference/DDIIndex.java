@@ -18,7 +18,12 @@ import java.util.*;
  * Values: the corresponding objects
  */
 @Slf4j
-public class DDIIndex extends HashMap<String, Object> {
+public class DDIIndex extends HashMap<String, Object> { //TODO: AbstractIdentifiableType i.o. Object
+
+    /**
+     * Key: a DDI object identifier
+     * Value: the identifier of its parent object */
+    private final Map<String, String> parentsMap = new HashMap<>();
 
     /**
      * Store all objects in the DDI document given in the map.
@@ -69,10 +74,13 @@ public class DDIIndex extends HashMap<String, Object> {
                 // Check that the list content applies for AbstractIdentifiableType
                 if (listContentType != null && AbstractIdentifiableType.class.isAssignableFrom(listContentType)) {
                     try {
-                        // Recursive calls of the function on each object in the list.
+                        // Iteration on each object in the list.
                         @SuppressWarnings("unchecked") // https://stackoverflow.com/a/4388173/13425151
                         Collection<AbstractIdentifiableType> ddiCollection = (Collection<AbstractIdentifiableType>) propertyDescriptor.getReadMethod().invoke(ddiObject);
                         for (AbstractIdentifiableType ddiObject2 : ddiCollection) {
+                            // Keep track of link between nested objects
+                            parentsMap.put(ddiObject2.getIDArray(0).getStringValue(), ddiObjectId);
+                            // Recursive call of the function
                             recursiveIndexing(ddiObject2);
                         }
                     } catch (IllegalAccessException | InvocationTargetException e) {
@@ -85,6 +93,11 @@ public class DDIIndex extends HashMap<String, Object> {
             }
         }
 
+    }
+
+    /** Return parent object of DDI object with given identifier. */
+    public Object getParent(String ddiObjectId) { //TODO: AbstractIdentifiableType i.o. Object
+        return this.get(parentsMap.get(ddiObjectId));
     }
 
     @Override
