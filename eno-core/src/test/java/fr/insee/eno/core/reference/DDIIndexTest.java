@@ -29,7 +29,7 @@ public class DDIIndexTest {
     public void indexDDITest() throws IOException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
-                DDIIndexTest.class.getClassLoader().getResource("l10xmg2l.xml"));
+                DDIIndexTest.class.getClassLoader().getResource("in/ddi/l10xmg2l.xml"));
         //
         DDIIndex ddiIndex = new DDIIndex();
         ddiIndex.indexDDI(ddiInstanceDocument);
