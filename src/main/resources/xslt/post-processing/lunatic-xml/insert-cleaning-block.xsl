@@ -182,7 +182,10 @@
       <!-- We iterate on all the loop components we find -->
       <xsl:for-each select="$root//h:components[@componentType='Loop']">
         <xsl:variable name="curLoop" select="."/>
-        <xsl:variable name="curLoopDependency" select="h:loopDependencies"/>
+        <!-- We retrieve the first loopDependencies which might be the variable for resizing (depends, see below).
+        There may be many loopDependencies, but only the first is of interest, since it is the variable chosen in core step-->
+        <!-- BEWARE : MIGHT BREAK WITH LOOP OF LOOP, SINCE ORDER IS NOT GUARANTEED, BUT WILL NEED CORE STEP REVISION ANYWAY  -->
+        <xsl:variable name="curLoopDependency" select="h:loopDependencies[1]"/>
         <xsl:variable name="curLoopDepth" select="@depth"/>
         <!-- We store the name of the resizing variable -->
         <xsl:variable name="resizingName">
