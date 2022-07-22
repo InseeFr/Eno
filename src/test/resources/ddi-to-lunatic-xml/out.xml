@@ -5258,8 +5258,11 @@
          <size>NB_CHAR</size>
          <variables>NAME_CHAR</variables>
          <variables>AGE_CHAR</variables>
+         </NB_CHAR>
+   <NAME_CHAR>
+         <size>count(NAME_CHAR)</size>
          <variables>FAVCHAR</variables>
          <variables>MEMORY_CHAR</variables>
-      </NB_CHAR>
+      </NAME_CHAR>
    </resizing>
 </Questionnaire>
