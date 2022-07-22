@@ -192,6 +192,8 @@
           <!-- Two cases : 
             - the loop is generated and we'll try to go back to the generating loop if possible 
             - the loop is not generated or we can't go back to the generating loop -->
+          <!-- We try to get the generating loop in a variable -->
+          <xsl:variable name="genLoop" select="$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]"/>
           <xsl:choose>
             <!-- If the loop is generated and we can go back to the generating loop, we 
             get the name of the loopDependency of the generating loop -->
@@ -200,7 +202,7 @@
               - it must be at the same depth level than our current loop
               - it must be deterministic upon the generating loop loopDependencies (i.e. fixed iterations or min=max, if min!=max
                 then it is not always necessary to resize upon the generating loop and we should not change the dependency) -->
-            <xsl:when test="$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]/h:iterations">
+            <xsl:when test="$genLoop/h:iterations or $genLoop/h:lines/h:min/h:value = $genLoop/h:lines/h:max/h:value">
               <xsl:value-of select="$root//h:components[@componentType='Loop' and descendant::h:response/@name=$curLoopDependency and @depth=$curLoopDepth]/h:loopDependencies"/>
             </xsl:when>
             <!-- If not, we just retrieve our current loop dependency -->
