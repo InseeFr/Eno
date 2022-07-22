@@ -2200,13 +2200,20 @@
       </components>
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="COMMENT-SEQ">
-      <label>"Commentaire"</label>
+      <label>
+         <value>"Commentaire"</value>
+         <type>VTL|MD</type>
+      </label>
       <conditionFilter>
          <value>true</value>
+         <type>VTL</type>
       </conditionFilter>
       <hierarchy>
          <sequence id="COMMENT-SEQ">
-            <label>"Commentaire"</label>
+            <label>
+               <value>"Commentaire"</value>
+               <type>VTL|MD</type>
+            </label>
          </sequence>
       </hierarchy>
       <components xsi:type="Textarea"
@@ -2214,13 +2221,20 @@
                    id="COMMENT-QUESTION"
                    maxLength="2000"
                    mandatory="false">
-         <label>"Commentaires et remarques éventuelles concernant l’enquête :"</label>
+         <label>
+            <value>"Commentaires et remarques éventuelles concernant l’enquête :"</value>
+            <type>VTL|MD</type>
+         </label>
          <conditionFilter>
             <value>true</value>
+            <type>VTL</type>
          </conditionFilter>
          <hierarchy>
             <sequence id="COMMENT-SEQ">
-               <label>"Commentaire"</label>
+               <label>
+                  <value>"Commentaire"</value>
+                  <type>VTL|MD</type>
+               </label>
             </sequence>
          </hierarchy>
          <bindingDependencies>COMMENT_QE</bindingDependencies>
