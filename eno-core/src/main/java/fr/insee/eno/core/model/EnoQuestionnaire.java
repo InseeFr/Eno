@@ -28,9 +28,24 @@ public class EnoQuestionnaire extends EnoObject {
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field ="setId(#param)")
     private String id;
 
+    @DDI(contextType = DDIInstanceType.class,
+            field = "getResourcePackageArray(0).getCodeListSchemeArray(0)" +
+                    ".getCodeListSchemeNameArray(0).getStringArray(0).getStringValue()") //TODO: see if it's that one
+    @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field ="setModele(#param)")
+    private String questionnaireModel;
+
+    @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field ="setEnoCoreVersion(#param)")
+    private String enoVersion = "TODO"; //TODO: get Eno & Lunatic versions programmatically
+
     @DDI(contextType = DDIInstanceType.class, field = "getCitation().getTitle().getStringArray(0).getStringValue()")
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "setLabel(#param)")
     private String label;
+
+    @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "setMissing(#param)")
+    private boolean missingVariables = false; //TODO: from parameter
+
+    @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "setPagination(#param)")
+    private String pagination = "question"; //TODO: from parameter
 
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getVariableSchemeArray(0)" +
