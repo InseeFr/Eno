@@ -1,5 +1,7 @@
 package fr.insee.eno.core.model;
 
+import datacollection33.IfThenElseTextType;
+import datacollection33.IfThenElseType;
 import datacollection33.SequenceType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
@@ -30,9 +32,19 @@ public abstract class AbstractSequence extends EnoObject {
 
     @DDI(contextType = SequenceType.class,
             field = "getControlConstructReferenceList()" +
-                    ".?[#this.getTypeOfObject().toString() == 'QuestionConstruct']" +
+                    ".?[#this.getTypeOfObject().toString() == 'QuestionConstruct'" +
+                    "or #this.getTypeOfObject().toString() == 'Sequence'" +
+                    "or #this.getTypeOfObject().toString() == 'IfThenElse']" +
                     ".![#index.get(#this.getIDArray(0).getStringValue())]" +
-                    ".![#this.getQuestionReference().getIDArray(0).getStringValue()]")
-    private final List<String> questionReferences = new ArrayList<>();
+                    ".![#this instanceof T(datacollection33.QuestionConstructType) ? " +
+                    "#this.getQuestionReference().getIDArray(0).getStringValue() : " +
+                    "#this instanceof T(datacollection33.SequenceType) ? " +
+                    "#this.getIDArray(0).getStringValue() : " +
+                    "#this instanceof T(datacollection33.IfThenElseType) ? " +
+                    "#index.get(#index.get(#this.getThenConstructReference().getIDArray(0).getStringValue())" +
+                    ".getControlConstructReferenceArray(0).getIDArray(0).getStringValue())" +
+                    ".getQuestionReference().getIDArray(0).getStringValue() " +
+                    ": null]")
+    private final List<String> componentReferences = new ArrayList<>();
     
 }
