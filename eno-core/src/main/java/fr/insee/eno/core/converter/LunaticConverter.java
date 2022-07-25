@@ -42,6 +42,10 @@ public class LunaticConverter {
             return new Options();
         else if (enoObject instanceof CodeResponse)
             return new ResponsesCheckboxGroup();
+        else if (enoObject instanceof TableLine)
+            return new CellsLines();
+        else if (enoObject instanceof TableCell)
+            return new CellsType();
         else
             throw new RuntimeException(unimplementedMessage(enoObject));
     }
