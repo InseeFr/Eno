@@ -58,6 +58,7 @@ public class HelloTest {
         //
         SequenceType s;
         ReferenceType r;
+        IfThenElseType ite;
         //
         QuestionConstructType q;
         //
@@ -102,7 +103,10 @@ public class HelloTest {
         // New Lunatic questionnaire
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         //
-        lunaticQuestionnaire.setLabel("i'm a Lunatic questionnaire :)))))");
+        lunaticQuestionnaire.setEnoCoreVersion("3.0.0-SNAPSHOT");
+        lunaticQuestionnaire.setModele("TOTO");
+        lunaticQuestionnaire.setLabel("i'm a Lunatic questionnaire :)");
+        lunaticQuestionnaire.setPagination("question");
         //
         //lunaticQuestionnaire.setGeneratingDate("");
         // Variables list
@@ -244,7 +248,7 @@ public class HelloTest {
         foo.setS(7);
         //
         BeanWrapper beanWrapper = new BeanWrapperImpl(foo);
-        for (Iterator<PropertyDescriptor> iterator = Mapper.propertyDescriptorIterator(beanWrapper); iterator.hasNext();) {
+        for (Iterator<PropertyDescriptor> iterator = Mapper.propertyDescriptorIterator(beanWrapper); iterator.hasNext(); ) {
             System.out.println(iterator.next().getName());
         }
         //

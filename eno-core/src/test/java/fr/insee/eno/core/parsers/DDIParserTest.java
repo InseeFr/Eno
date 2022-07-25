@@ -43,6 +43,7 @@ public class DDIParserTest {
         List<QuestionItemType> questionItemList = ddiInstanceDocument.getDDIInstance().getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionItemList();
         List<QuestionGridType> questionGridList = ddiInstanceDocument.getDDIInstance().getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionGridList();
         questionItemList.get(0).getOutParameterArray(0).getParameterNameArray(0).getStringArray(0).getStringValue();
+        questionGridList.get(0).getStructuredMixedGridResponseDomain().getGridResponseDomainInMixedList();
 
         //
         String firstInstructionLabel = ((TextTypeImpl) ((LiteralTextType) ddiInstanceDocument.getDDIInstance()
