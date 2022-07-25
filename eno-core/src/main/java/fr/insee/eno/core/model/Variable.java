@@ -24,4 +24,8 @@ public class Variable extends EnoObject {
             field = "getVariableRepresentation().getValueRepresentation()?.getMeasurementUnit()?.getStringValue()")
     String unit;
 
+    @Lunatic(contextType = IVariableType.class,
+            field = "setVariableType(T(fr.insee.lunatic.model.flat.VariableTypeEnum).valueOf(#param))")
+    String collected = "COLLECTED";
+
 }
