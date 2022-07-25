@@ -9,7 +9,6 @@ import fr.insee.eno.core.writers.EnoWriter;
 import fr.insee.eno.core.writers.LunaticWriter;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import instance33.DDIInstanceDocument;
-import org.apache.xmlbeans.XmlException;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
