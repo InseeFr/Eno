@@ -4,6 +4,7 @@ import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parsers.DDIParser;
+import fr.insee.eno.core.processing.EnoProcessing;
 import fr.insee.eno.core.processing.LunaticProcessing;
 import fr.insee.eno.core.writers.EnoWriter;
 import fr.insee.eno.core.writers.LunaticWriter;
@@ -34,6 +35,10 @@ public class DDIToLunatic {
         ddiMapper.mapDDI(enoQuestionnaire);
 
         //
+        EnoProcessing enoProcessing = new EnoProcessing();
+        enoProcessing.applyProcessing(enoQuestionnaire);
+
+        //
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         //
         LunaticMapper.map(enoQuestionnaire, lunaticQuestionnaire);
@@ -48,6 +53,6 @@ public class DDIToLunatic {
         //
         LunaticWriter.writeJsonQuestionnaire(lunaticQuestionnaire,
                Path.of("src/test/resources/out/lunatic/" + fileName + ".json"));
-
     }
+
 }
