@@ -4,7 +4,6 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.Sequence;
 import fr.insee.lunatic.model.flat.*;
 
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -38,7 +37,6 @@ public class LunaticProcessing {
         addPageNumbers(lunaticQuestionnaire);
         addHierarchy(enoQuestionnaire);
         removeSubsequencePage();
-        addCommentQuestion(lunaticQuestionnaire);
     }
 
     private void addGeneratingDate(Questionnaire lunaticQuestionnaire) {
@@ -124,49 +122,6 @@ public class LunaticProcessing {
                 }
             }
         });
-    }
-
-    private void addCommentQuestion(Questionnaire lunaticQuestionnaire) {
-        //
-        VariableType commentVariable = new VariableType();
-        commentVariable.setVariableType(VariableTypeEnum.COLLECTED);
-        commentVariable.setName("COMMENT_QE");
-        //
-        int pageNumber = Integer.parseInt(lunaticQuestionnaire.getMaxPage()) + 1;
-        //
-        SequenceType commentSequence = new SequenceType();
-        commentSequence.setId("COMMENT-SEQ");
-        commentSequence.setComponentType(ComponentTypeEnum.SEQUENCE);
-        commentSequence.setPage(String.valueOf(pageNumber)); pageNumber ++;
-        commentSequence.setLabel("Commentaire");
-        commentSequence.setConditionFilter(new ConditionFilterType());
-        commentSequence.getConditionFilter().setValue("true");
-        Hierarchy commentSequenceHierarchy = new Hierarchy();
-        commentSequenceHierarchy.setSequence(new SequenceDescription());
-        commentSequenceHierarchy.getSequence().setId(commentSequence.getId());
-        commentSequenceHierarchy.getSequence().setLabel(commentSequence.getLabel());
-        commentSequenceHierarchy.getSequence().setPage(commentSequence.getPage());
-        commentSequence.setHierarchy(commentSequenceHierarchy);
-        //
-        Textarea commentQuestion = new Textarea();
-        commentQuestion.setId("COMMENT-QUESTION");
-        commentQuestion.setMandatory(false);
-        commentQuestion.setPage(String.valueOf(pageNumber)); pageNumber ++;
-        commentQuestion.setMaxLength(BigInteger.valueOf(2000));
-        commentQuestion.setLabel("Avez-vous des remarques concernant l'enquête ou des commentaires\u00a0?");
-        commentQuestion.setConditionFilter(new ConditionFilterType());
-        commentQuestion.getConditionFilter().setValue("true");
-        commentQuestion.setHierarchy(commentSequenceHierarchy);
-        commentQuestion.getBindingDependencies().add(commentVariable.getName());
-        commentQuestion.setResponse(new ResponseType());
-        commentQuestion.getResponse().setName(commentVariable.getName());
-        //
-        commentVariable.setComponentRef(commentQuestion.getId());
-        //
-        lunaticQuestionnaire.getVariables().add(commentVariable);
-        lunaticQuestionnaire.getComponents().add(commentSequence);
-        lunaticQuestionnaire.getComponents().add(commentQuestion);
-        lunaticQuestionnaire.setMaxPage(String.valueOf(pageNumber - 1));
     }
 
 }
