@@ -3,7 +3,6 @@ package fr.insee.eno.core.model.question;
 import datacollection33.QuestionItemType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.Instruction;
 import fr.insee.eno.core.model.Response;
 import fr.insee.lunatic.model.flat.*;
@@ -11,29 +10,17 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-@ToString(of="name")
 @Getter
 @Setter
-public abstract class SingleResponseQuestion extends EnoObject {
-
-    @DDI(contextType = QuestionItemType.class, field = "getIDArray(0).getStringValue()")
-    @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class},
-            field = "setId(#param)")
-    String id;
+@ToString(of="name")
+public abstract class SingleResponseQuestion extends Question {
 
     @DDI(contextType = QuestionItemType.class,
             field = "getQuestionItemNameArray(0).getStringArray(0).getStringValue()")
     String name;
-
-    @DDI(contextType = QuestionItemType.class,
-            field = "getQuestionTextArray(0).getTextContentArray(0).getText().getStringValue()") //TODO: (warning) unsafe subclass method call
-    @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class},
-            field = "setLabel(#param)")
-    String label;
 
     @DDI(contextType = QuestionItemType.class,
             field = "getInterviewerInstructionReferenceList().![#index.get(#this.getIDArray(0).getStringValue())]")
