@@ -14,8 +14,11 @@ public class LunaticProcessing {
 
     //TODO: refactor duplicate code
 
+    /** Map to get Lunatic components by id.*/
     private final Map<String, ComponentType> lunaticComponentsMap = new HashMap<>();
+    /** Map to get sequences from Eno questionnaire by id. */
     private final Map<String, Sequence> enoSequencesMap = new HashMap<>();
+    /** Map to get subsequences from Eno questionnaire by id.*/
     private final Map<String, fr.insee.eno.core.model.Subsequence> enoSubsequencesMap = new HashMap<>();
 
     /**
