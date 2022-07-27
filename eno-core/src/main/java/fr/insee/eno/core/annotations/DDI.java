@@ -10,7 +10,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target(FIELD)
 public @interface DDI {
 
-    Class<?> contextType();
+    Class<?>[] contextType();
 
     String field();
 
