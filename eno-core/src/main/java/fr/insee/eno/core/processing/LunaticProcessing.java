@@ -36,7 +36,7 @@ public class LunaticProcessing {
         //
         addGeneratingDate(lunaticQuestionnaire);
         addPageNumbers(lunaticQuestionnaire);
-        addHierarchy(lunaticQuestionnaire);
+        addHierarchy(enoQuestionnaire);
         removeSubsequencePage();
         addCommentQuestion(lunaticQuestionnaire);
     }
@@ -79,10 +79,9 @@ public class LunaticProcessing {
 
     /**
      * Fill the 'hierarchy' field in Lunatic components.
-     * @param lunaticQuestionnaire Lunatic questionnaire to be modified.
      */
-    private void addHierarchy(Questionnaire lunaticQuestionnaire) {
-        for (String sequenceId : enoSequencesMap.keySet()) {
+    private void addHierarchy(EnoQuestionnaire enoQuestionnaire) {
+        for (String sequenceId : enoQuestionnaire.getSequenceReferences()) {
             ComponentType lunaticSequence = lunaticComponentsMap.get(sequenceId);
             Hierarchy hierarchy = new Hierarchy();
             SequenceDescription sequenceDescription = createDescription(lunaticSequence);
