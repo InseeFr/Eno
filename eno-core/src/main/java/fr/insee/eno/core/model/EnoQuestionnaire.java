@@ -81,13 +81,12 @@ public class EnoQuestionnaire extends EnoObject {
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "getComponents()")
     private final List<Subsequence> subsequences = new ArrayList<>();
 
-    /** Ordered list of questionnaire modules and sub-modules */
+    /** Ordered list of questionnaire modules. */
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
                     ".?[#this instanceof T(datacollection33.SequenceType) " +
                     "and not #this.getTypeOfSequenceList().isEmpty()]" +
-                    ".?[#this.getTypeOfSequenceArray(0).getStringValue() == 'module' " +
-                    "or #this.getTypeOfSequenceArray(0).getStringValue() == 'submodule']" +
+                    ".?[#this.getTypeOfSequenceArray(0).getStringValue() == 'module']" +
                     ".![#this.getIDArray(0).getStringValue()]")
     private final List<String> sequenceReferences = new ArrayList<>();
 
