@@ -32,6 +32,8 @@ public class LunaticConverter {
         else if (enoObject instanceof Declaration
                 || enoObject instanceof Instruction)
             return new DeclarationType();
+        else if (enoObject instanceof Control)
+            return new ControlType();
         else if (enoObject instanceof SingleResponseQuestion)
             return instantiateFrom((SingleResponseQuestion) enoObject);
         else if (enoObject instanceof MultipleResponseQuestion)
