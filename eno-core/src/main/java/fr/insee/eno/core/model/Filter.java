@@ -2,11 +2,15 @@ package fr.insee.eno.core.model;
 
 import datacollection33.IfThenElseTextType;
 import fr.insee.eno.core.annotations.DDI;
-import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.lunatic.model.flat.ComponentType;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Filter extends EnoObject {
 
+    @DDI(contextType = IfThenElseTextType.class, field = "getIDArray(0).getStringValue()")
+    private String id;
 
     private String componentReference;
 
