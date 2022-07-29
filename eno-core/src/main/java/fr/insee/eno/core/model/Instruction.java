@@ -30,7 +30,7 @@ public class Instruction extends EnoObject implements DeclarationInterface {
      */
     @DDI(contextType = InstructionType.class,
             field = "getInstructionNameList()" +
-                    ".?[T(fr.insee.eno.core.model.Mode).isDDIMode(#this.getStringArray(0).getStringValue())].get(0)" +
+                    ".?[!T(fr.insee.eno.core.model.Mode).isDDIMode(#this.getStringArray(0).getStringValue())].get(0)" +
                     ".getStringArray(0).getStringValue()")
     @Lunatic(contextType = DeclarationType.class,
             field = "setDeclarationType(T(fr.insee.lunatic.model.flat.DeclarationTypeEnum).valueOf(#param.toUpperCase()))")
