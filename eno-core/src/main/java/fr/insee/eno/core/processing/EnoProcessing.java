@@ -4,11 +4,15 @@ import fr.insee.eno.core.model.*;
 import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.model.question.TextQuestion;
 import fr.insee.eno.core.utils.RomanNumber;
+import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+@Slf4j
 public class EnoProcessing {
 
     public static final String COMMENT_VARIABLE_NAME = "COMMENT_QE";
@@ -41,9 +45,120 @@ public class EnoProcessing {
         enoQuestionnaire.getSingleResponseQuestions().forEach(question -> questionMap.put(question.getId(), question));
         enoQuestionnaire.getMultipleResponseQuestions().forEach(question -> questionMap.put(question.getId(), question));
         //
+        insertDeclarations(enoQuestionnaire);
+        insertControls(enoQuestionnaire);
+        //
         if (sequenceNumbering) addNumberingInSequences(enoQuestionnaire);
         addNumberingInQuestions(enoQuestionnaire, QuestionNumberingMode.SEQUENCE); //TODO: parametrize
         if (arrowCharInQuestions) addArrowCharInQuestion();
+    }
+
+    /** Controls are mapped directly in a flat list in the questionnaire object.
+     * This processing is intended to insert them into the objects to which they belong.
+     * (Controls are placed after the object they belong to in the sequence items lists.)
+     * Concerned objects : sequences, subsequences and questions. */
+    private void insertControls(EnoQuestionnaire enoQuestionnaire) { // TODO: code is a bit clumsy but works
+        //
+        Map<String, Control> controlMap = new HashMap<>();
+        enoQuestionnaire.getControls().forEach(control -> controlMap.put(control.getId(), control));
+        //
+        for (Sequence sequence : enoQuestionnaire.getSequences()) {
+            List<SequenceItem> sequenceItems = sequence.getSequenceItems();
+            if (! sequenceItems.isEmpty()) {
+                int bound = sequenceItems.size();
+                // Sequence controls
+                int i = 0;
+                while (i<bound && sequenceItems.get(i).getType() == SequenceItem.SequenceItemType.CONTROL) {
+                    sequence.getControls().add(controlMap.get(sequenceItems.get(i).getId()));
+                    i ++;
+                }
+                // Elements (questions, subsequences) in sequence
+                while (i < bound) {
+                    SequenceItem sequenceItem = sequenceItems.get(i);
+                    if (sequenceItem.getType() == SequenceItem.SequenceItemType.QUESTION) {
+                        Question question = questionMap.get(sequenceItem.getId());
+                        i ++;
+                        while (i<bound && sequenceItems.get(i).getType() == SequenceItem.SequenceItemType.CONTROL) {
+                            question.getControls().add(controlMap.get(sequenceItems.get(i).getId()));
+                            i ++;
+                        }
+                    }
+                    else if (sequenceItem.getType() == SequenceItem.SequenceItemType.SUBSEQUENCE) {
+                        Subsequence subsequence = subsequenceMap.get(sequenceItem.getId());
+                        List<SequenceItem> subsequenceItems = subsequence.getSequenceItems();
+                        if (! subsequenceItems.isEmpty()) {
+                            int bound2 = subsequenceItems.size();
+                            // Subsequence controls
+                            int j = 0;
+                            while (j<bound2 && subsequenceItems.get(j).getType() == SequenceItem.SequenceItemType.CONTROL) {
+                                subsequence.getControls().add(controlMap.get(subsequenceItems.get(j).getId()));
+                                j ++;
+                            }
+                            // Elements (questions) in subsequence
+                            while (j < bound2) {
+                                SequenceItem subsequenceItem = subsequenceItems.get(j);
+                                if (subsequenceItem.getType() == SequenceItem.SequenceItemType.QUESTION) {
+                                    Question question = questionMap.get(subsequenceItem.getId());
+                                    j ++;
+                                    while (j<bound2 && subsequenceItems.get(j).getType() == SequenceItem.SequenceItemType.CONTROL) {
+                                        question.getControls().add(controlMap.get(subsequenceItems.get(j).getId()));
+                                        j ++;
+                                    }
+                                }
+                                else { // skip other elements
+                                    j ++;
+                                }
+                            }
+                        }
+                        i ++;
+                    }
+                    else { // skip other elements
+                        i ++;
+                    }
+                }
+            }
+        }
+    }
+
+    /** Same idea as in the insertControls function, but for declarations.
+     * (Declarations are placed before the object they belong to in the sequence items lists.)
+     * Concerned objects : subsequences and questions. */
+    private void insertDeclarations(EnoQuestionnaire enoQuestionnaire) { // TODO: code is a bit clumsy but works
+        //
+        Map<String, Declaration> declarationMap = new HashMap<>();
+        enoQuestionnaire.getDeclarations().forEach(declaration -> declarationMap.put(declaration.getId(), declaration));
+        //
+        for (Sequence sequence : enoQuestionnaire.getSequences()) {
+            List<String> declarationIdStack = new ArrayList<>();
+            for (SequenceItem sequenceItem : sequence.getSequenceItems()) {
+                if (sequenceItem.getType() == SequenceItem.SequenceItemType.DECLARATION) {
+                    declarationIdStack.add(sequenceItem.getId());
+                }
+                if (sequenceItem.getType() == SequenceItem.SequenceItemType.QUESTION) {
+                    Question question = questionMap.get(sequenceItem.getId());
+                    declarationIdStack.forEach(declarationId ->
+                            question.getDeclarations().add(declarationMap.get(declarationId)));
+                    declarationIdStack = new ArrayList<>();
+                }
+                if (sequenceItem.getType() == SequenceItem.SequenceItemType.SUBSEQUENCE) {
+                    Subsequence subsequence = subsequenceMap.get(sequenceItem.getId());
+                    declarationIdStack.forEach(declarationId ->
+                            subsequence.getDeclarations().add(declarationMap.get(declarationId)));
+                    declarationIdStack = new ArrayList<>();
+                    for (SequenceItem subsequenceItem : subsequence.getSequenceItems()) {
+                        if (subsequenceItem.getType() == SequenceItem.SequenceItemType.DECLARATION) {
+                            declarationIdStack.add(subsequenceItem.getId());
+                        }
+                        if (subsequenceItem.getType() == SequenceItem.SequenceItemType.QUESTION) {
+                            Question question = questionMap.get(subsequenceItem.getId());
+                            declarationIdStack.forEach(declarationId ->
+                                    question.getDeclarations().add(declarationMap.get(declarationId)));
+                            declarationIdStack = new ArrayList<>();
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private void addCommentSection(EnoQuestionnaire enoQuestionnaire) {

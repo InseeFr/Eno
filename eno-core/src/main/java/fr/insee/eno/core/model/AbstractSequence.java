@@ -28,7 +28,11 @@ public abstract class AbstractSequence extends EnoObject {
     @Lunatic(contextType = {fr.insee.lunatic.model.flat.SequenceType.class, Subsequence.class}, field = "getDeclarations()")
     private final List<Instruction> instructions = new ArrayList<>();
 
+    @Lunatic(contextType = {fr.insee.lunatic.model.flat.SequenceType.class, Subsequence.class}, field = "getDeclarations()")
     private final List<Declaration> declarations = new ArrayList<>();
+
+    @Lunatic(contextType = {fr.insee.lunatic.model.flat.SequenceType.class, Subsequence.class}, field = "getControls()")
+    private final List<Control> controls = new ArrayList<>();
 
     @DDI(contextType = SequenceType.class,
             field = "getControlConstructReferenceList()" +
