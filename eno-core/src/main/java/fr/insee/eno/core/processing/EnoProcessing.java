@@ -58,7 +58,7 @@ public class EnoProcessing {
         insertControls(enoQuestionnaire);
         //
         if (parameters.isSequenceNumbering()) addNumberingInSequences(enoQuestionnaire);
-        addNumberingInQuestions(enoQuestionnaire, parameters.getQuestionNumberingMode()); //TODO: parametrize
+        addNumberingInQuestions(enoQuestionnaire, parameters.getQuestionNumberingMode());
         if (parameters.isArrowCharInQuestions()) addArrowCharInQuestion();
     }
 
