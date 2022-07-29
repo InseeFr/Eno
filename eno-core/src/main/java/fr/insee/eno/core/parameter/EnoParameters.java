@@ -1,10 +1,13 @@
 package fr.insee.eno.core.parameter;
 
+import fr.insee.eno.core.model.Mode;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static fr.insee.eno.core.model.Mode.*;
 
 @Getter
 @Setter
@@ -16,6 +19,7 @@ public class EnoParameters {
     private boolean sequenceNumbering;
     private QuestionNumberingMode questionNumberingMode;
     private boolean arrowCharInQuestions;
+    private List<Mode> selectedModes = new ArrayList<>();
 
     public EnoParameters() {
         defaultParameters();
@@ -26,6 +30,7 @@ public class EnoParameters {
         sequenceNumbering = true;
         questionNumberingMode = QuestionNumberingMode.SEQUENCE;
         arrowCharInQuestions = true;
+        selectedModes.addAll(List.of(CAPI, CATI, CAWI, PAPI));
     }
 
 }
