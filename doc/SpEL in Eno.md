@@ -27,6 +27,7 @@ https://docs.spring.io/spring-framework/docs/current/reference/html/core.html
 
 ### Logical operators
 
+- ``!`` (not)
 - ``==``, ``!=``
 - ``<``, ``<=``, ``>``, ``>=``
 - ``and``, ``or``
