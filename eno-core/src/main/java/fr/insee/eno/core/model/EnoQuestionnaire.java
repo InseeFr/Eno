@@ -96,6 +96,11 @@ public class EnoQuestionnaire extends EnoObject {
     private final List<Filter> filters = new ArrayList<>();
 
     @DDI(contextType = DDIInstanceType.class,
+            field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
+                    ".?[#this instanceof T(datacollection33.ComputationItemType)]")
+    private final List<Control> controls = new ArrayList<>();
+
+    @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionItemList()")
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "getComponents()")
     private final List<SingleResponseQuestion> singleResponseQuestions = new ArrayList<>();
