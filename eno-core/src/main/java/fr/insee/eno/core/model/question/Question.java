@@ -7,6 +7,7 @@ import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.Control;
 import fr.insee.eno.core.model.Declaration;
 import fr.insee.eno.core.model.EnoObject;
+import fr.insee.eno.core.model.Instruction;
 import fr.insee.lunatic.model.flat.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,6 +33,12 @@ public abstract class Question extends EnoObject {
     @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class, CheckboxGroup.class, Table.class},
             field = "getDeclarations()")
     private final List<Declaration> declarations = new ArrayList<>();
+
+    @DDI(contextType = {QuestionItemType.class, QuestionGridType.class},
+            field = "getInterviewerInstructionReferenceList().![#index.get(#this.getIDArray(0).getStringValue())]")
+    @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class, CheckboxGroup.class, Table.class},
+            field = "getDeclarations()")
+    List<Instruction> instructions = new ArrayList<>();
 
     @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class, CheckboxGroup.class, Table.class},
             field = "getControls()")
