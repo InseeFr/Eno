@@ -3,6 +3,8 @@ package fr.insee.eno.core.demo;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.Mode;
+import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.processing.EnoProcessing;
 import fr.insee.eno.core.processing.LunaticProcessing;
@@ -16,6 +18,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 
 public class DDIToLunatic {
 
@@ -36,6 +39,9 @@ public class DDIToLunatic {
         DDIMapper ddiMapper = new DDIMapper(ddiInstanceDocument);
         ddiMapper.mapDDI(enoQuestionnaire);
 
+        // Mode filtering
+        EnoParameters enoParameters = new EnoParameters();
+        enoParameters.setSelectedModes(List.of(Mode.CAPI, Mode.CATI));
         //
         EnoProcessing enoProcessing = new EnoProcessing();
         enoProcessing.applyProcessing(enoQuestionnaire);
