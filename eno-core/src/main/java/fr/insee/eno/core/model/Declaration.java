@@ -13,7 +13,7 @@ import java.util.List;
 /** Text displayed before a question or sequence. */
 @Getter
 @Setter
-public class Declaration extends EnoObject {
+public class Declaration extends EnoObject implements DeclarationInterface {
 
     @DDI(contextType = StatementItemType.class, field = "getIDArray(0).getStringValue()")
     @Lunatic(contextType = DeclarationType.class, field = "setId(#param)")

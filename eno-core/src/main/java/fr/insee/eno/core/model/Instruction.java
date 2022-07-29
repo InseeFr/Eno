@@ -13,7 +13,7 @@ import java.util.List;
 /** Text displayed after a question or sequence. */
 @Getter
 @Setter
-public class Instruction extends EnoObject {
+public class Instruction extends EnoObject implements DeclarationInterface {
 
     @DDI(contextType = InstructionType.class,
             field = "getIDArray(0).getStringValue()")
