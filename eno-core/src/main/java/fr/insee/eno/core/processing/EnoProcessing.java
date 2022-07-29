@@ -3,6 +3,7 @@ package fr.insee.eno.core.processing;
 import fr.insee.eno.core.model.*;
 import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.model.question.TextQuestion;
+import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.utils.RomanNumber;
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static fr.insee.eno.core.parameter.EnoParameters.QuestionNumberingMode;
 
 @Slf4j
 public class EnoProcessing {
@@ -21,36 +24,42 @@ public class EnoProcessing {
     public static final String COMMENT_QUESTION_ID = "COMMENT-QUESTION";
     public static final String COMMENT_QUESTION_LABEL =
             "Avez-vous des remarques concernant l'enquête ou des commentaires\u00a0?";
-
-    public enum QuestionNumberingMode {NONE, SEQUENCE, ALL}
+    public static final boolean COMMENT_QUESTION_MANDATORY = false;
+    public static final int COMMENT_QUESTION_LENGTH = 2000;
 
     public static final String SEQUENCE_NUMBERING_SEPARATOR = " -";
     public static final String QUESTION_NUMBERING_SEPARATOR = ".";
     public static final String QUESTION_ARROW_CHAR = "➡";
 
-    private boolean commentSection = true; //TODO: parametrize
-    private boolean sequenceNumbering = true; //TODO: parametrize
-    private boolean arrowCharInQuestions = true; //TODO: parametrize
+    private final EnoParameters parameters;
 
     Map<String, Sequence> sequenceMap = new HashMap<>();
     Map<String, Subsequence> subsequenceMap = new HashMap<>();
     Map<String, Question> questionMap = new HashMap<>();
 
+    public EnoProcessing() {
+        this.parameters = new EnoParameters();
+    }
+
+    public EnoProcessing(EnoParameters parameters) {
+        this.parameters = parameters;
+    }
+
     public void applyProcessing(EnoQuestionnaire enoQuestionnaire) {
         //
-        if (commentSection) addCommentSection(enoQuestionnaire);
+        if (parameters.isCommentSection()) addCommentSection(enoQuestionnaire);
         //
         enoQuestionnaire.getSequences().forEach(sequence -> sequenceMap.put(sequence.getId(), sequence));
         enoQuestionnaire.getSubsequences().forEach(subsequence -> subsequenceMap.put(subsequence.getId(), subsequence));
         enoQuestionnaire.getSingleResponseQuestions().forEach(question -> questionMap.put(question.getId(), question));
         enoQuestionnaire.getMultipleResponseQuestions().forEach(question -> questionMap.put(question.getId(), question));
-        //
+        // (technical processing)
         insertDeclarations(enoQuestionnaire);
         insertControls(enoQuestionnaire);
         //
-        if (sequenceNumbering) addNumberingInSequences(enoQuestionnaire);
-        addNumberingInQuestions(enoQuestionnaire, QuestionNumberingMode.SEQUENCE); //TODO: parametrize
-        if (arrowCharInQuestions) addArrowCharInQuestion();
+        if (parameters.isSequenceNumbering()) addNumberingInSequences(enoQuestionnaire);
+        addNumberingInQuestions(enoQuestionnaire, parameters.getQuestionNumberingMode()); //TODO: parametrize
+        if (parameters.isArrowCharInQuestions()) addArrowCharInQuestion();
     }
 
     /** Controls are mapped directly in a flat list in the questionnaire object.
@@ -180,8 +189,8 @@ public class EnoProcessing {
         commentQuestion.setId(COMMENT_QUESTION_ID);
         commentQuestion.setName(COMMENT_VARIABLE_NAME);
         commentQuestion.setLabel(COMMENT_QUESTION_LABEL);
-        commentQuestion.setMandatory(false);
-        commentQuestion.setMaxLength(BigInteger.valueOf(2000));
+        commentQuestion.setMandatory(COMMENT_QUESTION_MANDATORY);
+        commentQuestion.setMaxLength(BigInteger.valueOf(COMMENT_QUESTION_LENGTH));
         commentQuestion.setResponse(new Response());
         commentQuestion.getResponse().setVariableName(COMMENT_VARIABLE_NAME);
         enoQuestionnaire.getSingleResponseQuestions().add(commentQuestion);
