@@ -7,6 +7,9 @@ import fr.insee.lunatic.model.flat.DeclarationType;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /** Text displayed before a question or sequence. */
 @Getter
 @Setter
@@ -28,5 +31,14 @@ public class Declaration extends EnoObject {
     @Lunatic(contextType = DeclarationType.class,
             field = "setPosition(T(fr.insee.lunatic.model.flat.DeclarationPositionEnum).valueOf(#param))")
     String position = "BEFORE_QUESTION_TEXT";
+
+    /** List of concerned modes.
+     * Only exists in 'in' formats, then used to do mode selection processing on the model.
+     * In DDI, a StatementItem has a list of ConstructName that contains this information.
+     * (Difference with Instruction: no selection to do.) */
+    @DDI(contextType = StatementItemType.class,
+            field = "getConstructNameList()" +
+                    ".![T(fr.insee.eno.core.model.Mode).convertDDIMode(#this.getStringArray(0).getStringValue())]")
+    private final List<Mode> modes = new ArrayList<>();
 
 }

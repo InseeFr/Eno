@@ -7,6 +7,9 @@ import fr.insee.lunatic.model.flat.DeclarationType;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /** Text displayed after a question or sequence. */
 @Getter
 @Setter
@@ -38,5 +41,11 @@ public class Instruction extends EnoObject {
     @Lunatic(contextType = DeclarationType.class,
             field = "setPosition(T(fr.insee.lunatic.model.flat.DeclarationPositionEnum).valueOf(#param))")
     String position = "AFTER_QUESTION_TEXT";
+
+    @DDI(contextType = InstructionType.class,
+            field = "getInstructionNameList()" +
+                    ".?[T(fr.insee.eno.core.model.Mode).isDDIMode(#this.getStringArray(0).getStringValue())]" +
+                    ".![T(fr.insee.eno.core.model.Mode).convertDDIMode(#this.getStringArray(0).getStringValue())]")
+    private final List<Mode> modes = new ArrayList<>();
 
 }
