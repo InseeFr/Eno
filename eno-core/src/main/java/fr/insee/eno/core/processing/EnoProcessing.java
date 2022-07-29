@@ -1,7 +1,9 @@
 package fr.insee.eno.core.processing;
 
 import fr.insee.eno.core.model.*;
+import fr.insee.eno.core.model.question.MultipleResponseQuestion;
 import fr.insee.eno.core.model.question.Question;
+import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.model.question.TextQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.utils.RomanNumber;
@@ -47,6 +49,8 @@ public class EnoProcessing {
 
     public void applyProcessing(EnoQuestionnaire enoQuestionnaire) {
         //
+        modeSelection(enoQuestionnaire);
+        //
         if (parameters.isCommentSection()) addCommentSection(enoQuestionnaire);
         //
         enoQuestionnaire.getSequences().forEach(sequence -> sequenceMap.put(sequence.getId(), sequence));
@@ -60,6 +64,35 @@ public class EnoProcessing {
         if (parameters.isSequenceNumbering()) addNumberingInSequences(enoQuestionnaire);
         addNumberingInQuestions(enoQuestionnaire, parameters.getQuestionNumberingMode());
         if (parameters.isArrowCharInQuestions()) addArrowCharInQuestion();
+    }
+
+    /** Remove elements that does not correspond to the "selected modes" parameter.
+     * For now, only declarations and instructions are concerned by mode selection. */
+    private void modeSelection(EnoQuestionnaire enoQuestionnaire) {
+        /* TODO: (see comments that contain 'clumsy') an EnoComponent interface
+            that would be implemented by Question and AbstractSequence
+            would allow to refactor portions of code. */
+        for (Sequence sequence : enoQuestionnaire.getSequences()) {
+            sequence.getDeclarations().removeIf(this::hasNoSelectedMode);
+            sequence.getInstructions().removeIf(this::hasNoSelectedMode);
+        }
+        for (Subsequence subsequence : enoQuestionnaire.getSubsequences()) {
+            subsequence.getDeclarations().removeIf(this::hasNoSelectedMode);
+            subsequence.getInstructions().removeIf(this::hasNoSelectedMode);
+        }
+        for (SingleResponseQuestion question : enoQuestionnaire.getSingleResponseQuestions()) {
+            question.getDeclarations().removeIf(this::hasNoSelectedMode);
+            question.getInstructions().removeIf(this::hasNoSelectedMode);
+        }
+        for (MultipleResponseQuestion question : enoQuestionnaire.getMultipleResponseQuestions()) {
+            question.getDeclarations().removeIf(this::hasNoSelectedMode);
+            question.getInstructions().removeIf(this::hasNoSelectedMode);
+        }
+    }
+
+    /** Return true if the given instruction matches the selected modes from parameters. */
+    private boolean hasNoSelectedMode(DeclarationInterface declaration) {
+        return declaration.getModes().stream().noneMatch(parameters.getSelectedModes()::contains);
     }
 
     /** Controls are mapped directly in a flat list in the questionnaire object.
