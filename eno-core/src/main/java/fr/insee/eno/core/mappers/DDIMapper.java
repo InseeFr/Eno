@@ -88,7 +88,7 @@ public class DDIMapper extends Mapper {
                     //log.atDebug().log(()->"  Value "+beanWrapper.getPropertyValue(propertyDescriptor.getName())+" setted"); //FIXME
                 }
 
-                // Lists // TODO: manage the case of simple type lists (if the case occurs)
+                // Lists
                 else if (List.class.isAssignableFrom(classType)) {
                     // Get the DDI collection instance by evaluating the expression
                     List<?> ddiCollection = expression.getValue(context, ddiInstance, List.class);
@@ -157,6 +157,7 @@ public class DDIMapper extends Mapper {
                     }
                     //
                     else {
+                        log.debug(ddiAnnotation.field());
                         throw new RuntimeException("Object is neither a simple type nor an Eno object."); //TODO: pass parameters in exception message
                     }
                 }
