@@ -67,5 +67,9 @@ public class DDIIndexTest {
         //
         Object code = ddiIndex.get("CA-jfjevykh-1");
         assertNotNull(code);
+
+        //
+        Object instruction = ddiIndex.get("kk47fewm");
+        assertNotNull(instruction);
     }
 }

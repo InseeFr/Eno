@@ -2,6 +2,7 @@ package fr.insee.eno.core;
 
 import datacollection33.*;
 import datacollection33.SequenceType;
+import datacollection33.impl.TextTypeImpl;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.mappers.DDIMapperTest;
 import fr.insee.eno.core.mappers.Mapper;
@@ -61,6 +62,10 @@ public class HelloTest {
         IfThenElseType ite;
         //
         QuestionConstructType q;
+        //
+        StatementItemType st;
+        //((TextTypeImpl) ((LiteralTextType) st.getDisplayTextArray(0).getTextContentArray(0)).getText()).getStringValue();
+        // Note: why does TextType don't have the getStringValue() method, but the implementation has it?
         //
         ddiInstanceDocument.getDDIInstance().getResourcePackageArray(0)
                 .getInterviewerInstructionSchemeArray(0).getInstructionArray(0)

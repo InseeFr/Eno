@@ -4,6 +4,7 @@ import datacollection33.*;
 import datacollection33.impl.LiteralTextTypeImpl;
 import datacollection33.impl.TextTypeImpl;
 import fr.insee.eno.core.HelloTest;
+import group33.ResourcePackageType;
 import instance33.DDIInstanceDocument;
 import instance33.DDIInstanceType;
 import logicalproduct33.VariableType;
@@ -33,31 +34,36 @@ public class DDIParserTest {
         assertEquals("INSEE-l10xmg2l", ddiInstanceDocument.getDDIInstance().getIDList().get(0).getStringValue());
 
         //
-        List<ControlConstructType> foo = ddiInstanceDocument.getDDIInstance().getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()
+        ResourcePackageType resourcePackage = ddiInstanceDocument.getDDIInstance().getResourcePackageArray(0);
+
+        //
+        List<ControlConstructType> foo = resourcePackage.getControlConstructSchemeArray(0).getControlConstructList()
                 .stream()
                 .filter(controlConstructType -> controlConstructType instanceof SequenceType)
                 .toList();
         assertNotNull(foo);
 
         //
-        List<QuestionItemType> questionItemList = ddiInstanceDocument.getDDIInstance().getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionItemList();
-        List<QuestionGridType> questionGridList = ddiInstanceDocument.getDDIInstance().getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionGridList();
+        List<QuestionItemType> questionItemList = resourcePackage.getQuestionSchemeArray(0).getQuestionItemList();
+        List<QuestionGridType> questionGridList = resourcePackage.getQuestionSchemeArray(0).getQuestionGridList();
         questionItemList.get(0).getOutParameterArray(0).getParameterNameArray(0).getStringArray(0).getStringValue();
-        questionGridList.get(0).getStructuredMixedGridResponseDomain().getGridResponseDomainInMixedList();
+        //questionGridList.get(0).getStructuredMixedGridResponseDomain().getGridResponseDomainInMixedList();
 
         //
-        String firstInstructionLabel = ((TextTypeImpl) ((LiteralTextType) ddiInstanceDocument.getDDIInstance()
-                .getResourcePackageArray(0)
+        String firstInstructionLabel = ((TextTypeImpl) ((LiteralTextType) resourcePackage
                 .getInterviewerInstructionSchemeArray(0).getInstructionArray(0)
                 .getInstructionTextArray(0).getTextContentArray(0))
                 .getText()).getStringValue();
 
         //
-        VariableType unitVariable = ddiInstanceDocument.getDDIInstance().getResourcePackageArray(0)
-                .getVariableSchemeArray(0).getVariableList()
+        VariableType unitVariable = resourcePackage.getVariableSchemeArray(0).getVariableList()
                 .stream().filter(variableType -> variableType.getIDArray(0).getStringValue().equals("kyis3r6p"))
                 .findAny().orElse(null);
         assertNotNull(unitVariable);
+
+        //
+        ControlConstructSchemeType controlConstructScheme = resourcePackage.getControlConstructSchemeArray(0);
+        assertNotNull(controlConstructScheme);
     }
 
     @Test
