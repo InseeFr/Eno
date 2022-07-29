@@ -1,7 +1,5 @@
 package fr.insee.eno.core.model;
 
-import datacollection33.IfThenElseTextType;
-import datacollection33.IfThenElseType;
 import datacollection33.SequenceType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
