@@ -46,5 +46,8 @@ public abstract class AbstractSequence extends EnoObject {
                     ".getQuestionReference().getIDArray(0).getStringValue() " +
                     ": null]")
     private final List<String> componentReferences = new ArrayList<>();
-    
+
+    @DDI(contextType = SequenceType.class, field = "getControlConstructReferenceList()")
+    private final List<SequenceItem> sequenceItems = new ArrayList<>();
+
 }
