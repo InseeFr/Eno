@@ -1,0 +1,3574 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DDIInstance xmlns="ddi:instance:3_3" xmlns:a="ddi:archive:3_3" xmlns:d="ddi:datacollection:3_3" xmlns:g="ddi:group:3_3" xmlns:l="ddi:logicalproduct:3_3" xmlns:r="ddi:reusable:3_3" xmlns:s="ddi:studyunit:3_3" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd" isMaintainable="true"><!--Eno version : 2.3.8. Generation date : 28/07/2022 - 14:08:20-->
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-l10xmg2l</r:ID>
+   <r:Version>1</r:Version>
+   <r:Citation>
+      <r:Title>
+         <r:String>Questionnaires simple - réponses simples</r:String>
+      </r:Title>
+   </r:Citation>
+   <g:ResourcePackage isMaintainable="true" versionDate="2018-01-25+01:00">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>RessourcePackage-l10xmg2l</r:ID>
+      <r:Version>1</r:Version>
+      <d:InterviewerInstructionScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>InterviewerInstructionScheme-l10xmg2l</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">A définir</r:Content>
+         </r:Label>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfazqgv2</r:ID>
+            <r:Version>1</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">instruction</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">SelfAdministeredQuestionnaire.WebBased</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">SelfAdministeredQuestionnaire.Paper</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Cette séquence comprend les questions ouvertes (ceci est une déclaration de type consigne, associée au titre de séquence).</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kk47fewm</r:ID>
+            <r:Version>1</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">instruction</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">SelfAdministeredQuestionnaire.WebBased</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">SelfAdministeredQuestionnaire.Paper</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Ceci est une déclaration de type consigne, associée au titre de sous-séquence.</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l64tigcz</r:ID>
+            <r:Version>1</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">help</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">SelfAdministeredQuestionnaire.WebBased</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">SelfAdministeredQuestionnaire.Paper</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Déclaration après la question pour le répondant"</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kyisnj3g</r:ID>
+            <r:Version>1</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">help</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">SelfAdministeredQuestionnaire.WebBased</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">SelfAdministeredQuestionnaire.Paper</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">Interview.Telephone.CATI</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">Interview.FaceToFace.CAPIorCAMI</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Controle si &gt; 50</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjh1ndk-CI-0-II-0</r:ID>
+            <r:Version>1</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">warning</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Bizarre que &gt; 50</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+      </d:InterviewerInstructionScheme>
+      <d:ControlConstructScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>ControlConstructScheme-l10xmg2l</r:ID>
+         <r:Version>1</r:Version>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>Sequence-l10xmg2l</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Questionnaires simple - réponses simples</r:Content>
+            </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">template</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfaz9kv9</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjew4oy</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfaz9kv9</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">SIMPLE</r:String>
+            </d:ConstructName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Questions ouvertes - Titre de la séquence</r:Content>
+            </r:Label>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfazqgv2</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfazmcp8</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfazsitt</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjhggkx</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjeuskc</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfazmcp8</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">INTRO</r:String>
+            </d:ConstructName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Introduction -  Titre de la sous-séquence</r:Content>
+            </r:Label>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kk47fewm</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfazk91m-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l3laoj9p</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>IfThenElse</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfazsitt</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">QUESTIONSD</r:String>
+            </d:ConstructName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Questions de type Texte</r:Content>
+            </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfazww20-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfazwjyv-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kzwqst6c-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l64tgu5o-SI</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>StatementItem</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l64yvrfb-SI</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>StatementItem</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kk2fsjst-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjhggkx</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">NUMRIQUES</r:String>
+            </d:ConstructName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Numériques</r:Content>
+            </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjh1ndk-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjh1ndk-CI-0</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>ComputationItem</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjhb2pz-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjtbqh1-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kyiseu7q-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjeuskc</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">AUTRES</r:String>
+            </d:ConstructName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Autres formats de réponse</r:Content>
+            </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjfckyw-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kvl6bpxb-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjeud07-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjew4oy</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">QCUQCM</r:String>
+            </d:ConstructName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Questions à choix unique et questions à choix multiple</r:Content>
+            </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfkxouu8</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4sit8vt</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfkxouu8</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">QCU</r:String>
+            </d:ConstructName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Questions à choix unique</r:Content>
+            </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjepz6i-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjero7b-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjfae9f-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l4sit8vt</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">QCM</r:String>
+            </d:ConstructName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Questions à choix multiple</r:Content>
+            </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siyhfj-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siwldm-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:IfThenElse>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l3laoj9p</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">A définir</r:Content>
+            </r:Label>
+            <r:Description>
+               <r:Content xml:lang="fr-FR">Activation du filtre avec la question booléenne</r:Content>
+            </r:Description>
+            <d:TypeOfIfThenElse controlledVocabularyID="INSEE-TOITE-CL-1">hideable</d:TypeOfIfThenElse>
+            <d:IfCondition>
+               <r:Command>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>l3laoj9p-IP-1</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">BOOLEN</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>jfjeud07-QOP-jfjezhiz</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l3laoj9p-IP-1</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:CommandContent>l3laoj9p-IP-1 = '1'</r:CommandContent>
+               </r:Command>
+            </d:IfCondition>
+            <d:ThenConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l3laoj9p-THEN</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ThenConstructReference>
+         </d:IfThenElse>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l3laoj9p-THEN</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR"/>
+            </r:Label>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l3lan1ox-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfazk91m-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">COCHECASE</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfazk91m</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l3lan1ox-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">FILTRE</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l3lan1ox</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfazww20-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">TEXTECOURT</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfazww20</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfazwjyv-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">TEXTELONG249</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfazwjyv</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kzwqst6c-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">TEXTELONG250</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kzwqst6c</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kk2fsjst-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">NUMPREF</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kk2fsjst</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjh1ndk-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">INTEGER</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjh1ndk</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjhb2pz-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">FLOAT</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjhb2pz</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjtbqh1-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">unit</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjtbqh1</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kyiseu7q-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">UNITD</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kyiseu7q</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjfckyw-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">DATE</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjfckyw</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kvl6bpxb-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">DAAAA</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kvl6bpxb</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjeud07-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">BOOLEN</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjeud07</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjepz6i-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">radio</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjepz6i</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjero7b-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">checkbox</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjero7b</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjfae9f-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">dropdown</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjfae9f</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l4siyhfj-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">QCM_SIMPLE</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siyhfj</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l4siwldm-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">QCM_COMPLEXE</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siwldm</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:ComputationItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjh1ndk-CI-0</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Bizarre que &gt; 50</r:String>
+            </d:ConstructName>
+            <r:Description>
+               <r:Content xml:lang="fr-FR">Bizarre que &gt; 50</r:Content>
+            </r:Description>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjh1ndk-CI-0-II-0</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+            <r:CommandCode>
+               <r:Command>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jfjh1ndk-CI-0-IP-1</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">INTEGER</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>jfjh1ndk-QOP-jfjhmav1</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>jfjh1ndk-CI-0-IP-1</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:CommandContent>cast(jfjh1ndk-CI-0-IP-1,integer) &gt; 50</r:CommandContent>
+               </r:Command>
+            </r:CommandCode>
+         </d:ComputationItem>
+         <d:StatementItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l64tgu5o-SI</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">SelfAdministeredQuestionnaire.WebBased</r:String>
+            </d:ConstructName>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Interview.Telephone.CATI</r:String>
+            </d:ConstructName>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Interview.FaceToFace.CAPIorCAMI</r:String>
+            </d:ConstructName>
+            <d:DisplayText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Déclaration avant la question sur le numéro pour l'enquêteur"</d:Text>
+               </d:LiteralText>
+            </d:DisplayText>
+         </d:StatementItem>
+         <d:StatementItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l64yvrfb-SI</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">SelfAdministeredQuestionnaire.WebBased</r:String>
+            </d:ConstructName>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Interview.Telephone.CATI</r:String>
+            </d:ConstructName>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Interview.FaceToFace.CAPIorCAMI</r:String>
+            </d:ConstructName>
+            <d:DisplayText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Déclaration avant la question 2"</d:Text>
+               </d:LiteralText>
+            </d:DisplayText>
+         </d:StatementItem>
+      </d:ControlConstructScheme>
+      <d:QuestionScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>QuestionScheme-l10xmg2l</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">A définir</r:Content>
+         </r:Label>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfazk91m</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">COCHECASE</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfazk91m-QOP-jfazhq57</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">COCHECASE</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfazk91m-RDOP-jfazhq57</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfazk91m-QOP-jfazhq57</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Je suis un booleen</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:NominalDomain>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfazk91m-RDOP-jfazhq57</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:CodeRepresentation>
+                     <r:CodeSubsetInformation>
+                        <r:IncludedCode>
+                           <r:CodeReference>
+                              <r:Agency>fr.insee</r:Agency>
+                              <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                              <r:Version>1</r:Version>
+                              <r:TypeOfObject>Code</r:TypeOfObject>
+                           </r:CodeReference>
+                        </r:IncludedCode>
+                     </r:CodeSubsetInformation>
+                  </r:CodeRepresentation>
+                  <r:DefaultValue/>
+               </r:OutParameter>
+               <r:ResponseCardinality maximumResponses="1"/>
+            </d:NominalDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l3lan1ox</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">FILTRE</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l3lan1ox-QOP-l3lapqkp</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">FILTRE</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l3lan1ox-RDOP-l3lapqkp</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l3lan1ox-QOP-l3lapqkp</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Vous avez activé le filtre : êtes-vous satisfait ?</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:NominalDomain>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l3lan1ox-RDOP-l3lapqkp</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:CodeRepresentation>
+                     <r:CodeSubsetInformation>
+                        <r:IncludedCode>
+                           <r:CodeReference>
+                              <r:Agency>fr.insee</r:Agency>
+                              <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                              <r:Version>1</r:Version>
+                              <r:TypeOfObject>Code</r:TypeOfObject>
+                           </r:CodeReference>
+                        </r:IncludedCode>
+                     </r:CodeSubsetInformation>
+                  </r:CodeRepresentation>
+                  <r:DefaultValue/>
+               </r:OutParameter>
+               <r:ResponseCardinality maximumResponses="1"/>
+            </d:NominalDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfazww20</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">TEXTECOURT</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfazww20-QOP-jfazpjke</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">TEXTECOURT</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfazww20-RDOP-jfazpjke</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfazww20-QOP-jfazpjke</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Je suis le libellé de la question de type texte de longueur inférieure à 250 caractères (10 ici)</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:TextDomain maxLength="10">
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfazww20-RDOP-jfazpjke</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TextRepresentation maxLength="10"/>
+               </r:OutParameter>
+            </d:TextDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfazwjyv</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">TEXTELONG249</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfazwjyv-QOP-jfazfcmi</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">TEXTELONG249</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfazwjyv-RDOP-jfazfcmi</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfazwjyv-QOP-jfazfcmi</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR"> Je suis le libellé de la question de type texte de longueur 249 </d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:TextDomain maxLength="249">
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfazwjyv-RDOP-jfazfcmi</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TextRepresentation maxLength="249"/>
+               </r:OutParameter>
+            </d:TextDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kzwqst6c</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">TEXTELONG250</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kzwqst6c-QOP-kzwqbyx4</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">TEXTELONG250</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>kzwqst6c-RDOP-kzwqbyx4</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>kzwqst6c-QOP-kzwqbyx4</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR"> Je suis le libellé de la question de type texte de longueur supérieure à 250 caractères ici 250</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:TextDomain maxLength="250">
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>kzwqst6c-RDOP-kzwqbyx4</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TextRepresentation maxLength="250"/>
+               </r:OutParameter>
+            </d:TextDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kk2fsjst</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">NUMPREF</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kk2fsjst-QOP-kk2g425e</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">NUMPREF</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>kk2fsjst-RDOP-kk2g425e</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>kk2fsjst-QOP-kk2g425e</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Quel est votre numéro préféré (sur 20 caractères) ?</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:TextDomain maxLength="20">
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>kk2fsjst-RDOP-kk2g425e</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TextRepresentation maxLength="20"/>
+               </r:OutParameter>
+            </d:TextDomain>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l64tigcz</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjh1ndk</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">INTEGER</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjh1ndk-QOP-jfjhmav1</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">INTEGER</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjh1ndk-RDOP-jfjhmav1</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjh1ndk-QOP-jfjhmav1</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Nombre entier sans unité, entre 10 et 100.</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:NumericDomain>
+               <r:NumberRange>
+                  <r:Low isInclusive="true">10</r:Low>
+                  <r:High isInclusive="true">100</r:High>
+               </r:NumberRange>
+               <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjh1ndk-RDOP-jfjhmav1</r:ID>
+                  <r:Version>1</r:Version>
+               </r:OutParameter>
+            </d:NumericDomain>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kyisnj3g</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjhb2pz</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">FLOAT</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjhb2pz-QOP-jfjhhp1i</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">FLOAT</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjhb2pz-RDOP-jfjhhp1i</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjhb2pz-QOP-jfjhhp1i</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Numérique décimal sans unité, entre 10 et 100</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:NumericDomain decimalPositions="2">
+               <r:NumberRange>
+                  <r:Low isInclusive="true">10</r:Low>
+                  <r:High isInclusive="true">100</r:High>
+               </r:NumberRange>
+               <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjhb2pz-RDOP-jfjhhp1i</r:ID>
+                  <r:Version>1</r:Version>
+               </r:OutParameter>
+            </d:NumericDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjtbqh1</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">unit</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjtbqh1-QOP-jfjsxwcd</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">unit</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjtbqh1-RDOP-jfjsxwcd</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjtbqh1-QOP-jfjsxwcd</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Nombre avec unité, entre 0 et 10</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:NumericDomain>
+               <r:NumberRange>
+                  <r:Low isInclusive="true">0</r:Low>
+                  <r:High isInclusive="true">10</r:High>
+               </r:NumberRange>
+               <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjtbqh1-RDOP-jfjsxwcd</r:ID>
+                  <r:Version>1</r:Version>
+               </r:OutParameter>
+            </d:NumericDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kyiseu7q</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">UNITD</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kyiseu7q-QOP-kyislpdy</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">UNITD</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>kyiseu7q-RDOP-kyislpdy</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>kyiseu7q-QOP-kyislpdy</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Nombre avec unité, avec décimal, entre 0 et 10.
+Controle avec variable précédente</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:NumericDomain decimalPositions="2">
+               <r:NumberRange>
+                  <r:Low isInclusive="true">0</r:Low>
+                  <r:High isInclusive="true">10</r:High>
+               </r:NumberRange>
+               <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>kyiseu7q-RDOP-kyislpdy</r:ID>
+                  <r:Version>1</r:Version>
+               </r:OutParameter>
+            </d:NumericDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjfckyw</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">DATE</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjfckyw-QOP-jfjeyppa</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">DATE</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjfckyw-RDOP-jfjeyppa</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjfckyw-QOP-jfjeyppa</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Date AAAAMMJJ entre 1980 01 01 et 2022 01 01</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:DateTimeDomain>
+               <r:DateFieldFormat>YYYY-MM-DD</r:DateFieldFormat>
+               <r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV">date</r:DateTypeCode>
+               <r:Range>
+                  <r:MinimumValue included="true">1980-01-01</r:MinimumValue>
+                  <r:MaximumValue included="true">2022-01-01</r:MaximumValue>
+               </r:Range>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjfckyw-RDOP-jfjeyppa</r:ID>
+                  <r:Version>1</r:Version>
+               </r:OutParameter>
+            </d:DateTimeDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kvl6bpxb</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">DAAAA</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kvl6bpxb-QOP-kvl62are</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">DAAAA</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>kvl6bpxb-RDOP-kvl62are</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>kvl6bpxb-QOP-kvl62are</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Date AAAA entre 1900 et 2022 (n'existe pas en Lunatic)</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:DateTimeDomain>
+               <r:DateFieldFormat>YYYY</r:DateFieldFormat>
+               <r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV">gYear</r:DateTypeCode>
+               <r:Range>
+                  <r:MinimumValue included="true">1900</r:MinimumValue>
+                  <r:MaximumValue included="true">2022</r:MaximumValue>
+               </r:Range>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>kvl6bpxb-RDOP-kvl62are</r:ID>
+                  <r:Version>1</r:Version>
+               </r:OutParameter>
+            </d:DateTimeDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjeud07</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">BOOLEN</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjeud07-QOP-jfjezhiz</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">BOOLEN</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjeud07-RDOP-jfjezhiz</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjeud07-QOP-jfjezhiz</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Booléen</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:NominalDomain>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjeud07-RDOP-jfjezhiz</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:CodeRepresentation>
+                     <r:CodeSubsetInformation>
+                        <r:IncludedCode>
+                           <r:CodeReference>
+                              <r:Agency>fr.insee</r:Agency>
+                              <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                              <r:Version>1</r:Version>
+                              <r:TypeOfObject>Code</r:TypeOfObject>
+                           </r:CodeReference>
+                        </r:IncludedCode>
+                     </r:CodeSubsetInformation>
+                  </r:CodeRepresentation>
+                  <r:DefaultValue/>
+               </r:OutParameter>
+               <r:ResponseCardinality maximumResponses="1"/>
+            </d:NominalDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjepz6i</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">radio</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjepz6i-QOP-jfjepr5a</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">radio</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjepz6i-RDOP-jfjepr5a</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjepz6i-QOP-jfjepr5a</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Question à choix unique - présentation bouton radio</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:CodeDomain>
+               <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
+               <r:CodeListReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjevykh</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>CodeList</r:TypeOfObject>
+               </r:CodeListReference>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjepz6i-RDOP-jfjepr5a</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:CodeRepresentation>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>jfjevykh</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                  </r:CodeRepresentation>
+               </r:OutParameter>
+               <r:ResponseCardinality maximumResponses="1"/>
+            </d:CodeDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjero7b</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">checkbox</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjero7b-QOP-jfjepr5a</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">checkbox</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjero7b-RDOP-jfjepr5a</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjero7b-QOP-jfjepr5a</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Question à choix unique - présentation case à cocher</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:CodeDomain>
+               <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
+               <r:CodeListReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjevykh</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>CodeList</r:TypeOfObject>
+               </r:CodeListReference>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjero7b-RDOP-jfjepr5a</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:CodeRepresentation>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>jfjevykh</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                  </r:CodeRepresentation>
+               </r:OutParameter>
+               <r:ResponseCardinality maximumResponses="1"/>
+            </d:CodeDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjfae9f</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">dropdown</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjfae9f-QOP-jfjepr5a</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">dropdown</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjfae9f-RDOP-jfjepr5a</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjfae9f-QOP-jfjepr5a</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Question à choix unique - présentation liste déroulante</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:CodeDomain>
+               <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+               <r:CodeListReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjevykh</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>CodeList</r:TypeOfObject>
+               </r:CodeListReference>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>jfjfae9f-RDOP-jfjepr5a</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:CodeRepresentation>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>jfjevykh</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                  </r:CodeRepresentation>
+               </r:OutParameter>
+               <r:ResponseCardinality maximumResponses="1"/>
+            </d:CodeDomain>
+         </d:QuestionItem>
+         <d:QuestionGrid>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l4siyhfj</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionGridName>
+               <r:String xml:lang="fr-FR">QCM_SIMPLE</r:String>
+            </d:QuestionGridName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siyhfj-QOP-l4siwrns</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">QCM_SIMPLE1</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siyhfj-QOP-l4sjfp9i</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">QCM_SIMPLE2</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siyhfj-QOP-l4sj3mml</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">QCM_SIMPLE3</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siyhfj-QOP-l4sjedgv</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">QCM_SIMPLE4</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siyhfj-QOP-l4six0an</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">QCM_SIMPLE5</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siyhfj-RDOP-l4siwrns</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siyhfj-QOP-l4siwrns</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siyhfj-RDOP-l4sjfp9i</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siyhfj-QOP-l4sjfp9i</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siyhfj-RDOP-l4sj3mml</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siyhfj-QOP-l4sj3mml</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siyhfj-RDOP-l4sjedgv</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siyhfj-QOP-l4sjedgv</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siyhfj-RDOP-l4six0an</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siyhfj-QOP-l4six0an</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">Question à choix multiples simple</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:GridDimension displayCode="false" displayLabel="false" rank="1">
+               <d:CodeDomain>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jfjevykh</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </d:CodeDomain>
+            </d:GridDimension>
+            <d:StructuredMixedGridResponseDomain>
+               <d:GridResponseDomainInMixed>
+                  <d:NominalDomain>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l4siyhfj-RDOP-l4siwrns</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeSubsetInformation>
+                              <r:IncludedCode>
+                                 <r:CodeReference>
+                                    <r:Agency>fr.insee</r:Agency>
+                                    <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                                    <r:Version>1</r:Version>
+                                    <r:TypeOfObject>Code</r:TypeOfObject>
+                                 </r:CodeReference>
+                              </r:IncludedCode>
+                           </r:CodeSubsetInformation>
+                        </r:CodeRepresentation>
+                        <r:DefaultValue/>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:NominalDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
+                  <d:NominalDomain>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l4siyhfj-RDOP-l4sjfp9i</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeSubsetInformation>
+                              <r:IncludedCode>
+                                 <r:CodeReference>
+                                    <r:Agency>fr.insee</r:Agency>
+                                    <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                                    <r:Version>1</r:Version>
+                                    <r:TypeOfObject>Code</r:TypeOfObject>
+                                 </r:CodeReference>
+                              </r:IncludedCode>
+                           </r:CodeSubsetInformation>
+                        </r:CodeRepresentation>
+                        <r:DefaultValue/>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:NominalDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="2" rangeMaximum="2"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
+                  <d:NominalDomain>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l4siyhfj-RDOP-l4sj3mml</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeSubsetInformation>
+                              <r:IncludedCode>
+                                 <r:CodeReference>
+                                    <r:Agency>fr.insee</r:Agency>
+                                    <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                                    <r:Version>1</r:Version>
+                                    <r:TypeOfObject>Code</r:TypeOfObject>
+                                 </r:CodeReference>
+                              </r:IncludedCode>
+                           </r:CodeSubsetInformation>
+                        </r:CodeRepresentation>
+                        <r:DefaultValue/>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:NominalDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
+                  <d:NominalDomain>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l4siyhfj-RDOP-l4sjedgv</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeSubsetInformation>
+                              <r:IncludedCode>
+                                 <r:CodeReference>
+                                    <r:Agency>fr.insee</r:Agency>
+                                    <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                                    <r:Version>1</r:Version>
+                                    <r:TypeOfObject>Code</r:TypeOfObject>
+                                 </r:CodeReference>
+                              </r:IncludedCode>
+                           </r:CodeSubsetInformation>
+                        </r:CodeRepresentation>
+                        <r:DefaultValue/>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:NominalDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="4" rangeMaximum="4"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
+                  <d:NominalDomain>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l4siyhfj-RDOP-l4six0an</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeSubsetInformation>
+                              <r:IncludedCode>
+                                 <r:CodeReference>
+                                    <r:Agency>fr.insee</r:Agency>
+                                    <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                                    <r:Version>1</r:Version>
+                                    <r:TypeOfObject>Code</r:TypeOfObject>
+                                 </r:CodeReference>
+                              </r:IncludedCode>
+                           </r:CodeSubsetInformation>
+                        </r:CodeRepresentation>
+                        <r:DefaultValue/>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:NominalDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="5" rangeMaximum="5"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomainInMixed>
+            </d:StructuredMixedGridResponseDomain>
+         </d:QuestionGrid>
+         <d:QuestionGrid>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l4siwldm</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionGridName>
+               <r:String xml:lang="fr-FR">QCM_COMPLEXE</r:String>
+            </d:QuestionGridName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siwldm-QOP-l4sjfadl</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">QCM_COMPLEXE1</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siwldm-QOP-l4sj9jzg</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">QCM_COMPLEXE2</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siwldm-QOP-l4sjgbit</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">QCM_COMPLEXE3</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siwldm-QOP-l4sjh4t3</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">QCM_COMPLEXE4</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siwldm-QOP-l4sj4dgk</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">QCM_COMPLEXE5</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siwldm-RDOP-l4sjfadl</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siwldm-QOP-l4sjfadl</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siwldm-RDOP-l4sj9jzg</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siwldm-QOP-l4sj9jzg</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siwldm-RDOP-l4sjgbit</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siwldm-QOP-l4sjgbit</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siwldm-RDOP-l4sjh4t3</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siwldm-QOP-l4sjh4t3</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siwldm-RDOP-l4sj4dgk</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l4siwldm-QOP-l4sj4dgk</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">QCM compliquée</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:GridDimension displayCode="false" displayLabel="false" rank="1">
+               <d:CodeDomain>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jfjevykh</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </d:CodeDomain>
+            </d:GridDimension>
+            <d:StructuredMixedGridResponseDomain>
+               <d:GridResponseDomainInMixed>
+                  <d:CodeDomain>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l4sjd7gn</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l4siwldm-RDOP-l4sjfadl</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeListReference>
+                              <r:Agency>fr.insee</r:Agency>
+                              <r:ID>l4sjd7gn</r:ID>
+                              <r:Version>1</r:Version>
+                              <r:TypeOfObject>CodeList</r:TypeOfObject>
+                           </r:CodeListReference>
+                        </r:CodeRepresentation>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:CodeDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
+                  <d:CodeDomain>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l4sjd7gn</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l4siwldm-RDOP-l4sj9jzg</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeListReference>
+                              <r:Agency>fr.insee</r:Agency>
+                              <r:ID>l4sjd7gn</r:ID>
+                              <r:Version>1</r:Version>
+                              <r:TypeOfObject>CodeList</r:TypeOfObject>
+                           </r:CodeListReference>
+                        </r:CodeRepresentation>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:CodeDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="2" rangeMaximum="2"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
+                  <d:CodeDomain>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l4sjd7gn</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l4siwldm-RDOP-l4sjgbit</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeListReference>
+                              <r:Agency>fr.insee</r:Agency>
+                              <r:ID>l4sjd7gn</r:ID>
+                              <r:Version>1</r:Version>
+                              <r:TypeOfObject>CodeList</r:TypeOfObject>
+                           </r:CodeListReference>
+                        </r:CodeRepresentation>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:CodeDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
+                  <d:CodeDomain>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l4sjd7gn</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l4siwldm-RDOP-l4sjh4t3</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeListReference>
+                              <r:Agency>fr.insee</r:Agency>
+                              <r:ID>l4sjd7gn</r:ID>
+                              <r:Version>1</r:Version>
+                              <r:TypeOfObject>CodeList</r:TypeOfObject>
+                           </r:CodeListReference>
+                        </r:CodeRepresentation>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:CodeDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="4" rangeMaximum="4"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
+                  <d:CodeDomain>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l4sjd7gn</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l4siwldm-RDOP-l4sj4dgk</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeListReference>
+                              <r:Agency>fr.insee</r:Agency>
+                              <r:ID>l4sjd7gn</r:ID>
+                              <r:Version>1</r:Version>
+                              <r:TypeOfObject>CodeList</r:TypeOfObject>
+                           </r:CodeListReference>
+                        </r:CodeRepresentation>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:CodeDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="5" rangeMaximum="5"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomainInMixed>
+            </d:StructuredMixedGridResponseDomain>
+         </d:QuestionGrid>
+      </d:QuestionScheme>
+      <l:CategoryScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>CategoryScheme-jfjevykh</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">L_TEST_QCU</r:Content>
+         </r:Label>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>CA-jfjevykh-1</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">code1</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>CA-jfjevykh-2</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">code2</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>CA-jfjevykh-3</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">code3</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>CA-jfjevykh-4</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">code4</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>CA-jfjevykh-5</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">autre</r:Content>
+            </r:Label>
+         </l:Category>
+      </l:CategoryScheme>
+      <l:CategoryScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>CategoryScheme-l4sjd7gn</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">L_QCM</r:Content>
+         </r:Label>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>CA-l4sjd7gn-1</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Un peu</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>CA-l4sjd7gn-2</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Moyen</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>CA-l4sjd7gn-3</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Beaucoup</r:Content>
+            </r:Label>
+         </l:Category>
+      </l:CategoryScheme>
+      <l:CategoryScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>CategoryScheme-l10xmg2l</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">A définir</r:Content>
+         </r:Label>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR"/>
+            </r:Label>
+         </l:Category>
+      </l:CategoryScheme>
+      <l:CodeListScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>DOCSIMPLE-CLS</r:ID>
+         <r:Version>1</r:Version>
+         <l:CodeListSchemeName>
+            <r:String xml:lang="en-IE">DOCSIMPLE</r:String>
+         </l:CodeListSchemeName>
+         <l:CodeList>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjevykh</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">L_TEST_QCU</r:Content>
+            </r:Label>
+            <l:HierarchyType>Regular</l:HierarchyType>
+            <l:Level levelNumber="1">
+               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjevykh-1</r:ID>
+               <r:Version>1</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-jfjevykh-1</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>1</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjevykh-2</r:ID>
+               <r:Version>1</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-jfjevykh-2</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>2</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjevykh-3</r:ID>
+               <r:Version>1</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-jfjevykh-3</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>3</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjevykh-4</r:ID>
+               <r:Version>1</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-jfjevykh-4</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>4</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjevykh-5</r:ID>
+               <r:Version>1</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-jfjevykh-5</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>5</r:Value>
+            </l:Code>
+         </l:CodeList>
+         <l:CodeList>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l4sjd7gn</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">L_QCM</r:Content>
+            </r:Label>
+            <l:HierarchyType>Regular</l:HierarchyType>
+            <l:Level levelNumber="1">
+               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4sjd7gn-1</r:ID>
+               <r:Version>1</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-l4sjd7gn-1</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>A1</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4sjd7gn-2</r:ID>
+               <r:Version>1</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-l4sjd7gn-2</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>A2</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4sjd7gn-3</r:ID>
+               <r:Version>1</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-l4sjd7gn-3</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>A3</r:Value>
+            </l:Code>
+         </l:CodeList>
+         <l:CodeList>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-COMMUN-CL-Booleen</r:ID>
+            <r:Version>1</r:Version>
+            <l:CodeListName>
+               <r:String xml:lang="fr-FR">Booleen</r:String>
+            </l:CodeListName>
+            <l:HierarchyType>Regular</l:HierarchyType>
+            <l:Level levelNumber="1">
+               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+               <r:Version>1</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>1</r:Value>
+            </l:Code>
+         </l:CodeList>
+      </l:CodeListScheme>
+      <l:VariableScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>VariableScheme-l10xmg2l</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">Variable Scheme for the survey</r:Content>
+         </r:Label>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kzwoti00</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">COCHECASE</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">COCHECASE label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfazk91m-QOP-jfazhq57</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfazk91m</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l3lb3uac</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">FILTRE</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">FILTRE label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l3lan1ox-QOP-l3lapqkp</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l3lan1ox</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kyis1dqk</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">TEXTECOURT</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">TEXTECOURT label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfazww20-QOP-jfazpjke</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfazww20</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="10"/>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kzwqis9j</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">TEXTELONG249</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">TEXTELONG249 label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfazwjyv-QOP-jfazfcmi</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfazwjyv</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="249"/>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kzwqqti7</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">TEXTELONG250</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">TEXTELONG250 label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kzwqst6c-QOP-kzwqbyx4</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kzwqst6c</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="250"/>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kk2gf7tv</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">NUMPREF</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">NUMPREF label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kk2fsjst-QOP-kk2g425e</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kk2fsjst</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="20"/>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kyiskh85</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">INTEGER</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">INTEGER label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjh1ndk-QOP-jfjhmav1</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjh1ndk</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">10</r:Low>
+                     <r:High isInclusive="true">100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kyisuqvm</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">FLOAT</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">FLOAT label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjhb2pz-QOP-jfjhhp1i</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjhb2pz</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation decimalPositions="2">
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">10</r:Low>
+                     <r:High isInclusive="true">100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kyis3r6p</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">unit</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">unit label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjtbqh1-QOP-jfjsxwcd</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjtbqh1</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation>
+                  <r:MeasurementUnit>k€</r:MeasurementUnit>
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">10</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kyishnax</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">UNITD</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">UNITD label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kyiseu7q-QOP-kyislpdy</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kyiseu7q</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation decimalPositions="2">
+                  <r:MeasurementUnit>k€</r:MeasurementUnit>
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">10</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kyiuzq0b</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">DATE</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">DATE label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjfckyw-QOP-jfjeyppa</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjfckyw</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:DateTimeRepresentation>
+                  <r:DateFieldFormat>YYYY-MM-DD</r:DateFieldFormat>
+                  <r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV">date</r:DateTypeCode>
+                  <r:Range>
+                     <r:MinimumValue included="true">1980-01-01</r:MinimumValue>
+                     <r:MaximumValue included="true">2022-01-01</r:MaximumValue>
+                  </r:Range>
+               </r:DateTimeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kvl6czto</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">DAAAA</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">DAAAA label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kvl6bpxb-QOP-kvl62are</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kvl6bpxb</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:DateTimeRepresentation>
+                  <r:DateFieldFormat>YYYY</r:DateFieldFormat>
+                  <r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV">gYear</r:DateTypeCode>
+                  <r:Range>
+                     <r:MinimumValue included="true">1900</r:MinimumValue>
+                     <r:MaximumValue included="true">2022</r:MaximumValue>
+                  </r:Range>
+               </r:DateTimeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jfjewzwk</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">BOOLEN</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">BOOLEN label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjeud07-QOP-jfjezhiz</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjeud07</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kc2475xm</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">radio</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">radio label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjepz6i-QOP-jfjepr5a</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjepz6i</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jfjevykh</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kc241bj3</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">checkbox</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">checkbox label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjero7b-QOP-jfjepr5a</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjero7b</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jfjevykh</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>kc24j6oj</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">dropdown</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">dropdown label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjfae9f-QOP-jfjepr5a</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjfae9f</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jfjevykh</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l4sitvvj</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">QCM_SIMPLE1</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">1 - code1</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siyhfj-QOP-l4siwrns</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siyhfj</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l4sja6er</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">QCM_SIMPLE2</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">2 - code2</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siyhfj-QOP-l4sjfp9i</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siyhfj</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l4sj236e</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">QCM_SIMPLE3</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">3 - code3</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siyhfj-QOP-l4sj3mml</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siyhfj</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l4six1iq</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">QCM_SIMPLE4</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">4 - code4</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siyhfj-QOP-l4sjedgv</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siyhfj</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l4sjcrgi</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">QCM_SIMPLE5</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">5 - autre</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siyhfj-QOP-l4six0an</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siyhfj</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l4siyp3k</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">QCM_COMPLEXE1</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">1 - code1</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siwldm-QOP-l4sjfadl</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siwldm</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>l4sjd7gn</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l4sj5erw</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">QCM_COMPLEXE2</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">2 - code2</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siwldm-QOP-l4sj9jzg</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siwldm</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>l4sjd7gn</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l4sjekop</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">QCM_COMPLEXE3</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">3 - code3</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siwldm-QOP-l4sjgbit</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siwldm</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>l4sjd7gn</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l4sj26rp</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">QCM_COMPLEXE4</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">4 - code4</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siwldm-QOP-l4sjh4t3</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siwldm</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>l4sjd7gn</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l4sjb4fl</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">QCM_COMPLEXE5</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">5 - autre</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siwldm-QOP-l4sj4dgk</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siwldm</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>l4sjd7gn</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:VariableGroup>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-Instrument-l10xmg2l-vg</r:ID>
+            <r:Version>1</r:Version>
+            <r:BasedOnObject>
+               <r:BasedOnReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>Instrument-l10xmg2l</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Instrument</r:TypeOfObject>
+               </r:BasedOnReference>
+            </r:BasedOnObject>
+            <l:TypeOfVariableGroup>Questionnaire</l:TypeOfVariableGroup>
+            <l:VariableGroupName>
+               <r:String>DOCSIMPLE</r:String>
+            </l:VariableGroupName>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kzwoti00</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l3lb3uac</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kyis1dqk</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kzwqis9j</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kzwqqti7</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kk2gf7tv</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kyiskh85</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kyisuqvm</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kyis3r6p</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kyishnax</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kyiuzq0b</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kvl6czto</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jfjewzwk</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kc2475xm</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kc241bj3</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kc24j6oj</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4sitvvj</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4sja6er</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4sj236e</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4six1iq</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4sjcrgi</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4siyp3k</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4sj5erw</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4sjekop</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4sj26rp</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l4sjb4fl</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+         </l:VariableGroup>
+      </l:VariableScheme>
+      <d:ProcessingInstructionScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-PIS-1</r:ID>
+         <r:Version>1</r:Version>
+         <d:ProcessingInstructionSchemeName>
+            <r:String xml:lang="en-IE">SIMPSONS</r:String>
+         </d:ProcessingInstructionSchemeName>
+         <r:Label>
+            <r:Content xml:lang="en-IE">Processing instructions of the Simpsons questionnaire</r:Content>
+         </r:Label>
+      </d:ProcessingInstructionScheme>
+      <r:ManagedRepresentationScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-MRS</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="en-IE">Liste de formats numériques et dates de
+                            l'enquête</r:Content>
+            <r:Content xml:lang="en-IE">Numeric and DateTime list for the survey</r:Content>
+         </r:Label>
+         <r:ManagedDateTimeRepresentation>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-COMMUN-MNR-DateTimedate-YYYY-MM-DD</r:ID>
+            <r:Version>1</r:Version>
+            <r:DateFieldFormat>YYYY-MM-DD</r:DateFieldFormat>
+            <r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV">date</r:DateTypeCode>
+            <r:Range>
+               <r:MinimumValue included="true">1900-01-01</r:MinimumValue>
+               <r:MaximumValue included="true">format-date(current-date(),'[Y0001]-[M01]-[D01]')</r:MaximumValue>
+            </r:Range>
+         </r:ManagedDateTimeRepresentation>
+         <r:ManagedDateTimeRepresentation>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-COMMUN-MNR-DateTimedate-YYYY</r:ID>
+            <r:Version>1</r:Version>
+            <r:DateFieldFormat>YYYY</r:DateFieldFormat>
+            <r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV">gYear</r:DateTypeCode>
+            <r:Range>
+               <r:MinimumValue included="true">1900</r:MinimumValue>
+               <r:MaximumValue included="true">year-from-date(current-date())</r:MaximumValue>
+            </r:Range>
+         </r:ManagedDateTimeRepresentation>
+      </r:ManagedRepresentationScheme>
+   </g:ResourcePackage>
+   <s:StudyUnit>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>StudyUnit-l10xmg2l</r:ID>
+      <r:Version>1</r:Version>
+      <r:ExPostEvaluation/>
+      <d:DataCollection>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>DataCollection-l10xmg2l</r:ID>
+         <r:Version>1</r:Version>
+         <r:QuestionSchemeReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>QuestionScheme-l10xmg2l</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>QuestionScheme</r:TypeOfObject>
+         </r:QuestionSchemeReference>
+         <r:ControlConstructSchemeReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>ControlConstructScheme-l10xmg2l</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>ControlConstructScheme</r:TypeOfObject>
+         </r:ControlConstructSchemeReference>
+         <r:InterviewerInstructionSchemeReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>InterviewerInstructionScheme-l10xmg2l</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>InterviewerInstructionScheme</r:TypeOfObject>
+         </r:InterviewerInstructionSchemeReference>
+         <d:InstrumentScheme xml:lang="fr-FR">
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>InstrumentScheme-l10xmg2l</r:ID>
+            <r:Version>1</r:Version>
+            <d:Instrument xmlns:c="ddi:conceptualcomponent:3_3" xmlns:cm="ddi:comparative:3_3" xmlns:pogues="http://xml.insee.fr/schema/applis/pogues" xmlns:pr="ddi:ddiprofile:3_3">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>Instrument-l10xmg2l</r:ID>
+               <r:Version>1</r:Version>
+               <d:InstrumentName>
+                  <r:String>DOCSIMPLE</r:String>
+               </d:InstrumentName>
+               <r:Label>
+                  <r:Content xml:lang="fr-FR">Questionnaires simple - réponses simples questionnaire</r:Content>
+               </r:Label>
+               <d:TypeOfInstrument>A définir</d:TypeOfInstrument>
+               <d:ControlConstructReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>Sequence-l10xmg2l</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Sequence</r:TypeOfObject>
+               </d:ControlConstructReference>
+            </d:Instrument>
+         </d:InstrumentScheme>
+      </d:DataCollection>
+   </s:StudyUnit>
+</DDIInstance>
