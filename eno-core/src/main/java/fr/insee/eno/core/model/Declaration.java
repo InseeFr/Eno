@@ -12,13 +12,16 @@ import lombok.Setter;
 @Setter
 public class Declaration extends EnoObject {
 
-    //@DDI(contextType = StatementItemType.class, field = "") //TODO
+    @DDI(contextType = StatementItemType.class, field = "getIDArray(0).getStringValue()")
     String id;
 
+    @DDI(contextType = StatementItemType.class,
+            field = "getDisplayTextArray(0).getTextContentArray(0).getText().getStringValue()")
     String label;
 
     @Lunatic(contextType = DeclarationType.class,
             field = "setDeclarationType(T(fr.insee.lunatic.model.flat.DeclarationPositionEnum).valueOf(#param))")
+    String declarationType = "STATEMENT";
     String position = "BEFORE_QUESTION_TEXT";
 
 }
