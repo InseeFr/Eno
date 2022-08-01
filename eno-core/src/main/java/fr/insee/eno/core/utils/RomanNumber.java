@@ -4,7 +4,7 @@ import java.util.TreeMap;
 
 public class RomanNumber { // https://stackoverflow.com/questions/12967896/converting-integers-to-roman-numerals-java
 
-    private final static TreeMap<Integer, String> map = new TreeMap<Integer, String>();
+    private final static TreeMap<Integer, String> map = new TreeMap<>();
 
     static {
 
@@ -24,12 +24,26 @@ public class RomanNumber { // https://stackoverflow.com/questions/12967896/conve
 
     }
 
+    /**
+     * Return the roman representation of number.
+     *
+     * @param number : must be > 0
+     * @return : a String which is the roman representation of number
+     * @throws IllegalArgumentException if number is not > 0
+     */
     public static String toRoman(int number) {
-        int l =  map.floorKey(number);
+        if (number <= 0)
+            throw new IllegalArgumentException("RomanNumber.toNumber only accepts > 0 numbers (" + number + " provided)");
+        return toRomanRecursively(number);
+    }
+
+    private static String toRomanRecursively(int number) {
+        var l =  map.floorKey(number);
         if ( number == l ) {
             return map.get(number);
         }
         return map.get(l) + toRoman(number-l);
     }
+
 
 }
