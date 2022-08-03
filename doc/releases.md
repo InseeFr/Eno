@@ -1,5 +1,11 @@
 # Eno Releases note
 
+## 2.3.10 - 03/08/22
+- **[params][ddi2out]** splitting capi-cati into separated capi and cati modes
+
+## 2.3.9 - 01/07/22
+- **[poguesXML2ddi][core]** Add some measurement units
+
 ## 2.3.8 - 23/06/22
 - **[dependencies]** Upgrading dependancies.
 - **[poguesXML2ddi][core]** Add some measurement units
