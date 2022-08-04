@@ -62,6 +62,8 @@ public class EnoProcessing {
         enoComponentMap.putAll(subsequenceMap);
         enoComponentMap.putAll(questionMap);
         // (technical processing)
+        resolveFilterExpressions(enoQuestionnaire);
+        insertFilters(enoQuestionnaire);
         insertDeclarations(enoQuestionnaire);
         insertControls(enoQuestionnaire);
         //
@@ -84,6 +86,29 @@ public class EnoProcessing {
     /** Return true if the given instruction matches the selected modes from parameters. */
     private boolean hasNoSelectedMode(DeclarationInterface declaration) {
         return declaration.getModes().stream().noneMatch(parameters.getSelectedModes()::contains);
+    }
+
+    /** In DDI, VTL expressions contain variables references instead of their name.
+     * This method replaces the references with the names. */
+    private void resolveFilterExpressions(EnoQuestionnaire enoQuestionnaire) {
+        for (Filter filter : enoQuestionnaire.getFilters()) {
+            String expression = filter.getExpression();
+            for (Filter.BindingReference bindingReference : filter.getBindingReferences()) {
+                expression = expression.replace(bindingReference.getId(), bindingReference.getVariableName());
+            }
+            filter.setExpression(expression);
+        }
+    }
+
+    /** This method iterates on filters of the given Eno questionnaire, and set the filter expression
+     * in each concerned component. */
+    private void insertFilters(EnoQuestionnaire enoQuestionnaire) {
+        for (Filter filter : enoQuestionnaire.getFilters()) {
+            for (String componentId : filter.getComponentReferences()) {
+                EnoComponent enoComponent = enoComponentMap.get(componentId);
+                enoComponent.setFilter(filter);
+            }
+        }
     }
 
     /** Controls are mapped directly in a flat list in the questionnaire object.
