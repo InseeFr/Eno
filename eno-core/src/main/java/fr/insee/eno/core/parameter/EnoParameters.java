@@ -35,7 +35,7 @@ public class EnoParameters {
         missingVariables = false;
     }
 
-    public String lunaticNumberingMode(QuestionNumberingMode numberingMode) {
+    public static String lunaticNumberingMode(QuestionNumberingMode numberingMode) {
         return switch (numberingMode) {
             case NONE -> "none"; //TODO: check what is the correct value for Lunatic
             case SEQUENCE -> "sequence"; //TODO: check what is the correct value for Lunatic
