@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
-public class DDIToLunatic {
+public class DDIToLunaticTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
