@@ -94,7 +94,7 @@ public class EnoQuestionnaire extends EnoObject {
 
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
-                    ".?[#this instanceof T(datacollection33.IfThenElseTextType)]")
+                    ".?[#this instanceof T(datacollection33.IfThenElseType)]")
     private final List<Filter> filters = new ArrayList<>();
 
     @DDI(contextType = DDIInstanceType.class,
