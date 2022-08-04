@@ -28,6 +28,11 @@ public class Filter extends EnoObject {
         
     }
 
+    /** Default expression is "true". */
+    public Filter() {
+        expression = "true";
+    }
+
     @DDI(contextType = IfThenElseType.class, field = "getIDArray(0).getStringValue()")
     private String id;
 
