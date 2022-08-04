@@ -38,6 +38,7 @@ public class EnoProcessing {
     Map<String, Sequence> sequenceMap = new HashMap<>();
     Map<String, Subsequence> subsequenceMap = new HashMap<>();
     Map<String, Question> questionMap = new HashMap<>();
+    Map<String, EnoComponent> enoComponentMap = new HashMap<>();
 
     public EnoProcessing() {
         this.parameters = new EnoParameters();
@@ -49,7 +50,7 @@ public class EnoProcessing {
 
     public void applyProcessing(EnoQuestionnaire enoQuestionnaire) {
         //
-        modeSelection(enoQuestionnaire);
+        modeSelection();
         //
         if (parameters.isCommentSection()) addCommentSection(enoQuestionnaire);
         //
@@ -57,6 +58,9 @@ public class EnoProcessing {
         enoQuestionnaire.getSubsequences().forEach(subsequence -> subsequenceMap.put(subsequence.getId(), subsequence));
         enoQuestionnaire.getSingleResponseQuestions().forEach(question -> questionMap.put(question.getId(), question));
         enoQuestionnaire.getMultipleResponseQuestions().forEach(question -> questionMap.put(question.getId(), question));
+        enoComponentMap.putAll(sequenceMap);
+        enoComponentMap.putAll(subsequenceMap);
+        enoComponentMap.putAll(questionMap);
         // (technical processing)
         insertDeclarations(enoQuestionnaire);
         insertControls(enoQuestionnaire);
@@ -70,25 +74,10 @@ public class EnoProcessing {
 
     /** Remove elements that does not correspond to the "selected modes" parameter.
      * For now, only declarations and instructions are concerned by mode selection. */
-    private void modeSelection(EnoQuestionnaire enoQuestionnaire) {
-        /* TODO: (see comments that contain 'clumsy') an EnoComponent interface
-            that would be implemented by Question and AbstractSequence
-            would allow to refactor portions of code. */
-        for (Sequence sequence : enoQuestionnaire.getSequences()) {
-            sequence.getDeclarations().removeIf(this::hasNoSelectedMode);
-            sequence.getInstructions().removeIf(this::hasNoSelectedMode);
-        }
-        for (Subsequence subsequence : enoQuestionnaire.getSubsequences()) {
-            subsequence.getDeclarations().removeIf(this::hasNoSelectedMode);
-            subsequence.getInstructions().removeIf(this::hasNoSelectedMode);
-        }
-        for (SingleResponseQuestion question : enoQuestionnaire.getSingleResponseQuestions()) {
-            question.getDeclarations().removeIf(this::hasNoSelectedMode);
-            question.getInstructions().removeIf(this::hasNoSelectedMode);
-        }
-        for (MultipleResponseQuestion question : enoQuestionnaire.getMultipleResponseQuestions()) {
-            question.getDeclarations().removeIf(this::hasNoSelectedMode);
-            question.getInstructions().removeIf(this::hasNoSelectedMode);
+    private void modeSelection() {
+        for (EnoComponent enoComponent : enoComponentMap.values()) {
+            enoComponent.getDeclarations().removeIf(this::hasNoSelectedMode);
+            enoComponent.getInstructions().removeIf(this::hasNoSelectedMode);
         }
     }
 
