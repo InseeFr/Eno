@@ -71,5 +71,9 @@ public class DDIIndexTest {
         //
         Object instruction = ddiIndex.get("kk47fewm");
         assertNotNull(instruction);
+
+        //
+        Object ifThenElse = ddiIndex.get("l3laoj9p");
+        assertNotNull(ifThenElse);
     }
 }

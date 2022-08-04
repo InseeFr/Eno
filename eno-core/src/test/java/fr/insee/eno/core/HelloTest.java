@@ -27,6 +27,7 @@ import reusable33.ReferenceType;
 import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -264,6 +265,11 @@ public class HelloTest {
         DDI ddiAnnotation = sTypeDescriptor.getAnnotation(DDI.class);
         assertNotNull(ddiAnnotation);
         assertEquals("hello", ddiAnnotation.field());
+    }
+
+    @Test
+    public void testIntersection() {
+        assertFalse(Stream.of(1,2).noneMatch(List.of(2,3,4)::contains));
     }
 
 }

@@ -16,8 +16,8 @@ public class DDIToEnoTest {
     @Test
     public void writeEnoFileFromDDI() throws IOException {
         //
-        String fileName = "l10xmg2l_qcm_obligatoires_instructions";
-        //String fileName = "controles";
+        //String fileName = "l10xmg2l";
+        String fileName = "sandbox";
 
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
