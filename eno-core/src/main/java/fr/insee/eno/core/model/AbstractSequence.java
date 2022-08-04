@@ -15,7 +15,7 @@ import java.util.List;
  * In Lunatic, a sequence is a SequenceType, a subsequence is a Subsequence object. */
 @Getter
 @Setter
-public abstract class AbstractSequence extends EnoObject {
+public abstract class AbstractSequence extends EnoObject implements EnoComponent {
 
     @DDI(contextType = SequenceType.class, field = "getIDArray(0).getStringValue()")
     @Lunatic(contextType = {fr.insee.lunatic.model.flat.SequenceType.class, Subsequence.class}, field = "setId(#param)")
@@ -45,6 +45,13 @@ public abstract class AbstractSequence extends EnoObject {
      * In Lunatic, the sequence / subsequence object has a list of controls. */
     @Lunatic(contextType = {fr.insee.lunatic.model.flat.SequenceType.class, Subsequence.class}, field = "getControls()")
     private final List<Control> controls = new ArrayList<>();
+
+    /** Sequence / subsequence filter.
+     * In DDI, the filters are mapped in the questionnaire object.
+     * If there is a declared filter for this sequence / subsequence, it is put here through a 'processing' class.
+     * Otherwise, there is a default filter (with expression "true").
+     * In Lunatic, a ComponentType object has a ConditionFilter object. */
+    private Filter filter = new Filter();
 
     /** Ordered list of references to all objects in the sequence / subsequence
      * that corresponds to a subsequence (if any) or a question. */
