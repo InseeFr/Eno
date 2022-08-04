@@ -3,6 +3,7 @@ package fr.insee.eno.core.model;
 import datacollection33.SequenceType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.lunatic.model.flat.Subsequence;
 import lombok.Getter;
 import lombok.Setter;
 
