@@ -64,6 +64,8 @@ public class EnoProcessing {
         if (parameters.isSequenceNumbering()) addNumberingInSequences(enoQuestionnaire);
         addNumberingInQuestions(enoQuestionnaire, parameters.getQuestionNumberingMode());
         if (parameters.isArrowCharInQuestions()) addArrowCharInQuestion();
+        //
+        addMissingVariables(enoQuestionnaire);
     }
 
     /** Remove elements that does not correspond to the "selected modes" parameter.
@@ -240,6 +242,9 @@ public class EnoProcessing {
     }
 
     private void addNumberingInQuestions(EnoQuestionnaire enoQuestionnaire, QuestionNumberingMode mode) {
+        //
+        enoQuestionnaire.setQuestionNumberingMode(mode);
+        //
         if (mode != QuestionNumberingMode.NONE) {
             int questionNumber = 1;
             for (String sequenceId : enoQuestionnaire.getSequenceReferences()) {
@@ -271,6 +276,14 @@ public class EnoProcessing {
         for (Question question : questionMap.values()) {
             String questionLabel = question.getLabel();
             question.setLabel(QUESTION_ARROW_CHAR + " " + questionLabel);
+        }
+    }
+
+    private void addMissingVariables(EnoQuestionnaire enoQuestionnaire) {
+        enoQuestionnaire.setMissingVariables(parameters.isMissingVariables());
+        if (parameters.isMissingVariables()) {
+            log.info("Adding 'missing' variables in questionnaire.");
+            //TODO
         }
     }
 

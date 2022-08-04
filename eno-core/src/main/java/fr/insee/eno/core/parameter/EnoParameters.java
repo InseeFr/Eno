@@ -20,6 +20,7 @@ public class EnoParameters {
     private QuestionNumberingMode questionNumberingMode;
     private boolean arrowCharInQuestions;
     private List<Mode> selectedModes = new ArrayList<>();
+    private boolean missingVariables;
 
     public EnoParameters() {
         defaultParameters();
@@ -31,6 +32,15 @@ public class EnoParameters {
         questionNumberingMode = QuestionNumberingMode.SEQUENCE;
         arrowCharInQuestions = true;
         selectedModes.addAll(List.of(CAPI, CATI, CAWI, PAPI));
+        missingVariables = false;
+    }
+
+    public String lunaticNumberingMode(QuestionNumberingMode numberingMode) {
+        return switch (numberingMode) {
+            case NONE -> "none"; //TODO: check what is the correct value for Lunatic
+            case SEQUENCE -> "sequence"; //TODO: check what is the correct value for Lunatic
+            case ALL -> "question";
+        };
     }
 
 }
