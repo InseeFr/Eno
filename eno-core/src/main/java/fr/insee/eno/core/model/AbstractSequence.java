@@ -51,6 +51,8 @@ public abstract class AbstractSequence extends EnoObject implements EnoComponent
      * If there is a declared filter for this sequence / subsequence, it is put here through a 'processing' class.
      * Otherwise, there is a default filter (with expression "true").
      * In Lunatic, a ComponentType object has a ConditionFilter object. */
+    @Lunatic(contextType = {fr.insee.lunatic.model.flat.SequenceType.class, Subsequence.class},
+            field = "setConditionFilter(#param)")
     private Filter filter = new Filter();
 
     /** Ordered list of references to all objects in the sequence / subsequence

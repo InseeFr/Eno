@@ -4,6 +4,8 @@ import datacollection33.IfThenElseType;
 import datacollection33.QuestionConstructType;
 import datacollection33.SequenceType;
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.lunatic.model.flat.ConditionFilterType;
 import lombok.Getter;
 import lombok.Setter;
 import reusable33.InParameterType;
@@ -43,6 +45,7 @@ public class Filter extends EnoObject {
 
     /** Command that determines if the filter is applied or not. */
     @DDI(contextType = IfThenElseType.class, field = "getIfCondition().getCommandArray(0).getCommandContent()")
+    @Lunatic(contextType = ConditionFilterType.class, field = "setValue(#param)")
     private String expression;
 
     /** List of the identifier of components that are in the scope of the filter.

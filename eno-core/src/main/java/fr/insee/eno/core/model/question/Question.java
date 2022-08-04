@@ -46,6 +46,8 @@ public abstract class Question extends EnoObject implements EnoComponent {
      * If there is a declared filter for this question, it is put here through a 'processing' class.
      * Otherwise, there is a default filter (with expression "true").
      * In Lunatic, a ComponentType object has a ConditionFilter object. */
+    @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class, CheckboxGroup.class, Table.class},
+            field = "setConditionFilter(#param)")
     private Filter filter = new Filter();
 
 }
