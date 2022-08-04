@@ -51,18 +51,13 @@ public abstract class AbstractSequence extends EnoObject {
     @DDI(contextType = SequenceType.class,
             field = "getControlConstructReferenceList()" +
                     ".?[#this.getTypeOfObject().toString() == 'QuestionConstruct'" +
-                    "or #this.getTypeOfObject().toString() == 'Sequence'" +
-                    "or #this.getTypeOfObject().toString() == 'IfThenElse']" +
+                    "or #this.getTypeOfObject().toString() == 'Sequence']" +
                     ".![#index.get(#this.getIDArray(0).getStringValue())]" +
                     ".![#this instanceof T(datacollection33.QuestionConstructType) ? " +
                     "#this.getQuestionReference().getIDArray(0).getStringValue() : " +
                     "#this instanceof T(datacollection33.SequenceType) ? " +
                     "#this.getIDArray(0).getStringValue() : " +
-                    "#this instanceof T(datacollection33.IfThenElseType) ? " +
-                    "#index.get(#index.get(#this.getThenConstructReference().getIDArray(0).getStringValue())" +
-                    ".getControlConstructReferenceArray(0).getIDArray(0).getStringValue())" +
-                    ".getQuestionReference().getIDArray(0).getStringValue() " +
-                    ": null]")
+                    "null]")
     private final List<String> componentReferences = new ArrayList<>();
 
     /** Ordered list of all items in the sequence / subsequence.
