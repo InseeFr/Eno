@@ -6,7 +6,7 @@ import lombok.Setter;
 
 /** Eno object for subsequence.
  * Note: a 'subsequence' is sometimes called a 'submodule' in Eno.
- * A subsequence can contain the same king of elements as sequence, except subsequences.
+ * A subsequence can contain the same kind of elements as sequence, except subsequences.
  * In DDI, a sequence is a SequenceType that has the value 'submodule' in its 'type of sequence' field.
  * In Lunatic, a sequence is a Subsequence object. */
 @Getter
