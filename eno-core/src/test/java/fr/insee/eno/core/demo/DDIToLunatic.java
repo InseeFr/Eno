@@ -24,10 +24,11 @@ public class DDIToLunatic {
 
     @ParameterizedTest
     @ValueSource(strings = {
+            "l10xmg2l",
             //"l10xmg2l_avec_qcm_et_obligatoires",
             //"questionnaire-avec-filtre-eno-java",
             //"l10xmg2l_qcm_obligatoires_instructions",
-            "controles",
+            //"controles",
     })
     public void writeJsonLunaticFromDDI(String fileName) throws IOException, JAXBException {
         //
@@ -43,7 +44,7 @@ public class DDIToLunatic {
         EnoParameters enoParameters = new EnoParameters();
         enoParameters.setSelectedModes(List.of(Mode.CAPI, Mode.CATI));
         //
-        EnoProcessing enoProcessing = new EnoProcessing();
+        EnoProcessing enoProcessing = new EnoProcessing(enoParameters);
         enoProcessing.applyProcessing(enoQuestionnaire);
 
         //
