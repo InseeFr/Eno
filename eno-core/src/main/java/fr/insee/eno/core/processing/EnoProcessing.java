@@ -1,9 +1,7 @@
 package fr.insee.eno.core.processing;
 
 import fr.insee.eno.core.model.*;
-import fr.insee.eno.core.model.question.MultipleResponseQuestion;
 import fr.insee.eno.core.model.question.Question;
-import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.model.question.TextQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.utils.RomanNumber;
