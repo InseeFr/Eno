@@ -3611,7 +3611,7 @@
                 paginatedLoop="true">
       <iterations>
          <value>count(NAME_CHAR)</value>
-         <type>VTL|MD</type>
+         <type>VTL</type>
       </iterations>
       <conditionFilter>
          <value>(READY)</value>
