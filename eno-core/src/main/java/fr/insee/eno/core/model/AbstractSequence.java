@@ -36,7 +36,8 @@ public abstract class AbstractSequence extends EnoObject implements EnoComponent
 
     /** Sequence / subsequence declarations.
      * In DDI, the declarations are mapped in the questionnaire object, and are put here through a 'processing' class.
-     * In Lunatic, instructions and declarations belongs to the same list. */
+     * In Lunatic, instructions and declarations belongs to the same list.
+     * TODO: NOTE: seems like a sequence or subsequence cannot have declarations (Pogues). */
     @Lunatic(contextType = {fr.insee.lunatic.model.flat.SequenceType.class, Subsequence.class}, field = "getDeclarations()")
     private final List<Declaration> declarations = new ArrayList<>();
 
