@@ -75,6 +75,7 @@ public class EnoProcessing {
         insertFilters(enoQuestionnaire);
         resolveDeclarationLabels(enoQuestionnaire);
         insertDeclarations(enoQuestionnaire);
+        resolveControlExpressions(enoQuestionnaire);
         insertControls(enoQuestionnaire);
         //
         modeSelection();
@@ -148,6 +149,17 @@ public class EnoProcessing {
                 expression = expression.replace(bindingReference.getId(), bindingReference.getVariableName());
             }
             filter.setExpression(expression);
+        }
+    }
+
+    /** Same principle as 'resolveFilterExpressions' method for controls. */
+    private void resolveControlExpressions(EnoQuestionnaire enoQuestionnaire) {
+        for (Control control : enoQuestionnaire.getControls()) {
+            String expression = control.getExpression();
+            for (BindingReference bindingReference : control.getBindingReferences()) {
+                expression = expression.replace(bindingReference.getId(), bindingReference.getVariableName());
+            }
+            control.setExpression(expression);
         }
     }
 
