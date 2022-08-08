@@ -8,13 +8,11 @@ import fr.insee.eno.core.reference.DDIIndex;
 import instance33.DDIInstanceDocument;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
-import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import reusable33.AbstractIdentifiableType;
@@ -92,74 +90,80 @@ public class DDIMapper extends Mapper {
                 else if (List.class.isAssignableFrom(classType)) {
                     // Get the DDI collection instance by evaluating the expression
                     List<?> ddiCollection = expression.getValue(context, ddiInstance, List.class);
-                    if (ddiCollection == null) {
-                        log.warn(String.format(
+                    // If the DDI collection is null and null is not allowed by the annotation, exception
+                    if (ddiCollection == null && !ddiAnnotation.allowNullList()) {
+                        log.debug(String.format(
                                 "Incoherent expression in field of DDI annotation on property '%s' in class %s.",
                                 propertyDescriptor.getName(), enoInstance.getClass()));
+                        log.debug("If the DDI list can actually be null, use the annotation property to allow it.");
                         throw new RuntimeException(String.format(
                                 "DDI list mapped by the annotation on property '%s' in class %s is null",
                                 propertyDescriptor.getName(), enoInstance.getClass()));
                     }
-                    // Get the content type of the model collection
-                    Class<?> modelTargetType = typeDescriptor.getResolvableType()
-                            .getGeneric(0).getRawClass();
-                    assert modelTargetType != null;
-                    // List of simple types
-                    if (isSimpleType(modelTargetType)) {
-                        try {
-                            @SuppressWarnings("unchecked")
-                            Collection<Object> modelCollection = (Collection<Object>) propertyDescriptor.getReadMethod()
-                                    .invoke(enoInstance);
-                            modelCollection.addAll(ddiCollection);
-                        } catch (IllegalAccessException | InvocationTargetException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                    // Lists of complex types // Get the model collection instance
-                    else if (EnoObject.class.isAssignableFrom(modelTargetType)) {
-                        try {
-                            @SuppressWarnings("unchecked")
-                            Collection<EnoObject> modelCollection = (Collection<EnoObject>) propertyDescriptor.getReadMethod()
-                                    .invoke(enoInstance);
-                            // Iterate on the DDI collection
-                            for (int i=0; i<ddiCollection.size(); i++) {
-                                Object ddiItemInstance2 = ddiCollection.get(i);
-                                // Put current list index in context TODO: I don't really like this but... :(((
-                                context.setVariable("listIndex", i);
-                                // Instantiate a model object per DDI object and add it in the model collection
-                                EnoObject modelItemInstance2;
-                                // If the list content type is abstract call the converter
-                                if (Modifier.isAbstract(modelTargetType.getModifiers())) {
-                                    modelItemInstance2 = DDIConverter.instantiateFromDDIObject(ddiItemInstance2);
-                                }
-                                // Else, call class constructor
-                                else {
-                                    try {
-                                        modelItemInstance2 = (EnoObject) modelTargetType.getDeclaredConstructor().newInstance();
-                                    } catch (NoSuchMethodException | InstantiationException e) {
-                                        log.warn("Default constructor may be missing in class " + modelTargetType);
-                                        throw new RuntimeException("Unable to create instance for class " + modelTargetType);
-                                    }
-                                }
-                                // Keep parent reference
-                                modelItemInstance2.setParent(enoInstance);
-                                // Add the created instance in the model list
-                                modelCollection.add(modelItemInstance2);
-                                // Recursive call on these instances
-                                recursiveMapping(modelItemInstance2, ddiItemInstance2);
+                    // If the DDI collection is null and null is allowed, do nothing, else:
+                    else if (ddiCollection != null) {
+                        // Get the content type of the model collection
+                        Class<?> modelTargetType = typeDescriptor.getResolvableType()
+                                .getGeneric(0).getRawClass();
+                        assert modelTargetType != null;
+                        // List of simple types
+                        if (isSimpleType(modelTargetType)) {
+                            try {
+                                @SuppressWarnings("unchecked")
+                                Collection<Object> modelCollection = (Collection<Object>) propertyDescriptor.getReadMethod()
+                                        .invoke(enoInstance);
+                                modelCollection.addAll(ddiCollection);
+                            } catch (IllegalAccessException | InvocationTargetException e) {
+                                throw new RuntimeException(e);
                             }
-                        } catch (IllegalAccessException | InvocationTargetException e) {
-                            throw new RuntimeException(String.format(
-                                    "Error when calling read method from property descriptor '%s' in class %s.",
-                                    propertyDescriptor.getName(), enoInstance.getClass()),
-                                    e);
+                        }
+                        // Lists of complex types // Get the model collection instance
+                        else if (EnoObject.class.isAssignableFrom(modelTargetType)) {
+                            try {
+                                @SuppressWarnings("unchecked")
+                                Collection<EnoObject> modelCollection = (Collection<EnoObject>) propertyDescriptor.getReadMethod()
+                                        .invoke(enoInstance);
+                                // Iterate on the DDI collection
+                                for (int i=0; i<ddiCollection.size(); i++) {
+                                    Object ddiItemInstance2 = ddiCollection.get(i);
+                                    // Put current list index in context TODO: I don't really like this but... :(((
+                                    context.setVariable("listIndex", i);
+                                    // Instantiate a model object per DDI object and add it in the model collection
+                                    EnoObject modelItemInstance2;
+                                    // If the list content type is abstract call the converter
+                                    if (Modifier.isAbstract(modelTargetType.getModifiers())) {
+                                        modelItemInstance2 = DDIConverter.instantiateFromDDIObject(ddiItemInstance2);
+                                    }
+                                    // Else, call class constructor
+                                    else {
+                                        try {
+                                            modelItemInstance2 = (EnoObject) modelTargetType.getDeclaredConstructor().newInstance();
+                                        } catch (NoSuchMethodException | InstantiationException e) {
+                                            log.warn("Default constructor may be missing in class " + modelTargetType);
+                                            throw new RuntimeException("Unable to create instance for class " + modelTargetType);
+                                        }
+                                    }
+                                    // Keep parent reference
+                                    modelItemInstance2.setParent(enoInstance);
+                                    // Add the created instance in the model list
+                                    modelCollection.add(modelItemInstance2);
+                                    // Recursive call on these instances
+                                    recursiveMapping(modelItemInstance2, ddiItemInstance2);
+                                }
+                            } catch (IllegalAccessException | InvocationTargetException e) {
+                                throw new RuntimeException(String.format(
+                                        "Error when calling read method from property descriptor '%s' in class %s.",
+                                        propertyDescriptor.getName(), enoInstance.getClass()),
+                                        e);
+                            }
+                        }
+                        //
+                        else {
+                            log.debug(ddiAnnotation.field());
+                            throw new RuntimeException("Object is neither a simple type nor an Eno object."); //TODO: pass parameters in exception message
                         }
                     }
-                    //
-                    else {
-                        log.debug(ddiAnnotation.field());
-                        throw new RuntimeException("Object is neither a simple type nor an Eno object."); //TODO: pass parameters in exception message
-                    }
+
                 }
 
                 // Complex types
