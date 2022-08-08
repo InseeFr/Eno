@@ -76,4 +76,18 @@ public class DDIIndexTest {
         Object ifThenElse = ddiIndex.get("l3laoj9p");
         assertNotNull(ifThenElse);
     }
+
+    @Test
+    public void indexSandboxDDI() throws IOException {
+        //
+        DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
+                DDIIndexTest.class.getClassLoader().getResource("in/ddi/sandbox.xml"));
+        //
+        DDIIndex ddiIndex = new DDIIndex();
+        ddiIndex.indexDDI(ddiInstanceDocument);
+
+        //
+        Object processingInstruction = ddiIndex.get("l6f4bgf0-GI");
+        assertNotNull(processingInstruction);
+    }
 }

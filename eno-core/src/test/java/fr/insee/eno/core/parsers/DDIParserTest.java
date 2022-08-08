@@ -100,4 +100,17 @@ public class DDIParserTest {
         assertEquals("jfjevykh", codeListId);
     }
 
+    @Test
+    public void parseSandboxDDI() throws IOException {
+        //
+        DDIInstanceType ddiInstance = DDIParser.parse(
+                        this.getClass().getClassLoader().getResource("in/ddi/sandbox.xml"))
+                .getDDIInstance();
+        //
+        ResourcePackageType resourcePackage = ddiInstance.getResourcePackageArray(0);
+        //
+        List<VariableType> variables = resourcePackage.getVariableSchemeArray(0).getVariableList();
+        assertFalse(variables.isEmpty());
+    }
+
 }
