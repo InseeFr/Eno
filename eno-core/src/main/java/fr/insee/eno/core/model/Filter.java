@@ -1,14 +1,11 @@
 package fr.insee.eno.core.model;
 
 import datacollection33.IfThenElseType;
-import datacollection33.QuestionConstructType;
-import datacollection33.SequenceType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.lunatic.model.flat.ConditionFilterType;
 import lombok.Getter;
 import lombok.Setter;
-import reusable33.InParameterType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,19 +13,6 @@ import java.util.List;
 @Getter
 @Setter
 public class Filter extends EnoObject {
-
-    @Getter
-    @Setter
-    public static class BindingReference extends EnoObject {
-
-        @DDI(contextType = InParameterType.class, field = "getIDArray(0).getStringValue()")
-        private String id;
-
-        /** Name of the referenced variable. */
-        @DDI(contextType = InParameterType.class, field = "getParameterNameArray(0).getStringArray(0).getStringValue()")
-        private String variableName;
-        
-    }
 
     /** Default expression is "true". */
     public Filter() {

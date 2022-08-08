@@ -93,7 +93,7 @@ public class EnoProcessing {
     private void resolveFilterExpressions(EnoQuestionnaire enoQuestionnaire) {
         for (Filter filter : enoQuestionnaire.getFilters()) {
             String expression = filter.getExpression();
-            for (Filter.BindingReference bindingReference : filter.getBindingReferences()) {
+            for (BindingReference bindingReference : filter.getBindingReferences()) {
                 expression = expression.replace(bindingReference.getId(), bindingReference.getVariableName());
             }
             filter.setExpression(expression);
