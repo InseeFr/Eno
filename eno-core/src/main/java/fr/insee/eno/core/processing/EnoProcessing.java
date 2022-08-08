@@ -242,6 +242,7 @@ public class EnoProcessing {
         Variable commentVariable = new Variable();
         commentVariable.setName(COMMENT_VARIABLE_NAME);
         commentVariable.setQuestionReference(COMMENT_QUESTION_ID);
+        commentVariable.setCollected("COLLECTED"); //TODO: maybe an enum here see Variable class
         enoQuestionnaire.getVariables().add(commentVariable);
         //
         Sequence sequence = new Sequence();
