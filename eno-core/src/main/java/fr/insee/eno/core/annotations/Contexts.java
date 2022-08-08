@@ -22,9 +22,9 @@ public @interface Contexts {
     @interface Context {
 
         /** Concerned format. */
-        public Format format();
+        Format format();
 
-        /** Context class type in the mapped object. */
-        public Class<?> type();
+        /** Allowed context class types in the mapped object. */
+        Class<?>[] type();
     }
 }
