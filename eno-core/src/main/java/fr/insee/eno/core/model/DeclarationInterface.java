@@ -8,6 +8,7 @@ public interface DeclarationInterface {
     String getId();
     String getDeclarationType(); //TODO: maybe an enum instead of string would be appropriated here (see comments in implementations)
     String getLabel();
+    void setLabel(String label);
     String getPosition();
     List<Mode> getModes();
 
