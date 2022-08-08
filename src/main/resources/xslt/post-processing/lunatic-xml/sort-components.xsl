@@ -173,7 +173,7 @@
                     <type>                      
                         <xsl:choose>
                             <xsl:when test="string-length(h:iterations/h:type) &gt; 0"><xsl:value-of select="h:iterations/h:type"/></xsl:when>
-                            <xsl:otherwise><xsl:value-of select="'VTL|MD'"/></xsl:otherwise>
+                            <xsl:otherwise><xsl:value-of select="'VTL'"/></xsl:otherwise>
                         </xsl:choose>
                     </type>
                 </iterations>
