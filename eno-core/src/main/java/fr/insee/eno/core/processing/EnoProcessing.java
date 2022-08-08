@@ -40,6 +40,9 @@ public class EnoProcessing {
     Map<String, Question> questionMap = new HashMap<>();
     Map<String, EnoComponent> enoComponentMap = new HashMap<>();
 
+    /** In this local map, the key is the reference (not the id). */
+    Map<String, Variable> enoVariableMap = new HashMap<>();
+
     public EnoProcessing() {
         this.parameters = new EnoParameters();
     }
@@ -61,7 +64,9 @@ public class EnoProcessing {
         enoComponentMap.putAll(sequenceMap);
         enoComponentMap.putAll(subsequenceMap);
         enoComponentMap.putAll(questionMap);
+        enoQuestionnaire.getVariables().forEach(variable -> enoVariableMap.put(variable.getReference(), variable));
         // (technical processing)
+        resolveCalculatedExpressions(enoQuestionnaire);
         resolveFilterExpressions(enoQuestionnaire);
         insertFilters(enoQuestionnaire);
         insertDeclarations(enoQuestionnaire);
@@ -86,6 +91,19 @@ public class EnoProcessing {
     /** Return true if the given instruction matches the selected modes from parameters. */
     private boolean hasNoSelectedMode(DeclarationInterface declaration) {
         return declaration.getModes().stream().noneMatch(parameters.getSelectedModes()::contains);
+    }
+
+    /** Same principle as 'resolveFilterExpressions' method for calculated variables. */
+    public void resolveCalculatedExpressions(EnoQuestionnaire enoQuestionnaire) {
+        enoQuestionnaire.getVariables().stream()
+                .filter(variable -> variable.getCollected().equals("CALCULATED")) //TODO: no filter required when separate list for calculated variables will be implemented
+                .forEach(variable -> { //TODO: maybe a refactor is possible (Variable and Filter have similar attributes)
+                    String expression = variable.getExpression();
+                    for (BindingReference bindingReference : variable.getBindingReferences()) {
+                        expression = expression.replace(bindingReference.getId(), bindingReference.getVariableName());
+                    }
+                    variable.setExpression(expression);
+                });
     }
 
     /** In DDI, VTL expressions contain variables references instead of their name.
