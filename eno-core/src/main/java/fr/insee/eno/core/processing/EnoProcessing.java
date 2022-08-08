@@ -59,8 +59,6 @@ public class EnoProcessing {
 
     public void applyProcessing(EnoQuestionnaire enoQuestionnaire) {
         //
-        modeSelection();
-        //
         if (parameters.isCommentSection()) addCommentSection(enoQuestionnaire);
         //
         enoQuestionnaire.getSequences().forEach(sequence -> sequenceMap.put(sequence.getId(), sequence));
@@ -78,6 +76,8 @@ public class EnoProcessing {
         resolveDeclarationLabels(enoQuestionnaire);
         insertDeclarations(enoQuestionnaire);
         insertControls(enoQuestionnaire);
+        //
+        modeSelection();
         //
         if (parameters.isSequenceNumbering()) addNumberingInSequences(enoQuestionnaire);
         addNumberingInQuestions(enoQuestionnaire, parameters.getQuestionNumberingMode());
