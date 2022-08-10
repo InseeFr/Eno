@@ -121,7 +121,8 @@ public class EnoProcessing {
     }
 
     /** In DDI instructions / declarations, variables are replaced by a reference surrounded by a special character.
-     * This method replaces references by variables name in each instruction / declaration. */
+     * This method replaces references by variables name in each instruction / declaration.
+     * This method also fills the object's list of variable names used in its label. */
     private void resolveDeclarationLabels(EnoQuestionnaire enoQuestionnaire) {
         // Get all declarations and instructions
         List<DeclarationInterface> declarations = new ArrayList<>(enoQuestionnaire.getDeclarations());
@@ -138,9 +139,11 @@ public class EnoProcessing {
                 variableReferences.add(variableReference);
             }
             for (String variableReference : variableReferences) {
+                String variableName = enoVariableMap.get(variableReference).getName();
                 declarationLabel = declarationLabel.replace(
                         DECLARATION_REFERENCE_MARKER + variableReference + DECLARATION_REFERENCE_MARKER,
-                        enoVariableMap.get(variableReference).getName());
+                        variableName);
+                declaration.getVariableNames().add(variableName);
             }
             declaration.setLabel(declarationLabel);
         }
