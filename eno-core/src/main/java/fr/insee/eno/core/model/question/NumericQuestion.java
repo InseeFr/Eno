@@ -30,7 +30,10 @@ public class NumericQuestion extends SingleResponseQuestion {
     @Lunatic(contextType = InputNumber.class, field = "setDecimals(#param)")
     BigInteger numberOfDecimals;
 
-    // TODO: not available (even through references) in DDI QuestionItem, see Variable
+    /** Unit associated to the collected value.
+     * In DDI, this information is not available (even through references) in 'QuestionItem' object.
+     * It is mapped in Variable class and moved here by a processing. */
+    @Lunatic(contextType = InputNumber.class, field = "setUnit(#param)")
     String unit;
 
 }

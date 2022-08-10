@@ -1,6 +1,7 @@
 package fr.insee.eno.core.processing;
 
 import fr.insee.eno.core.model.*;
+import fr.insee.eno.core.model.question.NumericQuestion;
 import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.model.question.TextQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
@@ -68,6 +69,7 @@ public class EnoProcessing {
         enoComponentMap.putAll(questionMap);
         enoQuestionnaire.getVariables().forEach(variable -> enoVariableMap.put(variable.getReference(), variable));
         // (technical processing)
+        insertUnitInQuestions(enoQuestionnaire);
         resolveCalculatedExpressions(enoQuestionnaire);
         resolveFilterExpressions(enoQuestionnaire);
         insertFilters(enoQuestionnaire);
@@ -83,6 +85,25 @@ public class EnoProcessing {
         if (parameters.isArrowCharInQuestions()) addArrowCharInQuestion();
         //
         addMissingVariables(enoQuestionnaire);
+    }
+
+    /** In DDI, the 'unit' information is accessible in variables.
+     * In Lunatic, this information is required in some numeric questions. */
+    private void insertUnitInQuestions(EnoQuestionnaire enoQuestionnaire) {
+        enoQuestionnaire.getVariables().stream()
+                .filter(variable -> variable.getUnit() != null)
+                .forEach(variable -> {
+                    Question question = questionMap.get(variable.getQuestionReference());
+                    if (! (question instanceof NumericQuestion)) {
+                        log.warn(String.format(
+                                "Variable %s has a unit value '%s', and question reference '%s', " +
+                                        "but question '%s' has not been identified as a numeric question. " +
+                                        "This question will not have its unit set.",
+                                variable, variable.getUnit(), variable.getQuestionReference(), question));
+                    } else {
+                        ((NumericQuestion) question).setUnit(variable.getUnit());
+                    }
+                });
     }
 
     /** Remove elements that does not correspond to the "selected modes" parameter.
