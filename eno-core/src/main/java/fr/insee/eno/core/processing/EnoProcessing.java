@@ -21,6 +21,8 @@ import static fr.insee.eno.core.parameter.EnoParameters.QuestionNumberingMode;
 @Slf4j
 public class EnoProcessing {
 
+    // TODO: find a way to split this class in smaller parts
+
     /** In DDI, in declarations / instructions, variable names are replaces by their reference,
      * surrounded by this character. */
     public static final String DECLARATION_REFERENCE_MARKER = "¤";
@@ -47,6 +49,7 @@ public class EnoProcessing {
 
     /** In this local map, the key is the reference (not the id). */
     Map<String, Variable> enoVariableMap = new HashMap<>();
+    // TODO: maybe replace all these maps by a EnoIndex class to be used in processing class(es)
 
     public EnoProcessing() {
         this.parameters = new EnoParameters();
@@ -77,6 +80,8 @@ public class EnoProcessing {
         insertDeclarations(enoQuestionnaire);
         resolveControlExpressions(enoQuestionnaire);
         insertControls(enoQuestionnaire);
+        /* TODO: warning: in all "insert" methods, parent object is not changed.
+        *   2 solutions : set it each time (and then write tests!) or remove the parent attribute that is actually not used yet. */
         //
         modeSelection();
         //
@@ -152,7 +157,7 @@ public class EnoProcessing {
     /** Same principle as 'resolveFilterExpressions' method for calculated variables. */
     public void resolveCalculatedExpressions(EnoQuestionnaire enoQuestionnaire) {
         enoQuestionnaire.getVariables().stream()
-                .filter(variable -> variable.getCollected().equals("CALCULATED")) //TODO: no filter required when separate list for calculated variables will be implemented
+                .filter(variable -> variable.getCollected().equals("CALCULATED")) //TODO: no filter required here when separate list for calculated variables will be implemented
                 .forEach(variable -> { //TODO: maybe a refactor is possible (Variable and Filter have similar attributes)
                     String expression = variable.getExpression();
                     for (BindingReference bindingReference : variable.getBindingReferences()) {
