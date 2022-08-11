@@ -181,9 +181,10 @@
             
             <xsl:apply-templates select="h:label"/>
 
-            <!-- If not linked loop, we have to copy the lines node -->
+            <!-- If not linked loop, we have to copy the lines and the missingResponse node -->
             <xsl:if test="$idGenerator='' or not(exists($idGenerator))">
                 <xsl:apply-templates select="h:lines"/>
+                <xsl:apply-templates select="h:missingResponse"/>
             </xsl:if>
             
             <xsl:apply-templates select="h:declarations"/>
