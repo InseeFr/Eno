@@ -1,11 +1,22 @@
 # Eno Releases note
 
-## 2.3.7 - 24/02/21
+## 2.3.10 - 03/08/22
+- **[params][ddi2out]** splitting capi-cati into separated capi and cati modes
+
+## 2.3.9 - 01/07/22
+- **[poguesXML2ddi][core]** Add some measurement units
+
+## 2.3.8 - 23/06/22
+- **[dependencies]** Upgrading dependancies.
+- **[poguesXML2ddi][core]** Add some measurement units
+- **[ddi2fo][post-processing]** ***business*** Various changes to first page in fo format
+
+## 2.3.7 - 24/02/22
 - **[dependencies]** Upgrading dependancies.
 - **[ddi2lunaticXML][post-processing]** fixing the identification of first and last sequence id, which was wrong and could previously return multiple ids (insert-generic-questions).
 - **[ddi2lunaticXML][params]** Adding param 'UnusedVars' specifying if calculated variables that are not used inside the Questionnaire should be output or not. By default, is false.
 
-## 2.3.6 - 03/02/21
+## 2.3.6 - 03/02/22
 - **[ddi2fo][post-processing]** Various changes to ***household*** first page in fo format
 - **[ddi2fo][post-processing]** Changing the logo zone of business first page
 
