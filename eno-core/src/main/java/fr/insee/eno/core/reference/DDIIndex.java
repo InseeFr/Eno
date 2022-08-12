@@ -1,7 +1,9 @@
 package fr.insee.eno.core.reference;
 
 import fr.insee.eno.core.mappers.Mapper;
+import fr.insee.eno.core.model.EnoObject;
 import instance33.DDIInstanceDocument;
+import instance33.DDIInstanceType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
@@ -18,25 +20,32 @@ import java.util.*;
  * Values: the corresponding objects
  */
 @Slf4j
-public class DDIIndex extends HashMap<String, Object> { //TODO: AbstractIdentifiableType i.o. Object
+public class DDIIndex { //TODO: AbstractIdentifiableType i.o. Object
 
+    private Map<String, Object> index;
     /**
      * Key: a DDI object identifier
      * Value: the identifier of its parent object */
-    private final Map<String, String> parentsMap = new HashMap<>();
+    private Map<String, String> parentsMap;
+
+    private void setup() {
+        index = new HashMap<>();
+        parentsMap = new HashMap<>();
+    }
 
     /**
      * Store all objects in the DDI document given in the map.
      * @param ddiInstanceDocument A DDIInstanceDocument
      */
     public void indexDDI(DDIInstanceDocument ddiInstanceDocument) {
-        if (this.isEmpty()) {
-            log.info("Indexing objects of DDI document");
-            recursiveIndexing(ddiInstanceDocument.getDDIInstance());
-            log.info("Finished indexing of DDI document");
-        } else {
-            log.debug("Indexing already done.");
-        }
+        log.info("Indexing objects of DDI document");
+        indexDDIObject(ddiInstanceDocument.getDDIInstance());
+        log.info("Finished indexing of DDI document");
+    }
+
+    public void indexDDIObject(AbstractIdentifiableType ddiObject) {
+        setup();
+        recursiveIndexing(ddiObject);
     }
 
     /**
@@ -51,7 +60,7 @@ public class DDIIndex extends HashMap<String, Object> { //TODO: AbstractIdentifi
         String ddiObjectId = ddiObject.getIDArray(0).getStringValue();
 
         // Put the object in the map under the id (there should never be duplicate ids in DDI documents)
-        this.merge(ddiObjectId, ddiObject, (oldDDIObject, newDDIObject) -> {
+        index.merge(ddiObjectId, ddiObject, (oldDDIObject, newDDIObject) -> {
             throw new RuntimeException(String.format("Duplicate ID \"%s\" found in given DDI.", ddiObjectId));
         });
 
@@ -95,13 +104,17 @@ public class DDIIndex extends HashMap<String, Object> { //TODO: AbstractIdentifi
 
     }
 
+    public Object get(String ddiObjectId) {
+        return index.get(ddiObjectId);
+    }
+
     /** Return parent object of DDI object with given identifier. */
     public Object getParent(String ddiObjectId) { //TODO: AbstractIdentifiableType i.o. Object
-        return this.get(parentsMap.get(ddiObjectId));
+        return index.get(parentsMap.get(ddiObjectId));
     }
 
     @Override
     public String toString() {
-        return "DDIIndex["+size()+" elements]";
+        return "DDIIndex["+index.size()+" elements]";
     }
 }
