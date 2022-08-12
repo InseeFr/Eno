@@ -167,7 +167,7 @@ public class DDIMapper extends Mapper {
                 }
 
                 // Complex types
-                else { // TODO: if EnoObject.class.isAssignableFrom(...)
+                else if (EnoObject.class.isAssignableFrom(classType)) { // TODO: if EnoObject.class.isAssignableFrom(...)
                     try {
                         // Instantiate the model object
                         EnoObject enoObject2 = (EnoObject) typeDescriptor.getType().getDeclaredConstructor().newInstance();
@@ -181,6 +181,10 @@ public class DDIMapper extends Mapper {
                              InstantiationException | IllegalAccessException e) {
                         throw new RuntimeException(e); // TODO : refactor redundant code above
                     }
+                }
+
+                else {
+                    throw new RuntimeException("Not a valid simple type or Eno object (or list of these)."); //TODO: more detailed message
                 }
 
             }
