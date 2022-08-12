@@ -82,8 +82,14 @@ public class DDIMapper extends Mapper {
                     Object ddiValue = expression.getValue(context, ddiObject);
                     if (ddiValue != null) {
                         beanWrapper.setPropertyValue(propertyDescriptor.getName(), ddiValue);
+                        log.atDebug().log(()->"  Value "+beanWrapper.getPropertyValue(propertyDescriptor.getName())+" set."); //FIXME
                     }
-                    //log.atDebug().log(()->"  Value "+beanWrapper.getPropertyValue(propertyDescriptor.getName())+" setted"); //FIXME
+                    // It is allowed to have null values (a DDI property can be present or not depending on the case)
+                    else {
+                        log.debug(String.format(
+                                "null value from DDI annotation expression on property %s in class %s.",
+                                propertyDescriptor.getName(), enoObject.getClass()));
+                    }
                 }
 
                 // Lists
