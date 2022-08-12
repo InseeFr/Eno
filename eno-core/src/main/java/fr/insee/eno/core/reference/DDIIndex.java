@@ -20,7 +20,7 @@ import java.util.*;
 @Slf4j
 public class DDIIndex { //TODO: AbstractIdentifiableType i.o. Object
 
-    private Map<String, Object> index;
+    private Map<String, AbstractIdentifiableType> index;
     /**
      * Key: a DDI object identifier
      * Value: the identifier of its parent object */
@@ -102,7 +102,7 @@ public class DDIIndex { //TODO: AbstractIdentifiableType i.o. Object
 
     }
 
-    public Object get(String ddiObjectId) {
+    public AbstractIdentifiableType get(String ddiObjectId) {
         return index.get(ddiObjectId);
     }
 
@@ -111,7 +111,7 @@ public class DDIIndex { //TODO: AbstractIdentifiableType i.o. Object
     }
 
     /** Return parent object of DDI object with given identifier. */
-    public Object getParent(String ddiObjectId) { //TODO: AbstractIdentifiableType i.o. Object
+    public AbstractIdentifiableType getParent(String ddiObjectId) {
         return index.get(parentsMap.get(ddiObjectId));
     }
 
