@@ -1,9 +1,7 @@
 package fr.insee.eno.core.reference;
 
 import fr.insee.eno.core.mappers.Mapper;
-import fr.insee.eno.core.model.EnoObject;
 import instance33.DDIInstanceDocument;
-import instance33.DDIInstanceType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;

@@ -1,6 +1,5 @@
 package fr.insee.eno.core.reference;
 
-import datacollection33.CodeDomainType;
 import datacollection33.ControlConstructSchemeType;
 import datacollection33.InstructionType;
 import datacollection33.QuestionItemType;
@@ -9,7 +8,6 @@ import instance33.DDIInstanceDocument;
 import instance33.DDIInstanceType;
 import logicalproduct33.VariableGroupType;
 import logicalproduct33.VariableType;
-import org.apache.xmlbeans.XmlException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
