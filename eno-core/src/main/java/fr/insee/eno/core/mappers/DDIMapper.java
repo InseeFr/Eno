@@ -44,7 +44,7 @@ public class DDIMapper extends Mapper {
         context = new StandardEvaluationContext();
         context.setVariable("index", ddiIndex);
         //
-        //log.atDebug().log(()->this+ " instantiated"); //FIXME
+        log.debug(this+ " instantiated");
     }
 
     private void setup(AbstractIdentifiableType ddiObject) {
@@ -91,7 +91,8 @@ public class DDIMapper extends Mapper {
     private void recursiveMapping(Object ddiObject, EnoObject enoObject) {
         //TODO: refactor simple type / complex type mapping
 
-        //log.atDebug().log(()->"Start mapping for "+DDIToString(ddiObject)+" to "+enoObject); // FIXME
+        log.debug("Start mapping for "+DDIToString(ddiObject)
+                +" with model context type '"+enoObject.getClass().getSimpleName()+"'");
 
         // Use Spring BeanWrapper to iterate on property descriptors of the model object
         BeanWrapper beanWrapper = new BeanWrapperImpl(enoObject);
@@ -110,7 +111,8 @@ public class DDIMapper extends Mapper {
             DDI ddiAnnotation = typeDescriptor.getAnnotation(DDI.class);
             if (ddiAnnotation != null) {
 
-                //log.atDebug().log(()->"  Processing property "+propertyDescriptor.getName() +" for annotation "+ddiAnnotation); //FIXME
+                log.debug("Processing property '"+propertyDescriptor.getName()
+                        +"' of class '"+enoObject.getClass().getSimpleName()+"'");
 
                 // Instantiate a Spring expression with the annotation content
                 Expression expression = new SpelExpressionParser().parseExpression(ddiAnnotation.field());
@@ -121,13 +123,15 @@ public class DDIMapper extends Mapper {
                     Object ddiValue = expression.getValue(context, ddiObject);
                     if (ddiValue != null) {
                         beanWrapper.setPropertyValue(propertyDescriptor.getName(), ddiValue);
-                        log.atDebug().log(()->"  Value "+beanWrapper.getPropertyValue(propertyDescriptor.getName())+" set."); //FIXME
+                        log.debug("Value '"+beanWrapper.getPropertyValue(propertyDescriptor.getName())+"'"
+                                +" on property '"+propertyDescriptor.getName()+"'"
+                                +" of class '"+enoObject.getClass().getSimpleName()+"' set.");
                     }
                     // It is allowed to have null values (a DDI property can be present or not depending on the case)
                     else {
-                        log.debug(String.format(
-                                "null value from DDI annotation expression on property %s in class %s.",
-                                propertyDescriptor.getName(), enoObject.getClass()));
+                        log.debug("null value from DDI annotation expression"
+                                +" on property '"+propertyDescriptor.getName()+"'"
+                                +" of class '"+enoObject.getClass().getSimpleName()+"' set");
                     }
                 }
 

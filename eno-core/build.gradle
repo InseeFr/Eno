@@ -24,8 +24,8 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind'
 
     // Logging
-    implementation enforcedPlatform('org.slf4j:slf4j-api:2.0.0-alpha7')
-    testRuntimeOnly enforcedPlatform('ch.qos.logback:logback-classic:1.3.0-alpha16')
+    implementation 'org.slf4j:slf4j-api'
+    testRuntimeOnly 'ch.qos.logback:logback-classic'
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter'
     // Lombok https://projectlombok.org/setup/gradle // TODO: version could be managed with spring dependencies (?)
@@ -33,7 +33,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     testCompileOnly 'org.projectlombok:lombok:1.18.24'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
-    constraints{
+    constraints {
         implementation 'org.slf4j:slf4j-api:2.0.0-alpha7'
     }
 }
