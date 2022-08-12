@@ -13,15 +13,17 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
- * Flat map designed to store all objects of a DDI document.
- * Keys: string identifiers of DDI objects
- * Values: the corresponding objects
+ * Class designed to store all DDI identifiable objects within a DDI object in a flat map.
  */
 @Slf4j
-public class DDIIndex { //TODO: AbstractIdentifiableType i.o. Object
+public class DDIIndex {
 
+    /** Index of DDI identifiable objects.
+     * Key: a DDI object identifier
+     * Value: the DDI object with corresponding identifier. */
     private Map<String, AbstractIdentifiableType> index;
-    /**
+
+    /** Map containing nesting relationships between objects in index.
      * Key: a DDI object identifier
      * Value: the identifier of its parent object */
     private Map<String, String> parentsMap;
@@ -32,8 +34,8 @@ public class DDIIndex { //TODO: AbstractIdentifiableType i.o. Object
     }
 
     /**
-     * Store all objects in the DDI document given in the map.
-     * @param ddiInstanceDocument A DDIInstanceDocument
+     * Store all DDI identifiable objects that are in the given DDI document in the index.
+     * @param ddiInstanceDocument A DDIInstanceDocument.
      */
     public void indexDDI(DDIInstanceDocument ddiInstanceDocument) {
         log.info("Indexing objects of DDI document");
@@ -41,6 +43,10 @@ public class DDIIndex { //TODO: AbstractIdentifiableType i.o. Object
         log.info("Finished indexing of DDI document");
     }
 
+    /**
+     * Store all DDI identifiable objects that are in the given DDI object in the index.
+     * @param ddiObject A DDI identifiable object.
+     */
     public void indexDDIObject(AbstractIdentifiableType ddiObject) {
         setup();
         recursiveIndexing(ddiObject);
@@ -102,10 +108,13 @@ public class DDIIndex { //TODO: AbstractIdentifiableType i.o. Object
 
     }
 
+    /** Return the DDI object corresponding to the given identifier,
+     * null if the identifier is not in the index. */
     public AbstractIdentifiableType get(String ddiObjectId) {
         return index.get(ddiObjectId);
     }
 
+    /** Return true if the index contains the given identifier. */
     public boolean containsId(String ddiObjectId) {
         return index.containsKey(ddiObjectId);
     }
