@@ -5,8 +5,10 @@ import fr.insee.eno.core.model.question.BooleanQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.parsers.DDIParser;
 import instance33.DDIInstanceDocument;
+import instance33.DDIInstanceType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import reusable33.IDType;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -28,6 +30,21 @@ public class DDIMapperTest {
         //
         DDIMapper ddiMapper = new DDIMapper(ddiInstanceDocument);
         ddiMapper.mapDDI(enoQuestionnaire);
+
+
+        /* TODO: unit testing of annotations like this (also possible to read portions of DDI xml files
+        String expectedId = "TOTO-ID";
+        //
+        DDIInstanceType ddiInstanceType = DDIInstanceType.Factory.newInstance();
+        ddiInstanceType.getIDList().add(IDType.Factory.newInstance());
+        ddiInstanceType.getIDList().get(0).setStringValue(expectedId);
+        //
+        DDIMapper mapper = new DDIMapper(ddiInstanceType);
+        EnoQuestionnaire enoQuestionnaire1 = new EnoQuestionnaire();
+        mapper.mapDDI(enoQuestionnaire1, ddiInstanceType);
+        //
+        assertEquals(expectedId, enoQuestionnaire1.getId());
+        */
     }
 
     @Test
