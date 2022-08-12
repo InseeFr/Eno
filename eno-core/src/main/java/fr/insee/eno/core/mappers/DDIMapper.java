@@ -6,6 +6,7 @@ import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.reference.DDIIndex;
 import instance33.DDIInstanceDocument;
+import instance33.DDIInstanceType;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanWrapper;
@@ -27,10 +28,13 @@ import java.util.List;
 @Slf4j
 public class DDIMapper extends Mapper {
 
-    private final DDIInstanceDocument ddiInstanceDocument;
-    private final DDIIndex ddiIndex;
-    private final EvaluationContext context;
+    private DDIInstanceDocument ddiInstanceDocument; // TODO: to be removed
+    private DDIIndex ddiIndex;
+    private EvaluationContext context;
 
+    public DDIMapper() {}
+
+    @Deprecated
     public DDIMapper(@NonNull DDIInstanceDocument ddiInstanceDocument) {
         this.ddiInstanceDocument = ddiInstanceDocument;
         // Index DDI
@@ -43,10 +47,45 @@ public class DDIMapper extends Mapper {
         //log.atDebug().log(()->this+ " instantiated"); //FIXME
     }
 
+    private void setup(AbstractIdentifiableType ddiObject) {
+        // Index DDI object
+        ddiIndex = new DDIIndex();
+        ddiIndex.indexDDIObject(ddiObject);
+        // Init the context and put the DDI index
+        context = new StandardEvaluationContext();
+        context.setVariable("index", ddiIndex);
+    }
+
+    @Deprecated
     public void mapDDI(@NonNull EnoQuestionnaire enoQuestionnaire) {
         log.info("Starting mapping between DDI document and Eno model");
         recursiveMapping(ddiInstanceDocument.getDDIInstance(), enoQuestionnaire);
         log.info("Finished mapping between DDI document and Eno model");
+    }
+
+    public void mapDDI(@NonNull DDIInstanceDocument ddiInstanceDocument, @NonNull EnoQuestionnaire enoQuestionnaire) {
+        mapDDI(ddiInstanceDocument.getDDIInstance(), enoQuestionnaire);
+    }
+
+    public void mapDDI(@NonNull DDIInstanceType ddiInstanceType, @NonNull EnoQuestionnaire enoQuestionnaire) {
+        log.info("Starting mapping between DDI instance and Eno questionnaire.");
+        setup(ddiInstanceType);
+        recursiveMapping(ddiInstanceType, enoQuestionnaire);
+        log.info("Finished mapping between DDI instance and Eno questionnaire.");
+    }
+
+    public void mapDDIObject(AbstractIdentifiableType ddiObject, EnoObject enoObject) {
+        // TODO
+        //DDIContext ddiContext = enoObject.getClass().getAnnotation(DDIContext.class);
+        //List<Class<?>> contextTypes = new ArrayList<>(ddiContext.contextType());
+        //if (! contextTypes.contains(ddiObject.getClass())) {
+        //    throw new IllegalArgumentException(String.format(
+        //            "DDI object of type '%s' is not compatible with Eno object of type '%s'",
+        //            ddiObject.getClass(), enoObject.getClass()));
+        //{
+        //
+        setup(ddiObject);
+        recursiveMapping(ddiObject, enoObject);
     }
 
     private void recursiveMapping(Object ddiObject, EnoObject enoObject) {
