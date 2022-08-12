@@ -24,7 +24,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind'
 
     // Logging
-    implementation 'org.slf4j:slf4j-api:2.0.0-alpha7'
+    implementation enforcedPlatform('org.slf4j:slf4j-api:2.0.0-alpha7')
     testRuntimeOnly 'ch.qos.logback:logback-classic'
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter'
