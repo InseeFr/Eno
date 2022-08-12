@@ -108,6 +108,10 @@ public class DDIIndex { //TODO: AbstractIdentifiableType i.o. Object
         return index.get(ddiObjectId);
     }
 
+    public boolean containsId(String ddiObjectId) {
+        return index.containsKey(ddiObjectId);
+    }
+
     /** Return parent object of DDI object with given identifier. */
     public Object getParent(String ddiObjectId) { //TODO: AbstractIdentifiableType i.o. Object
         return index.get(parentsMap.get(ddiObjectId));
