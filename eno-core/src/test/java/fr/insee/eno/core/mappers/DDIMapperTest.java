@@ -24,7 +24,7 @@ public class DDIMapperTest {
     public static void mapDDI() throws IOException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
-                DDIMapperTest.class.getClassLoader().getResource("l10xmg2l.xml"));
+                DDIMapperTest.class.getClassLoader().getResource("in/ddi/l10xmg2l.xml"));
         //
         enoQuestionnaire = new EnoQuestionnaire();
         //
@@ -77,7 +77,7 @@ public class DDIMapperTest {
         assertEquals(2, enoQuestionnaire.getSequences().size());
         assertEquals("jfaz9kv9", enoQuestionnaire.getSequences().get(0).getId());
         // Subsequences
-        assertEquals(5, enoQuestionnaire.getSubsequences().size());
+        assertEquals(6, enoQuestionnaire.getSubsequences().size());
         // SingleResponseQuestions
         Map<String, SingleResponseQuestion> singleResponseQuestionsMap = new HashMap<>();
         enoQuestionnaire.getSingleResponseQuestions().forEach(singleResponseQuestion ->
