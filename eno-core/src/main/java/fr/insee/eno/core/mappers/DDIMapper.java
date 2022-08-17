@@ -89,18 +89,23 @@ public class DDIMapper extends Mapper {
     }
 
     private void recursiveMapping(Object ddiObject, EnoObject enoObject) {
-        //TODO: refactor simple type / complex type mapping
+
+        // Local variable used for logging purposes
+        Class<?> modelContextType = enoObject.getClass();
 
         log.debug("Start mapping for "+DDIToString(ddiObject)
-                +" with model context type '"+enoObject.getClass().getSimpleName()+"'");
+                +" with model context type '"+modelContextType.getSimpleName()+"'");
 
         // Use Spring BeanWrapper to iterate on property descriptors of the model object
         BeanWrapper beanWrapper = new BeanWrapperImpl(enoObject);
         for (Iterator<PropertyDescriptor> iterator = propertyDescriptorIterator(beanWrapper); iterator.hasNext();) {
             PropertyDescriptor propertyDescriptor = iterator.next();
 
+            // Property name
+            String propertyName = propertyDescriptor.getName();
+
             // Spring TypeDescriptor of the current property descriptor (several usages below)
-            TypeDescriptor typeDescriptor = beanWrapper.getPropertyTypeDescriptor(propertyDescriptor.getName());
+            TypeDescriptor typeDescriptor = beanWrapper.getPropertyTypeDescriptor(propertyName);
             assert typeDescriptor != null;
 
             // Identify the class type of the property
@@ -111,8 +116,8 @@ public class DDIMapper extends Mapper {
             DDI ddiAnnotation = typeDescriptor.getAnnotation(DDI.class);
             if (ddiAnnotation != null) {
 
-                log.debug("Processing property '"+propertyDescriptor.getName()
-                        +"' of class '"+enoObject.getClass().getSimpleName()+"'");
+                log.debug("Processing property '"+propertyName
+                        +"' of class '"+modelContextType.getSimpleName()+"'");
 
                 // Instantiate a Spring expression with the annotation content
                 Expression expression = new SpelExpressionParser().parseExpression(ddiAnnotation.field());
@@ -122,16 +127,33 @@ public class DDIMapper extends Mapper {
                     // Simply set the value in the field
                     Object ddiValue = expression.getValue(context, ddiObject);
                     if (ddiValue != null) {
-                        beanWrapper.setPropertyValue(propertyDescriptor.getName(), ddiValue);
-                        log.debug("Value '"+beanWrapper.getPropertyValue(propertyDescriptor.getName())+"'"
-                                +" on property '"+propertyDescriptor.getName()+"'"
-                                +" of class '"+enoObject.getClass().getSimpleName()+"' set.");
+                        beanWrapper.setPropertyValue(propertyName, ddiValue);
+                        log.debug("Value '"+beanWrapper.getPropertyValue(propertyName)+"'"
+                                +" on property '"+propertyName+"'"
+                                +" of class '"+modelContextType.getSimpleName()+"' set");
                     }
                     // It is allowed to have null values (a DDI property can be present or not depending on the case)
                     else {
-                        log.debug("null value from DDI annotation expression"
-                                +" on property '"+propertyDescriptor.getName()+"'"
-                                +" of class '"+enoObject.getClass().getSimpleName()+"' set");
+                        log.debug("null value got from evaluating DDI annotation expression"
+                                +" on property '"+propertyName+"'"
+                                +" of class '"+modelContextType.getSimpleName()+"'");
+                    }
+                }
+
+                // Complex types
+                else if (EnoObject.class.isAssignableFrom(classType)) {
+                    try {
+                        // Instantiate the model object
+                        EnoObject enoObject2 = (EnoObject) typeDescriptor.getType().getDeclaredConstructor().newInstance();
+                        // Attach it the parent object
+                        beanWrapper.setPropertyValue(propertyName, enoObject2);
+                        // Keep parent reference
+                        enoObject2.setParent(enoObject);
+                        // Recursive call of the mapper to dive into this object // TODO: control that result of expression is not null
+                        recursiveMapping(expression.getValue(context, ddiObject), enoObject2);
+                    } catch (InvocationTargetException | NoSuchMethodException |
+                             InstantiationException | IllegalAccessException e) {
+                        throw new RuntimeException(e); // TODO : refactor redundant code
                     }
                 }
 
@@ -143,11 +165,11 @@ public class DDIMapper extends Mapper {
                     if (ddiCollection == null && !ddiAnnotation.allowNullList()) {
                         log.debug(String.format(
                                 "Incoherent expression in field of DDI annotation on property '%s' in class %s.",
-                                propertyDescriptor.getName(), enoObject.getClass()));
+                                propertyName, modelContextType));
                         log.debug("If the DDI list can actually be null, use the annotation property to allow it.");
                         throw new RuntimeException(String.format(
                                 "DDI list mapped by the annotation on property '%s' in class %s is null",
-                                propertyDescriptor.getName(), enoObject.getClass()));
+                                propertyName, modelContextType));
                     }
                     // If the DDI collection is null and null is allowed, do nothing, else:
                     else if (ddiCollection != null) {
@@ -163,7 +185,8 @@ public class DDIMapper extends Mapper {
                                         .invoke(enoObject);
                                 modelCollection.addAll(ddiCollection);
                             } catch (IllegalAccessException | InvocationTargetException e) {
-                                throw new RuntimeException(e);
+                                log.debug("hint: Make sure that collection");
+                                throw new RuntimeException("Unable to get collection instance on property '' of class ''.", e); //TODO: exception message
                             }
                         }
                         // Lists of complex types // Get the model collection instance
@@ -185,12 +208,7 @@ public class DDIMapper extends Mapper {
                                     }
                                     // Else, call class constructor
                                     else {
-                                        try {
-                                            enoObject2 = (EnoObject) modelTargetType.getDeclaredConstructor().newInstance();
-                                        } catch (NoSuchMethodException | InstantiationException e) {
-                                            log.warn("Default constructor may be missing in class " + modelTargetType);
-                                            throw new RuntimeException("Unable to create instance for class " + modelTargetType);
-                                        }
+                                        enoObject2 = callConstructor(modelTargetType);
                                     }
                                     // Keep parent reference
                                     enoObject2.setParent(enoObject);
@@ -202,43 +220,45 @@ public class DDIMapper extends Mapper {
                             } catch (IllegalAccessException | InvocationTargetException e) {
                                 throw new RuntimeException(String.format(
                                         "Error when calling read method from property descriptor '%s' in class %s.",
-                                        propertyDescriptor.getName(), enoObject.getClass()),
+                                        propertyName, modelContextType),
                                         e);
                             }
                         }
                         //
                         else {
-                            log.debug(ddiAnnotation.field());
-                            throw new RuntimeException("Object is neither a simple type nor an Eno object."); //TODO: pass parameters in exception message
+                            unknownTypeException(modelTargetType, propertyDescriptor, modelContextType);
                         }
-                    }
-
-                }
-
-                // Complex types
-                else if (EnoObject.class.isAssignableFrom(classType)) { // TODO: if EnoObject.class.isAssignableFrom(...)
-                    try {
-                        // Instantiate the model object
-                        EnoObject enoObject2 = (EnoObject) typeDescriptor.getType().getDeclaredConstructor().newInstance();
-                        // Attach it the parent object
-                        beanWrapper.setPropertyValue(propertyDescriptor.getName(), enoObject2);
-                        // Keep parent reference
-                        enoObject2.setParent(enoObject);
-                        // Recursive call of the mapper to dive into this object // TODO: control that result of expression is not null
-                        recursiveMapping(expression.getValue(context, ddiObject), enoObject2);
-                    } catch (InvocationTargetException | NoSuchMethodException |
-                             InstantiationException | IllegalAccessException e) {
-                        throw new RuntimeException(e); // TODO : refactor redundant code above
                     }
                 }
 
                 else {
-                    throw new RuntimeException("Not a valid simple type or Eno object (or list of these)."); //TODO: more detailed message
+                    unknownTypeException(classType, propertyDescriptor, modelContextType);
                 }
 
             }
         }
 
+    }
+
+    private EnoObject callConstructor(Class<?> classType) {
+        try {
+            return (EnoObject) classType.getDeclaredConstructor().newInstance();
+        } catch (NoSuchMethodException e) {
+            log.debug("Default constructor may be missing in class " + classType);
+            throw new RuntimeException("Unable to create instance for class " + classType, e);
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            throw new RuntimeException("Unable to create instance for class " + classType, e);
+        }
+    }
+
+    private void unknownTypeException(Class<?> classType, PropertyDescriptor propertyDescriptor, Class<?> modelContextType) {
+        log.debug(String.format(
+                "Type '%s' found on Eno model property '%s' of model class '%s' " +
+                        "is neither a simple type nor an Eno object.",
+                classType, propertyDescriptor.getName(), modelContextType.getSimpleName()));
+        log.debug("hint: If it should be a simple type, check isSimpleType method in Mapper class.");
+        log.debug("hint: If it should be a complex type, make sure that the object inherits EnoObject.");
+        throw new RuntimeException(String.format("Unknown type '%s' encountered in Eno model.", classType));
     }
 
 
