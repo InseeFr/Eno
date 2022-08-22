@@ -27,8 +27,8 @@ public class DDIToEnoTest {
         //
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         //
-        DDIMapper ddiMapper = new DDIMapper(ddiInstanceDocument);
-        ddiMapper.mapDDI(enoQuestionnaire);
+        DDIMapper ddiMapper = new DDIMapper();
+        ddiMapper.mapDDI(ddiInstanceDocument, enoQuestionnaire);
 
         //
         EnoProcessing enoProcessing = new EnoProcessing();

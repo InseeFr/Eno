@@ -34,8 +34,8 @@ public class DDIToLunaticTest {
         //
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         //
-        DDIMapper ddiMapper = new DDIMapper(ddiInstanceDocument);
-        ddiMapper.mapDDI(enoQuestionnaire);
+        DDIMapper ddiMapper = new DDIMapper();
+        ddiMapper.mapDDI(ddiInstanceDocument, enoQuestionnaire);
 
         // Mode filtering
         EnoParameters enoParameters = new EnoParameters();
