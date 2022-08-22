@@ -160,6 +160,7 @@ public class DDIMapper extends Mapper {
                     }
                     // If the DDI collection is null and null is allowed, do nothing, else:
                     else if (ddiCollection != null) {
+                        int collectionSize = ddiCollection.size();
                         // Get the Eno model collection
                         Collection<Object> modelCollection = readCollection(propertyDescriptor, enoObject);
                         // Get the content type of the model collection
@@ -169,11 +170,17 @@ public class DDIMapper extends Mapper {
                         // List of simple types
                         if (isSimpleType(modelTargetType)) {
                             modelCollection.addAll(ddiCollection);
+                            log.debug(collectionSize+" values set"
+                                    +" on property '"+propertyName+"'"
+                                    +" of class '"+modelContextType.getSimpleName()+"'");
                         }
-                        // Lists of complex types // Get the model collection instance
+                        // Lists of complex types
                         else if (EnoObject.class.isAssignableFrom(modelTargetType)) {
                             // Iterate on the DDI collection
-                            for (int i=0; i<ddiCollection.size(); i++) {
+                            for (int i=0; i<collectionSize; i++) {
+                                log.debug("Iterating on "+collectionSize+" DDI objects"
+                                        +" on property '"+propertyName+"'"
+                                        +" of class '"+modelContextType.getSimpleName()+"'");
                                 Object ddiObject2 = ddiCollection.get(i);
                                 // Put current list index in context TODO: I don't really like this but... :(((
                                 context.setVariable("listIndex", i);
