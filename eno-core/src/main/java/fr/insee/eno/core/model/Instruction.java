@@ -41,6 +41,10 @@ public class Instruction extends EnoObject implements DeclarationInterface {
     @Lunatic(contextType = DeclarationType.class, field = "setLabel(#param)")
     String label;
 
+    /** List of variable names that are used in the declarations' label.
+     * This list is filled in an Eno processing, and used in Lunatic processing to fill 'bindingDependencies'. */
+    List<String> variableNames = new ArrayList<>();
+
     @Lunatic(contextType = DeclarationType.class,
             field = "setPosition(T(fr.insee.lunatic.model.flat.DeclarationPositionEnum).valueOf(#param))")
     String position = "AFTER_QUESTION_TEXT";

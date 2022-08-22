@@ -11,6 +11,4 @@ public abstract class EnoObject {
     @JsonIgnore
     private EnoObject parent;
 
-    //TODO: id mapping might be refactored here
-
 }

@@ -7,7 +7,7 @@ dependencies {
         transitive = false
     }
     implementation ('org.apache.xmlbeans:xmlbeans:5.0.3') {
-        exclude module: 'org.apache.logging.log4j:log4j-api:2.17.1'
+        //exclude group: 'org.apache.logging.log4j', module: 'log4j-api'
     }
     // Lunatic
     implementation 'fr.insee.lunatic:lunatic-model:2.2.10'
@@ -15,7 +15,7 @@ dependencies {
     implementation 'fr.insee.pogues:pogues-model:1.0.1'
 
     // Spring libraries
-    implementation enforcedPlatform('org.springframework.boot:spring-boot-dependencies:2.6.4')
+    implementation enforcedPlatform('org.springframework.boot:spring-boot-dependencies:2.7.2')
     implementation 'org.springframework:spring-core'
     implementation 'org.springframework:spring-beans'
     implementation 'org.springframework:spring-expression'
@@ -24,7 +24,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind'
 
     // Logging
-    implementation 'org.slf4j:slf4j-api:2.0.0-alpha7'
+    implementation 'org.slf4j:slf4j-api'
     testRuntimeOnly 'ch.qos.logback:logback-classic'
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter'
@@ -33,7 +33,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     testCompileOnly 'org.projectlombok:lombok:1.18.24'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
-    constraints{
+    constraints {
         implementation 'org.slf4j:slf4j-api:2.0.0-alpha7'
     }
 }

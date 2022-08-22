@@ -5,8 +5,10 @@ import fr.insee.eno.core.model.question.BooleanQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.parsers.DDIParser;
 import instance33.DDIInstanceDocument;
+import instance33.DDIInstanceType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import reusable33.IDType;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -22,12 +24,27 @@ public class DDIMapperTest {
     public static void mapDDI() throws IOException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
-                DDIMapperTest.class.getClassLoader().getResource("l10xmg2l.xml"));
+                DDIMapperTest.class.getClassLoader().getResource("in/ddi/l10xmg2l.xml"));
         //
         enoQuestionnaire = new EnoQuestionnaire();
         //
         DDIMapper ddiMapper = new DDIMapper(ddiInstanceDocument);
         ddiMapper.mapDDI(enoQuestionnaire);
+
+
+        /* TODO: unit testing of annotations like this (also possible to read portions of DDI xml files
+        String expectedId = "TOTO-ID";
+        //
+        DDIInstanceType ddiInstanceType = DDIInstanceType.Factory.newInstance();
+        ddiInstanceType.getIDList().add(IDType.Factory.newInstance());
+        ddiInstanceType.getIDList().get(0).setStringValue(expectedId);
+        //
+        DDIMapper mapper = new DDIMapper(ddiInstanceType);
+        EnoQuestionnaire enoQuestionnaire1 = new EnoQuestionnaire();
+        mapper.mapDDI(enoQuestionnaire1, ddiInstanceType);
+        //
+        assertEquals(expectedId, enoQuestionnaire1.getId());
+        */
     }
 
     @Test
@@ -60,7 +77,7 @@ public class DDIMapperTest {
         assertEquals(2, enoQuestionnaire.getSequences().size());
         assertEquals("jfaz9kv9", enoQuestionnaire.getSequences().get(0).getId());
         // Subsequences
-        assertEquals(5, enoQuestionnaire.getSubsequences().size());
+        assertEquals(6, enoQuestionnaire.getSubsequences().size());
         // SingleResponseQuestions
         Map<String, SingleResponseQuestion> singleResponseQuestionsMap = new HashMap<>();
         enoQuestionnaire.getSingleResponseQuestions().forEach(singleResponseQuestion ->

@@ -6,7 +6,7 @@ import java.lang.annotation.*;
  * Control annotation to specify the context type in the mapped objects that corresponds to the annotated class
  * for different formats.
  */
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Contexts {
 
@@ -16,15 +16,15 @@ public @interface Contexts {
      * Control annotation to specify the context type in the mapped object that corresponds to the annotated class
      * for a certain format.
      */
-    @Retention(RetentionPolicy.SOURCE)
+    @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)
     @Repeatable(value = Contexts.class)
     @interface Context {
 
         /** Concerned format. */
-        public Format format();
+        Format format();
 
-        /** Context class type in the mapped object. */
-        public Class<?> type();
+        /** Allowed context class types in the mapped object. */
+        Class<?>[] type();
     }
 }

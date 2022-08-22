@@ -13,30 +13,43 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
- * Flat map designed to store all objects of a DDI document.
- * Keys: string identifiers of DDI objects
- * Values: the corresponding objects
+ * Class designed to store all DDI identifiable objects within a DDI object in a flat map.
  */
 @Slf4j
-public class DDIIndex extends HashMap<String, Object> { //TODO: AbstractIdentifiableType i.o. Object
+public class DDIIndex {
 
-    /**
+    /** Index of DDI identifiable objects.
+     * Key: a DDI object identifier
+     * Value: the DDI object with corresponding identifier. */
+    private Map<String, AbstractIdentifiableType> index;
+
+    /** Map containing nesting relationships between objects in index.
      * Key: a DDI object identifier
      * Value: the identifier of its parent object */
-    private final Map<String, String> parentsMap = new HashMap<>();
+    private Map<String, String> parentsMap;
+
+    private void setup() {
+        index = new HashMap<>();
+        parentsMap = new HashMap<>();
+    }
 
     /**
-     * Store all objects in the DDI document given in the map.
-     * @param ddiInstanceDocument A DDIInstanceDocument
+     * Store all DDI identifiable objects that are in the given DDI document in the index.
+     * @param ddiInstanceDocument A DDIInstanceDocument.
      */
     public void indexDDI(DDIInstanceDocument ddiInstanceDocument) {
-        if (this.isEmpty()) {
-            log.info("Indexing objects of DDI document");
-            recursiveIndexing(ddiInstanceDocument.getDDIInstance());
-            log.info("Finished indexing of DDI document");
-        } else {
-            log.debug("Indexing already done.");
-        }
+        log.info("Indexing objects of DDI document");
+        indexDDIObject(ddiInstanceDocument.getDDIInstance());
+        log.info("Finished indexing of DDI document");
+    }
+
+    /**
+     * Store all DDI identifiable objects that are in the given DDI object in the index.
+     * @param ddiObject A DDI identifiable object.
+     */
+    public void indexDDIObject(AbstractIdentifiableType ddiObject) {
+        setup();
+        recursiveIndexing(ddiObject);
     }
 
     /**
@@ -51,7 +64,7 @@ public class DDIIndex extends HashMap<String, Object> { //TODO: AbstractIdentifi
         String ddiObjectId = ddiObject.getIDArray(0).getStringValue();
 
         // Put the object in the map under the id (there should never be duplicate ids in DDI documents)
-        this.merge(ddiObjectId, ddiObject, (oldDDIObject, newDDIObject) -> {
+        index.merge(ddiObjectId, ddiObject, (oldDDIObject, newDDIObject) -> {
             throw new RuntimeException(String.format("Duplicate ID \"%s\" found in given DDI.", ddiObjectId));
         });
 
@@ -95,13 +108,24 @@ public class DDIIndex extends HashMap<String, Object> { //TODO: AbstractIdentifi
 
     }
 
+    /** Return the DDI object corresponding to the given identifier,
+     * null if the identifier is not in the index. */
+    public AbstractIdentifiableType get(String ddiObjectId) {
+        return index.get(ddiObjectId);
+    }
+
+    /** Return true if the index contains the given identifier. */
+    public boolean containsId(String ddiObjectId) {
+        return index.containsKey(ddiObjectId);
+    }
+
     /** Return parent object of DDI object with given identifier. */
-    public Object getParent(String ddiObjectId) { //TODO: AbstractIdentifiableType i.o. Object
-        return this.get(parentsMap.get(ddiObjectId));
+    public AbstractIdentifiableType getParent(String ddiObjectId) {
+        return index.get(parentsMap.get(ddiObjectId));
     }
 
     @Override
     public String toString() {
-        return "DDIIndex["+size()+" elements]";
+        return "DDIIndex["+index.size()+" elements]";
     }
 }

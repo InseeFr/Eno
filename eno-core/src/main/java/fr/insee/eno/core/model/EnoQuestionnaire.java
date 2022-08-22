@@ -5,6 +5,7 @@ import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.question.MultipleResponseQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
+import fr.insee.eno.core.parameter.EnoParameters;
 import instance33.DDIInstanceType;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,10 +43,11 @@ public class EnoQuestionnaire extends EnoObject {
     private String label;
 
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "setMissing(#param)")
-    private boolean missingVariables = false; //TODO: from parameter
+    private boolean missingVariables;
 
-    @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "setPagination(#param)")
-    private String pagination = "question"; //TODO: from parameter
+    @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class,
+            field = "setPagination(T(fr.insee.eno.core.parameter.EnoParameters).lunaticNumberingMode(#param))")
+    private EnoParameters.QuestionNumberingMode questionNumberingMode;
 
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getVariableSchemeArray(0)" +
@@ -92,7 +94,7 @@ public class EnoQuestionnaire extends EnoObject {
 
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
-                    ".?[#this instanceof T(datacollection33.IfThenElseTextType)]")
+                    ".?[#this instanceof T(datacollection33.IfThenElseType)]")
     private final List<Filter> filters = new ArrayList<>();
 
     @DDI(contextType = DDIInstanceType.class,

@@ -4,10 +4,7 @@ import datacollection33.QuestionGridType;
 import datacollection33.QuestionItemType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.eno.core.model.Control;
-import fr.insee.eno.core.model.Declaration;
-import fr.insee.eno.core.model.EnoObject;
-import fr.insee.eno.core.model.Instruction;
+import fr.insee.eno.core.model.*;
 import fr.insee.lunatic.model.flat.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +14,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public abstract class Question extends EnoObject {
+public abstract class Question extends EnoObject implements EnoComponent {
 
     @DDI(contextType = {QuestionItemType.class, QuestionGridType.class}, field = "getIDArray(0).getStringValue()")
     @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class, CheckboxGroup.class, Table.class},
@@ -43,5 +40,14 @@ public abstract class Question extends EnoObject {
     @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class, CheckboxGroup.class, Table.class},
             field = "getControls()")
     private final List<Control> controls = new ArrayList<>();
+
+    /** Question filter.
+     * In DDI, the filters are mapped in the questionnaire object.
+     * If there is a declared filter for this question, it is put here through a 'processing' class.
+     * Otherwise, there is a default filter (with expression "true").
+     * In Lunatic, a ComponentType object has a ConditionFilter object. */
+    @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class, CheckboxGroup.class, Table.class},
+            field = "setConditionFilter(#param)")
+    private Filter filter = new Filter();
 
 }

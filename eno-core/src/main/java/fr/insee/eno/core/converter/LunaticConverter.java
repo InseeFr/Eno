@@ -34,6 +34,8 @@ public class LunaticConverter {
             return new DeclarationType();
         else if (enoObject instanceof Control)
             return new ControlType();
+        else if (enoObject instanceof Filter)
+            return new ConditionFilterType();
         else if (enoObject instanceof SingleResponseQuestion)
             return instantiateFrom((SingleResponseQuestion) enoObject);
         else if (enoObject instanceof MultipleResponseQuestion)

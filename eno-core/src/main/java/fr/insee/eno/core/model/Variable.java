@@ -7,25 +7,70 @@ import logicalproduct33.VariableType;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 public class Variable extends EnoObject {
 
+    /* TODO: separate object for calculated variable? probably (implies a selection on variable list in DDI,
+        but it is worth the effort since it would make more straightforward SpEL fields). */
+
+    @DDI(contextType = VariableType.class, field = "getIDArray(0).getStringValue()")
+    private String id;
+
+    /** In DDI, when a variable is used in a calculated expression, it is referred to through a reference
+     * (not by its id). This reference is the 'SourceParameterReference' id in the variable definition.
+     * Collected variables directly have a source parameter reference.
+     * Calculated variables have it in the 'Binding' in their 'VariableRepresentation'. */
+    @DDI(contextType = VariableType.class,
+            field = "getSourceParameterReference() != null ? " +
+                    "getSourceParameterReference().getIDArray(0).getStringValue() : " +
+                    "getVariableRepresentation().getProcessingInstructionReference().getBindingArray(0)" +
+                    ".getSourceParameterReference().getIDArray(0).getStringValue()")
+    private String reference;
+
+    /** Variable name. */
     @DDI(contextType = VariableType.class,
             field = "getVariableNameArray(0).getStringArray(0).getStringValue()")
     @Lunatic(contextType = IVariableType.class, field = "setName(#param)")
     private String name;
 
-    @DDI(contextType = VariableType.class, field = "getQuestionReferenceArray(0).getIDArray(0).getStringValue()")
+    /** Reference to the question in which the variable is collected. */
+    @DDI(contextType = VariableType.class,
+            field = "!#this.getQuestionReferenceList().isEmpty() ? " +
+                    "getQuestionReferenceArray(0).getIDArray(0).getStringValue() : null")
     @Lunatic(contextType = IVariableType.class, field = "setComponentRef(#param)")
-    String questionReference;
+    String questionReference; //TODO: case when the variable is used in multiple questions?
 
+    /** Expression to evaluate the variable if it is a calculated variable. */
+    @DDI(contextType = VariableType.class,
+            field = "getVariableRepresentation().getProcessingInstructionReference() != null ? " +
+                    "#index.get(#this.getVariableRepresentation().getProcessingInstructionReference().getIDArray(0).getStringValue())" +
+                    ".getCommandCodeArray(0).getCommandArray(0).getCommandContent() : null")
+    @Lunatic(contextType = fr.insee.lunatic.model.flat.VariableType.class, field = "setExpression(#param)")
+    String expression;
+
+    /** In DDI, the expression contains variable references instead of variables names.
+     * This list contains the references of these variables. */
+    @DDI(contextType = VariableType.class,
+            field = "getVariableRepresentation().getProcessingInstructionReference() != null ? " +
+                    "#index.get(#this.getVariableRepresentation().getProcessingInstructionReference().getIDArray(0).getStringValue())" +
+                    ".getCommandCodeArray(0).getCommandArray(0).getInParameterList() : null",
+            allowNullList = true)
+    private List<BindingReference> bindingReferences = new ArrayList<>();
+
+    /** Measurement unit (in case of some numeric variables). */
     @DDI(contextType = VariableType.class,
             field = "getVariableRepresentation().getValueRepresentation()?.getMeasurementUnit()?.getStringValue()")
     String unit;
 
+    /** Variable type (among 'COLLECTED', 'CALCULATED' or 'EXTERNAL'). */
+    @DDI(contextType = VariableType.class,
+            field = "!#this.getQuestionReferenceList().isEmpty() ? 'COLLECTED' : 'CALCULATED'")
     @Lunatic(contextType = IVariableType.class,
             field = "setVariableType(T(fr.insee.lunatic.model.flat.VariableTypeEnum).valueOf(#param))")
-    String collected = "COLLECTED";
+    String collected; // TODO: an enum (COLLECTED, CALCULATED, EXTERNAL) here would be appropriate (or separate classes?)
 
 }

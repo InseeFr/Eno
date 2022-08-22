@@ -32,6 +32,8 @@ build/
 
 ### Gradle ###
 .gradle
+<<<<<<< HEAD
 bin
 gradle
 gradlew*
+
