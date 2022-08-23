@@ -1,14 +1,13 @@
 package fr.insee.eno.core.mappers;
 
-import fr.insee.eno.core.model.*;
+import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.Variable;
+import fr.insee.eno.core.model.VariableGroup;
 import fr.insee.eno.core.model.question.BooleanQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.parsers.DDIParser;
 import instance33.DDIInstanceDocument;
-import instance33.DDIInstanceType;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import reusable33.IDType;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -18,37 +17,44 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DDIMapperTest {
 
-    private static EnoQuestionnaire enoQuestionnaire;
+    // TODO: more unit tests (one per DDI annotation in the model classes)
 
-    @BeforeAll
-    public static void mapDDI() throws IOException {
+    // Note: it may be pertinent to do one unit test class per model class
+
+    // Note: it is also possible to read portions of DDI xml files to do unit testing of annotations
+
+    /* TODO: test fails because no resource package is set on DDI instance. Same problem will occur for each
+        DDI annotation that uses a getter on a DDI list, see how we could manage this without adding null checks
+        in each SpEL expression of these annotations.
+        Idea: we could make unit tests not by annotation but by classes.
+    @Test
+    public void mapDDIInstanceId() {
+        //
+        String expectedId = "FOO-ID";
+        // Given
+        DDIInstanceType ddiInstanceType = DDIInstanceType.Factory.newInstance();
+        ddiInstanceType.getIDList().add(IDType.Factory.newInstance());
+        ddiInstanceType.getIDList().get(0).setStringValue(expectedId);
+        // When
+        DDIMapper mapper = new DDIMapper();
+        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
+        mapper.mapDDI(ddiInstanceType, enoQuestionnaire);
+        // Then
+        assertEquals(expectedId, enoQuestionnaire.getId());
+    }
+    */
+
+    @Test
+    public void ddiMappingFunctionalTest() throws IOException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
                 DDIMapperTest.class.getClassLoader().getResource("in/ddi/l10xmg2l.xml"));
         //
-        enoQuestionnaire = new EnoQuestionnaire();
+        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         //
-        DDIMapper ddiMapper = new DDIMapper(ddiInstanceDocument);
-        ddiMapper.mapDDI(enoQuestionnaire);
+        DDIMapper ddiMapper = new DDIMapper();
+        ddiMapper.mapDDI(ddiInstanceDocument, enoQuestionnaire);
 
-
-        /* TODO: unit testing of annotations like this (also possible to read portions of DDI xml files
-        String expectedId = "TOTO-ID";
-        //
-        DDIInstanceType ddiInstanceType = DDIInstanceType.Factory.newInstance();
-        ddiInstanceType.getIDList().add(IDType.Factory.newInstance());
-        ddiInstanceType.getIDList().get(0).setStringValue(expectedId);
-        //
-        DDIMapper mapper = new DDIMapper(ddiInstanceType);
-        EnoQuestionnaire enoQuestionnaire1 = new EnoQuestionnaire();
-        mapper.mapDDI(enoQuestionnaire1, ddiInstanceType);
-        //
-        assertEquals(expectedId, enoQuestionnaire1.getId());
-        */
-    }
-
-    @Test
-    public void ddiMappingTest() {
         // Questionnaire id
         assertEquals("INSEE-l10xmg2l", enoQuestionnaire.getId());
         // Variable
