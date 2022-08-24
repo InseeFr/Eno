@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Questionnaire xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
-               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               id="i6vwi2506qf2mms"
-               modele="SIMPSONS"
-               enoCoreVersion=""
-               missing="false"
-               pagination="question"
-               maxPage="37">
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                id="i6vwi2506qf2mms"
+                modele="SIMPSONS"
+                enoCoreVersion="2.3.10"
+                missing="false"
+                pagination="question"
+                maxPage="37">
    <label>
       <value>"Questionnaire SIMPSONS 20201215"</value>
       <type>VTL|MD</type>
@@ -194,6 +194,36 @@
                <type>VTL</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
+            <controls id="j6q9h8tj-formatNumber" criticality="ERROR">
+               <control>
+                  <value>not(not(match_characters(SEASON_NUMBER, "-?[0-9]+\.?[0-9]*")))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Vous devez saisir un nombre.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j6q9h8tj-formatBorneInfSup" criticality="ERROR">
+               <control>
+                  <value>not(0&gt;cast(SEASON_NUMBER,number) or 99&lt;cast(SEASON_NUMBER,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La valeur doit être comprise entre 0 et 99.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j6q9h8tj-formatDec" criticality="ERROR">
+               <control>
+                  <value>not(trunc(cast(SEASON_NUMBER,number),0)&lt;&gt;cast(SEASON_NUMBER,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
             <controls id="j6q9h8tj-CI-0" criticality="WARN">
                <control>
                   <value>not(SEASON_NUMBER = 0)</value>
@@ -246,6 +276,26 @@
                <type>VTL</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
+            <controls id="kiq71eoi-format" criticality="ERROR">
+               <control>
+                  <value>not(cast(\"DATEFIRST\", date, \"YYYY-MM-DD\"))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le format de la date YYYY-MM-DD n'est pas respecté.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="kiq71eoi-formatborne" criticality="ERROR">
+               <control>
+                  <value>not(cast(\"DATEFIRST\", date, \"YYYY-MM-DD\")&gt;cast(\"format-date(current-date(),"[Y0001]-[M01]-[D01]")\", date, \"YYYY-MM-DD\") or cast(\"DATEFIRST\", date, \"YYYY-MM-DD\")&lt;cast(\"1900-01-01\", date, \"YYYY-MM-DD\"))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La date saisie doit être comprise entre 1900-01-01 et format-date(current-date(),"[Y0001]-[M01]-[D01]").</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
             <hierarchy>
                <sequence id="j6p0ti5h" page="1">
                   <label>
@@ -287,6 +337,26 @@
                <type>VTL</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
+            <controls id="k5nvty2o-format" criticality="ERROR">
+               <control>
+                  <value>not(cast(\"DATEYYYYMM\", date, \"YYYY-MM\"))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le format de la date YYYY-MM n'est pas respecté.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="k5nvty2o-formatborne" criticality="ERROR">
+               <control>
+                  <value>not(cast(\"DATEYYYYMM\", date, \"YYYY-MM\")&lt;cast(\"1980-05\", date, \"YYYY-MM\"))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La date saisie doit être postérieure à 1980-05</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
             <hierarchy>
                <sequence id="j6p0ti5h" page="1">
                   <label>
@@ -329,6 +399,26 @@
                <type>VTL</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
+            <controls id="k5nw1fir-format" criticality="ERROR">
+               <control>
+                  <value>not(cast(\"DATEYYYY\", date, \"YYYY\"))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le format de la date YYYY n'est pas respecté.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="k5nw1fir-formatborne" criticality="ERROR">
+               <control>
+                  <value>not(cast(\"DATEYYYY\", date, \"YYYY\")&gt;cast(\"year-from-date(current-date())\", date, \"YYYY\") or cast(\"DATEYYYY\", date, \"YYYY\")&lt;cast(\"1900\", date, \"YYYY\"))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La date saisie doit être comprise entre 1900 et year-from-date(current-date()).</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
             <hierarchy>
                <sequence id="j6p0ti5h" page="1">
                   <label>
@@ -364,6 +454,36 @@
                <type>VTL</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
+            <controls id="k5nw0w05-formatNumber" criticality="ERROR">
+               <control>
+                  <value>not(not(match_characters(DURATIONH, "-?[0-9]+\.?[0-9]*")))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Vous devez saisir un nombre.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="k5nw0w05-formatBorneInfSup" criticality="ERROR">
+               <control>
+                  <value>not(0.00&gt;cast(DURATIONH,number) or 70.00&lt;cast(DURATIONH,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La valeur doit être comprise entre 0.00 et 70.00.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="k5nw0w05-formatDec" criticality="ERROR">
+               <control>
+                  <value>not(trunc(cast(DURATIONH,number),2)&lt;&gt;cast(DURATIONH,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le nombre doit comporter au maximum 2 chiffre(s) après la virgule.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
             <hierarchy>
                <sequence id="j6p0ti5h" page="1">
                   <label>
@@ -399,6 +519,36 @@
                <type>VTL</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
+            <controls id="k5nvu98z-formatNumber" criticality="ERROR">
+               <control>
+                  <value>not(not(match_characters(DURATIOND, "-?[0-9]+\.?[0-9]*")))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Vous devez saisir un nombre.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="k5nvu98z-formatBorneInfSup" criticality="ERROR">
+               <control>
+                  <value>not(0.0&gt;cast(DURATIOND,number) or 366.0&lt;cast(DURATIOND,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La valeur doit être comprise entre 0.0 et 366.0.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="k5nvu98z-formatDec" criticality="ERROR">
+               <control>
+                  <value>not(trunc(cast(DURATIOND,number),1)&lt;&gt;cast(DURATIOND,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le nombre doit comporter au maximum 1 chiffre(s) après la virgule.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
             <hierarchy>
                <sequence id="j6p0ti5h" page="1">
                   <label>
@@ -434,6 +584,36 @@
                <type>VTL</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
+            <controls id="k5nw8ei1-formatNumber" criticality="ERROR">
+               <control>
+                  <value>not(not(match_characters(DURATIONM, "-?[0-9]+\.?[0-9]*")))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Vous devez saisir un nombre.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="k5nw8ei1-formatBorneInfSup" criticality="ERROR">
+               <control>
+                  <value>not(0&gt;cast(DURATIONM,number) or 12&lt;cast(DURATIONM,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La valeur doit être comprise entre 0 et 12.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="k5nw8ei1-formatDec" criticality="ERROR">
+               <control>
+                  <value>not(trunc(cast(DURATIONM,number),0)&lt;&gt;cast(DURATIONM,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
             <hierarchy>
                <sequence id="j6p0ti5h" page="1">
                   <label>
@@ -469,6 +649,36 @@
                <type>VTL</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
+            <controls id="k5nw9dk4-formatNumber" criticality="ERROR">
+               <control>
+                  <value>not(not(match_characters(DURATIONY, "-?[0-9]+\.?[0-9]*")))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Vous devez saisir un nombre.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="k5nw9dk4-formatBorneInfSup" criticality="ERROR">
+               <control>
+                  <value>not(0&gt;cast(DURATIONY,number) or 100&lt;cast(DURATIONY,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La valeur doit être comprise entre 0 et 100.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="k5nw9dk4-formatDec" criticality="ERROR">
+               <control>
+                  <value>not(trunc(cast(DURATIONY,number),0)&lt;&gt;cast(DURATIONY,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
             <hierarchy>
                <sequence id="j6p0ti5h" page="1">
                   <label>
@@ -504,6 +714,36 @@
                <type>VTL</type>
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
+            <controls id="j6z06z1e-formatNumber" criticality="ERROR">
+               <control>
+                  <value>not(not(match_characters(AUDIENCE_SHARE, "-?[0-9]+\.?[0-9]*")))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Vous devez saisir un nombre.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j6z06z1e-formatBorneInfSup" criticality="ERROR">
+               <control>
+                  <value>not(0.0&gt;cast(AUDIENCE_SHARE,number) or 99.0&lt;cast(AUDIENCE_SHARE,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La valeur doit être comprise entre 0.0 et 99.0.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j6z06z1e-formatDec" criticality="ERROR">
+               <control>
+                  <value>not(trunc(cast(AUDIENCE_SHARE,number),1)&lt;&gt;cast(AUDIENCE_SHARE,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le nombre doit comporter au maximum 1 chiffre(s) après la virgule.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
             <hierarchy>
                <sequence id="j6p0ti5h" page="1">
                   <label>
@@ -1503,6 +1743,216 @@
             <bindingDependencies>PERCENTAGE_EXPENSES61</bindingDependencies>
             <bindingDependencies>PERCENTAGE_EXPENSES71</bindingDependencies>
             <bindingDependencies>SUM_EXPENSES</bindingDependencies>
+            <controls id="j4nwc63q-formatNumber" criticality="ERROR">
+               <control>
+                  <value>not(not(match_characters(PERCENTAGE_EXPENSES11, "-?[0-9]+\.?[0-9]*")))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Vous devez saisir un nombre.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatBorneInfSup" criticality="ERROR">
+               <control>
+                  <value>not(0.0&gt;cast(PERCENTAGE_EXPENSES11,number) or 100.0&lt;cast(PERCENTAGE_EXPENSES11,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La valeur doit être comprise entre 0.0 et 100.0.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatDec" criticality="ERROR">
+               <control>
+                  <value>not(trunc(cast(PERCENTAGE_EXPENSES11,number),1)&lt;&gt;cast(PERCENTAGE_EXPENSES11,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le nombre doit comporter au maximum 1 chiffre(s) après la virgule.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatNumber" criticality="ERROR">
+               <control>
+                  <value>not(not(match_characters(PERCENTAGE_EXPENSES21, "-?[0-9]+\.?[0-9]*")))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Vous devez saisir un nombre.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatBorneInfSup" criticality="ERROR">
+               <control>
+                  <value>not(0.0&gt;cast(PERCENTAGE_EXPENSES21,number) or 100.0&lt;cast(PERCENTAGE_EXPENSES21,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La valeur doit être comprise entre 0.0 et 100.0.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatDec" criticality="ERROR">
+               <control>
+                  <value>not(trunc(cast(PERCENTAGE_EXPENSES21,number),1)&lt;&gt;cast(PERCENTAGE_EXPENSES21,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le nombre doit comporter au maximum 1 chiffre(s) après la virgule.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatNumber" criticality="ERROR">
+               <control>
+                  <value>not(not(match_characters(PERCENTAGE_EXPENSES31, "-?[0-9]+\.?[0-9]*")))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Vous devez saisir un nombre.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatBorneInfSup" criticality="ERROR">
+               <control>
+                  <value>not(0.0&gt;cast(PERCENTAGE_EXPENSES31,number) or 100.0&lt;cast(PERCENTAGE_EXPENSES31,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La valeur doit être comprise entre 0.0 et 100.0.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatDec" criticality="ERROR">
+               <control>
+                  <value>not(trunc(cast(PERCENTAGE_EXPENSES31,number),1)&lt;&gt;cast(PERCENTAGE_EXPENSES31,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le nombre doit comporter au maximum 1 chiffre(s) après la virgule.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatNumber" criticality="ERROR">
+               <control>
+                  <value>not(not(match_characters(PERCENTAGE_EXPENSES41, "-?[0-9]+\.?[0-9]*")))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Vous devez saisir un nombre.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatBorneInfSup" criticality="ERROR">
+               <control>
+                  <value>not(0.0&gt;cast(PERCENTAGE_EXPENSES41,number) or 100.0&lt;cast(PERCENTAGE_EXPENSES41,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La valeur doit être comprise entre 0.0 et 100.0.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatDec" criticality="ERROR">
+               <control>
+                  <value>not(trunc(cast(PERCENTAGE_EXPENSES41,number),1)&lt;&gt;cast(PERCENTAGE_EXPENSES41,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le nombre doit comporter au maximum 1 chiffre(s) après la virgule.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatNumber" criticality="ERROR">
+               <control>
+                  <value>not(not(match_characters(PERCENTAGE_EXPENSES51, "-?[0-9]+\.?[0-9]*")))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Vous devez saisir un nombre.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatBorneInfSup" criticality="ERROR">
+               <control>
+                  <value>not(0.0&gt;cast(PERCENTAGE_EXPENSES51,number) or 100.0&lt;cast(PERCENTAGE_EXPENSES51,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La valeur doit être comprise entre 0.0 et 100.0.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatDec" criticality="ERROR">
+               <control>
+                  <value>not(trunc(cast(PERCENTAGE_EXPENSES51,number),1)&lt;&gt;cast(PERCENTAGE_EXPENSES51,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le nombre doit comporter au maximum 1 chiffre(s) après la virgule.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatNumber" criticality="ERROR">
+               <control>
+                  <value>not(not(match_characters(PERCENTAGE_EXPENSES61, "-?[0-9]+\.?[0-9]*")))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Vous devez saisir un nombre.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatBorneInfSup" criticality="ERROR">
+               <control>
+                  <value>not(0.0&gt;cast(PERCENTAGE_EXPENSES61,number) or 100.0&lt;cast(PERCENTAGE_EXPENSES61,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La valeur doit être comprise entre 0.0 et 100.0.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatDec" criticality="ERROR">
+               <control>
+                  <value>not(trunc(cast(PERCENTAGE_EXPENSES61,number),1)&lt;&gt;cast(PERCENTAGE_EXPENSES61,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le nombre doit comporter au maximum 1 chiffre(s) après la virgule.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatNumber" criticality="ERROR">
+               <control>
+                  <value>not(not(match_characters(PERCENTAGE_EXPENSES71, "-?[0-9]+\.?[0-9]*")))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Vous devez saisir un nombre.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatBorneInfSup" criticality="ERROR">
+               <control>
+                  <value>not(0.0&gt;cast(PERCENTAGE_EXPENSES71,number) or 100.0&lt;cast(PERCENTAGE_EXPENSES71,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La valeur doit être comprise entre 0.0 et 100.0.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="j4nwc63q-formatDec" criticality="ERROR">
+               <control>
+                  <value>not(trunc(cast(PERCENTAGE_EXPENSES71,number),1)&lt;&gt;cast(PERCENTAGE_EXPENSES71,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le nombre doit comporter au maximum 1 chiffre(s) après la virgule.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
             <controls id="j4nwc63q-CI-0" criticality="INFO">
                <control>
                   <value>not(PERCENTAGE_EXPENSES11 + PERCENTAGE_EXPENSES21 + PERCENTAGE_EXPENSES31 + PERCENTAGE_EXPENSES41 + PERCENTAGE_EXPENSES51 + PERCENTAGE_EXPENSES61 + PERCENTAGE_EXPENSES71  &lt;&gt;  100)</value>
@@ -1557,6 +2007,36 @@
                   <response name="PERCENTAGE_EXPENSES11"/>
                   <bindingDependencies>PERCENTAGE_EXPENSES11</bindingDependencies>
                </bodyLine>
+               <controls id="j4nwc63q-formatNumber" criticality="ERROR">
+                  <control>
+                     <value>not(not(match_characters(PERCENTAGE_EXPENSES11, "-?[0-9]+\.?[0-9]*")))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>Vous devez saisir un nombre.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
+               <controls id="j4nwc63q-formatBorneInfSup" criticality="ERROR">
+                  <control>
+                     <value>not(0.0&gt;cast(PERCENTAGE_EXPENSES11,number) or 100.0&lt;cast(PERCENTAGE_EXPENSES11,number))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>La valeur doit être comprise entre 0.0 et 100.0.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
+               <controls id="j4nwc63q-formatDec" criticality="ERROR">
+                  <control>
+                     <value>not(trunc(cast(PERCENTAGE_EXPENSES11,number),1)&lt;&gt;cast(PERCENTAGE_EXPENSES11,number))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>Le nombre doit comporter au maximum 1 chiffre(s) après la virgule.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
             </body>
             <body>
                <bodyLine>
@@ -1575,6 +2055,36 @@
                   <response name="PERCENTAGE_EXPENSES21"/>
                   <bindingDependencies>PERCENTAGE_EXPENSES21</bindingDependencies>
                </bodyLine>
+               <controls id="j4nwc63q-formatNumber" criticality="ERROR">
+                  <control>
+                     <value>not(not(match_characters(PERCENTAGE_EXPENSES21, "-?[0-9]+\.?[0-9]*")))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>Vous devez saisir un nombre.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
+               <controls id="j4nwc63q-formatBorneInfSup" criticality="ERROR">
+                  <control>
+                     <value>not(0.0&gt;cast(PERCENTAGE_EXPENSES21,number) or 100.0&lt;cast(PERCENTAGE_EXPENSES21,number))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>La valeur doit être comprise entre 0.0 et 100.0.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
+               <controls id="j4nwc63q-formatDec" criticality="ERROR">
+                  <control>
+                     <value>not(trunc(cast(PERCENTAGE_EXPENSES21,number),1)&lt;&gt;cast(PERCENTAGE_EXPENSES21,number))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>Le nombre doit comporter au maximum 1 chiffre(s) après la virgule.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
             </body>
             <body>
                <bodyLine rowspan="3">
@@ -1600,6 +2110,36 @@
                   <response name="PERCENTAGE_EXPENSES31"/>
                   <bindingDependencies>PERCENTAGE_EXPENSES31</bindingDependencies>
                </bodyLine>
+               <controls id="j4nwc63q-formatNumber" criticality="ERROR">
+                  <control>
+                     <value>not(not(match_characters(PERCENTAGE_EXPENSES31, "-?[0-9]+\.?[0-9]*")))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>Vous devez saisir un nombre.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
+               <controls id="j4nwc63q-formatBorneInfSup" criticality="ERROR">
+                  <control>
+                     <value>not(0.0&gt;cast(PERCENTAGE_EXPENSES31,number) or 100.0&lt;cast(PERCENTAGE_EXPENSES31,number))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>La valeur doit être comprise entre 0.0 et 100.0.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
+               <controls id="j4nwc63q-formatDec" criticality="ERROR">
+                  <control>
+                     <value>not(trunc(cast(PERCENTAGE_EXPENSES31,number),1)&lt;&gt;cast(PERCENTAGE_EXPENSES31,number))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>Le nombre doit comporter au maximum 1 chiffre(s) après la virgule.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
             </body>
             <body>
                <bodyLine>
@@ -1618,6 +2158,36 @@
                   <response name="PERCENTAGE_EXPENSES41"/>
                   <bindingDependencies>PERCENTAGE_EXPENSES41</bindingDependencies>
                </bodyLine>
+               <controls id="j4nwc63q-formatNumber" criticality="ERROR">
+                  <control>
+                     <value>not(not(match_characters(PERCENTAGE_EXPENSES41, "-?[0-9]+\.?[0-9]*")))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>Vous devez saisir un nombre.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
+               <controls id="j4nwc63q-formatBorneInfSup" criticality="ERROR">
+                  <control>
+                     <value>not(0.0&gt;cast(PERCENTAGE_EXPENSES41,number) or 100.0&lt;cast(PERCENTAGE_EXPENSES41,number))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>La valeur doit être comprise entre 0.0 et 100.0.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
+               <controls id="j4nwc63q-formatDec" criticality="ERROR">
+                  <control>
+                     <value>not(trunc(cast(PERCENTAGE_EXPENSES41,number),1)&lt;&gt;cast(PERCENTAGE_EXPENSES41,number))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>Le nombre doit comporter au maximum 1 chiffre(s) après la virgule.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
             </body>
             <body>
                <bodyLine>
@@ -1636,6 +2206,36 @@
                   <response name="PERCENTAGE_EXPENSES51"/>
                   <bindingDependencies>PERCENTAGE_EXPENSES51</bindingDependencies>
                </bodyLine>
+               <controls id="j4nwc63q-formatNumber" criticality="ERROR">
+                  <control>
+                     <value>not(not(match_characters(PERCENTAGE_EXPENSES51, "-?[0-9]+\.?[0-9]*")))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>Vous devez saisir un nombre.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
+               <controls id="j4nwc63q-formatBorneInfSup" criticality="ERROR">
+                  <control>
+                     <value>not(0.0&gt;cast(PERCENTAGE_EXPENSES51,number) or 100.0&lt;cast(PERCENTAGE_EXPENSES51,number))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>La valeur doit être comprise entre 0.0 et 100.0.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
+               <controls id="j4nwc63q-formatDec" criticality="ERROR">
+                  <control>
+                     <value>not(trunc(cast(PERCENTAGE_EXPENSES51,number),1)&lt;&gt;cast(PERCENTAGE_EXPENSES51,number))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>Le nombre doit comporter au maximum 1 chiffre(s) après la virgule.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
             </body>
             <body>
                <bodyLine>
@@ -1661,6 +2261,36 @@
                   <response name="PERCENTAGE_EXPENSES61"/>
                   <bindingDependencies>PERCENTAGE_EXPENSES61</bindingDependencies>
                </bodyLine>
+               <controls id="j4nwc63q-formatNumber" criticality="ERROR">
+                  <control>
+                     <value>not(not(match_characters(PERCENTAGE_EXPENSES61, "-?[0-9]+\.?[0-9]*")))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>Vous devez saisir un nombre.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
+               <controls id="j4nwc63q-formatBorneInfSup" criticality="ERROR">
+                  <control>
+                     <value>not(0.0&gt;cast(PERCENTAGE_EXPENSES61,number) or 100.0&lt;cast(PERCENTAGE_EXPENSES61,number))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>La valeur doit être comprise entre 0.0 et 100.0.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
+               <controls id="j4nwc63q-formatDec" criticality="ERROR">
+                  <control>
+                     <value>not(trunc(cast(PERCENTAGE_EXPENSES61,number),1)&lt;&gt;cast(PERCENTAGE_EXPENSES61,number))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>Le nombre doit comporter au maximum 1 chiffre(s) après la virgule.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
             </body>
             <body>
                <bodyLine colspan="2">
@@ -1679,6 +2309,36 @@
                   <response name="PERCENTAGE_EXPENSES71"/>
                   <bindingDependencies>PERCENTAGE_EXPENSES71</bindingDependencies>
                </bodyLine>
+               <controls id="j4nwc63q-formatNumber" criticality="ERROR">
+                  <control>
+                     <value>not(not(match_characters(PERCENTAGE_EXPENSES71, "-?[0-9]+\.?[0-9]*")))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>Vous devez saisir un nombre.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
+               <controls id="j4nwc63q-formatBorneInfSup" criticality="ERROR">
+                  <control>
+                     <value>not(0.0&gt;cast(PERCENTAGE_EXPENSES71,number) or 100.0&lt;cast(PERCENTAGE_EXPENSES71,number))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>La valeur doit être comprise entre 0.0 et 100.0.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
+               <controls id="j4nwc63q-formatDec" criticality="ERROR">
+                  <control>
+                     <value>not(trunc(cast(PERCENTAGE_EXPENSES71,number),1)&lt;&gt;cast(PERCENTAGE_EXPENSES71,number))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>Le nombre doit comporter au maximum 1 chiffre(s) après la virgule.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
             </body>
             <body>
                <bodyLine colspan="2">
@@ -3217,6 +3877,156 @@
          <bindingDependencies>LEAVDURATION42</bindingDependencies>
          <bindingDependencies>LEAVDURATION51</bindingDependencies>
          <bindingDependencies>LEAVDURATION52</bindingDependencies>
+         <controls id="jvxwy68n-formatNumber" criticality="ERROR">
+            <control>
+               <value>not(not(match_characters(LEAVDURATION11, "-?[0-9]+\.?[0-9]*")))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>Vous devez saisir un nombre.</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="jvxwy68n-formatBorneInfSup" criticality="ERROR">
+            <control>
+               <value>not(0&gt;cast(LEAVDURATION11,number) or 365&lt;cast(LEAVDURATION11,number))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>La valeur doit être comprise entre 0 et 365.</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="jvxwy68n-formatDec" criticality="ERROR">
+            <control>
+               <value>not(trunc(cast(LEAVDURATION11,number),0)&lt;&gt;cast(LEAVDURATION11,number))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="jvxwy68n-formatNumber" criticality="ERROR">
+            <control>
+               <value>not(not(match_characters(LEAVDURATION21, "-?[0-9]+\.?[0-9]*")))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>Vous devez saisir un nombre.</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="jvxwy68n-formatBorneInfSup" criticality="ERROR">
+            <control>
+               <value>not(0&gt;cast(LEAVDURATION21,number) or 365&lt;cast(LEAVDURATION21,number))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>La valeur doit être comprise entre 0 et 365.</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="jvxwy68n-formatDec" criticality="ERROR">
+            <control>
+               <value>not(trunc(cast(LEAVDURATION21,number),0)&lt;&gt;cast(LEAVDURATION21,number))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="jvxwy68n-formatNumber" criticality="ERROR">
+            <control>
+               <value>not(not(match_characters(LEAVDURATION31, "-?[0-9]+\.?[0-9]*")))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>Vous devez saisir un nombre.</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="jvxwy68n-formatBorneInfSup" criticality="ERROR">
+            <control>
+               <value>not(0&gt;cast(LEAVDURATION31,number) or 365&lt;cast(LEAVDURATION31,number))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>La valeur doit être comprise entre 0 et 365.</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="jvxwy68n-formatDec" criticality="ERROR">
+            <control>
+               <value>not(trunc(cast(LEAVDURATION31,number),0)&lt;&gt;cast(LEAVDURATION31,number))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="jvxwy68n-formatNumber" criticality="ERROR">
+            <control>
+               <value>not(not(match_characters(LEAVDURATION41, "-?[0-9]+\.?[0-9]*")))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>Vous devez saisir un nombre.</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="jvxwy68n-formatBorneInfSup" criticality="ERROR">
+            <control>
+               <value>not(0&gt;cast(LEAVDURATION41,number) or 365&lt;cast(LEAVDURATION41,number))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>La valeur doit être comprise entre 0 et 365.</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="jvxwy68n-formatDec" criticality="ERROR">
+            <control>
+               <value>not(trunc(cast(LEAVDURATION41,number),0)&lt;&gt;cast(LEAVDURATION41,number))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="jvxwy68n-formatNumber" criticality="ERROR">
+            <control>
+               <value>not(not(match_characters(LEAVDURATION51, "-?[0-9]+\.?[0-9]*")))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>Vous devez saisir un nombre.</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="jvxwy68n-formatBorneInfSup" criticality="ERROR">
+            <control>
+               <value>not(0&gt;cast(LEAVDURATION51,number) or 365&lt;cast(LEAVDURATION51,number))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>La valeur doit être comprise entre 0 et 365.</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="jvxwy68n-formatDec" criticality="ERROR">
+            <control>
+               <value>not(trunc(cast(LEAVDURATION51,number),0)&lt;&gt;cast(LEAVDURATION51,number))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
          <header>
             <label>
                <value/>
@@ -3251,6 +4061,36 @@
                <response name="LEAVDURATION11"/>
                <bindingDependencies>LEAVDURATION11</bindingDependencies>
             </bodyLine>
+            <controls id="jvxwy68n-formatNumber" criticality="ERROR">
+               <control>
+                  <value>not(not(match_characters(LEAVDURATION11, "-?[0-9]+\.?[0-9]*")))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Vous devez saisir un nombre.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="jvxwy68n-formatBorneInfSup" criticality="ERROR">
+               <control>
+                  <value>not(0&gt;cast(LEAVDURATION11,number) or 365&lt;cast(LEAVDURATION11,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La valeur doit être comprise entre 0 et 365.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="jvxwy68n-formatDec" criticality="ERROR">
+               <control>
+                  <value>not(trunc(cast(LEAVDURATION11,number),0)&lt;&gt;cast(LEAVDURATION11,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
             <bodyLine id="jvxwy68n-QOP-kewv20qg" componentType="Dropdown">
                <options>
                   <value>1</value>
@@ -3286,6 +4126,36 @@
                <response name="LEAVDURATION21"/>
                <bindingDependencies>LEAVDURATION21</bindingDependencies>
             </bodyLine>
+            <controls id="jvxwy68n-formatNumber" criticality="ERROR">
+               <control>
+                  <value>not(not(match_characters(LEAVDURATION21, "-?[0-9]+\.?[0-9]*")))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Vous devez saisir un nombre.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="jvxwy68n-formatBorneInfSup" criticality="ERROR">
+               <control>
+                  <value>not(0&gt;cast(LEAVDURATION21,number) or 365&lt;cast(LEAVDURATION21,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La valeur doit être comprise entre 0 et 365.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="jvxwy68n-formatDec" criticality="ERROR">
+               <control>
+                  <value>not(trunc(cast(LEAVDURATION21,number),0)&lt;&gt;cast(LEAVDURATION21,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
             <bodyLine id="jvxwy68n-QOP-kewvizdm" componentType="Dropdown">
                <options>
                   <value>1</value>
@@ -3321,6 +4191,36 @@
                <response name="LEAVDURATION31"/>
                <bindingDependencies>LEAVDURATION31</bindingDependencies>
             </bodyLine>
+            <controls id="jvxwy68n-formatNumber" criticality="ERROR">
+               <control>
+                  <value>not(not(match_characters(LEAVDURATION31, "-?[0-9]+\.?[0-9]*")))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Vous devez saisir un nombre.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="jvxwy68n-formatBorneInfSup" criticality="ERROR">
+               <control>
+                  <value>not(0&gt;cast(LEAVDURATION31,number) or 365&lt;cast(LEAVDURATION31,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La valeur doit être comprise entre 0 et 365.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="jvxwy68n-formatDec" criticality="ERROR">
+               <control>
+                  <value>not(trunc(cast(LEAVDURATION31,number),0)&lt;&gt;cast(LEAVDURATION31,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
             <bodyLine id="jvxwy68n-QOP-kewv9jcl" componentType="Dropdown">
                <options>
                   <value>1</value>
@@ -3356,6 +4256,36 @@
                <response name="LEAVDURATION41"/>
                <bindingDependencies>LEAVDURATION41</bindingDependencies>
             </bodyLine>
+            <controls id="jvxwy68n-formatNumber" criticality="ERROR">
+               <control>
+                  <value>not(not(match_characters(LEAVDURATION41, "-?[0-9]+\.?[0-9]*")))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Vous devez saisir un nombre.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="jvxwy68n-formatBorneInfSup" criticality="ERROR">
+               <control>
+                  <value>not(0&gt;cast(LEAVDURATION41,number) or 365&lt;cast(LEAVDURATION41,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La valeur doit être comprise entre 0 et 365.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="jvxwy68n-formatDec" criticality="ERROR">
+               <control>
+                  <value>not(trunc(cast(LEAVDURATION41,number),0)&lt;&gt;cast(LEAVDURATION41,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
             <bodyLine id="jvxwy68n-QOP-kewvf0gf" componentType="Dropdown">
                <options>
                   <value>1</value>
@@ -3391,6 +4321,36 @@
                <response name="LEAVDURATION51"/>
                <bindingDependencies>LEAVDURATION51</bindingDependencies>
             </bodyLine>
+            <controls id="jvxwy68n-formatNumber" criticality="ERROR">
+               <control>
+                  <value>not(not(match_characters(LEAVDURATION51, "-?[0-9]+\.?[0-9]*")))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Vous devez saisir un nombre.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="jvxwy68n-formatBorneInfSup" criticality="ERROR">
+               <control>
+                  <value>not(0&gt;cast(LEAVDURATION51,number) or 365&lt;cast(LEAVDURATION51,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>La valeur doit être comprise entre 0 et 365.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
+            <controls id="jvxwy68n-formatDec" criticality="ERROR">
+               <control>
+                  <value>not(trunc(cast(LEAVDURATION51,number),0)&lt;&gt;cast(LEAVDURATION51,number))</value>
+                  <type>VTL</type>
+               </control>
+               <errorMessage>
+                  <value>Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.</value>
+                  <type>VTL|MD</type>
+               </errorMessage>
+            </controls>
             <bodyLine id="jvxwy68n-QOP-kewvalmd" componentType="Dropdown">
                <options>
                   <value>1</value>
@@ -3450,6 +4410,36 @@
             <type>VTL</type>
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
+         <controls id="kiq612ky-formatNumber" criticality="ERROR">
+            <control>
+               <value>not(not(match_characters(NB_CHAR, "-?[0-9]+\.?[0-9]*")))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>Vous devez saisir un nombre.</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="kiq612ky-formatBorneInfSup" criticality="ERROR">
+            <control>
+               <value>not(0&gt;cast(NB_CHAR,number) or 20&lt;cast(NB_CHAR,number))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>La valeur doit être comprise entre 0 et 20.</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="kiq612ky-formatDec" criticality="ERROR">
+            <control>
+               <value>not(trunc(cast(NB_CHAR,number),0)&lt;&gt;cast(NB_CHAR,number))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
          <hierarchy>
             <sequence id="kiq5mr0b" page="32">
                <label>
@@ -3581,6 +4571,36 @@
                   <type>VTL</type>
                   <bindingDependencies>READY</bindingDependencies>
                </conditionFilter>
+               <controls id="kiq5r8wu-formatNumber" criticality="ERROR">
+                  <control>
+                     <value>not(not(match_characters(AGE_CHAR, "-?[0-9]+\.?[0-9]*")))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>Vous devez saisir un nombre.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
+               <controls id="kiq5r8wu-formatBorneInfSup" criticality="ERROR">
+                  <control>
+                     <value>not(0&gt;cast(AGE_CHAR,number) or 120&lt;cast(AGE_CHAR,number))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>La valeur doit être comprise entre 0 et 120.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
+               <controls id="kiq5r8wu-formatDec" criticality="ERROR">
+                  <control>
+                     <value>not(trunc(cast(AGE_CHAR,number),0)&lt;&gt;cast(AGE_CHAR,number))</value>
+                     <type>VTL</type>
+                  </control>
+                  <errorMessage>
+                     <value>Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.</value>
+                     <type>VTL|MD</type>
+                  </errorMessage>
+               </controls>
                <hierarchy>
                   <sequence id="kiq5mr0b" page="32">
                      <label>
@@ -5258,8 +6278,8 @@
          <size>NB_CHAR</size>
          <variables>NAME_CHAR</variables>
          <variables>AGE_CHAR</variables>
-         </NB_CHAR>
-   <NAME_CHAR>
+      </NB_CHAR>
+      <NAME_CHAR>
          <size>count(NAME_CHAR)</size>
          <variables>FAVCHAR</variables>
          <variables>MEMORY_CHAR</variables>

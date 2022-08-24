@@ -755,7 +755,9 @@
 					<missingResponse>
 						<xsl:attribute name="name" select="$missingResponseName"/>
 					</missingResponse>
-				</xsl:if>				
+				</xsl:if>
+
+
 			</components>
 			
 			<xsl:if test="$addFilterResult">
@@ -782,6 +784,19 @@
 				<xsl:with-param name="idLoop" select="$idLoop"/>
 			</xsl:call-template>
 		</xsl:if>
+		
+
+		<xsl:call-template name="enolunatic:add-format-controls">
+			<xsl:with-param name="idQuestion" select="$idQuestion"/>
+			<xsl:with-param name="responseName" select="$responseName"/>
+			<xsl:with-param name="componentType" select="$componentType"/>
+			<xsl:with-param name="minimumResponse" select="$minimumResponse"/>
+			<xsl:with-param name="numberOfDecimals" select="$numberOfDecimals"/>
+			<xsl:with-param name="maximumResponse" select="$maximumResponse"/>
+			<xsl:with-param name="format" select="$format"/>
+			<xsl:with-param name="lengthResponse" select="$lengthResponse"/>
+		</xsl:call-template>
+		
 	</xsl:template>
 
 	<xd:doc>
@@ -855,12 +870,26 @@
 				<xsl:with-param name="responseName" select="$responseName"/>
 			</xsl:call-template>
 		</xsl:element>
+		
 		<xsl:call-template name="enolunatic:add-collected-variable-to-components">
 			<xsl:with-param name="responseName" select="$responseName"/>
 			<xsl:with-param name="componentRef" select="$idQuestion"/>
 			<xsl:with-param name="loopDepth" select="$loopDepth"/>
 			<xsl:with-param name="idLoop" select="$idLoop"/>
 		</xsl:call-template>
+		<xsl:call-template name="enolunatic:add-format-controls">
+			<xsl:with-param name="idQuestion" select="$idQuestion"/>
+			<xsl:with-param name="responseName" select="$responseName"/>
+			<xsl:with-param name="componentType" select="$componentType"/>
+			<xsl:with-param name="minimumResponse" select="$minimumResponse"/>
+			<xsl:with-param name="numberOfDecimals" select="$numberOfDecimals"/>
+			<xsl:with-param name="maximumResponse" select="$maximumResponse"/>
+			<xsl:with-param name="format" select="$dateFormat"/>
+			<xsl:with-param name="lengthResponse" select="$lengthResponse"/>
+		</xsl:call-template>
+		
+		
+		
 	</xsl:template>
 
 	<xd:doc>
@@ -1096,6 +1125,7 @@
 			<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
 	
 			<controls>
+				
 				<xsl:if test="$id != ''">
 					<xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
 				</xsl:if>
@@ -1204,6 +1234,208 @@
 			</values>
 		</variables>
 	</xsl:template>
+	
+	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Named template: enolunatic:add-format-controls.</xd:p>
+			<xd:p>It creates the format controls.</xd:p>
+		</xd:desc>
+	</xd:doc>
+	<xsl:template name="enolunatic:add-format-controls">
+		<xsl:param name="idQuestion"/>
+		<xsl:param name="responseName"/>
+		<xsl:param name="componentType"/>
+		<xsl:param name="minimumResponse"/>
+		<xsl:param name="maximumResponse"/>
+		<xsl:param name="format"/>
+		<xsl:param name="numberOfDecimals"/>
+		<xsl:param name="lengthResponse"/>
+		<xsl:if test="$componentType='InputNumber'">
+			<controls>		
+				<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatNumber')"/></xsl:attribute>
+				<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
+				<control>       
+					<value>
+						<xsl:value-of select="'not(not(match_characters('||$responseName||', &quot;-?[0-9]+\.?[0-9]*&quot;)))'"/>				
+					</value>
+					<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
+				</control>
+				<errorMessage>
+					<value>
+						<xsl:value-of select="'Vous devez saisir un nombre.'"/>				
+					</value>
+					<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
+				</errorMessage>
+			</controls>	
+			<xsl:if test="$minimumResponse!='' and $maximumResponse!=''">	
+				<controls>		
+					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatBorneInfSup')"/></xsl:attribute>
+					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
+					<control>       
+						<value>
+							<xsl:value-of select="'not('||$minimumResponse|| '&gt;cast('||$responseName||',number) or '||$maximumResponse||'&lt;cast('||$responseName||',number))'"/>				
+						</value>
+						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
+					</control>
+					<errorMessage>
+						<value>
+							<xsl:value-of select="'La valeur doit être comprise entre ' ||$minimumResponse || ' et ' ||$maximumResponse ||'.'"/>				
+						</value>
+						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
+					</errorMessage>
+				</controls>
+			</xsl:if>
+			<xsl:if test="$minimumResponse='' and $maximumResponse!=''">	
+				<controls>		
+					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatBorneSup')"/></xsl:attribute>
+					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
+					<control>       
+						<value>
+							<xsl:value-of select="'not('||$maximumResponse||'&lt;cast('||$responseName||',number))'"/>				
+						</value>
+						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
+					</control>
+					<errorMessage>
+						<value>
+							<xsl:value-of select="'La valeur doit être inférieure à ' ||$maximumResponse ||'.'"/>				
+						</value>
+						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
+					</errorMessage>
+				</controls>
+			</xsl:if>
+			<xsl:if test="$minimumResponse!='' and $maximumResponse=''">	
+				<controls>		
+					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatBorneInf')"/></xsl:attribute>
+					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
+					<control>       
+						<value>
+							<xsl:value-of select="'not('||$minimumResponse|| '&gt;cast('||$responseName||',number)'"/>				
+						</value>
+						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
+					</control>
+					<errorMessage>
+						<value>
+							<xsl:value-of select="'La valeur doit être supérieure à ' ||$minimumResponse ||'.'"/>				
+						</value>
+						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
+					</errorMessage>
+				</controls>
+			</xsl:if>
+			<controls>		
+				<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatDec')"/></xsl:attribute>
+				<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
+				<control>       
+					<value>
+						<xsl:value-of select="'not(trunc(cast('||$responseName||',number),'||$numberOfDecimals ||')&lt;&gt;cast('||$responseName||',number))'"/>				
+					</value>
+					<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
+				</control>
+				<errorMessage>
+					<value>
+						<xsl:value-of select="'Le nombre doit comporter au maximum ' ||$numberOfDecimals|| ' chiffre(s) après la virgule.'"/>				
+					</value>
+					<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
+				</errorMessage>
+			</controls>
+		</xsl:if>
+		
+		<!--
+		<xsl:if test="$componentType=('Input', 'Textarea')">
+			<controls>		
+				<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatLength')"/></xsl:attribute>
+				<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
+				<control>       
+					<value>
+						<xsl:value-of select="'not(length('||$responseName||')&gt;'||$lengthResponse||')'"/>				
+					</value>
+					<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
+				</control>
+				<errorMessage>
+					<value>
+						<xsl:value-of select="'Vous avez dépassé la limite autorisée de '||$lengthResponse ||' caractères.'"/>				
+					</value>
+					<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
+				</errorMessage>
+			</controls>
+		</xsl:if>
+		-->
+		
+		<xsl:if test="$componentType='Datepicker'">
+			<controls>		
+				<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format')"/></xsl:attribute>
+				<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
+				<control>       
+					<value>
+						<xsl:value-of select="'not(cast(\&quot;'||$responseName||'\&quot;, date, \&quot;'||$format||'\&quot;))'"/>				
+					</value>
+					<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
+				</control>
+				<errorMessage>
+					<value>
+						<xsl:value-of select="'Le format de la date '||$format ||' n''est pas respecté.'"/>				
+					</value>
+					<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
+				</errorMessage>
+			</controls>
+			<xsl:if test="$minimumResponse!='' and $maximumResponse=''">
+				<controls>		
+					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatborne')"/></xsl:attribute>
+					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
+					<control>       
+						<value>
+							<xsl:value-of select="'not(cast(\&quot;'||$responseName||'\&quot;, date, \&quot;'||$format||'\&quot;)&lt;cast(\&quot;'||$minimumResponse||'\&quot;, date, \&quot;'||$format||'\&quot;))'"/>				
+						</value>
+						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
+					</control>
+					<errorMessage>
+						<value>
+							<xsl:value-of select="'La date saisie doit être postérieure à '|| $minimumResponse"/>				
+						</value>
+						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
+					</errorMessage>
+				</controls>
+			</xsl:if>
+			<xsl:if test="$minimumResponse='' and $maximumResponse!=''">
+				<controls>		
+					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatborne')"/></xsl:attribute>
+					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
+					<control>       
+						<value>
+							<xsl:value-of select="'not(cast(\&quot;'||$responseName||'\&quot;, date, \&quot;'||$format||')&gt;cast(\&quot;'||$maximumResponse||'\&quot;, date, \&quot;'||$format||'\&quot;))'"/>				
+						</value>
+						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
+					</control>
+					<errorMessage>
+						<value>
+							<xsl:value-of select="'La date saisie doit être antérieure à '|| $maximumResponse"/>				
+						</value>
+						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
+					</errorMessage>
+				</controls>
+			</xsl:if>
+			<xsl:if test="$minimumResponse!='' and $maximumResponse!=''">
+				<controls>		
+					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatborne')"/></xsl:attribute>
+					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
+					<control>       
+						<value>
+							<xsl:value-of select="'not(cast(\&quot;'||$responseName||'\&quot;, date, \&quot;'||$format||'\&quot;)&gt;cast(\&quot;'||$maximumResponse||'\&quot;, date, \&quot;'||$format||'\&quot;) or cast(\&quot;'||$responseName||'\&quot;, date, \&quot;'||$format||'\&quot;)&lt;cast(\&quot;'||$minimumResponse||'\&quot;, date, \&quot;'||$format||'\&quot;))'"/>				
+						</value>
+						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
+					</control>
+					<errorMessage>
+						<value>
+							<xsl:value-of select="'La date saisie doit être comprise entre '|| $minimumResponse || ' et '|| $maximumResponse || '.'"/>				
+						</value>
+						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
+					</errorMessage>
+				</controls>
+			</xsl:if>
+		</xsl:if>
+		
+	</xsl:template>
+	
 
 	<xd:doc>
 		<xd:desc>
