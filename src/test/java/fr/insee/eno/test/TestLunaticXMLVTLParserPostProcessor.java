@@ -70,7 +70,7 @@ public class TestLunaticXMLVTLParserPostProcessor {
 	public void simpleWithFileTest() {
 		try {
 			Path basePath = Path.of(TestLunaticXMLVTLParserPostProcessor.class.getResource("/lunatic-xml-vtl-parsing").toURI());
-			
+
 			Path outPath = Paths.get(Constants.TEMP_FOLDER_PATH + "/test-vtl.xml");
 			Files.deleteIfExists(outPath);
 			Path outputFilePath = Files.createFile(outPath);
@@ -78,7 +78,7 @@ public class TestLunaticXMLVTLParserPostProcessor {
 			File outPostProcessing = lunaticXMLVtlParserPostprocessor.process(in, null, "test");
 			FileUtils.copyFile(outPostProcessing,outputFilePath.toFile());
 			FileUtils.forceDelete(outPostProcessing);
-			File expectedFile = basePath.resolve("/out.xml").toFile();
+			File expectedFile = basePath.resolve("out.xml").toFile();
 			Diff diff = xmlDiff.getDiff(outputFilePath.toFile(),expectedFile);
 			Assertions.assertFalse(diff::hasDifferences, ()->getDiffMessage(diff, basePath.toString()));
 			
