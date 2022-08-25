@@ -17,25 +17,22 @@ public class XMLDiff {
         
     }
       
-    public Diff getDiff(File input, File expected) throws Exception {
+    public Diff getDiff(File input, File expected) {
         System.out.println(String.format("Diff  %s with %s", input.getAbsolutePath(), expected.getAbsolutePath()));
         CommentLessSource inputStream = null;
-        CommentLessSource expectedStream = null; 
-        try {
-        	inputStream = new CommentLessSource(new StreamSource(input));
-        	expectedStream = new CommentLessSource(new StreamSource(expected));
-        	
-            return DiffBuilder
-                    .compare(expectedStream)
-                    .withAttributeFilter(attr -> !attr.getName().equals("enoCoreVersion"))
-                    .withTest(inputStream)
-                    .ignoreWhitespace()
-                    .normalizeWhitespace()
-                    .checkForIdentical()
-                    .build();
-        } catch (Exception e) {
-            throw e;
-        } 
+        CommentLessSource expectedStream = null;
+
+        inputStream = new CommentLessSource(new StreamSource(input));
+        expectedStream = new CommentLessSource(new StreamSource(expected));
+
+        return DiffBuilder
+                .compare(expectedStream)
+                .withAttributeFilter(attr -> !attr.getName().equals("enoCoreVersion"))
+                .withTest(inputStream)
+                .ignoreWhitespace()
+                .normalizeWhitespace()
+                .checkForIdentical()
+                .build();
     }
 
     public Diff getDiff(String inputFilePath, String expectedFilePath) throws Exception {

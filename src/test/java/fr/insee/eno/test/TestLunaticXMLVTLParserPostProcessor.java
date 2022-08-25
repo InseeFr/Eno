@@ -2,10 +2,12 @@ package fr.insee.eno.test;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import fr.insee.eno.exception.EnoGenerationException;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -67,30 +69,24 @@ public class TestLunaticXMLVTLParserPostProcessor {
 	@Test
 	public void simpleWithFileTest() {
 		try {
-			String basePath = "src/test/resources/lunatic-xml-vtl-parsing";
+			Path basePath = Path.of(TestLunaticXMLVTLParserPostProcessor.class.getResource("/lunatic-xml-vtl-parsing").toURI());
 			
 			Path outPath = Paths.get(Constants.TEMP_FOLDER_PATH + "/test-vtl.xml");
 			Files.deleteIfExists(outPath);
 			Path outputFilePath = Files.createFile(outPath);
-			File in = new File(String.format("%s/in.xml", basePath));
+			File in = basePath.resolve("in.xml").toFile();
 			File outPostProcessing = lunaticXMLVtlParserPostprocessor.process(in, null, "test");
 			FileUtils.copyFile(outPostProcessing,outputFilePath.toFile());
 			FileUtils.forceDelete(outPostProcessing);
-			File expectedFile = new File(String.format("%s/out.xml", basePath));
+			File expectedFile = basePath.resolve("/out.xml").toFile();
 			Diff diff = xmlDiff.getDiff(outputFilePath.toFile(),expectedFile);
-			Assertions.assertFalse(diff::hasDifferences, ()->getDiffMessage(diff, basePath));
+			Assertions.assertFalse(diff::hasDifferences, ()->getDiffMessage(diff, basePath.toString()));
 			
-		} catch (IOException e) {
-			e.printStackTrace();
-			Assertions.fail();
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			Assertions.fail();
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (IOException | EnoGenerationException | URISyntaxException e) {
 			System.out.println(e.getMessage());
+			e.printStackTrace();
 			Assertions.fail();
-		} 
+		}
 	}
 	
 	private String getDiffMessage(Diff diff, String path) {
