@@ -5,6 +5,7 @@ import fr.insee.eno.core.model.EnoComponent;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.Mode;
 import fr.insee.eno.core.processing.EnoProcessingInterface;
+import fr.insee.eno.core.reference.EnoCatalog;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -14,13 +15,12 @@ public class EnoModeSelection implements EnoProcessingInterface {
 
     private final List<Mode> selectedModes;
 
+    private EnoCatalog enoCatalog;
+
     /** Remove elements that does not correspond to the "selected modes" parameter.
      * For now, only declarations and instructions are concerned by mode selection. */
     public void apply(EnoQuestionnaire enoQuestionnaire) {
-        //
-        assert enoQuestionnaire.getIndex() != null;
-        //
-        for (EnoComponent enoComponent : enoQuestionnaire.getIndex().getComponents()) {
+        for (EnoComponent enoComponent : enoCatalog.getComponents()) {
             enoComponent.getDeclarations().removeIf(this::hasNoSelectedMode);
             enoComponent.getInstructions().removeIf(this::hasNoSelectedMode);
         }
