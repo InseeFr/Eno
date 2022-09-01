@@ -2,9 +2,11 @@ package fr.insee.eno.core.mappers;
 
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.converter.DDIConverter;
+import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.reference.DDIIndex;
+import fr.insee.eno.core.reference.EnoIndex;
 import instance33.DDIInstanceDocument;
 import instance33.DDIInstanceType;
 import lombok.NonNull;
@@ -28,11 +30,15 @@ import java.util.List;
 @Slf4j
 public class DDIMapper extends Mapper {
 
+    /** SpEL evaluation context during the mapping. */
     private EvaluationContext context;
+
+    /** Index created in the entry object of mapping functions. */
+    private EnoIndex index;
 
     public DDIMapper() {}
 
-    private void setup(AbstractIdentifiableType ddiObject) {
+    private void setup(AbstractIdentifiableType ddiObject, EnoObject enoObject) {
         log.debug("DDI mapping entry object: " + DDIToString(ddiObject));
         // Index DDI object
         DDIIndex ddiIndex = new DDIIndex();
@@ -41,6 +47,9 @@ public class DDIMapper extends Mapper {
         // Init the context and put the DDI index
         context = new StandardEvaluationContext();
         context.setVariable("index", ddiIndex);
+        // Eno index to be filled by the mapper
+        index = new EnoIndex();
+        enoObject.setIndex(index);
     }
 
     public void mapDDI(@NonNull DDIInstanceDocument ddiInstanceDocument, @NonNull EnoQuestionnaire enoQuestionnaire) {
@@ -49,7 +58,7 @@ public class DDIMapper extends Mapper {
 
     public void mapDDI(@NonNull DDIInstanceType ddiInstanceType, @NonNull EnoQuestionnaire enoQuestionnaire) {
         log.info("Starting mapping between DDI instance and Eno questionnaire.");
-        setup(ddiInstanceType);
+        setup(ddiInstanceType, enoQuestionnaire);
         recursiveMapping(ddiInstanceType, enoQuestionnaire);
         log.info("Finished mapping between DDI instance and Eno questionnaire.");
     }
@@ -64,7 +73,7 @@ public class DDIMapper extends Mapper {
         //            ddiObject.getClass(), enoObject.getClass()));
         //{
         //
-        setup(ddiObject);
+        setup(ddiObject, enoObject);
         recursiveMapping(ddiObject, enoObject);
     }
 
@@ -214,6 +223,13 @@ public class DDIMapper extends Mapper {
                 }
 
             }
+        }
+
+        // Add the object in the index (if it is an identifiable object)
+        // Note: it is important to do this after that the mapping has been done
+        // (otherwise the object id is not set).
+        if (enoObject instanceof EnoIdentifiableObject enoIdentifiableObject) {
+            index.put(enoIdentifiableObject.getId(), enoIdentifiableObject);
         }
 
     }
