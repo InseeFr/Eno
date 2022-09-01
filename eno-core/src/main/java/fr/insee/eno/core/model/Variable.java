@@ -12,7 +12,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class Variable extends EnoObject {
+public class Variable extends EnoObject implements EnoObjectWithExpression {
 
     /* TODO: separate object for calculated variable? probably (implies a selection on variable list in DDI,
         but it is worth the effort since it would make more straightforward SpEL fields). */
