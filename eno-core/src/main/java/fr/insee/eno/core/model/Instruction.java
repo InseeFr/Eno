@@ -13,13 +13,9 @@ import java.util.List;
 /** Text displayed after a question or sequence. */
 @Getter
 @Setter
-public class Instruction extends EnoObject implements DeclarationInterface {
+public class Instruction extends EnoIdentifiableObject implements DeclarationInterface {
 
-    @DDI(contextType = InstructionType.class,
-            field = "getIDArray(0).getStringValue()")
-    @Lunatic(contextType = DeclarationType.class, field = "setId(#param)")
-    String id;
-    // TODO: why does Lunatic concatenate sequence id and declaration id ? -> no concrete reason, ok
+    // TODO: why does Eno-V2 concatenate sequence id and declaration id for Lunatic ? -> no concrete reason, ok
 
     /** Type of instruction (either instruction / help / warning / ...)
      * In DDI, this information is on the same level as the information on the modes concerned by the instruction.

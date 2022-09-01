@@ -14,12 +14,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public abstract class Question extends EnoObject implements EnoComponent {
-
-    @DDI(contextType = {QuestionItemType.class, QuestionGridType.class}, field = "getIDArray(0).getStringValue()")
-    @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class, CheckboxGroup.class, Table.class},
-            field = "setId(#param)")
-    String id;
+public abstract class Question extends EnoIdentifiableObject implements EnoComponent {
 
     @DDI(contextType = {QuestionItemType.class, QuestionGridType.class},
             field = "getQuestionTextArray(0).getTextContentArray(0).getText().getStringValue()")
