@@ -19,7 +19,7 @@ public class EnoParameters {
     private boolean sequenceNumbering;
     private QuestionNumberingMode questionNumberingMode;
     private boolean arrowCharInQuestions;
-    private List<Mode> selectedModes = new ArrayList<>();
+    private List<Mode> selectedModes = new ArrayList<>(); //TODO: maybe public class SelectedModes extends List<Mode>
     private boolean missingVariables;
 
     public EnoParameters() {
