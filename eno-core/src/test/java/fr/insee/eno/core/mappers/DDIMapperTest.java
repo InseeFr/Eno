@@ -33,18 +33,8 @@ public class DDIMapperTest {
 
     // Note: it is also possible to read portions of DDI xml files to do unit testing of annotations
 
-    /* TODO: test fails because no resource package is set on DDI instance. Same problem will occur for each
-        DDI annotation that uses a getter on a DDI list, see how we could manage this without adding null checks
-        in each SpEL expression of these annotations.
-        Idea: we could make unit tests not by annotation but by classes. */
     @Test
-    //@Disabled
     public void mapDDIInstanceId() {
-
-        EnoIndex enoIndex = Mockito.mock(EnoIndex.class);
-        Mockito.when(enoIndex.get("monId")).thenReturn(new EnoQuestionnaire());
-        enoIndex.get("foo");
-
         //
         String expectedId = "FOO-ID";
         // Given

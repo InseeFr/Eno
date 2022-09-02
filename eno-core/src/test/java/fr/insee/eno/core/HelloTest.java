@@ -10,10 +10,12 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.Variable;
 import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.reference.DDIIndex;
+import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
 import instance33.DDIInstanceDocument;
 import logicalproduct33.VariableGroupType;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.core.convert.TypeDescriptor;
@@ -41,6 +43,13 @@ public class HelloTest {
         //
         DDIInstanceDocument newInstance = DDIInstanceDocument.Factory.newInstance();
         System.out.println("Hello !");
+    }
+
+    @Test
+    public void helloMockito() {
+        EnoIndex enoIndex = Mockito.mock(EnoIndex.class);
+        Mockito.when(enoIndex.get("monId")).thenReturn(new EnoQuestionnaire());
+        enoIndex.get("foo");
     }
 
     @Test
