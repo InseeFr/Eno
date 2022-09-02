@@ -6,9 +6,19 @@ import fr.insee.eno.core.model.VariableGroup;
 import fr.insee.eno.core.model.question.BooleanQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.parsers.DDIParser;
+import fr.insee.eno.core.reference.EnoIndex;
 import instance33.DDIInstanceDocument;
+import instance33.DDIInstanceType;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.expression.EvaluationContext;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
+import reusable33.IDType;
 
+import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,9 +36,15 @@ public class DDIMapperTest {
     /* TODO: test fails because no resource package is set on DDI instance. Same problem will occur for each
         DDI annotation that uses a getter on a DDI list, see how we could manage this without adding null checks
         in each SpEL expression of these annotations.
-        Idea: we could make unit tests not by annotation but by classes.
+        Idea: we could make unit tests not by annotation but by classes. */
     @Test
+    //@Disabled
     public void mapDDIInstanceId() {
+
+        EnoIndex enoIndex = Mockito.mock(EnoIndex.class);
+        Mockito.when(enoIndex.get("monId")).thenReturn(new EnoQuestionnaire());
+        enoIndex.get("foo");
+
         //
         String expectedId = "FOO-ID";
         // Given
@@ -38,11 +54,13 @@ public class DDIMapperTest {
         // When
         DDIMapper mapper = new DDIMapper();
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-        mapper.mapDDI(ddiInstanceType, enoQuestionnaire);
+        BeanWrapper beanWrapper = new BeanWrapperImpl(enoQuestionnaire);
+        PropertyDescriptor propertyDescriptor = beanWrapper.getPropertyDescriptor("id");
+        EvaluationContext context = new StandardEvaluationContext();
+        mapper.propertyMapping(ddiInstanceType, enoQuestionnaire, beanWrapper, propertyDescriptor,context);
         // Then
         assertEquals(expectedId, enoQuestionnaire.getId());
     }
-    */
 
     @Test
     public void ddiMappingFunctionalTest() throws IOException {
