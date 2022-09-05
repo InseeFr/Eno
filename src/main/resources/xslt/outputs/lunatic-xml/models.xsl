@@ -1258,7 +1258,7 @@
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
 					<control>       
 						<value>
-							<xsl:value-of select="'not(not(isnull('||$responseName||')) and '||$minimumResponse|| '&gt;'||$responseName||' or '||$maximumResponse||'&lt;'||$responseName||'))'"/>				
+							<xsl:value-of select="'not(not(isnull('||$responseName||')) and ('||$minimumResponse|| '&gt;'||$responseName||' or '||$maximumResponse||'&lt;'||$responseName||')))'"/>				
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 					</control>
@@ -1331,7 +1331,7 @@
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
 					<control>       
 						<value>
-							<xsl:value-of select="'not(cast('||$responseName||', date, &quot;'||$format||'&quot;)&lt;cast(&quot;'||$minimumResponse||'&quot;, date, &quot;'||$format||'&quot;))'"/>				
+							<xsl:value-of select="'not(not(isnull('||$responseName||')) and cast('||$responseName||', date, &quot;'||$format||'&quot;)&lt;cast(&quot;'||$minimumResponse||'&quot;, date, &quot;'||$format||'&quot;))'"/>				
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 					</control>
@@ -1349,7 +1349,7 @@
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
 					<control>       
 						<value>
-							<xsl:value-of select="'not(cast(&quot;'||$responseName||'&quot;, date, &quot;'||$format||')&gt;cast(&quot;'||$maximumResponse||'&quot;, date, &quot;'||$format||'&quot;))'"/>				
+							<xsl:value-of select="'not(not(isnull('||$responseName||')) and cast('||$responseName||', date, &quot;'||$format||')&gt;cast(&quot;'||$maximumResponse||'&quot;, date, &quot;'||$format||'&quot;))'"/>				
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 					</control>
@@ -1367,7 +1367,7 @@
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
 					<control>       
 						<value>
-							<xsl:value-of select="'not(cast(&quot;'||$responseName||'&quot;, date, &quot;'||$format||'&quot;)&gt;cast(&quot;'||$maximumResponse||'&quot;, date, &quot;'||$format||'&quot;) or cast(&quot;'||$responseName||'&quot;, date, &quot;'||$format||'&quot;)&lt;cast(&quot;'||$minimumResponse||'&quot;, date, &quot;'||$format||'&quot;))'"/>				
+							<xsl:value-of select="'not(not(isnull('||$responseName||')) and (cast('||$responseName||', date, &quot;'||$format||'&quot;)&gt;cast(&quot;'||$maximumResponse||'&quot;, date, &quot;'||$format||'&quot;) or cast('||$responseName||', date, &quot;'||$format||'&quot;)&lt;cast(&quot;'||$minimumResponse||'&quot;, date, &quot;'||$format||'&quot;)))'"/>				
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 					</control>
