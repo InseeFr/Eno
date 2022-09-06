@@ -1260,7 +1260,7 @@
 				<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 				<control>       
 					<value>
-						<xsl:value-of select="'not(not(isnull'||$responseName||')) and not(match_characters(cast('||$responseName||',string), &quot;-?[0-9]+[\.,\,]?[0-9]*&quot;)))'"/>				
+						<xsl:value-of select="'not(not(isnull('||$responseName||')) and not(match_characters(cast('||$responseName||',string), &quot;-?[0-9]+[\.,\,]?[0-9]*&quot;)))'"/>				
 					</value>
 					<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 				</control>
