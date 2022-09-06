@@ -1254,6 +1254,22 @@
 		<xsl:param name="numberOfDecimals"/>
 		<xsl:param name="lengthResponse"/>
 		<xsl:if test="$componentType='InputNumber'">
+			<controls>		
+				<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatNumber')"/></xsl:attribute>
+				<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
+				<control>       
+					<value>
+						<xsl:value-of select="'not(not(isnull'||$responseName||')) and not(match_characters(cast('||$responseName||',string), &quot;-?[0-9]+[\.,\,]?[0-9]*&quot;)))'"/>				
+					</value>
+					<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
+				</control>
+				<errorMessage>
+					<value>
+						<xsl:value-of select="'&quot;Vous devez saisir un nombre.&quot;'"/>				
+					</value>
+					<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
+				</errorMessage>
+			</controls>	
 			<xsl:if test="$minimumResponse!='' and $maximumResponse!=''">	
 				<controls>		
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatBorneInfSup')"/></xsl:attribute>
