@@ -1264,7 +1264,7 @@
 					</control>
 					<errorMessage>
 						<value>
-							<xsl:value-of select="'\&quot; La valeur doit être comprise entre ' ||$minimumResponse || ' et ' ||$maximumResponse ||'.\&quot;'"/>				
+							<xsl:value-of select="'&quot; La valeur doit être comprise entre ' ||$minimumResponse || ' et ' ||$maximumResponse ||'.&quot;'"/>				
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
 					</errorMessage>
@@ -1282,7 +1282,7 @@
 					</control>
 					<errorMessage>
 						<value>
-							<xsl:value-of select="'\&quot;La valeur doit être inférieure à ' ||$maximumResponse ||'.\&quot;'"/>				
+							<xsl:value-of select="'&quot;La valeur doit être inférieure à ' ||$maximumResponse ||'.&quot;'"/>				
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
 					</errorMessage>
@@ -1300,7 +1300,7 @@
 					</control>
 					<errorMessage>
 						<value>
-							<xsl:value-of select="'\&quot;La valeur doit être supérieure à ' ||$minimumResponse ||'.\&quot;'"/>				
+							<xsl:value-of select="'&quot;La valeur doit être supérieure à ' ||$minimumResponse ||'.&quot;'"/>				
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
 					</errorMessage>
@@ -1317,7 +1317,7 @@
 				</control>
 				<errorMessage>
 					<value>
-						<xsl:value-of select="'\&quot;Le nombre doit comporter au maximum ' ||$numberOfDecimals|| ' chiffre(s) après la virgule.\&quot;'"/>				
+						<xsl:value-of select="'&quot;Le nombre doit comporter au maximum ' ||$numberOfDecimals|| ' chiffre(s) après la virgule.&quot;'"/>				
 					</value>
 					<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
 				</errorMessage>
@@ -1337,7 +1337,7 @@
 					</control>
 					<errorMessage>
 						<value>
-							<xsl:value-of select="'\&quot;La date saisie doit être postérieure à '|| $minimumResponse ||'.\&quot;'"/>				
+							<xsl:value-of select="'&quot;La date saisie doit être postérieure à '|| $minimumResponse ||'.&quot;'"/>				
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
 					</errorMessage>
@@ -1355,7 +1355,7 @@
 					</control>
 					<errorMessage>
 						<value>
-							<xsl:value-of select="'\&quot;La date saisie doit être antérieure à '|| $maximumResponse|| '\.&quot;'"/>				
+							<xsl:value-of select="'&quot;La date saisie doit être antérieure à '|| $maximumResponse|| '.&quot;'"/>				
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
 					</errorMessage>
@@ -1373,7 +1373,7 @@
 					</control>
 					<errorMessage>
 						<value>
-							<xsl:value-of select="'\&quot;La date saisie doit être comprise entre '|| $minimumResponse || ' et '|| $maximumResponse || '.\&quot;'"/>				
+							<xsl:value-of select="'&quot;La date saisie doit être comprise entre '|| $minimumResponse || ' et '|| $maximumResponse || '.&quot;'"/>				
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
 					</errorMessage>
