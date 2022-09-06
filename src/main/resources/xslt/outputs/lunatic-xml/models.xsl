@@ -1137,7 +1137,7 @@
 						<xsl:otherwise><xsl:attribute name="criticality"><xsl:value-of select="'INFO'"/></xsl:attribute></xsl:otherwise>
 					</xsl:choose>
 				</xsl:if>
-				<xsl:variable name="typeOfControl"><xsl:value-of select="'CONSISTENCY'"/></xsl:variable>
+				<xsl:attribute name="typeOfControl"><xsl:value-of select="$typeOfControl"/></xsl:attribute>
 				<xsl:if test="$control!=''">
 					<control>
 						<value><xsl:value-of select="normalize-space(enolunatic:replace-all-variables-with-business-name($source-context,$control))"/></value>
@@ -1258,7 +1258,7 @@
 				<controls>		
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatBorneInfSup')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
-					<xsl:variable name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:variable>
+					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 					<control>       
 						<value>
 							<xsl:value-of select="'not(not(isnull('||$responseName||')) and ('||$minimumResponse|| '&gt;'||$responseName||' or '||$maximumResponse||'&lt;'||$responseName||')))'"/>				
@@ -1277,7 +1277,7 @@
 				<controls>		
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatBorneSup')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
-					<xsl:variable name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:variable>
+					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 					<control>       
 						<value>
 							<xsl:value-of select="'not(not(isnull('||$responseName||')) and '||$maximumResponse||'&lt;'||$responseName||')'"/>				
@@ -1296,7 +1296,7 @@
 				<controls>		
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatBorneInf')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
-					<xsl:variable name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:variable>
+					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 					<control>       
 						<value>
 							<xsl:value-of select="'not(not(isnull('||$responseName||')) and '||$minimumResponse|| '&gt;'||$responseName||')'"/>				
@@ -1314,7 +1314,7 @@
 			<controls>		
 				<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatDec')"/></xsl:attribute>
 				<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>  
-				<xsl:variable name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:variable>
+				<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 				<control>       
 					<value>
 						<xsl:value-of select="'not(not(isnull('||$responseName||')) and trunc('||$responseName||','||$numberOfDecimals ||')&lt;&gt;'||$responseName||')'"/>				
@@ -1335,7 +1335,7 @@
 				<controls>		
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatborne')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
-					<xsl:variable name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:variable>
+					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 					<control>       
 						<value>
 							<xsl:value-of select="'not(not(isnull('||$responseName||')) and cast('||$responseName||', date, &quot;'||$format||'&quot;)&lt;cast(&quot;'||$minimumResponse||'&quot;, date, &quot;'||$format||'&quot;))'"/>				
@@ -1354,7 +1354,7 @@
 				<controls>		
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatborne')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
-					<xsl:variable name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:variable>
+					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 					<control>       
 						<value>
 							<xsl:value-of select="'not(not(isnull('||$responseName||')) and cast('||$responseName||', date, &quot;'||$format||')&gt;cast(&quot;'||$maximumResponse||'&quot;, date, &quot;'||$format||'&quot;))'"/>				
@@ -1373,7 +1373,7 @@
 				<controls>		
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatborne')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
-					<xsl:variable name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:variable>
+					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 					<control>       
 						<value>
 							<xsl:value-of select="'not(not(isnull('||$responseName||')) and (cast('||$responseName||', date, &quot;'||$format||'&quot;)&gt;cast(&quot;'||$maximumResponse||'&quot;, date, &quot;'||$format||'&quot;) or cast('||$responseName||', date, &quot;'||$format||'&quot;)&lt;cast(&quot;'||$minimumResponse||'&quot;, date, &quot;'||$format||'&quot;)))'"/>				
