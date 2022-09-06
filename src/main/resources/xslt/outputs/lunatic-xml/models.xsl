@@ -1256,7 +1256,8 @@
 		<xsl:if test="$componentType='InputNumber'">
 			<controls>		
 				<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatNumber')"/></xsl:attribute>
-				<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
+				<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
+				<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 				<control>       
 					<value>
 						<xsl:value-of select="'not(not(isnull'||$responseName||')) and not(match_characters(cast('||$responseName||',string), &quot;-?[0-9]+[\.,\,]?[0-9]*&quot;)))'"/>				
