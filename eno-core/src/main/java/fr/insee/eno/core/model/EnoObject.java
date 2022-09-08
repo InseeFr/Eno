@@ -1,5 +1,6 @@
 package fr.insee.eno.core.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.insee.eno.core.reference.EnoIndex;
 import lombok.Getter;
 import lombok.Setter;
