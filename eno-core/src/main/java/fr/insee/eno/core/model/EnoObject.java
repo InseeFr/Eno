@@ -15,6 +15,7 @@ public abstract class EnoObject {
 
     @Getter
     @Setter
+    @JsonIgnore
     private EnoIndex index;
 
     /** Shortcut method to get an object stored in the index. */
