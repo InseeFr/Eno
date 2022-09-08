@@ -1,21 +1,12 @@
 package fr.insee.eno.core.processing;
 
 import fr.insee.eno.core.annotations.Format;
-import fr.insee.eno.core.model.*;
-import fr.insee.eno.core.model.question.Question;
-import fr.insee.eno.core.model.question.TextQuestion;
+import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.impl.*;
 import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.eno.core.reference.EnoIndex;
-import fr.insee.eno.core.utils.RomanNumber;
 import lombok.extern.slf4j.Slf4j;
-
-import java.math.BigInteger;
-import java.util.HashMap;
-import java.util.Map;
-
-import static fr.insee.eno.core.parameter.EnoParameters.QuestionNumberingMode;
 
 @Slf4j
 public class EnoProcessing {
@@ -56,7 +47,6 @@ public class EnoProcessing {
         new EnoAddNumberingInQuestions(parameters.getQuestionNumberingMode()).apply(enoQuestionnaire);
         if (parameters.isArrowCharInQuestions())
             new EnoAddArrowCharInQuestions(enoCatalog).apply(enoQuestionnaire);
-        new EnoAddMissingVariables(parameters.isMissingVariables()).apply(enoQuestionnaire);
     }
 
     private void ddiTechnicalProcessing(EnoQuestionnaire enoQuestionnaire) {

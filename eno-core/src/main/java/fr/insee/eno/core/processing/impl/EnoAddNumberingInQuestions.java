@@ -20,8 +20,6 @@ public class EnoAddNumberingInQuestions implements EnoProcessingInterface {
         //
         assert enoQuestionnaire.getIndex() != null;
         //
-        enoQuestionnaire.setQuestionNumberingMode(mode);
-        //
         if (mode != EnoParameters.QuestionNumberingMode.NONE) {
             int questionNumber = 1;
             for (String sequenceId : enoQuestionnaire.getSequenceReferences()) {

@@ -38,13 +38,6 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "setLabel(#param)")
     private String label;
 
-    @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "setMissing(#param)")
-    private boolean missingVariables;
-
-    @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class,
-            field = "setPagination(T(fr.insee.eno.core.parameter.EnoParameters).lunaticNumberingMode(#param))")
-    private EnoParameters.QuestionNumberingMode questionNumberingMode;
-
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getVariableSchemeArray(0)" +
                     ".getVariableArray(0).getVariableNameArray(0).getStringArray(0).getStringValue()")
