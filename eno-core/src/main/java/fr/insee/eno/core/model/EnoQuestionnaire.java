@@ -5,7 +5,6 @@ import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.question.MultipleResponseQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
-import fr.insee.eno.core.parameter.EnoParameters;
 import instance33.DDIInstanceType;
 import lombok.Getter;
 import lombok.Setter;
