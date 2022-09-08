@@ -27,31 +27,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DDIMapperTest {
 
-    // TODO: more unit tests (one per DDI annotation in the model classes)
-
-    // Note: it may be pertinent to do one unit test class per model class
-
-    // Note: it is also possible to read portions of DDI xml files to do unit testing of annotations
-
-    @Test
-    public void mapDDIInstanceId() {
-        //
-        String expectedId = "FOO-ID";
-        // Given
-        DDIInstanceType ddiInstanceType = DDIInstanceType.Factory.newInstance();
-        ddiInstanceType.getIDList().add(IDType.Factory.newInstance());
-        ddiInstanceType.getIDList().get(0).setStringValue(expectedId);
-        // When
-        DDIMapper mapper = new DDIMapper();
-        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-        BeanWrapper beanWrapper = new BeanWrapperImpl(enoQuestionnaire);
-        PropertyDescriptor propertyDescriptor = beanWrapper.getPropertyDescriptor("id");
-        EvaluationContext context = new StandardEvaluationContext();
-        mapper.propertyMapping(ddiInstanceType, enoQuestionnaire, beanWrapper, propertyDescriptor,context);
-        // Then
-        assertEquals(expectedId, enoQuestionnaire.getId());
-    }
-
     @Test
     public void ddiMappingFunctionalTest() throws IOException {
         //
