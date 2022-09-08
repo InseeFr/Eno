@@ -13,6 +13,13 @@ import reusable33.AbstractIdentifiableType;
 @Setter
 public abstract class EnoIdentifiableObject extends EnoObject {
 
+    /** Object identifier.
+     * In DDI, it is the content of the first 'ID' element.
+     * In Lunatic, it is the 'id' attribute. */
+    @DDI(contextType = AbstractIdentifiableType.class, field = "getIDArray(0).getStringValue()")
+    @Lunatic(contextType = ComponentType.class, field ="setId(#param)")
+    String id;
+
     public EnoIdentifiableObject() {}
 
     /** Create and instance with given id, and put it in the given index.
@@ -21,12 +28,5 @@ public abstract class EnoIdentifiableObject extends EnoObject {
         this.id = id;
         enoIndex.put(id, this);
     }
-
-    /** Object identifier.
-     * In DDI, it is the content of the first 'ID' element.
-     * In Lunatic, it is the 'id' attribute. */
-    @DDI(contextType = AbstractIdentifiableType.class, field = "getIDArray(0).getStringValue()")
-    @Lunatic(contextType = ComponentType.class, field ="setId(#param)")
-    private String id;
 
 }

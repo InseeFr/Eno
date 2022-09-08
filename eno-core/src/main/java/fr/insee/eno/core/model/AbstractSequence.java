@@ -20,7 +20,7 @@ public abstract class AbstractSequence extends EnoIdentifiableObject implements 
     /** Sequence / subsequence label. */
     @DDI(contextType = SequenceType.class, field = "getLabelArray(0).getContentArray(0).getStringValue()")
     @Lunatic(contextType = {fr.insee.lunatic.model.flat.SequenceType.class, Subsequence.class}, field = "setLabel(#param)")
-    private String label;
+    String label;
 
     /** Sequence / subsequence instructions.
      * In DDI, the SequenceType object contains the list of references to the instructions.
