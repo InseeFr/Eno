@@ -25,6 +25,7 @@ dependencies {
 
     // Logging
     implementation 'org.slf4j:slf4j-api'
+    testImplementation 'org.mockito:mockito-core:4.7.0'
     testRuntimeOnly 'ch.qos.logback:logback-classic'
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter'
