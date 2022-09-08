@@ -1,9 +1,10 @@
 package fr.insee.eno.core;
 
-import datacollection33.*;
 import datacollection33.SequenceType;
-import datacollection33.impl.TextTypeImpl;
+import datacollection33.*;
+import fr.insee.eno.core.annotations.Contexts;
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.mappers.DDIMapperTest;
 import fr.insee.eno.core.mappers.Mapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
@@ -50,6 +51,15 @@ public class HelloTest {
         EnoIndex enoIndex = Mockito.mock(EnoIndex.class);
         Mockito.when(enoIndex.get("monId")).thenReturn(new EnoQuestionnaire());
         enoIndex.get("foo");
+    }
+
+    @Test
+    public void getRepeatableAnnotation() {
+        Contexts contexts = EnoQuestionnaire.class.getAnnotation(Contexts.class);
+        Contexts.Context[] toto =  EnoQuestionnaire.class.getAnnotationsByType(Contexts.Context.class);
+        assertNotNull(contexts);
+        assertNotNull(toto);
+        assertEquals(Format.LUNATIC, contexts.value()[2].format());
     }
 
     @Test
