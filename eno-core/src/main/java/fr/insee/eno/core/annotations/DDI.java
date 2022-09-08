@@ -21,4 +21,10 @@ public @interface DDI {
      * The mapper will not throw an exception if the property is set to true. */
     boolean allowNullList() default false;
 
+    /** In some objects, there can be lists that may be null in some instances for valid reasons.
+     * The mapper will not throw an exception if this annotation is placed. */
+    @Retention(RUNTIME)
+    @Target(FIELD)
+    @interface AllowNullList {}
+
 }
