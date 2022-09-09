@@ -1255,12 +1255,12 @@
 		<xsl:param name="lengthResponse"/>
 		<xsl:if test="$componentType='InputNumber'">
 			<controls>		
-				<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatNumber')"/></xsl:attribute>
+				<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-number')"/></xsl:attribute>
 				<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
 				<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 				<control>       
 					<value>
-						<xsl:value-of select="'not(not(isnull('||$responseName||')) and not(isNaN('||$responseName||')))'"/>				
+						<xsl:value-of select="'not(not(isnull('||$responseName||')) and not(cast('||$responseName||',string)=&quot;NaN&quot;))'"/>				
 					</value>
 					<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 				</control>
@@ -1273,12 +1273,12 @@
 			</controls>	
 			<xsl:if test="$minimumResponse!='' and $maximumResponse!=''">	
 				<controls>		
-					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatBorneInfSup')"/></xsl:attribute>
+					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-borne-inf-sup')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 					<control>       
 						<value>
-							<xsl:value-of select="'not(not(isnull('||$responseName||')) and ('||$minimumResponse|| '&gt;'||$responseName||' or '||$maximumResponse||'&lt;'||$responseName||')))'"/>				
+							<xsl:value-of select="'not(not(isnull('||$responseName||')) and not(cast('||$responseName||',string)=&quot;NaN&quot;) and ('||$minimumResponse|| '&gt;'||$responseName||' or '||$maximumResponse||'&lt;'||$responseName||')))'"/>				
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 					</control>
@@ -1292,12 +1292,12 @@
 			</xsl:if>
 			<xsl:if test="$minimumResponse='' and $maximumResponse!=''">	
 				<controls>		
-					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatBorneSup')"/></xsl:attribute>
+					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-borne-sup')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 					<control>       
 						<value>
-							<xsl:value-of select="'not(not(isnull('||$responseName||')) and '||$maximumResponse||'&lt;'||$responseName||')'"/>				
+							<xsl:value-of select="'not(not(isnull('||$responseName||'))  and not(cast('||$responseName||',string)=&quot;NaN&quot;) and '||$maximumResponse||'&lt;'||$responseName||')'"/>				
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 					</control>
@@ -1311,12 +1311,12 @@
 			</xsl:if>
 			<xsl:if test="$minimumResponse!='' and $maximumResponse=''">	
 				<controls>		
-					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatBorneInf')"/></xsl:attribute>
+					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-borne-inf')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 					<control>       
 						<value>
-							<xsl:value-of select="'not(not(isnull('||$responseName||')) and '||$minimumResponse|| '&gt;'||$responseName||')'"/>				
+							<xsl:value-of select="'not(not(isnull('||$responseName||')) and not(cast('||$responseName||',string)=&quot;NaN&quot;) and '||$minimumResponse|| '&gt;'||$responseName||')'"/>				
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 					</control>
@@ -1329,12 +1329,12 @@
 				</controls>
 			</xsl:if>
 			<controls>		
-				<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatDec')"/></xsl:attribute>
+				<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-decimal')"/></xsl:attribute>
 				<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>  
 				<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 				<control>       
 					<value>
-						<xsl:value-of select="'not(not(isnull('||$responseName||')) and trunc('||$responseName||','||$numberOfDecimals ||')&lt;&gt;'||$responseName||')'"/>				
+						<xsl:value-of select="'not(not(isnull('||$responseName||'))  and not(cast('||$responseName||',string)=&quot;NaN&quot;) and trunc('||$responseName||','||$numberOfDecimals ||')&lt;&gt;'||$responseName||')'"/>				
 					</value>
 					<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 				</control>
@@ -1350,7 +1350,7 @@
 		<xsl:if test="$componentType='Datepicker'">
 			<xsl:if test="$minimumResponse!='' and $maximumResponse=''">
 				<controls>		
-					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatborne')"/></xsl:attribute>
+					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-date-borne-sup')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 					<control>       
@@ -1369,7 +1369,7 @@
 			</xsl:if>
 			<xsl:if test="$minimumResponse='' and $maximumResponse!=''">
 				<controls>		
-					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatborne')"/></xsl:attribute>
+					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-date-borne-inf')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 					<control>       
@@ -1388,7 +1388,7 @@
 			</xsl:if>
 			<xsl:if test="$minimumResponse!='' and $maximumResponse!=''">
 				<controls>		
-					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-formatborne')"/></xsl:attribute>
+					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-borne-inf-sup')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 					<control>       
