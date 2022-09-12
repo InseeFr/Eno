@@ -1,24 +1,14 @@
 package fr.insee.eno.core.mappers;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.Variable;
-import fr.insee.eno.core.model.VariableGroup;
+import fr.insee.eno.core.model.variable.Variable;
+import fr.insee.eno.core.model.variable.VariableGroup;
 import fr.insee.eno.core.model.question.BooleanQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.parsers.DDIParser;
-import fr.insee.eno.core.reference.EnoIndex;
 import instance33.DDIInstanceDocument;
-import instance33.DDIInstanceType;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
-import org.springframework.expression.EvaluationContext;
-import org.springframework.expression.spel.support.StandardEvaluationContext;
-import reusable33.IDType;
 
-import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;

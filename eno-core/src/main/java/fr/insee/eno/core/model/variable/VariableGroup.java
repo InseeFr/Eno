@@ -1,6 +1,7 @@
-package fr.insee.eno.core.model;
+package fr.insee.eno.core.model.variable;
 
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.model.EnoObject;
 import logicalproduct33.VariableGroupType;
 import lombok.Getter;
 import lombok.Setter;

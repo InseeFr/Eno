@@ -2,6 +2,7 @@ package fr.insee.eno.core.reference;
 
 import fr.insee.eno.core.model.*;
 import fr.insee.eno.core.model.question.Question;
+import fr.insee.eno.core.model.variable.Variable;
 
 import java.util.Collection;
 import java.util.HashMap;

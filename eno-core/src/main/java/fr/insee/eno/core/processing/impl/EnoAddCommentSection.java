@@ -3,7 +3,7 @@ package fr.insee.eno.core.processing.impl;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.Response;
 import fr.insee.eno.core.model.Sequence;
-import fr.insee.eno.core.model.Variable;
+import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.model.question.TextQuestion;
 import fr.insee.eno.core.processing.EnoProcessingInterface;
 import fr.insee.eno.core.reference.EnoIndex;

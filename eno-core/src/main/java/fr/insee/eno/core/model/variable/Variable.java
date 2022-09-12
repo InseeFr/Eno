@@ -1,7 +1,10 @@
-package fr.insee.eno.core.model;
+package fr.insee.eno.core.model.variable;
 
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.model.BindingReference;
+import fr.insee.eno.core.model.EnoObject;
+import fr.insee.eno.core.model.EnoObjectWithExpression;
 import fr.insee.lunatic.model.flat.IVariableType;
 import logicalproduct33.VariableType;
 import lombok.Getter;

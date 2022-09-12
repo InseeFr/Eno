@@ -2,7 +2,7 @@ package fr.insee.eno.core.sandbox;
 
 import fr.insee.eno.core.mappers.DDIMapperTest;
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.Variable;
+import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.reference.DDIIndex;
 import fr.insee.lunatic.model.flat.Questionnaire;
