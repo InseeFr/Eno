@@ -15,7 +15,7 @@ dependencies {
     implementation 'fr.insee.pogues:pogues-model:1.0.1'
 
     // Spring libraries
-    implementation enforcedPlatform('org.springframework.boot:spring-boot-dependencies:2.7.2')
+    implementation enforcedPlatform('org.springframework.boot:spring-boot-dependencies:2.7.3')
     implementation 'org.springframework:spring-core'
     implementation 'org.springframework:spring-beans'
     implementation 'org.springframework:spring-expression'
