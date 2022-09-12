@@ -16,9 +16,13 @@ public class LunaticTests {
         // Questionnaire level metadata
         lunaticQuestionnaire.setEnoCoreVersion("3.0.0-SNAPSHOT");
         lunaticQuestionnaire.setModele("FOO");
-        lunaticQuestionnaire.setLabel("Hello questionnaire");
         lunaticQuestionnaire.setPagination("question");
         lunaticQuestionnaire.setGeneratingDate("No restriction on date format");
+        // NEW: complex object for labels
+        LabelType lunaticLabel = new LabelType();
+        lunaticLabel.setValue("Hello questionnaire");
+        lunaticLabel.setType("I can write anything I want here.");
+        lunaticQuestionnaire.setLabel(lunaticLabel);
         // Variables list
         List<IVariableType> lunaticVariables = lunaticQuestionnaire.getVariables();
         // Add a variable

@@ -4,7 +4,6 @@ import datacollection33.GridResponseDomainInMixedType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoObject;
-import fr.insee.lunatic.model.flat.CellsLines;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,7 @@ public class TableLine extends EnoObject {
 
     @DDI(contextType = GridResponseDomainInMixedType.class,
             field = "")
-    @Lunatic(contextType = CellsLines.class, field = "getCells()")
+    //@Lunatic(contextType = CellsLines.class, field = "getCells()") TODO: changed in Lunatic-Model v2.2.13
     private final List<TableCell> cells = new ArrayList<>();
 
 }

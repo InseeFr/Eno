@@ -10,7 +10,7 @@ dependencies {
         //exclude group: 'org.apache.logging.log4j', module: 'log4j-api'
     }
     // Lunatic
-    implementation 'fr.insee.lunatic:lunatic-model:2.2.10'
+    implementation 'fr.insee.lunatic:lunatic-model:2.2.13'
     // Pogues
     implementation 'fr.insee.pogues:pogues-model:1.0.1'
 

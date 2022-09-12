@@ -4,6 +4,7 @@ import fr.insee.eno.core.model.Sequence;
 import fr.insee.eno.core.model.Subsequence;
 import fr.insee.eno.core.model.*;
 import fr.insee.eno.core.model.question.*;
+import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,9 +48,9 @@ public class LunaticConverter {
         else if (enoObject instanceof CodeResponse)
             return new ResponsesCheckboxGroup();
         else if (enoObject instanceof TableLine)
-            return new CellsLines();
+            throw new RuntimeException("TableLine conversion not implemented."); //FIXME: (todo: annotation for conversion)
         else if (enoObject instanceof TableCell)
-            return new CellsType();
+            throw new RuntimeException("TableCell conversion not implemented."); //FIXME: (todo: annotation for conversion)
         else
             throw new RuntimeException(unimplementedMessage(enoObject));
     }
