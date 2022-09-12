@@ -12,7 +12,6 @@ to the project.
 
 - ``param``: used in out mapper to set property values
 - ``index``: used in DDI mapper to reference the map that contains DDI objects
-- ``lunaticIndex``: used in Lunatic mapper to reference the map that contains components
 
 ## SpEL functionalities / syntax
 
