@@ -1254,23 +1254,6 @@
 		<xsl:param name="numberOfDecimals"/>
 		<xsl:param name="lengthResponse"/>
 		<xsl:if test="$componentType='InputNumber'">
-			<controls>		
-				<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-number')"/></xsl:attribute>
-				<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
-				<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
-				<control>       
-					<value>
-						<xsl:value-of select="'not(not(isnull('||$responseName||')) and not(cast('||$responseName||',string)=&quot;NaN&quot;))'"/>				
-					</value>
-					<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
-				</control>
-				<errorMessage>
-					<value>
-						<xsl:value-of select="'&quot;Vous devez saisir un nombre.&quot;'"/>				
-					</value>
-					<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
-				</errorMessage>
-			</controls>	
 			<xsl:if test="$minimumResponse!='' and $maximumResponse!=''">	
 				<controls>		
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-borne-inf-sup')"/></xsl:attribute>
@@ -1278,7 +1261,7 @@
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 					<control>       
 						<value>
-							<xsl:value-of select="'not(not(isnull('||$responseName||')) and not(cast('||$responseName||',string)=&quot;NaN&quot;) and ('||$minimumResponse|| '&gt;'||$responseName||' or '||$maximumResponse||'&lt;'||$responseName||')))'"/>				
+							<xsl:value-of select="'not(not(isnull('||$responseName||')) and ('||$minimumResponse|| '&gt;'||$responseName||' or '||$maximumResponse||'&lt;'||$responseName||')))'"/>				
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 					</control>
@@ -1297,7 +1280,7 @@
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 					<control>       
 						<value>
-							<xsl:value-of select="'not(not(isnull('||$responseName||'))  and not(cast('||$responseName||',string)=&quot;NaN&quot;) and '||$maximumResponse||'&lt;'||$responseName||')'"/>				
+							<xsl:value-of select="'not(not(isnull('||$responseName||')) and '||$maximumResponse||'&lt;'||$responseName||')'"/>				
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 					</control>
@@ -1316,7 +1299,7 @@
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 					<control>       
 						<value>
-							<xsl:value-of select="'not(not(isnull('||$responseName||')) and not(cast('||$responseName||',string)=&quot;NaN&quot;) and '||$minimumResponse|| '&gt;'||$responseName||')'"/>				
+							<xsl:value-of select="'not(not(isnull('||$responseName||')) and '||$minimumResponse|| '&gt;'||$responseName||')'"/>				
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 					</control>
@@ -1334,7 +1317,7 @@
 				<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
 				<control>       
 					<value>
-						<xsl:value-of select="'not(not(isnull('||$responseName||'))  and not(cast('||$responseName||',string)=&quot;NaN&quot;) and trunc('||$responseName||','||$numberOfDecimals ||')&lt;&gt;'||$responseName||')'"/>				
+						<xsl:value-of select="'not(not(isnull('||$responseName||'))  and round('||$responseName||','||$numberOfDecimals ||')&lt;&gt;'||$responseName||')'"/>				
 					</value>
 					<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 				</control>
