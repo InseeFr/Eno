@@ -81,7 +81,8 @@
       <xd:p> - all mode (ddi and fodt output) to keep everything</xd:p>
       <xd:p> - papi mode (Fo output) only keeps SelfAdministeredQuestionnaire.Paper</xd:p>
       <xd:p> - cawi mode (Xforms output and some Lunatic output) only keeps SelfAdministeredQuestionnaire.WebBased</xd:p>
-      <xd:p> - capi-cati mode (some Lunatic output) keeps Interview.Telephone.CATI and Interview.FaceToFace.CAPIorCAMI</xd:p>
+      <xd:p> - cati mode (some Lunatic output) keeps Interview.Telephone.CATI</xd:p>
+      <xd:p> - capi mode (some Lunatic output) keeps Interview.FaceToFace.CAPIorCAMI</xd:p>
       <xd:p> - process mode (some Lunatic output) keeps everything (so for now, same as all)</xd:p>
       <xd:p>Since Fo and Xforms keep only one type of Instruction, the InstructionName items
         describing the collcetion mode can be deleted</xd:p>
@@ -104,7 +105,12 @@
           <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
       </xsl:when>
-      <xsl:when test="count(d:InstructionName[matches(r:String, 'Interview')]) > 0 and $mode = 'capi-cati'">
+      <xsl:when test=".[d:InstructionName/r:String = 'Interview.Telephone.CATI'] and $mode = 'cati'">
+        <xsl:copy>
+          <xsl:apply-templates select="node() | @*"/>
+        </xsl:copy>
+      </xsl:when>
+      <xsl:when test=".[d:InstructionName/r:String = 'Interview.FaceToFace.CAPIorCAMI'] and $mode = 'capi'">
         <xsl:copy>
           <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
@@ -131,7 +137,8 @@
       <xd:p> - all mode (ddi and fodt output) to keep everything</xd:p>
       <xd:p> - papi mode (Fo output) only keeps SelfAdministeredQuestionnaire.Paper</xd:p>
       <xd:p> - cawi mode (Xforms output and some Lunatic output) only keeps SelfAdministeredQuestionnaire.WebBased</xd:p>
-      <xd:p> - capi-cati mode (some Lunatic output) keeps Interview.Telephone.CATI and Interview.FaceToFace.CAPIorCAMI</xd:p>
+      <xd:p> - cati mode (some Lunatic output) keeps Interview.Telephone.CATI</xd:p>
+      <xd:p> - capi mode (some Lunatic output) keeps Interview.FaceToFace.CAPIorCAMI</xd:p>
       <xd:p> - process mode (some Lunatic output) keeps everything (so for now, same as all)</xd:p>
       <xd:p>Since Fo and Xforms keep only one type of Instruction, the InstructionName items
         describing the collcetion mode can be deleted</xd:p>
@@ -154,7 +161,12 @@
           <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
       </xsl:when>
-      <xsl:when test="count(d:ConstructName[matches(r:String, 'Interview')]) > 0 and $mode = 'capi-cati'">
+      <xsl:when test=".[d:ConstructName/r:String = 'Interview.Telephone.CATI'] and $mode = 'cati'">
+        <xsl:copy>
+          <xsl:apply-templates select="node() | @*"/>
+        </xsl:copy>
+      </xsl:when>
+      <xsl:when test=".[d:ConstructName/r:String = 'Interview.FaceToFace.CAPIorCAMI'] and $mode = 'capi'">
         <xsl:copy>
           <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
