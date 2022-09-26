@@ -154,6 +154,12 @@
             <xsl:when test=". = 'http://id.insee.fr/unit/megawatt'">
                 <xsl:value-of select="'MW'" />
             </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/megawattheurepcs'">
+                <xsl:value-of select="'MWh PCS'" />
+            </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/megawattheure'">
+                <xsl:value-of select="'MWh'" />
+            </xsl:when>
             <xsl:when test=". = 'http://id.insee.fr/unit/megawattpcs'">
                 <xsl:value-of select="'MW PCS'" />
             </xsl:when>
