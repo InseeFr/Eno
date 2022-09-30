@@ -1,0 +1,143 @@
+@startuml
+enum Mode {
++  CAPI
++  CATI
++  CAWI
++  PAPI
+- {static} Map<String,Mode> ddiModes
++ {static} boolean isDDIMode(String)
++ {static} Mode convertDDIMode(String)
+}
+class CodeItem {
+~ String label
+~ String value
+}
+class SequenceItem {
+- String id
+- SequenceItemType type
++ {static} SequenceItemType convertDDITypeOfObject(String)
+}
+enum SequenceItemType {
++  SUBSEQUENCE
++  QUESTION
++  FILTER
++  CONTROL
++  DECLARATION
+}
+class Sequence {
+- String componentType
+}
+class Declaration {
+~ String id
+~ String label
+~ String declarationType
+~ String position
+- List<Mode> modes
+}
+abstract class AbstractSequence {
+- String id
+- String label
+- List<Instruction> instructions
+- List<Declaration> declarations
+- List<Control> controls
+- List<String> componentReferences
+- List<SequenceItem> sequenceItems
+}
+class CodeResponse {
+- String id
+- String label
+~ Response response
+}
+class Filter {
+- String id
+- String componentReference
+- String expression
+}
+class Instruction {
+~ String id
+~ String declarationType
+~ String label
+~ String position
+- List<Mode> modes
+}
+class Control {
+- String id
+- Instruction instruction
+}
+enum ResponseFormat {
++  TEXT_DOMAIN
++  TEXT_AREA_DOMAIN
++  NUMERIC_DOMAIN
++  BOOLEAN_DOMAIN
++  CODE_DOMAIN
++  DATETIME_DOMAIN
++  DURATION_DOMAIN
+}
+class EnoQuestionnaire {
+- String id
+- String questionnaireModel
+- String enoVersion
+- String label
+- boolean missingVariables
+- String pagination
+- String firstVariableName
+- Variable firstVariable
+- List<Variable> variables
+- List<VariableGroup> variableGroups
+- List<Sequence> sequences
+- List<Subsequence> subsequences
+- List<String> sequenceReferences
+- List<Filter> filters
+- List<Control> controls
+- List<Declaration> declarations
+- List<SingleResponseQuestion> singleResponseQuestions
+- List<MultipleResponseQuestion> multipleResponseQuestions
+}
+class Response {
+~ String variableName
+}
+abstract class EnoObject {
+- EnoObject parent
+}
+class Variable {
+- String name
+~ String questionReference
+~ String unit
+~ String collected
+}
+interface DeclarationInterface {
+~ String getId()
+~ String getDeclarationType()
+~ String getLabel()
+~ String getPosition()
+~ List<Mode> getModes()
+}
+class VariableGroup {
+- String name
+- List<Variable> variables
+}
+class Subsequence {
+- String componentType
+}
+class Loop {
+}
+
+
+EnoObject <|-- CodeItem
+EnoObject <|-- SequenceItem
+AbstractSequence <|-- Sequence
+DeclarationInterface <|.. Declaration
+EnoObject <|-- Declaration
+EnoObject <|-- AbstractSequence
+EnoObject <|-- CodeResponse
+EnoObject <|-- Filter
+DeclarationInterface <|.. Instruction
+EnoObject <|-- Instruction
+EnoObject <|-- Control
+EnoObject <|-- EnoQuestionnaire
+EnoObject <|-- Response
+EnoObject <|-- Variable
+EnoObject <|-- VariableGroup
+AbstractSequence <|-- Subsequence
+EnoObject <|-- Loop
+@enduml

@@ -6,7 +6,6 @@ import org.springframework.beans.BeanWrapper;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
-import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
@@ -21,12 +20,16 @@ public class Mapper {
     }
 
     public static boolean isSimpleType(Class<?> classType) {
-        return String.class.isAssignableFrom(classType)
+        return classType!=null
+                &&
+                (CharSequence.class.isAssignableFrom(classType)
                 || int.class.isAssignableFrom(classType)
-                || BigInteger.class.isAssignableFrom(classType)
+                || Number.class.isAssignableFrom(classType)
                 || double.class.isAssignableFrom(classType)
                 || boolean.class.isAssignableFrom(classType)
-                || Enum.class.isAssignableFrom(classType);
+                || Boolean.class.isAssignableFrom(classType)
+                || Enum.class.isAssignableFrom(classType));
+
         // TODO: other simple types later (probably)
     }
 

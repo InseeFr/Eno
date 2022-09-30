@@ -18,6 +18,7 @@ public class DDIParser {
 
     public static DDIInstanceDocument parse(URL ddiUrl) throws IOException {
         log.info("Parsing DDI document from URL " + ddiUrl);
+        log.atDebug().log(()->"Test DEBUG logs with lambdas");
         try (InputStream is = ddiUrl.openStream()) {
             DDIInstanceDocument ddiInstanceDocument = DDIInstanceDocument.Factory.parse(is);
             log.info("Successfully parsed DDI from URL " + ddiUrl);

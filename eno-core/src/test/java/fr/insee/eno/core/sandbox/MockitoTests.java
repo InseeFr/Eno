@@ -5,13 +5,16 @@ import fr.insee.eno.core.reference.EnoIndex;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class MockitoTests {
 
     @Test
     public void helloMockito() {
+        String someId = "foo-id";
         EnoIndex enoIndex = Mockito.mock(EnoIndex.class);
-        Mockito.when(enoIndex.get("monId")).thenReturn(new EnoQuestionnaire());
-        enoIndex.get("foo");
+        Mockito.when(enoIndex.get(someId)).thenReturn(new EnoQuestionnaire());
+        assertTrue(enoIndex.get(someId) instanceof EnoQuestionnaire);
     }
 
 }
