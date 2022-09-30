@@ -2,6 +2,7 @@ package fr.insee.eno.core.model;
 
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.ComponentType;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,15 @@ public abstract class EnoIdentifiableObject extends EnoObject {
      * In Lunatic, it is the 'id' attribute. */
     @DDI(contextType = AbstractIdentifiableType.class, field = "getIDArray(0).getStringValue()")
     @Lunatic(contextType = ComponentType.class, field ="setId(#param)")
-    private String id;
+    String id;
+
+    public EnoIdentifiableObject() {}
+
+    /** Create and instance with given id, and put it in the given index.
+     * TODO: to be removed, useless since java doesn't support constructor inheritance... */
+    public EnoIdentifiableObject(String id, EnoIndex enoIndex) {
+        this.id = id;
+        enoIndex.put(id, this);
+    }
 
 }

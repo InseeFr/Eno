@@ -3,7 +3,7 @@ package fr.insee.eno.core.mappers;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.Sequence;
 import fr.insee.eno.core.model.Subsequence;
-import fr.insee.eno.core.model.Variable;
+import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.SequenceType;

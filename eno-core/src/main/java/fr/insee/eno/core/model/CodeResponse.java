@@ -9,11 +9,7 @@ import reusable33.ParameterType;
 
 @Getter
 @Setter
-public class CodeResponse extends EnoObject {
-
-    @DDI(contextType = ParameterType.class, field = "getIDArray(0).getStringValue()")
-    @Lunatic(contextType = ResponsesCheckboxGroup.class, field = "setId(#param)")
-    private String id;
+public class CodeResponse extends EnoIdentifiableObject {
 
     @DDI(contextType = ParameterType.class,
             field = "#index.get(#index.get(#index.getParent(#this.getIDArray(0).getStringValue())" +

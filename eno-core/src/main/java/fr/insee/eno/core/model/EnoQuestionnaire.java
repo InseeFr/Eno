@@ -5,7 +5,8 @@ import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.question.MultipleResponseQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
-import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.model.variable.Variable;
+import fr.insee.eno.core.model.variable.VariableGroup;
 import instance33.DDIInstanceType;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,11 +24,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @Context(format = Format.POGUES, type = fr.insee.pogues.model.Questionnaire.class)
 @Context(format = Format.DDI, type = DDIInstanceType.class)
 @Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.Questionnaire.class)
-public class EnoQuestionnaire extends EnoObject {
-
-    @DDI(contextType = DDIInstanceType.class, field = "getIDArray(0).getStringValue()")
-    @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field ="setId(#param)")
-    private String id;
+public class EnoQuestionnaire extends EnoIdentifiableObject {
 
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getCodeListSchemeArray(0)" +
@@ -41,13 +38,6 @@ public class EnoQuestionnaire extends EnoObject {
     @DDI(contextType = DDIInstanceType.class, field = "getCitation().getTitle().getStringArray(0).getStringValue()")
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "setLabel(#param)")
     private String label;
-
-    @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "setMissing(#param)")
-    private boolean missingVariables;
-
-    @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class,
-            field = "setPagination(T(fr.insee.eno.core.parameter.EnoParameters).lunaticNumberingMode(#param))")
-    private EnoParameters.QuestionNumberingMode questionNumberingMode;
 
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getVariableSchemeArray(0)" +

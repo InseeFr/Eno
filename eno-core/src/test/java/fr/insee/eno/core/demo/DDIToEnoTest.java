@@ -1,5 +1,6 @@
 package fr.insee.eno.core.demo;
 
+import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parsers.DDIParser;
@@ -32,7 +33,7 @@ public class DDIToEnoTest {
 
         //
         EnoProcessing enoProcessing = new EnoProcessing();
-        enoProcessing.applyProcessing(enoQuestionnaire);
+        enoProcessing.applyProcessing(enoQuestionnaire, Format.DDI);
 
         //
         EnoWriter.writeJson(enoQuestionnaire,

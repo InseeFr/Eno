@@ -1,0 +1,359 @@
+
+ { "id" : "l6692wu3",
+  "modele" : "SANDBOXENO",
+  "enoCoreVersion" : "2.3.10",
+  "lunaticModelVersion" : "2.2.10",
+  "generatingDate" : "04-08-2022 17:01:08",
+  "missing" : false,
+  "pagination" : "question",
+  "maxPage" : "10",
+  "label" : "Sandbox Eno v3",
+  "components" : 
+  [ 
+   { "id" : "l669ebci",
+    "componentType" : "Sequence",
+    "page" : "1",
+    "label" : "\"I - \" || \"Séquence 1\"",
+    "declarations" : 
+    [ 
+     { "id" : "l669ebci-l669ea0u",
+      "declarationType" : "HELP",
+      "position" : "AFTER_QUESTION_TEXT",
+      "label" : "\"Première séquence\"" } ],
+    "conditionFilter" : 
+    { "value" : "true" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l669ebci",
+      "page" : "1",
+      "label" : "\"I - \" || \"Séquence 1\"" } } },
+   
+   { "id" : "l669itrl",
+    "componentType" : "InputNumber",
+    "mandatory" : false,
+    "page" : "2",
+    "min" : 0,
+    "max" : 100,
+    "decimals" : 0,
+    "label" : "\"➡ \" || \"Nombre1\"",
+    "conditionFilter" : 
+    { "value" : "true" },
+    "controls" : 
+    [ 
+     { "id" : "l669itrl-CI-0",
+      "criticality" : "WARN",
+      "control" : "not(cast(NOMBRE1, integer) > 50)",
+      "errorMessage" : "\"Plus que 50 !\"",
+      "bindingDependencies" : 
+      [ "NOMBRE1" ] },
+     
+     { "id" : "l669itrl-CI-1",
+      "criticality" : "WARN",
+      "control" : "not(cast(NOMBRE1, integer) <= 10)",
+      "errorMessage" : "\"Moins que 10\"",
+      "bindingDependencies" : 
+      [ "NOMBRE1" ] } ],
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l669ebci",
+      "page" : "1",
+      "label" : "\"I - \" || \"Séquence 1\"" } },
+    "bindingDependencies" : 
+    [ "NOMBRE1" ],
+    "response" : 
+    { "name" : "NOMBRE1" } },
+   
+   { "id" : "l669opc6",
+    "componentType" : "InputNumber",
+    "mandatory" : false,
+    "page" : "3",
+    "min" : 0,
+    "max" : 100,
+    "decimals" : 0,
+    "label" : "\"➡ \" || \"Nombre2\"",
+    "declarations" : 
+    [ 
+     { "id" : "l669opc6-l669at60",
+      "declarationType" : "INSTRUCTION",
+      "position" : "AFTER_QUESTION_TEXT",
+      "label" : "\"Pas le droit de mettre plus que 90\"" } ],
+    "conditionFilter" : 
+    { "value" : "true" },
+    "controls" : 
+    [ 
+     { "id" : "l669opc6-CI-0",
+      "criticality" : "INFO",
+      "control" : "not(cast(NOMBRE2, integer) > 90)",
+      "errorMessage" : "\"On avait dit pas plus que 90 :(\"",
+      "bindingDependencies" : 
+      [ "NOMBRE2" ] } ],
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l669ebci",
+      "page" : "1",
+      "label" : "\"I - \" || \"Séquence 1\"" } },
+    "bindingDependencies" : 
+    [ "NOMBRE2" ],
+    "response" : 
+    { "name" : "NOMBRE2" } },
+   
+   { "id" : "l669tc5l",
+    "componentType" : "CheckboxBoolean",
+    "mandatory" : false,
+    "page" : "4",
+    "label" : "\"➡ \" || \"Case à cocher take 1\"",
+    "conditionFilter" : 
+    { "value" : "true" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l669ebci",
+      "page" : "1",
+      "label" : "\"I - \" || \"Séquence 1\"" } },
+    "bindingDependencies" : 
+    [ "BOOL1" ],
+    "response" : 
+    { "name" : "BOOL1" } },
+   
+   { "id" : "l669qqhz",
+    "componentType" : "CheckboxBoolean",
+    "mandatory" : false,
+    "page" : "5",
+    "label" : "\"➡ \" || \"Case à cocher take 2\"",
+    "conditionFilter" : 
+    { "value" : "true" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l669ebci",
+      "page" : "1",
+      "label" : "\"I - \" || \"Séquence 1\"" } },
+    "bindingDependencies" : 
+    [ "BOOL2" ],
+    "response" : 
+    { "name" : "BOOL2" } },
+   
+   { "id" : "l6esph52",
+    "componentType" : "Input",
+    "mandatory" : false,
+    "page" : "6",
+    "maxLength" : 249,
+    "label" : "\"➡ \" || \"Question avec filtre\"",
+    "conditionFilter" : 
+    { "value" : "(BOOL1 and BOOL2)",
+     "bindingDependencies" : 
+     [ "BOOL1",
+      "BOOL2" ] },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l669ebci",
+      "page" : "1",
+      "label" : "\"I - \" || \"Séquence 1\"" } },
+    "bindingDependencies" : 
+    [ "QFILTRE" ],
+    "response" : 
+    { "name" : "QFILTRE" } },
+   
+   { "id" : "l669x5cg",
+    "componentType" : "Subsequence",
+    "goToPage" : "7",
+    "label" : "Sous-séquence avec contrôle",
+    "conditionFilter" : 
+    { "value" : "true" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l669ebci",
+      "page" : "1",
+      "label" : "\"I - \" || \"Séquence 1\"" },
+     "subSequence" : 
+     { "id" : "l669x5cg",
+      "page" : "7",
+      "label" : "Sous-séquence avec contrôle" } } },
+   
+   { "id" : "l669yqg4",
+    "componentType" : "Textarea",
+    "mandatory" : false,
+    "page" : "7",
+    "maxLength" : 1000,
+    "label" : "\"➡ \" || \"Du texte\"",
+    "conditionFilter" : 
+    { "value" : "true" },
+    "controls" : 
+    [ 
+     { "id" : "l669yqg4-CI-0",
+      "criticality" : "INFO",
+      "control" : "not(false)",
+      "errorMessage" : "\"Invisible\"" } ],
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l669ebci",
+      "page" : "1",
+      "label" : "\"I - \" || \"Séquence 1\"" },
+     "subSequence" : 
+     { "id" : "l669x5cg",
+      "page" : "7",
+      "label" : "Sous-séquence avec contrôle" } },
+    "bindingDependencies" : 
+    [ "DUTEXTE" ],
+    "response" : 
+    { "name" : "DUTEXTE" } },
+   
+   { "id" : "l6f4ge86",
+    "componentType" : "Sequence",
+    "page" : "8",
+    "label" : "\"II - \" || \"Séquence avec libellé perso\"",
+    "declarations" : 
+    [ 
+     { "id" : "l6f4ge86-l6f4a1p9",
+      "declarationType" : "HELP",
+      "position" : "AFTER_QUESTION_TEXT",
+      "label" : "\"La valeur de la somme est \" || cast( SOMME, string )" } ],
+    "conditionFilter" : 
+    { "value" : "true" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l6f4ge86",
+      "page" : "8",
+      "label" : "\"II - \" || \"Séquence avec libellé perso\"" } },
+    "bindingDependencies" : 
+    [ "SOMME" ] },
+   
+   { "id" : "COMMENT-SEQ",
+    "componentType" : "Sequence",
+    "page" : "9",
+    "label" : "\"Commentaire\"",
+    "conditionFilter" : 
+    { "value" : "true" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "COMMENT-SEQ",
+      "page" : "9",
+      "label" : "\"Commentaire\"" } } },
+   
+   { "id" : "COMMENT-QUESTION",
+    "componentType" : "Textarea",
+    "mandatory" : false,
+    "page" : "10",
+    "maxLength" : 2000,
+    "label" : "\"Avez-vous des remarques concernant l'enquête ou des commentaires ?\"",
+    "conditionFilter" : 
+    { "value" : "true" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "COMMENT-SEQ",
+      "page" : "9",
+      "label" : "\"Commentaire\"" } },
+    "bindingDependencies" : 
+    [ "COMMENT_QE" ],
+    "response" : 
+    { "name" : "COMMENT_QE" } } ],
+  "variables" : 
+  [ 
+   { "variableType" : "COLLECTED",
+    "name" : "COMMENT_QE",
+    "componentRef" : "COMMENT-QUESTION",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "NOMBRE1",
+    "componentRef" : "l669itrl",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "NOMBRE2",
+    "componentRef" : "l669opc6",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "BOOL1",
+    "componentRef" : "l669tc5l",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "BOOL2",
+    "componentRef" : "l669qqhz",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "QFILTRE",
+    "componentRef" : "l6esph52",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "DUTEXTE",
+    "componentRef" : "l669yqg4",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_NOMBRE1",
+    "expression" : "true",
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_NOMBRE2",
+    "expression" : "true",
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_BOOL1",
+    "expression" : "true",
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_BOOL2",
+    "expression" : "true",
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_QFILTRE",
+    "expression" : "(BOOL1 and BOOL2)",
+    "bindingDependencies" : 
+    [ "BOOL1",
+     "BOOL2" ],
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_DUTEXTE",
+    "expression" : "true",
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "SOMME",
+    "expression" : "cast( NOMBRE1 , integer ) + cast( NOMBRE2 , integer )",
+    "bindingDependencies" : 
+    [ "NOMBRE1",
+     "NOMBRE2" ],
+    "inFilter" : "false" } ] }

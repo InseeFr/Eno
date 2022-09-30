@@ -15,7 +15,7 @@ import java.util.List;
 /** Consistency check. */
 @Getter
 @Setter
-public class Control extends EnoObject {
+public class Control extends EnoIdentifiableObject implements EnoObjectWithExpression {
 
     public enum Criticality {INFO, WARN, ERROR}
 
@@ -35,10 +35,6 @@ public class Control extends EnoObject {
             case ERROR -> ControlCriticityEnum.ERROR;
         };
     }
-
-    @DDI(contextType = ComputationItemType.class, field = "getIDArray(0).getStringValue()")
-    @Lunatic(contextType = ControlType.class, field = "setId(#param)")
-    private String id;
 
     /** Control criticality. */
     @DDI(contextType = ComputationItemType.class,

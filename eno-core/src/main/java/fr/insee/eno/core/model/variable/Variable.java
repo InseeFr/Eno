@@ -1,7 +1,10 @@
-package fr.insee.eno.core.model;
+package fr.insee.eno.core.model.variable;
 
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.model.BindingReference;
+import fr.insee.eno.core.model.EnoObject;
+import fr.insee.eno.core.model.EnoObjectWithExpression;
 import fr.insee.lunatic.model.flat.IVariableType;
 import logicalproduct33.VariableType;
 import lombok.Getter;
@@ -12,7 +15,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class Variable extends EnoObject {
+public class Variable extends EnoObject implements EnoObjectWithExpression {
 
     /* TODO: separate object for calculated variable? probably (implies a selection on variable list in DDI,
         but it is worth the effort since it would make more straightforward SpEL fields). */

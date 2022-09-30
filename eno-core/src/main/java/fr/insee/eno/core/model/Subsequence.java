@@ -19,4 +19,9 @@ public class Subsequence extends AbstractSequence {
             field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     private String componentType = "SUBSEQUENCE";
 
+    @Override
+    public String toString() {
+        return "Subsequence(id="+id+")";
+    }
+
 }

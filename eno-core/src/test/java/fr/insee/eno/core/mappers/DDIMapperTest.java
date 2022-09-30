@@ -1,8 +1,8 @@
 package fr.insee.eno.core.mappers;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.Variable;
-import fr.insee.eno.core.model.VariableGroup;
+import fr.insee.eno.core.model.variable.Variable;
+import fr.insee.eno.core.model.variable.VariableGroup;
 import fr.insee.eno.core.model.question.BooleanQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.parsers.DDIParser;
@@ -16,33 +16,6 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DDIMapperTest {
-
-    // TODO: more unit tests (one per DDI annotation in the model classes)
-
-    // Note: it may be pertinent to do one unit test class per model class
-
-    // Note: it is also possible to read portions of DDI xml files to do unit testing of annotations
-
-    /* TODO: test fails because no resource package is set on DDI instance. Same problem will occur for each
-        DDI annotation that uses a getter on a DDI list, see how we could manage this without adding null checks
-        in each SpEL expression of these annotations.
-        Idea: we could make unit tests not by annotation but by classes.
-    @Test
-    public void mapDDIInstanceId() {
-        //
-        String expectedId = "FOO-ID";
-        // Given
-        DDIInstanceType ddiInstanceType = DDIInstanceType.Factory.newInstance();
-        ddiInstanceType.getIDList().add(IDType.Factory.newInstance());
-        ddiInstanceType.getIDList().get(0).setStringValue(expectedId);
-        // When
-        DDIMapper mapper = new DDIMapper();
-        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-        mapper.mapDDI(ddiInstanceType, enoQuestionnaire);
-        // Then
-        assertEquals(expectedId, enoQuestionnaire.getId());
-    }
-    */
 
     @Test
     public void ddiMappingFunctionalTest() throws IOException {

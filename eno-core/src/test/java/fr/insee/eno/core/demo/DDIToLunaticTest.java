@@ -1,5 +1,6 @@
 package fr.insee.eno.core.demo;
 
+import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
@@ -42,7 +43,7 @@ public class DDIToLunaticTest {
         enoParameters.setSelectedModes(List.of(Mode.CAPI, Mode.CATI));
         //
         EnoProcessing enoProcessing = new EnoProcessing(enoParameters);
-        enoProcessing.applyProcessing(enoQuestionnaire);
+        enoProcessing.applyProcessing(enoQuestionnaire, Format.DDI);
 
         //
         Questionnaire lunaticQuestionnaire = new Questionnaire();
