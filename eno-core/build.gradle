@@ -38,9 +38,14 @@ dependencies {
     // Logging
     implementation 'org.slf4j:slf4j-api'
 
+    // Testing
     testRuntimeOnly 'ch.qos.logback:logback-classic'
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    // Mockito
+    testImplementation "org.mockito:mockito-core"
+
+
     // Lombok https://projectlombok.org/setup/gradle // TODO: version could be managed with spring dependencies (?)
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
