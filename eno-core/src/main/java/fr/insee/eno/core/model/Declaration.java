@@ -17,7 +17,7 @@ import java.util.List;
 public class Declaration extends EnoIdentifiableObject implements DeclarationInterface {
 
     @DDI(contextType = StatementItemType.class,
-            field = "getDisplayTextArray(0).getTextContentArray(0).getText().getStringValue()")
+            field = "getDisplayTextArray(0)")
     @Lunatic(contextType = DeclarationType.class, field = "setLabel(#param)")
     DynamicLabel label;
 
