@@ -176,9 +176,9 @@ public class DDIMapper extends Mapper {
         if (ddiObject2 != null) {
             recursiveMapping(ddiObject2, enoObject2, context);
         }
-        // For now, it is not allowed to have a null DDI object on complex type properties
+        // It is now allowed to have a null DDI object on complex type properties
         else {
-            throw new RuntimeException(String.format(
+            log.debug(String.format(
                     "DDI object mapped by the annotation on property '%s' in class %s is null",
                     propertyName, modelContextType));
         }
