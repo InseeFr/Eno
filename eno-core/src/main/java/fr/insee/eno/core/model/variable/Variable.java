@@ -2,16 +2,13 @@ package fr.insee.eno.core.model.variable;
 
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.eno.core.model.BindingReference;
+import fr.insee.eno.core.model.CalculatedExpression;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoObjectWithExpression;
 import fr.insee.lunatic.model.flat.IVariableType;
 import logicalproduct33.VariableType;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -51,18 +48,9 @@ public class Variable extends EnoObject implements EnoObjectWithExpression {
     @DDI(contextType = VariableType.class,
             field = "getVariableRepresentation().getProcessingInstructionReference() != null ? " +
                     "#index.get(#this.getVariableRepresentation().getProcessingInstructionReference().getIDArray(0).getStringValue())" +
-                    ".getCommandCodeArray(0).getCommandArray(0).getCommandContent() : null")
+                    ".getCommandCodeArray(0).getCommandArray(0) : null")
     @Lunatic(contextType = fr.insee.lunatic.model.flat.VariableType.class, field = "setExpression(#param)")
-    String expression;
-
-    /** In DDI, the expression contains variable references instead of variables names.
-     * This list contains the references of these variables. */
-    @DDI(contextType = VariableType.class,
-            field = "getVariableRepresentation().getProcessingInstructionReference() != null ? " +
-                    "#index.get(#this.getVariableRepresentation().getProcessingInstructionReference().getIDArray(0).getStringValue())" +
-                    ".getCommandCodeArray(0).getCommandArray(0).getInParameterList() : null",
-            allowNullList = true)
-    private List<BindingReference> bindingReferences = new ArrayList<>();
+    CalculatedExpression expression;
 
     /** Measurement unit (in case of some numeric variables). */
     @DDI(contextType = VariableType.class,
