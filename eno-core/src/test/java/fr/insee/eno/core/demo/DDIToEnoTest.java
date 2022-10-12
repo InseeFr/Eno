@@ -18,8 +18,9 @@ public class DDIToEnoTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
-            "l10xmg2l",
-            "sandbox",
+            //"l10xmg2l",
+            //"sandbox",
+            "sandbox_v2",
     })
     public void writeEnoFileFromDDI(String fileName) throws IOException {
         //
