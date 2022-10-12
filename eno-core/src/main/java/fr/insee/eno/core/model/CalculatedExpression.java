@@ -27,7 +27,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @AllArgsConstructor
 @Context(format = Format.DDI, type = CommandType.class)
 @Context(format = Format.LUNATIC, type = LabelType.class)
-public class CalculatedExpression {
+public class CalculatedExpression extends EnoObject {
 
     public static CalculatedExpression defaultExpression() {
         CalculatedExpression res = new CalculatedExpression();
