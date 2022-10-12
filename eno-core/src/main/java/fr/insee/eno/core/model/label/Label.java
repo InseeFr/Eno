@@ -4,11 +4,15 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoObject;
+import lombok.Getter;
+import lombok.Setter;
 import reusable33.LabelType;
 
 import static fr.insee.eno.core.annotations.Contexts.Context;
 
 /** Label object that is used in components */
+@Getter
+@Setter
 @Context(format = Format.DDI, type = LabelType.class)
 public class Label extends EnoObject {
 
