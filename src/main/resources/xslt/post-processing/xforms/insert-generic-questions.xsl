@@ -228,7 +228,7 @@
                         </INSEE-BUSINESS-SEQ-0-1>
                         <COMMENT_UE>
                             <label>
-                                <xsl:value-of select="'➡ Remarque, commentaire sur un changement concernant votre øLabelUniteEnqueteeø :'"/>
+                                <xsl:value-of select="'➡ Remarque, commentaire sur un changement concernant votre øLabelUniteEnqueteeø (ne pas mentionner de données à caractère personnel) :'"/>
                             </label>
                         </COMMENT_UE>
                     </xsl:if>
@@ -263,7 +263,7 @@
                         </xsl:if>
                         <xsl:if test="$end-comment-question">
                             <COMMENT_QE>
-                                <label>➡ Commentaires et remarques éventuelles concernant l’enquête :</label>
+                                <label>➡ Commentaires et remarques éventuelles concernant l’enquête (ne pas mentionner de données à caractère personnel) :</label>
                             </COMMENT_QE>
                         </xsl:if>
                     </xsl:if>

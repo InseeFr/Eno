@@ -663,13 +663,13 @@
             </fo:block>
          </fo:block-container>
          <fo:block-container margin-left="10mm"
-                             margin-top="23mm"
-                             width="150mm"
-                             height="10mm">
+                              margin-top="28mm"
+                              width="150mm"
+                              height="10mm">
             <fo:block font-family="Liberation Sans"
                       font-size="16pt"
                       font-weight="bold"
-                      text-align="center"> ${Enq_LibelleEnquete} </fo:block>
+                      text-align="center">${Enq_LibelleEnquete}</fo:block>
          </fo:block-container>
          <!--    Bloc Quand et comment répondre  -->
          <fo:block-container margin-top="5mm">
@@ -681,10 +681,10 @@
                      <fo:table-row>
                         <fo:table-cell width="20mm">
                            <fo:block>
-                              <fo:external-graphic src="Insee_formulaire-qui_repond.png"
-                                                   content-width="scale-to-fit"
-                                                   width="15mm"
-                                                   scaling="uniform"/>
+                              <fo:external-graphic src="coleman/COLEM_EnveloppeQuestionnaire.jpg"
+                                                    content-width="scale-to-fit"
+                                                    width="15mm"
+                                                    scaling="uniform"/>
                            </fo:block>
                         </fo:table-cell>
                         <fo:table-cell display-align="center">
@@ -701,8 +701,8 @@
                   <fo:block line-height="10pt">
                      <fo:block line-height="12pt">Au plus tard le <fo:inline font-weight="bold">${Enq_DateRetour}.</fo:inline>
                      </fo:block>
-                     <fo:block line-height="12pt">Remplissez un questionnaire papier ${Enq_PapierNombre}. #if(${Enq_PapierConsigne}!='') ${Enq_PapierConsigne}.#end</fo:block>
-                     <fo:block line-height="12pt">Utilisez l'enveloppe T pour envoyer ${Enq_PapierNombreQuest} à l'adresse suivante :</fo:block>
+                     <fo:block line-height="12pt">#if(${Enq_PapierNombre}!='')Remplissez un questionnaire papier ${Enq_PapierNombre}.#else Remplissez un questionnaire papier.#end #if(${Enq_PapierConsigne}!='')${Enq_PapierConsigne}.#end</fo:block>
+                     <fo:block line-height="12pt">Utilisez l'enveloppe T pour envoyer ${Enq_PapierNombreQuest} à l'adresse suivante :</fo:block>
                   </fo:block>
                   <fo:block line-height="10pt" margin-top="2mm">
                      <fo:block line-height="12pt">$!{Enq_AdresseRetourQL1}</fo:block>
@@ -726,10 +726,10 @@
                      <fo:table-row>
                         <fo:table-cell width="20mm">
                            <fo:block>
-                              <fo:external-graphic src="Insee_hommes-recensement-bleunuance2.png"
-                                                   content-width="scale-to-fit"
-                                                   width="15mm"
-                                                   scaling="uniform"/>
+                              <fo:external-graphic src="coleman/COLEM_QuiRepondQuestionnaire.jpg"
+                                                    content-width="scale-to-fit"
+                                                    width="15mm"
+                                                    scaling="uniform"/>
                            </fo:block>
                         </fo:table-cell>
                         <fo:table-cell display-align="center">
@@ -761,10 +761,10 @@
                      <fo:table-row>
                         <fo:table-cell width="20mm">
                            <fo:block>
-                              <fo:external-graphic src="Insee_formulaire-recensement-bleunuance2.png"
-                                                   content-width="scale-to-fit"
-                                                   width="15mm"
-                                                   scaling="uniform"/>
+                              <fo:external-graphic src="coleman/COLEM_RemplirQuestionnaire.jpg"
+                                                    content-width="scale-to-fit"
+                                                    width="15mm"
+                                                    scaling="uniform"/>
                            </fo:block>
                         </fo:table-cell>
                         <fo:table-cell display-align="center" width="80mm">
@@ -776,9 +776,10 @@
             </fo:block>
          </fo:block-container>
          <fo:block-container margin-left="15mm"
-                             font-family="Liberation Sans"
-                             font-size="10pt"
-                             text-align="justify">
+                              margin-right="5mm"
+                              font-family="Liberation Sans"
+                              font-size="10pt"
+                              text-align="justify">
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label start-indent="5mm" line-height="5mm">
@@ -804,13 +805,13 @@
                      </fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="10mm" line-height="5mm">
-                     <fo:block>Utilisez les cases prévues pour les réponses écrites. Exemple :
+                     <fo:block>Utilisez les cases prévues pour les réponses écrites. Exemple :
                                 <fo:external-graphic src="year_example.png"
-                                             padding-right="3pt"
-                                             padding-left="3pt"
-                                             vertical-align="middle"
-                                             content-width="10mm"
-                                             content-height="10mm"/>
+                                              padding-right="3pt"
+                                              padding-left="3pt"
+                                              vertical-align="middle"
+                                              content-width="5mm"
+                                              content-height="10mm"/>
                      </fo:block>
                   </fo:list-item-body>
                </fo:list-item>
@@ -835,29 +836,12 @@
             </fo:list-block>
          </fo:block-container>
          <!--    Bloc Consignes spécifiques enquête  -->
-         <fo:block-container margin-top="5mm">
-            <fo:block font-weight="bold" font-size="12pt">
-               <fo:table width="100mm">
-                  <fo:table-column/>
-                  <fo:table-column/>
-                  <fo:table-body>
-                     <fo:table-row>
-                        <fo:table-cell width="20mm">
-                           <fo:block/>
-                        </fo:table-cell>
-                        <fo:table-cell display-align="center" width="60mm">
-                           <fo:block line-height="10pt" font-weight="bold" font-size="12pt">Consignes spécifiques</fo:block>
-                        </fo:table-cell>
-                     </fo:table-row>
-                  </fo:table-body>
-               </fo:table>
-            </fo:block>
-         </fo:block-container>
-         <fo:block-container margin-top="5mm"
-                             margin-left="10mm"
-                             font-family="Liberation Sans"
-                             font-size="10pt"
-                             text-align="justify">
+         <fo:block-container margin-top="0mm"
+                              margin-left="10mm"
+                              margin-right="5mm"
+                              font-family="Liberation Sans"
+                              font-size="10pt"
+                              text-align="justify">
             <fo:block>
                     #if (${Enq_Consigne1} != '')
                     <fo:inline-container margin="0mm">
@@ -869,7 +853,7 @@
                            </fo:block>
                         </fo:list-item-label>
                         <fo:list-item-body start-indent="5mm" line-height="5mm">
-                           <fo:block line-height="12pt">${Enq_Consigne1}</fo:block>
+                           <fo:block>${Enq_Consigne1}</fo:block>
                         </fo:list-item-body>
                      </fo:list-item>
                   </fo:list-block>
@@ -885,7 +869,7 @@
                            </fo:block>
                         </fo:list-item-label>
                         <fo:list-item-body start-indent="5mm" line-height="5mm">
-                           <fo:block line-height="12pt">${Enq_Consigne2}</fo:block>
+                           <fo:block>${Enq_Consigne2}</fo:block>
                         </fo:list-item-body>
                      </fo:list-item>
                   </fo:list-block>
@@ -901,7 +885,7 @@
                            </fo:block>
                         </fo:list-item-label>
                         <fo:list-item-body start-indent="5mm" line-height="5mm">
-                           <fo:block line-height="12pt">${Enq_Consigne3}</fo:block>
+                           <fo:block>${Enq_Consigne3}</fo:block>
                         </fo:list-item-body>
                      </fo:list-item>
                   </fo:list-block>
