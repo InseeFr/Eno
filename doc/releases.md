@@ -1,5 +1,10 @@
 # Eno Releases note
 
+## 2.3.11 - 14/09/22
+
+- **[ddi2fo][post-processing]** ***Household*** : modification of the first page of paper questionnaires (revision of text and images)
+- **[ddi2fo][ddi2xforms][post-processing]** ***Business*** : update of the legal framework (for paper and web questionnaires)
+
 ## 2.3.10 - 03/08/22
 - **[params][ddi2out]** splitting capi-cati into separated capi and cati modes
 
