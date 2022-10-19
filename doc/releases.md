@@ -1,5 +1,12 @@
 # Eno Releases note
 
+## 2.4.0 - 19/10/22
+- **[ddi2lunaticXML][core]** switch to Lunatic-model v2.3.1 to lunatic V2 refactoring
+
+## 2.3.12 - 20/09/22
+
+- **[poguesXML2ddi][core]** Unit measures, adding `MWh` and `MWh PCS`
+
 ## 2.3.11 - 14/09/22
 
 - **[ddi2fo][post-processing]** ***Household*** : modification of the first page of paper questionnaires (revision of text and images)
