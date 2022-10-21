@@ -93,7 +93,7 @@ public class EnoQuestionnaireTest {
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         mapProperty(enoQuestionnaire, "label");
         //
-        assertEquals(expectedLabel, enoQuestionnaire.getLabel());
+        assertEquals(expectedLabel, enoQuestionnaire.getLabel().getValue());
     }
 
     @Test
