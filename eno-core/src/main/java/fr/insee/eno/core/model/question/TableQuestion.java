@@ -5,6 +5,8 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.CodeList;
 import fr.insee.lunatic.model.flat.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,8 @@ import java.util.List;
  * but mostly in a dedicated class that carries the logic of this conversion.
  * </p>
  */
+@Getter
+@Setter
 public class TableQuestion extends MultipleResponseQuestion {
 
     /** Parameter that exists in Lunatic but that has a fixed value for now. */

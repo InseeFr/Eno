@@ -6,6 +6,8 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.model.CodeItem;
 import fr.insee.eno.core.model.EnoObject;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 /** A TableCell object is the content of a table.
  * A cell is neither part of the header nor of the left column. */
 @Context(format = Format.DDI, type = GridResponseDomainInMixedType.class)
+@Getter
+@Setter
 public abstract class TableCell extends EnoObject {
 
     @DDI(contextType = GridResponseDomainInMixedType.class,
@@ -30,13 +34,16 @@ public abstract class TableCell extends EnoObject {
 
     // TODO: refactor DDI response domain mapping in questions and table cells
 
+    @Getter @Setter
     public static class BooleanCell extends TableCell {}
 
+    @Getter @Setter
     public static class TextCell extends TableCell {
         @DDI(contextType = GridResponseDomainInMixedType.class, field = "getResponseDomain().getMaxLength().intValue()")
         BigInteger maxLength;
     }
 
+    @Getter @Setter
     public static class NumericCell extends TableCell {
         @DDI(contextType = QuestionItemType.class,
                 field = "getResponseDomain()?.getNumberRangeList()?.get(0)?.getLow()?.getStringValue() != null ? " +
@@ -57,6 +64,7 @@ public abstract class TableCell extends EnoObject {
         String unit;
     }
 
+    @Getter @Setter
     public static class DateCell extends TableCell {
         @DDI(contextType = QuestionItemType.class, field = "getResponseDomain().getRangeArray(0).getMinimumValue().getStringValue()")
         private String minValue;
@@ -68,6 +76,7 @@ public abstract class TableCell extends EnoObject {
         private String format;
     }
 
+    @Getter @Setter
     public static class UniqueChoiceCell extends TableCell {
         @DDI(contextType = QuestionItemType.class,
                 field = "getResponseDomain().getGenericOutputFormat().getStringValue().equals('radio-button') ? " +
