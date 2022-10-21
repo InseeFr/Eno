@@ -35,11 +35,14 @@ public class Filter extends EnoIdentifiableObject implements EnoObjectWithExpres
     @Lunatic(contextType = ConditionFilterType.class, field = "setValue(#param)")
     private String stringExpression;
 
-    private CalculatedExpression expression = new CalculatedExpression();
+    private CalculatedExpression expression;
 
     public CalculatedExpression getExpression() {
-        expression.setValue(stringExpression);
-        expression.setBindingReferences(bindingReferences);
+        if (expression == null) {
+            expression = new CalculatedExpression();
+            expression.setValue(stringExpression);
+            expression.setBindingReferences(bindingReferences);
+        }
         return expression;
     }
 
