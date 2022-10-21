@@ -45,9 +45,18 @@
                 <!-- ZONE LOGOS -->
                 <fo:block-container absolute-position="absolute" left="5mm" top="2mm" width="180mm" height="25mm">
                     <fo:block>
+                        #if(${logo} == "1")
                         <fo:external-graphic src="logo_INSEE_M_SP.png" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
+                        #end
+                        #if(${logo} == "2")
+                        <fo:external-graphic src="logo_DARES_M_SP.png" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
+                        #end
+                        #if(${logo} == "3")
+                        <fo:external-graphic src="logo_SIES_SP.png" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
+                        #end
                     </fo:block>
                 </fo:block-container>
+                
                 
                 <!-- ZONE RESERVE ADRESSE -->
                 <fo:block-container absolute-position="absolute" left="80mm" top="33mm" width="110mm" height="50mm" overflow="hidden">
@@ -181,7 +190,7 @@
                     </fo:block>
                     <fo:block margin-top="3mm">
                         Des renseignements relatifs à l'enquête et à son calendrier sont disponibles sur le site internet du Cnis&#160;: <fo:inline text-decoration="underline">${BddURLCnis}</fo:inline>. #if($!{BddURLDiffusion})
-                        Les résultats de cette enquête ou des éditions antérieures sont disponibles sur le site de l'Insee&#160;: <fo:inline text-decoration="underline">$!{BddURLDiffusion}</fo:inline>.#end
+                        Les résultats de cette enquête ou des éditions antérieures sont disponibles sur le site suivant&#160;: <fo:inline text-decoration="underline">$!{BddURLDiffusion}</fo:inline>.#end
                     </fo:block>
                     <fo:block margin-top="3mm">
                         En vous remerciant par avance de votre collaboration, je vous prie de bien vouloir agréer,
@@ -303,13 +312,13 @@
                         Elle a obtenu le visa n°${BddNumeroVisa} du ${BddMinistereTutelle}, valable pour l'année ${BddAnneeCollecte}.
                     </fo:block>
                     <fo:block>
-                        #if(${BddCaractereObligatoire}=='oui')Cette enquête est obligatoire. En cas de défaut de réponse après mise en demeure dans le délai imparti ou de réponse sciemment inexacte, 
+                        #if(${BddCaractereObligatoire}=='oui')Cette enquête est <fo:inline font-weight="bold">obligatoire</fo:inline>. En cas de défaut de réponse après mise en demeure dans le délai imparti ou de réponse sciemment inexacte, 
                         les personnes physiques ou morales peuvent être l'objet d'une amende administrative prononcée par le ministre chargé de l'économie sur avis du 
                         Conseil national de l'information statistique réuni en Comité du contentieux des enquêtes statistiques obligatoires dans les conditions fixées 
                         par le décret prévu au II de l'article 1er bis de la loi du 7 juin 1951.#else<fo:inline font-size="0.1pt">&#160;</fo:inline>Cette enquête n’est pas obligatoire.#end
                     </fo:block>
                     <fo:block>
-                        Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à ${BddArticleServiceProducteur}${BddNomServiceProducteur}. 
+                        Les informations collectées dans le cadre de cette enquête sont protégées par le secret statistique et destinées à&#160;: ${BddArticleServiceProducteur}${BddNomServiceProducteur}. 
                         Ces réponses ainsi que les données obtenues par appariement seront conservées pendant ${BddConservation} à compter de la fin de la collecte pour les besoins de l’enquête. 
                         Elles seront archivées au-delà de cette durée. À tout moment, leur usage et leur accès seront strictement contrôlés et limités à l'élaboration de statistiques 
                         ou à des travaux de recherche scientifique ou historique.
@@ -317,8 +326,8 @@
                     <fo:block>
                         #if(${BddDonneesPerso}=='oui')Le règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD) ainsi que la loi 
                         n<fo:inline font-size="0.1pt">&#160;</fo:inline>°&#160;78-17 du 6 janvier 1978 relative à l'informatique, 
-                        aux fichiers et aux libertés s'appliquent à la présente enquête. Pour les données à caractère personnel, un droit d'accès, de rectification, 
-                        d’effacement ou de limitation de traitement peut être exercé pendant la période de conservation des données d’identification. 
+                        aux fichiers et aux libertés s'appliquent à la présente enquête. Pour les données à caractère personnel, un droit d'accès, de rectification 
+                        ou de limitation de traitement peut être exercé pendant la période de conservation des données d’identification. 
                         Ces droits peuvent être exercés auprès de ${AdresseRetourL1} que vous pouvez contacter à l’adresse ${BddServiceCollecteurAdresseMessagerie}. 
                         Pour toute question relative au traitement de vos données, vous pouvez contacter le délégué à la protection des données des ministères économique 
                         et financier à l’adresse <fo:inline text-decoration="underline">le-delegue-a-la-protection-des-donnees-personnelles@finances.gouv.fr</fo:inline> 

@@ -79,7 +79,8 @@
     <xs:simpleType name="Mode">
         <xs:restriction base="xs:token">
             <xs:enumeration value="cawi"/>
-            <xs:enumeration value="capi-cati"/>
+            <xs:enumeration value="capi"/>
+            <xs:enumeration value="cati"/>
             <xs:enumeration value="all"/>    
             <xs:enumeration value="papi"/>
             <!-- process is a phase of gsbpm and not a mode but the case being unique for the moment 
