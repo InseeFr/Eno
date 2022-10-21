@@ -27,11 +27,11 @@ public class Filter extends EnoIdentifiableObject implements EnoObjectWithExpres
 
     /** In DDI, the expression contains variable references instead of variables names.
      * This list contains the references of these variables. */
-    @DDI(contextType = IfThenElseType.class, field = "getIfCondition().getCommandArray(0)")
+    @DDI(contextType = IfThenElseType.class, field = "getIfCondition().getCommandArray(0).getInParameterList()")
     private List<BindingReference> bindingReferences = new ArrayList<>();
 
     /** Command that determines if the filter is applied or not. */
-    @DDI(contextType = IfThenElseType.class, field = "getIfCondition().getCommandArray(0)")
+    @DDI(contextType = IfThenElseType.class, field = "getIfCondition().getCommandArray(0).getCommandContent()")
     @Lunatic(contextType = ConditionFilterType.class, field = "setValue(#param)")
     private String stringExpression;
 
