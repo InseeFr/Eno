@@ -1,0 +1,470 @@
+
+ { "id" : "l8x6fhtd",
+  "modele" : "SANDBOXENO32",
+  "enoCoreVersion" : "2.3.10-controls-type",
+  "lunaticModelVersion" : "2.2.14-rc",
+  "generatingDate" : "19-10-2022 13:28:23",
+  "missing" : false,
+  "pagination" : "question",
+  "maxPage" : "4",
+  "label" : 
+  { "value" : "Sandbox Eno V3 Lunatic V2",
+   "type" : "VTL|MD" },
+  "components" : 
+  [ 
+   { "id" : "l9888jno",
+    "componentType" : "Sequence",
+    "page" : "1",
+    "label" : 
+    { "value" : "\"I - \" || \"Tableaux\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l9888jno",
+      "page" : "1",
+      "label" : 
+      { "value" : "\"I - \" || \"Tableaux\"",
+       "type" : "VTL|MD" } } } },
+   
+   { "id" : "l988nifn",
+    "componentType" : "Table",
+    "mandatory" : false,
+    "page" : "2",
+    "positioning" : "HORIZONTAL",
+    "label" : 
+    { "value" : "\"➡ \" || \"Tableau liste de codes + 2 colonnes\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "controls" : 
+    [ 
+     { "id" : "l988nifn-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB211)) and (0>TAB211 or 100<TAB211))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB211))  and round(TAB211,0)<>TAB211)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB212)) and (0>TAB212 or 100<TAB212))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB212))  and round(TAB212,0)<>TAB212)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB221)) and (0>TAB221 or 100<TAB221))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB221))  and round(TAB221,0)<>TAB221)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB222)) and (0>TAB222 or 100<TAB222))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB222))  and round(TAB222,0)<>TAB222)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB231)) and (0>TAB231 or 100<TAB231))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB231))  and round(TAB231,0)<>TAB231)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB232)) and (0>TAB232 or 100<TAB232))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB232))  and round(TAB232,0)<>TAB232)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB241)) and (0>TAB241 or 100<TAB241))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB241))  and round(TAB241,0)<>TAB241)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB242)) and (0>TAB242 or 100<TAB242))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB242))  and round(TAB242,0)<>TAB242)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } } ],
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l9888jno",
+      "page" : "1",
+      "label" : 
+      { "value" : "\"I - \" || \"Tableaux\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "TAB211",
+     "TAB212",
+     "TAB221",
+     "TAB222",
+     "TAB231",
+     "TAB232",
+     "TAB241",
+     "TAB242" ],
+    "header" : 
+    [ 
+     { "label" : 
+      { "value" : "",
+       "type" : "VTL|MD" } },
+     
+     { "label" : 
+      { "value" : "\"Colonne 1\"",
+       "type" : "VTL|MD" } },
+     
+     { "label" : 
+      { "value" : "\"Colonne 2\"",
+       "type" : "VTL|MD" } } ],
+    "body" : 
+    [ 
+     [ 
+      { "value" : "codeA",
+       "label" : 
+       { "value" : "\"Code A\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 100,
+       "decimals" : 0,
+       "id" : "l988nifn-QOP-l988oz8d",
+       "response" : 
+       { "name" : "TAB211" },
+       "bindingDependencies" : 
+       [ "TAB211" ] },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 100,
+       "decimals" : 0,
+       "id" : "l988nifn-QOP-l988ri4q",
+       "response" : 
+       { "name" : "TAB212" },
+       "bindingDependencies" : 
+       [ "TAB212" ] } ],
+     
+     [ 
+      { "value" : "codeB",
+       "label" : 
+       { "value" : "\"Code B\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 100,
+       "decimals" : 0,
+       "id" : "l988nifn-QOP-l988sd26",
+       "response" : 
+       { "name" : "TAB221" },
+       "bindingDependencies" : 
+       [ "TAB221" ] },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 100,
+       "decimals" : 0,
+       "id" : "l988nifn-QOP-l988xe31",
+       "response" : 
+       { "name" : "TAB222" },
+       "bindingDependencies" : 
+       [ "TAB222" ] } ],
+     
+     [ 
+      { "value" : "codeC",
+       "label" : 
+       { "value" : "\"Code C\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 100,
+       "decimals" : 0,
+       "id" : "l988nifn-QOP-l988q4mq",
+       "response" : 
+       { "name" : "TAB231" },
+       "bindingDependencies" : 
+       [ "TAB231" ] },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 100,
+       "decimals" : 0,
+       "id" : "l988nifn-QOP-l989272r",
+       "response" : 
+       { "name" : "TAB232" },
+       "bindingDependencies" : 
+       [ "TAB232" ] } ],
+     
+     [ 
+      { "value" : "codeD",
+       "label" : 
+       { "value" : "\"Code D\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 100,
+       "decimals" : 0,
+       "id" : "l988nifn-QOP-l988xrsd",
+       "response" : 
+       { "name" : "TAB241" },
+       "bindingDependencies" : 
+       [ "TAB241" ] },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 100,
+       "decimals" : 0,
+       "id" : "l988nifn-QOP-l9892y8n",
+       "response" : 
+       { "name" : "TAB242" },
+       "bindingDependencies" : 
+       [ "TAB242" ] } ] ] },
+   
+   { "id" : "COMMENT-SEQ",
+    "componentType" : "Sequence",
+    "page" : "3",
+    "label" : 
+    { "value" : "\"Commentaire\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "COMMENT-SEQ",
+      "page" : "3",
+      "label" : 
+      { "value" : "\"Commentaire\"",
+       "type" : "VTL|MD" } } } },
+   
+   { "id" : "COMMENT-QUESTION",
+    "componentType" : "Textarea",
+    "mandatory" : false,
+    "page" : "4",
+    "maxLength" : 2000,
+    "label" : 
+    { "value" : "\"Avez-vous des remarques concernant l'enquête ou des commentaires ?\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "COMMENT-SEQ",
+      "page" : "3",
+      "label" : 
+      { "value" : "\"Commentaire\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "COMMENT_QE" ],
+    "response" : 
+    { "name" : "COMMENT_QE" } } ],
+  "variables" : 
+  [ 
+   { "variableType" : "COLLECTED",
+    "name" : "COMMENT_QE",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB211",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB212",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB221",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB222",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB231",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB232",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB241",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB242",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_TAB2",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "inFilter" : "false" } ],
+  "cleaning" : 
+  {  },
+  "resizing" : 
+  {  } }
