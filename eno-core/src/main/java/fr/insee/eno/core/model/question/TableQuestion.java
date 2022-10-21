@@ -34,13 +34,13 @@ public class TableQuestion extends MultipleResponseQuestion {
 
     /** Code list that contain header info. */
     @DDI(contextType = QuestionGridType.class,
-            field = "#index.get(getGridDimensionList().?[#this.getRank().intValue() == 1].get(0)" +
-                    ".getCodeListReference().getIDArray(0).getStringValue())")
+            field = "#index.get(#this.getGridDimensionList().?[#this.getRank().intValue() == 1].get(0)" +
+                    ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue())")
     CodeList header;
 
     @DDI(contextType = QuestionGridType.class,
-            field = "#index.get(getGridDimensionList().?[#this.getRank().intValue() == 2].get(0)" +
-                    ".getCodeListReference().getIDArray(0).getStringValue())")
+            field = "#index.get(#this.getGridDimensionList().?[#this.getRank().intValue() == 2].get(0)" +
+                    ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue())")
     CodeList leftColumn;
 
     /** Considering that out parameters are sorted in the same order as GridResponseDomainInMixed objects in DDI. */
