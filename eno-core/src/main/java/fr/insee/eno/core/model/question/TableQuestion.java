@@ -46,7 +46,7 @@ public class TableQuestion extends MultipleResponseQuestion {
     /** Considering that out parameters are sorted in the same order as GridResponseDomainInMixed objects in DDI. */
     @DDI(contextType = QuestionGridType.class,
             field = "getOutParameterList().![#this.getParameterNameArray(0).getStringArray(0).getStringValue()]")
-    List<String> variableNames;
+    List<String> variableNames = new ArrayList<>();
 
     /** Table cells. */
     @DDI(contextType = QuestionGridType.class, field = "getStructuredMixedGridResponseDomain().getGridResponseDomainInMixedList()")
