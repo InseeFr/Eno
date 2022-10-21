@@ -95,7 +95,26 @@ public class DDIConverter {
                                 questionGridType.getIDArray(0).getStringValue());
         }
         else if (dimensionSize == 2) {
-            return new TableQuestion();
+            GridDimensionType gridDimensionType = questionGridType.getGridDimensionList().stream()
+                    .filter(gridDimensionType1 -> gridDimensionType1.getRank().intValue() == 1)
+                    .findAny().orElse(null);
+            if (gridDimensionType == null) {
+                throw new RuntimeException(String.format(
+                        "Question grid '%s' has no grid dimension of rank 1.",
+                        questionGridType.getIDArray(0).getStringValue()));
+            } else {
+                if (gridDimensionType.getCodeDomain() != null) {
+                    return new TableQuestion();
+                } else if (gridDimensionType.getRoster() != null) {
+                    return new DynamicTableQuestion();
+                } else {
+                    throw new RuntimeException(String.format(
+                            "Grid dimension of rank 1 of question grid '%s' is neither a CodeDomain nor a Roster. " +
+                                    "This case is unexpected and Eno is unable to convert this question.",
+                            questionGridType.getIDArray(0).getStringValue()));
+                }
+            }
+
         }
         else {
             throw new RuntimeException(String.format(
