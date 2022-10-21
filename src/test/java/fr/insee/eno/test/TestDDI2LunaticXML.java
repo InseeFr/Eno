@@ -42,6 +42,7 @@ public class TestDDI2LunaticXML {
 					new LunaticXMLSortComponentsPostprocessor(),
 					new LunaticXMLInsertGenericQuestionsPostprocessor(),
 					new LunaticXMLExternalizeVariablesAndDependenciesPostprocessor(),
+					new LunaticXMLInsertCleaningBlockPostprocessor(),
 					new LunaticXMLVTLParserPostprocessor(),
 					new LunaticXMLPaginationPostprocessor(),};
 			GenerationService genService = new GenerationService(preprocessors, ddi2lunaticXML, postprocessors);

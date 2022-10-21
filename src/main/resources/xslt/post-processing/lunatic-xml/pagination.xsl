@@ -192,7 +192,7 @@
                 <xsl:otherwise><xsl:value-of select="$newPage"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:variable name="isLinkedLoop" select="boolean(@iterations != '')"/>
+        <xsl:variable name="isLinkedLoop" select="boolean(h:iterations != '')"/>
         
         <xsl:copy>
             <xsl:copy-of select="@*"/>

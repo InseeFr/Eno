@@ -18,27 +18,28 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * Customization of JS postprocessor.
  */
-public class LunaticXMLSortComponentsPostprocessor implements Postprocessor {
+public class LunaticXMLInsertCleaningBlockPostprocessor implements Postprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(LunaticXMLSortComponentsPostprocessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(LunaticXMLInsertCleaningBlockPostprocessor.class);
 
 	private XslTransformation saxonService = new XslTransformation();
 
-	private static final String styleSheetPath = Constants.TRANSFORMATIONS_SORT_COMPONENTS_LUNATIC_XML;
+	private static final String styleSheetPath = Constants.TRANSFORMATIONS_INSERT_CLEANING_BLOCK_LUNATIC_XML;
 
 	@Override
 	public File process(File input, byte[] parameters, String surveyName) throws Exception {
 
 		File outputForJSFile = new File(input.getParent(),
 				Constants.BASE_NAME_FORM_FILE +
-				Constants.SORT_COMPONENTS_LUNATIC_XML_EXTENSION);
+				Constants.INSERT_CLEANING_BLOCK_XML_EXTENSION);
 		logger.debug("Output folder for basic-form : " + outputForJSFile.getAbsolutePath());
 
 		InputStream JS_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForJSFile);
+
 		try {
-			saxonService.transformLunaticXMLToLunaticXMLSimplePost(inputStream,outputStream, JS_XSL, parameters);
+			saxonService.transformLunaticXMLToLunaticXMLPost(inputStream,outputStream, JS_XSL);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),
@@ -47,17 +48,17 @@ public class LunaticXMLSortComponentsPostprocessor implements Postprocessor {
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
-
+		
 		inputStream.close();
 		outputStream.close();
 		JS_XSL.close();
-		logger.info("End JS sort component post-processing");
+		logger.info("End JS insert cleaning block post-processing");
 
 		return outputForJSFile;
 	}
 
 	public String toString() {
-		return PostProcessing.LUNATIC_XML_SORT_COMPONENTS.name();
+		return PostProcessing.LUNATIC_XML_INSERT_CLEANING_BLOCK.name();
 	}
 
 }

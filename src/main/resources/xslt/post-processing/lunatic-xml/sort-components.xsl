@@ -12,6 +12,38 @@
 
     <xsl:output indent="yes"/>
 
+
+
+    <xsl:param name="properties-file"/>
+    <xsl:param name="parameters-file"/>
+    <xsl:param name="parameters-node" as="node()" required="no">
+        <empty/>
+    </xsl:param>
+    
+    <xsl:variable name="properties" select="doc($properties-file)"/>
+    <xsl:variable name="parameters">
+        <xsl:choose>
+            <xsl:when test="$parameters-node/*">
+                <xsl:copy-of select="$parameters-node"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="doc($parameters-file)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    
+    <xsl:variable name="unusedVars" as="xs:boolean">
+        <xsl:choose>
+            <xsl:when test="$parameters//UnusedVars != ''">
+                <xsl:value-of select="$parameters//UnusedVars" />
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//UnusedVars" />
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+
+
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p>An xslt stylesheet who transforms an input into js through generic driver templates.</xd:p>
@@ -30,8 +62,8 @@
             <xsl:value-of select="concat(.,' ')"/>
         </xsl:for-each>
         <xsl:for-each select="$root//h:components/h:lines">
-            <xsl:value-of select="concat(@min,' ')"/>
-            <xsl:value-of select="concat(@max,' ')"/>
+            <xsl:value-of select="concat(h:min,' ')"/>
+            <xsl:value-of select="concat(h:max,' ')"/>
         </xsl:for-each>
     </xsl:variable>
     <xsl:variable name="variablesUsed" select="normalize-space($variablesUsedTemp)"/>
@@ -43,8 +75,8 @@
             <xsl:value-of select="concat(.,' ')"/>
         </xsl:for-each>
         <xsl:for-each select="$root//h:components/h:lines">
-            <xsl:value-of select="concat(@min,' ')"/>
-            <xsl:value-of select="concat(@max,' ')"/>
+            <xsl:value-of select="concat(h:min,' ')"/>
+            <xsl:value-of select="concat(h:max,' ')"/>
         </xsl:for-each>
     </xsl:variable>
 
@@ -99,18 +131,15 @@
         <xsl:param name="loopDependencies" as="xs:string*" tunnel="yes"/>
         <!-- Value of idGenerator, may be empty -->
         <xsl:variable name="idGenerator" select="h:idGenerator"/>
-        <!-- minimum is @min attribute of components if linked loop, else it is @min attributes of lines -->
+        <!-- minimum is value of min element of lines (may not exist)-->
         <xsl:variable name="minimum">
-            <xsl:choose>
-                <xsl:when test="$idGenerator!=''"><xsl:value-of select="@min"/></xsl:when>
-                <xsl:otherwise><xsl:value-of select="h:lines/@min"/></xsl:otherwise>
-            </xsl:choose>
+            <xsl:value-of select="h:lines/h:min/h:value"/>
         </xsl:variable>
-        <!-- maximum is @iterations attribute of components if linked loop, else it is @max attributes of lines -->
+        <!-- maximum is value of iterations element of components if linked loop, else it is value of max element of lines -->
         <xsl:variable name="maximum">
             <xsl:choose>
-                <xsl:when test="$idGenerator!=''"><xsl:value-of select="@iterations"/></xsl:when>
-                <xsl:otherwise><xsl:value-of select="h:lines/@max"/></xsl:otherwise>
+                <xsl:when test="$idGenerator!=''"><xsl:value-of select="h:iterations/h:value"/></xsl:when>
+                <xsl:otherwise><xsl:value-of select="h:lines/h:max/h:value"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         
@@ -132,21 +161,30 @@
         </xsl:variable>
         <components>
             <xsl:copy-of select="@*"/>
-            <!-- In case of linked loop, we put @iterations attribute with specified value or count of the generator loop response-->
+            <!-- In case of linked loop, we put iterations element with specified value or count of the generator loop response-->
             <xsl:if test="$idGenerator!=''">
-                <xsl:attribute name="iterations">
-                    <xsl:choose>
-                        <xsl:when test="string-length(@iterations) &gt; 0"><xsl:value-of select="@iterations"/></xsl:when>
-                        <xsl:otherwise><xsl:value-of select="concat('count(',$localLoopDependencies[1],')')"/></xsl:otherwise>
-                    </xsl:choose>
-                </xsl:attribute>
+                <iterations>
+                    <value>
+                        <xsl:choose>
+                            <xsl:when test="string-length(h:iterations/h:value) &gt; 0"><xsl:value-of select="h:iterations/h:value"/></xsl:when>
+                            <xsl:otherwise><xsl:value-of select="concat('count(',$localLoopDependencies[1],')')"/></xsl:otherwise>
+                        </xsl:choose>
+                    </value>
+                    <type>                      
+                        <xsl:choose>
+                            <xsl:when test="string-length(h:iterations/h:type) &gt; 0"><xsl:value-of select="h:iterations/h:type"/></xsl:when>
+                            <xsl:otherwise><xsl:value-of select="'VTL'"/></xsl:otherwise>
+                        </xsl:choose>
+                    </type>
+                </iterations>
             </xsl:if>
             
             <xsl:apply-templates select="h:label"/>
 
-            <!-- If not linked loop, we have to copy the lines node -->
+            <!-- If not linked loop, we have to copy the lines and the missingResponse node -->
             <xsl:if test="$idGenerator='' or not(exists($idGenerator))">
                 <xsl:apply-templates select="h:lines"/>
+                <xsl:apply-templates select="h:missingResponse"/>
             </xsl:if>
             
             <xsl:apply-templates select="h:declarations"/>
@@ -214,27 +252,27 @@
             <xsl:call-template name="enolunatic:add-all-dependencies">
                 <xsl:with-param name="dependencies" select="$allDependencies"/>
             </xsl:call-template>
-            <xsl:apply-templates select="*[not(self::h:variables or self::h:cells[@type='line'] or self::h:hierarchy or self::h:label or self::h:declarations or self::h:conditionFilter or self::h:missingResponse)]"/>
+            <xsl:apply-templates select="*[not(self::h:variables or self::h:body or self::h:hierarchy or self::h:label or self::h:declarations or self::h:conditionFilter or self::h:missingResponse)]"/>
             <xsl:choose>
                 <xsl:when test="h:lines">
-                    <xsl:variable name="nbLines" select="count(h:cells[@type='line'])"/>
-                    <xsl:variable name="nbLinesExpected" select="h:lines/@max"/>
+                    <xsl:variable name="nbLines" select="count(h:body)"/>
+                    <xsl:variable name="nbLinesExpected" select="h:lines/h:max/h:value"/>
                     <xsl:choose>
                         <xsl:when test="$nbLines = 1">
                             <xsl:call-template name="enolunatic:addLinesForRoster">
                                 <xsl:with-param name="currentLigne" select="1"/>
                                 <xsl:with-param name="nbLigneMax" select="$nbLinesExpected"/>
-                                <xsl:with-param name="lineToCopy" select="h:cells[@type='line']"/>
+                                <xsl:with-param name="lineToCopy" select="h:body"/>
                                 <xsl:with-param name="tableId" select="@id"/>
                             </xsl:call-template>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:apply-templates select="*[not(self::h:variables) and self::h:cells[@type='line']]"/>
+                            <xsl:apply-templates select="*[not(self::h:variables) and self::h:body]"/>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:apply-templates select="*[not(self::h:variables) and self::h:cells[@type='line']]"/>
+                    <xsl:apply-templates select="*[not(self::h:variables) and self::h:body]"/>
                 </xsl:otherwise>
             </xsl:choose>
         </components>
@@ -305,13 +343,19 @@
     <xsl:template match="h:responseDependencies"/>
 
     <xsl:template match="h:label">
-        <label><xsl:value-of select="normalize-space(.)"/></label>
+        <label>
+            <value><xsl:value-of select="normalize-space(./h:value)"/></value>
+            <type><xsl:value-of select="h:type"/></type>
+        </label>
     </xsl:template>
 
-    <xsl:template match="h:cells">
+    <!-- Due to confusing previous behaviour when everything was named "cells", this part has been fixed to handle
+    body and bodyLine elements with probable redundancy in some treatment. 
+    Would deserve to be reviewed thoroughly-->
+    <xsl:template match="h:body">
         <xsl:param name="idLine" tunnel="yes"/>        
         <xsl:param name="idColumn" tunnel="yes"/>
-        <cells>
+        <body>
             <xsl:if test="@id">
                 <xsl:attribute name="id">
                     <xsl:choose>
@@ -332,25 +376,40 @@
                 <xsl:if test="not($idColumn)"><xsl:copy-of select="$responseDependencies"/></xsl:if>
             </xsl:variable>
             <xsl:apply-templates select="*[not(self::h:variables)]"/>
+        </body>
+    </xsl:template>
+    
+    <xsl:template match="h:bodyLine">
+        <xsl:param name="idLine" tunnel="yes"/>        
+        <xsl:param name="idColumn" tunnel="yes"/>
+        <bodyLine>
+            <xsl:copy-of select="@*"/>
+            <xsl:variable name="dependencies" select="distinct-values(descendant::h:dependencies)" as="xs:string*"/>
+            <xsl:variable name="responseDependencies" select="distinct-values(descendant::h:responseDependencies)" as="xs:string*"/>
+            <xsl:variable name="allDependencies" as="xs:string*">
+                <xsl:copy-of select="$dependencies"/>
+                <xsl:if test="not($idColumn)"><xsl:copy-of select="$responseDependencies"/></xsl:if>
+            </xsl:variable>
+            <xsl:apply-templates select="*[not(self::h:variables)]"/>
             <xsl:if test="string-length(@type)=0">
                 <xsl:call-template name="enolunatic:add-all-dependencies">
                     <xsl:with-param name="dependencies" select="$allDependencies"/>
                 </xsl:call-template>
             </xsl:if>
-        </cells>
+        </bodyLine>
     </xsl:template>
 
-    <xsl:template match="h:cells" mode="roster">
+    <xsl:template match="h:body" mode="roster">
         <xsl:param name="tableId" tunnel="yes"/>
-        <cells>
+        <body>
             <xsl:copy-of select="@*"/>
-            <xsl:for-each select="h:cells">
+            <xsl:for-each select="h:bodyLine">
                 <xsl:apply-templates select=".">
                     <xsl:with-param name="tableId" select="$tableId" tunnel="yes"/>
                     <xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
                 </xsl:apply-templates>
             </xsl:for-each>
-        </cells>
+        </body>
     </xsl:template>
 
     <xsl:template match="h:conditionFilter">
@@ -369,7 +428,7 @@
     <xsl:template match="h:variables[@variableType='CALCULATED']">
         <xsl:variable name="varName" select="h:name"/>
         <xsl:variable name="searchTerm" select="concat('[\W]', $varName, '[\W]')"/>
-        <xsl:if test="enolunatic:is-var-used-in-list-of-dependencies($varName,'',$variablesUsed,$searchTerm)='true' or contains($varName,'FILTER_RESULT')">
+        <xsl:if test="$unusedVars or contains($varName,'FILTER_RESULT') or enolunatic:is-var-used-in-list-of-dependencies($varName,'',$variablesUsed,$searchTerm)='true'">
             <xsl:copy>
                 <xsl:apply-templates select="@*|node()"/>
                 <inFilter><xsl:value-of select="enolunatic:is-var-used-in-list-of-dependencies($varName,'',$variablesInFilter,$searchTerm)"/></inFilter>
@@ -384,7 +443,7 @@
         <!-- responseType="{$responseType}" -->
         <variables variableType="COLLECTED" xsi:type="VariableType">
             <name><xsl:value-of select="$responseName"/></name>
-            <componentRef><xsl:value-of select="$componentRef"/></componentRef>
+            <!-- <componentRef><xsl:value-of select="$componentRef"/></componentRef> -->
             <values>
                 <xsl:for-each select="tokenize($ResponseTypeEnum,',')">
                     <xsl:element name="{.}">
