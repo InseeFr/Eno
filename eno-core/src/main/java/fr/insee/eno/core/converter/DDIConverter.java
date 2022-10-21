@@ -26,6 +26,8 @@ public class DDIConverter {
             return instantiateFrom((QuestionItemType) ddiObject);
         else if (ddiObject instanceof QuestionGridType)
             return instantiateFrom((QuestionGridType) ddiObject);
+        else if (ddiObject instanceof GridResponseDomainInMixedType)
+            return instantiateFrom((GridResponseDomainInMixedType) ddiObject);
         else
             throw new RuntimeException("Eno conversion for DDI type " + ddiObject.getClass() + " not implemented.");
     }
@@ -76,17 +78,55 @@ public class DDIConverter {
     }
 
     private static EnoObject instantiateFrom(QuestionGridType questionGridType) {
-        RepresentationType representationType = questionGridType.getStructuredMixedGridResponseDomain()
-                .getGridResponseDomainInMixedArray(0) // supposing that it is the same for all modalities
-                .getResponseDomain();
-        if (representationType instanceof NominalDomainType)
-            return new MultipleChoiceQuestion();
-        else if (representationType instanceof CodeDomainType)
+        //
+        int dimensionSize = questionGridType.getGridDimensionList().size();
+        //
+        if (dimensionSize == 1) {
+            RepresentationType representationType = questionGridType.getStructuredMixedGridResponseDomain()
+                    .getGridResponseDomainInMixedArray(0) // supposing that it is the same for all modalities
+                    .getResponseDomain();
+            if (representationType instanceof NominalDomainType)
+                return new MultipleChoiceQuestion.Simple();
+            else if (representationType instanceof CodeDomainType)
+                return new MultipleChoiceQuestion.Complex();
+            else
+                throw new RuntimeException(
+                        "Unable to identify question type in DDI question grid " +
+                                questionGridType.getIDArray(0).getStringValue());
+        }
+        else if (dimensionSize == 2) {
             return new TableQuestion();
-        else
+        }
+        else {
+            throw new RuntimeException(String.format(
+                    "Question grid '%s' has %s grid dimension objects. " +
+                            "Eno expects question grids to have exactly 1 or 2 of these.",
+                    questionGridType.getIDArray(0).getStringValue(), dimensionSize));
+        }
+    }
+
+    private static EnoObject instantiateFrom(GridResponseDomainInMixedType gridResponseDomainInMixedType) {
+        RepresentationType representationType = gridResponseDomainInMixedType.getResponseDomain();
+        if (representationType instanceof NominalDomainType) {
+            return new TableCell.BooleanCell();
+        }
+        else if (representationType instanceof TextDomainType) {
+            return new TableCell.TextCell();
+        }
+        else if (representationType instanceof NumericDomainType) {
+            return new TableCell.NumericCell();
+        }
+        else if (representationType instanceof DateTimeDomainType) {
+            return new TableCell.DateCell();
+        }
+        else if (representationType instanceof CodeDomainType) {
+            return new TableCell.UniqueChoiceCell();
+        }
+        else {
             throw new RuntimeException(
-                    "Unable to identify question type in DDI question grid " +
-                            questionGridType.getIDArray(0).getStringValue());
+                    "Unable to identify cell type in DDI GridResponseDomainInMixed object " +
+                            "with response domain of type "+representationType.getClass()+".");
+        }
     }
 
 }

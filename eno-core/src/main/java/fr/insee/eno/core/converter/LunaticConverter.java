@@ -54,8 +54,6 @@ public class LunaticConverter {
                 || enoObject instanceof DynamicLabel
                 || enoObject instanceof CalculatedExpression)
             return new LabelType();
-        else if (enoObject instanceof TableLine)
-            throw new RuntimeException("TableLine conversion not implemented."); //FIXME: (todo: annotation for conversion)
         else if (enoObject instanceof TableCell)
             throw new RuntimeException("TableCell conversion not implemented."); //FIXME: (todo: annotation for conversion)
         else
@@ -89,9 +87,9 @@ public class LunaticConverter {
     }
 
     private static Object instantiateFrom(MultipleResponseQuestion enoQuestion) {
-        if (enoQuestion instanceof MultipleChoiceQuestion)
+        if (enoQuestion instanceof MultipleChoiceQuestion.Simple)
             return new CheckboxGroup();
-        else if (enoQuestion instanceof TableQuestion)
+        else if (enoQuestion instanceof MultipleChoiceQuestion.Complex)
             return new Table();
         else
             throw new RuntimeException(unimplementedMessage(enoQuestion));
