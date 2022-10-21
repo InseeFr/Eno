@@ -27,6 +27,7 @@ public class DDIToLunaticTest {
     @ValueSource(strings = {
             //"l10xmg2l",
             //"sandbox",
+            "l20g2ba7",
             "sandbox_v2",
     })
     public void writeJsonLunaticFromDDI(String fileName) throws IOException, JAXBException {
