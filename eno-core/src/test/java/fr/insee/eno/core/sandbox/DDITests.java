@@ -4,6 +4,7 @@ import datacollection33.*;
 import datacollection33.impl.TextContentTypeImpl;
 import datacollection33.impl.TextTypeImpl;
 import fr.insee.eno.core.parsers.DDIParser;
+import fr.insee.eno.core.reference.DDIIndex;
 import group33.ResourcePackageType;
 import instance33.DDIInstanceDocument;
 import logicalproduct33.VariableGroupType;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class DDITests {
 
@@ -27,6 +29,16 @@ public class DDITests {
         String stringId = "foo";
         idType.setStringValue(stringId);
         assertEquals(stringId, idType.getStringValue());
+    }
+
+    @Test
+    public void tableQuestion() throws IOException {
+        //
+        DDIIndex ddiIndex = new DDIIndex();
+        ddiIndex.indexDDI(DDIParser.parse(this.getClass().getClassLoader().getResource("in/ddi/l20g2ba7.xml")));
+        //
+        QuestionGridType tableQuestionGrid = (QuestionGridType) ddiIndex.get("l8u8d67h");
+        assertNotNull(tableQuestionGrid);
     }
 
     @Test
