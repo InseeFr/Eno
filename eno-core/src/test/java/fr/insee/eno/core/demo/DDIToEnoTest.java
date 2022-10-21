@@ -20,6 +20,7 @@ public class DDIToEnoTest {
     @ValueSource(strings = {
             //"l10xmg2l",
             //"sandbox",
+            "l20g2ba7",
             "sandbox_v2",
     })
     public void writeEnoFileFromDDI(String fileName) throws IOException {
