@@ -9,6 +9,7 @@ import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.core.convert.TypeDescriptor;
 import reusable33.AbstractIdentifiableType;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -61,6 +62,22 @@ public class SandboxTests {
     public void testIfListsHaveIntersection() {
         List<Integer> list = List.of(1,2);
         assertFalse(list.stream().noneMatch(List.of(2,3,4)::contains));
+    }
+
+    @Test
+    public void addElementWithIndexInArrayList() {
+        List<String> fooList = new ArrayList<>(); // this creates a list with a capacity of 10.
+        assertNotNull(fooList);
+        assertThrows(IndexOutOfBoundsException.class, () -> fooList.add(12, "foo"));
+        assertDoesNotThrow(() -> {
+            for (int i=0; i<12; i++) {
+                fooList.add("foo");
+            }
+        });
+        /*
+        Here in Eno: Lunatic-Model creates array lists of size 10 and doesn't allow a setter te replace these lists.
+        So adding elements in a precise position in Lunatic lists is not safe if the index might be >= 10.
+         */
     }
 
 }
