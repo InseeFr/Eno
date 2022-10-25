@@ -29,4 +29,15 @@ public class CodeList extends EnoIdentifiableObject {
                     ".getLabelArray(0).getContentArray(0).getStringValue()]")
     List<String> labels = new ArrayList<>();
 
+    /** Return the number of codes in the code list.
+     * An exception is raised if values and labels sizes mismatch. */
+    public int size() {
+        int res = values.size();
+        if (res == labels.size())
+            return res;
+        else
+            throw new RuntimeException(String.format(
+                    "Code list with id '%s' has %s values and %s labels.", id, res, labels.size()));
+    }
+
 }
