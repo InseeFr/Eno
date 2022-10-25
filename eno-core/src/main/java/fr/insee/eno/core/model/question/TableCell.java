@@ -4,8 +4,10 @@ import datacollection33.GridResponseDomainInMixedType;
 import datacollection33.QuestionItemType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Format;
+import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.CodeItem;
 import fr.insee.eno.core.model.EnoObject;
+import fr.insee.lunatic.model.flat.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -40,6 +42,7 @@ public abstract class TableCell extends EnoObject {
     @Getter @Setter
     public static class TextCell extends TableCell {
         @DDI(contextType = GridResponseDomainInMixedType.class, field = "getResponseDomain().getMaxLength().intValue()")
+        @Lunatic(contextType = BodyLine.class, field = "setMaxLength(#param)")
         BigInteger maxLength;
     }
 
@@ -48,15 +51,18 @@ public abstract class TableCell extends EnoObject {
         @DDI(contextType = QuestionItemType.class,
                 field = "getResponseDomain()?.getNumberRangeList()?.get(0)?.getLow()?.getStringValue() != null ? " +
                         "T(java.lang.Double).valueOf(getResponseDomain().getNumberRangeArray(0).getLow().getStringValue()) : null")
+        @Lunatic(contextType = BodyLine.class, field = "setMin(#param)")
         double minValue;
 
         @DDI(contextType = QuestionItemType.class,
                 field = "getResponseDomain()?.getNumberRangeList()?.get(0)?.getLow()?.getStringValue() != null ? " +
                         "T(java.lang.Double).valueOf(getResponseDomain().getNumberRangeArray(0).getLow().getStringValue()) : null")
+        @Lunatic(contextType = BodyLine.class, field = "setMax(#param)")
         double maxValue;
 
         @DDI(contextType = QuestionItemType.class,
                 field = "getResponseDomain()?.getDecimalPositions() ?: T(java.math.BigInteger).valueOf('0')")
+        @Lunatic(contextType = BodyLine.class, field = "setDecimals(#param)")
         BigInteger numberOfDecimals;
 
         /** Unit not accessible here in DDI.
@@ -66,6 +72,10 @@ public abstract class TableCell extends EnoObject {
 
     @Getter @Setter
     public static class DateCell extends TableCell {
+
+        // Note: with current Lunatic-Model implementation, it is impossible to set min & max in this case.
+        // TODO: issue sent to Lunatic-Model, come back here when the issue has been solved.
+
         @DDI(contextType = QuestionItemType.class, field = "getResponseDomain().getRangeArray(0).getMinimumValue().getStringValue()")
         private String minValue;
 
@@ -73,6 +83,7 @@ public abstract class TableCell extends EnoObject {
         private String maxValue;
 
         @DDI(contextType = QuestionItemType.class, field = "getResponseDomain().getDateFieldFormat().getStringValue()")
+        @Lunatic(contextType = Datepicker.class, field = "setDateFormat(#param)")
         private String format;
     }
 
@@ -89,6 +100,7 @@ public abstract class TableCell extends EnoObject {
 
         @DDI(contextType = QuestionItemType.class,
                 field = "#index.get(#this.getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()).getCodeList()")
+        @Lunatic(contextType = BodyLine.class, field = "getOptions()")
         List<CodeItem> codeList = new ArrayList<>();
     }
 
