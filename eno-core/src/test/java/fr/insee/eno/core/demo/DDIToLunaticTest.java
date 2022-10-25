@@ -50,7 +50,8 @@ public class DDIToLunaticTest {
         //
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         //
-        LunaticMapper.map(enoQuestionnaire, lunaticQuestionnaire);
+        LunaticMapper lunaticMapper = new LunaticMapper();
+        lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
 
         //
         LunaticProcessing lunaticProcessing = new LunaticProcessing();
