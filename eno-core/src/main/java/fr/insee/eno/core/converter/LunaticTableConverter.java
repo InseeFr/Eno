@@ -1,6 +1,7 @@
 package fr.insee.eno.core.converter;
 
 import fr.insee.eno.core.mappers.LunaticMapper;
+import fr.insee.eno.core.model.CodeList;
 import fr.insee.eno.core.model.question.TableCell;
 import fr.insee.eno.core.model.question.TableQuestion;
 import fr.insee.lunatic.model.flat.*;
@@ -33,24 +34,25 @@ public class LunaticTableConverter {
         topLeftCell.getLabel().setValue("");
         lunaticTable.getHeader().add(topLeftCell);
         // Header
-        for (String label : enoTable.getHeader().getLabels()) {
+        enoTable.getHeader().getCodeItems().stream().map(CodeList.CodeItem::getLabel).forEach(label -> {
             HeaderType headerCell = new HeaderType();
             headerCell.setLabel(new LabelType());
             headerCell.getLabel().setValue(label);
             lunaticTable.getHeader().add(headerCell);
-        }
+        });
         // Left column
         int headerSize = enoTable.getHeader().size();
-        for (String label : enoTable.getLeftColumn().getLabels()) {
+        enoTable.getLeftColumn().getCodeItems().stream().map(CodeList.CodeItem::getLabel).forEach(label -> {
             // (Lunatic class names are a bit confusing)
             BodyType bodyType = new BodyType(); // = Lunatic line
             BodyLine bodyLine = new BodyLine(); // = Lunatic cell
             bodyLine.setLabel(new LabelType());
             bodyLine.getLabel().setValue(label);
             bodyType.getBodyLine().add(bodyLine);
+            lunaticTable.getBody().add(bodyType);
             // Make sure that the line (BodyType) has enough capacity in its cells (BodyLine) list
             bodyType.getBodyLine().addAll(Collections.nCopies(headerSize, null)); // https://stackoverflow.com/a/27935203/13425151
-        }
+        });
         // Body
         // Not supposing that table cells are ordered in a certain way in the eno model
         for (int k=0; k<enoTable.getTableCells().size(); k++) {
