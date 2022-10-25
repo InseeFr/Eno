@@ -31,13 +31,21 @@ public class CodeList extends EnoIdentifiableObject {
                         ".getLabelArray(0).getContentArray(0).getStringValue()")
         String label;
 
+        /** Nested code lists. */
+        @DDI(contextType = CodeType.class, field = "getCodeList()")
+        List<CodeItem> codeItems = new ArrayList<>();
+
+        /** Return the number of sub-codes in the code item. */
+        public int size() {
+            return codeItems.size();
+        }
+
     }
 
     @DDI(contextType = CodeListType.class, field = "getLabelArray(0).getContentArray(0).getStringValue()")
     String name;
 
-    @DDI(contextType = CodeListType.class,
-            field = "getCodeList()")
+    @DDI(contextType = CodeListType.class, field = "getCodeList()")
     List<CodeItem> codeItems = new ArrayList<>();
 
     /** Return the number of codes in the code list. */

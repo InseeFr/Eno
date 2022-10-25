@@ -143,6 +143,10 @@ public class DDIParserTest {
         assertTrue(m221.getIsDiscrete());
         assertTrue(m222.getIsDiscrete());
         assertTrue(m23.getIsDiscrete());
+        // (to check that we have empty lists and not null in "discrete" code lists)
+        assertFalse(m2.getCodeList().isEmpty());
+        assertTrue(m21.getCodeList().isEmpty());
+        assertFalse(m22.getCodeList().isEmpty());
     }
 
 }
