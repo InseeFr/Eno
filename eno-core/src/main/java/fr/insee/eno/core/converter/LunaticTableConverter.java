@@ -47,19 +47,50 @@ public class LunaticTableConverter {
         List<BodyType> bodyTypes = flattenCodeList(enoTable.getLeftColumn());
         lunaticTable.getBody().addAll(bodyTypes);
         // Body
+        // Make sure that the lines have enough capacity
+        int headerSize = enoTable.getHeader().size(); // TODO: header can also have nested code lists
+        lunaticTable.getBody().forEach(bodyType ->
+                bodyType.getBodyLine().addAll(Collections.nCopies(headerSize, null))); // https://stackoverflow.com/a/27935203/13425151
         // Not supposing that table cells are ordered in a certain way in the eno model
+        int firstContentLine = 0; // TODO: in case of nested code lists, the first content line is > 1
+        int firstContentColumn = enoTable.getLeftColumn().getMaxLevel() + 1;
         for (int k=0; k<enoTable.getTableCells().size(); k++) {
             TableCell enoCell = enoTable.getTableCells().get(k);
             String variableName = enoTable.getVariableNames().get(k);
             BodyLine lunaticCell = convertEnoCell(enoCell, variableName);
-            lunaticTable.getBody().get(enoCell.getRowNumber()-1)
-                    .getBodyLine().add(enoCell.getColumnNumber(), lunaticCell);
+            lunaticTable.getBody().get(enoCell.getRowNumber() + firstContentLine - 1)
+                    .getBodyLine().add(enoCell.getColumnNumber() + firstContentColumn, lunaticCell);
         }
         //
         return lunaticTable;
     }
 
+    // We could do something neater here maybe
     public static List<BodyType> flattenCodeList(CodeList codeList) {
+        List<BodyType> lunaticLines = new ArrayList<>();
+        for (CodeList.CodeItem codeItem : codeList.getCodeItems()) {
+            lunaticLines.add(new BodyType());
+            flattenCodeItem(codeItem, lunaticLines);
+            lunaticLines.remove(lunaticLines.size()-1);
+        }
+        return lunaticLines;
+    }
+    private static void flattenCodeItem(CodeList.CodeItem codeItem, List<BodyType> lunaticLines) {
+        // Map code item on lunatic cell
+        BodyLine lunaticCell = new BodyLine();
+        LunaticMapper lunaticMapper = new LunaticMapper();
+        lunaticMapper.mapEnoObject(codeItem, lunaticCell);
+        // Add lunatic cell in flat list
+        lunaticLines.get(lunaticLines.size()-1).getBodyLine().add(lunaticCell);
+        //
+        if (codeItem.size() == 0) {
+            lunaticLines.add(new BodyType());
+        }
+        else {
+            for (CodeList.CodeItem codeItem1 : codeItem.getCodeItems()) {
+                flattenCodeItem(codeItem1, lunaticLines);
+            }
+        }
     }
 
     /** Uses eno cell and variable name give + annotations on the TableCell classes

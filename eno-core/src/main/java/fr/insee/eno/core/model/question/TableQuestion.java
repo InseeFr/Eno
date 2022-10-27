@@ -23,7 +23,10 @@ import java.util.List;
  * - a list of BodyType, one BodyType is one row, and a BodyType contains a list of BodyLine which are the cells of the line
  * </p><p>
  * This class is designed to be close to DDI modeling.
- * Header and left column are code lists. The left hand corner cell is in neither of these two (so it is implicitly an empty cell).
+ * Header and left column are code lists. The left hand corner cell is in neither of these two
+ * (so it is implicitly an empty cell).
+ * Code lists can have hierarchical codes, so header / left column do not necessarily represent a single line / column.
+ * Lunatic cells have 'colspan' / 'rowspan' attributes to handle this.
  * The conversion of tables to Lunatic is not done via annotations,
  * but mostly in a dedicated class that carries the logic of this conversion.
  * </p>
