@@ -2,6 +2,8 @@ import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
     id 'org.springframework.boot' version '2.7.3' apply false
+    id 'java'
+    id 'maven-publish'
 }
 
 description = 'eno-core'
@@ -62,4 +64,18 @@ configurations.all {
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+tasks.withType(GenerateModuleMetadata).configureEach {
+    // The value 'enforced-platform' is provided in the validation
+    // error message you got
+    suppressedValidationErrors.add('enforced-platform')
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
 }
