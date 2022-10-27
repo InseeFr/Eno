@@ -25,7 +25,10 @@ public class CodeList extends EnoIdentifiableObject {
 
     @Getter
     @Setter
-    public static class CodeItem extends EnoIdentifiableObject {
+    public static class CodeItem extends EnoObject {
+
+        @DDI(contextType = CodeType.class, field = "getIDArray(0).getStringValue()")
+        String id;
 
         @DDI(contextType = CodeType.class,
                 field = "getValue().getStringValue()")
