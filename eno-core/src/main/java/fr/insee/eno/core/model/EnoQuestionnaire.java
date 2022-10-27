@@ -3,13 +3,17 @@ package fr.insee.eno.core.model;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.model.label.Label;
+import fr.insee.eno.core.model.label.QuestionnaireLabel;
 import fr.insee.eno.core.model.question.MultipleResponseQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.model.variable.VariableGroup;
+import fr.insee.lunatic.model.flat.Questionnaire;
 import instance33.DDIInstanceType;
 import lombok.Getter;
 import lombok.Setter;
+import reusable33.InternationalStringType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +39,9 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field ="setEnoCoreVersion(#param)")
     private String enoVersion = "TODO"; //TODO: get Eno & Lunatic versions programmatically
 
-    @DDI(contextType = DDIInstanceType.class, field = "getCitation().getTitle().getStringArray(0).getStringValue()")
+    @DDI(contextType = DDIInstanceType.class, field = "getCitation().getTitle()")
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "setLabel(#param)")
-    private String label;
+    private QuestionnaireLabel label;
 
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getVariableSchemeArray(0)" +

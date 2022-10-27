@@ -31,7 +31,7 @@ public class DDIResolveDeclarationLabels implements InProcessingInterface {
         //
         Pattern pattern = Pattern.compile(DECLARATION_REFERENCE_MARKER + "(.+?)"+ DECLARATION_REFERENCE_MARKER);
         for (DeclarationInterface declaration : declarations) {
-            String declarationLabel = declaration.getLabel();
+            String declarationLabel = declaration.getLabel().getValue();
             // TODO: we could do what follows a bit neater maybe
             List<String> variableReferences = new ArrayList<>();
             for (Matcher matcher = pattern.matcher(declarationLabel); matcher.find();) {
@@ -46,7 +46,7 @@ public class DDIResolveDeclarationLabels implements InProcessingInterface {
                         variableName);
                 declaration.getVariableNames().add(variableName);
             }
-            declaration.setLabel(declarationLabel);
+            declaration.getLabel().setValue(declarationLabel);
         }
     }
 

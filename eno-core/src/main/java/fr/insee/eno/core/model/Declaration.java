@@ -3,6 +3,7 @@ package fr.insee.eno.core.model;
 import datacollection33.StatementItemType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.lunatic.model.flat.DeclarationType;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,9 +17,9 @@ import java.util.List;
 public class Declaration extends EnoIdentifiableObject implements DeclarationInterface {
 
     @DDI(contextType = StatementItemType.class,
-            field = "getDisplayTextArray(0).getTextContentArray(0).getText().getStringValue()")
+            field = "getDisplayTextArray(0)")
     @Lunatic(contextType = DeclarationType.class, field = "setLabel(#param)")
-    String label;
+    DynamicLabel label;
 
     /** List of variable names that are used in the declarations' label.
      * This list is filled in an Eno processing, and used in Lunatic processing to fill 'bindingDependencies'. */

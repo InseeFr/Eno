@@ -11,11 +11,11 @@ import lombok.Setter;
 @Setter
 public class DateQuestion extends SingleResponseQuestion {
 
-    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain().getRangeArray(0).getMinimumValue().getStringValue()")
+    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain().getRangeArray(0)?.getMinimumValue()?.getStringValue()")
     @Lunatic(contextType = Datepicker.class, field = "setMin(#param)")
     private String minValue;
 
-    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain().getRangeArray(0).getMaximumValue().getStringValue()")
+    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain().getRangeArray(0)?.getMaximumValue()?.getStringValue()")
     @Lunatic(contextType = Datepicker.class, field = "setMax(#param)")
     private String maxValue;
 

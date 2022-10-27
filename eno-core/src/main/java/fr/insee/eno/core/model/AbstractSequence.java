@@ -3,6 +3,7 @@ package fr.insee.eno.core.model;
 import datacollection33.SequenceType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.model.label.Label;
 import fr.insee.lunatic.model.flat.Subsequence;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,9 +19,9 @@ import java.util.List;
 public abstract class AbstractSequence extends EnoIdentifiableObject implements EnoComponent {
 
     /** Sequence / subsequence label. */
-    @DDI(contextType = SequenceType.class, field = "getLabelArray(0).getContentArray(0).getStringValue()")
+    @DDI(contextType = SequenceType.class, field = "getLabelArray(0)")
     @Lunatic(contextType = {fr.insee.lunatic.model.flat.SequenceType.class, Subsequence.class}, field = "setLabel(#param)")
-    String label;
+    Label label;
 
     /** Sequence / subsequence instructions.
      * In DDI, the SequenceType object contains the list of references to the instructions.

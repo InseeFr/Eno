@@ -7,6 +7,8 @@ import fr.insee.eno.core.HelloTest;
 import group33.ResourcePackageType;
 import instance33.DDIInstanceDocument;
 import instance33.DDIInstanceType;
+import logicalproduct33.CodeListType;
+import logicalproduct33.CodeType;
 import logicalproduct33.VariableType;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.impl.schema.SchemaTypeImpl;
@@ -111,6 +113,40 @@ public class DDIParserTest {
         //
         List<VariableType> variables = resourcePackage.getVariableSchemeArray(0).getVariableList();
         assertFalse(variables.isEmpty());
+    }
+
+    @Test
+    public void parseDDIComplexCodeList() throws IOException {
+        //
+        DDIInstanceType ddiInstance = DDIParser.parse(
+                        this.getClass().getClassLoader().getResource("in/ddi/liste-de-codes-imbrications.xml"))
+                .getDDIInstance();
+        //
+        ResourcePackageType resourcePackage = ddiInstance.getResourcePackageArray(0);
+        CodeListType codeList = resourcePackage.getCodeListSchemeArray(0).getCodeListList().get(0);
+
+        //
+        assertTrue(codeList.getCodeList().get(0).getIsDiscrete());
+        assertFalse(codeList.getCodeList().get(1).getIsDiscrete());
+
+        //
+        CodeType m2 = codeList.getCodeList().get(1);
+        CodeType m21 = m2.getCodeList().get(0);
+        CodeType m22 = m2.getCodeList().get(1);
+        CodeType m221 = m22.getCodeList().get(0);
+        CodeType m222 = m22.getCodeList().get(1);
+        CodeType m23 = m2.getCodeList().get(2);
+        //
+        assertFalse(m2.getIsDiscrete());
+        assertTrue(m21.getIsDiscrete());
+        assertFalse(m22.getIsDiscrete());
+        assertTrue(m221.getIsDiscrete());
+        assertTrue(m222.getIsDiscrete());
+        assertTrue(m23.getIsDiscrete());
+        // (to check that we have empty lists and not null in "discrete" code lists)
+        assertFalse(m2.getCodeList().isEmpty());
+        assertTrue(m21.getCodeList().isEmpty());
+        assertFalse(m22.getCodeList().isEmpty());
     }
 
 }

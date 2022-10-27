@@ -4,6 +4,7 @@ import fr.insee.eno.core.model.EnoComponent;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.Sequence;
 import fr.insee.eno.core.model.Subsequence;
+import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.EnoProcessingInterface;
@@ -29,14 +30,14 @@ public class EnoAddNumberingInQuestions implements EnoProcessingInterface {
                     if (component instanceof Subsequence subsequence) {
                         for (String questionId : subsequence.getComponentReferences()) {
                             Question question = (Question) enoQuestionnaire.get(questionId);
-                            String questionLabel = question.getLabel();
-                            question.setLabel(questionNumber + QUESTION_NUMBERING_SEPARATOR + " " + questionLabel);
+                            DynamicLabel questionLabel = question.getLabel();
+                            questionLabel.setValue(questionNumber + QUESTION_NUMBERING_SEPARATOR + " " + questionLabel.getValue());
                             questionNumber ++;
                         }
                     } else {
                         Question question = (Question) enoQuestionnaire.get(componentId);
-                        String questionLabel = question.getLabel();
-                        question.setLabel(questionNumber + QUESTION_NUMBERING_SEPARATOR + " " + questionLabel);
+                        DynamicLabel questionLabel = question.getLabel();
+                        questionLabel.setValue(questionNumber + QUESTION_NUMBERING_SEPARATOR + " " + questionLabel.getValue());
                         questionNumber ++;
                     }
                 }

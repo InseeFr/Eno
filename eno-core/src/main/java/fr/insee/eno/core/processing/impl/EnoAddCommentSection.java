@@ -3,6 +3,8 @@ package fr.insee.eno.core.processing.impl;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.Response;
 import fr.insee.eno.core.model.Sequence;
+import fr.insee.eno.core.model.label.DynamicLabel;
+import fr.insee.eno.core.model.label.Label;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.model.question.TextQuestion;
 import fr.insee.eno.core.processing.EnoProcessingInterface;
@@ -34,7 +36,8 @@ public class EnoAddCommentSection implements EnoProcessingInterface {
         //
         Sequence sequence = new Sequence();
         sequence.setId(COMMENT_SEQUENCE_ID);
-        sequence.setLabel(COMMENT_SEQUENCE_LABEL);
+        sequence.setLabel(new Label());
+        sequence.getLabel().setValue(COMMENT_SEQUENCE_LABEL);
         sequence.getComponentReferences().add(COMMENT_QUESTION_ID);
         enoQuestionnaire.getSequences().add(sequence);
         enoIndex.put(COMMENT_SEQUENCE_ID, sequence);
@@ -44,7 +47,8 @@ public class EnoAddCommentSection implements EnoProcessingInterface {
         TextQuestion commentQuestion = new TextQuestion();
         commentQuestion.setId(COMMENT_QUESTION_ID);
         commentQuestion.setName(COMMENT_VARIABLE_NAME);
-        commentQuestion.setLabel(COMMENT_QUESTION_LABEL);
+        commentQuestion.setLabel(new DynamicLabel());
+        commentQuestion.getLabel().setValue(COMMENT_QUESTION_LABEL);
         commentQuestion.setMandatory(COMMENT_QUESTION_MANDATORY);
         commentQuestion.setMaxLength(BigInteger.valueOf(COMMENT_QUESTION_LENGTH));
         commentQuestion.setResponse(new Response());

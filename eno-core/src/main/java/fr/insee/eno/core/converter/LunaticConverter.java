@@ -3,7 +3,11 @@ package fr.insee.eno.core.converter;
 import fr.insee.eno.core.model.Sequence;
 import fr.insee.eno.core.model.Subsequence;
 import fr.insee.eno.core.model.*;
+import fr.insee.eno.core.model.label.DynamicLabel;
+import fr.insee.eno.core.model.label.Label;
+import fr.insee.eno.core.model.label.QuestionnaireLabel;
 import fr.insee.eno.core.model.question.*;
+import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,14 +46,16 @@ public class LunaticConverter {
             return instantiateFrom((MultipleResponseQuestion) enoObject);
         else if (enoObject instanceof Response)
             return new ResponseType();
-        else if (enoObject instanceof CodeItem)
+        else if (enoObject instanceof CodeList.CodeItem)
             return new Options();
         else if (enoObject instanceof CodeResponse)
             return new ResponsesCheckboxGroup();
-        else if (enoObject instanceof TableLine)
-            return new CellsLines();
+        else if (enoObject instanceof Label || enoObject instanceof QuestionnaireLabel
+                || enoObject instanceof DynamicLabel
+                || enoObject instanceof CalculatedExpression)
+            return new LabelType();
         else if (enoObject instanceof TableCell)
-            return new CellsType();
+            throw new RuntimeException("TableCell conversion not implemented."); //FIXME: (todo: annotation for conversion)
         else
             throw new RuntimeException(unimplementedMessage(enoObject));
     }
@@ -81,9 +87,13 @@ public class LunaticConverter {
     }
 
     private static Object instantiateFrom(MultipleResponseQuestion enoQuestion) {
-        if (enoQuestion instanceof MultipleChoiceQuestion)
+        if (enoQuestion instanceof MultipleChoiceQuestion.Simple)
             return new CheckboxGroup();
-        else if (enoQuestion instanceof TableQuestion)
+        else if (enoQuestion instanceof MultipleChoiceQuestion.Complex)
+            return new Table();
+        else if (enoQuestion instanceof TableQuestion enoTable)
+            return LunaticTableConverter.convertEnoTable(enoTable);
+        else if (enoQuestion instanceof DynamicTableQuestion)
             return new Table();
         else
             throw new RuntimeException(unimplementedMessage(enoQuestion));

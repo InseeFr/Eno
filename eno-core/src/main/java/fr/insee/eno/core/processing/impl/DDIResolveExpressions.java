@@ -1,6 +1,9 @@
 package fr.insee.eno.core.processing.impl;
 
-import fr.insee.eno.core.model.*;
+import fr.insee.eno.core.model.BindingReference;
+import fr.insee.eno.core.model.CalculatedExpression;
+import fr.insee.eno.core.model.EnoObjectWithExpression;
+import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.processing.InProcessingInterface;
 
 public class DDIResolveExpressions implements InProcessingInterface {
@@ -24,11 +27,12 @@ public class DDIResolveExpressions implements InProcessingInterface {
      * Replace variable reference by variable name in given object's expression.
      */
     private void resolveExpression(EnoObjectWithExpression enoObject) {
-        String expression = enoObject.getExpression();
-        for (BindingReference bindingReference : enoObject.getBindingReferences()) {
-            expression = expression.replace(bindingReference.getId(), bindingReference.getVariableName());
+        CalculatedExpression expression = enoObject.getExpression();
+        String value = expression.getValue();
+        for (BindingReference bindingReference : enoObject.getExpression().getBindingReferences()) {
+            value = value.replace(bindingReference.getId(), bindingReference.getVariableName());
         }
-        enoObject.setExpression(expression);
+        expression.setValue(value);
     }
 
 }

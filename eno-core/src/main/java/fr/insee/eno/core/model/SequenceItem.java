@@ -9,7 +9,7 @@ import reusable33.ReferenceType;
 @Setter
 public class SequenceItem extends EnoObject {
 
-    public enum SequenceItemType {SUBSEQUENCE, QUESTION, FILTER, CONTROL, DECLARATION}
+    public enum SequenceItemType {SUBSEQUENCE, QUESTION, LOOP, FILTER, CONTROL, DECLARATION}
 
     @DDI(contextType = ReferenceType.class,
             field = "getTypeOfObject().toString() == 'QuestionConstruct' ? " +
@@ -30,6 +30,7 @@ public class SequenceItem extends EnoObject {
             case "ComputationItem" -> SequenceItemType.CONTROL;
             case "IfThenElse" -> SequenceItemType.FILTER;
             case "StatementItem" -> SequenceItemType.DECLARATION;
+            case "Loop" -> SequenceItemType.LOOP;
             default -> throw new RuntimeException("Unexpected type of object found in DDI control construct scheme.");
         };
     }

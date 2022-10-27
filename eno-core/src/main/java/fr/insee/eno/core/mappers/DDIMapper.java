@@ -23,7 +23,6 @@ import reusable33.AbstractIdentifiableType;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -176,9 +175,9 @@ public class DDIMapper extends Mapper {
         if (ddiObject2 != null) {
             recursiveMapping(ddiObject2, enoObject2, context);
         }
-        // For now, it is not allowed to have a null DDI object on complex type properties
+        // It is now allowed to have a null DDI object on complex type properties
         else {
-            throw new RuntimeException(String.format(
+            log.debug(String.format(
                     "DDI object mapped by the annotation on property '%s' in class %s is null",
                     propertyName, modelContextType));
         }
@@ -201,7 +200,7 @@ public class DDIMapper extends Mapper {
         else if (ddiCollection != null) {
             int collectionSize = ddiCollection.size();
             // Get the Eno model collection
-            Collection<Object> modelCollection = readCollection(propertyDescriptor, enoObject);
+            List<Object> modelCollection = readCollection(propertyDescriptor, enoObject);
             // Get the content type of the model collection
             Class<?> modelTargetType = typeDescriptor.getResolvableType()
                     .getGeneric(0).getRawClass();
@@ -213,7 +212,7 @@ public class DDIMapper extends Mapper {
                         +" on property '"+ propertyName +"'"
                         +" of class '"+ modelContextType.getSimpleName()+"'");
             }
-            // Lists of complex types
+            // List of complex types
             else if (EnoObject.class.isAssignableFrom(modelTargetType)) {
                 // Iterate on the DDI collection
                 for (int i=0; i<collectionSize; i++) {
@@ -258,11 +257,10 @@ public class DDIMapper extends Mapper {
     }
 
     private static String DDIToString(@NonNull Object ddiInstance) {
-        return ddiInstance.getClass().getSimpleName()+"["
+        return ddiInstance.getClass().getSimpleName()
                 +((ddiInstance instanceof AbstractIdentifiableType) ?
-                "id="+((AbstractIdentifiableType)ddiInstance).getIDArray(0).getStringValue() :
-                "")
-                +"]";
+                "[id="+((AbstractIdentifiableType)ddiInstance).getIDArray(0).getStringValue()+"]" :
+                "");
     }
 
 }

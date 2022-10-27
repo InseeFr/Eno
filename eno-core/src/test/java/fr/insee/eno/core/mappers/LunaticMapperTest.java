@@ -45,7 +45,8 @@ public class LunaticMapperTest {
 
         //
         Questionnaire lunaticQuestionnaire = new Questionnaire();
-        LunaticMapper.map(enoQuestionnaire, lunaticQuestionnaire);
+        LunaticMapper lunaticMapper = new LunaticMapper();
+        lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
 
         //
         assertEquals("TEST-ID", lunaticQuestionnaire.getId());

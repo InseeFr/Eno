@@ -5,6 +5,7 @@ import datacollection33.QuestionItemType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.*;
+import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.lunatic.model.flat.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,10 +18,10 @@ import java.util.List;
 public abstract class Question extends EnoIdentifiableObject implements EnoComponent {
 
     @DDI(contextType = {QuestionItemType.class, QuestionGridType.class},
-            field = "getQuestionTextArray(0).getTextContentArray(0).getText().getStringValue()")
+            field = "getQuestionTextArray(0)")
     @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class, CheckboxGroup.class, Table.class},
             field = "setLabel(#param)")
-    String label;
+    DynamicLabel label;
 
     @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class, CheckboxGroup.class, Table.class},
             field = "getDeclarations()")

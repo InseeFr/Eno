@@ -3,11 +3,12 @@ package fr.insee.eno.core.model.question;
 import datacollection33.QuestionItemType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.eno.core.model.CodeItem;
+import fr.insee.eno.core.model.CodeList;
 import fr.insee.lunatic.model.flat.CheckboxOne;
 import fr.insee.lunatic.model.flat.Dropdown;
 import fr.insee.lunatic.model.flat.Radio;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,6 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     @DDI(contextType = QuestionItemType.class,
             field = "#index.get(#this.getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()).getCodeList()") //TODO: map this only once
     @Lunatic(contextType = {CheckboxOne.class, Radio.class, Dropdown.class}, field = "getOptions()")
-    List<CodeItem> codeList = new ArrayList<>();
+    List<CodeList.CodeItem> codeList = new ArrayList<>();
 
 }

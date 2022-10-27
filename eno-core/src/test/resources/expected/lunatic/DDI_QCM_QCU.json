@@ -1,0 +1,248 @@
+
+ { "id" : "l8x6fhtd",
+  "modele" : "SANDBOXENO32",
+  "enoCoreVersion" : "2.3.10-controls-type",
+  "lunaticModelVersion" : "2.2.14-rc",
+  "generatingDate" : "19-10-2022 13:21:38",
+  "missing" : false,
+  "pagination" : "question",
+  "maxPage" : "4",
+  "label" : 
+  { "value" : "Sandbox Eno V3 Lunatic V2",
+   "type" : "VTL|MD" },
+  "components" : 
+  [ 
+   { "id" : "l9888jno",
+    "componentType" : "Sequence",
+    "page" : "1",
+    "label" : 
+    { "value" : "\"I - \" || \"Tableaux\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l9888jno",
+      "page" : "1",
+      "label" : 
+      { "value" : "\"I - \" || \"Tableaux\"",
+       "type" : "VTL|MD" } } } },
+   
+   { "id" : "l9fnqatd",
+    "componentType" : "Table",
+    "mandatory" : false,
+    "page" : "2",
+    "positioning" : "HORIZONTAL",
+    "label" : 
+    { "value" : "\"➡ \" || \"QCM complexe (réponses = liste de codes \/ QCU)\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l9888jno",
+      "page" : "1",
+      "label" : 
+      { "value" : "\"I - \" || \"Tableaux\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "QCM_COMPLEXE1",
+     "QCM_COMPLEXE2",
+     "QCM_COMPLEXE3",
+     "QCM_COMPLEXE4" ],
+    "body" : 
+    [ 
+     [ 
+      { "value" : "codeA",
+       "label" : 
+       { "value" : "\"Code A\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "CheckboxOne",
+       "id" : "l9fnqatd-QOP-l9fny2r5",
+       "options" : 
+       [ 
+        { "value" : "col1",
+         "label" : 
+         { "value" : "\"Colonne 1\"",
+          "type" : "VTL|MD" } },
+        
+        { "value" : "col2",
+         "label" : 
+         { "value" : "\"Colonne 2\"",
+          "type" : "VTL|MD" } } ],
+       "response" : 
+       { "name" : "QCM_COMPLEXE1" },
+       "bindingDependencies" : 
+       [ "QCM_COMPLEXE1" ] } ],
+     
+     [ 
+      { "value" : "codeB",
+       "label" : 
+       { "value" : "\"Code B\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "CheckboxOne",
+       "id" : "l9fnqatd-QOP-l9fo6ueb",
+       "options" : 
+       [ 
+        { "value" : "col1",
+         "label" : 
+         { "value" : "\"Colonne 1\"",
+          "type" : "VTL|MD" } },
+        
+        { "value" : "col2",
+         "label" : 
+         { "value" : "\"Colonne 2\"",
+          "type" : "VTL|MD" } } ],
+       "response" : 
+       { "name" : "QCM_COMPLEXE2" },
+       "bindingDependencies" : 
+       [ "QCM_COMPLEXE2" ] } ],
+     
+     [ 
+      { "value" : "codeC",
+       "label" : 
+       { "value" : "\"Code C\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "CheckboxOne",
+       "id" : "l9fnqatd-QOP-l9fnyzgc",
+       "options" : 
+       [ 
+        { "value" : "col1",
+         "label" : 
+         { "value" : "\"Colonne 1\"",
+          "type" : "VTL|MD" } },
+        
+        { "value" : "col2",
+         "label" : 
+         { "value" : "\"Colonne 2\"",
+          "type" : "VTL|MD" } } ],
+       "response" : 
+       { "name" : "QCM_COMPLEXE3" },
+       "bindingDependencies" : 
+       [ "QCM_COMPLEXE3" ] } ],
+     
+     [ 
+      { "value" : "codeD",
+       "label" : 
+       { "value" : "\"Code D\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "CheckboxOne",
+       "id" : "l9fnqatd-QOP-l9fo2v4i",
+       "options" : 
+       [ 
+        { "value" : "col1",
+         "label" : 
+         { "value" : "\"Colonne 1\"",
+          "type" : "VTL|MD" } },
+        
+        { "value" : "col2",
+         "label" : 
+         { "value" : "\"Colonne 2\"",
+          "type" : "VTL|MD" } } ],
+       "response" : 
+       { "name" : "QCM_COMPLEXE4" },
+       "bindingDependencies" : 
+       [ "QCM_COMPLEXE4" ] } ] ] },
+   
+   { "id" : "COMMENT-SEQ",
+    "componentType" : "Sequence",
+    "page" : "3",
+    "label" : 
+    { "value" : "\"Commentaire\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "COMMENT-SEQ",
+      "page" : "3",
+      "label" : 
+      { "value" : "\"Commentaire\"",
+       "type" : "VTL|MD" } } } },
+   
+   { "id" : "COMMENT-QUESTION",
+    "componentType" : "Textarea",
+    "mandatory" : false,
+    "page" : "4",
+    "maxLength" : 2000,
+    "label" : 
+    { "value" : "\"Avez-vous des remarques concernant l'enquête ou des commentaires ?\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "COMMENT-SEQ",
+      "page" : "3",
+      "label" : 
+      { "value" : "\"Commentaire\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "COMMENT_QE" ],
+    "response" : 
+    { "name" : "COMMENT_QE" } } ],
+  "variables" : 
+  [ 
+   { "variableType" : "COLLECTED",
+    "name" : "COMMENT_QE",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "QCM_COMPLEXE1",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "QCM_COMPLEXE2",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "QCM_COMPLEXE3",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "QCM_COMPLEXE4",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_QCM_COMPLEXE",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "inFilter" : "false" } ],
+  "cleaning" : 
+  {  },
+  "resizing" : 
+  {  } }
