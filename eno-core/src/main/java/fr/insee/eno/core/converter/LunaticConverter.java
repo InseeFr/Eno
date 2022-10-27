@@ -46,7 +46,7 @@ public class LunaticConverter {
             return instantiateFrom((MultipleResponseQuestion) enoObject);
         else if (enoObject instanceof Response)
             return new ResponseType();
-        else if (enoObject instanceof CodeItem)
+        else if (enoObject instanceof CodeList.CodeItem)
             return new Options();
         else if (enoObject instanceof CodeResponse)
             return new ResponsesCheckboxGroup();

@@ -5,9 +5,10 @@ import datacollection33.QuestionItemType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.eno.core.model.CodeItem;
+import fr.insee.eno.core.model.CodeList;
 import fr.insee.eno.core.model.EnoObject;
-import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.BodyLine;
+import fr.insee.lunatic.model.flat.Datepicker;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -101,7 +102,7 @@ public abstract class TableCell extends EnoObject {
         @DDI(contextType = QuestionItemType.class,
                 field = "#index.get(#this.getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()).getCodeList()")
         @Lunatic(contextType = BodyLine.class, field = "getOptions()")
-        List<CodeItem> codeList = new ArrayList<>();
+        List<CodeList.CodeItem> codeList = new ArrayList<>();
     }
 
 }

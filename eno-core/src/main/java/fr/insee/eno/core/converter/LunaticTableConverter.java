@@ -7,7 +7,9 @@ import fr.insee.eno.core.model.question.TableQuestion;
 import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /** Class that holds the conversion logic between model tables and Lunatic tables. */
 @Slf4j
@@ -34,25 +36,16 @@ public class LunaticTableConverter {
         topLeftCell.getLabel().setValue("");
         lunaticTable.getHeader().add(topLeftCell);
         // Header
-        enoTable.getHeader().getCodeItems().stream().map(CodeList.CodeItem::getLabel).forEach(label -> {
+        enoTable.getHeader().getCodeItems().forEach(codeItem -> {
             HeaderType headerCell = new HeaderType();
-            headerCell.setLabel(new LabelType());
-            headerCell.getLabel().setValue(label);
+            LunaticMapper lunaticMapper = new LunaticMapper();
+            lunaticMapper.mapEnoObject(codeItem, headerCell);
             lunaticTable.getHeader().add(headerCell);
         });
         // Left column
-        int headerSize = enoTable.getHeader().size();
-        enoTable.getLeftColumn().getCodeItems().stream().map(CodeList.CodeItem::getLabel).forEach(label -> {
-            // (Lunatic class names are a bit confusing)
-            BodyType bodyType = new BodyType(); // = Lunatic line
-            BodyLine bodyLine = new BodyLine(); // = Lunatic cell
-            bodyLine.setLabel(new LabelType());
-            bodyLine.getLabel().setValue(label);
-            bodyType.getBodyLine().add(bodyLine);
-            lunaticTable.getBody().add(bodyType);
-            // Make sure that the line (BodyType) has enough capacity in its cells (BodyLine) list
-            bodyType.getBodyLine().addAll(Collections.nCopies(headerSize, null)); // https://stackoverflow.com/a/27935203/13425151
-        });
+        // Note: Lunatic class names are a bit confusing: BodyType = line, BodyLine = cell
+        List<BodyType> bodyTypes = flattenCodeList(enoTable.getLeftColumn());
+        lunaticTable.getBody().addAll(bodyTypes);
         // Body
         // Not supposing that table cells are ordered in a certain way in the eno model
         for (int k=0; k<enoTable.getTableCells().size(); k++) {
@@ -64,6 +57,9 @@ public class LunaticTableConverter {
         }
         //
         return lunaticTable;
+    }
+
+    public static List<BodyType> flattenCodeList(CodeList codeList) {
     }
 
     /** Uses eno cell and variable name give + annotations on the TableCell classes

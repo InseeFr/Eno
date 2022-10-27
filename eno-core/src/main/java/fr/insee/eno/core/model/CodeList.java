@@ -1,6 +1,11 @@
 package fr.insee.eno.core.model;
 
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.model.label.Label;
+import fr.insee.lunatic.model.flat.BodyLine;
+import fr.insee.lunatic.model.flat.HeaderType;
+import fr.insee.lunatic.model.flat.Options;
 import logicalproduct33.CodeListType;
 import logicalproduct33.CodeType;
 import lombok.Getter;
@@ -24,12 +29,14 @@ public class CodeList extends EnoIdentifiableObject {
 
         @DDI(contextType = CodeType.class,
                 field = "getValue().getStringValue()")
+        @Lunatic(contextType = {Options.class, HeaderType.class, BodyLine.class}, field = "setValue(#param)")
         String value;
 
         @DDI(contextType = CodeType.class,
                 field = "#index.get(#this.getCategoryReference().getIDArray(0).getStringValue())" +
-                        ".getLabelArray(0).getContentArray(0).getStringValue()")
-        String label;
+                        ".getLabelArray(0)")
+        @Lunatic(contextType = {Options.class, HeaderType.class, BodyLine.class}, field = "setLabel(#param)")
+        Label label;
 
         /** Nested code lists. */
         @DDI(contextType = CodeType.class, field = "getCodeList()")
