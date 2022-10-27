@@ -29,6 +29,7 @@ public class DDIToLunaticTest {
             //"sandbox",
             "l20g2ba7",
             "sandbox_v2",
+            "DDI-tableau-2-colonnes",
     })
     public void writeJsonLunaticFromDDI(String fileName) throws IOException, JAXBException {
         //
