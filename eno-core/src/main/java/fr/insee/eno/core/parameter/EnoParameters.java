@@ -27,9 +27,9 @@ public class EnoParameters {
     private boolean missingVariables;
     private boolean filterResult; //TODO
 
-    private boolean filterDescription; // TODO pour generic
+    private boolean filterDescription; // TODO related to a processing for Generic app
 
-    private boolean unusedVariables; //TODO? a priori non
+    private boolean unusedVariables; //TODO? processing to remove calculated variables not used in questionnaire
 
     private LunaticPaginationMode lunaticPaginationMode;
 
