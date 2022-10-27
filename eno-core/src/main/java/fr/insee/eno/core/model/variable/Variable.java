@@ -2,7 +2,7 @@ package fr.insee.eno.core.model.variable;
 
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.eno.core.model.CalculatedExpression;
+import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoObjectWithExpression;
 import fr.insee.lunatic.model.flat.IVariableType;

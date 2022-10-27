@@ -1,8 +1,8 @@
 package fr.insee.eno.core.processing.impl;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.Response;
-import fr.insee.eno.core.model.Sequence;
+import fr.insee.eno.core.model.response.Response;
+import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.label.Label;
 import fr.insee.eno.core.model.variable.Variable;

@@ -5,7 +5,7 @@ import datacollection33.QuestionItemType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.eno.core.model.CodeList;
+import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.lunatic.model.flat.BodyLine;
 import fr.insee.lunatic.model.flat.Datepicker;

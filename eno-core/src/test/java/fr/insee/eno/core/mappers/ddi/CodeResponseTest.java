@@ -4,7 +4,7 @@ import datacollection33.CodeDomainType;
 import datacollection33.GridDimensionType;
 import datacollection33.QuestionGridType;
 import fr.insee.eno.core.mappers.DDIMapper;
-import fr.insee.eno.core.model.CodeResponse;
+import fr.insee.eno.core.model.response.CodeResponse;
 import fr.insee.eno.core.reference.DDIIndex;
 import fr.insee.eno.core.utils.DDIUtils;
 import logicalproduct33.CategoryType;

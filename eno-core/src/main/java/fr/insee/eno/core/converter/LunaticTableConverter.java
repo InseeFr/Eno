@@ -1,7 +1,7 @@
 package fr.insee.eno.core.converter;
 
 import fr.insee.eno.core.mappers.LunaticMapper;
-import fr.insee.eno.core.model.CodeList;
+import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.question.TableCell;
 import fr.insee.eno.core.model.question.TableQuestion;
 import fr.insee.lunatic.model.flat.*;

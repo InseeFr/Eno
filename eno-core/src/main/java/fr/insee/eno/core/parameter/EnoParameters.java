@@ -1,13 +1,13 @@
 package fr.insee.eno.core.parameter;
 
-import fr.insee.eno.core.model.Mode;
+import fr.insee.eno.core.model.mode.Mode;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static fr.insee.eno.core.model.Mode.*;
+import static fr.insee.eno.core.model.mode.Mode.*;
 
 @Getter
 @Setter
@@ -25,6 +25,12 @@ public class EnoParameters {
 
     // Lunatic parameters
     private boolean missingVariables;
+    private boolean filterResult; //TODO
+
+    private boolean filterDescription; // TODO pour generic
+
+    private boolean unusedVariables; //TODO? a priori non
+
     private LunaticPaginationMode lunaticPaginationMode;
 
     public EnoParameters() {

@@ -1,8 +1,15 @@
 package fr.insee.eno.core.converter;
 
-import fr.insee.eno.core.model.Sequence;
-import fr.insee.eno.core.model.Subsequence;
-import fr.insee.eno.core.model.*;
+import fr.insee.eno.core.model.code.CodeList;
+import fr.insee.eno.core.model.declaration.Declaration;
+import fr.insee.eno.core.model.declaration.Instruction;
+import fr.insee.eno.core.model.navigation.Control;
+import fr.insee.eno.core.model.navigation.Filter;
+import fr.insee.eno.core.model.response.CodeResponse;
+import fr.insee.eno.core.model.response.Response;
+import fr.insee.eno.core.model.sequence.Sequence;
+import fr.insee.eno.core.model.sequence.Subsequence;
+import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.label.Label;
 import fr.insee.eno.core.model.label.QuestionnaireLabel;

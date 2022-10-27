@@ -1,5 +1,6 @@
-package fr.insee.eno.core.model;
+package fr.insee.eno.core.model.declaration;
 
+import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.core.model.label.DynamicLabel;
 
 import java.util.List;

@@ -1,9 +1,9 @@
 package fr.insee.eno.core.processing.impl;
 
-import fr.insee.eno.core.model.AbstractSequence;
+import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.EnoComponent;
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.Subsequence;
+import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.processing.OutProcessingInterface;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.reference.LunaticCatalog;

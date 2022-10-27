@@ -1,7 +1,11 @@
 package fr.insee.eno.core.processing.impl;
 
 import fr.insee.eno.core.model.*;
+import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.question.Question;
+import fr.insee.eno.core.model.sequence.Sequence;
+import fr.insee.eno.core.model.sequence.SequenceItem;
+import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.processing.InProcessingInterface;
 
 import java.util.ArrayList;

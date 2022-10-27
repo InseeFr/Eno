@@ -1,7 +1,9 @@
-package fr.insee.eno.core.model;
+package fr.insee.eno.core.model.code;
 
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.model.EnoIdentifiableObject;
+import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.label.Label;
 import fr.insee.lunatic.model.flat.BodyLine;
 import fr.insee.lunatic.model.flat.HeaderType;

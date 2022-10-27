@@ -1,8 +1,11 @@
-package fr.insee.eno.core.model;
+package fr.insee.eno.core.model.navigation;
 
 import datacollection33.ComputationItemType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.model.EnoIdentifiableObject;
+import fr.insee.eno.core.model.EnoObjectWithExpression;
+import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.lunatic.model.flat.ControlCriticityEnum;
 import fr.insee.lunatic.model.flat.ControlType;
@@ -35,10 +38,10 @@ public class Control extends EnoIdentifiableObject implements EnoObjectWithExpre
 
     /** Control criticality. */
     @DDI(contextType = ComputationItemType.class,
-            field = "T(fr.insee.eno.core.model.Control).convertDDICriticality(" +
+            field = "T(fr.insee.eno.core.model.navigation.Control).convertDDICriticality(" +
                     "getTypeOfComputationItem().getStringValue())")
     @Lunatic(contextType = ControlType.class,
-            field = "setCriticality(T(fr.insee.eno.core.model.Control).convertCriticalityToLunatic(#param))")
+            field = "setCriticality(T(fr.insee.eno.core.model.navigation.Control).convertCriticalityToLunatic(#param))")
     private Criticality criticality;
 
     /** Label typed in Pogues, unused in Lunatic. */

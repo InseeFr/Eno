@@ -1,6 +1,7 @@
-package fr.insee.eno.core.model;
+package fr.insee.eno.core.model.sequence;
 
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.model.EnoObject;
 import lombok.Getter;
 import lombok.Setter;
 import reusable33.ReferenceType;
@@ -19,7 +20,7 @@ public class SequenceItem extends EnoObject {
     private String id;
 
     @DDI(contextType = ReferenceType.class,
-            field = "T(fr.insee.eno.core.model.SequenceItem).convertDDITypeOfObject(" +
+            field = "T(fr.insee.eno.core.model.sequence.SequenceItem).convertDDITypeOfObject(" +
                     "#this.getTypeOfObject().toString())")
     private SequenceItemType type;
 

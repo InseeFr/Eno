@@ -1,4 +1,4 @@
-package fr.insee.eno.core.model;
+package fr.insee.eno.core.model.sequence;
 
 import fr.insee.eno.core.annotations.Lunatic;
 import lombok.Getter;
@@ -21,7 +21,7 @@ public class Subsequence extends AbstractSequence {
 
     @Override
     public String toString() {
-        return "Subsequence(id="+id+")";
+        return "Subsequence(id="+getId()+")";
     }
 
 }

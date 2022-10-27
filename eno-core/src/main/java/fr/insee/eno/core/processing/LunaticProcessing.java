@@ -1,16 +1,11 @@
 package fr.insee.eno.core.processing;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.Sequence;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.impl.*;
-import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.reference.LunaticCatalog;
 import fr.insee.lunatic.model.flat.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class LunaticProcessing {
 

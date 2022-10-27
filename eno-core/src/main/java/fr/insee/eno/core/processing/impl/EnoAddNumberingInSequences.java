@@ -1,7 +1,7 @@
 package fr.insee.eno.core.processing.impl;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.Sequence;
+import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.label.Label;
 import fr.insee.eno.core.processing.EnoProcessingInterface;
 import fr.insee.eno.core.utils.RomanNumber;

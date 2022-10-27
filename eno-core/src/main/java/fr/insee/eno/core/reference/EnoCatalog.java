@@ -2,6 +2,8 @@ package fr.insee.eno.core.reference;
 
 import fr.insee.eno.core.model.*;
 import fr.insee.eno.core.model.question.Question;
+import fr.insee.eno.core.model.sequence.Sequence;
+import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.model.variable.Variable;
 
 import java.util.Collection;

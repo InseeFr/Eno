@@ -1,7 +1,7 @@
 package fr.insee.eno.core.processing.impl;
 
-import fr.insee.eno.core.model.BindingReference;
-import fr.insee.eno.core.model.CalculatedExpression;
+import fr.insee.eno.core.model.calculated.BindingReference;
+import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.EnoObjectWithExpression;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.processing.InProcessingInterface;

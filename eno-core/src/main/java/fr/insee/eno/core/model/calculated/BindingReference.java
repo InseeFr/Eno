@@ -1,6 +1,7 @@
-package fr.insee.eno.core.model;
+package fr.insee.eno.core.model.calculated;
 
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.model.EnoObject;
 import lombok.Getter;
 import lombok.Setter;
 import reusable33.InParameterType;

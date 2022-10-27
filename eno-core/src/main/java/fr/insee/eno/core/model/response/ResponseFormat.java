@@ -1,4 +1,4 @@
-package fr.insee.eno.core.model;
+package fr.insee.eno.core.model.response;
 
 public enum ResponseFormat {
 

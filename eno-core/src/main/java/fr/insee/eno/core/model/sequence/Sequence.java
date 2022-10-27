@@ -1,9 +1,8 @@
-package fr.insee.eno.core.model;
+package fr.insee.eno.core.model.sequence;
 
 import fr.insee.eno.core.annotations.Lunatic;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 /** Eno object for sequence.
  * Note: a 'sequence' is sometimes called a 'module' in Eno.
@@ -21,7 +20,7 @@ public class Sequence extends AbstractSequence {
 
     @Override
     public String toString() {
-        return "Sequence(id="+id+")";
+        return "Sequence(id="+getId()+")";
     }
 
 }

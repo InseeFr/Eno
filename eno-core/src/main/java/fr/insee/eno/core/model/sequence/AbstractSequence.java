@@ -1,9 +1,14 @@
-package fr.insee.eno.core.model;
+package fr.insee.eno.core.model.sequence;
 
 import datacollection33.SequenceType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.model.*;
+import fr.insee.eno.core.model.declaration.Declaration;
+import fr.insee.eno.core.model.declaration.Instruction;
 import fr.insee.eno.core.model.label.Label;
+import fr.insee.eno.core.model.navigation.Control;
+import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.lunatic.model.flat.Subsequence;
 import lombok.Getter;
 import lombok.Setter;

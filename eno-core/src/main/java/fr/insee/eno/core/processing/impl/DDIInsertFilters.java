@@ -3,7 +3,7 @@ package fr.insee.eno.core.processing.impl;
 import fr.insee.eno.core.model.EnoComponent;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.Filter;
+import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.processing.InProcessingInterface;
 
 public class DDIInsertFilters implements InProcessingInterface {

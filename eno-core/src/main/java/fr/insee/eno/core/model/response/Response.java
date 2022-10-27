@@ -1,7 +1,8 @@
-package fr.insee.eno.core.model;
+package fr.insee.eno.core.model.response;
 
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.model.EnoObject;
 import fr.insee.lunatic.model.flat.ResponseType;
 import lombok.Getter;
 import lombok.Setter;

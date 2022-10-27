@@ -3,7 +3,7 @@ package fr.insee.eno.core.model.question;
 import datacollection33.QuestionGridType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.eno.core.model.CodeList;
+import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.lunatic.model.flat.Table;
 import lombok.Getter;
 import lombok.Setter;

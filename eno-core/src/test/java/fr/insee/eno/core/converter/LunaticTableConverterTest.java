@@ -1,6 +1,7 @@
 package fr.insee.eno.core.converter;
 
-import fr.insee.eno.core.model.CodeList;
+import fr.insee.eno.core.model.code.CodeList;
+import fr.insee.eno.core.model.label.Label;
 import fr.insee.lunatic.model.flat.BodyType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

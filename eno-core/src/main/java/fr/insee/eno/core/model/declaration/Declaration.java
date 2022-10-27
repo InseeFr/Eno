@@ -1,8 +1,10 @@
-package fr.insee.eno.core.model;
+package fr.insee.eno.core.model.declaration;
 
 import datacollection33.StatementItemType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.model.EnoIdentifiableObject;
+import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.lunatic.model.flat.DeclarationType;
 import lombok.Getter;
@@ -39,7 +41,7 @@ public class Declaration extends EnoIdentifiableObject implements DeclarationInt
      * (Difference with Instruction: no selection to do.) */
     @DDI(contextType = StatementItemType.class,
             field = "getConstructNameList()" +
-                    ".![T(fr.insee.eno.core.model.Mode).convertDDIMode(#this.getStringArray(0).getStringValue())]")
+                    ".![T(fr.insee.eno.core.model.mode.Mode).convertDDIMode(#this.getStringArray(0).getStringValue())]")
     private final List<Mode> modes = new ArrayList<>();
 
 }

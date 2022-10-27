@@ -1,6 +1,6 @@
 package fr.insee.eno.core.processing.impl;
 
-import fr.insee.eno.core.model.DeclarationInterface;
+import fr.insee.eno.core.model.declaration.DeclarationInterface;
 import fr.insee.eno.core.processing.OutProcessingInterface;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.reference.LunaticCatalog;

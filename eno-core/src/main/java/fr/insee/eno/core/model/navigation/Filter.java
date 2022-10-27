@@ -1,8 +1,12 @@
-package fr.insee.eno.core.model;
+package fr.insee.eno.core.model.navigation;
 
 import datacollection33.IfThenElseType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.model.EnoIdentifiableObject;
+import fr.insee.eno.core.model.EnoObjectWithExpression;
+import fr.insee.eno.core.model.calculated.BindingReference;
+import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.lunatic.model.flat.ConditionFilterType;
 import lombok.Getter;
 import lombok.Setter;
@@ -70,7 +74,7 @@ public class Filter extends EnoIdentifiableObject implements EnoObjectWithExpres
                     "        #this.getIDArray(0).getStringValue() : " +
                     "    #this.getTypeOfObject().toString() == 'IfThenElse' ? " +
                     "        #this.getIDArray(0).getStringValue() : " +
-                    "    T(fr.insee.eno.core.model.Filter).unexpectedDDIComponent(#root, #this.getTypeOfObject().toString())" +
+                    "    T(fr.insee.eno.core.model.navigation.Filter).unexpectedDDIComponent(#root, #this.getTypeOfObject().toString())" +
                     "]")
     private List<String> componentReferences = new ArrayList<>();
 

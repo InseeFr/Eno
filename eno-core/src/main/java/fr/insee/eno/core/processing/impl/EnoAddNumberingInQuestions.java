@@ -2,8 +2,8 @@ package fr.insee.eno.core.processing.impl;
 
 import fr.insee.eno.core.model.EnoComponent;
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.Sequence;
-import fr.insee.eno.core.model.Subsequence;
+import fr.insee.eno.core.model.sequence.Sequence;
+import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.parameter.EnoParameters;

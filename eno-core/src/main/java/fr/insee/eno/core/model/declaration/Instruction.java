@@ -1,8 +1,10 @@
-package fr.insee.eno.core.model;
+package fr.insee.eno.core.model.declaration;
 
 import datacollection33.InstructionType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.model.EnoIdentifiableObject;
+import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.lunatic.model.flat.DeclarationType;
 import lombok.Getter;
@@ -27,7 +29,7 @@ public class Instruction extends EnoIdentifiableObject implements DeclarationInt
      */
     @DDI(contextType = InstructionType.class,
             field = "getInstructionNameList()" +
-                    ".?[!T(fr.insee.eno.core.model.Mode).isDDIMode(#this.getStringArray(0).getStringValue())].get(0)" +
+                    ".?[!T(fr.insee.eno.core.model.mode.Mode).isDDIMode(#this.getStringArray(0).getStringValue())].get(0)" +
                     ".getStringArray(0).getStringValue()")
     @Lunatic(contextType = DeclarationType.class,
             field = "setDeclarationType(T(fr.insee.lunatic.model.flat.DeclarationTypeEnum).valueOf(#param.toUpperCase()))")
@@ -48,8 +50,8 @@ public class Instruction extends EnoIdentifiableObject implements DeclarationInt
 
     @DDI(contextType = InstructionType.class,
             field = "getInstructionNameList()" +
-                    ".?[T(fr.insee.eno.core.model.Mode).isDDIMode(#this.getStringArray(0).getStringValue())]" +
-                    ".![T(fr.insee.eno.core.model.Mode).convertDDIMode(#this.getStringArray(0).getStringValue())]")
+                    ".?[T(fr.insee.eno.core.model.mode.Mode).isDDIMode(#this.getStringArray(0).getStringValue())]" +
+                    ".![T(fr.insee.eno.core.model.mode.Mode).convertDDIMode(#this.getStringArray(0).getStringValue())]")
     private final List<Mode> modes = new ArrayList<>();
 
 }

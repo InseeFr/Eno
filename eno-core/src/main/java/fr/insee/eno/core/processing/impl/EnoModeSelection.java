@@ -1,9 +1,9 @@
 package fr.insee.eno.core.processing.impl;
 
-import fr.insee.eno.core.model.DeclarationInterface;
+import fr.insee.eno.core.model.declaration.DeclarationInterface;
 import fr.insee.eno.core.model.EnoComponent;
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.Mode;
+import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.core.processing.EnoProcessingInterface;
 import fr.insee.eno.core.reference.EnoCatalog;
 import lombok.AllArgsConstructor;

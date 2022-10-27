@@ -1,6 +1,6 @@
 package fr.insee.eno.core.processing.impl;
 
-import fr.insee.eno.core.model.DeclarationInterface;
+import fr.insee.eno.core.model.declaration.DeclarationInterface;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.processing.InProcessingInterface;
 import fr.insee.eno.core.reference.EnoCatalog;

@@ -1,9 +1,10 @@
-package fr.insee.eno.core.model;
+package fr.insee.eno.core.model.calculated;
 
 import datacollection33.IfThenElseType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.model.EnoObject;
 import fr.insee.lunatic.model.flat.LabelType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
