@@ -91,9 +91,10 @@ public class LunaticConverter {
             return new CheckboxGroup();
         else if (enoQuestion instanceof MultipleChoiceQuestion.Complex)
             return new Table();
-        else if (enoQuestion instanceof TableQuestion enoTable) {
+        else if (enoQuestion instanceof TableQuestion enoTable)
             return LunaticTableConverter.convertEnoTable(enoTable);
-        }
+        else if (enoQuestion instanceof DynamicTableQuestion)
+            return new Table();
         else
             throw new RuntimeException(unimplementedMessage(enoQuestion));
     }
