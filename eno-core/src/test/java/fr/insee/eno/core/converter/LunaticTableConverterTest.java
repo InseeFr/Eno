@@ -15,7 +15,8 @@ public class LunaticTableConverterTest {
 
     private static CodeList.CodeItem createCode(String label) {
         CodeList.CodeItem codeItem = new CodeList.CodeItem();
-        codeItem.setLabel(label);
+        codeItem.setLabel(new Label());
+        codeItem.getLabel().setValue(label);
         return codeItem;
     }
 
