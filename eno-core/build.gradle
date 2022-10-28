@@ -1,7 +1,7 @@
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
-    id 'org.springframework.boot' version '2.7.3' apply false
+    id 'org.springframework.boot' version '3.0.0-RC1' apply false
     id 'java'
     id 'maven-publish'
 }
