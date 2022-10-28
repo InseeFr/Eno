@@ -47,12 +47,12 @@ dependencies {
     // Mockito
     testImplementation "org.mockito:mockito-core"
 
-
-    // Lombok https://projectlombok.org/setup/gradle // TODO: version could be managed with spring dependencies (?)
-    compileOnly 'org.projectlombok:lombok:1.18.24'
-    annotationProcessor 'org.projectlombok:lombok:1.18.24'
-    testCompileOnly 'org.projectlombok:lombok:1.18.24'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+    // Lombok https://projectlombok.org/setup/gradle // TODO: version could be managed with spring dependencies(?)
+    String lombokVersion = '1.18.24'
+    compileOnly 'org.projectlombok:lombok:'+lombokVersion
+    annotationProcessor 'org.projectlombok:lombok:'+lombokVersion
+    testCompileOnly 'org.projectlombok:lombok:'+lombokVersion
+    testAnnotationProcessor 'org.projectlombok:lombok:'+lombokVersion
 }
 
 configurations.all {
