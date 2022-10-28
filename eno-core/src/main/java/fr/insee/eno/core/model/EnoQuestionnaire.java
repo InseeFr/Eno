@@ -40,7 +40,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     private String questionnaireModel;
 
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field ="setEnoCoreVersion(#param)")
-    private String enoVersion; //TODO: get Eno & Lunatic versions programmatically
+    private String enoVersion;
 
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field ="setLunaticModelVersion(#param)")
     private String lunaticModelVersion;
