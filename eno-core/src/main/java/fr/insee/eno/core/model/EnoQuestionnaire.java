@@ -13,6 +13,7 @@ import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.model.variable.VariableGroup;
+import fr.insee.lunatic.model.flat.Questionnaire;
 import instance33.DDIInstanceType;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,7 +40,10 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     private String questionnaireModel;
 
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field ="setEnoCoreVersion(#param)")
-    private String enoVersion = "TODO"; //TODO: get Eno & Lunatic versions programmatically
+    private String enoVersion; //TODO: get Eno & Lunatic versions programmatically
+
+    @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field ="setLunaticModelVersion(#param)")
+    private String lunaticModelVersion;
 
     @DDI(contextType = DDIInstanceType.class, field = "getCitation().getTitle()")
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "setLabel(#param)")

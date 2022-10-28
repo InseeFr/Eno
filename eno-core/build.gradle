@@ -26,9 +26,9 @@ dependencies {
         //exclude group: 'org.apache.logging.log4j', module: 'log4j-api'
     }
     // Lunatic
-    implementation 'fr.insee.lunatic:lunatic-model:2.2.13'
+    implementation 'fr.insee.lunatic:lunatic-model:'+project.properties['version.lunatic-model']
     // Pogues
-    implementation 'fr.insee.pogues:pogues-model:1.0.1'
+    implementation 'fr.insee.pogues:pogues-model:'+project.properties['version.pogues-model']
 
     implementation 'org.springframework:spring-core'
     implementation 'org.springframework:spring-beans'
@@ -72,8 +72,7 @@ tasks.named('test') {
 }
 
 tasks.withType(GenerateModuleMetadata).configureEach {
-    // The value 'enforced-platform' is provided in the validation
-    // error message you got
+    // The value 'enforced-platform' is provided in the validation error message you got
     suppressedValidationErrors.add('enforced-platform')
 }
 

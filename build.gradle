@@ -1,6 +1,6 @@
 allprojects {
     group = 'fr.insee.eno'
-    version = '3.0.0-SNAPSHOT'
+    version = project.properties['version.eno']
 }
 
 subprojects{
