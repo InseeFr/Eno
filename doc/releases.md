@@ -1,5 +1,8 @@
 # Eno Releases note
 
+## 2.4.1 - 07/11/22
+- **[ddi2lunaticXML][core]** Fix to correctly resolve the variable name which generates a loop (for shapeFrom attribute in Lunatic)
+
 ## 2.4.0 - 19/10/22
 - **[ddi2lunaticXML][core]** switch to Lunatic-model v2.3.1 to lunatic V2 refactoring
 
