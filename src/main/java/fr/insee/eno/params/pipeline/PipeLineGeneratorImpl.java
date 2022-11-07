@@ -131,6 +131,8 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	
 	private LunaticXMLExternalizeVariablesAndDependenciesPostprocessor lunaticXMLExternalizeVariablesAndDependencies = new LunaticXMLExternalizeVariablesAndDependenciesPostprocessor();
 	
+	private LunaticXMLInsertCleaningBlockPostprocessor lunaticXMLInsertCleaningBlock = new LunaticXMLInsertCleaningBlockPostprocessor();
+	
 	private LunaticXMLSortComponentsPostprocessor lunaticXmlSortComponents = new LunaticXMLSortComponentsPostprocessor();
 	
 	private LunaticXMLVTLParserPostprocessor lunaticXmlvtlParser = new LunaticXMLVTLParserPostprocessor();
@@ -278,6 +280,9 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 			break;
 		case LUNATIC_XML_EXTERNALIZE_VARIABLES:
 			postprocessor = lunaticXMLExternalizeVariablesAndDependencies;
+			break;
+		case LUNATIC_XML_INSERT_CLEANING_BLOCK:
+			postprocessor = lunaticXMLInsertCleaningBlock;
 			break;
 		case LUNATIC_XML_INSERT_GENERIC_QUESTIONS:
 			postprocessor= lunaticXmlInsertGenericQuestions;
