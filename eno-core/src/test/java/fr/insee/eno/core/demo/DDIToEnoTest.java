@@ -5,7 +5,7 @@ import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.processing.EnoProcessing;
-import fr.insee.eno.core.writers.EnoWriter;
+import fr.insee.eno.core.output.EnoWriter;
 import instance33.DDIInstanceDocument;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
