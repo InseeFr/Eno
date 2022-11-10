@@ -11,6 +11,7 @@ public class EnoAddVersions implements EnoProcessingInterface {
 
     @Override
     public void apply(EnoQuestionnaire enoQuestionnaire) {
+        // TODO: use ModelVersions class here
         try {
             //
             Properties enoCoreProperties = new Properties();
