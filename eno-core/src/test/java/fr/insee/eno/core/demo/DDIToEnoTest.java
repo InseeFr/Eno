@@ -8,7 +8,6 @@ import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.processing.EnoProcessing;
 import fr.insee.eno.core.output.EnoWriter;
 import instance33.DDIInstanceDocument;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
