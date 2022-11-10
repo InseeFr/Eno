@@ -1,5 +1,6 @@
 package fr.insee.eno.core.converter;
 
+import fr.insee.eno.core.exceptions.UnauthorizedHeaderException;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.question.TableCell;
@@ -7,6 +8,7 @@ import fr.insee.eno.core.model.question.TableQuestion;
 import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,11 +32,22 @@ public class LunaticTableConverter {
     public static Table convertEnoTable(TableQuestion enoTable) {
         //
         Table lunaticTable = new Table();
+
+        // Compute sizes in header and left column
+        // For the header, this is done to ensure that it is not a nested code list
+        enoTable.getHeader().computeSizes();
+        if (enoTable.getHeader().getMaxLevel() > 0)
+            throw new UnauthorizedHeaderException(enoTable);
+        enoTable.getLeftColumn().computeSizes();
+
         // Top left empty cell
         HeaderType topLeftCell = new HeaderType();
         topLeftCell.setLabel(new LabelType());
         topLeftCell.getLabel().setValue("");
+        if (enoTable.getLeftColumn().getMaxLevel() > 0)
+            topLeftCell.setColspan(BigInteger.valueOf(enoTable.getLeftColumn().getMaxLevel() + 1));
         lunaticTable.getHeader().add(topLeftCell);
+
         // Header
         enoTable.getHeader().getCodeItems().forEach(codeItem -> {
             HeaderType headerCell = new HeaderType();
@@ -42,17 +55,20 @@ public class LunaticTableConverter {
             lunaticMapper.mapEnoObject(codeItem, headerCell);
             lunaticTable.getHeader().add(headerCell);
         });
+
         // Left column
         // Note: Lunatic class names are a bit confusing: BodyType = line, BodyLine = cell
         List<BodyType> bodyTypes = flattenCodeList(enoTable.getLeftColumn());
         lunaticTable.getBody().addAll(bodyTypes);
+
         // Body
         // Make sure that the lines have enough capacity
-        int headerSize = enoTable.getHeader().size(); // TODO: header can also have nested code lists
+        int headerSize = enoTable.getHeader().size();
         lunaticTable.getBody().forEach(bodyType ->
                 bodyType.getBodyLine().addAll(Collections.nCopies(headerSize, null))); // https://stackoverflow.com/a/27935203/13425151
-        // Not supposing that table cells are ordered in a certain way in the eno model
-        int firstContentLine = 0; // TODO: in case of nested code lists, the first content line is > 1
+        // In what follows, it is not assumed that table cells are ordered in a certain way in the eno model
+        // Each cell is inserted in the right place using its row number & column number
+        int firstContentLine = 0; // Fixed at 0 since nested code lists are not allowed in header
         int firstContentColumn = enoTable.getLeftColumn().getMaxLevel() + 1;
         for (int k=0; k<enoTable.getTableCells().size(); k++) {
             TableCell enoCell = enoTable.getTableCells().get(k);
@@ -61,6 +77,7 @@ public class LunaticTableConverter {
             lunaticTable.getBody().get(enoCell.getRowNumber() + firstContentLine - 1)
                     .getBodyLine().add(enoCell.getColumnNumber() + firstContentColumn, lunaticCell);
         }
+
         //
         return lunaticTable;
     }
@@ -78,8 +95,7 @@ public class LunaticTableConverter {
     private static void flattenCodeItem(CodeList.CodeItem codeItem, List<BodyType> lunaticLines) {
         // Map code item on lunatic cell
         BodyLine lunaticCell = new BodyLine();
-        LunaticMapper lunaticMapper = new LunaticMapper();
-        lunaticMapper.mapEnoObject(codeItem, lunaticCell);
+        new LunaticMapper().mapEnoObject(codeItem, lunaticCell);
         // Add lunatic cell in flat list
         lunaticLines.get(lunaticLines.size()-1).getBodyLine().add(lunaticCell);
         //
@@ -124,8 +140,7 @@ public class LunaticTableConverter {
             }
         }
         //
-        LunaticMapper lunaticMapper = new LunaticMapper();
-        lunaticMapper.mapEnoObject(enoCell, bodyLine);
+        new LunaticMapper().mapEnoObject(enoCell, bodyLine);
         //
         return bodyLine;
     }

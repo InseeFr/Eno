@@ -13,6 +13,7 @@ import logicalproduct33.CodeType;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,9 +51,16 @@ public class CodeList extends EnoIdentifiableObject {
         /** Depth level of the code. Starts at 0 for codes in CodeList. */
         int level;
 
-        /** "Horizontal" size onf the code item. */
+        /** "Horizontal" size onf the code item.
+         * In Lunatic "colspan" is set only if it is > 1. */
+        @Lunatic(contextType = BodyLine.class,
+                field = "setColspan(#param > 1 ? T(java.math.BigInteger).valueOf(#param) : null)")
         int hSize;
-        /** "Vertical" size onf the code item. */
+
+        /** "Vertical" size onf the code item.
+         * In Lunatic "rowspan" is set only if it is > 1. */
+        @Lunatic(contextType = BodyLine.class,
+                field = "setRowspan(#param > 1 ? T(java.math.BigInteger).valueOf(#param) : null)")
         int vSize;
 
         /** Return the number of sub-codes in the code item. */
@@ -60,6 +68,10 @@ public class CodeList extends EnoIdentifiableObject {
             return codeItems.size();
         }
 
+        void foo(int i) {
+            BodyLine b= new BodyLine();
+            b.setColspan(i > 1 ? BigInteger.valueOf(5) : null);
+        }
     }
 
     @DDI(contextType = CodeListType.class, field = "getLabelArray(0).getContentArray(0).getStringValue()")
