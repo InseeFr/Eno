@@ -1,4 +1,4 @@
-package fr.insee.eno.core.writers;
+package fr.insee.eno.core.output;
 
 import fr.insee.lunatic.conversion.JSONSerializer;
 import fr.insee.lunatic.model.flat.Questionnaire;

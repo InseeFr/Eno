@@ -1,4 +1,4 @@
-package fr.insee.eno.core.writers;
+package fr.insee.eno.core.output;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
