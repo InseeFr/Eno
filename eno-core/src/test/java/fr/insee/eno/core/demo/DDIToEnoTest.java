@@ -1,6 +1,7 @@
 package fr.insee.eno.core.demo;
 
 import fr.insee.eno.core.annotations.Format;
+import fr.insee.eno.core.exceptions.DDIParsingException;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parsers.DDIParser;
@@ -23,7 +24,7 @@ public class DDIToEnoTest {
             "l20g2ba7",
             "sandbox_v2",
     })
-    public void writeEnoFileFromDDI(String fileName) throws IOException {
+    public void writeEnoFileFromDDI(String fileName) throws IOException, DDIParsingException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
                 this.getClass().getClassLoader().getResource("in/ddi/" + fileName + ".xml"));

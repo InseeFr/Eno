@@ -1,5 +1,6 @@
 package fr.insee.eno.core.mappers;
 
+import fr.insee.eno.core.exceptions.DDIParsingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.model.variable.VariableGroup;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DDIMapperTest {
 
     @Test
-    public void ddiMappingFunctionalTest() throws IOException {
+    public void ddiMappingFunctionalTest() throws IOException, DDIParsingException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
                 DDIMapperTest.class.getClassLoader().getResource("in/ddi/l10xmg2l.xml"));

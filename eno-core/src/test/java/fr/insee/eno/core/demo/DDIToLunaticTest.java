@@ -1,6 +1,7 @@
 package fr.insee.eno.core.demo;
 
 import fr.insee.eno.core.annotations.Format;
+import fr.insee.eno.core.exceptions.DDIParsingException;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
@@ -31,7 +32,7 @@ public class DDIToLunaticTest {
             "sandbox_v2",
             "DDI-tableau-2-colonnes",
     })
-    public void writeJsonLunaticFromDDI(String fileName) throws IOException, JAXBException {
+    public void writeJsonLunaticFromDDI(String fileName) throws IOException, JAXBException, DDIParsingException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
                 this.getClass().getClassLoader().getResource("in/ddi/" + fileName + ".xml"));

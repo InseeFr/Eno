@@ -3,6 +3,7 @@ package fr.insee.eno.core.sandbox;
 import datacollection33.*;
 import datacollection33.impl.TextContentTypeImpl;
 import datacollection33.impl.TextTypeImpl;
+import fr.insee.eno.core.exceptions.DDIParsingException;
 import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.reference.DDIIndex;
 import group33.ResourcePackageType;
@@ -32,7 +33,7 @@ public class DDITests {
     }
 
     @Test
-    public void tableQuestion() throws IOException {
+    public void tableQuestion() throws IOException, DDIParsingException {
         //
         DDIIndex ddiIndex = new DDIIndex();
         ddiIndex.indexDDI(DDIParser.parse(this.getClass().getClassLoader().getResource("in/ddi/l20g2ba7.xml")));
@@ -42,7 +43,7 @@ public class DDITests {
     }
 
     @Test
-    public void ddiObjects() throws IOException {
+    public void ddiObjects() throws IOException, DDIParsingException {
         // (Parse)
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
                 this.getClass().getClassLoader().getResource("l10xmg2l.xml"));

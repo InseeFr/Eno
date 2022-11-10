@@ -1,5 +1,6 @@
 package fr.insee.eno.core.sandbox;
 
+import fr.insee.eno.core.exceptions.DDIParsingException;
 import fr.insee.eno.core.mappers.DDIMapperTest;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.variable.Variable;
@@ -120,7 +121,7 @@ public class SpelTests {
     }
 
     @Test
-    public void getDDIIndexUsingSpel() throws IOException {
+    public void getDDIIndexUsingSpel() throws IOException, DDIParsingException {
         //
         DDIIndex ddiIndex = new DDIIndex();
         ddiIndex.indexDDI(DDIParser.parse(
