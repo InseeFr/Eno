@@ -1,9 +1,12 @@
 package fr.insee.eno.core.parameter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.insee.eno.core.model.mode.Mode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +47,11 @@ public class EnoParameters {
     private boolean filterDescription; // TODO related to a processing for Generic app
     private boolean unusedVariables; //TODO? processing to remove calculated variables not used in questionnaire
     private LunaticPaginationMode lunaticPaginationMode;
+
+    public static EnoParameters parse(InputStream parametersInputStream) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(parametersInputStream, EnoParameters.class);
+    }
 
     public EnoParameters() {
         defaultParameters();
