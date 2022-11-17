@@ -5,6 +5,7 @@ import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.question.*;
 import lombok.extern.slf4j.Slf4j;
 import reusable33.RepresentationType;
+import reusable33.StandardKeyValuePairType;
 import reusable33.TextDomainType;
 
 @Slf4j
@@ -14,7 +15,10 @@ public class DDIConverter {
     public static final String RADIO_OUTPUT_FORMAT = "radio-button";
     public static final String CHECKBOX_OUTPUT_FORMAT = "checkbox";
     public static final String DROPDOWN_OUTPUT_FORMAT = "drop-down-list";
-    //TODO: Constants class for these?
+    //TODO: Constants class for these? + use these constants in DDI mapping annotation
+
+    public static final String DDI_PAIRWISE_KEY = "UIComponent";
+    public static final String DDI_PAIRWISE_VALUE = "HouseholdPairing";
 
     /**
      * Return an Eno instance corresponding to the given DDI object.
@@ -47,28 +51,18 @@ public class DDIConverter {
             return new DateQuestion();
         }
         else if (representationType instanceof CodeDomainType) {
-            // Version using annotation in UniqueChoiceQuestion class
-            return new UniqueChoiceQuestion();
-            // Version outside annotation:
-            /*
-            String controlledVocabularyID = representationType.getGenericOutputFormat().getControlledVocabularyID();
-            if (! controlledVocabularyID.equals(INSEE_VOCABULARY_ID)) {
-                log.warn(String.format(
-                        "Controlled vocabulary ID not equal to '%s' in DDI question item of ID '%s' (name: '%s')",
-                        INSEE_VOCABULARY_ID,
-                        questionItemType.getIDArray(0).getStringValue(),
-                        questionItemType.getQuestionItemNameArray(0).getStringArray(0).getStringValue()));
+            if (! questionItemType.getUserAttributePairList().isEmpty()) {
+                StandardKeyValuePairType userAttributePair = questionItemType.getUserAttributePairArray(0);
+                if (! userAttributePair.getAttributeKey().getStringValue().equals(DDI_PAIRWISE_KEY))
+                    log.warn("TODO"); //TODO: with caps lock
+                if (! userAttributePair.getAttributeValue().getStringValue().equals(DDI_PAIRWISE_VALUE))
+                    log.warn("TODO");
+                return new PairwiseQuestion();
             }
-            String outputFormat = representationType.getGenericOutputFormat().getStringValue();
-            return switch (outputFormat) {
-                case RADIO_OUTPUT_FORMAT -> UniqueChoiceQuestion.builder().displayFormat(UniqueChoiceQuestion.DisplayFormat.RADIO).build();
-                case CHECKBOX_OUTPUT_FORMAT -> UniqueChoiceQuestion.builder().displayFormat(UniqueChoiceQuestion.DisplayFormat.CHECKBOX).build();
-                case DROPDOWN_OUTPUT_FORMAT -> UniqueChoiceQuestion.builder().displayFormat(UniqueChoiceQuestion.DisplayFormat.DROPDOWN).build();
-                default -> throw new RuntimeException(
-                        "Unable to identify output format in DDI code domain of question item " +
-                                questionItemType.getIDArray(0).getStringValue());
-            };
-            */
+            else {
+                return new UniqueChoiceQuestion();
+            }
+
         }
         else {
             throw new RuntimeException(
