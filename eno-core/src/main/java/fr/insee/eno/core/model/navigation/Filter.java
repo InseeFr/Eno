@@ -72,6 +72,8 @@ public class Filter extends EnoIdentifiableObject implements EnoObjectWithExpres
                     "        .getQuestionReference().getIDArray(0).getStringValue() : " +
                     "    #this.getTypeOfObject().toString() == 'Sequence' ? " +
                     "        #this.getIDArray(0).getStringValue() : " +
+                    "    #this.getTypeOfObject().toString() == 'ComputationItem' ? " +
+                    "        #this.getIDArray(0).getStringValue() : " +
                     "    #this.getTypeOfObject().toString() == 'IfThenElse' ? " +
                     "        #this.getIDArray(0).getStringValue() : " +
                     "    T(fr.insee.eno.core.model.navigation.Filter).unexpectedDDIComponent(#root, #this.getTypeOfObject().toString())" +
