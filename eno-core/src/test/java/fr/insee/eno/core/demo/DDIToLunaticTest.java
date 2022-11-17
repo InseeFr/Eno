@@ -1,7 +1,9 @@
 package fr.insee.eno.core.demo;
 
+import fr.insee.eno.core.DDIToLunatic;
 import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.exceptions.DDIParsingException;
+import fr.insee.eno.core.exceptions.LunaticSerializationException;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
@@ -14,11 +16,15 @@ import fr.insee.eno.core.output.EnoWriter;
 import fr.insee.eno.core.output.LunaticWriter;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import instance33.DDIInstanceDocument;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import javax.xml.bind.JAXBException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -32,39 +38,26 @@ public class DDIToLunaticTest {
             "sandbox_v2",
             "DDI-tableau-2-colonnes",
     })
-    public void writeJsonLunaticFromDDI(String fileName) throws IOException, JAXBException, DDIParsingException {
-        //
-        DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
-                this.getClass().getClassLoader().getResource("in/ddi/" + fileName + ".xml"));
-        //
-        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-        //
-        DDIMapper ddiMapper = new DDIMapper();
-        ddiMapper.mapDDI(ddiInstanceDocument, enoQuestionnaire);
-
-        // Mode filtering
+    public void writeJsonLunaticFromDDI(String fileName)
+            throws IOException, DDIParsingException, LunaticSerializationException {
+        // DDI
+        InputStream ddiInputStream = this.getClass().getClassLoader()
+                .getResourceAsStream("in/ddi/" + fileName + ".xml");
+        // Parameters with mode filtering
         EnoParameters enoParameters = new EnoParameters();
         enoParameters.setSelectedModes(List.of(Mode.CAPI, Mode.CATI));
-        //
-        EnoProcessing enoProcessing = new EnoProcessing(enoParameters);
-        enoProcessing.applyProcessing(enoQuestionnaire, Format.DDI);
 
         //
-        Questionnaire lunaticQuestionnaire = new Questionnaire();
-        //
-        LunaticMapper lunaticMapper = new LunaticMapper();
-        lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
+        Files.writeString(Path.of("src/test/resources/out/lunatic/" + fileName + ".json"),
+                DDIToLunatic.transform(ddiInputStream, enoParameters));
+    }
 
-        //
-        LunaticProcessing lunaticProcessing = new LunaticProcessing();
-        lunaticProcessing.applyProcessing(lunaticQuestionnaire, enoQuestionnaire);
-
-        //
-        EnoWriter.writeJson(enoQuestionnaire,
-                Path.of("src/test/resources/out/eno/" + fileName + ".json"));
-        //
-        LunaticWriter.writeJsonQuestionnaire(lunaticQuestionnaire,
-               Path.of("src/test/resources/out/lunatic/" + fileName + ".json"));
+    @Test
+    public void ddiToLunatic_pairwise() throws DDIParsingException, IOException, LunaticSerializationException {
+        Files.writeString(Path.of("src/test/resources/out/lunatic/pairwise-test.json"),
+                DDIToLunatic.transform(
+                        this.getClass().getClassLoader().getResourceAsStream("pairwise/form-ddi-household-links.xml"),
+                        new EnoParameters()));
     }
 
 }
