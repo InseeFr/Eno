@@ -89,6 +89,8 @@ public class LunaticConverter {
                 case DROPDOWN -> new Dropdown();
             };
         }
+        else if (enoQuestion instanceof PairwiseQuestion)
+            return new PairwiseLinks();
         else
             throw new RuntimeException(unimplementedMessage(enoQuestion));
     }
