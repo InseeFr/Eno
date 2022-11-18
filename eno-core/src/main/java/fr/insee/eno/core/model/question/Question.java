@@ -21,6 +21,10 @@ import java.util.List;
 @Setter
 public abstract class Question extends EnoIdentifiableObject implements EnoComponent {
 
+    /** Attribute is defined here to factor toString methods,
+     * but DDI mapping is done in subclasses since DDI classes are different. */
+    String name;
+
     @DDI(contextType = {QuestionItemType.class, QuestionGridType.class},
             field = "getQuestionTextArray(0)")
     @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class, CheckboxGroup.class, Table.class},
@@ -49,5 +53,10 @@ public abstract class Question extends EnoIdentifiableObject implements EnoCompo
     @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class, CheckboxGroup.class, Table.class},
             field = "setConditionFilter(#param)")
     private Filter filter = new Filter();
+
+    @Override
+    public String toString() {
+        return this.getClass() + "[id="+this.getId()+", name="+getName()+"]";
+    }
 
 }

@@ -14,7 +14,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString(of="name")
 public abstract class SingleResponseQuestion extends Question {
 
     @DDI(contextType = QuestionItemType.class,

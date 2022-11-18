@@ -12,7 +12,6 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString(of="name")
 public abstract class MultipleResponseQuestion extends Question {
 
     @DDI(contextType = QuestionGridType.class,
