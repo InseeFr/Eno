@@ -62,7 +62,10 @@ public class LunaticConverter {
                 || enoObject instanceof CalculatedExpression)
             return new LabelType();
         else if (enoObject instanceof TableCell)
-            throw new RuntimeException("TableCell conversion not implemented."); //FIXME: (todo: annotation for conversion)
+            throw new RuntimeException(
+                    "Eno TableCell object '%s' called by basic converted method, this should not happen. " +
+                            "TableCell conversion for Lunatic is implemented in a dedicated class. " +
+                            "PLEASE REPORT THIS EXCEPTION TO ENO DEV TEAM.");
         else
             throw new RuntimeException(unimplementedMessage(enoObject));
     }
