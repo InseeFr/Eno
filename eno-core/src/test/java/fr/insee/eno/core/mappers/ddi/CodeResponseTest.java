@@ -3,7 +3,7 @@ package fr.insee.eno.core.mappers.ddi;
 import datacollection33.CodeDomainType;
 import datacollection33.GridDimensionType;
 import datacollection33.QuestionGridType;
-import fr.insee.eno.core.mappers.DDIMapper;
+import fr.insee.eno.core.mappers.MapperTestUtils;
 import fr.insee.eno.core.model.response.CodeResponse;
 import fr.insee.eno.core.reference.DDIIndex;
 import fr.insee.eno.core.utils.DDIUtils;
@@ -13,8 +13,6 @@ import logicalproduct33.CodeType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import reusable33.ContentType;
@@ -23,17 +21,19 @@ import reusable33.ParameterType;
 import reusable33.ReferenceType;
 import reusable33.impl.ContentTypeImpl;
 
-import java.beans.PropertyDescriptor;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CodeResponseTest {
 
+    MapperTestUtils utils = new MapperTestUtils();
+
     private ParameterType outParameter;
+    private CodeResponse codeResponse;
 
     @BeforeEach
     public void newParameterType() {
         outParameter = ParameterType.Factory.newInstance();
+        codeResponse = new CodeResponse();
     }
 
     @Test
@@ -42,7 +42,7 @@ public class CodeResponseTest {
         String fooLabel = "Foo label";
         //
         String outParameterId = "op-id";
-        String questionGridId = "qg-id";
+        //String questionGridId = "qg-id"; //(unnecessary)
         String codeListId = "cl-id";
         String category1Id = "c-1-id";
         //
@@ -80,14 +80,9 @@ public class CodeResponseTest {
         context.setVariable("index", ddiIndex);
         context.setVariable("listIndex", 0);
         //
-        CodeResponse codeResponse = new CodeResponse();
-        DDIMapper ddiMapper = new DDIMapper();
-        BeanWrapper beanWrapper = new BeanWrapperImpl(codeResponse);
-        PropertyDescriptor propertyDescriptor = beanWrapper.getPropertyDescriptor("label");
-        //
-        ddiMapper.propertyMapping(outParameter, codeResponse, beanWrapper, propertyDescriptor, context);
+        utils.mapProperty(outParameter, codeResponse, "label", context);
 
         //
-        assertEquals(fooLabel, codeResponse.getLabel());
+        assertEquals(fooLabel, codeResponse.getLabel().getValue());
     }
 }

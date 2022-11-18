@@ -1,6 +1,6 @@
 package fr.insee.eno.core.mappers.ddi;
 
-import fr.insee.eno.core.mappers.DDIMapper;
+import fr.insee.eno.core.mappers.MapperTestUtils;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import group33.ResourcePackageType;
 import instance33.DDIInstanceType;
@@ -8,17 +8,14 @@ import logicalproduct33.CodeListSchemeType;
 import logicalproduct33.VariableSchemeType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
-import org.springframework.expression.EvaluationContext;
-import org.springframework.expression.spel.support.StandardEvaluationContext;
 import reusable33.*;
 
-import java.beans.PropertyDescriptor;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EnoQuestionnaireTest {
+
+    MapperTestUtils utils = new MapperTestUtils();
 
     // TODO: more unit tests (one per DDI annotation in the model classes)
 
@@ -27,19 +24,12 @@ public class EnoQuestionnaireTest {
     // Note: it is also possible to read portions of DDI xml files to do unit testing of annotations
 
     private DDIInstanceType ddiInstanceType;
-
-    // TODO: move this method somewhere and make it accessible for the whole package
-    private void mapProperty(EnoQuestionnaire enoQuestionnaire, String propertyName) {
-        DDIMapper ddiMapper = new DDIMapper();
-        BeanWrapper beanWrapper = new BeanWrapperImpl(enoQuestionnaire);
-        PropertyDescriptor propertyDescriptor = beanWrapper.getPropertyDescriptor(propertyName);
-        EvaluationContext context = new StandardEvaluationContext();
-        ddiMapper.propertyMapping(ddiInstanceType, enoQuestionnaire, beanWrapper, propertyDescriptor, context);
-    }
+    private EnoQuestionnaire enoQuestionnaire;
 
     @BeforeEach
     public void newDDIInstanceType() {
         ddiInstanceType = DDIInstanceType.Factory.newInstance();
+        enoQuestionnaire = new EnoQuestionnaire();
     }
 
     @Test
@@ -51,7 +41,7 @@ public class EnoQuestionnaireTest {
         ddiInstanceType.getIDList().get(0).setStringValue(expectedId);
         // When
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-        mapProperty(enoQuestionnaire, "id");
+        utils.mapProperty(ddiInstanceType, enoQuestionnaire, "id");
         // Then
         assertEquals(expectedId, enoQuestionnaire.getId());
     }
@@ -74,8 +64,7 @@ public class EnoQuestionnaireTest {
                 .getStringArray(0)
                 .setStringValue(expectedModel);
         //
-        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-        mapProperty(enoQuestionnaire, "questionnaireModel");
+        utils.mapProperty(ddiInstanceType, enoQuestionnaire, "questionnaireModel");
         //
         assertEquals(expectedModel, enoQuestionnaire.getQuestionnaireModel());
     }
@@ -90,8 +79,7 @@ public class EnoQuestionnaireTest {
         ddiInstanceType.getCitation().getTitle().getStringList().add(StringType.Factory.newInstance());
         ddiInstanceType.getCitation().getTitle().getStringArray(0).setStringValue(expectedLabel);
         //
-        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-        mapProperty(enoQuestionnaire, "label");
+        utils.mapProperty(ddiInstanceType, enoQuestionnaire, "label");
         //
         assertEquals(expectedLabel, enoQuestionnaire.getLabel().getValue());
     }
@@ -105,8 +93,7 @@ public class EnoQuestionnaireTest {
             ddiInstanceType.getResourcePackageArray(0).getVariableSchemeList()
                     .add(VariableSchemeType.Factory.newInstance());
             //
-            EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-            mapProperty(enoQuestionnaire, "variables");
+            utils.mapProperty(ddiInstanceType, enoQuestionnaire, "variables");
         });
     }
 
@@ -119,8 +106,7 @@ public class EnoQuestionnaireTest {
             ddiInstanceType.getResourcePackageArray(0).getVariableSchemeList()
                     .add(VariableSchemeType.Factory.newInstance());
             //
-            EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-            mapProperty(enoQuestionnaire, "variableGroups");
+            utils.mapProperty(ddiInstanceType, enoQuestionnaire, "variableGroups");
         });
     }
 
