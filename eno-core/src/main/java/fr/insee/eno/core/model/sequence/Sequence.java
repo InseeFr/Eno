@@ -18,9 +18,4 @@ public class Sequence extends AbstractSequence {
             field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     private String componentType = "SEQUENCE";
 
-    @Override
-    public String toString() {
-        return "Sequence(id="+getId()+")";
-    }
-
 }
