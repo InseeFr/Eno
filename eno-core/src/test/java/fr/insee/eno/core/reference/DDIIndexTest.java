@@ -19,12 +19,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DDIIndexTest {
 
     @Test
-    public void arrayAndList() {
-        String[] foo = {"a", "b", "c"};
-        assertFalse(List.class.isAssignableFrom(foo.getClass()));
-    }
-
-    @Test
     public void indexDDITest() throws IOException, DDIParsingException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
