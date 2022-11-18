@@ -1,6 +1,7 @@
 package fr.insee.eno.core.sandbox;
 
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.Test;
@@ -78,6 +79,13 @@ public class SandboxTests {
         Here in Eno: Lunatic-Model creates array lists of size 10 and doesn't allow a setter te replace these lists.
         So adding elements in a precise position in Lunatic lists is not safe if the index might be >= 10.
          */
+    }
+
+    @Test
+    public void toStringOverride() {
+        UniqueChoiceQuestion ucq = new UniqueChoiceQuestion();
+        ucq.setId("foo");
+        assertEquals("UniqueChoiceQuestion[id=foo]", ucq.toString());
     }
 
 }

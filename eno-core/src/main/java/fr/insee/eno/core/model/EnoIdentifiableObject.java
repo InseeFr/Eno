@@ -29,4 +29,9 @@ public abstract class EnoIdentifiableObject extends EnoObject {
         enoIndex.put(id, this);
     }
 
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName()+"[id="+id+"]";
+    }
+
 }
