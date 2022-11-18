@@ -1,6 +1,7 @@
 package fr.insee.eno.core.sandbox;
 
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import lombok.Getter;
 import lombok.Setter;
@@ -83,9 +84,9 @@ public class SandboxTests {
 
     @Test
     public void toStringOverride() {
-        UniqueChoiceQuestion ucq = new UniqueChoiceQuestion();
-        ucq.setId("foo");
-        assertEquals("UniqueChoiceQuestion[id=foo]", ucq.toString());
+        Filter filter = new Filter();
+        filter.setId("foo");
+        assertEquals("Filter[id=foo]", filter.toString());
     }
 
 }

@@ -84,7 +84,7 @@ public class LunaticConverter {
             return new Datepicker();
         else if (enoQuestion instanceof UniqueChoiceQuestion) {
             if (((UniqueChoiceQuestion) enoQuestion).getDisplayFormat() == null) {
-                throw new RuntimeException("Display format has not been set in Eno question " + enoQuestion); //TODO: toString() for UniqueChoiceQuestion (and others...)
+                throw new RuntimeException("Display format has not been set in Eno question " + enoQuestion);
             }
             return switch (((UniqueChoiceQuestion) enoQuestion).getDisplayFormat()) {
                 case RADIO -> new Radio();
