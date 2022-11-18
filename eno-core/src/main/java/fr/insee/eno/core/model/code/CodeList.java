@@ -54,13 +54,17 @@ public class CodeList extends EnoIdentifiableObject {
         /** "Horizontal" size onf the code item.
          * In Lunatic "colspan" is set only if it is > 1. */
         @Lunatic(contextType = BodyLine.class,
-                field = "setColspan(#param > 1 ? T(java.math.BigInteger).valueOf(#param) : null)")
+                field = "#this instanceof T(fr.insee.lunatic.model.flat.BodyType) ? " +
+                        "setColspan(#param > 1 ? T(java.math.BigInteger).valueOf(#param) : null) :" +
+                        "null")
         int hSize;
 
         /** "Vertical" size onf the code item.
          * In Lunatic "rowspan" is set only if it is > 1. */
         @Lunatic(contextType = BodyLine.class,
-                field = "setRowspan(#param > 1 ? T(java.math.BigInteger).valueOf(#param) : null)")
+                field = "#this instanceof T(fr.insee.lunatic.model.flat.BodyType) ? " +
+                        "setRowspan(#param > 1 ? T(java.math.BigInteger).valueOf(#param) : null) :" +
+                        "null")
         int vSize;
 
         /** Return the number of sub-codes in the code item. */

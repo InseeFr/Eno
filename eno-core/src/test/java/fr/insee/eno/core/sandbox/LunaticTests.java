@@ -1,16 +1,18 @@
 package fr.insee.eno.core.sandbox;
 
-import fr.insee.eno.core.writers.LunaticWriter;
+import fr.insee.eno.core.output.LunaticWriter;
 import fr.insee.lunatic.conversion.JSONDeserializer;
-import fr.insee.lunatic.conversion.JSONSerializer;
+import fr.insee.lunatic.conversion.XMLLunaticFlatToJSONLunaticFlatTranslator;
+import fr.insee.lunatic.conversion.XMLLunaticToXMLLunaticFlatTranslator;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.Test;
 
 import javax.xml.bind.JAXBException;
+import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -175,6 +177,17 @@ public class LunaticTests {
         Questionnaire questionnaire = jsonDeserializer.deserialize(filePath);
         //
         assertNotNull(questionnaire);
+    }
+
+    @Test
+    public void flattenPairwise() throws Exception {
+
+        XMLLunaticToXMLLunaticFlatTranslator translator = new XMLLunaticToXMLLunaticFlatTranslator();
+        String lunaticXmlFlat = translator.generate(this.getClass().getClassLoader()
+                .getResourceAsStream("pairwise/form-lunatic-xml-household-links.xml"));
+        XMLLunaticFlatToJSONLunaticFlatTranslator translator2 = new XMLLunaticFlatToJSONLunaticFlatTranslator();
+        String result = translator2.translate(lunaticXmlFlat);
+        Files.writeString(Path.of("src/test/resources/pairwise/form-lunatic-xml-household-links.json"), result);
     }
 
 }

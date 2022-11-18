@@ -27,9 +27,9 @@ public class Variable extends EnoObject implements EnoObjectWithExpression {
     @DDI(contextType = VariableType.class,
             field = "getSourceParameterReference() != null ? " +
                     "getSourceParameterReference().getIDArray(0).getStringValue() : " +
-                    "getVariableRepresentation().getProcessingInstructionReference().getBindingArray(0)" +
-                    ".getSourceParameterReference().getIDArray(0).getStringValue()")
-    private String reference;
+                    "getVariableRepresentation()?.getProcessingInstructionReference()?.getBindingArray(0)" +
+                    "?.getSourceParameterReference()?.getIDArray(0)?.getStringValue()")
+    private String reference; // TODO: is it possible to have none of both cases? (see pairwise DDI with variable 'l0v32sjd': mistake or actual case?)
 
     /** Variable name. */
     @DDI(contextType = VariableType.class,

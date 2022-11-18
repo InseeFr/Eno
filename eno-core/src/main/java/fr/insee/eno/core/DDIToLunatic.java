@@ -11,19 +11,15 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.processing.EnoProcessing;
 import fr.insee.eno.core.processing.LunaticProcessing;
-import fr.insee.lunatic.conversion.JSONSerializer;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import instance33.DDIInstanceDocument;
-import instance33.DDIInstanceType;
-import org.apache.xmlbeans.XmlException;
 
-import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.io.InputStream;
 
 public class DDIToLunatic {
 
-    public String transform(InputStream ddiInputStream, EnoParameters enoParameters)
+    public static String transform(InputStream ddiInputStream, EnoParameters enoParameters)
             throws IOException, DDIParsingException, LunaticSerializationException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(ddiInputStream);
@@ -44,4 +40,5 @@ public class DDIToLunatic {
         //
         return LunaticSerializer.serializeToJson(lunaticQuestionnaire);
     }
+
 }

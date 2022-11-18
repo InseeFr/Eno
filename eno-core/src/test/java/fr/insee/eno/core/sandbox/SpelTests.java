@@ -6,10 +6,12 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.reference.DDIIndex;
+import fr.insee.lunatic.model.flat.PairwiseLinks;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import org.junit.jupiter.api.Test;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
+import org.springframework.expression.spel.standard.SpelExpression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
@@ -136,6 +138,22 @@ public class SpelTests {
         assertNotNull(ddiVariable);
         assertEquals("COCHECASE",
                 ddiVariable.getVariableNameArray(0).getStringArray(0).getStringValue());
+    }
+
+    @Test
+    public void useStaticMethodInLunaticMapper() {
+        //
+        PairwiseLinks lunaticPairwiseLinks = new PairwiseLinks();
+        String fooString = "FOO";
+        //
+        Expression expression = new SpelExpressionParser().parseExpression(
+                "T(fr.insee.eno.core.model.question.PairwiseQuestion).computeLunaticAxes(#this, #param)");
+        EvaluationContext context = new StandardEvaluationContext();
+        context.setVariable("param", fooString);
+        expression.getValue(context, lunaticPairwiseLinks);
+        //
+        assertEquals("count(FOO)", lunaticPairwiseLinks.getXAxisIterations().getValue());
+        assertEquals("VTL", lunaticPairwiseLinks.getXAxisIterations().getType());
     }
 
 }
