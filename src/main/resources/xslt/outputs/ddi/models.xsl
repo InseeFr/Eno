@@ -1609,6 +1609,12 @@
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+            <xsl:if test="self::QuestionPairwise">
+                <r:UserAttributePair>
+                    <r:AttributeKey>UIComponent</r:AttributeKey>
+                    <r:AttributeValue>HouseholdPairing</r:AttributeValue>
+                </r:UserAttributePair>
+            </xsl:if>
             <!-- QuestionName part -->
             <xsl:element name="{$ddi-question-name-element}">
                <r:String xml:lang="{enoddi33:get-lang($source-context)}">

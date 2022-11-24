@@ -3295,7 +3295,7 @@
       <text:p>enoddi:get-pairwise-scope</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>r:Binding[r:TargetParameterReference/r:TypeOfObject=&apos;InParameter&apos;]/r:SourceParameterReference/r:ID</text:p>
+      <text:p>r:Binding/r:TargetParameterReference[r:TypeOfObject=&apos;InParameter&apos;]/r:ID</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
