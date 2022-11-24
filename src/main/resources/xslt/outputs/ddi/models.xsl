@@ -1388,7 +1388,7 @@
         </d:QuestionConstruct>
     </xsl:template>
 
-    <xsl:template match="driver-QuestionScheme//QuestionSingleChoice//ResponseDomain || driver-QuestionScheme//QuestionPairwise//ResponseDomain" mode="model" priority="1">
+    <xsl:template match="driver-QuestionScheme//ResponseDomain[ancestor::QuestionSingleChoice or ancestor::QuestionPairwise]" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="mandatory" select="enoddi33:get-ci-type($source-context)"/>
@@ -1544,7 +1544,7 @@
     </xsl:template>
 
     <!-- This template is only matched when call just after driver-ResponseDomain (why it got 3 priority), to check if SMR is needed. -->
-    <xsl:template match="driver-ResponseDomain/QuestionSimple | driver-ResponseDomain/QuestionSingleChoice" mode="model" priority="3">
+    <xsl:template match="driver-ResponseDomain/QuestionSimple | driver-ResponseDomain/QuestionSingleChoice | driver-ResponseDomain/QuestionPairwise" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -1615,14 +1615,14 @@
                    <xsl:value-of select="enoddi33:get-name($source-context)"/>
                </r:String>
             </xsl:element>
-            <!-- InParamter part -->
+            <!-- InParameter part -->
             <xsl:if test="self::QuestionPairwise">
                 <r:InParameter isArray="false">
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                     <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/>-IP-1</r:ID>
                     <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                     <r:ParameterName>
-                        <r:String xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="enoddi33:get-pairwise-scope($source-context)"/></r:String>
+                        <r:String xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="enoddi33:get-name(enoddi33:get-pairwise-scope($source-context))"/></r:String>
                     </r:ParameterName>
                 </r:InParameter>
             </xsl:if>
