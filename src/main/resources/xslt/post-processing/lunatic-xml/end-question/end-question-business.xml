@@ -3,13 +3,18 @@
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <components xsi:type="Sequence" componentType="Sequence" id="TIME-COMMENT-SEQ">
-        <label>"Temps de réponse et commentaires"</label>
+        <label>
+            <value>"Temps de réponse et commentaires"</value>
+            <type>VTL|MD</type></label>
         <conditionFilter>
             <value>true</value>
+            <type>VTL</type>
         </conditionFilter>
         <hierarchy>
             <sequence id="TIME-COMMENT-SEQ">
-                <label>"Temps de réponse et commentaires"</label>
+                <label>
+                    <value>"Temps de réponse et commentaires"</value>
+                    <type>VTL|MD</type></label>
             </sequence>
         </hierarchy>
         <components xsi:type="InputNumber"
@@ -19,14 +24,20 @@
                     min="0"
                     max="99"
                     decimals="0">
-            <label>"Combien de temps avez-vous mis en tout pour répondre à cette enquête (recherche des données + remplissage du questionnaire) ?"</label>
+            <label>
+                <value>"Combien de temps avez-vous mis en tout pour répondre à cette enquête (recherche des données + remplissage du questionnaire) ?"</value>
+                <type>VTL|MD</type></label>
             <unit>heures</unit>
             <conditionFilter>
                 <value>true</value>
+                <type>VTL</type>
             </conditionFilter>
             <hierarchy>
                 <sequence id="TIME-COMMENT-SEQ">
-                    <label>"Temps de réponse et commentaires"</label>
+                    <label>
+                        <value>"Temps de réponse et commentaires"</value>
+                        <type>VTL|MD</type>
+                    </label>
                 </sequence>
             </hierarchy>
             <bindingDependencies>HEURE_REMPL</bindingDependencies>
@@ -50,14 +61,21 @@
                     min="0"
                     max="59"
                     decimals="0">
-            <label></label>
+            <label>
+                <value></value>
+                <type>VTL|MD</type>
+            </label>
             <unit>minutes</unit>
             <conditionFilter>
                 <value>true</value>
+                <type>VTL</type>
             </conditionFilter>
             <hierarchy>
                 <sequence id="TIME-COMMENT-SEQ">
-                    <label>"Temps de réponse et commentaires"</label>
+                    <label>
+                        <value>"Temps de réponse et commentaires"</value>
+                        <type>VTL|MD</type>
+                    </label>
                 </sequence>
             </hierarchy>
             <bindingDependencies>MIN_REMPL</bindingDependencies>
@@ -79,13 +97,20 @@
                     id="COMMENT-QUESTION"
                     maxLength="2000"
                     mandatory="false">
-            <label>"Commentaires et remarques éventuelles concernant l’enquête :"</label>
+            <label>
+                <value>"Commentaires et remarques éventuelles concernant l’enquête :"</value>
+                <type>VTL|MD</type>
+            </label>
             <conditionFilter>
                 <value>true</value>
+                <type>VTL</type>
             </conditionFilter>
             <hierarchy>
                 <sequence id="TIME-COMMENT-SEQ">
-                    <label>"Temps de réponse et commentaires"</label>
+                    <label>
+                        <value>"Temps de réponse et commentaires"</value>
+                        <type>VTL|MD</type>
+                    </label>
                 </sequence>
             </hierarchy>
             <bindingDependencies>COMMENT_QE</bindingDependencies>
@@ -105,13 +130,20 @@
     </components>
 
     <components xsi:type="Sequence" componentType="Sequence" id="COMMENT-SEQ">
-        <label>"Commentaire"</label>
+        <label>
+            <value>"Commentaire"</value>
+            <type>VTL|MD</type>
+        </label>
         <conditionFilter>
             <value>true</value>
+            <type>VTL</type>
         </conditionFilter>
         <hierarchy>
             <sequence id="COMMENT-SEQ">
-                <label>"Commentaire"</label>
+                <label>
+                    <value>"Commentaire"</value>
+                    <type>VTL|MD</type>
+                </label>
             </sequence>
         </hierarchy>
         <components xsi:type="Textarea"
@@ -119,11 +151,20 @@
                     id="COMMENT-QUESTION"
                     maxLength="2000"
                     mandatory="false">
-            <label>"Commentaires et remarques éventuelles concernant l’enquête :"</label>
-            <conditionFilter>"normal"</conditionFilter>
+            <label>
+                <value>"Commentaires et remarques éventuelles concernant l’enquête :"</value>
+                <type>VTL|MD</type>
+            </label>
+            <conditionFilter>
+                <value>true</value>
+                <type>VTL</type>
+            </conditionFilter>
             <hierarchy>
                 <sequence id="COMMENT-SEQ">
-                    <label>"Commentaire"</label>
+                    <label>
+                        <value>"Commentaire"</value>
+                        <type>VTL|MD</type>
+                    </label>
                 </sequence>
             </hierarchy>            
             <bindingDependencies>COMMENT_QE</bindingDependencies>
@@ -143,13 +184,20 @@
     </components>
 
     <components xsi:type="Sequence" componentType="Sequence" id="TIME-SEQ">
-        <label>"Temps de réponse"</label>
+        <label>
+            <value>"Temps de réponse"</value>
+            <type>VTL|MD</type>
+        </label>
         <conditionFilter>
             <value>true</value>
+            <type>VTL</type>
         </conditionFilter>
         <hierarchy>
             <sequence id="TIME-SEQ">
-                <label>"Temps de réponse"</label>
+                <label>
+                    <value>"Temps de réponse"</value>
+                    <type>VTL|MD</type>
+                </label>
             </sequence>
         </hierarchy>
         <components xsi:type="InputNumber"
@@ -159,14 +207,20 @@
                     min="0"
                     max="99"
                     decimals="0">
-            <label>"Combien de temps avez-vous mis en tout pour répondre à cette enquête (recherche des données + remplissage du questionnaire) ?"</label>
+            <label>
+                <value>"Combien de temps avez-vous mis en tout pour répondre à cette enquête (recherche des données + remplissage du questionnaire) ?"</value>
+                <type>VTL|MD</type></label>
             <unit>heures</unit>
             <conditionFilter>
                 <value>true</value>
+                <type>VTL</type>
             </conditionFilter>
             <hierarchy>
                 <sequence id="TIME-SEQ">
-                    <label>"Temps de réponse"</label>
+                    <label>
+                        <value>"Temps de réponse"</value>
+                        <type>VTL|MD</type>
+                    </label>
                 </sequence>
             </hierarchy>
             <bindingDependencies>HEURE_REMPL</bindingDependencies>
@@ -190,14 +244,21 @@
                     min="0"
                     max="59"
                     decimals="0">
-            <label></label>
+            <label>
+                <value></value>
+                <type>VTL|MD</type>
+            </label>
             <unit>minutes</unit>
             <conditionFilter>
                 <value>true</value>
+                <type>VTL</type>
             </conditionFilter>
             <hierarchy>
                 <sequence id="TIME-SEQ">
-                    <label>"Temps de réponse"</label>
+                    <label>
+                        <value>"Temps de réponse"</value>
+                        <type>VTL|MD</type>
+                    </label>
                 </sequence>
             </hierarchy>
             <bindingDependencies>MIN_REMPL</bindingDependencies>
