@@ -1,8 +1,8 @@
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
-    id 'org.springframework.boot' version '3.0.0-RC1' apply false
-    id 'java'
+    id 'org.springframework.boot'
+    id 'java-library'
     id 'maven-publish'
 }
 
@@ -12,6 +12,7 @@ description = 'eno-core'
 To manage dependencies with the help of spring boot dependencies BOM
 with Gradle, two solutions are possible :
 refer to https://docs.spring.io/spring-boot/docs/2.7.3/gradle-plugin/reference/htmlsingle
+https://docs.spring.io/spring-boot/docs/3.0.0-RC1/gradle-plugin/reference/htmlsingle/
  */
 
 dependencies {
@@ -19,12 +20,7 @@ dependencies {
     implementation enforcedPlatform(SpringBootPlugin.BOM_COORDINATES)
 
     // DDI
-    implementation (project(':ddi-beans')) {
-        transitive = false
-    }
-    implementation ('org.apache.xmlbeans:xmlbeans:5.0.3') {
-        //exclude group: 'org.apache.logging.log4j', module: 'log4j-api'
-    }
+    implementation project(':ddi-beans')
     // Lunatic
     implementation 'fr.insee.lunatic:lunatic-model:'+project.properties['version.lunatic-model']
     // Pogues
@@ -47,7 +43,7 @@ dependencies {
     // Mockito
     testImplementation "org.mockito:mockito-core"
 
-    // Lombok https://projectlombok.org/setup/gradle // TODO: version could be managed with spring dependencies(?)
+    // Lombok // https://projectlombok.org/setup/gradle
     String lombokVersion = '1.18.24'
     compileOnly 'org.projectlombok:lombok:'+lombokVersion
     annotationProcessor 'org.projectlombok:lombok:'+lombokVersion

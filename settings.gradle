@@ -7,8 +7,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'demo'
-
 dependencyResolutionManagement {
     repositories {
 	    maven{
@@ -19,5 +17,5 @@ dependencyResolutionManagement {
 
 rootProject.name = 'eno'  
 
-include(':eno-core')
-include(':ddi-beans')
+include 'eno-core'
+include 'ddi-beans'

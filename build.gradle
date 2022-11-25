@@ -1,10 +1,14 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.0-RC1' apply false
+}
+
 allprojects {
     group = 'fr.insee.eno'
     version = project.properties['version.eno']
 }
 
-subprojects{
-    apply plugin: 'java'
+subprojects {
     compileJava {
         options.release = 17
     }
