@@ -276,7 +276,7 @@
 	</xsl:template>
 
 	<xd:doc>
-		<xd:desc>SingleResponseQuestion driver does not create a component : it is created by its response</xd:desc>
+		<xd:desc>SingleResponseQuestion and MultipleQuestion drivers do not create a component : it is created by its response</xd:desc>
 	</xd:doc>
 	<xsl:template match="SingleResponseQuestion | MultipleQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -294,7 +294,7 @@
 			<xsl:for-each select="$labelDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
-			<xsl:if test="$shouldHaveMissingVars and $missingVar">				
+			<xsl:if test="$shouldHaveMissingVars and $missingVar">	
 				<xsl:value-of select="$missingResponseName"/>
 			</xsl:if>
 		</xsl:variable>
@@ -313,6 +313,150 @@
 			<xsl:with-param name="dependencies" select="$dependencies" tunnel="yes"/>
 		</xsl:apply-templates>
 
+		<xsl:apply-templates select="enolunatic:get-end-question-instructions($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
+	
+	<xd:doc>
+		<xd:desc>PairwiseQuestion driver creates a component which is likely a loop of loop, with the same axises : for example, the link between people of the same household</xd:desc>
+	</xd:doc>
+	<xsl:template match="PairwiseQuestion" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="sequenceParent" tunnel="yes"/>
+		<xsl:param name="subSequenceParent" tunnel="yes"/>
+		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
+		<xsl:param name="idLoop" select="''" tunnel="yes"/>
+		
+		<xsl:variable name="mandatory" select="enolunatic:is-required($source-context)" as="xs:boolean"/>
+		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
+		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
+		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
+		<xsl:variable name="idQuestion" select="enolunatic:get-name($source-context)"/>
+		<xsl:variable name="questionName" select="enolunatic:get-question-name($source-context,$languages[1])"/>
+		<xsl:variable name="missingResponseName" select="concat($questionName,'_MISSING')"/>
+		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context, $filter)"/>
+		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
+		<xsl:variable name="pairwiseScope" select="enolunatic:get-variable-business-name(enolunatic:get-pairwise-scope($source-context))"/>
+		<xsl:variable name="dependenciesVariables" as="xs:string*">
+			<xsl:for-each select="$labelDependencies">
+				<xsl:sequence select="."/>
+			</xsl:for-each>
+		</xsl:variable>
+		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
+		
+		<components xsi:type="PairwiseLinks" componentType="PairwiseLinks" id="{$idQuestion}" mandatory="{$mandatory}">
+			<xsl:copy-of select="enolunatic:add-condition-filter($filterCondition,$filterDependencies)"/>
+			<hierarchy>
+				<xsl:copy-of select="$sequenceParent"/>
+				<xsl:copy-of select="$subSequenceParent"/>
+			</hierarchy>
+			<xAxisIterations>
+				<value>count(<xsl:value-of select="$pairwiseScope"/>)</value>
+				<type>VTL|MD</type>
+			</xAxisIterations>
+			<yAxisIterations>
+				<value>count(<xsl:value-of select="$pairwiseScope"/>)</value>
+				<type>VTL|MD</type>
+			</yAxisIterations>
+			<symLinks>
+				<LINKS>
+					<LINK>
+						<source>1</source>
+						<target>1</target>
+					</LINK>
+					<LINK>
+						<source>2</source>
+						<target>3</target>
+					</LINK>
+					<LINK>
+						<source>3</source>
+						<target>2</target>
+					</LINK>
+					<LINK>
+						<source>4</source>
+						<target>4</target>
+					</LINK>
+					<LINK>
+						<source>5</source>
+						<target>6</target>
+					</LINK>
+					<LINK>
+						<source>6</source>
+						<target>5</target>
+					</LINK>
+					<LINK>
+						<source>7</source>
+						<target>8</target>
+					</LINK>
+					<LINK>
+						<source>8</source>
+						<target>7</target>
+					</LINK>
+					<LINK>
+						<source>9</source>
+						<target>9</target>
+					</LINK>
+					<LINK>
+						<source>10</source>
+						<target>12</target>
+					</LINK>
+					<LINK>
+						<source>11</source>
+						<target>13</target>
+					</LINK>
+					<LINK>
+						<source>12</source>
+						<target>10</target>
+					</LINK>
+					<LINK>
+						<source>13</source>
+						<target>11</target>
+					</LINK>
+					<LINK>
+						<source>14</source>
+						<target>null</target>
+					</LINK>
+					<LINK>
+						<source>15</source>
+						<target>null</target>
+					</LINK>
+					<LINK>
+						<source>16</source>
+						<target>16</target>
+					</LINK>
+					<LINK>
+						<source>17</source>
+						<target>null</target>
+					</LINK>
+				</LINKS>
+			</symLinks>
+			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<xsl:with-param name="driver" select="." tunnel="yes"/>
+				<xsl:with-param name="idQuestion" select="concat($idQuestion,'-pairwise-dropdown')" tunnel="yes"/>
+				<xsl:with-param name="questionName" select="$questionName" tunnel="yes"/>
+				<xsl:with-param name="missingResponseName" select="$missingResponseName" tunnel="yes"/>
+				<xsl:with-param name="labelQuestion" select="enolunatic:replace-all-variables-with-business-name($source-context, $label)" tunnel="yes"/>
+				<xsl:with-param name="typeOfQuestion" select="'Dropdown'" tunnel="yes"/>
+				<xsl:with-param name="declarations" select="enolunatic:getInstructionForQuestion($source-context,.)" as="node()*" tunnel="yes"/>
+				<xsl:with-param name="filterCondition" select="$filterCondition" tunnel="yes"/>
+				<xsl:with-param name="filterConditionDependencies" select="$filterDependencies" as="xs:string*" tunnel="yes"/>
+				<xsl:with-param name="dependencies" select="$dependencies" tunnel="yes"/>
+			</xsl:apply-templates>
+		</components>
+		<xsl:for-each select="('xAxis','yAxis')">
+			<variables variableType="CALCULATED" xsi:type="VariableType">
+				<name><xsl:value-of select="."/></name>
+				<expression>
+					<value><xsl:value-of select="$pairwiseScope"/></value>
+					<type>VTL</type>
+				</expression>
+				<bindingDependencies><xsl:value-of select="$pairwiseScope"/></bindingDependencies>
+				<shapeFrom><xsl:value-of select="$pairwiseScope"/></shapeFrom>
+				<inFilter>true</inFilter>
+			</variables>
+		</xsl:for-each>
 		<xsl:apply-templates select="enolunatic:get-end-question-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
@@ -659,7 +803,7 @@
 			<xd:p>The Response drivers in SingleResponseQuestion and MultipleQuestion create a component, which type depends on the Response driver.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="*[name(.) =('SingleResponseQuestion','MultipleQuestion')]//*[name(.) =('NumericDomain','TextDomain','TextareaDomain','DateTimeDomain','CodeDomain','BooleanDomain')]" mode="model" priority="1">
+	<xsl:template match="*[name(.) =('SingleResponseQuestion','MultipleQuestion','PairwiseQuestion')]//*[name(.) =('NumericDomain','TextDomain','TextareaDomain','DateTimeDomain','CodeDomain','BooleanDomain')]" mode="model" priority="1">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="idQuestion" tunnel="yes"/>
 		<xsl:param name="questionName" tunnel="yes"/>
@@ -721,11 +865,12 @@
 
 				<xsl:copy-of select="$declarations"/>
 				<xsl:copy-of select="enolunatic:add-condition-filter($filterCondition,$filterConditionDependencies)"/>
-				<hierarchy>
-					<xsl:copy-of select="$sequenceParent"/>
-					<xsl:copy-of select="$subSequenceParent"/>
-				</hierarchy>
-				
+				<xsl:if test="not(ancestor::PairwiseQuestion)">
+					<hierarchy>
+						<xsl:copy-of select="$sequenceParent"/>
+						<xsl:copy-of select="$subSequenceParent"/>
+					</hierarchy>
+				</xsl:if>
 				<xsl:copy-of select="$dependencies"/>
 				<xsl:call-template name="enolunatic:add-response-dependencies">
 					<xsl:with-param name="responseName" select="$responseName"/>
