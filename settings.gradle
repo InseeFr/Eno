@@ -1,21 +1,30 @@
 pluginManagement {
     repositories {
-        //maven {url System.properties['urlMavenRepo']}
         gradlePluginPortal()
         mavenCentral()
     }
 }
 
 dependencyResolutionManagement {
+
     repositories {
-	    //maven{url System.properties['urlMavenRepo']}
-        mavenLocal()
-        //maven { url 'https://nexus.insee.fr/repository/maven-releases' } //TODO: externalize this
         mavenCentral()
+        //maven{ url System.properties['urlMavenRepo'] }
+        maven { url 'https://nexus.insee.fr/repository/maven-releases' } //TODO: externalize this
+        mavenLocal()
     }
+
+    versionCatalogs {
+        libs {
+            library('lunaticModel', 'fr.insee.lunatic:lunatic-model:2.3.2-rc2')
+            library('poguesModel', 'fr.insee.pogues:pogues-model:1.0.3')
+        }
+    }
+
 }
 
 rootProject.name = 'eno'  
 
-include 'eno-core'
 include 'ddi-beans'
+include 'eno-core'
+include 'eno-ws'

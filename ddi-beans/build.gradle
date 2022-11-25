@@ -1,14 +1,20 @@
-import org.springframework.boot.gradle.plugin.SpringBootPlugin
-
 plugins {
     id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
     id 'java-library'
+}
+
+// https://stackoverflow.com/a/61671513/13425151
+bootJar {
+    enabled = false
+}
+jar {
+    enabled = true
 }
 
 description = 'ddi-beans'
 
 dependencies {
-    implementation enforcedPlatform(SpringBootPlugin.BOM_COORDINATES)
     api 'org.apache.xmlbeans:xmlbeans:5.0.3'
     implementation 'org.apache.logging.log4j:log4j-core'
 }

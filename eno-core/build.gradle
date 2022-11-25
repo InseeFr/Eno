@@ -1,31 +1,29 @@
-import org.springframework.boot.gradle.plugin.SpringBootPlugin
-
 plugins {
     id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
     id 'java-library'
     id 'maven-publish'
 }
 
+// https://stackoverflow.com/a/61671513/13425151
+bootJar {
+    enabled = false
+}
+jar {
+    enabled = true
+}
+
 description = 'eno-core'
 
-/*
-To manage dependencies with the help of spring boot dependencies BOM
-with Gradle, two solutions are possible :
-refer to https://docs.spring.io/spring-boot/docs/2.7.3/gradle-plugin/reference/htmlsingle
-https://docs.spring.io/spring-boot/docs/3.0.0-RC1/gradle-plugin/reference/htmlsingle/
- */
-
 dependencies {
-
-    implementation enforcedPlatform(SpringBootPlugin.BOM_COORDINATES)
-
     // DDI
     implementation project(':ddi-beans')
     // Lunatic
-    implementation 'fr.insee.lunatic:lunatic-model:'+project.properties['version.lunatic-model']
+    implementation libs.poguesModel
     // Pogues
-    implementation 'fr.insee.pogues:pogues-model:'+project.properties['version.pogues-model']
+    implementation libs.lunaticModel
 
+    // Spring
     implementation 'org.springframework:spring-core'
     implementation 'org.springframework:spring-beans'
     implementation 'org.springframework:spring-expression'
@@ -36,19 +34,16 @@ dependencies {
     // Logging
     implementation 'org.slf4j:slf4j-api'
 
-    // Testing
+    // Logback logging implementation for testing
     testRuntimeOnly 'ch.qos.logback:logback-classic'
-    // Use JUnit Jupiter for testing.
+    // JUnit Jupiter
     testImplementation 'org.junit.jupiter:junit-jupiter'
     // Mockito
-    testImplementation "org.mockito:mockito-core"
+    testImplementation 'org.mockito:mockito-core'
 
-    // Lombok // https://projectlombok.org/setup/gradle
-    String lombokVersion = '1.18.24'
-    compileOnly 'org.projectlombok:lombok:'+lombokVersion
-    annotationProcessor 'org.projectlombok:lombok:'+lombokVersion
-    testCompileOnly 'org.projectlombok:lombok:'+lombokVersion
-    testAnnotationProcessor 'org.projectlombok:lombok:'+lombokVersion
+    // Lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 }
 
 configurations.all {
