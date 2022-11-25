@@ -122,7 +122,7 @@ public class SpelTests {
         assertEquals(expected, result);
     }
 
-    @Test
+    //@Test
     public void getDDIIndexUsingSpel() throws IOException, DDIParsingException {
         //
         DDIIndex ddiIndex = new DDIIndex();

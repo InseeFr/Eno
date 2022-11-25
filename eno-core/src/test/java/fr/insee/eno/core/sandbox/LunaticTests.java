@@ -165,7 +165,7 @@ public class LunaticTests {
                 Path.of("src/test/resources/out/lunatic/TICTable.json"));
     }
 
-    @Test
+    //@Test
     public void deserializeQuestionnaire() throws JAXBException {
         //
         JSONDeserializer jsonDeserializer = new JSONDeserializer();
