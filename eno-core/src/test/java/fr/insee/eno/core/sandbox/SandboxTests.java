@@ -88,4 +88,12 @@ public class SandboxTests {
         assertEquals("Filter[id=foo]", filter.toString());
     }
 
+    private double d1;
+    private Double d2;
+    @Test
+    public void doubleDefaultValue() {
+        assertEquals(0d, d1);
+        assertNull(d2);
+    }
+
 }

@@ -16,8 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LunaticTests {
 
@@ -188,6 +187,14 @@ public class LunaticTests {
         XMLLunaticFlatToJSONLunaticFlatTranslator translator2 = new XMLLunaticFlatToJSONLunaticFlatTranslator();
         String result = translator2.translate(lunaticXmlFlat);
         Files.writeString(Path.of("src/test/resources/pairwise/form-lunatic-xml-household-links.json"), result);
+    }
+
+    @Test
+    public void nullValueOnDoubleAttribute() {
+        Double d = null;
+        BodyLine bodyLine = new BodyLine();
+        bodyLine.setMax(d);
+        assertNull(bodyLine.getMax());
     }
 
 }
