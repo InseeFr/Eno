@@ -3,6 +3,13 @@ plugins {
     id 'org.springframework.boot' version '3.0.0' apply false
 }
 
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://nexus.insee.fr/repository/maven-releases' } //TODO: externalize this
+    mavenLocal() // temp config since Eno library is not published
+}
+
 allprojects {
     group = 'fr.insee.eno'
     version = project.properties['version.eno']
