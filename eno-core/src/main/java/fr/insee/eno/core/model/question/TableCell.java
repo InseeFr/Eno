@@ -5,8 +5,8 @@ import datacollection33.QuestionItemType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.EnoObject;
+import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.lunatic.model.flat.BodyLine;
 import fr.insee.lunatic.model.flat.Datepicker;
 import lombok.Getter;
@@ -53,13 +53,13 @@ public abstract class TableCell extends EnoObject {
                 field = "getResponseDomain()?.getNumberRangeList()?.get(0)?.getLow()?.getStringValue() != null ? " +
                         "T(java.lang.Double).valueOf(getResponseDomain().getNumberRangeArray(0).getLow().getStringValue()) : null")
         @Lunatic(contextType = BodyLine.class, field = "setMin(#param)")
-        double minValue;
+        Double minValue;
 
         @DDI(contextType = QuestionItemType.class,
-                field = "getResponseDomain()?.getNumberRangeList()?.get(0)?.getLow()?.getStringValue() != null ? " +
-                        "T(java.lang.Double).valueOf(getResponseDomain().getNumberRangeArray(0).getLow().getStringValue()) : null")
+                field = "getResponseDomain()?.getNumberRangeList()?.get(0)?.getHigh()?.getStringValue() != null ? " +
+                        "T(java.lang.Double).valueOf(getResponseDomain().getNumberRangeArray(0).getHigh().getStringValue()) : null")
         @Lunatic(contextType = BodyLine.class, field = "setMax(#param)")
-        double maxValue;
+        Double maxValue;
 
         @DDI(contextType = QuestionItemType.class,
                 field = "getResponseDomain()?.getDecimalPositions() ?: T(java.math.BigInteger).valueOf('0')")

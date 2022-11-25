@@ -17,13 +17,13 @@ public class NumericQuestion extends SingleResponseQuestion {
             field = "getResponseDomain()?.getNumberRangeList()?.get(0)?.getLow()?.getStringValue() != null ? " +
                     "T(java.lang.Double).valueOf(getResponseDomain().getNumberRangeArray(0).getLow().getStringValue()) : null")
     @Lunatic(contextType = InputNumber.class, field = "setMin(#param)")
-    double minValue;
+    Double minValue;
 
     @DDI(contextType = QuestionItemType.class,
             field = "getResponseDomain()?.getNumberRangeList()?.get(0)?.getHigh()?.getStringValue() != null ? " +
                     "T(java.lang.Double).valueOf(getResponseDomain().getNumberRangeArray(0).getHigh().getStringValue()) : null")
     @Lunatic(contextType = InputNumber.class, field = "setMax(#param)")
-    double maxValue;
+    Double maxValue;
 
     @DDI(contextType = QuestionItemType.class,
             field = "getResponseDomain()?.getDecimalPositions() ?: T(java.math.BigInteger).valueOf('0')")
