@@ -69,7 +69,7 @@ public class LunaticTableConverter {
         // In what follows, it is not assumed that table cells are ordered in a certain way in the eno model
         // Each cell is inserted in the right place using its row number & column number
         int firstContentLine = 0; // Fixed at 0 since nested code lists are not allowed in header
-        int firstContentColumn = enoTable.getLeftColumn().getMaxLevel() + 1;
+        int firstContentColumn = enoTable.getLeftColumn().getMaxLevel();
         for (int k=0; k<enoTable.getTableCells().size(); k++) {
             TableCell enoCell = enoTable.getTableCells().get(k);
             String variableName = enoTable.getVariableNames().get(k);
