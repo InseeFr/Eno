@@ -2,9 +2,6 @@ package fr.insee.eno.core.sandbox;
 
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.model.navigation.Filter;
-import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
-import lombok.Getter;
-import lombok.Setter;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
@@ -19,17 +16,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class SandboxTests {
 
-    @Getter
-    @Setter
     public static abstract class FooAbstract {
         @DDI(contextType = AbstractIdentifiableType.class, field = "hello")
         int a;
+        public void setA(int a) {
+            this.a = a;
+        }
     }
 
-    @Getter
-    @Setter
-    public class FooChild extends FooAbstract {
+    public static class FooChild extends FooAbstract {
         int c;
+        public void setC(int c) {
+            this.c = c;
+        }
     }
 
     @Test
