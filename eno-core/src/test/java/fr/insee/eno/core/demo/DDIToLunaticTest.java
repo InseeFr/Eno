@@ -30,14 +30,14 @@ import java.util.List;
 
 public class DDIToLunaticTest {
 
-    /*@ParameterizedTest
+    @ParameterizedTest
     @ValueSource(strings = {
             //"l10xmg2l",
             //"sandbox",
             "l20g2ba7",
             "sandbox_v2",
             "DDI-tableau-2-colonnes",
-    })*/
+    })
     public void writeJsonLunaticFromDDI(String fileName)
             throws IOException, DDIParsingException, LunaticSerializationException {
         // DDI
