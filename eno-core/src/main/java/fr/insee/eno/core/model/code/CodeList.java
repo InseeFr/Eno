@@ -13,7 +13,6 @@ import logicalproduct33.CodeType;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,10 +71,6 @@ public class CodeList extends EnoIdentifiableObject {
             return codeItems.size();
         }
 
-        void foo(int i) {
-            BodyLine b= new BodyLine();
-            b.setColspan(i > 1 ? BigInteger.valueOf(5) : null);
-        }
     }
 
     @DDI(contextType = CodeListType.class, field = "getLabelArray(0).getContentArray(0).getStringValue()")
