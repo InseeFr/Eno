@@ -5,6 +5,7 @@ import fr.insee.lunatic.conversion.JSONDeserializer;
 import fr.insee.lunatic.conversion.XMLLunaticFlatToJSONLunaticFlatTranslator;
 import fr.insee.lunatic.conversion.XMLLunaticToXMLLunaticFlatTranslator;
 import fr.insee.lunatic.model.flat.*;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.xml.bind.JAXBException;
@@ -164,7 +165,8 @@ public class LunaticTests {
                 Path.of("src/test/resources/out/lunatic/TICTable.json"));
     }
 
-    //@Test
+    @Test
+    @Disabled
     public void deserializeQuestionnaire() throws JAXBException {
         //
         JSONDeserializer jsonDeserializer = new JSONDeserializer();
@@ -179,8 +181,8 @@ public class LunaticTests {
     }
 
     @Test
+    @Disabled("Used only to create a json test file.")
     public void flattenPairwise() throws Exception {
-
         XMLLunaticToXMLLunaticFlatTranslator translator = new XMLLunaticToXMLLunaticFlatTranslator();
         String lunaticXmlFlat = translator.generate(this.getClass().getClassLoader()
                 .getResourceAsStream("pairwise/form-lunatic-xml-household-links.xml"));
