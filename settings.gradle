@@ -10,7 +10,7 @@ dependencyResolutionManagement {
     repositories {
 	    //maven{url System.properties['urlMavenRepo']}
         mavenLocal()
-        maven { url 'https://nexus.insee.fr/repository/maven-releases' } //TODO: externalize this
+        //maven { url 'https://nexus.insee.fr/repository/maven-releases' } //TODO: externalize this
         mavenCentral()
     }
 }
