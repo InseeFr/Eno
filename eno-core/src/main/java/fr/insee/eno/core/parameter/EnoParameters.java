@@ -1,5 +1,6 @@
 package fr.insee.eno.core.parameter;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.insee.eno.core.model.mode.Mode;
 import lombok.Getter;
@@ -51,6 +52,11 @@ public class EnoParameters {
     public static EnoParameters parse(InputStream parametersInputStream) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(parametersInputStream, EnoParameters.class);
+    }
+
+    public static String serialize(EnoParameters enoParameters) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(enoParameters);
     }
 
     public EnoParameters() {
