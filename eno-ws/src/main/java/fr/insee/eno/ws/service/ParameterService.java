@@ -16,4 +16,13 @@ public class ParameterService {
             return Mono.error(e);
         }
     }
+
+    public Mono<String> defaultParams() {
+        try {
+            return Mono.just(EnoParameters.serialize(new EnoParameters()));
+        } catch (Exception e) {
+            return Mono.error(e);
+        }
+    }
+
 }
