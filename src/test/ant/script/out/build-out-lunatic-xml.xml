@@ -9,6 +9,8 @@
 		<xslt in="${postprocessing-input-file}"
 			out="${target-folder}/${survey-name}/${form-name}/form/form-sorted.${out-extension}"
 			style="${xslt.home}/post-processing/lunatic-xml/sort-components.xsl" classpath="${saxon.jar}" force="true">
+			<param name="properties-file" expression="${config-folder}/${Properties.InFormat}2${Properties.OutFormat}.xml"/>
+			<param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
 		</xslt>
 		
 		<xslt in="${target-folder}/${survey-name}/${form-name}/form/form-sorted.${out-extension}"

@@ -1770,7 +1770,7 @@
 
     <xsl:template match="driver-CodeListReference//*" mode="model"/>
 
-    <xsl:template match="driver-CodeListReference//CodeListReference | QuestionSingleChoice//ResponseDomain[not(ancestor::driver-OutParameter) and not(ancestor::driver-Binding)]/CodeListReference" mode="model" priority="2">
+    <xsl:template match="driver-CodeListReference//CodeListReference | ResponseDomain[(ancestor::QuestionSingleChoice or ancestor::QuestionPairwise) and not(ancestor::driver-OutParameter) and not(ancestor::driver-Binding)]/CodeListReference" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <r:CodeListReference>	

@@ -15,6 +15,7 @@
     <Filter>sdmx</Filter>
     <Context>default</Context>
     <FilterDescription>false</FilterDescription>
+    <UnusedVars>false</UnusedVars>
     <EndQuestion>
         <Folder>xslt/post-processing/lunatic-xml/end-question</Folder>
         <ResponseTimeQuestion>false</ResponseTimeQuestion>
