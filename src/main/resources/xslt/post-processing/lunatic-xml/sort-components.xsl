@@ -428,7 +428,7 @@
     <xsl:template match="h:variables[@variableType='CALCULATED']">
         <xsl:variable name="varName" select="h:name"/>
         <xsl:variable name="searchTerm" select="concat('[\W]', $varName, '[\W]')"/>
-        <xsl:if test="$unusedVars or contains($varName,'FILTER_RESULT') or enolunatic:is-var-used-in-list-of-dependencies($varName,'',$variablesUsed,$searchTerm)='true'">
+        <xsl:if test="$unusedVars or contains($varName,'FILTER_RESULT') or contains($varName,'xAxis') or contains($varName,'yAxis') or enolunatic:is-var-used-in-list-of-dependencies($varName,'',$variablesUsed,$searchTerm)='true'">
             <xsl:copy>
                 <xsl:apply-templates select="@*|node()"/>
                 <inFilter><xsl:value-of select="enolunatic:is-var-used-in-list-of-dependencies($varName,'',$variablesInFilter,$searchTerm)"/></inFilter>
@@ -549,7 +549,8 @@
             <xsl:when test="matches($dependenciesToSearch, $termToSearch)
                             or matches($dependenciesToSearch,concat('^',$varName,' '))
                             or matches($dependenciesToSearch,concat(' ',$varName,'$'))
-                            or matches($dependenciesToSearch,concat('^',$varName,'$'))">
+                            or matches($dependenciesToSearch,concat('^',$varName,'$'))
+                            or contains($varName,'xAxis') or contains($varName,'yAxis')">
                 <xsl:value-of select="'true'"/>
             </xsl:when>
             <xsl:otherwise>

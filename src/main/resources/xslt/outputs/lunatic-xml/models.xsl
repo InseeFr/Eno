@@ -454,7 +454,6 @@
 				</expression>
 				<bindingDependencies><xsl:value-of select="$pairwiseScope"/></bindingDependencies>
 				<shapeFrom><xsl:value-of select="$pairwiseScope"/></shapeFrom>
-				<inFilter>true</inFilter>
 			</variables>
 		</xsl:for-each>
 		<xsl:apply-templates select="enolunatic:get-end-question-instructions($source-context)" mode="source">
