@@ -9,6 +9,6 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String redirectToSwaggerUI() {
-		return "redirect:/swagger-ui/index.html";
+		return "redirect:/swagger-ui.html";
 	}
 }
