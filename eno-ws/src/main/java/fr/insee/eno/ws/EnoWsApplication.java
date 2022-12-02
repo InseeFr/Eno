@@ -30,11 +30,10 @@ public class EnoWsApplication {
 	private WebClient.Builder builder;
 
 	public static void main(String[] args) {
-		// Remove unallowed header names for jdk httpclient :
+		// Remove unauthorized header names for jdk httpclient :
 		System.setProperty("jdk.httpclient.allowRestrictedHeaders", "host,connection");
 		SpringApplication.run(EnoWsApplication.class, args);
 	}
-
 
 	@Bean
 	public WebClient webClient(@Value("${test.url}") String baseUrl, WebClient.Builder builder) {
@@ -59,7 +58,7 @@ public class EnoWsApplication {
 					httpHeaders.clear();
 					httpHeaders.addAll(serverRequest.headers().asHttpHeaders());
 				})
-				.retrieve()//exchange() : to access to the full server respsonse
+				.retrieve()//exchange() : to access to the full server response
 				.toEntityFlux(DataBuffer.class)
 				.flatMap(r -> ServerResponse.status(r.getStatusCode())
 						.headers(httpHeaders -> {
@@ -71,7 +70,7 @@ public class EnoWsApplication {
 	}
 
 	@Configuration
-	public class WebConfig implements WebFluxConfigurer{
+	public static class WebConfig implements WebFluxConfigurer {
 		public void configureViewResolvers(ViewResolverRegistry registry) {
 			registry.viewResolver(new UrlBasedViewResolver());
 		}

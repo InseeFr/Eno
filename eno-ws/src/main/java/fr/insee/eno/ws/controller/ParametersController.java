@@ -34,8 +34,9 @@ public class ParametersController {
 	private WebClient webClient;
 
 	@Operation(
-			summary="Get all default out format parameters.", 
-			description="It returns the default parameters file without Pipeline which is overloaded. This file don't be used directly : you have to fill Pipeline.")
+			summary = "Get all default out format parameters.",
+			description = "It returns the default parameters file without Pipeline which is overloaded. " +
+					"This file don't be used directly : you have to fill Pipeline.")
 	@GetMapping(value="default", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public Mono<ResponseEntity<Flux<DataBuffer>>> getDefaultParam(ServerHttpRequest serverRequest){
 
@@ -45,20 +46,18 @@ public class ParametersController {
 					httpHeaders.clear();
 					httpHeaders.addAll(serverRequest.getHeaders());
 				})
-				.retrieve()//exchange() : to access to the full server respsonse
+				.retrieve()//exchange() : to access to the full server response
 				.toEntityFlux(DataBuffer.class);
 	}
 
 	@Operation(
 			summary="Get default xml parameters file for the given context according to the outFormat",
-			description="It returns parameters used by default according to the studyunit and the outFormat.")
+			description="It returns parameters used by default according to the study unit and the outFormat.")
 	@GetMapping(value="{context}/default", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public Mono<ResponseEntity<Flux<DataBuffer>>> getDefaultOutParam(
 			@PathVariable Context context,
 			@RequestParam OutFormat outFormat) throws Exception {
 		return null;
 	}
-
-
 
 }

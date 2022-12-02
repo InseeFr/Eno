@@ -14,10 +14,8 @@ import reactor.core.publisher.Mono;
 @Controller
 public class PassePlatController {
 
-
     @Autowired
-    private  WebClient webClient;
-
+    private WebClient webClient;
 
     @GetMapping("/v2/**")
     public Mono<ResponseEntity<Flux<DataBuffer>>> passePlat(ServerHttpRequest serverRequest){
@@ -27,7 +25,7 @@ public class PassePlatController {
                     httpHeaders.clear();
                     httpHeaders.addAll(serverRequest.getHeaders());
                 })
-                .retrieve()//exchange() : to access to the full server respsonse
+                .retrieve()//exchange() : to access to the full server response
                 .toEntityFlux(DataBuffer.class);
     }
 
