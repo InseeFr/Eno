@@ -26,7 +26,7 @@ public class DDIParserTest {
     @Test
     public void parserDDITest() throws IOException, DDIParsingException {
         //
-        DDIInstanceDocument ddiInstanceDocument = DDIParser.parse( // FIXME: https://stackoverflow.com/questions/45718145/intellij-errorjava-java-lang-exceptionininitializererror
+        DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
                 this.getClass().getClassLoader().getResource("in/ddi/l10xmg2l.xml"));
 
 

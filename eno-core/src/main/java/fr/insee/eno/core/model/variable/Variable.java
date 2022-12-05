@@ -37,12 +37,13 @@ public class Variable extends EnoObject implements EnoObjectWithExpression {
     @Lunatic(contextType = IVariableType.class, field = "setName(#param)")
     private String name;
 
-    /** Reference to the question in which the variable is collected. */
+    /** Reference to the question in which the variable is collected.
+     * This property has been removed in Lunatic variables. */
     @DDI(contextType = VariableType.class,
             field = "!#this.getQuestionReferenceList().isEmpty() ? " +
                     "getQuestionReferenceArray(0).getIDArray(0).getStringValue() : null")
-    @Lunatic(contextType = IVariableType.class, field = "setComponentRef(#param)")
-    String questionReference; //TODO: case when the variable is used in multiple questions?
+    //@Lunatic(contextType = IVariableType.class, field = "setComponentRef(#param)")
+    String questionReference;
 
     /** Expression to evaluate the variable if it is a calculated variable. */
     @DDI(contextType = VariableType.class,

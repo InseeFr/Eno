@@ -17,10 +17,12 @@ import java.util.List;
 
 import static fr.insee.eno.core.annotations.Contexts.Context;
 
+/** Class that represent the "pairwise question"
+ * For now, this corresponds to a DDI QuestionItem object (could be QuestionGrid later on). */
 @Getter
 @Setter
 @Context(format = Format.DDI, type = QuestionItemType.class)
-@Context(format = Format.LUNATIC, type = PairwiseLinks.class) //TODO: temp class before it actually comes in Lunatic-Model
+@Context(format = Format.LUNATIC, type = PairwiseLinks.class)
 public class PairwiseQuestion extends SingleResponseQuestion {
 
     //TODO: doc here
@@ -43,7 +45,7 @@ public class PairwiseQuestion extends SingleResponseQuestion {
         LabelType xAxis = new LabelType();
         LabelType yAxis = new LabelType();
         String vtlExpression = "count("+loopVariableName+")";
-        String labelType = "VTL"; //TODO: enum here
+        String labelType = "VTL"; // TODO: see if it is 'VTL' or 'VTL|MD'
         xAxis.setValue(vtlExpression);
         xAxis.setType(labelType);
         yAxis.setValue(vtlExpression);

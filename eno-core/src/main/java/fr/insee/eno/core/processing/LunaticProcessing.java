@@ -20,7 +20,8 @@ public class LunaticProcessing {
     }
 
     /**
-     * TODO
+     * Apply both technical and business processing on the given Lunatic questionnaire.
+     * The Eno-model questionnaire object is required to accomplish this task.
      * @param lunaticQuestionnaire Lunatic questionnaire to be modified.
      * @param enoQuestionnaire Eno questionnaire that contains some required info.
      */
@@ -30,7 +31,7 @@ public class LunaticProcessing {
         //
         EnoIndex enoIndex = enoQuestionnaire.getIndex();
         assert enoIndex != null;
-        //
+        // TODO: (not a priority) implement something to manage the order of processing classes calls
         new LunaticSortComponents(enoQuestionnaire, lunaticCatalog).apply(lunaticQuestionnaire);
         new LunaticAddGeneratingDate().apply(lunaticQuestionnaire);
         new LunaticAddBindingDependencies(lunaticCatalog, enoIndex).apply(lunaticQuestionnaire);
