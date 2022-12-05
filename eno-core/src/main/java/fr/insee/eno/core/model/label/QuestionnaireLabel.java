@@ -21,7 +21,9 @@ public class QuestionnaireLabel extends EnoObject {
     @Lunatic(contextType = LabelType.class, field = "setValue(#param)")
     String value;
 
-    @Lunatic(contextType = LabelType.class, field = "setType('TODO')") //TODO: mapping or processing for this
+    /** For now, Lunatic type does not come from metadata, but is hardcoded here in Eno.
+     * See labels documentation. */
+    @Lunatic(contextType = LabelType.class, field = "setType('VTL|MD')")
     String type;
 
 }
