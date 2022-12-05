@@ -19,6 +19,7 @@ import java.util.List;
 @Builder*/
 @Getter
 @Setter
+@Slf4j
 public class UniqueChoiceQuestion extends SingleResponseQuestion {
 
     public static final String DDI_UCQ_VOCABULARY_ID = "INSEE-GOF-CV";
@@ -31,17 +32,26 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     public enum DisplayFormat {RADIO, CHECKBOX, DROPDOWN}
 
     @DDI(contextType = QuestionItemType.class,
-            field = "getResponseDomain().getGenericOutputFormat().getStringValue().equals('radio-button') ? " +
-                    "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion.DisplayFormat).RADIO : " +
-                    "getResponseDomain().getGenericOutputFormat().getStringValue().equals('checkbox') ? " +
-                    "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion.DisplayFormat).CHECKBOX : " +
-                    "getResponseDomain().getGenericOutputFormat().getStringValue().equals('drop-down-list') ? " +
-                    "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion.DisplayFormat).DROPDOWN : null") //TODO: static method in this class to simplify this field
+            field = "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDDIOutputFormat(#this)")
     DisplayFormat displayFormat;
 
     @DDI(contextType = QuestionItemType.class,
             field = "#index.get(#this.getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()).getCodeList()") //TODO: map this only once
     @Lunatic(contextType = {CheckboxOne.class, Radio.class, Dropdown.class}, field = "getOptions()")
     List<CodeList.CodeItem> codeList = new ArrayList<>();
+
+    public static DisplayFormat convertDDIOutputFormat(QuestionItemType questionItemType) {
+        String ddiOutputFormat = questionItemType.getResponseDomain().getGenericOutputFormat().getStringValue();
+        return switch (ddiOutputFormat) {
+            case DDI_UCQ_RADIO_OUTPUT_FORMAT -> DisplayFormat.RADIO;
+            case DDI_UCQ_CHECKBOX_OUTPUT_FORMAT -> DisplayFormat.CHECKBOX;
+            case DDI_UCQ_DROPDOWN_OUTPUT_FORMAT -> DisplayFormat.DROPDOWN;
+            default -> {
+                String questionId = questionItemType.getIDArray(0).getStringValue();
+                log.warn("Unknown output format '"+ddiOutputFormat+"' found in DDI question item '"+questionId+"'.");
+                yield null;
+            }
+        };
+    }
 
 }
