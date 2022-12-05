@@ -1,5 +1,6 @@
 package fr.insee.eno.core.converter;
 
+import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.exceptions.UnauthorizedHeaderException;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.code.CodeItem;
@@ -122,7 +123,7 @@ public class LunaticTableConverter {
             bodyLine.setComponentType(LUNATIC_BOOLEAN_COMPONENT);
         }
         else if (enoCell instanceof TableCell.TextCell textCell) {
-            if (textCell.getMaxLength().intValue() < LunaticConverter.SMALL_TEXT_LIMIT)
+            if (textCell.getMaxLength().intValue() < Constant.LUNATIC_SMALL_TEXT_LIMIT)
                 bodyLine.setComponentType(LUNATIC_SMALL_TEXT_COMPONENT);
             else
                 bodyLine.setComponentType(LUNATIC_LARGE_TEXT_COMPONENT);

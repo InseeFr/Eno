@@ -1,5 +1,6 @@
 package fr.insee.eno.core.converter;
 
+import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.declaration.Instruction;
@@ -20,8 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class LunaticConverter {
-
-    public static final int SMALL_TEXT_LIMIT = 250; //TODO: Constants class??
 
     /**
      * Return a Lunatic instance type that corresponds to the given Eno object.
@@ -72,7 +71,7 @@ public class LunaticConverter {
 
     private static Object instantiateFrom(SingleResponseQuestion enoQuestion) {
         if (enoQuestion instanceof TextQuestion)
-            if (((TextQuestion) enoQuestion).getMaxLength().intValue() < SMALL_TEXT_LIMIT)
+            if (((TextQuestion) enoQuestion).getMaxLength().intValue() < Constant.LUNATIC_SMALL_TEXT_LIMIT)
                 return new Input();
             else
                 return new Textarea();
