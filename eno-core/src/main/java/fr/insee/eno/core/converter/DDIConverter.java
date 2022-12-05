@@ -11,12 +11,6 @@ import reusable33.TextDomainType;
 @Slf4j
 public class DDIConverter {
 
-    public static final String INSEE_VOCABULARY_ID = "INSEE-GOF-CV";
-    public static final String RADIO_OUTPUT_FORMAT = "radio-button";
-    public static final String CHECKBOX_OUTPUT_FORMAT = "checkbox";
-    public static final String DROPDOWN_OUTPUT_FORMAT = "drop-down-list";
-    //TODO: Constants class for these? + use these constants in DDI mapping annotation
-
     public static final String DDI_PAIRWISE_KEY = "UIComponent";
     public static final String DDI_PAIRWISE_VALUE = "HouseholdPairing";
 
