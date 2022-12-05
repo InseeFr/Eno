@@ -1,6 +1,6 @@
 package fr.insee.eno.core.converter;
 
-import fr.insee.eno.core.model.code.CodeList;
+import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.declaration.Instruction;
 import fr.insee.eno.core.model.navigation.Control;
@@ -53,7 +53,7 @@ public class LunaticConverter {
             return instantiateFrom((MultipleResponseQuestion) enoObject);
         else if (enoObject instanceof Response)
             return new ResponseType();
-        else if (enoObject instanceof CodeList.CodeItem)
+        else if (enoObject instanceof CodeItem)
             return new Options();
         else if (enoObject instanceof CodeResponse)
             return new ResponsesCheckboxGroup();

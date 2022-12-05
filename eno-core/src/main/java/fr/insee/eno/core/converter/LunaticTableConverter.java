@@ -2,6 +2,7 @@ package fr.insee.eno.core.converter;
 
 import fr.insee.eno.core.exceptions.UnauthorizedHeaderException;
 import fr.insee.eno.core.mappers.LunaticMapper;
+import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.question.TableCell;
 import fr.insee.eno.core.model.question.TableQuestion;
@@ -85,14 +86,14 @@ public class LunaticTableConverter {
     // We could do something neater here maybe
     public static List<BodyType> flattenCodeList(CodeList codeList) {
         List<BodyType> lunaticLines = new ArrayList<>();
-        for (CodeList.CodeItem codeItem : codeList.getCodeItems()) {
+        for (CodeItem codeItem : codeList.getCodeItems()) {
             lunaticLines.add(new BodyType());
             flattenCodeItem(codeItem, lunaticLines);
             lunaticLines.remove(lunaticLines.size()-1);
         }
         return lunaticLines;
     }
-    private static void flattenCodeItem(CodeList.CodeItem codeItem, List<BodyType> lunaticLines) {
+    private static void flattenCodeItem(CodeItem codeItem, List<BodyType> lunaticLines) {
         // Map code item on lunatic cell
         BodyLine lunaticCell = new BodyLine();
         new LunaticMapper().mapEnoObject(codeItem, lunaticCell);
@@ -103,7 +104,7 @@ public class LunaticTableConverter {
             lunaticLines.add(new BodyType());
         }
         else {
-            for (CodeList.CodeItem codeItem1 : codeItem.getCodeItems()) {
+            for (CodeItem codeItem1 : codeItem.getCodeItems()) {
                 flattenCodeItem(codeItem1, lunaticLines);
             }
         }

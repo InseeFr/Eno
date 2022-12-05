@@ -3,7 +3,7 @@ package fr.insee.eno.core.model.question;
 import datacollection33.QuestionItemType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.eno.core.model.code.CodeList;
+import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.lunatic.model.flat.CheckboxOne;
 import fr.insee.lunatic.model.flat.Dropdown;
 import fr.insee.lunatic.model.flat.Radio;
@@ -38,7 +38,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     @DDI(contextType = QuestionItemType.class,
             field = "#index.get(#this.getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()).getCodeList()") //TODO: map this only once
     @Lunatic(contextType = {CheckboxOne.class, Radio.class, Dropdown.class}, field = "getOptions()")
-    List<CodeList.CodeItem> codeList = new ArrayList<>();
+    List<CodeItem> codeList = new ArrayList<>();
 
     public static DisplayFormat convertDDIOutputFormat(QuestionItemType questionItemType) {
         String ddiOutputFormat = questionItemType.getResponseDomain().getGenericOutputFormat().getStringValue();
