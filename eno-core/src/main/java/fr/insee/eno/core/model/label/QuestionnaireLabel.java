@@ -1,5 +1,6 @@
 package fr.insee.eno.core.model.label;
 
+import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.annotations.Lunatic;
@@ -23,7 +24,7 @@ public class QuestionnaireLabel extends EnoObject {
 
     /** For now, Lunatic type does not come from metadata, but is hardcoded here in Eno.
      * See labels documentation. */
-    @Lunatic(contextType = LabelType.class, field = "setType('VTL|MD')")
+    @Lunatic(contextType = LabelType.class, field = "setType('"+Constant.LUNATIC_LABEL_VTL_MD+"')")
     String type;
 
 }

@@ -1,6 +1,7 @@
 package fr.insee.eno.core.model.question;
 
 import datacollection33.QuestionItemType;
+import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.annotations.Lunatic;
@@ -45,11 +46,11 @@ public class PairwiseQuestion extends SingleResponseQuestion {
         LabelType xAxis = new LabelType();
         LabelType yAxis = new LabelType();
         String vtlExpression = "count("+loopVariableName+")";
-        String labelType = "VTL"; // TODO: see if it is 'VTL' or 'VTL|MD'
+        // TODO: see if xAxis and yAxis in PairwiseLinks are of type 'VTL' or 'VTL|MD'
         xAxis.setValue(vtlExpression);
-        xAxis.setType(labelType);
+        xAxis.setType(Constant.LUNATIC_LABEL_VTL_MD);
         yAxis.setValue(vtlExpression);
-        yAxis.setType(labelType);
+        yAxis.setType(Constant.LUNATIC_LABEL_VTL_MD);
         lunaticPairwiseLinks.setXAxisIterations(xAxis);
         lunaticPairwiseLinks.setYAxisIterations(yAxis);
     }

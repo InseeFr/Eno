@@ -1,6 +1,7 @@
 package fr.insee.eno.core.model.calculated;
 
 import datacollection33.IfThenElseType;
+import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.annotations.Lunatic;
@@ -40,7 +41,7 @@ public class CalculatedExpression extends EnoObject {
 
     /** For now, Lunatic type in label objects does not come from metadata, but is hardcoded here in Eno.
      * See labels documentation. */
-    @Lunatic(contextType = LabelType.class, field = "setType('VTL')")
+    @Lunatic(contextType = LabelType.class, field = "setType('"+ Constant.LUNATIC_LABEL_VTL+"')")
     String type;
 
     /** In DDI, the expression contains variable references instead of variables names.
