@@ -49,14 +49,14 @@ public class DDIConverter {
                 StandardKeyValuePairType userAttributePair = questionItemType.getUserAttributePairArray(0);
                 String attributeKey = userAttributePair.getAttributeKey().getStringValue();
                 String attributeValue = userAttributePair.getAttributeValue().getStringValue();
-                if (! attributeKey.equals(DDI_PAIRWISE_KEY))
+                if (! DDI_PAIRWISE_KEY.equals(attributeKey))
                     log.warn(String.format(
                             "Attribute pair list found in question item '%s', but key is equal to '%s' (should be '%s')",
-                            questionItemType.getIDArray(0).getStringValue(), attributeKey ,DDI_PAIRWISE_KEY));
-                if (! attributeValue.equals(DDI_PAIRWISE_VALUE))
+                            questionItemType.getIDArray(0).getStringValue(), attributeKey, DDI_PAIRWISE_KEY));
+                if (! DDI_PAIRWISE_VALUE.equals(attributeValue))
                     log.warn(String.format(
                             "Attribute pair list found in question item '%s', but value is equal to '%s' (should be '%s')",
-                            questionItemType.getIDArray(0).getStringValue(), attributeValue ,DDI_PAIRWISE_VALUE));
+                            questionItemType.getIDArray(0).getStringValue(), attributeValue, DDI_PAIRWISE_VALUE));
                 return new PairwiseQuestion();
             }
             else {
