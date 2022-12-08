@@ -581,7 +581,7 @@
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
 		<xsl:variable name="componentType">
 			<xsl:choose>
-				<xsl:when test="name(.) = 'TableLoop' and enolunatic:is-generating-loop($source-context)"><xsl:value-of select="'RosterForLoop'"/></xsl:when>
+				<xsl:when test="name(.) = 'TableLoop' and not(enolunatic:is-linked-loop($source-context))"><xsl:value-of select="'RosterForLoop'"/></xsl:when>
 				<xsl:otherwise><xsl:value-of select="'Table'"/></xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
