@@ -1,5 +1,6 @@
 package fr.insee.eno.core.sandbox;
 
+import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.exceptions.DDIParsingException;
 import fr.insee.eno.core.mappers.DDIMapperTest;
 import fr.insee.eno.core.model.EnoQuestionnaire;
@@ -153,7 +154,7 @@ public class SpelTests {
         expression.getValue(context, lunaticPairwiseLinks);
         //
         assertEquals("count(FOO)", lunaticPairwiseLinks.getXAxisIterations().getValue());
-        assertEquals("VTL", lunaticPairwiseLinks.getXAxisIterations().getType());
+        assertEquals(Constant.LUNATIC_LABEL_VTL_MD, lunaticPairwiseLinks.getXAxisIterations().getType());
     }
 
 }
