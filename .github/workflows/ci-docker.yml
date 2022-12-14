@@ -11,6 +11,8 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    outputs:
+      release-version: ${{ steps.version-step.outputs.eno-version }}
     steps:
       - uses: actions/checkout@v3
     
@@ -49,17 +51,27 @@ jobs:
           ref: ${{ env.ENOBRANCH }}
           path: Eno
 
+      - name: Enable wrapper
+        run: | 
+          chmod +x gradlew # (make gradle wrapper executable)
+          ./gradlew # (load the gradle wrapper, required for the get version step)
+
+      - id: version-step
+        run: echo "eno-version=$(./gradlew printVersion --console=plain -q)" >> $GITHUB_OUTPUT
+        
+      - name: Print Eno Version
+        run: echo ${{ steps.version-step.outputs.eno-version }}
+
       - name: Build Eno modules
-        working-directory: ./Eno
-        run: gradle build
+        run: ./gradlew build
 
       - name: Upload Eno-WS jar
         uses: actions/upload-artifact@v3
         with:
           name: eno-ws-jar
-          path: Eno/eno-ws/build/libs/eno-ws-3.0.0-SNAPSHOT.jar
-
-  download:
+          path: ./eno-ws/build/libs/eno-ws-${{ steps.version-step.outputs.eno-version }}.jar
+          
+  docker:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -69,25 +81,13 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: eno-ws-jar
-          path: eno-ws/build/libs/eno-ws-3.0.0-SNAPSHOT.jar
-          
-  docker:
-    needs: download
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+          path: ./tmp/eno-ws.jar
       
-      - name: Download Eno-WS jar
-        uses: actions/download-artifact@v3
-        with:
-          name: eno-ws-jar
-          path: eno-ws/build/libs/eno-ws-3.0.0-SNAPSHOT.jar
-
       - name: Publish to Docker Hub
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: inseefr/eno-ws
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           default_branch: 535-v3-ci-docker
-          tags: "3.0.0-SNAPSHOT"
+          tags: ${{ needs.build.outputs.release-version }}
