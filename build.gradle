@@ -18,3 +18,9 @@ subprojects {
         options.encoding = 'UTF-8'
     }
 }
+
+task printVersion {
+    doLast {
+        println project.version
+    }
+}
