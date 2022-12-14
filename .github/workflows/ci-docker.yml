@@ -57,10 +57,22 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: eno-ws-jar
-          path: eno-ws/build/libs/eno-ws-3.0.0-SNAPSHOT.jar
+          path: Eno/eno-ws/build/libs/eno-ws-3.0.0-SNAPSHOT.jar
 
-  docker:
+  download:
     needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Download Eno-WS jar
+        uses: actions/download-artifact@v3
+        with:
+          name: eno-ws-jar
+          path: eno-ws/build/libs/eno-ws-3.0.0-SNAPSHOT.jar
+          
+  docker:
+    needs: download
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
