@@ -114,3 +114,25 @@ jobs:
         with:
           name: jar
           path: build/libs/*.jar
+
+  docker:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download build
+        id: download
+        uses: actions/download-artifact@v2
+        with:
+          name: jar
+          path: build/libs
+
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: inseefr/eno-ws
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          default_branch: 535-v3-ci-docker
+          tags: "3.0.0-SNAPSHOT"
