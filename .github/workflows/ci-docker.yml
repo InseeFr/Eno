@@ -113,7 +113,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: jar
-          path: build/libs/*.jar
+          path: eno-ws/build/libs/*.jar
 
   docker:
     needs: build
