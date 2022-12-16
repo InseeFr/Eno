@@ -35,3 +35,5 @@ build/
 .gradle
 # Ignore Gradle build output directory
 build
+# Ignore Gradle user properties (proxy etc.)
+gradle-local.properties
