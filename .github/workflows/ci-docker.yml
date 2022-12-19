@@ -69,7 +69,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: eno-ws-jar
-          path: ./eno-ws/build/libs/eno-ws-${{ steps.version-step.outputs.eno-version }}.jar
+          path: ./eno-ws/build/libs/*.jar
           
   docker:
     needs: build
@@ -81,7 +81,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: eno-ws-jar
-          path: ./tmp/eno-ws.jar
+          path: ./eno-ws/build/libs
       
       - name: Publish to Docker Hub
         uses: elgohr/Publish-Docker-Github-Action@v5
