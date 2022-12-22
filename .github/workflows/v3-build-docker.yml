@@ -1,11 +1,11 @@
-name: Build docker
+name: V3 Build Docker
 
 on: workflow_dispatch
 
 env:
-  ENOBRANCH: v3-develop
-  LUNATICBRANCH: dev-pairwise
-  POGUESBRANCH: main
+  ENO_BRANCH: v3-develop
+  LUNATIC_BRANCH: dev-pairwise
+  POGUES_BRANCH: main
 
 jobs:
 
@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: InseeFr/Lunatic-Model
-          ref: ${{ env.LUNATICBRANCH }}
+          ref: ${{ env.LUNATIC_BRANCH }}
           path: Lunatic-model
 
       - name: Build Lunatic model
@@ -37,7 +37,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: InseeFr/Pogues-Model
-          ref: ${{ env.POGUESBRANCH }}
+          ref: ${{ env.POGUES_BRANCH }}
           path: Pogues-model
 
       - name: Build with Maven Pogues model
@@ -48,7 +48,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: InseeFr/Eno
-          ref: ${{ env.ENOBRANCH }}
+          ref: ${{ env.ENO_BRANCH }}
           path: Eno
 
       - name: Enable wrapper
@@ -56,7 +56,8 @@ jobs:
           chmod +x gradlew # (make gradle wrapper executable)
           ./gradlew # (load the gradle wrapper, required for the get version step)
 
-      - id: version-step
+      - name: Get Eno Version
+        id: version-step
         run: echo "eno-version=$(./gradlew printVersion --console=plain -q)" >> $GITHUB_OUTPUT
         
       - name: Print Eno Version
@@ -89,5 +90,5 @@ jobs:
           name: inseefr/eno-ws
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          default_branch: 535-v3-ci-docker
+          default_branch: v3-develop
           tags: ${{ needs.build.outputs.release-version }}
