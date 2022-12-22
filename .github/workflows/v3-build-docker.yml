@@ -1,0 +1,94 @@
+name: V3 Build Docker
+
+on: workflow_dispatch
+
+env:
+  ENO_BRANCH: v3-develop
+  LUNATIC_BRANCH: dev-pairwise
+  POGUES_BRANCH: main
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      release-version: ${{ steps.version-step.outputs.eno-version }}
+    steps:
+      - uses: actions/checkout@v3
+    
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Checkout Lunatic model repo
+        uses: actions/checkout@v3
+        with:
+          repository: InseeFr/Lunatic-Model
+          ref: ${{ env.LUNATIC_BRANCH }}
+          path: Lunatic-model
+
+      - name: Build Lunatic model
+        working-directory: ./Lunatic-model
+        run: mvn install -Djar.finalName="lunatic-model" -B -V --file pom.xml
+
+      - name: Checkout Pogues model repo
+        uses: actions/checkout@v3
+        with:
+          repository: InseeFr/Pogues-Model
+          ref: ${{ env.POGUES_BRANCH }}
+          path: Pogues-model
+
+      - name: Build with Maven Pogues model
+        working-directory: ./Pogues-model
+        run: mvn install -Djar.finalName="pogues-model" -B -V --file pom.xml
+
+      - name: Checkout Eno repo
+        uses: actions/checkout@v3
+        with:
+          repository: InseeFr/Eno
+          ref: ${{ env.ENO_BRANCH }}
+          path: Eno
+
+      - name: Enable wrapper
+        run: | 
+          chmod +x gradlew # (make gradle wrapper executable)
+          ./gradlew # (load the gradle wrapper, required for the get version step)
+
+      - name: Get Eno Version
+        id: version-step
+        run: echo "eno-version=$(./gradlew printVersion --console=plain -q)" >> $GITHUB_OUTPUT
+        
+      - name: Print Eno Version
+        run: echo ${{ steps.version-step.outputs.eno-version }}
+
+      - name: Build Eno modules
+        run: ./gradlew build
+
+      - name: Upload Eno-WS jar
+        uses: actions/upload-artifact@v3
+        with:
+          name: eno-ws-jar
+          path: ./eno-ws/build/libs/*.jar
+          
+  docker:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Download Eno-WS jar
+        uses: actions/download-artifact@v3
+        with:
+          name: eno-ws-jar
+          path: ./eno-ws/build/libs
+      
+      - name: Publish to Docker Hub
+        uses: elgohr/Publish-Docker-Github-Action@v5
+        with:
+          name: inseefr/eno-ws
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          default_branch: v3-develop
+          tags: ${{ needs.build.outputs.release-version }}
