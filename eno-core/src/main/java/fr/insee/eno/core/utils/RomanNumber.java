@@ -24,6 +24,8 @@ public class RomanNumber { // https://stackoverflow.com/questions/12967896/conve
 
     }
 
+    private RomanNumber() {}
+
     /**
      * Return the roman representation of number.
      *

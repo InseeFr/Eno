@@ -2,6 +2,8 @@ package fr.insee.eno.core.version;
 
 public class ModelVersions {
 
+    private ModelVersions() {}
+
     // TODO: use build tool to copy versions in application.properties, then read these properties here.
 
     /** Return the Eno version. */

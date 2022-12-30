@@ -19,6 +19,8 @@ import java.io.InputStream;
 
 public class DDIToLunatic {
 
+    private DDIToLunatic() {}
+
     public static String transform(InputStream ddiInputStream, EnoParameters enoParameters)
             throws IOException, DDIParsingException, LunaticSerializationException {
         //

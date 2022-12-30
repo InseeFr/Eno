@@ -9,6 +9,8 @@ import java.io.UnsupportedEncodingException;
 
 public class LunaticSerializer {
 
+    private LunaticSerializer() {}
+
     public static String serializeToJson(Questionnaire lunaticQuestionnaire) throws LunaticSerializationException {
         JSONSerializer jsonSerializer = new JSONSerializer();
         try {

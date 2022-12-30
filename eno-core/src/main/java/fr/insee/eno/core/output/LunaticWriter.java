@@ -12,6 +12,8 @@ import java.nio.file.Path;
 @Slf4j
 public class LunaticWriter {
 
+    private LunaticWriter() {}
+
     /**
      * Write a Lunatic questionnaire as a json file
      * (temporary method to test the application).

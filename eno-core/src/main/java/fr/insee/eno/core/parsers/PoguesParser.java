@@ -13,6 +13,8 @@ import java.nio.file.Path;
 @Slf4j
 public class PoguesParser {
 
+    private PoguesParser() {}
+
     public static Questionnaire parse(URL poguesFileUrl) throws PoguesDeserializationException, URISyntaxException {
         JSONDeserializer poguesDeserializer = new JSONDeserializer();
         log.info("Parsing Pogues files from URL " + poguesFileUrl);

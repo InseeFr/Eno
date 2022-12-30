@@ -12,6 +12,8 @@ import java.net.URL;
 @Slf4j
 public class DDIParser {
 
+    private DDIParser() {}
+
     public static DDIInstanceDocument parse(InputStream ddiInputStream) throws IOException, DDIParsingException {
         log.info("Parsing DDI document from input stream given");
         try {
