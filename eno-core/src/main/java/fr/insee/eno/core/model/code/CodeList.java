@@ -25,7 +25,7 @@ public class CodeList extends EnoIdentifiableObject {
     List<CodeItem> codeItems = new ArrayList<>();
 
     /** Max depth of the code list. */
-    int maxLevel;
+    private int maxDepth;
 
     /** Return the number of codes in the code list. */
     public int size() {
@@ -61,7 +61,7 @@ public class CodeList extends EnoIdentifiableObject {
     private void computeDepths(CodeItem codeItem, int level) {
         codeItem.setLevel(level);
         if (codeItem.size() == 0) {
-            if (level > maxLevel) maxLevel = level;
+            if (level > maxDepth) maxDepth = level;
         } else {
             for (CodeItem codeItem1 : codeItem.getCodeItems()) {
                 computeDepths(codeItem1, level+1);
@@ -73,9 +73,9 @@ public class CodeList extends EnoIdentifiableObject {
     }
     private void computeHorizontalSizes(CodeItem codeItem) {
         if (codeItem.size() == 0) {
-            codeItem.setHSize(maxLevel+1 - codeItem.level);
+            codeItem.setHSize(maxDepth +1 - codeItem.level);
         } else {
-            assert maxLevel >= 1 : "Horizontal sizes can not be computed if max level has not been computed.";
+            assert maxDepth >= 1 : "Horizontal sizes can not be computed if max level has not been computed.";
             // (default value for an int is 0, and if we get in this else that means that we must have max level >= 1)
             codeItem.setHSize(1);
             for (CodeItem codeItem1 : codeItem.getCodeItems()) {

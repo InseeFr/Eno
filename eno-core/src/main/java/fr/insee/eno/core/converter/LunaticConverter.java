@@ -23,6 +23,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LunaticConverter {
 
+    private LunaticConverter() {}
+
     /**
      * Return a Lunatic instance type that corresponds to the given Eno object.
      * @param enoObject An object from the Eno model.
@@ -47,10 +49,10 @@ public class LunaticConverter {
             return new ControlType();
         else if (enoObject instanceof Filter)
             return new ConditionFilterType();
-        else if (enoObject instanceof SingleResponseQuestion)
-            return instantiateFrom((SingleResponseQuestion) enoObject);
-        else if (enoObject instanceof MultipleResponseQuestion)
-            return instantiateFrom((MultipleResponseQuestion) enoObject);
+        else if (enoObject instanceof SingleResponseQuestion singleResponseQuestion)
+            return instantiateFrom(singleResponseQuestion);
+        else if (enoObject instanceof MultipleResponseQuestion multipleResponseQuestion)
+            return instantiateFrom(multipleResponseQuestion);
         else if (enoObject instanceof Response)
             return new ResponseType();
         else if (enoObject instanceof CodeItem)
@@ -71,19 +73,20 @@ public class LunaticConverter {
     }
 
     private static Object instantiateFrom(SingleResponseQuestion enoQuestion) {
-        if (enoQuestion instanceof TextQuestion)
-            if (((TextQuestion) enoQuestion).getMaxLength().intValue() < Constant.LUNATIC_SMALL_TEXT_LIMIT)
+        if (enoQuestion instanceof TextQuestion textQuestion) {
+            if (textQuestion.getMaxLength().intValue() < Constant.LUNATIC_SMALL_TEXT_LIMIT)
                 return new Input();
             else
                 return new Textarea();
+        }
         else if (enoQuestion instanceof NumericQuestion)
             return new InputNumber();
         else if (enoQuestion instanceof BooleanQuestion)
             return new CheckboxBoolean();
         else if (enoQuestion instanceof DateQuestion)
             return new Datepicker();
-        else if (enoQuestion instanceof UniqueChoiceQuestion) {
-            if (((UniqueChoiceQuestion) enoQuestion).getDisplayFormat() == null) {
+        else if (enoQuestion instanceof UniqueChoiceQuestion uniqueChoiceQuestion) {
+            if (uniqueChoiceQuestion.getDisplayFormat() == null) {
                 throw new ConversionException("Display format has not been set in Eno question " + enoQuestion);
             }
             return switch (((UniqueChoiceQuestion) enoQuestion).getDisplayFormat()) {

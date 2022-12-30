@@ -31,6 +31,8 @@ public class LunaticTableConverter {
     // TODO: type attribute in Lunatic labels
     // (probably not here but in a designed Lunatic processing class)
 
+    private LunaticTableConverter() {}
+
     public static Table convertEnoTable(TableQuestion enoTable) {
         //
         Table lunaticTable = new Table();
@@ -38,7 +40,7 @@ public class LunaticTableConverter {
         // Compute sizes in header and left column
         // For the header, this is done to ensure that it is not a nested code list
         enoTable.getHeader().computeSizes();
-        if (enoTable.getHeader().getMaxLevel() > 0)
+        if (enoTable.getHeader().getMaxDepth() > 0)
             throw new UnauthorizedHeaderException(enoTable);
         enoTable.getLeftColumn().computeSizes();
 
@@ -46,8 +48,10 @@ public class LunaticTableConverter {
         HeaderType topLeftCell = new HeaderType();
         topLeftCell.setLabel(new LabelType());
         topLeftCell.getLabel().setValue("");
-        if (enoTable.getLeftColumn().getMaxLevel() > 0)
-            topLeftCell.setColspan(BigInteger.valueOf(enoTable.getLeftColumn().getMaxLevel() + 1));
+        if (enoTable.getLeftColumn().getMaxDepth() > 0) {
+            int leftColumnHSize = enoTable.getLeftColumn().getMaxDepth() + 1;
+            topLeftCell.setColspan(BigInteger.valueOf(leftColumnHSize));
+        }
         lunaticTable.getHeader().add(topLeftCell);
 
         // Header
@@ -71,7 +75,7 @@ public class LunaticTableConverter {
         // In what follows, it is not assumed that table cells are ordered in a certain way in the eno model
         // Each cell is inserted in the right place using its row number & column number
         int firstContentLine = 0; // Fixed at 0 since nested code lists are not allowed in header
-        int firstContentColumn = enoTable.getLeftColumn().getMaxLevel();
+        int firstContentColumn = enoTable.getLeftColumn().getMaxDepth();
         for (int k=0; k<enoTable.getTableCells().size(); k++) {
             TableCell enoCell = enoTable.getTableCells().get(k);
             String variableName = enoTable.getVariableNames().get(k);
@@ -128,10 +132,10 @@ public class LunaticTableConverter {
             else
                 bodyLine.setComponentType(LUNATIC_LARGE_TEXT_COMPONENT);
         }
-        else if (enoCell instanceof TableCell.NumericCell numericCell) {
+        else if (enoCell instanceof TableCell.NumericCell) {
             bodyLine.setComponentType(LUNATIC_NUMERIC_COMPONENT);
         }
-        else if (enoCell instanceof TableCell.DateCell dateCell) {
+        else if (enoCell instanceof TableCell.DateCell) {
             bodyLine.setComponentType(LUNATIC_DATE_COMPONENT);
         }
         else if (enoCell instanceof TableCell.UniqueChoiceCell uniqueChoiceCell) {

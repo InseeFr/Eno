@@ -15,18 +15,20 @@ public class DDIConverter {
     public static final String DDI_PAIRWISE_KEY = "UIComponent";
     public static final String DDI_PAIRWISE_VALUE = "HouseholdPairing";
 
+    private DDIConverter() {}
+
     /**
      * Return an Eno instance corresponding to the given DDI object.
      *
      * @return A Eno model object.
      */
     public static EnoObject instantiateFromDDIObject(Object ddiObject) {
-        if (ddiObject instanceof QuestionItemType)
-            return instantiateFrom((QuestionItemType) ddiObject);
-        else if (ddiObject instanceof QuestionGridType)
-            return instantiateFrom((QuestionGridType) ddiObject);
-        else if (ddiObject instanceof GridResponseDomainInMixedType)
-            return instantiateFrom((GridResponseDomainInMixedType) ddiObject);
+        if (ddiObject instanceof QuestionItemType questionItemType)
+            return instantiateFrom(questionItemType);
+        else if (ddiObject instanceof QuestionGridType questionGridType)
+            return instantiateFrom(questionGridType);
+        else if (ddiObject instanceof GridResponseDomainInMixedType gridResponseDomainInMixedType)
+            return instantiateFrom(gridResponseDomainInMixedType);
         else
             throw new ConversionException("Eno conversion for DDI type " + ddiObject.getClass() + " not implemented.");
     }
