@@ -89,26 +89,32 @@ public class DDIIndex {
 
                 // Check that the list content applies for AbstractIdentifiableType
                 if (listContentType != null && AbstractIdentifiableType.class.isAssignableFrom(listContentType)) {
-                    try {
-                        // Iteration on each object in the list.
-                        @SuppressWarnings("unchecked") // https://stackoverflow.com/a/4388173/13425151
-                        Collection<AbstractIdentifiableType> ddiCollection = (Collection<AbstractIdentifiableType>) propertyDescriptor.getReadMethod().invoke(ddiObject);
-                        for (AbstractIdentifiableType ddiObject2 : ddiCollection) {
-                            // Keep track of link between nested objects
-                            parentsMap.put(ddiObject2.getIDArray(0).getStringValue(), ddiObjectId);
-                            // Recursive call of the function
-                            recursiveIndexing(ddiObject2);
-                        }
-                    } catch (IllegalAccessException | InvocationTargetException e) {
-                        throw new IndexingException(String.format(
-                                "Error when calling read method from property descriptor '%s' in class %s.",
-                                propertyDescriptor.getName(), ddiObject.getClass()),
-                                e);
-                    }
+
+                    // Now that we have what we want, index list content
+                    indexListContent(ddiObject, ddiObjectId, propertyDescriptor);
                 }
             }
         }
 
+    }
+
+    private void indexListContent(AbstractIdentifiableType ddiObject, String ddiObjectId, PropertyDescriptor propertyDescriptor) {
+        try {
+            // Iteration on each object in the list.
+            @SuppressWarnings("unchecked") // https://stackoverflow.com/a/4388173/13425151
+            Collection<AbstractIdentifiableType> ddiCollection = (Collection<AbstractIdentifiableType>) propertyDescriptor.getReadMethod().invoke(ddiObject);
+            for (AbstractIdentifiableType ddiObject2 : ddiCollection) {
+                // Keep track of link between nested objects
+                parentsMap.put(ddiObject2.getIDArray(0).getStringValue(), ddiObjectId);
+                // Recursive call of the function
+                recursiveIndexing(ddiObject2);
+            }
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw new IndexingException(String.format(
+                    "Error when calling read method from property descriptor '%s' in class %s.",
+                    propertyDescriptor.getName(), ddiObject.getClass()),
+                    e);
+        }
     }
 
     /** Return the DDI object corresponding to the given identifier,
