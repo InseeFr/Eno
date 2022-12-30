@@ -133,7 +133,7 @@ public class DDIMapper extends Mapper {
 
             // Lists
             else if (List.class.isAssignableFrom(classType)) {
-                listMapping(ddiObject, enoObject, modelContextType, propertyDescriptor, propertyName, typeDescriptor, ddiAnnotation, context, expression);
+                listMapping(ddiObject, enoObject, propertyDescriptor, typeDescriptor, ddiAnnotation, context, expression);
             }
 
             else {
@@ -177,7 +177,10 @@ public class DDIMapper extends Mapper {
         }
     }
 
-    private void listMapping(Object ddiObject, EnoObject enoObject, Class<?> modelContextType, PropertyDescriptor propertyDescriptor, String propertyName, TypeDescriptor typeDescriptor, DDI ddiAnnotation, EvaluationContext context, Expression expression) {
+    private void listMapping(Object ddiObject, EnoObject enoObject, PropertyDescriptor propertyDescriptor, TypeDescriptor typeDescriptor, DDI ddiAnnotation, EvaluationContext context, Expression expression) {
+        // Local variables used for logging purposes
+        Class<?> modelContextType = enoObject.getClass();
+        String propertyName = propertyDescriptor.getName();
         // Get the DDI collection instance by evaluating the expression
         List<?> ddiCollection = expression.getValue(context, ddiObject, List.class);
         // If the DDI collection is null and null is not allowed by the annotation, exception
