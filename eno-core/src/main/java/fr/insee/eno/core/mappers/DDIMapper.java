@@ -33,10 +33,8 @@ public class DDIMapper extends Mapper {
     /** Index created in the entry object of mapping functions. */
     private EnoIndex index;
 
-    public DDIMapper() {}
-
     private EvaluationContext setup(AbstractIdentifiableType ddiObject, EnoObject enoObject) {
-        log.debug("DDI mapping entry object: " + DDIToString(ddiObject));
+        log.debug("DDI mapping entry object: " + ddiToString(ddiObject));
         // Index DDI object
         DDIIndex ddiIndex = new DDIIndex();
         ddiIndex.indexDDIObject(ddiObject);
@@ -78,7 +76,7 @@ public class DDIMapper extends Mapper {
 
     private void recursiveMapping(Object ddiObject, EnoObject enoObject, EvaluationContext context) {
 
-        log.debug("Start mapping for "+DDIToString(ddiObject)
+        log.debug("Start mapping for "+ ddiToString(ddiObject)
                 +" with model context type '"+enoObject.getClass().getSimpleName()+"'");
 
         // Use Spring BeanWrapper to iterate on property descriptors of the model object
@@ -112,7 +110,6 @@ public class DDIMapper extends Mapper {
 
         // Identify the class type of the property
         Class<?> classType = propertyDescriptor.getPropertyType();
-        //Class<?> classType = typeDescriptor.getType();
 
         // Use the Spring type descriptor to get the DDI annotation if any
         DDI ddiAnnotation = typeDescriptor.getAnnotation(DDI.class);
@@ -151,15 +148,13 @@ public class DDIMapper extends Mapper {
         Object ddiValue = expression.getValue(context, ddiObject);
         if (ddiValue != null) {
             beanWrapper.setPropertyValue(propertyName, ddiValue);
-            log.debug("Value '"+ beanWrapper.getPropertyValue(propertyName)+"' set"
-                    +" on property '"+ propertyName +"'"
-                    +" of class '"+ modelContextType.getSimpleName()+"'");
+            log.debug("Value '"+ beanWrapper.getPropertyValue(propertyName)+"' set "
+                    + propertyDescription(propertyName, modelContextType.getSimpleName()));
         }
         // It is allowed to have null values (a DDI property can be present or not depending on the case)
         else {
-            log.debug("null value got from evaluating DDI annotation expression" +
-                    " on property '"+ propertyName +"'" +
-                    " of class '"+ modelContextType.getSimpleName()+"'");
+            log.debug("null value got from evaluating DDI annotation expression "
+                    + propertyDescription(propertyName, modelContextType.getSimpleName()));
         }
     }
 
@@ -168,9 +163,8 @@ public class DDIMapper extends Mapper {
         EnoObject enoObject2 = callConstructor(classType);
         // Attach it to the current object
         beanWrapper.setPropertyValue(propertyName, enoObject2);
-        log.debug("New instance of '"+enoObject2.getClass().getSimpleName()+"' set"
-                +" on property '"+ propertyName +"'"
-                +" of class '"+ modelContextType.getSimpleName()+"'");
+        log.debug("New instance of '"+enoObject2.getClass().getSimpleName()+"' set "
+                + propertyDescription(propertyName, modelContextType.getSimpleName()));
         // Recursive call of the mapper to dive into this object
         Object ddiObject2 = expression.getValue(context, ddiObject);
         if (ddiObject2 != null) {
@@ -178,9 +172,8 @@ public class DDIMapper extends Mapper {
         }
         // It is now allowed to have a null DDI object on complex type properties
         else {
-            log.debug(String.format(
-                    "DDI object mapped by the annotation on property '%s' in class %s is null",
-                    propertyName, modelContextType));
+            log.debug("DDI object mapped by the annotation is null "
+                            + propertyDescription(propertyName, modelContextType.getName()));
         }
     }
 
@@ -189,13 +182,11 @@ public class DDIMapper extends Mapper {
         List<?> ddiCollection = expression.getValue(context, ddiObject, List.class);
         // If the DDI collection is null and null is not allowed by the annotation, exception
         if (ddiCollection == null && !ddiAnnotation.allowNullList()) {
-            log.debug(String.format(
-                    "Incoherent expression in field of DDI annotation on property '%s' in class %s.",
-                    propertyName, modelContextType));
+            log.debug("Incoherent expression in field of DDI annotation "
+                    + propertyDescription(propertyName, modelContextType.getName()));
             log.debug("If the DDI list can actually be null, use the annotation property to allow it.");
-            throw new MappingException(String.format(
-                    "DDI list mapped by the annotation on property '%s' in class %s is null",
-                    propertyName, modelContextType));
+            throw new MappingException("DDI list mapped by the annotation is null "
+                    + propertyDescription(propertyName, modelContextType.getName()));
         }
         // If the DDI collection is null and null is allowed, do nothing, else:
         else if (ddiCollection != null) {
@@ -209,17 +200,15 @@ public class DDIMapper extends Mapper {
             // List of simple types
             if (isSimpleType(modelTargetType)) {
                 modelCollection.addAll(ddiCollection);
-                log.debug(collectionSize+" values set"
-                        +" on property '"+ propertyName +"'"
-                        +" of class '"+ modelContextType.getSimpleName()+"'");
+                log.debug(collectionSize+" values set "
+                        + propertyDescription(propertyName, modelContextType.getSimpleName()));
             }
             // List of complex types
             else if (EnoObject.class.isAssignableFrom(modelTargetType)) {
                 // Iterate on the DDI collection
                 for (int i=0; i<collectionSize; i++) {
-                    log.debug("Iterating on "+collectionSize+" DDI objects"
-                            +" on property '"+ propertyName +"'"
-                            +" of class '"+ modelContextType.getSimpleName()+"'");
+                    log.debug("Iterating on "+collectionSize+" DDI objects "
+                            + propertyDescription(propertyName, modelContextType.getSimpleName()));
                     Object ddiObject2 = ddiCollection.get(i);
                     // Put current list index in context TODO: I don't really like this but... :(((
                     context.setVariable("listIndex", i);
@@ -257,11 +246,15 @@ public class DDIMapper extends Mapper {
         }
     }
 
-    private static String DDIToString(@NonNull Object ddiInstance) {
-        return ddiInstance.getClass().getSimpleName()
-                +((ddiInstance instanceof AbstractIdentifiableType) ?
-                "[id="+((AbstractIdentifiableType)ddiInstance).getIDArray(0).getStringValue()+"]" :
+    private static String ddiToString(@NonNull Object ddiObject) {
+        return ddiObject.getClass().getSimpleName()
+                +((ddiObject instanceof AbstractIdentifiableType ddiIdentifiableObject) ?
+                "[id="+ddiIdentifiableObject.getIDArray(0).getStringValue()+"]" :
                 "");
+    }
+
+    private static String propertyDescription(String propertyName, String className) {
+        return "(Property '"+ propertyName +"' of class '"+ className +"')";
     }
 
 }
