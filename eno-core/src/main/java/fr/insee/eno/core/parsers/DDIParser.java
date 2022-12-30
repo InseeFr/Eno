@@ -1,6 +1,6 @@
 package fr.insee.eno.core.parsers;
 
-import fr.insee.eno.core.exceptions.DDIParsingException;
+import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import instance33.DDIInstanceDocument;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.xmlbeans.XmlException;

@@ -2,7 +2,7 @@ package fr.insee.eno.core.sandbox;
 
 import datacollection33.*;
 import datacollection33.impl.TextTypeImpl;
-import fr.insee.eno.core.exceptions.DDIParsingException;
+import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.reference.DDIIndex;
 import group33.ResourcePackageType;

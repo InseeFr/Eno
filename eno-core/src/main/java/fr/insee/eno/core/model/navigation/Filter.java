@@ -3,6 +3,7 @@ package fr.insee.eno.core.model.navigation;
 import datacollection33.IfThenElseType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoObjectWithExpression;
 import fr.insee.eno.core.model.calculated.BindingReference;
@@ -81,7 +82,7 @@ public class Filter extends EnoIdentifiableObject implements EnoObjectWithExpres
     private List<String> componentReferences = new ArrayList<>();
 
     public static String unexpectedDDIComponent(IfThenElseType ifThenElseType, String typeOfObject) {
-        throw new RuntimeException(String.format(
+        throw new MappingException(String.format(
                 "Unexpected type of object '%s' found in ThenConstructReference sequence of IfThenElse '%s'",
                 typeOfObject, ifThenElseType.getIDArray(0).getStringValue()));
     }

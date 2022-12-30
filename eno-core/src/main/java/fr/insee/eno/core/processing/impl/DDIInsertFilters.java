@@ -1,5 +1,6 @@
 package fr.insee.eno.core.processing.impl;
 
+import fr.insee.eno.core.exceptions.technical.FilterScopeException;
 import fr.insee.eno.core.model.EnoComponent;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
@@ -28,7 +29,7 @@ public class DDIInsertFilters implements InProcessingInterface {
                 // Controls are not concerned since they are inserted in components
                 // Else an exception is thrown
                 else if (! (enoObject instanceof Control))
-                    throw new RuntimeException(String.format(
+                    throw new FilterScopeException(String.format(
                             "Filter '%s' has an object in its scope that is neither a component or a filter. " +
                                     "Object in question: %s",
                             filter.getId(), enoObject));

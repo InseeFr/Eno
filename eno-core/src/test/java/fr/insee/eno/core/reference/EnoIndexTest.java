@@ -1,11 +1,10 @@
 package fr.insee.eno.core.reference;
 
-import fr.insee.eno.core.exceptions.DDIParsingException;
+import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parsers.DDIParser;
 import instance33.DDIInstanceDocument;
-import org.apache.xmlbeans.XmlException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

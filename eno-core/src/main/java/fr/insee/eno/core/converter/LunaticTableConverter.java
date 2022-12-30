@@ -1,7 +1,7 @@
 package fr.insee.eno.core.converter;
 
 import fr.insee.eno.core.Constant;
-import fr.insee.eno.core.exceptions.UnauthorizedHeaderException;
+import fr.insee.eno.core.exceptions.business.UnauthorizedHeaderException;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.code.CodeList;

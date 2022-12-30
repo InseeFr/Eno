@@ -2,6 +2,7 @@ package fr.insee.eno.core.mappers;
 
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.converter.DDIConverter;
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
@@ -192,7 +193,7 @@ public class DDIMapper extends Mapper {
                     "Incoherent expression in field of DDI annotation on property '%s' in class %s.",
                     propertyName, modelContextType));
             log.debug("If the DDI list can actually be null, use the annotation property to allow it.");
-            throw new RuntimeException(String.format(
+            throw new MappingException(String.format(
                     "DDI list mapped by the annotation on property '%s' in class %s is null",
                     propertyName, modelContextType));
         }
@@ -250,9 +251,9 @@ public class DDIMapper extends Mapper {
             return (EnoObject) classType.getDeclaredConstructor().newInstance();
         } catch (NoSuchMethodException e) {
             log.debug("Default constructor may be missing in class " + classType);
-            throw new RuntimeException("Unable to create instance for class " + classType, e);
+            throw new MappingException("Unable to create instance for class " + classType, e);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException("Unable to create instance for class " + classType, e);
+            throw new MappingException("Unable to create instance for class " + classType, e);
         }
     }
 

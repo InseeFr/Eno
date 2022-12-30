@@ -1,6 +1,6 @@
 package fr.insee.eno.core.mappers;
 
-import fr.insee.eno.core.exceptions.DDIParsingException;
+import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.model.variable.VariableGroup;

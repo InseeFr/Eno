@@ -1,6 +1,7 @@
 package fr.insee.eno.core.converter;
 
 import datacollection33.*;
+import fr.insee.eno.core.exceptions.technical.ConversionException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.question.*;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +28,7 @@ public class DDIConverter {
         else if (ddiObject instanceof GridResponseDomainInMixedType)
             return instantiateFrom((GridResponseDomainInMixedType) ddiObject);
         else
-            throw new RuntimeException("Eno conversion for DDI type " + ddiObject.getClass() + " not implemented.");
+            throw new ConversionException("Eno conversion for DDI type " + ddiObject.getClass() + " not implemented.");
     }
 
     private static EnoObject instantiateFrom(QuestionItemType questionItemType) {
@@ -65,7 +66,7 @@ public class DDIConverter {
 
         }
         else {
-            throw new RuntimeException(
+            throw new ConversionException(
                     "Unable to identify question type in DDI question item " +
                             questionItemType.getIDArray(0).getStringValue());
         }
@@ -84,7 +85,7 @@ public class DDIConverter {
             else if (representationType instanceof CodeDomainType)
                 return new MultipleChoiceQuestion.Complex();
             else
-                throw new RuntimeException(
+                throw new ConversionException(
                         "Unable to identify question type in DDI question grid " +
                                 questionGridType.getIDArray(0).getStringValue());
         }
@@ -93,7 +94,7 @@ public class DDIConverter {
                     .filter(gridDimensionType1 -> gridDimensionType1.getRank().intValue() == 1)
                     .findAny().orElse(null);
             if (gridDimensionType == null) {
-                throw new RuntimeException(String.format(
+                throw new ConversionException(String.format(
                         "Question grid '%s' has no grid dimension of rank 1.",
                         questionGridType.getIDArray(0).getStringValue()));
             } else {
@@ -102,7 +103,7 @@ public class DDIConverter {
                 } else if (gridDimensionType.getRoster() != null) {
                     return new DynamicTableQuestion();
                 } else {
-                    throw new RuntimeException(String.format(
+                    throw new ConversionException(String.format(
                             "Grid dimension of rank 1 of question grid '%s' is neither a CodeDomain nor a Roster. " +
                                     "This case is unexpected and Eno is unable to convert this question.",
                             questionGridType.getIDArray(0).getStringValue()));
@@ -111,7 +112,7 @@ public class DDIConverter {
 
         }
         else {
-            throw new RuntimeException(String.format(
+            throw new ConversionException(String.format(
                     "Question grid '%s' has %s grid dimension objects. " +
                             "Eno expects question grids to have exactly 1 or 2 of these.",
                     questionGridType.getIDArray(0).getStringValue(), dimensionSize));
@@ -136,7 +137,7 @@ public class DDIConverter {
             return new TableCell.UniqueChoiceCell();
         }
         else {
-            throw new RuntimeException(
+            throw new ConversionException(
                     "Unable to identify cell type in DDI GridResponseDomainInMixed object " +
                             "with response domain of type "+representationType.getClass()+".");
         }

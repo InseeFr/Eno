@@ -1,5 +1,7 @@
 package fr.insee.eno.core.reference;
 
+import fr.insee.eno.core.exceptions.business.DuplicateIdException;
+import fr.insee.eno.core.exceptions.technical.IndexingException;
 import fr.insee.eno.core.mappers.Mapper;
 import instance33.DDIInstanceDocument;
 import lombok.extern.slf4j.Slf4j;
@@ -7,8 +9,6 @@ import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.core.convert.TypeDescriptor;
 import reusable33.AbstractIdentifiableType;
-import reusable33.InParameterType;
-import reusable33.impl.InParameterTypeImpl;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
@@ -67,7 +67,7 @@ public class DDIIndex {
 
         // Put the object in the map under the id (there should never be duplicate ids in DDI documents)
         index.merge(ddiObjectId, ddiObject, (oldDDIObject, newDDIObject) -> {
-            throw new RuntimeException(String.format("Duplicate ID \"%s\" found in given DDI.", ddiObjectId));
+            throw new DuplicateIdException(String.format("Duplicate ID \"%s\" found in given DDI.", ddiObjectId));
         });
 
         // Use Spring BeanWrapper to iterate on object property descriptors
@@ -100,7 +100,7 @@ public class DDIIndex {
                             recursiveIndexing(ddiObject2);
                         }
                     } catch (IllegalAccessException | InvocationTargetException e) {
-                        throw new RuntimeException(String.format(
+                        throw new IndexingException(String.format(
                                 "Error when calling read method from property descriptor '%s' in class %s.",
                                 propertyDescriptor.getName(), ddiObject.getClass()),
                                 e);

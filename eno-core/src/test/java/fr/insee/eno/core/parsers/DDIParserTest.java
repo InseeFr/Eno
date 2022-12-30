@@ -1,20 +1,15 @@
 package fr.insee.eno.core.parsers;
 
 import datacollection33.*;
-import datacollection33.impl.LiteralTextTypeImpl;
 import datacollection33.impl.TextTypeImpl;
-import fr.insee.eno.core.HelloTest;
-import fr.insee.eno.core.exceptions.DDIParsingException;
+import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import group33.ResourcePackageType;
 import instance33.DDIInstanceDocument;
 import instance33.DDIInstanceType;
 import logicalproduct33.CodeListType;
 import logicalproduct33.CodeType;
 import logicalproduct33.VariableType;
-import org.apache.xmlbeans.XmlException;
-import org.apache.xmlbeans.impl.schema.SchemaTypeImpl;
 import org.junit.jupiter.api.Test;
-import reusable33.TextDomainType;
 
 import java.io.IOException;
 import java.util.List;

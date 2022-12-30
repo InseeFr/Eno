@@ -1,4 +1,4 @@
-package fr.insee.eno.core.exceptions;
+package fr.insee.eno.core.exceptions.business;
 
 public class LunaticSerializationException extends Exception {
 
