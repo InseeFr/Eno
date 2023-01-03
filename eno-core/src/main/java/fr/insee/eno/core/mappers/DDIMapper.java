@@ -49,6 +49,8 @@ public class DDIMapper extends Mapper {
         // Eno index to be filled by the mapper
         index = new EnoIndex();
         enoObject.setIndex(index);
+        // Set static methods to be used during mapping
+        DDIBindings.setMethods(context);
         //
         return context;
     }
