@@ -27,6 +27,10 @@ import java.lang.reflect.Modifier;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Mapper implementation for the DDI input format.
+ * While mapping a DDI object to an Eno object, the mapper builds an index of Eno objects.
+ */
 @Slf4j
 public class DDIMapper extends Mapper {
 
