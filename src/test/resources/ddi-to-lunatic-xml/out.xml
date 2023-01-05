@@ -3,7 +3,7 @@
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 id="i6vwi2506qf2mms"
                 modele="SIMPSONS"
-                enoCoreVersion=""
+                enoCoreVersion="2.4.1-pairwise"
                 missing="false"
                 pagination="question"
                 maxPage="40">
@@ -3192,6 +3192,7 @@
                   <type>VTL|MD</type>
                </label>
             </options>
+            <response name="FAVOURITE_CHAR3"/>
          </components>
       </components>
       <components xsi:type="Table"
