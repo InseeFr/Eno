@@ -3,10 +3,10 @@
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 id="i6vwi2506qf2mms"
                 modele="SIMPSONS"
-                enoCoreVersion="2.4.1-pairwise"
+                enoCoreVersion=""
                 missing="false"
                 pagination="question"
-                maxPage="37">
+                maxPage="40">
    <label>
       <value>"Questionnaire SIMPSONS 20201215"</value>
       <type>VTL|MD</type>
@@ -3101,8 +3101,8 @@
             </label>
          </sequence>
       </hierarchy>
-      <components xsi:type="Table"
-                   componentType="Table"
+      <components xsi:type="RosterForLoop"
+                   componentType="RosterForLoop"
                    id="j6qg8rc6"
                    positioning="HORIZONTAL"
                    mandatory="false"
@@ -3155,48 +3155,51 @@
                <type>VTL|MD</type>
             </label>
          </header>
-         <body>
-            <bodyLine id="j6qg8rc6-QOP-kiq7p16z" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHAR1"/>
-               <bindingDependencies>FAVOURITE_CHAR1</bindingDependencies>
-            </bodyLine>
-            <bodyLine id="j6qg8rc6-QOP-kiq7kny3" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHAR2"/>
-               <bindingDependencies>FAVOURITE_CHAR2</bindingDependencies>
-            </bodyLine>
-            <bodyLine id="j6qg8rc6-QOP-kiq7lffy" componentType="CheckboxOne">
-               <options>
-                  <value>1</value>
-                  <label>
-                     <value>"Yes"</value>
-                     <type>VTL|MD</type>
-                  </label>
-               </options>
-               <options>
-                  <value>2</value>
-                  <label>
-                     <value>"No"</value>
-                     <type>VTL|MD</type>
-                  </label>
-               </options>
-               <options>
-                  <value>3</value>
-                  <label>
-                     <value>"Other"</value>
-                     <type>VTL|MD</type>
-                  </label>
-               </options>
-               <response name="FAVOURITE_CHAR3"/>
-               <bindingDependencies>FAVOURITE_CHAR3</bindingDependencies>
-            </bodyLine>
-         </body>
+         <components id="j6qg8rc6-QOP-kiq7p16z"
+                      componentType="Textarea"
+                      maxLength="255"
+                      page="30">
+            <bindingDependencies>FAVOURITE_CHAR1</bindingDependencies>
+            <response name="FAVOURITE_CHAR1"/>
+         </components>
+         <components id="j6qg8rc6-QOP-kiq7kny3"
+                      componentType="Textarea"
+                      maxLength="255"
+                      page="31">
+            <bindingDependencies>FAVOURITE_CHAR2</bindingDependencies>
+            <response name="FAVOURITE_CHAR2"/>
+         </components>
+         <components id="j6qg8rc6-QOP-kiq7lffy" componentType="CheckboxOne" page="32">
+            <bindingDependencies>FAVOURITE_CHAR3</bindingDependencies>
+            <options>
+               <value>1</value>
+               <label>
+                  <value>"Yes"</value>
+                  <type>VTL|MD</type>
+               </label>
+            </options>
+            <options>
+               <value>2</value>
+               <label>
+                  <value>"No"</value>
+                  <type>VTL|MD</type>
+               </label>
+            </options>
+            <options>
+               <value>3</value>
+               <label>
+                  <value>"Other"</value>
+                  <type>VTL|MD</type>
+               </label>
+            </options>
+         </components>
       </components>
       <components xsi:type="Table"
                    componentType="Table"
                    id="jvxux0mi"
                    positioning="HORIZONTAL"
                    mandatory="false"
-                   page="30">
+                   page="33">
          <label>
             <value>"➡ 2. " || "How has your feeling about the following characters evolved over time?"</value>
             <type>VTL|MD</type>
@@ -3360,7 +3363,7 @@
                    id="jvxwy68n"
                    positioning="HORIZONTAL"
                    mandatory="false"
-                   page="31">
+                   page="34">
          <label>
             <value>"➡ 3. " || "Can you tell how long Bart Simpson has been on leave for each type and whether there has been another type?"</value>
             <type>VTL|MD</type>
@@ -3826,7 +3829,7 @@
    <components xsi:type="Sequence"
                 componentType="Sequence"
                 id="kiq5mr0b"
-                page="32">
+                page="35">
       <label>
          <value>"VI - " || "Favourite characters (Loop)"</value>
          <type>VTL|MD</type>
@@ -3837,7 +3840,7 @@
          <bindingDependencies>READY</bindingDependencies>
       </conditionFilter>
       <hierarchy>
-         <sequence id="kiq5mr0b" page="32">
+         <sequence id="kiq5mr0b" page="35">
             <label>
                <value>"VI - " || "Favourite characters (Loop)"</value>
                <type>VTL|MD</type>
@@ -3851,7 +3854,7 @@
                    min="0"
                    max="20"
                    decimals="0"
-                   page="33">
+                   page="36">
          <label>
             <value>"➡ 1. " || "How many characters from the Simpsons family could you precisely describe?"</value>
             <type>VTL|MD</type>
@@ -3886,7 +3889,7 @@
             </errorMessage>
          </controls>
          <hierarchy>
-            <sequence id="kiq5mr0b" page="32">
+            <sequence id="kiq5mr0b" page="35">
                <label>
                   <value>"VI - " || "Favourite characters (Loop)"</value>
                   <type>VTL|MD</type>
@@ -3900,7 +3903,7 @@
                    componentType="Loop"
                    id="kiq7bjam"
                    depth="1"
-                   page="34"
+                   page="37"
                    paginatedLoop="false">
          <label>
             <value>"Add a character"</value>
@@ -3926,7 +3929,7 @@
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="kiq5mr0b" page="32">
+            <sequence id="kiq5mr0b" page="35">
                <label>
                   <value>"VI - " || "Favourite characters (Loop)"</value>
                   <type>VTL|MD</type>
@@ -3940,8 +3943,8 @@
          <components xsi:type="Subsequence"
                       componentType="Subsequence"
                       id="kiq5u8d5"
-                      page="34"
-                      goToPage="34">
+                      page="37"
+                      goToPage="37">
             <label>
                <value>"Description of each character"</value>
                <type>VTL|MD</type>
@@ -3952,13 +3955,13 @@
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="kiq5mr0b" page="32">
+               <sequence id="kiq5mr0b" page="35">
                   <label>
                      <value>"VI - " || "Favourite characters (Loop)"</value>
                      <type>VTL|MD</type>
                   </label>
                </sequence>
-               <subSequence id="kiq5u8d5" page="34">
+               <subSequence id="kiq5u8d5" page="37">
                   <label>
                      <value>"Description of each character"</value>
                      <type>VTL|MD</type>
@@ -3971,7 +3974,7 @@
                          id="kiq66gtw"
                          maxLength="30"
                          mandatory="false"
-                         page="34">
+                         page="37">
                <label>
                   <value>"➡ 2. " || "What is the first name of this character?"</value>
                   <type>VTL|MD</type>
@@ -3982,13 +3985,13 @@
                   <bindingDependencies>READY</bindingDependencies>
                </conditionFilter>
                <hierarchy>
-                  <sequence id="kiq5mr0b" page="32">
+                  <sequence id="kiq5mr0b" page="35">
                      <label>
                         <value>"VI - " || "Favourite characters (Loop)"</value>
                         <type>VTL|MD</type>
                      </label>
                   </sequence>
-                  <subSequence id="kiq5u8d5" page="34">
+                  <subSequence id="kiq5u8d5" page="37">
                      <label>
                         <value>"Description of each character"</value>
                         <type>VTL|MD</type>
@@ -4006,7 +4009,7 @@
                          min="0"
                          max="120"
                          decimals="0"
-                         page="34">
+                         page="37">
                <label>
                   <value>"➡ 3. " || "How old is this character in the first episode of the Simpsons family?"</value>
                   <type>VTL|MD</type>
@@ -4041,13 +4044,13 @@
                   </errorMessage>
                </controls>
                <hierarchy>
-                  <sequence id="kiq5mr0b" page="32">
+                  <sequence id="kiq5mr0b" page="35">
                      <label>
                         <value>"VI - " || "Favourite characters (Loop)"</value>
                         <type>VTL|MD</type>
                      </label>
                   </sequence>
-                  <subSequence id="kiq5u8d5" page="34">
+                  <subSequence id="kiq5u8d5" page="37">
                      <label>
                         <value>"Description of each character"</value>
                         <type>VTL|MD</type>
@@ -4065,7 +4068,7 @@
                 componentType="Loop"
                 id="kiq7cbgo"
                 depth="1"
-                page="35"
+                page="38"
                 maxPage="3"
                 paginatedLoop="true">
       <iterations>
@@ -4085,7 +4088,7 @@
       <components xsi:type="Sequence"
                    componentType="Sequence"
                    id="kiq5xw5p"
-                   page="35.1">
+                   page="38.1">
          <label>
             <value>"VII - " || "Other details about character named " || NAME_CHAR || " "</value>
             <type>VTL|MD</type>
@@ -4096,7 +4099,7 @@
             <bindingDependencies>READY</bindingDependencies>
          </conditionFilter>
          <hierarchy>
-            <sequence id="kiq5xw5p" page="35.1">
+            <sequence id="kiq5xw5p" page="38.1">
                <label>
                   <value>"VII - " || "Other details about character named " || NAME_CHAR || " "</value>
                   <type>VTL|MD</type>
@@ -4109,7 +4112,7 @@
                       componentType="CheckboxOne"
                       id="kiq65x3c"
                       mandatory="false"
-                      page="35.2">
+                      page="38.2">
             <label>
                <value>"➡ 1. " || "Is character named " || NAME_CHAR || " your favourite one ? "</value>
                <type>VTL|MD</type>
@@ -4120,7 +4123,7 @@
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="kiq5xw5p" page="35.1">
+               <sequence id="kiq5xw5p" page="38.1">
                   <label>
                      <value>"VII - " || "Other details about character named " || NAME_CHAR || " "</value>
                      <type>VTL|MD</type>
@@ -4151,7 +4154,7 @@
                       id="kiq651zv"
                       maxLength="255"
                       mandatory="false"
-                      page="35.3">
+                      page="38.3">
             <label>
                <value>"➡ 2. " || "What is your best memory about character named " || NAME_CHAR || " ? "</value>
                <type>VTL|MD</type>
@@ -4162,7 +4165,7 @@
                <bindingDependencies>READY</bindingDependencies>
             </conditionFilter>
             <hierarchy>
-               <sequence id="kiq5xw5p" page="35.1">
+               <sequence id="kiq5xw5p" page="38.1">
                   <label>
                      <value>"VII - " || "Other details about character named " || NAME_CHAR || " "</value>
                      <type>VTL|MD</type>
@@ -4179,7 +4182,7 @@
    <components xsi:type="Sequence"
                 componentType="Sequence"
                 id="j6z12s2d"
-                page="36">
+                page="39">
       <label>
          <value>"VIII - " || "Comment"</value>
          <type>VTL|MD</type>
@@ -4189,7 +4192,7 @@
          <type>VTL</type>
       </conditionFilter>
       <hierarchy>
-         <sequence id="j6z12s2d" page="36">
+         <sequence id="j6z12s2d" page="39">
             <label>
                <value>"VIII - " || "Comment"</value>
                <type>VTL|MD</type>
@@ -4201,7 +4204,7 @@
                    id="j6z0z3us"
                    maxLength="255"
                    mandatory="false"
-                   page="37">
+                   page="40">
          <label>
             <value>"➡ 1. " || "Do you have any comment about the survey?"</value>
             <type>VTL|MD</type>
@@ -4211,7 +4214,7 @@
             <type>VTL</type>
          </conditionFilter>
          <hierarchy>
-            <sequence id="j6z12s2d" page="36">
+            <sequence id="j6z12s2d" page="39">
                <label>
                   <value>"VIII - " || "Comment"</value>
                   <type>VTL|MD</type>
@@ -5016,34 +5019,64 @@
          <INPUTED xsi:nil="true"/>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHAR1</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHAR2</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHAR3</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
    <variables variableType="COLLECTED" xsi:type="VariableType">
@@ -5366,9 +5399,6 @@
          <TRAVEL44>(READY)</TRAVEL44>
          <TRAVEL45>(READY)</TRAVEL45>
          <TRAVEL46>(READY)</TRAVEL46>
-         <FAVOURITE_CHAR1>(READY)</FAVOURITE_CHAR1>
-         <FAVOURITE_CHAR2>(READY)</FAVOURITE_CHAR2>
-         <FAVOURITE_CHAR3>(READY)</FAVOURITE_CHAR3>
          <FEELCHAREV1>(READY)</FEELCHAREV1>
          <FEELCHAREV2>(READY)</FEELCHAREV2>
          <FEELCHAREV3>(READY)</FEELCHAREV3>
