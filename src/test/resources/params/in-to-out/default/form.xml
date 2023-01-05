@@ -3,7 +3,7 @@
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 id="i6vwi0"
                 modele="SIMPSONS"
-                enoCoreVersion=""
+                enoCoreVersion="2.4.1-pairwise"
                 missing="false">
    <label>
       <value>Questionnaire SIMPSONS</value>
@@ -2582,6 +2582,10 @@
          <controls id="j6qg8rc6-format-decimal"
                     criticality="ERROR"
                     typeOfControl="FORMAT">
+            <control>
+               <value>not(not(isnull(FAVOURITE_CHARACTERS52))  and round(FAVOURITE_CHARACTERS52,0)&lt;&gt;FAVOURITE_CHARACTERS52)</value>
+               <type>VTL</type>
+            </control>
             <errorMessage>
                <value>"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule."</value>
                <type>VTL|MD</type>
@@ -2680,6 +2684,90 @@
             </control>
             <errorMessage>
                <value>" La valeur doit être comprise entre 0 et 120."</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="j6qg8rc6-format-decimal"
+                    criticality="ERROR"
+                    typeOfControl="FORMAT">
+            <control>
+               <value>not(not(isnull(FAVOURITE_CHARACTERS82))  and round(FAVOURITE_CHARACTERS82,0)&lt;&gt;FAVOURITE_CHARACTERS82)</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule."</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <components id="j6qg8rc6-QOP-jbgd5jet" componentType="Textarea" maxLength="255">
+            <bindingDependencies>FAVOURITE_CHARACTERS91</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS91"/>
+         </components>
+         <components id="j6qg8rc6-QOP-jbgdk0x4"
+                      componentType="InputNumber"
+                      min="0"
+                      max="120"
+                      decimals="0">
+            <bindingDependencies>FAVOURITE_CHARACTERS92</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS92"/>
+         </components>
+         <controls id="j6qg8rc6-format-borne-inf-sup"
+                    criticality="ERROR"
+                    typeOfControl="FORMAT">
+            <control>
+               <value>not(not(isnull(FAVOURITE_CHARACTERS92)) and (0&gt;FAVOURITE_CHARACTERS92 or 120&lt;FAVOURITE_CHARACTERS92))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>" La valeur doit être comprise entre 0 et 120."</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="j6qg8rc6-format-decimal"
+                    criticality="ERROR"
+                    typeOfControl="FORMAT">
+            <control>
+               <value>not(not(isnull(FAVOURITE_CHARACTERS92))  and round(FAVOURITE_CHARACTERS92,0)&lt;&gt;FAVOURITE_CHARACTERS92)</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule."</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <components id="j6qg8rc6-QOP-jbgdjw90" componentType="Textarea" maxLength="255">
+            <bindingDependencies>FAVOURITE_CHARACTERS101</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS101"/>
+         </components>
+         <components id="j6qg8rc6-QOP-jbgd2wgf"
+                      componentType="InputNumber"
+                      min="0"
+                      max="120"
+                      decimals="0">
+            <bindingDependencies>FAVOURITE_CHARACTERS102</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS102"/>
+         </components>
+         <controls id="j6qg8rc6-format-borne-inf-sup"
+                    criticality="ERROR"
+                    typeOfControl="FORMAT">
+            <control>
+               <value>not(not(isnull(FAVOURITE_CHARACTERS102)) and (0&gt;FAVOURITE_CHARACTERS102 or 120&lt;FAVOURITE_CHARACTERS102))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>" La valeur doit être comprise entre 0 et 120."</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+         <controls id="j6qg8rc6-format-decimal"
+                    criticality="ERROR"
+                    typeOfControl="FORMAT">
+            <control>
+               <value>not(not(isnull(FAVOURITE_CHARACTERS102))  and round(FAVOURITE_CHARACTERS102,0)&lt;&gt;FAVOURITE_CHARACTERS102)</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule."</value>
                <type>VTL|MD</type>
             </errorMessage>
          </controls>
