@@ -703,8 +703,11 @@
 		<xsl:element name="{$elementName}">
 			<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 			<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
-			<xsl:if test="$label!='' and $elementName!='header'">
+			<xsl:if test="$label!='' and $elementName!='header' and $elementName!='headers'">
 				<value><xsl:value-of select="enolunatic:get-value($source-context)"/></value>
+			</xsl:if>
+			<xsl:if test="$elementName = 'headers'">
+				<headerCell>true</headerCell>
 			</xsl:if>
 			<label>
 				<value><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/></value>
