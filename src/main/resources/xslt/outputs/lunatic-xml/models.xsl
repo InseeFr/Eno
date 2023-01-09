@@ -627,27 +627,15 @@
 				</xsl:call-template>
 			</xsl:if>
 
-			<xsl:for-each select="enolunatic:get-header-lines($source-context)">
-				<xsl:choose>
-					<xsl:when test="$componentType = 'Table'">
+			<xsl:choose>
+				<xsl:when test="$componentType = 'Table'">
+					<xsl:for-each select="enolunatic:get-header-lines($source-context)">
 						<xsl:apply-templates select="enolunatic:get-header-line($source-context,position())" mode="source">
 							<xsl:with-param name="elementName" select="'header'" tunnel="yes"/>
 							<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
 						</xsl:apply-templates>
-					</xsl:when>
-					<xsl:when test="$componentType = 'RosterForLoop'">
-						<xsl:apply-templates select="enolunatic:get-header-line($source-context,position())" mode="source">
-							<xsl:with-param name="elementName" select="'header'" tunnel="yes"/>
-							<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
-							<xsl:with-param name="loopDepth" select="$loopDepth + 1" tunnel="yes"/>
-						</xsl:apply-templates>
-					</xsl:when>
-				</xsl:choose>
-			</xsl:for-each>
-
-			<xsl:for-each select="enolunatic:get-body-lines($source-context)">
-				<xsl:choose>
-					<xsl:when test="$componentType = 'Table'">
+					</xsl:for-each>
+					<xsl:for-each select="enolunatic:get-body-lines($source-context)">
 						<body>
 							<xsl:apply-templates select="enolunatic:get-body-line($source-context,position())" mode="source">
 								<xsl:with-param name="elementName" select="'bodyLine'" tunnel="yes"/>
@@ -656,8 +644,17 @@
 								<xsl:with-param name="idQuestion" select="$idQuestion" tunnel="yes"/>
 							</xsl:apply-templates>
 						</body>
-					</xsl:when>
-					<xsl:when test="$componentType = 'RosterForLoop'">
+					</xsl:for-each>
+				</xsl:when>
+				<xsl:when test="$componentType = 'RosterForLoop'">
+					<xsl:for-each select="enolunatic:get-header-lines($source-context)">
+						<xsl:apply-templates select="enolunatic:get-header-line($source-context,position())" mode="source">
+							<xsl:with-param name="elementName" select="'headers'" tunnel="yes"/>
+							<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
+							<xsl:with-param name="loopDepth" select="$loopDepth + 1" tunnel="yes"/>
+						</xsl:apply-templates>
+					</xsl:for-each>
+					<xsl:for-each select="enolunatic:get-body-lines($source-context)">
 						<xsl:apply-templates select="enolunatic:get-body-line($source-context,position())" mode="source">
 							<xsl:with-param name="elementName" select="'components'" tunnel="yes"/>
 							<xsl:with-param name="position" select="position()" tunnel="yes"/>
@@ -665,9 +662,9 @@
 							<xsl:with-param name="idQuestion" select="$idQuestion" tunnel="yes"/>
 							<xsl:with-param name="loopDepth" select="$loopDepth + 1" tunnel="yes"/>
 						</xsl:apply-templates>
-					</xsl:when>
-				</xsl:choose>
-			</xsl:for-each>
+					</xsl:for-each>
+				</xsl:when>
+			</xsl:choose>
 		</components>
 		
 		<xsl:if test="$addFilterResult">
