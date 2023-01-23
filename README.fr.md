@@ -22,7 +22,7 @@ La documentation se trouve dans le dossier [docs](./docs/fr) et peut être [cons
 
 ## Eno _Java_
 
-Projet Eno V3 "Java" : changement de technologie de XSLT vers Java.
+Projet V3 "Eno Java" : changement de technologie de XSLT vers Java.
 
 ## Configuration
 
