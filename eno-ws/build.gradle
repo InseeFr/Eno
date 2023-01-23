@@ -1,8 +1,17 @@
 plugins {
 	id 'org.springframework.boot'
+	id 'application'
 	id 'io.spring.dependency-management'
 	id 'java'
 	id 'maven-publish'
+}
+
+ext {
+   javaMainClass = 'fr.insee.eno.ws.EnoWsApplication'
+}
+
+application {
+	getMainClass().set(javaMainClass)
 }
 
 // Remove the "-plain" jar
