@@ -1,6 +1,5 @@
 package fr.insee.eno.core.model.calculated;
 
-import datacollection33.IfThenElseType;
 import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Format;
@@ -35,7 +34,7 @@ public class CalculatedExpression extends EnoObject {
     }
 
     /** Expression. */
-    @DDI(contextType = IfThenElseType.class, field = "getCommandContent()")
+    @DDI(contextType = CommandType.class, field = "getCommandContent()")
     @Lunatic(contextType = LabelType.class, field = "setValue(#param)")
     private String value;
 
