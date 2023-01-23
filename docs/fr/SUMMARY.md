@@ -6,12 +6,12 @@
 - [Eno Java](eno-core/index.md)
 - [Eno Web-Service](eno-ws/index.md)
 
-## Guide utilisateur
+## Documentation utilisateur
 
 - [Paramètres Eno](eno-core/eno-parameters.md)
 - [Couverture fonctionnelle](eno-core/functional-coverage.md)
 
-## Guide dévolppeur
+## Documentation développeur
 
 - [Démarrage](./CONTRIBUTING.md)
 - [Paradigme d'implémentation](eno-core/implementation-paradigm.md)
