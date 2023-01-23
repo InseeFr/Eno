@@ -17,8 +17,12 @@ public class DDIToEnoTest {
     @ValueSource(strings = {
             //"l10xmg2l",
             //"sandbox",
-            "l20g2ba7",
-            "sandbox_v2",
+            //"l20g2ba7",
+            //"sandbox_v2",
+            "sandbox_v3",
+            "l5v3spn0",
+            "kx0a2hn8",
+            "lciyojcw",
     })
     public void writeEnoFileFromDDI(String fileName) {
         assertDoesNotThrow(() -> {
