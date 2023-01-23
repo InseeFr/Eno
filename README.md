@@ -20,9 +20,9 @@ Eno is a part of the [Bowie](https://github.com/InseeFr/Bowie) product.
 
 The documentation can be found in the [docs](./docs/en) folder and [browsed online](https://inseefr.github.io/Eno).
 
-## Eno "Java"
+## Eno _Java_
 
-V3 "Java version" project: change of technology from XSLT to Java.
+V3 "Eno Java" project: change of technology from XSLT to Java.
 
 ## Setup
 
