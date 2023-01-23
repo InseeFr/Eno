@@ -7,13 +7,13 @@ import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.label.QuestionnaireLabel;
 import fr.insee.eno.core.model.navigation.Control;
 import fr.insee.eno.core.model.navigation.Filter;
+import fr.insee.eno.core.model.navigation.Loop;
 import fr.insee.eno.core.model.question.MultipleResponseQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.model.variable.VariableGroup;
-import fr.insee.lunatic.model.flat.Questionnaire;
 import instance33.DDIInstanceType;
 import lombok.Getter;
 import lombok.Setter;
@@ -91,6 +91,11 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
                     ".?[#this.getTypeOfSequenceArray(0).getStringValue() == 'module']" +
                     ".![#this.getIDArray(0).getStringValue()]")
     private final List<String> sequenceReferences = new ArrayList<>();
+
+    @DDI(contextType = DDIInstanceType.class,
+            field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
+                    ".?[#this instanceof T(datacollection33.LoopType)]")
+    private final List<Loop> loops = new ArrayList<>();
 
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
