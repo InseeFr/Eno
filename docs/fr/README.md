@@ -12,4 +12,4 @@ Eno est un projet multi-modules, se reporter à la documentation du module selon
 
 ## Je souhaite contribuer
 
-:right_arrow: [Guide du contributeur](./CONTRIBUTING.md)
+:arrow_right: [Guide du contributeur](./CONTRIBUTING.md)

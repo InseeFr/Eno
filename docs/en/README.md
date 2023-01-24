@@ -14,4 +14,4 @@ Eno is a multi-module project, refer to modules' documentation :
 
 ## Contributor guide
 
-:right_arrow: [Contributor guidelines](./CONTRIBUTING.md)
+:arrow_right: [Contributor guidelines](./CONTRIBUTING.md)
