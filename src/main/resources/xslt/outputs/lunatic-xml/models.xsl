@@ -444,7 +444,7 @@
 				<xsl:with-param name="labelQuestion" select="enolunatic:replace-all-variables-with-business-name($source-context, $label)" tunnel="yes"/>
 				<xsl:with-param name="typeOfQuestion" select="'Dropdown'" tunnel="yes"/>
 				<xsl:with-param name="declarations" select="enolunatic:getInstructionForQuestion($source-context,.)" as="node()*" tunnel="yes"/>
-				<xsl:with-param name="filterCondition" select="'xAxis != yAxis'" tunnel="yes"/>
+				<xsl:with-param name="filterCondition" select="'xAxis &lt;&gt; yAxis'" tunnel="yes"/>
 				<xsl:with-param name="filterConditionDependencies" select="''" as="xs:string*" tunnel="yes"/>
 				<xsl:with-param name="dependencies" select="$dependencies" tunnel="yes"/>
 				<xsl:with-param name="loopDepth" select="$loopDepth +2" tunnel="yes"/>
@@ -650,7 +650,7 @@
 				<xsl:when test="$componentType = 'RosterForLoop'">
 					<xsl:for-each select="enolunatic:get-header-lines($source-context)">
 						<xsl:apply-templates select="enolunatic:get-header-line($source-context,position())" mode="source">
-							<xsl:with-param name="elementName" select="'headers'" tunnel="yes"/>
+							<xsl:with-param name="elementName" select="'header'" tunnel="yes"/>
 							<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
 							<xsl:with-param name="loopDepth" select="$loopDepth + 1" tunnel="yes"/>
 						</xsl:apply-templates>
@@ -704,11 +704,8 @@
 		<xsl:element name="{$elementName}">
 			<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 			<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
-			<xsl:if test="$label!='' and $elementName!='header' and $elementName!='headers'">
+			<xsl:if test="$label!='' and $elementName!='header'">
 				<value><xsl:value-of select="enolunatic:get-value($source-context)"/></value>
-			</xsl:if>
-			<xsl:if test="$elementName = 'headers'">
-				<headerCell>true</headerCell>
 			</xsl:if>
 			<label>
 				<value><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/></value>
