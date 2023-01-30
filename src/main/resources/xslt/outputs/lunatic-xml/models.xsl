@@ -354,87 +354,87 @@
 			</hierarchy>
 			<xAxisIterations>
 				<value>count(<xsl:value-of select="$pairwiseScope"/>)</value>
-				<type>VTL|MD</type>
+				<type>VTL</type>
 			</xAxisIterations>
 			<yAxisIterations>
 				<value>count(<xsl:value-of select="$pairwiseScope"/>)</value>
-				<type>VTL|MD</type>
+				<type>VTL</type>
 			</yAxisIterations>
 			<symLinks>
-				<LINKS>
-					<LINK>
-						<source>1</source>
-						<target>1</target>
-					</LINK>
-					<LINK>
-						<source>2</source>
-						<target>3</target>
-					</LINK>
-					<LINK>
-						<source>3</source>
-						<target>2</target>
-					</LINK>
-					<LINK>
-						<source>4</source>
-						<target>4</target>
-					</LINK>
-					<LINK>
-						<source>5</source>
-						<target>6</target>
-					</LINK>
-					<LINK>
-						<source>6</source>
-						<target>5</target>
-					</LINK>
-					<LINK>
-						<source>7</source>
-						<target>8</target>
-					</LINK>
-					<LINK>
-						<source>8</source>
-						<target>7</target>
-					</LINK>
-					<LINK>
-						<source>9</source>
-						<target>10</target>
-					</LINK>
-					<LINK>
-						<source>10</source>
-						<target>9</target>
-					</LINK>
-					<LINK>
-						<source>11</source>
-						<target>13</target>
-					</LINK>
-					<LINK>
-						<source>12</source>
-						<target>12</target>
-					</LINK>
-					<LINK>
-						<source>13</source>
-						<target>11</target>
-					</LINK>
-					<LINK>
-						<source>14</source>
-						<target>null</target>
-					</LINK>
-					<LINK>
-						<source>15</source>
-						<target>null</target>
-					</LINK>
-					<LINK>
-						<source>16</source>
-						<target>16</target>
-					</LINK>
-					<LINK>
-						<source>17</source>
-						<target>17</target>
-					</LINK>
-					<LINK>
-						<source>18</source>
-						<target>18</target>
-					</LINK>
-				</LINKS>
+				<xsl:attribute name="name" select="$questionName"/>
+				
+				<LINK>
+					<source>1</source>
+					<target>1</target>
+				</LINK>
+				<LINK>
+					<source>2</source>
+					<target>3</target>
+				</LINK>
+				<LINK>
+					<source>3</source>
+					<target>2</target>
+				</LINK>
+				<LINK>
+					<source>4</source>
+					<target>4</target>
+				</LINK>
+				<LINK>
+					<source>5</source>
+					<target>6</target>
+				</LINK>
+				<LINK>
+					<source>6</source>
+					<target>5</target>
+				</LINK>
+				<LINK>
+					<source>7</source>
+					<target>8</target>
+				</LINK>
+				<LINK>
+					<source>8</source>
+					<target>7</target>
+				</LINK>
+				<LINK>
+					<source>9</source>
+					<target>10</target>
+				</LINK>
+				<LINK>
+					<source>10</source>
+					<target>9</target>
+				</LINK>
+				<LINK>
+					<source>11</source>
+					<target>13</target>
+				</LINK>
+				<LINK>
+					<source>12</source>
+					<target>12</target>
+				</LINK>
+				<LINK>
+					<source>13</source>
+					<target>11</target>
+				</LINK>
+				<LINK>
+					<source>14</source>
+					<target>null</target>
+				</LINK>
+				<LINK>
+					<source>15</source>
+					<target>null</target>
+				</LINK>
+				<LINK>
+					<source>16</source>
+					<target>16</target>
+				</LINK>
+				<LINK>
+					<source>17</source>
+					<target>17</target>
+				</LINK>
+				<LINK>
+					<source>18</source>
+					<target>18</target>
+				</LINK>
 			</symLinks>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -444,9 +444,10 @@
 				<xsl:with-param name="labelQuestion" select="enolunatic:replace-all-variables-with-business-name($source-context, $label)" tunnel="yes"/>
 				<xsl:with-param name="typeOfQuestion" select="'Dropdown'" tunnel="yes"/>
 				<xsl:with-param name="declarations" select="enolunatic:getInstructionForQuestion($source-context,.)" as="node()*" tunnel="yes"/>
-				<xsl:with-param name="filterCondition" select="$filterCondition" tunnel="yes"/>
-				<xsl:with-param name="filterConditionDependencies" select="$filterDependencies" as="xs:string*" tunnel="yes"/>
+				<xsl:with-param name="filterCondition" select="'xAxis &lt;&gt; yAxis'" tunnel="yes"/>
+				<xsl:with-param name="filterConditionDependencies" select="''" as="xs:string*" tunnel="yes"/>
 				<xsl:with-param name="dependencies" select="$dependencies" tunnel="yes"/>
+				<xsl:with-param name="loopDepth" select="$loopDepth +2" tunnel="yes"/>
 			</xsl:apply-templates>
 		</components>
 		<xsl:for-each select="('xAxis','yAxis')">
@@ -627,27 +628,15 @@
 				</xsl:call-template>
 			</xsl:if>
 
-			<xsl:for-each select="enolunatic:get-header-lines($source-context)">
-				<xsl:choose>
-					<xsl:when test="$componentType = 'Table'">
+			<xsl:choose>
+				<xsl:when test="$componentType = 'Table'">
+					<xsl:for-each select="enolunatic:get-header-lines($source-context)">
 						<xsl:apply-templates select="enolunatic:get-header-line($source-context,position())" mode="source">
 							<xsl:with-param name="elementName" select="'header'" tunnel="yes"/>
 							<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
 						</xsl:apply-templates>
-					</xsl:when>
-					<xsl:when test="$componentType = 'RosterForLoop'">
-						<xsl:apply-templates select="enolunatic:get-header-line($source-context,position())" mode="source">
-							<xsl:with-param name="elementName" select="'header'" tunnel="yes"/>
-							<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
-							<xsl:with-param name="loopDepth" select="$loopDepth + 1" tunnel="yes"/>
-						</xsl:apply-templates>
-					</xsl:when>
-				</xsl:choose>
-			</xsl:for-each>
-
-			<xsl:for-each select="enolunatic:get-body-lines($source-context)">
-				<xsl:choose>
-					<xsl:when test="$componentType = 'Table'">
+					</xsl:for-each>
+					<xsl:for-each select="enolunatic:get-body-lines($source-context)">
 						<body>
 							<xsl:apply-templates select="enolunatic:get-body-line($source-context,position())" mode="source">
 								<xsl:with-param name="elementName" select="'bodyLine'" tunnel="yes"/>
@@ -656,8 +645,17 @@
 								<xsl:with-param name="idQuestion" select="$idQuestion" tunnel="yes"/>
 							</xsl:apply-templates>
 						</body>
-					</xsl:when>
-					<xsl:when test="$componentType = 'RosterForLoop'">
+					</xsl:for-each>
+				</xsl:when>
+				<xsl:when test="$componentType = 'RosterForLoop'">
+					<xsl:for-each select="enolunatic:get-header-lines($source-context)">
+						<xsl:apply-templates select="enolunatic:get-header-line($source-context,position())" mode="source">
+							<xsl:with-param name="elementName" select="'header'" tunnel="yes"/>
+							<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
+							<xsl:with-param name="loopDepth" select="$loopDepth + 1" tunnel="yes"/>
+						</xsl:apply-templates>
+					</xsl:for-each>
+					<xsl:for-each select="enolunatic:get-body-lines($source-context)">
 						<xsl:apply-templates select="enolunatic:get-body-line($source-context,position())" mode="source">
 							<xsl:with-param name="elementName" select="'components'" tunnel="yes"/>
 							<xsl:with-param name="position" select="position()" tunnel="yes"/>
@@ -665,9 +663,9 @@
 							<xsl:with-param name="idQuestion" select="$idQuestion" tunnel="yes"/>
 							<xsl:with-param name="loopDepth" select="$loopDepth + 1" tunnel="yes"/>
 						</xsl:apply-templates>
-					</xsl:when>
-				</xsl:choose>
-			</xsl:for-each>
+					</xsl:for-each>
+				</xsl:when>
+			</xsl:choose>
 		</components>
 		
 		<xsl:if test="$addFilterResult">
