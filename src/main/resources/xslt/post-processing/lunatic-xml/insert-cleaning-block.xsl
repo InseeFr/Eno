@@ -309,7 +309,7 @@
             <sizeForLinksVariables><xsl:value-of select="$curPairwiseLinks/h:xAxisIterations/h:value"/></sizeForLinksVariables>
             <sizeForLinksVariables><xsl:value-of select="$curPairwiseLinks/h:yAxisIterations/h:value"/></sizeForLinksVariables>
             <xsl:for-each select="$curPairwiseLinks/h:components/h:response">
-              <xsl:value-of select="@name"/>
+              <linksVariables><xsl:value-of select="@name"/></linksVariables>
             </xsl:for-each>
           </xsl:element>
         </xsl:for-each>
