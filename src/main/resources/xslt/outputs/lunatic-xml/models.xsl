@@ -445,7 +445,7 @@
 				<xsl:with-param name="typeOfQuestion" select="'Dropdown'" tunnel="yes"/>
 				<xsl:with-param name="declarations" select="enolunatic:getInstructionForQuestion($source-context,.)" as="node()*" tunnel="yes"/>
 				<xsl:with-param name="filterCondition" select="'xAxis &lt;&gt; yAxis'" tunnel="yes"/>
-				<xsl:with-param name="filterConditionDependencies" select="''" as="xs:string*" tunnel="yes"/>
+				<xsl:with-param name="filterConditionDependencies" select="tokenize('xAxis yAxis',' ')" as="xs:string*" tunnel="yes"/>
 				<xsl:with-param name="dependencies" select="$dependencies" tunnel="yes"/>
 				<xsl:with-param name="loopDepth" select="$loopDepth +2" tunnel="yes"/>
 			</xsl:apply-templates>

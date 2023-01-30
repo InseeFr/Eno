@@ -288,19 +288,19 @@
       <!-- We iterate on all the PairwiseLinks we find -->
       <xsl:for-each select="$root//h:components[@componentType='PairwiseLinks']">
         <xsl:variable name="curPairwiseLinks" select="."/>
-        <xsl:variable name="axisSourceVariables" select="$root//h:variables[h:name='xAxis' or h:name='yAxis']/h:shapeFrom"/>
+        <xsl:variable name="axisSourceVariables" select="$root//h:variables[h:name='xAxis' or h:name='yAxis']/h:shapeFrom" as="xs:string *"/>
         <!-- Some times, the loop dependency (so what we stored in resizingName) might be a calculated variable.
         For Lunatic to process correctly the resizing of variables, we need to specifiy the collected variables which impact the resizing.
         Thus we must resolve the calculated variable until all collected variables which are involved in its construction.
         It has already been done in the core transformation, so we just need to retrieve the bindingDependencies of the calculated variable-->
-        <xsl:variable name="resizingNameResolved">
+        <xsl:variable name="resizingNameResolved" as="xs:string *">
           <xsl:choose>
             <xsl:when test="$root//h:variables[h:name=$axisSourceVariables]/@variableType='CALCULATED'">
               <xsl:sequence select="$root//h:variables[h:name=$axisSourceVariables]/h:bindingDependencies"/>
             </xsl:when>
             <!-- Little trick : I encapsulate in a bindingDependency the original name when it is already a collected vraiable 
             It's an easy way to keep a consistent behaviour with the following for-each, without a painful tokenizing step for calculated variables -->
-            <xsl:otherwise><h:bindingDependencies><xsl:value-of select="$axisSourceVariables"/></h:bindingDependencies></xsl:otherwise>
+            <xsl:otherwise><xsl:copy-of select="$axisSourceVariables"/></xsl:otherwise>
           </xsl:choose>
         </xsl:variable>
         
