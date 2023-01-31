@@ -11,6 +11,10 @@ import org.springframework.web.reactive.config.WebFluxConfigurer;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.result.view.UrlBasedViewResolver;
 
+import java.net.InetSocketAddress;
+import java.net.ProxySelector;
+import java.net.http.HttpClient;
+
 @SpringBootApplication
 public class EnoWsApplication {
 
@@ -20,7 +24,6 @@ public class EnoWsApplication {
 		SpringApplication.run(EnoWsApplication.class, args);
 	}
 
-
 	@Bean
 	public WebClient webClient(@Value("${test.url}") String baseUrl, WebClient.Builder builder) {
 		return builder.baseUrl(baseUrl)
@@ -29,7 +32,21 @@ public class EnoWsApplication {
 				.build();
 	}
 
+	//@Bean
+	public WebClient webClientWithProxy(@Value("${test.url}") String baseUrl,
+										@Value("${test.proxy.port}") String proxyHost,
+										@Value("${test.proxy.port}") int proxyPort,
+										WebClient.Builder builder) {
+		HttpClient httpClient = HttpClient.newBuilder()
+				.proxy(ProxySelector.of(new InetSocketAddress(proxyHost,proxyPort)))
+				.build();
+		JdkClientHttpConnector connector = new JdkClientHttpConnector(httpClient);
 
+		return builder.baseUrl(baseUrl)
+				.clientConnector(new JdkClientHttpConnector())
+				.clientConnector(connector)
+				.build();
+	}
 
 	@Configuration
 	public class WebConfig implements WebFluxConfigurer{
@@ -37,6 +54,5 @@ public class EnoWsApplication {
 			registry.viewResolver(new UrlBasedViewResolver());
 		}
 	}
-
 
 }
