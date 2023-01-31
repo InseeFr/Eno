@@ -1,0 +1,212 @@
+{
+  "owner": "FAKEPERMISSION",
+  "FlowControl": [
+    {
+      "Description": "Libellé du filtre",
+      "Expression": "$AFFICHERLE$ != '1'",
+      "id": "lct8anpg",
+      "IfTrue": "l4i3m6qa-l4i3m6qa"
+    }
+  ],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "lct75a9v",
+        "lct75cqv",
+        "l4i3m6qa",
+        "l6dnlrka",
+        "idendquest",
+        "lct8pcsy"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "lct77svt",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "test questionnaire référencé filtré"
+  ],
+  "childQuestionnaireRef": [
+    "l4i3m6qa",
+    "l6dnlrka",
+    "lct8pcsy"
+  ],
+  "Name": "filtreRef",
+  "Variables": {
+    "Variable": [
+      {
+        "Label": "AFFICHERLE label",
+        "id": "lct75mai",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lct71kh3",
+        "Name": "AFFICHERLE",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Thu Jan 12 2023 16:24:33 GMT+0100 (heure normale d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "esa-dc-2018",
+      "uri": "http://ddi:fr.insee:DataCollection.esa-dc-2018",
+      "Name": "Enquête sectorielle annuelle 2018"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "lct78jr8",
+  "TargetMode": [
+    "CAWI"
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "Label": "OuiNon",
+        "id": "lct71kh3",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "Oui",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "Non",
+            "Value": "2"
+          }
+        ],
+        "Name": ""
+      }
+    ]
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "seq"
+      ],
+      "id": "lct75a9v",
+      "TargetMode": [
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lct75mai",
+              "id": "lct72lm3",
+              "mandatory": true,
+              "CodeListReference": "lct71kh3",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "Afficher le questionnaire référencé ?"
+          ],
+          "ClarificationQuestion": [],
+          "id": "lct75cqv",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SINGLE_CHOICE",
+          "Name": "AFFICHERLE"
+        }
+      ],
+      "Name": "SEQ"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "EXTERNAL_ELEMENT",
+      "Label": [
+        "Catalogue"
+      ],
+      "id": "l4i3m6qa",
+      "TargetMode": [
+        ""
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "CATALOGUE"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "EXTERNAL_ELEMENT",
+      "Label": [
+        "Test Anne curiosité"
+      ],
+      "id": "l6dnlrka",
+      "TargetMode": [
+        ""
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "TESTANNECU"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "EXTERNAL_ELEMENT",
+      "Label": [
+        "quest avec boucle pour être référencé"
+      ],
+      "id": "lct8pcsy",
+      "TargetMode": [
+        ""
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTAVECB"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

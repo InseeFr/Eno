@@ -1,0 +1,355 @@
+{
+  "owner": "FAKEPERMISSION",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "l4i3a6ii",
+        "l4i3it38",
+        "l4i3b1na",
+        "l4i3w0p1",
+        "idendquest"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "l4i3je0b",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "Catalogue"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "CATALOGUE",
+  "Variables": {
+    "Variable": [
+      {
+        "Formula": "42",
+        "Label": "CAT_VAR_COMP_1",
+        "id": "l50tn9cp",
+        "type": "CalculatedVariableType",
+        "Name": "CAT_VAR_COMP_1",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "CAT_VAR_EXT_1",
+        "id": "l7hn33xv",
+        "type": "ExternalVariableType",
+        "Name": "CAT_VAR_EXT_1",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "CAT_Q1 label",
+        "id": "l4i3ae42",
+        "type": "CollectedVariableType",
+        "Name": "CAT_Q1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "1 - Netflix",
+        "id": "l4i3j8e1",
+        "type": "CollectedVariableType",
+        "Name": "CAT_Q21",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "2 - Canal+",
+        "id": "l4i3dbok",
+        "type": "CollectedVariableType",
+        "Name": "CAT_Q22",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "3 - Disnex+",
+        "id": "l4i3gycc",
+        "type": "CollectedVariableType",
+        "Name": "CAT_Q23",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "4 - Prime",
+        "id": "l4i3ikfy",
+        "type": "CollectedVariableType",
+        "Name": "CAT_Q24",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Wed Sep 07 2022 10:34:29 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "esa-dc-2018",
+      "uri": "http://ddi:fr.insee:DataCollection.esa-dc-2018"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "l4i3m6qa",
+  "TargetMode": [
+    "CAWI",
+    "PAPI",
+    "CATI",
+    "CAPI"
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "Label": "ABONNEMENTS",
+        "id": "l4i3ehzf",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "Netflix",
+            "Value": 1
+          },
+          {
+            "Parent": "",
+            "Label": "Canal+",
+            "Value": 2
+          },
+          {
+            "Parent": "",
+            "Label": "Disnex+",
+            "Value": 3
+          },
+          {
+            "Parent": "",
+            "Label": "Prime",
+            "Value": 4
+          }
+        ],
+        "Name": ""
+      }
+    ]
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "CAT_S1"
+      ],
+      "id": "l4i3a6ii",
+      "TargetMode": [
+        "CAWI",
+        "PAPI",
+        "CATI",
+        "CAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "l4i3ae42",
+              "id": "l4i3k2ed",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"CAT_Q1\""
+          ],
+          "id": "l4i3it38",
+          "TargetMode": [
+            "CAWI",
+            "PAPI",
+            "CATI",
+            "CAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"With a twist\"",
+              "id": "l7fzaq2p",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAWI",
+                "PAPI",
+                "CATI",
+                "CAPI"
+              ]
+            }
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "CAT_Q1"
+        }
+      ],
+      "Name": "CAT_S1"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "CAT_S2"
+      ],
+      "id": "l4i3b1na",
+      "TargetMode": [
+        "CAWI",
+        "PAPI",
+        "CATI",
+        "CAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "FlowControl": [],
+          "Label": [
+            "\"CAT_Q2\""
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "l4i3rxxm",
+                "MappingTarget": "1"
+              },
+              {
+                "MappingSource": "l4i3lzwf",
+                "MappingTarget": "2"
+              },
+              {
+                "MappingSource": "l4i3d9if",
+                "MappingTarget": "3"
+              },
+              {
+                "MappingSource": "l4i3t95q",
+                "MappingTarget": "4"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "0",
+                "CodeListReference": "l4i3ehzf"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "CAT_Q2",
+          "Response": [
+            {
+              "CollectedVariableReference": "l4i3j8e1",
+              "id": "l4i3rxxm",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            },
+            {
+              "CollectedVariableReference": "l4i3dbok",
+              "id": "l4i3lzwf",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            },
+            {
+              "CollectedVariableReference": "l4i3gycc",
+              "id": "l4i3d9if",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            },
+            {
+              "CollectedVariableReference": "l4i3ikfy",
+              "id": "l4i3t95q",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "l4i3w0p1",
+          "TargetMode": [
+            "CAWI",
+            "PAPI",
+            "CATI",
+            "CAPI"
+          ],
+          "Declaration": [],
+          "questionType": "MULTIPLE_CHOICE"
+        }
+      ],
+      "Name": "CAT_S2"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAWI",
+        "PAPI",
+        "CATI",
+        "CAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}
