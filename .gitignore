@@ -31,9 +31,9 @@ build/
 .vscode/
 
 ### Gradle ###
+# Ignore Gradle project-specific cache directory
 .gradle
-<<<<<<< HEAD
-bin
-gradle
-gradlew*
-
+# Ignore Gradle build output directory
+build
+# Ignore Gradle user properties (proxy etc.)
+gradle-local.properties

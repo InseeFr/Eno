@@ -1,5 +1,6 @@
 package fr.insee.eno.core.mappers;
 
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanWrapper;
@@ -40,7 +41,7 @@ public class Mapper {
         } catch (IllegalAccessException | InvocationTargetException e) {
             log.debug("hint: Make sure that collection has been initialized (i.e. is not null) in model class.");
             log.debug("hint: Example: List<SomeEnoObject> = new ArrayList<>();");
-            throw new RuntimeException(
+            throw new MappingException(
                     String.format("Unable to get collection instance on property '%s' of class '%s'.",
                             propertyDescriptor.getName(), enoObject.getClass()),
                     e);
@@ -54,7 +55,7 @@ public class Mapper {
                 classType, propertyDescriptor.getName(), modelContextType.getSimpleName()));
         log.debug("hint: If it should be a simple type, check isSimpleType method in Mapper class.");
         log.debug("hint: If it should be a complex type, make sure that the object inherits EnoObject.");
-        throw new RuntimeException(String.format("Unknown type '%s' encountered in Eno model.", classType));
+        throw new MappingException(String.format("Unknown type '%s' encountered in Eno model.", classType));
     }
 
 }

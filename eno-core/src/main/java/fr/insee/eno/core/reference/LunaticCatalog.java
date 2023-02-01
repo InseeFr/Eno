@@ -9,9 +9,9 @@ import java.util.Map;
 /** Class designed to be used in processing to easily access different kinds of Lunatic objects. */
 public class LunaticCatalog {
 
-    public final static List<Class<?>> sequenceClassTypes =
+    public static final List<Class<?>> sequenceClassTypes =
             List.of(SequenceType.class, Subsequence.class);
-    public final static List<Class<?>> questionClassTypes =
+    public static final List<Class<?>> questionClassTypes =
             List.of(Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class,
                     CheckboxOne.class, Radio.class, Dropdown.class, CheckboxGroup.class, Table.class);
 

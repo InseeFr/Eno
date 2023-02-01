@@ -5,6 +5,12 @@ plugins {
 	id 'maven-publish'
 }
 
+// Remove the "-plain" jar
+// https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/#packaging-executable.and-plain-archives
+tasks.jar {
+	enabled = false
+}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor

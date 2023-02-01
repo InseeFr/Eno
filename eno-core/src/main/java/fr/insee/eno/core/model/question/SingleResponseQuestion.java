@@ -20,9 +20,6 @@ public abstract class SingleResponseQuestion extends Question {
             field = "getQuestionItemNameArray(0).getStringArray(0).getStringValue()")
     String name;
 
-    /** List of variable names on which the question is dependent. */ //TODO: where is this info in DDI?
-    List<String> bindingDependencies = new ArrayList<>();
-
     @DDI(contextType = QuestionItemType.class, field = "getOutParameterArray(0)")
     @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class},
             field = "setResponse(#param)")

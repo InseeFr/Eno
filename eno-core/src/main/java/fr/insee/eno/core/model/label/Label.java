@@ -1,5 +1,6 @@
 package fr.insee.eno.core.model.label;
 
+import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.annotations.Lunatic;
@@ -20,7 +21,9 @@ public class Label extends EnoObject {
     @Lunatic(contextType = fr.insee.lunatic.model.flat.LabelType.class, field = "setValue(#param)")
     String value;
 
-    @Lunatic(contextType = fr.insee.lunatic.model.flat.LabelType.class, field = "setType('TODO')") //TODO: mapping or processing for this
+    /** For now, Lunatic type in label objects does not come from metadata, but is hardcoded here in Eno.
+     * See labels documentation. */
+    @Lunatic(contextType = fr.insee.lunatic.model.flat.LabelType.class, field = "setType('"+ Constant.LUNATIC_LABEL_VTL_MD+"')")
     String type;
 
 }

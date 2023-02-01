@@ -1,6 +1,8 @@
 package fr.insee.eno.core.converter;
 
-import fr.insee.eno.core.model.code.CodeList;
+import fr.insee.eno.core.Constant;
+import fr.insee.eno.core.exceptions.technical.ConversionException;
+import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.declaration.Instruction;
 import fr.insee.eno.core.model.navigation.Control;
@@ -21,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LunaticConverter {
 
-    public static final int SMALL_TEXT_LIMIT = 250; //TODO: Constants class??
+    private LunaticConverter() {}
 
     /**
      * Return a Lunatic instance type that corresponds to the given Eno object.
@@ -47,13 +49,13 @@ public class LunaticConverter {
             return new ControlType();
         else if (enoObject instanceof Filter)
             return new ConditionFilterType();
-        else if (enoObject instanceof SingleResponseQuestion)
-            return instantiateFrom((SingleResponseQuestion) enoObject);
-        else if (enoObject instanceof MultipleResponseQuestion)
-            return instantiateFrom((MultipleResponseQuestion) enoObject);
+        else if (enoObject instanceof SingleResponseQuestion singleResponseQuestion)
+            return instantiateFrom(singleResponseQuestion);
+        else if (enoObject instanceof MultipleResponseQuestion multipleResponseQuestion)
+            return instantiateFrom(multipleResponseQuestion);
         else if (enoObject instanceof Response)
             return new ResponseType();
-        else if (enoObject instanceof CodeList.CodeItem)
+        else if (enoObject instanceof CodeItem)
             return new Options();
         else if (enoObject instanceof CodeResponse)
             return new ResponsesCheckboxGroup();
@@ -62,29 +64,30 @@ public class LunaticConverter {
                 || enoObject instanceof CalculatedExpression)
             return new LabelType();
         else if (enoObject instanceof TableCell)
-            throw new RuntimeException(
+            throw new ConversionException(
                     "Eno TableCell object '%s' called by basic converted method, this should not happen. " +
                             "TableCell conversion for Lunatic is implemented in a dedicated class. " +
                             "PLEASE REPORT THIS EXCEPTION TO ENO DEV TEAM.");
         else
-            throw new RuntimeException(unimplementedMessage(enoObject));
+            throw new ConversionException(unimplementedMessage(enoObject));
     }
 
     private static Object instantiateFrom(SingleResponseQuestion enoQuestion) {
-        if (enoQuestion instanceof TextQuestion)
-            if (((TextQuestion) enoQuestion).getMaxLength().intValue() < SMALL_TEXT_LIMIT)
+        if (enoQuestion instanceof TextQuestion textQuestion) {
+            if (textQuestion.getMaxLength().intValue() < Constant.LUNATIC_SMALL_TEXT_LIMIT)
                 return new Input();
             else
                 return new Textarea();
+        }
         else if (enoQuestion instanceof NumericQuestion)
             return new InputNumber();
         else if (enoQuestion instanceof BooleanQuestion)
             return new CheckboxBoolean();
         else if (enoQuestion instanceof DateQuestion)
             return new Datepicker();
-        else if (enoQuestion instanceof UniqueChoiceQuestion) {
-            if (((UniqueChoiceQuestion) enoQuestion).getDisplayFormat() == null) {
-                throw new RuntimeException("Display format has not been set in Eno question " + enoQuestion);
+        else if (enoQuestion instanceof UniqueChoiceQuestion uniqueChoiceQuestion) {
+            if (uniqueChoiceQuestion.getDisplayFormat() == null) {
+                throw new ConversionException("Display format has not been set in Eno question " + enoQuestion);
             }
             return switch (((UniqueChoiceQuestion) enoQuestion).getDisplayFormat()) {
                 case RADIO -> new Radio();
@@ -95,7 +98,7 @@ public class LunaticConverter {
         else if (enoQuestion instanceof PairwiseQuestion)
             return new PairwiseLinks();
         else
-            throw new RuntimeException(unimplementedMessage(enoQuestion));
+            throw new ConversionException(unimplementedMessage(enoQuestion));
     }
 
     private static Object instantiateFrom(MultipleResponseQuestion enoQuestion) {
@@ -108,7 +111,7 @@ public class LunaticConverter {
         else if (enoQuestion instanceof DynamicTableQuestion)
             return new Table();
         else
-            throw new RuntimeException(unimplementedMessage(enoQuestion));
+            throw new ConversionException(unimplementedMessage(enoQuestion));
     }
 
     private static String unimplementedMessage(Object enoObject) {

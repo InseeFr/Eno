@@ -1,5 +1,6 @@
 package fr.insee.eno.core.sandbox;
 
+import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.output.LunaticWriter;
 import fr.insee.lunatic.conversion.JSONDeserializer;
 import fr.insee.lunatic.conversion.XMLLunaticFlatToJSONLunaticFlatTranslator;
@@ -20,8 +21,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LunaticTests {
-
-    private static final String VTL_MD = "VTL|MD";
 
     @Test
     public void helloLunaticQuestionnaire() {
@@ -61,12 +60,12 @@ public class LunaticTests {
         optionA.setValue("Option A value");
         optionA.setLabel(new LabelType());
         optionA.getLabel().setValue("Option A label");
-        optionA.getLabel().setType(VTL_MD);
+        optionA.getLabel().setType(Constant.LUNATIC_LABEL_VTL_MD);
         Options optionB = new Options();
         optionB.setValue("Option B value");
         optionB.setLabel(new LabelType());
         optionB.getLabel().setValue("Option B label");
-        optionB.getLabel().setType(VTL_MD);
+        optionB.getLabel().setType(Constant.LUNATIC_LABEL_VTL_MD);
     }
 
     @Test
@@ -76,24 +75,24 @@ public class LunaticTests {
         table.setPositioning("HORIZONTAL");
         // Note: lines roster is currently useless
         LinesRoster linesRoster = new LinesRoster();
-        linesRoster.setMin(new LabelType()); // TODO: why is there a label for min & max?
+        linesRoster.setMin(new LabelType());
         linesRoster.getMin().setValue("1");
-        linesRoster.getMin().setType("???"); // TODO: ???
+        linesRoster.getMin().setType(Constant.LUNATIC_LABEL_VTL_MD);
         linesRoster.setMax(new LabelType());
         linesRoster.getMax().setValue("5");
-        linesRoster.getMax().setType("???");
+        linesRoster.getMax().setType(Constant.LUNATIC_LABEL_VTL_MD);
         //
         HeaderType headerType0 = new HeaderType();
         headerType0.setValue("Left column value");
         headerType0.setLabel(new LabelType());
         headerType0.getLabel().setValue("Left column label");
-        headerType0.getLabel().setType(VTL_MD);
+        headerType0.getLabel().setType(Constant.LUNATIC_LABEL_VTL_MD);
         //
         HeaderType headerType1 = new HeaderType();
         headerType1.setValue("Column 1 value");
         headerType1.setLabel(new LabelType());
         headerType1.getLabel().setValue("Column 1 label");
-        headerType1.getLabel().setType(VTL_MD);
+        headerType1.getLabel().setType(Constant.LUNATIC_LABEL_VTL_MD);
         //
         table.getHeader().add(headerType0);
         table.getHeader().add(headerType1);
@@ -116,20 +115,20 @@ public class LunaticTests {
         table.setLabel(new LabelType());
         table.getLabel().setValue(
                 "➡ 1. Tableau TIC - répartition du nb habitants, comparaison question INTEGER");
-        table.getLabel().setType(VTL_MD);
+        table.getLabel().setType(Constant.LUNATIC_LABEL_VTL_MD);
         //
         // Skipped: declarations conditionFilter controls hierarchy bindingDependencies
         //
         HeaderType headerLeft = new HeaderType();
         headerLeft.setLabel(new LabelType());
         headerLeft.getLabel().setValue("");
-        headerLeft.getLabel().setType(VTL_MD);
+        headerLeft.getLabel().setType(Constant.LUNATIC_LABEL_VTL_MD);
         table.getHeader().add(headerLeft);
         //
         HeaderType headerColumn1 = new HeaderType();
         headerColumn1.setLabel(new LabelType());
         headerColumn1.getLabel().setValue("Nombre de personnes, entre 0 et 20");
-        headerColumn1.getLabel().setType(VTL_MD);
+        headerColumn1.getLabel().setType(Constant.LUNATIC_LABEL_VTL_MD);
         table.getHeader().add(headerColumn1);
         //
         List<String> bodyValues = List.of("1", "2", "3", "4");
@@ -146,7 +145,7 @@ public class LunaticTests {
             bodyLeft.setValue(value);
             bodyLeft.setLabel(new LabelType());
             bodyLeft.getLabel().setValue(label);
-            bodyLeft.getLabel().setType(VTL_MD);
+            bodyLeft.getLabel().setType(Constant.LUNATIC_LABEL_VTL_MD);
             BodyLine bodyColumn1 = new BodyLine();
             bodyColumn1.setComponentType("InputNumber");
             bodyColumn1.setMin(0d);

@@ -1,0 +1,206 @@
+{
+  "owner": "FAKEPERMISSION",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "idendquest",
+        "lct96xpy",
+        "lct98ohm",
+        "lct97wcp",
+        "lct9aj5a"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "lct96ais",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "quest avec boucle pour être référencé"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "bouclePourRef",
+  "Variables": {
+    "Variable": [
+      {
+        "Label": "COMBIENDOC label",
+        "id": "lct99vhk",
+        "type": "CollectedVariableType",
+        "Name": "COMBIENDOC",
+        "Datatype": {
+          "Maximum": "20",
+          "Minimum": "1",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": "0"
+        }
+      },
+      {
+        "Scope": "lct9c9sr",
+        "Label": "ENCOREUNEF label",
+        "id": "lct8qz18",
+        "type": "CollectedVariableType",
+        "Name": "ENCOREUNEF",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Thu Jan 12 2023 16:24:14 GMT+0100 (heure normale d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "esa-dc-2018",
+      "uri": "http://ddi:fr.insee:DataCollection.esa-dc-2018",
+      "Name": "Enquête sectorielle annuelle 2018"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "lct8pcsy",
+  "TargetMode": [
+    "CAWI"
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "Iterations": {
+    "Iteration": [
+      {
+        "Maximum": "$COMBIENDOC$ ",
+        "Minimum": "1",
+        "MemberReference": [
+          "lct97wcp"
+        ],
+        "id": "lct9c9sr",
+        "Step": "1",
+        "type": "DynamicIterationType",
+        "Name": "boucle"
+      }
+    ]
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "seq principale"
+      ],
+      "id": "lct96xpy",
+      "TargetMode": [
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lct99vhk",
+              "id": "lct978td",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "20",
+                "Minimum": "1",
+                "typeName": "NUMERIC",
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Decimals": "0"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "Combien d'occurrences pour la boucle ?"
+          ],
+          "id": "lct98ohm",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "COMBIENDOC"
+        }
+      ],
+      "Name": "SEQPRINCIP"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "seq qui boucle"
+      ],
+      "id": "lct97wcp",
+      "TargetMode": [
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lct8qz18",
+              "id": "lct8ycjy",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "Encore une fois !"
+          ],
+          "id": "lct9aj5a",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "ENCOREUNEF"
+        }
+      ],
+      "Name": "SEQQUIBOUC"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

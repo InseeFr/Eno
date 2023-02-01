@@ -10,12 +10,6 @@ public abstract class EnoObject {
     @Getter
     @Setter
     @JsonIgnore
-    @Deprecated // TODO: see comments in processing class, to be removed
-    private EnoObject parent;
-
-    @Getter
-    @Setter
-    @JsonIgnore
     private EnoIndex index;
 
     /** Shortcut method to get an object stored in the index. */

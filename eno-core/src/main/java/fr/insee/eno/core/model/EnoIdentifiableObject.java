@@ -20,15 +20,6 @@ public abstract class EnoIdentifiableObject extends EnoObject {
     @Lunatic(contextType = ComponentType.class, field ="setId(#param)")
     String id;
 
-    public EnoIdentifiableObject() {}
-
-    /** Create and instance with given id, and put it in the given index.
-     * TODO: to be removed, useless since java doesn't support constructor inheritance... */
-    public EnoIdentifiableObject(String id, EnoIndex enoIndex) {
-        this.id = id;
-        enoIndex.put(id, this);
-    }
-
     @Override
     public String toString() {
         return this.getClass().getSimpleName()+"[id="+getId()+"]";

@@ -16,7 +16,7 @@ public class DDIInsertDeclarations implements InProcessingInterface {
     /** Same idea as in the DDI insert controls processing, but for declarations.
      * (Declarations are placed before the object they belong to in the sequence items lists.)
      * Concerned objects : subsequences and questions. */
-    public void apply(EnoQuestionnaire enoQuestionnaire) { // TODO: code is a bit clumsy but works
+    public void apply(EnoQuestionnaire enoQuestionnaire) { // Note: code is a bit clumsy but works
         //
         assert enoQuestionnaire.getIndex() != null;
         //

@@ -1,8 +1,8 @@
 package fr.insee.eno.core;
 
 import fr.insee.eno.core.annotations.Format;
-import fr.insee.eno.core.exceptions.DDIParsingException;
-import fr.insee.eno.core.exceptions.LunaticSerializationException;
+import fr.insee.eno.core.exceptions.business.DDIParsingException;
+import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class DDIToLunatic {
+
+    private DDIToLunatic() {}
 
     public static String transform(InputStream ddiInputStream, EnoParameters enoParameters)
             throws IOException, DDIParsingException, LunaticSerializationException {

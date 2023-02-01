@@ -4,7 +4,7 @@ import java.util.TreeMap;
 
 public class RomanNumber { // https://stackoverflow.com/questions/12967896/converting-integers-to-roman-numerals-java
 
-    private final static TreeMap<Integer, String> map = new TreeMap<>();
+    private static final TreeMap<Integer, String> map = new TreeMap<>();
 
     static {
 
@@ -23,6 +23,8 @@ public class RomanNumber { // https://stackoverflow.com/questions/12967896/conve
         map.put(1, "I");
 
     }
+
+    private RomanNumber() {}
 
     /**
      * Return the roman representation of number.

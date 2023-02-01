@@ -2,10 +2,9 @@ package fr.insee.eno.core.version;
 
 public class ModelVersions {
 
-    /* TODO: These methods won't work outside dev environment
-        -> use gradle to copy versions in application.properties,
-        then use the latter in code.
-     */
+    private ModelVersions() {}
+
+    // TODO: use build tool to copy versions in application.properties, then read these properties here.
 
     /** Return the Eno version. */
     public static String enoVersion() {

@@ -1,5 +1,6 @@
 package fr.insee.eno.core.converter;
 
+import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.label.Label;
 import fr.insee.lunatic.model.flat.BodyType;
@@ -14,8 +15,8 @@ public class LunaticTableConverterTest {
 
     private CodeList codeList;
 
-    private static CodeList.CodeItem createCode(String label) {
-        CodeList.CodeItem codeItem = new CodeList.CodeItem();
+    private static CodeItem createCode(String label) {
+        CodeItem codeItem = new CodeItem();
         codeItem.setLabel(new Label());
         codeItem.getLabel().setValue(label);
         return codeItem;
@@ -24,30 +25,30 @@ public class LunaticTableConverterTest {
     @BeforeEach
     public void createCodeList() {
         codeList = new CodeList();
-        CodeList.CodeItem c1 = createCode("1");
-        CodeList.CodeItem c2 = createCode("2");
-        CodeList.CodeItem c3 = createCode("3");
+        CodeItem c1 = createCode("1");
+        CodeItem c2 = createCode("2");
+        CodeItem c3 = createCode("3");
         codeList.getCodeItems().add(c1);
         codeList.getCodeItems().add(c2);
         codeList.getCodeItems().add(c3);
-        CodeList.CodeItem c21 = createCode("21");
-        CodeList.CodeItem c22 = createCode("22");
-        CodeList.CodeItem c23 = createCode("23");
+        CodeItem c21 = createCode("21");
+        CodeItem c22 = createCode("22");
+        CodeItem c23 = createCode("23");
         c2.getCodeItems().add(c21);
         c2.getCodeItems().add(c22);
         c2.getCodeItems().add(c23);
-        CodeList.CodeItem c221 = createCode("221");
-        CodeList.CodeItem c222 = createCode("222");
-        CodeList.CodeItem c223 = createCode("223");
+        CodeItem c221 = createCode("221");
+        CodeItem c222 = createCode("222");
+        CodeItem c223 = createCode("223");
         c22.getCodeItems().add(c221);
         c22.getCodeItems().add(c222);
         c22.getCodeItems().add(c223);
-        CodeList.CodeItem c231 = createCode("231");
-        CodeList.CodeItem c232 = createCode("232");
+        CodeItem c231 = createCode("231");
+        CodeItem c232 = createCode("232");
         c23.getCodeItems().add(c231);
         c23.getCodeItems().add(c232);
-        CodeList.CodeItem c2231 = createCode("2231");
-        CodeList.CodeItem c2232 = createCode("2232");
+        CodeItem c2231 = createCode("2231");
+        CodeItem c2232 = createCode("2232");
         c223.getCodeItems().add(c2231);
         c223.getCodeItems().add(c2232);
     }

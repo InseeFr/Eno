@@ -1,6 +1,7 @@
 package fr.insee.eno.core.converter;
 
 import datacollection33.*;
+import fr.insee.eno.core.exceptions.technical.ConversionException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.question.*;
 import lombok.extern.slf4j.Slf4j;
@@ -11,14 +12,10 @@ import reusable33.TextDomainType;
 @Slf4j
 public class DDIConverter {
 
-    public static final String INSEE_VOCABULARY_ID = "INSEE-GOF-CV";
-    public static final String RADIO_OUTPUT_FORMAT = "radio-button";
-    public static final String CHECKBOX_OUTPUT_FORMAT = "checkbox";
-    public static final String DROPDOWN_OUTPUT_FORMAT = "drop-down-list";
-    //TODO: Constants class for these? + use these constants in DDI mapping annotation
-
     public static final String DDI_PAIRWISE_KEY = "UIComponent";
     public static final String DDI_PAIRWISE_VALUE = "HouseholdPairing";
+
+    private DDIConverter() {}
 
     /**
      * Return an Eno instance corresponding to the given DDI object.
@@ -26,14 +23,14 @@ public class DDIConverter {
      * @return A Eno model object.
      */
     public static EnoObject instantiateFromDDIObject(Object ddiObject) {
-        if (ddiObject instanceof QuestionItemType)
-            return instantiateFrom((QuestionItemType) ddiObject);
-        else if (ddiObject instanceof QuestionGridType)
-            return instantiateFrom((QuestionGridType) ddiObject);
-        else if (ddiObject instanceof GridResponseDomainInMixedType)
-            return instantiateFrom((GridResponseDomainInMixedType) ddiObject);
+        if (ddiObject instanceof QuestionItemType questionItemType)
+            return instantiateFrom(questionItemType);
+        else if (ddiObject instanceof QuestionGridType questionGridType)
+            return instantiateFrom(questionGridType);
+        else if (ddiObject instanceof GridResponseDomainInMixedType gridResponseDomainInMixedType)
+            return instantiateFrom(gridResponseDomainInMixedType);
         else
-            throw new RuntimeException("Eno conversion for DDI type " + ddiObject.getClass() + " not implemented.");
+            throw new ConversionException("Eno conversion for DDI type " + ddiObject.getClass() + " not implemented.");
     }
 
     private static EnoObject instantiateFrom(QuestionItemType questionItemType) {
@@ -55,14 +52,14 @@ public class DDIConverter {
                 StandardKeyValuePairType userAttributePair = questionItemType.getUserAttributePairArray(0);
                 String attributeKey = userAttributePair.getAttributeKey().getStringValue();
                 String attributeValue = userAttributePair.getAttributeValue().getStringValue();
-                if (! attributeKey.equals(DDI_PAIRWISE_KEY))
+                if (! DDI_PAIRWISE_KEY.equals(attributeKey))
                     log.warn(String.format(
                             "Attribute pair list found in question item '%s', but key is equal to '%s' (should be '%s')",
-                            questionItemType.getIDArray(0).getStringValue(), attributeKey ,DDI_PAIRWISE_KEY));
-                if (! attributeValue.equals(DDI_PAIRWISE_VALUE))
+                            questionItemType.getIDArray(0).getStringValue(), attributeKey, DDI_PAIRWISE_KEY));
+                if (! DDI_PAIRWISE_VALUE.equals(attributeValue))
                     log.warn(String.format(
                             "Attribute pair list found in question item '%s', but value is equal to '%s' (should be '%s')",
-                            questionItemType.getIDArray(0).getStringValue(), attributeValue ,DDI_PAIRWISE_VALUE));
+                            questionItemType.getIDArray(0).getStringValue(), attributeValue, DDI_PAIRWISE_VALUE));
                 return new PairwiseQuestion();
             }
             else {
@@ -71,7 +68,7 @@ public class DDIConverter {
 
         }
         else {
-            throw new RuntimeException(
+            throw new ConversionException(
                     "Unable to identify question type in DDI question item " +
                             questionItemType.getIDArray(0).getStringValue());
         }
@@ -90,7 +87,7 @@ public class DDIConverter {
             else if (representationType instanceof CodeDomainType)
                 return new MultipleChoiceQuestion.Complex();
             else
-                throw new RuntimeException(
+                throw new ConversionException(
                         "Unable to identify question type in DDI question grid " +
                                 questionGridType.getIDArray(0).getStringValue());
         }
@@ -99,7 +96,7 @@ public class DDIConverter {
                     .filter(gridDimensionType1 -> gridDimensionType1.getRank().intValue() == 1)
                     .findAny().orElse(null);
             if (gridDimensionType == null) {
-                throw new RuntimeException(String.format(
+                throw new ConversionException(String.format(
                         "Question grid '%s' has no grid dimension of rank 1.",
                         questionGridType.getIDArray(0).getStringValue()));
             } else {
@@ -108,7 +105,7 @@ public class DDIConverter {
                 } else if (gridDimensionType.getRoster() != null) {
                     return new DynamicTableQuestion();
                 } else {
-                    throw new RuntimeException(String.format(
+                    throw new ConversionException(String.format(
                             "Grid dimension of rank 1 of question grid '%s' is neither a CodeDomain nor a Roster. " +
                                     "This case is unexpected and Eno is unable to convert this question.",
                             questionGridType.getIDArray(0).getStringValue()));
@@ -117,7 +114,7 @@ public class DDIConverter {
 
         }
         else {
-            throw new RuntimeException(String.format(
+            throw new ConversionException(String.format(
                     "Question grid '%s' has %s grid dimension objects. " +
                             "Eno expects question grids to have exactly 1 or 2 of these.",
                     questionGridType.getIDArray(0).getStringValue(), dimensionSize));
@@ -142,7 +139,7 @@ public class DDIConverter {
             return new TableCell.UniqueChoiceCell();
         }
         else {
-            throw new RuntimeException(
+            throw new ConversionException(
                     "Unable to identify cell type in DDI GridResponseDomainInMixed object " +
                             "with response domain of type "+representationType.getClass()+".");
         }

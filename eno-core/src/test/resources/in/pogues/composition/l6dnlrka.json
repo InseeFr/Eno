@@ -1,0 +1,252 @@
+{
+  "owner": "FAKEPERMISSION",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "idendquest",
+        "l6do3jai",
+        "l6dnow3h"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "l6do39gh",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "Test Anne curiosité"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "TESTANNE",
+  "Variables": {
+    "Variable": [
+      {
+        "Label": "Q1 label",
+        "id": "l6dntzzd",
+        "type": "CollectedVariableType",
+        "Name": "Q1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Wed Aug 03 2022 15:36:50 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "esa-dc-2018",
+      "uri": "http://ddi:fr.insee:DataCollection.esa-dc-2018",
+      "Name": "Enquête sectorielle annuelle 2018"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "l6dnlrka",
+  "TargetMode": [
+    "CATI",
+    "CAPI",
+    "PAPI",
+    "CAWI"
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "S1"
+      ],
+      "id": "l6do3jai",
+      "TargetMode": [
+        "CATI",
+        "CAPI",
+        "PAPI",
+        "CAWI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "HELP",
+          "Text": "aide capi",
+          "id": "l6do1hn2",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI"
+          ]
+        },
+        {
+          "declarationType": "HELP",
+          "Text": "aide cati",
+          "id": "l6dnzl20",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CATI"
+          ]
+        },
+        {
+          "declarationType": "HELP",
+          "Text": "aide capi cati",
+          "id": "l6dnm79s",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI"
+          ]
+        },
+        {
+          "declarationType": "HELP",
+          "Text": "aide cawi",
+          "id": "l6dnz2ry",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAWI"
+          ]
+        },
+        {
+          "declarationType": "HELP",
+          "Text": "aide cati capi cawi",
+          "id": "l6dnzdnb",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "l6dntzzd",
+              "id": "l6do21h7",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "Q1"
+          ],
+          "id": "l6dnow3h",
+          "TargetMode": [
+            "CATI",
+            "CAPI",
+            "PAPI",
+            "CAWI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "aide cati",
+              "id": "l6dnloib",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CATI"
+              ]
+            },
+            {
+              "declarationType": "HELP",
+              "Text": "aide capi",
+              "id": "l6do0xll",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI"
+              ]
+            },
+            {
+              "declarationType": "HELP",
+              "Text": "aide cawi",
+              "id": "l6do28aa",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAWI"
+              ]
+            },
+            {
+              "declarationType": "HELP",
+              "Text": "aide cati capi",
+              "id": "l6do61se",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI"
+              ]
+            },
+            {
+              "declarationType": "INSTRUCTION",
+              "Text": "consigne cati",
+              "id": "l6dntnyy",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CATI"
+              ]
+            },
+            {
+              "declarationType": "INSTRUCTION",
+              "Text": "consigne capi",
+              "id": "l6do6bsv",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI"
+              ]
+            },
+            {
+              "declarationType": "CODECARD",
+              "Text": "carte code",
+              "id": "l6do0pqc",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CATI",
+                "CAPI"
+              ]
+            }
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q1"
+        }
+      ],
+      "Name": "S1"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CATI",
+        "CAPI",
+        "PAPI",
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

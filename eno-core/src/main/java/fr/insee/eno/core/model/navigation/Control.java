@@ -3,6 +3,7 @@ package fr.insee.eno.core.model.navigation;
 import datacollection33.ComputationItemType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoObjectWithExpression;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
@@ -24,7 +25,7 @@ public class Control extends EnoIdentifiableObject implements EnoObjectWithExpre
             case "informational" -> Criticality.INFO;
             case "warning" -> Criticality.WARN;
             case "stumblingblock" -> Criticality.ERROR;
-            default -> throw new RuntimeException(String.format("Unknown DDI criticality '%s'", ddiCriticality));
+            default -> throw new MappingException(String.format("Unknown DDI criticality '%s'", ddiCriticality));
         };
     }
 

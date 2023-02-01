@@ -39,7 +39,7 @@ public class EnoCatalog {
         componentMap.putAll(subsequenceMap);
         componentMap.putAll(questionMap);
         //
-        enoQuestionnaire.getVariables().forEach(variable -> variableMap.put(variable.getReference(), variable)); //TODO: careful here is Variable class is split
+        enoQuestionnaire.getVariables().forEach(variable -> variableMap.put(variable.getReference(), variable)); //TODO: careful here if Variable class is split
     }
 
     public Sequence getSequence(String sequenceId) {

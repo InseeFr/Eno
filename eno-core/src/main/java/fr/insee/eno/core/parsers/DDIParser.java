@@ -1,6 +1,6 @@
 package fr.insee.eno.core.parsers;
 
-import fr.insee.eno.core.exceptions.DDIParsingException;
+import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import instance33.DDIInstanceDocument;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.xmlbeans.XmlException;
@@ -11,6 +11,8 @@ import java.net.URL;
 
 @Slf4j
 public class DDIParser {
+
+    private DDIParser() {}
 
     public static DDIInstanceDocument parse(InputStream ddiInputStream) throws IOException, DDIParsingException {
         log.info("Parsing DDI document from input stream given");

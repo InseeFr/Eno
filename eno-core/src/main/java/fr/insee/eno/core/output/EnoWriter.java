@@ -11,6 +11,8 @@ import java.nio.file.Path;
  */
 public class EnoWriter {
 
+    private EnoWriter() {}
+
     /**
      * Write the given Eno questionnaire ina json file.
      * @param enoQuestionnaire A Eno questionnaire.
@@ -21,4 +23,5 @@ public class EnoWriter {
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(outPath.toFile(), enoQuestionnaire);
     }
+
 }

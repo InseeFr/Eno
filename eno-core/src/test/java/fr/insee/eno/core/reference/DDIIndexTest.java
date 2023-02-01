@@ -3,7 +3,7 @@ package fr.insee.eno.core.reference;
 import datacollection33.ControlConstructSchemeType;
 import datacollection33.InstructionType;
 import datacollection33.QuestionItemType;
-import fr.insee.eno.core.exceptions.DDIParsingException;
+import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.parsers.DDIParser;
 import instance33.DDIInstanceDocument;
 import instance33.DDIInstanceType;
@@ -12,7 +12,6 @@ import logicalproduct33.VariableType;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

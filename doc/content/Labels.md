@@ -40,14 +40,39 @@ NB : au niveau Lunatic, les 3 types de libellés correspondent au même objet.
 
 ## Labels dans Lunatic
 
-| Nom de la propriété | Classes Lunatic | 
-| --- | --- |
-| "label" | Sequence, Subsquence |
-| "label" | Input, Textarea, InputNumber, CheckboxBoolean, Datepicker, CheckboxOne, Radio, Dropdown, CheckboxGroup, Table |
-| "label" | dans les "options" d'un CheckboxOne |
-| "label" | dans les "responses" d'un CheckboxGroup |
-| "label" | Declaration (dans les "declarations" d'un objet composant) |
-| "control" | Control (dans les "controls" d'un objet composant) |
-| "errorMessage" | Control (dans les "controls" d'un objet composant) |
-| "value" + "type" | Filter (champ "filter" dans les objets composant) _Cas batard, on devrait avoir une propriété "expression" (ou autre, peu importe, mais utiliser l'objet Label)_ |
-| "expression" | Variable (avec "variableType" : "CALCULATED") |
+| Nom de la propriété | Type   | Classes Lunatic                                                                                                                                                  | 
+|---------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| "label"             | VTL/MD | Sequence, Subsquence                                                                                                                                             |
+| "label"             | VTL/MD | Input, Textarea, InputNumber, CheckboxBoolean, Datepicker, CheckboxOne, Radio, Dropdown, CheckboxGroup, Table                                                    |
+| "label"             | VTL/MD | dans les "options" d'un CheckboxOne                                                                                                                              |
+| "label"             | VTL/MD | dans les "responses" d'un CheckboxGroup                                                                                                                          |
+| "label"             | VTL/MD | Declaration (dans les "declarations" d'un objet composant)                                                                                                       |
+| "control"           | VTL    | Control (dans les "controls" d'un objet composant)                                                                                                               |
+| "errorMessage"      | VTL/MD | Control (dans les "controls" d'un objet composant)                                                                                                               |
+| "value" + "type"    | VTL    | Filter (champ "filter" dans les objets composant) _Cas batard, on devrait avoir une propriété "expression" (ou autre, peu importe, mais utiliser l'objet Label)_ |
+| "expression"        | VTL    | Variable (avec "variableType" : "CALCULATED")                                                                                                                    |
+
+Rules from Eno-V2 source code:
+
+```xml
+<xsl:function name="enolunatic:get-label-type">
+<xsl:param name="locationOfLabel"/>
+<xsl:choose>
+<xsl:when test="$locationOfLabel='label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
+<xsl:when test="$locationOfLabel='responses.label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
+<xsl:when test="$locationOfLabel='hierarchy.label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
+<xsl:when test="$locationOfLabel='hierarchy.subSequence.label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
+<xsl:when test="$locationOfLabel='hierarchy.sequence.label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
+<xsl:when test="$locationOfLabel='declarations.label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
+<xsl:when test="$locationOfLabel='controls.control'"><xsl:value-of select="'VTL'"/></xsl:when>
+<xsl:when test="$locationOfLabel='controls.errorMessage'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
+<xsl:when test="$locationOfLabel='options.label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
+<xsl:when test="$locationOfLabel='lines.min'"><xsl:value-of select="'VTL'"/></xsl:when>
+<xsl:when test="$locationOfLabel='lines.max'"><xsl:value-of select="'VTL'"/></xsl:when>
+<xsl:when test="$locationOfLabel='iterations'"><xsl:value-of select="'VTL'"/></xsl:when>
+<xsl:when test="$locationOfLabel='conditionFilter'"><xsl:value-of select="'VTL'"/></xsl:when>
+<xsl:when test="$locationOfLabel='expression'"><xsl:value-of select="'VTL'"/></xsl:when>
+<xsl:otherwise><xsl:value-of select="'VTL|MD'"/></xsl:otherwise>
+</xsl:choose>
+</xsl:function>
+```

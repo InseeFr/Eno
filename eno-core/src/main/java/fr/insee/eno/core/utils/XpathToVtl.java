@@ -21,6 +21,8 @@ public class XpathToVtl {
     public static final String VTL_NOT_EQUAL_TO = " &lt;&gt; ";
     public static final String VTL_EQUAL_TO_NULL_FUNCTION = "isnull";
 
+    private XpathToVtl() {}
+
     /**
      * This function translates XPATH expression to <a href="https://sdmx.org/?page_id=5096">VTL</a> expression.
      * Examples:

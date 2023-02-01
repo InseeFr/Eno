@@ -1,6 +1,7 @@
 package fr.insee.eno.core.sandbox;
 
-import fr.insee.eno.core.exceptions.DDIParsingException;
+import fr.insee.eno.core.Constant;
+import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.DDIMapperTest;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.variable.Variable;
@@ -11,7 +12,6 @@ import fr.insee.lunatic.model.flat.Questionnaire;
 import org.junit.jupiter.api.Test;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
-import org.springframework.expression.spel.standard.SpelExpression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
@@ -153,7 +153,7 @@ public class SpelTests {
         expression.getValue(context, lunaticPairwiseLinks);
         //
         assertEquals("count(FOO)", lunaticPairwiseLinks.getXAxisIterations().getValue());
-        assertEquals("VTL", lunaticPairwiseLinks.getXAxisIterations().getType());
+        assertEquals(Constant.LUNATIC_LABEL_VTL_MD, lunaticPairwiseLinks.getXAxisIterations().getType());
     }
 
 }

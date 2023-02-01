@@ -1,5 +1,6 @@
 package fr.insee.eno.core.parsers;
 
+import fr.insee.eno.core.exceptions.business.PoguesDeserializationException;
 import fr.insee.pogues.model.Questionnaire;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class PoguesParserTest {
 
     @Test
-    public void poguesParserTest() throws URISyntaxException {
+    public void poguesParserTest() throws URISyntaxException, PoguesDeserializationException {
         //
         URL testPoguesFileUrl = this.getClass().getClassLoader().getResource("in/pogues/pogues.json");
         assert testPoguesFileUrl != null;

@@ -1,10 +1,8 @@
 package fr.insee.eno.core.reference;
 
-import fr.insee.eno.core.model.*;
-import fr.insee.eno.core.model.question.Question;
+import fr.insee.eno.core.model.EnoIdentifiableObject;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,11 +13,6 @@ import java.util.Map;
 public class EnoIndex {
 
     Map<String, EnoIdentifiableObject> index = new HashMap<>();
-
-    /** Recursively path through all eno identifiable objects and put them in the index. */
-    private void recursiveIndexing(EnoIdentifiableObject enoIdentifiableObject) {
-        // Finally done in mapper, TODO: remove this method
-    }
 
     public void put(String enoObjectId, EnoIdentifiableObject enoIdentifiableObject) {
         index.put(enoObjectId, enoIdentifiableObject);

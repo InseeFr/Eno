@@ -57,9 +57,6 @@ public class EnoProcessing {
         new DDIInsertDeclarations().apply(enoQuestionnaire);
         new DDIInsertControls().apply(enoQuestionnaire);
         new DDIInsertFilters().apply(enoQuestionnaire);
-        /* TODO: warning: in all "insert" methods, parent object is not changed.
-         *   2 solutions : set it each time (and then write tests!) or remove the parent attribute that is actually not used yet.
-         * Solution 2 selected: parent attribute marked as deprecated, to be removed. */
     }
 
     private void poguesTechnicalProcessing(EnoQuestionnaire enoQuestionnaire) {
