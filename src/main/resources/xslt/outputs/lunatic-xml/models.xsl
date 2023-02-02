@@ -701,10 +701,6 @@
 				<xsl:when test="$dec='' and $minimumResponse!='' and self::NumericDomain">0</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
-		<xsl:variable name="thousandSeparator">
-			<xsl:variable name="thousandSep" select="enolunatic:get-format($source-context)"/>
-			<xsl:value-of select="$thousandSep"/>
-		</xsl:variable>
 		<xsl:variable name="unit" select="enolunatic:get-suffix($source-context,$languages[1])"/>
 		<!-- TextDomain getters -->
 		<xsl:variable name="lengthResponse" select="enolunatic:get-length($source-context)"/>
@@ -718,7 +714,7 @@
 				<xsl:if test="$minimumResponse!=''"><xsl:attribute name="min" select="$minimumResponse"/></xsl:if>
 				<xsl:if test="$maximumResponse!=''"><xsl:attribute name="max" select="$maximumResponse"/></xsl:if>
 				<xsl:if test="$numberOfDecimals!=''"><xsl:attribute name="decimals" select="$numberOfDecimals"/></xsl:if>
-				<xsl:if test="self::NumericDomain"><xsl:attribute name="thousandSeparator" select="string($thousandSeparator)='thousandSeparator'"/></xsl:if>
+				<xsl:if test="self::NumericDomain and $format!=''"><xsl:attribute name="thousandSeparator" select="string($format)='thousandSeparator'"/></xsl:if>
 				<label>
 					<value><xsl:value-of select="$labelQuestion"/></value>
 					<type><xsl:value-of select="$labelType"/></type>
@@ -739,7 +735,7 @@
 				<xsl:if test="$unit!=''">
 					<unit><xsl:value-of select="$unit"/></unit>
 				</xsl:if>
-				<xsl:if test="$format != ''">
+				<xsl:if test="$format != '' and not(self::NumericDomain)">
 					<xsl:choose>
 						<xsl:when test="self::DateTimeDomain">
 							<dateFormat><xsl:value-of select="$format"/></dateFormat>

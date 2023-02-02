@@ -3,7 +3,7 @@
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 id="i6vwi2506qf2mms"
                 modele="SIMPSONS"
-                enoCoreVersion="2.4.0"
+                enoCoreVersion="2.4.2"
                 missing="false"
                 pagination="question"
                 maxPage="37">
@@ -182,8 +182,9 @@
                       id="j6q9h8tj"
                       mandatory="true"
                       min="0"
-                      max="99"
+                      max="10000"
                       decimals="0"
+                      thousandSeparator="true"
                       page="5">
             <label>
                <value>"➡ 4. " || "What is the current season number?"</value>
@@ -198,11 +199,11 @@
                        criticality="ERROR"
                        typeOfControl="FORMAT">
                <control>
-                  <value>not(not(isnull(SEASON_NUMBER)) and (0&gt;SEASON_NUMBER or 99&lt;SEASON_NUMBER))</value>
+                  <value>not(not(isnull(SEASON_NUMBER)) and (0&gt;SEASON_NUMBER or 10000&lt;SEASON_NUMBER))</value>
                   <type>VTL</type>
                </control>
                <errorMessage>
-                  <value>" La valeur doit être comprise entre 0 et 99."</value>
+                  <value>" La valeur doit être comprise entre 0 et 10000."</value>
                   <type>VTL|MD</type>
                </errorMessage>
             </controls>
