@@ -25,14 +25,6 @@ public class EnoWsApplication {
 	}
 
 	@Bean
-	public WebClient webClient(@Value("${test.url}") String baseUrl, WebClient.Builder builder) {
-		return builder.baseUrl(baseUrl)
-				// bug in jetty for DNS resolution in fucking Insee VPN ? => use jdk http client connector
-				.clientConnector(new JdkClientHttpConnector())
-				.build();
-	}
-
-	//@Bean
 	public WebClient webClientWithProxy(@Value("${test.url}") String baseUrl,
 										@Value("${test.proxy.host}") String proxyHost,
 										@Value("${test.proxy.port}") int proxyPort,
