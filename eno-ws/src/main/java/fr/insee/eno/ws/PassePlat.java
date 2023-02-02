@@ -2,6 +2,7 @@ package fr.insee.eno.ws;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
@@ -19,12 +20,15 @@ public class PassePlat {
                 .uri(serverRequest.getURI().getPath())
                 .headers(httpHeaders -> {
                     httpHeaders.clear();
-                    httpHeaders.addAll(serverRequest.getHeaders());
+                    serverRequest.getHeaders().forEach((key, strings) -> {
+                        if(!"Host".equals(key)) httpHeaders.put(key, strings);
+                    });
                 })
                 .exchangeToFlux(r -> {
                     response.setStatusCode(r.statusCode());
                     response.getHeaders().clear();
-                    response.getHeaders().addAll(r.headers().asHttpHeaders());
+                    r.headers().asHttpHeaders().forEach((key, strings) ->
+                        response.getHeaders().put(key.replace(":",""), strings)); //TODO: >_<
                     return r.bodyToFlux(DataBuffer.class);
                 }));
     }
