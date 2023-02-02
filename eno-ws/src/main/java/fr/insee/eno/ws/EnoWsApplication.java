@@ -41,7 +41,8 @@ public class EnoWsApplication {
 	}
 
 	@Configuration
-	public class WebConfig implements WebFluxConfigurer{
+	public static class WebConfig implements WebFluxConfigurer{
+		@Override
 		public void configureViewResolvers(ViewResolverRegistry registry) {
 			registry.viewResolver(new UrlBasedViewResolver());
 		}
