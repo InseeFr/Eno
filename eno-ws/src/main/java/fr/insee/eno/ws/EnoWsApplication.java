@@ -34,7 +34,7 @@ public class EnoWsApplication {
 
 	//@Bean
 	public WebClient webClientWithProxy(@Value("${test.url}") String baseUrl,
-										@Value("${test.proxy.port}") String proxyHost,
+										@Value("${test.proxy.host}") String proxyHost,
 										@Value("${test.proxy.port}") int proxyPort,
 										WebClient.Builder builder) {
 		HttpClient httpClient = HttpClient.newBuilder()
