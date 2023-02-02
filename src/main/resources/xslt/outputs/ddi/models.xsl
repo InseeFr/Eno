@@ -1822,6 +1822,8 @@
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 	            <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableScheme', .)" tunnel="yes"/>
 	        </xsl:apply-templates>
+            <xsl:variable name="format" select="enoddi33:get-format($source-context)"/>
+            <xsl:if test="$format != ''"><r:Format><xsl:value-of select="$format"/></r:Format></xsl:if>
 			<r:NumberRange>
                 <r:Low isInclusive="true">
                     <xsl:value-of select="enoddi33:get-low($source-context)"/>

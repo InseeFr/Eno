@@ -100,10 +100,11 @@
           <Response id="jbgdjy8h" mandatory="true">
             <Datatype typeName="NUMERIC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="NumericDatatypeType">
               <Minimum>0</Minimum>
-              <Maximum>99</Maximum>
+              <Maximum>10000</Maximum>
               <Decimals>0</Decimals>
               <Unit>
               </Unit>
+              <Format>thousandSeparator</Format>
             </Datatype>
             <CollectedVariableReference>k5nvrul1</CollectedVariableReference>
           </Response>

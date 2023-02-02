@@ -2022,7 +2022,7 @@
             <d:NumericDomain>
                <r:NumberRange>
                   <r:Low isInclusive="true">0</r:Low>
-                  <r:High isInclusive="true">99</r:High>
+                  <r:High isInclusive="true">10000</r:High>
                </r:NumberRange>
                <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                <r:OutParameter isArray="false">
@@ -10724,9 +10724,10 @@
             </r:QuestionReference>
             <l:VariableRepresentation>
                <r:NumericRepresentation>
+                  <r:Format>thousandSeparator</r:Format>
                   <r:NumberRange>
                      <r:Low isInclusive="true">0</r:Low>
-                     <r:High isInclusive="true">99</r:High>
+                     <r:High isInclusive="true">10000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>

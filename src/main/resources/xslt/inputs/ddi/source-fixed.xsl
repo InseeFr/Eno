@@ -159,6 +159,16 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>Getting the format for NumericDomain</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:NumericDomain" mode="enoddi:get-format">
+        <xsl:variable name="ddi-variable" select="enoddi:get-id(.)"/>
+        <xsl:value-of select="//l:VariableScheme//l:Variable[r:SourceParameterReference/r:ID = $ddi-variable]/l:VariableRepresentation//r:Format"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Getting levels of first dimension in d:QuestionGrid elements.</xd:p>
         </xd:desc>
     </xd:doc>
