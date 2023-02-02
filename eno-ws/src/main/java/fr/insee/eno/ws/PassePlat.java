@@ -7,8 +7,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.server.ServerRequest;
 import reactor.core.publisher.Mono;
+
+import static org.springframework.web.reactive.function.BodyInserters.fromPublisher;
 
 @Component
 public class PassePlat {
@@ -22,14 +26,14 @@ public class PassePlat {
                 .headers(httpHeaders -> {
                     httpHeaders.clear();
                     serverRequest.getHeaders().forEach((key, strings) -> {
-                        if(!"Host".equals(key)) httpHeaders.put(key, strings);
+                        if (!"Host".equals(key)) httpHeaders.put(key, strings);
                     });
                 })
                 .exchangeToFlux(r -> {
                     response.setStatusCode(r.statusCode());
                     response.getHeaders().clear();
                     r.headers().asHttpHeaders().forEach((key, strings) ->
-                        response.getHeaders().put(key.replace(":",""), strings)); //TODO: >_<
+                            response.getHeaders().put(key.replace(":", ""), strings)); //TODO: >_<
                     return r.bodyToFlux(DataBuffer.class);
                 }));
     }
@@ -37,10 +41,12 @@ public class PassePlat {
     public Mono<Void> passePlatPost(ServerHttpRequest request, ServerHttpResponse response) {
         return response.writeWith(this.webClient.post()
                 .uri(request.getURI().getPath())
+                .body(fromPublisher(request.getBody(), DataBuffer.class))
                 .headers(httpHeaders -> {
                     httpHeaders.clear();
-                    httpHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
-                    httpHeaders.addAll(request.getHeaders());
+                    request.getHeaders().forEach((key, strings) -> {
+                        if (!"Host".equals(key)) httpHeaders.put(key, strings);
+                    });
                 })
                 .exchangeToFlux(r -> {
                     response.setStatusCode(r.statusCode());
