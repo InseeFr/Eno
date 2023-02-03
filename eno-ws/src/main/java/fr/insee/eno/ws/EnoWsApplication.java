@@ -29,7 +29,7 @@ public class EnoWsApplication {
 										@Value("${test.proxy.host}") String proxyHost,
 										@Value("${test.proxy.port}") String proxyPort,
 										WebClient.Builder builder) {
-		if (!"".equals(proxyPort) && !"".equals(proxyHost)) {
+		if (proxyPort.matches("-?\\d+") && !"".equals(proxyHost)) {
 			HttpClient httpClient = HttpClient.newBuilder()
 					.proxy(ProxySelector.of(new InetSocketAddress(proxyHost,Integer.parseInt(proxyPort))))
 					.build();
