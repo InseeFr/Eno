@@ -27,16 +27,17 @@ public class EnoWsApplication {
 	@Bean
 	public WebClient webClientWithProxy(@Value("${test.url}") String baseUrl,
 										@Value("${test.proxy.host}") String proxyHost,
-										@Value("${test.proxy.port}") int proxyPort,
+										@Value("${test.proxy.port}") String proxyPort,
 										WebClient.Builder builder) {
-		HttpClient httpClient = HttpClient.newBuilder()
-				.proxy(ProxySelector.of(new InetSocketAddress(proxyHost,proxyPort)))
-				.build();
-		JdkClientHttpConnector connector = new JdkClientHttpConnector(httpClient);
-
+		if (!"".equals(proxyPort) && !"".equals(proxyHost)) {
+			HttpClient httpClient = HttpClient.newBuilder()
+					.proxy(ProxySelector.of(new InetSocketAddress(proxyHost,Integer.parseInt(proxyPort))))
+					.build();
+			builder.clientConnector(new JdkClientHttpConnector(httpClient));
+		} else {
+			builder.clientConnector(new JdkClientHttpConnector());
+		}
 		return builder.baseUrl(baseUrl)
-				.clientConnector(new JdkClientHttpConnector())
-				.clientConnector(connector)
 				.build();
 	}
 
