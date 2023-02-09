@@ -20,8 +20,11 @@ public class V3ParameterController {
 
     public static final String PARAMETERS_V3_FILE_NAME = "default-parameters-v3.json";
 
-    @Autowired
-    ParameterService parameterService;
+    private final ParameterService parameterService;
+
+    public V3ParameterController(ParameterService parameterService) {
+        this.parameterService = parameterService;
+    }
 
     @Operation(
             summary="Get V3 default parameters.",
