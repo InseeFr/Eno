@@ -2,13 +2,10 @@ package fr.insee.eno.ws;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.server.ServerRequest;
 import reactor.core.publisher.Mono;
 
 import static org.springframework.web.reactive.function.BodyInserters.fromPublisher;
@@ -16,8 +13,11 @@ import static org.springframework.web.reactive.function.BodyInserters.fromPublis
 @Component
 public class PassePlat {
 
-    @Autowired
-    private WebClient webClient;
+    private final WebClient webClient;
+
+    public PassePlat(WebClient webClient) {
+        this.webClient = webClient;
+    }
 
     public Mono<Void> passePlatGet(ServerHttpRequest serverRequest, ServerHttpResponse response) {
         return response.writeWith(this.webClient.get()
@@ -31,8 +31,7 @@ public class PassePlat {
                 .exchangeToFlux(r -> {
                     response.setStatusCode(r.statusCode());
                     response.getHeaders().clear();
-                    r.headers().asHttpHeaders().forEach((key, strings) ->
-                            response.getHeaders().put(key.replace(":", ""), strings)); //TODO: >_<
+                    response.getHeaders().addAll(r.headers().asHttpHeaders());
                     return r.bodyToFlux(DataBuffer.class);
                 }));
     }
@@ -50,7 +49,6 @@ public class PassePlat {
                 .exchangeToFlux(r -> {
                     response.setStatusCode(r.statusCode());
                     response.getHeaders().clear();
-                    response.getHeaders().setContentType(MediaType.APPLICATION_OCTET_STREAM);
                     response.getHeaders().addAll(r.headers().asHttpHeaders());
                     return r.bodyToFlux(DataBuffer.class);
                 }));
