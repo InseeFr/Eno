@@ -1,10 +1,11 @@
 {
-    "title": "My GitBook Document",
-    "author": "John Doe",
+    "title": "Eno Java Documentation",
     "gitbook": "3.2.3",
     "structure": {
         "readme": "README.md",
-        "summary": "SUMMARY.md"
+        "summary": "SUMMARY.md",
+        "glossary": "GLOSSARY.md",
+        "languages": "LANGS.md"
     },
     "plugins": [
         "github",
@@ -12,7 +13,7 @@
     ],
     "pluginsConfig": {
         "github": {
-            "url": "https://github.com/my-username/my-repo"
+            "url": "https://github.com/InseeFr/Eno"
         }
     }
 }
