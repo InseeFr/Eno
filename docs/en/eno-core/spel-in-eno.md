@@ -1,5 +1,7 @@
 # Usage of Spring Expression Language in Eno
 
+_Not updated: please refer to french version._
+
 This page provides documentation of the parameters that can be used in annotations on the Eno model
 (these parameters are hardcoded in mappers).
 

@@ -9,3 +9,6 @@
 
 ## Bowie
 [Bowie](https://github.com/InseeFr/Bowie) désigne le produit "Atelier de conception d'enquêtes", dont Eno est une composante.
+
+## SpEL
+[Spring Element Language](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html), utilisé dans les annotations posées sur les objets du modèle Eno pour définir le mapping entre le modèle et les différents formats d'entrée ou sortie.

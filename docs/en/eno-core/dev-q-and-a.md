@@ -1,5 +1,7 @@
 # Technical notes
 
+_Not updated: please refer to french version._
+
 ### My objects mapped by my annotations are null, why?
 
 Mapper uses reflection to access/set model values. Make sure that attributes have their getters and setters. 
