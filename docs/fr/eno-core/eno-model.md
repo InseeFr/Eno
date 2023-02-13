@@ -1,90 +1,111 @@
 # Modèle Eno
 
-Rappel : principe
+## Concepts
 
-```
-Format d'entrée 
-    --Deserializer--> Objet d'entrée
-    --Mapper--> Objet du modèle Eno
-    --Mapper--> Objet de sortie
-    --Serializer--> Format de sortie
-```
+Résumé des concepts de questionnaire manipulés par Eno :
 
-## Labels
+- Questionnaire
+- Séquence
+- Sous-séquence
+- Libellé / libellé dynamique
+- Expression calculée
+- Déclaration / Instruction
+- Mode de collecte
+- Question à réponse unique
+  - Question simple
+    - booléenne
+    - texte
+    - numérique
+    - date
+  - Question à choix unique
+- Question à réponses multiples
+  - Question à choix multiple
+  - Question "lien deux à deux"
+  - Tableau
+    - statique
+    - dynamique
+- Réponse
+- Contrôle
+- Filtre
+- Boucle
+- Variable 
+  - collectée
+  - calculée
+  - externe
+- Groupe de variables
+- Liste de codes
+- Suggesteur
 
-### Labels en DDI
+### Structure du questionnaire
 
-Classe Eno          Attribut                            Expression SpEL (DDI)
+Un questionnaire est structuré en séquences et éventuellement sous-séquences. 
 
-AbstractSequence    String label                        getLabelArray(0).getContentArray(0).getStringValue()
+Il n'y a pas de "sous-sous-séquence" etc.
 
-Question            String label                        getQuestionTextArray(0).getTextContentArray(0).getText().getStringValue()
+Un questionnaire commence obligatoirement pas une séquence, et toutes les questions appartiennent à une séquence ou sous-séquence.
 
-Declaration         String label                        getDisplayTextArray(0).getTextContentArray(0).getText().getStringValue()
-                    List<String> variableNames
-Instruction         idem                                getInstructionTextArray(0).getTextContentArray(0).getText().getStringValue()
+### Libellés & expressions
 
-Control             String expression                   getCommandCode().getCommandArray(0).getCommandContent()
-                    List<String> bindingReferences
-Filter              idem                                getIfCondition().getCommandArray(0).getCommandContent()
-Variable            idem                                ..getCommandCodeArray(0).getCommandArray(0).getCommandContent()
+Libellé (statique) : libellé à valeur fixe (la cible dans Pogues étant que tous les libellés soient dynamiques).
 
-Control             String (message) label              getDescription().getContentArray(0).getStringValue()
-                                                        ou :
-                                                        getConstructNameArray(0).getStringArray(0).getStringValue()
+Libellé dynamique : libellé défini par une expression calculée (renvoyant une chaîne de caractères).
 
-Control             String message                      ..getInstructionTextArray(0).getTextContentArray(0).getText().getStringValue()
+Expression calculée : expression
 
-CodeResponse        String label                        ..getLabelArray(0).getContentArray(0).getStringValue()
+Les expressions sont définies en Xpath ou VTL. Le XPath a vocation a disparaître.
 
-CodeItem            String label                        ..getLabelArray(0).getContentArray(0).getStringValue()
+### Déclarations / Instructions
 
-=> 3 objets de libellés au niveau de la modélisation DDI :
+Déclaration = texte affiché _avant_ la question
 
-Description                 Classe Eno              Classes ayant ce type de libellé
-Les libellés statiques      Label                   AbstractSequence CodeResponse CodeItem Control(message)
-Les libellés dynamiques     DynamicLabel            Question Declaration Instruction
-Les expressions VTL         CalculatedExpression    Control(expression) Filter Variable
+Instruction = texte affiché _après_ la question
 
-NB : les libellés dynamiques sont aussi des expressions VTL, c'est juste modélisé différemment en DDI.
+### Mode de collecte
 
-NB : au niveau Lunatic, les 3 types de libellés correspondent au même objet.
+Certains éléments portent les modes de collecte pour lesquels ils sont définis.
 
-### Labels dans Lunatic
+Actuellement : uniquement les déclaration / instructions.
 
-| Nom de la propriété | Type   | Classes Lunatic                                                                                                                                                  | 
-|---------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| "label"             | VTL/MD | Sequence, Subsquence                                                                                                                                             |
-| "label"             | VTL/MD | Input, Textarea, InputNumber, CheckboxBoolean, Datepicker, CheckboxOne, Radio, Dropdown, CheckboxGroup, Table                                                    |
-| "label"             | VTL/MD | dans les "options" d'un CheckboxOne                                                                                                                              |
-| "label"             | VTL/MD | dans les "responses" d'un CheckboxGroup                                                                                                                          |
-| "label"             | VTL/MD | Declaration (dans les "declarations" d'un objet composant)                                                                                                       |
-| "control"           | VTL    | Control (dans les "controls" d'un objet composant)                                                                                                               |
-| "errorMessage"      | VTL/MD | Control (dans les "controls" d'un objet composant)                                                                                                               |
-| "value" + "type"    | VTL    | Filter (champ "filter" dans les objets composant) _Cas batard, on devrait avoir une propriété "expression" (ou autre, peu importe, mais utiliser l'objet Label)_ |
-| "expression"        | VTL    | Variable (avec "variableType" : "CALCULATED")                                                                                                                    |
+### Questions / Réponses
 
-Rules from Eno-V2 source code:
+Dans le modèle Eno, on distingue trois types de questions :
 
-```xml
-<xsl:function name="enolunatic:get-label-type">
-<xsl:param name="locationOfLabel"/>
-<xsl:choose>
-<xsl:when test="$locationOfLabel='label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
-<xsl:when test="$locationOfLabel='responses.label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
-<xsl:when test="$locationOfLabel='hierarchy.label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
-<xsl:when test="$locationOfLabel='hierarchy.subSequence.label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
-<xsl:when test="$locationOfLabel='hierarchy.sequence.label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
-<xsl:when test="$locationOfLabel='declarations.label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
-<xsl:when test="$locationOfLabel='controls.control'"><xsl:value-of select="'VTL'"/></xsl:when>
-<xsl:when test="$locationOfLabel='controls.errorMessage'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
-<xsl:when test="$locationOfLabel='options.label'"><xsl:value-of select="'VTL|MD'"/></xsl:when>
-<xsl:when test="$locationOfLabel='lines.min'"><xsl:value-of select="'VTL'"/></xsl:when>
-<xsl:when test="$locationOfLabel='lines.max'"><xsl:value-of select="'VTL'"/></xsl:when>
-<xsl:when test="$locationOfLabel='iterations'"><xsl:value-of select="'VTL'"/></xsl:when>
-<xsl:when test="$locationOfLabel='conditionFilter'"><xsl:value-of select="'VTL'"/></xsl:when>
-<xsl:when test="$locationOfLabel='expression'"><xsl:value-of select="'VTL'"/></xsl:when>
-<xsl:otherwise><xsl:value-of select="'VTL|MD'"/></xsl:otherwise>
-</xsl:choose>
-</xsl:function>
-```
+- Questions à réponse unique : questions simples et QCU
+- Questions à réponses multiples : uniquement les QCM dont les modalités sont des booléens
+- Tableaux : QCM "complexes" et tableaux
+
+Voir la documentation sur les modélisations DDI, Pogues, Lunatic pour les détails.
+
+Les objets de réponse sont propres à Lunatic.
+
+### Élements de navigation
+
+Contrôle : contient une expression calculée pour afficher ou non un avertissement selon la saisie du répondant.
+
+Filtre : expression calculée définissant des composants à ne pas afficher en fonction des réponses dans le questionnaire.
+
+Boucle : un ensemble de séquences ou de sous-séquences peut être itéré plusieurs fois (exemple : individus d'un ménage).
+
+### Variables
+
+Collectée : valeur saisie par le répondant.
+
+Calculée : valeur calculée pendant la passation du questionnaire.
+
+Externe : variable destinée à être valorisée avant la passation du questionnaire.
+
+### Suggesteur
+
+Auto-complétion.
+
+## Correspondances entre modèles
+
+Table de correspondance entre les classes des différents modèles
+
+| _Concept_ | Pogues | DDI | Eno | Lunatic |
+| --- | --- | --- | --- | --- |
+| Questionnaire | `Questionnaire` | `Questionnaire` | `EnoQuestionnaire` | `Questionnaire` |
+
+...
+
+_(TODO)_
