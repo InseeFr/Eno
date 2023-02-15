@@ -35,6 +35,12 @@ dependencies {
 	testImplementation 'io.projectreactor:reactor-test'
 }
 
+processResources {
+	filesMatching('version.properties') {
+		expand(project.properties)
+	}
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
