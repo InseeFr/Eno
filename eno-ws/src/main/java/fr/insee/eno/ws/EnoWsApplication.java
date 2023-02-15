@@ -14,24 +14,25 @@ import org.springframework.web.reactive.result.view.UrlBasedViewResolver;
 import java.net.InetSocketAddress;
 import java.net.ProxySelector;
 import java.net.http.HttpClient;
+import java.util.Optional;
 
 @SpringBootApplication
 public class EnoWsApplication {
 
 	public static void main(String[] args) {
-		// Remove unauthorized header names for jdk httpclient :
+		// Remove unauthorized header names for jdk httpclient:
 		System.setProperty("jdk.httpclient.allowRestrictedHeaders", "host,connection");
 		SpringApplication.run(EnoWsApplication.class, args);
 	}
 
 	@Bean
-	public WebClient webClientWithProxy(@Value("${test.url}") String baseUrl,
-										@Value("${test.proxy.host}") String proxyHost,
-										@Value("${test.proxy.port}") String proxyPort,
-										WebClient.Builder builder) {
-		if (proxyPort.matches("-?\\d+") && !"".equals(proxyHost)) {
+	public WebClient webClient(@Value("${eno.legacy.ws.url}") String baseUrl,
+							   @Value("${proxy.host}") Optional<String> proxyHost,
+							   @Value("${proxy.port}") Optional<Integer> proxyPort,
+							   WebClient.Builder builder) {
+		if (proxyHost.isPresent() && proxyPort.isPresent()) {
 			HttpClient httpClient = HttpClient.newBuilder()
-					.proxy(ProxySelector.of(new InetSocketAddress(proxyHost,Integer.parseInt(proxyPort))))
+					.proxy(ProxySelector.of(new InetSocketAddress(proxyHost.get(), proxyPort.get())))
 					.build();
 			builder.clientConnector(new JdkClientHttpConnector(httpClient));
 		} else {
