@@ -1,23 +1,34 @@
 package fr.insee.eno.ws.config;
 
+//import fr.insee.ddi.model.DDIMetadata;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-public class OpenApiConfiguration { // TODO: prod config using spring.profiles.active?
+@PropertySource("classpath:version.properties")
+public class OpenApiConfiguration {
+
+    @Value("${eno.legacy.ws.url}")
+    private String enoLegacyUrl;
+    @Value("${version.eno}")
+    private String enoVersion;
+    @Value("${version.pogues.model}")
+    private String poguesModelVersion;
+    @Value("${version.lunatic.model}")
+    private String lunaticModelVersion;
 
     @Bean
     public OpenAPI customOpenAPI() {
-        String enoVersion = "(todo) 3.x"; //TODO: get eno & Lunatic version in code
-        String lunaticModelVersion = "(todo) 2.3.x";
         return new OpenAPI()
                 .info(new Info()
                         .title("Eno Web Service")
                         .description(
-                                "<h2>Generator using :</h2>" +
+                                "<h2>Generator using:</h2>" +
                                         "<style>" +
                                         "  .cell{" +
                                         "    border: black 2px solid; " +
@@ -27,18 +38,25 @@ public class OpenApiConfiguration { // TODO: prod config using spring.profiles.a
                                         "  .version{color:darkred}" +
                                         "</style>" +
                                         "<table style=\"width:40%\">" +
-                                        "  <tr>" +
-                                        "    <td class=\"cell\">Eno version</td>" +
-                                        "    <td class=\"cell version\">"+enoVersion+"</td>" +
-                                        "  </tr>" +
-                                        "  <tr>" +
-                                        "    <td class=\"cell\">Lunatic Model version</td>" +
-                                        "    <td class=\"cell version\">"+lunaticModelVersion+"</td>" +
-                                        "  </tr>" +
+                                        descriptionEntry("Eno Java version", enoVersion) +
+                                        descriptionEntry("Eno XML web service", htmlLink(enoLegacyUrl)) +
+                                        descriptionEntry("DDI version", /*DDIMetadata.MODEL_VERSION*/ "3.3") +
+                                        descriptionEntry("Pogues Model version", poguesModelVersion) +
+                                        descriptionEntry("Lunatic Model version", lunaticModelVersion) +
                                         "</table>")
-                        .version("(todo) Eno-WS v2.x here") //TODO
-                        .license(new License().name("Apache 2.0").url("http://springdoc.org"))
+                        .version(enoVersion)
+                        .license(new License().name("Apache 2.0").url("https://springdoc.org"))
                 );
+    }
+
+    private static String descriptionEntry(String description, String version) {
+        return "<tr>" +
+                        "  <td class=\"cell\">"+description+"</td>" +
+                        "  <td class=\"cell version\">"+version+"</td>" +
+                        "</tr>";
+    }
+    private static String htmlLink(String url) {
+        return "<a href=\""+url+"\">"+url+"</a>";
     }
 
 }
