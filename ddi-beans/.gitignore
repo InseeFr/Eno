@@ -1,6 +1,9 @@
 # Generated sources
 src/main/java/*
-!src/main/java/fr/insee/eno
+!src/main/java/fr/insee/ddi/model/DDIMetadata.java
+# NB: It is not possible to re-include a file if a parent directory of that file is excluded.
+# https://git-scm.com/docs/gitignore#_pattern_format
+# TODO: proper signle package for DDI generated model
 
 # Generated resources
 src/main/resources/org/apache/xmlbeans/*

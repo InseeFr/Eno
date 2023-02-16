@@ -1,6 +1,6 @@
 package fr.insee.eno.ws.config;
 
-import fr.insee.ddi.model.DDIMetadata;
+//import fr.insee.ddi.model.DDIMetadata;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
@@ -40,7 +40,7 @@ public class OpenApiConfiguration {
                                         "<table style=\"width:40%\">" +
                                         descriptionEntry("Eno Java version", enoVersion) +
                                         descriptionEntry("Eno XML web service", htmlLink(enoLegacyUrl)) +
-                                        descriptionEntry("DDI version", DDIMetadata.MODEL_VERSION) +
+                                        descriptionEntry("DDI version", /*DDIMetadata.MODEL_VERSION*/ "3.3") +
                                         descriptionEntry("Pogues Model version", poguesModelVersion) +
                                         descriptionEntry("Lunatic Model version", lunaticModelVersion) +
                                         "</table>")
