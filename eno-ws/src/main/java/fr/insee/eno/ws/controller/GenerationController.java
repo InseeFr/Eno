@@ -1,7 +1,5 @@
 package fr.insee.eno.ws.controller;
 
-import fr.insee.eno.legacy.model.BrowsingSuggest;
-import fr.insee.eno.legacy.model.DDIVersion;
 import fr.insee.eno.legacy.parameters.*;
 import fr.insee.eno.ws.PassePlat;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,10 +10,7 @@ import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @Tag(name = "Generation of questionnaire")
@@ -56,17 +51,18 @@ public class GenerationController {
 	public Mono<Void> generateFOQuestionnaire(
 			@RequestPart(value="in", required=true) Mono<FilePart> in,
 			@RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
-			@RequestParam(value="DDIVersion", required=false, defaultValue="DDI_33") DDIVersion ddiVersion,
 			@RequestParam(value="multi-model", required=false, defaultValue="false") boolean multiModel,
-			@RequestParam(value="context", required=true) Context context,
-			@RequestParam(value="endQuestionResponseTime") boolean endQuestionResponseTime,
+			@RequestParam Context context,
+			@RequestParam(value="ResponseTimeQuestion") boolean endQuestionResponseTime,
 			@RequestParam(value="CommentQuestion") boolean endQuestionCommentQuestion,
 			@RequestParam(value="Format-orientation") Orientation orientation,
 			@RequestParam(value="Format-column", defaultValue="1") int nbColumn,
 			@RequestParam(value="AccompanyingMail") AccompanyingMail accompanyingMail,
-			@RequestParam(value="PageBreakBetween") Level pageBreakBetween, 
+			@RequestParam(value="PageBreakBetween") Level pageBreakBetween,
 			@RequestParam(value="Capture") CaptureEnum capture,
-			@RequestParam(value="Browsing") BrowsingSuggest browsingSuggest,
+			@RequestParam(value="QuestNum") BrowsingEnum questNum,
+			@RequestParam(value="SeqNum") boolean seqNum,
+			@RequestParam(value="PreQuestSymbol") boolean preQuestSymbol,
 			ServerHttpRequest request, ServerHttpResponse response) throws Exception {
 		return passePlat.passePlatPost(request, response);
 	}
@@ -81,7 +77,6 @@ public class GenerationController {
 			@RequestPart(value="in", required=true) Mono<FilePart> in,			
 			@RequestPart(value="metadata", required=false) Mono<FilePart> metadata,
 			@RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
-			@RequestParam(value="DDIVersion", required=true, defaultValue="DDI_33") DDIVersion ddiVersion,
 			@RequestParam(value="multi-model", required=false, defaultValue="false") boolean multiModel,
 			@RequestParam(value="context", required=true) Context context,
 			@RequestParam(value="IdentificationQuestion") boolean identificationQuestion,
@@ -93,7 +88,9 @@ public class GenerationController {
 			@RequestParam(value="LengthOfLongTable", defaultValue="7") int lengthOfLongTable, 
 			@RequestParam(value="DecimalSeparator") DecimalSeparator decimalSeparator,
 			@RequestParam(value="css", required=false) String css,
-			@RequestParam(value="Browsing") BrowsingSuggest browsingSuggest,
+			@RequestParam(value="QuestNum", required=true) BrowsingEnum questNum,
+			@RequestParam(value="SeqNum") boolean seqNum,
+			@RequestParam(value="PreQuestSymbol") boolean preQuestSymbol,
 			ServerHttpRequest request, ServerHttpResponse response) throws Exception {
 		return passePlat.passePlatPost(request, response);
 	}
@@ -102,31 +99,37 @@ public class GenerationController {
 			summary = "Generation of Lunatic json questionnaire.",
 			description = "Generate a Lunatic json (flat) questionnaire from a DDI questionnaire " +
 					"using the parameters given.")
-	@PostMapping(value = "ddi-2-lunatic-json",
+	@PostMapping(value = "ddi-2-lunatic-json/{mode}",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Mono<Void> generateLunaticJsonQuestionnaire(
 			@RequestPart(value="in", required=true) Mono<FilePart> in,
 			@RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
-			@RequestParam(value="DDIVersion", required=true, defaultValue="DDI_33") DDIVersion ddiVersion,
+			@PathVariable Mode mode,
 			@RequestParam(value="context", required=true) Context context,
-			@RequestParam(value="IdentificationQuestion") boolean identificationQuestion,
-			@RequestParam(value="ResponseTimeQuestion") boolean endQuestionResponseTime,
-			@RequestParam(value="CommentQuestion") boolean endQuestionCommentQuestion,
+			@RequestParam(value="IdentificationQuestion", required=false) boolean identificationQuestion,
+			@RequestParam(value="ResponseTimeQuestion", required=false) boolean endQuestionResponseTime,
+			@RequestParam(value="CommentQuestion", required=false) boolean endQuestionCommentQuestion,
+			@RequestParam(value="parsingXpathVTL", required=false) boolean parsingXpathVTL,
 			@RequestParam(value="filterDescription", defaultValue="false") boolean filterDescription,
-			@RequestParam(value="Browsing") BrowsingSuggest browsingSuggest,
+			@RequestParam(value="control", defaultValue="false") boolean control,
+			@RequestParam(value="missingVar", defaultValue="false") boolean missingVar,
+			@RequestParam(value="AddFilterResult") boolean addFilterResult,
+			@RequestParam(value="QuestNum") BrowsingEnum questNum,
+			@RequestParam(value="SeqNum") boolean seqNum,
+			@RequestParam(value="PreQuestSymbol") boolean preQuestSymbol,
+			@RequestParam(value="Pagination", required=false, defaultValue="NONE") Pagination pagination,
+			@RequestParam(value="includeUnusedCalculatedVariables") boolean unusedVars,
 			ServerHttpRequest request, ServerHttpResponse response) throws Exception {
 		return passePlat.passePlatPost(request, response);
 	}
 	
 	@Operation(
 			summary = "Generation of DDI questionnaire from Pogues xml questionnaire.",
-			description = "Generate a DDI questionnaire from a Pogues xml questionnaire. " +
-					"You can choose if the transformation uses the markdown to xhtml post processor.")
+			description = "Generate a DDI questionnaire from a Pogues xml questionnaire.")
 	@PostMapping(value="poguesxml-2-ddi",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Mono<Void> generateDDIQuestionnaire(
 			@RequestPart(value="in", required=true) Mono<FilePart> in,
-			@RequestParam(value="mw-2-xhtml", required=true, defaultValue="true") boolean mw2xhtml,
 			ServerHttpRequest request, ServerHttpResponse response) throws Exception {
 		return passePlat.passePlatPost(request, response);
 	}
@@ -138,7 +141,9 @@ public class GenerationController {
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Mono<Void> generateODTQuestionnaire(
 			@RequestPart(value="in", required=true) Mono<FilePart> in,
-			@RequestParam(value="Browsing", required=true) BrowsingSuggest browsingSuggest,
+			@RequestParam(value="QuestNum") BrowsingEnum questNum,
+			@RequestParam(value="SeqNum") boolean seqNum,
+			@RequestParam(value="PreQuestSymbol") boolean preQuestSymbol,
 			ServerHttpRequest request, ServerHttpResponse response) throws Exception {
 		return passePlat.passePlatPost(request, response);
 	}

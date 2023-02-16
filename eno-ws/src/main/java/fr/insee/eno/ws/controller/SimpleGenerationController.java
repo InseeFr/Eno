@@ -1,5 +1,6 @@
 package fr.insee.eno.ws.controller;
 
+import fr.insee.eno.legacy.parameters.CaptureEnum;
 import fr.insee.eno.legacy.parameters.Context;
 import fr.insee.eno.legacy.parameters.Mode;
 import fr.insee.eno.ws.PassePlat;
@@ -11,10 +12,7 @@ import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @Tag(name = "Simple generation of questionnaire")
@@ -40,6 +38,8 @@ public class SimpleGenerationController {
     public Mono<Void> generateFOQuestionnaire(
             @RequestPart(value="in", required=true) Mono<FilePart> in,
             @RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
+            @RequestParam(value="Format-column", required=false) Integer nbColumn,
+            @RequestParam(value="Capture", required=false) CaptureEnum capture,
             @PathVariable Context context,
             ServerHttpRequest request, ServerHttpResponse response) throws Exception {
         return passePlat.passePlatPost(request, response);
