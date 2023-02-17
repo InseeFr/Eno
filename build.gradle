@@ -15,12 +15,14 @@ subprojects {
     compileJava {
         options.release = 17
     }
-    tasks.withType(JavaCompile) {
-        options.encoding = 'UTF-8'
+    tasks.withType(JavaCompile).tap {
+        configureEach {
+            options.encoding = 'UTF-8'
+        }
     }
 }
 
-task printVersion {
+tasks.register('printVersion') {
     doLast {
         println project.version
     }
