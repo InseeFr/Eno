@@ -9,7 +9,9 @@ dependencyResolutionManagement {
 
     repositories {
         mavenCentral()
+        // Temporary config for private maven repository (for Pogues-Model and Lunatic-Model)
         maven { url System.properties['urlMavenRepo'] }
+        // Temporary config if you choose to install Pogues-Model and Lunatic-Model locally
         mavenLocal()
     }
 
