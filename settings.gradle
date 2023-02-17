@@ -9,6 +9,7 @@ dependencyResolutionManagement {
 
     repositories {
         mavenCentral()
+        maven { url System.properties['urlMavenRepo'] }
         mavenLocal()
     }
 
