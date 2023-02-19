@@ -32,7 +32,7 @@ public class UtilController {
     @PostMapping(value = "ddi32-2-ddi33",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<Void> generateDDI33Questionnaire(
-            @RequestPart(value="in", required=true) Mono<FilePart> in,
+            @RequestPart(value="in") Mono<FilePart> in,
             ServerHttpRequest request, ServerHttpResponse response) {
         return passePlat.passePlatPost(request, response);
     }
@@ -42,7 +42,7 @@ public class UtilController {
             description = "Generate a VTL in 2.0 version from a Xpath in 1.1 version.")
     @PostMapping(value = "xpath-2-vtl")
     public Mono<ResponseEntity<String>> generateVTLFormula(
-            @RequestParam(value="xpath", required=true) String xpath) {
+            @RequestParam(value="xpath") String xpath) {
         String result = XpathToVtl.parseToVTL(xpath);
         log.info("Xpath expression given parsed to VTL: {}", result);
         return Mono.just(ResponseEntity.ok().body(result));
@@ -54,7 +54,7 @@ public class UtilController {
     @PostMapping(value = "lunatic-model/xml-2-json",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<Void> generateLunaticJson(
-            @RequestPart(value="in", required=true) Mono<FilePart> in,
+            @RequestPart(value="in") Mono<FilePart> in,
             ServerHttpRequest request, ServerHttpResponse response) {
         return passePlat.passePlatPost(request, response);
     }

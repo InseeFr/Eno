@@ -38,8 +38,8 @@ public class IntegrationHouseholdController {
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<Void> generateLunaticJson(
             @PathVariable Mode mode,
-            @RequestPart(value="in", required=true) Mono<FilePart> in,
-            @RequestPart(value="params", required=true) Mono<FilePart> params,
+            @RequestPart(value="in") Mono<FilePart> in,
+            @RequestPart(value="params") Mono<FilePart> params,
             @RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
             ServerHttpRequest request, ServerHttpResponse response) {
         return passePlat.passePlatPost(request, response);

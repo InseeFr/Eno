@@ -33,8 +33,8 @@ public class GenerationController {
 	@PostMapping(value = "in-2-out",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Mono<Void> generate(
-			@RequestPart(value="in", required=true) Mono<FilePart> in,
-			@RequestPart(value="params", required=true) Mono<FilePart> params,
+			@RequestPart(value="in") Mono<FilePart> in,
+			@RequestPart(value="params") Mono<FilePart> params,
 			@RequestPart(value="metadata", required=false) Mono<FilePart> metadata,
 			@RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
 			@RequestPart(value="mapping", required=false) Mono<FilePart> mapping,
@@ -49,7 +49,7 @@ public class GenerationController {
 	@PostMapping(value = "ddi-2-fo",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Mono<Void> generateFOQuestionnaire(
-			@RequestPart(value="in", required=true) Mono<FilePart> in,
+			@RequestPart(value="in") Mono<FilePart> in,
 			@RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
 			@RequestParam(value="multi-model", required=false, defaultValue="false") boolean multiModel,
 			@RequestParam Context context,
@@ -74,11 +74,11 @@ public class GenerationController {
 	@PostMapping(value = "ddi-2-xforms",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Mono<Void> generateXformsQuestionnaire(
-			@RequestPart(value="in", required=true) Mono<FilePart> in,
+			@RequestPart(value="in") Mono<FilePart> in,
 			@RequestPart(value="metadata", required=false) Mono<FilePart> metadata,
 			@RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
 			@RequestParam(value="multi-model", required=false, defaultValue="false") boolean multiModel,
-			@RequestParam(value="context", required=true) Context context,
+			@RequestParam(value="context") Context context,
 			@RequestParam(value="IdentificationQuestion") boolean identificationQuestion,
 			@RequestParam(value="ResponseTimeQuestion") boolean endQuestionResponseTime,
 			@RequestParam(value="CommentQuestion") boolean endQuestionCommentQuestion,
@@ -88,7 +88,7 @@ public class GenerationController {
 			@RequestParam(value="LengthOfLongTable", defaultValue="7") int lengthOfLongTable,
 			@RequestParam(value="DecimalSeparator") DecimalSeparator decimalSeparator,
 			@RequestParam(value="css", required=false) String css,
-			@RequestParam(value="QuestNum", required=true) BrowsingEnum questNum,
+			@RequestParam(value="QuestNum") BrowsingEnum questNum,
 			@RequestParam(value="SeqNum") boolean seqNum,
 			@RequestParam(value="PreQuestSymbol") boolean preQuestSymbol,
 			ServerHttpRequest request, ServerHttpResponse response) {
@@ -102,10 +102,10 @@ public class GenerationController {
 	@PostMapping(value = "ddi-2-lunatic-json/{mode}",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Mono<Void> generateLunaticJsonQuestionnaire(
-			@RequestPart(value="in", required=true) Mono<FilePart> in,
+			@RequestPart(value="in") Mono<FilePart> in,
 			@RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
 			@PathVariable Mode mode,
-			@RequestParam(value="context", required=true) Context context,
+			@RequestParam(value="context") Context context,
 			@RequestParam(value="IdentificationQuestion", required=false) boolean identificationQuestion,
 			@RequestParam(value="ResponseTimeQuestion", required=false) boolean endQuestionResponseTime,
 			@RequestParam(value="CommentQuestion", required=false) boolean endQuestionCommentQuestion,
@@ -129,7 +129,7 @@ public class GenerationController {
 	@PostMapping(value="poguesxml-2-ddi",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Mono<Void> generateDDIQuestionnaire(
-			@RequestPart(value="in", required=true) Mono<FilePart> in,
+			@RequestPart(value="in") Mono<FilePart> in,
 			ServerHttpRequest request, ServerHttpResponse response) {
 		return passePlat.passePlatPost(request, response);
 	}
@@ -140,7 +140,7 @@ public class GenerationController {
 	@PostMapping(value="ddi-2-fodt",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Mono<Void> generateODTQuestionnaire(
-			@RequestPart(value="in", required=true) Mono<FilePart> in,
+			@RequestPart(value="in") Mono<FilePart> in,
 			@RequestParam(value="QuestNum") BrowsingEnum questNum,
 			@RequestParam(value="SeqNum") boolean seqNum,
 			@RequestParam(value="PreQuestSymbol") boolean preQuestSymbol,

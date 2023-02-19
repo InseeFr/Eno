@@ -37,9 +37,9 @@ public class IntegrationBusinessController {
 	@PostMapping(value = "ddi-2-xforms",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Mono<Void> generateXforms(
-			@RequestPart(value="in", required=true) Mono<FilePart> in,
-			@RequestPart(value="params", required=true) Mono<FilePart> params,
-			@RequestPart(value="metadata", required=true) Mono<FilePart> metadata,
+			@RequestPart(value="in") Mono<FilePart> in,
+			@RequestPart(value="params") Mono<FilePart> params,
+			@RequestPart(value="metadata") Mono<FilePart> metadata,
 			@RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
 			ServerHttpRequest request, ServerHttpResponse response) {
 		return passePlat.passePlatPost(request, response);
@@ -53,9 +53,9 @@ public class IntegrationBusinessController {
 	@PostMapping(value = "ddi-2-fo",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Mono<Void> generateFo(
-			@RequestPart(value="in", required=true) MultipartFile in,
-			@RequestPart(value="params", required=true) MultipartFile params,
-			@RequestPart(value="metadata", required=true) MultipartFile metadata,
+			@RequestPart(value="in") MultipartFile in,
+			@RequestPart(value="params") MultipartFile params,
+			@RequestPart(value="metadata") MultipartFile metadata,
 			@RequestPart(value="specificTreatment", required=false) MultipartFile specificTreatment,
 			ServerHttpRequest request, ServerHttpResponse response) {
 		return passePlat.passePlatPost(request, response);

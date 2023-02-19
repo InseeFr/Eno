@@ -36,7 +36,7 @@ public class SimpleGenerationController {
     @PostMapping(value = "{context}/fo",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<Void> generateFOQuestionnaire(
-            @RequestPart(value="in", required=true) Mono<FilePart> in,
+            @RequestPart(value="in") Mono<FilePart> in,
             @RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
             @RequestParam(value="Format-column", required=false) Integer nbColumn,
             @RequestParam(value="Capture", required=false) CaptureEnum capture,
@@ -53,7 +53,7 @@ public class SimpleGenerationController {
     @PostMapping(value = "{context}/xforms",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<Void> generateXformsQuestionnaire(
-            @RequestPart(value="in", required=true) Mono<FilePart> in,
+            @RequestPart(value="in") Mono<FilePart> in,
             @RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
             @PathVariable Context context,
             ServerHttpRequest request, ServerHttpResponse response) {
@@ -68,7 +68,7 @@ public class SimpleGenerationController {
     @PostMapping(value = "{context}/lunatic-xml/{mode}",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<Void> generateLunaticXmlQuestionnaire(
-            @RequestPart(value="in", required=true) Mono<FilePart> in,
+            @RequestPart(value="in") Mono<FilePart> in,
             @RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
             @PathVariable Context context,
             @PathVariable Mode mode,
@@ -85,7 +85,7 @@ public class SimpleGenerationController {
     @PostMapping(value = "{context}/lunatic-json/{mode}",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<Void> generateLunaticJsonQuestionnaire(
-            @RequestPart(value="in", required=true) Mono<FilePart> in,
+            @RequestPart(value="in") Mono<FilePart> in,
             @RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
             @PathVariable Context context,
             @PathVariable Mode mode,
@@ -101,7 +101,7 @@ public class SimpleGenerationController {
     @PostMapping(value = "{context}/fodt",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<Void> generateFODTQuestionnaire(
-            @RequestPart(value="in", required=true) Mono<FilePart> in,
+            @RequestPart(value="in") Mono<FilePart> in,
             @PathVariable Context context,
             ServerHttpRequest request, ServerHttpResponse response) {
         return passePlat.passePlatPost(request, response);
