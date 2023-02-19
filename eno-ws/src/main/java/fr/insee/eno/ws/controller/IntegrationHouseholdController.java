@@ -41,7 +41,7 @@ public class IntegrationHouseholdController {
             @RequestPart(value="in", required=true) Mono<FilePart> in,
             @RequestPart(value="params", required=true) Mono<FilePart> params,
             @RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
-            ServerHttpRequest request, ServerHttpResponse response) throws Exception {
+            ServerHttpRequest request, ServerHttpResponse response) {
         return passePlat.passePlatPost(request, response);
     }
 

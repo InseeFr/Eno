@@ -49,7 +49,7 @@ public class ParametersController {
 			@PathVariable Context context,
 			@PathVariable OutFormat outFormat,
 			@RequestParam(value="Mode",required=false) Mode mode,
-			ServerHttpRequest request, ServerHttpResponse response) throws Exception {
+			ServerHttpRequest request, ServerHttpResponse response) {
 		return passePlat.passePlatGet(request, response);
 	}
 

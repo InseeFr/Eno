@@ -19,7 +19,7 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @SuppressWarnings("unused")
 public class GenerationController {
-	
+
 	private final PassePlat passePlat;
 
 	public GenerationController(PassePlat passePlat) {
@@ -30,7 +30,7 @@ public class GenerationController {
 			summary = "Generation of questionnaire according to parameters.",
 			description = "Generate a questionnaire using the parameters file (required), metadata file (optional) " +
 					"and the specificTreatment file (optional). To use it, you have to upload all necessary files.")
-	@PostMapping(value = "in-2-out", 
+	@PostMapping(value = "in-2-out",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Mono<Void> generate(
 			@RequestPart(value="in", required=true) Mono<FilePart> in,
@@ -39,7 +39,7 @@ public class GenerationController {
 			@RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
 			@RequestPart(value="mapping", required=false) Mono<FilePart> mapping,
 			@RequestParam(value="multi-model", required=false, defaultValue="false") boolean multiModel,
-			ServerHttpRequest request, ServerHttpResponse response) throws Exception {
+			ServerHttpRequest request, ServerHttpResponse response) {
 		return passePlat.passePlatPost(request, response);
 	}
 
@@ -63,7 +63,7 @@ public class GenerationController {
 			@RequestParam(value="QuestNum") BrowsingEnum questNum,
 			@RequestParam(value="SeqNum") boolean seqNum,
 			@RequestParam(value="PreQuestSymbol") boolean preQuestSymbol,
-			ServerHttpRequest request, ServerHttpResponse response) throws Exception {
+			ServerHttpRequest request, ServerHttpResponse response) {
 		return passePlat.passePlatPost(request, response);
 	}
 
@@ -74,7 +74,7 @@ public class GenerationController {
 	@PostMapping(value = "ddi-2-xforms",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Mono<Void> generateXformsQuestionnaire(
-			@RequestPart(value="in", required=true) Mono<FilePart> in,			
+			@RequestPart(value="in", required=true) Mono<FilePart> in,
 			@RequestPart(value="metadata", required=false) Mono<FilePart> metadata,
 			@RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
 			@RequestParam(value="multi-model", required=false, defaultValue="false") boolean multiModel,
@@ -85,13 +85,13 @@ public class GenerationController {
 			@RequestParam(value="NumericExample") boolean numericExample,
 			@RequestParam(value="Deblocage", defaultValue="false") boolean deblocage,
 			@RequestParam(value="Satisfaction", defaultValue="false") boolean satisfaction,
-			@RequestParam(value="LengthOfLongTable", defaultValue="7") int lengthOfLongTable, 
+			@RequestParam(value="LengthOfLongTable", defaultValue="7") int lengthOfLongTable,
 			@RequestParam(value="DecimalSeparator") DecimalSeparator decimalSeparator,
 			@RequestParam(value="css", required=false) String css,
 			@RequestParam(value="QuestNum", required=true) BrowsingEnum questNum,
 			@RequestParam(value="SeqNum") boolean seqNum,
 			@RequestParam(value="PreQuestSymbol") boolean preQuestSymbol,
-			ServerHttpRequest request, ServerHttpResponse response) throws Exception {
+			ServerHttpRequest request, ServerHttpResponse response) {
 		return passePlat.passePlatPost(request, response);
 	}
 
@@ -119,10 +119,10 @@ public class GenerationController {
 			@RequestParam(value="PreQuestSymbol") boolean preQuestSymbol,
 			@RequestParam(value="Pagination", required=false, defaultValue="NONE") Pagination pagination,
 			@RequestParam(value="includeUnusedCalculatedVariables") boolean unusedVars,
-			ServerHttpRequest request, ServerHttpResponse response) throws Exception {
+			ServerHttpRequest request, ServerHttpResponse response) {
 		return passePlat.passePlatPost(request, response);
 	}
-	
+
 	@Operation(
 			summary = "Generation of DDI questionnaire from Pogues xml questionnaire.",
 			description = "Generate a DDI questionnaire from a Pogues xml questionnaire.")
@@ -130,7 +130,7 @@ public class GenerationController {
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Mono<Void> generateDDIQuestionnaire(
 			@RequestPart(value="in", required=true) Mono<FilePart> in,
-			ServerHttpRequest request, ServerHttpResponse response) throws Exception {
+			ServerHttpRequest request, ServerHttpResponse response) {
 		return passePlat.passePlatPost(request, response);
 	}
 
@@ -144,7 +144,7 @@ public class GenerationController {
 			@RequestParam(value="QuestNum") BrowsingEnum questNum,
 			@RequestParam(value="SeqNum") boolean seqNum,
 			@RequestParam(value="PreQuestSymbol") boolean preQuestSymbol,
-			ServerHttpRequest request, ServerHttpResponse response) throws Exception {
+			ServerHttpRequest request, ServerHttpResponse response) {
 		return passePlat.passePlatPost(request, response);
 	}
 

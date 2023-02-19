@@ -41,7 +41,7 @@ public class SimpleGenerationController {
             @RequestParam(value="Format-column", required=false) Integer nbColumn,
             @RequestParam(value="Capture", required=false) CaptureEnum capture,
             @PathVariable Context context,
-            ServerHttpRequest request, ServerHttpResponse response) throws Exception {
+            ServerHttpRequest request, ServerHttpResponse response) {
         return passePlat.passePlatPost(request, response);
     }
 
@@ -56,7 +56,7 @@ public class SimpleGenerationController {
             @RequestPart(value="in", required=true) Mono<FilePart> in,
             @RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
             @PathVariable Context context,
-            ServerHttpRequest request, ServerHttpResponse response) throws Exception {
+            ServerHttpRequest request, ServerHttpResponse response) {
         return passePlat.passePlatPost(request, response);
     }
 
@@ -72,7 +72,7 @@ public class SimpleGenerationController {
             @RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
             @PathVariable Context context,
             @PathVariable Mode mode,
-            ServerHttpRequest request, ServerHttpResponse response) throws Exception {
+            ServerHttpRequest request, ServerHttpResponse response) {
         return passePlat.passePlatPost(request, response);
     }
 
@@ -89,7 +89,7 @@ public class SimpleGenerationController {
             @RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
             @PathVariable Context context,
             @PathVariable Mode mode,
-            ServerHttpRequest request, ServerHttpResponse response) throws Exception {
+            ServerHttpRequest request, ServerHttpResponse response) {
         return passePlat.passePlatPost(request, response);
     }
 
@@ -103,7 +103,7 @@ public class SimpleGenerationController {
     public Mono<Void> generateFODTQuestionnaire(
             @RequestPart(value="in", required=true) Mono<FilePart> in,
             @PathVariable Context context,
-            ServerHttpRequest request, ServerHttpResponse response) throws Exception {
+            ServerHttpRequest request, ServerHttpResponse response) {
         return passePlat.passePlatPost(request, response);
     }
 
