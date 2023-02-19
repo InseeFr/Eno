@@ -18,6 +18,8 @@ public class PassePlat {
         this.webClient = webClient;
     }
 
+    // TODO: better request headers managements
+
     public Mono<Void> passePlatGet(ServerHttpRequest serverRequest, ServerHttpResponse response) {
         return response.writeWith(this.webClient.get()
                 .uri(serverRequest.getURI().getPath())
@@ -30,7 +32,8 @@ public class PassePlat {
                 .exchangeToFlux(r -> {
                     response.setStatusCode(r.statusCode());
                     response.getHeaders().clear();
-                    response.getHeaders().addAll(r.headers().asHttpHeaders());
+                    r.headers().asHttpHeaders().forEach((key, strings) ->
+                            response.getHeaders().put(key.replace(":", ""), strings));
                     return r.bodyToFlux(DataBuffer.class);
                 }));
     }
@@ -48,7 +51,8 @@ public class PassePlat {
                 .exchangeToFlux(r -> {
                     response.setStatusCode(r.statusCode());
                     response.getHeaders().clear();
-                    response.getHeaders().addAll(r.headers().asHttpHeaders());
+                    r.headers().asHttpHeaders().forEach((key, strings) ->
+                            response.getHeaders().put(key.replace(":", ""), strings));
                     return r.bodyToFlux(DataBuffer.class);
                 }));
     }
