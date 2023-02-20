@@ -9,15 +9,18 @@ dependencyResolutionManagement {
 
     repositories {
         mavenCentral()
-        //maven{ url System.properties['urlMavenRepo'] }
-        maven { url 'https://nexus.insee.fr/repository/maven-releases' } //TODO: externalize this
+        // Temporary config for private maven repository (for Pogues-Model and Lunatic-Model)
+        maven { url System.properties['urlMavenRepo'] }
+        // Temporary config if you choose to install Pogues-Model and Lunatic-Model locally
         mavenLocal()
     }
 
     versionCatalogs {
         libs {
-            library('lunaticModel', 'fr.insee.lunatic:lunatic-model:2.3.2-rc4')
-            library('poguesModel', 'fr.insee.pogues:pogues-model:1.0.3')
+            version('lunatic-model', '2.3.2-rc4')
+            version('pogues-model', '1.0.4')
+            library('lunatic-model', 'fr.insee.lunatic', 'lunatic-model').versionRef('lunatic-model')
+            library('pogues-model', 'fr.insee.pogues', 'pogues-model').versionRef('pogues-model')
         }
     }
 

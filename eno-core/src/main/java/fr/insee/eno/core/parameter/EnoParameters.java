@@ -33,7 +33,7 @@ public class EnoParameters {
 
     // Eno core parameters
     private boolean identificationQuestion; //TODO
-    private boolean responseTimeQuestion; //TODO
+    private boolean responseTimeQuestion;
     private boolean commentSection;
     private boolean sequenceNumbering;
     private QuestionNumberingMode questionNumberingMode;

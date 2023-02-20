@@ -40,6 +40,8 @@ public class EnoProcessing {
 
     private void coreProcessing(EnoQuestionnaire enoQuestionnaire) {
         new EnoAddVersions().apply(enoQuestionnaire);
+        if (parameters.isResponseTimeQuestion())
+            new EnoAddResponseTimeSection().apply(enoQuestionnaire);
         if (parameters.isCommentSection())
             new EnoAddCommentSection().apply(enoQuestionnaire);
         new EnoModeSelection(parameters.getSelectedModes(), enoCatalog).apply(enoQuestionnaire);

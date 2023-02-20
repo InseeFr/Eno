@@ -2,9 +2,7 @@ package fr.insee.eno.core.processing.impl;
 
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.OutProcessingInterface;
-import fr.insee.lunatic.model.flat.ComponentType;
-import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.Subsequence;
+import fr.insee.lunatic.model.flat.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,17 +23,18 @@ public class LunaticAddPageNumbers implements OutProcessingInterface<Questionnai
     public void apply(Questionnaire lunaticQuestionnaire) {
         lunaticQuestionnaire.setPagination(EnoParameters.lunaticNumberingMode(mode));
         switch (mode) {
-            case NONE -> log.info("No pagination."); //TODO: more details
+            case NONE -> log.info("No pagination.");
             case QUESTION -> questionModeNumbering(lunaticQuestionnaire);
             case SEQUENCE -> sequenceModePagination(lunaticQuestionnaire);
         }
     }
 
     private void questionModeNumbering(Questionnaire lunaticQuestionnaire) {
+        log.info("Adding page numbers by question.");
         int pageNumber = 1;
         for (Iterator<ComponentType> iterator = lunaticQuestionnaire.getComponents().iterator(); iterator.hasNext();) {
             ComponentType component = iterator.next();
-            // Special cas for subsequences that has a "goToPage"
+            // Special case for subsequences that has a "goToPage"
             if (component instanceof Subsequence subsequence) {
                 // goToPage number, weird case if the questionnaire ends with a subsequence
                 if (iterator.hasNext()) {
@@ -53,14 +52,30 @@ public class LunaticAddPageNumbers implements OutProcessingInterface<Questionnai
             //
             else {
                 component.setPage(String.valueOf(pageNumber));
+                if (component instanceof PairwiseLinks pairwiseLinks)
+                    pairwiseComponentPagination(pairwiseLinks);
                 pageNumber++;
             }
         }
     }
 
     private void sequenceModePagination(Questionnaire lunaticQuestionnaire) {
-        log.warn("'SEQUENCE' pagination mode is not implemented!");
-        // TODO
+        log.info("Adding page numbers by sequence.");
+        int pageNumber = 1;
+        for (ComponentType component : lunaticQuestionnaire.getComponents()) {
+            if (component instanceof Sequence) {
+                pageNumber++;
+            }
+            component.setPage(String.valueOf(pageNumber));
+            if (component instanceof PairwiseLinks pairwiseLinks)
+                pairwiseComponentPagination(pairwiseLinks);
+        }
+    }
+
+    /** PairwiseLinks component contains list of components. These share the same page number. */
+    private void pairwiseComponentPagination(PairwiseLinks pairwiseLinks) {
+        String pageNumber = pairwiseLinks.getPage();
+        pairwiseLinks.getComponents().forEach(component -> component.setPage(pageNumber));
     }
 
 }

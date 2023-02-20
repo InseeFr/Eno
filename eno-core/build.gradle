@@ -19,9 +19,9 @@ dependencies {
     // DDI
     implementation project(':ddi-beans')
     // Lunatic
-    implementation libs.poguesModel
+    implementation libs.pogues.model
     // Pogues
-    implementation libs.lunaticModel
+    implementation libs.lunatic.model
 
     // Spring
     implementation 'org.springframework:spring-core'
