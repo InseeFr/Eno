@@ -3,6 +3,8 @@ package fr.insee.eno.core.converter;
 import datacollection33.*;
 import fr.insee.eno.core.exceptions.technical.ConversionException;
 import fr.insee.eno.core.model.EnoObject;
+import fr.insee.eno.core.model.navigation.LinkedLoop;
+import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.*;
 import lombok.extern.slf4j.Slf4j;
 import reusable33.RepresentationType;
@@ -23,7 +25,9 @@ public class DDIConverter {
      * @return A Eno model object.
      */
     public static EnoObject instantiateFromDDIObject(Object ddiObject) {
-        if (ddiObject instanceof QuestionItemType questionItemType)
+        if (ddiObject instanceof LoopType loopType)
+            return instantiateFrom(loopType);
+        else if (ddiObject instanceof QuestionItemType questionItemType)
             return instantiateFrom(questionItemType);
         else if (ddiObject instanceof QuestionGridType questionGridType)
             return instantiateFrom(questionGridType);
@@ -33,7 +37,20 @@ public class DDIConverter {
             throw new ConversionException("Eno conversion for DDI type " + ddiObject.getClass() + " not implemented.");
     }
 
-    private static EnoObject instantiateFrom(QuestionItemType questionItemType) {
+    public static EnoObject instantiateFrom(LoopType loopType) {
+        if (loopType.getInitialValue() == null && loopType.getLoopWhile() == null) {
+            return new LinkedLoop();
+        } else {
+            // A standalone loop should have both "initial value" and "loop while" defined
+            if (loopType.getInitialValue() == null)
+                log.warn("DDI Loop '{}' has a null initial value.", loopType.getIDArray(0).getStringValue());
+            if (loopType.getLoopWhile() == null)
+                log.warn("DDI Loop '{}' has a null loop while.", loopType.getIDArray(0).getStringValue());
+            return new StandaloneLoop();
+        }
+    }
+
+    public static EnoObject instantiateFrom(QuestionItemType questionItemType) {
         RepresentationType representationType = questionItemType.getResponseDomain();
         if (representationType instanceof NominalDomainType) {
             return new BooleanQuestion();
@@ -74,7 +91,7 @@ public class DDIConverter {
         }
     }
 
-    private static EnoObject instantiateFrom(QuestionGridType questionGridType) {
+    public static EnoObject instantiateFrom(QuestionGridType questionGridType) {
         //
         int dimensionSize = questionGridType.getGridDimensionList().size();
         //
@@ -121,7 +138,7 @@ public class DDIConverter {
         }
     }
 
-    private static EnoObject instantiateFrom(GridResponseDomainInMixedType gridResponseDomainInMixedType) {
+    public static EnoObject instantiateFrom(GridResponseDomainInMixedType gridResponseDomainInMixedType) {
         RepresentationType representationType = gridResponseDomainInMixedType.getResponseDomain();
         if (representationType instanceof NominalDomainType) {
             return new TableCell.BooleanCell();
