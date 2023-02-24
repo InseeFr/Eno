@@ -12,6 +12,8 @@ import java.util.Iterator;
 @AllArgsConstructor
 public class LunaticAddPageNumbers implements OutProcessingInterface<Questionnaire> {
 
+    // TODO: make pagination after loop resolution (requires to add page numbers in components hierarchy)
+
     private EnoParameters.LunaticPaginationMode mode;
 
     /**

@@ -38,6 +38,7 @@ public class LunaticProcessing {
         new LunaticAddPageNumbers(parameters.getLunaticPaginationMode()).apply(lunaticQuestionnaire);
         new LunaticAddHierarchy().apply(lunaticQuestionnaire);
         new LunaticAddMissingVariables(parameters.isMissingVariables()).apply(lunaticQuestionnaire);
+        new LunaticLoopResolution(enoQuestionnaire, lunaticCatalog).apply(lunaticQuestionnaire);
     }
 
 }

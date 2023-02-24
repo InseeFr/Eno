@@ -21,6 +21,9 @@ public class DDIToLunaticTest {
             "l20g2ba7",
             "sandbox_v2",
             "DDI-tableau-2-colonnes",
+            "l5v3spn0",
+            "kx0a2hn8",
+            "lciyojcw",
     })
     public void writeJsonLunaticFromDDI(String fileName) {
         assertDoesNotThrow(() -> {
