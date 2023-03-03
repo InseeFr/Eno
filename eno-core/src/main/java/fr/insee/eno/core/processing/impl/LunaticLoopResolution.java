@@ -13,7 +13,6 @@ import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.sequence.SequenceItem;
 import fr.insee.eno.core.processing.OutProcessingInterface;
 import fr.insee.eno.core.reference.EnoIndex;
-import fr.insee.eno.core.reference.LunaticCatalog;
 import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,11 +28,9 @@ public class LunaticLoopResolution implements OutProcessingInterface<Questionnai
 
     private final EnoQuestionnaire enoQuestionnaire;
     private EnoIndex enoIndex;
-    private final LunaticCatalog lunaticCatalog;
 
-    public LunaticLoopResolution(EnoQuestionnaire enoQuestionnaire, LunaticCatalog lunaticCatalog) {
+    public LunaticLoopResolution(EnoQuestionnaire enoQuestionnaire) {
         this.enoQuestionnaire = enoQuestionnaire;
-        this.lunaticCatalog = lunaticCatalog;
     }
 
     public void apply(Questionnaire lunaticQuestionnaire) {
@@ -113,10 +110,9 @@ public class LunaticLoopResolution implements OutProcessingInterface<Questionnai
         //
         lunaticLoop.setId(enoLoop.getId());
         lunaticLoop.setDepth(BigInteger.ONE); // Note: Nested loops is not supported yet
-        //
-        ComponentType referenceLunaticSequence = lunaticCatalog.getComponent(enoLoop.getSequenceReference());
-        lunaticLoop.setHierarchy(referenceLunaticSequence.getHierarchy());
-        lunaticLoop.setConditionFilter(referenceLunaticSequence.getConditionFilter());
+        // Condition filter of the loop will is the same as its first component
+        lunaticLoop.setConditionFilter(lunaticLoop.getComponents().get(0).getConditionFilter());
+        // TODO: is hierarchy useful in Loop components? (not sure)
         //
         if (enoLoop instanceof StandaloneLoop standaloneLoop) {
             standaloneLoopMapping(lunaticLoop, standaloneLoop);

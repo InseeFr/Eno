@@ -5,8 +5,6 @@ import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.TextQuestion;
 import fr.insee.eno.core.model.sequence.Sequence;
-import fr.insee.eno.core.model.sequence.Subsequence;
-import fr.insee.eno.core.reference.LunaticCatalog;
 import fr.insee.lunatic.model.flat.Input;
 import fr.insee.lunatic.model.flat.Loop;
 import fr.insee.lunatic.model.flat.Questionnaire;
@@ -39,7 +37,7 @@ class LunaticLoopResolutionTest {
         lunaticQuestionnaire.getComponents().add(lunaticTextQuestion);;
 
         //
-        LunaticLoopResolution lunaticLoopResolution = new LunaticLoopResolution(enoQuestionnaire, null);
+        LunaticLoopResolution lunaticLoopResolution = new LunaticLoopResolution(enoQuestionnaire);
         lunaticLoopResolution.apply(lunaticQuestionnaire);
 
         //
@@ -72,11 +70,9 @@ class LunaticLoopResolutionTest {
         Input lunaticTextQuestion = new Input();
         lunaticQuestionnaire.getComponents().add(lunaticSequence);
         lunaticQuestionnaire.getComponents().add(lunaticTextQuestion);
-        //
-        LunaticCatalog lunaticCatalog = new LunaticCatalog(lunaticQuestionnaire);
 
         //
-        LunaticLoopResolution lunaticLoopResolution = new LunaticLoopResolution(enoQuestionnaire, lunaticCatalog);
+        LunaticLoopResolution lunaticLoopResolution = new LunaticLoopResolution(enoQuestionnaire);
         lunaticLoopResolution.apply(lunaticQuestionnaire);
 
         //
