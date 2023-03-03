@@ -1,11 +1,10 @@
 package fr.insee.eno.core.processing.impl;
 
 import fr.insee.eno.core.processing.OutProcessingInterface;
-import fr.insee.eno.core.reference.LunaticCatalog;
 import fr.insee.lunatic.model.flat.*;
 import lombok.AllArgsConstructor;
 
-import java.util.Iterator;
+import java.util.List;
 
 @AllArgsConstructor
 public class LunaticAddHierarchy implements OutProcessingInterface<Questionnaire> {
@@ -15,10 +14,19 @@ public class LunaticAddHierarchy implements OutProcessingInterface<Questionnaire
      * Warning: this method supposes that components are sorted and that pagination has been done.
      */
     public void apply(Questionnaire lunaticQuestionnaire) {
-        SequenceDescription currentSequenceDescription = null;
-        SequenceDescription currentSubsequenceDescription = null;
-        for (ComponentType component : lunaticQuestionnaire.getComponents()) {
+        generateHierarchy(lunaticQuestionnaire.getComponents(), null, null);
+    }
+
+    /** Create hierarchy objects and put them in components.
+     * Recursive call when the component is a loop. */
+    private static void generateHierarchy(List<ComponentType> components,
+                                          SequenceDescription currentSequenceDescription,
+                                          SequenceDescription currentSubsequenceDescription) {
+        for (ComponentType component : components) {
             Hierarchy hierarchy = new Hierarchy();
+            if (component instanceof Loop loop) {
+                generateHierarchy(loop.getComponents(), currentSequenceDescription, currentSubsequenceDescription);
+            }
             if (component instanceof SequenceType sequence) {
                 currentSequenceDescription = createDescription(sequence);
                 currentSubsequenceDescription = null;
@@ -43,7 +51,10 @@ public class LunaticAddHierarchy implements OutProcessingInterface<Questionnaire
         SequenceDescription sequenceDescription = new SequenceDescription();
         sequenceDescription.setId(subsequence.getId());
         sequenceDescription.setLabel(subsequence.getLabel());
-        sequenceDescription.setPage(subsequence.getGoToPage());
+        if (subsequence.getDeclarations().isEmpty())
+            sequenceDescription.setPage(subsequence.getGoToPage());
+        else
+            sequenceDescription.setPage(subsequence.getPage());
         return sequenceDescription;
     }
 
