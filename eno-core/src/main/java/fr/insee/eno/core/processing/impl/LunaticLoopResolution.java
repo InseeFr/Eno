@@ -111,6 +111,9 @@ public class LunaticLoopResolution implements OutProcessingInterface<Questionnai
         lunaticLoop.setId(enoLoop.getId());
         lunaticLoop.setDepth(BigInteger.ONE); // Note: Nested loops is not supported yet
         // Condition filter of the loop will is the same as its first component
+        if (lunaticLoop.getComponents().isEmpty()) {
+            log.warn("Loop '{}' is empty (weird).", lunaticLoop.getId());
+        }
         lunaticLoop.setConditionFilter(lunaticLoop.getComponents().get(0).getConditionFilter());
         // TODO: is hierarchy useful in Loop components? (not sure)
         //
