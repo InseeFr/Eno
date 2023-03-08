@@ -28,13 +28,19 @@ public class LunaticSortComponents implements OutProcessingInterface<Questionnai
         assert enoIndex != null;
         // Lunatic questionnaire components
         List<ComponentType> lunaticComponents = lunaticQuestionnaire.getComponents();
+        int initialSize = lunaticComponents.size();
         // Empty the component list (to be refilled using the Lunatic catalog)
         lunaticComponents.clear();
         // Iterate on the Eno questionnaire to add components in the right order
         enoQuestionnaire.getSequences().forEach(enoSequence -> {
                     lunaticComponents.add(lunaticCatalog.getComponent(enoSequence.getId()));
-                    addSequenceComponentsRec2(lunaticComponents, enoSequence,enoIndex);
+                    addSequenceComponents(lunaticComponents, enoSequence, enoIndex);
                 });
+        //
+        int finalSize = lunaticComponents.size();
+        if (finalSize != initialSize) {
+            log.warn("Initial components count: {}, after sorting: {}", initialSize, finalSize);
+        }
     }
 
     /** Add Lunatic components described ine the Eno sequence given in the list given in the right order. */
