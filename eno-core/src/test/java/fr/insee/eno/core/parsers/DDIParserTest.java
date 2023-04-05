@@ -16,10 +16,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DDIParserTest {
+class DDIParserTest {
 
     @Test
-    public void parserDDITest() throws IOException, DDIParsingException {
+    void parserDDITest() throws IOException, DDIParsingException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
                 this.getClass().getClassLoader().getResource("in/ddi/l10xmg2l.xml"));
@@ -65,7 +65,7 @@ public class DDIParserTest {
     }
 
     @Test
-    public void parserDDIWithFilter() throws IOException, DDIParsingException {
+    void parserDDIWithFilter() throws IOException, DDIParsingException {
         //
         DDIInstanceType ddiInstance = DDIParser.parse(
                         this.getClass().getClassLoader().getResource("in/ddi/questionnaire-avec-filtre-eno-java.xml"))
@@ -79,7 +79,7 @@ public class DDIParserTest {
     }
 
     @Test
-    public void parserDDIWithMcq() throws IOException, DDIParsingException {
+    void parserDDIWithMcq() throws IOException, DDIParsingException {
         //
         DDIInstanceType ddiInstance = DDIParser.parse(
                         this.getClass().getClassLoader().getResource("in/ddi/l10xmg2l_avec_qcm_et_obligatoires.xml"))
@@ -99,7 +99,7 @@ public class DDIParserTest {
     }
 
     @Test
-    public void parseSandboxDDI() throws IOException, DDIParsingException {
+    void parseSandboxDDI() throws IOException, DDIParsingException {
         //
         DDIInstanceType ddiInstance = DDIParser.parse(
                         this.getClass().getClassLoader().getResource("in/ddi/sandbox.xml"))
@@ -112,7 +112,7 @@ public class DDIParserTest {
     }
 
     @Test
-    public void parseDDIComplexCodeList() throws IOException, DDIParsingException {
+    void parseDDIComplexCodeList() throws IOException, DDIParsingException {
         //
         DDIInstanceType ddiInstance = DDIParser.parse(
                         this.getClass().getClassLoader().getResource("in/ddi/liste-de-codes-imbrications.xml"))

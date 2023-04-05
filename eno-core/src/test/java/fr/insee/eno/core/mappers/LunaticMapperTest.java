@@ -13,10 +13,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LunaticMapperTest {
+class LunaticMapperTest {
 
     @Test
-    public void modelToLunaticTest() {
+    void modelToLunaticTest() {
         //
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         // Id

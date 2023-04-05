@@ -15,10 +15,10 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DDIIndexTest {
+class DDIIndexTest {
 
     @Test
-    public void indexDDITest() throws IOException, DDIParsingException {
+    void indexDDITest() throws IOException, DDIParsingException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
                 DDIIndexTest.class.getClassLoader().getResource("in/ddi/l10xmg2l.xml"));
@@ -70,7 +70,7 @@ public class DDIIndexTest {
     }
 
     @Test
-    public void indexSandboxDDI() throws IOException, DDIParsingException {
+    void indexSandboxDDI() throws IOException, DDIParsingException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
                 DDIIndexTest.class.getClassLoader().getResource("in/ddi/sandbox.xml"));

@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class EnoAddVersionsTest {
+class EnoAddVersionsTest {
 
     @Test
-    public void addVersions_resultNotNull() {
+    void addVersions_resultNotNull() {
         //
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         //

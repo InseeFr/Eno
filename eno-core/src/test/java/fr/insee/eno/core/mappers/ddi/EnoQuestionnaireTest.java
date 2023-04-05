@@ -13,7 +13,7 @@ import reusable33.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class EnoQuestionnaireTest {
+class EnoQuestionnaireTest {
 
     MapperTestUtils utils = new MapperTestUtils();
 
@@ -33,7 +33,7 @@ public class EnoQuestionnaireTest {
     }
 
     @Test
-    public void mapId() {
+    void mapId() {
         //
         String expectedId = "FOO-ID";
         // Given
@@ -47,7 +47,7 @@ public class EnoQuestionnaireTest {
     }
 
     @Test
-    public void mapQuestionnaireModel() {
+    void mapQuestionnaireModel() {
         //
         String expectedModel = "FOO-MODEL";
         //

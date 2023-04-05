@@ -17,17 +17,17 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DDITests {
+class DDITests {
 
     @Test
-    public void arrayAndList() {
+    void arrayAndList() {
         String[] foo = {"a", "b", "c"};
         assertFalse(List.class.isAssignableFrom(foo.getClass()));
         assertEquals("a", foo[0]);
     }
 
     @Test
-    public void xmlBeansAndDDI() {
+    void xmlBeansAndDDI() {
         IDType idType = IDType.Factory.newInstance();
         String stringId = "foo";
         idType.setStringValue(stringId);
@@ -35,7 +35,7 @@ public class DDITests {
     }
 
     @Test
-    public void tableQuestion() throws IOException, DDIParsingException {
+    void tableQuestion() throws IOException, DDIParsingException {
         //
         DDIIndex ddiIndex = new DDIIndex();
         ddiIndex.indexDDI(DDIParser.parse(this.getClass().getClassLoader().getResource("in/ddi/l20g2ba7.xml")));
@@ -45,7 +45,7 @@ public class DDITests {
     }
 
     @Test
-    public void ddiObjects() throws IOException, DDIParsingException {
+    void ddiObjects() throws IOException, DDIParsingException {
         // (Parse)
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
                 this.getClass().getClassLoader().getResource("in/ddi/l10xmg2l.xml"));
@@ -116,7 +116,7 @@ public class DDITests {
     }
 
     @Test
-    public void labelInInstruction() {
+    void labelInInstruction() {
         //
         String fooLabel = "Foo label";
 
@@ -144,7 +144,7 @@ public class DDITests {
     }
 
     @Test
-    public void labelInDeclaration() {
+    void labelInDeclaration() {
         //
         String fooLabel = "Foo label";
 
@@ -172,7 +172,7 @@ public class DDITests {
     }
 
     @Test
-    public void labelInQuestion() {
+    void labelInQuestion() {
         //
         String fooLabel = "Foo label";
 
@@ -200,7 +200,7 @@ public class DDITests {
     }
 
     @Test
-    public void labelInSequence() {
+    void labelInSequence() {
         //
         String fooLabel = "Foo label";
 

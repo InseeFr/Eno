@@ -8,17 +8,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class AnnotationTests {
+class AnnotationTests {
 
     @Test
-    public void getRepeatableAnnotation() {
+    void getRepeatableAnnotation() {
         Contexts contexts = EnoQuestionnaire.class.getAnnotation(Contexts.class);
         assertNotNull(contexts);
         assertEquals(Format.LUNATIC, contexts.value()[2].format());
     }
 
     @Test
-    public void getRepeatableAnnotation_better() {
+    void getRepeatableAnnotation_better() {
         Contexts.Context[] contextArray =  EnoQuestionnaire.class.getAnnotationsByType(Contexts.Context.class);
         assertNotNull(contextArray);
         assertEquals(Format.LUNATIC, contextArray[2].format());

@@ -10,10 +10,10 @@ import java.net.URL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class PoguesParserTest {
+class PoguesParserTest {
 
     @Test
-    public void poguesParserTest() throws URISyntaxException, PoguesDeserializationException {
+    void poguesParserTest() throws URISyntaxException, PoguesDeserializationException {
         //
         URL testPoguesFileUrl = this.getClass().getClassLoader().getResource("in/pogues/pogues.json");
         assert testPoguesFileUrl != null;

@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-public class DDIToEnoTest {
+class DDIToEnoTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
@@ -20,7 +20,7 @@ public class DDIToEnoTest {
             "l20g2ba7",
             "sandbox_v2",
     })
-    public void writeEnoFileFromDDI(String fileName) {
+    void writeEnoFileFromDDI(String fileName) {
         assertDoesNotThrow(() -> {
             //
             DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(

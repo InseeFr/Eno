@@ -16,10 +16,10 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DDIMapperTest {
+class DDIMapperTest {
 
     @Test
-    public void ddiMappingFunctionalTest() throws IOException, DDIParsingException {
+    void ddiMappingFunctionalTest() throws IOException, DDIParsingException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
                 DDIMapperTest.class.getClassLoader().getResource("in/ddi/l10xmg2l.xml"));
