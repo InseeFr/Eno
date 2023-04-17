@@ -32,7 +32,7 @@ class DDIToLunaticTest {
             enoParameters.setSelectedModes(List.of(Mode.CAPI, Mode.CATI));
 
             //
-            String result = DDIToLunatic.transform(ddiInputStream, enoParameters);
+            String result = DDIToLunatic.transformToJson(ddiInputStream, enoParameters);
 
             //
             //Files.writeString(Path.of("src/test/resources/out/lunatic/" + fileName + ".json"), result);
@@ -42,7 +42,7 @@ class DDIToLunaticTest {
     @Test
     void ddiToLunatic_pairwise() {
         assertDoesNotThrow(() -> {
-            String result = DDIToLunatic.transform(
+            String result = DDIToLunatic.transformToJson(
                     this.getClass().getClassLoader().getResourceAsStream("pairwise/form-ddi-household-links.xml"),
                     new EnoParameters());
 

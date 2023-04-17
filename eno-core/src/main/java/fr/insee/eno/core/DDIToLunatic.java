@@ -21,8 +21,8 @@ public class DDIToLunatic {
 
     private DDIToLunatic() {}
 
-    public static String transform(InputStream ddiInputStream, EnoParameters enoParameters)
-            throws IOException, DDIParsingException, LunaticSerializationException {
+    public static Questionnaire transform(InputStream ddiInputStream, EnoParameters enoParameters)
+            throws IOException, DDIParsingException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(ddiInputStream);
         //
@@ -40,7 +40,19 @@ public class DDIToLunatic {
         LunaticProcessing lunaticProcessing = new LunaticProcessing(enoParameters);
         lunaticProcessing.applyProcessing(lunaticQuestionnaire, enoQuestionnaire);
         //
+        return lunaticQuestionnaire;
+    }
+
+    public static String transformToJson(InputStream ddiInputStream, EnoParameters enoParameters)
+            throws IOException, DDIParsingException, LunaticSerializationException {
+        Questionnaire lunaticQuestionnaire = transform(ddiInputStream, enoParameters);
         return LunaticSerializer.serializeToJson(lunaticQuestionnaire);
+    }
+
+    public static String transformToXml(InputStream ddiInputStream, EnoParameters enoParameters)
+            throws IOException, DDIParsingException, LunaticSerializationException {
+        Questionnaire lunaticQuestionnaire = transform(ddiInputStream, enoParameters);
+        return LunaticSerializer.serializeToXml(lunaticQuestionnaire);
     }
 
 }
