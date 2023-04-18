@@ -3,6 +3,7 @@ package fr.insee.eno.core.output;
 import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
 import fr.insee.lunatic.conversion.JSONSerializer;
 import fr.insee.lunatic.conversion.XMLSerializer;
+import fr.insee.lunatic.exception.SerializationException;
 import fr.insee.lunatic.model.flat.Questionnaire;
 
 import javax.xml.bind.JAXBException;
@@ -34,7 +35,11 @@ public class LunaticSerializer {
 
     public static String serializeToJson(Questionnaire lunaticQuestionnaire) throws LunaticSerializationException {
         JSONSerializer jsonSerializer = new JSONSerializer();
-        return serialize(lunaticQuestionnaire, jsonSerializer::serialize);
+        try {
+            return jsonSerializer.serialize2(lunaticQuestionnaire);
+        } catch (SerializationException e) {
+            throw new LunaticSerializationException("Error when calling Lunatic-Model serializer.", e);
+        }
     }
 
     public static String serializeToXml(Questionnaire lunaticQuestionnaire) throws LunaticSerializationException {
