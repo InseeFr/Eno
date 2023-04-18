@@ -49,10 +49,4 @@ public class DDIToLunatic {
         return LunaticSerializer.serializeToJson(lunaticQuestionnaire);
     }
 
-    public static String transformToXml(InputStream ddiInputStream, EnoParameters enoParameters)
-            throws IOException, DDIParsingException, LunaticSerializationException {
-        Questionnaire lunaticQuestionnaire = transform(ddiInputStream, enoParameters);
-        return LunaticSerializer.serializeToXml(lunaticQuestionnaire);
-    }
-
 }

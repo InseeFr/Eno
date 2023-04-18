@@ -53,21 +53,4 @@ public class V3ControllerUtils {
                         .body(result));
     }
 
-    public Mono<ResponseEntity<String>> ddiToLunaticXml(Mono<FilePart> ddiFile, Mono<FilePart> parametersFile) {
-        return readParametersFile(parametersFile)
-                .flatMap(enoParameters -> ddiToLunaticXml(ddiFile, enoParameters));
-    }
-
-    public Mono<ResponseEntity<String>> ddiToLunaticXml(Mono<FilePart> ddiFile, EnoParameters enoParameters) {
-        return ddiFile.flatMap(filePart -> filePart.content()
-                        .map(dataBuffer -> dataBuffer.asInputStream(true))
-                        .reduce(SequenceInputStream::new))
-                .flatMap(inputStream -> ddiToLunaticService.transformToXml(inputStream, enoParameters))
-                .map(result -> ResponseEntity
-                        .ok()
-                        .cacheControl(CacheControl.noCache())
-                        .headers(HeadersUtils.with(LUNATIC_XML_FILE_NAME))
-                        .body(result));
-    }
-
 }
