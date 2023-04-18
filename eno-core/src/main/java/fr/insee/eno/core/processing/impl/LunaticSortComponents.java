@@ -1,5 +1,6 @@
 package fr.insee.eno.core.processing.impl;
 
+import fr.insee.eno.core.exceptions.technical.LunaticSortingException;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.EnoComponent;
 import fr.insee.eno.core.model.EnoQuestionnaire;
@@ -39,7 +40,8 @@ public class LunaticSortComponents implements OutProcessingInterface<Questionnai
         //
         int finalSize = lunaticComponents.size();
         if (finalSize != initialSize) {
-            log.warn("Initial components count: {}, after sorting: {}", initialSize, finalSize);
+            throw new LunaticSortingException(String.format(
+                    "Initial components count: %s, after sorting: %s", initialSize, finalSize));
         }
     }
 
