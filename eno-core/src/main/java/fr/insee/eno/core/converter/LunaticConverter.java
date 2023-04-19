@@ -74,10 +74,16 @@ public class LunaticConverter {
 
     private static Object instantiateFrom(SingleResponseQuestion enoQuestion) {
         if (enoQuestion instanceof TextQuestion textQuestion) {
-            if (textQuestion.getMaxLength().intValue() < Constant.LUNATIC_SMALL_TEXT_LIMIT)
-                return new Input();
-            else
-                return new Textarea();
+            if (textQuestion.getMaxLength().intValue() < Constant.LUNATIC_SMALL_TEXT_LIMIT) {
+                Input input = new Input();
+                input.setComponentType(ComponentTypeEnum.INPUT);
+                return input;
+            }
+            else {
+                Textarea textarea = new Textarea();
+                textarea.setComponentType(ComponentTypeEnum.TEXTAREA);
+                return textarea;
+            }
         }
         else if (enoQuestion instanceof NumericQuestion)
             return new InputNumber();
@@ -90,9 +96,21 @@ public class LunaticConverter {
                 throw new ConversionException("Display format has not been set in Eno question " + enoQuestion);
             }
             return switch (((UniqueChoiceQuestion) enoQuestion).getDisplayFormat()) {
-                case RADIO -> new Radio();
-                case CHECKBOX -> new CheckboxOne();
-                case DROPDOWN -> new Dropdown();
+                case RADIO -> {
+                    Radio radio = new Radio();
+                    radio.setComponentType(ComponentTypeEnum.RADIO);
+                    yield radio;
+                }
+                case CHECKBOX -> {
+                    CheckboxOne checkboxOne = new CheckboxOne();
+                    checkboxOne.setComponentType(ComponentTypeEnum.CHECKBOX_ONE);
+                    yield checkboxOne;
+                }
+                case DROPDOWN -> {
+                    Dropdown dropdown = new Dropdown();
+                    dropdown.setComponentType(ComponentTypeEnum.DROPDOWN);
+                    yield dropdown;
+                }
             };
         }
         else if (enoQuestion instanceof PairwiseQuestion)
