@@ -24,7 +24,7 @@ public class DynamicLabel extends EnoObject {
 
     /** For now, Lunatic type in label objects does not come from metadata, but is hardcoded here in Eno.
      * See labels documentation. */
-    @Lunatic(contextType = LabelType.class, field = "setType('"+ Constant.LUNATIC_LABEL_VTL_MD+"')")
-    String type;
+    @Lunatic(contextType = LabelType.class, field = "setType(#param)")
+    String type = Constant.LUNATIC_LABEL_VTL_MD;
 
 }

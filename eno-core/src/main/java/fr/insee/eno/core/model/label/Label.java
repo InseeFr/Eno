@@ -23,7 +23,7 @@ public class Label extends EnoObject {
 
     /** For now, Lunatic type in label objects does not come from metadata, but is hardcoded here in Eno.
      * See labels documentation. */
-    @Lunatic(contextType = fr.insee.lunatic.model.flat.LabelType.class, field = "setType('"+ Constant.LUNATIC_LABEL_VTL_MD+"')")
-    String type;
+    @Lunatic(contextType = fr.insee.lunatic.model.flat.LabelType.class, field = "setType(#param)")
+    String type = Constant.LUNATIC_LABEL_VTL_MD;
 
 }

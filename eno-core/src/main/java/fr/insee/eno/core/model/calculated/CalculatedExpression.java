@@ -31,6 +31,7 @@ public class CalculatedExpression extends EnoObject {
     public static CalculatedExpression defaultExpression() {
         CalculatedExpression res = new CalculatedExpression();
         res.setValue("true");
+        res.setType(Constant.LUNATIC_LABEL_VTL);
         return res;
     }
 
@@ -41,8 +42,8 @@ public class CalculatedExpression extends EnoObject {
 
     /** For now, Lunatic type in label objects does not come from metadata, but is hardcoded here in Eno.
      * See labels documentation. */
-    @Lunatic(contextType = LabelType.class, field = "setType('"+ Constant.LUNATIC_LABEL_VTL+"')")
-    String type;
+    @Lunatic(contextType = LabelType.class, field = "setType(#param)")
+    String type = Constant.LUNATIC_LABEL_VTL;
 
     /** In DDI, the expression contains variable references instead of variables names.
      * This list contains the references of these variables. */
