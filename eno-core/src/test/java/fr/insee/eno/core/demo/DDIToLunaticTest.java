@@ -18,6 +18,7 @@ class DDIToLunaticTest {
     @ValueSource(strings = {
             //"l10xmg2l",
             //"sandbox",
+            "hello-world",
             "l20g2ba7",
             "sandbox_v2",
             "DDI-tableau-2-colonnes",
