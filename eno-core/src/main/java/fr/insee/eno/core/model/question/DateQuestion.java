@@ -22,4 +22,8 @@ public class DateQuestion extends SingleResponseQuestion {
     @DDI(contextType = QuestionItemType.class, field = "getResponseDomain().getDateFieldFormat().getStringValue()")
     @Lunatic(contextType = Datepicker.class, field = "setDateFormat(#param)")
     private String format;
+
+    @Lunatic(contextType = Datepicker.class,
+            field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
+    String lunaticComponentType = "DATEPICKER";
 }

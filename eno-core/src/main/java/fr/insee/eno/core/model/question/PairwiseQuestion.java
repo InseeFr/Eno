@@ -55,4 +55,8 @@ public class PairwiseQuestion extends SingleResponseQuestion {
         lunaticPairwiseLinks.setYAxisIterations(yAxis);
     }
 
+    @Lunatic(contextType = PairwiseLinks.class,
+            field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
+    String lunaticComponentType = "PAIRWISE_LINKS";
+
 }

@@ -36,4 +36,8 @@ public class NumericQuestion extends SingleResponseQuestion {
     @Lunatic(contextType = InputNumber.class, field = "setUnit(#param)")
     String unit;
 
+    @Lunatic(contextType = InputNumber.class,
+            field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
+    String lunaticComponentType = "INPUT_NUMBER";
+
 }

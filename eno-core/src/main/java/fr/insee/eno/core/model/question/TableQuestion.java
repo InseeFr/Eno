@@ -39,6 +39,10 @@ public class TableQuestion extends MultipleResponseQuestion {
     @Lunatic(contextType = Table.class, field = "setPositioning(#param)")
     private final String positioning = "HORIZONTAL";
 
+    @Lunatic(contextType = Table.class,
+            field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
+    String lunaticComponentType = "TABLE";
+
     /** Code list that contain header info. */
     @DDI(contextType = QuestionGridType.class,
             field = "#index.get(#this.getGridDimensionList().?[#this.getRank().intValue() == 2].get(0)" +

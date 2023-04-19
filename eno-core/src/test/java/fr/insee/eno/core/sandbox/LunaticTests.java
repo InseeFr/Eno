@@ -22,6 +22,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LunaticTests {
 
+    @Test
+    void componentType() {
+        InputNumber inputNumber = new InputNumber();
+        inputNumber.setComponentType(ComponentTypeEnum.TEXTAREA);
+        // This enum shouldn't exist, Lunatic serializer should automatically write this value
+        // (nothing prevents you from writing the wrong component type...)
+        assertNotEquals(ComponentTypeEnum.INPUT_NUMBER, inputNumber.getComponentType());
+    }
+
     void helloLunaticQuestionnaire() {
         // New Lunatic questionnaire
         Questionnaire lunaticQuestionnaire = new Questionnaire();

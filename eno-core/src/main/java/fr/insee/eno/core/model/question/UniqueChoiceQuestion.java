@@ -5,6 +5,7 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.lunatic.model.flat.CheckboxOne;
+import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Dropdown;
 import fr.insee.lunatic.model.flat.Radio;
 import lombok.Getter;
@@ -31,6 +32,10 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
 
     public enum DisplayFormat {RADIO, CHECKBOX, DROPDOWN}
 
+    /**
+     * Property used to convert to unique choice question to the right Lunatic component.
+     * In DDI, there are conventional values in the "generic output format" property.
+     * In Lunatic, it is used by the converter to create the right object, and to set the component type property. */
     @DDI(contextType = QuestionItemType.class,
             field = "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDDIOutputFormat(#this)")
     DisplayFormat displayFormat;
