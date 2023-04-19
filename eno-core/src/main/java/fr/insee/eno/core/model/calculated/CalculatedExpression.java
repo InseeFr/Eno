@@ -18,8 +18,8 @@ import java.util.List;
 
 import static fr.insee.eno.core.annotations.Contexts.Context;
 
-/** Class that could be used to refactor calculated expressions' mapping.
- * Unused yet since the Lunatic mapper doesn't allow to dig into a complex object without creating a new instance. */
+/** Class used to for the mapping of calculated expressions that can be found in objects like
+ * calculated variables, controls, filters. */
 @Getter
 @Setter
 @NoArgsConstructor
