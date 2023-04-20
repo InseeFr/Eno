@@ -1,9 +1,12 @@
 name: V3 Build Docker
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - v3.*
 
 env:
-  ENO_BRANCH: v3-develop
   LUNATIC_BRANCH: dev-pairwise
   POGUES_BRANCH: main
 
@@ -48,7 +51,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: InseeFr/Eno
-          ref: ${{ env.ENO_BRANCH }}
+          ref: ${{ github.ref }}
           path: Eno
 
       - name: Enable wrapper
@@ -90,5 +93,5 @@ jobs:
           name: inseefr/eno-ws
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          default_branch: v3-develop
+          default_branch: ${{ github.ref }}
           tags: ${{ needs.build.outputs.release-version }}
