@@ -19,13 +19,4 @@ public class DDIToLunaticService {
         }
     }
 
-    /** Temporary service while Eno legacy WS is still in use. */
-    public Mono<String> transformToXml(InputStream ddiInputStream, EnoParameters parameterInputStream) {
-        try {
-            return Mono.just(DDIToLunatic.transformToXml(ddiInputStream, parameterInputStream));
-        } catch (Exception e) {
-            return Mono.error(e);
-        }
-    }
-
 }

@@ -42,6 +42,14 @@ public class LunaticSerializer {
         }
     }
 
+    /**
+     * Serialize given questionnaire to xml flat (warning: flat, not hierarchical).
+     * @param lunaticQuestionnaire Lunatic questionnaire.
+     * @return Lunatic questionnaire as xml string.
+     * @throws LunaticSerializationException if serialization using Lunatic-Model fails.
+     * @deprecated Xml services are not required in Eno v3.
+     */
+    @Deprecated
     public static String serializeToXml(Questionnaire lunaticQuestionnaire) throws LunaticSerializationException {
         XMLSerializer xmlSerializer = new XMLSerializer();
         return serialize(lunaticQuestionnaire, xmlSerializer::serialize);
