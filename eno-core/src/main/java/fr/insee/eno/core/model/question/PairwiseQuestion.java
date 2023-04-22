@@ -5,9 +5,6 @@ import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.eno.core.model.EnoIdentifiableObject;
-import fr.insee.eno.core.model.EnoObject;
-import fr.insee.eno.core.model.response.Response;
 import fr.insee.lunatic.model.flat.LabelType;
 import fr.insee.lunatic.model.flat.PairwiseLinks;
 import lombok.Getter;
@@ -25,9 +22,6 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @Context(format = Format.DDI, type = QuestionItemType.class)
 @Context(format = Format.LUNATIC, type = PairwiseLinks.class)
 public class PairwiseQuestion extends SingleResponseQuestion {
-
-    Response response = null;
-    boolean mandatory = true; //TODO: see if it should be true, false or null
 
     /** Name of the variable to be used for the question iterations. */
     @DDI(contextType = QuestionItemType.class,
