@@ -51,6 +51,9 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * In Lunatic, it is used by the converter to create the right object, and to set the component type property. */
     @DDI(contextType = QuestionItemType.class,
             field = "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDDIOutputFormat(#this)")
+    @Lunatic(contextType = {CheckboxOne.class, Radio.class, Dropdown.class},
+            field = "setComponentType(" +
+                    "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
     DisplayFormat displayFormat;
 
     /**
@@ -79,6 +82,19 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
                 log.warn("Unknown output format '"+ddiOutputFormat+"' found in DDI question item '"+questionId+"'.");
                 yield null;
             }
+        };
+    }
+
+    /**
+     * Uses display format given to return corresponding Lunatic component type.
+     * @param displayFormat A DisplayFormat value.
+     * @return Lunatic component type value.
+     */
+    public static ComponentTypeEnum convertDisplayFormatToLunatic(DisplayFormat displayFormat) {
+        return switch (displayFormat) {
+            case RADIO -> ComponentTypeEnum.RADIO;
+            case DROPDOWN -> ComponentTypeEnum.DROPDOWN;
+            case CHECKBOX -> ComponentTypeEnum.CHECKBOX_ONE;
         };
     }
 

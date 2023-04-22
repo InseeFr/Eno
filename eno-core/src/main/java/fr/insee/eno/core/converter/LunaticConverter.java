@@ -96,21 +96,9 @@ public class LunaticConverter {
                 throw new ConversionException("Display format has not been set in Eno question " + enoQuestion);
             }
             return switch (((UniqueChoiceQuestion) enoQuestion).getDisplayFormat()) {
-                case RADIO -> {
-                    Radio radio = new Radio();
-                    radio.setComponentType(ComponentTypeEnum.RADIO);
-                    yield radio;
-                }
-                case CHECKBOX -> {
-                    CheckboxOne checkboxOne = new CheckboxOne();
-                    checkboxOne.setComponentType(ComponentTypeEnum.CHECKBOX_ONE);
-                    yield checkboxOne;
-                }
-                case DROPDOWN -> {
-                    Dropdown dropdown = new Dropdown();
-                    dropdown.setComponentType(ComponentTypeEnum.DROPDOWN);
-                    yield dropdown;
-                }
+                case RADIO -> new Radio();
+                case CHECKBOX -> new CheckboxOne();
+                case DROPDOWN -> new Dropdown();
             };
         }
         else if (enoQuestion instanceof PairwiseQuestion)
