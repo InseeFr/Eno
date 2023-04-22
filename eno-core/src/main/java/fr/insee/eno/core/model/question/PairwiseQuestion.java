@@ -18,7 +18,7 @@ import java.util.List;
 
 import static fr.insee.eno.core.annotations.Contexts.Context;
 
-/** Class that represent the "pairwise question"
+/** Class that represent the "pairwise question".
  * For now, this corresponds to a DDI QuestionItem object (could be QuestionGrid later on). */
 @Getter
 @Setter
@@ -26,18 +26,20 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @Context(format = Format.LUNATIC, type = PairwiseLinks.class)
 public class PairwiseQuestion extends SingleResponseQuestion {
 
-    //TODO: doc here
-
     Response response = null;
     boolean mandatory = true; //TODO: see if it should be true, false or null
 
-    /** Variable to loop over */
+    /** Name of the variable to be used for the question iterations. */
     @DDI(contextType = QuestionItemType.class,
             field = "getInParameterArray(0).getParameterNameArray(0).getStringArray(0).getStringValue()")
     @Lunatic(contextType = PairwiseLinks.class,
             field = "T(fr.insee.eno.core.model.question.PairwiseQuestion).computeLunaticAxes(#this, #param)")
     String loopVariableName;
 
+    /**
+     * The pairwise question object encapsulates a unique choice question.
+     * (During data collection, the collection is iterated several times to establish each link between individuals.)
+     */
     @DDI(contextType = QuestionItemType.class, field = "T(java.util.List).of(#this)")
     @Lunatic(contextType = PairwiseLinks.class, field = "getComponents()")
     List<UniqueChoiceQuestion> uniqueChoiceQuestions = new ArrayList<>();
@@ -46,7 +48,6 @@ public class PairwiseQuestion extends SingleResponseQuestion {
         LabelType xAxis = new LabelType();
         LabelType yAxis = new LabelType();
         String vtlExpression = "count("+loopVariableName+")";
-        // TODO: see if xAxis and yAxis in PairwiseLinks are of type 'VTL' or 'VTL|MD'
         xAxis.setValue(vtlExpression);
         xAxis.setType(Constant.LUNATIC_LABEL_VTL_MD);
         yAxis.setValue(vtlExpression);
@@ -55,6 +56,8 @@ public class PairwiseQuestion extends SingleResponseQuestion {
         lunaticPairwiseLinks.setYAxisIterations(yAxis);
     }
 
+    /** Lunatic component type property.
+     * This should be inserted by Lunatic-Model serializer later on. */
     @Lunatic(contextType = PairwiseLinks.class,
             field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     String lunaticComponentType = "PAIRWISE_LINKS";
