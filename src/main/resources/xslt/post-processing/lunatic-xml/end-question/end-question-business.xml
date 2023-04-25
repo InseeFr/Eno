@@ -32,7 +32,31 @@
                 <value>true</value>
                 <type>VTL</type>
             </conditionFilter>
-            <hierarchy>
+         <controls id="controls-format-borne-inf-sup"
+                    criticality="ERROR"
+                    typeOfControl="FORMAT">
+            <control>
+               <value>not(not(isnull(TIME-QUESTION-HEURE-REMPL)) and (0&gt;TIME-QUESTION-HEURE-REMPL or 99&lt;TIME-QUESTION-HEURE-REMPL))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>" La valeur doit être comprise entre 0 et 99."</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+            <controls id="controls-format-decimal"
+                    criticality="ERROR"
+                    typeOfControl="FORMAT">
+            <control>
+               <value>not(not(isnull(TIME-QUESTION-HEURE-REMPL))  and round(TIME-QUESTION-HEURE-REMPL,0)&lt;&gt;TIME-QUESTION-HEURE-REMPL)</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule."</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+		 <hierarchy>
                 <sequence id="TIME-COMMENT-SEQ">
                     <label>
                         <value>"Temps de réponse et commentaires"</value>
@@ -70,6 +94,30 @@
                 <value>true</value>
                 <type>VTL</type>
             </conditionFilter>
+            <controls id="controls-format-borne-inf-sup"
+                    criticality="ERROR"
+                    typeOfControl="FORMAT">
+            <control>
+               <value>not(not(isnull(TIME-QUESTION-MIN-REMPL)) and (0&gt;TIME-QUESTION-MIN-REMPL or 59&lt;TIME-QUESTION-MIN-REMPL))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>"La valeur doit être comprise entre 0 et 59."</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+            <controls id="controls-format-decimal"
+                    criticality="ERROR"
+                    typeOfControl="FORMAT">
+            <control>
+               <value>not(not(isnull(TIME-QUESTION-MIN-REMPL))  and round(TIME-QUESTION-MIN-REMPL,0)&lt;&gt;TIME-QUESTION-MIN-REMPL)</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule."</value>
+             <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
             <hierarchy>
                 <sequence id="TIME-COMMENT-SEQ">
                     <label>
