@@ -51,7 +51,7 @@
                 </label>
                 <conditionFilter>
                     <value>true</value>
-                    <type>VTL</type
+                    <type>VTL</type>
                 </conditionFilter>
                 <hierarchy>
                     <sequence id="BEGIN-QUESTION-SEQ">
