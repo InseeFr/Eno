@@ -38,7 +38,7 @@
                     criticality="ERROR"
                     typeOfControl="FORMAT">
             <control>
-               <value>not(not(isnull(TIME-QUESTION-HEURE-REMPL)) and (0&gt;TIME-QUESTION-HEURE-REMPL or 99&lt;TIME-QUESTION-HEURE-REMPL))</value>
+                <value>not(not(isnull(HEURE_REMPL)) and (0&gt;HEURE_REMPL or 99&lt;HEURE_REMPL))</value>
                <type>VTL</type>
             </control>
             <errorMessage>
@@ -50,7 +50,7 @@
                     criticality="ERROR"
                     typeOfControl="FORMAT">
             <control>
-               <value>not(not(isnull(TIME-QUESTION-HEURE-REMPL))  and round(TIME-QUESTION-HEURE-REMPL,0)&lt;&gt;TIME-QUESTION-HEURE-REMPL)</value>
+                <value>not(not(isnull(HEURE_REMPL))  and round(HEURE_REMPL,0)&lt;&gt;HEURE_REMPL)</value>
                <type>VTL</type>
             </control>
             <errorMessage>
@@ -99,7 +99,7 @@
                     criticality="ERROR"
                     typeOfControl="FORMAT">
             <control>
-               <value>not(not(isnull(TIME-QUESTION-MIN-REMPL)) and (0&gt;TIME-QUESTION-MIN-REMPL or 59&lt;TIME-QUESTION-MIN-REMPL))</value>
+                <value>not(not(isnull(MIN_REMPL)) and (0&gt;MIN_REMPL or 59&lt;MIN_REMPL))</value>
                <type>VTL</type>
             </control>
             <errorMessage>
@@ -111,7 +111,7 @@
                     criticality="ERROR"
                     typeOfControl="FORMAT">
             <control>
-               <value>not(not(isnull(TIME-QUESTION-MIN-REMPL))  and round(TIME-QUESTION-MIN-REMPL,0)&lt;&gt;TIME-QUESTION-MIN-REMPL)</value>
+                <value>not(not(isnull(MIN_REMPL))  and round(MIN_REMPL,0)&lt;&gt;MIN_REMPL)</value>
                <type>VTL</type>
             </control>
             <errorMessage>
