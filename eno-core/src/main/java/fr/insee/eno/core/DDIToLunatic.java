@@ -14,7 +14,6 @@ import fr.insee.eno.core.processing.LunaticProcessing;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import instance33.DDIInstanceDocument;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 public class DDIToLunatic {
@@ -22,7 +21,7 @@ public class DDIToLunatic {
     private DDIToLunatic() {}
 
     public static Questionnaire transform(InputStream ddiInputStream, EnoParameters enoParameters)
-            throws IOException, DDIParsingException {
+            throws DDIParsingException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(ddiInputStream);
         //
@@ -43,8 +42,12 @@ public class DDIToLunatic {
         return lunaticQuestionnaire;
     }
 
+    public static Questionnaire transform(InputStream ddiInputStream) throws DDIParsingException {
+        return transform(ddiInputStream, new EnoParameters());
+    }
+
     public static String transformToJson(InputStream ddiInputStream, EnoParameters enoParameters)
-            throws IOException, DDIParsingException, LunaticSerializationException {
+            throws DDIParsingException, LunaticSerializationException {
         Questionnaire lunaticQuestionnaire = transform(ddiInputStream, enoParameters);
         return LunaticSerializer.serializeToJson(lunaticQuestionnaire);
     }

@@ -14,16 +14,18 @@ public class DDIParser {
 
     private DDIParser() {}
 
-    public static DDIInstanceDocument parse(InputStream ddiInputStream) throws IOException, DDIParsingException {
+    public static DDIInstanceDocument parse(InputStream ddiInputStream) throws DDIParsingException {
         log.info("Parsing DDI document from input stream given");
         try {
             return DDIInstanceDocument.Factory.parse(ddiInputStream);
         } catch (XmlException e) {
             throw new DDIParsingException("Unable to parse DDI document from input stream given.", e);
+        } catch (IOException e) {
+            throw new DDIParsingException("IOException occurred when trying to parse given input stream.", e);
         }
     }
 
-    public static DDIInstanceDocument parse(URL ddiUrl) throws IOException, DDIParsingException {
+    public static DDIInstanceDocument parse(URL ddiUrl) throws DDIParsingException {
         log.info("Parsing DDI document from URL " + ddiUrl);
         log.atDebug().log(()->"Test DEBUG logs with lambdas");
         try (InputStream is = ddiUrl.openStream()) {
@@ -32,6 +34,8 @@ public class DDIParser {
             return ddiInstanceDocument;
         } catch (XmlException e) {
             throw new DDIParsingException("Unable to parse DDI document from URL " + ddiUrl, e);
+        } catch (IOException e) {
+            throw new DDIParsingException("IOException occurred when trying to open stream from URL " + ddiUrl, e);
         }
     }
 
