@@ -1,6 +1,6 @@
 package fr.insee.eno.ws.service;
 
-import fr.insee.eno.core.annotations.Format;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.parameter.EnoParameters;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;

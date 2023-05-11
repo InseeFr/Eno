@@ -1,7 +1,7 @@
 package fr.insee.eno.core.model;
 
 import fr.insee.eno.core.annotations.DDI;
-import fr.insee.eno.core.annotations.Format;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.label.QuestionnaireLabel;
@@ -13,7 +13,6 @@ import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.model.variable.VariableGroup;
-import fr.insee.lunatic.model.flat.Questionnaire;
 import instance33.DDIInstanceType;
 import lombok.Getter;
 import lombok.Setter;

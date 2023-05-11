@@ -1,4 +1,4 @@
-package fr.insee.eno.core.annotations;
+package fr.insee.eno.core.parameter;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

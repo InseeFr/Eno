@@ -1,6 +1,6 @@
 package fr.insee.eno.core;
 
-import fr.insee.eno.core.annotations.Format;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
 import fr.insee.eno.core.mappers.DDIMapper;

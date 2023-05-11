@@ -1,6 +1,6 @@
 package fr.insee.eno.ws.controller;
 
-import fr.insee.eno.core.annotations.Format;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.legacy.parameters.*;

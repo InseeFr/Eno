@@ -2,7 +2,6 @@ package fr.insee.eno.core.parameter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.model.mode.Mode;
 import lombok.Getter;
 import lombok.Setter;
