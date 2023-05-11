@@ -1,4 +1,4 @@
-package fr.insee.eno.core.demo;
+package fr.insee.eno.core;
 
 import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.mappers.DDIMapper;
@@ -11,6 +11,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+/**
+ * Integration tests for the DDI input format.
+ * */
 class DDIToEnoTest {
 
     @ParameterizedTest
