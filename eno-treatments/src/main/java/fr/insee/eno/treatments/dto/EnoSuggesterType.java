@@ -51,6 +51,11 @@ public class EnoSuggesterType {
         this.version = version;
     }
 
+    /**
+     *
+     * @param enoType EnoSuggester object to convert
+     * @return the corresponding lunatic model object
+     */
     public static SuggesterType toLunaticModel(EnoSuggesterType enoType) {
         if(enoType == null) {
             return null;
@@ -69,6 +74,11 @@ public class EnoSuggesterType {
         return type;
     }
 
+    /**
+     *
+     * @param enoTypes EnoSuggesterType list object to convert
+     * @return the corresponding lunatic model list object
+     */
     public static List<SuggesterType> toLunaticModelList(List<EnoSuggesterType> enoTypes) {
         if(enoTypes == null) {
             return new ArrayList<>();

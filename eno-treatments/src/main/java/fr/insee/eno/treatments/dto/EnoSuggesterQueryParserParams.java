@@ -31,6 +31,11 @@ public class EnoSuggesterQueryParserParams {
         this.pattern = pattern;
     }
 
+    /**
+     *
+     * @param enoParams EnoSuggesterQueryParserParams object to convert
+     * @return the corresponding lunatic model object
+     */
     public static SuggesterQueryParserParams toLunaticModel(EnoSuggesterQueryParserParams enoParams) {
         if(enoParams == null) {
             return null;

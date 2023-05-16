@@ -47,6 +47,11 @@ public class EnoSuggesterField {
         this.synonyms = synonyms;
     }
 
+    /**
+     *
+     * @param suggesterField EnoSuggesterField object to convert
+     * @return the corresponding lunatic model object
+     */
     public static SuggesterField toLunaticModel(EnoSuggesterField suggesterField) {
         if(suggesterField == null) {
             return null;
@@ -77,6 +82,10 @@ public class EnoSuggesterField {
         return lunaticField;
     }
 
+    /**
+     * @param enoFields EnoSuggesterField list object to convert
+     * @return the corresponding lunatic model list object
+     */
     public static List<SuggesterField> toLunaticModelList(List<EnoSuggesterField> enoFields) {
         if(enoFields == null) {
             return new ArrayList<>();

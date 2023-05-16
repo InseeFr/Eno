@@ -25,6 +25,11 @@ public class EnoFieldSynonym {
         this.target = target;
     }
 
+    /**
+     *
+     * @param enoFieldSynonym EnoFieldSynonym object
+     * @return the corresponding lunatic model object
+     */
     public static FieldSynonym toLunaticModel(EnoFieldSynonym enoFieldSynonym) {
         if(enoFieldSynonym == null) {
             return null;
@@ -35,6 +40,11 @@ public class EnoFieldSynonym {
         return fieldSynonym;
     }
 
+    /**
+     *
+     * @param enoFieldSynonyms EnoFieldSynonym list object
+     * @return the corresponding lunatic model list
+     */
     public static List<FieldSynonym> toLunaticModelList(List<EnoFieldSynonym> enoFieldSynonyms) {
         if(enoFieldSynonyms == null) {
             return new ArrayList<>();

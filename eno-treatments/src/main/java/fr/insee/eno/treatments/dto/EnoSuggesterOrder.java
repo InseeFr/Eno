@@ -26,6 +26,11 @@ public class EnoSuggesterOrder {
         this.type = type;
     }
 
+    /**
+     *
+     * @param enoOrder EnoSuggesterOrder object to convert
+     * @return the corresponding lunatic model object
+     */
     public static SuggesterOrder toLunaticModel(EnoSuggesterOrder enoOrder) {
         if(enoOrder == null) {
             return null;
