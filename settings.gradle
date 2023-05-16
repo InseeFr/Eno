@@ -30,4 +30,5 @@ rootProject.name = 'eno'
 
 include 'ddi-beans'
 include 'eno-core'
+include 'eno-treatments'
 include 'eno-ws'

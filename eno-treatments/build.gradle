@@ -1,0 +1,77 @@
+plugins {
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+    id 'java-library'
+    id 'maven-publish'
+}
+
+// https://stackoverflow.com/a/61671513/13425151
+bootJar {
+    enabled = false
+}
+jar {
+    enabled = true
+}
+
+description = 'eno-treatments'
+
+dependencies {
+    // DDI
+    implementation project(':ddi-beans')
+    implementation project(':eno-core')
+    // Lunatic
+    implementation libs.pogues.model
+    // Pogues
+    implementation libs.lunatic.model
+
+    // Spring
+    implementation 'org.springframework:spring-core'
+    implementation 'org.springframework:spring-beans'
+    implementation 'org.springframework:spring-expression'
+
+    // Jackson
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+    // Logging
+    implementation 'org.slf4j:slf4j-api'
+
+    // Logback logging implementation for testing
+    testRuntimeOnly 'ch.qos.logback:logback-classic'
+    // JUnit Jupiter
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    // Mockito
+    testImplementation 'org.mockito:mockito-inline'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.requested.group == 'org.slf4j') {
+            details.useVersion '2.0.0'
+        }
+        if (details.requested.group == 'ch.qos.logback'){
+            details.useVersion '1.3.0-beta0'
+        }
+    }
+}
+
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
+
+tasks.withType(GenerateModuleMetadata).configureEach {
+    // The value 'enforced-platform' is provided in the validation error message you got
+    suppressedValidationErrors.add('enforced-platform')
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
