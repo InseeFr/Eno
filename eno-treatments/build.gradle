@@ -28,6 +28,7 @@ dependencies {
     implementation 'org.springframework:spring-core'
     implementation 'org.springframework:spring-beans'
     implementation 'org.springframework:spring-expression'
+    implementation 'com.networknt:json-schema-validator:1.0.78'
 
     // Jackson
     implementation 'com.fasterxml.jackson.core:jackson-databind'

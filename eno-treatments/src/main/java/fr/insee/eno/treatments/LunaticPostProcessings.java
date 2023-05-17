@@ -7,6 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handle list of lunatic out processings
+ */
 @Slf4j
 public class LunaticPostProcessings implements OutProcessingInterface<Questionnaire> {
 
@@ -17,7 +20,6 @@ public class LunaticPostProcessings implements OutProcessingInterface<Questionna
     }
 
     public void addPostProcessing(OutProcessingInterface<Questionnaire> lunaticProcessing) {
-        log.info("Coucou");
         lunaticProcessings.add(lunaticProcessing);
     }
 
