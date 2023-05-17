@@ -1,6 +1,8 @@
 package fr.insee.eno.ws.controller.utils;
 
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.treatments.LunaticPostProcessings;
+import fr.insee.eno.treatments.LunaticSuggesterProcessing;
 import fr.insee.eno.ws.service.DDIToLunaticService;
 import fr.insee.eno.ws.service.ParameterService;
 import org.springframework.http.CacheControl;
@@ -53,4 +55,30 @@ public class V3ControllerUtils {
                         .body(result));
     }
 
+    public Mono<ResponseEntity<String>> ddiToLunaticJson(Mono<FilePart> ddiFile, EnoParameters enoParameters, LunaticPostProcessings lunaticPostProcessings) {
+        return ddiFile.flatMap(filePart -> filePart.content()
+                        .map(dataBuffer -> dataBuffer.asInputStream(true))
+                        .reduce(SequenceInputStream::new))
+                .flatMap(inputStream -> ddiToLunaticService.transformToJson(inputStream, enoParameters, lunaticPostProcessings))
+                .map(result -> ResponseEntity
+                        .ok()
+                        .cacheControl(CacheControl.noCache())
+                        .headers(HeadersUtils.with(LUNATIC_JSON_FILE_NAME))
+                        .body(result));
+    }
+
+    public LunaticPostProcessings generateLunaticPostProcessings(Mono<FilePart> specificTreatment) {
+        LunaticPostProcessings lunaticPostProcessings = new LunaticPostProcessings();
+        if(specificTreatment == null) {
+            return lunaticPostProcessings;
+        }
+        specificTreatment.flatMap(filePart -> filePart.content()
+                        .map(dataBuffer -> dataBuffer.asInputStream(true))
+                        .reduce(SequenceInputStream::new))
+                .doOnSuccess(specificTreatmentStream ->
+                    lunaticPostProcessings.addPostProcessing(new LunaticSuggesterProcessing(specificTreatmentStream)))
+                .subscribe();
+
+        return lunaticPostProcessings;
+    }
 }

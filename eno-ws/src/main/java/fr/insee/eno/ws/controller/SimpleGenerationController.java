@@ -5,6 +5,7 @@ import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.legacy.parameters.CaptureEnum;
 import fr.insee.eno.legacy.parameters.Context;
+import fr.insee.eno.treatments.LunaticPostProcessings;
 import fr.insee.eno.ws.PassePlat;
 import fr.insee.eno.ws.controller.utils.V3ControllerUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -97,15 +98,13 @@ public class SimpleGenerationController {
             @PathVariable EnoParameters.Context context,
             @PathVariable Mode mode) {
         //
-        if (specificTreatment != null) {
-            log.warn("Specific treatments has changed in Eno v3. File given will be ignored.");
-        }
+        LunaticPostProcessings lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
         //
         EnoParameters enoParameters = new EnoParameters(context, Format.LUNATIC);
         enoParameters.getSelectedModes().clear();
         enoParameters.getSelectedModes().add(mode);
         //
-        return controllerUtils.ddiToLunaticJson(ddiFile, enoParameters);
+        return controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessings);
     }
 
     @Operation(

@@ -40,7 +40,7 @@ dependencies {
     // JUnit Jupiter
     testImplementation 'org.junit.jupiter:junit-jupiter'
     // Mockito
-    testImplementation 'org.mockito:mockito-inline'
+    testImplementation 'org.mockito:mockito-core'
 
     // Lombok
     compileOnly 'org.projectlombok:lombok'

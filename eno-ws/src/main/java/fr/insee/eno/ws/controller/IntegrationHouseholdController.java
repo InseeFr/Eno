@@ -1,6 +1,7 @@
 package fr.insee.eno.ws.controller;
 
 import fr.insee.eno.core.model.mode.Mode;
+import fr.insee.eno.treatments.LunaticPostProcessings;
 import fr.insee.eno.ws.controller.utils.V3ControllerUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,18 +40,17 @@ public class IntegrationHouseholdController {
             @RequestPart(value="in") Mono<FilePart> ddiFile,
             @RequestPart(value="params") Mono<FilePart> parametersFile,
             @RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment) {
-        //
-        if (specificTreatment != null) {
-            log.warn("Specific treatments has changed in Eno v3. File given will be ignored.");
-        }
-        //
+
+
+        LunaticPostProcessings lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
+
         return controllerUtils.readParametersFile(parametersFile)
                 .flatMap(enoParameters -> {
                     enoParameters.getSelectedModes().clear();
                     enoParameters.getSelectedModes().add(mode);
                     return Mono.just(enoParameters);
                 })
-                .flatMap(enoParameters -> controllerUtils.ddiToLunaticJson(ddiFile, enoParameters));
+                .flatMap(enoParameters -> controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessings));
     }
 
 }

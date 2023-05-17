@@ -1,9 +1,10 @@
 package fr.insee.eno.ws.controller;
 
-import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.legacy.parameters.*;
+import fr.insee.eno.treatments.LunaticPostProcessings;
 import fr.insee.eno.ws.PassePlat;
 import fr.insee.eno.ws.controller.utils.V3ControllerUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -130,9 +131,9 @@ public class GenerationController {
 			@RequestParam(value="Pagination", required=false, defaultValue="NONE") Pagination pagination,
 			@RequestParam(value="includeUnusedCalculatedVariables") boolean unusedVars) {
 		//
-		if (specificTreatment != null) {
-			log.warn("Specific treatments has changed in Eno v3. File given will be ignored.");
-		}
+
+		LunaticPostProcessings lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
+
 		//
 		EnoParameters parameters = new EnoParameters(context, Format.LUNATIC);
 		parameters.getSelectedModes().clear();
@@ -173,7 +174,7 @@ public class GenerationController {
 		parameters.setUnusedVariables(unusedVars);
 		log.info("'Unused variables' feature is not implemented in Eno v3.");
 		//
-		return controllerUtils.ddiToLunaticJson(ddiFile, parameters);
+		return controllerUtils.ddiToLunaticJson(ddiFile, parameters, lunaticPostProcessings);
 	}
 
 	@Operation(
