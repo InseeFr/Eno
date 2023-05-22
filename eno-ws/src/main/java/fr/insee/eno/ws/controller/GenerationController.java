@@ -132,7 +132,7 @@ public class GenerationController {
 			@RequestParam(value="includeUnusedCalculatedVariables") boolean unusedVars) {
 		//
 
-		LunaticPostProcessings lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
+		Mono<LunaticPostProcessings> lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
 
 		//
 		EnoParameters parameters = new EnoParameters(context, Format.LUNATIC);

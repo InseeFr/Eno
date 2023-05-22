@@ -41,7 +41,7 @@ public class SuggesterDeserializer {
             if(!errors.isEmpty()) {
                 StringBuilder messageBuilder = new StringBuilder();
                 for(ValidationMessage errorMessage : errors) {
-                    messageBuilder.append(errorMessage.toString());
+                    messageBuilder.append(errorMessage.getMessage());
                     messageBuilder.append("\n");
                 }
                 throw new SuggesterValidationException(messageBuilder.toString());

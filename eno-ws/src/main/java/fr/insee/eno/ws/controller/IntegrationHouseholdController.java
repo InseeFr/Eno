@@ -42,7 +42,7 @@ public class IntegrationHouseholdController {
             @RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment) {
 
 
-        LunaticPostProcessings lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
+        Mono<LunaticPostProcessings> lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
 
         return controllerUtils.readParametersFile(parametersFile)
                 .flatMap(enoParameters -> {

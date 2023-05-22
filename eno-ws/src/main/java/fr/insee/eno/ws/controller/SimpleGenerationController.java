@@ -98,7 +98,7 @@ public class SimpleGenerationController {
             @PathVariable EnoParameters.Context context,
             @PathVariable Mode mode) {
         //
-        LunaticPostProcessings lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
+        Mono<LunaticPostProcessings> lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
         //
         EnoParameters enoParameters = new EnoParameters(context, Format.LUNATIC);
         enoParameters.getSelectedModes().clear();

@@ -63,11 +63,13 @@ public class V3ControllerUtils {
      * @param lunaticPostProcessings additional lunatic post processings
      * @return json lunatic response
      */
-    public Mono<ResponseEntity<String>> ddiToLunaticJson(Mono<FilePart> ddiFile, EnoParameters enoParameters, LunaticPostProcessings lunaticPostProcessings) {
+    public Mono<ResponseEntity<String>> ddiToLunaticJson(Mono<FilePart> ddiFile, EnoParameters enoParameters, Mono<LunaticPostProcessings> lunaticPostProcessings) {
+
         return ddiFile.flatMap(filePart -> filePart.content()
                         .map(dataBuffer -> dataBuffer.asInputStream(true))
                         .reduce(SequenceInputStream::new))
-                .flatMap(inputStream -> ddiToLunaticService.transformToJson(inputStream, enoParameters, lunaticPostProcessings))
+                .flatMap(inputStream ->
+                    lunaticPostProcessings.flatMap(lunaticProcessings -> ddiToLunaticService.transformToJson(inputStream, enoParameters, lunaticProcessings)))
                 .map(result -> ResponseEntity
                         .ok()
                         .cacheControl(CacheControl.noCache())
@@ -80,25 +82,22 @@ public class V3ControllerUtils {
      * @param specificTreatment json specific treatment file
      * @return a lunatic post processing for this treatment
      */
-    public LunaticPostProcessings generateLunaticPostProcessings(Mono<FilePart> specificTreatment) {
+    public Mono<LunaticPostProcessings> generateLunaticPostProcessings(Mono<FilePart> specificTreatment) {
         LunaticPostProcessings lunaticPostProcessings = new LunaticPostProcessings();
         if(specificTreatment == null) {
-            return lunaticPostProcessings;
+            return Mono.just(lunaticPostProcessings);
         }
-        specificTreatment.flatMap(filePart -> filePart.content()
+        return specificTreatment.flatMap(filePart -> filePart.content()
                         .map(dataBuffer -> dataBuffer.asInputStream(true))
                         .reduce(SequenceInputStream::new))
                 .flatMap(specificTreatmentStream -> {
                     try {
-                        return Mono.just(new LunaticSuggesterProcessing(specificTreatmentStream));
+                        LunaticSuggesterProcessing suggesterProcessing = new LunaticSuggesterProcessing(specificTreatmentStream);
+                        lunaticPostProcessings.addPostProcessing(suggesterProcessing);
+                        return Mono.just(lunaticPostProcessings);
                     } catch(SuggesterDeserializationException ex) {
                         return Mono.error(ex);
                     }
-                })
-                .doOnSuccess(lunaticPostProcessings::addPostProcessing)
-                .subscribe();
-
-
-        return lunaticPostProcessings;
+                });
     }
 }
