@@ -5,7 +5,6 @@ import fr.insee.eno.treatments.dto.EnoSuggesterQueryParserParams;
 import fr.insee.eno.treatments.dto.EnoSuggesterType;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
 import java.util.List;
@@ -17,7 +16,7 @@ class SuggesterDeserializerTest {
     private final ClassLoader classLoader = this.getClass().getClassLoader();
 
     @Test
-    void deserializeSuggesterTest() throws IOException {
+    void deserializeSuggesterTest() {
         InputStream suggestersInputStream = classLoader.getResourceAsStream("suggesters.json");
 
         SuggesterDeserializer converter = new SuggesterDeserializer();
@@ -30,8 +29,8 @@ class SuggesterDeserializerTest {
         assertEquals("L_PCS_HOMMES-1-3-0", suggester.getName());
         assertEquals("plop", suggester.getUrl());
         assertEquals("1", suggester.getVersion());
-        assertTrue(suggester.getResponseNames().contains("jfaz9kv9"));
-        assertEquals(BigInteger.ONE.longValue(), suggester.getMax().longValue());
+        assertTrue(suggester.getResponseNames().contains("PCS"));
+        assertEquals(BigInteger.TWO.longValue(), suggester.getMax().longValue());
 
         assertEquals(23, suggester.getStopWords().size());
         assertTrue(suggester.getStopWords().contains("a"));

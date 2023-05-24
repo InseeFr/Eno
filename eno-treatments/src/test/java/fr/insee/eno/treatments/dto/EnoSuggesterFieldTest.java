@@ -79,7 +79,7 @@ class EnoSuggesterFieldTest {
     }
 
     @Test
-    void whenConvertingToLunaticMappingIfNullParameterListReturnNull() {
-        assertNull(EnoSuggesterField.toLunaticModelList(null));
+    void whenConvertingToLunaticMappingIfNullParameterListReturnEmptyList() {
+        assertEquals(0, EnoSuggesterField.toLunaticModelList(null).size());
     }
 }

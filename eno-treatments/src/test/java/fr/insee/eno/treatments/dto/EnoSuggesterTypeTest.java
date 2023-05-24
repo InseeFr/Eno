@@ -44,7 +44,7 @@ class EnoSuggesterTypeTest {
     }
 
     @Test
-    void whenConvertingToLunaticMappingIfNullParameterListReturnNull() {
-        assertNull(EnoSuggesterType.toLunaticModelList(null));
+    void whenConvertingToLunaticMappingIfNullParameterListReturnEmptyList() {
+        assertEquals(0, EnoSuggesterType.toLunaticModelList(null).size());
     }
 }

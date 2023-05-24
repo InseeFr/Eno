@@ -24,8 +24,8 @@ class EnoFieldSynonymTest {
     }
 
     @Test
-    void whenConvertingToLunaticMappingIfNullParameterListReturnNull() {
-        assertNull(EnoFieldSynonym.toLunaticModelList(null));
+    void whenConvertingToLunaticMappingIfNullParameterListReturnEmptyList() {
+        assertEquals(0, EnoFieldSynonym.toLunaticModelList(null).size());
     }
 
     @Test
