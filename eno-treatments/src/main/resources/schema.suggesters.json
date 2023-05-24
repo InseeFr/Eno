@@ -1,11 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://insee.fr/suggesters.schema.json",
-  "title": "Suggesters",
-  "description": "Suggesters",
-  "type": "array",
-  "items": {
-    "$ref": "#/$defs/suggester"
+  "title": "Specific treatments schema",
+  "description": "Specific tratments schema",
+  "type": "object",
+  "properties": {
+    "suggesters": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/suggester"
+      }
+    }
   },
   "minItems": 1,
 

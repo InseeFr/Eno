@@ -1,6 +1,5 @@
 package fr.insee.eno.treatments;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
@@ -9,6 +8,7 @@ import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.SpecVersion;
 import com.networknt.schema.ValidationMessage;
 import fr.insee.eno.treatments.dto.EnoSuggesterType;
+import fr.insee.eno.treatments.dto.SpecificTreatments;
 import fr.insee.eno.treatments.exceptions.SuggesterDeserializationException;
 import fr.insee.eno.treatments.exceptions.SuggesterValidationException;
 import lombok.extern.slf4j.Slf4j;
@@ -47,8 +47,9 @@ public class SuggesterDeserializer {
                 throw new SuggesterValidationException(messageBuilder.toString());
             }
 
-            ObjectReader reader = mapper.readerFor(new TypeReference<List<EnoSuggesterType>>(){});
-            return reader.readValue(jsonSuggesters);
+            ObjectReader reader = mapper.readerFor(SpecificTreatments.class);
+            SpecificTreatments treatments = reader.readValue(jsonSuggesters);
+            return treatments.getSuggesters();
         } catch(IOException ex) {
             throw new SuggesterDeserializationException(ex.getMessage());
         }

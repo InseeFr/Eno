@@ -4,11 +4,14 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.treatments.LunaticPostProcessings;
 import fr.insee.eno.treatments.LunaticSuggesterProcessing;
 import fr.insee.eno.treatments.exceptions.SuggesterDeserializationException;
+import fr.insee.eno.treatments.exceptions.SuggesterValidationException;
 import fr.insee.eno.ws.service.DDIToLunaticService;
 import fr.insee.eno.ws.service.ParameterService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.FilePart;
+import org.springframework.http.codec.multipart.Part;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
@@ -16,6 +19,7 @@ import java.io.SequenceInputStream;
 
 /** Class to factorize code in v3 controllers' methods. */
 @Component
+@Slf4j
 public class V3ControllerUtils {
 
     public static final String LUNATIC_JSON_FILE_NAME = "lunatic-form.json";
@@ -82,22 +86,29 @@ public class V3ControllerUtils {
      * @param specificTreatment json specific treatment file
      * @return a lunatic post processing for this treatment
      */
-    public Mono<LunaticPostProcessings> generateLunaticPostProcessings(Mono<FilePart> specificTreatment) {
+    public Mono<LunaticPostProcessings> generateLunaticPostProcessings(Mono<Part> specificTreatment) {
         LunaticPostProcessings lunaticPostProcessings = new LunaticPostProcessings();
-        if(specificTreatment == null) {
-            return Mono.just(lunaticPostProcessings);
-        }
-        return specificTreatment.flatMap(filePart -> filePart.content()
+
+        return specificTreatment
+                /*
+                   This workaround (next filter) is used to make swagger works when empty value is checked for this input file on the endpoint
+                   - there is no way to disallow empty checkbox value at this moment on swagger (though openAPI support configuring this)
+                   - when empty value, spring boot considers the input as a DefaultFormField and not a file part, causing exceptions
+                   if trying to cast to filepart
+                   :-\
+                 */
+                .filter(FilePart.class::isInstance)
+                .flatMap(specificTreatmentPart -> specificTreatmentPart.content()
                         .map(dataBuffer -> dataBuffer.asInputStream(true))
                         .reduce(SequenceInputStream::new))
                 .flatMap(specificTreatmentStream -> {
                     try {
-                        LunaticSuggesterProcessing suggesterProcessing = new LunaticSuggesterProcessing(specificTreatmentStream);
-                        lunaticPostProcessings.addPostProcessing(suggesterProcessing);
+                        lunaticPostProcessings.addPostProcessing(new LunaticSuggesterProcessing(specificTreatmentStream));
                         return Mono.just(lunaticPostProcessings);
-                    } catch(SuggesterDeserializationException ex) {
+                    } catch (SuggesterDeserializationException | SuggesterValidationException ex) {
                         return Mono.error(ex);
                     }
-                });
+                })
+                .switchIfEmpty(Mono.just(lunaticPostProcessings));
     }
 }

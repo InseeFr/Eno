@@ -4,11 +4,14 @@ import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.treatments.LunaticPostProcessings;
 import fr.insee.eno.ws.controller.utils.V3ControllerUtils;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.FilePart;
+import org.springframework.http.codec.multipart.Part;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,9 +42,17 @@ public class IntegrationHouseholdController {
             @PathVariable Mode mode,
             @RequestPart(value="in") Mono<FilePart> ddiFile,
             @RequestPart(value="params") Mono<FilePart> parametersFile,
-            @RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment) {
+            @Parameter(name = "specificTreatment",
+                    schema = @Schema(type="string", format="binary"))
+            @RequestPart(value="specificTreatment", required=false) Mono<Part> specificTreatment) {
 
-
+        /*
+           specificTreatment parameter is a part instead of a FilePart. This workaround is used to make swagger works
+           when empty value is checked for this input file on the endpoint.
+           When empty value is checked, swagger send no content-type nor filename for this multipart file. In this case,
+           Spring considers having a DefaultFormField object instead of FilePart and exceptions is throwed
+           There is no way at this moment to disable the allow empty value when filed is not required.
+         */
         Mono<LunaticPostProcessings> lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
 
         return controllerUtils.readParametersFile(parametersFile)
