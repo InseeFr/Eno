@@ -5,7 +5,6 @@ import fr.insee.eno.treatments.dto.EnoSuggesterType;
 import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -18,11 +17,10 @@ public class LunaticSuggesterProcessing implements OutProcessingInterface<Questi
 
     /**
      * Initialize eno suggesters from input
-     * @param jsonSuggestersStream input stream of json suggesters
+     * @param suggesters suggester list
      */
-    public LunaticSuggesterProcessing(InputStream jsonSuggestersStream) {
-        SuggesterDeserializer deserializer = new SuggesterDeserializer();
-        this.enoSuggesters = deserializer.deserializeSuggesters(jsonSuggestersStream);
+    public LunaticSuggesterProcessing(List<EnoSuggesterType> suggesters) {
+        this.enoSuggesters = suggesters;
     }
 
     @Override

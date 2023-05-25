@@ -22,7 +22,7 @@ class JsonSchemaValidationTest {
         ObjectMapper mapper = new ObjectMapper();
         JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
         JsonSchema jsonSchema = factory.getSchema(
-                classLoader.getResourceAsStream("schema.suggesters.json"));
+                classLoader.getResourceAsStream("schema.treatments.json"));
         JsonNode jsonNode = mapper.readTree(
                 classLoader.getResourceAsStream("suggesters.json"));
         Set<ValidationMessage> errors = jsonSchema.validate(jsonNode);

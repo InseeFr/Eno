@@ -3,6 +3,7 @@ package fr.insee.eno.treatments;
 import fr.insee.eno.treatments.dto.EnoSuggesterField;
 import fr.insee.eno.treatments.dto.EnoSuggesterQueryParserParams;
 import fr.insee.eno.treatments.dto.EnoSuggesterType;
+import fr.insee.eno.treatments.dto.SpecificTreatments;
 import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
@@ -11,17 +12,18 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SuggesterDeserializerTest {
+class SpecificTreatmentsDeserializerTest {
 
     private final ClassLoader classLoader = this.getClass().getClassLoader();
 
     @Test
     void deserializeSuggesterTest() {
-        InputStream suggestersInputStream = classLoader.getResourceAsStream("suggesters.json");
+        InputStream treatmentsInputStream = classLoader.getResourceAsStream("suggesters.json");
 
-        SuggesterDeserializer converter = new SuggesterDeserializer();
+        SpecificTreatmentsDeserializer converter = new SpecificTreatmentsDeserializer();
 
-        List<EnoSuggesterType> suggesters = converter.deserializeSuggesters(suggestersInputStream);
+        SpecificTreatments treatments = converter.deserialize(treatmentsInputStream);
+        List<EnoSuggesterType> suggesters = treatments.getSuggesters();
 
         assertNotNull(suggesters);
         assertEquals(2, suggesters.size());

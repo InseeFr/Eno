@@ -7,36 +7,34 @@ import com.networknt.schema.JsonSchema;
 import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.SpecVersion;
 import com.networknt.schema.ValidationMessage;
-import fr.insee.eno.treatments.dto.EnoSuggesterType;
 import fr.insee.eno.treatments.dto.SpecificTreatments;
-import fr.insee.eno.treatments.exceptions.SuggesterDeserializationException;
-import fr.insee.eno.treatments.exceptions.SuggesterValidationException;
+import fr.insee.eno.treatments.exceptions.SpecificTreatmentsDeserializationException;
+import fr.insee.eno.treatments.exceptions.SpecificTreatmentsValidationException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Set;
 
 @Slf4j
-public class SuggesterDeserializer {
+public class SpecificTreatmentsDeserializer {
 
     private final ClassLoader classLoader = this.getClass().getClassLoader();
 
     /**
-     * Deserialize a json stream input to an Eno suggester object
-     * @param suggestersStream stream input of suggesters
-     * @return an Eno suggester corresponding to the input parameter
+     * Deserialize a json stream input to an specific treatments object
+     * @param treatmentsStream stream input of specific treatments
+     * @return the specifics treatments corresponding to the input parameter
      */
-    public List<EnoSuggesterType> deserializeSuggesters(InputStream suggestersStream) {
+    public SpecificTreatments deserialize(InputStream treatmentsStream) {
         ObjectMapper mapper = new ObjectMapper();
         JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
         JsonSchema jsonSchema = factory.getSchema(
-                classLoader.getResourceAsStream("schema.suggesters.json"));
+                classLoader.getResourceAsStream("schema.treatments.json"));
 
         try {
-            JsonNode jsonSuggesters = mapper.readTree(suggestersStream);
-            Set<ValidationMessage> errors = jsonSchema.validate(jsonSuggesters);
+            JsonNode jsonTreatments = mapper.readTree(treatmentsStream);
+            Set<ValidationMessage> errors = jsonSchema.validate(jsonTreatments);
 
             if(!errors.isEmpty()) {
                 StringBuilder messageBuilder = new StringBuilder();
@@ -44,14 +42,13 @@ public class SuggesterDeserializer {
                     messageBuilder.append(errorMessage.getMessage());
                     messageBuilder.append("\n");
                 }
-                throw new SuggesterValidationException(messageBuilder.toString());
+                throw new SpecificTreatmentsValidationException(messageBuilder.toString());
             }
 
             ObjectReader reader = mapper.readerFor(SpecificTreatments.class);
-            SpecificTreatments treatments = reader.readValue(jsonSuggesters);
-            return treatments.getSuggesters();
+            return reader.readValue(jsonTreatments);
         } catch(IOException ex) {
-            throw new SuggesterDeserializationException(ex.getMessage());
+            throw new SpecificTreatmentsDeserializationException(ex.getMessage());
         }
     }
 }

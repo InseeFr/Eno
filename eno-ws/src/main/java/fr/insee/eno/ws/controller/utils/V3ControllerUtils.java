@@ -3,8 +3,11 @@ package fr.insee.eno.ws.controller.utils;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.treatments.LunaticPostProcessings;
 import fr.insee.eno.treatments.LunaticSuggesterProcessing;
-import fr.insee.eno.treatments.exceptions.SuggesterDeserializationException;
-import fr.insee.eno.treatments.exceptions.SuggesterValidationException;
+import fr.insee.eno.treatments.SpecificTreatmentsDeserializer;
+import fr.insee.eno.treatments.dto.EnoSuggesterType;
+import fr.insee.eno.treatments.dto.SpecificTreatments;
+import fr.insee.eno.treatments.exceptions.SpecificTreatmentsDeserializationException;
+import fr.insee.eno.treatments.exceptions.SpecificTreatmentsValidationException;
 import fr.insee.eno.ws.service.DDIToLunaticService;
 import fr.insee.eno.ws.service.ParameterService;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.io.SequenceInputStream;
+import java.util.List;
 
 /** Class to factorize code in v3 controllers' methods. */
 @Component
@@ -103,9 +107,14 @@ public class V3ControllerUtils {
                         .reduce(SequenceInputStream::new))
                 .flatMap(specificTreatmentStream -> {
                     try {
-                        lunaticPostProcessings.addPostProcessing(new LunaticSuggesterProcessing(specificTreatmentStream));
+                        SpecificTreatmentsDeserializer deserializer = new SpecificTreatmentsDeserializer();
+                        SpecificTreatments treatments = deserializer.deserialize(specificTreatmentStream);
+                        List<EnoSuggesterType> suggesters = treatments.getSuggesters();
+                        if(!suggesters.isEmpty()) {
+                            lunaticPostProcessings.addPostProcessing(new LunaticSuggesterProcessing(suggesters));
+                        }
                         return Mono.just(lunaticPostProcessings);
-                    } catch (SuggesterDeserializationException | SuggesterValidationException ex) {
+                    } catch (SpecificTreatmentsDeserializationException | SpecificTreatmentsValidationException ex) {
                         return Mono.error(ex);
                     }
                 })
