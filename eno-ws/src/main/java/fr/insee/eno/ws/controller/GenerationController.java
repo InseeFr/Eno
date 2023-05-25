@@ -137,10 +137,10 @@ public class GenerationController {
 			@RequestParam(value="includeUnusedCalculatedVariables") boolean unusedVars) {
 
 		/*
-           specificTreatment parameter is a part instead of a FilePart. This workaround is used to make swagger works
+           specificTreatment parameter is a part instead of a FilePart. This workaround is used to make swagger work
            when empty value is checked for this input file on the endpoint.
            When empty value is checked, swagger send no content-type nor filename for this multipart file. In this case,
-           Spring considers having a DefaultFormField object instead of FilePart and exceptions is throwed
+           Spring considers having a DefaultFormField object instead of FilePart and exceptions is thrown
            There is no way at this moment to disable the allow empty value when filed is not required.
          */
 		Mono<LunaticPostProcessings> lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
