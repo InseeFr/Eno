@@ -1,14 +1,12 @@
 package fr.insee.eno.treatments;
 
-import fr.insee.eno.treatments.dto.EnoSuggesterField;
-import fr.insee.eno.treatments.dto.EnoSuggesterQueryParserParams;
-import fr.insee.eno.treatments.dto.EnoSuggesterType;
-import fr.insee.eno.treatments.dto.SpecificTreatments;
+import fr.insee.eno.treatments.dto.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,12 +16,12 @@ class SpecificTreatmentsDeserializerTest {
 
     @Test
     void deserializeSuggesterTest() {
-        InputStream treatmentsInputStream = classLoader.getResourceAsStream("suggesters.json");
+        InputStream treatmentsInputStream = classLoader.getResourceAsStream("specific-treatments.json");
 
         SpecificTreatmentsDeserializer converter = new SpecificTreatmentsDeserializer();
 
         SpecificTreatments treatments = converter.deserialize(treatmentsInputStream);
-        List<EnoSuggesterType> suggesters = treatments.getSuggesters();
+        List<EnoSuggesterType> suggesters = treatments.suggesters();
 
         assertNotNull(suggesters);
         assertEquals(2, suggesters.size());
@@ -57,5 +55,27 @@ class SpecificTreatmentsDeserializerTest {
         assertEquals("French", params.getLanguage());
         assertEquals(BigInteger.ONE.longValue(), params.getMin().longValue());
 
+    }
+
+    @Test
+    void deserializeRegroupementsTest() {
+        InputStream treatmentsInputStream = classLoader.getResourceAsStream("specific-treatments.json");
+
+        SpecificTreatmentsDeserializer converter = new SpecificTreatmentsDeserializer();
+
+        SpecificTreatments treatments = converter.deserialize(treatmentsInputStream);
+        Regroupements regroupements = new Regroupements(treatments.regroupements());
+
+        assertNotNull(regroupements);
+        assertEquals(2, regroupements.count());
+        Optional<Regroupement> regroupement = regroupements.getRegroupementForVariable("var1");
+        assertTrue(regroupement.isPresent());
+        assertTrue(regroupement.get().hasVariable("var1"));
+        assertTrue(regroupement.get().hasVariable("var2"));
+
+        regroupement = regroupements.getRegroupementForVariable("var3");
+        assertTrue(regroupement.isPresent());
+        assertTrue(regroupement.get().hasVariable("var3"));
+        assertTrue(regroupement.get().hasVariable("var4"));
     }
 }
