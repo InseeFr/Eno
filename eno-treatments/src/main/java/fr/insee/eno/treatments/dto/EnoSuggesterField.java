@@ -13,8 +13,6 @@ import java.util.List;
 @Data
 public class EnoSuggesterField {
 
-    public static final String SOFT_RULE_VALUE = "soft";
-
     private String name;
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     private List<String> rules;
@@ -25,7 +23,6 @@ public class EnoSuggesterField {
 
     @JsonCreator
     public EnoSuggesterField(@JsonProperty(value = "name", required = true) String name,
-                             @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
                              @JsonProperty("rules") List<String> rules,
                              @JsonProperty("language") String language,
                              @JsonProperty("min") BigInteger min,
@@ -54,21 +51,13 @@ public class EnoSuggesterField {
         lunaticField.setLanguage(suggesterField.getLanguage());
         lunaticField.setMin(suggesterField.getMin());
         lunaticField.setStemmer(suggesterField.getStemmer());
+
+        if(suggesterField.getRules() != null) {
+            lunaticField.getRules().addAll(suggesterField.getRules());
+        }
+
         if(suggesterField.getSynonyms() != null) {
             lunaticField.getSynonyms().addAll(EnoFieldSynonym.toLunaticModelList(suggesterField.getSynonyms()));
-        }
-
-        List<String> rules = suggesterField.getRules();
-
-        if (rules == null || rules.isEmpty()) {
-            return lunaticField;
-        }
-
-        String rule = rules.get(0);
-        if (rules.size() == 1 && EnoSuggesterField.SOFT_RULE_VALUE.equals(rule)) {
-            lunaticField.setRules(rule);
-        } else {
-            lunaticField.getRulesA().addAll(rules);
         }
 
         return lunaticField;
