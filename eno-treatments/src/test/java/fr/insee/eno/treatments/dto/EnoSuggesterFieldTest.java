@@ -24,31 +24,20 @@ class EnoSuggesterFieldTest {
         EnoSuggesterField enoField = new EnoSuggesterField("name", rules, "French", BigInteger.ONE, true, synonyms);
         SuggesterField field = EnoSuggesterField.toLunaticModel(enoField);
         assertEquals(field.getName(), enoField.getName());
-        assertTrue(field.getRulesA().contains("rule1"));
-        assertTrue(field.getRulesA().contains("rule2"));
-        assertNull(field.getRules());
+        assertTrue(field.getRules().contains("rule1"));
+        assertTrue(field.getRules().contains("rule2"));
         assertEquals(field.getLanguage(), enoField.getLanguage());
         assertEquals(field.getMin(), enoField.getMin());
         assertEquals(field.isStemmer(), enoField.getStemmer());
     }
 
-    @Test
-    void whenRuleUniqueAndIsSoftCheckMappingRulesProperty() {
-        List<String> rules = List.of("soft");
-        EnoSuggesterField enoField = new EnoSuggesterField("name", rules, "French", BigInteger.ONE, true, synonyms);
-        SuggesterField field = EnoSuggesterField.toLunaticModel(enoField);
-        assertEquals("soft", field.getRules());
-        assertTrue(field.getRulesA().isEmpty());
-    }
-
     @ParameterizedTest
     @MethodSource("generateRules")
-    void whenOtherRulesCheckMappingRulesAProperty(List<String> rules) {
+    void whenOtherRulesCheckMappingRulesProperty(List<String> rules) {
         EnoSuggesterField enoField = new EnoSuggesterField("name", rules, "French", BigInteger.ONE, true, synonyms);
         SuggesterField field = EnoSuggesterField.toLunaticModel(enoField);
-        assertNull(field.getRules());
         for(String rule : rules) {
-            assertTrue(field.getRulesA().contains(rule));
+            assertTrue(field.getRules().contains(rule));
         }
     }
 
