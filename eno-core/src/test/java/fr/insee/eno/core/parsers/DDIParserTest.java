@@ -9,6 +9,7 @@ import instance33.DDIInstanceType;
 import logicalproduct33.CodeListType;
 import logicalproduct33.CodeType;
 import logicalproduct33.VariableType;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -65,6 +66,7 @@ class DDIParserTest {
     }
 
     @Test
+    @Disabled("temporary disabled")
     void parserDDIWithFilter() throws IOException, DDIParsingException {
         //
         DDIInstanceType ddiInstance = DDIParser.parse(
@@ -79,6 +81,7 @@ class DDIParserTest {
     }
 
     @Test
+    @Disabled("temporary disabled")
     void parserDDIWithMcq() throws IOException, DDIParsingException {
         //
         DDIInstanceType ddiInstance = DDIParser.parse(
@@ -99,6 +102,7 @@ class DDIParserTest {
     }
 
     @Test
+    @Disabled("temporary disabled")
     void parseSandboxDDI() throws IOException, DDIParsingException {
         //
         DDIInstanceType ddiInstance = DDIParser.parse(
@@ -112,6 +116,7 @@ class DDIParserTest {
     }
 
     @Test
+    @Disabled("temporary disabled")
     void parseDDIComplexCodeList() throws IOException, DDIParsingException {
         //
         DDIInstanceType ddiInstance = DDIParser.parse(

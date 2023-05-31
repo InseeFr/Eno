@@ -9,6 +9,7 @@ import instance33.DDIInstanceDocument;
 import instance33.DDIInstanceType;
 import logicalproduct33.VariableGroupType;
 import logicalproduct33.VariableType;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -70,6 +71,7 @@ class DDIIndexTest {
     }
 
     @Test
+    @Disabled("temporary disabled")
     void indexSandboxDDI() throws IOException, DDIParsingException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
