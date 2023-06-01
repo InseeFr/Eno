@@ -7,7 +7,7 @@ on:
       - v3.*
 
 env:
-  LUNATIC_BRANCH: dev-pairwise
+  LUNATIC_BRANCH: dev-eno-v3
   POGUES_BRANCH: main
 
 jobs:
