@@ -14,7 +14,7 @@ public class Regroupement {
 
     public Regroupement(@NonNull List<String> variables) {
         if(variables.isEmpty() || variables.size() < 2) {
-            throw new IllegalArgumentException("variables cannot be empty or have less than 2 variables");
+            throw new IllegalArgumentException("Il faut définir au moins 2 variables pour un regroupement");
         }
         this.variables = variables;
     }
