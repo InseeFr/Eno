@@ -31,16 +31,25 @@ public class LunaticSuggesterProcessing implements OutProcessingInterface<Questi
 
         // set suggesters to lunatic model
         lunaticQuestionnaire.getSuggesters().addAll(suggesters);
+        transformComponentsToSuggesters(lunaticQuestionnaire.getComponents());
+    }
 
-        // change corresponding components type to suggester type
-        enoSuggesters.forEach(enoSuggester ->
-            lunaticQuestionnaire.getComponents().stream()
+    private void transformComponentsToSuggesters(List<ComponentType> components) {
+        enoSuggesters.forEach(enoSuggester -> {
+            components.stream()
                     .filter(component -> shouldApplySuggester(component, enoSuggester))
                     .forEach(component -> {
                         component.setComponentType(ComponentTypeEnum.SUGGESTER);
                         component.setStoreName(enoSuggester.getName());
-                    }));
+                    });
+
+            components.stream()
+                    .filter(component -> component.getComponentType().equals(ComponentTypeEnum.LOOP))
+                    .map(Loop.class::cast)
+                    .forEach(loop -> transformComponentsToSuggesters(loop.getComponents()));
+        });
     }
+
 
     /**
      * check if suggester can be applied to specific component.
