@@ -5,15 +5,15 @@ import fr.insee.eno.treatments.dto.Regroupement;
 import fr.insee.eno.treatments.dto.Regroupements;
 import fr.insee.lunatic.model.flat.*;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class LunaticRegroupementProcessing implements OutProcessingInterface<Questionnaire> {
     private final Regroupements regroupements;
+    private Map<String, String> sequencePages;
 
     public LunaticRegroupementProcessing(List<Regroupement> regroupements) {
         this.regroupements = new Regroupements(regroupements);
+        this.sequencePages = new HashMap<>();
     }
 
     @Override
@@ -33,58 +33,88 @@ public class LunaticRegroupementProcessing implements OutProcessingInterface<Que
             String numPage = numPagePrefix + pageCount;
 
             if(component.getComponentType().equals(ComponentTypeEnum.SUBSEQUENCE)) {
-                applyNumPageOnSubsequence((Subsequence) component, numPagePrefix, pageCount, questionnaire);
+                Subsequence subsequence = (Subsequence) component;
+                applyNumPageOnSubsequence(subsequence, numPagePrefix, pageCount);
+                addSequencePage(subsequence);
                 continue;
             }
 
             if(component.getComponentType().equals(ComponentTypeEnum.SEQUENCE)) {
-                applyNumPageOnSequence((Sequence) component, numPage, questionnaire);
+                Sequence sequence = (Sequence) component;
+                sequence.setPage(numPage);
+                addSequencePage(sequence);
                 continue;
             }
 
             component.setPage(numPage);
+
             if(component.getComponentType().equals(ComponentTypeEnum.LOOP)) {
-                regroupQuestions(((Loop)component).getComponents(), component.getPage() + ".", 0, questionnaire);
+                Loop loop = (Loop) component;
+                List<ComponentType> loopComponents = loop.getComponents();
+                regroupQuestions(loopComponents, component.getPage() + ".", 0, questionnaire);
+                if(loop.getMaxPage() != null) {
+                    String pageLastComponent = loopComponents.get(loopComponents.size()-1).getPage();
+                    String maxPage = pageLastComponent.substring(pageLastComponent.lastIndexOf(".")+1);
+                    loop.setMaxPage(maxPage);
+                }
             }
         }
+        processSequencePagesOnHierarchies(components);
     }
 
-    private void applyNumPageOnSequence(Sequence sequence, String numPage, Questionnaire questionnaire) {
-        sequence.setPage(numPage);
-        questionnaire.getComponents().stream()
+    private void processSequencePagesOnHierarchies(List<ComponentType> components) {
+        components.stream()
                 .map(component -> component.getHierarchy().getSequence())
                 .filter(Objects::nonNull)
-                .filter(hierarchySequence -> hierarchySequence.getId().equals(sequence.getId()))
-                .forEach(hierarchySequence -> hierarchySequence.setPage(sequence.getPage()));
-    }
+                .forEach(hierarchySequence -> {
+                    String page = sequencePages.get(hierarchySequence.getId());
+                    hierarchySequence.setPage(page);
+                });
 
-    private void applyNumPageOnSubsequence(Subsequence subsequence, String numPagePrefix, int pageCount, Questionnaire questionnaire) {
-
-        if(subsequence.getPage() != null) {
-            String numPage = numPagePrefix + pageCount;
-            subsequence.setPage(numPage);
-            subsequence.setGoToPage(numPage);
-        } else {
-            // if no page, the subsequence is regrouped with the next component
-            // we increment the pageCount to link the subsequence to next component page
-            // (we assume the next component will have his page incremented)
-            int gotToPage = pageCount + 1;
-            subsequence.setGoToPage(String.valueOf(gotToPage));
-        }
-
-
-        questionnaire.getComponents().stream()
+        components.stream()
                 .map(component -> component.getHierarchy().getSubSequence())
                 .filter(Objects::nonNull)
-                .filter(hierarchySubsequence -> hierarchySubsequence.getId().equals(subsequence.getId()))
-                .forEach(hierarchySubsequence -> hierarchySubsequence.setPage(subsequence.getGoToPage()));
+                .forEach(hierarchySubsequence -> {
+                    String page = sequencePages.get(hierarchySubsequence.getId());
+                    hierarchySubsequence.setPage(page);
+                });
+    }
+
+    private void addSequencePage(Sequence sequence) {
+        sequencePages.put(sequence.getId(), sequence.getPage());
+    }
+
+    private void addSequencePage(Subsequence sequence) {
+        String page = sequence.getPage();
+        if(page == null) {
+            page = sequence.getGoToPage();
+        }
+        sequencePages.put(sequence.getId(), page);
+    }
+
+    private void applyNumPageOnSubsequence(Subsequence subsequence, String numPagePrefix, int pageCount) {
+
+        String numPage = numPagePrefix + pageCount;
+        if(subsequence.getDeclarations() == null || subsequence.getDeclarations().isEmpty()) {
+            int pageSequence = pageCount + 1;
+            numPage = numPagePrefix + pageSequence;
+        }
+
+        if(subsequence.getPage() != null) {
+            subsequence.setPage(numPage);
+        }
+
+        if(subsequence.getGoToPage() != null) {
+            subsequence.setGoToPage(numPage);
+        }
     }
 
     private boolean canIncrementPageCount(ComponentType component) {
 
-        // if component is a subsequence and has no page attribute set, it will regroup with next component, so no
+        // if component is a subsequence and has no declarations set, it will regroup with next component, so no
         // increment in this specific case
-        if(component.getComponentType().equals(ComponentTypeEnum.SUBSEQUENCE) && component.getPage() == null) {
+        if(component.getComponentType().equals(ComponentTypeEnum.SUBSEQUENCE) &&
+                (component.getDeclarations() == null || component.getDeclarations().isEmpty())) {
            return false;
         }
 
