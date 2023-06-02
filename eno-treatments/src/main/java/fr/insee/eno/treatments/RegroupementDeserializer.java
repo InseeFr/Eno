@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.io.Serial;
 import java.util.List;
 
+/**
+ * Deserialize the regroupement object from the specific treatment json file
+ */
 public class RegroupementDeserializer extends StdDeserializer<Regroupement> {
 
     @Serial

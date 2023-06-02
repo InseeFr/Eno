@@ -1,6 +1,5 @@
 package fr.insee.eno.treatments;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.insee.eno.treatments.dto.Regroupement;
 import fr.insee.lunatic.conversion.JSONSerializer;
 import fr.insee.lunatic.exception.SerializationException;
@@ -47,7 +46,7 @@ class LunaticRegroupementProcessingTest {
         InputNumber n5 = buildNumber("li1w3tmf", "5", "NB", s4, null);
         components.add(n5);
 
-        Loop l6 = buildEmptyLoop("li1wjxs2", "6", null, s4);
+        Loop l6 = buildEmptyLoop("li1wjxs2", "6", null, s4, false);
 
         // build loop 6 components
         Subsequence ss6 = buildSubsequence("li1wbv47", "6", "6", s4);
@@ -59,7 +58,7 @@ class LunaticRegroupementProcessingTest {
         l6.getComponents().addAll(l6Components);
         components.add(l6);
 
-        Loop l7 = buildEmptyLoop("li1wsotd", "7", "2", s4);
+        Loop l7 = buildEmptyLoop("li1wsotd", "7", "2", s4, true);
 
         // build loop 7 components
         Subsequence ss71 = buildSubsequence("li1wfnbk", null, "7.1", s4);
@@ -157,13 +156,14 @@ class LunaticRegroupementProcessingTest {
         return number;
     }
 
-    private Loop buildEmptyLoop(String id, String page, String maxPage, Sequence sequence) {
+    private Loop buildEmptyLoop(String id, String page, String maxPage, Sequence sequence, boolean isPaginated) {
         Loop loop = new Loop();
         loop.setComponentType(ComponentTypeEnum.LOOP);
         loop.setId(id);
         loop.setPage(page);
         loop.setMaxPage(maxPage);
         loop.setHierarchy(buildHierarchy(sequence));
+        loop.setPaginatedLoop(isPaginated);
         return loop;
     }
 
