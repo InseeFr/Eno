@@ -34,6 +34,10 @@ public class LunaticSuggesterProcessing implements OutProcessingInterface<Questi
         transformComponentsToSuggesters(lunaticQuestionnaire.getComponents());
     }
 
+    /**
+     * recursive method which permits to transforms components in suggesters if needed
+     * @param components component list
+     */
     private void transformComponentsToSuggesters(List<ComponentType> components) {
         enoSuggesters.forEach(enoSuggester -> {
             components.stream()
