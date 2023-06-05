@@ -3,7 +3,7 @@
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 id="i6vwi0"
                 modele="SIMPSONS"
-                enoCoreVersion="2.4.0"
+                enoCoreVersion="2.4.1-pairwise"
                 missing="false">
    <label>
       <value>Questionnaire SIMPSONS</value>
@@ -2347,8 +2347,8 @@
             </label>
          </sequence>
       </hierarchy>
-      <components xsi:type="Table"
-                   componentType="Table"
+      <components xsi:type="RosterForLoop"
+                   componentType="RosterForLoop"
                    id="j6qg8rc6"
                    positioning="HORIZONTAL"
                    mandatory="false">
@@ -2389,6 +2389,40 @@
          <bindingDependencies>FAVOURITE_CHARACTERS92</bindingDependencies>
          <bindingDependencies>FAVOURITE_CHARACTERS101</bindingDependencies>
          <bindingDependencies>FAVOURITE_CHARACTERS102</bindingDependencies>
+         <lines>
+            <min>
+               <value>1</value>
+               <type>VTL</type>
+            </min>
+            <max>
+               <value>10</value>
+               <type>VTL</type>
+            </max>
+         </lines>
+         <header>
+            <label>
+               <value>"Name"</value>
+               <type>VTL|MD</type>
+            </label>
+         </header>
+         <header>
+            <label>
+               <value>"Age"</value>
+               <type>VTL|MD</type>
+            </label>
+         </header>
+         <components id="j6qg8rc6-QOP-jbgdl5jb" componentType="Textarea" maxLength="255">
+            <bindingDependencies>FAVOURITE_CHARACTERS11</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS11"/>
+         </components>
+         <components id="j6qg8rc6-QOP-jbgdfndq"
+                      componentType="InputNumber"
+                      min="0"
+                      max="120"
+                      decimals="0">
+            <bindingDependencies>FAVOURITE_CHARACTERS12</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS12"/>
+         </components>
          <controls id="j6qg8rc6-format-borne-inf-sup"
                     criticality="ERROR"
                     typeOfControl="FORMAT">
@@ -2413,6 +2447,18 @@
                <type>VTL|MD</type>
             </errorMessage>
          </controls>
+         <components id="j6qg8rc6-QOP-jbgd8lwo" componentType="Textarea" maxLength="255">
+            <bindingDependencies>FAVOURITE_CHARACTERS21</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS21"/>
+         </components>
+         <components id="j6qg8rc6-QOP-jbgd7osi"
+                      componentType="InputNumber"
+                      min="0"
+                      max="120"
+                      decimals="0">
+            <bindingDependencies>FAVOURITE_CHARACTERS22</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS22"/>
+         </components>
          <controls id="j6qg8rc6-format-borne-inf-sup"
                     criticality="ERROR"
                     typeOfControl="FORMAT">
@@ -2437,6 +2483,18 @@
                <type>VTL|MD</type>
             </errorMessage>
          </controls>
+         <components id="j6qg8rc6-QOP-jbgdbfag" componentType="Textarea" maxLength="255">
+            <bindingDependencies>FAVOURITE_CHARACTERS31</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS31"/>
+         </components>
+         <components id="j6qg8rc6-QOP-jbgd7bnw"
+                      componentType="InputNumber"
+                      min="0"
+                      max="120"
+                      decimals="0">
+            <bindingDependencies>FAVOURITE_CHARACTERS32</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS32"/>
+         </components>
          <controls id="j6qg8rc6-format-borne-inf-sup"
                     criticality="ERROR"
                     typeOfControl="FORMAT">
@@ -2461,6 +2519,18 @@
                <type>VTL|MD</type>
             </errorMessage>
          </controls>
+         <components id="j6qg8rc6-QOP-jbgdlgja" componentType="Textarea" maxLength="255">
+            <bindingDependencies>FAVOURITE_CHARACTERS41</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS41"/>
+         </components>
+         <components id="j6qg8rc6-QOP-jbgd9k71"
+                      componentType="InputNumber"
+                      min="0"
+                      max="120"
+                      decimals="0">
+            <bindingDependencies>FAVOURITE_CHARACTERS42</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS42"/>
+         </components>
          <controls id="j6qg8rc6-format-borne-inf-sup"
                     criticality="ERROR"
                     typeOfControl="FORMAT">
@@ -2485,6 +2555,18 @@
                <type>VTL|MD</type>
             </errorMessage>
          </controls>
+         <components id="j6qg8rc6-QOP-jbgd745y" componentType="Textarea" maxLength="255">
+            <bindingDependencies>FAVOURITE_CHARACTERS51</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS51"/>
+         </components>
+         <components id="j6qg8rc6-QOP-jbgdimks"
+                      componentType="InputNumber"
+                      min="0"
+                      max="120"
+                      decimals="0">
+            <bindingDependencies>FAVOURITE_CHARACTERS52</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS52"/>
+         </components>
          <controls id="j6qg8rc6-format-borne-inf-sup"
                     criticality="ERROR"
                     typeOfControl="FORMAT">
@@ -2509,6 +2591,18 @@
                <type>VTL|MD</type>
             </errorMessage>
          </controls>
+         <components id="j6qg8rc6-QOP-jbgdjkts" componentType="Textarea" maxLength="255">
+            <bindingDependencies>FAVOURITE_CHARACTERS61</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS61"/>
+         </components>
+         <components id="j6qg8rc6-QOP-jbgdjquz"
+                      componentType="InputNumber"
+                      min="0"
+                      max="120"
+                      decimals="0">
+            <bindingDependencies>FAVOURITE_CHARACTERS62</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS62"/>
+         </components>
          <controls id="j6qg8rc6-format-borne-inf-sup"
                     criticality="ERROR"
                     typeOfControl="FORMAT">
@@ -2533,6 +2627,18 @@
                <type>VTL|MD</type>
             </errorMessage>
          </controls>
+         <components id="j6qg8rc6-QOP-jbgdcax7" componentType="Textarea" maxLength="255">
+            <bindingDependencies>FAVOURITE_CHARACTERS71</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS71"/>
+         </components>
+         <components id="j6qg8rc6-QOP-jbgdd2w3"
+                      componentType="InputNumber"
+                      min="0"
+                      max="120"
+                      decimals="0">
+            <bindingDependencies>FAVOURITE_CHARACTERS72</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS72"/>
+         </components>
          <controls id="j6qg8rc6-format-borne-inf-sup"
                     criticality="ERROR"
                     typeOfControl="FORMAT">
@@ -2557,6 +2663,18 @@
                <type>VTL|MD</type>
             </errorMessage>
          </controls>
+         <components id="j6qg8rc6-QOP-jbgdjye1" componentType="Textarea" maxLength="255">
+            <bindingDependencies>FAVOURITE_CHARACTERS81</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS81"/>
+         </components>
+         <components id="j6qg8rc6-QOP-jbgdkosc"
+                      componentType="InputNumber"
+                      min="0"
+                      max="120"
+                      decimals="0">
+            <bindingDependencies>FAVOURITE_CHARACTERS82</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS82"/>
+         </components>
          <controls id="j6qg8rc6-format-borne-inf-sup"
                     criticality="ERROR"
                     typeOfControl="FORMAT">
@@ -2581,6 +2699,18 @@
                <type>VTL|MD</type>
             </errorMessage>
          </controls>
+         <components id="j6qg8rc6-QOP-jbgd5jet" componentType="Textarea" maxLength="255">
+            <bindingDependencies>FAVOURITE_CHARACTERS91</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS91"/>
+         </components>
+         <components id="j6qg8rc6-QOP-jbgdk0x4"
+                      componentType="InputNumber"
+                      min="0"
+                      max="120"
+                      decimals="0">
+            <bindingDependencies>FAVOURITE_CHARACTERS92</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS92"/>
+         </components>
          <controls id="j6qg8rc6-format-borne-inf-sup"
                     criticality="ERROR"
                     typeOfControl="FORMAT">
@@ -2605,6 +2735,18 @@
                <type>VTL|MD</type>
             </errorMessage>
          </controls>
+         <components id="j6qg8rc6-QOP-jbgdjw90" componentType="Textarea" maxLength="255">
+            <bindingDependencies>FAVOURITE_CHARACTERS101</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS101"/>
+         </components>
+         <components id="j6qg8rc6-QOP-jbgd2wgf"
+                      componentType="InputNumber"
+                      min="0"
+                      max="120"
+                      decimals="0">
+            <bindingDependencies>FAVOURITE_CHARACTERS102</bindingDependencies>
+            <response name="FAVOURITE_CHARACTERS102"/>
+         </components>
          <controls id="j6qg8rc6-format-borne-inf-sup"
                     criticality="ERROR"
                     typeOfControl="FORMAT">
@@ -2629,408 +2771,6 @@
                <type>VTL|MD</type>
             </errorMessage>
          </controls>
-         <lines>
-            <min>
-               <value>1</value>
-               <type>VTL</type>
-            </min>
-            <max>
-               <value>10</value>
-               <type>VTL</type>
-            </max>
-         </lines>
-         <header>
-            <label>
-               <value>"Name"</value>
-               <type>VTL|MD</type>
-            </label>
-         </header>
-         <header>
-            <label>
-               <value>"Age"</value>
-               <type>VTL|MD</type>
-            </label>
-         </header>
-         <body>
-            <bodyLine id="j6qg8rc6-QOP-jbgdl5jb" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS11"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS11</bindingDependencies>
-            </bodyLine>
-            <bodyLine id="j6qg8rc6-QOP-jbgdfndq"
-                       componentType="InputNumber"
-                       min="0"
-                       max="120"
-                       decimals="0">
-               <response name="FAVOURITE_CHARACTERS12"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS12</bindingDependencies>
-            </bodyLine>
-            <controls id="j6qg8rc6-format-borne-inf-sup"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS12)) and (0&gt;FAVOURITE_CHARACTERS12 or 120&lt;FAVOURITE_CHARACTERS12))</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>" La valeur doit être comprise entre 0 et 120."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-            <controls id="j6qg8rc6-format-decimal"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS12))  and round(FAVOURITE_CHARACTERS12,0)&lt;&gt;FAVOURITE_CHARACTERS12)</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-         </body>
-         <body>
-            <bodyLine id="j6qg8rc6-QOP-jbgd8lwo" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS21"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS21</bindingDependencies>
-            </bodyLine>
-            <bodyLine id="j6qg8rc6-QOP-jbgd7osi"
-                       componentType="InputNumber"
-                       min="0"
-                       max="120"
-                       decimals="0">
-               <response name="FAVOURITE_CHARACTERS22"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS22</bindingDependencies>
-            </bodyLine>
-            <controls id="j6qg8rc6-format-borne-inf-sup"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS22)) and (0&gt;FAVOURITE_CHARACTERS22 or 120&lt;FAVOURITE_CHARACTERS22))</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>" La valeur doit être comprise entre 0 et 120."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-            <controls id="j6qg8rc6-format-decimal"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS22))  and round(FAVOURITE_CHARACTERS22,0)&lt;&gt;FAVOURITE_CHARACTERS22)</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-         </body>
-         <body>
-            <bodyLine id="j6qg8rc6-QOP-jbgdbfag" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS31"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS31</bindingDependencies>
-            </bodyLine>
-            <bodyLine id="j6qg8rc6-QOP-jbgd7bnw"
-                       componentType="InputNumber"
-                       min="0"
-                       max="120"
-                       decimals="0">
-               <response name="FAVOURITE_CHARACTERS32"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS32</bindingDependencies>
-            </bodyLine>
-            <controls id="j6qg8rc6-format-borne-inf-sup"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS32)) and (0&gt;FAVOURITE_CHARACTERS32 or 120&lt;FAVOURITE_CHARACTERS32))</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>" La valeur doit être comprise entre 0 et 120."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-            <controls id="j6qg8rc6-format-decimal"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS32))  and round(FAVOURITE_CHARACTERS32,0)&lt;&gt;FAVOURITE_CHARACTERS32)</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-         </body>
-         <body>
-            <bodyLine id="j6qg8rc6-QOP-jbgdlgja" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS41"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS41</bindingDependencies>
-            </bodyLine>
-            <bodyLine id="j6qg8rc6-QOP-jbgd9k71"
-                       componentType="InputNumber"
-                       min="0"
-                       max="120"
-                       decimals="0">
-               <response name="FAVOURITE_CHARACTERS42"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS42</bindingDependencies>
-            </bodyLine>
-            <controls id="j6qg8rc6-format-borne-inf-sup"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS42)) and (0&gt;FAVOURITE_CHARACTERS42 or 120&lt;FAVOURITE_CHARACTERS42))</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>" La valeur doit être comprise entre 0 et 120."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-            <controls id="j6qg8rc6-format-decimal"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS42))  and round(FAVOURITE_CHARACTERS42,0)&lt;&gt;FAVOURITE_CHARACTERS42)</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-         </body>
-         <body>
-            <bodyLine id="j6qg8rc6-QOP-jbgd745y" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS51"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS51</bindingDependencies>
-            </bodyLine>
-            <bodyLine id="j6qg8rc6-QOP-jbgdimks"
-                       componentType="InputNumber"
-                       min="0"
-                       max="120"
-                       decimals="0">
-               <response name="FAVOURITE_CHARACTERS52"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS52</bindingDependencies>
-            </bodyLine>
-            <controls id="j6qg8rc6-format-borne-inf-sup"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS52)) and (0&gt;FAVOURITE_CHARACTERS52 or 120&lt;FAVOURITE_CHARACTERS52))</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>" La valeur doit être comprise entre 0 et 120."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-            <controls id="j6qg8rc6-format-decimal"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS52))  and round(FAVOURITE_CHARACTERS52,0)&lt;&gt;FAVOURITE_CHARACTERS52)</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-         </body>
-         <body>
-            <bodyLine id="j6qg8rc6-QOP-jbgdjkts" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS61"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS61</bindingDependencies>
-            </bodyLine>
-            <bodyLine id="j6qg8rc6-QOP-jbgdjquz"
-                       componentType="InputNumber"
-                       min="0"
-                       max="120"
-                       decimals="0">
-               <response name="FAVOURITE_CHARACTERS62"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS62</bindingDependencies>
-            </bodyLine>
-            <controls id="j6qg8rc6-format-borne-inf-sup"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS62)) and (0&gt;FAVOURITE_CHARACTERS62 or 120&lt;FAVOURITE_CHARACTERS62))</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>" La valeur doit être comprise entre 0 et 120."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-            <controls id="j6qg8rc6-format-decimal"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS62))  and round(FAVOURITE_CHARACTERS62,0)&lt;&gt;FAVOURITE_CHARACTERS62)</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-         </body>
-         <body>
-            <bodyLine id="j6qg8rc6-QOP-jbgdcax7" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS71"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS71</bindingDependencies>
-            </bodyLine>
-            <bodyLine id="j6qg8rc6-QOP-jbgdd2w3"
-                       componentType="InputNumber"
-                       min="0"
-                       max="120"
-                       decimals="0">
-               <response name="FAVOURITE_CHARACTERS72"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS72</bindingDependencies>
-            </bodyLine>
-            <controls id="j6qg8rc6-format-borne-inf-sup"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS72)) and (0&gt;FAVOURITE_CHARACTERS72 or 120&lt;FAVOURITE_CHARACTERS72))</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>" La valeur doit être comprise entre 0 et 120."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-            <controls id="j6qg8rc6-format-decimal"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS72))  and round(FAVOURITE_CHARACTERS72,0)&lt;&gt;FAVOURITE_CHARACTERS72)</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-         </body>
-         <body>
-            <bodyLine id="j6qg8rc6-QOP-jbgdjye1" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS81"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS81</bindingDependencies>
-            </bodyLine>
-            <bodyLine id="j6qg8rc6-QOP-jbgdkosc"
-                       componentType="InputNumber"
-                       min="0"
-                       max="120"
-                       decimals="0">
-               <response name="FAVOURITE_CHARACTERS82"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS82</bindingDependencies>
-            </bodyLine>
-            <controls id="j6qg8rc6-format-borne-inf-sup"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS82)) and (0&gt;FAVOURITE_CHARACTERS82 or 120&lt;FAVOURITE_CHARACTERS82))</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>" La valeur doit être comprise entre 0 et 120."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-            <controls id="j6qg8rc6-format-decimal"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS82))  and round(FAVOURITE_CHARACTERS82,0)&lt;&gt;FAVOURITE_CHARACTERS82)</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-         </body>
-         <body>
-            <bodyLine id="j6qg8rc6-QOP-jbgd5jet" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS91"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS91</bindingDependencies>
-            </bodyLine>
-            <bodyLine id="j6qg8rc6-QOP-jbgdk0x4"
-                       componentType="InputNumber"
-                       min="0"
-                       max="120"
-                       decimals="0">
-               <response name="FAVOURITE_CHARACTERS92"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS92</bindingDependencies>
-            </bodyLine>
-            <controls id="j6qg8rc6-format-borne-inf-sup"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS92)) and (0&gt;FAVOURITE_CHARACTERS92 or 120&lt;FAVOURITE_CHARACTERS92))</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>" La valeur doit être comprise entre 0 et 120."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-            <controls id="j6qg8rc6-format-decimal"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS92))  and round(FAVOURITE_CHARACTERS92,0)&lt;&gt;FAVOURITE_CHARACTERS92)</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-         </body>
-         <body>
-            <bodyLine id="j6qg8rc6-QOP-jbgdjw90" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS101"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS101</bindingDependencies>
-            </bodyLine>
-            <bodyLine id="j6qg8rc6-QOP-jbgd2wgf"
-                       componentType="InputNumber"
-                       min="0"
-                       max="120"
-                       decimals="0">
-               <response name="FAVOURITE_CHARACTERS102"/>
-               <bindingDependencies>FAVOURITE_CHARACTERS102</bindingDependencies>
-            </bodyLine>
-            <controls id="j6qg8rc6-format-borne-inf-sup"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS102)) and (0&gt;FAVOURITE_CHARACTERS102 or 120&lt;FAVOURITE_CHARACTERS102))</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>" La valeur doit être comprise entre 0 et 120."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-            <controls id="j6qg8rc6-format-decimal"
-                       criticality="ERROR"
-                       typeOfControl="FORMAT">
-               <control>
-                  <value>not(not(isnull(FAVOURITE_CHARACTERS102))  and round(FAVOURITE_CHARACTERS102,0)&lt;&gt;FAVOURITE_CHARACTERS102)</value>
-                  <type>VTL</type>
-               </control>
-               <errorMessage>
-                  <value>"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule."</value>
-                  <type>VTL|MD</type>
-               </errorMessage>
-            </controls>
-         </body>
       </components>
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="j6z12s2d">
@@ -3782,204 +3522,404 @@
          <INPUTED xsi:nil="true"/>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS11</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS12</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS21</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS22</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS31</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS32</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS41</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS42</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS51</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS52</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS61</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS62</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS71</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS72</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS81</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS82</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS91</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS92</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS101</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
-   <variables variableType="COLLECTED" xsi:type="VariableType">
+   <variables variableType="COLLECTED" xsi:type="VariableTypeArray">
       <name>FAVOURITE_CHARACTERS102</name>
       <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
+         <PREVIOUS xsi:type="PREVIOUSArray">
+            <PREVIOUS xsi:nil="true"/>
+         </PREVIOUS>
+         <COLLECTED xsi:type="COLLECTEDArray">
+            <COLLECTED xsi:nil="true"/>
+         </COLLECTED>
+         <FORCED xsi:type="FORCEDArray">
+            <FORCED xsi:nil="true"/>
+         </FORCED>
+         <EDITED xsi:type="EDITEDArray">
+            <EDITED xsi:nil="true"/>
+         </EDITED>
+         <INPUTED xsi:type="INPUTEDArray">
+            <INPUTED xsi:nil="true"/>
+         </INPUTED>
       </values>
    </variables>
    <variables variableType="COLLECTED" xsi:type="VariableType">
@@ -4230,26 +4170,6 @@
          <TRAVEL44>(not(cast(READY,integer)!= '1') )</TRAVEL44>
          <TRAVEL45>(not(cast(READY,integer)!= '1') )</TRAVEL45>
          <TRAVEL46>(not(cast(READY,integer)!= '1') )</TRAVEL46>
-         <FAVOURITE_CHARACTERS11>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS11>
-         <FAVOURITE_CHARACTERS12>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS12>
-         <FAVOURITE_CHARACTERS21>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS21>
-         <FAVOURITE_CHARACTERS22>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS22>
-         <FAVOURITE_CHARACTERS31>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS31>
-         <FAVOURITE_CHARACTERS32>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS32>
-         <FAVOURITE_CHARACTERS41>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS41>
-         <FAVOURITE_CHARACTERS42>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS42>
-         <FAVOURITE_CHARACTERS51>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS51>
-         <FAVOURITE_CHARACTERS52>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS52>
-         <FAVOURITE_CHARACTERS61>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS61>
-         <FAVOURITE_CHARACTERS62>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS62>
-         <FAVOURITE_CHARACTERS71>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS71>
-         <FAVOURITE_CHARACTERS72>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS72>
-         <FAVOURITE_CHARACTERS81>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS81>
-         <FAVOURITE_CHARACTERS82>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS82>
-         <FAVOURITE_CHARACTERS91>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS91>
-         <FAVOURITE_CHARACTERS92>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS92>
-         <FAVOURITE_CHARACTERS101>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS101>
-         <FAVOURITE_CHARACTERS102>(not(cast(READY,integer)!= '1') )</FAVOURITE_CHARACTERS102>
       </READY>
    </cleaning>
    <resizing/>

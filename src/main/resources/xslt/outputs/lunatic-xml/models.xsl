@@ -252,7 +252,7 @@
 			</label>
 			<xsl:copy-of select="enolunatic:getInstructionForQuestion($source-context,.)"/>
 			<xsl:copy-of select="enolunatic:add-condition-filter($filterCondition,$filterDependencies)"/>
-			<hierarchy>				
+			<hierarchy>
 				<xsl:copy-of select="$sequence"/>
 				<xsl:copy-of select="$subSequence"/>
 			</hierarchy>
@@ -276,7 +276,7 @@
 	</xsl:template>
 
 	<xd:doc>
-		<xd:desc>SingleResponseQuestion driver does not create a component : it is created by its response</xd:desc>
+		<xd:desc>SingleResponseQuestion and MultipleQuestion drivers do not create a component : it is created by its response</xd:desc>
 	</xd:doc>
 	<xsl:template match="SingleResponseQuestion | MultipleQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -294,7 +294,7 @@
 			<xsl:for-each select="$labelDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
-			<xsl:if test="$shouldHaveMissingVars and $missingVar">				
+			<xsl:if test="$shouldHaveMissingVars and $missingVar">	
 				<xsl:value-of select="$missingResponseName"/>
 			</xsl:if>
 		</xsl:variable>
@@ -313,6 +313,153 @@
 			<xsl:with-param name="dependencies" select="$dependencies" tunnel="yes"/>
 		</xsl:apply-templates>
 
+		<xsl:apply-templates select="enolunatic:get-end-question-instructions($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
+	
+	<xd:doc>
+		<xd:desc>PairwiseQuestion driver creates a component which is likely a loop of loop, with the same axises : for example, the link between people of the same household</xd:desc>
+	</xd:doc>
+	<xsl:template match="PairwiseQuestion" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="sequenceParent" tunnel="yes"/>
+		<xsl:param name="subSequenceParent" tunnel="yes"/>
+		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
+		<xsl:param name="idLoop" select="''" tunnel="yes"/>
+		
+		<xsl:variable name="mandatory" select="enolunatic:is-required($source-context)" as="xs:boolean"/>
+		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
+		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
+		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
+		<xsl:variable name="idQuestion" select="enolunatic:get-name($source-context)"/>
+		<xsl:variable name="questionName" select="enolunatic:get-question-name($source-context,$languages[1])"/>
+		<xsl:variable name="missingResponseName" select="concat($questionName,'_MISSING')"/>
+		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context, $filter)"/>
+		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
+		<xsl:variable name="pairwiseScope" select="enolunatic:get-variable-business-name(enolunatic:get-pairwise-scope($source-context))"/>
+		<xsl:variable name="dependenciesVariables" as="xs:string*">
+			<xsl:for-each select="$labelDependencies">
+				<xsl:sequence select="."/>
+			</xsl:for-each>
+		</xsl:variable>
+		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
+		
+		<components xsi:type="PairwiseLinks" componentType="PairwiseLinks" id="{$idQuestion}" mandatory="{$mandatory}">
+			<xsl:copy-of select="enolunatic:add-condition-filter($filterCondition,$filterDependencies)"/>
+			<hierarchy>
+				<xsl:copy-of select="$sequenceParent"/>
+				<xsl:copy-of select="$subSequenceParent"/>
+			</hierarchy>
+			<xAxisIterations>
+				<value>count(<xsl:value-of select="$pairwiseScope"/>)</value>
+				<type>VTL</type>
+			</xAxisIterations>
+			<yAxisIterations>
+				<value>count(<xsl:value-of select="$pairwiseScope"/>)</value>
+				<type>VTL</type>
+			</yAxisIterations>
+			<symLinks>
+				<xsl:attribute name="name" select="$questionName"/>
+				
+				<LINK>
+					<source>1</source>
+					<target>1</target>
+				</LINK>
+				<LINK>
+					<source>2</source>
+					<target>3</target>
+				</LINK>
+				<LINK>
+					<source>3</source>
+					<target>2</target>
+				</LINK>
+				<LINK>
+					<source>4</source>
+					<target>4</target>
+				</LINK>
+				<LINK>
+					<source>5</source>
+					<target>6</target>
+				</LINK>
+				<LINK>
+					<source>6</source>
+					<target>5</target>
+				</LINK>
+				<LINK>
+					<source>7</source>
+					<target>8</target>
+				</LINK>
+				<LINK>
+					<source>8</source>
+					<target>7</target>
+				</LINK>
+				<LINK>
+					<source>9</source>
+					<target>10</target>
+				</LINK>
+				<LINK>
+					<source>10</source>
+					<target>9</target>
+				</LINK>
+				<LINK>
+					<source>11</source>
+					<target>13</target>
+				</LINK>
+				<LINK>
+					<source>12</source>
+					<target>12</target>
+				</LINK>
+				<LINK>
+					<source>13</source>
+					<target>11</target>
+				</LINK>
+				<LINK>
+					<source>14</source>
+					<target>null</target>
+				</LINK>
+				<LINK>
+					<source>15</source>
+					<target>null</target>
+				</LINK>
+				<LINK>
+					<source>16</source>
+					<target>16</target>
+				</LINK>
+				<LINK>
+					<source>17</source>
+					<target>17</target>
+				</LINK>
+				<LINK>
+					<source>18</source>
+					<target>18</target>
+				</LINK>
+			</symLinks>
+			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<xsl:with-param name="driver" select="." tunnel="yes"/>
+				<xsl:with-param name="idQuestion" select="concat($idQuestion,'-pairwise-dropdown')" tunnel="yes"/>
+				<xsl:with-param name="questionName" select="$questionName" tunnel="yes"/>
+				<xsl:with-param name="missingResponseName" select="$missingResponseName" tunnel="yes"/>
+				<xsl:with-param name="labelQuestion" select="enolunatic:replace-all-variables-with-business-name($source-context, $label)" tunnel="yes"/>
+				<xsl:with-param name="typeOfQuestion" select="'Dropdown'" tunnel="yes"/>
+				<xsl:with-param name="declarations" select="enolunatic:getInstructionForQuestion($source-context,.)" as="node()*" tunnel="yes"/>
+				<xsl:with-param name="filterCondition" select="'xAxis &lt;&gt; yAxis'" tunnel="yes"/>
+				<xsl:with-param name="dependencies" select="$dependencies" tunnel="yes"/>
+				<xsl:with-param name="loopDepth" select="$loopDepth +2" tunnel="yes"/>
+			</xsl:apply-templates>
+		</components>
+		<xsl:for-each select="('xAxis','yAxis')">
+			<variables variableType="CALCULATED" xsi:type="VariableType">
+				<name><xsl:value-of select="."/></name>
+				<expression>
+					<value><xsl:value-of select="$pairwiseScope"/></value>
+					<type>VTL</type>
+				</expression>
+				<bindingDependencies><xsl:value-of select="$pairwiseScope"/></bindingDependencies>
+				<shapeFrom><xsl:value-of select="$pairwiseScope"/></shapeFrom>
+			</variables>
+		</xsl:for-each>
 		<xsl:apply-templates select="enolunatic:get-end-question-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
@@ -428,13 +575,13 @@
 				<xsl:sequence select="."/>
 			</xsl:for-each>
 			<xsl:if test="$shouldHaveMissingVars and $missingVar">
-				<xsl:value-of select="$missingResponseName"/>				
+				<xsl:value-of select="$missingResponseName"/>
 			</xsl:if>
 		</xsl:variable>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
 		<xsl:variable name="componentType">
 			<xsl:choose>
-				<xsl:when test="name(.) = 'TableLoop' and enolunatic:is-generating-loop($source-context)"><xsl:value-of select="'RosterForLoop'"/></xsl:when>
+				<xsl:when test="name(.) = 'TableLoop' and not(enolunatic:is-linked-loop($source-context))"><xsl:value-of select="'RosterForLoop'"/></xsl:when>
 				<xsl:otherwise><xsl:value-of select="'Table'"/></xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
@@ -480,27 +627,15 @@
 				</xsl:call-template>
 			</xsl:if>
 
-			<xsl:for-each select="enolunatic:get-header-lines($source-context)">
-				<xsl:choose>
-					<xsl:when test="$componentType = 'Table'">
+			<xsl:choose>
+				<xsl:when test="$componentType = 'Table'">
+					<xsl:for-each select="enolunatic:get-header-lines($source-context)">
 						<xsl:apply-templates select="enolunatic:get-header-line($source-context,position())" mode="source">
 							<xsl:with-param name="elementName" select="'header'" tunnel="yes"/>
 							<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
 						</xsl:apply-templates>
-					</xsl:when>
-					<xsl:when test="$componentType = 'RosterForLoop'">
-						<xsl:apply-templates select="enolunatic:get-header-line($source-context,position())" mode="source">
-							<xsl:with-param name="elementName" select="'header'" tunnel="yes"/>
-							<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
-							<xsl:with-param name="loopDepth" select="$loopDepth + 1" tunnel="yes"/>
-						</xsl:apply-templates>						
-					</xsl:when>
-				</xsl:choose>				
-			</xsl:for-each>
-
-			<xsl:for-each select="enolunatic:get-body-lines($source-context)">
-				<xsl:choose>
-					<xsl:when test="$componentType = 'Table'">
+					</xsl:for-each>
+					<xsl:for-each select="enolunatic:get-body-lines($source-context)">
 						<body>
 							<xsl:apply-templates select="enolunatic:get-body-line($source-context,position())" mode="source">
 								<xsl:with-param name="elementName" select="'bodyLine'" tunnel="yes"/>
@@ -509,18 +644,27 @@
 								<xsl:with-param name="idQuestion" select="$idQuestion" tunnel="yes"/>
 							</xsl:apply-templates>
 						</body>
-					</xsl:when>
-					<xsl:when test="$componentType = 'RosterForLoop'">
+					</xsl:for-each>
+				</xsl:when>
+				<xsl:when test="$componentType = 'RosterForLoop'">
+					<xsl:for-each select="enolunatic:get-header-lines($source-context)">
+						<xsl:apply-templates select="enolunatic:get-header-line($source-context,position())" mode="source">
+							<xsl:with-param name="elementName" select="'header'" tunnel="yes"/>
+							<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
+							<xsl:with-param name="loopDepth" select="$loopDepth + 1" tunnel="yes"/>
+						</xsl:apply-templates>
+					</xsl:for-each>
+					<xsl:for-each select="enolunatic:get-body-lines($source-context)">
 						<xsl:apply-templates select="enolunatic:get-body-line($source-context,position())" mode="source">
 							<xsl:with-param name="elementName" select="'components'" tunnel="yes"/>
 							<xsl:with-param name="position" select="position()" tunnel="yes"/>
 							<xsl:with-param name="questionName" select="enolunatic:get-question-name($source-context,$languages[1])" tunnel="yes"/>
 							<xsl:with-param name="idQuestion" select="$idQuestion" tunnel="yes"/>
 							<xsl:with-param name="loopDepth" select="$loopDepth + 1" tunnel="yes"/>
-						</xsl:apply-templates>						
-					</xsl:when>
-				</xsl:choose>				
-			</xsl:for-each>
+						</xsl:apply-templates>
+					</xsl:for-each>
+				</xsl:when>
+			</xsl:choose>
 		</components>
 		
 		<xsl:if test="$addFilterResult">
@@ -648,7 +792,7 @@
 			<xsl:otherwise>
 				<xsl:element name="{$elementName}">
 					<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
-					<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>				
+					<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
 				</xsl:element>
 			</xsl:otherwise>
 		</xsl:choose>
@@ -659,7 +803,7 @@
 			<xd:p>The Response drivers in SingleResponseQuestion and MultipleQuestion create a component, which type depends on the Response driver.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="*[name(.) =('SingleResponseQuestion','MultipleQuestion')]//*[name(.) =('NumericDomain','TextDomain','TextareaDomain','DateTimeDomain','CodeDomain','BooleanDomain')]" mode="model" priority="1">
+	<xsl:template match="*[name(.) =('SingleResponseQuestion','MultipleQuestion','PairwiseQuestion')]//*[name(.) =('NumericDomain','TextDomain','TextareaDomain','DateTimeDomain','CodeDomain','BooleanDomain')]" mode="model" priority="1">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="idQuestion" tunnel="yes"/>
 		<xsl:param name="questionName" tunnel="yes"/>
@@ -721,16 +865,17 @@
 
 				<xsl:copy-of select="$declarations"/>
 				<xsl:copy-of select="enolunatic:add-condition-filter($filterCondition,$filterConditionDependencies)"/>
-				<hierarchy>
-					<xsl:copy-of select="$sequenceParent"/>
-					<xsl:copy-of select="$subSequenceParent"/>
-				</hierarchy>
-				
+				<xsl:if test="not(ancestor::PairwiseQuestion)">
+					<hierarchy>
+						<xsl:copy-of select="$sequenceParent"/>
+						<xsl:copy-of select="$subSequenceParent"/>
+					</hierarchy>
+				</xsl:if>
 				<xsl:copy-of select="$dependencies"/>
 				<xsl:call-template name="enolunatic:add-response-dependencies">
 					<xsl:with-param name="responseName" select="$responseName"/>
 				</xsl:call-template>
-				
+
 				<xsl:if test="$unit!=''">
 					<unit><xsl:value-of select="$unit"/></unit>
 				</xsl:if>
@@ -747,7 +892,7 @@
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 					<xsl:with-param name="driver" select="." tunnel="yes"/>
 					<xsl:with-param name="idQuestion" select="$idQuestion" tunnel="yes"/>
-				</xsl:apply-templates>				
+				</xsl:apply-templates>
 				<xsl:call-template name="enolunatic:add-response-to-components">
 					<xsl:with-param name="responseName" select="$responseName"/>
 				</xsl:call-template>
@@ -1036,7 +1181,7 @@
 
 		<variables variableType="CALCULATED" xsi:type="VariableType">
 			<name><xsl:value-of select="$nameOutVariable"/></name>
-			<expression>				
+			<expression>
 				<value><xsl:value-of select="normalize-space(enolunatic:replace-all-variables-with-business-name($source-context,$expression))"/></value>
 				<type><xsl:value-of select="enolunatic:get-label-type('expression')"/></type>
 			</expression>
@@ -1126,7 +1271,7 @@
 			<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
 	
 			<controls>
-				
+
 				<xsl:if test="$id != ''">
 					<xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
 				</xsl:if>
@@ -1259,15 +1404,15 @@
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-borne-inf-sup')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
-					<control>       
+					<control>
 						<value>
-							<xsl:value-of select="'not(not(isnull('||$responseName||')) and ('||$minimumResponse|| '&gt;'||$responseName||' or '||$maximumResponse||'&lt;'||$responseName||'))'"/>				
+							<xsl:value-of select="concat('not(not(isnull(',$responseName,')) and (',$minimumResponse, '&gt;',$responseName,' or ',$maximumResponse,'&lt;',$responseName,'))')"/>
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 					</control>
 					<errorMessage>
 						<value>
-							<xsl:value-of select="'&quot; La valeur doit être comprise entre ' ||$minimumResponse || ' et ' ||$maximumResponse ||'.&quot;'"/>				
+							<xsl:value-of select="concat('&quot; La valeur doit être comprise entre ' ,$minimumResponse , ' et ' ,$maximumResponse ,'.&quot;')"/>
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
 					</errorMessage>
@@ -1276,17 +1421,17 @@
 			<xsl:if test="$minimumResponse='' and $maximumResponse!=''">	
 				<controls>		
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-borne-sup')"/></xsl:attribute>
-					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
+					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
-					<control>       
+					<control>
 						<value>
-							<xsl:value-of select="'not(not(isnull('||$responseName||')) and '||$maximumResponse||'&lt;'||$responseName||')'"/>				
+							<xsl:value-of select="concat('not(not(isnull(',$responseName,')) and ',$maximumResponse,'&lt;',$responseName,')')"/>
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 					</control>
 					<errorMessage>
 						<value>
-							<xsl:value-of select="'&quot;La valeur doit être inférieure à ' ||$maximumResponse ||'.&quot;'"/>				
+							<xsl:value-of select="concat('&quot;La valeur doit être inférieure à ' ,$maximumResponse ,'.&quot;')"/>
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
 					</errorMessage>
@@ -1295,17 +1440,17 @@
 			<xsl:if test="$minimumResponse!='' and $maximumResponse=''">	
 				<controls>		
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-borne-inf')"/></xsl:attribute>
-					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
+					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
-					<control>       
+					<control>
 						<value>
-							<xsl:value-of select="'not(not(isnull('||$responseName||')) and '||$minimumResponse|| '&gt;'||$responseName||')'"/>				
+							<xsl:value-of select="concat('not(not(isnull(',$responseName,')) and ',$minimumResponse, '&gt;',$responseName,')')"/>
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 					</control>
 					<errorMessage>
 						<value>
-							<xsl:value-of select="'&quot;La valeur doit être supérieure à ' ||$minimumResponse ||'.&quot;'"/>				
+							<xsl:value-of select="concat('&quot;La valeur doit être supérieure à ' ,$minimumResponse ,'.&quot;')"/>
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
 					</errorMessage>
@@ -1313,17 +1458,17 @@
 			</xsl:if>
 			<controls>		
 				<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-decimal')"/></xsl:attribute>
-				<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>  
+				<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
 				<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
-				<control>       
+				<control>
 					<value>
-						<xsl:value-of select="'not(not(isnull('||$responseName||'))  and round('||$responseName||','||$numberOfDecimals ||')&lt;&gt;'||$responseName||')'"/>				
+						<xsl:value-of select="concat('not(not(isnull(',$responseName,'))  and round(',$responseName,',',$numberOfDecimals ,')&lt;&gt;',$responseName,')')"/>
 					</value>
 					<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 				</control>
 				<errorMessage>
 					<value>
-						<xsl:value-of select="'&quot;Le nombre doit comporter au maximum ' ||$numberOfDecimals|| ' chiffre(s) après la virgule.&quot;'"/>				
+						<xsl:value-of select="concat('&quot;Le nombre doit comporter au maximum ' ,$numberOfDecimals, ' chiffre(s) après la virgule.&quot;')"/>
 					</value>
 					<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
 				</errorMessage>
@@ -1334,17 +1479,17 @@
 			<xsl:if test="$minimumResponse!='' and $maximumResponse=''">
 				<controls>		
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-date-borne-sup')"/></xsl:attribute>
-					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
+					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
-					<control>       
+					<control>
 						<value>
-							<xsl:value-of select="'not(not(isnull('||$responseName||')) and cast('||$responseName||', date, &quot;'||$format||'&quot;)&lt;cast(&quot;'||$minimumResponse||'&quot;, date, &quot;'||$format||'&quot;))'"/>				
+							<xsl:value-of select="concat('not(not(isnull(',$responseName,')) and cast(',$responseName,', date, &quot;',$format,'&quot;)&lt;cast(&quot;',$minimumResponse,'&quot;, date, &quot;',$format,'&quot;))')"/>
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 					</control>
 					<errorMessage>
 						<value>
-							<xsl:value-of select="'&quot;La date saisie doit être postérieure à '|| $minimumResponse ||'.&quot;'"/>				
+							<xsl:value-of select="concat('&quot;La date saisie doit être postérieure à ', $minimumResponse ,'.&quot;')"/>
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
 					</errorMessage>
@@ -1353,17 +1498,17 @@
 			<xsl:if test="$minimumResponse='' and $maximumResponse!=''">
 				<controls>		
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-date-borne-inf')"/></xsl:attribute>
-					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
+					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
-					<control>       
+					<control>
 						<value>
-							<xsl:value-of select="'not(not(isnull('||$responseName||')) and cast('||$responseName||', date, &quot;'||$format||')&gt;cast(&quot;'||$maximumResponse||'&quot;, date, &quot;'||$format||'&quot;))'"/>				
+							<xsl:value-of select="concat('not(not(isnull(',$responseName,')) and cast(',$responseName,', date, &quot;',$format,')&gt;cast(&quot;',$maximumResponse,'&quot;, date, &quot;',$format,'&quot;))')"/>
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 					</control>
 					<errorMessage>
 						<value>
-							<xsl:value-of select="'&quot;La date saisie doit être antérieure à '|| $maximumResponse|| '.&quot;'"/>				
+							<xsl:value-of select="concat('&quot;La date saisie doit être antérieure à ', $maximumResponse, '.&quot;')"/>
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
 					</errorMessage>
@@ -1372,17 +1517,17 @@
 			<xsl:if test="$minimumResponse!='' and $maximumResponse!=''">
 				<controls>		
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-borne-inf-sup')"/></xsl:attribute>
-					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>   
+					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
-					<control>       
+					<control>
 						<value>
-							<xsl:value-of select="'not(not(isnull('||$responseName||')) and (cast('||$responseName||', date, &quot;'||$format||'&quot;)&gt;cast(&quot;'||$maximumResponse||'&quot;, date, &quot;'||$format||'&quot;) or cast('||$responseName||', date, &quot;'||$format||'&quot;)&lt;cast(&quot;'||$minimumResponse||'&quot;, date, &quot;'||$format||'&quot;)))'"/>				
+							<xsl:value-of select="concat('not(not(isnull(',$responseName,')) and (cast(',$responseName,', date, &quot;',$format,'&quot;)&gt;cast(&quot;',$maximumResponse,'&quot;, date, &quot;',$format,'&quot;) or cast(',$responseName,', date, &quot;',$format,'&quot;)&lt;cast(&quot;',$minimumResponse,'&quot;, date, &quot;',$format,'&quot;)))')"/>
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.control')"/></type>
 					</control>
 					<errorMessage>
 						<value>
-							<xsl:value-of select="'&quot;La date saisie doit être comprise entre '|| $minimumResponse || ' et '|| $maximumResponse || '.&quot;'"/>				
+							<xsl:value-of select="concat('&quot;La date saisie doit être comprise entre ', $minimumResponse , ' et ', $maximumResponse , '.&quot;')"/>
 						</value>
 						<type><xsl:value-of select="enolunatic:get-label-type('controls.errorMessage')"/></type>
 					</errorMessage>
