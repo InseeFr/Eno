@@ -1,10 +1,17 @@
 name: Test on push or PR
 
 on:
-  pull_request:
   push:
-    branches:
-      - "**"
+    branches-ignore:
+      - 'v3**'
+    paths-ignore:
+      - 'docs/**'
+      - 'doc/**'
+  pull_request:
+    types:
+      - opened
+    branches-ignore:
+      - 'v3**'
 
 jobs:
   build:

@@ -17,8 +17,8 @@ Vous trouverez le paramétrage par défaut via le web-service d'Eno-WS :
 |**Parameters**|**valeurs**|**defaut**|**description**|
 |--|--|--|--|
 |      Context|household, business, default||Le contexte métier dans lequel est généré le questionnaire, respectivement enquêtes ménages, enquêtes entreprises, visualisation pogues. Il permet de récupérer le paramétrage par défaut en cas d'absence d'un paramètre.||
-|      Campagne|*champ texte*|test-2020-x00|Nom de la campagne. Il sert notamment au nommage de l'output.|
-|      Mode|cawi, capi, cati, papi,process||Mode de collecte pour le questionnaire généré (cas particulier : phase GSBPM "process" pour le post-collecte). |
+|      Campagne|*champ texte*|test-2020-x00|Nom de la campagne. Il sert notamment au nommage de l'output. Ne saisir que des minuscules.|
+|      Mode|**cawi (web), capi (face à face), cati (téléphone), papi (papier), process**||Mode de collecte pour le questionnaire généré (cas particulier : phase GSBPM "process" pour le post-collecte). |
 |         Languages/Language|fr, en, it, es, de  | fr|Langage du questionnaire|
 
 
