@@ -45,7 +45,7 @@ class SpecificTreatmentsDeserializerTest {
         assertEquals(BigInteger.TWO.longValue(), field.getMin().longValue());
         assertTrue(field.getStemmer());
         assertEquals(2, field.getSynonyms().size());
-        assertEquals(2, field.getRules().size());
+        assertEquals(1, field.getRules().size());
         assertEquals("field", suggester.getOrder().getField());
         assertEquals("type", suggester.getOrder().getType());
         assertEquals("tokenized", suggester.getQueryParser().getType());
