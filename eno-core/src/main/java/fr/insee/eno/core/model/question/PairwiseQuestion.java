@@ -3,6 +3,7 @@ package fr.insee.eno.core.model.question;
 import datacollection33.QuestionItemType;
 import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.lunatic.model.flat.LabelType;
@@ -22,6 +23,9 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @Context(format = Format.DDI, type = QuestionItemType.class)
 @Context(format = Format.LUNATIC, type = PairwiseLinks.class)
 public class PairwiseQuestion extends SingleResponseQuestion {
+
+    Response response = null;
+    boolean mandatory = true; //TODO: see if it should be true, false or null
 
     /** Name of the variable to be used for the question iterations. */
     @DDI(contextType = QuestionItemType.class,
