@@ -10,7 +10,7 @@
               xmlns:xs="http://www.w3.org/2001/XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
-              isMaintainable="true"><!--Eno version : 2.3.10-controls-type. Generation date : 06/10/2022 - 9:36:45-->
+              isMaintainable="true"><!--Eno version : 2.4.1-pairwise. Generation date : 15/06/2023 - 14:40:55-->
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-l20g2ba7</r:ID>
    <r:Version>1</r:Version>
@@ -3734,7 +3734,7 @@ never cared for what they say never cared for games they play never cared for wh
             </d:QuestionItemName>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k6ccoydl-QOP-k6cccd5s</r:ID>
+               <r:ID>k6ccoydl-QOP-l9iebmwb</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">AUTOCOMPL</r:String>
@@ -3743,13 +3743,13 @@ never cared for what they say never cared for games they play never cared for wh
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k6ccoydl-RDOP-k6cccd5s</r:ID>
+                  <r:ID>k6ccoydl-RDOP-l9iebmwb</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k6ccoydl-QOP-k6cccd5s</r:ID>
+                  <r:ID>k6ccoydl-QOP-l9iebmwb</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -3759,29 +3759,14 @@ never cared for what they say never cared for games they play never cared for wh
                   <d:Text xml:lang="fr-FR">"Question à choix unique - présentation autocomplétion, par TS"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
-            <d:CodeDomain>
-               <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
-               <r:CodeListReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k6cc9a1f</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>CodeList</r:TypeOfObject>
-               </r:CodeListReference>
+            <d:TextDomain maxLength="249">
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k6ccoydl-RDOP-k6cccd5s</r:ID>
+                  <r:ID>k6ccoydl-RDOP-l9iebmwb</r:ID>
                   <r:Version>1</r:Version>
-                  <r:CodeRepresentation>
-                     <r:CodeListReference>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>k6cc9a1f</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TypeOfObject>CodeList</r:TypeOfObject>
-                     </r:CodeListReference>
-                  </r:CodeRepresentation>
+                  <r:TextRepresentation maxLength="249"/>
                </r:OutParameter>
-               <r:ResponseCardinality maximumResponses="1"/>
-            </d:CodeDomain>
+            </d:TextDomain>
          </d:QuestionItem>
          <d:QuestionItem>
             <r:Agency>fr.insee</r:Agency>
@@ -9801,30 +9786,6 @@ ligne 3</r:Content>
       </l:CategoryScheme>
       <l:CategoryScheme>
          <r:Agency>fr.insee</r:Agency>
-         <r:ID>CategoryScheme-k6cc9a1f</r:ID>
-         <r:Version>1</r:Version>
-         <r:Label>
-            <r:Content xml:lang="fr-FR">L_commune</r:Content>
-         </r:Label>
-         <l:Category>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-k6cc9a1f-1</r:ID>
-            <r:Version>1</r:Version>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">Malakoff</r:Content>
-            </r:Label>
-         </l:Category>
-         <l:Category>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-k6cc9a1f-2</r:ID>
-            <r:Version>1</r:Version>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">Montrouge</r:Content>
-            </r:Label>
-         </l:Category>
-      </l:CategoryScheme>
-      <l:CategoryScheme>
-         <r:Agency>fr.insee</r:Agency>
          <r:ID>CategoryScheme-jfkxgkqx</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
@@ -11640,42 +11601,6 @@ ligne 3</r:Content>
          </l:CodeList>
          <l:CodeList>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>k6cc9a1f</r:ID>
-            <r:Version>1</r:Version>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">L_commune</r:Content>
-            </r:Label>
-            <l:HierarchyType>Regular</l:HierarchyType>
-            <l:Level levelNumber="1">
-               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
-            </l:Level>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>k6cc9a1f-1</r:ID>
-               <r:Version>1</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-k6cc9a1f-1</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>92240</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>k6cc9a1f-2</r:ID>
-               <r:Version>1</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-k6cc9a1f-2</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>92120</r:Value>
-            </l:Code>
-         </l:CodeList>
-         <l:CodeList>
-            <r:Agency>fr.insee</r:Agency>
             <r:ID>jfkxgkqx</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
@@ -12944,7 +12869,7 @@ ligne 3</r:Content>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>k6cco8xc</r:ID>
+            <r:ID>l9iekhrm</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">AUTOCOMPL</r:String>
@@ -12954,7 +12879,7 @@ ligne 3</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k6ccoydl-QOP-k6cccd5s</r:ID>
+               <r:ID>k6ccoydl-QOP-l9iebmwb</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -12965,14 +12890,7 @@ ligne 3</r:Content>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <r:CodeRepresentation>
-                  <r:CodeListReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>k6cc9a1f</r:ID>
-                     <r:Version>1</r:Version>
-                     <r:TypeOfObject>CodeList</r:TypeOfObject>
-                  </r:CodeListReference>
-               </r:CodeRepresentation>
+               <r:TextRepresentation maxLength="249"/>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -16552,7 +16470,7 @@ ligne 3</r:Content>
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k6cco8xc</r:ID>
+               <r:ID>l9iekhrm</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>

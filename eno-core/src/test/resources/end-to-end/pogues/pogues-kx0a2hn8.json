@@ -1,0 +1,985 @@
+{
+  "owner": "QNONREG",
+  "FlowControl": [
+    {
+      "Description": "Description du filtre sur Q1",
+      "Expression": "$Q1$= \"A\"",
+      "id": "lciymc87",
+      "IfTrue": "kx06v7yq-kx06v7yq"
+    }
+  ],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "kwupyhsh",
+        "l7g7ou85",
+        "l7g7tek6",
+        "l7g7lnew",
+        "kx05sq4y",
+        "kx06v7yq",
+        "l7puc9t3",
+        "kwupqy19",
+        "l7puoovt",
+        "l7pu8g5e",
+        "l7pu5agy",
+        "lhywdenk",
+        "lhywkzhc",
+        "lhywjv88",
+        "kx06a9lq",
+        "lhyvw4w4",
+        "kx061cac",
+        "kwupruv2",
+        "kx09u145",
+        "kx05rmm0",
+        "idendquest"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "kwupta0a",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "QNONREG - tous types boucle nombre variable ou fixe (min=max) - ok"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "TESTANNE",
+  "Variables": {
+    "Variable": [
+      {
+        "Scope": "l7pusaki",
+        "Label": "PRENOM label",
+        "id": "l7puqneq",
+        "type": "CollectedVariableType",
+        "Name": "PRENOM",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "l7pusaki",
+        "Label": "Q1 label",
+        "id": "l7pulxyu",
+        "type": "CollectedVariableType",
+        "Name": "Q1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "l7pusaki",
+        "Label": "Q2 label",
+        "id": "l7pujnpr",
+        "type": "CollectedVariableType",
+        "Name": "Q2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "l7puibqj",
+        "Label": "P1 label",
+        "id": "l7pucfbi",
+        "type": "CollectedVariableType",
+        "Name": "P1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "l7puibqj",
+        "Label": "P2 label",
+        "id": "l7pufgki",
+        "type": "CollectedVariableType",
+        "Name": "P2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "NBP label",
+        "id": "lhyvwwrl",
+        "type": "CollectedVariableType",
+        "Name": "NBP",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Scope": "l7pv0z7b",
+        "Label": "PRENOM2 label",
+        "id": "l7pugqtv",
+        "type": "CollectedVariableType",
+        "Name": "PRENOM2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "l7pv0z7b",
+        "Label": "AGE label",
+        "id": "l7pufgoy",
+        "type": "CollectedVariableType",
+        "Name": "AGE",
+        "Datatype": {
+          "Maximum": "99",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "NB label",
+        "id": "lhyw11ir",
+        "type": "CollectedVariableType",
+        "Name": "NB",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Scope": "lhywawti",
+        "Label": "P1B label",
+        "id": "lhywnsr5",
+        "type": "CollectedVariableType",
+        "Name": "P1B",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "lhywawti",
+        "Label": "P2B label",
+        "id": "lhywknlh",
+        "type": "CollectedVariableType",
+        "Name": "P2B",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Mon May 22 2023 15:37:56 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "esa-dc-2018",
+      "uri": "http://ddi:fr.insee:DataCollection.esa-dc-2018"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "kx0a2hn8",
+  "TargetMode": [
+    "CATI",
+    "CAWI",
+    "CAPI"
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "Iterations": {
+    "Iteration": [
+      {
+        "Maximum": "4",
+        "Minimum": "1",
+        "MemberReference": [
+          "l7g7ou85",
+          "l7g7ou85"
+        ],
+        "Label": "Ajoute un prénom",
+        "id": "l7pusaki",
+        "Step": "1",
+        "type": "DynamicIterationType",
+        "Name": "BOUCLE1A4"
+      },
+      {
+        "MemberReference": [
+          "l7g7lnew",
+          "l7g7lnew"
+        ],
+        "id": "l7puyos3",
+        "type": "DynamicIterationType",
+        "Name": "BOUCLELIEE1A4",
+        "IterableReference": "l7pusaki"
+      },
+      {
+        "Maximum": "4",
+        "Minimum": "1",
+        "MemberReference": [
+          "l7puoovt",
+          "l7puoovt"
+        ],
+        "Label": "Ajouter un produit",
+        "id": "l7puibqj",
+        "Step": "1",
+        "type": "DynamicIterationType",
+        "Name": "BOUCLECONJ"
+      },
+      {
+        "Maximum": "nvl($NB$,1)",
+        "Minimum": "nvl($NB$,1)",
+        "MemberReference": [
+          "kx061cac",
+          "kx061cac"
+        ],
+        "id": "l7pv0z7b",
+        "Step": "1",
+        "type": "DynamicIterationType",
+        "Name": "BOUCLELOGEMENT"
+      },
+      {
+        "MemberReference": [
+          "kx09u145",
+          "kx09u145"
+        ],
+        "id": "l7puvvpz",
+        "type": "DynamicIterationType",
+        "Name": "BOUCLELOGLIEE",
+        "IterableReference": "l7pv0z7b"
+      },
+      {
+        "Maximum": "nvl($NBP$,1)",
+        "Minimum": "1",
+        "MemberReference": [
+          "lhywdenk",
+          "lhywdenk"
+        ],
+        "Label": "Ajouter",
+        "id": "lhywawti",
+        "Step": "1",
+        "type": "DynamicIterationType",
+        "Name": "BOUCLCONJ2"
+      }
+    ]
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "S1 - boucle liée de 1 à max 4 avec un nb inconnu au début"
+      ],
+      "id": "kwupyhsh",
+      "TargetMode": [
+        "CATI",
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "SS11"
+          ],
+          "id": "l7g7ou85",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l7puqneq",
+                  "id": "l7g7ub1j",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [
+                {
+                  "post_collect": false,
+                  "Description": "Prénom vide",
+                  "Expression": "nvl($PRENOM$,\"\")=\"\"",
+                  "during_collect": false,
+                  "criticity": "INFO",
+                  "FailMessage": "\"Prénom est vide\"",
+                  "id": "lfgki00q"
+                }
+              ],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"PRENOM\""
+              ],
+              "id": "l7g7tek6",
+              "TargetMode": [
+                "CATI",
+                "CAWI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Ajout d'un contrôle sur prénom vide\"",
+                  "id": "lfgkfl45",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAWI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "PRENOM"
+            }
+          ],
+          "Name": "SS11"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "SS12"
+          ],
+          "id": "l7g7lnew",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l7pulxyu",
+                  "id": "kx063fw6",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [
+                {
+                  "post_collect": false,
+                  "Description": "Q1 vide",
+                  "Expression": "nvl($Q1$,\"\")=\"\"",
+                  "during_collect": false,
+                  "criticity": "INFO",
+                  "FailMessage": "\"Q1 est vide\"",
+                  "id": "lfgkr89y"
+                }
+              ],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Q1 de \" || $PRENOM$"
+              ],
+              "id": "kx05sq4y",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Filtre pour affichage de Q2 : Q2 affichée si Q1 = A, donc à tester\"",
+                  "id": "lciynl4d",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAWI",
+                    "CAPI"
+                  ]
+                },
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Contrôle sur Q1 vide\"",
+                  "id": "lfgkbdvi",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAWI",
+                    "CATI",
+                    "CAPI",
+                    "PAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "Q1"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l7pujnpr",
+                  "id": "kx06jdgo",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Affichage de Q2 si Q1 = A - rappel du prénom : \" || $PRENOM$"
+              ],
+              "id": "kx06v7yq",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "Q2"
+            }
+          ],
+          "Name": "SS12"
+        }
+      ],
+      "Name": "S1"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "S2 - boucle type conjoncture, de 1 à 4, ne sera pas liée"
+      ],
+      "id": "l7puc9t3",
+      "TargetMode": [
+        "CATI",
+        "CAWI",
+        "CAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lhyvwwrl",
+              "id": "kwupivn8",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"NBP\""
+          ],
+          "id": "kwupqy19",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"on vérifie que la formule cast-string-NB est ok :\" || cast($NBP$,string) ",
+              "id": "kx09g78a",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ]
+            }
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "NBP"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Decrire le produit avec max fixe"
+          ],
+          "id": "l7puoovt",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"on décrit un produit, boucle de 1 à 4\"",
+              "id": "l7pv1nnm",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ]
+            }
+          ],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l7pucfbi",
+                  "id": "l7purdst",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [
+                {
+                  "post_collect": false,
+                  "Description": "P1 vide",
+                  "Expression": "nvl($P1$,\"\")=\"\"",
+                  "during_collect": false,
+                  "criticity": "INFO",
+                  "FailMessage": "\"P1 est vide\"",
+                  "id": "lfgmj3q8"
+                }
+              ],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Décrire un produit\""
+              ],
+              "id": "l7pu8g5e",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Contrôle sur P1 vide\"",
+                  "id": "lfgmlc9s",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAWI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "P1"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l7pufgki",
+                  "id": "l7pu9w7t",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Avis sur produit\""
+              ],
+              "id": "l7pu5agy",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "P2"
+            }
+          ],
+          "Name": "SS21"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Decrire le produit avec max collecté NBP"
+          ],
+          "id": "lhywdenk",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lhywnsr5",
+                  "id": "lhywp0mv",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Décrire un produit\""
+              ],
+              "id": "lhywkzhc",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Contrôle sur P1 vide\"",
+                  "id": "lhywl5zk",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAWI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "P1B"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lhywknlh",
+                  "id": "lhyw8l77",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Avis sur produit\""
+              ],
+              "id": "lhywjv88",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "P2B"
+            }
+          ],
+          "Name": "SS22"
+        }
+      ],
+      "Name": "S2"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "S3 - boucle N occurrences, N collecté en premier, type logement"
+      ],
+      "id": "kx06a9lq",
+      "TargetMode": [
+        "CATI",
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lhyw11ir",
+              "id": "lhyw1irk",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"NB\""
+          ],
+          "id": "lhyvw4w4",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"on vérifie que la formule cast-string-NB est ok :\" || cast($NB$,string) ",
+              "id": "lhyw7k0f",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ]
+            }
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "NB"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "SS31"
+          ],
+          "id": "kx061cac",
+          "TargetMode": [
+            "CATI",
+            "CAWI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l7pugqtv",
+                  "id": "kwuq7jok",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"PRENOM\""
+              ],
+              "id": "kwupruv2",
+              "TargetMode": [
+                "CATI",
+                "CAWI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "PRENOM2"
+            }
+          ],
+          "Name": "SS31"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "SS32"
+          ],
+          "id": "kx09u145",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l7pufgoy",
+                  "id": "kx062ukq",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Maximum": "99",
+                    "Minimum": "0",
+                    "typeName": "NUMERIC",
+                    "Unit": "",
+                    "type": "NumericDatatypeType",
+                    "Decimals": ""
+                  }
+                }
+              ],
+              "Control": [
+                {
+                  "post_collect": false,
+                  "Description": "AGE vide",
+                  "Expression": "nvl($AGE$,\"\")=\"\"",
+                  "during_collect": false,
+                  "criticity": "INFO",
+                  "FailMessage": "\"AGE est vide\"",
+                  "id": "lfgmv4j2"
+                }
+              ],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"AGE de \" ||  $PRENOM2$"
+              ],
+              "id": "kx05rmm0",
+              "TargetMode": [
+                "CATI",
+                "CAWI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Contrôle sur AGE vide\"",
+                  "id": "lfgmwbpy",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAWI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "AGE"
+            }
+          ],
+          "Name": "SS32"
+        }
+      ],
+      "Name": "S3"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CATI",
+        "CAWI",
+        "CAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}
