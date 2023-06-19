@@ -91,11 +91,87 @@ Types d'instructions :
     <d:QuestionScheme>
 	    <d:QuestionItem>
             <r:Agency>fr.insee</r:Agency>
+            <r:ID><!-- Identifiant de la question --></r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+                <r:String xml:lang="fr-FR"><!-- Nom métier de la question --></r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+                <!-- ... -->
+            </r:OutParameter>
+            <r:Binding>
+                <!-- ... -->
+            </r:Binding>
+            <d:QuestionText>
+                <!-- ... -->
+            </d:QuestionText>
 		    <!-- ... -->
-		</d:QuestionItem>
+        </d:QuestionItem>
     </d:QuestionScheme>
 </g:ResourcePackage>
 ```
+
+### Questions de date
+
+```xml
+<g:ResourcePackage>
+    <d:QuestionScheme>
+        <d:QuestionItem>
+            <!-- ... Contenu d'une question à réponse unique ... -->
+            <d:DateTimeDomain>
+               <r:DateFieldFormat><!-- Valeurs possibles ci-dessous--></r:DateFieldFormat>
+               <r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV"><!-- Valeurs possibles ci-dessous--></r:DateTypeCode>
+               <r:Range>
+                  <r:MinimumValue included="true"><!-- Valeur de date (le format doit respecter le 'DateFieldFormat') --></r:MinimumValue>
+                  <r:MaximumValue included="true"><!-- Valeur de date (le format doit respecter le 'DateFieldFormat') --></r:MaximumValue>
+               </r:Range>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID><!-- id du OutParameter de la question --></r:ID>
+                  <r:Version>1</r:Version>
+               </r:OutParameter>
+            </d:DateTimeDomain>
+         </d:QuestionItem>
+    </d:QuestionScheme>
+</g:ResourcePackage>
+```
+
+| `DateFieldFormat` | `DateTypeCode` |
+|-------------------|----------------|
+| YYYY-MM-DD        |  date          |
+| YYYY-MM           |  gYearMonth    |
+| YYYY              |  gYear         |
+
+
+### Questions de durée
+
+```xml
+<g:ResourcePackage>
+    <d:QuestionScheme>
+        <d:QuestionItem>
+            <!-- ... Contenu d'une question à réponse unique ... -->
+            <d:DateTimeDomain>
+               <r:DateFieldFormat><!-- Valeurs possibles ci-dessous--></r:DateFieldFormat>
+               <r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV"><!-- Valeurs possibles ci-dessous--></r:DateTypeCode>
+               <r:Range>
+                   <r:MinimumValue included="true"><!-- Valeur de durée (le format doit respecter le 'DateFieldFormat') --></r:MinimumValue>
+                   <r:MaximumValue included="true"><!-- Valeur de durée (le format doit respecter le 'DateFieldFormat') --></r:MaximumValue>
+               </r:Range>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID><!-- id du OutParameter de la question --></r:ID>
+                  <r:Version>1</r:Version>
+               </r:OutParameter>
+            </d:DateTimeDomain>
+         </d:QuestionItem>
+    </d:QuestionScheme>
+</g:ResourcePackage>
+```
+
+| `DateFieldFormat` | `DateTypeCode` | Exemple de valeur |
+|-------------------|----------------|-------------------|
+| PTnHnM            |  duration      | PT200H59M         |
+| PnYnM             |  duration      | P5Y11M            |
 
 ### Question à réponses multiples
 
@@ -110,7 +186,7 @@ Types d'instructions :
 </g:ResourcePackage>
 ```
 
-# Tableaux
+### Tableaux
 
 ```xml
 <d:QuestionGrid>
