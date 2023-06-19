@@ -2,6 +2,7 @@ package fr.insee.eno.core;
 
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,8 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * Functional tests for the DDI to Lunatic transformation.
  */
 class DDIToLunaticTest {
-
-    private static final String DDI_TEST_FOLDER = "in/ddi/";
 
     private final ClassLoader classLoader = this.getClass().getClassLoader();
     private EnoParameters enoParameters;
@@ -56,6 +55,21 @@ class DDIToLunaticTest {
 
         //
         assertNotNull(lunaticQuestionnaire);
+
+        // Components
+        assertEquals(ComponentTypeEnum.SEQUENCE, lunaticQuestionnaire.getComponents().get(0).getComponentType());
+        assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticQuestionnaire.getComponents().get(1).getComponentType());
+        assertEquals(ComponentTypeEnum.INPUT, lunaticQuestionnaire.getComponents().get(2).getComponentType());
+        assertEquals(ComponentTypeEnum.TEXTAREA, lunaticQuestionnaire.getComponents().get(3).getComponentType());
+        assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticQuestionnaire.getComponents().get(4).getComponentType());
+        assertEquals(ComponentTypeEnum.INPUT_NUMBER, lunaticQuestionnaire.getComponents().get(5).getComponentType());
+        assertEquals(ComponentTypeEnum.INPUT_NUMBER, lunaticQuestionnaire.getComponents().get(6).getComponentType());
+        assertEquals(ComponentTypeEnum.INPUT_NUMBER, lunaticQuestionnaire.getComponents().get(7).getComponentType());
+        assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticQuestionnaire.getComponents().get(8).getComponentType());
+        assertEquals(ComponentTypeEnum.DATEPICKER, lunaticQuestionnaire.getComponents().get(9).getComponentType());
+        assertEquals(ComponentTypeEnum.DATEPICKER, lunaticQuestionnaire.getComponents().get(10).getComponentType());
+        assertEquals(ComponentTypeEnum.DATEPICKER, lunaticQuestionnaire.getComponents().get(11).getComponentType());
+        assertEquals(ComponentTypeEnum.CHECKBOX_BOOLEAN, lunaticQuestionnaire.getComponents().get(12).getComponentType()); // FAILS -> "duration" question
         //
         assertEquals(53, lunaticQuestionnaire.getComponents().size()); // FAILS -> work in progress
     }
