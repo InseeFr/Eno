@@ -26,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * */
 class DDIToEnoTest {
 
+    private final ClassLoader classLoader = this.getClass().getClassLoader();
     private EnoParameters enoParameters;
 
     /** The focus is on the mapping part here, so business processing (that may be enabled by default) are disabled. */
@@ -54,7 +55,7 @@ class DDIToEnoTest {
     void testAll(String questionnaireId) throws DDIParsingException {
         //
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
-                this.getClass().getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-"+questionnaireId+".xml"),
+                classLoader.getResourceAsStream("end-to-end/ddi/ddi-"+questionnaireId+".xml"),
                 enoParameters);
         //
         assertNotNull(enoQuestionnaire);
@@ -65,7 +66,7 @@ class DDIToEnoTest {
     void test01() throws DDIParsingException {
         //
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
-                this.getClass().getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml"),
+                classLoader.getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml"),
                 enoParameters);
 
         //
@@ -90,7 +91,7 @@ class DDIToEnoTest {
     void test02() throws DDIParsingException {
         //
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
-                this.getClass().getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-l5v3spn0.xml"),
+                classLoader.getResourceAsStream("end-to-end/ddi/ddi-l5v3spn0.xml"),
                 enoParameters);
         //
         assertNotNull(enoQuestionnaire);
@@ -101,7 +102,7 @@ class DDIToEnoTest {
     void test03() throws DDIParsingException {
         //
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
-                this.getClass().getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-kx0a2hn8.xml"),
+                classLoader.getResourceAsStream("end-to-end/ddi/ddi-kx0a2hn8.xml"),
                 enoParameters);
         //
         assertNotNull(enoQuestionnaire);
@@ -112,7 +113,7 @@ class DDIToEnoTest {
     void test04() throws DDIParsingException {
         //
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
-                this.getClass().getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-kzy5kbtl.xml"),
+                classLoader.getResourceAsStream("end-to-end/ddi/ddi-kzy5kbtl.xml"),
                 enoParameters);
         //
         assertNotNull(enoQuestionnaire);
@@ -123,7 +124,7 @@ class DDIToEnoTest {
     void test05() throws DDIParsingException {
         //
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
-                this.getClass().getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-l8x6fhtd.xml"),
+                classLoader.getResourceAsStream("end-to-end/ddi/ddi-l8x6fhtd.xml"),
                 enoParameters);
         //
         assertNotNull(enoQuestionnaire);
@@ -135,7 +136,7 @@ class DDIToEnoTest {
     void test06() throws DDIParsingException {
         //
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
-                this.getClass().getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-ldodefpq.xml"),
+                classLoader.getResourceAsStream("end-to-end/ddi/ddi-ldodefpq.xml"),
                 enoParameters);
         //
         assertNotNull(enoQuestionnaire);
