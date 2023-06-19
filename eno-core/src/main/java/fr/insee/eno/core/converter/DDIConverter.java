@@ -9,11 +9,15 @@ import reusable33.RepresentationType;
 import reusable33.StandardKeyValuePairType;
 import reusable33.TextDomainType;
 
+import java.util.Set;
+
 @Slf4j
 public class DDIConverter {
 
     public static final String DDI_PAIRWISE_KEY = "UIComponent";
     public static final String DDI_PAIRWISE_VALUE = "HouseholdPairing";
+    public static final Set<String> DDI_DATE_TYPE_CODE = Set.of("date", "gYearMonth", "gYear");
+    public static final Set<String> DDI_DURATION_TYPE_CODE = Set.of("duration");
 
     private DDIConverter() {}
 
@@ -75,7 +79,14 @@ public class DDIConverter {
     }
 
     private static EnoObject convertDateTimeQuestion(DateTimeDomainType dateTimeDomainType) {
-        return new DateQuestion();
+        String dateTypeCode = dateTimeDomainType.getDateTypeCode().getStringValue();
+        if (DDI_DATE_TYPE_CODE.contains(dateTypeCode))
+            return new DateQuestion();
+        if (DDI_DURATION_TYPE_CODE.contains(dateTypeCode)) {
+            return new DurationQuestion();
+        }
+        // If none match, thrown an exception
+        throw new ConversionException("Unknown date type code: "+dateTypeCode);
     }
 
     private static EnoObject instantiateFrom(QuestionGridType questionGridType) {
