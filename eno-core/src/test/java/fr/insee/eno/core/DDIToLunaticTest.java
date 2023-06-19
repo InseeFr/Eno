@@ -28,6 +28,7 @@ class DDIToLunaticTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
+            "lhpz68wp",
             "l20g2ba7",
             "l5v3spn0",
             "kx0a2hn8",
