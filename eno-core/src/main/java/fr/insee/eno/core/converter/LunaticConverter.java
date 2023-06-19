@@ -91,6 +91,10 @@ public class LunaticConverter {
             return new CheckboxBoolean();
         else if (enoQuestion instanceof DateQuestion)
             return new Datepicker();
+        else if (enoQuestion instanceof DurationQuestion) {
+            log.warn("Duration questions is not supported in Lunatic yet. " + enoQuestion);
+            return null;
+        }
         else if (enoQuestion instanceof UniqueChoiceQuestion uniqueChoiceQuestion) {
             if (uniqueChoiceQuestion.getDisplayFormat() == null) {
                 throw new ConversionException("Display format has not been set in Eno question " + enoQuestion);

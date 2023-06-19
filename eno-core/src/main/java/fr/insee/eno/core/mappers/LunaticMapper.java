@@ -120,6 +120,10 @@ public class LunaticMapper extends Mapper {
         if (enoObject2 != null) {
             // Instantiate the Lunatic target object
             Object lunaticObject2 = LunaticConverter.instantiateFromEnoObject(enoObject2);
+            //
+            if (lunaticObject2 == null) { // TODO: do this better using Optional (or even better: create a "conversion result" class)
+                return;
+            }
             // Evaluate the mapping expression that set the created instance in the Lunatic object attribute
             EvaluationContext context = new StandardEvaluationContext();
             context.setVariable("param", lunaticObject2); //TODO: other keyword for new instances setter?
@@ -150,6 +154,10 @@ public class LunaticMapper extends Mapper {
                 for (Object enoObject2 : enoCollection) {
                     // Instantiate corresponding Lunatic object
                     Object lunaticObject2 = LunaticConverter.instantiateFromEnoObject(enoObject2);
+                    //
+                    if (lunaticObject2 == null) { // TODO: do this better using Optional (or even better: create a "conversion result" class)
+                        continue;
+                    }
                     // Add it in the Lunatic collection
                     lunaticCollection.add(lunaticObject2);
                     // Recursive call on these instances

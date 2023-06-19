@@ -44,8 +44,8 @@ public class DDIConverter {
         else if (representationType instanceof NumericDomainType) {
             return new NumericQuestion();
         }
-        else if (representationType instanceof DateTimeDomainType) {
-            return new DateQuestion();
+        else if (representationType instanceof DateTimeDomainType dateTimeDomainType) {
+            return convertDateTimeQuestion(dateTimeDomainType);
         }
         else if (representationType instanceof CodeDomainType) {
             if (! questionItemType.getUserAttributePairList().isEmpty()) {
@@ -72,6 +72,10 @@ public class DDIConverter {
                     "Unable to identify question type in DDI question item " +
                             questionItemType.getIDArray(0).getStringValue());
         }
+    }
+
+    private static EnoObject convertDateTimeQuestion(DateTimeDomainType dateTimeDomainType) {
+        return new DateQuestion();
     }
 
     private static EnoObject instantiateFrom(QuestionGridType questionGridType) {

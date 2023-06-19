@@ -90,7 +90,7 @@ Types d'instructions :
 <g:ResourcePackage>
     <d:QuestionScheme>
 	    <d:QuestionItem>
-	        <r:ID>string-id</r:ID>
+            <r:Agency>fr.insee</r:Agency>
 		    <!-- ... -->
 		</d:QuestionItem>
     </d:QuestionScheme>
