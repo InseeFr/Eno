@@ -30,5 +30,4 @@ public class LunaticCatalog {
     public ComponentType getComponent(String componentId) {
         return componentMap.get(componentId);
     }
-
 }
