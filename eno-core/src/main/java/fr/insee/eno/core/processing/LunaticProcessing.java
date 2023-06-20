@@ -32,7 +32,7 @@ public class LunaticProcessing {
         EnoIndex enoIndex = enoQuestionnaire.getIndex();
         assert enoIndex != null;
         // TODO: (not a priority) implement something to manage the order of processing classes calls
-        new LunaticSortComponents(enoQuestionnaire, lunaticCatalog).apply(lunaticQuestionnaire);
+        new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);
         new LunaticAddGeneratingDate().apply(lunaticQuestionnaire);
         new LunaticAddBindingDependencies(lunaticCatalog, enoIndex).apply(lunaticQuestionnaire);
         new LunaticAddPageNumbers(parameters.getLunaticPaginationMode()).apply(lunaticQuestionnaire);

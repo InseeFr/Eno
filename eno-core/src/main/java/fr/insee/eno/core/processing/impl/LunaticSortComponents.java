@@ -1,8 +1,10 @@
 package fr.insee.eno.core.processing.impl;
 
+import fr.insee.eno.core.exceptions.technical.LunaticSortingException;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.EnoComponent;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.processing.OutProcessingInterface;
 import fr.insee.eno.core.reference.EnoIndex;
@@ -10,68 +12,88 @@ import fr.insee.eno.core.reference.LunaticCatalog;
 import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
+import java.util.*;
 
 @Slf4j
-@AllArgsConstructor
 public class LunaticSortComponents implements OutProcessingInterface<Questionnaire> {
 
-    private EnoQuestionnaire enoQuestionnaire;
-    private LunaticCatalog lunaticCatalog;
+    /** The Eno questionnaire contains the information of the components' order. */
+    private final EnoQuestionnaire enoQuestionnaire;
+    /** Map used during sorting to transfer components. */
+    private Map<String, ComponentType> transientMap;
+
+    public LunaticSortComponents(EnoQuestionnaire enoQuestionnaire) {
+        this.enoQuestionnaire = enoQuestionnaire;
+    }
 
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
-        // Get the Eno index
-        EnoIndex enoIndex = enoQuestionnaire.getIndex();
-        assert enoIndex != null;
-        // Lunatic questionnaire components
+        //
+        int componentsCount = lunaticQuestionnaire.getComponents().size();
         List<ComponentType> lunaticComponents = lunaticQuestionnaire.getComponents();
-        // Empty the component list (to be refilled using the Lunatic catalog)
-        lunaticComponents.clear();
-        // Iterate on the Eno questionnaire to add components in the right order
+        // Transfer components in a temporary map
+        transientMap = new HashMap<>();
+        for (Iterator<ComponentType> iterator = lunaticComponents.iterator(); iterator.hasNext();) {
+            ComponentType component = iterator.next();
+            transientMap.put(component.getId(), component);
+            iterator.remove();
+        }
+        // Insert the components from the temporary map in the right order
         enoQuestionnaire.getSequences().forEach(enoSequence -> {
-                    lunaticComponents.add(lunaticCatalog.getComponent(enoSequence.getId()));
-                    addSequenceComponentsRec2(lunaticComponents, enoSequence,enoIndex);
-                });
+            ComponentType toBeInserted = transientMap.remove(enoSequence.getId());
+            if (toBeInserted == null) {
+                throw new LunaticSortingException(String.format(
+                        "Sequence '%s' found in the Eno questionnaire is not present in Lunatic components.",
+                        enoSequence.getId()));
+            }
+            lunaticComponents.add(toBeInserted);
+            addSequenceComponents(lunaticComponents, enoSequence);
+        });
+        // Safety check
+        int finalSize = lunaticComponents.size();
+        if (finalSize != componentsCount) {
+            throw new LunaticSortingException(String.format(
+                    "Some components were lost during sorting. Initial count: %s, after sorting: %s.",
+                    componentsCount, finalSize));
+        }
     }
 
     /** Add Lunatic components described ine the Eno sequence given in the list given in the right order. */
-    private void addSequenceComponents(List<ComponentType> lunaticComponents, AbstractSequence enoSequence, EnoIndex enoIndex) {
+    private void addSequenceComponents(List<ComponentType> lunaticComponents, Sequence enoSequence) {
         for (String enoComponentReference : enoSequence.getComponentReferences()) {
-            EnoComponent enoComponent = (EnoComponent) enoIndex.get(enoComponentReference);
-            lunaticComponents.add(
-                    lunaticCatalog.getComponent(enoComponent.getId()));
-            if (enoComponent instanceof Subsequence enoSubsequence) {
+            Optional<EnoComponent> enoComponent = insertLunaticComponent(lunaticComponents, enoComponentReference);
+            if (enoComponent.isEmpty())
+                continue;
+            if (enoComponent.get() instanceof Subsequence enoSubsequence) {
                 for (String enoComponentReference2 : enoSubsequence.getComponentReferences()) {
-                    EnoComponent enoComponent2 = (EnoComponent) enoIndex.get(enoComponentReference2);
-                    lunaticComponents.add(
-                            lunaticCatalog.getComponent(enoComponent2.getId()));
+                    insertLunaticComponent(lunaticComponents, enoComponentReference2);
                 }
             }
         }
     }
 
-    /** (Unused recursive equivalent of iterative method above.) */
-    private void addSequenceComponentsRec(List<ComponentType> lunaticComponents, AbstractSequence enoSequence, EnoIndex enoIndex) {
-        enoSequence.getComponentReferences().forEach(enoComponentReference -> {
-            lunaticComponents.add(
-                    lunaticCatalog.getComponent(enoComponentReference));
-            if (enoIndex.get(enoComponentReference) instanceof AbstractSequence enoSequence2)
-                addSequenceComponentsRec(lunaticComponents, enoSequence2, enoIndex);
-        });
+    /**  */
+    private Optional<EnoComponent> insertLunaticComponent(List<ComponentType> lunaticComponents, String enoComponentReference) {
+        EnoComponent enoComponent = (EnoComponent) enoQuestionnaire.get(enoComponentReference);
+        ComponentType toBeInserted = transientMap.remove(enoComponent.getId());
+        // Here component can be null (if some component exists in Eno-model but not in Lunatic)
+        if (toBeInserted == null) {
+            log.info("Eno component "+enoComponent+" has no match in Lunatic questionnaire.");
+            return Optional.empty();
+        }
+        lunaticComponents.add(toBeInserted);
+        return Optional.of(enoComponent);
     }
 
-    /** (Slightly optimized version.) */
-    private void addSequenceComponentsRec2(List<ComponentType> lunaticComponents, AbstractSequence enoSequence, EnoIndex enoIndex) {
+    /** (Recursive equivalent of iterative method above.) */
+    private void addSequenceComponentsRec(List<ComponentType> lunaticComponents, AbstractSequence enoSequence) {
         enoSequence.getComponentReferences().forEach(enoComponentReference -> {
-            ComponentType lunaticComponent = lunaticCatalog.getComponent(enoComponentReference);
-            lunaticComponents.add(lunaticComponent);
-            if (lunaticComponent instanceof fr.insee.lunatic.model.flat.Subsequence) {
-                AbstractSequence enoSequence2 = (AbstractSequence) enoIndex.get(enoComponentReference);
-                addSequenceComponentsRec2(lunaticComponents, enoSequence2, enoIndex);
-            }
+            insertLunaticComponent(lunaticComponents, enoComponentReference);
+            if (enoQuestionnaire.get(enoComponentReference) instanceof AbstractSequence enoSequence2)
+                addSequenceComponentsRec(lunaticComponents, enoSequence2);
         });
     }
 
