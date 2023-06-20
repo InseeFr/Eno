@@ -1,13 +1,19 @@
 package fr.insee.eno.core.converter;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.ValueNode;
 import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
 import fr.insee.eno.core.model.lunatic.LunaticResizingLoopVariable;
 import fr.insee.eno.core.model.lunatic.LunaticResizingPairWiseVariable;
 import fr.insee.eno.core.output.LunaticSerializer;
 import fr.insee.lunatic.model.flat.Questionnaire;
+import fr.insee.lunatic.model.flat.ResizingType;
 
-import javax.json.*;
-import java.io.StringReader;
 import java.util.List;
 
 public class JsonResizingConverter {
@@ -15,48 +21,78 @@ public class JsonResizingConverter {
         throw new IllegalArgumentException("Utility class");
     }
 
+    /**
+     * convert a questionnaire to json string with resize variables included
+     * @param lunaticQuestionnaire lunatic questionnaire
+     * @return json string of the questionnaire with resize included
+     * @throws LunaticSerializationException
+     */
     public static String convertResizingToJsonLunatic(Questionnaire lunaticQuestionnaire) throws LunaticSerializationException {
         String lunaticJson = LunaticSerializer.serializeToJson(lunaticQuestionnaire);
-        JsonReader jsonReader = Json.createReader(new StringReader(lunaticJson));
-        JsonObject questionnaire = jsonReader.readObject();
-
-        List<Object> resizingVariables = lunaticQuestionnaire.getResizing().getAny();
-        JsonObjectBuilder resizingsJson = Json.createObjectBuilder();
-
-        for(Object variableObject: resizingVariables) {
-            if(variableObject instanceof LunaticResizingPairWiseVariable variable) {
-                resizingsJson.add(variable.getName(), buildPairwiseResizingVariable(variable));
-            }
-
-            if(variableObject instanceof LunaticResizingLoopVariable variable) {
-                resizingsJson.add(variable.getName(), buildResizingLoopVariable(variable));
-            }
+        ResizingType resizingType = lunaticQuestionnaire.getResizing();
+        if(resizingType == null || resizingType.getAny().isEmpty()) {
+            return lunaticJson;
         }
-        questionnaire.put("resizing", resizingsJson.build());
-        jsonReader.close();
-        return questionnaire.toString();
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            ObjectNode questionnaireNode = (ObjectNode) mapper.readTree(lunaticJson);
+            questionnaireNode.get("resizing");
+            List<Object> resizingVariables = lunaticQuestionnaire.getResizing().getAny();
+
+            ObjectNode resizingsJson = mapper.createObjectNode();
+            for(Object variableObject: resizingVariables) {
+                if(variableObject instanceof LunaticResizingPairWiseVariable variable) {
+                    resizingsJson.set(variable.getName(), buildPairwiseResizingVariable(variable));
+                }
+
+                if(variableObject instanceof LunaticResizingLoopVariable variable) {
+                    resizingsJson.set(variable.getName(), buildResizingLoopVariable(variable));
+                }
+            }
+            questionnaireNode.set("resizing", resizingsJson);
+
+            return mapper.writeValueAsString(questionnaireNode);
+        } catch(JsonProcessingException ex) {
+            throw new LunaticSerializationException(ex.getMessage());
+        }
     }
 
-    public static JsonObject buildPairwiseResizingVariable(LunaticResizingPairWiseVariable variable) {
-        JsonArrayBuilder linksVariablesBuilder = Json.createArrayBuilder();
+    /**
+     * Build variable for pairwise resize
+     * @param variable variable to resize
+     * @return variable node to resize
+     */
+    public static JsonNode buildPairwiseResizingVariable(LunaticResizingPairWiseVariable variable) {
+        ArrayNode linksVariablesBuilder = JsonNodeFactory.instance.arrayNode();
         variable.getLinksVariables().forEach(linksVariablesBuilder::add);
 
-        JsonArrayBuilder sizeForLinksVariablesBuilder = Json.createArrayBuilder();
+        ArrayNode sizeForLinksVariablesBuilder = JsonNodeFactory.instance.arrayNode();
         variable.getSizeForLinksVariables().forEach(sizeForLinksVariablesBuilder::add);
 
-        return Json.createObjectBuilder()
-                .add("linksVariables", linksVariablesBuilder.build())
-                .add("sizeForLinksVariables", sizeForLinksVariablesBuilder.build())
-                .build();
+        ObjectNode pairwiseVariableNode = JsonNodeFactory.instance.objectNode();
+
+        pairwiseVariableNode.set("linksVariables", linksVariablesBuilder);
+        pairwiseVariableNode.set("sizeForLinksVariables", sizeForLinksVariablesBuilder);
+
+        return pairwiseVariableNode;
     }
 
-    public static JsonObject buildResizingLoopVariable(LunaticResizingLoopVariable variable) {
-        JsonArrayBuilder variablesBuilder = Json.createArrayBuilder();
-        variable.getVariables().forEach(variablesBuilder::add);
+    /**
+     * Build variable for loop resize
+     * @param variable variable to resize
+     * @return variable node to resize
+     */
+    public static JsonNode buildResizingLoopVariable(LunaticResizingLoopVariable variable) {
+        ArrayNode variablesArray = JsonNodeFactory.instance.arrayNode();
+        variable.getVariables().forEach(variablesArray::add);
 
-        return Json.createObjectBuilder()
-                .add("size", variable.getSize())
-                .add("variables",variablesBuilder.build())
-                .build();
+        ObjectNode loopVariableNode = JsonNodeFactory.instance.objectNode();
+
+        ValueNode sizeNodeValue = JsonNodeFactory.instance.textNode(variable.getSize());
+        loopVariableNode.set("size",  sizeNodeValue);
+        loopVariableNode.set("variables", variablesArray);
+
+        return loopVariableNode;
     }
 }

@@ -30,7 +30,12 @@ public class LunaticAddResizing implements OutProcessingInterface<Questionnaire>
 
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
-        List<Object> resizings = lunaticQuestionnaire.getResizing().getAny();
+        ResizingType resizingType = lunaticQuestionnaire.getResizing();
+        if(resizingType == null) {
+            resizingType = new ResizingType();
+        }
+
+        List<Object> resizings = resizingType.getAny();
 
         for(ComponentType component: lunaticQuestionnaire.getComponents()) {
             if(component.getComponentType().equals(ComponentTypeEnum.LOOP)) {
@@ -41,16 +46,21 @@ public class LunaticAddResizing implements OutProcessingInterface<Questionnaire>
                 resizings.addAll(buildResizingVariablesForPairwise((PairwiseLinks) component));
             }
         }
+
+        if(!resizings.isEmpty()) {
+            lunaticQuestionnaire.setResizing(resizingType);
+        }
     }
 
 
     private List<LunaticResizingPairWiseVariable> buildResizingVariablesForPairwise(PairwiseLinks links) {
         List<String> sizesVTLFormula = List.of(links.getXAxisIterations().getValue(), links.getYAxisIterations().getValue());
-        List<Variable> variables = getVariables(links.getId());
-        List<String> collectedVariablesFormulaDependencies = getCollectedVariablesFormulaDependencies(variables);
+        List<Variable> resizingVariables = getResizingVariables(links.getId());
+        List<String> variablesNames = getVariables(links.getId());
+        List<String> collectedVariablesFormulaDependencies = getCollectedVariablesFormulaDependencies(resizingVariables);
 
-        return variables.stream()
-                .map(variable -> new LunaticResizingPairWiseVariable(variable.getName(), sizesVTLFormula, collectedVariablesFormulaDependencies))
+        return collectedVariablesFormulaDependencies.stream()
+                .map(collectedVariable -> new LunaticResizingPairWiseVariable(collectedVariable, sizesVTLFormula, variablesNames))
                 .toList();
     }
 
@@ -63,21 +73,28 @@ public class LunaticAddResizing implements OutProcessingInterface<Questionnaire>
             return new ArrayList<>();
         }
 
-        List<Variable> variables = getVariables(loop.getId());
-        List<String> collectedVariablesFormulaDependencies = getCollectedVariablesFormulaDependencies(variables);
+        List<Variable> resizingVariables = getResizingVariables(loop.getId());
+        List<String> variablesNames = getVariables(loop.getId());
+        List<String> collectedVariablesFormulaDependencies = getCollectedVariablesFormulaDependencies(resizingVariables);
 
-        return variables.stream()
-                .map(variable -> new LunaticResizingLoopVariable(variable.getName(), sizeVTLFormula, collectedVariablesFormulaDependencies))
+        return collectedVariablesFormulaDependencies.stream()
+                .map(collectedVariable -> new LunaticResizingLoopVariable(collectedVariable, sizeVTLFormula, variablesNames))
                 .toList();
     }
 
 
-    private List<Variable> getVariables(String loopId) {
+    private List<String> getVariables(String loopId) {
         return enoQuestionnaire.getVariableGroups().stream()
                 .filter(variableGroup -> variableGroup.getName().equals(loopId))
                 .map(VariableGroup::getVariables)
                 .flatMap(Collection::stream)
+                .map(Variable::getName)
                 .toList();
+    }
+
+    private List<Variable> getResizingVariables(String loopId) {
+        // TODO: change to retrieve resizing variables instead of links variables
+        throw new UnsupportedOperationException("getResizingVariables needs some code !!");
     }
 
     private List<String> getCollectedVariablesFormulaDependencies(List<Variable> variables) {
