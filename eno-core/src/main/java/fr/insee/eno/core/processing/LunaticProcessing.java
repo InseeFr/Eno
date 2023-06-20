@@ -35,9 +35,10 @@ public class LunaticProcessing {
         new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);
         new LunaticAddGeneratingDate().apply(lunaticQuestionnaire);
         new LunaticAddBindingDependencies(lunaticCatalog, enoIndex).apply(lunaticQuestionnaire);
+        new LunaticAddMissingVariables(parameters.isMissingVariables()).apply(lunaticQuestionnaire);
+        new LunaticLoopResolution(enoQuestionnaire).apply(lunaticQuestionnaire);
         new LunaticAddPageNumbers(parameters.getLunaticPaginationMode()).apply(lunaticQuestionnaire);
         new LunaticAddHierarchy().apply(lunaticQuestionnaire);
-        new LunaticAddMissingVariables(parameters.isMissingVariables()).apply(lunaticQuestionnaire);
     }
 
 }

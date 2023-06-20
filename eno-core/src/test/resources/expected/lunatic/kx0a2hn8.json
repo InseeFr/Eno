@@ -1,0 +1,879 @@
+
+ { "id" : "kx0a2hn8",
+  "modele" : "TESTANNE",
+  "enoCoreVersion" : "2.4.0",
+  "lunaticModelVersion" : "2.3.1",
+  "generatingDate" : "09-01-2023 13:32:48",
+  "missing" : false,
+  "pagination" : "question",
+  "maxPage" : "11",
+  "label" : 
+  { "value" : "QNONREG - tous types boucle nombre variable ou fixe (min=max) - ok",
+   "type" : "VTL|MD" },
+  "components" : 
+  [ 
+   { "id" : "kwupyhsh",
+    "componentType" : "Sequence",
+    "page" : "1",
+    "label" : 
+    { "value" : "\"I - \" || \"S1 - boucle liée de 1 à max 4 avec un nb inconnu au début\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "kwupyhsh",
+      "page" : "1",
+      "label" : 
+      { "value" : "\"I - \" || \"S1 - boucle liée de 1 à max 4 avec un nb inconnu au début\"",
+       "type" : "VTL|MD" } } } },
+   
+   { "id" : "l7pusaki",
+    "componentType" : "Loop",
+    "page" : "2",
+    "depth" : 1,
+    "paginatedLoop" : false,
+    "label" : 
+    { "value" : "Ajoute un prénom",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "kwupyhsh",
+      "page" : "1",
+      "label" : 
+      { "value" : "\"I - \" || \"S1 - boucle liée de 1 à max 4 avec un nb inconnu au début\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "PRENOM" ],
+    "lines" : 
+    { "min" : 
+     { "value" : "1",
+      "type" : "VTL" },
+     "max" : 
+     { "value" : "4",
+      "type" : "VTL" } },
+    "components" : 
+    [ 
+     { "id" : "l7g7ou85",
+      "componentType" : "Subsequence",
+      "page" : "2",
+      "goToPage" : "2",
+      "label" : 
+      { "value" : "SS11",
+       "type" : "VTL|MD" },
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "kwupyhsh",
+        "page" : "1",
+        "label" : 
+        { "value" : "\"I - \" || \"S1 - boucle liée de 1 à max 4 avec un nb inconnu au début\"",
+         "type" : "VTL|MD" } },
+       "subSequence" : 
+       { "id" : "l7g7ou85",
+        "page" : "2",
+        "label" : 
+        { "value" : "SS11",
+         "type" : "VTL|MD" } } } },
+     
+     { "id" : "l7g7tek6",
+      "componentType" : "Input",
+      "mandatory" : false,
+      "page" : "2",
+      "maxLength" : 249,
+      "label" : 
+      { "value" : "\"➡ \" || \"PRENOM\"",
+       "type" : "VTL|MD" },
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "kwupyhsh",
+        "page" : "1",
+        "label" : 
+        { "value" : "\"I - \" || \"S1 - boucle liée de 1 à max 4 avec un nb inconnu au début\"",
+         "type" : "VTL|MD" } },
+       "subSequence" : 
+       { "id" : "l7g7ou85",
+        "page" : "2",
+        "label" : 
+        { "value" : "SS11",
+         "type" : "VTL|MD" } } },
+      "bindingDependencies" : 
+      [ "PRENOM" ],
+      "response" : 
+      { "name" : "PRENOM" } } ] },
+   
+   { "id" : "l7puyos3",
+    "componentType" : "Loop",
+    "page" : "3",
+    "maxPage" : "2",
+    "depth" : 1,
+    "paginatedLoop" : true,
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "kwupyhsh",
+      "page" : "1",
+      "label" : 
+      { "value" : "\"I - \" || \"S1 - boucle liée de 1 à max 4 avec un nb inconnu au début\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "PRENOM",
+     "Q1",
+     "Q2" ],
+    "loopDependencies" : 
+    [ "PRENOM" ],
+    "components" : 
+    [ 
+     { "id" : "l7g7lnew",
+      "componentType" : "Subsequence",
+      "goToPage" : "3.1",
+      "label" : 
+      { "value" : "SS12",
+       "type" : "VTL|MD" },
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "kwupyhsh",
+        "page" : "1",
+        "label" : 
+        { "value" : "\"I - \" || \"S1 - boucle liée de 1 à max 4 avec un nb inconnu au début\"",
+         "type" : "VTL|MD" } },
+       "subSequence" : 
+       { "id" : "l7g7lnew",
+        "page" : "3.1",
+        "label" : 
+        { "value" : "SS12",
+         "type" : "VTL|MD" } } },
+      "bindingDependencies" : 
+      [ "PRENOM" ] },
+     
+     { "id" : "kx05sq4y",
+      "componentType" : "Input",
+      "mandatory" : false,
+      "page" : "3.1",
+      "maxLength" : 249,
+      "label" : 
+      { "value" : "\"➡ \" || \"Q1 de \"|| cast(PRENOM,string)",
+       "type" : "VTL|MD" },
+      "declarations" : 
+      [ 
+       { "id" : "kx05sq4y-lciynl4d",
+        "declarationType" : "HELP",
+        "position" : "AFTER_QUESTION_TEXT",
+        "label" : 
+        { "value" : "\"Filtre pour affichage de Q2 : Q2 affichée si Q1 = A, donc à tester\"",
+         "type" : "VTL|MD" } } ],
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "kwupyhsh",
+        "page" : "1",
+        "label" : 
+        { "value" : "\"I - \" || \"S1 - boucle liée de 1 à max 4 avec un nb inconnu au début\"",
+         "type" : "VTL|MD" } },
+       "subSequence" : 
+       { "id" : "l7g7lnew",
+        "page" : "3.1",
+        "label" : 
+        { "value" : "SS12",
+         "type" : "VTL|MD" } } },
+      "bindingDependencies" : 
+      [ "PRENOM",
+       "Q1" ],
+      "response" : 
+      { "name" : "Q1" } },
+     
+     { "id" : "kx06v7yq",
+      "componentType" : "Input",
+      "mandatory" : false,
+      "page" : "3.2",
+      "maxLength" : 249,
+      "label" : 
+      { "value" : "\"➡ \" || \"Affichage si Q1 = A de Q2 de \"|| cast(PRENOM,string)",
+       "type" : "VTL|MD" },
+      "conditionFilter" : 
+      { "value" : "(Q1= \"A\")",
+       "type" : "VTL",
+       "bindingDependencies" : 
+       [ "Q1" ] },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "kwupyhsh",
+        "page" : "1",
+        "label" : 
+        { "value" : "\"I - \" || \"S1 - boucle liée de 1 à max 4 avec un nb inconnu au début\"",
+         "type" : "VTL|MD" } },
+       "subSequence" : 
+       { "id" : "l7g7lnew",
+        "page" : "3.1",
+        "label" : 
+        { "value" : "SS12",
+         "type" : "VTL|MD" } } },
+      "bindingDependencies" : 
+      [ "PRENOM",
+       "Q2" ],
+      "response" : 
+      { "name" : "Q2" } } ],
+    "iterations" : 
+    { "value" : "count(PRENOM)",
+     "type" : "VTL" } },
+   
+   { "id" : "l7puc9t3",
+    "componentType" : "Sequence",
+    "page" : "4",
+    "label" : 
+    { "value" : "\"II - \" || \"S2 - boucle type conjoncture, de 1 à 4, ne sera pas liée\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l7puc9t3",
+      "page" : "4",
+      "label" : 
+      { "value" : "\"II - \" || \"S2 - boucle type conjoncture, de 1 à 4, ne sera pas liée\"",
+       "type" : "VTL|MD" } } } },
+   
+   { "id" : "l7puibqj",
+    "componentType" : "Loop",
+    "page" : "5",
+    "depth" : 1,
+    "paginatedLoop" : false,
+    "label" : 
+    { "value" : "Ajouter un produit",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l7puc9t3",
+      "page" : "4",
+      "label" : 
+      { "value" : "\"II - \" || \"S2 - boucle type conjoncture, de 1 à 4, ne sera pas liée\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "P1",
+     "P2" ],
+    "lines" : 
+    { "min" : 
+     { "value" : "1",
+      "type" : "VTL" },
+     "max" : 
+     { "value" : "4",
+      "type" : "VTL" } },
+    "components" : 
+    [ 
+     { "id" : "l7puoovt",
+      "componentType" : "Subsequence",
+      "page" : "5",
+      "goToPage" : "5",
+      "label" : 
+      { "value" : "Decrire le produit",
+       "type" : "VTL|MD" },
+      "declarations" : 
+      [ 
+       { "id" : "l7puoovt-l7pv1nnm",
+        "declarationType" : "HELP",
+        "position" : "AFTER_QUESTION_TEXT",
+        "label" : 
+        { "value" : "\"on décrit un produit\"",
+         "type" : "VTL|MD" } } ],
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "l7puc9t3",
+        "page" : "4",
+        "label" : 
+        { "value" : "\"II - \" || \"S2 - boucle type conjoncture, de 1 à 4, ne sera pas liée\"",
+         "type" : "VTL|MD" } },
+       "subSequence" : 
+       { "id" : "l7puoovt",
+        "page" : "5",
+        "label" : 
+        { "value" : "Decrire le produit",
+         "type" : "VTL|MD" } } } },
+     
+     { "id" : "l7pu8g5e",
+      "componentType" : "Input",
+      "mandatory" : false,
+      "page" : "5",
+      "maxLength" : 249,
+      "label" : 
+      { "value" : "\"➡ \" || \"Décrire un produit\"",
+       "type" : "VTL|MD" },
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "l7puc9t3",
+        "page" : "4",
+        "label" : 
+        { "value" : "\"II - \" || \"S2 - boucle type conjoncture, de 1 à 4, ne sera pas liée\"",
+         "type" : "VTL|MD" } },
+       "subSequence" : 
+       { "id" : "l7puoovt",
+        "page" : "5",
+        "label" : 
+        { "value" : "Decrire le produit",
+         "type" : "VTL|MD" } } },
+      "bindingDependencies" : 
+      [ "P1" ],
+      "response" : 
+      { "name" : "P1" } },
+     
+     { "id" : "l7pu5agy",
+      "componentType" : "Input",
+      "mandatory" : false,
+      "page" : "5",
+      "maxLength" : 249,
+      "label" : 
+      { "value" : "\"➡ \" || \"Avis sur produit\"",
+       "type" : "VTL|MD" },
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "l7puc9t3",
+        "page" : "4",
+        "label" : 
+        { "value" : "\"II - \" || \"S2 - boucle type conjoncture, de 1 à 4, ne sera pas liée\"",
+         "type" : "VTL|MD" } },
+       "subSequence" : 
+       { "id" : "l7puoovt",
+        "page" : "5",
+        "label" : 
+        { "value" : "Decrire le produit",
+         "type" : "VTL|MD" } } },
+      "bindingDependencies" : 
+      [ "P2" ],
+      "response" : 
+      { "name" : "P2" } } ] },
+   
+   { "id" : "kx06a9lq",
+    "componentType" : "Sequence",
+    "page" : "6",
+    "label" : 
+    { "value" : "\"III - \" || \"S3 - boucle N occurrences, N collecté en premier, type logement\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "kx06a9lq",
+      "page" : "6",
+      "label" : 
+      { "value" : "\"III - \" || \"S3 - boucle N occurrences, N collecté en premier, type logement\"",
+       "type" : "VTL|MD" } } } },
+   
+   { "id" : "kwupqy19",
+    "componentType" : "InputNumber",
+    "mandatory" : false,
+    "page" : "7",
+    "min" : 0,
+    "max" : 100,
+    "decimals" : 0,
+    "label" : 
+    { "value" : "\"➡ \" || \"NB\"",
+     "type" : "VTL|MD" },
+    "declarations" : 
+    [ 
+     { "id" : "kwupqy19-kx09g78a",
+      "declarationType" : "HELP",
+      "position" : "AFTER_QUESTION_TEXT",
+      "label" : 
+      { "value" : "\"affiche nb = (on vérifie que cast string ok) :\" || cast(NB,string)",
+       "type" : "VTL|MD" } } ],
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "controls" : 
+    [ 
+     { "id" : "kwupqy19-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(NB)) and (0>NB or 100<NB))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "kwupqy19-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(NB))  and round(NB,0)<>NB)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } } ],
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "kx06a9lq",
+      "page" : "6",
+      "label" : 
+      { "value" : "\"III - \" || \"S3 - boucle N occurrences, N collecté en premier, type logement\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "NB" ],
+    "response" : 
+    { "name" : "NB" } },
+   
+   { "id" : "l7pv0z7b",
+    "componentType" : "Loop",
+    "page" : "8",
+    "depth" : 1,
+    "paginatedLoop" : false,
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "kx06a9lq",
+      "page" : "6",
+      "label" : 
+      { "value" : "\"III - \" || \"S3 - boucle N occurrences, N collecté en premier, type logement\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "NB",
+     "PRENOM2" ],
+    "loopDependencies" : 
+    [ "NB" ],
+    "lines" : 
+    { "min" : 
+     { "value" : "nvl(NB,1)",
+      "type" : "VTL" },
+     "max" : 
+     { "value" : "nvl(NB,1)",
+      "type" : "VTL" } },
+    "components" : 
+    [ 
+     { "id" : "kx061cac",
+      "componentType" : "Subsequence",
+      "page" : "8",
+      "goToPage" : "8",
+      "label" : 
+      { "value" : "SS31",
+       "type" : "VTL|MD" },
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "kx06a9lq",
+        "page" : "6",
+        "label" : 
+        { "value" : "\"III - \" || \"S3 - boucle N occurrences, N collecté en premier, type logement\"",
+         "type" : "VTL|MD" } },
+       "subSequence" : 
+       { "id" : "kx061cac",
+        "page" : "8",
+        "label" : 
+        { "value" : "SS31",
+         "type" : "VTL|MD" } } },
+      "bindingDependencies" : 
+      [ "NB" ] },
+     
+     { "id" : "kwupruv2",
+      "componentType" : "Input",
+      "mandatory" : false,
+      "page" : "8",
+      "maxLength" : 249,
+      "label" : 
+      { "value" : "\"➡ \" || \"PRENOM\"",
+       "type" : "VTL|MD" },
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "kx06a9lq",
+        "page" : "6",
+        "label" : 
+        { "value" : "\"III - \" || \"S3 - boucle N occurrences, N collecté en premier, type logement\"",
+         "type" : "VTL|MD" } },
+       "subSequence" : 
+       { "id" : "kx061cac",
+        "page" : "8",
+        "label" : 
+        { "value" : "SS31",
+         "type" : "VTL|MD" } } },
+      "bindingDependencies" : 
+      [ "PRENOM2",
+       "NB" ],
+      "response" : 
+      { "name" : "PRENOM2" } } ] },
+   
+   { "id" : "l7puvvpz",
+    "componentType" : "Loop",
+    "page" : "9",
+    "maxPage" : "1",
+    "depth" : 1,
+    "paginatedLoop" : true,
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "kx06a9lq",
+      "page" : "6",
+      "label" : 
+      { "value" : "\"III - \" || \"S3 - boucle N occurrences, N collecté en premier, type logement\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "PRENOM2",
+     "AGE" ],
+    "loopDependencies" : 
+    [ "PRENOM2" ],
+    "components" : 
+    [ 
+     { "id" : "kx09u145",
+      "componentType" : "Subsequence",
+      "goToPage" : "9.1",
+      "label" : 
+      { "value" : "SS32",
+       "type" : "VTL|MD" },
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "kx06a9lq",
+        "page" : "6",
+        "label" : 
+        { "value" : "\"III - \" || \"S3 - boucle N occurrences, N collecté en premier, type logement\"",
+         "type" : "VTL|MD" } },
+       "subSequence" : 
+       { "id" : "kx09u145",
+        "page" : "9.1",
+        "label" : 
+        { "value" : "SS32",
+         "type" : "VTL|MD" } } },
+      "bindingDependencies" : 
+      [ "PRENOM2" ] },
+     
+     { "id" : "kx05rmm0",
+      "componentType" : "InputNumber",
+      "mandatory" : false,
+      "page" : "9.1",
+      "min" : 0,
+      "max" : 99,
+      "decimals" : 0,
+      "label" : 
+      { "value" : "\"➡ \" || \"AGE de \" || cast(PRENOM2,string)",
+       "type" : "VTL|MD" },
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "controls" : 
+      [ 
+       { "id" : "kx05rmm0-format-borne-inf-sup",
+        "typeOfControl" : "FORMAT",
+        "criticality" : "ERROR",
+        "control" : 
+        { "value" : "not(not(isnull(AGE)) and (0>AGE or 99<AGE))",
+         "type" : "VTL" },
+        "errorMessage" : 
+        { "value" : "\" La valeur doit être comprise entre 0 et 99.\"",
+         "type" : "VTL|MD" } },
+       
+       { "id" : "kx05rmm0-format-decimal",
+        "typeOfControl" : "FORMAT",
+        "criticality" : "ERROR",
+        "control" : 
+        { "value" : "not(not(isnull(AGE))  and round(AGE,0)<>AGE)",
+         "type" : "VTL" },
+        "errorMessage" : 
+        { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+         "type" : "VTL|MD" } },
+       
+       { "id" : "kx05rmm0-CI-0",
+        "typeOfControl" : "CONSISTENCY",
+        "criticality" : "WARN",
+        "control" : 
+        { "value" : "not(isnull(AGE))",
+         "type" : "VTL" },
+        "errorMessage" : 
+        { "value" : "\"Age est vide\"",
+         "type" : "VTL|MD" },
+        "bindingDependencies" : 
+        [ "AGE" ] } ],
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "kx06a9lq",
+        "page" : "6",
+        "label" : 
+        { "value" : "\"III - \" || \"S3 - boucle N occurrences, N collecté en premier, type logement\"",
+         "type" : "VTL|MD" } },
+       "subSequence" : 
+       { "id" : "kx09u145",
+        "page" : "9.1",
+        "label" : 
+        { "value" : "SS32",
+         "type" : "VTL|MD" } } },
+      "bindingDependencies" : 
+      [ "PRENOM2",
+       "AGE" ],
+      "response" : 
+      { "name" : "AGE" } } ],
+    "iterations" : 
+    { "value" : "count(PRENOM2)",
+     "type" : "VTL" } },
+   
+   { "id" : "COMMENT-SEQ",
+    "componentType" : "Sequence",
+    "page" : "10",
+    "label" : 
+    { "value" : "\"Commentaire\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "COMMENT-SEQ",
+      "page" : "10",
+      "label" : 
+      { "value" : "\"Commentaire\"",
+       "type" : "VTL|MD" } } } },
+   
+   { "id" : "COMMENT-QUESTION",
+    "componentType" : "Textarea",
+    "mandatory" : false,
+    "page" : "11",
+    "maxLength" : 2000,
+    "label" : 
+    { "value" : "\"Avez-vous des remarques concernant l'enquête ou des commentaires ?\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "COMMENT-SEQ",
+      "page" : "10",
+      "label" : 
+      { "value" : "\"Commentaire\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "COMMENT_QE" ],
+    "response" : 
+    { "name" : "COMMENT_QE" } } ],
+  "variables" : 
+  [ 
+   { "variableType" : "COLLECTED",
+    "name" : "COMMENT_QE",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "PRENOM",
+    "values" : 
+    { "PREVIOUS" : 
+     [ null ],
+     "COLLECTED" : 
+     [ null ],
+     "FORCED" : 
+     [ null ],
+     "EDITED" : 
+     [ null ],
+     "INPUTED" : 
+     [ null ] } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "Q1",
+    "values" : 
+    { "PREVIOUS" : 
+     [ null ],
+     "COLLECTED" : 
+     [ null ],
+     "FORCED" : 
+     [ null ],
+     "EDITED" : 
+     [ null ],
+     "INPUTED" : 
+     [ null ] } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "Q2",
+    "values" : 
+    { "PREVIOUS" : 
+     [ null ],
+     "COLLECTED" : 
+     [ null ],
+     "FORCED" : 
+     [ null ],
+     "EDITED" : 
+     [ null ],
+     "INPUTED" : 
+     [ null ] } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "P1",
+    "values" : 
+    { "PREVIOUS" : 
+     [ null ],
+     "COLLECTED" : 
+     [ null ],
+     "FORCED" : 
+     [ null ],
+     "EDITED" : 
+     [ null ],
+     "INPUTED" : 
+     [ null ] } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "P2",
+    "values" : 
+    { "PREVIOUS" : 
+     [ null ],
+     "COLLECTED" : 
+     [ null ],
+     "FORCED" : 
+     [ null ],
+     "EDITED" : 
+     [ null ],
+     "INPUTED" : 
+     [ null ] } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "NB",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "PRENOM2",
+    "values" : 
+    { "PREVIOUS" : 
+     [ null ],
+     "COLLECTED" : 
+     [ null ],
+     "FORCED" : 
+     [ null ],
+     "EDITED" : 
+     [ null ],
+     "INPUTED" : 
+     [ null ] } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "AGE",
+    "values" : 
+    { "PREVIOUS" : 
+     [ null ],
+     "COLLECTED" : 
+     [ null ],
+     "FORCED" : 
+     [ null ],
+     "EDITED" : 
+     [ null ],
+     "INPUTED" : 
+     [ null ] } },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_PRENOM",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "shapeFrom" : "PRENOM",
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_Q1",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "shapeFrom" : "Q1",
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_Q2",
+    "expression" : 
+    { "value" : "(Q1= \"A\")",
+     "type" : "VTL" },
+    "bindingDependencies" : 
+    [ "Q1" ],
+    "shapeFrom" : "Q1",
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_P1",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "shapeFrom" : "P1",
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_P2",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "shapeFrom" : "P1",
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_NB",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_PRENOM2",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "shapeFrom" : "PRENOM2",
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_AGE",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "shapeFrom" : "AGE",
+    "inFilter" : "false" } ],
+  "cleaning" : 
+  { "Q1" : 
+   { "Q2" : "(Q1= \"A\")" } },
+  "resizing" : 
+  { "PRENOM" : 
+   { "size" : "count(PRENOM)",
+    "variables" : 
+    [ "Q1",
+     "Q2" ] },
+   "NB" : 
+   { "size" : "nvl(NB,1)",
+    "variables" : 
+    [ "PRENOM2",
+     "AGE" ] } } }

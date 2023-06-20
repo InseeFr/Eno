@@ -1,0 +1,2047 @@
+
+ { "id" : "l8x6fhtd",
+  "modele" : "SANDBOXENO32",
+  "enoCoreVersion" : "2.4.0",
+  "lunaticModelVersion" : "2.3.1",
+  "generatingDate" : "10-01-2023 13:13:13",
+  "missing" : false,
+  "pagination" : "question",
+  "maxPage" : "14",
+  "label" : 
+  { "value" : "Sandbox Eno V3 Lunatic V2",
+   "type" : "VTL|MD" },
+  "components" : 
+  [ 
+   { "id" : "l8x6ebv8",
+    "componentType" : "Sequence",
+    "page" : "1",
+    "label" : 
+    { "value" : "\"I - \" || \"Première séquence\"",
+     "type" : "VTL|MD" },
+    "declarations" : 
+    [ 
+     { "id" : "l8x6ebv8-l8x6k5lj",
+      "declarationType" : "HELP",
+      "position" : "AFTER_QUESTION_TEXT",
+      "label" : 
+      { "value" : "\"Bonjour\"",
+       "type" : "VTL|MD" } } ],
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l8x6ebv8",
+      "page" : "1",
+      "label" : 
+      { "value" : "\"I - \" || \"Première séquence\"",
+       "type" : "VTL|MD" } } } },
+   
+   { "id" : "lc0cu6i6",
+    "componentType" : "Subsequence",
+    "goToPage" : "2",
+    "label" : 
+    { "value" : "\"Première sous-séquence\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l8x6ebv8",
+      "page" : "1",
+      "label" : 
+      { "value" : "\"I - \" || \"Première séquence\"",
+       "type" : "VTL|MD" } },
+     "subSequence" : 
+     { "id" : "lc0cu6i6",
+      "page" : "2",
+      "label" : 
+      { "value" : "\"Première sous-séquence\"",
+       "type" : "VTL|MD" } } } },
+   
+   { "id" : "l8x6akb3",
+    "componentType" : "Input",
+    "mandatory" : false,
+    "page" : "2",
+    "maxLength" : 249,
+    "label" : 
+    { "value" : "\"➡ \" || \"Première question\"",
+     "type" : "VTL|MD" },
+    "declarations" : 
+    [ 
+     { "id" : "l8x6hd7l-SI",
+      "declarationType" : "STATEMENT",
+      "position" : "BEFORE_QUESTION_TEXT",
+      "label" : 
+      { "value" : "\"Instruction consigne pour la première question.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l8x6akb3-l8x6lv3v",
+      "declarationType" : "HELP",
+      "position" : "AFTER_QUESTION_TEXT",
+      "label" : 
+      { "value" : "\"Bienvenue\"",
+       "type" : "VTL|MD" } } ],
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l8x6ebv8",
+      "page" : "1",
+      "label" : 
+      { "value" : "\"I - \" || \"Première séquence\"",
+       "type" : "VTL|MD" } },
+     "subSequence" : 
+     { "id" : "lc0cu6i6",
+      "page" : "2",
+      "label" : 
+      { "value" : "\"Première sous-séquence\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "Q1" ],
+    "response" : 
+    { "name" : "Q1" } },
+   
+   { "id" : "l8y8ozno",
+    "componentType" : "InputNumber",
+    "mandatory" : false,
+    "page" : "3",
+    "min" : 0,
+    "max" : 100,
+    "decimals" : 1,
+    "label" : 
+    { "value" : "\"➡ \" || \"Numérique avec contrôle\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "controls" : 
+    [ 
+     { "id" : "l8y8ozno-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(Q2)) and (0.0>Q2 or 100.0<Q2))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0.0 et 100.0.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l8y8ozno-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(Q2))  and round(Q2,1)<>Q2)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 1 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l8y8ozno-CI-0",
+      "typeOfControl" : "CONSISTENCY",
+      "criticality" : "WARN",
+      "control" : 
+      { "value" : "not(cast(Q2, number) > 30)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Valeur renseignée = \" || cast(Q2, string) || \" (> 30).\"",
+       "type" : "VTL|MD" } } ],
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l8x6ebv8",
+      "page" : "1",
+      "label" : 
+      { "value" : "\"I - \" || \"Première séquence\"",
+       "type" : "VTL|MD" } },
+     "subSequence" : 
+     { "id" : "lc0cu6i6",
+      "page" : "2",
+      "label" : 
+      { "value" : "\"Première sous-séquence\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "Q2" ],
+    "response" : 
+    { "name" : "Q2" } },
+   
+   { "id" : "l8y8wde3",
+    "componentType" : "CheckboxBoolean",
+    "mandatory" : false,
+    "page" : "4",
+    "label" : 
+    { "value" : "\"➡ \" || \"Booléenne\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l8x6ebv8",
+      "page" : "1",
+      "label" : 
+      { "value" : "\"I - \" || \"Première séquence\"",
+       "type" : "VTL|MD" } },
+     "subSequence" : 
+     { "id" : "lc0cu6i6",
+      "page" : "2",
+      "label" : 
+      { "value" : "\"Première sous-séquence\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "Q3" ],
+    "response" : 
+    { "name" : "Q3" } },
+   
+   { "id" : "l9nxvj6m",
+    "componentType" : "Radio",
+    "mandatory" : false,
+    "page" : "5",
+    "label" : 
+    { "value" : "\"➡ \" || \"QCU avec liste de codes imbriqués\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l8x6ebv8",
+      "page" : "1",
+      "label" : 
+      { "value" : "\"I - \" || \"Première séquence\"",
+       "type" : "VTL|MD" } },
+     "subSequence" : 
+     { "id" : "lc0cu6i6",
+      "page" : "2",
+      "label" : 
+      { "value" : "\"Première sous-séquence\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "QCU_COMPLEXE" ],
+    "options" : 
+    [ 
+     { "value" : "m1",
+      "label" : 
+      { "value" : "\"Modalité simple 1\"",
+       "type" : "VTL|MD" } },
+     
+     { "value" : "m2",
+      "label" : 
+      { "value" : "\"Modalité 2 avec imbrications\"",
+       "type" : "VTL|MD" } } ],
+    "response" : 
+    { "name" : "QCU_COMPLEXE" } },
+   
+   { "id" : "l9888jno",
+    "componentType" : "Sequence",
+    "page" : "6",
+    "label" : 
+    { "value" : "\"II - \" || \"Tableaux\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l9888jno",
+      "page" : "6",
+      "label" : 
+      { "value" : "\"II - \" || \"Tableaux\"",
+       "type" : "VTL|MD" } } } },
+   
+   { "id" : "l988nifn",
+    "componentType" : "Table",
+    "mandatory" : false,
+    "page" : "7",
+    "positioning" : "HORIZONTAL",
+    "label" : 
+    { "value" : "\"➡ \" || \"Tableau liste de codes + 2 colonnes\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "controls" : 
+    [ 
+     { "id" : "l988nifn-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB211)) and (0>TAB211 or 100<TAB211))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB211))  and round(TAB211,0)<>TAB211)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB212)) and (0>TAB212 or 100<TAB212))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB212))  and round(TAB212,0)<>TAB212)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB221)) and (0>TAB221 or 100<TAB221))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB221))  and round(TAB221,0)<>TAB221)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB222)) and (0>TAB222 or 100<TAB222))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB222))  and round(TAB222,0)<>TAB222)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB231)) and (0>TAB231 or 100<TAB231))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB231))  and round(TAB231,0)<>TAB231)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB232)) and (0>TAB232 or 100<TAB232))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB232))  and round(TAB232,0)<>TAB232)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB241)) and (0>TAB241 or 100<TAB241))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB241))  and round(TAB241,0)<>TAB241)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB242)) and (0>TAB242 or 100<TAB242))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l988nifn-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB242))  and round(TAB242,0)<>TAB242)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } } ],
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l9888jno",
+      "page" : "6",
+      "label" : 
+      { "value" : "\"II - \" || \"Tableaux\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "TAB211",
+     "TAB212",
+     "TAB221",
+     "TAB222",
+     "TAB231",
+     "TAB232",
+     "TAB241",
+     "TAB242" ],
+    "header" : 
+    [ 
+     { "label" : 
+      { "value" : "",
+       "type" : "VTL|MD" } },
+     
+     { "label" : 
+      { "value" : "\"Colonne 1\"",
+       "type" : "VTL|MD" } },
+     
+     { "label" : 
+      { "value" : "\"Colonne 2\"",
+       "type" : "VTL|MD" } } ],
+    "body" : 
+    [ 
+     [ 
+      { "value" : "codeA",
+       "label" : 
+       { "value" : "\"Code A\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 100,
+       "decimals" : 0,
+       "id" : "l988nifn-QOP-l98a9uow",
+       "response" : 
+       { "name" : "TAB211" },
+       "bindingDependencies" : 
+       [ "TAB211" ] },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 100,
+       "decimals" : 0,
+       "id" : "l988nifn-QOP-l98akz5o",
+       "response" : 
+       { "name" : "TAB212" },
+       "bindingDependencies" : 
+       [ "TAB212" ] } ],
+     
+     [ 
+      { "value" : "codeB",
+       "label" : 
+       { "value" : "\"Code B\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 100,
+       "decimals" : 0,
+       "id" : "l988nifn-QOP-l98aeyfq",
+       "response" : 
+       { "name" : "TAB221" },
+       "bindingDependencies" : 
+       [ "TAB221" ] },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 100,
+       "decimals" : 0,
+       "id" : "l988nifn-QOP-l98aceo5",
+       "response" : 
+       { "name" : "TAB222" },
+       "bindingDependencies" : 
+       [ "TAB222" ] } ],
+     
+     [ 
+      { "value" : "codeC",
+       "label" : 
+       { "value" : "\"Code C\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 100,
+       "decimals" : 0,
+       "id" : "l988nifn-QOP-l98aadol",
+       "response" : 
+       { "name" : "TAB231" },
+       "bindingDependencies" : 
+       [ "TAB231" ] },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 100,
+       "decimals" : 0,
+       "id" : "l988nifn-QOP-l98a7b6m",
+       "response" : 
+       { "name" : "TAB232" },
+       "bindingDependencies" : 
+       [ "TAB232" ] } ],
+     
+     [ 
+      { "value" : "codeD",
+       "label" : 
+       { "value" : "\"Code D\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 100,
+       "decimals" : 0,
+       "id" : "l988nifn-QOP-l98adzsy",
+       "response" : 
+       { "name" : "TAB241" },
+       "bindingDependencies" : 
+       [ "TAB241" ] },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 100,
+       "decimals" : 0,
+       "id" : "l988nifn-QOP-l98a6v1m",
+       "response" : 
+       { "name" : "TAB242" },
+       "bindingDependencies" : 
+       [ "TAB242" ] } ] ] },
+   
+   { "id" : "l9ny8wb8",
+    "componentType" : "Table",
+    "mandatory" : false,
+    "page" : "8",
+    "positioning" : "HORIZONTAL",
+    "label" : 
+    { "value" : "\"➡ \" || \"Tableau avec liste de codes imbriqués\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "controls" : 
+    [ 
+     { "id" : "l9ny8wb8-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB_IMBRIQ11)) and (0>TAB_IMBRIQ11 or 10<TAB_IMBRIQ11))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 10.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l9ny8wb8-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB_IMBRIQ11))  and round(TAB_IMBRIQ11,0)<>TAB_IMBRIQ11)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l9ny8wb8-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB_IMBRIQ21)) and (0>TAB_IMBRIQ21 or 10<TAB_IMBRIQ21))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 10.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l9ny8wb8-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB_IMBRIQ21))  and round(TAB_IMBRIQ21,0)<>TAB_IMBRIQ21)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l9ny8wb8-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB_IMBRIQ31)) and (0>TAB_IMBRIQ31 or 10<TAB_IMBRIQ31))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 10.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l9ny8wb8-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB_IMBRIQ31))  and round(TAB_IMBRIQ31,0)<>TAB_IMBRIQ31)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l9ny8wb8-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB_IMBRIQ41)) and (0>TAB_IMBRIQ41 or 10<TAB_IMBRIQ41))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 10.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l9ny8wb8-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB_IMBRIQ41))  and round(TAB_IMBRIQ41,0)<>TAB_IMBRIQ41)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l9ny8wb8-format-borne-inf-sup",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB_IMBRIQ51)) and (0>TAB_IMBRIQ51 or 10<TAB_IMBRIQ51))",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\" La valeur doit être comprise entre 0 et 10.\"",
+       "type" : "VTL|MD" } },
+     
+     { "id" : "l9ny8wb8-format-decimal",
+      "typeOfControl" : "FORMAT",
+      "criticality" : "ERROR",
+      "control" : 
+      { "value" : "not(not(isnull(TAB_IMBRIQ51))  and round(TAB_IMBRIQ51,0)<>TAB_IMBRIQ51)",
+       "type" : "VTL" },
+      "errorMessage" : 
+      { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+       "type" : "VTL|MD" } } ],
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l9888jno",
+      "page" : "6",
+      "label" : 
+      { "value" : "\"II - \" || \"Tableaux\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "TAB_IMBRIQ11",
+     "TAB_IMBRIQ21",
+     "TAB_IMBRIQ31",
+     "TAB_IMBRIQ41",
+     "TAB_IMBRIQ51" ],
+    "header" : 
+    [ 
+     { "colspan" : 3,
+      "label" : 
+      { "value" : "",
+       "type" : "VTL|MD" } },
+     
+     { "label" : 
+      { "value" : "\"Nombre tableau imbrications\"",
+       "type" : "VTL|MD" } } ],
+    "body" : 
+    [ 
+     [ 
+      { "colspan" : 3,
+       "value" : "m1",
+       "label" : 
+       { "value" : "\"Modalité simple 1\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 10,
+       "decimals" : 0,
+       "id" : "l9ny8wb8-QOP-l9nyjkq7",
+       "response" : 
+       { "name" : "TAB_IMBRIQ11" },
+       "bindingDependencies" : 
+       [ "TAB_IMBRIQ11" ] } ],
+     
+     [ 
+      { "rowspan" : 4,
+       "value" : "m2",
+       "label" : 
+       { "value" : "\"Modalité 2 avec imbrications\"",
+        "type" : "VTL|MD" } },
+      
+      { "colspan" : 2,
+       "value" : "m21",
+       "label" : 
+       { "value" : "\"Imbrication 1\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 10,
+       "decimals" : 0,
+       "id" : "l9ny8wb8-QOP-l9nyfqio",
+       "response" : 
+       { "name" : "TAB_IMBRIQ21" },
+       "bindingDependencies" : 
+       [ "TAB_IMBRIQ21" ] } ],
+     
+     [ 
+      { "rowspan" : 2,
+       "value" : "m22",
+       "label" : 
+       { "value" : "\"Imbrication 2\"",
+        "type" : "VTL|MD" } },
+      
+      { "value" : "m221",
+       "label" : 
+       { "value" : "\"Sous-imbrication 1\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 10,
+       "decimals" : 0,
+       "id" : "l9ny8wb8-QOP-l9nylh0w",
+       "response" : 
+       { "name" : "TAB_IMBRIQ31" },
+       "bindingDependencies" : 
+       [ "TAB_IMBRIQ31" ] } ],
+     
+     [ 
+      { "value" : "m222",
+       "label" : 
+       { "value" : "\"Sous-imbrication 2\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 10,
+       "decimals" : 0,
+       "id" : "l9ny8wb8-QOP-l9nycx2s",
+       "response" : 
+       { "name" : "TAB_IMBRIQ41" },
+       "bindingDependencies" : 
+       [ "TAB_IMBRIQ41" ] } ],
+     
+     [ 
+      { "colspan" : 2,
+       "value" : "m23",
+       "label" : 
+       { "value" : "\"Imbrication 3\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "InputNumber",
+       "min" : 0,
+       "max" : 10,
+       "decimals" : 0,
+       "id" : "l9ny8wb8-QOP-l9nyglkt",
+       "response" : 
+       { "name" : "TAB_IMBRIQ51" },
+       "bindingDependencies" : 
+       [ "TAB_IMBRIQ51" ] } ] ] },
+   
+   { "id" : "l9sao32k",
+    "componentType" : "Table",
+    "mandatory" : false,
+    "page" : "9",
+    "positioning" : "HORIZONTAL",
+    "label" : 
+    { "value" : "\"➡ \" || \"Tableau avec en-tête compliqué\"",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "l9888jno",
+      "page" : "6",
+      "label" : 
+      { "value" : "\"II - \" || \"Tableaux\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "TAB_HEADER11",
+     "TAB_HEADER12",
+     "TAB_HEADER13",
+     "TAB_HEADER14",
+     "TAB_HEADER15",
+     "TAB_HEADER16",
+     "TAB_HEADER17",
+     "TAB_HEADER18",
+     "TAB_HEADER19",
+     "TAB_HEADER21",
+     "TAB_HEADER22",
+     "TAB_HEADER23",
+     "TAB_HEADER24",
+     "TAB_HEADER25",
+     "TAB_HEADER26",
+     "TAB_HEADER27",
+     "TAB_HEADER28",
+     "TAB_HEADER29" ],
+    "header" : 
+    [ 
+     { "rowspan" : 3,
+      "label" : 
+      { "value" : "",
+       "type" : "VTL|MD" } },
+     
+     { "rowspan" : 3,
+      "label" : 
+      { "value" : "\"En-tête 1\"",
+       "type" : "VTL|MD" } },
+     
+     { "colspan" : 4,
+      "label" : 
+      { "value" : "\"En-tête 2\"",
+       "type" : "VTL|MD" } },
+     
+     { "colspan" : 4,
+      "label" : 
+      { "value" : "\"En-tête 3\"",
+       "type" : "VTL|MD" } },
+     
+     { "colspan" : 3,
+      "label" : 
+      { "value" : "\"En-tête 21\"",
+       "type" : "VTL|MD" } },
+     
+     { "rowspan" : 2,
+      "label" : 
+      { "value" : "\"En-tête 22\"",
+       "type" : "VTL|MD" } },
+     
+     { "rowspan" : 2,
+      "label" : 
+      { "value" : "\"En-tête 31\"",
+       "type" : "VTL|MD" } },
+     
+     { "rowspan" : 2,
+      "label" : 
+      { "value" : "\"En-tête 32\"",
+       "type" : "VTL|MD" } },
+     
+     { "colspan" : 2,
+      "label" : 
+      { "value" : "\"En-tête 33\"",
+       "type" : "VTL|MD" } },
+     
+     { "label" : 
+      { "value" : "\"En-tête 211\"",
+       "type" : "VTL|MD" } },
+     
+     { "label" : 
+      { "value" : "\"En-tête 212\"",
+       "type" : "VTL|MD" } },
+     
+     { "label" : 
+      { "value" : "\"En-tête 213\"",
+       "type" : "VTL|MD" } },
+     
+     { "label" : 
+      { "value" : "\"En-tête 331\"",
+       "type" : "VTL|MD" } },
+     
+     { "label" : 
+      { "value" : "\"En-tête 332\"",
+       "type" : "VTL|MD" } } ],
+    "body" : 
+    [ 
+     [ 
+      { "value" : "col1",
+       "label" : 
+       { "value" : "\"Colonne 1\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "CheckboxBoolean",
+       "id" : "l9sao32k-QOP-l9scc1ws",
+       "response" : 
+       { "name" : "TAB_HEADER11" },
+       "bindingDependencies" : 
+       [ "TAB_HEADER11" ] },
+      
+      { "componentType" : "CheckboxBoolean",
+       "id" : "l9sao32k-QOP-l9scehfq",
+       "response" : 
+       { "name" : "TAB_HEADER12" },
+       "bindingDependencies" : 
+       [ "TAB_HEADER12" ] },
+      
+      { "componentType" : "CheckboxBoolean",
+       "id" : "l9sao32k-QOP-l9sc5fv8",
+       "response" : 
+       { "name" : "TAB_HEADER13" },
+       "bindingDependencies" : 
+       [ "TAB_HEADER13" ] },
+      
+      { "componentType" : "CheckboxBoolean",
+       "id" : "l9sao32k-QOP-l9scffnq",
+       "response" : 
+       { "name" : "TAB_HEADER14" },
+       "bindingDependencies" : 
+       [ "TAB_HEADER14" ] },
+      
+      { "componentType" : "CheckboxBoolean",
+       "id" : "l9sao32k-QOP-l9sc5pd6",
+       "response" : 
+       { "name" : "TAB_HEADER15" },
+       "bindingDependencies" : 
+       [ "TAB_HEADER15" ] },
+      
+      { "componentType" : "CheckboxBoolean",
+       "id" : "l9sao32k-QOP-l9sc6uvk",
+       "response" : 
+       { "name" : "TAB_HEADER16" },
+       "bindingDependencies" : 
+       [ "TAB_HEADER16" ] },
+      
+      { "componentType" : "CheckboxBoolean",
+       "id" : "l9sao32k-QOP-l9sc875l",
+       "response" : 
+       { "name" : "TAB_HEADER17" },
+       "bindingDependencies" : 
+       [ "TAB_HEADER17" ] },
+      
+      { "componentType" : "CheckboxBoolean",
+       "id" : "l9sao32k-QOP-l9sbxeve",
+       "response" : 
+       { "name" : "TAB_HEADER18" },
+       "bindingDependencies" : 
+       [ "TAB_HEADER18" ] },
+      
+      { "componentType" : "CheckboxBoolean",
+       "id" : "l9sao32k-QOP-l9sc8pte",
+       "response" : 
+       { "name" : "TAB_HEADER19" },
+       "bindingDependencies" : 
+       [ "TAB_HEADER19" ] } ],
+     
+     [ 
+      { "value" : "col2",
+       "label" : 
+       { "value" : "\"Colonne 2\"",
+        "type" : "VTL|MD" } },
+      
+      { "componentType" : "CheckboxBoolean",
+       "id" : "l9sao32k-QOP-l9scgf6q",
+       "response" : 
+       { "name" : "TAB_HEADER21" },
+       "bindingDependencies" : 
+       [ "TAB_HEADER21" ] },
+      
+      { "componentType" : "CheckboxBoolean",
+       "id" : "l9sao32k-QOP-l9scbs40",
+       "response" : 
+       { "name" : "TAB_HEADER22" },
+       "bindingDependencies" : 
+       [ "TAB_HEADER22" ] },
+      
+      { "componentType" : "CheckboxBoolean",
+       "id" : "l9sao32k-QOP-l9sbx6ql",
+       "response" : 
+       { "name" : "TAB_HEADER23" },
+       "bindingDependencies" : 
+       [ "TAB_HEADER23" ] },
+      
+      { "componentType" : "CheckboxBoolean",
+       "id" : "l9sao32k-QOP-l9sc9zik",
+       "response" : 
+       { "name" : "TAB_HEADER24" },
+       "bindingDependencies" : 
+       [ "TAB_HEADER24" ] },
+      
+      { "componentType" : "CheckboxBoolean",
+       "id" : "l9sao32k-QOP-l9sc88m0",
+       "response" : 
+       { "name" : "TAB_HEADER25" },
+       "bindingDependencies" : 
+       [ "TAB_HEADER25" ] },
+      
+      { "componentType" : "CheckboxBoolean",
+       "id" : "l9sao32k-QOP-l9sc4gho",
+       "response" : 
+       { "name" : "TAB_HEADER26" },
+       "bindingDependencies" : 
+       [ "TAB_HEADER26" ] },
+      
+      { "componentType" : "CheckboxBoolean",
+       "id" : "l9sao32k-QOP-l9scdx94",
+       "response" : 
+       { "name" : "TAB_HEADER27" },
+       "bindingDependencies" : 
+       [ "TAB_HEADER27" ] },
+      
+      { "componentType" : "CheckboxBoolean",
+       "id" : "l9sao32k-QOP-l9sc9vnz",
+       "response" : 
+       { "name" : "TAB_HEADER28" },
+       "bindingDependencies" : 
+       [ "TAB_HEADER28" ] },
+      
+      { "componentType" : "CheckboxBoolean",
+       "id" : "l9sao32k-QOP-l9scfl2z",
+       "response" : 
+       { "name" : "TAB_HEADER29" },
+       "bindingDependencies" : 
+       [ "TAB_HEADER29" ] } ] ] },
+   
+   { "id" : "lbxg68fq",
+    "componentType" : "Sequence",
+    "page" : "10",
+    "label" : 
+    { "value" : "\"III - \" || \"Séquence boucle\"",
+     "type" : "VTL|MD" },
+    "declarations" : 
+    [ 
+     { "id" : "lbxg68fq-lbxg5q0i",
+      "declarationType" : "HELP",
+      "position" : "AFTER_QUESTION_TEXT",
+      "label" : 
+      { "value" : "\"Séquence boucle\"",
+       "type" : "VTL|MD" } } ],
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "lbxg68fq",
+      "page" : "10",
+      "label" : 
+      { "value" : "\"III - \" || \"Séquence boucle\"",
+       "type" : "VTL|MD" } } } },
+   
+   { "id" : "lc0c5724",
+    "componentType" : "Loop",
+    "page" : "11",
+    "depth" : 1,
+    "paginatedLoop" : false,
+    "label" : 
+    { "value" : "BOUTON_BOUCLE",
+     "type" : "VTL|MD" },
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "hierarchy" : 
+    { "sequence" : 
+     { "id" : "lbxg68fq",
+      "page" : "10",
+      "label" : 
+      { "value" : "\"III - \" || \"Séquence boucle\"",
+       "type" : "VTL|MD" } } },
+    "bindingDependencies" : 
+    [ "QSIMPLE",
+     "UNEQUESTIO" ],
+    "lines" : 
+    { "min" : 
+     { "value" : "1",
+      "type" : "VTL" },
+     "max" : 
+     { "value" : "5",
+      "type" : "VTL" } },
+    "components" : 
+    [ 
+     { "id" : "lcoxacye",
+      "componentType" : "Subsequence",
+      "page" : "11",
+      "goToPage" : "11",
+      "label" : 
+      { "value" : "\"Sous séquence bouclée 1\"",
+       "type" : "VTL|MD" },
+      "declarations" : 
+      [ 
+       { "id" : "lcoxacye-lcoxcd5s",
+        "declarationType" : "HELP",
+        "position" : "AFTER_QUESTION_TEXT",
+        "label" : 
+        { "value" : "\"Sous-séquence 1 de la boucle\"",
+         "type" : "VTL|MD" } } ],
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "lbxg68fq",
+        "page" : "10",
+        "label" : 
+        { "value" : "\"III - \" || \"Séquence boucle\"",
+         "type" : "VTL|MD" } },
+       "subSequence" : 
+       { "id" : "lcoxacye",
+        "page" : "11",
+        "label" : 
+        { "value" : "\"Sous séquence bouclée 1\"",
+         "type" : "VTL|MD" } } } },
+     
+     { "id" : "lbxgigk8",
+      "componentType" : "InputNumber",
+      "mandatory" : false,
+      "page" : "11",
+      "min" : 0,
+      "max" : 10000,
+      "decimals" : 0,
+      "label" : 
+      { "value" : "\"➡ \" || \"Question simple\"",
+       "type" : "VTL|MD" },
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "controls" : 
+      [ 
+       { "id" : "lbxgigk8-format-borne-inf-sup",
+        "typeOfControl" : "FORMAT",
+        "criticality" : "ERROR",
+        "control" : 
+        { "value" : "not(not(isnull(QSIMPLE)) and (0>QSIMPLE or 10000<QSIMPLE))",
+         "type" : "VTL" },
+        "errorMessage" : 
+        { "value" : "\" La valeur doit être comprise entre 0 et 10000.\"",
+         "type" : "VTL|MD" } },
+       
+       { "id" : "lbxgigk8-format-decimal",
+        "typeOfControl" : "FORMAT",
+        "criticality" : "ERROR",
+        "control" : 
+        { "value" : "not(not(isnull(QSIMPLE))  and round(QSIMPLE,0)<>QSIMPLE)",
+         "type" : "VTL" },
+        "errorMessage" : 
+        { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+         "type" : "VTL|MD" } } ],
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "lbxg68fq",
+        "page" : "10",
+        "label" : 
+        { "value" : "\"III - \" || \"Séquence boucle\"",
+         "type" : "VTL|MD" } },
+       "subSequence" : 
+       { "id" : "lcoxacye",
+        "page" : "11",
+        "label" : 
+        { "value" : "\"Sous séquence bouclée 1\"",
+         "type" : "VTL|MD" } } },
+      "bindingDependencies" : 
+      [ "QSIMPLE" ],
+      "unit" : "€",
+      "response" : 
+      { "name" : "QSIMPLE" } },
+     
+     { "id" : "lcox3rt2",
+      "componentType" : "Subsequence",
+      "page" : "11",
+      "goToPage" : "11",
+      "label" : 
+      { "value" : "\"Sous-séquence bouclée 2\"",
+       "type" : "VTL|MD" },
+      "declarations" : 
+      [ 
+       { "id" : "lcox3rt2-lcoxfv3j",
+        "declarationType" : "HELP",
+        "position" : "AFTER_QUESTION_TEXT",
+        "label" : 
+        { "value" : "\"Sous-séquence de la boucle 2\"",
+         "type" : "VTL|MD" } } ],
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "lbxg68fq",
+        "page" : "10",
+        "label" : 
+        { "value" : "\"III - \" || \"Séquence boucle\"",
+         "type" : "VTL|MD" } },
+       "subSequence" : 
+       { "id" : "lcox3rt2",
+        "page" : "11",
+        "label" : 
+        { "value" : "\"Sous-séquence bouclée 2\"",
+         "type" : "VTL|MD" } } } },
+     
+     { "id" : "lcoxana6",
+      "componentType" : "InputNumber",
+      "mandatory" : false,
+      "page" : "11",
+      "min" : 0,
+      "max" : 100,
+      "decimals" : 0,
+      "label" : 
+      { "value" : "\"➡ \" || \"Question simple 2\"",
+       "type" : "VTL|MD" },
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "controls" : 
+      [ 
+       { "id" : "lcoxana6-format-borne-inf-sup",
+        "typeOfControl" : "FORMAT",
+        "criticality" : "ERROR",
+        "control" : 
+        { "value" : "not(not(isnull(UNEQUESTIO)) and (0>UNEQUESTIO or 100<UNEQUESTIO))",
+         "type" : "VTL" },
+        "errorMessage" : 
+        { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+         "type" : "VTL|MD" } },
+       
+       { "id" : "lcoxana6-format-decimal",
+        "typeOfControl" : "FORMAT",
+        "criticality" : "ERROR",
+        "control" : 
+        { "value" : "not(not(isnull(UNEQUESTIO))  and round(UNEQUESTIO,0)<>UNEQUESTIO)",
+         "type" : "VTL" },
+        "errorMessage" : 
+        { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+         "type" : "VTL|MD" } } ],
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "lbxg68fq",
+        "page" : "10",
+        "label" : 
+        { "value" : "\"III - \" || \"Séquence boucle\"",
+         "type" : "VTL|MD" } },
+       "subSequence" : 
+       { "id" : "lcox3rt2",
+        "page" : "11",
+        "label" : 
+        { "value" : "\"Sous-séquence bouclée 2\"",
+         "type" : "VTL|MD" } } },
+      "bindingDependencies" : 
+      [ "UNEQUESTIO" ],
+      "response" : 
+      { "name" : "UNEQUESTIO" } } ] },
+   
+   { "id" : "lc0cefvn",
+    "componentType" : "Loop",
+    "page" : "12",
+    "maxPage" : "2",
+    "depth" : 1,
+    "paginatedLoop" : true,
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "bindingDependencies" : 
+    [ "LASUITE" ],
+    "loopDependencies" : 
+    [ "QSIMPLE",
+     "UNEQUESTIO" ],
+    "components" : 
+    [ 
+     { "id" : "lc0c6j7f",
+      "componentType" : "Sequence",
+      "page" : "12.1",
+      "label" : 
+      { "value" : "\"IV - \" || \"Séquence boucle 2\"",
+       "type" : "VTL|MD" },
+      "declarations" : 
+      [ 
+       { "id" : "lc0c6j7f-lc0c74gh",
+        "declarationType" : "HELP",
+        "position" : "AFTER_QUESTION_TEXT",
+        "label" : 
+        { "value" : "\"Séquence boucle 2\"",
+         "type" : "VTL|MD" } } ],
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "lc0c6j7f",
+        "page" : "12.1",
+        "label" : 
+        { "value" : "\"IV - \" || \"Séquence boucle 2\"",
+         "type" : "VTL|MD" } } },
+      "bindingDependencies" : 
+      [ "QSIMPLE",
+       "UNEQUESTIO" ] },
+     
+     { "id" : "lc0clxv1",
+      "componentType" : "Input",
+      "mandatory" : false,
+      "page" : "12.2",
+      "maxLength" : 249,
+      "label" : 
+      { "value" : "\"➡ \" || \"La suite\"",
+       "type" : "VTL|MD" },
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "lc0c6j7f",
+        "page" : "12.1",
+        "label" : 
+        { "value" : "\"IV - \" || \"Séquence boucle 2\"",
+         "type" : "VTL|MD" } } },
+      "bindingDependencies" : 
+      [ "LASUITE",
+       "QSIMPLE",
+       "UNEQUESTIO" ],
+      "response" : 
+      { "name" : "LASUITE" } } ],
+    "iterations" : 
+    { "value" : "count(QSIMPLE)",
+     "type" : "VTL" } },
+   
+   { "id" : "lcq19udk",
+    "componentType" : "Loop",
+    "page" : "13",
+    "depth" : 1,
+    "paginatedLoop" : false,
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "bindingDependencies" : 
+    [ "TOTOA" ],
+    "lines" : 
+    { "min" : 
+     { "value" : "0",
+      "type" : "VTL" },
+     "max" : 
+     { "value" : "",
+      "type" : "VTL" } },
+    "components" : 
+    [ 
+     { "id" : "lchfj2o1",
+      "componentType" : "Sequence",
+      "page" : "13",
+      "label" : 
+      { "value" : "\"V - \" || \"Séquence A\"",
+       "type" : "VTL|MD" },
+      "declarations" : 
+      [ 
+       { "id" : "lchfj2o1-lcq1hfbm",
+        "declarationType" : "HELP",
+        "position" : "AFTER_QUESTION_TEXT",
+        "label" : 
+        { "value" : "\"Séquence A\"",
+         "type" : "VTL|MD" } } ],
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "lchfj2o1",
+        "page" : "13",
+        "label" : 
+        { "value" : "\"V - \" || \"Séquence A\"",
+         "type" : "VTL|MD" } } } },
+     
+     { "id" : "lcq1pnud",
+      "componentType" : "InputNumber",
+      "mandatory" : false,
+      "page" : "13",
+      "min" : 0,
+      "max" : 100,
+      "decimals" : 0,
+      "label" : 
+      { "value" : "\"➡ \" || \"Toto A\"",
+       "type" : "VTL|MD" },
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "controls" : 
+      [ 
+       { "id" : "lcq1pnud-format-borne-inf-sup",
+        "typeOfControl" : "FORMAT",
+        "criticality" : "ERROR",
+        "control" : 
+        { "value" : "not(not(isnull(TOTOA)) and (0>TOTOA or 100<TOTOA))",
+         "type" : "VTL" },
+        "errorMessage" : 
+        { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+         "type" : "VTL|MD" } },
+       
+       { "id" : "lcq1pnud-format-decimal",
+        "typeOfControl" : "FORMAT",
+        "criticality" : "ERROR",
+        "control" : 
+        { "value" : "not(not(isnull(TOTOA))  and round(TOTOA,0)<>TOTOA)",
+         "type" : "VTL" },
+        "errorMessage" : 
+        { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+         "type" : "VTL|MD" } } ],
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "lchfj2o1",
+        "page" : "13",
+        "label" : 
+        { "value" : "\"V - \" || \"Séquence A\"",
+         "type" : "VTL|MD" } } },
+      "bindingDependencies" : 
+      [ "TOTOA" ],
+      "response" : 
+      { "name" : "TOTOA" } } ] },
+   
+   { "id" : "lcq1cpki",
+    "componentType" : "Loop",
+    "page" : "14",
+    "maxPage" : "4",
+    "depth" : 1,
+    "paginatedLoop" : true,
+    "conditionFilter" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "bindingDependencies" : 
+    [ "TOTOB" ],
+    "loopDependencies" : 
+    [ "QSIMPLE",
+     "UNEQUESTIO" ],
+    "components" : 
+    [ 
+     { "id" : "lcq1esye",
+      "componentType" : "Sequence",
+      "page" : "14.1",
+      "label" : 
+      { "value" : "\"VI - \" || \"Séquence B\"",
+       "type" : "VTL|MD" },
+      "declarations" : 
+      [ 
+       { "id" : "lcq1esye-lcq1ogvx",
+        "declarationType" : "HELP",
+        "position" : "AFTER_QUESTION_TEXT",
+        "label" : 
+        { "value" : "\"Séquence B\"",
+         "type" : "VTL|MD" } } ],
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "lcq1esye",
+        "page" : "14.1",
+        "label" : 
+        { "value" : "\"VI - \" || \"Séquence B\"",
+         "type" : "VTL|MD" } } },
+      "bindingDependencies" : 
+      [ "QSIMPLE",
+       "UNEQUESTIO" ] },
+     
+     { "id" : "lcq1cyit",
+      "componentType" : "InputNumber",
+      "mandatory" : false,
+      "page" : "14.2",
+      "min" : 0,
+      "max" : 100,
+      "decimals" : 0,
+      "label" : 
+      { "value" : "\"➡ \" || \"Toto B\"",
+       "type" : "VTL|MD" },
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "controls" : 
+      [ 
+       { "id" : "lcq1cyit-format-borne-inf-sup",
+        "typeOfControl" : "FORMAT",
+        "criticality" : "ERROR",
+        "control" : 
+        { "value" : "not(not(isnull(TOTOB)) and (0>TOTOB or 100<TOTOB))",
+         "type" : "VTL" },
+        "errorMessage" : 
+        { "value" : "\" La valeur doit être comprise entre 0 et 100.\"",
+         "type" : "VTL|MD" } },
+       
+       { "id" : "lcq1cyit-format-decimal",
+        "typeOfControl" : "FORMAT",
+        "criticality" : "ERROR",
+        "control" : 
+        { "value" : "not(not(isnull(TOTOB))  and round(TOTOB,0)<>TOTOB)",
+         "type" : "VTL" },
+        "errorMessage" : 
+        { "value" : "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+         "type" : "VTL|MD" } } ],
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "lcq1esye",
+        "page" : "14.1",
+        "label" : 
+        { "value" : "\"VI - \" || \"Séquence B\"",
+         "type" : "VTL|MD" } } },
+      "bindingDependencies" : 
+      [ "TOTOB",
+       "QSIMPLE",
+       "UNEQUESTIO" ],
+      "response" : 
+      { "name" : "TOTOB" } },
+     
+     { "id" : "COMMENT-SEQ",
+      "componentType" : "Sequence",
+      "page" : "14.3",
+      "label" : 
+      { "value" : "\"Commentaire\"",
+       "type" : "VTL|MD" },
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "COMMENT-SEQ",
+        "page" : "14.3",
+        "label" : 
+        { "value" : "\"Commentaire\"",
+         "type" : "VTL|MD" } } } },
+     
+     { "id" : "COMMENT-QUESTION",
+      "componentType" : "Textarea",
+      "mandatory" : false,
+      "page" : "14.4",
+      "maxLength" : 2000,
+      "label" : 
+      { "value" : "\"Avez-vous des remarques concernant l'enquête ou des commentaires ?\"",
+       "type" : "VTL|MD" },
+      "conditionFilter" : 
+      { "value" : "true",
+       "type" : "VTL" },
+      "hierarchy" : 
+      { "sequence" : 
+       { "id" : "COMMENT-SEQ",
+        "page" : "14.3",
+        "label" : 
+        { "value" : "\"Commentaire\"",
+         "type" : "VTL|MD" } } },
+      "bindingDependencies" : 
+      [ "COMMENT_QE" ],
+      "response" : 
+      { "name" : "COMMENT_QE" } } ],
+    "iterations" : 
+    { "value" : "count(QSIMPLE)",
+     "type" : "VTL" } } ],
+  "variables" : 
+  [ 
+   { "variableType" : "COLLECTED",
+    "name" : "COMMENT_QE",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "Q1",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "Q2",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "Q3",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "QCU_COMPLEXE",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB211",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB212",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB221",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB222",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB231",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB232",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB241",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB242",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_IMBRIQ11",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_IMBRIQ21",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_IMBRIQ31",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_IMBRIQ41",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_IMBRIQ51",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_HEADER11",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_HEADER12",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_HEADER13",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_HEADER14",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_HEADER15",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_HEADER16",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_HEADER17",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_HEADER18",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_HEADER19",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_HEADER21",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_HEADER22",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_HEADER23",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_HEADER24",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_HEADER25",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_HEADER26",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_HEADER27",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_HEADER28",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TAB_HEADER29",
+    "values" : 
+    { "PREVIOUS" : null,
+     "COLLECTED" : null,
+     "FORCED" : null,
+     "EDITED" : null,
+     "INPUTED" : null } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "QSIMPLE",
+    "values" : 
+    { "PREVIOUS" : 
+     [ null ],
+     "COLLECTED" : 
+     [ null ],
+     "FORCED" : 
+     [ null ],
+     "EDITED" : 
+     [ null ],
+     "INPUTED" : 
+     [ null ] } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "UNEQUESTIO",
+    "values" : 
+    { "PREVIOUS" : 
+     [ null ],
+     "COLLECTED" : 
+     [ null ],
+     "FORCED" : 
+     [ null ],
+     "EDITED" : 
+     [ null ],
+     "INPUTED" : 
+     [ null ] } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "LASUITE",
+    "values" : 
+    { "PREVIOUS" : 
+     [ null ],
+     "COLLECTED" : 
+     [ null ],
+     "FORCED" : 
+     [ null ],
+     "EDITED" : 
+     [ null ],
+     "INPUTED" : 
+     [ null ] } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TOTOA",
+    "values" : 
+    { "PREVIOUS" : 
+     [ null ],
+     "COLLECTED" : 
+     [ null ],
+     "FORCED" : 
+     [ null ],
+     "EDITED" : 
+     [ null ],
+     "INPUTED" : 
+     [ null ] } },
+   
+   { "variableType" : "COLLECTED",
+    "name" : "TOTOB",
+    "values" : 
+    { "PREVIOUS" : 
+     [ null ],
+     "COLLECTED" : 
+     [ null ],
+     "FORCED" : 
+     [ null ],
+     "EDITED" : 
+     [ null ],
+     "INPUTED" : 
+     [ null ] } },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_Q1",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_Q2",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_Q3",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_QCU_COMPLEXE",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_TAB2",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_TAB_IMBRIQ",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_TAB_HEADER",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_QSIMPLE",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "shapeFrom" : "QSIMPLE",
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_QSIMPLE2",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "shapeFrom" : "QSIMPLE",
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_LASUITE",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "shapeFrom" : "LASUITE",
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_TOTOA",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "shapeFrom" : "TOTOA",
+    "inFilter" : "false" },
+   
+   { "variableType" : "CALCULATED",
+    "name" : "FILTER_RESULT_TOTOB",
+    "expression" : 
+    { "value" : "true",
+     "type" : "VTL" },
+    "shapeFrom" : "TOTOB",
+    "inFilter" : "false" } ],
+  "cleaning" : 
+  {  },
+  "resizing" : 
+  { "QSIMPLE" : 
+   { "size" : "count(QSIMPLE)",
+    "variables" : 
+    [ "LASUITE",
+     "TOTOB",
+     "COMMENT_QE" ] } } }
