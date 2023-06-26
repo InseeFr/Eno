@@ -188,6 +188,7 @@ public class LunaticRegroupementProcessing implements OutProcessingInterface<Que
      * @return true if the numpage for this component can be incremented, false otherwise
      */
     private boolean canIncrementPageCount(ComponentType component, boolean isParentPaginated) {
+        String responseName = null;
         // if parent component not paginated, all child have same page
         if(!isParentPaginated) {
             return false;
@@ -200,14 +201,15 @@ public class LunaticRegroupementProcessing implements OutProcessingInterface<Que
            return false;
         }
 
-        Optional<String> optResponseName = LunaticPostProcessingUtils.getResponseName(component);
+        if(component instanceof ComponentSimpleResponseType simpleResponse) {
+            responseName = simpleResponse.getResponse().getName();
+        }
 
         // no response name, so no regroupement, we can increment
-        if(optResponseName.isEmpty()) {
+        if(responseName == null) {
             return true;
         }
 
-        String responseName = optResponseName.get();
         Optional<Regroupement> optRegroupement = regroupements.getRegroupementForVariable(responseName);
         // if no regroupement, we can increment
         if(optRegroupement.isEmpty()) {

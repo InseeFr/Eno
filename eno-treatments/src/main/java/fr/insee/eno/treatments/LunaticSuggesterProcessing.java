@@ -6,7 +6,6 @@ import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Processing for suggesters
@@ -61,12 +60,10 @@ public class LunaticSuggesterProcessing implements OutProcessingInterface<Questi
      * @param suggester suggester to apply
      */
     private boolean shouldApplySuggester(ComponentType component, EnoSuggesterType suggester) {
-        Optional<String> responseName = LunaticPostProcessingUtils.getResponseName(component);
-
-        if(responseName.isEmpty()) {
-            return false;
+        if(component instanceof ComponentSimpleResponseType simpleResponse) {
+            String responseName = simpleResponse.getResponse().getName();
+            return suggester.getResponseNames().contains(responseName);
         }
-
-        return suggester.getResponseNames().contains(responseName.get());
+        return false;
     }
 }
