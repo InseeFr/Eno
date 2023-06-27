@@ -6,7 +6,6 @@ import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.output.LunaticSerializer;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.parsers.DDIParser;
@@ -71,7 +70,9 @@ public class DDIToLunatic {
     public static String transformToJson(InputStream ddiInputStream, EnoParameters enoParameters)
             throws DDIParsingException, LunaticSerializationException {
         Questionnaire lunaticQuestionnaire = transform(ddiInputStream, enoParameters);
-        return LunaticSerializer.serializeToJson(lunaticQuestionnaire);
+
+        // Handle resizing (sic) as lunatic model can't support this at this time, really ugly :\
+        return JsonResizingConverter.convertResizingToJsonLunatic(lunaticQuestionnaire);
     }
 
     /**
