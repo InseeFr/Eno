@@ -25,9 +25,9 @@ public class JsonLunaticConverter {
      * convert a questionnaire to json string with resize variables included
      * @param lunaticQuestionnaire lunatic questionnaire
      * @return json string of the questionnaire with resize included
-     * @throws LunaticSerializationException
+     * @throws LunaticSerializationException serialization exception
      */
-    public static String convertResizingToJsonLunatic(Questionnaire lunaticQuestionnaire) throws LunaticSerializationException {
+    public static String convert(Questionnaire lunaticQuestionnaire) throws LunaticSerializationException {
         String lunaticJson = LunaticSerializer.serializeToJson(lunaticQuestionnaire);
         ResizingType resizingType = lunaticQuestionnaire.getResizing();
         if(resizingType == null || resizingType.getAny().isEmpty()) {
@@ -63,7 +63,7 @@ public class JsonLunaticConverter {
      * @param variable variable to resize
      * @return variable node to resize
      */
-    public static JsonNode buildPairwiseResizingVariable(LunaticResizingPairWiseVariable variable) {
+    private static JsonNode buildPairwiseResizingVariable(LunaticResizingPairWiseVariable variable) {
         ArrayNode linksVariablesBuilder = JsonNodeFactory.instance.arrayNode();
         variable.getLinksVariables().forEach(linksVariablesBuilder::add);
 
@@ -83,7 +83,7 @@ public class JsonLunaticConverter {
      * @param variable variable to resize
      * @return variable node to resize
      */
-    public static JsonNode buildResizingLoopVariable(LunaticResizingLoopVariable variable) {
+    private static JsonNode buildResizingLoopVariable(LunaticResizingLoopVariable variable) {
         ArrayNode variablesArray = JsonNodeFactory.instance.arrayNode();
         variable.getVariables().forEach(variablesArray::add);
 

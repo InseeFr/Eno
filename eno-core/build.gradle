@@ -40,6 +40,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
     // Mockito
     testImplementation 'org.mockito:mockito-core'
+    testImplementation 'org.skyscreamer:jsonassert:1.5.1'
 
     // Lombok
     compileOnly 'org.projectlombok:lombok'
