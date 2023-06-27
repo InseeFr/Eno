@@ -1,7 +1,9 @@
 package fr.insee.eno.core.processing.impl;
 
+import fr.insee.eno.core.exceptions.business.LunaticProcessingException;
 import fr.insee.eno.core.model.lunatic.MissingBlock;
 import fr.insee.eno.core.processing.OutProcessingInterface;
+import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.lunatic.model.flat.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,14 +15,21 @@ import java.util.List;
 @AllArgsConstructor
 @Slf4j
 public class LunaticAddMissingVariables implements OutProcessingInterface<Questionnaire> {
+
+    private EnoCatalog enoCatalog;
     private boolean isMissingVariables;
+
+    private static final String MISSING_RESPONSE_SUFFIX = "_MISSING";
 
     public void apply(Questionnaire lunaticQuestionnaire) {
         lunaticQuestionnaire.setMissing(isMissingVariables);
         if (!isMissingVariables) {
             return;
         }
-        List<MissingBlock> missingBlocks = getMissingBlocks(lunaticQuestionnaire.getComponents());
+        List<ComponentType> components = lunaticQuestionnaire.getComponents();
+
+        components.forEach(this::createMissingResponse);
+        List<MissingBlock> missingBlocks = createMissingBlocks(lunaticQuestionnaire.getComponents());
 
         List<VariableType> missingVariables = new ArrayList<>();
         List<MissingBlock> allMissingBlocks = new ArrayList<>();
@@ -32,7 +41,7 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
             missingVariables.add(missingVariable);
 
             allMissingBlocks.add(missingBlock);
-            allMissingBlocks.addAll(getInversedMissingBlocks(missingBlock));
+            allMissingBlocks.addAll(createInversedMissingBlocks(missingBlock));
         });
 
         if(!allMissingBlocks.isEmpty()) {
@@ -44,21 +53,42 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
         }
     }
 
-    private List<MissingBlock> getInversedMissingBlocks(MissingBlock missingBlock) {
+    private List<MissingBlock> createInversedMissingBlocks(MissingBlock missingBlock) {
         return missingBlock.getNames().stream()
                 .map(name -> new MissingBlock(name, List.of(missingBlock.getMissingName())))
                 .toList();
     }
 
-    private List<MissingBlock> getMissingBlocks(List<ComponentType> components) {
-        return components.stream()
+    private List<MissingBlock> createMissingBlocks(List<ComponentType> components) {
+        List<MissingBlock> missingBlocks = new ArrayList<>();
+        // generate blocks on components with missing response attribute (included main loop)
+        missingBlocks.addAll(components.stream()
                 .filter(componentType -> componentType.getMissingResponse() != null)
                 .map(component -> {
                     String missingResponseName = component.getMissingResponse().getName();
                     List<String> names = getMissingBlockNames(component);
                     return new MissingBlock(missingResponseName, names);
                 })
-                .toList();
+                .toList());
+
+        // generate blocks for subcomponents on linked loop
+        missingBlocks.addAll(components.stream()
+                .filter(componentType -> componentType.getComponentType().equals(ComponentTypeEnum.LOOP))
+                .map(Loop.class::cast)
+                .filter(this::isLinkedLoop)
+                .map(linkedLoop -> createMissingBlocks(linkedLoop.getComponents()))
+                .flatMap(Collection::stream)
+                .toList());
+
+        // generate blocks for subcomponents on pairwiselinks
+        missingBlocks.addAll(components.stream()
+                .filter(componentType -> componentType.getComponentType().equals(ComponentTypeEnum.PAIRWISE_LINKS))
+                .map(PairwiseLinks.class::cast)
+                .map(pairwiseLinks -> createMissingBlocks(pairwiseLinks.getComponents()))
+                .flatMap(Collection::stream)
+                .toList());
+
+        return missingBlocks;
     }
 
     private List<String> getMissingBlockNames(ComponentType component) {
@@ -79,11 +109,6 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
                             .map(this::getMissingBlockNames)
                             .flatMap(Collection::stream)
                             .toList();
-            case PAIRWISE_LINKS ->
-                    names = ((PairwiseLinks)component).getComponents().stream()
-                            .map(this::getMissingBlockNames)
-                            .flatMap(Collection::stream)
-                            .toList();
             case TABLE ->
                     names = ((Table)component).getBody().stream()
                             .map(BodyType::getBodyLine)
@@ -91,16 +116,53 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
                             .filter(subcomponent -> subcomponent.getResponse() != null)
                             .map(subcomponent -> subcomponent.getResponse().getName())
                             .toList();
-            case INPUT -> names = List.of(((Input)component).getResponse().getName());
-            case INPUT_NUMBER -> names = List.of(((InputNumber)component).getResponse().getName());
-            case TEXTAREA -> names = List.of(((Textarea)component).getResponse().getName());
-            case DATEPICKER -> names = List.of(((Datepicker)component).getResponse().getName());
-            case CHECKBOX_ONE -> names = List.of(((CheckboxOne)component).getResponse().getName());
-            case CHECKBOX_BOOLEAN -> names = List.of(((CheckboxBoolean)component).getResponse().getName());
-            case DROPDOWN -> names = List.of(((Dropdown)component).getResponse().getName());
-            case RADIO -> names = List.of(((Radio)component).getResponse().getName());
-            default -> names = new ArrayList<>();
+            default -> {
+                ComponentSimpleResponseType simpleResponseComponent = (ComponentSimpleResponseType) component;
+                names = List.of(simpleResponseComponent.getResponse().getName());
+            }
         }
         return names;
+    }
+
+    private void createMissingResponse(ComponentType component) {
+        String missingResponseName = null;
+
+        switch(component.getComponentType()) {
+            case LOOP -> {
+                Loop loop = (Loop) component;
+                // when linked loop, missing responses are generated on the loop components
+                if(isLinkedLoop(loop)) {
+                    ((Loop) component).getComponents().forEach(this::createMissingResponse);
+                    return;
+                }
+
+                //on main loop, missing response is generated on the loop component
+                // /!\ we assume the first question component found is a simple question (not roster, table, checkboxgroup, ...)
+                missingResponseName = loop.getComponents().stream()
+                        .filter(ComponentSimpleResponseType.class::isInstance)
+                        .map(ComponentSimpleResponseType.class::cast)
+                        .map(ComponentSimpleResponseType::getResponse)
+                        .map(ResponseType::getName)
+                        .findFirst()
+                        .orElseThrow(() -> new LunaticProcessingException(String.format("main loop %s does not have a simple question in his components", loop.getId())));
+            }
+
+            // missing responses are handled on the components of pairwise
+            case PAIRWISE_LINKS -> ((PairwiseLinks) component).getComponents().forEach(this::createMissingResponse);
+
+            default -> missingResponseName = enoCatalog.getQuestion(component.getId()).getName();
+
+        }
+
+        if(missingResponseName != null) {
+            missingResponseName += MISSING_RESPONSE_SUFFIX;
+            ResponseType missingResponse = new ResponseType();
+            missingResponse.setName(missingResponseName);
+            component.setMissingResponse(missingResponse);
+        }
+    }
+
+    private boolean isLinkedLoop(Loop loop) {
+        return loop.getLines() == null;
     }
 }
