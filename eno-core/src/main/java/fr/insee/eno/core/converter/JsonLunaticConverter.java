@@ -16,8 +16,8 @@ import fr.insee.lunatic.model.flat.ResizingType;
 
 import java.util.List;
 
-public class JsonResizingConverter {
-    private JsonResizingConverter() {
+public class JsonLunaticConverter {
+    private JsonLunaticConverter() {
         throw new IllegalArgumentException("Utility class");
     }
 

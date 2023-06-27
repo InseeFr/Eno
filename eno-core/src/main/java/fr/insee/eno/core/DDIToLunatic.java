@@ -1,6 +1,6 @@
 package fr.insee.eno.core;
 
-import fr.insee.eno.core.converter.JsonResizingConverter;
+import fr.insee.eno.core.converter.JsonLunaticConverter;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
 import fr.insee.eno.core.mappers.DDIMapper;
@@ -71,8 +71,8 @@ public class DDIToLunatic {
             throws DDIParsingException, LunaticSerializationException {
         Questionnaire lunaticQuestionnaire = transform(ddiInputStream, enoParameters);
 
-        // Handle resizing (sic) as lunatic model can't support this at this time, really ugly :\
-        return JsonResizingConverter.convertResizingToJsonLunatic(lunaticQuestionnaire);
+        // Handle missing/resizing (sic) as lunatic model can't support this at this time, really ugly :\
+        return JsonLunaticConverter.convert(lunaticQuestionnaire);
     }
 
     /**
@@ -87,7 +87,7 @@ public class DDIToLunatic {
         Questionnaire lunaticQuestionnaire = transform(ddiInputStream, enoParameters);
         lunaticPostProcessings.apply(lunaticQuestionnaire);
 
-        // Handle resizing (sic) as lunatic model can't support this at this time, really ugly :\
-        return JsonResizingConverter.convertResizingToJsonLunatic(lunaticQuestionnaire);
+        // Handle missing/resizing (sic) as lunatic model can't support this at this time, really ugly :\
+        return JsonLunaticConverter.convert(lunaticQuestionnaire);
     }
 }
