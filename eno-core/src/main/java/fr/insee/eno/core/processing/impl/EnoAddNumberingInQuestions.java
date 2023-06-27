@@ -1,6 +1,7 @@
 package fr.insee.eno.core.processing.impl;
 
 import fr.insee.eno.core.model.EnoComponent;
+import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.Subsequence;
@@ -23,7 +24,7 @@ public class EnoAddNumberingInQuestions implements EnoProcessingInterface {
         //
         if (mode != EnoParameters.QuestionNumberingMode.NONE) {
             int questionNumber = 1;
-            for (String sequenceId : enoQuestionnaire.getSequenceReferences()) {
+            for (String sequenceId : enoQuestionnaire.getSequences().stream().map(EnoIdentifiableObject::getId).toList()) {
                 Sequence sequence = (Sequence) enoQuestionnaire.get(sequenceId);
                 for (String componentId : sequence.getComponentReferences()) {
                     EnoComponent component = (EnoComponent) enoQuestionnaire.get(componentId);

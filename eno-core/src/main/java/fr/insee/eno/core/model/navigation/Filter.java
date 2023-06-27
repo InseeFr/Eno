@@ -8,6 +8,7 @@ import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoObjectWithExpression;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
+import fr.insee.eno.core.model.sequence.SequenceItem;
 import fr.insee.lunatic.model.flat.ConditionFilterType;
 import lombok.Getter;
 import lombok.Setter;
@@ -57,34 +58,10 @@ public class Filter extends EnoIdentifiableObject implements EnoObjectWithExpres
         return expression;
     }
 
-    //
-
-    /** List of the identifier of components that are in the scope of the filter.
-     * In DDI, we expect to have 'Sequence', 'QuestionConstruct' and 'IfThenElse' references.
-     * In the sequence case, the reference id directly designates the corresponding sequence object.
-     * Same in the filter (IfThenElse) case.
-     * In the question construct case, the reference id designates a QuestionConstruct object,
-     * that contains a reference to the concrete question object. */
+    /** Same principle as sequence items list in sequence objects. */
     @DDI(contextType = IfThenElseType.class,
             field = "#index.get(#this.getThenConstructReference().getIDArray(0).getStringValue())" +
-                    ".getControlConstructReferenceList().![" +
-                    "    #this.getTypeOfObject().toString() == 'QuestionConstruct' ? " +
-                    "        #index.get(#this.getIDArray(0).getStringValue())" +
-                    "        .getQuestionReference().getIDArray(0).getStringValue() : " +
-                    "    #this.getTypeOfObject().toString() == 'Sequence' ? " +
-                    "        #this.getIDArray(0).getStringValue() : " +
-                    "    #this.getTypeOfObject().toString() == 'ComputationItem' ? " +
-                    "        #this.getIDArray(0).getStringValue() : " +
-                    "    #this.getTypeOfObject().toString() == 'IfThenElse' ? " +
-                    "        #this.getIDArray(0).getStringValue() : " +
-                    "    T(fr.insee.eno.core.model.navigation.Filter).unexpectedDDIComponent(#root, #this.getTypeOfObject().toString())" +
-                    "]")
-    private List<String> componentReferences = new ArrayList<>();
-
-    public static String unexpectedDDIComponent(IfThenElseType ifThenElseType, String typeOfObject) {
-        throw new MappingException(String.format(
-                "Unexpected type of object '%s' found in ThenConstructReference sequence of IfThenElse '%s'",
-                typeOfObject, ifThenElseType.getIDArray(0).getStringValue()));
-    }
+                    ".getControlConstructReferenceList()")
+    private List<SequenceItem> filterItems = new ArrayList<>();
 
 }

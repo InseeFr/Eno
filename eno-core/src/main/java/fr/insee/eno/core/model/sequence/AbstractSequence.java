@@ -9,12 +9,16 @@ import fr.insee.eno.core.model.declaration.Instruction;
 import fr.insee.eno.core.model.label.Label;
 import fr.insee.eno.core.model.navigation.Control;
 import fr.insee.eno.core.model.navigation.Filter;
+import fr.insee.eno.core.model.sequence.SequenceItem.SequenceItemType;
 import fr.insee.lunatic.model.flat.Subsequence;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
+import static fr.insee.eno.core.model.sequence.SequenceItem.SequenceItemType.*;
 
 /** Abstract object for sequence and subsequence.
  * In DDI, a sequence or subsequence is a SequenceType object.
@@ -58,23 +62,24 @@ public abstract class AbstractSequence extends EnoIdentifiableObject implements 
             field = "setConditionFilter(#param)")
     private Filter filter = new Filter();
 
-    /** Ordered list of references to all objects in the sequence / subsequence
-     * that corresponds to a subsequence (if any) or a question. */
-    @DDI(contextType = SequenceType.class,
-            field = "getControlConstructReferenceList()" +
-                    ".?[#this.getTypeOfObject().toString() == 'QuestionConstruct'" +
-                    "or #this.getTypeOfObject().toString() == 'Sequence']" +
-                    ".![#index.get(#this.getIDArray(0).getStringValue())]" +
-                    ".![#this instanceof T(datacollection33.QuestionConstructType) ? " +
-                    "#this.getQuestionReference().getIDArray(0).getStringValue() : " +
-                    "#this instanceof T(datacollection33.SequenceType) ? " +
-                    "#this.getIDArray(0).getStringValue() : " +
-                    "null]")
-    private final List<String> componentReferences = new ArrayList<>();
-
     /** Ordered list of all items in the sequence / subsequence.
-     * Note: the 'componentReference' attribute usages could be replaced with this one. */
+     * Important note: if a loop is defined over a sequence or subsequence, the sequence item will correspond to
+     * the loop (and not the sequence or subsequence), same for the filters. */
     @DDI(contextType = SequenceType.class, field = "getControlConstructReferenceList()")
     private final List<SequenceItem> sequenceItems = new ArrayList<>();
+
+    /** Return the ordered list of component identifiers within the sequence/subsequence
+     * (filtering controls, declarations etc.)
+     * YET: in DDI, loop and filter references replace the components, it has to be resolved someway:
+     * TODO: manage LOOP and FILTER case for sequence items
+     * */
+    @Deprecated
+    public List<String> getComponentReferences() {
+        return sequenceItems.stream()
+                .filter(sequenceItem -> SequenceItem.SequenceItemType.SUBSEQUENCE.equals(sequenceItem.getType()) ||
+                        SequenceItem.SequenceItemType.QUESTION.equals(sequenceItem.getType()))
+                .map(SequenceItem::getId)
+                .toList();
+    }
 
 }

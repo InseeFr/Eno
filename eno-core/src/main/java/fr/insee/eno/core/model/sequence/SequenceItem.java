@@ -3,12 +3,14 @@ package fr.insee.eno.core.model.sequence;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoObject;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import reusable33.ReferenceType;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class SequenceItem extends EnoObject {
 
     public enum SequenceItemType {SUBSEQUENCE, QUESTION, LOOP, FILTER, CONTROL, DECLARATION}
@@ -33,7 +35,8 @@ public class SequenceItem extends EnoObject {
             case "IfThenElse" -> SequenceItemType.FILTER;
             case "StatementItem" -> SequenceItemType.DECLARATION;
             case "Loop" -> SequenceItemType.LOOP;
-            default -> throw new MappingException("Unexpected type of object found in DDI control construct scheme.");
+            default -> throw new MappingException(
+                    "Unexpected type of object '"+typeOfObject+"' found in DDI control construct reference.");
         };
     }
 

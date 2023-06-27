@@ -2,6 +2,7 @@ package fr.insee.eno.core.mappers.lunatic;
 
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.navigation.Loop;
+import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ class LoopTest {
 
     @BeforeEach
     void loopObjects() {
-        enoLoop = new Loop();
+        enoLoop = new StandaloneLoop();
         lunaticLoop = new fr.insee.lunatic.model.flat.Loop();
     }
 
