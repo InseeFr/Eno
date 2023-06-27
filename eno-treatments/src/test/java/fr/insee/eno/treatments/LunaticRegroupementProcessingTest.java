@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LunaticRegroupementProcessingTest {
 
     private Questionnaire questionnaire;
-    private Sequence s1, s4, s8, s9;
+    private SequenceType s1, s4, s8, s9;
     private InputNumber n2, n3, n72, n73, n5;
     private Textarea t10;
     private Loop l6, l7;
@@ -39,7 +39,7 @@ class LunaticRegroupementProcessingTest {
         List<ComponentType> l7Components = new ArrayList<>();
         List<ComponentType> p73Components = new ArrayList<>();
 
-        s1 = buildSequence("jfaz9kv9", "1");
+        s1 = buildSequenceType("jfaz9kv9", "1");
         components.add(s1);
 
         n2 = buildNumber("jfazk91m", "2", "Q1", s1, null);
@@ -48,7 +48,7 @@ class LunaticRegroupementProcessingTest {
         n3 = buildNumber("lhpz37kh", "3", "Q2", s1, null);
         components.add(n3);
 
-        s4 = buildSequence("li1w5tqk", "4");
+        s4 = buildSequenceType("li1w5tqk", "4");
         components.add(s4);
 
         n5 = buildNumber("li1w3tmf", "5", "NB", s4, null);
@@ -89,10 +89,10 @@ class LunaticRegroupementProcessingTest {
         l7.getComponents().addAll(l7Components);
         components.add(l7);
 
-        s8 = buildSequence("li1wjpqw", "8");
+        s8 = buildSequenceType("li1wjpqw", "8");
         components.add(s8);
 
-        s9 = buildSequence("COMMENT-SEQ", "9");
+        s9 = buildSequenceType("COMMENT-SEQ", "9");
         components.add(s9);
 
         t10 = buildTextarea("COMMENT-QUESTION", "10", "COMMENT_QE", s9);
@@ -185,19 +185,19 @@ class LunaticRegroupementProcessingTest {
     }
 
     @Test
-    void shouldHierarchiesPageHaveSamePageOfCorrespondingSequences() {
-        List<Sequence> sequences = List.of(s1, s4, s8, s9);
+    void shouldHierarchiesPageHaveSamePageOfCorrespondingSequenceTypes() {
+        List<SequenceType> sequences = List.of(s1, s4, s8, s9);
 
         // check hierarchies page against sequences/subsequences page
-        for(Sequence sequence : sequences) {
+        for(SequenceType sequence : sequences) {
             components.stream()
                     .map(ComponentType::getHierarchy)
                     .filter(Objects::nonNull)
                     .forEach(hierarchy -> {
-                        SequenceDescription hierarchySequence = hierarchy.getSequence();
+                        SequenceDescription hierarchySequenceType = hierarchy.getSequence();
 
-                        if(hierarchySequence != null && hierarchySequence.getId().equals(sequence.getId())) {
-                            assertEquals(sequence.getPage(), hierarchySequence.getPage());
+                        if(hierarchySequenceType != null && hierarchySequenceType.getId().equals(sequence.getId())) {
+                            assertEquals(sequence.getPage(), hierarchySequenceType.getPage());
                         }
                     });
         }
@@ -221,7 +221,7 @@ class LunaticRegroupementProcessingTest {
         }
     }
 
-    private CheckboxOne buildCheckboxOne(String id, String page, String name, Sequence sequence, Subsequence subsequence) {
+    private CheckboxOne buildCheckboxOne(String id, String page, String name, SequenceType sequence, Subsequence subsequence) {
         CheckboxOne co = new CheckboxOne();
         co.setComponentType(ComponentTypeEnum.CHECKBOX_ONE);
         co.setId(id);
@@ -231,7 +231,7 @@ class LunaticRegroupementProcessingTest {
         return co;
     }
 
-    private Textarea buildTextarea(String id, String page, String name, Sequence sequence) {
+    private Textarea buildTextarea(String id, String page, String name, SequenceType sequence) {
         Textarea textarea = new Textarea();
         textarea.setComponentType(ComponentTypeEnum.TEXTAREA);
         textarea.setId(id);
@@ -241,7 +241,7 @@ class LunaticRegroupementProcessingTest {
         return textarea;
     }
 
-    private Input buildInput(String id, String page, String name, Sequence sequence, Subsequence subsequence) {
+    private Input buildInput(String id, String page, String name, SequenceType sequence, Subsequence subsequence) {
         Input input = new Input();
         input.setComponentType(ComponentTypeEnum.INPUT);
         input.setId(id);
@@ -251,8 +251,8 @@ class LunaticRegroupementProcessingTest {
         return input;
     }
 
-    private Sequence buildSequence(String id, String page) {
-        Sequence sequence = new Sequence();
+    private SequenceType buildSequenceType(String id, String page) {
+        SequenceType sequence = new SequenceType();
         sequence.setId(id);
         sequence.setComponentType(ComponentTypeEnum.SEQUENCE);
         sequence.setPage(page);
@@ -260,7 +260,7 @@ class LunaticRegroupementProcessingTest {
         return sequence;
     }
 
-    private Subsequence buildSubsequence(String id, String page, String gotoPage, Sequence sequence) {
+    private Subsequence buildSubsequence(String id, String page, String gotoPage, SequenceType sequence) {
         Subsequence subsequence = new Subsequence();
         subsequence.setId(id);
         subsequence.setComponentType(ComponentTypeEnum.SUBSEQUENCE);
@@ -270,7 +270,7 @@ class LunaticRegroupementProcessingTest {
         return subsequence;
     }
 
-    private InputNumber buildNumber(String id, String page, String name, Sequence sequence, Subsequence subsequence) {
+    private InputNumber buildNumber(String id, String page, String name, SequenceType sequence, Subsequence subsequence) {
         InputNumber number = new InputNumber();
         number.setComponentType(ComponentTypeEnum.INPUT_NUMBER);
         number.setId(id);
@@ -280,7 +280,7 @@ class LunaticRegroupementProcessingTest {
         return number;
     }
 
-    private Loop buildEmptyLoop(String id, String page, String maxPage, Sequence sequence, boolean isPaginated) {
+    private Loop buildEmptyLoop(String id, String page, String maxPage, SequenceType sequence, boolean isPaginated) {
         Loop loop = new Loop();
         loop.setComponentType(ComponentTypeEnum.LOOP);
         loop.setId(id);
@@ -291,7 +291,7 @@ class LunaticRegroupementProcessingTest {
         return loop;
     }
 
-    private Hierarchy buildHierarchy(Sequence sequence) {
+    private Hierarchy buildHierarchy(SequenceType sequence) {
         SequenceDescription sequenceDescription = new SequenceDescription();
         sequenceDescription.setId(sequence.getId());
         sequenceDescription.setPage(sequence.getPage());
@@ -300,7 +300,7 @@ class LunaticRegroupementProcessingTest {
         return hierarchy;
     }
 
-    private Hierarchy buildHierarchy(Sequence sequence, Subsequence subsequence) {
+    private Hierarchy buildHierarchy(SequenceType sequence, Subsequence subsequence) {
         Hierarchy hierarchy = buildHierarchy(sequence);
 
         if(subsequence == null) {
@@ -321,7 +321,7 @@ class LunaticRegroupementProcessingTest {
         return response;
     }
 
-    private PairwiseLinks buildEmptyPairWiseLinks(String id, String page, Sequence sequence, Subsequence subsequence) {
+    private PairwiseLinks buildEmptyPairWiseLinks(String id, String page, SequenceType sequence, Subsequence subsequence) {
         PairwiseLinks pairwiseLinks = new PairwiseLinks();
         pairwiseLinks.setId(id);
         pairwiseLinks.setPage(page);
