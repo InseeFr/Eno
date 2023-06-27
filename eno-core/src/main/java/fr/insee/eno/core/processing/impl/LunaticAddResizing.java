@@ -53,20 +53,34 @@ public class LunaticAddResizing implements OutProcessingInterface<Questionnaire>
     }
 
 
+    /**
+     * Build resizing variables for a pairwise link
+     * @param links pairwise link
+     * @return list of resizing variables of a pairwise link
+     */
     private List<LunaticResizingPairWiseVariable> buildResizingVariablesForPairwise(PairwiseLinks links) {
         List<String> sizesVTLFormula = List.of(links.getXAxisIterations().getValue(), links.getYAxisIterations().getValue());
         List<Variable> resizingVariables = getResizingVariables(links.getId());
-        List<String> variablesNames = getVariables(links.getId());
-        List<String> collectedVariablesFormulaDependencies = getCollectedVariablesFormulaDependencies(resizingVariables);
+        List<String> variablesNames = getVariablesUsedInFormula(links.getId());
+        List<String> collectedVariablesFormulaDependencies = getCollectedResizingVariables(resizingVariables);
 
         return collectedVariablesFormulaDependencies.stream()
                 .map(collectedVariable -> new LunaticResizingPairWiseVariable(collectedVariable, sizesVTLFormula, variablesNames))
                 .toList();
     }
 
-
+    /**
+     * Build resizing variables for a loop
+     * @param loop loop
+     * @return list of resizing variables of a loop
+     */
     private List<LunaticResizingLoopVariable> buildResizingVariablesForLoop(Loop loop) {
-        String sizeVTLFormula = getSizeVTLFormula(loop);
+        // no need to handle linked loops, variables from main loop includes variables from linked loops
+        if(isLinkedLoop(loop)) {
+            return new ArrayList<>();
+        }
+
+        String sizeVTLFormula = loop.getLines().getMax().getValue();
 
         // if VTL formula is a numeric value, no need to handle variables
         if(sizeVTLFormula.chars().allMatch(Character::isDigit)) {
@@ -74,16 +88,19 @@ public class LunaticAddResizing implements OutProcessingInterface<Questionnaire>
         }
 
         List<Variable> resizingVariables = getResizingVariables(loop.getId());
-        List<String> variablesNames = getVariables(loop.getId());
-        List<String> collectedVariablesFormulaDependencies = getCollectedVariablesFormulaDependencies(resizingVariables);
+        List<String> variablesNames = getVariablesUsedInFormula(loop.getId());
+        List<String> collectedVariablesFormulaDependencies = getCollectedResizingVariables(resizingVariables);
 
         return collectedVariablesFormulaDependencies.stream()
                 .map(collectedVariable -> new LunaticResizingLoopVariable(collectedVariable, sizeVTLFormula, variablesNames))
                 .toList();
     }
 
-
-    private List<String> getVariables(String loopId) {
+    /**
+     * @param loopId loop id
+     * @return all the variables used in the resizing formula
+     */
+    private List<String> getVariablesUsedInFormula(String loopId) {
         return enoQuestionnaire.getVariableGroups().stream()
                 .filter(variableGroup -> variableGroup.getName().equals(loopId))
                 .map(VariableGroup::getVariables)
@@ -92,13 +109,24 @@ public class LunaticAddResizing implements OutProcessingInterface<Questionnaire>
                 .toList();
     }
 
+    /**
+     * Get resizing variables of a loop/pairwise
+     * @param loopId id of the loop/pairwise
+     * @return resizing variable list
+     */
     private List<Variable> getResizingVariables(String loopId) {
         // TODO: change to retrieve resizing variables instead of links variables
         throw new UnsupportedOperationException("getResizingVariables needs some code !!");
     }
 
-    private List<String> getCollectedVariablesFormulaDependencies(List<Variable> variables) {
-        return getCollectedVariablesFromVariables(variables).stream()
+    /**
+     * Return collected variables needed to run the VTL formula on calculated variables extracted from a variable list
+     *
+     * @param resizingVariables resizing variable list
+     * @return list of collected variables that trigger resizing from calculated variable
+     */
+    private List<String> getCollectedResizingVariables(List<Variable> resizingVariables) {
+        return getCollectedVariablesFromResizingVariables(resizingVariables).stream()
                 .map(Variable::getName)
                 .distinct()
                 .toList();
@@ -117,45 +145,35 @@ public class LunaticAddResizing implements OutProcessingInterface<Questionnaire>
                 .map(variableName -> enoCatalog.getVariable(variableName))
                 .toList();
         // The binding references can include calculated variables too, hence the recursion
-        return getCollectedVariablesFromVariables(bindingVariables);
+        return getCollectedVariablesFromResizingVariables(bindingVariables);
     }
 
     /**
-     * Return collected variables needed to run the VTL formula from a list of variables (calculated and collected).
+     * Return collected variables from a list of resizing variables (collected + calculated)
      *
-     * @param variables variables needed to run the VTL formula (collected and calculated)
-     * @return list of collected variables needed to run the VTL formula
+     * @param resizingVariables resizing variables (xontaining collected and calculated variables)
+     * @return list of collected resizing variables
      */
-    private List<Variable> getCollectedVariablesFromVariables(List<Variable> variables) {
-        List<Variable> collectedVariables = variables.stream()
-                .filter(variable -> variable.getCollected().equals("COLLECTED"))
-                .toList();
+    private List<Variable> getCollectedVariablesFromResizingVariables(List<Variable> resizingVariables) {
+        List<Variable> collectedVariables = new ArrayList<>();
+        collectedVariables.addAll(resizingVariables.stream()
+                .filter(resizingVariable -> resizingVariable.getCollected().equals("COLLECTED"))
+                .toList());
 
-        List<Variable> collectedVariablesFromCalculatedVariables = variables.stream()
-                .filter(variable -> variable.getCollected().equals("CALCULATED"))
+        collectedVariables.addAll(resizingVariables.stream()
+                .filter(resizingVariable -> resizingVariable.getCollected().equals("CALCULATED"))
                 .map(this::getCollectedVariablesFromCalculatedVariable)
                 .flatMap(Collection::stream)
-                .toList();
-
-        collectedVariables.addAll(collectedVariablesFromCalculatedVariables);
+                .toList());
         return collectedVariables;
     }
 
     /**
-     * Get size VTL formula from loop
-     * @param loop loop to retrieve vtl formula
-     * @return size VTL formula
+     * Check if loop is a main or linked loop
+     * @param loop loop to check
+     * @return true if linked loop, false otherwise
      */
-    private String getSizeVTLFormula(Loop loop) {
-        String sizeVTLFormula = null;
-        if(loop.getLines() != null) {
-            sizeVTLFormula = loop.getLines().getMax().getValue();
-        }
-
-        if(sizeVTLFormula == null) {
-            sizeVTLFormula = loop.getIterations().getValue();
-        }
-
-        return sizeVTLFormula;
+    private boolean isLinkedLoop(Loop loop) {
+        return loop.getLines() == null;
     }
 }
