@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class LunaticAddResizingTest {
 
     private Questionnaire lunaticQuestionnaire;
-    private SequenceType s1, s4, s8, s9;
+    private Sequence s1, s4, s8, s9;
     private InputNumber n2, n3, n72, n73, n5;
     private Textarea t10;
     private Loop l6, l7;
@@ -63,7 +63,7 @@ class LunaticAddResizingTest {
         List<ComponentType> l7Components = new ArrayList<>();
         List<ComponentType> p73Components = new ArrayList<>();
 
-        s1 = buildSequenceType("jfaz9kv9");
+        s1 = buildSequence("jfaz9kv9");
         components.add(s1);
 
         n2 = buildNumber("jfazk91m");
@@ -72,7 +72,7 @@ class LunaticAddResizingTest {
         n3 = buildNumber("lhpz37kh");
         components.add(n3);
 
-        s4 = buildSequenceType("li1w5tqk");
+        s4 = buildSequence("li1w5tqk");
         components.add(s4);
 
         n5 = buildNumber("li1w3tmf");
@@ -113,10 +113,10 @@ class LunaticAddResizingTest {
         l7.getComponents().addAll(l7Components);
         components.add(l7);
 
-        s8 = buildSequenceType("li1wjpqw");
+        s8 = buildSequence("li1wjpqw");
         components.add(s8);
 
-        s9 = buildSequenceType("COMMENT-SEQ");
+        s9 = buildSequence("COMMENT-SEQ");
         components.add(s9);
 
         t10 = buildTextarea("COMMENT-QUESTION");
@@ -147,8 +147,8 @@ class LunaticAddResizingTest {
         return input;
     }
 
-    private SequenceType buildSequenceType(String id) {
-        SequenceType sequence = new SequenceType();
+    private Sequence buildSequence(String id) {
+        Sequence sequence = new Sequence();
         sequence.setId(id);
         sequence.setComponentType(ComponentTypeEnum.SEQUENCE);
         return sequence;
@@ -172,6 +172,12 @@ class LunaticAddResizingTest {
         Loop loop = new Loop();
         loop.setComponentType(ComponentTypeEnum.LOOP);
         loop.setId(id);
+
+        LabelType label = new LabelType();
+        label.setValue("COUNT(PRENOM)");
+        LinesLoop line = new LinesLoop();
+        line.setMax(label);
+        loop.setLines(line);
         return loop;
     }
 
