@@ -21,6 +21,10 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
 
     private static final String MISSING_RESPONSE_SUFFIX = "_MISSING";
 
+    /**
+     * process missing responses on lunatic questionnaire
+     * @param lunaticQuestionnaire Out object to be processed.
+     */
     public void apply(Questionnaire lunaticQuestionnaire) {
         lunaticQuestionnaire.setMissing(isMissingVariables);
         if (!isMissingVariables) {
@@ -31,7 +35,7 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
 
         List<ComponentType> components = filterComponentsToProcess(lunaticQuestionnaire.getComponents());
 
-        components.forEach(this::createMissingResponse);
+        components.forEach(this::setComponentMissingResponse);
         List<MissingBlock> missingBlocks = createMissingBlocks(components);
 
         List<VariableType> missingVariables = new ArrayList<>();
@@ -44,7 +48,7 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
             missingVariables.add(missingVariable);
 
             allMissingBlocks.add(missingBlock);
-            allMissingBlocks.addAll(createInversedMissingBlocks(missingBlock));
+            allMissingBlocks.addAll(createReversedMissingBlocks(missingBlock));
         });
 
         if(!allMissingBlocks.isEmpty()) {
@@ -56,12 +60,22 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
         }
     }
 
-    private List<MissingBlock> createInversedMissingBlocks(MissingBlock missingBlock) {
+    /**
+     * create the reversed missing blocks from a missing block
+     * @param missingBlock missing block from which we ne to create reversed missing blocks
+     * @return list of reversed missing blocks
+     */
+    private List<MissingBlock> createReversedMissingBlocks(MissingBlock missingBlock) {
         return missingBlock.getNames().stream()
                 .map(name -> new MissingBlock(name, List.of(missingBlock.getMissingName())))
                 .toList();
     }
 
+    /**
+     * create missing blocks from components
+     * @param components list of components to process
+     * @return list of missing blocks
+     */
     private List<MissingBlock> createMissingBlocks(List<ComponentType> components) {
         List<MissingBlock> missingBlocks = new ArrayList<>();
         // generate blocks on components with missing response attribute (included main loop)
@@ -94,6 +108,11 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
         return missingBlocks;
     }
 
+    /**
+     * Extract the names of a missing block from a component
+     * @param component component which we extract missing block names
+     * @return list of names
+     */
     private List<String> getMissingBlockNames(ComponentType component) {
         List<String> names;
         switch(component.getComponentType()) {
@@ -127,7 +146,11 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
         return names;
     }
 
-    private void createMissingResponse(ComponentType component) {
+    /**
+     * set missing response for a component
+     * @param component set missing response for this component
+     */
+    private void setComponentMissingResponse(ComponentType component) {
         String missingResponseName = null;
 
         switch(component.getComponentType()) {
@@ -135,7 +158,7 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
                 Loop loop = (Loop) component;
                 // when linked loop, missing responses are generated on the loop components
                 if(isLinkedLoop(loop)) {
-                    ((Loop) component).getComponents().forEach(this::createMissingResponse);
+                    ((Loop) component).getComponents().forEach(this::setComponentMissingResponse);
                     return;
                 }
 
@@ -151,7 +174,7 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
             }
 
             // missing responses are handled on the components of pairwise
-            case PAIRWISE_LINKS -> ((PairwiseLinks) component).getComponents().forEach(this::createMissingResponse);
+            case PAIRWISE_LINKS -> ((PairwiseLinks) component).getComponents().forEach(this::setComponentMissingResponse);
 
             default -> {
                 log.info(component.getId());
@@ -168,6 +191,11 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
         }
     }
 
+    /**
+     * filter components to process (only questions/loops)
+     * @param components components needing filtering
+     * @return filtered components
+     */
     private List<ComponentType> filterComponentsToProcess(List<ComponentType> components) {
         return components.stream()
                 .filter(component -> !component.getComponentType().equals(ComponentTypeEnum.SEQUENCE))
@@ -175,6 +203,12 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
                 .filter(component -> !component.getComponentType().equals(ComponentTypeEnum.FILTER_DESCRIPTION))
                 .toList();
     }
+
+    /**
+     * Check if loop is a main or linked loop
+     * @param loop loop to check
+     * @return true if linked loop, false otherwise
+     */
     private boolean isLinkedLoop(Loop loop) {
         return loop.getLines() == null;
     }

@@ -34,7 +34,6 @@ class JsonMissingBlockConverterTest {
     @Test
     void whenTransformingToJsonMissingBlockIsCorrect() throws LunaticSerializationException, JSONException {
         String questionnaireJson = JsonLunaticConverter.convert(lunaticQuestionnaire);
-        System.out.println(questionnaireJson);
 
         String expectedJson = """
             {
