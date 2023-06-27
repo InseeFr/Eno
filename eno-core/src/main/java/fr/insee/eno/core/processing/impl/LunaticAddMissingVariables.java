@@ -24,12 +24,15 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
     public void apply(Questionnaire lunaticQuestionnaire) {
         lunaticQuestionnaire.setMissing(isMissingVariables);
         if (!isMissingVariables) {
+            log.info("Skip missing variables processing");
             return;
         }
-        List<ComponentType> components = lunaticQuestionnaire.getComponents();
+        log.info("Adding missing variables for this lunatic questionnaire");
+
+        List<ComponentType> components = filterComponentsToProcess(lunaticQuestionnaire.getComponents());
 
         components.forEach(this::createMissingResponse);
-        List<MissingBlock> missingBlocks = createMissingBlocks(lunaticQuestionnaire.getComponents());
+        List<MissingBlock> missingBlocks = createMissingBlocks(components);
 
         List<VariableType> missingVariables = new ArrayList<>();
         List<MissingBlock> allMissingBlocks = new ArrayList<>();
@@ -76,7 +79,7 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
                 .filter(componentType -> componentType.getComponentType().equals(ComponentTypeEnum.LOOP))
                 .map(Loop.class::cast)
                 .filter(this::isLinkedLoop)
-                .map(linkedLoop -> createMissingBlocks(linkedLoop.getComponents()))
+                .map(linkedLoop -> createMissingBlocks(filterComponentsToProcess(linkedLoop.getComponents())))
                 .flatMap(Collection::stream)
                 .toList());
 
@@ -84,7 +87,7 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
         missingBlocks.addAll(components.stream()
                 .filter(componentType -> componentType.getComponentType().equals(ComponentTypeEnum.PAIRWISE_LINKS))
                 .map(PairwiseLinks.class::cast)
-                .map(pairwiseLinks -> createMissingBlocks(pairwiseLinks.getComponents()))
+                .map(pairwiseLinks -> createMissingBlocks(filterComponentsToProcess(pairwiseLinks.getComponents())))
                 .flatMap(Collection::stream)
                 .toList());
 
@@ -150,7 +153,10 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
             // missing responses are handled on the components of pairwise
             case PAIRWISE_LINKS -> ((PairwiseLinks) component).getComponents().forEach(this::createMissingResponse);
 
-            default -> missingResponseName = enoCatalog.getQuestion(component.getId()).getName();
+            default -> {
+                log.info(component.getId());
+                missingResponseName = enoCatalog.getQuestion(component.getId()).getName();
+            }
 
         }
 
@@ -162,6 +168,13 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
         }
     }
 
+    private List<ComponentType> filterComponentsToProcess(List<ComponentType> components) {
+        return components.stream()
+                .filter(component -> !component.getComponentType().equals(ComponentTypeEnum.SEQUENCE))
+                .filter(component -> !component.getComponentType().equals(ComponentTypeEnum.SUBSEQUENCE))
+                .filter(component -> !component.getComponentType().equals(ComponentTypeEnum.FILTER_DESCRIPTION))
+                .toList();
+    }
     private boolean isLinkedLoop(Loop loop) {
         return loop.getLines() == null;
     }
