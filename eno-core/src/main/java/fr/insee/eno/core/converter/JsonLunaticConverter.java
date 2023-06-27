@@ -11,11 +11,10 @@ import fr.insee.eno.core.output.LunaticSerializer;
 import fr.insee.lunatic.model.flat.MissingType;
 import fr.insee.lunatic.model.flat.Questionnaire;
 
-public class JsonMissingBlockConverter {
+public class JsonLunaticConverter {
 
-    private final ObjectMapper mapper;
-    public JsonMissingBlockConverter() {
-        this.mapper = new ObjectMapper();
+    private JsonLunaticConverter() {
+        throw new UnsupportedOperationException("Utility class");
     }
 
     /**
@@ -24,14 +23,15 @@ public class JsonMissingBlockConverter {
      * @return json lunatic with missing blocks included
      * @throws LunaticSerializationException exception raised when serializing lunatic questionnaire
      */
-    public String convert(Questionnaire lunaticQuestionnaire) throws LunaticSerializationException {
+    public static String convert(Questionnaire lunaticQuestionnaire) throws LunaticSerializationException {
+        ObjectMapper mapper = new ObjectMapper();
         try {
             String lunaticJson = LunaticSerializer.serializeToJson(lunaticQuestionnaire);
             ObjectNode questionnaireNode = (ObjectNode) mapper.readTree(lunaticJson);
 
             MissingType missingType = lunaticQuestionnaire.getMissingBlock();
             if(missingType != null && !missingType.getAny().isEmpty()) {
-                questionnaireNode.set("missingBlock", createMissingBlocks(lunaticQuestionnaire));
+                questionnaireNode.set("missingBlock", createMissingBlocks(lunaticQuestionnaire, mapper));
             }
             return mapper.writeValueAsString(questionnaireNode);
         } catch(JsonProcessingException ex) {
@@ -44,7 +44,7 @@ public class JsonMissingBlockConverter {
      * @param lunaticQuestionnaire lunatic questionnaire
      * @return the json node containing all missing blocks in correct format
      */
-    private ObjectNode createMissingBlocks(Questionnaire lunaticQuestionnaire) {
+    private static ObjectNode createMissingBlocks(Questionnaire lunaticQuestionnaire, ObjectMapper mapper) {
         ObjectNode missingBlocksJson = mapper.createObjectNode();
         lunaticQuestionnaire.getMissingBlock().getAny().stream()
                 .map(MissingBlock.class::cast)

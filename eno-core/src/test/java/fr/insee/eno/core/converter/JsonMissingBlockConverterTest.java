@@ -15,11 +15,9 @@ import java.util.List;
 class JsonMissingBlockConverterTest {
     private Questionnaire lunaticQuestionnaire;
 
-    private JsonMissingBlockConverter converter;
 
     @BeforeEach
     void init() {
-        converter = new JsonMissingBlockConverter();
         lunaticQuestionnaire = new Questionnaire();
         MissingType missingType = new MissingType();
         lunaticQuestionnaire.setMissingBlock(missingType);
@@ -35,7 +33,7 @@ class JsonMissingBlockConverterTest {
 
     @Test
     void whenTransformingToJsonMissingBlockIsCorrect() throws LunaticSerializationException, JSONException {
-        String questionnaireJson = converter.convert(lunaticQuestionnaire);
+        String questionnaireJson = JsonLunaticConverter.convert(lunaticQuestionnaire);
         System.out.println(questionnaireJson);
 
         String expectedJson = """
