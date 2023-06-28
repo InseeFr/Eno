@@ -1,5 +1,7 @@
 package fr.insee.eno.core.processing.impl;
 
+import fr.insee.eno.core.exceptions.business.DDIParsingException;
+import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.navigation.Loop;
@@ -8,8 +10,11 @@ import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.SequenceItem;
 import fr.insee.eno.core.model.sequence.SequenceItem.SequenceItemType;
 import fr.insee.eno.core.model.sequence.Subsequence;
+import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.reference.EnoIndex;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +25,7 @@ class DDIResolveSequencesStructureTest {
     private static final String SUBSEQUENCE_ID = "subsequence-id";
     private static final String QUESTION_ID = "question-id";
     private static final String LOOP_ID = "loop-id";
-    private static final String FILTER_ID = "loop-id";
+    private static final String FILTER_ID = "filter-id";
 
     @Test
     @DisplayName("1 sequence, 1 question")
@@ -154,6 +159,111 @@ class DDIResolveSequencesStructureTest {
         assertEquals(1, subsequence.getSequenceStructure().size());
         assertEquals(QUESTION_ID, subsequence.getSequenceStructure().get(0).getId());
         assertEquals(SequenceItemType.QUESTION, subsequence.getSequenceStructure().get(0).getType());
+    }
+
+    @Nested
+    @DisplayName("Larger tests with 'l20g2ba7'")
+    class IntegrationTests {
+
+        static EnoQuestionnaire enoQuestionnaire;
+
+        @BeforeAll
+        static void mapQuestionnaire() throws DDIParsingException {
+            // Given
+            enoQuestionnaire = new EnoQuestionnaire();
+            DDIMapper ddiMapper = new DDIMapper();
+            ddiMapper.mapDDI(DDIParser.parse(
+                    IntegrationTests.class.getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml")),
+                    enoQuestionnaire);
+            // When
+            DDIResolveSequencesStructure ddiResolveSequencesStructure = new DDIResolveSequencesStructure();
+            ddiResolveSequencesStructure.apply(enoQuestionnaire);
+            // Then
+            // -> split in several tests
+        }
+
+        @Test
+        @DisplayName("Sequences / subsequences structure")
+        void integrationTest_subsequences() {
+            //
+            assertEquals(3, enoQuestionnaire.getSequences().get(0).getSequenceStructure().size());
+            enoQuestionnaire.getSequences().get(0).getSequenceStructure().forEach(sequenceItem ->
+                    assertEquals(SequenceItemType.SUBSEQUENCE, sequenceItem.getType()));
+            //
+            assertEquals(2, enoQuestionnaire.getSequences().get(1).getSequenceStructure().size());
+            enoQuestionnaire.getSequences().get(1).getSequenceStructure().forEach(sequenceItem ->
+                    assertEquals(SequenceItemType.SUBSEQUENCE, sequenceItem.getType()));
+            //
+            assertEquals(6, enoQuestionnaire.getSequences().get(2).getSequenceStructure().size());
+            enoQuestionnaire.getSequences().get(2).getSequenceStructure().forEach(sequenceItem ->
+                    assertEquals(SequenceItemType.QUESTION, sequenceItem.getType()));
+            //
+            assertEquals(5, enoQuestionnaire.getSequences().get(3).getSequenceStructure().size());
+            assertEquals(SequenceItemType.QUESTION,
+                    enoQuestionnaire.getSequences().get(3).getSequenceStructure().get(0).getType());
+            assertEquals(SequenceItemType.QUESTION,
+                    enoQuestionnaire.getSequences().get(3).getSequenceStructure().get(1).getType());
+            assertEquals(SequenceItemType.SUBSEQUENCE,
+                    enoQuestionnaire.getSequences().get(3).getSequenceStructure().get(2).getType());
+            assertEquals(SequenceItemType.SUBSEQUENCE,
+                    enoQuestionnaire.getSequences().get(3).getSequenceStructure().get(3).getType());
+            assertEquals(SequenceItemType.SUBSEQUENCE,
+                    enoQuestionnaire.getSequences().get(3).getSequenceStructure().get(4).getType());
+            //
+            assertEquals(3, enoQuestionnaire.getSequences().get(4).getSequenceStructure().size());
+            enoQuestionnaire.getSequences().get(4).getSequenceStructure().forEach(sequenceItem ->
+                    assertEquals(SequenceItemType.SUBSEQUENCE, sequenceItem.getType()));
+            //
+            assertEquals(0, enoQuestionnaire.getSequences().get(5).getSequenceStructure().size());
+        }
+
+        @Test
+        @DisplayName("Questions in subsequence")
+        void integrationTest_questions() {
+            Subsequence subsequence11 = (Subsequence) enoQuestionnaire.get(
+                    enoQuestionnaire.getSequences().get(0).getSequenceStructure().get(0).getId());
+            assertEquals(2, subsequence11.getSequenceStructure().size());
+            assertEquals(SequenceItemType.QUESTION, subsequence11.getSequenceStructure().get(0).getType());
+            assertEquals(SequenceItemType.QUESTION, subsequence11.getSequenceStructure().get(1).getType());
+        }
+
+        @Test
+        @DisplayName("Loop references should be resolved")
+        void integrationTest_loops() {
+            // Subsequence targeted by a loop
+            Subsequence subsequence52 = (Subsequence) enoQuestionnaire.get(
+                    enoQuestionnaire.getSequences().get(4).getSequenceStructure().get(1).getId());
+            assertEquals(2, subsequence52.getSequenceStructure().size());
+            assertEquals(SequenceItemType.QUESTION, subsequence52.getSequenceStructure().get(0).getType());
+            assertEquals(SequenceItemType.QUESTION, subsequence52.getSequenceStructure().get(1).getType());
+            // Subsequence targeted by a linked loop;
+            Subsequence subsequence53 = (Subsequence) enoQuestionnaire.get(
+                    enoQuestionnaire.getSequences().get(4).getSequenceStructure().get(2).getId());
+            assertEquals(1, subsequence53.getSequenceStructure().size());
+            assertEquals(SequenceItemType.QUESTION, subsequence53.getSequenceStructure().get(0).getType());
+        }
+
+        @Test
+        @DisplayName("Filter references should be resolved")
+        void integrationTest_filters() {
+            // A question in this subsequence is targeted by a filter
+            Subsequence subsequence21 = (Subsequence) enoQuestionnaire.get(
+                    enoQuestionnaire.getSequences().get(1).getSequenceStructure().get(0).getId());
+            assertEquals(7, subsequence21.getSequenceStructure().size());
+            subsequence21.getSequenceStructure().forEach(sequenceItem ->
+                    assertEquals(SequenceItemType.QUESTION, sequenceItem.getType()));
+            // Subsequence targeted by a filter
+            Subsequence subsequence42 = (Subsequence) enoQuestionnaire.get(
+                    enoQuestionnaire.getSequences().get(3).getSequenceStructure().get(3).getId());
+            assertEquals(1, subsequence42.getSequenceStructure().size());
+            assertEquals(SequenceItemType.QUESTION, subsequence42.getSequenceStructure().get(0).getType());
+            // Subsequence targeted by nested filters
+            Subsequence subsequence43 = (Subsequence) enoQuestionnaire.get(
+                    enoQuestionnaire.getSequences().get(3).getSequenceStructure().get(4).getId());
+            assertEquals(1, subsequence43.getSequenceStructure().size());
+            assertEquals(SequenceItemType.QUESTION, subsequence43.getSequenceStructure().get(0).getType());
+        }
+
     }
 
 }
