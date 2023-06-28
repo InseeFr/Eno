@@ -16,6 +16,7 @@ import fr.insee.eno.core.processing.EnoProcessing;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
@@ -40,7 +41,7 @@ class LunaticLoopResolutionTest {
         enoQuestionnaire = new EnoQuestionnaire();
         Sequence sequence = new Sequence();
         sequence.setId(SEQUENCE_ID);
-        sequence.getSequenceItems().add(
+        sequence.getSequenceStructure().add(
                 SequenceItem.builder().id(QUESTION_ID).type(SequenceItemType.QUESTION).build());
         enoQuestionnaire.getSequences().add(sequence);
         TextQuestion textQuestion = new TextQuestion();
@@ -95,7 +96,8 @@ class LunaticLoopResolutionTest {
         assertTrue(((Loop) lunaticQuestionnaire.getComponents().get(0)).getComponents().get(1) instanceof Input);
     }
 
-    static class IntegrationTests {
+    @Nested
+    class IntegrationTests {
 
         @Test
         void largeCoverageQuestionnaire() throws DDIParsingException {
@@ -110,7 +112,8 @@ class LunaticLoopResolutionTest {
             Questionnaire lunaticQuestionnaire = new Questionnaire();
             LunaticMapper lunaticMapper = new LunaticMapper();
             lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
-
+            LunaticSortComponents lunaticSortComponents = new LunaticSortComponents(enoQuestionnaire);
+            lunaticSortComponents.apply(lunaticQuestionnaire);
 
             // When
             LunaticLoopResolution2 lunaticLoopResolution = new LunaticLoopResolution2(enoQuestionnaire);

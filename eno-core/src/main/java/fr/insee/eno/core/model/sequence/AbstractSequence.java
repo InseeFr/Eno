@@ -73,18 +73,4 @@ public abstract class AbstractSequence extends EnoIdentifiableObject implements 
      * In DDI, this list is filled in a processing class using the 'sequenceItems' list. */
     private final List<SequenceItem> sequenceStructure = new ArrayList<>();
 
-    /** Return the ordered list of component identifiers within the sequence/subsequence
-     * (filtering controls, declarations etc.)
-     * YET: in DDI, loop and filter references replace the components, it has to be resolved someway:
-     * TODO: manage LOOP and FILTER case for sequence items -> Work in progress ("sequence structure")
-     * */
-    @Deprecated
-    public List<String> getComponentReferences() {
-        return sequenceItems.stream()
-                .filter(sequenceItem -> SequenceItem.SequenceItemType.SUBSEQUENCE.equals(sequenceItem.getType()) ||
-                        SequenceItem.SequenceItemType.QUESTION.equals(sequenceItem.getType()))
-                .map(SequenceItem::getId)
-                .toList();
-    }
-
 }

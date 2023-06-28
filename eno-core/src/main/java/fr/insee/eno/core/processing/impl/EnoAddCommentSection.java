@@ -40,7 +40,7 @@ public class EnoAddCommentSection implements EnoProcessingInterface {
         sequence.setId(COMMENT_SEQUENCE_ID);
         sequence.setLabel(new Label());
         sequence.getLabel().setValue(COMMENT_SEQUENCE_LABEL);
-        sequence.getSequenceItems().add(
+        sequence.getSequenceStructure().add(
                 SequenceItem.builder().id(COMMENT_QUESTION_ID).type(SequenceItemType.QUESTION).build());
         enoQuestionnaire.getSequences().add(sequence);
         enoIndex.put(COMMENT_SEQUENCE_ID, sequence);

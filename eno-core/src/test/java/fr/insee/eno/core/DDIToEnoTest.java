@@ -7,8 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static fr.insee.eno.core.model.sequence.SequenceItem.SequenceItemType.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -33,26 +31,6 @@ class DDIToEnoTest {
         enoParameters.setIdentificationQuestion(false);
         enoParameters.setCommentSection(false);
         enoParameters.setResponseTimeQuestion(false);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {
-            "lhpz68wp",
-            "l20g2ba7",
-            "l5v3spn0",
-            "kx0a2hn8",
-            //"kzy5kbtl",
-            "l8x6fhtd",
-            //"ldodefpq",
-    })
-    @DisplayName("Many questionnaires, non null output")
-    void testAll(String questionnaireId) throws DDIParsingException {
-        //
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
-                classLoader.getResourceAsStream("end-to-end/ddi/ddi-"+questionnaireId+".xml"),
-                enoParameters);
-        //
-        assertNotNull(enoQuestionnaire);
     }
 
     @Test
@@ -116,7 +94,6 @@ class DDIToEnoTest {
 
     @Test
     @DisplayName("DDI 'l5v3spn0' (contains loops)")
-    @Disabled("Loop over a sequence makes Lunatic sorting processing fail, to be fixed")
     void test02() throws DDIParsingException {
         //
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(

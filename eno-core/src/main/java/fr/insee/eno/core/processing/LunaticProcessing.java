@@ -35,8 +35,8 @@ public class LunaticProcessing {
         //
         new LunaticAddGeneratingDate().apply(lunaticQuestionnaire);
         //
-        new LunaticLoopResolution2(enoQuestionnaire).apply(lunaticQuestionnaire);
         new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);
+        new LunaticLoopResolution2(enoQuestionnaire).apply(lunaticQuestionnaire);
 
         new LunaticAddBindingDependencies(lunaticCatalog, enoIndex).apply(lunaticQuestionnaire);
         new LunaticAddMissingVariables(parameters.isMissingVariables()).apply(lunaticQuestionnaire);

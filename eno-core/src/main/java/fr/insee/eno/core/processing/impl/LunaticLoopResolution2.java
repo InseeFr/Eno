@@ -51,6 +51,7 @@ public class LunaticLoopResolution2 implements OutProcessingInterface<Questionna
         List<ComponentType> components = lunaticQuestionnaire.getComponents();
         Iterator<ComponentType> iterator = components.iterator();
         // First iterate until we find the referenced sequence
+        int position = 0;
         while (iterator.hasNext()) {
             ComponentType component = iterator.next();
             // Then transfer concerned components in the loop component
@@ -63,18 +64,17 @@ public class LunaticLoopResolution2 implements OutProcessingInterface<Questionna
                 insertComponentsInLoop(lunaticQuestionnaire, lunaticLoop, sequenceReference);
                 break;
             }
+            position++;
         }
-        components.add(lunaticLoop);
+        components.add(position, lunaticLoop);
     }
 
-    /** Insert components that belongs to the loop, in the right order, using Eno sequence object.
-     * FIXME: this will not work if some components in the loop are filtered (see getComponentReferences method comments)
-     * */
+    /** Insert components that belongs to the loop, in the right order, using Eno sequence object. */
     private void insertComponentsInLoop(
             Questionnaire lunaticQuestionnaire, Loop lunaticLoop, String sequenceReference) {
          AbstractSequence enoSequence = (AbstractSequence) enoIndex.get(sequenceReference);
-         enoSequence.getComponentReferences().forEach(componentReference ->
-                 relocateComponent(lunaticQuestionnaire, lunaticLoop, componentReference));
+         enoSequence.getSequenceStructure().forEach(sequenceItem ->
+                 relocateComponent(lunaticQuestionnaire, lunaticLoop, sequenceItem.getId()));
     }
 
     /** Relocate the component with given reference (id) from the questionnaire's components
@@ -118,6 +118,9 @@ public class LunaticLoopResolution2 implements OutProcessingInterface<Questionna
 
     /** In case of a standalone loop: "min" and "max" lines. */
     private static void standaloneLoopMapping(Loop lunaticLoop, StandaloneLoop enoStandaloneLoop) {
+        //
+        lunaticLoop.setPaginatedLoop(false);
+        //
         LunaticMapper lunaticMapper = new LunaticMapper();
         lunaticLoop.setLines(new LinesLoop());
         LabelType minExpression = new LabelType();
@@ -132,6 +135,8 @@ public class LunaticLoopResolution2 implements OutProcessingInterface<Questionna
      * TODO: Issue on current Lunatic conception around this. To be addressed later on.
      * */
     private void linkedLoopMapping(Loop lunaticLoop, LinkedLoop enoLinkedLoop) {
+        //
+        lunaticLoop.setPaginatedLoop(true);
         // We "just" want to find the first variable in the scope of the reference loop
         EnoIdentifiableObject reference = enoIndex.get(enoLinkedLoop.getReference());
         //

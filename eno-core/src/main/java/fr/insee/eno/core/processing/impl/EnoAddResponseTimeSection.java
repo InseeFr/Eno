@@ -58,9 +58,9 @@ public class EnoAddResponseTimeSection implements EnoProcessingInterface {
         sequence.setId(RESPONSE_TIME_SEQUENCE_ID);
         sequence.setLabel(new Label());
         sequence.getLabel().setValue(RESPONSE_TIME_SEQUENCE_LABEL);
-        sequence.getSequenceItems().add(
+        sequence.getSequenceStructure().add(
                 SequenceItem.builder().id(HOURS_QUESTION_ID).type(SequenceItemType.QUESTION).build());
-        sequence.getSequenceItems().add(
+        sequence.getSequenceStructure().add(
                 SequenceItem.builder().id(MINUTES_QUESTION_ID).type(SequenceItemType.QUESTION).build());
         enoQuestionnaire.getSequences().add(sequence);
         enoIndex.put(RESPONSE_TIME_SEQUENCE_ID, sequence);

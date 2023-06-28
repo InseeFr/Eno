@@ -171,7 +171,7 @@ class LunaticTests {
     }
 
     @Test
-    @Disabled("Deserialization of this questionnaire fails, reason is not yet identified.")
+    @Disabled("Lunatic-Model deserialization doesn't work for now.")
     void deserializeQuestionnaire() throws JAXBException {
         //
         JSONDeserializer jsonDeserializer = new JSONDeserializer();
