@@ -1,8 +1,10 @@
 package fr.insee.eno.core.processing.impl;
 
 import fr.insee.eno.core.model.EnoComponent;
+import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.sequence.Sequence;
+import fr.insee.eno.core.model.sequence.SequenceItem;
 import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.question.Question;
@@ -23,12 +25,12 @@ public class EnoAddNumberingInQuestions implements EnoProcessingInterface {
         //
         if (mode != EnoParameters.QuestionNumberingMode.NONE) {
             int questionNumber = 1;
-            for (String sequenceId : enoQuestionnaire.getSequenceReferences()) {
+            for (String sequenceId : enoQuestionnaire.getSequences().stream().map(EnoIdentifiableObject::getId).toList()) {
                 Sequence sequence = (Sequence) enoQuestionnaire.get(sequenceId);
-                for (String componentId : sequence.getComponentReferences()) {
+                for (String componentId : sequence.getSequenceStructure().stream().map(SequenceItem::getId).toList()) {
                     EnoComponent component = (EnoComponent) enoQuestionnaire.get(componentId);
                     if (component instanceof Subsequence subsequence) {
-                        for (String questionId : subsequence.getComponentReferences()) {
+                        for (String questionId : subsequence.getSequenceStructure().stream().map(SequenceItem::getId).toList()) {
                             Question question = (Question) enoQuestionnaire.get(questionId);
                             DynamicLabel questionLabel = question.getLabel();
                             questionLabel.setValue(questionNumber + QUESTION_NUMBERING_SEPARATOR + " " + questionLabel.getValue());

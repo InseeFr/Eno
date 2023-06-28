@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.insee.eno.core.model.mode.Mode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +16,7 @@ import static fr.insee.eno.core.model.mode.Mode.*;
 
 @Getter
 @Setter
+@Slf4j
 public class EnoParameters {
 
     public enum Context {HOUSEHOLD, BUSINESS, DEFAULT}
@@ -50,17 +52,25 @@ public class EnoParameters {
     private LunaticPaginationMode lunaticPaginationMode;
 
     public static EnoParameters parse(InputStream parametersInputStream) throws IOException {
+        log.info("Parsing Eno parameters from input stream");
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(parametersInputStream, EnoParameters.class);
     }
 
     public static String serialize(EnoParameters enoParameters) throws JsonProcessingException {
+        log.info("Serializing parameters file");
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(enoParameters);
     }
 
     public EnoParameters() {
         defaultParameters();
+    }
+
+    public EnoParameters(Context context, Format outFormat) {
+        log.info("Parameters with context {} and out format {}", context, outFormat);
+        defaultParameters(); // TODO: default values in function of context & out format
+        this.context = context;
     }
 
     private void defaultParameters() {

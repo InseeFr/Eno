@@ -7,7 +7,9 @@ import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.reference.DDIIndex;
 import group33.ResourcePackageType;
 import instance33.DDIInstanceDocument;
+import instance33.DDIInstanceType;
 import logicalproduct33.VariableGroupType;
+import logicalproduct33.VariableSchemeType;
 import org.junit.jupiter.api.Test;
 import reusable33.*;
 import reusable33.impl.ContentTypeImpl;
@@ -17,17 +19,17 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DDITests {
+class DDITests {
 
     @Test
-    public void arrayAndList() {
+    void arrayAndList() {
         String[] foo = {"a", "b", "c"};
         assertFalse(List.class.isAssignableFrom(foo.getClass()));
         assertEquals("a", foo[0]);
     }
 
     @Test
-    public void xmlBeansAndDDI() {
+    void xmlBeansAndDDI() {
         IDType idType = IDType.Factory.newInstance();
         String stringId = "foo";
         idType.setStringValue(stringId);
@@ -35,23 +37,26 @@ public class DDITests {
     }
 
     @Test
-    public void tableQuestion() throws IOException, DDIParsingException {
+    void tableQuestion() throws DDIParsingException {
         //
         DDIIndex ddiIndex = new DDIIndex();
-        ddiIndex.indexDDI(DDIParser.parse(this.getClass().getClassLoader().getResource("in/ddi/l20g2ba7.xml")));
+        ddiIndex.indexDDI(DDIParser.parse(
+                this.getClass().getClassLoader().getResource("end-to-end/ddi/ddi-l20g2ba7.xml")));
         //
         QuestionGridType tableQuestionGrid = (QuestionGridType) ddiIndex.get("l8u8d67h");
         assertNotNull(tableQuestionGrid);
     }
 
     @Test
-    public void ddiObjects() throws IOException, DDIParsingException {
-        // (Parse)
-        DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
-                this.getClass().getClassLoader().getResource("in/ddi/l10xmg2l.xml"));
+    void ddiObjects() {
+        // DDI instance
+        DDIInstanceDocument ddiInstanceDocument = DDIInstanceDocument.Factory.newInstance();
+        DDIInstanceType ddiInstanceType = DDIInstanceType.Factory.newInstance();
+        ddiInstanceDocument.setDDIInstance(ddiInstanceType);
 
         // Resource package
-        ResourcePackageType resourcePackage = ddiInstanceDocument.getDDIInstance().getResourcePackageArray(0);
+        ResourcePackageType resourcePackage = ResourcePackageType.Factory.newInstance();
+        ddiInstanceDocument.getDDIInstance().getResourcePackageList().add(resourcePackage);
 
         // Citation
         String ddiCitation = "foo-citation";
@@ -63,6 +68,9 @@ public class DDITests {
         assertEquals(ddiCitation, citation);
 
         // Variable group
+        VariableSchemeType variableSchemeType = VariableSchemeType.Factory.newInstance();
+        variableSchemeType.getVariableGroupList().add(VariableGroupType.Factory.newInstance());
+        resourcePackage.getVariableSchemeList().add(variableSchemeType);
         VariableGroupType firstVariableGroupType = resourcePackage.getVariableSchemeArray(0).getVariableGroupArray(0);
 
         // References in a variable group
@@ -76,10 +84,10 @@ public class DDITests {
 
         // Statement item
         resourcePackage.getControlConstructSchemeList().add(ControlConstructSchemeType.Factory.newInstance());
-        resourcePackage.getControlConstructSchemeArray(0).getControlConstructList().add(5,
+        resourcePackage.getControlConstructSchemeArray(0).getControlConstructList().add(
                 StatementItemType.Factory.newInstance());
         StatementItemType statementItem = (StatementItemType) resourcePackage.getControlConstructSchemeArray(0)
-                .getControlConstructList().get(5);
+                .getControlConstructList().get(0);
 
         // Label of a statement item
         String statementString = "foo-statement";
@@ -108,15 +116,10 @@ public class DDITests {
         String firstInstructionName = resourcePackage.getInterviewerInstructionSchemeArray(0)
                 .getInstructionArray(0).getInstructionNameArray(0).getStringArray(0).getStringValue();
         assertEquals(instructionName, firstInstructionName);
-
-        // Question scheme
-        QuestionSchemeType questionScheme = ddiInstanceDocument.getDDIInstance().getResourcePackageArray(0)
-                .getQuestionSchemeArray(0);
-        assertNotNull(questionScheme);
     }
 
     @Test
-    public void labelInInstruction() {
+    void labelInInstruction() {
         //
         String fooLabel = "Foo label";
 
@@ -144,7 +147,7 @@ public class DDITests {
     }
 
     @Test
-    public void labelInDeclaration() {
+    void labelInDeclaration() {
         //
         String fooLabel = "Foo label";
 
@@ -172,7 +175,7 @@ public class DDITests {
     }
 
     @Test
-    public void labelInQuestion() {
+    void labelInQuestion() {
         //
         String fooLabel = "Foo label";
 
@@ -200,7 +203,7 @@ public class DDITests {
     }
 
     @Test
-    public void labelInSequence() {
+    void labelInSequence() {
         //
         String fooLabel = "Foo label";
 

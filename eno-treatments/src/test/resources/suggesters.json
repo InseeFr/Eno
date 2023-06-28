@@ -1,0 +1,101 @@
+{
+  "suggesters": [
+    {
+      "responseNames": [
+        "PCS"
+      ],
+      "name": "L_PCS_HOMMES-1-3-0",
+      "fields": [
+        {
+          "name": "label",
+          "rules": [
+            "[\\w]+",
+            "rule2"
+          ],
+          "language": "French",
+          "min": 2,
+          "stemmer": true,
+          "synonyms": [
+            {
+              "source": "source1",
+              "target": [
+                "target1",
+                "target2"
+              ]
+            },
+            {
+              "source": "source2",
+              "target": [
+                "target1",
+                "target2"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "id"
+        }
+      ],
+      "stopWords": [
+        "a",
+        "au",
+        "dans",
+        "de",
+        "des",
+        "du",
+        "en",
+        "er",
+        "la",
+        "le",
+        "ou",
+        "sur",
+        "d",
+        "l",
+        "aux",
+        "dans",
+        "un",
+        "une",
+        "pour",
+        "avec",
+        "chez",
+        "par",
+        "les"
+      ],
+      "queryParser": {
+        "type": "tokenized",
+        "params": {
+          "language": "French",
+          "pattern": "pattern",
+          "min": 1
+        }
+      },
+      "version": "1",
+      "url": "plop",
+      "max": 2,
+      "order": {
+        "type": "type",
+        "field": "field"
+      }
+    },
+    {
+      "responseNames": [
+        "GEO"
+      ],
+      "name": "L_GEO",
+      "fields": [
+        {
+          "name": "label",
+          "rules": "soft",
+          "min": 2
+        },
+        {
+          "name": "id"
+        }
+      ],
+      "queryParser": {
+        "type": "soft"
+      },
+      "version": "1"
+    }
+  ]
+}

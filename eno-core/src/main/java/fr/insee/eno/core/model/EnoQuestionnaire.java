@@ -1,7 +1,7 @@
 package fr.insee.eno.core.model;
 
 import fr.insee.eno.core.annotations.DDI;
-import fr.insee.eno.core.annotations.Format;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.label.QuestionnaireLabel;
@@ -67,6 +67,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
             field = "getResourcePackageArray(0).getVariableSchemeArray(0).getVariableGroupList()")
     private final List<VariableGroup> variableGroups = new ArrayList<>();
 
+    /** List of questionnaire's sequences. */
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
                     ".?[#this instanceof T(datacollection33.SequenceType) " +
@@ -75,6 +76,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "getComponents()")
     private final List<Sequence> sequences = new ArrayList<>();
 
+    /** List of questionnaire's subsequences. */
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
                     ".?[#this instanceof T(datacollection33.SequenceType) " +
@@ -82,15 +84,6 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
                     ".?[#this.getTypeOfSequenceArray(0).getStringValue() == 'submodule']")
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "getComponents()")
     private final List<Subsequence> subsequences = new ArrayList<>();
-
-    /** Ordered list of questionnaire modules. */
-    @DDI(contextType = DDIInstanceType.class,
-            field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
-                    ".?[#this instanceof T(datacollection33.SequenceType) " +
-                    "and not #this.getTypeOfSequenceList().isEmpty()]" +
-                    ".?[#this.getTypeOfSequenceArray(0).getStringValue() == 'module']" +
-                    ".![#this.getIDArray(0).getStringValue()]")
-    private final List<String> sequenceReferences = new ArrayList<>();
 
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +

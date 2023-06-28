@@ -13,7 +13,7 @@ import reusable33.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class EnoQuestionnaireTest {
+class EnoQuestionnaireTest {
 
     MapperTestUtils utils = new MapperTestUtils();
 
@@ -33,7 +33,7 @@ public class EnoQuestionnaireTest {
     }
 
     @Test
-    public void mapId() {
+    void mapId() {
         //
         String expectedId = "FOO-ID";
         // Given
@@ -41,13 +41,13 @@ public class EnoQuestionnaireTest {
         ddiInstanceType.getIDList().get(0).setStringValue(expectedId);
         // When
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-        utils.mapProperty(ddiInstanceType, enoQuestionnaire, "id");
+        utils.mapDDIProperty(ddiInstanceType, enoQuestionnaire, "id");
         // Then
         assertEquals(expectedId, enoQuestionnaire.getId());
     }
 
     @Test
-    public void mapQuestionnaireModel() {
+    void mapQuestionnaireModel() {
         //
         String expectedModel = "FOO-MODEL";
         //
@@ -64,7 +64,7 @@ public class EnoQuestionnaireTest {
                 .getStringArray(0)
                 .setStringValue(expectedModel);
         //
-        utils.mapProperty(ddiInstanceType, enoQuestionnaire, "questionnaireModel");
+        utils.mapDDIProperty(ddiInstanceType, enoQuestionnaire, "questionnaireModel");
         //
         assertEquals(expectedModel, enoQuestionnaire.getQuestionnaireModel());
     }
@@ -79,7 +79,7 @@ public class EnoQuestionnaireTest {
         ddiInstanceType.getCitation().getTitle().getStringList().add(StringType.Factory.newInstance());
         ddiInstanceType.getCitation().getTitle().getStringArray(0).setStringValue(expectedLabel);
         //
-        utils.mapProperty(ddiInstanceType, enoQuestionnaire, "label");
+        utils.mapDDIProperty(ddiInstanceType, enoQuestionnaire, "label");
         //
         assertEquals(expectedLabel, enoQuestionnaire.getLabel().getValue());
     }
@@ -93,7 +93,7 @@ public class EnoQuestionnaireTest {
             ddiInstanceType.getResourcePackageArray(0).getVariableSchemeList()
                     .add(VariableSchemeType.Factory.newInstance());
             //
-            utils.mapProperty(ddiInstanceType, enoQuestionnaire, "variables");
+            utils.mapDDIProperty(ddiInstanceType, enoQuestionnaire, "variables");
         });
     }
 
@@ -106,7 +106,7 @@ public class EnoQuestionnaireTest {
             ddiInstanceType.getResourcePackageArray(0).getVariableSchemeList()
                     .add(VariableSchemeType.Factory.newInstance());
             //
-            utils.mapProperty(ddiInstanceType, enoQuestionnaire, "variableGroups");
+            utils.mapDDIProperty(ddiInstanceType, enoQuestionnaire, "variableGroups");
         });
     }
 

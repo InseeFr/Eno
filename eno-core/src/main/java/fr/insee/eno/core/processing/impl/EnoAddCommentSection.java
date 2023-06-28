@@ -5,6 +5,8 @@ import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.label.Label;
+import fr.insee.eno.core.model.sequence.SequenceItem;
+import fr.insee.eno.core.model.sequence.SequenceItem.SequenceItemType;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.model.question.TextQuestion;
 import fr.insee.eno.core.processing.EnoProcessingInterface;
@@ -38,11 +40,10 @@ public class EnoAddCommentSection implements EnoProcessingInterface {
         sequence.setId(COMMENT_SEQUENCE_ID);
         sequence.setLabel(new Label());
         sequence.getLabel().setValue(COMMENT_SEQUENCE_LABEL);
-        sequence.getComponentReferences().add(COMMENT_QUESTION_ID);
+        sequence.getSequenceStructure().add(
+                SequenceItem.builder().id(COMMENT_QUESTION_ID).type(SequenceItemType.QUESTION).build());
         enoQuestionnaire.getSequences().add(sequence);
         enoIndex.put(COMMENT_SEQUENCE_ID, sequence);
-        //
-        enoQuestionnaire.getSequenceReferences().add(COMMENT_SEQUENCE_ID);
         //
         TextQuestion commentQuestion = new TextQuestion();
         commentQuestion.setId(COMMENT_QUESTION_ID);

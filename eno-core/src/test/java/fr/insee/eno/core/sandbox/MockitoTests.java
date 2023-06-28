@@ -7,10 +7,10 @@ import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MockitoTests {
+class MockitoTests {
 
     @Test
-    public void helloMockito() {
+    void helloMockito() {
         String someId = "foo-id";
         EnoIndex enoIndex = Mockito.mock(EnoIndex.class);
         Mockito.when(enoIndex.get(someId)).thenReturn(new EnoQuestionnaire());

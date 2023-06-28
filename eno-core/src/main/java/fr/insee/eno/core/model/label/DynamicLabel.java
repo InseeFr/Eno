@@ -3,7 +3,7 @@ package fr.insee.eno.core.model.label;
 import datacollection33.DynamicTextType;
 import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.annotations.DDI;
-import fr.insee.eno.core.annotations.Format;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.lunatic.model.flat.LabelType;
@@ -24,7 +24,7 @@ public class DynamicLabel extends EnoObject {
 
     /** For now, Lunatic type in label objects does not come from metadata, but is hardcoded here in Eno.
      * See labels documentation. */
-    @Lunatic(contextType = LabelType.class, field = "setType('"+ Constant.LUNATIC_LABEL_VTL_MD+"')")
-    String type;
+    @Lunatic(contextType = LabelType.class, field = "setType(#param)")
+    String type = Constant.LUNATIC_LABEL_VTL_MD;
 
 }

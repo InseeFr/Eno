@@ -11,13 +11,13 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class EnoIndexTest {
+class EnoIndexTest {
 
     @Test
-    public void indexingDoneByMapper() throws IOException, DDIParsingException {
+    void indexingDoneByMapper() throws IOException, DDIParsingException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
-                this.getClass().getClassLoader().getResourceAsStream("in/ddi/l10xmg2l.xml"));
+                this.getClass().getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml"));
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         //
         DDIMapper ddiMapper = new DDIMapper();

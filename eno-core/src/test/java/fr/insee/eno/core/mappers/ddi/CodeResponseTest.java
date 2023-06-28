@@ -80,7 +80,7 @@ public class CodeResponseTest {
         context.setVariable("index", ddiIndex);
         context.setVariable("listIndex", 0);
         //
-        utils.mapProperty(outParameter, codeResponse, "label", context);
+        utils.mapDDIProperty(outParameter, codeResponse, "label", context);
 
         //
         assertEquals(fooLabel, codeResponse.getLabel().getValue());

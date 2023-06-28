@@ -74,10 +74,16 @@ public class LunaticConverter {
 
     private static Object instantiateFrom(SingleResponseQuestion enoQuestion) {
         if (enoQuestion instanceof TextQuestion textQuestion) {
-            if (textQuestion.getMaxLength().intValue() < Constant.LUNATIC_SMALL_TEXT_LIMIT)
-                return new Input();
-            else
-                return new Textarea();
+            if (textQuestion.getMaxLength().intValue() < Constant.LUNATIC_SMALL_TEXT_LIMIT) {
+                Input input = new Input();
+                input.setComponentType(ComponentTypeEnum.INPUT);
+                return input;
+            }
+            else {
+                Textarea textarea = new Textarea();
+                textarea.setComponentType(ComponentTypeEnum.TEXTAREA);
+                return textarea;
+            }
         }
         else if (enoQuestion instanceof NumericQuestion)
             return new InputNumber();
@@ -85,6 +91,10 @@ public class LunaticConverter {
             return new CheckboxBoolean();
         else if (enoQuestion instanceof DateQuestion)
             return new Datepicker();
+        else if (enoQuestion instanceof DurationQuestion) {
+            log.warn("Duration questions is not supported in Lunatic yet. " + enoQuestion);
+            return null;
+        }
         else if (enoQuestion instanceof UniqueChoiceQuestion uniqueChoiceQuestion) {
             if (uniqueChoiceQuestion.getDisplayFormat() == null) {
                 throw new ConversionException("Display format has not been set in Eno question " + enoQuestion);

@@ -2,7 +2,7 @@ package fr.insee.eno.core.model.calculated;
 
 import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.annotations.DDI;
-import fr.insee.eno.core.annotations.Format;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.lunatic.model.flat.LabelType;
@@ -17,8 +17,8 @@ import java.util.List;
 
 import static fr.insee.eno.core.annotations.Contexts.Context;
 
-/** Class that could be used to refactor calculated expressions' mapping.
- * Unused yet since the Lunatic mapper doesn't allow to dig into a complex object without creating a new instance. */
+/** Class used to for the mapping of calculated expressions that can be found in objects like
+ * calculated variables, controls, filters. */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -30,6 +30,7 @@ public class CalculatedExpression extends EnoObject {
     public static CalculatedExpression defaultExpression() {
         CalculatedExpression res = new CalculatedExpression();
         res.setValue("true");
+        res.setType(Constant.LUNATIC_LABEL_VTL);
         return res;
     }
 
@@ -40,8 +41,8 @@ public class CalculatedExpression extends EnoObject {
 
     /** For now, Lunatic type in label objects does not come from metadata, but is hardcoded here in Eno.
      * See labels documentation. */
-    @Lunatic(contextType = LabelType.class, field = "setType('"+ Constant.LUNATIC_LABEL_VTL+"')")
-    String type;
+    @Lunatic(contextType = LabelType.class, field = "setType(#param)")
+    String type = Constant.LUNATIC_LABEL_VTL;
 
     /** In DDI, the expression contains variable references instead of variables names.
      * This list contains the references of these variables. */

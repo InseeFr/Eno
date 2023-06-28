@@ -1,6 +1,6 @@
 package fr.insee.eno.core.processing;
 
-import fr.insee.eno.core.annotations.Format;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.impl.*;
@@ -59,6 +59,7 @@ public class EnoProcessing {
         new DDIInsertDeclarations().apply(enoQuestionnaire);
         new DDIInsertControls().apply(enoQuestionnaire);
         new DDIInsertFilters().apply(enoQuestionnaire);
+        new DDIResolveSequencesStructure().apply(enoQuestionnaire);
     }
 
     private void poguesTechnicalProcessing(EnoQuestionnaire enoQuestionnaire) {

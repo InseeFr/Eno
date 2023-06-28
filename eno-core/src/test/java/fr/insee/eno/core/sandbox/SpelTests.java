@@ -2,7 +2,6 @@ package fr.insee.eno.core.sandbox;
 
 import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
-import fr.insee.eno.core.mappers.DDIMapperTest;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.variable.Variable;
@@ -147,7 +146,7 @@ public class SpelTests {
         //
         DDIIndex ddiIndex = new DDIIndex();
         ddiIndex.indexDDI(DDIParser.parse(
-                DDIMapperTest.class.getClassLoader().getResource("l10xmg2l.xml")));
+                this.getClass().getClassLoader().getResource("l10xmg2l.xml")));
         //
         Expression expression = new SpelExpressionParser()
                 .parseExpression("#index.get(\"kzwoti00\")");

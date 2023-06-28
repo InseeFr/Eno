@@ -8,15 +8,13 @@ import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.core.convert.TypeDescriptor;
 import reusable33.AbstractIdentifiableType;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SandboxTests {
+class SandboxTests {
 
-    public static abstract class FooAbstract {
+    static abstract class FooAbstract {
         @DDI(contextType = AbstractIdentifiableType.class, field = "hello")
         int a;
         public void setA(int a) {
@@ -24,7 +22,7 @@ public class SandboxTests {
         }
     }
 
-    public static class FooChild extends FooAbstract {
+    static class FooChild extends FooAbstract {
         int c;
         public void setC(int c) {
             this.c = c;
@@ -32,7 +30,7 @@ public class SandboxTests {
     }
 
     @Test
-    public void propertyInheritanceWithAbstractClass() {
+    void propertyInheritanceWithAbstractClass() {
         //
         FooChild foo = new FooChild();
         foo.setA(1);
@@ -60,13 +58,13 @@ public class SandboxTests {
 
 
     @Test
-    public void testIfListsHaveIntersection() {
+    void testIfListsHaveIntersection() {
         List<Integer> list = List.of(1,2);
         assertFalse(list.stream().noneMatch(List.of(2,3,4)::contains));
     }
 
     @Test
-    public void addElementWithIndexInArrayList() {
+    void addElementWithIndexInArrayList() {
         List<String> fooList = new ArrayList<>(); // this creates a list with a capacity of 10.
         assertNotNull(fooList);
         assertThrows(IndexOutOfBoundsException.class, () -> fooList.add(12, "foo"));
@@ -82,7 +80,7 @@ public class SandboxTests {
     }
 
     @Test
-    public void toStringOverride() {
+    void toStringOverride() {
         Filter filter = new Filter();
         filter.setId("foo");
         assertEquals("Filter[id=foo]", filter.toString());
@@ -91,9 +89,31 @@ public class SandboxTests {
     private double d1;
     private Double d2;
     @Test
-    public void doubleDefaultValue() {
+    void doubleDefaultValue() {
         assertEquals(0d, d1);
         assertNull(d2);
+    }
+
+    @Test
+    void continueKeyword() {
+        List<Integer> result = new ArrayList<>();
+        for(int i : List.of(1,2,3,4)) {
+            if (i == 2) {
+                continue;
+            }
+            result.add(i);
+        }
+        assertEquals(List.of(1,3,4), result);
+    }
+
+    @Test
+    void hashMapRemoveNull(){
+        Map<String, Integer> map = new HashMap<>();
+        map.put("a", 2);
+        Integer a = map.remove("a");
+        Integer b = map.remove("b");
+        assertEquals(2, a);
+        assertNull(b);
     }
 
 }

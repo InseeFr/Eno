@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LunaticTableConverterTest {
+class LunaticTableConverterTest {
 
     private CodeList codeList;
 
@@ -23,7 +23,7 @@ public class LunaticTableConverterTest {
     }
 
     @BeforeEach
-    public void createCodeList() {
+    void createCodeList() {
         codeList = new CodeList();
         CodeItem c1 = createCode("1");
         CodeItem c2 = createCode("2");
@@ -54,7 +54,7 @@ public class LunaticTableConverterTest {
     }
 
     @Test
-    public void testComputeVerticalSizes() {
+    void testComputeVerticalSizes() {
         //
         codeList.computeSizes();
         //
@@ -77,7 +77,7 @@ public class LunaticTableConverterTest {
     }
 
     @Test
-    public void testFlattenFunction() {
+    void testFlattenFunction() {
         //
         List<BodyType> res = LunaticTableConverter.flattenCodeList(codeList);
         //
