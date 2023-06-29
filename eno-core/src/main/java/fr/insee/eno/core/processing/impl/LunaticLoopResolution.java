@@ -46,7 +46,7 @@ public class LunaticLoopResolution implements OutProcessingInterface<Questionnai
 
     /** Replace components that are in the referenced sequence or subsequence
      * by a loop object containing these (including the sequence component itself). */
-    private static void insertLoopComponent(
+    private void insertLoopComponent(
             Questionnaire lunaticQuestionnaire, Loop lunaticLoop, String sequenceReference) {
         List<ComponentType> components = lunaticQuestionnaire.getComponents();
         Iterator<ComponentType> iterator = components.iterator();
@@ -54,56 +54,47 @@ public class LunaticLoopResolution implements OutProcessingInterface<Questionnai
         int position = 0;
         while (iterator.hasNext()) {
             ComponentType component = iterator.next();
-            // Then create a loop object, and transfer components in its scope in it
+            // Then transfer concerned components in the loop component
             if (sequenceReference.equals(component.getId())) {
-                insertComponentsInLoop(lunaticLoop, iterator, component);
+                // Check that the reference is actually a sequence or subsequence
+                assert component instanceof SequenceType || component instanceof Subsequence;
+                // Insert the sequence/subsequence (first element of the loop)
+                lunaticLoop.getComponents().add(component);
+                iterator.remove();
+                insertComponentsInLoop(lunaticQuestionnaire, lunaticLoop, sequenceReference);
                 break;
             }
-            position ++;
+            position++;
         }
         components.add(position, lunaticLoop);
     }
 
-    private static void insertComponentsInLoop(
-            Loop lunaticLoop, Iterator<ComponentType> iterator, ComponentType sequence) {
-        // Determine if the reference is a sequence or subsequence
-        Class<?> sequenceType = sequence.getClass();
-        assert sequenceType == SequenceType.class || sequenceType == Subsequence.class;
-        lunaticLoop.getComponents().add(sequence);
-        iterator.remove();
-        // (A sequence can eventually be empty)
-        if (iterator.hasNext()) {
-            ComponentType component = iterator.next();
-            // If the reference is a sequence, iterate until the next sequence
-            // If the reference is a subsequence, iterate until the next sequence or subsequence
-            while (compare(component.getClass(), sequenceType) && iterator.hasNext()) {
-                lunaticLoop.getComponents().add(component);
-                iterator.remove();
-                component = iterator.next();
-            }
-            // ... or questionnaire end
-            if (!iterator.hasNext()) {
-                lunaticLoop.getComponents().add(component);
-                iterator.remove();
-            }
-        }
+    /** Insert components that belongs to the loop, in the right order, using Eno sequence object. */
+    private void insertComponentsInLoop(
+            Questionnaire lunaticQuestionnaire, Loop lunaticLoop, String sequenceReference) {
+         AbstractSequence enoSequence = (AbstractSequence) enoIndex.get(sequenceReference);
+         enoSequence.getSequenceStructure().forEach(sequenceItem ->
+                 relocateComponent(lunaticQuestionnaire, lunaticLoop, sequenceItem.getId()));
     }
 
-    /**
-     * Return true if component class is under the scope of sequence class.
-     * Sequence > Subsequence > other components.
-     * @param componentType Lunatic component class.
-     * @param sequenceType Lunatic sequence or subsequence class.
-     * @return "Given component class is strictly inferior to given sequence class"
-     */
-    private static boolean compare(Class<?> componentType, Class<?> sequenceType) {
-        if (sequenceType == SequenceType.class) {
-            return componentType != SequenceType.class;
-        } else if (sequenceType == Subsequence.class) {
-            return componentType != SequenceType.class && componentType != Subsequence.class;
-        } else {
-            throw new IllegalArgumentException("Method designed to compare with sequence or subsequence type.");
+    /** Relocate the component with given reference (id) from the questionnaire's components
+     * to the loop's components. */
+    private void relocateComponent(Questionnaire lunaticQuestionnaire, Loop lunaticLoop, String componentReference) {
+        // Find the component and remove it from questionnaire's components
+        Iterator<ComponentType> iterator = lunaticQuestionnaire.getComponents().iterator();
+        ComponentType searchedComponent = null;
+        while (iterator.hasNext()) {
+            searchedComponent = iterator.next();
+            if (componentReference.equals(searchedComponent.getId())) {
+                iterator.remove();
+                break;
+            }
         }
+        // Insert the component in the loop
+        if (searchedComponent == null) {
+            throw new MappingException("Unable to find component "+componentReference); // TODO: more precise message
+        }
+        lunaticLoop.getComponents().add(searchedComponent);
     }
 
     private void insertEnoLoopInfo(Loop lunaticLoop, fr.insee.eno.core.model.navigation.Loop enoLoop) {
@@ -127,6 +118,9 @@ public class LunaticLoopResolution implements OutProcessingInterface<Questionnai
 
     /** In case of a standalone loop: "min" and "max" lines. */
     private static void standaloneLoopMapping(Loop lunaticLoop, StandaloneLoop enoStandaloneLoop) {
+        //
+        lunaticLoop.setPaginatedLoop(false);
+        //
         LunaticMapper lunaticMapper = new LunaticMapper();
         lunaticLoop.setLines(new LinesLoop());
         LabelType minExpression = new LabelType();
@@ -141,6 +135,8 @@ public class LunaticLoopResolution implements OutProcessingInterface<Questionnai
      * TODO: Issue on current Lunatic conception around this. To be addressed later on.
      * */
     private void linkedLoopMapping(Loop lunaticLoop, LinkedLoop enoLinkedLoop) {
+        //
+        lunaticLoop.setPaginatedLoop(true);
         // We "just" want to find the first variable in the scope of the reference loop
         EnoIdentifiableObject reference = enoIndex.get(enoLinkedLoop.getReference());
         //

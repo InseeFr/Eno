@@ -19,10 +19,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -66,7 +64,7 @@ class LunaticLoopResolutionTest {
     @Test
     void testLoopResolution_noLoop() {
         // When
-        LunaticLoopResolution2 lunaticLoopResolution = new LunaticLoopResolution2(enoQuestionnaire);
+        LunaticLoopResolution lunaticLoopResolution = new LunaticLoopResolution(enoQuestionnaire);
         lunaticLoopResolution.apply(lunaticQuestionnaire);
         // Then
         assertEquals(2, lunaticQuestionnaire.getComponents().size());
@@ -84,7 +82,7 @@ class LunaticLoopResolutionTest {
         enoQuestionnaire.getLoops().add(standaloneLoop);
 
         // When
-        LunaticLoopResolution2 lunaticLoopResolution = new LunaticLoopResolution2(enoQuestionnaire);
+        LunaticLoopResolution lunaticLoopResolution = new LunaticLoopResolution(enoQuestionnaire);
         lunaticLoopResolution.apply(lunaticQuestionnaire);
 
         // Then
@@ -116,7 +114,7 @@ class LunaticLoopResolutionTest {
             lunaticSortComponents.apply(lunaticQuestionnaire);
 
             // When
-            LunaticLoopResolution2 lunaticLoopResolution = new LunaticLoopResolution2(enoQuestionnaire);
+            LunaticLoopResolution lunaticLoopResolution = new LunaticLoopResolution(enoQuestionnaire);
             lunaticLoopResolution.apply(lunaticQuestionnaire);
 
             // Then
