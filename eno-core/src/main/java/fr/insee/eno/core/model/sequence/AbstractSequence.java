@@ -3,22 +3,19 @@ package fr.insee.eno.core.model.sequence;
 import datacollection33.SequenceType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.eno.core.model.*;
+import fr.insee.eno.core.model.EnoComponent;
+import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.declaration.Instruction;
 import fr.insee.eno.core.model.label.Label;
 import fr.insee.eno.core.model.navigation.Control;
 import fr.insee.eno.core.model.navigation.Filter;
-import fr.insee.eno.core.model.sequence.SequenceItem.SequenceItemType;
 import fr.insee.lunatic.model.flat.Subsequence;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
-import static fr.insee.eno.core.model.sequence.SequenceItem.SequenceItemType.*;
 
 /** Abstract object for sequence and subsequence.
  * In DDI, a sequence or subsequence is a SequenceType object.

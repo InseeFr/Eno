@@ -14,12 +14,17 @@ import lombok.extern.slf4j.Slf4j;
 /** Sequence objects contain "sequence items" lists, that are designed to keep the structure of the questionnaire.
  * These lists are mapped from the DDI, and contain the reference of components in the right order.
  * Yet, this information does not allow to retrieve questionnaire's structure easily.
- * Thus, this processing class fills the "sequence structure" property of sequence objects. */
+ * Thus, this processing class fills the "sequence structure" property of sequence objects.
+ * */
 @Slf4j
 public class DDIResolveSequencesStructure implements InProcessingInterface {
 
     private EnoQuestionnaire enoQuestionnaire;
 
+    /** Fills the "sequence structure" list in each sequence of the eno questionnaire given,
+     * using the "sequence items" list mapped from DDI.
+     * @param enoQuestionnaire Eno questionnaire mapped from a DDI.
+     * */
     @Override
     public void apply(EnoQuestionnaire enoQuestionnaire) {
         this.enoQuestionnaire = enoQuestionnaire;
@@ -28,18 +33,38 @@ public class DDIResolveSequencesStructure implements InProcessingInterface {
         }
     }
 
+    /** Iterates on sequence items of the given sequence and resolve them.
+     * See <code>resolveStructure</code> method.
+     * @param sequence A sequence or subsequence object.
+     * */
     private void resolveSequenceStructure(AbstractSequence sequence) {
         for (SequenceItem sequenceItem : sequence.getSequenceItems()) {
             resolveStructure(sequence, sequenceItem);
         }
     }
 
+    /** Iterates on sequence items listed in the filter object, and resolve them in the sequence object.
+     * See <code>resolveStructure</code> method.
+     * @param filter A filter object.
+     * @param sequence A sequence or subsequence.
+     * */
     private void resolveFilterStructure(Filter filter, AbstractSequence sequence) {
         for (SequenceItem filterItem : filter.getFilterItems()) {
             resolveStructure(sequence, filterItem);
         }
     }
 
+    /** <p>Resolves the sequence item given, recursively if needed. "Resolve" means inserting sequence items in the
+     * "sequence structure" of given sequence. It is done by:</p>
+     * <ul>
+     *   <li>filtering sequence items that are not a part of the questionnaire's structure (e.g. controls,
+     *   declarations)</li>
+     *   <li>replacing items that encapsulate other items (loops and filters).</li>
+     * </ul>
+     * <p>Note: (!) Nested loop is not supported here yet. (!)</p>
+     * @param sequence A sequence or subsequence.
+     * @param sequenceItem A sequence item.
+     * */
     private void resolveStructure(AbstractSequence sequence, SequenceItem sequenceItem) {
         switch (sequenceItem.getType()) {
             case SUBSEQUENCE -> {
