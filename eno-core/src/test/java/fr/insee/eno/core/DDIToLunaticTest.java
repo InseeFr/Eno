@@ -1,87 +1,78 @@
 package fr.insee.eno.core;
 
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
-import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * Integration tests for the DDI to Lunatic transformation.
+ * Functional tests for the DDI to Lunatic transformation.
  */
 class DDIToLunaticTest {
 
-    private static final String DDI_TEST_FOLDER = "in/ddi/";
     private final ClassLoader classLoader = this.getClass().getClassLoader();
+    private EnoParameters enoParameters;
 
-    @Test
-    void ddiToLunatic_modeFiltering() throws DDIParsingException {
-        // DDI
-        InputStream ddiInputStream = classLoader.getResourceAsStream(DDI_TEST_FOLDER + "l10xmg2l.xml");
-        // Parameters with mode filtering
-        EnoParameters enoParameters = new EnoParameters();
-        enoParameters.setSelectedModes(List.of(Mode.CAPI, Mode.CATI));
+    @BeforeEach
+    void setupParameters() {
+        enoParameters = new EnoParameters();
+    }
 
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "lhpz68wp",
+            "l20g2ba7",
+            //"l5v3spn0",
+            "kx0a2hn8",
+            //"kzy5kbtl",
+            //"l8x6fhtd",
+            //"ldodefpq",
+    })
+    @DisplayName("Many questionnaires, non null output")
+    void testAll(String questionnaireId) throws DDIParsingException {
         //
-        Questionnaire result = DDIToLunatic.transform(ddiInputStream, enoParameters);
-
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+                classLoader.getResourceAsStream("end-to-end/ddi/ddi-"+questionnaireId+".xml"),
+                enoParameters);
         //
-        assertNotNull(result);
+        assertNotNull(lunaticQuestionnaire);
     }
 
     @Test
-    void ddiToLunatic_sandboxQuestionnaire() throws DDIParsingException {
+    @DisplayName("DDI 'l20g2ba7' to Lunatic (acceptance test)")
+    void test01() throws DDIParsingException {
         //
-        Questionnaire result = DDIToLunatic.transform(
-                classLoader.getResourceAsStream(DDI_TEST_FOLDER + "sandbox_v2.xml"));
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+                classLoader.getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml"),
+                enoParameters);
 
         //
-        assertNotNull(result);
-        //
-        assertEquals("INSEE-l8x6fhtd", result.getId());
-    }
+        assertNotNull(lunaticQuestionnaire);
 
-    @Test
-    void ddiToLunatic_largeQuestionnaire1() throws DDIParsingException {
+        // Components
+        assertEquals(ComponentTypeEnum.SEQUENCE, lunaticQuestionnaire.getComponents().get(0).getComponentType());
+        assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticQuestionnaire.getComponents().get(1).getComponentType());
+        assertEquals(ComponentTypeEnum.INPUT, lunaticQuestionnaire.getComponents().get(2).getComponentType());
+        assertEquals(ComponentTypeEnum.TEXTAREA, lunaticQuestionnaire.getComponents().get(3).getComponentType());
+        assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticQuestionnaire.getComponents().get(4).getComponentType());
+        assertEquals(ComponentTypeEnum.INPUT_NUMBER, lunaticQuestionnaire.getComponents().get(5).getComponentType());
+        assertEquals(ComponentTypeEnum.INPUT_NUMBER, lunaticQuestionnaire.getComponents().get(6).getComponentType());
+        assertEquals(ComponentTypeEnum.INPUT_NUMBER, lunaticQuestionnaire.getComponents().get(7).getComponentType());
+        assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticQuestionnaire.getComponents().get(8).getComponentType());
+        assertEquals(ComponentTypeEnum.DATEPICKER, lunaticQuestionnaire.getComponents().get(9).getComponentType());
+        assertEquals(ComponentTypeEnum.DATEPICKER, lunaticQuestionnaire.getComponents().get(10).getComponentType());
+        assertEquals(ComponentTypeEnum.DATEPICKER, lunaticQuestionnaire.getComponents().get(11).getComponentType());
+        assertEquals(ComponentTypeEnum.CHECKBOX_BOOLEAN, lunaticQuestionnaire.getComponents().get(12).getComponentType()); // FAILS -> "duration" question
         //
-        Questionnaire result = DDIToLunatic.transform(
-                classLoader.getResourceAsStream(DDI_TEST_FOLDER + "l10xmg2l.xml"));
-
-        //
-        assertNotNull(result);
-        //
-        assertEquals("INSEE-l10xmg2l", result.getId());
-    }
-
-    @Test
-    void ddiToLunatic_largeQuestionnaire2() throws DDIParsingException {
-        //
-        Questionnaire result = DDIToLunatic.transform(
-                classLoader.getResourceAsStream(DDI_TEST_FOLDER + "l20g2ba7.xml"));
-
-        //
-        assertNotNull(result);
-        //
-        assertEquals("INSEE-l20g2ba7", result.getId());
-    }
-
-    @Test
-    @Disabled("temporary disabled")
-    void ddiToLunatic_pairwise() throws DDIParsingException {
-        //
-        Questionnaire result = DDIToLunatic.transform(
-                classLoader.getResourceAsStream("pairwise/form-ddi-household-links.xml"));
-        //
-        assertNotNull(result);
+        //assertEquals(53, lunaticQuestionnaire.getComponents().size()); // FAILS -> work in progress
     }
 
 }

@@ -3,6 +3,7 @@ package fr.insee.eno.core.sandbox;
 import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.reference.DDIIndex;
@@ -20,8 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SpelTests {
 
@@ -48,6 +48,19 @@ public class SpelTests {
     public void spelInlineVariable() {
         String fooString = new SpelExpressionParser().parseExpression("true ? 'hello' : 'goodbye'").getValue(String.class);
         assertEquals("hello", fooString);
+    }
+
+    @Test
+    public void startWithSafeNavigationOperator() {
+        //
+        Variable variable = new Variable();
+        CalculatedExpression expression = variable.getExpression();
+        //
+        assertThrows(NullPointerException.class, () -> expression.getBindingReferences());
+        assertDoesNotThrow(() -> {
+            SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
+            spelExpressionParser.parseExpression("#this?.getBindingReferences()?.clear()").getValue(expression);
+        });
     }
 
     @Test
@@ -85,6 +98,13 @@ public class SpelTests {
         //
         assertNotNull(stringList);
         assertEquals(stringList1, stringList);
+    }
+
+    @Test
+    public void callMethodOnProjection() {
+        List<String> stringList = List.of("a", "b", "c");
+        assertTrue(stringList.contains("c"));
+        assertTrue(new SpelExpressionParser().parseExpression("#root.?[#this == 'c'].size() > 0").getValue(stringList, Boolean.class));
     }
 
     @Test

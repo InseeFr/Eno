@@ -7,6 +7,7 @@ import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.label.QuestionnaireLabel;
 import fr.insee.eno.core.model.navigation.Control;
 import fr.insee.eno.core.model.navigation.Filter;
+import fr.insee.eno.core.model.navigation.Loop;
 import fr.insee.eno.core.model.question.MultipleResponseQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.model.sequence.Sequence;
@@ -66,6 +67,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
             field = "getResourcePackageArray(0).getVariableSchemeArray(0).getVariableGroupList()")
     private final List<VariableGroup> variableGroups = new ArrayList<>();
 
+    /** List of questionnaire's sequences. */
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
                     ".?[#this instanceof T(datacollection33.SequenceType) " +
@@ -74,6 +76,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "getComponents()")
     private final List<Sequence> sequences = new ArrayList<>();
 
+    /** List of questionnaire's subsequences. */
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
                     ".?[#this instanceof T(datacollection33.SequenceType) " +
@@ -82,14 +85,10 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "getComponents()")
     private final List<Subsequence> subsequences = new ArrayList<>();
 
-    /** Ordered list of questionnaire modules. */
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
-                    ".?[#this instanceof T(datacollection33.SequenceType) " +
-                    "and not #this.getTypeOfSequenceList().isEmpty()]" +
-                    ".?[#this.getTypeOfSequenceArray(0).getStringValue() == 'module']" +
-                    ".![#this.getIDArray(0).getStringValue()]")
-    private final List<String> sequenceReferences = new ArrayList<>();
+                    ".?[#this instanceof T(datacollection33.LoopType)]")
+    private final List<Loop> loops = new ArrayList<>();
 
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +

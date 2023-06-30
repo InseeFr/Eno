@@ -31,23 +31,9 @@ public class DDIToLunatic {
     public static Questionnaire transform(InputStream ddiInputStream, EnoParameters enoParameters)
             throws DDIParsingException {
         //
-        DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(ddiInputStream);
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(ddiInputStream, enoParameters);
         //
-        DDIMapper ddiMapper = new DDIMapper();
-        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-        ddiMapper.mapDDI(ddiInstanceDocument, enoQuestionnaire);
-        //
-        EnoProcessing enoProcessing = new EnoProcessing(enoParameters);
-        enoProcessing.applyProcessing(enoQuestionnaire, Format.DDI);
-        //
-        LunaticMapper lunaticMapper = new LunaticMapper();
-        Questionnaire lunaticQuestionnaire = new Questionnaire();
-        lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
-        //
-        LunaticProcessing lunaticProcessing = new LunaticProcessing(enoParameters);
-        lunaticProcessing.applyProcessing(lunaticQuestionnaire, enoQuestionnaire);
-        //
-        return lunaticQuestionnaire;
+        return EnoToLunatic.transform(enoQuestionnaire, enoParameters);
     }
 
     /**

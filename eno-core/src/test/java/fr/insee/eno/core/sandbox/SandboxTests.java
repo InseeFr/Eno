@@ -8,9 +8,7 @@ import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.core.convert.TypeDescriptor;
 import reusable33.AbstractIdentifiableType;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -94,6 +92,28 @@ class SandboxTests {
     void doubleDefaultValue() {
         assertEquals(0d, d1);
         assertNull(d2);
+    }
+
+    @Test
+    void continueKeyword() {
+        List<Integer> result = new ArrayList<>();
+        for(int i : List.of(1,2,3,4)) {
+            if (i == 2) {
+                continue;
+            }
+            result.add(i);
+        }
+        assertEquals(List.of(1,3,4), result);
+    }
+
+    @Test
+    void hashMapRemoveNull(){
+        Map<String, Integer> map = new HashMap<>();
+        map.put("a", 2);
+        Integer a = map.remove("a");
+        Integer b = map.remove("b");
+        assertEquals(2, a);
+        assertNull(b);
     }
 
 }

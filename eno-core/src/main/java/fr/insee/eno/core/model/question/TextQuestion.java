@@ -26,7 +26,7 @@ public class TextQuestion extends SingleResponseQuestion {
     @Lunatic(contextType = {Input.class, Textarea.class}, field = "setMaxLength(#param)")
     BigInteger maxLength;
 
-    // Lunatic component type set by Lunatic converter
+    // Lunatic component type set by Lunatic converter (see comment in LunaticConverter class)
     // Note: the mapping of this information is done several ways among question types,
     // but this should be managed by Lunatic-Model itself, so no critical need to implement a neater way for this.
 
