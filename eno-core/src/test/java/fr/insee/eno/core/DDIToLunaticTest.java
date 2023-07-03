@@ -89,5 +89,13 @@ class DDIToLunaticTest {
             }
         }
 
+        @Test
+        @DisplayName("Loop components should have their component type property set")
+        void testLoopComponentTypes() {
+            lunaticQuestionnaire.getComponents().stream()
+                    .filter(componentType -> componentType instanceof Loop).forEach(componentType ->
+                            assertNotNull(componentType.getComponentType()));
+        }
+
     }
 }
