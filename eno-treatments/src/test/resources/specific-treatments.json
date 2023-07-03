@@ -9,8 +9,7 @@
         {
           "name": "label",
           "rules": [
-            "[\\w]+",
-            "rule2"
+            "[\\w]+"
           ],
           "language": "French",
           "min": 2,
@@ -97,5 +96,15 @@
       },
       "version": "1"
     }
+  ],
+  "regroupements": [
+    [
+      "var1",
+      "var2"
+    ],
+    [
+      "var3",
+      "var4"
+    ]
   ]
 }

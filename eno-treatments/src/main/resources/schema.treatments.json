@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://insee.fr/suggesters.schema.json",
   "title": "Specific treatments schema",
-  "description": "Specific tratments schema",
+  "description": "Specific treatments schema",
   "type": "object",
   "properties": {
     "suggesters": {
@@ -10,9 +10,14 @@
       "items": {
         "$ref": "#/$defs/suggester"
       }
+    },
+    "regroupements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/regroupement"
+      }
     }
   },
-  "minItems": 1,
 
   "$defs": {
     "suggester": {
@@ -139,6 +144,10 @@
         },
         "required": ["source", "target"]
       }
+    },
+    "regroupement": {
+      "type": "array",
+      "minItems": 2
     }
   }
 }
