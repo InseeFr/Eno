@@ -39,6 +39,7 @@ public class LunaticLoopResolution implements OutProcessingInterface<Questionnai
         //
         enoQuestionnaire.getLoops().forEach(enoLoop -> {
             Loop lunaticLoop = new Loop();
+            lunaticLoop.setComponentType(ComponentTypeEnum.LOOP); // a bit ugly to do it here...
             insertLoopComponent(lunaticQuestionnaire, lunaticLoop, enoLoop.getSequenceReference());
             insertEnoLoopInfo(lunaticLoop, enoLoop);
         });
