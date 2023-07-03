@@ -24,7 +24,7 @@ class JsonSchemaValidationTest {
         JsonSchema jsonSchema = factory.getSchema(
                 classLoader.getResourceAsStream("schema.treatments.json"));
         JsonNode jsonNode = mapper.readTree(
-                classLoader.getResourceAsStream("suggesters.json"));
+                classLoader.getResourceAsStream("specific-treatments.json"));
         Set<ValidationMessage> errors = jsonSchema.validate(jsonNode);
 
         for(ValidationMessage error : errors) {
