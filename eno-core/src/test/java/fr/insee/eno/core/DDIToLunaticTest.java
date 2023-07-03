@@ -3,13 +3,15 @@ package fr.insee.eno.core;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
+import fr.insee.lunatic.model.flat.Loop;
 import fr.insee.lunatic.model.flat.Questionnaire;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.List;
+
+import static fr.insee.lunatic.model.flat.ComponentTypeEnum.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -46,33 +48,54 @@ class DDIToLunaticTest {
         assertNotNull(lunaticQuestionnaire);
     }
 
-    @Test
+    @Nested
     @DisplayName("DDI 'l20g2ba7' to Lunatic (acceptance test)")
-    void test01() throws DDIParsingException {
-        //
-        Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
-                classLoader.getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml"),
-                enoParameters);
+    class AcceptanceTest {
 
-        //
-        assertNotNull(lunaticQuestionnaire);
+        static Questionnaire lunaticQuestionnaire;
 
-        // Components
-        assertEquals(ComponentTypeEnum.SEQUENCE, lunaticQuestionnaire.getComponents().get(0).getComponentType());
-        assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticQuestionnaire.getComponents().get(1).getComponentType());
-        assertEquals(ComponentTypeEnum.INPUT, lunaticQuestionnaire.getComponents().get(2).getComponentType());
-        assertEquals(ComponentTypeEnum.TEXTAREA, lunaticQuestionnaire.getComponents().get(3).getComponentType());
-        assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticQuestionnaire.getComponents().get(4).getComponentType());
-        assertEquals(ComponentTypeEnum.INPUT_NUMBER, lunaticQuestionnaire.getComponents().get(5).getComponentType());
-        assertEquals(ComponentTypeEnum.INPUT_NUMBER, lunaticQuestionnaire.getComponents().get(6).getComponentType());
-        assertEquals(ComponentTypeEnum.INPUT_NUMBER, lunaticQuestionnaire.getComponents().get(7).getComponentType());
-        assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticQuestionnaire.getComponents().get(8).getComponentType());
-        assertEquals(ComponentTypeEnum.DATEPICKER, lunaticQuestionnaire.getComponents().get(9).getComponentType());
-        assertEquals(ComponentTypeEnum.DATEPICKER, lunaticQuestionnaire.getComponents().get(10).getComponentType());
-        assertEquals(ComponentTypeEnum.DATEPICKER, lunaticQuestionnaire.getComponents().get(11).getComponentType());
-        assertEquals(ComponentTypeEnum.CHECKBOX_BOOLEAN, lunaticQuestionnaire.getComponents().get(12).getComponentType()); // FAILS -> "duration" question
-        //
-        //assertEquals(53, lunaticQuestionnaire.getComponents().size()); // FAILS -> work in progress
+        @BeforeAll
+        static void mapLunaticQuestionnaire() throws DDIParsingException {
+            lunaticQuestionnaire = DDIToLunatic.transform(
+                    AcceptanceTest.class.getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml"),
+                    EnoParameters.defaultParameters());
+        }
+
+        @Test
+        @DisplayName("We should have the correct number of components")
+        void testComponentsSize() {
+            assertEquals(53, lunaticQuestionnaire.getComponents().size());
+        }
+
+        @Test // This test is tedious => we should figure out a way to automate this kind of tests
+        @DisplayName("Components should be in the right order")
+        void testComponentsOrder() {
+            List<ComponentTypeEnum> expectedComponentTypeSequence = List.of(
+                    SEQUENCE,
+                    SUBSEQUENCE, INPUT, TEXTAREA,
+                    SUBSEQUENCE, INPUT_NUMBER, INPUT_NUMBER, INPUT_NUMBER,
+                    SUBSEQUENCE, DATEPICKER, DATEPICKER, DATEPICKER, CHECKBOX_BOOLEAN,
+                    SEQUENCE,
+                    SUBSEQUENCE, RADIO, CHECKBOX_ONE, CHECKBOX_ONE, CHECKBOX_ONE, INPUT, DROPDOWN, INPUT,
+                    SUBSEQUENCE, CHECKBOX_GROUP, TABLE, TABLE,
+                    SEQUENCE,
+                    TABLE, TABLE, TABLE, TABLE, TABLE, ROSTER_FOR_LOOP,
+                    SEQUENCE
+                    // ...
+                    );
+            for (int i=0; i< expectedComponentTypeSequence.size(); i++) {
+                assertEquals(expectedComponentTypeSequence.get(i),
+                        lunaticQuestionnaire.getComponents().get(i).getComponentType());
+            }
+        }
+
+        @Test
+        @DisplayName("Loop components should have their component type property set")
+        void testLoopComponentTypes() {
+            lunaticQuestionnaire.getComponents().stream()
+                    .filter(componentType -> componentType instanceof Loop).forEach(componentType ->
+                            assertNotNull(componentType.getComponentType()));
+        }
+
     }
-
 }
