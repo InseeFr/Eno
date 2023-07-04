@@ -19,7 +19,7 @@ class LunaticAddHierarchyTest {
         // Given
         questionnaire = new Questionnaire();
         //
-        SequenceType sequence = new SequenceType();
+        Sequence sequence = new Sequence();
         sequence.setId(SEQUENCE_ID);
         sequence.setLabel(new LabelType());
         sequence.getLabel().setValue(SEQUENCE_LABEL);

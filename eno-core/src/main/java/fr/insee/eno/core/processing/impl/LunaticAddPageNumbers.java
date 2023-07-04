@@ -164,7 +164,7 @@ public class LunaticAddPageNumbers implements OutProcessingInterface<Questionnai
             // If the next component is a sequence, increment page number
             if (iterator.hasNext()) {
                 ComponentType nextComponent = iterator.next();
-                if (nextComponent instanceof SequenceType) {
+                if (nextComponent instanceof Sequence) {
                     pageNumber.increment();
                 }
                 setComponentPage(nextComponent, pageNumber);

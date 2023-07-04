@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.xml.bind.JAXBException;
-import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
@@ -54,7 +53,7 @@ class LunaticTests {
         // Components
         List<ComponentType> components = lunaticQuestionnaire.getComponents();
         // Sequence
-        SequenceType sequence = new SequenceType();
+        Sequence sequence = new Sequence();
         ComponentTypeEnum sequenceType = ComponentTypeEnum.valueOf("SEQUENCE");
         sequence.setComponentType(sequenceType);
         // Declaration
