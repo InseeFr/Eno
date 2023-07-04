@@ -127,7 +127,7 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
                             .map(subcomponent -> subcomponent.getResponse().getName())
                             .toList();
             case LOOP ->
-                    names = ((Loop)component).getComponents().stream()
+                    names = filterComponentsToProcess(((Loop)component).getComponents()).stream()
                             .map(this::getMissingBlockNames)
                             .flatMap(Collection::stream)
                             .toList();
