@@ -5,8 +5,8 @@ import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.navigation.Loop;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.sequence.Sequence;
-import fr.insee.eno.core.model.sequence.SequenceItem;
-import fr.insee.eno.core.model.sequence.SequenceItem.SequenceItemType;
+import fr.insee.eno.core.model.sequence.ItemReference;
+import fr.insee.eno.core.model.sequence.ItemReference.ItemType;
 import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.processing.InProcessingInterface;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +38,7 @@ public class DDIResolveSequencesStructure implements InProcessingInterface {
      * @param sequence A sequence or subsequence object.
      * */
     private void resolveSequenceStructure(AbstractSequence sequence) {
-        for (SequenceItem sequenceItem : sequence.getSequenceItems()) {
+        for (ItemReference sequenceItem : sequence.getSequenceItems()) {
             resolveStructure(sequence, sequenceItem);
         }
     }
@@ -49,7 +49,7 @@ public class DDIResolveSequencesStructure implements InProcessingInterface {
      * @param sequence A sequence or subsequence.
      * */
     private void resolveFilterStructure(Filter filter, AbstractSequence sequence) {
-        for (SequenceItem filterItem : filter.getFilterItems()) {
+        for (ItemReference filterItem : filter.getFilterItems()) {
             resolveStructure(sequence, filterItem);
         }
     }
@@ -65,7 +65,7 @@ public class DDIResolveSequencesStructure implements InProcessingInterface {
      * @param sequence A sequence or subsequence.
      * @param sequenceItem A sequence item.
      * */
-    private void resolveStructure(AbstractSequence sequence, SequenceItem sequenceItem) {
+    private void resolveStructure(AbstractSequence sequence, ItemReference sequenceItem) {
         switch (sequenceItem.getType()) {
             case SUBSEQUENCE -> {
                 sequence.getSequenceStructure().add(sequenceItem);
@@ -80,9 +80,9 @@ public class DDIResolveSequencesStructure implements InProcessingInterface {
                 Subsequence subsequence = (Subsequence) enoQuestionnaire.get(subsequenceReference);
                 // Note: embedded loops is not supported here.
                 // (With embedded loops the reference might be a loop and not a subsequence.)
-                sequence.getSequenceStructure().add(SequenceItem.builder()
+                sequence.getSequenceStructure().add(ItemReference.builder()
                         .id(subsequenceReference)
-                        .type(SequenceItemType.SUBSEQUENCE)
+                        .type(ItemType.SUBSEQUENCE)
                         .build());
                 resolveSequenceStructure(subsequence);
             }

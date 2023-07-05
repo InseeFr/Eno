@@ -11,7 +11,7 @@ import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
-import fr.insee.eno.core.model.sequence.SequenceItem;
+import fr.insee.eno.core.model.sequence.ItemReference;
 import fr.insee.eno.core.processing.OutProcessingInterface;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
@@ -193,9 +193,9 @@ public class LunaticLoopResolution implements OutProcessingInterface<Questionnai
                             "Unable to find its first question to compute Lunatic \"iterations\" expression.",
                     enoLinkedLoop.getId(), enoLinkedLoop.getReference(), enoLinkedLoop.getSequenceReference()));
         }
-        SequenceItem firstSequenceItem = sequence.getSequenceStructure().get(0);
+        ItemReference firstSequenceItem = sequence.getSequenceStructure().get(0);
         //
-        if (firstSequenceItem.getType() == SequenceItem.SequenceItemType.QUESTION) {
+        if (firstSequenceItem.getType() == ItemReference.ItemType.QUESTION) {
             return firstSequenceItem.getId();
         }
         //

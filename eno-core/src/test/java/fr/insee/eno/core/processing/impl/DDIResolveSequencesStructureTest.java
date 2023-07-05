@@ -7,8 +7,8 @@ import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.navigation.Loop;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.sequence.Sequence;
-import fr.insee.eno.core.model.sequence.SequenceItem;
-import fr.insee.eno.core.model.sequence.SequenceItem.SequenceItemType;
+import fr.insee.eno.core.model.sequence.ItemReference;
+import fr.insee.eno.core.model.sequence.ItemReference.ItemType;
 import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.reference.EnoIndex;
@@ -35,7 +35,7 @@ class DDIResolveSequencesStructureTest {
         Sequence sequence = new Sequence();
         sequence.setId(SEQUENCE_ID);
         sequence.getSequenceItems().add(
-                SequenceItem.builder().id(QUESTION_ID).type(SequenceItemType.QUESTION).build());
+                ItemReference.builder().id(QUESTION_ID).type(ItemType.QUESTION).build());
         enoQuestionnaire.getSequences().add(sequence);
         //
         DDIResolveSequencesStructure ddiResolveSequencesStructure = new DDIResolveSequencesStructure();
@@ -43,7 +43,7 @@ class DDIResolveSequencesStructureTest {
         //
         assertEquals(1, sequence.getSequenceStructure().size());
         assertEquals(QUESTION_ID, sequence.getSequenceStructure().get(0).getId());
-        assertEquals(SequenceItemType.QUESTION, sequence.getSequenceStructure().get(0).getType());
+        assertEquals(ItemType.QUESTION, sequence.getSequenceStructure().get(0).getType());
     }
 
     @Test
@@ -55,13 +55,13 @@ class DDIResolveSequencesStructureTest {
         Sequence sequence = new Sequence();
         sequence.setId(SEQUENCE_ID);
         sequence.getSequenceItems().add(
-                SequenceItem.builder().id(SUBSEQUENCE_ID).type(SequenceItemType.SUBSEQUENCE).build());
+                ItemReference.builder().id(SUBSEQUENCE_ID).type(ItemType.SUBSEQUENCE).build());
         enoQuestionnaire.getSequences().add(sequence);
         //
         Subsequence subsequence = new Subsequence();
         subsequence.setId(SUBSEQUENCE_ID);
         subsequence.getSequenceItems().add(
-                SequenceItem.builder().id(QUESTION_ID).type(SequenceItemType.QUESTION).build());
+                ItemReference.builder().id(QUESTION_ID).type(ItemType.QUESTION).build());
         enoQuestionnaire.getSubsequences().add(subsequence);
         //
         EnoIndex enoIndex = new EnoIndex();
@@ -75,10 +75,10 @@ class DDIResolveSequencesStructureTest {
         //
         assertEquals(1, sequence.getSequenceStructure().size());
         assertEquals(SUBSEQUENCE_ID, sequence.getSequenceStructure().get(0).getId());
-        assertEquals(SequenceItemType.SUBSEQUENCE, sequence.getSequenceStructure().get(0).getType());
+        assertEquals(ItemType.SUBSEQUENCE, sequence.getSequenceStructure().get(0).getType());
         assertEquals(1, subsequence.getSequenceStructure().size());
         assertEquals(QUESTION_ID, subsequence.getSequenceStructure().get(0).getId());
-        assertEquals(SequenceItemType.QUESTION, subsequence.getSequenceStructure().get(0).getType());
+        assertEquals(ItemType.QUESTION, subsequence.getSequenceStructure().get(0).getType());
     }
 
     @Test
@@ -90,7 +90,7 @@ class DDIResolveSequencesStructureTest {
         Sequence sequence = new Sequence();
         sequence.setId(SEQUENCE_ID);
         sequence.getSequenceItems().add(
-                SequenceItem.builder().id(LOOP_ID).type(SequenceItemType.LOOP).build());
+                ItemReference.builder().id(LOOP_ID).type(ItemType.LOOP).build());
         enoQuestionnaire.getSequences().add(sequence);
         //
         Loop loop = new StandaloneLoop();
@@ -100,7 +100,7 @@ class DDIResolveSequencesStructureTest {
         Subsequence subsequence = new Subsequence();
         subsequence.setId(SUBSEQUENCE_ID);
         subsequence.getSequenceItems().add(
-                SequenceItem.builder().id(QUESTION_ID).type(SequenceItemType.QUESTION).build());
+                ItemReference.builder().id(QUESTION_ID).type(ItemType.QUESTION).build());
         enoQuestionnaire.getSubsequences().add(subsequence);
         //
         EnoIndex enoIndex = new EnoIndex();
@@ -115,10 +115,10 @@ class DDIResolveSequencesStructureTest {
         //
         assertEquals(1, sequence.getSequenceStructure().size());
         assertEquals(SUBSEQUENCE_ID, sequence.getSequenceStructure().get(0).getId());
-        assertEquals(SequenceItemType.SUBSEQUENCE, sequence.getSequenceStructure().get(0).getType());
+        assertEquals(ItemType.SUBSEQUENCE, sequence.getSequenceStructure().get(0).getType());
         assertEquals(1, subsequence.getSequenceStructure().size());
         assertEquals(QUESTION_ID, subsequence.getSequenceStructure().get(0).getId());
-        assertEquals(SequenceItemType.QUESTION, subsequence.getSequenceStructure().get(0).getType());
+        assertEquals(ItemType.QUESTION, subsequence.getSequenceStructure().get(0).getType());
     }
 
     @Test
@@ -130,18 +130,18 @@ class DDIResolveSequencesStructureTest {
         Sequence sequence = new Sequence();
         sequence.setId(SEQUENCE_ID);
         sequence.getSequenceItems().add(
-                SequenceItem.builder().id(SUBSEQUENCE_ID).type(SequenceItemType.SUBSEQUENCE).build());
+                ItemReference.builder().id(SUBSEQUENCE_ID).type(ItemType.SUBSEQUENCE).build());
         enoQuestionnaire.getSequences().add(sequence);
         //
         Subsequence subsequence = new Subsequence();
         subsequence.setId(SUBSEQUENCE_ID);
         subsequence.getSequenceItems().add(
-                SequenceItem.builder().id(FILTER_ID).type(SequenceItemType.FILTER).build());
+                ItemReference.builder().id(FILTER_ID).type(ItemType.FILTER).build());
         enoQuestionnaire.getSubsequences().add(subsequence);
         //
         Filter filter = new Filter();
         filter.getFilterItems().add(
-                SequenceItem.builder().id(QUESTION_ID).type(SequenceItemType.QUESTION).build());
+                ItemReference.builder().id(QUESTION_ID).type(ItemType.QUESTION).build());
         //
         EnoIndex enoIndex = new EnoIndex();
         enoIndex.put(SUBSEQUENCE_ID, subsequence);
@@ -155,10 +155,10 @@ class DDIResolveSequencesStructureTest {
         //
         assertEquals(1, sequence.getSequenceStructure().size());
         assertEquals(SUBSEQUENCE_ID, sequence.getSequenceStructure().get(0).getId());
-        assertEquals(SequenceItemType.SUBSEQUENCE, sequence.getSequenceStructure().get(0).getType());
+        assertEquals(ItemType.SUBSEQUENCE, sequence.getSequenceStructure().get(0).getType());
         assertEquals(1, subsequence.getSequenceStructure().size());
         assertEquals(QUESTION_ID, subsequence.getSequenceStructure().get(0).getId());
-        assertEquals(SequenceItemType.QUESTION, subsequence.getSequenceStructure().get(0).getType());
+        assertEquals(ItemType.QUESTION, subsequence.getSequenceStructure().get(0).getType());
     }
 
     @Nested
@@ -188,31 +188,31 @@ class DDIResolveSequencesStructureTest {
             //
             assertEquals(3, enoQuestionnaire.getSequences().get(0).getSequenceStructure().size());
             enoQuestionnaire.getSequences().get(0).getSequenceStructure().forEach(sequenceItem ->
-                    assertEquals(SequenceItemType.SUBSEQUENCE, sequenceItem.getType()));
+                    assertEquals(ItemType.SUBSEQUENCE, sequenceItem.getType()));
             //
             assertEquals(2, enoQuestionnaire.getSequences().get(1).getSequenceStructure().size());
             enoQuestionnaire.getSequences().get(1).getSequenceStructure().forEach(sequenceItem ->
-                    assertEquals(SequenceItemType.SUBSEQUENCE, sequenceItem.getType()));
+                    assertEquals(ItemType.SUBSEQUENCE, sequenceItem.getType()));
             //
             assertEquals(6, enoQuestionnaire.getSequences().get(2).getSequenceStructure().size());
             enoQuestionnaire.getSequences().get(2).getSequenceStructure().forEach(sequenceItem ->
-                    assertEquals(SequenceItemType.QUESTION, sequenceItem.getType()));
+                    assertEquals(ItemType.QUESTION, sequenceItem.getType()));
             //
             assertEquals(5, enoQuestionnaire.getSequences().get(3).getSequenceStructure().size());
-            assertEquals(SequenceItemType.QUESTION,
+            assertEquals(ItemType.QUESTION,
                     enoQuestionnaire.getSequences().get(3).getSequenceStructure().get(0).getType());
-            assertEquals(SequenceItemType.QUESTION,
+            assertEquals(ItemType.QUESTION,
                     enoQuestionnaire.getSequences().get(3).getSequenceStructure().get(1).getType());
-            assertEquals(SequenceItemType.SUBSEQUENCE,
+            assertEquals(ItemType.SUBSEQUENCE,
                     enoQuestionnaire.getSequences().get(3).getSequenceStructure().get(2).getType());
-            assertEquals(SequenceItemType.SUBSEQUENCE,
+            assertEquals(ItemType.SUBSEQUENCE,
                     enoQuestionnaire.getSequences().get(3).getSequenceStructure().get(3).getType());
-            assertEquals(SequenceItemType.SUBSEQUENCE,
+            assertEquals(ItemType.SUBSEQUENCE,
                     enoQuestionnaire.getSequences().get(3).getSequenceStructure().get(4).getType());
             //
             assertEquals(3, enoQuestionnaire.getSequences().get(4).getSequenceStructure().size());
             enoQuestionnaire.getSequences().get(4).getSequenceStructure().forEach(sequenceItem ->
-                    assertEquals(SequenceItemType.SUBSEQUENCE, sequenceItem.getType()));
+                    assertEquals(ItemType.SUBSEQUENCE, sequenceItem.getType()));
             //
             assertEquals(0, enoQuestionnaire.getSequences().get(5).getSequenceStructure().size());
         }
@@ -223,8 +223,8 @@ class DDIResolveSequencesStructureTest {
             Subsequence subsequence11 = (Subsequence) enoQuestionnaire.get(
                     enoQuestionnaire.getSequences().get(0).getSequenceStructure().get(0).getId());
             assertEquals(2, subsequence11.getSequenceStructure().size());
-            assertEquals(SequenceItemType.QUESTION, subsequence11.getSequenceStructure().get(0).getType());
-            assertEquals(SequenceItemType.QUESTION, subsequence11.getSequenceStructure().get(1).getType());
+            assertEquals(ItemType.QUESTION, subsequence11.getSequenceStructure().get(0).getType());
+            assertEquals(ItemType.QUESTION, subsequence11.getSequenceStructure().get(1).getType());
         }
 
         @Test
@@ -234,13 +234,13 @@ class DDIResolveSequencesStructureTest {
             Subsequence subsequence52 = (Subsequence) enoQuestionnaire.get(
                     enoQuestionnaire.getSequences().get(4).getSequenceStructure().get(1).getId());
             assertEquals(2, subsequence52.getSequenceStructure().size());
-            assertEquals(SequenceItemType.QUESTION, subsequence52.getSequenceStructure().get(0).getType());
-            assertEquals(SequenceItemType.QUESTION, subsequence52.getSequenceStructure().get(1).getType());
+            assertEquals(ItemType.QUESTION, subsequence52.getSequenceStructure().get(0).getType());
+            assertEquals(ItemType.QUESTION, subsequence52.getSequenceStructure().get(1).getType());
             // Subsequence targeted by a linked loop;
             Subsequence subsequence53 = (Subsequence) enoQuestionnaire.get(
                     enoQuestionnaire.getSequences().get(4).getSequenceStructure().get(2).getId());
             assertEquals(1, subsequence53.getSequenceStructure().size());
-            assertEquals(SequenceItemType.QUESTION, subsequence53.getSequenceStructure().get(0).getType());
+            assertEquals(ItemType.QUESTION, subsequence53.getSequenceStructure().get(0).getType());
         }
 
         @Test
@@ -251,17 +251,17 @@ class DDIResolveSequencesStructureTest {
                     enoQuestionnaire.getSequences().get(1).getSequenceStructure().get(0).getId());
             assertEquals(7, subsequence21.getSequenceStructure().size());
             subsequence21.getSequenceStructure().forEach(sequenceItem ->
-                    assertEquals(SequenceItemType.QUESTION, sequenceItem.getType()));
+                    assertEquals(ItemType.QUESTION, sequenceItem.getType()));
             // Subsequence targeted by a filter
             Subsequence subsequence42 = (Subsequence) enoQuestionnaire.get(
                     enoQuestionnaire.getSequences().get(3).getSequenceStructure().get(3).getId());
             assertEquals(1, subsequence42.getSequenceStructure().size());
-            assertEquals(SequenceItemType.QUESTION, subsequence42.getSequenceStructure().get(0).getType());
+            assertEquals(ItemType.QUESTION, subsequence42.getSequenceStructure().get(0).getType());
             // Subsequence targeted by nested filters
             Subsequence subsequence43 = (Subsequence) enoQuestionnaire.get(
                     enoQuestionnaire.getSequences().get(3).getSequenceStructure().get(4).getId());
             assertEquals(1, subsequence43.getSequenceStructure().size());
-            assertEquals(SequenceItemType.QUESTION, subsequence43.getSequenceStructure().get(0).getType());
+            assertEquals(ItemType.QUESTION, subsequence43.getSequenceStructure().get(0).getType());
         }
 
     }

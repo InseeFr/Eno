@@ -3,12 +3,11 @@ package fr.insee.eno.core.model.navigation;
 import datacollection33.IfThenElseType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoObjectWithExpression;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
-import fr.insee.eno.core.model.sequence.SequenceItem;
+import fr.insee.eno.core.model.sequence.ItemReference;
 import fr.insee.lunatic.model.flat.ConditionFilterType;
 import lombok.Getter;
 import lombok.Setter;
@@ -62,6 +61,6 @@ public class Filter extends EnoIdentifiableObject implements EnoObjectWithExpres
     @DDI(contextType = IfThenElseType.class,
             field = "#index.get(#this.getThenConstructReference().getIDArray(0).getStringValue())" +
                     ".getControlConstructReferenceList()")
-    private List<SequenceItem> filterItems = new ArrayList<>();
+    private List<ItemReference> filterItems = new ArrayList<>();
 
 }

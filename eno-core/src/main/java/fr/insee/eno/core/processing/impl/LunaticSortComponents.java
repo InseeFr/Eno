@@ -5,7 +5,7 @@ import fr.insee.eno.core.model.EnoComponent;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.sequence.Sequence;
-import fr.insee.eno.core.model.sequence.SequenceItem;
+import fr.insee.eno.core.model.sequence.ItemReference;
 import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.processing.OutProcessingInterface;
 import fr.insee.lunatic.model.flat.ComponentType;
@@ -60,12 +60,12 @@ public class LunaticSortComponents implements OutProcessingInterface<Questionnai
 
     /** Add Lunatic components described ine the Eno sequence given in the list given in the right order. */
     private void addSequenceComponents(List<ComponentType> lunaticComponents, Sequence enoSequence) {
-        for (String enoComponentReference : enoSequence.getSequenceStructure().stream().map(SequenceItem::getId).toList()) {
+        for (String enoComponentReference : enoSequence.getSequenceStructure().stream().map(ItemReference::getId).toList()) {
             Optional<EnoComponent> enoComponent = insertLunaticComponent(lunaticComponents, enoComponentReference);
             if (enoComponent.isEmpty())
                 continue;
             if (enoComponent.get() instanceof Subsequence enoSubsequence) {
-                for (String enoComponentReference2 : enoSubsequence.getSequenceStructure().stream().map(SequenceItem::getId).toList()) {
+                for (String enoComponentReference2 : enoSubsequence.getSequenceStructure().stream().map(ItemReference::getId).toList()) {
                     insertLunaticComponent(lunaticComponents, enoComponentReference2);
                 }
             }
@@ -87,7 +87,7 @@ public class LunaticSortComponents implements OutProcessingInterface<Questionnai
 
     /** (Recursive equivalent of iterative method above.) */
     private void addSequenceComponentsRec(List<ComponentType> lunaticComponents, AbstractSequence enoSequence) {
-        enoSequence.getSequenceStructure().stream().map(SequenceItem::getId).forEachOrdered(enoComponentReference -> {
+        enoSequence.getSequenceStructure().stream().map(ItemReference::getId).forEachOrdered(enoComponentReference -> {
             insertLunaticComponent(lunaticComponents, enoComponentReference);
             if (enoQuestionnaire.get(enoComponentReference) instanceof AbstractSequence enoSequence2)
                 addSequenceComponentsRec(lunaticComponents, enoSequence2);

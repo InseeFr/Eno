@@ -6,7 +6,7 @@ import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.navigation.Control;
 import fr.insee.eno.core.model.navigation.Filter;
-import fr.insee.eno.core.model.sequence.SequenceItem;
+import fr.insee.eno.core.model.sequence.ItemReference;
 import fr.insee.eno.core.processing.InProcessingInterface;
 
 public class DDIInsertFilters implements InProcessingInterface {
@@ -18,7 +18,7 @@ public class DDIInsertFilters implements InProcessingInterface {
         assert enoQuestionnaire.getIndex() != null;
         //
         for (Filter filter : enoQuestionnaire.getFilters()) {
-            filter.getFilterItems().stream().map(SequenceItem::getId).forEachOrdered(componentId -> {
+            filter.getFilterItems().stream().map(ItemReference::getId).forEachOrdered(componentId -> {
                 //
                 EnoObject enoObject = enoQuestionnaire.get(componentId);
                 // Filter: set parent relationship

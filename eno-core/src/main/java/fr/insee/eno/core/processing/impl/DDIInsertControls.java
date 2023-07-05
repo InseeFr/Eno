@@ -4,7 +4,7 @@ import fr.insee.eno.core.model.*;
 import fr.insee.eno.core.model.navigation.Control;
 import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.model.sequence.Sequence;
-import fr.insee.eno.core.model.sequence.SequenceItem;
+import fr.insee.eno.core.model.sequence.ItemReference;
 import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.processing.InProcessingInterface;
 
@@ -21,47 +21,47 @@ public class DDIInsertControls implements InProcessingInterface {
         assert enoQuestionnaire.getIndex() != null;
         //
         for (Sequence sequence : enoQuestionnaire.getSequences()) {
-            List<SequenceItem> sequenceItems = sequence.getSequenceItems();
+            List<ItemReference> sequenceItems = sequence.getSequenceItems();
             if (! sequenceItems.isEmpty()) {
                 int bound = sequenceItems.size();
                 // Sequence controls
                 int i = 0;
-                while (i<bound && sequenceItems.get(i).getType() == SequenceItem.SequenceItemType.CONTROL) {
+                while (i<bound && sequenceItems.get(i).getType() == ItemReference.ItemType.CONTROL) {
                     sequence.getControls().add(
                             (Control) enoQuestionnaire.get(sequenceItems.get(i).getId()));
                     i ++;
                 }
                 // Elements (questions, subsequences) in sequence
                 while (i < bound) {
-                    SequenceItem sequenceItem = sequenceItems.get(i);
-                    if (sequenceItem.getType() == SequenceItem.SequenceItemType.QUESTION) {
+                    ItemReference sequenceItem = sequenceItems.get(i);
+                    if (sequenceItem.getType() == ItemReference.ItemType.QUESTION) {
                         Question question = (Question) enoQuestionnaire.get(sequenceItem.getId());
                         i ++;
-                        while (i<bound && sequenceItems.get(i).getType() == SequenceItem.SequenceItemType.CONTROL) {
+                        while (i<bound && sequenceItems.get(i).getType() == ItemReference.ItemType.CONTROL) {
                             question.getControls().add(
                                     (Control) enoQuestionnaire.get(sequenceItems.get(i).getId()));
                             i ++;
                         }
                     }
-                    else if (sequenceItem.getType() == SequenceItem.SequenceItemType.SUBSEQUENCE) {
+                    else if (sequenceItem.getType() == ItemReference.ItemType.SUBSEQUENCE) {
                         Subsequence subsequence = (Subsequence) enoQuestionnaire.get(sequenceItem.getId());
-                        List<SequenceItem> subsequenceItems = subsequence.getSequenceItems();
+                        List<ItemReference> subsequenceItems = subsequence.getSequenceItems();
                         if (! subsequenceItems.isEmpty()) {
                             int bound2 = subsequenceItems.size();
                             // Subsequence controls
                             int j = 0;
-                            while (j<bound2 && subsequenceItems.get(j).getType() == SequenceItem.SequenceItemType.CONTROL) {
+                            while (j<bound2 && subsequenceItems.get(j).getType() == ItemReference.ItemType.CONTROL) {
                                 subsequence.getControls().add(
                                         (Control) enoQuestionnaire.get(subsequenceItems.get(j).getId()));
                                 j ++;
                             }
                             // Elements (questions) in subsequence
                             while (j < bound2) {
-                                SequenceItem subsequenceItem = subsequenceItems.get(j);
-                                if (subsequenceItem.getType() == SequenceItem.SequenceItemType.QUESTION) {
+                                ItemReference subsequenceItem = subsequenceItems.get(j);
+                                if (subsequenceItem.getType() == ItemReference.ItemType.QUESTION) {
                                     Question question = (Question) enoQuestionnaire.get(subsequenceItem.getId());
                                     j ++;
-                                    while (j<bound2 && subsequenceItems.get(j).getType() == SequenceItem.SequenceItemType.CONTROL) {
+                                    while (j<bound2 && subsequenceItems.get(j).getType() == ItemReference.ItemType.CONTROL) {
                                         question.getControls().add(
                                                 (Control) enoQuestionnaire.get(subsequenceItems.get(j).getId()));
                                         j ++;

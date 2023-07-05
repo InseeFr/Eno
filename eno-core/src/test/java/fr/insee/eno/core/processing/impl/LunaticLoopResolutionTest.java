@@ -8,8 +8,8 @@ import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.TextQuestion;
 import fr.insee.eno.core.model.sequence.Sequence;
-import fr.insee.eno.core.model.sequence.SequenceItem;
-import fr.insee.eno.core.model.sequence.SequenceItem.SequenceItemType;
+import fr.insee.eno.core.model.sequence.ItemReference;
+import fr.insee.eno.core.model.sequence.ItemReference.ItemType;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.processing.EnoProcessing;
@@ -40,7 +40,7 @@ class LunaticLoopResolutionTest {
         Sequence sequence = new Sequence();
         sequence.setId(SEQUENCE_ID);
         sequence.getSequenceStructure().add(
-                SequenceItem.builder().id(QUESTION_ID).type(SequenceItemType.QUESTION).build());
+                ItemReference.builder().id(QUESTION_ID).type(ItemType.QUESTION).build());
         enoQuestionnaire.getSequences().add(sequence);
         TextQuestion textQuestion = new TextQuestion();
         textQuestion.setId(QUESTION_ID);

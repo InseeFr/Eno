@@ -63,11 +63,11 @@ public abstract class AbstractSequence extends EnoIdentifiableObject implements 
      * Important note: if a loop is defined over a sequence or subsequence, the sequence item will correspond to
      * the loop (and not the sequence or subsequence), same for the filters. */
     @DDI(contextType = SequenceType.class, field = "getControlConstructReferenceList()")
-    private final List<SequenceItem> sequenceItems = new ArrayList<>();
+    private final List<ItemReference> sequenceItems = new ArrayList<>();
 
     /** Ordered list of only subsequence and question items.
      * TODO: proper oop to make a difference between subsequences/question, loops/filters and controls/declarations
      * In DDI, this list is filled in a processing class using the 'sequenceItems' list. */
-    private final List<SequenceItem> sequenceStructure = new ArrayList<>();
+    private final List<ItemReference> sequenceStructure = new ArrayList<>();
 
 }

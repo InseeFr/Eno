@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static fr.insee.eno.core.model.sequence.SequenceItem.SequenceItemType.*;
+import static fr.insee.eno.core.model.sequence.ItemReference.ItemType.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

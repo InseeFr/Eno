@@ -1,6 +1,7 @@
 package fr.insee.eno.core.model.navigation;
 
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.model.EnoComponent;
 import fr.insee.eno.core.model.EnoObject;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +30,6 @@ public abstract class Loop extends EnoIdentifiableObject {
     @DDI(contextType = LoopType.class, field = "getConstructNameArray(0).getStringArray(0).getStringValue()")
     private String name;
 
-
     /** Sequence or sub-sequence to loop on.
      * In Lunatic, components within the referenced sequence will be moved in the loop components' list.
      * This is done in a Lunatic processing. */
@@ -46,5 +46,10 @@ public abstract class Loop extends EnoIdentifiableObject {
         }
         return controlConstruct.getIDArray(0).getStringValue();
     }
+
+    /** A loop can be in the scope of a filter.
+     * In DDI, filters are mapped at questionnaire level and inserted through a processing step. */
+    @Lunatic(contextType = fr.insee.lunatic.model.flat.Loop.class, field = "setConditionFilter(#param)")
+    private Filter filter;
 
 }
