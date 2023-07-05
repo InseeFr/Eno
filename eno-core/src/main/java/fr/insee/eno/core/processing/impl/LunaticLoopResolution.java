@@ -58,7 +58,7 @@ public class LunaticLoopResolution implements OutProcessingInterface<Questionnai
             // Then transfer concerned components in the loop component
             if (sequenceReference.equals(component.getId())) {
                 // Check that the reference is actually a sequence or subsequence
-                assert component instanceof SequenceType || component instanceof Subsequence;
+                assert component instanceof Sequence || component instanceof Subsequence;
                 // Insert the sequence/subsequence (first element of the loop)
                 lunaticLoop.getComponents().add(component);
                 iterator.remove();

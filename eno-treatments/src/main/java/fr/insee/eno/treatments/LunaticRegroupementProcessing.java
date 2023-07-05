@@ -49,7 +49,7 @@ public class LunaticRegroupementProcessing implements OutProcessingInterface<Que
             }
 
             switch(component.getComponentType()) {
-                case SEQUENCE -> applyNumPageOnSequence((SequenceType) component, numPagePrefix + pageCount);
+                case SEQUENCE -> applyNumPageOnSequence((Sequence) component, numPagePrefix + pageCount);
                 case SUBSEQUENCE -> applyNumPageOnSubsequence((Subsequence) component, numPagePrefix, pageCount, isParentPaginated);
                 case PAIRWISE_LINKS -> applyNumPageOnPairwiseLinks((PairwiseLinks) component, numPagePrefix, pageCount);
                 case LOOP -> applyNumPageOnLoop((Loop) component, numPagePrefix, pageCount);
@@ -64,7 +64,7 @@ public class LunaticRegroupementProcessing implements OutProcessingInterface<Que
      * @param sequence sequence component
      * @param numPage numpage to set
      */
-    private void applyNumPageOnSequence(SequenceType sequence, String numPage) {
+    private void applyNumPageOnSequence(Sequence sequence, String numPage) {
         sequence.setPage(numPage);
         addSequencePage(sequence);
     }
@@ -165,7 +165,7 @@ public class LunaticRegroupementProcessing implements OutProcessingInterface<Que
      * Add an entry for a sequence to the sequencePage map
      * @param sequence sequence to add in the map
      */
-    private void addSequencePage(SequenceType sequence) {
+    private void addSequencePage(Sequence sequence) {
         sequencePages.put(sequence.getId(), sequence.getPage());
     }
 

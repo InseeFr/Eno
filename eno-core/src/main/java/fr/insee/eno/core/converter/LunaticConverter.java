@@ -39,7 +39,7 @@ public class LunaticConverter {
         if (enoObject instanceof Variable)
             return new VariableType();
         if (enoObject instanceof Sequence)
-            return new SequenceType();
+            return new fr.insee.lunatic.model.flat.Sequence();
         if (enoObject instanceof Subsequence)
             return new fr.insee.lunatic.model.flat.Subsequence();
         if (isInstanceOfLunaticDeclaration(enoObject))
