@@ -5,7 +5,8 @@ import fr.insee.eno.core.model.sequence.ItemReference.ItemType;
 import lombok.*;
 
 /**
- * <Code>ComponentReference</Code> objects are designed to be used in lists holding the questionnaire structure.
+ * Reference of an item that is part of a questionnaire's structure:
+ * that is to say either sequence, subsequence or question.
  */
 @Getter
 @Setter
