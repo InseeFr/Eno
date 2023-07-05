@@ -6,8 +6,8 @@ import fr.insee.eno.core.model.label.Label;
 import fr.insee.eno.core.model.question.NumericQuestion;
 import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.model.sequence.Sequence;
-import fr.insee.eno.core.model.sequence.ItemReference;
-import fr.insee.eno.core.model.sequence.ItemReference.ItemType;
+import fr.insee.eno.core.model.sequence.StructureItemReference;
+import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.EnoProcessingInterface;
 import fr.insee.eno.core.reference.EnoIndex;
@@ -59,9 +59,9 @@ public class EnoAddResponseTimeSection implements EnoProcessingInterface {
         sequence.setLabel(new Label());
         sequence.getLabel().setValue(RESPONSE_TIME_SEQUENCE_LABEL);
         sequence.getSequenceStructure().add(
-                ItemReference.builder().id(HOURS_QUESTION_ID).type(ItemType.QUESTION).build());
+                StructureItemReference.builder().id(HOURS_QUESTION_ID).type(StructureItemType.QUESTION).build());
         sequence.getSequenceStructure().add(
-                ItemReference.builder().id(MINUTES_QUESTION_ID).type(ItemType.QUESTION).build());
+                StructureItemReference.builder().id(MINUTES_QUESTION_ID).type(StructureItemType.QUESTION).build());
         enoQuestionnaire.getSequences().add(sequence);
         enoIndex.put(RESPONSE_TIME_SEQUENCE_ID, sequence);
         //

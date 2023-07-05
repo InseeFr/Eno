@@ -8,6 +8,8 @@ import fr.insee.eno.core.model.question.NumericQuestion;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.ItemReference;
 import fr.insee.eno.core.model.sequence.ItemReference.ItemType;
+import fr.insee.eno.core.model.sequence.StructureItemReference;
+import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.processing.EnoProcessing;
@@ -38,7 +40,7 @@ class LunaticSortComponentsTest {
         NumericQuestion enoQuestion = new NumericQuestion();
         enoQuestion.setId(QUESTION_ID);
         enoSequence.getSequenceStructure().add(
-                ItemReference.builder().id(QUESTION_ID).type(ItemType.QUESTION).build());
+                StructureItemReference.builder().id(QUESTION_ID).type(StructureItemType.QUESTION).build());
         enoQuestionnaire.getSequences().add(enoSequence);
         enoQuestionnaire.getSingleResponseQuestions().add(enoQuestion);
         //

@@ -1,17 +1,18 @@
 package fr.insee.eno.core.model.navigation;
 
-import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.eno.core.model.EnoComponent;
-import fr.insee.eno.core.model.EnoObject;
-import lombok.Getter;
-import lombok.Setter;
 import datacollection33.LoopType;
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
+import fr.insee.eno.core.model.sequence.ItemReference;
+import fr.insee.eno.core.model.sequence.StructureItemReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import reusable33.ReferenceType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A loop is defined by its scope, which is a sequence or subsequence reference.
@@ -35,7 +36,20 @@ public abstract class Loop extends EnoIdentifiableObject {
      * This is done in a Lunatic processing. */
     @DDI(contextType = LoopType.class,
             field = "T(fr.insee.eno.core.model.navigation.Loop).mapSequenceReference(#this)")
-    private String sequenceReference;
+    private String sequenceReference; // TODO: to be replaced by a loopScope property analog to what's done for filters
+
+    /** Reference to the sequence or sub-sequence to loop on.
+     * In Lunatic, components within the referenced sequence will be moved in the loop components' list.
+     * This is done in a Lunatic processing.
+     * TODO: waiting for a fix in DDI modeling, this should be a List<StructureItemReference>
+     *     with DDI mapping expression:
+     *     #index.get(getControlConstructReferenceArray(0).getIDArray(0).getStringValue()).getControlConstructReferenceList()
+     * */
+    @DDI(contextType = LoopType.class, field = "T(java.util.List).of(#this.getControlConstructReference())")
+    private final List<ItemReference> loopItems = new ArrayList<>();
+
+    // TODO: doc
+    private final List<StructureItemReference> loopScope = new ArrayList<>();
 
     public static String mapSequenceReference(LoopType ddiLoop) {
         ReferenceType controlConstruct = ddiLoop.getControlConstructReference();

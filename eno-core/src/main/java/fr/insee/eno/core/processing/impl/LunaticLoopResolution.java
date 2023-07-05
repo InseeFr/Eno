@@ -11,7 +11,8 @@ import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
-import fr.insee.eno.core.model.sequence.ItemReference;
+import fr.insee.eno.core.model.sequence.StructureItemReference;
+import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType;
 import fr.insee.eno.core.processing.OutProcessingInterface;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
@@ -74,8 +75,8 @@ public class LunaticLoopResolution implements OutProcessingInterface<Questionnai
     private void insertComponentsInLoop(
             Questionnaire lunaticQuestionnaire, Loop lunaticLoop, String sequenceReference) {
          AbstractSequence enoSequence = (AbstractSequence) enoIndex.get(sequenceReference);
-         enoSequence.getSequenceStructure().forEach(sequenceItem ->
-                 relocateComponent(lunaticQuestionnaire, lunaticLoop, sequenceItem.getId()));
+         enoSequence.getSequenceStructure().forEach(structureItemReference ->
+                 relocateComponent(lunaticQuestionnaire, lunaticLoop, structureItemReference.getId()));
     }
 
     /** Relocate the component with given reference (id) from the questionnaire's components
@@ -193,9 +194,9 @@ public class LunaticLoopResolution implements OutProcessingInterface<Questionnai
                             "Unable to find its first question to compute Lunatic \"iterations\" expression.",
                     enoLinkedLoop.getId(), enoLinkedLoop.getReference(), enoLinkedLoop.getSequenceReference()));
         }
-        ItemReference firstSequenceItem = sequence.getSequenceStructure().get(0);
+        StructureItemReference firstSequenceItem = sequence.getSequenceStructure().get(0);
         //
-        if (firstSequenceItem.getType() == ItemReference.ItemType.QUESTION) {
+        if (firstSequenceItem.getType() == StructureItemType.QUESTION) {
             return firstSequenceItem.getId();
         }
         //
