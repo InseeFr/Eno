@@ -8,6 +8,7 @@ import fr.insee.eno.core.model.EnoObjectWithExpression;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.sequence.ItemReference;
+import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.lunatic.model.flat.ConditionFilterType;
 import lombok.Getter;
 import lombok.Setter;
@@ -62,5 +63,8 @@ public class Filter extends EnoIdentifiableObject implements EnoObjectWithExpres
             field = "#index.get(#this.getThenConstructReference().getIDArray(0).getStringValue())" +
                     ".getControlConstructReferenceList()")
     private List<ItemReference> filterItems = new ArrayList<>();
+
+    /** References of sequences, subsequences and questions that are in the filter of the scope. */
+    private final List<StructureItemReference> filterScope = new ArrayList<>();
 
 }
