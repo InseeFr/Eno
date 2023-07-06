@@ -923,12 +923,25 @@
                     </d:ControlConstructReference>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                        <xsl:with-param name="driver" select="." tunnel="yes"/>
-                    </xsl:apply-templates>
+                    <d:ControlConstructReference>
+                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                        <r:ID><xsl:value-of select="concat(enoddi33:get-id($source-context),'-SEQ')"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                        <r:TypeOfObject>Sequence</r:TypeOfObject>
+                    </d:ControlConstructReference>
                 </xsl:otherwise>
             </xsl:choose>
         </d:Loop>
+        <xsl:if test="not(enoddi33:get-loop-filter($source-context) != '')">
+            <d:Sequence>
+                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                <r:ID><xsl:value-of select="concat(enoddi33:get-id($source-context),'-SEQ')"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="." tunnel="yes"/>
+                </xsl:apply-templates>
+            </d:Sequence>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template name="StatementItem" match="driver-StatementItem//Instruction[not(ancestor::driver-InterviewerInstructionReference)]" mode="model">
