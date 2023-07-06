@@ -1,0 +1,409 @@
+{
+  "owner": "FAKEPERMISSION",
+  "FlowControl": [
+    {
+      "Description": "The sum is less than 10",
+      "Expression": "$SUM_Q11_Q12$  < 10",
+      "id": "ljr8txj9",
+      "IfTrue": "ljr8raj5-ljr8raj5"
+    }
+  ],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "idendquest",
+        "ljr8kldp",
+        "ljr8o4md",
+        "ljr8mkct",
+        "ljr91fii",
+        "ljr8raj5",
+        "ljr8quv4",
+        "ljr901dk",
+        "ljr8sn7a"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "ljra0eec",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "Eno - Filters with calculated"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "ENOFILTERS4",
+  "Variables": {
+    "Variable": [
+      {
+        "Formula": "cast($Q11$, integer) + cast($Q12$, integer)",
+        "Label": "\"Sum of Q11 and Q12\"",
+        "id": "ljr8wz8f",
+        "type": "CalculatedVariableType",
+        "Name": "SUM_Q11_Q12",
+        "Datatype": {
+          "Maximum": "20",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": "0"
+        }
+      },
+      {
+        "Label": "Q11 label",
+        "id": "ljr9cims",
+        "type": "CollectedVariableType",
+        "Name": "Q11",
+        "Datatype": {
+          "Maximum": "10",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": "0"
+        }
+      },
+      {
+        "Label": "Q12 label",
+        "id": "ljr90kmw",
+        "type": "CollectedVariableType",
+        "Name": "Q12",
+        "Datatype": {
+          "Maximum": "10",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": "0"
+        }
+      },
+      {
+        "Label": "CHECK label",
+        "id": "ljr8mo8u",
+        "type": "CollectedVariableType",
+        "Name": "CHECK",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q2 label",
+        "id": "ljr90xjr",
+        "type": "CollectedVariableType",
+        "Name": "Q2",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q3 label",
+        "id": "ljr9clyu",
+        "type": "CollectedVariableType",
+        "Name": "Q3",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Thu Jul 06 2023 16:55:47 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "eec-dc1-2017",
+      "uri": "http://ddi:fr.insee:DataCollection.eec-dc1-2017",
+      "Name": "Enquête Emploi en continu 2017 - Vague 1"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "ljr8xy13",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"First sequence\""
+      ],
+      "id": "ljr8kldp",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljr9cims",
+              "id": "ljra1scb",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "10",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Decimals": "0"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 1\""
+          ],
+          "id": "ljr8o4md",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q11"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljr90kmw",
+              "id": "ljrabr00",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "10",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Decimals": "0"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 2\""
+          ],
+          "id": "ljr8mkct",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q12"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljr8mo8u",
+              "id": "ljraa587",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"The value of the sum is: \" || cast($SUM_Q11_Q12$, string)"
+          ],
+          "id": "ljr91fii",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Question defined to display the value of the sum before the filtered sequence\"",
+              "id": "ljr8upfl",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ]
+            }
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "CHECK"
+        }
+      ],
+      "Name": "S1"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Filtered sequence\""
+      ],
+      "id": "ljr8raj5",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "HELP",
+          "Text": "\"Sequence displayed in function of a calculated variable\"",
+          "id": "ljr8uldd",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljr90xjr",
+              "id": "ljra44d8",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question of filtered sequence\""
+          ],
+          "id": "ljr8quv4",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q2"
+        }
+      ],
+      "Name": "S2"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"End sequence\""
+      ],
+      "id": "ljr901dk",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljr9clyu",
+              "id": "ljra9445",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Last question\""
+          ],
+          "id": "ljr8sn7a",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q3"
+        }
+      ],
+      "Name": "S3"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}
