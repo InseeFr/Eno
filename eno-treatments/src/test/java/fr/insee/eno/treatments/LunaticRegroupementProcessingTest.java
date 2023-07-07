@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,47 +38,53 @@ class LunaticRegroupementProcessingTest {
         List<ComponentType> l7Components = new ArrayList<>();
         List<ComponentType> p73Components = new ArrayList<>();
 
-        s1 = buildSequence("jfaz9kv9", "1");
+        s1 = buildSequence("jfaz9kv9");
         components.add(s1);
 
-        n2 = buildNumber("jfazk91m", "2", "Q1", s1, null);
+        n2 = buildNumber("jfazk91m", "Q1", s1, null);
         components.add(n2);
 
-        n3 = buildNumber("lhpz37kh", "3", "Q2", s1, null);
+        n3 = buildNumber("lhpz37kh", "Q2", s1, null);
         components.add(n3);
 
-        s4 = buildSequence("li1w5tqk", "4");
+        s4 = buildSequence("li1w5tqk");
         components.add(s4);
 
-        n5 = buildNumber("li1w3tmf", "5", "NB", s4, null);
+        n5 = buildNumber("li1w3tmf", "NB", s4, null);
         components.add(n5);
 
-        l6 = buildEmptyLoop("li1wjxs2", "6", null, s4, false);
+        l6 = buildEmptyLoop("li1wjxs2", s4);
+        // to consider this loop as main loop
+        l6.setLines(new LinesLoop());
 
         // build loop 6 components
-        ss6 = buildSubsequence("li1wbv47", "6", "6", s4);
+        ss6 = buildSubsequence("li1wbv47", s4);
+        //set a declaration for this subsequence
+        ss6.getDeclarations().add(new DeclarationType());
         l6Components.add(ss6);
 
-        i6 = buildInput("li1wptdt", "6", "PRENOM", s4, ss6);
+        i6 = buildInput("li1wptdt", "PRENOM", s4, ss6);
         l6Components.add(i6);
 
         l6.getComponents().addAll(l6Components);
         components.add(l6);
 
-        l7 = buildEmptyLoop("li1wsotd", "7", "2", s4, true);
+        l7 = buildEmptyLoop("li1wsotd", s4);
+        // to make this loop considered as linked
+        l7.setIterations(new LabelType());
 
-        ss71 = buildSubsequence("li1wfnbk", null, "7.1", s4);
+        ss71 = buildSubsequence("li1wfnbk", s4);
         l7Components.add(ss71);
 
-        co71 = buildCheckboxOne("lhpyz9b0", "7.1", "Q5", s4, ss71);
+        co71 = buildCheckboxOne("lhpyz9b0", "Q5", s4, ss71);
         l7Components.add(co71);
 
-        n72 = buildNumber("lhpzan4t", "7.2", "Q6", s4, ss71);
+        n72 = buildNumber("lhpzan4t", "Q6", s4, ss71);
         l7Components.add(n72);
 
-        p73 = buildEmptyPairWiseLinks("pairwise-links", "7.3", s4, ss71);
-        co73 = buildCheckboxOne("lhpyz9b73", "7.3", "QQCO", s4, ss71);
-        n73 = buildNumber("lhpzan73", "7.3", "QQN", s4, ss71);
+        p73 = buildEmptyPairWiseLinks("pairwise-links", s4, ss71);
+        co73 = buildCheckboxOne("lhpyz9b73", "QQCO", s4, ss71);
+        n73 = buildNumber("lhpzan73", "QQN", s4, ss71);
 
         p73Components.add(co73);
         p73Components.add(n73);
@@ -89,17 +94,16 @@ class LunaticRegroupementProcessingTest {
         l7.getComponents().addAll(l7Components);
         components.add(l7);
 
-        s8 = buildSequence("li1wjpqw", "8");
+        s8 = buildSequence("li1wjpqw");
         components.add(s8);
 
-        s9 = buildSequence("COMMENT-SEQ", "9");
+        s9 = buildSequence("COMMENT-SEQ");
         components.add(s9);
 
-        t10 = buildTextarea("COMMENT-QUESTION", "10", "COMMENT_QE", s9);
+        t10 = buildTextarea("COMMENT-QUESTION", "COMMENT_QE", s9);
         components.add(t10);
 
         questionnaire.getComponents().addAll(components);
-        questionnaire.setMaxPage("10");
 
         //JSONSerializer jsonSerializer = new JSONSerializer();
         //System.out.println(jsonSerializer.serialize2(questionnaire));
@@ -112,7 +116,6 @@ class LunaticRegroupementProcessingTest {
         assertFalse(l6.isPaginatedLoop());
         assertEquals("5", l6.getPage());
         assertEquals("5", ss6.getPage());
-        assertEquals("5", ss6.getGoToPage());
         assertEquals("5", i6.getPage());
     }
 
@@ -184,117 +187,69 @@ class LunaticRegroupementProcessingTest {
         assertEquals("9", t10.getPage());
     }
 
-    @Test
-    void shouldHierarchiesPageHaveSamePageOfCorrespondingSequences() {
-        List<Sequence> sequences = List.of(s1, s4, s8, s9);
-
-        // check hierarchies page against sequences/subsequences page
-        for(Sequence sequence : sequences) {
-            components.stream()
-                    .map(ComponentType::getHierarchy)
-                    .filter(Objects::nonNull)
-                    .forEach(hierarchy -> {
-                        SequenceDescription hierarchySequence = hierarchy.getSequence();
-
-                        if(hierarchySequence != null && hierarchySequence.getId().equals(sequence.getId())) {
-                            assertEquals(sequence.getPage(), hierarchySequence.getPage());
-                        }
-                    });
-        }
-    }
-
-    @Test
-    void shouldHierarchiesPageHaveSamePageOfCorrespondingSubsequences() {
-        List<Subsequence> subsequences = List.of(ss6, ss71);
-
-        for(Subsequence subsequence : subsequences) {
-            components.stream()
-                    .map(ComponentType::getHierarchy)
-                    .filter(Objects::nonNull)
-                    .forEach(hierarchy -> {
-                        SequenceDescription hierarchySubsequence = hierarchy.getSubSequence();
-
-                        if(hierarchySubsequence != null && hierarchySubsequence.getId().equals(subsequence.getId())) {
-                            assertEquals(subsequence.getPage(), hierarchySubsequence.getPage());
-                        }
-                    });
-        }
-    }
-
-    private CheckboxOne buildCheckboxOne(String id, String page, String name, Sequence sequence, Subsequence subsequence) {
+    private CheckboxOne buildCheckboxOne(String id, String name, Sequence sequence, Subsequence subsequence) {
         CheckboxOne co = new CheckboxOne();
         co.setComponentType(ComponentTypeEnum.CHECKBOX_ONE);
         co.setId(id);
-        co.setPage(page);
         co.setHierarchy(buildHierarchy(sequence, subsequence));
         co.setResponse(buildResponse(name));
         return co;
     }
 
-    private Textarea buildTextarea(String id, String page, String name, Sequence sequence) {
+    private Textarea buildTextarea(String id, String name, Sequence sequence) {
         Textarea textarea = new Textarea();
         textarea.setComponentType(ComponentTypeEnum.TEXTAREA);
         textarea.setId(id);
-        textarea.setPage(page);
         textarea.setHierarchy(buildHierarchy(sequence));
         textarea.setResponse(buildResponse(name));
         return textarea;
     }
 
-    private Input buildInput(String id, String page, String name, Sequence sequence, Subsequence subsequence) {
+    private Input buildInput(String id, String name, Sequence sequence, Subsequence subsequence) {
         Input input = new Input();
         input.setComponentType(ComponentTypeEnum.INPUT);
         input.setId(id);
-        input.setPage(page);
         input.setHierarchy(buildHierarchy(sequence, subsequence));
         input.setResponse(buildResponse(name));
         return input;
     }
 
-    private Sequence buildSequence(String id, String page) {
+    private Sequence buildSequence(String id) {
         Sequence sequence = new Sequence();
         sequence.setId(id);
         sequence.setComponentType(ComponentTypeEnum.SEQUENCE);
-        sequence.setPage(page);
         sequence.setHierarchy(buildHierarchy(sequence));
         return sequence;
     }
 
-    private Subsequence buildSubsequence(String id, String page, String gotoPage, Sequence sequence) {
+    private Subsequence buildSubsequence(String id, Sequence sequence) {
         Subsequence subsequence = new Subsequence();
         subsequence.setId(id);
         subsequence.setComponentType(ComponentTypeEnum.SUBSEQUENCE);
-        subsequence.setPage(page);
-        subsequence.setGoToPage(gotoPage);
         subsequence.setHierarchy(buildHierarchy(sequence, subsequence));
         return subsequence;
     }
 
-    private InputNumber buildNumber(String id, String page, String name, Sequence sequence, Subsequence subsequence) {
+    private InputNumber buildNumber(String id, String name, Sequence sequence, Subsequence subsequence) {
         InputNumber number = new InputNumber();
         number.setComponentType(ComponentTypeEnum.INPUT_NUMBER);
         number.setId(id);
-        number.setPage(page);
         number.setHierarchy(buildHierarchy(sequence, subsequence));
         number.setResponse(buildResponse(name));
         return number;
     }
 
-    private Loop buildEmptyLoop(String id, String page, String maxPage, Sequence sequence, boolean isPaginated) {
+    private Loop buildEmptyLoop(String id, Sequence sequence) {
         Loop loop = new Loop();
         loop.setComponentType(ComponentTypeEnum.LOOP);
         loop.setId(id);
-        loop.setPage(page);
-        loop.setMaxPage(maxPage);
         loop.setHierarchy(buildHierarchy(sequence));
-        loop.setPaginatedLoop(isPaginated);
         return loop;
     }
 
     private Hierarchy buildHierarchy(Sequence sequence) {
         SequenceDescription sequenceDescription = new SequenceDescription();
         sequenceDescription.setId(sequence.getId());
-        sequenceDescription.setPage(sequence.getPage());
         Hierarchy hierarchy = new Hierarchy();
         hierarchy.setSequence(sequenceDescription);
         return hierarchy;
@@ -309,7 +264,6 @@ class LunaticRegroupementProcessingTest {
 
         SequenceDescription subsequenceDescription = new SequenceDescription();
         subsequenceDescription.setId(subsequence.getId());
-        subsequenceDescription.setPage(subsequence.getGoToPage());
 
         hierarchy.setSubSequence(subsequenceDescription);
         return hierarchy;
@@ -321,10 +275,9 @@ class LunaticRegroupementProcessingTest {
         return response;
     }
 
-    private PairwiseLinks buildEmptyPairWiseLinks(String id, String page, Sequence sequence, Subsequence subsequence) {
+    private PairwiseLinks buildEmptyPairWiseLinks(String id, Sequence sequence, Subsequence subsequence) {
         PairwiseLinks pairwiseLinks = new PairwiseLinks();
         pairwiseLinks.setId(id);
-        pairwiseLinks.setPage(page);
         pairwiseLinks.setComponentType(ComponentTypeEnum.PAIRWISE_LINKS);
         pairwiseLinks.setHierarchy(buildHierarchy(sequence, subsequence));
         return pairwiseLinks;
