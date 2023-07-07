@@ -1224,21 +1224,21 @@
             <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <xsl:for-each select="$related-questions//Question">
                 <xsl:if test="not(preceding-sibling::Question[@id = current()/@id])">
-                    <d:SourceQuestion>
+                    <d:InputQuestionReference>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                         <r:ID><xsl:value-of select="@id"/></r:ID>
                         <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                         <r:TypeOfObject><xsl:value-of select="@type"/></r:TypeOfObject>
-                    </d:SourceQuestion>
+                    </d:InputQuestionReference>
                 </xsl:if>
             </xsl:for-each>
             <xsl:for-each select="$related-variables">
-                <d:SourceVariable>
+                <d:InputVariableReference>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                     <r:ID><xsl:value-of select="enoddi33:get-id(.)"/></r:ID>
                     <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                     <r:TypeOfObject>Variable</r:TypeOfObject>
-                </d:SourceVariable>
+                </d:InputVariableReference>
             </xsl:for-each>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>

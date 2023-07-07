@@ -15237,54 +15237,54 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>jbcggtca-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceQuestion>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>j4nwc63q</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceVariable>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>kbrnt6wl</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>kbrnnrzt</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>kbrnizqp</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>kbrnq58i</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>kbrnol5q</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>kbrnrvw8</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>kbrnxlbs</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>xpath</r:ProgramLanguage>
