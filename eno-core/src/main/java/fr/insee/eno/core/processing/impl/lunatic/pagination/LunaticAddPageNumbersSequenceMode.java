@@ -1,12 +1,12 @@
  package fr.insee.eno.core.processing.impl.lunatic.pagination;
 
-import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
-import fr.insee.lunatic.model.flat.ComponentType;
-import fr.insee.lunatic.model.flat.ComponentTypeEnum;
-import fr.insee.lunatic.model.flat.Loop;
-import fr.insee.lunatic.model.flat.Subsequence;
+ import fr.insee.eno.core.exceptions.business.LunaticLoopResolutionException;
+ import fr.insee.lunatic.model.flat.ComponentType;
+ import fr.insee.lunatic.model.flat.ComponentTypeEnum;
+ import fr.insee.lunatic.model.flat.Loop;
+ import fr.insee.lunatic.model.flat.Subsequence;
 
-import java.util.List;
+ import java.util.List;
 
 /**
  * Post processing of a lunatic questionnaire. With this processing, one sequence is displayed on each page.
@@ -50,7 +50,7 @@ public class LunaticAddPageNumbersSequenceMode extends LunaticAddPageNumbersAllM
     private boolean shouldLoopBePaginated(Loop loop) {
         List<ComponentType> loopComponents = loop.getComponents();
         if(loopComponents == null || loopComponents.isEmpty()) {
-            throw new LunaticSerializationException(String.format("Loop %s should have components inside", loop.getId()));
+            throw new LunaticLoopResolutionException(String.format("Loop %s should have components inside", loop.getId()));
         }
 
         return loopComponents.get(0).getComponentType().equals(ComponentTypeEnum.SEQUENCE);
