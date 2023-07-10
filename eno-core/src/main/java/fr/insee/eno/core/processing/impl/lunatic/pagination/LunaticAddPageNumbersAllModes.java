@@ -6,10 +6,8 @@ import fr.insee.lunatic.model.flat.*;
 import java.util.*;
 
     /**
-     * Post processing of a lunatic questionnaire. Without this processing, one question is displayed on each page.
-     * This post processing permits to regroup questions of a questionnaire in same pages
-     * /!\ We assume variables defined in a regroupement are consecutive and in the same order as their
-     * corresponding components in the questionnaire
+     * Abstract Post processing of a lunatic questionnaire. This processing handles the global flow of the pagination processing,
+     * letting concrete classes to implement specific details about how the pagination increment/loops/subsequences are handled
      */
     public abstract class LunaticAddPageNumbersAllModes implements OutProcessingInterface<Questionnaire> {
         // The sequence pages is filled during the questionnaire processing
