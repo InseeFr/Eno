@@ -25,7 +25,6 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 public class PairwiseQuestion extends SingleResponseQuestion {
 
     Response response = null;
-    boolean mandatory = true; //TODO: see if it should be true, false or null
 
     /** Name of the variable to be used for the question iterations. */
     @DDI(contextType = QuestionItemType.class,
