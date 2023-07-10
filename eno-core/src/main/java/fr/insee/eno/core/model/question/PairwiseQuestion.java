@@ -3,9 +3,9 @@ package fr.insee.eno.core.model.question;
 import datacollection33.QuestionItemType;
 import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.lunatic.model.flat.LabelType;
 import fr.insee.lunatic.model.flat.PairwiseLinks;
 import lombok.Getter;
@@ -39,7 +39,13 @@ public class PairwiseQuestion extends SingleResponseQuestion {
      */
     @DDI(contextType = QuestionItemType.class, field = "T(java.util.List).of(#this)")
     @Lunatic(contextType = PairwiseLinks.class, field = "getComponents()")
-    List<UniqueChoiceQuestion> uniqueChoiceQuestions = new ArrayList<>();
+    List<PairwiseUniqueChoiceQuestion> uniqueChoiceQuestions = new ArrayList<>();
+
+    /** Lunatic component type property.
+     * This should be inserted by Lunatic-Model serializer later on. */
+    @Lunatic(contextType = PairwiseLinks.class,
+            field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
+    String lunaticComponentType = "PAIRWISE_LINKS";
 
     public static void computeLunaticAxes(PairwiseLinks lunaticPairwiseLinks, String loopVariableName) {
         LabelType xAxis = new LabelType();
@@ -52,11 +58,4 @@ public class PairwiseQuestion extends SingleResponseQuestion {
         lunaticPairwiseLinks.setXAxisIterations(xAxis);
         lunaticPairwiseLinks.setYAxisIterations(yAxis);
     }
-
-    /** Lunatic component type property.
-     * This should be inserted by Lunatic-Model serializer later on. */
-    @Lunatic(contextType = PairwiseLinks.class,
-            field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
-    String lunaticComponentType = "PAIRWISE_LINKS";
-
 }
