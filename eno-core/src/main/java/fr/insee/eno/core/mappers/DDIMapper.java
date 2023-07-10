@@ -35,20 +35,22 @@ import java.util.List;
 public class DDIMapper extends Mapper {
 
     /** Index created in the entry object of mapping functions. */
-    private EnoIndex index;
+    private EnoIndex enoIndex;
+
+    private DDIIndex ddiIndex;
 
     private EvaluationContext setup(AbstractIdentifiableType ddiObject, EnoObject enoObject) {
         log.debug("DDI mapping entry object: " + ddiToString(ddiObject));
         // Index DDI object
-        DDIIndex ddiIndex = new DDIIndex();
+        ddiIndex = new DDIIndex();
         ddiIndex.indexDDIObject(ddiObject);
         log.debug("DDI index: " + ddiIndex);
         // Init the context and put the DDI index
         EvaluationContext context = new StandardEvaluationContext();
         context.setVariable("index", ddiIndex);
         // Eno index to be filled by the mapper
-        index = new EnoIndex();
-        enoObject.setIndex(index);
+        enoIndex = new EnoIndex();
+        enoObject.setIndex(enoIndex);
         // Set static methods to be used during mapping
         DDIBindings.setMethods(context);
         //
@@ -97,7 +99,7 @@ public class DDIMapper extends Mapper {
         // Note: it is important to do this after that the mapping has been done
         // (otherwise the object id is not set).
         if (enoObject instanceof EnoIdentifiableObject enoIdentifiableObject) {
-            index.put(enoIdentifiableObject.getId(), enoIdentifiableObject);
+            enoIndex.put(enoIdentifiableObject.getId(), enoIdentifiableObject);
         }
 
     }
@@ -225,7 +227,7 @@ public class DDIMapper extends Mapper {
                     EnoObject enoObject2;
                     // If the list content type is abstract call the converter
                     if (Modifier.isAbstract(modelTargetType.getModifiers())) {
-                        enoObject2 = DDIConverter.instantiateFromDDIObject(ddiObject2); //TODO: remove usage of this (conversion using annotations)
+                        enoObject2 = DDIConverter.instantiateFromDDIObject(ddiObject2, ddiIndex); //TODO: remove usage of this (conversion using annotations)
                     }
                     // Else, call class constructor
                     else {

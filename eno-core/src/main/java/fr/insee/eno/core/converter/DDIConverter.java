@@ -6,10 +6,9 @@ import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.navigation.LinkedLoop;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.*;
+import fr.insee.eno.core.reference.DDIIndex;
 import lombok.extern.slf4j.Slf4j;
-import reusable33.RepresentationType;
-import reusable33.StandardKeyValuePairType;
-import reusable33.TextDomainType;
+import reusable33.*;
 
 import java.util.Set;
 
@@ -28,11 +27,11 @@ public class DDIConverter {
      *
      * @return A Eno model object.
      */
-    public static EnoObject instantiateFromDDIObject(Object ddiObject) {
+    public static EnoObject instantiateFromDDIObject(Object ddiObject, DDIIndex ddiIndex) {
         if (ddiObject instanceof LoopType loopType)
             return instantiateFrom(loopType);
         else if (ddiObject instanceof QuestionItemType questionItemType)
-            return instantiateFrom(questionItemType);
+            return instantiateFrom(questionItemType, ddiIndex);
         else if (ddiObject instanceof QuestionGridType questionGridType)
             return instantiateFrom(questionGridType);
         else if (ddiObject instanceof GridResponseDomainInMixedType gridResponseDomainInMixedType)
@@ -54,21 +53,31 @@ public class DDIConverter {
         }
     }
 
-    public static EnoObject instantiateFrom(QuestionItemType questionItemType) {
+    public static EnoObject instantiateFrom(QuestionItemType questionItemType, DDIIndex ddiIndex) {
         RepresentationType representationType = questionItemType.getResponseDomain();
+        DomainReferenceType referenceType = questionItemType.getResponseDomainReference();
+
         if (representationType instanceof NominalDomainType) {
             return new BooleanQuestion();
         }
-        else if (representationType instanceof TextDomainType) {
+
+        if (representationType instanceof TextDomainType) {
             return new TextQuestion();
         }
-        else if (representationType instanceof NumericDomainType) {
+
+        if (representationType instanceof NumericDomainType) {
             return new NumericQuestion();
         }
-        else if (representationType instanceof DateTimeDomainType dateTimeDomainType) {
+
+        if (representationType instanceof DateTimeDomainType dateTimeDomainType) {
             return convertDateTimeQuestion(dateTimeDomainType);
         }
-        else if (representationType instanceof CodeDomainType) {
+
+        if(referenceType != null && referenceType.getTypeOfObject().equals(TypeOfObjectType.MANAGED_DATE_TIME_REPRESENTATION)) {
+            return convertDateTimeQuestion(referenceType, ddiIndex);
+        }
+
+        if (representationType instanceof CodeDomainType) {
             if (! questionItemType.getUserAttributePairList().isEmpty()) {
                 StandardKeyValuePairType userAttributePair = questionItemType.getUserAttributePairArray(0);
                 String attributeKey = userAttributePair.getAttributeKey().getStringValue();
@@ -88,15 +97,29 @@ public class DDIConverter {
             }
 
         }
-        else {
-            throw new ConversionException(
-                    "Unable to identify question type in DDI question item " +
-                            questionItemType.getIDArray(0).getStringValue());
-        }
+
+        throw new ConversionException(
+                "Unable to identify question type in DDI question item " +
+                        questionItemType.getIDArray(0).getStringValue());
+
     }
 
     private static EnoObject convertDateTimeQuestion(DateTimeDomainType dateTimeDomainType) {
         String dateTypeCode = dateTimeDomainType.getDateTypeCode().getStringValue();
+        if (DDI_DATE_TYPE_CODE.contains(dateTypeCode))
+            return new DateQuestion();
+        if (DDI_DURATION_TYPE_CODE.contains(dateTypeCode)) {
+            return new DurationQuestion();
+        }
+        // If none match, thrown an exception
+        throw new ConversionException("Unknown date type code: "+dateTypeCode);
+    }
+
+    private static EnoObject convertDateTimeQuestion(DomainReferenceType referenceType, DDIIndex ddiIndex) {
+        AbstractIdentifiableType ddiObject = ddiIndex.get(referenceType.getIDArray(0).getStringValue());
+        ManagedDateTimeRepresentationType dateTimeRepresentation = (ManagedDateTimeRepresentationType) ddiObject;
+        String dateTypeCode = dateTimeRepresentation.getDateTypeCode().getStringValue();
+
         if (DDI_DATE_TYPE_CODE.contains(dateTypeCode))
             return new DateQuestion();
         if (DDI_DURATION_TYPE_CODE.contains(dateTypeCode)) {
