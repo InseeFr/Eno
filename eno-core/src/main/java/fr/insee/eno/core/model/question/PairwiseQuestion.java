@@ -10,6 +10,7 @@ import fr.insee.lunatic.model.flat.LabelType;
 import fr.insee.lunatic.model.flat.PairwiseLinks;
 import lombok.Getter;
 import lombok.Setter;
+import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +38,9 @@ public class PairwiseQuestion extends SingleResponseQuestion {
      * The pairwise question object encapsulates a unique choice question.
      * (During data collection, the collection is iterated several times to establish each link between individuals.)
      */
-    @DDI(contextType = QuestionItemType.class, field = "T(java.util.List).of(#this)")
+    @DDI(contextType = QuestionItemType.class, field = "T(fr.insee.eno.core.model.question.PairwiseQuestion).createQuestionForUniqueChoice(#this)")
     @Lunatic(contextType = PairwiseLinks.class, field = "getComponents()")
-    List<PairwiseUniqueChoiceQuestion> uniqueChoiceQuestions = new ArrayList<>();
+    List<UniqueChoiceQuestion> uniqueChoiceQuestions = new ArrayList<>();
 
     /** Lunatic component type property.
      * This should be inserted by Lunatic-Model serializer later on. */
@@ -57,5 +58,17 @@ public class PairwiseQuestion extends SingleResponseQuestion {
         yAxis.setType(Constant.LUNATIC_LABEL_VTL_MD);
         lunaticPairwiseLinks.setXAxisIterations(xAxis);
         lunaticPairwiseLinks.setYAxisIterations(yAxis);
+    }
+
+    /**
+     *
+     * @param questionItemType question item type corresponding to the pairwise
+     * @return question item type for the ucq
+     */
+    public static List<QuestionItemType> createQuestionForUniqueChoice(QuestionItemType questionItemType) {
+        ModelMapper mapper = new ModelMapper();
+        QuestionItemType questionItemUniqueChoice = mapper.map(questionItemType, QuestionItemType.class);
+        questionItemUniqueChoice.getIDArray(0).setStringValue(questionItemType.getIDArray(0).getStringValue()+"-pairwise-dropdown");
+        return List.of(questionItemUniqueChoice);
     }
 }
