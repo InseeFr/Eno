@@ -8,8 +8,8 @@ import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.declaration.Instruction;
 import fr.insee.eno.core.model.label.Label;
+import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.eno.core.model.navigation.Control;
-import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.lunatic.model.flat.Subsequence;
 import lombok.Getter;
 import lombok.Setter;
@@ -50,14 +50,9 @@ public abstract class AbstractSequence extends EnoIdentifiableObject implements 
     @Lunatic(contextType = {fr.insee.lunatic.model.flat.SequenceType.class, Subsequence.class}, field = "getControls()")
     private final List<Control> controls = new ArrayList<>();
 
-    /** Sequence / subsequence filter.
-     * In DDI, the filters are mapped in the questionnaire object.
-     * If there is a declared filter for this sequence / subsequence, it is put here through a 'processing' class.
-     * Otherwise, there is a default filter (with expression "true").
-     * In Lunatic, a ComponentType object has a ConditionFilter object. */
     @Lunatic(contextType = {fr.insee.lunatic.model.flat.SequenceType.class, Subsequence.class},
             field = "setConditionFilter(#param)")
-    private Filter filter = new Filter();
+    private ComponentFilter componentFilter = new ComponentFilter();
 
     /** Ordered list of all items in the sequence / subsequence.
      * Important note: if a loop is defined over a sequence or subsequence, the sequence item will correspond to

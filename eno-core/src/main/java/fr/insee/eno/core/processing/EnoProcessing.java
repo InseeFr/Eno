@@ -1,8 +1,8 @@
 package fr.insee.eno.core.processing;
 
-import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.processing.impl.*;
 import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.eno.core.reference.EnoIndex;
@@ -50,6 +50,8 @@ public class EnoProcessing {
         new EnoAddNumberingInQuestions(parameters.getQuestionNumberingMode()).apply(enoQuestionnaire);
         if (parameters.isArrowCharInQuestions())
             new EnoAddArrowCharInQuestions(enoCatalog).apply(enoQuestionnaire);
+        //
+        new EnoInsertComponentFilters().apply(enoQuestionnaire);
     }
 
     private void ddiTechnicalProcessing(EnoQuestionnaire enoQuestionnaire) {
@@ -58,7 +60,6 @@ public class EnoProcessing {
         new DDIResolveExpressions().apply(enoQuestionnaire);
         new DDIInsertDeclarations().apply(enoQuestionnaire);
         new DDIInsertControls().apply(enoQuestionnaire);
-        new DDIInsertFilters().apply(enoQuestionnaire);
         new DDIResolveSequencesStructure().apply(enoQuestionnaire);
     }
 

@@ -2,20 +2,20 @@ package fr.insee.eno.core.converter;
 
 import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.exceptions.technical.ConversionException;
+import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.declaration.Instruction;
+import fr.insee.eno.core.model.label.DynamicLabel;
+import fr.insee.eno.core.model.label.Label;
+import fr.insee.eno.core.model.label.QuestionnaireLabel;
+import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.eno.core.model.navigation.Control;
-import fr.insee.eno.core.model.navigation.Filter;
+import fr.insee.eno.core.model.question.*;
 import fr.insee.eno.core.model.response.CodeResponse;
 import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.Subsequence;
-import fr.insee.eno.core.model.calculated.CalculatedExpression;
-import fr.insee.eno.core.model.label.DynamicLabel;
-import fr.insee.eno.core.model.label.Label;
-import fr.insee.eno.core.model.label.QuestionnaireLabel;
-import fr.insee.eno.core.model.question.*;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +46,7 @@ public class LunaticConverter {
             return new DeclarationType();
         if (enoObject instanceof Control)
             return new ControlType();
-        if (enoObject instanceof Filter)
+        if (enoObject instanceof ComponentFilter)
             return new ConditionFilterType();
         if (enoObject instanceof SingleResponseQuestion singleResponseQuestion)
             return instantiateFrom(singleResponseQuestion);
