@@ -14,21 +14,29 @@ import lombok.Setter;
 public class DurationQuestion extends SingleResponseQuestion {
 
     /**
-     * Duration format.
-     */
-    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain().getDateFieldFormat().getStringValue()")
-    private String format;
-
-    /**
      * Minimum duration value allowed.
      */
-    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain().getRangeArray(0)?.getMinimumValue()?.getStringValue()")
+    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain() != null ? " +
+            "getResponseDomain().getRangeArray(0)?.getMinimumValue()?.getStringValue() : " +
+            "#index.get(#this.getResponseDomainReference().getIDArray(0).getStringValue())" +
+            ".getRangeArray(0)?.getMinimumValue()?.getStringValue()")
     private String minValue;
 
     /**
      * Maximum duration value allowed.
      */
-    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain().getRangeArray(0)?.getMaximumValue()?.getStringValue()")
+    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain() != null ? " +
+            "getResponseDomain().getRangeArray(0)?.getMaximumValue()?.getStringValue() : " +
+            "#index.get(#this.getResponseDomainReference().getIDArray(0).getStringValue())" +
+            ".getRangeArray(0)?.getMaximumValue()?.getStringValue()")
     private String maxValue;
 
+    /**
+     * Duration format.
+     */
+    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain() != null ? " +
+            "getResponseDomain().getDateFieldFormat().getStringValue() : " +
+            "#index.get(#this.getResponseDomainReference().getIDArray(0).getStringValue())" +
+            ".getDateFieldFormat().getStringValue()")
+    private String format;
 }
