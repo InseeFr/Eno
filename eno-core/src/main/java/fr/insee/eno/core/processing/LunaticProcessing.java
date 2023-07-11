@@ -3,9 +3,10 @@ package fr.insee.eno.core.processing;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.impl.*;
+import fr.insee.eno.core.processing.impl.lunatic.pagination.LunaticAddPageNumbers;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.reference.LunaticCatalog;
-import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.Questionnaire;
 
 public class LunaticProcessing {
 
@@ -40,8 +41,8 @@ public class LunaticProcessing {
 
         new LunaticAddBindingDependencies(lunaticCatalog, enoIndex).apply(lunaticQuestionnaire);
         new LunaticAddMissingVariables(parameters.isMissingVariables()).apply(lunaticQuestionnaire);
-        new LunaticAddPageNumbers(parameters.getLunaticPaginationMode()).apply(lunaticQuestionnaire);
         new LunaticAddHierarchy().apply(lunaticQuestionnaire);
+        new LunaticAddPageNumbers(parameters.getLunaticPaginationMode()).apply(lunaticQuestionnaire);
     }
 
 }
