@@ -43,7 +43,6 @@ public class LunaticAddHierarchy implements OutProcessingInterface<Questionnaire
         SequenceDescription sequenceDescription = new SequenceDescription();
         sequenceDescription.setId(sequence.getId());
         sequenceDescription.setLabel(sequence.getLabel());
-        sequenceDescription.setPage(sequence.getPage());
         return sequenceDescription;
     }
 
@@ -51,10 +50,6 @@ public class LunaticAddHierarchy implements OutProcessingInterface<Questionnaire
         SequenceDescription sequenceDescription = new SequenceDescription();
         sequenceDescription.setId(subsequence.getId());
         sequenceDescription.setLabel(subsequence.getLabel());
-        if (subsequence.getDeclarations().isEmpty())
-            sequenceDescription.setPage(subsequence.getGoToPage());
-        else
-            sequenceDescription.setPage(subsequence.getPage());
         return sequenceDescription;
     }
 

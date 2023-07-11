@@ -19,14 +19,20 @@ public class DateQuestion extends SingleResponseQuestion {
     /**
      * Minimum date value allowed.
      */
-    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain().getRangeArray(0)?.getMinimumValue()?.getStringValue()")
+    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain() != null ? " +
+                    "getResponseDomain().getRangeArray(0)?.getMinimumValue()?.getStringValue() : " +
+                    "#index.get(#this.getResponseDomainReference().getIDArray(0).getStringValue())" +
+                    ".getRangeArray(0)?.getMinimumValue()?.getStringValue()")
     @Lunatic(contextType = Datepicker.class, field = "setMin(#param)")
     private String minValue;
 
     /**
      * Maximum date value allowed.
      */
-    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain().getRangeArray(0)?.getMaximumValue()?.getStringValue()")
+    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain() != null ? " +
+            "getResponseDomain().getRangeArray(0)?.getMaximumValue()?.getStringValue() : " +
+            "#index.get(#this.getResponseDomainReference().getIDArray(0).getStringValue())" +
+            ".getRangeArray(0)?.getMaximumValue()?.getStringValue()")
     @Lunatic(contextType = Datepicker.class, field = "setMax(#param)")
     private String maxValue;
 
@@ -34,7 +40,10 @@ public class DateQuestion extends SingleResponseQuestion {
      * Date format.
      * This property is a String in both DDI and Lunatic.
      */
-    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain().getDateFieldFormat().getStringValue()")
+    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain() != null ? " +
+            "getResponseDomain().getDateFieldFormat().getStringValue() : " +
+            "#index.get(#this.getResponseDomainReference().getIDArray(0).getStringValue())" +
+            ".getDateFieldFormat().getStringValue()")
     @Lunatic(contextType = Datepicker.class, field = "setDateFormat(#param)")
     private String format;
 
