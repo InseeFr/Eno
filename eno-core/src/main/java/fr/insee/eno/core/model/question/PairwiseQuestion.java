@@ -25,6 +25,8 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @Context(format = Format.LUNATIC, type = PairwiseLinks.class)
 public class PairwiseQuestion extends SingleResponseQuestion {
 
+    //!\ We need to redefine response here as parent class is mapping a wrong response attribute for the pairwise case
+    // not a really good solution, could be refactored
     Response response = null;
 
     /** Name of the variable to be used for the question iterations. */
