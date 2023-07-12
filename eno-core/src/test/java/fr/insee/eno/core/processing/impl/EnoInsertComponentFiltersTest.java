@@ -45,7 +45,7 @@ class EnoInsertComponentFiltersTest {
         // Then
         assertNotNull(enoQuestionnaire.getSequences().get(0).getComponentFilter());
         assertEquals("(FOO_VARIABLE = 1)",
-                enoQuestionnaire.getSequences().get(0).getComponentFilter().getExpression().getValue());
+                enoQuestionnaire.getSequences().get(0).getComponentFilter().getValue());
     }
 
 }
