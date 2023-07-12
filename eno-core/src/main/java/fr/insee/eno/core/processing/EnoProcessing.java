@@ -61,6 +61,7 @@ public class EnoProcessing {
         new DDIInsertDeclarations().apply(enoQuestionnaire);
         new DDIInsertControls().apply(enoQuestionnaire);
         new DDIResolveSequencesStructure().apply(enoQuestionnaire);
+        new DDIResolveFiltersScope().apply(enoQuestionnaire);
     }
 
     private void poguesTechnicalProcessing(EnoQuestionnaire enoQuestionnaire) {
