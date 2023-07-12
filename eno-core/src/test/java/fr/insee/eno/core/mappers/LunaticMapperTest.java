@@ -6,7 +6,6 @@ import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.SequenceType;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -56,7 +55,7 @@ class LunaticMapperTest {
         //
         List<ComponentType> lunaticSequences = lunaticQuestionnaire.getComponents()
                 .stream()
-                .filter(componentType -> componentType instanceof SequenceType)
+                .filter(componentType -> componentType instanceof fr.insee.lunatic.model.flat.Sequence)
                 .toList();
         assertEquals("s1-id", lunaticSequences.get(0).getId());
         assertEquals("s2-id", lunaticSequences.get(1).getId());

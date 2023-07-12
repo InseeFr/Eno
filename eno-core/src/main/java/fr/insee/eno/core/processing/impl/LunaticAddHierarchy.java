@@ -27,7 +27,7 @@ public class LunaticAddHierarchy implements OutProcessingInterface<Questionnaire
             if (component instanceof Loop loop) {
                 generateHierarchy(loop.getComponents(), currentSequenceDescription, currentSubsequenceDescription);
             }
-            if (component instanceof SequenceType sequence) {
+            if (component instanceof Sequence sequence) {
                 currentSequenceDescription = createDescription(sequence);
                 currentSubsequenceDescription = null;
             } else if (component instanceof Subsequence subsequence) {
@@ -39,11 +39,10 @@ public class LunaticAddHierarchy implements OutProcessingInterface<Questionnaire
         }
     }
 
-    private static SequenceDescription createDescription(SequenceType sequence) {
+    private static SequenceDescription createDescription(Sequence sequence) {
         SequenceDescription sequenceDescription = new SequenceDescription();
         sequenceDescription.setId(sequence.getId());
         sequenceDescription.setLabel(sequence.getLabel());
-        sequenceDescription.setPage(sequence.getPage());
         return sequenceDescription;
     }
 
@@ -51,10 +50,6 @@ public class LunaticAddHierarchy implements OutProcessingInterface<Questionnaire
         SequenceDescription sequenceDescription = new SequenceDescription();
         sequenceDescription.setId(subsequence.getId());
         sequenceDescription.setLabel(subsequence.getLabel());
-        if (subsequence.getDeclarations().isEmpty())
-            sequenceDescription.setPage(subsequence.getGoToPage());
-        else
-            sequenceDescription.setPage(subsequence.getPage());
         return sequenceDescription;
     }
 

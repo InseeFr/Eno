@@ -53,7 +53,7 @@ class LunaticLoopResolutionTest {
         enoQuestionnaire.setIndex(enoIndex);
         //
         lunaticQuestionnaire = new Questionnaire();
-        SequenceType lunaticSequence = new SequenceType();
+        fr.insee.lunatic.model.flat.Sequence lunaticSequence = new fr.insee.lunatic.model.flat.Sequence();
         lunaticSequence.setId(SEQUENCE_ID);
         Input lunaticTextQuestion = new Input();
         lunaticTextQuestion.setId(QUESTION_ID);

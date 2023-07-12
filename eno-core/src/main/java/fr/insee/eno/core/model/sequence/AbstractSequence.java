@@ -19,14 +19,14 @@ import java.util.List;
 
 /** Abstract object for sequence and subsequence.
  * In DDI, a sequence or subsequence is a SequenceType object.
- * In Lunatic, a sequence is a SequenceType, a subsequence is a Subsequence object. */
+ * In Lunatic, a sequence is a Sequence object, a subsequence is a Subsequence object. */
 @Getter
 @Setter
 public abstract class AbstractSequence extends EnoIdentifiableObject implements EnoComponent {
 
     /** Sequence / subsequence label. */
     @DDI(contextType = SequenceType.class, field = "getLabelArray(0)")
-    @Lunatic(contextType = {fr.insee.lunatic.model.flat.SequenceType.class, Subsequence.class}, field = "setLabel(#param)")
+    @Lunatic(contextType = {fr.insee.lunatic.model.flat.Sequence.class, Subsequence.class}, field = "setLabel(#param)")
     Label label;
 
     /** Sequence / subsequence instructions.
@@ -34,7 +34,7 @@ public abstract class AbstractSequence extends EnoIdentifiableObject implements 
      * In Lunatic, instructions and declarations belongs to the same list. */
     @DDI(contextType = SequenceType.class,
             field = "getInterviewerInstructionReferenceList().![#index.get(#this.getIDArray(0).getStringValue())]")
-    @Lunatic(contextType = {fr.insee.lunatic.model.flat.SequenceType.class, Subsequence.class}, field = "getDeclarations()")
+    @Lunatic(contextType = {fr.insee.lunatic.model.flat.Sequence.class, Subsequence.class}, field = "getDeclarations()")
     private final List<Instruction> instructions = new ArrayList<>();
 
     /** Sequence / subsequence declarations.
@@ -47,10 +47,15 @@ public abstract class AbstractSequence extends EnoIdentifiableObject implements 
     /** Sequence / subsequence controls.
      * In DDI, the controls are mapped in the questionnaire object, and are put here through a 'processing' class.
      * In Lunatic, the sequence / subsequence object has a list of controls. */
-    @Lunatic(contextType = {fr.insee.lunatic.model.flat.SequenceType.class, Subsequence.class}, field = "getControls()")
+    @Lunatic(contextType = {fr.insee.lunatic.model.flat.Sequence.class, Subsequence.class}, field = "getControls()")
     private final List<Control> controls = new ArrayList<>();
 
-    @Lunatic(contextType = {fr.insee.lunatic.model.flat.SequenceType.class, Subsequence.class},
+    /** Sequence / subsequence filter.
+     * In DDI, the filters are mapped in the questionnaire object.
+     * If there is a declared filter for this sequence / subsequence, it is put here through a 'processing' class.
+     * Otherwise, there is a default filter (with expression "true").
+     * In Lunatic, a ComponentType object has a ConditionFilter object. */
+    @Lunatic(contextType = {fr.insee.lunatic.model.flat.Sequence.class, Subsequence.class},
             field = "setConditionFilter(#param)")
     private ComponentFilter componentFilter = new ComponentFilter();
 
