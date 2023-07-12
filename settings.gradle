@@ -9,6 +9,12 @@ dependencyResolutionManagement {
 
     repositories {
         mavenCentral()
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots"
+            mavenContent {
+                snapshotsOnly()
+            }
+        }
         // Temporary config for private maven repository (for Pogues-Model and Lunatic-Model)
         maven { url System.properties['urlMavenRepo'] }
         // Temporary config if you choose to install Pogues-Model and Lunatic-Model locally
