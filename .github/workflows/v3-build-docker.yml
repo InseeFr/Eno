@@ -7,7 +7,6 @@ on:
       - v3.*
 
 env:
-  LUNATIC_BRANCH: dev-eno-v3
   POGUES_BRANCH: main
 
 jobs:
@@ -24,17 +23,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-
-      - name: Checkout Lunatic model repo
-        uses: actions/checkout@v3
-        with:
-          repository: InseeFr/Lunatic-Model
-          ref: ${{ env.LUNATIC_BRANCH }}
-          path: Lunatic-model
-
-      - name: Build Lunatic model
-        working-directory: ./Lunatic-model
-        run: mvn install -Djar.finalName="lunatic-model" -B -V --file pom.xml
 
       - name: Checkout Pogues model repo
         uses: actions/checkout@v3
