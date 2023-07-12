@@ -3,26 +3,23 @@ package fr.insee.eno.core.processing.impl;
 import fr.insee.eno.core.model.lunatic.CleaningConcernedVariable;
 import fr.insee.eno.core.model.lunatic.CleaningVariable;
 import fr.insee.eno.core.processing.OutProcessingInterface;
-import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.lunatic.model.flat.*;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
-@AllArgsConstructor
 @Slf4j
 public class LunaticAddCleaningVariables implements OutProcessingInterface<Questionnaire> {
-    private EnoCatalog enoCatalog;
-
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
         List<ComponentType> components = lunaticQuestionnaire.getComponents();
         List<CleaningVariable> cleaningVariables = createCleaningVariables(components);
 
-        CleaningType cleaningType = lunaticQuestionnaire.getCleaning();
-        if(cleaningType == null) {
-           cleaningType = new CleaningType();
+        CleaningType cleaningType = new CleaningType();
+        lunaticQuestionnaire.setCleaning(cleaningType);
+
+        if(cleaningVariables.isEmpty()) {
+            return;
         }
         cleaningType.getAny().addAll(groupCleaningVariables(cleaningVariables));
     }
@@ -45,13 +42,14 @@ public class LunaticAddCleaningVariables implements OutProcessingInterface<Quest
 
                     if(componentType instanceof ComponentMultipleResponseType) {
                         cleaningVariables.addAll(createCleaningVariablesFromMultipleResponseComponent(componentType));
-                        return;
-                    }
-
-                    if(componentType instanceof ComponentNestingType nestingComponent) {
-                        cleaningVariables.addAll(createCleaningVariables(nestingComponent.getComponents()));
                     }
         });
+
+        components.stream()
+                .filter(ComponentNestingType.class::isInstance)
+                .map(ComponentNestingType.class::cast)
+                .forEach(nestingComponent -> cleaningVariables.addAll(createCleaningVariables(nestingComponent.getComponents())));
+
         return cleaningVariables;
     }
 
@@ -65,8 +63,13 @@ public class LunaticAddCleaningVariables implements OutProcessingInterface<Quest
             throw new IllegalArgumentException(String.format("Cannot create cleaning variable from this simple response component %s", componentType.getId()));
         }
 
+        List<String> bindingDependencies = componentType.getConditionFilter().getBindingDependencies();
+        if(bindingDependencies.isEmpty()) {
+            return new ArrayList<>();
+        }
+
         CleaningConcernedVariable concernedVariable = new CleaningConcernedVariable(simpleResponseType.getResponse().getName(), componentType.getConditionFilter().getValue());
-        return componentType.getBindingDependencies().stream()
+        return bindingDependencies.stream()
                 .map(bindingDependency -> new CleaningVariable(bindingDependency, List.of(concernedVariable)))
                 .toList();
     }
@@ -80,7 +83,10 @@ public class LunaticAddCleaningVariables implements OutProcessingInterface<Quest
         if(!(componentType instanceof ComponentMultipleResponseType)) {
             throw new IllegalArgumentException(String.format("Cannot create cleaning variable from this multiple response component %s", componentType.getId()));
         }
-
+        List<String> bindingDependencies = componentType.getConditionFilter().getBindingDependencies();
+        if(bindingDependencies.isEmpty()) {
+            return new ArrayList<>();
+        }
         String conditionFilter = componentType.getConditionFilter().getValue();
 
         List<CleaningConcernedVariable> concernedVariables;
@@ -111,18 +117,18 @@ public class LunaticAddCleaningVariables implements OutProcessingInterface<Quest
             default -> throw new IllegalArgumentException(String.format("Cannot create cleaning variable from this multiple response component %s, componentType not defined", componentType.getId()));
         }
 
-        return componentType.getBindingDependencies().stream()
+        return bindingDependencies.stream()
                 .map(bindingDependency -> new CleaningVariable(bindingDependency, concernedVariables))
                 .toList();
     }
 
     /**
      * Regroup cleaning variables with same name together
-     * @param variables
+     * @param variables cleaning variables to regroup
      * @return grouped variables
      */
     private List<CleaningVariable> groupCleaningVariables(List<CleaningVariable> variables) {
-        Map<String, CleaningVariable> groupCleaningVariables = new HashMap<>();
+        Map<String, CleaningVariable> groupCleaningVariables = new LinkedHashMap<>();
         for (CleaningVariable variable : variables) {
             if(!groupCleaningVariables.containsKey(variable.getName())) {
                 groupCleaningVariables.put(variable.getName(), variable);
@@ -130,7 +136,9 @@ public class LunaticAddCleaningVariables implements OutProcessingInterface<Quest
             }
 
             CleaningVariable groupVariable = groupCleaningVariables.get(variable.getName());
-            groupVariable.getConcernedVariables().addAll(variable.getConcernedVariables());
+            List<CleaningConcernedVariable> concernedVariables = new ArrayList<>(groupVariable.getConcernedVariables());
+            concernedVariables.addAll(variable.getConcernedVariables());
+            groupVariable.setConcernedVariables(concernedVariables);
         }
         return groupCleaningVariables.values().stream()
                 .toList();
