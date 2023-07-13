@@ -7,7 +7,7 @@ plugins {
 
 allprojects {
     group = 'fr.insee.eno'
-    version = '3.2.0-SNAPSHOT'
+    version = '3.2.1-SNAPSHOT'
     sourceCompatibility = '17'
 }
 
