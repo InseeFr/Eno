@@ -6,7 +6,7 @@ import fr.insee.lunatic.model.flat.*;
 import lombok.AllArgsConstructor;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.List;
 
 /**
@@ -47,37 +47,37 @@ public class LunaticAddControlFormat implements OutProcessingInterface<Questionn
      * @param number input number to process
      */
     private void createFormatControlsForInputNumber(InputNumber number) {
-        List<ControlType> controls = number.getControls();
         String controlIdPrefix = number.getId() + "-format";
         Double min = number.getMin();
         Double max = number.getMax();
-        BigInteger decimalsCount = number.getDecimals();
+        int decimalsCount = number.getDecimals().intValue();
         String responseName = number.getResponse().getName();
 
+        number.getControls().add(0, createDecimalsFormatControl(controlIdPrefix, responseName, decimalsCount));
+
+
         if(min != null && max != null) {
-            String minValue = formatDoubleValue(min);
-            String maxValue = formatDoubleValue(max);
+            String minValue = formatDoubleValue(min, decimalsCount);
+            String maxValue = formatDoubleValue(max, decimalsCount);
             String controlExpression = String.format("not(not(isnull(%s)) and (%s>%s or %s<%s))", responseName, minValue, responseName, maxValue, responseName);
             String controlErrorMessage = String.format("\" La valeur doit être comprise entre %s et %s.\"", minValue, maxValue);
-            controls.add(createFormatControl(controlIdPrefix+"-borne-inf-sup", controlExpression, controlErrorMessage));
+            number.getControls().add(0, createFormatControl(controlIdPrefix+"-borne-inf-sup", controlExpression, controlErrorMessage));
+            return;
         }
 
         if(min == null && max != null) {
-            String maxValue = formatDoubleValue(max);
+            String maxValue = formatDoubleValue(max, decimalsCount);
             String controlExpression = String.format("not(not(isnull(%s)) and %s<%s)", responseName, maxValue, responseName);
             String controlErrorMessage = String.format("\" La valeur doit être inférieure à %s.\"", maxValue);
-            controls.add(createFormatControl(controlIdPrefix+"-borne-sup", controlExpression, controlErrorMessage));
+            number.getControls().add(0, createFormatControl(controlIdPrefix+"-borne-sup", controlExpression, controlErrorMessage));
+            return;
         }
 
         if(min != null && max == null) {
-            String minValue = formatDoubleValue(min);
+            String minValue = formatDoubleValue(min, decimalsCount);
             String controlExpression = String.format("not(not(isnull(%s)) and %s>%s)", responseName, minValue, responseName);
             String controlErrorMessage = String.format("\" La valeur doit être supérieure à %s.\"", minValue);
-            controls.add(createFormatControl(controlIdPrefix+"-borne-inf", controlExpression, controlErrorMessage));
-        }
-
-        if(decimalsCount != null) {
-            controls.add(createDecimalsFormatControl(controlIdPrefix, responseName, decimalsCount));
+            number.getControls().add(0, createFormatControl(controlIdPrefix+"-borne-inf", controlExpression, controlErrorMessage));
         }
     }
 
@@ -86,7 +86,6 @@ public class LunaticAddControlFormat implements OutProcessingInterface<Questionn
      * @param datepicker date picker to process
      */
     private void createFormatControlsForDatepicker(Datepicker datepicker) {
-        List<ControlType> controls = datepicker.getControls();
         String controlIdPrefix = datepicker.getId() + "-format-date";
         String minValue = datepicker.getMin();
         String maxValue = datepicker.getMax();
@@ -99,23 +98,21 @@ public class LunaticAddControlFormat implements OutProcessingInterface<Questionn
                     "cast(%s, date, \"%s\")>cast(\"%s\", date, \"%s\")))",
                     responseName, responseName, format, minValue, format, responseName, format, maxValue, format);
             String controlErrorMessage = String.format("\"La date saisie doit être comprise entre %s et %s.\"", minValue, maxValue);
-            controls.add(createFormatControl(controlIdPrefix+"-borne-inf-sup", controlExpression, controlErrorMessage));
-            return;
+            datepicker.getControls().add(createFormatControl(controlIdPrefix+"-borne-inf-sup", controlExpression, controlErrorMessage));
         }
 
         if(minValue == null && maxValue != null) {
             String controlExpression = String.format("not(not(isnull(%s)) and (cast(%s, date, \"%s\")>cast(\"%s\", date, \"%s\")))",
                     responseName, responseName, format, maxValue, format);
             String controlErrorMessage = String.format("\"La date saisie doit être antérieure à à %s.\"", maxValue);
-            controls.add(createFormatControl(controlIdPrefix+"-borne-sup", controlExpression, controlErrorMessage));
-            return;
+            datepicker.getControls().add(createFormatControl(controlIdPrefix+"-borne-sup", controlExpression, controlErrorMessage));
         }
 
         if(minValue != null && maxValue == null) {
             String controlExpression = String.format("not(not(isnull(%s)) and (cast(%s, date, \"%s\")<cast(\"%s\", date, \"%s\")))",
                     responseName, responseName, format, minValue, format);
             String controlErrorMessage = String.format("\"La date saisie doit être postérieure à %s.\"", minValue);
-            controls.add(createFormatControl(controlIdPrefix+"-borne-inf", controlExpression, controlErrorMessage));
+            datepicker.getControls().add(createFormatControl(controlIdPrefix+"-borne-inf", controlExpression, controlErrorMessage));
         }
     }
 
@@ -126,8 +123,8 @@ public class LunaticAddControlFormat implements OutProcessingInterface<Questionn
      * @param decimalsCount decimals count allowed after semicolon
      * @return control for a decimal count
      */
-    private ControlType createDecimalsFormatControl(String controlId, String responseName, BigInteger decimalsCount) {
-        String controlExpression = String.format("not(not(isnull(%s)) and round(%s,%d)<>%s)", responseName, responseName, decimalsCount, responseName);
+    private ControlType createDecimalsFormatControl(String controlId, String responseName, int decimalsCount) {
+        String controlExpression = String.format("not(not(isnull(%s))  and round(%s,%d)<>%s)", responseName, responseName, decimalsCount, responseName);
         String controlErrorMessage = String.format("\"Le nombre doit comporter au maximum %d chiffre(s) après la virgule.\"", decimalsCount);
         return createFormatControl(controlId+"-decimal", controlExpression, controlErrorMessage);
     }
@@ -157,7 +154,7 @@ public class LunaticAddControlFormat implements OutProcessingInterface<Questionn
         return control;
     }
     
-    private String formatDoubleValue(Double value) {
-        return BigDecimal.valueOf(value).stripTrailingZeros().toPlainString();
+    private String formatDoubleValue(Double value, int decimalCount) {
+        return BigDecimal.valueOf(value).setScale(decimalCount, RoundingMode.CEILING).toPlainString();
     }
 }

@@ -29,34 +29,57 @@ class LunaticAddControlFormatTest {
         number = new InputNumber();
         number.setComponentType(ComponentTypeEnum.INPUT_NUMBER);
         number.setId("number-id");
+        number.setDecimals(BigInteger.ZERO);
         number.setResponse(buildResponse("NUMBERVAR"));
     }
 
     @Test
-    void shouldInputNumberNotHaveControlsWhenMinMaxDecimalsNotSet() {
+    void shouldInputNumberHaveDecimalsControl() {
         lunaticQuestionnaire = new Questionnaire();
-        lunaticQuestionnaire.getComponents().add(number);
-        processing.apply(lunaticQuestionnaire);
-        assertTrue(number.getControls() == null || number.getControls().isEmpty());
-    }
 
-    @Test
-    void shouldInputNumberHaveDecimalsControlWhenDecimalsSet() {
-        lunaticQuestionnaire = new Questionnaire();
+        number.setDecimals(BigInteger.TEN);
+
         lunaticQuestionnaire.getComponents().add(number);
-        number.setDecimals(BigInteger.ONE);
         processing.apply(lunaticQuestionnaire);
 
         List<ControlType> controls = number.getControls();
         assertEquals(1, controls.size());
         ControlType control = controls.get(0);
 
-        assertEquals("not(not(isnull(NUMBERVAR)) and round(NUMBERVAR,1)<>NUMBERVAR)", control.getControl().getValue());
+        assertEquals("not(not(isnull(NUMBERVAR))  and round(NUMBERVAR,10)<>NUMBERVAR)", control.getControl().getValue());
         assertEquals("VTL", control.getControl().getType());
         assertEquals("VTL|MD", control.getErrorMessage().getType());
         assertEquals("number-id-format-decimal", control.getId());
         assertEquals(ControlTypeOfControlEnum.FORMAT, control.getTypeOfControl());
         assertEquals(ControlCriticityEnum.ERROR, control.getCriticality());
+    }
+
+    @Test
+    void shouldInputNumberHaveScaleOnDecimalValuesWhenDecimalsIsSet() {
+        lunaticQuestionnaire = new Questionnaire();
+
+        number.setDecimals(BigInteger.TEN);
+        number.setMin(5.24);
+        number.setMax(10.12);
+
+        lunaticQuestionnaire.getComponents().add(number);
+        processing.apply(lunaticQuestionnaire);
+
+        List<ControlType> controls = number.getControls();
+
+        ControlType control = controls.get(0);
+        assertEquals("not(not(isnull(NUMBERVAR)) and (5.2400000000>NUMBERVAR or 10.1200000000<NUMBERVAR))", control.getControl().getValue());
+    }
+
+    @Test
+    void shouldInputNumberHaveTwoFormatControlsWhenMinOrMaxSet() {
+        lunaticQuestionnaire = new Questionnaire();
+        lunaticQuestionnaire.getComponents().add(number);
+        number.setMin(5.0);
+        processing.apply(lunaticQuestionnaire);
+
+        List<ControlType> controls = number.getControls();
+        assertEquals(2, controls.size());
     }
 
     @Test
@@ -68,7 +91,7 @@ class LunaticAddControlFormatTest {
         processing.apply(lunaticQuestionnaire);
 
         List<ControlType> controls = number.getControls();
-        assertEquals(1, controls.size());
+        assertEquals(2, controls.size());
         ControlType control = controls.get(0);
 
         assertEquals("not(not(isnull(NUMBERVAR)) and (5>NUMBERVAR or 10<NUMBERVAR))", control.getControl().getValue());
@@ -80,18 +103,6 @@ class LunaticAddControlFormatTest {
     }
 
     @Test
-    void shouldInputNumberHaveTwoFormatControlsIfMinOrMaxAndDecimalsSet() {
-        lunaticQuestionnaire = new Questionnaire();
-        lunaticQuestionnaire.getComponents().add(number);
-        number.setMin(5.0);
-        number.setDecimals(BigInteger.ONE);
-        processing.apply(lunaticQuestionnaire);
-
-        List<ControlType> controls = number.getControls();
-        assertEquals(2, controls.size());
-    }
-
-    @Test
     void shouldInputNumberHaveMinFormatControl() {
         lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(number);
@@ -99,7 +110,7 @@ class LunaticAddControlFormatTest {
         processing.apply(lunaticQuestionnaire);
 
         List<ControlType> controls = number.getControls();
-        assertEquals(1, controls.size());
+        assertEquals(2, controls.size());
         ControlType control = controls.get(0);
 
         assertEquals("not(not(isnull(NUMBERVAR)) and 5>NUMBERVAR)", control.getControl().getValue());
@@ -118,7 +129,7 @@ class LunaticAddControlFormatTest {
         processing.apply(lunaticQuestionnaire);
 
         List<ControlType> controls = number.getControls();
-        assertEquals(1, controls.size());
+        assertEquals(2, controls.size());
         ControlType control = controls.get(0);
 
         assertEquals("not(not(isnull(NUMBERVAR)) and 10<NUMBERVAR)", control.getControl().getValue());
@@ -215,21 +226,7 @@ class LunaticAddControlFormatTest {
         processing.apply(lunaticQuestionnaire);
 
         assertEquals(1, datePicker.getControls().size());
-        assertEquals(1, number.getControls().size());
-    }
-
-
-
-    private ControlType buildControl(String id, String errorMessage, ControlTypeOfControlEnum typeOfControl, ControlCriticityEnum criticality ) {
-        ControlType control = new ControlType();
-        control.setTypeOfControl(typeOfControl);
-        control.setId(id);
-        control.setCriticality(criticality);
-        LabelType label = new LabelType();
-        label.setType("VTL");
-        label.setValue(errorMessage);
-        control.setControl(label);
-        return control;
+        assertEquals(2, number.getControls().size());
     }
 
     private ResponseType buildResponse(String name) {
