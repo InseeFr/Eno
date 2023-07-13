@@ -68,21 +68,23 @@ public class LunaticAddControlFormat implements OutProcessingInterface<Questionn
 
     private List<ControlType> getFormatControlsForBodyLines(List<BodyLine> bodyLines) {
         List<ControlType> controls = new ArrayList<>();
-        bodyLines.forEach(bodyLine -> {
-            if(ComponentTypeEnum.INPUT_NUMBER.value().equals(bodyLine.getComponentType())) {
-                controls.addAll(
-                    getFormatControlsFromInputNumberAttributes(bodyLine.getId(), bodyLine.getMin(), bodyLine.getMax(),
-                            bodyLine.getDecimals().intValue(), bodyLine.getResponse().getName())
-                );
-            }
+        bodyLines.stream()
+                .filter(Objects::nonNull)
+                .forEach(bodyLine -> {
+                    if(ComponentTypeEnum.INPUT_NUMBER.value().equals(bodyLine.getComponentType())) {
+                        controls.addAll(
+                            getFormatControlsFromInputNumberAttributes(bodyLine.getId(), bodyLine.getMin(), bodyLine.getMax(),
+                                    bodyLine.getDecimals().intValue(), bodyLine.getResponse().getName())
+                        );
+                    }
 
-            // TODO: Implements date pickers components correctly in tables/rosters
-            /*
-            if(ComponentTypeEnum.DATEPICKER.value().equals(bodyLine.getComponentType())) {
-                controls.add(
-                        getFormatControlFromDatepickerAttributes(bodyLine.getId(), bodyLine.getMin(), bodyLine.getMax(),
-                                bodyLine.getDecimals().intValue(), bodyLine.getResponse().getName()));
-            }*/
+                    // TODO: Implements date pickers components correctly in tables/rosters
+                    /*
+                    if(ComponentTypeEnum.DATEPICKER.value().equals(bodyLine.getComponentType())) {
+                        controls.add(
+                                getFormatControlFromDatepickerAttributes(bodyLine.getId(), bodyLine.getMin(), bodyLine.getMax(),
+                                        bodyLine.getDecimals().intValue(), bodyLine.getResponse().getName()));
+                    }*/
         });
         return controls;
     }
