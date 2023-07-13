@@ -38,9 +38,7 @@ public abstract class Loop extends EnoIdentifiableObject {
             field = "T(fr.insee.eno.core.model.navigation.Loop).mapSequenceReference(#this)")
     private String sequenceReference; // TODO: to be replaced by a loopScope property analog to what's done for filters
 
-    /** Reference to the sequence or sub-sequence to loop on.
-     * In Lunatic, components within the referenced sequence will be moved in the loop components' list.
-     * This is done in a Lunatic processing.
+    /** Same principle as sequence items list in sequence objects.
      * TODO: waiting for a fix in DDI modeling, this should be a List<StructureItemReference>
      *     with DDI mapping expression:
      *     #index.get(getControlConstructReferenceArray(0).getIDArray(0).getStringValue()).getControlConstructReferenceList()
@@ -48,7 +46,10 @@ public abstract class Loop extends EnoIdentifiableObject {
     @DDI(contextType = LoopType.class, field = "T(java.util.List).of(#this.getControlConstructReference())")
     private final List<ItemReference> loopItems = new ArrayList<>();
 
-    // TODO: doc
+    /** References of sequences or subsequences that are in the scope of the loop.
+     * Note: in Pogues a loop can only be defined on sequence or subsequences.
+     * (In other formats, nothing makes it formally impossible to have loops defined directly on questions.)
+     * In DDI, this property is filled by a processing using the "loopItems" property. */
     private final List<StructureItemReference> loopScope = new ArrayList<>();
 
     public static String mapSequenceReference(LoopType ddiLoop) {

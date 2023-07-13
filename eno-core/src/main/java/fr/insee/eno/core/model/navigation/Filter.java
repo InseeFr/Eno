@@ -33,7 +33,8 @@ public class Filter extends EnoIdentifiableObject implements EnoObjectWithExpres
                     ".getControlConstructReferenceList()")
     private List<ItemReference> filterItems = new ArrayList<>();
 
-    /** References of sequences, subsequences and questions that are in the filter of the scope. */
+    /** References of sequences, subsequences or/and questions that are in the scope of the filter.
+     * In DDI, this property is filled by a processing using the "filterItems" property. */
     private final List<StructureItemReference> filterScope = new ArrayList<>();
 
 }
