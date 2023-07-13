@@ -7,7 +7,9 @@ import lombok.AllArgsConstructor;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Processing adding format controls to components
@@ -31,6 +33,16 @@ public class LunaticAddControlFormat implements OutProcessingInterface<Questionn
                         return;
                     }
 
+                    if(componentType instanceof Table table) {
+                        createFormatControlsForTable(table);
+                        return;
+                    }
+
+                    if(componentType instanceof RosterForLoop roster) {
+                        createFormatControlsForRoster(roster);
+                        return;
+                    }
+
                     if(componentType instanceof InputNumber number) {
                         createFormatControlsForInputNumber(number);
                         return;
@@ -42,43 +54,84 @@ public class LunaticAddControlFormat implements OutProcessingInterface<Questionn
                 });
     }
 
+    private void createFormatControlsForTable(Table table) {
+        List<ControlType> controls = table.getControls();
+        for(BodyType bodyType : table.getBody()) {
+            controls.addAll(0, getFormatControlsForBodyLines(bodyType.getBodyLine()));
+        }
+    }
+
+    private void createFormatControlsForRoster(RosterForLoop roster) {
+        List<ControlType> controls = getFormatControlsForBodyLines(roster.getComponents());
+        roster.getControls().addAll(0, controls);
+    }
+
+    private List<ControlType> getFormatControlsForBodyLines(List<BodyLine> bodyLines) {
+        List<ControlType> controls = new ArrayList<>();
+        bodyLines.forEach(bodyLine -> {
+            if(ComponentTypeEnum.INPUT_NUMBER.value().equals(bodyLine.getComponentType())) {
+                controls.addAll(
+                    getFormatControlsFromInputNumberAttributes(bodyLine.getId(), bodyLine.getMin(), bodyLine.getMax(),
+                            bodyLine.getDecimals().intValue(), bodyLine.getResponse().getName())
+                );
+            }
+
+            // TODO: Implements date pickers components correctly in tables/rosters
+            /*
+            if(ComponentTypeEnum.DATEPICKER.value().equals(bodyLine.getComponentType())) {
+                controls.add(
+                        getFormatControlFromDatepickerAttributes(bodyLine.getId(), bodyLine.getMin(), bodyLine.getMax(),
+                                bodyLine.getDecimals().intValue(), bodyLine.getResponse().getName()));
+            }*/
+        });
+        return controls;
+    }
+
     /**
      * Create controls for a input number component
      * @param number input number to process
      */
     private void createFormatControlsForInputNumber(InputNumber number) {
-        String controlIdPrefix = number.getId() + "-format";
-        Double min = number.getMin();
-        Double max = number.getMax();
-        int decimalsCount = number.getDecimals().intValue();
-        String responseName = number.getResponse().getName();
+        number.getControls().addAll(0, getFormatControlsFromInputNumberAttributes(number.getId(),
+                number.getMin(), number.getMax(), number.getDecimals().intValue(), number.getResponse().getName()));
+    }
 
-        number.getControls().add(0, createDecimalsFormatControl(controlIdPrefix, responseName, decimalsCount));
-
+    /**
+     * Create controls from input number attributes
+     * @param id input number id
+     * @param min min value
+     * @param max max value
+     * @param decimalsCount number of decimals allowed
+     * @param responseName input number reponse attribute
+     */
+    private List<ControlType> getFormatControlsFromInputNumberAttributes(String id, Double min, Double max, int decimalsCount, String responseName) {
+        String controlIdPrefix = id + "-format";
+        List<ControlType> controls = new ArrayList<>();
 
         if(min != null && max != null) {
             String minValue = formatDoubleValue(min, decimalsCount);
             String maxValue = formatDoubleValue(max, decimalsCount);
             String controlExpression = String.format("not(not(isnull(%s)) and (%s>%s or %s<%s))", responseName, minValue, responseName, maxValue, responseName);
             String controlErrorMessage = String.format("\" La valeur doit être comprise entre %s et %s.\"", minValue, maxValue);
-            number.getControls().add(0, createFormatControl(controlIdPrefix+"-borne-inf-sup", controlExpression, controlErrorMessage));
-            return;
+            controls.add(0, createFormatControl(controlIdPrefix+"-borne-inf-sup", controlExpression, controlErrorMessage));
         }
 
         if(min == null && max != null) {
             String maxValue = formatDoubleValue(max, decimalsCount);
             String controlExpression = String.format("not(not(isnull(%s)) and %s<%s)", responseName, maxValue, responseName);
             String controlErrorMessage = String.format("\" La valeur doit être inférieure à %s.\"", maxValue);
-            number.getControls().add(0, createFormatControl(controlIdPrefix+"-borne-sup", controlExpression, controlErrorMessage));
-            return;
+            controls.add(0, createFormatControl(controlIdPrefix+"-borne-sup", controlExpression, controlErrorMessage));
         }
 
         if(min != null && max == null) {
             String minValue = formatDoubleValue(min, decimalsCount);
             String controlExpression = String.format("not(not(isnull(%s)) and %s>%s)", responseName, minValue, responseName);
             String controlErrorMessage = String.format("\" La valeur doit être supérieure à %s.\"", minValue);
-            number.getControls().add(0, createFormatControl(controlIdPrefix+"-borne-inf", controlExpression, controlErrorMessage));
+            controls.add(0, createFormatControl(controlIdPrefix+"-borne-inf", controlExpression, controlErrorMessage));
         }
+
+        controls.add(createDecimalsFormatControl(controlIdPrefix, responseName, decimalsCount));
+        return controls;
     }
 
     /**
@@ -86,11 +139,29 @@ public class LunaticAddControlFormat implements OutProcessingInterface<Questionn
      * @param datepicker date picker to process
      */
     private void createFormatControlsForDatepicker(Datepicker datepicker) {
-        String controlIdPrefix = datepicker.getId() + "-format-date";
+        String id = datepicker.getId();
         String minValue = datepicker.getMin();
         String maxValue = datepicker.getMax();
         String format = datepicker.getDateFormat();
         String responseName = datepicker.getResponse().getName();
+
+        List<ControlType> controls = datepicker.getControls();
+
+        Optional<ControlType> control = getFormatControlFromDatepickerAttributes(id, minValue, maxValue, format, responseName);
+
+        control.ifPresent(controlType -> controls.add(0, controlType));
+    }
+
+    /**
+     * Create controls from date picker attributes
+     * @param id date picker id
+     * @param minValue min value
+     * @param maxValue max value
+     * @param format format string
+     * @param responseName date picker reponse attribute
+     */
+    private Optional<ControlType> getFormatControlFromDatepickerAttributes(String id, String minValue, String maxValue, String format, String responseName) {
+        String controlIdPrefix = id + "-format-date";
 
         if(minValue != null && maxValue != null) {
             String controlExpression = String.format("not(not(isnull(%s)) and " +
@@ -98,22 +169,23 @@ public class LunaticAddControlFormat implements OutProcessingInterface<Questionn
                     "cast(%s, date, \"%s\")>cast(\"%s\", date, \"%s\")))",
                     responseName, responseName, format, minValue, format, responseName, format, maxValue, format);
             String controlErrorMessage = String.format("\"La date saisie doit être comprise entre %s et %s.\"", minValue, maxValue);
-            datepicker.getControls().add(createFormatControl(controlIdPrefix+"-borne-inf-sup", controlExpression, controlErrorMessage));
+            return Optional.of(createFormatControl(controlIdPrefix+"-borne-inf-sup", controlExpression, controlErrorMessage));
         }
 
         if(minValue == null && maxValue != null) {
             String controlExpression = String.format("not(not(isnull(%s)) and (cast(%s, date, \"%s\")>cast(\"%s\", date, \"%s\")))",
                     responseName, responseName, format, maxValue, format);
             String controlErrorMessage = String.format("\"La date saisie doit être antérieure à à %s.\"", maxValue);
-            datepicker.getControls().add(createFormatControl(controlIdPrefix+"-borne-sup", controlExpression, controlErrorMessage));
+            return Optional.of(createFormatControl(controlIdPrefix+"-borne-sup", controlExpression, controlErrorMessage));
         }
 
         if(minValue != null && maxValue == null) {
             String controlExpression = String.format("not(not(isnull(%s)) and (cast(%s, date, \"%s\")<cast(\"%s\", date, \"%s\")))",
                     responseName, responseName, format, minValue, format);
             String controlErrorMessage = String.format("\"La date saisie doit être postérieure à %s.\"", minValue);
-            datepicker.getControls().add(createFormatControl(controlIdPrefix+"-borne-inf", controlExpression, controlErrorMessage));
+            return Optional.of(createFormatControl(controlIdPrefix+"-borne-inf", controlExpression, controlErrorMessage));
         }
+        return Optional.empty();
     }
 
     /**

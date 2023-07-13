@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -229,9 +230,86 @@ class LunaticAddControlFormatTest {
         assertEquals(2, number.getControls().size());
     }
 
+    @Test
+    void shouldTableComponentsHaveSubComponentsControls() {
+        Table table = new Table();
+        table.setComponentType(ComponentTypeEnum.TABLE);
+        table.setId("table-id");
+
+        List<BodyType> bodyTypes = table.getBody();
+
+        List<BodyLine> bodyLines = new ArrayList<>();
+        bodyLines.add(buildBodyLine("line1"));
+        bodyLines.add(buildBodyLine(table.getId()+"-co", "CHECKVAR", ComponentTypeEnum.CHECKBOX_ONE.value()));
+        bodyTypes.add(buildBodyType(bodyLines));
+
+        bodyLines = new ArrayList<>();
+        bodyLines.add(buildBodyLine("line2"));
+        bodyLines.add(buildBodyLine(table.getId()+"-number", "NUMBERVAR", ComponentTypeEnum.INPUT_NUMBER.value(), BigInteger.TWO, 2.0, 5.0));
+        bodyTypes.add(buildBodyType(bodyLines));
+
+        lunaticQuestionnaire = new Questionnaire();
+        lunaticQuestionnaire.getComponents().add(table);
+
+        processing.apply(lunaticQuestionnaire);
+
+        assertEquals(2, table.getControls().size());
+        assertEquals("table-id-number-format-borne-inf-sup", table.getControls().get(0).getId());
+        assertEquals("table-id-number-format-decimal", table.getControls().get(1).getId());
+    }
+
+    @Test
+    void shouldRosterComponentsHaveSubComponentsControls() {
+        RosterForLoop roster = new RosterForLoop();
+        roster.setComponentType(ComponentTypeEnum.ROSTER_FOR_LOOP);
+        roster.setId("roster-id");
+
+        List<BodyLine> bodyLines = roster.getComponents();
+        bodyLines.add(buildBodyLine("line1"));
+        bodyLines.add(buildBodyLine(roster.getId()+"-number", "NUMBERVAR", ComponentTypeEnum.INPUT_NUMBER.value(), BigInteger.TWO, 2.0, 5.0));
+        bodyLines.add(buildBodyLine(roster.getId()+"-co", "CHECKVAR", ComponentTypeEnum.CHECKBOX_ONE.value()));
+
+        lunaticQuestionnaire = new Questionnaire();
+        lunaticQuestionnaire.getComponents().add(roster);
+
+        processing.apply(lunaticQuestionnaire);
+
+        assertEquals(2, roster.getControls().size());
+        assertEquals("roster-id-number-format-borne-inf-sup", roster.getControls().get(0).getId());
+        assertEquals("roster-id-number-format-decimal", roster.getControls().get(1).getId());
+    }
+
     private ResponseType buildResponse(String name) {
         ResponseType response = new ResponseType();
         response.setName(name);
         return response;
+    }
+
+    private BodyLine buildBodyLine(String id, String name, String componentType) {
+        BodyLine bodyLine = new BodyLine();
+        bodyLine.setId(id);
+        bodyLine.setComponentType(componentType);
+        bodyLine.setResponse(buildResponse(name));
+        return bodyLine;
+    }
+
+    private BodyLine buildBodyLine(String id, String name, String componentType, BigInteger decimals, Double min, Double max) {
+        BodyLine bodyLine = buildBodyLine(id, name, componentType);
+        bodyLine.setDecimals(decimals);
+        bodyLine.setMin(min);
+        bodyLine.setMax(max);
+        return bodyLine;
+    }
+
+    private BodyLine buildBodyLine(String value) {
+        BodyLine bodyLine = new BodyLine();
+        bodyLine.setValue(value);
+        return bodyLine;
+    }
+
+    private BodyType buildBodyType(List<BodyLine> bodyLines) {
+        BodyType bodyType = new BodyType();
+        bodyType.getBodyLine().addAll(bodyLines);
+        return bodyType;
     }
 }
