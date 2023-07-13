@@ -43,6 +43,7 @@ public class LunaticProcessing {
         new LunaticAddMissingVariables(parameters.isMissingVariables()).apply(lunaticQuestionnaire);
         new LunaticAddHierarchy().apply(lunaticQuestionnaire);
         new LunaticAddPageNumbers(parameters.getLunaticPaginationMode()).apply(lunaticQuestionnaire);
+        new LunaticAddControlFormat().apply(lunaticQuestionnaire);
         new LunaticReverseConsistencyControlLabel().apply(lunaticQuestionnaire);
     }
 
