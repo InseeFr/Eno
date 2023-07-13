@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -26,7 +27,7 @@ public class LunaticAddControlFormat implements OutProcessingInterface<Questionn
     }
 
     private void processComponents(List<ComponentType> components) {
-        components.parallelStream()
+        components
                 .forEach(componentType -> {
                     if(componentType instanceof ComponentNestingType componentNesting) {
                         processComponents(componentNesting.getComponents());
@@ -68,6 +69,7 @@ public class LunaticAddControlFormat implements OutProcessingInterface<Questionn
 
     private List<ControlType> getFormatControlsForBodyLines(List<BodyLine> bodyLines) {
         List<ControlType> controls = new ArrayList<>();
+
         bodyLines.stream()
                 .filter(Objects::nonNull)
                 .forEach(bodyLine -> {
