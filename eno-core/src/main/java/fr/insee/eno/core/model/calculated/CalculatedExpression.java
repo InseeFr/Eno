@@ -2,13 +2,11 @@ package fr.insee.eno.core.model.calculated;
 
 import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.annotations.DDI;
-import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoObject;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.LabelType;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import reusable33.CommandType;
 
@@ -21,8 +19,6 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
  * calculated variables, controls, filters. */
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Context(format = Format.DDI, type = CommandType.class)
 @Context(format = Format.LUNATIC, type = LabelType.class)
 public class CalculatedExpression extends EnoObject {

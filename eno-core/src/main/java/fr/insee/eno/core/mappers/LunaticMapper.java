@@ -2,7 +2,6 @@ package fr.insee.eno.core.mappers;
 
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.converter.LunaticConverter;
-import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.lunatic.model.flat.Questionnaire;
@@ -146,7 +145,7 @@ public class LunaticMapper extends Mapper {
             Class<?> modelContentType = enoCollection.get(0).getClass();
             // List of simple type
             if (isSimpleType(modelContentType)) {
-                throw new MappingException("List of simple type mapping is not implemented for Lunatic.");
+                lunaticCollection.addAll(enoCollection);
             }
             // List of complex type
             else if (EnoObject.class.isAssignableFrom(modelContentType)) {

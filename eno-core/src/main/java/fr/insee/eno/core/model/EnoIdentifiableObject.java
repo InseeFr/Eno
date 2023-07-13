@@ -8,7 +8,9 @@ import lombok.Getter;
 import lombok.Setter;
 import reusable33.AbstractIdentifiableType;
 
-/** Abstract class to factorize the mapping of the identifier in many objects. */
+/** Abstract class to factorize the mapping of the identifier in many objects.
+ * Note: an object that doesn't inherit this class cannot be indexed in an EnoIndex object.
+ * @see EnoIndex */
 @Getter
 @Setter
 public abstract class EnoIdentifiableObject extends EnoObject {

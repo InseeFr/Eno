@@ -8,8 +8,8 @@ import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.TextQuestion;
 import fr.insee.eno.core.model.sequence.Sequence;
-import fr.insee.eno.core.model.sequence.SequenceItem;
-import fr.insee.eno.core.model.sequence.SequenceItem.SequenceItemType;
+import fr.insee.eno.core.model.sequence.StructureItemReference;
+import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.processing.EnoProcessing;
@@ -22,7 +22,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LunaticLoopResolutionTest {
 
@@ -40,7 +41,7 @@ class LunaticLoopResolutionTest {
         Sequence sequence = new Sequence();
         sequence.setId(SEQUENCE_ID);
         sequence.getSequenceStructure().add(
-                SequenceItem.builder().id(QUESTION_ID).type(SequenceItemType.QUESTION).build());
+                StructureItemReference.builder().id(QUESTION_ID).type(StructureItemType.QUESTION).build());
         enoQuestionnaire.getSequences().add(sequence);
         TextQuestion textQuestion = new TextQuestion();
         textQuestion.setId(QUESTION_ID);

@@ -1,13 +1,12 @@
 package fr.insee.eno.core.processing.impl;
 
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.navigation.Loop;
-import fr.insee.eno.core.model.sequence.AbstractSequence;
-import fr.insee.eno.core.model.sequence.Sequence;
-import fr.insee.eno.core.model.sequence.SequenceItem;
-import fr.insee.eno.core.model.sequence.SequenceItem.SequenceItemType;
-import fr.insee.eno.core.model.sequence.Subsequence;
+import fr.insee.eno.core.model.sequence.*;
+import fr.insee.eno.core.model.sequence.ItemReference.ItemType;
+import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType;
 import fr.insee.eno.core.processing.InProcessingInterface;
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,19 +37,30 @@ public class DDIResolveSequencesStructure implements InProcessingInterface {
      * @param sequence A sequence or subsequence object.
      * */
     private void resolveSequenceStructure(AbstractSequence sequence) {
-        for (SequenceItem sequenceItem : sequence.getSequenceItems()) {
+        for (ItemReference sequenceItem : sequence.getSequenceItems()) {
             resolveStructure(sequence, sequenceItem);
         }
     }
 
-    /** Iterates on sequence items listed in the filter object, and resolve them in the sequence object.
+    /** Iterates on items listed in the filter object, and resolve them in the sequence object.
      * See <code>resolveStructure</code> method.
      * @param filter A filter object.
      * @param sequence A sequence or subsequence.
      * */
     private void resolveFilterStructure(Filter filter, AbstractSequence sequence) {
-        for (SequenceItem filterItem : filter.getFilterItems()) {
+        for (ItemReference filterItem : filter.getFilterItems()) {
             resolveStructure(sequence, filterItem);
+        }
+    }
+
+    /** Iterates on items listed in the loop object, and resolve them in the sequence object.
+     * See <code>resolveStructure</code> method.
+     * @param loop A filter object.
+     * @param sequence A sequence or subsequence.
+     * */
+    private void resolveLoopStructure(Loop loop, AbstractSequence sequence) {
+        for (ItemReference loopItem : loop.getLoopItems()) {
+            resolveStructure(sequence, loopItem);
         }
     }
 
@@ -65,31 +75,29 @@ public class DDIResolveSequencesStructure implements InProcessingInterface {
      * @param sequence A sequence or subsequence.
      * @param sequenceItem A sequence item.
      * */
-    private void resolveStructure(AbstractSequence sequence, SequenceItem sequenceItem) {
+    private void resolveStructure(AbstractSequence sequence, ItemReference sequenceItem) {
         switch (sequenceItem.getType()) {
+            case SEQUENCE -> {
+                log.error("Sequences should not contain filter or loop references that have a sequence in their scope");
+                throw new MappingException("Error when resolving structure of sequence "+sequence);
+            }
             case SUBSEQUENCE -> {
-                sequence.getSequenceStructure().add(sequenceItem);
+                sequence.getSequenceStructure().add(StructureItemReference.from(sequenceItem));
                 Subsequence subsequence = (Subsequence) enoQuestionnaire.get(sequenceItem.getId());
                 resolveSequenceStructure(subsequence);
             }
             case QUESTION ->
-                    sequence.getSequenceStructure().add(sequenceItem);
+                    sequence.getSequenceStructure().add(StructureItemReference.from(sequenceItem));
             case LOOP -> {
                 Loop loop = (Loop) enoQuestionnaire.get(sequenceItem.getId());
-                String subsequenceReference = loop.getSequenceReference();
-                Subsequence subsequence = (Subsequence) enoQuestionnaire.get(subsequenceReference);
-                // Note: embedded loops is not supported here.
-                // (With embedded loops the reference might be a loop and not a subsequence.)
-                sequence.getSequenceStructure().add(SequenceItem.builder()
-                        .id(subsequenceReference)
-                        .type(SequenceItemType.SUBSEQUENCE)
-                        .build());
-                resolveSequenceStructure(subsequence);
+                resolveLoopStructure(loop, sequence);
             }
             case FILTER -> {
                 Filter filter = (Filter) enoQuestionnaire.get(sequenceItem.getId());
                 resolveFilterStructure(filter, sequence);
             }
+            case CONTROL, DECLARATION ->
+                    log.debug("Control and declaration are ignored while resolving sequence structure.");
         }
     }
 

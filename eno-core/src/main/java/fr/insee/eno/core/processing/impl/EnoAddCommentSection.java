@@ -1,14 +1,14 @@
 package fr.insee.eno.core.processing.impl;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.response.Response;
-import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.label.Label;
-import fr.insee.eno.core.model.sequence.SequenceItem;
-import fr.insee.eno.core.model.sequence.SequenceItem.SequenceItemType;
-import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.model.question.TextQuestion;
+import fr.insee.eno.core.model.response.Response;
+import fr.insee.eno.core.model.sequence.Sequence;
+import fr.insee.eno.core.model.sequence.StructureItemReference;
+import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType;
+import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.EnoProcessingInterface;
 import fr.insee.eno.core.reference.EnoIndex;
 
@@ -41,7 +41,7 @@ public class EnoAddCommentSection implements EnoProcessingInterface {
         sequence.setLabel(new Label());
         sequence.getLabel().setValue(COMMENT_SEQUENCE_LABEL);
         sequence.getSequenceStructure().add(
-                SequenceItem.builder().id(COMMENT_QUESTION_ID).type(SequenceItemType.QUESTION).build());
+                StructureItemReference.builder().id(COMMENT_QUESTION_ID).type(StructureItemType.QUESTION).build());
         enoQuestionnaire.getSequences().add(sequence);
         enoIndex.put(COMMENT_SEQUENCE_ID, sequence);
         //
