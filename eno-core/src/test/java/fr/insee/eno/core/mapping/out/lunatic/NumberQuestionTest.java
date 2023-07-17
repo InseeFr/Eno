@@ -31,10 +31,10 @@ class NumberQuestionTest {
         Optional<InputNumber> inputNumberWithUnit = inputNumbers.stream()
                 .filter(inputNumber -> "NUMBER_UNIT".equals(inputNumber.getResponse().getName()))
                 .findAny();
-        assert inputNumberWithUnit.isPresent();
         // assertions
         assertEquals(3, inputNumbersNoUnit.size());
         inputNumbersNoUnit.forEach(inputNumber -> assertNull(inputNumber.getUnit()));
+        assertTrue(inputNumberWithUnit.isPresent());
         assertNotNull(inputNumberWithUnit.get().getUnit());
         assertEquals("kg", inputNumberWithUnit.get().getUnit());
     }
