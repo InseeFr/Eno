@@ -2,9 +2,9 @@ package fr.insee.eno.core.model.label;
 
 import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.annotations.DDI;
-import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoObject;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.LabelType;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +16,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @Getter
 @Setter
 @Context(format = Format.DDI, type = InternationalStringType.class)
+@Context(format = Format.LUNATIC, type = LabelType.class)
 public class QuestionnaireLabel extends EnoObject {
 
     @DDI(contextType = InternationalStringType.class, field = "getStringArray(0).getStringValue()")

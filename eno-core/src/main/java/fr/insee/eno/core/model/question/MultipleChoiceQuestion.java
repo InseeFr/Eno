@@ -1,9 +1,11 @@
 package fr.insee.eno.core.model.question;
 
 import datacollection33.QuestionGridType;
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.response.CodeResponse;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.CheckboxGroup;
 import fr.insee.lunatic.model.flat.Table;
 import lombok.Getter;
@@ -19,6 +21,8 @@ import java.util.List;
  */
 @Getter
 @Setter
+@Context(format = Format.DDI, type = QuestionGridType.class)
+@Context(format = Format.LUNATIC, type = {CheckboxGroup.class, Table.class})
 public abstract class MultipleChoiceQuestion extends MultipleResponseQuestion {
 
     /**
@@ -29,6 +33,8 @@ public abstract class MultipleChoiceQuestion extends MultipleResponseQuestion {
      */
     @Getter
     @Setter
+    @Context(format = Format.DDI, type = QuestionGridType.class)
+    @Context(format = Format.LUNATIC, type = CheckboxGroup.class)
     public static class Simple extends MultipleResponseQuestion {
 
         /**
@@ -58,6 +64,8 @@ public abstract class MultipleChoiceQuestion extends MultipleResponseQuestion {
     @Getter
     @Setter
     @Slf4j
+    @Context(format = Format.DDI, type = QuestionGridType.class)
+    @Context(format = Format.LUNATIC, type = Table.class)
     public static class Complex extends MultipleResponseQuestion {
 
         public Complex() {

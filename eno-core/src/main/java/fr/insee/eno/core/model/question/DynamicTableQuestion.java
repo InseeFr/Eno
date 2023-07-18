@@ -1,6 +1,9 @@
 package fr.insee.eno.core.model.question;
 
+import datacollection33.QuestionGridType;
+import fr.insee.eno.core.annotations.Contexts;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.RosterForLoop;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 @Getter
 @Setter
 @Slf4j
+@Contexts.Context(format = Format.DDI, type = QuestionGridType.class)
+@Contexts.Context(format = Format.LUNATIC, type = RosterForLoop.class)
 public class DynamicTableQuestion extends MultipleResponseQuestion {
 
     public DynamicTableQuestion() {

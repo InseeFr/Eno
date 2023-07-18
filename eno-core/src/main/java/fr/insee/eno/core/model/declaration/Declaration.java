@@ -1,11 +1,13 @@
 package fr.insee.eno.core.model.declaration;
 
 import datacollection33.StatementItemType;
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
-import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.core.model.label.DynamicLabel;
+import fr.insee.eno.core.model.mode.Mode;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.DeclarationType;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +18,8 @@ import java.util.List;
 /** Text displayed before a question or sequence. */
 @Getter
 @Setter
+@Context(format = Format.DDI, type = StatementItemType.class)
+@Context(format = Format.LUNATIC, type = DeclarationType.class)
 public class Declaration extends EnoIdentifiableObject implements DeclarationInterface {
 
     @DDI(contextType = StatementItemType.class,

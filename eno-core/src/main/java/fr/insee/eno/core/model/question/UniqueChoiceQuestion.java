@@ -1,9 +1,11 @@
 package fr.insee.eno.core.model.question;
 
 import datacollection33.QuestionItemType;
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.code.CodeItem;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.CheckboxOne;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Dropdown;
@@ -23,6 +25,8 @@ import java.util.List;
 @Getter
 @Setter
 @Slf4j
+@Context(format = Format.DDI, type = QuestionItemType.class)
+@Context(format = Format.LUNATIC, type = {CheckboxOne.class, Radio.class, Dropdown.class})
 public class UniqueChoiceQuestion extends SingleResponseQuestion {
 
     /**

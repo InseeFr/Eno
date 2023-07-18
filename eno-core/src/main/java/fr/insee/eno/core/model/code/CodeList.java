@@ -1,7 +1,9 @@
 package fr.insee.eno.core.model.code;
 
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
+import fr.insee.eno.core.parameter.Format;
 import logicalproduct33.CodeListType;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +18,7 @@ import java.util.List;
  * */
 @Getter
 @Setter
+@Context(format = Format.DDI, type = CodeListType.class)
 public class CodeList extends EnoIdentifiableObject {
 
     @DDI(contextType = CodeListType.class, field = "getLabelArray(0).getContentArray(0).getStringValue()")

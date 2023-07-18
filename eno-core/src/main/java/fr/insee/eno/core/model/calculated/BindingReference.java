@@ -1,7 +1,9 @@
 package fr.insee.eno.core.model.calculated;
 
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.model.EnoObject;
+import fr.insee.eno.core.parameter.Format;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +15,7 @@ import reusable33.InParameterType;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Context(format = Format.DDI, type = InParameterType.class)
 public class BindingReference extends EnoObject {
 
     @DDI(contextType = InParameterType.class, field = "getIDArray(0).getStringValue()")

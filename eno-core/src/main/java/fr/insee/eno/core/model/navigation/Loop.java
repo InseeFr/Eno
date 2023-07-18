@@ -1,11 +1,13 @@
 package fr.insee.eno.core.model.navigation;
 
 import datacollection33.LoopType;
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.sequence.ItemReference;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
+import fr.insee.eno.core.parameter.Format;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +22,11 @@ import java.util.List;
 @Getter
 @Setter
 @Slf4j
+@Context(format = Format.DDI, type = LoopType.class)
+@Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.Loop.class)
 public abstract class Loop extends EnoIdentifiableObject {
 
-    @Lunatic(contextType = fr.insee.lunatic.model.flat.Subsequence.class,
+    @Lunatic(contextType = fr.insee.lunatic.model.flat.Loop.class,
             field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     private String componentType = "LOOP";
 

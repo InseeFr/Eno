@@ -1,6 +1,7 @@
 package fr.insee.eno.core.model.navigation;
 
 import datacollection33.ComputationItemType;
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.exceptions.technical.MappingException;
@@ -8,6 +9,7 @@ import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoObjectWithExpression;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.label.DynamicLabel;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.ControlCriticityEnum;
 import fr.insee.lunatic.model.flat.ControlType;
 import fr.insee.lunatic.model.flat.ControlTypeOfControlEnum;
@@ -17,6 +19,8 @@ import lombok.Setter;
 /** Consistency check. */
 @Getter
 @Setter
+@Context(format = Format.DDI, type = ComputationItemType.class)
+@Context(format = Format.LUNATIC, type = ControlType.class)
 public class Control extends EnoIdentifiableObject implements EnoObjectWithExpression {
 
     public enum Criticality {INFO, WARN, ERROR}
