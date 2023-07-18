@@ -2,12 +2,12 @@ package fr.insee.eno.core.sandbox;
 
 import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.output.LunaticWriter;
-import fr.insee.lunatic.conversion.JSONDeserializer;
+import fr.insee.lunatic.conversion.JsonDeserializer;
+import fr.insee.lunatic.exception.SerializationException;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
@@ -72,7 +72,7 @@ class LunaticTests {
         optionB.getLabel().setType(Constant.LUNATIC_LABEL_VTL_MD);
     }
 
-    void lunaticTable_headerOnly() throws JAXBException, IOException {
+    void lunaticTable_headerOnly() throws SerializationException, IOException {
         Table table = new Table();
         //
         table.setPositioning("HORIZONTAL");
@@ -107,7 +107,7 @@ class LunaticTests {
                 Path.of("src/test/resources/out/lunatic/testTable.json"));
     }
 
-    void tableauTIC() throws JAXBException, IOException {
+    void tableauTIC() throws IOException, SerializationException {
         Table table = new Table();
         //
         table.setId("l8u8d67h");
@@ -168,9 +168,9 @@ class LunaticTests {
 
     @Test
     @Disabled("Lunatic-Model deserialization doesn't work for now.")
-    void deserializeQuestionnaire() throws IOException {
+    void deserializeQuestionnaire() throws SerializationException {
         //
-        JSONDeserializer jsonDeserializer = new JSONDeserializer();
+        JsonDeserializer jsonDeserializer = new JsonDeserializer();
         URL fileUrl = this.getClass().getClassLoader()
                 .getResource("expected/lunatic/l20g2ba7_expected.json");
         assert fileUrl != null;
