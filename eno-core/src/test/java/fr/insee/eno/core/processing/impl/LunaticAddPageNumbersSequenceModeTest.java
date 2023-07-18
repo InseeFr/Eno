@@ -113,26 +113,26 @@ class LunaticAddPageNumbersSequenceModeTest {
 
     @Test
     void shouldLoopWithFirstElementSequenceIsConsideredAsPaginatedLoop() {
-        assertTrue(l7.isPaginatedLoop());
+        assertTrue(l7.getPaginatedLoop());
         assertEquals(ComponentTypeEnum.SEQUENCE, l7.getComponents().get(0).getComponentType());
     }
 
     @Test
     void shouldPaginatedLoopIncrementPage() {
-        assertTrue(l7.isPaginatedLoop());
+        assertTrue(l7.getPaginatedLoop());
         assertEquals("2", l6.getPage());
         assertEquals("3", l7.getPage());
     }
 
     @Test
     void shouldLoopWithNonFirstElementSequenceIsConsideredAsNonPaginatedLoop() {
-        assertFalse(l6.isPaginatedLoop());
+        assertFalse(l6.getPaginatedLoop());
         assertNotEquals(ComponentTypeEnum.SEQUENCE, l6.getComponents().get(0).getComponentType());
     }
 
     @Test
     void shouldComponentsInNotPaginatedLoopToHaveSamePage() {
-        assertFalse(l6.isPaginatedLoop());
+        assertFalse(l6.getPaginatedLoop());
         assertEquals("2", l6.getPage());
         assertEquals("2", ss6.getPage());
         assertEquals("2", i6.getPage());
@@ -141,7 +141,7 @@ class LunaticAddPageNumbersSequenceModeTest {
     @Test
     void shouldComponentsInPaginatedLoopToHaveSamePageButDifferentFromLoop() {
         // l7 is paginated loop so we'll increment subcomponents
-        assertTrue(l7.isPaginatedLoop());
+        assertTrue(l7.getPaginatedLoop());
         assertEquals("3", l7.getPage());
         assertEquals("3.1", s71.getPage());
         assertEquals("3.1", co71.getPage());
@@ -159,13 +159,13 @@ class LunaticAddPageNumbersSequenceModeTest {
 
     @Test
     void shouldNotSetMaxPageOnNotPaginatedLoop() {
-        assertFalse(l6.isPaginatedLoop());
+        assertFalse(l6.getPaginatedLoop());
         assertNull(l6.getMaxPage());
     }
 
     @Test
     void shouldSetCorrectMaxPageOnPaginatedLoop() {
-        assertTrue(l7.isPaginatedLoop());
+        assertTrue(l7.getPaginatedLoop());
         assertEquals("1", l7.getMaxPage());
     }
 

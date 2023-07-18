@@ -28,7 +28,7 @@ class EnoSuggesterFieldTest {
         assertTrue(field.getRules().contains("rule2"));
         assertEquals(field.getLanguage(), enoField.getLanguage());
         assertEquals(field.getMin(), enoField.getMin());
-        assertEquals(field.isStemmer(), enoField.getStemmer());
+        assertEquals(field.getStemmer(), enoField.getStemmer());
     }
 
     @ParameterizedTest

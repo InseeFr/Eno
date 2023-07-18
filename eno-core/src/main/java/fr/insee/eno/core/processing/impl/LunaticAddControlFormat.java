@@ -57,35 +57,35 @@ public class LunaticAddControlFormat implements OutProcessingInterface<Questionn
 
     private void createFormatControlsForTable(Table table) {
         List<ControlType> controls = table.getControls();
-        for(BodyType bodyType : table.getBody()) {
-            controls.addAll(0, getFormatControlsForBodyLines(bodyType.getBodyLine()));
+        for(BodyLine bodyLine : table.getBodyLines()) {
+            controls.addAll(0, getFormatControlsForBodyCells(bodyLine.getBodyCells()));
         }
     }
 
     private void createFormatControlsForRoster(RosterForLoop roster) {
-        List<ControlType> controls = getFormatControlsForBodyLines(roster.getComponents());
+        List<ControlType> controls = getFormatControlsForBodyCells(roster.getComponents());
         roster.getControls().addAll(0, controls);
     }
 
-    private List<ControlType> getFormatControlsForBodyLines(List<BodyLine> bodyLines) {
+    private List<ControlType> getFormatControlsForBodyCells(List<BodyCell> bodyCells) {
         List<ControlType> controls = new ArrayList<>();
 
-        bodyLines.stream()
+        bodyCells.stream()
                 .filter(Objects::nonNull)
-                .forEach(bodyLine -> {
-                    if(ComponentTypeEnum.INPUT_NUMBER.value().equals(bodyLine.getComponentType())) {
+                .forEach(bodyCell -> {
+                    if(ComponentTypeEnum.INPUT_NUMBER.value().equals(bodyCell.getComponentType())) {
                         controls.addAll(
-                            getFormatControlsFromInputNumberAttributes(bodyLine.getId(), bodyLine.getMin(), bodyLine.getMax(),
-                                    bodyLine.getDecimals().intValue(), bodyLine.getResponse().getName())
+                            getFormatControlsFromInputNumberAttributes(bodyCell.getId(), bodyCell.getMin(), bodyCell.getMax(),
+                                    bodyCell.getDecimals().intValue(), bodyCell.getResponse().getName())
                         );
                     }
 
                     // TODO: Implements date pickers components correctly in tables/rosters
                     /*
-                    if(ComponentTypeEnum.DATEPICKER.value().equals(bodyLine.getComponentType())) {
+                    if(ComponentTypeEnum.DATEPICKER.value().equals(bodyCell.getComponentType())) {
                         controls.add(
-                                getFormatControlFromDatepickerAttributes(bodyLine.getId(), bodyLine.getMin(), bodyLine.getMax(),
-                                        bodyLine.getDecimals().intValue(), bodyLine.getResponse().getName()));
+                                getFormatControlFromDatepickerAttributes(bodyCell.getId(), bodyCell.getMin(), bodyCell.getMax(),
+                                        bodyCell.getDecimals().intValue(), bodyCell.getResponse().getName()));
                     }*/
         });
         return controls;

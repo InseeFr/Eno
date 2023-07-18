@@ -2,18 +2,15 @@ package fr.insee.eno.core.sandbox;
 
 import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.output.LunaticWriter;
-import fr.insee.lunatic.conversion.JSONDeserializer;
-import fr.insee.lunatic.conversion.XMLLunaticFlatToJSONLunaticFlatTranslator;
-import fr.insee.lunatic.conversion.XMLLunaticToXMLLunaticFlatTranslator;
+import fr.insee.lunatic.conversion.JsonDeserializer;
+import fr.insee.lunatic.exception.SerializationException;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -75,7 +72,7 @@ class LunaticTests {
         optionB.getLabel().setType(Constant.LUNATIC_LABEL_VTL_MD);
     }
 
-    void lunaticTable_headerOnly() throws JAXBException, IOException {
+    void lunaticTable_headerOnly() throws SerializationException, IOException {
         Table table = new Table();
         //
         table.setPositioning("HORIZONTAL");
@@ -110,7 +107,7 @@ class LunaticTests {
                 Path.of("src/test/resources/out/lunatic/testTable.json"));
     }
 
-    void tableauTIC() throws JAXBException, IOException {
+    void tableauTIC() throws IOException, SerializationException {
         Table table = new Table();
         //
         table.setId("l8u8d67h");
@@ -145,21 +142,21 @@ class LunaticTests {
         for (int i=0; i<4; i++) {
             String value = bodyValues.get(i);
             String label = bodyLabels.get(i);
-            BodyType bodyType = new BodyType();
-            BodyLine bodyLeft = new BodyLine();
+            BodyLine bodyLine = new BodyLine();
+            BodyCell bodyLeft = new BodyCell();
             bodyLeft.setValue(value);
             bodyLeft.setLabel(new LabelType());
             bodyLeft.getLabel().setValue(label);
             bodyLeft.getLabel().setType(Constant.LUNATIC_LABEL_VTL_MD);
-            BodyLine bodyColumn1 = new BodyLine();
+            BodyCell bodyColumn1 = new BodyCell();
             bodyColumn1.setComponentType("InputNumber");
             bodyColumn1.setMin(0d);
             bodyColumn1.setMax(20d);
             bodyColumn1.setDecimals(BigInteger.ZERO);
             bodyColumn1.setId("l8u8d67h-QOP-"+value);
-            bodyType.getBodyLine().add(bodyLeft);
-            bodyType.getBodyLine().add(bodyColumn1);
-            table.getBody().add(bodyType);
+            bodyLine.getBodyCells().add(bodyLeft);
+            bodyLine.getBodyCells().add(bodyColumn1);
+            table.getBodyLines().add(bodyLine);
         }
 
         //
@@ -171,9 +168,9 @@ class LunaticTests {
 
     @Test
     @Disabled("Lunatic-Model deserialization doesn't work for now.")
-    void deserializeQuestionnaire() throws JAXBException {
+    void deserializeQuestionnaire() throws SerializationException {
         //
-        JSONDeserializer jsonDeserializer = new JSONDeserializer();
+        JsonDeserializer jsonDeserializer = new JsonDeserializer();
         URL fileUrl = this.getClass().getClassLoader()
                 .getResource("expected/lunatic/l20g2ba7_expected.json");
         assert fileUrl != null;
@@ -185,23 +182,11 @@ class LunaticTests {
     }
 
     @Test
-    @Disabled("Used only to create a json test file.")
-    void flattenPairwise() throws Exception {
-        XMLLunaticToXMLLunaticFlatTranslator translator = new XMLLunaticToXMLLunaticFlatTranslator();
-        String lunaticXmlFlat = translator.generate(this.getClass().getClassLoader()
-                .getResourceAsStream("pairwise/form-lunatic-xml-household-links.xml"));
-        XMLLunaticFlatToJSONLunaticFlatTranslator translator2 = new XMLLunaticFlatToJSONLunaticFlatTranslator();
-        String result = translator2.translate(lunaticXmlFlat);
-        assertNotNull(result);
-        Files.writeString(Path.of("src/test/resources/pairwise/form-lunatic-xml-household-links.json"), result);
-    }
-
-    @Test
     void nullValueOnDoubleAttribute() {
         Double d = null;
-        BodyLine bodyLine = new BodyLine();
-        bodyLine.setMax(d);
-        assertNull(bodyLine.getMax());
+        BodyCell bodyCell = new BodyCell();
+        bodyCell.setMax(d);
+        assertNull(bodyCell.getMax());
     }
 
 }

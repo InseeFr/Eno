@@ -96,15 +96,15 @@ import java.util.*;
             int loopPageCount = pageCount;
 
             applyLoopPaginationProperty(loop);
-            if(loop.isPaginatedLoop() != null && loop.isPaginatedLoop()) {
+            if(loop.getPaginatedLoop() != null && loop.getPaginatedLoop()) {
                 numPagePrefix = loop.getPage() + ".";
                 loopPageCount = 0;
             }
 
             // call to recursive method to regroup questions in the loop components
-            applyNumPageOnComponents(loopComponents, numPagePrefix, loopPageCount, loop.isPaginatedLoop());
+            applyNumPageOnComponents(loopComponents, numPagePrefix, loopPageCount, loop.getPaginatedLoop());
 
-            if(loop.isPaginatedLoop() != null && loop.isPaginatedLoop()) {
+            if(loop.getPaginatedLoop() != null && loop.getPaginatedLoop()) {
                 long maxPage = loop.getComponents().stream()
                         .map(ComponentType::getPage)
                         .filter(Objects::nonNull)
