@@ -20,7 +20,7 @@ import java.util.List;
  * </p><p>
  * In Lunatic, the modeling is significantly different:
  * - a list of HeaderType which is the header (and is optional)
- * - a list of BodyType, one BodyType is one row, and a BodyType contains a list of BodyLine which are the cells of the line
+ * - a list of BodyLine, one BodyLine is one row, and a BodyLine contains a list of BodyCell which are the cells of the line
  * </p><p>
  * This class is designed to be close to DDI modeling.
  * Header and left column are code lists. The left hand corner cell is in neither of these two

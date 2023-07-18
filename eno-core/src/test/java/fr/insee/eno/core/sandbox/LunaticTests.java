@@ -142,21 +142,21 @@ class LunaticTests {
         for (int i=0; i<4; i++) {
             String value = bodyValues.get(i);
             String label = bodyLabels.get(i);
-            BodyType bodyType = new BodyType();
-            BodyLine bodyLeft = new BodyLine();
+            BodyLine bodyLine = new BodyLine();
+            BodyCell bodyLeft = new BodyCell();
             bodyLeft.setValue(value);
             bodyLeft.setLabel(new LabelType());
             bodyLeft.getLabel().setValue(label);
             bodyLeft.getLabel().setType(Constant.LUNATIC_LABEL_VTL_MD);
-            BodyLine bodyColumn1 = new BodyLine();
+            BodyCell bodyColumn1 = new BodyCell();
             bodyColumn1.setComponentType("InputNumber");
             bodyColumn1.setMin(0d);
             bodyColumn1.setMax(20d);
             bodyColumn1.setDecimals(BigInteger.ZERO);
             bodyColumn1.setId("l8u8d67h-QOP-"+value);
-            bodyType.getBodyLine().add(bodyLeft);
-            bodyType.getBodyLine().add(bodyColumn1);
-            table.getBody().add(bodyType);
+            bodyLine.getBodyCells().add(bodyLeft);
+            bodyLine.getBodyCells().add(bodyColumn1);
+            table.getBodyLines().add(bodyLine);
         }
 
         //
@@ -184,9 +184,9 @@ class LunaticTests {
     @Test
     void nullValueOnDoubleAttribute() {
         Double d = null;
-        BodyLine bodyLine = new BodyLine();
-        bodyLine.setMax(d);
-        assertNull(bodyLine.getMax());
+        BodyCell bodyCell = new BodyCell();
+        bodyCell.setMax(d);
+        assertNull(bodyCell.getMax());
     }
 
 }

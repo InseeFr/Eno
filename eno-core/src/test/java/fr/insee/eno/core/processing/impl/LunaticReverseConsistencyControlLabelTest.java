@@ -155,34 +155,34 @@ class LunaticReverseConsistencyControlLabelTest {
         Table input = new Table();
         input.setId(id);
         input.setComponentType(ComponentTypeEnum.TABLE);
-        List<BodyType> bodyTypes = input.getBody();
+        List<BodyLine> bodyLines = input.getBodyLines();
 
         for(int cpt=0; cpt<responseNames.size(); cpt++) {
-            List<BodyLine> bodyLines = new ArrayList<>();
-            bodyLines.add(buildBodyLine(Integer.toString(cpt)));
-            bodyLines.add(buildBodyLine(id+"-"+"-"+cpt, responseNames.get(cpt), ComponentTypeEnum.CHECKBOX_ONE.value()));
-            bodyTypes.add(buildBodyType(bodyLines));
+            List<BodyCell> bodyCells = new ArrayList<>();
+            bodyCells.add(buildBodyCell(Integer.toString(cpt)));
+            bodyCells.add(buildBodyCell(id+"-"+"-"+cpt, responseNames.get(cpt), ComponentTypeEnum.CHECKBOX_ONE.value()));
+            bodyLines.add(buildBodyLine(bodyCells));
         }
         return input;
     }
 
-    private BodyLine buildBodyLine(String id, String name, String componentType) {
-        BodyLine bodyLine = new BodyLine();
-        bodyLine.setId(id);
-        bodyLine.setComponentType(componentType);
-        return bodyLine;
+    private BodyCell buildBodyCell(String id, String name, String componentType) {
+        BodyCell bodyCell = new BodyCell();
+        bodyCell.setId(id);
+        bodyCell.setComponentType(componentType);
+        return bodyCell;
     }
 
-    private BodyLine buildBodyLine(String value) {
-        BodyLine bodyLine = new BodyLine();
-        bodyLine.setValue(value);
-        return bodyLine;
+    private BodyCell buildBodyCell(String value) {
+        BodyCell bodyCell = new BodyCell();
+        bodyCell.setValue(value);
+        return bodyCell;
     }
 
-    private BodyType buildBodyType(List<BodyLine> bodyLines) {
-        BodyType bodyType = new BodyType();
-        bodyType.getBodyLine().addAll(bodyLines);
-        return bodyType;
+    private BodyLine buildBodyLine(List<BodyCell> bodyCells) {
+        BodyLine bodyLine = new BodyLine();
+        bodyLine.getBodyCells().addAll(bodyCells);
+        return bodyLine;
     }
 
     private Loop buildLoop(String id, List<ComponentType>components) {

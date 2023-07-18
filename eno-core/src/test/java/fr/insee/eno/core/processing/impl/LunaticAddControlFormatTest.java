@@ -236,17 +236,17 @@ class LunaticAddControlFormatTest {
         table.setComponentType(ComponentTypeEnum.TABLE);
         table.setId("table-id");
 
-        List<BodyType> bodyTypes = table.getBody();
+        List<BodyLine> bodyLines = table.getBodyLines();
 
-        List<BodyLine> bodyLines = new ArrayList<>();
-        bodyLines.add(buildBodyLine("line1"));
-        bodyLines.add(buildBodyLine(table.getId()+"-co", "CHECKVAR", ComponentTypeEnum.CHECKBOX_ONE.value()));
-        bodyTypes.add(buildBodyType(bodyLines));
+        List<BodyCell> bodyCells = new ArrayList<>();
+        bodyCells.add(buildBodyCell("line1"));
+        bodyCells.add(buildBodyCell(table.getId()+"-co", "CHECKVAR", ComponentTypeEnum.CHECKBOX_ONE.value()));
+        bodyLines.add(buildBodyLine(bodyCells));
 
-        bodyLines = new ArrayList<>();
-        bodyLines.add(buildBodyLine("line2"));
-        bodyLines.add(buildBodyLine(table.getId()+"-number", "NUMBERVAR", ComponentTypeEnum.INPUT_NUMBER.value(), BigInteger.TWO, 2.0, 5.0));
-        bodyTypes.add(buildBodyType(bodyLines));
+        bodyCells = new ArrayList<>();
+        bodyCells.add(buildBodyCell("line2"));
+        bodyCells.add(buildBodyCell(table.getId()+"-number", "NUMBERVAR", ComponentTypeEnum.INPUT_NUMBER.value(), BigInteger.TWO, 2.0, 5.0));
+        bodyLines.add(buildBodyLine(bodyCells));
 
         lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(table);
@@ -264,10 +264,10 @@ class LunaticAddControlFormatTest {
         roster.setComponentType(ComponentTypeEnum.ROSTER_FOR_LOOP);
         roster.setId("roster-id");
 
-        List<BodyLine> bodyLines = roster.getComponents();
-        bodyLines.add(buildBodyLine("line1"));
-        bodyLines.add(buildBodyLine(roster.getId()+"-number", "NUMBERVAR", ComponentTypeEnum.INPUT_NUMBER.value(), BigInteger.TWO, 2.0, 5.0));
-        bodyLines.add(buildBodyLine(roster.getId()+"-co", "CHECKVAR", ComponentTypeEnum.CHECKBOX_ONE.value()));
+        List<BodyCell> bodyCells = roster.getComponents();
+        bodyCells.add(buildBodyCell("line1"));
+        bodyCells.add(buildBodyCell(roster.getId()+"-number", "NUMBERVAR", ComponentTypeEnum.INPUT_NUMBER.value(), BigInteger.TWO, 2.0, 5.0));
+        bodyCells.add(buildBodyCell(roster.getId()+"-co", "CHECKVAR", ComponentTypeEnum.CHECKBOX_ONE.value()));
 
         lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(roster);
@@ -285,31 +285,31 @@ class LunaticAddControlFormatTest {
         return response;
     }
 
-    private BodyLine buildBodyLine(String id, String name, String componentType) {
+    private BodyCell buildBodyCell(String id, String name, String componentType) {
+        BodyCell bodyCell = new BodyCell();
+        bodyCell.setId(id);
+        bodyCell.setComponentType(componentType);
+        bodyCell.setResponse(buildResponse(name));
+        return bodyCell;
+    }
+
+    private BodyCell buildBodyCell(String id, String name, String componentType, BigInteger decimals, Double min, Double max) {
+        BodyCell bodyCell = buildBodyCell(id, name, componentType);
+        bodyCell.setDecimals(decimals);
+        bodyCell.setMin(min);
+        bodyCell.setMax(max);
+        return bodyCell;
+    }
+
+    private BodyCell buildBodyCell(String value) {
+        BodyCell bodyCell = new BodyCell();
+        bodyCell.setValue(value);
+        return bodyCell;
+    }
+
+    private BodyLine buildBodyLine(List<BodyCell> bodyCells) {
         BodyLine bodyLine = new BodyLine();
-        bodyLine.setId(id);
-        bodyLine.setComponentType(componentType);
-        bodyLine.setResponse(buildResponse(name));
+        bodyLine.getBodyCells().addAll(bodyCells);
         return bodyLine;
-    }
-
-    private BodyLine buildBodyLine(String id, String name, String componentType, BigInteger decimals, Double min, Double max) {
-        BodyLine bodyLine = buildBodyLine(id, name, componentType);
-        bodyLine.setDecimals(decimals);
-        bodyLine.setMin(min);
-        bodyLine.setMax(max);
-        return bodyLine;
-    }
-
-    private BodyLine buildBodyLine(String value) {
-        BodyLine bodyLine = new BodyLine();
-        bodyLine.setValue(value);
-        return bodyLine;
-    }
-
-    private BodyType buildBodyType(List<BodyLine> bodyLines) {
-        BodyType bodyType = new BodyType();
-        bodyType.getBodyLine().addAll(bodyLines);
-        return bodyType;
     }
 }
