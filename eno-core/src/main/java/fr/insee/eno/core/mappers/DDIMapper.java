@@ -167,22 +167,22 @@ public class DDIMapper extends Mapper {
     }
 
     private void complexTypeMapping(Object ddiObject, Class<?> modelContextType, BeanWrapper beanWrapper, String propertyName, EvaluationContext context, Expression expression, Class<?> classType) {
+        // Get the DDI object from annotation expression
+        Object ddiObject2 = expression.getValue(context, ddiObject);
+        // It is now allowed to have a null DDI object on complex type properties
+        if (ddiObject2 == null) {
+            log.debug("DDI object mapped by the annotation is null "
+                    + propertyDescription(propertyName, modelContextType.getName()));
+            return;
+        }
         // Instantiate the model target object
-        EnoObject enoObject2 = callConstructor(classType);
+        EnoObject enoObject2 = convert(ddiObject2, classType);
         // Attach it to the current object
         beanWrapper.setPropertyValue(propertyName, enoObject2);
         log.debug("New instance of '"+enoObject2.getClass().getSimpleName()+"' set "
                 + propertyDescription(propertyName, modelContextType.getSimpleName()));
         // Recursive call of the mapper to dive into this object
-        Object ddiObject2 = expression.getValue(context, ddiObject);
-        if (ddiObject2 != null) {
-            recursiveMapping(ddiObject2, enoObject2, context);
-        }
-        // It is now allowed to have a null DDI object on complex type properties
-        else {
-            log.debug("DDI object mapped by the annotation is null "
-                            + propertyDescription(propertyName, modelContextType.getName()));
-        }
+        recursiveMapping(ddiObject2, enoObject2, context);
     }
 
     private void listMapping(Object ddiObject, EnoObject enoObject, PropertyDescriptor propertyDescriptor, TypeDescriptor typeDescriptor, DDI ddiAnnotation, EvaluationContext context, Expression expression) {
@@ -224,15 +224,7 @@ public class DDIMapper extends Mapper {
                     // Put current list index in context TODO: I don't really like this but... :(((
                     context.setVariable("listIndex", i);
                     // Instantiate a model object per DDI object and add it in the model collection
-                    EnoObject enoObject2;
-                    // If the list content type is abstract call the converter
-                    if (Modifier.isAbstract(modelTargetType.getModifiers())) {
-                        enoObject2 = DDIConverter.instantiateFromDDIObject(ddiObject2, ddiIndex); //TODO: remove usage of this (conversion using annotations)
-                    }
-                    // Else, call class constructor
-                    else {
-                        enoObject2 = callConstructor(modelTargetType);
-                    }
+                    EnoObject enoObject2 = convert(ddiObject2, modelTargetType);
                     // Add the created instance in the model list
                     modelCollection.add(enoObject2);
                     // Recursive call on these instances
@@ -244,6 +236,14 @@ public class DDIMapper extends Mapper {
                 unknownTypeException(modelTargetType, propertyDescriptor, modelContextType);
             }
         }
+    }
+
+    private EnoObject convert(Object ddiObject, Class<?> enoTargetType) {
+        // If the list content type is abstract call the converter
+        if (Modifier.isAbstract(enoTargetType.getModifiers()))
+            return DDIConverter.instantiateFromDDIObject(ddiObject, ddiIndex); //TODO: remove usage of this (conversion using annotations)
+        // Else, call class constructor
+        return callConstructor(enoTargetType);
     }
 
     EnoObject callConstructor(Class<?> classType) {

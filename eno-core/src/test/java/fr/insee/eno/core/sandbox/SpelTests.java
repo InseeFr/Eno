@@ -4,6 +4,8 @@ import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
+import fr.insee.eno.core.model.variable.CalculatedVariable;
+import fr.insee.eno.core.model.variable.CollectedVariable;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.reference.DDIIndex;
@@ -53,7 +55,7 @@ public class SpelTests {
     @Test
     public void startWithSafeNavigationOperator() {
         //
-        Variable variable = new Variable();
+        CalculatedVariable variable = new CalculatedVariable();
         CalculatedExpression expression = variable.getExpression();
         //
         assertThrows(NullPointerException.class, () -> expression.getBindingReferences());
@@ -65,7 +67,7 @@ public class SpelTests {
 
     @Test
     public void chainedSpelExpression() {
-        Variable variable = new Variable();
+        Variable variable = new CollectedVariable();
         variable.setName("hello");
         SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
         String hello = spelExpressionParser.parseExpression("getName()").getValue(variable, String.class);
@@ -81,9 +83,9 @@ public class SpelTests {
     public void modifyListContentWithSpel() {
         // Idea : convert a list of something (e.g. Variable) into a list of something else (e.g. String)
         //
-        Variable v1 = new Variable();
+        Variable v1 = new CollectedVariable();
         v1.setName("foo");
-        Variable v2 = new Variable();
+        Variable v2 = new CollectedVariable();
         v2.setName("bar");
         List<Variable> variableList = new ArrayList<>();
         variableList.add(v1);
@@ -111,18 +113,18 @@ public class SpelTests {
     public void usingIndexOnListWithSpel() {
         // Idea : convert a list of something (e.g. Variable) into a list of something else (e.g. String)
         //
-        Variable v1 = new Variable();
+        Variable v1 = new CollectedVariable();
         v1.setName("foo");
-        Variable v2 = new Variable();
+        Variable v2 = new CollectedVariable();
         v2.setName("bar");
         //
         Map<String, Variable> indexMap = new HashMap<>();
         indexMap.put("id1", v1);
         indexMap.put("id2", v2);
         //
-        Variable variableReference1 = new Variable();
+        Variable variableReference1 = new CollectedVariable();
         variableReference1.setName("id1");
-        Variable variableReference2 = new Variable();
+        Variable variableReference2 = new CollectedVariable();
         variableReference2.setName("id2");
         List<Variable> referenceList = new ArrayList<>();
         referenceList.add(variableReference1);

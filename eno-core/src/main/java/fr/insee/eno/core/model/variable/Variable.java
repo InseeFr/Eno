@@ -22,24 +22,23 @@ public abstract class Variable extends EnoObject {
     @DDI(contextType = VariableType.class, field = "getIDArray(0).getStringValue()")
     private String id;
 
-    /** In DDI, when a variable is used in a calculated expression, it is referred to through a reference
-     * (not by its id). This reference is the 'SourceParameterReference' id in the variable definition.
-     * Collected variables directly have a source parameter reference.
+    /** In DDI, when a variable is used in a dynamic label, it is referred to through its reference (not by its id),
+     * surrounded with a special character.
      * Calculated variables have it in the 'Binding' in their 'VariableRepresentation'. */
     private String reference;
+    // TODO: see pairwise DDI with variable 'l0v32sjd': mistake or actual case?
 
     /** Variable name. */
-    @DDI(contextType = VariableType.class,
-            field = "getVariableNameArray(0).getStringArray(0).getStringValue()")
+    @DDI(contextType = VariableType.class, field = "getVariableNameArray(0).getStringArray(0).getStringValue()")
     @Lunatic(contextType = IVariableType.class, field = "setName(#param)")
     private String name;
 
-    /** Measurement unit (in case of some numeric variables). */
+    /** Measurement unit (for numeric variables). */
     @DDI(contextType = VariableType.class,
             field = "getVariableRepresentation().getValueRepresentation()?.getMeasurementUnit()?.getStringValue()")
     private String unit;
 
-    /** Method to convert a Eno-model CollectionType object (from the enum class)
+    /** Method to convert an Eno-model CollectionType object (from the enum class)
      * to the value expected in Lunatic-Model. */
     public static VariableTypeEnum lunaticCollectionType(CollectionType enoCollectionType) {
         return VariableTypeEnum.valueOf(enoCollectionType.name()); // (For now names coincide.)

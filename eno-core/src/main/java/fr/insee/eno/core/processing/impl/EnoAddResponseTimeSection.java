@@ -8,6 +8,7 @@ import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType;
+import fr.insee.eno.core.model.variable.CollectedVariable;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.EnoProcessingInterface;
 import fr.insee.eno.core.reference.EnoIndex;
@@ -40,18 +41,16 @@ public class EnoAddResponseTimeSection implements EnoProcessingInterface {
         EnoIndex enoIndex = enoQuestionnaire.getIndex();
         assert enoIndex != null;
         //
-        Variable hoursVariable = new Variable();
+        CollectedVariable hoursVariable = new CollectedVariable();
         hoursVariable.setName(HOURS_VARIABLE_NAME);
         hoursVariable.setQuestionReference(HOURS_QUESTION_ID);
         hoursVariable.setUnit(HOURS_VARIABLE_UNIT);
-        hoursVariable.setCollected("COLLECTED"); //TODO: maybe an enum here see Variable class
         enoQuestionnaire.getVariables().add(hoursVariable);
         //
-        Variable minutesVariable = new Variable();
+        CollectedVariable minutesVariable = new CollectedVariable();
         minutesVariable.setName(MINUTES_VARIABLE_NAME);
         minutesVariable.setQuestionReference(MINUTES_QUESTION_ID);
         minutesVariable.setUnit(MINUTES_VARIABLE_UNIT);
-        minutesVariable.setCollected("COLLECTED"); //TODO: maybe an enum here see Variable class
         enoQuestionnaire.getVariables().add(minutesVariable);
         //
         Sequence sequence = new Sequence();

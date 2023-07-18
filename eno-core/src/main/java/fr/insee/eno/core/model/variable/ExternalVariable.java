@@ -15,15 +15,9 @@ public class ExternalVariable extends Variable {
             field = "setVariableType(T(fr.insee.eno.core.model.variable.Variable).lunaticCollectionType(#param))")
     private CollectionType collectionType = CollectionType.EXTERNAL;
 
-    /** In DDI, when a variable is used in a calculated expression, it is referred to through a reference
-     * (not by its id). This reference is the 'SourceParameterReference' id in the variable definition.
-     * Collected variables directly have a source parameter reference.
-     * Calculated variables have it in the 'Binding' in their 'VariableRepresentation'. */
-    @DDI(contextType = VariableType.class,
-            field = "getSourceParameterReference() != null ? " +
-                    "getSourceParameterReference().getIDArray(0).getStringValue() : " +
-                    "getVariableRepresentation()?.getProcessingInstructionReference()?.getBindingArray(0)" +
-                    "?.getSourceParameterReference()?.getIDArray(0)?.getStringValue()")
-    private String reference; // TODO: is it possible to have none of both cases? (see pairwise DDI with variable 'l0v32sjd': mistake or actual case?)
+    /** DDI reference of the variable.
+     * For an external variable, it is the variable name itself. */
+    @DDI(contextType = VariableType.class, field = "getVariableNameArray(0).getStringArray(0).getStringValue()")
+    private String reference;
 
 }
