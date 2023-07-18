@@ -17,8 +17,8 @@ import reusable33.ParameterType;
 public class Response extends EnoObject {
 
     /** Variable name corresponding to the response. */
-    @DDI(contextType = ParameterType.class, field = "getParameterNameArray(0).getStringArray(0).getStringValue()")
-    @Lunatic(contextType = ResponseType.class, field = "setName(#param)")
+    @DDI("getParameterNameArray(0).getStringArray(0).getStringValue()")
+    @Lunatic("setName(#param)")
     String variableName;
 
 }

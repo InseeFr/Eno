@@ -23,17 +23,16 @@ import java.util.List;
 public class Filter extends EnoIdentifiableObject implements EnoObjectWithExpression {
 
     /** Lunatic filters doesn't have an identifier. */
-    @DDI(contextType = IfThenElseType.class, field = "getIDArray(0).getStringValue()")
+    @DDI("getIDArray(0).getStringValue()")
     private String id;
 
     /** Filter expression. */
-    @DDI(contextType = IfThenElseType.class, field = "getIfCondition().getCommandArray(0)")
+    @DDI("getIfCondition().getCommandArray(0)")
     private CalculatedExpression expression;
 
     /** Same principle as sequence items list in sequence objects. */
-    @DDI(contextType = IfThenElseType.class,
-            field = "#index.get(#this.getThenConstructReference().getIDArray(0).getStringValue())" +
-                    ".getControlConstructReferenceList()")
+    @DDI("#index.get(#this.getThenConstructReference().getIDArray(0).getStringValue())" +
+            ".getControlConstructReferenceList()")
     private List<ItemReference> filterItems = new ArrayList<>();
 
     /** References of sequences, subsequences or/and questions that are in the scope of the filter.

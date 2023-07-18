@@ -52,35 +52,28 @@ public class Control extends EnoIdentifiableObject implements EnoObjectWithExpre
     }
 
     /** Control criticality. */
-    @DDI(contextType = ComputationItemType.class,
-            field = "T(fr.insee.eno.core.model.navigation.Control).convertDDICriticality(" +
-                    "getTypeOfComputationItem().getStringValue())")
-    @Lunatic(contextType = ControlType.class,
-            field = "setCriticality(T(fr.insee.eno.core.model.navigation.Control).convertCriticalityToLunatic(#param))")
+    @DDI("T(fr.insee.eno.core.model.navigation.Control).convertDDICriticality(" +
+            "getTypeOfComputationItem().getStringValue())")
+    @Lunatic("setCriticality(T(fr.insee.eno.core.model.navigation.Control).convertCriticalityToLunatic(#param))")
     private Criticality criticality;
 
-    @DDI(contextType = ComputationItemType.class,
-            field = "T(fr.insee.eno.core.model.navigation.Control.TypeOfControl).CONSISTENCY")
-    @Lunatic(contextType = ControlType.class,
-            field = "setTypeOfControl(T(fr.insee.eno.core.model.navigation.Control).convertTypeOfControlToLunatic(#param))")
+    @DDI("T(fr.insee.eno.core.model.navigation.Control.TypeOfControl).CONSISTENCY")
+    @Lunatic("setTypeOfControl(T(fr.insee.eno.core.model.navigation.Control).convertTypeOfControlToLunatic(#param))")
     private TypeOfControl typeOfControl;
 
     /** Label typed in Pogues, unused in Lunatic. */
-    @DDI(contextType = ComputationItemType.class,
-            field = "getDescription().getContentArray(0).getStringValue()") // TODO: (NOTE:) getConstructNameArray(0).getStringArray(0).getStringValue() has the same information
+    @DDI("getDescription().getContentArray(0).getStringValue()") // TODO: (NOTE:) getConstructNameArray(0).getStringArray(0).getStringValue() has the same information
     private String label;
 
     /** Expression that determines if the control is triggered or not. */
-    @DDI(contextType = ComputationItemType.class,
-            field = "getCommandCode().getCommandArray(0)")
-    @Lunatic(contextType = ControlType.class, field = "setControl(#param)")
+    @DDI("getCommandCode().getCommandArray(0)")
+    @Lunatic("setControl(#param)")
     private CalculatedExpression expression;
 
     /** Message displayed if the control is triggered. */
-    @DDI(contextType = ComputationItemType.class,
-            field = "#index.get(#this.getInterviewerInstructionReferenceArray(0).getIDArray(0).getStringValue())" +
-                    ".getInstructionTextArray(0)")
-    @Lunatic(contextType = ControlType.class, field = "setErrorMessage(#param)")
+    @DDI("#index.get(#this.getInterviewerInstructionReferenceArray(0).getIDArray(0).getStringValue())" +
+            ".getInstructionTextArray(0)")
+    @Lunatic("setErrorMessage(#param)")
     private DynamicLabel message; //TODO: DDI mapping
 
     /* TODO: later on references in message will be authorized (should be analog as in declaration labels,

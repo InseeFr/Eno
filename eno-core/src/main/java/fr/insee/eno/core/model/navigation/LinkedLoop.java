@@ -30,8 +30,7 @@ import java.util.Optional;
 public class LinkedLoop extends Loop {
 
     /** Reference (id) of the loop or dynamic table question on which the linked loop is based on. */
-    @DDI(contextType = LoopType.class,
-            field = "T(fr.insee.eno.core.model.navigation.LinkedLoop).findLoopReference(#this, #index)")
+    @DDI("T(fr.insee.eno.core.model.navigation.LinkedLoop).findLoopReference(#this, #index)")
     private String reference;
 
     // TODO: method bindings -> no fully qualified classes in spel in annotations

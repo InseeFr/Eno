@@ -79,7 +79,7 @@ public class LunaticMapper extends Mapper {
                     +"' of class '"+ modelContextType.getSimpleName()+"'");
 
             // Instantiate a Spring expression with the annotation content
-            Expression expression = new SpelExpressionParser().parseExpression(lunaticAnnotation.field());
+            Expression expression = new SpelExpressionParser().parseExpression(lunaticAnnotation.value());
 
             if (isSimpleType(classType)) {
                 simpleTypeMapping(lunaticObject, beanWrapper, propertyName, expression);

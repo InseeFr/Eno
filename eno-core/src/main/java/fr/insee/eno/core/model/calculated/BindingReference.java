@@ -18,11 +18,11 @@ import reusable33.InParameterType;
 @Context(format = Format.DDI, type = InParameterType.class)
 public class BindingReference extends EnoObject {
 
-    @DDI(contextType = InParameterType.class, field = "getIDArray(0).getStringValue()")
+    @DDI("getIDArray(0).getStringValue()")
     private String id;
 
     /** Name of the referenced variable. */
-    @DDI(contextType = InParameterType.class, field = "getParameterNameArray(0).getStringArray(0).getStringValue()")
+    @DDI("getParameterNameArray(0).getStringArray(0).getStringValue()")
     private String variableName;
 
 }

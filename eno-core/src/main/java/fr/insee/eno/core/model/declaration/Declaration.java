@@ -22,30 +22,26 @@ import java.util.List;
 @Context(format = Format.LUNATIC, type = DeclarationType.class)
 public class Declaration extends EnoIdentifiableObject implements DeclarationInterface {
 
-    @DDI(contextType = StatementItemType.class,
-            field = "getDisplayTextArray(0)")
-    @Lunatic(contextType = DeclarationType.class, field = "setLabel(#param)")
+    @DDI("getDisplayTextArray(0)")
+    @Lunatic("setLabel(#param)")
     DynamicLabel label;
 
     /** List of variable names that are used in the declarations' label.
      * This list is filled in an Eno processing, and used in Lunatic processing to fill 'bindingDependencies'. */
     List<String> variableNames = new ArrayList<>();
 
-    @Lunatic(contextType = DeclarationType.class,
-            field = "setDeclarationType(T(fr.insee.lunatic.model.flat.DeclarationTypeEnum).valueOf(#param))")
+    @Lunatic("setDeclarationType(T(fr.insee.lunatic.model.flat.DeclarationTypeEnum).valueOf(#param))")
     String declarationType = "STATEMENT";
 
-    @Lunatic(contextType = DeclarationType.class,
-            field = "setPosition(T(fr.insee.lunatic.model.flat.DeclarationPositionEnum).valueOf(#param))")
+    @Lunatic("setPosition(T(fr.insee.lunatic.model.flat.DeclarationPositionEnum).valueOf(#param))")
     String position = "BEFORE_QUESTION_TEXT";
 
     /** List of concerned modes.
      * Only exists in 'in' formats, then used to do mode selection processing on the model.
      * In DDI, a StatementItem has a list of ConstructName that contains this information.
      * (Difference with Instruction: no selection to do.) */
-    @DDI(contextType = StatementItemType.class,
-            field = "getConstructNameList()" +
-                    ".![T(fr.insee.eno.core.model.mode.Mode).convertDDIMode(#this.getStringArray(0).getStringValue())]")
+    @DDI("getConstructNameList()" +
+            ".![T(fr.insee.eno.core.model.mode.Mode).convertDDIMode(#this.getStringArray(0).getStringValue())]")
     private final List<Mode> modes = new ArrayList<>();
 
 }

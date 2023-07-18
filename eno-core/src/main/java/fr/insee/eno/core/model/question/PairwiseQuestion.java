@@ -30,24 +30,21 @@ public class PairwiseQuestion extends SingleResponseQuestion {
     Response response = null;
 
     /** Name of the variable to be used for the question iterations. */
-    @DDI(contextType = QuestionItemType.class,
-            field = "getInParameterArray(0).getParameterNameArray(0).getStringArray(0).getStringValue()")
-    @Lunatic(contextType = PairwiseLinks.class,
-            field = "T(fr.insee.eno.core.model.question.PairwiseQuestion).computeLunaticAxes(#this, #param)")
+    @DDI("getInParameterArray(0).getParameterNameArray(0).getStringArray(0).getStringValue()")
+    @Lunatic("T(fr.insee.eno.core.model.question.PairwiseQuestion).computeLunaticAxes(#this, #param)")
     String loopVariableName;
 
     /**
      * The pairwise question object encapsulates a unique choice question.
      * (During data collection, the collection is iterated several times to establish each link between individuals.)
      */
-    @DDI(contextType = QuestionItemType.class, field = "T(fr.insee.eno.core.model.question.PairwiseQuestion).createQuestionForUniqueChoice(#this)")
-    @Lunatic(contextType = PairwiseLinks.class, field = "getComponents()")
+    @DDI("T(fr.insee.eno.core.model.question.PairwiseQuestion).createQuestionForUniqueChoice(#this)")
+    @Lunatic("getComponents()")
     List<UniqueChoiceQuestion> uniqueChoiceQuestions = new ArrayList<>();
 
     /** Lunatic component type property.
      * This should be inserted by Lunatic-Model serializer later on. */
-    @Lunatic(contextType = PairwiseLinks.class,
-            field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
+    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     String lunaticComponentType = "PAIRWISE_LINKS";
 
     public static void computeLunaticAxes(PairwiseLinks lunaticPairwiseLinks, String loopVariableName) {

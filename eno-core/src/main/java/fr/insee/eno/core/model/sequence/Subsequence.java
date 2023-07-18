@@ -20,8 +20,7 @@ public class Subsequence extends AbstractSequence {
 
     /** Field specific to Lunatic.
      * Note: maybe redundant with "type" field in Lunatic serialized documents. */
-    @Lunatic(contextType = fr.insee.lunatic.model.flat.Subsequence.class,
-            field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
+    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     private String componentType = "SUBSEQUENCE";
 
 }

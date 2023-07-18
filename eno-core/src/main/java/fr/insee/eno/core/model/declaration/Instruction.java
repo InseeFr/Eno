@@ -32,31 +32,26 @@ public class Instruction extends EnoIdentifiableObject implements DeclarationInt
      * then there should be only remaining instruction name which the one we want.
      * TODO: conversion between DDI and Lunatic using toUpperCase works, but is weak, dedicated static methods in the class would be better.
      */
-    @DDI(contextType = InstructionType.class,
-            field = "getInstructionNameList()" +
-                    ".?[!T(fr.insee.eno.core.model.mode.Mode).isDDIMode(#this.getStringArray(0).getStringValue())].get(0)" +
-                    ".getStringArray(0).getStringValue()")
-    @Lunatic(contextType = DeclarationType.class,
-            field = "setDeclarationType(T(fr.insee.lunatic.model.flat.DeclarationTypeEnum).valueOf(#param.toUpperCase()))")
+    @DDI("getInstructionNameList()" +
+            ".?[!T(fr.insee.eno.core.model.mode.Mode).isDDIMode(#this.getStringArray(0).getStringValue())].get(0)" +
+            ".getStringArray(0).getStringValue()")
+    @Lunatic("setDeclarationType(T(fr.insee.lunatic.model.flat.DeclarationTypeEnum).valueOf(#param.toUpperCase()))")
     String declarationType;
 
-    @DDI(contextType = InstructionType.class,
-            field = "getInstructionTextArray(0)")
-    @Lunatic(contextType = DeclarationType.class, field = "setLabel(#param)")
+    @DDI("getInstructionTextArray(0)")
+    @Lunatic("setLabel(#param)")
     DynamicLabel label;
 
     /** List of variable names that are used in the declarations' label.
      * This list is filled in an Eno processing, and used in Lunatic processing to fill 'bindingDependencies'. */
     List<String> variableNames = new ArrayList<>();
 
-    @Lunatic(contextType = DeclarationType.class,
-            field = "setPosition(T(fr.insee.lunatic.model.flat.DeclarationPositionEnum).valueOf(#param))")
+    @Lunatic("setPosition(T(fr.insee.lunatic.model.flat.DeclarationPositionEnum).valueOf(#param))")
     String position = "AFTER_QUESTION_TEXT";
 
-    @DDI(contextType = InstructionType.class,
-            field = "getInstructionNameList()" +
-                    ".?[T(fr.insee.eno.core.model.mode.Mode).isDDIMode(#this.getStringArray(0).getStringValue())]" +
-                    ".![T(fr.insee.eno.core.model.mode.Mode).convertDDIMode(#this.getStringArray(0).getStringValue())]")
+    @DDI("getInstructionNameList()" +
+            ".?[T(fr.insee.eno.core.model.mode.Mode).isDDIMode(#this.getStringArray(0).getStringValue())]" +
+            ".![T(fr.insee.eno.core.model.mode.Mode).convertDDIMode(#this.getStringArray(0).getStringValue())]")
     private final List<Mode> modes = new ArrayList<>();
 
 }

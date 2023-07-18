@@ -23,7 +23,7 @@ public class ComponentFilter extends EnoObject {
 
     /** Expression initialized with the default value. */
     @Getter @Setter
-    @Lunatic(contextType = ConditionFilterType.class, field = "setValue(#param)")
+    @Lunatic("setValue(#param)")
     private String value = DEFAULT_FILTER_VALUE;
 
     /** Private attribute used to replace the default value without doing strings comparison. */
@@ -32,7 +32,7 @@ public class ComponentFilter extends EnoObject {
     /** For now, Lunatic type in label objects does not come from metadata, but is hardcoded here in Eno.
      * See labels documentation. */
     @Getter @Setter
-    @Lunatic(contextType = ConditionFilterType.class, field = "setType(#param)")
+    @Lunatic("setType(#param)")
     String type = Constant.LUNATIC_LABEL_VTL;
 
     @Getter
@@ -40,7 +40,7 @@ public class ComponentFilter extends EnoObject {
 
     /** Contrary to CalculatedExpression class, Lunatic binding dependencies are mapped in the condition filter
      * object. */
-    @Lunatic(contextType = ConditionFilterType.class, field = "getBindingDependencies()")
+    @Lunatic("getBindingDependencies()")
     private List<String> bindingDependencies;
 
     /** Custom getter that uses the binding references. */

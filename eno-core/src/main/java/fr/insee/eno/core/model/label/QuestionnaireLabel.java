@@ -19,13 +19,13 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @Context(format = Format.LUNATIC, type = LabelType.class)
 public class QuestionnaireLabel extends EnoObject {
 
-    @DDI(contextType = InternationalStringType.class, field = "getStringArray(0).getStringValue()")
-    @Lunatic(contextType = LabelType.class, field = "setValue(#param)")
+    @DDI("getStringArray(0).getStringValue()")
+    @Lunatic("setValue(#param)")
     String value;
 
     /** For now, Lunatic type does not come from metadata, but is hardcoded here in Eno.
      * See labels documentation. */
-    @Lunatic(contextType = LabelType.class, field = "setType(#param)")
+    @Lunatic("setType(#param)")
     String type = Constant.LUNATIC_LABEL_VTL_MD;
 
 }

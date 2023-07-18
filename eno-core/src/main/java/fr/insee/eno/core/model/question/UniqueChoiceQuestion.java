@@ -53,19 +53,16 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * Property used to convert to unique choice question to the right Lunatic component.
      * In DDI, there are conventional values in the "generic output format" property.
      * In Lunatic, it is used by the converter to create the right object, and to set the component type property. */
-    @DDI(contextType = QuestionItemType.class,
-            field = "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDDIOutputFormat(#this)")
-    @Lunatic(contextType = {CheckboxOne.class, Radio.class, Dropdown.class},
-            field = "setComponentType(" +
-                    "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
+    @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDDIOutputFormat(#this)")
+    @Lunatic("setComponentType(" +
+            "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
     DisplayFormat displayFormat;
 
     /**
      * List of modalities of the unique choice question.
      */
-    @DDI(contextType = QuestionItemType.class,
-            field = "#index.get(#this.getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()).getCodeList()")
-    @Lunatic(contextType = {CheckboxOne.class, Radio.class, Dropdown.class}, field = "getOptions()")
+    @DDI("#index.get(#this.getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()).getCodeList()")
+    @Lunatic("getOptions()")
     List<CodeItem> codeList = new ArrayList<>();
     //TODO: map this only once maybe (currently a list of object is created for each unique choice question)
 

@@ -40,34 +40,30 @@ import java.util.List;
 public class TableQuestion extends MultipleResponseQuestion {
 
     /** Parameter that exists in Lunatic but that has a fixed value for now. */
-    @Lunatic(contextType = Table.class, field = "setPositioning(#param)")
+    @Lunatic("setPositioning(#param)")
     private final String positioning = "HORIZONTAL";
 
     /** Lunatic component type property.
      * This should be inserted by Lunatic-Model serializer later on. */
-    @Lunatic(contextType = Table.class,
-            field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
+    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     String lunaticComponentType = "TABLE";
 
     /** Code list that contains header info. */
-    @DDI(contextType = QuestionGridType.class,
-            field = "#index.get(#this.getGridDimensionList().?[#this.getRank().intValue() == 2].get(0)" +
-                    ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue())")
+    @DDI("#index.get(#this.getGridDimensionList().?[#this.getRank().intValue() == 2].get(0)" +
+            ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue())")
     CodeList header;
 
     /** Code list that contains left column info. */
-    @DDI(contextType = QuestionGridType.class,
-            field = "#index.get(#this.getGridDimensionList().?[#this.getRank().intValue() == 1].get(0)" +
-                    ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue())")
+    @DDI("#index.get(#this.getGridDimensionList().?[#this.getRank().intValue() == 1].get(0)" +
+            ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue())")
     CodeList leftColumn;
 
     /** Considering that out parameters are sorted in the same order as GridResponseDomainInMixed objects in DDI. */
-    @DDI(contextType = QuestionGridType.class,
-            field = "getOutParameterList().![#this.getParameterNameArray(0).getStringArray(0).getStringValue()]")
+    @DDI("getOutParameterList().![#this.getParameterNameArray(0).getStringArray(0).getStringValue()]")
     List<String> variableNames = new ArrayList<>();
 
     /** Table cells. */
-    @DDI(contextType = QuestionGridType.class, field = "getStructuredMixedGridResponseDomain().getGridResponseDomainInMixedList()")
+    @DDI("getStructuredMixedGridResponseDomain().getGridResponseDomainInMixedList()")
     List<TableCell> tableCells = new ArrayList<>();
 
 }

@@ -16,20 +16,16 @@ import lombok.Setter;
 @Context(format = Format.LUNATIC, type = ComponentSimpleResponseType.class)
 public abstract class SingleResponseQuestion extends Question {
 
-    @DDI(contextType = QuestionItemType.class,
-            field = "getQuestionItemNameArray(0).getStringArray(0).getStringValue()")
+    @DDI("getQuestionItemNameArray(0).getStringArray(0).getStringValue()")
     String name;
 
-    @DDI(contextType = QuestionItemType.class, field = "getOutParameterArray(0)")
-    @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class},
-            field = "setResponse(#param)")
+    @DDI("getOutParameterArray(0)")
+    @Lunatic("setResponse(#param)")
     Response response;
 
-    @DDI(contextType = QuestionItemType.class,
-            field = "getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
-                    "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
-    @Lunatic(contextType = {Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class, CheckboxOne.class, Radio.class, Dropdown.class},
-            field = "setMandatory(#param)")
+    @DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
+            "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
+    @Lunatic("setMandatory(#param)")
     boolean mandatory;
 
 }

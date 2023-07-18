@@ -26,20 +26,18 @@ import java.util.List;
 @Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.Loop.class)
 public abstract class Loop extends EnoIdentifiableObject {
 
-    @Lunatic(contextType = fr.insee.lunatic.model.flat.Loop.class,
-            field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
+    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     private String componentType = "LOOP";
 
     /** Loop business name.
      * Unused in Lunatic. */
-    @DDI(contextType = LoopType.class, field = "getConstructNameArray(0).getStringArray(0).getStringValue()")
+    @DDI("getConstructNameArray(0).getStringArray(0).getStringValue()")
     private String name;
 
     /** Sequence or sub-sequence to loop on.
      * In Lunatic, components within the referenced sequence will be moved in the loop components' list.
      * This is done in a Lunatic processing. */
-    @DDI(contextType = LoopType.class,
-            field = "T(fr.insee.eno.core.model.navigation.Loop).mapSequenceReference(#this)")
+    @DDI("T(fr.insee.eno.core.model.navigation.Loop).mapSequenceReference(#this)")
     private String sequenceReference; // TODO: to be replaced by a loopScope property analog to what's done for filters
 
     /** Same principle as sequence items list in sequence objects.
@@ -47,7 +45,7 @@ public abstract class Loop extends EnoIdentifiableObject {
      *     with DDI mapping expression:
      *     #index.get(getControlConstructReferenceArray(0).getIDArray(0).getStringValue()).getControlConstructReferenceList()
      * */
-    @DDI(contextType = LoopType.class, field = "T(java.util.List).of(#this.getControlConstructReference())")
+    @DDI("T(java.util.List).of(#this.getControlConstructReference())")
     private final List<ItemReference> loopItems = new ArrayList<>();
 
     /** References of sequences or subsequences that are in the scope of the loop.
@@ -68,7 +66,7 @@ public abstract class Loop extends EnoIdentifiableObject {
 
     /** A loop can be in the scope of a filter.
      * In DDI, filters are mapped at questionnaire level and inserted through a processing step. */
-    @Lunatic(contextType = fr.insee.lunatic.model.flat.Loop.class, field = "setConditionFilter(#param)")
+    @Lunatic("setConditionFilter(#param)")
     private Filter filter;
 
 }

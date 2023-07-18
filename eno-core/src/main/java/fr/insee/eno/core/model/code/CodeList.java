@@ -21,10 +21,10 @@ import java.util.List;
 @Context(format = Format.DDI, type = CodeListType.class)
 public class CodeList extends EnoIdentifiableObject {
 
-    @DDI(contextType = CodeListType.class, field = "getLabelArray(0).getContentArray(0).getStringValue()")
+    @DDI("getLabelArray(0).getContentArray(0).getStringValue()")
     String name;
 
-    @DDI(contextType = CodeListType.class, field = "getCodeList()")
+    @DDI("getCodeList()")
     List<CodeItem> codeItems = new ArrayList<>();
 
     /** Max depth of the code list. */

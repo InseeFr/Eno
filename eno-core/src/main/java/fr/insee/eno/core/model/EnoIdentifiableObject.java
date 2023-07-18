@@ -1,7 +1,9 @@
 package fr.insee.eno.core.model;
 
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.ComponentType;
 import lombok.Getter;
@@ -13,13 +15,15 @@ import reusable33.AbstractIdentifiableType;
  * @see EnoIndex */
 @Getter
 @Setter
+@Context(format = Format.DDI, type = AbstractIdentifiableType.class)
+@Context(format = Format.LUNATIC, type = ComponentType.class)
 public abstract class EnoIdentifiableObject extends EnoObject {
 
     /** Object identifier.
      * In DDI, it is the content of the first 'ID' element.
      * In Lunatic, it is the 'id' attribute. */
-    @DDI(contextType = AbstractIdentifiableType.class, field = "getIDArray(0).getStringValue()")
-    @Lunatic(contextType = ComponentType.class, field ="setId(#param)")
+    @DDI("getIDArray(0).getStringValue()")
+    @Lunatic("setId(#param)")
     String id;
 
     @Override

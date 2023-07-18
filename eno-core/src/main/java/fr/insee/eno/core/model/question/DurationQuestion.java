@@ -19,7 +19,7 @@ public class DurationQuestion extends SingleResponseQuestion {
     /**
      * Minimum duration value allowed.
      */
-    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain() != null ? " +
+    @DDI("getResponseDomain() != null ? " +
             "getResponseDomain().getRangeArray(0)?.getMinimumValue()?.getStringValue() : " +
             "#index.get(#this.getResponseDomainReference().getIDArray(0).getStringValue())" +
             ".getRangeArray(0)?.getMinimumValue()?.getStringValue()")
@@ -28,7 +28,7 @@ public class DurationQuestion extends SingleResponseQuestion {
     /**
      * Maximum duration value allowed.
      */
-    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain() != null ? " +
+    @DDI("getResponseDomain() != null ? " +
             "getResponseDomain().getRangeArray(0)?.getMaximumValue()?.getStringValue() : " +
             "#index.get(#this.getResponseDomainReference().getIDArray(0).getStringValue())" +
             ".getRangeArray(0)?.getMaximumValue()?.getStringValue()")
@@ -37,7 +37,7 @@ public class DurationQuestion extends SingleResponseQuestion {
     /**
      * Duration format.
      */
-    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain() != null ? " +
+    @DDI("getResponseDomain() != null ? " +
             "getResponseDomain().getDateFieldFormat().getStringValue() : " +
             "#index.get(#this.getResponseDomainReference().getIDArray(0).getStringValue())" +
             ".getDateFieldFormat().getStringValue()")

@@ -20,14 +20,12 @@ public class StandaloneLoop extends Loop {
     /** Minimum number of iterations allowed.
      * In Pogues, this field is excluded if the "Based on" field is specified.
      * The value is a VTL expression. */
-    @DDI(contextType = LoopType.class,
-            field = "getInitialValue().getCommandArray(0)")
+    @DDI("getInitialValue().getCommandArray(0)")
     private CalculatedExpression minIteration;
 
     /** Maximum number of iterations allowed.
      * See 'minIteration' for details. */
-    @DDI(contextType = LoopType.class,
-            field = "getLoopWhile().getCommandArray(0)")
+    @DDI("getLoopWhile().getCommandArray(0)")
     private CalculatedExpression maxIteration;
 
 }

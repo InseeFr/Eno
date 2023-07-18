@@ -127,7 +127,7 @@ public class DDIMapper extends Mapper {
                     +"' of class '"+ modelContextType.getSimpleName()+"'");
 
             // Instantiate a Spring expression with the annotation content
-            Expression expression = new SpelExpressionParser().parseExpression(ddiAnnotation.field());
+            Expression expression = new SpelExpressionParser().parseExpression(ddiAnnotation.value());
 
             // Simple types
             if (isSimpleType(classType)) {

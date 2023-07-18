@@ -26,19 +26,17 @@ public class NumericQuestion extends SingleResponseQuestion {
     /**
      * Minimum value allowed.
      */
-    @DDI(contextType = QuestionItemType.class,
-            field = "getResponseDomain()?.getNumberRangeList()?.get(0)?.getLow()?.getStringValue() != null ? " +
-                    "T(java.lang.Double).valueOf(getResponseDomain().getNumberRangeArray(0).getLow().getStringValue()) : null")
-    @Lunatic(contextType = InputNumber.class, field = "setMin(#param)")
+    @DDI("getResponseDomain()?.getNumberRangeList()?.get(0)?.getLow()?.getStringValue() != null ? " +
+            "T(java.lang.Double).valueOf(getResponseDomain().getNumberRangeArray(0).getLow().getStringValue()) : null")
+    @Lunatic("setMin(#param)")
     Double minValue;
 
     /**
      * Maximum value allowed.
      */
-    @DDI(contextType = QuestionItemType.class,
-            field = "getResponseDomain()?.getNumberRangeList()?.get(0)?.getHigh()?.getStringValue() != null ? " +
-                    "T(java.lang.Double).valueOf(getResponseDomain().getNumberRangeArray(0).getHigh().getStringValue()) : null")
-    @Lunatic(contextType = InputNumber.class, field = "setMax(#param)")
+    @DDI("getResponseDomain()?.getNumberRangeList()?.get(0)?.getHigh()?.getStringValue() != null ? " +
+            "T(java.lang.Double).valueOf(getResponseDomain().getNumberRangeArray(0).getHigh().getStringValue()) : null")
+    @Lunatic("setMax(#param)")
     Double maxValue;
 
     /**
@@ -46,21 +44,19 @@ public class NumericQuestion extends SingleResponseQuestion {
      * In DDI, a null value is equivalent to 0.
      * Represented as a BigInteger since it is the type used in both DDI and Lunatic for this property.
      */
-    @DDI(contextType = QuestionItemType.class,
-            field = "getResponseDomain()?.getDecimalPositions() ?: T(java.math.BigInteger).valueOf('0')")
-    @Lunatic(contextType = InputNumber.class, field = "setDecimals(#param)")
+    @DDI("getResponseDomain()?.getDecimalPositions() ?: T(java.math.BigInteger).valueOf('0')")
+    @Lunatic("setDecimals(#param)")
     BigInteger numberOfDecimals;
 
     /** Unit associated to the collected value.
      * In DDI, this information is not available (even through references) in 'QuestionItem' object.
      * It is mapped in Variable class and moved here by a processing. */
-    @Lunatic(contextType = InputNumber.class, field = "setUnit(#param)")
+    @Lunatic("setUnit(#param)")
     String unit;
 
     /** Lunatic component type property.
      * This should be inserted by Lunatic-Model serializer later on. */
-    @Lunatic(contextType = InputNumber.class,
-            field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
+    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     String lunaticComponentType = "INPUT_NUMBER";
 
 }

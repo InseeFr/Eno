@@ -42,14 +42,13 @@ public abstract class MultipleChoiceQuestion extends MultipleResponseQuestion {
          * In DDI, this corresponds to a list ouf out parameters.
          * In Lunatic, the CheckboxGroup component has a particular way to hold this information.
          */
-        @DDI(contextType = QuestionGridType.class, field = "getOutParameterList()")
-        @Lunatic(contextType = CheckboxGroup.class, field = "getResponses()")
+        @DDI("getOutParameterList()")
+        @Lunatic("getResponses()")
         List<CodeResponse> codeList = new ArrayList<>();
 
         /** Lunatic component type property.
          * This should be inserted by Lunatic-Model serializer later on. */
-        @Lunatic(contextType = CheckboxGroup.class,
-                field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
+        @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
         String lunaticComponentType = "CHECKBOX_GROUP";
 
     }
@@ -74,8 +73,7 @@ public abstract class MultipleChoiceQuestion extends MultipleResponseQuestion {
 
         /** Lunatic component type property.
          * This should be inserted by Lunatic-Model serializer later on. */
-        @Lunatic(contextType = Table.class,
-                field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
+        @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
         String lunaticComponentType = "TABLE";
 
     }

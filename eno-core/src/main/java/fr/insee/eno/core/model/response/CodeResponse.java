@@ -17,16 +17,15 @@ import reusable33.ParameterType;
 @Context(format = Format.LUNATIC, type = ResponsesCheckboxGroup.class)
 public class CodeResponse extends EnoIdentifiableObject {
 
-    @DDI(contextType = ParameterType.class,
-            field = "#index.get(#index.get(#index.getParent(#this.getIDArray(0).getStringValue())" +
-                    ".getGridDimensionArray(0).getCodeDomain().getCodeListReference().getIDArray(0).getStringValue())" +
-                    ".getCodeArray(#listIndex).getCategoryReference().getIDArray(0).getStringValue())" +
-                    ".getLabelArray(0)") //TODO: >_< see todo in DDIMapper....
-    @Lunatic(contextType = ResponsesCheckboxGroup.class, field = "setLabel(#param)")
+    @DDI("#index.get(#index.get(#index.getParent(#this.getIDArray(0).getStringValue())" +
+            ".getGridDimensionArray(0).getCodeDomain().getCodeListReference().getIDArray(0).getStringValue())" +
+            ".getCodeArray(#listIndex).getCategoryReference().getIDArray(0).getStringValue())" +
+            ".getLabelArray(0)") //TODO: >_< see todo in DDIMapper....
+    @Lunatic("setLabel(#param)")
     private Label label;
 
-    @DDI(contextType = ParameterType.class, field = "#this")
-    @Lunatic(contextType = ResponsesCheckboxGroup.class, field = "setResponse(#param)")
+    @DDI("#this")
+    @Lunatic("setResponse(#param)")
     Response response;
 
 }

@@ -26,8 +26,8 @@ public class TextQuestion extends SingleResponseQuestion {
     /** Maximal length authorized.
      * BigInteger since it is like this in both DDI and Lunatic.
      * See Lunatic converter about Input vs Textarea. */
-    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain()?.getMaxLength()?.intValue()")
-    @Lunatic(contextType = {Input.class, Textarea.class}, field = "setMaxLength(#param)")
+    @DDI("getResponseDomain()?.getMaxLength()?.intValue()")
+    @Lunatic("setMaxLength(#param)")
     BigInteger maxLength;
 
     // Lunatic component type set by Lunatic converter (see comment in LunaticConverter class)
