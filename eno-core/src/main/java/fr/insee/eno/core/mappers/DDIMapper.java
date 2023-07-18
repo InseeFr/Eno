@@ -1,11 +1,13 @@
 package fr.insee.eno.core.mappers;
 
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.converter.DDIConverter;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.DDIIndex;
 import fr.insee.eno.core.reference.EnoIndex;
 import instance33.DDIInstanceDocument;
@@ -24,8 +26,10 @@ import reusable33.AbstractIdentifiableType;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Mapper implementation for the DDI input format.
@@ -69,17 +73,30 @@ public class DDIMapper extends Mapper {
     }
 
     public void mapDDIObject(AbstractIdentifiableType ddiObject, EnoObject enoObject) {
-        // TODO
-        //DDIContext ddiContext = enoObject.getClass().getAnnotation(DDIContext.class);
-        //List<Class<?>> contextTypes = new ArrayList<>(ddiContext.contextType());
-        //if (! contextTypes.contains(ddiObject.getClass())) {
-        //    throw new IllegalArgumentException(String.format(
-        //            "DDI object of type '%s' is not compatible with Eno object of type '%s'",
-        //            ddiObject.getClass(), enoObject.getClass()));
-        //{
+        //
+        Class<?>[] ddiContextTypes = getDDIContext(enoObject);
+        if (hasNoneAssignableMatch(ddiObject, ddiContextTypes))
+            throw new IllegalArgumentException(String.format(
+                    "DDI object of type '%s' is not compatible with Eno object of type '%s'",
+                    ddiObject.getClass(), enoObject.getClass()));
         //
         EvaluationContext context = setup(ddiObject, enoObject);
         recursiveMapping(ddiObject, enoObject, context);
+    }
+
+    private static boolean hasNoneAssignableMatch(AbstractIdentifiableType ddiObject, Class<?>[] ddiContextTypes) {
+        return Arrays.stream(ddiContextTypes).noneMatch(ddiContextType ->
+                ddiObject.getClass().isAssignableFrom(ddiContextType));
+    }
+
+    private static Class<?>[] getDDIContext(EnoObject enoObject) {
+        Optional<Context> ddiContext = Arrays.stream(enoObject.getClass().getAnnotationsByType(Context.class))
+                .filter(context -> Format.DDI.equals(context.format()))
+                .findAny();
+        if (ddiContext.isEmpty())
+            throw new MappingException("Context is not defined in Eno model class "
+                    + enoObject.getClass().getSimpleName());
+        return ddiContext.get().type();
     }
 
     private void recursiveMapping(Object ddiObject, EnoObject enoObject, EvaluationContext context) {
