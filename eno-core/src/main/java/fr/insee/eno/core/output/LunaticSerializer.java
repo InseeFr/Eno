@@ -1,9 +1,8 @@
 package fr.insee.eno.core.output;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
 import fr.insee.lunatic.conversion.JSONSerializer;
-import fr.insee.lunatic.conversion.XMLSerializer;
-import fr.insee.lunatic.exception.SerializationException;
 import fr.insee.lunatic.model.flat.Questionnaire;
 
 import javax.xml.bind.JAXBException;
@@ -36,23 +35,9 @@ public class LunaticSerializer {
     public static String serializeToJson(Questionnaire lunaticQuestionnaire) throws LunaticSerializationException {
         JSONSerializer jsonSerializer = new JSONSerializer();
         try {
-            return jsonSerializer.serialize2(lunaticQuestionnaire);
-        } catch (SerializationException e) {
+            return jsonSerializer.serialize(lunaticQuestionnaire);
+        } catch (JsonProcessingException e) {
             throw new LunaticSerializationException("Error when calling Lunatic-Model serializer.", e);
         }
     }
-
-    /**
-     * Serialize given questionnaire to xml flat (warning: flat, not hierarchical).
-     * @param lunaticQuestionnaire Lunatic questionnaire.
-     * @return Lunatic questionnaire as xml string.
-     * @throws LunaticSerializationException if serialization using Lunatic-Model fails.
-     * @deprecated Xml services are not required in Eno v3.
-     */
-    @Deprecated
-    public static String serializeToXml(Questionnaire lunaticQuestionnaire) throws LunaticSerializationException {
-        XMLSerializer xmlSerializer = new XMLSerializer();
-        return serialize(lunaticQuestionnaire, xmlSerializer::serialize);
-    }
-
 }

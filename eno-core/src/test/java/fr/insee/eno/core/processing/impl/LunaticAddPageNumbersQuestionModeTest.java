@@ -115,17 +115,17 @@ class LunaticAddPageNumbersQuestionModeTest {
 
     @Test
     void shouldMainLoopConsideredAsNonPaginatedLoop() {
-        assertFalse(l6.isPaginatedLoop());
+        assertFalse(l6.getPaginatedLoop());
     }
 
     @Test
     void shouldLinkedLoopConsideredAsPaginatedLoop() {
-        assertTrue(l7.isPaginatedLoop());
+        assertTrue(l7.getPaginatedLoop());
     }
 
     @Test
     void shouldComponentsInNotPaginatedLoopToHaveSamePage() {
-        assertFalse(l6.isPaginatedLoop());
+        assertFalse(l6.getPaginatedLoop());
         assertEquals("6", l6.getPage());
         assertEquals("6", ss6.getPage());
         assertEquals("6", i6.getPage());
@@ -142,7 +142,7 @@ class LunaticAddPageNumbersQuestionModeTest {
     @Test
     void shouldComponentsInPaginatedLoopToHaveDifferentsPage() {
         // l7 is paginated loop so we'll increment subcomponents
-        assertTrue(l7.isPaginatedLoop());
+        assertTrue(l7.getPaginatedLoop());
         assertEquals("7", l7.getPage());
         assertEquals("7.1", co71.getPage());
         assertEquals("7.2", n72.getPage());
@@ -153,7 +153,7 @@ class LunaticAddPageNumbersQuestionModeTest {
     void shouldSubsequenceWithNoDeclarationsAndParentIsPaginatedTakesSamePageAsNextComponent() {
         assertNull(ss71.getPage());
         assertTrue(ss71.getDeclarations().isEmpty());
-        assertTrue(l7.isPaginatedLoop());
+        assertTrue(l7.getPaginatedLoop());
         assertEquals("7.1", ss71.getGoToPage());
         assertEquals("7.1", co71.getPage());
     }
@@ -161,7 +161,7 @@ class LunaticAddPageNumbersQuestionModeTest {
     @Test
     void shouldSubsequenceWithDeclarationsAndParentIsNotPaginatedHasPageAttributeSet() {
         assertFalse(ss6.getDeclarations().isEmpty());
-        assertFalse(l6.isPaginatedLoop());
+        assertFalse(l6.getPaginatedLoop());
         assertEquals("6", ss6.getPage());
         assertNull(ss6.getGoToPage());
     }
@@ -176,13 +176,13 @@ class LunaticAddPageNumbersQuestionModeTest {
 
     @Test
     void shouldNotSetMaxPageOnNotPaginatedLoop() {
-        assertFalse(l6.isPaginatedLoop());
+        assertFalse(l6.getPaginatedLoop());
         assertNull(l6.getMaxPage());
     }
 
     @Test
     void shouldSetCorrectMaxPageOnPaginatedLoop() {
-        assertTrue(l7.isPaginatedLoop());
+        assertTrue(l7.getPaginatedLoop());
         assertEquals("3", l7.getMaxPage());
     }
 

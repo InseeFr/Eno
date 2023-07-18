@@ -3,8 +3,6 @@ package fr.insee.eno.core.sandbox;
 import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.output.LunaticWriter;
 import fr.insee.lunatic.conversion.JSONDeserializer;
-import fr.insee.lunatic.conversion.XMLLunaticFlatToJSONLunaticFlatTranslator;
-import fr.insee.lunatic.conversion.XMLLunaticToXMLLunaticFlatTranslator;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -13,7 +11,6 @@ import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -171,7 +168,7 @@ class LunaticTests {
 
     @Test
     @Disabled("Lunatic-Model deserialization doesn't work for now.")
-    void deserializeQuestionnaire() throws JAXBException {
+    void deserializeQuestionnaire() throws IOException {
         //
         JSONDeserializer jsonDeserializer = new JSONDeserializer();
         URL fileUrl = this.getClass().getClassLoader()
@@ -182,18 +179,6 @@ class LunaticTests {
         Questionnaire questionnaire = jsonDeserializer.deserialize(filePath);
         //
         assertNotNull(questionnaire);
-    }
-
-    @Test
-    @Disabled("Used only to create a json test file.")
-    void flattenPairwise() throws Exception {
-        XMLLunaticToXMLLunaticFlatTranslator translator = new XMLLunaticToXMLLunaticFlatTranslator();
-        String lunaticXmlFlat = translator.generate(this.getClass().getClassLoader()
-                .getResourceAsStream("pairwise/form-lunatic-xml-household-links.xml"));
-        XMLLunaticFlatToJSONLunaticFlatTranslator translator2 = new XMLLunaticFlatToJSONLunaticFlatTranslator();
-        String result = translator2.translate(lunaticXmlFlat);
-        assertNotNull(result);
-        Files.writeString(Path.of("src/test/resources/pairwise/form-lunatic-xml-household-links.json"), result);
     }
 
     @Test
