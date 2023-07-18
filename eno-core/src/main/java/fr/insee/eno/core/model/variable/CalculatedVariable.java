@@ -10,6 +10,7 @@ import logicalproduct33.VariableType;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatedVariable extends Variable implements EnoObjectWithExpression {
@@ -41,6 +42,8 @@ public class CalculatedVariable extends Variable implements EnoObjectWithExpress
     private List<String> lunaticBindingDependencies;
 
     public List<String> getLunaticBindingDependencies() {
+        if (expression == null)
+            return new ArrayList<>();
         return expression.getBindingReferences().stream()
                 .map(BindingReference::getVariableName)
                 .toList();
