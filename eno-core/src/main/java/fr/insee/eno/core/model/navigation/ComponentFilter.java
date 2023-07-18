@@ -41,10 +41,10 @@ public class ComponentFilter extends EnoObject {
     /** Contrary to CalculatedExpression class, Lunatic binding dependencies are mapped in the condition filter
      * object. */
     @Lunatic(contextType = ConditionFilterType.class, field = "getBindingDependencies()")
-    private List<String> bindingDependencies;
+    private List<String> lunaticBindingDependencies;
 
     /** Custom getter that uses the binding references. */
-    public List<String> getBindingDependencies() {
+    public List<String> getLunaticBindingDependencies() {
         return bindingReferences.stream().map(BindingReference::getVariableName).toList();
     }
 
