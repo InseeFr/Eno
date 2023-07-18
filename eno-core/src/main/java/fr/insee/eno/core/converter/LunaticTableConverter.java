@@ -63,15 +63,14 @@ public class LunaticTableConverter {
         });
 
         // Left column
-        // Note: Lunatic class names are a bit confusing: BodyType = line, BodyLine = cell
-        List<BodyType> bodyTypes = flattenCodeList(enoTable.getLeftColumn());
-        lunaticTable.getBody().addAll(bodyTypes);
+        List<BodyLine> bodyLines = flattenCodeList(enoTable.getLeftColumn());
+        lunaticTable.getBodyLines().addAll(bodyLines);
 
         // Body
         // Make sure that the lines have enough capacity
         int headerSize = enoTable.getHeader().size();
-        lunaticTable.getBody().forEach(bodyType ->
-                bodyType.getBodyLine().addAll(Collections.nCopies(headerSize, null))); // https://stackoverflow.com/a/27935203/13425151
+        lunaticTable.getBodyLines().forEach(bodyLine ->
+                bodyLine.getBodyCells().addAll(Collections.nCopies(headerSize, null))); // https://stackoverflow.com/a/27935203/13425151
         // In what follows, it is not assumed that table cells are ordered in a certain way in the eno model
         // Each cell is inserted in the right place using its row number & column number
         int firstContentLine = 0; // Fixed at 0 since nested code lists are not allowed in header
@@ -79,9 +78,9 @@ public class LunaticTableConverter {
         for (int k=0; k<enoTable.getTableCells().size(); k++) {
             TableCell enoCell = enoTable.getTableCells().get(k);
             String variableName = enoTable.getVariableNames().get(k);
-            BodyLine lunaticCell = convertEnoCell(enoCell, variableName);
-            lunaticTable.getBody().get(enoCell.getRowNumber() + firstContentLine - 1)
-                    .getBodyLine().add(enoCell.getColumnNumber() + firstContentColumn, lunaticCell);
+            BodyCell lunaticCell = convertEnoCell(enoCell, variableName);
+            lunaticTable.getBodyLines().get(enoCell.getRowNumber() + firstContentLine - 1)
+                    .getBodyCells().add(enoCell.getColumnNumber() + firstContentColumn, lunaticCell);
         }
 
         //
@@ -89,24 +88,24 @@ public class LunaticTableConverter {
     }
 
     // We could do something neater here maybe
-    public static List<BodyType> flattenCodeList(CodeList codeList) {
-        List<BodyType> lunaticLines = new ArrayList<>();
+    public static List<BodyLine> flattenCodeList(CodeList codeList) {
+        List<BodyLine> lunaticLines = new ArrayList<>();
         for (CodeItem codeItem : codeList.getCodeItems()) {
-            lunaticLines.add(new BodyType());
+            lunaticLines.add(new BodyLine());
             flattenCodeItem(codeItem, lunaticLines);
             lunaticLines.remove(lunaticLines.size()-1);
         }
         return lunaticLines;
     }
-    private static void flattenCodeItem(CodeItem codeItem, List<BodyType> lunaticLines) {
+    private static void flattenCodeItem(CodeItem codeItem, List<BodyLine> lunaticLines) {
         // Map code item on lunatic cell
-        BodyLine lunaticCell = new BodyLine();
+        BodyCell lunaticCell = new BodyCell();
         new LunaticMapper().mapEnoObject(codeItem, lunaticCell);
         // Add lunatic cell in flat list
-        lunaticLines.get(lunaticLines.size()-1).getBodyLine().add(lunaticCell);
+        lunaticLines.get(lunaticLines.size()-1).getBodyCells().add(lunaticCell);
         //
         if (codeItem.size() == 0) {
-            lunaticLines.add(new BodyType());
+            lunaticLines.add(new BodyLine());
         }
         else {
             for (CodeItem codeItem1 : codeItem.getCodeItems()) {
@@ -116,39 +115,39 @@ public class LunaticTableConverter {
     }
 
     /** Uses eno cell and variable name give + annotations on the TableCell classes
-     * to return a fulfilled BodyLine object. */
-    private static BodyLine convertEnoCell(TableCell enoCell, String variableName) {
+     * to return a fulfilled BodyCell object. */
+    private static BodyCell convertEnoCell(TableCell enoCell, String variableName) {
         //
-        BodyLine bodyLine = new BodyLine();
+        BodyCell bodyCell = new BodyCell();
         //
-        bodyLine.setResponse(new ResponseType());
-        bodyLine.getResponse().setName(variableName);
+        bodyCell.setResponse(new ResponseType());
+        bodyCell.getResponse().setName(variableName);
         if (enoCell instanceof TableCell.BooleanCell) {
-            bodyLine.setComponentType(LUNATIC_BOOLEAN_COMPONENT);
+            bodyCell.setComponentType(LUNATIC_BOOLEAN_COMPONENT);
         }
         else if (enoCell instanceof TableCell.TextCell textCell) {
             if (textCell.getMaxLength().intValue() < Constant.LUNATIC_SMALL_TEXT_LIMIT)
-                bodyLine.setComponentType(LUNATIC_SMALL_TEXT_COMPONENT);
+                bodyCell.setComponentType(LUNATIC_SMALL_TEXT_COMPONENT);
             else
-                bodyLine.setComponentType(LUNATIC_LARGE_TEXT_COMPONENT);
+                bodyCell.setComponentType(LUNATIC_LARGE_TEXT_COMPONENT);
         }
         else if (enoCell instanceof TableCell.NumericCell) {
-            bodyLine.setComponentType(LUNATIC_NUMERIC_COMPONENT);
+            bodyCell.setComponentType(LUNATIC_NUMERIC_COMPONENT);
         }
         else if (enoCell instanceof TableCell.DateCell) {
-            bodyLine.setComponentType(LUNATIC_DATE_COMPONENT);
+            bodyCell.setComponentType(LUNATIC_DATE_COMPONENT);
         }
         else if (enoCell instanceof TableCell.UniqueChoiceCell uniqueChoiceCell) {
             switch (uniqueChoiceCell.getDisplayFormat()) {
-                case RADIO -> bodyLine.setComponentType(LUNATIC_UCQ_RADIO_COMPONENT);
-                case CHECKBOX -> bodyLine.setComponentType(LUNATIC_UCQ_CHECKBOX_COMPONENT);
-                case DROPDOWN -> bodyLine.setComponentType(LUNATIC_UCQ_DROPDOWN_COMPONENT);
+                case RADIO -> bodyCell.setComponentType(LUNATIC_UCQ_RADIO_COMPONENT);
+                case CHECKBOX -> bodyCell.setComponentType(LUNATIC_UCQ_CHECKBOX_COMPONENT);
+                case DROPDOWN -> bodyCell.setComponentType(LUNATIC_UCQ_DROPDOWN_COMPONENT);
             }
         }
         //
-        new LunaticMapper().mapEnoObject(enoCell, bodyLine);
+        new LunaticMapper().mapEnoObject(enoCell, bodyCell);
         //
-        return bodyLine;
+        return bodyCell;
     }
 
 }

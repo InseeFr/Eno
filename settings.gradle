@@ -23,7 +23,7 @@ dependencyResolutionManagement {
 
     versionCatalogs {
         libs {
-            version('lunatic-model', '2.4.1-SNAPSHOT')
+            version('lunatic-model', '3.0.3-SNAPSHOT')
             version('pogues-model', '1.0.4')
             library('lunatic-model', 'fr.insee.lunatic', 'lunatic-model').versionRef('lunatic-model')
             library('pogues-model', 'fr.insee.pogues', 'pogues-model').versionRef('pogues-model')

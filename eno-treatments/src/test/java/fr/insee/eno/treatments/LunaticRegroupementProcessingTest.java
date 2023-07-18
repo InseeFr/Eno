@@ -113,7 +113,7 @@ class LunaticRegroupementProcessingTest {
 
     @Test
     void shouldComponentsInNotPaginatedLoopToHaveSamePage() {
-        assertFalse(l6.isPaginatedLoop());
+        assertFalse(l6.getPaginatedLoop());
         assertEquals("5", l6.getPage());
         assertEquals("5", ss6.getPage());
         assertEquals("5", i6.getPage());
@@ -130,7 +130,7 @@ class LunaticRegroupementProcessingTest {
     @Test
     void shouldComponentsInPaginatedLoopToHaveDifferentsPage() {
         // l7 is paginated loop so we'll increment subcomponents
-        assertTrue(l7.isPaginatedLoop());
+        assertTrue(l7.getPaginatedLoop());
         assertEquals("6", l7.getPage());
         assertEquals("6.1", n72.getPage());
         assertEquals("6.2", p73.getPage());
@@ -146,13 +146,13 @@ class LunaticRegroupementProcessingTest {
 
     @Test
     void shouldNotSetMaxPageOnNotPaginatedLoop() {
-        assertFalse(l6.isPaginatedLoop());
+        assertFalse(l6.getPaginatedLoop());
         assertNull(l6.getMaxPage());
     }
 
     @Test
     void shouldSetCorrectMaxPageOnPaginatedLoop() {
-        assertTrue(l7.isPaginatedLoop());
+        assertTrue(l7.getPaginatedLoop());
         assertEquals("2", l7.getMaxPage());
     }
 
@@ -170,7 +170,7 @@ class LunaticRegroupementProcessingTest {
 
     @Test
     void shouldRegroupedQuestionsInLoopHaveSamePage() {
-        assertTrue(l7.isPaginatedLoop());
+        assertTrue(l7.getPaginatedLoop());
         assertEquals("6", l7.getPage());
         // Q5 and Q6 components in the l7 loop are regrouped, they take the same page
         assertEquals("6.1", co71.getPage());

@@ -3,7 +3,7 @@ package fr.insee.eno.core.converter;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.label.Label;
-import fr.insee.lunatic.model.flat.BodyType;
+import fr.insee.lunatic.model.flat.BodyLine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -79,21 +79,21 @@ class LunaticTableConverterTest {
     @Test
     void testFlattenFunction() {
         //
-        List<BodyType> res = LunaticTableConverter.flattenCodeList(codeList);
+        List<BodyLine> res = LunaticTableConverter.flattenCodeList(codeList);
         //
-        assertEquals(1, res.get(0).getBodyLine().size());
-        assertEquals("1", res.get(0).getBodyLine().get(0).getLabel().getValue());
-        assertEquals(2, res.get(1).getBodyLine().size());
-        assertEquals("2", res.get(1).getBodyLine().get(0).getLabel().getValue());
-        assertEquals("21", res.get(1).getBodyLine().get(1).getLabel().getValue());
-        assertEquals(2, res.get(2).getBodyLine().size());
-        assertEquals("22", res.get(2).getBodyLine().get(0).getLabel().getValue());
-        assertEquals("221", res.get(2).getBodyLine().get(1).getLabel().getValue());
-        assertEquals(1, res.get(3).getBodyLine().size());
-        assertEquals("222", res.get(3).getBodyLine().get(0).getLabel().getValue());
-        assertEquals(2, res.get(4).getBodyLine().size());
-        assertEquals("223", res.get(4).getBodyLine().get(0).getLabel().getValue());
-        assertEquals("2231", res.get(4).getBodyLine().get(1).getLabel().getValue());
+        assertEquals(1, res.get(0).getBodyCells().size());
+        assertEquals("1", res.get(0).getBodyCells().get(0).getLabel().getValue());
+        assertEquals(2, res.get(1).getBodyCells().size());
+        assertEquals("2", res.get(1).getBodyCells().get(0).getLabel().getValue());
+        assertEquals("21", res.get(1).getBodyCells().get(1).getLabel().getValue());
+        assertEquals(2, res.get(2).getBodyCells().size());
+        assertEquals("22", res.get(2).getBodyCells().get(0).getLabel().getValue());
+        assertEquals("221", res.get(2).getBodyCells().get(1).getLabel().getValue());
+        assertEquals(1, res.get(3).getBodyCells().size());
+        assertEquals("222", res.get(3).getBodyCells().get(0).getLabel().getValue());
+        assertEquals(2, res.get(4).getBodyCells().size());
+        assertEquals("223", res.get(4).getBodyCells().get(0).getLabel().getValue());
+        assertEquals("2231", res.get(4).getBodyCells().get(1).getLabel().getValue());
         //...
         assertEquals(9, res.size());
     }

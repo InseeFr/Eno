@@ -7,7 +7,7 @@ import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.code.CodeItem;
-import fr.insee.lunatic.model.flat.BodyLine;
+import fr.insee.lunatic.model.flat.BodyCell;
 import fr.insee.lunatic.model.flat.Datepicker;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,7 +43,7 @@ public abstract class TableCell extends EnoObject {
     @Getter @Setter
     public static class TextCell extends TableCell {
         @DDI(contextType = GridResponseDomainInMixedType.class, field = "getResponseDomain().getMaxLength().intValue()")
-        @Lunatic(contextType = BodyLine.class, field = "setMaxLength(#param)")
+        @Lunatic(contextType = BodyCell.class, field = "setMaxLength(#param)")
         BigInteger maxLength;
     }
 
@@ -52,18 +52,18 @@ public abstract class TableCell extends EnoObject {
         @DDI(contextType = QuestionItemType.class,
                 field = "getResponseDomain()?.getNumberRangeList()?.get(0)?.getLow()?.getStringValue() != null ? " +
                         "T(java.lang.Double).valueOf(getResponseDomain().getNumberRangeArray(0).getLow().getStringValue()) : null")
-        @Lunatic(contextType = BodyLine.class, field = "setMin(#param)")
+        @Lunatic(contextType = BodyCell.class, field = "setMin(#param)")
         Double minValue;
 
         @DDI(contextType = QuestionItemType.class,
                 field = "getResponseDomain()?.getNumberRangeList()?.get(0)?.getHigh()?.getStringValue() != null ? " +
                         "T(java.lang.Double).valueOf(getResponseDomain().getNumberRangeArray(0).getHigh().getStringValue()) : null")
-        @Lunatic(contextType = BodyLine.class, field = "setMax(#param)")
+        @Lunatic(contextType = BodyCell.class, field = "setMax(#param)")
         Double maxValue;
 
         @DDI(contextType = QuestionItemType.class,
                 field = "getResponseDomain()?.getDecimalPositions() ?: T(java.math.BigInteger).valueOf('0')")
-        @Lunatic(contextType = BodyLine.class, field = "setDecimals(#param)")
+        @Lunatic(contextType = BodyCell.class, field = "setDecimals(#param)")
         BigInteger numberOfDecimals;
 
         /** Unit not accessible here in DDI.
@@ -101,7 +101,7 @@ public abstract class TableCell extends EnoObject {
 
         @DDI(contextType = QuestionItemType.class,
                 field = "#index.get(#this.getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()).getCodeList()")
-        @Lunatic(contextType = BodyLine.class, field = "getOptions()")
+        @Lunatic(contextType = BodyCell.class, field = "getOptions()")
         List<CodeItem> codeList = new ArrayList<>();
     }
 
