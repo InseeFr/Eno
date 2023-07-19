@@ -127,6 +127,18 @@ class CalculatedVariableTest {
                     Set.of("NUMBER1", "NUMBER2")));
         }
 
+        @Test
+        void bindingDependencies_withCalculated() {
+            //
+            assertEquals(2, calculatedVariables.get("CALCULATED3").getBindingDependencies().size());
+            assertTrue(calculatedVariables.get("CALCULATED3").getBindingDependencies().containsAll(
+                    Set.of("CALCULATED1", "NUMBER1")));
+            //
+            assertEquals(3, calculatedVariables.get("CALCULATED4").getBindingDependencies().size());
+            assertTrue(calculatedVariables.get("CALCULATED4").getBindingDependencies().containsAll(
+                    Set.of("CALCULATED2", "NUMBER1", "NUMBER2")));
+        }
+
     }
 
     @Nested

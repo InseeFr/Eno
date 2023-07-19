@@ -51,6 +51,7 @@ public class EnoProcessing {
         if (parameters.isArrowCharInQuestions())
             new EnoAddArrowCharInQuestions(enoCatalog).apply(enoQuestionnaire);
         //
+        new EnoResolveBindingReferences().apply(enoQuestionnaire);
         new EnoInsertComponentFilters().apply(enoQuestionnaire);
     }
 
