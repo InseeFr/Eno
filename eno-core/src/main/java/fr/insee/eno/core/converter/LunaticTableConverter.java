@@ -7,6 +7,7 @@ import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.question.TableCell;
 import fr.insee.eno.core.model.question.TableQuestion;
+import fr.insee.eno.core.model.question.table.*;
 import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,10 +29,9 @@ public class LunaticTableConverter {
     public static final String LUNATIC_UCQ_RADIO_COMPONENT = "Radio";
     public static final String LUNATIC_UCQ_DROPDOWN_COMPONENT = "Dropdown";
 
-    // TODO: type attribute in Lunatic labels
-    // (probably not here but in a designed Lunatic processing class)
-
-    private LunaticTableConverter() {}
+    private LunaticTableConverter() {
+        throw new IllegalArgumentException("Utility class");
+    }
 
     public static Table convertEnoTable(TableQuestion enoTable) {
         //
@@ -46,8 +46,11 @@ public class LunaticTableConverter {
 
         // Top left empty cell
         HeaderType topLeftCell = new HeaderType();
-        topLeftCell.setLabel(new LabelType());
-        topLeftCell.getLabel().setValue("");
+        LabelType topLeftLabel = new LabelType();
+        topLeftLabel.setValue("");
+        topLeftLabel.setType(Constant.LUNATIC_LABEL_VTL_MD);
+        topLeftCell.setLabel(topLeftLabel);
+
         if (enoTable.getLeftColumn().getMaxDepth() > 0) {
             int leftColumnHSize = enoTable.getLeftColumn().getMaxDepth() + 1;
             topLeftCell.setColspan(BigInteger.valueOf(leftColumnHSize));
@@ -55,12 +58,7 @@ public class LunaticTableConverter {
         lunaticTable.getHeader().add(topLeftCell);
 
         // Header
-        enoTable.getHeader().getCodeItems().forEach(codeItem -> {
-            HeaderType headerCell = new HeaderType();
-            LunaticMapper lunaticMapper = new LunaticMapper();
-            lunaticMapper.mapEnoObject(codeItem, headerCell);
-            lunaticTable.getHeader().add(headerCell);
-        });
+        lunaticTable.getHeader().addAll(convertEnoHeaders(enoTable.getHeader()));
 
         // Left column
         List<BodyLine> bodyLines = flattenCodeList(enoTable.getLeftColumn());
@@ -116,28 +114,30 @@ public class LunaticTableConverter {
 
     /** Uses eno cell and variable name give + annotations on the TableCell classes
      * to return a fulfilled BodyCell object. */
-    private static BodyCell convertEnoCell(TableCell enoCell, String variableName) {
+    public static BodyCell convertEnoCell(TableCell enoCell, String variableName) {
         //
         BodyCell bodyCell = new BodyCell();
         //
         bodyCell.setResponse(new ResponseType());
         bodyCell.getResponse().setName(variableName);
-        if (enoCell instanceof TableCell.BooleanCell) {
+        bodyCell.setId(enoCell.getId());
+
+        if (enoCell instanceof BooleanCell) {
             bodyCell.setComponentType(LUNATIC_BOOLEAN_COMPONENT);
         }
-        else if (enoCell instanceof TableCell.TextCell textCell) {
+        else if (enoCell instanceof TextCell textCell) {
             if (textCell.getMaxLength().intValue() < Constant.LUNATIC_SMALL_TEXT_LIMIT)
                 bodyCell.setComponentType(LUNATIC_SMALL_TEXT_COMPONENT);
             else
                 bodyCell.setComponentType(LUNATIC_LARGE_TEXT_COMPONENT);
         }
-        else if (enoCell instanceof TableCell.NumericCell) {
+        else if (enoCell instanceof NumericCell) {
             bodyCell.setComponentType(LUNATIC_NUMERIC_COMPONENT);
         }
-        else if (enoCell instanceof TableCell.DateCell) {
+        else if (enoCell instanceof DateCell) {
             bodyCell.setComponentType(LUNATIC_DATE_COMPONENT);
         }
-        else if (enoCell instanceof TableCell.UniqueChoiceCell uniqueChoiceCell) {
+        else if (enoCell instanceof UniqueChoiceCell uniqueChoiceCell) {
             switch (uniqueChoiceCell.getDisplayFormat()) {
                 case RADIO -> bodyCell.setComponentType(LUNATIC_UCQ_RADIO_COMPONENT);
                 case CHECKBOX -> bodyCell.setComponentType(LUNATIC_UCQ_CHECKBOX_COMPONENT);
@@ -150,4 +150,16 @@ public class LunaticTableConverter {
         return bodyCell;
     }
 
+    public static List<HeaderType> convertEnoHeaders(CodeList enoHeaders) {
+        List<HeaderType> headers = new ArrayList<>();
+        enoHeaders.getCodeItems().forEach(codeItem -> {
+            HeaderType headerCell = new HeaderType();
+            LabelType headerLabel = new LabelType();
+            headerLabel.setValue(codeItem.getLabel().getValue());
+            headerLabel.setType(Constant.LUNATIC_LABEL_VTL_MD);
+            headerCell.setLabel(headerLabel);
+            headers.add(headerCell);
+        });
+        return headers;
+    }
 }

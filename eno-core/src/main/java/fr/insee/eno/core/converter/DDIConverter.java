@@ -6,6 +6,7 @@ import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.navigation.LinkedLoop;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.*;
+import fr.insee.eno.core.model.question.table.*;
 import fr.insee.eno.core.reference.DDIIndex;
 import lombok.extern.slf4j.Slf4j;
 import reusable33.*;
@@ -179,19 +180,19 @@ public class DDIConverter {
     public static EnoObject instantiateFrom(GridResponseDomainInMixedType gridResponseDomainInMixedType) {
         RepresentationType representationType = gridResponseDomainInMixedType.getResponseDomain();
         if (representationType instanceof NominalDomainType) {
-            return new TableCell.BooleanCell();
+            return new BooleanCell();
         }
         else if (representationType instanceof TextDomainType) {
-            return new TableCell.TextCell();
+            return new TextCell();
         }
         else if (representationType instanceof NumericDomainType) {
-            return new TableCell.NumericCell();
+            return new NumericCell();
         }
         else if (representationType instanceof DateTimeDomainType) {
-            return new TableCell.DateCell();
+            return new DateCell();
         }
         else if (representationType instanceof CodeDomainType) {
-            return new TableCell.UniqueChoiceCell();
+            return new UniqueChoiceCell();
         }
         else {
             throw new ConversionException(

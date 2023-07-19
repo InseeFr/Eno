@@ -138,8 +138,8 @@ public class LunaticConverter {
             return new Table();
         if (enoQuestion instanceof TableQuestion enoTable)
             return LunaticTableConverter.convertEnoTable(enoTable);
-        if (enoQuestion instanceof DynamicTableQuestion)
-            return new Table();
+        if (enoQuestion instanceof DynamicTableQuestion enoTable)
+            return LunaticDynamicTableConverter.convertEnoDynamicTable(enoTable);
         //
         throw new ConversionException(unimplementedMessage(enoQuestion));
     }

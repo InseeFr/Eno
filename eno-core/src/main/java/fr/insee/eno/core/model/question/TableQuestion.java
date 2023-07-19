@@ -4,6 +4,7 @@ import datacollection33.QuestionGridType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.code.CodeList;
+import fr.insee.lunatic.model.flat.RosterForLoop;
 import fr.insee.lunatic.model.flat.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,7 +38,14 @@ public class TableQuestion extends MultipleResponseQuestion {
 
     /** Parameter that exists in Lunatic but that has a fixed value for now. */
     @Lunatic(contextType = Table.class, field = "setPositioning(#param)")
-    private final String positioning = "HORIZONTAL";
+    private String positioning = "HORIZONTAL";
+
+    @DDI(contextType = QuestionGridType.class,
+            field = "getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
+                    "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
+    @Lunatic(contextType = {Table.class, RosterForLoop.class},
+            field = "setMandatory(#param)")
+    boolean mandatory;
 
     /** Lunatic component type property.
      * This should be inserted by Lunatic-Model serializer later on. */
