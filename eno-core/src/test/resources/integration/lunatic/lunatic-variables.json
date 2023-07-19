@@ -3,10 +3,10 @@
   "modele": "ENOVARIABLES",
   "enoCoreVersion": "2.4.1-pairwise",
   "lunaticModelVersion": "2.3.2-rc7",
-  "generatingDate": "17-07-2023 11:08:54",
+  "generatingDate": "19-07-2023 14:33:20",
   "missing": false,
   "pagination": "question",
-  "maxPage": "12",
+  "maxPage": "10",
   "label": {
     "value": "Eno - Variables",
     "type": "VTL|MD"
@@ -41,7 +41,7 @@
       "mandatory": false,
       "page": "2",
       "label": {
-        "value": "\"➡ 1. \" || \"Boolean question\"",
+        "value": "\"➡ \" || \"Boolean question\"",
         "type": "VTL|MD"
       },
       "conditionFilter": {
@@ -72,7 +72,7 @@
       "page": "3",
       "maxLength": 249,
       "label": {
-        "value": "\"➡ 2. \" || \"Short text question\"",
+        "value": "\"➡ \" || \"Short text question\"",
         "type": "VTL|MD"
       },
       "conditionFilter": {
@@ -103,7 +103,7 @@
       "page": "4",
       "maxLength": 250,
       "label": {
-        "value": "\"➡ 3. \" || \"Long text question\"",
+        "value": "\"➡ \" || \"Long text question\"",
         "type": "VTL|MD"
       },
       "conditionFilter": {
@@ -136,7 +136,7 @@
       "max": 10,
       "decimals": 0,
       "label": {
-        "value": "\"➡ 4. \" || \"Numeric question\"",
+        "value": "\"➡ \" || \"Numeric question\"",
         "type": "VTL|MD"
       },
       "conditionFilter": {
@@ -197,7 +197,7 @@
       "max": 10,
       "decimals": 0,
       "label": {
-        "value": "\"➡ 5. \" || \"Numeric question 2\"",
+        "value": "\"➡ \" || \"Numeric question 2\"",
         "type": "VTL|MD"
       },
       "conditionFilter": {
@@ -258,7 +258,7 @@
       "max": 100,
       "decimals": 2,
       "label": {
-        "value": "\"➡ 6. \" || \"Number with two decimals\"",
+        "value": "\"➡ \" || \"Number with two decimals\"",
         "type": "VTL|MD"
       },
       "conditionFilter": {
@@ -319,7 +319,7 @@
       "max": 100,
       "decimals": 0,
       "label": {
-        "value": "\"➡ 7. \" || \"Number with unit\"",
+        "value": "\"➡ \" || \"Number with unit\"",
         "type": "VTL|MD"
       },
       "conditionFilter": {
@@ -380,7 +380,7 @@
       "min": "1900-01-01",
       "max": "format-date(current-date(),'[Y0001]-[M01]-[D01]')",
       "label": {
-        "value": "\"➡ 8. \" || \"Date question\"",
+        "value": "\"➡ \" || \"Date question\"",
         "type": "VTL|MD"
       },
       "conditionFilter": {
@@ -428,7 +428,7 @@
       "min": "2000-01-01",
       "max": "2030-01-01",
       "label": {
-        "value": "\"➡ 9. \" || \"Date question (with min / max)\"",
+        "value": "\"➡ \" || \"Date question (with min / max)\"",
         "type": "VTL|MD"
       },
       "conditionFilter": {
@@ -467,74 +467,9 @@
       "response": {
         "name": "DATE_BOUNDED"
       }
-    },
-    {
-      "id": "COMMENT-SEQ",
-      "componentType": "Sequence",
-      "page": "11",
-      "label": {
-        "value": "\"Commentaire\"",
-        "type": "VTL|MD"
-      },
-      "conditionFilter": {
-        "value": "true",
-        "type": "VTL"
-      },
-      "hierarchy": {
-        "sequence": {
-          "id": "COMMENT-SEQ",
-          "page": "11",
-          "label": {
-            "value": "\"Commentaire\"",
-            "type": "VTL|MD"
-          }
-        }
-      }
-    },
-    {
-      "id": "COMMENT-QUESTION",
-      "componentType": "Textarea",
-      "mandatory": false,
-      "page": "12",
-      "maxLength": 2000,
-      "label": {
-        "value": "\"Avez-vous des remarques concernant l'enquête ou des commentaires ?\"",
-        "type": "VTL|MD"
-      },
-      "conditionFilter": {
-        "value": "true",
-        "type": "VTL"
-      },
-      "hierarchy": {
-        "sequence": {
-          "id": "COMMENT-SEQ",
-          "page": "11",
-          "label": {
-            "value": "\"Commentaire\"",
-            "type": "VTL|MD"
-          }
-        }
-      },
-      "bindingDependencies": [
-        "COMMENT_QE"
-      ],
-      "response": {
-        "name": "COMMENT_QE"
-      }
     }
   ],
   "variables": [
-    {
-      "variableType": "COLLECTED",
-      "name": "COMMENT_QE",
-      "values": {
-        "PREVIOUS": null,
-        "COLLECTED": null,
-        "FORCED": null,
-        "EDITED": null,
-        "INPUTED": null
-      }
-    },
     {
       "variableType": "EXTERNAL",
       "name": "EXTERNAL_TEXT",
@@ -646,83 +581,123 @@
     },
     {
       "variableType": "CALCULATED",
-      "name": "FILTER_RESULT_BOOL",
+      "name": "CALCULATED1",
       "expression": {
-        "value": "true",
+        "value": "cast(NUMBER1, number) * 10",
         "type": "VTL"
       },
+      "bindingDependencies": [
+        "NUMBER1"
+      ],
       "inFilter": "false"
     },
     {
       "variableType": "CALCULATED",
-      "name": "FILTER_RESULT_TEXT_SHORT",
+      "name": "CALCULATED2",
       "expression": {
-        "value": "true",
+        "value": "cast(NUMBER1, integer) + cast(NUMBER2, integer)",
         "type": "VTL"
       },
+      "bindingDependencies": [
+        "NUMBER1",
+        "NUMBER2"
+      ],
       "inFilter": "false"
     },
     {
       "variableType": "CALCULATED",
-      "name": "FILTER_RESULT_TEXT_LONG",
+      "name": "CALCULATED3",
       "expression": {
-        "value": "true",
+        "value": "CALCULATED1 + 50",
         "type": "VTL"
       },
+      "bindingDependencies": [
+        "CALCULATED1",
+        "NUMBER1"
+      ],
       "inFilter": "false"
     },
     {
       "variableType": "CALCULATED",
-      "name": "FILTER_RESULT_NUMBER1",
+      "name": "CALCULATED4",
       "expression": {
-        "value": "true",
+        "value": "CALCULATED2 + 30",
         "type": "VTL"
       },
+      "bindingDependencies": [
+        "CALCULATED2",
+        "NUMBER1",
+        "NUMBER2"
+      ],
       "inFilter": "false"
     },
     {
       "variableType": "CALCULATED",
-      "name": "FILTER_RESULT_NUMBER2",
+      "name": "CALCULATED5",
       "expression": {
-        "value": "true",
+        "value": "\"Value is: \" || cast(CALCULATED4, string)",
         "type": "VTL"
       },
+      "bindingDependencies": [
+        "CALCULATED4",
+        "NUMBER1",
+        "NUMBER2"
+      ],
       "inFilter": "false"
     },
     {
       "variableType": "CALCULATED",
-      "name": "FILTER_RESULT_NUMBER_DECIMALS",
+      "name": "CALCULATED6",
       "expression": {
-        "value": "true",
+        "value": "\"External text is: \" || EXTERNAL_TEXT",
         "type": "VTL"
       },
+      "bindingDependencies": [
+        "EXTERNAL_TEXT"
+      ],
       "inFilter": "false"
     },
     {
       "variableType": "CALCULATED",
-      "name": "FILTER_RESULT_NUMBER_UNIT",
+      "name": "CALCULATED7",
       "expression": {
-        "value": "true",
+        "value": "cast(EXTERNAL_NUMBER, integer) + cast(NUMBER1, integer)",
         "type": "VTL"
       },
+      "bindingDependencies": [
+        "EXTERNAL_NUMBER",
+        "NUMBER1"
+      ],
       "inFilter": "false"
     },
     {
       "variableType": "CALCULATED",
-      "name": "FILTER_RESULT_DATE",
+      "name": "CALCULATED8",
       "expression": {
-        "value": "true",
+        "value": "\"Value is: \" || cast(CALCULATED7, string)",
         "type": "VTL"
       },
+      "bindingDependencies": [
+        "CALCULATED7",
+        "EXTERNAL_NUMBER",
+        "NUMBER1"
+      ],
       "inFilter": "false"
     },
     {
       "variableType": "CALCULATED",
-      "name": "FILTER_RESULT_DATE_BOUNDED",
+      "name": "CALCULATED9",
       "expression": {
-        "value": "true",
+        "value": "CALCULATED4 + CALCULATED7",
         "type": "VTL"
       },
+      "bindingDependencies": [
+        "CALCULATED4",
+        "CALCULATED7",
+        "EXTERNAL_NUMBER",
+        "NUMBER1",
+        "NUMBER2"
+      ],
       "inFilter": "false"
     }
   ],
