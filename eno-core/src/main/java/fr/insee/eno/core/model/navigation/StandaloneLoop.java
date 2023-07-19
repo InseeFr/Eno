@@ -15,6 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Context(format = Format.DDI, type = LoopType.class)
+@Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.Loop.class)
 public class StandaloneLoop extends Loop {
 
     /** Minimum number of iterations allowed.

@@ -43,6 +43,10 @@ public class DDIMapper extends Mapper {
 
     private DDIIndex ddiIndex;
 
+    public DDIMapper() {
+        this.format = Format.DDI;
+    }
+
     private EvaluationContext setup(AbstractIdentifiableType ddiObject, EnoObject enoObject) {
         log.debug("DDI mapping entry object: " + ddiToString(ddiObject));
         // Index DDI object
@@ -74,30 +78,13 @@ public class DDIMapper extends Mapper {
 
     public void mapDDIObject(AbstractIdentifiableType ddiObject, EnoObject enoObject) {
         //
-        Class<?>[] ddiContextTypes = getDDIContext(enoObject);
-        if (hasNoneAssignableMatch(ddiObject, ddiContextTypes))
-            throw new IllegalArgumentException(String.format(
-                    "DDI object of type '%s' is not compatible with Eno object of type '%s'",
-                    ddiObject.getClass(), enoObject.getClass()));
+        compatibilityCheck(ddiObject, enoObject);
         //
         EvaluationContext context = setup(ddiObject, enoObject);
         recursiveMapping(ddiObject, enoObject, context);
     }
 
-    private static boolean hasNoneAssignableMatch(AbstractIdentifiableType ddiObject, Class<?>[] ddiContextTypes) {
-        return Arrays.stream(ddiContextTypes).noneMatch(ddiContextType ->
-                ddiObject.getClass().isAssignableFrom(ddiContextType));
-    }
 
-    private static Class<?>[] getDDIContext(EnoObject enoObject) {
-        Optional<Context> ddiContext = Arrays.stream(enoObject.getClass().getAnnotationsByType(Context.class))
-                .filter(context -> Format.DDI.equals(context.format()))
-                .findAny();
-        if (ddiContext.isEmpty())
-            throw new MappingException("Context is not defined in Eno model class "
-                    + enoObject.getClass().getSimpleName());
-        return ddiContext.get().type();
-    }
 
     private void recursiveMapping(Object ddiObject, EnoObject enoObject, EvaluationContext context) {
 

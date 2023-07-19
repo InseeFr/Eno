@@ -1,7 +1,9 @@
 package fr.insee.eno.core.mappers;
 
+import fr.insee.eno.core.annotations.Contexts;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoObject;
+import fr.insee.eno.core.parameter.Format;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanWrapper;
 
@@ -10,9 +12,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 public class Mapper {
+
+    Format format;
 
     public static Iterator<PropertyDescriptor> propertyDescriptorIterator(BeanWrapper beanWrapper) {
         return Arrays.stream(beanWrapper.getPropertyDescriptors())
@@ -32,6 +37,30 @@ public class Mapper {
                 || Enum.class.isAssignableFrom(classType));
 
         // TODO: other simple types later (probably)
+    }
+
+    void compatibilityCheck(Object mappedObject, EnoObject enoObject) {
+        Class<?>[] contextTypes = getContextTypes(enoObject);
+        if (hasNoneAssignableMatch(mappedObject, contextTypes))
+            throw new IllegalArgumentException(String.format(
+                    "Object of type '%s' is not compatible with Eno object of type '%s'",
+                    mappedObject.getClass(), enoObject.getClass()));
+    }
+
+    private boolean hasNoneAssignableMatch(Object mappedObject, Class<?>[] contextTypes) {
+        return Arrays.stream(contextTypes).noneMatch(contextType ->
+                mappedObject.getClass().isAssignableFrom(contextType));
+    }
+
+    private Class<?>[] getContextTypes(EnoObject enoObject) {
+        Optional<Contexts.Context> contextAnnotation = Arrays.stream(enoObject.getClass().getAnnotationsByType(Contexts.Context.class))
+                .filter(context -> format.equals(context.format()))
+                .findAny();
+        if (contextAnnotation.isEmpty())
+            throw new MappingException(String.format(
+                    "Context is not defined in Eno model class %s for format %s",
+                    enoObject.getClass().getSimpleName(), format));
+        return contextAnnotation.get().type();
     }
 
     @SuppressWarnings("unchecked")

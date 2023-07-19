@@ -4,6 +4,7 @@ import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.converter.LunaticConverter;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanWrapper;
@@ -25,6 +26,10 @@ import java.util.List;
 @Slf4j
 public class LunaticMapper extends Mapper {
 
+    public LunaticMapper() {
+        this.format = Format.LUNATIC;
+    }
+
     /**
      * Fill the given Lunatic questionnaire with the content of the Eno questionnaire.
      * @param enoQuestionnaire A fulfilled Eno questionnaire.
@@ -37,7 +42,7 @@ public class LunaticMapper extends Mapper {
     }
 
     public void mapEnoObject(EnoObject enoObject, Object lunaticObject) {
-        // TODO: control that eno and lunatic objects types are coherent
+        compatibilityCheck(lunaticObject, enoObject);
         recursiveMapping(enoObject, lunaticObject);
     }
 

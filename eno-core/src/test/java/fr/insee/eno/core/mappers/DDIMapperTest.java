@@ -15,7 +15,8 @@ class DDIMapperTest {
         SequenceType ddiSequence = SequenceType.Factory.newInstance();
         // When + Then
         DDIMapper ddiMapper = new DDIMapper();
-        assertThrows(IllegalArgumentException.class, () -> ddiMapper.mapDDIObject(ddiSequence, enoQuestionnaire));
+        assertThrows(IllegalArgumentException.class, () ->
+                ddiMapper.mapDDIObject(ddiSequence, enoQuestionnaire));
     }
 
 }
