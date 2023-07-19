@@ -8,7 +8,6 @@ import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.variable.CalculatedVariable;
 import fr.insee.eno.core.processing.impl.LunaticFilterResult;
-import fr.insee.lunatic.model.flat.IVariableType;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.VariableType;
 import fr.insee.lunatic.model.flat.VariableTypeEnum;
@@ -17,11 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -92,18 +87,20 @@ class CalculatedVariableTest {
     @Nested
     class IntegrationTest1 {
 
-        private static List<VariableType> calculatedVariables;
+        private static Map<String, VariableType> calculatedVariables;
 
         @BeforeAll
         static void mapQuestionnaire() throws DDIParsingException {
             Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
                     CalculatedVariableTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-variables.xml"));
-            calculatedVariables = lunaticQuestionnaire.getVariables().stream()
+            //
+            calculatedVariables = new HashMap<>();
+            lunaticQuestionnaire.getVariables().stream()
                     .map(VariableType.class::cast)
                     .filter(variableType -> VariableTypeEnum.CALCULATED.equals(variableType.getVariableType()))
                     .filter(variableType -> !variableType.getName().startsWith(LunaticFilterResult.FILTER_RESULT_PREFIX))
-                    .toList();
+                    .forEach(variableType -> calculatedVariables.put(variableType.getName(), variableType));
         }
 
         @Test
@@ -116,7 +113,18 @@ class CalculatedVariableTest {
             assertEquals(
                     Set.of("CALCULATED1", "CALCULATED2", "CALCULATED3", "CALCULATED4",
                             "CALCULATED5", "CALCULATED6", "CALCULATED7", "CALCULATED8", "CALCULATED9"),
-                    calculatedVariables.stream().map(IVariableType::getName).collect(Collectors.toSet()));
+                    calculatedVariables.keySet());
+        }
+
+        @Test
+        void bindingDependencies_collectedOnly() {
+            //
+            assertEquals(1, calculatedVariables.get("CALCULATED1").getBindingDependencies().size());
+            assertTrue(calculatedVariables.get("CALCULATED1").getBindingDependencies().contains("NUMBER1"));
+            //
+            assertEquals(2, calculatedVariables.get("CALCULATED2").getBindingDependencies().size());
+            assertTrue(calculatedVariables.get("CALCULATED2").getBindingDependencies().containsAll(
+                    Set.of("NUMBER1", "NUMBER2")));
         }
 
     }
