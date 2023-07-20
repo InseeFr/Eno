@@ -24,6 +24,7 @@ import reusable33.AbstractIdentifiableType;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -139,9 +140,9 @@ public class DDIMapper extends Mapper {
                 complexTypeMapping(ddiObject, modelContextType, beanWrapper, propertyName, context, expression, classType);
             }
 
-            // Lists
-            else if (List.class.isAssignableFrom(classType)) {
-                listMapping(ddiObject, enoObject, propertyDescriptor, typeDescriptor, ddiAnnotation, context, expression);
+            // Collections
+            else if (Collection.class.isAssignableFrom(classType)) {
+                collectionMapping(ddiObject, enoObject, propertyDescriptor, typeDescriptor, ddiAnnotation, context, expression);
             }
 
             else {
@@ -185,7 +186,7 @@ public class DDIMapper extends Mapper {
         recursiveMapping(ddiObject2, enoObject2, context);
     }
 
-    private void listMapping(Object ddiObject, EnoObject enoObject, PropertyDescriptor propertyDescriptor, TypeDescriptor typeDescriptor, DDI ddiAnnotation, EvaluationContext context, Expression expression) {
+    private void collectionMapping(Object ddiObject, EnoObject enoObject, PropertyDescriptor propertyDescriptor, TypeDescriptor typeDescriptor, DDI ddiAnnotation, EvaluationContext context, Expression expression) {
         // Local variables used for logging purposes
         Class<?> modelContextType = enoObject.getClass();
         String propertyName = propertyDescriptor.getName();
@@ -195,51 +196,52 @@ public class DDIMapper extends Mapper {
         if (ddiCollection == null && !ddiAnnotation.allowNullList()) {
             log.debug("Incoherent expression in field of DDI annotation "
                     + propertyDescription(propertyName, modelContextType.getName()));
-            log.debug("If the DDI list can actually be null, use the annotation property to allow it.");
-            throw new MappingException("DDI list mapped by the annotation is null "
+            log.debug("If the DDI collection can actually be null, use the annotation property to allow it.");
+            throw new MappingException("DDI collection mapped by the annotation is null "
                     + propertyDescription(propertyName, modelContextType.getName()));
         }
-        // If the DDI collection is null and null is allowed, do nothing, else:
-        else if (ddiCollection != null) {
-            int collectionSize = ddiCollection.size();
-            // Get the Eno model collection
-            List<Object> modelCollection = readCollection(propertyDescriptor, enoObject);
-            // Get the content type of the model collection
-            Class<?> modelTargetType = typeDescriptor.getResolvableType()
-                    .getGeneric(0).getRawClass();
-            assert modelTargetType != null;
-            // List of simple types
-            if (isSimpleType(modelTargetType)) {
-                modelCollection.addAll(ddiCollection);
-                log.debug(collectionSize+" values set "
+        // If the DDI collection is null and null is allowed, do nothing
+        if (ddiCollection == null)
+            return;
+        // Else
+        int collectionSize = ddiCollection.size();
+        // Get the Eno model collection
+        Collection<Object> modelCollection = readCollection(propertyDescriptor, enoObject);
+        // Get the content type of the model collection
+        Class<?> modelTargetType = typeDescriptor.getResolvableType()
+                .getGeneric(0).getRawClass();
+        assert modelTargetType != null;
+        // Collection of simple types
+        if (isSimpleType(modelTargetType)) {
+            modelCollection.addAll(ddiCollection);
+            log.debug(collectionSize+" values set "
+                    + propertyDescription(propertyName, modelContextType.getSimpleName()));
+        }
+        // Collection of complex types
+        else if (EnoObject.class.isAssignableFrom(modelTargetType)) {
+            // Iterate on the DDI collection
+            for (int i=0; i<collectionSize; i++) {
+                log.debug("Iterating on "+collectionSize+" DDI objects "
                         + propertyDescription(propertyName, modelContextType.getSimpleName()));
+                Object ddiObject2 = ddiCollection.get(i);
+                // Put current DDI list index in context TODO: I don't really like this but... :(((
+                context.setVariable("listIndex", i);
+                // Instantiate a model object per DDI object and add it in the model collection
+                EnoObject enoObject2 = convert(ddiObject2, modelTargetType);
+                // Add the created instance in the model collection
+                modelCollection.add(enoObject2);
+                // Recursive call on these instances
+                recursiveMapping(ddiObject2, enoObject2, context);
             }
-            // List of complex types
-            else if (EnoObject.class.isAssignableFrom(modelTargetType)) {
-                // Iterate on the DDI collection
-                for (int i=0; i<collectionSize; i++) {
-                    log.debug("Iterating on "+collectionSize+" DDI objects "
-                            + propertyDescription(propertyName, modelContextType.getSimpleName()));
-                    Object ddiObject2 = ddiCollection.get(i);
-                    // Put current list index in context TODO: I don't really like this but... :(((
-                    context.setVariable("listIndex", i);
-                    // Instantiate a model object per DDI object and add it in the model collection
-                    EnoObject enoObject2 = convert(ddiObject2, modelTargetType);
-                    // Add the created instance in the model list
-                    modelCollection.add(enoObject2);
-                    // Recursive call on these instances
-                    recursiveMapping(ddiObject2, enoObject2, context);
-                }
-            }
-            //
-            else {
-                unknownTypeException(modelTargetType, propertyDescriptor, modelContextType);
-            }
+        }
+        //
+        else {
+            unknownTypeException(modelTargetType, propertyDescriptor, modelContextType);
         }
     }
 
     private EnoObject convert(Object ddiObject, Class<?> enoTargetType) {
-        // If the list content type is abstract call the converter
+        // If the Eno type is abstract call the converter
         if (Modifier.isAbstract(enoTargetType.getModifiers()))
             return DDIConverter.instantiateFromDDIObject(ddiObject, ddiIndex); //TODO: remove usage of this (conversion using annotations)
         // Else, call class constructor
