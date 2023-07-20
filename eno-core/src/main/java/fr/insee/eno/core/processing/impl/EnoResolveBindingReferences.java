@@ -8,10 +8,7 @@ import fr.insee.eno.core.model.variable.CalculatedVariable;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.EnoProcessingInterface;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /** Processing on the Eno-model calculated expressions concerning calculated variables.
  * When a calculated expression has a reference to a calculated variable, we want to retrieve the variables references
@@ -54,9 +51,9 @@ public class EnoResolveBindingReferences implements EnoProcessingInterface {
      * @param bindingReferences References to be added in the expression binding references.
      * @param expression Expression being updated.
      */
-    private void insertReferences(List<BindingReference> bindingReferences, CalculatedExpression expression) {
+    private void insertReferences(Set<BindingReference> bindingReferences, CalculatedExpression expression) {
         for (BindingReference bindingReference : bindingReferences) {
-            expression.getBindingReferences().add(bindingReference); // TODO: Set<> for binding references to not worry about duplicates!!!
+            expression.getBindingReferences().add(bindingReference);
             Variable variable = variableMap.get(bindingReference.getVariableName());
             if (Variable.CollectionType.CALCULATED.equals(variable.getCollectionType())) {
                 insertReferences(((CalculatedVariable) variable).getExpression().getBindingReferences(), expression);
