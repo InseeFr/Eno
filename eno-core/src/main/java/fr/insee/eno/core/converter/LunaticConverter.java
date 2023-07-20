@@ -12,6 +12,7 @@ import fr.insee.eno.core.model.label.QuestionnaireLabel;
 import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.eno.core.model.navigation.Control;
 import fr.insee.eno.core.model.question.*;
+import fr.insee.eno.core.model.question.table.TableCell;
 import fr.insee.eno.core.model.response.CodeResponse;
 import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.model.sequence.Sequence;
@@ -132,10 +133,10 @@ public class LunaticConverter {
     }
 
     private static Object instantiateFrom(MultipleResponseQuestion enoQuestion) {
-        if (enoQuestion instanceof MultipleChoiceQuestion.Simple)
+        if (enoQuestion instanceof SimpleMultipleChoiceQuestion)
             return new CheckboxGroup();
-        if (enoQuestion instanceof MultipleChoiceQuestion.Complex)
-            return new Table();
+        if (enoQuestion instanceof ComplexMultipleChoiceQuestion complexMultipleChoiceQuestion)
+            return LunaticComplexMultipleChoiceQuestionConverter.convertEnoComplexMCQ(complexMultipleChoiceQuestion);
         if (enoQuestion instanceof TableQuestion enoTable)
             return LunaticTableConverter.convertEnoTable(enoTable);
         if (enoQuestion instanceof DynamicTableQuestion enoTable)

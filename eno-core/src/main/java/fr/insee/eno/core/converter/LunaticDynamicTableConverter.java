@@ -2,7 +2,7 @@ package fr.insee.eno.core.converter;
 
 import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
-import fr.insee.eno.core.model.question.TableCell;
+import fr.insee.eno.core.model.question.table.TableCell;
 import fr.insee.lunatic.model.flat.BodyCell;
 import fr.insee.lunatic.model.flat.LabelType;
 import fr.insee.lunatic.model.flat.LinesRoster;

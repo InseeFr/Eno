@@ -124,7 +124,7 @@ public class DDIMapper extends Mapper {
         if (ddiAnnotation != null) {
 
             log.debug("Processing property '"+ propertyName
-                    +"' of class '"+ modelContextType.getSimpleName()+"'");
+                    +"' of class '"+ modelContextType.getSimpleName()+"' " + ddiAnnotation.field());
 
             // Instantiate a Spring expression with the annotation content
             Expression expression = new SpelExpressionParser().parseExpression(ddiAnnotation.field());
@@ -171,7 +171,7 @@ public class DDIMapper extends Mapper {
         EnoObject enoObject2 = callConstructor(classType);
         // Attach it to the current object
         beanWrapper.setPropertyValue(propertyName, enoObject2);
-        log.debug("New instance of '"+enoObject2.getClass().getSimpleName()+"' set "
+        log.info("New instance of '"+enoObject2.getClass().getSimpleName()+"' set "
                 + propertyDescription(propertyName, modelContextType.getSimpleName()));
         // Recursive call of the mapper to dive into this object
         Object ddiObject2 = expression.getValue(context, ddiObject);

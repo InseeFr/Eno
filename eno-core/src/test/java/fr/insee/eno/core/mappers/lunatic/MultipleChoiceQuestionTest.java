@@ -1,7 +1,8 @@
 package fr.insee.eno.core.mappers.lunatic;
 
 import fr.insee.eno.core.mappers.LunaticMapper;
-import fr.insee.eno.core.model.question.MultipleChoiceQuestion;
+import fr.insee.eno.core.model.question.ComplexMultipleChoiceQuestion;
+import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.lunatic.model.flat.CheckboxGroup;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Table;
@@ -14,7 +15,7 @@ class MultipleChoiceQuestionTest {
     @Test
     void simpleMCQ_lunaticComponentType() {
         //
-        MultipleChoiceQuestion.Simple enoMultipleChoiceQuestion = new MultipleChoiceQuestion.Simple();
+        SimpleMultipleChoiceQuestion enoMultipleChoiceQuestion = new SimpleMultipleChoiceQuestion();
         CheckboxGroup lunaticCheckboxGroup = new CheckboxGroup();
         //
         LunaticMapper lunaticMapper = new LunaticMapper();
@@ -26,7 +27,7 @@ class MultipleChoiceQuestionTest {
     @Test
     void complexMCQ_lunaticComponentType() {
         //
-        MultipleChoiceQuestion.Complex enoMultipleChoiceQuestion = new MultipleChoiceQuestion.Complex();
+        ComplexMultipleChoiceQuestion enoMultipleChoiceQuestion = new ComplexMultipleChoiceQuestion();
         Table lunaticTable = new Table();
         //
         LunaticMapper lunaticMapper = new LunaticMapper();

@@ -10,37 +10,26 @@ import fr.insee.lunatic.model.flat.RosterForLoop;
 import fr.insee.lunatic.model.flat.Table;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Eno model class to represent dynamic table questions.
- * A dynamic table question is a table question where lines can be dynamically added/removed during data collection.
- * In DDI, it corresponds to a QuestionGrid similar to table questions (to be verified).
- * In Lunatic, it corresponds to the RosterForLoop component (to be verified).
+ * "Complex" multiple choice question.
+ * Each modality is itself a list of possibilities
+ * (in this way the multiple choice question looks like a combination of unique choice questions).
+ * In DDI, it corresponds to a QuestionGrid.
+ * In Lunatic, it corresponds to a Table component.
  */
 @Getter
 @Setter
-@Slf4j
-public class DynamicTableQuestion extends MultipleResponseQuestion {
-
-    public DynamicTableQuestion() {
-        log.warn("Dynamic tables mapping is not implemented!");
-    }
+public  class ComplexMultipleChoiceQuestion extends MultipleResponseQuestion {
 
     /** Lunatic component type property.
      * This should be inserted by Lunatic-Model serializer later on. */
-    @Lunatic(contextType = RosterForLoop.class,
+    @Lunatic(contextType = Table.class,
             field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
-    String lunaticComponentType = "ROSTER_FOR_LOOP";
-
-    @DDI(contextType = QuestionGridType.class,
-            field = "#index.get(#this.getGridDimensionList().?[#this.getRank().intValue() == 2].get(0)" +
-                    ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue())")
-    CodeList header;
+    String lunaticComponentType = "TABLE";
 
     /** Parameter that exists in Lunatic but that has a fixed value for now. */
     @Lunatic(contextType = Table.class, field = "setPositioning(#param)")
@@ -54,15 +43,11 @@ public class DynamicTableQuestion extends MultipleResponseQuestion {
     boolean mandatory;
 
     @DDI(contextType = QuestionGridType.class,
-            field = "getGridDimensionList().?[#this.getRank().intValue() == 1].get(0)" +
-                    ".getRoster().getMinimumRequired()")
-    BigInteger minLines;
+            field = "#index.get(#this.getGridDimensionList().?[#this.getRank().intValue() == 1].get(0)" +
+                    ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue())")
+    CodeList headers;
 
-    @DDI(contextType = QuestionGridType.class,
-            field = "getGridDimensionList().?[#this.getRank().intValue() == 1].get(0)" +
-                    ".getRoster().getMaximumAllowed()")
-    BigInteger maxLines;
-
+    /** Considering that out parameters are sorted in the same order as GridResponseDomainInMixed objects in DDI. */
     @DDI(contextType = QuestionGridType.class,
             field = "getOutParameterList().![#this.getParameterNameArray(0).getStringArray(0).getStringValue()]")
     List<String> variableNames = new ArrayList<>();

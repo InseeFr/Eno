@@ -131,17 +131,15 @@ public class DDIConverter {
     }
 
     public static EnoObject instantiateFrom(QuestionGridType questionGridType) {
-        //
         int dimensionSize = questionGridType.getGridDimensionList().size();
-        //
         if (dimensionSize == 1) {
             RepresentationType representationType = questionGridType.getStructuredMixedGridResponseDomain()
                     .getGridResponseDomainInMixedArray(0) // supposing that it is the same for all modalities
                     .getResponseDomain();
             if (representationType instanceof NominalDomainType)
-                return new MultipleChoiceQuestion.Simple();
+                return new SimpleMultipleChoiceQuestion();
             else if (representationType instanceof CodeDomainType)
-                return new MultipleChoiceQuestion.Complex();
+                return new ComplexMultipleChoiceQuestion();
             else
                 throw new ConversionException(
                         "Unable to identify question type in DDI question grid " +

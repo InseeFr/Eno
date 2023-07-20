@@ -4,6 +4,8 @@ import datacollection33.QuestionGridType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.code.CodeList;
+import fr.insee.eno.core.model.navigation.Binding;
+import fr.insee.eno.core.model.question.table.TableCell;
 import fr.insee.lunatic.model.flat.RosterForLoop;
 import fr.insee.lunatic.model.flat.Table;
 import lombok.Getter;
@@ -69,6 +71,10 @@ public class TableQuestion extends MultipleResponseQuestion {
     @DDI(contextType = QuestionGridType.class,
             field = "getOutParameterList().![#this.getParameterNameArray(0).getStringArray(0).getStringValue()]")
     List<String> variableNames = new ArrayList<>();
+
+    @DDI(contextType = QuestionGridType.class,
+            field = "getBindingArray()")
+    List<Binding> bindings = new ArrayList<>();
 
     /** Table cells. */
     @DDI(contextType = QuestionGridType.class, field = "getStructuredMixedGridResponseDomain().getGridResponseDomainInMixedList()")

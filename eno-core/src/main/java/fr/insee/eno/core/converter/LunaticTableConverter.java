@@ -5,7 +5,7 @@ import fr.insee.eno.core.exceptions.business.UnauthorizedHeaderException;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.code.CodeList;
-import fr.insee.eno.core.model.question.TableCell;
+import fr.insee.eno.core.model.question.table.TableCell;
 import fr.insee.eno.core.model.question.TableQuestion;
 import fr.insee.eno.core.model.question.table.*;
 import fr.insee.lunatic.model.flat.*;

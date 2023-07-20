@@ -3,7 +3,6 @@ package fr.insee.eno.core.model.question.table;
 import datacollection33.QuestionItemType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.eno.core.model.question.TableCell;
 import fr.insee.lunatic.model.flat.Datepicker;
 import lombok.Getter;
 import lombok.Setter;

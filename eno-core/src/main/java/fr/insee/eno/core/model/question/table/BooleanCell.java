@@ -1,7 +1,6 @@
 package fr.insee.eno.core.model.question.table;
 
 import datacollection33.GridResponseDomainInMixedType;
-import fr.insee.eno.core.model.question.TableCell;
 import fr.insee.eno.core.parameter.Format;
 import lombok.Getter;
 import lombok.Setter;
