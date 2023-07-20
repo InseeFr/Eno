@@ -46,6 +46,7 @@ public class CalculatedVariable extends Variable implements EnoObjectWithExpress
             return new ArrayList<>();
         return expression.getBindingReferences().stream()
                 .map(BindingReference::getVariableName)
+                .distinct()
                 .toList();
     }
 

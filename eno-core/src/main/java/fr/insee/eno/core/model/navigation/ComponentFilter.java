@@ -47,7 +47,7 @@ public class ComponentFilter extends EnoObject {
 
     /** Custom getter that uses the binding references. */
     public List<String> getLunaticBindingDependencies() {
-        return bindingReferences.stream().map(BindingReference::getVariableName).toList();
+        return bindingReferences.stream().map(BindingReference::getVariableName).distinct().toList();
     }
 
     /**
