@@ -2,7 +2,9 @@ package fr.insee.eno.core.processing.impl;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.declaration.DeclarationInterface;
+import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.navigation.Control;
+import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.InProcessingInterface;
 import fr.insee.eno.core.reference.EnoCatalog;
@@ -33,10 +35,15 @@ public class DDIResolveVariableReferencesInLabels implements InProcessingInterfa
         // Get all declarations and instructions
         List<DeclarationInterface> declarations = new ArrayList<>(enoQuestionnaire.getDeclarations());
         List<Control> controls = new ArrayList<>();
+        List<DynamicLabel> labels = new ArrayList<>();
         enoCatalog.getComponents()
                 .forEach(enoComponent -> {
                     declarations.addAll(enoComponent.getInstructions());
                     controls.addAll(enoComponent.getControls());
+
+                    if(enoComponent instanceof Question question) {
+                        labels.add(question.getLabel());
+                    }
                 });
 
         for (DeclarationInterface declaration : declarations) {
@@ -53,6 +60,13 @@ public class DDIResolveVariableReferencesInLabels implements InProcessingInterfa
             List<Variable> variableReferences = getVariableReferences(message);
             String resolvedMessage = getResolvedLabel(message, variableReferences);
             control.getMessage().setValue(resolvedMessage);
+        }
+
+        for (DynamicLabel label : labels) {
+            String message =label.getValue();
+            List<Variable> variableReferences = getVariableReferences(message);
+            String resolvedMessage = getResolvedLabel(message, variableReferences);
+            label.setValue(resolvedMessage);
         }
     }
 
