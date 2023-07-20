@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -117,26 +118,63 @@ class CalculatedVariableTest {
         }
 
         @Test
+        void calculatedExpressions() {
+            assertEquals("cast(NUMBER1, number) * 10",
+                    calculatedVariables.get("CALCULATED1").getExpression().getValue());
+            // ...
+        }
+
+        @Test
+        void calculatedExpressionType() {
+            calculatedVariables.values().forEach(variableType ->
+                    assertEquals(Constant.LUNATIC_LABEL_VTL, variableType.getExpression().getType()));
+        }
+
+        @Test
         void bindingDependencies_collectedOnly() {
-            //
-            assertEquals(1, calculatedVariables.get("CALCULATED1").getBindingDependencies().size());
-            assertTrue(calculatedVariables.get("CALCULATED1").getBindingDependencies().contains("NUMBER1"));
-            //
-            assertEquals(2, calculatedVariables.get("CALCULATED2").getBindingDependencies().size());
-            assertTrue(calculatedVariables.get("CALCULATED2").getBindingDependencies().containsAll(
-                    Set.of("NUMBER1", "NUMBER2")));
+            assertThat(calculatedVariables.get("CALCULATED1").getBindingDependencies())
+                    .containsExactlyInAnyOrderElementsOf(List.of("NUMBER1"));
+            assertThat(calculatedVariables.get("CALCULATED2").getBindingDependencies())
+                    .containsExactlyInAnyOrderElementsOf(List.of("NUMBER1", "NUMBER2"));
         }
 
         @Test
         void bindingDependencies_withCalculated() {
-            //
-            assertEquals(2, calculatedVariables.get("CALCULATED3").getBindingDependencies().size());
-            assertTrue(calculatedVariables.get("CALCULATED3").getBindingDependencies().containsAll(
-                    Set.of("CALCULATED1", "NUMBER1")));
-            //
-            assertEquals(3, calculatedVariables.get("CALCULATED4").getBindingDependencies().size());
-            assertTrue(calculatedVariables.get("CALCULATED4").getBindingDependencies().containsAll(
-                    Set.of("CALCULATED2", "NUMBER1", "NUMBER2")));
+            assertThat(calculatedVariables.get("CALCULATED3").getBindingDependencies())
+                    .containsExactlyInAnyOrderElementsOf(List.of("CALCULATED1", "NUMBER1"));
+            assertThat(calculatedVariables.get("CALCULATED4").getBindingDependencies())
+                    .containsExactlyInAnyOrderElementsOf(List.of("CALCULATED2", "NUMBER1", "NUMBER2"));
+        }
+
+        @Test
+        void bindingDependencies_intermediateCalculatedReference() {
+            assertThat(calculatedVariables.get("CALCULATED5").getBindingDependencies())
+                    .containsExactlyInAnyOrderElementsOf(List.of("CALCULATED4", "NUMBER1", "NUMBER2"));
+        }
+
+        @Test
+        void bindingDependencies_external() {
+            assertThat(calculatedVariables.get("CALCULATED6").getBindingDependencies())
+                    .containsExactlyInAnyOrderElementsOf(List.of("EXTERNAL_TEXT"));
+        }
+
+        @Test
+        void bindingDependencies_externalAndCollected() {
+            assertThat(calculatedVariables.get("CALCULATED7").getBindingDependencies())
+                    .containsExactlyInAnyOrderElementsOf(List.of("EXTERNAL_NUMBER", "NUMBER1"));
+        }
+
+        @Test
+        void bindingDependencies_externalAndCollectedAndCalculated() {
+            assertThat(calculatedVariables.get("CALCULATED8").getBindingDependencies())
+                    .containsExactlyInAnyOrderElementsOf(List.of("EXTERNAL_NUMBER", "NUMBER1", "CALCULATED7"));
+        }
+
+        @Test
+        void bindingDependencies_finalBoss() {
+            assertThat(calculatedVariables.get("CALCULATED9").getBindingDependencies())
+                    .containsExactlyInAnyOrderElementsOf(List.of("EXTERNAL_NUMBER", "NUMBER1", "NUMBER2",
+                            "CALCULATED4", "CALCULATED7"));
         }
 
     }
