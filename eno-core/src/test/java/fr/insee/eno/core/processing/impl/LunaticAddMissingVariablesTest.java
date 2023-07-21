@@ -57,7 +57,7 @@ class LunaticAddMissingVariablesTest {
     @Test
     void whenApplyingMissingProcessingQuestionnaireMissingAttributeIsTrue() {
         processing.apply(lunaticQuestionnaire);
-        assertTrue(lunaticQuestionnaire.isMissing());
+        assertTrue(lunaticQuestionnaire.getMissing());
     }
     @Test
     void whenSimpleQuestionsGenerateCorrectMissingResponse() {
@@ -420,38 +420,38 @@ class LunaticAddMissingVariablesTest {
         Table input = new Table();
         input.setId(id);
         input.setComponentType(ComponentTypeEnum.TABLE);
-        List<BodyType> bodyTypes = input.getBody();
+        List<BodyLine> bodyLines = input.getBodyLines();
 
         for(int cpt=0; cpt<responseNames.size(); cpt++) {
-            List<BodyLine> bodyLines = new ArrayList<>();
-            bodyLines.add(buildBodyLine(Integer.toString(cpt)));
-            bodyLines.add(buildBodyLine(id+"-"+"-"+cpt, responseNames.get(cpt), ComponentTypeEnum.CHECKBOX_ONE.value()));
+            List<BodyCell> bodyCells = new ArrayList<>();
+            bodyCells.add(buildBodyCell(Integer.toString(cpt)));
+            bodyCells.add(buildBodyCell(id+"-"+"-"+cpt, responseNames.get(cpt), ComponentTypeEnum.CHECKBOX_ONE.value()));
             buildEnoQuestion(id+"-"+"-"+cpt, responseNames.get(cpt));
-            bodyTypes.add(buildBodyType(bodyLines));
+            bodyLines.add(buildBodyLine(bodyCells));
         }
         buildEnoQuestion(id, "table");
         return input;
     }
 
-    private BodyLine buildBodyLine(String id, String name, String componentType) {
-        BodyLine bodyLine = new BodyLine();
-        bodyLine.setId(id);
-        bodyLine.setComponentType(componentType);
-        bodyLine.setResponse(buildResponse(name));
+    private BodyCell buildBodyCell(String id, String name, String componentType) {
+        BodyCell bodyCell = new BodyCell();
+        bodyCell.setId(id);
+        bodyCell.setComponentType(componentType);
+        bodyCell.setResponse(buildResponse(name));
         buildEnoQuestion(id, name);
-        return bodyLine;
+        return bodyCell;
     }
 
-    private BodyLine buildBodyLine(String value) {
+    private BodyCell buildBodyCell(String value) {
+        BodyCell bodyCell = new BodyCell();
+        bodyCell.setValue(value);
+        return bodyCell;
+    }
+
+    private BodyLine buildBodyLine(List<BodyCell> bodyCells) {
         BodyLine bodyLine = new BodyLine();
-        bodyLine.setValue(value);
+        bodyLine.getBodyCells().addAll(bodyCells);
         return bodyLine;
-    }
-
-    private BodyType buildBodyType(List<BodyLine> bodyLines) {
-        BodyType bodyType = new BodyType();
-        bodyType.getBodyLine().addAll(bodyLines);
-        return bodyType;
     }
 
     private Loop buildLoop(String id, List<ComponentType>components, boolean isMainLoop) {
@@ -478,10 +478,10 @@ class LunaticAddMissingVariablesTest {
         input.setId(id);
         input.setComponentType(ComponentTypeEnum.ROSTER_FOR_LOOP);
 
-        List<BodyLine> bodyLines = input.getComponents();
+        List<BodyCell> bodyCells = input.getComponents();
         for(int cpt=0; cpt<responseNames.size(); cpt++) {
-            bodyLines.add(buildBodyLine(Integer.toString(cpt)));
-            bodyLines.add(buildBodyLine(id+"-"+"-"+cpt, responseNames.get(cpt), ComponentTypeEnum.CHECKBOX_ONE.value()));
+            bodyCells.add(buildBodyCell(Integer.toString(cpt)));
+            bodyCells.add(buildBodyCell(id+"-"+"-"+cpt, responseNames.get(cpt), ComponentTypeEnum.CHECKBOX_ONE.value()));
             buildEnoQuestion(id+"-"+"-"+cpt, responseNames.get(cpt));
         }
         buildEnoQuestion(id, "roster");
