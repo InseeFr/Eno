@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @AllArgsConstructor
 @Slf4j
@@ -123,6 +124,7 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
                             .toList();
             case ROSTER_FOR_LOOP ->
                     names = ((RosterForLoop)component).getComponents().stream()
+                            .filter(Objects::nonNull)
                             .filter(subcomponent -> subcomponent.getResponse() != null)
                             .map(subcomponent -> subcomponent.getResponse().getName())
                             .toList();
@@ -135,6 +137,7 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
                     names = ((Table)component).getBodyLines().stream()
                             .map(BodyLine::getBodyCells)
                             .flatMap(Collection::stream)
+                            .filter(Objects::nonNull)
                             .filter(subcomponent -> subcomponent.getResponse() != null)
                             .map(subcomponent -> subcomponent.getResponse().getName())
                             .toList();
@@ -164,13 +167,13 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
 
                 //on main loop, missing response is generated on the loop component
                 // /!\ we assume the first question component found is a simple question (not roster, table, checkboxgroup, ...)
-                missingResponseName = loop.getComponents().stream()
+                /*missingResponseName = loop.getComponents().stream()
                         .filter(ComponentSimpleResponseType.class::isInstance)
                         .map(ComponentSimpleResponseType.class::cast)
                         .map(ComponentSimpleResponseType::getResponse)
                         .map(ResponseType::getName)
                         .findFirst()
-                        .orElseThrow(() -> new LunaticProcessingException(String.format("main loop %s does not have a simple question in his components", loop.getId())));
+                        .orElseThrow(() -> new LunaticProcessingException(String.format("main loop %s does not have a simple question in his components", loop.getId())));*/
             }
 
             // missing responses are handled on the components of pairwise
