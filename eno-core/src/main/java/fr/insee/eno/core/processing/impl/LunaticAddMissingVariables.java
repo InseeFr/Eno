@@ -132,8 +132,8 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
                             .flatMap(Collection::stream)
                             .toList();
             case TABLE ->
-                    names = ((Table)component).getBody().stream()
-                            .map(BodyType::getBodyLine)
+                    names = ((Table)component).getBodyLines().stream()
+                            .map(BodyLine::getBodyCells)
                             .flatMap(Collection::stream)
                             .filter(subcomponent -> subcomponent.getResponse() != null)
                             .map(subcomponent -> subcomponent.getResponse().getName())
@@ -158,7 +158,7 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
                 Loop loop = (Loop) component;
                 // when linked loop, missing responses are generated on the loop components
                 if(isLinkedLoop(loop)) {
-                    ((Loop) component).getComponents().forEach(this::setComponentMissingResponse);
+                    filterComponentsToProcess(loop.getComponents()).forEach(this::setComponentMissingResponse);
                     return;
                 }
 
@@ -176,11 +176,7 @@ public class LunaticAddMissingVariables implements OutProcessingInterface<Questi
             // missing responses are handled on the components of pairwise
             case PAIRWISE_LINKS -> ((PairwiseLinks) component).getComponents().forEach(this::setComponentMissingResponse);
 
-            default -> {
-                log.info(component.getId());
-                missingResponseName = enoCatalog.getQuestion(component.getId()).getName();
-            }
-
+            default -> missingResponseName = enoCatalog.getQuestion(component.getId()).getName();
         }
 
         if(missingResponseName != null) {
