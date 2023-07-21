@@ -44,6 +44,7 @@ public class LunaticProcessing {
         new LunaticAddMissingVariables(new EnoCatalog(enoQuestionnaire), parameters.isMissingVariables()).apply(lunaticQuestionnaire);
         new LunaticAddHierarchy().apply(lunaticQuestionnaire);
         new LunaticAddPageNumbers(parameters.getLunaticPaginationMode()).apply(lunaticQuestionnaire);
+        new LunaticAddCleaningVariables().apply(lunaticQuestionnaire);
         new LunaticAddControlFormat().apply(lunaticQuestionnaire);
         new LunaticReverseConsistencyControlLabel().apply(lunaticQuestionnaire);
     }

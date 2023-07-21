@@ -36,7 +36,7 @@ public class JsonLunaticConverter {
             CleaningType cleaningType = lunaticQuestionnaire.getCleaning();
             if(cleaningType != null && !cleaningType.getAny().isEmpty()) {
                 questionnaireNode.set("cleaning", createCleaningObject(lunaticQuestionnaire, mapper));
-
+            }
             MissingType missingType = lunaticQuestionnaire.getMissingBlock();
             if(missingType != null && !missingType.getAny().isEmpty()) {
                 questionnaireNode.set("missingBlock", createMissingBlocks(lunaticQuestionnaire, mapper));
@@ -63,7 +63,7 @@ public class JsonLunaticConverter {
                 });
         return missingBlocksJson;
     }
-}
+
     /**
      * Create cleaning json node
      * @param lunaticQuestionnaire lunatic questionnaire

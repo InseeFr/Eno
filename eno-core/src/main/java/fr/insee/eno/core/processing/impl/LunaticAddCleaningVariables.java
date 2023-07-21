@@ -15,12 +15,13 @@ public class LunaticAddCleaningVariables implements OutProcessingInterface<Quest
         List<ComponentType> components = lunaticQuestionnaire.getComponents();
         List<CleaningVariable> cleaningVariables = createCleaningVariables(components);
 
-        CleaningType cleaningType = new CleaningType();
-        lunaticQuestionnaire.setCleaning(cleaningType);
-
         if(cleaningVariables.isEmpty()) {
             return;
         }
+
+        CleaningType cleaningType = new CleaningType();
+        lunaticQuestionnaire.setCleaning(cleaningType);
+
         cleaningType.getAny().addAll(groupCleaningVariables(cleaningVariables));
     }
 
@@ -75,7 +76,7 @@ public class LunaticAddCleaningVariables implements OutProcessingInterface<Quest
     }
 
     /**
-     * Create cleaning variables for a multiplr response type component
+     * Create cleaning variables for a multiple response type component
      * @param componentType component to process (must be a multiple response type)
      * @return cleaning variables for this component
      */
@@ -92,17 +93,17 @@ public class LunaticAddCleaningVariables implements OutProcessingInterface<Quest
         List<CleaningConcernedVariable> concernedVariables;
 
         switch(componentType.getComponentType()) {
-            case TABLE -> concernedVariables = ((Table) componentType).getBody().stream()
-                    .map(BodyType::getBodyLine)
+            case TABLE -> concernedVariables = ((Table) componentType).getBodyLines().stream()
+                    .map(BodyLine::getBodyCells)
                     .flatMap(Collection::stream)
-                    .map(BodyLine::getResponse)
+                    .map(BodyCell::getResponse)
                     .filter(Objects::nonNull)
                     .map(ResponseType::getName)
                     .map(name -> new CleaningConcernedVariable(name, conditionFilter))
                     .toList();
 
             case ROSTER_FOR_LOOP -> concernedVariables = ((RosterForLoop) componentType).getComponents().stream()
-                    .map(BodyLine::getResponse)
+                    .map(BodyCell::getResponse)
                     .filter(Objects::nonNull)
                     .map(ResponseType::getName)
                     .map(name -> new CleaningConcernedVariable(name, conditionFilter))
