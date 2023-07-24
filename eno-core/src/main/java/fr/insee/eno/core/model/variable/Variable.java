@@ -2,67 +2,46 @@ package fr.insee.eno.core.model.variable;
 
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.EnoObject;
-import fr.insee.eno.core.model.EnoObjectWithExpression;
 import fr.insee.lunatic.model.flat.IVariableType;
+import fr.insee.lunatic.model.flat.VariableTypeEnum;
 import logicalproduct33.VariableType;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Variable extends EnoObject implements EnoObjectWithExpression {
+public abstract class Variable extends EnoObject {
 
-    /* TODO: separate object for calculated variable? probably (implies a selection on variable list in DDI,
-        but it is worth the effort since it would make more straightforward SpEL fields). */
+    public enum CollectionType {COLLECTED, CALCULATED, EXTERNAL}
 
+    /** Variable collection type. */
+    private CollectionType collectionType;
+
+    /** Variables doesn't have an identifier in Lunatic. */
     @DDI(contextType = VariableType.class, field = "getIDArray(0).getStringValue()")
     private String id;
 
-    /** In DDI, when a variable is used in a calculated expression, it is referred to through a reference
-     * (not by its id). This reference is the 'SourceParameterReference' id in the variable definition.
-     * Collected variables directly have a source parameter reference.
+    /** In DDI, when a variable is used in a dynamic label, it is referred to through its reference (not by its id),
+     * surrounded with a special character.
      * Calculated variables have it in the 'Binding' in their 'VariableRepresentation'. */
-    @DDI(contextType = VariableType.class,
-            field = "getSourceParameterReference() != null ? " +
-                    "getSourceParameterReference().getIDArray(0).getStringValue() : " +
-                    "getVariableRepresentation()?.getProcessingInstructionReference()?.getBindingArray(0)" +
-                    "?.getSourceParameterReference()?.getIDArray(0)?.getStringValue()")
-    private String reference; // TODO: is it possible to have none of both cases? (see pairwise DDI with variable 'l0v32sjd': mistake or actual case?)
+    private String reference;
+    // TODO: see pairwise DDI with variable 'l0v32sjd': mistake or actual case?
 
     /** Variable name. */
-    @DDI(contextType = VariableType.class,
-            field = "getVariableNameArray(0).getStringArray(0).getStringValue()")
+    @DDI(contextType = VariableType.class, field = "getVariableNameArray(0).getStringArray(0).getStringValue()")
     @Lunatic(contextType = IVariableType.class, field = "setName(#param)")
     private String name;
 
-    /** Reference to the question in which the variable is collected.
-     * This property has been removed in Lunatic variables. */
-    @DDI(contextType = VariableType.class,
-            field = "!#this.getQuestionReferenceList().isEmpty() ? " +
-                    "getQuestionReferenceArray(0).getIDArray(0).getStringValue() : null")
-    //@Lunatic(contextType = IVariableType.class, field = "setComponentRef(#param)")
-    String questionReference;
-
-    /** Expression to evaluate the variable if it is a calculated variable. */
-    @DDI(contextType = VariableType.class,
-            field = "getVariableRepresentation().getProcessingInstructionReference() != null ? " +
-                    "#index.get(#this.getVariableRepresentation().getProcessingInstructionReference().getIDArray(0).getStringValue())" +
-                    ".getCommandCodeArray(0).getCommandArray(0) : null")
-    @Lunatic(contextType = fr.insee.lunatic.model.flat.VariableType.class, field = "setExpression(#param)")
-    CalculatedExpression expression;
-
-    /** Measurement unit (in case of some numeric variables). */
+    /** Measurement unit (for numeric variables). */
     @DDI(contextType = VariableType.class,
             field = "getVariableRepresentation().getValueRepresentation()?.getMeasurementUnit()?.getStringValue()")
-    String unit;
+    private String unit;
 
-    /** Variable type (among 'COLLECTED', 'CALCULATED' or 'EXTERNAL'). */
-    @DDI(contextType = VariableType.class,
-            field = "!#this.getQuestionReferenceList().isEmpty() ? 'COLLECTED' : 'CALCULATED'")
-    @Lunatic(contextType = IVariableType.class,
-            field = "setVariableType(T(fr.insee.lunatic.model.flat.VariableTypeEnum).valueOf(#param))")
-    String collected; // TODO: an enum (COLLECTED, CALCULATED, EXTERNAL) here would be appropriate (or separate classes?)
+    /** Method to convert an Eno-model CollectionType object (from the enum class)
+     * to the value expected in Lunatic-Model. */
+    public static VariableTypeEnum lunaticCollectionType(CollectionType enoCollectionType) {
+        return VariableTypeEnum.valueOf(enoCollectionType.name()); // (For now names coincide.)
+    }
 
 }

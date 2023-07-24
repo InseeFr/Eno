@@ -8,7 +8,7 @@ import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType;
-import fr.insee.eno.core.model.variable.Variable;
+import fr.insee.eno.core.model.variable.CollectedVariable;
 import fr.insee.eno.core.processing.EnoProcessingInterface;
 import fr.insee.eno.core.reference.EnoIndex;
 
@@ -30,10 +30,9 @@ public class EnoAddCommentSection implements EnoProcessingInterface {
         EnoIndex enoIndex = enoQuestionnaire.getIndex();
         assert enoIndex != null;
         //
-        Variable commentVariable = new Variable();
+        CollectedVariable commentVariable = new CollectedVariable();
         commentVariable.setName(COMMENT_VARIABLE_NAME);
         commentVariable.setQuestionReference(COMMENT_QUESTION_ID);
-        commentVariable.setCollected("COLLECTED"); //TODO: maybe an enum here see Variable class
         enoQuestionnaire.getVariables().add(commentVariable);
         //
         Sequence sequence = new Sequence();

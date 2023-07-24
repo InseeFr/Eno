@@ -15,6 +15,7 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 import java.beans.PropertyDescriptor;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -89,8 +90,8 @@ public class LunaticMapper extends Mapper {
                 complexTypeMapping(lunaticObject, beanWrapper, propertyName, expression);
             }
 
-            else if (List.class.isAssignableFrom(classType)) {
-                listMapping(enoObject, lunaticObject, propertyDescriptor, expression);
+            else if (Collection.class.isAssignableFrom(classType)) {
+                collectionMapping(enoObject, lunaticObject, propertyDescriptor, expression);
             }
 
             else {
@@ -132,22 +133,22 @@ public class LunaticMapper extends Mapper {
         }
     }
 
-    private void listMapping(EnoObject enoObject, Object lunaticObject, PropertyDescriptor propertyDescriptor, Expression expression) {
+    private void collectionMapping(EnoObject enoObject, Object lunaticObject, PropertyDescriptor propertyDescriptor, Expression expression) {
         // Get the Lunatic collection to be filled
         @SuppressWarnings("unchecked")
         List<Object> lunaticCollection = expression.getValue(lunaticObject, List.class);
         assert lunaticCollection != null : "Lunatic collections are expected to be initialized.";
         // Get the model collection
-        List<Object> enoCollection = readCollection(propertyDescriptor, enoObject);
+        Collection<Object> enoCollection = readCollection(propertyDescriptor, enoObject);
         assert enoCollection != null : "Model collections are expected to be initialized.";
         if (! enoCollection.isEmpty()) {
             // Content type of the model collection
-            Class<?> modelContentType = enoCollection.get(0).getClass();
-            // List of simple type
+            Class<?> modelContentType = enoCollection.iterator().next().getClass();
+            // Collection of simple type
             if (isSimpleType(modelContentType)) {
                 lunaticCollection.addAll(enoCollection);
             }
-            // List of complex type
+            // Collection of complex type
             else if (EnoObject.class.isAssignableFrom(modelContentType)) {
                 // Iterate on the model collection
                 for (Object enoObject2 : enoCollection) {

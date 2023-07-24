@@ -8,6 +8,7 @@ import org.springframework.beans.BeanWrapper;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,9 +36,9 @@ public class Mapper {
     }
 
     @SuppressWarnings("unchecked")
-    List<Object> readCollection(PropertyDescriptor propertyDescriptor, EnoObject enoObject) {
+    Collection<Object> readCollection(PropertyDescriptor propertyDescriptor, EnoObject enoObject) {
         try {
-            return (List<Object>) propertyDescriptor.getReadMethod().invoke(enoObject);
+            return (Collection<Object>) propertyDescriptor.getReadMethod().invoke(enoObject);
         } catch (IllegalAccessException | InvocationTargetException e) {
             log.debug("hint: Make sure that collection has been initialized (i.e. is not null) in model class.");
             log.debug("hint: Example: List<SomeEnoObject> = new ArrayList<>();");
