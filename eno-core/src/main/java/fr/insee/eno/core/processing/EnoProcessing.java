@@ -52,6 +52,7 @@ public class EnoProcessing {
             new EnoAddArrowCharInQuestions(enoCatalog).apply(enoQuestionnaire);
         //
         new EnoInsertComponentFilters().apply(enoQuestionnaire);
+        new EnoResolveBindingReferences().apply(enoQuestionnaire);
     }
 
     private void ddiTechnicalProcessing(EnoQuestionnaire enoQuestionnaire) {

@@ -3,6 +3,8 @@ package fr.insee.eno.core.processing.impl;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.NumericQuestion;
 import fr.insee.eno.core.model.question.Question;
+import fr.insee.eno.core.model.variable.CollectedVariable;
+import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.InProcessingInterface;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,6 +21,8 @@ public class DDIMoveUnitInQuestions implements InProcessingInterface {
         assert enoQuestionnaire.getIndex() != null;
         //
         enoQuestionnaire.getVariables().stream()
+                .filter(variable -> Variable.CollectionType.COLLECTED.equals(variable.getCollectionType()))
+                .map(CollectedVariable.class::cast)
                 .filter(variable -> variable.getUnit() != null)
                 .forEach(variable -> {
                     Question question = (Question) enoQuestionnaire.get(variable.getQuestionReference());

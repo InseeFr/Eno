@@ -4,6 +4,8 @@ import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.EnoObjectWithExpression;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.variable.CalculatedVariable;
+import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.InProcessingInterface;
 
 public class DDIResolveExpressions implements InProcessingInterface {
@@ -15,7 +17,8 @@ public class DDIResolveExpressions implements InProcessingInterface {
     public void apply(EnoQuestionnaire enoQuestionnaire) {
         // Calculated variables
         enoQuestionnaire.getVariables().stream()
-                .filter(variable -> variable.getCollected().equals("CALCULATED")) //TODO: no filter required here when separate list for calculated variables will be implemented
+                .filter(variable -> Variable.CollectionType.CALCULATED.equals(variable.getCollectionType()))
+                .map(CalculatedVariable.class::cast)
                 .forEach(this::resolveExpression);
         // Controls
         enoQuestionnaire.getControls().forEach(this::resolveExpression);

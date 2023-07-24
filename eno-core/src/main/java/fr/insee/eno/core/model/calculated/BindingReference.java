@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import reusable33.InParameterType;
 
+import java.util.Objects;
+
 /** Class to associate a reference id with a variable name in some calculated expressions. */
 @Getter
 @Setter
@@ -25,4 +27,16 @@ public class BindingReference extends EnoObject {
     @DDI("getParameterNameArray(0).getStringArray(0).getStringValue()")
     private String variableName;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BindingReference that = (BindingReference) o;
+        return Objects.equals(id, that.id) && Objects.equals(variableName, that.variableName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, variableName);
+    }
 }
