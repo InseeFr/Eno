@@ -4,9 +4,10 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.impl.*;
 import fr.insee.eno.core.processing.impl.lunatic.pagination.LunaticAddPageNumbers;
+import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.reference.LunaticCatalog;
-import fr.insee.lunatic.model.flat.Questionnaire;
+import fr.insee.lunatic.model.flat.*;
 
 public class LunaticProcessing {
 
@@ -38,7 +39,7 @@ public class LunaticProcessing {
         //
         new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);
         new LunaticLoopResolution(enoQuestionnaire).apply(lunaticQuestionnaire);
-        new LunaticAddMissingVariables(parameters.isMissingVariables()).apply(lunaticQuestionnaire);
+        new LunaticAddMissingVariables(new EnoCatalog(enoQuestionnaire), parameters.isMissingVariables()).apply(lunaticQuestionnaire);
         new LunaticAddHierarchy().apply(lunaticQuestionnaire);
         new LunaticAddPageNumbers(parameters.getLunaticPaginationMode()).apply(lunaticQuestionnaire);
         new LunaticAddControlFormat().apply(lunaticQuestionnaire);
