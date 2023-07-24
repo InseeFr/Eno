@@ -3,10 +3,12 @@ package fr.insee.eno.core.model.navigation;
 import datacollection33.ControlConstructSchemeType;
 import datacollection33.LoopType;
 import datacollection33.QuestionGridType;
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.converter.DDIConverter;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.DDIIndex;
 import group33.ResourcePackageType;
 import logicalproduct33.VariableGroupType;
@@ -24,11 +26,11 @@ import java.util.Optional;
 @Getter
 @Setter
 @Slf4j
+@Context(format = Format.DDI, type = LoopType.class)
 public class LinkedLoop extends Loop {
 
     /** Reference (id) of the loop or dynamic table question on which the linked loop is based on. */
-    @DDI(contextType = LoopType.class,
-            field = "T(fr.insee.eno.core.model.navigation.LinkedLoop).findLoopReference(#this, #index)")
+    @DDI("T(fr.insee.eno.core.model.navigation.LinkedLoop).findLoopReference(#this, #index)")
     private String reference;
 
     // TODO: method bindings -> no fully qualified classes in spel in annotations

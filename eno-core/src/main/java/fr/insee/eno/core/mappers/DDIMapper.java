@@ -6,6 +6,7 @@ import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.DDIIndex;
 import fr.insee.eno.core.reference.EnoIndex;
 import instance33.DDIInstanceDocument;
@@ -40,6 +41,10 @@ public class DDIMapper extends Mapper {
 
     private DDIIndex ddiIndex;
 
+    public DDIMapper() {
+        this.format = Format.DDI;
+    }
+
     private EvaluationContext setup(AbstractIdentifiableType ddiObject, EnoObject enoObject) {
         log.debug("DDI mapping entry object: " + ddiToString(ddiObject));
         // Index DDI object
@@ -70,18 +75,14 @@ public class DDIMapper extends Mapper {
     }
 
     public void mapDDIObject(AbstractIdentifiableType ddiObject, EnoObject enoObject) {
-        // TODO
-        //DDIContext ddiContext = enoObject.getClass().getAnnotation(DDIContext.class);
-        //List<Class<?>> contextTypes = new ArrayList<>(ddiContext.contextType());
-        //if (! contextTypes.contains(ddiObject.getClass())) {
-        //    throw new IllegalArgumentException(String.format(
-        //            "DDI object of type '%s' is not compatible with Eno object of type '%s'",
-        //            ddiObject.getClass(), enoObject.getClass()));
-        //{
+        //
+        compatibilityCheck(ddiObject, enoObject);
         //
         EvaluationContext context = setup(ddiObject, enoObject);
         recursiveMapping(ddiObject, enoObject, context);
     }
+
+
 
     private void recursiveMapping(Object ddiObject, EnoObject enoObject, EvaluationContext context) {
 
@@ -128,7 +129,7 @@ public class DDIMapper extends Mapper {
                     +"' of class '"+ modelContextType.getSimpleName()+"'");
 
             // Instantiate a Spring expression with the annotation content
-            Expression expression = new SpelExpressionParser().parseExpression(ddiAnnotation.field());
+            Expression expression = new SpelExpressionParser().parseExpression(ddiAnnotation.value());
 
             // Simple types
             if (isSimpleType(classType)) {
