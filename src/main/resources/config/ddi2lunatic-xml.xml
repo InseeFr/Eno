@@ -15,6 +15,7 @@
     <Filter>sdmx</Filter>
     <Context>default</Context>
     <FilterDescription>false</FilterDescription>
+    <UnusedVars>false</UnusedVars>
     <EndQuestion>
         <Folder>xslt/post-processing/lunatic-xml/end-question</Folder>
         <ResponseTimeQuestion>false</ResponseTimeQuestion>
@@ -25,6 +26,9 @@
         <Identification>false</Identification>
     </BeginQuestion>
     <Pagination>none</Pagination>
+    <MissingVar>false</MissingVar>
+    <AddFilterResult>false</AddFilterResult>
+    <Control>false</Control>
     
     <!-- https://outils-javascript.aliasdmc.fr/encodage-caracteres-speciaux/encode-caractere-2019-html-css-js-autre.html -->
     <JSEncoding>

@@ -1327,7 +1327,7 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template name="ControlConstructReference" match="*[name()=('Sequence','IfThenElse','Loop')]//*[name() =('Sequence','IfThenElse','Loop','QuestionMultipleChoice','QuestionSingleChoice','QuestionOtherDetails','QuestionTable','QuestionDynamicTable','QuestionSimple','Control')
+    <xsl:template name="ControlConstructReference" match="*[name()=('Sequence','IfThenElse','Loop')]//*[name() =('Sequence','IfThenElse','Loop','QuestionMultipleChoice','QuestionSingleChoice','QuestionOtherDetails','QuestionPairwise','QuestionTable','QuestionDynamicTable','QuestionSimple','Control')
         and not(ancestor::driver-ManagedRepresentationScheme) and not(ancestor::driver-VariableGroup)]" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -1371,7 +1371,7 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template name="QuestionConstruct" match="driver-ControlConstructScheme//*[name() = ('QuestionMultipleChoice','QuestionTable','QuestionDynamicTable','QuestionSimple','QuestionSingleChoice','QuestionOtherDetails')]" mode="model">
+    <xsl:template name="QuestionConstruct" match="driver-ControlConstructScheme//*[name() = ('QuestionMultipleChoice','QuestionTable','QuestionDynamicTable','QuestionSimple','QuestionSingleChoice','QuestionOtherDetails','QuestionPairwise')]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:QuestionConstruct>
@@ -1388,7 +1388,7 @@
         </d:QuestionConstruct>
     </xsl:template>
 
-    <xsl:template match="driver-QuestionScheme//QuestionSingleChoice//ResponseDomain" mode="model" priority="1">
+    <xsl:template match="driver-QuestionScheme//ResponseDomain[ancestor::QuestionSingleChoice or ancestor::QuestionPairwise]" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="mandatory" select="enoddi33:get-ci-type($source-context)"/>
@@ -1544,7 +1544,7 @@
     </xsl:template>
 
     <!-- This template is only matched when call just after driver-ResponseDomain (why it got 3 priority), to check if SMR is needed. -->
-    <xsl:template match="driver-ResponseDomain/QuestionSimple | driver-ResponseDomain/QuestionSingleChoice" mode="model" priority="3">
+    <xsl:template match="driver-ResponseDomain/QuestionSimple | driver-ResponseDomain/QuestionSingleChoice | driver-ResponseDomain/QuestionPairwise" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -1572,7 +1572,7 @@
         </d:StructuredMixedGridResponseDomain>
     </xsl:template>
 
-    <xsl:template name="Question" match="driver-QuestionScheme//*[name() = ('QuestionMultipleChoice','QuestionTable','QuestionDynamicTable','QuestionSimple','QuestionSingleChoice','QuestionOtherDetails')]" mode="model">
+    <xsl:template name="Question" match="driver-QuestionScheme//*[name() = ('QuestionMultipleChoice','QuestionTable','QuestionDynamicTable','QuestionSimple','QuestionSingleChoice','QuestionPairwise','QuestionOtherDetails')]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <!--
@@ -1585,7 +1585,7 @@
                 <xsl:when test="./name() = ('QuestionMultipleChoice','QuestionTable','QuestionDynamicTable')">
                     <xsl:value-of select="'d:QuestionGrid'"/>
                 </xsl:when>
-                <xsl:when test="./name() = ('QuestionSimple','QuestionSingleChoice','QuestionOtherDetails')">
+                <xsl:when test="./name() = ('QuestionSimple','QuestionSingleChoice','QuestionOtherDetails','QuestionPairwise')">
                     <xsl:value-of select="'d:QuestionItem'"/>
                 </xsl:when>
                 <xsl:otherwise>
@@ -1609,17 +1609,50 @@
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+            <xsl:if test="self::QuestionPairwise">
+                <r:UserAttributePair>
+                    <r:AttributeKey>UIComponent</r:AttributeKey>
+                    <r:AttributeValue>HouseholdPairing</r:AttributeValue>
+                </r:UserAttributePair>
+            </xsl:if>
             <!-- QuestionName part -->
             <xsl:element name="{$ddi-question-name-element}">
                <r:String xml:lang="{enoddi33:get-lang($source-context)}">
                    <xsl:value-of select="enoddi33:get-name($source-context)"/>
                </r:String>
             </xsl:element>
+            <!-- InParameter part -->
+            <xsl:if test="self::QuestionPairwise">
+                <r:InParameter isArray="false">
+                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                    <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/>-IP-1</r:ID>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                    <r:ParameterName>
+                        <r:String xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="enoddi33:get-name(enoddi33:get-pairwise-scope($source-context))"/></r:String>
+                    </r:ParameterName>
+                </r:InParameter>
+            </xsl:if>
             <!-- OutParameter part -->
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-OutParameter', .)" tunnel="yes"/>
             </xsl:apply-templates>
             <!-- Binding part -->
+            <xsl:if test="self::QuestionPairwise">
+                <r:Binding>
+                    <r:SourceParameterReference>
+                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                        <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/>-IP-1</r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:SourceParameterReference>
+                    <r:TargetParameterReference>
+                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                        <r:ID><xsl:value-of select="enoddi33:get-qop-id(enoddi33:get-pairwise-scope($source-context))"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                    </r:TargetParameterReference>
+                </r:Binding>
+            </xsl:if>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-Binding', .)" tunnel="yes"/>
             </xsl:apply-templates>
@@ -1737,7 +1770,7 @@
 
     <xsl:template match="driver-CodeListReference//*" mode="model"/>
 
-    <xsl:template match="driver-CodeListReference//CodeListReference | QuestionSingleChoice//ResponseDomain[not(ancestor::driver-OutParameter) and not(ancestor::driver-Binding)]/CodeListReference" mode="model" priority="2">
+    <xsl:template match="driver-CodeListReference//CodeListReference | ResponseDomain[(ancestor::QuestionSingleChoice or ancestor::QuestionPairwise) and not(ancestor::driver-OutParameter) and not(ancestor::driver-Binding)]/CodeListReference" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <r:CodeListReference>	
