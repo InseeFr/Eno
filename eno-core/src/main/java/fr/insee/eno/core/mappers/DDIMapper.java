@@ -1,6 +1,5 @@
 package fr.insee.eno.core.mappers;
 
-import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.converter.DDIConverter;
 import fr.insee.eno.core.exceptions.technical.MappingException;
@@ -26,11 +25,9 @@ import reusable33.AbstractIdentifiableType;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Mapper implementation for the DDI input format.
