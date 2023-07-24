@@ -1,6 +1,7 @@
 package fr.insee.eno.postprocessing.lunaticxml;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 
 
 	@Override
-	public File process(File input, byte[] parameters, String surveyName) throws Exception {
+	public File process(File input, byte[] parameters, String surveyName) throws EnoGenerationException, IOException {
 
 		File outputCustomFOFile = new File(input.getParent(),
 				Constants.BASE_NAME_FORM_FILE +
@@ -39,6 +40,7 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 		try {
 			FileUtils.writeStringToFile(outputCustomFOFile, parseToVTLInNodes(inputString), StandardCharsets.UTF_8);
 		}catch(Exception e) {
+			logger.error(e.getMessage(),e);
 			String errorMessage = String.format("An error was occured during the %s transformation. %s",
 					toString(),
 					e.getMessage());

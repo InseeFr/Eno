@@ -183,13 +183,31 @@
                                 width="180mm"
                                 height="25mm">
                <fo:block>
-                  <fo:external-graphic src="logo_INSEE_M_SP.png"
+                        #if(${logo} == "1")
+                        <fo:external-graphic src="logo_INSEE_M_SP.png"
                                        width="100%"
                                        height="100%"
                                        content-height="scale-to-fit"
                                        content-width="scale-to-fit"
                                        scaling="uniform"/>
-               </fo:block>
+                        #end
+                        #if(${logo} == "2")
+                        <fo:external-graphic src="logo_DARES_M_SP.png"
+                                        width="100%"
+                                        height="100%"
+                                        content-height="scale-to-fit"
+                                        content-width="scale-to-fit"
+                                        scaling="uniform"/>
+                        #end
+                        #if(${logo} == "3")
+                        <fo:external-graphic src="logo_SIES_SP.png"
+                                        width="100%"
+                                        height="100%"
+                                        content-height="scale-to-fit"
+                                        content-width="scale-to-fit"
+                                        scaling="uniform"/>
+                        #end
+                    </fo:block>
             </fo:block-container>
             <!-- ZONE RESERVE ADRESSE -->
             <fo:block-container absolute-position="absolute"
@@ -329,9 +347,6 @@
                         soit de répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre soit de compléter le questionnaire joint,#end dans un délai de 15 jours. 
                         A l’expiration de ce délai, votre dossier sera soumis pour examen au <fo:inline font-weight="bold">Comité du contentieux</fo:inline> des enquêtes statistiques obligatoires 
                         du Conseil national de l’information statistique (Cnis), conformément à la loi*.
-                        Dans le contexte actuel, nous avons plus que jamais besoin de votre participation pour assurer la qualité des statistiques publiques. 
-                        Nous sommes conscients des difficultés que la crise fait peser sur les entreprises.  
-                        Cependant, pour mieux évaluer son impact et plus généralement suivre l’activité économique en France, l’Insee s’efforce de poursuivre la diffusion de ses principaux indicateurs.
                     </fo:block>
                <fo:block margin-top="3mm">
                         S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre. 
@@ -430,13 +445,13 @@
                         Elle a obtenu le visa n°${BddNumeroVisa} du ${BddMinistereTutelle}, valable pour l'année ${BddAnneeCollecte}.
                     </fo:block>
                <fo:block>
-                        #if(${BddCaractereObligatoire}=='oui')Cette enquête est obligatoire. En cas de défaut de réponse après mise en demeure dans le délai imparti ou de réponse sciemment inexacte, 
+                        #if(${BddCaractereObligatoire}=='oui')Cette enquête est <fo:inline font-weight="bold">obligatoire</fo:inline>. En cas de défaut de réponse après mise en demeure dans le délai imparti ou de réponse sciemment inexacte, 
                         les personnes physiques ou morales peuvent être l'objet d'une amende administrative prononcée par le ministre chargé de l'économie sur avis du 
                         Conseil national de l'information statistique réuni en Comité du contentieux des enquêtes statistiques obligatoires dans les conditions fixées 
                         par le décret prévu au II de l'article 1er bis de la loi du 7 juin 1951.#else<fo:inline font-size="0.1pt"> </fo:inline>Cette enquête n’est pas obligatoire.#end
                     </fo:block>
                <fo:block>
-                        Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à ${BddArticleServiceProducteur}${BddNomServiceProducteur}. 
+                        Les informations collectées dans le cadre de cette enquête sont protégées par le secret statistique et destinées à : ${BddArticleServiceProducteur}${BddNomServiceProducteur}. 
                         Ces réponses ainsi que les données obtenues par appariement seront conservées pendant ${BddConservation} à compter de la fin de la collecte pour les besoins de l’enquête. 
                         Elles seront archivées au-delà de cette durée. À tout moment, leur usage et leur accès seront strictement contrôlés et limités à l'élaboration de statistiques 
                         ou à des travaux de recherche scientifique ou historique.
@@ -444,8 +459,8 @@
                <fo:block>
                         #if(${BddDonneesPerso}=='oui')Le règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD) ainsi que la loi 
                         n<fo:inline font-size="0.1pt"> </fo:inline>° 78-17 du 6 janvier 1978 relative à l'informatique, 
-                        aux fichiers et aux libertés s'appliquent à la présente enquête. Pour les données à caractère personnel, un droit d'accès, de rectification, 
-                        d’effacement ou de limitation de traitement peut être exercé pendant la période de conservation des données d’identification. 
+                        aux fichiers et aux libertés s'appliquent à la présente enquête. Pour les données à caractère personnel, un droit d'accès, de rectification 
+                        ou de limitation de traitement peut être exercé pendant la période de conservation des données d’identification. 
                         Ces droits peuvent être exercés auprès de ${AdresseRetourL1} que vous pouvez contacter à l’adresse ${BddServiceCollecteurAdresseMessagerie}. 
                         Pour toute question relative au traitement de vos données, vous pouvez contacter le délégué à la protection des données des ministères économique 
                         et financier à l’adresse <fo:inline text-decoration="underline">le-delegue-a-la-protection-des-donnees-personnelles@finances.gouv.fr</fo:inline> 
@@ -485,16 +500,17 @@
                   <fo:inline-container>
                      <fo:block font-weight="bold">Unité enquêtée</fo:block>
                      <fo:block>Identifiant : ${BddIdentifiantUniteEnquetee}</fo:block>
-                     <fo:block>Raison sociale : ${BddRaisonSociale}</fo:block>
+                     <fo:block>Raison sociale :  </fo:block>
+                     <fo:block>${BddRaisonSociale}</fo:block>
                   </fo:inline-container>
                </fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute"
-                                left="15mm"
-                                top="80mm"
-                                width="75mm"
-                                height="60mm"
-                                overflow="hidden">
+                                 left="15mm"
+                                 top="80mm"
+                                 width="160mm"
+                                 height="80mm"
+                                 overflow="hidden">
                <fo:block margin-top="3mm" margin-left="1mm">
                   <fo:inline-container>
                      <fo:block font-weight="bold">Coordonnées de la personne
@@ -503,11 +519,37 @@
                      <fo:block>Nom : $!{BddNom} $!{BddPrenom}</fo:block>
                      <fo:block>Téléphone : $!{BddTelContact}</fo:block>
                      <fo:block>Courriel : $!{BddMailContact}</fo:block>
-                     <fo:block font-weight="bold" margin-top="3mm">Si vous n'êtes pas cette personne, </fo:block>
-                     <fo:block font-weight="bold">merci de compléter vos coordonnées :</fo:block>
-                     <fo:block>Nom : ....................</fo:block>
-                     <fo:block>Prénom : ....................</fo:block>
-                     <fo:block>Fonction : ....................</fo:block>
+                     <fo:block font-weight="bold" margin-top="3mm">Si les coordonnées ci-dessus sont absentes ou erronées, </fo:block>
+                     <fo:block font-weight="bold">merci de compléter :</fo:block>
+                     <fo:block>Nom : <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                     </fo:block>
+                     <fo:block>Prénom : <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                     </fo:block>
                      <fo:block>Tél : <fo:external-graphic src="mask_number.png"/>
                         <fo:external-graphic src="mask_number.png"/>
                         <fo:external-graphic src="mask_number.png"/>
@@ -519,7 +561,49 @@
                         <fo:external-graphic src="mask_number.png"/>
                         <fo:external-graphic src="mask_number.png"/>
                      </fo:block>
-                     <fo:block>Courriel : ....................</fo:block>
+                     <fo:block margin-top="2mm">Fonction : <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                     </fo:block>
+                     <fo:block margin-top="2mm">Courriel : <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                     </fo:block>
                   </fo:inline-container>
                </fo:block>
             </fo:block-container>
@@ -552,75 +636,47 @@
                      <fo:block>#if ($!{InitNumeroSVI}||$!{InitGestionnaireTel})<fo:inline>Téléphone</fo:inline> : #end #if
                                 ($!{InitNumeroSVI})09-69-32-97-47 #elseif($!{InitGestionnaireTel})
                                 $!{InitGestionnaireTel}#end </fo:block>
-                     <fo:block>#if ($!{InitNumeroSVI})<fo:inline>Code enquête</fo:inline> : $!{InitNumeroSVI} #end</fo:block>
+                     <fo:block>#if ($!{InitNumeroSVI})<fo:inline>Code enquête</fo:inline> : $!{InitNumeroSVI} #end</fo:block>
                   </fo:inline-container>
                </fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute"
-                                left="15mm"
-                                top="145mm"
-                                width="180mm"
-                                height="25mm"
-                                padding="2mm"
-                                border="solid black 1pt">
-               <fo:block font-weight="bold">Commentaires et remarques :</fo:block>
+                                 left="18mm"
+                                 top="160mm"
+                                 width="180mm"
+                                 height="5mm">
+               <fo:block font-weight="bold">Commentaires et remarques (ne pas mentionner de données à caractère personnel)</fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute"
-                                left="15mm"
-                                top="175mm"
-                                width="180mm"
-                                height="10mm">
+                                 left="18mm"
+                                 top="165mm"
+                                 width="175mm"
+                                 height="20mm"
+                                 border="solid black 1pt">
+               <fo:block font-weight="bold"/>
+            </fo:block-container>
+            <fo:block-container absolute-position="absolute"
+                                 left="18mm"
+                                 top="190mm"
+                                 width="180mm"
+                                 height="5mm">
                <fo:block font-weight="bold" font-size="12pt">Votre réponse était attendue pour le ${BddDateEcheance}. Merci de nous retourner ce questionnaire dans les meilleurs délais, à l’adresse
-                        suivante :</fo:block>
+                     suivante :</fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute"
-                                left="15mm"
-                                top="210mm"
-                                width="80mm"
-                                height="65mm"
-                                padding="2mm"
-                                padding-top="10mm"
-                                border="solid black 0.5pt"
-                                text-align="justify">
-               <fo:block font-size="7pt">Vu l'avis favorable du Conseil national de
-                        l'information statistique, cette enquête
-                        #if(${BddCaractereObligatoire}=='oui') reconnue d'${BddStatutEnquete}, est
-                        obligatoire#else est reconnue d'${BddStatutEnquete} sans avoir de caractère
-                        obligatoire#end.</fo:block>
-               <fo:block font-size="7pt">Visa n°${BddNumeroVisa} du ${BddMinistereTutelle},
-                        valable pour l’année ${BddAnneeCollecte}.</fo:block>
-               <fo:block font-size="7pt">Aux termes de l'article 6 de la loi n° 51-711 du 7
-                        juin 1951 modifiée sur l'obligation, la coordination et le secret en matière
-                        de statistiques, les renseignements transmis en réponse au présent
-                        questionnaire ne sauraient en aucun cas être utilisés à des fins de contrôle
-                        fiscal ou de répression économique.</fo:block>
-               <fo:block font-size="7pt">Questionnaire confidentiel destiné à
-                        ${BddArticleServiceProducteur}${BddNomServiceProducteur}. La loi n° 78-17 du
-                        6 janvier 1978 modifiée, relative à l'informatique, aux fichiers et aux
-                        libertés, s'applique aux réponses faites à la présente enquête par les
-                        entreprises individuelles. Elle leur garantit un droit d'accès et de
-                        rectification pour les données les concernant. Ce droit peut être exercé
-                        auprès de
-                        ${BddArticleServiceProducteur}${BddNomServiceProducteur}.</fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute"
-                                left="100mm"
-                                top="195mm"
-                                width="97mm"
-                                height="10mm">
-               <fo:block text-align="left">
-                  <fo:block>
-                     <fo:instream-foreign-object>
-                        <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                                         message="Code Bar"
-                                         orientation="0">
-                           <barcode:code39>
-                              <barcode:height>10mm</barcode:height>
-                           </barcode:code39>
-                        </barcode:barcode>
-                     </fo:instream-foreign-object>
-                  </fo:block>
-               </fo:block>
+                                 left="20mm"
+                                 top="220mm"
+                                 width="80mm"
+                                 height="60mm"
+                                 padding="2mm"
+                                 padding-top="10mm"
+                                 border="solid black 0.5pt"
+                                 text-align="justify">
+               <fo:block font-size="7pt">Vu l'avis favorable du Conseil national de l'information statistique, cette enquête #if(${BddCaractereObligatoire}=='oui') reconnue d'${BddStatutEnquete}, est obligatoire, en application de la loi n° 51-711 du 7 juin 1951 modifiée sur l’obligation, la coordination et le secret en matière de statistiques#else est reconnue d'${BddStatutEnquete} sans avoir de caractère
+                  obligatoire, en application de la loi n° 51-711 du 7 juin 1951 modifiée sur l’obligation, la coordination et le secret en matière de statistiques#end.</fo:block>
+               <fo:block font-size="7pt">Visa n°${BddNumeroVisa} du ${BddMinistereTutelle}, valable pour l’année ${BddAnneeCollecte}.</fo:block>
+               <fo:block font-size="7pt">Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à : ${BddArticleServiceProducteur}${BddNomServiceProducteur}.</fo:block>
+               <fo:block font-size="7pt"> Le règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD) ainsi que la loi n° 78-17 du 6 janvier 1978 modifiée, relative à l'informatique, aux fichiers et aux libertés, s'appliquent à la présente enquête pour les données à caractère personnel. Ces droits, rappelés dans la lettre-avis, peuvent être exercés auprès de : ${BddArticleServiceProducteur}${BddNomServiceProducteur}.</fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute"
                                 left="105mm"
@@ -638,6 +694,25 @@
                      <fo:block>${AdresseRetourL6}</fo:block>
                      <fo:block>${AdresseRetourL7}</fo:block>
                   </fo:inline-container>
+               </fo:block>
+            </fo:block-container>
+            <fo:block-container absolute-position="absolute"
+                                 left="115mm"
+                                 top="265mm"
+                                 width="97mm"
+                                 height="10mm">
+               <fo:block text-align="left">
+                  <fo:block>
+                     <fo:instream-foreign-object>
+                        <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
+                                          message="${BddIdentifiantUniteEnquetee}"
+                                          orientation="0">
+                           <barcode:code39>
+                              <barcode:height>10mm</barcode:height>
+                           </barcode:code39>
+                        </barcode:barcode>
+                     </fo:instream-foreign-object>
+                  </fo:block>
                </fo:block>
             </fo:block-container>
          </fo:block>
@@ -688,6 +763,25 @@
                <fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
             </fo:block>
          </fo:block-container>
+         <fo:block-container absolute-position="absolute"
+                              left="120mm"
+                              top="2mm"
+                              width="80mm"
+                              height="7mm">
+            <fo:block>
+               <fo:instream-foreign-object>
+                  <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
+                                    message="${BddIdentifiantUniteEnquetee}">
+                     <barcode:code128>
+                        <barcode:height>10mm</barcode:height>
+                        <barcode:human-readable>
+                           <barcode:placement>bottom</barcode:placement>
+                        </barcode:human-readable>
+                     </barcode:code128>
+                  </barcode:barcode>
+               </fo:instream-foreign-object>
+            </fo:block>
+         </fo:block-container>
       </fo:static-content>
       <fo:static-content flow-name="region-after-even-business">
          <fo:block-container absolute-position="absolute"
@@ -736,39 +830,39 @@
       <fo:flow flow-name="xsl-region-body"
                border-collapse="collapse"
                font-size="10pt">
-         <fo:block background-color="#666666"
-                   color="white"
-                   font-weight="bold"
-                   margin-bottom="9pt"
-                   font-size="14pt"
-                   border-color="black"
-                   border-style="solid"
-                   space-before="10mm"
-                   space-before.conditionality="discard"
-                   text-align="left"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">I - Activité et situation juridique</fo:block>
-         <fo:block background-color="#CCCCCC"
-                   color="black"
-                   font-weight="bold"
-                   margin-bottom="9pt"
-                   font-size="12pt"
-                   text-align="left"
-                   space-before="6mm"
-                   space-before.conditionality="discard"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Activité principale de l'entreprise</fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 1. Est-ce que votre activité principale (APE) est bien ${LIB_APE_LANC} (${APE_LANC}) ? </fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    background-color="#666666"
+                    color="white"
+                    font-weight="bold"
+                    margin-bottom="9pt"
+                    font-size="14pt"
+                    border-color="black"
+                    border-style="solid"
+                    space-before="10mm"
+                    space-before.conditionality="discard"
+                    text-align="left">I - Activité et situation juridique</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    background-color="#CCCCCC"
+                    color="black"
+                    font-weight="bold"
+                    margin-bottom="9pt"
+                    font-size="12pt"
+                    text-align="left"
+                    space-before="6mm"
+                    space-before.conditionality="discard">Activité principale de l'entreprise</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 1. Est-ce que votre activité principale (APE) est bien ${LIB_APE_LANC} (${APE_LANC}) ? </fo:block>
          <fo:block id="APE_LANC_OK" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -801,13 +895,13 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block space-before="2pt"
-                   space-after="2pt"
-                   start-indent="5%"
-                   end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+         <fo:block page-break-inside="avoid"
+                    keep-with-previous="always"
+                    space-before="2pt"
+                    space-after="2pt"
+                    start-indent="5%"
+                    end-indent="0%"
+                    background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -828,15 +922,15 @@
                          text-align="justify">Si votre APE n'est pas modifiée, aller directement à la question I.3</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 2. Quelle est l'activité principale de votre entreprise ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 2. Quelle est l'activité principale de votre entreprise ?</fo:block>
          <fo:block id="APE" page-break-inside="avoid">
             <fo:block>
                <fo:block-container height="8mm"
@@ -847,26 +941,26 @@
                </fo:block-container>
             </fo:block>
          </fo:block>
-         <fo:block background-color="#CCCCCC"
-                   color="black"
-                   font-weight="bold"
-                   margin-bottom="9pt"
-                   font-size="12pt"
-                   text-align="left"
-                   space-before="6mm"
-                   space-before.conditionality="discard"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Catégorie juridique</fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 3. Est-ce que votre catégorie juridique (CJ) est bien ${LIB_CJ_LANC} (${CJ_LANC}) ? </fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    background-color="#CCCCCC"
+                    color="black"
+                    font-weight="bold"
+                    margin-bottom="9pt"
+                    font-size="12pt"
+                    text-align="left"
+                    space-before="6mm"
+                    space-before.conditionality="discard">Catégorie juridique</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 3. Est-ce que votre catégorie juridique (CJ) est bien ${LIB_CJ_LANC} (${CJ_LANC}) ? </fo:block>
          <fo:block id="CJ_LANC_OK" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -899,13 +993,13 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block space-before="2pt"
-                   space-after="2pt"
-                   start-indent="5%"
-                   end-indent="0%"
-                   background-color="#f0f0f0"
-                   page-break-inside="avoid"
-                   keep-with-previous="always">
+         <fo:block page-break-inside="avoid"
+                    keep-with-previous="always"
+                    space-before="2pt"
+                    space-after="2pt"
+                    start-indent="5%"
+                    end-indent="0%"
+                    background-color="#f0f0f0">
             <fo:inline-container start-indent="0%"
                                  end-indent="0%"
                                  width="9%"
@@ -926,15 +1020,15 @@
                          text-align="justify">Si votre CJ n'est pas modifiée, allez directement au module II</fo:block>
             </fo:inline-container>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 4. Quelle est la catégorie juridique de votre entreprise ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 4. Quelle est la catégorie juridique de votre entreprise ?</fo:block>
          <fo:block id="CJ" page-break-inside="avoid">
             <fo:block>
                <fo:block-container height="8mm"
@@ -945,28 +1039,28 @@
                </fo:block-container>
             </fo:block>
          </fo:block>
-         <fo:block background-color="#666666"
-                   color="white"
-                   font-weight="bold"
-                   margin-bottom="9pt"
-                   font-size="14pt"
-                   border-color="black"
-                   border-style="solid"
-                   space-before="10mm"
-                   space-before.conditionality="discard"
-                   text-align="left"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">II - Salariés de l'entreprise</fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 1. Est-ce que le dirigeant de l'entreprise est salarié ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    background-color="#666666"
+                    color="white"
+                    font-weight="bold"
+                    margin-bottom="9pt"
+                    font-size="14pt"
+                    border-color="black"
+                    border-style="solid"
+                    space-before="10mm"
+                    space-before.conditionality="discard"
+                    text-align="left">II - Salariés de l'entreprise</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 1. Est-ce que le dirigeant de l'entreprise est salarié ?</fo:block>
          <fo:block id="DIRIGEANT_SALARIE" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -999,33 +1093,33 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 2. Combien l'entreprise compte de salariés au 31/12/${ANNEE_EXERCICE} ? </fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Y compris les dirigeants de sociétés et gérants salariés, le personnel saisonnier ou occasionnel. Ne comptez pas le personnel rémunéré par d’autres entreprises (travail temporaire, personnel prêté par d’autres entreprises) ni les stagiaires non rémunérés.</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 2. Combien l'entreprise compte de salariés au 31/12/${ANNEE_EXERCICE} ? </fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify">Y compris les dirigeants de sociétés et gérants salariés, le personnel saisonnier ou occasionnel. Ne comptez pas le personnel rémunéré par d’autres entreprises (travail temporaire, personnel prêté par d’autres entreprises) ni les stagiaires non rémunérés.</fo:block>
          <fo:block id="EFF3112" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="16mm">
                      <fo:block-container height="8mm"
                                          width="16mm"
@@ -1040,33 +1134,33 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 3. Combien l'entreprise compte de salariés en équivalent temps plein sur l'année ${ANNEE_EXERCICE} ? </fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Pour calculer l'effectif en équivalent temps plein, on divise le nombre d'heures travaillées dans l'entreprise pendant l'année par le temps de travail légal d'un salarié à temps plein. Par exemple, un salarié travaillant à temps plein durant 1 an compte pour 1, un salarié travaillant pendant 6 mois à temps plein compte pour 0,5, un salarié travaillant à mi-temps (50%) pendant un an compte également pour 0,5.</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 3. Combien l'entreprise compte de salariés en équivalent temps plein sur l'année ${ANNEE_EXERCICE} ? </fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify">Pour calculer l'effectif en équivalent temps plein, on divise le nombre d'heures travaillées dans l'entreprise pendant l'année par le temps de travail légal d'un salarié à temps plein. Par exemple, un salarié travaillant à temps plein durant 1 an compte pour 1, un salarié travaillant pendant 6 mois à temps plein compte pour 0,5, un salarié travaillant à mi-temps (50%) pendant un an compte également pour 0,5.</fo:block>
          <fo:block id="EFF_ETP" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="28mm">
                      <fo:block-container height="8mm"
                                          width="28mm"
@@ -1081,37 +1175,37 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block background-color="#666666"
-                   color="white"
-                   font-weight="bold"
-                   margin-bottom="9pt"
-                   font-size="14pt"
-                   border-color="black"
-                   border-style="solid"
-                   space-before="10mm"
-                   space-before.conditionality="discard"
-                   text-align="left"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">III - Dernier exercice comptable</fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 1. Quelle est la date de clôture de l'exercice qui se réfère à l'année ${ANNEE_EXERCICE} ? </fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">L'exercice demandé concerne l'année ${ANNEE_EXERCICE}. Merci de renseigner une date postérieure au 1er juillet $!{ANNEE_EXERCICE_MOINS_UN} et antérieure au 30 juin ${ANNEE_EXERCICE} </fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    background-color="#666666"
+                    color="white"
+                    font-weight="bold"
+                    margin-bottom="9pt"
+                    font-size="14pt"
+                    border-color="black"
+                    border-style="solid"
+                    space-before="10mm"
+                    space-before.conditionality="discard"
+                    text-align="left">III - Dernier exercice comptable</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 1. Quelle est la date de clôture de l'exercice qui se réfère à l'année ${ANNEE_EXERCICE} ? </fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify">L'exercice demandé concerne l'année ${ANNEE_EXERCICE}. Merci de renseigner une date postérieure au 1er juillet $!{ANNEE_EXERCICE_MOINS_UN} et antérieure au 30 juin ${ANNEE_EXERCICE} </fo:block>
          <fo:block id="DATE_CLOTURE_EXERCICE" page-break-inside="avoid">
             <fo:block color="black"
                       font-weight="normal"
@@ -1121,24 +1215,24 @@
                <fo:external-graphic src="date-m-fr-YYYYMMDD.png"/>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 2. Quelle est la durée de l'exercice qui se réfère à l'année ${ANNEE_EXERCICE}? (en mois) </fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 2. Quelle est la durée de l'exercice qui se réfère à l'année ${ANNEE_EXERCICE}? (en mois) </fo:block>
          <fo:block id="DUREE_EXERCICE" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="8mm">
                      <fo:block-container height="8mm"
                                          width="8mm"
@@ -1153,55 +1247,55 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block background-color="#666666"
-                   color="white"
-                   font-weight="bold"
-                   margin-bottom="9pt"
-                   font-size="14pt"
-                   border-color="black"
-                   border-style="solid"
-                   space-before="10mm"
-                   space-before.conditionality="discard"
-                   text-align="left"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">IV - Chiffre d'affaires de l'exercice ${ANNEE_EXERCICE} </fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Pour la suite du questionnaire, toutes les questions concerneront l'exercice que vous venez de décrire.</fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 1. Quel est le chiffre d'affaires net de l'exercice ${ANNEE_EXERCICE} ? </fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always"> Il s’agit du montant des ventes de produits (y compris revente de produits en l’état) et services liées à l’activité courante, diminué des réductions sur ventes, de la taxe sur la valeur ajoutée et des taxes assimilées (compte 70 du plan comptable général).</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    background-color="#666666"
+                    color="white"
+                    font-weight="bold"
+                    margin-bottom="9pt"
+                    font-size="14pt"
+                    border-color="black"
+                    border-style="solid"
+                    space-before="10mm"
+                    space-before.conditionality="discard"
+                    text-align="left">IV - Chiffre d'affaires de l'exercice ${ANNEE_EXERCICE} </fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify">Pour la suite du questionnaire, toutes les questions concerneront l'exercice que vous venez de décrire.</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 1. Quel est le chiffre d'affaires net de l'exercice ${ANNEE_EXERCICE} ? </fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify"> Il s’agit du montant des ventes de produits (y compris revente de produits en l’état) et services liées à l’activité courante, diminué des réductions sur ventes, de la taxe sur la valeur ajoutée et des taxes assimilées (compte 70 du plan comptable général).</fo:block>
          <fo:block id="CA" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="40mm">
                      <fo:block-container height="8mm"
                                          width="40mm"
@@ -1216,24 +1310,24 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 2. Quel est le montant du chiffre d'affaires déclaré ci-dessus qui résulte de la vente de marchandises en l'état (négoce) ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 2. Quel est le montant du chiffre d'affaires déclaré ci-dessus qui résulte de la vente de marchandises en l'état (négoce) ?</fo:block>
          <fo:block id="CA_MARCHANDISES" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="40mm">
                      <fo:block-container height="8mm"
                                          width="40mm"
@@ -1248,33 +1342,33 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 3. Quel est le montant de la production stockée et en cours ?</fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Il s’agit de la variation des stocks de produits finis ou des en-cours de production de biens et de services (compte 71 du plan comptable général).</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 3. Quel est le montant de la production stockée et en cours ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify">Il s’agit de la variation des stocks de produits finis ou des en-cours de production de biens et de services (compte 71 du plan comptable général).</fo:block>
          <fo:block id="PROD_STOCKEE_ET_EN_COURS" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -1289,33 +1383,33 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 4. Quel est le montant de la production immobilisée ?</fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Il s'agit du montant des immobilisations incorporelles et corporelles que votre entreprise a produites par son propre compte (compte 72 du plan comptable général).</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 4. Quel est le montant de la production immobilisée ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify">Il s'agit du montant des immobilisations incorporelles et corporelles que votre entreprise a produites par son propre compte (compte 72 du plan comptable général).</fo:block>
          <fo:block id="PRODUCTION_IMMOBILISEE" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -1330,33 +1424,33 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 5. Quel est le montant des subventions d'exploitation que vous avez perçues ?</fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Il s'agit du compte 74 du plan comptable général</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 5. Quel est le montant des subventions d'exploitation que vous avez perçues ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify">Il s'agit du compte 74 du plan comptable général</fo:block>
          <fo:block id="SUBVENTIONS_EXPLOITATION" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -1371,33 +1465,33 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 6. Quel est le montant des autres produits d'exploitation non financiers ?</fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Il s'agit du compte 75 du plan comptable général.</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 6. Quel est le montant des autres produits d'exploitation non financiers ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify">Il s'agit du compte 75 du plan comptable général.</fo:block>
          <fo:block id="AUTRES_PRODUITS" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -1412,35 +1506,35 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block background-color="#CCCCCC"
-                   color="black"
-                   font-weight="bold"
-                   margin-bottom="9pt"
-                   font-size="12pt"
-                   text-align="left"
-                   space-before="6mm"
-                   space-before.conditionality="discard"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Répartition du chiffre d'affaires</fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   space-before="20pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Vous allez maintenant renseigner la répartition de votre chiffre d'affaires suivant les différentes activités réalisées.</fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 7. Vous souhaitez renseigner votre réponse :</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    background-color="#CCCCCC"
+                    color="black"
+                    font-weight="bold"
+                    margin-bottom="9pt"
+                    font-size="12pt"
+                    text-align="left"
+                    space-before="6mm"
+                    space-before.conditionality="discard">Répartition du chiffre d'affaires</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    space-before="20pt"
+                    margin-bottom="3pt"
+                    text-align="justify">Vous allez maintenant renseigner la répartition de votre chiffre d'affaires suivant les différentes activités réalisées.</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 7. Vous souhaitez renseigner votre réponse :</fo:block>
          <fo:block id="UNITE_REPARTITION" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -1473,24 +1567,24 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 8. Veuillez répartir votre chiffre d'affaires net entre les différentes activités que vous effectuez. Nous vous proposons quelques exemples, mais vous êtes invités à ajouter autant de lignes que vous avez d'activités.</fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Si vous déclarez en euros, la somme des CA ventilés doit être égale au CA total. Sinon, le total doit être égal à 100 %.</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 8. Veuillez répartir votre chiffre d'affaires net entre les différentes activités que vous effectuez. Nous vous proposons quelques exemples, mais vous êtes invités à ajouter autant de lignes que vous avez d'activités.</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify">Si vous déclarez en euros, la somme des CA ventilés doit être égale au CA total. Sinon, le total doit être égal à 100 %.</fo:block>
          <fo:block page-break-inside="avoid" id="REPARTITION_CA">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
@@ -1506,40 +1600,40 @@
                                 font-weight="normal"
                                 font-size="10pt"
                                 text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="120mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="20mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Code activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="40mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
@@ -1572,40 +1666,40 @@
                                 font-weight="normal"
                                 font-size="10pt"
                                 text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="120mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="20mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Code activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="40mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
@@ -1634,12 +1728,12 @@
                                     padding="1mm">
                         <fo:block>
                            <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
+                              <fo:block padding-bottom="0mm"
+                                         padding-top="0mm"
+                                         color="black"
+                                         font-weight="normal"
+                                         font-size="10pt"
+                                         padding="1mm">
                                  <fo:inline-container width="27mm">
                                     <fo:block-container height="8mm" width="27mm">
                                        <fo:block>
@@ -1678,40 +1772,40 @@
                                 font-weight="normal"
                                 font-size="10pt"
                                 text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="120mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="20mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Code activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="40mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
@@ -1747,12 +1841,12 @@
                                     padding="1mm">
                         <fo:block>
                            <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
+                              <fo:block padding-bottom="0mm"
+                                         padding-top="0mm"
+                                         color="black"
+                                         font-weight="normal"
+                                         font-size="10pt"
+                                         padding="1mm">
                                  <fo:inline-container width="27mm">
                                     <fo:block-container height="8mm" width="27mm">
                                        <fo:block>
@@ -1789,40 +1883,40 @@
                                 font-weight="normal"
                                 font-size="10pt"
                                 text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="120mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="20mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Code activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="40mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
@@ -1858,12 +1952,12 @@
                                     padding="1mm">
                         <fo:block>
                            <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
+                              <fo:block padding-bottom="0mm"
+                                         padding-top="0mm"
+                                         color="black"
+                                         font-weight="normal"
+                                         font-size="10pt"
+                                         padding="1mm">
                                  <fo:inline-container width="27mm">
                                     <fo:block-container height="8mm" width="27mm">
                                        <fo:block>
@@ -1901,40 +1995,40 @@
                                 font-weight="normal"
                                 font-size="10pt"
                                 text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="120mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="20mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Code activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="40mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
@@ -1970,12 +2064,12 @@
                                     padding="1mm">
                         <fo:block>
                            <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
+                              <fo:block padding-bottom="0mm"
+                                         padding-top="0mm"
+                                         color="black"
+                                         font-weight="normal"
+                                         font-size="10pt"
+                                         padding="1mm">
                                  <fo:inline-container width="27mm">
                                     <fo:block-container height="8mm" width="27mm">
                                        <fo:block>
@@ -2013,40 +2107,40 @@
                                 font-weight="normal"
                                 font-size="10pt"
                                 text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="120mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="20mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Code activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="40mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
@@ -2082,12 +2176,12 @@
                                     padding="1mm">
                         <fo:block>
                            <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
+                              <fo:block padding-bottom="0mm"
+                                         padding-top="0mm"
+                                         color="black"
+                                         font-weight="normal"
+                                         font-size="10pt"
+                                         padding="1mm">
                                  <fo:inline-container width="27mm">
                                     <fo:block-container height="8mm" width="27mm">
                                        <fo:block>
@@ -2125,40 +2219,40 @@
                                 font-weight="normal"
                                 font-size="10pt"
                                 text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="120mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="20mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Code activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="40mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
@@ -2194,12 +2288,12 @@
                                     padding="1mm">
                         <fo:block>
                            <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
+                              <fo:block padding-bottom="0mm"
+                                         padding-top="0mm"
+                                         color="black"
+                                         font-weight="normal"
+                                         font-size="10pt"
+                                         padding="1mm">
                                  <fo:inline-container width="27mm">
                                     <fo:block-container height="8mm" width="27mm">
                                        <fo:block>
@@ -2237,40 +2331,40 @@
                                 font-weight="normal"
                                 font-size="10pt"
                                 text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="120mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="20mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Code activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="40mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
@@ -2306,12 +2400,12 @@
                                     padding="1mm">
                         <fo:block>
                            <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
+                              <fo:block padding-bottom="0mm"
+                                         padding-top="0mm"
+                                         color="black"
+                                         font-weight="normal"
+                                         font-size="10pt"
+                                         padding="1mm">
                                  <fo:inline-container width="27mm">
                                     <fo:block-container height="8mm" width="27mm">
                                        <fo:block>
@@ -2349,40 +2443,40 @@
                                 font-weight="normal"
                                 font-size="10pt"
                                 text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="120mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="20mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Code activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="40mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
@@ -2418,12 +2512,12 @@
                                     padding="1mm">
                         <fo:block>
                            <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
+                              <fo:block padding-bottom="0mm"
+                                         padding-top="0mm"
+                                         color="black"
+                                         font-weight="normal"
+                                         font-size="10pt"
+                                         padding="1mm">
                                  <fo:inline-container width="27mm">
                                     <fo:block-container height="8mm" width="27mm">
                                        <fo:block>
@@ -2461,40 +2555,40 @@
                                 font-weight="normal"
                                 font-size="10pt"
                                 text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="120mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="20mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Code activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="40mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
@@ -2530,12 +2624,12 @@
                                     padding="1mm">
                         <fo:block>
                            <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
+                              <fo:block padding-bottom="0mm"
+                                         padding-top="0mm"
+                                         color="black"
+                                         font-weight="normal"
+                                         font-size="10pt"
+                                         padding="1mm">
                                  <fo:inline-container width="27mm">
                                     <fo:block-container height="8mm" width="27mm">
                                        <fo:block>
@@ -2573,40 +2667,40 @@
                                 font-weight="normal"
                                 font-size="10pt"
                                 text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="120mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="20mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Code activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="40mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
@@ -2642,12 +2736,12 @@
                                     padding="1mm">
                         <fo:block>
                            <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
+                              <fo:block padding-bottom="0mm"
+                                         padding-top="0mm"
+                                         color="black"
+                                         font-weight="normal"
+                                         font-size="10pt"
+                                         padding="1mm">
                                  <fo:inline-container width="27mm">
                                     <fo:block-container height="8mm" width="27mm">
                                        <fo:block>
@@ -2685,40 +2779,40 @@
                                 font-weight="normal"
                                 font-size="10pt"
                                 text-align="center">
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="120mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="120mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="20mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="20mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm">Code activité</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black"
-                                    border-style="solid"
-                                    text-align="center"
-                                    padding-left="1mm"
-                                    padding-right="1mm"
-                                    number-rows-spanned="1"
-                                    number-columns-spanned="1"
-                                    width="40mm">
+                     <fo:table-cell number-rows-spanned="1"
+                                     number-columns-spanned="1"
+                                     border-color="black"
+                                     border-style="solid"
+                                     text-align="center"
+                                     padding-left="1mm"
+                                     padding-right="1mm"
+                                     width="40mm">
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
@@ -2754,12 +2848,12 @@
                                     padding="1mm">
                         <fo:block>
                            <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
+                              <fo:block padding-bottom="0mm"
+                                         padding-top="0mm"
+                                         color="black"
+                                         font-weight="normal"
+                                         font-size="10pt"
+                                         padding="1mm">
                                  <fo:inline-container width="27mm">
                                     <fo:block-container height="8mm" width="27mm">
                                        <fo:block>
@@ -2777,46 +2871,46 @@
 </fo:table-body>
             </fo:table>
          </fo:block>
-         <fo:block background-color="#666666"
-                   color="white"
-                   font-weight="bold"
-                   margin-bottom="9pt"
-                   font-size="14pt"
-                   border-color="black"
-                   border-style="solid"
-                   space-before="10mm"
-                   space-before.conditionality="discard"
-                   text-align="left"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">V - Salaires, traitements, charges sociales versées au cours de l'exercice ${ANNEE_EXERCICE} </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 1. Quel est le montant des salaires et traitements ?</fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Il s’agit des rémunérations brutes versées avant déduction de la part salariale des cotisations sociales, de la contribution sociale généralisée et de la contribution au remboursement de la dette sociale (comptes 641 et 644 du plan comptable général).</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    background-color="#666666"
+                    color="white"
+                    font-weight="bold"
+                    margin-bottom="9pt"
+                    font-size="14pt"
+                    border-color="black"
+                    border-style="solid"
+                    space-before="10mm"
+                    space-before.conditionality="discard"
+                    text-align="left">V - Salaires, traitements, charges sociales versées au cours de l'exercice ${ANNEE_EXERCICE} </fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 1. Quel est le montant des salaires et traitements ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify">Il s’agit des rémunérations brutes versées avant déduction de la part salariale des cotisations sociales, de la contribution sociale généralisée et de la contribution au remboursement de la dette sociale (comptes 641 et 644 du plan comptable général).</fo:block>
          <fo:block id="SALAIRES_TRAITEMENTS" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -2831,33 +2925,33 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 2. Quel est le montant des charges sociales ?</fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Il s’agit de la part patronale des versements effectués par l’employeur aux organismes de sécurité sociale et de prévoyance ainsi que des cotisations sociales personnelles. (compte 645 et 646 du plan comptable général).</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 2. Quel est le montant des charges sociales ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify">Il s’agit de la part patronale des versements effectués par l’employeur aux organismes de sécurité sociale et de prévoyance ainsi que des cotisations sociales personnelles. (compte 645 et 646 du plan comptable général).</fo:block>
          <fo:block id="CHARGES_SOCIALES" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -2872,33 +2966,33 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 3. Parmi ces charges sociales, quel est le montant des cotisations sociales personnelles de l'exploitant ?</fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always"> Il s’agit de l’assurance vieillesse, allocations familiales, assurance maladie et maternité obligatoires personnelles de l'exploitant (compte 646 du plan comptable général).</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 3. Parmi ces charges sociales, quel est le montant des cotisations sociales personnelles de l'exploitant ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify"> Il s’agit de l’assurance vieillesse, allocations familiales, assurance maladie et maternité obligatoires personnelles de l'exploitant (compte 646 du plan comptable général).</fo:block>
          <fo:block id="COTISATIONS_SOCIALES_EXPLOITANT" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -2913,48 +3007,48 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block background-color="#666666"
-                   color="white"
-                   font-weight="bold"
-                   margin-bottom="9pt"
-                   font-size="14pt"
-                   border-color="black"
-                   border-style="solid"
-                   space-before="10mm"
-                   space-before.conditionality="discard"
-                   text-align="left"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">VI - Acquisitions et cessions au cours de l'exercice ${ANNEE_EXERCICE} </fo:block>
-         <fo:block background-color="#CCCCCC"
-                   color="black"
-                   font-weight="bold"
-                   margin-bottom="9pt"
-                   font-size="12pt"
-                   text-align="left"
-                   space-before="6mm"
-                   space-before.conditionality="discard"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Acquisitions</fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 1. Quel est le montant total des acquisitions d'actifs corporels (achat ou aménagement de terrains, de bâtiments, achat de véhicules, d'outillage, de mobilier, de matériel de bureau ou informatique...) ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    background-color="#666666"
+                    color="white"
+                    font-weight="bold"
+                    margin-bottom="9pt"
+                    font-size="14pt"
+                    border-color="black"
+                    border-style="solid"
+                    space-before="10mm"
+                    space-before.conditionality="discard"
+                    text-align="left">VI - Acquisitions et cessions au cours de l'exercice ${ANNEE_EXERCICE} </fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    background-color="#CCCCCC"
+                    color="black"
+                    font-weight="bold"
+                    margin-bottom="9pt"
+                    font-size="12pt"
+                    text-align="left"
+                    space-before="6mm"
+                    space-before.conditionality="discard">Acquisitions</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 1. Quel est le montant total des acquisitions d'actifs corporels (achat ou aménagement de terrains, de bâtiments, achat de véhicules, d'outillage, de mobilier, de matériel de bureau ou informatique...) ?</fo:block>
          <fo:block id="ACQUSITIONS_CORPORELLES" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -2969,24 +3063,24 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 2. Parmi les acquisitions d'actifs corporels, quel est le montant des acquisitions de terrains ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 2. Parmi les acquisitions d'actifs corporels, quel est le montant des acquisitions de terrains ?</fo:block>
          <fo:block id="ACQUSITIONS_TERRAINS" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -3001,24 +3095,24 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 3. Quel est le montant des acquisitions d’actifs incorporels en logiciel, base de donnée, recherche et développement</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 3. Quel est le montant des acquisitions d’actifs incorporels en logiciel, base de donnée, recherche et développement</fo:block>
          <fo:block id="ACQUISITIONS_INCORP_BDD" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="40mm">
                      <fo:block-container height="8mm"
                                          width="40mm"
@@ -3033,46 +3127,46 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block background-color="#CCCCCC"
-                   color="black"
-                   font-weight="bold"
-                   margin-bottom="9pt"
-                   font-size="12pt"
-                   text-align="left"
-                   space-before="6mm"
-                   space-before.conditionality="discard"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Cessions</fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 4. Quelle est le montant des cessions corporelles courantes (vente de terrains, de bâtiments, de véhicules, d'outillage, de mobilier, de matériel de bureau ou informatique...) ?</fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    background-color="#CCCCCC"
+                    color="black"
+                    font-weight="bold"
+                    margin-bottom="9pt"
+                    font-size="12pt"
+                    text-align="left"
+                    space-before="6mm"
+                    space-before.conditionality="discard">Cessions</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 4. Quelle est le montant des cessions corporelles courantes (vente de terrains, de bâtiments, de véhicules, d'outillage, de mobilier, de matériel de bureau ou informatique...) ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify">
             <fo:inline font-style="italic">Au prix de cession</fo:inline>
          </fo:block>
          <fo:block id="CESSIONS_CORPORELLES" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -3087,24 +3181,24 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 5. Parmi les cessions corporelles, quel est le montant des cessions de terrains ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 5. Parmi les cessions corporelles, quel est le montant des cessions de terrains ?</fo:block>
          <fo:block id="CESSIONS_TERRAINS" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -3119,24 +3213,24 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 6. Quel est le montant des cessions incorporelles en logiciel, base de donnée, recherche et développement ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 6. Quel est le montant des cessions incorporelles en logiciel, base de donnée, recherche et développement ?</fo:block>
          <fo:block id="CESSIONS_INCORPORELLES_BDD" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -3151,48 +3245,48 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block background-color="#666666"
-                   color="white"
-                   font-weight="bold"
-                   margin-bottom="9pt"
-                   font-size="14pt"
-                   border-color="black"
-                   border-style="solid"
-                   space-before="10mm"
-                   space-before.conditionality="discard"
-                   text-align="left"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">VII - Dépenses professionnelles et montant des stocks au cours de l'exercice ${ANNEE_EXERCICE} </fo:block>
-         <fo:block background-color="#CCCCCC"
-                   color="black"
-                   font-weight="bold"
-                   margin-bottom="9pt"
-                   font-size="12pt"
-                   text-align="left"
-                   space-before="6mm"
-                   space-before.conditionality="discard"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Dépenses professionnelles</fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 1. Quel est le montant des achats de marchandises pour revente en l'état ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    background-color="#666666"
+                    color="white"
+                    font-weight="bold"
+                    margin-bottom="9pt"
+                    font-size="14pt"
+                    border-color="black"
+                    border-style="solid"
+                    space-before="10mm"
+                    space-before.conditionality="discard"
+                    text-align="left">VII - Dépenses professionnelles et montant des stocks au cours de l'exercice ${ANNEE_EXERCICE} </fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    background-color="#CCCCCC"
+                    color="black"
+                    font-weight="bold"
+                    margin-bottom="9pt"
+                    font-size="12pt"
+                    text-align="left"
+                    space-before="6mm"
+                    space-before.conditionality="discard">Dépenses professionnelles</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 1. Quel est le montant des achats de marchandises pour revente en l'état ?</fo:block>
          <fo:block id="ACHAT_MARCHANDISES" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -3207,24 +3301,24 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 2. Quel est le montant des achats de matières premières, fournitures et autres approvisionnements ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 2. Quel est le montant des achats de matières premières, fournitures et autres approvisionnements ?</fo:block>
          <fo:block id="ACHATS_MATIERES_PREMIERES" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -3239,33 +3333,33 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 3. Quel est le montant des autres achats et charges externes ?</fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">comptes 61 et 62 du plan comptable général</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 3. Quel est le montant des autres achats et charges externes ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify">comptes 61 et 62 du plan comptable général</fo:block>
          <fo:block id="CHARGES_EXTERNES" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -3280,33 +3374,33 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 4. Quel est le montant des impôts, taxes et versements assimilés ?</fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Ne comprend pas les impôts sur le résultat mais uniquement le compte 63 du plan comptable général.</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 4. Quel est le montant des impôts, taxes et versements assimilés ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify">Ne comprend pas les impôts sur le résultat mais uniquement le compte 63 du plan comptable général.</fo:block>
          <fo:block id="IMPOTS" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -3321,33 +3415,33 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 5. Quel est le montant des autres charges ?</fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">compte 65 du plan comptable général</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 5. Quel est le montant des autres charges ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify">compte 65 du plan comptable général</fo:block>
          <fo:block id="AUTRES_CHARGES" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -3362,54 +3456,54 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block background-color="#CCCCCC"
-                   color="black"
-                   font-weight="bold"
-                   margin-bottom="9pt"
-                   font-size="12pt"
-                   text-align="left"
-                   space-before="6mm"
-                   space-before.conditionality="discard"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Montant des variations des stocks</fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Veuillez indiquer les variations de stocks de marchandises, matières premières et autres approvisionnements de l’exercice. <fo:inline font-weight="bold">La variation du stock est égal au stock en début d'exercice auquel on soustrait le stock en fin d'exercice. Elle peut être négative ou positive, bien le préciser.</fo:inline>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    background-color="#CCCCCC"
+                    color="black"
+                    font-weight="bold"
+                    margin-bottom="9pt"
+                    font-size="12pt"
+                    text-align="left"
+                    space-before="6mm"
+                    space-before.conditionality="discard">Montant des variations des stocks</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify">Veuillez indiquer les variations de stocks de marchandises, matières premières et autres approvisionnements de l’exercice. <fo:inline font-weight="bold">La variation du stock est égal au stock en début d'exercice auquel on soustrait le stock en fin d'exercice. Elle peut être négative ou positive, bien le préciser.</fo:inline>
          </fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Les montants s’entendent hors TVA. Ils correspondent aux comptes 603 du plan comptable général. Les stocks de produits et d’en-cours (comptes 33, 34 et 35) sont à exclure.</fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 6. Quel est le montant de la variation du stock de marchandises ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify">Les montants s’entendent hors TVA. Ils correspondent aux comptes 603 du plan comptable général. Les stocks de produits et d’en-cours (comptes 33, 34 et 35) sont à exclure.</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 6. Quel est le montant de la variation du stock de marchandises ?</fo:block>
          <fo:block id="VARIATION_STOCK_MARCHANDISES" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="28mm">
                      <fo:block-container height="8mm"
                                          width="28mm"
@@ -3424,24 +3518,24 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 7. Quel est le montant de la variation du stock de matières premières ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 7. Quel est le montant de la variation du stock de matières premières ?</fo:block>
          <fo:block id="VARIATION_STOCK_MATIERES_PREMIERES" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="32mm">
                      <fo:block-container height="8mm"
                                          width="32mm"
@@ -3456,46 +3550,46 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block background-color="#666666"
-                   color="white"
-                   font-weight="bold"
-                   margin-bottom="9pt"
-                   font-size="14pt"
-                   border-color="black"
-                   border-style="solid"
-                   space-before="10mm"
-                   space-before.conditionality="discard"
-                   text-align="left"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">VIII - Exportations / importations au cours de l'exercice ${ANNEE_EXERCICE} </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 1. Quel est le montant total des exportations hors de Mayotte au cours du dernier exercice ?</fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">Indiquez le montant total hors frais (douane, transport, stockage...)</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    background-color="#666666"
+                    color="white"
+                    font-weight="bold"
+                    margin-bottom="9pt"
+                    font-size="14pt"
+                    border-color="black"
+                    border-style="solid"
+                    space-before="10mm"
+                    space-before.conditionality="discard"
+                    text-align="left">VIII - Exportations / importations au cours de l'exercice ${ANNEE_EXERCICE} </fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 1. Quel est le montant total des exportations hors de Mayotte au cours du dernier exercice ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify">Indiquez le montant total hors frais (douane, transport, stockage...)</fo:block>
          <fo:block id="EXPORTATIONS" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -3510,33 +3604,33 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 2. Quel est le montant total des importations ou acquisitions hors de Mayotte au cours du dernier exercice ?</fo:block>
-         <fo:block font-size="10pt"
-                   font-weight="normal"
-                   font-style="italic"
-                   margin-bottom="3pt"
-                   margin-left="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always"> Indiquez le montant total hors frais (douane, transport, stockage...)</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 2. Quel est le montant total des importations ou acquisitions hors de Mayotte au cours du dernier exercice ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    font-size="10pt"
+                    font-weight="normal"
+                    font-style="italic"
+                    margin-bottom="3pt"
+                    margin-left="3pt"
+                    text-align="justify"> Indiquez le montant total hors frais (douane, transport, stockage...)</fo:block>
          <fo:block id="IMPORTATIONS" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="36mm">
                      <fo:block-container height="8mm"
                                          width="36mm"
@@ -3551,37 +3645,37 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block background-color="#666666"
-                   color="white"
-                   font-weight="bold"
-                   margin-bottom="9pt"
-                   font-size="14pt"
-                   border-color="black"
-                   border-style="solid"
-                   space-before="10mm"
-                   space-before.conditionality="discard"
-                   text-align="left"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">IX - Compte financier de l'exercice ${ANNEE_EXERCICE} </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 1. Quel est le montant des intérêts et charges assimilés versés ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    background-color="#666666"
+                    color="white"
+                    font-weight="bold"
+                    margin-bottom="9pt"
+                    font-size="14pt"
+                    border-color="black"
+                    border-style="solid"
+                    space-before="10mm"
+                    space-before.conditionality="discard"
+                    text-align="left">IX - Compte financier de l'exercice ${ANNEE_EXERCICE} </fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 1. Quel est le montant des intérêts et charges assimilés versés ?</fo:block>
          <fo:block id="INTERETS_VERSES" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="32mm">
                      <fo:block-container height="8mm"
                                          width="32mm"
@@ -3596,24 +3690,24 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 2. Quel est le montant des intérêts et produits assimilés perçus ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 2. Quel est le montant des intérêts et produits assimilés perçus ?</fo:block>
          <fo:block id="INTERETS_PERCUS" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="32mm">
                      <fo:block-container height="8mm"
                                          width="32mm"
@@ -3628,24 +3722,24 @@
                </fo:block>
             </fo:block>
          </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   text-align="justify"
-                   page-break-inside="avoid"
-                   keep-with-next="always"
-                   keep-together.within-column="always">➡ 3. Quel est le montant des dividendes versés ?</fo:block>
+         <fo:block page-break-inside="avoid"
+                    keep-with-next="always"
+                    keep-together.within-column="always"
+                    color="black"
+                    font-weight="bold"
+                    font-size="10pt"
+                    margin-top="9pt"
+                    margin-bottom="3pt"
+                    text-align="justify">➡ 3. Quel est le montant des dividendes versés ?</fo:block>
          <fo:block id="DIVIDENDES" page-break-inside="avoid">
             <fo:block>
-               <fo:block color="black"
-                         font-weight="normal"
-                         font-size="10pt"
-                         padding="1mm"
-                         text-align="justify"
-                         padding-bottom="0mm"
-                         padding-top="0mm">
+               <fo:block padding-bottom="0mm"
+                          padding-top="0mm"
+                          color="black"
+                          font-weight="normal"
+                          font-size="10pt"
+                          padding="1mm"
+                          text-align="justify">
                   <fo:inline-container width="40mm">
                      <fo:block-container height="8mm"
                                          width="40mm"

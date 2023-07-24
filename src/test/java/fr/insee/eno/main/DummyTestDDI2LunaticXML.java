@@ -35,6 +35,7 @@ public class DummyTestDDI2LunaticXML {
 				new LunaticXMLSortComponentsPostprocessor(),
 				new LunaticXMLInsertGenericQuestionsPostprocessor(),
 				new LunaticXMLExternalizeVariablesAndDependenciesPostprocessor(),
+				new LunaticXMLInsertCleaningBlockPostprocessor(),
 				new LunaticXMLVTLParserPostprocessor(),
 				new LunaticXMLVTLParserPostprocessor(),
 				new LunaticXMLPaginationPostprocessor(),};

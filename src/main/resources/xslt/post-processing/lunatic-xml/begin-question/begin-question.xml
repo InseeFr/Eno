@@ -6,23 +6,37 @@
         <label>"Identification"</label>      
         <conditionFilter>
             <value>true</value>
+            <type>VTL</type>
         </conditionFilter>
         <hierarchy>
             <sequence id="BEGIN-QUESTION-SEQ">
-                <label>"Identification"</label>
+                <label>
+                    <value>"Identification"</value>
+                    <type>VTL|MD</type>
+                </label>
             </sequence>
         </hierarchy> 
         <components xsi:type="Subsequence" componentType="Subsequence" id="BEGIN-QUESTION-SUBSEQ">
-            <label>"Identification de votre " || cast(LABEL_UNITE_ENQUETEE,string)</label>
+            <label>
+                <value>"Identification de votre " || cast(LABEL_UNITE_ENQUETEE,string)</value>
+                <type>VTL|MD</type>
+            </label>
             <conditionFilter>
                 <value>true</value>
+                <type>VTL</type>
             </conditionFilter>
             <hierarchy>
                 <sequence id="BEGIN-QUESTION-SEQ">
-                    <label>"Identification"</label>
+                    <label>
+                        <value>"Identification"</value>
+                        <type>VTL|MD</type>
+                    </label>
                 </sequence>
                 <subSequence id="BEGIN-QUESTION-SUBSEQ">
-                    <label>"Identification de votre " || cast(LABEL_UNITE_ENQUETEE,string)</label>
+                    <label>
+                        <value>"Identification de votre " || cast(LABEL_UNITE_ENQUETEE,string)</value>
+                        <type>VTL|MD</type>
+                    </label>
                 </subSequence>
             </hierarchy> 
             <bindingsDependencies>LABEL_UNITE_ENQUETEE</bindingsDependencies>
@@ -31,16 +45,26 @@
                 id="COMMENT-UE-QUESTION"
                 maxLength="2000"
                 mandatory="false">
-                <label>"Remarque, commentaire sur un changement concernant votre " || cast(LABEL_UNITE_ENQUETEE,string) || " :"</label>
+                <label>
+                    <value>"Remarque, commentaire sur un changement concernant votre " || cast(LABEL_UNITE_ENQUETEE,string) || " :"</value>
+                    <type>VTL|MD</type>
+                </label>
                 <conditionFilter>
                     <value>true</value>
+                    <type>VTL</type>
                 </conditionFilter>
                 <hierarchy>
                     <sequence id="BEGIN-QUESTION-SEQ">
-                        <label>"Identification"</label>
+                        <label>
+                            <value>"Identification"</value>
+                            <type>VTL|MD</type>
+                        </label>
                     </sequence>
                     <subSequence id="BEGIN-QUESTION-SUBSEQ">
-                        <label>"Identification de votre " || cast(LABEL_UNITE_ENQUETEE,string)</label>
+                        <label>
+                            <value>"Identification de votre " || cast(LABEL_UNITE_ENQUETEE,string)</value>
+                            <type>VTL|MD</type>
+                        </label>
                     </subSequence>
                 </hierarchy> 
                 <bindingDependencies>LABEL_UNITE_ENQUETEE</bindingDependencies>
@@ -48,7 +72,7 @@
                 <response name="COMMENT_UE"/>
                 <variables variableType="COLLECTED" xsi:type="VariableType">
                     <name>COMMENT_UE</name>
-                    <componentRef>COMMENT-UE-QUESTION</componentRef>
+                    <!--<componentRef>COMMENT-UE-QUESTION</componentRef>-->
                     <values>
                         <PREVIOUS xsi:nil="true"/>
                         <COLLECTED xsi:nil="true"/>

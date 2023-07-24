@@ -5,7 +5,8 @@
 	<groupId>fr.insee.eno</groupId>
 	<artifactId>eno-core</artifactId>
 
-	<version>2.3.7</version>
+
+	<version>2.4.3</version>
 
 
 	<packaging>jar</packaging>
@@ -52,27 +53,27 @@
 	<properties>
 		<guice.version>5.1.0</guice.version>
 		<commons-io.version>2.11.0</commons-io.version>
-		<saxon.version>11.2</saxon.version>
+		<saxon.version>11.3</saxon.version>
 		<fop.version>2.7</fop.version>
-		<xalan.version>2.7.2</xalan.version>
+		<xalan.version>2.7.3</xalan.version>
 		<slf4j.version>1.7.36</slf4j.version>
-		<eclipse.version>2.6.0</eclipse.version>
+		<eclipse.version>3.0.2</eclipse.version>
 		<jaxb-api.version>2.3.1</jaxb-api.version>
 
 		<apache-commons.version>3.5</apache-commons.version>
 		<junit.version>5.8.2</junit.version>
 		<xmlunit.version>2.9.0</xmlunit.version>
-		<log4j-slf4j.version>2.17.2</log4j-slf4j.version>
+		<log4j-slf4j.version>2.20.0</log4j-slf4j.version>
 
 
 		<source.plugin.version>3.2.1</source.plugin.version>
-		<javadoc.plugin.version>3.3.2</javadoc.plugin.version>
+		<javadoc.plugin.version>3.4.0</javadoc.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 
 					<!-- Configuration Sonar -->
-		<jacoco.version>0.8.7</jacoco.version>	
+		<jacoco.version>0.8.8</jacoco.version>	
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
@@ -88,11 +89,7 @@
 			<artifactId>Saxon-HE</artifactId>
 			<version>${saxon.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>xalan</groupId>
-			<artifactId>xalan</artifactId>
-			<version>${xalan.version}</version>
-		</dependency>
+
 		<dependency>
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
@@ -109,6 +106,12 @@
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>fop</artifactId>
 			<version>${fop.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- LOG4j and SL4J dependancies -->
@@ -211,7 +214,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.7</version>
+				<version>3.3.0</version>
 				<configuration>
 					<encoding>UTF-8</encoding>
 				</configuration>
@@ -356,7 +359,7 @@
 					<plugin>
 						<groupId>org.sonatype.plugins</groupId>
 						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>1.6.12</version>
+						<version>1.6.13</version>
 						<extensions>true</extensions>
 						<configuration>
 							<serverId>ossrh</serverId>

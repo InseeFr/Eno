@@ -106,18 +106,20 @@ public class TestValidator {
 	public void validateModeLunatic() {
 		ValidationMessage valid0 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.CAWI);
 		ValidationMessage valid1 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.PAPI);
-		ValidationMessage valid2 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.CAPI_CATI);
-		ValidationMessage valid3 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.ALL);
-		ValidationMessage valid4 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.PROCESS);
-		ValidationMessage valid5 = validator.validateMode(OutFormat.LUNATIC_XML,null);	
+		ValidationMessage valid2 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.CAPI);
+		ValidationMessage valid3 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.CATI);
+		ValidationMessage valid4 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.ALL);
+		ValidationMessage valid5 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.PROCESS);
+		ValidationMessage valid6 = validator.validateMode(OutFormat.LUNATIC_XML,null);	
 		
 		
 		Assertions.assertTrue(valid0.isValid());
 		Assertions.assertFalse(valid1.isValid());
 		Assertions.assertTrue(valid2.isValid());
-		Assertions.assertFalse(valid3.isValid());
-		Assertions.assertTrue(valid4.isValid());
-		Assertions.assertFalse(valid5.isValid());
+		Assertions.assertTrue(valid3.isValid());
+		Assertions.assertFalse(valid4.isValid());
+		Assertions.assertTrue(valid5.isValid());
+		Assertions.assertFalse(valid6.isValid());
 		
 	}
 	
@@ -127,18 +129,20 @@ public class TestValidator {
 		
 		ValidationMessage valida0 = validator.validateMode(OutFormat.DDI,Mode.CAWI);
 		ValidationMessage valida1 = validator.validateMode(OutFormat.DDI,Mode.PAPI);
-		ValidationMessage valida2 = validator.validateMode(OutFormat.DDI,Mode.CAPI_CATI);
-		ValidationMessage valida3 = validator.validateMode(OutFormat.DDI,Mode.ALL);
-		ValidationMessage valida4 = validator.validateMode(OutFormat.DDI,Mode.PROCESS);
-		ValidationMessage valida5 = validator.validateMode(OutFormat.DDI,null);	
+		ValidationMessage valida2 = validator.validateMode(OutFormat.DDI,Mode.CAPI);
+		ValidationMessage valida3 = validator.validateMode(OutFormat.DDI,Mode.CATI);
+		ValidationMessage valida4 = validator.validateMode(OutFormat.DDI,Mode.ALL);
+		ValidationMessage valida5 = validator.validateMode(OutFormat.DDI,Mode.PROCESS);
+		ValidationMessage valida6 = validator.validateMode(OutFormat.DDI,null);	
 		
 		
 		Assertions.assertFalse(valida0.isValid());
 		Assertions.assertFalse(valida1.isValid());
 		Assertions.assertFalse(valida2.isValid());
-		Assertions.assertTrue(valida3.isValid());
-		Assertions.assertFalse(valida4.isValid());
-		Assertions.assertTrue(valida5.isValid());
+		Assertions.assertFalse(valida3.isValid());
+		Assertions.assertTrue(valida4.isValid());
+		Assertions.assertFalse(valida5.isValid());
+		Assertions.assertTrue(valida6.isValid());
 		
 	}
 	
@@ -148,10 +152,11 @@ public class TestValidator {
 		
 		ValidationMessage validb0 = validator.validateMode(OutFormat.FO,Mode.CAWI);
 		ValidationMessage validb1 = validator.validateMode(OutFormat.FO,Mode.PAPI);
-		ValidationMessage validb2 = validator.validateMode(OutFormat.FO,Mode.CAPI_CATI);
-		ValidationMessage validb3 = validator.validateMode(OutFormat.FO,Mode.ALL);
-		ValidationMessage validb4 = validator.validateMode(OutFormat.FO,Mode.PROCESS);
-		ValidationMessage validb5 = validator.validateMode(OutFormat.FO,null);	
+		ValidationMessage validb2 = validator.validateMode(OutFormat.FO,Mode.CAPI);
+		ValidationMessage validb3 = validator.validateMode(OutFormat.FO,Mode.CATI);
+		ValidationMessage validb4 = validator.validateMode(OutFormat.FO,Mode.ALL);
+		ValidationMessage validb5 = validator.validateMode(OutFormat.FO,Mode.PROCESS);
+		ValidationMessage validb6 = validator.validateMode(OutFormat.FO,null);	
 	
 		
 		Assertions.assertFalse(validb0.isValid());
@@ -159,7 +164,8 @@ public class TestValidator {
 		Assertions.assertFalse(validb2.isValid());
 		Assertions.assertFalse(validb3.isValid());
 		Assertions.assertFalse(validb4.isValid());
-		Assertions.assertTrue(validb5.isValid());
+		Assertions.assertFalse(validb5.isValid());
+		Assertions.assertTrue(validb6.isValid());
 	}
 	
 	@Test
@@ -167,17 +173,19 @@ public class TestValidator {
 		
 		ValidationMessage validc0 = validator.validateMode(OutFormat.FODT,Mode.CAWI);
 		ValidationMessage validc1 = validator.validateMode(OutFormat.FODT,Mode.PAPI);
-		ValidationMessage validc2 = validator.validateMode(OutFormat.FODT,Mode.CAPI_CATI);
-		ValidationMessage validc3 = validator.validateMode(OutFormat.FODT,Mode.ALL);
-		ValidationMessage validc4 = validator.validateMode(OutFormat.FODT,Mode.PROCESS);
-		ValidationMessage validc5 = validator.validateMode(OutFormat.FODT,null);
+		ValidationMessage validc2 = validator.validateMode(OutFormat.FODT,Mode.CAPI);
+		ValidationMessage validc3 = validator.validateMode(OutFormat.FODT,Mode.CATI);
+		ValidationMessage validc4 = validator.validateMode(OutFormat.FODT,Mode.ALL);
+		ValidationMessage validc5 = validator.validateMode(OutFormat.FODT,Mode.PROCESS);
+		ValidationMessage validc6 = validator.validateMode(OutFormat.FODT,null);
 		
 		Assertions.assertFalse(validc0.isValid());
 		Assertions.assertFalse(validc1.isValid());
 		Assertions.assertFalse(validc2.isValid());
-		Assertions.assertTrue(validc3.isValid());
-		Assertions.assertFalse(validc4.isValid());
-		Assertions.assertTrue(validc5.isValid());
+		Assertions.assertFalse(validc3.isValid());
+		Assertions.assertTrue(validc4.isValid());
+		Assertions.assertFalse(validc5.isValid());
+		Assertions.assertTrue(validc6.isValid());
 		
 	}
 	
@@ -186,16 +194,18 @@ public class TestValidator {
 		
 		ValidationMessage validd0 = validator.validateMode(OutFormat.XFORMS,Mode.CAWI);
 		ValidationMessage validd1 = validator.validateMode(OutFormat.XFORMS,Mode.PAPI);
-		ValidationMessage validd2 = validator.validateMode(OutFormat.XFORMS,Mode.CAPI_CATI);
-		ValidationMessage validd3 = validator.validateMode(OutFormat.XFORMS,Mode.ALL);
-		ValidationMessage validd4 = validator.validateMode(OutFormat.XFORMS,Mode.PROCESS);
-		ValidationMessage validd5 = validator.validateMode(OutFormat.XFORMS,null);	
+		ValidationMessage validd2 = validator.validateMode(OutFormat.XFORMS,Mode.CAPI);
+		ValidationMessage validd3 = validator.validateMode(OutFormat.XFORMS,Mode.CATI);
+		ValidationMessage validd4 = validator.validateMode(OutFormat.XFORMS,Mode.ALL);
+		ValidationMessage validd5 = validator.validateMode(OutFormat.XFORMS,Mode.PROCESS);
+		ValidationMessage validd6 = validator.validateMode(OutFormat.XFORMS,null);	
 		
 		Assertions.assertTrue(validd0.isValid());
 		Assertions.assertFalse(validd1.isValid());
 		Assertions.assertFalse(validd2.isValid());
 		Assertions.assertFalse(validd3.isValid());
 		Assertions.assertFalse(validd4.isValid());
-		Assertions.assertTrue(validd5.isValid());
+		Assertions.assertFalse(validd5.isValid());
+		Assertions.assertTrue(validd6.isValid());
 	}
 }
