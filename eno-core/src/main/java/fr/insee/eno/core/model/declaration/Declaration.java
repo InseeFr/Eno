@@ -26,10 +26,6 @@ public class Declaration extends EnoIdentifiableObject implements DeclarationInt
     @Lunatic("setLabel(#param)")
     DynamicLabel label;
 
-    /** List of variable names that are used in the declarations' label.
-     * This list is filled in an Eno processing, and used in Lunatic processing to fill 'bindingDependencies'. */
-    List<String> variableNames = new ArrayList<>();
-
     @Lunatic("setDeclarationType(T(fr.insee.lunatic.model.flat.DeclarationTypeEnum).valueOf(#param))")
     String declarationType = "STATEMENT";
 
