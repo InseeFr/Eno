@@ -1,10 +1,13 @@
 package fr.insee.eno.core.processing.impl;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.code.CodeItem;
+import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.declaration.Instruction;
 import fr.insee.eno.core.model.label.EnoLabel;
 import fr.insee.eno.core.model.navigation.Control;
+import fr.insee.eno.core.model.question.MultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.variable.Variable;
@@ -35,24 +38,30 @@ public class DDIResolveVariableReferencesInLabels implements InProcessingInterfa
      */
     public void apply(EnoQuestionnaire enoQuestionnaire) {
         // Sequences and subsequences
-        enoQuestionnaire.getSequences().stream().map(AbstractSequence::getLabel).forEach(this::resolveValue);
-        enoQuestionnaire.getSubsequences().stream().map(AbstractSequence::getLabel).forEach(this::resolveValue);
+        enoQuestionnaire.getSequences().stream().map(AbstractSequence::getLabel).forEach(this::resolveLabel);
+        enoQuestionnaire.getSubsequences().stream().map(AbstractSequence::getLabel).forEach(this::resolveLabel);
         // Questions
-        enoCatalog.getQuestions().stream().map(Question::getLabel).forEach(this::resolveValue);
+        enoCatalog.getQuestions().stream().map(Question::getLabel).forEach(this::resolveLabel);
         // Declarations, instructions and controls within components
         enoCatalog.getComponents().forEach(enoComponent -> {
-                enoComponent.getDeclarations().stream().map(Declaration::getLabel).forEach(this::resolveValue);
-                enoComponent.getInstructions().stream().map(Instruction::getLabel).forEach(this::resolveValue);
-                enoComponent.getControls().stream().map(Control::getMessage).forEach(this::resolveValue);
+                enoComponent.getDeclarations().stream().map(Declaration::getLabel).forEach(this::resolveLabel);
+                enoComponent.getInstructions().stream().map(Instruction::getLabel).forEach(this::resolveLabel);
+                enoComponent.getControls().stream().map(Control::getMessage).forEach(this::resolveLabel);
         });
-        // TODO: labels in items of code lists
+        // Code lists
+        enoQuestionnaire.getCodeLists().stream().map(CodeList::getCodeItems).forEach(this::resolveCodeItemsLabel);
+        // Code lists in multiple response questions (might be refactored afterward)
+        enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .filter(MultipleChoiceQuestion.Simple.class::isInstance)
+                .map(MultipleChoiceQuestion.Simple.class::cast)
+                .forEach(this::resolveCodeResponsesLabel);
     }
 
     /**
      * Resolve the value of a label, by replacing the variable references by the variable names.
      * @param enoLabel Label to resolve.
      */
-    private void resolveValue(EnoLabel enoLabel) {
+    private void resolveLabel(EnoLabel enoLabel) {
         String resolvedValue = enoLabel.getValue();
         for (Variable variable : getReferencedVariables(enoLabel)) {
             resolvedValue = resolvedValue.replace(
@@ -81,6 +90,18 @@ public class DDIResolveVariableReferencesInLabels implements InProcessingInterfa
         return variableReferences.stream()
                         .map(variableReference -> enoCatalog.getVariable(variableReference))
                         .toList();
+    }
+
+    private void resolveCodeItemsLabel(List<CodeItem> codeItems) {
+        for (CodeItem codeItem : codeItems) {
+            resolveLabel(codeItem.getLabel());
+            // Recursive call in case of nested code items
+            resolveCodeItemsLabel(codeItem.getCodeItems());
+        }
+    }
+
+    private void resolveCodeResponsesLabel(MultipleChoiceQuestion.Simple multipleChoiceQuestion) {
+        multipleChoiceQuestion.getCodeResponses().forEach(codeResponse -> resolveLabel(codeResponse.getLabel()));
     }
 
 }
