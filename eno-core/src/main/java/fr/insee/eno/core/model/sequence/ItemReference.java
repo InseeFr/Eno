@@ -1,9 +1,11 @@
 package fr.insee.eno.core.model.sequence;
 
 import datacollection33.SequenceType;
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoObject;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.DDIIndex;
 import lombok.*;
 import reusable33.ReferenceType;
@@ -19,21 +21,20 @@ import reusable33.ReferenceType;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Context(format = Format.DDI, type = ReferenceType.class)
 public class ItemReference extends EnoObject {
 
     /** Type of items that can be found in control construct references in DDI. */
     public enum ItemType {SEQUENCE, SUBSEQUENCE, QUESTION, LOOP, FILTER, CONTROL, DECLARATION}
 
-    @DDI(contextType = ReferenceType.class,
-            field = "getTypeOfObject().toString() == 'QuestionConstruct' ? " +
-                    "#index.get(#this.getIDArray(0).getStringValue())" +
-                    ".getQuestionReference().getIDArray(0).getStringValue() : " +
-                    "getIDArray(0).getStringValue()")
+    @DDI("getTypeOfObject().toString() == 'QuestionConstruct' ? " +
+            "#index.get(#this.getIDArray(0).getStringValue())" +
+            ".getQuestionReference().getIDArray(0).getStringValue() : " +
+            "getIDArray(0).getStringValue()")
     private String id;
 
-    @DDI(contextType = ReferenceType.class,
-            field = "T(fr.insee.eno.core.model.sequence.ItemReference).convertDDITypeOfObject(" +
-                    "#this, #index)")
+    @DDI("T(fr.insee.eno.core.model.sequence.ItemReference).convertDDITypeOfObject(" +
+            "#this, #index)")
     private ItemType type;
 
     public static ItemType convertDDITypeOfObject(ReferenceType referenceType, DDIIndex ddiIndex) {

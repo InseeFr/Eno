@@ -1,0 +1,753 @@
+{
+  "owner": "FAKEPERMISSION",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "idendquest",
+        "lk6pnxga",
+        "lk6py97h",
+        "lk6psv66",
+        "lk6pzghy",
+        "lk6q2owb",
+        "lk6qpybd",
+        "lk6pyh7q",
+        "lk6qdwha",
+        "lk6pzgni",
+        "lk6qkux0",
+        "lk6qg0bv",
+        "lk6qn5v3"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "lk6remti",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "Eno - Variables"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "ENOVARIABLES",
+  "Variables": {
+    "Variable": [
+      {
+        "Formula": "cast($NUMBER1$, number) * 10",
+        "Label": "\"Number 1 times 10\"",
+        "id": "lk6qier3",
+        "type": "CalculatedVariableType",
+        "Name": "CALCULATED1",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Formula": "cast($NUMBER1$, integer) + cast($NUMBER2$, integer)",
+        "Label": "\"Sum of number 1 and number 2\"",
+        "id": "lk6qnuh1",
+        "type": "CalculatedVariableType",
+        "Name": "CALCULATED2",
+        "Datatype": {
+          "Maximum": "20",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Formula": "$CALCULATED1$ + 50",
+        "Label": "\"Calculated 1 plus 50\"",
+        "id": "lk6qqn46",
+        "type": "CalculatedVariableType",
+        "Name": "CALCULATED3",
+        "Datatype": {
+          "Maximum": "150",
+          "Minimum": "50",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Formula": "$CALCULATED2$ + 30",
+        "Label": "\"Calculated 2 plus 30\"",
+        "id": "lk6qyfbi",
+        "type": "CalculatedVariableType",
+        "Name": "CALCULATED4",
+        "Datatype": {
+          "Maximum": "50",
+          "Minimum": "30",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Formula": "\"Value is: \" || cast($CALCULATED4$, string)",
+        "Label": "\"Display calculated 4\"",
+        "id": "lk6r2vce",
+        "type": "CalculatedVariableType",
+        "Name": "CALCULATED5",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "20"
+        }
+      },
+      {
+        "Formula": "\"External text is: \" || $EXTERNAL_TEXT$",
+        "Label": "\"Calculated using external\"",
+        "id": "lk6rs5li",
+        "type": "CalculatedVariableType",
+        "Name": "CALCULATED6",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "50"
+        }
+      },
+      {
+        "Formula": "cast($EXTERNAL_NUMBER$, integer) + cast($NUMBER1$, integer)",
+        "Label": "\"Calculated using external and collected\"",
+        "id": "lk6ritn6",
+        "type": "CalculatedVariableType",
+        "Name": "CALCULATED7",
+        "Datatype": {
+          "Maximum": "20",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Formula": "\"Value is: \" || cast($CALCULATED7$, string)",
+        "Label": "\"Display calculated 7\"",
+        "id": "lk6rq2p2",
+        "type": "CalculatedVariableType",
+        "Name": "CALCULATED8",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "20"
+        }
+      },
+      {
+        "Formula": "$CALCULATED4$ + $CALCULATED7$",
+        "Label": "\"Sum of calculated 4 and calculated 7\"",
+        "id": "lk6rd4c0",
+        "type": "CalculatedVariableType",
+        "Name": "CALCULATED9",
+        "Datatype": {
+          "Maximum": "70",
+          "Minimum": "30",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "\"External (text)\"",
+        "id": "lk6qy1u9",
+        "type": "ExternalVariableType",
+        "Name": "EXTERNAL_TEXT",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "10"
+        }
+      },
+      {
+        "Label": "\"External (number)\"",
+        "id": "lk6r7758",
+        "type": "ExternalVariableType",
+        "Name": "EXTERNAL_NUMBER",
+        "Datatype": {
+          "Maximum": "10",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "TEXT_SHORT label",
+        "id": "lk6pzrbo",
+        "type": "CollectedVariableType",
+        "Name": "TEXT_SHORT",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "249"
+        }
+      },
+      {
+        "Label": "TEXT_LONG label",
+        "id": "lk6q09rz",
+        "type": "CollectedVariableType",
+        "Name": "TEXT_LONG",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "250"
+        }
+      },
+      {
+        "Label": "NUMBER1 label",
+        "id": "lk6qh1mo",
+        "type": "CollectedVariableType",
+        "Name": "NUMBER1",
+        "Datatype": {
+          "Maximum": "10",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "NUMBER_DECIMALS label",
+        "id": "lk6q5ucl",
+        "type": "CollectedVariableType",
+        "Name": "NUMBER_DECIMALS",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": "2"
+        }
+      },
+      {
+        "Label": "NUMBER_UNIT label",
+        "id": "lk6q23tu",
+        "type": "CollectedVariableType",
+        "Name": "NUMBER_UNIT",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "http://id.insee.fr/unit/kg",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "BOOL label",
+        "id": "lk6qd5g9",
+        "type": "CollectedVariableType",
+        "Name": "BOOL",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "DATE label",
+        "id": "lk6qmbw5",
+        "type": "CollectedVariableType",
+        "Name": "DATE",
+        "Datatype": {
+          "Format": "YYYY-MM-DD",
+          "typeName": "DATE",
+          "type": "DateDatatypeType"
+        }
+      },
+      {
+        "Label": "DATE_BOUNDED label",
+        "id": "lk6q0oa6",
+        "type": "CollectedVariableType",
+        "Name": "DATE_BOUNDED",
+        "Datatype": {
+          "Maximum": "2030-01-01",
+          "Minimum": "2000-01-01",
+          "Format": "YYYY-MM-DD",
+          "typeName": "DATE",
+          "type": "DateDatatypeType"
+        }
+      },
+      {
+        "Label": "DURATION label",
+        "id": "lk6qeybx",
+        "type": "CollectedVariableType",
+        "Name": "DURATION",
+        "Datatype": {
+          "Format": "PTnHnM",
+          "typeName": "DURATION",
+          "type": "DurationDatatypeType"
+        }
+      },
+      {
+        "Label": "DURATION_BOUNDED label",
+        "id": "lk6qocnd",
+        "type": "CollectedVariableType",
+        "Name": "DURATION_BOUNDED",
+        "Datatype": {
+          "Maximum": "PT10H0M",
+          "Minimum": "PT1H30M",
+          "Format": "PTnHnM",
+          "typeName": "DURATION",
+          "type": "DurationDatatypeType"
+        }
+      },
+      {
+        "Label": "NUMBER2 label",
+        "id": "lk6qjv5z",
+        "type": "CollectedVariableType",
+        "Name": "NUMBER2",
+        "Datatype": {
+          "Maximum": "10",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Mon Jul 17 2023 13:01:15 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "TCM",
+      "uri": "http://ddi:fr.insee:DataCollection.TCM"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "lk6phc5i",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Unique sequence\""
+      ],
+      "id": "lk6pnxga",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lk6qd5g9",
+              "id": "lk6rugut",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Boolean question\""
+          ],
+          "id": "lk6py97h",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "BOOL"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lk6pzrbo",
+              "id": "lk6ru7d7",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": "249"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Short text question\""
+          ],
+          "id": "lk6psv66",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "TEXT_SHORT"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lk6q09rz",
+              "id": "lk6rasqy",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": "250"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Long text question\""
+          ],
+          "id": "lk6pzghy",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "TEXT_LONG"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lk6qh1mo",
+              "id": "lk6rfeb5",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "10",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Numeric question\""
+          ],
+          "id": "lk6q2owb",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "NUMBER1"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lk6qjv5z",
+              "id": "lk6qmw67",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "10",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Numeric question 2\""
+          ],
+          "id": "lk6qpybd",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "NUMBER2"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lk6q5ucl",
+              "id": "lk6roea8",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Decimals": "2"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Number with two decimals\""
+          ],
+          "id": "lk6pyh7q",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "NUMBER_DECIMALS"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lk6q23tu",
+              "id": "lk6rij82",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "http://id.insee.fr/unit/kg",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Number with unit\""
+          ],
+          "id": "lk6qdwha",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "NUMBER_UNIT"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lk6qmbw5",
+              "id": "lk6ru8um",
+              "mandatory": false,
+              "Datatype": {
+                "Format": "YYYY-MM-DD",
+                "typeName": "DATE",
+                "type": "DateDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Date question\""
+          ],
+          "id": "lk6pzgni",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "DATE"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lk6q0oa6",
+              "id": "lk6rr1ix",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "2030-01-01",
+                "Minimum": "2000-01-01",
+                "Format": "YYYY-MM-DD",
+                "typeName": "DATE",
+                "type": "DateDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Date question (with min / max)\""
+          ],
+          "id": "lk6qkux0",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "DATE_BOUNDED"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lk6qeybx",
+              "id": "lk6ruckh",
+              "mandatory": false,
+              "Datatype": {
+                "Format": "PTnHnM",
+                "typeName": "DURATION",
+                "type": "DurationDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Duration question\""
+          ],
+          "id": "lk6qg0bv",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "DURATION"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lk6qocnd",
+              "id": "lk6rix25",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "PT10H0M",
+                "Minimum": "PT1H30M",
+                "Format": "PTnHnM",
+                "typeName": "DURATION",
+                "type": "DurationDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Duration question (with min / max)\""
+          ],
+          "id": "lk6qn5v3",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "DURATION_BOUNDED"
+        }
+      ],
+      "Name": "SEQ"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

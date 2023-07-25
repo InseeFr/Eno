@@ -10,8 +10,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target(FIELD)
 public @interface Lunatic {
 
-    Class<?>[] contextType();
-
-    String field();
+    String value();
 
 }

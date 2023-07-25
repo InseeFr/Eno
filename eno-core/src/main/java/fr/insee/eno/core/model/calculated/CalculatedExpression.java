@@ -10,8 +10,8 @@ import lombok.Getter;
 import lombok.Setter;
 import reusable33.CommandType;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import static fr.insee.eno.core.annotations.Contexts.Context;
 
@@ -31,18 +31,18 @@ public class CalculatedExpression extends EnoObject {
     }
 
     /** Expression. */
-    @DDI(contextType = CommandType.class, field = "getCommandContent()")
-    @Lunatic(contextType = LabelType.class, field = "setValue(#param)")
+    @DDI("getCommandContent()")
+    @Lunatic("setValue(#param)")
     private String value;
 
     /** For now, Lunatic type in label objects does not come from metadata, but is hardcoded here in Eno.
      * See labels documentation. */
-    @Lunatic(contextType = LabelType.class, field = "setType(#param)")
+    @Lunatic("setType(#param)")
     String type = Constant.LUNATIC_LABEL_VTL;
 
     /** In DDI, the expression contains variable references instead of variables names.
      * This list contains the references of these variables. */
-    @DDI(contextType = CommandType.class, field = "getInParameterList()")
-    private List<BindingReference> bindingReferences = new ArrayList<>();
+    @DDI("getInParameterList()")
+    private Set<BindingReference> bindingReferences = new HashSet<>();
 
 }
