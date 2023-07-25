@@ -2,6 +2,7 @@ package fr.insee.eno.core.model;
 
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.label.QuestionnaireLabel;
 import fr.insee.eno.core.model.navigation.Control;
@@ -101,5 +102,8 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     @DDI("getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionGridList()")
     @Lunatic("getComponents()")
     private final List<MultipleResponseQuestion> multipleResponseQuestions = new ArrayList<>();
+
+    @DDI("getResourcePackageArray(0).getCodeListSchemeArray(0).getCodeListList()")
+    List<CodeList> codeLists = new ArrayList<>();
 
 }

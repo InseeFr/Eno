@@ -21,7 +21,7 @@ import java.util.List;
 @Context(format = Format.DDI, type = CodeListType.class)
 public class CodeList extends EnoIdentifiableObject {
 
-    @DDI("getLabelArray(0).getContentArray(0).getStringValue()")
+    @DDI("!getLabelList().isEmpty() ? getLabelArray(0).getContentArray(0).getStringValue() : null")
     String name;
 
     @DDI("getCodeList()")

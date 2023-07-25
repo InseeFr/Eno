@@ -48,14 +48,22 @@ public class TableQuestion extends MultipleResponseQuestion {
     @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     String lunaticComponentType = "TABLE";
 
-    /** Code list that contains header info. */
-    @DDI("#index.get(#this.getGridDimensionList().?[#this.getRank().intValue() == 2].get(0)" +
-            ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue())")
+    /** Reference of the code list that contains header info. */
+    @DDI("getGridDimensionList().?[#this.getRank().intValue() == 2].get(0)" +
+            ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue()")
+    String headerCodeListReference;
+
+    /** Code list that contains header info.
+     * In DDI, inserted here through a processing. */
     CodeList header;
 
-    /** Code list that contains left column info. */
-    @DDI("#index.get(#this.getGridDimensionList().?[#this.getRank().intValue() == 1].get(0)" +
-            ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue())")
+    /** Code list that contains header info. */
+    @DDI("getGridDimensionList().?[#this.getRank().intValue() == 1].get(0)" +
+            ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue()")
+    String leftColumnCodeListReference;
+
+    /** Code list that contains left column info.
+     * In DDI, inserted here through a processing. */
     CodeList leftColumn;
 
     /** Considering that out parameters are sorted in the same order as GridResponseDomainInMixed objects in DDI. */

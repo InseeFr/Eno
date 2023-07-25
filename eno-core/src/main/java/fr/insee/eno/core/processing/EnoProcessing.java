@@ -60,6 +60,7 @@ public class EnoProcessing {
         new DDIResolveVariableReferencesInExpressions().apply(enoQuestionnaire);
         new DDIInsertDeclarations().apply(enoQuestionnaire);
         new DDIInsertControls().apply(enoQuestionnaire);
+        new DDIInsertCodeLists().apply(enoQuestionnaire);
         new DDIResolveVariableReferencesInLabels(enoCatalog).apply(enoQuestionnaire);
         new DDIResolveSequencesStructure().apply(enoQuestionnaire);
         new DDIResolveFiltersScope().apply(enoQuestionnaire);
