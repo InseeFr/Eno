@@ -57,7 +57,7 @@ public class EnoProcessing {
 
     private void ddiTechnicalProcessing(EnoQuestionnaire enoQuestionnaire) {
         new DDIMoveUnitInQuestions().apply(enoQuestionnaire);
-        new DDIResolveExpressions().apply(enoQuestionnaire);
+        new DDIResolveVariableReferencesInExpressions().apply(enoQuestionnaire);
         new DDIInsertDeclarations().apply(enoQuestionnaire);
         new DDIInsertControls().apply(enoQuestionnaire);
         new DDIResolveVariableReferencesInLabels(enoCatalog).apply(enoQuestionnaire);

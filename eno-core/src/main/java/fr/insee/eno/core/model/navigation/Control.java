@@ -62,7 +62,7 @@ public class Control extends EnoIdentifiableObject implements EnoObjectWithExpre
     private TypeOfControl typeOfControl;
 
     /** Label typed in Pogues, unused in Lunatic. */
-    @DDI("getDescription().getContentArray(0).getStringValue()") // TODO: (NOTE:) getConstructNameArray(0).getStringArray(0).getStringValue() has the same information
+    @DDI("getDescription().getContentArray(0).getStringValue()") // NOTE: getConstructNameArray(0).getStringArray(0).getStringValue() has the same information
     private String label;
 
     /** Expression that determines if the control is triggered or not. */
@@ -74,9 +74,6 @@ public class Control extends EnoIdentifiableObject implements EnoObjectWithExpre
     @DDI("#index.get(#this.getInterviewerInstructionReferenceArray(0).getIDArray(0).getStringValue())" +
             ".getInstructionTextArray(0)")
     @Lunatic("setErrorMessage(#param)")
-    private DynamicLabel message; //TODO: DDI mapping
-
-    /* TODO: later on references in message will be authorized (should be analog as in declaration labels,
-        i.e. no additional info required here, a processing that uses regex with the special character should work) */
+    private DynamicLabel message;
 
 }

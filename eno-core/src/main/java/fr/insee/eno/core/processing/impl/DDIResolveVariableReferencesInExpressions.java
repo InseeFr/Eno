@@ -8,7 +8,7 @@ import fr.insee.eno.core.model.variable.CalculatedVariable;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.InProcessingInterface;
 
-public class DDIResolveExpressions implements InProcessingInterface {
+public class DDIResolveVariableReferencesInExpressions implements InProcessingInterface {
 
     /**
      * In DDI, VTL expressions contain variables references instead of their name.

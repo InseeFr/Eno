@@ -16,7 +16,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @Setter
 @Context(format = Format.DDI, type = DynamicTextType.class)
 @Context(format = Format.LUNATIC, type = LabelType.class)
-public class DynamicLabel extends EnoObject {
+public class DynamicLabel extends EnoObject implements EnoLabel {
 
     @DDI("getTextContentArray(0).getText().getStringValue()")
     @Lunatic("setValue(#param)")

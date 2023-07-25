@@ -1,96 +1,85 @@
 package fr.insee.eno.core.processing.impl;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.declaration.DeclarationInterface;
+import fr.insee.eno.core.model.declaration.Declaration;
+import fr.insee.eno.core.model.declaration.Instruction;
+import fr.insee.eno.core.model.label.EnoLabel;
 import fr.insee.eno.core.model.navigation.Control;
+import fr.insee.eno.core.model.question.Question;
+import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.InProcessingInterface;
 import fr.insee.eno.core.reference.EnoCatalog;
 import lombok.AllArgsConstructor;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @AllArgsConstructor
 public class DDIResolveVariableReferencesInLabels implements InProcessingInterface {
 
-    /** In DDI, in declarations / instructions / controls, variable names are replaces by their reference,
-     * surrounded by this character. */
+    /** In DDI, in labels, variable names are replaces by their reference, surrounded by this character. */
     public static final String VARIABLE_REFERENCE_MARKER = "¤";
 
     private EnoCatalog enoCatalog;
 
     /**
-     * In DDI instructions / declarations / controls, variables are replaced by a reference surrounded by a special character.
-     * This method replaces references by variables name in each instruction / declaration / control.
-     * This method also fills the object's list of variable names used in its label for declarations / instructions.
-     *
+     * In DDI labels, variables are replaced by a reference surrounded by a special character.
+     * This method replaces references by variables name in each concerned object.
+     * Note: This processing doesn't keep the link between labels and the variables used in them.
+     * (We could do this for Lunatic binding dependencies if it turns useful.)
      * @param enoQuestionnaire Eno questionnaire to be processed.
      */
     public void apply(EnoQuestionnaire enoQuestionnaire) {
-        // Get all declarations and instructions
-        List<DeclarationInterface> declarations = new ArrayList<>(enoQuestionnaire.getDeclarations());
-        List<Control> controls = new ArrayList<>();
-        enoCatalog.getComponents()
-                .forEach(enoComponent -> {
-                    declarations.addAll(enoComponent.getInstructions());
-                    controls.addAll(enoComponent.getControls());
-                });
-
-        for (DeclarationInterface declaration : declarations) {
-            String declarationLabel = declaration.getLabel().getValue();
-            List<Variable> variableReferences = getVariableReferences(declarationLabel);
-            String resolvedLabel = getResolvedLabel(declarationLabel, variableReferences);
-            declaration.getLabel().setValue(resolvedLabel);
-            List<String> variableNames = variableReferences.stream().map(Variable::getName).toList();
-            declaration.getVariableNames().addAll(variableNames);
-        }
-
-        for (Control control : controls) {
-            String message = control.getMessage().getValue();
-            List<Variable> variableReferences = getVariableReferences(message);
-            String resolvedMessage = getResolvedLabel(message, variableReferences);
-            control.getMessage().setValue(resolvedMessage);
-        }
+        // Sequences and subsequences
+        enoQuestionnaire.getSequences().stream().map(AbstractSequence::getLabel).forEach(this::resolveValue);
+        enoQuestionnaire.getSubsequences().stream().map(AbstractSequence::getLabel).forEach(this::resolveValue);
+        // Questions
+        enoCatalog.getQuestions().stream().map(Question::getLabel).forEach(this::resolveValue);
+        // Declarations, instructions and controls within components
+        enoCatalog.getComponents().forEach(enoComponent -> {
+                enoComponent.getDeclarations().stream().map(Declaration::getLabel).forEach(this::resolveValue);
+                enoComponent.getInstructions().stream().map(Instruction::getLabel).forEach(this::resolveValue);
+                enoComponent.getControls().stream().map(Control::getMessage).forEach(this::resolveValue);
+        });
+        // TODO: labels in items of code lists
     }
 
     /**
-     * resolve a label, by changing the variable ids in the label by the variable names
-     * @param label label to resolve
-     * @param variables variables for this label
-     * @return the resolved label
+     * Resolve the value of a label, by replacing the variable references by the variable names.
+     * @param enoLabel Label to resolve.
      */
-    private String getResolvedLabel(String label, List<Variable> variables) {
-        String resolvedLabel = label;
-
-        for(Variable variable : variables) {
-            resolvedLabel = resolvedLabel.replace(VARIABLE_REFERENCE_MARKER + variable.getReference() + VARIABLE_REFERENCE_MARKER, variable.getName());
+    private void resolveValue(EnoLabel enoLabel) {
+        String resolvedValue = enoLabel.getValue();
+        for (Variable variable : getReferencedVariables(enoLabel)) {
+            resolvedValue = resolvedValue.replace(
+                    VARIABLE_REFERENCE_MARKER + variable.getReference() + VARIABLE_REFERENCE_MARKER,
+                    variable.getName());
         }
-
-        return resolvedLabel;
+        enoLabel.setValue(resolvedValue);
     }
 
     /**
-     * Get variable references of a specific label
-     * @param label label from which we retrieve variable ids
-     * @return variables used in the label
+     * Get variable objects from variable references that are in the label.
+     * @param enoLabel Label from which we retrieve variables.
+     * @return Variables that are used in the label.
      */
-    private List<Variable> getVariableReferences(String label) {
-        List<String> variableIds = new ArrayList<>();
+    private List<Variable> getReferencedVariables(EnoLabel enoLabel) {
+        String labelValue = enoLabel.getValue();
+        Set<String> variableReferences = new HashSet<>();
         Pattern pattern = Pattern.compile(VARIABLE_REFERENCE_MARKER + "(.+?)"+ VARIABLE_REFERENCE_MARKER);
 
-        for (Matcher matcher = pattern.matcher(label); matcher.find();) {
+        for (Matcher matcher = pattern.matcher(labelValue); matcher.find();) {
             String match = matcher.group();
-            String variableId = match.substring(1, match.length()-1);
-            if(!variableIds.contains(variableId)) {
-                variableIds.add(variableId);
-            }
+            String variableReference = match.substring(1, match.length()-1);
+            variableReferences.add(variableReference);
         }
 
-        return variableIds.stream()
-                        .map(variableId -> enoCatalog.getVariable(variableId))
+        return variableReferences.stream()
+                        .map(variableReference -> enoCatalog.getVariable(variableReference))
                         .toList();
     }
 
