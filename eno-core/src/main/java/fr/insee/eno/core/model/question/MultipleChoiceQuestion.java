@@ -44,7 +44,8 @@ public abstract class MultipleChoiceQuestion extends MultipleResponseQuestion {
          */
         @DDI("getOutParameterList()")
         @Lunatic("getResponses()")
-        List<CodeResponse> codeList = new ArrayList<>();
+        List<CodeResponse> codeResponses = new ArrayList<>();
+        // TODO: refactor the mapping of these using code lists somehow maybe
 
         /** Lunatic component type property.
          * This should be inserted by Lunatic-Model serializer later on. */

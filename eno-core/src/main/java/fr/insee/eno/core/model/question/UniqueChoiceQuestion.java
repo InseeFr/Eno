@@ -58,13 +58,16 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
             "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
     DisplayFormat displayFormat;
 
+    /** Reference to the code list that contain the modalities of the question. */
+    @DDI("getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()")
+    String codeListReference;
+
     /**
      * List of modalities of the unique choice question.
+     * In DDI, these are inserted here through a processing.
      */
-    @DDI("#index.get(#this.getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()).getCodeList()")
     @Lunatic("getOptions()")
-    List<CodeItem> codeList = new ArrayList<>();
-    //TODO: map this only once maybe (currently a list of object is created for each unique choice question)
+    List<CodeItem> codeItems = new ArrayList<>();
 
     /**
      * From DDI question item (that correspond to a unique choice question),

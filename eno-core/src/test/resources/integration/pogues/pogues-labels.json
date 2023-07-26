@@ -1,0 +1,664 @@
+{
+  "owner": "FAKEPERMISSION",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "lkgwb7kj",
+        "lkgw4ll2",
+        "lkgw83gj",
+        "lkid1wnz",
+        "lkij6vip",
+        "lkgw93vs",
+        "lkgw9h1r",
+        "lkgwt260",
+        "lkid7ahs",
+        "lkijhbsn",
+        "idendquest"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "lkgwqqx9",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "Eno - Labels"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "ENOLABELS",
+  "Variables": {
+    "Variable": [
+      {
+        "Label": "Q1 label",
+        "id": "lkgw4tqi",
+        "type": "CollectedVariableType",
+        "Name": "Q1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "10"
+        }
+      },
+      {
+        "Label": "UCQ1 label",
+        "id": "lkicxd4v",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lkicwv7a",
+        "Name": "UCQ1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "STATIC1 - \"Static code 1\"",
+        "id": "lkijgspa",
+        "type": "CollectedVariableType",
+        "Name": "MCQ11",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "STATIC2 - \"Static code 2\"",
+        "id": "lkijk4dg",
+        "type": "CollectedVariableType",
+        "Name": "MCQ12",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q2 label",
+        "id": "lkgwist8",
+        "type": "CollectedVariableType",
+        "Name": "Q2",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "UCQ2 label",
+        "id": "lkicrust",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lkicukhi",
+        "Name": "UCQ2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "DYNAMIC1 - \"Dynamic code 1: \" || $Q1$",
+        "id": "lkijbtxh",
+        "type": "CollectedVariableType",
+        "Name": "MCQ21",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "DYNAMIC2 - \"Dynamic code 2: \" || $Q1$",
+        "id": "lkijcm4c",
+        "type": "CollectedVariableType",
+        "Name": "MCQ22",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Wed Jul 26 2023 10:44:57 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "eec-dc1-2017",
+      "uri": "http://ddi:fr.insee:DataCollection.eec-dc1-2017"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "lkgwbz1e",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "Label": "STATIC_CODE_LIST",
+        "id": "lkicwv7a",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Static code 1\"",
+            "Value": "STATIC1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Static code 2\"",
+            "Value": "STATIC2"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "DYNAMIC_CODE_LIST",
+        "id": "lkicukhi",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Dynamic code 1: \" || $Q1$",
+            "Value": "DYNAMIC1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Dynamic code 2: \" || $Q1$",
+            "Value": "DYNAMIC2"
+          }
+        ],
+        "Name": ""
+      }
+    ]
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Static sequence name\""
+      ],
+      "id": "lkgwb7kj",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "HELP",
+          "Text": "\"Static declaration on sequence\"",
+          "id": "lkgw4v7r",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "\"Static subsequence name\""
+          ],
+          "id": "lkgw4ll2",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Static declaration on subsequence\"",
+              "id": "lkgw5f3l",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ]
+            }
+          ],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lkgw4tqi",
+                  "id": "lkgwwkd1",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": "10"
+                  }
+                }
+              ],
+              "Control": [
+                {
+                  "post_collect": false,
+                  "Description": "Control with static message",
+                  "Expression": "true",
+                  "during_collect": false,
+                  "criticity": "INFO",
+                  "FailMessage": "\"Static control message\"",
+                  "id": "lkicm0j2"
+                }
+              ],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Static question name\""
+              ],
+              "id": "lkgw83gj",
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Static declaration before the question.\"",
+                  "id": "lkgwi1d3",
+                  "position": "BEFORE_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Static declaration after the question.\"",
+                  "id": "lkgwbcj4",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "Q1"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lkicxd4v",
+                  "id": "lkid6mrg",
+                  "mandatory": false,
+                  "CodeListReference": "lkicwv7a",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Unique choice question 1\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lkid1wnz",
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "UCQ1"
+            },
+            {
+              "FlowControl": [],
+              "Label": [
+                "\"Multiple choice question 1\""
+              ],
+              "ResponseStructure": {
+                "Attribute": [],
+                "Mapping": [
+                  {
+                    "MappingSource": "lkij837f",
+                    "MappingTarget": "1"
+                  },
+                  {
+                    "MappingSource": "lkij9tch",
+                    "MappingTarget": "2"
+                  }
+                ],
+                "Dimension": [
+                  {
+                    "dimensionType": "PRIMARY",
+                    "dynamic": "0",
+                    "CodeListReference": "lkicwv7a"
+                  },
+                  {
+                    "dimensionType": "MEASURE",
+                    "dynamic": "0"
+                  }
+                ]
+              },
+              "type": "QuestionType",
+              "Name": "MCQ1",
+              "Response": [
+                {
+                  "CollectedVariableReference": "lkijgspa",
+                  "id": "lkij837f",
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                },
+                {
+                  "CollectedVariableReference": "lkijk4dg",
+                  "id": "lkij9tch",
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "ClarificationQuestion": [],
+              "id": "lkij6vip",
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "questionType": "MULTIPLE_CHOICE"
+            }
+          ],
+          "Name": "SS1"
+        }
+      ],
+      "Name": "S1"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Dynamic sequence name: \" || $Q1$"
+      ],
+      "id": "lkgw93vs",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "HELP",
+          "Text": "\"Dynamic declaration on sequence: \" || $Q1$",
+          "id": "lkgwbmbn",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "\"Dynamic subsequence name: \" || $Q1$"
+          ],
+          "id": "lkgw9h1r",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Dynamic declaration on subsequence: \" || $Q1$",
+              "id": "lkgwhgt4",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ]
+            }
+          ],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lkgwist8",
+                  "id": "lkgwhof6",
+                  "mandatory": false,
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                }
+              ],
+              "Control": [
+                {
+                  "post_collect": false,
+                  "Description": "Control with dynamic message",
+                  "Expression": "true",
+                  "during_collect": false,
+                  "criticity": "INFO",
+                  "FailMessage": "\"Dynamic control message: \" || $Q1$",
+                  "id": "lkid4jl6"
+                }
+              ],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Dynamic question name: \" || $Q1$"
+              ],
+              "id": "lkgwt260",
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Dynamic declaration before the question: \" || $Q1$",
+                  "id": "lkgwe557",
+                  "position": "BEFORE_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Dynamic declaration after the question: \" || $Q1$",
+                  "id": "lkgwozcf",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "Q2"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lkicrust",
+                  "id": "lkicwavs",
+                  "mandatory": false,
+                  "CodeListReference": "lkicukhi",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Unique choice question 2\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lkid7ahs",
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "UCQ2"
+            },
+            {
+              "FlowControl": [],
+              "Label": [
+                "\"Multiple choice question 2\""
+              ],
+              "ResponseStructure": {
+                "Attribute": [],
+                "Mapping": [
+                  {
+                    "MappingSource": "lkij77ci",
+                    "MappingTarget": "1"
+                  },
+                  {
+                    "MappingSource": "lkijke8q",
+                    "MappingTarget": "2"
+                  }
+                ],
+                "Dimension": [
+                  {
+                    "dimensionType": "PRIMARY",
+                    "dynamic": "0",
+                    "CodeListReference": "lkicukhi"
+                  },
+                  {
+                    "dimensionType": "MEASURE",
+                    "dynamic": "0"
+                  }
+                ]
+              },
+              "type": "QuestionType",
+              "Name": "MCQ2",
+              "Response": [
+                {
+                  "CollectedVariableReference": "lkijbtxh",
+                  "id": "lkij77ci",
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                },
+                {
+                  "CollectedVariableReference": "lkijcm4c",
+                  "id": "lkijke8q",
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "ClarificationQuestion": [],
+              "id": "lkijhbsn",
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "questionType": "MULTIPLE_CHOICE"
+            }
+          ],
+          "Name": "SS2"
+        }
+      ],
+      "Name": "S2"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

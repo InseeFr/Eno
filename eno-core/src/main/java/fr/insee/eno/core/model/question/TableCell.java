@@ -1,14 +1,12 @@
 package fr.insee.eno.core.model.question;
 
 import datacollection33.GridResponseDomainInMixedType;
-import datacollection33.QuestionItemType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.BodyCell;
-import fr.insee.lunatic.model.flat.Datepicker;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -104,9 +102,11 @@ public abstract class TableCell extends EnoObject {
                 "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion.DisplayFormat).DROPDOWN : null")
         UniqueChoiceQuestion.DisplayFormat displayFormat;
 
-        @DDI("#index.get(#this.getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()).getCodeList()")
+        @DDI("getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()")
+        String codeListReference;
+
         @Lunatic("getOptions()")
-        List<CodeItem> codeList = new ArrayList<>();
+        List<CodeItem> codeItems = new ArrayList<>();
     }
 
 }
