@@ -6,8 +6,10 @@ import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.DDIIndex;
 import fr.insee.eno.core.reference.EnoIndex;
+import fr.insee.eno.core.utils.EnoSpelEngine;
 import instance33.DDIInstanceDocument;
 import instance33.DDIInstanceType;
 import lombok.NonNull;
@@ -34,27 +36,29 @@ import java.util.List;
 @Slf4j
 public class DDIMapper extends Mapper {
 
+    private EnoSpelEngine spelEngine;
+
     /** Index created in the entry object of mapping functions. */
     private EnoIndex enoIndex;
-
     private DDIIndex ddiIndex;
 
-    private EvaluationContext setup(AbstractIdentifiableType ddiObject, EnoObject enoObject) {
+    private void setup(AbstractIdentifiableType ddiObject, EnoObject enoObject) {
         log.debug("DDI mapping entry object: " + ddiToString(ddiObject));
-        // Index DDI object
-        ddiIndex = new DDIIndex();
-        ddiIndex.indexDDIObject(ddiObject);
-        log.debug("DDI index: " + ddiIndex);
+        //
+        indexDDIObject(ddiObject);
         // Init the context and put the DDI index
-        EvaluationContext context = new StandardEvaluationContext();
-        context.setVariable("index", ddiIndex);
+        spelEngine = new EnoSpelEngine(Format.DDI);
+        spelEngine.getContext().setVariable("index", ddiIndex);
         // Eno index to be filled by the mapper
         enoIndex = new EnoIndex();
         enoObject.setIndex(enoIndex);
         // Set static methods to be used during mapping
-        DDIBindings.setMethods(context);
-        //
-        return context;
+        DDIBindings.setMethods(spelEngine.getContext());
+    }
+
+    private void indexDDIObject(AbstractIdentifiableType ddiObject) {
+        ddiIndex = new DDIIndex();
+        ddiIndex.indexDDIObject(ddiObject);
     }
 
     public void mapDDI(@NonNull DDIInstanceDocument ddiInstanceDocument, @NonNull EnoQuestionnaire enoQuestionnaire) {
@@ -63,8 +67,8 @@ public class DDIMapper extends Mapper {
 
     public void mapDDI(@NonNull DDIInstanceType ddiInstanceType, @NonNull EnoQuestionnaire enoQuestionnaire) {
         log.info("Starting mapping between DDI instance and Eno questionnaire.");
-        EvaluationContext context = setup(ddiInstanceType, enoQuestionnaire);
-        recursiveMapping(ddiInstanceType, enoQuestionnaire, context);
+        setup(ddiInstanceType, enoQuestionnaire);
+        recursiveMapping(ddiInstanceType, enoQuestionnaire);
         log.info("Finished mapping between DDI instance and Eno questionnaire.");
     }
 
@@ -78,11 +82,15 @@ public class DDIMapper extends Mapper {
         //            ddiObject.getClass(), enoObject.getClass()));
         //{
         //
-        EvaluationContext context = setup(ddiObject, enoObject);
-        recursiveMapping(ddiObject, enoObject, context);
+        setup(ddiObject, enoObject);
+        recursiveMapping(ddiObject, enoObject);
     }
 
-    private void recursiveMapping(Object ddiObject, EnoObject enoObject, EvaluationContext context) {
+    public void mapDDIObject(AbstractIdentifiableType ddiObject, EnoObject enoObject, DDIIndex ddiIndex) {
+
+    }
+
+    private void recursiveMapping(Object ddiObject, EnoObject enoObject) {
 
         log.debug("Start mapping for "+ ddiToString(ddiObject)
                 +" with model context type '"+enoObject.getClass().getSimpleName()+"'");
@@ -92,7 +100,7 @@ public class DDIMapper extends Mapper {
         for (Iterator<PropertyDescriptor> iterator = propertyDescriptorIterator(beanWrapper); iterator.hasNext();) {
             PropertyDescriptor propertyDescriptor = iterator.next();
             // Map property
-            propertyMapping(ddiObject, enoObject, beanWrapper, propertyDescriptor, context);
+            propertyMapping(ddiObject, enoObject, beanWrapper, propertyDescriptor);
         }
 
         // Add the object in the index (if it is an identifiable object)
@@ -104,7 +112,7 @@ public class DDIMapper extends Mapper {
 
     }
 
-    public void propertyMapping(Object ddiObject, EnoObject enoObject, BeanWrapper beanWrapper, PropertyDescriptor propertyDescriptor, EvaluationContext context) {
+    public void propertyMapping(Object ddiObject, EnoObject enoObject, BeanWrapper beanWrapper, PropertyDescriptor propertyDescriptor) {
 
         // Local variable used for logging purposes
         Class<?> modelContextType = enoObject.getClass();
@@ -131,17 +139,17 @@ public class DDIMapper extends Mapper {
 
             // Simple types
             if (isSimpleType(classType)) {
-                simpleTypeMapping(ddiObject, modelContextType, beanWrapper, propertyName, context, expression);
+                simpleTypeMapping(ddiObject, modelContextType, beanWrapper, propertyName, expression);
             }
 
             // Complex types
             else if (EnoObject.class.isAssignableFrom(classType)) {
-                complexTypeMapping(ddiObject, modelContextType, beanWrapper, propertyName, context, expression, classType);
+                complexTypeMapping(ddiObject, modelContextType, beanWrapper, propertyName, expression, classType);
             }
 
             // Lists
             else if (List.class.isAssignableFrom(classType)) {
-                listMapping(ddiObject, enoObject, propertyDescriptor, typeDescriptor, ddiAnnotation, context, expression);
+                listMapping(ddiObject, enoObject, propertyDescriptor, typeDescriptor, ddiAnnotation, expression);
             }
 
             else {
@@ -151,9 +159,9 @@ public class DDIMapper extends Mapper {
         }
     }
 
-    private void simpleTypeMapping(Object ddiObject, Class<?> modelContextType, BeanWrapper beanWrapper, String propertyName, EvaluationContext context, Expression expression) {
+    private void simpleTypeMapping(Object ddiObject, Class<?> modelContextType, BeanWrapper beanWrapper, String propertyName, Expression expression) {
         // Simply set the value in the field
-        Object ddiValue = expression.getValue(context, ddiObject);
+        Object ddiValue = spelEngine.evaluate(expression, ddiObject, modelContextType, propertyName);
         if (ddiValue != null) {
             beanWrapper.setPropertyValue(propertyName, ddiValue);
             log.debug("Value '"+ beanWrapper.getPropertyValue(propertyName)+"' set "
@@ -166,7 +174,7 @@ public class DDIMapper extends Mapper {
         }
     }
 
-    private void complexTypeMapping(Object ddiObject, Class<?> modelContextType, BeanWrapper beanWrapper, String propertyName, EvaluationContext context, Expression expression, Class<?> classType) {
+    private void complexTypeMapping(Object ddiObject, Class<?> modelContextType, BeanWrapper beanWrapper, String propertyName, Expression expression, Class<?> classType) {
         // Instantiate the model target object
         EnoObject enoObject2 = callConstructor(classType);
         // Attach it to the current object
@@ -174,9 +182,9 @@ public class DDIMapper extends Mapper {
         log.debug("New instance of '"+enoObject2.getClass().getSimpleName()+"' set "
                 + propertyDescription(propertyName, modelContextType.getSimpleName()));
         // Recursive call of the mapper to dive into this object
-        Object ddiObject2 = expression.getValue(context, ddiObject);
+        Object ddiObject2 = spelEngine.evaluate(expression, ddiObject, modelContextType, propertyName);
         if (ddiObject2 != null) {
-            recursiveMapping(ddiObject2, enoObject2, context);
+            recursiveMapping(ddiObject2, enoObject2);
         }
         // It is now allowed to have a null DDI object on complex type properties
         else {
@@ -185,17 +193,17 @@ public class DDIMapper extends Mapper {
         }
     }
 
-    private void listMapping(Object ddiObject, EnoObject enoObject, PropertyDescriptor propertyDescriptor, TypeDescriptor typeDescriptor, DDI ddiAnnotation, EvaluationContext context, Expression expression) {
+    private void listMapping(Object ddiObject, EnoObject enoObject, PropertyDescriptor propertyDescriptor, TypeDescriptor typeDescriptor, DDI ddiAnnotation, Expression expression) {
         // Local variables used for logging purposes
         Class<?> modelContextType = enoObject.getClass();
         String propertyName = propertyDescriptor.getName();
         // Get the DDI collection instance by evaluating the expression
-        List<?> ddiCollection = expression.getValue(context, ddiObject, List.class);
+        List<?> ddiCollection = spelEngine.evaluateToList(expression, ddiObject, modelContextType, propertyName);
         // If the DDI collection is null and null is not allowed by the annotation, exception
         if (ddiCollection == null && !ddiAnnotation.allowNullList()) {
-            log.debug("Incoherent expression in field of DDI annotation "
+            log.error("Incoherent expression in field of DDI annotation "
                     + propertyDescription(propertyName, modelContextType.getName()));
-            log.debug("If the DDI list can actually be null, use the annotation property to allow it.");
+            log.error("If the DDI list can actually be null, use the annotation property to allow it.");
             throw new MappingException("DDI list mapped by the annotation is null "
                     + propertyDescription(propertyName, modelContextType.getName()));
         }
@@ -222,7 +230,7 @@ public class DDIMapper extends Mapper {
                             + propertyDescription(propertyName, modelContextType.getSimpleName()));
                     Object ddiObject2 = ddiCollection.get(i);
                     // Put current list index in context TODO: I don't really like this but... :(((
-                    context.setVariable("listIndex", i);
+                    spelEngine.getContext().setVariable("listIndex", i);
                     // Instantiate a model object per DDI object and add it in the model collection
                     EnoObject enoObject2;
                     // If the list content type is abstract call the converter
@@ -236,7 +244,7 @@ public class DDIMapper extends Mapper {
                     // Add the created instance in the model list
                     modelCollection.add(enoObject2);
                     // Recursive call on these instances
-                    recursiveMapping(ddiObject2, enoObject2, context);
+                    recursiveMapping(ddiObject2, enoObject2);
                 }
             }
             //
@@ -255,6 +263,10 @@ public class DDIMapper extends Mapper {
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             throw new MappingException("Unable to create instance for class " + classType, e);
         }
+    }
+
+    private Object evaluateSpEL() {
+        return null;
     }
 
     private static String ddiToString(@NonNull Object ddiObject) {

@@ -35,7 +35,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
 
     @DDI(contextType = DDIInstanceType.class,
             field = "getResourcePackageArray(0).getCodeListSchemeArray(0)" +
-                    ".getCodeListSchemeNameArray(0).getStringArray(0).getStringValue()") //TODO: see if it's that one
+                    ".getCodeListSchemeNameArray(0).getStringArray(0).getStringValue()") //TODO: see if it's that one (weird that this info is in the first occurrence of code list)
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field ="setModele(#param)")
     private String questionnaireModel;
 
@@ -45,17 +45,17 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field ="setLunaticModelVersion(#param)")
     private String lunaticModelVersion;
 
-    @DDI(contextType = DDIInstanceType.class, field = "getCitation().getTitle()")
+    @DDI(contextType = DDIInstanceType.class, field = "getCitation()?.getTitle()")
     @Lunatic(contextType = fr.insee.lunatic.model.flat.Questionnaire.class, field = "setLabel(#param)")
     private QuestionnaireLabel label;
 
-    @DDI(contextType = DDIInstanceType.class,
-            field = "getResourcePackageArray(0).getVariableSchemeArray(0)" +
-                    ".getVariableArray(0).getVariableNameArray(0).getStringArray(0).getStringValue()")
+//    @DDI(contextType = DDIInstanceType.class,
+//            field = "getResourcePackageArray(0).getVariableSchemeArray(0)" +
+//                    ".getVariableArray(0).getVariableNameArray(0).getStringArray(0).getStringValue()")
     private String firstVariableName;
 
-    @DDI(contextType = DDIInstanceType.class,
-            field = "getResourcePackageArray(0).getVariableSchemeArray(0).getVariableArray(0)")
+//    @DDI(contextType = DDIInstanceType.class,
+//            field = "getResourcePackageArray(0).getVariableSchemeArray(0).getVariableArray(0)")
     private Variable firstVariable;
 
     @DDI(contextType = DDIInstanceType.class,

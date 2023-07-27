@@ -5,7 +5,7 @@ import reusable33.AbstractIdentifiableType;
 import reusable33.IDType;
 import reusable33.ReferenceType;
 
-public class DDIUtils {
+public class DDITestUtils {
 
     public static void setId(AbstractIdentifiableType ddiObject, String id) {
         ddiObject.getIDList().add(IDType.Factory.newInstance());

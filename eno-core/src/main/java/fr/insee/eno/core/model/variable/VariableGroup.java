@@ -14,7 +14,7 @@ import java.util.List;
 public class VariableGroup extends EnoObject {
 
     @DDI(contextType = VariableGroupType.class,
-            field = "getVariableGroupNameArray(0).getStringArray(0).getStringValue()")
+            field = "!getVariableGroupNameList().isEmpty ? getVariableGroupNameArray(0).getStringArray(0).getStringValue() : null")
     private String name;
 
     @DDI(contextType = VariableGroupType.class,

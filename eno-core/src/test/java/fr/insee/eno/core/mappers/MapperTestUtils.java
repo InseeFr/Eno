@@ -11,21 +11,6 @@ import java.beans.PropertyDescriptor;
 
 public class MapperTestUtils {
 
-    /** Map DDI property between objects with default evaluation context. */
-    public void mapDDIProperty(AbstractIdentifiableType ddiObject, EnoObject enoObject, String propertyName) {
-        EvaluationContext context = new StandardEvaluationContext();
-        mapDDIProperty(ddiObject, enoObject, propertyName, context);
-    }
-
-    /** Map DDI property between objects with given evaluation context. */
-    public void mapDDIProperty(AbstractIdentifiableType ddiObject, EnoObject enoObject, String propertyName,
-                               EvaluationContext context) {
-        DDIMapper ddiMapper = new DDIMapper();
-        BeanWrapper beanWrapper = new BeanWrapperImpl(enoObject);
-        PropertyDescriptor propertyDescriptor = beanWrapper.getPropertyDescriptor(propertyName);
-        ddiMapper.propertyMapping(ddiObject, enoObject, beanWrapper, propertyDescriptor, context);
-    }
-
     /** Map Lunatic property between objects. */
     public void mapLunaticProperty(EnoObject enoObject, Object lunaticObject, String propertyName) {
         LunaticMapper lunaticMapper = new LunaticMapper();

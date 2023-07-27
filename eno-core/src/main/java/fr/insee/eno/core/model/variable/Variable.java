@@ -33,7 +33,7 @@ public class Variable extends EnoObject implements EnoObjectWithExpression {
 
     /** Variable name. */
     @DDI(contextType = VariableType.class,
-            field = "getVariableNameArray(0).getStringArray(0).getStringValue()")
+            field = "!getVariableNameList().isEmpty() ? getVariableNameArray(0).getStringArray(0)?.getStringValue() : null")
     @Lunatic(contextType = IVariableType.class, field = "setName(#param)")
     private String name;
 
@@ -47,7 +47,7 @@ public class Variable extends EnoObject implements EnoObjectWithExpression {
 
     /** Expression to evaluate the variable if it is a calculated variable. */
     @DDI(contextType = VariableType.class,
-            field = "getVariableRepresentation().getProcessingInstructionReference() != null ? " +
+            field = "getVariableRepresentation()?.getProcessingInstructionReference() != null ? " +
                     "#index.get(#this.getVariableRepresentation().getProcessingInstructionReference().getIDArray(0).getStringValue())" +
                     ".getCommandCodeArray(0).getCommandArray(0) : null")
     @Lunatic(contextType = fr.insee.lunatic.model.flat.VariableType.class, field = "setExpression(#param)")
@@ -55,7 +55,7 @@ public class Variable extends EnoObject implements EnoObjectWithExpression {
 
     /** Measurement unit (in case of some numeric variables). */
     @DDI(contextType = VariableType.class,
-            field = "getVariableRepresentation().getValueRepresentation()?.getMeasurementUnit()?.getStringValue()")
+            field = "getVariableRepresentation()?.getValueRepresentation()?.getMeasurementUnit()?.getStringValue()")
     String unit;
 
     /** Variable type (among 'COLLECTED', 'CALCULATED' or 'EXTERNAL'). */
