@@ -64,12 +64,12 @@ public class EnoParameters {
     }
 
     public EnoParameters() {
-        defaultValues();
+        setDefaultValues();
     }
 
     public EnoParameters(Context context, Format outFormat) {
         log.info("Parameters with context {} and out format {}", context, outFormat);
-        defaultValues(); // TODO: default values in function of context & out format
+        setDefaultValues(); // TODO: default values in function of context & out format
         this.context = context;
     }
 
@@ -79,7 +79,7 @@ public class EnoParameters {
         return new EnoParameters();
     }
 
-    private void defaultValues() {
+    private void setDefaultValues() {
         // Eno core
         commentSection = true;
         sequenceNumbering = true;

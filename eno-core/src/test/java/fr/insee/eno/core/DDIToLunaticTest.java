@@ -25,7 +25,7 @@ class DDIToLunaticTest {
 
     @BeforeEach
     void setupParameters() {
-        enoParameters = new EnoParameters();
+        enoParameters = EnoParameters.defaultParameters();
     }
 
     @ParameterizedTest

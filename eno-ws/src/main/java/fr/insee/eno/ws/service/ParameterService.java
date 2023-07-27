@@ -20,7 +20,7 @@ public class ParameterService {
 
     public Mono<String> defaultParams() {
         try {
-            return Mono.just(EnoParameters.serialize(new EnoParameters()));
+            return Mono.just(EnoParameters.serialize(EnoParameters.defaultParameters()));
         } catch (Exception e) {
             return Mono.error(e);
         }

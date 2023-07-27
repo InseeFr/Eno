@@ -7,7 +7,7 @@ import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.variable.CalculatedVariable;
-import fr.insee.eno.core.processing.impl.LunaticFilterResult;
+import fr.insee.eno.core.processing.out.steps.lunatic.LunaticFilterResult;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.VariableType;
 import fr.insee.lunatic.model.flat.VariableTypeEnum;

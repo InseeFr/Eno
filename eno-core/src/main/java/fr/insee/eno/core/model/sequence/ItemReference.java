@@ -6,6 +6,7 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.eno.core.processing.in.steps.ddi.DDIResolveSequencesStructure;
 import fr.insee.eno.core.reference.DDIIndex;
 import lombok.*;
 import reusable33.ReferenceType;
@@ -15,7 +16,7 @@ import reusable33.ReferenceType;
  * The <Code>ItemReference</Code> objects are only use to hold information derived from DDI,
  * these are resolved into <Code>StructureItemReference</Code> objects in a DDI processing.
  * @see StructureItemReference
- * @see fr.insee.eno.core.processing.impl.DDIResolveSequencesStructure */
+ * @see DDIResolveSequencesStructure */
 @Getter
 @Setter
 @NoArgsConstructor
