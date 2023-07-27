@@ -1,7 +1,7 @@
 package fr.insee.eno.ws.controller;
 
 import fr.insee.eno.core.model.mode.Mode;
-import fr.insee.eno.treatments.LunaticPostProcessings;
+import fr.insee.eno.treatments.LunaticPostProcessing;
 import fr.insee.eno.ws.controller.utils.V3ControllerUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -53,7 +53,7 @@ public class IntegrationHouseholdController {
            Spring considers having a DefaultFormField object instead of FilePart and exceptions is thrown
            There is no way at this moment to disable the allow empty value when filed is not required.
          */
-        Mono<LunaticPostProcessings> lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
+        Mono<LunaticPostProcessing> lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
 
         return controllerUtils.readParametersFile(parametersFile)
                 .flatMap(enoParameters -> {

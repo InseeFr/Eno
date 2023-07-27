@@ -1,6 +1,6 @@
 package fr.insee.eno.treatments;
 
-import fr.insee.eno.core.processing.OutProcessingInterface;
+import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.treatments.dto.EnoSuggesterType;
 import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +11,7 @@ import java.util.List;
  * Processing for suggesters
  */
 @Slf4j
-public class LunaticSuggesterProcessing implements OutProcessingInterface<Questionnaire> {
+public class LunaticSuggesterProcessing implements ProcessingStep<Questionnaire> {
 
     private final List<EnoSuggesterType> enoSuggesters;
 
