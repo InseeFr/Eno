@@ -23,7 +23,7 @@ class DDIToEnoDatesTest {
     @BeforeAll
     void init() throws DDIParsingException {
         InputStream ddiStream = this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-dates.xml");
-        EnoQuestionnaire questionnaire = DDIToEno.transform(ddiStream, EnoParameters.defaultParameters());
+        EnoQuestionnaire questionnaire = DDIToEno.transform(ddiStream, EnoParameters.defaultValues());
         index = questionnaire.getIndex();
     }
 

@@ -146,7 +146,7 @@ public class GenerationController {
 		Mono<LunaticPostProcessing> lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
 
 		//
-		EnoParameters parameters = new EnoParameters(context, Format.LUNATIC);
+		EnoParameters parameters = EnoParameters.of(context, Format.LUNATIC);
 		parameters.getSelectedModes().clear();
 		parameters.getSelectedModes().add(mode);
 		parameters.setIdentificationQuestion(identificationQuestion);

@@ -2,7 +2,6 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.DDIToEno;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
-import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.NumericQuestion;
@@ -10,9 +9,6 @@ import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType;
 import fr.insee.eno.core.parameter.EnoParameters;
-import fr.insee.eno.core.parsers.DDIParser;
-import fr.insee.eno.core.processing.common.EnoProcessing;
-import fr.insee.eno.core.processing.out.steps.lunatic.LunaticSortComponents;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.Questionnaire;
@@ -75,7 +71,7 @@ class LunaticSortComponentsTest {
             // Given
             EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
                     this.getClass().getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml"),
-                    EnoParameters.defaultParameters());
+                    EnoParameters.defaultValues());
             Questionnaire lunaticQuestionnaire = new Questionnaire();
             LunaticMapper lunaticMapper = new LunaticMapper();
             lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);

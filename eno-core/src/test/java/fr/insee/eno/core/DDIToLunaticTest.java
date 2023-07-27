@@ -25,7 +25,7 @@ class DDIToLunaticTest {
 
     @BeforeEach
     void setupParameters() {
-        enoParameters = EnoParameters.defaultParameters();
+        enoParameters = EnoParameters.defaultValues();
     }
 
     @ParameterizedTest
@@ -58,7 +58,7 @@ class DDIToLunaticTest {
         static void mapLunaticQuestionnaire() throws DDIParsingException {
             lunaticQuestionnaire = DDIToLunatic.transform(
                     AcceptanceTest.class.getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml"),
-                    EnoParameters.defaultParameters());
+                    EnoParameters.defaultValues());
         }
 
         @Test

@@ -18,11 +18,10 @@ public class EnoProcessing {
     }
 
     public void applyProcessing(EnoQuestionnaire enoQuestionnaire) {
-        EnoCatalog enoCatalog;
         //
         EnoIndex enoIndex = enoQuestionnaire.getIndex();
         assert enoIndex != null;
-        enoCatalog = new EnoCatalog(enoQuestionnaire);
+        EnoCatalog enoCatalog = new EnoCatalog(enoQuestionnaire);
         //
         ProcessingPipeline<EnoQuestionnaire> processingPipeline = new ProcessingPipeline<>();
         processingPipeline.start(enoQuestionnaire)
