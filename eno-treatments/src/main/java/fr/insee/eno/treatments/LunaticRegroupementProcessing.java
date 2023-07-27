@@ -1,6 +1,6 @@
 package fr.insee.eno.treatments;
 
-import fr.insee.eno.core.processing.impl.lunatic.pagination.LunaticAddPageNumbersQuestionMode;
+import fr.insee.eno.core.processing.out.steps.lunatic.pagination.LunaticAddPageNumbersQuestionMode;
 import fr.insee.eno.treatments.dto.Regroupement;
 import fr.insee.eno.treatments.dto.Regroupements;
 import fr.insee.lunatic.model.flat.*;

@@ -6,9 +6,6 @@ on:
     tags:
       - v3.*
 
-env:
-  POGUES_BRANCH: main
-
 jobs:
 
   build:
@@ -23,17 +20,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-
-      - name: Checkout Pogues model repo
-        uses: actions/checkout@v3
-        with:
-          repository: InseeFr/Pogues-Model
-          ref: ${{ env.POGUES_BRANCH }}
-          path: Pogues-model
-
-      - name: Build with Maven Pogues model
-        working-directory: ./Pogues-model
-        run: mvn install -Djar.finalName="pogues-model" -B -V --file pom.xml
 
       - name: Checkout Eno repo
         uses: actions/checkout@v3

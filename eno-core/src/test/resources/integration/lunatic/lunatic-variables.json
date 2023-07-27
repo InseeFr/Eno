@@ -1,0 +1,706 @@
+{
+  "id": "lk6phc5i",
+  "modele": "ENOVARIABLES",
+  "enoCoreVersion": "2.4.1-pairwise",
+  "lunaticModelVersion": "2.3.2-rc7",
+  "generatingDate": "19-07-2023 14:33:20",
+  "missing": false,
+  "pagination": "question",
+  "maxPage": "10",
+  "label": {
+    "value": "Eno - Variables",
+    "type": "VTL|MD"
+  },
+  "components": [
+    {
+      "id": "lk6pnxga",
+      "componentType": "Sequence",
+      "page": "1",
+      "label": {
+        "value": "\"I - \" || \"Unique sequence\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lk6pnxga",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Unique sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "lk6py97h",
+      "componentType": "CheckboxBoolean",
+      "mandatory": false,
+      "page": "2",
+      "label": {
+        "value": "\"➡ \" || \"Boolean question\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lk6pnxga",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Unique sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "BOOL"
+      ],
+      "response": {
+        "name": "BOOL"
+      }
+    },
+    {
+      "id": "lk6psv66",
+      "componentType": "Input",
+      "mandatory": false,
+      "page": "3",
+      "maxLength": 249,
+      "label": {
+        "value": "\"➡ \" || \"Short text question\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lk6pnxga",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Unique sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "TEXT_SHORT"
+      ],
+      "response": {
+        "name": "TEXT_SHORT"
+      }
+    },
+    {
+      "id": "lk6pzghy",
+      "componentType": "Textarea",
+      "mandatory": false,
+      "page": "4",
+      "maxLength": 250,
+      "label": {
+        "value": "\"➡ \" || \"Long text question\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lk6pnxga",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Unique sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "TEXT_LONG"
+      ],
+      "response": {
+        "name": "TEXT_LONG"
+      }
+    },
+    {
+      "id": "lk6q2owb",
+      "componentType": "InputNumber",
+      "mandatory": false,
+      "page": "5",
+      "min": 0,
+      "max": 10,
+      "decimals": 0,
+      "label": {
+        "value": "\"➡ \" || \"Numeric question\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "controls": [
+        {
+          "id": "lk6q2owb-format-borne-inf-sup",
+          "typeOfControl": "FORMAT",
+          "criticality": "ERROR",
+          "control": {
+            "value": "not(not(isnull(NUMBER1)) and (0>NUMBER1 or 10<NUMBER1))",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\" La valeur doit être comprise entre 0 et 10.\"",
+            "type": "VTL|MD"
+          }
+        },
+        {
+          "id": "lk6q2owb-format-decimal",
+          "typeOfControl": "FORMAT",
+          "criticality": "ERROR",
+          "control": {
+            "value": "not(not(isnull(NUMBER1))  and round(NUMBER1,0)<>NUMBER1)",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "hierarchy": {
+        "sequence": {
+          "id": "lk6pnxga",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Unique sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "NUMBER1"
+      ],
+      "response": {
+        "name": "NUMBER1"
+      }
+    },
+    {
+      "id": "lk6qpybd",
+      "componentType": "InputNumber",
+      "mandatory": false,
+      "page": "6",
+      "min": 0,
+      "max": 10,
+      "decimals": 0,
+      "label": {
+        "value": "\"➡ \" || \"Numeric question 2\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "controls": [
+        {
+          "id": "lk6qpybd-format-borne-inf-sup",
+          "typeOfControl": "FORMAT",
+          "criticality": "ERROR",
+          "control": {
+            "value": "not(not(isnull(NUMBER2)) and (0>NUMBER2 or 10<NUMBER2))",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\" La valeur doit être comprise entre 0 et 10.\"",
+            "type": "VTL|MD"
+          }
+        },
+        {
+          "id": "lk6qpybd-format-decimal",
+          "typeOfControl": "FORMAT",
+          "criticality": "ERROR",
+          "control": {
+            "value": "not(not(isnull(NUMBER2))  and round(NUMBER2,0)<>NUMBER2)",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "hierarchy": {
+        "sequence": {
+          "id": "lk6pnxga",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Unique sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "NUMBER2"
+      ],
+      "response": {
+        "name": "NUMBER2"
+      }
+    },
+    {
+      "id": "lk6pyh7q",
+      "componentType": "InputNumber",
+      "mandatory": false,
+      "page": "7",
+      "min": 0,
+      "max": 100,
+      "decimals": 2,
+      "label": {
+        "value": "\"➡ \" || \"Number with two decimals\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "controls": [
+        {
+          "id": "lk6pyh7q-format-borne-inf-sup",
+          "typeOfControl": "FORMAT",
+          "criticality": "ERROR",
+          "control": {
+            "value": "not(not(isnull(NUMBER_DECIMALS)) and (0.00>NUMBER_DECIMALS or 100.00<NUMBER_DECIMALS))",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\" La valeur doit être comprise entre 0.00 et 100.00.\"",
+            "type": "VTL|MD"
+          }
+        },
+        {
+          "id": "lk6pyh7q-format-decimal",
+          "typeOfControl": "FORMAT",
+          "criticality": "ERROR",
+          "control": {
+            "value": "not(not(isnull(NUMBER_DECIMALS))  and round(NUMBER_DECIMALS,2)<>NUMBER_DECIMALS)",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\"Le nombre doit comporter au maximum 2 chiffre(s) après la virgule.\"",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "hierarchy": {
+        "sequence": {
+          "id": "lk6pnxga",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Unique sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "NUMBER_DECIMALS"
+      ],
+      "response": {
+        "name": "NUMBER_DECIMALS"
+      }
+    },
+    {
+      "id": "lk6qdwha",
+      "componentType": "InputNumber",
+      "mandatory": false,
+      "page": "8",
+      "min": 0,
+      "max": 100,
+      "decimals": 0,
+      "label": {
+        "value": "\"➡ \" || \"Number with unit\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "controls": [
+        {
+          "id": "lk6qdwha-format-borne-inf-sup",
+          "typeOfControl": "FORMAT",
+          "criticality": "ERROR",
+          "control": {
+            "value": "not(not(isnull(NUMBER_UNIT)) and (0>NUMBER_UNIT or 100<NUMBER_UNIT))",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\" La valeur doit être comprise entre 0 et 100.\"",
+            "type": "VTL|MD"
+          }
+        },
+        {
+          "id": "lk6qdwha-format-decimal",
+          "typeOfControl": "FORMAT",
+          "criticality": "ERROR",
+          "control": {
+            "value": "not(not(isnull(NUMBER_UNIT))  and round(NUMBER_UNIT,0)<>NUMBER_UNIT)",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "hierarchy": {
+        "sequence": {
+          "id": "lk6pnxga",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Unique sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "NUMBER_UNIT"
+      ],
+      "unit": "kg",
+      "response": {
+        "name": "NUMBER_UNIT"
+      }
+    },
+    {
+      "id": "lk6pzgni",
+      "componentType": "Datepicker",
+      "mandatory": false,
+      "page": "9",
+      "min": "1900-01-01",
+      "max": "format-date(current-date(),'[Y0001]-[M01]-[D01]')",
+      "label": {
+        "value": "\"➡ \" || \"Date question\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "controls": [
+        {
+          "id": "lk6pzgni-format-borne-inf-sup",
+          "typeOfControl": "FORMAT",
+          "criticality": "ERROR",
+          "control": {
+            "value": "not(not(isnull(DATE)) and (cast(DATE, date, \"YYYY-MM-DD\")>cast(\"format-date(current-date(),'[Y0001]-[M01]-[D01]')\", date, \"YYYY-MM-DD\") or cast(DATE, date, \"YYYY-MM-DD\")<cast(\"1900-01-01\", date, \"YYYY-MM-DD\")))",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\"La date saisie doit être comprise entre 1900-01-01 et format-date(current-date(),'[Y0001]-[M01]-[D01]').\"",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "hierarchy": {
+        "sequence": {
+          "id": "lk6pnxga",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Unique sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "DATE"
+      ],
+      "dateFormat": "YYYY-MM-DD",
+      "response": {
+        "name": "DATE"
+      }
+    },
+    {
+      "id": "lk6qkux0",
+      "componentType": "Datepicker",
+      "mandatory": false,
+      "page": "10",
+      "min": "2000-01-01",
+      "max": "2030-01-01",
+      "label": {
+        "value": "\"➡ \" || \"Date question (with min / max)\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "controls": [
+        {
+          "id": "lk6qkux0-format-borne-inf-sup",
+          "typeOfControl": "FORMAT",
+          "criticality": "ERROR",
+          "control": {
+            "value": "not(not(isnull(DATE_BOUNDED)) and (cast(DATE_BOUNDED, date, \"YYYY-MM-DD\")>cast(\"2030-01-01\", date, \"YYYY-MM-DD\") or cast(DATE_BOUNDED, date, \"YYYY-MM-DD\")<cast(\"2000-01-01\", date, \"YYYY-MM-DD\")))",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\"La date saisie doit être comprise entre 2000-01-01 et 2030-01-01.\"",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "hierarchy": {
+        "sequence": {
+          "id": "lk6pnxga",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Unique sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "DATE_BOUNDED"
+      ],
+      "dateFormat": "YYYY-MM-DD",
+      "response": {
+        "name": "DATE_BOUNDED"
+      }
+    }
+  ],
+  "variables": [
+    {
+      "variableType": "EXTERNAL",
+      "name": "EXTERNAL_TEXT",
+      "value": null
+    },
+    {
+      "variableType": "EXTERNAL",
+      "name": "EXTERNAL_NUMBER",
+      "value": null
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "BOOL",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "TEXT_SHORT",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "TEXT_LONG",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "NUMBER1",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "NUMBER2",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "NUMBER_DECIMALS",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "NUMBER_UNIT",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "DATE",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "DATE_BOUNDED",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "CALCULATED1",
+      "expression": {
+        "value": "cast(NUMBER1, number) * 10",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "NUMBER1"
+      ],
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "CALCULATED2",
+      "expression": {
+        "value": "cast(NUMBER1, integer) + cast(NUMBER2, integer)",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "NUMBER1",
+        "NUMBER2"
+      ],
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "CALCULATED3",
+      "expression": {
+        "value": "CALCULATED1 + 50",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "CALCULATED1",
+        "NUMBER1"
+      ],
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "CALCULATED4",
+      "expression": {
+        "value": "CALCULATED2 + 30",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "CALCULATED2",
+        "NUMBER1",
+        "NUMBER2"
+      ],
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "CALCULATED5",
+      "expression": {
+        "value": "\"Value is: \" || cast(CALCULATED4, string)",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "CALCULATED4",
+        "NUMBER1",
+        "NUMBER2"
+      ],
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "CALCULATED6",
+      "expression": {
+        "value": "\"External text is: \" || EXTERNAL_TEXT",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "EXTERNAL_TEXT"
+      ],
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "CALCULATED7",
+      "expression": {
+        "value": "cast(EXTERNAL_NUMBER, integer) + cast(NUMBER1, integer)",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "EXTERNAL_NUMBER",
+        "NUMBER1"
+      ],
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "CALCULATED8",
+      "expression": {
+        "value": "\"Value is: \" || cast(CALCULATED7, string)",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "CALCULATED7",
+        "EXTERNAL_NUMBER",
+        "NUMBER1"
+      ],
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "CALCULATED9",
+      "expression": {
+        "value": "CALCULATED4 + CALCULATED7",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "CALCULATED4",
+        "CALCULATED7",
+        "EXTERNAL_NUMBER",
+        "NUMBER1",
+        "NUMBER2"
+      ],
+      "inFilter": "false"
+    }
+  ],
+  "cleaning": {},
+  "resizing": {}
+}

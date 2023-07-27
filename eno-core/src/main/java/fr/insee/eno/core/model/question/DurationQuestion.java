@@ -1,7 +1,9 @@
 package fr.insee.eno.core.model.question;
 
 import datacollection33.QuestionItemType;
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.parameter.Format;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,12 +13,13 @@ import lombok.Setter;
  * It is not supported in Lunatic yet. */
 @Getter
 @Setter
+@Context(format = Format.DDI, type = QuestionItemType.class)
 public class DurationQuestion extends SingleResponseQuestion {
 
     /**
      * Minimum duration value allowed.
      */
-    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain() != null ? " +
+    @DDI("getResponseDomain() != null ? " +
             "getResponseDomain().getRangeArray(0)?.getMinimumValue()?.getStringValue() : " +
             "#index.get(#this.getResponseDomainReference().getIDArray(0).getStringValue())" +
             ".getRangeArray(0)?.getMinimumValue()?.getStringValue()")
@@ -25,7 +28,7 @@ public class DurationQuestion extends SingleResponseQuestion {
     /**
      * Maximum duration value allowed.
      */
-    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain() != null ? " +
+    @DDI("getResponseDomain() != null ? " +
             "getResponseDomain().getRangeArray(0)?.getMaximumValue()?.getStringValue() : " +
             "#index.get(#this.getResponseDomainReference().getIDArray(0).getStringValue())" +
             ".getRangeArray(0)?.getMaximumValue()?.getStringValue()")
@@ -34,7 +37,7 @@ public class DurationQuestion extends SingleResponseQuestion {
     /**
      * Duration format.
      */
-    @DDI(contextType = QuestionItemType.class, field = "getResponseDomain() != null ? " +
+    @DDI("getResponseDomain() != null ? " +
             "getResponseDomain().getDateFieldFormat().getStringValue() : " +
             "#index.get(#this.getResponseDomainReference().getIDArray(0).getStringValue())" +
             ".getDateFieldFormat().getStringValue()")

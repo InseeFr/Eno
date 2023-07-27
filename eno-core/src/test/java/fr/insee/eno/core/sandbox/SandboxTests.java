@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SandboxTests {
 
     static abstract class FooAbstract {
-        @DDI(contextType = AbstractIdentifiableType.class, field = "hello")
+        @DDI("hello")
         int a;
         public void setA(int a) {
             this.a = a;
@@ -53,7 +53,7 @@ class SandboxTests {
         assertNotNull(aTypeDescriptor);
         DDI ddiAnnotation = aTypeDescriptor.getAnnotation(DDI.class);
         assertNotNull(ddiAnnotation);
-        assertEquals("hello", ddiAnnotation.field());
+        assertEquals("hello", ddiAnnotation.value());
     }
 
 

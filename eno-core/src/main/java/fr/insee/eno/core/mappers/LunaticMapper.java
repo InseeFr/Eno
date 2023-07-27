@@ -4,6 +4,7 @@ import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.converter.LunaticConverter;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanWrapper;
@@ -15,6 +16,7 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 import java.beans.PropertyDescriptor;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,6 +26,10 @@ import java.util.List;
  */
 @Slf4j
 public class LunaticMapper extends Mapper {
+
+    public LunaticMapper() {
+        this.format = Format.LUNATIC;
+    }
 
     /**
      * Fill the given Lunatic questionnaire with the content of the Eno questionnaire.
@@ -37,7 +43,7 @@ public class LunaticMapper extends Mapper {
     }
 
     public void mapEnoObject(EnoObject enoObject, Object lunaticObject) {
-        // TODO: control that eno and lunatic objects types are coherent
+        compatibilityCheck(lunaticObject, enoObject);
         recursiveMapping(enoObject, lunaticObject);
     }
 
@@ -79,7 +85,7 @@ public class LunaticMapper extends Mapper {
                     +"' of class '"+ modelContextType.getSimpleName()+"'");
 
             // Instantiate a Spring expression with the annotation content
-            Expression expression = new SpelExpressionParser().parseExpression(lunaticAnnotation.field());
+            Expression expression = new SpelExpressionParser().parseExpression(lunaticAnnotation.value());
 
             if (isSimpleType(classType)) {
                 simpleTypeMapping(lunaticObject, beanWrapper, propertyName, expression);
@@ -89,8 +95,8 @@ public class LunaticMapper extends Mapper {
                 complexTypeMapping(lunaticObject, beanWrapper, propertyName, expression);
             }
 
-            else if (List.class.isAssignableFrom(classType)) {
-                listMapping(enoObject, lunaticObject, propertyDescriptor, expression);
+            else if (Collection.class.isAssignableFrom(classType)) {
+                collectionMapping(enoObject, lunaticObject, propertyDescriptor, expression);
             }
 
             else {
@@ -132,22 +138,22 @@ public class LunaticMapper extends Mapper {
         }
     }
 
-    private void listMapping(EnoObject enoObject, Object lunaticObject, PropertyDescriptor propertyDescriptor, Expression expression) {
+    private void collectionMapping(EnoObject enoObject, Object lunaticObject, PropertyDescriptor propertyDescriptor, Expression expression) {
         // Get the Lunatic collection to be filled
         @SuppressWarnings("unchecked")
         List<Object> lunaticCollection = expression.getValue(lunaticObject, List.class);
         assert lunaticCollection != null : "Lunatic collections are expected to be initialized.";
         // Get the model collection
-        List<Object> enoCollection = readCollection(propertyDescriptor, enoObject);
+        Collection<Object> enoCollection = readCollection(propertyDescriptor, enoObject);
         assert enoCollection != null : "Model collections are expected to be initialized.";
         if (! enoCollection.isEmpty()) {
             // Content type of the model collection
-            Class<?> modelContentType = enoCollection.get(0).getClass();
-            // List of simple type
+            Class<?> modelContentType = enoCollection.iterator().next().getClass();
+            // Collection of simple type
             if (isSimpleType(modelContentType)) {
                 lunaticCollection.addAll(enoCollection);
             }
-            // List of complex type
+            // Collection of complex type
             else if (EnoObject.class.isAssignableFrom(modelContentType)) {
                 // Iterate on the model collection
                 for (Object enoObject2 : enoCollection) {

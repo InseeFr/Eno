@@ -10,8 +10,9 @@ import fr.insee.lunatic.model.flat.ConditionFilterType;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /** Class that is very similar to the calculatedExpression class, designed to map the "conditionFilter"
  * property in Lunatic components.
@@ -23,7 +24,7 @@ public class ComponentFilter extends EnoObject {
 
     /** Expression initialized with the default value. */
     @Getter @Setter
-    @Lunatic(contextType = ConditionFilterType.class, field = "setValue(#param)")
+    @Lunatic("setValue(#param)")
     private String value = DEFAULT_FILTER_VALUE;
 
     /** Private attribute used to replace the default value without doing strings comparison. */
@@ -32,20 +33,20 @@ public class ComponentFilter extends EnoObject {
     /** For now, Lunatic type in label objects does not come from metadata, but is hardcoded here in Eno.
      * See labels documentation. */
     @Getter @Setter
-    @Lunatic(contextType = ConditionFilterType.class, field = "setType(#param)")
+    @Lunatic("setType(#param)")
     String type = Constant.LUNATIC_LABEL_VTL;
 
     @Getter
-    private final List<BindingReference> bindingReferences = new ArrayList<>();
+    private final Set<BindingReference> bindingReferences = new HashSet<>();
 
     /** Contrary to CalculatedExpression class, Lunatic binding dependencies are mapped in the condition filter
      * object. */
-    @Lunatic(contextType = ConditionFilterType.class, field = "getBindingDependencies()")
-    private List<String> bindingDependencies;
+    @Lunatic("getBindingDependencies()")
+    private List<String> lunaticBindingDependencies;
 
     /** Custom getter that uses the binding references. */
-    public List<String> getBindingDependencies() {
-        return bindingReferences.stream().map(BindingReference::getVariableName).toList();
+    public List<String> getLunaticBindingDependencies() {
+        return bindingReferences.stream().map(BindingReference::getVariableName).distinct().toList();
     }
 
     /**
@@ -70,10 +71,6 @@ public class ComponentFilter extends EnoObject {
 
     private void addFilterBindingReferences(Filter filter) {
         this.getBindingReferences().addAll(filter.getExpression().getBindingReferences());
-        /* TODO: duplicates might be a problem, so: replace "List" with "Collection" in mappers,
-            use Set instead of List for this property here (and maybe in other places),
-            and implement equals method in the BindingReference class
-         */
     }
 
 }

@@ -5,7 +5,7 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.legacy.parameters.CaptureEnum;
 import fr.insee.eno.legacy.parameters.Context;
-import fr.insee.eno.treatments.LunaticPostProcessings;
+import fr.insee.eno.treatments.LunaticPostProcessing;
 import fr.insee.eno.ws.PassePlat;
 import fr.insee.eno.ws.controller.utils.V3ControllerUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -110,13 +110,13 @@ public class SimpleGenerationController {
            Spring considers having a DefaultFormField object instead of FilePart and exceptions is thrown
            There is no way at this moment to disable the allow empty value when filed is not required.
          */
-        Mono<LunaticPostProcessings> lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
+        Mono<LunaticPostProcessing> lunaticPostProcessing = controllerUtils.generateLunaticPostProcessings(specificTreatment);
         //
-        EnoParameters enoParameters = new EnoParameters(context, Format.LUNATIC);
+        EnoParameters enoParameters = EnoParameters.of(context, Format.LUNATIC);
         enoParameters.getSelectedModes().clear();
         enoParameters.getSelectedModes().add(mode);
         //
-        return controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessings);
+        return controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessing);
     }
 
     @Operation(

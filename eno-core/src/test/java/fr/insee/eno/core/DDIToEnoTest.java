@@ -24,7 +24,7 @@ class DDIToEnoTest {
     /** The focus is on the mapping part here, so business processing (that may be enabled by default) are disabled. */
     @BeforeEach
     void parametersWithNoBusinessProcessing() {
-        enoParameters = new EnoParameters();
+        enoParameters = EnoParameters.defaultValues();
         enoParameters.setSequenceNumbering(false);
         enoParameters.setQuestionNumberingMode(EnoParameters.QuestionNumberingMode.NONE);
         enoParameters.setArrowCharInQuestions(false);
