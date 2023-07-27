@@ -22,7 +22,7 @@ public class LunaticAddPageNumbers implements ProcessingStep<Questionnaire> {
      * @param lunaticQuestionnaire Lunatic questionnaire to be processed.
      */
     public void apply(Questionnaire lunaticQuestionnaire) {
-        lunaticQuestionnaire.setPagination(EnoParameters.lunaticNumberingMode(mode));
+        lunaticQuestionnaire.setPagination(lunaticNumberingMode(mode));
         switch (mode) {
             case NONE -> log.info("No pagination.");
             case QUESTION -> {
@@ -35,4 +35,14 @@ public class LunaticAddPageNumbers implements ProcessingStep<Questionnaire> {
             }
         }
     }
+
+    // TODO: enum in Lunatic-Model for this...
+    public static String lunaticNumberingMode(EnoParameters.LunaticPaginationMode paginationMode) {
+        return switch (paginationMode) {
+            case NONE -> "none";
+            case SEQUENCE -> "sequence";
+            case QUESTION -> "question";
+        };
+    }
+
 }

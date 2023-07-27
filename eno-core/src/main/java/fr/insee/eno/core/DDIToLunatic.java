@@ -38,7 +38,7 @@ public class DDIToLunatic {
      * @throws DDIParsingException if the input stream given cannot be parsed to a DDI object.
      */
     public static Questionnaire transform(InputStream ddiInputStream) throws DDIParsingException {
-        return transform(ddiInputStream, EnoParameters.defaultParameters());
+        return transform(ddiInputStream, EnoParameters.defaultValues());
     }
 
     /**

@@ -29,27 +29,66 @@ public class EnoParameters {
 
     // Context parameters
     private Context context;
-    private String campaignName = DEFAULT_CAMPAIGN_NAME;
+    private String campaignName = DEFAULT_CAMPAIGN_NAME; // unused yet
     private ModeParameter modeParameter;
     private Language language = Language.FR; // unused yet
 
     // Eno core parameters
-    private boolean identificationQuestion; //TODO
+    private boolean identificationQuestion;
     private boolean responseTimeQuestion;
     private boolean commentSection;
     private boolean sequenceNumbering;
     private QuestionNumberingMode questionNumberingMode;
     private boolean arrowCharInQuestions;
-    private List<Mode> selectedModes = new ArrayList<>(); //TODO: maybe public class SelectedModes extends List<Mode>
+    private List<Mode> selectedModes = new ArrayList<>();
 
     // Lunatic parameters
     private boolean controls;
-    private boolean toolTip; // Not implemented in Lunatic
+    private boolean toolTip; // Not implemented yet in Lunatic
     private boolean missingVariables;
-    private boolean filterResult; //TODO
-    private boolean filterDescription; // TODO related to a processing for Generic app
-    private boolean unusedVariables; //TODO? processing to remove calculated variables not used in questionnaire
+    private boolean filterResult;
+    private boolean filterDescription;
+    private boolean unusedVariables; // Not maintained in Eno v3 for now
     private LunaticPaginationMode lunaticPaginationMode;
+
+    private EnoParameters() {}
+
+    public static EnoParameters emptyValues() {
+        return new EnoParameters();
+    }
+
+    public static EnoParameters defaultValues() {
+        EnoParameters enoParameters = new EnoParameters();
+        enoParameters.setDefaultValues();
+        enoParameters.setContext(Context.DEFAULT);
+        return enoParameters;
+    }
+
+    public static EnoParameters of(Context context, Format outFormat) {
+        log.info("Parameters with context {} and out format {}", context, outFormat);
+        // TODO: values in function of context & out format
+        EnoParameters enoParameters = new EnoParameters();
+        enoParameters.setDefaultValues();
+        enoParameters.setContext(context);
+        return enoParameters;
+    }
+
+    private void setDefaultValues() {
+        // Eno core
+        identificationQuestion = false;
+        responseTimeQuestion = false;
+        commentSection = true;
+        sequenceNumbering = true;
+        questionNumberingMode = QuestionNumberingMode.SEQUENCE;
+        arrowCharInQuestions = true;
+        selectedModes = new ArrayList<>(List.of(CAPI, CATI, CAWI, PAPI));
+        // Lunatic
+        controls = true;
+        missingVariables = false;
+        filterResult = false;
+        filterDescription = false;
+        lunaticPaginationMode = LunaticPaginationMode.QUESTION;
+    }
 
     public static EnoParameters parse(InputStream parametersInputStream) throws IOException {
         log.info("Parsing Eno parameters from input stream");
@@ -61,42 +100,6 @@ public class EnoParameters {
         log.info("Serializing parameters file");
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(enoParameters);
-    }
-
-    public EnoParameters() {
-        setDefaultValues();
-    }
-
-    public EnoParameters(Context context, Format outFormat) {
-        log.info("Parameters with context {} and out format {}", context, outFormat);
-        setDefaultValues(); // TODO: default values in function of context & out format
-        this.context = context;
-    }
-
-    // TODO: private constructors and use static methods
-
-    public static EnoParameters defaultParameters() {
-        return new EnoParameters();
-    }
-
-    private void setDefaultValues() {
-        // Eno core
-        commentSection = true;
-        sequenceNumbering = true;
-        questionNumberingMode = QuestionNumberingMode.SEQUENCE;
-        arrowCharInQuestions = true;
-        selectedModes.addAll(List.of(CAPI, CATI, CAWI, PAPI));
-        // Lunatic
-        missingVariables = false;
-        lunaticPaginationMode = LunaticPaginationMode.QUESTION;
-    }
-
-    public static String lunaticNumberingMode(LunaticPaginationMode paginationMode) {
-        return switch (paginationMode) {
-            case NONE -> "none"; //TODO: check what is the correct value for Lunatic
-            case SEQUENCE -> "sequence"; //TODO: check what is the correct value for Lunatic
-            case QUESTION -> "question";
-        };
     }
 
 }

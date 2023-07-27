@@ -112,7 +112,7 @@ public class SimpleGenerationController {
          */
         Mono<LunaticPostProcessing> lunaticPostProcessing = controllerUtils.generateLunaticPostProcessings(specificTreatment);
         //
-        EnoParameters enoParameters = new EnoParameters(context, Format.LUNATIC);
+        EnoParameters enoParameters = EnoParameters.of(context, Format.LUNATIC);
         enoParameters.getSelectedModes().clear();
         enoParameters.getSelectedModes().add(mode);
         //
