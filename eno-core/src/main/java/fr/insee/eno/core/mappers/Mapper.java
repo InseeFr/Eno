@@ -12,7 +12,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -42,15 +41,15 @@ public class Mapper {
 
     void compatibilityCheck(Object mappedObject, EnoObject enoObject) {
         Class<?>[] contextTypes = getContextTypes(enoObject);
-        if (hasNoneAssignableMatch(mappedObject, contextTypes))
+        if (! hasAnAssignableMatch(mappedObject, contextTypes))
             throw new IllegalArgumentException(String.format(
                     "Object of type '%s' is not compatible with Eno object of type '%s'",
                     mappedObject.getClass(), enoObject.getClass()));
     }
 
-    private boolean hasNoneAssignableMatch(Object mappedObject, Class<?>[] contextTypes) {
-        return Arrays.stream(contextTypes).noneMatch(contextType ->
-                mappedObject.getClass().isAssignableFrom(contextType));
+    private boolean hasAnAssignableMatch(Object mappedObject, Class<?>[] contextTypes) {
+        return Arrays.stream(contextTypes).anyMatch(contextType ->
+                contextType.isAssignableFrom(mappedObject.getClass()));
     }
 
     private Class<?>[] getContextTypes(EnoObject enoObject) {

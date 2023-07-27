@@ -18,7 +18,7 @@ public class ExternalVariable extends Variable {
 
     /** DDI reference of the variable.
      * For an external variable, it is the variable name itself. */
-    @DDI("getVariableNameArray(0).getStringArray(0).getStringValue()")
+    @DDI("!getVariableNameList().isEmpty() ? getVariableNameArray(0).getStringArray(0)?.getStringValue() : null")
     private String reference;
 
 }

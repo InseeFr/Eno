@@ -17,10 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
-import org.springframework.expression.spel.support.StandardEvaluationContext;
 import reusable33.AbstractIdentifiableType;
 
 import java.beans.PropertyDescriptor;
@@ -77,7 +75,7 @@ public class DDIMapper extends Mapper {
         log.info("Finished mapping between DDI instance and Eno questionnaire.");
     }
 
-    public void mapDDIObject(AbstractIdentifiableType ddiObject, EnoObject enoObject, DDIIndex ddiIndex) {
+    public void mapDDIObject(AbstractIdentifiableType ddiObject, EnoObject enoObject) {
         //
         compatibilityCheck(ddiObject, enoObject);
         //
@@ -188,11 +186,7 @@ public class DDIMapper extends Mapper {
         recursiveMapping(ddiObject2, enoObject2);
     }
 
-    private void listMapping(Object ddiObject, EnoObject enoObject, PropertyDescriptor propertyDescriptor, TypeDescriptor typeDescriptor, DDI ddiAnnotation, Expression expression) {
-        recursiveMapping(ddiObject2, enoObject2, context);
-    }
-
-    private void collectionMapping(Object ddiObject, EnoObject enoObject, PropertyDescriptor propertyDescriptor, TypeDescriptor typeDescriptor, DDI ddiAnnotation, EvaluationContext context, Expression expression) {
+    private void collectionMapping(Object ddiObject, EnoObject enoObject, PropertyDescriptor propertyDescriptor, TypeDescriptor typeDescriptor, DDI ddiAnnotation, Expression expression) {
         // Local variables used for logging purposes
         Class<?> modelContextType = enoObject.getClass();
         String propertyName = propertyDescriptor.getName();
@@ -263,10 +257,6 @@ public class DDIMapper extends Mapper {
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             throw new MappingException("Unable to create instance for class " + classType, e);
         }
-    }
-
-    private Object evaluateSpEL() {
-        return null;
     }
 
     private static String ddiToString(@NonNull Object ddiObject) {

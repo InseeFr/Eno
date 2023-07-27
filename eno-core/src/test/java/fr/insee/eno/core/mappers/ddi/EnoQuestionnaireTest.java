@@ -6,6 +6,7 @@ import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import group33.ResourcePackageType;
 import instance33.DDIInstanceType;
+import instance33.impl.DDIInstanceTypeImpl;
 import logicalproduct33.CodeListSchemeType;
 import logicalproduct33.VariableGroupType;
 import logicalproduct33.VariableSchemeType;
@@ -14,8 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import reusable33.*;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class EnoQuestionnaireTest {
 

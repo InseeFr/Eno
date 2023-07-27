@@ -217,7 +217,8 @@ public class DDIConverter {
     public static EnoObject instantiateFrom(VariableType variableType) {
         if (! variableType.getQuestionReferenceList().isEmpty())
             return new CollectedVariable();
-        if (variableType.getVariableRepresentation().getProcessingInstructionReference() != null)
+        if (variableType.getVariableRepresentation() != null &&
+                variableType.getVariableRepresentation().getProcessingInstructionReference() != null)
             return new CalculatedVariable();
         return new ExternalVariable();
     }
