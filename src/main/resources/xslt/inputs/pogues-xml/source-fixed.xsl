@@ -55,6 +55,21 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
+    <xsl:template match="pogues:Declaration[@declarationType='CODECARD']"
+        mode="enopogues:get-instruction-text">
+        <xsl:variable name="original-declaration-text">
+            <xsl:apply-templates select="pogues:Text" mode="id-variable"/>
+        </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="enopogues:get-lang(.)='fr-FR'">
+                <xsl:value-of select="concat('Montrer la carte code ',$original-declaration-text)"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="concat('Show the code card ',$original-declaration-text)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
     <xsl:template match="pogues:Datatype/@visualizationHint" mode="conversion-table">
         <xsl:choose>

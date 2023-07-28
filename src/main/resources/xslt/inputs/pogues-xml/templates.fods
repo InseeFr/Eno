@@ -1035,7 +1035,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>pogues:Declaration</text:p>
+      <text:p>pogues:Declaration[not(@declarationType=&apos;CODECARD&apos;)]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-instruction-text</text:p>
