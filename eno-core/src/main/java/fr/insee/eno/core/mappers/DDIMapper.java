@@ -35,8 +35,6 @@ import java.util.List;
 @Slf4j
 public class DDIMapper extends Mapper {
 
-    private EnoSpelEngine spelEngine;
-
     /** Index created in the entry object of mapping functions. */
     private EnoIndex enoIndex;
     private DDIIndex ddiIndex;

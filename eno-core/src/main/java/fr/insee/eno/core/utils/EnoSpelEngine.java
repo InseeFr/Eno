@@ -21,10 +21,14 @@ public class EnoSpelEngine {
     private final Format format;
     
     @Getter
-    private final EvaluationContext context;
+    private EvaluationContext context;
 
     public EnoSpelEngine(Format format) {
         this.format = format;
+        context = new StandardEvaluationContext();
+    }
+
+    public void resetContext() {
         context = new StandardEvaluationContext();
     }
 

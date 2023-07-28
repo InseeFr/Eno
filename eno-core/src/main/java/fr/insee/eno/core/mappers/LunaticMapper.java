@@ -5,15 +5,14 @@ import fr.insee.eno.core.converter.LunaticConverter;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.eno.core.utils.EnoSpelEngine;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
-import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 import java.beans.PropertyDescriptor;
 import java.util.Collection;
@@ -29,6 +28,7 @@ public class LunaticMapper extends Mapper {
 
     public LunaticMapper() {
         this.format = Format.LUNATIC;
+        spelEngine = new EnoSpelEngine(format);
     }
 
     /**
@@ -38,12 +38,14 @@ public class LunaticMapper extends Mapper {
      */
     public void mapQuestionnaire(EnoQuestionnaire enoQuestionnaire, Questionnaire lunaticQuestionnaire) {
         log.info("Starting mapping between Eno model and Lunatic questionnaire");
+        spelEngine.resetContext();
         recursiveMapping(enoQuestionnaire, lunaticQuestionnaire);
         log.info("Finished mapping between Eno model and Lunatic questionnaire");
     }
 
     public void mapEnoObject(EnoObject enoObject, Object lunaticObject) {
         compatibilityCheck(lunaticObject, enoObject);
+        spelEngine.resetContext();
         recursiveMapping(enoObject, lunaticObject);
     }
 
@@ -79,7 +81,7 @@ public class LunaticMapper extends Mapper {
 
         // Use the Spring type descriptor to get the Lunatic annotation if any
         Lunatic lunaticAnnotation = typeDescriptor.getAnnotation(Lunatic.class);
-        if(lunaticAnnotation != null) {
+        if (lunaticAnnotation != null) {
 
             log.debug("Processing property '"+ propertyName
                     +"' of class '"+ modelContextType.getSimpleName()+"'");
@@ -108,14 +110,14 @@ public class LunaticMapper extends Mapper {
 
     // Note: not useful to put debug log in below methods, 'in' mapper already gives enough.
 
-    private static void simpleTypeMapping(Object lunaticObject, BeanWrapper beanWrapper, String propertyName, Expression expression) {
+    private void simpleTypeMapping(Object lunaticObject, BeanWrapper beanWrapper, String propertyName, Expression expression) {
         // Read the value in the Eno model class
         Object modelValue = beanWrapper.getPropertyValue(propertyName);
         if (modelValue != null) {
             // Evaluate the mapping expression that set the value
-            EvaluationContext context = new StandardEvaluationContext();
-            context.setVariable("param", modelValue);
-            expression.getValue(context, lunaticObject);
+            spelEngine.resetContext(); // Not sure if it is required but feels safe
+            spelEngine.getContext().setVariable("param", modelValue);
+            spelEngine.evaluate(expression, lunaticObject, beanWrapper.getWrappedClass(), propertyName);
         }
     }
 
@@ -130,9 +132,9 @@ public class LunaticMapper extends Mapper {
                 return;
             }
             // Evaluate the mapping expression that set the created instance in the Lunatic object attribute
-            EvaluationContext context = new StandardEvaluationContext();
-            context.setVariable("param", lunaticObject2); //TODO: other keyword for new instances setter?
-            expression.getValue(context, lunaticObject);
+            spelEngine.resetContext();
+            spelEngine.getContext().setVariable("param", lunaticObject2); //TODO: other keyword for new instances setter?
+            spelEngine.evaluate(expression, lunaticObject, beanWrapper.getWrappedClass(), propertyName);
             // Recursive call of the mapper to dive into this object
             recursiveMapping(enoObject2, lunaticObject2);
         }
@@ -141,7 +143,8 @@ public class LunaticMapper extends Mapper {
     private void collectionMapping(EnoObject enoObject, Object lunaticObject, PropertyDescriptor propertyDescriptor, Expression expression) {
         // Get the Lunatic collection to be filled
         @SuppressWarnings("unchecked")
-        List<Object> lunaticCollection = expression.getValue(lunaticObject, List.class);
+        List<Object> lunaticCollection = (List<Object>) spelEngine.evaluateToList(
+                expression, lunaticObject, enoObject.getClass(), propertyDescriptor.getName());
         assert lunaticCollection != null : "Lunatic collections are expected to be initialized.";
         // Get the model collection
         Collection<Object> enoCollection = readCollection(propertyDescriptor, enoObject);

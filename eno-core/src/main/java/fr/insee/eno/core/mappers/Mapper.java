@@ -4,6 +4,7 @@ import fr.insee.eno.core.annotations.Contexts;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.eno.core.utils.EnoSpelEngine;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanWrapper;
 
@@ -18,6 +19,7 @@ import java.util.Optional;
 public class Mapper {
 
     Format format;
+    EnoSpelEngine spelEngine;
 
     public static Iterator<PropertyDescriptor> propertyDescriptorIterator(BeanWrapper beanWrapper) {
         return Arrays.stream(beanWrapper.getPropertyDescriptors())
