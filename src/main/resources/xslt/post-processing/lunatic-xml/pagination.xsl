@@ -77,7 +77,8 @@
                     <xsl:copy>
                         <xsl:copy-of select="@*"/>
                         <xsl:attribute name="pagination" select="$pagination"/>
-                        <xsl:attribute name="maxPage" select="count(descendant::h:components[not(ancestor::h:components[@componentType='Loop' or @componentType='PairwiseLinks'])][(@componentType!='FilterDescription' and @componentType!='Subsequence') or @componentType='Subsequence' and h:declarations])"/>
+                        <xsl:attribute name="maxPage" select="count(descendant::h:components[not(ancestor::h:components[@componentType='Loop' or @componentType='PairwiseLinks' or @componentType='RosterForLoop'])]
+                                                                                            [@componentType!='FilterDescription' and (@componentType!='Subsequence' or h:declarations)])"/>
                         <xsl:apply-templates mode="question"/>
                     </xsl:copy>
                 </xsl:variable>
@@ -183,7 +184,10 @@
         <xsl:variable name="firstComponentId" select="$container/h:components[1]/@id"/>
         <xsl:variable name="page">
             <xsl:variable name="newPage">
-                <xsl:number count="h:components[@componentType!='FilterDescription' and (@componentType!='Subsequence' or (@componentType='Subsequence' and h:declarations)) and not(ancestor::h:components[@componentType='PairwiseLinks'])][ancestor::h:*[@componentType='Loop' or local-name(.)='Questionnaire'][1]/@id = $container/@id]"
+                <xsl:number count="h:components[@componentType!='FilterDescription'
+                                                and (@componentType!='Subsequence' or h:declarations)
+                                                and not(ancestor::h:components[@componentType='PairwiseLinks' or @componentType='RosterForLoop'])
+                                                and ancestor::h:*[@componentType='Loop' or local-name(.)='Questionnaire'][1]/@id = $container/@id]"
                     level="any" format="1"
                     from="h:components[@id = $firstComponentId]"/>
             </xsl:variable>
@@ -198,7 +202,9 @@
             <xsl:copy-of select="@*"/>
             <xsl:attribute name="page" select="$page"/>
             <xsl:if test="$isLinkedLoop">
-                <xsl:attribute name="maxPage" select="count(descendant::h:components[(@componentType!='FilterDescription' and @componentType!='Subsequence') or @componentType='Subsequence' and h:declarations])"/>
+                <xsl:attribute name="maxPage" select="count(descendant::h:components[ancestor::h:components[@componentType='Loop'][1]/@id = current()/@id]
+                                                                                    [not(ancestor::h:components[@componentType='PairwiseLinks' or @componentType='RosterForLoop'])]
+                                                                                    [@componentType!='FilterDescription' and (@componentType!='Subsequence' or h:declarations)])"/>
             </xsl:if>
             <xsl:attribute name="paginatedLoop" select="$isLinkedLoop"/>
             <xsl:apply-templates mode="#current">
@@ -216,9 +222,13 @@
         <xsl:variable name="firstComponentId" select="$container/h:components[1]/@id"/>
         <xsl:variable name="page">
             <xsl:variable name="newPage">
-                <xsl:number count="h:components[@componentType!='FilterDescription' and (@componentType!='Subsequence' or (@componentType='Subsequence' and h:declarations)) and not(ancestor::h:components[@componentType='PairwiseLinks'])][ancestor::h:*[@componentType='Loop' or local-name(.)='Questionnaire'][1]/@id = $container/@id]"
+                <xsl:number count="h:components[@componentType!='FilterDescription'
+                                                and (@componentType!='Subsequence' or h:declarations)
+                                                and not(ancestor::h:components[@componentType='PairwiseLinks' or @componentType='RosterForLoop'])
+                                                and ancestor::h:*[@componentType='Loop' or local-name(.)='Questionnaire'][1]/@id = $container/@id]"
                     level="any" format="1"
                     from="h:components[@id = $firstComponentId]"/>
+                
             </xsl:variable>
             <xsl:choose>
                 <xsl:when test="$loopPage != '' and $isFromLinkedLoop"><xsl:value-of select="concat($loopPage,'.',$newPage)"/></xsl:when>
@@ -255,9 +265,12 @@
         <xsl:variable name="firstComponentId" select="$container/h:components[1]/@id"/>
         <xsl:variable name="page">
             <xsl:variable name="newPage">
-                <xsl:number count="h:components[@componentType!='FilterDescription' and (@componentType!='Subsequence' or (@componentType='Subsequence' and h:declarations)) and not(ancestor::h:components[@componentType='PairwiseLinks'])][ancestor::h:*[@componentType='Loop' or local-name(.)='Questionnaire'][1]/@id = $container/@id]"
+                <xsl:number count="h:components[@componentType!='FilterDescription'
+                                                and (@componentType!='Subsequence' or h:declarations)
+                                                and not(ancestor::h:components[@componentType='PairwiseLinks' or @componentType='RosterForLoop'])
+                                                and ancestor::h:*[@componentType='Loop' or local-name(.)='Questionnaire'][1]/@id = $container/@id]"
                     level="any" format="1"
-                    from="h:components[@id = $firstComponentId]"/>                        
+                    from="h:components[@id = $firstComponentId]"/>
             </xsl:variable>
             <xsl:choose>
                 <xsl:when test="$loopPage != '' and $isFromLinkedLoop"><xsl:value-of select="concat($loopPage,'.',$newPage)"/></xsl:when>
@@ -265,7 +278,7 @@
                 <xsl:otherwise><xsl:value-of select="$newPage"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        
+
         <xsl:copy>
             <xsl:copy-of select="@*"/>
             <xsl:attribute name="page" select="$page"/>
