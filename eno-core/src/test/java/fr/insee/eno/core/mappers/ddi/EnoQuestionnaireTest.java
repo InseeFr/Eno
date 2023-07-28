@@ -1,21 +1,23 @@
 package fr.insee.eno.core.mappers.ddi;
 
-import fr.insee.eno.core.mappers.MapperTestUtils;
+import datacollection33.ControlConstructSchemeType;
+import datacollection33.QuestionSchemeType;
+import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import group33.ResourcePackageType;
 import instance33.DDIInstanceType;
+import instance33.impl.DDIInstanceTypeImpl;
 import logicalproduct33.CodeListSchemeType;
+import logicalproduct33.VariableGroupType;
 import logicalproduct33.VariableSchemeType;
+import logicalproduct33.VariableType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import reusable33.*;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class EnoQuestionnaireTest {
-
-    MapperTestUtils utils = new MapperTestUtils();
 
     // TODO: more unit tests (one per DDI annotation in the model classes)
 
@@ -26,47 +28,65 @@ class EnoQuestionnaireTest {
     private DDIInstanceType ddiInstanceType;
     private EnoQuestionnaire enoQuestionnaire;
 
+    private DDIMapper ddiMapper;
+
     @BeforeEach
     public void newDDIInstanceType() {
+        //
         ddiInstanceType = DDIInstanceType.Factory.newInstance();
+        ddiInstanceType.getIDList().add(IDType.Factory.newInstance());
+        ddiInstanceType.getIDList().get(0).setStringValue("ddi-instance-id");
+        //
+        ResourcePackageType resourcePackageType = ResourcePackageType.Factory.newInstance();
+        resourcePackageType.getIDList().add(IDType.Factory.newInstance());
+        resourcePackageType.getIDArray(0).setStringValue("resource-package-id");
+        //
+        ControlConstructSchemeType controlConstructSchemeType = ControlConstructSchemeType.Factory.newInstance();
+        controlConstructSchemeType.getIDList().add(IDType.Factory.newInstance());
+        controlConstructSchemeType.getIDArray(0).setStringValue("control-construct-scheme-id");
+        resourcePackageType.getControlConstructSchemeList().add(controlConstructSchemeType);
+        //
+        QuestionSchemeType questionSchemeType = QuestionSchemeType.Factory.newInstance();
+        questionSchemeType.getIDList().add(IDType.Factory.newInstance());
+        questionSchemeType.getIDArray(0).setStringValue("question-scheme-id");
+        resourcePackageType.getQuestionSchemeList().add(questionSchemeType);
+        //
+        VariableSchemeType variableSchemeType = VariableSchemeType.Factory.newInstance();
+        variableSchemeType.getIDList().add(IDType.Factory.newInstance());
+        variableSchemeType.getIDArray(0).setStringValue("variable-scheme-id");
+        resourcePackageType.getVariableSchemeList().add(variableSchemeType);
+        //
+        CodeListSchemeType codeListSchemeType = CodeListSchemeType.Factory.newInstance();
+        codeListSchemeType.getIDList().add(IDType.Factory.newInstance());
+        codeListSchemeType.getIDArray(0).setStringValue("code-list-id");
+        //
+        codeListSchemeType.getCodeListSchemeNameList().add(NameType.Factory.newInstance());
+        codeListSchemeType.getCodeListSchemeNameArray(0).getStringList().add(StringType.Factory.newInstance());
+        codeListSchemeType.getCodeListSchemeNameArray(0).getStringArray(0).setStringValue("CL-MODEL");
+        //
+        resourcePackageType.getCodeListSchemeList().add(codeListSchemeType);
+        //
+        ddiInstanceType.getResourcePackageList().add(resourcePackageType);
+        //
         enoQuestionnaire = new EnoQuestionnaire();
+        //
+        ddiMapper = new DDIMapper();
     }
 
     @Test
     void mapId() {
         //
-        String expectedId = "FOO-ID";
-        // Given
-        ddiInstanceType.getIDList().add(IDType.Factory.newInstance());
-        ddiInstanceType.getIDList().get(0).setStringValue(expectedId);
-        // When
-        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-        utils.mapDDIProperty(ddiInstanceType, enoQuestionnaire, "id");
-        // Then
-        assertEquals(expectedId, enoQuestionnaire.getId());
+        ddiMapper.mapDDIObject(ddiInstanceType, enoQuestionnaire);
+        //
+        assertEquals("ddi-instance-id", enoQuestionnaire.getId());
     }
 
     @Test
     void mapQuestionnaireModel() {
         //
-        String expectedModel = "FOO-MODEL";
+        ddiMapper.mapDDIObject(ddiInstanceType, enoQuestionnaire);
         //
-        ddiInstanceType.getResourcePackageList()
-                .add(ResourcePackageType.Factory.newInstance());
-        ddiInstanceType.getResourcePackageArray(0).getCodeListSchemeList()
-                .add(CodeListSchemeType.Factory.newInstance());
-        ddiInstanceType.getResourcePackageArray(0).getCodeListSchemeArray(0).getCodeListSchemeNameList()
-                .add(NameType.Factory.newInstance());
-        ddiInstanceType.getResourcePackageArray(0).getCodeListSchemeArray(0).getCodeListSchemeNameArray(0)
-                .getStringList()
-                .add(StringType.Factory.newInstance());
-        ddiInstanceType.getResourcePackageArray(0).getCodeListSchemeArray(0).getCodeListSchemeNameArray(0)
-                .getStringArray(0)
-                .setStringValue(expectedModel);
-        //
-        utils.mapDDIProperty(ddiInstanceType, enoQuestionnaire, "questionnaireModel");
-        //
-        assertEquals(expectedModel, enoQuestionnaire.getQuestionnaireModel());
+        assertEquals("CL-MODEL", enoQuestionnaire.getQuestionnaireModel());
     }
 
     @Test
@@ -79,35 +99,35 @@ class EnoQuestionnaireTest {
         ddiInstanceType.getCitation().getTitle().getStringList().add(StringType.Factory.newInstance());
         ddiInstanceType.getCitation().getTitle().getStringArray(0).setStringValue(expectedLabel);
         //
-        utils.mapDDIProperty(ddiInstanceType, enoQuestionnaire, "label");
+        ddiMapper.mapDDIObject(ddiInstanceType, enoQuestionnaire);
         //
         assertEquals(expectedLabel, enoQuestionnaire.getLabel().getValue());
     }
 
     @Test
     public void mapVariables() {
-        assertDoesNotThrow(() -> {
-            //
-            ddiInstanceType.getResourcePackageList()
-                    .add(ResourcePackageType.Factory.newInstance());
-            ddiInstanceType.getResourcePackageArray(0).getVariableSchemeList()
-                    .add(VariableSchemeType.Factory.newInstance());
-            //
-            utils.mapDDIProperty(ddiInstanceType, enoQuestionnaire, "variables");
-        });
+        //
+        VariableType ddiVariable = VariableType.Factory.newInstance();
+        ddiVariable.getIDList().add(IDType.Factory.newInstance());
+        ddiVariable.getIDArray(0).setStringValue("variable-id");
+        ddiInstanceType.getResourcePackageArray(0).getVariableSchemeArray(0).getVariableList().add(ddiVariable);
+        //
+        ddiMapper.mapDDIObject(ddiInstanceType, enoQuestionnaire);
+        //
+        assertEquals(1, enoQuestionnaire.getVariables().size());
     }
 
     @Test
     public void mapVariableGroups() {
-        assertDoesNotThrow(() -> {
-            //
-            ddiInstanceType.getResourcePackageList()
-                    .add(ResourcePackageType.Factory.newInstance());
-            ddiInstanceType.getResourcePackageArray(0).getVariableSchemeList()
-                    .add(VariableSchemeType.Factory.newInstance());
-            //
-            utils.mapDDIProperty(ddiInstanceType, enoQuestionnaire, "variableGroups");
-        });
+        //
+        VariableGroupType variableGroupType = VariableGroupType.Factory.newInstance();
+        variableGroupType.getIDList().add(IDType.Factory.newInstance());
+        variableGroupType.getIDArray(0).setStringValue("variable-group-id");
+        ddiInstanceType.getResourcePackageArray(0).getVariableSchemeArray(0).getVariableGroupList().add(variableGroupType);
+        //
+        ddiMapper.mapDDIObject(ddiInstanceType, enoQuestionnaire);
+        //
+        assertEquals(1, enoQuestionnaire.getVariableGroups().size());
     }
 
 }

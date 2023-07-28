@@ -16,6 +16,6 @@ public @interface DDI {
 
     /** In some objects, there can be lists that may be null in some instances for valid reasons.
      * The mapper will not throw an exception if the property is set to true. */
-    boolean allowNullList() default false;
+    boolean allowNullList() default true;
 
 }

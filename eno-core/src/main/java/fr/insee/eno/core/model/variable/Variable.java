@@ -31,12 +31,12 @@ public abstract class Variable extends EnoObject {
     // TODO: see pairwise DDI with variable 'l0v32sjd': mistake or actual case?
 
     /** Variable name. */
-    @DDI("getVariableNameArray(0).getStringArray(0).getStringValue()")
+    @DDI("!getVariableNameList().isEmpty() ? getVariableNameArray(0).getStringArray(0)?.getStringValue() : null")
     @Lunatic("setName(#param)")
     private String name;
 
     /** Measurement unit (for numeric variables). */
-    @DDI("getVariableRepresentation().getValueRepresentation()?.getMeasurementUnit()?.getStringValue()")
+    @DDI("getVariableRepresentation()?.getValueRepresentation()?.getMeasurementUnit()?.getStringValue()")
     private String unit;
 
     /** Method to convert an Eno-model CollectionType object (from the enum class)

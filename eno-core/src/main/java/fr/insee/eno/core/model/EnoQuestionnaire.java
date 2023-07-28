@@ -39,22 +39,9 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     @Lunatic("setModele(#param)")
     private String questionnaireModel;
 
-    @Lunatic("setEnoCoreVersion(#param)")
-    private String enoVersion;
-
-    @Lunatic("setLunaticModelVersion(#param)")
-    private String lunaticModelVersion;
-
-    @DDI("getCitation().getTitle()")
+    @DDI("getCitation()?.getTitle()")
     @Lunatic("setLabel(#param)")
     private QuestionnaireLabel label;
-
-    @DDI("getResourcePackageArray(0).getVariableSchemeArray(0)" +
-            ".getVariableArray(0).getVariableNameArray(0).getStringArray(0).getStringValue()")
-    private String firstVariableName;
-
-    @DDI("getResourcePackageArray(0).getVariableSchemeArray(0).getVariableArray(0)")
-    private Variable firstVariable;
 
     @DDI("getResourcePackageArray(0).getVariableSchemeArray(0).getVariableList()")
     @Lunatic("getVariables()")
