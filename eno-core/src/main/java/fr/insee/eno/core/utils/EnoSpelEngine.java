@@ -32,6 +32,12 @@ public class EnoSpelEngine {
         context = new StandardEvaluationContext();
     }
 
+    /* TODO: more precise parameters
+        - Class<? extends EnoObject> for enoContextType
+        - PropertyDescriptor propertyDescriptor object instead of String propertyName
+        (needs some refactor in mappers to do so)
+     */
+
     public Object evaluate(Expression expression, Object rootObject,
                            Class<?> enoContextType, String propertyName) {
         return evaluate(expression, rootObject, Object.class, enoContextType, propertyName);
