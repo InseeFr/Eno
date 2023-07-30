@@ -1,5 +1,20 @@
 # Eno Releases note
 
+## 2.4.3 - 05/06/23
+- **[dependencies]** upgrading dependancies
+- **[ci]** : update CI
+- **[ddi2lunaticXML][core]** add pairwise component
+- **[ddi2lunaticXML][core]** enrich code card label
+- **[ddi2fo][post-processing]** ***Business*** : update fist page
+- **[poguesXML2ddi][core]** add pairwise component
+
+## 2.4.2 - 26/04/23
+- **[docs]** update docs
+- **[ddi2lunatic][post-processing]** : fix to generate questionnaire with begin questions
+
+## 2.4.1 - 07/11/22
+- **[ddi2lunaticXML][core]** Fix to correctly resolve the variable name which generates a loop (for shapeFrom attribute in Lunatic)
+
 ## 2.4.0 - 19/10/22
 - **[ddi2lunaticXML][core]** switch to Lunatic-model v2.3.1 to lunatic V2 refactoring
 

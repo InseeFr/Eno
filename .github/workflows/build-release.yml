@@ -3,7 +3,7 @@ name: Eno CI
 on:
   push:
     tags:
-      - "*.*.*"
+      - v2.*
 
 jobs:
   build-release:
