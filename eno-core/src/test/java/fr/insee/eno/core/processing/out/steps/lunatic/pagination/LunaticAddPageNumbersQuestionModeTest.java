@@ -1,6 +1,5 @@
-package fr.insee.eno.core.processing.out.steps.lunatic;
+package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 
-import fr.insee.eno.core.processing.out.steps.lunatic.pagination.LunaticAddPageNumbersQuestionMode;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
