@@ -34,7 +34,7 @@ dependencies {
 	// Spring Web
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	// Open API // https://springdoc.org/v2/#spring-webflux-support
-	implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.0.0'
+	implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.1.0'
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
