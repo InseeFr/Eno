@@ -3,7 +3,9 @@ name: Test on push or PR
 on:
   push:
     branches-ignore:
-      - 'v3**'
+      - 'v3-main'
+      - 'v3-develop'
+      - '**/v3-**'
     paths-ignore:
       - 'docs/**'
       - 'doc/**'
@@ -11,7 +13,9 @@ on:
     types:
       - opened
     branches-ignore:
-      - 'v3**'
+      - 'v3-main'
+      - 'v3-develop'
+      - '**/v3-**'
 
 jobs:
   build:
