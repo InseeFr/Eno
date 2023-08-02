@@ -1,6 +1,5 @@
 package fr.insee.eno.core.utils;
 
-import fr.insee.eno.core.model.EnoObject;
 import reusable33.AbstractIdentifiableType;
 import reusable33.IDType;
 import reusable33.ReferenceType;
@@ -17,7 +16,4 @@ public class DDITestUtils {
         ddiReferenceObject.getIDArray(0).setStringValue(id);
     }
 
-    public static void foo(EnoObject enoObject) {
-        System.out.println(enoObject);
-    }
 }
