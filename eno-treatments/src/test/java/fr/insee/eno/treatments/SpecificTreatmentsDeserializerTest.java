@@ -14,6 +14,7 @@ class SpecificTreatmentsDeserializerTest {
 
     private final ClassLoader classLoader = this.getClass().getClassLoader();
 
+    // FIXME: test fails after bump json-schema-validator from 1.0.78 to 1.0.86
     @Test
     void deserializeSuggesterTest() {
         InputStream treatmentsInputStream = classLoader.getResourceAsStream("specific-treatments.json");
@@ -57,6 +58,7 @@ class SpecificTreatmentsDeserializerTest {
 
     }
 
+    // FIXME: test fails after bump json-schema-validator from 1.0.78 to 1.0.86
     @Test
     void deserializeRegroupementsTest() {
         InputStream treatmentsInputStream = classLoader.getResourceAsStream("specific-treatments.json");
