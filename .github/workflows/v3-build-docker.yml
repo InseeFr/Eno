@@ -28,10 +28,8 @@ jobs:
           ref: ${{ github.ref }}
           path: Eno
 
-      - name: Enable wrapper
-        run: | 
-          chmod +x gradlew # (make gradle wrapper executable)
-          ./gradlew # (load the gradle wrapper, required for the get version step)
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
 
       - name: Get Eno Version
         id: version-step

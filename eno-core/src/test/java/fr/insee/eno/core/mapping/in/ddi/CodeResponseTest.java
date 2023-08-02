@@ -1,4 +1,4 @@
-package fr.insee.eno.core.mappers.ddi;
+package fr.insee.eno.core.mapping.in.ddi;
 
 import datacollection33.CodeDomainType;
 import datacollection33.GridDimensionType;
