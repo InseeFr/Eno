@@ -9,6 +9,7 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.DDIIndex;
 import fr.insee.eno.core.reference.EnoIndex;
+import fr.insee.eno.core.utils.DDIUtils;
 import fr.insee.eno.core.utils.EnoSpelEngine;
 import instance33.DDIInstanceDocument;
 import instance33.DDIInstanceType;
@@ -44,7 +45,7 @@ public class DDIMapper extends Mapper {
     }
 
     private void setup(AbstractIdentifiableType ddiObject, EnoObject enoObject) {
-        log.debug("DDI mapping entry object: " + ddiToString(ddiObject));
+        log.debug("DDI mapping entry object: " + DDIUtils.ddiToString(ddiObject));
         //
         indexDDIObject(ddiObject);
         // Init the context and put the DDI index
@@ -83,7 +84,7 @@ public class DDIMapper extends Mapper {
 
     private void recursiveMapping(Object ddiObject, EnoObject enoObject) {
 
-        log.debug("Start mapping for "+ ddiToString(ddiObject)
+        log.debug("Start mapping for "+ DDIUtils.ddiToString(ddiObject)
                 +" with model context type '"+enoObject.getClass().getSimpleName()+"'");
 
         // Use Spring BeanWrapper to iterate on property descriptors of the model object
@@ -151,18 +152,17 @@ public class DDIMapper extends Mapper {
     }
 
     private void simpleTypeMapping(Object ddiObject, Class<?> modelContextType, BeanWrapper beanWrapper, String propertyName, Expression expression) {
-        // Simply set the value in the field
+        // Read DDI value by evaluating mapping expression
         Object ddiValue = spelEngine.evaluate(expression, ddiObject, modelContextType, propertyName);
-        if (ddiValue != null) {
-            beanWrapper.setPropertyValue(propertyName, ddiValue);
-            log.debug("Value '"+ beanWrapper.getPropertyValue(propertyName)+"' set "
-                    + propertyDescription(propertyName, modelContextType.getSimpleName()));
-        }
         // It is allowed to have null values (a DDI property can be present or not depending on the case)
-        else {
+        if (ddiValue == null) {
             log.debug("null value got from evaluating DDI annotation expression "
                     + propertyDescription(propertyName, modelContextType.getSimpleName()));
         }
+        // Simply set the value in the field
+        beanWrapper.setPropertyValue(propertyName, ddiValue);
+        log.debug("Value '"+ beanWrapper.getPropertyValue(propertyName)+"' set "
+                + propertyDescription(propertyName, modelContextType.getSimpleName()));
     }
 
     private void complexTypeMapping(Object ddiObject, Class<?> modelContextType, BeanWrapper beanWrapper, String propertyName, Expression expression, Class<?> classType) {
@@ -206,8 +206,7 @@ public class DDIMapper extends Mapper {
         // Get the Eno model collection
         Collection<Object> modelCollection = readCollection(propertyDescriptor, enoObject);
         // Get the content type of the model collection
-        Class<?> modelTargetType = typeDescriptor.getResolvableType()
-                .getGeneric(0).getRawClass();
+        Class<?> modelTargetType = typeDescriptor.getResolvableType().getGeneric(0).getRawClass();
         assert modelTargetType != null;
         // Collection of simple types
         if (isSimpleType(modelTargetType)) {
@@ -255,13 +254,6 @@ public class DDIMapper extends Mapper {
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             throw new MappingException("Unable to create instance for class " + classType, e);
         }
-    }
-
-    private static String ddiToString(@NonNull Object ddiObject) {
-        return ddiObject.getClass().getSimpleName()
-                +((ddiObject instanceof AbstractIdentifiableType ddiIdentifiableObject) ?
-                "[id="+ddiIdentifiableObject.getIDArray(0).getStringValue()+"]" :
-                "");
     }
 
     private static String propertyDescription(String propertyName, String className) {

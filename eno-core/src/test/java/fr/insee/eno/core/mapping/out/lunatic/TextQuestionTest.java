@@ -1,6 +1,6 @@
-package fr.insee.eno.core.mappers.lunatic;
+package fr.insee.eno.core.mapping.out.lunatic;
 
-import fr.insee.eno.core.mappers.MapperTestUtils;
+import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.TextQuestion;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
@@ -13,8 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TextQuestionTest {
 
-    private final MapperTestUtils testUtils = new MapperTestUtils();
-
     @Test
     void shortText_lunaticComponentType() {
         // With the current implementation, this can only be tested starting at the questionnaire level.
@@ -24,7 +22,8 @@ class TextQuestionTest {
         enoQuestionnaire.getSingleResponseQuestions().add(enoTextQuestion);
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         //
-        testUtils.mapLunaticProperty(enoQuestionnaire, lunaticQuestionnaire, "singleResponseQuestions");
+        LunaticMapper lunaticMapper = new LunaticMapper();
+        lunaticMapper.mapEnoObject(enoQuestionnaire, lunaticQuestionnaire);
         //
         assertEquals(ComponentTypeEnum.INPUT, lunaticQuestionnaire.getComponents().get(0).getComponentType());
     }
@@ -38,7 +37,8 @@ class TextQuestionTest {
         enoQuestionnaire.getSingleResponseQuestions().add(enoTextQuestion);
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         //
-        testUtils.mapLunaticProperty(enoQuestionnaire, lunaticQuestionnaire, "singleResponseQuestions");
+        LunaticMapper lunaticMapper = new LunaticMapper();
+        lunaticMapper.mapEnoObject(enoQuestionnaire, lunaticQuestionnaire);
         //
         assertEquals(ComponentTypeEnum.TEXTAREA, lunaticQuestionnaire.getComponents().get(0).getComponentType());
     }

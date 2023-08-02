@@ -3,12 +3,11 @@ package fr.insee.eno.core.sandbox;
 import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.calculated.CalculatedExpression;
-import fr.insee.eno.core.model.variable.CalculatedVariable;
 import fr.insee.eno.core.model.variable.CollectedVariable;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.reference.DDIIndex;
+import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.PairwiseLinks;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import org.junit.jupiter.api.Test;
@@ -25,44 +24,38 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/** Sandbox tests on SpEL. */
 public class SpelTests {
 
     @Test
     public void useSpelToSetValue() {
-        // Given a Eno questionnaire
+        // Given: a Eno questionnaire with id, and an Lunatic questionnaire with no id
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         enoQuestionnaire.setId("hello");
-
-        // Put the Eno questionnaire id in a Lunatic questionnaire using Spring expression language
-        Object value = enoQuestionnaire.getId();
         Questionnaire lunaticQuestionnaire = new Questionnaire();
-
+        // When: Put the Eno questionnaire id in a Lunatic questionnaire using Spring expression language
+        Object value = enoQuestionnaire.getId();
         EvaluationContext context = new StandardEvaluationContext();
         context.setVariable("param", value);
-
-        (new SpelExpressionParser().parseExpression("setId(#param)")).getValue(context, lunaticQuestionnaire);
-
-        //
+        (new SpelExpressionParser().parseExpression("setId(#param)"))
+                .getValue(context, lunaticQuestionnaire);
+        // Then: the Lunatic questionnaire should have the id
         assertEquals("hello", lunaticQuestionnaire.getId());
     }
 
     @Test
-    public void spelInlineVariable() {
-        String fooString = new SpelExpressionParser().parseExpression("true ? 'hello' : 'goodbye'").getValue(String.class);
+    public void ternaryOperator() {
+        String fooString = new SpelExpressionParser().parseExpression("true ? 'hello' : 'goodbye'")
+                .getValue(String.class);
         assertEquals("hello", fooString);
     }
 
     @Test
-    public void startWithSafeNavigationOperator() {
-        //
-        CalculatedVariable variable = new CalculatedVariable();
-        CalculatedExpression expression = variable.getExpression();
-        //
-        assertThrows(NullPointerException.class, () -> expression.getBindingReferences());
-        assertDoesNotThrow(() -> {
-            SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
-            spelExpressionParser.parseExpression("#this?.getBindingReferences()?.clear()").getValue(expression);
-        });
+    public void safeNavigationOperator() {
+        SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
+        Object result = spelExpressionParser.parseExpression("#this?.getBindingReferences()?.clear()")
+                .getValue((Object) null);
+        assertNull(result);
     }
 
     @Test
@@ -79,102 +72,32 @@ public class SpelTests {
         assertEquals("bar", variable.getName());
     }
 
+    /** Idea: convert a list of something (e.g. Variable) into a list of something else (e.g. String) */
     @Test
-    public void modifyListContentWithSpel() {
-        // Idea : convert a list of something (e.g. Variable) into a list of something else (e.g. String)
-        //
+    public void spelProjectionOperator() {
+        // Given: a list of variables
         Variable v1 = new CollectedVariable();
         v1.setName("foo");
         Variable v2 = new CollectedVariable();
         v2.setName("bar");
-        List<Variable> variableList = new ArrayList<>();
-        variableList.add(v1);
-        variableList.add(v2);
-        // desired output
-        List<String> stringList1 = variableList.stream().map(Variable::getName).toList();
-        // do it with spel
-        String stringExpression = "![getName()]";
+        List<Variable> variableList = List.of(v1, v2);
+        // When: use SpEL projection operator
         @SuppressWarnings("unchecked")
-        List<String> stringList = new SpelExpressionParser().parseExpression(stringExpression)
+        List<String> result = new SpelExpressionParser().parseExpression("![getName()]")
                 .getValue(variableList, List.class);
-        //
-        assertNotNull(stringList);
-        assertEquals(stringList1, stringList);
+        // Then: check the result is as expected
+        List<String> expected = variableList.stream().map(Variable::getName).toList();
+        assertNotNull(result);
+        assertEquals(expected, result);
     }
 
     @Test
     public void callMethodOnProjection() {
         List<String> stringList = List.of("a", "b", "c");
-        assertTrue(stringList.contains("c"));
-        assertTrue(new SpelExpressionParser().parseExpression("#root.?[#this == 'c'].size() > 0").getValue(stringList, Boolean.class));
-    }
-
-    @Test
-    public void usingIndexOnListWithSpel() {
-        // Idea : convert a list of something (e.g. Variable) into a list of something else (e.g. String)
-        //
-        Variable v1 = new CollectedVariable();
-        v1.setName("foo");
-        Variable v2 = new CollectedVariable();
-        v2.setName("bar");
-        //
-        Map<String, Variable> indexMap = new HashMap<>();
-        indexMap.put("id1", v1);
-        indexMap.put("id2", v2);
-        //
-        Variable variableReference1 = new CollectedVariable();
-        variableReference1.setName("id1");
-        Variable variableReference2 = new CollectedVariable();
-        variableReference2.setName("id2");
-        List<Variable> referenceList = new ArrayList<>();
-        referenceList.add(variableReference1);
-        referenceList.add(variableReference2);
-        //
-        List<Variable> expected = referenceList.stream().map(referenceVariable -> indexMap.get(referenceVariable.getName())).toList();
-        //
-        EvaluationContext context = new StandardEvaluationContext();
-        context.setVariable("index", indexMap);
-        String stringExpression = "![#index.get(#this.getName())]";
-        @SuppressWarnings("unchecked")
-        List<Variable> result = new SpelExpressionParser().parseExpression(stringExpression)
-                .getValue(context, referenceList, List.class);
-        //
+        Boolean result = new SpelExpressionParser().parseExpression("#root.?[#this == 'c'].size() > 0")
+                .getValue(stringList, Boolean.class);
         assertNotNull(result);
-        assertEquals(expected, result);
-    }
-
-    //@Test
-    public void getDDIIndexUsingSpel() throws IOException, DDIParsingException {
-        //
-        DDIIndex ddiIndex = new DDIIndex();
-        ddiIndex.indexDDI(DDIParser.parse(
-                this.getClass().getClassLoader().getResource("l10xmg2l.xml")));
-        //
-        Expression expression = new SpelExpressionParser()
-                .parseExpression("#index.get(\"kzwoti00\")");
-        EvaluationContext context = new StandardEvaluationContext();
-        context.setVariable("index", ddiIndex);
-        //
-        logicalproduct33.VariableType ddiVariable = expression.getValue(context, logicalproduct33.VariableType.class);
-        assertNotNull(ddiVariable);
-        assertEquals("COCHECASE",
-                ddiVariable.getVariableNameArray(0).getStringArray(0).getStringValue());
-    }
-
-    @Test
-    public void useStaticMethodInLunaticMapper() {
-        //
-        PairwiseLinks lunaticPairwiseLinks = new PairwiseLinks();
-        String fooString = "FOO";
-        //
-        Expression expression = new SpelExpressionParser().parseExpression(
-                "T(fr.insee.eno.core.model.question.PairwiseQuestion).computeLunaticAxes(#this, #param)");
-        EvaluationContext context = new StandardEvaluationContext();
-        context.setVariable("param", fooString);
-        expression.getValue(context, lunaticPairwiseLinks);
-        //
-        assertEquals("count(FOO)", lunaticPairwiseLinks.getXAxisIterations().getValue());
-        assertEquals(Constant.LUNATIC_LABEL_VTL_MD, lunaticPairwiseLinks.getXAxisIterations().getType());
+        assertTrue(result);
     }
 
 }

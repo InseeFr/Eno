@@ -1,4 +1,4 @@
-package fr.insee.eno.core.mappers.lunatic;
+package fr.insee.eno.core.mapping.out.lunatic;
 
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.question.TableQuestion;

@@ -1,4 +1,4 @@
-package fr.insee.eno.core.processing.out.steps.lunatic;
+package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 
 import fr.insee.lunatic.model.flat.*;
 
