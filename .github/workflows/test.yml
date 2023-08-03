@@ -1,7 +1,6 @@
 name: Test on push or PR
 
 on:
-  workflow_dispatch:
   push:
     branches-ignore:
       - 'v3-main'
