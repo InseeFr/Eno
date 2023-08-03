@@ -56,14 +56,14 @@
 		<saxon.version>12.3</saxon.version>
 		<fop.version>2.7</fop.version>
 		<xalan.version>2.7.3</xalan.version>
-		<slf4j.version>1.7.36</slf4j.version>
+		<slf4j.version>2.0.7</slf4j.version>
 		<eclipse.version>2.6.0</eclipse.version>
 		<jaxb-api.version>2.3.1</jaxb-api.version>
 
 		<apache-commons.version>3.5</apache-commons.version>
 		<junit.version>5.10.0</junit.version>
 		<xmlunit.version>2.9.0</xmlunit.version>
-		<log4j-slf4j.version>2.20.0</log4j-slf4j.version>
+		<log4j-slf4j2.version>2.20.0</log4j-slf4j2.version>
 
 
 		<source.plugin.version>3.2.1</source.plugin.version>
@@ -112,7 +112,7 @@
 			<version>${fop.version}</version>
 		</dependency>
 
-		<!-- LOG4j and SL4J dependancies -->
+		<!-- Logging dependencies -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -140,8 +140,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>${log4j-slf4j.version}</version>
+			<artifactId>log4j-slf4j2-impl</artifactId>
+			<version>${log4j-slf4j2.version}</version>
 			<scope>test</scope>
 		</dependency>
 
