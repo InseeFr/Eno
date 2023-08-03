@@ -1,19 +1,17 @@
 name: Eno V2 test
 
 on:
-  push:
-    branches-ignore:
-      - 'main' # Realse workflow on main already runs the tests
-    paths-ignore:
-      - 'docs/**'
-      - 'doc/**'
   pull_request:
     types:
       - opened
+    paths-ignore:
+      - 'docs/**'
+      - 'doc/**'
 
 jobs:
 
   test:
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
