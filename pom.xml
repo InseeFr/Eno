@@ -57,7 +57,7 @@
 		<fop.version>2.7</fop.version>
 		<xalan.version>2.7.3</xalan.version>
 		<slf4j.version>2.0.7</slf4j.version>
-		<eclipse.version>4.0.2</eclipse.version>
+		<eclipse.version>2.7.13</eclipse.version>
 		<jaxb-api.version>2.3.1</jaxb-api.version>
 
 		<apache-commons.version>3.5</apache-commons.version>
