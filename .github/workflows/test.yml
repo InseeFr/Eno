@@ -3,7 +3,7 @@ name: Eno V2 test
 on:
   push:
     branches-ignore:
-      - 'main' # Realse workflow on main already run the tests
+      - 'main' # Realse workflow on main already runs the tests
     paths-ignore:
       - 'docs/**'
       - 'doc/**'
