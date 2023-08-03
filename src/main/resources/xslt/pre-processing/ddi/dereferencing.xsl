@@ -67,6 +67,8 @@
         <dereferencing:reference-name name="r:TargetParameterReference"/>
         <dereferencing:reference-name name="r:BasedOnReference"/>
         <dereferencing:reference-name name="r:ExternalURLReference"/>
+        <dereferencing:reference-name name="d:InputQuestionReference"/>
+        <dereferencing:reference-name name="d:InputVariableReference"/>
         <!-- Celle-ci, je doute -->
         <dereferencing:reference-name name="r:ProcessingInstructionReference"/>
     </xsl:variable>
