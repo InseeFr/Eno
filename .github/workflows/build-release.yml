@@ -1,47 +1,77 @@
-name: Eno CI
+name: Eno V2 release
 
 on:
   push:
-    tags:
-      - v2.*
+    branches:
+      - 'main'
+    paths-ignore:
+      - 'docs/**'
+      - 'doc/**'
 
 jobs:
-  build-release:
-    runs-on: ubuntu-latest
 
+  test:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
       - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '11'
+      - name: Build Eno with Maven
+        run: mvn clean process-classes package install --no-transfer-progress -DskipTests=true -Dmaven.javadoc.skip=true -Djar.finalName="eno-core" -B -V --file pom.xml
+      - name: Run test with Maven
+        run: mvn test
 
-      - name: Build with Maven
-        run: mvn clean process-classes package install -DskipTests=true -Dmaven.javadoc.skip=true -Djar.finalName="eno-core" -B -V --file pom.xml
+  check-version:
+    needs: test
+    runs-on: ubuntu-latest
+    outputs:
+      release-version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v3
 
-      - name: Test with Maven
-        run: mvn test -B --file pom.xml
+      - name: Get version
+        id: version
+        run: echo "version=$(mvn -f pom.xml help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+      - name: Print version
+        run: echo ${{ steps.version.outputs.version }}
+
+      - name: Check tag existence
+        id: check-tag-exists
+        uses: mukunku/tag-exists-action@v1.2.0
+        with:
+          tag: "v${{ steps.version.outputs.version }}"
+
+      - name: Tag verification
+        id: check-tag
+        run: |
+          if ! [[ "${{ steps.version.outputs.version }}" =~ ^2.[0-9]+.[0-9]+$ ]]; then
+            echo "Version on main ${{ steps.version.outputs.version }} branch does not match the format 2.Y.Z"
+            exit 1
+          fi
+
+          if [[ "${{ steps.check-tag-exists.outputs.exists }}" == "true" ]]; then
+            echo "Nothing to tag/release, the tag ${{ steps.version.outputs.version }} already exists"
+            exit 1
+          fi
+
+  tag-release:
+    needs: check-version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # Todo: add automated changelog step (based conventionnal commit using requarks/changelog-action)
+
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: "v${{ needs.check-version.outputs.release-version }}"
+          target_commitish: ${{ github.head_ref || github.ref }}
+          name: "v${{ needs.check-version.outputs.release-version }}"
+          #body: see todo
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: "Release ${{ github.ref }}"
-          draft: false
-          prerelease: false
-
-      - name: Upload Release Asset
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: target/eno-core.jar
-          asset_name: eno-core.jar
-          asset_content_type: application/java-archive
