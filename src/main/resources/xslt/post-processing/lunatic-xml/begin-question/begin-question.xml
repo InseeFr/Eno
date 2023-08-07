@@ -3,7 +3,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     
     <components xsi:type="Sequence" componentType="Sequence" id="BEGIN-QUESTION-SEQ">
-        <label>"Identification"</label>      
+        <label>
+            <value>"Identification"</value>
+            <type>VTL|MD</type>
+        </label>    
         <conditionFilter>
             <value>true</value>
             <type>VTL</type>
