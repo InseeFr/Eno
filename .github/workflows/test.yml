@@ -1,6 +1,9 @@
 name: Eno V2 test
 
 on:
+  push:
+    branches:
+      - 'develop'
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
     paths-ignore:
