@@ -33,7 +33,9 @@ jobs:
 
       - name: Get Eno Version
         id: version-step
-        run: echo "eno-version=$(./gradlew printVersion --console=plain -q)" >> $GITHUB_OUTPUT
+        run: |
+          ./gradlew # (load the gradle wrapper, required for the get version step)
+          echo "eno-version=$(./gradlew printVersion --console=plain -q)" >> $GITHUB_OUTPUT
         
       - name: Print Eno Version
         run: echo ${{ steps.version-step.outputs.eno-version }}
