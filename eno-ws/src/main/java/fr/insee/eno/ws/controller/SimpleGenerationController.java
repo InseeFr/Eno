@@ -101,7 +101,7 @@ public class SimpleGenerationController {
                     schema = @Schema(type="string", format="binary"))
             @RequestPart(value="specificTreatment", required = false) Mono<Part> specificTreatment,
             @PathVariable EnoParameters.Context context,
-            @PathVariable EnoParameters.ModeParameter modeParameter) {
+            @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter) {
 
         /*
            specificTreatment parameter is a part instead of a FilePart. This workaround is used to make swagger work
