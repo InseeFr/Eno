@@ -1,7 +1,6 @@
 package fr.insee.eno.core.processing.common.steps;
 
 import fr.insee.eno.core.model.EnoComponent;
-import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.question.Question;
@@ -9,24 +8,30 @@ import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.model.sequence.Subsequence;
-import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.QuestionNumberingMode;
 import fr.insee.eno.core.processing.ProcessingStep;
-import lombok.AllArgsConstructor;
+import fr.insee.eno.core.utils.VtlSyntaxUtils;
 
 import java.util.List;
 
-@AllArgsConstructor
-public class EnoAddNumberingInQuestions implements ProcessingStep<EnoQuestionnaire> {
+public class EnoAddPrefixInQuestionLabels implements ProcessingStep<EnoQuestionnaire> {
 
-    public static final String QUESTION_NUMBERING_SEPARATOR = ".";
+    private static final String QUESTION_ARROW_CHAR = "➡";
+    private static final String QUESTION_NUMBERING_SEPARATOR = ".";
 
-    private final EnoParameters.QuestionNumberingMode mode;
+    private final boolean arrowCharInQuestions;
+    private final QuestionNumberingMode questionNumberingMode;
+
+    public EnoAddPrefixInQuestionLabels(boolean arrowCharInQuestions, QuestionNumberingMode questionNumberingMode) {
+        this.arrowCharInQuestions = arrowCharInQuestions;
+        this.questionNumberingMode = questionNumberingMode;
+    }
 
     public void apply(EnoQuestionnaire enoQuestionnaire) {
         //
         assert enoQuestionnaire.getIndex() != null;
         //
-        if (mode == EnoParameters.QuestionNumberingMode.NONE) {
+        if (questionNumberingMode == QuestionNumberingMode.NONE) {
             return;
         }
         //
@@ -36,15 +41,15 @@ public class EnoAddNumberingInQuestions implements ProcessingStep<EnoQuestionnai
                 EnoComponent component = (EnoComponent) enoQuestionnaire.get(componentId);
                 if (component instanceof Subsequence subsequence) {
                     for (String questionId : getSequenceComponentIds(subsequence)) {
-                        addNumberInQuestionLabel(enoQuestionnaire, questionNumber, questionId);
+                        addPrefixInQuestionLabel(enoQuestionnaire, questionId, questionNumber);
                         questionNumber ++;
                     }
                 } else {
-                    addNumberInQuestionLabel(enoQuestionnaire, questionNumber, componentId);
+                    addPrefixInQuestionLabel(enoQuestionnaire, componentId, questionNumber);
                     questionNumber ++;
                 }
             }
-            if (mode == EnoParameters.QuestionNumberingMode.SEQUENCE) {
+            if (questionNumberingMode == QuestionNumberingMode.SEQUENCE) {
                 questionNumber = 1;
             }
         }
@@ -55,18 +60,22 @@ public class EnoAddNumberingInQuestions implements ProcessingStep<EnoQuestionnai
      * @param sequence Sequence or subsequence object.
      * @return The ordered list of component ids within the sequence or subsequence.
      */
-    private static List<String> getSequenceComponentIds(AbstractSequence sequence) {
+    private List<String> getSequenceComponentIds(AbstractSequence sequence) {
         return sequence.getSequenceStructure().stream().map(StructureItemReference::getId).toList();
     }
 
-    private static void addNumberInQuestionLabel(EnoQuestionnaire enoQuestionnaire, int questionNumber, String questionId) {
+    private void addPrefixInQuestionLabel(EnoQuestionnaire enoQuestionnaire, String questionId, int questionNumber) {
         Question question = (Question) enoQuestionnaire.get(questionId);
         DynamicLabel questionLabel = question.getLabel();
-        questionLabel.setValue(addNumberInLabel(questionNumber, questionLabel));
+        questionLabel.setValue(addPrefixInLabel(questionLabel, questionNumber));
     }
 
-    private static String addNumberInLabel(int questionNumber, DynamicLabel questionLabel) {
-        return questionNumber + QUESTION_NUMBERING_SEPARATOR + " " + questionLabel.getValue();
+    private String addPrefixInLabel(DynamicLabel questionLabel, int questionNumber) {
+        StringBuilder prefix = new StringBuilder();
+        if (arrowCharInQuestions)
+            prefix.append(QUESTION_ARROW_CHAR).append(" ");
+        prefix.append(questionNumber).append(QUESTION_NUMBERING_SEPARATOR).append(" ");
+        return VtlSyntaxUtils.concatenateStrings(prefix.toString(), questionLabel.getValue());
     }
 
 }
