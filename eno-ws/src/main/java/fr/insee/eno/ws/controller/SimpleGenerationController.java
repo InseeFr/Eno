@@ -72,22 +72,6 @@ public class SimpleGenerationController {
     }
 
     @Operation(
-            summary = "Generation of Lunatic xml questionnaire according to the context.",
-            description = "Generate a Lunatic xml questionnaire from a DDI questionnaire " +
-                    "using the default Lunatic parameters in function of context. " +
-                    "To see these parameters, you can use the endpoint: `/parameter/{context}/LUNATIC_XML/default`")
-    @PostMapping(value = "{context}/lunatic-xml/{mode}",
-            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @SuppressWarnings("unused")
-    public Mono<Void> generateLunaticXmlQuestionnaire(
-            @RequestPart(value="in") Mono<FilePart> ddiFile,
-            @PathVariable EnoParameters.Context context,
-            @PathVariable Mode mode,
-            ServerHttpRequest request, ServerHttpResponse response) {
-        return passePlat.passePlatPost(request, response);
-    }
-
-    @Operation(
             summary = "[V3] Generation of Lunatic json flat questionnaire according to the context.",
             description = "**This endpoint uses Eno V3.** " +
                     "Generate a Lunatic json flat questionnaire from a DDI questionnaire " +
