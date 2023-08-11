@@ -12,15 +12,13 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static fr.insee.eno.core.model.mode.Mode.*;
-
 @Getter
 @Setter
 @Slf4j
 public class EnoParameters {
 
     public enum Context {HOUSEHOLD, BUSINESS, DEFAULT}
-    public enum ModeParameter {CAPI, CATI, CAWI, PAPI, PROCESS, DEFAULT}
+    public enum ModeParameter {CAPI, CATI, CAWI, PAPI, PROCESS}
     public enum Language {FR, EN, IT, ES, DE}
     public enum QuestionNumberingMode {NONE, SEQUENCE, ALL}
     public enum LunaticPaginationMode {NONE, SEQUENCE, QUESTION}
@@ -66,10 +64,48 @@ public class EnoParameters {
 
     public static EnoParameters of(Context context, Format outFormat) {
         log.info("Parameters with context {} and out format {}", context, outFormat);
-        // TODO: values in function of context & out format
         EnoParameters enoParameters = new EnoParameters();
         enoParameters.setDefaultValues();
         enoParameters.setContext(context);
+        return enoParameters;
+    }
+
+    public static EnoParameters of(Context context, Format outFormat, ModeParameter modeParameter) {
+        log.info("Parameters with context {}, out format {}, mode {}", context, outFormat, modeParameter);
+        EnoParameters enoParameters = new EnoParameters();
+        //
+        if (! Format.LUNATIC.equals(outFormat))
+            throw new UnsupportedOperationException("Only Lunatic out format is supported for now.");
+        //
+        enoParameters.setContext(context);
+        switch (modeParameter) {
+            case CAPI -> enoParameters.setSelectedModes(List.of(Mode.CAPI));
+            case CATI -> enoParameters.setSelectedModes(List.of(Mode.CATI));
+            case CAWI -> enoParameters.setSelectedModes(List.of(Mode.CAWI));
+            case PAPI -> throw new IllegalArgumentException("Mode 'PAPI' is not compatible with Lunatic format.");
+            case PROCESS -> enoParameters.setSelectedModes(List.of(Mode.CAPI, Mode.CATI, Mode.CAWI));
+        }
+        //
+        enoParameters.setIdentificationQuestion(Context.BUSINESS.equals(context));
+        enoParameters.setResponseTimeQuestion(Context.BUSINESS.equals(context));
+        enoParameters.setCommentSection(Context.HOUSEHOLD.equals(context) || Context.BUSINESS.equals(context));
+        enoParameters.setQuestionNumberingMode(
+                Context.HOUSEHOLD.equals(context) ? QuestionNumberingMode.ALL : QuestionNumberingMode.SEQUENCE);
+        enoParameters.sequenceNumbering = true;
+        enoParameters.arrowCharInQuestions = true;
+        //
+        boolean isInterview = ModeParameter.CAPI.equals(modeParameter) || ModeParameter.CATI.equals(modeParameter);
+        boolean isWeb = ModeParameter.CAWI.equals(modeParameter);
+        boolean isProcess = ModeParameter.PROCESS.equals(modeParameter);
+        enoParameters.setControls(isWeb || isProcess);
+        enoParameters.setToolTip(isWeb || isProcess);
+        enoParameters.setFilterDescription(isProcess);
+        enoParameters.setFilterResult(isWeb);
+        enoParameters.setMissingVariables(isInterview);
+        enoParameters.setLunaticPaginationMode(
+                isInterview || isWeb ? LunaticPaginationMode.QUESTION : LunaticPaginationMode.NONE);
+        enoParameters.setUnusedVariables(false); // maybe !isProcess later on
+        //
         return enoParameters;
     }
 
@@ -81,7 +117,7 @@ public class EnoParameters {
         sequenceNumbering = true;
         questionNumberingMode = QuestionNumberingMode.SEQUENCE;
         arrowCharInQuestions = true;
-        selectedModes = new ArrayList<>(List.of(CAPI, CATI, CAWI, PAPI));
+        selectedModes = new ArrayList<>(List.of(Mode.CAPI, Mode.CATI, Mode.CAWI, Mode.PAPI));
         // Lunatic
         controls = true;
         missingVariables = false;

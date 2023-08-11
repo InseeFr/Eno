@@ -101,7 +101,7 @@ public class SimpleGenerationController {
                     schema = @Schema(type="string", format="binary"))
             @RequestPart(value="specificTreatment", required = false) Mono<Part> specificTreatment,
             @PathVariable EnoParameters.Context context,
-            @PathVariable Mode mode) {
+            @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter) {
 
         /*
            specificTreatment parameter is a part instead of a FilePart. This workaround is used to make swagger work
@@ -112,9 +112,7 @@ public class SimpleGenerationController {
          */
         Mono<LunaticPostProcessing> lunaticPostProcessing = controllerUtils.generateLunaticPostProcessings(specificTreatment);
         //
-        EnoParameters enoParameters = EnoParameters.of(context, Format.LUNATIC);
-        enoParameters.getSelectedModes().clear();
-        enoParameters.getSelectedModes().add(mode);
+        EnoParameters enoParameters = EnoParameters.of(context, Format.LUNATIC, modeParameter);
         //
         return controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessing);
     }
