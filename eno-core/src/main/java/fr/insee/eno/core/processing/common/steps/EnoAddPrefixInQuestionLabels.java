@@ -8,6 +8,7 @@ import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.model.sequence.Subsequence;
+import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.QuestionNumberingMode;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.utils.VtlSyntaxUtils;
@@ -21,10 +22,13 @@ public class EnoAddPrefixInQuestionLabels implements ProcessingStep<EnoQuestionn
 
     private final boolean arrowCharInQuestions;
     private final QuestionNumberingMode questionNumberingMode;
+    private final EnoParameters.ModeParameter modeParameter;
 
-    public EnoAddPrefixInQuestionLabels(boolean arrowCharInQuestions, QuestionNumberingMode questionNumberingMode) {
+    public EnoAddPrefixInQuestionLabels(boolean arrowCharInQuestions, QuestionNumberingMode questionNumberingMode,
+                                        EnoParameters.ModeParameter modeParameter) {
         this.arrowCharInQuestions = arrowCharInQuestions;
         this.questionNumberingMode = questionNumberingMode;
+        this.modeParameter = modeParameter;
     }
 
     public void apply(EnoQuestionnaire enoQuestionnaire) {
@@ -68,10 +72,18 @@ public class EnoAddPrefixInQuestionLabels implements ProcessingStep<EnoQuestionn
 
     private void addPrefixInQuestionLabel(Question question, int questionNumber) {
         DynamicLabel questionLabel = question.getLabel();
-        questionLabel.setValue(addPrefixInLabel(questionLabel, questionNumber));
+        questionLabel.setValue(addPrefixInLabel(questionLabel.getValue(), questionNumber));
     }
 
-    private String addPrefixInLabel(DynamicLabel questionLabel, int questionNumber) {
+    private String addPrefixInLabel(String questionLabelValue, int questionNumber) {
+        return switch (modeParameter) {
+            case CAPI, CATI, CAWI, PROCESS -> prefixingDynamicMode(questionLabelValue, questionNumber);
+            case PAPI -> prefixingStaticMode(questionLabelValue, questionNumber);
+        };
+    }
+
+    /** VTL prefixing using VTL string concatenation operator. */
+    private String prefixingDynamicMode(String questionLabelValue, int questionNumber) {
         StringBuilder prefix = new StringBuilder();
         prefix.append("\"");
         if (arrowCharInQuestions)
@@ -79,7 +91,18 @@ public class EnoAddPrefixInQuestionLabels implements ProcessingStep<EnoQuestionn
         if (questionNumberingMode != QuestionNumberingMode.NONE)
             prefix.append(questionNumber).append(QUESTION_NUMBERING_SEPARATOR).append(" ");
         prefix.append("\"");
-        return VtlSyntaxUtils.concatenateStrings(prefix.toString(), questionLabel.getValue());
+        return VtlSyntaxUtils.concatenateStrings(prefix.toString(), questionLabelValue);
+    }
+
+    /** Raw string prefixing for the paper format where there is no VTL.
+     * Also removes eventual quotes that might be in the label. */
+    private String prefixingStaticMode(String questionLabelValue, int questionNumber) {
+        StringBuilder prefix = new StringBuilder();
+        if (arrowCharInQuestions)
+            prefix.append(QUESTION_ARROW_CHAR).append(" ");
+        if (questionNumberingMode != QuestionNumberingMode.NONE)
+            prefix.append(questionNumber).append(QUESTION_NUMBERING_SEPARATOR).append(" ");
+        return prefix + questionLabelValue.replace("\"", "");
     }
 
 }

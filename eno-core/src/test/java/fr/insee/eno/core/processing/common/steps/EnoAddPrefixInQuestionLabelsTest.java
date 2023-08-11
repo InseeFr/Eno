@@ -5,6 +5,7 @@ import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.question.TextQuestion;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.EnoParameters.QuestionNumberingMode;
 import fr.insee.eno.core.reference.EnoIndex;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,7 +43,8 @@ class EnoAddPrefixInQuestionLabelsTest {
     @Test
     void noPrefix() {
         //
-        new EnoAddPrefixInQuestionLabels(false, QuestionNumberingMode.NONE).apply(enoQuestionnaire);
+        new EnoAddPrefixInQuestionLabels(false, QuestionNumberingMode.NONE, ModeParameter.CAWI)
+                .apply(enoQuestionnaire);
         //
         assertEquals("\"Question label\"",
                 enoQuestionnaire.getSingleResponseQuestions().get(0).getLabel().getValue());
@@ -51,7 +53,8 @@ class EnoAddPrefixInQuestionLabelsTest {
     @Test
     void arrowCharPrefix() {
         //
-        new EnoAddPrefixInQuestionLabels(true, QuestionNumberingMode.NONE).apply(enoQuestionnaire);
+        new EnoAddPrefixInQuestionLabels(true, QuestionNumberingMode.NONE, ModeParameter.CAWI)
+                .apply(enoQuestionnaire);
         //
         assertEquals("\"➡ \" || \"Question label\"",
                 enoQuestionnaire.getSingleResponseQuestions().get(0).getLabel().getValue());
@@ -60,7 +63,8 @@ class EnoAddPrefixInQuestionLabelsTest {
     @Test
     void numberingPrefix() {
         //
-        new EnoAddPrefixInQuestionLabels(false, QuestionNumberingMode.ALL).apply(enoQuestionnaire);
+        new EnoAddPrefixInQuestionLabels(false, QuestionNumberingMode.ALL, ModeParameter.CAWI)
+                .apply(enoQuestionnaire);
         //
         assertEquals("\"1. \" || \"Question label\"",
                 enoQuestionnaire.getSingleResponseQuestions().get(0).getLabel().getValue());
@@ -69,9 +73,20 @@ class EnoAddPrefixInQuestionLabelsTest {
     @Test
     void arrowCharAndNumberingPrefix() {
         //
-        new EnoAddPrefixInQuestionLabels(true, QuestionNumberingMode.ALL).apply(enoQuestionnaire);
+        new EnoAddPrefixInQuestionLabels(true, QuestionNumberingMode.ALL, ModeParameter.CAWI)
+                .apply(enoQuestionnaire);
         //
         assertEquals("\"➡ 1. \" || \"Question label\"",
+                enoQuestionnaire.getSingleResponseQuestions().get(0).getLabel().getValue());
+    }
+
+    @Test
+    void arrowCharAndNumberingPrefix_staticMode() {
+        //
+        new EnoAddPrefixInQuestionLabels(true, QuestionNumberingMode.ALL, ModeParameter.PAPI)
+                .apply(enoQuestionnaire);
+        //
+        assertEquals("➡ 1. Question label",
                 enoQuestionnaire.getSingleResponseQuestions().get(0).getLabel().getValue());
     }
 
