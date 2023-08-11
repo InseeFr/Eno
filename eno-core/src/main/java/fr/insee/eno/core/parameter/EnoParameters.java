@@ -46,7 +46,6 @@ public class EnoParameters {
     private boolean missingVariables;
     private boolean filterResult;
     private boolean filterDescription;
-    private boolean unusedVariables; // Not maintained in Eno v3 for now
     private LunaticPaginationMode lunaticPaginationMode;
 
     private EnoParameters() {}
@@ -91,7 +90,6 @@ public class EnoParameters {
         enoParameters.setMissingVariables(isInterview);
         enoParameters.setLunaticPaginationMode(
                 isInterview || isWeb ? LunaticPaginationMode.QUESTION : LunaticPaginationMode.NONE);
-        enoParameters.setUnusedVariables(false); // maybe !isProcess later on
         //
         return enoParameters;
     }

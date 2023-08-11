@@ -1,6 +1,5 @@
 package fr.insee.eno.ws.controller;
 
-import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.legacy.parameters.*;
@@ -133,8 +132,7 @@ public class GenerationController {
 			@RequestParam(value="QuestNum") BrowsingEnum questNum,
 			@RequestParam(value="SeqNum") boolean seqNum,
 			@RequestParam(value="PreQuestSymbol") boolean preQuestSymbol,
-			@RequestParam(value="Pagination", required=false, defaultValue="NONE") Pagination pagination,
-			@RequestParam(value="includeUnusedCalculatedVariables") boolean unusedVars) {
+			@RequestParam(value="Pagination", required=false, defaultValue="NONE") Pagination pagination) {
 
 		/*
            specificTreatment parameter is a part instead of a FilePart. This workaround is used to make swagger work
@@ -181,8 +179,6 @@ public class GenerationController {
 			}
 			case QUESTION -> parameters.setLunaticPaginationMode(EnoParameters.LunaticPaginationMode.QUESTION);
 		}
-		parameters.setUnusedVariables(unusedVars);
-		log.info("'Unused variables' feature is not implemented in Eno v3.");
 		//
 		return controllerUtils.ddiToLunaticJson(ddiFile, parameters, lunaticPostProcessings);
 	}
