@@ -9,6 +9,9 @@ import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.Questionnaire;
@@ -71,7 +74,7 @@ class LunaticSortComponentsTest {
             // Given
             EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
                     this.getClass().getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml"),
-                    EnoParameters.defaultValues());
+                    EnoParameters.of(Context.DEFAULT, Format.LUNATIC, ModeParameter.PROCESS));
             Questionnaire lunaticQuestionnaire = new Questionnaire();
             LunaticMapper lunaticMapper = new LunaticMapper();
             lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);

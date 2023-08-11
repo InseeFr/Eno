@@ -2,6 +2,8 @@ package fr.insee.eno.core.mapping.out.lunatic;
 
 import fr.insee.eno.core.DDIToLunatic;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
+import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.InputNumber;
 import fr.insee.lunatic.model.flat.Questionnaire;
@@ -18,7 +20,8 @@ class NumberQuestionTest {
     void integrationTest_unit() throws DDIParsingException {
         // Given + When
         Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-variables.xml"));
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-variables.xml"),
+                EnoParameters.of(EnoParameters.Context.DEFAULT, Format.LUNATIC, EnoParameters.ModeParameter.CAWI));
         // Then
         // gather components to look at
         List<InputNumber> inputNumbers = lunaticQuestionnaire.getComponents().stream()

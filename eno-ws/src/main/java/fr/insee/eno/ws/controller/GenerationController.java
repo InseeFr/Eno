@@ -120,7 +120,7 @@ public class GenerationController {
 			@Parameter(name = "specificTreatment",
 					schema = @Schema(type="string", format="binary"))
 			@RequestPart(value="specificTreatment", required=false) Mono<Part> specificTreatment,
-			@PathVariable Mode mode,
+			@PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter,
 			@RequestParam(value="context") EnoParameters.Context context,
 			@RequestParam(value="IdentificationQuestion", required=false) boolean identificationQuestion,
 			@RequestParam(value="ResponseTimeQuestion", required=false) boolean endQuestionResponseTime,
@@ -146,9 +146,8 @@ public class GenerationController {
 		Mono<LunaticPostProcessing> lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
 
 		//
-		EnoParameters parameters = EnoParameters.of(context, Format.LUNATIC);
-		parameters.getSelectedModes().clear();
-		parameters.getSelectedModes().add(mode);
+		EnoParameters parameters = EnoParameters.of(context, Format.LUNATIC, modeParameter);
+		//
 		parameters.setIdentificationQuestion(identificationQuestion);
 		parameters.setResponseTimeQuestion(endQuestionResponseTime);
 		parameters.setIdentificationQuestion(endQuestionCommentQuestion);

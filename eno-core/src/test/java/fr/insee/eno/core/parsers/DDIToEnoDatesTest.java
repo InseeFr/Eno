@@ -6,6 +6,9 @@ import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.DateQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.EnoIndex;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -13,7 +16,8 @@ import org.junit.jupiter.api.TestInstance;
 
 import java.io.InputStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class DDIToEnoDatesTest {
@@ -23,7 +27,8 @@ class DDIToEnoDatesTest {
     @BeforeAll
     void init() throws DDIParsingException {
         InputStream ddiStream = this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-dates.xml");
-        EnoQuestionnaire questionnaire = DDIToEno.transform(ddiStream, EnoParameters.defaultValues());
+        EnoQuestionnaire questionnaire = DDIToEno.transform(ddiStream,
+                EnoParameters.of(Context.DEFAULT, Format.LUNATIC, ModeParameter.PROCESS));
         index = questionnaire.getIndex();
     }
 

@@ -1,6 +1,9 @@
 package fr.insee.eno.ws.controller;
 
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.ws.controller.utils.V3ControllerUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,7 +35,8 @@ public class DDIToLunaticController {
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<ResponseEntity<String>> ddiToLunatic(
             @RequestPart("ddiFile") Mono<FilePart> ddiFile) {
-        return controllerUtils.ddiToLunaticJson(ddiFile, EnoParameters.defaultValues());
+        return controllerUtils.ddiToLunaticJson(ddiFile,
+                EnoParameters.of(Context.DEFAULT, Format.LUNATIC, ModeParameter.PROCESS));
     }
 
     @Operation(

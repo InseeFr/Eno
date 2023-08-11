@@ -26,19 +26,6 @@ public class V3ParameterController {
     }
 
     @Operation(
-            summary = "Get V3 all default parameters.",
-            description = "Return V3 parameters file containing all default values.")
-    @GetMapping(value = "default", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public Mono<ResponseEntity<String>> v3DefaultParameters() {
-        return parameterService.defaultParams()
-                .map(params -> ResponseEntity
-                        .ok()
-                        .cacheControl(CacheControl.noCache())
-                        .headers(HeadersUtils.with(PARAMETERS_V3_FILE_NAME))
-                        .body(params));
-    }
-
-    @Operation(
             summary = "Get V3 default parameters with context.",
             description = "Return default parameters file in function of context given, " +
                     "to be used in V3 endpoints that require a parameter file.")

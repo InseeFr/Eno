@@ -63,12 +63,24 @@ public class DDIResolveVariableReferencesInLabels implements ProcessingStep<EnoQ
      */
     private void resolveLabel(EnoLabel enoLabel) {
         String resolvedValue = enoLabel.getValue();
-        for (Variable variable : getReferencedVariables(enoLabel)) {
+        List<Variable> referencedVariables = getReferencedVariables(enoLabel);
+        if (referencedVariables.isEmpty())
+            resolvedValue = toValidStringExpression(resolvedValue);
+        for (Variable variable : referencedVariables) {
             resolvedValue = resolvedValue.replace(
                     VARIABLE_REFERENCE_MARKER + variable.getReference() + VARIABLE_REFERENCE_MARKER,
                     variable.getName());
         }
         enoLabel.setValue(resolvedValue);
+    }
+
+    /** For now, Pogues allows users to input invalid VTL expressions for static labels
+     * (i.e. to input a value without quotes), and Pogues does not add the missing quotes. */
+    private String toValidStringExpression(String staticLabel) {
+        // Remove eventual quote characters that might be in the middle of the label
+        staticLabel = staticLabel.replace("\"", "");
+        // Return the label value surrounded with quotes
+        return "\"" + staticLabel + "\"";
     }
 
     /**

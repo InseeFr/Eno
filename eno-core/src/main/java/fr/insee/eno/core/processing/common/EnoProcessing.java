@@ -28,9 +28,11 @@ public class EnoProcessing {
                 .thenIf(parameters.isResponseTimeQuestion(), new EnoAddResponseTimeSection())
                 .thenIf(parameters.isCommentSection(), new EnoAddCommentSection())
                 .then(new EnoModeSelection(parameters.getSelectedModes(), enoCatalog))
-                .thenIf(parameters.isSequenceNumbering(), new EnoAddNumberingInSequences())
-                .then(new EnoAddNumberingInQuestions(parameters.getQuestionNumberingMode()))
-                .thenIf(parameters.isArrowCharInQuestions(), new EnoAddArrowCharInQuestions(enoCatalog))
+                .thenIf(parameters.isSequenceNumbering(), new EnoAddNumberingInSequences(
+                        parameters.getModeParameter()))
+                .then(new EnoAddPrefixInQuestionLabels(
+                        parameters.isArrowCharInQuestions(), parameters.getQuestionNumberingMode(),
+                        parameters.getModeParameter()))
                 .then(new EnoInsertComponentFilters())
                 .then(new EnoResolveBindingReferences());
     }
