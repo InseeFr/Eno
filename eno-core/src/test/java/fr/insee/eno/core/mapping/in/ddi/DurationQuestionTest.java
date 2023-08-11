@@ -1,4 +1,4 @@
-package fr.insee.eno.core.parsers;
+package fr.insee.eno.core.mapping.in.ddi;
 
 import fr.insee.eno.core.DDIToEno;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
@@ -19,7 +19,7 @@ import java.io.InputStream;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class DDIToEnoDurationsTest {
+class DurationQuestionTest {
 
     private EnoIndex index;
 

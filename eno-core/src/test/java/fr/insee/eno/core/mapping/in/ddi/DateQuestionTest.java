@@ -1,4 +1,4 @@
-package fr.insee.eno.core.parsers;
+package fr.insee.eno.core.mapping.in.ddi;
 
 import fr.insee.eno.core.DDIToEno;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class DDIToEnoDatesTest {
+class DateQuestionTest {
 
     private EnoIndex index;
 
