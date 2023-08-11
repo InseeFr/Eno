@@ -2,6 +2,9 @@ package fr.insee.eno.core;
 
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Loop;
 import fr.insee.lunatic.model.flat.Questionnaire;
@@ -25,7 +28,7 @@ class DDIToLunaticTest {
 
     @BeforeEach
     void setupParameters() {
-        enoParameters = EnoParameters.defaultValues();
+        enoParameters = EnoParameters.of(Context.DEFAULT, Format.LUNATIC, ModeParameter.CAWI);
     }
 
     @ParameterizedTest
@@ -58,13 +61,13 @@ class DDIToLunaticTest {
         static void mapLunaticQuestionnaire() throws DDIParsingException {
             lunaticQuestionnaire = DDIToLunatic.transform(
                     AcceptanceTest.class.getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml"),
-                    EnoParameters.defaultValues());
+                    EnoParameters.of(Context.DEFAULT, Format.LUNATIC, ModeParameter.CAWI));
         }
 
         @Test
         @DisplayName("We should have the correct number of components")
         void testComponentsSize() {
-            assertEquals(53, lunaticQuestionnaire.getComponents().size());
+            assertEquals(51, lunaticQuestionnaire.getComponents().size());
         }
 
         @Test // This test is tedious => we should figure out a way to automate this kind of tests

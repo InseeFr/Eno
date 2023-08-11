@@ -55,21 +55,6 @@ public class EnoParameters {
         return new EnoParameters();
     }
 
-    public static EnoParameters defaultValues() {
-        EnoParameters enoParameters = new EnoParameters();
-        enoParameters.setDefaultValues();
-        enoParameters.setContext(Context.DEFAULT);
-        return enoParameters;
-    }
-
-    public static EnoParameters of(Context context, Format outFormat) {
-        log.info("Parameters with context {} and out format {}", context, outFormat);
-        EnoParameters enoParameters = new EnoParameters();
-        enoParameters.setDefaultValues();
-        enoParameters.setContext(context);
-        return enoParameters;
-    }
-
     public static EnoParameters of(Context context, Format outFormat, ModeParameter modeParameter) {
         log.info("Parameters with context {}, out format {}, mode {}", context, outFormat, modeParameter);
         EnoParameters enoParameters = new EnoParameters();
@@ -78,6 +63,8 @@ public class EnoParameters {
             throw new UnsupportedOperationException("Only Lunatic out format is supported for now.");
         //
         enoParameters.setContext(context);
+        enoParameters.setModeParameter(modeParameter);
+        //
         switch (modeParameter) {
             case CAPI -> enoParameters.setSelectedModes(List.of(Mode.CAPI));
             case CATI -> enoParameters.setSelectedModes(List.of(Mode.CATI));
@@ -107,23 +94,6 @@ public class EnoParameters {
         enoParameters.setUnusedVariables(false); // maybe !isProcess later on
         //
         return enoParameters;
-    }
-
-    private void setDefaultValues() {
-        // Eno core
-        identificationQuestion = false;
-        responseTimeQuestion = false;
-        commentSection = true;
-        sequenceNumbering = true;
-        questionNumberingMode = QuestionNumberingMode.SEQUENCE;
-        arrowCharInQuestions = true;
-        selectedModes = new ArrayList<>(List.of(Mode.CAPI, Mode.CATI, Mode.CAWI, Mode.PAPI));
-        // Lunatic
-        controls = true;
-        missingVariables = false;
-        filterResult = false;
-        filterDescription = false;
-        lunaticPaginationMode = LunaticPaginationMode.QUESTION;
     }
 
     public static EnoParameters parse(InputStream parametersInputStream) throws IOException {

@@ -7,6 +7,8 @@ import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.variable.CalculatedVariable;
+import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticFilterResult;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.VariableType;
@@ -94,7 +96,8 @@ class CalculatedVariableTest {
         static void mapQuestionnaire() throws DDIParsingException {
             Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
                     CalculatedVariableTest.class.getClassLoader().getResourceAsStream(
-                            "integration/ddi/ddi-variables.xml"));
+                            "integration/ddi/ddi-variables.xml"),
+                    EnoParameters.of(EnoParameters.Context.DEFAULT, Format.LUNATIC, EnoParameters.ModeParameter.CAWI));
             //
             calculatedVariables = new HashMap<>();
             lunaticQuestionnaire.getVariables().stream()
@@ -187,7 +190,8 @@ class CalculatedVariableTest {
             // Given + When
             Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
                     CalculatedVariableTest.class.getClassLoader().getResourceAsStream(
-                            "integration/ddi/ddi-declarations.xml"));
+                            "integration/ddi/ddi-declarations.xml"),
+                    EnoParameters.of(EnoParameters.Context.DEFAULT, Format.LUNATIC, EnoParameters.ModeParameter.CAWI));
             // Then
             Optional<VariableType> lunaticVariable = lunaticQuestionnaire.getVariables().stream()
                     .filter(variableType -> "CALCULATED1".equals(variableType.getName()))

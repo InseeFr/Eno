@@ -6,6 +6,8 @@ import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.navigation.ComponentFilter;
+import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.ConditionFilterType;
 import fr.insee.lunatic.model.flat.Questionnaire;
@@ -69,7 +71,8 @@ class ComponentFilterTest {
         static void mapQuestionnaire() throws DDIParsingException {
             lunaticQuestionnaire = DDIToLunatic.transform(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
-                            "integration/ddi/ddi-filters-simple.xml"));
+                            "integration/ddi/ddi-filters-simple.xml"),
+                    EnoParameters.of(EnoParameters.Context.DEFAULT, Format.LUNATIC, EnoParameters.ModeParameter.CAWI));
         }
 
         @Test
@@ -139,7 +142,8 @@ class ComponentFilterTest {
         static void mapQuestionnaire() throws DDIParsingException {
             lunaticQuestionnaire = DDIToLunatic.transform(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
-                            "integration/ddi/ddi-filters-extended.xml"));
+                            "integration/ddi/ddi-filters-extended.xml"),
+                    EnoParameters.of(EnoParameters.Context.DEFAULT, Format.LUNATIC, EnoParameters.ModeParameter.CAWI));
         }
 
         @Test
@@ -181,7 +185,8 @@ class ComponentFilterTest {
         static void mapQuestionnaire() throws DDIParsingException {
             lunaticQuestionnaire = DDIToLunatic.transform(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
-                            "integration/ddi/ddi-filters-calculated.xml"));
+                            "integration/ddi/ddi-filters-calculated.xml"),
+                    EnoParameters.of(EnoParameters.Context.DEFAULT, Format.LUNATIC, EnoParameters.ModeParameter.CAWI));
         }
 
         @ParameterizedTest

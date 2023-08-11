@@ -32,16 +32,6 @@ public class DDIToLunatic {
     }
 
     /**
-     * Transform given DDI input stream into a Lunatic questionnaire object with default parameters.
-     * @param ddiInputStream Input stream of a DDI document.
-     * @return Lunatic questionnaire object.
-     * @throws DDIParsingException if the input stream given cannot be parsed to a DDI object.
-     */
-    public static Questionnaire transform(InputStream ddiInputStream) throws DDIParsingException {
-        return transform(ddiInputStream, EnoParameters.defaultValues());
-    }
-
-    /**
      * Transform given DDI input stream into a Lunatic questionnaire as a json string, using parameters given.
      * @param ddiInputStream Input stream of a DDI document.
      * @param enoParameters Eno parameters object.
