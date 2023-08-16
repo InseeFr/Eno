@@ -11,6 +11,9 @@ updates:
     schedule:
       interval: "weekly"
     target-branch: "develop"
+    ignore:
+      - dependency-name: "org.eclipse.persistence:*"
+        update-types: ["version-update:semver-major"] # ignore new major versions of eclipse dependencies for now
   
   - package-ecosystem: "gradle"
     directory: "/" # Location of package manifests
