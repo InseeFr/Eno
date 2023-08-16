@@ -1,5 +1,26 @@
 # Eno Releases note
 
+## 2.4.9 - _September 2023_
+- **[build]** dependencies update
+
+## 2.4.8 _(no public release)_
+- **[ddi2lunatic]** fix on begin & end questions: controls and title
+
+## 2.4.7 _(no public release)_
+- **[build]** dependencies update
+
+## 2.4.6 _(no public release)_
+-  **[ddi2lunatic]** fix roster for loop pagination
+
+## 2.4.5 _(no public release)_
+- **[build]** dependencies update
+
+## 2.4.4 _(no public release)_
+- **[build]** remove xalan dependency and add exclusion for "xml-apis" in Apache fop dependency
+- **[fix]** small fix on file manipulations
+- **[poguesXML2ddi]** add a child sequence for loops that don't have a filter on their occurrences
+- **[poguesXML2ddi]** replace SourceQuestion and SourceVariable in DDI
+
 ## 2.4.3 - 05/06/23
 - **[dependencies]** upgrading dependancies
 - **[ci]** : update CI
