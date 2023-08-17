@@ -118,8 +118,6 @@ class DDIToEnoTest {
 
     @Test
     @DisplayName("DDI 'kzy5kbtl' (contains tables)")
-    @Disabled("Questionnaire is not valid (contains a loop with neither min/max not 'based on'. " +
-            "To be edited and re-generated.")
     void test04() throws DDIParsingException {
         //
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
