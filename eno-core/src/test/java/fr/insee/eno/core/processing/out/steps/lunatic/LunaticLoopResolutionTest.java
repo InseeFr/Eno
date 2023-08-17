@@ -16,10 +16,7 @@ import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -99,7 +96,37 @@ class LunaticLoopResolutionTest {
     }
 
     @Nested
-    class IntegrationTests {
+    class IntegrationTest1 {
+
+        static final Questionnaire lunaticQuestionnaire = new Questionnaire();
+
+        @BeforeAll
+        static void mapLunaticQuestionnaire() throws DDIParsingException {
+            // Given: a mapped and sorted Lunatic questionnaire
+            EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+                    LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
+                            "integration/ddi/ddi-loops-sequence.xml"),
+                    EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
+            LunaticMapper lunaticMapper = new LunaticMapper();
+            lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
+            new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);
+            // When: applying loop resolution
+            new LunaticLoopResolution(enoQuestionnaire).apply(lunaticQuestionnaire);
+            // Then
+            // -> tests
+        }
+
+        @Test
+        void questionnaireStructure() {
+            assertEquals(9, lunaticQuestionnaire.getComponents().size());
+            assertEquals(4L, lunaticQuestionnaire.getComponents().stream()
+                    .filter(component -> ComponentTypeEnum.LOOP.equals(component.getComponentType())).count());
+        }
+
+    }
+
+    @Nested
+    class TestWithLargeQuestionnaire {
 
         @Test
         @DisplayName("Questionnaire 'l20g2ba7': loops are inserted and contain the right components")
