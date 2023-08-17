@@ -79,7 +79,8 @@ class LunaticLoopResolutionTest {
         // Given: adding a standalone loop in Eno questionnaire
         StandaloneLoop standaloneLoop = new StandaloneLoop();
         standaloneLoop.setId(LOOP_ID);
-        standaloneLoop.setSequenceReference(SEQUENCE_ID);
+        standaloneLoop.getLoopScope().add(
+                StructureItemReference.builder().id(SEQUENCE_ID).type(StructureItemType.SEQUENCE).build());
         standaloneLoop.setMinIteration(new CalculatedExpression());
         standaloneLoop.setMaxIteration(new CalculatedExpression());
         enoQuestionnaire.getLoops().add(standaloneLoop);

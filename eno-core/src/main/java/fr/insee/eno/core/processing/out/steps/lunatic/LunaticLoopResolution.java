@@ -41,7 +41,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
         enoQuestionnaire.getLoops().forEach(enoLoop -> {
             Loop lunaticLoop = new Loop();
             lunaticLoop.setComponentType(ComponentTypeEnum.LOOP); // a bit ugly to do it here...
-            insertLoopComponent(lunaticQuestionnaire, lunaticLoop, enoLoop.getSequenceReference());
+            insertLoopComponent(lunaticQuestionnaire, lunaticLoop, enoLoop.getLoopScope().get(0).getId()); // FIXME: extended loop
             insertEnoLoopInfo(lunaticLoop, enoLoop);
         });
     }
@@ -151,7 +151,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
         EnoIdentifiableObject reference = enoIndex.get(enoLinkedLoop.getReference());
         //
         if (reference instanceof StandaloneLoop) {
-            AbstractSequence sequence = (AbstractSequence) enoIndex.get(enoLinkedLoop.getSequenceReference());
+            AbstractSequence sequence = (AbstractSequence) enoIndex.get(enoLinkedLoop.getLoopScope().get(0).getId()); // FIXME: see abive
             String firstQuestionId = findFirstQuestionId(sequence, enoLinkedLoop);
             EnoObject firstQuestion = enoIndex.get(firstQuestionId);
             if (! (firstQuestion instanceof SingleResponseQuestion)) {
@@ -159,7 +159,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
                         "Linked loop '%s' is based on loop '%s' that starts at sequence '%s'. " +
                                 "This first question of the sequence is not a \"simple\" question. " +
                                 "The linked loop will not work as expected.",
-                        enoLinkedLoop.getId(), enoLinkedLoop.getId(), enoLinkedLoop.getSequenceReference()));
+                        enoLinkedLoop.getId(), enoLinkedLoop.getId(), enoLinkedLoop.getLoopScope().get(0).getId())); // FIXME: see above
             }
             String variableName = ((SingleResponseQuestion) firstQuestion).getResponse().getVariableName();
             lunaticLoop.setIterations(new LabelType());
@@ -192,7 +192,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
             throw new LunaticLoopResolutionException(String.format(
                     "Linked loop '%s' is based on loop '%s'. This loop references sequence '%s'. " +
                             "Unable to find its first question to compute Lunatic \"iterations\" expression.",
-                    enoLinkedLoop.getId(), enoLinkedLoop.getReference(), enoLinkedLoop.getSequenceReference()));
+                    enoLinkedLoop.getId(), enoLinkedLoop.getReference(), enoLinkedLoop.getLoopScope().get(0).getId())); // FIXME: see above
         }
         StructureItemReference firstSequenceItem = sequence.getSequenceStructure().get(0);
         //

@@ -11,14 +11,13 @@ import fr.insee.eno.core.parameter.Format;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import reusable33.ReferenceType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A loop is defined by its scope, which is a sequence or subsequence reference.
- * TODO: current DDI modeling only works with scope = single sequence/subsequence. */
+ * TODO: current DDI modeling only works with scope = single sequence/subsequence. -> WIP */
 @Getter
 @Setter
 @Slf4j
@@ -34,12 +33,6 @@ public abstract class Loop extends EnoIdentifiableObject {
     @DDI("getConstructNameArray(0).getStringArray(0).getStringValue()")
     private String name;
 
-    /** Sequence or sub-sequence to loop on.
-     * In Lunatic, components within the referenced sequence will be moved in the loop components' list.
-     * This is done in a Lunatic processing. */
-    @DDI("T(fr.insee.eno.core.model.navigation.Loop).mapSequenceReference(#this)")
-    private String sequenceReference; // TODO: to be replaced by a loopScope property analog to what's done for filters
-
     /** Same principle as sequence items list in sequence objects. */
     @DDI("#index.get(#this.getControlConstructReference().getIDArray(0).getStringValue())" +
             ".getControlConstructReferenceList()")
@@ -50,16 +43,6 @@ public abstract class Loop extends EnoIdentifiableObject {
      * (In other formats, nothing makes it formally impossible to have loops defined directly on questions.)
      * In DDI, this property is filled by a processing using the "loopItems" property. */
     private final List<StructureItemReference> loopScope = new ArrayList<>();
-
-    public static String mapSequenceReference(LoopType ddiLoop) {
-        ReferenceType controlConstruct = ddiLoop.getControlConstructReference();
-        String typeOfObject = controlConstruct.getTypeOfObject().toString();
-        if (! "Sequence".equals(typeOfObject)) {
-            log.warn(String.format("DDI loop '%s' references an object of type '%s' (should be 'Sequence')",
-                    ddiLoop.getIDArray(0).getStringValue(), typeOfObject));
-        }
-        return controlConstruct.getIDArray(0).getStringValue();
-    }
 
     /** A loop can be in the scope of a filter.
      * In DDI, filters are mapped at questionnaire level and inserted through a processing step. */
