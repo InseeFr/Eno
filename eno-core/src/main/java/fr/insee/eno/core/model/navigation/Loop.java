@@ -47,6 +47,6 @@ public abstract class Loop extends EnoIdentifiableObject {
     /** A loop can be in the scope of a filter.
      * In DDI, filters are mapped at questionnaire level and inserted through a processing step. */
     @Lunatic("setConditionFilter(#param)")
-    private Filter filter;
+    private ComponentFilter filter;
 
 }
