@@ -40,12 +40,9 @@ public abstract class Loop extends EnoIdentifiableObject {
     @DDI("T(fr.insee.eno.core.model.navigation.Loop).mapSequenceReference(#this)")
     private String sequenceReference; // TODO: to be replaced by a loopScope property analog to what's done for filters
 
-    /** Same principle as sequence items list in sequence objects.
-     * TODO: waiting for a fix in DDI modeling, this should be a List<StructureItemReference>
-     *     with DDI mapping expression:
-     *     #index.get(getControlConstructReferenceArray(0).getIDArray(0).getStringValue()).getControlConstructReferenceList()
-     * */
-    @DDI("T(java.util.List).of(#this.getControlConstructReference())")
+    /** Same principle as sequence items list in sequence objects. */
+    @DDI("#index.get(#this.getControlConstructReference().getIDArray(0).getStringValue())" +
+            ".getControlConstructReferenceList()")
     private final List<ItemReference> loopItems = new ArrayList<>();
 
     /** References of sequences or subsequences that are in the scope of the loop.
