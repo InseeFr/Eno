@@ -74,7 +74,7 @@ class LunaticSortComponentsTest {
             // Given
             EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
                     this.getClass().getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml"),
-                    EnoParameters.of(Context.DEFAULT, Format.LUNATIC, ModeParameter.PROCESS));
+                    EnoParameters.of(Context.DEFAULT, ModeParameter.PROCESS, Format.LUNATIC));
             Questionnaire lunaticQuestionnaire = new Questionnaire();
             LunaticMapper lunaticMapper = new LunaticMapper();
             lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);

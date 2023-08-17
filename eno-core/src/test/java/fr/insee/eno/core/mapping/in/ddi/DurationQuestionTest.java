@@ -27,7 +27,7 @@ class DurationQuestionTest {
     void init() throws DDIParsingException {
         InputStream ddiStream = this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-durations.xml");
         EnoQuestionnaire questionnaire = DDIToEno.transform(ddiStream,
-                EnoParameters.of(Context.DEFAULT, Format.LUNATIC, ModeParameter.PROCESS));
+                EnoParameters.of(Context.DEFAULT, ModeParameter.PROCESS));
         index = questionnaire.getIndex();
     }
 

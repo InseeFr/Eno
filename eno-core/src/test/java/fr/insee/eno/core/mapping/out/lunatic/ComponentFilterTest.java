@@ -72,7 +72,7 @@ class ComponentFilterTest {
             lunaticQuestionnaire = DDIToLunatic.transform(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-filters-simple.xml"),
-                    EnoParameters.of(EnoParameters.Context.DEFAULT, Format.LUNATIC, EnoParameters.ModeParameter.CAWI));
+                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
         }
 
         @Test
@@ -143,7 +143,7 @@ class ComponentFilterTest {
             lunaticQuestionnaire = DDIToLunatic.transform(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-filters-extended.xml"),
-                    EnoParameters.of(EnoParameters.Context.DEFAULT, Format.LUNATIC, EnoParameters.ModeParameter.CAWI));
+                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
         }
 
         @Test
@@ -186,7 +186,7 @@ class ComponentFilterTest {
             lunaticQuestionnaire = DDIToLunatic.transform(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-filters-calculated.xml"),
-                    EnoParameters.of(EnoParameters.Context.DEFAULT, Format.LUNATIC, EnoParameters.ModeParameter.CAWI));
+                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
         }
 
         @ParameterizedTest

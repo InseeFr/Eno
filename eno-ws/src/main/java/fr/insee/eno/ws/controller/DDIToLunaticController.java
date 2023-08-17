@@ -36,7 +36,7 @@ public class DDIToLunaticController {
     public Mono<ResponseEntity<String>> ddiToLunatic(
             @RequestPart("ddiFile") Mono<FilePart> ddiFile) {
         return controllerUtils.ddiToLunaticJson(ddiFile,
-                EnoParameters.of(Context.DEFAULT, Format.LUNATIC, ModeParameter.PROCESS));
+                EnoParameters.of(Context.DEFAULT, ModeParameter.PROCESS, Format.LUNATIC));
     }
 
     @Operation(

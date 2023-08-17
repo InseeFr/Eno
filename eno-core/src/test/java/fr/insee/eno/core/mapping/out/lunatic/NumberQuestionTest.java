@@ -21,7 +21,7 @@ class NumberQuestionTest {
         // Given + When
         Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-variables.xml"),
-                EnoParameters.of(EnoParameters.Context.DEFAULT, Format.LUNATIC, EnoParameters.ModeParameter.CAWI));
+                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
         // Then
         // gather components to look at
         List<InputNumber> inputNumbers = lunaticQuestionnaire.getComponents().stream()

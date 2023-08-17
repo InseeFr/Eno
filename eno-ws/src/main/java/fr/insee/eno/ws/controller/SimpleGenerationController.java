@@ -1,6 +1,5 @@
 package fr.insee.eno.ws.controller;
 
-import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.legacy.parameters.CaptureEnum;
@@ -96,7 +95,7 @@ public class SimpleGenerationController {
          */
         Mono<LunaticPostProcessing> lunaticPostProcessing = controllerUtils.generateLunaticPostProcessings(specificTreatment);
         //
-        EnoParameters enoParameters = EnoParameters.of(context, Format.LUNATIC, modeParameter);
+        EnoParameters enoParameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
         //
         return controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessing);
     }
