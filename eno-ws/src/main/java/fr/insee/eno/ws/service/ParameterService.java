@@ -21,7 +21,7 @@ public class ParameterService {
 
     public Mono<String> defaultParams(EnoParameters.Context context, Format format, ModeParameter modeParameter) {
         try {
-            return Mono.just(EnoParameters.serialize(EnoParameters.of(context, format, modeParameter)));
+            return Mono.just(EnoParameters.serialize(EnoParameters.of(context, modeParameter, format)));
         } catch (Exception e) {
             return Mono.error(e);
         }

@@ -97,7 +97,7 @@ class CalculatedVariableTest {
             Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
                     CalculatedVariableTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-variables.xml"),
-                    EnoParameters.of(EnoParameters.Context.DEFAULT, Format.LUNATIC, EnoParameters.ModeParameter.CAWI));
+                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
             //
             calculatedVariables = new HashMap<>();
             lunaticQuestionnaire.getVariables().stream()
@@ -191,7 +191,7 @@ class CalculatedVariableTest {
             Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
                     CalculatedVariableTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-declarations.xml"),
-                    EnoParameters.of(EnoParameters.Context.DEFAULT, Format.LUNATIC, EnoParameters.ModeParameter.CAWI));
+                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
             // Then
             Optional<VariableType> lunaticVariable = lunaticQuestionnaire.getVariables().stream()
                     .filter(variableType -> "CALCULATED1".equals(variableType.getName()))
