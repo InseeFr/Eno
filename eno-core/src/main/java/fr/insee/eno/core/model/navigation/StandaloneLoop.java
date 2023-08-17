@@ -21,7 +21,7 @@ import lombok.Setter;
 public class StandaloneLoop extends Loop {
 
     /** A standalone loop has a button to add occurrences, which has a label. */
-    @DDI("getLabelArray(0)")
+    @DDI("!getLabelList().isEmpty ? getLabelArray(0) : null")
     @Lunatic("setLabel(#param)")
     Label addButtonLabel;
 
