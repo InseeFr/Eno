@@ -3,6 +3,7 @@ package fr.insee.eno.core;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -24,7 +25,8 @@ class DDIToEnoTest {
     /** The focus is on the mapping part here, so business processing (that may be enabled by default) are disabled. */
     @BeforeEach
     void parametersWithNoBusinessProcessing() {
-        enoParameters = new EnoParameters();
+        enoParameters = EnoParameters.emptyValues();
+        enoParameters.setModeParameter(ModeParameter.PROCESS);
         enoParameters.setSequenceNumbering(false);
         enoParameters.setQuestionNumberingMode(EnoParameters.QuestionNumberingMode.NONE);
         enoParameters.setArrowCharInQuestions(false);

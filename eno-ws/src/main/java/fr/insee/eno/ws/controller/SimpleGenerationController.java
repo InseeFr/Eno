@@ -1,11 +1,10 @@
 package fr.insee.eno.ws.controller;
 
-import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.legacy.parameters.CaptureEnum;
 import fr.insee.eno.legacy.parameters.Context;
-import fr.insee.eno.treatments.LunaticPostProcessings;
+import fr.insee.eno.treatments.LunaticPostProcessing;
 import fr.insee.eno.ws.PassePlat;
 import fr.insee.eno.ws.controller.utils.V3ControllerUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -72,22 +71,6 @@ public class SimpleGenerationController {
     }
 
     @Operation(
-            summary = "Generation of Lunatic xml questionnaire according to the context.",
-            description = "Generate a Lunatic xml questionnaire from a DDI questionnaire " +
-                    "using the default Lunatic parameters in function of context. " +
-                    "To see these parameters, you can use the endpoint: `/parameter/{context}/LUNATIC_XML/default`")
-    @PostMapping(value = "{context}/lunatic-xml/{mode}",
-            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @SuppressWarnings("unused")
-    public Mono<Void> generateLunaticXmlQuestionnaire(
-            @RequestPart(value="in") Mono<FilePart> ddiFile,
-            @PathVariable EnoParameters.Context context,
-            @PathVariable Mode mode,
-            ServerHttpRequest request, ServerHttpResponse response) {
-        return passePlat.passePlatPost(request, response);
-    }
-
-    @Operation(
             summary = "[V3] Generation of Lunatic json flat questionnaire according to the context.",
             description = "**This endpoint uses Eno V3.** " +
                     "Generate a Lunatic json flat questionnaire from a DDI questionnaire " +
@@ -101,7 +84,7 @@ public class SimpleGenerationController {
                     schema = @Schema(type="string", format="binary"))
             @RequestPart(value="specificTreatment", required = false) Mono<Part> specificTreatment,
             @PathVariable EnoParameters.Context context,
-            @PathVariable Mode mode) {
+            @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter) {
 
         /*
            specificTreatment parameter is a part instead of a FilePart. This workaround is used to make swagger work
@@ -110,13 +93,11 @@ public class SimpleGenerationController {
            Spring considers having a DefaultFormField object instead of FilePart and exceptions is thrown
            There is no way at this moment to disable the allow empty value when filed is not required.
          */
-        Mono<LunaticPostProcessings> lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
+        Mono<LunaticPostProcessing> lunaticPostProcessing = controllerUtils.generateLunaticPostProcessings(specificTreatment);
         //
-        EnoParameters enoParameters = new EnoParameters(context, Format.LUNATIC);
-        enoParameters.getSelectedModes().clear();
-        enoParameters.getSelectedModes().add(mode);
+        EnoParameters enoParameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
         //
-        return controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessings);
+        return controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessing);
     }
 
     @Operation(

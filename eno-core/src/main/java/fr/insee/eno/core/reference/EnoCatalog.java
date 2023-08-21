@@ -30,7 +30,7 @@ public class EnoCatalog {
 
     /** Holdall method to fill some useful maps / collections. */
     private void complementaryIndexing(EnoQuestionnaire enoQuestionnaire) {
-        //
+        // Questionnaire components (sequences, subsequences and questions)
         enoQuestionnaire.getSequences().forEach(sequence -> sequenceMap.put(sequence.getId(), sequence));
         enoQuestionnaire.getSubsequences().forEach(subsequence -> subsequenceMap.put(subsequence.getId(), subsequence));
         enoQuestionnaire.getSingleResponseQuestions().forEach(question -> questionMap.put(question.getId(), question));
@@ -38,8 +38,8 @@ public class EnoCatalog {
         componentMap.putAll(sequenceMap);
         componentMap.putAll(subsequenceMap);
         componentMap.putAll(questionMap);
-        //
-        enoQuestionnaire.getVariables().forEach(variable -> variableMap.put(variable.getReference(), variable)); //TODO: careful here if Variable class is split
+        // Variables
+        enoQuestionnaire.getVariables().forEach(variable -> variableMap.put(variable.getReference(), variable));
     }
 
     public Sequence getSequence(String sequenceId) {

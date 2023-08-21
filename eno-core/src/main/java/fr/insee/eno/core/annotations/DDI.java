@@ -10,21 +10,12 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target(FIELD)
 public @interface DDI {
 
-    /** Property to be removed (see Context annotation). */
-    Class<?>[] contextType();
-
     /** SpEL expression to be applied on the DDI object to get the adapted value
      * on the model attribute on which the annotation is placed. */
-    String field();
+    String value();
 
     /** In some objects, there can be lists that may be null in some instances for valid reasons.
      * The mapper will not throw an exception if the property is set to true. */
-    boolean allowNullList() default false;
-
-    /** In some objects, there can be lists that may be null in some instances for valid reasons.
-     * The mapper will not throw an exception if this annotation is placed. */
-    @Retention(RUNTIME)
-    @Target(FIELD)
-    @interface AllowNullList {}
+    boolean allowNullList() default true;
 
 }

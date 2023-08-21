@@ -13,12 +13,10 @@ import java.util.List;
 @Setter
 public class VariableGroup extends EnoObject {
 
-    @DDI(contextType = VariableGroupType.class,
-            field = "getVariableGroupNameArray(0).getStringArray(0).getStringValue()")
+    @DDI("!getVariableGroupNameList().isEmpty ? getVariableGroupNameArray(0).getStringArray(0).getStringValue() : null")
     private String name;
 
-    @DDI(contextType = VariableGroupType.class,
-            field = "getVariableReferenceList().![#index.get(#this.getIDArray(0).getStringValue())]")
+    @DDI("getVariableReferenceList().![#index.get(#this.getIDArray(0).getStringValue())]")
     private final List<Variable> variables = new ArrayList<>();
 
 }

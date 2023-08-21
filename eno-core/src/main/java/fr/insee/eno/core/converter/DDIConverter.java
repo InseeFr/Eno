@@ -6,7 +6,11 @@ import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.navigation.LinkedLoop;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.*;
+import fr.insee.eno.core.model.variable.CalculatedVariable;
+import fr.insee.eno.core.model.variable.CollectedVariable;
+import fr.insee.eno.core.model.variable.ExternalVariable;
 import fr.insee.eno.core.reference.DDIIndex;
+import logicalproduct33.VariableType;
 import lombok.extern.slf4j.Slf4j;
 import reusable33.*;
 
@@ -36,6 +40,8 @@ public class DDIConverter {
             return instantiateFrom(questionGridType);
         else if (ddiObject instanceof GridResponseDomainInMixedType gridResponseDomainInMixedType)
             return instantiateFrom(gridResponseDomainInMixedType);
+        else if (ddiObject instanceof VariableType variableType)
+            return instantiateFrom(variableType);
         else
             throw new ConversionException("Eno conversion for DDI type " + ddiObject.getClass() + " not implemented.");
     }
@@ -198,6 +204,23 @@ public class DDIConverter {
                     "Unable to identify cell type in DDI GridResponseDomainInMixed object " +
                             "with response domain of type "+representationType.getClass()+".");
         }
+    }
+
+    /** <p>In "Insee" DDI:</p>
+     * <ul>
+     *   <li>collected variables are characterized by having a "question reference"</li>
+     *   <li>calculated variables are characterized by having a "processing instruction reference"
+     *   in their "variable representation"</li>
+     *   <li>external variables have no specific characteristics so these are the remaining cases. </li>
+     * </ul>
+     * */
+    public static EnoObject instantiateFrom(VariableType variableType) {
+        if (! variableType.getQuestionReferenceList().isEmpty())
+            return new CollectedVariable();
+        if (variableType.getVariableRepresentation() != null &&
+                variableType.getVariableRepresentation().getProcessingInstructionReference() != null)
+            return new CalculatedVariable();
+        return new ExternalVariable();
     }
 
 }
