@@ -49,6 +49,8 @@ public class LunaticSortComponents implements ProcessingStep<Questionnaire> {
             lunaticComponents.add(toBeInserted);
             addSequenceComponents(lunaticComponents, enoSequence);
         });
+        // Re-insert loops
+        lunaticComponents.addAll(transientMap.values());
         // Safety check
         int finalSize = lunaticComponents.size();
         if (finalSize != componentsCount) {

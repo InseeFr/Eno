@@ -21,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 /** Lunatic technical processing for loops.
  * Requires: sorted components, hierarchy. */
@@ -39,11 +40,23 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
         enoIndex = enoQuestionnaire.getIndex();
         //
         enoQuestionnaire.getLoops().forEach(enoLoop -> {
-            Loop lunaticLoop = new Loop();
+            Loop lunaticLoop = findLunaticLoop(lunaticQuestionnaire, enoLoop);
             lunaticLoop.setComponentType(ComponentTypeEnum.LOOP); // a bit ugly to do it here...
             insertLoopComponent(lunaticQuestionnaire, lunaticLoop, enoLoop.getLoopScope().get(0).getId()); // FIXME: extended loop
             insertEnoLoopInfo(lunaticLoop, enoLoop);
         });
+    }
+
+    private static Loop findLunaticLoop(Questionnaire lunaticQuestionnaire, fr.insee.eno.core.model.navigation.Loop enoLoop) {
+        for (Iterator<ComponentType> iterator = lunaticQuestionnaire.getComponents().iterator(); iterator.hasNext();) {
+            ComponentType component = iterator.next();
+            if (enoLoop.getId().equals(component.getId())){
+                iterator.remove();
+                return (Loop) component;
+            }
+        }
+        //
+        throw new MappingException("TODO");
     }
 
     /** Replace components that are in the referenced sequence or subsequence
@@ -130,15 +143,6 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
     private void standaloneLoopMapping(Loop lunaticLoop, StandaloneLoop enoStandaloneLoop) {
         //
         lunaticLoop.setPaginatedLoop(false);
-        //
-        LunaticMapper lunaticMapper = new LunaticMapper();
-        lunaticLoop.setLines(new LinesLoop());
-        LabelType minExpression = new LabelType();
-        LabelType maxExpression = new LabelType();
-        lunaticMapper.mapEnoObject(enoStandaloneLoop.getMinIteration(), minExpression);
-        lunaticMapper.mapEnoObject(enoStandaloneLoop.getMaxIteration(), maxExpression);
-        lunaticLoop.getLines().setMin(minExpression);
-        lunaticLoop.getLines().setMax(maxExpression);
     }
 
     /** Lunatic linked loops are "paginated" and have the "iterations" property.

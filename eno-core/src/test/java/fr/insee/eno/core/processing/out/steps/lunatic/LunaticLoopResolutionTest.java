@@ -78,9 +78,12 @@ class LunaticLoopResolutionTest {
         standaloneLoop.setId(LOOP_ID);
         standaloneLoop.getLoopScope().add(
                 StructureItemReference.builder().id(SEQUENCE_ID).type(StructureItemType.SEQUENCE).build());
-        standaloneLoop.setMinIteration(new CalculatedExpression());
-        standaloneLoop.setMaxIteration(new CalculatedExpression());
         enoQuestionnaire.getLoops().add(standaloneLoop);
+        enoQuestionnaire.getIndex().put(LOOP_ID, standaloneLoop);
+        //
+        fr.insee.lunatic.model.flat.Loop lunaticLoop = new Loop();
+        lunaticLoop.setId(LOOP_ID);
+        lunaticQuestionnaire.getComponents().add(lunaticLoop);
 
         // When
         LunaticLoopResolution lunaticLoopResolution = new LunaticLoopResolution(enoQuestionnaire);
