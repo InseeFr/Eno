@@ -1,4 +1,4 @@
-package fr.insee.eno.core.processing.impl;
+package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.model.lunatic.CleaningConcernedVariable;
 import fr.insee.eno.core.model.lunatic.CleaningVariable;
@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LunaticAddCleaningVariablesTest {
 
@@ -47,7 +46,7 @@ class LunaticAddCleaningVariablesTest {
         lunaticQuestionnaire.getComponents().addAll(List.of(i, co, t, l));
         processing.apply(lunaticQuestionnaire);
 
-        assertTrue(lunaticQuestionnaire.getCleaning().getAny().isEmpty());
+        assertNull(lunaticQuestionnaire.getCleaning());
     }
 
     @Test
@@ -61,7 +60,7 @@ class LunaticAddCleaningVariablesTest {
         }
         lunaticQuestionnaire.getComponents().addAll(List.of(i, co, t, l));
         processing.apply(lunaticQuestionnaire);
-        assertTrue(lunaticQuestionnaire.getCleaning().getAny().isEmpty());
+        assertNull(lunaticQuestionnaire.getCleaning());
     }
 
     @Test

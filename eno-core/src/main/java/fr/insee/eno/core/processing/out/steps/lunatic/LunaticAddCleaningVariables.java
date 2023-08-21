@@ -1,15 +1,16 @@
-package fr.insee.eno.core.processing.impl;
+package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.model.lunatic.CleaningConcernedVariable;
 import fr.insee.eno.core.model.lunatic.CleaningVariable;
-import fr.insee.eno.core.processing.OutProcessingInterface;
+import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
 @Slf4j
-public class LunaticAddCleaningVariables implements OutProcessingInterface<Questionnaire> {
+public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire> {
+
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
         List<ComponentType> components = lunaticQuestionnaire.getComponents();
