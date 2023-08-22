@@ -30,18 +30,21 @@ public class StandaloneLoop extends Loop {
     @Lunatic("setLines(#param)")
     LoopIterations loopIterations;
 
-    // FIXME: temp code
+    /** Getter to access directly the "min iteration" expression that is nested in the "loop iterations". */
     public CalculatedExpression getMinIteration() {
         if (loopIterations == null)
             loopIterations = new LoopIterations();
         return loopIterations.getMinIteration();
     }
+    /** Getter to access directly the "max iteration" expression that is nested in the "loop iterations". */
     public CalculatedExpression getMaxIteration() {
         if (loopIterations == null)
             loopIterations = new LoopIterations();
         return loopIterations.getMaxIteration();
     }
 
+    /** Nesting class for min and max iteration properties.
+     * Created to match with the Lunatic 'lines' property. */
     @Getter
     @Setter
     public static class LoopIterations extends EnoObject {
