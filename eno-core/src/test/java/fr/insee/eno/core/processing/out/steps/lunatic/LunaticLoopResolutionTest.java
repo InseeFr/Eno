@@ -20,7 +20,9 @@ import org.junit.jupiter.api.*;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -145,6 +147,17 @@ class LunaticLoopResolutionTest {
         }
 
         @Test
+        void loopDependencies() {
+            // Main loops
+            assertTrue(lunaticLoops.get(0).getLoopDependencies().isEmpty());
+            assertThat(lunaticLoops.get(2).getLoopDependencies())
+                    .containsExactlyInAnyOrderElementsOf(Set.of("MIN_OCC", "MAX_OCC"));
+            // Linked loops
+            assertEquals(List.of("Q1A"), lunaticLoops.get(1).getLoopDependencies());
+            assertEquals(List.of("Q3A"), lunaticLoops.get(3).getLoopDependencies());
+        }
+
+        @Test
         void loopsConditionFilter() {
             lunaticLoops.forEach(loop ->
                     assertEquals("true", loop.getConditionFilter().getValue()));
@@ -226,6 +239,17 @@ class LunaticLoopResolutionTest {
         }
 
         @Test
+        void loopDependencies() {
+            // Main loops
+            assertTrue(lunaticLoops.get(0).getLoopDependencies().isEmpty());
+            assertThat(lunaticLoops.get(2).getLoopDependencies())
+                    .containsExactlyInAnyOrderElementsOf(Set.of("MIN_OCC", "MAX_OCC"));
+            // Linked loops
+            assertEquals(List.of("Q1A"), lunaticLoops.get(1).getLoopDependencies());
+            assertEquals(List.of("Q2A"), lunaticLoops.get(3).getLoopDependencies());
+        }
+
+        @Test
         void loopsStructure() {
             //
             assertEquals(2, lunaticLoops.get(0).getComponents().size());
@@ -285,6 +309,14 @@ class LunaticLoopResolutionTest {
         @Test
         void linkedLoopIterations() {
             assertEquals("count(Q1)", lunaticLoops.get(1).getIterations().getValue());
+        }
+
+        @Test
+        void loopDependencies() {
+            // Main loop
+            assertThat(lunaticLoops.get(0).getLoopDependencies()).isEmpty();
+            // Linked loop
+            assertEquals(List.of("Q1"), lunaticLoops.get(1).getLoopDependencies());
         }
 
         @Test
@@ -349,6 +381,14 @@ class LunaticLoopResolutionTest {
         @Test
         void linkedLoopIterations() {
             assertEquals("count(Q11)", lunaticLoops.get(1).getIterations().getValue());
+        }
+
+        @Test
+        void loopDependencies() {
+            // Main loop
+            assertThat(lunaticLoops.get(0).getLoopDependencies()).isEmpty();
+            // Linked loop
+            assertEquals(List.of("Q11"), lunaticLoops.get(1).getLoopDependencies());
         }
 
         @Test
