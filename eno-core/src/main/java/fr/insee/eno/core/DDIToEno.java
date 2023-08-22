@@ -4,7 +4,6 @@ import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
-import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.processing.common.EnoProcessing;
 import fr.insee.eno.core.processing.in.DDIInProcessing;
