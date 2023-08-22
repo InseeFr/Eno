@@ -68,6 +68,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
 
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
             ".?[#this instanceof T(datacollection33.LoopType)]")
+    @Lunatic("getComponents()")
     private final List<Loop> loops = new ArrayList<>();
 
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +

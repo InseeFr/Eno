@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DDIInstance xmlns="ddi:instance:3_3"
-              xmlns:a="ddi:archive:3_3"
-              xmlns:d="ddi:datacollection:3_3"
-              xmlns:g="ddi:group:3_3"
-              xmlns:l="ddi:logicalproduct:3_3"
-              xmlns:r="ddi:reusable:3_3"
-              xmlns:s="ddi:studyunit:3_3"
-              xmlns:xhtml="http://www.w3.org/1999/xhtml"
-              xmlns:xs="http://www.w3.org/2001/XMLSchema"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
-              isMaintainable="true"><!--Eno version : 2.4.1-pairwise. Generation date : 15/06/2023 - 14:43:55-->
+             xmlns:a="ddi:archive:3_3"
+             xmlns:d="ddi:datacollection:3_3"
+             xmlns:g="ddi:group:3_3"
+             xmlns:l="ddi:logicalproduct:3_3"
+             xmlns:r="ddi:reusable:3_3"
+             xmlns:s="ddi:studyunit:3_3"
+             xmlns:xhtml="http://www.w3.org/1999/xhtml"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
+             isMaintainable="true"><!--Eno version : 2.4.9. Generation date : 17/08/2023 - 13:10:12-->
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-kx0a2hn8</r:ID>
    <r:Version>1</r:Version>
@@ -601,11 +601,22 @@
             </d:StepValue>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>l7g7ou85</r:ID>
+               <r:ID>l7pusaki-SEQ</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Sequence</r:TypeOfObject>
             </d:ControlConstructReference>
          </d:Loop>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l7pusaki-SEQ</r:ID>
+            <r:Version>1</r:Version>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l7g7ou85</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
          <d:Loop>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l7puyos3</r:ID>
@@ -615,11 +626,22 @@
             </d:ConstructName>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>l7g7lnew</r:ID>
+               <r:ID>l7puyos3-SEQ</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Sequence</r:TypeOfObject>
             </d:ControlConstructReference>
          </d:Loop>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l7puyos3-SEQ</r:ID>
+            <r:Version>1</r:Version>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l7g7lnew</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
          <d:Loop>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l7puibqj</r:ID>
@@ -650,11 +672,22 @@
             </d:StepValue>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>l7puoovt</r:ID>
+               <r:ID>l7puibqj-SEQ</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Sequence</r:TypeOfObject>
             </d:ControlConstructReference>
          </d:Loop>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l7puibqj-SEQ</r:ID>
+            <r:Version>1</r:Version>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l7puoovt</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
          <d:Loop>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>lhywawti</r:ID>
@@ -707,11 +740,22 @@
             </d:StepValue>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>lhywdenk</r:ID>
+               <r:ID>lhywawti-SEQ</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Sequence</r:TypeOfObject>
             </d:ControlConstructReference>
          </d:Loop>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lhywawti-SEQ</r:ID>
+            <r:Version>1</r:Version>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lhywdenk</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
          <d:Loop>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l7pv0z7b</r:ID>
@@ -783,11 +827,22 @@
             </d:StepValue>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>kx061cac</r:ID>
+               <r:ID>l7pv0z7b-SEQ</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Sequence</r:TypeOfObject>
             </d:ControlConstructReference>
          </d:Loop>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l7pv0z7b-SEQ</r:ID>
+            <r:Version>1</r:Version>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kx061cac</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
          <d:Loop>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l7puvvpz</r:ID>
@@ -797,11 +852,22 @@
             </d:ConstructName>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>kx09u145</r:ID>
+               <r:ID>l7puvvpz-SEQ</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Sequence</r:TypeOfObject>
             </d:ControlConstructReference>
          </d:Loop>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l7puvvpz-SEQ</r:ID>
+            <r:Version>1</r:Version>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>kx09u145</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
          <d:IfThenElse>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>lciymc87</r:ID>
@@ -2343,9 +2409,9 @@
             <r:ID>InstrumentScheme-kx0a2hn8</r:ID>
             <r:Version>1</r:Version>
             <d:Instrument xmlns:c="ddi:conceptualcomponent:3_3"
-                           xmlns:cm="ddi:comparative:3_3"
-                           xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
-                           xmlns:pr="ddi:ddiprofile:3_3">
+                          xmlns:cm="ddi:comparative:3_3"
+                          xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
+                          xmlns:pr="ddi:ddiprofile:3_3">
                <r:Agency>fr.insee</r:Agency>
                <r:ID>Instrument-kx0a2hn8</r:ID>
                <r:Version>1</r:Version>
