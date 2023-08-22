@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A loop is defined by its scope, which is a sequence or subsequence reference.
- * TODO: current DDI modeling only works with scope = single sequence/subsequence. -> WIP */
+ * A loop is defined by its scope, which is a list of sequence or subsequence references.
+ * */
 @Getter
 @Setter
 @Slf4j
