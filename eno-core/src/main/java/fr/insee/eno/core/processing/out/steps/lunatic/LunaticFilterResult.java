@@ -55,7 +55,7 @@ public class LunaticFilterResult implements ProcessingStep<Questionnaire> {
         VariableType filterVariable = new VariableType();
         filterVariable.setVariableType(VariableTypeEnum.CALCULATED);
         String questionName = ((Question) enoIndex.get(component.getId())).getName();
-        filterVariable.setName(questionName);
+        filterVariable.setName(FILTER_RESULT_PREFIX + questionName);
         ConditionFilterType conditionFilter = component.getConditionFilter();
         if(conditionFilter.getBindingDependencies() != null) {
             filterVariable.getBindingDependencies().addAll(conditionFilter.getBindingDependencies());
