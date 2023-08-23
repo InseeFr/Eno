@@ -20,7 +20,8 @@ public class DDIInProcessing {
                 .then(new DDIInsertCodeLists())
                 .then(new DDIResolveVariableReferencesInLabels(enoCatalog))
                 .then(new DDIResolveSequencesStructure())
-                .then(new DDIResolveFiltersScope());
+                .then(new DDIResolveFiltersScope())
+                .then(new DDIResolveLoopsScope());
     }
 
 }

@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/** Class to test Lunatic loop objects after mapping.
+ * Loops are completely resolved in a processing class, so also look at tests of this processing. */
 class LoopTest {
 
     private Loop enoLoop;

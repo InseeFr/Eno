@@ -8,7 +8,7 @@ import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.processing.ProcessingStep;
 import lombok.extern.slf4j.Slf4j;
 
-/** Filter objects contain a "filter items", mapped from the DDI, that contain the reference of components
+/** Filter objects contain a "filter items" list, mapped from the DDI, that contain the reference of components
  * that are in the scope of the filter, in the right order.
  * This processing class converts this raw DDI information into the proper "filter scope" property of the Eno model.
  * */
@@ -48,7 +48,7 @@ public class DDIResolveFiltersScope implements ProcessingStep<EnoQuestionnaire> 
 
     /**
      * Iterates on the loop item references to resolve the filter object scope.
-     * @param loop A loop object, its "filter items" are read.
+     * @param loop A loop object, its "loop items" are read.
      * @param filter The filter whose scope is being resolved.
      * */
     private void resolveScopeFrom(Loop loop, Filter filter) {

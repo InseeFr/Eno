@@ -118,8 +118,6 @@ class DDIToEnoTest {
 
     @Test
     @DisplayName("DDI 'kzy5kbtl' (contains tables)")
-    @Disabled("Questionnaire is not valid (contains a loop with neither min/max not 'based on'. " +
-            "To be edited and re-generated.")
     void test04() throws DDIParsingException {
         //
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
@@ -142,7 +140,7 @@ class DDIToEnoTest {
 
     @Test
     @DisplayName("DDI 'ldodefpq' (contains pairwise question)")
-    @Disabled("Bug identified on the date type of question conversion.")
+    @Disabled("Bug identified on the date type of question conversion. + Must be re-generated with loop spec in DDI.")
     void test06() throws DDIParsingException {
         //
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(

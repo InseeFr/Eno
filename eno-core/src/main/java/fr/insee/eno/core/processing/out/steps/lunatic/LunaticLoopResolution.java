@@ -2,7 +2,6 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.exceptions.business.LunaticLoopResolutionException;
 import fr.insee.eno.core.exceptions.technical.MappingException;
-import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
@@ -39,16 +38,37 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
         enoIndex = enoQuestionnaire.getIndex();
         //
         enoQuestionnaire.getLoops().forEach(enoLoop -> {
-            Loop lunaticLoop = new Loop();
-            lunaticLoop.setComponentType(ComponentTypeEnum.LOOP); // a bit ugly to do it here...
-            insertLoopComponent(lunaticQuestionnaire, lunaticLoop, enoLoop.getSequenceReference());
-            insertEnoLoopInfo(lunaticLoop, enoLoop);
+            Loop lunaticLoop = findLunaticLoop(lunaticQuestionnaire, enoLoop);
+            insertSequencesInLoop(lunaticQuestionnaire, lunaticLoop, enoLoop);
+            setOtherLoopProperties(lunaticLoop, enoLoop);
         });
+    }
+
+    private static Loop findLunaticLoop(Questionnaire lunaticQuestionnaire, fr.insee.eno.core.model.navigation.Loop enoLoop) {
+        for (Iterator<ComponentType> iterator = lunaticQuestionnaire.getComponents().iterator(); iterator.hasNext();) {
+            ComponentType component = iterator.next();
+            if (enoLoop.getId().equals(component.getId())){
+                iterator.remove();
+                return (Loop) component;
+            }
+        }
+        throw new MappingException(String.format(
+                "Loop '%s' not found among Lunatic components of questionnaire '%s'",
+                enoLoop.getId(), lunaticQuestionnaire.getId()));
+    }
+
+    private void insertSequencesInLoop(Questionnaire lunaticQuestionnaire, Loop lunaticLoop, fr.insee.eno.core.model.navigation.Loop enoLoop) {
+        if (enoLoop.getLoopScope().isEmpty())
+            throw new LunaticLoopResolutionException("Loop '" + enoLoop.getId() + "' has an empty scope.");
+        int position = insertSequenceInLoop(lunaticQuestionnaire, lunaticLoop, enoLoop.getLoopScope().get(0).getId());
+        enoLoop.getLoopScope().stream().skip(1).forEachOrdered(structureItemReference ->
+                insertSequenceInLoop(lunaticQuestionnaire, lunaticLoop, structureItemReference.getId()));
+        lunaticQuestionnaire.getComponents().add(position, lunaticLoop);
     }
 
     /** Replace components that are in the referenced sequence or subsequence
      * by a loop object containing these (including the sequence component itself). */
-    private void insertLoopComponent(
+    private int insertSequenceInLoop(
             Questionnaire lunaticQuestionnaire, Loop lunaticLoop, String sequenceReference) {
         List<ComponentType> components = lunaticQuestionnaire.getComponents();
         Iterator<ComponentType> iterator = components.iterator();
@@ -68,7 +88,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
             }
             position++;
         }
-        components.add(position, lunaticLoop);
+        return position;
     }
 
     /** Insert components that belongs to the loop, in the right order, using Eno sequence object. */
@@ -94,25 +114,19 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
         }
         // Insert the component in the loop
         if (searchedComponent == null) {
-            throw new MappingException(
-                    "Unable to find component '"+componentReference+"' when trying to insert it in Lunatic loop.");
+            throw new MappingException(String.format(
+                    "Unable to find component '%s' when trying to insert it in Lunatic loop '%s'.",
+                    componentReference, lunaticLoop.getId()));
         }
         lunaticLoop.getComponents().add(searchedComponent);
     }
 
-    /** Map eno loop's metadata into lunatic loop object. */
-    private void insertEnoLoopInfo(Loop lunaticLoop, fr.insee.eno.core.model.navigation.Loop enoLoop) {
-        //
-        lunaticLoop.setId(enoLoop.getId());
-        lunaticLoop.setDepth(BigInteger.ONE); // (Nested loops is not supported yet)
+    private void setOtherLoopProperties(Loop lunaticLoop, fr.insee.eno.core.model.navigation.Loop enoLoop) {
+        lunaticLoop.setDepth(BigInteger.ONE);
         setLunaticLoopFilter(lunaticLoop);
-        // TODO: is hierarchy useful in Loop components? (not sure)
-        //
-        if (enoLoop instanceof StandaloneLoop standaloneLoop) {
-            standaloneLoopMapping(lunaticLoop, standaloneLoop);
-        }
-        if (enoLoop instanceof LinkedLoop linkedLoop) {
-            linkedLoopMapping(lunaticLoop, linkedLoop);
+        // TODO: hierarchy
+        if (enoLoop instanceof LinkedLoop enoLinkedLoop) {
+            setLinkedLoopIterations(lunaticLoop, enoLinkedLoop);
         }
     }
 
@@ -126,82 +140,65 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
         lunaticLoop.setConditionFilter(lunaticLoop.getComponents().get(0).getConditionFilter());
     }
 
-    /** Lunatic standalone loops are not "paginated" and have a "lines" property (with "min" and "max"). */
-    private void standaloneLoopMapping(Loop lunaticLoop, StandaloneLoop enoStandaloneLoop) {
-        //
-        lunaticLoop.setPaginatedLoop(false);
-        //
-        LunaticMapper lunaticMapper = new LunaticMapper();
-        lunaticLoop.setLines(new LinesLoop());
-        LabelType minExpression = new LabelType();
-        LabelType maxExpression = new LabelType();
-        lunaticMapper.mapEnoObject(enoStandaloneLoop.getMinIteration(), minExpression);
-        lunaticMapper.mapEnoObject(enoStandaloneLoop.getMaxIteration(), maxExpression);
-        lunaticLoop.getLines().setMin(minExpression);
-        lunaticLoop.getLines().setMax(maxExpression);
-    }
-
-    /** Lunatic linked loops are "paginated" and have the "iterations" property.
+    /** Lunatic linked loops have an "iterations" property.
      * The "iterations" property is a calculated expression, it is a VTL count on variable of the first question
-     * of the loop. This has been discussed with Lunatic, it is what it is for now. */
-    private void linkedLoopMapping(Loop lunaticLoop, LinkedLoop enoLinkedLoop) {
-        //
-        lunaticLoop.setPaginatedLoop(true);
+     * of the loop it is based on.
+     * (This has been discussed with Lunatic, it is what it is for now...) */
+    private void setLinkedLoopIterations(Loop lunaticLoop, LinkedLoop enoLinkedLoop) {
         // We "just" want to find the first variable in the scope of the reference loop
         EnoIdentifiableObject reference = enoIndex.get(enoLinkedLoop.getReference());
-        //
-        if (reference instanceof StandaloneLoop) {
-            AbstractSequence sequence = (AbstractSequence) enoIndex.get(enoLinkedLoop.getSequenceReference());
-            String firstQuestionId = findFirstQuestionId(sequence, enoLinkedLoop);
-            EnoObject firstQuestion = enoIndex.get(firstQuestionId);
-            if (! (firstQuestion instanceof SingleResponseQuestion)) {
-                throw new LunaticLoopResolutionException(String.format(
-                        "Linked loop '%s' is based on loop '%s' that starts at sequence '%s'. " +
-                                "This first question of the sequence is not a \"simple\" question. " +
-                                "The linked loop will not work as expected.",
-                        enoLinkedLoop.getId(), enoLinkedLoop.getId(), enoLinkedLoop.getSequenceReference()));
-            }
-            String variableName = ((SingleResponseQuestion) firstQuestion).getResponse().getVariableName();
-            lunaticLoop.setIterations(new LabelType());
-            lunaticLoop.getIterations().setValue("count("+ variableName +")");
+        if (reference instanceof StandaloneLoop enoReferenceLoop) {
+            setIterationsFromLoop(lunaticLoop, enoLinkedLoop, enoReferenceLoop);
             return;
         }
-        //
         if (reference instanceof DynamicTableQuestion) {
-            log.warn("Linked loop '{}' is based on a dynamic table. This feature is not supported yet.",
-                    enoLinkedLoop.getId());
-            lunaticLoop.setIterations(new LabelType());
-            lunaticLoop.getIterations().setValue("1");
+            setIterationsFromTable(enoLinkedLoop);
             return;
         }
-        //
         throw new LunaticLoopResolutionException(String.format(
                 "Linked loop '%s' reference object's '%s' is neither a loop nor a dynamic table.",
                 enoLinkedLoop.getId(), reference));
     }
 
+    private void setIterationsFromLoop(Loop lunaticLoop, LinkedLoop enoLinkedLoop, StandaloneLoop enoReferenceLoop) {
+        AbstractSequence startSequence = (AbstractSequence) enoIndex.get(enoReferenceLoop.getLoopScope().get(0).getId());
+        if (startSequence.getSequenceStructure().isEmpty()) {
+            throw new LunaticLoopResolutionException(String.format(
+                    "Linked loop '%s' is based on loop '%s'. " +
+                            "This loop is defined to start at sequence '%s', which is empty. " +
+                            "Unable to find its first question to compute Lunatic \"iterations\" expression.",
+                    enoLinkedLoop.getId(), enoReferenceLoop.getId(), startSequence.getId()));
+        }
+        String firstQuestionId = findFirstQuestionId(startSequence);
+        EnoObject firstQuestion = enoIndex.get(firstQuestionId);
+        if (! (firstQuestion instanceof SingleResponseQuestion)) {
+            throw new LunaticLoopResolutionException(String.format(
+                    "Linked loop '%s' is based on loop '%s' that starts at sequence '%s'. " +
+                            "This first question of the sequence is not a \"simple\" question.",
+                    enoLinkedLoop.getId(), enoReferenceLoop.getId(), startSequence.getId()));
+        }
+        String variableName = ((SingleResponseQuestion) firstQuestion).getResponse().getVariableName();
+        lunaticLoop.setIterations(new LabelType());
+        lunaticLoop.getIterations().setValue("count("+ variableName +")");
+    }
+
     /**
      * Return the id of the first question in given sequence or subsequence object.
      * @param sequence Eno sequence object.
-     * @param enoLinkedLoop Passed only for logging purposes.
      * @return The id of the first question within the sequence.
      */
-    private String findFirstQuestionId(AbstractSequence sequence, LinkedLoop enoLinkedLoop) {
-        //
-        if (sequence.getSequenceStructure().isEmpty()) {
-            throw new LunaticLoopResolutionException(String.format(
-                    "Linked loop '%s' is based on loop '%s'. This loop references sequence '%s'. " +
-                            "Unable to find its first question to compute Lunatic \"iterations\" expression.",
-                    enoLinkedLoop.getId(), enoLinkedLoop.getReference(), enoLinkedLoop.getSequenceReference()));
-        }
+    private String findFirstQuestionId(AbstractSequence sequence) {
         StructureItemReference firstSequenceItem = sequence.getSequenceStructure().get(0);
-        //
-        if (firstSequenceItem.getType() == StructureItemType.QUESTION) {
+        if (firstSequenceItem.getType() == StructureItemType.QUESTION)
             return firstSequenceItem.getId();
-        }
-        //
         AbstractSequence subsequence = (AbstractSequence) enoIndex.get(firstSequenceItem.getId());
-        return findFirstQuestionId(subsequence, enoLinkedLoop);
+        return findFirstQuestionId(subsequence);
+    }
+
+    private void setIterationsFromTable(LinkedLoop enoLinkedLoop) {
+        throw new UnsupportedOperationException(String.format(
+                "Linked loop '%s' is based on a dynamic table. This feature is not supported yet.",
+                enoLinkedLoop.getId()));
     }
 
 }

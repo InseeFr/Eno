@@ -1,0 +1,698 @@
+{
+  "id": "ll11itij",
+  "modele": "ENOLOOPS1",
+  "enoCoreVersion": "2.4.9",
+  "lunaticModelVersion": "2.3.4",
+  "generatingDate": "16-08-2023 16:40:57",
+  "missing": false,
+  "pagination": "question",
+  "maxPage": "9",
+  "label": {
+    "value": "Eno - Loops (sequence)",
+    "type": "VTL|MD"
+  },
+  "components": [
+    {
+      "id": "ll1230bz",
+      "componentType": "Loop",
+      "page": "1",
+      "depth": 1,
+      "paginatedLoop": false,
+      "label": {
+        "value": "\"Add\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "Q1A"
+      ],
+      "lines": {
+        "min": {
+          "value": "1",
+          "type": "VTL"
+        },
+        "max": {
+          "value": "3",
+          "type": "VTL"
+        }
+      },
+      "components": [
+        {
+          "id": "ll11fy43",
+          "componentType": "Sequence",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Sequence 1 A (has loop)\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll11fy43",
+              "page": "1",
+              "label": {
+                "value": "\"I - \" || \"Sequence 1 A (has loop)\"",
+                "type": "VTL|MD"
+              }
+            }
+          }
+        },
+        {
+          "id": "ll11rugt",
+          "componentType": "Input",
+          "mandatory": false,
+          "page": "1",
+          "maxLength": 249,
+          "label": {
+            "value": "\"➡ \" || \"Question 1 A\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll11fy43",
+              "page": "1",
+              "label": {
+                "value": "\"I - \" || \"Sequence 1 A (has loop)\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "Q1A"
+          ],
+          "response": {
+            "name": "Q1A"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ll11uka2",
+      "componentType": "Loop",
+      "page": "2",
+      "maxPage": "2",
+      "depth": 1,
+      "paginatedLoop": true,
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "Q1B"
+      ],
+      "loopDependencies": [
+        "Q1A"
+      ],
+      "components": [
+        {
+          "id": "ll11krll",
+          "componentType": "Sequence",
+          "page": "2.1",
+          "label": {
+            "value": "\"II - \" || \"Sequence 1 B (has linked loop)\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll11krll",
+              "page": "2.1",
+              "label": {
+                "value": "\"II - \" || \"Sequence 1 B (has linked loop)\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "Q1A"
+          ]
+        },
+        {
+          "id": "ll11q3fh",
+          "componentType": "Input",
+          "mandatory": false,
+          "page": "2.2",
+          "maxLength": 249,
+          "label": {
+            "value": "\"➡ \" || \"Question 1 B\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll11krll",
+              "page": "2.1",
+              "label": {
+                "value": "\"II - \" || \"Sequence 1 B (has linked loop)\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "Q1B",
+            "Q1A"
+          ],
+          "response": {
+            "name": "Q1B"
+          }
+        }
+      ],
+      "iterations": {
+        "value": "count(Q1A)",
+        "type": "VTL"
+      }
+    },
+    {
+      "id": "ll11mavg",
+      "componentType": "Sequence",
+      "page": "3",
+      "label": {
+        "value": "\"III - \" || \"Sequence 2\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ll11mavg",
+          "page": "3",
+          "label": {
+            "value": "\"III - \" || \"Sequence 2\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "ll11kkvp",
+      "componentType": "InputNumber",
+      "mandatory": false,
+      "page": "4",
+      "min": 1,
+      "max": 2,
+      "decimals": 0,
+      "label": {
+        "value": "\"➡ \" || \"Minimum occurrences of next sequence\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "controls": [
+        {
+          "id": "ll11kkvp-format-borne-inf-sup",
+          "typeOfControl": "FORMAT",
+          "criticality": "ERROR",
+          "control": {
+            "value": "not(not(isnull(MIN_OCC)) and (1>MIN_OCC or 2<MIN_OCC))",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\" La valeur doit être comprise entre 1 et 2.\"",
+            "type": "VTL|MD"
+          }
+        },
+        {
+          "id": "ll11kkvp-format-decimal",
+          "typeOfControl": "FORMAT",
+          "criticality": "ERROR",
+          "control": {
+            "value": "not(not(isnull(MIN_OCC))  and round(MIN_OCC,0)<>MIN_OCC)",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "hierarchy": {
+        "sequence": {
+          "id": "ll11mavg",
+          "page": "3",
+          "label": {
+            "value": "\"III - \" || \"Sequence 2\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "MIN_OCC"
+      ],
+      "response": {
+        "name": "MIN_OCC"
+      }
+    },
+    {
+      "id": "ll11y58s",
+      "componentType": "InputNumber",
+      "mandatory": false,
+      "page": "5",
+      "min": 3,
+      "max": 5,
+      "decimals": 0,
+      "label": {
+        "value": "\"➡ \" || \"Maximum occurrences of next sequence\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "controls": [
+        {
+          "id": "ll11y58s-format-borne-inf-sup",
+          "typeOfControl": "FORMAT",
+          "criticality": "ERROR",
+          "control": {
+            "value": "not(not(isnull(MAX_OCC)) and (3>MAX_OCC or 5<MAX_OCC))",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\" La valeur doit être comprise entre 3 et 5.\"",
+            "type": "VTL|MD"
+          }
+        },
+        {
+          "id": "ll11y58s-format-decimal",
+          "typeOfControl": "FORMAT",
+          "criticality": "ERROR",
+          "control": {
+            "value": "not(not(isnull(MAX_OCC))  and round(MAX_OCC,0)<>MAX_OCC)",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "hierarchy": {
+        "sequence": {
+          "id": "ll11mavg",
+          "page": "3",
+          "label": {
+            "value": "\"III - \" || \"Sequence 2\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "MAX_OCC"
+      ],
+      "response": {
+        "name": "MAX_OCC"
+      }
+    },
+    {
+      "id": "ll127c65",
+      "componentType": "Loop",
+      "page": "6",
+      "depth": 1,
+      "paginatedLoop": false,
+      "label": {
+        "value": "\"Add\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "MIN_OCC",
+        "MAX_OCC",
+        "Q3A"
+      ],
+      "loopDependencies": [
+        "MIN_OCC",
+        "MAX_OCC"
+      ],
+      "lines": {
+        "min": {
+          "value": "nvl( MIN_OCC , 1)",
+          "type": "VTL"
+        },
+        "max": {
+          "value": "nvl( MAX_OCC , 1)",
+          "type": "VTL"
+        }
+      },
+      "components": [
+        {
+          "id": "ll1239fr",
+          "componentType": "Sequence",
+          "page": "6",
+          "label": {
+            "value": "\"IV - \" || \"Sequence 3 A (has loop)\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll1239fr",
+              "page": "6",
+              "label": {
+                "value": "\"IV - \" || \"Sequence 3 A (has loop)\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "MIN_OCC",
+            "MAX_OCC"
+          ]
+        },
+        {
+          "id": "ll11mui1",
+          "componentType": "Input",
+          "mandatory": false,
+          "page": "6",
+          "maxLength": 249,
+          "label": {
+            "value": "\"➡ \" || \"Question 3 A\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll1239fr",
+              "page": "6",
+              "label": {
+                "value": "\"IV - \" || \"Sequence 3 A (has loop)\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "Q3A",
+            "MIN_OCC",
+            "MAX_OCC"
+          ],
+          "response": {
+            "name": "Q3A"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ll12fcag",
+      "componentType": "Loop",
+      "page": "7",
+      "maxPage": "2",
+      "depth": 1,
+      "paginatedLoop": true,
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "QUESTION3B"
+      ],
+      "loopDependencies": [
+        "Q3A"
+      ],
+      "components": [
+        {
+          "id": "ll11on2a",
+          "componentType": "Sequence",
+          "page": "7.1",
+          "label": {
+            "value": "\"V - \" || \"Sequence 3 B (has linked loop)\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll11on2a",
+              "page": "7.1",
+              "label": {
+                "value": "\"V - \" || \"Sequence 3 B (has linked loop)\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "Q3A"
+          ]
+        },
+        {
+          "id": "ll11wnay",
+          "componentType": "Input",
+          "mandatory": false,
+          "page": "7.2",
+          "maxLength": 249,
+          "label": {
+            "value": "\"➡ \" || \"Question 3 B\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll11on2a",
+              "page": "7.1",
+              "label": {
+                "value": "\"V - \" || \"Sequence 3 B (has linked loop)\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "QUESTION3B",
+            "Q3A"
+          ],
+          "response": {
+            "name": "QUESTION3B"
+          }
+        }
+      ],
+      "iterations": {
+        "value": "count(Q3A)",
+        "type": "VTL"
+      }
+    },
+    {
+      "id": "ll11skaw",
+      "componentType": "Sequence",
+      "page": "8",
+      "label": {
+        "value": "\"VI - \" || \"Last sequence\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ll11skaw",
+          "page": "8",
+          "label": {
+            "value": "\"VI - \" || \"Last sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "ll1209zf",
+      "componentType": "CheckboxBoolean",
+      "mandatory": false,
+      "page": "9",
+      "label": {
+        "value": "\"➡ \" || \"Last question\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ll11skaw",
+          "page": "8",
+          "label": {
+            "value": "\"VI - \" || \"Last sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q_LAST"
+      ],
+      "response": {
+        "name": "Q_LAST"
+      }
+    }
+  ],
+  "variables": [
+    {
+      "variableType": "COLLECTED",
+      "name": "Q1A",
+      "values": {
+        "PREVIOUS": [
+          null
+        ],
+        "COLLECTED": [
+          null
+        ],
+        "FORCED": [
+          null
+        ],
+        "EDITED": [
+          null
+        ],
+        "INPUTED": [
+          null
+        ]
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q1B",
+      "values": {
+        "PREVIOUS": [
+          null
+        ],
+        "COLLECTED": [
+          null
+        ],
+        "FORCED": [
+          null
+        ],
+        "EDITED": [
+          null
+        ],
+        "INPUTED": [
+          null
+        ]
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MIN_OCC",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MAX_OCC",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q3A",
+      "values": {
+        "PREVIOUS": [
+          null
+        ],
+        "COLLECTED": [
+          null
+        ],
+        "FORCED": [
+          null
+        ],
+        "EDITED": [
+          null
+        ],
+        "INPUTED": [
+          null
+        ]
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "QUESTION3B",
+      "values": {
+        "PREVIOUS": [
+          null
+        ],
+        "COLLECTED": [
+          null
+        ],
+        "FORCED": [
+          null
+        ],
+        "EDITED": [
+          null
+        ],
+        "INPUTED": [
+          null
+        ]
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q_LAST",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    }
+  ],
+  "cleaning": {},
+  "resizing": {
+    "Q1A": {
+      "size": "count(Q1A)",
+      "variables": [
+        "Q1B"
+      ]
+    },
+    "MIN_OCC": {
+      "size": "nvl( MAX_OCC , 1)",
+      "variables": [
+        "Q3A"
+      ]
+    },
+    "Q3A": {
+      "size": "count(Q3A)",
+      "variables": [
+        "QUESTION3B"
+      ]
+    }
+  }
+}
