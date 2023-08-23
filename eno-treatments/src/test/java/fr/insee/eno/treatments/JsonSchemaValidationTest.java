@@ -17,7 +17,6 @@ class JsonSchemaValidationTest {
 
     private final ClassLoader classLoader = this.getClass().getClassLoader();
 
-    // FIXME: test fails after bump json-schema-validator from 1.0.78 to 1.0.86
     @Test
     void givenValidJsonInput_whenValidating_thenNoErrors() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
