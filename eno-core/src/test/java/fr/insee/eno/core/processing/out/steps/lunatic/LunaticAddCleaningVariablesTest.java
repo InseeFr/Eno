@@ -14,36 +14,36 @@ import static org.junit.jupiter.api.Assertions.*;
 class LunaticAddCleaningVariablesTest {
 
     LunaticAddCleaningVariables processing;
-    Input i;
-    InputNumber ln;
-    CheckboxOne co;
-    Dropdown ldd;
-    Table t;
-    CheckboxGroup lcg;
-    Loop l;
+    Input input;
+    InputNumber inputNumber;
+    CheckboxOne checkboxOne;
+    Dropdown dropdown;
+    Table table;
+    CheckboxGroup checkboxGroup;
+    Loop loop;
 
     Questionnaire lunaticQuestionnaire;
 
     @BeforeEach
     void init() {
-        i = buildInput("jfazww20", "TEXTECOURT");
-        co = buildCheckboxOne("k6gik8v5", "CHECKBOX");
-        t = buildTable("jfkxybfe", List.of("QCM_OM1", "QCM_OM2", "QCM_OM3"));
-        ldd = buildDropdown("jfjfae9f", "DROPDOWN");
-        ln = buildNumber("jfjh1ndk", "INTEGER");
-        lcg = buildCheckboxGroup("jfkxybff", List.of("QCM_OM1", "QCM_OM2", "QCM_OM3"));
-        l = buildLoop("loopid", List.of(ldd, ln));
+        input = buildInput("jfazww20", "TEXTECOURT");
+        checkboxOne = buildCheckboxOne("k6gik8v5", "CHECKBOX");
+        table = buildTable("jfkxybfe", List.of("QCM_OM1", "QCM_OM2", "QCM_OM3"));
+        dropdown = buildDropdown("jfjfae9f", "DROPDOWN");
+        inputNumber = buildNumber("jfjh1ndk", "INTEGER");
+        checkboxGroup = buildCheckboxGroup("jfkxybff", List.of("QCM_OM1", "QCM_OM2", "QCM_OM3"));
+        loop = buildLoop("loopid", List.of(dropdown, inputNumber));
         processing = new LunaticAddCleaningVariables();
     }
 
     @Test
     void shouldNotHaveCleaningVariableWhenComponentWithNoConditionFilter() {
-        List<ComponentType> components = List.of(i, co, t, l, ln, ldd, lcg);
+        List<ComponentType> components = List.of(input, checkboxOne, table, loop, inputNumber, dropdown, checkboxGroup);
         for (ComponentType component : components) {
             component.setConditionFilter(null);
         }
         lunaticQuestionnaire = new Questionnaire();
-        lunaticQuestionnaire.getComponents().addAll(List.of(i, co, t, l));
+        lunaticQuestionnaire.getComponents().addAll(List.of(input, checkboxOne, table, loop));
         processing.apply(lunaticQuestionnaire);
 
         assertNull(lunaticQuestionnaire.getCleaning());
@@ -52,13 +52,13 @@ class LunaticAddCleaningVariablesTest {
     @Test
     void shouldNotHaveCleaningVariableWhenComponentWithEmptyDependenciesInConditionFilter() {
         lunaticQuestionnaire = new Questionnaire();
-        i.setConditionFilter(buildConditionFilter("(SUM1 < 10)", List.of("SUM1", "Q11", "Q12")));
+        input.setConditionFilter(buildConditionFilter("(SUM1 < 10)", List.of("SUM1", "Q11", "Q12")));
 
-        List<ComponentType> components = List.of(i, co, t, l, ln, ldd, lcg);
+        List<ComponentType> components = List.of(input, checkboxOne, table, loop, inputNumber, dropdown, checkboxGroup);
         for (ComponentType component : components) {
             component.setConditionFilter(buildConditionFilter("true", new ArrayList<>()));
         }
-        lunaticQuestionnaire.getComponents().addAll(List.of(i, co, t, l));
+        lunaticQuestionnaire.getComponents().addAll(List.of(input, checkboxOne, table, loop));
         processing.apply(lunaticQuestionnaire);
         assertNull(lunaticQuestionnaire.getCleaning());
     }
@@ -67,9 +67,9 @@ class LunaticAddCleaningVariablesTest {
     void shouldHaveCleaningVariableWhenSimpleResponseComponentWithBindingDependencies() {
 
         lunaticQuestionnaire = new Questionnaire();
-        lunaticQuestionnaire.getComponents().add(i);
+        lunaticQuestionnaire.getComponents().add(input);
 
-        i.setConditionFilter(buildConditionFilter("(SUM1 < 10)", List.of("SUM1", "Q11", "Q12")));
+        input.setConditionFilter(buildConditionFilter("(SUM1 < 10)", List.of("SUM1", "Q11", "Q12")));
 
         processing.apply(lunaticQuestionnaire);
         List<CleaningVariable> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
@@ -102,10 +102,10 @@ class LunaticAddCleaningVariablesTest {
     void shouldHaveCleaningVariablesOnLoopComponentsWithBindingDependencies() {
 
         lunaticQuestionnaire = new Questionnaire();
-        lunaticQuestionnaire.getComponents().add(l);
+        lunaticQuestionnaire.getComponents().add(loop);
 
-        ln.setConditionFilter(buildConditionFilter("(SUM2 < 10)", List.of("SUM2", "Q2")));
-        ldd.setConditionFilter(buildConditionFilter("(SUM1 < 10)", List.of("SUM1", "Q1")));
+        inputNumber.setConditionFilter(buildConditionFilter("(SUM2 < 10)", List.of("SUM2", "Q2")));
+        dropdown.setConditionFilter(buildConditionFilter("(SUM1 < 10)", List.of("SUM1", "Q1")));
 
         processing.apply(lunaticQuestionnaire);
         List<CleaningVariable> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
@@ -145,11 +145,11 @@ class LunaticAddCleaningVariablesTest {
     void shouldHaveGroupedCleaningVariablesOnComponentsHavingSameDependencies() {
 
         lunaticQuestionnaire = new Questionnaire();
-        lunaticQuestionnaire.getComponents().addAll(List.of(i, l));
+        lunaticQuestionnaire.getComponents().addAll(List.of(input, loop));
 
-        i.setConditionFilter(buildConditionFilter("(TEST > 30)", List.of("TEST", "SUM2")));
-        ln.setConditionFilter(buildConditionFilter("(SUM2 < 10)", List.of("SUM2", "Q2")));
-        ldd.setConditionFilter(buildConditionFilter("(SUM1 < 10)", List.of("SUM1", "Q1")));
+        input.setConditionFilter(buildConditionFilter("(TEST > 30)", List.of("TEST", "SUM2")));
+        inputNumber.setConditionFilter(buildConditionFilter("(SUM2 < 10)", List.of("SUM2", "Q2")));
+        dropdown.setConditionFilter(buildConditionFilter("(SUM1 < 10)", List.of("SUM1", "Q1")));
 
         processing.apply(lunaticQuestionnaire);
         List<CleaningVariable> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
@@ -198,9 +198,9 @@ class LunaticAddCleaningVariablesTest {
     void shouldHaveCleaningVariablesWhenTableWithBindingDependencies() {
 
         lunaticQuestionnaire = new Questionnaire();
-        lunaticQuestionnaire.getComponents().add(t);
+        lunaticQuestionnaire.getComponents().add(table);
 
-        t.setConditionFilter(buildConditionFilter("(SUM2 < 10)", List.of("SUM2", "SUM1", "Q11", "Q12")));
+        table.setConditionFilter(buildConditionFilter("(SUM2 < 10)", List.of("SUM2", "SUM1", "Q11", "Q12")));
 
         processing.apply(lunaticQuestionnaire);
         List<CleaningVariable> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
@@ -214,9 +214,9 @@ class LunaticAddCleaningVariablesTest {
     void shouldHaveCleaningVariableWhenCheckboxGroupWithBindingDependencies() {
 
         lunaticQuestionnaire = new Questionnaire();
-        lunaticQuestionnaire.getComponents().add(lcg);
+        lunaticQuestionnaire.getComponents().add(checkboxGroup);
 
-        lcg.setConditionFilter(buildConditionFilter("(SUM2 < 10)", List.of("SUM2", "SUM1", "Q11", "Q12")));
+        checkboxGroup.setConditionFilter(buildConditionFilter("(SUM2 < 10)", List.of("SUM2", "SUM1", "Q11", "Q12")));
 
         processing.apply(lunaticQuestionnaire);
         List<CleaningVariable> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
