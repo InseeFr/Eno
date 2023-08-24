@@ -54,10 +54,12 @@ public class StandaloneLoop extends Loop {
 
     public List<String> getLunaticLoopDependencies() {
         List<String> res = new ArrayList<>();
-        res.addAll(loopIterations.getMinIteration().getBindingReferences().stream()
-                .map(BindingReference::getVariableName).toList());
-        res.addAll(loopIterations.getMaxIteration().getBindingReferences().stream()
-                .map(BindingReference::getVariableName).toList());
+        if (this.getMinIteration() != null)
+            res.addAll(this.getMinIteration().getBindingReferences().stream()
+                    .map(BindingReference::getVariableName).toList());
+        if (this.getMaxIteration() != null)
+            res.addAll(this.getMaxIteration().getBindingReferences().stream()
+                    .map(BindingReference::getVariableName).toList());
         return res;
     }
 
