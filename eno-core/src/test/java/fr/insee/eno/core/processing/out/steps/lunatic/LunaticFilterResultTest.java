@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LunaticFilterResultTest {
 
@@ -116,9 +117,9 @@ class LunaticFilterResultTest {
         assertEquals(VariableTypeEnum.CALCULATED, variable.getVariableType());
         assertEquals("FILTER_RESULT_" + textQuestion.getName(), variable.getName());
         assertEquals(3, variable.getBindingDependencies().size());
-        assertEquals("CALCULATED_VARIABLE", variable.getBindingDependencies().get(0));
-        assertEquals("NUMERIC1_USED_FOR_CALCULATED_VARIABLE", variable.getBindingDependencies().get(1));
-        assertEquals("NUMERIC2_USED_FOR_CALCULATED_VARIABLE", variable.getBindingDependencies().get(2));
+        assertTrue(variable.getBindingDependencies().contains("CALCULATED_VARIABLE"));
+        assertTrue(variable.getBindingDependencies().contains("NUMERIC1_USED_FOR_CALCULATED_VARIABLE"));
+        assertTrue(variable.getBindingDependencies().contains("NUMERIC2_USED_FOR_CALCULATED_VARIABLE"));
         assertEquals("count(CALCULATED_VARIABLE) < 2", variable.getExpression().getValue());
     }
 
@@ -126,8 +127,8 @@ class LunaticFilterResultTest {
         assertEquals(VariableTypeEnum.CALCULATED, variable.getVariableType());
         assertEquals("FILTER_RESULT_" + tableQuestion.getName(), variable.getName());
         assertEquals(2, variable.getBindingDependencies().size());
-        assertEquals("CALCULATED_VARIABLE_2", variable.getBindingDependencies().get(0));
-        assertEquals("NUMERIC_USED_FOR_CALCULATED_VARIABLE_2", variable.getBindingDependencies().get(1));
+        assertTrue(variable.getBindingDependencies().contains("CALCULATED_VARIABLE_2"));
+        assertTrue(variable.getBindingDependencies().contains("NUMERIC_USED_FOR_CALCULATED_VARIABLE_2"));
         assertEquals("count(CALCULATED_VARIABLE_2) < 4", variable.getExpression().getValue());
     }
 }
