@@ -1,0 +1,1037 @@
+{
+  "id": "ljo1cbeo",
+  "modele": "ENOFILTERS2",
+  "enoCoreVersion": "2.4.1-pairwise",
+  "lunaticModelVersion": "2.3.2-rc7",
+  "generatingDate": "21-07-2023 13:40:53",
+  "missing": false,
+  "pagination": "question",
+  "maxPage": "20",
+  "label": {
+    "value": "Eno - Extended filters",
+    "type": "VTL|MD"
+  },
+  "components": [
+    {
+      "id": "ljo15yqj",
+      "componentType": "Sequence",
+      "page": "1",
+      "label": {
+        "value": "\"I - \" || \"First sequence\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo15yqj",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"First sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "ljo10typ",
+      "componentType": "CheckboxBoolean",
+      "mandatory": false,
+      "page": "2",
+      "label": {
+        "value": "\"➡ 1. \" || \"Question for sequences filter\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo15yqj",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"First sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q11"
+      ],
+      "response": {
+        "name": "Q11"
+      }
+    },
+    {
+      "id": "ljo1irqf",
+      "componentType": "CheckboxBoolean",
+      "mandatory": false,
+      "page": "3",
+      "label": {
+        "value": "\"➡ 2. \" || \"Question for subsequences filter\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo15yqj",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"First sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q12"
+      ],
+      "response": {
+        "name": "Q12"
+      }
+    },
+    {
+      "id": "ljo1dbf5",
+      "componentType": "CheckboxBoolean",
+      "mandatory": false,
+      "page": "4",
+      "label": {
+        "value": "\"➡ 3. \" || \"Question for questions filter\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo15yqj",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"First sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q13"
+      ],
+      "response": {
+        "name": "Q13"
+      }
+    },
+    {
+      "id": "ljo1a5e8",
+      "componentType": "Sequence",
+      "page": "5",
+      "label": {
+        "value": "\"II - \" || \"Séquence 2 A\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "(Q11)",
+        "type": "VTL",
+        "bindingDependencies": [
+          "Q11"
+        ]
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo1a5e8",
+          "page": "5",
+          "label": {
+            "value": "\"II - \" || \"Séquence 2 A\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "ljo1erjg",
+      "componentType": "Input",
+      "mandatory": false,
+      "page": "6",
+      "maxLength": 249,
+      "label": {
+        "value": "\"➡ 4. \" || \"Question 2 A\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "(Q11)",
+        "type": "VTL",
+        "bindingDependencies": [
+          "Q11"
+        ]
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo1a5e8",
+          "page": "5",
+          "label": {
+            "value": "\"II - \" || \"Séquence 2 A\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q2A"
+      ],
+      "response": {
+        "name": "Q2A"
+      }
+    },
+    {
+      "id": "ljo1m0rp",
+      "componentType": "Sequence",
+      "page": "7",
+      "label": {
+        "value": "\"III - \" || \"Sequence 2 B\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "(Q11)",
+        "type": "VTL",
+        "bindingDependencies": [
+          "Q11"
+        ]
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo1m0rp",
+          "page": "7",
+          "label": {
+            "value": "\"III - \" || \"Sequence 2 B\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "ljo1cthd",
+      "componentType": "Input",
+      "mandatory": false,
+      "page": "8",
+      "maxLength": 249,
+      "label": {
+        "value": "\"➡ 5. \" || \"Question 2 B\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "(Q11)",
+        "type": "VTL",
+        "bindingDependencies": [
+          "Q11"
+        ]
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo1m0rp",
+          "page": "7",
+          "label": {
+            "value": "\"III - \" || \"Sequence 2 B\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q2B"
+      ],
+      "response": {
+        "name": "Q2B"
+      }
+    },
+    {
+      "id": "ljo1n2i4",
+      "componentType": "Sequence",
+      "page": "9",
+      "label": {
+        "value": "\"IV - \" || \"Sequence 2 C\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "(Q11)",
+        "type": "VTL",
+        "bindingDependencies": [
+          "Q11"
+        ]
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo1n2i4",
+          "page": "9",
+          "label": {
+            "value": "\"IV - \" || \"Sequence 2 C\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "ljo1obod",
+      "componentType": "Input",
+      "mandatory": false,
+      "page": "10",
+      "maxLength": 249,
+      "label": {
+        "value": "\"➡ 6. \" || \"Question 2 C\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "(Q11)",
+        "type": "VTL",
+        "bindingDependencies": [
+          "Q11"
+        ]
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo1n2i4",
+          "page": "9",
+          "label": {
+            "value": "\"IV - \" || \"Sequence 2 C\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q2C"
+      ],
+      "response": {
+        "name": "Q2C"
+      }
+    },
+    {
+      "id": "ljo19nvz",
+      "componentType": "Sequence",
+      "page": "11",
+      "label": {
+        "value": "\"V - \" || \"Sequence 3\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo19nvz",
+          "page": "11",
+          "label": {
+            "value": "\"V - \" || \"Sequence 3\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "ljo1hpgw",
+      "componentType": "Subsequence",
+      "goToPage": "12",
+      "label": {
+        "value": "\"Subsequence 3.1\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "(Q12)",
+        "type": "VTL",
+        "bindingDependencies": [
+          "Q12"
+        ]
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo19nvz",
+          "page": "11",
+          "label": {
+            "value": "\"V - \" || \"Sequence 3\"",
+            "type": "VTL|MD"
+          }
+        },
+        "subSequence": {
+          "id": "ljo1hpgw",
+          "page": "12",
+          "label": {
+            "value": "\"Subsequence 3.1\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "ljo1c8h5",
+      "componentType": "Input",
+      "mandatory": false,
+      "page": "12",
+      "maxLength": 249,
+      "label": {
+        "value": "\"➡ 7. \" || \"Question 3.1\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "(Q12)",
+        "type": "VTL",
+        "bindingDependencies": [
+          "Q12"
+        ]
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo19nvz",
+          "page": "11",
+          "label": {
+            "value": "\"V - \" || \"Sequence 3\"",
+            "type": "VTL|MD"
+          }
+        },
+        "subSequence": {
+          "id": "ljo1hpgw",
+          "page": "12",
+          "label": {
+            "value": "\"Subsequence 3.1\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q31"
+      ],
+      "response": {
+        "name": "Q31"
+      }
+    },
+    {
+      "id": "ljo1imhf",
+      "componentType": "Subsequence",
+      "goToPage": "13",
+      "label": {
+        "value": "\"Subsequence 3.2\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "(Q12)",
+        "type": "VTL",
+        "bindingDependencies": [
+          "Q12"
+        ]
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo19nvz",
+          "page": "11",
+          "label": {
+            "value": "\"V - \" || \"Sequence 3\"",
+            "type": "VTL|MD"
+          }
+        },
+        "subSequence": {
+          "id": "ljo1imhf",
+          "page": "13",
+          "label": {
+            "value": "\"Subsequence 3.2\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "ljo1dmgc",
+      "componentType": "Input",
+      "mandatory": false,
+      "page": "13",
+      "maxLength": 249,
+      "label": {
+        "value": "\"➡ 8. \" || \"Question 3.2\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "(Q12)",
+        "type": "VTL",
+        "bindingDependencies": [
+          "Q12"
+        ]
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo19nvz",
+          "page": "11",
+          "label": {
+            "value": "\"V - \" || \"Sequence 3\"",
+            "type": "VTL|MD"
+          }
+        },
+        "subSequence": {
+          "id": "ljo1imhf",
+          "page": "13",
+          "label": {
+            "value": "\"Subsequence 3.2\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q32"
+      ],
+      "response": {
+        "name": "Q32"
+      }
+    },
+    {
+      "id": "ljo19fbn",
+      "componentType": "Subsequence",
+      "goToPage": "14",
+      "label": {
+        "value": "\"Subsequence 3.3\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "(Q12)",
+        "type": "VTL",
+        "bindingDependencies": [
+          "Q12"
+        ]
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo19nvz",
+          "page": "11",
+          "label": {
+            "value": "\"V - \" || \"Sequence 3\"",
+            "type": "VTL|MD"
+          }
+        },
+        "subSequence": {
+          "id": "ljo19fbn",
+          "page": "14",
+          "label": {
+            "value": "\"Subsequence 3.3\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "ljo1cx8w",
+      "componentType": "Input",
+      "mandatory": false,
+      "page": "14",
+      "maxLength": 249,
+      "label": {
+        "value": "\"➡ 9. \" || \"Question 3.3\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "(Q12)",
+        "type": "VTL",
+        "bindingDependencies": [
+          "Q12"
+        ]
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo19nvz",
+          "page": "11",
+          "label": {
+            "value": "\"V - \" || \"Sequence 3\"",
+            "type": "VTL|MD"
+          }
+        },
+        "subSequence": {
+          "id": "ljo19fbn",
+          "page": "14",
+          "label": {
+            "value": "\"Subsequence 3.3\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q33"
+      ],
+      "response": {
+        "name": "Q33"
+      }
+    },
+    {
+      "id": "ljo1erbo",
+      "componentType": "Sequence",
+      "page": "15",
+      "label": {
+        "value": "\"VI - \" || \"Sequence 4\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo1erbo",
+          "page": "15",
+          "label": {
+            "value": "\"VI - \" || \"Sequence 4\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "ljo1jopg",
+      "componentType": "Input",
+      "mandatory": false,
+      "page": "16",
+      "maxLength": 249,
+      "label": {
+        "value": "\"➡ 10. \" || \"Question 1 of sequence 4\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "(Q13)",
+        "type": "VTL",
+        "bindingDependencies": [
+          "Q13"
+        ]
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo1erbo",
+          "page": "15",
+          "label": {
+            "value": "\"VI - \" || \"Sequence 4\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q41"
+      ],
+      "response": {
+        "name": "Q41"
+      }
+    },
+    {
+      "id": "ljo1ppho",
+      "componentType": "Input",
+      "mandatory": false,
+      "page": "17",
+      "maxLength": 249,
+      "label": {
+        "value": "\"➡ 11. \" || \"Question 2 of sequence 4\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "(Q13)",
+        "type": "VTL",
+        "bindingDependencies": [
+          "Q13"
+        ]
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo1erbo",
+          "page": "15",
+          "label": {
+            "value": "\"VI - \" || \"Sequence 4\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q42"
+      ],
+      "response": {
+        "name": "Q42"
+      }
+    },
+    {
+      "id": "ljo1lbcc",
+      "componentType": "Input",
+      "mandatory": false,
+      "page": "18",
+      "maxLength": 249,
+      "label": {
+        "value": "\"➡ 12. \" || \"Question 3 of sequence 4\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "(Q13)",
+        "type": "VTL",
+        "bindingDependencies": [
+          "Q13"
+        ]
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ljo1erbo",
+          "page": "15",
+          "label": {
+            "value": "\"VI - \" || \"Sequence 4\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q43"
+      ],
+      "response": {
+        "name": "Q43"
+      }
+    },
+    {
+      "id": "COMMENT-SEQ",
+      "componentType": "Sequence",
+      "page": "19",
+      "label": {
+        "value": "\"Commentaire\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "COMMENT-SEQ",
+          "page": "19",
+          "label": {
+            "value": "\"Commentaire\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "COMMENT-QUESTION",
+      "componentType": "Textarea",
+      "mandatory": false,
+      "page": "20",
+      "maxLength": 2000,
+      "label": {
+        "value": "\"Avez-vous des remarques concernant l'enquête ou des commentaires ?\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "COMMENT-SEQ",
+          "page": "19",
+          "label": {
+            "value": "\"Commentaire\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "COMMENT_QE"
+      ],
+      "response": {
+        "name": "COMMENT_QE"
+      }
+    }
+  ],
+  "variables": [
+    {
+      "variableType": "COLLECTED",
+      "name": "COMMENT_QE",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q11",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q12",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q13",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q2A",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q2B",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q2C",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q31",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q32",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q33",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q41",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q42",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q43",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "FILTER_RESULT_Q11",
+      "expression": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "FILTER_RESULT_Q12",
+      "expression": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "FILTER_RESULT_Q13",
+      "expression": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "FILTER_RESULT_Q2A",
+      "expression": {
+        "value": "(Q11)",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "Q11"
+      ],
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "FILTER_RESULT_Q2B",
+      "expression": {
+        "value": "(Q11)",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "Q11"
+      ],
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "FILTER_RESULT_Q2C",
+      "expression": {
+        "value": "(Q11)",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "Q11"
+      ],
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "FILTER_RESULT_Q31",
+      "expression": {
+        "value": "(Q12)",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "Q12"
+      ],
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "FILTER_RESULT_Q32",
+      "expression": {
+        "value": "(Q12)",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "Q12"
+      ],
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "FILTER_RESULT_Q33",
+      "expression": {
+        "value": "(Q12)",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "Q12"
+      ],
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "FILTER_RESULT_Q41",
+      "expression": {
+        "value": "(Q13)",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "Q13"
+      ],
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "FILTER_RESULT_Q42",
+      "expression": {
+        "value": "(Q13)",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "Q13"
+      ],
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "FILTER_RESULT_Q43",
+      "expression": {
+        "value": "(Q13)",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "Q13"
+      ],
+      "inFilter": "false"
+    }
+  ],
+  "cleaning": {
+    "Q11": {
+      "Q2A": "(Q11)",
+      "Q2B": "(Q11)",
+      "Q2C": "(Q11)"
+    },
+    "Q12": {
+      "Q31": "(Q12)",
+      "Q32": "(Q12)",
+      "Q33": "(Q12)"
+    },
+    "Q13": {
+      "Q41": "(Q13)",
+      "Q42": "(Q13)",
+      "Q43": "(Q13)"
+    }
+  },
+  "resizing": {}
+}

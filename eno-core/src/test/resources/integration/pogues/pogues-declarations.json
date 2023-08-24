@@ -1,0 +1,554 @@
+{
+  "owner": "FAKEPERMISSION",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "idendquest",
+        "lk6zlgzm",
+        "lk6zkkfr",
+        "lk6znaqx",
+        "lk6zs7tw",
+        "lk709m8o",
+        "lk702f0b",
+        "lk70b3kk"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "lk708209",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "Eno - Declarations and instructions"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "ENODECLARATIONS",
+  "Variables": {
+    "Variable": [
+      {
+        "Formula": "cast($Q3$, integer) + 5",
+        "Label": "\"A calculated variable\"",
+        "id": "lk7054i6",
+        "type": "CalculatedVariableType",
+        "Name": "CALCULATED1",
+        "Datatype": {
+          "Maximum": "15",
+          "Minimum": "5",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": "0"
+        }
+      },
+      {
+        "Label": "\"An external variable\"",
+        "id": "lk70gx22",
+        "type": "ExternalVariableType",
+        "Name": "EXTERNAL1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "Q1 label",
+        "id": "lk6z944k",
+        "type": "CollectedVariableType",
+        "Name": "Q1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "Q2 label",
+        "id": "lk703g29",
+        "type": "CollectedVariableType",
+        "Name": "Q2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "Q3 label",
+        "id": "lk70e8ls",
+        "type": "CollectedVariableType",
+        "Name": "Q3",
+        "Datatype": {
+          "Maximum": "10",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": "0"
+        }
+      },
+      {
+        "Label": "Q4 label",
+        "id": "lk701lna",
+        "type": "CollectedVariableType",
+        "Name": "Q4",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q5 label",
+        "id": "lk7043ag",
+        "type": "CollectedVariableType",
+        "Name": "Q5",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Mon Jul 17 2023 17:05:47 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "TCM",
+      "uri": "http://ddi:fr.insee:DataCollection.TCM"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "lk6zk95c",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Types of declaration\""
+      ],
+      "id": "lk6zlgzm",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "HELP",
+          "Text": "\"Static label  of type 'Aide' in Pogues\"",
+          "id": "lk6zj8wp",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ]
+        },
+        {
+          "declarationType": "INSTRUCTION",
+          "Text": "\"Static label  of type 'Consigne' in Pogues\"",
+          "id": "lk6zi722",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ]
+        },
+        {
+          "declarationType": "CODECARD",
+          "Text": "\"Code card static label\"",
+          "id": "lk6zsixf",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lk6z944k",
+              "id": "lk70crwr",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 1\""
+          ],
+          "id": "lk6zkkfr",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Static label 'Aide' before the question\"",
+              "id": "lk706b3k",
+              "position": "BEFORE_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ]
+            },
+            {
+              "declarationType": "INSTRUCTION",
+              "Text": "\"Static label 'Consigne' before the question\"",
+              "id": "lk701wsj",
+              "position": "BEFORE_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ]
+            },
+            {
+              "declarationType": "CODECARD",
+              "Text": "\"Code card before the question\"",
+              "id": "lk6zltsp",
+              "position": "BEFORE_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI"
+              ]
+            },
+            {
+              "declarationType": "HELP",
+              "Text": "\"Static label 'Aide' after the question\"",
+              "id": "lk6zp25f",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "PAPI",
+                "CAWI"
+              ]
+            },
+            {
+              "declarationType": "INSTRUCTION",
+              "Text": "\"Static label 'Consigne' after the question\"",
+              "id": "lk6zls8d",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ]
+            },
+            {
+              "declarationType": "CODECARD",
+              "Text": "\"Code card after the question\"",
+              "id": "lk6zxafy",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI"
+              ]
+            }
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q1"
+        }
+      ],
+      "Name": "S1"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Dynamic declarations\""
+      ],
+      "id": "lk6znaqx",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "HELP",
+          "Text": "\"Answer to question 1: \" || $Q1$",
+          "id": "lk6znwqo",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lk703g29",
+              "id": "lk703ksf",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 2\""
+          ],
+          "id": "lk6zs7tw",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Dynamic declaration using one collected: \" || $Q1$",
+              "id": "lk709w0i",
+              "position": "BEFORE_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ]
+            },
+            {
+              "declarationType": "HELP",
+              "Text": "\"Dynamic instruction using one collected: \" || $Q1$",
+              "id": "lk6zw2lh",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ]
+            }
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q2"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lk70e8ls",
+              "id": "lk702hbk",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "10",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Decimals": "0"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 3\""
+          ],
+          "id": "lk709m8o",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Dynamic declaration using two collected: \" || $Q1$ || \" and \" || $Q2$",
+              "id": "lk703vgg",
+              "position": "BEFORE_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ]
+            },
+            {
+              "declarationType": "HELP",
+              "Text": "\"Dynamic instruction using two collected: \" || $Q1$ || \" and \" || $Q2$",
+              "id": "lk70182d",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ]
+            }
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q3"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lk701lna",
+              "id": "lk70i9tk",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 4\""
+          ],
+          "id": "lk702f0b",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Dynamic instruction using a calculated: \" || cast($CALCULATED1$, string)",
+              "id": "lk70c4cl",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ]
+            }
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q4"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lk7043ag",
+              "id": "lk70fg0y",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 5\""
+          ],
+          "id": "lk70b3kk",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Dynamic instruction using an external: \" || $EXTERNAL1$",
+              "id": "lk70diom",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ]
+            }
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q5"
+        }
+      ],
+      "Name": "S2"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

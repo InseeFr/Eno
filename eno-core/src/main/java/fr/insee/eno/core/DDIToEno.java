@@ -6,7 +6,8 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.parsers.DDIParser;
-import fr.insee.eno.core.processing.EnoProcessing;
+import fr.insee.eno.core.processing.common.EnoProcessing;
+import fr.insee.eno.core.processing.in.DDIInProcessing;
 import instance33.DDIInstanceDocument;
 
 import java.io.InputStream;
@@ -31,8 +32,11 @@ public class DDIToEno {
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         ddiMapper.mapDDI(ddiInstanceDocument, enoQuestionnaire);
         //
+        DDIInProcessing ddiInProcessing = new DDIInProcessing();
+        ddiInProcessing.applyProcessing(enoQuestionnaire);
+        //
         EnoProcessing enoProcessing = new EnoProcessing(enoParameters);
-        enoProcessing.applyProcessing(enoQuestionnaire, Format.DDI);
+        enoProcessing.applyProcessing(enoQuestionnaire);
         //
         return enoQuestionnaire;
     }

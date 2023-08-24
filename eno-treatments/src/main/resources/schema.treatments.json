@@ -83,7 +83,10 @@
           "type": "boolean"
         },
         "synonyms": {
-          "$ref": "#/$defs/field_synonym"
+          "type" : "array",
+          "items" : {
+            "$ref": "#/$defs/field_synonym"
+          }
         }
       },
       "required": ["name", "rules"]

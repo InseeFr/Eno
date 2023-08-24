@@ -1,12 +1,14 @@
 package fr.insee.eno.core.model.question;
 
 import datacollection33.QuestionGridType;
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.navigation.Binding;
 import fr.insee.eno.core.model.question.table.TableCell;
 import fr.insee.lunatic.model.flat.RosterForLoop;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,11 +38,13 @@ import java.util.List;
  */
 @Getter
 @Setter
+@Context(format = Format.DDI, type = QuestionGridType.class)
+@Context(format = Format.LUNATIC, type = Table.class)
 public class TableQuestion extends MultipleResponseQuestion {
 
     /** Parameter that exists in Lunatic but that has a fixed value for now. */
-    @Lunatic(contextType = Table.class, field = "setPositioning(#param)")
-    private String positioning = "HORIZONTAL";
+    @Lunatic("setPositioning(#param)")
+    private final String positioning = "HORIZONTAL";
 
     @DDI(contextType = QuestionGridType.class,
             field = "getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
@@ -51,25 +55,29 @@ public class TableQuestion extends MultipleResponseQuestion {
 
     /** Lunatic component type property.
      * This should be inserted by Lunatic-Model serializer later on. */
-    @Lunatic(contextType = Table.class,
-            field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
+    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     String lunaticComponentType = "TABLE";
 
-    /** Code list that contains header info. */
-    @DDI(contextType = QuestionGridType.class,
-            field = "#index.get(#this.getGridDimensionList().?[#this.getRank().intValue() == 2].get(0)" +
-                    ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue())")
+    /** Reference of the code list that contains header info. */
+    @DDI("getGridDimensionList().?[#this.getRank().intValue() == 2].get(0)" +
+            ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue()")
+    String headerCodeListReference;
+
+    /** Code list that contains header info.
+     * In DDI, inserted here through a processing. */
     CodeList header;
 
-    /** Code list that contains left column info. */
-    @DDI(contextType = QuestionGridType.class,
-            field = "#index.get(#this.getGridDimensionList().?[#this.getRank().intValue() == 1].get(0)" +
-                    ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue())")
+    /** Code list that contains header info. */
+    @DDI("getGridDimensionList().?[#this.getRank().intValue() == 1].get(0)" +
+            ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue()")
+    String leftColumnCodeListReference;
+
+    /** Code list that contains left column info.
+     * In DDI, inserted here through a processing. */
     CodeList leftColumn;
 
     /** Considering that out parameters are sorted in the same order as GridResponseDomainInMixed objects in DDI. */
-    @DDI(contextType = QuestionGridType.class,
-            field = "getOutParameterList().![#this.getParameterNameArray(0).getStringArray(0).getStringValue()]")
+    @DDI("getOutParameterList().![#this.getParameterNameArray(0).getStringArray(0).getStringValue()]")
     List<String> variableNames = new ArrayList<>();
 
     @DDI(contextType = QuestionGridType.class,
@@ -77,7 +85,7 @@ public class TableQuestion extends MultipleResponseQuestion {
     List<Binding> bindings = new ArrayList<>();
 
     /** Table cells. */
-    @DDI(contextType = QuestionGridType.class, field = "getStructuredMixedGridResponseDomain().getGridResponseDomainInMixedList()")
+    @DDI("getStructuredMixedGridResponseDomain().getGridResponseDomainInMixedList()")
     List<TableCell> tableCells = new ArrayList<>();
 
 }

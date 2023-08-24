@@ -3,6 +3,7 @@ package fr.insee.eno.core;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -24,7 +25,8 @@ class DDIToEnoTest {
     /** The focus is on the mapping part here, so business processing (that may be enabled by default) are disabled. */
     @BeforeEach
     void parametersWithNoBusinessProcessing() {
-        enoParameters = new EnoParameters();
+        enoParameters = EnoParameters.emptyValues();
+        enoParameters.setModeParameter(ModeParameter.PROCESS);
         enoParameters.setSequenceNumbering(false);
         enoParameters.setQuestionNumberingMode(EnoParameters.QuestionNumberingMode.NONE);
         enoParameters.setArrowCharInQuestions(false);
@@ -116,8 +118,6 @@ class DDIToEnoTest {
 
     @Test
     @DisplayName("DDI 'kzy5kbtl' (contains tables)")
-    @Disabled("Questionnaire is not valid (contains a loop with neither min/max not 'based on'. " +
-            "To be edited and re-generated.")
     void test04() throws DDIParsingException {
         //
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
@@ -140,7 +140,7 @@ class DDIToEnoTest {
 
     @Test
     @DisplayName("DDI 'ldodefpq' (contains pairwise question)")
-    @Disabled("Bug identified on the date type of question conversion.")
+    @Disabled("Bug identified on the date type of question conversion. + Must be re-generated with loop spec in DDI.")
     void test06() throws DDIParsingException {
         //
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(

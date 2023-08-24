@@ -14,19 +14,11 @@ import org.junit.jupiter.api.Test;
 import reusable33.*;
 import reusable33.impl.ContentTypeImpl;
 
-import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DDITests {
-
-    @Test
-    void arrayAndList() {
-        String[] foo = {"a", "b", "c"};
-        assertFalse(List.class.isAssignableFrom(foo.getClass()));
-        assertEquals("a", foo[0]);
-    }
 
     @Test
     void xmlBeansAndDDI() {

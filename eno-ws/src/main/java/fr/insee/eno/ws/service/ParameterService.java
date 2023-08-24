@@ -1,5 +1,6 @@
 package fr.insee.eno.ws.service;
 
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.parameter.EnoParameters;
 import org.springframework.stereotype.Service;
@@ -18,17 +19,9 @@ public class ParameterService {
         }
     }
 
-    public Mono<String> defaultParams() {
+    public Mono<String> defaultParams(EnoParameters.Context context, Format format, ModeParameter modeParameter) {
         try {
-            return Mono.just(EnoParameters.serialize(new EnoParameters()));
-        } catch (Exception e) {
-            return Mono.error(e);
-        }
-    }
-
-    public Mono<String> defaultParams(EnoParameters.Context context, Format format) {
-        try {
-            return Mono.just(EnoParameters.serialize(new EnoParameters(context, format)));
+            return Mono.just(EnoParameters.serialize(EnoParameters.of(context, modeParameter, format)));
         } catch (Exception e) {
             return Mono.error(e);
         }

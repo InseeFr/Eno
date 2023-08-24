@@ -1,9 +1,11 @@
 package fr.insee.eno.core.model.question;
 
 import datacollection33.QuestionItemType;
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.code.CodeItem;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.CheckboxOne;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Dropdown;
@@ -23,6 +25,8 @@ import java.util.List;
 @Getter
 @Setter
 @Slf4j
+@Context(format = Format.DDI, type = QuestionItemType.class)
+@Context(format = Format.LUNATIC, type = {CheckboxOne.class, Radio.class, Dropdown.class})
 public class UniqueChoiceQuestion extends SingleResponseQuestion {
 
     /**
@@ -49,21 +53,21 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * Property used to convert to unique choice question to the right Lunatic component.
      * In DDI, there are conventional values in the "generic output format" property.
      * In Lunatic, it is used by the converter to create the right object, and to set the component type property. */
-    @DDI(contextType = QuestionItemType.class,
-            field = "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDDIOutputFormat(#this)")
-    @Lunatic(contextType = {CheckboxOne.class, Radio.class, Dropdown.class},
-            field = "setComponentType(" +
-                    "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
+    @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDDIOutputFormat(#this)")
+    @Lunatic("setComponentType(" +
+            "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
     DisplayFormat displayFormat;
+
+    /** Reference to the code list that contain the modalities of the question. */
+    @DDI("getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()")
+    String codeListReference;
 
     /**
      * List of modalities of the unique choice question.
+     * In DDI, these are inserted here through a processing.
      */
-    @DDI(contextType = QuestionItemType.class,
-            field = "#index.get(#this.getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()).getCodeList()")
-    @Lunatic(contextType = {CheckboxOne.class, Radio.class, Dropdown.class}, field = "getOptions()")
-    List<CodeItem> codeList = new ArrayList<>();
-    //TODO: map this only once maybe (currently a list of object is created for each unique choice question)
+    @Lunatic("getOptions()")
+    List<CodeItem> codeItems = new ArrayList<>();
 
     /**
      * From DDI question item (that correspond to a unique choice question),

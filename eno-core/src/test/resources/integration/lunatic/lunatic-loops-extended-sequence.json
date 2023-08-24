@@ -1,0 +1,627 @@
+{
+  "id": "ll3vc5g5",
+  "modele": "ENOLOOPS3",
+  "enoCoreVersion": "2.4.9",
+  "lunaticModelVersion": "2.3.4",
+  "generatingDate": "16-08-2023 16:40:15",
+  "missing": false,
+  "pagination": "question",
+  "maxPage": "4",
+  "label": {
+    "value": "Eno - Extended loops (sequence)",
+    "type": "VTL|MD"
+  },
+  "components": [
+    {
+      "id": "ll3vo4wh",
+      "componentType": "Loop",
+      "page": "1",
+      "depth": 1,
+      "paginatedLoop": false,
+      "label": {
+        "value": "\"Add\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "Q1",
+        "Q2",
+        "Q3"
+      ],
+      "lines": {
+        "min": {
+          "value": "1",
+          "type": "VTL"
+        },
+        "max": {
+          "value": "5",
+          "type": "VTL"
+        }
+      },
+      "components": [
+        {
+          "id": "ll3voupu",
+          "componentType": "Sequence",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Sequence 1 (start of loop)\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll3voupu",
+              "page": "1",
+              "label": {
+                "value": "\"I - \" || \"Sequence 1 (start of loop)\"",
+                "type": "VTL|MD"
+              }
+            }
+          }
+        },
+        {
+          "id": "ll3vmxdk",
+          "componentType": "Input",
+          "mandatory": false,
+          "page": "1",
+          "maxLength": 249,
+          "label": {
+            "value": "\"➡ \" || \"Question 1\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll3voupu",
+              "page": "1",
+              "label": {
+                "value": "\"I - \" || \"Sequence 1 (start of loop)\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "Q1"
+          ],
+          "response": {
+            "name": "Q1"
+          }
+        },
+        {
+          "id": "ll3vzeuu",
+          "componentType": "Sequence",
+          "page": "1",
+          "label": {
+            "value": "\"II - \" || \"Sequence 2\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll3vzeuu",
+              "page": "1",
+              "label": {
+                "value": "\"II - \" || \"Sequence 2\"",
+                "type": "VTL|MD"
+              }
+            }
+          }
+        },
+        {
+          "id": "ll3vmtwc",
+          "componentType": "Input",
+          "mandatory": false,
+          "page": "1",
+          "maxLength": 249,
+          "label": {
+            "value": "\"➡ \" || \"Question 2\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll3vzeuu",
+              "page": "1",
+              "label": {
+                "value": "\"II - \" || \"Sequence 2\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "Q2"
+          ],
+          "response": {
+            "name": "Q2"
+          }
+        },
+        {
+          "id": "ll3vxw30",
+          "componentType": "Sequence",
+          "page": "1",
+          "label": {
+            "value": "\"III - \" || \"Sequence 3 (end of loop)\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll3vxw30",
+              "page": "1",
+              "label": {
+                "value": "\"III - \" || \"Sequence 3 (end of loop)\"",
+                "type": "VTL|MD"
+              }
+            }
+          }
+        },
+        {
+          "id": "ll3vwe72",
+          "componentType": "Input",
+          "mandatory": false,
+          "page": "1",
+          "maxLength": 249,
+          "label": {
+            "value": "\"➡ \" || \"Question 3\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll3vxw30",
+              "page": "1",
+              "label": {
+                "value": "\"III - \" || \"Sequence 3 (end of loop)\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "Q3"
+          ],
+          "response": {
+            "name": "Q3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ll3vwi5e",
+      "componentType": "Loop",
+      "page": "2",
+      "maxPage": "6",
+      "depth": 1,
+      "paginatedLoop": true,
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "Q4",
+        "Q5",
+        "Q6"
+      ],
+      "loopDependencies": [
+        "Q1",
+        "Q2",
+        "Q3"
+      ],
+      "components": [
+        {
+          "id": "ll3vyvgg",
+          "componentType": "Sequence",
+          "page": "2.1",
+          "label": {
+            "value": "\"IV - \" || \"Sequence 4 (start of linked loop)\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll3vyvgg",
+              "page": "2.1",
+              "label": {
+                "value": "\"IV - \" || \"Sequence 4 (start of linked loop)\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "Q1",
+            "Q2",
+            "Q3"
+          ]
+        },
+        {
+          "id": "ll3vutdx",
+          "componentType": "Input",
+          "mandatory": false,
+          "page": "2.2",
+          "maxLength": 249,
+          "label": {
+            "value": "\"➡ \" || \"Question 4\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll3vyvgg",
+              "page": "2.1",
+              "label": {
+                "value": "\"IV - \" || \"Sequence 4 (start of linked loop)\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "Q4",
+            "Q1",
+            "Q2",
+            "Q3"
+          ],
+          "response": {
+            "name": "Q4"
+          }
+        },
+        {
+          "id": "ll3vk7v3",
+          "componentType": "Sequence",
+          "page": "2.3",
+          "label": {
+            "value": "\"V - \" || \"Sequence 5\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll3vk7v3",
+              "page": "2.3",
+              "label": {
+                "value": "\"V - \" || \"Sequence 5\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "Q1",
+            "Q2",
+            "Q3"
+          ]
+        },
+        {
+          "id": "ll3w31im",
+          "componentType": "Input",
+          "mandatory": false,
+          "page": "2.4",
+          "maxLength": 249,
+          "label": {
+            "value": "\"➡ \" || \"Question 5\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll3vk7v3",
+              "page": "2.3",
+              "label": {
+                "value": "\"V - \" || \"Sequence 5\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "Q5",
+            "Q1",
+            "Q2",
+            "Q3"
+          ],
+          "response": {
+            "name": "Q5"
+          }
+        },
+        {
+          "id": "ll3w45z4",
+          "componentType": "Sequence",
+          "page": "2.5",
+          "label": {
+            "value": "\"VI - \" || \"Sequence 6 (end of linked loop)\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll3w45z4",
+              "page": "2.5",
+              "label": {
+                "value": "\"VI - \" || \"Sequence 6 (end of linked loop)\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "Q1",
+            "Q2",
+            "Q3"
+          ]
+        },
+        {
+          "id": "ll3vkt4b",
+          "componentType": "Input",
+          "mandatory": false,
+          "page": "2.6",
+          "maxLength": 249,
+          "label": {
+            "value": "\"➡ \" || \"Question 6\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "ll3w45z4",
+              "page": "2.5",
+              "label": {
+                "value": "\"VI - \" || \"Sequence 6 (end of linked loop)\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "Q6",
+            "Q1",
+            "Q2",
+            "Q3"
+          ],
+          "response": {
+            "name": "Q6"
+          }
+        }
+      ],
+      "iterations": {
+        "value": "count(Q1)",
+        "type": "VTL"
+      }
+    },
+    {
+      "id": "ll3vqv42",
+      "componentType": "Sequence",
+      "page": "3",
+      "label": {
+        "value": "\"VII - \" || \"Last sequence\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ll3vqv42",
+          "page": "3",
+          "label": {
+            "value": "\"VII - \" || \"Last sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "ll3w8u8z",
+      "componentType": "CheckboxBoolean",
+      "mandatory": false,
+      "page": "4",
+      "label": {
+        "value": "\"➡ \" || \"Last question\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "ll3vqv42",
+          "page": "3",
+          "label": {
+            "value": "\"VII - \" || \"Last sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q_LAST"
+      ],
+      "response": {
+        "name": "Q_LAST"
+      }
+    }
+  ],
+  "variables": [
+    {
+      "variableType": "COLLECTED",
+      "name": "Q1",
+      "values": {
+        "PREVIOUS": [
+          null
+        ],
+        "COLLECTED": [
+          null
+        ],
+        "FORCED": [
+          null
+        ],
+        "EDITED": [
+          null
+        ],
+        "INPUTED": [
+          null
+        ]
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q2",
+      "values": {
+        "PREVIOUS": [
+          null
+        ],
+        "COLLECTED": [
+          null
+        ],
+        "FORCED": [
+          null
+        ],
+        "EDITED": [
+          null
+        ],
+        "INPUTED": [
+          null
+        ]
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q3",
+      "values": {
+        "PREVIOUS": [
+          null
+        ],
+        "COLLECTED": [
+          null
+        ],
+        "FORCED": [
+          null
+        ],
+        "EDITED": [
+          null
+        ],
+        "INPUTED": [
+          null
+        ]
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q4",
+      "values": {
+        "PREVIOUS": [
+          null
+        ],
+        "COLLECTED": [
+          null
+        ],
+        "FORCED": [
+          null
+        ],
+        "EDITED": [
+          null
+        ],
+        "INPUTED": [
+          null
+        ]
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q5",
+      "values": {
+        "PREVIOUS": [
+          null
+        ],
+        "COLLECTED": [
+          null
+        ],
+        "FORCED": [
+          null
+        ],
+        "EDITED": [
+          null
+        ],
+        "INPUTED": [
+          null
+        ]
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q6",
+      "values": {
+        "PREVIOUS": [
+          null
+        ],
+        "COLLECTED": [
+          null
+        ],
+        "FORCED": [
+          null
+        ],
+        "EDITED": [
+          null
+        ],
+        "INPUTED": [
+          null
+        ]
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q_LAST",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    }
+  ],
+  "cleaning": {},
+  "resizing": {
+    "Q1": {
+      "size": "count(Q1)",
+      "variables": [
+        "Q4",
+        "Q5",
+        "Q6"
+      ]
+    }
+  }
+}

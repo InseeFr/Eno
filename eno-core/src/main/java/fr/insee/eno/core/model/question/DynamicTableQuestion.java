@@ -6,6 +6,9 @@ import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.navigation.Binding;
 import fr.insee.eno.core.model.question.table.TableCell;
+import fr.insee.eno.core.annotations.Contexts;
+import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.RosterForLoop;
 import fr.insee.lunatic.model.flat.Table;
 import lombok.Getter;
@@ -25,6 +28,8 @@ import java.util.List;
 @Getter
 @Setter
 @Slf4j
+@Contexts.Context(format = Format.DDI, type = QuestionGridType.class)
+@Contexts.Context(format = Format.LUNATIC, type = RosterForLoop.class)
 public class DynamicTableQuestion extends MultipleResponseQuestion {
 
     public DynamicTableQuestion() {
@@ -33,8 +38,7 @@ public class DynamicTableQuestion extends MultipleResponseQuestion {
 
     /** Lunatic component type property.
      * This should be inserted by Lunatic-Model serializer later on. */
-    @Lunatic(contextType = RosterForLoop.class,
-            field = "setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
+    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     String lunaticComponentType = "ROSTER_FOR_LOOP";
 
     @DDI(contextType = QuestionGridType.class,
