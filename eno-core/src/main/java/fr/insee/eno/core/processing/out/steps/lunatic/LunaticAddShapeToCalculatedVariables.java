@@ -11,10 +11,10 @@ import java.util.List;
  * Add shapeFrom attribute on calculated variables. Exclude shapeFrom for non eno calculated variables
  * (shapeFrom on filter results calculated variables and pairwise calculated variables are generated in their processings)
  */
-public class LunaticAddShapeFromAttributeToCalculatedVariables implements ProcessingStep<Questionnaire> {
+public class LunaticAddShapeToCalculatedVariables implements ProcessingStep<Questionnaire> {
     private final EnoQuestionnaire enoQuestionnaire;
 
-    public LunaticAddShapeFromAttributeToCalculatedVariables(EnoQuestionnaire enoQuestionnaire) {
+    public LunaticAddShapeToCalculatedVariables(EnoQuestionnaire enoQuestionnaire) {
         this.enoQuestionnaire = enoQuestionnaire;
     }
 

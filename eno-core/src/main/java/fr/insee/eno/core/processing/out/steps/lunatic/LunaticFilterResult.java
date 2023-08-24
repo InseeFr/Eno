@@ -3,7 +3,7 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.processing.ProcessingStep;
-import fr.insee.eno.core.reference.EnoIndex;
+import fr.insee.eno.core.processing.out.steps.lunatic.calculatedvariable.RetrieveShapeFromAttribute;
 import fr.insee.lunatic.model.flat.*;
 
 import java.util.ArrayList;
@@ -12,11 +12,11 @@ import java.util.Optional;
 
 public class LunaticFilterResult implements ProcessingStep<Questionnaire> {
 
-    private final EnoIndex enoIndex;
+    private final EnoQuestionnaire enoQuestionnaire;
     public static final String FILTER_RESULT_PREFIX = "FILTER_RESULT_";
 
     public LunaticFilterResult(EnoQuestionnaire enoQuestionnaire) {
-        this.enoIndex = enoQuestionnaire.getIndex();
+        this.enoQuestionnaire = enoQuestionnaire;
     }
 
     @Override
@@ -54,8 +54,11 @@ public class LunaticFilterResult implements ProcessingStep<Questionnaire> {
 
         VariableType filterVariable = new VariableType();
         filterVariable.setVariableType(VariableTypeEnum.CALCULATED);
-        String questionName = ((Question) enoIndex.get(component.getId())).getName();
+        Question question = (Question) enoQuestionnaire.getIndex().get(component.getId());
+        String questionName = question.getName();
         filterVariable.setName(FILTER_RESULT_PREFIX + questionName);
+        RetrieveShapeFromAttribute.getShapeFrom(questionName, enoQuestionnaire)
+                .ifPresent(shapeFromVariable -> filterVariable.setShapeFrom(shapeFromVariable.getName()));
         ConditionFilterType conditionFilter = component.getConditionFilter();
         if(conditionFilter.getBindingDependencies() != null) {
             filterVariable.getBindingDependencies().addAll(conditionFilter.getBindingDependencies());
