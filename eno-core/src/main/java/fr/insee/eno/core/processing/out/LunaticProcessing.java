@@ -40,6 +40,7 @@ public class LunaticProcessing {
                 .then(new LunaticAddCleaningVariables())
                 .then(new LunaticAddControlFormat())
                 .then(new LunaticReverseConsistencyControlLabel())
+                .then(new LunaticAddShapeFromAttributeToCalculatedVariables(enoQuestionnaire))
                 .then(new LunaticFinalizePairwise(enoQuestionnaire))
                 .then(new LunaticFilterResult(enoQuestionnaire));
                 
