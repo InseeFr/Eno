@@ -18,22 +18,23 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 
 /** A UniqueChoiceCell object is the content of a table.
  * A cell is neither part of the header nor of the left column. */
-@Context(format = Format.DDI, type = GridResponseDomainInMixedType.class)
 @Getter @Setter
+@Context(format = Format.DDI, type = GridResponseDomainInMixedType.class)
+@Context(format = Format.LUNATIC, type = BodyCell.class)
 public class UniqueChoiceCell extends TableCell {
 
-    @DDI(contextType = QuestionItemType.class,
-            field = "getResponseDomain().getGenericOutputFormat().getStringValue().equals('radio-button') ? " +
-                    "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion.DisplayFormat).RADIO : " +
-                    "getResponseDomain().getGenericOutputFormat().getStringValue().equals('checkbox') ? " +
-                    "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion.DisplayFormat).CHECKBOX : " +
-                    "getResponseDomain().getGenericOutputFormat().getStringValue().equals('drop-down-list') ? " +
-                    "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion.DisplayFormat).DROPDOWN : null")
+    @DDI("getResponseDomain().getGenericOutputFormat().getStringValue().equals('radio-button') ? " +
+            "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion.DisplayFormat).RADIO : " +
+            "getResponseDomain().getGenericOutputFormat().getStringValue().equals('checkbox') ? " +
+            "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion.DisplayFormat).CHECKBOX : " +
+            "getResponseDomain().getGenericOutputFormat().getStringValue().equals('drop-down-list') ? " +
+            "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion.DisplayFormat).DROPDOWN : null")
     UniqueChoiceQuestion.DisplayFormat displayFormat;
 
-    @DDI(contextType = QuestionItemType.class,
-            field = "#index.get(#this.getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()).getCodeList()")
-    @Lunatic(contextType = BodyCell.class, field = "getOptions()")
-    List<CodeItem> codeList = new ArrayList<>();
+    @DDI("getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()")
+    String codeListReference;
+
+    @Lunatic("getOptions()")
+    List<CodeItem> codeItems = new ArrayList<>();
 }
 

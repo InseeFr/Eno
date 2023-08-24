@@ -167,13 +167,13 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
 
                 //on main loop, missing response is generated on the loop component
                 // /!\ we assume the first question component found is a simple question (not roster, table, checkboxgroup, ...)
-                /*missingResponseName = loop.getComponents().stream()
+                missingResponseName = loop.getComponents().stream()
                         .filter(ComponentSimpleResponseType.class::isInstance)
                         .map(ComponentSimpleResponseType.class::cast)
                         .map(ComponentSimpleResponseType::getResponse)
                         .map(ResponseType::getName)
                         .findFirst()
-                        .orElseThrow(() -> new LunaticProcessingException(String.format("main loop %s does not have a simple question in his components", loop.getId())));*/
+                        .orElseThrow(() -> new LunaticProcessingException(String.format("main loop %s does not have a simple question in his components", loop.getId())));
             }
 
             // missing responses are handled on the components of pairwise

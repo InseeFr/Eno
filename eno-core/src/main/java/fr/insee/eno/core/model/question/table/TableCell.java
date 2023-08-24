@@ -5,6 +5,7 @@ import datacollection33.SelectDimensionType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.lunatic.model.flat.BodyCell;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,22 +16,20 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 
 /** A TableCell object is the content of a table.
  * A cell is neither part of the header nor of the left column. */
-@Context(format = Format.DDI, type = GridResponseDomainInMixedType.class)
 @Getter
 @Setter
+@Context(format = Format.DDI, type = GridResponseDomainInMixedType.class)
+@Context(format = Format.LUNATIC, type = BodyCell.class)
 public abstract class TableCell extends EnoIdentifiableObject {
 
-    // get source parameter id from DDI
-    @DDI(contextType = GridResponseDomainInMixedType.class,
-            field = "getResponseDomain().getOutParameter().getIDArray(0).getStringValue()")
+    /** Source parameter id from DDI **/
+    @DDI("getResponseDomain().getOutParameter().getIDArray(0).getStringValue()")
     String id;
 
-    @DDI(contextType = GridResponseDomainInMixedType.class,
-            field = "T(fr.insee.eno.core.model.question.table.TableCell).convertDimension(#this, 1)")
+    @DDI("T(fr.insee.eno.core.model.question.table.TableCell).convertDimension(#this, 1)")
     Integer rowNumber;
 
-    @DDI(contextType = GridResponseDomainInMixedType.class,
-            field = "T(fr.insee.eno.core.model.question.table.TableCell).convertDimension(#this, 2)")
+    @DDI("T(fr.insee.eno.core.model.question.table.TableCell).convertDimension(#this, 2)")
     Integer columnNumber;
 
     public static Integer convertDimension(GridResponseDomainInMixedType gridType, long dimensionNumber) {
@@ -43,4 +42,5 @@ public abstract class TableCell extends EnoIdentifiableObject {
         }
         return Integer.parseInt(dimensions.get(0).getRangeMinimum());
     }
+
 }

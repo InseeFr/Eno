@@ -1,7 +1,9 @@
 package fr.insee.eno.core.model.navigation;
 
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.model.EnoObject;
+import fr.insee.eno.core.parameter.Format;
 import lombok.Getter;
 import lombok.Setter;
 import reusable33.BindingType;
@@ -11,13 +13,13 @@ import reusable33.BindingType;
  */
 @Getter
 @Setter
+@Context(format = Format.DDI, type = BindingType.class)
 public class Binding extends EnoObject {
 
-    @DDI(contextType = BindingType.class,
-            field = "getSourceParameterReference().getIDArray(0).getStringValue()")
+    @DDI("getSourceParameterReference().getIDArray(0).getStringValue()")
     String sourceParameterId;
 
-    @DDI(contextType = BindingType.class,
-            field = "getTargetParameterReference().getIDArray(0).getStringValue()")
+    @DDI("getTargetParameterReference().getIDArray(0).getStringValue()")
     String targetParameterId;
+
 }

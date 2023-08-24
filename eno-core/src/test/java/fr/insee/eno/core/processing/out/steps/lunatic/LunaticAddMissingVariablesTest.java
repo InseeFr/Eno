@@ -110,7 +110,6 @@ class LunaticAddMissingVariablesTest {
         lunaticQuestionnaire = new Questionnaire();
         List<ComponentType> questionnaireComponents = lunaticQuestionnaire.getComponents();
 
-
         List<ComponentType> loopComponents = new ArrayList<>(List.of(i, ta, n, d, cb, r, co, dd));
         Loop loop = buildLoop("jghdkmdf", loopComponents, true);
         questionnaireComponents.add(loop);

@@ -3,9 +3,10 @@ package fr.insee.eno.core.processing.in.steps.ddi;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.question.PairwiseQuestion;
-import fr.insee.eno.core.model.question.TableCell;
 import fr.insee.eno.core.model.question.TableQuestion;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
+import fr.insee.eno.core.model.question.table.TableCell;
+import fr.insee.eno.core.model.question.table.UniqueChoiceCell;
 import fr.insee.eno.core.processing.ProcessingStep;
 
 import java.util.Collection;
@@ -48,8 +49,8 @@ public class DDIInsertCodeLists implements ProcessingStep<EnoQuestionnaire> {
         // Insert code lists in table cells that are a unique choice question
         tableQuestions.forEach(tableQuestion ->
                 tableQuestion.getTableCells().stream()
-                        .filter(TableCell.UniqueChoiceCell.class::isInstance)
-                        .map(TableCell.UniqueChoiceCell.class::cast)
+                        .filter(UniqueChoiceCell.class::isInstance)
+                        .map(UniqueChoiceCell.class::cast)
                         .forEach(this::insertCodeItems));
     }
 
@@ -57,7 +58,7 @@ public class DDIInsertCodeLists implements ProcessingStep<EnoQuestionnaire> {
         uniqueChoiceQuestion.setCodeItems(codeListMap.get(uniqueChoiceQuestion.getCodeListReference()).getCodeItems());
     }
 
-    private void insertCodeItems(TableCell.UniqueChoiceCell uniqueChoiceCell) {
+    private void insertCodeItems(UniqueChoiceCell uniqueChoiceCell) {
         uniqueChoiceCell.setCodeItems(codeListMap.get(uniqueChoiceCell.getCodeListReference()).getCodeItems());
     }
 

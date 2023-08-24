@@ -1,10 +1,11 @@
 package fr.insee.eno.core.model.question.table;
 
-import datacollection33.QuestionItemType;
+import datacollection33.GridResponseDomainInMixedType;
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.BodyCell;
-import fr.insee.lunatic.model.flat.InputNumber;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,25 +13,26 @@ import java.math.BigInteger;
 
 @Getter
 @Setter
+@Context(format = Format.DDI, type = GridResponseDomainInMixedType.class)
+@Context(format = Format.LUNATIC, type = BodyCell.class)
 public class NumericCell extends TableCell {
-    @DDI(contextType = QuestionItemType.class,
-            field = "getResponseDomain()?.getNumberRangeList()?.get(0)?.getLow()?.getStringValue() != null ? " +
-                    "T(java.lang.Double).valueOf(getResponseDomain().getNumberRangeArray(0).getLow().getStringValue()) : null")
-    @Lunatic(contextType = BodyCell.class, field = "setMin(#param)")
+
+    @DDI("getResponseDomain()?.getNumberRangeList()?.get(0)?.getLow()?.getStringValue() != null ? " +
+            "T(java.lang.Double).valueOf(getResponseDomain().getNumberRangeArray(0).getLow().getStringValue()) : null")
+    @Lunatic("setMin(#param)")
     Double minValue;
 
-    @DDI(contextType = QuestionItemType.class,
-            field = "getResponseDomain()?.getNumberRangeList()?.get(0)?.getHigh()?.getStringValue() != null ? " +
-                    "T(java.lang.Double).valueOf(getResponseDomain().getNumberRangeArray(0).getHigh().getStringValue()) : null")
-    @Lunatic(contextType = BodyCell.class, field = "setMax(#param)")
+    @DDI("getResponseDomain()?.getNumberRangeList()?.get(0)?.getHigh()?.getStringValue() != null ? " +
+            "T(java.lang.Double).valueOf(getResponseDomain().getNumberRangeArray(0).getHigh().getStringValue()) : null")
+    @Lunatic("setMax(#param)")
     Double maxValue;
 
-    @DDI(contextType = QuestionItemType.class,
-            field = "getResponseDomain()?.getDecimalPositions() ?: T(java.math.BigInteger).valueOf('0')")
-    @Lunatic(contextType = BodyCell.class, field = "setDecimals(#param)")
+    @DDI("getResponseDomain()?.getDecimalPositions() ?: T(java.math.BigInteger).valueOf('0')")
+    @Lunatic("setDecimals(#param)")
     BigInteger numberOfDecimals;
 
-    // DDI processing for this attribute is done in a processing
-    @Lunatic(contextType = InputNumber.class, field = "setUnit(#param)")
+    /** Unit not accessible here in DDI, the value is set there during a processing. */
+    @Lunatic("setUnit(#param)")
     String unit;
+
 }

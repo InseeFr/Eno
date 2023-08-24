@@ -7,7 +7,6 @@ import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.navigation.Binding;
 import fr.insee.eno.core.model.question.table.TableCell;
-import fr.insee.lunatic.model.flat.RosterForLoop;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.Table;
 import lombok.Getter;
@@ -44,13 +43,11 @@ public class TableQuestion extends MultipleResponseQuestion {
 
     /** Parameter that exists in Lunatic but that has a fixed value for now. */
     @Lunatic("setPositioning(#param)")
-    private final String positioning = "HORIZONTAL";
+    private String positioning = "HORIZONTAL";
 
-    @DDI(contextType = QuestionGridType.class,
-            field = "getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
-                    "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
-    @Lunatic(contextType = {Table.class, RosterForLoop.class},
-            field = "setMandatory(#param)")
+    @DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
+            "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
+    @Lunatic("setMandatory(#param)")
     boolean mandatory;
 
     /** Lunatic component type property.
@@ -80,8 +77,7 @@ public class TableQuestion extends MultipleResponseQuestion {
     @DDI("getOutParameterList().![#this.getParameterNameArray(0).getStringArray(0).getStringValue()]")
     List<String> variableNames = new ArrayList<>();
 
-    @DDI(contextType = QuestionGridType.class,
-            field = "getBindingArray()")
+    @DDI("getBindingArray()")
     List<Binding> bindings = new ArrayList<>();
 
     /** Table cells. */
