@@ -2,8 +2,10 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.processing.ProcessingStep;
-import fr.insee.eno.core.processing.out.steps.lunatic.calculatedvariable.RetrieveShapeFromAttribute;
-import fr.insee.lunatic.model.flat.*;
+import fr.insee.eno.core.processing.out.steps.lunatic.calculatedvariable.ShapefromAttributeRetrieval;
+import fr.insee.lunatic.model.flat.Questionnaire;
+import fr.insee.lunatic.model.flat.VariableType;
+import fr.insee.lunatic.model.flat.VariableTypeEnum;
 
 import java.util.List;
 
@@ -13,9 +15,11 @@ import java.util.List;
  */
 public class LunaticAddShapeToCalculatedVariables implements ProcessingStep<Questionnaire> {
     private final EnoQuestionnaire enoQuestionnaire;
+    private final ShapefromAttributeRetrieval shapeFromAttributeRetrieval;
 
-    public LunaticAddShapeToCalculatedVariables(EnoQuestionnaire enoQuestionnaire) {
+    public LunaticAddShapeToCalculatedVariables(EnoQuestionnaire enoQuestionnaire, ShapefromAttributeRetrieval shapeFromAttributeRetrieval) {
         this.enoQuestionnaire = enoQuestionnaire;
+        this.shapeFromAttributeRetrieval = shapeFromAttributeRetrieval;
     }
 
     @Override
@@ -26,7 +30,7 @@ public class LunaticAddShapeToCalculatedVariables implements ProcessingStep<Ques
                 .toList();
 
         for(VariableType lunaticCalculatedVariable : lunaticCalculatedVariables) {
-            RetrieveShapeFromAttribute.getShapeFrom(lunaticCalculatedVariable.getName(), enoQuestionnaire)
+            shapeFromAttributeRetrieval.getShapeFrom(lunaticCalculatedVariable.getName(), enoQuestionnaire)
                     .ifPresent(shapeFromVariable -> lunaticCalculatedVariable.setShapeFrom(shapeFromVariable.getName()));
         }
     }

@@ -4,6 +4,7 @@ import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.TableQuestion;
 import fr.insee.eno.core.model.question.TextQuestion;
+import fr.insee.eno.core.processing.out.steps.lunatic.calculatedvariable.ShapefromAttributeRetrievalReturnVariableNameInVariable;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -62,7 +63,7 @@ class LunaticFilterResultTest {
         tableConditionFilterType.getBindingDependencies().addAll(List.of("CALCULATED_VARIABLE_2", "NUMERIC_USED_FOR_CALCULATED_VARIABLE_2"));
         table.setConditionFilter(tableConditionFilterType);
 
-        processing = new LunaticFilterResult(enoQuestionnaire);
+        processing = new LunaticFilterResult(enoQuestionnaire, new ShapefromAttributeRetrievalReturnVariableNameInVariable());
     }
 
     @Test
@@ -120,6 +121,7 @@ class LunaticFilterResultTest {
         assertTrue(variable.getBindingDependencies().contains("CALCULATED_VARIABLE"));
         assertTrue(variable.getBindingDependencies().contains("NUMERIC1_USED_FOR_CALCULATED_VARIABLE"));
         assertTrue(variable.getBindingDependencies().contains("NUMERIC2_USED_FOR_CALCULATED_VARIABLE"));
+        assertEquals("input-name", variable.getShapeFrom());
         assertEquals("count(CALCULATED_VARIABLE) < 2", variable.getExpression().getValue());
     }
 
@@ -129,6 +131,7 @@ class LunaticFilterResultTest {
         assertEquals(2, variable.getBindingDependencies().size());
         assertTrue(variable.getBindingDependencies().contains("CALCULATED_VARIABLE_2"));
         assertTrue(variable.getBindingDependencies().contains("NUMERIC_USED_FOR_CALCULATED_VARIABLE_2"));
+        assertEquals("table-name", variable.getShapeFrom());
         assertEquals("count(CALCULATED_VARIABLE_2) < 4", variable.getExpression().getValue());
     }
 }

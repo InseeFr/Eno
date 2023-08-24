@@ -6,12 +6,9 @@ import fr.insee.eno.core.model.variable.VariableGroup;
 
 import java.util.Optional;
 
-public class RetrieveShapeFromAttribute {
-    private RetrieveShapeFromAttribute() {
-        throw new IllegalArgumentException("Utility class");
-    }
+public class ShapefromAttributeRetrievalFromVariableGroups implements ShapefromAttributeRetrieval {
 
-    public static Optional<Variable> getShapeFrom(String lunaticCalculatedVariableName, EnoQuestionnaire enoQuestionnaire) {
+    public Optional<Variable> getShapeFrom(String lunaticCalculatedVariableName, EnoQuestionnaire enoQuestionnaire) {
         Optional<VariableGroup> variableGroup = enoQuestionnaire.getVariableGroups().stream()
                 .filter(vGroup -> !vGroup.getType().equals("Questionnaire"))
                 .filter(vGroup -> vGroup.getVariableByName(lunaticCalculatedVariableName).isPresent())
