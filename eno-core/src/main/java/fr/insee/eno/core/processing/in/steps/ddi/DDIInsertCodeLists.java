@@ -2,11 +2,13 @@ package fr.insee.eno.core.processing.in.steps.ddi;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.code.CodeList;
+import fr.insee.eno.core.model.question.PairwiseQuestion;
 import fr.insee.eno.core.model.question.TableCell;
 import fr.insee.eno.core.model.question.TableQuestion;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import fr.insee.eno.core.processing.ProcessingStep;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +28,15 @@ public class DDIInsertCodeLists implements ProcessingStep<EnoQuestionnaire> {
                 .filter(UniqueChoiceQuestion.class::isInstance)
                 .map(UniqueChoiceQuestion.class::cast)
                 .forEach(this::insertCodeItems);
+
+        // Insert code lists in pairwise questions
+        enoQuestionnaire.getSingleResponseQuestions().stream()
+                .filter(PairwiseQuestion.class::isInstance)
+                .map(PairwiseQuestion.class::cast)
+                .map(PairwiseQuestion::getUniqueChoiceQuestions)
+                .flatMap(Collection::stream)
+                .forEach(this::insertCodeItems);
+
         // Gather table question objects
         List<TableQuestion> tableQuestions = enoQuestionnaire.getMultipleResponseQuestions().stream()
                 .filter(TableQuestion.class::isInstance)
