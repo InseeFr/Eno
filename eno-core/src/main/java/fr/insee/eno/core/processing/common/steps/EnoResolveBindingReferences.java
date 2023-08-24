@@ -5,6 +5,7 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.navigation.ComponentFilter;
+import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.variable.CalculatedVariable;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.ProcessingStep;
@@ -35,7 +36,11 @@ public class EnoResolveBindingReferences implements ProcessingStep<EnoQuestionna
         updateComponentFilterReferences(enoQuestionnaire.getSubsequences());
         updateComponentFilterReferences(enoQuestionnaire.getSingleResponseQuestions());
         updateComponentFilterReferences(enoQuestionnaire.getMultipleResponseQuestions());
-        // TODO: probably loops too here
+        // Loops
+        enoQuestionnaire.getLoops().stream()
+                .filter(StandaloneLoop.class::isInstance)
+                .map(StandaloneLoop.class::cast)
+                .forEach(this::updateStandaloneLoopReferences);
     }
 
     /**
@@ -76,22 +81,29 @@ public class EnoResolveBindingReferences implements ProcessingStep<EnoQuestionna
     private void updateComponentFilterReferences(List<? extends EnoComponent> enoComponents) {
         enoComponents.stream()
                 .map(EnoComponent::getComponentFilter)
-                .forEach(this::updateReferences);
+                .map(ComponentFilter::getBindingReferences)
+                .forEach(this::updateBindingReferences);
+    }
+
+    /** Update the binding references of the "min" and "max" expressions of the given loop. */
+    private void updateStandaloneLoopReferences(StandaloneLoop standaloneLoop) {
+        updateBindingReferences(standaloneLoop.getMinIteration().getBindingReferences());
+        updateBindingReferences(standaloneLoop.getMaxIteration().getBindingReferences());
     }
 
     /**
-     * If the component filter has calculated variables in its binding references,
+     * If the binding references contains calculated variables,
      * this method adds the references contained in these calculated variables.
-     * @param componentFilter Component filter on which binding references will be updated.
+     * @param bindingReferences Binding references to be updated.
      */
-    private void updateReferences(ComponentFilter componentFilter) {
+    private void updateBindingReferences(Set<BindingReference> bindingReferences) {
         // shallow copy
-        List<BindingReference> initialBindingReferences = new ArrayList<>(componentFilter.getBindingReferences());
+        List<BindingReference> initialBindingReferences = new ArrayList<>(bindingReferences);
         //
         for (BindingReference bindingReference : initialBindingReferences) {
             Variable variable = variableMap.get(bindingReference.getVariableName());
             if (Variable.CollectionType.CALCULATED.equals(variable.getCollectionType()))
-                componentFilter.getBindingReferences().addAll(
+                bindingReferences.addAll(
                         ((CalculatedVariable) variable).getExpression().getBindingReferences());
         }
     }
