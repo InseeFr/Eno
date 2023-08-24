@@ -37,6 +37,7 @@ public class LunaticProcessing {
                 .then(new LunaticAddMissingVariables(enoCatalog, parameters.isMissingVariables()))
                 .then(new LunaticAddHierarchy())
                 .then(new LunaticAddPageNumbers(parameters.getLunaticPaginationMode()))
+                .then(new LunaticAddCleaningVariables())
                 .then(new LunaticAddControlFormat())
                 .then(new LunaticReverseConsistencyControlLabel())
                 .then(new LunaticFinalizePairwise(enoQuestionnaire));
