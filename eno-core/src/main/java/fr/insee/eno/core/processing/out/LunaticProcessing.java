@@ -39,7 +39,8 @@ public class LunaticProcessing {
                 .then(new LunaticAddPageNumbers(parameters.getLunaticPaginationMode()))
                 .then(new LunaticAddCleaningVariables())
                 .then(new LunaticAddControlFormat())
-                .then(new LunaticReverseConsistencyControlLabel());
+                .then(new LunaticReverseConsistencyControlLabel())
+                .then(new LunaticFinalizePairwise(enoQuestionnaire));
     }
 
 }
