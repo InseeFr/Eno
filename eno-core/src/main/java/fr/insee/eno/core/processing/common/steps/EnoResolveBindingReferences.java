@@ -4,7 +4,6 @@ import fr.insee.eno.core.model.EnoComponent;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
-import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.variable.CalculatedVariable;
 import fr.insee.eno.core.model.variable.Variable;
@@ -81,14 +80,19 @@ public class EnoResolveBindingReferences implements ProcessingStep<EnoQuestionna
     private void updateComponentFilterReferences(List<? extends EnoComponent> enoComponents) {
         enoComponents.stream()
                 .map(EnoComponent::getComponentFilter)
-                .map(ComponentFilter::getBindingReferences)
-                .forEach(this::updateBindingReferences);
+                .forEach(componentFilter -> {
+                    Set<BindingReference> references = resolveBindingReferences(componentFilter.getBindingReferences());
+                    componentFilter.getResolvedBindingReferences().addAll(references);
+                } );
     }
 
     /** Update the binding references of the "min" and "max" expressions of the given loop. */
     private void updateStandaloneLoopReferences(StandaloneLoop standaloneLoop) {
-        updateBindingReferences(standaloneLoop.getMinIteration().getBindingReferences());
-        updateBindingReferences(standaloneLoop.getMaxIteration().getBindingReferences());
+        Set<BindingReference> references = resolveBindingReferences(standaloneLoop.getMinIteration().getBindingReferences());
+        standaloneLoop.getMinIteration().setBindingReferences(references);
+
+        references = resolveBindingReferences(standaloneLoop.getMaxIteration().getBindingReferences());
+        standaloneLoop.getMaxIteration().setBindingReferences(references);
     }
 
     /**
@@ -96,16 +100,16 @@ public class EnoResolveBindingReferences implements ProcessingStep<EnoQuestionna
      * this method adds the references contained in these calculated variables.
      * @param bindingReferences Binding references to be updated.
      */
-    private void updateBindingReferences(Set<BindingReference> bindingReferences) {
+    private Set<BindingReference> resolveBindingReferences(Set<BindingReference> bindingReferences) {
         // shallow copy
-        List<BindingReference> initialBindingReferences = new ArrayList<>(bindingReferences);
+        Set<BindingReference> resolvedBindingReferences = new HashSet<>(bindingReferences);
         //
-        for (BindingReference bindingReference : initialBindingReferences) {
+        for (BindingReference bindingReference : resolvedBindingReferences) {
             Variable variable = variableMap.get(bindingReference.getVariableName());
             if (Variable.CollectionType.CALCULATED.equals(variable.getCollectionType()))
-                bindingReferences.addAll(
+                resolvedBindingReferences.addAll(
                         ((CalculatedVariable) variable).getExpression().getBindingReferences());
         }
+        return resolvedBindingReferences;
     }
-
 }
