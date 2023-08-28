@@ -39,6 +39,9 @@ public class ComponentFilter extends EnoObject {
     @Getter
     private final Set<BindingReference> bindingReferences = new HashSet<>();
 
+    @Getter
+    private final Set<BindingReference> resolvedBindingReferences = new HashSet<>();
+
     /** Contrary to CalculatedExpression class, Lunatic binding dependencies are mapped in the condition filter
      * object. */
     @Lunatic("getBindingDependencies()")
@@ -46,7 +49,7 @@ public class ComponentFilter extends EnoObject {
 
     /** Custom getter that uses the binding references. */
     public List<String> getLunaticBindingDependencies() {
-        return bindingReferences.stream().map(BindingReference::getVariableName).distinct().toList();
+        return resolvedBindingReferences.stream().map(BindingReference::getVariableName).distinct().toList();
     }
 
     /**

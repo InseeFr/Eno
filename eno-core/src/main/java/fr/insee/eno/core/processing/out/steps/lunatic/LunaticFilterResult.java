@@ -1,6 +1,8 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.calculated.BindingReference;
+import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.processing.out.steps.lunatic.calculatedvariable.ShapefromAttributeRetrieval;
@@ -62,8 +64,11 @@ public class LunaticFilterResult implements ProcessingStep<Questionnaire> {
         shapefromAttributeRetrieval.getShapeFrom(questionName, enoQuestionnaire)
                 .ifPresent(shapeFromVariable -> filterVariable.setShapeFrom(shapeFromVariable.getName()));
         ConditionFilterType conditionFilter = component.getConditionFilter();
-        if(conditionFilter.getBindingDependencies() != null) {
-            filterVariable.getBindingDependencies().addAll(conditionFilter.getBindingDependencies());
+        ComponentFilter componentFilter = question.getComponentFilter();
+        if(componentFilter != null && !componentFilter.getBindingReferences().isEmpty()) {
+            componentFilter.getBindingReferences().stream()
+                    .map(BindingReference::getVariableName)
+                    .forEach(variableName -> filterVariable.getBindingDependencies().add(variableName));
         }
         LabelType expression = new LabelType();
         expression.setType(conditionFilter.getType());

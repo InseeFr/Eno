@@ -2,8 +2,11 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.calculated.BindingReference;
+import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.eno.core.model.question.TableQuestion;
 import fr.insee.eno.core.model.question.TextQuestion;
+import fr.insee.eno.core.model.variable.VariableGroup;
 import fr.insee.eno.core.processing.out.steps.lunatic.calculatedvariable.ShapefromAttributeRetrievalReturnVariableNameInVariable;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
@@ -25,6 +28,7 @@ class LunaticFilterResultTest {
     TextQuestion textQuestion;
     Table table;
     TableQuestion tableQuestion;
+    VariableGroup variableGroup;
 
     @BeforeEach
     void init() {
@@ -33,11 +37,23 @@ class LunaticFilterResultTest {
         textQuestion = new TextQuestion();
         textQuestion.setName("input-name");
         textQuestion.setId("lxcsdfg");
+        ComponentFilter textQuestionFilter = new ComponentFilter();
+        textQuestionFilter.setValue("count(CALCULATED_VARIABLE) < 2");
+        textQuestionFilter.setType(Constant.LUNATIC_LABEL_VTL);
+        BindingReference textFilterBindingRef = new BindingReference("idref", "CALCULATED_VARIABLE");
+        textQuestionFilter.getBindingReferences().add(textFilterBindingRef);
+        textQuestion.setComponentFilter(textQuestionFilter);
         enoIndex.put(textQuestion.getId(), textQuestion);
 
         tableQuestion = new TableQuestion();
         tableQuestion.setName("table-name");
         tableQuestion.setId("xdsfgh54");
+        BindingReference tableFilterBindingRef1 = new BindingReference("idreft1", "CALCULATED_VARIABLE_2");
+        BindingReference tableFilterBindingRef2 = new BindingReference("idreft2", "NUMERIC_USED_FOR_CALCULATED_VARIABLE_2");
+        ComponentFilter tableQuestionFilter = new ComponentFilter();
+        tableQuestionFilter.getBindingReferences().add(tableFilterBindingRef1);
+        tableQuestionFilter.getBindingReferences().add(tableFilterBindingRef2);
+        tableQuestion.setComponentFilter(tableQuestionFilter);
         enoIndex.put(tableQuestion.getId(), tableQuestion);
         enoQuestionnaire.setIndex(enoIndex);
 
@@ -52,17 +68,20 @@ class LunaticFilterResultTest {
         table.setId(tableQuestion.getId());
 
         ConditionFilterType inputConditionFilterType = new ConditionFilterType();
-        inputConditionFilterType.setType(Constant.LUNATIC_LABEL_VTL);
-        inputConditionFilterType.setValue("count(CALCULATED_VARIABLE) < 2");
-        inputConditionFilterType.getBindingDependencies().addAll(List.of("CALCULATED_VARIABLE", "NUMERIC1_USED_FOR_CALCULATED_VARIABLE", "NUMERIC2_USED_FOR_CALCULATED_VARIABLE"));
+        inputConditionFilterType.setType(textQuestionFilter.getType());
+        inputConditionFilterType.setValue(textQuestionFilter.getValue());
         input.setConditionFilter(inputConditionFilterType);
 
         ConditionFilterType tableConditionFilterType = new ConditionFilterType();
         tableConditionFilterType.setType(Constant.LUNATIC_LABEL_VTL);
-        tableConditionFilterType.setValue("count(CALCULATED_VARIABLE_2) < 4");
-        tableConditionFilterType.getBindingDependencies().addAll(List.of("CALCULATED_VARIABLE_2", "NUMERIC_USED_FOR_CALCULATED_VARIABLE_2"));
+        tableConditionFilterType.setValue("count(CALCULATED_VARIABLE_2) + NUMERIC_USED_FOR_CALCULATED_VARIABLE_2 < 4");
         table.setConditionFilter(tableConditionFilterType);
-
+/*
+        VariableGroup variableGroup = new VariableGroup();
+        Variable inputVariable = new CalculatedVariable();
+        inputVariable.setId(textQuestion.getId());
+        variableGroup.getVariables().add(inputVariable);
+*/
         processing = new LunaticFilterResult(enoQuestionnaire, new ShapefromAttributeRetrievalReturnVariableNameInVariable());
     }
 
@@ -89,6 +108,8 @@ class LunaticFilterResultTest {
     @Test
     void whenApplyingShouldProcessComplexComponentsWithFilter() {
         lunaticQuestionnaire.getComponents().add(table);
+
+        enoQuestionnaire.getVariableGroups().add(variableGroup);
 
         processing.apply(lunaticQuestionnaire);
         assertEquals(1, lunaticQuestionnaire.getVariables().size());
@@ -117,10 +138,8 @@ class LunaticFilterResultTest {
     private void testInputCalculatedVariable(VariableType variable) {
         assertEquals(VariableTypeEnum.CALCULATED, variable.getVariableType());
         assertEquals("FILTER_RESULT_" + textQuestion.getName(), variable.getName());
-        assertEquals(3, variable.getBindingDependencies().size());
+        assertEquals(1, variable.getBindingDependencies().size());
         assertTrue(variable.getBindingDependencies().contains("CALCULATED_VARIABLE"));
-        assertTrue(variable.getBindingDependencies().contains("NUMERIC1_USED_FOR_CALCULATED_VARIABLE"));
-        assertTrue(variable.getBindingDependencies().contains("NUMERIC2_USED_FOR_CALCULATED_VARIABLE"));
         assertEquals("input-name", variable.getShapeFrom());
         assertEquals("count(CALCULATED_VARIABLE) < 2", variable.getExpression().getValue());
     }
@@ -132,6 +151,6 @@ class LunaticFilterResultTest {
         assertTrue(variable.getBindingDependencies().contains("CALCULATED_VARIABLE_2"));
         assertTrue(variable.getBindingDependencies().contains("NUMERIC_USED_FOR_CALCULATED_VARIABLE_2"));
         assertEquals("table-name", variable.getShapeFrom());
-        assertEquals("count(CALCULATED_VARIABLE_2) < 4", variable.getExpression().getValue());
+        assertEquals("count(CALCULATED_VARIABLE_2) + NUMERIC_USED_FOR_CALCULATED_VARIABLE_2 < 4", variable.getExpression().getValue());
     }
 }
