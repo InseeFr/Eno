@@ -36,18 +36,18 @@ jobs:
         name: Check tag existence
         id: check-tag-exists
         with:
-          tag: ${{ steps.version.outputs.version }}
+          tag: ${{ steps.version-step.outputs.version }}
 
       - name: Tag verification
         id: check-tag
         run: |
           if [[ "${{ steps.check-tag-exists.outputs.exists }}" == "true" ]]; then
-            echo "Nothing to tag/release, the tag ${{ steps.version.outputs.version }} already exists"
+            echo "Nothing to tag/release, the tag ${{ steps.version-step.outputs.version }} already exists"
             exit 1
           fi
 
-          if ! [[ "${{ steps.version.outputs.version }}" =~ ^[0-9]+.[0-9]+.[0-9]+-SNAPSHOT$ ]]; then
-            echo "Nothing to tag/release, the tag ${{ steps.version.outputs.version }} is not in correct format X.Y.Z-SNAPSHOT"
+          if ! [[ "${{ steps.version-step.outputs.version }}" =~ ^[0-9]+.[0-9]+.[0-9]+-SNAPSHOT$ ]]; then
+            echo "Nothing to tag/release, the tag ${{ steps.version-step.outputs.version }} is not in correct format X.Y.Z-SNAPSHOT"
             exit 1
           fi
   build-sources:
