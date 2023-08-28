@@ -82,7 +82,7 @@ class LunaticFilterResultTest {
         inputVariable.setId(textQuestion.getId());
         variableGroup.getVariables().add(inputVariable);
 */
-        processing = new LunaticFilterResult(enoQuestionnaire);
+        processing = new LunaticFilterResult(enoQuestionnaire, new ShapefromAttributeRetrievalReturnVariableNameInVariable());
     }
 
     @Test
@@ -140,8 +140,6 @@ class LunaticFilterResultTest {
         assertEquals("FILTER_RESULT_" + textQuestion.getName(), variable.getName());
         assertEquals(1, variable.getBindingDependencies().size());
         assertTrue(variable.getBindingDependencies().contains("CALCULATED_VARIABLE"));
-        assertTrue(variable.getBindingDependencies().contains("NUMERIC1_USED_FOR_CALCULATED_VARIABLE"));
-        assertTrue(variable.getBindingDependencies().contains("NUMERIC2_USED_FOR_CALCULATED_VARIABLE"));
         assertEquals("input-name", variable.getShapeFrom());
         assertEquals("count(CALCULATED_VARIABLE) < 2", variable.getExpression().getValue());
     }
