@@ -74,7 +74,7 @@ jobs:
           path: ./eno-ws/build/libs/*.jar
 
   create-release:
-    needs: build-sources
+    needs: [ check-version, build-sources ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -105,7 +105,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-docker:
-    needs: create-release
+    needs: [ check-version, create-release ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
