@@ -4,6 +4,8 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.ProcessingPipeline;
 import fr.insee.eno.core.processing.out.steps.lunatic.*;
+import fr.insee.eno.core.processing.out.steps.lunatic.calculatedvariable.ShapefromAttributeRetrieval;
+import fr.insee.eno.core.processing.out.steps.lunatic.calculatedvariable.ShapefromAttributeRetrievalFromVariableGroups;
 import fr.insee.eno.core.processing.out.steps.lunatic.pagination.LunaticAddPageNumbers;
 import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.eno.core.reference.EnoIndex;
@@ -28,6 +30,7 @@ public class LunaticProcessing {
         EnoIndex enoIndex = enoQuestionnaire.getIndex();
         assert enoIndex != null;
         EnoCatalog enoCatalog = new EnoCatalog(enoQuestionnaire);
+        ShapefromAttributeRetrieval shapefromAttributeRetrieval = new ShapefromAttributeRetrievalFromVariableGroups();
         //
         ProcessingPipeline<Questionnaire> processingPipeline = new ProcessingPipeline<>();
         processingPipeline.start(lunaticQuestionnaire)
@@ -40,8 +43,9 @@ public class LunaticProcessing {
                 .then(new LunaticAddCleaningVariables())
                 .then(new LunaticAddControlFormat())
                 .then(new LunaticReverseConsistencyControlLabel())
+                .then(new LunaticAddShapeToCalculatedVariables(enoQuestionnaire, shapefromAttributeRetrieval))
                 .then(new LunaticFinalizePairwise(enoQuestionnaire))
-                .then(new LunaticFilterResult(enoQuestionnaire));
+                .then(new LunaticFilterResult(enoQuestionnaire, shapefromAttributeRetrieval));
                 
     }
 
