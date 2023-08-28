@@ -142,25 +142,31 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
 
     /** Lunatic linked loops have an "iterations" property.
      * The "iterations" property is a calculated expression, it is a VTL count on variable of the first question
-     * of the loop it is based on.
-     * (This has been discussed with Lunatic, it is what it is for now...) */
+     * of the loop it is based on. (This has been discussed with Lunatic, it is what it is for now...)
+     * The "iterations" property is linked to the "loopDependencies" property,
+     * this method also sets the "loopDependencies" property of the linked loop.
+     * */
     private void setLinkedLoopIterations(Loop lunaticLoop, LinkedLoop enoLinkedLoop) {
         // We "just" want to find the first variable in the scope of the reference loop
         EnoIdentifiableObject reference = enoIndex.get(enoLinkedLoop.getReference());
         if (reference instanceof StandaloneLoop enoReferenceLoop) {
-            setIterationsFromLoop(lunaticLoop, enoLinkedLoop, enoReferenceLoop);
+            String variableName = findFirstVariableOfReference(enoLinkedLoop, enoReferenceLoop);
+            lunaticLoop.setIterations(new LabelType());
+            lunaticLoop.getIterations().setValue("count("+ variableName +")");
+            lunaticLoop.getLoopDependencies().add(variableName);
             return;
         }
         if (reference instanceof DynamicTableQuestion) {
-            setIterationsFromTable(enoLinkedLoop);
-            return;
+            throw new UnsupportedOperationException(String.format(
+                    "Linked loop '%s' is based on a dynamic table. This feature is not supported yet.",
+                    enoLinkedLoop.getId()));
         }
         throw new LunaticLoopResolutionException(String.format(
                 "Linked loop '%s' reference object's '%s' is neither a loop nor a dynamic table.",
                 enoLinkedLoop.getId(), reference));
     }
 
-    private void setIterationsFromLoop(Loop lunaticLoop, LinkedLoop enoLinkedLoop, StandaloneLoop enoReferenceLoop) {
+    private String findFirstVariableOfReference(LinkedLoop enoLinkedLoop, StandaloneLoop enoReferenceLoop) {
         AbstractSequence startSequence = (AbstractSequence) enoIndex.get(enoReferenceLoop.getLoopScope().get(0).getId());
         if (startSequence.getSequenceStructure().isEmpty()) {
             throw new LunaticLoopResolutionException(String.format(
@@ -177,9 +183,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
                             "This first question of the sequence is not a \"simple\" question.",
                     enoLinkedLoop.getId(), enoReferenceLoop.getId(), startSequence.getId()));
         }
-        String variableName = ((SingleResponseQuestion) firstQuestion).getResponse().getVariableName();
-        lunaticLoop.setIterations(new LabelType());
-        lunaticLoop.getIterations().setValue("count("+ variableName +")");
+        return ((SingleResponseQuestion) firstQuestion).getResponse().getVariableName();
     }
 
     /**
@@ -193,12 +197,6 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
             return firstSequenceItem.getId();
         AbstractSequence subsequence = (AbstractSequence) enoIndex.get(firstSequenceItem.getId());
         return findFirstQuestionId(subsequence);
-    }
-
-    private void setIterationsFromTable(LinkedLoop enoLinkedLoop) {
-        throw new UnsupportedOperationException(String.format(
-                "Linked loop '%s' is based on a dynamic table. This feature is not supported yet.",
-                enoLinkedLoop.getId()));
     }
 
 }
