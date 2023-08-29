@@ -1,12 +1,14 @@
-package fr.insee.eno.core.processing.impl;
+package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.lunatic.LunaticResizingLoopVariable;
 import fr.insee.eno.core.model.lunatic.LunaticResizingPairWiseVariable;
+import fr.insee.eno.core.model.variable.CalculatedVariable;
+import fr.insee.eno.core.model.variable.CollectedVariable;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.model.variable.VariableGroup;
-import fr.insee.eno.core.processing.OutProcessingInterface;
+import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.lunatic.model.flat.*;
 import lombok.AllArgsConstructor;
@@ -18,7 +20,7 @@ import java.util.List;
 
 @Slf4j
 @AllArgsConstructor
-public class LunaticAddResizing implements OutProcessingInterface<Questionnaire> {
+public class LunaticAddResizing implements ProcessingStep<Questionnaire> {
 
     private EnoQuestionnaire enoQuestionnaire;
     private EnoCatalog enoCatalog;
@@ -139,7 +141,7 @@ public class LunaticAddResizing implements OutProcessingInterface<Questionnaire>
      * @param calculatedVariable calculated variable
      * @return list of collected variables that trigger resizing from calculated variable
      */
-    private List<Variable> getCollectedVariablesFromCalculatedVariable(Variable calculatedVariable) {
+    private List<CollectedVariable> getCollectedVariablesFromCalculatedVariable(CalculatedVariable calculatedVariable) {
         List<Variable> bindingVariables = calculatedVariable.getExpression().getBindingReferences().stream()
                 .map(BindingReference::getVariableName)
                 .map(variableName -> enoCatalog.getVariable(variableName))
@@ -154,14 +156,16 @@ public class LunaticAddResizing implements OutProcessingInterface<Questionnaire>
      * @param resizingVariables resizing variables (xontaining collected and calculated variables)
      * @return list of collected resizing variables
      */
-    private List<Variable> getCollectedVariablesFromResizingVariables(List<Variable> resizingVariables) {
-        List<Variable> collectedVariables = new ArrayList<>();
+    private List<CollectedVariable> getCollectedVariablesFromResizingVariables(List<Variable> resizingVariables) {
+        List<CollectedVariable> collectedVariables = new ArrayList<>();
         collectedVariables.addAll(resizingVariables.stream()
-                .filter(resizingVariable -> resizingVariable.getCollected().equals("COLLECTED"))
+                .filter(variable -> Variable.CollectionType.COLLECTED.equals(variable.getCollectionType()))
+                .map(CollectedVariable.class::cast)
                 .toList());
 
         collectedVariables.addAll(resizingVariables.stream()
-                .filter(resizingVariable -> resizingVariable.getCollected().equals("CALCULATED"))
+                .filter(variable -> Variable.CollectionType.CALCULATED.equals(variable.getCollectionType()))
+                .map(CalculatedVariable.class::cast)
                 .map(this::getCollectedVariablesFromCalculatedVariable)
                 .flatMap(Collection::stream)
                 .toList());

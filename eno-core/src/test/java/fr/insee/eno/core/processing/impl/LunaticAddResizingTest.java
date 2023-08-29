@@ -3,6 +3,7 @@ package fr.insee.eno.core.processing.impl;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.lunatic.LunaticResizingLoopVariable;
 import fr.insee.eno.core.model.lunatic.LunaticResizingPairWiseVariable;
+import fr.insee.eno.core.processing.out.steps.lunatic.LunaticAddResizing;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

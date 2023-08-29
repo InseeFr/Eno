@@ -38,6 +38,7 @@ public class LunaticProcessing {
                 .then(new LunaticSortComponents(enoQuestionnaire))
                 .then(new LunaticLoopResolution(enoQuestionnaire))
                 .then(new LunaticAddMissingVariables(enoCatalog, parameters.isMissingVariables()))
+                .then(new LunaticAddResizing(enoQuestionnaire))
                 .then(new LunaticAddHierarchy())
                 .then(new LunaticAddPageNumbers(parameters.getLunaticPaginationMode()))
                 .then(new LunaticAddCleaningVariables())
