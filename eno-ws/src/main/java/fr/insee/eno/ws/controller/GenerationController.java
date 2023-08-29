@@ -1,10 +1,9 @@
 package fr.insee.eno.ws.controller;
 
-import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.legacy.parameters.*;
-import fr.insee.eno.treatments.LunaticPostProcessings;
+import fr.insee.eno.treatments.LunaticPostProcessing;
 import fr.insee.eno.ws.PassePlat;
 import fr.insee.eno.ws.controller.utils.V3ControllerUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -120,7 +119,7 @@ public class GenerationController {
 			@Parameter(name = "specificTreatment",
 					schema = @Schema(type="string", format="binary"))
 			@RequestPart(value="specificTreatment", required=false) Mono<Part> specificTreatment,
-			@PathVariable Mode mode,
+			@PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter,
 			@RequestParam(value="context") EnoParameters.Context context,
 			@RequestParam(value="IdentificationQuestion", required=false) boolean identificationQuestion,
 			@RequestParam(value="ResponseTimeQuestion", required=false) boolean endQuestionResponseTime,
@@ -133,8 +132,7 @@ public class GenerationController {
 			@RequestParam(value="QuestNum") BrowsingEnum questNum,
 			@RequestParam(value="SeqNum") boolean seqNum,
 			@RequestParam(value="PreQuestSymbol") boolean preQuestSymbol,
-			@RequestParam(value="Pagination", required=false, defaultValue="NONE") Pagination pagination,
-			@RequestParam(value="includeUnusedCalculatedVariables") boolean unusedVars) {
+			@RequestParam(value="Pagination", required=false, defaultValue="NONE") Pagination pagination) {
 
 		/*
            specificTreatment parameter is a part instead of a FilePart. This workaround is used to make swagger work
@@ -143,12 +141,11 @@ public class GenerationController {
            Spring considers having a DefaultFormField object instead of FilePart and exceptions is thrown
            There is no way at this moment to disable the allow empty value when filed is not required.
          */
-		Mono<LunaticPostProcessings> lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
+		Mono<LunaticPostProcessing> lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
 
 		//
-		EnoParameters parameters = new EnoParameters(context, Format.LUNATIC);
-		parameters.getSelectedModes().clear();
-		parameters.getSelectedModes().add(mode);
+		EnoParameters parameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
+		//
 		parameters.setIdentificationQuestion(identificationQuestion);
 		parameters.setResponseTimeQuestion(endQuestionResponseTime);
 		parameters.setIdentificationQuestion(endQuestionCommentQuestion);
@@ -182,8 +179,6 @@ public class GenerationController {
 			}
 			case QUESTION -> parameters.setLunaticPaginationMode(EnoParameters.LunaticPaginationMode.QUESTION);
 		}
-		parameters.setUnusedVariables(unusedVars);
-		log.info("'Unused variables' feature is not implemented in Eno v3.");
 		//
 		return controllerUtils.ddiToLunaticJson(ddiFile, parameters, lunaticPostProcessings);
 	}

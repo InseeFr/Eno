@@ -48,15 +48,4 @@ public class UtilController {
         return Mono.just(ResponseEntity.ok().body(result));
     }
 
-    @Operation(
-            summary = "Generation of Lunatic json from a Lunatic xml questionnaire.",
-            description = "Generate a Lunatic Json from a Lunatic xml questionnaire, using the Lunatic-Model library.")
-    @PostMapping(value = "lunatic-model/xml-2-json",
-            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Mono<Void> generateLunaticJson(
-            @RequestPart(value="in") Mono<FilePart> in,
-            ServerHttpRequest request, ServerHttpResponse response) {
-        return passePlat.passePlatPost(request, response);
-    }
-
 }

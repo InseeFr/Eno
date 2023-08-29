@@ -1,0 +1,643 @@
+{
+  "id": "lkgwbz1e",
+  "modele": "ENOLABELS",
+  "enoCoreVersion": "2.4.1-pairwise",
+  "lunaticModelVersion": "2.3.2-rc7",
+  "generatingDate": "26-07-2023 08:45:27",
+  "missing": false,
+  "pagination": "question",
+  "maxPage": "10",
+  "label": {
+    "value": "Eno - Labels",
+    "type": "VTL|MD"
+  },
+  "components": [
+    {
+      "id": "lkgwb7kj",
+      "componentType": "Sequence",
+      "page": "1",
+      "label": {
+        "value": "\"I - \" || \"Static sequence name\"",
+        "type": "VTL|MD"
+      },
+      "declarations": [
+        {
+          "id": "lkgwb7kj-lkgw4v7r",
+          "declarationType": "HELP",
+          "position": "AFTER_QUESTION_TEXT",
+          "label": {
+            "value": "\"Static declaration on sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lkgwb7kj",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Static sequence name\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "lkgw4ll2",
+      "componentType": "Subsequence",
+      "page": "2",
+      "goToPage": "2",
+      "label": {
+        "value": "\"Static subsequence name\"",
+        "type": "VTL|MD"
+      },
+      "declarations": [
+        {
+          "id": "lkgw4ll2-lkgw5f3l",
+          "declarationType": "HELP",
+          "position": "AFTER_QUESTION_TEXT",
+          "label": {
+            "value": "\"Static declaration on subsequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lkgwb7kj",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Static sequence name\"",
+            "type": "VTL|MD"
+          }
+        },
+        "subSequence": {
+          "id": "lkgw4ll2",
+          "page": "2",
+          "label": {
+            "value": "\"Static subsequence name\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "lkgw83gj",
+      "componentType": "Input",
+      "mandatory": false,
+      "page": "3",
+      "maxLength": 10,
+      "label": {
+        "value": "\"➡ \" || \"Static question name\"",
+        "type": "VTL|MD"
+      },
+      "declarations": [
+        {
+          "id": "lkgwi1d3-SI",
+          "declarationType": "STATEMENT",
+          "position": "BEFORE_QUESTION_TEXT",
+          "label": {
+            "value": "\"Static declaration before the question.\"",
+            "type": "VTL|MD"
+          }
+        },
+        {
+          "id": "lkgw83gj-lkgwbcj4",
+          "declarationType": "HELP",
+          "position": "AFTER_QUESTION_TEXT",
+          "label": {
+            "value": "\"Static declaration after the question.\"",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "controls": [
+        {
+          "id": "lkgw83gj-CI-0",
+          "typeOfControl": "CONSISTENCY",
+          "criticality": "WARN",
+          "control": {
+            "value": "not(true)",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\"Static control message\"",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "hierarchy": {
+        "sequence": {
+          "id": "lkgwb7kj",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Static sequence name\"",
+            "type": "VTL|MD"
+          }
+        },
+        "subSequence": {
+          "id": "lkgw4ll2",
+          "page": "2",
+          "label": {
+            "value": "\"Static subsequence name\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q1"
+      ],
+      "response": {
+        "name": "Q1"
+      }
+    },
+    {
+      "id": "lkid1wnz",
+      "componentType": "Radio",
+      "mandatory": false,
+      "page": "4",
+      "label": {
+        "value": "\"➡ \" || \"Unique choice question 1\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lkgwb7kj",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Static sequence name\"",
+            "type": "VTL|MD"
+          }
+        },
+        "subSequence": {
+          "id": "lkgw4ll2",
+          "page": "2",
+          "label": {
+            "value": "\"Static subsequence name\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "UCQ1"
+      ],
+      "options": [
+        {
+          "value": "STATIC1",
+          "label": {
+            "value": "\"Static code 1\"",
+            "type": "VTL|MD"
+          }
+        },
+        {
+          "value": "STATIC2",
+          "label": {
+            "value": "\"Static code 2\"",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "response": {
+        "name": "UCQ1"
+      }
+    },
+    {
+      "id": "lkij6vip",
+      "componentType": "CheckboxGroup",
+      "page": "5",
+      "label": {
+        "value": "\"➡ \" || \"Multiple choice question 1\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lkgwb7kj",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Static sequence name\"",
+            "type": "VTL|MD"
+          }
+        },
+        "subSequence": {
+          "id": "lkgw4ll2",
+          "page": "2",
+          "label": {
+            "value": "\"Static subsequence name\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "MCQ11",
+        "MCQ12"
+      ],
+      "responses": [
+        {
+          "id": "lkij6vip-QOP-lkij837f",
+          "label": {
+            "value": "\"Static code 1\"",
+            "type": "VTL|MD"
+          },
+          "response": {
+            "name": "MCQ11"
+          }
+        },
+        {
+          "id": "lkij6vip-QOP-lkij9tch",
+          "label": {
+            "value": "\"Static code 2\"",
+            "type": "VTL|MD"
+          },
+          "response": {
+            "name": "MCQ12"
+          }
+        }
+      ]
+    },
+    {
+      "id": "lkgw93vs",
+      "componentType": "Sequence",
+      "page": "6",
+      "label": {
+        "value": "\"II - \" || \"Dynamic sequence name: \" || Q1",
+        "type": "VTL|MD"
+      },
+      "declarations": [
+        {
+          "id": "lkgw93vs-lkgwbmbn",
+          "declarationType": "HELP",
+          "position": "AFTER_QUESTION_TEXT",
+          "label": {
+            "value": "\"Dynamic declaration on sequence: \" || Q1",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lkgw93vs",
+          "page": "6",
+          "label": {
+            "value": "\"II - \" || \"Dynamic sequence name: \" || Q1",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q1"
+      ]
+    },
+    {
+      "id": "lkgw9h1r",
+      "componentType": "Subsequence",
+      "page": "7",
+      "goToPage": "7",
+      "label": {
+        "value": "\"Dynamic subsequence name: \" || Q1",
+        "type": "VTL|MD"
+      },
+      "declarations": [
+        {
+          "id": "lkgw9h1r-lkgwhgt4",
+          "declarationType": "HELP",
+          "position": "AFTER_QUESTION_TEXT",
+          "label": {
+            "value": "\"Dynamic declaration on subsequence: \" || Q1",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lkgw93vs",
+          "page": "6",
+          "label": {
+            "value": "\"II - \" || \"Dynamic sequence name: \" || Q1",
+            "type": "VTL|MD"
+          }
+        },
+        "subSequence": {
+          "id": "lkgw9h1r",
+          "page": "7",
+          "label": {
+            "value": "\"Dynamic subsequence name: \" || Q1",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q1"
+      ]
+    },
+    {
+      "id": "lkgwt260",
+      "componentType": "CheckboxBoolean",
+      "mandatory": false,
+      "page": "8",
+      "label": {
+        "value": "\"➡ \" || \"Dynamic question name: \" || Q1",
+        "type": "VTL|MD"
+      },
+      "declarations": [
+        {
+          "id": "lkgwe557-SI",
+          "declarationType": "STATEMENT",
+          "position": "BEFORE_QUESTION_TEXT",
+          "label": {
+            "value": "\"Dynamic declaration before the question: \" || Q1",
+            "type": "VTL|MD"
+          }
+        },
+        {
+          "id": "lkgwt260-lkgwozcf",
+          "declarationType": "HELP",
+          "position": "AFTER_QUESTION_TEXT",
+          "label": {
+            "value": "\"Dynamic declaration after the question: \" || Q1",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "controls": [
+        {
+          "id": "lkgwt260-CI-0",
+          "typeOfControl": "CONSISTENCY",
+          "criticality": "WARN",
+          "control": {
+            "value": "not(true)",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\"Dynamic control message: \" || Q1 ",
+            "type": "VTL|MD"
+          },
+          "bindingDependencies": [
+            "Q1"
+          ]
+        }
+      ],
+      "hierarchy": {
+        "sequence": {
+          "id": "lkgw93vs",
+          "page": "6",
+          "label": {
+            "value": "\"II - \" || \"Dynamic sequence name: \" || Q1",
+            "type": "VTL|MD"
+          }
+        },
+        "subSequence": {
+          "id": "lkgw9h1r",
+          "page": "7",
+          "label": {
+            "value": "\"Dynamic subsequence name: \" || Q1",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q1",
+        "Q2"
+      ],
+      "response": {
+        "name": "Q2"
+      }
+    },
+    {
+      "id": "lkid7ahs",
+      "componentType": "Radio",
+      "mandatory": false,
+      "page": "9",
+      "label": {
+        "value": "\"➡ \" || \"Unique choice question 2\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lkgw93vs",
+          "page": "6",
+          "label": {
+            "value": "\"II - \" || \"Dynamic sequence name: \" || Q1",
+            "type": "VTL|MD"
+          }
+        },
+        "subSequence": {
+          "id": "lkgw9h1r",
+          "page": "7",
+          "label": {
+            "value": "\"Dynamic subsequence name: \" || Q1",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q1",
+        "UCQ2"
+      ],
+      "options": [
+        {
+          "value": "DYNAMIC1",
+          "label": {
+            "value": "\"Dynamic code 1: \" || Q1",
+            "type": "VTL|MD"
+          }
+        },
+        {
+          "value": "DYNAMIC2",
+          "label": {
+            "value": "\"Dynamic code 2: \" || Q1",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "response": {
+        "name": "UCQ2"
+      }
+    },
+    {
+      "id": "lkijhbsn",
+      "componentType": "CheckboxGroup",
+      "page": "10",
+      "label": {
+        "value": "\"➡ \" || \"Multiple choice question 2\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lkgw93vs",
+          "page": "6",
+          "label": {
+            "value": "\"II - \" || \"Dynamic sequence name: \" || Q1",
+            "type": "VTL|MD"
+          }
+        },
+        "subSequence": {
+          "id": "lkgw9h1r",
+          "page": "7",
+          "label": {
+            "value": "\"Dynamic subsequence name: \" || Q1",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q1",
+        "MCQ21",
+        "MCQ22"
+      ],
+      "responses": [
+        {
+          "id": "lkijhbsn-QOP-lkij77ci",
+          "label": {
+            "value": "\"Dynamic code 1: \" || Q1",
+            "type": "VTL|MD"
+          },
+          "response": {
+            "name": "MCQ21"
+          }
+        },
+        {
+          "id": "lkijhbsn-QOP-lkijke8q",
+          "label": {
+            "value": "\"Dynamic code 2: \" || Q1",
+            "type": "VTL|MD"
+          },
+          "response": {
+            "name": "MCQ22"
+          }
+        }
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "variableType": "COLLECTED",
+      "name": "Q1",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "UCQ1",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ11",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ12",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q2",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "UCQ2",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ21",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ22",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    }
+  ],
+  "cleaning": {},
+  "resizing": {}
+}

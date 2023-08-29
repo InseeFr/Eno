@@ -1,90 +1,42 @@
 package fr.insee.eno.core.model.navigation;
 
 import datacollection33.IfThenElseType;
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
-import fr.insee.eno.core.annotations.Lunatic;
-import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoObjectWithExpression;
-import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
-import fr.insee.lunatic.model.flat.ConditionFilterType;
+import fr.insee.eno.core.model.sequence.ItemReference;
+import fr.insee.eno.core.model.sequence.StructureItemReference;
+import fr.insee.eno.core.parameter.Format;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/** Filter defined at the questionnaire level.
+ * @see ComponentFilter for filter objects wihtin components. */
 @Getter
 @Setter
+@Context(format = Format.DDI, type = IfThenElseType.class)
 public class Filter extends EnoIdentifiableObject implements EnoObjectWithExpression {
 
-    /** In DDI, filter have a "scope" that can contain other filters (nested filters).
-     * Parent filter relationships are set during a DDI processing.
-     * In Lunatic, each component has a unique filter. Its expression is a logical concatenation of the filter
-     * with its parent expressions. */
-    private Filter parentFilter; //TODO: nested filters logical concatenation for Lunatic
-
-    /** Default expression is "true". */
-    public Filter() {
-        stringExpression = "true";
-    }
-
     /** Lunatic filters doesn't have an identifier. */
-    @DDI(contextType = IfThenElseType.class, field = "getIDArray(0).getStringValue()")
+    @DDI("getIDArray(0).getStringValue()")
     private String id;
 
-    //TODO: Asked Lunatic-Model to use LabelType in ConditionFilterType to refactor this.
-
-    /** In DDI, the expression contains variable references instead of variables names.
-     * This list contains the references of these variables. */
-    @DDI(contextType = IfThenElseType.class, field = "getIfCondition().getCommandArray(0).getInParameterList()")
-    private List<BindingReference> bindingReferences = new ArrayList<>();
-
-    /** Command that determines if the filter is applied or not. */
-    @DDI(contextType = IfThenElseType.class, field = "getIfCondition().getCommandArray(0).getCommandContent()")
-    @Lunatic(contextType = ConditionFilterType.class, field = "setValue(#param)")
-    private String stringExpression;
-
+    /** Filter expression. */
+    @DDI("getIfCondition().getCommandArray(0)")
     private CalculatedExpression expression;
 
-    public CalculatedExpression getExpression() {
-        if (expression == null) {
-            expression = new CalculatedExpression();
-            expression.setValue(stringExpression);
-            expression.setBindingReferences(bindingReferences);
-        }
-        return expression;
-    }
+    /** Same principle as sequence items list in sequence objects. */
+    @DDI("#index.get(#this.getThenConstructReference().getIDArray(0).getStringValue())" +
+            ".getControlConstructReferenceList()")
+    private List<ItemReference> filterItems = new ArrayList<>();
 
-    //
-
-    /** List of the identifier of components that are in the scope of the filter.
-     * In DDI, we expect to have 'Sequence', 'QuestionConstruct' and 'IfThenElse' references.
-     * In the sequence case, the reference id directly designates the corresponding sequence object.
-     * Same in the filter (IfThenElse) case.
-     * In the question construct case, the reference id designates a QuestionConstruct object,
-     * that contains a reference to the concrete question object. */
-    @DDI(contextType = IfThenElseType.class,
-            field = "#index.get(#this.getThenConstructReference().getIDArray(0).getStringValue())" +
-                    ".getControlConstructReferenceList().![" +
-                    "    #this.getTypeOfObject().toString() == 'QuestionConstruct' ? " +
-                    "        #index.get(#this.getIDArray(0).getStringValue())" +
-                    "        .getQuestionReference().getIDArray(0).getStringValue() : " +
-                    "    #this.getTypeOfObject().toString() == 'Sequence' ? " +
-                    "        #this.getIDArray(0).getStringValue() : " +
-                    "    #this.getTypeOfObject().toString() == 'ComputationItem' ? " +
-                    "        #this.getIDArray(0).getStringValue() : " +
-                    "    #this.getTypeOfObject().toString() == 'IfThenElse' ? " +
-                    "        #this.getIDArray(0).getStringValue() : " +
-                    "    T(fr.insee.eno.core.model.navigation.Filter).unexpectedDDIComponent(#root, #this.getTypeOfObject().toString())" +
-                    "]")
-    private List<String> componentReferences = new ArrayList<>();
-
-    public static String unexpectedDDIComponent(IfThenElseType ifThenElseType, String typeOfObject) {
-        throw new MappingException(String.format(
-                "Unexpected type of object '%s' found in ThenConstructReference sequence of IfThenElse '%s'",
-                typeOfObject, ifThenElseType.getIDArray(0).getStringValue()));
-    }
+    /** References of sequences, subsequences or/and questions that are in the scope of the filter.
+     * In DDI, this property is filled by a processing using the "filterItems" property. */
+    private final List<StructureItemReference> filterScope = new ArrayList<>();
 
 }

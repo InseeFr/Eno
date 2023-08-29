@@ -10,7 +10,7 @@ import java.util.Map;
 public class LunaticCatalog {
 
     public static final List<Class<?>> sequenceClassTypes =
-            List.of(SequenceType.class, Subsequence.class);
+            List.of(Sequence.class, Subsequence.class);
     public static final List<Class<?>> questionClassTypes =
             List.of(Input.class, Textarea.class, InputNumber.class, CheckboxBoolean.class, Datepicker.class,
                     CheckboxOne.class, Radio.class, Dropdown.class, CheckboxGroup.class, Table.class);

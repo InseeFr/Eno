@@ -1,10 +1,12 @@
 package fr.insee.eno.core.model.code;
 
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.label.Label;
-import fr.insee.lunatic.model.flat.BodyLine;
+import fr.insee.eno.core.parameter.Format;
+import fr.insee.lunatic.model.flat.BodyCell;
 import fr.insee.lunatic.model.flat.HeaderType;
 import fr.insee.lunatic.model.flat.Options;
 import logicalproduct33.CodeType;
@@ -16,26 +18,25 @@ import java.util.List;
 
 @Getter
 @Setter
+@Context(format = Format.DDI, type = CodeType.class)
+@Context(format = Format.LUNATIC, type = {Options.class, HeaderType.class, BodyCell.class})
 public class CodeItem extends EnoObject {
 
-    @DDI(contextType = CodeType.class, field = "getIDArray(0).getStringValue()")
+    @DDI("getIDArray(0).getStringValue()")
     String id;
 
-    @DDI(contextType = CodeType.class,
-            field = "getValue().getStringValue()")
-    @Lunatic(contextType = {Options.class, HeaderType.class, BodyLine.class}, field = "setValue(#param)")
+    @DDI("getValue().getStringValue()")
+    @Lunatic("setValue(#param)")
     String value;
 
-    @DDI(contextType = CodeType.class,
-            field = "#index.get(#this.getCategoryReference().getIDArray(0).getStringValue())" +
-                    ".getLabelArray(0)")
-    @Lunatic(contextType = {Options.class, HeaderType.class, BodyLine.class}, field = "setLabel(#param)")
+    @DDI("#index.get(#this.getCategoryReference().getIDArray(0).getStringValue()).getLabelArray(0)")
+    @Lunatic("setLabel(#param)")
     Label label;
 
     /**
      * Nested code lists.
      */
-    @DDI(contextType = CodeType.class, field = "getCodeList()")
+    @DDI("getCodeList()")
     List<CodeItem> codeItems = new ArrayList<>();
 
     /**
@@ -47,20 +48,18 @@ public class CodeItem extends EnoObject {
      * "Horizontal" size onf the code item.
      * In Lunatic "colspan" is set only if it is > 1.
      */
-    @Lunatic(contextType = BodyLine.class,
-            field = "#this instanceof T(fr.insee.lunatic.model.flat.BodyType) ? " +
-                    "setColspan(#param > 1 ? T(java.math.BigInteger).valueOf(#param) : null) :" +
-                    "null")
+    @Lunatic("#this instanceof T(fr.insee.lunatic.model.flat.BodyLine) ? " +
+            "setColspan(#param > 1 ? T(java.math.BigInteger).valueOf(#param) : null) :" +
+            "null")
     int hSize;
 
     /**
      * "Vertical" size onf the code item.
      * In Lunatic "rowspan" is set only if it is > 1.
      */
-    @Lunatic(contextType = BodyLine.class,
-            field = "#this instanceof T(fr.insee.lunatic.model.flat.BodyType) ? " +
-                    "setRowspan(#param > 1 ? T(java.math.BigInteger).valueOf(#param) : null) :" +
-                    "null")
+    @Lunatic("#this instanceof T(fr.insee.lunatic.model.flat.BodyLine) ? " +
+            "setRowspan(#param > 1 ? T(java.math.BigInteger).valueOf(#param) : null) :" +
+            "null")
     int vSize;
 
     /**

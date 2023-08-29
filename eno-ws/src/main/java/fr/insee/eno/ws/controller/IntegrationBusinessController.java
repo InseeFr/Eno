@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
 
 @Tag(name = "Integration of questionnaire")
@@ -53,10 +52,10 @@ public class IntegrationBusinessController {
 	@PostMapping(value = "ddi-2-fo",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Mono<Void> generateFo(
-			@RequestPart(value="in") MultipartFile in,
-			@RequestPart(value="params") MultipartFile params,
-			@RequestPart(value="metadata") MultipartFile metadata,
-			@RequestPart(value="specificTreatment", required=false) MultipartFile specificTreatment,
+			@RequestPart(value="in") Mono<FilePart> in,
+			@RequestPart(value="params") Mono<FilePart> params,
+			@RequestPart(value="metadata") Mono<FilePart> metadata,
+			@RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
 			ServerHttpRequest request, ServerHttpResponse response) {
 		return passePlat.passePlatPost(request, response);
 	}

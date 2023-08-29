@@ -1,0 +1,1258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DDIInstance xmlns="ddi:instance:3_3"
+              xmlns:a="ddi:archive:3_3"
+              xmlns:d="ddi:datacollection:3_3"
+              xmlns:g="ddi:group:3_3"
+              xmlns:l="ddi:logicalproduct:3_3"
+              xmlns:r="ddi:reusable:3_3"
+              xmlns:s="ddi:studyunit:3_3"
+              xmlns:xhtml="http://www.w3.org/1999/xhtml"
+              xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
+              isMaintainable="true"><!--Eno version : 2.3.8. Generation date : 29/07/2022 - 12:11:16-->
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-l6692wu3</r:ID>
+   <r:Version>1</r:Version>
+   <r:Citation>
+      <r:Title>
+         <r:String>Sandbox Eno v3</r:String>
+      </r:Title>
+   </r:Citation>
+   <g:ResourcePackage isMaintainable="true" versionDate="2018-01-25+01:00">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>RessourcePackage-l6692wu3</r:ID>
+      <r:Version>1</r:Version>
+      <d:InterviewerInstructionScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>InterviewerInstructionScheme-l6692wu3</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">A définir</r:Content>
+         </r:Label>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669ea0u</r:ID>
+            <r:Version>1</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">help</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">SelfAdministeredQuestionnaire.WebBased</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">SelfAdministeredQuestionnaire.Paper</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">Interview.Telephone.CATI</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">Interview.FaceToFace.CAPIorCAMI</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Première séquence"</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669ebci-CI-0-II-0</r:ID>
+            <r:Version>1</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">warning</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Hola"</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669ebci-CI-1-II-1</r:ID>
+            <r:Version>1</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">warning</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Holaaa"</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669itrl-CI-0-II-0</r:ID>
+            <r:Version>1</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">warning</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Plus que 50 !"</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669itrl-CI-1-II-1</r:ID>
+            <r:Version>1</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">warning</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Moins que 10"</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669at60</r:ID>
+            <r:Version>1</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">instruction</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">SelfAdministeredQuestionnaire.WebBased</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">SelfAdministeredQuestionnaire.Paper</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">Interview.Telephone.CATI</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">Interview.FaceToFace.CAPIorCAMI</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Pas le droit de mettre plus que 90"</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669opc6-CI-0-II-0</r:ID>
+            <r:Version>1</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">warning</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"On avait dit pas plus que 90 :("</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669x5cg-CI-0-II-0</r:ID>
+            <r:Version>1</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">warning</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Vous n'avez pas coché toutes les cases :("</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669yqg4-CI-0-II-0</r:ID>
+            <r:Version>1</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">warning</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Invisible"</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+      </d:InterviewerInstructionScheme>
+      <d:ControlConstructScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>ControlConstructScheme-l6692wu3</r:ID>
+         <r:Version>1</r:Version>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>Sequence-l6692wu3</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Sandbox Eno v3</r:Content>
+            </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">template</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669ebci</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669ebci</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">SQUENCE1</r:String>
+            </d:ConstructName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Séquence 1</r:Content>
+            </r:Label>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669ea0u</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669ebci-CI-0</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>ComputationItem</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669ebci-CI-1</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>ComputationItem</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669itrl-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669itrl-CI-0</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>ComputationItem</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669itrl-CI-1</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>ComputationItem</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669opc6-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669opc6-CI-0</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>ComputationItem</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669tc5l-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669qqhz-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669x5cg</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669x5cg</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">SOUSSEQ_CONTROLE</r:String>
+            </d:ConstructName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Sous-séquence avec contrôle</r:Content>
+            </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669x5cg-CI-0</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>ComputationItem</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669yqg4-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669yqg4-CI-0</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>ComputationItem</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669itrl-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">NOMBRE1</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669itrl</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669opc6-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">NOMBRE2</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669opc6</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669tc5l-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">BOOL1</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669tc5l</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669qqhz-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">BOOL2</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669qqhz</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669yqg4-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">DUTEXTE</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669yqg4</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:ComputationItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669ebci-CI-0</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Contrôle sur séquence</r:String>
+            </d:ConstructName>
+            <r:Description>
+               <r:Content xml:lang="fr-FR">Contrôle sur séquence</r:Content>
+            </r:Description>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669ebci-CI-0-II-0</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+            <r:CommandCode>
+               <r:Command>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
+                  <r:CommandContent>true</r:CommandContent>
+               </r:Command>
+            </r:CommandCode>
+         </d:ComputationItem>
+         <d:ComputationItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669ebci-CI-1</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Deuxième contrôle sur séquence</r:String>
+            </d:ConstructName>
+            <r:Description>
+               <r:Content xml:lang="fr-FR">Deuxième contrôle sur séquence</r:Content>
+            </r:Description>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669ebci-CI-1-II-1</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+            <r:CommandCode>
+               <r:Command>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
+                  <r:CommandContent>true</r:CommandContent>
+               </r:Command>
+            </r:CommandCode>
+         </d:ComputationItem>
+         <d:ComputationItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669itrl-CI-0</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Supérieur à 50</r:String>
+            </d:ConstructName>
+            <r:Description>
+               <r:Content xml:lang="fr-FR">Supérieur à 50</r:Content>
+            </r:Description>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669itrl-CI-0-II-0</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem>
+            <r:CommandCode>
+               <r:Command>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>l669itrl-CI-0-IP-1</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">NOMBRE1</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l669itrl-QOP-l66fvgnw</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l669itrl-CI-0-IP-1</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:CommandContent>cast(l669itrl-CI-0-IP-1, integer) &gt; 50</r:CommandContent>
+               </r:Command>
+            </r:CommandCode>
+         </d:ComputationItem>
+         <d:ComputationItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669itrl-CI-1</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Inférieur à 10</r:String>
+            </d:ConstructName>
+            <r:Description>
+               <r:Content xml:lang="fr-FR">Inférieur à 10</r:Content>
+            </r:Description>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669itrl-CI-1-II-1</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+            <r:CommandCode>
+               <r:Command>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>l669itrl-CI-1-IP-1</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">NOMBRE1</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l669itrl-QOP-l66fvgnw</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l669itrl-CI-1-IP-1</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:CommandContent>cast(l669itrl-CI-1-IP-1, integer) &lt;= 10</r:CommandContent>
+               </r:Command>
+            </r:CommandCode>
+         </d:ComputationItem>
+         <d:ComputationItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669opc6-CI-0</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Supérieur à 90</r:String>
+            </d:ConstructName>
+            <r:Description>
+               <r:Content xml:lang="fr-FR">Supérieur à 90</r:Content>
+            </r:Description>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669opc6-CI-0-II-0</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-3">stumblingblock</d:TypeOfComputationItem>
+            <r:CommandCode>
+               <r:Command>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>l669opc6-CI-0-IP-1</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">NOMBRE2</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l669opc6-QOP-l66fusqh</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l669opc6-CI-0-IP-1</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:CommandContent>cast(l669opc6-CI-0-IP-1, integer) &gt; 90</r:CommandContent>
+               </r:Command>
+            </r:CommandCode>
+         </d:ComputationItem>
+         <d:ComputationItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669x5cg-CI-0</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Remplissage des questions précédentes</r:String>
+            </d:ConstructName>
+            <r:Description>
+               <r:Content xml:lang="fr-FR">Remplissage des questions précédentes</r:Content>
+            </r:Description>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669x5cg-CI-0-II-0</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem>
+            <r:CommandCode>
+               <r:Command>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>l669x5cg-CI-0-IP-1</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">BOOL1</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>l669x5cg-CI-0-IP-2</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">BOOL2</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l669tc5l-QOP-l66fioxa</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l669x5cg-CI-0-IP-1</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l669qqhz-QOP-l669vmbc</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>l669x5cg-CI-0-IP-2</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:CommandContent>l669x5cg-CI-0-IP-1 = false or l669x5cg-CI-0-IP-2 = false</r:CommandContent>
+               </r:Command>
+            </r:CommandCode>
+         </d:ComputationItem>
+         <d:ComputationItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669yqg4-CI-0</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Contrôle sur le texte</r:String>
+            </d:ConstructName>
+            <r:Description>
+               <r:Content xml:lang="fr-FR">Contrôle sur le texte</r:Content>
+            </r:Description>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669yqg4-CI-0-II-0</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-3">stumblingblock</d:TypeOfComputationItem>
+            <r:CommandCode>
+               <r:Command>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
+                  <r:CommandContent>false</r:CommandContent>
+               </r:Command>
+            </r:CommandCode>
+         </d:ComputationItem>
+      </d:ControlConstructScheme>
+      <d:QuestionScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>QuestionScheme-l6692wu3</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">A définir</r:Content>
+         </r:Label>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669itrl</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">NOMBRE1</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669itrl-QOP-l66fvgnw</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">NOMBRE1</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l669itrl-RDOP-l66fvgnw</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l669itrl-QOP-l66fvgnw</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Nombre1"</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:NumericDomain>
+               <r:NumberRange>
+                  <r:Low isInclusive="true">0</r:Low>
+                  <r:High isInclusive="true">100</r:High>
+               </r:NumberRange>
+               <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l669itrl-RDOP-l66fvgnw</r:ID>
+                  <r:Version>1</r:Version>
+               </r:OutParameter>
+            </d:NumericDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669opc6</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">NOMBRE2</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669opc6-QOP-l66fusqh</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">NOMBRE2</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l669opc6-RDOP-l66fusqh</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l669opc6-QOP-l66fusqh</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Nombre2"</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:NumericDomain decimalPositions="1">
+               <r:NumberRange>
+                  <r:Low isInclusive="true">0</r:Low>
+                  <r:High isInclusive="true">100</r:High>
+               </r:NumberRange>
+               <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l669opc6-RDOP-l66fusqh</r:ID>
+                  <r:Version>1</r:Version>
+               </r:OutParameter>
+            </d:NumericDomain>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669at60</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669tc5l</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">BOOL1</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669tc5l-QOP-l66fioxa</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">BOOL1</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l669tc5l-RDOP-l66fioxa</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l669tc5l-QOP-l66fioxa</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Case à cocher take 1"</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:NominalDomain>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l669tc5l-RDOP-l66fioxa</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:CodeRepresentation>
+                     <r:CodeSubsetInformation>
+                        <r:IncludedCode>
+                           <r:CodeReference>
+                              <r:Agency>fr.insee</r:Agency>
+                              <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                              <r:Version>1</r:Version>
+                              <r:TypeOfObject>Code</r:TypeOfObject>
+                           </r:CodeReference>
+                        </r:IncludedCode>
+                     </r:CodeSubsetInformation>
+                  </r:CodeRepresentation>
+                  <r:DefaultValue/>
+               </r:OutParameter>
+               <r:ResponseCardinality maximumResponses="1"/>
+            </d:NominalDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669qqhz</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">BOOL2</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669qqhz-QOP-l669vmbc</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">BOOL2</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l669qqhz-RDOP-l669vmbc</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l669qqhz-QOP-l669vmbc</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Case à cocher take 2"</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:NominalDomain>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l669qqhz-RDOP-l669vmbc</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:CodeRepresentation>
+                     <r:CodeSubsetInformation>
+                        <r:IncludedCode>
+                           <r:CodeReference>
+                              <r:Agency>fr.insee</r:Agency>
+                              <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                              <r:Version>1</r:Version>
+                              <r:TypeOfObject>Code</r:TypeOfObject>
+                           </r:CodeReference>
+                        </r:IncludedCode>
+                     </r:CodeSubsetInformation>
+                  </r:CodeRepresentation>
+                  <r:DefaultValue/>
+               </r:OutParameter>
+               <r:ResponseCardinality maximumResponses="1"/>
+            </d:NominalDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669yqg4</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">DUTEXTE</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669yqg4-QOP-l66fnk9d</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">DUTEXTE</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l669yqg4-RDOP-l66fnk9d</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l669yqg4-QOP-l66fnk9d</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Du texte"</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:TextDomain maxLength="1000">
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>l669yqg4-RDOP-l66fnk9d</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TextRepresentation maxLength="1000"/>
+               </r:OutParameter>
+            </d:TextDomain>
+         </d:QuestionItem>
+      </d:QuestionScheme>
+      <l:CategoryScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>CategoryScheme-l6692wu3</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">A définir</r:Content>
+         </r:Label>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR"/>
+            </r:Label>
+         </l:Category>
+      </l:CategoryScheme>
+      <l:CodeListScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>SANDBOXENO-CLS</r:ID>
+         <r:Version>1</r:Version>
+         <l:CodeListSchemeName>
+            <r:String xml:lang="en-IE">SANDBOXENO</r:String>
+         </l:CodeListSchemeName>
+         <l:CodeList>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-COMMUN-CL-Booleen</r:ID>
+            <r:Version>1</r:Version>
+            <l:CodeListName>
+               <r:String xml:lang="fr-FR">Booleen</r:String>
+            </l:CodeListName>
+            <l:HierarchyType>Regular</l:HierarchyType>
+            <l:Level levelNumber="1">
+               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+               <r:Version>1</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>1</r:Value>
+            </l:Code>
+         </l:CodeList>
+      </l:CodeListScheme>
+      <l:VariableScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>VariableScheme-l6692wu3</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">Variable Scheme for the survey</r:Content>
+         </r:Label>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669cx0i</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">NOMBRE1</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">NOMBRE1 label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669itrl-QOP-l66fvgnw</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669itrl</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669hqot</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">NOMBRE2</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">NOMBRE2 label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669opc6-QOP-l66fusqh</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669opc6</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation decimalPositions="1">
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669cvve</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">BOOL1</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">BOOL1 label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669tc5l-QOP-l66fioxa</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669tc5l</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669y6qe</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">BOOL2</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">BOOL2 label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669qqhz-QOP-l669vmbc</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669qqhz</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l669teez</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">DUTEXTE</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">DUTEXTE label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669yqg4-QOP-l66fnk9d</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669yqg4</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="1000"/>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:VariableGroup>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-Instrument-l6692wu3-vg</r:ID>
+            <r:Version>1</r:Version>
+            <r:BasedOnObject>
+               <r:BasedOnReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>Instrument-l6692wu3</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Instrument</r:TypeOfObject>
+               </r:BasedOnReference>
+            </r:BasedOnObject>
+            <l:TypeOfVariableGroup>Questionnaire</l:TypeOfVariableGroup>
+            <l:VariableGroupName>
+               <r:String>SANDBOXENO</r:String>
+            </l:VariableGroupName>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669cx0i</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669hqot</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669cvve</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669y6qe</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l669teez</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+         </l:VariableGroup>
+      </l:VariableScheme>
+      <d:ProcessingInstructionScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-PIS-1</r:ID>
+         <r:Version>1</r:Version>
+         <d:ProcessingInstructionSchemeName>
+            <r:String xml:lang="en-IE">SIMPSONS</r:String>
+         </d:ProcessingInstructionSchemeName>
+         <r:Label>
+            <r:Content xml:lang="en-IE">Processing instructions of the Simpsons questionnaire</r:Content>
+         </r:Label>
+      </d:ProcessingInstructionScheme>
+      <r:ManagedRepresentationScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-MRS</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="en-IE">Liste de formats numériques et dates de
+                            l'enquête</r:Content>
+            <r:Content xml:lang="en-IE">Numeric and DateTime list for the survey</r:Content>
+         </r:Label>
+      </r:ManagedRepresentationScheme>
+   </g:ResourcePackage>
+   <s:StudyUnit>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>StudyUnit-l6692wu3</r:ID>
+      <r:Version>1</r:Version>
+      <r:ExPostEvaluation/>
+      <d:DataCollection>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>DataCollection-l6692wu3</r:ID>
+         <r:Version>1</r:Version>
+         <r:QuestionSchemeReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>QuestionScheme-l6692wu3</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>QuestionScheme</r:TypeOfObject>
+         </r:QuestionSchemeReference>
+         <r:ControlConstructSchemeReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>ControlConstructScheme-l6692wu3</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>ControlConstructScheme</r:TypeOfObject>
+         </r:ControlConstructSchemeReference>
+         <r:InterviewerInstructionSchemeReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>InterviewerInstructionScheme-l6692wu3</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>InterviewerInstructionScheme</r:TypeOfObject>
+         </r:InterviewerInstructionSchemeReference>
+         <d:InstrumentScheme xml:lang="fr-FR">
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>InstrumentScheme-l6692wu3</r:ID>
+            <r:Version>1</r:Version>
+            <d:Instrument xmlns:c="ddi:conceptualcomponent:3_3"
+                           xmlns:cm="ddi:comparative:3_3"
+                           xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
+                           xmlns:pr="ddi:ddiprofile:3_3">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>Instrument-l6692wu3</r:ID>
+               <r:Version>1</r:Version>
+               <d:InstrumentName>
+                  <r:String>SANDBOXENO</r:String>
+               </d:InstrumentName>
+               <r:Label>
+                  <r:Content xml:lang="fr-FR">Sandbox Eno v3 questionnaire</r:Content>
+               </r:Label>
+               <d:TypeOfInstrument>A définir</d:TypeOfInstrument>
+               <d:ControlConstructReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>Sequence-l6692wu3</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Sequence</r:TypeOfObject>
+               </d:ControlConstructReference>
+            </d:Instrument>
+         </d:InstrumentScheme>
+      </d:DataCollection>
+   </s:StudyUnit>
+</DDIInstance>

@@ -1,10 +1,12 @@
 package fr.insee.eno.ws.controller.utils;
 
 import fr.insee.eno.core.parameter.EnoParameters;
-import fr.insee.eno.treatments.LunaticPostProcessings;
+import fr.insee.eno.treatments.LunaticPostProcessing;
+import fr.insee.eno.treatments.LunaticRegroupementProcessing;
 import fr.insee.eno.treatments.LunaticSuggesterProcessing;
 import fr.insee.eno.treatments.SpecificTreatmentsDeserializer;
 import fr.insee.eno.treatments.dto.EnoSuggesterType;
+import fr.insee.eno.treatments.dto.Regroupement;
 import fr.insee.eno.treatments.dto.SpecificTreatments;
 import fr.insee.eno.treatments.exceptions.SpecificTreatmentsDeserializationException;
 import fr.insee.eno.treatments.exceptions.SpecificTreatmentsValidationException;
@@ -71,7 +73,7 @@ public class V3ControllerUtils {
      * @param lunaticPostProcessings additional lunatic post processings
      * @return json lunatic response
      */
-    public Mono<ResponseEntity<String>> ddiToLunaticJson(Mono<FilePart> ddiFile, EnoParameters enoParameters, Mono<LunaticPostProcessings> lunaticPostProcessings) {
+    public Mono<ResponseEntity<String>> ddiToLunaticJson(Mono<FilePart> ddiFile, EnoParameters enoParameters, Mono<LunaticPostProcessing> lunaticPostProcessings) {
 
         return ddiFile.flatMap(filePart -> filePart.content()
                         .map(dataBuffer -> dataBuffer.asInputStream(true))
@@ -90,8 +92,8 @@ public class V3ControllerUtils {
      * @param specificTreatment json specific treatment file
      * @return a lunatic post processing for this treatment
      */
-    public Mono<LunaticPostProcessings> generateLunaticPostProcessings(Mono<Part> specificTreatment) {
-        LunaticPostProcessings lunaticPostProcessings = new LunaticPostProcessings();
+    public Mono<LunaticPostProcessing> generateLunaticPostProcessings(Mono<Part> specificTreatment) {
+        LunaticPostProcessing lunaticPostProcessings = new LunaticPostProcessing();
 
         return specificTreatment
                 /*
@@ -109,9 +111,14 @@ public class V3ControllerUtils {
                     try {
                         SpecificTreatmentsDeserializer deserializer = new SpecificTreatmentsDeserializer();
                         SpecificTreatments treatments = deserializer.deserialize(specificTreatmentStream);
-                        List<EnoSuggesterType> suggesters = treatments.getSuggesters();
-                        if(!suggesters.isEmpty()) {
+                        List<EnoSuggesterType> suggesters = treatments.suggesters();
+                        if(suggesters != null && !suggesters.isEmpty()) {
                             lunaticPostProcessings.addPostProcessing(new LunaticSuggesterProcessing(suggesters));
+                        }
+
+                        List<Regroupement> regroupements = treatments.regroupements();
+                        if(regroupements != null && !regroupements.isEmpty()) {
+                            lunaticPostProcessings.addPostProcessing(new LunaticRegroupementProcessing(regroupements));
                         }
                         return Mono.just(lunaticPostProcessings);
                     } catch (SpecificTreatmentsDeserializationException | SpecificTreatmentsValidationException ex) {

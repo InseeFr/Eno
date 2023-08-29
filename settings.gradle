@@ -9,16 +9,22 @@ dependencyResolutionManagement {
 
     repositories {
         mavenCentral()
-        // Temporary config for private maven repository (for Pogues-Model and Lunatic-Model)
-        maven { url System.properties['urlMavenRepo'] }
-        // Temporary config if you choose to install Pogues-Model and Lunatic-Model locally
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots"
+            mavenContent {
+                snapshotsOnly()
+            }
+        }
+        // Config for private maven repository:
+        //maven { url System.properties['urlMavenRepo'] }
+        // Config for local maven dependencies:
         mavenLocal()
     }
 
     versionCatalogs {
         libs {
-            version('lunatic-model', '2.3.2-rc8')
-            version('pogues-model', '1.0.4')
+            version('lunatic-model', '3.0.4-SNAPSHOT')
+            version('pogues-model', '1.0.5')
             library('lunatic-model', 'fr.insee.lunatic', 'lunatic-model').versionRef('lunatic-model')
             library('pogues-model', 'fr.insee.pogues', 'pogues-model').versionRef('pogues-model')
         }
@@ -26,7 +32,7 @@ dependencyResolutionManagement {
 
 }
 
-rootProject.name = 'eno'  
+rootProject.name = 'Eno'
 
 include 'ddi-beans'
 include 'eno-core'

@@ -15,13 +15,13 @@ class PoguesParserTest {
     @Test
     void poguesParserTest() throws URISyntaxException, PoguesDeserializationException {
         //
-        URL testPoguesFileUrl = this.getClass().getClassLoader().getResource("in/pogues/pogues.json");
+        URL testPoguesFileUrl = this.getClass().getClassLoader().getResource("end-to-end/pogues/pogues-l20g2ba7.json");
         assert testPoguesFileUrl != null;
         Questionnaire poguesQuestionnaire = PoguesParser.parse(testPoguesFileUrl);
 
         //
         assertNotNull(poguesQuestionnaire);
-        assertEquals("l10xmg2l", poguesQuestionnaire.getId());
-        assertEquals("DOCSIMPLE", poguesQuestionnaire.getName());
+        assertEquals("l20g2ba7", poguesQuestionnaire.getId());
     }
+    
 }

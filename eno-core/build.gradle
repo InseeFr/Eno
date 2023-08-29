@@ -34,10 +34,15 @@ dependencies {
     // Logging
     implementation 'org.slf4j:slf4j-api'
 
+    // Mapper
+    implementation 'org.modelmapper:modelmapper:3.1.1'
+
     // Logback logging implementation for testing
     testRuntimeOnly 'ch.qos.logback:logback-classic'
     // JUnit Jupiter
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    // AssertJ
+    testImplementation 'org.assertj:assertj-core'
     // Mockito
     testImplementation 'org.mockito:mockito-core'
     testImplementation 'org.skyscreamer:jsonassert:1.5.1'

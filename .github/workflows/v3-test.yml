@@ -1,0 +1,32 @@
+name: Eno V3 test
+
+on:
+  push:
+    branches:
+      - 'v3-main'
+      - 'v3-develop'
+    paths-ignore: ['docs/**', 'logo/**', 'Dockerfile', 'README**.md']
+  pull_request:
+    branches:
+      - 'v3-main'
+      - 'v3-develop'
+    types: [opened, synchronize, reopened, ready_for_review]
+
+jobs:
+  test:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Run tests with Gradle Wrapper
+        run: ./gradlew test

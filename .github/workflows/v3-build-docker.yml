@@ -4,11 +4,7 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - v3.*
-
-env:
-  LUNATIC_BRANCH: dev-eno-v3
-  POGUES_BRANCH: main
+      - 3.*.*-SNAPSHOT
 
 jobs:
 
@@ -25,28 +21,6 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Checkout Lunatic model repo
-        uses: actions/checkout@v3
-        with:
-          repository: InseeFr/Lunatic-Model
-          ref: ${{ env.LUNATIC_BRANCH }}
-          path: Lunatic-model
-
-      - name: Build Lunatic model
-        working-directory: ./Lunatic-model
-        run: mvn install -Djar.finalName="lunatic-model" -B -V --file pom.xml
-
-      - name: Checkout Pogues model repo
-        uses: actions/checkout@v3
-        with:
-          repository: InseeFr/Pogues-Model
-          ref: ${{ env.POGUES_BRANCH }}
-          path: Pogues-model
-
-      - name: Build with Maven Pogues model
-        working-directory: ./Pogues-model
-        run: mvn install -Djar.finalName="pogues-model" -B -V --file pom.xml
-
       - name: Checkout Eno repo
         uses: actions/checkout@v3
         with:
@@ -54,14 +28,14 @@ jobs:
           ref: ${{ github.ref }}
           path: Eno
 
-      - name: Enable wrapper
-        run: | 
-          chmod +x gradlew # (make gradle wrapper executable)
-          ./gradlew # (load the gradle wrapper, required for the get version step)
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
 
       - name: Get Eno Version
         id: version-step
-        run: echo "eno-version=$(./gradlew printVersion --console=plain -q)" >> $GITHUB_OUTPUT
+        run: |
+          ./gradlew # (load the gradle wrapper, required for the get version step)
+          echo "eno-version=$(./gradlew printVersion --console=plain -q)" >> $GITHUB_OUTPUT
         
       - name: Print Eno Version
         run: echo ${{ steps.version-step.outputs.eno-version }}
