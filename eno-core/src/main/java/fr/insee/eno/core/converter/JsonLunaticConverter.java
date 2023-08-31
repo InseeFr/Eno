@@ -45,7 +45,7 @@ public class JsonLunaticConverter {
             }
 
             ResizingType resizingType = lunaticQuestionnaire.getResizing();
-            if(resizingType == null || resizingType.getAny().isEmpty()) {
+            if(resizingType != null && !resizingType.getAny().isEmpty()) {
                 questionnaireNode.set("resizing", createResizingObject(lunaticQuestionnaire, mapper));
             }
             return mapper.writeValueAsString(questionnaireNode);
