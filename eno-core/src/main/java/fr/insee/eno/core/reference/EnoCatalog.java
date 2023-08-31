@@ -61,6 +61,9 @@ public class EnoCatalog {
     public Collection<Question> getQuestions() {
         return questionMap.values();
     }
+    public Collection<Variable> getVariables() {
+        return variableMap.values();
+    }
     public Collection<EnoComponent> getComponents() {
         return componentMap.values();
     }

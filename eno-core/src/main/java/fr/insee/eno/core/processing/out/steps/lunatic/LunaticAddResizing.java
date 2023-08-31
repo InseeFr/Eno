@@ -1,13 +1,13 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
+import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.lunatic.LunaticResizingLoopVariable;
 import fr.insee.eno.core.model.lunatic.LunaticResizingPairWiseVariable;
-import fr.insee.eno.core.model.variable.CalculatedVariable;
+import fr.insee.eno.core.model.navigation.LinkedLoop;
+import fr.insee.eno.core.model.question.PairwiseQuestion;
 import fr.insee.eno.core.model.variable.CollectedVariable;
 import fr.insee.eno.core.model.variable.Variable;
-import fr.insee.eno.core.model.variable.VariableGroup;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.lunatic.model.flat.*;
@@ -15,7 +15,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Slf4j
@@ -45,7 +44,7 @@ public class LunaticAddResizing implements ProcessingStep<Questionnaire> {
             }
 
             if(component.getComponentType().equals(ComponentTypeEnum.PAIRWISE_LINKS)) {
-                resizings.addAll(buildResizingVariablesForPairwise((PairwiseLinks) component));
+                resizings.add(buildResizingVariableForPairwise((PairwiseLinks) component));
             }
         }
 
@@ -56,128 +55,72 @@ public class LunaticAddResizing implements ProcessingStep<Questionnaire> {
 
 
     /**
-     * Build resizing variables for a pairwise link
+     * Build resizing variable for a pairwise link
      * @param links pairwise link
-     * @return list of resizing variables of a pairwise link
+     * @return resizing variable of a pairwise link
      */
-    private List<LunaticResizingPairWiseVariable> buildResizingVariablesForPairwise(PairwiseLinks links) {
+    private LunaticResizingPairWiseVariable buildResizingVariableForPairwise(PairwiseLinks links) {
         List<String> sizesVTLFormula = List.of(links.getXAxisIterations().getValue(), links.getYAxisIterations().getValue());
-        List<Variable> resizingVariables = getResizingVariables(links.getId());
-        List<String> variablesNames = getVariablesUsedInFormula(links.getId());
-        List<String> collectedVariablesFormulaDependencies = getCollectedResizingVariables(resizingVariables);
-
-        return collectedVariablesFormulaDependencies.stream()
-                .map(collectedVariable -> new LunaticResizingPairWiseVariable(collectedVariable, sizesVTLFormula, variablesNames))
-                .toList();
+        String resizingVariable = ((PairwiseQuestion) enoCatalog.getQuestion(links.getId())).getLoopVariableName();
+        List<String> variablesNames = getLoopVariables(links.getId());
+        return new LunaticResizingPairWiseVariable(resizingVariable, sizesVTLFormula, variablesNames);
     }
 
-    /**
+
+     /**
      * Build resizing variables for a loop
      * @param loop loop
      * @return list of resizing variables of a loop
      */
     private List<LunaticResizingLoopVariable> buildResizingVariablesForLoop(Loop loop) {
         // no need to handle linked loops, variables from main loop includes variables from linked loops
-        if(isLinkedLoop(loop)) {
+        fr.insee.eno.core.model.navigation.Loop enoLoop = (fr.insee.eno.core.model.navigation.Loop) enoQuestionnaire.getIndex().get(loop.getId());
+        String sizeVTLFormula;
+
+        if(enoLoop instanceof LinkedLoop) {
+            sizeVTLFormula = loop.getIterations().getValue();
+        } else {
+            sizeVTLFormula = loop.getLines().getMax().getValue();
+        }
+        List<CollectedVariable> resizingVariables = getResizingVariables(loop);
+
+        if(resizingVariables.isEmpty()) {
             return new ArrayList<>();
         }
 
-        String sizeVTLFormula = loop.getLines().getMax().getValue();
-
-        // if VTL formula is a numeric value, no need to handle variables
-        if(sizeVTLFormula.chars().allMatch(Character::isDigit)) {
-            return new ArrayList<>();
-        }
-
-        List<Variable> resizingVariables = getResizingVariables(loop.getId());
-        List<String> variablesNames = getVariablesUsedInFormula(loop.getId());
-        List<String> collectedVariablesFormulaDependencies = getCollectedResizingVariables(resizingVariables);
-
-        return collectedVariablesFormulaDependencies.stream()
-                .map(collectedVariable -> new LunaticResizingLoopVariable(collectedVariable, sizeVTLFormula, variablesNames))
+        List<String> loopVariables = getLoopVariables(loop.getId());
+        return resizingVariables.stream()
+                .map(resizingVariable -> new LunaticResizingLoopVariable(resizingVariable.getName(), sizeVTLFormula, loopVariables))
                 .toList();
+
     }
 
     /**
-     * @param loopId loop id
-     * @return all the variables used in the resizing formula
+     * @param loopId/pairwise loop id
+     * @return all the variables in a loop/pairwise
      */
-    private List<String> getVariablesUsedInFormula(String loopId) {
-        return enoQuestionnaire.getVariableGroups().stream()
-                .filter(variableGroup -> variableGroup.getName().equals(loopId))
-                .map(VariableGroup::getVariables)
-                .flatMap(Collection::stream)
-                .map(Variable::getName)
-                .toList();
+    private List<String> getLoopVariables(String loopId) {
+        //TODO retrieve variables from loop
+        return new ArrayList<>();
     }
 
     /**
-     * Get resizing variables of a loop/pairwise
-     * @param loopId id of the loop/pairwise
+     * Get resizing variables of a loop
+     * @param loop loop component
      * @return resizing variable list
      */
-    private List<Variable> getResizingVariables(String loopId) {
-        // TODO: change to retrieve resizing variables instead of links variables
-        throw new UnsupportedOperationException("getResizingVariables needs some code !!");
-    }
-
-    /**
-     * Return collected variables needed to run the VTL formula on calculated variables extracted from a variable list
-     *
-     * @param resizingVariables resizing variable list
-     * @return list of collected variables that trigger resizing from calculated variable
-     */
-    private List<String> getCollectedResizingVariables(List<Variable> resizingVariables) {
-        return getCollectedVariablesFromResizingVariables(resizingVariables).stream()
-                .map(Variable::getName)
-                .distinct()
-                .toList();
-    }
-
-    /**
-     * Return collected variables needed to run the VTL formula from a calculated variable
-     * To get collected variables from a calculated variable, we have to retrieve the binding references of the calculated variable
-     *
-     * @param calculatedVariable calculated variable
-     * @return list of collected variables that trigger resizing from calculated variable
-     */
-    private List<CollectedVariable> getCollectedVariablesFromCalculatedVariable(CalculatedVariable calculatedVariable) {
-        List<Variable> bindingVariables = calculatedVariable.getExpression().getBindingReferences().stream()
-                .map(BindingReference::getVariableName)
-                .map(variableName -> enoCatalog.getVariable(variableName))
-                .toList();
-        // The binding references can include calculated variables too, hence the recursion
-        return getCollectedVariablesFromResizingVariables(bindingVariables);
-    }
-
-    /**
-     * Return collected variables from a list of resizing variables (collected + calculated)
-     *
-     * @param resizingVariables resizing variables (xontaining collected and calculated variables)
-     * @return list of collected resizing variables
-     */
-    private List<CollectedVariable> getCollectedVariablesFromResizingVariables(List<Variable> resizingVariables) {
-        List<CollectedVariable> collectedVariables = new ArrayList<>();
-        collectedVariables.addAll(resizingVariables.stream()
-                .filter(variable -> Variable.CollectionType.COLLECTED.equals(variable.getCollectionType()))
+    private List<CollectedVariable> getResizingVariables(Loop loop) {
+        return loop.getLoopDependencies().stream()
+                .map(this::getEnoVariable)
+                .filter(variable -> variable.getCollectionType().equals(Variable.CollectionType.COLLECTED))
                 .map(CollectedVariable.class::cast)
-                .toList());
-
-        collectedVariables.addAll(resizingVariables.stream()
-                .filter(variable -> Variable.CollectionType.CALCULATED.equals(variable.getCollectionType()))
-                .map(CalculatedVariable.class::cast)
-                .map(this::getCollectedVariablesFromCalculatedVariable)
-                .flatMap(Collection::stream)
-                .toList());
-        return collectedVariables;
+                .toList();
     }
 
-    /**
-     * Check if loop is a main or linked loop
-     * @param loop loop to check
-     * @return true if linked loop, false otherwise
-     */
-    private boolean isLinkedLoop(Loop loop) {
-        return loop.getLines() == null;
+    private Variable getEnoVariable(String variableName) {
+        return enoCatalog.getVariables().stream()
+                .filter(variable -> variableName.equals(variable.getName()))
+                .findFirst()
+                .orElseThrow(() -> new LunaticSerializationException(String.format("Variable %s not found when trying to process resizing", variableName)));
     }
 }

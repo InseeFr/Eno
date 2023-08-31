@@ -50,13 +50,6 @@ class LunaticAddResizingTest {
         assertTrue(resizings.get(1) instanceof LunaticResizingPairWiseVariable);
     }
 
-    @Test
-    void whenProcessingLoopVariableIsConsideredAPairwiseVariable() {
-        processing.apply(lunaticQuestionnaire);
-        List<Object> resizings = lunaticQuestionnaire.getResizing().getAny();
-        assertTrue(resizings.get(1) instanceof LunaticResizingPairWiseVariable);
-    }
-
     private Questionnaire buildLunaticQuestionnaire() {
         Questionnaire questionnaire = new Questionnaire();
         components = new ArrayList<>();
