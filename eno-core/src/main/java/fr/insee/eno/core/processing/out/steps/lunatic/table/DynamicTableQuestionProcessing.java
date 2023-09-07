@@ -20,7 +20,7 @@ public class DynamicTableQuestionProcessing {
     public static void process(RosterForLoop lunaticRoster, DynamicTableQuestion enoTable) {
 
         // Header
-        lunaticRoster.getHeader().addAll(HeaderCellsProcessing.from(enoTable, 1));
+        lunaticRoster.getHeader().addAll(HeaderCellsProcessing.from(enoTable, 0));
 
         LinesRoster lines = new LinesRoster();
         LabelType minLabel = new LabelType();
