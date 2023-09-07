@@ -52,7 +52,8 @@ public class HeaderCellsProcessing {
         topLeftLabel.setValue("");
         topLeftLabel.setType(Constant.LUNATIC_LABEL_VTL_MD);
         topLeftCell.setLabel(topLeftLabel);
-        topLeftCell.setColspan(BigInteger.valueOf(leftColumnColspan));
+        if (leftColumnColspan > 1) // little detail that might change (no colspan if the value is 1)
+            topLeftCell.setColspan(BigInteger.valueOf(leftColumnColspan));
         lunaticHeader.add(topLeftCell);
     }
 
