@@ -1,4 +1,4 @@
-package fr.insee.eno.core.converter;
+package fr.insee.eno.core.processing.out.steps.lunatic.table;
 
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.question.ComplexMultipleChoiceQuestion;
@@ -13,14 +13,13 @@ import java.util.List;
 
 /** Class that holds the conversion logic between model tables and Lunatic tables. */
 @Slf4j
-public class LunaticComplexMultipleChoiceQuestionConverter {
+public class ComplexMultipleChoiceQuestionProcessing {
 
-    private LunaticComplexMultipleChoiceQuestionConverter() {
+    private ComplexMultipleChoiceQuestionProcessing() {
         throw new IllegalArgumentException("Utility class");
     }
 
-    public static Table convertEnoComplexMCQ(ComplexMultipleChoiceQuestion enoMCQ) {
-        Table lunaticTable = new Table();
+    public static void process(Table lunaticTable, ComplexMultipleChoiceQuestion enoMCQ) {
 
         List<BodyCell> headers = convertEnoHeaders(enoMCQ.getHeaders());
 
@@ -28,14 +27,12 @@ public class LunaticComplexMultipleChoiceQuestionConverter {
             BodyLine bodyLine = new BodyLine();
 
             TableCell enoCell = enoMCQ.getTableCells().get(indexCell);
-            String variableName = enoMCQ.getVariableNames().get(indexCell);
 
-            BodyCell lunaticCell = LunaticTableConverter.convertEnoCell(enoCell, variableName);
+            BodyCell lunaticCell = TableQuestionProcessing.convertEnoCell(enoCell);
             bodyLine.getBodyCells().add(headers.get(indexCell));
             bodyLine.getBodyCells().add(lunaticCell);
             lunaticTable.getBodyLines().add(bodyLine);
         }
-        return lunaticTable;
     }
 
     private static List<BodyCell> convertEnoHeaders(CodeList headers) {
@@ -50,6 +47,5 @@ public class LunaticComplexMultipleChoiceQuestionConverter {
                     return lunaticHeader;
                 }).toList();
     }
-
 
 }

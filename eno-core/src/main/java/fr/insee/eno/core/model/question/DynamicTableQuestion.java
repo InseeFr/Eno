@@ -1,7 +1,7 @@
 package fr.insee.eno.core.model.question;
 
 import datacollection33.QuestionGridType;
-import fr.insee.eno.core.annotations.Contexts;
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.code.CodeList;
@@ -11,7 +11,6 @@ import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.RosterForLoop;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -25,14 +24,9 @@ import java.util.List;
  */
 @Getter
 @Setter
-@Slf4j
-@Contexts.Context(format = Format.DDI, type = QuestionGridType.class)
-@Contexts.Context(format = Format.LUNATIC, type = RosterForLoop.class)
-public class DynamicTableQuestion extends MultipleResponseQuestion {
-
-    public DynamicTableQuestion() {
-        log.warn("Dynamic tables mapping is not implemented!");
-    }
+@Context(format = Format.DDI, type = QuestionGridType.class)
+@Context(format = Format.LUNATIC, type = RosterForLoop.class)
+public class DynamicTableQuestion extends MultipleResponseQuestion implements EnoTable {
 
     /** Lunatic component type property.
      * This should be inserted by Lunatic-Model serializer later on. */
@@ -68,4 +62,5 @@ public class DynamicTableQuestion extends MultipleResponseQuestion {
 
     @DDI("getStructuredMixedGridResponseDomain().getGridResponseDomainInMixedList()")
     List<TableCell> tableCells = new ArrayList<>();
+
 }

@@ -5,6 +5,7 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.ProcessingPipeline;
 import fr.insee.eno.core.processing.out.steps.lunatic.*;
 import fr.insee.eno.core.processing.out.steps.lunatic.pagination.LunaticAddPageNumbers;
+import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
 import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
@@ -34,6 +35,7 @@ public class LunaticProcessing {
                 .then(new LunaticAddGeneratingDate())
                 .then(new LunaticSortComponents(enoQuestionnaire))
                 .then(new LunaticLoopResolution(enoQuestionnaire))
+                .then(new LunaticTableProcessing(enoQuestionnaire))
                 .then(new LunaticAddMissingVariables(enoCatalog, parameters.isMissingVariables()))
                 .then(new LunaticAddHierarchy())
                 .then(new LunaticAddPageNumbers(parameters.getLunaticPaginationMode()))

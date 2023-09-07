@@ -14,6 +14,7 @@ public class DDIInProcessing {
         ProcessingPipeline<EnoQuestionnaire> processingPipeline = new ProcessingPipeline<>();
         processingPipeline.start(enoQuestionnaire)
                 .then(new DDIMoveUnitInQuestions())
+                .then(new DDIInsertResponseInTableCells())
                 .then(new DDIResolveVariableReferencesInExpressions())
                 .then(new DDIInsertDeclarations())
                 .then(new DDIInsertControls())

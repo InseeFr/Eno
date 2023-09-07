@@ -1,4 +1,4 @@
-package fr.insee.eno.core.converter;
+package fr.insee.eno.core.processing.out.steps.lunatic.table;
 
 import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
@@ -9,20 +9,18 @@ import fr.insee.lunatic.model.flat.LinesRoster;
 import fr.insee.lunatic.model.flat.RosterForLoop;
 import lombok.extern.slf4j.Slf4j;
 
-/** Class that holds the conversion logic between model tables and Lunatic tables. */
+/** Class that holds the conversion logic between model dynamic tables and Lunatic 'roster' tables. */
 @Slf4j
-public class LunaticDynamicTableConverter {
+public class DynamicTableQuestionProcessing {
 
-    private LunaticDynamicTableConverter() {
+    private DynamicTableQuestionProcessing() {
         throw new IllegalArgumentException("Utility class");
     }
 
-    public static RosterForLoop convertEnoDynamicTable(DynamicTableQuestion enoTable) {
-        //
-        RosterForLoop lunaticRoster = new RosterForLoop();
+    public static void process(RosterForLoop lunaticRoster, DynamicTableQuestion enoTable) {
 
         // Header
-        lunaticRoster.getHeader().addAll(LunaticTableConverter.convertEnoHeaders(enoTable.getHeader()));
+        lunaticRoster.getHeader().addAll(HeaderCellsProcessing.from(enoTable, 1));
 
         LinesRoster lines = new LinesRoster();
         LabelType minLabel = new LabelType();
@@ -36,12 +34,9 @@ public class LunaticDynamicTableConverter {
         lines.setMax(maxLabel);
         lunaticRoster.setLines(lines);
 
-        for (int indexCell=0; indexCell < enoTable.getTableCells().size(); indexCell++) {
-            TableCell enoCell = enoTable.getTableCells().get(indexCell);
-            String variableName = enoTable.getVariableNames().get(indexCell);
-            BodyCell lunaticCell = LunaticTableConverter.convertEnoCell(enoCell, variableName);
+        for (TableCell enoCell : enoTable.getTableCells()) {
+            BodyCell lunaticCell = TableQuestionProcessing.convertEnoCell(enoCell);
             lunaticRoster.getComponents().add(lunaticCell);
         }
-        return lunaticRoster;
     }
 }

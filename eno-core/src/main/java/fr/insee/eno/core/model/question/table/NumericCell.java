@@ -17,6 +17,9 @@ import java.math.BigInteger;
 @Context(format = Format.LUNATIC, type = BodyCell.class)
 public class NumericCell extends TableCell {
 
+    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
+    String lunaticComponentType = "INPUT_NUMBER";
+
     @DDI("getResponseDomain()?.getNumberRangeList()?.get(0)?.getLow()?.getStringValue() != null ? " +
             "T(java.lang.Double).valueOf(getResponseDomain().getNumberRangeArray(0).getLow().getStringValue()) : null")
     @Lunatic("setMin(#param)")

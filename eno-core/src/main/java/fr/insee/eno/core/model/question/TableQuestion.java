@@ -39,7 +39,7 @@ import java.util.List;
 @Setter
 @Context(format = Format.DDI, type = QuestionGridType.class)
 @Context(format = Format.LUNATIC, type = Table.class)
-public class TableQuestion extends MultipleResponseQuestion {
+public class TableQuestion extends MultipleResponseQuestion implements EnoTable {
 
     /** Parameter that exists in Lunatic but that has a fixed value for now. */
     @Lunatic("setPositioning(#param)")

@@ -15,6 +15,9 @@ import lombok.Setter;
 @Context(format = Format.LUNATIC, type = BodyCell.class)
 public class DateCell extends TableCell {
 
+    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
+    String lunaticComponentType = "DATEPICKER";
+
     // Note: with current Lunatic-Model implementation, it is impossible to set min & max in this case.
     // TODO: issue sent to Lunatic-Model, come back here when the issue has been solved.
 
