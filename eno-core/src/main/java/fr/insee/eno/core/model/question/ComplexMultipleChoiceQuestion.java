@@ -26,7 +26,7 @@ import java.util.List;
 @Setter
 @Context(format = Format.DDI, type = QuestionGridType.class)
 @Context(format = Format.LUNATIC, type = Table.class)
-public  class ComplexMultipleChoiceQuestion extends MultipleResponseQuestion {
+public class ComplexMultipleChoiceQuestion extends MultipleResponseQuestion implements EnoTable {
 
     /** Lunatic component type property.
      * This should be inserted by Lunatic-Model serializer later on. */
@@ -42,9 +42,11 @@ public  class ComplexMultipleChoiceQuestion extends MultipleResponseQuestion {
     @Lunatic("setMandatory(#param)")
     boolean mandatory;
 
-    @DDI("#index.get(#this.getGridDimensionList().?[#this.getRank().intValue() == 1].get(0)" +
-            ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue())")
-    CodeList headers;
+    @DDI("#this.getGridDimensionList().?[#this.getRank().intValue() == 1].get(0)" +
+            ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue()")
+    String headerCodeListReference;
+
+    CodeList header;
 
     /** Considering that out parameters are sorted in the same order as GridResponseDomainInMixed objects in DDI. */
     @DDI("getOutParameterList().![#this.getParameterNameArray(0).getStringArray(0).getStringValue()]")

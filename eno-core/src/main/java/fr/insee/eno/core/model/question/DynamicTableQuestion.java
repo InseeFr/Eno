@@ -33,8 +33,10 @@ public class DynamicTableQuestion extends MultipleResponseQuestion implements En
     @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     String lunaticComponentType = "ROSTER_FOR_LOOP";
 
-    @DDI("#index.get(#this.getGridDimensionList().?[#this.getRank().intValue() == 2].get(0)" +
-            ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue())")
+    @DDI("#this.getGridDimensionList().?[#this.getRank().intValue() == 2].get(0)" +
+            ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue()")
+    String headerCodeListReference;
+
     CodeList header;
 
     /** Parameter that exists in Lunatic but that has a fixed value for now. */

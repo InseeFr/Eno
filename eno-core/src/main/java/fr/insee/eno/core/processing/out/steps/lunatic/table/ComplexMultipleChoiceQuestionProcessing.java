@@ -21,7 +21,7 @@ public class ComplexMultipleChoiceQuestionProcessing {
 
     public static void process(Table lunaticTable, ComplexMultipleChoiceQuestion enoMCQ) {
 
-        List<BodyCell> headers = convertEnoHeaders(enoMCQ.getHeaders());
+        List<BodyCell> headers = convertEnoHeaders(enoMCQ.getHeader());
 
         for (int indexCell=0; indexCell < enoMCQ.getTableCells().size(); indexCell++) {
             BodyLine bodyLine = new BodyLine();

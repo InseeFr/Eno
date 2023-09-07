@@ -5,12 +5,14 @@ import fr.insee.eno.core.model.question.table.TableCell;
 
 import java.util.List;
 
-/** Interface to make polymorphism between table and dynamic table objects. */
+/** Interface to make polymorphism between different kinds of table question objects. */
 public interface EnoTable {
 
     String getId();
     String getName();
+    String getHeaderCodeListReference();
     CodeList getHeader();
+    void setHeader(CodeList codeList);
     List<String> getVariableNames();
     List<TableCell> getTableCells();
 
