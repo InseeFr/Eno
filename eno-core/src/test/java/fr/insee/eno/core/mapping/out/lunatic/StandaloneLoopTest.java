@@ -8,9 +8,11 @@ import fr.insee.lunatic.model.flat.Loop;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StandaloneLoopTest {
 
@@ -38,6 +40,23 @@ class StandaloneLoopTest {
         lunaticMapper.mapEnoObject(enoLoop, lunaticLoop);
         //
         assertThat(lunaticLoop.getLoopDependencies()).containsExactlyInAnyOrderElementsOf(Set.of("FOO", "BAR"));
+    }
+
+    @Test
+    void lunaticLoopDependencies_shouldBeNoDuplicate() {
+        //
+        enoLoop.setLoopIterations(new StandaloneLoop.LoopIterations());
+        CalculatedExpression minIteration = new CalculatedExpression();
+        minIteration.getBindingReferences().add(new BindingReference("foo-ref1", "FOO"));
+        enoLoop.getLoopIterations().setMinIteration(minIteration);
+        CalculatedExpression maxIteration = new CalculatedExpression();
+        maxIteration.getBindingReferences().add(new BindingReference("foo-ref2", "FOO"));
+        enoLoop.getLoopIterations().setMaxIteration(maxIteration);
+        //
+        LunaticMapper lunaticMapper = new LunaticMapper();
+        lunaticMapper.mapEnoObject(enoLoop, lunaticLoop);
+        //
+        assertEquals(List.of("FOO"), lunaticLoop.getLoopDependencies());
     }
 
 }

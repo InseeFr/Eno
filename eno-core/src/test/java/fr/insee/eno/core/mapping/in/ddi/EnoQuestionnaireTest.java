@@ -6,7 +6,6 @@ import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import group33.ResourcePackageType;
 import instance33.DDIInstanceType;
-import instance33.impl.DDIInstanceTypeImpl;
 import logicalproduct33.CodeListSchemeType;
 import logicalproduct33.VariableGroupType;
 import logicalproduct33.VariableSchemeType;
@@ -90,7 +89,7 @@ class EnoQuestionnaireTest {
     }
 
     @Test
-    public void mapLabel() {
+    void mapLabel() {
         //
         String expectedLabel = "Foo label";
         //
@@ -105,7 +104,7 @@ class EnoQuestionnaireTest {
     }
 
     @Test
-    public void mapVariables() {
+    void mapVariables() {
         //
         VariableType ddiVariable = VariableType.Factory.newInstance();
         ddiVariable.getIDList().add(IDType.Factory.newInstance());
@@ -118,11 +117,14 @@ class EnoQuestionnaireTest {
     }
 
     @Test
-    public void mapVariableGroups() {
+    void mapVariableGroups() {
         //
         VariableGroupType variableGroupType = VariableGroupType.Factory.newInstance();
         variableGroupType.getIDList().add(IDType.Factory.newInstance());
         variableGroupType.getIDArray(0).setStringValue("variable-group-id");
+        CodeValueType type = CodeValueType.Factory.newInstance();
+        type.setStringValue("Questionnaire");
+        variableGroupType.setTypeOfVariableGroup(type);
         ddiInstanceType.getResourcePackageArray(0).getVariableSchemeArray(0).getVariableGroupList().add(variableGroupType);
         //
         ddiMapper.mapDDIObject(ddiInstanceType, enoQuestionnaire);

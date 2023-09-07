@@ -1,9 +1,11 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.calculated.BindingReference;
+import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.processing.ProcessingStep;
-import fr.insee.eno.core.reference.EnoIndex;
+import fr.insee.eno.core.processing.out.steps.lunatic.calculatedvariable.ShapefromAttributeRetrieval;
 import fr.insee.lunatic.model.flat.*;
 
 import java.util.ArrayList;
@@ -12,11 +14,13 @@ import java.util.Optional;
 
 public class LunaticFilterResult implements ProcessingStep<Questionnaire> {
 
-    private final EnoIndex enoIndex;
+    private final EnoQuestionnaire enoQuestionnaire;
+    private final ShapefromAttributeRetrieval shapefromAttributeRetrieval;
     public static final String FILTER_RESULT_PREFIX = "FILTER_RESULT_";
 
-    public LunaticFilterResult(EnoQuestionnaire enoQuestionnaire) {
-        this.enoIndex = enoQuestionnaire.getIndex();
+    public LunaticFilterResult(EnoQuestionnaire enoQuestionnaire, ShapefromAttributeRetrieval shapefromAttributeRetrieval) {
+        this.enoQuestionnaire = enoQuestionnaire;
+        this.shapefromAttributeRetrieval = shapefromAttributeRetrieval;
     }
 
     @Override
@@ -54,11 +58,17 @@ public class LunaticFilterResult implements ProcessingStep<Questionnaire> {
 
         VariableType filterVariable = new VariableType();
         filterVariable.setVariableType(VariableTypeEnum.CALCULATED);
-        String questionName = ((Question) enoIndex.get(component.getId())).getName();
+        Question question = (Question) enoQuestionnaire.getIndex().get(component.getId());
+        String questionName = question.getName();
         filterVariable.setName(FILTER_RESULT_PREFIX + questionName);
+        shapefromAttributeRetrieval.getShapeFrom(questionName, enoQuestionnaire)
+                .ifPresent(shapeFromVariable -> filterVariable.setShapeFrom(shapeFromVariable.getName()));
         ConditionFilterType conditionFilter = component.getConditionFilter();
-        if(conditionFilter.getBindingDependencies() != null) {
-            filterVariable.getBindingDependencies().addAll(conditionFilter.getBindingDependencies());
+        ComponentFilter componentFilter = question.getComponentFilter();
+        if(componentFilter != null && !componentFilter.getBindingReferences().isEmpty()) {
+            componentFilter.getBindingReferences().stream()
+                    .map(BindingReference::getVariableName)
+                    .forEach(variableName -> filterVariable.getBindingDependencies().add(variableName));
         }
         LabelType expression = new LabelType();
         expression.setType(conditionFilter.getType());
