@@ -18,6 +18,14 @@ public class HeaderCellsProcessing {
 
     private HeaderCellsProcessing() {}
 
+    /**
+     * Use the eno table given to create the header of the corresponding Lunatic table.
+     * If the table has a left column, it implies adding a first empty cell, with a 'colspan' that fits
+     * this left column.
+     * @param enoTable Eno table object.
+     * @param leftColumnColspan Lunatic colspan for the first cell. Use 0 if there is no such empty cell.
+     * @return Lunatic header for the table.
+     */
     public static List<HeaderType> from(EnoTable enoTable, int leftColumnColspan) {
         flatListCheck(enoTable);
         return createHeaderCells(enoTable.getHeader(), leftColumnColspan);
