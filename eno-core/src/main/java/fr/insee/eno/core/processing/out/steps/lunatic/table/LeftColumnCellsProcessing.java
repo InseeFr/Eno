@@ -61,14 +61,14 @@ public class LeftColumnCellsProcessing {
         new LunaticMapper().mapEnoObject(codeItem, lunaticCell);
         // Add lunatic cell in flat list
         lunaticLines.get(lunaticLines.size()-1).getBodyCells().add(lunaticCell);
-        //
+        // If the current code has no sub-codes, it's a new line
         if (codeItem.size() == 0) {
             lunaticLines.add(new BodyLine());
+            return;
         }
-        else {
-            for (CodeItem codeItem1 : codeItem.getCodeItems()) {
-                flattenCodeItem(codeItem1, lunaticLines);
-            }
+        // Otherwise, recursive call on sub-codes
+        for (CodeItem codeItem1 : codeItem.getCodeItems()) {
+            flattenCodeItem(codeItem1, lunaticLines);
         }
     }
 
