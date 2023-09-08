@@ -12,7 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigInteger;
-import java.util.List;
+import java.util.Optional;
 
 import static fr.insee.eno.core.annotations.Contexts.Context;
 
@@ -34,7 +34,9 @@ public abstract class TableCell extends EnoIdentifiableObject {
     @DDI("T(fr.insee.eno.core.model.question.table.TableCell).convertDDIDimension(#this, 1)")
     Integer rowNumber;
 
-    /** Column position in the table. Starts at 1. */
+    /** Column position in the table. Starts at 1.
+     * In DDI, the 'GridResponseDomainInMixed' element may not have a rank '2' dimension
+     * (e.g. in a question grid that correspond to a complex multiple choice question). */
     @DDI("T(fr.insee.eno.core.model.question.table.TableCell).convertDDIDimension(#this, 2)")
     Integer columnNumber;
 
@@ -43,15 +45,19 @@ public abstract class TableCell extends EnoIdentifiableObject {
     @Lunatic("setResponse(#param)")
     Response response;
 
-    public static Integer convertDDIDimension(GridResponseDomainInMixedType gridType, long dimensionNumber) {
-        List<SelectDimensionType> dimensions = gridType
+    /** From the GridResponseDomainInMixedType object given, return the range value of the dimension that has the
+     * given 'rank'. Return null if there is no dimension that has the given rank.
+     * Note: DDI has range 'minimum' and 'maximum' properties. This method returns the 'minimum' one,
+     * both are equal in current Insee modeling. */
+    public static Integer convertDDIDimension(GridResponseDomainInMixedType gridType, long dimensionRank) {
+        Optional<SelectDimensionType> dimensions = gridType
                 .getGridAttachmentArray(0).getCellCoordinatesAsDefinedArray(0).getSelectDimensionList()
                 .stream()
-                .filter(selectDimensionType -> selectDimensionType.getRank().equals(BigInteger.valueOf(dimensionNumber)))
-                .toList();
+                .filter(selectDimensionType -> selectDimensionType.getRank().equals(BigInteger.valueOf(dimensionRank)))
+                .findAny();
         if (dimensions.isEmpty())
             return null;
-        return Integer.parseInt(dimensions.get(0).getRangeMinimum());
+        return Integer.parseInt(dimensions.get().getRangeMinimum());
     }
 
 }
