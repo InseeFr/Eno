@@ -10,7 +10,6 @@ import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
@@ -28,13 +27,12 @@ public class LunaticTableProcessing implements ProcessingStep<Questionnaire> {
     }
 
     private void processTableComponent(ComponentType componentType) {
-        ComponentTypeEnum type = componentType.getComponentType();
-        if (Objects.requireNonNull(type) == ComponentTypeEnum.LOOP)
-            ((Loop) componentType).getComponents().forEach(this::processTableComponent);
-        if (type == ComponentTypeEnum.TABLE)
-            processTable((Table) componentType);
-        if (type == ComponentTypeEnum.ROSTER_FOR_LOOP)
-            processRosterForLoop((RosterForLoop) componentType);
+        switch (componentType.getComponentType()) {
+            case LOOP -> ((Loop) componentType).getComponents().forEach(this::processTableComponent);
+            case TABLE -> processTable((Table) componentType);
+            case ROSTER_FOR_LOOP -> processRosterForLoop((RosterForLoop) componentType);
+            default -> {}
+        }
     }
 
     private void processTable(Table table) {
