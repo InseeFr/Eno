@@ -13,7 +13,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Standalone loop, in opposition to "linked" loop.
@@ -53,14 +55,14 @@ public class StandaloneLoop extends Loop {
     }
 
     public List<String> getLunaticLoopDependencies() {
-        List<String> res = new ArrayList<>();
+        Set<String> res = new HashSet<>();
         if (this.getMinIteration() != null)
             res.addAll(this.getMinIteration().getBindingReferences().stream()
                     .map(BindingReference::getVariableName).toList());
         if (this.getMaxIteration() != null)
             res.addAll(this.getMaxIteration().getBindingReferences().stream()
                     .map(BindingReference::getVariableName).toList());
-        return res;
+        return new ArrayList<>(res);
     }
 
     /** Nesting class for min and max iteration properties.

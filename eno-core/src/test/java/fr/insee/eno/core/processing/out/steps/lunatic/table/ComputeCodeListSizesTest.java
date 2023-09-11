@@ -1,19 +1,13 @@
-package fr.insee.eno.core.converter;
+package fr.insee.eno.core.processing.out.steps.lunatic.table;
 
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.label.Label;
-import fr.insee.lunatic.model.flat.BodyLine;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class LunaticTableConverterTest {
-
-    private CodeList codeList;
+class ComputeCodeListSizesTest {
 
     private static CodeItem createCode(String label) {
         CodeItem codeItem = new CodeItem();
@@ -22,9 +16,8 @@ class LunaticTableConverterTest {
         return codeItem;
     }
 
-    @BeforeEach
-    void createCodeList() {
-        codeList = new CodeList();
+    public static CodeList createComplexNestedCodeList() {
+        CodeList codeList = new CodeList();
         CodeItem c1 = createCode("1");
         CodeItem c2 = createCode("2");
         CodeItem c3 = createCode("3");
@@ -51,13 +44,16 @@ class LunaticTableConverterTest {
         CodeItem c2232 = createCode("2232");
         c223.getCodeItems().add(c2231);
         c223.getCodeItems().add(c2232);
+        return codeList;
     }
 
     @Test
-    void testComputeVerticalSizes() {
-        //
-        codeList.computeSizes();
-        //
+    void testSizesComputationLogic() {
+        // Given
+        CodeList codeList = createComplexNestedCodeList();
+        // When
+        ComputeCodeListSizes.of(codeList);
+        // Then
         assertEquals(1, codeList.getCodeItems().get(0).getVSize());
         assertEquals(7, codeList.getCodeItems().get(1).getVSize());
         assertEquals(1, codeList.getCodeItems().get(2).getVSize());
@@ -76,25 +72,4 @@ class LunaticTableConverterTest {
         //...
     }
 
-    @Test
-    void testFlattenFunction() {
-        //
-        List<BodyLine> res = LunaticTableConverter.flattenCodeList(codeList);
-        //
-        assertEquals(1, res.get(0).getBodyCells().size());
-        assertEquals("1", res.get(0).getBodyCells().get(0).getLabel().getValue());
-        assertEquals(2, res.get(1).getBodyCells().size());
-        assertEquals("2", res.get(1).getBodyCells().get(0).getLabel().getValue());
-        assertEquals("21", res.get(1).getBodyCells().get(1).getLabel().getValue());
-        assertEquals(2, res.get(2).getBodyCells().size());
-        assertEquals("22", res.get(2).getBodyCells().get(0).getLabel().getValue());
-        assertEquals("221", res.get(2).getBodyCells().get(1).getLabel().getValue());
-        assertEquals(1, res.get(3).getBodyCells().size());
-        assertEquals("222", res.get(3).getBodyCells().get(0).getLabel().getValue());
-        assertEquals(2, res.get(4).getBodyCells().size());
-        assertEquals("223", res.get(4).getBodyCells().get(0).getLabel().getValue());
-        assertEquals("2231", res.get(4).getBodyCells().get(1).getLabel().getValue());
-        //...
-        assertEquals(9, res.size());
-    }
 }

@@ -110,7 +110,6 @@ class LunaticAddMissingVariablesTest {
         lunaticQuestionnaire = new Questionnaire();
         List<ComponentType> questionnaireComponents = lunaticQuestionnaire.getComponents();
 
-
         List<ComponentType> loopComponents = new ArrayList<>(List.of(i, ta, n, d, cb, r, co, dd));
         Loop loop = buildLoop("jghdkmdf", loopComponents, true);
         questionnaireComponents.add(loop);
@@ -426,7 +425,7 @@ class LunaticAddMissingVariablesTest {
         for(int cpt=0; cpt<responseNames.size(); cpt++) {
             List<BodyCell> bodyCells = new ArrayList<>();
             bodyCells.add(buildBodyCell(Integer.toString(cpt)));
-            bodyCells.add(buildBodyCell(id+"-"+"-"+cpt, responseNames.get(cpt), ComponentTypeEnum.CHECKBOX_ONE.value()));
+            bodyCells.add(buildBodyCell(id+"-"+"-"+cpt, responseNames.get(cpt), ComponentTypeEnum.CHECKBOX_ONE));
             buildEnoQuestion(id+"-"+"-"+cpt, responseNames.get(cpt));
             bodyLines.add(buildBodyLine(bodyCells));
         }
@@ -434,7 +433,7 @@ class LunaticAddMissingVariablesTest {
         return input;
     }
 
-    private BodyCell buildBodyCell(String id, String name, String componentType) {
+    private BodyCell buildBodyCell(String id, String name, ComponentTypeEnum componentType) {
         BodyCell bodyCell = new BodyCell();
         bodyCell.setId(id);
         bodyCell.setComponentType(componentType);
@@ -482,7 +481,7 @@ class LunaticAddMissingVariablesTest {
         List<BodyCell> bodyCells = input.getComponents();
         for(int cpt=0; cpt<responseNames.size(); cpt++) {
             bodyCells.add(buildBodyCell(Integer.toString(cpt)));
-            bodyCells.add(buildBodyCell(id+"-"+"-"+cpt, responseNames.get(cpt), ComponentTypeEnum.CHECKBOX_ONE.value()));
+            bodyCells.add(buildBodyCell(id+"-"+"-"+cpt, responseNames.get(cpt), ComponentTypeEnum.CHECKBOX_ONE));
             buildEnoQuestion(id+"-"+"-"+cpt, responseNames.get(cpt));
         }
         buildEnoQuestion(id, "roster");

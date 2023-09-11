@@ -5,7 +5,7 @@ import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.label.Label;
-import fr.insee.eno.core.model.question.MultipleChoiceQuestion;
+import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.variable.CollectedVariable;
@@ -161,12 +161,12 @@ class DDIResolveVariableReferencesInLabelsTest {
         @Test
         void multipleChoiceQuestion_codeResponsesLabel() {
             //
-            MultipleChoiceQuestion.Simple mcq1 = (MultipleChoiceQuestion.Simple)
+            SimpleMultipleChoiceQuestion mcq1 = (SimpleMultipleChoiceQuestion)
                     enoQuestionnaire.getMultipleResponseQuestions().get(0);
             assertEquals("\"Static code 1\"", mcq1.getCodeResponses().get(0).getLabel().getValue());
             assertEquals("\"Static code 2\"", mcq1.getCodeResponses().get(1).getLabel().getValue());
             //
-            MultipleChoiceQuestion.Simple mcq2 = (MultipleChoiceQuestion.Simple)
+            SimpleMultipleChoiceQuestion mcq2 = (SimpleMultipleChoiceQuestion)
                     enoQuestionnaire.getMultipleResponseQuestions().get(1);
             assertEquals("\"Dynamic code 1: \" || Q1",
                     mcq2.getCodeResponses().get(0).getLabel().getValue().trim());

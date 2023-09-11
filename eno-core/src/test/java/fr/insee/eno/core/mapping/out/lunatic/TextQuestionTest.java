@@ -7,8 +7,6 @@ import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigInteger;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TextQuestionTest {
@@ -18,7 +16,7 @@ class TextQuestionTest {
         // With the current implementation, this can only be tested starting at the questionnaire level.
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         TextQuestion enoTextQuestion = new TextQuestion();
-        enoTextQuestion.setMaxLength(BigInteger.valueOf(249));
+        enoTextQuestion.setLengthType(TextQuestion.LengthType.SHORT);
         enoQuestionnaire.getSingleResponseQuestions().add(enoTextQuestion);
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         //
@@ -33,7 +31,7 @@ class TextQuestionTest {
         // With the current implementation, this can only be tested starting at the questionnaire level.
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         TextQuestion enoTextQuestion = new TextQuestion();
-        enoTextQuestion.setMaxLength(BigInteger.valueOf(250));
+        enoTextQuestion.setLengthType(TextQuestion.LengthType.LONG);
         enoQuestionnaire.getSingleResponseQuestions().add(enoTextQuestion);
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         //
