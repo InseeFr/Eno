@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'v3-main'
+    paths-ignore: ['docs/**', 'logo/**', 'README**.md']
 
 jobs:
 

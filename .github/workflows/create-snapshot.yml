@@ -3,6 +3,7 @@ name: Build snapshot
 on:
   pull_request:
     types: [labeled]
+    paths-ignore: ['docs/**', 'logo/**', 'README**.md']
 
 jobs:
 
