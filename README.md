@@ -32,25 +32,26 @@ JDK 17+ is required.
 
 ### Make sustainable clones!
 
-The V3 project is developped on the `v3-develop` orphan branch. If you are not interested by the legacy xslt version of Eno, you can clone the project like this:
+The V3 project is developed on the `v3-develop` orphan branch. If you are not interested by the legacy xslt version of Eno, you can clone the project like this:
 
 `git clone --no-tags --single-branch --depth=1  --branch=v3-develop https://github.com/InseeFr/Eno.git`
 
 ### Gradle
 
 The project is build using [Gradle](https://gradle.org/). 
-A Gradle installaltion is not required to work on the project. 
+A Gradle installation is not required to work on the project. 
 A Gradle wrapper is included, it will automatically download the appropriate version of Gradle to test, build, and run the project.
 
-- Test the project: `./gradlew test` (Linux/macOS) or `gradlew.bat test` (Windows)
-- Build the project: `./gradlew build` (Linux/macOS) or `gradlew.bat build` (Windows)
-- Run Eno web service: `./gradlew :eno-ws:run` (Linux/macOS) or `gradlew.bat :eno-ws:run` (Windows)
+- Test the project: `./gradlew test`
+- Build the project: `./gradlew build`
+- Run Eno web service: `./gradlew :eno-ws:run`
+
+Note: on Windows cmd or PowerShell, use `.\gradlew.bat ...`
 
 ### Proxy
 
-If you are accessing the web through a proxy, you can set your proxy in a `gradle-local.properties` file at the root of project.
-
-Example:
+If you are accessing the web through a proxy, create a `gradle.properties` file in `<your_user_home_folder>/.gradle`, 
+with your proxy information:
 
 ```
 # HTTP
@@ -67,5 +68,8 @@ systemProp.https.proxyPassword=password
 # Non proxy hosts
 systemProp.http.nonProxyHosts=*.nonproxyrepos.com|localhost
 ```
+
+If you have trouble with this first method, you can directly edit the `gradle.properties` file 
+that is at the root of the project (but don't commit it).
 
 ([Gradle docs](https://docs.gradle.org/current/userguide/build_environment.html#sec:accessing_the_web_via_a_proxy))
