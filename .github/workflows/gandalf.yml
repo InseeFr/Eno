@@ -3,7 +3,8 @@ name: Eno V3 test
 on:
   pull_request:
     branches:
-      - 'v3-develop'
+      - 'v3-develop' # temp branch
+      - 'v3-main'
     types: [opened, synchronize, reopened, ready_for_review]
     paths-ignore: ['docs/**', 'logo/**', 'Dockerfile', 'README**.md']
 
