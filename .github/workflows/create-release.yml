@@ -3,9 +3,10 @@ name: Build release
 on:
   push:
     branches:
-      - v3-main
+      - 'v3-main'
 
 jobs:
+
   check-version:
     runs-on: ubuntu-latest
     outputs:
@@ -50,6 +51,7 @@ jobs:
             echo "Nothing to tag/release, the tag ${{ steps.version-step.outputs.version }} is not in correct format X.Y.Z"
             exit 1
           fi
+
   build-sources:
     needs: check-version
     runs-on: ubuntu-latest
@@ -104,7 +106,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  build-docker:
+  publish-docker:
     needs: [ check-version, create-release ]
     runs-on: ubuntu-latest
     steps:

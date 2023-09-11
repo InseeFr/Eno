@@ -5,6 +5,7 @@ on:
     types: [labeled]
 
 jobs:
+
   check-version:
     if: ${{ contains(github.event.pull_request.labels.*.name, 'deploy-snapshot') }}
     runs-on: ubuntu-latest
@@ -50,6 +51,7 @@ jobs:
             echo "Nothing to tag/release, the tag ${{ steps.version-step.outputs.version }} is not in correct format X.Y.Z-SNAPSHOT"
             exit 1
           fi
+
   build-sources:
     needs: check-version
     runs-on: ubuntu-latest
@@ -72,6 +74,7 @@ jobs:
         with:
           name: eno-ws-jar
           path: ./eno-ws/build/libs/*.jar
+
   create-tag:
     needs: [ check-version, build-sources ]
     runs-on: ubuntu-latest
@@ -87,7 +90,7 @@ jobs:
               sha: context.sha
             })
 
-  build-docker:
+  publish-docker:
     needs: [ check-version, create-tag ]
     runs-on: ubuntu-latest
     steps:
@@ -108,8 +111,8 @@ jobs:
           default_branch: ${{ github.ref }}
           tags: ${{ needs.check-version.outputs.release-version }}
 
-  deploy-comment:
-    needs: [ check-version, build-docker ]
+  write-comment:
+    needs: [ check-version, publish-docker ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v6
@@ -123,7 +126,7 @@ jobs:
             })       
 
   remove-deploy-label:
-    needs: deploy-comment
+    needs: write-comment
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
