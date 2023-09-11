@@ -80,12 +80,12 @@ public class Mapper {
     }
 
     void unknownTypeException(Class<?> classType, PropertyDescriptor propertyDescriptor, Class<?> modelContextType) {
-        log.debug(String.format(
+        log.error(String.format(
                 "Type '%s' found on Eno model property '%s' of model class '%s' " +
                         "is neither a simple type nor an Eno object.",
                 classType, propertyDescriptor.getName(), modelContextType.getSimpleName()));
-        log.debug("hint: If it should be a simple type, check isSimpleType method in Mapper class.");
-        log.debug("hint: If it should be a complex type, make sure that the object inherits EnoObject.");
+        log.error("hint: If it should be a simple type, check isSimpleType method in Mapper class.");
+        log.error("hint: If it should be a complex type, make sure that the object inherits EnoObject.");
         throw new MappingException(String.format("Unknown type '%s' encountered in Eno model.", classType));
     }
 

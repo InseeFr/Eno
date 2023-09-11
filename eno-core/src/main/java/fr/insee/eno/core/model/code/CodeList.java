@@ -35,6 +35,7 @@ public class CodeList extends EnoIdentifiableObject {
         return codeItems.size();
     }
 
+    // TODO: the logic should be refactored outside the object imo
     public void computeSizes() {
         // Compute methods have to be used in a certain order
         // Some methods could be merged for slight performance improvement, but it would be to the detriment of code readability
