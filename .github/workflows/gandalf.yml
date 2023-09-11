@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
       - 'v3-develop'
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, ready_for_review]
     paths-ignore: ['docs/**', 'logo/**', 'Dockerfile', 'README**.md']
 
 jobs:
