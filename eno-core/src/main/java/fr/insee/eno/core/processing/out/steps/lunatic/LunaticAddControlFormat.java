@@ -71,7 +71,7 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
         bodyCells.stream()
                 .filter(Objects::nonNull)
                 .forEach(bodyCell -> {
-                    if(ComponentTypeEnum.INPUT_NUMBER.value().equals(bodyCell.getComponentType())) {
+                    if(ComponentTypeEnum.INPUT_NUMBER.equals(bodyCell.getComponentType())) {
                         controls.addAll(
                             getFormatControlsFromInputNumberAttributes(bodyCell.getId(), bodyCell.getMin(), bodyCell.getMax(),
                                     bodyCell.getDecimals().intValue(), bodyCell.getResponse().getName())
@@ -80,7 +80,7 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
 
                     // TODO: Implements date pickers components correctly in tables/rosters
                     /*
-                    if(ComponentTypeEnum.DATEPICKER.value().equals(bodyCell.getComponentType())) {
+                    if(ComponentTypeEnum.DATEPICKER.equals(bodyCell.getComponentType())) {
                         controls.add(
                                 getFormatControlFromDatepickerAttributes(bodyCell.getId(), bodyCell.getMin(), bodyCell.getMax(),
                                         bodyCell.getDecimals().intValue(), bodyCell.getResponse().getName()));

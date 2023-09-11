@@ -48,7 +48,7 @@ public class CodeItem extends EnoObject {
      * "Horizontal" size onf the code item.
      * In Lunatic "colspan" is set only if it is > 1.
      */
-    @Lunatic("#this instanceof T(fr.insee.lunatic.model.flat.BodyLine) ? " +
+    @Lunatic("#this instanceof T(fr.insee.lunatic.model.flat.BodyCell) ? " +
             "setColspan(#param > 1 ? T(java.math.BigInteger).valueOf(#param) : null) :" +
             "null")
     int hSize;
@@ -57,7 +57,7 @@ public class CodeItem extends EnoObject {
      * "Vertical" size onf the code item.
      * In Lunatic "rowspan" is set only if it is > 1.
      */
-    @Lunatic("#this instanceof T(fr.insee.lunatic.model.flat.BodyLine) ? " +
+    @Lunatic("#this instanceof T(fr.insee.lunatic.model.flat.BodyCell) ? " +
             "setRowspan(#param > 1 ? T(java.math.BigInteger).valueOf(#param) : null) :" +
             "null")
     int vSize;

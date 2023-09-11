@@ -4,6 +4,7 @@ import datacollection33.QuestionItemType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.CheckboxOne;
@@ -16,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Eno model class to represent unique choice questions (UCQ).
@@ -77,15 +79,20 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      */
     public static DisplayFormat convertDDIOutputFormat(QuestionItemType questionItemType) {
         String ddiOutputFormat = questionItemType.getResponseDomain().getGenericOutputFormat().getStringValue();
+        Optional<DisplayFormat> convertedDisplayFormat = ddiValueToDisplayFormat(ddiOutputFormat);
+        if (convertedDisplayFormat.isEmpty())
+            throw new MappingException(String.format(
+                    "Unknown output format '%s' found in DDI question item '%s'.",
+                    ddiOutputFormat, questionItemType.getIDArray(0).getStringValue()));
+        return convertedDisplayFormat.get();
+    }
+
+    public static Optional<DisplayFormat> ddiValueToDisplayFormat(String ddiOutputFormat) {
         return switch (ddiOutputFormat) {
-            case DDI_UCQ_RADIO_OUTPUT_FORMAT -> DisplayFormat.RADIO;
-            case DDI_UCQ_CHECKBOX_OUTPUT_FORMAT -> DisplayFormat.CHECKBOX;
-            case DDI_UCQ_DROPDOWN_OUTPUT_FORMAT -> DisplayFormat.DROPDOWN;
-            default -> {
-                String questionId = questionItemType.getIDArray(0).getStringValue();
-                log.warn("Unknown output format '"+ddiOutputFormat+"' found in DDI question item '"+questionId+"'.");
-                yield null;
-            }
+            case DDI_UCQ_RADIO_OUTPUT_FORMAT -> Optional.of(DisplayFormat.RADIO);
+            case DDI_UCQ_CHECKBOX_OUTPUT_FORMAT -> Optional.of(DisplayFormat.CHECKBOX);
+            case DDI_UCQ_DROPDOWN_OUTPUT_FORMAT -> Optional.of(DisplayFormat.DROPDOWN);
+            default -> Optional.empty();
         };
     }
 
