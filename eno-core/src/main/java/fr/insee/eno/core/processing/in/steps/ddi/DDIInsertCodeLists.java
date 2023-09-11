@@ -2,10 +2,11 @@ package fr.insee.eno.core.processing.in.steps.ddi;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.code.CodeList;
+import fr.insee.eno.core.model.question.EnoTable;
 import fr.insee.eno.core.model.question.PairwiseQuestion;
-import fr.insee.eno.core.model.question.TableCell;
 import fr.insee.eno.core.model.question.TableQuestion;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
+import fr.insee.eno.core.model.question.table.UniqueChoiceCell;
 import fr.insee.eno.core.processing.ProcessingStep;
 
 import java.util.Collection;
@@ -38,18 +39,22 @@ public class DDIInsertCodeLists implements ProcessingStep<EnoQuestionnaire> {
                 .forEach(this::insertCodeItems);
 
         // Gather table question objects
-        List<TableQuestion> tableQuestions = enoQuestionnaire.getMultipleResponseQuestions().stream()
+        List<EnoTable> enoTables = enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .filter(EnoTable.class::isInstance)
+                .map(EnoTable.class::cast)
+                .toList();
+        // Insert code lists in header of tables
+        enoTables.forEach(this::insertHeader);
+        // Only table question objects have a left column
+        enoTables.stream()
                 .filter(TableQuestion.class::isInstance)
                 .map(TableQuestion.class::cast)
-                .toList();
-        // Insert code lists in header and left column properties of table questions
-        tableQuestions.forEach(this::insertHeader);
-        tableQuestions.forEach(this::insertLeftColumn);
+                .forEach(this::insertLeftColumn);
         // Insert code lists in table cells that are a unique choice question
-        tableQuestions.forEach(tableQuestion ->
-                tableQuestion.getTableCells().stream()
-                        .filter(TableCell.UniqueChoiceCell.class::isInstance)
-                        .map(TableCell.UniqueChoiceCell.class::cast)
+        enoTables.forEach(enoTable ->
+                enoTable.getTableCells().stream()
+                        .filter(UniqueChoiceCell.class::isInstance)
+                        .map(UniqueChoiceCell.class::cast)
                         .forEach(this::insertCodeItems));
     }
 
@@ -57,12 +62,12 @@ public class DDIInsertCodeLists implements ProcessingStep<EnoQuestionnaire> {
         uniqueChoiceQuestion.setCodeItems(codeListMap.get(uniqueChoiceQuestion.getCodeListReference()).getCodeItems());
     }
 
-    private void insertCodeItems(TableCell.UniqueChoiceCell uniqueChoiceCell) {
+    private void insertCodeItems(UniqueChoiceCell uniqueChoiceCell) {
         uniqueChoiceCell.setCodeItems(codeListMap.get(uniqueChoiceCell.getCodeListReference()).getCodeItems());
     }
 
-    private void insertHeader(TableQuestion tableQuestion) {
-        tableQuestion.setHeader(codeListMap.get(tableQuestion.getHeaderCodeListReference()));
+    private void insertHeader(EnoTable enoTable) {
+        enoTable.setHeader(codeListMap.get(enoTable.getHeaderCodeListReference()));
     }
 
     private void insertLeftColumn(TableQuestion tableQuestion) {

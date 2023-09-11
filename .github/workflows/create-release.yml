@@ -1,0 +1,129 @@
+name: Build release
+
+on:
+  push:
+    branches:
+      - 'v3-main'
+    paths-ignore: ['docs/**', 'logo/**', 'README**.md']
+
+jobs:
+
+  check-version:
+    runs-on: ubuntu-latest
+    outputs:
+      release-version: ${{ steps.version-step.outputs.version }}
+    steps:
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Checkout Eno repo
+        uses: actions/checkout@v3
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Get Eno Version
+        id: version-step
+        run: |
+          ./gradlew # (load the gradle wrapper, required for the get version step)
+          echo "version=$(./gradlew printVersion --console=plain -q)" >> $GITHUB_OUTPUT
+
+      - name: Print Eno Version
+        run: echo ${{ steps.version-step.outputs.version }}
+
+      - uses: mukunku/tag-exists-action@v1.2.0
+        name: Check tag existence
+        id: check-tag-exists
+        with:
+          tag: ${{ steps.version-step.outputs.version }}
+
+      - name: Tag verification
+        id: check-tag
+        run: |
+          if [[ "${{ steps.check-tag-exists.outputs.exists }}" == "true" ]]; then
+            echo "Nothing to tag/release, the tag ${{ steps.version-step.outputs.version }} already exists"
+            exit 1
+          fi
+
+          if ! [[ "${{ steps.version-step.outputs.version }}" =~ ^[0-9]+.[0-9]+.[0-9]+$ ]]; then
+            echo "Nothing to tag/release, the tag ${{ steps.version-step.outputs.version }} is not in correct format X.Y.Z"
+            exit 1
+          fi
+
+  build-sources:
+    needs: check-version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - uses: actions/checkout@v3
+      - name: Build Eno modules
+        run: ./gradlew build
+
+      - name: Upload Eno-WS jar
+        uses: actions/upload-artifact@v3
+        with:
+          name: eno-ws-jar
+          path: ./eno-ws/build/libs/*.jar
+
+  create-release:
+    needs: [ check-version, build-sources ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+
+      - name: Get previous final release tag
+        id: previousTag
+        run: echo "previousTag=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | grep "^[0-9]\+\.[0-9]\+\.[0-9]\+$" | tail -1)" >> $GITHUB_OUTPUT
+
+      - name: Create release note
+        id: changelog
+        uses: requarks/changelog-action@v1
+        with:
+          fromTag: ${{ github.sha }}
+          toTag: ${{ steps.previousTag.outputs.previousTag}}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          writeToFile: false
+
+      - uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ needs.check-version.outputs.release-version }}
+          target_commitish: ${{ github.head_ref || github.ref }}
+          name: ${{ needs.check-version.outputs.release-version }}
+          body: ${{steps.changelog.outputs.changes}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-docker:
+    needs: [ check-version, create-release ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download Eno-WS jar
+        uses: actions/download-artifact@v3
+        with:
+          name: eno-ws-jar
+          path: ./eno-ws/build/libs
+
+      - name: Publish to Docker Hub
+        uses: elgohr/Publish-Docker-Github-Action@v5
+        with:
+          name: inseefr/eno-ws
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          default_branch: ${{ github.ref }}
+          tags: ${{ needs.check-version.outputs.release-version }}

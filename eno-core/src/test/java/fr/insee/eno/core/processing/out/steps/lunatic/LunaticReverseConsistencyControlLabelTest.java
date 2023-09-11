@@ -161,13 +161,13 @@ class LunaticReverseConsistencyControlLabelTest {
         for(int cpt=0; cpt<responseNames.size(); cpt++) {
             List<BodyCell> bodyCells = new ArrayList<>();
             bodyCells.add(buildBodyCell(Integer.toString(cpt)));
-            bodyCells.add(buildBodyCell(id+"-"+"-"+cpt, responseNames.get(cpt), ComponentTypeEnum.CHECKBOX_ONE.value()));
+            bodyCells.add(buildBodyCell(id+"-"+"-"+cpt, responseNames.get(cpt), ComponentTypeEnum.CHECKBOX_ONE));
             bodyLines.add(buildBodyLine(bodyCells));
         }
         return input;
     }
 
-    private BodyCell buildBodyCell(String id, String name, String componentType) {
+    private BodyCell buildBodyCell(String id, String name, ComponentTypeEnum componentType) {
         BodyCell bodyCell = new BodyCell();
         bodyCell.setId(id);
         bodyCell.setComponentType(componentType);

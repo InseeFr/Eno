@@ -1,6 +1,5 @@
 package fr.insee.eno.core.converter;
 
-import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.exceptions.technical.ConversionException;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.code.CodeItem;
@@ -14,6 +13,7 @@ import fr.insee.eno.core.model.navigation.Control;
 import fr.insee.eno.core.model.navigation.Loop;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.*;
+import fr.insee.eno.core.model.question.table.TableCell;
 import fr.insee.eno.core.model.response.CodeResponse;
 import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.model.sequence.Sequence;
@@ -58,6 +58,8 @@ public class LunaticConverter {
             return instantiateFrom(singleResponseQuestion);
         if (enoObject instanceof MultipleResponseQuestion multipleResponseQuestion)
             return instantiateFrom(multipleResponseQuestion);
+        if (enoObject instanceof TableCell)
+            return new BodyCell();
         if (enoObject instanceof Response)
             return new ResponseType();
         if (enoObject instanceof CodeItem)
@@ -66,11 +68,6 @@ public class LunaticConverter {
             return new ResponsesCheckboxGroup();
         if (isInstanceOfLunaticLAbel(enoObject))
             return new LabelType();
-        if (enoObject instanceof TableCell)
-            throw new ConversionException(
-                    "Eno TableCell object '%s' called by basic converted method, this should not happen. " +
-                            "TableCell conversion for Lunatic is implemented in a dedicated class. " +
-                            "PLEASE REPORT THIS EXCEPTION TO ENO DEV TEAM.");
         //
         throw new ConversionException(unimplementedMessage(enoObject));
     }
@@ -110,26 +107,17 @@ public class LunaticConverter {
     }
 
     private static ComponentType textComponentConversion(TextQuestion textQuestion) {
-        // Setting the component type enum value here breaks the single responsibility principle a bit
-        // Yet, this property might be directly supported by Lunatic-Model later,
-        // or the use of conversion annotations in Eno would allow to map this property directly,
-        // using model annotation (see comment in TextQuestion class)
-        if (textQuestion.getMaxLength().intValue() < Constant.LUNATIC_SMALL_TEXT_LIMIT) {
-            Input input = new Input();
-            input.setComponentType(ComponentTypeEnum.INPUT);
-            return input;
-        }
-        else {
-            Textarea textarea = new Textarea();
-            textarea.setComponentType(ComponentTypeEnum.TEXTAREA);
-            return textarea;
-        }
+        if (textQuestion.getLengthType() == null)
+            throw new ConversionException("Length type has not been set in Eno question " + textQuestion);
+        return switch (textQuestion.getLengthType()) {
+            case SHORT -> new Input();
+            case LONG -> new Textarea();
+        };
     }
 
     private static Object ucqComponentConversion(SingleResponseQuestion enoQuestion, UniqueChoiceQuestion uniqueChoiceQuestion) {
-        if (uniqueChoiceQuestion.getDisplayFormat() == null) {
+        if (uniqueChoiceQuestion.getDisplayFormat() == null)
             throw new ConversionException("Display format has not been set in Eno question " + enoQuestion);
-        }
         return switch (((UniqueChoiceQuestion) enoQuestion).getDisplayFormat()) {
             case RADIO -> new Radio();
             case CHECKBOX -> new CheckboxOne();
@@ -138,14 +126,14 @@ public class LunaticConverter {
     }
 
     private static Object instantiateFrom(MultipleResponseQuestion enoQuestion) {
-        if (enoQuestion instanceof MultipleChoiceQuestion.Simple)
+        if (enoQuestion instanceof SimpleMultipleChoiceQuestion)
             return new CheckboxGroup();
-        if (enoQuestion instanceof MultipleChoiceQuestion.Complex)
+        if (enoQuestion instanceof ComplexMultipleChoiceQuestion)
             return new Table();
-        if (enoQuestion instanceof TableQuestion enoTable)
-            return LunaticTableConverter.convertEnoTable(enoTable);
+        if (enoQuestion instanceof TableQuestion)
+            return new Table();
         if (enoQuestion instanceof DynamicTableQuestion)
-            return new Table();
+            return new RosterForLoop();
         //
         throw new ConversionException(unimplementedMessage(enoQuestion));
     }

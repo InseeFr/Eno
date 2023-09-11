@@ -123,8 +123,7 @@ public class DDIMapper extends Mapper {
         DDI ddiAnnotation = typeDescriptor.getAnnotation(DDI.class);
         if (ddiAnnotation != null) {
 
-            log.debug("Processing property '"+ propertyName
-                    +"' of class '"+ modelContextType.getSimpleName()+"'");
+            log.debug("Processing property '"+ propertyName +"' of class '"+ modelContextType.getSimpleName()+"' ");
 
             // Instantiate a Spring expression with the annotation content
             Expression expression = new SpelExpressionParser().parseExpression(ddiAnnotation.value());

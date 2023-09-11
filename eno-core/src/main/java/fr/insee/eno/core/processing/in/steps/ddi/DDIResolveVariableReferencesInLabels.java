@@ -7,8 +7,8 @@ import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.declaration.Instruction;
 import fr.insee.eno.core.model.label.EnoLabel;
 import fr.insee.eno.core.model.navigation.Control;
-import fr.insee.eno.core.model.question.MultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.Question;
+import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.ProcessingStep;
@@ -52,8 +52,8 @@ public class DDIResolveVariableReferencesInLabels implements ProcessingStep<EnoQ
         enoQuestionnaire.getCodeLists().stream().map(CodeList::getCodeItems).forEach(this::resolveCodeItemsLabel);
         // Code lists in multiple response questions (might be refactored afterward)
         enoQuestionnaire.getMultipleResponseQuestions().stream()
-                .filter(MultipleChoiceQuestion.Simple.class::isInstance)
-                .map(MultipleChoiceQuestion.Simple.class::cast)
+                .filter(SimpleMultipleChoiceQuestion.class::isInstance)
+                .map(SimpleMultipleChoiceQuestion.class::cast)
                 .forEach(this::resolveCodeResponsesLabel);
     }
 
@@ -112,7 +112,7 @@ public class DDIResolveVariableReferencesInLabels implements ProcessingStep<EnoQ
         }
     }
 
-    private void resolveCodeResponsesLabel(MultipleChoiceQuestion.Simple multipleChoiceQuestion) {
+    private void resolveCodeResponsesLabel(SimpleMultipleChoiceQuestion multipleChoiceQuestion) {
         multipleChoiceQuestion.getCodeResponses().forEach(codeResponse -> resolveLabel(codeResponse.getLabel()));
     }
 

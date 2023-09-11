@@ -1,6 +1,5 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
-import fr.insee.eno.core.processing.out.steps.lunatic.LunaticAddControlFormat;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -241,12 +240,12 @@ class LunaticAddControlFormatTest {
 
         List<BodyCell> bodyCells = new ArrayList<>();
         bodyCells.add(buildBodyCell("line1"));
-        bodyCells.add(buildBodyCell(table.getId()+"-co", "CHECKVAR", ComponentTypeEnum.CHECKBOX_ONE.value()));
+        bodyCells.add(buildBodyCell(table.getId()+"-co", "CHECKVAR", ComponentTypeEnum.CHECKBOX_ONE));
         bodyLines.add(buildBodyLine(bodyCells));
 
         bodyCells = new ArrayList<>();
         bodyCells.add(buildBodyCell("line2"));
-        bodyCells.add(buildBodyCell(table.getId()+"-number", "NUMBERVAR", ComponentTypeEnum.INPUT_NUMBER.value(), BigInteger.TWO, 2.0, 5.0));
+        bodyCells.add(buildBodyCell(table.getId()+"-number", "NUMBERVAR", ComponentTypeEnum.INPUT_NUMBER, BigInteger.TWO, 2.0, 5.0));
         bodyLines.add(buildBodyLine(bodyCells));
 
         lunaticQuestionnaire = new Questionnaire();
@@ -267,8 +266,8 @@ class LunaticAddControlFormatTest {
 
         List<BodyCell> bodyCells = roster.getComponents();
         bodyCells.add(buildBodyCell("line1"));
-        bodyCells.add(buildBodyCell(roster.getId()+"-number", "NUMBERVAR", ComponentTypeEnum.INPUT_NUMBER.value(), BigInteger.TWO, 2.0, 5.0));
-        bodyCells.add(buildBodyCell(roster.getId()+"-co", "CHECKVAR", ComponentTypeEnum.CHECKBOX_ONE.value()));
+        bodyCells.add(buildBodyCell(roster.getId()+"-number", "NUMBERVAR", ComponentTypeEnum.INPUT_NUMBER, BigInteger.TWO, 2.0, 5.0));
+        bodyCells.add(buildBodyCell(roster.getId()+"-co", "CHECKVAR", ComponentTypeEnum.CHECKBOX_ONE));
 
         lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(roster);
@@ -286,7 +285,7 @@ class LunaticAddControlFormatTest {
         return response;
     }
 
-    private BodyCell buildBodyCell(String id, String name, String componentType) {
+    private BodyCell buildBodyCell(String id, String name, ComponentTypeEnum componentType) {
         BodyCell bodyCell = new BodyCell();
         bodyCell.setId(id);
         bodyCell.setComponentType(componentType);
@@ -294,7 +293,7 @@ class LunaticAddControlFormatTest {
         return bodyCell;
     }
 
-    private BodyCell buildBodyCell(String id, String name, String componentType, BigInteger decimals, Double min, Double max) {
+    private BodyCell buildBodyCell(String id, String name, ComponentTypeEnum componentType, BigInteger decimals, Double min, Double max) {
         BodyCell bodyCell = buildBodyCell(id, name, componentType);
         bodyCell.setDecimals(decimals);
         bodyCell.setMin(min);
