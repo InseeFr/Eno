@@ -1,34 +1,23 @@
 package fr.insee.eno.core.sandbox;
 
-import fr.insee.eno.core.Constant;
-import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.variable.CollectedVariable;
 import fr.insee.eno.core.model.variable.Variable;
-import fr.insee.eno.core.parsers.DDIParser;
-import fr.insee.eno.core.reference.DDIIndex;
-import fr.insee.eno.core.reference.EnoIndex;
-import fr.insee.lunatic.model.flat.PairwiseLinks;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import org.junit.jupiter.api.Test;
 import org.springframework.expression.EvaluationContext;
-import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /** Sandbox tests on SpEL. */
-public class SpelTests {
+class SpelTests {
 
     @Test
-    public void useSpelToSetValue() {
+    void useSpelToSetValue() {
         // Given: a Eno questionnaire with id, and an Lunatic questionnaire with no id
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         enoQuestionnaire.setId("hello");
@@ -44,14 +33,14 @@ public class SpelTests {
     }
 
     @Test
-    public void ternaryOperator() {
+    void ternaryOperator() {
         String fooString = new SpelExpressionParser().parseExpression("true ? 'hello' : 'goodbye'")
                 .getValue(String.class);
         assertEquals("hello", fooString);
     }
 
     @Test
-    public void safeNavigationOperator() {
+    void safeNavigationOperator() {
         SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
         Object result = spelExpressionParser.parseExpression("#this?.getBindingReferences()?.clear()")
                 .getValue((Object) null);
@@ -59,13 +48,13 @@ public class SpelTests {
     }
 
     @Test
-    public void chainedSpelExpression() {
+    void chainedSpelExpression() {
         Variable variable = new CollectedVariable();
         variable.setName("hello");
         SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
         String hello = spelExpressionParser.parseExpression("getName()").getValue(variable, String.class);
         assertNotNull(hello);
-        assertEquals(hello, "hello");
+        assertEquals("hello", hello);
         spelExpressionParser.parseExpression("setName(\"foo\")").getValue(variable);
         assertEquals("foo", variable.getName());
         spelExpressionParser.parseExpression("setName(\"bar\")").getValue(variable);
@@ -74,7 +63,7 @@ public class SpelTests {
 
     /** Idea: convert a list of something (e.g. Variable) into a list of something else (e.g. String) */
     @Test
-    public void spelProjectionOperator() {
+    void spelProjectionOperator() {
         // Given: a list of variables
         Variable v1 = new CollectedVariable();
         v1.setName("foo");
@@ -92,7 +81,7 @@ public class SpelTests {
     }
 
     @Test
-    public void callMethodOnProjection() {
+    void callMethodOnProjection() {
         List<String> stringList = List.of("a", "b", "c");
         Boolean result = new SpelExpressionParser().parseExpression("#root.?[#this == 'c'].size() > 0")
                 .getValue(stringList, Boolean.class);
