@@ -1,4 +1,5 @@
-<img align="right" src="logo/eno-logo.png" alt="Eno logo"/>
+<style>img.logo {float: right;}</style>
+<img class="logo" src="logo/eno-logo.png" alt="Eno logo"/>
 
 # Eno
 
@@ -8,7 +9,7 @@ Eno is a tool designed to transform questionnaires from their formal description
 
 From a DDI, Eno produces:
 
-- A [Lunatic](https://github.com/InseeFr/Lunatic) questionnaire that can be used for web web, telephone or face to face interviewing.
+- A [Lunatic](https://github.com/InseeFr/Lunatic) questionnaire that can be used for web, telephone or face to face interviewing.
 - A questionnaire in paper format.
 - A description of the questionnaire in an editable file.
 
@@ -32,7 +33,7 @@ JDK 17+ is required.
 
 ### Make sustainable clones!
 
-The V3 project is developed on the `v3-develop` orphan branch. If you are not interested by the legacy xslt version of Eno, you can clone the project like this:
+The V3 project is developed on the `v3-develop` orphan branch. If you are not interested in the legacy xslt version of Eno, you can clone the project like this:
 
 `git clone --no-tags --single-branch --depth=1  --branch=v3-develop https://github.com/InseeFr/Eno.git`
 
