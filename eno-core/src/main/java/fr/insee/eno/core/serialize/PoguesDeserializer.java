@@ -1,4 +1,4 @@
-package fr.insee.eno.core.parsers;
+package fr.insee.eno.core.serialize;
 
 import fr.insee.eno.core.exceptions.business.PoguesDeserializationException;
 import fr.insee.pogues.conversion.JSONDeserializer;
@@ -11,11 +11,11 @@ import java.net.URL;
 import java.nio.file.Path;
 
 @Slf4j
-public class PoguesParser {
+public class PoguesDeserializer {
 
-    private PoguesParser() {}
+    private PoguesDeserializer() {}
 
-    public static Questionnaire parse(URL poguesFileUrl) throws PoguesDeserializationException, URISyntaxException {
+    public static Questionnaire deserialize(URL poguesFileUrl) throws PoguesDeserializationException, URISyntaxException {
         JSONDeserializer poguesDeserializer = new JSONDeserializer();
         log.info("Parsing Pogues files from URL " + poguesFileUrl);
         try {

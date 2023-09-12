@@ -3,7 +3,7 @@ package fr.insee.eno.core.sandbox;
 import datacollection33.*;
 import datacollection33.impl.TextTypeImpl;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
-import fr.insee.eno.core.parsers.DDIParser;
+import fr.insee.eno.core.serialize.DDIDeserializer;
 import fr.insee.eno.core.reference.DDIIndex;
 import group33.ResourcePackageType;
 import instance33.DDIInstanceDocument;
@@ -32,7 +32,7 @@ class DDITests {
     void tableQuestion() throws DDIParsingException {
         //
         DDIIndex ddiIndex = new DDIIndex();
-        ddiIndex.indexDDI(DDIParser.parse(
+        ddiIndex.indexDDI(DDIDeserializer.deserialize(
                 this.getClass().getClassLoader().getResource("end-to-end/ddi/ddi-l20g2ba7.xml")));
         //
         QuestionGridType tableQuestionGrid = (QuestionGridType) ddiIndex.get("l8u8d67h");

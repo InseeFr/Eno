@@ -1,28 +1,24 @@
-package fr.insee.eno.core.parsers;
+package fr.insee.eno.core.serialize;
 
-import datacollection33.*;
-import datacollection33.impl.TextTypeImpl;
+import datacollection33.ControlConstructType;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import group33.ResourcePackageType;
-import instance33.DDIInstanceDocument;
 import instance33.DDIInstanceType;
 import logicalproduct33.CodeListType;
 import logicalproduct33.CodeType;
 import logicalproduct33.VariableType;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DDIParserTest {
+class DDIDeserializerTest {
 
     @Test
     void parserDDIWithFilter() throws DDIParsingException {
         //
-        DDIInstanceType ddiInstance = DDIParser.parse(
+        DDIInstanceType ddiInstance = DDIDeserializer.deserialize(
                         this.getClass().getClassLoader().getResource("integration/ddi/ddi-filters.xml"))
                 .getDDIInstance();
         //
@@ -36,7 +32,7 @@ class DDIParserTest {
     @Test
     void parseSandboxDDI() throws DDIParsingException {
         //
-        DDIInstanceType ddiInstance = DDIParser.parse(
+        DDIInstanceType ddiInstance = DDIDeserializer.deserialize(
                         this.getClass().getClassLoader().getResource("end-to-end/ddi/ddi-l8x6fhtd.xml"))
                 .getDDIInstance();
         //
@@ -49,7 +45,7 @@ class DDIParserTest {
     @Test
     void parseDDIComplexCodeList() throws DDIParsingException {
         //
-        DDIInstanceType ddiInstance = DDIParser.parse(
+        DDIInstanceType ddiInstance = DDIDeserializer.deserialize(
                         this.getClass().getClassLoader().getResource("integration/ddi/ddi-nested-code-lists.xml"))
                 .getDDIInstance();
         //

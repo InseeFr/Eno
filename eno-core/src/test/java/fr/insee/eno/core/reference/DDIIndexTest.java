@@ -2,7 +2,7 @@ package fr.insee.eno.core.reference;
 
 import datacollection33.SequenceType;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
-import fr.insee.eno.core.parsers.DDIParser;
+import fr.insee.eno.core.serialize.DDIDeserializer;
 import instance33.DDIInstanceDocument;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ class DDIIndexTest {
     @Test
     void indexSandboxDDI() throws DDIParsingException {
         //
-        DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(
+        DDIInstanceDocument ddiInstanceDocument = DDIDeserializer.deserialize(
                 DDIIndexTest.class.getClassLoader().getResource("end-to-end/ddi/ddi-l8x6fhtd.xml"));
         //
         DDIIndex ddiIndex = new DDIIndex();

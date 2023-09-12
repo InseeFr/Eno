@@ -1,4 +1,4 @@
-package fr.insee.eno.core.converter;
+package fr.insee.eno.core.serialize;
 
 import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
 import fr.insee.eno.core.model.lunatic.LunaticResizingLoopVariable;
@@ -13,7 +13,7 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 
 import java.util.List;
 
-class JsonResizeConverterTest {
+class LunaticSerializerResizingTest {
     private Questionnaire lunaticQuestionnaire;
 
     @BeforeEach
@@ -31,7 +31,7 @@ class JsonResizeConverterTest {
 
     @Test
     void whenTransformingToJsonResizingIsCorrect() throws LunaticSerializationException, JSONException {
-        String questionnaireJson = JsonLunaticConverter.convert(lunaticQuestionnaire);
+        String questionnaireJson = LunaticSerializer.serializeToJson(lunaticQuestionnaire);
 
         String expectedJson = """
         {
@@ -50,7 +50,7 @@ class JsonResizeConverterTest {
               "sizeForLinksVariables": ["count(NBP1)", "count(PRENOMP1)"]
             }
           }
-        }     
+        }
         """;
         JSONAssert.assertEquals(expectedJson, questionnaireJson, JSONCompareMode.STRICT);
     }

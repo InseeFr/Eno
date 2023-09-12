@@ -1,4 +1,4 @@
-package fr.insee.eno.core.converter;
+package fr.insee.eno.core.serialize;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -9,7 +9,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ValueNode;
 import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
 import fr.insee.eno.core.model.lunatic.*;
-import fr.insee.eno.core.output.LunaticSerializer;
+import fr.insee.lunatic.conversion.JsonSerializer;
+import fr.insee.lunatic.exception.SerializationException;
 import fr.insee.lunatic.model.flat.CleaningType;
 import fr.insee.lunatic.model.flat.MissingType;
 import fr.insee.lunatic.model.flat.Questionnaire;
@@ -17,10 +18,33 @@ import fr.insee.lunatic.model.flat.ResizingType;
 
 import java.util.List;
 
-public class JsonLunaticConverter {
-    private JsonLunaticConverter() {
+public class LunaticSerializer {
+    private LunaticSerializer() {
         throw new IllegalArgumentException("Utility class");
     }
+
+    /**
+     * Serialize the given questionnaire in the json format.
+     * @param lunaticQuestionnaire Lunatic questionnaire object.
+     * @return Questionnaire serialized as json string.
+     * @throws LunaticSerializationException if serialization fails.
+     */
+    public static String serializeToJson(Questionnaire lunaticQuestionnaire) throws LunaticSerializationException {
+        String lunaticJson = rawSerialization(lunaticQuestionnaire);
+        return extendedSerialization(lunaticJson, lunaticQuestionnaire);
+    }
+
+    /** Return the json string produced by Lunatic-Model json serializer. */
+    private static String rawSerialization(Questionnaire lunaticQuestionnaire) {
+        JsonSerializer jsonSerializer = new JsonSerializer();
+        try {
+            return jsonSerializer.serialize(lunaticQuestionnaire);
+        } catch (SerializationException e) {
+            throw new LunaticSerializationException("Lunatic questionnaire given cannot be serialized.", e);
+        }
+    }
+
+    /* The following part should be supported by Lunatic-Model: */
 
     /**
      * convert a questionnaire to json string with resize variables included
@@ -28,10 +52,10 @@ public class JsonLunaticConverter {
      * @return json string of the questionnaire with resize included
      * @throws LunaticSerializationException serialization exception
      */
-    public static String convert(Questionnaire lunaticQuestionnaire) throws LunaticSerializationException {
+    public static String extendedSerialization(String lunaticJson, Questionnaire lunaticQuestionnaire)
+            throws LunaticSerializationException {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            String lunaticJson = LunaticSerializer.serializeToJson(lunaticQuestionnaire);
             ObjectNode questionnaireNode = (ObjectNode) mapper.readTree(lunaticJson);
 
             CleaningType cleaningType = lunaticQuestionnaire.getCleaning();
