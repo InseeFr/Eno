@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    if: (${{ ! contains(github.event.pull_request.labels.*.name, 'deploy-snapshot') }}) && (github.event.pull_request.draft == false)
+    if: ${{ (github.event.pull_request.draft == false) && !contains(github.event.pull_request.labels.*.name, 'deploy-snapshot') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
