@@ -1,26 +1,17 @@
-name: Test on push or PR
+name: Eno V2 test
 
 on:
-  push:
-    branches-ignore:
-      - 'v3-main'
-      - 'v3-develop'
-      - '**/v3-**'
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
     paths-ignore:
       - 'docs/**'
       - 'doc/**'
-  pull_request:
-    types:
-      - opened
-    branches-ignore:
-      - 'v3-main'
-      - 'v3-develop'
-      - '**/v3-**'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
 
+  test:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 11
@@ -28,7 +19,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '11'
-      - name: Build with Maven Eno
-        run: mvn clean process-classes package install -DskipTests=true -Dmaven.javadoc.skip=true -Djar.finalName="eno-core" -B -V --file pom.xml
-      - name: Test
+      - name: Build Eno with Maven
+        run: mvn clean process-classes package install --no-transfer-progress -DskipTests=true -Dmaven.javadoc.skip=true -Djar.finalName="eno-core" -B -V --file pom.xml
+      - name: Run test with Maven
         run: mvn test

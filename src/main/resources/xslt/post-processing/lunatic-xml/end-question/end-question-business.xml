@@ -32,7 +32,31 @@
                 <value>true</value>
                 <type>VTL</type>
             </conditionFilter>
-            <hierarchy>
+         <controls id="controls-format-borne-inf-sup"
+                    criticality="ERROR"
+                    typeOfControl="FORMAT">
+            <control>
+                <value>not(not(isnull(HEURE_REMPL)) and (0&gt;HEURE_REMPL or 99&lt;HEURE_REMPL))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>" La valeur doit être comprise entre 0 et 99."</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+            <controls id="controls-format-decimal"
+                    criticality="ERROR"
+                    typeOfControl="FORMAT">
+            <control>
+                <value>not(not(isnull(HEURE_REMPL))  and round(HEURE_REMPL,0)&lt;&gt;HEURE_REMPL)</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule."</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+		 <hierarchy>
                 <sequence id="TIME-COMMENT-SEQ">
                     <label>
                         <value>"Temps de réponse et commentaires"</value>
@@ -70,6 +94,30 @@
                 <value>true</value>
                 <type>VTL</type>
             </conditionFilter>
+            <controls id="controls-format-borne-inf-sup"
+                    criticality="ERROR"
+                    typeOfControl="FORMAT">
+            <control>
+                <value>not(not(isnull(MIN_REMPL)) and (0&gt;MIN_REMPL or 59&lt;MIN_REMPL))</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>"La valeur doit être comprise entre 0 et 59."</value>
+               <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
+            <controls id="controls-format-decimal"
+                    criticality="ERROR"
+                    typeOfControl="FORMAT">
+            <control>
+                <value>not(not(isnull(MIN_REMPL))  and round(MIN_REMPL,0)&lt;&gt;MIN_REMPL)</value>
+               <type>VTL</type>
+            </control>
+            <errorMessage>
+               <value>"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule."</value>
+             <type>VTL|MD</type>
+            </errorMessage>
+         </controls>
             <hierarchy>
                 <sequence id="TIME-COMMENT-SEQ">
                     <label>

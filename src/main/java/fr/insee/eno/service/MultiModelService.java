@@ -282,7 +282,7 @@ public class MultiModelService {
 		Path newDirectoryPath = Paths.get(file.getParent() + "/"+ FilenameUtils.removeExtension(file.getName()));
 		Files.createDirectories(newDirectoryPath);	
 		Path movedPath = Paths.get(newDirectoryPath.toString()+"/"+file.getName());
-		Files.move(file.toPath(), movedPath);
+		Files.copy(file.toPath(), movedPath);
 		return movedPath.toFile();
 	}
 
