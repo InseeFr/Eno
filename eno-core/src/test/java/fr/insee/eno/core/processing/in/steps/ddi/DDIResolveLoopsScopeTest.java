@@ -5,7 +5,7 @@ import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.navigation.Loop;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
-import fr.insee.eno.core.parsers.DDIParser;
+import fr.insee.eno.core.serialize.DDIDeserializer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ public class DDIResolveLoopsScopeTest {
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();
             ddiMapper.mapDDI(
-                    DDIParser.parse(DDIResolveLoopsScopeTest.class.getClassLoader().getResourceAsStream(
+                    DDIDeserializer.deserialize(DDIResolveLoopsScopeTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-loops-sequence.xml")),
                     enoQuestionnaire);
             // When
@@ -75,7 +75,7 @@ public class DDIResolveLoopsScopeTest {
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();
             ddiMapper.mapDDI(
-                    DDIParser.parse(DDIResolveLoopsScopeTest.class.getClassLoader().getResourceAsStream(
+                    DDIDeserializer.deserialize(DDIResolveLoopsScopeTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-loops-subsequence.xml")),
                     enoQuestionnaire);
             // When
@@ -125,7 +125,7 @@ public class DDIResolveLoopsScopeTest {
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();
             ddiMapper.mapDDI(
-                    DDIParser.parse(DDIResolveLoopsScopeTest.class.getClassLoader().getResourceAsStream(
+                    DDIDeserializer.deserialize(DDIResolveLoopsScopeTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-loops-extended-sequence.xml")),
                     enoQuestionnaire);
             // When
@@ -175,7 +175,7 @@ public class DDIResolveLoopsScopeTest {
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();
             ddiMapper.mapDDI(
-                    DDIParser.parse(DDIResolveLoopsScopeTest.class.getClassLoader().getResourceAsStream(
+                    DDIDeserializer.deserialize(DDIResolveLoopsScopeTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-loops-extended-subsequence.xml")),
                     enoQuestionnaire);
             // When

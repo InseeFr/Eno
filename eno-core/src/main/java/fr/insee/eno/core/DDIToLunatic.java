@@ -1,11 +1,11 @@
 package fr.insee.eno.core;
 
-import fr.insee.eno.core.converter.JsonLunaticConverter;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.ProcessingStep;
+import fr.insee.eno.core.serialize.LunaticSerializer;
 import fr.insee.lunatic.model.flat.Questionnaire;
 
 import java.io.InputStream;
@@ -43,7 +43,7 @@ public class DDIToLunatic {
         Questionnaire lunaticQuestionnaire = transform(ddiInputStream, enoParameters);
 
         // Handle missing/resizing (sic) as lunatic model can't support this at this time, really ugly :\
-        return JsonLunaticConverter.convert(lunaticQuestionnaire);
+        return LunaticSerializer.serializeToJson(lunaticQuestionnaire);
     }
 
     /**
@@ -59,7 +59,7 @@ public class DDIToLunatic {
         lunaticPostProcessings.apply(lunaticQuestionnaire);
 
         // Handle missing/resizing (sic) as lunatic model can't support this at this time, really ugly :\
-        return JsonLunaticConverter.convert(lunaticQuestionnaire);
+        return LunaticSerializer.serializeToJson(lunaticQuestionnaire);
     }
 
 }

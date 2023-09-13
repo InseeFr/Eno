@@ -5,7 +5,7 @@ import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType;
-import fr.insee.eno.core.parsers.DDIParser;
+import fr.insee.eno.core.serialize.DDIDeserializer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -34,7 +34,7 @@ class DDIResolveFiltersScopeTest {
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();
             ddiMapper.mapDDI(
-                    DDIParser.parse(DDIResolveFiltersScopeTest.class.getClassLoader().getResourceAsStream(
+                    DDIDeserializer.deserialize(DDIResolveFiltersScopeTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-filters-simple.xml")),
                     enoQuestionnaire);
             // When
@@ -88,7 +88,7 @@ class DDIResolveFiltersScopeTest {
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();
             ddiMapper.mapDDI(
-                    DDIParser.parse(DDIResolveFiltersScopeTest.class.getClassLoader().getResourceAsStream(
+                    DDIDeserializer.deserialize(DDIResolveFiltersScopeTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-filters-extended.xml")),
                     enoQuestionnaire);
             // When
@@ -148,7 +148,7 @@ class DDIResolveFiltersScopeTest {
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();
             ddiMapper.mapDDI(
-                    DDIParser.parse(DDIResolveFiltersScopeTest.class.getClassLoader().getResourceAsStream(
+                    DDIDeserializer.deserialize(DDIResolveFiltersScopeTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-filters-nested.xml")),
                     enoQuestionnaire);
             // When

@@ -1,4 +1,4 @@
-package fr.insee.eno.core.parsers;
+package fr.insee.eno.core.serialize;
 
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import instance33.DDIInstanceDocument;
@@ -10,11 +10,11 @@ import java.io.InputStream;
 import java.net.URL;
 
 @Slf4j
-public class DDIParser {
+public class DDIDeserializer {
 
-    private DDIParser() {}
+    private DDIDeserializer() {}
 
-    public static DDIInstanceDocument parse(InputStream ddiInputStream) throws DDIParsingException {
+    public static DDIInstanceDocument deserialize(InputStream ddiInputStream) throws DDIParsingException {
         log.info("Parsing DDI document from input stream given");
         try {
             return DDIInstanceDocument.Factory.parse(ddiInputStream);
@@ -25,7 +25,7 @@ public class DDIParser {
         }
     }
 
-    public static DDIInstanceDocument parse(URL ddiUrl) throws DDIParsingException {
+    public static DDIInstanceDocument deserialize(URL ddiUrl) throws DDIParsingException {
         log.info("Parsing DDI document from URL " + ddiUrl);
         log.atDebug().log(()->"Test DEBUG logs with lambdas");
         try (InputStream is = ddiUrl.openStream()) {

@@ -11,8 +11,7 @@ import fr.insee.eno.core.model.sequence.ItemReference;
 import fr.insee.eno.core.model.sequence.ItemReference.ItemType;
 import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType;
 import fr.insee.eno.core.model.sequence.Subsequence;
-import fr.insee.eno.core.parsers.DDIParser;
-import fr.insee.eno.core.processing.in.steps.ddi.DDIResolveSequencesStructure;
+import fr.insee.eno.core.serialize.DDIDeserializer;
 import fr.insee.eno.core.reference.EnoIndex;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -175,7 +174,7 @@ class DDIResolveSequencesStructureTest {
             // Given
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();
-            ddiMapper.mapDDI(DDIParser.parse(
+            ddiMapper.mapDDI(DDIDeserializer.deserialize(
                     IntegrationTests.class.getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml")),
                     enoQuestionnaire);
             // When

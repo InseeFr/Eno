@@ -63,5 +63,4 @@ public class IntegrationHouseholdController {
                 })
                 .flatMap(enoParameters -> controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessings));
     }
-
 }

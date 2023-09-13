@@ -40,6 +40,7 @@ public class LunaticProcessing {
                 .then(new LunaticLoopResolution(enoQuestionnaire))
                 .then(new LunaticTableProcessing(enoQuestionnaire))
                 .then(new LunaticAddMissingVariables(enoCatalog, parameters.isMissingVariables()))
+                //.then(new LunaticAddResizing(enoQuestionnaire)) // TODO: re-active when work is done
                 .then(new LunaticAddHierarchy())
                 .then(new LunaticAddPageNumbers(parameters.getLunaticPaginationMode()))
                 .then(new LunaticAddCleaningVariables())

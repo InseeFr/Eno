@@ -4,9 +4,9 @@ import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
-import fr.insee.eno.core.parsers.DDIParser;
 import fr.insee.eno.core.processing.common.EnoProcessing;
 import fr.insee.eno.core.processing.in.DDIInProcessing;
+import fr.insee.eno.core.serialize.DDIDeserializer;
 import instance33.DDIInstanceDocument;
 
 import java.io.InputStream;
@@ -25,7 +25,7 @@ public class DDIToEno {
     public static EnoQuestionnaire transform(InputStream ddiInputStream, EnoParameters enoParameters)
             throws DDIParsingException {
         //
-        DDIInstanceDocument ddiInstanceDocument = DDIParser.parse(ddiInputStream);
+        DDIInstanceDocument ddiInstanceDocument = DDIDeserializer.deserialize(ddiInputStream);
         //
         DDIMapper ddiMapper = new DDIMapper();
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();

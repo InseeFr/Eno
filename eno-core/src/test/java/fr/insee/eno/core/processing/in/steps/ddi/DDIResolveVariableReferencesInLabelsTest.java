@@ -10,7 +10,7 @@ import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.variable.CollectedVariable;
 import fr.insee.eno.core.model.variable.Variable;
-import fr.insee.eno.core.parsers.DDIParser;
+import fr.insee.eno.core.serialize.DDIDeserializer;
 import fr.insee.eno.core.reference.EnoCatalog;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
@@ -61,7 +61,7 @@ class DDIResolveVariableReferencesInLabelsTest {
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();
             ddiMapper.mapDDI(
-                    DDIParser.parse(DDIResolveVariableReferencesInLabelsTest.class.getClassLoader()
+                    DDIDeserializer.deserialize(DDIResolveVariableReferencesInLabelsTest.class.getClassLoader()
                             .getResourceAsStream("integration/ddi/ddi-labels.xml")),
                     enoQuestionnaire);
             EnoCatalog enoCatalog = new EnoCatalog(enoQuestionnaire);

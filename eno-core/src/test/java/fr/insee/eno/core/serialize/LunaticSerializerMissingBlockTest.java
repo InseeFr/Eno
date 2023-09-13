@@ -1,4 +1,4 @@
-package fr.insee.eno.core.converter;
+package fr.insee.eno.core.serialize;
 
 import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
 import fr.insee.eno.core.model.lunatic.MissingBlock;
@@ -12,7 +12,7 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 
 import java.util.List;
 
-class JsonMissingBlockConverterTest {
+class LunaticSerializerMissingBlockTest {
     private Questionnaire lunaticQuestionnaire;
 
 
@@ -33,7 +33,7 @@ class JsonMissingBlockConverterTest {
 
     @Test
     void whenTransformingToJsonMissingBlockIsCorrect() throws LunaticSerializationException, JSONException {
-        String questionnaireJson = JsonLunaticConverter.convert(lunaticQuestionnaire);
+        String questionnaireJson = LunaticSerializer.serializeToJson(lunaticQuestionnaire);
 
         String expectedJson = """
             {
