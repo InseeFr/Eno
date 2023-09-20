@@ -1,6 +1,6 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.resizing;
 
-import fr.insee.eno.core.exceptions.business.LunaticLoopResolutionException;
+import fr.insee.eno.core.exceptions.business.LunaticLoopException;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
@@ -113,15 +113,15 @@ public class LunaticLoopResizingLogic {
                                         .filter(bodyCell -> bodyCell.getResponse() != null)
                                         .forEach(bodyCell -> result.add(bodyCell.getResponse().getName())));
                 case ROSTER_FOR_LOOP ->
-                        throw new LunaticLoopResolutionException(String.format(
+                        throw new LunaticLoopException(String.format(
                                 "Dynamic tables are forbidden in loops: loop '%s' contains a dynamic table.",
                                 loop.getId()));
                 case LOOP ->
-                        throw new LunaticLoopResolutionException(String.format(
+                        throw new LunaticLoopException(String.format(
                                 "Nested loop are forbidden: loop '%s' contains an other loop.",
                                 loop.getId()));
                 case PAIRWISE_LINKS ->
-                        throw new LunaticLoopResolutionException(String.format(
+                        throw new LunaticLoopException(String.format(
                                 "Pairwise components are forbidden in loops: loop '%s' contains a pairwise component.",
                                 loop.getId()));
                 default ->

@@ -1,7 +1,7 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.Constant;
-import fr.insee.eno.core.exceptions.business.LunaticLoopResolutionException;
+import fr.insee.eno.core.exceptions.business.LunaticLoopException;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoObject;
@@ -60,7 +60,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
 
     private void insertSequencesInLoop(Questionnaire lunaticQuestionnaire, Loop lunaticLoop, fr.insee.eno.core.model.navigation.Loop enoLoop) {
         if (enoLoop.getLoopScope().isEmpty())
-            throw new LunaticLoopResolutionException("Loop '" + enoLoop.getId() + "' has an empty scope.");
+            throw new LunaticLoopException("Loop '" + enoLoop.getId() + "' has an empty scope.");
         int position = insertSequenceInLoop(lunaticQuestionnaire, lunaticLoop, enoLoop.getLoopScope().get(0).getId());
         enoLoop.getLoopScope().stream().skip(1).forEachOrdered(structureItemReference ->
                 insertSequenceInLoop(lunaticQuestionnaire, lunaticLoop, structureItemReference.getId()));
@@ -163,7 +163,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
                     "Linked loop '%s' is based on a dynamic table. This feature is not supported yet.",
                     enoLinkedLoop.getId()));
         }
-        throw new LunaticLoopResolutionException(String.format(
+        throw new LunaticLoopException(String.format(
                 "Linked loop '%s' reference object's '%s' is neither a loop nor a dynamic table.",
                 enoLinkedLoop.getId(), reference));
     }
@@ -171,7 +171,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
     private String findFirstVariableOfReference(LinkedLoop enoLinkedLoop, StandaloneLoop enoReferenceLoop) {
         AbstractSequence startSequence = (AbstractSequence) enoIndex.get(enoReferenceLoop.getLoopScope().get(0).getId());
         if (startSequence.getSequenceStructure().isEmpty()) {
-            throw new LunaticLoopResolutionException(String.format(
+            throw new LunaticLoopException(String.format(
                     "Linked loop '%s' is based on loop '%s'. " +
                             "This loop is defined to start at sequence '%s', which is empty. " +
                             "Unable to find its first question to compute Lunatic \"iterations\" expression.",
@@ -180,7 +180,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
         String firstQuestionId = findFirstQuestionId(startSequence);
         EnoObject firstQuestion = enoIndex.get(firstQuestionId);
         if (! (firstQuestion instanceof SingleResponseQuestion)) {
-            throw new LunaticLoopResolutionException(String.format(
+            throw new LunaticLoopException(String.format(
                     "Linked loop '%s' is based on loop '%s' that starts at sequence '%s'. " +
                             "This first question of the sequence is not a \"simple\" question.",
                     enoLinkedLoop.getId(), enoReferenceLoop.getId(), startSequence.getId()));
