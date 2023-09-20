@@ -1,6 +1,6 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
-import fr.insee.eno.core.exceptions.business.LunaticProcessingException;
+import fr.insee.eno.core.exceptions.business.LunaticLoopResolutionException;
 import fr.insee.eno.core.model.lunatic.MissingBlock;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoCatalog;
@@ -170,7 +170,8 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
                         .map(ComponentSimpleResponseType::getResponse)
                         .map(ResponseType::getName)
                         .findFirst()
-                        .orElseThrow(() -> new LunaticProcessingException(String.format("main loop %s does not have a simple question in his components", loop.getId())));
+                        .orElseThrow(() -> new LunaticLoopResolutionException(String.format(
+                                "Main loop '%s' does not have a simple question in its components.", loop.getId())));
             }
 
             // missing responses are handled on the components of pairwise
