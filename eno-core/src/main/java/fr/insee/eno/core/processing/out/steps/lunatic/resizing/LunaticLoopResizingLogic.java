@@ -70,17 +70,20 @@ public class LunaticLoopResizingLogic {
                 .map(BindingReference::getVariableName)
                 .toList();
         return lunaticQuestionnaire.getVariables().stream()
-                .filter(variable -> maxIterationDependencies.contains(variable.getName()))
                 .filter(variable -> VariableTypeEnum.COLLECTED.equals(variable.getVariableType()))
                 .map(IVariableType::getName)
+                .filter(maxIterationDependencies::contains)
                 .toList();
     }
 
     // Note: external variables are not concerned since their values are not designed to be changed dynamically
     private List<String> findResizedVariablesForLoop(Loop lunaticLoop, StandaloneLoop enoLoop) {
-        List<String> resizedVariableNames = new ArrayList<>();
+        //
+        List<String> resizedVariableNames = new ArrayList<>(getCollectedVariablesInLoop(lunaticLoop));
+        //
         List<Loop> lunaticLinkedLoops = findLunaticLinkedLoops(enoLoop);
-        lunaticLinkedLoops.forEach(loop -> resizedVariableNames.addAll(getCollectedVariablesInLoop(lunaticLoop)));
+        lunaticLinkedLoops.forEach(linkedLoop -> resizedVariableNames.addAll(getCollectedVariablesInLoop(linkedLoop)));
+        //
         return resizedVariableNames;
     }
 
