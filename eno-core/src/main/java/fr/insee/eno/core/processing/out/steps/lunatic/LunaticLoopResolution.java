@@ -151,7 +151,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
         // We "just" want to find the first variable in the scope of the reference loop
         EnoIdentifiableObject reference = enoIndex.get(enoLinkedLoop.getReference());
         if (reference instanceof StandaloneLoop enoReferenceLoop) {
-            String variableName = findFirstVariableOfReference(enoLinkedLoop, enoReferenceLoop);
+            String variableName = findFirstVariableOfReference(enoLinkedLoop, enoReferenceLoop, enoIndex);
             lunaticLoop.setIterations(new LabelType());
             lunaticLoop.getIterations().setValue("count("+ variableName +")");
             lunaticLoop.getIterations().setType(Constant.LUNATIC_LABEL_VTL);
@@ -168,7 +168,8 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
                 enoLinkedLoop.getId(), reference));
     }
 
-    private String findFirstVariableOfReference(LinkedLoop enoLinkedLoop, StandaloneLoop enoReferenceLoop) {
+    public static String findFirstVariableOfReference(LinkedLoop enoLinkedLoop, StandaloneLoop enoReferenceLoop,
+                                                       EnoIndex enoIndex) {
         AbstractSequence startSequence = (AbstractSequence) enoIndex.get(enoReferenceLoop.getLoopScope().get(0).getId());
         if (startSequence.getSequenceStructure().isEmpty()) {
             throw new LunaticLoopException(String.format(
@@ -177,7 +178,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
                             "Unable to find its first question to compute Lunatic \"iterations\" expression.",
                     enoLinkedLoop.getId(), enoReferenceLoop.getId(), startSequence.getId()));
         }
-        String firstQuestionId = findFirstQuestionId(startSequence);
+        String firstQuestionId = findFirstQuestionId(startSequence, enoIndex);
         EnoObject firstQuestion = enoIndex.get(firstQuestionId);
         if (! (firstQuestion instanceof SingleResponseQuestion)) {
             throw new LunaticLoopException(String.format(
@@ -190,15 +191,16 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
 
     /**
      * Return the id of the first question in given sequence or subsequence object.
+     *
      * @param sequence Eno sequence object.
      * @return The id of the first question within the sequence.
      */
-    private String findFirstQuestionId(AbstractSequence sequence) {
+    private static String findFirstQuestionId(AbstractSequence sequence, EnoIndex enoIndex) {
         StructureItemReference firstSequenceItem = sequence.getSequenceStructure().get(0);
         if (firstSequenceItem.getType() == StructureItemType.QUESTION)
             return firstSequenceItem.getId();
         AbstractSequence subsequence = (AbstractSequence) enoIndex.get(firstSequenceItem.getId());
-        return findFirstQuestionId(subsequence);
+        return findFirstQuestionId(subsequence, enoIndex);
     }
 
 }

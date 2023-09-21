@@ -2,18 +2,19 @@ package fr.insee.eno.core.processing.out.steps.lunatic.resizing;
 
 import fr.insee.eno.core.exceptions.business.LunaticLoopException;
 import fr.insee.eno.core.exceptions.technical.MappingException;
-import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.lunatic.LunaticResizingEntry;
 import fr.insee.eno.core.model.navigation.LinkedLoop;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
+import fr.insee.eno.core.processing.out.steps.lunatic.LunaticLoopResolution;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 public class LunaticLoopResizingLogic {
@@ -42,25 +43,32 @@ public class LunaticLoopResizingLogic {
             throw new MappingException(String.format(
                     "Eno loop object corresponding to Lunatic loop '%s' cannot be found.", lunaticLoop.getId()));
 
-        // Linked loop are processed starting from main loops
-        if (enoLoop instanceof LinkedLoop)
-            return new ArrayList<>();
-
         // Variable names that are the keys of the resizing
-        List<String> resizingVariableNames = findResizingVariablesForLoop((StandaloneLoop) enoLoop);
+        List<String> resizingVariableNames = new ArrayList<>();
+        // Expression that resize the concerned variables
+        String sizeExpression = null;
+
+        if (enoLoop instanceof StandaloneLoop enoStandaloneLoop) {
+            resizingVariableNames.addAll(findResizingVariablesForLoop(enoStandaloneLoop));
+            sizeExpression = lunaticLoop.getLines().getMax().getValue();
+        }
+        if (enoLoop instanceof LinkedLoop enoLinkedLoop){
+            resizingVariableNames.add(findResizingVariableForLinkedLoop(enoLinkedLoop));
+            sizeExpression = lunaticLoop.getIterations().getValue();
+        }
 
         if (resizingVariableNames.isEmpty())
             return new ArrayList<>();
 
-        // Expression that resize the concerned variables
-        String sizeExpression = lunaticLoop.getLines().getMax().getValue();
         // Concerned variables to be resized
-        List<String> resizedVariableNames = findResizedVariablesForLoop(lunaticLoop, (StandaloneLoop) enoLoop);
+        // Note: external variables are not concerned since their values are not designed to be changed dynamically
+        List<String> resizedVariableNames = getCollectedVariablesInLoop(lunaticLoop);
 
         List<LunaticResizingEntry> resizingLoopEntries = new ArrayList<>();
+        String finalSizeExpression = sizeExpression; // (due to usage in lambda)
         resizingVariableNames.forEach(variableName ->
                 resizingLoopEntries.add(
-                        new LunaticResizingEntry(variableName, sizeExpression, resizedVariableNames)));
+                        new LunaticResizingEntry(variableName, finalSizeExpression, resizedVariableNames)));
 
         return resizingLoopEntries;
     }
@@ -76,29 +84,21 @@ public class LunaticLoopResizingLogic {
                 .toList();
     }
 
-    // Note: external variables are not concerned since their values are not designed to be changed dynamically
-    private List<String> findResizedVariablesForLoop(Loop lunaticLoop, StandaloneLoop enoLoop) {
-        //
-        List<String> resizedVariableNames = new ArrayList<>(getCollectedVariablesInLoop(lunaticLoop));
-        //
-        List<Loop> lunaticLinkedLoops = findLunaticLinkedLoops(enoLoop);
-        lunaticLinkedLoops.forEach(linkedLoop -> resizedVariableNames.addAll(getCollectedVariablesInLoop(linkedLoop)));
-        //
-        return resizedVariableNames;
-    }
-
-    private List<Loop> findLunaticLinkedLoops(StandaloneLoop enoLoop) {
-        // This first filter could be removed if Lunatic linked loops had the reference of their "main" loop
-        List<String> linkedLoopIds = enoQuestionnaire.getLoops().stream()
-                .filter(LinkedLoop.class::isInstance)
-                .map(LinkedLoop.class::cast)
-                .filter(linkedLoop -> enoLoop.getId().equals(linkedLoop.getReference()))
-                .map(EnoIdentifiableObject::getId)
-                .toList();
-        return lunaticQuestionnaire.getComponents().stream()
-                .filter(component -> linkedLoopIds.contains(component.getId()))
-                .map(Loop.class::cast)
-                .toList();
+    /** For a linked loop, the resizing variable is the first variable of its reference/main loop
+     * (this implicit rule strikes again here...). */
+    private String findResizingVariableForLinkedLoop(LinkedLoop enoLinkedLoop) {
+        // Find the reference/main loop of the linked loop
+        Optional<StandaloneLoop> referenceLoop = enoQuestionnaire.getLoops().stream()
+                .filter(StandaloneLoop.class::isInstance)
+                .map(StandaloneLoop.class::cast)
+                .filter(standaloneLoop -> enoLinkedLoop.getReference().equals(standaloneLoop.getId()))
+                .findAny();
+        if (referenceLoop.isEmpty())
+            throw new MappingException(String.format(
+                    "Unable to find the reference loop '%s' of linked loop '%s'",
+                    enoLinkedLoop.getReference(), enoLinkedLoop.getId()));
+        // Return the variable name of its first question (reusing some code from lunatic loop processing)
+        return LunaticLoopResolution.findFirstVariableOfReference(enoLinkedLoop, referenceLoop.get(), enoIndex);
     }
 
     private List<String> getCollectedVariablesInLoop(Loop loop) {
