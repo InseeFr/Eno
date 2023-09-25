@@ -81,6 +81,8 @@ public class EnoAddResponseTimeSection implements ProcessingStep<EnoQuestionnair
         NumericQuestion minutesQuestion = new NumericQuestion();
         minutesQuestion.setId(MINUTES_QUESTION_ID);
         minutesQuestion.setName(MINUTES_VARIABLE_NAME);
+        minutesQuestion.setLabel(new DynamicLabel());
+        minutesQuestion.getLabel().setValue("");
         minutesQuestion.setMandatory(RESPONSE_TIME_QUESTION_MANDATORY);
         minutesQuestion.setMinValue(TIME_MINUTES_QUESTION_MIN_VALUE);
         minutesQuestion.setMaxValue(RESPONSE_TIME_MINUTES_QUESTION_MAX_VALUE);
