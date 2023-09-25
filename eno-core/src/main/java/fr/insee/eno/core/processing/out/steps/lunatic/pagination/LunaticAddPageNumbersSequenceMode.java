@@ -1,6 +1,6 @@
  package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 
- import fr.insee.eno.core.exceptions.business.LunaticLoopResolutionException;
+ import fr.insee.eno.core.exceptions.business.LunaticLoopException;
  import fr.insee.lunatic.model.flat.ComponentType;
  import fr.insee.lunatic.model.flat.ComponentTypeEnum;
  import fr.insee.lunatic.model.flat.Loop;
@@ -50,7 +50,7 @@ public class LunaticAddPageNumbersSequenceMode extends LunaticAddPageNumbersAllM
     private boolean shouldLoopBePaginated(Loop loop) {
         List<ComponentType> loopComponents = loop.getComponents();
         if(loopComponents == null || loopComponents.isEmpty()) {
-            throw new LunaticLoopResolutionException(String.format("Loop %s should have components inside", loop.getId()));
+            throw new LunaticLoopException(String.format("Loop %s should have components inside", loop.getId()));
         }
 
         return loopComponents.get(0).getComponentType().equals(ComponentTypeEnum.SEQUENCE);

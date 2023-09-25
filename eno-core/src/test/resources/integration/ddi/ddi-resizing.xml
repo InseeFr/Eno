@@ -1,0 +1,1212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DDIInstance xmlns="ddi:instance:3_3"
+             xmlns:a="ddi:archive:3_3"
+             xmlns:d="ddi:datacollection:3_3"
+             xmlns:g="ddi:group:3_3"
+             xmlns:l="ddi:logicalproduct:3_3"
+             xmlns:r="ddi:reusable:3_3"
+             xmlns:s="ddi:studyunit:3_3"
+             xmlns:xhtml="http://www.w3.org/1999/xhtml"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
+             isMaintainable="true"><!--Eno version : 2.4.9. Generation date : 21/09/2023 - 15:55:21-->
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-lmeyzqxr</r:ID>
+   <r:Version>1</r:Version>
+   <r:Citation>
+      <r:Title>
+         <r:String>Eno - Resizing</r:String>
+      </r:Title>
+   </r:Citation>
+   <g:ResourcePackage isMaintainable="true" versionDate="2018-01-25+01:00">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>RessourcePackage-lmeyzqxr</r:ID>
+      <r:Version>1</r:Version>
+      <d:InterviewerInstructionScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>InterviewerInstructionScheme-lmeyzqxr</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">A définir</r:Content>
+         </r:Label>
+      </d:InterviewerInstructionScheme>
+      <d:ControlConstructScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>ControlConstructScheme-lmeyzqxr</r:ID>
+         <r:Version>1</r:Version>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>Sequence-lmeyzqxr</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Eno - Resizing</r:Content>
+            </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">template</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezfil0</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezf1ds</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Loop</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezmqi8</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Loop</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmgeljoy</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmezfil0</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">S1</r:String>
+            </d:ConstructName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">"First sequence"</r:Content>
+            </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezc4x9-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmez63il</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">S2</r:String>
+            </d:ConstructName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">"Sequence with loop"</r:Content>
+            </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmriwa1y-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezduli-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmezflon</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">S3</r:String>
+            </d:ConstructName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">"Séquence avec boucle liée"</r:Content>
+            </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezp3nz-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmgeljoy</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">S4</r:String>
+            </d:ConstructName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">"Sequence pairwise links"</r:Content>
+            </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmgen8zt-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Loop>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmezf1ds</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">LOOP</r:String>
+            </d:ConstructName>
+            <d:InitialValue>
+               <r:Command>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
+                  <r:CommandContent>1</r:CommandContent>
+               </r:Command>
+            </d:InitialValue>
+            <d:LoopWhile>
+               <r:Command>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>lmezf1ds-IP-1</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">NUMBER</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>lmezc4x9-QOP-lmf3zaup</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>lmezf1ds-IP-1</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:CommandContent>nvl(lmezf1ds-IP-1, 1)</r:CommandContent>
+               </r:Command>
+            </d:LoopWhile>
+            <d:StepValue>
+               <r:Command>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
+                  <r:CommandContent>1</r:CommandContent>
+               </r:Command>
+            </d:StepValue>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezf1ds-SEQ</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Loop>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmezf1ds-SEQ</r:ID>
+            <r:Version>1</r:Version>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmez63il</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Loop>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmezmqi8</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">LINKED_LOOP</r:String>
+            </d:ConstructName>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezmqi8-SEQ</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Loop>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmezmqi8-SEQ</r:ID>
+            <r:Version>1</r:Version>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezflon</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmezc4x9-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">NUMBER</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezc4x9</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmriwa1y-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Q2</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmriwa1y</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmezduli-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">PAIRWISE_SOURCE</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezduli</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmezp3nz-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Q3</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezp3nz</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmgen8zt-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">LINKS</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmgen8zt</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+      </d:ControlConstructScheme>
+      <d:QuestionScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>QuestionScheme-lmeyzqxr</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">A définir</r:Content>
+         </r:Label>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmezc4x9</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">NUMBER</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezc4x9-QOP-lmf3zaup</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">NUMBER</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmezc4x9-RDOP-lmf3zaup</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmezc4x9-QOP-lmf3zaup</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Question that determines loops size"</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:NumericDomain>
+               <r:NumberRange>
+                  <r:Low isInclusive="true">2</r:Low>
+                  <r:High isInclusive="true">10</r:High>
+               </r:NumberRange>
+               <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmezc4x9-RDOP-lmf3zaup</r:ID>
+                  <r:Version>1</r:Version>
+               </r:OutParameter>
+            </d:NumericDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmriwa1y</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">Q2</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmriwa1y-QOP-lmrvzzlr</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">Q2</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmriwa1y-RDOP-lmrvzzlr</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmriwa1y-QOP-lmrvzzlr</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Question in sequence 2"</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:TextDomain maxLength="249">
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmriwa1y-RDOP-lmrvzzlr</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TextRepresentation maxLength="249"/>
+               </r:OutParameter>
+            </d:TextDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmezduli</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">PAIRWISE_SOURCE</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezduli-QOP-lmf46fuf</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">PAIRWISE_SOURCE</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmezduli-RDOP-lmf46fuf</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmezduli-QOP-lmf46fuf</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Question that is the input of the pairwise question"</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:TextDomain maxLength="20">
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmezduli-RDOP-lmf46fuf</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TextRepresentation maxLength="20"/>
+               </r:OutParameter>
+            </d:TextDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmezp3nz</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">Q3</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezp3nz-QOP-lmf4a46s</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">Q3</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmezp3nz-RDOP-lmf4a46s</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmezp3nz-QOP-lmf4a46s</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Question in sequence 3"</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:TextDomain maxLength="249">
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmezp3nz-RDOP-lmf4a46s</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TextRepresentation maxLength="249"/>
+               </r:OutParameter>
+            </d:TextDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmgen8zt</r:ID>
+            <r:Version>1</r:Version>
+            <r:UserAttributePair>
+               <r:AttributeKey>UIComponent</r:AttributeKey>
+               <r:AttributeValue>HouseholdPairing</r:AttributeValue>
+            </r:UserAttributePair>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">LINKS</r:String>
+            </d:QuestionItemName>
+            <r:InParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmgen8zt-IP-1</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">PAIRWISE_SOURCE</r:String>
+               </r:ParameterName>
+            </r:InParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmgen8zt-QOP-lmgf25ji</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">LINKS</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmgen8zt-IP-1</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmezduli-QOP-lmf46fuf</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>InParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmgen8zt-RDOP-lmgf25ji</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmgen8zt-QOP-lmgf25ji</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Pairwise links question"</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:CodeDomain>
+               <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+               <r:CodeListReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmgeb1uh</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>CodeList</r:TypeOfObject>
+               </r:CodeListReference>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmgen8zt-RDOP-lmgf25ji</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:CodeRepresentation>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>lmgeb1uh</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                  </r:CodeRepresentation>
+               </r:OutParameter>
+               <r:ResponseCardinality maximumResponses="1"/>
+            </d:CodeDomain>
+         </d:QuestionItem>
+      </d:QuestionScheme>
+      <l:CategoryScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>CategoryScheme-lmgeb1uh</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">LINKS_LIST</r:Content>
+         </r:Label>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>CA-lmgeb1uh-1</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">"Link of type A"</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>CA-lmgeb1uh-2</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">"Link of type B"</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>CA-lmgeb1uh-3</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">"Link of type C"</r:Content>
+            </r:Label>
+         </l:Category>
+      </l:CategoryScheme>
+      <l:CategoryScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>CategoryScheme-lmeyzqxr</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">A définir</r:Content>
+         </r:Label>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR"/>
+            </r:Label>
+         </l:Category>
+      </l:CategoryScheme>
+      <l:CodeListScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>ENORESIZING-CLS</r:ID>
+         <r:Version>1</r:Version>
+         <l:CodeListSchemeName>
+            <r:String xml:lang="en-IE">ENORESIZING</r:String>
+         </l:CodeListSchemeName>
+         <l:CodeList>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmgeb1uh</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">LINKS_LIST</r:Content>
+            </r:Label>
+            <l:HierarchyType>Regular</l:HierarchyType>
+            <l:Level levelNumber="1">
+               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmgeb1uh-1</r:ID>
+               <r:Version>1</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-lmgeb1uh-1</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>LINK_A</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmgeb1uh-2</r:ID>
+               <r:Version>1</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-lmgeb1uh-2</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>LINK_B</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmgeb1uh-3</r:ID>
+               <r:Version>1</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-lmgeb1uh-3</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>LINK_C</r:Value>
+            </l:Code>
+         </l:CodeList>
+         <l:CodeList>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-COMMUN-CL-Booleen</r:ID>
+            <r:Version>1</r:Version>
+            <l:CodeListName>
+               <r:String xml:lang="fr-FR">Booleen</r:String>
+            </l:CodeListName>
+            <l:HierarchyType>Regular</l:HierarchyType>
+            <l:Level levelNumber="1">
+               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+               <r:Version>1</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>1</r:Value>
+            </l:Code>
+         </l:CodeList>
+      </l:CodeListScheme>
+      <l:VariableScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>VariableScheme-lmeyzqxr</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">Variable Scheme for the survey</r:Content>
+         </r:Label>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmezvjtr</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">CALCULATED1</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">"Calculated using main loop variable"</r:Content>
+            </r:Label>
+            <r:OutParameter>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezvjtr-VROP</r:ID>
+               <r:Version>1</r:Version>
+            </r:OutParameter>
+            <l:VariableRepresentation>
+               <r:ProcessingInstructionReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmezvjtr-GI</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>GenerationInstruction</r:TypeOfObject>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>lmezvjtr-GOP</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>lmezvjtr-VROP</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+               </r:ProcessingInstructionReference>
+               <r:TextRepresentation maxLength="249"/>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmf0pvfh</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">CALCULATED2</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">"Calculated using linked loop variable"</r:Content>
+            </r:Label>
+            <r:OutParameter>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmf0pvfh-VROP</r:ID>
+               <r:Version>1</r:Version>
+            </r:OutParameter>
+            <l:VariableRepresentation>
+               <r:ProcessingInstructionReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmf0pvfh-GI</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>GenerationInstruction</r:TypeOfObject>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>lmf0pvfh-GOP</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>lmf0pvfh-VROP</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+               </r:ProcessingInstructionReference>
+               <r:TextRepresentation maxLength="249"/>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmt9ljtn</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">NUMBER</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">NUMBER label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezc4x9-QOP-lmf3zaup</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezc4x9</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">2</r:Low>
+                     <r:High isInclusive="true">10</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmt9waph</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">Q2</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Q2 label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmriwa1y-QOP-lmrvzzlr</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmriwa1y</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="249"/>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmt9xzdm</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">PAIRWISE_SOURCE</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">PAIRWISE_SOURCE label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezduli-QOP-lmf46fuf</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezduli</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="20"/>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmez8o56</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">Q3</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Q3 label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezp3nz-QOP-lmf4a46s</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezp3nz</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="249"/>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmt9r0x0</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">LINKS</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">LINKS label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmgen8zt-QOP-lmgf25ji</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmgen8zt</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>lmgeb1uh</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:VariableGroup>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmezf1ds-vg</r:ID>
+            <r:Version>1</r:Version>
+            <r:BasedOnObject>
+               <r:BasedOnReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmezf1ds</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Loop</r:TypeOfObject>
+               </r:BasedOnReference>
+               <r:BasedOnReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>lmezmqi8</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Loop</r:TypeOfObject>
+               </r:BasedOnReference>
+            </r:BasedOnObject>
+            <l:TypeOfVariableGroup>Loop</l:TypeOfVariableGroup>
+            <l:VariableGroupName>
+               <r:String>LOOP</r:String>
+            </l:VariableGroupName>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezvjtr</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmf0pvfh</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmt9waph</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmt9xzdm</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmez8o56</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+         </l:VariableGroup>
+         <l:VariableGroup>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-Instrument-lmeyzqxr-vg</r:ID>
+            <r:Version>1</r:Version>
+            <r:BasedOnObject>
+               <r:BasedOnReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>Instrument-lmeyzqxr</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Instrument</r:TypeOfObject>
+               </r:BasedOnReference>
+            </r:BasedOnObject>
+            <l:TypeOfVariableGroup>Questionnaire</l:TypeOfVariableGroup>
+            <l:VariableGroupName>
+               <r:String>ENORESIZING</r:String>
+            </l:VariableGroupName>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmt9ljtn</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmt9r0x0</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <l:VariableGroupReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezf1ds-vg</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>VariableGroup</r:TypeOfObject>
+            </l:VariableGroupReference>
+         </l:VariableGroup>
+      </l:VariableScheme>
+      <d:ProcessingInstructionScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-PIS-1</r:ID>
+         <r:Version>1</r:Version>
+         <d:ProcessingInstructionSchemeName>
+            <r:String xml:lang="en-IE">SIMPSONS</r:String>
+         </d:ProcessingInstructionSchemeName>
+         <r:Label>
+            <r:Content xml:lang="en-IE">Processing instructions of the Simpsons questionnaire</r:Content>
+         </r:Label>
+         <d:GenerationInstruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmezvjtr-GI</r:ID>
+            <r:Version>1</r:Version>
+            <d:InputQuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmriwa1y</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmt9waph</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </d:InputVariableReference>
+            <r:CommandCode>
+               <r:Command>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>lmezvjtr-IP-1</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">Q2</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
+                  <r:OutParameter>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>lmezvjtr-GOP</r:ID>
+                     <r:Version>1</r:Version>
+                  </r:OutParameter>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>lmriwa1y-QOP-lmrvzzlr</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>lmezvjtr-IP-1</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:CommandContent>nvl(lmezvjtr-IP-1, "") || " " || "FOO"</r:CommandContent>
+               </r:Command>
+            </r:CommandCode>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezf1ds</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Loop</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:GenerationInstruction>
+         <d:GenerationInstruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>lmf0pvfh-GI</r:ID>
+            <r:Version>1</r:Version>
+            <d:InputQuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezp3nz</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmez8o56</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </d:InputVariableReference>
+            <r:CommandCode>
+               <r:Command>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>lmf0pvfh-IP-1</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">Q3</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
+                  <r:OutParameter>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>lmf0pvfh-GOP</r:ID>
+                     <r:Version>1</r:Version>
+                  </r:OutParameter>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>lmezp3nz-QOP-lmf4a46s</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>lmf0pvfh-IP-1</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:CommandContent>nvl(lmf0pvfh-IP-1, "") || " " || "BAR"</r:CommandContent>
+               </r:Command>
+            </r:CommandCode>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>lmezf1ds</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Loop</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:GenerationInstruction>
+      </d:ProcessingInstructionScheme>
+      <r:ManagedRepresentationScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-MRS</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="en-IE">Liste de formats numériques et dates de
+                            l'enquête</r:Content>
+            <r:Content xml:lang="en-IE">Numeric and DateTime list for the survey</r:Content>
+         </r:Label>
+      </r:ManagedRepresentationScheme>
+   </g:ResourcePackage>
+   <s:StudyUnit>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>StudyUnit-lmeyzqxr</r:ID>
+      <r:Version>1</r:Version>
+      <r:ExPostEvaluation/>
+      <d:DataCollection>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>DataCollection-lmeyzqxr</r:ID>
+         <r:Version>1</r:Version>
+         <r:QuestionSchemeReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>QuestionScheme-lmeyzqxr</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>QuestionScheme</r:TypeOfObject>
+         </r:QuestionSchemeReference>
+         <r:ControlConstructSchemeReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>ControlConstructScheme-lmeyzqxr</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>ControlConstructScheme</r:TypeOfObject>
+         </r:ControlConstructSchemeReference>
+         <r:InterviewerInstructionSchemeReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>InterviewerInstructionScheme-lmeyzqxr</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>InterviewerInstructionScheme</r:TypeOfObject>
+         </r:InterviewerInstructionSchemeReference>
+         <d:InstrumentScheme xml:lang="fr-FR">
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>InstrumentScheme-lmeyzqxr</r:ID>
+            <r:Version>1</r:Version>
+            <d:Instrument xmlns:c="ddi:conceptualcomponent:3_3"
+                          xmlns:cm="ddi:comparative:3_3"
+                          xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
+                          xmlns:pr="ddi:ddiprofile:3_3">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>Instrument-lmeyzqxr</r:ID>
+               <r:Version>1</r:Version>
+               <d:InstrumentName>
+                  <r:String>ENORESIZING</r:String>
+               </d:InstrumentName>
+               <r:Label>
+                  <r:Content xml:lang="fr-FR">Eno - Resizing questionnaire</r:Content>
+               </r:Label>
+               <d:TypeOfInstrument>A définir</d:TypeOfInstrument>
+               <d:ControlConstructReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>Sequence-lmeyzqxr</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Sequence</r:TypeOfObject>
+               </d:ControlConstructReference>
+            </d:Instrument>
+         </d:InstrumentScheme>
+      </d:DataCollection>
+   </s:StudyUnit>
+</DDIInstance>

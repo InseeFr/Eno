@@ -7,9 +7,9 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class LunaticResizingLoopVariable {
+public class LunaticResizingPairwiseEntry {
     private String name;
-    private String size;
-    private List<String> variables;
+    private List<String> sizeForLinksVariables;
+    private List<String> linksVariables;
 
 }

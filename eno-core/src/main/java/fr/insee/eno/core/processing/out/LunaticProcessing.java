@@ -7,6 +7,7 @@ import fr.insee.eno.core.processing.out.steps.lunatic.*;
 import fr.insee.eno.core.processing.out.steps.lunatic.calculatedvariable.ShapefromAttributeRetrieval;
 import fr.insee.eno.core.processing.out.steps.lunatic.calculatedvariable.ShapefromAttributeRetrievalFromVariableGroups;
 import fr.insee.eno.core.processing.out.steps.lunatic.pagination.LunaticAddPageNumbers;
+import fr.insee.eno.core.processing.out.steps.lunatic.resizing.LunaticAddResizing;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
 import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.eno.core.reference.EnoIndex;
@@ -40,7 +41,7 @@ public class LunaticProcessing {
                 .then(new LunaticLoopResolution(enoQuestionnaire))
                 .then(new LunaticTableProcessing(enoQuestionnaire))
                 .then(new LunaticAddMissingVariables(enoCatalog, parameters.isMissingVariables()))
-                //.then(new LunaticAddResizing(enoQuestionnaire)) // TODO: re-active when work is done
+                .then(new LunaticAddResizing(enoQuestionnaire))
                 .then(new LunaticAddHierarchy())
                 .then(new LunaticAddPageNumbers(parameters.getLunaticPaginationMode()))
                 .then(new LunaticAddCleaningVariables())

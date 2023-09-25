@@ -1,0 +1,470 @@
+{
+  "owner": "FAKEPERMISSION",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "lmezfil0",
+        "lmezc4x9",
+        "lmez63il",
+        "lmriwa1y",
+        "lmezduli",
+        "lmezflon",
+        "lmezp3nz",
+        "lmgeljoy",
+        "lmgen8zt",
+        "idendquest"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "lmf42v0u",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "Eno - Resizing"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "ENORESIZING",
+  "Variables": {
+    "Variable": [
+      {
+        "Formula": "nvl($Q2$, \"\") || \" \" || \"FOO\"",
+        "Scope": "lmezf1ds",
+        "Label": "\"Calculated using main loop variable\"",
+        "id": "lmezvjtr",
+        "type": "CalculatedVariableType",
+        "Name": "CALCULATED1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Formula": "nvl($Q3$, \"\") || \" \" || \"BAR\"",
+        "Scope": "lmezf1ds",
+        "Label": "\"Calculated using linked loop variable\"",
+        "id": "lmf0pvfh",
+        "type": "CalculatedVariableType",
+        "Name": "CALCULATED2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "NUMBER label",
+        "id": "lmt9ljtn",
+        "type": "CollectedVariableType",
+        "Name": "NUMBER",
+        "Datatype": {
+          "Maximum": "10",
+          "Minimum": "2",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": "0"
+        }
+      },
+      {
+        "Scope": "lmezf1ds",
+        "Label": "Q2 label",
+        "id": "lmt9waph",
+        "type": "CollectedVariableType",
+        "Name": "Q2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "lmezf1ds",
+        "Label": "PAIRWISE_SOURCE label",
+        "id": "lmt9xzdm",
+        "type": "CollectedVariableType",
+        "Name": "PAIRWISE_SOURCE",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "20"
+        }
+      },
+      {
+        "Scope": "lmezf1ds",
+        "Label": "Q3 label",
+        "id": "lmez8o56",
+        "type": "CollectedVariableType",
+        "Name": "Q3",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "LINKS label",
+        "id": "lmt9r0x0",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lmgeb1uh",
+        "Name": "LINKS",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Thu Sep 21 2023 17:54:10 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "TCM",
+      "uri": "http://ddi:fr.insee:DataCollection.TCM"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "lmeyzqxr",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "Label": "LINKS_LIST",
+        "id": "lmgeb1uh",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Link of type A\"",
+            "Value": "LINK_A"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Link of type B\"",
+            "Value": "LINK_B"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Link of type C\"",
+            "Value": "LINK_C"
+          }
+        ],
+        "Name": ""
+      }
+    ]
+  },
+  "Iterations": {
+    "Iteration": [
+      {
+        "Maximum": "nvl($NUMBER$, 1)",
+        "Minimum": "1",
+        "MemberReference": [
+          "lmez63il",
+          "lmez63il"
+        ],
+        "id": "lmezf1ds",
+        "Step": "1",
+        "type": "DynamicIterationType",
+        "Name": "LOOP"
+      },
+      {
+        "MemberReference": [
+          "lmezflon",
+          "lmezflon"
+        ],
+        "id": "lmezmqi8",
+        "type": "DynamicIterationType",
+        "Name": "LINKED_LOOP",
+        "IterableReference": "lmezf1ds"
+      }
+    ]
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"First sequence\""
+      ],
+      "id": "lmezfil0",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lmt9ljtn",
+              "id": "lmf3zaup",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "10",
+                "Minimum": "2",
+                "typeName": "NUMERIC",
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Decimals": "0"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question that determines loops size\""
+          ],
+          "id": "lmezc4x9",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "NUMBER"
+        }
+      ],
+      "Name": "S1"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence with loop\""
+      ],
+      "id": "lmez63il",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lmt9waph",
+              "id": "lmrvzzlr",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question in sequence 2\""
+          ],
+          "id": "lmriwa1y",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q2"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lmt9xzdm",
+              "id": "lmf46fuf",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": "20"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question that is the input of the pairwise question\""
+          ],
+          "id": "lmezduli",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "PAIRWISE_SOURCE"
+        }
+      ],
+      "Name": "S2"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Séquence avec boucle liée\""
+      ],
+      "id": "lmezflon",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lmez8o56",
+              "id": "lmf4a46s",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question in sequence 3\""
+          ],
+          "id": "lmezp3nz",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q3"
+        }
+      ],
+      "Name": "S3"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence pairwise links\""
+      ],
+      "id": "lmgeljoy",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lmt9r0x0",
+              "id": "lmgf25ji",
+              "mandatory": false,
+              "CodeListReference": "lmgeb1uh",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Scope": "lmt9xzdm",
+          "Label": [
+            "\"Pairwise links question\""
+          ],
+          "id": "lmgen8zt",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "PAIRWISE",
+          "Name": "LINKS"
+        }
+      ],
+      "Name": "S4"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

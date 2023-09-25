@@ -1,8 +1,8 @@
 package fr.insee.eno.core.serialize;
 
 import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
-import fr.insee.eno.core.model.lunatic.LunaticResizingLoopVariable;
-import fr.insee.eno.core.model.lunatic.LunaticResizingPairWiseVariable;
+import fr.insee.eno.core.model.lunatic.LunaticResizingEntry;
+import fr.insee.eno.core.model.lunatic.LunaticResizingPairwiseEntry;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.ResizingType;
 import org.json.JSONException;
@@ -23,10 +23,10 @@ class LunaticSerializerResizingTest {
         lunaticQuestionnaire.setResizing(resizingType);
 
         List<Object> data = resizingType.getAny();
-        data.add(new LunaticResizingLoopVariable("loopVariable", "count(NB)", List.of("NB")));
-        data.add(new LunaticResizingLoopVariable("loopVariable1", "count(NB1,PRENOM1)", List.of("NB1", "PRENOM1")));
-        data.add(new LunaticResizingPairWiseVariable("pairwise", List.of("count(NBP)", "count(PRENOMP)"), List.of("NBP", "PRENOMP")));
-        data.add(new LunaticResizingPairWiseVariable("pairwise1", List.of("count(NBP1)", "count(PRENOMP1)"), List.of("NBP1", "PRENOMP1")));
+        data.add(new LunaticResizingEntry("loopVariable", "count(NB)", List.of("NB")));
+        data.add(new LunaticResizingEntry("loopVariable1", "count(NB1,PRENOM1)", List.of("NB1", "PRENOM1")));
+        data.add(new LunaticResizingPairwiseEntry("pairwise", List.of("count(NBP)", "count(PRENOMP)"), List.of("NBP", "PRENOMP")));
+        data.add(new LunaticResizingPairwiseEntry("pairwise1", List.of("count(NBP1)", "count(PRENOMP1)"), List.of("NBP1", "PRENOMP1")));
     }
 
     @Test

@@ -7,9 +7,9 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class LunaticResizingPairWiseVariable {
+public class LunaticResizingEntry {
     private String name;
-    private List<String> sizeForLinksVariables;
-    private List<String> linksVariables;
+    private String size;
+    private List<String> variables;
 
 }
