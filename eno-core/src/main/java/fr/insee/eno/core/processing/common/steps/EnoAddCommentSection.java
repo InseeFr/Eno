@@ -50,6 +50,7 @@ public class EnoAddCommentSection implements ProcessingStep<EnoQuestionnaire> {
         commentQuestion.setLabel(new DynamicLabel());
         commentQuestion.getLabel().setValue(COMMENT_QUESTION_LABEL);
         commentQuestion.setMandatory(COMMENT_QUESTION_MANDATORY);
+        commentQuestion.setLengthType(TextQuestion.qualifyLength(COMMENT_QUESTION_LENGTH));
         commentQuestion.setMaxLength(BigInteger.valueOf(COMMENT_QUESTION_LENGTH));
         commentQuestion.setResponse(new Response());
         commentQuestion.getResponse().setVariableName(COMMENT_VARIABLE_NAME);

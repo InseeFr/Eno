@@ -1,7 +1,9 @@
 package fr.insee.eno.core.processing.out;
 
+import fr.insee.eno.core.exceptions.business.EnoParametersException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.processing.ProcessingPipeline;
 import fr.insee.eno.core.processing.out.steps.lunatic.*;
 import fr.insee.eno.core.processing.out.steps.lunatic.calculatedvariable.ShapefromAttributeRetrieval;
@@ -11,7 +13,7 @@ import fr.insee.eno.core.processing.out.steps.lunatic.resizing.LunaticAddResizin
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
 import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.eno.core.reference.EnoIndex;
-import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.Questionnaire;
 
 public class LunaticProcessing {
 
@@ -28,6 +30,9 @@ public class LunaticProcessing {
      * @param enoQuestionnaire Eno questionnaire that contains some required info.
      */
     public void applyProcessing(Questionnaire lunaticQuestionnaire, EnoQuestionnaire enoQuestionnaire) {
+        //
+        if (! Format.LUNATIC.equals(parameters.getOutFormat()))
+            throw new EnoParametersException("Out format is not 'LUNATIC' in given parameters.");
         //
         EnoIndex enoIndex = enoQuestionnaire.getIndex();
         assert enoIndex != null;

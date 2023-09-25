@@ -7,7 +7,7 @@ public class EnoAddIdentificationSection implements ProcessingStep<EnoQuestionna
 
     @Override
     public void apply(EnoQuestionnaire enoQuestionnaire) {
-        // TODO: implement this processing
+        throw new UnsupportedOperationException("The addition of the 'identification' section is not supported yet.");
     }
 
 }

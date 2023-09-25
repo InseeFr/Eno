@@ -27,8 +27,9 @@ public class EnoParameters {
 
     // Context parameters
     private Context context;
-    private String campaignName = DEFAULT_CAMPAIGN_NAME; // unused yet
     private ModeParameter modeParameter;
+    private Format outFormat;
+    private String campaignName = DEFAULT_CAMPAIGN_NAME; // unused yet
     private Language language = Language.FR; // unused yet
 
     // Eno core parameters
@@ -81,6 +82,7 @@ public class EnoParameters {
         //
         if (! Format.LUNATIC.equals(outFormat))
             throw new UnsupportedOperationException("Only Lunatic out format is supported for now.");
+        enoParameters.setOutFormat(outFormat);
         //
         enoParameters.enoValues(context, modeParameter);
         //

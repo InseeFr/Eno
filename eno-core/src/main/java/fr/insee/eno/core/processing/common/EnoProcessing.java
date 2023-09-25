@@ -25,6 +25,7 @@ public class EnoProcessing {
         //
         ProcessingPipeline<EnoQuestionnaire> processingPipeline = new ProcessingPipeline<>();
         processingPipeline.start(enoQuestionnaire)
+                .thenIf(parameters.isIdentificationQuestion(), new EnoAddIdentificationSection())
                 .thenIf(parameters.isResponseTimeQuestion(), new EnoAddResponseTimeSection())
                 .thenIf(parameters.isCommentSection(), new EnoAddCommentSection())
                 .then(new EnoModeSelection(parameters.getSelectedModes(), enoCatalog))
