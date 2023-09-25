@@ -1,0 +1,85 @@
+{
+  "id": "lmyoceix",
+  "modele": "ENOSIMPLE",
+  "enoCoreVersion": "2.4.9",
+  "lunaticModelVersion": "2.3.4",
+  "generatingDate": "25-09-2023 09:03:08",
+  "missing": false,
+  "pagination": "question",
+  "maxPage": "2",
+  "label": {
+    "value": "Eno - Simple questionnaire",
+    "type": "VTL|MD"
+  },
+  "components": [
+    {
+      "id": "lmynuv39",
+      "componentType": "Sequence",
+      "page": "1",
+      "label": {
+        "value": "\"I - \" || \"Unique sequence\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lmynuv39",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Unique sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "lmyo3e0y",
+      "componentType": "Input",
+      "mandatory": false,
+      "page": "2",
+      "maxLength": 249,
+      "label": {
+        "value": "\"➡ \" || \"Unique question\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lmynuv39",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Unique sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q1"
+      ],
+      "response": {
+        "name": "Q1"
+      }
+    }
+  ],
+  "variables": [
+    {
+      "variableType": "COLLECTED",
+      "name": "Q1",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    }
+  ],
+  "cleaning": {},
+  "resizing": {}
+}
