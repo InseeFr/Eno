@@ -40,6 +40,7 @@ class DDIToLunaticTest {
             //"kzy5kbtl",
             //"l8x6fhtd",
             //"ldodefpq",
+            "li49zxju"
     })
     @DisplayName("Many questionnaires, non null output")
     void testAll(String questionnaireId) throws DDIParsingException {
