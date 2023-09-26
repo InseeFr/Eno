@@ -1,16 +1,20 @@
 package fr.insee.eno.core.model.navigation;
 
 import datacollection33.LoopType;
+import datacollection33.SequenceType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.sequence.ItemReference;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.eno.core.reference.DDIIndex;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import reusable33.ReferenceType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +38,7 @@ public abstract class Loop extends EnoIdentifiableObject {
     private String name;
 
     /** Same principle as sequence items list in sequence objects. */
-    @DDI("#index.get(#this.getControlConstructReference().getIDArray(0).getStringValue())" +
-            ".getControlConstructReferenceList()")
+    @DDI("T(fr.insee.eno.core.model.navigation.Loop).mapLoopItemReferences(#this, #index)")
     private final List<ItemReference> loopItems = new ArrayList<>();
 
     /** References of sequences or subsequences that are in the scope of the loop.
@@ -43,10 +46,20 @@ public abstract class Loop extends EnoIdentifiableObject {
      * (In other formats, nothing makes it formally impossible to have loops defined directly on questions.)
      * In DDI, this property is filled by a processing using the "loopItems" property. */
     private final List<StructureItemReference> loopScope = new ArrayList<>();
-
-    /** A loop can be in the scope of a filter.
-     * In DDI, filters are mapped at questionnaire level and inserted through a processing step. */
-    @Lunatic("setConditionFilter(#param)")
-    private ComponentFilter filter;
+    
+    public static List<ReferenceType> mapLoopItemReferences(LoopType ddiLoop, DDIIndex ddiIndex) {
+        ReferenceType controlConstructReference = ddiLoop.getControlConstructReference();
+        String referencedControlConstructType = controlConstructReference.getTypeOfObject().toString();
+        if ("Sequence".equals(referencedControlConstructType)) {
+            SequenceType ddiSequence = (SequenceType) ddiIndex.get(controlConstructReference.getIDArray(0).getStringValue());
+            return ddiSequence.getControlConstructReferenceList();
+        }
+        if ("IfThenElse".equals(referencedControlConstructType)) {
+            return List.of(ddiLoop.getControlConstructReference());
+        }
+        throw new MappingException(String.format(
+                "DDI loop '%s' references an object of unexpected type: '%s'.",
+                ddiLoop.getIDArray(0).getStringValue(), referencedControlConstructType));
+    }
 
 }
