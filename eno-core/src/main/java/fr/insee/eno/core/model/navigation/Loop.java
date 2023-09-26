@@ -44,9 +44,4 @@ public abstract class Loop extends EnoIdentifiableObject {
      * In DDI, this property is filled by a processing using the "loopItems" property. */
     private final List<StructureItemReference> loopScope = new ArrayList<>();
 
-    /** A loop can be in the scope of a filter.
-     * In DDI, filters are mapped at questionnaire level and inserted through a processing step. */
-    @Lunatic("setConditionFilter(#param)")
-    private ComponentFilter filter;
-
 }
