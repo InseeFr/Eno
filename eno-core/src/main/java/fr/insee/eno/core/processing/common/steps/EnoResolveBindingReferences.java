@@ -104,7 +104,7 @@ public class EnoResolveBindingReferences implements ProcessingStep<EnoQuestionna
         // shallow copy
         Set<BindingReference> resolvedBindingReferences = new HashSet<>(bindingReferences);
         //
-        for (BindingReference bindingReference : resolvedBindingReferences) {
+        for (BindingReference bindingReference : bindingReferences) {
             Variable variable = variableMap.get(bindingReference.getVariableName());
             if (Variable.CollectionType.CALCULATED.equals(variable.getCollectionType()))
                 resolvedBindingReferences.addAll(

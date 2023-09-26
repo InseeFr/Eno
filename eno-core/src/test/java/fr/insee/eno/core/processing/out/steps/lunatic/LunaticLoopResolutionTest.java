@@ -459,4 +459,37 @@ class LunaticLoopResolutionTest {
 
     }
 
+    @Nested
+    class LoopWithExcept {
+
+        @Test
+        void componentsInLinkedLoopShouldHaveFilter() throws DDIParsingException {
+            // Given
+            EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+                    this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-loop-except.xml"),
+                    EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
+            Questionnaire lunaticQuestionnaire = new Questionnaire();
+            LunaticMapper lunaticMapper = new LunaticMapper();
+            lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
+            LunaticSortComponents lunaticSortComponents = new LunaticSortComponents(enoQuestionnaire);
+            lunaticSortComponents.apply(lunaticQuestionnaire);
+
+            // When
+            LunaticLoopResolution lunaticLoopResolution = new LunaticLoopResolution(enoQuestionnaire);
+            lunaticLoopResolution.apply(lunaticQuestionnaire);
+
+            // Then
+            assertEquals(ComponentTypeEnum.LOOP, lunaticQuestionnaire.getComponents().get(3).getComponentType());
+            Loop lunaticLinkedLoop = (Loop) lunaticQuestionnaire.getComponents().get(3);
+            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLinkedLoop.getComponents().get(0).getComponentType());
+            assertEquals(ComponentTypeEnum.CHECKBOX_BOOLEAN, lunaticLinkedLoop.getComponents().get(1).getComponentType());
+            //
+            lunaticLinkedLoop.getComponents().forEach(component -> {
+                assertEquals("(not(nvl(AGE, 0) < 18))", component.getConditionFilter().getValue());
+                assertEquals(Constant.LUNATIC_LABEL_VTL, component.getConditionFilter().getType());
+            });
+        }
+
+    }
+
 }
