@@ -1,6 +1,7 @@
 package fr.insee.eno.ws.controller;
 
 import fr.insee.eno.core.model.mode.Mode;
+import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.treatments.LunaticPostProcessing;
 import fr.insee.eno.ws.controller.utils.V3ControllerUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +22,7 @@ import reactor.core.publisher.Mono;
 
 @Tag(name = "Integration of questionnaire")
 @Controller
-@RequestMapping("/integration-business")
+@RequestMapping("/integration-household")
 @Slf4j
 public class IntegrationHouseholdController {
 
@@ -57,10 +58,22 @@ public class IntegrationHouseholdController {
 
         return controllerUtils.readParametersFile(parametersFile)
                 .flatMap(enoParameters -> {
+                    // Context
+                    if (enoParameters.getContext() == null)
+                        enoParameters.setContext(EnoParameters.Context.HOUSEHOLD);
+                    if (! validateHouseholdParameters(enoParameters))
+                        return Mono.error(new IllegalArgumentException(
+                                "Invalid household parameters. Context is 'BUSINESS' in parameters given."));
+                    // Mode
                     enoParameters.getSelectedModes().clear();
                     enoParameters.getSelectedModes().add(mode);
                     return Mono.just(enoParameters);
                 })
                 .flatMap(enoParameters -> controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessings));
     }
+
+    private boolean validateHouseholdParameters(EnoParameters enoParameters) {
+        return !EnoParameters.Context.BUSINESS.equals(enoParameters.getContext());
+    }
+
 }
