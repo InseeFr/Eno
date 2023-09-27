@@ -1,6 +1,5 @@
 package fr.insee.eno.ws.controller;
 
-import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.treatments.LunaticPostProcessing;
 import fr.insee.eno.ws.controller.utils.V3ControllerUtils;
@@ -40,7 +39,7 @@ public class IntegrationHouseholdController {
     @PostMapping(value = "ddi-2-lunatic-json/{mode}",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<ResponseEntity<String>> generateLunaticJson(
-            @PathVariable Mode mode,
+            @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter,
             @RequestPart(value="in") Mono<FilePart> ddiFile,
             @RequestPart(value="params") Mono<FilePart> parametersFile,
             @Parameter(name = "specificTreatment",
@@ -65,8 +64,7 @@ public class IntegrationHouseholdController {
                         return Mono.error(new IllegalArgumentException(
                                 "Invalid household parameters. Context is 'BUSINESS' in parameters given."));
                     // Mode
-                    enoParameters.getSelectedModes().clear();
-                    enoParameters.getSelectedModes().add(mode);
+                    enoParameters.setModeParameter(modeParameter);
                     return Mono.just(enoParameters);
                 })
                 .flatMap(enoParameters -> controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessings));
