@@ -23,45 +23,37 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 class DDIToLunaticTest {
 
-    private final ClassLoader classLoader = this.getClass().getClassLoader();
-    private EnoParameters enoParameters;
-
-    @BeforeEach
-    void setupParameters() {
-        enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
-    }
-
     @ParameterizedTest
     @ValueSource(strings = {
-            "lhpz68wp",
             "l20g2ba7",
             //"l5v3spn0",
             "kx0a2hn8",
-            //"kzy5kbtl",
+            "kzy5kbtl",
             //"l8x6fhtd",
             //"ldodefpq",
+            "lhpz68wp",
             "li49zxju"
     })
-    @DisplayName("Many questionnaires, non null output")
-    void testAll(String questionnaireId) throws DDIParsingException {
+    @DisplayName("Large questionnaires, DDI to Lunatic, transformation should succeed")
+    void transformQuestionnaire_nonNullOutput(String questionnaireId) throws DDIParsingException {
         //
         Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
-                classLoader.getResourceAsStream("end-to-end/ddi/ddi-"+questionnaireId+".xml"),
-                enoParameters);
+                this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-" +questionnaireId+".xml"),
+                EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
         //
         assertNotNull(lunaticQuestionnaire);
     }
 
     @Nested
-    @DisplayName("DDI 'l20g2ba7' to Lunatic (acceptance test)")
-    class AcceptanceTest {
+    @DisplayName("DDI to Lunatic, functional test with 'l20g2ba7'")
+    class FunctionalTest1 {
 
-        static Questionnaire lunaticQuestionnaire;
+        private static Questionnaire lunaticQuestionnaire;
 
         @BeforeAll
         static void mapLunaticQuestionnaire() throws DDIParsingException {
             lunaticQuestionnaire = DDIToLunatic.transform(
-                    AcceptanceTest.class.getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml"),
+                    DDIToLunaticTest.class.getClassLoader().getResourceAsStream("functional/ddi/ddi-l20g2ba7.xml"),
                     EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
         }
 
@@ -102,4 +94,5 @@ class DDIToLunaticTest {
         }
 
     }
+
 }

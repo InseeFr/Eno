@@ -428,7 +428,7 @@ class LunaticLoopResolutionTest {
         void largeCoverageQuestionnaire() throws DDIParsingException {
             // Given
             EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
-                    this.getClass().getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml"),
+                    this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-l20g2ba7.xml"),
                     EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
             Questionnaire lunaticQuestionnaire = new Questionnaire();
             LunaticMapper lunaticMapper = new LunaticMapper();

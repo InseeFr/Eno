@@ -17,7 +17,7 @@ class EnoIndexTest {
     void indexingDoneByMapper() throws IOException, DDIParsingException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIDeserializer.deserialize(
-                this.getClass().getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml"));
+                this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-l20g2ba7.xml"));
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         //
         DDIMapper ddiMapper = new DDIMapper();
