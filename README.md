@@ -32,9 +32,9 @@ JDK 17+ is required.
 
 ### Make sustainable clones!
 
-The V3 project is developed on the `v3-develop` orphan branch. If you are not interested in the legacy xslt version of Eno, you can clone the project like this:
+The base branch for Eno "Java" is the `v3-main` orphan branch. If you are not interested in the legacy xslt version of Eno, you can clone the project like this:
 
-`git clone --no-tags --single-branch --depth=1  --branch=v3-develop https://github.com/InseeFr/Eno.git`
+`git clone --no-tags --single-branch --depth=1  --branch=v3-main https://github.com/InseeFr/Eno.git`
 
 ### Gradle
 
