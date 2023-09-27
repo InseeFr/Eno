@@ -1,5 +1,4 @@
-<style>img.logo {float: right;}</style>
-<img class="logo" src="logo/eno-logo.png" alt="Eno logo"/>
+<img style="float: right;" src="logo/eno-logo.png" alt="Eno logo"/>
 
 # Eno
 
