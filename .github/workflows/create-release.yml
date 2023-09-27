@@ -76,39 +76,48 @@ jobs:
           name: eno-ws-jar
           path: ./eno-ws/build/libs/*.jar
 
-  create-release:
+  create-tag:
     needs: [ check-version, build-sources ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: rickstaa/action-create-tag@v1
         with:
-          ref: ${{ github.ref }}
-          fetch-depth: 0
+          tag: ${{ needs.check-version.outputs.release-version }}
 
-      - name: Get previous final release tag
-        id: previousTag
-        run: echo "previousTag=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | grep "^[0-9]\+\.[0-9]\+\.[0-9]\+$" | tail -1)" >> $GITHUB_OUTPUT
-
-      - name: Create release note
-        id: changelog
-        uses: requarks/changelog-action@v1
-        with:
-          fromTag: ${{ github.sha }}
-          toTag: ${{ steps.previousTag.outputs.previousTag}}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          writeToFile: false
-
-      - uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ needs.check-version.outputs.release-version }}
-          target_commitish: ${{ github.head_ref || github.ref }}
-          name: ${{ needs.check-version.outputs.release-version }}
-          body: ${{steps.changelog.outputs.changes}}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#  create-release: # replaced with create-tag while v3 is not the main branch
+#    needs: [ check-version, build-sources ]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#        with:
+#          ref: ${{ github.ref }}
+#          fetch-depth: 0
+#
+#      - name: Get previous final release tag
+#        id: previousTag
+#        run: echo "previousTag=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | grep "^[0-9]\+\.[0-9]\+\.[0-9]\+$" | tail -1)" >> $GITHUB_OUTPUT
+#
+#      - name: Create release note
+#        id: changelog
+#        uses: requarks/changelog-action@v1
+#        with:
+#          fromTag: ${{ github.sha }}
+#          toTag: ${{ steps.previousTag.outputs.previousTag}}
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#          writeToFile: false
+#
+#      - uses: softprops/action-gh-release@v1
+#        with:
+#          tag_name: ${{ needs.check-version.outputs.release-version }}
+#          target_commitish: ${{ github.head_ref || github.ref }}
+#          name: ${{ needs.check-version.outputs.release-version }}
+#          body: ${{steps.changelog.outputs.changes}}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish-docker:
-    needs: [ check-version, create-release ]
+    needs: [ check-version, create-tag ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
