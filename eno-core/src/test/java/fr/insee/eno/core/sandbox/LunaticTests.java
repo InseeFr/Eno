@@ -60,7 +60,7 @@ class LunaticTests {
     void lunaticDeserializer_doesNotWork() {
         JsonDeserializer jsonDeserializer = new JsonDeserializer();
         assertThrows(Exception.class, () -> jsonDeserializer.deserialize(this.getClass().getClassLoader()
-                        .getResourceAsStream("end-to-end/lunatic/lunatic-l20g2ba7.json")));
+                        .getResourceAsStream("functional/lunatic/lunatic-l20g2ba7.json")));
     }
 
 }

@@ -33,7 +33,7 @@ class DDIToEnoTest {
     void transformQuestionnaire_nonNullOutput(String questionnaireId) throws DDIParsingException {
         //
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
-                this.getClass().getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-"+questionnaireId+".xml"),
+                this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-" +questionnaireId+".xml"),
                 EnoParameters.of(EnoParameters.Context.DEFAULT, ModeParameter.PROCESS));
         //
         assertNotNull(enoQuestionnaire);
@@ -58,7 +58,7 @@ class DDIToEnoTest {
             enoParameters.setResponseTimeQuestion(false);
             //
             enoQuestionnaire = DDIToEno.transform(
-                    DDIToEnoTest.class.getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml"),
+                    DDIToEnoTest.class.getClassLoader().getResourceAsStream("functional/ddi/ddi-l20g2ba7.xml"),
                     enoParameters);
         }
 

@@ -28,7 +28,7 @@ class PoguesDeserializerTest {
     void deserialize_largeQuestionnaire() throws URISyntaxException, PoguesDeserializationException {
         //
         URL testPoguesFileUrl = this.getClass().getClassLoader().getResource(
-                "end-to-end/pogues/pogues-l20g2ba7.json");
+                "functional/pogues/pogues-l20g2ba7.json");
         assert testPoguesFileUrl != null;
         //
         Questionnaire poguesQuestionnaire = PoguesDeserializer.deserialize(testPoguesFileUrl);

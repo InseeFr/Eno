@@ -14,7 +14,7 @@ class DDIIndexTest {
     void indexSandboxDDI() throws DDIParsingException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIDeserializer.deserialize(
-                DDIIndexTest.class.getClassLoader().getResource("end-to-end/ddi/ddi-l8x6fhtd.xml"));
+                DDIIndexTest.class.getClassLoader().getResource("functional/ddi/ddi-l8x6fhtd.xml"));
         //
         DDIIndex ddiIndex = new DDIIndex();
         ddiIndex.indexDDI(ddiInstanceDocument);

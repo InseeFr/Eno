@@ -38,7 +38,7 @@ class DDIToLunaticTest {
     void transformQuestionnaire_nonNullOutput(String questionnaireId) throws DDIParsingException {
         //
         Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
-                this.getClass().getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-"+questionnaireId+".xml"),
+                this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-" +questionnaireId+".xml"),
                 EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
         //
         assertNotNull(lunaticQuestionnaire);
@@ -53,7 +53,7 @@ class DDIToLunaticTest {
         @BeforeAll
         static void mapLunaticQuestionnaire() throws DDIParsingException {
             lunaticQuestionnaire = DDIToLunatic.transform(
-                    DDIToLunaticTest.class.getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml"),
+                    DDIToLunaticTest.class.getClassLoader().getResourceAsStream("functional/ddi/ddi-l20g2ba7.xml"),
                     EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
         }
 

@@ -33,7 +33,7 @@ class DDITests {
         //
         DDIIndex ddiIndex = new DDIIndex();
         ddiIndex.indexDDI(DDIDeserializer.deserialize(
-                this.getClass().getClassLoader().getResource("end-to-end/ddi/ddi-l20g2ba7.xml")));
+                this.getClass().getClassLoader().getResource("functional/ddi/ddi-l20g2ba7.xml")));
         //
         QuestionGridType tableQuestionGrid = (QuestionGridType) ddiIndex.get("l8u8d67h");
         assertNotNull(tableQuestionGrid);

@@ -175,7 +175,7 @@ class DDIResolveSequencesStructureTest {
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();
             ddiMapper.mapDDI(DDIDeserializer.deserialize(
-                    IntegrationTests.class.getClassLoader().getResourceAsStream("end-to-end/ddi/ddi-l20g2ba7.xml")),
+                    IntegrationTests.class.getClassLoader().getResourceAsStream("functional/ddi/ddi-l20g2ba7.xml")),
                     enoQuestionnaire);
             // When
             DDIResolveSequencesStructure ddiResolveSequencesStructure = new DDIResolveSequencesStructure();
