@@ -10,7 +10,7 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
-    target-branch: "develop"
+    target-branch: "main"
     ignore:
       - dependency-name: "org.eclipse.persistence:*"
         update-types: ["version-update:semver-major"] # ignore new major versions of eclipse dependencies for now
@@ -19,7 +19,7 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
-    target-branch: "v3-develop"
+    target-branch: "v3-main"
 
   - package-ecosystem: "github-actions"
     # Workflow files stored in the
