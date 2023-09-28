@@ -1,0 +1,401 @@
+{
+  "id": "lmyvhgys",
+  "modele": "ENOLOOPEXCEPT",
+  "enoCoreVersion": "2.4.9",
+  "lunaticModelVersion": "2.3.4",
+  "generatingDate": "25-09-2023 13:10:05",
+  "missing": false,
+  "pagination": "question",
+  "maxPage": "6",
+  "label": {
+    "value": "Eno - Loop with 'except'",
+    "type": "VTL|MD"
+  },
+  "components": [
+    {
+      "id": "lmyvwhde",
+      "componentType": "Sequence",
+      "page": "1",
+      "label": {
+        "value": "\"I - \" || \"Sequence 1\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lmyvwhde",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Sequence 1\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "lmyvnjlh",
+      "componentType": "Input",
+      "mandatory": false,
+      "page": "2",
+      "maxLength": 249,
+      "label": {
+        "value": "\"➡ \" || \"Question 1\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lmyvwhde",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Sequence 1\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q1"
+      ],
+      "response": {
+        "name": "Q1"
+      }
+    },
+    {
+      "id": "lmyvqn54",
+      "componentType": "Loop",
+      "page": "3",
+      "depth": 1,
+      "paginatedLoop": false,
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "AGE"
+      ],
+      "lines": {
+        "min": {
+          "value": "1",
+          "type": "VTL"
+        },
+        "max": {
+          "value": "5",
+          "type": "VTL"
+        }
+      },
+      "components": [
+        {
+          "id": "lmyvhcbn",
+          "componentType": "Sequence",
+          "page": "3",
+          "label": {
+            "value": "\"II - \" || \"Sequence with loop\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "lmyvhcbn",
+              "page": "3",
+              "label": {
+                "value": "\"II - \" || \"Sequence with loop\"",
+                "type": "VTL|MD"
+              }
+            }
+          }
+        },
+        {
+          "id": "lmyvkhm5",
+          "componentType": "InputNumber",
+          "mandatory": true,
+          "page": "3",
+          "min": 0,
+          "max": 120,
+          "decimals": 0,
+          "label": {
+            "value": "\"➡ \" || \"Question 2: How old are you?\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "controls": [
+            {
+              "id": "lmyvkhm5-format-borne-inf-sup",
+              "typeOfControl": "FORMAT",
+              "criticality": "ERROR",
+              "control": {
+                "value": "not(not(isnull(AGE)) and (0>AGE or 120<AGE))",
+                "type": "VTL"
+              },
+              "errorMessage": {
+                "value": "\" La valeur doit être comprise entre 0 et 120.\"",
+                "type": "VTL|MD"
+              }
+            },
+            {
+              "id": "lmyvkhm5-format-decimal",
+              "typeOfControl": "FORMAT",
+              "criticality": "ERROR",
+              "control": {
+                "value": "not(not(isnull(AGE))  and round(AGE,0)<>AGE)",
+                "type": "VTL"
+              },
+              "errorMessage": {
+                "value": "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+                "type": "VTL|MD"
+              }
+            }
+          ],
+          "hierarchy": {
+            "sequence": {
+              "id": "lmyvhcbn",
+              "page": "3",
+              "label": {
+                "value": "\"II - \" || \"Sequence with loop\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "AGE"
+          ],
+          "unit": "ans",
+          "response": {
+            "name": "AGE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "lmywa9tg",
+      "componentType": "Loop",
+      "page": "4",
+      "maxPage": "2",
+      "depth": 1,
+      "paginatedLoop": true,
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "AGE",
+        "Q3"
+      ],
+      "loopDependencies": [
+        "AGE"
+      ],
+      "components": [
+        {
+          "id": "lmyvx1tz",
+          "componentType": "Sequence",
+          "page": "4.1",
+          "label": {
+            "value": "\"III - \" || \"Sequence with linked loop\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "(not(nvl(AGE, 0) < 18))",
+            "type": "VTL",
+            "bindingDependencies": [
+              "AGE"
+            ]
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "lmyvx1tz",
+              "page": "4.1",
+              "label": {
+                "value": "\"III - \" || \"Sequence with linked loop\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "AGE"
+          ]
+        },
+        {
+          "id": "lmyvnrgq",
+          "componentType": "CheckboxBoolean",
+          "mandatory": false,
+          "page": "4.2",
+          "label": {
+            "value": "\"➡ \" || \"Question 3: only adults are asked (age: \" || cast(AGE, string) || \")\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "(not(nvl(AGE, 0) < 18))",
+            "type": "VTL",
+            "bindingDependencies": [
+              "AGE"
+            ]
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "lmyvx1tz",
+              "page": "4.1",
+              "label": {
+                "value": "\"III - \" || \"Sequence with linked loop\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "AGE",
+            "Q3"
+          ],
+          "response": {
+            "name": "Q3"
+          }
+        }
+      ],
+      "iterations": {
+        "value": "count(AGE)",
+        "type": "VTL"
+      }
+    },
+    {
+      "id": "lmyw4apf",
+      "componentType": "Sequence",
+      "page": "5",
+      "label": {
+        "value": "\"IV - \" || \"Last sequence\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lmyw4apf",
+          "page": "5",
+          "label": {
+            "value": "\"IV - \" || \"Last sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "lmyw3vc0",
+      "componentType": "CheckboxBoolean",
+      "mandatory": false,
+      "page": "6",
+      "label": {
+        "value": "\"➡ \" || \"Last question\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lmyw4apf",
+          "page": "5",
+          "label": {
+            "value": "\"IV - \" || \"Last sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q_LAST"
+      ],
+      "response": {
+        "name": "Q_LAST"
+      }
+    }
+  ],
+  "variables": [
+    {
+      "variableType": "COLLECTED",
+      "name": "Q1",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "AGE",
+      "values": {
+        "PREVIOUS": [
+          null
+        ],
+        "COLLECTED": [
+          null
+        ],
+        "FORCED": [
+          null
+        ],
+        "EDITED": [
+          null
+        ],
+        "INPUTED": [
+          null
+        ]
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q3",
+      "values": {
+        "PREVIOUS": [
+          null
+        ],
+        "COLLECTED": [
+          null
+        ],
+        "FORCED": [
+          null
+        ],
+        "EDITED": [
+          null
+        ],
+        "INPUTED": [
+          null
+        ]
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q_LAST",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    }
+  ],
+  "cleaning": {
+    "AGE": {
+      "Q3": "(not(nvl(AGE, 0) < 18))"
+    }
+  },
+  "resizing": {
+    "AGE": {
+      "size": "count(AGE)",
+      "variables": [
+        "Q3"
+      ]
+    }
+  }
+}

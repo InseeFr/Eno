@@ -1,17 +1,20 @@
 package fr.insee.eno.ws.controller;
 
-import fr.insee.eno.core.annotations.Format;
-import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.legacy.parameters.*;
+import fr.insee.eno.treatments.LunaticPostProcessing;
 import fr.insee.eno.ws.PassePlat;
 import fr.insee.eno.ws.controller.utils.V3ControllerUtils;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.FilePart;
+import org.springframework.http.codec.multipart.Part;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Controller;
@@ -113,8 +116,10 @@ public class GenerationController {
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Mono<ResponseEntity<String>> generateLunaticJsonQuestionnaire(
 			@RequestPart(value="in") Mono<FilePart> ddiFile,
-			@RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
-			@PathVariable Mode mode,
+			@Parameter(name = "specificTreatment",
+					schema = @Schema(type="string", format="binary"))
+			@RequestPart(value="specificTreatment", required=false) Mono<Part> specificTreatment,
+			@PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter,
 			@RequestParam(value="context") EnoParameters.Context context,
 			@RequestParam(value="IdentificationQuestion", required=false) boolean identificationQuestion,
 			@RequestParam(value="ResponseTimeQuestion", required=false) boolean endQuestionResponseTime,
@@ -127,16 +132,20 @@ public class GenerationController {
 			@RequestParam(value="QuestNum") BrowsingEnum questNum,
 			@RequestParam(value="SeqNum") boolean seqNum,
 			@RequestParam(value="PreQuestSymbol") boolean preQuestSymbol,
-			@RequestParam(value="Pagination", required=false, defaultValue="NONE") Pagination pagination,
-			@RequestParam(value="includeUnusedCalculatedVariables") boolean unusedVars) {
+			@RequestParam(value="Pagination", required=false, defaultValue="NONE") Pagination pagination) {
+
+		/*
+           specificTreatment parameter is a part instead of a FilePart. This workaround is used to make swagger work
+           when empty value is checked for this input file on the endpoint.
+           When empty value is checked, swagger send no content-type nor filename for this multipart file. In this case,
+           Spring considers having a DefaultFormField object instead of FilePart and exceptions is thrown
+           There is no way at this moment to disable the allow empty value when filed is not required.
+         */
+		Mono<LunaticPostProcessing> lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
+
 		//
-		if (specificTreatment != null) {
-			log.warn("Specific treatments has changed in Eno v3. File given will be ignored.");
-		}
+		EnoParameters parameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
 		//
-		EnoParameters parameters = new EnoParameters(context, Format.LUNATIC);
-		parameters.getSelectedModes().clear();
-		parameters.getSelectedModes().add(mode);
 		parameters.setIdentificationQuestion(identificationQuestion);
 		parameters.setResponseTimeQuestion(endQuestionResponseTime);
 		parameters.setIdentificationQuestion(endQuestionCommentQuestion);
@@ -170,10 +179,8 @@ public class GenerationController {
 			}
 			case QUESTION -> parameters.setLunaticPaginationMode(EnoParameters.LunaticPaginationMode.QUESTION);
 		}
-		parameters.setUnusedVariables(unusedVars);
-		log.info("'Unused variables' feature is not implemented in Eno v3.");
 		//
-		return controllerUtils.ddiToLunaticJson(ddiFile, parameters);
+		return controllerUtils.ddiToLunaticJson(ddiFile, parameters, lunaticPostProcessings);
 	}
 
 	@Operation(

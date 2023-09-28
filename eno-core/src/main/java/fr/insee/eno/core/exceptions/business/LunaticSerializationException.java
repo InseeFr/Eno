@@ -1,6 +1,6 @@
 package fr.insee.eno.core.exceptions.business;
 
-public class LunaticSerializationException extends Exception {
+public class LunaticSerializationException extends RuntimeException {
 
     public LunaticSerializationException(String message) {
         super(message);

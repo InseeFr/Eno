@@ -1,0 +1,5902 @@
+{
+  "owner": "QTEST-LUNATIC-V2",
+  "FlowControl": [
+    {
+      "Description": "[MMASQUE] Sous module masqué par défaut, qui s'affiche lorsque l'individu coche majeur",
+      "Expression": "$MAJEUR$=\"1\"",
+      "id": "kzf8xhgq",
+      "IfTrue": "k6c9b3d2-k6c971cz"
+    },
+    {
+      "Description": "[MFILTRE] Sous module affiché par défaut, filtré si l'individu est un homme",
+      "Expression": "isnull($SEXE$) or $SEXE$=\"2\"",
+      "id": "kzf8tetc",
+      "IfTrue": "k6c971cz-k6c971cz"
+    },
+    {
+      "Description": "",
+      "Expression": "$CHECKBOX_AUTRE$  = \"3\"",
+      "id": "l8u82370",
+      "IfTrue": "l8u7iy3l-l8u7iy3l"
+    }
+  ],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "jfaz9kv9",
+        "jfazsitt",
+        "jfazww20",
+        "jfazwjyv",
+        "jfjhggkx",
+        "jfjh1ndk",
+        "jfjhb2pz",
+        "jfjtbqh1",
+        "jfjeuskc",
+        "jfjfckyw",
+        "k6c1guqb",
+        "k6c1che6",
+        "k6c0ysf3",
+        "k6c10exe",
+        "jfjeud07",
+        "jfjew4oy",
+        "jfkxouu8",
+        "jfjepz6i",
+        "k6gik8v5",
+        "k6cc6f8r",
+        "jfjero7b",
+        "l8u7iy3l",
+        "jfjfae9f",
+        "k6ccoydl",
+        "jfkxuinz",
+        "jfkxh2lf",
+        "jfkxybfe",
+        "jfkyw9o1",
+        "jfkyvabw",
+        "l8u8d67h",
+        "jfkzltkm",
+        "jfkzpexn",
+        "jfkzttm3",
+        "jfkzrwce",
+        "k6c6kj14",
+        "k3opdj10",
+        "k6c3ia6n",
+        "k6gjzooe",
+        "k3opeux2",
+        "k6c6mt9g",
+        "k6c36b39",
+        "k6c7mdcb",
+        "k6c9b3d2",
+        "k6c9pbc3",
+        "k6c971cz",
+        "k6c9al86",
+        "l262oeox",
+        "k6c75pyx",
+        "k6c748uq",
+        "k6c7oj3o",
+        "l8uaq797",
+        "k6ca0fk1",
+        "l8uav5ld",
+        "kzf9qrnj",
+        "k6ccf759",
+        "l8uan6l7",
+        "idendquest"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "kfs75lit",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "QTEST Questionnaire pour tests accessibilité"
+  ],
+  "Name": "RESPDESIGN",
+  "Variables": {
+    "Variable": [
+      {
+        "Formula": "2022 - cast(substr(cast($NAISSANCE$,string),1,4),integer)",
+        "Label": "AGE",
+        "id": "k6c6rte2",
+        "type": "CalculatedVariableType",
+        "Name": "AGEPRENOM",
+        "Datatype": {
+          "Maximum": "120",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Formula": "nvl($NBPERS$,0)  - nvl($NBENFANT$,0)",
+        "Label": "NB adultes",
+        "id": "k6c7a117",
+        "type": "CalculatedVariableType",
+        "Name": "NBADULTES",
+        "Datatype": {
+          "Maximum": "20",
+          "Minimum": "-20",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Formula": "if (nvl($SEXE$,\"\") = \"1\") then 'monsieur' else if (nvl($SEXE$,\"\") = \"2\") then 'madame' else \"\"",
+        "Label": "civilite",
+        "id": "kfs6pqtb",
+        "type": "CalculatedVariableType",
+        "Name": "CIVILITE",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 255
+        }
+      },
+      {
+        "Formula": "nvl($TABLEAU1A1M11$,0)+nvl($TABLEAU1A1M21$,0)+nvl($TABLEAU1A1M31$,0)+nvl($TABLEAU1A1M41$,0)+\r\nnvl($TABLEAU1A1M51$,0)",
+        "Label": "TOTAL_TAB",
+        "id": "l8ip18zi",
+        "type": "CalculatedVariableType",
+        "Name": "TOTAL_TAB",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "TEXTECOURT label",
+        "id": "k6gb7a3r",
+        "type": "CollectedVariableType",
+        "Name": "TEXTECOURT",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "5"
+        }
+      },
+      {
+        "Label": "TEXTELONG label",
+        "id": "k6gbg26h",
+        "type": "CollectedVariableType",
+        "Name": "TEXTELONG",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "500"
+        }
+      },
+      {
+        "Label": "INTEGER label",
+        "id": "k6c0vvj1",
+        "type": "CollectedVariableType",
+        "Name": "INTEGER",
+        "Datatype": {
+          "Maximum": "999999999",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "FLOAT label",
+        "id": "k6gi6ffr",
+        "type": "CollectedVariableType",
+        "Name": "FLOAT",
+        "Datatype": {
+          "Maximum": "1000",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": "2"
+        }
+      },
+      {
+        "Label": "UNIT label",
+        "id": "l8u915mp",
+        "type": "CollectedVariableType",
+        "Name": "UNIT",
+        "Datatype": {
+          "Maximum": "9999",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "http://id.insee.fr/unit/keuro",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "DATE label",
+        "id": "k6ce80ez",
+        "type": "CollectedVariableType",
+        "Name": "DATE",
+        "Datatype": {
+          "Maximum": "2020-03-31",
+          "Minimum": "2000-01-01",
+          "Format": "YYYY-MM-DD",
+          "typeName": "DATE",
+          "type": "DateDatatypeType"
+        }
+      },
+      {
+        "Label": "DATEMOIS label",
+        "id": "k6ce81li",
+        "type": "CollectedVariableType",
+        "Name": "DATEMOIS",
+        "Datatype": {
+          "Maximum": "2020-03",
+          "Minimum": "2000-01",
+          "Format": "YYYY-MM",
+          "typeName": "DATE",
+          "type": "DateDatatypeType"
+        }
+      },
+      {
+        "Label": "DATEANNEE label",
+        "id": "l8ionnab",
+        "type": "CollectedVariableType",
+        "Name": "DATEANNEE",
+        "Datatype": {
+          "Maximum": "2020",
+          "Minimum": "2000",
+          "Format": "YYYY",
+          "typeName": "DATE",
+          "type": "DateDatatypeType"
+        }
+      },
+      {
+        "Label": "DUREE label",
+        "id": "l8iorxhx",
+        "type": "CollectedVariableType",
+        "Name": "DUREE",
+        "Datatype": {
+          "Maximum": "PT200H59M",
+          "Format": "PTnHnM",
+          "typeName": "DURATION",
+          "type": "DurationDatatypeType"
+        }
+      },
+      {
+        "Label": "DUREEANNEEMOIS label",
+        "id": "l8iownbs",
+        "type": "CollectedVariableType",
+        "Name": "DUREEANNEEMOIS",
+        "Datatype": {
+          "Maximum": "P5Y11M",
+          "Format": "PnYnM",
+          "typeName": "DURATION",
+          "type": "DurationDatatypeType"
+        }
+      },
+      {
+        "Label": "BOOLEEN label",
+        "id": "l8iou30x",
+        "type": "CollectedVariableType",
+        "Name": "BOOLEEN",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "RADIO label",
+        "id": "l8ubg466",
+        "type": "CollectedVariableType",
+        "CodeListReference": "jfjevykh",
+        "Name": "RADIO",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "CHECKBOX label",
+        "id": "k6gjvhxv",
+        "type": "CollectedVariableType",
+        "CodeListReference": "jfjevykh",
+        "Name": "CHECKBOX",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "IMAGE label",
+        "id": "k6ccfe5l",
+        "type": "CollectedVariableType",
+        "CodeListReference": "k6cce8dh",
+        "Name": "IMAGE",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "CHECKBOX_AUTRE label",
+        "id": "l8u7fsws",
+        "type": "CollectedVariableType",
+        "CodeListReference": "k6c9vw7w",
+        "Name": "CHECKBOX_AUTRE",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "AUTRE_PRECISER label",
+        "id": "l8u7eo4z",
+        "type": "CollectedVariableType",
+        "Name": "AUTRE_PRECISER",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "DROPDOWN label",
+        "id": "l8ub6mlp",
+        "type": "CollectedVariableType",
+        "CodeListReference": "k6c1il3m",
+        "Name": "DROPDOWN",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "AUTOCOMPL label",
+        "id": "l9iekhrm",
+        "type": "CollectedVariableType",
+        "Name": "AUTOCOMPL",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "1 - code1",
+        "id": "k6c1k3u0",
+        "type": "CollectedVariableType",
+        "Name": "QCM_B1",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "2 - code2",
+        "id": "k6c1ny98",
+        "type": "CollectedVariableType",
+        "Name": "QCM_B2",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "3 - code3",
+        "id": "k6c1l1mx",
+        "type": "CollectedVariableType",
+        "Name": "QCM_B3",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "4 - code4",
+        "id": "k6c17pi6",
+        "type": "CollectedVariableType",
+        "Name": "QCM_B4",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "5 - code5",
+        "id": "k6c1h2q5",
+        "type": "CollectedVariableType",
+        "Name": "QCM_B5",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "6 - code6",
+        "id": "k6c1esnj",
+        "type": "CollectedVariableType",
+        "Name": "QCM_B6",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "7 - code7",
+        "id": "k6c18fmq",
+        "type": "CollectedVariableType",
+        "Name": "QCM_B7",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "8 - code8",
+        "id": "k6c1a4su",
+        "type": "CollectedVariableType",
+        "Name": "QCM_B8",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "1 - choix 1",
+        "id": "k6c1wilq",
+        "type": "CollectedVariableType",
+        "CodeListReference": "k6c27lmm",
+        "Name": "QCM_ON1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "2 - choix 2",
+        "id": "k6c2a5je",
+        "type": "CollectedVariableType",
+        "CodeListReference": "k6c27lmm",
+        "Name": "QCM_ON2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "3 - choix 3",
+        "id": "k6c26p41",
+        "type": "CollectedVariableType",
+        "CodeListReference": "k6c27lmm",
+        "Name": "QCM_ON3",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "4 - choix 4",
+        "id": "k6c1vo4l",
+        "type": "CollectedVariableType",
+        "CodeListReference": "k6c27lmm",
+        "Name": "QCM_ON4",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "5 - choix 5",
+        "id": "k6c263vm",
+        "type": "CollectedVariableType",
+        "CodeListReference": "k6c27lmm",
+        "Name": "QCM_ON5",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "1 - code1",
+        "id": "k6c15cph",
+        "type": "CollectedVariableType",
+        "CodeListReference": "jfkxtrih",
+        "Name": "QCM_ONR1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "2 - code2",
+        "id": "k6c1g2d5",
+        "type": "CollectedVariableType",
+        "CodeListReference": "jfkxtrih",
+        "Name": "QCM_ONR2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "3 - code3",
+        "id": "k6c1jrw7",
+        "type": "CollectedVariableType",
+        "CodeListReference": "jfkxtrih",
+        "Name": "QCM_ONR3",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "4 - code4",
+        "id": "k6c1crfs",
+        "type": "CollectedVariableType",
+        "CodeListReference": "jfkxtrih",
+        "Name": "QCM_ONR4",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "5 - code5",
+        "id": "k6c19sdw",
+        "type": "CollectedVariableType",
+        "CodeListReference": "jfkxtrih",
+        "Name": "QCM_ONR5",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "6 - code6",
+        "id": "k6c1cdqm",
+        "type": "CollectedVariableType",
+        "CodeListReference": "jfkxtrih",
+        "Name": "QCM_ONR6",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "7 - code7",
+        "id": "k6c1ctpx",
+        "type": "CollectedVariableType",
+        "CodeListReference": "jfkxtrih",
+        "Name": "QCM_ONR7",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "8 - code8",
+        "id": "k6c15toy",
+        "type": "CollectedVariableType",
+        "CodeListReference": "jfkxtrih",
+        "Name": "QCM_ONR8",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "\"moins de 15\"-\"Nombre de personnes, entre 0 et 20\"",
+        "id": "l8u8cwms",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAUTIC11",
+        "Datatype": {
+          "Maximum": "20",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "\"de 16 à 17 ans\"-\"Nombre de personnes, entre 0 et 20\"",
+        "id": "l8u83d29",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAUTIC21",
+        "Datatype": {
+          "Maximum": "20",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "\"de 18 à 19 ans\"-\"Nombre de personnes, entre 0 et 20\"",
+        "id": "l8u8aqat",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAUTIC31",
+        "Datatype": {
+          "Maximum": "20",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "\"20 et plus\"-\"Nombre de personnes, entre 0 et 20\"",
+        "id": "l8u86vzj",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAUTIC41",
+        "Datatype": {
+          "Maximum": "20",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "choix 1-Mesure de type numérique",
+        "id": "k6c9yoih",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1A1M11",
+        "Datatype": {
+          "Maximum": "999",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "choix 2-Mesure de type numérique",
+        "id": "k6ca1ru2",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1A1M21",
+        "Datatype": {
+          "Maximum": "999",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "[choix 3](. \"1 2 3 soleil\")-Mesure de type numérique",
+        "id": "k6c9xlf4",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1A1M31",
+        "Datatype": {
+          "Maximum": "999",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "choix 4-Mesure de type numérique",
+        "id": "k6ca8qzy",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1A1M41",
+        "Datatype": {
+          "Maximum": "999",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "choix 5-Mesure de type numérique",
+        "id": "k6ca9ufk",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1A1M51",
+        "Datatype": {
+          "Maximum": "999",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "choix 1-Mesure de type numérique",
+        "id": "k6cablut",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1A3M11",
+        "Datatype": {
+          "Maximum": "999",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "choix 2-Mesure de type numérique",
+        "id": "k6ca0e5y",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1A3M21",
+        "Datatype": {
+          "Maximum": "999",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "[choix 3](. \"1 2 3 soleil\")-Mesure de type numérique",
+        "id": "k6ca2jtf",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1A3M31",
+        "Datatype": {
+          "Maximum": "999",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "choix 4-Mesure de type numérique",
+        "id": "k6ca4lh3",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1A3M41",
+        "Datatype": {
+          "Maximum": "999",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "choix 5-Mesure de type numérique",
+        "id": "k6c9vzuj",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1A3M51",
+        "Datatype": {
+          "Maximum": "999",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "choix 1-Mesure de type liste",
+        "id": "k6ca6p99",
+        "type": "CollectedVariableType",
+        "CodeListReference": "jfkxtrih",
+        "Name": "TABLEAU1A3M12",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "choix 2-Mesure de type liste",
+        "id": "k6c9t1w6",
+        "type": "CollectedVariableType",
+        "CodeListReference": "jfkxtrih",
+        "Name": "TABLEAU1A3M22",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "[choix 3](. \"1 2 3 soleil\")-Mesure de type liste",
+        "id": "k6ca13ju",
+        "type": "CollectedVariableType",
+        "CodeListReference": "jfkxtrih",
+        "Name": "TABLEAU1A3M32",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "choix 4-Mesure de type liste",
+        "id": "k6ca38ur",
+        "type": "CollectedVariableType",
+        "CodeListReference": "jfkxtrih",
+        "Name": "TABLEAU1A3M42",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "choix 5-Mesure de type liste",
+        "id": "k6c9tl08",
+        "type": "CollectedVariableType",
+        "CodeListReference": "jfkxtrih",
+        "Name": "TABLEAU1A3M52",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "choix 1-Mesure de type texte",
+        "id": "k6c9wb64",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1A3M13",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "25"
+        }
+      },
+      {
+        "Label": "choix 2-Mesure de type texte",
+        "id": "k6c9zvmm",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1A3M23",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "25"
+        }
+      },
+      {
+        "Label": "[choix 3](. \"1 2 3 soleil\")-Mesure de type texte",
+        "id": "k6ca85te",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1A3M33",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "25"
+        }
+      },
+      {
+        "Label": "choix 4-Mesure de type texte",
+        "id": "k6ca0tyw",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1A3M43",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "25"
+        }
+      },
+      {
+        "Label": "choix 5-Mesure de type texte",
+        "id": "k6ca98ho",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1A3M53",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "25"
+        }
+      },
+      {
+        "Label": "code1 : le libellé du code 1 contient du gras -choix 1-répartition",
+        "id": "k6gb25z0",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A11",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code2 le libellé du code 2 contient de l'italique -choix 1-répartition",
+        "id": "k6gbgeeg",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A21",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code3 : le libellé du code 3 contient du gras et de l'italique-choix 1-répartition",
+        "id": "k6gaxtpy",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A31",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code4 : le libellé du code 4 contient du gras italique-choix 1-répartition",
+        "id": "k6gb8i7c",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A41",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code5 : le libellé du code 5 contient des retours à la ligne \n\nligne 2\n\nligne 3-choix 1-répartition",
+        "id": "k6gaz0zn",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A51",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code6-choix 1-répartition",
+        "id": "k6gbgx8q",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A61",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "[code7](. \"My name is Bond, James Bond\") le code 7 porte une infobulle-choix 1-répartition",
+        "id": "k6gaxo5h",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A71",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code8-choix 1-répartition",
+        "id": "k6gb66qp",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A81",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code1 : le libellé du code 1 contient du gras -choix 2-répartition",
+        "id": "k6gb94dz",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A12",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code2 le libellé du code 2 contient de l'italique -choix 2-répartition",
+        "id": "k6gb3rsu",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A22",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code3 : le libellé du code 3 contient du gras et de l'italique-choix 2-répartition",
+        "id": "k6gbd5l4",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A32",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code4 : le libellé du code 4 contient du gras italique-choix 2-répartition",
+        "id": "k6gb31wg",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A42",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code5 : le libellé du code 5 contient des retours à la ligne \n\nligne 2\n\nligne 3-choix 2-répartition",
+        "id": "k6gbfu8i",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A52",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code6-choix 2-répartition",
+        "id": "k6gay2l8",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A62",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "[code7](. \"My name is Bond, James Bond\") le code 7 porte une infobulle-choix 2-répartition",
+        "id": "k6gbahfm",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A72",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code8-choix 2-répartition",
+        "id": "k6gawvio",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A82",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code1 : le libellé du code 1 contient du gras -[choix 3](. \"1 2 3 soleil\")-répartition",
+        "id": "k6gbh5or",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A13",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code2 le libellé du code 2 contient de l'italique -[choix 3](. \"1 2 3 soleil\")-répartition",
+        "id": "k6gb3l05",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A23",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code3 : le libellé du code 3 contient du gras et de l'italique-[choix 3](. \"1 2 3 soleil\")-répartition",
+        "id": "k6gb6ejg",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A33",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code4 : le libellé du code 4 contient du gras italique-[choix 3](. \"1 2 3 soleil\")-répartition",
+        "id": "k6gbc6it",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A43",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code5 : le libellé du code 5 contient des retours à la ligne \n\nligne 2\n\nligne 3-[choix 3](. \"1 2 3 soleil\")-répartition",
+        "id": "k6gazldv",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A53",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code6-[choix 3](. \"1 2 3 soleil\")-répartition",
+        "id": "k6gaxf6z",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A63",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "[code7](. \"My name is Bond, James Bond\") le code 7 porte une infobulle-[choix 3](. \"1 2 3 soleil\")-répartition",
+        "id": "k6gbbppr",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A73",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code8-[choix 3](. \"1 2 3 soleil\")-répartition",
+        "id": "k6gb28dm",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A83",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code1 : le libellé du code 1 contient du gras -choix 4-répartition",
+        "id": "k6gb65n8",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A14",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code2 le libellé du code 2 contient de l'italique -choix 4-répartition",
+        "id": "k6gb4xdv",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A24",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code3 : le libellé du code 3 contient du gras et de l'italique-choix 4-répartition",
+        "id": "k6gb4gfy",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A34",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code4 : le libellé du code 4 contient du gras italique-choix 4-répartition",
+        "id": "k6gbcyg1",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A44",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code5 : le libellé du code 5 contient des retours à la ligne \n\nligne 2\n\nligne 3-choix 4-répartition",
+        "id": "k6gb11jv",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A54",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code6-choix 4-répartition",
+        "id": "k6gbfnex",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A64",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "[code7](. \"My name is Bond, James Bond\") le code 7 porte une infobulle-choix 4-répartition",
+        "id": "k6gaxys7",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A74",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code8-choix 4-répartition",
+        "id": "k6gb7swd",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A84",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code1 : le libellé du code 1 contient du gras -choix 5-répartition",
+        "id": "k6gb2yw1",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A15",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code2 le libellé du code 2 contient de l'italique -choix 5-répartition",
+        "id": "k6gb9zec",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A25",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code3 : le libellé du code 3 contient du gras et de l'italique-choix 5-répartition",
+        "id": "k6gbfrd2",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A35",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code4 : le libellé du code 4 contient du gras italique-choix 5-répartition",
+        "id": "k6gawywh",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A45",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code5 : le libellé du code 5 contient des retours à la ligne \n\nligne 2\n\nligne 3-choix 5-répartition",
+        "id": "k6gawznt",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A55",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code6-choix 5-répartition",
+        "id": "k6gb09uy",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A65",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "[code7](. \"My name is Bond, James Bond\") le code 7 porte une infobulle-choix 5-répartition",
+        "id": "k6gb7ynx",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A75",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code8-choix 5-répartition",
+        "id": "k6gaw5zi",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU2A85",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code 1 1-Mesure de type numérique avec unité",
+        "id": "k6ca5mt1",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1AH1M11",
+        "Datatype": {
+          "Maximum": "999",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "http://id.insee.fr/unit/keuro",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code 1 2-Mesure de type numérique avec unité",
+        "id": "k6ca9vpx",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1AH1M21",
+        "Datatype": {
+          "Maximum": "999",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "http://id.insee.fr/unit/keuro",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code 2 1-Mesure de type numérique avec unité",
+        "id": "k6ca3eg3",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1AH1M31",
+        "Datatype": {
+          "Maximum": "999",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "http://id.insee.fr/unit/keuro",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code 2 2-Mesure de type numérique avec unité",
+        "id": "k6c9vgff",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1AH1M41",
+        "Datatype": {
+          "Maximum": "999",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "http://id.insee.fr/unit/keuro",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code 2 3-Mesure de type numérique avec unité",
+        "id": "k6ca49wv",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1AH1M51",
+        "Datatype": {
+          "Maximum": "999",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "http://id.insee.fr/unit/keuro",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "code 3-Mesure de type numérique avec unité",
+        "id": "k6ca5xg8",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAU1AH1M61",
+        "Datatype": {
+          "Maximum": "999",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "http://id.insee.fr/unit/keuro",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Scope": "k6c6kj14",
+        "Label": "Mesure de type texte",
+        "id": "kzf8aac2",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAUDYN1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "25"
+        }
+      },
+      {
+        "Scope": "k6c6kj14",
+        "Label": "Mesure de type numérique unité",
+        "id": "kzf8cnac",
+        "type": "CollectedVariableType",
+        "Name": "TABLEAUDYN2",
+        "Datatype": {
+          "Maximum": "120",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "http://id.insee.fr/unit/keuro",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "PRENOM label",
+        "id": "l8ioso1g",
+        "type": "CollectedVariableType",
+        "Name": "PRENOM",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "25"
+        }
+      },
+      {
+        "Label": "EMAIL label",
+        "id": "k6gjrmq4",
+        "type": "CollectedVariableType",
+        "Name": "EMAIL",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "80"
+        }
+      },
+      {
+        "Label": "MAJEUR label",
+        "id": "k6c6k1tu",
+        "type": "CollectedVariableType",
+        "CodeListReference": "jfkxtrih",
+        "Name": "MAJEUR",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "NAISSANCE label",
+        "id": "k6c73rl5",
+        "type": "CollectedVariableType",
+        "Name": "NAISSANCE",
+        "Datatype": {
+          "Maximum": "2020",
+          "Minimum": "1900",
+          "Format": "YYYY",
+          "typeName": "DATE",
+          "type": "DateDatatypeType"
+        }
+      },
+      {
+        "Label": "SEXE label",
+        "id": "k6c77e0d",
+        "type": "CollectedVariableType",
+        "CodeListReference": "k6c79ub1",
+        "Name": "SEXE",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "QMASQUEE label",
+        "id": "k6hx5t9w",
+        "type": "CollectedVariableType",
+        "Name": "QMASQUEE",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 255
+        }
+      },
+      {
+        "Label": "QFILTRE label",
+        "id": "k6c9bf1r",
+        "type": "CollectedVariableType",
+        "Name": "QFILTRE",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 255
+        }
+      },
+      {
+        "Label": "NBPERS label",
+        "id": "k6c7uu2e",
+        "type": "CollectedVariableType",
+        "Name": "NBPERS",
+        "Datatype": {
+          "Maximum": "20",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "NBENFANT label",
+        "id": "k6cbkeju",
+        "type": "CollectedVariableType",
+        "Name": "NBENFANT",
+        "Datatype": {
+          "Maximum": "20",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Scope": "l8uayz0h",
+        "Label": "THL_PRENOM label",
+        "id": "l8uahgew",
+        "type": "CollectedVariableType",
+        "Name": "THL_PRENOM",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "l8uayz0h",
+        "Label": "THL_AGE label",
+        "id": "l8uay6c9",
+        "type": "CollectedVariableType",
+        "Name": "THL_AGE",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "http://id.insee.fr/unit/annee",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Scope": "l8uayz0h",
+        "Label": "TAILLE label",
+        "id": "l8uan3ph",
+        "type": "CollectedVariableType",
+        "Name": "TAILLE",
+        "Datatype": {
+          "Maximum": "300",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Fri Oct 21 2022 13:08:07 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "esa-dc-2018",
+      "uri": "http://ddi:fr.insee:DataCollection.esa-dc-2018",
+      "Name": "Enquête sectorielle annuelle 2018"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "l20g2ba7",
+  "TargetMode": [
+    "CAWI",
+    "CAPI",
+    "CATI",
+    "PAPI"
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "Label": "L_TEST_QCU_8",
+        "id": "jfjevykh",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "code1 : le libellé du code 1 contient **du gras** ",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "code2 le libellé du code 2 contient *de l'italique* ",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "code3 : le libellé du code 3 contient **du gras** et *de l'italique*",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "code4 : le libellé du code 4 contient du ***gras italique***",
+            "Value": "4"
+          },
+          {
+            "Parent": "",
+            "Label": "code5 : le libellé du code 5 contient des retours à la ligne \n\nligne 2\n\nligne 3",
+            "Value": "5"
+          },
+          {
+            "Parent": "",
+            "Label": "code6",
+            "Value": "6"
+          },
+          {
+            "Parent": "",
+            "Label": "[code7](. \"My name is Bond, James Bond\") le code 7 porte une infobulle",
+            "Value": "7"
+          },
+          {
+            "Parent": "",
+            "Label": "code8",
+            "Value": "8"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "L_image",
+        "id": "k6cce8dh",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "soleil",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"&#x2798;\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"&#x279E;\"",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "orage",
+            "Value": "4"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "L_couleur",
+        "id": "k6c9vw7w",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "bleu",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "rouge",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "autre",
+            "Value": "3"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "L_Departement",
+        "id": "k6c1il3m",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "Ain",
+            "Value": "01"
+          },
+          {
+            "Parent": "",
+            "Label": "Aisne",
+            "Value": "02"
+          },
+          {
+            "Parent": "",
+            "Label": "Allier",
+            "Value": "03"
+          },
+          {
+            "Parent": "",
+            "Label": "Alpes-de-Haute-Provence",
+            "Value": "04"
+          },
+          {
+            "Parent": "",
+            "Label": "Hautes-Alpes",
+            "Value": "05"
+          },
+          {
+            "Parent": "",
+            "Label": "Alpes-Maritimes",
+            "Value": "06"
+          },
+          {
+            "Parent": "",
+            "Label": "Ardèche",
+            "Value": "07"
+          },
+          {
+            "Parent": "",
+            "Label": "Ardennes",
+            "Value": "08"
+          },
+          {
+            "Parent": "",
+            "Label": "Ariège",
+            "Value": "09"
+          },
+          {
+            "Parent": "",
+            "Label": "Aube",
+            "Value": "10"
+          },
+          {
+            "Parent": "",
+            "Label": "Aude",
+            "Value": "11"
+          },
+          {
+            "Parent": "",
+            "Label": "Aveyron",
+            "Value": "12"
+          },
+          {
+            "Parent": "",
+            "Label": "Bouches-du-Rhône",
+            "Value": "13"
+          },
+          {
+            "Parent": "",
+            "Label": "Calvados",
+            "Value": "14"
+          },
+          {
+            "Parent": "",
+            "Label": "Cantal",
+            "Value": "15"
+          },
+          {
+            "Parent": "",
+            "Label": "Charente",
+            "Value": "16"
+          },
+          {
+            "Parent": "",
+            "Label": "Charente-Maritime",
+            "Value": "17"
+          },
+          {
+            "Parent": "",
+            "Label": "Cher",
+            "Value": "18"
+          },
+          {
+            "Parent": "",
+            "Label": "Corrèze",
+            "Value": "19"
+          },
+          {
+            "Parent": "",
+            "Label": "Corse-du-Sud",
+            "Value": "2A"
+          },
+          {
+            "Parent": "",
+            "Label": "Haute-Corse",
+            "Value": "2B"
+          },
+          {
+            "Parent": "",
+            "Label": "Côte-d'Or",
+            "Value": "21"
+          },
+          {
+            "Parent": "",
+            "Label": "Côtes d'Armor",
+            "Value": "22"
+          },
+          {
+            "Parent": "",
+            "Label": "Creuse",
+            "Value": "23"
+          },
+          {
+            "Parent": "",
+            "Label": "Dordogne",
+            "Value": "24"
+          },
+          {
+            "Parent": "",
+            "Label": "Doubs",
+            "Value": "25"
+          },
+          {
+            "Parent": "",
+            "Label": "Drôme",
+            "Value": "26"
+          },
+          {
+            "Parent": "",
+            "Label": "Eure",
+            "Value": "27"
+          },
+          {
+            "Parent": "",
+            "Label": "Eure-et-Loir",
+            "Value": "28"
+          },
+          {
+            "Parent": "",
+            "Label": "Finistère",
+            "Value": "29"
+          },
+          {
+            "Parent": "",
+            "Label": "Gard",
+            "Value": "30"
+          },
+          {
+            "Parent": "",
+            "Label": "Haute-Garonne",
+            "Value": "31"
+          },
+          {
+            "Parent": "",
+            "Label": "Gers",
+            "Value": "32"
+          },
+          {
+            "Parent": "",
+            "Label": "Gironde",
+            "Value": "33"
+          },
+          {
+            "Parent": "",
+            "Label": "Hérault",
+            "Value": "34"
+          },
+          {
+            "Parent": "",
+            "Label": "Ille-et-Vilaine",
+            "Value": "35"
+          },
+          {
+            "Parent": "",
+            "Label": "Indre",
+            "Value": "36"
+          },
+          {
+            "Parent": "",
+            "Label": "Indre-et-Loire",
+            "Value": "37"
+          },
+          {
+            "Parent": "",
+            "Label": "Isère",
+            "Value": "38"
+          },
+          {
+            "Parent": "",
+            "Label": "Jura",
+            "Value": "39"
+          },
+          {
+            "Parent": "",
+            "Label": "Landes",
+            "Value": "40"
+          },
+          {
+            "Parent": "",
+            "Label": "Loir-et-Cher",
+            "Value": "41"
+          },
+          {
+            "Parent": "",
+            "Label": "Loire",
+            "Value": "42"
+          },
+          {
+            "Parent": "",
+            "Label": "Haute-Loire",
+            "Value": "43"
+          },
+          {
+            "Parent": "",
+            "Label": "Loire-Atlantique",
+            "Value": "44"
+          },
+          {
+            "Parent": "",
+            "Label": "Loiret",
+            "Value": "45"
+          },
+          {
+            "Parent": "",
+            "Label": "Lot",
+            "Value": "46"
+          },
+          {
+            "Parent": "",
+            "Label": "Lot-et-Garonne",
+            "Value": "47"
+          },
+          {
+            "Parent": "",
+            "Label": "Lozère",
+            "Value": "48"
+          },
+          {
+            "Parent": "",
+            "Label": "Maine-et-Loire",
+            "Value": "49"
+          },
+          {
+            "Parent": "",
+            "Label": "Manche",
+            "Value": "50"
+          },
+          {
+            "Parent": "",
+            "Label": "Marne",
+            "Value": "51"
+          },
+          {
+            "Parent": "",
+            "Label": "Haute-Marne",
+            "Value": "52"
+          },
+          {
+            "Parent": "",
+            "Label": "Mayenne",
+            "Value": "53"
+          },
+          {
+            "Parent": "",
+            "Label": "Meurthe-et-Moselle",
+            "Value": "54"
+          },
+          {
+            "Parent": "",
+            "Label": "Meuse",
+            "Value": "55"
+          },
+          {
+            "Parent": "",
+            "Label": "Morbihan",
+            "Value": "56"
+          },
+          {
+            "Parent": "",
+            "Label": "Moselle",
+            "Value": "57"
+          },
+          {
+            "Parent": "",
+            "Label": "Nièvre",
+            "Value": "58"
+          },
+          {
+            "Parent": "",
+            "Label": "Nord",
+            "Value": "59"
+          },
+          {
+            "Parent": "",
+            "Label": "Oise",
+            "Value": "60"
+          },
+          {
+            "Parent": "",
+            "Label": "Orne",
+            "Value": "61"
+          },
+          {
+            "Parent": "",
+            "Label": "Pas-de-Calais",
+            "Value": "62"
+          },
+          {
+            "Parent": "",
+            "Label": "Puy-de-Dôme",
+            "Value": "63"
+          },
+          {
+            "Parent": "",
+            "Label": "Pyrénées-Atlantiques",
+            "Value": "64"
+          },
+          {
+            "Parent": "",
+            "Label": "Hautes-Pyrénées",
+            "Value": "65"
+          },
+          {
+            "Parent": "",
+            "Label": "Pyrénées-Orientales",
+            "Value": "66"
+          },
+          {
+            "Parent": "",
+            "Label": "Bas-Rhin",
+            "Value": "67"
+          },
+          {
+            "Parent": "",
+            "Label": "Haut-Rhin",
+            "Value": "68"
+          },
+          {
+            "Parent": "",
+            "Label": "Rhône",
+            "Value": "69"
+          },
+          {
+            "Parent": "",
+            "Label": "Haute-Saône",
+            "Value": "70"
+          },
+          {
+            "Parent": "",
+            "Label": "Saône-et-Loire",
+            "Value": "71"
+          },
+          {
+            "Parent": "",
+            "Label": "Sarthe",
+            "Value": "72"
+          },
+          {
+            "Parent": "",
+            "Label": "Savoie",
+            "Value": "73"
+          },
+          {
+            "Parent": "",
+            "Label": "Haute-Savoie",
+            "Value": "74"
+          },
+          {
+            "Parent": "",
+            "Label": "Paris",
+            "Value": "75"
+          },
+          {
+            "Parent": "",
+            "Label": "Seine-Maritime",
+            "Value": "76"
+          },
+          {
+            "Parent": "",
+            "Label": "Seine-et-Marne",
+            "Value": "77"
+          },
+          {
+            "Parent": "",
+            "Label": "Yvelines",
+            "Value": "78"
+          },
+          {
+            "Parent": "",
+            "Label": "Deux-Sèvres",
+            "Value": "79"
+          },
+          {
+            "Parent": "",
+            "Label": "Somme",
+            "Value": "80"
+          },
+          {
+            "Parent": "",
+            "Label": "Tarn",
+            "Value": "81"
+          },
+          {
+            "Parent": "",
+            "Label": "Tarn-et-Garonne",
+            "Value": "82"
+          },
+          {
+            "Parent": "",
+            "Label": "Var",
+            "Value": "83"
+          },
+          {
+            "Parent": "",
+            "Label": "Vaucluse",
+            "Value": "84"
+          },
+          {
+            "Parent": "",
+            "Label": "Vandée",
+            "Value": "85"
+          },
+          {
+            "Parent": "",
+            "Label": "Vienne",
+            "Value": "86"
+          },
+          {
+            "Parent": "",
+            "Label": "Haute-Vienne",
+            "Value": "87"
+          },
+          {
+            "Parent": "",
+            "Label": "Vosges",
+            "Value": "88"
+          },
+          {
+            "Parent": "",
+            "Label": "Yonne",
+            "Value": "89"
+          },
+          {
+            "Parent": "",
+            "Label": "Territoire de Belfort",
+            "Value": "90"
+          },
+          {
+            "Parent": "",
+            "Label": "Essonne",
+            "Value": "91"
+          },
+          {
+            "Parent": "",
+            "Label": "Hauts-de-Seine",
+            "Value": "92"
+          },
+          {
+            "Parent": "",
+            "Label": "Seine-St-Denis",
+            "Value": "93"
+          },
+          {
+            "Parent": "",
+            "Label": "Val-de-Marne",
+            "Value": "94"
+          },
+          {
+            "Parent": "",
+            "Label": "Val-D'Oise",
+            "Value": "95"
+          },
+          {
+            "Parent": "",
+            "Label": "Guadeloupe",
+            "Value": "971"
+          },
+          {
+            "Parent": "",
+            "Label": "Martinique",
+            "Value": "972"
+          },
+          {
+            "Parent": "",
+            "Label": "Guyane",
+            "Value": "973"
+          },
+          {
+            "Parent": "",
+            "Label": "La Réunion",
+            "Value": "974"
+          },
+          {
+            "Parent": "",
+            "Label": "Mayotte",
+            "Value": "976"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "L_TEST_QCM",
+        "id": "jfkxgkqx",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "choix 1",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "choix 2",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "[choix 3](. \"1 2 3 soleil\")",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "choix 4",
+            "Value": "4"
+          },
+          {
+            "Parent": "",
+            "Label": "choix 5",
+            "Value": "5"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "L_ONNSP",
+        "id": "k6c27lmm",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "Oui",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "Non",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "Ne sait pas",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "Sans objet",
+            "Value": "4"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "L_OuiNon",
+        "id": "jfkxtrih",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "Oui",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "Non",
+            "Value": "2"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "l_trancheAge",
+        "id": "l8u7vv82",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"moins de 15\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"de 16 à 17 ans\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"de 18 à 19 ans\"",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "\"20 et plus\"",
+            "Value": "4"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "L_TEST_H",
+        "id": "jfkxc40e",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "code1",
+            "Value": "10"
+          },
+          {
+            "Parent": "10",
+            "Label": "code 1 1",
+            "Value": "11"
+          },
+          {
+            "Parent": "10",
+            "Label": "code 1 2",
+            "Value": "12"
+          },
+          {
+            "Parent": "",
+            "Label": "code2",
+            "Value": "20"
+          },
+          {
+            "Parent": "20",
+            "Label": "code 2 1",
+            "Value": "21"
+          },
+          {
+            "Parent": "20",
+            "Label": "code 2 2",
+            "Value": "22"
+          },
+          {
+            "Parent": "20",
+            "Label": "code 2 3",
+            "Value": "23"
+          },
+          {
+            "Parent": "",
+            "Label": "code 3",
+            "Value": "30"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "L_HF",
+        "id": "k6c79ub1",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "Homme",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "Femme",
+            "Value": "2"
+          }
+        ],
+        "Name": ""
+      }
+    ]
+  },
+  "Iterations": {
+    "Iteration": [
+      {
+        "MemberReference": [
+          "kzf9qrnj"
+        ],
+        "id": "kfs6ox4i",
+        "type": "DynamicIterationType",
+        "Name": "BOUCLEINDIV",
+        "IterableReference": "l8uayz0h"
+      },
+      {
+        "Maximum": "nvl($NBPERS$,1)",
+        "Minimum": "nvl($NBPERS$,1)",
+        "MemberReference": [
+          "l8uaq797"
+        ],
+        "id": "l8uayz0h",
+        "Step": "1",
+        "type": "DynamicIterationType",
+        "Name": "BOUCLETHL"
+      }
+    ]
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "Questions ouvertes - Titre de la séquence"
+      ],
+      "id": "jfaz9kv9",
+      "TargetMode": [
+        "CAWI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "INSTRUCTION",
+          "Text": "Ce module comprend les questions ouvertes.&#xd;​&#xd;Ceci est une déclaration de type consigne, associée au titre du module. ",
+          "id": "jfazqgv2",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAWI",
+            "PAPI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Questions de type Texte"
+          ],
+          "id": "jfazsitt",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "k6gb7a3r",
+                  "id": "jfazpjke",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": "5"
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Je suis le libellé de la question de type texte de longueur inférieure à 250 caractères\""
+              ],
+              "id": "jfazww20",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "INSTRUCTION",
+                  "Text": "So close no matter how far couldn't be much more from the heart forever trust in who we are and nothing else matters \r\n\r\n<br/>\r\nnever opened myself this way life is ours, we live it our way all these words I don't just say and nothing else matters \r\n\r\n<br/>\r\n\r\ntrust I seek and I find in you every day for us something new open mind for a different view and nothing else matters\r\n\r\nnever cared for what they do never cared for what they know But I know\r\n\r\nso close no matter how far couldn't be much more from the heart forever trusting who we are and nothing else matters\r\n\r\nnever cared for what they do never cared for what they know And I know\r\n\r\nI never opened myself this way life is ours, we live it our way all these words I don't just say and nothing else matters\r\n\r\ntrust I seek and I find in you every day for us something new open mind for a different view and nothing else matters\r\n\r\nnever cared for what they say never cared for games they play never cared for what they do",
+                  "id": "k6gbafch",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAWI",
+                    "PAPI",
+                    "CATI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "TEXTECOURT"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "k6gbg26h",
+                  "id": "jfazfcmi",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": "500"
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Je suis le libellé de la question de type texte de longueur supérieure à 250 caractères.&#xd;Demain, dès l’aube, à l’heure où blanchit la campagne,&#xd;Je partirai. Vois-tu, je sais que tu m’attends. J’irai par la forêt, j’irai par la montagne. Je ne puis demeurer loin de toi plus longtemps.&#xd;Je marcherai les yeux fixés sur mes pensées, Sans rien voir au dehors, sans entendre aucun bruit, Seul, inconnu, le dos courbé, les mains croisées, Triste, et le jour pour moi sera comme la nuit.&#xd;Je ne regarderai ni l’or du soir qui tombe, Ni les voiles au loin descendant vers Harfleur, Et quand j’arriverai, je mettrai sur ta tombe Un bouquet de houx vert et de bruyère en fleur.\""
+              ],
+              "id": "jfazwjyv",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "INSTRUCTION",
+                  "Text": "Le champ de la réponse de type texte long est modifiable à la souris",
+                  "id": "k6c6cjxu",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAWI",
+                    "PAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "TEXTELONG"
+            }
+          ],
+          "Name": "QUESTIONSD"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Numériques"
+          ],
+          "id": "jfjhggkx",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "k6c0vvj1",
+                  "id": "jfjhmav1",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Maximum": "999999999",
+                    "Minimum": "0",
+                    "typeName": "NUMERIC",
+                    "Unit": "",
+                    "type": "NumericDatatypeType",
+                    "Decimals": ""
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Numérique entier sans unité - grand (max= 999999999)\""
+              ],
+              "id": "jfjh1ndk",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Variable utilisée dans le tableau question 22\"",
+                  "id": "l8ua25i0",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAWI",
+                    "CAPI",
+                    "CATI",
+                    "PAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "INTEGER"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "k6gi6ffr",
+                  "id": "jfjhhp1i",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Maximum": "1000",
+                    "Minimum": "0",
+                    "typeName": "NUMERIC",
+                    "Unit": "",
+                    "type": "NumericDatatypeType",
+                    "Decimals": "2"
+                  }
+                }
+              ],
+              "Control": [
+                {
+                  "post_collect": false,
+                  "Description": "test",
+                  "Expression": "$INTEGER$ < $FLOAT$ and not(isnull($INTEGER$)) and not(isnull($FLOAT$))",
+                  "during_collect": false,
+                  "criticity": "INFO",
+                  "FailMessage": "\"Message un peu long pour tester la modale sur smartphone. Vous devez saisir un nombre plus petit que pour la question 3 :\" || cast($INTEGER$,string) || \" est plus grand que \" || cast($FLOAT$,string)",
+                  "id": "k6gbrjrl"
+                }
+              ],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Numérique décimal sans unité (entre 0 et 1000.00)\""
+              ],
+              "id": "jfjhb2pz",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Controle par rapport à question 3 dont la valeur est :\" || cast($INTEGER$,string)",
+                  "id": "l8iohgoa",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAWI",
+                    "CAPI",
+                    "CATI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Test :  saisir un nombre plus grand que celui de la question 3 et vérifier affichage du controle\"",
+                  "id": "l8u98od1",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAWI",
+                    "CAPI",
+                    "CATI",
+                    "PAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "FLOAT"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l8u915mp",
+                  "id": "jfjsxwcd",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Maximum": "9999",
+                    "Minimum": "0",
+                    "typeName": "NUMERIC",
+                    "Unit": "http://id.insee.fr/unit/keuro",
+                    "type": "NumericDatatypeType",
+                    "Decimals": ""
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Numérique max 9999 avec[ unité](. \"l'unité choisie ici est le kilo euro\") et infobulle sur le mot unité de cette question\""
+              ],
+              "id": "jfjtbqh1",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "UNIT"
+            }
+          ],
+          "Name": "NUMRIQUES"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Autres formats de réponse"
+          ],
+          "id": "jfjeuskc",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "INSTRUCTION",
+              "Text": "Ce sous module comprend des questions de type : &#xd;- date&#xd;- durée&#xd;- booléen",
+              "id": "k6c6agsi",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAWI",
+                "PAPI"
+              ]
+            }
+          ],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "k6ce80ez",
+                  "id": "jfjeyppa",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Maximum": "2020-03-31",
+                    "Minimum": "2000-01-01",
+                    "Format": "YYYY-MM-DD",
+                    "typeName": "DATE",
+                    "type": "DateDatatypeType"
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Date jour\""
+              ],
+              "id": "jfjfckyw",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "DATE"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "k6ce81li",
+                  "id": "k6c1e84f",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Maximum": "2020-03",
+                    "Minimum": "2000-01",
+                    "Format": "YYYY-MM",
+                    "typeName": "DATE",
+                    "type": "DateDatatypeType"
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Date mois - pas encore fonctionnel donc tester affichage au format date jour\""
+              ],
+              "id": "k6c1guqb",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "DATEMOIS"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l8ionnab",
+                  "id": "k6c0ytt3",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Maximum": "2020",
+                    "Minimum": "2000",
+                    "Format": "YYYY",
+                    "typeName": "DATE",
+                    "type": "DateDatatypeType"
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Date année pas encore fonctionnel donc tester affichage au format date jour\""
+              ],
+              "id": "k6c1che6",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "DATEANNEE"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l8iorxhx",
+                  "id": "k6c165yg",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Maximum": "PT200H59M",
+                    "Format": "PTnHnM",
+                    "typeName": "DURATION",
+                    "type": "DurationDatatypeType"
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Durée heures minutes\""
+              ],
+              "id": "k6c0ysf3",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "DUREE"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l8iownbs",
+                  "id": "k6c142hx",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Maximum": "P5Y11M",
+                    "Format": "PnYnM",
+                    "typeName": "DURATION",
+                    "type": "DurationDatatypeType"
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Durée année mois\""
+              ],
+              "id": "k6c10exe",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "DUREEANNEEMOIS"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l8iou30x",
+                  "id": "jfjezhiz",
+                  "mandatory": false,
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Booléen\""
+              ],
+              "id": "jfjeud07",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "BOOLEEN"
+            }
+          ],
+          "Name": "AUTRES"
+        }
+      ],
+      "Name": "SIMPLE"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "Questions à choix unique et questions à choix multiple"
+      ],
+      "id": "jfjew4oy",
+      "TargetMode": [
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Questions à choix unique"
+          ],
+          "id": "jfkxouu8",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l8ubg466",
+                  "id": "jfjepr5a",
+                  "mandatory": false,
+                  "CodeListReference": "jfjevykh",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question à choix unique / présentation bouton radio\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "jfjepz6i",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "RADIO"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "k6gjvhxv",
+                  "id": "k6gir82o",
+                  "mandatory": false,
+                  "CodeListReference": "jfjevykh",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "CHECKBOX",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question à choix unique - présentation case à cocher décochable\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "k6gik8v5",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "CHECKBOX"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "k6ccfe5l",
+                  "id": "k6ccfnnt",
+                  "mandatory": false,
+                  "CodeListReference": "k6cce8dh",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "CHECKBOX",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question à choix unique - présentation images - non fonc Lunatic (Symboles en attendant) - besoin Conjoncture\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "k6cc6f8r",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "IMAGE"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l8u7fsws",
+                  "id": "k6c9ri36",
+                  "mandatory": false,
+                  "CodeListReference": "k6c9vw7w",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "CHECKBOX",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question à choix unique - présentation case à cocher + autre précisez (non fonc Lunatic)\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "jfjero7b",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "CHECKBOX_AUTRE"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l8u7eo4z",
+                  "id": "l8u83cwl",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Autres préciser\""
+              ],
+              "id": "l8u7iy3l",
+              "TargetMode": [
+                "CAWI",
+                "CAPI",
+                "CATI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "AUTRE_PRECISER"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l8ub6mlp",
+                  "id": "k6c1t2ff",
+                  "mandatory": false,
+                  "CodeListReference": "k6c1il3m",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "DROPDOWN",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question à choix unique - présentation liste déroulante\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "jfjfae9f",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "DROPDOWN"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l9iekhrm",
+                  "id": "l9iebmwb",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question à choix unique - présentation autocomplétion, par TS\""
+              ],
+              "id": "k6ccoydl",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "AUTOCOMPL"
+            }
+          ],
+          "Name": "QCU"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Questions à choix multiple"
+          ],
+          "id": "jfkxuinz",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "FlowControl": [],
+              "Label": [
+                "\"Question à choix multiple - réponse booléen\""
+              ],
+              "ResponseStructure": {
+                "Attribute": [],
+                "Mapping": [
+                  {
+                    "MappingSource": "kfs6nzmk",
+                    "MappingTarget": "1"
+                  },
+                  {
+                    "MappingSource": "kfs76ek4",
+                    "MappingTarget": "2"
+                  },
+                  {
+                    "MappingSource": "kfs6od02",
+                    "MappingTarget": "3"
+                  },
+                  {
+                    "MappingSource": "kfs6thpf",
+                    "MappingTarget": "4"
+                  },
+                  {
+                    "MappingSource": "kfs75eiq",
+                    "MappingTarget": "5"
+                  },
+                  {
+                    "MappingSource": "kfs738z6",
+                    "MappingTarget": "6"
+                  },
+                  {
+                    "MappingSource": "kfs6yui1",
+                    "MappingTarget": "7"
+                  },
+                  {
+                    "MappingSource": "kfs6t577",
+                    "MappingTarget": "8"
+                  }
+                ],
+                "Dimension": [
+                  {
+                    "dimensionType": "PRIMARY",
+                    "dynamic": "0",
+                    "CodeListReference": "jfjevykh"
+                  },
+                  {
+                    "dimensionType": "MEASURE",
+                    "dynamic": "0"
+                  }
+                ]
+              },
+              "type": "QuestionType",
+              "Name": "QCM_B",
+              "Response": [
+                {
+                  "CollectedVariableReference": "k6c1k3u0",
+                  "id": "kfs6nzmk",
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                },
+                {
+                  "CollectedVariableReference": "k6c1ny98",
+                  "id": "kfs76ek4",
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                },
+                {
+                  "CollectedVariableReference": "k6c1l1mx",
+                  "id": "kfs6od02",
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                },
+                {
+                  "CollectedVariableReference": "k6c17pi6",
+                  "id": "kfs6thpf",
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                },
+                {
+                  "CollectedVariableReference": "k6c1h2q5",
+                  "id": "kfs75eiq",
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                },
+                {
+                  "CollectedVariableReference": "k6c1esnj",
+                  "id": "kfs738z6",
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                },
+                {
+                  "CollectedVariableReference": "k6c18fmq",
+                  "id": "kfs6yui1",
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                },
+                {
+                  "CollectedVariableReference": "k6c1a4su",
+                  "id": "kfs6t577",
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "ClarificationQuestion": [],
+              "id": "jfkxh2lf",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [],
+              "questionType": "MULTIPLE_CHOICE"
+            },
+            {
+              "FlowControl": [],
+              "Label": [
+                "\"Question à choix multiple - réponse oui/non case à cocher\""
+              ],
+              "ResponseStructure": {
+                "Attribute": [],
+                "Mapping": [
+                  {
+                    "MappingSource": "kfs6tu6f",
+                    "MappingTarget": "1"
+                  },
+                  {
+                    "MappingSource": "kfs6uuii",
+                    "MappingTarget": "2"
+                  },
+                  {
+                    "MappingSource": "kfs6rmz9",
+                    "MappingTarget": "3"
+                  },
+                  {
+                    "MappingSource": "kfs6tmb0",
+                    "MappingTarget": "4"
+                  },
+                  {
+                    "MappingSource": "kfs74s7k",
+                    "MappingTarget": "5"
+                  }
+                ],
+                "Dimension": [
+                  {
+                    "dimensionType": "PRIMARY",
+                    "dynamic": "0",
+                    "CodeListReference": "jfkxgkqx"
+                  },
+                  {
+                    "dimensionType": "MEASURE",
+                    "dynamic": "0"
+                  }
+                ]
+              },
+              "type": "QuestionType",
+              "Name": "QCM_ON",
+              "Response": [
+                {
+                  "CollectedVariableReference": "k6c1wilq",
+                  "id": "kfs6tu6f",
+                  "CodeListReference": "k6c27lmm",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "CHECKBOX",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                },
+                {
+                  "CollectedVariableReference": "k6c2a5je",
+                  "id": "kfs6uuii",
+                  "CodeListReference": "k6c27lmm",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "CHECKBOX",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                },
+                {
+                  "CollectedVariableReference": "k6c26p41",
+                  "id": "kfs6rmz9",
+                  "CodeListReference": "k6c27lmm",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "CHECKBOX",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                },
+                {
+                  "CollectedVariableReference": "k6c1vo4l",
+                  "id": "kfs6tmb0",
+                  "CodeListReference": "k6c27lmm",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "CHECKBOX",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                },
+                {
+                  "CollectedVariableReference": "k6c263vm",
+                  "id": "kfs74s7k",
+                  "CodeListReference": "k6c27lmm",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "CHECKBOX",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "ClarificationQuestion": [],
+              "id": "jfkxybfe",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [],
+              "questionType": "MULTIPLE_CHOICE"
+            },
+            {
+              "FlowControl": [],
+              "Label": [
+                "\"Question à choix multiple - réponse oui/non radio\""
+              ],
+              "ResponseStructure": {
+                "Attribute": [],
+                "Mapping": [
+                  {
+                    "MappingSource": "kfs71o3d",
+                    "MappingTarget": "1"
+                  },
+                  {
+                    "MappingSource": "kfs76d8p",
+                    "MappingTarget": "2"
+                  },
+                  {
+                    "MappingSource": "kfs77h0z",
+                    "MappingTarget": "3"
+                  },
+                  {
+                    "MappingSource": "kfs6ujsf",
+                    "MappingTarget": "4"
+                  },
+                  {
+                    "MappingSource": "kfs6roe4",
+                    "MappingTarget": "5"
+                  },
+                  {
+                    "MappingSource": "kfs6zvn6",
+                    "MappingTarget": "6"
+                  },
+                  {
+                    "MappingSource": "kfs6z8u9",
+                    "MappingTarget": "7"
+                  },
+                  {
+                    "MappingSource": "kfs6ok4m",
+                    "MappingTarget": "8"
+                  }
+                ],
+                "Dimension": [
+                  {
+                    "dimensionType": "PRIMARY",
+                    "dynamic": "0",
+                    "CodeListReference": "jfjevykh"
+                  },
+                  {
+                    "dimensionType": "MEASURE",
+                    "dynamic": "0"
+                  }
+                ]
+              },
+              "type": "QuestionType",
+              "Name": "QCM_ONR",
+              "Response": [
+                {
+                  "CollectedVariableReference": "k6c15cph",
+                  "id": "kfs71o3d",
+                  "CodeListReference": "jfkxtrih",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                },
+                {
+                  "CollectedVariableReference": "k6c1g2d5",
+                  "id": "kfs76d8p",
+                  "CodeListReference": "jfkxtrih",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                },
+                {
+                  "CollectedVariableReference": "k6c1jrw7",
+                  "id": "kfs77h0z",
+                  "CodeListReference": "jfkxtrih",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                },
+                {
+                  "CollectedVariableReference": "k6c1crfs",
+                  "id": "kfs6ujsf",
+                  "CodeListReference": "jfkxtrih",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                },
+                {
+                  "CollectedVariableReference": "k6c19sdw",
+                  "id": "kfs6roe4",
+                  "CodeListReference": "jfkxtrih",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                },
+                {
+                  "CollectedVariableReference": "k6c1cdqm",
+                  "id": "kfs6zvn6",
+                  "CodeListReference": "jfkxtrih",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                },
+                {
+                  "CollectedVariableReference": "k6c1ctpx",
+                  "id": "kfs6z8u9",
+                  "CodeListReference": "jfkxtrih",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                },
+                {
+                  "CollectedVariableReference": "k6c15toy",
+                  "id": "kfs6ok4m",
+                  "CodeListReference": "jfkxtrih",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "ClarificationQuestion": [],
+              "id": "jfkyw9o1",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [],
+              "questionType": "MULTIPLE_CHOICE"
+            }
+          ],
+          "Name": "QCM"
+        }
+      ],
+      "Name": "QCUQCM"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "Tableaux"
+      ],
+      "id": "jfkyvabw",
+      "TargetMode": [
+        "CAWI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "INSTRUCTION",
+          "Text": "Ce module concerne les tableaux ",
+          "id": "k6c7aexd",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAWI",
+            "PAPI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "FlowControl": [],
+          "Label": [
+            "\"Tableau TIC - répartition du nb habitants, comparaison question INTEGER\""
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "l8u8ju3p",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "l8u8ezod",
+                "MappingTarget": "2 1"
+              },
+              {
+                "MappingSource": "l8u85xql",
+                "MappingTarget": "3 1"
+              },
+              {
+                "MappingSource": "l8u80yaz",
+                "MappingTarget": "4 1"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "0",
+                "CodeListReference": "l8u7vv82"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Nombre de personnes, entre 0 et 20\"",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "TABLEAUTIC",
+          "Response": [
+            {
+              "CollectedVariableReference": "l8u8cwms",
+              "id": "l8u8ju3p",
+              "Datatype": {
+                "Maximum": "20",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "l8u83d29",
+              "id": "l8u8ezod",
+              "Datatype": {
+                "Maximum": "20",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "l8u8aqat",
+              "id": "l8u85xql",
+              "Datatype": {
+                "Maximum": "20",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "l8u86vzj",
+              "id": "l8u80yaz",
+              "Datatype": {
+                "Maximum": "20",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            }
+          ],
+          "Control": [
+            {
+              "post_collect": false,
+              "Description": "\"Somme trop élevée\"",
+              "Expression": "nvl($TABLEAUTIC11$,0)+nvl($TABLEAUTIC21$,0)+nvl($TABLEAUTIC31$,0)+\r\nnvl($TABLEAUTIC41$,0) > nvl($INTEGER$,0)",
+              "during_collect": false,
+              "criticity": "INFO",
+              "FailMessage": "\"La somme est supérieure au nombre collecté : \" || cast($INTEGER$,string)",
+              "id": "l8u8ehko"
+            }
+          ],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "l8u8d67h",
+          "TargetMode": [
+            "CAWI",
+            "CAPI",
+            "CATI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Rappel de la valeur collectée INTEGER = \" || cast($INTEGER$,string)",
+              "id": "l8u8f3sa",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAWI",
+                "CAPI",
+                "CATI",
+                "PAPI"
+              ]
+            }
+          ],
+          "questionType": "TABLE"
+        },
+        {
+          "FlowControl": [],
+          "Label": [
+            "\"Tableau un axe simple, une mesure, sans unité\""
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "kfs6nvkt",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "kfs789y1",
+                "MappingTarget": "2 1"
+              },
+              {
+                "MappingSource": "kfs74fzv",
+                "MappingTarget": "3 1"
+              },
+              {
+                "MappingSource": "kfs752q3",
+                "MappingTarget": "4 1"
+              },
+              {
+                "MappingSource": "kfs70f2t",
+                "MappingTarget": "5 1"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "0",
+                "CodeListReference": "jfkxgkqx"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "Mesure de type numérique",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "TABLEAU1A1M",
+          "Response": [
+            {
+              "CollectedVariableReference": "k6c9yoih",
+              "id": "kfs6nvkt",
+              "Datatype": {
+                "Maximum": "999",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6ca1ru2",
+              "id": "kfs789y1",
+              "Datatype": {
+                "Maximum": "999",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6c9xlf4",
+              "id": "kfs74fzv",
+              "Datatype": {
+                "Maximum": "999",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6ca8qzy",
+              "id": "kfs752q3",
+              "Datatype": {
+                "Maximum": "999",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6ca9ufk",
+              "id": "kfs70f2t",
+              "Datatype": {
+                "Maximum": "999",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            }
+          ],
+          "Control": [
+            {
+              "post_collect": false,
+              "Description": "\"Tot tableaux supérieur à 100\"",
+              "Expression": "nvl($TABLEAU1A1M11$,0)+nvl($TABLEAU1A1M21$,0)+nvl($TABLEAU1A1M31$,0)+nvl($TABLEAU1A1M41$,0)+\r\nnvl($TABLEAU1A1M51$,0) > 100",
+              "during_collect": false,
+              "criticity": "INFO",
+              "FailMessage": "\"La somme des lignes (\" || cast($TOTAL_TAB$,string) || \") est supérieure à 100.\"",
+              "id": "l8iovzkk"
+            }
+          ],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "jfkzltkm",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"COntrole sur somme des lignes > 100\"",
+              "id": "l8ubvmec",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAWI",
+                "CAPI",
+                "CATI",
+                "PAPI"
+              ]
+            }
+          ],
+          "questionType": "TABLE"
+        },
+        {
+          "FlowControl": [],
+          "Label": [
+            "\"Tableau un axe simple, plusieurs mesures, sans unité\""
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "kfs6zwqz",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "kfs6n365",
+                "MappingTarget": "2 1"
+              },
+              {
+                "MappingSource": "kfs6r9ry",
+                "MappingTarget": "3 1"
+              },
+              {
+                "MappingSource": "kfs70a3j",
+                "MappingTarget": "4 1"
+              },
+              {
+                "MappingSource": "kfs6s3d1",
+                "MappingTarget": "5 1"
+              },
+              {
+                "MappingSource": "kfs76fb2",
+                "MappingTarget": "1 2"
+              },
+              {
+                "MappingSource": "kfs6p4en",
+                "MappingTarget": "2 2"
+              },
+              {
+                "MappingSource": "kfs6plyt",
+                "MappingTarget": "3 2"
+              },
+              {
+                "MappingSource": "kfs71729",
+                "MappingTarget": "4 2"
+              },
+              {
+                "MappingSource": "kfs6oml8",
+                "MappingTarget": "5 2"
+              },
+              {
+                "MappingSource": "kfs6rhps",
+                "MappingTarget": "1 3"
+              },
+              {
+                "MappingSource": "kfs6qqki",
+                "MappingTarget": "2 3"
+              },
+              {
+                "MappingSource": "kfs6yj1e",
+                "MappingTarget": "3 3"
+              },
+              {
+                "MappingSource": "kfs6tod7",
+                "MappingTarget": "4 3"
+              },
+              {
+                "MappingSource": "kfs6vpzt",
+                "MappingTarget": "5 3"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "0",
+                "CodeListReference": "jfkxgkqx"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "Mesure de type numérique",
+                "dynamic": "0"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "Mesure de type liste",
+                "dynamic": "0"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "Mesure de type texte",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "TABLEAU1A3M",
+          "Response": [
+            {
+              "CollectedVariableReference": "k6cablut",
+              "id": "kfs6zwqz",
+              "Datatype": {
+                "Maximum": "999",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6ca0e5y",
+              "id": "kfs6n365",
+              "Datatype": {
+                "Maximum": "999",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6ca2jtf",
+              "id": "kfs6r9ry",
+              "Datatype": {
+                "Maximum": "999",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6ca4lh3",
+              "id": "kfs70a3j",
+              "Datatype": {
+                "Maximum": "999",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6c9vzuj",
+              "id": "kfs6s3d1",
+              "Datatype": {
+                "Maximum": "999",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6ca6p99",
+              "id": "kfs76fb2",
+              "CodeListReference": "jfkxtrih",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "CHECKBOX",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "k6c9t1w6",
+              "id": "kfs6p4en",
+              "CodeListReference": "jfkxtrih",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "CHECKBOX",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "k6ca13ju",
+              "id": "kfs6plyt",
+              "CodeListReference": "jfkxtrih",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "CHECKBOX",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "k6ca38ur",
+              "id": "kfs71729",
+              "CodeListReference": "jfkxtrih",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "CHECKBOX",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "k6c9tl08",
+              "id": "kfs6oml8",
+              "CodeListReference": "jfkxtrih",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "CHECKBOX",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "k6c9wb64",
+              "id": "kfs6rhps",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": "25"
+              }
+            },
+            {
+              "CollectedVariableReference": "k6c9zvmm",
+              "id": "kfs6qqki",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": "25"
+              }
+            },
+            {
+              "CollectedVariableReference": "k6ca85te",
+              "id": "kfs6yj1e",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": "25"
+              }
+            },
+            {
+              "CollectedVariableReference": "k6ca0tyw",
+              "id": "kfs6tod7",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": "25"
+              }
+            },
+            {
+              "CollectedVariableReference": "k6ca98ho",
+              "id": "kfs6vpzt",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": "25"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "jfkzpexn",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [],
+          "questionType": "TABLE"
+        },
+        {
+          "FlowControl": [],
+          "Label": [
+            "\"Tableau 2 axes - 1 mesure de type numérique, sans unité\""
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "kfs74dod",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "kfs6p839",
+                "MappingTarget": "2 1"
+              },
+              {
+                "MappingSource": "kfs74pe1",
+                "MappingTarget": "3 1"
+              },
+              {
+                "MappingSource": "kfs6std4",
+                "MappingTarget": "4 1"
+              },
+              {
+                "MappingSource": "kfs765pz",
+                "MappingTarget": "5 1"
+              },
+              {
+                "MappingSource": "kfs6psi9",
+                "MappingTarget": "6 1"
+              },
+              {
+                "MappingSource": "kfs6oi5b",
+                "MappingTarget": "7 1"
+              },
+              {
+                "MappingSource": "kfs6o718",
+                "MappingTarget": "8 1"
+              },
+              {
+                "MappingSource": "kfs714gr",
+                "MappingTarget": "1 2"
+              },
+              {
+                "MappingSource": "kfs6qzke",
+                "MappingTarget": "2 2"
+              },
+              {
+                "MappingSource": "kfs6r6v2",
+                "MappingTarget": "3 2"
+              },
+              {
+                "MappingSource": "kfs6wteu",
+                "MappingTarget": "4 2"
+              },
+              {
+                "MappingSource": "kfs6vlxk",
+                "MappingTarget": "5 2"
+              },
+              {
+                "MappingSource": "kfs714kn",
+                "MappingTarget": "6 2"
+              },
+              {
+                "MappingSource": "kfs74cck",
+                "MappingTarget": "7 2"
+              },
+              {
+                "MappingSource": "kfs6uhz5",
+                "MappingTarget": "8 2"
+              },
+              {
+                "MappingSource": "kfs6yh8c",
+                "MappingTarget": "1 3"
+              },
+              {
+                "MappingSource": "kfs6wcke",
+                "MappingTarget": "2 3"
+              },
+              {
+                "MappingSource": "kfs71abh",
+                "MappingTarget": "3 3"
+              },
+              {
+                "MappingSource": "kfs6o4tr",
+                "MappingTarget": "4 3"
+              },
+              {
+                "MappingSource": "kfs70fpo",
+                "MappingTarget": "5 3"
+              },
+              {
+                "MappingSource": "kfs770cc",
+                "MappingTarget": "6 3"
+              },
+              {
+                "MappingSource": "kfs6zzlh",
+                "MappingTarget": "7 3"
+              },
+              {
+                "MappingSource": "kfs6r0f9",
+                "MappingTarget": "8 3"
+              },
+              {
+                "MappingSource": "kfs6wx2s",
+                "MappingTarget": "1 4"
+              },
+              {
+                "MappingSource": "kfs6swtm",
+                "MappingTarget": "2 4"
+              },
+              {
+                "MappingSource": "kfs71r6u",
+                "MappingTarget": "3 4"
+              },
+              {
+                "MappingSource": "kfs70s5e",
+                "MappingTarget": "4 4"
+              },
+              {
+                "MappingSource": "kfs6yf0h",
+                "MappingTarget": "5 4"
+              },
+              {
+                "MappingSource": "kfs75dsl",
+                "MappingTarget": "6 4"
+              },
+              {
+                "MappingSource": "kfs77kxk",
+                "MappingTarget": "7 4"
+              },
+              {
+                "MappingSource": "kfs751qu",
+                "MappingTarget": "8 4"
+              },
+              {
+                "MappingSource": "kfs6ycig",
+                "MappingTarget": "1 5"
+              },
+              {
+                "MappingSource": "kfs6wkxw",
+                "MappingTarget": "2 5"
+              },
+              {
+                "MappingSource": "kfs70wj3",
+                "MappingTarget": "3 5"
+              },
+              {
+                "MappingSource": "kfs73tkt",
+                "MappingTarget": "4 5"
+              },
+              {
+                "MappingSource": "kfs72bf8",
+                "MappingTarget": "5 5"
+              },
+              {
+                "MappingSource": "kfs6pfhm",
+                "MappingTarget": "6 5"
+              },
+              {
+                "MappingSource": "kfs6wdle",
+                "MappingTarget": "7 5"
+              },
+              {
+                "MappingSource": "kfs77396",
+                "MappingTarget": "8 5"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "0",
+                "CodeListReference": "jfjevykh"
+              },
+              {
+                "dimensionType": "SECONDARY",
+                "dynamic": "0",
+                "CodeListReference": "jfkxgkqx"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "répartition",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "TABLEAU2A",
+          "Response": [
+            {
+              "CollectedVariableReference": "k6gb25z0",
+              "id": "kfs74dod",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gbgeeg",
+              "id": "kfs6p839",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gaxtpy",
+              "id": "kfs74pe1",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gb8i7c",
+              "id": "kfs6std4",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gaz0zn",
+              "id": "kfs765pz",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gbgx8q",
+              "id": "kfs6psi9",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gaxo5h",
+              "id": "kfs6oi5b",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gb66qp",
+              "id": "kfs6o718",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gb94dz",
+              "id": "kfs714gr",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gb3rsu",
+              "id": "kfs6qzke",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gbd5l4",
+              "id": "kfs6r6v2",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gb31wg",
+              "id": "kfs6wteu",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gbfu8i",
+              "id": "kfs6vlxk",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gay2l8",
+              "id": "kfs714kn",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gbahfm",
+              "id": "kfs74cck",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gawvio",
+              "id": "kfs6uhz5",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gbh5or",
+              "id": "kfs6yh8c",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gb3l05",
+              "id": "kfs6wcke",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gb6ejg",
+              "id": "kfs71abh",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gbc6it",
+              "id": "kfs6o4tr",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gazldv",
+              "id": "kfs70fpo",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gaxf6z",
+              "id": "kfs770cc",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gbbppr",
+              "id": "kfs6zzlh",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gb28dm",
+              "id": "kfs6r0f9",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gb65n8",
+              "id": "kfs6wx2s",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gb4xdv",
+              "id": "kfs6swtm",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gb4gfy",
+              "id": "kfs71r6u",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gbcyg1",
+              "id": "kfs70s5e",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gb11jv",
+              "id": "kfs6yf0h",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gbfnex",
+              "id": "kfs75dsl",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gaxys7",
+              "id": "kfs77kxk",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gb7swd",
+              "id": "kfs751qu",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gb2yw1",
+              "id": "kfs6ycig",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gb9zec",
+              "id": "kfs6wkxw",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gbfrd2",
+              "id": "kfs70wj3",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gawywh",
+              "id": "kfs73tkt",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gawznt",
+              "id": "kfs72bf8",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gb09uy",
+              "id": "kfs6pfhm",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gb7ynx",
+              "id": "kfs6wdle",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6gaw5zi",
+              "id": "kfs77396",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "jfkzttm3",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [],
+          "questionType": "TABLE"
+        },
+        {
+          "FlowControl": [],
+          "Label": [
+            "\"Tableau 1 axe avec hiérarchie , 1 mesure, avec unité\""
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "kfs70aez",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "kfs6o7rs",
+                "MappingTarget": "2 1"
+              },
+              {
+                "MappingSource": "kfs72t19",
+                "MappingTarget": "3 1"
+              },
+              {
+                "MappingSource": "kfs77h7l",
+                "MappingTarget": "4 1"
+              },
+              {
+                "MappingSource": "kfs6vcz9",
+                "MappingTarget": "5 1"
+              },
+              {
+                "MappingSource": "kfs7347h",
+                "MappingTarget": "6 1"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "0",
+                "CodeListReference": "jfkxc40e"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "Mesure de type numérique avec unité",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "TABLEAU1AH1M",
+          "Response": [
+            {
+              "CollectedVariableReference": "k6ca5mt1",
+              "id": "kfs70aez",
+              "Datatype": {
+                "Maximum": "999",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "http://id.insee.fr/unit/keuro",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6ca9vpx",
+              "id": "kfs6o7rs",
+              "Datatype": {
+                "Maximum": "999",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "http://id.insee.fr/unit/keuro",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6ca3eg3",
+              "id": "kfs72t19",
+              "Datatype": {
+                "Maximum": "999",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "http://id.insee.fr/unit/keuro",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6c9vgff",
+              "id": "kfs77h7l",
+              "Datatype": {
+                "Maximum": "999",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "http://id.insee.fr/unit/keuro",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6ca49wv",
+              "id": "kfs6vcz9",
+              "Datatype": {
+                "Maximum": "999",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "http://id.insee.fr/unit/keuro",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "k6ca5xg8",
+              "id": "kfs7347h",
+              "Datatype": {
+                "Maximum": "999",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "http://id.insee.fr/unit/keuro",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "jfkzrwce",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [],
+          "questionType": "TABLE"
+        },
+        {
+          "FlowControl": [],
+          "Label": [
+            "\"Tableau dynamique jusque 5 lignes, 2 mesures dont une unité\""
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "kzf8wn5w",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "kzf8tv7x",
+                "MappingTarget": "1 2"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "1-5"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "Mesure de type texte",
+                "dynamic": "0"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "Mesure de type numérique unité",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "TABLEAUDYN",
+          "Response": [
+            {
+              "CollectedVariableReference": "kzf8aac2",
+              "id": "kzf8wn5w",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": "25"
+              }
+            },
+            {
+              "CollectedVariableReference": "kzf8cnac",
+              "id": "kzf8tv7x",
+              "Datatype": {
+                "Maximum": "120",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "http://id.insee.fr/unit/keuro",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "k6c6kj14",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "INSTRUCTION",
+              "Text": "La question suivante est une question de type tableau dynamique.",
+              "id": "k6c6qh0u",
+              "position": "BEFORE_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAWI",
+                "PAPI"
+              ]
+            }
+          ],
+          "questionType": "TABLE"
+        }
+      ],
+      "Name": "TABLEAUX"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "Séquence personnalisée et comportant des filtres"
+      ],
+      "id": "k3opdj10",
+      "TargetMode": [
+        "CAWI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "INSTRUCTION",
+          "Text": "Nous allons maintenant personnaliser ce questionnaire",
+          "id": "k6c39mjo",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAWI",
+            "PAPI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "l8ioso1g",
+              "id": "k6c3719g",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": "25"
+              }
+            }
+          ],
+          "Control": [
+            {
+              "post_collect": false,
+              "Description": "prenom vide",
+              "Expression": "nvl($PRENOM$,\"\")=\"\"",
+              "during_collect": false,
+              "criticity": "INFO",
+              "FailMessage": "\"Merci de renseigner votre prénom\"",
+              "id": "k6c6jawj"
+            }
+          ],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Quel est votre prénom ? \""
+          ],
+          "id": "k6c3ia6n",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "Controle sur prénom vide",
+              "id": "kzf8uqsy",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAWI",
+                "CAPI",
+                "CATI",
+                "PAPI"
+              ]
+            }
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "PRENOM"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "k6gjrmq4",
+              "id": "k6gjnv40",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": "80"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Quelle est votre adresse email ?\""
+          ],
+          "id": "k6gjzooe",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "EMAIL"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "\"Description socio démo de \"|| $PRENOM$"
+          ],
+          "id": "k3opeux2",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "Ajouter une décla sinon le titre de sous seq n'apparait pas",
+              "id": "kzf8lbqn",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAWI",
+                "CAPI",
+                "CATI"
+              ]
+            }
+          ],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "k6c6k1tu",
+                  "id": "k6c6nccx",
+                  "mandatory": false,
+                  "CodeListReference": "jfkxtrih",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "CHECKBOX",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Bonjour \" || $PRENOM$ || \", êtes vous majeur ?\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "k6c6mt9g",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "INSTRUCTION",
+                  "Text": "Si vous répondez oui, alors la question 32/33 apparaîtra",
+                  "id": "k6cbmkuw",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAWI",
+                    "PAPI",
+                    "CAPI",
+                    "CATI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "MAJEUR"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "k6c73rl5",
+                  "id": "k6c3c6ci",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Maximum": "2020",
+                    "Minimum": "1900",
+                    "Format": "YYYY",
+                    "typeName": "DATE",
+                    "type": "DateDatatypeType"
+                  }
+                }
+              ],
+              "Control": [
+                {
+                  "post_collect": false,
+                  "Description": "Contrôle majeur",
+                  "Expression": "$MAJEUR$ = \"1\" and $AGEPRENOM$ < 18 and not(isnull($NAISSANCE$))",
+                  "during_collect": false,
+                  "criticity": "INFO",
+                  "FailMessage": "\"Vous avez dit être majeur, or vous avez \"|| cast($AGEPRENOM$,string) || \" ans.\"",
+                  "id": "k6c70u7r"
+                }
+              ],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "$PRENOM$ ||\", quelle est votre date de naissance ?\""
+              ],
+              "id": "k6c36b39",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "Format année : AAAA",
+                  "id": "kzf8r6ee",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAWI",
+                    "CAPI",
+                    "CATI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "HELP",
+                  "Text": "Controle sur age et fait d'être majeur",
+                  "id": "kzf8wj2j",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAWI",
+                    "CATI",
+                    "CAPI"
+                  ]
+                },
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"AGE calculé : \" || cast($AGEPRENOM$,string)",
+                  "id": "kzf8pk3q",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "NAISSANCE"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "k6c77e0d",
+                  "id": "k6c7eskw",
+                  "mandatory": false,
+                  "CodeListReference": "k6c79ub1",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "CHECKBOX",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Quel est votre sexe ?\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "k6c7mdcb",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "INSTRUCTION",
+                  "Text": "Si vous répondez homme, alors la question 33 disparaîtra",
+                  "id": "k6cc1one",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAWI",
+                    "PAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "SEXE"
+            }
+          ],
+          "Name": "SSSEQPERSO"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Sous module masqué par défaut, qui s'affiche lorsque l'individu coche majeur"
+          ],
+          "id": "k6c9b3d2",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "k6hx5t9w",
+                  "id": "k6c9tbhd",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 255
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question masquée par défaut, qui s'affiche lorsque l'individu coche majeur\""
+              ],
+              "id": "k6c9pbc3",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "Si a coché Homme, la question 33 disparaitra",
+                  "id": "kzfa7bm2",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAWI",
+                    "CAPI",
+                    "CATI",
+                    "PAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "QMASQUEE"
+            }
+          ],
+          "Name": "MMASQUE"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Sous module affiché par défaut, filtré si l'individu est un homme"
+          ],
+          "id": "k6c971cz",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "k6c9bf1r",
+                  "id": "k6c9url7",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 255
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question affichée par défaut, filtrée si l'individu est un homme\""
+              ],
+              "id": "k6c9al86",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "QFILTRE"
+            }
+          ],
+          "Name": "MFILTRE"
+        }
+      ],
+      "Name": "PERSO"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "PERSO - Composition du ménage - boucle type logement"
+      ],
+      "id": "l262oeox",
+      "TargetMode": [
+        "CAWI",
+        "CAPI",
+        "CATI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Description de votre ménage"
+          ],
+          "id": "k6c75pyx",
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "INSTRUCTION",
+              "Text": "\"Nous allons maintenant décrire les personnes qui vivent avec \" || $CIVILITE$ || $PRENOM$",
+              "id": "k6c7kiym",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAWI",
+                "PAPI",
+                "CAPI",
+                "CATI"
+              ]
+            }
+          ],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "k6c7uu2e",
+                  "id": "k6c7fp0x",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Maximum": "20",
+                    "Minimum": "0",
+                    "typeName": "NUMERIC",
+                    "Unit": "",
+                    "type": "NumericDatatypeType",
+                    "Decimals": ""
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Combien de personnes vivent dans votre logement, y compris vous ?\""
+              ],
+              "id": "k6c748uq",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "NBPERS"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "k6cbkeju",
+                  "id": "k6c7knp1",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Maximum": "20",
+                    "Minimum": "0",
+                    "typeName": "NUMERIC",
+                    "Unit": "",
+                    "type": "NumericDatatypeType",
+                    "Decimals": ""
+                  }
+                }
+              ],
+              "Control": [
+                {
+                  "post_collect": false,
+                  "Description": "nb enf présents",
+                  "Expression": "nvl($NBPERS$,0)  - nvl($NBENFANT$,0) < 1",
+                  "during_collect": false,
+                  "criticity": "INFO",
+                  "FailMessage": "\"le ménage doit comporter au moins un adulte. Vous en déclarez \" || cast($NBADULTES$,string)",
+                  "id": "k6c7ufpq"
+                }
+              ],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Combien avez vous d'enfants à charge ?\""
+              ],
+              "id": "k6c7oj3o",
+              "TargetMode": [
+                "CAWI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "Controle sur nb enfants",
+                  "id": "kzf9l7fc",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAWI",
+                    "CAPI",
+                    "CATI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Nb adultes : \" || cast(nvl($NBADULTES$,0),string)",
+                  "id": "kzf9gony",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "NBENFANT"
+            }
+          ],
+          "Name": "MENAGE"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Décrire chaque habitant"
+          ],
+          "id": "l8uaq797",
+          "TargetMode": [
+            "CAWI",
+            "CAPI",
+            "CATI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l8uahgew",
+                  "id": "l8uan067",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Nom\""
+              ],
+              "id": "k6ca0fk1",
+              "TargetMode": [
+                "CAWI",
+                "CAPI",
+                "CATI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "THL_PRENOM"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l8uay6c9",
+                  "id": "l8uatt9p",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Maximum": "100",
+                    "Minimum": "0",
+                    "typeName": "NUMERIC",
+                    "Unit": "http://id.insee.fr/unit/annee",
+                    "type": "NumericDatatypeType",
+                    "Decimals": ""
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Age entre 0 et 100\""
+              ],
+              "id": "l8uav5ld",
+              "TargetMode": [
+                "CAWI",
+                "CAPI",
+                "CATI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "THL_AGE"
+            }
+          ],
+          "Name": "THL"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "\"Questionnaire individuel de \" || $THL_PRENOM$ "
+          ],
+          "id": "kzf9qrnj",
+          "TargetMode": [
+            "CAWI",
+            "CAPI",
+            "CATI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "l8uan3ph",
+                  "id": "k6ccqh0g",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Maximum": "300",
+                    "Minimum": "0",
+                    "typeName": "NUMERIC",
+                    "Unit": "",
+                    "type": "NumericDatatypeType",
+                    "Decimals": ""
+                  }
+                }
+              ],
+              "Control": [
+                {
+                  "post_collect": false,
+                  "Description": "contrôle taille",
+                  "Expression": "nvl($TAILLE$,81) < 80 ",
+                  "during_collect": false,
+                  "criticity": "INFO",
+                  "FailMessage": "\"Vous êtes bien petit pour votre âge. Vous avez \" || cast($THL_AGE$,string)  || \" ans  ?\"",
+                  "id": "k6ccj578"
+                }
+              ],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "$THL_PRENOM$ || \", quelle est votre taille en centimètres ?\""
+              ],
+              "id": "k6ccf759",
+              "TargetMode": [
+                "CAWI",
+                "CAPI",
+                "CATI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Controle sur taille - si taille < 80\"",
+                  "id": "kzfaujvy",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAWI",
+                    "CAPI",
+                    "CATI",
+                    "PAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "TAILLE"
+            }
+          ],
+          "Name": "BOUCLE"
+        }
+      ],
+      "Name": "PERSOCOMPO"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "FIN QUESTIONNAIRE"
+      ],
+      "id": "l8uan6l7",
+      "TargetMode": [
+        "CAWI",
+        "CAPI",
+        "CATI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "FINQUEST"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAWI",
+        "CAPI",
+        "CATI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

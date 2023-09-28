@@ -1,19 +1,33 @@
 package fr.insee.eno.core.mappers;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.question.TextQuestion;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.Subsequence;
+import fr.insee.eno.core.model.variable.CollectedVariable;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.lunatic.model.flat.ComponentType;
+import fr.insee.lunatic.model.flat.InputNumber;
 import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.SequenceType;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LunaticMapperTest {
+
+    @Test
+    void mapIncompatibleTypes_throwsException() {
+        // Given
+        TextQuestion enoTextQuestion = new TextQuestion();
+        InputNumber lunaticNumericQuestion = new InputNumber();
+        // When + Then
+        LunaticMapper lunaticMapper = new LunaticMapper();
+        assertThrows(IllegalArgumentException.class, () ->
+                lunaticMapper.mapEnoObject(enoTextQuestion, lunaticNumericQuestion));
+    }
 
     @Test
     void modelToLunaticTest() {
@@ -22,10 +36,10 @@ class LunaticMapperTest {
         // Id
         enoQuestionnaire.setId("TEST-ID");
         // Variables
-        Variable v1 = new Variable();
+        Variable v1 = new CollectedVariable();
         v1.setName("foo1");
         enoQuestionnaire.getVariables().add(v1);
-        Variable v2 = new Variable();
+        Variable v2 = new CollectedVariable();
         v2.setName("foo2");
         enoQuestionnaire.getVariables().add(v2);
         // Sequences
@@ -56,7 +70,7 @@ class LunaticMapperTest {
         //
         List<ComponentType> lunaticSequences = lunaticQuestionnaire.getComponents()
                 .stream()
-                .filter(componentType -> componentType instanceof SequenceType)
+                .filter(componentType -> componentType instanceof fr.insee.lunatic.model.flat.Sequence)
                 .toList();
         assertEquals("s1-id", lunaticSequences.get(0).getId());
         assertEquals("s2-id", lunaticSequences.get(1).getId());

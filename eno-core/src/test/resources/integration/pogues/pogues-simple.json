@@ -1,0 +1,136 @@
+{
+  "owner": "ENO-INTEGRATION-TESTS",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "idendquest",
+        "lmynuv39",
+        "lmyo3e0y"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "lmynyac5",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "Eno - Simple questionnaire"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "ENOSIMPLE",
+  "Variables": {
+    "Variable": [
+      {
+        "Label": "Q1 label",
+        "id": "lmyo22nw",
+        "type": "CollectedVariableType",
+        "Name": "Q1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Mon Sep 25 2023 11:01:43 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "TCM",
+      "uri": "http://ddi:fr.insee:DataCollection.TCM"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "lmyoceix",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "PAPI",
+    "CAWI"
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Unique sequence\""
+      ],
+      "id": "lmynuv39",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "PAPI",
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lmyo22nw",
+              "id": "lmynvhl8",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Unique question\""
+          ],
+          "id": "lmyo3e0y",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "PAPI",
+            "CAWI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q1"
+        }
+      ],
+      "Name": "S1"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "PAPI",
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

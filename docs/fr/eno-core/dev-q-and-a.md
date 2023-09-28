@@ -2,7 +2,7 @@
 
 ### Une annotation est définie sur un attribut, mais sa valeur reste `null`
 
-Les mappers utilise l'introspection pour accéder ou modifier les objets du modèle. Vérifier que les getters et setters sont définis pour l'attribut en question.
+Les mappers utilisent l'introspection pour accéder ou modifier les objets du modèle. Vérifier que les getters et setters sont définis pour l'attribut en question.
 
 En général, les getters et setters sont implémentés via les annotations `@Getter` and `@Setter` de Lombok. Vérifier si ces annotations sont présentes au niveau de la classe.
 
@@ -13,7 +13,6 @@ Cannot invoke "java.util.Collection.addAll(java.util.Collection)" because "model
 java.lang.NullPointerException: Cannot invoke "java.util.Collection.addAll(java.util.Collection)" because "modelCollection" is null
 ```
 
-The in mapper expects collections to be initialized. Make sure that each attribute that is a list is initialized.
 Les mappers supposent que les listes sont initialisées. Vérifier que les attributs qui sont une liste sont initialisés à la création de la classe.
 
 Incorrect :
@@ -38,7 +37,7 @@ class SomeModelClass extends EnoObject {
 }
 ```
 
-Note : on pourrait optimiser l'espace mémoire en modifiant les mappers pour initialiser les listes uniquement quand c'est nécessaire, ou modifier les getters pour les listes (example en-dessous). Peut-être plus tard (ça semble peu utile pour l'instant).
+Note : on pourrait optimiser l'espace mémoire en modifiant les mappers pour initialiser les listes uniquement quand c'est nécessaire, ou modifier les getters pour les listes (exemple en-dessous). Peut-être plus tard (ça semble peu utile pour l'instant).
 
 ```java
 @Getter @Setter
@@ -48,9 +47,8 @@ class SomeModelClass extends EnoObject {
 
     // Surcharge du getter par défaut pour initialiser la liste à la demande :
     public List<SomeEnoObject> getSomeEnoObjects() {
-        if (someEnoObjects == null) {
-            return new ArrayList<>();
-        }
+        if (someEnoObjects == null) 
+            someEnoObjects = new ArrayList<>();
         return someEnoObjects;
     }
 

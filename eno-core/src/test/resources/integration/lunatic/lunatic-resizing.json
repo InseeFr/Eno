@@ -1,0 +1,609 @@
+{
+  "id": "lmeyzqxr",
+  "modele": "ENORESIZING",
+  "enoCoreVersion": "2.4.9",
+  "lunaticModelVersion": "2.3.4",
+  "generatingDate": "21-09-2023 15:57:44",
+  "missing": false,
+  "pagination": "question",
+  "maxPage": "6",
+  "label": {
+    "value": "Eno - Resizing",
+    "type": "VTL|MD"
+  },
+  "components": [
+    {
+      "id": "lmezfil0",
+      "componentType": "Sequence",
+      "page": "1",
+      "label": {
+        "value": "\"I - \" || \"First sequence\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lmezfil0",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"First sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "lmezc4x9",
+      "componentType": "InputNumber",
+      "mandatory": false,
+      "page": "2",
+      "min": 2,
+      "max": 10,
+      "decimals": 0,
+      "label": {
+        "value": "\"➡ \" || \"Question that determines loops size\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "controls": [
+        {
+          "id": "lmezc4x9-format-borne-inf-sup",
+          "typeOfControl": "FORMAT",
+          "criticality": "ERROR",
+          "control": {
+            "value": "not(not(isnull(NUMBER)) and (2>NUMBER or 10<NUMBER))",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\" La valeur doit être comprise entre 2 et 10.\"",
+            "type": "VTL|MD"
+          }
+        },
+        {
+          "id": "lmezc4x9-format-decimal",
+          "typeOfControl": "FORMAT",
+          "criticality": "ERROR",
+          "control": {
+            "value": "not(not(isnull(NUMBER))  and round(NUMBER,0)<>NUMBER)",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\"",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "hierarchy": {
+        "sequence": {
+          "id": "lmezfil0",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"First sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "NUMBER"
+      ],
+      "response": {
+        "name": "NUMBER"
+      }
+    },
+    {
+      "id": "lmezf1ds",
+      "componentType": "Loop",
+      "page": "3",
+      "depth": 1,
+      "paginatedLoop": false,
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "NUMBER",
+        "Q2",
+        "PAIRWISE_SOURCE"
+      ],
+      "loopDependencies": [
+        "NUMBER"
+      ],
+      "lines": {
+        "min": {
+          "value": "1",
+          "type": "VTL"
+        },
+        "max": {
+          "value": "nvl(NUMBER, 1)",
+          "type": "VTL"
+        }
+      },
+      "components": [
+        {
+          "id": "lmez63il",
+          "componentType": "Sequence",
+          "page": "3",
+          "label": {
+            "value": "\"II - \" || \"Sequence with loop\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "lmez63il",
+              "page": "3",
+              "label": {
+                "value": "\"II - \" || \"Sequence with loop\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "NUMBER"
+          ]
+        },
+        {
+          "id": "lmriwa1y",
+          "componentType": "Input",
+          "mandatory": false,
+          "page": "3",
+          "maxLength": 249,
+          "label": {
+            "value": "\"➡ \" || \"Question in sequence 2\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "lmez63il",
+              "page": "3",
+              "label": {
+                "value": "\"II - \" || \"Sequence with loop\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "Q2",
+            "NUMBER"
+          ],
+          "response": {
+            "name": "Q2"
+          }
+        },
+        {
+          "id": "lmezduli",
+          "componentType": "Input",
+          "mandatory": false,
+          "page": "3",
+          "maxLength": 20,
+          "label": {
+            "value": "\"➡ \" || \"Question that is the input of the pairwise question\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "lmez63il",
+              "page": "3",
+              "label": {
+                "value": "\"II - \" || \"Sequence with loop\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "PAIRWISE_SOURCE",
+            "NUMBER"
+          ],
+          "response": {
+            "name": "PAIRWISE_SOURCE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "lmezmqi8",
+      "componentType": "Loop",
+      "page": "4",
+      "maxPage": "2",
+      "depth": 1,
+      "paginatedLoop": true,
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "Q3"
+      ],
+      "loopDependencies": [
+        "Q2",
+        "PAIRWISE_SOURCE"
+      ],
+      "components": [
+        {
+          "id": "lmezflon",
+          "componentType": "Sequence",
+          "page": "4.1",
+          "label": {
+            "value": "\"III - \" || \"Séquence avec boucle liée\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "lmezflon",
+              "page": "4.1",
+              "label": {
+                "value": "\"III - \" || \"Séquence avec boucle liée\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "Q2",
+            "PAIRWISE_SOURCE"
+          ]
+        },
+        {
+          "id": "lmezp3nz",
+          "componentType": "Input",
+          "mandatory": false,
+          "page": "4.2",
+          "maxLength": 249,
+          "label": {
+            "value": "\"➡ \" || \"Question in sequence 3\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "lmezflon",
+              "page": "4.1",
+              "label": {
+                "value": "\"III - \" || \"Séquence avec boucle liée\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "Q3",
+            "Q2",
+            "PAIRWISE_SOURCE"
+          ],
+          "response": {
+            "name": "Q3"
+          }
+        }
+      ],
+      "iterations": {
+        "value": "count(Q2)",
+        "type": "VTL"
+      }
+    },
+    {
+      "id": "lmgeljoy",
+      "componentType": "Sequence",
+      "page": "5",
+      "label": {
+        "value": "\"IV - \" || \"Sequence pairwise links\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lmgeljoy",
+          "page": "5",
+          "label": {
+            "value": "\"IV - \" || \"Sequence pairwise links\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "lmgen8zt",
+      "componentType": "PairwiseLinks",
+      "mandatory": false,
+      "page": "6",
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lmgeljoy",
+          "page": "5",
+          "label": {
+            "value": "\"IV - \" || \"Sequence pairwise links\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "LINKS"
+      ],
+      "xAxisIterations": {
+        "value": "count(PAIRWISE_SOURCE)"
+      },
+      "yAxisIterations": {
+        "value": "count(PAIRWISE_SOURCE)"
+      },
+      "components": [
+        {
+          "id": "lmgen8zt-pairwise-dropdown",
+          "componentType": "Dropdown",
+          "mandatory": false,
+          "page": "6",
+          "label": {
+            "value": "\"➡ \" || \"Pairwise links question\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "xAxis <> yAxis",
+            "type": "VTL"
+          },
+          "bindingDependencies": [
+            "LINKS"
+          ],
+          "options": [
+            {
+              "value": "LINK_A",
+              "label": {
+                "value": "\"Link of type A\"",
+                "type": "VTL|MD"
+              }
+            },
+            {
+              "value": "LINK_B",
+              "label": {
+                "value": "\"Link of type B\"",
+                "type": "VTL|MD"
+              }
+            },
+            {
+              "value": "LINK_C",
+              "label": {
+                "value": "\"Link of type C\"",
+                "type": "VTL|MD"
+              }
+            }
+          ],
+          "response": {
+            "name": "LINKS"
+          }
+        }
+      ],
+      "symLinks": {
+        "LINKS": {
+          "1": "1",
+          "2": "3",
+          "3": "2",
+          "4": "4",
+          "5": "6",
+          "6": "5",
+          "7": "8",
+          "8": "7",
+          "9": "10",
+          "10": "9",
+          "11": "13",
+          "12": "12",
+          "13": "11",
+          "14": null,
+          "15": null,
+          "16": "16",
+          "17": "17",
+          "18": "18"
+        }
+      }
+    }
+  ],
+  "variables": [
+    {
+      "variableType": "COLLECTED",
+      "name": "NUMBER",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q2",
+      "values": {
+        "PREVIOUS": [
+          null
+        ],
+        "COLLECTED": [
+          null
+        ],
+        "FORCED": [
+          null
+        ],
+        "EDITED": [
+          null
+        ],
+        "INPUTED": [
+          null
+        ]
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "PAIRWISE_SOURCE",
+      "values": {
+        "PREVIOUS": [
+          null
+        ],
+        "COLLECTED": [
+          null
+        ],
+        "FORCED": [
+          null
+        ],
+        "EDITED": [
+          null
+        ],
+        "INPUTED": [
+          null
+        ]
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q3",
+      "values": {
+        "PREVIOUS": [
+          null
+        ],
+        "COLLECTED": [
+          null
+        ],
+        "FORCED": [
+          null
+        ],
+        "EDITED": [
+          null
+        ],
+        "INPUTED": [
+          null
+        ]
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "LINKS",
+      "values": {
+        "PREVIOUS": [
+          [
+            null
+          ]
+        ],
+        "COLLECTED": [
+          [
+            null
+          ]
+        ],
+        "FORCED": [
+          [
+            null
+          ]
+        ],
+        "EDITED": [
+          [
+            null
+          ]
+        ],
+        "INPUTED": [
+          [
+            null
+          ]
+        ]
+      }
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "CALCULATED1",
+      "expression": {
+        "value": "nvl(Q2, \"\") || \" \" || \"FOO\"",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "Q2"
+      ],
+      "shapeFrom": "Q2",
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "CALCULATED2",
+      "expression": {
+        "value": "nvl(Q3, \"\") || \" \" || \"BAR\"",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "Q3"
+      ],
+      "shapeFrom": "Q2",
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "xAxis",
+      "expression": {
+        "value": "PAIRWISE_SOURCE",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "PAIRWISE_SOURCE"
+      ],
+      "shapeFrom": "PAIRWISE_SOURCE",
+      "inFilter": "true"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "yAxis",
+      "expression": {
+        "value": "PAIRWISE_SOURCE",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "PAIRWISE_SOURCE"
+      ],
+      "shapeFrom": "PAIRWISE_SOURCE",
+      "inFilter": "true"
+    }
+  ],
+  "cleaning": {},
+  "resizing": {
+    "NUMBER": {
+      "size": "nvl(NUMBER, 1)",
+      "variables": [
+        "Q2",
+        "PAIRWISE_SOURCE"
+      ]
+    },
+    "Q2": {
+      "size": "count(Q2)",
+      "variables": [
+        "Q3"
+      ]
+    },
+    "PAIRWISE_SOURCE": {
+      "sizeForLinksVariables": [
+        "count(PAIRWISE_SOURCE)",
+        "count(PAIRWISE_SOURCE)"
+      ],
+      "linksVariables": [
+        "LINKS"
+      ]
+    }
+  }
+}

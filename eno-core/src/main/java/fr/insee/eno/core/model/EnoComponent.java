@@ -2,8 +2,8 @@ package fr.insee.eno.core.model;
 
 import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.declaration.Instruction;
+import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.eno.core.model.navigation.Control;
-import fr.insee.eno.core.model.navigation.Filter;
 
 import java.util.List;
 
@@ -14,6 +14,6 @@ public interface EnoComponent {
     List<Declaration> getDeclarations();
     List<Instruction> getInstructions();
     List<Control> getControls();
-    void setFilter(Filter filter);
+    ComponentFilter getComponentFilter();
 
 }
