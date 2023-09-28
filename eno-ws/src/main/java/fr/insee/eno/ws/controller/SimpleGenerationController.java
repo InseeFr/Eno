@@ -1,18 +1,21 @@
 package fr.insee.eno.ws.controller;
 
-import fr.insee.eno.core.annotations.Format;
-import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.legacy.parameters.CaptureEnum;
 import fr.insee.eno.legacy.parameters.Context;
+import fr.insee.eno.treatments.LunaticPostProcessing;
 import fr.insee.eno.ws.PassePlat;
 import fr.insee.eno.ws.controller.utils.V3ControllerUtils;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.FilePart;
+import org.springframework.http.codec.multipart.Part;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Controller;
@@ -68,28 +71,6 @@ public class SimpleGenerationController {
     }
 
     @Operation(
-            summary = "[V3] Generation of Lunatic xml questionnaire according to the context.",
-            description = "**This endpoint uses Eno V3.** " +
-                    "Generate a Lunatic xml **flat** questionnaire from a DDI questionnaire " +
-                    "using the default Lunatic parameters in function of context. " +
-                    "*Warning: in legacy version, this endpoint used to deliver Lunatic xml **hierarchical** " +
-                    "questionnaires (to be confirmed).*" +
-                    "To see these parameters, you can use the endpoint: `/v3/parameter/{context}/LUNATIC/default`")
-    @PostMapping(value = "{context}/lunatic-xml/{mode}",
-            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Mono<ResponseEntity<String>> generateLunaticXmlQuestionnaire(
-            @RequestPart(value="in") Mono<FilePart> ddiFile,
-            @PathVariable EnoParameters.Context context,
-            @PathVariable Mode mode) {
-        //
-        EnoParameters enoParameters = new EnoParameters(context, Format.LUNATIC);
-        enoParameters.getSelectedModes().clear();
-        enoParameters.getSelectedModes().add(mode);
-        //
-        return controllerUtils.ddiToLunaticXml(ddiFile, enoParameters);
-    }
-
-    @Operation(
             summary = "[V3] Generation of Lunatic json flat questionnaire according to the context.",
             description = "**This endpoint uses Eno V3.** " +
                     "Generate a Lunatic json flat questionnaire from a DDI questionnaire " +
@@ -99,19 +80,24 @@ public class SimpleGenerationController {
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<ResponseEntity<String>> generateLunaticJsonQuestionnaire(
             @RequestPart(value="in") Mono<FilePart> ddiFile,
-            @RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
+            @Parameter(name = "specificTreatment",
+                    schema = @Schema(type="string", format="binary"))
+            @RequestPart(value="specificTreatment", required = false) Mono<Part> specificTreatment,
             @PathVariable EnoParameters.Context context,
-            @PathVariable Mode mode) {
+            @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter) {
+
+        /*
+           specificTreatment parameter is a part instead of a FilePart. This workaround is used to make swagger work
+           when empty value is checked for this input file on the endpoint.
+           When empty value is checked, swagger send no content-type nor filename for this multipart file. In this case,
+           Spring considers having a DefaultFormField object instead of FilePart and exceptions is thrown
+           There is no way at this moment to disable the allow empty value when filed is not required.
+         */
+        Mono<LunaticPostProcessing> lunaticPostProcessing = controllerUtils.generateLunaticPostProcessings(specificTreatment);
         //
-        if (specificTreatment != null) {
-            log.warn("Specific treatments has changed in Eno v3. File given will be ignored.");
-        }
+        EnoParameters enoParameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
         //
-        EnoParameters enoParameters = new EnoParameters(context, Format.LUNATIC);
-        enoParameters.getSelectedModes().clear();
-        enoParameters.getSelectedModes().add(mode);
-        //
-        return controllerUtils.ddiToLunaticJson(ddiFile, enoParameters);
+        return controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessing);
     }
 
     @Operation(

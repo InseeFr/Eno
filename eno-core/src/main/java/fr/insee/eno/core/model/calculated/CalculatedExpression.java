@@ -1,20 +1,17 @@
 package fr.insee.eno.core.model.calculated;
 
-import datacollection33.IfThenElseType;
 import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.annotations.DDI;
-import fr.insee.eno.core.annotations.Format;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoObject;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.LabelType;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import reusable33.CommandType;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import static fr.insee.eno.core.annotations.Contexts.Context;
 
@@ -22,8 +19,6 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
  * calculated variables, controls, filters. */
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Context(format = Format.DDI, type = CommandType.class)
 @Context(format = Format.LUNATIC, type = LabelType.class)
 public class CalculatedExpression extends EnoObject {
@@ -36,18 +31,18 @@ public class CalculatedExpression extends EnoObject {
     }
 
     /** Expression. */
-    @DDI(contextType = IfThenElseType.class, field = "getCommandContent()")
-    @Lunatic(contextType = LabelType.class, field = "setValue(#param)")
+    @DDI("getCommandContent()")
+    @Lunatic("setValue(#param)")
     private String value;
 
     /** For now, Lunatic type in label objects does not come from metadata, but is hardcoded here in Eno.
      * See labels documentation. */
-    @Lunatic(contextType = LabelType.class, field = "setType(#param)")
+    @Lunatic("setType(#param)")
     String type = Constant.LUNATIC_LABEL_VTL;
 
     /** In DDI, the expression contains variable references instead of variables names.
      * This list contains the references of these variables. */
-    @DDI(contextType = CommandType.class, field = "getInParameterList()")
-    private List<BindingReference> bindingReferences = new ArrayList<>();
+    @DDI("getInParameterList()")
+    private Set<BindingReference> bindingReferences = new HashSet<>();
 
 }

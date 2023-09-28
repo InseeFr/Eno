@@ -1,0 +1,568 @@
+{
+  "owner": "ENO-INTEGRATION-TESTS",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "ll3voupu",
+        "ll3vmxdk",
+        "idendquest",
+        "ll3vzeuu",
+        "ll3vmtwc",
+        "ll3vxw30",
+        "ll3vwe72",
+        "ll3vyvgg",
+        "ll3vutdx",
+        "ll3vk7v3",
+        "ll3w31im",
+        "ll3w45z4",
+        "ll3vkt4b",
+        "ll3vqv42",
+        "ll3w8u8z"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "ll3vouty",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "Eno - Extended loops (sequence)"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "ENOLOOPS3",
+  "Variables": {
+    "Variable": [
+      {
+        "Scope": "ll3vo4wh",
+        "Label": "Q1 label",
+        "id": "ll3vsusw",
+        "type": "CollectedVariableType",
+        "Name": "Q1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "Q2 label",
+        "id": "ll3vqclb",
+        "type": "CollectedVariableType",
+        "Name": "Q2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "ll3vo4wh",
+        "Label": "Q3 label",
+        "id": "ll3w2hht",
+        "type": "CollectedVariableType",
+        "Name": "Q3",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "ll3vo4wh",
+        "Label": "Q4 label",
+        "id": "ll3vkn9p",
+        "type": "CollectedVariableType",
+        "Name": "Q4",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "ll3vo4wh",
+        "Label": "Q5 label",
+        "id": "ll3w1dq2",
+        "type": "CollectedVariableType",
+        "Name": "Q5",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "ll3vo4wh",
+        "Label": "Q6 label",
+        "id": "ll3vrr9e",
+        "type": "CollectedVariableType",
+        "Name": "Q6",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "Q_LAST label",
+        "id": "ll3vv651",
+        "type": "CollectedVariableType",
+        "Name": "Q_LAST",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Wed Aug 09 2023 17:22:51 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "eec-dc1-2017",
+      "uri": "http://ddi:fr.insee:DataCollection.eec-dc1-2017",
+      "Name": "Enquête Emploi en continu 2017 - Vague 1"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "ll3vc5g5",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "Iterations": {
+    "Iteration": [
+      {
+        "Maximum": "5",
+        "Minimum": "1",
+        "MemberReference": [
+          "ll3voupu",
+          "ll3vxw30"
+        ],
+        "Label": "\"Add\"",
+        "id": "ll3vo4wh",
+        "Step": "1",
+        "type": "DynamicIterationType",
+        "Name": "LOOP_S1S3"
+      },
+      {
+        "MemberReference": [
+          "ll3vyvgg",
+          "ll3w45z4"
+        ],
+        "Label": "\"Add\"",
+        "id": "ll3vwi5e",
+        "type": "DynamicIterationType",
+        "Name": "LOOP_S4S6",
+        "IterableReference": "ll3vo4wh"
+      }
+    ]
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence 1 (start of loop)\""
+      ],
+      "id": "ll3voupu",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ll3vsusw",
+              "id": "ll3vz16z",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 1\""
+          ],
+          "id": "ll3vmxdk",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q1"
+        }
+      ],
+      "Name": "S1"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence 2\""
+      ],
+      "id": "ll3vzeuu",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ll3vqclb",
+              "id": "ll3vz9do",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 2\""
+          ],
+          "id": "ll3vmtwc",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q2"
+        }
+      ],
+      "Name": "S2"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence 3 (end of loop)\""
+      ],
+      "id": "ll3vxw30",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ll3w2hht",
+              "id": "ll3vsmg6",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 3\""
+          ],
+          "id": "ll3vwe72",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q3"
+        }
+      ],
+      "Name": "S3"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence 4 (start of linked loop)\""
+      ],
+      "id": "ll3vyvgg",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ll3vkn9p",
+              "id": "ll3walpa",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 4\""
+          ],
+          "id": "ll3vutdx",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q4"
+        }
+      ],
+      "Name": "S4"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence 5\""
+      ],
+      "id": "ll3vk7v3",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ll3w1dq2",
+              "id": "ll3w0q59",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 5\""
+          ],
+          "id": "ll3w31im",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q5"
+        }
+      ],
+      "Name": "S5"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence 6 (end of linked loop)\""
+      ],
+      "id": "ll3w45z4",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ll3vrr9e",
+              "id": "ll3vqvxb",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 6\""
+          ],
+          "id": "ll3vkt4b",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q6"
+        }
+      ],
+      "Name": "S6"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Last sequence\""
+      ],
+      "id": "ll3vqv42",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ll3vv651",
+              "id": "ll3w3mdp",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Last question\""
+          ],
+          "id": "ll3w8u8z",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q_LAST"
+        }
+      ],
+      "Name": "S_LAST"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

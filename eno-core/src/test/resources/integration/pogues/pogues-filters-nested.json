@@ -1,0 +1,1760 @@
+{
+  "owner": "ENO-INTEGRATION-TESTS",
+  "FlowControl": [
+    {
+      "Description": "Filter S2",
+      "Expression": "$Q1$ ",
+      "id": "ljoax6zf",
+      "IfTrue": "ljo1ukn7-ljo1ukn7"
+    },
+    {
+      "Description": "Filter Q22",
+      "Expression": "$Q21$ ",
+      "id": "ljob9von",
+      "IfTrue": "ljo80ypl-ljo80ypl"
+    },
+    {
+      "Description": "Filter Q34 to Q36",
+      "Expression": "$Q31$ ",
+      "id": "ljob7bmo",
+      "IfTrue": "ljo7u6ez-ljo8efze"
+    },
+    {
+      "Description": "Filter Q35 to Q36",
+      "Expression": "$Q32$ ",
+      "id": "ljob2029",
+      "IfTrue": "ljo863wa-ljo8efze"
+    },
+    {
+      "Description": "Filter Q36",
+      "Expression": "$Q33$ ",
+      "id": "ljob77i7",
+      "IfTrue": "ljo8efze-ljo8efze"
+    },
+    {
+      "Description": "Filter Q42 to Q44",
+      "Expression": "$Q41$ ",
+      "id": "ljob6b2w",
+      "IfTrue": "ljo8dint-ljo8y8il"
+    },
+    {
+      "Description": "Filter Q43 to Q44",
+      "Expression": "$Q42$ = 1",
+      "id": "ljob1vor",
+      "IfTrue": "ljo8fpi7-ljo8y8il"
+    },
+    {
+      "Description": "Filter Q44",
+      "Expression": "$Q43$ < 5",
+      "id": "ljob1hoo",
+      "IfTrue": "ljo8y8il-ljo8y8il"
+    },
+    {
+      "Description": "Filter S5B",
+      "Expression": "$Q5A$ ",
+      "id": "ljob6qbr",
+      "IfTrue": "ljo8o1z8-ljo8o1z8"
+    },
+    {
+      "Description": "Filter SS51",
+      "Expression": "$Q51$ ",
+      "id": "ljobcl8q",
+      "IfTrue": "ljo8qap9-ljo8qap9"
+    },
+    {
+      "Description": "Filter Q512",
+      "Expression": "$Q52$ ",
+      "id": "ljoblett",
+      "IfTrue": "ljo8zvhe-ljo8zvhe"
+    },
+    {
+      "Description": "Filter SS52",
+      "Expression": "$Q53$ ",
+      "id": "ljob9k7u",
+      "IfTrue": "ljo99ila-ljo99ila"
+    },
+    {
+      "Description": "Filter Q522",
+      "Expression": "$Q521$ ",
+      "id": "ljobpkyh",
+      "IfTrue": "ljo9d46d-ljo9d46d"
+    },
+    {
+      "Description": "Filter SS61 to SS62",
+      "Expression": "$Q6$ ",
+      "id": "ljobpg2q",
+      "IfTrue": "ljoaosdm-ljoat8bh"
+    },
+    {
+      "Description": "Filter SS62",
+      "Expression": "$Q61$ ",
+      "id": "ljobobls",
+      "IfTrue": "ljoat8bh-ljoat8bh"
+    },
+    {
+      "Description": "Filter S7B to S7C",
+      "Expression": "$Q7A$ ",
+      "id": "ljobnjoi",
+      "IfTrue": "ljob0ptq-ljoap1yc"
+    },
+    {
+      "Description": "Filter S7C",
+      "Expression": "$Q7B$ ",
+      "id": "ljobh8bb",
+      "IfTrue": "ljoap1yc-ljoap1yc"
+    }
+  ],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "ljo1xxiz",
+        "ljo1mx40",
+        "ljo1ukn7",
+        "ljo7wksz",
+        "ljo80ypl",
+        "idendquest",
+        "ljo7ig4r",
+        "ljo7ndmd",
+        "ljo8c901",
+        "ljo7vj0u",
+        "ljo7u6ez",
+        "ljo863wa",
+        "ljo8efze",
+        "ljo8qza6",
+        "ljo8tbgr",
+        "ljo8dint",
+        "ljo8fpi7",
+        "ljo8y8il",
+        "ljoamxkr",
+        "ljoaeqlu",
+        "ljo8o1z8",
+        "ljo8kins",
+        "ljoaqndv",
+        "ljoavr2x",
+        "ljo8qap9",
+        "ljo8ybrh",
+        "ljo8zvhe",
+        "ljo99ila",
+        "ljo9gsrg",
+        "ljo9d46d",
+        "ljo9u9gn",
+        "ljoavuyn",
+        "ljoaosdm",
+        "ljoah3jp",
+        "ljoat8bh",
+        "ljoar6en",
+        "ljob4qjl",
+        "ljoax0e4",
+        "ljob0ptq",
+        "ljoaur3q",
+        "ljoap1yc",
+        "ljob4ofd"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "ljo2a0fp",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "Eno - Nested filters"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "ENOFILTERS3",
+  "Variables": {
+    "Variable": [
+      {
+        "Label": "Q1 label",
+        "id": "ljo1l4ff",
+        "type": "CollectedVariableType",
+        "Name": "Q1",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q21 label",
+        "id": "ljo7szs5",
+        "type": "CollectedVariableType",
+        "Name": "Q21",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "Q22 label",
+        "id": "ljo7ohf6",
+        "type": "CollectedVariableType",
+        "Name": "Q22",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "Q31 label",
+        "id": "ljo7xjpz",
+        "type": "CollectedVariableType",
+        "Name": "Q31",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q32 label",
+        "id": "ljo86a2z",
+        "type": "CollectedVariableType",
+        "Name": "Q32",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q33 label",
+        "id": "ljo7zcix",
+        "type": "CollectedVariableType",
+        "Name": "Q33",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q34 label",
+        "id": "ljo867nq",
+        "type": "CollectedVariableType",
+        "Name": "Q34",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "Q35 label",
+        "id": "ljo80s4v",
+        "type": "CollectedVariableType",
+        "Name": "Q35",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "Q36 label",
+        "id": "ljo8dkpx",
+        "type": "CollectedVariableType",
+        "Name": "Q36",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "Q41 label",
+        "id": "ljo8nwhr",
+        "type": "CollectedVariableType",
+        "Name": "Q41",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q42 label",
+        "id": "ljo8e1xs",
+        "type": "CollectedVariableType",
+        "Name": "Q42",
+        "Datatype": {
+          "Maximum": "2",
+          "Minimum": "1",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": "0"
+        }
+      },
+      {
+        "Label": "Q43 label",
+        "id": "ljo8fz26",
+        "type": "CollectedVariableType",
+        "Name": "Q43",
+        "Datatype": {
+          "Maximum": "10",
+          "Minimum": "1",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": "0"
+        }
+      },
+      {
+        "Label": "Q44 label",
+        "id": "ljo8gbnf",
+        "type": "CollectedVariableType",
+        "Name": "Q44",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "Q51 label",
+        "id": "ljo8y7z4",
+        "type": "CollectedVariableType",
+        "Name": "Q51",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q511 label",
+        "id": "ljo8sjvt",
+        "type": "CollectedVariableType",
+        "Name": "Q511",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "Q512 label",
+        "id": "ljo938hm",
+        "type": "CollectedVariableType",
+        "Name": "Q512",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "Q521 label",
+        "id": "ljo9g1bg",
+        "type": "CollectedVariableType",
+        "Name": "Q521",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q522 label",
+        "id": "ljo9gyed",
+        "type": "CollectedVariableType",
+        "Name": "Q522",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "Q5A label",
+        "id": "ljoammly",
+        "type": "CollectedVariableType",
+        "Name": "Q5A",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q52 label",
+        "id": "ljoasuv0",
+        "type": "CollectedVariableType",
+        "Name": "Q52",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q53 label",
+        "id": "ljoalq60",
+        "type": "CollectedVariableType",
+        "Name": "Q53",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q6 label",
+        "id": "ljoagvqk",
+        "type": "CollectedVariableType",
+        "Name": "Q6",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q61 label",
+        "id": "ljoat8bf",
+        "type": "CollectedVariableType",
+        "Name": "Q61",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q62 label",
+        "id": "ljoau28o",
+        "type": "CollectedVariableType",
+        "Name": "Q62",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q7A label",
+        "id": "ljob7ixv",
+        "type": "CollectedVariableType",
+        "Name": "Q7A",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q7B label",
+        "id": "ljoaslst",
+        "type": "CollectedVariableType",
+        "Name": "Q7B",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "Q7C label",
+        "id": "ljobsr53",
+        "type": "CollectedVariableType",
+        "Name": "Q7C",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Tue Jul 04 2023 15:19:12 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "eec-dc1-2017",
+      "uri": "http://ddi:fr.insee:DataCollection.eec-dc1-2017"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "ljo1z9t3",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"First sequence\""
+      ],
+      "id": "ljo1xxiz",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljo1l4ff",
+              "id": "ljo20oma",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question to trigger first filter\""
+          ],
+          "id": "ljo1mx40",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q1"
+        }
+      ],
+      "Name": "S1"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence 2 (has filter)\""
+      ],
+      "id": "ljo1ukn7",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "HELP",
+          "Text": "\"Nested filters: sequence and question\"",
+          "id": "ljo83pw0",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljo7szs5",
+              "id": "ljobsm5i",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 2.1\""
+          ],
+          "id": "ljo7wksz",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q21"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljo7ohf6",
+              "id": "ljobmqej",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 2.2 (has filter)\""
+          ],
+          "id": "ljo80ypl",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q22"
+        }
+      ],
+      "Name": "S2"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence 3\""
+      ],
+      "id": "ljo7ig4r",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "HELP",
+          "Text": "\"Nested filters on questions, using variables outside filters scope\"",
+          "id": "ljo85y0b",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljo7xjpz",
+              "id": "ljobr6vd",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 3.1\""
+          ],
+          "id": "ljo7ndmd",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q31"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljo86a2z",
+              "id": "ljobjhkl",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 3.2\""
+          ],
+          "id": "ljo8c901",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q32"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljo7zcix",
+              "id": "ljobjqi2",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 3.3\""
+          ],
+          "id": "ljo7vj0u",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q33"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljo867nq",
+              "id": "ljobh509",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 3.4 (has filter)\""
+          ],
+          "id": "ljo7u6ez",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q34"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljo80s4v",
+              "id": "ljobx0zo",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 3.5 (has filter)\""
+          ],
+          "id": "ljo863wa",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q35"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljo8dkpx",
+              "id": "ljobq0mi",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 3.6 (has filter)\""
+          ],
+          "id": "ljo8efze",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q36"
+        }
+      ],
+      "Name": "S3"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence 4\""
+      ],
+      "id": "ljo8qza6",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "HELP",
+          "Text": "\"Nested filters on questions: using variables inside filters scope\"",
+          "id": "ljo8mvj6",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljo8nwhr",
+              "id": "ljobinhr",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 4.1\""
+          ],
+          "id": "ljo8tbgr",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q41"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljo8e1xs",
+              "id": "ljoc04dp",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "2",
+                "Minimum": "1",
+                "typeName": "NUMERIC",
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Decimals": "0"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 4.2 (has filter)\""
+          ],
+          "id": "ljo8dint",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q42"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljo8fz26",
+              "id": "ljobjsem",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "10",
+                "Minimum": "1",
+                "typeName": "NUMERIC",
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Decimals": "0"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 4.3 (has filter)\""
+          ],
+          "id": "ljo8fpi7",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q43"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljo8gbnf",
+              "id": "ljobgse9",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 4.4 (has filter)\""
+          ],
+          "id": "ljo8y8il",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q44"
+        }
+      ],
+      "Name": "S4"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence 5 A\""
+      ],
+      "id": "ljoamxkr",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "HELP",
+          "Text": "\"Question to filter or not sequence 5 B\"",
+          "id": "ljoafzg9",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljoammly",
+              "id": "ljobul2e",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 5 A\""
+          ],
+          "id": "ljoaeqlu",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q5A"
+        }
+      ],
+      "Name": "S5A"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence 5 B (has filter)\""
+      ],
+      "id": "ljo8o1z8",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "HELP",
+          "Text": "\"Nested filters with subsequences\"",
+          "id": "ljo8yko9",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljo8y7z4",
+              "id": "ljobncyp",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Trigger for subsequence 5.1\""
+          ],
+          "id": "ljo8kins",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q51"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljoasuv0",
+              "id": "ljobm1sx",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Trigger for question 5.2.1\""
+          ],
+          "id": "ljoaqndv",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q52"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljoalq60",
+              "id": "ljobqaa7",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Trigger for subsequence 5.2\""
+          ],
+          "id": "ljoavr2x",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q53"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "\"Subsequence 5.1 (has filter)\""
+          ],
+          "id": "ljo8qap9",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Nested filter on subsequence's question using variable outside the subsequence\"",
+              "id": "ljo9464l",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ]
+            }
+          ],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "ljo8sjvt",
+                  "id": "ljobh55m",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question 5.1.1\""
+              ],
+              "id": "ljo8ybrh",
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "Q511"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "ljo938hm",
+                  "id": "ljobsyb4",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question 5.1.2 (has filter)\""
+              ],
+              "id": "ljo8zvhe",
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "Q512"
+            }
+          ],
+          "Name": "SS51"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "\"Subsequence 5.2 (has filter)\""
+          ],
+          "id": "ljo99ila",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Nested filter on subsequence's question using variable inside the subsequence\"",
+              "id": "ljo94kqw",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ]
+            }
+          ],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "ljo9g1bg",
+                  "id": "ljobkv81",
+                  "mandatory": false,
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question 5.2.1\""
+              ],
+              "id": "ljo9gsrg",
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "Q521"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "ljo9gyed",
+                  "id": "ljobhzxm",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question 5.2.2 (has filter)\""
+              ],
+              "id": "ljo9d46d",
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "Q522"
+            }
+          ],
+          "Name": "SS52"
+        }
+      ],
+      "Name": "S5B"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence 6\""
+      ],
+      "id": "ljo9u9gn",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "HELP",
+          "Text": "\"Nested filters on consecutive subsequences\"",
+          "id": "ljo9syjy",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljoagvqk",
+              "id": "ljobjjia",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 6\""
+          ],
+          "id": "ljoavuyn",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q6"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "\"Subsequence 6.1 (has filter)\""
+          ],
+          "id": "ljoaosdm",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "ljoat8bf",
+                  "id": "ljoblcfy",
+                  "mandatory": false,
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question 6.1\""
+              ],
+              "id": "ljoah3jp",
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "Q61"
+            }
+          ],
+          "Name": "SS61"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "\"Subsequence 6.2 (has filter)\""
+          ],
+          "id": "ljoat8bh",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "ljoau28o",
+                  "id": "ljobwudt",
+                  "mandatory": false,
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question 6.2\""
+              ],
+              "id": "ljoar6en",
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "Q62"
+            }
+          ],
+          "Name": "SS62"
+        }
+      ],
+      "Name": "S6"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence 7 A\""
+      ],
+      "id": "ljob4qjl",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "HELP",
+          "Text": "\"Nested filters on consecutive sequences\"",
+          "id": "ljoaxrwu",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljob7ixv",
+              "id": "ljobp1n8",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 7 A\""
+          ],
+          "id": "ljoax0e4",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q7A"
+        }
+      ],
+      "Name": "S7A"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence 7 B (has filter)\""
+      ],
+      "id": "ljob0ptq",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljoaslst",
+              "id": "ljobnlpr",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 7 B\""
+          ],
+          "id": "ljoaur3q",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q7B"
+        }
+      ],
+      "Name": "S7B"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence 7 C (has filter)\""
+      ],
+      "id": "ljoap1yc",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ljobsr53",
+              "id": "ljobvqxh",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question 7 C\""
+          ],
+          "id": "ljob4ofd",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q7C"
+        }
+      ],
+      "Name": "S7C"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

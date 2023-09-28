@@ -1,7 +1,7 @@
 package fr.insee.eno.core.sandbox;
 
 import fr.insee.eno.core.annotations.Contexts;
-import fr.insee.eno.core.annotations.Format;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import org.junit.jupiter.api.Test;
 

@@ -1,13 +1,13 @@
 plugins {
     id 'net.saliman.properties' version '1.5.2'
     id 'java'
-    id 'org.springframework.boot' version '3.0.0' apply false
-    id 'io.spring.dependency-management' version '1.1.0' apply false
+    id 'org.springframework.boot' version '3.1.4' apply false
+    id 'io.spring.dependency-management' version '1.1.3' apply false
 }
 
 allprojects {
     group = 'fr.insee.eno'
-    version = '3.0.0-RC'
+    version = '3.10.5-SNAPSHOT'
     sourceCompatibility = '17'
 }
 
