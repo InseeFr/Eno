@@ -28,6 +28,11 @@ public class LunaticVariablesValues implements ProcessingStep<Questionnaire> {
                 .filter(Loop.class::isInstance)
                 .map(Loop.class::cast)
                 .forEach(this::replaceLoopVariables);
+        //
+        lunaticQuestionnaire.getComponents().stream()
+                .filter(PairwiseLinks.class::isInstance)
+                .map(PairwiseLinks.class::cast)
+                .forEach(this::replacePairwiseVariable);
     }
 
     /**
@@ -48,6 +53,18 @@ public class LunaticVariablesValues implements ProcessingStep<Questionnaire> {
             variableTypeArray.setValues(new ValuesTypeArray());
             lunaticQuestionnaire.getVariables().add(variableTypeArray);
         });
+    }
+
+    private void replacePairwiseVariable(PairwiseLinks pairwiseLinks) {
+        String pairwiseVariableName = LunaticUtils.getPairwiseResponseVariable(pairwiseLinks);
+        //
+        lunaticQuestionnaire.getVariables().removeIf(variable -> pairwiseVariableName.equals(variable.getName()));
+        //
+        VariableTypeTwoDimensionsArray variableTypeTwoDimensionsArray = new VariableTypeTwoDimensionsArray();
+        variableTypeTwoDimensionsArray.setVariableType(VariableTypeEnum.COLLECTED);
+        variableTypeTwoDimensionsArray.setName(pairwiseVariableName);
+        variableTypeTwoDimensionsArray.setValues(new ValuesTypeTwoDimensionsArray());
+        lunaticQuestionnaire.getVariables().add(variableTypeTwoDimensionsArray);
     }
 
 }
