@@ -1,6 +1,5 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.resizing;
 
-import fr.insee.eno.core.exceptions.business.LunaticLoopException;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.BindingReference;
@@ -9,7 +8,11 @@ import fr.insee.eno.core.model.navigation.LinkedLoop;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticLoopResolution;
 import fr.insee.eno.core.reference.EnoIndex;
-import fr.insee.lunatic.model.flat.*;
+import fr.insee.eno.core.utils.LunaticUtils;
+import fr.insee.lunatic.model.flat.IVariableType;
+import fr.insee.lunatic.model.flat.Loop;
+import fr.insee.lunatic.model.flat.Questionnaire;
+import fr.insee.lunatic.model.flat.VariableTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -62,7 +65,7 @@ public class LunaticLoopResizingLogic {
 
         // Concerned variables to be resized
         // Note: external variables are not concerned since their values are not designed to be changed dynamically
-        List<String> resizedVariableNames = getCollectedVariablesInLoop(lunaticLoop);
+        List<String> resizedVariableNames = LunaticUtils.getCollectedVariablesInLoop(lunaticLoop);
 
         List<LunaticResizingEntry> resizingLoopEntries = new ArrayList<>();
         String finalSizeExpression = sizeExpression; // (due to usage in lambda)
@@ -99,39 +102,6 @@ public class LunaticLoopResizingLogic {
                     enoLinkedLoop.getReference(), enoLinkedLoop.getId()));
         // Return the variable name of its first question (reusing some code from lunatic loop processing)
         return LunaticLoopResolution.findFirstVariableOfReference(enoLinkedLoop, referenceLoop.get(), enoIndex);
-    }
-
-    private List<String> getCollectedVariablesInLoop(Loop loop) {
-        List<String> result = new ArrayList<>();
-        loop.getComponents().forEach(component -> {
-            switch (component.getComponentType()) {
-                case CHECKBOX_BOOLEAN, INPUT_NUMBER, INPUT, TEXTAREA, DATEPICKER, RADIO, CHECKBOX_ONE, DROPDOWN ->
-                        result.add(((ComponentSimpleResponseType) component).getResponse().getName());
-                case CHECKBOX_GROUP ->
-                        ((CheckboxGroup) component).getResponses().forEach(responsesCheckboxGroup ->
-                                result.add(responsesCheckboxGroup.getResponse().getName()));
-                case TABLE ->
-                        ((Table) component).getBodyLines().forEach(bodyLine ->
-                                bodyLine.getBodyCells().stream()
-                                        .filter(bodyCell -> bodyCell.getResponse() != null)
-                                        .forEach(bodyCell -> result.add(bodyCell.getResponse().getName())));
-                case ROSTER_FOR_LOOP ->
-                        throw new LunaticLoopException(String.format(
-                                "Dynamic tables are forbidden in loops: loop '%s' contains a dynamic table.",
-                                loop.getId()));
-                case LOOP ->
-                        throw new LunaticLoopException(String.format(
-                                "Nested loop are forbidden: loop '%s' contains an other loop.",
-                                loop.getId()));
-                case PAIRWISE_LINKS ->
-                        throw new LunaticLoopException(String.format(
-                                "Pairwise components are forbidden in loops: loop '%s' contains a pairwise component.",
-                                loop.getId()));
-                default ->
-                        log.debug("(Resizing) Component of type {} has no response.", component.getComponentType());
-            }
-        });
-        return result;
     }
 
 }
