@@ -1,10 +1,8 @@
 package fr.insee.eno.core.utils;
 
 import fr.insee.eno.core.exceptions.business.LunaticLoopException;
-import fr.insee.lunatic.model.flat.CheckboxGroup;
-import fr.insee.lunatic.model.flat.ComponentSimpleResponseType;
-import fr.insee.lunatic.model.flat.Loop;
-import fr.insee.lunatic.model.flat.Table;
+import fr.insee.eno.core.exceptions.technical.LunaticPairwiseException;
+import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -52,6 +50,26 @@ public class LunaticUtils {
             }
         });
         return result;
+    }
+
+    public static List<String> getPairwiseResponseVariable(PairwiseLinks pairwiseLinks) {
+        // Some controls...
+        int pairwiseComponentsSize = pairwiseLinks.getComponents().size();
+        if (pairwiseComponentsSize != 1)
+            throw new LunaticPairwiseException(String.format(
+                    "Lunatic pairwise must contain exactly 1 component. Pairwise object '%s' contains %s.",
+                    pairwiseLinks.getId(), pairwiseComponentsSize));
+        ComponentType pairwiseComponent = pairwiseLinks.getComponents().get(0);
+        if (! (ComponentTypeEnum.DROPDOWN.equals(pairwiseComponent.getComponentType()) ||
+                ComponentTypeEnum.RADIO.equals(pairwiseComponent.getComponentType()) ||
+                ComponentTypeEnum.CHECKBOX_ONE.equals(pairwiseComponent.getComponentType())))
+            throw new LunaticPairwiseException(String.format(
+                    "Lunatic pairwise component should be a unique choice component. Pairwise object '%s' " +
+                            "contains a component of type '%s'.",
+                    pairwiseLinks.getId(), pairwiseComponent.getComponentType()));
+        //
+        return List.of(
+                ((ComponentSimpleResponseType) pairwiseComponent).getResponse().getName());
     }
 
 }
