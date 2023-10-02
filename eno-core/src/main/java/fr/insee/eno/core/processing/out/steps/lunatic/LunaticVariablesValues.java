@@ -2,10 +2,7 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.utils.LunaticUtils;
-import fr.insee.lunatic.model.flat.Loop;
-import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.VariableTypeArray;
-import fr.insee.lunatic.model.flat.VariableTypeEnum;
+import fr.insee.lunatic.model.flat.*;
 
 import java.util.List;
 
@@ -48,6 +45,7 @@ public class LunaticVariablesValues implements ProcessingStep<Questionnaire> {
             VariableTypeArray variableTypeArray = new VariableTypeArray();
             variableTypeArray.setVariableType(VariableTypeEnum.COLLECTED);
             variableTypeArray.setName(variableName);
+            variableTypeArray.setValues(new ValuesTypeArray());
             lunaticQuestionnaire.getVariables().add(variableTypeArray);
         });
     }
