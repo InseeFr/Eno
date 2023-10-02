@@ -47,7 +47,7 @@ public class LunaticPairwiseResizingLogic {
         List<String> sizeExpressions = List.of(
                 pairwiseLinks.getXAxisIterations().getValue(), pairwiseLinks.getYAxisIterations().getValue());
         // Concerned variables to be resized
-        List<String> resizedVariableNames = LunaticUtils.getPairwiseResponseVariable(pairwiseLinks);
+        List<String> resizedVariableNames = List.of(LunaticUtils.getPairwiseResponseVariable(pairwiseLinks));
 
         List<LunaticResizingPairwiseEntry> resizingPairwiseEntries = new ArrayList<>();
         resizingVariableNames.forEach(variableName ->

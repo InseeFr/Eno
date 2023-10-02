@@ -52,7 +52,7 @@ public class LunaticUtils {
         return result;
     }
 
-    public static List<String> getPairwiseResponseVariable(PairwiseLinks pairwiseLinks) {
+    public static String getPairwiseResponseVariable(PairwiseLinks pairwiseLinks) {
         // Some controls...
         int pairwiseComponentsSize = pairwiseLinks.getComponents().size();
         if (pairwiseComponentsSize != 1)
@@ -68,8 +68,7 @@ public class LunaticUtils {
                             "contains a component of type '%s'.",
                     pairwiseLinks.getId(), pairwiseComponent.getComponentType()));
         //
-        return List.of(
-                ((ComponentSimpleResponseType) pairwiseComponent).getResponse().getName());
+        return ((ComponentSimpleResponseType) pairwiseComponent).getResponse().getName();
     }
 
 }
