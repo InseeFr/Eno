@@ -25,6 +25,7 @@ public class LunaticAddShapeToCalculatedVariables implements ProcessingStep<Ques
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
         List<VariableType> lunaticCalculatedVariables = lunaticQuestionnaire.getVariables().stream()
+                .filter(VariableType.class::isInstance)
                 .map(VariableType.class::cast)
                 .filter(variableType -> variableType.getVariableType().equals(VariableTypeEnum.CALCULATED))
                 .toList();

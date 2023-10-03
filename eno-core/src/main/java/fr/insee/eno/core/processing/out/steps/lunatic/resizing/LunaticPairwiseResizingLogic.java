@@ -5,6 +5,7 @@ import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.lunatic.LunaticResizingPairwiseEntry;
 import fr.insee.eno.core.model.question.PairwiseQuestion;
 import fr.insee.eno.core.reference.EnoIndex;
+import fr.insee.eno.core.utils.LunaticUtils;
 import fr.insee.lunatic.model.flat.*;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class LunaticPairwiseResizingLogic {
         List<String> sizeExpressions = List.of(
                 pairwiseLinks.getXAxisIterations().getValue(), pairwiseLinks.getYAxisIterations().getValue());
         // Concerned variables to be resized
-        List<String> resizedVariableNames = findResizedVariablesForPairwise(pairwiseLinks);
+        List<String> resizedVariableNames = List.of(LunaticUtils.getPairwiseResponseVariable(pairwiseLinks));
 
         List<LunaticResizingPairwiseEntry> resizingPairwiseEntries = new ArrayList<>();
         resizingVariableNames.forEach(variableName ->
@@ -75,26 +76,6 @@ public class LunaticPairwiseResizingLogic {
         return pairwiseSourceVariable.getBindingDependencies().stream()
                 .filter(variableName -> !pairwiseSourceVariableName.equals(variableName))
                 .toList();
-    }
-
-    private List<String> findResizedVariablesForPairwise(PairwiseLinks pairwiseLinks) {
-        // Some controls...
-        int pairwiseComponentsSize = pairwiseLinks.getComponents().size();
-        if (pairwiseComponentsSize != 1)
-            throw new LunaticPairwiseException(String.format(
-                    "Lunatic pairwise must contain exactly 1 component. Pairwise object '%s' contains %s.",
-                    pairwiseLinks.getId(), pairwiseComponentsSize));
-        ComponentType pairwiseComponent = pairwiseLinks.getComponents().get(0);
-        if (! (ComponentTypeEnum.DROPDOWN.equals(pairwiseComponent.getComponentType()) ||
-                ComponentTypeEnum.RADIO.equals(pairwiseComponent.getComponentType()) ||
-                ComponentTypeEnum.CHECKBOX_ONE.equals(pairwiseComponent.getComponentType())))
-            throw new LunaticPairwiseException(String.format(
-                    "Lunatic pairwise component should be a unique choice component. Pairwise object '%s' " +
-                            "contains a component of type '%s'.",
-                    pairwiseLinks.getId(), pairwiseComponent.getComponentType()));
-        //
-        return List.of(
-                ((ComponentSimpleResponseType) pairwiseComponent).getResponse().getName());
     }
 
 }
