@@ -74,6 +74,7 @@
         <xslt in="${input-file}"
             out="${temp.home}/${survey-name}/${Properties.InFormat}/multimodal-selected.tmp"
             style="${xslt.home}/pre-processing/ddi/multimodal-selection.xsl" classpath="${saxon.jar}" force="true">
+            <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
         </xslt>
     </target>
     
