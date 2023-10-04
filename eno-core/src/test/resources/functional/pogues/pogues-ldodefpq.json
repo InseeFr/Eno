@@ -1,0 +1,916 @@
+{
+  "owner": "QNONREG",
+  "FlowControl": [
+    {
+      "Description": "",
+      "Expression": "$Q1$ = \"A\" ",
+      "id": "liudgsg9",
+      "IfTrue": "liude0tk-liude0tk"
+    }
+  ],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "ldodmvpw",
+        "ldodmfpq",
+        "ldodn448",
+        "ldoe54ur",
+        "ldodqku4",
+        "ldoe64h3",
+        "ldoeba22",
+        "ldoez5qc",
+        "ldoexsbc",
+        "ldof1gdm",
+        "ldoffn3o",
+        "liude0tk",
+        "liud6mss",
+        "liudoeqe",
+        "liudjf9l",
+        "idendquest"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "ldoe735i",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "QNONREG Liens deux à deux Proto TCM"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "PROTO_TCM",
+  "Variables": {
+    "Variable": [
+      {
+        "Label": "NBHAB label",
+        "id": "ldodx43e",
+        "type": "CollectedVariableType",
+        "Name": "NBHAB",
+        "Datatype": {
+          "Maximum": "10",
+          "Minimum": "1",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Scope": "ldoe0rct",
+        "Label": "PRENOM label",
+        "id": "ldodtu99",
+        "type": "CollectedVariableType",
+        "Name": "PRENOM",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "ldoe0rct",
+        "Label": "AGE label",
+        "id": "ldodwln8",
+        "type": "CollectedVariableType",
+        "Name": "AGE",
+        "Datatype": {
+          "Maximum": "120",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "http://id.insee.fr/unit/annee",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "LIENS label",
+        "id": "ldoel6mm",
+        "type": "CollectedVariableType",
+        "CodeListReference": "ldoe6hg3",
+        "Name": "LIENS",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Scope": "ldoe0rct",
+        "Label": "ENFANT_SEUL label",
+        "id": "ldoev9n2",
+        "type": "CollectedVariableType",
+        "Name": "ENFANT_SEUL",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "ldoe0rct",
+        "Label": "Q1 label",
+        "id": "liudjg60",
+        "type": "CollectedVariableType",
+        "Name": "Q1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "ldoe0rct",
+        "Label": "Q3 label",
+        "id": "liudqzbi",
+        "type": "CollectedVariableType",
+        "Name": "Q3",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "ldoe0rct",
+        "Label": "Q2 label",
+        "id": "liudg5ku",
+        "type": "CollectedVariableType",
+        "Name": "Q2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "DERNIREQUE label",
+        "id": "liudbn1v",
+        "type": "CollectedVariableType",
+        "Name": "DERNIREQUE",
+        "Datatype": {
+          "Format": "YYYY-MM-DD",
+          "typeName": "DATE",
+          "type": "DateDatatypeType"
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Tue Jun 13 2023 16:19:04 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "esa-dc-2018",
+      "uri": "http://ddi:fr.insee:DataCollection.esa-dc-2018"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "ldodefpq",
+  "TargetMode": [
+    "CATI",
+    "CAWI",
+    "CAPI",
+    "PAPI"
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "Label": "LISTE_LIENS",
+        "id": "ldoe6hg3",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "Son conjoint, sa conjointe",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "Sa mère, son père",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "Sa fille, son fils",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "Sa soeur, son frère (y compris demi et quasi)",
+            "Value": "4"
+          },
+          {
+            "Parent": "",
+            "Label": "Sa belle-mère, son beau-père (conjoint.e d'un des parents)",
+            "Value": "5"
+          },
+          {
+            "Parent": "",
+            "Label": "L'enfant du conjoint (belle-fille, beau-fils)",
+            "Value": "6"
+          },
+          {
+            "Parent": "",
+            "Label": "Sa belle-mère, son beau-père (parent du conjoint)",
+            "Value": "7"
+          },
+          {
+            "Parent": "",
+            "Label": "Sa belle-fille, son beau-fils (conjoint.e d'un enfant)",
+            "Value": "8"
+          },
+          {
+            "Parent": "",
+            "Label": "Sa grand-mère, son grand-père",
+            "Value": "9"
+          },
+          {
+            "Parent": "",
+            "Label": "Sa petite-fille, petit-fils",
+            "Value": "10"
+          },
+          {
+            "Parent": "",
+            "Label": "Sa tante, son oncle",
+            "Value": "11"
+          },
+          {
+            "Parent": "",
+            "Label": "Sa cousine, son cousin",
+            "Value": "12"
+          },
+          {
+            "Parent": "",
+            "Label": "Sa nièce, son neveu",
+            "Value": "13"
+          },
+          {
+            "Parent": "",
+            "Label": "Un enfant placé en famille d'accueil",
+            "Value": "14"
+          },
+          {
+            "Parent": "",
+            "Label": "Sa belle-soeur, son beau-frère",
+            "Value": "15"
+          },
+          {
+            "Parent": "",
+            "Label": "Un autre lien familial",
+            "Value": "16"
+          },
+          {
+            "Parent": "",
+            "Label": "Autre lien (employé de maison, salarié logé, jeune au pair …)",
+            "Value": "17"
+          }
+        ],
+        "Name": ""
+      }
+    ]
+  },
+  "Iterations": {
+    "Iteration": [
+      {
+        "Maximum": "nvl($NBHAB$,1)",
+        "Minimum": "nvl($NBHAB$,1) ",
+        "MemberReference": [
+          "ldodn448",
+          "ldodn448"
+        ],
+        "id": "ldoe0rct",
+        "Step": "1",
+        "type": "DynamicIterationType",
+        "Name": "BOUCLE_HABITANTS"
+      },
+      {
+        "Filter": "$AGE$ > 17 or \"3\" in $LIENS$",
+        "MemberReference": [
+          "ldoez5qc",
+          "ldoez5qc"
+        ],
+        "id": "ldoem3k0",
+        "type": "DynamicIterationType",
+        "Name": "BOUCLE_QUESTIONS_LIENS",
+        "IterableReference": "ldoe0rct"
+      },
+      {
+        "Filter": "$AGE$ < 17",
+        "MemberReference": [
+          "ldof1gdm",
+          "ldof1gdm"
+        ],
+        "id": "ldof5dww",
+        "type": "DynamicIterationType",
+        "Name": "BOUCLE_MOINS_18",
+        "IterableReference": "ldoe0rct"
+      }
+    ]
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "THL"
+      ],
+      "id": "ldodmvpw",
+      "TargetMode": [
+        "CATI",
+        "CAWI",
+        "CAPI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "HELP",
+          "Text": "Aide",
+          "id": "lity4hfz",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CATI",
+            "CAWI",
+            "CAPI",
+            "PAPI"
+          ]
+        },
+        {
+          "declarationType": "INSTRUCTION",
+          "Text": "Consigne",
+          "id": "litxs78w",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CATI",
+            "CAPI",
+            "CAWI",
+            "PAPI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ldodx43e",
+              "id": "ldoe36wb",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "10",
+                "Minimum": "1",
+                "typeName": "NUMERIC",
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Combien de personnes habitent ce logement ?\""
+          ],
+          "id": "ldodmfpq",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"délaration\"",
+              "id": "lisltf38",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CATI",
+                "CAWI",
+                "CAPI",
+                "PAPI"
+              ]
+            },
+            {
+              "declarationType": "INSTRUCTION",
+              "Text": "\"consigne\"",
+              "id": "lisluajr",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ]
+            },
+            {
+              "declarationType": "INSTRUCTION",
+              "Text": "\"je suis la consigne cawi\"",
+              "id": "lislsviz",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAWI"
+              ]
+            },
+            {
+              "declarationType": "HELP",
+              "Text": "\"je suis l'aide cawi\"",
+              "id": "lismdq50",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAWI"
+              ]
+            }
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "NBHAB"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Description des habitants"
+          ],
+          "id": "ldodn448",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "Aide",
+              "id": "litxui6g",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CATI",
+                "CAWI",
+                "CAPI",
+                "PAPI"
+              ]
+            },
+            {
+              "declarationType": "INSTRUCTION",
+              "Text": "Consigne",
+              "id": "litxz7cp",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ]
+            }
+          ],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "ldodtu99",
+                  "id": "ldoe2hhn",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Quel est le prénom de cette personne ?\""
+              ],
+              "id": "ldoe54ur",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "PRENOM"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "ldodwln8",
+                  "id": "ldodo1pa",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Maximum": "120",
+                    "Minimum": "0",
+                    "typeName": "NUMERIC",
+                    "Unit": "http://id.insee.fr/unit/annee",
+                    "type": "NumericDatatypeType",
+                    "Decimals": ""
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Quel est l'âge de cet habitant ?\""
+              ],
+              "id": "ldodqku4",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "AGE"
+            }
+          ],
+          "Name": "DESCRIPTION_HABITANTS"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Liens entre les habitants"
+          ],
+          "id": "ldoe64h3",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "Aide",
+              "id": "litxu92f",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CATI",
+                "CAWI",
+                "CAPI",
+                "PAPI"
+              ]
+            },
+            {
+              "declarationType": "INSTRUCTION",
+              "Text": "Consigne",
+              "id": "lity100d",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ]
+            }
+          ],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "ldoel6mm",
+                  "id": "ldoe52wk",
+                  "mandatory": false,
+                  "CodeListReference": "ldoe6hg3",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "DROPDOWN",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Scope": "ldodtu99",
+              "Label": [
+                "\"Qui est \" || yAxis || \" pour \" || xAxis || \" ?\""
+              ],
+              "id": "ldoeba22",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "PAIRWISE",
+              "Name": "LIENS"
+            }
+          ],
+          "Name": "LIENS_HABITANTS"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Questions sur les liens des habitants"
+          ],
+          "id": "ldoez5qc",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "ldoev9n2",
+                  "id": "ldoeln9v",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Pourquoi \" || $PRENOM$ || \" ne vit pas avec ses parents ?\""
+              ],
+              "id": "ldoexsbc",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI",
+                "PAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "if \"3\" not_in $LIENS$ then \"pas 3\" else \"3\"",
+                  "id": "ldvd1lsi",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAWI",
+                    "CAPI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"déclaration\"",
+                  "id": "lislr92s",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAWI",
+                    "PAPI",
+                    "CATI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "ENFANT_SEUL"
+            }
+          ],
+          "Name": "QUESTIONS_LIENS"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "QUESTIONS_PLUS_17ANS"
+          ],
+          "id": "ldof1gdm",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "liudjg60",
+                  "id": "ldofjhje",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question qui va filtrer Q2  pour \" || $PRENOM$"
+              ],
+              "id": "ldoffn3o",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI",
+                "PAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Si Q1 = A alors afficher Q2\"",
+                  "id": "liudchiz",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAWI",
+                    "CAPI",
+                    "PAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "Q1"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "liudg5ku",
+                  "id": "liudpu6f",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question Q2 affichée si Q1 = A pour  \" || $PRENOM$"
+              ],
+              "id": "liude0tk",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "Q2"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "liudqzbi",
+                  "id": "liudhd60",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question troisième \" || $PRENOM$"
+              ],
+              "id": "liud6mss",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "Q3"
+            }
+          ],
+          "Name": "QUESTIONS_MOINS_17ANS"
+        }
+      ],
+      "Name": "THL"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "S2"
+      ],
+      "id": "liudoeqe",
+      "TargetMode": [
+        "CATI",
+        "CAWI",
+        "CAPI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "liudbn1v",
+              "id": "liudmp3w",
+              "mandatory": false,
+              "Datatype": {
+                "Format": "YYYY-MM-DD",
+                "typeName": "DATE",
+                "type": "DateDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Dernière question\""
+          ],
+          "id": "liudjf9l",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "DERNIREQUE"
+        }
+      ],
+      "Name": "S2"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CATI",
+        "CAWI",
+        "CAPI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

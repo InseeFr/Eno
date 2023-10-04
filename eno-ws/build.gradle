@@ -30,6 +30,7 @@ dependencies {
 	//
 	implementation project(':ddi-beans')
 	implementation project(':eno-core')
+	implementation project(':eno-treatments')
 	// Spring Web
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	// Open API // https://springdoc.org/v2/#spring-webflux-support

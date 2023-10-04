@@ -1,5 +1,7 @@
 package fr.insee.eno.core.annotations;
 
+import fr.insee.eno.core.parameter.Format;
+
 import java.lang.annotation.*;
 
 /**

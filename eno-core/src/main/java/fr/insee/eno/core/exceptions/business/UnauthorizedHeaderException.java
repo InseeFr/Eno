@@ -1,6 +1,6 @@
 package fr.insee.eno.core.exceptions.business;
 
-import fr.insee.eno.core.model.question.TableQuestion;
+import fr.insee.eno.core.model.question.EnoTable;
 
 /**
  * DDI and Lunatic formats allow to have nested code list in the header of a table question.
@@ -9,11 +9,11 @@ import fr.insee.eno.core.model.question.TableQuestion;
  */
 public class UnauthorizedHeaderException extends RuntimeException {
 
-    public UnauthorizedHeaderException(TableQuestion tableQuestion) {
+    public UnauthorizedHeaderException(EnoTable enoTable) {
         super(String.format(
                 "Table question with id='%s' and name ='%s' contains a hierarchical code list in its header, " +
                         "which is not allowed.",
-                tableQuestion.getId(), tableQuestion.getName()));
+                enoTable.getId(), enoTable.getName()));
     }
 
 }

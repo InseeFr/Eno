@@ -1,7 +1,9 @@
 package fr.insee.eno.core.model.code;
 
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
+import fr.insee.eno.core.parameter.Format;
 import logicalproduct33.CodeListType;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,12 +18,13 @@ import java.util.List;
  * */
 @Getter
 @Setter
+@Context(format = Format.DDI, type = CodeListType.class)
 public class CodeList extends EnoIdentifiableObject {
 
-    @DDI(contextType = CodeListType.class, field = "getLabelArray(0).getContentArray(0).getStringValue()")
+    @DDI("!getLabelList().isEmpty() ? getLabelArray(0).getContentArray(0).getStringValue() : null")
     String name;
 
-    @DDI(contextType = CodeListType.class, field = "getCodeList()")
+    @DDI("getCodeList()")
     List<CodeItem> codeItems = new ArrayList<>();
 
     /** Max depth of the code list. */
@@ -32,6 +35,7 @@ public class CodeList extends EnoIdentifiableObject {
         return codeItems.size();
     }
 
+    // TODO: the logic should be refactored outside the object imo
     public void computeSizes() {
         // Compute methods have to be used in a certain order
         // Some methods could be merged for slight performance improvement, but it would be to the detriment of code readability

@@ -1,0 +1,195 @@
+{
+  "id": "lmyoceix",
+  "modele": "ENOSIMPLE",
+  "enoCoreVersion": "2.4.9",
+  "lunaticModelVersion": "2.3.4",
+  "generatingDate": "25-09-2023 11:41:24",
+  "missing": false,
+  "pagination": "question",
+  "maxPage": "4",
+  "label": {
+    "value": "Eno - Simple questionnaire",
+    "type": "VTL|MD"
+  },
+  "components": [
+    {
+      "id": "BEGIN-QUESTION-SEQ",
+      "componentType": "Sequence",
+      "page": "1",
+      "label": {
+        "value": "\"Identification\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "BEGIN-QUESTION-SEQ",
+          "page": "1",
+          "label": {
+            "value": "\"Identification\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "BEGIN-QUESTION-SUBSEQ",
+      "componentType": "Subsequence",
+      "goToPage": "2",
+      "label": {
+        "value": "\"Identification de votre \" || cast(LABEL_UNITE_ENQUETEE,string)",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "BEGIN-QUESTION-SEQ",
+          "page": "1",
+          "label": {
+            "value": "\"Identification\"",
+            "type": "VTL|MD"
+          }
+        },
+        "subSequence": {
+          "id": "BEGIN-QUESTION-SUBSEQ",
+          "page": "2",
+          "label": {
+            "value": "\"Identification de votre \" || cast(LABEL_UNITE_ENQUETEE,string)",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "COMMENT-UE-QUESTION",
+      "componentType": "Textarea",
+      "mandatory": false,
+      "page": "2",
+      "maxLength": 2000,
+      "label": {
+        "value": "\"Remarque, commentaire sur un changement concernant votre \" || cast(LABEL_UNITE_ENQUETEE,string) || \" :\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "BEGIN-QUESTION-SEQ",
+          "page": "1",
+          "label": {
+            "value": "\"Identification\"",
+            "type": "VTL|MD"
+          }
+        },
+        "subSequence": {
+          "id": "BEGIN-QUESTION-SUBSEQ",
+          "page": "2",
+          "label": {
+            "value": "\"Identification de votre \" || cast(LABEL_UNITE_ENQUETEE,string)",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "LABEL_UNITE_ENQUETEE",
+        "COMMENT_UE"
+      ],
+      "response": {
+        "name": "COMMENT_UE"
+      }
+    },
+    {
+      "id": "lmynuv39",
+      "componentType": "Sequence",
+      "page": "3",
+      "label": {
+        "value": "\"I - \" || \"Unique sequence\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lmynuv39",
+          "page": "3",
+          "label": {
+            "value": "\"I - \" || \"Unique sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "lmyo3e0y",
+      "componentType": "Input",
+      "mandatory": false,
+      "page": "4",
+      "maxLength": 249,
+      "label": {
+        "value": "\"➡ 1. \" || \"Unique question\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lmynuv39",
+          "page": "3",
+          "label": {
+            "value": "\"I - \" || \"Unique sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q1"
+      ],
+      "response": {
+        "name": "Q1"
+      }
+    }
+  ],
+  "variables": [
+    {
+      "variableType": "COLLECTED",
+      "name": "COMMENT_UE",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "EXTERNAL",
+      "name": "LABEL_UNITE_ENQUETEE",
+      "value": null
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q1",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    }
+  ],
+  "cleaning": {},
+  "resizing": {}
+}

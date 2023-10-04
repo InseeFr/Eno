@@ -1,0 +1,198 @@
+{
+  "id": "lmyoceix",
+  "modele": "ENOSIMPLE",
+  "enoCoreVersion": "2.4.9",
+  "lunaticModelVersion": "2.3.4",
+  "generatingDate": "25-09-2023 10:07:18",
+  "missing": false,
+  "pagination": "question",
+  "maxPage": "5",
+  "label": {
+    "value": "Eno - Simple questionnaire",
+    "type": "VTL|MD"
+  },
+  "components": [
+    {
+      "id": "lmynuv39",
+      "componentType": "Sequence",
+      "page": "1",
+      "label": {
+        "value": "\"I - \" || \"Unique sequence\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lmynuv39",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Unique sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "lmyo3e0y",
+      "componentType": "Input",
+      "mandatory": false,
+      "page": "2",
+      "maxLength": 249,
+      "label": {
+        "value": "\"➡ \" || \"Unique question\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lmynuv39",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Unique sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q1"
+      ],
+      "response": {
+        "name": "Q1"
+      }
+    },
+    {
+      "id": "TIME-SEQ",
+      "componentType": "Sequence",
+      "page": "3",
+      "label": {
+        "value": "\"Temps de réponse\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "TIME-SEQ",
+          "page": "3",
+          "label": {
+            "value": "\"Temps de réponse\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "TIME-QUESTION-HEURE-REMPL",
+      "componentType": "InputNumber",
+      "mandatory": false,
+      "page": "4",
+      "min": 0,
+      "max": 99,
+      "decimals": 0,
+      "label": {
+        "value": "\"Combien de temps avez-vous mis en tout pour répondre à cette enquête (recherche des données + remplissage du questionnaire) ?\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "TIME-SEQ",
+          "page": "3",
+          "label": {
+            "value": "\"Temps de réponse\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "HEURE_REMPL"
+      ],
+      "unit": "heures",
+      "response": {
+        "name": "HEURE_REMPL"
+      }
+    },
+    {
+      "id": "TIME-QUESTION-MIN-REMPL",
+      "componentType": "InputNumber",
+      "mandatory": false,
+      "page": "5",
+      "min": 0,
+      "max": 59,
+      "decimals": 0,
+      "label": {
+        "value": "",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "TIME-SEQ",
+          "page": "3",
+          "label": {
+            "value": "\"Temps de réponse\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "MIN_REMPL"
+      ],
+      "unit": "minutes",
+      "response": {
+        "name": "MIN_REMPL"
+      }
+    }
+  ],
+  "variables": [
+    {
+      "variableType": "COLLECTED",
+      "name": "HEURE_REMPL",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MIN_REMPL",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q1",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    }
+  ],
+  "cleaning": {},
+  "resizing": {}
+}
