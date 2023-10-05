@@ -12,6 +12,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
 import java.util.List;
+import java.util.Set;
 
 class LunaticSerializerResizingTest {
     private Questionnaire lunaticQuestionnaire;
@@ -23,8 +24,8 @@ class LunaticSerializerResizingTest {
         lunaticQuestionnaire.setResizing(resizingType);
 
         List<Object> data = resizingType.getAny();
-        data.add(new LunaticResizingEntry("loopVariable", "count(NB)", List.of("NB")));
-        data.add(new LunaticResizingEntry("loopVariable1", "count(NB1,PRENOM1)", List.of("NB1", "PRENOM1")));
+        data.add(new LunaticResizingEntry("loopVariable", "count(NB)", Set.of("NB")));
+        data.add(new LunaticResizingEntry("loopVariable1", "count(NB1,PRENOM1)", Set.of("NB1", "PRENOM1")));
         data.add(new LunaticResizingPairwiseEntry("pairwise", List.of("count(NBP)", "count(PRENOMP)"), List.of("NBP", "PRENOMP")));
         data.add(new LunaticResizingPairwiseEntry("pairwise1", List.of("count(NBP1)", "count(PRENOMP1)"), List.of("NBP1", "PRENOMP1")));
     }
