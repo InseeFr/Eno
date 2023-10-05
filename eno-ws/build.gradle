@@ -31,6 +31,8 @@ dependencies {
 	implementation project(':ddi-beans')
 	implementation project(':eno-core')
 	implementation project(':eno-treatments')
+	// Lunatic
+	implementation libs.lunatic.model
 	// Spring Web
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	// Open API // https://springdoc.org/v2/#spring-webflux-support
