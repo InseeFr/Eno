@@ -1,7 +1,7 @@
 package fr.insee.eno.ws.controller;
 
 import fr.insee.eno.core.utils.XpathToVtl;
-import fr.insee.eno.ws.PassePlat;
+import fr.insee.eno.ws.PassThrough;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +20,9 @@ import reactor.core.publisher.Mono;
 @SuppressWarnings("unused")
 public class UtilController {
 
-    private final PassePlat passePlat;
+    private final PassThrough passePlat;
 
-    public UtilController(PassePlat passePlat) {
+    public UtilController(PassThrough passePlat) {
         this.passePlat = passePlat;
     }
 
