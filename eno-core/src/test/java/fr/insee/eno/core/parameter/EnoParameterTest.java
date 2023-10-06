@@ -9,15 +9,16 @@ class EnoParameterTest {
     @Test
     void lunaticParameters_DefaultCAWILunatic_testLunaticValues() {
         //
-        EnoParameters parameters = EnoParameters.of(
+        EnoParameters enoParameters = EnoParameters.of(
                 EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
         //
-        assertTrue(parameters.isControls());
-        assertTrue(parameters.isToolTip());
-        assertFalse(parameters.isFilterDescription());
-        assertTrue(parameters.isFilterResult());
-        assertFalse(parameters.isMissingVariables());
-        assertEquals(EnoParameters.LunaticPaginationMode.QUESTION, parameters.getLunaticPaginationMode());
+        LunaticParameters lunaticParameters = enoParameters.getLunaticParameters();
+        assertTrue(lunaticParameters.isControls());
+        assertTrue(lunaticParameters.isToolTip());
+        assertFalse(lunaticParameters.isFilterDescription());
+        assertTrue(lunaticParameters.isFilterResult());
+        assertFalse(lunaticParameters.isMissingVariables());
+        assertEquals(EnoParameters.LunaticPaginationMode.QUESTION, lunaticParameters.getLunaticPaginationMode());
     }
 
     @Test
