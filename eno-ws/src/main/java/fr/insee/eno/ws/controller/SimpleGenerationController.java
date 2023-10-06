@@ -5,7 +5,7 @@ import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.legacy.parameters.CaptureEnum;
 import fr.insee.eno.legacy.parameters.Context;
 import fr.insee.eno.treatments.LunaticPostProcessing;
-import fr.insee.eno.ws.PassePlat;
+import fr.insee.eno.ws.PassThrough;
 import fr.insee.eno.ws.controller.utils.V3ControllerUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -29,9 +29,9 @@ import reactor.core.publisher.Mono;
 public class SimpleGenerationController {
 
     private final V3ControllerUtils controllerUtils;
-    private final PassePlat passePlat;
+    private final PassThrough passePlat;
 
-    public SimpleGenerationController(V3ControllerUtils controllerUtils, PassePlat passePlat) {
+    public SimpleGenerationController(V3ControllerUtils controllerUtils, PassThrough passePlat) {
         this.controllerUtils = controllerUtils;
         this.passePlat = passePlat;
     }
