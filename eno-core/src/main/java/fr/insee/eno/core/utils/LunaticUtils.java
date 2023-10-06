@@ -5,8 +5,8 @@ import fr.insee.eno.core.exceptions.technical.LunaticPairwiseException;
 import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Slf4j
 public class LunaticUtils {
@@ -18,8 +18,8 @@ public class LunaticUtils {
      * @param loop A Lunatic loop.
      * @return A list of collected variable names.
      */
-    public static List<String> getCollectedVariablesInLoop(Loop loop) {
-        List<String> result = new ArrayList<>();
+    public static Set<String> getCollectedVariablesInLoop(Loop loop) {
+        Set<String> result = new HashSet<>();
         loop.getComponents().forEach(component -> {
             switch (component.getComponentType()) {
                 case CHECKBOX_BOOLEAN, INPUT_NUMBER, INPUT, TEXTAREA, DATEPICKER, RADIO, CHECKBOX_ONE, DROPDOWN ->

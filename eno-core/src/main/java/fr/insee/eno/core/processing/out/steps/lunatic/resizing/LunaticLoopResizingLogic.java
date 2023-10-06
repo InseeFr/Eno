@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Slf4j
 public class LunaticLoopResizingLogic {
@@ -65,7 +66,7 @@ public class LunaticLoopResizingLogic {
 
         // Concerned variables to be resized
         // Note: external variables are not concerned since their values are not designed to be changed dynamically
-        List<String> resizedVariableNames = LunaticUtils.getCollectedVariablesInLoop(lunaticLoop);
+        Set<String> resizedVariableNames = LunaticUtils.getCollectedVariablesInLoop(lunaticLoop);
 
         List<LunaticResizingEntry> resizingLoopEntries = new ArrayList<>();
         String finalSizeExpression = sizeExpression; // (due to usage in lambda)

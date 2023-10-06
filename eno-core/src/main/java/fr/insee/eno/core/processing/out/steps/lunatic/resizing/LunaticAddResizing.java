@@ -25,8 +25,7 @@ public class LunaticAddResizing implements ProcessingStep<Questionnaire> {
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
         //
-        ResizingType resizingType = new ResizingType();
-        List<Object> resizingList = resizingType.getAny();
+        List<Object> resizingList = new ArrayList<>();
         //
         LunaticLoopResizingLogic loopResizingLogic = new LunaticLoopResizingLogic(
                 lunaticQuestionnaire, enoQuestionnaire, enoIndex);
@@ -48,40 +47,75 @@ public class LunaticAddResizing implements ProcessingStep<Questionnaire> {
                 resizingList.addAll(pairwiseResizingLogic.buildPairwiseResizingEntries((PairwiseLinks) component));
             }
         });
-        // Check that there is no duplicate keys for resizing
-        // (Lunatic modeling for resizing has to be changed to be more precise, so that there would be no duplicate issue)
-        noDuplicatesControl(resizingList);
+        // Manage eventual resizing duplicates
+        List<Object> resizingListWithoutDuplicates = noDuplicatesControl(resizingList);
         // Set the resizing list only if it is not empty
-        if(!resizingList.isEmpty())
+        if(!resizingListWithoutDuplicates.isEmpty()) {
+            ResizingType resizingType = new ResizingType();
+            resizingType.setAny(resizingListWithoutDuplicates);
             lunaticQuestionnaire.setResizing(resizingType);
+        }
     }
 
     /** Throws an exception if there are duplicates in the resizing list.
-     * We could make something more precise than this by making controls everywhere we add resizing entries.
-     * Yet since the Lunatic "resizing" feature has to be reworked, we'll settle for that for now. */
-    private void noDuplicatesControl(List<Object> resizingList) {
-        Set<String> resizingKeys = new HashSet<>();
-        Set<String> duplicates = new HashSet<>();
-        resizingList.forEach(resizingEntry -> {
-            // crappy code but all this will be removed when there will be a proper implementation in Lunatic-Model
-            String variableName = null;
-            if (resizingEntry instanceof LunaticResizingEntry lunaticResizingEntry)
-                variableName = lunaticResizingEntry.getName();
-            if (resizingEntry instanceof LunaticResizingPairwiseEntry lunaticResizingPairwiseEntry)
-                variableName = lunaticResizingPairwiseEntry.getName();
-            assert variableName != null;
-            //
-            if (resizingKeys.contains(variableName))
-                duplicates.add(variableName);
-            resizingKeys.add(variableName);
+     * If there is duplicate keys, resizing entries are merged is the resizing expression is the same,
+     * an exception is thrown otherwise.
+     * @param resizingList Resizing list with eventual duplicates.
+     * @return The resizing list with duplicate entries merged. */
+    private List<Object> noDuplicatesControl(List<Object> resizingList) {
+        // Duplicates between regular entries
+        Map<String, LunaticResizingEntry> resizingMap = new HashMap<>();
+        List<LunaticResizingEntry> resizingEntries = resizingList.stream()
+                .filter(LunaticResizingEntry.class::isInstance)
+                .map(LunaticResizingEntry.class::cast)
+                .toList();
+        resizingEntries.forEach(resizingEntry -> {
+            String variableName = resizingEntry.getName();
+            if (! resizingMap.containsKey(variableName))
+                resizingMap.put(variableName, resizingEntry);
+            else
+                resizingMap.put(variableName, mergeResizingEntries(resizingMap.get(variableName), resizingEntry));
         });
+        List<Object> result = new ArrayList<>(resizingMap.values());
+        // Duplicate between pairwise entry and regular entries
+        Optional<LunaticResizingPairwiseEntry> pairwiseResizingEntry = resizingList
+                .stream()
+                .filter(LunaticResizingPairwiseEntry.class::isInstance)
+                .map(LunaticResizingPairwiseEntry.class::cast)
+                .findAny();
+        if (pairwiseResizingEntry.isPresent()) {
+            if (resizingMap.containsKey(pairwiseResizingEntry.get().getName()))
+                throw new LunaticLogicException(String.format(
+                        "Variable '%s' is used to define the size of the pairwise links question and other " +
+                                "components (loops or dynamic tables), which is currently forbidden.",
+                        pairwiseResizingEntry.get().getName()));
+            result.add(pairwiseResizingEntry.get());
+        }
         //
-        if (! duplicates.isEmpty())
+        return result;
+    }
+
+    /**
+     * Merge resizing entries given into a single one.
+     * @param entry1 Resizing entry.
+     * @param entry2 Resizing entry, with same name.
+     * @return A merged resizing entry with variables from both entries.
+     */
+    public LunaticResizingEntry mergeResizingEntries(LunaticResizingEntry entry1, LunaticResizingEntry entry2) {
+        // (should not happen, but you never know)
+        if (! entry1.getName().equals(entry2.getName()))
+            throw new IllegalArgumentException("Resizing entries with different names cannot be merged.");
+        //
+        if (! entry1.getSize().equals(entry2.getSize()))
             throw new LunaticLogicException(String.format(
-                    "Variables '%s' is are used to define the size of different components in the questionnaire. " +
-                            "Check loop 'max' iteration expressions, dynamic table max size expressions, " +
-                            "and variable used for the pairwise component.",
-                    duplicates));
+                    "Variable '%s' is used to define the size of different components in the questionnaire. " +
+                            "Check loop 'max' iteration expressions, dynamic table max size expressions.",
+                    entry1.getName()));
+        //
+        LunaticResizingEntry mergedEntry = new LunaticResizingEntry(
+                entry1.getName(), entry1.getSize(), entry1.getVariables());
+        mergedEntry.getVariables().addAll(entry2.getVariables());
+        return mergedEntry;
     }
 
 }

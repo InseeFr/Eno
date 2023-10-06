@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -74,7 +75,7 @@ class LunaticAddResizingTest {
                 .findAny();
         assertTrue(linkedLoopResizingEntry.isPresent());
         assertEquals("count(Q2)", linkedLoopResizingEntry.get().getSize());
-        assertEquals(List.of("Q3"), linkedLoopResizingEntry.get().getVariables());
+        assertEquals(Set.of("Q3"), linkedLoopResizingEntry.get().getVariables());
     }
 
     @Test
@@ -90,7 +91,7 @@ class LunaticAddResizingTest {
         assertEquals("PAIRWISE_SOURCE", pairwiseResizingEntry.getName());
         assertEquals(List.of("count(PAIRWISE_SOURCE)", "count(PAIRWISE_SOURCE)"),
                 pairwiseResizingEntry.getSizeForLinksVariables());
-        assertEquals(List.of("LINKS"), pairwiseResizingEntry.getLinksVariables());
+        assertEquals(Set.of("LINKS"), pairwiseResizingEntry.getLinksVariables());
     }
 
 }
