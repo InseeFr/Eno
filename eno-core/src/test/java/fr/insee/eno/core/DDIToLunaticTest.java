@@ -32,7 +32,8 @@ class DDIToLunaticTest {
             //"l8x6fhtd",
             //"ldodefpq",
             "lhpz68wp",
-            "li49zxju"
+            "li49zxju",
+            "lmyjrqbb",
     })
     @DisplayName("Large questionnaires, DDI to Lunatic, transformation should succeed")
     void transformQuestionnaire_nonNullOutput(String questionnaireId) throws DDIParsingException {

@@ -1,0 +1,679 @@
+{
+  "owner": "QNONREG",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "kd09v80w",
+        "lgks9tjk",
+        "lmyji0w7",
+        "kd0a6rn3",
+        "k0dzbfek",
+        "lmyjvzqy",
+        "lgks7wff",
+        "lmyjjaco",
+        "kd0a4t4f",
+        "kd0c2j4a",
+        "lna96sa0",
+        "lmew9gwq",
+        "lmew27ey",
+        "idendquest"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "kf3ta7k8",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "QNONREG - Boucles simples sans SAUF"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "QTESTCONTR",
+  "Variables": {
+    "Variable": [
+      {
+        "Formula": "nvl($QNUM1$,0)*2",
+        "Label": "DOUBLEQNUM1",
+        "id": "lk6xfxdd",
+        "type": "CalculatedVariableType",
+        "Name": "DOUBLEQNUM1",
+        "Datatype": {
+          "Maximum": "1000",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "TEST_EXTERNE",
+        "id": "lmewctv7",
+        "type": "ExternalVariableType",
+        "Name": "TEST_EXTERNE",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "NBHAB label",
+        "id": "lmyjwmm1",
+        "type": "CollectedVariableType",
+        "Name": "NBHAB",
+        "Datatype": {
+          "Maximum": "10",
+          "Minimum": "1",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Scope": "lmyju13m",
+        "Label": "PRENOM label",
+        "id": "lmyjk82o",
+        "type": "CollectedVariableType",
+        "Name": "PRENOM",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "lmyju13m",
+        "Label": "AGE label",
+        "id": "lmyjh7ua",
+        "type": "CollectedVariableType",
+        "Name": "AGE",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "http://id.insee.fr/unit/an",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Scope": "lmyju13m",
+        "Label": "FILTRE2 label",
+        "id": "lmyjnchi",
+        "type": "CollectedVariableType",
+        "Name": "FILTRE2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "lmyju13m",
+        "Label": "QCU1 label",
+        "id": "lmyjib7o",
+        "type": "CollectedVariableType",
+        "Name": "QCU1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "lmyju13m",
+        "Label": "QMIN label",
+        "id": "lna9hbuq",
+        "type": "CollectedVariableType",
+        "Name": "QMIN",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Scope": "lmyju13m",
+        "Label": "1 - \"je filtre\"",
+        "id": "lna9ev18",
+        "type": "CollectedVariableType",
+        "Name": "QCM21",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Scope": "lmyju13m",
+        "Label": "2 - \"je ne filtre pas\"",
+        "id": "lna9g8s9",
+        "type": "CollectedVariableType",
+        "Name": "QCM22",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "QUESTIONFI label",
+        "id": "lmewdeu5",
+        "type": "CollectedVariableType",
+        "Name": "QUESTIONFI",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Tue Oct 03 2023 13:45:58 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "esa-dc-2018",
+      "uri": "http://ddi:fr.insee:DataCollection.esa-dc-2018"
+    },
+    {
+      "id": "TCM",
+      "uri": "http://ddi:fr.insee:DataCollection.TCM"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "lmyjrqbb",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "Label": "\"QCM1\"",
+        "id": "lgksmeof",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"AAAA\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"BBBB\"",
+            "Value": "2"
+          }
+        ],
+        "Name": ""
+      }
+    ]
+  },
+  "Iterations": {
+    "Iteration": [
+      {
+        "Maximum": "$NBHAB$ ",
+        "Minimum": "$NBHAB$ ",
+        "MemberReference": [
+          "lmyji0w7",
+          "lmyji0w7"
+        ],
+        "id": "lmyju13m",
+        "Step": "1",
+        "type": "DynamicIterationType",
+        "Name": "BOUCLE1"
+      },
+      {
+        "MemberReference": [
+          "lmyjvzqy",
+          "lmyjvzqy"
+        ],
+        "id": "lmyjw7jl",
+        "type": "DynamicIterationType",
+        "Name": "BCTOUS",
+        "IterableReference": "lmyju13m"
+      },
+      {
+        "MemberReference": [
+          "lmyjjaco",
+          "lmyjjaco"
+        ],
+        "id": "lna9ou51",
+        "type": "DynamicIterationType",
+        "Name": "BCMINEURS",
+        "IterableReference": "lmyju13m"
+      }
+    ]
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "Lister les habitants"
+      ],
+      "id": "kd09v80w",
+      "TargetMode": [
+        ""
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lmyjwmm1",
+              "id": "lmyjwdbs",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "10",
+                "Minimum": "1",
+                "typeName": "NUMERIC",
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Combien d'habitants de 1 à 10\""
+          ],
+          "id": "lgks9tjk",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "NBHAB"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Décrire les habitants"
+          ],
+          "id": "lmyji0w7",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lmyjk82o",
+                  "id": "kd0a6x8t",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Prenom\""
+              ],
+              "id": "kd0a6rn3",
+              "TargetMode": [
+                ""
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "PRENOM"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lmyjh7ua",
+                  "id": "k0dz2eb9",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Maximum": "100",
+                    "Minimum": "0",
+                    "typeName": "NUMERIC",
+                    "Unit": "http://id.insee.fr/unit/an",
+                    "type": "NumericDatatypeType",
+                    "Decimals": ""
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Age\""
+              ],
+              "id": "k0dzbfek",
+              "TargetMode": [
+                ""
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "AGE"
+            }
+          ],
+          "Name": "DCRIRELESH"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Boucle sur tous"
+          ],
+          "id": "lmyjvzqy",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lmyjnchi",
+                  "id": "lmyjzo1k",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question pour \" || $PRENOM$"
+              ],
+              "id": "lgks7wff",
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "FILTRE2"
+            }
+          ],
+          "Name": "BOUCLETOUS"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Filtre sur mineurs"
+          ],
+          "id": "lmyjjaco",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lmyjib7o",
+                  "id": "lmyjvnxc",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [
+                {
+                  "post_collect": false,
+                  "Description": "supérieur ou égal",
+                  "Expression": "nvl($QNUM4$,0)  >= 5",
+                  "during_collect": false,
+                  "criticity": "INFO",
+                  "FailMessage": "\"la valeur saisie est supérieure ou égale à 5\"",
+                  "id": "kd09xebu"
+                }
+              ],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Question pour mineurs \" || $PRENOM$"
+              ],
+              "id": "kd0a4t4f",
+              "TargetMode": [
+                ""
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "QCU1"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lna9hbuq",
+                  "id": "lna9faqp",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  }
+                }
+              ],
+              "Control": [
+                {
+                  "post_collect": false,
+                  "Description": "Différence",
+                  "Expression": "$QDIFFERENCE$ <> $CALC_DIFFERENCE$  and not(isnull($QDIFFERENCE$))",
+                  "during_collect": false,
+                  "criticity": "INFO",
+                  "FailMessage": "\"Différence\"",
+                  "id": "kzs9u0ub"
+                }
+              ],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Questions mineurs\""
+              ],
+              "id": "kd0c2j4a",
+              "TargetMode": [
+                ""
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "QMIN"
+            },
+            {
+              "FlowControl": [],
+              "Label": [
+                "\"QCM2\""
+              ],
+              "ResponseStructure": {
+                "Attribute": [],
+                "Mapping": [
+                  {
+                    "MappingSource": "lna9p02t",
+                    "MappingTarget": "1"
+                  },
+                  {
+                    "MappingSource": "lna97z2o",
+                    "MappingTarget": "2"
+                  }
+                ],
+                "Dimension": [
+                  {
+                    "dimensionType": "PRIMARY",
+                    "dynamic": "0",
+                    "CodeListReference": "lgksmeof"
+                  },
+                  {
+                    "dimensionType": "MEASURE",
+                    "dynamic": "0"
+                  }
+                ]
+              },
+              "type": "QuestionType",
+              "Name": "QCM2",
+              "Response": [
+                {
+                  "CollectedVariableReference": "lna9ev18",
+                  "id": "lna9p02t",
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                },
+                {
+                  "CollectedVariableReference": "lna9g8s9",
+                  "id": "lna97z2o",
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "ClarificationQuestion": [],
+              "id": "lna96sa0",
+              "TargetMode": [
+                ""
+              ],
+              "Declaration": [],
+              "questionType": "MULTIPLE_CHOICE"
+            }
+          ],
+          "Name": "BOUCLEMINEURS"
+        }
+      ],
+      "Name": "LESHABT"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "SFILTRE3"
+      ],
+      "id": "lmew9gwq",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lmewdeu5",
+              "id": "lmewcdvw",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "Question filtrée uniquement par une externe"
+          ],
+          "id": "lmew27ey",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "QUESTIONFI"
+        }
+      ],
+      "Name": "SFILTRE3"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}
