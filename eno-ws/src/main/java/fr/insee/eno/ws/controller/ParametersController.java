@@ -3,7 +3,7 @@ package fr.insee.eno.ws.controller;
 import fr.insee.eno.legacy.parameters.Context;
 import fr.insee.eno.legacy.parameters.Mode;
 import fr.insee.eno.legacy.parameters.OutFormat;
-import fr.insee.eno.ws.PassePlat;
+import fr.insee.eno.ws.PassThrough;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
@@ -26,9 +26,9 @@ public class ParametersController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ParametersController.class);
 
-	private final PassePlat passePlat;
+	private final PassThrough passePlat;
 
-	public ParametersController(PassePlat passePlat) {
+	public ParametersController(PassThrough passePlat) {
 		this.passePlat = passePlat;
 	}
 

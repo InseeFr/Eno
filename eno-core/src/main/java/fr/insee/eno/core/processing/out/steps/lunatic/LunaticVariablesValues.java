@@ -4,7 +4,7 @@ import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.utils.LunaticUtils;
 import fr.insee.lunatic.model.flat.*;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * <p>Processing step aimed to replace Lunatic simple variable objects by:</p>
@@ -42,7 +42,7 @@ public class LunaticVariablesValues implements ProcessingStep<Questionnaire> {
      * @param loop A Lunatic loop components.
      */
     private void replaceLoopVariables(Loop loop) {
-        List<String> collectedVariables = LunaticUtils.getCollectedVariablesInLoop(loop);
+        Set<String> collectedVariables = LunaticUtils.getCollectedVariablesInLoop(loop);
         //
         lunaticQuestionnaire.getVariables().removeIf(variable -> collectedVariables.contains(variable.getName()));
         //

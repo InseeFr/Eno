@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -73,7 +74,7 @@ class LunaticLoopResizingLogicTest {
         assertEquals(1, resizingEntries.size());
         assertEquals("LOOP_SIZE_VAR", resizingEntries.get(0).getName());
         assertEquals("nvl(LOOP_SIZE_VAR, 1)", resizingEntries.get(0).getSize());
-        assertEquals(List.of("RESPONSE_VAR"), resizingEntries.get(0).getVariables());
+        assertEquals(Set.of("RESPONSE_VAR"), resizingEntries.get(0).getVariables());
     }
 
     @Test
@@ -129,7 +130,7 @@ class LunaticLoopResizingLogicTest {
 
         // Then
         assertThat(resizingEntries.get(0).getVariables()).containsExactlyInAnyOrderElementsOf(
-                List.of("BOOLEAN_VAR", "INPUT_VAR", "TEXT_VAR", "NUMBER_VAR", "DATE_VAR",
+                Set.of("BOOLEAN_VAR", "INPUT_VAR", "TEXT_VAR", "NUMBER_VAR", "DATE_VAR",
                         "DROPDOWN_VAR", "RADIO_VAR", "CHECKBOX_VAR"));
     }
 
@@ -185,7 +186,7 @@ class LunaticLoopResizingLogicTest {
 
         // Then
         assertThat(resizingEntries.get(0).getVariables()).containsExactlyInAnyOrderElementsOf(
-                List.of("CELL11", "CELL12", "CELL21", "CELL22"));
+                Set.of("CELL11", "CELL12", "CELL21", "CELL22"));
     }
 
     @Test
@@ -215,7 +216,7 @@ class LunaticLoopResizingLogicTest {
         //
         resizingEntries.forEach(resizingEntry -> {
             assertEquals("LOOP_SIZE_VAR + LOOP_SIZE_VAR2", resizingEntry.getSize());
-            assertEquals(List.of("RESPONSE_VAR"), resizingEntry.getVariables());
+            assertEquals(Set.of("RESPONSE_VAR"), resizingEntry.getVariables());
         });
     }
 
@@ -288,7 +289,7 @@ class LunaticLoopResizingLogicTest {
         assertEquals(1, resizingEntries.size());
         assertEquals("COLLECTED_VAR", resizingEntries.get(0).getName());
         assertEquals("CALCULATED_VAR", resizingEntries.get(0).getSize());
-        assertEquals(List.of("RESPONSE_VAR"), resizingEntries.get(0).getVariables());
+        assertEquals(Set.of("RESPONSE_VAR"), resizingEntries.get(0).getVariables());
     }
 
     @Test
@@ -314,7 +315,7 @@ class LunaticLoopResizingLogicTest {
         assertEquals(1, resizingEntries.size());
         assertEquals("LOOP_SIZE_VAR", resizingEntries.get(0).getName());
         assertEquals("LOOP_SIZE_VAR + EXTERNAL_VAR", resizingEntries.get(0).getSize());
-        assertEquals(List.of("RESPONSE_VAR"), resizingEntries.get(0).getVariables());
+        assertEquals(Set.of("RESPONSE_VAR"), resizingEntries.get(0).getVariables());
     }
 
 }

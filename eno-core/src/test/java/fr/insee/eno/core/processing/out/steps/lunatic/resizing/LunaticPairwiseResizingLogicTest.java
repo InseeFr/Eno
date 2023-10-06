@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LunaticPairwiseResizingLogicTest {
@@ -54,7 +55,8 @@ class LunaticPairwiseResizingLogicTest {
         assertEquals(1, pairwiseResizingEntries.size());
         assertEquals("LOOP_VAR", pairwiseResizingEntries.get(0).getName());
         assertEquals(List.of("count(LOOP_VAR)", "count(LOOP_VAR)"), pairwiseResizingEntries.get(0).getSizeForLinksVariables());
-        assertEquals(List.of("LINKS_VAR"), pairwiseResizingEntries.get(0).getLinksVariables());
+        assertThat(pairwiseResizingEntries.get(0).getLinksVariables())
+                .containsExactlyInAnyOrderElementsOf(List.of("LINKS_VAR"));
     }
 
 }

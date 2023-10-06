@@ -11,6 +11,7 @@ import fr.insee.lunatic.model.flat.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class LunaticPairwiseResizingLogic {
 
@@ -47,7 +48,7 @@ public class LunaticPairwiseResizingLogic {
         List<String> sizeExpressions = List.of(
                 pairwiseLinks.getXAxisIterations().getValue(), pairwiseLinks.getYAxisIterations().getValue());
         // Concerned variables to be resized
-        List<String> resizedVariableNames = List.of(LunaticUtils.getPairwiseResponseVariable(pairwiseLinks));
+        Set<String> resizedVariableNames = Set.of(LunaticUtils.getPairwiseResponseVariable(pairwiseLinks));
 
         List<LunaticResizingPairwiseEntry> resizingPairwiseEntries = new ArrayList<>();
         resizingVariableNames.forEach(variableName ->

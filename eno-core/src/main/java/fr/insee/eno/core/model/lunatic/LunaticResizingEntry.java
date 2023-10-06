@@ -3,13 +3,16 @@ package fr.insee.eno.core.model.lunatic;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.List;
+import java.util.Collection;
 
 @Data
 @AllArgsConstructor
-public class LunaticResizingEntry {
+public class LunaticResizingEntry implements LunaticResizingInterface {
+    /** Resizing variable. */
     private String name;
+    /** Resizing expression. */
     private String size;
-    private List<String> variables;
+    /** Resized variables. */
+    private Collection<String> variables;
 
 }
