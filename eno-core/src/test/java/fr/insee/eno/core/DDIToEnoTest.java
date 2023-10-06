@@ -27,7 +27,8 @@ class DDIToEnoTest {
             //"l8x6fhtd", // 'sandbox' questionnaire
             //"ldodefpq", // contains pairwise question
             "lhpz68wp", // designed to test question grouping
-            "li49zxju" // 'vpp' survey
+            "li49zxju", // 'vpp' survey
+            "lmyjrqbb", // several linked loops
     })
     @DisplayName("Large questionnaires, DDI to Eno, transformation should succeed")
     void transformQuestionnaire_nonNullOutput(String questionnaireId) throws DDIParsingException {
