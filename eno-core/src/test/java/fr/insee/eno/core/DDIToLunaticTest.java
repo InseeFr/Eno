@@ -34,12 +34,23 @@ class DDIToLunaticTest {
             "lhpz68wp",
             "li49zxju",
             "lmyjrqbb",
+            "ljr4jm9a",
     })
     @DisplayName("Large questionnaires, DDI to Lunatic, transformation should succeed")
     void transformQuestionnaire_nonNullOutput(String questionnaireId) throws DDIParsingException {
         //
         Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
                 this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-" +questionnaireId+".xml"),
+                EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
+        //
+        assertNotNull(lunaticQuestionnaire);
+    }
+
+    @Test
+    void bugCase() throws DDIParsingException {
+        //
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+                this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-ljr4jm9a.xml"),
                 EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
         //
         assertNotNull(lunaticQuestionnaire);
