@@ -27,4 +27,45 @@ class EnoParameterTest {
                 EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.PAPI, Format.LUNATIC));
     }
 
+    @Test
+    void parameters_HouseholdCAWILunatic_testEnoValues() {
+        //
+        EnoParameters enoParameters = EnoParameters.of(
+                EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
+        //
+        assertEquals(EnoParameters.QuestionNumberingMode.NONE, enoParameters.getQuestionNumberingMode());
+        assertFalse(enoParameters.isArrowCharInQuestions());
+        assertFalse(enoParameters.isCommentSection());
+    }
+
+    @Test
+    void parameters_HouseholdCAPILunatic_enoValues() {
+        //
+        EnoParameters enoParameters = EnoParameters.of(
+                EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAPI, Format.LUNATIC);
+        //
+        assertEquals(EnoParameters.QuestionNumberingMode.NONE, enoParameters.getQuestionNumberingMode());
+        assertFalse(enoParameters.isArrowCharInQuestions());
+    }
+
+    @Test
+    void parameters_HouseholdCATILunatic_enoValues() {
+        //
+        EnoParameters enoParameters = EnoParameters.of(
+                EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAPI, Format.LUNATIC);
+        //
+        assertEquals(EnoParameters.QuestionNumberingMode.NONE, enoParameters.getQuestionNumberingMode());
+        assertFalse(enoParameters.isArrowCharInQuestions());
+    }
+
+    @Test
+    void parameters_BusinessCAPILunatic_lunaticPagination() {
+        //
+        EnoParameters enoParameters = EnoParameters.of(
+                EnoParameters.Context.BUSINESS, EnoParameters.ModeParameter.CAPI, Format.LUNATIC);
+        //
+        LunaticParameters lunaticParameters = enoParameters.getLunaticParameters();
+        assertEquals(EnoParameters.LunaticPaginationMode.SEQUENCE, lunaticParameters.getLunaticPaginationMode());
+    }
+
 }
