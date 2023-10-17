@@ -2,6 +2,7 @@ package fr.insee.eno.ws.controller;
 
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.eno.core.parameter.LunaticParameters;
 import fr.insee.eno.legacy.parameters.*;
 import fr.insee.eno.treatments.LunaticPostProcessing;
 import fr.insee.eno.ws.PassThrough;
@@ -144,43 +145,44 @@ public class GenerationController {
 		Mono<LunaticPostProcessing> lunaticPostProcessings = controllerUtils.generateLunaticPostProcessings(specificTreatment);
 
 		//
-		EnoParameters parameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
+		EnoParameters enoParameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
 		//
-		parameters.setIdentificationQuestion(identificationQuestion);
-		parameters.setResponseTimeQuestion(endQuestionResponseTime);
-		parameters.setIdentificationQuestion(endQuestionCommentQuestion);
+		enoParameters.setIdentificationQuestion(identificationQuestion);
+		enoParameters.setResponseTimeQuestion(endQuestionResponseTime);
+		enoParameters.setIdentificationQuestion(endQuestionCommentQuestion);
 		if (parsingXpathVTL)
 			log.info("Parsing XpathVTL parameter is ignored.");
-		parameters.setFilterDescription(filterDescription);
+		LunaticParameters lunaticParameters = enoParameters.getLunaticParameters();
+		lunaticParameters.setFilterDescription(filterDescription);
 		if (filterDescription)
 			log.info("'Filter description' feature is not supported yet.");
-		parameters.setMissingVariables(missingVar);
+		lunaticParameters.setMissingVariables(missingVar);
 		if (missingVar)
 			log.info("'MISSING' variables is not implemented yet.");
-		parameters.setFilterResult(addFilterResult);
+		lunaticParameters.setFilterResult(addFilterResult);
 		if (addFilterResult)
 			log.info("'FILTER_RESULT' variables is not supported yet.");
-		parameters.setControls(control);
+		lunaticParameters.setControls(control);
 		if (control)
 			log.info("Generated format controls is not supported yet.");
 		switch (questNum) {
-			case ALL -> parameters.setQuestionNumberingMode(EnoParameters.QuestionNumberingMode.ALL);
-			case MODULE -> parameters.setQuestionNumberingMode(EnoParameters.QuestionNumberingMode.SEQUENCE);
-			case NO_NUMBER -> parameters.setQuestionNumberingMode(EnoParameters.QuestionNumberingMode.NONE);
+			case ALL -> enoParameters.setQuestionNumberingMode(EnoParameters.QuestionNumberingMode.ALL);
+			case MODULE -> enoParameters.setQuestionNumberingMode(EnoParameters.QuestionNumberingMode.SEQUENCE);
+			case NO_NUMBER -> enoParameters.setQuestionNumberingMode(EnoParameters.QuestionNumberingMode.NONE);
 		}
-		parameters.setSequenceNumbering(seqNum);
-		parameters.setArrowCharInQuestions(preQuestSymbol);
+		enoParameters.setSequenceNumbering(seqNum);
+		enoParameters.setArrowCharInQuestions(preQuestSymbol);
 		switch (pagination) {
-			case NONE -> parameters.setLunaticPaginationMode(EnoParameters.LunaticPaginationMode.NONE);
-			case SEQUENCE -> parameters.setLunaticPaginationMode(EnoParameters.LunaticPaginationMode.SEQUENCE);
+			case NONE -> lunaticParameters.setLunaticPaginationMode(EnoParameters.LunaticPaginationMode.NONE);
+			case SEQUENCE -> lunaticParameters.setLunaticPaginationMode(EnoParameters.LunaticPaginationMode.SEQUENCE);
 			case SUBSEQUENCE -> {
-				parameters.setLunaticPaginationMode(EnoParameters.LunaticPaginationMode.NONE);
+				lunaticParameters.setLunaticPaginationMode(EnoParameters.LunaticPaginationMode.NONE);
 				log.info("Lunatic 'SUBSEQUENCE' pagination is not supported. Pagination has been set to 'NONE'.");
 			}
-			case QUESTION -> parameters.setLunaticPaginationMode(EnoParameters.LunaticPaginationMode.QUESTION);
+			case QUESTION -> lunaticParameters.setLunaticPaginationMode(EnoParameters.LunaticPaginationMode.QUESTION);
 		}
 		//
-		return controllerUtils.ddiToLunaticJson(ddiFile, parameters, lunaticPostProcessings);
+		return controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessings);
 	}
 
 	@Operation(

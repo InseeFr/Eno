@@ -17,8 +17,6 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/v3/parameter")
 public class V3ParameterController {
 
-    public static final String PARAMETERS_V3_FILE_NAME = "default-parameters-v3.json";
-
     private final ParameterService parameterService;
 
     public V3ParameterController(ParameterService parameterService) {
@@ -30,15 +28,18 @@ public class V3ParameterController {
             description = "Return default parameters file in function of context given, " +
                     "to be used in V3 endpoints that require a parameter file.")
     @GetMapping(value = "{context}/{outFormat}/default", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public Mono<ResponseEntity<String>> v3DefaultParameters(
+    public Mono<ResponseEntity<String>> v3Parameters(
             @PathVariable EnoParameters.Context context,
             @PathVariable Format outFormat,
             @RequestParam(value = "Mode") EnoParameters.ModeParameter modeParameter) {
+        //
+        String parametersFileName = "eno-parameters-" + context + "-" + modeParameter + "-" + outFormat + ".json";
+        //
         return parameterService.defaultParams(context, outFormat, modeParameter)
                 .map(params -> ResponseEntity
                         .ok()
                         .cacheControl(CacheControl.noCache())
-                        .headers(HeadersUtils.with(PARAMETERS_V3_FILE_NAME))
+                        .headers(HeadersUtils.with(parametersFileName))
                         .body(params));
     }
 
