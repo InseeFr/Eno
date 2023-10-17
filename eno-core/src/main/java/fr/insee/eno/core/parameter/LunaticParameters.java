@@ -20,13 +20,13 @@ public class LunaticParameters {
         return new LunaticParameters();
     }
 
-    public static LunaticParameters of(EnoParameters.ModeParameter modeParameter) {
+    public static LunaticParameters of(EnoParameters.Context context, EnoParameters.ModeParameter modeParameter) {
         LunaticParameters parameters = new LunaticParameters();
-        parameters.lunaticValues(modeParameter);
+        parameters.lunaticValues(context, modeParameter);
         return parameters;
     }
 
-    private void lunaticValues(EnoParameters.ModeParameter modeParameter) {
+    private void lunaticValues(EnoParameters.Context context, EnoParameters.ModeParameter modeParameter) {
         //
         if (EnoParameters.ModeParameter.PAPI.equals(modeParameter))
             throw new IllegalArgumentException("Mode 'PAPI' is not compatible with Lunatic format.");
@@ -40,7 +40,9 @@ public class LunaticParameters {
         this.setFilterResult(isWeb);
         this.setMissingVariables(isInterview);
         this.setLunaticPaginationMode(
-                isInterview || isWeb ? EnoParameters.LunaticPaginationMode.QUESTION : EnoParameters.LunaticPaginationMode.NONE);
+                EnoParameters.Context.BUSINESS.equals(context) ?
+                        EnoParameters.LunaticPaginationMode.SEQUENCE :
+                        EnoParameters.LunaticPaginationMode.NONE);
     }
 
 }

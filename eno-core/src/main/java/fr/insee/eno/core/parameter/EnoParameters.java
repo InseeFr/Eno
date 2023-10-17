@@ -82,7 +82,7 @@ public class EnoParameters {
         enoParameters.setOutFormat(outFormat);
         //
         enoParameters.enoValues(context, modeParameter);
-        enoParameters.setLunaticParameters(LunaticParameters.of(modeParameter));
+        enoParameters.setLunaticParameters(LunaticParameters.of(context, modeParameter));
         //
         return enoParameters;
     }
@@ -102,11 +102,11 @@ public class EnoParameters {
         //
         this.setIdentificationQuestion(Context.BUSINESS.equals(context));
         this.setResponseTimeQuestion(Context.BUSINESS.equals(context));
-        this.setCommentSection(Context.HOUSEHOLD.equals(context) || Context.BUSINESS.equals(context));
+        this.setCommentSection(Context.BUSINESS.equals(context));
         this.setQuestionNumberingMode(
-                Context.HOUSEHOLD.equals(context) ? QuestionNumberingMode.ALL : QuestionNumberingMode.SEQUENCE);
-        this.sequenceNumbering = true;
-        this.arrowCharInQuestions = true;
+                Context.HOUSEHOLD.equals(context) ? QuestionNumberingMode.NONE : QuestionNumberingMode.SEQUENCE);
+        this.setSequenceNumbering(true);
+        this.setArrowCharInQuestions(Context.BUSINESS.equals(context));
     }
 
 }
