@@ -2,7 +2,7 @@ package fr.insee.eno.ws.controller;
 
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.treatments.LunaticPostProcessing;
-import fr.insee.eno.ws.PassePlat;
+import fr.insee.eno.ws.PassThrough;
 import fr.insee.eno.ws.controller.utils.V3ControllerUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -29,10 +29,10 @@ import reactor.core.publisher.Mono;
 @SuppressWarnings("unused")
 public class IntegrationBusinessController {
 
-	private final PassePlat passePlat;
+	private final PassThrough passePlat;
 	private final V3ControllerUtils controllerUtils;
 
-	public IntegrationBusinessController(PassePlat passePlat, V3ControllerUtils controllerUtils) {
+	public IntegrationBusinessController(PassThrough passePlat, V3ControllerUtils controllerUtils) {
 		this.passePlat = passePlat;
 		this.controllerUtils = controllerUtils;
 	}
