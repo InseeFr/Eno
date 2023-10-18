@@ -69,11 +69,11 @@ public class LunaticPairwiseResizingLogic {
             throw new LunaticPairwiseException(String.format(
                     "Source variable '%s' of pairwise component '%s' cannot be found in questionnaire variables.",
                     pairwiseSourceVariableName, pairwiseLinks));
-        VariableType pairwiseSourceVariable = (VariableType) correspondingVariable.get();
         // If it not a calculated, simply return the variable name
         if (! VariableTypeEnum.CALCULATED.equals(correspondingVariable.get().getVariableType()))
             return List.of(pairwiseSourceVariableName);
         // Otherwise return its binding dependencies (without the calculated variable)
+        VariableType pairwiseSourceVariable = (VariableType) correspondingVariable.get();
         return pairwiseSourceVariable.getBindingDependencies().stream()
                 .filter(variableName -> !pairwiseSourceVariableName.equals(variableName))
                 .toList();
