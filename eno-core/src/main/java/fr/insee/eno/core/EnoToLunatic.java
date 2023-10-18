@@ -22,7 +22,7 @@ public class EnoToLunatic {
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
         //
-        LunaticProcessing lunaticProcessing = new LunaticProcessing(enoParameters);
+        LunaticProcessing lunaticProcessing = new LunaticProcessing(enoParameters.getLunaticParameters());
         lunaticProcessing.applyProcessing(lunaticQuestionnaire, enoQuestionnaire);
         //
         return lunaticQuestionnaire;

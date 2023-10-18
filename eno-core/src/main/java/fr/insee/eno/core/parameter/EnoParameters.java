@@ -1,5 +1,6 @@
 package fr.insee.eno.core.parameter;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.insee.eno.core.model.mode.Mode;
@@ -42,12 +43,8 @@ public class EnoParameters {
     private List<Mode> selectedModes = new ArrayList<>();
 
     // Lunatic parameters
-    private boolean controls;
-    private boolean toolTip; // Not implemented yet in Lunatic
-    private boolean missingVariables;
-    private boolean filterResult;
-    private boolean filterDescription;
-    private LunaticPaginationMode lunaticPaginationMode;
+    @JsonProperty("lunatic")
+    private LunaticParameters lunaticParameters;
 
     private EnoParameters() {}
 
@@ -85,8 +82,7 @@ public class EnoParameters {
         enoParameters.setOutFormat(outFormat);
         //
         enoParameters.enoValues(context, modeParameter);
-        //
-        enoParameters.lunaticValues(modeParameter);
+        enoParameters.setLunaticParameters(LunaticParameters.of(context, modeParameter));
         //
         return enoParameters;
     }
@@ -106,28 +102,11 @@ public class EnoParameters {
         //
         this.setIdentificationQuestion(Context.BUSINESS.equals(context));
         this.setResponseTimeQuestion(Context.BUSINESS.equals(context));
-        this.setCommentSection(Context.HOUSEHOLD.equals(context) || Context.BUSINESS.equals(context));
+        this.setCommentSection(Context.BUSINESS.equals(context));
         this.setQuestionNumberingMode(
-                Context.HOUSEHOLD.equals(context) ? QuestionNumberingMode.ALL : QuestionNumberingMode.SEQUENCE);
-        this.sequenceNumbering = true;
-        this.arrowCharInQuestions = true;
-    }
-
-    private void lunaticValues(ModeParameter modeParameter) {
-        //
-        if (ModeParameter.PAPI.equals(modeParameter))
-            throw new IllegalArgumentException("Mode 'PAPI' is not compatible with Lunatic format.");
-        //
-        boolean isInterview = ModeParameter.CAPI.equals(modeParameter) || ModeParameter.CATI.equals(modeParameter);
-        boolean isWeb = ModeParameter.CAWI.equals(modeParameter);
-        boolean isProcess = ModeParameter.PROCESS.equals(modeParameter);
-        this.setControls(isWeb || isProcess);
-        this.setToolTip(isWeb || isProcess);
-        this.setFilterDescription(isProcess);
-        this.setFilterResult(isWeb);
-        this.setMissingVariables(isInterview);
-        this.setLunaticPaginationMode(
-                isInterview || isWeb ? LunaticPaginationMode.QUESTION : LunaticPaginationMode.NONE);
+                Context.HOUSEHOLD.equals(context) ? QuestionNumberingMode.NONE : QuestionNumberingMode.SEQUENCE);
+        this.setSequenceNumbering(true);
+        this.setArrowCharInQuestions(Context.BUSINESS.equals(context));
     }
 
 }

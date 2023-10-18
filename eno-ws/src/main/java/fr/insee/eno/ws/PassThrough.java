@@ -15,14 +15,15 @@ import java.util.Optional;
 
 import static org.springframework.web.reactive.function.BodyInserters.fromPublisher;
 
+/** Client to redirect requests send to Eno "java" web-service to the legacy Eno web-service. */
 @Component
-public class PassePlat {
+public class PassThrough {
 
     private final WebClient webClient;
 
     private final Integer timeout;
 
-    public PassePlat(WebClient webClient, @Value("${eno.webclient.timeout}") Optional<Integer> timeout) {
+    public PassThrough(WebClient webClient, @Value("${eno.webclient.timeout}") Optional<Integer> timeout) {
         this.webClient = webClient;
         if(timeout.isEmpty()) {
             throw new IllegalArgumentException("Timeout is not configured for webclient");
