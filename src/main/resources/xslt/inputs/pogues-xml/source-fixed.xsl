@@ -82,6 +82,9 @@
             <xsl:when test=". = 'DROPDOWN'">
                 <xsl:value-of select="'drop-down-list'"/>
             </xsl:when>
+            <xsl:when test=". = 'SUGGESTER'">
+                <xsl:value-of select="'suggester'"/>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:apply-templates select="." mode="conversion-table-error-message"/>
             </xsl:otherwise>

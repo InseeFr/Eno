@@ -671,7 +671,7 @@
 	                        <xhtml:div class="Description">
 	                            <!-- Variables referenced in the description of a FlowControl must be with the character ¤ (entered in Pogues with the character $)  -->
 	                            <!-- WARNING : A dollar currency entry which is also changed to ¤...  -->
-	                            <xsl:value-of select="replace(enoddi33:get-description($source-context),'\$','¤')"/> 
+	                            <xsl:value-of select="replace(enoddi33:get-description($source-context),'\$','¤')"/>
 	                        </xhtml:div>
 	                        <xhtml:div class="Expression"><xsl:value-of select="enoddi33:get-expression($source-context)"/></xhtml:div>
 	                        <xhtml:div class="IfTrue"><xsl:value-of select="enoddi33:get-if-true($source-context)"/></xhtml:div>
@@ -737,6 +737,10 @@
     <xsl:template match="driver-CodeListScheme//CodeList" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+
+        <xsl:variable name="urn" select="enoddi33:get-urn($source-context)"/>
+        <xsl:variable name="suggester-parameters" select="enoddi33:get-suggester-parameters($source-context)"/>
+
         <l:CodeList>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID>
@@ -763,6 +767,20 @@
 "Continuous" May be used to identify both interval and ratio classification levels, when more precise information is not available.-->
                 <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
             </l:Level>
+            <xsl:if test="$urn != ''">
+                <r:CodeListReference isExternal="true">
+                    <r:URN><xsl:value-of select="$urn"/></r:URN>
+                    <r:TypeOfObject>CodeList</r:TypeOfObject>
+                </r:CodeListReference>
+            </xsl:if>
+            <xsl:if test="$suggester-parameters">
+                <r:UserAttributePair>
+                    <r:AttributeKey>SuggesterConfiguration</r:AttributeKey>
+                    <r:AttributeValue>
+                        <xsl:copy-of select="$suggester-parameters"/>
+                    </r:AttributeValue>
+                </r:UserAttributePair>
+            </xsl:if>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
@@ -808,7 +826,7 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="driver-CategoryScheme//CodeList" mode="model">
+    <xsl:template match="driver-CategoryScheme//CodeList[descendant::Code]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" tunnel="yes"/>
         <l:CategoryScheme>
@@ -1209,7 +1227,7 @@
                                 <xsl:attribute name="type">
                                     <xsl:value-of select="if(enoddi33:get-question-type($response) = ('MULTIPLE_CHOICE','TABLE','DYNAMIC_TABLE')) then('QuestionGrid') else('QuestionItem')"/>
                                 </xsl:attribute>
-                            </Question>                            
+                            </Question>
                         </xsl:if>
                     </xsl:for-each>
                 </xsl:if>
