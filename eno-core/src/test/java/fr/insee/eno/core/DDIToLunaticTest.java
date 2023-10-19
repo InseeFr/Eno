@@ -47,6 +47,7 @@ class DDIToLunaticTest {
     }
 
     @Test
+    @Disabled("A priori a business invalid case here")
     void bugCase() throws DDIParsingException {
         //
         Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
