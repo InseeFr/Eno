@@ -1520,10 +1520,10 @@
                <xf:case id="5">
                   <fr:section id="ji5s5tl9-control" bind="ji5s5tl9-bind" name="ji5s5tl9">
                      <xf:label ref="$form-resources/ji5s5tl9/label"/>
-                     <xf:input id="DATE_CLOTURE_EXERCICE-control"
-                               name="DATE_CLOTURE_EXERCICE"
-                               bind="DATE_CLOTURE_EXERCICE-bind"
-                               class="question date">
+                     <fr:date id="DATE_CLOTURE_EXERCICE-control"
+                              name="DATE_CLOTURE_EXERCICE"
+                              bind="DATE_CLOTURE_EXERCICE-bind"
+                              class="question date">
                         <xf:label ref="replace(replace($form-resources/DATE_CLOTURE_EXERCICE/label,'¤ANNEE_EXERCICE¤',string(instance('fr-form-instance')//Variable[@idVariable='ANNEE_EXERCICE'])),'¤jsltjh1l-GOP¤',string(instance('fr-form-instance')//Variable[@idVariable='ANNEE_EXERCICE_MOINS_UN']))"
                                   mediatype="text/html"/>
                         <xf:hint ref="$form-resources/DATE_CLOTURE_EXERCICE/hint"/>
@@ -1531,7 +1531,7 @@
                         <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                      name="DOMFocusOut"
                                      target="ji5rmgik-CI-0-control"/>
-                     </xf:input>
+                     </fr:date>
                      <xf:output id="ji5rmgik-CI-0-control"
                                 name="ji5rmgik-CI-0"
                                 bind="ji5rmgik-CI-0-bind">
@@ -2242,10 +2242,10 @@
                </xf:trigger>
                <xf:trigger id="warning-previous">
                   <xf:label ref="$form-resources/GoBackWarning/label"/>
-                  <xxf:hide ev:event="DOMActivate" dialog="warningPrevious"/>
                   <xf:action ev:event="DOMActivate">
                      <xf:dispatch name="ChangementPageEffectif" targetid="fr-form-model"/>
                   </xf:action>
+                  <xxf:hide ev:event="DOMActivate" dialog="warningPrevious"/>
                </xf:trigger>
             </xxf:dialog>
             <xxf:dialog id="warningNext" close="false" draggable="false">
@@ -2259,10 +2259,10 @@
                </xf:trigger>
                <xf:trigger id="warning-continue">
                   <xf:label ref="$form-resources/Continue/label"/>
-                  <xxf:hide ev:event="DOMActivate" dialog="warningNext"/>
                   <xf:action ev:event="DOMActivate">
                      <xf:dispatch name="ChangementPageEffectif" targetid="fr-form-model"/>
                   </xf:action>
+                  <xxf:hide ev:event="DOMActivate" dialog="warningNext"/>
                </xf:trigger>
             </xxf:dialog>
             <xxf:dialog id="welcome-back" close="false" draggable="false">
