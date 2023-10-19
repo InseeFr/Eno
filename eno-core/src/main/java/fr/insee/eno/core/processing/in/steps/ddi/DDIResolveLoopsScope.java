@@ -1,5 +1,6 @@
 package fr.insee.eno.core.processing.in.steps.ddi;
 
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.navigation.Loop;
@@ -46,26 +47,17 @@ public class DDIResolveLoopsScope implements ProcessingStep<EnoQuestionnaire> {
         }
     }
 
-    /**
-     * Iterates on the sub-loop item references to resolve the loop object scope.
-     * @param subLoop A loop object (unchanged), its "loop items" are read.
-     * @param loop The loop whose scope is being resolved.
-     * */
-    private void resolveScopeFrom(Loop subLoop, Loop loop) {
-        for (ItemReference loopItem : subLoop.getLoopItems()) {
-            resolveStructure(loop, loopItem);
-        }
-    }
-
     private void resolveStructure(Loop loop, ItemReference itemReference) {
         switch (itemReference.getType()) {
-            case SEQUENCE, SUBSEQUENCE, QUESTION ->
+            case SEQUENCE, SUBSEQUENCE ->
                     loop.getLoopScope().add(StructureItemReference.from(itemReference));
-            case LOOP -> { // (nested loops)
-                log.warn("Nested loops is not completely supported for now."); // (supported here but not everywhere)
-                Loop subLoop = (Loop) enoQuestionnaire.get(itemReference.getId());
-                resolveScopeFrom(subLoop, loop);
-            }
+            case QUESTION ->
+                    throw new MappingException(String.format(
+                            "%s has the question of id '%s' in its scope. " +
+                                    "The scope of a loop should be either sequence(s) or subsequence(s).",
+                            loop, itemReference.getId()));
+            case LOOP ->
+                    throw new UnsupportedOperationException("Nested loops are not supported.");
             case FILTER -> { // (filter inside loop)
                 Filter filter = (Filter) enoQuestionnaire.get(itemReference.getId());
                 resolveScopeFrom(filter, loop);
