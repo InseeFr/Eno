@@ -54,7 +54,7 @@ class DDIToLunaticTest {
     void ddiLinkedLoopAndPairwiseWithSameSizeVariable_shouldThrowException() {
         // Given
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(
-                "functional/ddi/ddi-ljr4jm9a-cdv.xml");
+                "functional/ddi/ddi-ljr4jm9a.xml");
         EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
         // When + Then
         assertThrows(LunaticLogicException.class, () -> DDIToLunatic.transform(inputStream, enoParameters));
