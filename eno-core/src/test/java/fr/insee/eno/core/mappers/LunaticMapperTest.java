@@ -29,6 +29,10 @@ class LunaticMapperTest {
                 lunaticMapper.mapEnoObject(enoTextQuestion, lunaticNumericQuestion));
     }
 
+    /**
+     * Map a Eno questionnaire with some objects to Lunatic to test that Lunatic mapper globally works.
+     * See mapping tests by model classes for unit testing on mapping annotations.
+     */
     @Test
     void modelToLunaticTest() {
         //
