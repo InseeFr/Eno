@@ -48,12 +48,6 @@ public abstract class AbstractSequence extends EnoIdentifiableObject implements 
     @Lunatic("getDeclarations()")
     private final List<Declaration> declarations = new ArrayList<>();
 
-    /** Sequence / subsequence controls.
-     * In DDI, the controls are mapped in the questionnaire object, and are put here through a 'processing' class.
-     * In Lunatic, the sequence / subsequence object has a list of controls. */
-    @Lunatic("getControls()")
-    private final List<Control> controls = new ArrayList<>();
-
     /** Sequence / subsequence filter.
      * In DDI, the filters are mapped in the questionnaire object.
      * If there is a declared filter for this sequence / subsequence, it is put here through a 'processing' class.

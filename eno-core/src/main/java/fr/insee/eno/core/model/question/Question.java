@@ -42,6 +42,9 @@ public abstract class Question extends EnoIdentifiableObject implements EnoCompo
     @Lunatic("getDeclarations()")
     List<Instruction> instructions = new ArrayList<>();
 
+    /** Controls applied to the question.
+     * In DDI, the controls are mapped in the questionnaire object, and are put here through a processing.
+     * In Lunatic, the question components have a list of controls. */
     @Lunatic("getControls()")
     private final List<Control> controls = new ArrayList<>();
 
