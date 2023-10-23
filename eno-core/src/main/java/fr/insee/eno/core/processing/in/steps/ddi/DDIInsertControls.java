@@ -18,7 +18,7 @@ public class DDIInsertControls implements ProcessingStep<EnoQuestionnaire> {
      * This processing is intended to insert them into the objects to which they belong.
      * (Controls are placed after the object they belong to in the sequence items lists.)
      * Concerned objects : sequences, subsequences and questions. */
-    public void apply(EnoQuestionnaire enoQuestionnaire) { // Note: code is a bit clumsy but works
+    public void apply(EnoQuestionnaire enoQuestionnaire) {
         //
         assert enoQuestionnaire.getIndex() != null;
         //
