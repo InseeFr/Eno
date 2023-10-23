@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DDIInstance xmlns="ddi:instance:3_3"
-              xmlns:a="ddi:archive:3_3"
-              xmlns:d="ddi:datacollection:3_3"
-              xmlns:g="ddi:group:3_3"
-              xmlns:l="ddi:logicalproduct:3_3"
-              xmlns:r="ddi:reusable:3_3"
-              xmlns:s="ddi:studyunit:3_3"
-              xmlns:xhtml="http://www.w3.org/1999/xhtml"
-              xmlns:xs="http://www.w3.org/2001/XMLSchema"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
-              isMaintainable="true"><!--Eno version : 2.4.3. Generation date : 27/09/2023 - 16:38:40-->
+             xmlns:a="ddi:archive:3_3"
+             xmlns:d="ddi:datacollection:3_3"
+             xmlns:g="ddi:group:3_3"
+             xmlns:l="ddi:logicalproduct:3_3"
+             xmlns:r="ddi:reusable:3_3"
+             xmlns:s="ddi:studyunit:3_3"
+             xmlns:xhtml="http://www.w3.org/1999/xhtml"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
+             isMaintainable="true"><!--Eno version : 2.4.10. Generation date : 19/10/2023 - 11:59:53-->
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-ljr4jm9a</r:ID>
    <r:Version>1</r:Version>
@@ -4415,11 +4415,22 @@ else (¤lix9pz46-GOP¤ || ", nous allons décrire votre emploi principal.") </d:
             </d:StepValue>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>l0mkvvru</r:ID>
+               <r:ID>l0v3gfcr-SEQ</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Sequence</r:TypeOfObject>
             </d:ControlConstructReference>
          </d:Loop>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l0v3gfcr-SEQ</r:ID>
+            <r:Version>1</r:Version>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l0mkvvru</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
          <d:Loop>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l0v43iz7</r:ID>
@@ -4429,11 +4440,22 @@ else (¤lix9pz46-GOP¤ || ", nous allons décrire votre emploi principal.") </d:
             </d:ConstructName>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>l0v3oeqn</r:ID>
+               <r:ID>l0v43iz7-SEQ</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Sequence</r:TypeOfObject>
             </d:ControlConstructReference>
          </d:Loop>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l0v43iz7-SEQ</r:ID>
+            <r:Version>1</r:Version>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l0v3oeqn</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
          <d:Loop>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>livn4kyr</r:ID>
@@ -4443,11 +4465,22 @@ else (¤lix9pz46-GOP¤ || ", nous allons décrire votre emploi principal.") </d:
             </d:ConstructName>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>l129294o</r:ID>
+               <r:ID>livn4kyr-SEQ</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Sequence</r:TypeOfObject>
             </d:ControlConstructReference>
          </d:Loop>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>livn4kyr-SEQ</r:ID>
+            <r:Version>1</r:Version>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l129294o</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
          <d:Loop>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l13ntyek</r:ID>
@@ -4457,11 +4490,22 @@ else (¤lix9pz46-GOP¤ || ", nous allons décrire votre emploi principal.") </d:
             </d:ConstructName>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>l13np0wv</r:ID>
+               <r:ID>l13ntyek-SEQ</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Sequence</r:TypeOfObject>
             </d:ControlConstructReference>
          </d:Loop>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>l13ntyek-SEQ</r:ID>
+            <r:Version>1</r:Version>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>l13np0wv</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
          <d:IfThenElse>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>liaanh04</r:ID>
@@ -40196,30 +40240,30 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l13h1ecy-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceQuestion>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l0v4oi1v</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceQuestion>
+            </d:InputQuestionReference>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l11z2too</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceVariable>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lfthns08</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>liubyc07</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -40286,12 +40330,12 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l13h4aiz-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceVariable>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l13h1ecy</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -40336,18 +40380,18 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l14uaqgk-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceQuestion>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l0v4b34m</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceVariable>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lfthsyka</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -40392,18 +40436,18 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l14tv7tn-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceQuestion>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l0v4b34m</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceVariable>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lfthsyka</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -40448,18 +40492,18 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l14vgvlc-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceQuestion>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l0v3g11i</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceVariable>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lftrwvwz</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -40504,18 +40548,18 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l1w5c7yp-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceQuestion>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l0v4b34m</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceVariable>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lfthsyka</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -40560,18 +40604,18 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l1w5mjq9-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceQuestion>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l0v4b34m</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceVariable>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lfthsyka</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -40616,18 +40660,18 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l2itqw98-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceVariable>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lix9oxsd</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lix9pz46</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -40694,18 +40738,18 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l2iu1atg-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceVariable>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lix9oxsd</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lix9pz46</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -40772,18 +40816,18 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l2iur75u-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceQuestion>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l0v4b34m</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceVariable>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lfthsyka</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -40828,30 +40872,30 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l2j6udu0-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceQuestion>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l1awvkop</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceQuestion>
+            </d:InputQuestionReference>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l1axg6y2</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceVariable>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lfti75fy</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lfti40wt</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -40918,18 +40962,18 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l2osro6c-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceVariable>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lix9oxsd</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lix9pz46</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -40996,30 +41040,30 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l2re729e-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceQuestion>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l2otzngx</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceQuestion>
+            </d:InputQuestionReference>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l2otx5kf</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceVariable>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lfti5s8s</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lftii4kx</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -41086,18 +41130,18 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l2rs5tmg-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceVariable>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lix9oxsd</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lix9pz46</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -41164,18 +41208,18 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l2st84mt-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceVariable>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lix9oxsd</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lix9pz46</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -41242,18 +41286,18 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l3jyfypp-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceQuestion>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l0v4b34m</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceVariable>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lfthsyka</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -41298,18 +41342,18 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>lf9ty6tb-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceQuestion>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l0v2t2lc</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceVariable>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lfthszef</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -41354,84 +41398,84 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>liahw5su-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceQuestion>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>liaan4on</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceQuestion>
+            </d:InputQuestionReference>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>liabhv5v</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceQuestion>
+            </d:InputQuestionReference>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>liab1zgi</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceQuestion>
+            </d:InputQuestionReference>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>liab43ec</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceQuestion>
+            </d:InputQuestionReference>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>liaaz3if</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceQuestion>
+            </d:InputQuestionReference>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>liabfww0</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceVariable>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l0v32sjd</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>liaa88ij</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>liabbp0h</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>liab9snc</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>liab69kc</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>liabh0d9</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>liab8sfs</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -41608,18 +41652,18 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>liboqrtq-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceQuestion>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l2owdadb</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceVariable>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lk0y67p5</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -41664,42 +41708,42 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>lic0n43l-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceQuestion>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l13pbxr1</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceQuestion>
+            </d:InputQuestionReference>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l13pyw1k</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceQuestion>
+            </d:InputQuestionReference>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lic040m4</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceVariable>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lfti6imf</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lic03m4k</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lic00nl4</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -41788,18 +41832,18 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>lix9oxsd-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceQuestion>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l0v3g11i</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceVariable>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lftrwvwz</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -41844,18 +41888,18 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>lix9pz46-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceVariable>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l14vgvlc</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            </d:InputVariableReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lf9ty6tb</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -41922,12 +41966,12 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>ljr4pqwh-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceVariable>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l13h4aiz</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -41972,18 +42016,18 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>ljr4z7rr-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceQuestion>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l0v4b34m</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceVariable>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lfthsyka</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -42028,12 +42072,12 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>ljr4u1mi-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceVariable>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l14tv7tn</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -42078,12 +42122,12 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>ljr55psz-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceVariable>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l1w5c7yp</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -42128,12 +42172,12 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>ljr5fqh9-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceVariable>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l1w5mjq9</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -42178,12 +42222,12 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>ljr4zoft-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceVariable>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l2iur75u</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -42228,12 +42272,12 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>ljr56lx3-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceVariable>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l3jyfypp</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -42278,18 +42322,18 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:Agency>fr.insee</r:Agency>
             <r:ID>llnjyd11-GI</r:ID>
             <r:Version>1</r:Version>
-            <d:SourceQuestion>
+            <d:InputQuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>livjrp7n</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </d:SourceQuestion>
-            <d:SourceVariable>
+            </d:InputQuestionReference>
+            <d:InputVariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>livk5bpx</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
+            </d:InputVariableReference>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -42385,9 +42429,9 @@ else "qu'" ||¤l14uaqgk-GOP¤ || " occupe") ||&#xD;
             <r:ID>InstrumentScheme-ljr4jm9a</r:ID>
             <r:Version>1</r:Version>
             <d:Instrument xmlns:c="ddi:conceptualcomponent:3_3"
-                           xmlns:cm="ddi:comparative:3_3"
-                           xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
-                           xmlns:pr="ddi:ddiprofile:3_3">
+                          xmlns:cm="ddi:comparative:3_3"
+                          xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
+                          xmlns:pr="ddi:ddiprofile:3_3">
                <r:Agency>fr.insee</r:Agency>
                <r:ID>Instrument-ljr4jm9a</r:ID>
                <r:Version>1</r:Version>
