@@ -46,8 +46,9 @@ public class DDIResolveVariableReferencesInLabels implements ProcessingStep<EnoQ
         enoCatalog.getComponents().forEach(enoComponent -> {
                 enoComponent.getDeclarations().stream().map(Declaration::getLabel).forEach(this::resolveLabel);
                 enoComponent.getInstructions().stream().map(Instruction::getLabel).forEach(this::resolveLabel);
-                enoComponent.getControls().stream().map(Control::getMessage).forEach(this::resolveLabel);
         });
+        enoCatalog.getQuestions().forEach(enoQuestion ->
+                enoQuestion.getControls().stream().map(Control::getMessage).forEach(this::resolveLabel));
         // Code lists
         enoQuestionnaire.getCodeLists().stream().map(CodeList::getCodeItems).forEach(this::resolveCodeItemsLabel);
         // Code lists in multiple response questions (might be refactored afterward)

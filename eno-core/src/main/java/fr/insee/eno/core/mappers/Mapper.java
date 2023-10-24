@@ -37,8 +37,6 @@ public class Mapper {
                 || boolean.class.isAssignableFrom(classType)
                 || Boolean.class.isAssignableFrom(classType)
                 || Enum.class.isAssignableFrom(classType));
-
-        // TODO: other simple types later (probably)
     }
 
     void compatibilityCheck(Object mappedObject, EnoObject enoObject) {
