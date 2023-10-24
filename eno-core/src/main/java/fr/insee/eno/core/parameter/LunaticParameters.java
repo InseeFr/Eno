@@ -42,7 +42,7 @@ public class LunaticParameters {
         this.setLunaticPaginationMode(
                 EnoParameters.Context.BUSINESS.equals(context) ?
                         EnoParameters.LunaticPaginationMode.SEQUENCE :
-                        EnoParameters.LunaticPaginationMode.NONE);
+                        EnoParameters.LunaticPaginationMode.QUESTION);
     }
 
 }
