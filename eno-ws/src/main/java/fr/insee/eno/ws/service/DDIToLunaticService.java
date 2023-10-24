@@ -21,9 +21,9 @@ public class DDIToLunaticService {
     @Value("${version.lunatic.model}")
     String lunaticModelVersion;
 
-    public Mono<String> transformToJson(InputStream ddiInputStream, EnoParameters parameterInputStream, LunaticPostProcessing lunaticPostProcessings) {
+    public Mono<String> transformToJson(InputStream ddiInputStream, EnoParameters enoParameters, LunaticPostProcessing lunaticPostProcessings) {
         try {
-            Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(ddiInputStream, parameterInputStream);
+            Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(ddiInputStream, enoParameters);
             lunaticQuestionnaire.setEnoCoreVersion(enoVersion);
             lunaticQuestionnaire.setLunaticModelVersion(lunaticModelVersion);
             lunaticPostProcessings.apply(lunaticQuestionnaire);
@@ -33,9 +33,12 @@ public class DDIToLunaticService {
         }
     }
 
-    public Mono<String> transformToJson(InputStream ddiInputStream, EnoParameters parameterInputStream) {
+    public Mono<String> transformToJson(InputStream ddiInputStream, EnoParameters enoParameters) {
         try {
-            return Mono.just(DDIToLunatic.transformToJson(ddiInputStream, parameterInputStream));
+            Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(ddiInputStream, enoParameters);
+            lunaticQuestionnaire.setEnoCoreVersion(enoVersion);
+            lunaticQuestionnaire.setLunaticModelVersion(lunaticModelVersion);
+            return Mono.just(LunaticSerializer.serializeToJson(lunaticQuestionnaire));
         } catch (Exception e) {
             return Mono.error(e);
         }
