@@ -29,7 +29,7 @@ class DDIToLunaticServiceTest {
             "ljps8p2l", // dynamic tables
             "lb3ei722", // occurrence filtering
             "l7j0wwqx", // linked loops
-            //"simpsonsvtl", // Simpsons questionnaire (!!! non-passing for now)
+            "simpsonsvtl", // Simpsons questionnaire
             "kx0a2hn8", // loops
             "kzguw1v7", // non-numeric controls
             "kanye31s_1", // declarations
@@ -39,18 +39,6 @@ class DDIToLunaticServiceTest {
         DDIToLunaticService ddiToLunaticService = new DDIToLunaticService();
         String result = ddiToLunaticService.transformToJson(
                         this.getClass().getClassLoader().getResourceAsStream("non-regression/ddi-"+questionnaireId+".xml"),
-                        EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC))
-                .block();
-        //
-        assertNotNull(result);
-    }
-
-    @Test
-    void current_filters() {
-        //
-        DDIToLunaticService ddiToLunaticService = new DDIToLunaticService();
-        String result = ddiToLunaticService.transformToJson(
-                        this.getClass().getClassLoader().getResourceAsStream("non-regression/ddi-lk6x162e.xml"),
                         EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC))
                 .block();
         //
