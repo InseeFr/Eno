@@ -25,7 +25,7 @@ class DDIToLunaticServiceTest {
             "lk6x162e", // filters
             "kzfezgxb", // numeric controls
             "l9o7l439", // all components
-            //"ldodefpq", // pairwise links (!!! non-passing for now)
+            "ldodefpq", // pairwise links
             "ljps8p2l", // dynamic tables
             "lb3ei722", // occurrence filtering
             "l7j0wwqx", // linked loops
