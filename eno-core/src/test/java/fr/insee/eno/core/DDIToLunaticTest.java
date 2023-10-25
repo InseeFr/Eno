@@ -38,6 +38,7 @@ class DDIToLunaticTest {
             "lhpz68wp",
             "li49zxju",
             "lmyjrqbb",
+            "ljr4jm9a",
     })
     @DisplayName("Large questionnaires, DDI to Lunatic, transformation should succeed")
     void transformQuestionnaire_nonNullOutput(String questionnaireId) throws DDIParsingException {
@@ -47,17 +48,6 @@ class DDIToLunaticTest {
                 EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
         //
         assertNotNull(lunaticQuestionnaire);
-    }
-
-    // TODO: confirm the business rule here between generating incomplete resizing or throw an exception
-    @Test
-    void ddiLinkedLoopAndPairwiseWithSameSizeVariable_shouldThrowException() {
-        // Given
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(
-                "functional/ddi/ddi-ljr4jm9a.xml");
-        EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
-        // When + Then
-        assertThrows(LunaticLogicException.class, () -> DDIToLunatic.transform(inputStream, enoParameters));
     }
 
     @Nested
