@@ -1,0 +1,1826 @@
+{
+  "id": "lo5uid4s",
+  "modele": "ENOMCQ",
+  "enoCoreVersion": "2.4.10",
+  "lunaticModelVersion": "2.3.4",
+  "generatingDate": "25-10-2023 15:11:53",
+  "missing": false,
+  "pagination": "question",
+  "maxPage": "6",
+  "label": {
+    "value": "Eno - Multiple choice questions",
+    "type": "VTL|MD"
+  },
+  "components": [
+    {
+      "id": "lo5ufiuu",
+      "componentType": "Sequence",
+      "page": "1",
+      "label": {
+        "value": "\"I - \" || \"Multiple choice questions\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lo5ufiuu",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Multiple choice questions\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "lo5uw0qc",
+      "componentType": "CheckboxGroup",
+      "page": "2",
+      "label": {
+        "value": "\"➡ \" || \"Normal multiple choice question\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lo5ufiuu",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Multiple choice questions\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "MCQ_BOOL1",
+        "MCQ_BOOL2",
+        "MCQ_BOOL3",
+        "MCQ_BOOL4"
+      ],
+      "responses": [
+        {
+          "id": "lo5uw0qc-QOP-lo5wh6sm",
+          "label": {
+            "value": "\"Code A\"",
+            "type": "VTL|MD"
+          },
+          "response": {
+            "name": "MCQ_BOOL1"
+          }
+        },
+        {
+          "id": "lo5uw0qc-QOP-lo5woun5",
+          "label": {
+            "value": "\"Code B\"",
+            "type": "VTL|MD"
+          },
+          "response": {
+            "name": "MCQ_BOOL2"
+          }
+        },
+        {
+          "id": "lo5uw0qc-QOP-lo5wo17c",
+          "label": {
+            "value": "\"Code C\"",
+            "type": "VTL|MD"
+          },
+          "response": {
+            "name": "MCQ_BOOL3"
+          }
+        },
+        {
+          "id": "lo5uw0qc-QOP-lo5wljqy",
+          "label": {
+            "value": "\"Code D\"",
+            "type": "VTL|MD"
+          },
+          "response": {
+            "name": "MCQ_BOOL4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "lo5vgc2u",
+      "componentType": "Table",
+      "mandatory": false,
+      "page": "3",
+      "positioning": "HORIZONTAL",
+      "label": {
+        "value": "\"➡ \" || \"Multiple choice question - Code list answers - Radio buttons\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lo5ufiuu",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Multiple choice questions\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "MCQ_CL_RADIO1",
+        "MCQ_CL_RADIO2",
+        "MCQ_CL_RADIO3",
+        "MCQ_CL_RADIO4"
+      ],
+      "body": [
+        [
+          {
+            "value": "codeA",
+            "label": {
+              "value": "\"Code A\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Radio",
+            "id": "lo5vgc2u-QOP-lo5wq92e",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_CL_RADIO1"
+            },
+            "bindingDependencies": [
+              "MCQ_CL_RADIO1"
+            ]
+          }
+        ],
+        [
+          {
+            "value": "codeB",
+            "label": {
+              "value": "\"Code B\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Radio",
+            "id": "lo5vgc2u-QOP-lo5w9fuu",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_CL_RADIO2"
+            },
+            "bindingDependencies": [
+              "MCQ_CL_RADIO2"
+            ]
+          }
+        ],
+        [
+          {
+            "value": "codeC",
+            "label": {
+              "value": "\"Code C\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Radio",
+            "id": "lo5vgc2u-QOP-lo5w9dyx",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_CL_RADIO3"
+            },
+            "bindingDependencies": [
+              "MCQ_CL_RADIO3"
+            ]
+          }
+        ],
+        [
+          {
+            "value": "codeD",
+            "label": {
+              "value": "\"Code D\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Radio",
+            "id": "lo5vgc2u-QOP-lo5wk420",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_CL_RADIO4"
+            },
+            "bindingDependencies": [
+              "MCQ_CL_RADIO4"
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "id": "lo5vn4ry",
+      "componentType": "Table",
+      "mandatory": false,
+      "page": "4",
+      "positioning": "HORIZONTAL",
+      "label": {
+        "value": "\"➡ \" || \"Multiple choice question - Code list answers - Dropdowns\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lo5ufiuu",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Multiple choice questions\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "MCQ_CL_DROPDOWN1",
+        "MCQ_CL_DROPDOWN2",
+        "MCQ_CL_DROPDOWN3",
+        "MCQ_CL_DROPDOWN4"
+      ],
+      "body": [
+        [
+          {
+            "value": "codeA",
+            "label": {
+              "value": "\"Code A\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Dropdown",
+            "id": "lo5vn4ry-QOP-lo5wesiv",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_CL_DROPDOWN1"
+            },
+            "bindingDependencies": [
+              "MCQ_CL_DROPDOWN1"
+            ]
+          }
+        ],
+        [
+          {
+            "value": "codeB",
+            "label": {
+              "value": "\"Code B\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Dropdown",
+            "id": "lo5vn4ry-QOP-lo5wnhmh",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_CL_DROPDOWN2"
+            },
+            "bindingDependencies": [
+              "MCQ_CL_DROPDOWN2"
+            ]
+          }
+        ],
+        [
+          {
+            "value": "codeC",
+            "label": {
+              "value": "\"Code C\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Dropdown",
+            "id": "lo5vn4ry-QOP-lo5waed8",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_CL_DROPDOWN3"
+            },
+            "bindingDependencies": [
+              "MCQ_CL_DROPDOWN3"
+            ]
+          }
+        ],
+        [
+          {
+            "value": "codeD",
+            "label": {
+              "value": "\"Code D\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Dropdown",
+            "id": "lo5vn4ry-QOP-lo5wod8t",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_CL_DROPDOWN4"
+            },
+            "bindingDependencies": [
+              "MCQ_CL_DROPDOWN4"
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "id": "lo5vms0u",
+      "componentType": "Table",
+      "mandatory": false,
+      "page": "5",
+      "positioning": "HORIZONTAL",
+      "label": {
+        "value": "\"➡ \" || \"Multiple choice question - Table - Radio buttons\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lo5ufiuu",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Multiple choice questions\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "MCQ_TABLE_RADIO1",
+        "MCQ_TABLE_RADIO2",
+        "MCQ_TABLE_RADIO3",
+        "MCQ_TABLE_RADIO4",
+        "MCQ_TABLE_RADIO5",
+        "MCQ_TABLE_RADIO6",
+        "MCQ_TABLE_RADIO7"
+      ],
+      "body": [
+        [
+          {
+            "colspan": 3,
+            "value": "c1",
+            "label": {
+              "value": "\"Code 1\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Radio",
+            "id": "lo5vms0u-QOP-lo5wq91q",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_TABLE_RADIO1"
+            },
+            "bindingDependencies": [
+              "MCQ_TABLE_RADIO1"
+            ]
+          }
+        ],
+        [
+          {
+            "rowspan": 2,
+            "value": "c2",
+            "label": {
+              "value": "\"Code 2\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "colspan": 2,
+            "value": "c21",
+            "label": {
+              "value": "\"Code 2.1\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Radio",
+            "id": "lo5vms0u-QOP-lo5wacoi",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_TABLE_RADIO2"
+            },
+            "bindingDependencies": [
+              "MCQ_TABLE_RADIO2"
+            ]
+          }
+        ],
+        [
+          {
+            "colspan": 2,
+            "value": "c22",
+            "label": {
+              "value": "\"Code 2.2\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Radio",
+            "id": "lo5vms0u-QOP-lo5wknau",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_TABLE_RADIO3"
+            },
+            "bindingDependencies": [
+              "MCQ_TABLE_RADIO3"
+            ]
+          }
+        ],
+        [
+          {
+            "rowspan": 4,
+            "value": "c3",
+            "label": {
+              "value": "\"Code 3\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "rowspan": 3,
+            "value": "c31",
+            "label": {
+              "value": "\"Code 3.1\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "value": "c311",
+            "label": {
+              "value": "\"Code 3.1.1\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Radio",
+            "id": "lo5vms0u-QOP-lo5w74aq",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_TABLE_RADIO4"
+            },
+            "bindingDependencies": [
+              "MCQ_TABLE_RADIO4"
+            ]
+          }
+        ],
+        [
+          {
+            "value": "c312",
+            "label": {
+              "value": "\"Code 3.1.2\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Radio",
+            "id": "lo5vms0u-QOP-lo5w6upk",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_TABLE_RADIO5"
+            },
+            "bindingDependencies": [
+              "MCQ_TABLE_RADIO5"
+            ]
+          }
+        ],
+        [
+          {
+            "value": "c313",
+            "label": {
+              "value": "\"Code 3.1.3\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Radio",
+            "id": "lo5vms0u-QOP-lo5wpj3p",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_TABLE_RADIO6"
+            },
+            "bindingDependencies": [
+              "MCQ_TABLE_RADIO6"
+            ]
+          }
+        ],
+        [
+          {
+            "colspan": 2,
+            "value": "c32",
+            "label": {
+              "value": "\"Code 3.2\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Radio",
+            "id": "lo5vms0u-QOP-lo5wb2ey",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_TABLE_RADIO7"
+            },
+            "bindingDependencies": [
+              "MCQ_TABLE_RADIO7"
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "id": "lo5vj128",
+      "componentType": "Table",
+      "mandatory": false,
+      "page": "6",
+      "positioning": "HORIZONTAL",
+      "label": {
+        "value": "\"➡ \" || \"Multiple choice question - Table - Dropdowns\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lo5ufiuu",
+          "page": "1",
+          "label": {
+            "value": "\"I - \" || \"Multiple choice questions\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "MCQ_TABLE_DROPDOWN1",
+        "MCQ_TABLE_DROPDOWN2",
+        "MCQ_TABLE_DROPDOWN3",
+        "MCQ_TABLE_DROPDOWN4",
+        "MCQ_TABLE_DROPDOWN5",
+        "MCQ_TABLE_DROPDOWN6",
+        "MCQ_TABLE_DROPDOWN7"
+      ],
+      "body": [
+        [
+          {
+            "colspan": 3,
+            "value": "c1",
+            "label": {
+              "value": "\"Code 1\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Dropdown",
+            "id": "lo5vj128-QOP-lo5wnzny",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_TABLE_DROPDOWN1"
+            },
+            "bindingDependencies": [
+              "MCQ_TABLE_DROPDOWN1"
+            ]
+          }
+        ],
+        [
+          {
+            "rowspan": 2,
+            "value": "c2",
+            "label": {
+              "value": "\"Code 2\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "colspan": 2,
+            "value": "c21",
+            "label": {
+              "value": "\"Code 2.1\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Dropdown",
+            "id": "lo5vj128-QOP-lo5wauxr",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_TABLE_DROPDOWN2"
+            },
+            "bindingDependencies": [
+              "MCQ_TABLE_DROPDOWN2"
+            ]
+          }
+        ],
+        [
+          {
+            "colspan": 2,
+            "value": "c22",
+            "label": {
+              "value": "\"Code 2.2\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Dropdown",
+            "id": "lo5vj128-QOP-lo5wcj1m",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_TABLE_DROPDOWN3"
+            },
+            "bindingDependencies": [
+              "MCQ_TABLE_DROPDOWN3"
+            ]
+          }
+        ],
+        [
+          {
+            "rowspan": 4,
+            "value": "c3",
+            "label": {
+              "value": "\"Code 3\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "rowspan": 3,
+            "value": "c31",
+            "label": {
+              "value": "\"Code 3.1\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "value": "c311",
+            "label": {
+              "value": "\"Code 3.1.1\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Dropdown",
+            "id": "lo5vj128-QOP-lo5wdckv",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_TABLE_DROPDOWN4"
+            },
+            "bindingDependencies": [
+              "MCQ_TABLE_DROPDOWN4"
+            ]
+          }
+        ],
+        [
+          {
+            "value": "c312",
+            "label": {
+              "value": "\"Code 3.1.2\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Dropdown",
+            "id": "lo5vj128-QOP-lo5wo52o",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_TABLE_DROPDOWN5"
+            },
+            "bindingDependencies": [
+              "MCQ_TABLE_DROPDOWN5"
+            ]
+          }
+        ],
+        [
+          {
+            "value": "c313",
+            "label": {
+              "value": "\"Code 3.1.3\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Dropdown",
+            "id": "lo5vj128-QOP-lo5wlsvx",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_TABLE_DROPDOWN6"
+            },
+            "bindingDependencies": [
+              "MCQ_TABLE_DROPDOWN6"
+            ]
+          }
+        ],
+        [
+          {
+            "colspan": 2,
+            "value": "c32",
+            "label": {
+              "value": "\"Code 3.2\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Dropdown",
+            "id": "lo5vj128-QOP-lo5we02i",
+            "options": [
+              {
+                "value": "answerA",
+                "label": {
+                  "value": "\"Answer A\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerB",
+                "label": {
+                  "value": "\"Answer B\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerC",
+                "label": {
+                  "value": "\"Answer C\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerD",
+                "label": {
+                  "value": "\"Answer D\"",
+                  "type": "VTL|MD"
+                }
+              },
+              {
+                "value": "answerE",
+                "label": {
+                  "value": "\"Answer E\"",
+                  "type": "VTL|MD"
+                }
+              }
+            ],
+            "response": {
+              "name": "MCQ_TABLE_DROPDOWN7"
+            },
+            "bindingDependencies": [
+              "MCQ_TABLE_DROPDOWN7"
+            ]
+          }
+        ]
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_BOOL1",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_BOOL2",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_BOOL3",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_BOOL4",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_CL_RADIO1",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_CL_RADIO2",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_CL_RADIO3",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_CL_RADIO4",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_CL_DROPDOWN1",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_CL_DROPDOWN2",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_CL_DROPDOWN3",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_CL_DROPDOWN4",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_TABLE_RADIO1",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_TABLE_RADIO2",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_TABLE_RADIO3",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_TABLE_RADIO4",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_TABLE_RADIO5",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_TABLE_RADIO6",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_TABLE_RADIO7",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_TABLE_DROPDOWN1",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_TABLE_DROPDOWN2",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_TABLE_DROPDOWN3",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_TABLE_DROPDOWN4",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_TABLE_DROPDOWN5",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_TABLE_DROPDOWN6",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "MCQ_TABLE_DROPDOWN7",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    }
+  ],
+  "cleaning": {},
+  "resizing": {}
+}
