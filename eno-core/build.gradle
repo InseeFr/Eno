@@ -35,7 +35,7 @@ dependencies {
     implementation 'org.slf4j:slf4j-api'
 
     // Mapper
-    implementation 'org.modelmapper:modelmapper:3.1.1'
+    implementation 'org.modelmapper:modelmapper:3.2.0'
 
     // Logback logging implementation for testing
     testRuntimeOnly 'ch.qos.logback:logback-classic'
