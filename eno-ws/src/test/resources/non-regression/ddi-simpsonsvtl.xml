@@ -10,7 +10,7 @@
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
-             isMaintainable="true"><!--Eno version : 2.4.9. Generation date : 24/10/2023 - 10:15:51-->
+             isMaintainable="true"><!--Eno version : 2.4.9. Generation date : 25/10/2023 - 8:48:16-->
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-simpsonsvtl</r:ID>
    <r:Version>1</r:Version>
@@ -2605,14 +2605,6 @@
                   <r:String xml:lang="fr-FR">MAYOR</r:String>
                </r:ParameterName>
             </r:OutParameter>
-            <r:OutParameter isArray="false">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8iwb97-QOP-kn8isfc4</r:ID>
-               <r:Version>1</r:Version>
-               <r:ParameterName>
-                  <r:String xml:lang="fr-FR">MAYOROTCL</r:String>
-               </r:ParameterName>
-            </r:OutParameter>
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
@@ -2627,80 +2619,34 @@
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
             </r:Binding>
-            <r:Binding>
-               <r:SourceParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8iwb97-RDOP-kn8isfc4</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:SourceParameterReference>
-               <r:TargetParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8iwb97-QOP-kn8isfc4</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:TargetParameterReference>
-            </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">"Who is the Simpsons city mayor?"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
-            <d:StructuredMixedResponseDomain>
-               <d:ResponseDomainInMixed attachmentBase="1">
-                  <d:CodeDomain>
-                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
+            <d:CodeDomain>
+               <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
+               <r:CodeListReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>j6qdqoen</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>CodeList</r:TypeOfObject>
+               </r:CodeListReference>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>j6qdfhvw-RDOP-jbgd8ghp</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:CodeRepresentation>
                      <r:CodeListReference>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j6qdqoen</r:ID>
                         <r:Version>1</r:Version>
                         <r:TypeOfObject>CodeList</r:TypeOfObject>
                      </r:CodeListReference>
-                     <r:OutParameter isArray="false">
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j6qdfhvw-RDOP-jbgd8ghp</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:CodeRepresentation>
-                           <r:CodeListReference>
-                              <r:Agency>fr.insee</r:Agency>
-                              <r:ID>j6qdqoen</r:ID>
-                              <r:Version>1</r:Version>
-                              <r:TypeOfObject>CodeList</r:TypeOfObject>
-                           </r:CodeListReference>
-                        </r:CodeRepresentation>
-                     </r:OutParameter>
-                     <r:ResponseCardinality maximumResponses="1"/>
-                  </d:CodeDomain>
-               </d:ResponseDomainInMixed>
-               <d:ResponseDomainInMixed>
-                  <d:TextDomain maxLength="249">
-                     <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
-                     </r:Label>
-                     <r:OutParameter isArray="false">
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kn8iwb97-RDOP-kn8isfc4</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TextRepresentation maxLength="249"/>
-                     </r:OutParameter>
-                  </d:TextDomain>
-                  <d:AttachmentLocation>
-                     <d:DomainSpecificValue attachmentDomain="1">
-                        <r:Value>OT</r:Value>
-                     </d:DomainSpecificValue>
-                     <r:CodeReference>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j6qdqoen-4</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TypeOfObject>Code</r:TypeOfObject>
-                     </r:CodeReference>
-                  </d:AttachmentLocation>
-               </d:ResponseDomainInMixed>
-            </d:StructuredMixedResponseDomain>
+                  </r:CodeRepresentation>
+               </r:OutParameter>
+               <r:ResponseCardinality maximumResponses="1"/>
+            </d:CodeDomain>
             <d:InterviewerInstructionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>d4</r:ID>
@@ -3056,7 +3002,7 @@
             </d:QuestionGridName>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j334akov-QOP-khokqjtw</r:ID>
+               <r:ID>j334akov-QOP-lo5hcoxd</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">PET1</r:String>
@@ -3064,7 +3010,7 @@
             </r:OutParameter>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j334akov-QOP-khokur7a</r:ID>
+               <r:ID>j334akov-QOP-lo5hr0c0</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">PET2</r:String>
@@ -3072,7 +3018,7 @@
             </r:OutParameter>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j334akov-QOP-khol82ux</r:ID>
+               <r:ID>j334akov-QOP-lo5hc0rn</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">PET3</r:String>
@@ -3080,30 +3026,22 @@
             </r:OutParameter>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j334akov-QOP-khokqee5</r:ID>
+               <r:ID>j334akov-QOP-lo5hdbbk</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">PET4</r:String>
                </r:ParameterName>
             </r:OutParameter>
-            <r:OutParameter isArray="false">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8is5ba-QOP-kn8imaom</r:ID>
-               <r:Version>1</r:Version>
-               <r:ParameterName>
-                  <r:String xml:lang="fr-FR">PETOCL</r:String>
-               </r:ParameterName>
-            </r:OutParameter>
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j334akov-RDOP-khokqjtw</r:ID>
+                  <r:ID>j334akov-RDOP-lo5hcoxd</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j334akov-QOP-khokqjtw</r:ID>
+                  <r:ID>j334akov-QOP-lo5hcoxd</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -3111,13 +3049,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j334akov-RDOP-khokur7a</r:ID>
+                  <r:ID>j334akov-RDOP-lo5hr0c0</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j334akov-QOP-khokur7a</r:ID>
+                  <r:ID>j334akov-QOP-lo5hr0c0</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -3125,13 +3063,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j334akov-RDOP-khol82ux</r:ID>
+                  <r:ID>j334akov-RDOP-lo5hc0rn</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j334akov-QOP-khol82ux</r:ID>
+                  <r:ID>j334akov-QOP-lo5hc0rn</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -3139,27 +3077,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j334akov-RDOP-khokqee5</r:ID>
+                  <r:ID>j334akov-RDOP-lo5hdbbk</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j334akov-QOP-khokqee5</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:TargetParameterReference>
-            </r:Binding>
-            <r:Binding>
-               <r:SourceParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8is5ba-RDOP-kn8imaom</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:SourceParameterReference>
-               <r:TargetParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8is5ba-QOP-kn8imaom</r:ID>
+                  <r:ID>j334akov-QOP-lo5hdbbk</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -3184,7 +3108,7 @@
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j334akov-RDOP-khokqjtw</r:ID>
+                        <r:ID>j334akov-RDOP-lo5hcoxd</r:ID>
                         <r:Version>1</r:Version>
                         <r:CodeRepresentation>
                            <r:CodeSubsetInformation>
@@ -3212,7 +3136,7 @@
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j334akov-RDOP-khokur7a</r:ID>
+                        <r:ID>j334akov-RDOP-lo5hr0c0</r:ID>
                         <r:Version>1</r:Version>
                         <r:CodeRepresentation>
                            <r:CodeSubsetInformation>
@@ -3240,7 +3164,7 @@
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j334akov-RDOP-khol82ux</r:ID>
+                        <r:ID>j334akov-RDOP-lo5hc0rn</r:ID>
                         <r:Version>1</r:Version>
                         <r:CodeRepresentation>
                            <r:CodeSubsetInformation>
@@ -3264,11 +3188,11 @@
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
                </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed attachmentBase="4">
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j334akov-RDOP-khokqee5</r:ID>
+                        <r:ID>j334akov-RDOP-lo5hdbbk</r:ID>
                         <r:Version>1</r:Version>
                         <r:CodeRepresentation>
                            <r:CodeSubsetInformation>
@@ -3292,34 +3216,6 @@
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
                </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed>
-                  <d:TextDomain maxLength="249">
-                     <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
-                     </r:Label>
-                     <r:OutParameter isArray="false">
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kn8is5ba-RDOP-kn8imaom</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TextRepresentation maxLength="249"/>
-                     </r:OutParameter>
-                  </d:TextDomain>
-                  <d:ResponseAttachmentLocation>
-                     <d:DomainSpecificValue attachmentDomain="4">
-                        <r:Value>1</r:Value>
-                     </d:DomainSpecificValue>
-                     <r:CodeReference>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TypeOfObject>Code</r:TypeOfObject>
-                     </r:CodeReference>
-                  </d:ResponseAttachmentLocation>
-               </d:GridResponseDomainInMixed>
             </d:StructuredMixedGridResponseDomain>
             <d:InterviewerInstructionReference>
                <r:Agency>fr.insee</r:Agency>
@@ -3337,7 +3233,7 @@
             </d:QuestionGridName>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6p29i81-QOP-kiq5w99y</r:ID>
+               <r:ID>j6p29i81-QOP-lo5hfhcc</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">ICE_FLAVOUR1</r:String>
@@ -3345,7 +3241,7 @@
             </r:OutParameter>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6p29i81-QOP-kiq5ummf</r:ID>
+               <r:ID>j6p29i81-QOP-lo5hbxp5</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">ICE_FLAVOUR2</r:String>
@@ -3353,7 +3249,7 @@
             </r:OutParameter>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6p29i81-QOP-kiq5mry5</r:ID>
+               <r:ID>j6p29i81-QOP-lo5hep96</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">ICE_FLAVOUR3</r:String>
@@ -3361,30 +3257,22 @@
             </r:OutParameter>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6p29i81-QOP-kiq5lkr8</r:ID>
+               <r:ID>j6p29i81-QOP-lo5hm63y</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">ICE_FLAVOUR4</r:String>
                </r:ParameterName>
             </r:OutParameter>
-            <r:OutParameter isArray="false">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8iw4q0-QOP-kn8iv1mv</r:ID>
-               <r:Version>1</r:Version>
-               <r:ParameterName>
-                  <r:String xml:lang="fr-FR">ICE_FLAVOUROTCL</r:String>
-               </r:ParameterName>
-            </r:OutParameter>
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j6p29i81-RDOP-kiq5w99y</r:ID>
+                  <r:ID>j6p29i81-RDOP-lo5hfhcc</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j6p29i81-QOP-kiq5w99y</r:ID>
+                  <r:ID>j6p29i81-QOP-lo5hfhcc</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -3392,13 +3280,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j6p29i81-RDOP-kiq5ummf</r:ID>
+                  <r:ID>j6p29i81-RDOP-lo5hbxp5</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j6p29i81-QOP-kiq5ummf</r:ID>
+                  <r:ID>j6p29i81-QOP-lo5hbxp5</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -3406,13 +3294,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j6p29i81-RDOP-kiq5mry5</r:ID>
+                  <r:ID>j6p29i81-RDOP-lo5hep96</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j6p29i81-QOP-kiq5mry5</r:ID>
+                  <r:ID>j6p29i81-QOP-lo5hep96</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -3420,27 +3308,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j6p29i81-RDOP-kiq5lkr8</r:ID>
+                  <r:ID>j6p29i81-RDOP-lo5hm63y</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j6p29i81-QOP-kiq5lkr8</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:TargetParameterReference>
-            </r:Binding>
-            <r:Binding>
-               <r:SourceParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8iw4q0-RDOP-kn8iv1mv</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:SourceParameterReference>
-               <r:TargetParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8iw4q0-QOP-kn8iv1mv</r:ID>
+                  <r:ID>j6p29i81-QOP-lo5hm63y</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -3472,7 +3346,7 @@
                      </r:CodeListReference>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j6p29i81-RDOP-kiq5w99y</r:ID>
+                        <r:ID>j6p29i81-RDOP-lo5hfhcc</r:ID>
                         <r:Version>1</r:Version>
                         <r:CodeRepresentation>
                            <r:CodeListReference>
@@ -3502,7 +3376,7 @@
                      </r:CodeListReference>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j6p29i81-RDOP-kiq5ummf</r:ID>
+                        <r:ID>j6p29i81-RDOP-lo5hbxp5</r:ID>
                         <r:Version>1</r:Version>
                         <r:CodeRepresentation>
                            <r:CodeListReference>
@@ -3532,7 +3406,7 @@
                      </r:CodeListReference>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j6p29i81-RDOP-kiq5mry5</r:ID>
+                        <r:ID>j6p29i81-RDOP-lo5hep96</r:ID>
                         <r:Version>1</r:Version>
                         <r:CodeRepresentation>
                            <r:CodeListReference>
@@ -3551,7 +3425,7 @@
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
                </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed attachmentBase="4">
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
                      <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
                      <r:CodeListReference>
@@ -3562,7 +3436,7 @@
                      </r:CodeListReference>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j6p29i81-RDOP-kiq5lkr8</r:ID>
+                        <r:ID>j6p29i81-RDOP-lo5hm63y</r:ID>
                         <r:Version>1</r:Version>
                         <r:CodeRepresentation>
                            <r:CodeListReference>
@@ -3580,34 +3454,6 @@
                         <d:SelectDimension rank="1" rangeMinimum="4" rangeMaximum="4"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed>
-                  <d:TextDomain maxLength="249">
-                     <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
-                     </r:Label>
-                     <r:OutParameter isArray="false">
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kn8iw4q0-RDOP-kn8iv1mv</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TextRepresentation maxLength="249"/>
-                     </r:OutParameter>
-                  </d:TextDomain>
-                  <d:ResponseAttachmentLocation>
-                     <d:DomainSpecificValue attachmentDomain="4">
-                        <r:Value>1</r:Value>
-                     </d:DomainSpecificValue>
-                     <r:CodeReference>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>jbdxh138-1</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TypeOfObject>Code</r:TypeOfObject>
-                     </r:CodeReference>
-                  </d:ResponseAttachmentLocation>
                </d:GridResponseDomainInMixed>
             </d:StructuredMixedGridResponseDomain>
          </d:QuestionGrid>
@@ -4515,7 +4361,7 @@
             </d:QuestionGridName>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t-QOP-kiq6pljq</r:ID>
+               <r:ID>k9cg2q5t-QOP-lo5hje47</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING11</r:String>
@@ -4523,7 +4369,7 @@
             </r:OutParameter>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t-QOP-kiq6mgpv</r:ID>
+               <r:ID>k9cg2q5t-QOP-lo5hwozj</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING21</r:String>
@@ -4531,7 +4377,7 @@
             </r:OutParameter>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t-QOP-kiq6pmtz</r:ID>
+               <r:ID>k9cg2q5t-QOP-lo5hlcle</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING31</r:String>
@@ -4539,7 +4385,7 @@
             </r:OutParameter>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t-QOP-kiq6k4lf</r:ID>
+               <r:ID>k9cg2q5t-QOP-lo5hwqk2</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING41</r:String>
@@ -4547,7 +4393,7 @@
             </r:OutParameter>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t-QOP-kiq6p70n</r:ID>
+               <r:ID>k9cg2q5t-QOP-lo5hjq43</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING51</r:String>
@@ -4555,7 +4401,7 @@
             </r:OutParameter>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t-QOP-kiq6lh5v</r:ID>
+               <r:ID>k9cg2q5t-QOP-lo5hlnnl</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING61</r:String>
@@ -4563,7 +4409,7 @@
             </r:OutParameter>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t-QOP-kiq703te</r:ID>
+               <r:ID>k9cg2q5t-QOP-lo5hhmu2</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING71</r:String>
@@ -4571,86 +4417,22 @@
             </r:OutParameter>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t-QOP-kiq6zpd3</r:ID>
+               <r:ID>k9cg2q5t-QOP-lo5hs719</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING81</r:String>
                </r:ParameterName>
             </r:OutParameter>
-            <r:OutParameter isArray="false">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8iuohr-QOP-kn8iz33u</r:ID>
-               <r:Version>1</r:Version>
-               <r:ParameterName>
-                  <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING113CL</r:String>
-               </r:ParameterName>
-            </r:OutParameter>
-            <r:OutParameter isArray="false">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8j5f8m-QOP-kn8iqa3o</r:ID>
-               <r:Version>1</r:Version>
-               <r:ParameterName>
-                  <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING213CL</r:String>
-               </r:ParameterName>
-            </r:OutParameter>
-            <r:OutParameter isArray="false">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8ivic6-QOP-kn8irapl</r:ID>
-               <r:Version>1</r:Version>
-               <r:ParameterName>
-                  <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING313CL</r:String>
-               </r:ParameterName>
-            </r:OutParameter>
-            <r:OutParameter isArray="false">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8j1qir-QOP-kn8j5v35</r:ID>
-               <r:Version>1</r:Version>
-               <r:ParameterName>
-                  <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING413CL</r:String>
-               </r:ParameterName>
-            </r:OutParameter>
-            <r:OutParameter isArray="false">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8iupkb-QOP-kn8im95w</r:ID>
-               <r:Version>1</r:Version>
-               <r:ParameterName>
-                  <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING513CL</r:String>
-               </r:ParameterName>
-            </r:OutParameter>
-            <r:OutParameter isArray="false">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8iptlw-QOP-kn8in3rk</r:ID>
-               <r:Version>1</r:Version>
-               <r:ParameterName>
-                  <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING613CL</r:String>
-               </r:ParameterName>
-            </r:OutParameter>
-            <r:OutParameter isArray="false">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8ivkuz-QOP-kn8j4ola</r:ID>
-               <r:Version>1</r:Version>
-               <r:ParameterName>
-                  <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING713CL</r:String>
-               </r:ParameterName>
-            </r:OutParameter>
-            <r:OutParameter isArray="false">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8j21ue-QOP-kn8izclz</r:ID>
-               <r:Version>1</r:Version>
-               <r:ParameterName>
-                  <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING813CL</r:String>
-               </r:ParameterName>
-            </r:OutParameter>
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k9cg2q5t-RDOP-kiq6pljq</r:ID>
+                  <r:ID>k9cg2q5t-RDOP-lo5hje47</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k9cg2q5t-QOP-kiq6pljq</r:ID>
+                  <r:ID>k9cg2q5t-QOP-lo5hje47</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -4658,13 +4440,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k9cg2q5t-RDOP-kiq6mgpv</r:ID>
+                  <r:ID>k9cg2q5t-RDOP-lo5hwozj</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k9cg2q5t-QOP-kiq6mgpv</r:ID>
+                  <r:ID>k9cg2q5t-QOP-lo5hwozj</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -4672,13 +4454,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k9cg2q5t-RDOP-kiq6pmtz</r:ID>
+                  <r:ID>k9cg2q5t-RDOP-lo5hlcle</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k9cg2q5t-QOP-kiq6pmtz</r:ID>
+                  <r:ID>k9cg2q5t-QOP-lo5hlcle</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -4686,13 +4468,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k9cg2q5t-RDOP-kiq6k4lf</r:ID>
+                  <r:ID>k9cg2q5t-RDOP-lo5hwqk2</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k9cg2q5t-QOP-kiq6k4lf</r:ID>
+                  <r:ID>k9cg2q5t-QOP-lo5hwqk2</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -4700,13 +4482,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k9cg2q5t-RDOP-kiq6p70n</r:ID>
+                  <r:ID>k9cg2q5t-RDOP-lo5hjq43</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k9cg2q5t-QOP-kiq6p70n</r:ID>
+                  <r:ID>k9cg2q5t-QOP-lo5hjq43</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -4714,13 +4496,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k9cg2q5t-RDOP-kiq6lh5v</r:ID>
+                  <r:ID>k9cg2q5t-RDOP-lo5hlnnl</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k9cg2q5t-QOP-kiq6lh5v</r:ID>
+                  <r:ID>k9cg2q5t-QOP-lo5hlnnl</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -4728,13 +4510,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k9cg2q5t-RDOP-kiq703te</r:ID>
+                  <r:ID>k9cg2q5t-RDOP-lo5hhmu2</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k9cg2q5t-QOP-kiq703te</r:ID>
+                  <r:ID>k9cg2q5t-QOP-lo5hhmu2</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -4742,125 +4524,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k9cg2q5t-RDOP-kiq6zpd3</r:ID>
+                  <r:ID>k9cg2q5t-RDOP-lo5hs719</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>k9cg2q5t-QOP-kiq6zpd3</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:TargetParameterReference>
-            </r:Binding>
-            <r:Binding>
-               <r:SourceParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8iuohr-RDOP-kn8iz33u</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:SourceParameterReference>
-               <r:TargetParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8iuohr-QOP-kn8iz33u</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:TargetParameterReference>
-            </r:Binding>
-            <r:Binding>
-               <r:SourceParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8j5f8m-RDOP-kn8iqa3o</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:SourceParameterReference>
-               <r:TargetParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8j5f8m-QOP-kn8iqa3o</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:TargetParameterReference>
-            </r:Binding>
-            <r:Binding>
-               <r:SourceParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8ivic6-RDOP-kn8irapl</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:SourceParameterReference>
-               <r:TargetParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8ivic6-QOP-kn8irapl</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:TargetParameterReference>
-            </r:Binding>
-            <r:Binding>
-               <r:SourceParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8j1qir-RDOP-kn8j5v35</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:SourceParameterReference>
-               <r:TargetParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8j1qir-QOP-kn8j5v35</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:TargetParameterReference>
-            </r:Binding>
-            <r:Binding>
-               <r:SourceParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8iupkb-RDOP-kn8im95w</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:SourceParameterReference>
-               <r:TargetParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8iupkb-QOP-kn8im95w</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:TargetParameterReference>
-            </r:Binding>
-            <r:Binding>
-               <r:SourceParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8iptlw-RDOP-kn8in3rk</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:SourceParameterReference>
-               <r:TargetParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8iptlw-QOP-kn8in3rk</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:TargetParameterReference>
-            </r:Binding>
-            <r:Binding>
-               <r:SourceParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8ivkuz-RDOP-kn8j4ola</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:SourceParameterReference>
-               <r:TargetParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8ivkuz-QOP-kn8j4ola</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:TargetParameterReference>
-            </r:Binding>
-            <r:Binding>
-               <r:SourceParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8j21ue-RDOP-kn8izclz</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:SourceParameterReference>
-               <r:TargetParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>kn8j21ue-QOP-kn8izclz</r:ID>
+                  <r:ID>k9cg2q5t-QOP-lo5hs719</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -4891,7 +4561,7 @@
                </d:CodeDomain>
             </d:GridDimension>
             <d:StructuredMixedGridResponseDomain>
-               <d:GridResponseDomainInMixed attachmentBase="1">
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
                      <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
                      <r:CodeListReference>
@@ -4902,7 +4572,7 @@
                      </r:CodeListReference>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>k9cg2q5t-RDOP-kiq6pljq</r:ID>
+                        <r:ID>k9cg2q5t-RDOP-lo5hje47</r:ID>
                         <r:Version>1</r:Version>
                         <r:CodeRepresentation>
                            <r:CodeListReference>
@@ -4922,7 +4592,7 @@
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
                </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed attachmentBase="2">
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
                      <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
                      <r:CodeListReference>
@@ -4933,7 +4603,7 @@
                      </r:CodeListReference>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>k9cg2q5t-RDOP-kiq6mgpv</r:ID>
+                        <r:ID>k9cg2q5t-RDOP-lo5hwozj</r:ID>
                         <r:Version>1</r:Version>
                         <r:CodeRepresentation>
                            <r:CodeListReference>
@@ -4953,7 +4623,7 @@
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
                </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed attachmentBase="3">
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
                      <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
                      <r:CodeListReference>
@@ -4964,7 +4634,7 @@
                      </r:CodeListReference>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>k9cg2q5t-RDOP-kiq6pmtz</r:ID>
+                        <r:ID>k9cg2q5t-RDOP-lo5hlcle</r:ID>
                         <r:Version>1</r:Version>
                         <r:CodeRepresentation>
                            <r:CodeListReference>
@@ -4984,7 +4654,7 @@
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
                </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed attachmentBase="4">
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
                      <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
                      <r:CodeListReference>
@@ -4995,7 +4665,7 @@
                      </r:CodeListReference>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>k9cg2q5t-RDOP-kiq6k4lf</r:ID>
+                        <r:ID>k9cg2q5t-RDOP-lo5hwqk2</r:ID>
                         <r:Version>1</r:Version>
                         <r:CodeRepresentation>
                            <r:CodeListReference>
@@ -5015,7 +4685,7 @@
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
                </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed attachmentBase="5">
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
                      <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
                      <r:CodeListReference>
@@ -5026,7 +4696,7 @@
                      </r:CodeListReference>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>k9cg2q5t-RDOP-kiq6p70n</r:ID>
+                        <r:ID>k9cg2q5t-RDOP-lo5hjq43</r:ID>
                         <r:Version>1</r:Version>
                         <r:CodeRepresentation>
                            <r:CodeListReference>
@@ -5046,7 +4716,7 @@
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
                </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed attachmentBase="6">
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
                      <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
                      <r:CodeListReference>
@@ -5057,7 +4727,7 @@
                      </r:CodeListReference>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>k9cg2q5t-RDOP-kiq6lh5v</r:ID>
+                        <r:ID>k9cg2q5t-RDOP-lo5hlnnl</r:ID>
                         <r:Version>1</r:Version>
                         <r:CodeRepresentation>
                            <r:CodeListReference>
@@ -5077,7 +4747,7 @@
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
                </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed attachmentBase="7">
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
                      <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
                      <r:CodeListReference>
@@ -5088,7 +4758,7 @@
                      </r:CodeListReference>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>k9cg2q5t-RDOP-kiq703te</r:ID>
+                        <r:ID>k9cg2q5t-RDOP-lo5hhmu2</r:ID>
                         <r:Version>1</r:Version>
                         <r:CodeRepresentation>
                            <r:CodeListReference>
@@ -5108,7 +4778,7 @@
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
                </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed attachmentBase="8">
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
                      <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
                      <r:CodeListReference>
@@ -5119,7 +4789,7 @@
                      </r:CodeListReference>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>k9cg2q5t-RDOP-kiq6zpd3</r:ID>
+                        <r:ID>k9cg2q5t-RDOP-lo5hs719</r:ID>
                         <r:Version>1</r:Version>
                         <r:CodeRepresentation>
                            <r:CodeListReference>
@@ -5138,230 +4808,6 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed>
-                  <d:TextDomain maxLength="249">
-                     <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
-                     </r:Label>
-                     <r:OutParameter isArray="false">
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kn8iuohr-RDOP-kn8iz33u</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TextRepresentation maxLength="249"/>
-                     </r:OutParameter>
-                  </d:TextDomain>
-                  <d:ResponseAttachmentLocation>
-                     <d:DomainSpecificValue attachmentDomain="1">
-                        <r:Value>3</r:Value>
-                     </d:DomainSpecificValue>
-                     <r:CodeReference>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kiq6nvuw-3</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TypeOfObject>Code</r:TypeOfObject>
-                     </r:CodeReference>
-                  </d:ResponseAttachmentLocation>
-               </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed>
-                  <d:TextDomain maxLength="249">
-                     <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
-                     </r:Label>
-                     <r:OutParameter isArray="false">
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kn8j5f8m-RDOP-kn8iqa3o</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TextRepresentation maxLength="249"/>
-                     </r:OutParameter>
-                  </d:TextDomain>
-                  <d:ResponseAttachmentLocation>
-                     <d:DomainSpecificValue attachmentDomain="2">
-                        <r:Value>3</r:Value>
-                     </d:DomainSpecificValue>
-                     <r:CodeReference>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kiq6nvuw-3</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TypeOfObject>Code</r:TypeOfObject>
-                     </r:CodeReference>
-                  </d:ResponseAttachmentLocation>
-               </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed>
-                  <d:TextDomain maxLength="249">
-                     <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
-                     </r:Label>
-                     <r:OutParameter isArray="false">
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kn8ivic6-RDOP-kn8irapl</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TextRepresentation maxLength="249"/>
-                     </r:OutParameter>
-                  </d:TextDomain>
-                  <d:ResponseAttachmentLocation>
-                     <d:DomainSpecificValue attachmentDomain="3">
-                        <r:Value>3</r:Value>
-                     </d:DomainSpecificValue>
-                     <r:CodeReference>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kiq6nvuw-3</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TypeOfObject>Code</r:TypeOfObject>
-                     </r:CodeReference>
-                  </d:ResponseAttachmentLocation>
-               </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed>
-                  <d:TextDomain maxLength="249">
-                     <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
-                     </r:Label>
-                     <r:OutParameter isArray="false">
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kn8j1qir-RDOP-kn8j5v35</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TextRepresentation maxLength="249"/>
-                     </r:OutParameter>
-                  </d:TextDomain>
-                  <d:ResponseAttachmentLocation>
-                     <d:DomainSpecificValue attachmentDomain="4">
-                        <r:Value>3</r:Value>
-                     </d:DomainSpecificValue>
-                     <r:CodeReference>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kiq6nvuw-3</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TypeOfObject>Code</r:TypeOfObject>
-                     </r:CodeReference>
-                  </d:ResponseAttachmentLocation>
-               </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed>
-                  <d:TextDomain maxLength="249">
-                     <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
-                     </r:Label>
-                     <r:OutParameter isArray="false">
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kn8iupkb-RDOP-kn8im95w</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TextRepresentation maxLength="249"/>
-                     </r:OutParameter>
-                  </d:TextDomain>
-                  <d:ResponseAttachmentLocation>
-                     <d:DomainSpecificValue attachmentDomain="5">
-                        <r:Value>3</r:Value>
-                     </d:DomainSpecificValue>
-                     <r:CodeReference>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kiq6nvuw-3</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TypeOfObject>Code</r:TypeOfObject>
-                     </r:CodeReference>
-                  </d:ResponseAttachmentLocation>
-               </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed>
-                  <d:TextDomain maxLength="249">
-                     <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
-                     </r:Label>
-                     <r:OutParameter isArray="false">
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kn8iptlw-RDOP-kn8in3rk</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TextRepresentation maxLength="249"/>
-                     </r:OutParameter>
-                  </d:TextDomain>
-                  <d:ResponseAttachmentLocation>
-                     <d:DomainSpecificValue attachmentDomain="6">
-                        <r:Value>3</r:Value>
-                     </d:DomainSpecificValue>
-                     <r:CodeReference>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kiq6nvuw-3</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TypeOfObject>Code</r:TypeOfObject>
-                     </r:CodeReference>
-                  </d:ResponseAttachmentLocation>
-               </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed>
-                  <d:TextDomain maxLength="249">
-                     <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
-                     </r:Label>
-                     <r:OutParameter isArray="false">
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kn8ivkuz-RDOP-kn8j4ola</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TextRepresentation maxLength="249"/>
-                     </r:OutParameter>
-                  </d:TextDomain>
-                  <d:ResponseAttachmentLocation>
-                     <d:DomainSpecificValue attachmentDomain="7">
-                        <r:Value>3</r:Value>
-                     </d:DomainSpecificValue>
-                     <r:CodeReference>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kiq6nvuw-3</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TypeOfObject>Code</r:TypeOfObject>
-                     </r:CodeReference>
-                  </d:ResponseAttachmentLocation>
-               </d:GridResponseDomainInMixed>
-               <d:GridResponseDomainInMixed>
-                  <d:TextDomain maxLength="249">
-                     <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
-                     </r:Label>
-                     <r:OutParameter isArray="false">
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kn8j21ue-RDOP-kn8izclz</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TextRepresentation maxLength="249"/>
-                     </r:OutParameter>
-                  </d:TextDomain>
-                  <d:ResponseAttachmentLocation>
-                     <d:DomainSpecificValue attachmentDomain="8">
-                        <r:Value>3</r:Value>
-                     </d:DomainSpecificValue>
-                     <r:CodeReference>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>kiq6nvuw-3</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TypeOfObject>Code</r:TypeOfObject>
-                     </r:CodeReference>
-                  </d:ResponseAttachmentLocation>
                </d:GridResponseDomainInMixed>
             </d:StructuredMixedGridResponseDomain>
          </d:QuestionGrid>
@@ -7879,7 +7325,7 @@
          <r:ID>CategoryScheme-j6qdqoen</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">MAYOR </r:Content>
+            <r:Content xml:lang="fr-FR">L_MAYOR</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
@@ -8846,7 +8292,7 @@
             <r:ID>j6qdqoen</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">MAYOR </r:Content>
+               <r:Content xml:lang="fr-FR">L_MAYOR</r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -10830,7 +10276,7 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>khokr3d5</r:ID>
+            <r:ID>lo5hc4su</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">MAYOR</r:String>
@@ -10859,32 +10305,6 @@
                      <r:TypeOfObject>CodeList</r:TypeOfObject>
                   </r:CodeListReference>
                </r:CodeRepresentation>
-            </l:VariableRepresentation>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>khokrxjr</r:ID>
-            <r:Version>1</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="fr-FR">MAYOROTCL</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">MAYOROTCL label </r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8iwb97-QOP-kn8isfc4</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6qdfhvw</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:TextRepresentation maxLength="249"/>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -10922,7 +10342,7 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>khokodq3</r:ID>
+            <r:ID>lo5h70qh</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">PET1</r:String>
@@ -10932,7 +10352,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j334akov-QOP-khokqjtw</r:ID>
+               <r:ID>j334akov-QOP-lo5hcoxd</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -10959,7 +10379,7 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>khokvtc3</r:ID>
+            <r:ID>lo5hkkyk</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">PET2</r:String>
@@ -10969,7 +10389,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j334akov-QOP-khokur7a</r:ID>
+               <r:ID>j334akov-QOP-lo5hr0c0</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -10996,7 +10416,7 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>khokn596</r:ID>
+            <r:ID>lo5higuo</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">PET3</r:String>
@@ -11006,7 +10426,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j334akov-QOP-khol82ux</r:ID>
+               <r:ID>j334akov-QOP-lo5hc0rn</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -11033,7 +10453,7 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>khokqyqi</r:ID>
+            <r:ID>lo5heqms</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">PET4</r:String>
@@ -11043,7 +10463,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j334akov-QOP-khokqee5</r:ID>
+               <r:ID>j334akov-QOP-lo5hdbbk</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -11070,33 +10490,7 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>khol7yu4</r:ID>
-            <r:Version>1</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="fr-FR">PETOCL</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">PETOCL label </r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8is5ba-QOP-kn8imaom</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j334akov</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:TextRepresentation maxLength="249"/>
-            </l:VariableRepresentation>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq5m50u</r:ID>
+            <r:ID>lo5hd3f4</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">ICE_FLAVOUR1</r:String>
@@ -11106,7 +10500,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6p29i81-QOP-kiq5w99y</r:ID>
+               <r:ID>j6p29i81-QOP-lo5hfhcc</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -11129,7 +10523,7 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq5ozuv</r:ID>
+            <r:ID>lo5hgxnv</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">ICE_FLAVOUR2</r:String>
@@ -11139,7 +10533,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6p29i81-QOP-kiq5ummf</r:ID>
+               <r:ID>j6p29i81-QOP-lo5hbxp5</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -11162,7 +10556,7 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq5tapt</r:ID>
+            <r:ID>lo5hd75n</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">ICE_FLAVOUR3</r:String>
@@ -11172,7 +10566,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6p29i81-QOP-kiq5mry5</r:ID>
+               <r:ID>j6p29i81-QOP-lo5hep96</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -11195,7 +10589,7 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq5sxcq</r:ID>
+            <r:ID>lo5hdazu</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">ICE_FLAVOUR4</r:String>
@@ -11205,7 +10599,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6p29i81-QOP-kiq5lkr8</r:ID>
+               <r:ID>j6p29i81-QOP-lo5hm63y</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -11224,32 +10618,6 @@
                      <r:TypeOfObject>CodeList</r:TypeOfObject>
                   </r:CodeListReference>
                </r:CodeRepresentation>
-            </l:VariableRepresentation>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq5n8gf</r:ID>
-            <r:Version>1</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="fr-FR">ICE_FLAVOUROTCL</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">ICE_FLAVOUROTCL label </r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8iw4q0-QOP-kn8iv1mv</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6p29i81</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:TextRepresentation maxLength="249"/>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -11815,7 +11183,7 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq70n2n</r:ID>
+            <r:ID>lo5hrv7h</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING11</r:String>
@@ -11825,7 +11193,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t-QOP-kiq6pljq</r:ID>
+               <r:ID>k9cg2q5t-QOP-lo5hje47</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -11848,7 +11216,7 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq711j5</r:ID>
+            <r:ID>lo5hciay</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING21</r:String>
@@ -11858,7 +11226,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t-QOP-kiq6mgpv</r:ID>
+               <r:ID>k9cg2q5t-QOP-lo5hwozj</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -11881,7 +11249,7 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq6t03g</r:ID>
+            <r:ID>lo5hvvlz</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING31</r:String>
@@ -11891,7 +11259,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t-QOP-kiq6pmtz</r:ID>
+               <r:ID>k9cg2q5t-QOP-lo5hlcle</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -11914,7 +11282,7 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq6kl68</r:ID>
+            <r:ID>lo5hgksa</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING41</r:String>
@@ -11924,7 +11292,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t-QOP-kiq6k4lf</r:ID>
+               <r:ID>k9cg2q5t-QOP-lo5hwqk2</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -11947,7 +11315,7 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq6num0</r:ID>
+            <r:ID>lo5hqtxn</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING51</r:String>
@@ -11957,7 +11325,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t-QOP-kiq6p70n</r:ID>
+               <r:ID>k9cg2q5t-QOP-lo5hjq43</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -11980,7 +11348,7 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq6vzhq</r:ID>
+            <r:ID>lo5hkt9q</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING61</r:String>
@@ -11990,7 +11358,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t-QOP-kiq6lh5v</r:ID>
+               <r:ID>k9cg2q5t-QOP-lo5hlnnl</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -12013,7 +11381,7 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq6j9y2</r:ID>
+            <r:ID>lo5hcjbk</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING71</r:String>
@@ -12023,7 +11391,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t-QOP-kiq703te</r:ID>
+               <r:ID>k9cg2q5t-QOP-lo5hhmu2</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -12046,7 +11414,7 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq6iysv</r:ID>
+            <r:ID>lo5hstw5</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING81</r:String>
@@ -12056,7 +11424,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t-QOP-kiq6zpd3</r:ID>
+               <r:ID>k9cg2q5t-QOP-lo5hs719</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -12075,214 +11443,6 @@
                      <r:TypeOfObject>CodeList</r:TypeOfObject>
                   </r:CodeListReference>
                </r:CodeRepresentation>
-            </l:VariableRepresentation>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq6s6h4</r:ID>
-            <r:Version>1</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING113CL</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">LAST_FOOD_SHOPPING113CL label </r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8iuohr-QOP-kn8iz33u</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:TextRepresentation maxLength="249"/>
-            </l:VariableRepresentation>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq6nxdm</r:ID>
-            <r:Version>1</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING213CL</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">LAST_FOOD_SHOPPING213CL label </r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8j5f8m-QOP-kn8iqa3o</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:TextRepresentation maxLength="249"/>
-            </l:VariableRepresentation>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq71jcl</r:ID>
-            <r:Version>1</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING313CL</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">LAST_FOOD_SHOPPING313CL label </r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8ivic6-QOP-kn8irapl</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:TextRepresentation maxLength="249"/>
-            </l:VariableRepresentation>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq6xeyd</r:ID>
-            <r:Version>1</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING413CL</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">LAST_FOOD_SHOPPING413CL label </r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8j1qir-QOP-kn8j5v35</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:TextRepresentation maxLength="249"/>
-            </l:VariableRepresentation>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq6o5db</r:ID>
-            <r:Version>1</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING513CL</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">LAST_FOOD_SHOPPING513CL label </r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8iupkb-QOP-kn8im95w</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:TextRepresentation maxLength="249"/>
-            </l:VariableRepresentation>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq6mbhy</r:ID>
-            <r:Version>1</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING613CL</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">LAST_FOOD_SHOPPING613CL label </r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8iptlw-QOP-kn8in3rk</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:TextRepresentation maxLength="249"/>
-            </l:VariableRepresentation>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq6n5we</r:ID>
-            <r:Version>1</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING713CL</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">LAST_FOOD_SHOPPING713CL label </r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8ivkuz-QOP-kn8j4ola</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:TextRepresentation maxLength="249"/>
-            </l:VariableRepresentation>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>kiq6snxi</r:ID>
-            <r:Version>1</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="fr-FR">LAST_FOOD_SHOPPING813CL</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">LAST_FOOD_SHOPPING813CL label </r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kn8j21ue-QOP-kn8izclz</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>k9cg2q5t</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:TextRepresentation maxLength="249"/>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -14263,13 +13423,7 @@
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>khokr3d5</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>Variable</r:TypeOfObject>
-            </r:VariableReference>
-            <r:VariableReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>khokrxjr</r:ID>
+               <r:ID>lo5hc4su</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
@@ -14281,61 +13435,49 @@
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>khokodq3</r:ID>
+               <r:ID>lo5h70qh</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>khokvtc3</r:ID>
+               <r:ID>lo5hkkyk</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>khokn596</r:ID>
+               <r:ID>lo5higuo</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>khokqyqi</r:ID>
+               <r:ID>lo5heqms</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>khol7yu4</r:ID>
+               <r:ID>lo5hd3f4</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq5m50u</r:ID>
+               <r:ID>lo5hgxnv</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq5ozuv</r:ID>
+               <r:ID>lo5hd75n</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq5tapt</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>Variable</r:TypeOfObject>
-            </r:VariableReference>
-            <r:VariableReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq5sxcq</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>Variable</r:TypeOfObject>
-            </r:VariableReference>
-            <r:VariableReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq5n8gf</r:ID>
+               <r:ID>lo5hdazu</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
@@ -14443,97 +13585,49 @@
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq70n2n</r:ID>
+               <r:ID>lo5hrv7h</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq711j5</r:ID>
+               <r:ID>lo5hciay</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq6t03g</r:ID>
+               <r:ID>lo5hvvlz</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq6kl68</r:ID>
+               <r:ID>lo5hgksa</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq6num0</r:ID>
+               <r:ID>lo5hqtxn</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq6vzhq</r:ID>
+               <r:ID>lo5hkt9q</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq6j9y2</r:ID>
+               <r:ID>lo5hcjbk</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq6iysv</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>Variable</r:TypeOfObject>
-            </r:VariableReference>
-            <r:VariableReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq6s6h4</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>Variable</r:TypeOfObject>
-            </r:VariableReference>
-            <r:VariableReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq6nxdm</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>Variable</r:TypeOfObject>
-            </r:VariableReference>
-            <r:VariableReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq71jcl</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>Variable</r:TypeOfObject>
-            </r:VariableReference>
-            <r:VariableReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq6xeyd</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>Variable</r:TypeOfObject>
-            </r:VariableReference>
-            <r:VariableReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq6o5db</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>Variable</r:TypeOfObject>
-            </r:VariableReference>
-            <r:VariableReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq6mbhy</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>Variable</r:TypeOfObject>
-            </r:VariableReference>
-            <r:VariableReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq6n5we</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>Variable</r:TypeOfObject>
-            </r:VariableReference>
-            <r:VariableReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>kiq6snxi</r:ID>
+               <r:ID>lo5hstw5</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
