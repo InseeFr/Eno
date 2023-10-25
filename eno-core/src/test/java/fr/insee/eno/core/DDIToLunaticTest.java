@@ -30,11 +30,10 @@ class DDIToLunaticTest {
     @ParameterizedTest
     @ValueSource(strings = {
             "l20g2ba7",
-            //"l5v3spn0",
             "kx0a2hn8",
             "kzy5kbtl",
-            //"l8x6fhtd",
-            //"ldodefpq",
+            //"l8x6fhtd", // !!! bug in complex mcq with nested code list
+            "ldodefpq",
             "lhpz68wp",
             "li49zxju",
             "lmyjrqbb",
@@ -48,6 +47,16 @@ class DDIToLunaticTest {
                 EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
         //
         assertNotNull(lunaticQuestionnaire);
+    }
+
+    @Test
+    void ddiLoopBasedOnDynamicTable_shouldThrowException() {
+        // Given
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(
+                "functional/ddi/ddi-l5v3spn0.xml");
+        EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
+        // When + Then
+        assertThrows(UnsupportedOperationException.class, () -> DDIToLunatic.transform(inputStream, enoParameters));
     }
 
     @Nested

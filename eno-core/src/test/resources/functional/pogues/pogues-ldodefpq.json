@@ -16,10 +16,9 @@
         "ldodn448",
         "ldoe54ur",
         "ldodqku4",
+        "ljintclc",
         "ldoe64h3",
         "ldoeba22",
-        "ldoez5qc",
-        "ldoexsbc",
         "ldof1gdm",
         "ldoffn3o",
         "liude0tk",
@@ -44,6 +43,50 @@
   "Name": "PROTO_TCM",
   "Variables": {
     "Variable": [
+      {
+        "Formula": "if $LIENS$ = \"3\" then 1 else 0",
+        "Scope": "ldoe0rct",
+        "Label": "CALC",
+        "id": "livk3uvt",
+        "type": "CalculatedVariableType",
+        "Name": "CALC",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Formula": "sum($CALC$)",
+        "Scope": "ldoe0rct",
+        "Label": "SCALC",
+        "id": "livju6xt",
+        "type": "CalculatedVariableType",
+        "Name": "SCALC",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Formula": "if \"2\" in $LIENS$ then 1\r\nelse 0",
+        "Scope": "ldoe0rct",
+        "Label": "PARL",
+        "id": "llni96r7",
+        "type": "CalculatedVariableType",
+        "Name": "PARL",
+        "Datatype": {
+          "Maximum": "1",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
       {
         "Label": "NBHAB label",
         "id": "ldodx43e",
@@ -87,8 +130,20 @@
         }
       },
       {
+        "Scope": "ldoe0rct",
+        "Label": "ANAIS label",
+        "id": "ljinfs23",
+        "type": "CollectedVariableType",
+        "Name": "ANAIS",
+        "Datatype": {
+          "Format": "YYYY-MM-DD",
+          "typeName": "DATE",
+          "type": "DateDatatypeType"
+        }
+      },
+      {
         "Label": "LIENS label",
-        "id": "ldoel6mm",
+        "id": "livj66y0",
         "type": "CollectedVariableType",
         "CodeListReference": "ldoe6hg3",
         "Name": "LIENS",
@@ -97,19 +152,6 @@
           "typeName": "TEXT",
           "type": "TextDatatypeType",
           "MaxLength": 1
-        }
-      },
-      {
-        "Scope": "ldoe0rct",
-        "Label": "ENFANT_SEUL label",
-        "id": "ldoev9n2",
-        "type": "CollectedVariableType",
-        "Name": "ENFANT_SEUL",
-        "Datatype": {
-          "Pattern": "",
-          "typeName": "TEXT",
-          "type": "TextDatatypeType",
-          "MaxLength": 249
         }
       },
       {
@@ -127,28 +169,49 @@
       },
       {
         "Scope": "ldoe0rct",
-        "Label": "Q3 label",
-        "id": "liudqzbi",
+        "Label": "1 - A",
+        "id": "lix9351e",
         "type": "CollectedVariableType",
+        "Name": "Q21",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Scope": "ldoe0rct",
+        "Label": "2 - b",
+        "id": "lix9au4x",
+        "type": "CollectedVariableType",
+        "Name": "Q22",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Scope": "ldoe0rct",
+        "Label": "3 - c",
+        "id": "lix8qlcp",
+        "type": "CollectedVariableType",
+        "Name": "Q23",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Scope": "ldoe0rct",
+        "Label": "Q3 label",
+        "id": "lix8rdw6",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lix8slbk",
         "Name": "Q3",
         "Datatype": {
           "Pattern": "",
           "typeName": "TEXT",
           "type": "TextDatatypeType",
-          "MaxLength": 249
-        }
-      },
-      {
-        "Scope": "ldoe0rct",
-        "Label": "Q2 label",
-        "id": "liudg5ku",
-        "type": "CollectedVariableType",
-        "Name": "Q2",
-        "Datatype": {
-          "Pattern": "",
-          "typeName": "TEXT",
-          "type": "TextDatatypeType",
-          "MaxLength": 249
+          "MaxLength": 1
         }
       },
       {
@@ -164,7 +227,7 @@
       }
     ]
   },
-  "lastUpdatedDate": "Tue Jun 13 2023 16:19:04 GMT+0200 (heure d’été d’Europe centrale)",
+  "lastUpdatedDate": "Fri Sep 15 2023 09:47:17 GMT+0200 (heure d’été d’Europe centrale)",
   "DataCollection": [
     {
       "id": "esa-dc-2018",
@@ -270,6 +333,33 @@
             "Parent": "",
             "Label": "Autre lien (employé de maison, salarié logé, jeune au pair …)",
             "Value": "17"
+          },
+          {
+            "Parent": "",
+            "Label": "test",
+            "Value": "18"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "l_abc",
+        "id": "lix8slbk",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "A",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "b",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "c",
+            "Value": "3"
           }
         ],
         "Name": ""
@@ -291,18 +381,6 @@
         "Name": "BOUCLE_HABITANTS"
       },
       {
-        "Filter": "$AGE$ > 17 or \"3\" in $LIENS$",
-        "MemberReference": [
-          "ldoez5qc",
-          "ldoez5qc"
-        ],
-        "id": "ldoem3k0",
-        "type": "DynamicIterationType",
-        "Name": "BOUCLE_QUESTIONS_LIENS",
-        "IterableReference": "ldoe0rct"
-      },
-      {
-        "Filter": "$AGE$ < 17",
         "MemberReference": [
           "ldof1gdm",
           "ldof1gdm"
@@ -544,6 +622,37 @@
               "type": "QuestionType",
               "questionType": "SIMPLE",
               "Name": "AGE"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "ljinfs23",
+                  "id": "ljinx6vp",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Format": "YYYY-MM-DD",
+                    "typeName": "DATE",
+                    "type": "DateDatatypeType"
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Quel est la date de naissance de cet habitant ?\""
+              ],
+              "id": "ljintclc",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "ANAIS"
             }
           ],
           "Name": "DESCRIPTION_HABITANTS"
@@ -594,7 +703,7 @@
             {
               "Response": [
                 {
-                  "CollectedVariableReference": "ldoel6mm",
+                  "CollectedVariableReference": "livj66y0",
                   "id": "ldoe52wk",
                   "mandatory": false,
                   "CodeListReference": "ldoe6hg3",
@@ -628,84 +737,6 @@
             }
           ],
           "Name": "LIENS_HABITANTS"
-        },
-        {
-          "Control": [],
-          "depth": 2,
-          "FlowControl": [],
-          "genericName": "SUBMODULE",
-          "Label": [
-            "Questions sur les liens des habitants"
-          ],
-          "id": "ldoez5qc",
-          "TargetMode": [
-            "CATI",
-            "CAWI",
-            "CAPI",
-            "PAPI"
-          ],
-          "Declaration": [],
-          "type": "SequenceType",
-          "Child": [
-            {
-              "Response": [
-                {
-                  "CollectedVariableReference": "ldoev9n2",
-                  "id": "ldoeln9v",
-                  "mandatory": false,
-                  "Datatype": {
-                    "Pattern": "",
-                    "typeName": "TEXT",
-                    "type": "TextDatatypeType",
-                    "MaxLength": 249
-                  }
-                }
-              ],
-              "Control": [],
-              "depth": 3,
-              "FlowControl": [],
-              "Label": [
-                "\"Pourquoi \" || $PRENOM$ || \" ne vit pas avec ses parents ?\""
-              ],
-              "id": "ldoexsbc",
-              "TargetMode": [
-                "CATI",
-                "CAWI",
-                "CAPI",
-                "PAPI"
-              ],
-              "Declaration": [
-                {
-                  "declarationType": "HELP",
-                  "Text": "if \"3\" not_in $LIENS$ then \"pas 3\" else \"3\"",
-                  "id": "ldvd1lsi",
-                  "position": "AFTER_QUESTION_TEXT",
-                  "DeclarationMode": [
-                    "CATI",
-                    "CAWI",
-                    "CAPI",
-                    "PAPI"
-                  ]
-                },
-                {
-                  "declarationType": "HELP",
-                  "Text": "\"déclaration\"",
-                  "id": "lislr92s",
-                  "position": "AFTER_QUESTION_TEXT",
-                  "DeclarationMode": [
-                    "CAWI",
-                    "PAPI",
-                    "CATI",
-                    "CAPI"
-                  ]
-                }
-              ],
-              "type": "QuestionType",
-              "questionType": "SIMPLE",
-              "Name": "ENFANT_SEUL"
-            }
-          ],
-          "Name": "QUESTIONS_LIENS"
         },
         {
           "Control": [],
@@ -771,25 +802,69 @@
               "Name": "Q1"
             },
             {
+              "FlowControl": [],
+              "Label": [
+                "\"QCM Q2 affichée si Q1 = A pour  \" || $PRENOM$"
+              ],
+              "ResponseStructure": {
+                "Attribute": [],
+                "Mapping": [
+                  {
+                    "MappingSource": "lix8xm18",
+                    "MappingTarget": "1"
+                  },
+                  {
+                    "MappingSource": "lix9cvmr",
+                    "MappingTarget": "2"
+                  },
+                  {
+                    "MappingSource": "lix900ki",
+                    "MappingTarget": "3"
+                  }
+                ],
+                "Dimension": [
+                  {
+                    "dimensionType": "PRIMARY",
+                    "dynamic": "0",
+                    "CodeListReference": "lix8slbk"
+                  },
+                  {
+                    "dimensionType": "MEASURE",
+                    "dynamic": "0"
+                  }
+                ]
+              },
+              "type": "QuestionType",
+              "Name": "Q2",
               "Response": [
                 {
-                  "CollectedVariableReference": "liudg5ku",
-                  "id": "liudpu6f",
-                  "mandatory": false,
+                  "CollectedVariableReference": "lix9351e",
+                  "id": "lix8xm18",
                   "Datatype": {
-                    "Pattern": "",
-                    "typeName": "TEXT",
-                    "type": "TextDatatypeType",
-                    "MaxLength": 249
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                },
+                {
+                  "CollectedVariableReference": "lix9au4x",
+                  "id": "lix9cvmr",
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
+                  }
+                },
+                {
+                  "CollectedVariableReference": "lix8qlcp",
+                  "id": "lix900ki",
+                  "Datatype": {
+                    "typeName": "BOOLEAN",
+                    "type": "BooleanDatatypeType"
                   }
                 }
               ],
               "Control": [],
               "depth": 3,
-              "FlowControl": [],
-              "Label": [
-                "\"Question Q2 affichée si Q1 = A pour  \" || $PRENOM$"
-              ],
+              "ClarificationQuestion": [],
               "id": "liude0tk",
               "TargetMode": [
                 "CATI",
@@ -798,21 +873,21 @@
                 "PAPI"
               ],
               "Declaration": [],
-              "type": "QuestionType",
-              "questionType": "SIMPLE",
-              "Name": "Q2"
+              "questionType": "MULTIPLE_CHOICE"
             },
             {
               "Response": [
                 {
-                  "CollectedVariableReference": "liudqzbi",
-                  "id": "liudhd60",
+                  "CollectedVariableReference": "lix8rdw6",
+                  "id": "lix8yrur",
                   "mandatory": false,
+                  "CodeListReference": "lix8slbk",
                   "Datatype": {
                     "Pattern": "",
                     "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
                     "type": "TextDatatypeType",
-                    "MaxLength": 249
+                    "MaxLength": 1
                   }
                 }
               ],
@@ -820,8 +895,9 @@
               "depth": 3,
               "FlowControl": [],
               "Label": [
-                "\"Question troisième \" || $PRENOM$"
+                "\"qCU troisième \" || $PRENOM$"
               ],
+              "ClarificationQuestion": [],
               "id": "liud6mss",
               "TargetMode": [
                 "CATI",
@@ -831,7 +907,7 @@
               ],
               "Declaration": [],
               "type": "QuestionType",
-              "questionType": "SIMPLE",
+              "questionType": "SINGLE_CHOICE",
               "Name": "Q3"
             }
           ],
