@@ -22,18 +22,21 @@ public class EnoProcessing {
         EnoIndex enoIndex = enoQuestionnaire.getIndex();
         assert enoIndex != null;
         EnoCatalog enoCatalog = new EnoCatalog(enoQuestionnaire);
+
         //
         ProcessingPipeline<EnoQuestionnaire> processingPipeline = new ProcessingPipeline<>();
         processingPipeline.start(enoQuestionnaire)
                 .thenIf(parameters.isIdentificationQuestion(), new EnoAddIdentificationSection())
-                .thenIf(parameters.isResponseTimeQuestion(), new EnoAddResponseTimeSection())
-                .thenIf(parameters.isCommentSection(), new EnoAddCommentSection())
                 .then(new EnoModeSelection(parameters.getSelectedModes(), enoCatalog))
                 .thenIf(parameters.isSequenceNumbering(), new EnoAddNumberingInSequences(
-                        parameters.getModeParameter()))
-                .then(new EnoAddPrefixInQuestionLabels(
-                        parameters.isArrowCharInQuestions(), parameters.getQuestionNumberingMode(),
-                        parameters.getModeParameter()))
+                        parameters.getModeParameter()));
+        // This step will be re-used after for question numbering reasons
+        EnoAddPrefixInQuestionLabels prefixingStep = new EnoAddPrefixInQuestionLabels(
+                parameters.isArrowCharInQuestions(), parameters.getQuestionNumberingMode(),
+                parameters.getModeParameter());
+        processingPipeline.then(prefixingStep)
+                .thenIf(parameters.isResponseTimeQuestion(), new EnoAddResponseTimeSection(prefixingStep))
+                .thenIf(parameters.isCommentSection(), new EnoAddCommentSection(prefixingStep))
                 .then(new EnoInsertComponentFilters())
                 .then(new EnoResolveBindingReferences());
     }
