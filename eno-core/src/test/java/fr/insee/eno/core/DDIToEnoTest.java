@@ -21,14 +21,15 @@ class DDIToEnoTest {
     @ParameterizedTest
     @ValueSource(strings = {
             "l20g2ba7", // acceptance questionnaire
-            //"l5v3spn0", // contains loops
+            "l5v3spn0", // contains loops and dynamic tables
             "kx0a2hn8", // contains loops
             "kzy5kbtl", // contains tables
-            //"l8x6fhtd", // 'sandbox' questionnaire
-            //"ldodefpq", // contains pairwise question
+            "l8x6fhtd", // 'sandbox' questionnaire
+            "ldodefpq", // contains pairwise question
             "lhpz68wp", // designed to test question grouping
             "li49zxju", // 'vpp' survey
             "lmyjrqbb", // several linked loops
+            "ljr4jm9a", // 'quality of life' survey
     })
     @DisplayName("Large questionnaires, DDI to Eno, transformation should succeed")
     void transformQuestionnaire_nonNullOutput(String questionnaireId) throws DDIParsingException {

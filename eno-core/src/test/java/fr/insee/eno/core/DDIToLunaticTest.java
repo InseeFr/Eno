@@ -1,6 +1,8 @@
 package fr.insee.eno.core;
 
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
+import fr.insee.eno.core.exceptions.business.LunaticLogicException;
+import fr.insee.eno.core.exceptions.business.UnauthorizedHeaderException;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
@@ -8,15 +10,18 @@ import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Loop;
 import fr.insee.lunatic.model.flat.Questionnaire;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.io.InputStream;
 import java.util.List;
 
 import static fr.insee.lunatic.model.flat.ComponentTypeEnum.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Functional tests for the DDI to Lunatic transformation.
@@ -26,14 +31,13 @@ class DDIToLunaticTest {
     @ParameterizedTest
     @ValueSource(strings = {
             "l20g2ba7",
-            //"l5v3spn0",
             "kx0a2hn8",
             "kzy5kbtl",
-            //"l8x6fhtd",
-            //"ldodefpq",
+            "ldodefpq",
             "lhpz68wp",
             "li49zxju",
             "lmyjrqbb",
+            "ljr4jm9a",
     })
     @DisplayName("Large questionnaires, DDI to Lunatic, transformation should succeed")
     void transformQuestionnaire_nonNullOutput(String questionnaireId) throws DDIParsingException {
@@ -43,6 +47,26 @@ class DDIToLunaticTest {
                 EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
         //
         assertNotNull(lunaticQuestionnaire);
+    }
+
+    @Test
+    void ddiLoopBasedOnDynamicTable_shouldThrowException() {
+        // Given
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(
+                "functional/ddi/ddi-l5v3spn0.xml");
+        EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
+        // When + Then
+        assertThrows(UnsupportedOperationException.class, () -> DDIToLunatic.transform(inputStream, enoParameters));
+    }
+
+    @Test
+    void ddiWithTableWithNestedCodeListHeader_shouldThrowException() {
+        // Given
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(
+                "functional/ddi/ddi-l8x6fhtd.xml");
+        EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
+        // When + Then
+        assertThrows(UnauthorizedHeaderException.class, () -> DDIToLunatic.transform(inputStream, enoParameters));
     }
 
     @Nested

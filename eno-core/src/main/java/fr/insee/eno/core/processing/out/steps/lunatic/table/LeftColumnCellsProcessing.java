@@ -26,8 +26,17 @@ public class LeftColumnCellsProcessing {
      * @return The "body" part of the Lunatic table, with only cells that correspond to the left column.
      */
     public static LeftColumnCellsProcessing from(TableQuestion enoTable) {
+        return LeftColumnCellsProcessing.from(enoTable.getLeftColumn());
+    }
+
+    /**
+     * Uses the Eno code list given to compute "rowspan" and "colspan" of Lunatic cells of the left column,
+     * and return  a list of Lunatic body lines containing them.
+     * @param leftColumnCodeList Description of the left column of a Lunatic table in the Eno model.
+     * @return The "body" part of the Lunatic table, with only cells that correspond to the left column.
+     */
+    public static LeftColumnCellsProcessing from(CodeList leftColumnCodeList) {
         LeftColumnCellsProcessing result = new LeftColumnCellsProcessing();
-        CodeList leftColumnCodeList = enoTable.getLeftColumn();
         ComputeCodeListSizes.of(leftColumnCodeList);
         result.leftColumnColspan = leftColumnCodeList.getMaxDepth() + 1;
         result.lunaticBody = createLeftColumnCells(leftColumnCodeList);

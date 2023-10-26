@@ -13,7 +13,6 @@ public interface EnoComponent {
     String getId();
     List<Declaration> getDeclarations();
     List<Instruction> getInstructions();
-    List<Control> getControls();
     ComponentFilter getComponentFilter();
 
 }

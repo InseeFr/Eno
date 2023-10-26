@@ -1,0 +1,65 @@
+{
+  "suggesters": [
+   {
+      "responseNames": ["SUGG_GEO_HB"],
+      "name": "L_DEPNAIS-1-1-0",
+      "fields": [
+        { "name": "label", "rules": "soft", "min": 2 },
+        { "name": "id" }
+      ],
+      "queryParser": { "type": "soft" },
+      "version": "1"
+    },
+           {
+            "responseNames": ["SUGG_PCS_HB"]   
+            "name": "L_PCS_FEMMES-1-4-1-SANS",
+            "fields": [
+                {
+                    "name": "label",
+                    "rules": ["[\\w]+"],
+                    "language": "French",
+                    "min": 2,
+                    "stemmer": false
+                },
+                {"name": "id"}
+            ],
+            "queryParser": {
+                "type": "tokenized",
+                "params": {
+                    "language": "French",
+                    "pattern": "[\\w.]+",
+                    "stemmer": false
+                }
+            },
+            "version": "1",
+            "meloto": true,
+            "max" : 5,
+            "stopWords": [
+    "a",
+    "au",
+    "dans",
+    "de",
+    "des",
+    "du",
+    "en",
+    "er",
+    "la",
+    "le",
+    "ou",
+    "sur",
+    "d",
+    "l",
+    "aux",
+    "dans",
+    "un",
+    "une",
+    "pour",
+    "avec",
+    "chez",
+    "par",
+    "les"
+  ]
+
+        },
+  ]
+}

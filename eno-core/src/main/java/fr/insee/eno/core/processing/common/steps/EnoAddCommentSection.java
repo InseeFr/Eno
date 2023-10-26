@@ -18,12 +18,18 @@ public class EnoAddCommentSection implements ProcessingStep<EnoQuestionnaire> {
 
     public static final String COMMENT_VARIABLE_NAME = "COMMENT_QE";
     public static final String COMMENT_SEQUENCE_ID = "COMMENT-SEQ";
-    public static final String COMMENT_SEQUENCE_LABEL = "Commentaire";
+    public static final String COMMENT_SEQUENCE_LABEL = "\"Commentaire\"";
     public static final String COMMENT_QUESTION_ID = "COMMENT-QUESTION";
     public static final String COMMENT_QUESTION_LABEL =
-            "Avez-vous des remarques concernant l'enquête ou des commentaires\u00a0?";
+            "\"Avez-vous des remarques concernant l'enquête ou des commentaires\u00a0?\"";
     public static final boolean COMMENT_QUESTION_MANDATORY = false;
     public static final int COMMENT_QUESTION_LENGTH = 2000;
+
+    private final EnoAddPrefixInQuestionLabels prefixingStep;
+
+    public EnoAddCommentSection(EnoAddPrefixInQuestionLabels prefixingStep) {
+        this.prefixingStep = prefixingStep;
+    }
 
     public void apply(EnoQuestionnaire enoQuestionnaire) {
         //
@@ -49,6 +55,7 @@ public class EnoAddCommentSection implements ProcessingStep<EnoQuestionnaire> {
         commentQuestion.setName(COMMENT_VARIABLE_NAME);
         commentQuestion.setLabel(new DynamicLabel());
         commentQuestion.getLabel().setValue(COMMENT_QUESTION_LABEL);
+        prefixingStep.addPrefixInQuestionLabel(commentQuestion);
         commentQuestion.setMandatory(COMMENT_QUESTION_MANDATORY);
         commentQuestion.setLengthType(TextQuestion.qualifyLength(COMMENT_QUESTION_LENGTH));
         commentQuestion.setMaxLength(BigInteger.valueOf(COMMENT_QUESTION_LENGTH));

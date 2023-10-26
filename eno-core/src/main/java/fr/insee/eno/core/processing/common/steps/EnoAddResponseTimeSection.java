@@ -21,12 +21,12 @@ public class EnoAddResponseTimeSection implements ProcessingStep<EnoQuestionnair
     public static final String MINUTES_VARIABLE_NAME = "MIN_REMPL";
     public static final String MINUTES_VARIABLE_UNIT = "minutes";
     public static final String RESPONSE_TIME_SEQUENCE_ID = "TIME-SEQ";
-    public static final String RESPONSE_TIME_SEQUENCE_LABEL = "Temps de réponse";
+    public static final String RESPONSE_TIME_SEQUENCE_LABEL = "\"Temps de réponse\"";
     public static final String HOURS_QUESTION_ID = "TIME-QUESTION-HEURE-REMPL";
     public static final String MINUTES_QUESTION_ID = "TIME-QUESTION-MIN-REMPL";
     public static final String RESPONSE_TIME_QUESTION_LABEL =
-            "Combien de temps avez-vous mis en tout pour répondre à cette enquête " +
-                    "(recherche des données + remplissage du questionnaire)\u00a0?";
+            "\"Combien de temps avez-vous mis en tout pour répondre à cette enquête " +
+                    "(recherche des données + remplissage du questionnaire)\u00a0?\"";
     public static final boolean RESPONSE_TIME_QUESTION_MANDATORY = false;
     public static final double HOURS_QUESTION_MIN_VALUE = 0;
     public static final double HOURS_QUESTION_MAX_VALUE = 99;
@@ -34,6 +34,12 @@ public class EnoAddResponseTimeSection implements ProcessingStep<EnoQuestionnair
     public static final double TIME_MINUTES_QUESTION_MIN_VALUE = 0;
     public static final double RESPONSE_TIME_MINUTES_QUESTION_MAX_VALUE = 59;
     public static final BigInteger RESPONSE_TIME_MINUTES_QUESTION_DECIMALS = BigInteger.ZERO;
+
+    private final EnoAddPrefixInQuestionLabels prefixingStep;
+
+    public EnoAddResponseTimeSection(EnoAddPrefixInQuestionLabels prefixingStep) {
+        this.prefixingStep = prefixingStep;
+    }
 
     public void apply(EnoQuestionnaire enoQuestionnaire) {
         //
@@ -68,6 +74,7 @@ public class EnoAddResponseTimeSection implements ProcessingStep<EnoQuestionnair
         hoursQuestion.setName(HOURS_VARIABLE_NAME);
         hoursQuestion.setLabel(new DynamicLabel());
         hoursQuestion.getLabel().setValue(RESPONSE_TIME_QUESTION_LABEL);
+        prefixingStep.addPrefixInQuestionLabel(hoursQuestion);
         hoursQuestion.setMandatory(RESPONSE_TIME_QUESTION_MANDATORY);
         hoursQuestion.setMinValue(HOURS_QUESTION_MIN_VALUE);
         hoursQuestion.setMaxValue(HOURS_QUESTION_MAX_VALUE);
