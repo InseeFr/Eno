@@ -31,25 +31,25 @@ class ComplexMultipleChoiceQuestionTest {
         assertEquals(4, complexMCQList.size());
         //
         assertEquals("MCQ_CL_RADIO", complexMCQList.get(0).getName());
-        assertEquals("lo5upwdy", complexMCQList.get(0).getHeaderCodeListReference());
+        assertEquals("lo5upwdy", complexMCQList.get(0).getLeftColumnCodeListReference());
         assertEquals(4, complexMCQList.get(0).getVariableNames().size());
         assertEquals(4, complexMCQList.get(0).getBindings().size());
         assertEquals(4, complexMCQList.get(0).getTableCells().size());
         //
         assertEquals("MCQ_CL_DROPDOWN", complexMCQList.get(1).getName());
-        assertEquals("lo5upwdy", complexMCQList.get(1).getHeaderCodeListReference());
+        assertEquals("lo5upwdy", complexMCQList.get(1).getLeftColumnCodeListReference());
         assertEquals(4, complexMCQList.get(1).getVariableNames().size());
         assertEquals(4, complexMCQList.get(1).getBindings().size());
         assertEquals(4, complexMCQList.get(1).getTableCells().size());
         //
         assertEquals("MCQ_TABLE_RADIO", complexMCQList.get(2).getName());
-        assertEquals("lo5uxn2k", complexMCQList.get(2).getHeaderCodeListReference());
+        assertEquals("lo5uxn2k", complexMCQList.get(2).getLeftColumnCodeListReference());
         assertEquals(7, complexMCQList.get(2).getVariableNames().size());
         assertEquals(7, complexMCQList.get(2).getBindings().size());
         assertEquals(7, complexMCQList.get(2).getTableCells().size());
         //
         assertEquals("MCQ_TABLE_DROPDOWN", complexMCQList.get(3).getName());
-        assertEquals("lo5uxn2k", complexMCQList.get(3).getHeaderCodeListReference());
+        assertEquals("lo5uxn2k", complexMCQList.get(3).getLeftColumnCodeListReference());
         assertEquals(7, complexMCQList.get(3).getVariableNames().size());
         assertEquals(7, complexMCQList.get(3).getBindings().size());
         assertEquals(7, complexMCQList.get(3).getTableCells().size());
