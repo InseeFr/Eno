@@ -25,6 +25,12 @@ public class EnoAddCommentSection implements ProcessingStep<EnoQuestionnaire> {
     public static final boolean COMMENT_QUESTION_MANDATORY = false;
     public static final int COMMENT_QUESTION_LENGTH = 2000;
 
+    private final EnoAddPrefixInQuestionLabels prefixingStep;
+
+    public EnoAddCommentSection(EnoAddPrefixInQuestionLabels prefixingStep) {
+        this.prefixingStep = prefixingStep;
+    }
+
     public void apply(EnoQuestionnaire enoQuestionnaire) {
         //
         EnoIndex enoIndex = enoQuestionnaire.getIndex();
@@ -49,6 +55,7 @@ public class EnoAddCommentSection implements ProcessingStep<EnoQuestionnaire> {
         commentQuestion.setName(COMMENT_VARIABLE_NAME);
         commentQuestion.setLabel(new DynamicLabel());
         commentQuestion.getLabel().setValue(COMMENT_QUESTION_LABEL);
+        prefixingStep.addPrefixInQuestionLabel(commentQuestion);
         commentQuestion.setMandatory(COMMENT_QUESTION_MANDATORY);
         commentQuestion.setLengthType(TextQuestion.qualifyLength(COMMENT_QUESTION_LENGTH));
         commentQuestion.setMaxLength(BigInteger.valueOf(COMMENT_QUESTION_LENGTH));
