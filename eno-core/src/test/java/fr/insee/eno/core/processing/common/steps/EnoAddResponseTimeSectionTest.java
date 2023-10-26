@@ -26,6 +26,7 @@ class EnoAddResponseTimeSectionTest {
         enoQuestionnaire.setIndex(new EnoIndex());
         EnoAddPrefixInQuestionLabels prefixingStep = new EnoAddPrefixInQuestionLabels(
                 false, EnoParameters.QuestionNumberingMode.NONE, EnoParameters.ModeParameter.PROCESS);
+        prefixingStep.apply(enoQuestionnaire);
         EnoAddResponseTimeSection processing = new EnoAddResponseTimeSection(prefixingStep);
         // When
         processing.apply(enoQuestionnaire);
@@ -53,6 +54,7 @@ class EnoAddResponseTimeSectionTest {
         enoQuestionnaire.setIndex(new EnoIndex());
         EnoAddPrefixInQuestionLabels prefixingStep = new EnoAddPrefixInQuestionLabels(
                 true, EnoParameters.QuestionNumberingMode.NONE, EnoParameters.ModeParameter.PROCESS);
+        prefixingStep.apply(enoQuestionnaire);
         EnoAddResponseTimeSection processing = new EnoAddResponseTimeSection(prefixingStep);
         // When
         processing.apply(enoQuestionnaire);
@@ -73,7 +75,8 @@ class EnoAddResponseTimeSectionTest {
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         enoQuestionnaire.setIndex(new EnoIndex());
         EnoAddPrefixInQuestionLabels prefixingStep = new EnoAddPrefixInQuestionLabels(
-                true, EnoParameters.QuestionNumberingMode.NONE, EnoParameters.ModeParameter.PROCESS);
+                true, EnoParameters.QuestionNumberingMode.SEQUENCE, EnoParameters.ModeParameter.PROCESS);
+        prefixingStep.apply(enoQuestionnaire);
         EnoAddResponseTimeSection processing = new EnoAddResponseTimeSection(prefixingStep);
         // When
         processing.apply(enoQuestionnaire);
