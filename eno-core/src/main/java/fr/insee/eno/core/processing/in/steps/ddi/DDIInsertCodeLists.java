@@ -2,10 +2,7 @@ package fr.insee.eno.core.processing.in.steps.ddi;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.code.CodeList;
-import fr.insee.eno.core.model.question.EnoTable;
-import fr.insee.eno.core.model.question.PairwiseQuestion;
-import fr.insee.eno.core.model.question.TableQuestion;
-import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
+import fr.insee.eno.core.model.question.*;
 import fr.insee.eno.core.model.question.table.UniqueChoiceCell;
 import fr.insee.eno.core.processing.ProcessingStep;
 
@@ -43,19 +40,29 @@ public class DDIInsertCodeLists implements ProcessingStep<EnoQuestionnaire> {
                 .filter(EnoTable.class::isInstance)
                 .map(EnoTable.class::cast)
                 .toList();
+        // Gather complex multiple choice question objects (that end up being tables in Lunatic for instance)
+        List<ComplexMultipleChoiceQuestion> enoComplexMCQList = enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .filter(ComplexMultipleChoiceQuestion.class::isInstance)
+                .map(ComplexMultipleChoiceQuestion.class::cast)
+                .toList();
+
         // Insert code lists in header of tables
         enoTables.forEach(this::insertHeader);
-        // Only table question objects have a left column
+        // Insert code lists in left column of tables and complex multiple choice questions
         enoTables.stream()
                 .filter(TableQuestion.class::isInstance)
                 .map(TableQuestion.class::cast)
                 .forEach(this::insertLeftColumn);
+        enoComplexMCQList.forEach(this::insertLeftColumn);
         // Insert code lists in table cells that are a unique choice question
         enoTables.forEach(enoTable ->
                 enoTable.getTableCells().stream()
                         .filter(UniqueChoiceCell.class::isInstance)
                         .map(UniqueChoiceCell.class::cast)
                         .forEach(this::insertCodeItems));
+        enoComplexMCQList.forEach(enoComplexMCQ -> enoComplexMCQ.getTableCells().stream()
+                .map(UniqueChoiceCell.class::cast) // No filtering here since in complex MCQ cells are always UCQ
+                .forEach(this::insertCodeItems));
     }
 
     private void insertCodeItems(UniqueChoiceQuestion uniqueChoiceQuestion) {
@@ -72,6 +79,11 @@ public class DDIInsertCodeLists implements ProcessingStep<EnoQuestionnaire> {
 
     private void insertLeftColumn(TableQuestion tableQuestion) {
         tableQuestion.setLeftColumn(codeListMap.get(tableQuestion.getLeftColumnCodeListReference()));
+    }
+
+    private void insertLeftColumn(ComplexMultipleChoiceQuestion complexMultipleChoiceQuestion) {
+        complexMultipleChoiceQuestion.setLeftColumn(
+                codeListMap.get(complexMultipleChoiceQuestion.getLeftColumnCodeListReference()));
     }
 
 }

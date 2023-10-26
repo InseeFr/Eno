@@ -2,6 +2,7 @@ package fr.insee.eno.core;
 
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.exceptions.business.LunaticLogicException;
+import fr.insee.eno.core.exceptions.business.UnauthorizedHeaderException;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
@@ -32,7 +33,6 @@ class DDIToLunaticTest {
             "l20g2ba7",
             "kx0a2hn8",
             "kzy5kbtl",
-            //"l8x6fhtd", // !!! bug in complex mcq with nested code list
             "ldodefpq",
             "lhpz68wp",
             "li49zxju",
@@ -57,6 +57,16 @@ class DDIToLunaticTest {
         EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
         // When + Then
         assertThrows(UnsupportedOperationException.class, () -> DDIToLunatic.transform(inputStream, enoParameters));
+    }
+
+    @Test
+    void ddiWithTableWithNestedCodeListHeader_shouldThrowException() {
+        // Given
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(
+                "functional/ddi/ddi-l8x6fhtd.xml");
+        EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
+        // When + Then
+        assertThrows(UnauthorizedHeaderException.class, () -> DDIToLunatic.transform(inputStream, enoParameters));
     }
 
     @Nested
