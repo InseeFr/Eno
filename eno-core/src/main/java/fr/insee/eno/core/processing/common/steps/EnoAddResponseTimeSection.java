@@ -35,6 +35,12 @@ public class EnoAddResponseTimeSection implements ProcessingStep<EnoQuestionnair
     public static final double RESPONSE_TIME_MINUTES_QUESTION_MAX_VALUE = 59;
     public static final BigInteger RESPONSE_TIME_MINUTES_QUESTION_DECIMALS = BigInteger.ZERO;
 
+    private final EnoAddPrefixInQuestionLabels prefixingStep;
+
+    public EnoAddResponseTimeSection(EnoAddPrefixInQuestionLabels prefixingStep) {
+        this.prefixingStep = prefixingStep;
+    }
+
     public void apply(EnoQuestionnaire enoQuestionnaire) {
         //
         EnoIndex enoIndex = enoQuestionnaire.getIndex();
@@ -68,6 +74,7 @@ public class EnoAddResponseTimeSection implements ProcessingStep<EnoQuestionnair
         hoursQuestion.setName(HOURS_VARIABLE_NAME);
         hoursQuestion.setLabel(new DynamicLabel());
         hoursQuestion.getLabel().setValue(RESPONSE_TIME_QUESTION_LABEL);
+        prefixingStep.addPrefixInQuestionLabel(hoursQuestion);
         hoursQuestion.setMandatory(RESPONSE_TIME_QUESTION_MANDATORY);
         hoursQuestion.setMinValue(HOURS_QUESTION_MIN_VALUE);
         hoursQuestion.setMaxValue(HOURS_QUESTION_MAX_VALUE);

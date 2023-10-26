@@ -45,6 +45,7 @@ public class LunaticProcessing {
                 .then(new LunaticAddResizing(enoQuestionnaire))
                 .then(new LunaticAddHierarchy())
                 .then(new LunaticAddPageNumbers(parameters.getLunaticPaginationMode()))
+                .then(new LunaticResponseTimeQuestionPagination())
                 .then(new LunaticAddCleaningVariables())
                 .thenIf(parameters.isControls(), new LunaticAddControlFormat())
                 .then(new LunaticReverseConsistencyControlLabel())

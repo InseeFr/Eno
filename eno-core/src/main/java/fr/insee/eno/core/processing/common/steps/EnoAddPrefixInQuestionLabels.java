@@ -24,6 +24,8 @@ public class EnoAddPrefixInQuestionLabels implements ProcessingStep<EnoQuestionn
     private final QuestionNumberingMode questionNumberingMode;
     private final EnoParameters.ModeParameter modeParameter;
 
+    private int questionNumber;
+
     public EnoAddPrefixInQuestionLabels(boolean arrowCharInQuestions, QuestionNumberingMode questionNumberingMode,
                                         EnoParameters.ModeParameter modeParameter) {
         this.arrowCharInQuestions = arrowCharInQuestions;
@@ -35,30 +37,31 @@ public class EnoAddPrefixInQuestionLabels implements ProcessingStep<EnoQuestionn
         //
         assert enoQuestionnaire.getIndex() != null;
         //
-        if (QuestionNumberingMode.NONE.equals(questionNumberingMode) && !arrowCharInQuestions) {
+        if (prefixingDisabled())
             return;
-        }
         //
-        int questionNumber = 1;
+        questionNumber = 1;
         for (Sequence sequence : enoQuestionnaire.getSequences()) {
             for (String componentId : getSequenceComponentIds(sequence)) {
                 EnoComponent component = (EnoComponent) enoQuestionnaire.get(componentId);
                 if (component instanceof Subsequence subsequence) {
                     for (String questionId : getSequenceComponentIds(subsequence)) {
                         Question question = (Question) enoQuestionnaire.get(questionId);
-                        addPrefixInQuestionLabel(question, questionNumber);
-                        questionNumber ++;
+                        addPrefixInQuestionLabel(question);
                     }
                 } else {
                     Question question = (Question) component;
-                    addPrefixInQuestionLabel(question, questionNumber);
-                    questionNumber ++;
+                    addPrefixInQuestionLabel(question);
                 }
             }
             if (questionNumberingMode == QuestionNumberingMode.SEQUENCE) {
                 questionNumber = 1;
             }
         }
+    }
+
+    private boolean prefixingDisabled() {
+        return QuestionNumberingMode.NONE.equals(questionNumberingMode) && !arrowCharInQuestions;
     }
 
     /**
@@ -70,9 +73,12 @@ public class EnoAddPrefixInQuestionLabels implements ProcessingStep<EnoQuestionn
         return sequence.getSequenceStructure().stream().map(StructureItemReference::getId).toList();
     }
 
-    private void addPrefixInQuestionLabel(Question question, int questionNumber) {
+    public void addPrefixInQuestionLabel(Question question) {
+        if (prefixingDisabled())
+            return;
         DynamicLabel questionLabel = question.getLabel();
         questionLabel.setValue(addPrefixInLabel(questionLabel.getValue(), questionNumber));
+        questionNumber ++;
     }
 
     private String addPrefixInLabel(String questionLabelValue, int questionNumber) {
