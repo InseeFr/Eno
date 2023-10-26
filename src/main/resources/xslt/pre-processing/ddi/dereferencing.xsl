@@ -295,7 +295,7 @@
     <xd:doc>
         <xd:desc>Template for Reference tags</xd:desc>
     </xd:doc>
-    <xsl:template match="node()[ends-with(name(.), 'Reference')]" mode="output-DDI">
+    <xsl:template match="node()[ends-with(name(.), 'Reference') and not(@isExternal)]" mode="output-DDI">
 
         <xsl:variable name="copy-node-name" select="name(.)"/>
         <xsl:choose>
@@ -393,7 +393,7 @@
     <xd:doc>
         <xd:desc>Template for Reference tags</xd:desc>
     </xd:doc>
-    <xsl:template match="node()[ends-with(name(.), 'Reference')]" mode="output-message">
+    <xsl:template match="node()[ends-with(name(.), 'Reference') and not(@isExternal)]" mode="output-message">
 
         <xsl:variable name="copy-node-name" select="name(.)"/>
         <xsl:choose>

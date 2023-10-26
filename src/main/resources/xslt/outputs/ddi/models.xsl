@@ -746,11 +746,31 @@
             <r:ID>
                 <xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+            <xsl:if test="$suggester-parameters/*">
+                <r:UserAttributePair>
+                    <r:AttributeKey>SuggesterConfiguration</r:AttributeKey>
+                    <r:AttributeValue>
+                        <xsl:text disable-output-escaping="yes">&lt;![CDATA[</xsl:text>
+                        <xsl:for-each select="$suggester-parameters">
+                            <xsl:call-template name="copy-without-namespace">
+                                <xsl:with-param name="content-with-namespace" select="."/>
+                            </xsl:call-template>                            
+                        </xsl:for-each>
+                        <xsl:text disable-output-escaping="yes">]]&gt;</xsl:text>
+                    </r:AttributeValue>
+                </r:UserAttributePair>
+            </xsl:if>
             <r:Label>
                 <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
                     <xsl:value-of select="enoddi33:get-label($source-context)"/>
                 </r:Content>
             </r:Label>
+            <xsl:if test="$urn != ''">
+                <r:CodeListReference isExternal="true">
+                    <r:URN><xsl:value-of select="$urn"/></r:URN>
+                    <r:TypeOfObject>CodeList</r:TypeOfObject>
+                </r:CodeListReference>
+            </xsl:if>
             <!--TODO define HierarchyType-->
             <!-- Enumeration:
             "Regular" A hierarchy where each section has the same number of nested levels, i.e., the lowest level represents the most discrete values.
@@ -767,20 +787,6 @@
 "Continuous" May be used to identify both interval and ratio classification levels, when more precise information is not available.-->
                 <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
             </l:Level>
-            <xsl:if test="$urn != ''">
-                <r:CodeListReference isExternal="true">
-                    <r:URN><xsl:value-of select="$urn"/></r:URN>
-                    <r:TypeOfObject>CodeList</r:TypeOfObject>
-                </r:CodeListReference>
-            </xsl:if>
-            <xsl:if test="$suggester-parameters">
-                <r:UserAttributePair>
-                    <r:AttributeKey>SuggesterConfiguration</r:AttributeKey>
-                    <r:AttributeValue>
-                        <xsl:copy-of select="$suggester-parameters"/>
-                    </r:AttributeValue>
-                </r:UserAttributePair>
-            </xsl:if>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
@@ -2179,6 +2185,27 @@
                 <r:Version><xsl:value-of select="enoddi33:get-version(.)"/></r:Version>
                 <r:TypeOfObject><xsl:value-of select="$elementName"/></r:TypeOfObject>
             </r:QuestionReference>
+    </xsl:template>
+
+    <xsl:template name="copy-without-namespace">
+        <xsl:param name="content-with-namespace"/>
+        <xsl:choose>
+            <xsl:when test="$content-with-namespace/*">
+                <xsl:element name="{local-name($content-with-namespace)}">
+                    <xsl:copy-of select="$content-with-namespace/@*"/>
+                    <xsl:for-each select="$content-with-namespace/*">
+                        <xsl:call-template name="copy-without-namespace">
+                            <xsl:with-param name="content-with-namespace" select="."/>
+                        </xsl:call-template>
+                    </xsl:for-each>
+                </xsl:element>                
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:element name="{local-name($content-with-namespace)}">
+                    <xsl:value-of select="$content-with-namespace"/>
+                </xsl:element>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 </xsl:stylesheet>
