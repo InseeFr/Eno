@@ -1,11 +1,9 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.table;
 
-import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.question.ComplexMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.table.TableCell;
 import fr.insee.lunatic.model.flat.BodyCell;
 import fr.insee.lunatic.model.flat.BodyLine;
-import fr.insee.lunatic.model.flat.LabelType;
 import fr.insee.lunatic.model.flat.Table;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,31 +19,18 @@ public class ComplexMultipleChoiceQuestionProcessing {
 
     public static void process(Table lunaticTable, ComplexMultipleChoiceQuestion enoMCQ) {
 
-        List<BodyCell> headers = convertEnoHeaders(enoMCQ.getHeader());
+        // Create body lines with the left column cells from the corresponding code list
+        List<BodyLine> lunaticBody = LeftColumnCellsProcessing.from(enoMCQ.getLeftColumn()).getLunaticBody();
 
-        for (int indexCell=0; indexCell < enoMCQ.getTableCells().size(); indexCell++) {
-            BodyLine bodyLine = new BodyLine();
-
-            TableCell enoCell = enoMCQ.getTableCells().get(indexCell);
-
+        // For each line, just add the response cell (that is either a radio, dropdown, or checkboxOne)
+        for (int i = 0; i < enoMCQ.getTableCells().size(); i++) {
+            BodyLine lunaticLine = lunaticBody.get(i);
+            TableCell enoCell = enoMCQ.getTableCells().get(i);
             BodyCell lunaticCell = TableQuestionProcessing.convertEnoCell(enoCell);
-            bodyLine.getBodyCells().add(headers.get(indexCell));
-            bodyLine.getBodyCells().add(lunaticCell);
-            lunaticTable.getBodyLines().add(bodyLine);
+            lunaticLine.getBodyCells().add(lunaticCell);
         }
-    }
 
-    private static List<BodyCell> convertEnoHeaders(CodeList headers) {
-        return headers.getCodeItems().stream()
-                .map(headerItem -> {
-                    LabelType headerLabel = new LabelType();
-                    headerLabel.setValue(headerItem.getLabel().getValue());
-                    headerLabel.setType(headerItem.getLabel().getType());
-                    BodyCell lunaticHeader = new BodyCell();
-                    lunaticHeader.setValue(headerItem.getValue());
-                    lunaticHeader.setLabel(headerLabel);
-                    return lunaticHeader;
-                }).toList();
+        lunaticTable.setBodyLines(lunaticBody);
     }
 
 }

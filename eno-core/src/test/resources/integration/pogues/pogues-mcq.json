@@ -1,0 +1,1130 @@
+{
+  "owner": "FAKEPERMISSION",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "idendquest",
+        "lo5ufiuu",
+        "lo5uw0qc",
+        "lo5vgc2u",
+        "lo5vn4ry",
+        "lo5vms0u",
+        "lo5vj128"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "lo5vkozr",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "Eno - Multiple choice questions"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "ENOMCQ",
+  "Variables": {
+    "Variable": [
+      {
+        "Label": "codeA - \"Code A\"",
+        "id": "lo5v7gab",
+        "type": "CollectedVariableType",
+        "Name": "MCQ_BOOL1",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "codeB - \"Code B\"",
+        "id": "lo5v52w5",
+        "type": "CollectedVariableType",
+        "Name": "MCQ_BOOL2",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "codeC - \"Code C\"",
+        "id": "lo5v8zv8",
+        "type": "CollectedVariableType",
+        "Name": "MCQ_BOOL3",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "codeD - \"Code D\"",
+        "id": "lo5v8beu",
+        "type": "CollectedVariableType",
+        "Name": "MCQ_BOOL4",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "c1 - \"Code 1\"",
+        "id": "lo5w0299",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_TABLE_RADIO1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "c21 - \"Code 2.1\"",
+        "id": "lo5vy65n",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_TABLE_RADIO2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "c22 - \"Code 2.2\"",
+        "id": "lo5vjg8q",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_TABLE_RADIO3",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "c311 - \"Code 3.1.1\"",
+        "id": "lo5vkg0a",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_TABLE_RADIO4",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "c312 - \"Code 3.1.2\"",
+        "id": "lo5vyoeo",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_TABLE_RADIO5",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "c313 - \"Code 3.1.3\"",
+        "id": "lo5vg30y",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_TABLE_RADIO6",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "c32 - \"Code 3.2\"",
+        "id": "lo5vzapd",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_TABLE_RADIO7",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "codeA - \"Code A\"",
+        "id": "lo5vnukv",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_CL_RADIO1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "codeB - \"Code B\"",
+        "id": "lo5vrr5y",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_CL_RADIO2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "codeC - \"Code C\"",
+        "id": "lo5vlkdg",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_CL_RADIO3",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "codeD - \"Code D\"",
+        "id": "lo5vuhxi",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_CL_RADIO4",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "codeA - \"Code A\"",
+        "id": "lo5vf143",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_CL_DROPDOWN1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "codeB - \"Code B\"",
+        "id": "lo5vlhu1",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_CL_DROPDOWN2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "codeC - \"Code C\"",
+        "id": "lo5veoug",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_CL_DROPDOWN3",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "codeD - \"Code D\"",
+        "id": "lo5vf784",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_CL_DROPDOWN4",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "c1 - \"Code 1\"",
+        "id": "lo5vr98h",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_TABLE_DROPDOWN1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "c21 - \"Code 2.1\"",
+        "id": "lo5vq2k5",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_TABLE_DROPDOWN2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "c22 - \"Code 2.2\"",
+        "id": "lo5vnoo4",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_TABLE_DROPDOWN3",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "c311 - \"Code 3.1.1\"",
+        "id": "lo5vg4zd",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_TABLE_DROPDOWN4",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "c312 - \"Code 3.1.2\"",
+        "id": "lo5vpzj7",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_TABLE_DROPDOWN5",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "c313 - \"Code 3.1.3\"",
+        "id": "lo5vqf2b",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_TABLE_DROPDOWN6",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "c32 - \"Code 3.2\"",
+        "id": "lo5vzg0b",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo5v7rid",
+        "Name": "MCQ_TABLE_DROPDOWN7",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Wed Oct 25 2023 16:49:53 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "eec-dc1-2017",
+      "uri": "http://ddi:fr.insee:DataCollection.eec-dc1-2017",
+      "Name": "Enquête Emploi en continu 2017 - Vague 1"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "lo5uid4s",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "Label": "SIMPLE_CODE_LIST",
+        "id": "lo5upwdy",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Code A\"",
+            "Value": "codeA"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Code B\"",
+            "Value": "codeB"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Code C\"",
+            "Value": "codeC"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Code D\"",
+            "Value": "codeD"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "NESTED_CODE_LIST",
+        "id": "lo5uxn2k",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Code 1\"",
+            "Value": "c1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Code 2\"",
+            "Value": "c2"
+          },
+          {
+            "Parent": "c2",
+            "Label": "\"Code 2.1\"",
+            "Value": "c21"
+          },
+          {
+            "Parent": "c2",
+            "Label": "\"Code 2.2\"",
+            "Value": "c22"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Code 3\"",
+            "Value": "c3"
+          },
+          {
+            "Parent": "c3",
+            "Label": "\"Code 3.1\"",
+            "Value": "c31"
+          },
+          {
+            "Parent": "c31",
+            "Label": "\"Code 3.1.1\"",
+            "Value": "c311"
+          },
+          {
+            "Parent": "c31",
+            "Label": "\"Code 3.1.2\"",
+            "Value": "c312"
+          },
+          {
+            "Parent": "c31",
+            "Label": "\"Code 3.1.3\"",
+            "Value": "c313"
+          },
+          {
+            "Parent": "c3",
+            "Label": "\"Code 3.2\"",
+            "Value": "c32"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "ANSWERS_CODE_LIST",
+        "id": "lo5v7rid",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Answer A\"",
+            "Value": "answerA"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Answer B\"",
+            "Value": "answerB"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Answer C\"",
+            "Value": "answerC"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Answer D\"",
+            "Value": "answerD"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Answer E\"",
+            "Value": "answerE"
+          }
+        ],
+        "Name": ""
+      }
+    ]
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Multiple choice questions\""
+      ],
+      "id": "lo5ufiuu",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "FlowControl": [],
+          "Label": [
+            "\"Normal multiple choice question\""
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "lo5w0fka",
+                "MappingTarget": "1"
+              },
+              {
+                "MappingSource": "lo5vxvt0",
+                "MappingTarget": "2"
+              },
+              {
+                "MappingSource": "lo5w1ik0",
+                "MappingTarget": "3"
+              },
+              {
+                "MappingSource": "lo5vnq8g",
+                "MappingTarget": "4"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "0",
+                "CodeListReference": "lo5upwdy"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "MCQ_BOOL",
+          "Response": [
+            {
+              "CollectedVariableReference": "lo5v7gab",
+              "id": "lo5w0fka",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5v52w5",
+              "id": "lo5vxvt0",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5v8zv8",
+              "id": "lo5w1ik0",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5v8beu",
+              "id": "lo5vnq8g",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "lo5uw0qc",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "questionType": "MULTIPLE_CHOICE"
+        },
+        {
+          "FlowControl": [],
+          "Label": [
+            "\"Multiple choice question - Code list answers - Radio buttons\""
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "lo5vppud",
+                "MappingTarget": "1"
+              },
+              {
+                "MappingSource": "lo5vuv4l",
+                "MappingTarget": "2"
+              },
+              {
+                "MappingSource": "lo5vgqu3",
+                "MappingTarget": "3"
+              },
+              {
+                "MappingSource": "lo5vte91",
+                "MappingTarget": "4"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "0",
+                "CodeListReference": "lo5upwdy"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "MCQ_CL_RADIO",
+          "Response": [
+            {
+              "CollectedVariableReference": "lo5vnukv",
+              "id": "lo5vppud",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5vrr5y",
+              "id": "lo5vuv4l",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5vlkdg",
+              "id": "lo5vgqu3",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5vuhxi",
+              "id": "lo5vte91",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "lo5vgc2u",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "questionType": "MULTIPLE_CHOICE"
+        },
+        {
+          "FlowControl": [],
+          "Label": [
+            "\"Multiple choice question - Code list answers - Dropdowns\""
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "lo5vo734",
+                "MappingTarget": "1"
+              },
+              {
+                "MappingSource": "lo5vo12o",
+                "MappingTarget": "2"
+              },
+              {
+                "MappingSource": "lo5vlewr",
+                "MappingTarget": "3"
+              },
+              {
+                "MappingSource": "lo5vnonj",
+                "MappingTarget": "4"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "0",
+                "CodeListReference": "lo5upwdy"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "MCQ_CL_DROPDOWN",
+          "Response": [
+            {
+              "CollectedVariableReference": "lo5vf143",
+              "id": "lo5vo734",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5vlhu1",
+              "id": "lo5vo12o",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5veoug",
+              "id": "lo5vlewr",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5vf784",
+              "id": "lo5vnonj",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "lo5vn4ry",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "questionType": "MULTIPLE_CHOICE"
+        },
+        {
+          "FlowControl": [],
+          "Label": [
+            "\"Multiple choice question - Table - Radio buttons\""
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "lo5vm6jm",
+                "MappingTarget": "1"
+              },
+              {
+                "MappingSource": "lo5w1m3u",
+                "MappingTarget": "2"
+              },
+              {
+                "MappingSource": "lo5vuzdc",
+                "MappingTarget": "3"
+              },
+              {
+                "MappingSource": "lo5vn9tj",
+                "MappingTarget": "4"
+              },
+              {
+                "MappingSource": "lo5vl0qc",
+                "MappingTarget": "5"
+              },
+              {
+                "MappingSource": "lo5vkha7",
+                "MappingTarget": "6"
+              },
+              {
+                "MappingSource": "lo5vku6f",
+                "MappingTarget": "7"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "0",
+                "CodeListReference": "lo5uxn2k"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "MCQ_TABLE_RADIO",
+          "Response": [
+            {
+              "CollectedVariableReference": "lo5w0299",
+              "id": "lo5vm6jm",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5vy65n",
+              "id": "lo5w1m3u",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5vjg8q",
+              "id": "lo5vuzdc",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5vkg0a",
+              "id": "lo5vn9tj",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5vyoeo",
+              "id": "lo5vl0qc",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5vg30y",
+              "id": "lo5vkha7",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5vzapd",
+              "id": "lo5vku6f",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "lo5vms0u",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "questionType": "MULTIPLE_CHOICE"
+        },
+        {
+          "FlowControl": [],
+          "Label": [
+            "\"Multiple choice question - Table - Dropdowns\""
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "lo5vj9e1",
+                "MappingTarget": "1"
+              },
+              {
+                "MappingSource": "lo5vr8pm",
+                "MappingTarget": "2"
+              },
+              {
+                "MappingSource": "lo5vnax6",
+                "MappingTarget": "3"
+              },
+              {
+                "MappingSource": "lo5viq24",
+                "MappingTarget": "4"
+              },
+              {
+                "MappingSource": "lo5vp48u",
+                "MappingTarget": "5"
+              },
+              {
+                "MappingSource": "lo5vi5pv",
+                "MappingTarget": "6"
+              },
+              {
+                "MappingSource": "lo5vsq7k",
+                "MappingTarget": "7"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "0",
+                "CodeListReference": "lo5uxn2k"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "MCQ_TABLE_DROPDOWN",
+          "Response": [
+            {
+              "CollectedVariableReference": "lo5vr98h",
+              "id": "lo5vj9e1",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5vq2k5",
+              "id": "lo5vr8pm",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5vnoo4",
+              "id": "lo5vnax6",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5vg4zd",
+              "id": "lo5viq24",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5vpzj7",
+              "id": "lo5vp48u",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5vqf2b",
+              "id": "lo5vi5pv",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lo5vzg0b",
+              "id": "lo5vsq7k",
+              "CodeListReference": "lo5v7rid",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "lo5vj128",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "questionType": "MULTIPLE_CHOICE"
+        }
+      ],
+      "Name": "S1"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}
