@@ -1,0 +1,333 @@
+{
+  "id": "lo9tkf89",
+  "modele": "ENOPAIRWISE",
+  "enoCoreVersion": "2.4.10",
+  "lunaticModelVersion": "2.3.4",
+  "generatingDate": "28-10-2023 09:23:24",
+  "missing": false,
+  "pagination": "question",
+  "maxPage": "3",
+  "label": {
+    "value": "Eno - Pairwise question",
+    "type": "VTL|MD"
+  },
+  "components": [
+    {
+      "id": "lo9ty2ut",
+      "componentType": "Loop",
+      "page": "1",
+      "depth": 1,
+      "paginatedLoop": false,
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "PAIRWISE_SOURCE"
+      ],
+      "lines": {
+        "min": {
+          "value": "1",
+          "type": "VTL"
+        },
+        "max": {
+          "value": "5",
+          "type": "VTL"
+        }
+      },
+      "components": [
+        {
+          "id": "lo9tnxzt",
+          "componentType": "Sequence",
+          "page": "1",
+          "label": {
+            "value": "\"Sequence with loop\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "lo9tnxzt",
+              "page": "1",
+              "label": {
+                "value": "\"Sequence with loop\"",
+                "type": "VTL|MD"
+              }
+            }
+          }
+        },
+        {
+          "id": "lo9twdr9",
+          "componentType": "Input",
+          "mandatory": false,
+          "page": "1",
+          "maxLength": 20,
+          "label": {
+            "value": "\"➡ \" || \"Source of the pairwise question\"",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "true",
+            "type": "VTL"
+          },
+          "hierarchy": {
+            "sequence": {
+              "id": "lo9tnxzt",
+              "page": "1",
+              "label": {
+                "value": "\"Sequence with loop\"",
+                "type": "VTL|MD"
+              }
+            }
+          },
+          "bindingDependencies": [
+            "PAIRWISE_SOURCE"
+          ],
+          "response": {
+            "name": "PAIRWISE_SOURCE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "lo9tqe07",
+      "componentType": "Sequence",
+      "page": "2",
+      "label": {
+        "value": "\"Pairwise sequence\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lo9tqe07",
+          "page": "2",
+          "label": {
+            "value": "\"Pairwise sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "lo9tyy1v",
+      "componentType": "PairwiseLinks",
+      "mandatory": false,
+      "page": "3",
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lo9tqe07",
+          "page": "2",
+          "label": {
+            "value": "\"Pairwise sequence\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "PAIRWISE_QUESTION"
+      ],
+      "xAxisIterations": {
+        "value": "count(PAIRWISE_SOURCE)"
+      },
+      "yAxisIterations": {
+        "value": "count(PAIRWISE_SOURCE)"
+      },
+      "components": [
+        {
+          "id": "lo9tyy1v-pairwise-dropdown",
+          "componentType": "Dropdown",
+          "mandatory": false,
+          "page": "3",
+          "label": {
+            "value": "\"➡ \" || \"Pairwise link between \" || xAxis || \" and \" || yAxis",
+            "type": "VTL|MD"
+          },
+          "conditionFilter": {
+            "value": "xAxis <> yAxis",
+            "type": "VTL"
+          },
+          "bindingDependencies": [
+            "PAIRWISE_QUESTION"
+          ],
+          "options": [
+            {
+              "value": "linkA",
+              "label": {
+                "value": "\"Link of type A\"",
+                "type": "VTL|MD"
+              }
+            },
+            {
+              "value": "linkB",
+              "label": {
+                "value": "\"Link of type B\"",
+                "type": "VTL|MD"
+              }
+            },
+            {
+              "value": "linkC",
+              "label": {
+                "value": "\"Link of type C\"",
+                "type": "VTL|MD"
+              }
+            },
+            {
+              "value": "linkD",
+              "label": {
+                "value": "\"Link of type D\"",
+                "type": "VTL|MD"
+              }
+            }
+          ],
+          "response": {
+            "name": "PAIRWISE_QUESTION"
+          }
+        }
+      ],
+      "symLinks": {
+        "PAIRWISE_QUESTION": {
+          "1": "1",
+          "2": "3",
+          "3": "2",
+          "4": "4",
+          "5": "6",
+          "6": "5",
+          "7": "8",
+          "8": "7",
+          "9": "10",
+          "10": "9",
+          "11": "13",
+          "12": "12",
+          "13": "11",
+          "14": null,
+          "15": null,
+          "16": "16",
+          "17": "17",
+          "18": "18"
+        }
+      }
+    }
+  ],
+  "variables": [
+    {
+      "variableType": "COLLECTED",
+      "name": "PAIRWISE_SOURCE",
+      "values": {
+        "PREVIOUS": [
+          null
+        ],
+        "COLLECTED": [
+          null
+        ],
+        "FORCED": [
+          null
+        ],
+        "EDITED": [
+          null
+        ],
+        "INPUTED": [
+          null
+        ]
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "PAIRWISE_QUESTION",
+      "values": {
+        "PREVIOUS": [
+          [
+            null
+          ]
+        ],
+        "COLLECTED": [
+          [
+            null
+          ]
+        ],
+        "FORCED": [
+          [
+            null
+          ]
+        ],
+        "EDITED": [
+          [
+            null
+          ]
+        ],
+        "INPUTED": [
+          [
+            null
+          ]
+        ]
+      }
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "FILTER_RESULT_PAIRWISE_SOURCE",
+      "expression": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "shapeFrom": "PAIRWISE_SOURCE",
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "FILTER_RESULT_PAIRWISE_QUESTION",
+      "expression": {
+        "value": "xAxis <> yAxis",
+        "type": "VTL"
+      },
+      "inFilter": "false"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "xAxis",
+      "expression": {
+        "value": "PAIRWISE_SOURCE",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "PAIRWISE_SOURCE"
+      ],
+      "shapeFrom": "PAIRWISE_SOURCE",
+      "inFilter": "true"
+    },
+    {
+      "variableType": "CALCULATED",
+      "name": "yAxis",
+      "expression": {
+        "value": "PAIRWISE_SOURCE",
+        "type": "VTL"
+      },
+      "bindingDependencies": [
+        "PAIRWISE_SOURCE"
+      ],
+      "shapeFrom": "PAIRWISE_SOURCE",
+      "inFilter": "true"
+    }
+  ],
+  "cleaning": {},
+  "resizing": {
+    "PAIRWISE_SOURCE": {
+      "sizeForLinksVariables": [
+        "count(PAIRWISE_SOURCE)",
+        "count(PAIRWISE_SOURCE)"
+      ],
+      "linksVariables": [
+        "PAIRWISE_QUESTION"
+      ]
+    }
+  }
+}

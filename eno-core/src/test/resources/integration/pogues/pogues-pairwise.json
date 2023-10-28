@@ -1,0 +1,252 @@
+{
+  "owner": "ENO-INTEGRATION-TESTS",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "idendquest",
+        "lo9tnxzt",
+        "lo9twdr9",
+        "lo9tqe07",
+        "lo9tyy1v"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "lo9ua0ch",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "Eno - Pairwise question"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "ENOPAIRWISE",
+  "Variables": {
+    "Variable": [
+      {
+        "Scope": "lo9ty2ut",
+        "Label": "PAIRWISE_SOURCE label",
+        "id": "lo9tpsgi",
+        "type": "CollectedVariableType",
+        "Name": "PAIRWISE_SOURCE",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "20"
+        }
+      },
+      {
+        "Label": "PAIRWISE_QUESTION label",
+        "id": "lo9u3tv1",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lo9tv7s6",
+        "Name": "PAIRWISE_QUESTION",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Sat Oct 28 2023 11:21:34 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "TCM",
+      "uri": "http://ddi:fr.insee:DataCollection.TCM"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "lo9tkf89",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "Label": "LINKS_CODE_LIST",
+        "id": "lo9tv7s6",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Link of type A\"",
+            "Value": "linkA"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Link of type B\"",
+            "Value": "linkB"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Link of type C\"",
+            "Value": "linkC"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Link of type D\"",
+            "Value": "linkD"
+          }
+        ],
+        "Name": ""
+      }
+    ]
+  },
+  "Iterations": {
+    "Iteration": [
+      {
+        "Maximum": "5",
+        "Minimum": "1",
+        "MemberReference": [
+          "lo9tnxzt",
+          "lo9tnxzt"
+        ],
+        "id": "lo9ty2ut",
+        "Step": "1",
+        "type": "DynamicIterationType",
+        "Name": "LOOP"
+      }
+    ]
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence with loop\""
+      ],
+      "id": "lo9tnxzt",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lo9tpsgi",
+              "id": "lo9udsz2",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": "20"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Source of the pairwise question\""
+          ],
+          "id": "lo9twdr9",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "PAIRWISE_SOURCE"
+        }
+      ],
+      "Name": "S1"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Pairwise sequence\""
+      ],
+      "id": "lo9tqe07",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lo9u3tv1",
+              "id": "lo9uemwq",
+              "mandatory": false,
+              "CodeListReference": "lo9tv7s6",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Scope": "lo9tpsgi",
+          "Label": [
+            "\"Pairwise link between \" || xAxis || \" and \" || yAxis"
+          ],
+          "id": "lo9tyy1v",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "PAIRWISE",
+          "Name": "PAIRWISE_QUESTION"
+        }
+      ],
+      "Name": "S2"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

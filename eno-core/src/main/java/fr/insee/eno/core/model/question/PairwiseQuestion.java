@@ -52,9 +52,9 @@ public class PairwiseQuestion extends SingleResponseQuestion {
         LabelType yAxis = new LabelType();
         String vtlExpression = "count("+loopVariableName+")";
         xAxis.setValue(vtlExpression);
-        xAxis.setType(Constant.LUNATIC_LABEL_VTL_MD);
+        xAxis.setType(Constant.LUNATIC_LABEL_VTL);
         yAxis.setValue(vtlExpression);
-        yAxis.setType(Constant.LUNATIC_LABEL_VTL_MD);
+        yAxis.setType(Constant.LUNATIC_LABEL_VTL);
         lunaticPairwiseLinks.setXAxisIterations(xAxis);
         lunaticPairwiseLinks.setYAxisIterations(yAxis);
     }
