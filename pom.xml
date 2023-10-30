@@ -63,7 +63,7 @@
 		<apache-commons.version>3.13.0</apache-commons.version>
 		<junit.version>5.10.0</junit.version>
 		<xmlunit.version>2.9.1</xmlunit.version>
-		<log4j-slf4j2.version>2.20.0</log4j-slf4j2.version>
+		<log4j-slf4j2.version>2.21.1</log4j-slf4j2.version>
 
 
 		<source.plugin.version>3.3.0</source.plugin.version>
