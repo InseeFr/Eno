@@ -15,6 +15,7 @@ public class EnoSuggesterType {
     private List<String> responseNames;
     private String name;
     private List<EnoSuggesterField> fields;
+    private Boolean meloto;
     private BigInteger max;
     private List<String> stopWords;
     private EnoSuggesterOrder order;
@@ -26,6 +27,7 @@ public class EnoSuggesterType {
     public EnoSuggesterType(@JsonProperty(value = "responseNames", required = true) List<String> responseNames,
                             @JsonProperty(value = "name", required = true) String name,
                             @JsonProperty(value = "fields", required = true) List<EnoSuggesterField> fields,
+                            @JsonProperty("meloto") Boolean meloto,
                             @JsonProperty("max") BigInteger max,
                             @JsonProperty("stopWords")  List<String> stopWords,
                             @JsonProperty("order") EnoSuggesterOrder order,
@@ -35,6 +37,7 @@ public class EnoSuggesterType {
         this.responseNames = responseNames;
         this.name = name;
         this.fields = fields;
+        this.meloto = meloto;
         this.max = max;
         this.stopWords = stopWords;
         this.order = order;
@@ -53,6 +56,7 @@ public class EnoSuggesterType {
             return null;
         }
         SuggesterType type = new SuggesterType();
+        type.setMeloto(enoType.getMeloto());
         type.setMax(enoType.getMax());
         type.setName(enoType.getName());
         type.setOrder(EnoSuggesterOrder.toLunaticModel(enoType.getOrder()));
