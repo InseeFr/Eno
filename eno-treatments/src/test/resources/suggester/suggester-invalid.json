@@ -1,0 +1,71 @@
+{
+  "suggesters": [
+    {
+      "responseNames": ["PCS"],
+      "name": "L_PCS_HOMMES-1-3-0",
+      "fields": [
+        {
+          "name": "label",
+          "rules": ["[\\w]+"],
+          "language": "French",
+          "min": 2
+        },
+        {
+          "name": "id"
+        }
+      ],
+      "stopWords": [
+        "a",
+        "au",
+        "dans",
+        "de",
+        "des",
+        "du",
+        "en",
+        "er",
+        "la",
+        "le",
+        "ou",
+        "sur",
+        "d",
+        "l",
+        "aux",
+        "dans",
+        "un",
+        "une",
+        "pour",
+        "avec",
+        "chez",
+        "par",
+        "les"
+      ],
+      "queryParser": {
+        "type": "tokenized",
+        "params": {
+          "language": "French",
+          "pattern": "pattern",
+          "min": 1
+        }
+      },
+      "version": "1"
+    },
+    {
+      "responseNames": ["GEO"],
+      "name": "L_GEO",
+      "fields": [
+        {
+          "name": "label",
+          "rules": "soft",
+          "min": 2
+        },
+        {
+          "name": "id"
+        }
+      ],
+      "queryParser": {
+        "type": "soft"
+      },
+      "version": "1"
+    }
+  ]
+}

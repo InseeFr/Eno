@@ -13,14 +13,17 @@ public class EnoSuggesterQueryParserParams {
     private String language;
     private BigInteger min;
     private String pattern;
+    private Boolean stemmer;
 
     @JsonCreator
     public EnoSuggesterQueryParserParams(@JsonProperty("language") String language,
                                          @JsonProperty("min") BigInteger min,
-                                         @JsonProperty("pattern") String pattern) {
+                                         @JsonProperty("pattern") String pattern,
+                                         @JsonProperty("stemmer") Boolean stemmer) {
         this.language = language;
         this.min = min;
         this.pattern = pattern;
+        this.stemmer = stemmer;
     }
 
     /**
@@ -36,6 +39,7 @@ public class EnoSuggesterQueryParserParams {
         params.setLanguage(enoParams.getLanguage());
         params.setMin(enoParams.getMin());
         params.setPattern(enoParams.getPattern());
+        params.setStemmer(enoParams.getStemmer());
         return params;
     }
 }

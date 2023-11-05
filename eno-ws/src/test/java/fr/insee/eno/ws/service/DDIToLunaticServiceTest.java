@@ -46,7 +46,6 @@ class DDIToLunaticServiceTest {
     }
 
     @Test
-    @Disabled("to be fixed")
     void nonRegression_suggesterProcessing() {
         //
         SpecificTreatmentsDeserializer deserializer = new SpecificTreatmentsDeserializer();
@@ -59,7 +58,7 @@ class DDIToLunaticServiceTest {
         //
         DDIToLunaticService ddiToLunaticService = new DDIToLunaticService();
         String result = ddiToLunaticService.transformToJson(
-                        this.getClass().getClassLoader().getResourceAsStream("non-regression/suggester-processing/ddi-l7j0wwqx.xml"),
+                        this.getClass().getClassLoader().getResourceAsStream("non-regression/suggester-processing/ddi-l7ugetj0.xml"),
                         EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC),
                         lunaticPostProcessing)
                 .block();

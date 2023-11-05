@@ -12,7 +12,8 @@ class EnoSuggesterQueryParserParamsTest {
 
     @Test
     void whenConvertingToLunaticMappingIsCorrect() {
-        EnoSuggesterQueryParserParams enoParams = new EnoSuggesterQueryParserParams("French", BigInteger.ONE, "pattern");
+        EnoSuggesterQueryParserParams enoParams = new EnoSuggesterQueryParserParams(
+                "French", BigInteger.ONE, "pattern", false);
         SuggesterQueryParserParams params = EnoSuggesterQueryParserParams.toLunaticModel(enoParams);
         assertEquals(params.getLanguage(), enoParams.getLanguage());
         assertEquals(params.getMin(), enoParams.getMin());
