@@ -3321,9 +3321,11 @@
       <text:p>enoddi:get-external-codelist-name</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>r:CodeListReference/l:CodeList/r:CodeListReference[@isExternal]/r:URN</text:p>
+      <text:p>r:CodeListReference/l:CodeList[r:CodeListReference/@isExternal]/l:CodeListName/r:String</text:p>
      </table:table-cell>
-     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>lang-choice</text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Returns the name of an external codelist</text:p>
      </table:table-cell>
