@@ -47,6 +47,14 @@ dependencies {
 	testImplementation 'io.projectreactor:reactor-test'
 }
 
+configurations.configureEach {
+	resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+		if (details.requested.group == 'org.yaml' && details.requested.name == 'snakeyaml') {
+			details.useVersion '2.2'
+		} // security issue in versions <2.0 imported as transitive dependencies
+	}
+}
+
 processResources {
 	filesMatching('version.properties') {
 		expand(project.properties)
