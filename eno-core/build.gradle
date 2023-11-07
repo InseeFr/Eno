@@ -30,12 +30,11 @@ dependencies {
 
     // Jackson
     implementation 'com.fasterxml.jackson.core:jackson-databind'
+    // ModelMapper (used to copy objects, few usages)
+    implementation 'org.modelmapper:modelmapper:3.2.0'
 
     // Logging
     implementation 'org.slf4j:slf4j-api'
-
-    // Mapper
-    implementation 'org.modelmapper:modelmapper:3.2.0'
 
     // Logback logging implementation for testing
     testRuntimeOnly 'ch.qos.logback:logback-classic'
@@ -43,9 +42,10 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
     // AssertJ
     testImplementation 'org.assertj:assertj-core'
+    // JSONAssert
+    testImplementation 'org.skyscreamer:jsonassert'
     // Mockito
     testImplementation 'org.mockito:mockito-core'
-    testImplementation 'org.skyscreamer:jsonassert:1.5.1'
 
     // Lombok
     compileOnly 'org.projectlombok:lombok'

@@ -18,6 +18,7 @@ description = 'eno-treatments'
 dependencies {
     // DDI
     implementation project(':ddi-beans')
+    // Eno core
     implementation project(':eno-core')
     // Lunatic
     implementation libs.pogues.model
@@ -28,10 +29,11 @@ dependencies {
     implementation 'org.springframework:spring-core'
     implementation 'org.springframework:spring-beans'
     implementation 'org.springframework:spring-expression'
-    implementation 'com.networknt:json-schema-validator:1.0.87'
 
     // Jackson
     implementation 'com.fasterxml.jackson.core:jackson-databind'
+    // Json schema validator
+    implementation 'com.networknt:json-schema-validator:1.0.87'
 
     // Logging
     implementation 'org.slf4j:slf4j-api'
