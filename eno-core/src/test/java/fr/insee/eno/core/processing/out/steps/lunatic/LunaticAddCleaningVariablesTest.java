@@ -266,6 +266,32 @@ class LunaticAddCleaningVariablesTest {
         assertEquals("(SUM1 < 10)", concernedVariables.get(2).getFilter());
     }
 
+    @Test
+    void externalBindingDependency_shouldNotBeInCleaningEntries() {
+
+        lunaticQuestionnaire = new Questionnaire();
+        lunaticQuestionnaire.getComponents().add(input);
+
+        input.setConditionFilter(buildConditionFilter("(SUM1 < 10)", List.of("Q1", "EXTERNAL1")));
+
+        lunaticQuestionnaire.getVariables().add(buildCalculatedVariable("SUM1"));
+        lunaticQuestionnaire.getVariables().add(buildCollectedVariable("Q1"));
+        lunaticQuestionnaire.getVariables().add(buildExternalVariable("EXTERNAL1"));
+
+        processing.apply(lunaticQuestionnaire);
+        List<CleaningEntry> cleaningEntries = lunaticQuestionnaire.getCleaning().getAny().stream()
+                .map(CleaningEntry.class::cast)
+                .toList();
+
+        assertEquals(1, cleaningEntries.size());
+
+        CleaningEntry variable = cleaningEntries.get(0);
+        assertEquals("Q1", variable.getVariableName());
+        assertEquals(1, variable.getConcernedVariables().size());
+        assertEquals("SHORT_TEXT", variable.getConcernedVariables().get(0).getName());
+        assertEquals("(SUM1 < 10)", variable.getConcernedVariables().get(0).getFilter());
+    }
+
     /* ----- Private utility methods below ----- */
 
     private CheckboxGroup buildCheckboxGroup(String id, List<String> names) {
@@ -382,6 +408,13 @@ class LunaticAddCleaningVariablesTest {
     private VariableType buildCalculatedVariable(String variableName) {
         VariableType variable = new VariableType();
         variable.setVariableType(VariableTypeEnum.CALCULATED);
+        variable.setName(variableName);
+        return variable;
+    }
+
+    private VariableType buildExternalVariable(String variableName) {
+        VariableType variable = new VariableType();
+        variable.setVariableType(VariableTypeEnum.EXTERNAL);
         variable.setName(variableName);
         return variable;
     }
