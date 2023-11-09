@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://insee.fr/suggesters.schema.json",
+  "$id": "treatments.schema.json",
   "title": "Specific treatments schema",
   "description": "Specific treatments schema",
   "type": "object",
@@ -8,149 +8,14 @@
     "suggesters": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/suggester"
+        "$ref": "./suggesters.schema.json"
       }
     },
     "regroupements": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/regroupement"
+        "$ref": "./regrouping.schema.json"
       }
-    }
-  },
-
-  "$defs": {
-    "suggester": {
-      "type": "object",
-      "properties": {
-        "responseNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1
-        },
-        "name": {
-          "type": "string"
-        },
-        "queryParser": {
-          "$ref": "#/$defs/query_parser"
-        },
-        "fields": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/suggester_field"
-          }
-        },
-        "stopWords": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "version": {
-          "type": "string"
-        },
-        "url": {
-          "type": "string"
-        },
-        "max": {
-          "type": "number"
-        },
-        "order": {
-          "$ref": "#/$defs/suggester_order"
-        }
-      },
-      "required": ["responseNames", "name", "fields", "queryParser", "version"]
-    },
-
-    "suggester_field": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "rules": {
-          "type": "array"
-        },
-        "min": {
-          "type": "number"
-        },
-        "language": {
-          "type": "string"
-        },
-        "stemmer": {
-          "type": "boolean"
-        },
-        "synonyms": {
-          "type" : "array",
-          "items" : {
-            "$ref": "#/$defs/field_synonym"
-          }
-        }
-      },
-      "required": ["name", "rules"]
-    },
-
-    "query_parser": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "params": {
-          "$ref": "#/$defs/query_parser_params"
-        }
-      },
-      "required": ["type"]
-    },
-
-    "suggester_order": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "field": {
-          "type": "string"
-        }
-      },
-      "required": ["type", "field"]
-    },
-
-    "query_parser_params": {
-      "type": "object",
-      "properties": {
-        "language": {
-          "type": "string"
-        },
-        "min": {
-          "type": "number"
-        },
-        "pattern": {
-          "type": "string"
-        }
-      }
-    },
-    "field_synonym": {
-      "type": "object",
-      "properties": {
-        "source": {
-          "type": "string"
-        },
-        "target": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1
-        },
-        "required": ["source", "target"]
-      }
-    },
-    "regroupement": {
-      "type": "array",
-      "minItems": 2
     }
   }
 }

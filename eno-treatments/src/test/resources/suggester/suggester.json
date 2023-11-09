@@ -9,6 +9,10 @@
           "rules": ["[\\w]+"],
           "language": "French",
           "min": 2
+        },
+        {
+          "name": "id",
+          "rules": "soft"
         }
       ],
       "stopWords": [
@@ -52,8 +56,12 @@
       "fields": [
         {
           "name": "label",
-          "rules": ["soft"],
+          "rules": "soft",
           "min": 2
+        },
+        {
+          "name": "id",
+          "rules": "soft"
         }
       ],
       "queryParser": {
