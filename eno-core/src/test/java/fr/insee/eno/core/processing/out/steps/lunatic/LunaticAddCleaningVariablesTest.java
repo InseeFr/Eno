@@ -79,20 +79,20 @@ class LunaticAddCleaningVariablesTest {
         assertEquals(3, variables.size());
 
         CleaningEntry variable = variables.get(0);
-        assertEquals("SUM1", variable.getName());
+        assertEquals("SUM1", variable.getVariableName());
         List<CleaningConcernedVariable> concernedVariables = variable.getConcernedVariables();
         assertEquals(1, concernedVariables.size());
         assertEquals("TEXTECOURT", concernedVariables.get(0).getName());
         assertEquals("(SUM1 < 10)", concernedVariables.get(0).getFilter());
 
         variable = variables.get(1);
-        assertEquals("Q11", variable.getName());
+        assertEquals("Q11", variable.getVariableName());
         assertEquals(1, variable.getConcernedVariables().size());
         assertEquals("TEXTECOURT", variable.getConcernedVariables().get(0).getName());
         assertEquals("(SUM1 < 10)", variable.getConcernedVariables().get(0).getFilter());
 
         variable = variables.get(2);
-        assertEquals("Q12", variable.getName());
+        assertEquals("Q12", variable.getVariableName());
         assertEquals(1, variable.getConcernedVariables().size());
         assertEquals("TEXTECOURT", variable.getConcernedVariables().get(0).getName());
         assertEquals("(SUM1 < 10)", variable.getConcernedVariables().get(0).getFilter());
@@ -115,27 +115,27 @@ class LunaticAddCleaningVariablesTest {
         assertEquals(4, variables.size());
 
         CleaningEntry variable = variables.get(0);
-        assertEquals("SUM1", variable.getName());
+        assertEquals("SUM1", variable.getVariableName());
         List<CleaningConcernedVariable> concernedVariables = variable.getConcernedVariables();
         assertEquals(1, concernedVariables.size());
         assertEquals("DROPDOWN", concernedVariables.get(0).getName());
         assertEquals("(SUM1 < 10)", concernedVariables.get(0).getFilter());
 
         variable = variables.get(1);
-        assertEquals("Q1", variable.getName());
+        assertEquals("Q1", variable.getVariableName());
         assertEquals(1, variable.getConcernedVariables().size());
         assertEquals("DROPDOWN", variable.getConcernedVariables().get(0).getName());
         assertEquals("(SUM1 < 10)", variable.getConcernedVariables().get(0).getFilter());
 
         variable = variables.get(2);
-        assertEquals("SUM2", variable.getName());
+        assertEquals("SUM2", variable.getVariableName());
         concernedVariables = variable.getConcernedVariables();
         assertEquals(1, concernedVariables.size());
         assertEquals("INTEGER", concernedVariables.get(0).getName());
         assertEquals("(SUM2 < 10)", concernedVariables.get(0).getFilter());
 
         variable = variables.get(3);
-        assertEquals("Q2", variable.getName());
+        assertEquals("Q2", variable.getVariableName());
         assertEquals(1, variable.getConcernedVariables().size());
         assertEquals("INTEGER", variable.getConcernedVariables().get(0).getName());
         assertEquals("(SUM2 < 10)", variable.getConcernedVariables().get(0).getFilter());
@@ -159,14 +159,14 @@ class LunaticAddCleaningVariablesTest {
         assertEquals(5, variables.size());
 
         CleaningEntry variable = variables.get(0);
-        assertEquals("TEST", variable.getName());
+        assertEquals("TEST", variable.getVariableName());
         List<CleaningConcernedVariable> concernedVariables = variable.getConcernedVariables();
         assertEquals(1, concernedVariables.size());
         assertEquals("TEXTECOURT", concernedVariables.get(0).getName());
         assertEquals("(TEST > 30)", concernedVariables.get(0).getFilter());
 
         variable = variables.get(1);
-        assertEquals("SUM2", variable.getName());
+        assertEquals("SUM2", variable.getVariableName());
         concernedVariables = variable.getConcernedVariables();
         assertEquals(2, concernedVariables.size());
         assertEquals("TEXTECOURT", concernedVariables.get(0).getName());
@@ -175,20 +175,20 @@ class LunaticAddCleaningVariablesTest {
         assertEquals("(SUM2 < 10)", concernedVariables.get(1).getFilter());
 
         variable = variables.get(2);
-        assertEquals("SUM1", variable.getName());
+        assertEquals("SUM1", variable.getVariableName());
         concernedVariables = variable.getConcernedVariables();
         assertEquals(1, concernedVariables.size());
         assertEquals("DROPDOWN", concernedVariables.get(0).getName());
         assertEquals("(SUM1 < 10)", concernedVariables.get(0).getFilter());
 
         variable = variables.get(3);
-        assertEquals("Q1", variable.getName());
+        assertEquals("Q1", variable.getVariableName());
         assertEquals(1, variable.getConcernedVariables().size());
         assertEquals("DROPDOWN", variable.getConcernedVariables().get(0).getName());
         assertEquals("(SUM1 < 10)", variable.getConcernedVariables().get(0).getFilter());
 
         variable = variables.get(4);
-        assertEquals("Q2", variable.getName());
+        assertEquals("Q2", variable.getVariableName());
         assertEquals(1, variable.getConcernedVariables().size());
         assertEquals("INTEGER", variable.getConcernedVariables().get(0).getName());
         assertEquals("(SUM2 < 10)", variable.getConcernedVariables().get(0).getFilter());
@@ -230,7 +230,7 @@ class LunaticAddCleaningVariablesTest {
         assertEquals(4, variables.size());
 
         CleaningEntry variable = variables.get(0);
-        assertEquals("SUM2", variable.getName());
+        assertEquals("SUM2", variable.getVariableName());
         List<CleaningConcernedVariable> concernedVariables = variable.getConcernedVariables();
         assertEquals(3, concernedVariables.size());
         assertEquals("QCM_OM1", concernedVariables.get(0).getName());
@@ -241,7 +241,7 @@ class LunaticAddCleaningVariablesTest {
         assertEquals("(SUM2 < 10)", concernedVariables.get(2).getFilter());
 
         variable = variables.get(1);
-        assertEquals("SUM1", variable.getName());
+        assertEquals("SUM1", variable.getVariableName());
         concernedVariables = variable.getConcernedVariables();
         assertEquals(3, concernedVariables.size());
         assertEquals("QCM_OM1", concernedVariables.get(0).getName());
@@ -252,7 +252,7 @@ class LunaticAddCleaningVariablesTest {
         assertEquals("(SUM2 < 10)", concernedVariables.get(2).getFilter());
 
         variable = variables.get(2);
-        assertEquals("Q11", variable.getName());
+        assertEquals("Q11", variable.getVariableName());
         concernedVariables = variable.getConcernedVariables();
         assertEquals(3, concernedVariables.size());
         assertEquals("QCM_OM1", concernedVariables.get(0).getName());
@@ -263,7 +263,7 @@ class LunaticAddCleaningVariablesTest {
         assertEquals("(SUM2 < 10)", concernedVariables.get(2).getFilter());
 
         variable = variables.get(3);
-        assertEquals("Q12", variable.getName());
+        assertEquals("Q12", variable.getVariableName());
         concernedVariables = variable.getConcernedVariables();
         assertEquals(3, concernedVariables.size());
         assertEquals("QCM_OM1", concernedVariables.get(0).getName());

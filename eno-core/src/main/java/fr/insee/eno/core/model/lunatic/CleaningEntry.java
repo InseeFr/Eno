@@ -14,9 +14,9 @@ import java.util.List;
 public class CleaningEntry {
 
     /** Variable name (key of the resizing entry). */
-    private String name;
+    private String variableName;
 
     /** List of variable names (value of the resizing entry). */
     private List<CleaningConcernedVariable> concernedVariables;
-    
+
 }

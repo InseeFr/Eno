@@ -110,7 +110,7 @@ public class LunaticSerializer {
                         ValueNode filterNode = JsonNodeFactory.instance.textNode(concernedVariable.getFilter());
                         concernedVariablesNode.set(concernedVariable.getName(), filterNode);
                     }
-                    cleaningBlocksNode.set(cleaningVariable.getName(), concernedVariablesNode);
+                    cleaningBlocksNode.set(cleaningVariable.getVariableName(), concernedVariablesNode);
                 });
         return cleaningBlocksNode;
     }

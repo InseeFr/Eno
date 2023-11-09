@@ -15,7 +15,8 @@ import java.util.*;
  * Important note: the cleaning only concerns COLLECTED variables.
  * Cleaning entries have variable names as keys, and list of variable names as values.
  * Keys are variables that trigger a cleaning action (i.e. variables used in filter expressions).
- * Values are the variables that need to be cleaned when the key variable is modified.
+ * Values are the variables that may to be cleaned when the key variable is modified + the filter expression (to
+ * determine if the variable has to be cleaned or not).
  * */
 @Slf4j
 public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire> {
@@ -26,7 +27,8 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
      */
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
-        List<CleaningEntry> cleaningVariables = createCleaningVariables(lunaticQuestionnaire);
+        List<ComponentType> components = lunaticQuestionnaire.getComponents();
+        List<CleaningEntry> cleaningVariables = createCleaningVariables(components, lunaticQuestionnaire);
 
         if(cleaningVariables.isEmpty()) {
             return;
@@ -39,33 +41,35 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
     }
 
     /**
-     * Create cleaning variables for all response components.
+     * Create cleaning variables for all response components. Can be called recursively for components that contain
+     * other components (such as loops).
+     * @param components A list of components.
      * @param lunaticQuestionnaire Lunatic questionnaire to process.
      * @return All cleaning entries for the questionnaire's components.
      */
-    private List<CleaningEntry> createCleaningVariables(Questionnaire lunaticQuestionnaire) {
-        List<ComponentType> components = lunaticQuestionnaire.getComponents();
-        List<CleaningEntry> cleaningVariables = new ArrayList<>();
+    private List<CleaningEntry> createCleaningVariables(List<ComponentType> components, Questionnaire lunaticQuestionnaire) {
+        List<CleaningEntry> cleaningEntries = new ArrayList<>();
 
         components.stream()
                 .filter(component -> component.getConditionFilter() != null)
                 .forEach(componentType -> {
                     if(componentType instanceof ComponentSimpleResponseType) {
-                        cleaningVariables.addAll(createCleaningVariablesFromSimpleResponseComponent(componentType));
+                        cleaningEntries.addAll(
+                                createCleaningVariablesFromSimpleResponseComponent(componentType, lunaticQuestionnaire));
                         return;
                     }
 
                     if(componentType instanceof ComponentMultipleResponseType) {
-                        cleaningVariables.addAll(createCleaningVariablesFromMultipleResponseComponent(componentType));
+                        cleaningEntries.addAll(createCleaningVariablesFromMultipleResponseComponent(componentType));
                     }
         });
 
         components.stream()
                 .filter(ComponentNestingType.class::isInstance)
                 .map(ComponentNestingType.class::cast)
-                .forEach(nestingComponent -> cleaningVariables.addAll(createCleaningVariables(nestingComponent.getComponents())));
+                .forEach(nestingComponent -> cleaningEntries.addAll(createCleaningVariables(nestingComponent.getComponents(), lunaticQuestionnaire)));
 
-        return cleaningVariables;
+        return cleaningEntries;
     }
 
     /**
@@ -73,21 +77,42 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
      * @param componentType component to process (must be a simple response type)
      * @return cleaning variables for this component
      */
-    private List<CleaningEntry> createCleaningVariablesFromSimpleResponseComponent(ComponentType componentType) {
+    private List<CleaningEntry> createCleaningVariablesFromSimpleResponseComponent(
+            ComponentType componentType, Questionnaire lunaticQuestionnaire) {
         if(!(componentType instanceof ComponentSimpleResponseType simpleResponseType)) {
-            throw new IllegalArgumentException(String.format("Cannot create cleaning variable from this simple response component %s", componentType.getId()));
+            throw new IllegalArgumentException(String.format(
+                    "Cannot create cleaning variable from this simple response component %s", componentType.getId()));
         }
 
-        List<String> bindingDependencies = componentType.getConditionFilter().getBindingDependencies();
-        if(bindingDependencies.isEmpty()) {
+        // Cleaning key
+        List<String> bindingDependencies = filterNonCollectedVariables(
+                componentType.getConditionFilter().getBindingDependencies(), lunaticQuestionnaire);
+        if (bindingDependencies.isEmpty()) {
             return new ArrayList<>();
         }
 
+        // Cleaning value (here one value per key, objects with same key are grouped together afterward)
         CleaningConcernedVariable concernedVariable = new CleaningConcernedVariable(
                 simpleResponseType.getResponse().getName(),
                 componentType.getConditionFilter().getValue());
+
+        // Cleaning entries
         return bindingDependencies.stream()
                 .map(bindingDependency -> new CleaningEntry(bindingDependency, List.of(concernedVariable)))
+                .toList();
+    }
+
+    /**
+     * Returns a new list containing only collected variable names among ones in the given list.
+     * @param variableNames List of variable names.
+     * @param lunaticQuestionnaire A Lunatic questionnaire.
+     * @return A new list containing only collected variable names.
+     */
+    private static List<String> filterNonCollectedVariables(List<String> variableNames, Questionnaire lunaticQuestionnaire) {
+        return lunaticQuestionnaire.getVariables().stream()
+                .filter(variable -> VariableTypeEnum.COLLECTED.equals(variable.getVariableType()))
+                .map(IVariableType::getName)
+                .filter(variableNames::contains)
                 .toList();
     }
 
@@ -141,20 +166,20 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
 
     /**
      * Regroup cleaning variables with same name together
-     * @param variables cleaning variables to regroup
+     * @param cleaningEntries cleaning variables to regroup
      * @return grouped variables
      */
-    private List<CleaningEntry> groupCleaningVariables(List<CleaningEntry> variables) {
+    private List<CleaningEntry> groupCleaningVariables(List<CleaningEntry> cleaningEntries) {
         Map<String, CleaningEntry> groupCleaningVariables = new LinkedHashMap<>();
-        for (CleaningEntry variable : variables) {
-            if(!groupCleaningVariables.containsKey(variable.getName())) {
-                groupCleaningVariables.put(variable.getName(), variable);
+        for (CleaningEntry cleaningEntry : cleaningEntries) {
+            if(!groupCleaningVariables.containsKey(cleaningEntry.getVariableName())) {
+                groupCleaningVariables.put(cleaningEntry.getVariableName(), cleaningEntry);
                 continue;
             }
 
-            CleaningEntry groupVariable = groupCleaningVariables.get(variable.getName());
+            CleaningEntry groupVariable = groupCleaningVariables.get(cleaningEntry.getVariableName());
             List<CleaningConcernedVariable> concernedVariables = new ArrayList<>(groupVariable.getConcernedVariables());
-            concernedVariables.addAll(variable.getConcernedVariables());
+            concernedVariables.addAll(cleaningEntry.getConcernedVariables());
             groupVariable.setConcernedVariables(concernedVariables);
         }
         return groupCleaningVariables.values().stream()
