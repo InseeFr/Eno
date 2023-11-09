@@ -103,7 +103,7 @@ public class LunaticSerializer {
     private static ObjectNode createCleaningObject(Questionnaire lunaticQuestionnaire, ObjectMapper mapper) {
         ObjectNode cleaningBlocksNode = mapper.createObjectNode();
         lunaticQuestionnaire.getCleaning().getAny().stream()
-                .map(CleaningVariable.class::cast)
+                .map(CleaningEntry.class::cast)
                 .forEach(cleaningVariable -> {
                     ObjectNode concernedVariablesNode = JsonNodeFactory.instance.objectNode();
                     for(CleaningConcernedVariable concernedVariable : cleaningVariable.getConcernedVariables()) {

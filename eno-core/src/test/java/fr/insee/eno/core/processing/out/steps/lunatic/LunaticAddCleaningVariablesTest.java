@@ -1,7 +1,7 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.model.lunatic.CleaningConcernedVariable;
-import fr.insee.eno.core.model.lunatic.CleaningVariable;
+import fr.insee.eno.core.model.lunatic.CleaningEntry;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -72,13 +72,13 @@ class LunaticAddCleaningVariablesTest {
         input.setConditionFilter(buildConditionFilter("(SUM1 < 10)", List.of("SUM1", "Q11", "Q12")));
 
         processing.apply(lunaticQuestionnaire);
-        List<CleaningVariable> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
-                .map(CleaningVariable.class::cast)
+        List<CleaningEntry> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
+                .map(CleaningEntry.class::cast)
                 .toList();
 
         assertEquals(3, variables.size());
 
-        CleaningVariable variable = variables.get(0);
+        CleaningEntry variable = variables.get(0);
         assertEquals("SUM1", variable.getName());
         List<CleaningConcernedVariable> concernedVariables = variable.getConcernedVariables();
         assertEquals(1, concernedVariables.size());
@@ -108,13 +108,13 @@ class LunaticAddCleaningVariablesTest {
         dropdown.setConditionFilter(buildConditionFilter("(SUM1 < 10)", List.of("SUM1", "Q1")));
 
         processing.apply(lunaticQuestionnaire);
-        List<CleaningVariable> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
-                .map(CleaningVariable.class::cast)
+        List<CleaningEntry> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
+                .map(CleaningEntry.class::cast)
                 .toList();
 
         assertEquals(4, variables.size());
 
-        CleaningVariable variable = variables.get(0);
+        CleaningEntry variable = variables.get(0);
         assertEquals("SUM1", variable.getName());
         List<CleaningConcernedVariable> concernedVariables = variable.getConcernedVariables();
         assertEquals(1, concernedVariables.size());
@@ -152,13 +152,13 @@ class LunaticAddCleaningVariablesTest {
         dropdown.setConditionFilter(buildConditionFilter("(SUM1 < 10)", List.of("SUM1", "Q1")));
 
         processing.apply(lunaticQuestionnaire);
-        List<CleaningVariable> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
-                .map(CleaningVariable.class::cast)
+        List<CleaningEntry> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
+                .map(CleaningEntry.class::cast)
                 .toList();
 
         assertEquals(5, variables.size());
 
-        CleaningVariable variable = variables.get(0);
+        CleaningEntry variable = variables.get(0);
         assertEquals("TEST", variable.getName());
         List<CleaningConcernedVariable> concernedVariables = variable.getConcernedVariables();
         assertEquals(1, concernedVariables.size());
@@ -203,8 +203,8 @@ class LunaticAddCleaningVariablesTest {
         table.setConditionFilter(buildConditionFilter("(SUM2 < 10)", List.of("SUM2", "SUM1", "Q11", "Q12")));
 
         processing.apply(lunaticQuestionnaire);
-        List<CleaningVariable> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
-                .map(CleaningVariable.class::cast)
+        List<CleaningEntry> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
+                .map(CleaningEntry.class::cast)
                 .toList();
 
         checkCleaningVariablesOnComplexResponseType(variables);
@@ -219,17 +219,17 @@ class LunaticAddCleaningVariablesTest {
         checkboxGroup.setConditionFilter(buildConditionFilter("(SUM2 < 10)", List.of("SUM2", "SUM1", "Q11", "Q12")));
 
         processing.apply(lunaticQuestionnaire);
-        List<CleaningVariable> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
-                .map(CleaningVariable.class::cast)
+        List<CleaningEntry> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
+                .map(CleaningEntry.class::cast)
                 .toList();
 
         checkCleaningVariablesOnComplexResponseType(variables);
     }
 
-    private void checkCleaningVariablesOnComplexResponseType(List<CleaningVariable> variables) {
+    private void checkCleaningVariablesOnComplexResponseType(List<CleaningEntry> variables) {
         assertEquals(4, variables.size());
 
-        CleaningVariable variable = variables.get(0);
+        CleaningEntry variable = variables.get(0);
         assertEquals("SUM2", variable.getName());
         List<CleaningConcernedVariable> concernedVariables = variable.getConcernedVariables();
         assertEquals(3, concernedVariables.size());
