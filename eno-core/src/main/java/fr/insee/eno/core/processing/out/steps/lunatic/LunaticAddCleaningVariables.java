@@ -84,7 +84,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                     "Cannot create cleaning variable from this simple response component %s", componentType.getId()));
         }
 
-        // Cleaning key
+        // Cleaning keys
         List<String> bindingDependencies = filterNonCollectedVariables(
                 componentType.getConditionFilter().getBindingDependencies(), lunaticQuestionnaire);
         if (bindingDependencies.isEmpty()) {
