@@ -2,7 +2,7 @@ package fr.insee.eno.core.serialize;
 
 import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
 import fr.insee.eno.core.model.lunatic.CleaningConcernedVariable;
-import fr.insee.eno.core.model.lunatic.CleaningVariable;
+import fr.insee.eno.core.model.lunatic.CleaningEntry;
 import fr.insee.lunatic.model.flat.CleaningType;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import org.json.JSONException;
@@ -31,9 +31,9 @@ class LunaticSerializerCleaningTest {
         CleaningConcernedVariable concernedVariable6 = new CleaningConcernedVariable("CONCERNED_VARIABLE6", "filter6");
 
         List<Object> data = cleaningType.getAny();
-        data.add(new CleaningVariable("SOME_VARIABLE1", List.of(concernedVariable1, concernedVariable2)));
-        data.add(new CleaningVariable("SOME_VARIABLE2", List.of(concernedVariable3, concernedVariable4)));
-        data.add(new CleaningVariable("SOME_VARIABLE3", List.of(concernedVariable5, concernedVariable6)));
+        data.add(new CleaningEntry("SOME_VARIABLE1", List.of(concernedVariable1, concernedVariable2)));
+        data.add(new CleaningEntry("SOME_VARIABLE2", List.of(concernedVariable3, concernedVariable4)));
+        data.add(new CleaningEntry("SOME_VARIABLE3", List.of(concernedVariable5, concernedVariable6)));
 
         cleaningType.getAny().addAll(data);
     }
