@@ -837,18 +837,20 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="driver-CategoryScheme//CodeList[descendant::Code]" mode="model">
+    <xsl:template match="driver-CategoryScheme//CodeList" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" tunnel="yes"/>
-        <l:CategoryScheme>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="concat('CategoryScheme-',enoddi33:get-id($source-context))"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
-            <r:Label><r:Content xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="enoddi33:get-label($source-context)"/></r:Content></r:Label>
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="." tunnel="yes"/>
-            </xsl:apply-templates>
-        </l:CategoryScheme>
+        <xsl:if test="enoddi33:get-urn($source-context) = ''">
+            <l:CategoryScheme>
+                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                <r:ID><xsl:value-of select="concat('CategoryScheme-',enoddi33:get-id($source-context))"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                <r:Label><r:Content xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="enoddi33:get-label($source-context)"/></r:Content></r:Label>
+                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="." tunnel="yes"/>
+                </xsl:apply-templates>
+            </l:CategoryScheme>            
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="driver-CategoryScheme//Code" mode="model">
