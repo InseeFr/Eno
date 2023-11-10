@@ -18,7 +18,7 @@ class EnoParameterTest {
         assertFalse(lunaticParameters.isFilterDescription());
         assertTrue(lunaticParameters.isFilterResult());
         assertFalse(lunaticParameters.isMissingVariables());
-        assertEquals(EnoParameters.LunaticPaginationMode.QUESTION, lunaticParameters.getLunaticPaginationMode());
+        assertEquals(LunaticParameters.LunaticPaginationMode.QUESTION, lunaticParameters.getLunaticPaginationMode());
     }
 
     @Test
@@ -65,7 +65,7 @@ class EnoParameterTest {
                 EnoParameters.Context.BUSINESS, EnoParameters.ModeParameter.CAPI, Format.LUNATIC);
         //
         LunaticParameters lunaticParameters = enoParameters.getLunaticParameters();
-        assertEquals(EnoParameters.LunaticPaginationMode.SEQUENCE, lunaticParameters.getLunaticPaginationMode());
+        assertEquals(LunaticParameters.LunaticPaginationMode.SEQUENCE, lunaticParameters.getLunaticPaginationMode());
     }
 
 }
