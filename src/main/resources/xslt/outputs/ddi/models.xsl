@@ -746,11 +746,6 @@
             <r:ID>
                 <xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
-            <xsl:if test="$urn != ''">
-                <l:CodeListName>
-                    <r:String xml:lang="fr-FR"><xsl:value-of select="enoddi33:get-name($source-context)"/></r:String>
-                </l:CodeListName>
-            </xsl:if>
             <xsl:if test="$suggester-parameters/*">
                 <r:UserAttributePair>
                     <r:AttributeKey>SuggesterConfiguration</r:AttributeKey>
@@ -764,6 +759,11 @@
                         <xsl:text disable-output-escaping="yes">]]&gt;</xsl:text>
                     </r:AttributeValue>
                 </r:UserAttributePair>
+            </xsl:if>
+            <xsl:if test="$urn != ''">
+                <l:CodeListName>
+                    <r:String xml:lang="fr-FR"><xsl:value-of select="enoddi33:get-name($source-context)"/></r:String>
+                </l:CodeListName>
             </xsl:if>
             <r:Label>
                 <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
