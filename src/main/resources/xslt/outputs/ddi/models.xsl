@@ -840,7 +840,7 @@
     <xsl:template match="driver-CategoryScheme//CodeList" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" tunnel="yes"/>
-        <xsl:if test="enoddi33:get-urn($source-context) = ''">
+        <xsl:if test="not(enoddi33:get-urn($source-context) != '')">
             <l:CategoryScheme>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="concat('CategoryScheme-',enoddi33:get-id($source-context))"/></r:ID>
