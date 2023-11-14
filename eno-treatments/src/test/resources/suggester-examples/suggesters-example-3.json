@@ -1,0 +1,136 @@
+[
+  {
+    "name": "L_ACTIVITES-1-0-0-SANS",
+    "fields": [
+      {
+        "name": "label",
+        "rules": [
+          "[\\w]+"
+        ],
+        "language": "French",
+        "min": 2,
+        "stemmer": false,
+        "synonyms": {
+          "accueil": [
+            "ACCEUIL",
+            "ACCUEILLIR",
+            "ACCUEILLANTE",
+            "ACCUEILLANT",
+            "ACCUEILLE"
+          ],
+          "EHPAD": [
+            "EPHAD",
+            "HEPAD",
+            "EPAD",
+            "EPAHD",
+            "EPADH"
+          ],
+          "plaquisterie": [
+            "PLACO",
+            "PLACOPLATRE"
+          ],
+          "pneumatique": [
+            "PNEU",
+            "PNEUS"
+          ],
+          "prestation": [
+            "PRESTATAIRE"
+          ],
+          "echafaudage": [
+            "ECHAFFAUDAGE",
+            "ECHAFFAUDEUR"
+          ],
+          "conseil": [
+            "CONSULTING"
+          ],
+          "URSSAF": [
+            "URSAF",
+            "URSAFF"
+          ],
+          "ingenierie": [
+            "INGENIEURIE",
+            "INGENERIE",
+            "INGIENERIE"
+          ],
+          "construction": [
+            "CONSTRUCTEUR"
+          ],
+          "distribution": [
+            "DISTRIBUTEUR"
+          ],
+          "fabrication": [
+            "FABRICANT"
+          ],
+          "abattage": [
+            "ABATOIR",
+            "ABBATOIR",
+            "ABATTOIRS",
+            "ABATOIRE",
+            "ABATTOIRE",
+            "ABBATTAGE"
+          ],
+          "ascenseur": [
+            "ASCENCEUR",
+            "ASCENCEURS"
+          ],
+          "briqueterie": [
+            "BRIQUETTERIE"
+          ],
+          "joaillerie": [
+            "JOAILLIER"
+          ],
+          "agroalimentaire": [
+            "AGGRO",
+            "AGGROALIMANTAIRE",
+            "AGRO",
+            "AGROALIMENTAIRE"
+          ],
+          "alimentaire": [
+            "ALIMANTAIRE"
+          ],
+          "recherche-développement": [
+            "R &amp D",
+            "R&ampD"
+          ]
+        }
+      },
+      {
+        "name": "id"
+      }
+    ],
+    "queryParser": {
+      "type": "tokenized",
+      "params": {
+        "language": "French",
+        "pattern": "[\\w.]+",
+        "stemmer": false
+      }
+    },
+    "version": "1",
+    "stopWords": [
+      "a",
+      "au",
+      "dans",
+      "de",
+      "des",
+      "du",
+      "en",
+      "er",
+      "la",
+      "le",
+      "ou",
+      "sur",
+      "d",
+      "l",
+      "aux",
+      "dans",
+      "un",
+      "une",
+      "pour",
+      "avec",
+      "chez",
+      "par",
+      "les"
+    ]
+  }
+]

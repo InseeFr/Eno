@@ -14,22 +14,16 @@
           "language": "French",
           "min": 2,
           "stemmer": true,
-          "synonyms": [
-            {
-              "source": "source1",
-              "target": [
-                "target1",
-                "target2"
-              ]
-            },
-            {
-              "source": "source2",
-              "target": [
-                "target1",
-                "target2"
-              ]
-            }
-          ]
+          "synonyms": {
+            "source1": [
+              "target1",
+              "target2"
+            ],
+            "source2": [
+              "target1",
+              "target2"
+            ]
+          }
         },
         {
           "name": "id",
@@ -75,7 +69,7 @@
       "url": "plop",
       "max": 2,
       "order": {
-        "type": "type",
+        "type": "ascending",
         "field": "field"
       }
     },
@@ -87,7 +81,9 @@
       "fields": [
         {
           "name": "label",
-          "rules": ["soft"],
+          "rules": [
+            "soft"
+          ],
           "min": 2
         },
         {
