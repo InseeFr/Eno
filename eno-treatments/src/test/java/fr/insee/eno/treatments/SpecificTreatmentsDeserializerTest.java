@@ -47,7 +47,7 @@ class SpecificTreatmentsDeserializerTest {
         assertEquals(2, field.getSynonyms().size());
         assertEquals(1, field.getRules().size());
         assertEquals("field", suggester.getOrder().getField());
-        assertEquals("type", suggester.getOrder().getType());
+        assertEquals("ascending", suggester.getOrder().getType());
         assertEquals("tokenized", suggester.getQueryParser().getType());
 
         EnoSuggesterQueryParserParams params = suggester.getQueryParser().getParams();
