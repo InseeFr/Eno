@@ -3,12 +3,14 @@ package fr.insee.eno.treatments.dto;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.insee.lunatic.model.flat.FieldSynonym;
 import fr.insee.lunatic.model.flat.SuggesterField;
 import lombok.*;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Data
 public class EnoSuggesterField {
@@ -19,7 +21,7 @@ public class EnoSuggesterField {
     private String language;
     private BigInteger min;
     private Boolean stemmer;
-    private List<EnoFieldSynonym> synonyms;
+    private Map<String, List<String>> synonyms;
 
     @JsonCreator
     public EnoSuggesterField(@JsonProperty(value = "name", required = true) String name,
@@ -27,7 +29,7 @@ public class EnoSuggesterField {
                              @JsonProperty("language") String language,
                              @JsonProperty("min") BigInteger min,
                              @JsonProperty("stemmer") Boolean stemmer,
-                             @JsonProperty("synonyms") List<EnoFieldSynonym> synonyms) {
+                             @JsonProperty("synonyms") Map<String, List<String>> synonyms) {
         this.name = name;
         this.rules = rules;
         this.language = language;
@@ -57,7 +59,12 @@ public class EnoSuggesterField {
         }
 
         if(suggesterField.getSynonyms() != null) {
-            lunaticField.getSynonyms().addAll(EnoFieldSynonym.toLunaticModelList(suggesterField.getSynonyms()));
+            suggesterField.getSynonyms().forEach((stringKey, stringsValue) -> {
+                FieldSynonym fieldSynonym = new FieldSynonym();
+                fieldSynonym.setSource(stringKey);
+                fieldSynonym.setTarget(stringsValue);
+                lunaticField.getSynonyms().add(fieldSynonym);
+            });
         }
 
         return lunaticField;
