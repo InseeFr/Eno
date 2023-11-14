@@ -9,6 +9,7 @@ import org.mockito.Mock;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class EnoSuggesterFieldTest {
 
     @Mock
-    private List<EnoFieldSynonym> synonyms;
+    private Map<String, List<String>> synonyms;
 
     @Test
     void whenConvertingToLunaticCheckMappingIsCorrect() {
