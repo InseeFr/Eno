@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://insee.fr/suggesters.schema.json",
-  "title": "Lunatic suggesters schema",
-  "description": "Array of Lunatic suggester components.",
+  "title": "Lunatic suggesters' options schema",
+  "description": "Array of Lunatic suggester options.",
   "type": "array",
   "items": {
     "$ref": "#/$defs/suggester"
@@ -11,23 +11,10 @@
   "$defs": {
 
     "suggester": {
-      "description": "Lunatic suggester component.",
       "type": "object",
       "properties": {
-        "responseNames": {
-          "description": "???",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1
-        },
         "name": {
-          "description": "??? Nom métier du composant suggester.",
           "type": "string"
-        },
-        "queryParser": {
-          "$ref": "#/$defs/query_parser"
         },
         "fields": {
           "type": "array",
@@ -35,77 +22,64 @@
             "$ref": "#/$defs/suggester_field"
           }
         },
+        "queryParser": {
+          "$ref": "#/$defs/query_parser"
+        },
         "meloto": {
-          "description": "(Bien avec un 'o' et pas 'melauto'...) Valeur true pour recherche de mots proches de la saisie (échos)",
           "type": "boolean"
         },
         "stopWords": {
-          "description": "Liste de mots ignorés dans la recherche",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "version": {
-          "description": "??? Version du composant suggester.",
           "type": "string"
         },
         "url": {
-          "description": "???",
           "type": "string"
         },
         "max": {
-          "description": "???",
           "type": "number"
         },
         "order": {
           "$ref": "#/$defs/suggester_order"
         }
       },
-      "required": ["responseNames", "name", "fields", "queryParser", "version"]
+      "required": ["name", "fields", "queryParser", "version"]
     },
 
     "suggester_field": {
-      "description": "??? Propriétés sur laquelle la recherche s'effectue (exemples : label, id).",
       "type": "object",
       "properties": {
         "name": {
-          "description": "???",
           "type": "string"
         },
         "rules": {
-          "description": "Définit le comportement de la recherche. Si string, seule la valeur 'soft' est valide. La valeur 'soft' conduit à une transformation minime du champs (La belle nuit de Noël -> la-belle-nuit-de-noel). Règle nécessaire pour le mode de recherche à préfixe. Si tableau, ???",
           "type": ["string", "array"],
           "pattern": "^soft$"
         },
         "min": {
-          "description": "Taille minimale des tokens à conserver.",
           "type": "number"
         },
         "language": {
-          "description": "Langue de référence pour la lemmatisation.",
-          "enum": ["French"]
+          "enum": ["French", "English"]
         },
         "stemmer": {
-          "description": "Active ou pas la lemmatisation.",
           "type": "boolean"
         },
         "synonyms": {
-          "type" : "array",
-          "items" : {
-            "$ref": "#/$defs/field_synonym"
-          }
+          "$ref": "#/$defs/field_synonym"
         }
       },
-      "required": ["name", "rules"]
+      "required": ["name"]
     },
 
     "query_parser": {
-      "description": "???",
       "type": "object",
       "properties": {
         "type": {
-          "description": "??? 'tokenized' permet de décomposer la recherche utilisateur en tokens.",
           "enum": ["soft", "tokenized"]
         },
         "params": {
@@ -116,15 +90,12 @@
     },
 
     "suggester_order": {
-      "description": "???",
       "type": "object",
       "properties": {
         "type": {
-          "description": "???",
-          "type": "string"
+          "enum": ["ascending", "desceding"]
         },
         "field": {
-          "description": "???",
           "type": "string"
         }
       },
@@ -132,41 +103,33 @@
     },
 
     "query_parser_params": {
-      "description": "??? Paramètres du query parser.",
       "type": "object",
       "properties": {
+        "stemmer": {
+          "type": "boolean"
+        },
         "language": {
-          "description": "???",
-          "enum": ["French"]
+          "enum": ["French", "English"]
         },
         "min": {
-          "description": "???",
           "type": "number"
         },
         "pattern": {
-          "description": "Règle d'extraction des tokens.",
           "type": "string"
         }
       }
     },
 
     "field_synonym": {
-      "description": "Entrée pour définir des synonymes pour un mot.",
       "type": "object",
-      "properties": {
-        "source": {
-          "description": "Mot acceptant des synonymes (bien respecter la casse du mot qui est à associer, il doit être dans la nomenclature avec cette syntaxe).",
-          "type": "string"
-        },
-        "target": {
-          "description": "Liste de mots acceptés comme synonymes du mot source.",
+      "patternProperties": {
+        ".*" : {
           "type": "array",
           "items": {
             "type": "string"
           },
           "minItems": 1
-        },
-        "required": ["source", "target"]
+        }
       }
     }
 
