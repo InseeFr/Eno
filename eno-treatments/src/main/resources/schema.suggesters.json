@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://insee.fr/suggesters.schema.json",
-  "title": "Lunatic suggesters' options schema",
-  "description": "Array of Lunatic suggester options.",
+  "$id": "https://insee.fr/eno/suggesters.schema.json",
+  "title": "Lunatic suggesters' schema for Eno specific treatment",
+  "description": "Fits Lunatic suggesters property's schema, except a 'responseName' attribute is added here.",
   "type": "array",
   "items": {
     "$ref": "#/$defs/suggester"
@@ -13,6 +13,14 @@
     "suggester": {
       "type": "object",
       "properties": {
+        "responseNames": {
+          "description": "Property that is not in Lunatic schema, used to associate suggester with components.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
         "name": {
           "type": "string"
         },
