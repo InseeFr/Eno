@@ -3,7 +3,9 @@ package fr.insee.eno.treatments.dto;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.insee.lunatic.model.flat.FieldRules;
 import fr.insee.lunatic.model.flat.FieldSynonym;
+import fr.insee.lunatic.model.flat.FieldSynonyms;
 import fr.insee.lunatic.model.flat.SuggesterField;
 import lombok.*;
 
@@ -55,10 +57,16 @@ public class EnoSuggesterField {
         lunaticField.setStemmer(suggesterField.getStemmer());
 
         if(suggesterField.getRules() != null) {
-            lunaticField.getRules().addAll(suggesterField.getRules());
+            lunaticField.setRules(new FieldRules());
+            if (suggesterField.getRules().size() == 1 && FieldRules.SOFT_RULE.equals(suggesterField.getRules().get(0))) {
+                lunaticField.getRules().setRule(FieldRules.SOFT_RULE);
+            } else {
+                suggesterField.getRules().forEach(pattern -> lunaticField.getRules().addPattern(pattern));
+            }
         }
 
         if(suggesterField.getSynonyms() != null) {
+            lunaticField.setSynonyms(new FieldSynonyms());
             suggesterField.getSynonyms().forEach((stringKey, stringsValue) -> {
                 FieldSynonym fieldSynonym = new FieldSynonym();
                 fieldSynonym.setSource(stringKey);
