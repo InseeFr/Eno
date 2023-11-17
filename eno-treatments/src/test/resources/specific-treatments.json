@@ -88,9 +88,7 @@
         },
         {
           "name": "id",
-          "rules": [
-            "soft"
-          ]
+          "rules": "soft"
         }
       ],
       "queryParser": {
