@@ -5,7 +5,8 @@
     xmlns:d="ddi:datacollection:3_3" xmlns:s="ddi:studyunit:3_3" xmlns:r="ddi:reusable:3_3"
     xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:a="ddi:archive:3_3"
     xmlns:l="ddi:logicalproduct:3_3" xmlns:enoddi33="http://xml.insee.fr/apps/eno/out/ddi33"
-    exclude-result-prefixes="xd eno enoddi33" version="2.0">
+    xmlns:lunatic="http://xml.insee.fr/schema/applis/lunatic-h"
+    exclude-result-prefixes="xd eno enoddi33 lunatic" version="2.0">
 
     <xd:doc>
         <xd:desc>
@@ -752,8 +753,8 @@
                     <r:AttributeValue>
                         <xsl:text disable-output-escaping="yes">&lt;![CDATA[</xsl:text>
                         <xsl:for-each select="$suggester-parameters">
-                            <xsl:call-template name="copy-without-namespace">
-                                <xsl:with-param name="content-with-namespace" select="."/>
+                            <xsl:call-template name="copy-with-lunatic-namespace">
+                                <xsl:with-param name="content-with-previous-namespace" select="."/>
                             </xsl:call-template>                            
                         </xsl:for-each>
                         <xsl:text disable-output-escaping="yes">]]&gt;</xsl:text>
@@ -2194,22 +2195,22 @@
             </r:QuestionReference>
     </xsl:template>
 
-    <xsl:template name="copy-without-namespace">
-        <xsl:param name="content-with-namespace"/>
+    <xsl:template name="copy-with-lunatic-namespace">
+        <xsl:param name="content-with-previous-namespace"/>
         <xsl:choose>
-            <xsl:when test="$content-with-namespace/*">
-                <xsl:element name="{local-name($content-with-namespace)}">
-                    <xsl:copy-of select="$content-with-namespace/@*"/>
-                    <xsl:for-each select="$content-with-namespace/*">
-                        <xsl:call-template name="copy-without-namespace">
-                            <xsl:with-param name="content-with-namespace" select="."/>
+            <xsl:when test="$content-with-previous-namespace/*">
+                <xsl:element name="{local-name($content-with-previous-namespace)}" namespace="http://xml.insee.fr/schema/applis/lunatic-h">
+                    <xsl:copy-of select="$content-with-previous-namespace/@*"/>
+                    <xsl:for-each select="$content-with-previous-namespace/*">
+                        <xsl:call-template name="copy-with-lunatic-namespace">
+                            <xsl:with-param name="content-with-previous-namespace" select="."/>
                         </xsl:call-template>
                     </xsl:for-each>
                 </xsl:element>                
             </xsl:when>
             <xsl:otherwise>
-                <xsl:element name="{local-name($content-with-namespace)}">
-                    <xsl:value-of select="$content-with-namespace"/>
+                <xsl:element name="{local-name($content-with-previous-namespace)}" namespace="http://xml.insee.fr/schema/applis/lunatic-h">
+                    <xsl:value-of select="$content-with-previous-namespace"/>
                 </xsl:element>
             </xsl:otherwise>
         </xsl:choose>
