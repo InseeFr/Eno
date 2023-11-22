@@ -10,18 +10,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-public class LunaticSuggesterProcessingTest {
+class LunaticSuggesterProcessingTest {
 
     @Test
     void suggesterTest() throws DDIParsingException {
         //
         Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
-                this.getClass().getClassLoader().getResourceAsStream("suggester/ddi-lgl1kmol.xml"),
+                this.getClass().getClassLoader().getResourceAsStream("suggester-treatment/ddi-lgl1kmol.xml"),
                 EnoParameters.of(EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
         //
         SpecificTreatmentsDeserializer treatmentsDeserializer = new SpecificTreatmentsDeserializer();
         SpecificTreatments treatmentsInput = treatmentsDeserializer.deserialize(
-                this.getClass().getClassLoader().getResourceAsStream("suggester/suggester.json"));
+                this.getClass().getClassLoader().getResourceAsStream("suggester-treatment/suggesters.json"));
         LunaticSuggesterProcessing suggesterProcessing = new LunaticSuggesterProcessing(treatmentsInput.suggesters());
         suggesterProcessing.apply(lunaticQuestionnaire);
         //

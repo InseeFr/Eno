@@ -1,0 +1,30 @@
+[
+  {
+    "name": "naf-rev2",
+    "fields": [
+      {
+        "name": "label",
+        "rules": [
+          "[\\w]+"
+        ],
+        "language": "French",
+        "min": 2
+      },
+      {
+        "name": "id"
+      },
+      {
+        "name": "demo",
+        "rules": "soft"
+      }
+    ],
+    "queryParser": {
+      "type": "tokenized",
+      "params": {
+        "language": "French",
+        "pattern": "[\\w.]+"
+      }
+    },
+    "version": "1"
+  }
+]

@@ -18,7 +18,7 @@ class EnoParameterTest {
         assertFalse(lunaticParameters.isFilterDescription());
         assertTrue(lunaticParameters.isFilterResult());
         assertFalse(lunaticParameters.isMissingVariables());
-        assertEquals(LunaticParameters.LunaticPaginationMode.QUESTION, lunaticParameters.getLunaticPaginationMode());
+        assertEquals(EnoParameters.LunaticPaginationMode.QUESTION, lunaticParameters.getLunaticPaginationMode());
     }
 
     @Test

@@ -32,7 +32,7 @@ class LunaticResponseTimeQuestionPaginationTest {
         LunaticMapper lunaticMapper = new LunaticMapper();
         lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
         //
-        new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION).apply(lunaticQuestionnaire);
+        new LunaticAddPageNumbers(EnoParameters.LunaticPaginationMode.QUESTION).apply(lunaticQuestionnaire);
 
         // When
         new LunaticResponseTimeQuestionPagination().apply(lunaticQuestionnaire);
