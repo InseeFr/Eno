@@ -43,8 +43,8 @@ public class LunaticParameters {
         this.setMissingVariables(isInterview);
         this.setLunaticPaginationMode(
                 EnoParameters.Context.BUSINESS.equals(context) ?
-                        EnoParameters.LunaticPaginationMode.SEQUENCE :
-                        EnoParameters.LunaticPaginationMode.QUESTION);
+                        LunaticPaginationMode.SEQUENCE :
+                        LunaticPaginationMode.QUESTION);
     }
 
 }
