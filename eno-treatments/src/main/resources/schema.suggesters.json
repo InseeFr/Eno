@@ -1,29 +1,20 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://insee.fr/suggesters.schema.json",
-  "title": "Specific treatments schema",
-  "description": "Specific treatments schema",
-  "type": "object",
-  "properties": {
-    "suggesters": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/suggester"
-      }
-    },
-    "regroupements": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/regroupement"
-      }
-    }
+  "$id": "https://insee.fr/eno/suggesters.schema.json",
+  "title": "Lunatic suggesters' schema for Eno specific treatment",
+  "description": "Fits Lunatic suggesters property's schema, except a 'responseName' attribute is added here.",
+  "type": "array",
+  "items": {
+    "$ref": "#/$defs/suggester"
   },
 
   "$defs": {
+
     "suggester": {
       "type": "object",
       "properties": {
         "responseNames": {
+          "description": "Property that is not in Lunatic schema, used to associate suggester with components.",
           "type": "array",
           "items": {
             "type": "string"
@@ -33,14 +24,17 @@
         "name": {
           "type": "string"
         },
-        "queryParser": {
-          "$ref": "#/$defs/query_parser"
-        },
         "fields": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/suggester_field"
           }
+        },
+        "queryParser": {
+          "$ref": "#/$defs/query_parser"
+        },
+        "meloto": {
+          "type": "boolean"
         },
         "stopWords": {
           "type": "array",
@@ -61,7 +55,7 @@
           "$ref": "#/$defs/suggester_order"
         }
       },
-      "required": ["responseNames", "name", "fields", "queryParser", "version"]
+      "required": ["name", "fields", "queryParser", "version"]
     },
 
     "suggester_field": {
@@ -71,32 +65,30 @@
           "type": "string"
         },
         "rules": {
-          "type": "array"
+          "type": ["string", "array"],
+          "pattern": "^soft$"
         },
         "min": {
           "type": "number"
         },
         "language": {
-          "type": "string"
+          "enum": ["French", "English"]
         },
         "stemmer": {
           "type": "boolean"
         },
         "synonyms": {
-          "type" : "array",
-          "items" : {
-            "$ref": "#/$defs/field_synonym"
-          }
+          "$ref": "#/$defs/field_synonym"
         }
       },
-      "required": ["name", "rules"]
+      "required": ["name"]
     },
 
     "query_parser": {
       "type": "object",
       "properties": {
         "type": {
-          "type": "string"
+          "enum": ["soft", "tokenized"]
         },
         "params": {
           "$ref": "#/$defs/query_parser_params"
@@ -109,7 +101,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": "string"
+          "enum": ["ascending", "desceding"]
         },
         "field": {
           "type": "string"
@@ -121,8 +113,11 @@
     "query_parser_params": {
       "type": "object",
       "properties": {
+        "stemmer": {
+          "type": "boolean"
+        },
         "language": {
-          "type": "string"
+          "enum": ["French", "English"]
         },
         "min": {
           "type": "number"
@@ -132,25 +127,19 @@
         }
       }
     },
+
     "field_synonym": {
       "type": "object",
-      "properties": {
-        "source": {
-          "type": "string"
-        },
-        "target": {
+      "patternProperties": {
+        ".*" : {
           "type": "array",
           "items": {
             "type": "string"
           },
           "minItems": 1
-        },
-        "required": ["source", "target"]
+        }
       }
-    },
-    "regroupement": {
-      "type": "array",
-      "minItems": 2
     }
+
   }
 }
