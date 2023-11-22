@@ -4,10 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.insee.lunatic.model.flat.FieldRules;
-import fr.insee.lunatic.model.flat.FieldSynonym;
-import fr.insee.lunatic.model.flat.FieldSynonyms;
 import fr.insee.lunatic.model.flat.SuggesterField;
-import lombok.*;
+import lombok.Data;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -58,7 +56,7 @@ public class EnoSuggesterField {
 
         if(suggesterField.getRules() != null) {
             lunaticField.setRules(new FieldRules());
-            if (suggesterField.getRules().size() == 1 && FieldRules.SOFT_RULE.equals(suggesterField.getRules().get(0))) {
+            if (isSoftRule(suggesterField.getRules())) {
                 lunaticField.getRules().setRule(FieldRules.SOFT_RULE);
             } else {
                 suggesterField.getRules().forEach(pattern -> lunaticField.getRules().addPattern(pattern));
@@ -66,16 +64,15 @@ public class EnoSuggesterField {
         }
 
         if(suggesterField.getSynonyms() != null) {
-            lunaticField.setSynonyms(new FieldSynonyms());
-            suggesterField.getSynonyms().forEach((stringKey, stringsValue) -> {
-                FieldSynonym fieldSynonym = new FieldSynonym();
-                fieldSynonym.setSource(stringKey);
-                fieldSynonym.setTarget(stringsValue);
-                lunaticField.getSynonyms().add(fieldSynonym);
-            });
+            suggesterField.getSynonyms().forEach((stringKey, stringsValue) ->
+                lunaticField.getSynonyms().put(stringKey, stringsValue));
         }
 
         return lunaticField;
+    }
+
+    private static boolean isSoftRule(List<String> enoFieldRules) {
+        return enoFieldRules.size() == 1 && FieldRules.SOFT_RULE.equals(enoFieldRules.get(0));
     }
 
     /**
