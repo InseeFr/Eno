@@ -8,8 +8,12 @@
       "fields": [
         {
           "name": "label",
-          "rules": ["soft"],
+          "rules": "soft",
           "min": 2
+        },
+        {
+          "name": "id",
+          "rules": "soft"
         }
       ],
       "queryParser": {
@@ -31,6 +35,10 @@
           "language": "French",
           "min": 2,
           "stemmer": false
+        },
+        {
+          "name": "id",
+          "rules": "soft"
         }
       ],
       "queryParser": {

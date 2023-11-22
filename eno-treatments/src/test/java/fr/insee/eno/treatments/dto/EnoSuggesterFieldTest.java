@@ -9,6 +9,7 @@ import org.mockito.Mock;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class EnoSuggesterFieldTest {
 
     @Mock
-    private List<EnoFieldSynonym> synonyms;
+    private Map<String, List<String>> synonyms;
 
     @Test
     void whenConvertingToLunaticCheckMappingIsCorrect() {
@@ -24,8 +25,8 @@ class EnoSuggesterFieldTest {
         EnoSuggesterField enoField = new EnoSuggesterField("name", rules, "French", BigInteger.ONE, true, synonyms);
         SuggesterField field = EnoSuggesterField.toLunaticModel(enoField);
         assertEquals(field.getName(), enoField.getName());
-        assertTrue(field.getRules().contains("rule1"));
-        assertTrue(field.getRules().contains("rule2"));
+        assertTrue(field.getRules().getPatterns().contains("rule1"));
+        assertTrue(field.getRules().getPatterns().contains("rule2"));
         assertEquals(field.getLanguage(), enoField.getLanguage());
         assertEquals(field.getMin(), enoField.getMin());
         assertEquals(field.getStemmer(), enoField.getStemmer());
@@ -37,7 +38,7 @@ class EnoSuggesterFieldTest {
         EnoSuggesterField enoField = new EnoSuggesterField("name", rules, "French", BigInteger.ONE, true, synonyms);
         SuggesterField field = EnoSuggesterField.toLunaticModel(enoField);
         for(String rule : rules) {
-            assertTrue(field.getRules().contains(rule));
+            assertTrue(field.getRules().getPatterns().contains(rule));
         }
     }
 
@@ -45,7 +46,6 @@ class EnoSuggesterFieldTest {
         return Stream.of(
                 Arguments.of(List.of("rule1", "rule2")),
                 Arguments.of(List.of("rule1")),
-                Arguments.of(List.of("soft", "rule2")),
                 Arguments.of(List.of("rule1", "rule2", "rule3"))
         );
     }
