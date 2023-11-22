@@ -29,20 +29,17 @@ public class SpecificTreatmentsDeserializer {
     public SpecificTreatments deserialize(InputStream treatmentsStream) {
         ObjectMapper mapper = new ObjectMapper();
         JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
-        JsonSchema jsonSchema = factory.getSchema(
-                classLoader.getResourceAsStream("schema.treatments.json"));
+        JsonSchema suggesterSchema = factory.getSchema(
+                classLoader.getResourceAsStream("schema.suggesters.json"));
+        JsonSchema regroupingSchema = factory.getSchema(
+                classLoader.getResourceAsStream("schema.regrouping.json"));
 
         try {
             JsonNode jsonTreatments = mapper.readTree(treatmentsStream);
-            Set<ValidationMessage> errors = jsonSchema.validate(jsonTreatments);
-
-            if(!errors.isEmpty()) {
-                StringBuilder messageBuilder = new StringBuilder();
-                for(ValidationMessage errorMessage : errors) {
-                    messageBuilder.append(errorMessage.getMessage());
-                    messageBuilder.append("\n");
-                }
-                throw new SpecificTreatmentsValidationException(messageBuilder.toString());
+            if (jsonTreatments.has("suggesters"))
+                validateTreatmentInput(suggesterSchema, jsonTreatments.get("suggesters"));
+            if (jsonTreatments.has("regroupements")) {
+                validateTreatmentInput(regroupingSchema, jsonTreatments.get("regroupements"));
             }
 
             ObjectReader reader = mapper.readerFor(SpecificTreatments.class);
@@ -51,4 +48,18 @@ public class SpecificTreatmentsDeserializer {
             throw new SpecificTreatmentsDeserializationException(ex.getMessage());
         }
     }
+
+    private static void validateTreatmentInput(JsonSchema suggesterSchema, JsonNode treatmentInput) {
+        Set<ValidationMessage> errors = suggesterSchema.validate(treatmentInput);
+
+        if(!errors.isEmpty()) {
+            StringBuilder messageBuilder = new StringBuilder();
+            for(ValidationMessage errorMessage : errors) {
+                messageBuilder.append(errorMessage.getMessage());
+                messageBuilder.append("\n");
+            }
+            throw new SpecificTreatmentsValidationException(messageBuilder.toString());
+        }
+    }
+
 }

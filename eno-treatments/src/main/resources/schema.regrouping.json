@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://insee.fr/eno/regrouping.schema.json",
+  "title": "Regrouping specific treatments schema",
+  "description": "List of variable names to be grouped in the same page in the Lunatic questionnaire.",
+  "type": "array",
+  "items": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "minItems": 2,
+    "uniqueItems": true
+  }
+}

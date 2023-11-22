@@ -1,0 +1,19 @@
+[
+  {
+    "name": "L_DIPLOMES",
+    "fields": [
+      {
+        "name": "label",
+        "rules": "soft"
+      },
+      {
+        "name": "id",
+        "rules": "soft"
+      }
+    ],
+    "queryParser": {
+      "type": "soft"
+    },
+    "version": "1"
+  }
+]
