@@ -115,7 +115,7 @@ import java.util.Objects;
                         .count();
 
                 loop.setMaxPage(Long.toString(maxPage));
-            }
+            } // Note: shouldn't be max page equal to "1" if non paginated loop?
         }
 
         /**
