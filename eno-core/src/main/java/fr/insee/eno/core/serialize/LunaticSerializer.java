@@ -52,7 +52,7 @@ public class LunaticSerializer {
      * @return json string of the questionnaire with resize included
      * @throws LunaticSerializationException serialization exception
      */
-    public static String extendedSerialization(String lunaticJson, Questionnaire lunaticQuestionnaire)
+    private static String extendedSerialization(String lunaticJson, Questionnaire lunaticQuestionnaire)
             throws LunaticSerializationException {
         ObjectMapper mapper = new ObjectMapper();
         try {

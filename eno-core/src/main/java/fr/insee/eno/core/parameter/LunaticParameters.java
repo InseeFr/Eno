@@ -7,12 +7,14 @@ import lombok.Setter;
 @Setter
 public class LunaticParameters {
 
+    public enum LunaticPaginationMode {NONE, SEQUENCE, QUESTION}
+
     private boolean controls;
     private boolean toolTip; // Not implemented yet in Lunatic
     private boolean missingVariables;
     private boolean filterResult;
     private boolean filterDescription;
-    private EnoParameters.LunaticPaginationMode lunaticPaginationMode;
+    private LunaticPaginationMode lunaticPaginationMode;
 
     private LunaticParameters() {}
 
@@ -41,8 +43,8 @@ public class LunaticParameters {
         this.setMissingVariables(isInterview);
         this.setLunaticPaginationMode(
                 EnoParameters.Context.BUSINESS.equals(context) ?
-                        EnoParameters.LunaticPaginationMode.SEQUENCE :
-                        EnoParameters.LunaticPaginationMode.QUESTION);
+                        LunaticPaginationMode.SEQUENCE :
+                        LunaticPaginationMode.QUESTION);
     }
 
 }

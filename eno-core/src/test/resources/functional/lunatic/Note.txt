@@ -1,2 +1,2 @@
-Questionnaires generated using the /questionnaire/HOUSEHOLD/lunatic-json/CAWI endpoint from Eno "xml" web-service.
+Questionnaires generated using Eno "xml" service.
 (Identation added for readability.)

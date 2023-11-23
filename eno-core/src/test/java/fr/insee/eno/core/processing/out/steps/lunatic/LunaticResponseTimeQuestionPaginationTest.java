@@ -3,6 +3,7 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.LunaticParameters;
 import fr.insee.eno.core.processing.common.steps.EnoAddPrefixInQuestionLabels;
 import fr.insee.eno.core.processing.common.steps.EnoAddResponseTimeSection;
 import fr.insee.eno.core.processing.out.steps.lunatic.pagination.LunaticAddPageNumbers;
@@ -31,7 +32,7 @@ class LunaticResponseTimeQuestionPaginationTest {
         LunaticMapper lunaticMapper = new LunaticMapper();
         lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
         //
-        new LunaticAddPageNumbers(EnoParameters.LunaticPaginationMode.QUESTION).apply(lunaticQuestionnaire);
+        new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION).apply(lunaticQuestionnaire);
 
         // When
         new LunaticResponseTimeQuestionPagination().apply(lunaticQuestionnaire);

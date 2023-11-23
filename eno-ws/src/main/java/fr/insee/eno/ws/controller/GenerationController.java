@@ -173,13 +173,13 @@ public class GenerationController {
 		enoParameters.setSequenceNumbering(seqNum);
 		enoParameters.setArrowCharInQuestions(preQuestSymbol);
 		switch (pagination) {
-			case NONE -> lunaticParameters.setLunaticPaginationMode(EnoParameters.LunaticPaginationMode.NONE);
-			case SEQUENCE -> lunaticParameters.setLunaticPaginationMode(EnoParameters.LunaticPaginationMode.SEQUENCE);
+			case NONE -> lunaticParameters.setLunaticPaginationMode(LunaticParameters.LunaticPaginationMode.NONE);
+			case SEQUENCE -> lunaticParameters.setLunaticPaginationMode(LunaticParameters.LunaticPaginationMode.SEQUENCE);
 			case SUBSEQUENCE -> {
-				lunaticParameters.setLunaticPaginationMode(EnoParameters.LunaticPaginationMode.NONE);
+				lunaticParameters.setLunaticPaginationMode(LunaticParameters.LunaticPaginationMode.NONE);
 				log.info("Lunatic 'SUBSEQUENCE' pagination is not supported. Pagination has been set to 'NONE'.");
 			}
-			case QUESTION -> lunaticParameters.setLunaticPaginationMode(EnoParameters.LunaticPaginationMode.QUESTION);
+			case QUESTION -> lunaticParameters.setLunaticPaginationMode(LunaticParameters.LunaticPaginationMode.QUESTION);
 		}
 		//
 		return controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessings);
