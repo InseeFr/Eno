@@ -1,16 +1,16 @@
 name: Eno V3 test
 
-on:
-  pull_request:
-    branches:
-      - 'v3-main'
-      - 'v3-next'
-    types: [opened, synchronize, reopened, ready_for_review]
-    paths-ignore: ['docs/**', 'logo/**', 'Dockerfile', 'README**.md']
+on: workflow_dispatch # replaced by sonar workflow
+#  pull_request:
+#    branches:
+#      - 'v3-main'
+#      - 'v3-next'
+#    types: [opened, synchronize, reopened, ready_for_review]
+#    paths-ignore: ['docs/**', 'logo/**', 'Dockerfile', 'README**.md']
 
 jobs:
   test:
-    if: ${{ (github.event.pull_request.draft == false) && !contains(github.event.pull_request.labels.*.name, 'deploy-snapshot') }}
+    # if: ${{ (github.event.pull_request.draft == false) && !contains(github.event.pull_request.labels.*.name, 'deploy-snapshot') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

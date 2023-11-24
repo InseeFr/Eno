@@ -1,14 +1,16 @@
-name: Sonar Analysis
+name: Test and Sonar Analysis
 
 on:
-  push:
-    branches:
-      - main
-      - v3-next
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches:
+      - 'v3-main'
+      - 'v3-next'
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths-ignore: ['docs/**', 'logo/**', 'Dockerfile', 'README**.md']
+
 jobs:
   build:
+    if: ${{ (github.event.pull_request.draft == false) && !contains(github.event.pull_request.labels.*.name, 'deploy-snapshot') }}
     name: Build and analyze
     runs-on: ubuntu-latest
     steps:
