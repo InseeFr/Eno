@@ -3,6 +3,7 @@ plugins {
     id 'io.spring.dependency-management'
     id 'java-library'
     id 'maven-publish'
+    id 'jacoco'
 }
 
 // https://stackoverflow.com/a/61671513/13425151
