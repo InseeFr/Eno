@@ -1,0 +1,9 @@
+apply plugin: "org.sonarqube"
+
+sonar {
+    properties {
+        property 'sonar.projectKey', 'InseeFr_Eno'
+        property 'sonar.host.url', 'https://sonarcloud.io'
+        property 'sonar.organization', 'inseefr'
+    }
+}
