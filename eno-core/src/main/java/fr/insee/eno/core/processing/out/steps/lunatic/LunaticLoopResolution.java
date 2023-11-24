@@ -96,8 +96,11 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
     private void insertComponentsInLoop(
             Questionnaire lunaticQuestionnaire, Loop lunaticLoop, String sequenceReference) {
          AbstractSequence enoSequence = (AbstractSequence) enoIndex.get(sequenceReference);
-         enoSequence.getSequenceStructure().forEach(structureItemReference ->
-                 relocateComponent(lunaticQuestionnaire, lunaticLoop, structureItemReference.getId()));
+         enoSequence.getSequenceStructure().forEach(structureItemReference -> {
+             relocateComponent(lunaticQuestionnaire, lunaticLoop, structureItemReference.getId());
+             if (StructureItemType.SUBSEQUENCE.equals(structureItemReference.getType()))
+                 insertComponentsInLoop(lunaticQuestionnaire, lunaticLoop, structureItemReference.getId());
+         });
     }
 
     /** Relocate the component with given reference (id) from the questionnaire's components

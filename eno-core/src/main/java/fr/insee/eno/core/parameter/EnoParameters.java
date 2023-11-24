@@ -22,7 +22,6 @@ public class EnoParameters {
     public enum ModeParameter {CAPI, CATI, CAWI, PAPI, PROCESS}
     public enum Language {FR, EN, IT, ES, DE}
     public enum QuestionNumberingMode {NONE, SEQUENCE, ALL}
-    public enum LunaticPaginationMode {NONE, SEQUENCE, QUESTION}
 
     public static final String DEFAULT_CAMPAIGN_NAME = "test-2020-x00";
 

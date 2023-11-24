@@ -1,6 +1,6 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 
-import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.LunaticParameters;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import lombok.extern.slf4j.Slf4j;
@@ -8,9 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LunaticAddPageNumbers implements ProcessingStep<Questionnaire> {
 
-    private final EnoParameters.LunaticPaginationMode mode;
+    private final LunaticParameters.LunaticPaginationMode mode;
 
-    public LunaticAddPageNumbers(EnoParameters.LunaticPaginationMode mode) {
+    public LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode mode) {
         this.mode = mode;
     }
 
@@ -37,7 +37,7 @@ public class LunaticAddPageNumbers implements ProcessingStep<Questionnaire> {
     }
 
     // TODO: enum in Lunatic-Model for this...
-    public static String lunaticNumberingMode(EnoParameters.LunaticPaginationMode paginationMode) {
+    public static String lunaticNumberingMode(LunaticParameters.LunaticPaginationMode paginationMode) {
         return switch (paginationMode) {
             case NONE -> "none";
             case SEQUENCE -> "sequence";

@@ -101,10 +101,7 @@ class LunaticAddPageNumbersQuestionModeTest {
 
         questionnaire.getComponents().addAll(components);
 
-        //JSONSerializer jsonSerializer = new JSONSerializer();
-        //System.out.println(jsonSerializer.serialize2(questionnaire));
         processing.apply(questionnaire);
-        //System.out.println(jsonSerializer.serialize2(questionnaire));
     }
 
     @Test
@@ -139,7 +136,7 @@ class LunaticAddPageNumbersQuestionModeTest {
     }
 
     @Test
-    void shouldComponentsInPaginatedLoopToHaveDifferentsPage() {
+    void shouldComponentsInPaginatedLoopToHaveDifferentPage() {
         // l7 is paginated loop so we'll increment subcomponents
         assertTrue(l7.getPaginatedLoop());
         assertEquals("7", l7.getPage());
