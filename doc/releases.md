@@ -1,5 +1,8 @@
 # Eno Releases note
 
+## 2.4.10 - 04/10/2023
+- **[build]** dependencies update
+
 ## 2.4.9 - _September 2023_
 - **[build]** dependencies update
 
