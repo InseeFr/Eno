@@ -1,0 +1,424 @@
+{
+  "owner": "ENO-INTEGRATION-TESTS",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "lpe7pagw",
+        "lpe7p7ji",
+        "lpgv5kfr",
+        "lpgvd4xx",
+        "lpgvggno",
+        "idendquest"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "lpe7ztyo",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "Eno - Tooltip"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "ENOTOOLTIP",
+  "Variables": {
+    "Variable": [
+      {
+        "Label": "Q1 label",
+        "id": "lpe7gfh7",
+        "type": "CollectedVariableType",
+        "Name": "Q1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "Q2 label",
+        "id": "lpgv1s4j",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lpgv54ab",
+        "Name": "Q2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "code1 - \"[Code 1](. \"Tooltip text\")\"",
+        "id": "lpgvc9js",
+        "type": "CollectedVariableType",
+        "Name": "Q31",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "code2 - \"[Code 2](. \"Tooltip text\")\"",
+        "id": "lpgv76zh",
+        "type": "CollectedVariableType",
+        "Name": "Q32",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "Label": "\"[Code 1](. \"Tooltip text\")\"-\"Table [information](. \"Tooltip text\")\"",
+        "id": "lpgvdh2c",
+        "type": "CollectedVariableType",
+        "Name": "Q411",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "\"[Code 2](. \"Tooltip text\")\"-\"Table [information](. \"Tooltip text\")\"",
+        "id": "lpgvf3m7",
+        "type": "CollectedVariableType",
+        "Name": "Q421",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Mon Nov 27 2023 16:46:49 GMT+0100 (heure normale d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "TCM",
+      "uri": "http://ddi:fr.insee:DataCollection.TCM"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "lpe7odyn",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "Label": "CODE_LIST_TOOLTIPS",
+        "id": "lpgv54ab",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"[Code 1](. \"Tooltip text of code 1\")\"",
+            "Value": "code1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"[Code 2](. \"Tooltip text of code 2\")\"",
+            "Value": "code2"
+          }
+        ],
+        "Name": ""
+      }
+    ]
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence [label](. \"There is a tooltip on the label.\")\""
+      ],
+      "id": "lpe7pagw",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "HELP",
+          "Text": "\"Declaration with a tooltip [here](. \"Tooltip's content.\").\"",
+          "id": "lpgufl5l",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lpe7gfh7",
+              "id": "lpe80mfi",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [
+            {
+              "post_collect": false,
+              "Description": "Empty content",
+              "Expression": "nvl($Q1$, \"\") = \"\"",
+              "during_collect": false,
+              "criticity": "INFO",
+              "FailMessage": "\"Error message with a [tooltip](. \"Some text\")\"",
+              "id": "lpguvzic"
+            }
+          ],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Question label with a [tooltip](. \"The tooltip, also known as infotip or hint, is a common graphical user interface element in which, when hovering over a screen element or component, a text box displays information about that element.\").\""
+          ],
+          "id": "lpe7p7ji",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Before question [label](. \"Some text\").\"",
+              "id": "lpgv0v4d",
+              "position": "BEFORE_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI"
+              ]
+            },
+            {
+              "declarationType": "HELP",
+              "Text": "\"After question [label](. \"Some text\").\"",
+              "id": "lpgv278x",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI"
+              ]
+            }
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q1"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lpgv1s4j",
+              "id": "lph3lpo4",
+              "mandatory": false,
+              "CodeListReference": "lpgv54ab",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Unique choice question with tooltips\""
+          ],
+          "ClarificationQuestion": [],
+          "id": "lpgv5kfr",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SINGLE_CHOICE",
+          "Name": "Q2"
+        },
+        {
+          "FlowControl": [],
+          "Label": [
+            "\"Multiple choice question with tooltips\""
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "lph3hauk",
+                "MappingTarget": "1"
+              },
+              {
+                "MappingSource": "lph32imm",
+                "MappingTarget": "2"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "0",
+                "CodeListReference": "lpgv54ab"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "Q3",
+          "Response": [
+            {
+              "CollectedVariableReference": "lpgvc9js",
+              "id": "lph3hauk",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            },
+            {
+              "CollectedVariableReference": "lpgv76zh",
+              "id": "lph32imm",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "lpgvd4xx",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "questionType": "MULTIPLE_CHOICE"
+        },
+        {
+          "FlowControl": [],
+          "Label": [
+            "\"Table with tooltips\""
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "lph379ew",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "lph3ao05",
+                "MappingTarget": "2 1"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "0",
+                "CodeListReference": "lpgv54ab"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Table [information](. \"Tooltip text\")\"",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "Q4",
+          "Response": [
+            {
+              "CollectedVariableReference": "lpgvdh2c",
+              "id": "lph379ew",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            },
+            {
+              "CollectedVariableReference": "lpgvf3m7",
+              "id": "lph3ao05",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "lpgvggno",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "questionType": "TABLE"
+        }
+      ],
+      "Name": "S1"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

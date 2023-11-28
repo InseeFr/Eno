@@ -1,0 +1,369 @@
+{
+  "id": "lpe7odyn",
+  "modele": "ENOTOOLTIP",
+  "enoCoreVersion": "2.4.10",
+  "lunaticModelVersion": "2.3.4",
+  "generatingDate": "27-11-2023 17:04:57",
+  "missing": false,
+  "pagination": "question",
+  "maxPage": "5",
+  "label": {
+    "value": "Eno - Tooltip",
+    "type": "VTL|MD"
+  },
+  "components": [
+    {
+      "id": "lpe7pagw",
+      "componentType": "Sequence",
+      "page": "1",
+      "label": {
+        "value": "\"Sequence [label](. 'There is a tooltip on the label.')\"",
+        "type": "VTL|MD"
+      },
+      "declarations": [
+        {
+          "id": "lpe7pagw-lpgufl5l",
+          "declarationType": "HELP",
+          "position": "AFTER_QUESTION_TEXT",
+          "label": {
+            "value": "\"Declaration with a tooltip [here](. 'Tooltip’s content.').\"",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lpe7pagw",
+          "page": "1",
+          "label": {
+            "value": "\"Sequence [label](. 'There is a tooltip on the label.')\"",
+            "type": "VTL|MD"
+          }
+        }
+      }
+    },
+    {
+      "id": "lpe7p7ji",
+      "componentType": "Input",
+      "mandatory": false,
+      "page": "2",
+      "maxLength": 249,
+      "label": {
+        "value": "\"Question label with a [tooltip](. 'The tooltip, also known as infotip or hint, is a common graphical user interface element in which, when hovering over a screen element or component, a text box displays information about that element.').\"",
+        "type": "VTL|MD"
+      },
+      "declarations": [
+        {
+          "id": "lpgv0v4d-SI",
+          "declarationType": "STATEMENT",
+          "position": "BEFORE_QUESTION_TEXT",
+          "label": {
+            "value": "\"Before question [label](. 'Some text').\"",
+            "type": "VTL|MD"
+          }
+        },
+        {
+          "id": "lpe7p7ji-lpgv278x",
+          "declarationType": "HELP",
+          "position": "AFTER_QUESTION_TEXT",
+          "label": {
+            "value": "\"After question [label](. 'Some text').\"",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "controls": [
+        {
+          "id": "lpe7p7ji-CI-0",
+          "typeOfControl": "CONSISTENCY",
+          "criticality": "WARN",
+          "control": {
+            "value": "not(nvl(Q1, \"\") = \"\")",
+            "type": "VTL"
+          },
+          "errorMessage": {
+            "value": "\"Error message with a [tooltip](. 'Some text')\"",
+            "type": "VTL|MD"
+          },
+          "bindingDependencies": [
+            "Q1"
+          ]
+        }
+      ],
+      "hierarchy": {
+        "sequence": {
+          "id": "lpe7pagw",
+          "page": "1",
+          "label": {
+            "value": "\"Sequence [label](. 'There is a tooltip on the label.')\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q1"
+      ],
+      "response": {
+        "name": "Q1"
+      }
+    },
+    {
+      "id": "lpgv5kfr",
+      "componentType": "Radio",
+      "mandatory": false,
+      "page": "3",
+      "label": {
+        "value": "\"Unique choice question with tooltips\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lpe7pagw",
+          "page": "1",
+          "label": {
+            "value": "\"Sequence [label](. 'There is a tooltip on the label.')\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q2"
+      ],
+      "options": [
+        {
+          "value": "code1",
+          "label": {
+            "value": "\"[Code 1](. 'Tooltip text of code 1')\"",
+            "type": "VTL|MD"
+          }
+        },
+        {
+          "value": "code2",
+          "label": {
+            "value": "\"[Code 2](. 'Tooltip text of code 2')\"",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "response": {
+        "name": "Q2"
+      }
+    },
+    {
+      "id": "lpgvd4xx",
+      "componentType": "CheckboxGroup",
+      "page": "4",
+      "label": {
+        "value": "\"Multiple choice question with tooltips\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lpe7pagw",
+          "page": "1",
+          "label": {
+            "value": "\"Sequence [label](. 'There is a tooltip on the label.')\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q31",
+        "Q32"
+      ],
+      "responses": [
+        {
+          "id": "lpgvd4xx-QOP-lph3gw1f",
+          "label": {
+            "value": "\"[Code 1](. 'Tooltip text of code 1')\"",
+            "type": "VTL|MD"
+          },
+          "response": {
+            "name": "Q31"
+          }
+        },
+        {
+          "id": "lpgvd4xx-QOP-lph3ij51",
+          "label": {
+            "value": "\"[Code 2](. 'Tooltip text of code 2')\"",
+            "type": "VTL|MD"
+          },
+          "response": {
+            "name": "Q32"
+          }
+        }
+      ]
+    },
+    {
+      "id": "lpgvggno",
+      "componentType": "Table",
+      "mandatory": false,
+      "page": "5",
+      "positioning": "HORIZONTAL",
+      "label": {
+        "value": "\"Table with tooltips\"",
+        "type": "VTL|MD"
+      },
+      "conditionFilter": {
+        "value": "true",
+        "type": "VTL"
+      },
+      "hierarchy": {
+        "sequence": {
+          "id": "lpe7pagw",
+          "page": "1",
+          "label": {
+            "value": "\"Sequence [label](. 'There is a tooltip on the label.')\"",
+            "type": "VTL|MD"
+          }
+        }
+      },
+      "bindingDependencies": [
+        "Q411",
+        "Q421"
+      ],
+      "header": [
+        {
+          "label": {
+            "value": "",
+            "type": "VTL|MD"
+          }
+        },
+        {
+          "label": {
+            "value": "\"Table [information](. 'Tooltip text')\"",
+            "type": "VTL|MD"
+          }
+        }
+      ],
+      "body": [
+        [
+          {
+            "value": "code1",
+            "label": {
+              "value": "\"[Code 1](. 'Tooltip text of code 1')\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Input",
+            "maxLength": 249,
+            "id": "lpgvggno-QOP-lph3md1y",
+            "response": {
+              "name": "Q411"
+            },
+            "bindingDependencies": [
+              "Q411"
+            ]
+          }
+        ],
+        [
+          {
+            "value": "code2",
+            "label": {
+              "value": "\"[Code 2](. 'Tooltip text of code 2')\"",
+              "type": "VTL|MD"
+            }
+          },
+          {
+            "componentType": "Input",
+            "maxLength": 249,
+            "id": "lpgvggno-QOP-lph3ln2w",
+            "response": {
+              "name": "Q421"
+            },
+            "bindingDependencies": [
+              "Q421"
+            ]
+          }
+        ]
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "variableType": "COLLECTED",
+      "name": "Q1",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q2",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q31",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q32",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q411",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    },
+    {
+      "variableType": "COLLECTED",
+      "name": "Q421",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    }
+  ],
+  "cleaning": {},
+  "resizing": {}
+}

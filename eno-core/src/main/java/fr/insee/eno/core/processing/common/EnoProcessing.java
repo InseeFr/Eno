@@ -2,6 +2,7 @@ package fr.insee.eno.core.processing.common;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.processing.ProcessingPipeline;
 import fr.insee.eno.core.processing.common.steps.*;
 import fr.insee.eno.core.reference.EnoCatalog;
@@ -39,6 +40,10 @@ public class EnoProcessing {
                 .thenIf(parameters.isCommentSection(), new EnoAddCommentSection(prefixingStep))
                 .then(new EnoInsertComponentFilters())
                 .then(new EnoResolveBindingReferences());
+
+        // Tooltip processing that is common to DDI and Pogues, but only concerns Lunatic
+        if (Format.LUNATIC.equals(parameters.getOutFormat()))
+            new EnoCleanTooltips(enoCatalog).apply(enoQuestionnaire);
     }
 
 }

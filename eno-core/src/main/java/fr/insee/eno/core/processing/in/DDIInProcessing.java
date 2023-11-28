@@ -9,8 +9,6 @@ public class DDIInProcessing {
 
     public void applyProcessing(EnoQuestionnaire enoQuestionnaire) {
         //
-        EnoCatalog enoCatalog = new EnoCatalog(enoQuestionnaire);
-        //
         ProcessingPipeline<EnoQuestionnaire> processingPipeline = new ProcessingPipeline<>();
         processingPipeline.start(enoQuestionnaire)
                 .then(new DDIMoveUnitInQuestions())
@@ -18,8 +16,11 @@ public class DDIInProcessing {
                 .then(new DDIResolveVariableReferencesInExpressions())
                 .then(new DDIInsertDeclarations())
                 .then(new DDIInsertControls())
-                .then(new DDIInsertCodeLists())
-                .then(new DDIResolveVariableReferencesInLabels(enoCatalog))
+                .then(new DDIInsertCodeLists());
+        //
+        EnoCatalog enoCatalog = new EnoCatalog(enoQuestionnaire);
+        //
+        processingPipeline.then(new DDIResolveVariableReferencesInLabels(enoCatalog))
                 .then(new DDIResolveSequencesStructure())
                 .then(new DDIResolveFiltersScope())
                 .then(new DDIResolveLoopsScope());

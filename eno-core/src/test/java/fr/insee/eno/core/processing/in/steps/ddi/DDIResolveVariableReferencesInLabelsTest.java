@@ -64,10 +64,10 @@ class DDIResolveVariableReferencesInLabelsTest {
                     DDIDeserializer.deserialize(DDIResolveVariableReferencesInLabelsTest.class.getClassLoader()
                             .getResourceAsStream("integration/ddi/ddi-labels.xml")),
                     enoQuestionnaire);
-            EnoCatalog enoCatalog = new EnoCatalog(enoQuestionnaire);
             new DDIInsertDeclarations().apply(enoQuestionnaire);
             new DDIInsertControls().apply(enoQuestionnaire);
             new DDIInsertCodeLists().apply(enoQuestionnaire);
+            EnoCatalog enoCatalog = new EnoCatalog(enoQuestionnaire);
             // When
             new DDIResolveVariableReferencesInLabels(enoCatalog).apply(enoQuestionnaire);
             // Then
