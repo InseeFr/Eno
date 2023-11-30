@@ -1,6 +1,5 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
-import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.exceptions.business.LunaticLoopException;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
@@ -157,7 +156,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
             String variableName = findFirstVariableOfReference(enoLinkedLoop, enoReferenceLoop, enoIndex);
             lunaticLoop.setIterations(new LabelType());
             lunaticLoop.getIterations().setValue("count("+ variableName +")");
-            lunaticLoop.getIterations().setType(Constant.LUNATIC_LABEL_VTL);
+            lunaticLoop.getIterations().setType(LabelTypeEnum.VTL);
             lunaticLoop.getLoopDependencies().add(variableName);
             return;
         }

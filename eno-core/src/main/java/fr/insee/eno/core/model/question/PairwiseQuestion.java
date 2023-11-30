@@ -1,12 +1,12 @@
 package fr.insee.eno.core.model.question;
 
 import datacollection33.QuestionItemType;
-import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.LabelType;
+import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.PairwiseLinks;
 import lombok.Getter;
 import lombok.Setter;
@@ -52,9 +52,9 @@ public class PairwiseQuestion extends SingleResponseQuestion {
         LabelType yAxis = new LabelType();
         String vtlExpression = "count("+loopVariableName+")";
         xAxis.setValue(vtlExpression);
-        xAxis.setType(Constant.LUNATIC_LABEL_VTL);
+        xAxis.setType(LabelTypeEnum.VTL);
         yAxis.setValue(vtlExpression);
-        yAxis.setType(Constant.LUNATIC_LABEL_VTL);
+        yAxis.setType(LabelTypeEnum.VTL);
         lunaticPairwiseLinks.setXAxisIterations(xAxis);
         lunaticPairwiseLinks.setYAxisIterations(yAxis);
     }

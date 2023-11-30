@@ -1,12 +1,12 @@
 package fr.insee.eno.core.model.navigation;
 
-import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.ConditionFilterType;
+import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,8 +33,8 @@ public class ComponentFilter extends EnoObject {
     /** For now, Lunatic type in label objects does not come from metadata, but is hardcoded here in Eno.
      * See labels documentation. */
     @Getter @Setter
-    @Lunatic("setType(#param)")
-    String type = Constant.LUNATIC_LABEL_VTL;
+    @Lunatic("setType(T(fr.insee.lunatic.model.flat.LabelTypeEnum).fromValue(#param))")
+    String type = LabelTypeEnum.VTL.value();
 
     @Getter
     private final Set<BindingReference> bindingReferences = new HashSet<>();

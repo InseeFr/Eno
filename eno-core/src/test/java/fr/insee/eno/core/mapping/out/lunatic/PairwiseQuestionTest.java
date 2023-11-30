@@ -1,6 +1,5 @@
 package fr.insee.eno.core.mapping.out.lunatic;
 
-import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.DDIToEno;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.LunaticMapper;
@@ -15,7 +14,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PairwiseQuestionTest {
 
@@ -61,8 +61,8 @@ class PairwiseQuestionTest {
         assertEquals("lo9tyy1v", lunaticPairwise.getId());
         assertEquals("count(PAIRWISE_SOURCE)", lunaticPairwise.getXAxisIterations().getValue());
         assertEquals("count(PAIRWISE_SOURCE)", lunaticPairwise.getYAxisIterations().getValue());
-        assertEquals(Constant.LUNATIC_LABEL_VTL, lunaticPairwise.getXAxisIterations().getType());
-        assertEquals(Constant.LUNATIC_LABEL_VTL, lunaticPairwise.getYAxisIterations().getType());
+        assertEquals(LabelTypeEnum.VTL, lunaticPairwise.getXAxisIterations().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL, lunaticPairwise.getYAxisIterations().getTypeEnum());
         assertEquals(1, lunaticPairwise.getComponents().size());
         //
         ComponentType pairwiseInnerComponent = lunaticPairwise.getComponents().get(0);
