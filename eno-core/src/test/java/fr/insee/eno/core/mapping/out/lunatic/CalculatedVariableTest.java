@@ -1,6 +1,5 @@
 package fr.insee.eno.core.mapping.out.lunatic;
 
-import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.DDIToLunatic;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.LunaticMapper;
@@ -10,6 +9,7 @@ import fr.insee.eno.core.model.variable.CalculatedVariable;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticFilterResult;
+import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.VariableType;
 import fr.insee.lunatic.model.flat.VariableTypeEnum;
@@ -72,7 +72,7 @@ class CalculatedVariableTest {
         lunaticMapper.mapEnoObject(enoVariable, lunaticVariable);
         //
         assertEquals("BAR = 1 or BAZ = 1", lunaticVariable.getExpression().getValue());
-        assertEquals(Constant.LUNATIC_LABEL_VTL, lunaticVariable.getExpression().getType());
+        assertEquals(LabelTypeEnum.VTL, lunaticVariable.getExpression().getTypeEnum());
     }
 
     @Test
@@ -130,7 +130,7 @@ class CalculatedVariableTest {
         @Test
         void calculatedExpressionType() {
             calculatedVariables.values().forEach(variableType ->
-                    assertEquals(Constant.LUNATIC_LABEL_VTL, variableType.getExpression().getType()));
+                    assertEquals(LabelTypeEnum.VTL, variableType.getExpression().getTypeEnum()));
         }
 
         @Test
@@ -201,7 +201,7 @@ class CalculatedVariableTest {
             assertEquals(VariableTypeEnum.CALCULATED, lunaticVariable.get().getVariableType());
             assertEquals("CALCULATED1", lunaticVariable.get().getName());
             assertEquals("cast(Q3, integer) + 5", lunaticVariable.get().getExpression().getValue());
-            assertEquals(Constant.LUNATIC_LABEL_VTL, lunaticVariable.get().getExpression().getType());
+            assertEquals(LabelTypeEnum.VTL, lunaticVariable.get().getExpression().getTypeEnum());
             assertEquals(1, lunaticVariable.get().getBindingDependencies().size());
             assertEquals("Q3", lunaticVariable.get().getBindingDependencies().get(0));
         }

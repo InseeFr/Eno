@@ -1,6 +1,5 @@
 package fr.insee.eno.core.mapping.out.lunatic;
 
-import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.DDIToEno;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.LunaticMapper;
@@ -10,6 +9,7 @@ import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.lunatic.model.flat.CheckboxGroup;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
+import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.Table;
 import org.junit.jupiter.api.Test;
 
@@ -53,7 +53,7 @@ class MultipleChoiceQuestionTest {
         assertEquals("\"Code D\"", lunaticCheckboxGroup.getResponses().get(3).getLabel().getValue());
         //
         lunaticCheckboxGroup.getResponses().forEach(responsesCheckboxGroup ->
-                assertEquals(Constant.LUNATIC_LABEL_VTL_MD, responsesCheckboxGroup.getLabel().getType()));
+                assertEquals(LabelTypeEnum.VTL_MD, responsesCheckboxGroup.getLabel().getTypeEnum()));
         //
         assertEquals("MCQ_BOOL1", lunaticCheckboxGroup.getResponses().get(0).getResponse().getName());
         assertEquals("MCQ_BOOL2", lunaticCheckboxGroup.getResponses().get(1).getResponse().getName());

@@ -1,15 +1,11 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.table;
 
-import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.DDIToEno;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.ComplexMultipleChoiceQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
-import fr.insee.lunatic.model.flat.BodyCell;
-import fr.insee.lunatic.model.flat.ComponentTypeEnum;
-import fr.insee.lunatic.model.flat.Options;
-import fr.insee.lunatic.model.flat.Table;
+import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -99,8 +95,8 @@ class ComplexMultipleChoiceQuestionProcessingTest {
         assertEquals("c1", lunaticTable.getBodyLines().get(0).getBodyCells().get(0).getValue());
         assertEquals("\"Code 1\"",
                 lunaticTable.getBodyLines().get(0).getBodyCells().get(0).getLabel().getValue());
-        assertEquals(Constant.LUNATIC_LABEL_VTL_MD,
-                lunaticTable.getBodyLines().get(0).getBodyCells().get(0).getLabel().getType());
+        assertEquals(LabelTypeEnum.VTL_MD,
+                lunaticTable.getBodyLines().get(0).getBodyCells().get(0).getLabel().getTypeEnum());
         // Only look at the modality value for the others
         assertEquals("c2", lunaticTable.getBodyLines().get(1).getBodyCells().get(0).getValue());
         assertEquals("c21", lunaticTable.getBodyLines().get(1).getBodyCells().get(1).getValue());

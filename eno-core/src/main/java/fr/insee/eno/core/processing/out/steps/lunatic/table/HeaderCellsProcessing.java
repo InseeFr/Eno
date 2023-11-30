@@ -1,12 +1,11 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.table;
 
-import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.exceptions.business.UnauthorizedHeaderException;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.question.EnoTable;
-import fr.insee.eno.core.model.question.TableQuestion;
 import fr.insee.lunatic.model.flat.HeaderType;
 import fr.insee.lunatic.model.flat.LabelType;
+import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import lombok.Getter;
 
 import java.math.BigInteger;
@@ -58,7 +57,7 @@ public class HeaderCellsProcessing {
         HeaderType topLeftCell = new HeaderType();
         LabelType topLeftLabel = new LabelType();
         topLeftLabel.setValue("");
-        topLeftLabel.setType(Constant.LUNATIC_LABEL_VTL_MD);
+        topLeftLabel.setType(LabelTypeEnum.VTL_MD);
         topLeftCell.setLabel(topLeftLabel);
         if (leftColumnColspan > 1) // little detail that might change (no colspan if the value is 1)
             topLeftCell.setColspan(BigInteger.valueOf(leftColumnColspan));
@@ -70,7 +69,7 @@ public class HeaderCellsProcessing {
             HeaderType headerCell = new HeaderType();
             LabelType headerLabel = new LabelType();
             headerLabel.setValue(codeItem.getLabel().getValue());
-            headerLabel.setType(Constant.LUNATIC_LABEL_VTL_MD);
+            headerLabel.setType(LabelTypeEnum.VTL_MD);
             headerCell.setLabel(headerLabel);
             lunaticHeader.add(headerCell);
         });

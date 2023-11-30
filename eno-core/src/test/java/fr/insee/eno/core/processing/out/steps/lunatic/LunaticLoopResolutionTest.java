@@ -1,6 +1,5 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
-import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.DDIToEno;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.LunaticMapper;
@@ -145,8 +144,8 @@ class LunaticLoopResolutionTest {
         void linkedLoopsIterations() {
             assertEquals("count(Q1A)", lunaticLoops.get(1).getIterations().getValue());
             assertEquals("count(Q3A)", lunaticLoops.get(3).getIterations().getValue());
-            assertEquals(Constant.LUNATIC_LABEL_VTL, lunaticLoops.get(1).getIterations().getType());
-            assertEquals(Constant.LUNATIC_LABEL_VTL, lunaticLoops.get(3).getIterations().getType());
+            assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(1).getIterations().getTypeEnum());
+            assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(3).getIterations().getTypeEnum());
         }
 
         @Test
@@ -239,8 +238,8 @@ class LunaticLoopResolutionTest {
         void linkedLoopsIterations() {
             assertEquals("count(Q1A)", lunaticLoops.get(1).getIterations().getValue());
             assertEquals("count(Q2A)", lunaticLoops.get(3).getIterations().getValue());
-            assertEquals(Constant.LUNATIC_LABEL_VTL, lunaticLoops.get(1).getIterations().getType());
-            assertEquals(Constant.LUNATIC_LABEL_VTL, lunaticLoops.get(3).getIterations().getType());
+            assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(1).getIterations().getTypeEnum());
+            assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(3).getIterations().getTypeEnum());
         }
 
         @Test
@@ -322,7 +321,7 @@ class LunaticLoopResolutionTest {
             assertThat(lunaticLoops.get(0).getLoopDependencies()).isEmpty();
             // Linked loop
             assertEquals(List.of("Q1"), lunaticLoops.get(1).getLoopDependencies());
-            assertEquals(Constant.LUNATIC_LABEL_VTL, lunaticLoops.get(1).getIterations().getType());
+            assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(1).getIterations().getTypeEnum());
         }
 
         @Test
@@ -395,7 +394,7 @@ class LunaticLoopResolutionTest {
             assertThat(lunaticLoops.get(0).getLoopDependencies()).isEmpty();
             // Linked loop
             assertEquals(List.of("Q11"), lunaticLoops.get(1).getLoopDependencies());
-            assertEquals(Constant.LUNATIC_LABEL_VTL, lunaticLoops.get(1).getIterations().getType());
+            assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(1).getIterations().getTypeEnum());
         }
 
         @Test
@@ -486,7 +485,7 @@ class LunaticLoopResolutionTest {
             //
             lunaticLinkedLoop.getComponents().forEach(component -> {
                 assertEquals("(not(nvl(AGE, 0) < 18))", component.getConditionFilter().getValue());
-                assertEquals(Constant.LUNATIC_LABEL_VTL, component.getConditionFilter().getType());
+                assertEquals(LabelTypeEnum.VTL, component.getConditionFilter().getTypeEnum());
             });
         }
 

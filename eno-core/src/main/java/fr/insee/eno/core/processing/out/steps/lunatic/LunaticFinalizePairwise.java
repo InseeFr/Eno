@@ -1,6 +1,5 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
-import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.PairwiseQuestion;
@@ -87,7 +86,7 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
             calculatedAxis.setVariableType(VariableTypeEnum.CALCULATED);
             calculatedAxis.setName(calculatedVariableName);
             LabelType expression = new LabelType();
-            expression.setType(Constant.LUNATIC_LABEL_VTL);
+            expression.setType(LabelTypeEnum.VTL);
             expression.setValue(pairwiseName);
             calculatedAxis.setExpression(expression);
             calculatedAxis.setBindingDependencies(List.of(pairwiseName));
