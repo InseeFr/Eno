@@ -31,7 +31,7 @@ class LunaticTests {
         // NEW: complex object for labels
         LabelType lunaticLabel = new LabelType();
         lunaticLabel.setValue("Hello questionnaire");
-        lunaticLabel.setType("I can write anything I want here.");
+        lunaticLabel.setType(LabelTypeEnum.VTL_MD);
         lunaticQuestionnaire.setLabel(lunaticLabel);
         // Variables list
         List<IVariableType> lunaticVariables = lunaticQuestionnaire.getVariables();

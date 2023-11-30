@@ -1,6 +1,5 @@
 package fr.insee.eno.core.processing.common.steps;
 
-import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.label.Label;
@@ -12,6 +11,7 @@ import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.model.variable.CollectedVariable;
 import fr.insee.eno.core.model.variable.ExternalVariable;
 import fr.insee.eno.core.processing.ProcessingStep;
+import fr.insee.lunatic.model.flat.LabelTypeEnum;
 
 import java.math.BigInteger;
 
@@ -46,7 +46,7 @@ public class EnoAddIdentificationSection implements ProcessingStep<EnoQuestionna
         sequence.setId(IDENTIFICATION_SEQUENCE_ID);
         sequence.setLabel(new Label());
         sequence.getLabel().setValue(IDENTIFICATION_SEQUENCE_LABEL);
-        sequence.getLabel().setType(Constant.LUNATIC_LABEL_VTL_MD);
+        sequence.getLabel().setType(LabelTypeEnum.VTL_MD.value());
         sequence.getSequenceStructure().add(
                 StructureItemReference.builder().id(IDENTIFICATION_SUBSEQUENCE_ID).type(StructureItemType.SUBSEQUENCE).build());
         enoQuestionnaire.getSequences().add(0, sequence);
@@ -56,7 +56,7 @@ public class EnoAddIdentificationSection implements ProcessingStep<EnoQuestionna
         subsequence.setId(IDENTIFICATION_SUBSEQUENCE_ID);
         subsequence.setLabel(new Label());
         subsequence.getLabel().setValue(IDENTIFICATION_SUBSEQUENCE_LABEL);
-        subsequence.getLabel().setType(Constant.LUNATIC_LABEL_VTL_MD);
+        subsequence.getLabel().setType(LabelTypeEnum.VTL_MD.value());
         subsequence.getSequenceStructure().add(
                 StructureItemReference.builder().id(IDENTIFICATION_QUESTION_ID).type(StructureItemType.QUESTION).build());
         enoQuestionnaire.getSubsequences().add(0, subsequence);
@@ -66,7 +66,7 @@ public class EnoAddIdentificationSection implements ProcessingStep<EnoQuestionna
         question.setId(IDENTIFICATION_QUESTION_ID);
         question.setLabel(new DynamicLabel());
         question.getLabel().setValue(IDENTIFICATION_QUESTION_LABEL);
-        question.getLabel().setType(Constant.LUNATIC_LABEL_VTL_MD);
+        question.getLabel().setType(LabelTypeEnum.VTL_MD.value());
         question.setLengthType(TextQuestion.qualifyLength(IDENTIFICATION_QUESTION_LENGTH));
         question.setMaxLength(BigInteger.valueOf(IDENTIFICATION_QUESTION_LENGTH));
         question.setMandatory(IDENTIFICATION_QUESTION_MANDATORY);
