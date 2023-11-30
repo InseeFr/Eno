@@ -33,16 +33,17 @@ It is developped in an international perspective, codes and comments are in engl
 
 ## How to use it ?
 
+To work with the library locally, run:
+
+```sh
+mvn clean process-classes test # to run tests
+mvn clean process-classes package install # to install the lib locally
+```
+
 Eno comes packaged in a **REST web service using [Eno-WS](https://github.com/InseeFr/Eno-WS)** and a Docker image.
 
-## Example :
+## Example
 
 You can find on the subdirectory [/questionnaire/], the questionnaire example "Simpsons" specified in the DDI format.
 
-You can find a platform of demonstration on [Docker image](https://eno.dev.insee.io).
-
-## Road Map
-
-Eno is very widely, even systematically, used in business surveys (web questionnaire, paper questionnaire, takeover and management tool).
-
-Household surveys have also started to use it and work is underway to increase the functional coverage required for these surveys (e.g. description of filters, possibility to loop or select occurrences of a loop, interviewer questionnaire).
+You can find a [demonstration platform](https://eno-ws.demo.insee.io).
