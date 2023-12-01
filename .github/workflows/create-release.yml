@@ -20,7 +20,7 @@ jobs:
           java-version: '17'
 
       - name: Checkout Eno repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
@@ -66,7 +66,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build Eno modules
         run: ./gradlew build
 
@@ -80,7 +80,7 @@ jobs:
     needs: [ check-version, build-sources ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: rickstaa/action-create-tag@v1
         with:
           tag: ${{ needs.check-version.outputs.release-version }}
@@ -89,7 +89,7 @@ jobs:
 #    needs: [ check-version, build-sources ]
 #    runs-on: ubuntu-latest
 #    steps:
-#      - uses: actions/checkout@v3
+#      - uses: actions/checkout@v4
 #        with:
 #          ref: ${{ github.ref }}
 #          fetch-depth: 0
@@ -120,7 +120,7 @@ jobs:
     needs: [ check-version, create-tag ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Download Eno-WS jar
         uses: actions/download-artifact@v3
