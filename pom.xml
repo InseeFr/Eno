@@ -73,7 +73,7 @@
 		<maven.compiler.target>17</maven.compiler.target>
 
 		<!-- Sonar -->
-		<jacoco.version>0.8.10</jacoco.version>	
+		<jacoco.version>0.8.11</jacoco.version>	
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
