@@ -34,7 +34,7 @@ jobs:
       - name: Print Eno Version
         run: echo ${{ steps.version-step.outputs.version }}
 
-      - uses: mukunku/tag-exists-action@v1.2.0
+      - uses: mukunku/tag-exists-action@v1.4.0
         name: Check tag existence
         id: check-tag-exists
         with:
