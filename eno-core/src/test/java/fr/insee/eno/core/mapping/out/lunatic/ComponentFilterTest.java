@@ -1,6 +1,5 @@
 package fr.insee.eno.core.mapping.out.lunatic;
 
-import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.DDIToLunatic;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.LunaticMapper;
@@ -9,6 +8,7 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.ConditionFilterType;
+import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,7 +41,7 @@ class ComponentFilterTest {
         lunaticMapper.mapEnoObject(enoComponentFilter, lunaticConditionFilter);
         //
         assertEquals(ComponentFilter.DEFAULT_FILTER_VALUE, lunaticConditionFilter.getValue());
-        assertEquals(Constant.LUNATIC_LABEL_VTL, lunaticConditionFilter.getType());
+        assertEquals(LabelTypeEnum.VTL, lunaticConditionFilter.getTypeEnum());
         assertTrue(lunaticConditionFilter.getBindingDependencies().isEmpty());
     }
 
@@ -92,7 +92,7 @@ class ComponentFilterTest {
             lunaticQuestionnaire.getComponents().stream()
                     .map(ComponentType::getConditionFilter)
                     .forEach(conditionFilterType ->
-                            assertEquals(Constant.LUNATIC_LABEL_VTL, conditionFilterType.getType()));
+                            assertEquals(LabelTypeEnum.VTL, conditionFilterType.getTypeEnum()));
         }
 
         @Test
@@ -177,7 +177,7 @@ class ComponentFilterTest {
         void filterWithCalculatedVariable(int index) {
             ConditionFilterType conditionFilter = lunaticQuestionnaire.getComponents().get(index).getConditionFilter();
             assertEquals("(SUM_Q11_Q12 < 10)", conditionFilter.getValue());
-            assertEquals(Constant.LUNATIC_LABEL_VTL, conditionFilter.getType());
+            assertEquals(LabelTypeEnum.VTL, conditionFilter.getTypeEnum());
             assertEquals(3, conditionFilter.getBindingDependencies().size());
             assertTrue(conditionFilter.getBindingDependencies().containsAll(List.of("SUM_Q11_Q12", "Q11", "Q12")));
         }

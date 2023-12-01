@@ -1,14 +1,22 @@
 package fr.insee.eno.core.reference;
 
-import fr.insee.eno.core.model.*;
+import fr.insee.eno.core.model.EnoComponent;
+import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.code.CodeItem;
+import fr.insee.eno.core.model.code.CodeList;
+import fr.insee.eno.core.model.declaration.Declaration;
+import fr.insee.eno.core.model.declaration.Instruction;
+import fr.insee.eno.core.model.label.EnoLabel;
+import fr.insee.eno.core.model.navigation.Control;
 import fr.insee.eno.core.model.question.Question;
+import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
+import fr.insee.eno.core.model.response.CodeResponse;
+import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.model.variable.Variable;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /** Class designed to be used in processing to easily access different kinds of Eno objects. */
 public class EnoCatalog {
@@ -23,6 +31,9 @@ public class EnoCatalog {
     Map<String, EnoComponent> componentMap = new HashMap<>();
     /** Map of collected variables stored by their reference (warning: keys = not ids). */
     Map<String, Variable> variableMap = new HashMap<>();
+    /** List with all labels that are in the questionnaire. */
+    private final Collection<EnoLabel> labels = new ArrayDeque<>();
+    // NB: https://stackoverflow.com/questions/6129805/what-is-the-fastest-java-collection-with-the-basic-functionality-of-a-queue
 
     public EnoCatalog(EnoQuestionnaire enoQuestionnaire) {
         complementaryIndexing(enoQuestionnaire);
@@ -38,6 +49,8 @@ public class EnoCatalog {
         componentMap.putAll(sequenceMap);
         componentMap.putAll(subsequenceMap);
         componentMap.putAll(questionMap);
+        // Labels
+        gatherLabels(enoQuestionnaire);
         // Variables
         enoQuestionnaire.getVariables().forEach(variable -> variableMap.put(variable.getReference(), variable));
     }
@@ -66,6 +79,44 @@ public class EnoCatalog {
     }
     public Collection<EnoComponent> getComponents() {
         return componentMap.values();
+    }
+    public Collection<EnoLabel> getLabels() {
+        return labels;
+    }
+
+    private void gatherLabels(EnoQuestionnaire enoQuestionnaire) {
+        // Sequences and subsequences
+        labels.addAll(enoQuestionnaire.getSequences().stream().map(AbstractSequence::getLabel).toList());
+        labels.addAll(enoQuestionnaire.getSubsequences().stream().map(AbstractSequence::getLabel).toList());
+        // Questions
+        labels.addAll(this.getQuestions().stream().map(Question::getLabel).filter(Objects::nonNull).toList());
+        // Declarations, instructions and controls within components
+        this.getComponents().forEach(enoComponent -> {
+            labels.addAll(enoComponent.getDeclarations().stream().map(Declaration::getLabel).toList());
+            labels.addAll(enoComponent.getInstructions().stream().map(Instruction::getLabel).toList());
+        });
+        // Controls
+        this.getQuestions().forEach(enoQuestion ->
+                labels.addAll(enoQuestion.getControls().stream().map(Control::getMessage).toList()));
+        // Code lists
+        enoQuestionnaire.getCodeLists().stream().map(CodeList::getCodeItems).forEach(this::gatherLabelsFromCodeItems);
+        // Code lists in multiple response questions (might be refactored afterward)
+        enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .filter(SimpleMultipleChoiceQuestion.class::isInstance)
+                .map(SimpleMultipleChoiceQuestion.class::cast)
+                .forEach(this::gatherLabelsFromCodeResponses);
+    }
+
+    private void gatherLabelsFromCodeItems(List<CodeItem> codeItems) {
+        for (CodeItem codeItem : codeItems) {
+            labels.add(codeItem.getLabel());
+            // Recursive call in case of nested code items
+            gatherLabelsFromCodeItems(codeItem.getCodeItems());
+        }
+    }
+
+    private void gatherLabelsFromCodeResponses(SimpleMultipleChoiceQuestion multipleChoiceQuestion) {
+        labels.addAll(multipleChoiceQuestion.getCodeResponses().stream().map(CodeResponse::getLabel).toList());
     }
 
 }

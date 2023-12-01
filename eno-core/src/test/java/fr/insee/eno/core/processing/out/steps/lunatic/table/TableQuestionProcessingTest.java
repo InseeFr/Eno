@@ -1,6 +1,5 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.table;
 
-import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.label.Label;
@@ -10,6 +9,7 @@ import fr.insee.eno.core.model.question.table.BooleanCell;
 import fr.insee.eno.core.model.question.table.NumericCell;
 import fr.insee.eno.core.model.question.table.TextCell;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
+import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.Table;
 import org.junit.jupiter.api.Test;
 
@@ -95,16 +95,16 @@ class TableQuestionProcessingTest {
         assertEquals("h2", lunaticTable.getHeader().get(2).getLabel().getValue());
         assertEquals("h3", lunaticTable.getHeader().get(3).getLabel().getValue());
         lunaticTable.getHeader().forEach(headerType ->
-                assertEquals(Constant.LUNATIC_LABEL_VTL_MD, headerType.getLabel().getType()));
+                assertEquals(LabelTypeEnum.VTL_MD, headerType.getLabel().getTypeEnum()));
         //
         assertEquals("1", lunaticTable.getBodyLines().get(0).getBodyCells().get(0).getValue());
         assertEquals("2", lunaticTable.getBodyLines().get(1).getBodyCells().get(0).getValue());
         assertEquals("l1", lunaticTable.getBodyLines().get(0).getBodyCells().get(0).getLabel().getValue());
         assertEquals("l2", lunaticTable.getBodyLines().get(1).getBodyCells().get(0).getLabel().getValue());
-        assertEquals(Constant.LUNATIC_LABEL_VTL_MD,
-                lunaticTable.getBodyLines().get(0).getBodyCells().get(0).getLabel().getType());
-        assertEquals(Constant.LUNATIC_LABEL_VTL_MD,
-                lunaticTable.getBodyLines().get(1).getBodyCells().get(0).getLabel().getType());
+        assertEquals(LabelTypeEnum.VTL_MD,
+                lunaticTable.getBodyLines().get(0).getBodyCells().get(0).getLabel().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL_MD,
+                lunaticTable.getBodyLines().get(1).getBodyCells().get(0).getLabel().getTypeEnum());
         //
         assertEquals(ComponentTypeEnum.CHECKBOX_BOOLEAN, lunaticTable.getBodyLines().get(0).getBodyCells().get(1).getComponentType());
         assertEquals(ComponentTypeEnum.CHECKBOX_BOOLEAN, lunaticTable.getBodyLines().get(1).getBodyCells().get(1).getComponentType());

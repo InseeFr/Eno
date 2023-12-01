@@ -1,15 +1,7 @@
 package fr.insee.eno.core.processing.in.steps.ddi;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.code.CodeItem;
-import fr.insee.eno.core.model.code.CodeList;
-import fr.insee.eno.core.model.declaration.Declaration;
-import fr.insee.eno.core.model.declaration.Instruction;
 import fr.insee.eno.core.model.label.EnoLabel;
-import fr.insee.eno.core.model.navigation.Control;
-import fr.insee.eno.core.model.question.Question;
-import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
-import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoCatalog;
@@ -37,25 +29,7 @@ public class DDIResolveVariableReferencesInLabels implements ProcessingStep<EnoQ
      * @param enoQuestionnaire Eno questionnaire to be processed.
      */
     public void apply(EnoQuestionnaire enoQuestionnaire) {
-        // Sequences and subsequences
-        enoQuestionnaire.getSequences().stream().map(AbstractSequence::getLabel).forEach(this::resolveLabel);
-        enoQuestionnaire.getSubsequences().stream().map(AbstractSequence::getLabel).forEach(this::resolveLabel);
-        // Questions
-        enoCatalog.getQuestions().stream().map(Question::getLabel).forEach(this::resolveLabel);
-        // Declarations, instructions and controls within components
-        enoCatalog.getComponents().forEach(enoComponent -> {
-                enoComponent.getDeclarations().stream().map(Declaration::getLabel).forEach(this::resolveLabel);
-                enoComponent.getInstructions().stream().map(Instruction::getLabel).forEach(this::resolveLabel);
-        });
-        enoCatalog.getQuestions().forEach(enoQuestion ->
-                enoQuestion.getControls().stream().map(Control::getMessage).forEach(this::resolveLabel));
-        // Code lists
-        enoQuestionnaire.getCodeLists().stream().map(CodeList::getCodeItems).forEach(this::resolveCodeItemsLabel);
-        // Code lists in multiple response questions (might be refactored afterward)
-        enoQuestionnaire.getMultipleResponseQuestions().stream()
-                .filter(SimpleMultipleChoiceQuestion.class::isInstance)
-                .map(SimpleMultipleChoiceQuestion.class::cast)
-                .forEach(this::resolveCodeResponsesLabel);
+        enoCatalog.getLabels().forEach(this::resolveLabel);
     }
 
     /**
@@ -75,13 +49,20 @@ public class DDIResolveVariableReferencesInLabels implements ProcessingStep<EnoQ
         enoLabel.setValue(resolvedValue);
     }
 
-    /** For now, Pogues allows users to input invalid VTL expressions for static labels
-     * (i.e. to input a value without quotes), and Pogues does not add the missing quotes. */
+    /**
+     * For now, Pogues allows users to input invalid VTL expressions for static labels
+     * (i.e. to input a value without quotes), and Pogues does not add the missing quotes.
+     * @param staticLabel A static label value.
+     * @return The label value surrounded with quotes
+     */
     private String toValidStringExpression(String staticLabel) {
-        // Remove eventual quote characters that might be in the middle of the label
-        staticLabel = staticLabel.replace("\"", "");
-        // Return the label value surrounded with quotes
-        return "\"" + staticLabel + "\"";
+        StringBuilder stringBuilder = new StringBuilder();
+        if (! staticLabel.startsWith("\""))
+            stringBuilder.append("\"");
+        stringBuilder.append(staticLabel);
+        if(! staticLabel.endsWith("\""))
+            stringBuilder.append("\"");
+        return stringBuilder.toString();
     }
 
     /**
@@ -103,18 +84,6 @@ public class DDIResolveVariableReferencesInLabels implements ProcessingStep<EnoQ
         return variableReferences.stream()
                         .map(variableReference -> enoCatalog.getVariable(variableReference))
                         .toList();
-    }
-
-    private void resolveCodeItemsLabel(List<CodeItem> codeItems) {
-        for (CodeItem codeItem : codeItems) {
-            resolveLabel(codeItem.getLabel());
-            // Recursive call in case of nested code items
-            resolveCodeItemsLabel(codeItem.getCodeItems());
-        }
-    }
-
-    private void resolveCodeResponsesLabel(SimpleMultipleChoiceQuestion multipleChoiceQuestion) {
-        multipleChoiceQuestion.getCodeResponses().forEach(codeResponse -> resolveLabel(codeResponse.getLabel()));
     }
 
 }

@@ -1,6 +1,5 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
-import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.navigation.ComponentFilter;
@@ -39,7 +38,7 @@ class LunaticFilterResultTest {
         textQuestion.setId("lxcsdfg");
         ComponentFilter textQuestionFilter = new ComponentFilter();
         textQuestionFilter.setValue("count(CALCULATED_VARIABLE) < 2");
-        textQuestionFilter.setType(Constant.LUNATIC_LABEL_VTL);
+        textQuestionFilter.setType(LabelTypeEnum.VTL.value());
         BindingReference textFilterBindingRef = new BindingReference("idref", "CALCULATED_VARIABLE");
         textQuestionFilter.getBindingReferences().add(textFilterBindingRef);
         textQuestion.setComponentFilter(textQuestionFilter);
@@ -68,12 +67,12 @@ class LunaticFilterResultTest {
         table.setId(tableQuestion.getId());
 
         ConditionFilterType inputConditionFilterType = new ConditionFilterType();
-        inputConditionFilterType.setType(textQuestionFilter.getType());
+        inputConditionFilterType.setType(LabelTypeEnum.VTL);
         inputConditionFilterType.setValue(textQuestionFilter.getValue());
         input.setConditionFilter(inputConditionFilterType);
 
         ConditionFilterType tableConditionFilterType = new ConditionFilterType();
-        tableConditionFilterType.setType(Constant.LUNATIC_LABEL_VTL);
+        tableConditionFilterType.setType(LabelTypeEnum.VTL);
         tableConditionFilterType.setValue("count(CALCULATED_VARIABLE_2) + NUMERIC_USED_FOR_CALCULATED_VARIABLE_2 < 4");
         table.setConditionFilter(tableConditionFilterType);
 /*

@@ -1,6 +1,5 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
-import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.lunatic.model.flat.*;
 
@@ -217,12 +216,12 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
         control.setCriticality(ControlCriticityEnum.ERROR);
 
         LabelType controlLabel = new LabelType();
-        controlLabel.setType(Constant.LUNATIC_LABEL_VTL);
+        controlLabel.setType(LabelTypeEnum.VTL);
         controlLabel.setValue(controlExpression);
         control.setControl(controlLabel);
 
         LabelType controlErrorLabel = new LabelType();
-        controlErrorLabel.setType(Constant.LUNATIC_LABEL_VTL_MD);
+        controlErrorLabel.setType(LabelTypeEnum.VTL_MD);
         controlErrorLabel.setValue(controlErrorMessage);
         control.setErrorMessage(controlErrorLabel);
         return control;

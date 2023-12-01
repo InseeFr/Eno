@@ -1,7 +1,6 @@
 package fr.insee.eno.core.model.question;
 
 import datacollection33.QuestionItemType;
-import fr.insee.eno.core.Constant;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
@@ -25,6 +24,8 @@ import java.math.BigInteger;
 @Context(format = Format.LUNATIC, type = {Input.class, Textarea.class})
 public class TextQuestion extends SingleResponseQuestion {
 
+    private static final int LUNATIC_SMALL_TEXT_LIMIT = 250;
+
     /** Enum to discriminate short text question with long text questions. */
     public enum LengthType {SHORT, LONG}
 
@@ -47,7 +48,7 @@ public class TextQuestion extends SingleResponseQuestion {
      * @return A value of the LengthType enum.
      */
     public static LengthType qualifyLength(int maxLength) {
-        return maxLength < Constant.LUNATIC_SMALL_TEXT_LIMIT ? LengthType.SHORT : LengthType.LONG;
+        return maxLength < LUNATIC_SMALL_TEXT_LIMIT ? LengthType.SHORT : LengthType.LONG;
     }
 
     public static ComponentTypeEnum lengthTypeToLunatic(LengthType lengthType) {
