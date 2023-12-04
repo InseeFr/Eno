@@ -8419,10 +8419,10 @@
                </xf:trigger>
                <xf:trigger id="warning-previous">
                   <xf:label ref="$form-resources/GoBackWarning/label"/>
-                  <xxf:hide ev:event="DOMActivate" dialog="warningPrevious"/>
                   <xf:action ev:event="DOMActivate">
                      <xf:dispatch name="ChangementPageEffectif" targetid="fr-form-model"/>
                   </xf:action>
+                  <xxf:hide ev:event="DOMActivate" dialog="warningPrevious"/>
                </xf:trigger>
             </xxf:dialog>
             <xxf:dialog id="warningNext" close="false" draggable="false">
@@ -8436,10 +8436,10 @@
                </xf:trigger>
                <xf:trigger id="warning-continue">
                   <xf:label ref="$form-resources/Continue/label"/>
-                  <xxf:hide ev:event="DOMActivate" dialog="warningNext"/>
                   <xf:action ev:event="DOMActivate">
                      <xf:dispatch name="ChangementPageEffectif" targetid="fr-form-model"/>
                   </xf:action>
+                  <xxf:hide ev:event="DOMActivate" dialog="warningNext"/>
                </xf:trigger>
             </xxf:dialog>
             <xxf:dialog id="welcome-back" close="false" draggable="false">

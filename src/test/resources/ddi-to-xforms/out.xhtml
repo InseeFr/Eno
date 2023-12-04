@@ -2775,15 +2775,15 @@
                               <xf:label ref="$form-resources/SEASON_NUMBER/label"/>
                               <xf:alert ref="$form-resources/SEASON_NUMBER/alert"/>
                            </fr:number>
-                           <xf:input id="DATEFIRST-control"
-                                     name="DATEFIRST"
-                                     bind="DATEFIRST-bind"
-                                     class="question date">
+                           <fr:date id="DATEFIRST-control"
+                                    name="DATEFIRST"
+                                    bind="DATEFIRST-bind"
+                                    class="question date">
                               <xf:label ref="replace($form-resources/DATEFIRST/label,'¤LAST_BROADCAST¤',instance('fr-form-instance')//LAST_BROADCAST)"
                                         mediatype="text/html"/>
                               <xf:hint ref="$form-resources/DATEFIRST/hint"/>
                               <xf:alert ref="$form-resources/DATEFIRST/alert"/>
-                           </xf:input>
+                           </fr:date>
                            <fr:number id="AUDIENCE_SHARE-control"
                                       name="AUDIENCE_SHARE"
                                       bind="AUDIENCE_SHARE-bind"
@@ -4348,10 +4348,10 @@
                </xf:trigger>
                <xf:trigger id="warning-previous">
                   <xf:label ref="$form-resources/GoBackWarning/label"/>
-                  <xxf:hide ev:event="DOMActivate" dialog="warningPrevious"/>
                   <xf:action ev:event="DOMActivate">
                      <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
                   </xf:action>
+                  <xxf:hide ev:event="DOMActivate" dialog="warningPrevious"/>
                </xf:trigger>
             </xxf:dialog>
             <xxf:dialog id="warningNext" close="false" draggable="false">
@@ -4365,10 +4365,10 @@
                </xf:trigger>
                <xf:trigger id="warning-continue">
                   <xf:label ref="$form-resources/Continue/label"/>
-                  <xxf:hide ev:event="DOMActivate" dialog="warningNext"/>
                   <xf:action ev:event="DOMActivate">
                      <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
                   </xf:action>
+                  <xxf:hide ev:event="DOMActivate" dialog="warningNext"/>
                </xf:trigger>
             </xxf:dialog>
             <xxf:dialog id="welcome-back" close="false" draggable="false">

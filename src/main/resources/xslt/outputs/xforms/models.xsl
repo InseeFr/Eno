@@ -2631,7 +2631,7 @@
         <xsl:variable name="input-format">
             <xsl:choose>
                 <xsl:when test="$dateduration-format = 'YYYY-MM-DD' or upper-case($dateduration-format) = 'JJ/MM/AAAA'">
-                    <xsl:value-of select="'xf:input'"/>
+                    <xsl:value-of select="'fr:date'"/>
                 </xsl:when>
                 <xsl:when test="$current-driver='DurationDomain'">
                     <xsl:value-of select="'fr:number'"/>
