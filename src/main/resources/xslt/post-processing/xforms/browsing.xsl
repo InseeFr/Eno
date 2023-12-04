@@ -174,25 +174,29 @@
                     <xsl:for-each select="$ancestor-loops//Loop">
                         <xsl:value-of select="concat('instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',@container,'''] != '''' and ancestor::',@loop,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',@container,''']] and ')"/>
                     </xsl:for-each>
+                    <xsl:value-of select="concat('instance(''fr-form-instance'')/Util/CurrentSectionName = ''',@name,'''')"/>
                 </xsl:variable>
                 <xsl:copy>
                     <xsl:apply-templates select="@*" mode="bind"/>
                     <xsl:choose>
-                        <xsl:when test="@relevant">
+                        <xsl:when test="$ancestor-loops//Loop and @relevant">
                             <xsl:attribute name="relevant">
                                 <xsl:call-template name="improve-bind-formula">
-                                    <xsl:with-param name="attribute" select="concat($ancestor-loop-relevant,@relevant)"/>
+                                    <xsl:with-param name="attribute" select="concat($ancestor-loop-relevant,' and ',@relevant)"/>
                                     <xsl:with-param name="ancestor-loops" as="node()" select="$ancestor-loops"/>
                                 </xsl:call-template>
                             </xsl:attribute>
                         </xsl:when>
-                        <xsl:when test="$ancestor-loop-relevant != ''">
+                        <xsl:when test="$ancestor-loops//Loop">
                             <xsl:attribute name="relevant">
                                 <xsl:call-template name="improve-bind-formula">
-                                    <xsl:with-param name="attribute" select="substring($ancestor-loop-relevant,1,string-length($ancestor-loop-relevant)-5)"/>
+                                    <xsl:with-param name="attribute" select="$ancestor-loop-relevant"/>
                                     <xsl:with-param name="ancestor-loops" as="node()" select="$ancestor-loops"/>
                                 </xsl:call-template>
                             </xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="@relevant">
+                            <xsl:attribute name="relevant" select="@relevant"/>
                         </xsl:when>
                         <xsl:otherwise/>
                     </xsl:choose>
@@ -1114,10 +1118,10 @@
                 </xf:trigger>
                 <xf:trigger id="warning-previous">
                     <xf:label ref="$form-resources/GoBackWarning/label"/>
-                    <xxf:hide ev:event="DOMActivate" dialog="warningPrevious"/>
                     <xf:action ev:event="DOMActivate">
                         <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
                     </xf:action>
+                    <xxf:hide ev:event="DOMActivate" dialog="warningPrevious"/>
                 </xf:trigger>
             </xxf:dialog>
             <xxf:dialog id="warningNext" close="false" draggable="false">
@@ -1131,10 +1135,10 @@
                 </xf:trigger>
                 <xf:trigger id="warning-continue">
                     <xf:label ref="$form-resources/Continue/label"/>
-                    <xxf:hide ev:event="DOMActivate" dialog="warningNext"/>
                     <xf:action ev:event="DOMActivate">
                         <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
                     </xf:action>
+                    <xxf:hide ev:event="DOMActivate" dialog="warningNext"/>
                 </xf:trigger>
             </xxf:dialog>
             <!-- The dialog displayed when the form is charged, for a user who already started filling the form without submitting it -->
