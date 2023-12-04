@@ -40,7 +40,7 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
         pairwiseLinks.setSymLinks(PairwiseLinks.createDefaultSymLinks(simpleResponseComponent.getResponse().getName()));
 
         ComponentType pairwiseSubComponent = pairwiseLinks.getComponents().get(0);
-        pairwiseSubComponent.getConditionFilter().setValue("xAxis <> yAxis");
+        pairwiseSubComponent.setConditionFilter(null);
 
         List<IVariableType> variables = lunaticQuestionnaire.getVariables();
         variables.addAll(createCalculatedAxisVariables(pairwiseLinks));
@@ -91,7 +91,6 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
             calculatedAxis.setExpression(expression);
             calculatedAxis.setBindingDependencies(List.of(pairwiseName));
             calculatedAxis.setShapeFrom(pairwiseName);
-            calculatedAxis.setInFilter("true");
             variables.add(calculatedAxis);
         }
         return variables;
