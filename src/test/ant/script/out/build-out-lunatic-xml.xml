@@ -36,7 +36,22 @@
 			<param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
 		</xslt>
 		
-		<copy file="${target-folder}/${survey-name}/${form-name}/form/form-paginated.${out-extension}"
+		<!-- treatment specifif to 1 survey -->
+		<if>
+			<available file="${questionnaires-folder}/${survey-name}/lunatic-xml-specific-treatment.xsl"/>
+			<then>
+				<xslt in="${target-folder}/${survey-name}/${form-name}/form/form-paginated.${out-extension}"
+					out="${target-folder}/${survey-name}/${form-name}/form/form-specific-treatment.${out-extension}"
+					style="${questionnaires-folder}/${survey-name}/lunatic-xml-specific-treatment.xsl" force="true" classpath="${saxon.jar}">
+				</xslt>
+			</then>
+			<else>
+				<copy file="${target-folder}/${survey-name}/${form-name}/form/form-paginated.${out-extension}"
+					tofile="${target-folder}/${survey-name}/${form-name}/form/form-specific-treatment.${out-extension}"/>
+			</else>
+		</if>
+		
+		<copy file="${target-folder}/${survey-name}/${form-name}/form/form-specific-treatment.${out-extension}"
 			tofile="${target-folder}/${survey-name}/${form-name}/form/form.${out-extension}"/>
 		<!-- Manque l'appel au lunatic-vtlParser -->
 		<!-- Pourrait s'inspirer de ceci, mais il manque une méthode main dans vtl-parser -->
