@@ -71,7 +71,7 @@ public class LunaticFilterResult implements ProcessingStep<Questionnaire> {
                     .forEach(variableName -> filterVariable.getBindingDependencies().add(variableName));
         }
         LabelType expression = new LabelType();
-        expression.setType(conditionFilter.getType());
+        expression.setType(conditionFilter.getTypeEnum());
         expression.setValue(conditionFilter.getValue());
         filterVariable.setExpression(expression);
         return Optional.of(filterVariable);

@@ -46,6 +46,7 @@ class LunaticFinalizePairwiseTest {
         radioComponent.setResponse(responseType);
         ConditionFilterType conditionFilterType = new ConditionFilterType();
         conditionFilterType.setValue("true");
+        conditionFilterType.setType(LabelTypeEnum.VTL);
         radioComponent.setConditionFilter(conditionFilterType);
         pairwiseLinks1.setComponents(List.of(radioComponent));
     }
@@ -66,7 +67,7 @@ class LunaticFinalizePairwiseTest {
     void whenFinalizingSubComponentConditionFilterIsSet() {
         lunaticQuestionnaire.getComponents().add(pairwiseLinks1);
         processing.apply(lunaticQuestionnaire);
-        assertEquals("xAxis <> yAxis", radioComponent.getConditionFilter().getValue());
+        assertNull(radioComponent.getConditionFilter());
     }
 
     @Test
@@ -76,7 +77,7 @@ class LunaticFinalizePairwiseTest {
         lunaticQuestionnaire.getComponents().add(loop);
         loop.getComponents().add(pairwiseLinks1);
         processing.apply(lunaticQuestionnaire);
-        assertEquals("xAxis <> yAxis", radioComponent.getConditionFilter().getValue());
+        assertNull(radioComponent.getConditionFilter());
     }
 
     @Test
