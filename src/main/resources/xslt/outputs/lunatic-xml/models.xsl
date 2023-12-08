@@ -27,7 +27,7 @@
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>template Variable is used only for external variables : TODO : refactor for other ones</xd:desc>
 	</xd:doc>
@@ -85,13 +85,13 @@
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
 		<xsl:variable name="labelType" select="enolunatic:get-label-type('label')"/>
 		<xsl:variable name="firstDescendantResponse" select="enolunatic:get-loop-first-descendant-question($source-context,$languages[1])"/>
-		
+
 		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
 		<!-- keep idLoop of the parent Loop if exists -->
 		<xsl:variable name="newIdLoop" select="if($idLoop!='') then $idLoop else $id"/>
-		<xsl:variable name="newLoopDepth" select="$loopDepth + 1"/>		
+		<xsl:variable name="newLoopDepth" select="$loopDepth + 1"/>
 		<xsl:variable name="newShouldHaveMissingVars" select="if(string($shouldHaveMissingVars)!='') then $shouldHaveMissingVars else not($isGeneratingLoop)"/>
-		
+
 		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
 		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
 		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context,$filter)"/>
@@ -115,8 +115,7 @@
 			</xsl:if>
 		</xsl:variable>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
-		
-		
+
 		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$id}">
 			<xsl:attribute name="depth" select="$newLoopDepth"/>
 			<xsl:choose>
@@ -164,9 +163,9 @@
 				<hierarchy>
 					<xsl:copy-of select="$sequenceParent"/>
 				</hierarchy>
-			</xsl:if>			
+			</xsl:if>
 			<xsl:copy-of select="$dependencies"/>
-			
+
 			<!-- In the case of not shouldHaveMissingVars, it means it is a generating loop
 				Thus I want to generate a simple missing collected variable, based on the name of the first descendant response of the loop
 				which should be the variable used as the iterator for linked loops
@@ -177,7 +176,7 @@
 					<xsl:with-param name="idLoop" select="$newIdLoop"/>
 				</xsl:call-template>
 			</xsl:if>
-			
+
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 				<xsl:with-param name="loopDepth" select="$newLoopDepth" tunnel="yes"/>
@@ -218,7 +217,7 @@
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
-		
+
 		<xsl:variable name="sequence">
 			<xsl:choose>
 				<xsl:when test="self::Module">
@@ -294,7 +293,7 @@
 			<xsl:for-each select="$labelDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
-			<xsl:if test="$shouldHaveMissingVars and $missingVar">	
+			<xsl:if test="$shouldHaveMissingVars and $missingVar">
 				<xsl:value-of select="$missingResponseName"/>
 			</xsl:if>
 		</xsl:variable>
@@ -317,7 +316,7 @@
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>PairwiseQuestion driver creates a component which is likely a loop of loop, with the same axises : for example, the link between people of the same household</xd:desc>
 	</xd:doc>
@@ -328,7 +327,7 @@
 		<xsl:param name="subSequenceParent" tunnel="yes"/>
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
 		<xsl:param name="idLoop" select="''" tunnel="yes"/>
-		
+
 		<xsl:variable name="mandatory" select="enolunatic:is-required($source-context)" as="xs:boolean"/>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
 		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
@@ -345,7 +344,7 @@
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
-		
+
 		<components xsi:type="PairwiseLinks" componentType="PairwiseLinks" id="{$idQuestion}" mandatory="{$mandatory}">
 			<xsl:copy-of select="enolunatic:add-condition-filter($filterCondition,$filterDependencies)"/>
 			<hierarchy>
@@ -362,7 +361,6 @@
 			</yAxisIterations>
 			<symLinks>
 				<xsl:attribute name="name" select="$questionName"/>
-				
 				<LINK>
 					<source>1</source>
 					<target>1</target>
@@ -476,7 +474,7 @@
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
 		<xsl:param name="idLoop" select="''" tunnel="yes"/>
 		<xsl:param name="shouldHaveMissingVars" select="true()" tunnel="yes"/>
-		
+
 		<xsl:variable name="filter" select="enolunatic:get-global-filter($source-context)"/>
 		<xsl:variable name="filterDependencies" select="enolunatic:find-variables-in-formula($filter)"/>
 		<xsl:variable name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context,$filter)"/>
@@ -496,7 +494,6 @@
 			</xsl:if>
 		</xsl:variable>
 		<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
-		
 
 		<components xsi:type="CheckboxGroup" componentType="CheckboxGroup" id="{$idQuestion}">
 			<label>
@@ -512,7 +509,7 @@
 			<xsl:if test="$shouldHaveMissingVars and $missingVar">
 				<missingResponse>
 					<xsl:attribute name="name" select="$missingResponseName"/>
-				</missingResponse>	
+				</missingResponse>
 			</xsl:if>
 			<xsl:copy-of select="$dependencies"/>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -525,7 +522,7 @@
 				<xsl:with-param name="filterCondition" select="$filterCondition" tunnel="yes"/>
 			</xsl:apply-templates>
 		</components>
-		
+
 		<xsl:if test="$addFilterResult">
 			<xsl:call-template name="enolunatic:add-calculated-variable-filter-result">
 				<xsl:with-param name="name" select="$questionName"/>
@@ -543,7 +540,7 @@
 				<xsl:with-param name="idLoop" select="$idLoop"/>
 			</xsl:call-template>
 		</xsl:if>
-		
+
 		<xsl:apply-templates select="enolunatic:get-end-question-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
@@ -666,7 +663,7 @@
 				</xsl:when>
 			</xsl:choose>
 		</components>
-		
+
 		<xsl:if test="$addFilterResult">
 			<xsl:call-template name="enolunatic:add-calculated-variable-filter-result">
 				<xsl:with-param name="name" select="$questionName"/>
@@ -676,7 +673,7 @@
 				<xsl:with-param name="languages" select="$languages"/>
 			</xsl:call-template>
 		</xsl:if>
-		
+
 		<xsl:apply-templates select="enolunatic:get-end-question-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
@@ -720,7 +717,7 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="idColumn" tunnel="yes"/>
 		<xsl:param name="elementName" tunnel="yes"/>
-		
+
 		<xsl:variable name="col-span" select="number(enolunatic:get-colspan($source-context))"/>
 		<xsl:variable name="row-span" select="number(enolunatic:get-rowspan($source-context))"/>
 		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
@@ -751,7 +748,7 @@
 		</xsl:element>
 		<xsl:copy-of select="$dependencies"/>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>The Cell driver gives the colspan and the rowspan to the Response, which creates the cell.</xd:p>
@@ -832,6 +829,7 @@
 				<xsl:when test="self::CodeDomain and $code-appearance='radio-button'"><xsl:value-of select="'Radio'"/></xsl:when>
 				<xsl:when test="self::CodeDomain and $code-appearance='drop-down-list'"><xsl:value-of select="'Dropdown'"/></xsl:when>
 				<xsl:when test="self::CodeDomain and $code-appearance='checkbox'"><xsl:value-of select="'CheckboxOne'"/></xsl:when>
+				<xsl:when test="self::CodeDomain and $code-appearance='suggester'"><xsl:value-of select="'Suggester'"/></xsl:when>
 				<xsl:when test="self::BooleanDomain"><xsl:value-of select="'CheckboxBoolean'"/></xsl:when>
 			</xsl:choose>
 		</xsl:variable>
@@ -850,6 +848,8 @@
 		<xsl:variable name="lengthResponse" select="enolunatic:get-length($source-context)"/>
 		<!-- DateTimeDomain getters -->
 		<xsl:variable name="format" select="enolunatic:get-format($source-context)"/>
+		<xsl:variable name="external-codelist-name" select="enolunatic:get-external-codelist-name($source-context)"/>
+		<xsl:variable name="suggester-configuration" select="enolunatic:get-suggester-configuration($source-context)"/>
 
 		<xsl:if test="$questionName!=''">
 			<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idQuestion}">
@@ -864,6 +864,9 @@
 				</label>
 
 				<xsl:copy-of select="$declarations"/>
+				<xsl:if test="$external-codelist-name != ''">
+					<storeName><xsl:value-of select="$external-codelist-name"/></storeName>
+				</xsl:if>
 				<xsl:copy-of select="enolunatic:add-condition-filter($filterCondition,$filterConditionDependencies)"/>
 				<xsl:if test="not(ancestor::PairwiseQuestion)">
 					<hierarchy>
@@ -901,10 +904,8 @@
 						<xsl:attribute name="name" select="$missingResponseName"/>
 					</missingResponse>
 				</xsl:if>
-
-
 			</components>
-			
+
 			<xsl:if test="$addFilterResult">
 				<xsl:call-template name="enolunatic:add-calculated-variable-filter-result">
 					<xsl:with-param name="name" select="$questionName"/>
@@ -929,7 +930,6 @@
 				<xsl:with-param name="idLoop" select="$idLoop"/>
 			</xsl:call-template>
 		</xsl:if>
-		
 
 		<xsl:call-template name="enolunatic:add-format-controls">
 			<xsl:with-param name="idQuestion" select="$idQuestion"/>
@@ -941,7 +941,12 @@
 			<xsl:with-param name="format" select="$format"/>
 			<xsl:with-param name="lengthResponse" select="$lengthResponse"/>
 		</xsl:call-template>
-		
+		<xsl:if test="$suggester-configuration != ''">
+			<xsl:call-template name="enolunatic:add-suggester-configuration">
+				<xsl:with-param name="codelist-name" select="$external-codelist-name"/>
+				<xsl:with-param name="suggester-configuration" select="$suggester-configuration"/>
+			</xsl:call-template>
+		</xsl:if>
 	</xsl:template>
 
 	<xd:doc>
@@ -970,6 +975,7 @@
 				<xsl:when test="self::CodeDomain and $code-appearance='radio-button'"><xsl:value-of select="'Radio'"/></xsl:when>
 				<xsl:when test="self::CodeDomain and $code-appearance='drop-down-list'"><xsl:value-of select="'Dropdown'"/></xsl:when>
 				<xsl:when test="self::CodeDomain and $code-appearance='checkbox'"><xsl:value-of select="'CheckboxOne'"/></xsl:when>
+				<xsl:when test="self::CodeDomain and $code-appearance='suggester'"><xsl:value-of select="'Suggester'"/></xsl:when>
 				<xsl:when test="self::BooleanDomain"><xsl:value-of select="'CheckboxBoolean'"/></xsl:when>
 			</xsl:choose>
 		</xsl:variable>
@@ -988,7 +994,9 @@
 		<xsl:variable name="lengthResponse" select="enolunatic:get-length($source-context)"/>
 		<!-- DateTimeDomain getters -->
 		<xsl:variable name="dateFormat" select="enolunatic:get-format($source-context)"/>
-		
+		<xsl:variable name="external-codelist-name" select="enolunatic:get-external-codelist-name($source-context)"/>
+		<xsl:variable name="suggester-configuration" select="enolunatic:get-suggester-configuration($source-context)"/>
+
 		<xsl:element name="{$elementName}">
 			<xsl:attribute name="id" select="enolunatic:get-name($source-context)"/>
 			<xsl:attribute name="componentType" select="$componentType"/>
@@ -1001,12 +1009,15 @@
 			<xsl:call-template name="enolunatic:add-response-dependencies">
 				<xsl:with-param name="responseName" select="$responseName"/>
 			</xsl:call-template>
-			
+
 			<xsl:if test="$unit!=''">
 				<unit><xsl:value-of select="$unit"/></unit>
 			</xsl:if>
 			<xsl:if test="$dateFormat != ''">
 				<dateFormat><xsl:value-of select="$dateFormat"/></dateFormat>
+			</xsl:if>
+			<xsl:if test="$external-codelist-name != ''">
+				<storeName><xsl:value-of select="$external-codelist-name"/></storeName>
 			</xsl:if>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -1015,7 +1026,7 @@
 				<xsl:with-param name="responseName" select="$responseName"/>
 			</xsl:call-template>
 		</xsl:element>
-		
+
 		<xsl:call-template name="enolunatic:add-collected-variable-to-components">
 			<xsl:with-param name="responseName" select="$responseName"/>
 			<xsl:with-param name="componentRef" select="$idQuestion"/>
@@ -1032,9 +1043,12 @@
 			<xsl:with-param name="format" select="$dateFormat"/>
 			<xsl:with-param name="lengthResponse" select="$lengthResponse"/>
 		</xsl:call-template>
-		
-		
-		
+		<xsl:if test="$suggester-configuration != ''">
+			<xsl:call-template name="enolunatic:add-suggester-configuration">
+				<xsl:with-param name="codelist-name" select="$external-codelist-name"/>
+				<xsl:with-param name="suggester-configuration" select="$suggester-configuration"/>
+			</xsl:call-template>
+		</xsl:if>
 	</xsl:template>
 
 	<xd:doc>
@@ -1063,7 +1077,6 @@
 		<xsl:call-template name="enolunatic:add-response-dependencies">
 			<xsl:with-param name="responseName" select="$responseName"/>
 		</xsl:call-template>
-		
 		<xsl:call-template name="enolunatic:add-collected-variable-to-components">
 			<xsl:with-param name="responseName" select="$responseName"/>
 			<xsl:with-param name="componentRef" select="$idQuestion"/>
@@ -1257,7 +1270,6 @@
 			<xsl:variable name="errorMessage" select="enolunatic:get-vtl-label($source-context, $languages[1])"/>
 			<xsl:variable name="criticality" select="enolunatic:get-alert-level($source-context)"/>
 			<xsl:variable name="typeOfControl"><xsl:value-of select="'CONSISTENCY'"/></xsl:variable>
-			
 			<xsl:variable name="controlDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($control)"/>
 			<xsl:variable name="instructionDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($errorMessage)"/>
 			<xsl:variable name="dependenciesVariables" as="xs:string*">
@@ -1269,9 +1281,8 @@
 				</xsl:for-each>
 			</xsl:variable>
 			<xsl:variable name="dependencies" select="enolunatic:add-dependencies($dependenciesVariables)"/>
-	
-			<controls>
 
+			<controls>
 				<xsl:if test="$id != ''">
 					<xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
 				</xsl:if>
@@ -1296,14 +1307,12 @@
 					</errorMessage>
 				</xsl:if>
 				<xsl:copy-of select="$dependencies"/>
-	
 				<!-- Go to the Calculated Variable -->
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 					<xsl:with-param name="driver" select="." tunnel="yes"/>
 				</xsl:apply-templates>
 			</controls>
 		</xsl:if>
-		
 	</xsl:template>
 
 	<xd:doc>
@@ -1334,7 +1343,7 @@
 		<xsl:param name="responseName"/>
 		<response name="{$responseName}"/>
 	</xsl:template>
-	
+
 	<xsl:template name="enolunatic:add-response-dependencies">
 		<xsl:param name="responseName"/>
 		<responseDependencies><xsl:value-of select="$responseName"/></responseDependencies>
@@ -1381,8 +1390,7 @@
 			</values>
 		</variables>
 	</xsl:template>
-	
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Named template: enolunatic:add-format-controls.</xd:p>
@@ -1399,8 +1407,8 @@
 		<xsl:param name="numberOfDecimals"/>
 		<xsl:param name="lengthResponse"/>
 		<xsl:if test="$componentType='InputNumber'">
-			<xsl:if test="$minimumResponse!='' and $maximumResponse!=''">	
-				<controls>		
+			<xsl:if test="$minimumResponse!='' and $maximumResponse!=''">
+				<controls>
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-borne-inf-sup')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
@@ -1418,8 +1426,8 @@
 					</errorMessage>
 				</controls>
 			</xsl:if>
-			<xsl:if test="$minimumResponse='' and $maximumResponse!=''">	
-				<controls>		
+			<xsl:if test="$minimumResponse='' and $maximumResponse!=''">
+				<controls>
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-borne-sup')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
@@ -1437,8 +1445,8 @@
 					</errorMessage>
 				</controls>
 			</xsl:if>
-			<xsl:if test="$minimumResponse!='' and $maximumResponse=''">	
-				<controls>		
+			<xsl:if test="$minimumResponse!='' and $maximumResponse=''">
+				<controls>
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-borne-inf')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
@@ -1456,7 +1464,7 @@
 					</errorMessage>
 				</controls>
 			</xsl:if>
-			<controls>		
+			<controls>
 				<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-decimal')"/></xsl:attribute>
 				<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
 				<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
@@ -1474,10 +1482,10 @@
 				</errorMessage>
 			</controls>
 		</xsl:if>
-		
+
 		<xsl:if test="$componentType='Datepicker'">
 			<xsl:if test="$minimumResponse!='' and $maximumResponse=''">
-				<controls>		
+				<controls>
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-date-borne-sup')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
@@ -1496,7 +1504,7 @@
 				</controls>
 			</xsl:if>
 			<xsl:if test="$minimumResponse='' and $maximumResponse!=''">
-				<controls>		
+				<controls>
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-date-borne-inf')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
@@ -1515,7 +1523,7 @@
 				</controls>
 			</xsl:if>
 			<xsl:if test="$minimumResponse!='' and $maximumResponse!=''">
-				<controls>		
+				<controls>
 					<xsl:attribute name="id"><xsl:value-of select="concat($idQuestion,'-format-borne-inf-sup')"/></xsl:attribute>
 					<xsl:attribute name="criticality"><xsl:value-of select="'ERROR'"/></xsl:attribute>
 					<xsl:attribute name="typeOfControl"><xsl:value-of select="'FORMAT'"/></xsl:attribute>
@@ -1534,9 +1542,7 @@
 				</controls>
 			</xsl:if>
 		</xsl:if>
-		
 	</xsl:template>
-	
 
 	<xd:doc>
 		<xd:desc>
@@ -1549,7 +1555,7 @@
 			<dependencies><xsl:value-of select="enolunatic:get-variable-business-name(.)"/></dependencies>
 		</xsl:for-each>
 	</xsl:function>
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Named function: enolunatic:add-conditionFilter</xd:p>
@@ -1568,7 +1574,7 @@
 	<xsl:template name="enolunatic:add-collected-value">
 		<xsl:param name="valueType"/>
 		<xsl:param name="depth"/>
-		
+
 		<xsl:choose>
 			<xsl:when test="$depth&gt;0">
 				<xsl:element name="{$valueType}">
@@ -1586,7 +1592,7 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-	
+
 	<xsl:template name="enolunatic:add-calculated-variable-filter-result">
 		<xsl:param name="name"/>
 		<xsl:param name="expression"/>
@@ -1607,5 +1613,14 @@
 			</xsl:if>
 		</variables>
 	</xsl:template>
-	
+
+	<xsl:template name="enolunatic:add-suggester-configuration">
+		<xsl:param name="codelist-name"/>
+		<xsl:param name="suggester-configuration"/>
+		
+		<suggesters>
+			<name><xsl:value-of select="$codelist-name"/></name>
+			<xsl:value-of select="$suggester-configuration" disable-output-escaping="yes"/>
+		</suggesters>
+	</xsl:template>
 </xsl:stylesheet>
