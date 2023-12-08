@@ -1432,6 +1432,30 @@
       <text:p>Return the scope of the pairwise</text:p>
      </table:table-cell>
     </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi33:get-urn</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enopogues:get-urn</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Returns the URN from the external codelist</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi33:get-suggester-parameters</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enopogues:get-suggester-parameters</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Returns the parameters for the suggester responses using this codelist</text:p>
+     </table:table-cell>
+    </table:table-row>
    </table:table>
    <table:named-expressions/>
    <table:database-ranges>

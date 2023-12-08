@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<office:document xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:rpt="http://openoffice.org/2005/report" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:css3t="http://www.w3.org/TR/css3-text/" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" office:version="1.3" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>P5DT7H30M35S</meta:editing-duration><meta:editing-cycles>471</meta:editing-cycles><meta:generator>LibreOffice/7.3.6.2$Windows_X86_64 LibreOffice_project/c28ca90fd6e1a19e189fc16c05f8f8924961e12e</meta:generator><dc:date>2022-11-10T17:59:30.047000000</dc:date><dc:creator>François Bulot</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="684" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
+<office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:rpt="http://openoffice.org/2005/report" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:css3t="http://www.w3.org/TR/css3-text/" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" office:version="1.3" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
+ <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>P5DT10H45M4S</meta:editing-duration><meta:editing-cycles>479</meta:editing-cycles><meta:generator>LibreOffice/7.4.7.2$Windows_X86_64 LibreOffice_project/723314e595e8007d3cf785c16538505a1c878ca5</meta:generator><dc:date>2023-10-23T20:45:36.030000000</dc:date><dc:creator>François Bulot</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="697" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">0</config:config-item>
-   <config:config-item config:name="VisibleAreaWidth" config:type="int">63256</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">115019</config:config-item>
+   <config:config-item config:name="VisibleAreaWidth" config:type="int">63257</config:config-item>
+   <config:config-item config:name="VisibleAreaHeight" config:type="int">116374</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
      <config:config-item-map-named config:name="Tables">
       <config:config-item-map-entry config:name="Sheet1">
-       <config:config-item config:name="CursorPositionX" config:type="int">2</config:config-item>
-       <config:config-item config:name="CursorPositionY" config:type="int">210</config:config-item>
-       <config:config-item config:name="HorizontalSplitMode" config:type="short">0</config:config-item>
-       <config:config-item config:name="VerticalSplitMode" config:type="short">0</config:config-item>
-       <config:config-item config:name="HorizontalSplitPosition" config:type="int">0</config:config-item>
-       <config:config-item config:name="VerticalSplitPosition" config:type="int">0</config:config-item>
+       <config:config-item config:name="CursorPositionX" config:type="int">0</config:config-item>
+       <config:config-item config:name="CursorPositionY" config:type="int">212</config:config-item>
        <config:config-item config:name="ActiveSplitRange" config:type="short">2</config:config-item>
        <config:config-item config:name="PositionLeft" config:type="int">0</config:config-item>
        <config:config-item config:name="PositionRight" config:type="int">0</config:config-item>
        <config:config-item config:name="PositionTop" config:type="int">0</config:config-item>
-       <config:config-item config:name="PositionBottom" config:type="int">189</config:config-item>
+       <config:config-item config:name="PositionBottom" config:type="int">201</config:config-item>
        <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
        <config:config-item config:name="ZoomValue" config:type="int">100</config:config-item>
        <config:config-item config:name="PageViewZoomValue" config:type="int">60</config:config-item>
@@ -32,7 +28,7 @@
       </config:config-item-map-entry>
      </config:config-item-map-named>
      <config:config-item config:name="ActiveTable" config:type="string">Sheet1</config:config-item>
-     <config:config-item config:name="HorizontalScrollbarWidth" config:type="int">1341</config:config-item>
+     <config:config-item config:name="HorizontalScrollbarWidth" config:type="int">1301</config:config-item>
      <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
      <config:config-item config:name="ZoomValue" config:type="int">100</config:config-item>
      <config:config-item config:name="PageViewZoomValue" config:type="int">60</config:config-item>
@@ -43,7 +39,7 @@
      <config:config-item config:name="GridColor" config:type="int">12632256</config:config-item>
      <config:config-item config:name="ShowPageBreaks" config:type="boolean">true</config:config-item>
      <config:config-item config:name="HasColumnRowHeaders" config:type="boolean">true</config:config-item>
-     <config:config-item config:name="HasSheetTabs" config:type="boolean">true</config:config-item>
+     <config:config-item config:name="FormulaBarHeight" config:type="short">1</config:config-item>
      <config:config-item config:name="IsOutlineSymbolsSet" config:type="boolean">true</config:config-item>
      <config:config-item config:name="IsValueHighlightingEnabled" config:type="boolean">false</config:config-item>
      <config:config-item config:name="IsSnapToRaster" config:type="boolean">false</config:config-item>
@@ -93,6 +89,7 @@
    <config:config-item config:name="GridColor" config:type="int">12632256</config:config-item>
    <config:config-item config:name="HasColumnRowHeaders" config:type="boolean">true</config:config-item>
    <config:config-item config:name="HasSheetTabs" config:type="boolean">true</config:config-item>
+   <config:config-item config:name="ImagePreferredDPI" config:type="int">0</config:config-item>
    <config:config-item config:name="IsDocumentShared" config:type="boolean">false</config:config-item>
    <config:config-item config:name="IsKernAsianPunctuation" config:type="boolean">false</config:config-item>
    <config:config-item config:name="IsOutlineSymbolsSet" config:type="boolean">true</config:config-item>
@@ -135,6 +132,7 @@
   <style:font-face style:name="Arial" svg:font-family="Arial" style:font-family-generic="swiss" style:font-pitch="variable"/>
   <style:font-face style:name="Arial1" svg:font-family="Arial" style:font-family-generic="swiss"/>
   <style:font-face style:name="Arial2" svg:font-family="Arial" style:font-family-generic="system" style:font-pitch="variable"/>
+  <style:font-face style:name="F" svg:font-family="" style:font-family-generic="roman"/>
   <style:font-face style:name="Liberation Sans" svg:font-family="&apos;Liberation Sans&apos;" style:font-family-generic="swiss" style:font-pitch="variable"/>
   <style:font-face style:name="Mangal" svg:font-family="Mangal" style:font-pitch="variable"/>
   <style:font-face style:name="Microsoft YaHei" svg:font-family="&apos;Microsoft YaHei&apos;" style:font-family-generic="system" style:font-pitch="variable"/>
@@ -511,14 +509,6 @@
   <style:style style:name="Result" style:family="table-cell" style:parent-style-name="Default">
    <style:text-properties fo:font-style="italic" style:text-underline-style="solid" style:text-underline-width="auto" style:text-underline-color="font-color" fo:font-weight="bold"/>
   </style:style>
-  <style:style style:name="Heading" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties style:text-align-source="fix" style:repeat-content="false"/>
-   <style:paragraph-properties fo:text-align="center"/>
-   <style:text-properties fo:font-size="16pt" fo:font-style="italic" fo:font-weight="bold"/>
-  </style:style>
-  <style:style style:name="Result" style:family="table-cell" style:parent-style-name="Default">
-   <style:text-properties fo:font-style="italic" style:text-underline-style="solid" style:text-underline-width="auto" style:text-underline-color="font-color" fo:font-weight="bold"/>
-  </style:style>
   <style:style style:name="Result2" style:family="table-cell" style:parent-style-name="Result" style:data-style-name="N108"/>
  </office:styles>
  <office:automatic-styles>
@@ -616,267 +606,7 @@
     <text:p>Page <text:page-number>1</text:page-number></text:p>
    </style:footer>
    <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="Report" style:page-layout-name="pm2">
-   <style:header>
-    <style:region-left>
-     <text:p><text:sheet-name>???</text:sheet-name><text:s/>(<text:title>???</text:title>)</text:p>
-    </style:region-left>
-    <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2021-11-26">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="17:16:58.301000000">00:00:00</text:time></text:p>
-    </style:region-right>
-   </style:header>
-   <style:header-left style:display="false"/>
-   <style:footer>
-    <text:p>Page <text:page-number>1</text:page-number><text:s/>/ <text:page-count>99</text:page-count></text:p>
-   </style:footer>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1" style:display-name="PageStyle_Feuil1" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_1" style:display-name="PageStyle_Feuil1 1" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_2" style:display-name="PageStyle_Feuil1 2" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_3" style:display-name="PageStyle_Feuil1 3" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_4" style:display-name="PageStyle_Feuil1 4" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_5" style:display-name="PageStyle_Feuil1 5" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_6" style:display-name="PageStyle_Feuil1 6" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_7" style:display-name="PageStyle_Feuil1 7" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_8" style:display-name="PageStyle_Feuil1 8" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_9" style:display-name="PageStyle_Feuil1 9" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_10" style:display-name="PageStyle_Feuil1 10" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_11" style:display-name="PageStyle_Feuil1 11" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_12" style:display-name="PageStyle_Feuil1 12" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_13" style:display-name="PageStyle_Feuil1 13" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_14" style:display-name="PageStyle_Feuil1 14" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_15" style:display-name="PageStyle_Feuil1 15" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_16" style:display-name="PageStyle_Feuil1 16" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_17" style:display-name="PageStyle_Feuil1 17" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_18" style:display-name="PageStyle_Feuil1 18" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_19" style:display-name="PageStyle_Feuil1 19" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_20" style:display-name="PageStyle_Feuil1 20" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_21" style:display-name="PageStyle_Feuil1 21" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_22" style:display-name="PageStyle_Feuil1 22" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_23" style:display-name="PageStyle_Feuil1 23" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_24" style:display-name="PageStyle_Feuil1 24" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_25" style:display-name="PageStyle_Feuil1 25" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_26" style:display-name="PageStyle_Feuil1 26" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_27" style:display-name="PageStyle_Feuil1 27" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_28" style:display-name="PageStyle_Feuil1 28" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_29" style:display-name="PageStyle_Feuil1 29" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_30" style:display-name="PageStyle_Feuil1 30" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_31" style:display-name="PageStyle_Feuil1 31" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_32" style:display-name="PageStyle_Feuil1 32" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_33" style:display-name="PageStyle_Feuil1 33" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_34" style:display-name="PageStyle_Feuil1 34" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_35" style:display-name="PageStyle_Feuil1 35" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_36" style:display-name="PageStyle_Feuil1 36" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_37" style:display-name="PageStyle_Feuil1 37" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_38" style:display-name="PageStyle_Feuil1 38" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_39" style:display-name="PageStyle_Feuil1 39" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
-  </style:master-page>
-  <style:master-page style:name="PageStyle_5f_Feuil1_20_40" style:display-name="PageStyle_Feuil1 40" style:page-layout-name="pm3">
-   <style:header style:display="false"/>
-   <style:header-left style:display="false"/>
-   <style:footer style:display="false"/>
-   <style:footer-left style:display="false"/>
+   <style:footer-first style:display="false"/>
   </style:master-page>
  </office:master-styles>
  <office:body>
@@ -3569,7 +3299,7 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce19" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[not(d:StructuredMixedResponseDomain) and r:UserAttributePair/r:AttributeValue=&apos;HouseholdPairing&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -3583,7 +3313,39 @@
       <text:p>Returns the r:ID of the pairwise scope</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro1" table:number-rows-repeated="1048365">
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>d:CodeDomain</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-external-codelist-name</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>r:CodeListReference/l:CodeList[r:CodeListReference/@isExternal]/l:CodeListName/r:String</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>lang-choice</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Returns the name of an external codelist</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>d:CodeDomain</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-suggester-configuration</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>r:CodeListReference/l:CodeList/r:UserAttributePair[r:AttributeKey=&apos;SuggesterConfiguration&apos;]/r:AttributeValue</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Returns the configuration for a suggester</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1" table:number-rows-repeated="1048362">
      <table:table-cell table:number-columns-repeated="5"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">

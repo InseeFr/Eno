@@ -5,7 +5,8 @@
     xmlns:d="ddi:datacollection:3_3" xmlns:s="ddi:studyunit:3_3" xmlns:r="ddi:reusable:3_3"
     xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:a="ddi:archive:3_3"
     xmlns:l="ddi:logicalproduct:3_3" xmlns:enoddi33="http://xml.insee.fr/apps/eno/out/ddi33"
-    exclude-result-prefixes="xd eno enoddi33" version="2.0">
+    xmlns:lunatic="http://xml.insee.fr/schema/applis/lunatic-h"
+    exclude-result-prefixes="xd eno enoddi33 lunatic" version="2.0">
 
     <xd:doc>
         <xd:desc>
@@ -671,7 +672,7 @@
 	                        <xhtml:div class="Description">
 	                            <!-- Variables referenced in the description of a FlowControl must be with the character ¤ (entered in Pogues with the character $)  -->
 	                            <!-- WARNING : A dollar currency entry which is also changed to ¤...  -->
-	                            <xsl:value-of select="replace(enoddi33:get-description($source-context),'\$','¤')"/> 
+	                            <xsl:value-of select="replace(enoddi33:get-description($source-context),'\$','¤')"/>
 	                        </xhtml:div>
 	                        <xhtml:div class="Expression"><xsl:value-of select="enoddi33:get-expression($source-context)"/></xhtml:div>
 	                        <xhtml:div class="IfTrue"><xsl:value-of select="enoddi33:get-if-true($source-context)"/></xhtml:div>
@@ -737,16 +738,45 @@
     <xsl:template match="driver-CodeListScheme//CodeList" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+
+        <xsl:variable name="urn" select="enoddi33:get-urn($source-context)"/>
+        <xsl:variable name="suggester-parameters" select="enoddi33:get-suggester-parameters($source-context)"/>
+
         <l:CodeList>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID>
                 <xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+            <xsl:if test="$suggester-parameters/*">
+                <r:UserAttributePair>
+                    <r:AttributeKey>SuggesterConfiguration</r:AttributeKey>
+                    <r:AttributeValue>
+                        <xsl:text disable-output-escaping="yes">&lt;![CDATA[</xsl:text>
+                        <xsl:for-each select="$suggester-parameters">
+                            <xsl:call-template name="copy-with-lunatic-namespace">
+                                <xsl:with-param name="content-with-previous-namespace" select="."/>
+                            </xsl:call-template>                            
+                        </xsl:for-each>
+                        <xsl:text disable-output-escaping="yes">]]&gt;</xsl:text>
+                    </r:AttributeValue>
+                </r:UserAttributePair>
+            </xsl:if>
+            <xsl:if test="$urn != ''">
+                <l:CodeListName>
+                    <r:String xml:lang="fr-FR"><xsl:value-of select="enoddi33:get-name($source-context)"/></r:String>
+                </l:CodeListName>
+            </xsl:if>
             <r:Label>
                 <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
                     <xsl:value-of select="enoddi33:get-label($source-context)"/>
                 </r:Content>
             </r:Label>
+            <xsl:if test="$urn != ''">
+                <r:CodeListReference isExternal="true">
+                    <r:URN><xsl:value-of select="$urn"/></r:URN>
+                    <r:TypeOfObject>CodeList</r:TypeOfObject>
+                </r:CodeListReference>
+            </xsl:if>
             <!--TODO define HierarchyType-->
             <!-- Enumeration:
             "Regular" A hierarchy where each section has the same number of nested levels, i.e., the lowest level represents the most discrete values.
@@ -811,15 +841,17 @@
     <xsl:template match="driver-CategoryScheme//CodeList" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" tunnel="yes"/>
-        <l:CategoryScheme>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="concat('CategoryScheme-',enoddi33:get-id($source-context))"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
-            <r:Label><r:Content xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="enoddi33:get-label($source-context)"/></r:Content></r:Label>
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="." tunnel="yes"/>
-            </xsl:apply-templates>
-        </l:CategoryScheme>
+        <xsl:if test="not(enoddi33:get-urn($source-context) != '')">
+            <l:CategoryScheme>
+                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                <r:ID><xsl:value-of select="concat('CategoryScheme-',enoddi33:get-id($source-context))"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                <r:Label><r:Content xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="enoddi33:get-label($source-context)"/></r:Content></r:Label>
+                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="." tunnel="yes"/>
+                </xsl:apply-templates>
+            </l:CategoryScheme>            
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="driver-CategoryScheme//Code" mode="model">
@@ -1209,7 +1241,7 @@
                                 <xsl:attribute name="type">
                                     <xsl:value-of select="if(enoddi33:get-question-type($response) = ('MULTIPLE_CHOICE','TABLE','DYNAMIC_TABLE')) then('QuestionGrid') else('QuestionItem')"/>
                                 </xsl:attribute>
-                            </Question>                            
+                            </Question>
                         </xsl:if>
                     </xsl:for-each>
                 </xsl:if>
@@ -2161,6 +2193,27 @@
                 <r:Version><xsl:value-of select="enoddi33:get-version(.)"/></r:Version>
                 <r:TypeOfObject><xsl:value-of select="$elementName"/></r:TypeOfObject>
             </r:QuestionReference>
+    </xsl:template>
+
+    <xsl:template name="copy-with-lunatic-namespace">
+        <xsl:param name="content-with-previous-namespace"/>
+        <xsl:choose>
+            <xsl:when test="$content-with-previous-namespace/*">
+                <xsl:element name="{local-name($content-with-previous-namespace)}" namespace="http://xml.insee.fr/schema/applis/lunatic-h">
+                    <xsl:copy-of select="$content-with-previous-namespace/@*"/>
+                    <xsl:for-each select="$content-with-previous-namespace/*">
+                        <xsl:call-template name="copy-with-lunatic-namespace">
+                            <xsl:with-param name="content-with-previous-namespace" select="."/>
+                        </xsl:call-template>
+                    </xsl:for-each>
+                </xsl:element>                
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:element name="{local-name($content-with-previous-namespace)}" namespace="http://xml.insee.fr/schema/applis/lunatic-h">
+                    <xsl:value-of select="$content-with-previous-namespace"/>
+                </xsl:element>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 </xsl:stylesheet>

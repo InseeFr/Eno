@@ -1296,7 +1296,7 @@
 		</xsl:variable>
 
 		<xsl:choose>
-			<xsl:when test="enofo:get-appearance($source-context) = 'drop-down-list'">
+			<xsl:when test="enofo:get-appearance($source-context) = 'drop-down-list' or enofo:get-appearance($source-context) = 'suggester'">
 				<xsl:choose>
 					<xsl:when test="$no-border = 'no-border'">
 						<fo:block-container height="8mm" width="50mm">
