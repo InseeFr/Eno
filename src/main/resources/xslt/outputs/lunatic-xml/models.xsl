@@ -442,7 +442,7 @@
 				<xsl:with-param name="labelQuestion" select="enolunatic:replace-all-variables-with-business-name($source-context, $label)" tunnel="yes"/>
 				<xsl:with-param name="typeOfQuestion" select="'Dropdown'" tunnel="yes"/>
 				<xsl:with-param name="declarations" select="enolunatic:getInstructionForQuestion($source-context,.)" as="node()*" tunnel="yes"/>
-				<xsl:with-param name="filterCondition" select="'xAxis &lt;&gt; yAxis'" tunnel="yes"/>
+				<xsl:with-param name="filterCondition" select="$filterCondition" tunnel="yes"/>
 				<xsl:with-param name="dependencies" select="$dependencies" tunnel="yes"/>
 				<xsl:with-param name="loopDepth" select="$loopDepth +2" tunnel="yes"/>
 			</xsl:apply-templates>
