@@ -18,10 +18,6 @@ public class LunaticParameters {
 
     private LunaticParameters() {}
 
-    public static LunaticParameters emptyValues() {
-        return new LunaticParameters();
-    }
-
     public static LunaticParameters of(EnoParameters.Context context, EnoParameters.ModeParameter modeParameter) {
         LunaticParameters parameters = new LunaticParameters();
         parameters.lunaticValues(context, modeParameter);
@@ -39,12 +35,25 @@ public class LunaticParameters {
         this.setControls(isWeb || isProcess);
         this.setToolTip(isWeb || isProcess);
         this.setFilterDescription(isProcess);
-        this.setFilterResult(isWeb);
-        this.setMissingVariables(isInterview);
-        this.setLunaticPaginationMode(
-                EnoParameters.Context.BUSINESS.equals(context) ?
-                        LunaticPaginationMode.SEQUENCE :
-                        LunaticPaginationMode.QUESTION);
+        this.setFilterResult(isWeb || isProcess);
+        this.setMissingVariables(isInterview || isProcess);
+        this.setLunaticPaginationMode(paginationValue(context, modeParameter));
+    }
+
+    private LunaticPaginationMode paginationValue(EnoParameters.Context context, EnoParameters.ModeParameter modeParameter) {
+        return switch (context) {
+            case DEFAULT, HOUSEHOLD ->
+                    EnoParameters.ModeParameter.PROCESS.equals(modeParameter) ?
+                            LunaticPaginationMode.NONE :
+                            LunaticPaginationMode.QUESTION;
+            case BUSINESS -> {
+                if (EnoParameters.ModeParameter.PROCESS.equals(modeParameter))
+                    yield LunaticPaginationMode.NONE;
+                if (EnoParameters.ModeParameter.CAWI.equals(modeParameter))
+                    yield LunaticPaginationMode.SEQUENCE;
+                yield LunaticPaginationMode.QUESTION;
+            }
+        };
     }
 
 }
