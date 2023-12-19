@@ -99,13 +99,33 @@ public class EnoParameters {
             case PROCESS -> this.setSelectedModes(List.of(Mode.CAPI, Mode.CATI, Mode.CAWI, Mode.PAPI));
         }
         //
+        boolean isInterviewMode = ModeParameter.CAPI.equals(modeParameter) || ModeParameter.CATI.equals(modeParameter);
+        boolean isProcessMode = ModeParameter.PROCESS.equals(modeParameter);
+        //
         this.setIdentificationQuestion(Context.BUSINESS.equals(context));
         this.setResponseTimeQuestion(Context.BUSINESS.equals(context));
-        this.setCommentSection(Context.BUSINESS.equals(context));
-        this.setQuestionNumberingMode(
-                Context.HOUSEHOLD.equals(context) ? QuestionNumberingMode.NONE : QuestionNumberingMode.SEQUENCE);
+        this.setCommentSection(Context.BUSINESS.equals(context) || (isInterviewMode || isProcessMode));
         this.setSequenceNumbering(true);
-        this.setArrowCharInQuestions(Context.BUSINESS.equals(context));
+        this.setQuestionNumberingMode(questionNumberingModeValue(context, modeParameter));
+        this.setArrowCharInQuestions(arrowCharValue(context, modeParameter));
+    }
+
+    private QuestionNumberingMode questionNumberingModeValue(Context context, ModeParameter modeParameter) {
+        return switch (context) {
+            case DEFAULT -> QuestionNumberingMode.ALL;
+            case HOUSEHOLD ->
+                    (ModeParameter.PAPI.equals(modeParameter) || ModeParameter.PROCESS.equals(modeParameter)) ?
+                            QuestionNumberingMode.ALL :
+                            QuestionNumberingMode.NONE;
+            case BUSINESS -> QuestionNumberingMode.SEQUENCE;
+        };
+    }
+
+    private boolean arrowCharValue(Context context, ModeParameter modeParameter) {
+        return switch (context) {
+            case DEFAULT, BUSINESS -> true;
+            case HOUSEHOLD -> ! ModeParameter.CAWI.equals(modeParameter);
+        };
     }
 
 }
