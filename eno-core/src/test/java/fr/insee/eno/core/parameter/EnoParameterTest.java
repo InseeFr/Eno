@@ -2,6 +2,8 @@ package fr.insee.eno.core.parameter;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class EnoParameterTest {
@@ -45,7 +47,8 @@ class EnoParameterTest {
                 EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAPI, Format.LUNATIC);
         //
         assertEquals(EnoParameters.QuestionNumberingMode.NONE, enoParameters.getQuestionNumberingMode());
-        assertFalse(enoParameters.isArrowCharInQuestions());
+        assertTrue(enoParameters.isArrowCharInQuestions());
+        assertTrue(enoParameters.isCommentSection());
     }
 
     @Test
@@ -55,17 +58,22 @@ class EnoParameterTest {
                 EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAPI, Format.LUNATIC);
         //
         assertEquals(EnoParameters.QuestionNumberingMode.NONE, enoParameters.getQuestionNumberingMode());
-        assertFalse(enoParameters.isArrowCharInQuestions());
+        assertTrue(enoParameters.isArrowCharInQuestions());
+        assertTrue(enoParameters.isCommentSection());
     }
 
     @Test
-    void parameters_BusinessCAPILunatic_lunaticPagination() {
-        //
-        EnoParameters enoParameters = EnoParameters.of(
-                EnoParameters.Context.BUSINESS, EnoParameters.ModeParameter.CAPI, Format.LUNATIC);
-        //
-        LunaticParameters lunaticParameters = enoParameters.getLunaticParameters();
-        assertEquals(LunaticParameters.LunaticPaginationMode.SEQUENCE, lunaticParameters.getLunaticPaginationMode());
+    void parameters_CAPILunatic_lunaticPagination() {
+        List.of(EnoParameters.Context.DEFAULT, EnoParameters.Context.HOUSEHOLD, EnoParameters.Context.BUSINESS)
+                .forEach(context -> {
+                    //
+                    EnoParameters enoParameters = EnoParameters.of(
+                            context, EnoParameters.ModeParameter.CAPI, Format.LUNATIC);
+                    //
+                    LunaticParameters lunaticParameters = enoParameters.getLunaticParameters();
+                    assertEquals(LunaticParameters.LunaticPaginationMode.QUESTION,
+                            lunaticParameters.getLunaticPaginationMode());
+        });
     }
 
 }
