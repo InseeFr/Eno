@@ -43,6 +43,7 @@ dependencies {
     testRuntimeOnly 'ch.qos.logback:logback-classic'
     // JUnit Jupiter
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     // Mockito
     testImplementation 'org.mockito:mockito-core'
 
@@ -57,11 +58,6 @@ configurations.configureEach {
             details.useVersion '2.2'
         } // security issue in versions <2.0 imported as transitive dependencies
     }
-}
-
-tasks.named('test') {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
 }
 
 tasks.withType(GenerateModuleMetadata).configureEach {

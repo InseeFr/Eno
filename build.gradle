@@ -6,10 +6,17 @@ plugins {
     id "org.sonarqube" version '4.4.1.3373'
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.deprecation = true
+}
+
 allprojects {
     group = 'fr.insee.eno'
     version = '3.13.6'
-    sourceCompatibility = '17'
 }
 
 subprojects {

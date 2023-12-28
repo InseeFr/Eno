@@ -33,7 +33,7 @@ sourceSets {
     }
 }
 
-task generateSources(type: JavaExec) {
+tasks.register('generateSources', JavaExec) {
     group 'build'
     description 'Generate java sources from DDI xsd'
     classpath = sourceSets.main.compileClasspath
