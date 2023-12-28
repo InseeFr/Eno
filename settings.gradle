@@ -15,9 +15,6 @@ dependencyResolutionManagement {
                 snapshotsOnly()
             }
         }
-        // Config for private maven repository:
-        //maven { url System.properties['urlMavenRepo'] }
-        // Config for local maven dependencies:
         mavenLocal()
     }
 

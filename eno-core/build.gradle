@@ -41,6 +41,7 @@ dependencies {
     testRuntimeOnly 'ch.qos.logback:logback-classic'
     // JUnit Jupiter
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     // AssertJ
     testImplementation 'org.assertj:assertj-core'
     // JSONAssert
@@ -51,11 +52,6 @@ dependencies {
     // Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-}
-
-tasks.named('test') {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
 }
 
 tasks.withType(GenerateModuleMetadata).configureEach {
