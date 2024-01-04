@@ -1,6 +1,7 @@
 package fr.insee.eno.core.processing.in.steps.ddi;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.question.ComplexMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
 import fr.insee.eno.core.model.question.TableQuestion;
 import fr.insee.eno.core.model.question.table.BooleanCell;
@@ -45,6 +46,23 @@ class DDIInsertResponseInTableCellsTest {
         dynamicTableQuestion.getTableCells().forEach(tableCell -> assertNotNull(tableCell.getResponse()));
         assertEquals("FOO", dynamicTableQuestion.getTableCells().get(0).getResponse().getVariableName());
         assertEquals("BAR", dynamicTableQuestion.getTableCells().get(1).getResponse().getVariableName());
+    }
+
+    @Test
+    void complexMultipleChoiceQuestionCase() {
+        // Given
+        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
+        ComplexMultipleChoiceQuestion complexMultipleChoiceQuestion = new ComplexMultipleChoiceQuestion();
+        complexMultipleChoiceQuestion.setTableCells(List.of(new BooleanCell(), new BooleanCell()));
+        complexMultipleChoiceQuestion.setVariableNames(List.of("FOO", "BAR"));
+        enoQuestionnaire.getMultipleResponseQuestions().add(complexMultipleChoiceQuestion);
+        // When
+        DDIInsertResponseInTableCells processing = new DDIInsertResponseInTableCells();
+        processing.apply(enoQuestionnaire);
+        // Then
+        complexMultipleChoiceQuestion.getTableCells().forEach(tableCell -> assertNotNull(tableCell.getResponse()));
+        assertEquals("FOO", complexMultipleChoiceQuestion.getTableCells().get(0).getResponse().getVariableName());
+        assertEquals("BAR", complexMultipleChoiceQuestion.getTableCells().get(1).getResponse().getVariableName());
     }
 
 }
