@@ -1,28 +1,34 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.exceptions.business.LunaticLoopException;
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.lunatic.MissingBlock;
+import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.lunatic.model.flat.*;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@AllArgsConstructor
 @Slf4j
 public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire> {
 
-    private EnoCatalog enoCatalog;
-    private boolean isMissingVariables;
+    private final EnoCatalog enoCatalog;
+    private final boolean isMissingVariables;
 
     private static final String MISSING_RESPONSE_SUFFIX = "_MISSING";
 
+    public LunaticAddMissingVariables(EnoCatalog enoCatalog, boolean isMissingVariables) {
+        this.enoCatalog = enoCatalog;
+        this.isMissingVariables = isMissingVariables;
+    }
+
     /**
      * process missing responses on lunatic questionnaire
+     *
      * @param lunaticQuestionnaire Out object to be processed.
      */
     public void apply(Questionnaire lunaticQuestionnaire) {
@@ -51,7 +57,7 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
             allMissingBlocks.addAll(createReversedMissingBlocks(missingBlock));
         });
 
-        if(!allMissingBlocks.isEmpty()) {
+        if (!allMissingBlocks.isEmpty()) {
             MissingType missingType = new MissingType();
             missingType.getAny().addAll(allMissingBlocks);
 
@@ -62,7 +68,8 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
 
     /**
      * create the reversed missing blocks from a missing block
-     * @param missingBlock missing block from which we ne to create reversed missing blocks
+     *
+     * @param missingBlock missing block from which we need to create reversed missing blocks
      * @return list of reversed missing blocks
      */
     private List<MissingBlock> createReversedMissingBlocks(MissingBlock missingBlock) {
@@ -73,6 +80,7 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
 
     /**
      * create missing blocks from components
+     *
      * @param components list of components to process
      * @return list of missing blocks
      */
@@ -97,7 +105,7 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
                 .flatMap(Collection::stream)
                 .toList());
 
-        // generate blocks for subcomponents on pairwiselinks
+        // generate blocks for subcomponents on pairwise links
         missingBlocks.addAll(components.stream()
                 .filter(componentType -> componentType.getComponentType().equals(ComponentTypeEnum.PAIRWISE_LINKS))
                 .map(PairwiseLinks.class::cast)
@@ -110,34 +118,31 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
 
     /**
      * Extract the names of a missing block from a component
+     *
      * @param component component which we extract missing block names
      * @return list of names
      */
     private List<String> getMissingBlockNames(ComponentType component) {
         List<String> names;
-        switch(component.getComponentType()) {
-            case CHECKBOX_GROUP ->
-                    names = ((CheckboxGroup)component).getResponses().stream()
-                            .map(ResponsesCheckboxGroup::getResponse)
-                            .map(ResponseType::getName)
-                            .toList();
-            case ROSTER_FOR_LOOP ->
-                    names = ((RosterForLoop)component).getComponents().stream()
-                            .filter(subcomponent -> subcomponent.getResponse() != null)
-                            .map(subcomponent -> subcomponent.getResponse().getName())
-                            .toList();
-            case LOOP ->
-                    names = filterComponentsToProcess(((Loop)component).getComponents()).stream()
-                            .map(this::getMissingBlockNames)
-                            .flatMap(Collection::stream)
-                            .toList();
-            case TABLE ->
-                    names = ((Table)component).getBodyLines().stream()
-                            .map(BodyLine::getBodyCells)
-                            .flatMap(Collection::stream)
-                            .filter(subcomponent -> subcomponent.getResponse() != null)
-                            .map(subcomponent -> subcomponent.getResponse().getName())
-                            .toList();
+        switch (component.getComponentType()) {
+            case CHECKBOX_GROUP -> names = ((CheckboxGroup) component).getResponses().stream()
+                    .map(ResponsesCheckboxGroup::getResponse)
+                    .map(ResponseType::getName)
+                    .toList();
+            case ROSTER_FOR_LOOP -> names = ((RosterForLoop) component).getComponents().stream()
+                    .filter(subcomponent -> subcomponent.getResponse() != null)
+                    .map(subcomponent -> subcomponent.getResponse().getName())
+                    .toList();
+            case LOOP -> names = filterComponentsToProcess(((Loop) component).getComponents()).stream()
+                    .map(this::getMissingBlockNames)
+                    .flatMap(Collection::stream)
+                    .toList();
+            case TABLE -> names = ((Table) component).getBodyLines().stream()
+                    .map(BodyLine::getBodyCells)
+                    .flatMap(Collection::stream)
+                    .filter(subcomponent -> subcomponent.getResponse() != null)
+                    .map(subcomponent -> subcomponent.getResponse().getName())
+                    .toList();
             default -> {
                 ComponentSimpleResponseType simpleResponseComponent = (ComponentSimpleResponseType) component;
                 names = List.of(simpleResponseComponent.getResponse().getName());
@@ -148,22 +153,23 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
 
     /**
      * set missing response for a component
+     *
      * @param component set missing response for this component
      */
     private void setComponentMissingResponse(ComponentType component) {
         String missingResponseName = null;
 
-        switch(component.getComponentType()) {
+        switch (component.getComponentType()) {
             case LOOP -> {
                 Loop loop = (Loop) component;
                 // when linked loop, missing responses are generated on the loop components
-                if(isLinkedLoop(loop)) {
+                if (isLinkedLoop(loop)) {
                     filterComponentsToProcess(loop.getComponents()).forEach(this::setComponentMissingResponse);
                     return;
                 }
 
                 //on main loop, missing response is generated on the loop component
-                // /!\ we assume the first question component found is a simple question (not roster, table, checkboxgroup, ...)
+                // /!\ we assume the first question component found is a simple question (not roster, table, checkbox group, ...)
                 missingResponseName = loop.getComponents().stream()
                         .filter(ComponentSimpleResponseType.class::isInstance)
                         .map(ComponentSimpleResponseType.class::cast)
@@ -175,12 +181,26 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
             }
 
             // missing responses are handled on the components of pairwise
-            case PAIRWISE_LINKS -> ((PairwiseLinks) component).getComponents().forEach(this::setComponentMissingResponse);
+            case PAIRWISE_LINKS -> {
+                List<ComponentType> pairwiseComponents = ((PairwiseLinks) component).getComponents();
+                if (pairwiseComponents.size() != 1)
+                    throw new MappingException(String.format(
+                            "Pairwise component '%s' has %s inner components (should be exactly 1).",
+                            component.getId(), pairwiseComponents.size()));
+                ComponentType pairwiseInnerComponent = pairwiseComponents.get(0);
+                ResponseType missingResponse = new ResponseType();
+                missingResponse.setName(
+                        ((ComponentSimpleResponseType) pairwiseInnerComponent).getResponse() + MISSING_RESPONSE_SUFFIX);
+                pairwiseInnerComponent.setMissingResponse(missingResponse);
+            }
 
-            default -> missingResponseName = enoCatalog.getQuestion(component.getId()).getName();
+            default -> {
+                Question question = enoCatalog.getQuestion(component.getId());
+                missingResponseName = question.getName();
+            }
         }
 
-        if(missingResponseName != null) {
+        if (missingResponseName != null) {
             missingResponseName += MISSING_RESPONSE_SUFFIX;
             ResponseType missingResponse = new ResponseType();
             missingResponse.setName(missingResponseName);
@@ -190,6 +210,7 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
 
     /**
      * filter components to process (only questions/loops)
+     *
      * @param components components needing filtering
      * @return filtered components
      */
@@ -203,6 +224,7 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
 
     /**
      * Check if loop is a main or linked loop
+     *
      * @param loop loop to check
      * @return true if linked loop, false otherwise
      */

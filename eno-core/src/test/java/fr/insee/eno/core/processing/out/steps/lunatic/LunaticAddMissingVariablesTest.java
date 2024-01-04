@@ -4,7 +4,6 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.lunatic.MissingBlock;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.model.question.TextQuestion;
-import fr.insee.eno.core.processing.out.steps.lunatic.LunaticAddMissingVariables;
 import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -65,12 +64,12 @@ class LunaticAddMissingVariablesTest {
         lunaticQuestionnaire = new Questionnaire();
         List<ComponentType> components = lunaticQuestionnaire.getComponents();
         components.addAll(List.of(i, ta, n, d, cb, r, co, dd));
-        List<ComponentSimpleResponseType> responseTypes = components.stream().map(ComponentSimpleResponseType.class::cast).toList();
+
         processing.apply(lunaticQuestionnaire);
 
-        for(int cpt=0; cpt<components.size(); cpt++) {
-            ComponentType component = components.get(cpt);
-            assertEquals(component.getMissingResponse().getName(), enoCatalog.getQuestion(component.getId()).getName()+"_MISSING");
+        for (ComponentType component : components) {
+            assertEquals(component.getMissingResponse().getName(),
+                    enoCatalog.getQuestion(component.getId()).getName() + "_MISSING");
         }
     }
 
@@ -251,28 +250,23 @@ class LunaticAddMissingVariablesTest {
         lunaticQuestionnaire = new Questionnaire();
         List<ComponentType> questionnaireComponents = lunaticQuestionnaire.getComponents();
 
-
-        List<ComponentType> pairwiseComponents = new ArrayList<>(List.of(i, ta));
+        List<ComponentType> pairwiseComponents = new ArrayList<>(List.of(dd));
         PairwiseLinks pairwiseLinks = buildPairWiseLinks("jghdkpdf", pairwiseComponents);
         questionnaireComponents.add(pairwiseLinks);
         processing.apply(lunaticQuestionnaire);
 
-        List<ComponentSimpleResponseType> responseTypes = pairwiseComponents.stream().map(ComponentSimpleResponseType.class::cast).toList();
+        ComponentType pairwiseInnerComponent = pairwiseComponents.get(0);
         List<MissingBlock> missingBlocks = lunaticQuestionnaire.getMissingBlock().getAny().stream()
                 .map(MissingBlock.class::cast).toList();
 
-        for(int cpt=0; cpt<pairwiseComponents.size(); cpt++) {
-            ComponentType component = pairwiseComponents.get(cpt);
-            ComponentSimpleResponseType simpleResponseType = responseTypes.get(cpt);
-            assertTrue(missingBlocks.stream()
-                    .anyMatch(missingBlock -> missingBlock.getMissingName().equals(component.getMissingResponse().getName())
-                            && missingBlock.getNames().size() == 1
-                            && missingBlock.getNames().contains(simpleResponseType.getResponse().getName())));
-            assertTrue(missingBlocks.stream()
-                    .anyMatch(missingBlock -> missingBlock.getMissingName().equals(simpleResponseType.getResponse().getName())
-                            && missingBlock.getNames().size() == 1
-                            && missingBlock.getNames().contains(component.getMissingResponse().getName())));
-        }
+        assertTrue(missingBlocks.stream().anyMatch(missingBlock ->
+                missingBlock.getMissingName().equals(pairwiseInnerComponent.getMissingResponse().getName())
+                        && missingBlock.getNames().size() == 1
+                        && missingBlock.getNames().contains(((ComponentSimpleResponseType) pairwiseInnerComponent).getResponse().getName())));
+        assertTrue(missingBlocks.stream().anyMatch(missingBlock ->
+                missingBlock.getMissingName().equals(((ComponentSimpleResponseType) pairwiseInnerComponent).getResponse().getName())
+                        && missingBlock.getNames().size() == 1
+                        && missingBlock.getNames().contains(pairwiseInnerComponent.getMissingResponse().getName())));
     }
 
     @Test
