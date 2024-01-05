@@ -1,7 +1,6 @@
 package fr.insee.eno.core;
 
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
-import fr.insee.eno.core.exceptions.business.LunaticLogicException;
 import fr.insee.eno.core.exceptions.business.UnauthorizedHeaderException;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.Context;
@@ -38,6 +37,7 @@ class DDIToLunaticTest {
             "li49zxju",
             "lmyjrqbb",
             "ljr4jm9a",
+            "l5v3spn0",
     })
     @DisplayName("Large questionnaires, DDI to Lunatic, transformation should succeed")
     void transformQuestionnaire_nonNullOutput(String questionnaireId) throws DDIParsingException {
@@ -47,16 +47,6 @@ class DDIToLunaticTest {
                 EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
         //
         assertNotNull(lunaticQuestionnaire);
-    }
-
-    @Test
-    void ddiLoopBasedOnDynamicTable_shouldThrowException() {
-        // Given
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(
-                "functional/ddi/ddi-l5v3spn0.xml");
-        EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
-        // When + Then
-        assertThrows(UnsupportedOperationException.class, () -> DDIToLunatic.transform(inputStream, enoParameters));
     }
 
     @Test
