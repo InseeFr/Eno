@@ -127,7 +127,6 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
     private void setOtherLoopProperties(Loop lunaticLoop, fr.insee.eno.core.model.navigation.Loop enoLoop) {
         lunaticLoop.setDepth(BigInteger.ONE);
         setLunaticLoopFilter(lunaticLoop);
-        // TODO: hierarchy
         if (enoLoop instanceof LinkedLoop enoLinkedLoop) {
             setLinkedLoopIterations(lunaticLoop, enoLinkedLoop);
         }
@@ -160,10 +159,16 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
             lunaticLoop.getLoopDependencies().add(variableName);
             return;
         }
-        if (reference instanceof DynamicTableQuestion) {
-            throw new UnsupportedOperationException(String.format(
-                    "Linked loop '%s' is based on a dynamic table. This feature is not supported yet.",
-                    enoLinkedLoop.getId()));
+        if (reference instanceof DynamicTableQuestion enoDynamicTable) {
+            String variableName = enoDynamicTable.getVariableNames().get(0);
+            lunaticLoop.setIterations(new LabelType());
+            lunaticLoop.getIterations().setValue("count(" + variableName + ")");
+            lunaticLoop.getIterations().setType(LabelTypeEnum.VTL);
+            // For a dynamic table: insert all variables of the table in loop dependencies
+            // Note: done this way since Eno xml does it like this),
+            // but the loop dependency property doesn't really matter
+            lunaticLoop.getLoopDependencies().addAll(enoDynamicTable.getVariableNames());
+            return;
         }
         throw new LunaticLoopException(String.format(
                 "Linked loop '%s' reference object's '%s' is neither a loop nor a dynamic table.",
