@@ -23,8 +23,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LunaticLoopResolutionTest {
 
@@ -93,11 +92,11 @@ class LunaticLoopResolutionTest {
 
         // Then
         assertEquals(1, lunaticQuestionnaire.getComponents().size());
-        assertTrue(lunaticQuestionnaire.getComponents().get(0) instanceof Loop);
+        assertInstanceOf(Loop.class, lunaticQuestionnaire.getComponents().get(0));
         assertEquals(LOOP_ID, lunaticQuestionnaire.getComponents().get(0).getId());
         assertEquals(2, ((Loop) lunaticQuestionnaire.getComponents().get(0)).getComponents().size());
         assertEquals(SEQUENCE_ID, ((Loop) lunaticQuestionnaire.getComponents().get(0)).getComponents().get(0).getId());
-        assertTrue(((Loop) lunaticQuestionnaire.getComponents().get(0)).getComponents().get(1) instanceof Input);
+        assertInstanceOf(Input.class, ((Loop) lunaticQuestionnaire.getComponents().get(0)).getComponents().get(1));
     }
 
     @Nested
@@ -449,11 +448,11 @@ class LunaticLoopResolutionTest {
             Optional<Loop> loop2 = loops.stream().filter(loop -> loop.getComponents().size() == 2).findAny();
             assertTrue(loop1.isPresent());
             assertTrue(loop2.isPresent());
-            assertTrue(loop1.get().getComponents().get(0) instanceof Subsequence);
-            assertTrue(loop1.get().getComponents().get(1) instanceof Input);
-            assertTrue(loop1.get().getComponents().get(2) instanceof InputNumber);
-            assertTrue(loop2.get().getComponents().get(0) instanceof Subsequence);
-            assertTrue(loop2.get().getComponents().get(1) instanceof InputNumber);
+            assertInstanceOf(Subsequence.class, loop1.get().getComponents().get(0));
+            assertInstanceOf(Input.class, loop1.get().getComponents().get(1));
+            assertInstanceOf(InputNumber.class, loop1.get().getComponents().get(2));
+            assertInstanceOf(Subsequence.class, loop2.get().getComponents().get(0));
+            assertInstanceOf(InputNumber.class, loop2.get().getComponents().get(1));
         }
 
     }
@@ -487,6 +486,37 @@ class LunaticLoopResolutionTest {
                 assertEquals("(not(nvl(AGE, 0) < 18))", component.getConditionFilter().getValue());
                 assertEquals(LabelTypeEnum.VTL, component.getConditionFilter().getTypeEnum());
             });
+        }
+
+    }
+
+    @Nested
+    class LinkedLoopBasedOnDynamicTable {
+
+        @Test
+        void mapLunaticQuestionnaire() throws DDIParsingException {
+            // Given: a mapped and sorted Lunatic questionnaire
+            EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+                    LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
+                            "integration/ddi/ddi-dynamic-table.xml"),
+                    EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
+            Questionnaire lunaticQuestionnaire = new Questionnaire();
+            LunaticMapper lunaticMapper = new LunaticMapper();
+            lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
+            new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);
+
+            // When: applying loop resolution
+            new LunaticLoopResolution(enoQuestionnaire).apply(lunaticQuestionnaire);
+
+            // Then
+            List<Loop> lunaticLoops = lunaticQuestionnaire.getComponents().stream()
+                    .filter(Loop.class::isInstance).map(Loop.class::cast).toList();
+            assertEquals(1, lunaticLoops.size());
+            Loop lunaticLinkedLoop = lunaticLoops.get(0);
+            assertEquals(List.of("DYNAMIC_TABLE1", "DYNAMIC_TABLE2", "DYNAMIC_TABLE3"),
+                    lunaticLinkedLoop.getLoopDependencies());
+            assertEquals("count(DYNAMIC_TABLE1)", lunaticLinkedLoop.getIterations().getValue());
+            assertEquals(LabelTypeEnum.VTL, lunaticLinkedLoop.getIterations().getTypeEnum());
         }
 
     }

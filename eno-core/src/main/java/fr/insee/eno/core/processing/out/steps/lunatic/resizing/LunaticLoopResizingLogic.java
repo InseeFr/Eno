@@ -6,6 +6,7 @@ import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.lunatic.LunaticResizingEntry;
 import fr.insee.eno.core.model.navigation.LinkedLoop;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
+import fr.insee.eno.core.model.question.DynamicTableQuestion;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticLoopResolution;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.utils.LunaticUtils;
@@ -89,20 +90,34 @@ public class LunaticLoopResizingLogic {
     }
 
     /** For a linked loop, the resizing variable is the first variable of its reference/main loop
+     * or the first variable of the dynamic table it is linked with
      * (this implicit rule strikes again here...). */
     private String findResizingVariableForLinkedLoop(LinkedLoop enoLinkedLoop) {
+
         // Find the reference/main loop of the linked loop
         Optional<StandaloneLoop> referenceLoop = enoQuestionnaire.getLoops().stream()
                 .filter(StandaloneLoop.class::isInstance)
                 .map(StandaloneLoop.class::cast)
                 .filter(standaloneLoop -> enoLinkedLoop.getReference().equals(standaloneLoop.getId()))
                 .findAny();
-        if (referenceLoop.isEmpty())
-            throw new MappingException(String.format(
-                    "Unable to find the reference loop '%s' of linked loop '%s'",
-                    enoLinkedLoop.getReference(), enoLinkedLoop.getId()));
-        // Return the variable name of its first question (reusing some code from lunatic loop processing)
-        return LunaticLoopResolution.findFirstVariableOfReference(enoLinkedLoop, referenceLoop.get(), enoIndex);
+        if (referenceLoop.isPresent())
+            // Return the variable name of its first question (reusing some code from lunatic loop processing)
+            return LunaticLoopResolution.findFirstVariableOfReference(enoLinkedLoop, referenceLoop.get(), enoIndex);
+
+        // Otherwise find the dynamic table on which the loop is linked
+        Optional<DynamicTableQuestion> referenceTable = enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .filter(DynamicTableQuestion.class::isInstance)
+                .map(DynamicTableQuestion.class::cast)
+                .filter(dynamicTableQuestion -> enoLinkedLoop.getReference().equals(dynamicTableQuestion.getId()))
+                .findAny();
+        if (referenceTable.isPresent())
+            // Return the first column variable
+            return referenceTable.get().getVariableNames().get(0);
+
+        // If neither main loop nor dynamic table reference is found: exception
+        throw new MappingException(String.format(
+                "Unable to find the reference loop or dynamic table '%s' of linked loop '%s'",
+                enoLinkedLoop.getReference(), enoLinkedLoop.getId()));
     }
 
 }

@@ -31,17 +31,13 @@ public class LunaticAddResizing implements ProcessingStep<Questionnaire> {
                 lunaticQuestionnaire, enoQuestionnaire, enoIndex);
         LunaticPairwiseResizingLogic pairwiseResizingLogic = new LunaticPairwiseResizingLogic(
                 lunaticQuestionnaire, enoIndex);
-        LunaticDynamicTableResizingLogic dynamicTableResizingLogic = new LunaticDynamicTableResizingLogic(
-                lunaticQuestionnaire);
+        // Note: roster for loop component don't generate resizing entries unless there is a loop linked to it
+        // (this case is managed in the "loop resizing logic" class).
         //
         lunaticQuestionnaire.getComponents().forEach(component -> {
             ComponentTypeEnum componentType = component.getComponentType();
             if (Objects.requireNonNull(componentType) == ComponentTypeEnum.LOOP) {
                 resizingList.addAll(loopResizingLogic.buildResizingEntries((Loop) component));
-            }
-            if (componentType == ComponentTypeEnum.ROSTER_FOR_LOOP) {
-                log.warn("Resizing is not implemented for dynamic tables.");
-                resizingList.addAll(dynamicTableResizingLogic.buildResizingEntries((RosterForLoop) component));
             }
             if (componentType == ComponentTypeEnum.PAIRWISE_LINKS) {
                 resizingList.addAll(pairwiseResizingLogic.buildPairwiseResizingEntries((PairwiseLinks) component));

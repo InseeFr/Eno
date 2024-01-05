@@ -46,6 +46,7 @@ dependencies {
 	// Tests
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 configurations.configureEach {
@@ -60,10 +61,6 @@ processResources {
 	filesMatching('version.properties') {
 		expand(project.properties)
 	}
-}
-
-tasks.named('test') {
-	useJUnitPlatform()
 }
 
 publishing {
