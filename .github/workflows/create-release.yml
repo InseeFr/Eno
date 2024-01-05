@@ -4,7 +4,12 @@ on:
   push:
     branches:
       - 'v3-main'
-    paths-ignore: ['docs/**', 'logo/**', 'README**.md']
+    paths-ignore:
+      - 'logo/**'
+      - 'docs/**'
+      - 'README**.md'
+      - 'Dockerfile'
+      - '.github/**'
 
 jobs:
 
