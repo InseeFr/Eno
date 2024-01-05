@@ -1,0 +1,395 @@
+{
+  "owner": "FAKEPERMISSION",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "lr0eb56v",
+        "lr0e2k6k",
+        "lr0ef7d0",
+        "lr0ekng3",
+        "lr0eepqa",
+        "lr0els9b",
+        "idendquest"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "lr0eky1u",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "Eno - Dynamic table"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "ENO_DYNAMIC_TABLE",
+  "Variables": {
+    "Variable": [
+      {
+        "Scope": "lr0e2k6k",
+        "Label": "\"Table text variable\"",
+        "id": "lr0e7z8q",
+        "type": "CollectedVariableType",
+        "Name": "DYNAMIC_TABLE1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "20"
+        }
+      },
+      {
+        "Scope": "lr0e2k6k",
+        "Label": "\"Table percentage variable\"",
+        "id": "lr0em9ce",
+        "type": "CollectedVariableType",
+        "Name": "DYNAMIC_TABLE2",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "http://id.insee.fr/unit/percent",
+          "type": "NumericDatatypeType",
+          "Decimals": "0"
+        }
+      },
+      {
+        "Scope": "lr0e2k6k",
+        "Label": "\"Table unique choice variable\"",
+        "id": "lr0enehb",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lr0dyeyr",
+        "Name": "DYNAMIC_TABLE3",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Scope": "lr0e2k6k",
+        "Label": "Q_LOOP label",
+        "id": "lr0fmgf7",
+        "type": "CollectedVariableType",
+        "Name": "Q_LOOP",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": "249"
+        }
+      },
+      {
+        "Label": "Q_LAST label",
+        "id": "lr0eiypu",
+        "type": "CollectedVariableType",
+        "Name": "Q_LAST",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Fri Jan 05 2024 10:15:56 GMT+0100 (heure normale d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "TCM",
+      "uri": "http://ddi:fr.insee:DataCollection.TCM"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "lr0e0nxo",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI"
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "Label": "YES_NO_CODE_LIST",
+        "id": "lr0dyeyr",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Yes\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"No\"",
+            "Value": "0"
+          }
+        ],
+        "Name": ""
+      }
+    ]
+  },
+  "Iterations": {
+    "Iteration": [
+      {
+        "MemberReference": [
+          "lr0ef7d0",
+          "lr0ef7d0"
+        ],
+        "id": "lr0eprgy",
+        "type": "DynamicIterationType",
+        "Name": "LINKED_LOOP",
+        "IterableReference": "lr0e2k6k"
+      }
+    ]
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence with dynamic table\""
+      ],
+      "id": "lr0eb56v",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "FlowControl": [],
+          "Label": [
+            "\"Dynamic table\""
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "lr0elmn3",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "lr0ede23",
+                "MappingTarget": "1 2"
+              },
+              {
+                "MappingSource": "lr0e9vxz",
+                "MappingTarget": "1 3"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "1-5"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Table text variable\"",
+                "dynamic": "0"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Table percentage variable\"",
+                "dynamic": "0"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Table unique choice variable\"",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "DYNAMIC_TABLE",
+          "Response": [
+            {
+              "CollectedVariableReference": "lr0e7z8q",
+              "id": "lr0elmn3",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": "20"
+              }
+            },
+            {
+              "CollectedVariableReference": "lr0em9ce",
+              "id": "lr0ede23",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "http://id.insee.fr/unit/percent",
+                "type": "NumericDatatypeType",
+                "Decimals": "0"
+              }
+            },
+            {
+              "CollectedVariableReference": "lr0enehb",
+              "id": "lr0e9vxz",
+              "CodeListReference": "lr0dyeyr",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "lr0e2k6k",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI"
+          ],
+          "Declaration": [],
+          "questionType": "TABLE"
+        }
+      ],
+      "Name": "S1"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence with linked loop\""
+      ],
+      "id": "lr0ef7d0",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lr0fmgf7",
+              "id": "lr0e9sdn",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": "249"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Loop question\""
+          ],
+          "id": "lr0ekng3",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Answer in dynamic table: \" || $DYNAMIC_TABLE1$",
+              "id": "lr0eoovm",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI"
+              ]
+            }
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q_LOOP"
+        }
+      ],
+      "Name": "S2"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Last sequence\""
+      ],
+      "id": "lr0eepqa",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lr0eiypu",
+              "id": "lr0eu46o",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Last question\""
+          ],
+          "id": "lr0els9b",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "Q_LAST"
+        }
+      ],
+      "Name": "S_LAST"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

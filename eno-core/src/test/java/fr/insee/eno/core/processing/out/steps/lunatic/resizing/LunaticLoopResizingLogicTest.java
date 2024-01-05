@@ -4,13 +4,19 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.lunatic.LunaticResizingEntry;
+import fr.insee.eno.core.model.navigation.LinkedLoop;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
+import fr.insee.eno.core.model.question.BooleanQuestion;
+import fr.insee.eno.core.model.question.DynamicTableQuestion;
+import fr.insee.eno.core.model.response.Response;
+import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -36,6 +42,10 @@ class LunaticLoopResizingLogicTest {
         lunaticLoop.getLines().setMax(new LabelType());
         lunaticLoop.getLines().getMax().setValue("nvl(LOOP_SIZE_VAR, 1)");
         //
+        Sequence lunaticSequence = new Sequence();
+        lunaticSequence.setComponentType(ComponentTypeEnum.SEQUENCE);
+        lunaticLoop.getComponents().add(lunaticSequence);
+        //
         CheckboxBoolean simpleResponseComponent = new CheckboxBoolean();
         simpleResponseComponent.setComponentType(ComponentTypeEnum.CHECKBOX_BOOLEAN);
         simpleResponseComponent.setResponse(new ResponseType());
@@ -51,15 +61,32 @@ class LunaticLoopResizingLogicTest {
 
         //
         enoQuestionnaire = new EnoQuestionnaire();
+        enoIndex = new EnoIndex();
+        //
+        fr.insee.eno.core.model.sequence.Sequence enoSequence = new fr.insee.eno.core.model.sequence.Sequence();
+        enoSequence.setId("sequence-id");
+        enoSequence.getSequenceStructure().add(
+                StructureItemReference.builder()
+                        .id("loop-question-id")
+                        .type(StructureItemReference.StructureItemType.QUESTION)
+                        .build());
+        BooleanQuestion booleanQuestion = new BooleanQuestion();
+        booleanQuestion.setId("loop-question-id");
+        booleanQuestion.setResponse(new Response());
+        booleanQuestion.getResponse().setVariableName("RESPONSE_VAR");
+        enoIndex.put("sequence-id", enoSequence);
+        enoIndex.put("loop-question-id", booleanQuestion);
+        //
         enoLoop = new StandaloneLoop();
         enoLoop.setId("loop-id");
         enoLoop.setLoopIterations(new StandaloneLoop.LoopIterations());
         enoLoop.getLoopIterations().setMaxIteration(new CalculatedExpression());
         enoLoop.getLoopIterations().getMaxIteration().getBindingReferences().add(
                 new BindingReference("loop-size-var-ref", "LOOP_SIZE_VAR"));
-
+        enoLoop.getLoopScope().add(StructureItemReference.builder()
+                .id("sequence-id").type(StructureItemReference.StructureItemType.SEQUENCE).build());
+        enoQuestionnaire.getLoops().add(enoLoop);
         //
-        enoIndex = new EnoIndex();
         enoIndex.put("loop-id", enoLoop);
     }
 
@@ -316,6 +343,92 @@ class LunaticLoopResizingLogicTest {
         assertEquals("LOOP_SIZE_VAR", resizingEntries.get(0).getName());
         assertEquals("LOOP_SIZE_VAR + EXTERNAL_VAR", resizingEntries.get(0).getSize());
         assertEquals(Set.of("RESPONSE_VAR"), resizingEntries.get(0).getVariables());
+    }
+
+    @Test
+    void resizing_linkedLoop() {
+        //
+        Loop lunaticLinkedLoop = new Loop();
+        lunaticLinkedLoop.setId("linked-loop-id");
+        lunaticLinkedLoop.setIterations(new LabelType());
+        lunaticLinkedLoop.getIterations().setValue("count(RESPONSE_VAR)");
+        //
+        Input input = new Input();
+        input.setComponentType(ComponentTypeEnum.INPUT);
+        input.setResponse(new ResponseType());
+        input.getResponse().setName("LINKED_LOOP_RESPONSE");
+        lunaticLinkedLoop.getComponents().add(input);
+        //
+        lunaticQuestionnaire.getComponents().add(lunaticLinkedLoop);
+        //
+        LinkedLoop enoLinkedLoop = new LinkedLoop();
+        enoLinkedLoop.setId("linked-loop-id");
+        enoLinkedLoop.setReference("loop-id");
+        enoQuestionnaire.getLoops().add(enoLinkedLoop);
+        //
+        enoIndex.put("linked-loop-id", enoLinkedLoop);
+
+        // When
+        LunaticLoopResizingLogic loopResizingLogic = new LunaticLoopResizingLogic(
+                lunaticQuestionnaire, enoQuestionnaire, enoIndex);
+        List<LunaticResizingEntry> resizingEntries = loopResizingLogic.buildResizingEntries(lunaticLinkedLoop);
+
+        // Then
+        Optional<LunaticResizingEntry> searchedResizingEntry = resizingEntries.stream()
+                .filter(resizingEntry -> "RESPONSE_VAR".equals(resizingEntry.getName()))
+                .findAny();
+        assertTrue(searchedResizingEntry.isPresent());
+        LunaticResizingEntry linkedLoopResizingEntry = searchedResizingEntry.get();
+        assertEquals("count(RESPONSE_VAR)", linkedLoopResizingEntry.getSize());
+        assertEquals(1, linkedLoopResizingEntry.getVariables().size());
+        assertTrue(linkedLoopResizingEntry.getVariables().contains("LINKED_LOOP_RESPONSE"));
+    }
+
+    @Test
+    void resizing_linkedLoop_basedOnDynamicTable() {
+        //
+        RosterForLoop rosterForLoop = new RosterForLoop();
+        Loop lunaticLinkedLoop = new Loop();
+        lunaticLinkedLoop.setId("linked-loop-id");
+        lunaticLinkedLoop.setIterations(new LabelType());
+        lunaticLinkedLoop.getIterations().setValue("count(TABLE_RESPONSE1)");
+        //
+        Input input = new Input();
+        input.setComponentType(ComponentTypeEnum.INPUT);
+        input.setResponse(new ResponseType());
+        input.getResponse().setName("LINKED_LOOP_RESPONSE");
+        lunaticLinkedLoop.getComponents().add(input);
+        //
+        lunaticQuestionnaire.getComponents().add(lunaticLinkedLoop);
+        lunaticQuestionnaire.getComponents().add(rosterForLoop);
+
+        //
+        DynamicTableQuestion dynamicTableQuestion = new DynamicTableQuestion();
+        dynamicTableQuestion.setId("dynamic-table-id");
+        dynamicTableQuestion.getVariableNames().add("TABLE_RESPONSE1");
+        enoQuestionnaire.getMultipleResponseQuestions().add(dynamicTableQuestion);
+        //
+        LinkedLoop enoLinkedLoop = new LinkedLoop();
+        enoLinkedLoop.setId("linked-loop-id");
+        enoLinkedLoop.setReference("dynamic-table-id");
+        enoQuestionnaire.getLoops().add(enoLinkedLoop);
+        //
+        enoIndex.put("linked-loop-id", enoLinkedLoop);
+
+        // When
+        LunaticLoopResizingLogic loopResizingLogic = new LunaticLoopResizingLogic(
+                lunaticQuestionnaire, enoQuestionnaire, enoIndex);
+        List<LunaticResizingEntry> resizingEntries = loopResizingLogic.buildResizingEntries(lunaticLinkedLoop);
+
+        // Then
+        Optional<LunaticResizingEntry> searchedResizingEntry = resizingEntries.stream()
+                .filter(resizingEntry -> "TABLE_RESPONSE1".equals(resizingEntry.getName()))
+                .findAny();
+        assertTrue(searchedResizingEntry.isPresent());
+        LunaticResizingEntry linkedLoopResizingEntry = searchedResizingEntry.get();
+        assertEquals("count(TABLE_RESPONSE1)", linkedLoopResizingEntry.getSize());
+        assertEquals(1, linkedLoopResizingEntry.getVariables().size());
+        assertTrue(linkedLoopResizingEntry.getVariables().contains("LINKED_LOOP_RESPONSE"));
     }
 
 }
