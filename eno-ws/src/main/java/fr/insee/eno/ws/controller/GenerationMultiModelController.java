@@ -31,8 +31,8 @@ public class GenerationMultiModelController {
     @Operation(
             summary = "[Eno Xml service] Generation of questionnaire according to parameters.",
             description = "**This endpoint uses the 'Xml' version of Eno.** " +
-                    "Generation of a questionnaire using a parameters `xml` file (required), metadata `xml` file " +
-                    "(optional) and the specific treatment `xsl` file (optional). This service contains a " +
+                    "Generation of a questionnaire using a parameters `xml` file _(required)_, metadata `xml` file " +
+                    "_(optional)_ and the specific treatment `xsl` file _(optional)_. This service contains a " +
                     "multi-model parameter to generate several questionnaires in a zip file in a single request.")
     @PostMapping(value = "in-2-out",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
