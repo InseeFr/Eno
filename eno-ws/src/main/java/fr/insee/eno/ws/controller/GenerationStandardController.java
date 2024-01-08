@@ -2,6 +2,9 @@ package fr.insee.eno.ws.controller;
 
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.eno.ws.exception.ContextException;
+import fr.insee.eno.ws.exception.MetadataFileException;
+import fr.insee.eno.ws.exception.ModeParameterException;
 import fr.insee.eno.legacy.parameters.CaptureEnum;
 import fr.insee.eno.legacy.parameters.Context;
 import fr.insee.eno.treatments.LunaticPostProcessing;
@@ -50,6 +53,8 @@ public class GenerationStandardController {
             @RequestPart(value="specificTreatment", required = false) Mono<Part> specificTreatment,
             @PathVariable EnoParameters.Context context,
             @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter) {
+        if (EnoParameters.ModeParameter.PAPI.equals(modeParameter))
+            return Mono.error(new ModeParameterException("Lunatic format is not compatible with the mode 'PAPER'."));
 
         /*
            specificTreatment parameter is a part instead of a FilePart. This workaround is used to make swagger work
@@ -80,7 +85,15 @@ public class GenerationStandardController {
             @RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
             @PathVariable Context context,
             ServerHttpRequest request, ServerHttpResponse response) {
-        return passThrough.passePlatPost(request, response);
+        if (Context.HOUSEHOLD.equals(context))
+            return Mono.error(new ContextException("Xforms format is not compatible with 'HOUSEHOLD' context."));
+        return metadata.hasElement()
+                .flatMap(hasElementValue -> {
+                    if (Context.BUSINESS.equals(context) && Boolean.FALSE.equals(hasElementValue))
+                        return Mono.error(new MetadataFileException(
+                                "The metadata file is required in 'BUSINESS' context."));
+                    return passThrough.passePlatPost(request, response);
+                });
     }
 
     @Operation(
@@ -101,7 +114,13 @@ public class GenerationStandardController {
             @RequestParam(value="Capture", required=false) CaptureEnum capture,
             @PathVariable Context context,
             ServerHttpRequest request, ServerHttpResponse response) {
-        return passThrough.passePlatPost(request, response);
+        return metadata.hasElement()
+                .flatMap(hasElementValue -> {
+                    if (Context.BUSINESS.equals(context) && Boolean.FALSE.equals(hasElementValue))
+                        return Mono.error(new MetadataFileException(
+                                "The metadata file is required in 'BUSINESS' context."));
+                    return passThrough.passePlatPost(request, response);
+                });
     }
 
     @Operation(
