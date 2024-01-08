@@ -1,5 +1,6 @@
 package fr.insee.eno.ws.controller.utils;
 
+import fr.insee.eno.core.exceptions.business.EnoParametersException;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.treatments.LunaticPostProcessing;
 import fr.insee.eno.treatments.LunaticRegroupementProcessing;
@@ -23,13 +24,12 @@ import reactor.core.publisher.Mono;
 import java.io.SequenceInputStream;
 import java.util.List;
 
-/** Class to factorize code in v3 controllers' methods. */
+/** Class to factorize code in Eno Java controllers' methods. */
 @Component
 @Slf4j
 public class ReactiveControllerUtils {
 
     public static final String LUNATIC_JSON_FILE_NAME = "lunatic-form.json";
-    public static final String LUNATIC_XML_FILE_NAME = "lunatic-form.xml";
 
     private final DDIToLunaticService ddiToLunaticService;
     private final ParameterService parameterService;
@@ -42,15 +42,23 @@ public class ReactiveControllerUtils {
     // TODO: replace Mono<FilePart> parametersFile with EnoParameters argument (automatic deserialization)
     // TODO: implement API friendly endpoints that return json/xml instead of octet stream
 
-    public Mono<EnoParameters> readParametersFile(Mono<FilePart> parametersFile) {
-        return parametersFile.flatMap(filePart -> filePart.content()
+    public Mono<EnoParameters> readEnoJavaParametersFile(Mono<FilePart> parametersFile) {
+        return parametersFile
+                .flatMap(this::validateEnoJavaParametersFileName)
+                .flatMap(filePart -> filePart.content()
                         .map(dataBuffer -> dataBuffer.asInputStream(true))
                         .reduce(SequenceInputStream::new))
                 .flatMap(parameterService::parse);
     }
 
+    private Mono<FilePart> validateEnoJavaParametersFileName(FilePart filePart) {
+        if (! filePart.filename().endsWith(".json"))
+            return Mono.error(new EnoParametersException("Eno Java parameters file name must end with '.json'."));
+        return Mono.just(filePart);
+    }
+
     public Mono<ResponseEntity<String>> ddiToLunaticJson(Mono<FilePart> ddiFile, Mono<FilePart> parametersFile) {
-        return readParametersFile(parametersFile)
+        return readEnoJavaParametersFile(parametersFile)
                 .flatMap(enoParameters -> ddiToLunaticJson(ddiFile, enoParameters));
     }
 

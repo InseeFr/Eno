@@ -3,6 +3,7 @@ package fr.insee.eno.core.parameter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.insee.eno.core.exceptions.business.EnoParametersException;
 import fr.insee.eno.core.model.mode.Mode;
 import lombok.Getter;
 import lombok.Setter;
@@ -47,10 +48,16 @@ public class EnoParameters {
 
     private EnoParameters() {}
 
-    public static EnoParameters parse(InputStream parametersInputStream) throws IOException {
+    public static EnoParameters parse(InputStream parametersInputStream) throws IOException, EnoParametersException {
         log.info("Parsing Eno parameters from input stream");
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(parametersInputStream, EnoParameters.class);
+        try {
+            return objectMapper.readValue(parametersInputStream, EnoParameters.class);
+        } catch (JsonProcessingException jsonProcessingException) {
+            // TODO: more detailed exception message (e.g. using a json schema)
+            throw new EnoParametersException("Error while processing json content.", jsonProcessingException);
+        }
+
     }
 
     public static String serialize(EnoParameters enoParameters) throws JsonProcessingException {
