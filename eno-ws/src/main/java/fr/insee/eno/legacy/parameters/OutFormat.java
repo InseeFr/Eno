@@ -42,9 +42,8 @@ public enum OutFormat {
     @XmlEnumValue("fo")
     FO("fo"),
     @XmlEnumValue("fodt")
-    FODT("fodt"),
-    @XmlEnumValue("lunatic-xml")
-    LUNATIC_XML("lunatic-xml");
+    FODT("fodt");
+
     private final String value;
 
     OutFormat(String v) {
