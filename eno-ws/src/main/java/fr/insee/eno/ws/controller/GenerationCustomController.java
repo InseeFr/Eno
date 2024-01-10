@@ -58,7 +58,7 @@ public class GenerationCustomController {
          */
 		Mono<LunaticPostProcessing> lunaticPostProcessing = controllerUtils.generateLunaticPostProcessings(specificTreatment);
 
-		return controllerUtils.readParametersFile(parametersFile)
+		return controllerUtils.readEnoJavaParametersFile(parametersFile)
 				.flatMap(enoParameters ->
 						controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessing));
 	}
