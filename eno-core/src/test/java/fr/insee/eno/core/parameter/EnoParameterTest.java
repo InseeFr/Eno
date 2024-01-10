@@ -1,12 +1,34 @@
 package fr.insee.eno.core.parameter;
 
+import fr.insee.eno.core.exceptions.business.EnoParametersException;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class EnoParameterTest {
+
+    @Test
+    void parseParameters_invalidProperty_shouldThrowException() {
+        //
+        InputStream inputStream = new ByteArrayInputStream("{\"foo\": \"bar\"}".getBytes());
+        //
+        assertThrows(EnoParametersException.class, () ->
+                EnoParameters.parse(inputStream));
+    }
+
+    @Test
+    void parseParameters_malformedJson_shouldThrowException() {
+        //
+        InputStream inputStream = new ByteArrayInputStream("{".getBytes());
+        //
+        assertThrows(EnoParametersException.class, () ->
+                EnoParameters.parse(inputStream));
+    }
 
     @Test
     void lunaticParameters_DefaultCAWILunatic_testLunaticValues() {
