@@ -8,6 +8,7 @@ import fr.insee.eno.legacy.exception.EnoGenerationException;
 import fr.insee.eno.legacy.exception.EnoLegacyParametersException;
 import fr.insee.eno.treatments.exceptions.SpecificTreatmentsDeserializationException;
 import fr.insee.eno.treatments.exceptions.SpecificTreatmentsValidationException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 
 @ControllerAdvice
+@Slf4j
 public class EnoExceptionController {
 
 	@ExceptionHandler(value = EnoLegacyParametersException.class)
@@ -59,6 +61,7 @@ public class EnoExceptionController {
 
 	@ExceptionHandler(value = Exception.class)
 	public ResponseEntity<Object> exception(Exception exception) {
+		log.error("Unhandled exception thrown in controller: ", exception);
 		return new ResponseEntity<>("Unknown error during generation: "+exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
