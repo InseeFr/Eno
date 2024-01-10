@@ -1,5 +1,23 @@
 # Eno Releases note
 
+## 2.7.0
+- Integrated suggester feature!
+  - **[pogues2ddi]**
+  - **[ddi2lunatic]**
+  - **[ddi2fo]**
+
+## 2.6.1
+- **[ddi2lunatic]** Pairwise: remove `"xAvisIterations <> yAxisIterations"` filter
+
+## 2.6.0
+- **[ddi2xforms]** Orbean 2022 compatibility
+
+## 2.5.1
+- **[build]** dependencies update
+
+## 2.5.0
+- **[build]** java 11 to **17**
+
 ## 2.4.10 - 04/10/2023
 - **[build]** dependencies update
 
