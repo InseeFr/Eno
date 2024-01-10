@@ -15,25 +15,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import reactor.core.publisher.Mono;
 
-@Tag(name = "Multi-module generation")
+@Tag(name = "Generation with custom mapping")
 @Controller
 @RequestMapping("/questionnaire")
 @Slf4j
 @SuppressWarnings("unused")
-public class GenerationMultiModelController {
+public class GenerationWithMappingController {
 
     private final PassThrough passThrough;
 
-    public GenerationMultiModelController(PassThrough passThrough) {
+    public GenerationWithMappingController(PassThrough passThrough) {
         this.passThrough = passThrough;
     }
 
     @Operation(
             summary = "[Eno Xml service] Generation of questionnaire according to parameters.",
             description = "**This endpoint uses the 'Xml' version of Eno.** " +
-                    "Generation of a questionnaire using a parameters `xml` file _(required)_, metadata `xml` file " +
-                    "_(optional)_ and the specific treatment `xsl` file _(optional)_. This service contains a " +
-                    "multi-model parameter to generate several questionnaires in a zip file in a single request.")
+                    "Generation of a questionnaire from the input file given, " +
+                    "using a parameters file _(required)_, a metadata file _(optional)_, a specific treatment file " +
+                    "_(optional)_ and a mapping file _(optional)_. " +
+                    "If the multi-model option is set to true, the output questionnaire(s) are put in a zip file.")
     @PostMapping(value = "in-2-out",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<Void> generate(

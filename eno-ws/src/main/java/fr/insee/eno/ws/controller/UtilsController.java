@@ -31,7 +31,7 @@ public class UtilsController {
             description = "Generation of a DDI in 3.3 version from the given DDI in 3.2 version.")
     @PostMapping(value = "ddi32-2-ddi33",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Mono<Void> generateDDI33Questionnaire(
+    public Mono<Void> convertDDI32ToDDI33(
             @RequestPart(value="in") Mono<FilePart> in,
             ServerHttpRequest request, ServerHttpResponse response) {
         return passThrough.passePlatPost(request, response);
@@ -41,7 +41,7 @@ public class UtilsController {
             summary = "Conversion of Xpath expression to VTL expression.",
             description = "Converts the given Xpath 1.1 expression to a VTL 2.0 expression.")
     @PostMapping(value = "xpath-2-vtl")
-    public Mono<ResponseEntity<String>> generateVTLFormula(
+    public Mono<ResponseEntity<String>> convertXpathToVTL(
             @RequestParam(value="xpath") String xpath) {
         String result = XpathToVtl.parseToVTL(xpath);
         log.info("Xpath expression given parsed to VTL: {}", result);
