@@ -1,5 +1,8 @@
 # Eno Releases note
 
+## 2.7.1
+- **[ddi2fo][post-processing]** ***Household***: update fist page
+
 ## 2.7.0
 - Integrated suggester feature!
   - **[pogues2ddi]**
