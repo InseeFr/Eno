@@ -39,7 +39,7 @@ public class GenerationCustomController {
 			summary = "[Eno Java service] Lunatic questionnaire generation from DDI.",
 			description= "**This endpoint uses the 'Java' version of Eno.** " +
 					"Generation a Lunatic questionnaire from the given DDI, using a custom parameters `json` file " +
-					"(required) and a specific treatment `json` file (optional). " +
+					"_(required)_ and a specific treatment `json` file _(optional)_. " +
 					"You can get a parameters file by using the endpoint `/parameters/java/{context}/LUNATIC/{mode}`")
 	@PostMapping(value = "ddi-2-lunatic-json",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -67,8 +67,8 @@ public class GenerationCustomController {
 			summary = "[Eno Xml service] Xforms questionnaire generation from DDI.",
 			description = "**This endpoint uses the 'Xml' version of Eno.** " +
 					"Generation of a Xforms questionnaire (for business web surveys) from the given DDI, using a " +
-					"custom parameters `xml` file (required), a metadata `xml` file (required) and a specific " +
-					"treatment `xsl` file (optional). " +
+					"custom parameters `xml` file _(required)_, a metadata `xml` file _(required)_ and a specific " +
+					"treatment `xsl` file _(optional)_. " +
 					"You can get a parameters file by using the endpoint `/parameters/xml/BUSINESS/XFORMS`")
 	@PostMapping(value = "ddi-2-xforms",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -85,8 +85,8 @@ public class GenerationCustomController {
 			summary = "[Eno Xml service] FO questionnaire generation from DDI.",
 			description = "**This endpoint uses the 'Xml' version of Eno.** " +
 					"Generation of a FO questionnaire (for the paper format) from the given DDI, using a " +
-					"custom parameters `xml` file (required), a metadata `xml` file (required) and a specific " +
-					"treatment `xsl` file (optional). " +
+					"custom parameters `xml` file _(required)_, a metadata `xml` file _(required)_ and a specific " +
+					"treatment `xsl` file _(optional)_. " +
 					"You can get a parameters file by using the endpoint `/parameters/xml/{context}/FO`")
 	@PostMapping(value = "ddi-2-fo",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

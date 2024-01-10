@@ -124,7 +124,7 @@ public class GenerationStandardController {
     }
 
     @Operation(
-            summary = "[Eno Xml service] Generation of FODT specifications.",
+            summary = "[Eno Xml service] Generation of FODT specifications from DDI.",
             description = "**This endpoint uses the 'Xml' version of Eno.** " +
                     "Generate a FODT description of the of the given DDI with standard parameters, in function of " +
                     "context.")
