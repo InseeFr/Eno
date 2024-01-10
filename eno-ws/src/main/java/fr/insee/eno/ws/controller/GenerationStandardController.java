@@ -87,13 +87,14 @@ public class GenerationStandardController {
             ServerHttpRequest request, ServerHttpResponse response) {
         if (Context.HOUSEHOLD.equals(context))
             return Mono.error(new ContextException("Xforms format is not compatible with 'HOUSEHOLD' context."));
-        return metadata.hasElement()
+        metadata.hasElement()
                 .flatMap(hasElementValue -> {
                     if (Context.BUSINESS.equals(context) && Boolean.FALSE.equals(hasElementValue))
                         return Mono.error(new MetadataFileException(
                                 "The metadata file is required in 'BUSINESS' context."));
-                    return passThrough.passePlatPost(request, response);
+                    return null;
                 });
+        return passThrough.passePlatPost(request, response);
     }
 
     @Operation(
@@ -114,13 +115,14 @@ public class GenerationStandardController {
             @RequestParam(value="Capture", required=false) CaptureEnum capture,
             @PathVariable Context context,
             ServerHttpRequest request, ServerHttpResponse response) {
-        return metadata.hasElement()
+        metadata.hasElement()
                 .flatMap(hasElementValue -> {
                     if (Context.BUSINESS.equals(context) && Boolean.FALSE.equals(hasElementValue))
                         return Mono.error(new MetadataFileException(
                                 "The metadata file is required in 'BUSINESS' context."));
-                    return passThrough.passePlatPost(request, response);
+                    return null;
                 });
+        return passThrough.passePlatPost(request, response);
     }
 
     @Operation(
