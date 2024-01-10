@@ -35,7 +35,7 @@ public class ParametersXmlController {
 			summary = "Get all default Eno Xml parameters.",
 			description= "Return the default parameters file for Eno Xml. This file cannot be used directly: " +
 					"you have to fill the `Pipeline` section according to the desired transformation.")
-	@GetMapping(value="default", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@GetMapping(value="all", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public Mono<Void> getAllXmlParameters(ServerHttpRequest request, ServerHttpResponse response) {
 		return passePlat.passePlatGet(request, response);
 	}
