@@ -13,35 +13,35 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
-@Tag(name = "Util")
+@Tag(name = "Utils")
 @RestController
-@RequestMapping("/util")
+@RequestMapping("/utils")
 @Slf4j
 @SuppressWarnings("unused")
-public class UtilController {
+public class UtilsController {
 
-    private final PassThrough passePlat;
+    private final PassThrough passThrough;
 
-    public UtilController(PassThrough passePlat) {
-        this.passePlat = passePlat;
+    public UtilsController(PassThrough passThrough) {
+        this.passThrough = passThrough;
     }
 
     @Operation(
-            summary = "Generation of DDI 3.3 questionnaire from DDI 3.2 questionnaire.",
-            description = "Generate a DDI in 3.3 version questionnaire from a a DDI in 3.2 version questionnaire.")
+            summary = "Generation of DDI 3.3 from DDI 3.2.",
+            description = "Generation of a DDI in 3.3 version from the given DDI in 3.2 version.")
     @PostMapping(value = "ddi32-2-ddi33",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Mono<Void> generateDDI33Questionnaire(
+    public Mono<Void> convertDDI32ToDDI33(
             @RequestPart(value="in") Mono<FilePart> in,
             ServerHttpRequest request, ServerHttpResponse response) {
-        return passePlat.passePlatPost(request, response);
+        return passThrough.passePlatPost(request, response);
     }
 
     @Operation(
-            summary = "Generation of VTL expression from Xpath expression.",
-            description = "Generate a VTL in 2.0 version from a Xpath in 1.1 version.")
+            summary = "Conversion of Xpath expression to VTL expression.",
+            description = "Converts the given Xpath 1.1 expression to a VTL 2.0 expression.")
     @PostMapping(value = "xpath-2-vtl")
-    public Mono<ResponseEntity<String>> generateVTLFormula(
+    public Mono<ResponseEntity<String>> convertXpathToVTL(
             @RequestParam(value="xpath") String xpath) {
         String result = XpathToVtl.parseToVTL(xpath);
         log.info("Xpath expression given parsed to VTL: {}", result);

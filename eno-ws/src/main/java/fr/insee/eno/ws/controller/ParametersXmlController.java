@@ -2,7 +2,6 @@ package fr.insee.eno.ws.controller;
 
 import fr.insee.eno.legacy.parameters.Context;
 import fr.insee.eno.legacy.parameters.Mode;
-import fr.insee.eno.legacy.parameters.OutFormat;
 import fr.insee.eno.ws.PassThrough;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -18,36 +17,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import reactor.core.publisher.Mono;
 
-@Tag(name="Parameters")
+@Tag(name="Parameters (Eno Xml)")
 @Controller
-@RequestMapping("/parameter")
+@RequestMapping("/parameters/xml")
 @SuppressWarnings("unused")
-public class ParametersController {
+public class ParametersXmlController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ParametersController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ParametersXmlController.class);
 
 	private final PassThrough passePlat;
 
-	public ParametersController(PassThrough passePlat) {
+	public ParametersXmlController(PassThrough passePlat) {
 		this.passePlat = passePlat;
 	}
 
 	@Operation(
-			summary = "Get all default out format parameters.",
-			description= "Return the default parameters file. This file should not be used directly: " +
+			summary = "Get all default Eno Xml parameters.",
+			description= "Return the default parameters file for Eno Xml. This file cannot be used directly: " +
 					"you have to fill the `Pipeline` section according to the desired transformation.")
-	@GetMapping(value="default", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
-	public Mono<Void> getDefaultParam(ServerHttpRequest request, ServerHttpResponse response) {
+	@GetMapping(value="all", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public Mono<Void> getAllXmlParameters(ServerHttpRequest request, ServerHttpResponse response) {
 		return passePlat.passePlatGet(request, response);
 	}
 
 	@Operation(
-			summary = "Get default parameters file according to context and out format.",
-			description = "Return parameters used by default in context and out format given.")
-	@GetMapping(value="{context}/{outFormat}/default", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
-	public Mono<Void> getDefaultOutParam(
+			summary = "Get parameters file for Eno Xml services.",
+			description = "Returns a `xml` parameters file with standard values, in function of context and mode, " +
+					"for the concerned out format, to be used in _Eno Xml_ services that require a parameters file.")
+	@GetMapping(value="{context}/{outFormat}", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public Mono<Void> getXmlParameters(
 			@PathVariable Context context,
-			@PathVariable OutFormat outFormat,
+			@PathVariable fr.insee.eno.legacy.parameters.OutFormat outFormat,
 			@RequestParam(value="Mode",required=false) Mode mode,
 			ServerHttpRequest request, ServerHttpResponse response) {
 		return passePlat.passePlatGet(request, response);

@@ -26,7 +26,7 @@ import java.util.List;
 /** Class to factorize code in v3 controllers' methods. */
 @Component
 @Slf4j
-public class V3ControllerUtils {
+public class ReactiveControllerUtils {
 
     public static final String LUNATIC_JSON_FILE_NAME = "lunatic-form.json";
     public static final String LUNATIC_XML_FILE_NAME = "lunatic-form.xml";
@@ -34,7 +34,7 @@ public class V3ControllerUtils {
     private final DDIToLunaticService ddiToLunaticService;
     private final ParameterService parameterService;
 
-    public V3ControllerUtils(DDIToLunaticService ddiToLunaticService, ParameterService parameterService) {
+    public ReactiveControllerUtils(DDIToLunaticService ddiToLunaticService, ParameterService parameterService) {
         this.ddiToLunaticService = ddiToLunaticService;
         this.parameterService = parameterService;
     }
