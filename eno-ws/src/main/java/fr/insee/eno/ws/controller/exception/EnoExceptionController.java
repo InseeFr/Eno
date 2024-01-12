@@ -8,6 +8,7 @@ import fr.insee.eno.legacy.exception.EnoGenerationException;
 import fr.insee.eno.legacy.exception.EnoLegacyParametersException;
 import fr.insee.eno.treatments.exceptions.SpecificTreatmentsDeserializationException;
 import fr.insee.eno.treatments.exceptions.SpecificTreatmentsValidationException;
+import fr.insee.eno.ws.exception.MultiModelException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,11 @@ public class EnoExceptionController {
 	@ExceptionHandler(value = MetadataFileException.class)
 	public ResponseEntity<Object> exception(MetadataFileException exception) {
 		return new ResponseEntity<>("Metadata file error: "+exception.getMessage(), HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(value = MultiModelException.class)
+	public ResponseEntity<Object> exception(MultiModelException exception) {
+		return new ResponseEntity<>("Multi-model option error: "+exception.getMessage(), HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(value = EnoGenerationException.class)
