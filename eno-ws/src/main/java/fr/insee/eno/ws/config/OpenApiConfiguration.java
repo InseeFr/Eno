@@ -4,6 +4,7 @@ package fr.insee.eno.ws.config;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,8 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("classpath:version.properties")
 public class OpenApiConfiguration {
 
+    @Value("${eno.ws.url}")
+    private String enoUrl;
     @Value("${eno.legacy.ws.url}")
     private String enoLegacyUrl;
     @Value("${version.eno}")
@@ -24,7 +27,10 @@ public class OpenApiConfiguration {
 
     @Bean
     public OpenAPI customOpenAPI() {
+        Server server = new Server();
+        server.setUrl(enoUrl);
         return new OpenAPI()
+                .addServersItem(server)
                 .info(new Info()
                         .title("Eno Web Service")
                         .description(
