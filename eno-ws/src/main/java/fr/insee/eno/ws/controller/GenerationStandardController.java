@@ -10,6 +10,7 @@ import fr.insee.eno.legacy.parameters.Context;
 import fr.insee.eno.treatments.LunaticPostProcessing;
 import fr.insee.eno.ws.PassThrough;
 import fr.insee.eno.ws.controller.utils.ReactiveControllerUtils;
+import fr.insee.eno.ws.exception.MultiModelException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -76,7 +77,8 @@ public class GenerationStandardController {
                     "Generation of a Xforms questionnaire (for business web surveys) from the given DDI with " +
                     "standard parameters, in function of context. " +
                     "An metadata `xml` file can be added and is required is the context is 'BUSINESS'. " +
-                    "An optional specific treatment `xsl` file can be added.")
+                    "An optional specific treatment `xsl` file can be added. " +
+                    "If the multi-model option is set to true, the output questionnaire(s) are put in a zip file.")
     @PostMapping(value = "{context}/xforms",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<Void> generateXforms(
@@ -84,9 +86,12 @@ public class GenerationStandardController {
             @RequestPart(value="metadata", required = false) Mono<FilePart> metadata,
             @RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
             @PathVariable Context context,
+            @RequestParam(value="multi-model", required=false, defaultValue="false") boolean multiModel,
             ServerHttpRequest request, ServerHttpResponse response) {
         if (Context.HOUSEHOLD.equals(context))
             return Mono.error(new ContextException("Xforms format is not compatible with 'HOUSEHOLD' context."));
+        if (Context.BUSINESS.equals(context) && (! multiModel))
+            return Mono.error(new MultiModelException("Multi-model option must be 'true' in 'BUSINESS' context."));
         metadata.hasElement()
                 .flatMap(hasElementValue -> {
                     if (Context.BUSINESS.equals(context) && Boolean.FALSE.equals(hasElementValue))
@@ -104,7 +109,8 @@ public class GenerationStandardController {
                     "parameters, in function of context. Custom values can be passed for format of columns and " +
                     "capture mode. " +
                     "An metadata `xml` file can be added and is required is the context is 'BUSINESS'. " +
-                    "An optional specific treatment `xsl` file can be added." )
+                    "An optional specific treatment `xsl` file can be added. " +
+                    "If the multi-model option is set to true, the output questionnaire(s) are put in a zip file." )
     @PostMapping(value = "{context}/fo",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<Void> generateFO(
@@ -114,7 +120,10 @@ public class GenerationStandardController {
             @RequestParam(value="Format-column", required=false) Integer nbColumn,
             @RequestParam(value="Capture", required=false) CaptureEnum capture,
             @PathVariable Context context,
+            @RequestParam(value="multi-model", required=false, defaultValue="false") boolean multiModel,
             ServerHttpRequest request, ServerHttpResponse response) {
+        if (Context.BUSINESS.equals(context) && (! multiModel))
+            return Mono.error(new MultiModelException("Multi-model option must be 'true' in 'BUSINESS' context."));
         metadata.hasElement()
                 .flatMap(hasElementValue -> {
                     if (Context.BUSINESS.equals(context) && Boolean.FALSE.equals(hasElementValue))
