@@ -27,11 +27,13 @@ public class Control extends EnoIdentifiableObject implements EnoObjectWithExpre
 
     public enum TypeOfControl { CONSISTENCY, FORMAT }
 
+    // TODO: controls "criticality" temporary set to INFO
+
     public static Criticality convertDDICriticality(String ddiCriticality) {
         return switch (ddiCriticality) {
             case "informational" -> Criticality.INFO;
-            case "warning" -> Criticality.WARN;
-            case "stumblingblock" -> Criticality.ERROR;
+            case "warning" -> Criticality.INFO; // WARN
+            case "stumblingblock" -> Criticality.INFO; // ERROR
             default -> throw new MappingException(String.format("Unknown DDI criticality '%s'", ddiCriticality));
         };
     }
@@ -39,8 +41,8 @@ public class Control extends EnoIdentifiableObject implements EnoObjectWithExpre
     public static ControlCriticityEnum convertCriticalityToLunatic(Criticality criticality) {
         return switch (criticality) {
             case INFO -> ControlCriticityEnum.INFO;
-            case WARN -> ControlCriticityEnum.WARN;
-            case ERROR -> ControlCriticityEnum.ERROR;
+            case WARN -> ControlCriticityEnum.INFO; // WARN
+            case ERROR -> ControlCriticityEnum.INFO; // ERROR
         };
     }
 
