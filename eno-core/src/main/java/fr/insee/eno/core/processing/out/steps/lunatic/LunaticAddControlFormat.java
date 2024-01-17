@@ -213,7 +213,7 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
         ControlType control = new ControlType();
         control.setTypeOfControl(ControlTypeOfControlEnum.FORMAT);
         control.setId(id);
-        control.setCriticality(ControlCriticityEnum.ERROR);
+        control.setCriticality(ControlCriticityEnum.INFO); // TODO: maybe but back ERROR here later
 
         LabelType controlLabel = new LabelType();
         controlLabel.setType(LabelTypeEnum.VTL);
