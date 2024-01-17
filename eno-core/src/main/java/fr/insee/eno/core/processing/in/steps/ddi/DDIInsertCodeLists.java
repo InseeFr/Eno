@@ -1,5 +1,6 @@
 package fr.insee.eno.core.processing.in.steps.ddi;
 
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.question.*;
@@ -65,12 +66,37 @@ public class DDIInsertCodeLists implements ProcessingStep<EnoQuestionnaire> {
                 .forEach(this::insertCodeItems));
     }
 
+    /**
+     * Return the code list that is referenced in the Eno component (such as unique choice question, unique choice
+     * table cell or else) with given id, using the local code list map of this class.
+     * Throws a runtime exception if there is something null along the way.
+     * @param codeListReference Code list referenced in the Eno component.
+     * @param enoComponentId Eno component id.
+     * @return The corresponding (non-null) code list.
+     */
+    private CodeList getCodeListFromMap(String codeListReference, String enoComponentId) {
+        if (codeListReference == null)
+            throw new MappingException(String.format(
+                    "Eno component '%s' has no referenced code list.",
+                    enoComponentId));
+        CodeList searchedCodeList = codeListMap.get(codeListReference);
+        if (searchedCodeList == null)
+            throw new MappingException(String.format(
+                    "Code list referenced in Eno component '%s' with id '%s' cannot be found.",
+                    enoComponentId, codeListReference));
+        return searchedCodeList;
+    }
+
     private void insertCodeItems(UniqueChoiceQuestion uniqueChoiceQuestion) {
-        uniqueChoiceQuestion.setCodeItems(codeListMap.get(uniqueChoiceQuestion.getCodeListReference()).getCodeItems());
+        uniqueChoiceQuestion.setCodeItems(
+                getCodeListFromMap(uniqueChoiceQuestion.getCodeListReference(), uniqueChoiceQuestion.getId())
+                        .getCodeItems());
     }
 
     private void insertCodeItems(UniqueChoiceCell uniqueChoiceCell) {
-        uniqueChoiceCell.setCodeItems(codeListMap.get(uniqueChoiceCell.getCodeListReference()).getCodeItems());
+        uniqueChoiceCell.setCodeItems(
+                getCodeListFromMap(uniqueChoiceCell.getCodeListReference(), uniqueChoiceCell.getId())
+                        .getCodeItems());
     }
 
     private void insertHeader(EnoTable enoTable) {
