@@ -20,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 /** Lunatic technical processing for loops.
  * Requires: sorted components, hierarchy. */
@@ -175,25 +176,51 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
                 enoLinkedLoop.getId(), reference));
     }
 
+    /**
+     * Returns the first response name that belong to the reference loop.
+     * @param enoLinkedLoop Eno linked loop passed for logging purposes.
+     * @param enoReferenceLoop Eno reference ("main") loop.
+     * @param enoIndex Eno index.
+     * @return The first response name (string) that belong to the reference loop.
+     */
     public static String findFirstVariableOfReference(LinkedLoop enoLinkedLoop, StandaloneLoop enoReferenceLoop,
-                                                       EnoIndex enoIndex) {
-        AbstractSequence startSequence = (AbstractSequence) enoIndex.get(enoReferenceLoop.getLoopScope().get(0).getId());
-        if (startSequence.getSequenceStructure().isEmpty()) {
+                                                      EnoIndex enoIndex) {
+        String contextErrorMessage = String.format(
+                "Unable to find its first question to compute Lunatic \"iterations\" expression for linked loop '%s'.",
+                enoLinkedLoop.getId());
+        return findFirstResponseNameOfLoop(enoReferenceLoop, enoIndex, contextErrorMessage);
+    }
+
+    /**
+     * Returns the first response name that belong to the loop.
+     * @param enoLoop A eno loop object.
+     * @param enoIndex Eno index.
+     * @param contextErrorMessage Context that will be added in the exception message if retrieving the response name fails.
+     * @return The first response name (string) that belong to the loop.
+     */
+    public static String findFirstResponseNameOfLoop(fr.insee.eno.core.model.navigation.Loop enoLoop,
+                                                     EnoIndex enoIndex,
+                                                     String contextErrorMessage) {
+        AbstractSequence firstSequenceOfLoop = (AbstractSequence) enoIndex.get(enoLoop.getLoopScope().get(0).getId());
+        if (firstSequenceOfLoop.getSequenceStructure().isEmpty())
             throw new LunaticLoopException(String.format(
-                    "Linked loop '%s' is based on loop '%s'. " +
-                            "This loop is defined to start at sequence '%s', which is empty. " +
-                            "Unable to find its first question to compute Lunatic \"iterations\" expression.",
-                    enoLinkedLoop.getId(), enoReferenceLoop.getId(), startSequence.getId()));
-        }
-        String firstQuestionId = findFirstQuestionId(startSequence, enoIndex);
-        EnoObject firstQuestion = enoIndex.get(firstQuestionId);
-        if (! (firstQuestion instanceof SingleResponseQuestion)) {
+                    "Loop '%s' is defined to start at sequence '%s', which is empty. %s",
+                    enoLoop.getId(), firstSequenceOfLoop.getId(), contextErrorMessage));
+        String firstQuestionId = findFirstQuestionId(firstSequenceOfLoop, enoIndex);
+        Optional<String> variableName = getVariableNameFromQuestionId(firstQuestionId, enoIndex);
+        if (variableName.isEmpty())
             throw new LunaticLoopException(String.format(
-                    "Linked loop '%s' is based on loop '%s' that starts at sequence '%s'. " +
-                            "This first question of the sequence is not a \"simple\" question.",
-                    enoLinkedLoop.getId(), enoReferenceLoop.getId(), startSequence.getId()));
-        }
-        return ((SingleResponseQuestion) firstQuestion).getResponse().getVariableName();
+                    "Loop '%s' that starts at sequence '%s'. " +
+                            "This first question of the sequence is not a \"simple\" question. %s",
+                    enoLoop.getId(), firstSequenceOfLoop.getId(), contextErrorMessage));
+        return variableName.get();
+    }
+
+    private static Optional<String> getVariableNameFromQuestionId(String questionId, EnoIndex enoIndex) {
+        EnoObject firstQuestion = enoIndex.get(questionId);
+        if (! (firstQuestion instanceof SingleResponseQuestion))
+            return Optional.empty();
+        return Optional.of(((SingleResponseQuestion) firstQuestion).getResponse().getVariableName());
     }
 
     /**
