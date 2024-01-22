@@ -9,6 +9,11 @@ import fr.insee.eno.core.model.variable.CalculatedVariable;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.ProcessingStep;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
+
 public class DDIResolveVariableReferencesInExpressions implements ProcessingStep<EnoQuestionnaire> {
 
     /**
@@ -47,10 +52,28 @@ public class DDIResolveVariableReferencesInExpressions implements ProcessingStep
 
     private static void resolveExpression(CalculatedExpression expression) {
         String value = expression.getValue();
-        for (BindingReference bindingReference : expression.getBindingReferences()) {
+        List<BindingReference> orderedBindingReferences = orderById(expression.getBindingReferences());
+        // Iterate on the reverse order, so that if some references overlap, the longer one is replaced first
+        for (int i = orderedBindingReferences.size() - 1; i >= 0; i --) {
+            BindingReference bindingReference = orderedBindingReferences.get(i);
             value = value.replace(bindingReference.getId(), bindingReference.getVariableName());
         }
         expression.setValue(value);
     }
+
+    /**
+     * Binding reference identifiers can overlap, so the replacement of references by the variable name must be done
+     * carefully in a rather precise order. This method returns a list containing given binding references, ordered by
+     * id.
+     * @param bindingReferences A set of binding references.
+     * @return A list of the binding references, ordered by id.
+     */
+    private static List<BindingReference> orderById(Set<BindingReference> bindingReferences) {
+        List<BindingReference> res = new ArrayList<>(bindingReferences);
+        res.sort(Comparator.comparing(BindingReference::getId));
+        return res;
+    }
+
+    // Note: orderByIdLength would have worked also
 
 }
