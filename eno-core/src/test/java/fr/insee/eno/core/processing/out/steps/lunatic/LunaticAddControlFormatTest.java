@@ -48,8 +48,8 @@ class LunaticAddControlFormatTest {
         ControlType control = controls.get(0);
 
         assertEquals("not(not(isnull(NUMBERVAR))  and round(NUMBERVAR,10)<>NUMBERVAR)", control.getControl().getValue());
-        assertEquals("VTL", control.getControl().getType());
-        assertEquals("VTL|MD", control.getErrorMessage().getType());
+        assertEquals(LabelTypeEnum.VTL, control.getControl().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getTypeEnum());
         assertEquals("number-id-format-decimal", control.getId());
         assertEquals(ControlTypeOfControlEnum.FORMAT, control.getTypeOfControl());
         assertEquals(ControlCriticityEnum.INFO, control.getCriticality());
@@ -96,8 +96,8 @@ class LunaticAddControlFormatTest {
         ControlType control = controls.get(0);
 
         assertEquals("not(not(isnull(NUMBERVAR)) and (5>NUMBERVAR or 10<NUMBERVAR))", control.getControl().getValue());
-        assertEquals("VTL", control.getControl().getType());
-        assertEquals("VTL|MD", control.getErrorMessage().getType());
+        assertEquals(LabelTypeEnum.VTL, control.getControl().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getTypeEnum());
         assertEquals("number-id-format-borne-inf-sup", control.getId());
         assertEquals(ControlTypeOfControlEnum.FORMAT, control.getTypeOfControl());
         assertEquals(ControlCriticityEnum.INFO, control.getCriticality());
@@ -115,8 +115,8 @@ class LunaticAddControlFormatTest {
         ControlType control = controls.get(0);
 
         assertEquals("not(not(isnull(NUMBERVAR)) and 5>NUMBERVAR)", control.getControl().getValue());
-        assertEquals("VTL", control.getControl().getType());
-        assertEquals("VTL|MD", control.getErrorMessage().getType());
+        assertEquals(LabelTypeEnum.VTL, control.getControl().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getTypeEnum());
         assertEquals("number-id-format-borne-inf", control.getId());
         assertEquals(ControlTypeOfControlEnum.FORMAT, control.getTypeOfControl());
         assertEquals(ControlCriticityEnum.INFO, control.getCriticality());
@@ -134,8 +134,8 @@ class LunaticAddControlFormatTest {
         ControlType control = controls.get(0);
 
         assertEquals("not(not(isnull(NUMBERVAR)) and 10<NUMBERVAR)", control.getControl().getValue());
-        assertEquals("VTL", control.getControl().getType());
-        assertEquals("VTL|MD", control.getErrorMessage().getType());
+        assertEquals(LabelTypeEnum.VTL, control.getControl().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getTypeEnum());
         assertEquals("number-id-format-borne-sup", control.getId());
         assertEquals(ControlTypeOfControlEnum.FORMAT, control.getTypeOfControl());
         assertEquals(ControlCriticityEnum.INFO, control.getCriticality());
@@ -163,8 +163,8 @@ class LunaticAddControlFormatTest {
         ControlType control = controls.get(0);
 
         assertEquals("not(not(isnull(DATEVAR)) and (cast(DATEVAR, date, \"YYYY-MM-DD\")<cast(\"2020-01-01\", date, \"YYYY-MM-DD\") or cast(DATEVAR, date, \"YYYY-MM-DD\")>cast(\"2023-01-01\", date, \"YYYY-MM-DD\")))", control.getControl().getValue());
-        assertEquals("VTL", control.getControl().getType());
-        assertEquals("VTL|MD", control.getErrorMessage().getType());
+        assertEquals(LabelTypeEnum.VTL, control.getControl().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getTypeEnum());
         assertEquals("datepicker-id-format-date-borne-inf-sup", control.getId());
         assertEquals(ControlTypeOfControlEnum.FORMAT, control.getTypeOfControl());
         assertEquals(ControlCriticityEnum.INFO, control.getCriticality());
@@ -183,8 +183,8 @@ class LunaticAddControlFormatTest {
         ControlType control = controls.get(0);
 
         assertEquals("not(not(isnull(DATEVAR)) and (cast(DATEVAR, date, \"YYYY-MM-DD\")<cast(\"2020-01-01\", date, \"YYYY-MM-DD\")))", control.getControl().getValue());
-        assertEquals("VTL", control.getControl().getType());
-        assertEquals("VTL|MD", control.getErrorMessage().getType());
+        assertEquals(LabelTypeEnum.VTL, control.getControl().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getTypeEnum());
         assertEquals("datepicker-id-format-date-borne-inf", control.getId());
         assertEquals(ControlTypeOfControlEnum.FORMAT, control.getTypeOfControl());
         assertEquals(ControlCriticityEnum.INFO, control.getCriticality());
@@ -203,8 +203,8 @@ class LunaticAddControlFormatTest {
         ControlType control = controls.get(0);
 
         assertEquals("not(not(isnull(DATEVAR)) and (cast(DATEVAR, date, \"YYYY-MM-DD\")>cast(\"2023-01-01\", date, \"YYYY-MM-DD\")))", control.getControl().getValue());
-        assertEquals("VTL", control.getControl().getType());
-        assertEquals("VTL|MD", control.getErrorMessage().getType());
+        assertEquals(LabelTypeEnum.VTL, control.getControl().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getTypeEnum());
         assertEquals("datepicker-id-format-date-borne-sup", control.getId());
         assertEquals(ControlTypeOfControlEnum.FORMAT, control.getTypeOfControl());
         assertEquals(ControlCriticityEnum.INFO, control.getCriticality());
