@@ -48,7 +48,7 @@ class DDIResolveVariableReferencesInExpressionsTest {
             EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
             Filter filter = new Filter();
             CalculatedExpression calculatedExpression= new CalculatedExpression();
-            calculatedExpression.setValue("foo-ref-1 = 1 and foo-ref-1O = 1");
+            calculatedExpression.setValue("foo-ref-1 = 1 and foo-ref-10 = 1");
             Set<BindingReference> bindingReferences = new LinkedHashSet<>();
             bindingReferences.add(new BindingReference("foo-ref-1", "FOO_A"));
             bindingReferences.add(new BindingReference("foo-ref-10", "FOO_K"));
