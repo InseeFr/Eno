@@ -3,6 +3,7 @@ package fr.insee.eno.core.parameter;
 import lombok.Getter;
 import lombok.Setter;
 
+/** Parameters that concern the Lunatic output format. */
 @Getter
 @Setter
 public class LunaticParameters {
