@@ -12,7 +12,11 @@ import reusable33.InParameterType;
 
 import java.util.Objects;
 
-/** Class to associate a reference id with a variable name in some calculated expressions. */
+/** Class to associate a reference id with a variable name in calculated expressions.
+ * In DDI, variable names are replaced by references in calculated (VTL) expressions
+ * (e.g. in filters, controls, loops, calculated variables etc.).
+ * Binding references are mapped in the calculated expression object to keep track of
+ * the binding between the variable name and its reference. */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,6 +24,7 @@ import java.util.Objects;
 @Context(format = Format.DDI, type = InParameterType.class)
 public class BindingReference extends EnoObject {
 
+    /** Identifier that is the variable reference. */
     @DDI("getIDArray(0).getStringValue()")
     private String id;
 
