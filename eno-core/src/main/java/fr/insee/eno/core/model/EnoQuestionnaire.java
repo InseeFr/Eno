@@ -34,19 +34,24 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.Questionnaire.class)
 public class EnoQuestionnaire extends EnoIdentifiableObject {
 
+    /** Name of the questionnaire model. */
     @DDI("getResourcePackageArray(0).getCodeListSchemeArray(0)" +
             ".getCodeListSchemeNameArray(0).getStringArray(0).getStringValue()") //TODO: see if it's that one
     @Lunatic("setModele(#param)")
     private String questionnaireModel;
 
+    /** Short description of the questionnaire. */
     @DDI("getCitation()?.getTitle()")
     @Lunatic("setLabel(#param)")
     private QuestionnaireLabel label;
 
+    /** Questionnaire variables. Note: variables can have different "scope" (questionnaire-level, loop or dynamic
+     * table level), yet all variables are defined in this list. */
     @DDI("getResourcePackageArray(0).getVariableSchemeArray(0).getVariableList()")
     @Lunatic("getVariables()")
     private final List<Variable> variables = new ArrayList<>();
 
+    /** Variable groups of the questionnaire. A variable group contains variables that share a common scope. */
     @DDI("getResourcePackageArray(0).getVariableSchemeArray(0).getVariableGroupList()")
     private final List<VariableGroup> variableGroups = new ArrayList<>();
 
@@ -58,7 +63,8 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     @Lunatic("getComponents()")
     private final List<Sequence> sequences = new ArrayList<>();
 
-    /** List of questionnaire's subsequences. */
+    /** List of questionnaire's subsequences.
+     * Note: the order and hierarchy of the sequences and subsequences is stored in the sequence objects. */
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
             ".?[#this instanceof T(datacollection33.SequenceType) " +
             "and not #this.getTypeOfSequenceList().isEmpty()]" +
@@ -66,31 +72,57 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     @Lunatic("getComponents()")
     private final List<Subsequence> subsequences = new ArrayList<>();
 
+    /** Loops defined in the questionnaire.
+     * In DDI, a loop is defined at the questionnaire level.
+     * In Lunatic, a loop is a component containing components within its scope.
+     */
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
             ".?[#this instanceof T(datacollection33.LoopType)]")
     @Lunatic("getComponents()")
     private final List<Loop> loops = new ArrayList<>();
 
+    /** In DDI, all filters are mapped at the questionnaire level.
+     * They are inserted in the objects they belong to through a DDI processing.
+     * Note: there is a difference between filter objects mapped in this list (in the questionnaire object) and filter
+     * objects that are inserted in components (sequences, questions etc.)
+     */
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
             ".?[#this instanceof T(datacollection33.IfThenElseType)]")
     private final List<Filter> filters = new ArrayList<>();
 
+    /** In DDI, all controls are mapped at the questionnaire level.
+     * They are inserted in the objects they belong to through a DDI processing.
+     */
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
             ".?[#this instanceof T(datacollection33.ComputationItemType)]")
     private final List<Control> controls = new ArrayList<>();
 
+    /** In DDI, all declarations are mapped at the questionnaire level.
+     * They are inserted in the objects they belong to through a DDI processing.
+     */
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
             ".?[#this instanceof T(datacollection33.StatementItemType)]")
     private final List<Declaration> declarations = new ArrayList<>();
 
+    /** Single response questions.
+     * This corresponds to DDI "QuestionItem" objects.
+     * Question objects are components in the Lunatic questionnaire.
+     */
     @DDI("getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionItemList()")
     @Lunatic("getComponents()")
     private final List<SingleResponseQuestion> singleResponseQuestions = new ArrayList<>();
 
+    /** Multiple response questions.
+     * This corresponds to DDI "QuestionGrid" objects.
+     * Question objects are components in the Lunatic questionnaire.
+     */
     @DDI("getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionGridList()")
     @Lunatic("getComponents()")
     private final List<MultipleResponseQuestion> multipleResponseQuestions = new ArrayList<>();
 
+    /** In DDI, code lists are mapped at the questionnaire level.
+     * They are inserted in objects that rely on a code list through a DDI processing.
+     */
     @DDI("getResourcePackageArray(0).getCodeListSchemeArray(0).getCodeListList()")
     List<CodeList> codeLists = new ArrayList<>();
 
