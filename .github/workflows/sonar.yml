@@ -4,7 +4,6 @@ on:
   pull_request:
     branches:
       - 'v3-main'
-      - 'v3-next'
     types: [opened, synchronize, reopened, ready_for_review]
     paths-ignore:
       - 'logo/**'
@@ -12,9 +11,6 @@ on:
       - 'README**.md'
       - 'Dockerfile'
       - '.github/**'
-      - '/build.gradle'
-      # temporary exclude root build.gradle file from test workflow trigger
-      # todo: externailze the project version somewhere so to not trigger tests for nothing when only project version has changed
 
 jobs:
   build:
