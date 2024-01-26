@@ -16,6 +16,11 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Entry in a code list. A code item is mainly defined by its value and label. The value is the value stored in data
+ * when this code item is chosen by a respondent in some question. The label is the label displayed to the respondent.
+ * Code lists can have nested code items, so the code item class contains a list that can contain sub-items.
+ */
 @Getter
 @Setter
 @Context(format = Format.DDI, type = CodeType.class)

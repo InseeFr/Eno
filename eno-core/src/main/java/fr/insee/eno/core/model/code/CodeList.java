@@ -14,7 +14,6 @@ import java.util.List;
 /**
  * Class to hold code list information.
  * Contains two ordered lists with values and corresponding labels.
- * Only used in table questions for now.
  * */
 @Getter
 @Setter
