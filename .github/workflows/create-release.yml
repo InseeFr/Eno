@@ -102,8 +102,9 @@ jobs:
         with:
           fromTag: ${{ github.sha }}
           toTag: ${{ steps.previousTag.outputs.previousTag}}
+          excludeTypes: ci,style,chore,other
           token: ${{ secrets.GITHUB_TOKEN }}
-          writeToFile: false
+          writeToFile: true
 
       - name: Download build
         id: download
