@@ -73,16 +73,25 @@ jobs:
         id: previousTag
         run: echo "previousTag=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | grep "^v2\.[0-9]\+\.[0-9]\+$" | tail -1)" >> $GITHUB_OUTPUT
 
-      - name: Print previous tag
+      - name: Print previous tag version
         run: echo ${{ steps.previousTag.outputs.previousTag }}
+
+      - name: Create tag
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: "v${{ needs.check-version.outputs.release-version }}"
+
+      - name: Print new tag version
+        run: echo ${{ needs.check-version.outputs.release-version }}
 
       - name: Create release note
         id: changelog
         uses: requarks/changelog-action@v1
         with:
-          fromTag: ${{ github.sha }}
+          fromTag: "v${{ needs.check-version.outputs.release-version }}"
           toTag: ${{ steps.previousTag.outputs.previousTag }}
           excludeTypes: style,chore,other
+          excludeScopes: changelog # do not include changelog commits
           token: ${{ secrets.GITHUB_TOKEN }}
           writeToFile: true
           changelogFilePath: 'doc/releases.md'
@@ -95,3 +104,10 @@ jobs:
           name: "v${{ needs.check-version.outputs.release-version }}"
           body: ${{steps.changelog.outputs.changes}}
           makeLatest: 'false'
+
+      - name: Commit changelog file
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: 'v2-main'
+          commit_message: 'docs(changelog): ${{ needs.check-version.outputs.release-version }} update [skip ci]'
+          file_pattern: 'doc/releases.md'
