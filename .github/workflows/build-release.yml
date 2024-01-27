@@ -65,7 +65,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Todo: add automated changelog step (based conventionnal commit using requarks/changelog-action)
+      - name: Get previous v2 release tag
+        id: previousTag
+        run: echo "previousTag=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | grep "^2\.[0-9]\+\.[0-9]\+$" | tail -1)" >> $GITHUB_OUTPUT
+
+      - name: Create release note
+        id: changelog
+        uses: requarks/changelog-action@v1
+        with:
+          fromTag: ${{ github.sha }}
+          toTag: ${{ steps.previousTag.outputs.previousTag }}
+          excludeTypes: ci,style,chore,other
+          token: ${{ secrets.GITHUB_TOKEN }}
+          writeToFile: true
+          changelogFilePath: 'doc/releases.md'
 
       - name: Create release
         uses: softprops/action-gh-release@v1
@@ -73,6 +86,6 @@ jobs:
           tag_name: "v${{ needs.check-version.outputs.release-version }}"
           target_commitish: ${{ github.head_ref || github.ref }}
           name: "v${{ needs.check-version.outputs.release-version }}"
-          #body: see todo
+          body: ${{steps.changelog.outputs.changes}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
