@@ -70,7 +70,7 @@ jobs:
 
       - name: Get previous v2 release tag
         id: previousTag
-        run: echo "previousTag=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | grep "^2\.[0-9]\+\.[0-9]\+$" | tail -1)" >> $GITHUB_OUTPUT
+        run: echo "previousTag=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | grep "^v2\.[0-9]\+\.[0-9]\+$" | tail -1)" >> $GITHUB_OUTPUT
 
       - name: Print previous tag
         run: echo ${{ steps.previousTag.outputs.previousTag }}
