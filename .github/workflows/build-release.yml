@@ -87,11 +87,10 @@ jobs:
           changelogFilePath: 'doc/releases.md'
 
       - name: Create release
-        uses: softprops/action-gh-release@v1
+        uses: ncipollo/release-action@v1 # This action allows to publish non 'latest' releases
         with:
-          tag_name: "v${{ needs.check-version.outputs.release-version }}"
-          target_commitish: ${{ github.head_ref || github.ref }}
+          tag: "v${{ needs.check-version.outputs.release-version }}"
+          commit: ${{ github.head_ref || github.ref }}
           name: "v${{ needs.check-version.outputs.release-version }}"
           body: ${{steps.changelog.outputs.changes}}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          makeLatest: 'false'
