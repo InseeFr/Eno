@@ -8,6 +8,9 @@
 
 [Release description](https://github.com/InseeFr/Eno/tree/master/doc/releases.md)
 
+> [!NOTE]  
+> This branch contains the XML version of Eno. From version 3+, Eno is being re-written in Java. See the main branch of the repo.
+
 ## What is it ?
 
 **Eno** is a tool that **generates survey questionnaires starting from their formal description** in [DDI](http://ddialliance.org).
