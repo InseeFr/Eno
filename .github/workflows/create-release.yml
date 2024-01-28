@@ -7,6 +7,7 @@ on:
     paths-ignore:
       - 'logo/**'
       - 'docs/**'
+      - 'CHANGELOG.md'
       - 'README**.md'
       - 'Dockerfile'
       - '.github/**'
@@ -83,9 +84,11 @@ jobs:
           name: eno-ws-jar
           path: ./eno-ws/build/libs/eno-ws.jar
 
-  create-release: # replaced with create-tag while v3 is not the main branch
+  create-release:
     needs: [ check-version, build-sources ]
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -96,15 +99,21 @@ jobs:
         id: previousTag
         run: echo "previousTag=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | grep "^[0-9]\+\.[0-9]\+\.[0-9]\+$" | tail -1)" >> $GITHUB_OUTPUT
 
+      - name: Create tag
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: ${{ needs.check-version.outputs.release-version }}
+
       - name: Create release note
         id: changelog
         uses: requarks/changelog-action@v1
         with:
-          fromTag: ${{ github.sha }}
+          fromTag: ${{ needs.check-version.outputs.release-version }}
           toTag: ${{ steps.previousTag.outputs.previousTag}}
-          excludeTypes: ci,style,chore,other
+          excludeTypes: style,chore,other
           token: ${{ secrets.GITHUB_TOKEN }}
           writeToFile: true
+          changelogFilePath: 'CHANGELOG.md'
 
       - name: Download build
         id: download
@@ -113,7 +122,8 @@ jobs:
           name: eno-ws-jar
           path: eno-ws/build/libs/
 
-      - uses: softprops/action-gh-release@v1
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ needs.check-version.outputs.release-version }}
           target_commitish: ${{ github.head_ref || github.ref }}
@@ -122,6 +132,13 @@ jobs:
           files: eno-ws/build/libs/eno-ws.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit changelog file
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: 'v3-main'
+          commit_message: 'docs(changelog): ${{ needs.check-version.outputs.release-version }} update [skip ci]'
+          file_pattern: 'CHANGELOG.md'
 
   publish-docker:
     needs: [ check-version, create-release ]

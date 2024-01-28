@@ -6,6 +6,7 @@ on:
     paths-ignore:
       - 'logo/**'
       - 'docs/**'
+      - 'CHANGELOG.md'
       - 'README**.md'
       - 'Dockerfile'
       - '.github/**'
