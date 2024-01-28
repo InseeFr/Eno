@@ -1,5 +1,19 @@
 # Eno Releases note
 
+## [v2.7.2] - 2024-01-27
+
+### :construction_worker: Build System
+- [`742757b`](https://github.com/InseeFr/Eno/commit/742757be3d1f19072234136f060ecbd55b93cf72) - bump org.apache.commons:commons-lang3 from 3.13.0 to 3.14.0 (#815)
+- [`ddd9ab1`](https://github.com/InseeFr/Eno/commit/ddd9ab10a9e9b96737014b8ed58839a2a275a77b) - bump org.apache.maven.plugins:maven-javadoc-plugin (#818)
+- [`78f5e49`](https://github.com/InseeFr/Eno/commit/78f5e49302ff71c8618fe09e5d385215e6958a50) - bump org.apache.logging.log4j:log4j-slf4j2-impl (#836)
+- [`ebb2e40`](https://github.com/InseeFr/Eno/commit/ebb2e40a83b03611f83cb7e8056cb2f25d88dddc) - bump mukunku/tag-exists-action from 1.4.0 to 1.5.0 (#840)
+
+### :rocket: CI Workflow Changes
+- [`34e8f20`](https://github.com/InseeFr/Eno/commit/34e8f20792ae8e2dac463f3798f5dcfa23008433) - add automated changelog *(commit by @nsenave)*
+
+### :memo: Documentation Changes
+- [`f861f21`](https://github.com/InseeFr/Eno/commit/f861f2184e15d3d3fca8aff5cf404a27e5b2d5b2) - add eno java info in readme *(commit by @nsenave)*
+
 ## 2.7.1
 - **[ddi2fo][post-processing]** ***Household***: update fist page
 
