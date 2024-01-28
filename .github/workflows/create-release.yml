@@ -160,4 +160,4 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           default_branch: ${{ github.ref }}
-          tags: ${{ needs.check-version.outputs.release-version }}
+          tags: "latest,${{ needs.check-version.outputs.release-version }}"
