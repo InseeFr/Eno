@@ -20,6 +20,8 @@ public class OpenApiConfiguration {
     private String enoLegacyUrl;
     @Value("${version.eno}")
     private String enoVersion;
+    @Value("${eno.release.note.url}")
+    private String releaseNoteUrl;
     @Value("${version.pogues.model}")
     private String poguesModelVersion;
     @Value("${version.lunatic.model}")
@@ -44,7 +46,8 @@ public class OpenApiConfiguration {
                                         "  .version{color:darkred}" +
                                         "</style>" +
                                         "<table style=\"width:40%\">" +
-                                        descriptionEntry("Eno Java version", enoVersion) +
+                                        descriptionEntry("Eno Java version",
+                                                enoVersion + releaseNoteLink(releaseNoteUrl)) +
                                         descriptionEntry("Eno XML web service", htmlLink(enoLegacyUrl)) +
                                         descriptionEntry("DDI version", /*DDIMetadata.MODEL_VERSION*/ "3.3") +
                                         descriptionEntry("Pogues Model version", poguesModelVersion) +
@@ -63,6 +66,11 @@ public class OpenApiConfiguration {
     }
     private static String htmlLink(String url) {
         return "<a href=\""+url+"\">"+url+"</a>";
+    }
+    private static String releaseNoteLink(String url) {
+        if (url == null || "".equals(url))
+            return "";
+        return " " + "<i><a href=\""+url+"\" target=\"_blank\">(Release note)</a></i>";
     }
 
 }
