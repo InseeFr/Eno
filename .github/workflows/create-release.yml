@@ -94,6 +94,7 @@ jobs:
         with:
           ref: ${{ github.ref }}
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get previous final release tag
         id: previousTag
