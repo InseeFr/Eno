@@ -7,7 +7,7 @@ plugins {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -16,7 +16,7 @@ tasks.withType(JavaCompile).configureEach {
 
 allprojects {
     group = 'fr.insee.eno'
-    version = '3.15.10'
+    version = '3.16.0'
 }
 
 subprojects {

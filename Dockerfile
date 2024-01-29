@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jre-focal
+FROM eclipse-temurin:21-jre
 WORKDIR /opt/eno-ws/
 COPY ./eno-ws/build/libs/*.jar /opt/eno-ws/eno-ws.jar
 EXPOSE 8080
