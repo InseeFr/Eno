@@ -28,11 +28,16 @@ public class OpenApiConfiguration {
 
     @Bean
     public OpenAPI customOpenAPI() {
-        Server server = new Server();
-        server.setUrl(enoUrl);
-        return new OpenAPI()
-                .addServersItem(server)
-                .info(new Info()
+        OpenAPI openAPI = new OpenAPI();
+        //
+        if (enoUrl != null && !enoUrl.isEmpty()) {
+            Server server = new Server();
+            server.setUrl(enoUrl);
+            openAPI.addServersItem(server);
+        }
+        //
+        openAPI.info(
+                new Info()
                         .title("Eno Web Service")
                         .description(
                                 "<h2>Generator using:</h2>" +
@@ -55,6 +60,7 @@ public class OpenApiConfiguration {
                         .version(enoVersion)
                         .license(new License().name("Apache 2.0").url("https://springdoc.org"))
                 );
+        return openAPI;
     }
 
     private static String descriptionEntry(String description, String version) {
@@ -67,7 +73,7 @@ public class OpenApiConfiguration {
         return "<a href=\""+url+"\">"+url+"</a>";
     }
     private static String releaseNoteLink(String url) {
-        if (url == null || "".equals(url))
+        if (url == null || url.isEmpty())
             return "";
         return " " + "<i><a href=\""+url+"\" target=\"_blank\">(Release note)</a></i>";
     }
