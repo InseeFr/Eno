@@ -28,7 +28,7 @@ V3 "Eno Java" project: change of technology from XSLT to Java.
 
 ### Requirements
 
-JDK 17+ is required.
+JDK 21+ is required.
 
 ### Make sustainable clones!
 
