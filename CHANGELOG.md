@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.16.1] - 2024-01-30
+### :bug: Bug Fixes
+- [`f487c48`](https://github.com/InseeFr/Eno/commit/f487c4863e439417f536b54f0302c183fbeb7ce4) - remove prefix in questionnaire id *(PR [#890](https://github.com/InseeFr/Eno/pull/890) by [@nsenave](https://github.com/nsenave))*
+  - :arrow_lower_right: *fixes issue [#889](undefined) opened by [@romaintailhurat](https://github.com/romaintailhurat)*
+
+### :construction_worker: Build System
+- [`063e513`](https://github.com/InseeFr/Eno/commit/063e513a721b6b2d341a8d5a617945199fbcff63) - **release**: add github token to authorize auto commit *(commit by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.15.10] - 2024-01-27
 
 ### :recycle: Refactors
@@ -49,3 +58,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 :sparkles: Main feature: DDI to Lunatic transformation.
 
 :recycle: Eno web API has been enhanced.
+
+[3.16.1]: https://github.com/InseeFr/Eno/compare/3.16.0...3.16.1
