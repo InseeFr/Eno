@@ -63,11 +63,14 @@ jobs:
   tag-release:
     needs: check-version
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get previous v2 release tag
         id: previousTag
