@@ -12,6 +12,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### :construction_worker: Build System
 - [`063e513`](https://github.com/InseeFr/Eno/commit/063e513a721b6b2d341a8d5a617945199fbcff63) - **release**: add github token to authorize auto commit *(commit by [@nsenave](https://github.com/nsenave))*
 
+## [3.16.0] - 2024-01-29
+
+### :construction_worker: Build System
+- [`3a3b00c`](https://github.com/InseeFr/Eno/commit/3a3b00c6df38c3dc6c7e9cbd476770ce23792f03) - java 21 *(PR #879 by @nsenave)*
+
+### :rocket: CI Workflow Changes
+- [`0e339f5`](https://github.com/InseeFr/Eno/commit/0e339f5e5915378c947c3d0e133f3b50e59f19ef) - update release note action *(commit by @nsenave)*
+- [`0c0a29e`](https://github.com/InseeFr/Eno/commit/0c0a29e1eb6d135f4317e467e78bc190f8d4da5b) - add dependabot config file *(commit by @nsenave)*
+- [`ab1dd36`](https://github.com/InseeFr/Eno/commit/ab1dd36b58d1658fb7e918e8f797f84062e881e9) - write changelog file in release workflow *(commit by @nsenave)*
+- [`a35ebf9`](https://github.com/InseeFr/Eno/commit/a35ebf9b1454e5b11d6cc2106c0aae287953eda4) - refine previous tag search regex *(commit by @nsenave)*
+- [`6a7ffa9`](https://github.com/InseeFr/Eno/commit/6a7ffa95ae76f29a6d46df2bc2067cb1e9066060) - add 'latest' tag in docker publish *(commit by @nsenave)*
+
+### :memo: Documentation Changes
+- [`b3fe5d8`](https://github.com/InseeFr/Eno/commit/b3fe5d8e4d549b5a351359b131dd2a0392646c59) - init changelog file *(commit by @nsenave)*
+- [`5e83285`](https://github.com/InseeFr/Eno/commit/5e8328565cfecce9d4f1a6d18e2b734a55365ee9) - add property to link release note in swagger *(commit by @nsenave)*
 
 ## [3.15.10] - 2024-01-27
 
