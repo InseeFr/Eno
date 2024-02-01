@@ -56,21 +56,12 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
 
         List<ComponentType> components = LunaticUtils.getResponseComponents(lunaticQuestionnaire.getComponents());
 
-        components.forEach(this::processComponentsMissingResponse);
+        components.forEach(component -> processComponentsMissingResponse(component, lunaticQuestionnaire));
 
         List<MissingBlock> missingBlocks = createMissingBlocks(components);
-
-        List<VariableType> missingVariables = new ArrayList<>();
-
         // New list so that we put missing blocks next to the corresponding reversed missing block
         List<MissingBlock> allMissingBlocks = new ArrayList<>();
-
         missingBlocks.forEach(missingBlock -> {
-            VariableType missingVariable = new VariableType();
-            missingVariable.setVariableType(VariableTypeEnum.COLLECTED);
-            missingVariable.setName(missingBlock.getMissingName());
-            missingVariables.add(missingVariable);
-
             allMissingBlocks.add(missingBlock);
             allMissingBlocks.addAll(createReversedMissingBlocks(missingBlock));
         });
@@ -78,9 +69,7 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
         if (!allMissingBlocks.isEmpty()) {
             MissingType missingType = new MissingType();
             missingType.getAny().addAll(allMissingBlocks);
-
             lunaticQuestionnaire.setMissingBlock(missingType);
-            lunaticQuestionnaire.getVariables().addAll(missingVariables);
         }
     }
 
@@ -88,7 +77,7 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
      * set missing response for a component
      * @param component set missing response for this component
      */
-    private void processComponentsMissingResponse(ComponentType component) {
+    private void processComponentsMissingResponse(ComponentType component, Questionnaire lunaticQuestionnaire) {
 
         switch (component.getComponentType()) {
 
@@ -97,7 +86,8 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
 
                 // For paginated loops, missing responses are generated on the loop components
                 if (Boolean.TRUE.equals(loop.getPaginatedLoop())) {
-                    LunaticUtils.getResponseComponents(loop.getComponents()).forEach(this::processComponentsMissingResponse);
+                    LunaticUtils.getResponseComponents(loop.getComponents())
+                            .forEach(loopComponent -> processComponentsMissingResponse(loopComponent, lunaticQuestionnaire));
                     return;
                 }
 
@@ -111,18 +101,27 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
                         .findFirst()
                         .orElseThrow(() -> new LunaticLoopException(String.format(
                                 "Main loop '%s' does not have a simple question in its components.", loop.getId())));
-                setMissingResponse(loop, firstResponseName);
+                String missingResponseName = setMissingResponse(loop, firstResponseName);
+                addMissingVariable(new VariableTypeArray(), missingResponseName, lunaticQuestionnaire);
+            }
+
+            case ROSTER_FOR_LOOP -> {
+                Question question = enoCatalog.getQuestion(component.getId());
+                String missingResponseName = setMissingResponse(component, question.getName());
+                addMissingVariable(new VariableTypeArray(), missingResponseName, lunaticQuestionnaire);
             }
 
             case PAIRWISE_LINKS -> {
                 ComponentType pairwiseInnerComponent = LunaticUtils.getPairwiseInnerComponent((PairwiseLinks) component);
                 String pairwiseResponseName = ((ComponentSimpleResponseType) pairwiseInnerComponent).getResponse().getName();
-                setMissingResponse(pairwiseInnerComponent, pairwiseResponseName);
+                String missingResponseName = setMissingResponse(pairwiseInnerComponent, pairwiseResponseName);
+                addMissingVariable(new VariableTypeTwoDimensionsArray(), missingResponseName, lunaticQuestionnaire);
             }
 
             default -> {
                 Question question = enoCatalog.getQuestion(component.getId());
-                setMissingResponse(component, question.getName());
+                String missingResponseName = setMissingResponse(component, question.getName());
+                addMissingVariable(new VariableType(), missingResponseName, lunaticQuestionnaire);
             }
         }
     }
@@ -132,11 +131,21 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
      * concatenation of the given prefix and the common missing response suffix.
      * @param component A Lunatic component.
      * @param missingResponsePrefix Business name that corresponds to the component.
+     * @return The missing response name.
      */
-    private void setMissingResponse(ComponentType component, String missingResponsePrefix) {
+    private String setMissingResponse(ComponentType component, String missingResponsePrefix) {
         ResponseType missingResponse = new ResponseType();
-        missingResponse.setName(missingResponsePrefix + MISSING_RESPONSE_SUFFIX);
+        String missingResponseName = missingResponsePrefix + MISSING_RESPONSE_SUFFIX;
+        missingResponse.setName(missingResponseName);
         component.setMissingResponse(missingResponse);
+        return missingResponseName;
+    }
+
+    private void addMissingVariable(IVariableType variable, String missingResponseName,
+                                    Questionnaire lunaticQuestionnaire) {
+        variable.setName(missingResponseName);
+        variable.setVariableType(VariableTypeEnum.COLLECTED);
+        lunaticQuestionnaire.getVariables().add(variable);
     }
 
     /**
