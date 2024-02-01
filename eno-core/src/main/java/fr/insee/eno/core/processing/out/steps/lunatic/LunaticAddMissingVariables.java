@@ -86,8 +86,11 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
 
                 // For paginated loops, missing responses are generated on the loop components
                 if (Boolean.TRUE.equals(loop.getPaginatedLoop())) {
-                    LunaticUtils.getResponseComponents(loop.getComponents())
-                            .forEach(loopComponent -> processComponentsMissingResponse(loopComponent, lunaticQuestionnaire));
+                    LunaticUtils.getResponseComponents(loop.getComponents()).forEach(loopComponent -> {
+                        Question question = enoCatalog.getQuestion(loopComponent.getId());
+                        String missingResponseName = setMissingResponse(loopComponent, question.getName());
+                        addMissingVariable(new VariableTypeArray(), missingResponseName, lunaticQuestionnaire);
+                    });
                     return;
                 }
 
