@@ -454,6 +454,7 @@ class LunaticAddMissingVariablesTest {
         loop.setId(id);
         loop.getComponents().addAll(components);
         if(isMainLoop) {
+            loop.setPaginatedLoop(false);
             LinesLoop line = new LinesLoop();
             LabelType label = new LabelType();
             label.setValue("COUNT(prenom)");
@@ -464,6 +465,7 @@ class LunaticAddMissingVariablesTest {
         LabelType label = new LabelType();
         label.setValue("COUNT(prenom)");
         loop.setIterations(label);
+        loop.setPaginatedLoop(true);
         return loop;
     }
 

@@ -13,7 +13,9 @@ import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.eno.core.model.navigation.Control;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.ComponentMultipleResponseType;
+import fr.insee.lunatic.model.flat.ComponentSimpleResponseType;
+import fr.insee.lunatic.model.flat.PairwiseLinks;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,7 +29,9 @@ import java.util.List;
         type = {ComponentSimpleResponseType.class, ComponentMultipleResponseType.class, PairwiseLinks.class})
 public abstract class Question extends EnoIdentifiableObject implements EnoComponent {
 
-    /** Attribute is defined here to factor toString methods,
+    /**
+     * Business name of the question.
+     * Attribute is defined here to factor toString methods,
      * but DDI mapping is done in subclasses since DDI classes are different. */
     String name;
 
