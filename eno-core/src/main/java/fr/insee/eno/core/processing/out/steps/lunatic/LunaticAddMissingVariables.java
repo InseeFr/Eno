@@ -83,29 +83,11 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
 
             case LOOP -> {
                 Loop loop = (Loop) component;
-
-                // For paginated loops, missing responses are generated on the loop components
-                if (Boolean.TRUE.equals(loop.getPaginatedLoop())) {
-                    LunaticUtils.getResponseComponents(loop.getComponents()).forEach(loopComponent -> {
-                        Question question = enoCatalog.getQuestion(loopComponent.getId());
-                        String missingResponseName = setMissingResponse(loopComponent, question.getName());
-                        addMissingVariable(new VariableTypeArray(), missingResponseName, lunaticQuestionnaire);
-                    });
-                    return;
-                }
-
-                // For non-paginated loop, missing response is generated on the loop component
-                // (!!!) we assume the loop contains a simple question (not roster, table, checkbox group, ...)
-                String firstResponseName = loop.getComponents().stream()
-                        .filter(ComponentSimpleResponseType.class::isInstance)
-                        .map(ComponentSimpleResponseType.class::cast)
-                        .map(ComponentSimpleResponseType::getResponse)
-                        .map(ResponseType::getName)
-                        .findFirst()
-                        .orElseThrow(() -> new LunaticLoopException(String.format(
-                                "Main loop '%s' does not have a simple question in its components.", loop.getId())));
-                String missingResponseName = setMissingResponse(loop, firstResponseName);
-                addMissingVariable(new VariableTypeArray(), missingResponseName, lunaticQuestionnaire);
+                LunaticUtils.getResponseComponents(loop.getComponents()).forEach(loopComponent -> {
+                    Question question = enoCatalog.getQuestion(loopComponent.getId());
+                    String missingResponseName = setMissingResponse(loopComponent, question.getName());
+                    addMissingVariable(new VariableTypeArray(), missingResponseName, lunaticQuestionnaire);
+                });
             }
 
             case ROSTER_FOR_LOOP -> {
@@ -169,11 +151,10 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
                 })
                 .toList());
 
-        // generate blocks for subcomponents on linked loop
+        // generate blocks for subcomponents on loop
         missingBlocks.addAll(components.stream()
                 .filter(componentType -> componentType.getComponentType().equals(ComponentTypeEnum.LOOP))
                 .map(Loop.class::cast)
-                .filter(Loop::getPaginatedLoop)
                 .map(linkedLoop -> createMissingBlocks(LunaticUtils.getResponseComponents(linkedLoop.getComponents())))
                 .flatMap(Collection::stream)
                 .toList());

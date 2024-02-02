@@ -8,6 +8,8 @@ import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,14 +91,15 @@ class LunaticAddMissingVariablesTest {
         assertEquals(table.getMissingResponse().getName(), enoCatalog.getQuestion(table.getId()).getName()+"_MISSING");
     }
 
-    @Test
-    void whenPaginatedLoopGenerateMissingResponseOnSubComponents() {
+    @ParameterizedTest
+    @ValueSource(booleans = {true, false})
+    void whenLoopGenerateMissingResponseOnSubComponents(boolean paginatedLoop) {
         lunaticQuestionnaire = new Questionnaire();
         List<ComponentType> questionnaireComponents = lunaticQuestionnaire.getComponents();
 
 
         List<ComponentType> loopComponents = new ArrayList<>(List.of(input, textarea, inputNumber, datepicker, checkboxBoolean, radio, checkboxOne, dropdown));
-        Loop loop = buildLoop("jghdkmdf", loopComponents, true);
+        Loop loop = buildLoop("jghdkmdf", loopComponents, paginatedLoop);
         questionnaireComponents.add(loop);
         processing.apply(lunaticQuestionnaire);
 
@@ -104,24 +107,6 @@ class LunaticAddMissingVariablesTest {
             assertEquals(component.getMissingResponse().getName(), enoCatalog.getQuestion(component.getId()).getName() + "_MISSING");
         }
         assertNull(loop.getMissingResponse());
-    }
-
-    @Test
-    void whenNonPaginatedLoopGenerateSingleMissingResponse() {
-        lunaticQuestionnaire = new Questionnaire();
-        List<ComponentType> questionnaireComponents = lunaticQuestionnaire.getComponents();
-
-        List<ComponentType> loopComponents = new ArrayList<>(List.of(table, input, textarea, inputNumber, datepicker, checkboxBoolean, radio, checkboxOne, dropdown));
-        Loop loop = buildLoop("jghdkmdf", loopComponents, false);
-        questionnaireComponents.add(loop);
-        processing.apply(lunaticQuestionnaire);
-
-        for (ComponentType component : loopComponents) {
-            assertNull(component.getMissingResponse());
-        }
-
-        // The first response that belongs to a simple response component is used
-        assertEquals(input.getResponse().getName()+"_MISSING", loop.getMissingResponse().getName());
     }
 
     @Test
@@ -160,13 +145,14 @@ class LunaticAddMissingVariablesTest {
         });
     }
 
-    @Test
-    void whenPaginatedLoopGenerateCorrectVariables() {
+    @ParameterizedTest
+    @ValueSource(booleans = {true, false})
+    void whenLoopGenerateCorrectVariables(boolean paginatedLoop) {
         lunaticQuestionnaire = new Questionnaire();
         List<ComponentType> components = lunaticQuestionnaire.getComponents();
         Loop loop = buildLoop("jdfhjis5",
                 List.of(input, textarea, inputNumber, datepicker, checkboxBoolean, radio, checkboxOne, dropdown),
-                true);
+                paginatedLoop);
         components.add(loop);
         processing.apply(lunaticQuestionnaire);
 
@@ -175,23 +161,6 @@ class LunaticAddMissingVariablesTest {
                 .filter(VariableTypeArray.class::isInstance)
                 .filter(variable -> variable.getVariableType().equals(VariableTypeEnum.COLLECTED))
                 .anyMatch(variable -> variable.getName().equals(componentType.getMissingResponse().getName()))));
-    }
-
-    @Test
-    void whenNonPaginatedLoopGenerateCorrectVariables() {
-        lunaticQuestionnaire = new Questionnaire();
-        List<ComponentType> components = lunaticQuestionnaire.getComponents();
-        Loop loop = buildLoop("jdfhjis5",
-                List.of(input, textarea, inputNumber, datepicker, checkboxBoolean, radio, checkboxOne, dropdown),
-                false);
-        components.add(loop);
-        processing.apply(lunaticQuestionnaire);
-
-        List<IVariableType> variables = lunaticQuestionnaire.getVariables();
-        assertTrue(variables.stream()
-                .filter(VariableTypeArray.class::isInstance)
-                .filter(variable -> variable.getVariableType().equals(VariableTypeEnum.COLLECTED))
-                .anyMatch(variable -> variable.getName().equals(loop.getMissingResponse().getName())));
     }
 
     @Test
@@ -205,28 +174,29 @@ class LunaticAddMissingVariablesTest {
         List<MissingBlock> missingBlocks = lunaticQuestionnaire.getMissingBlock().getAny().stream()
                 .map(MissingBlock.class::cast).toList();
 
-        for(int cpt=0; cpt<components.size(); cpt++) {
-            ComponentType component = components.get(cpt);
-            ComponentSimpleResponseType simpleResponseType = responseTypes.get(cpt);
+        for(ComponentType component : components) {
+            String responseName = ((ComponentSimpleResponseType) component).getResponse().getName();
+            String missingResponseName = component.getMissingResponse().getName();
             assertTrue(missingBlocks.stream()
-                    .anyMatch(missingBlock -> missingBlock.getMissingName().equals(component.getMissingResponse().getName())
+                    .anyMatch(missingBlock -> missingBlock.getMissingName().equals(missingResponseName)
                             && missingBlock.getNames().size() == 1
-                            && missingBlock.getNames().contains(simpleResponseType.getResponse().getName())));
+                            && missingBlock.getNames().contains(responseName)));
             assertTrue(missingBlocks.stream()
-                    .anyMatch(missingBlock -> missingBlock.getMissingName().equals(simpleResponseType.getResponse().getName())
+                    .anyMatch(missingBlock -> missingBlock.getMissingName().equals(responseName)
                             && missingBlock.getNames().size() == 1
-                            && missingBlock.getNames().contains(component.getMissingResponse().getName())));
+                            && missingBlock.getNames().contains(missingResponseName)));
         }
     }
 
-    @Test
-    void whenLinkedLoopGenerateMissingBlocksFromSubComponents() {
+    @ParameterizedTest
+    @ValueSource(booleans = {true, false})
+    void whenLoopGenerateMissingBlocksFromSubComponents(boolean paginatedLoop) {
         // Given
         lunaticQuestionnaire = new Questionnaire();
         List<ComponentType> questionnaireComponents = lunaticQuestionnaire.getComponents();
         //
         List<ComponentType> loopComponents = new ArrayList<>(List.of(input, textarea, inputNumber, datepicker, checkboxBoolean, radio, checkboxOne, dropdown));
-        Loop loop = buildLoop("jghdkmdf", loopComponents, true);
+        Loop loop = buildLoop("jghdkmdf", loopComponents, paginatedLoop);
         questionnaireComponents.add(loop);
         // When
         processing.apply(lunaticQuestionnaire);
@@ -273,55 +243,31 @@ class LunaticAddMissingVariablesTest {
     }
 
     @Test
-    void whenNonPaginatedLoopGenerateMissingBlocksFromLoopMissingResponse() {
-        lunaticQuestionnaire = new Questionnaire();
-        List<ComponentType> questionnaireComponents = lunaticQuestionnaire.getComponents();
-
-
-        List<ComponentType> loopComponents = new ArrayList<>(List.of(input, textarea, inputNumber, datepicker, checkboxBoolean, radio, checkboxOne, dropdown));
-        Loop loop = buildLoop("jghdkmdf", loopComponents, false);
-        questionnaireComponents.add(loop);
-        processing.apply(lunaticQuestionnaire);
-
-        List<ComponentSimpleResponseType> responseTypes = loopComponents.stream().map(ComponentSimpleResponseType.class::cast).toList();
-        List<MissingBlock> missingBlocks = lunaticQuestionnaire.getMissingBlock().getAny().stream()
-                .map(MissingBlock.class::cast).toList();
-
-        for(int cpt=0; cpt<loopComponents.size(); cpt++) {
-            ComponentSimpleResponseType simpleResponseType = responseTypes.get(cpt);
-            assertTrue(missingBlocks.stream()
-                    .anyMatch(missingBlock -> missingBlock.getMissingName().equals(loop.getMissingResponse().getName())
-                            && missingBlock.getNames().size() == 8));
-            assertTrue(missingBlocks.stream()
-                    .anyMatch(missingBlock -> missingBlock.getMissingName().equals(simpleResponseType.getResponse().getName())
-                            && missingBlock.getNames().size() == 1
-                            && missingBlock.getNames().contains(loop.getMissingResponse().getName())));
-        }
-    }
-
-    @Test
     void whenCheckboxGroupQuestionsGenerateCorrectMissingBlocks() {
+        // Given: questionnaire with simple response components
         lunaticQuestionnaire = new Questionnaire();
         List<ComponentType> components = lunaticQuestionnaire.getComponents();
-        components.addAll(List.of(input, textarea, inputNumber, datepicker, checkboxBoolean, radio, checkboxOne, dropdown));
+        components.add(checkboxGroup);
+        // When
         processing.apply(lunaticQuestionnaire);
-
-        List<ComponentSimpleResponseType> responseTypes = components.stream().map(ComponentSimpleResponseType.class::cast).toList();
+        // Then
         List<MissingBlock> missingBlocks = lunaticQuestionnaire.getMissingBlock().getAny().stream()
                 .map(MissingBlock.class::cast).toList();
-
-        for(int cpt=0; cpt<components.size(); cpt++) {
-            ComponentType component = components.get(cpt);
-            ComponentSimpleResponseType simpleResponseType = responseTypes.get(cpt);
-            assertTrue(missingBlocks.stream()
-                    .anyMatch(missingBlock -> missingBlock.getMissingName().equals(component.getMissingResponse().getName())
-                            && missingBlock.getNames().size() == 1
-                            && missingBlock.getNames().contains(simpleResponseType.getResponse().getName())));
-            assertTrue(missingBlocks.stream()
-                    .anyMatch(missingBlock -> missingBlock.getMissingName().equals(simpleResponseType.getResponse().getName())
-                            && missingBlock.getNames().size() == 1
-                            && missingBlock.getNames().contains(component.getMissingResponse().getName())));
-        }
+        //
+        List<String> responseNames = checkboxGroup.getResponses().stream()
+                .map(responsesCheckboxGroup -> responsesCheckboxGroup.getResponse().getName())
+                .toList();
+        String missingResponseName = checkboxGroup.getMissingResponse().getName();
+        //
+        assertTrue(missingBlocks.stream()
+                .anyMatch(missingBlock -> missingBlock.getMissingName().equals(missingResponseName)
+                        && missingBlock.getNames().size() == responseNames.size()
+                        && missingBlock.getNames().containsAll(responseNames)));
+        responseNames.forEach(responseName ->
+                assertTrue(missingBlocks.stream()
+                        .anyMatch(missingBlock -> missingBlock.getMissingName().equals(responseName)
+                                && missingBlock.getNames().size() == 1
+                                && missingBlock.getNames().contains(missingResponseName))));
     }
 
     private CheckboxGroup buildCheckboxGroup(String id, List<String> names) {
