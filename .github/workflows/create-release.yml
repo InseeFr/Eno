@@ -113,6 +113,7 @@ jobs:
           fromTag: ${{ needs.check-version.outputs.release-version }}
           toTag: ${{ steps.previousTag.outputs.previousTag}}
           excludeTypes: style,chore,other
+          excludeScopes: changelog # do not include changelog commits
           token: ${{ secrets.GITHUB_TOKEN }}
           writeToFile: true
           changelogFilePath: 'CHANGELOG.md'
