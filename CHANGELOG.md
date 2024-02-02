@@ -19,8 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [`8a9eba1`](https://github.com/InseeFr/Eno/commit/8a9eba1df1b4142baa3ffb79f8bb218c7dc7c778) - bump com.networknt:json-schema-validator from 1.2.0 to 1.3.0 *(PR [#882](https://github.com/InseeFr/Eno/pull/882) by [@dependabot[bot]](https://github.com/apps/dependabot))*
 
 ### :memo: Documentation Changes
-- [`e411258`](https://github.com/InseeFr/Eno/commit/e411258cf5e05ff845d824bb2181f4126c4a118d) - **changelog**: 3.16.1 update [skip ci] *(commit by [@nsenave](https://github.com/nsenave))*
-- [`f1682bb`](https://github.com/InseeFr/Eno/commit/f1682bbff011f7c1daf544512a754578517f43e7) - **changelog**: update changelog *(commit by [@nsenave](https://github.com/nsenave))*
 - [`f6ce68c`](https://github.com/InseeFr/Eno/commit/f6ce68c319e6df77815f97eb55e285a25609dd21) - update readme after java 21 *(commit by [@nsenave](https://github.com/nsenave))*
 
 
