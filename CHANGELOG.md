@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.17.0] - 2024-02-02
+### :bug: Bug Fixes
+- [`6282cb0`](https://github.com/InseeFr/Eno/commit/6282cb00724ff90787089f93ba1d4d263465abb4) - pairwise missing variable name *(PR [#892](https://github.com/InseeFr/Eno/pull/892) by [@nsenave](https://github.com/nsenave))*
+- [`c09fd08`](https://github.com/InseeFr/Eno/commit/c09fd08414670a3fabf4c41370139fcf46b5f957) - missing variable values *(PR [#894](https://github.com/InseeFr/Eno/pull/894) by [@nsenave](https://github.com/nsenave))*
+- [`303396b`](https://github.com/InseeFr/Eno/commit/303396b98a59507892b425387bedb8de42006bdc) - missing variables in non paginated loops *(PR [#895](https://github.com/InseeFr/Eno/pull/895) by [@nsenave](https://github.com/nsenave))*
+
+### :recycle: Refactors
+- [`2958230`](https://github.com/InseeFr/Eno/commit/29582309411cb559429a3acb02b187aeafd75de8) - **swagger**: make eno url property optional *(commit by [@nsenave](https://github.com/nsenave))*
+
+### :construction_worker: Build System
+- [`a80f667`](https://github.com/InseeFr/Eno/commit/a80f667ff8f3f6e7f53e645e4e3ffe274135f8e9) - bump actions/cache from 3 to 4 *(PR [#888](https://github.com/InseeFr/Eno/pull/888) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`eb89b88`](https://github.com/InseeFr/Eno/commit/eb89b884d81789a2d90883d4c84857c6eb1df98c) - bump gradle/gradle-build-action from 2 to 3 *(PR [#887](https://github.com/InseeFr/Eno/pull/887) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`8a9eba1`](https://github.com/InseeFr/Eno/commit/8a9eba1df1b4142baa3ffb79f8bb218c7dc7c778) - bump com.networknt:json-schema-validator from 1.2.0 to 1.3.0 *(PR [#882](https://github.com/InseeFr/Eno/pull/882) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+
+### :memo: Documentation Changes
+- [`e411258`](https://github.com/InseeFr/Eno/commit/e411258cf5e05ff845d824bb2181f4126c4a118d) - **changelog**: 3.16.1 update [skip ci] *(commit by [@nsenave](https://github.com/nsenave))*
+- [`f1682bb`](https://github.com/InseeFr/Eno/commit/f1682bbff011f7c1daf544512a754578517f43e7) - **changelog**: update changelog *(commit by [@nsenave](https://github.com/nsenave))*
+- [`f6ce68c`](https://github.com/InseeFr/Eno/commit/f6ce68c319e6df77815f97eb55e285a25609dd21) - update readme after java 21 *(commit by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.16.1] - 2024-01-30
 ### :bug: Bug Fixes
 - [`f487c48`](https://github.com/InseeFr/Eno/commit/f487c4863e439417f536b54f0302c183fbeb7ce4) - remove prefix in questionnaire id *(PR [#890](https://github.com/InseeFr/Eno/pull/890) by [@nsenave](https://github.com/nsenave))*
@@ -75,3 +95,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.15.10]: https://github.com/InseeFr/Eno/compare/3.15.9...3.15.10
 [3.16.0]: https://github.com/InseeFr/Eno/compare/3.15.10...3.16.0
 [3.16.1]: https://github.com/InseeFr/Eno/compare/3.16.0...3.16.1
+
+[3.17.0]: https://github.com/InseeFr/Eno/compare/3.16.1...3.17.0
