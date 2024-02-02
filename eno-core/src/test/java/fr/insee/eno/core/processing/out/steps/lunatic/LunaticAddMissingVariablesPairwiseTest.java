@@ -39,6 +39,7 @@ class LunaticAddMissingVariablesPairwiseTest {
                 .filter(variable -> "FOO_LINKS_MISSING".equals(variable.getName()))
                 .findAny();
         assertTrue(pairwiseMissingVariable.isPresent());
+        assertInstanceOf(VariableTypeTwoDimensionsArray.class, pairwiseMissingVariable.get());
         //
         List<MissingBlock> missingEntries = lunaticQuestionnaire.getMissingBlock().getAny().stream()
                 .map(MissingBlock.class::cast).toList();
