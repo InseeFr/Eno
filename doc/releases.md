@@ -1,5 +1,23 @@
 # Eno Releases note
 
+## [v2.7.3] - 2024-02-05
+### :bug: Bug Fixes
+- [`e427bd3`](https://github.com/InseeFr/Eno/commit/e427bd397b421052147274234dacd05577adc3cc) - suggester *(PR [#900](https://github.com/InseeFr/Eno/pull/900) by [@nsenave](https://github.com/nsenave))*
+
+### :construction_worker: Build System
+- [`038f941`](https://github.com/InseeFr/Eno/commit/038f9412bb57226e36a9ae76ba3a5b8ba506913e) - **release**: make non 'latest' releases for v2 *(commit by [@nsenave](https://github.com/nsenave))*
+- [`29ad784`](https://github.com/InseeFr/Eno/commit/29ad78499d3debbfc7998ef8af0a22efdb77269f) - **release**: remove 'ci' from exclude types (cf. requarks/changelog-action[#47](https://github.com/InseeFr/Eno/pull/47)) *(commit by [@nsenave](https://github.com/nsenave))*
+- [`261e041`](https://github.com/InseeFr/Eno/commit/261e0410b87ddcc6f2ef9c2e58f8d6388065304d) - update workflows with 'v2-main' branch *(commit by [@nsenave](https://github.com/nsenave))*
+- [`11a185b`](https://github.com/InseeFr/Eno/commit/11a185b3d3a1cbee3dc25b39c6e781e81beb597f) - write changelog in file *(commit by [@nsenave](https://github.com/nsenave))*
+- [`4d95dff`](https://github.com/InseeFr/Eno/commit/4d95dfffcc39774f125a4100d1291e913545193c) - **release**: add git and write permissions *(commit by [@nsenave](https://github.com/nsenave))*
+- [`5a22c22`](https://github.com/InseeFr/Eno/commit/5a22c22fbf7017b97c5bda6d5ba3ad6272dcdf38) - bump org.junit.jupiter:junit-jupiter-engine from 5.10.0 to 5.10.2 *(PR [#898](https://github.com/InseeFr/Eno/pull/898) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`a9eb602`](https://github.com/InseeFr/Eno/commit/a9eb6024f61edef0de21f2713fb005a5ffc0bf3c) - bump eclipse.version from 2.7.13 to 2.7.14 *(PR [#885](https://github.com/InseeFr/Eno/pull/885) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`0dc844e`](https://github.com/InseeFr/Eno/commit/0dc844e2dd620b1f1e61a9060bb0f8b7cb19d755) - bump net.sf.saxon:Saxon-HE from 12.3 to 12.4 *(PR [#884](https://github.com/InseeFr/Eno/pull/884) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`2f77ce4`](https://github.com/InseeFr/Eno/commit/2f77ce4f9e45e0231a60ca4e03c9b94de995bf05) - bump org.codehaus.mojo:exec-maven-plugin from 3.1.0 to 3.1.1 *(PR [#881](https://github.com/InseeFr/Eno/pull/881) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+
+### :memo: Documentation Changes
+
+
 ## [v2.7.2] - 2024-01-27
 
 ### :construction_worker: Build System
@@ -215,3 +233,5 @@
 ## 2.2.0 - 22/01/2021
 
 - **[ddi2lunaticXML][core]** Changing the lunatic-model, using v.2.0.0.
+
+[v2.7.3]: https://github.com/InseeFr/Eno/compare/v2.7.2...v2.7.3
