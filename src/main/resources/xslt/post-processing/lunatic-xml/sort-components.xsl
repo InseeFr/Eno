@@ -97,7 +97,7 @@
         <Questionnaire>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="*[not(self::h:variables)]"/>
-            <xsl:apply-templates select="descendant::h:suggesters[not(preceding::h:suggesters[h:name = current()/h:name])]"/>
+            <xsl:apply-templates select="descendant::h:suggesters[not(h:name = preceding::h:suggesters/h:name)]"/>
             <xsl:apply-templates select="descendant::h:variables[@variableType='EXTERNAL']"/>
             <xsl:apply-templates select="descendant::h:variables[@variableType='COLLECTED']"/>
             <xsl:apply-templates select="descendant::h:variables[@variableType='CALCULATED']"/>
@@ -224,7 +224,7 @@
             <xsl:call-template name="enolunatic:add-all-dependencies">
                 <xsl:with-param name="dependencies" select="$allDependencies"/>
             </xsl:call-template>
-            <xsl:apply-templates select="*[not(self::h:hierarchy or self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter or self::h:missingResponse)]"/>
+            <xsl:apply-templates select="*[not(self::h:hierarchy or self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter or self::h:missingResponse or self::h:suggesters)]"/>
         </components>
     </xsl:template>
 
@@ -293,7 +293,7 @@
     <xsl:template match="h:body">
         <body>
             <xsl:copy-of select="@*"/>
-            <xsl:apply-templates select="*[not(self::h:variables)]"/>
+            <xsl:apply-templates select="*[not(self::h:variables or self::h:suggesters)]"/>
         </body>
     </xsl:template>
 
