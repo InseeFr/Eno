@@ -1,0 +1,255 @@
+{
+  "owner": "DG75-L201",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "lrf2xcww",
+        "lrf3d3rk",
+        "idendquest"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "lrf2z2x2",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "Tableaux dynamiques en nouvelle filière"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "TABLEAUXDYNNF",
+  "Variables": {
+    "Variable": [
+      {
+        "Scope": "lrf3d3rk",
+        "Label": "\"Fruit\"",
+        "id": "lrf3ngv1",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lrf2yl3n",
+        "Name": "TABLEAUBASIQUE1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Scope": "lrf3d3rk",
+        "Label": "\"J'aime, j'aime pas\"",
+        "id": "lrf3fxwp",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lrf3aaj8",
+        "Name": "TABLEAUBASIQUE2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Wed Jan 24 2024 12:01:44 GMT+0100 (heure normale d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "d5225468-f2c0-4a1b-a662-7b892d9bd734",
+      "uri": "http://ddi:fr.insee:DataCollection.d5225468-f2c0-4a1b-a662-7b892d9bd734"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "lrf3chy8",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "Label": "FRUITS",
+        "id": "lrf2yl3n",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "Banana",
+            "Value": 1
+          },
+          {
+            "Parent": "",
+            "Label": "Water melon",
+            "Value": 2
+          },
+          {
+            "Parent": "",
+            "Label": "Strawberry",
+            "Value": 3
+          },
+          {
+            "Parent": "",
+            "Label": "Durian",
+            "Value": 4
+          },
+          {
+            "Parent": "",
+            "Label": "Apple",
+            "Value": 5
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "AIMER_OU_PAS",
+        "id": "lrf3aaj8",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"J'aime\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"J'aime pas\"",
+            "Value": "2"
+          }
+        ],
+        "Name": ""
+      }
+    ]
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "Fonctionnalités de base"
+      ],
+      "id": "lrf2xcww",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "FlowControl": [],
+          "Label": [
+            "\"Tableau basique\""
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "lrf3gjnl",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "lrf3mpzp",
+                "MappingTarget": "1 2"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "1-5"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Fruit\"",
+                "dynamic": "0"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"J'aime, j'aime pas\"",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "TABLEAUBASIQUE",
+          "Response": [
+            {
+              "CollectedVariableReference": "lrf3ngv1",
+              "id": "lrf3gjnl",
+              "CodeListReference": "lrf2yl3n",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lrf3fxwp",
+              "id": "lrf3mpzp",
+              "CodeListReference": "lrf3aaj8",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            }
+          ],
+          "Control": [
+            {
+              "post_collect": false,
+              "Description": "Contrôle Banane",
+              "Expression": "$TABLEAUBASIQUE1$ = \"1\"",
+              "during_collect": false,
+              "criticity": "INFO",
+              "FailMessage": "\"Banana!\"",
+              "id": "lrrooivf"
+            }
+          ],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "lrf3d3rk",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "questionType": "TABLE"
+        }
+      ],
+      "Name": "FBASE"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}
