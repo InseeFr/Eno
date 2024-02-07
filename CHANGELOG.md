@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.17.1] - 2024-02-07
+### :bug: Bug Fixes
+- [`0fd6dc1`](https://github.com/InseeFr/Eno/commit/0fd6dc1651a6655f3b7ee8cd5e2e8f8d65fb4199) - lunatic dynamic table variables *(PR [#903](https://github.com/InseeFr/Eno/pull/903) by [@nsenave](https://github.com/nsenave))*
+
+### :recycle: Refactors
+- [`de29cc2`](https://github.com/InseeFr/Eno/commit/de29cc2f4c877b30f26eeb7c82a55d2298a6de55) - **resizing**: update warning message *(commit by [@nsenave](https://github.com/nsenave))*
+
+### :construction_worker: Build System
+- [`2476295`](https://github.com/InseeFr/Eno/commit/24762952cfe0c3e3f1dd1ed52f038d9abf171ea7) - bump com.networknt:json-schema-validator from 1.3.0 to 1.3.1 *(PR [#897](https://github.com/InseeFr/Eno/pull/897) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+
+### :memo: Documentation Changes
+
+
 ## [3.17.0] - 2024-02-02
 ### :bug: Bug Fixes
 - [`6282cb0`](https://github.com/InseeFr/Eno/commit/6282cb00724ff90787089f93ba1d4d263465abb4) - pairwise missing variable name *(PR [#892](https://github.com/InseeFr/Eno/pull/892) by [@nsenave](https://github.com/nsenave))*
@@ -95,3 +108,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.16.1]: https://github.com/InseeFr/Eno/compare/3.16.0...3.16.1
 
 [3.17.0]: https://github.com/InseeFr/Eno/compare/3.16.1...3.17.0
+
+[3.17.1]: https://github.com/InseeFr/Eno/compare/3.17.0...3.17.1
