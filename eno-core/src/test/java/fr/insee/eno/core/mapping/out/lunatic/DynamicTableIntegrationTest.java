@@ -23,7 +23,7 @@ class DynamicTableIntegrationTest {
         // When
         Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
                 this.getClass().getClassLoader().getResourceAsStream(
-                        "functional/ddi/dynamic-table/ddi-dynamic-table.xml"),
+                        "integration/ddi/ddi-dynamic-table-2.xml"),
                 EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
 
         // Then
