@@ -4,6 +4,8 @@ import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.utils.LunaticUtils;
 import fr.insee.lunatic.model.flat.*;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,6 +21,11 @@ public class LunaticVariablesValues implements ProcessingStep<Questionnaire> {
 
     private Questionnaire lunaticQuestionnaire;
 
+    /**
+     * Replace "simple" variables that are collected in iterated component (such as loop, dynamic table, pairwise)
+     * by array variables in the given questionnaire.
+     * @param lunaticQuestionnaire Lunatic questionnaire.
+     */
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
         //
@@ -30,6 +37,11 @@ public class LunaticVariablesValues implements ProcessingStep<Questionnaire> {
                 .forEach(this::replaceLoopVariables);
         //
         lunaticQuestionnaire.getComponents().stream()
+                .filter(RosterForLoop.class::isInstance)
+                .map(RosterForLoop.class::cast)
+                .forEach(this::replaceRosterForLoopVariables);
+        //
+        lunaticQuestionnaire.getComponents().stream()
                 .filter(PairwiseLinks.class::isInstance)
                 .map(PairwiseLinks.class::cast)
                 .forEach(this::replacePairwiseVariable);
@@ -39,14 +51,30 @@ public class LunaticVariablesValues implements ProcessingStep<Questionnaire> {
      * Iterates on the loop components to find the variables that are collected within the loop.
      * Then, replaces corresponding variable objects by new variable array objects.
      * Note: with the current implementation, the replacement is not "in-place".
-     * @param loop A Lunatic loop components.
+     * @param loop A Lunatic loop component.
      */
     private void replaceLoopVariables(Loop loop) {
         Set<String> collectedVariables = LunaticUtils.getCollectedVariablesInLoop(loop);
+        replaceArrayVariables(collectedVariables);
+    }
+
+    /**
+     * Iterates on the roster for loop components to find the variables that are collected within the roster.
+     * Then, replaces corresponding variable objects by new variable array objects.
+     * @param rosterForLoop A Lunatic roster for loop component.
+     */
+    private void replaceRosterForLoopVariables(RosterForLoop rosterForLoop) {
+        List<String> collectedVariables = rosterForLoop.getComponents().stream()
+                .map(bodyCell -> bodyCell.getResponse().getName())
+                .toList();
+        replaceArrayVariables(collectedVariables);
+    }
+
+    private void replaceArrayVariables(Collection<String> collectedVariableNames) {
         //
-        lunaticQuestionnaire.getVariables().removeIf(variable -> collectedVariables.contains(variable.getName()));
+        lunaticQuestionnaire.getVariables().removeIf(variable -> collectedVariableNames.contains(variable.getName()));
         //
-        collectedVariables.forEach(variableName -> {
+        collectedVariableNames.forEach(variableName -> {
             VariableTypeArray variableTypeArray = new VariableTypeArray();
             variableTypeArray.setVariableType(VariableTypeEnum.COLLECTED);
             variableTypeArray.setName(variableName);
@@ -55,6 +83,11 @@ public class LunaticVariablesValues implements ProcessingStep<Questionnaire> {
         });
     }
 
+    /**
+     * Iterates on the pairwise links components to find the variables that are collected within the pairwise.
+     * Then, replaces corresponding variable objects by new two dimensions variable array objects.
+     * @param pairwiseLinks A Lunatic pairwise links component.
+     */
     private void replacePairwiseVariable(PairwiseLinks pairwiseLinks) {
         String pairwiseVariableName = LunaticUtils.getPairwiseResponseVariable(pairwiseLinks);
         //

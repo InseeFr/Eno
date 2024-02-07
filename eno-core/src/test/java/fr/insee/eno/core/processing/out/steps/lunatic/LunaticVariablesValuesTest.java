@@ -30,11 +30,43 @@ class LunaticVariablesValuesTest {
         //
         assertFalse(lunaticQuestionnaire.getVariables().isEmpty());
         assertEquals(1, lunaticQuestionnaire.getVariables().size());
-        assertTrue(lunaticQuestionnaire.getVariables().get(0) instanceof VariableTypeArray);
+        assertInstanceOf(VariableTypeArray.class, lunaticQuestionnaire.getVariables().getFirst());
         //
-        VariableTypeArray loopVariable = (VariableTypeArray) lunaticQuestionnaire.getVariables().get(0);
+        VariableTypeArray loopVariable = (VariableTypeArray) lunaticQuestionnaire.getVariables().getFirst();
         assertEquals(VariableTypeEnum.COLLECTED, loopVariable.getVariableType());
         assertEquals("FOO_VAR", loopVariable.getName());
+        assertNotNull(loopVariable.getValues());
+        assertNotNull(loopVariable.getValues().getCollected());
+    }
+
+    @Test
+    void replaceVariablesFromRosterForLoop() {
+        //
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
+        //
+        RosterForLoop rosterForLoop = new RosterForLoop();
+        BodyCell dropdownCell = new BodyCell();
+        dropdownCell.setComponentType(ComponentTypeEnum.DROPDOWN);
+        dropdownCell.setResponse(new ResponseType());
+        dropdownCell.getResponse().setName("COLUMN1_VAR");
+        rosterForLoop.getComponents().add(dropdownCell);
+        lunaticQuestionnaire.getComponents().add(rosterForLoop);
+        //
+        VariableType variableType = new VariableType();
+        variableType.setName("COLUMN1_VAR");
+        lunaticQuestionnaire.getVariables().add(variableType);
+
+        //
+        new LunaticVariablesValues().apply(lunaticQuestionnaire);
+
+        //
+        assertFalse(lunaticQuestionnaire.getVariables().isEmpty());
+        assertEquals(1, lunaticQuestionnaire.getVariables().size());
+        assertInstanceOf(VariableTypeArray.class, lunaticQuestionnaire.getVariables().getFirst());
+        //
+        VariableTypeArray loopVariable = (VariableTypeArray) lunaticQuestionnaire.getVariables().getFirst();
+        assertEquals(VariableTypeEnum.COLLECTED, loopVariable.getVariableType());
+        assertEquals("COLUMN1_VAR", loopVariable.getName());
         assertNotNull(loopVariable.getValues());
         assertNotNull(loopVariable.getValues().getCollected());
     }
@@ -58,10 +90,10 @@ class LunaticVariablesValuesTest {
         //
         assertFalse(lunaticQuestionnaire.getVariables().isEmpty());
         assertEquals(1, lunaticQuestionnaire.getVariables().size());
-        assertTrue(lunaticQuestionnaire.getVariables().get(0) instanceof VariableTypeTwoDimensionsArray);
+        assertInstanceOf(VariableTypeTwoDimensionsArray.class, lunaticQuestionnaire.getVariables().getFirst());
         //
         VariableTypeTwoDimensionsArray pairwiseVariable = (VariableTypeTwoDimensionsArray)
-                lunaticQuestionnaire.getVariables().get(0);
+                lunaticQuestionnaire.getVariables().getFirst();
         assertEquals(VariableTypeEnum.COLLECTED, pairwiseVariable.getVariableType());
         assertEquals("LINKS_VAR", pairwiseVariable.getName());
         assertNotNull(pairwiseVariable.getValues());
