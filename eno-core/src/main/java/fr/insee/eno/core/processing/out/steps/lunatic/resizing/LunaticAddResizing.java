@@ -84,7 +84,7 @@ public class LunaticAddResizing implements ProcessingStep<Questionnaire> {
                 // Note: Lunatic resizing modeling has to be changed so that there wouldn't be any issue here
                 log.warn(String.format(
                         "Variable '%s' is used to define the size of the pairwise links question and other " +
-                                "components (loops or dynamic tables), which is currently forbidden.",
+                                "components (loops or dynamic tables), this may cause problems.",
                         pairwiseResizingEntry.get().getName()));
             }
             result.add(pairwiseResizingEntry.get());
