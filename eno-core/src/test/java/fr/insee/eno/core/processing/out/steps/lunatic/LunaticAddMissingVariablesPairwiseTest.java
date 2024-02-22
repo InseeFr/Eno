@@ -1,10 +1,8 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
-import fr.insee.eno.core.model.lunatic.MissingBlock;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,23 +39,18 @@ class LunaticAddMissingVariablesPairwiseTest {
         assertTrue(pairwiseMissingVariable.isPresent());
         assertInstanceOf(VariableTypeTwoDimensionsArray.class, pairwiseMissingVariable.get());
         //
-        List<MissingBlock> missingEntries = lunaticQuestionnaire.getMissingBlock().getAny().stream()
-                .map(MissingBlock.class::cast).toList();
-        assertEquals(2, missingEntries.size());
+        MissingType missingType = lunaticQuestionnaire.getMissingBlock();
+        assertEquals(2, missingType.countMissingEntries());
         //
-        Optional<MissingBlock> pairwiseMissingBlock = missingEntries.stream()
-                .filter(missingBlock -> "FOO_LINKS_MISSING".equals(missingBlock.getMissingName()))
-                .findAny();
-        assertTrue(pairwiseMissingBlock.isPresent());
-        assertEquals(1, pairwiseMissingBlock.get().getNames().size());
-        assertEquals("FOO_LINKS", pairwiseMissingBlock.get().getNames().get(0));
+        MissingEntry pairwiseMissingEntry = missingType.getMissingEntry("FOO_LINKS_MISSING");
+        assertNotNull(pairwiseMissingEntry);
+        assertEquals(1, pairwiseMissingEntry.getCorrespondingVariables().size());
+        assertEquals("FOO_LINKS", pairwiseMissingEntry.getCorrespondingVariables().getFirst());
         //
-        Optional<MissingBlock> pairwiseReverseMissingBlock = missingEntries.stream()
-                .filter(missingBlock -> "FOO_LINKS".equals(missingBlock.getMissingName()))
-                .findAny();
-        assertTrue(pairwiseReverseMissingBlock.isPresent());
-        assertEquals(1, pairwiseReverseMissingBlock.get().getNames().size());
-        assertEquals("FOO_LINKS_MISSING", pairwiseReverseMissingBlock.get().getNames().get(0));
+        MissingEntry pairwiseReverseMissingEntry = missingType.getMissingEntry("FOO_LINKS");
+        assertNotNull(pairwiseReverseMissingEntry);
+        assertEquals(1, pairwiseReverseMissingEntry.getCorrespondingVariables().size());
+        assertEquals("FOO_LINKS_MISSING", pairwiseReverseMissingEntry.getCorrespondingVariables().getFirst());
     }
 
 }
