@@ -1,7 +1,5 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
-import fr.insee.eno.core.model.lunatic.CleaningConcernedVariable;
-import fr.insee.eno.core.model.lunatic.CleaningEntry;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
@@ -28,16 +26,17 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
         List<ComponentType> components = lunaticQuestionnaire.getComponents();
-        List<CleaningEntry> cleaningVariables = createCleaningVariables(components, lunaticQuestionnaire);
+        List<CleaningVariableEntry> cleaningVariables = createCleaningVariables(components, lunaticQuestionnaire);
 
         if(cleaningVariables.isEmpty()) {
             return;
         }
 
         CleaningType cleaningType = new CleaningType();
-        lunaticQuestionnaire.setCleaning(cleaningType);
 
-        cleaningType.getAny().addAll(groupCleaningVariables(cleaningVariables));
+        cleaningVariables.forEach(cleaningType::addCleaningEntry);
+
+        lunaticQuestionnaire.setCleaning(cleaningType);
     }
 
     /**
@@ -47,8 +46,8 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
      * @param lunaticQuestionnaire Lunatic questionnaire to process.
      * @return All cleaning entries for the questionnaire's components.
      */
-    private List<CleaningEntry> createCleaningVariables(List<ComponentType> components, Questionnaire lunaticQuestionnaire) {
-        List<CleaningEntry> cleaningEntries = new ArrayList<>();
+    private List<CleaningVariableEntry> createCleaningVariables(List<ComponentType> components, Questionnaire lunaticQuestionnaire) {
+        List<CleaningVariableEntry> cleaningEntries = new ArrayList<>();
 
         components.stream()
                 .filter(component -> component.getConditionFilter() != null)
@@ -69,7 +68,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                 .map(ComponentNestingType.class::cast)
                 .forEach(nestingComponent -> cleaningEntries.addAll(createCleaningVariables(nestingComponent.getComponents(), lunaticQuestionnaire)));
 
-        return cleaningEntries;
+        return groupCleaningVariables(cleaningEntries);
     }
 
     /**
@@ -77,7 +76,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
      * @param componentType component to process (must be a simple response type)
      * @return cleaning variables for this component
      */
-    private List<CleaningEntry> createCleaningVariablesFromSimpleResponseComponent(
+    private List<CleaningVariableEntry> createCleaningVariablesFromSimpleResponseComponent(
             ComponentType componentType, Questionnaire lunaticQuestionnaire) {
         if(!(componentType instanceof ComponentSimpleResponseType simpleResponseType)) {
             throw new IllegalArgumentException(String.format(
@@ -92,13 +91,17 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
         }
 
         // Cleaning value (here one value per key, objects with same key are grouped together afterward)
-        CleaningConcernedVariable concernedVariable = new CleaningConcernedVariable(
+        CleanedVariableEntry cleanedVariableEntry = new CleanedVariableEntry(
                 simpleResponseType.getResponse().getName(),
                 componentType.getConditionFilter().getValue());
 
         // Cleaning entries
         return bindingDependencies.stream()
-                .map(bindingDependency -> new CleaningEntry(bindingDependency, List.of(concernedVariable)))
+                .map(bindingDependency -> {
+                    CleaningVariableEntry cleaningVariableEntry = new CleaningVariableEntry(bindingDependency);
+                    cleaningVariableEntry.addCleanedVariable(cleanedVariableEntry);
+                    return cleaningVariableEntry;
+                })
                 .toList();
     }
 
@@ -121,7 +124,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
      * @param componentType component to process (must be a multiple response type)
      * @return cleaning variables for this component
      */
-    private List<CleaningEntry> createCleaningVariablesFromMultipleResponseComponent(ComponentType componentType) {
+    private List<CleaningVariableEntry> createCleaningVariablesFromMultipleResponseComponent(ComponentType componentType) {
         if(!(componentType instanceof ComponentMultipleResponseType)) {
             throw new IllegalArgumentException(String.format("Cannot create cleaning variable from this multiple response component %s", componentType.getId()));
         }
@@ -131,36 +134,40 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
         }
         String conditionFilter = componentType.getConditionFilter().getValue();
 
-        List<CleaningConcernedVariable> concernedVariables;
+        List<CleanedVariableEntry> cleanedVariableEntries;
 
         switch(componentType.getComponentType()) {
-            case TABLE -> concernedVariables = ((Table) componentType).getBodyLines().stream()
+            case TABLE -> cleanedVariableEntries = ((Table) componentType).getBodyLines().stream()
                     .map(BodyLine::getBodyCells)
                     .flatMap(Collection::stream)
                     .map(BodyCell::getResponse)
                     .filter(Objects::nonNull)
                     .map(ResponseType::getName)
-                    .map(name -> new CleaningConcernedVariable(name, conditionFilter))
+                    .map(name -> new CleanedVariableEntry(name, conditionFilter))
                     .toList();
 
-            case ROSTER_FOR_LOOP -> concernedVariables = ((RosterForLoop) componentType).getComponents().stream()
+            case ROSTER_FOR_LOOP -> cleanedVariableEntries = ((RosterForLoop) componentType).getComponents().stream()
                     .map(BodyCell::getResponse)
                     .filter(Objects::nonNull)
                     .map(ResponseType::getName)
-                    .map(name -> new CleaningConcernedVariable(name, conditionFilter))
+                    .map(name -> new CleanedVariableEntry(name, conditionFilter))
                     .toList();
 
-            case CHECKBOX_GROUP -> concernedVariables = ((CheckboxGroup) componentType).getResponses().stream()
+            case CHECKBOX_GROUP -> cleanedVariableEntries = ((CheckboxGroup) componentType).getResponses().stream()
                     .map(ResponsesCheckboxGroup::getResponse)
                     .map(ResponseType::getName)
-                    .map(name -> new CleaningConcernedVariable(name, conditionFilter))
+                    .map(name -> new CleanedVariableEntry(name, conditionFilter))
                     .toList();
 
             default -> throw new IllegalArgumentException(String.format("Cannot create cleaning variable from this multiple response component %s, componentType not defined", componentType.getId()));
         }
 
         return bindingDependencies.stream()
-                .map(bindingDependency -> new CleaningEntry(bindingDependency, concernedVariables))
+                .map(bindingDependency -> {
+                    CleaningVariableEntry cleaningVariableEntry = new CleaningVariableEntry(bindingDependency);
+                    cleanedVariableEntries.forEach(cleaningVariableEntry::addCleanedVariable);
+                    return cleaningVariableEntry;
+                })
                 .toList();
     }
 
@@ -169,19 +176,21 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
      * @param cleaningEntries cleaning variables to regroup
      * @return grouped variables
      */
-    private List<CleaningEntry> groupCleaningVariables(List<CleaningEntry> cleaningEntries) {
-        Map<String, CleaningEntry> groupCleaningVariables = new LinkedHashMap<>();
-        for (CleaningEntry cleaningEntry : cleaningEntries) {
-            if(!groupCleaningVariables.containsKey(cleaningEntry.getVariableName())) {
-                groupCleaningVariables.put(cleaningEntry.getVariableName(), cleaningEntry);
+    private List<CleaningVariableEntry> groupCleaningVariables(List<CleaningVariableEntry> cleaningEntries) {
+
+        Map<String, CleaningVariableEntry> groupCleaningVariables = new LinkedHashMap<>();
+
+        for (CleaningVariableEntry cleaningEntry : cleaningEntries) {
+            if(!groupCleaningVariables.containsKey(cleaningEntry.getCleaningVariableName())) {
+                groupCleaningVariables.put(cleaningEntry.getCleaningVariableName(), cleaningEntry);
                 continue;
             }
 
-            CleaningEntry groupVariable = groupCleaningVariables.get(cleaningEntry.getVariableName());
-            List<CleaningConcernedVariable> concernedVariables = new ArrayList<>(groupVariable.getConcernedVariables());
-            concernedVariables.addAll(cleaningEntry.getConcernedVariables());
-            groupVariable.setConcernedVariables(concernedVariables);
+            CleaningVariableEntry groupVariable = groupCleaningVariables.get(cleaningEntry.getCleaningVariableName());
+            cleaningEntry.getCleanedVariableNames().forEach(cleanedVariableName ->
+                    groupVariable.addCleanedVariable(cleaningEntry.getCleanedVariable(cleanedVariableName)));
         }
+
         return groupCleaningVariables.values().stream()
                 .toList();
     }
