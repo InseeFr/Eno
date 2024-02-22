@@ -3,7 +3,6 @@ package fr.insee.eno.core.processing.out.steps.lunatic.resizing;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
-import fr.insee.eno.core.model.lunatic.LunaticResizingEntry;
 import fr.insee.eno.core.model.navigation.LinkedLoop;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.BooleanQuestion;
@@ -16,7 +15,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class LunaticLoopResizingLogicTest {
 
     private Questionnaire lunaticQuestionnaire;
+    private ResizingType lunaticResizing;
     private EnoQuestionnaire enoQuestionnaire;
     private EnoIndex enoIndex;
     private Loop lunaticLoop;
@@ -35,6 +34,7 @@ class LunaticLoopResizingLogicTest {
     void resizingUnitTestsCanvas() {
         //
         lunaticQuestionnaire = new Questionnaire();
+        lunaticResizing = new ResizingType();
         //
         lunaticLoop = new Loop();
         lunaticLoop.setId("loop-id");
@@ -95,13 +95,12 @@ class LunaticLoopResizingLogicTest {
         // When
         LunaticLoopResizingLogic loopResizingLogic = new LunaticLoopResizingLogic(
                 lunaticQuestionnaire, enoQuestionnaire, enoIndex);
-        List<LunaticResizingEntry> resizingEntries = loopResizingLogic.buildResizingEntries(lunaticLoop);
+        loopResizingLogic.buildResizingEntries(lunaticLoop, lunaticResizing);
 
         // Then
-        assertEquals(1, resizingEntries.size());
-        assertEquals("LOOP_SIZE_VAR", resizingEntries.get(0).getName());
-        assertEquals("nvl(LOOP_SIZE_VAR, 1)", resizingEntries.get(0).getSize());
-        assertEquals(Set.of("RESPONSE_VAR"), resizingEntries.get(0).getVariables());
+        assertEquals(1, lunaticResizing.countResizingEntries());
+        assertEquals("nvl(LOOP_SIZE_VAR, 1)", lunaticResizing.getResizingEntry("LOOP_SIZE_VAR").getSize());
+        assertEquals(List.of("RESPONSE_VAR"), lunaticResizing.getResizingEntry("LOOP_SIZE_VAR").getVariables());
     }
 
     @Test
@@ -153,11 +152,12 @@ class LunaticLoopResizingLogicTest {
         // When
         LunaticLoopResizingLogic loopResizingLogic = new LunaticLoopResizingLogic(
                 lunaticQuestionnaire, enoQuestionnaire, enoIndex);
-        List<LunaticResizingEntry> resizingEntries = loopResizingLogic.buildResizingEntries(lunaticLoop);
+        loopResizingLogic.buildResizingEntries(lunaticLoop, lunaticResizing);
 
         // Then
-        assertThat(resizingEntries.get(0).getVariables()).containsExactlyInAnyOrderElementsOf(
-                Set.of("BOOLEAN_VAR", "INPUT_VAR", "TEXT_VAR", "NUMBER_VAR", "DATE_VAR",
+        assertThat(lunaticResizing.getResizingEntry("LOOP_SIZE_VAR").getVariables())
+                .containsExactlyInAnyOrderElementsOf(Set.of(
+                        "BOOLEAN_VAR", "INPUT_VAR", "TEXT_VAR", "NUMBER_VAR", "DATE_VAR",
                         "DROPDOWN_VAR", "RADIO_VAR", "CHECKBOX_VAR"));
     }
 
@@ -178,11 +178,11 @@ class LunaticLoopResizingLogicTest {
         // When
         LunaticLoopResizingLogic loopResizingLogic = new LunaticLoopResizingLogic(
                 lunaticQuestionnaire, enoQuestionnaire, enoIndex);
-        List<LunaticResizingEntry> resizingEntries = loopResizingLogic.buildResizingEntries(lunaticLoop);
+        loopResizingLogic.buildResizingEntries(lunaticLoop, lunaticResizing);
 
         // Then
-        assertThat(resizingEntries.get(0).getVariables()).containsExactlyInAnyOrderElementsOf(
-                List.of("RESPONSE_VAR1", "RESPONSE_VAR2"));
+        assertThat(lunaticResizing.getResizingEntry("LOOP_SIZE_VAR").getVariables())
+                .containsExactlyInAnyOrderElementsOf(List.of("RESPONSE_VAR1", "RESPONSE_VAR2"));
     }
 
     @Test
@@ -209,11 +209,11 @@ class LunaticLoopResizingLogicTest {
         // When
         LunaticLoopResizingLogic loopResizingLogic = new LunaticLoopResizingLogic(
                 lunaticQuestionnaire, enoQuestionnaire, enoIndex);
-        List<LunaticResizingEntry> resizingEntries = loopResizingLogic.buildResizingEntries(lunaticLoop);
+        loopResizingLogic.buildResizingEntries(lunaticLoop, lunaticResizing);
 
         // Then
-        assertThat(resizingEntries.get(0).getVariables()).containsExactlyInAnyOrderElementsOf(
-                Set.of("CELL11", "CELL12", "CELL21", "CELL22"));
+        assertThat(lunaticResizing.getResizingEntry("LOOP_SIZE_VAR").getVariables())
+                .containsExactlyInAnyOrderElementsOf(Set.of("CELL11", "CELL12", "CELL21", "CELL22"));
     }
 
     @Test
@@ -233,17 +233,15 @@ class LunaticLoopResizingLogicTest {
         // When
         LunaticLoopResizingLogic loopResizingLogic = new LunaticLoopResizingLogic(
                 lunaticQuestionnaire, enoQuestionnaire, enoIndex);
-        List<LunaticResizingEntry> resizingEntries = loopResizingLogic.buildResizingEntries(lunaticLoop);
+        loopResizingLogic.buildResizingEntries(lunaticLoop, lunaticResizing);
 
         // Then
-        assertEquals(2, resizingEntries.size());
+        assertEquals(2, lunaticResizing.countResizingEntries());
         //
-        assertThat(resizingEntries.stream().map(LunaticResizingEntry::getName).toList())
-                .containsExactlyInAnyOrderElementsOf(List.of("LOOP_SIZE_VAR", "LOOP_SIZE_VAR2"));
-        //
-        resizingEntries.forEach(resizingEntry -> {
+        List.of("LOOP_SIZE_VAR", "LOOP_SIZE_VAR2").forEach(resizingVariableName -> {
+            ResizingEntry resizingEntry = lunaticResizing.getResizingEntry(resizingVariableName);
             assertEquals("LOOP_SIZE_VAR + LOOP_SIZE_VAR2", resizingEntry.getSize());
-            assertEquals(Set.of("RESPONSE_VAR"), resizingEntry.getVariables());
+            assertEquals(List.of("RESPONSE_VAR"), resizingEntry.getVariables());
         });
     }
 
@@ -255,9 +253,9 @@ class LunaticLoopResizingLogicTest {
         // When
         LunaticLoopResizingLogic loopResizingLogic = new LunaticLoopResizingLogic(
                 lunaticQuestionnaire, enoQuestionnaire, enoIndex);
-        List<LunaticResizingEntry> resizingEntries = loopResizingLogic.buildResizingEntries(lunaticLoop);
+        loopResizingLogic.buildResizingEntries(lunaticLoop, lunaticResizing);
         // Then
-        assertTrue(resizingEntries.isEmpty());
+        assertEquals(0, lunaticResizing.countResizingEntries());
     }
 
     @Test
@@ -276,9 +274,9 @@ class LunaticLoopResizingLogicTest {
         // When
         LunaticLoopResizingLogic loopResizingLogic = new LunaticLoopResizingLogic(
                 lunaticQuestionnaire, enoQuestionnaire, enoIndex);
-        List<LunaticResizingEntry> resizingEntries = loopResizingLogic.buildResizingEntries(lunaticLoop);
+        loopResizingLogic.buildResizingEntries(lunaticLoop, lunaticResizing);
         // Then
-        assertTrue(resizingEntries.isEmpty());
+        assertEquals(0, lunaticResizing.countResizingEntries());
     }
 
     @Test
@@ -310,13 +308,12 @@ class LunaticLoopResizingLogicTest {
         // When
         LunaticLoopResizingLogic loopResizingLogic = new LunaticLoopResizingLogic(
                 lunaticQuestionnaire, enoQuestionnaire, enoIndex);
-        List<LunaticResizingEntry> resizingEntries = loopResizingLogic.buildResizingEntries(lunaticLoop);
+        loopResizingLogic.buildResizingEntries(lunaticLoop, lunaticResizing);
 
         // Then
-        assertEquals(1, resizingEntries.size());
-        assertEquals("COLLECTED_VAR", resizingEntries.get(0).getName());
-        assertEquals("CALCULATED_VAR", resizingEntries.get(0).getSize());
-        assertEquals(Set.of("RESPONSE_VAR"), resizingEntries.get(0).getVariables());
+        assertEquals(1, lunaticResizing.countResizingEntries());
+        assertEquals("CALCULATED_VAR", lunaticResizing.getResizingEntry("COLLECTED_VAR").getSize());
+        assertEquals(List.of("RESPONSE_VAR"), lunaticResizing.getResizingEntry("COLLECTED_VAR").getVariables());
     }
 
     @Test
@@ -336,13 +333,12 @@ class LunaticLoopResizingLogicTest {
         // When
         LunaticLoopResizingLogic loopResizingLogic = new LunaticLoopResizingLogic(
                 lunaticQuestionnaire, enoQuestionnaire, enoIndex);
-        List<LunaticResizingEntry> resizingEntries = loopResizingLogic.buildResizingEntries(lunaticLoop);
+        loopResizingLogic.buildResizingEntries(lunaticLoop, lunaticResizing);
 
         // Then
-        assertEquals(1, resizingEntries.size());
-        assertEquals("LOOP_SIZE_VAR", resizingEntries.get(0).getName());
-        assertEquals("LOOP_SIZE_VAR + EXTERNAL_VAR", resizingEntries.get(0).getSize());
-        assertEquals(Set.of("RESPONSE_VAR"), resizingEntries.get(0).getVariables());
+        assertEquals(1, lunaticResizing.countResizingEntries());
+        assertEquals("LOOP_SIZE_VAR + EXTERNAL_VAR", lunaticResizing.getResizingEntry("LOOP_SIZE_VAR").getSize());
+        assertEquals(List.of("RESPONSE_VAR"), lunaticResizing.getResizingEntry("LOOP_SIZE_VAR").getVariables());
     }
 
     @Test
@@ -371,14 +367,10 @@ class LunaticLoopResizingLogicTest {
         // When
         LunaticLoopResizingLogic loopResizingLogic = new LunaticLoopResizingLogic(
                 lunaticQuestionnaire, enoQuestionnaire, enoIndex);
-        List<LunaticResizingEntry> resizingEntries = loopResizingLogic.buildResizingEntries(lunaticLinkedLoop);
+        loopResizingLogic.buildResizingEntries(lunaticLinkedLoop, lunaticResizing);
 
         // Then
-        Optional<LunaticResizingEntry> searchedResizingEntry = resizingEntries.stream()
-                .filter(resizingEntry -> "RESPONSE_VAR".equals(resizingEntry.getName()))
-                .findAny();
-        assertTrue(searchedResizingEntry.isPresent());
-        LunaticResizingEntry linkedLoopResizingEntry = searchedResizingEntry.get();
+        ResizingEntry linkedLoopResizingEntry = lunaticResizing.getResizingEntry("RESPONSE_VAR");
         assertEquals("count(RESPONSE_VAR)", linkedLoopResizingEntry.getSize());
         assertEquals(1, linkedLoopResizingEntry.getVariables().size());
         assertTrue(linkedLoopResizingEntry.getVariables().contains("LINKED_LOOP_RESPONSE"));
@@ -418,14 +410,10 @@ class LunaticLoopResizingLogicTest {
         // When
         LunaticLoopResizingLogic loopResizingLogic = new LunaticLoopResizingLogic(
                 lunaticQuestionnaire, enoQuestionnaire, enoIndex);
-        List<LunaticResizingEntry> resizingEntries = loopResizingLogic.buildResizingEntries(lunaticLinkedLoop);
+        loopResizingLogic.buildResizingEntries(lunaticLinkedLoop, lunaticResizing);
 
         // Then
-        Optional<LunaticResizingEntry> searchedResizingEntry = resizingEntries.stream()
-                .filter(resizingEntry -> "TABLE_RESPONSE1".equals(resizingEntry.getName()))
-                .findAny();
-        assertTrue(searchedResizingEntry.isPresent());
-        LunaticResizingEntry linkedLoopResizingEntry = searchedResizingEntry.get();
+        ResizingEntry linkedLoopResizingEntry = lunaticResizing.getResizingEntry("TABLE_RESPONSE1");
         assertEquals("count(TABLE_RESPONSE1)", linkedLoopResizingEntry.getSize());
         assertEquals(1, linkedLoopResizingEntry.getVariables().size());
         assertTrue(linkedLoopResizingEntry.getVariables().contains("LINKED_LOOP_RESPONSE"));
