@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.17.2] - 2024-02-23
+### :recycle: Refactors
+- [`282a34d`](https://github.com/InseeFr/Eno/commit/282a34db5c652b5b1b93d6dd0278c8451cf560b1) - remove lunatic patches *(PR [#913](https://github.com/InseeFr/Eno/pull/913) by [@nsenave](https://github.com/nsenave))*
+
+### :memo: Documentation Changes
+
+
 ## [3.17.1] - 2024-02-07
 ### :bug: Bug Fixes
 - [`0fd6dc1`](https://github.com/InseeFr/Eno/commit/0fd6dc1651a6655f3b7ee8cd5e2e8f8d65fb4199) - lunatic dynamic table variables *(PR [#903](https://github.com/InseeFr/Eno/pull/903) by [@nsenave](https://github.com/nsenave))*
@@ -110,3 +117,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.17.0]: https://github.com/InseeFr/Eno/compare/3.16.1...3.17.0
 
 [3.17.1]: https://github.com/InseeFr/Eno/compare/3.17.0...3.17.1
+[3.17.2]: https://github.com/InseeFr/Eno/compare/3.17.1...3.17.2
