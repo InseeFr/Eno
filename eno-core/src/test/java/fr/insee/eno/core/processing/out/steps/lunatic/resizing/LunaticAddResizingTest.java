@@ -4,26 +4,25 @@ import fr.insee.eno.core.DDIToEno;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.lunatic.LunaticResizingEntry;
-import fr.insee.eno.core.model.lunatic.LunaticResizingPairwiseEntry;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticLoopResolution;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticSortComponents;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
 import fr.insee.lunatic.model.flat.Questionnaire;
+import fr.insee.lunatic.model.flat.ResizingPairwiseEntry;
+import fr.insee.lunatic.model.flat.ResizingType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 class LunaticAddResizingTest {
 
-    private static List<Object> resizingList;
+    private static ResizingType resizingType;
 
     @BeforeAll
     static void init() throws DDIParsingException {
@@ -44,54 +43,34 @@ class LunaticAddResizingTest {
         new LunaticAddResizing(enoQuestionnaire).apply(lunaticQuestionnaire);
 
         // Then
-        resizingList = lunaticQuestionnaire.getResizing().getAny();
+        resizingType = lunaticQuestionnaire.getResizing();
         // -> tests
     }
 
     @Test
-    void resizingListIsNotEmpty() {
-        assertFalse(resizingList.isEmpty());
+    void resizingEntriesCount() {
+        assertEquals(3, resizingType.countResizingEntries());
     }
 
     @Test
     void loopResizing() {
-        List<LunaticResizingEntry> resizingEntries = resizingList.stream()
-                .filter(LunaticResizingEntry.class::isInstance)
-                .map(LunaticResizingEntry.class::cast)
-                .toList();
         //
-        assertEquals(2, resizingEntries.size());
+        assertEquals("nvl(NUMBER, 1)", resizingType.getResizingEntry("NUMBER").getSize());
+        assertThat(resizingType.getResizingEntry("NUMBER").getVariables())
+                .containsExactlyInAnyOrderElementsOf(List.of("Q2", "PAIRWISE_SOURCE"));
         //
-        Optional<LunaticResizingEntry> loopResizingEntry = resizingEntries.stream()
-                .filter(resizingEntry -> "NUMBER".equals(resizingEntry.getName()))
-                .findAny();
-        assertTrue(loopResizingEntry.isPresent());
-        assertEquals("nvl(NUMBER, 1)", loopResizingEntry.get().getSize());
-        assertThat(loopResizingEntry.get().getVariables()).containsExactlyInAnyOrderElementsOf(
-                List.of("Q2", "PAIRWISE_SOURCE"));
-        //
-        Optional<LunaticResizingEntry> linkedLoopResizingEntry = resizingEntries.stream()
-                .filter(resizingEntry -> "Q2".equals(resizingEntry.getName()))
-                .findAny();
-        assertTrue(linkedLoopResizingEntry.isPresent());
-        assertEquals("count(Q2)", linkedLoopResizingEntry.get().getSize());
-        assertEquals(Set.of("Q3"), linkedLoopResizingEntry.get().getVariables());
+        assertEquals("count(Q2)", resizingType.getResizingEntry("Q2").getSize());
+        assertEquals(List.of("Q3"), resizingType.getResizingEntry("Q2").getVariables());
     }
 
     @Test
     void pairwiseResizing() {
-        List<LunaticResizingPairwiseEntry> resizingPairwiseEntries = resizingList.stream()
-                .filter(LunaticResizingPairwiseEntry.class::isInstance)
-                .map(LunaticResizingPairwiseEntry.class::cast)
-                .toList();
         //
-        assertEquals(1, resizingPairwiseEntries.size());
-        //
-        LunaticResizingPairwiseEntry pairwiseResizingEntry = resizingPairwiseEntries.get(0);
-        assertEquals("PAIRWISE_SOURCE", pairwiseResizingEntry.getName());
+        ResizingPairwiseEntry resizingPairwiseEntry = assertInstanceOf(ResizingPairwiseEntry.class,
+                resizingType.getResizingEntry("PAIRWISE_SOURCE"));
         assertEquals(List.of("count(PAIRWISE_SOURCE)", "count(PAIRWISE_SOURCE)"),
-                pairwiseResizingEntry.getSizeForLinksVariables());
-        assertEquals(Set.of("LINKS"), pairwiseResizingEntry.getLinksVariables());
+                resizingPairwiseEntry.getSizeForLinksVariables());
+        assertEquals(List.of("LINKS"), resizingPairwiseEntry.getLinksVariables());
     }
 
 }

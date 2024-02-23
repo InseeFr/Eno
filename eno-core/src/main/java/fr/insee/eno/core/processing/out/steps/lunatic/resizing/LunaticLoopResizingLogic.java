@@ -1,22 +1,19 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.resizing;
 
+import fr.insee.eno.core.exceptions.business.LunaticLogicException;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.BindingReference;
-import fr.insee.eno.core.model.lunatic.LunaticResizingEntry;
 import fr.insee.eno.core.model.navigation.LinkedLoop;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticLoopResolution;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.utils.LunaticUtils;
-import fr.insee.lunatic.model.flat.IVariableType;
-import fr.insee.lunatic.model.flat.Loop;
-import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.VariableTypeEnum;
+import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -35,11 +32,11 @@ public class LunaticLoopResizingLogic {
     }
 
     /**
-     * Build resizing entries for a loop.
+     * Insert resizing entries for the given loop.
      * @param lunaticLoop Lunatic loop object.
-     * @return list of resizing entries of the loop.
+     * @param lunaticResizing Lunatic resizing block object.
      */
-    public List<LunaticResizingEntry> buildResizingEntries(Loop lunaticLoop) {
+    public void buildResizingEntries(Loop lunaticLoop, ResizingType lunaticResizing) {
 
         // Corresponding Eno loop object
         fr.insee.eno.core.model.navigation.Loop enoLoop = (fr.insee.eno.core.model.navigation.Loop)
@@ -48,8 +45,8 @@ public class LunaticLoopResizingLogic {
             throw new MappingException(String.format(
                     "Eno loop object corresponding to Lunatic loop '%s' cannot be found.", lunaticLoop.getId()));
 
-        // Variable names that are the keys of the resizing
-        List<String> resizingVariableNames = new ArrayList<>();
+        // Variable names that are the keys of the resizing (using a set to make sure there is no duplicates)
+        Set<String> resizingVariableNames = new LinkedHashSet<>();
         // Expression that resize the concerned variables
         String sizeExpression = null;
 
@@ -57,25 +54,21 @@ public class LunaticLoopResizingLogic {
             resizingVariableNames.addAll(findResizingVariablesForLoop(enoStandaloneLoop));
             sizeExpression = lunaticLoop.getLines().getMax().getValue();
         }
-        if (enoLoop instanceof LinkedLoop enoLinkedLoop){
+        if (enoLoop instanceof LinkedLoop enoLinkedLoop) {
             resizingVariableNames.add(findResizingVariableForLinkedLoop(enoLinkedLoop));
             sizeExpression = lunaticLoop.getIterations().getValue();
         }
 
         if (resizingVariableNames.isEmpty())
-            return new ArrayList<>();
+            return;
 
         // Concerned variables to be resized
         // Note: external variables are not concerned since their values are not designed to be changed dynamically
-        Set<String> resizedVariableNames = LunaticUtils.getCollectedVariablesInLoop(lunaticLoop);
+        List<String> resizedVariableNames = LunaticUtils.getCollectedVariablesInLoop(lunaticLoop).stream().toList();
 
-        List<LunaticResizingEntry> resizingLoopEntries = new ArrayList<>();
         String finalSizeExpression = sizeExpression; // (due to usage in lambda)
-        resizingVariableNames.forEach(variableName ->
-                resizingLoopEntries.add(
-                        new LunaticResizingEntry(variableName, finalSizeExpression, resizedVariableNames)));
-
-        return resizingLoopEntries;
+        resizingVariableNames.forEach(variableName -> insertIterationEntry(
+                lunaticResizing, variableName, finalSizeExpression, resizedVariableNames));
     }
 
     private List<String> findResizingVariablesForLoop(StandaloneLoop enoLoop) {
@@ -112,12 +105,37 @@ public class LunaticLoopResizingLogic {
                 .findAny();
         if (referenceTable.isPresent())
             // Return the first column variable
-            return referenceTable.get().getVariableNames().get(0);
+            return referenceTable.get().getVariableNames().getFirst();
 
         // If neither main loop nor dynamic table reference is found: exception
         throw new MappingException(String.format(
                 "Unable to find the reference loop or dynamic table '%s' of linked loop '%s'",
                 enoLinkedLoop.getReference(), enoLinkedLoop.getId()));
+    }
+
+    private static void insertIterationEntry(ResizingType lunaticResizing,
+                                             String resizingVariableName, String sizeExpression, List<String> resizedVariableNames) {
+        // If no entry for the resizing variable name given, create it
+        if (lunaticResizing.getResizingEntry(resizingVariableName) == null) {
+            ResizingIterationEntry resizingIterationEntry = new ResizingIterationEntry();
+            resizingIterationEntry.setSize(sizeExpression);
+            resizingIterationEntry.getVariables().addAll(resizedVariableNames);
+            lunaticResizing.putResizingEntry(resizingVariableName, resizingIterationEntry);
+            return;
+        }
+        // Otherwise update existing one, only if the size expression is the same
+        ResizingEntry resizingEntry = lunaticResizing.getResizingEntry(resizingVariableName);
+        if (resizingEntry.getSize() == null) // Entry can be a pairwise entry, in this case the 'iteration' size is not set yet
+            resizingEntry.setSize(sizeExpression);
+        if (! sizeExpression.equals(resizingEntry.getSize()))
+            throw new LunaticLogicException(String.format(
+                    "Variable '%s' is used to define the size of different iterations in the questionnaire. " +
+                            "Check loop 'max' iteration expressions, dynamic table max size expressions.",
+                    resizingVariableName));
+        resizedVariableNames.forEach(resizedVariableName -> {
+            if (! resizingEntry.getVariables().contains(resizedVariableName))
+                resizingEntry.getVariables().add(resizedVariableName);
+        });
     }
 
 }

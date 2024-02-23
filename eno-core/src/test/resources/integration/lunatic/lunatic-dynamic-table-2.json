@@ -137,9 +137,6 @@
                             "id": "kfxmjupm-CI-0"
                         }
                     ],
-                    "bindingDependencies": [
-                        "TABLEAUBASIQUE1"
-                    ],
                     "response": {
                         "name": "TABLEAUBASIQUE1"
                     },
@@ -184,9 +181,6 @@
                 },
                 {
                     "componentType": "Radio",
-                    "bindingDependencies": [
-                        "TABLEAUBASIQUE2"
-                    ],
                     "response": {
                         "name": "TABLEAUBASIQUE2"
                     },
@@ -208,10 +202,6 @@
                     ],
                     "id": "lrf3d3rk-QOP-lrf3paxv"
                 }
-            ],
-            "bindingDependencies": [
-                "TABLEAUBASIQUE1",
-                "TABLEAUBASIQUE2"
             ],
             "positioning": "HORIZONTAL",
             "hierarchy": {
@@ -259,60 +249,6 @@
                 }
             },
             "mandatory": false
-        },
-        {
-            "componentType": "Sequence",
-            "hierarchy": {
-                "sequence": {
-                    "id": "COMMENT-SEQ",
-                    "page": "3",
-                    "label": {
-                        "type": "VTL|MD",
-                        "value": "\"Commentaire\""
-                    }
-                }
-            },
-            "conditionFilter": {
-                "type": "VTL",
-                "value": "true"
-            },
-            "id": "COMMENT-SEQ",
-            "page": "3",
-            "label": {
-                "type": "VTL|MD",
-                "value": "\"Commentaire\""
-            }
-        },
-        {
-            "componentType": "Textarea",
-            "bindingDependencies": [
-                "COMMENT_QE"
-            ],
-            "response": {
-                "name": "COMMENT_QE"
-            },
-            "hierarchy": {
-                "sequence": {
-                    "id": "COMMENT-SEQ",
-                    "page": "3",
-                    "label": {
-                        "type": "VTL|MD",
-                        "value": "\"Commentaire\""
-                    }
-                }
-            },
-            "conditionFilter": {
-                "type": "VTL",
-                "value": "true"
-            },
-            "id": "COMMENT-QUESTION",
-            "page": "4",
-            "label": {
-                "type": "VTL|MD",
-                "value": "\"Avez-vous des remarques concernant l'enquête ou des commentaires ?\""
-            },
-            "mandatory": false,
-            "maxLength": 2000
         }
     ],
     "pagination": "question",
@@ -327,5 +263,5 @@
     "generatingDate": "15-01-2024 15:38:29",
     "missing": false,
     "id": "lrf3chy8",
-    "maxPage": "4"
+    "maxPage": "2"
 }

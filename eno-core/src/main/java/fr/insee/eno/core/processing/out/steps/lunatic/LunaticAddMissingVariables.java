@@ -1,7 +1,5 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
-import fr.insee.eno.core.exceptions.business.LunaticLoopException;
-import fr.insee.eno.core.model.lunatic.MissingBlock;
 import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoCatalog;
@@ -58,9 +56,9 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
 
         components.forEach(component -> processComponentsMissingResponse(component, lunaticQuestionnaire));
 
-        List<MissingBlock> missingBlocks = createMissingBlocks(components);
+        List<MissingEntry> missingBlocks = createMissingBlocks(components);
         // New list so that we put missing blocks next to the corresponding reversed missing block
-        List<MissingBlock> allMissingBlocks = new ArrayList<>();
+        List<MissingEntry> allMissingBlocks = new ArrayList<>();
         missingBlocks.forEach(missingBlock -> {
             allMissingBlocks.add(missingBlock);
             allMissingBlocks.addAll(createReversedMissingBlocks(missingBlock));
@@ -68,7 +66,7 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
 
         if (!allMissingBlocks.isEmpty()) {
             MissingType missingType = new MissingType();
-            missingType.getAny().addAll(allMissingBlocks);
+            allMissingBlocks.forEach(missingType::addMissingEntry);
             lunaticQuestionnaire.setMissingBlock(missingType);
         }
     }
@@ -139,15 +137,17 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
      * @param components List of components used to generate missing block entries.
      * @return list of missing blocks
      */
-    private List<MissingBlock> createMissingBlocks(List<ComponentType> components) {
-        List<MissingBlock> missingBlocks = new ArrayList<>();
+    private List<MissingEntry> createMissingBlocks(List<ComponentType> components) {
+        List<MissingEntry> missingBlocks = new ArrayList<>();
         // generate blocks on components with missing response attribute (included main loop)
         missingBlocks.addAll(components.stream()
                 .filter(componentType -> componentType.getMissingResponse() != null)
                 .map(component -> {
                     String missingResponseName = component.getMissingResponse().getName();
                     List<String> names = LunaticUtils.getResponseNames(component);
-                    return new MissingBlock(missingResponseName, names);
+                    MissingEntry missingEntry = new MissingEntry(missingResponseName);
+                    names.forEach(name -> missingEntry.getCorrespondingVariables().add(name));
+                    return missingEntry;
                 })
                 .toList());
 
@@ -176,9 +176,13 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
      * @param missingBlock Missing block from which we need to create reversed missing blocks.
      * @return List of reversed missing blocks.
      */
-    private List<MissingBlock> createReversedMissingBlocks(MissingBlock missingBlock) {
-        return missingBlock.getNames().stream()
-                .map(name -> new MissingBlock(name, List.of(missingBlock.getMissingName())))
+    private List<MissingEntry> createReversedMissingBlocks(MissingEntry missingBlock) {
+        return missingBlock.getCorrespondingVariables().stream()
+                .map(name -> {
+                    MissingEntry missingEntry = new MissingEntry(name);
+                    missingEntry.getCorrespondingVariables().add(missingBlock.getVariableName());
+                    return missingEntry;
+                })
                 .toList();
     }
 

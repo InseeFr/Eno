@@ -46,8 +46,6 @@ dependencies {
     testImplementation 'org.assertj:assertj-core'
     // JSONAssert
     testImplementation 'org.skyscreamer:jsonassert'
-    // Mockito
-    testImplementation 'org.mockito:mockito-core'
 
     // Lombok
     compileOnly 'org.projectlombok:lombok'
