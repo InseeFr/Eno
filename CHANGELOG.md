@@ -8,9 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### :recycle: Refactors
 - [`282a34d`](https://github.com/InseeFr/Eno/commit/282a34db5c652b5b1b93d6dd0278c8451cf560b1) - remove lunatic patches *(PR [#913](https://github.com/InseeFr/Eno/pull/913) by [@nsenave](https://github.com/nsenave))*
 
-### :memo: Documentation Changes
-
-
 ## [3.17.1] - 2024-02-07
 ### :bug: Bug Fixes
 - [`0fd6dc1`](https://github.com/InseeFr/Eno/commit/0fd6dc1651a6655f3b7ee8cd5e2e8f8d65fb4199) - lunatic dynamic table variables *(PR [#903](https://github.com/InseeFr/Eno/pull/903) by [@nsenave](https://github.com/nsenave))*
@@ -20,9 +17,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### :construction_worker: Build System
 - [`2476295`](https://github.com/InseeFr/Eno/commit/24762952cfe0c3e3f1dd1ed52f038d9abf171ea7) - bump com.networknt:json-schema-validator from 1.3.0 to 1.3.1 *(PR [#897](https://github.com/InseeFr/Eno/pull/897) by [@dependabot[bot]](https://github.com/apps/dependabot))*
-
-### :memo: Documentation Changes
-
 
 ## [3.17.0] - 2024-02-02
 ### :bug: Bug Fixes
@@ -40,7 +34,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### :memo: Documentation Changes
 - [`f6ce68c`](https://github.com/InseeFr/Eno/commit/f6ce68c319e6df77815f97eb55e285a25609dd21) - update readme after java 21 *(commit by [@nsenave](https://github.com/nsenave))*
-
 
 ## [3.16.1] - 2024-01-30
 ### :bug: Bug Fixes
