@@ -78,7 +78,6 @@ public class LunaticVariablesValues implements ProcessingStep<Questionnaire> {
             VariableTypeArray variableTypeArray = new VariableTypeArray();
             variableTypeArray.setVariableType(VariableTypeEnum.COLLECTED);
             variableTypeArray.setName(variableName);
-            variableTypeArray.setValues(new ValuesTypeArray());
             lunaticQuestionnaire.getVariables().add(variableTypeArray);
         });
     }
@@ -96,7 +95,6 @@ public class LunaticVariablesValues implements ProcessingStep<Questionnaire> {
         VariableTypeTwoDimensionsArray variableTypeTwoDimensionsArray = new VariableTypeTwoDimensionsArray();
         variableTypeTwoDimensionsArray.setVariableType(VariableTypeEnum.COLLECTED);
         variableTypeTwoDimensionsArray.setName(pairwiseVariableName);
-        variableTypeTwoDimensionsArray.setValues(new ValuesTypeTwoDimensionsArray());
         lunaticQuestionnaire.getVariables().add(variableTypeTwoDimensionsArray);
     }
 
