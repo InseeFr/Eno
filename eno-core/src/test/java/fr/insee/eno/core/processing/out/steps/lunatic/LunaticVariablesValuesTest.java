@@ -1,11 +1,31 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
+import fr.insee.eno.core.DDIToLunatic;
+import fr.insee.eno.core.exceptions.business.DDIParsingException;
+import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.Test;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class LunaticVariablesValuesTest {
+
+    @Test
+    void scalarVariable_integrationTest_ValuesShouldBeNotNull() throws DDIParsingException {
+        //
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"),
+                EnoParameters.of(EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+        //
+        Optional<IVariableType> searchedVariable = lunaticQuestionnaire.getVariables().stream()
+                .filter(variable -> "Q1".equals(variable.getName())).findAny();
+        assertTrue(searchedVariable.isPresent());
+        VariableType variableType = assertInstanceOf(VariableType.class, searchedVariable.get());
+        assertNotNull(variableType.getValues());
+    }
 
     @Test
     void replaceVariablesFromLoop() {
