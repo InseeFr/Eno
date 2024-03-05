@@ -122,6 +122,7 @@ public class LunaticConverter {
             case RADIO -> new Radio();
             case CHECKBOX -> new CheckboxOne();
             case DROPDOWN -> new Dropdown();
+            case SUGGESTER -> new Suggester();
         };
     }
 

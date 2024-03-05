@@ -20,8 +20,13 @@ import java.util.List;
 @Context(format = Format.DDI, type = CodeListType.class)
 public class CodeList extends EnoIdentifiableObject {
 
-    @DDI("!getLabelList().isEmpty() ? getLabelArray(0).getContentArray(0).getStringValue() : null")
+    @DDI("!getCodeListNameList().isEmpty() ? getCodeListNameArray(0).getStringArray(0).getStringValue() : null")
     String name;
+
+    /** Code list label inputted in Pogues.
+     * Not used in Lunatic, so it is directly mapped as a string for now. */
+    @DDI("!getLabelList().isEmpty ? getLabelArray(0).getContentArray(0).getStringValue() : null")
+    String label;
 
     @DDI("getCodeList()")
     List<CodeItem> codeItems = new ArrayList<>();

@@ -43,13 +43,15 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     public static final String DDI_UCQ_CHECKBOX_OUTPUT_FORMAT = "checkbox";
     /** DDI value for dropdown display format. */
     public static final String DDI_UCQ_DROPDOWN_OUTPUT_FORMAT = "drop-down-list";
+    /** DDI value for suggester display format. */
+    public static final String DDI_UCQ_SUGGESTER_OUTPUT_FORMAT = "suggester";
 
     /**
      * Enum for unique choice question display format.
      * A unique choice question can be displayed as radio buttons, checkboxes (discouraged since checkboxes should be
      * only used for multiple choice questions), or dropdown.
      */
-    public enum DisplayFormat {RADIO, CHECKBOX, DROPDOWN}
+    public enum DisplayFormat {RADIO, CHECKBOX, DROPDOWN, SUGGESTER}
 
     /**
      * Property used to convert to unique choice question to the right Lunatic component.
@@ -92,6 +94,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
             case DDI_UCQ_RADIO_OUTPUT_FORMAT -> Optional.of(DisplayFormat.RADIO);
             case DDI_UCQ_CHECKBOX_OUTPUT_FORMAT -> Optional.of(DisplayFormat.CHECKBOX);
             case DDI_UCQ_DROPDOWN_OUTPUT_FORMAT -> Optional.of(DisplayFormat.DROPDOWN);
+            case DDI_UCQ_SUGGESTER_OUTPUT_FORMAT -> Optional.of(DisplayFormat.SUGGESTER);
             default -> Optional.empty();
         };
     }
@@ -106,6 +109,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
             case RADIO -> ComponentTypeEnum.RADIO;
             case DROPDOWN -> ComponentTypeEnum.DROPDOWN;
             case CHECKBOX -> ComponentTypeEnum.CHECKBOX_ONE;
+            case SUGGESTER -> ComponentTypeEnum.SUGGESTER;
         };
     }
 
