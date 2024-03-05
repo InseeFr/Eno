@@ -55,7 +55,7 @@ public class FolderCleaner {
 	 * @param folder : the folder to be cleaned
 	 * @throws IOException : FileNotfound / NoAccess mainly
 	 */
-	public void cleanOneFolder(File folder) throws IOException {
+	public static void cleanOneFolder(File folder) throws IOException {
 		logger.debug("Cleaning " + folder);
 		if (folder.exists() && Files.isDirectory(folder.toPath())) {
 			FileUtils.cleanDirectory(folder);
