@@ -1,8 +1,6 @@
 package fr.insee.eno.generation;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
@@ -24,28 +22,16 @@ public class PoguesXML2DDIGenerator implements Generator {
 	private static final String styleSheetPath = Constants.TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL;
 
 	@Override
-	public File generate(File finalInput, byte[] parameters, String surveyName) throws Exception {
-		logger.info("PoguesXML2DDI Target : START");
-		logger.debug("Arguments : finalInput : " + finalInput + " surveyName " + surveyName);
-		String formNameFolder = null;
-		String outputBasicFormPath = null;
+	public ByteArrayOutputStream generate(ByteArrayInputStream byteArrayInputStream, byte[] parameters, String surveyName) throws Exception {
+		logger.info(String.format("%s Target : START",in2out().toLowerCase()));
 
-		formNameFolder = getFormNameFolder(finalInput);
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-		logger.debug("formNameFolder : " + formNameFolder);
-		String sUB_TEMP_FOLDER = Constants.sUB_TEMP_FOLDER(surveyName);
-		outputBasicFormPath = Constants.tEMP_DDI_FOLDER(sUB_TEMP_FOLDER) + "/" + formNameFolder + "/"
-				+ Constants.BASIC_FORM_TMP_FILENAME;
-		logger.debug("Output folder for basic-form : " + outputBasicFormPath);
+		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
+			 byteArrayInputStream;){
 
-		InputStream isTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL = Constants
-				.getInputStreamFromPath(styleSheetPath);
-		InputStream isFinalInput = FileUtils.openInputStream(finalInput);
-		OutputStream osOutputBasicForm = FileUtils.openOutputStream(new File(outputBasicFormPath));
+			saxonService.transformPoguesXML2DDI(byteArrayInputStream, byteArrayOutputStream, xslIS, parameters);
 
-		try {
-			saxonService.transformPoguesXML2DDI(isFinalInput, osOutputBasicForm,
-					isTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL, parameters);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					in2out(),
@@ -55,11 +41,7 @@ public class PoguesXML2DDIGenerator implements Generator {
 			throw new EnoGenerationException(errorMessage);
 		}
 
-		isTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL.close();
-		isFinalInput.close();
-		osOutputBasicForm.close();
-
-		return new File(outputBasicFormPath);
+		return byteArrayOutputStream;
 	}
 
 	/**

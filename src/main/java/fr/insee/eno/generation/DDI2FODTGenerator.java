@@ -1,8 +1,6 @@
 package fr.insee.eno.generation;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
@@ -24,28 +22,15 @@ public class DDI2FODTGenerator implements Generator {
 	private static final String styleSheetPath = Constants.TRANSFORMATIONS_DDI2FODT_DDI2FODT_XSL;
 
 	@Override
-	public File generate(File finalInput, byte[] parameters, String surveyName) throws Exception {
-		logger.info("DDI2ODT Target : START");
-		logger.debug("Arguments : finalInput : " + finalInput + " surveyName " + surveyName);
-		String formNameFolder = null;
-		String outputBasicFormPath = null;
+	public ByteArrayOutputStream generate(ByteArrayInputStream byteArrayInputStream, byte[] parameters, String surveyName) throws Exception {
+		logger.info(String.format("%s Target : START",in2out().toLowerCase()));
 
-		formNameFolder = getFormNameFolder(finalInput);
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-		logger.debug("formNameFolder : " + formNameFolder);
-
-		outputBasicFormPath = Constants.TEMP_FOLDER_PATH + "/" + surveyName + "/" + formNameFolder + "/form";
-		logger.debug("Output folder for basic-form : " + outputBasicFormPath);
-
-		String outputForm = outputBasicFormPath + "/form.fodt";
-		
-
-		try (InputStream isTRANSFORMATIONS_DDI2FODT_DDI2ODT_XSL = Constants
-				.getInputStreamFromPath(styleSheetPath);
-			InputStream isFinalInput = FileUtils.openInputStream(finalInput);
-			OutputStream osOutputFile = FileUtils.openOutputStream(new File(outputForm));){
+		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
+				byteArrayInputStream;){
 			
-			saxonService.transformDDI2FODT(isFinalInput, osOutputFile, isTRANSFORMATIONS_DDI2FODT_DDI2ODT_XSL, parameters);
+			saxonService.transformDDI2FODT(byteArrayInputStream, byteArrayOutputStream, xslIS, parameters);
 		
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
@@ -56,21 +41,8 @@ public class DDI2FODTGenerator implements Generator {
 			throw new EnoGenerationException(errorMessage);
 		}
 		
-		return new File(outputForm);
+		return byteArrayOutputStream;
 	}
-
-	/**
-	 * @param finalInput
-	 * @return
-	 */
-	public String getFormNameFolder(File finalInput) {
-		String formNameFolder;
-		formNameFolder = FilenameUtils.getBaseName(finalInput.getAbsolutePath());
-		formNameFolder = FilenameUtils.removeExtension(formNameFolder);
-		formNameFolder = formNameFolder.replace(XslParameters.TITLED_EXTENSION, "");
-		return formNameFolder;
-	}
-
 	public String in2out() {
 		return "ddi2fodt";
 	}
