@@ -51,7 +51,7 @@ public class FOSpecificTreatmentPostprocessor implements Postprocessor {
 			}
 		}
 		else {
-			logger.info("Not specific treatment in params : simply return inputcopying this file");
+			logger.info("Not specific treatment in params : simply return input");
 			byteArrayOutputStream.write(byteArrayInputStream.readAllBytes());
 			byteArrayInputStream.close();
 		}

@@ -1,7 +1,6 @@
 package fr.insee.eno.postprocessing.lunaticxml;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,18 +26,13 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(LunaticXMLVTLParserPostprocessor.class);
 
-
 	@Override
-	public File process(File input, byte[] parameters, String surveyName) throws EnoGenerationException, IOException {
+	public ByteArrayOutputStream process(ByteArrayInputStream input, byte[] parameters, String surveyName) throws EnoGenerationException, IOException {
 
-		File outputCustomFOFile = new File(input.getParent(),
-				Constants.BASE_NAME_FORM_FILE +
-				Constants.FINAL_LUNATIC_XML_EXTENSION);
-		logger.info("Start JS parsing xpath to vtl post-processing");
-
-		String inputString = FileUtils.readFileToString(input, StandardCharsets.UTF_8);
-		try {
-			FileUtils.writeStringToFile(outputCustomFOFile, parseToVTLInNodes(inputString), StandardCharsets.UTF_8);
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		String inputString = new String(input.readAllBytes(), StandardCharsets.UTF_8);
+		try(input) {
+			byteArrayOutputStream.write(parseToVTLInNodes(inputString).getBytes(StandardCharsets.UTF_8));
 		}catch(Exception e) {
 			logger.error(e.getMessage(),e);
 			String errorMessage = String.format("An error was occured during the %s transformation. %s",
@@ -49,7 +43,7 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 		}
 		logger.info("End JS parsing xpath to vtl post-processing");
 
-		return outputCustomFOFile;
+		return byteArrayOutputStream;
 	}
 	public static final String XPATH_CONCAT_FUNCTION = "concat";
 	public static final String XPATH_SUBSTRING_FUNCTION = "substring";

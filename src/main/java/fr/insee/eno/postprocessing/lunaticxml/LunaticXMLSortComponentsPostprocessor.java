@@ -1,8 +1,6 @@
 package fr.insee.eno.postprocessing.lunaticxml;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
@@ -27,18 +25,16 @@ public class LunaticXMLSortComponentsPostprocessor implements Postprocessor {
 	private static final String styleSheetPath = Constants.TRANSFORMATIONS_SORT_COMPONENTS_LUNATIC_XML;
 
 	@Override
-	public File process(File input, byte[] parameters, String surveyName) throws Exception {
+	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parameters, String surveyName) throws Exception {
+		logger.info(String.format("%s Target : START",toString().toLowerCase()));
 
-		File outputForJSFile = new File(input.getParent(),
-				Constants.BASE_NAME_FORM_FILE +
-				Constants.SORT_COMPONENTS_LUNATIC_XML_EXTENSION);
-		logger.debug("Output folder for basic-form : " + outputForJSFile.getAbsolutePath());
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-		InputStream JS_XSL = Constants.getInputStreamFromPath(styleSheetPath);
-		InputStream inputStream = FileUtils.openInputStream(input);
-		OutputStream outputStream = FileUtils.openOutputStream(outputForJSFile);
-		try {
-			saxonService.transformLunaticXMLToLunaticXMLSimplePost(inputStream,outputStream, JS_XSL, parameters);
+		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
+			 byteArrayInputStream;){
+
+			saxonService.transformLunaticXMLToLunaticXMLPost(byteArrayInputStream, byteArrayOutputStream, xslIS);
+
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),
@@ -48,12 +44,7 @@ public class LunaticXMLSortComponentsPostprocessor implements Postprocessor {
 			throw new EnoGenerationException(errorMessage);
 		}
 
-		inputStream.close();
-		outputStream.close();
-		JS_XSL.close();
-		logger.info("End JS sort component post-processing");
-
-		return outputForJSFile;
+		return byteArrayOutputStream;
 	}
 
 	public String toString() {
