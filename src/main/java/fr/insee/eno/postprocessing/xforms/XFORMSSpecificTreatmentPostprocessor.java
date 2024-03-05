@@ -1,9 +1,6 @@
 package fr.insee.eno.postprocessing.xforms;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
@@ -23,32 +20,30 @@ public class XFORMSSpecificTreatmentPostprocessor implements Postprocessor {
 	private XslTransformation saxonService = new XslTransformation();
 
 	@Override
-	public File process(File input, byte[] parameters, String survey) throws Exception {
+	public ByteArrayOutputStream process(ByteArrayInputStream input, byte[] parameters, String survey) throws Exception {
 		return this.process(input, parameters, null, null, survey);
 	}
 
 	@Override
-	public File process(File input, byte[] parametersFile, byte[] metadata, String survey) throws Exception {
+	public ByteArrayOutputStream process(ByteArrayInputStream input, byte[] parametersFile, byte[] metadata, String survey) throws Exception {
 		return this.process(input, parametersFile, metadata, null, survey);
 	}
 
 	@Override
-	public File process(File input, byte[] parametersFile, byte[] metadata, byte[] specificTreatmentXsl, String survey) throws Exception {
-		File outputForFRFile = new File(input.getParent(),
-				Constants.BASE_NAME_FORM_FILE +
-				Constants.SPECIFIC_TREATMENT_XFORMS_EXTENSION);
+	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parametersFile, byte[] metadata, byte[] specificTreatmentXsl, String survey) throws Exception {
+		logger.info(String.format("%s Target : START",toString().toLowerCase()));
 
-		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
 		InputStream specificTreatmentXslIS = null;
 
 		if(specificTreatmentXsl!=null) {
 			specificTreatmentXslIS = new ByteArrayInputStream(specificTreatmentXsl);
-			InputStream inputStream = FileUtils.openInputStream(input);
-			OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
-			try {
-				saxonService.transformWithFRSpecificTreatment(inputStream, outputStream, specificTreatmentXslIS, parametersFile);
-			}catch(Exception e) {
+
+			try (byteArrayInputStream){
+				saxonService.transformWithFRSpecificTreatment(byteArrayInputStream, byteArrayOutputStream, specificTreatmentXslIS, parametersFile);
+
+			} catch(Exception e) {
 				String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 						toString(),
 						e.getMessage(),
@@ -56,19 +51,14 @@ public class XFORMSSpecificTreatmentPostprocessor implements Postprocessor {
 				logger.error(errorMessage);
 				throw new EnoGenerationException(errorMessage);
 			}
-
-			inputStream.close();
-			outputStream.close();
-			specificTreatmentXslIS.close();
-
 		}
 		else {
-			logger.info("Not specific treatment in params : simply copying this file" + input.getAbsolutePath());
-			FileUtils.copyFile(input, outputForFRFile);
+			logger.info("Not specific treatment in params : simply return input");
+			byteArrayOutputStream.write(byteArrayInputStream.readAllBytes());
+			byteArrayInputStream.close();
 		}
-		logger.info("End of specific treatment post-processing " + outputForFRFile.getAbsolutePath());		
-
-		return outputForFRFile;
+		logger.info("End of specific treatment post-processing ");
+		return byteArrayOutputStream;
 	}
 
 	@Override

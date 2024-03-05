@@ -39,7 +39,7 @@ public class LunaticXMLSpecificTreatmentPostprocessor implements Postprocessor {
 			specificTreatmentXslIS = new ByteArrayInputStream(specificTreatmentXsl);
 
 			try (byteArrayInputStream){
-				saxonService.transformWithPDFSpecificTreatment(byteArrayInputStream, byteArrayOutputStream, specificTreatmentXslIS, parametersFile);
+				saxonService.transformWithLunaticXMLSpecificTreatment(byteArrayInputStream, byteArrayOutputStream, specificTreatmentXslIS, parametersFile);
 
 			} catch(Exception e) {
 				String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",

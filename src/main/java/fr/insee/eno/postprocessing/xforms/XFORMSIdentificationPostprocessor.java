@@ -1,8 +1,6 @@
 package fr.insee.eno.postprocessing.xforms;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
@@ -24,21 +22,16 @@ public class XFORMSIdentificationPostprocessor implements Postprocessor {
 	private static final String styleSheetPath = Constants.UTIL_XFORMS_IDENTIFICATION_XSL;
 
 	@Override
-	public File process(File input, byte[] parameters, String survey) throws Exception {
+	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parameters, String surveyName) throws Exception {
+		logger.info(String.format("%s Target : START",toString().toLowerCase()));
 
-		File outputForFRFile = new File(input.getParent(),
-				Constants.BASE_NAME_FORM_FILE +
-				Constants.IDENTIFICATION_XFORMS_EXTENSION);
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
+		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
+			 byteArrayInputStream;){
 
-		InputStream FO_XSL = Constants.getInputStreamFromPath(styleSheetPath);
+			saxonService.transformLunaticXMLToLunaticXMLPost(byteArrayInputStream, byteArrayOutputStream, xslIS);
 
-		InputStream inputStream = FileUtils.openInputStream(input);
-		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
-
-		try {
-			saxonService.transformSimple(inputStream, outputStream, FO_XSL);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),
@@ -48,12 +41,7 @@ public class XFORMSIdentificationPostprocessor implements Postprocessor {
 			throw new EnoGenerationException(errorMessage);
 		}
 
-		inputStream.close();
-		outputStream.close();
-		FO_XSL.close();
-		logger.info("End of identification post-processing " + outputForFRFile.getAbsolutePath());
-
-		return outputForFRFile;
+		return byteArrayOutputStream;
 	}
 
 	@Override

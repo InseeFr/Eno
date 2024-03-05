@@ -1,8 +1,6 @@
 package fr.insee.eno.postprocessing.xforms;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
@@ -24,26 +22,18 @@ public class XFORMSInsertEndPostprocessor implements Postprocessor {
 	private static final String styleSheetPath = Constants.UTIL_XFORMS_INSERT_END_XSL;
 
 	@Override
-	public File process(File input, byte[] parameters, String survey) throws Exception {
+	public ByteArrayOutputStream process(ByteArrayInputStream input, byte[] parameters, String survey) throws Exception {
 		return this.process(input, parameters, null, survey);
 	}
 
 	@Override
-	public File process(File input, byte[] parameters, byte[] metadata, String survey) throws Exception {
-
-		File outputForFRFile = new File(input.getParent(),
-				Constants.BASE_NAME_FORM_FILE +
-				Constants.INSERT_END_XFORMS_EXTENSION);
-
-		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
+	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parameters, byte[] metadata, String survey) throws Exception {
 
 		InputStream FO_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 
-		InputStream inputStream = FileUtils.openInputStream(input);
-		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
-
-		try {
-			saxonService.transformWithMetadata(inputStream, outputStream, FO_XSL, parameters, metadata);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		try(byteArrayInputStream; FO_XSL) {
+			saxonService.transformWithMetadata(byteArrayInputStream, outputStream, FO_XSL, parameters, metadata);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),
@@ -52,13 +42,9 @@ public class XFORMSInsertEndPostprocessor implements Postprocessor {
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
-
-		inputStream.close();
-		outputStream.close();
 		FO_XSL.close();
-		logger.info("End of insert end post-processing " + outputForFRFile.getAbsolutePath());
-
-		return outputForFRFile;
+		logger.info("End of EditPatron post-processing");
+		return outputStream;
 	}
 
 	@Override
