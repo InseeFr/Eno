@@ -1,8 +1,6 @@
 package fr.insee.eno.postprocessing.fo;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
@@ -28,22 +26,16 @@ public class FOInsertCoverPagePostprocessor implements Postprocessor {
 	private static final String styleSheetPath = Constants.TRANSFORMATIONS_COVER_PAGE_FO_4PDF;
 
 	@Override
-	public File process(File input, byte[] parameters, String survey) throws Exception {
+	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parameters, String surveyName) throws Exception {
+		logger.info(String.format("%s Target : START",toString().toLowerCase()));
 
-		File outputForFOFile = new File(input.getParent(),
-				Constants.BASE_NAME_FORM_FILE +
-				Constants.COVER_PAGE_FO_EXTENSION);
-		logger.debug("Output folder for basic-form : " + outputForFOFile.getAbsolutePath());
-		String surveyName = survey;
-		String formName = getFormName(input);
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-		InputStream FO_XSL = Constants.getInputStreamFromPath(styleSheetPath);
+		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
+			 byteArrayInputStream;){
 
-		InputStream inputStream = FileUtils.openInputStream(input);
-		OutputStream outputStream = FileUtils.openOutputStream(outputForFOFile);
+			saxonService.transformFOToStep4FO(byteArrayInputStream, byteArrayOutputStream, xslIS, surveyName, surveyName, parameters);
 
-		try {
-			saxonService.transformFOToStep4FO(inputStream, outputStream, FO_XSL, surveyName, formName, parameters);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),
@@ -53,12 +45,7 @@ public class FOInsertCoverPagePostprocessor implements Postprocessor {
 			throw new EnoGenerationException(errorMessage);
 		}
 
-		inputStream.close();
-		outputStream.close();
-		FO_XSL.close();
-		logger.info("End of InsertCoverPage post-processing " + outputForFOFile.getAbsolutePath());
-
-		return outputForFOFile;
+		return byteArrayOutputStream;
 	}
 
 	private String getFormName(File input) {

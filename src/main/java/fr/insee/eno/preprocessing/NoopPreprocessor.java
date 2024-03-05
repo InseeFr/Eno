@@ -22,8 +22,11 @@ public class NoopPreprocessor implements Preprocessor {
 //	}
 
 	@Override
-	public ByteArrayOutputStream process(ByteArrayInputStream inputFile, byte[] parameters, String survey, String in2out) throws Exception {
-		return null;
+	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parameters, String survey, String in2out) throws Exception {
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		byteArrayOutputStream.write(byteArrayInputStream.readAllBytes());
+		byteArrayInputStream.close();
+		return byteArrayOutputStream;
 	}
 
 	@Override
