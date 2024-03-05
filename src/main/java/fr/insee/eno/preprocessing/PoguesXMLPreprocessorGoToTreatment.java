@@ -1,8 +1,6 @@
 package fr.insee.eno.preprocessing;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
@@ -27,26 +25,16 @@ public class PoguesXMLPreprocessorGoToTreatment implements Preprocessor {
 	private static final String styleSheetPath = Constants.UTIL_POGUES_XML_GOTO_ITE_XSL;
 
 	@Override
-	public File process(File inputFile, byte[] parametersFile, String surveyName, String in2out) throws Exception {
+	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parameters, String survey, String in2out) throws Exception {
+		logger.info(String.format("%s Target : START",toString().toLowerCase()));
 
-		logger.info("PoguesXMLPreprocessing Target : START");
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-		String outputPreprocessGOT2ITE = null;
+		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
+			 byteArrayInputStream;){
 
-		outputPreprocessGOT2ITE = FilenameUtils.removeExtension(inputFile.getAbsolutePath())
-				+ Constants.TEMP_EXTENSION;
+			saxonService.transformLunaticXMLToLunaticXMLPost(byteArrayInputStream, byteArrayOutputStream, xslIS);
 
-		logger.debug("GOTO 2 ITE : -Input : " + inputFile + " -Output : " + outputPreprocessGOT2ITE + " -Stylesheet : "
-				+ styleSheetPath + " -Parameters : "
-				+ (parametersFile == null ? "Default parameters" : "Provided parameters"));
-
-		InputStream isInputFile = FileUtils.openInputStream(inputFile);
-		InputStream isUTIL_POGUES_XML_GOTO_ITE_XSL = Constants
-				.getInputStreamFromPath(styleSheetPath);
-		OutputStream osGOTO2ITE = FileUtils.openOutputStream(new File(outputPreprocessGOT2ITE));
-
-		try {
-			saxonService.transform(isInputFile, isUTIL_POGUES_XML_GOTO_ITE_XSL, osGOTO2ITE);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),
@@ -55,15 +43,8 @@ public class PoguesXMLPreprocessorGoToTreatment implements Preprocessor {
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
-		
-		isInputFile.close();
-		isUTIL_POGUES_XML_GOTO_ITE_XSL.close();
-		osGOTO2ITE.close();
 
-
-		logger.debug("PoguesXMLPreprocessing : END");
-		return new File(outputPreprocessGOT2ITE);
-
+		return byteArrayOutputStream;
 	}
 
 	public String toString() {

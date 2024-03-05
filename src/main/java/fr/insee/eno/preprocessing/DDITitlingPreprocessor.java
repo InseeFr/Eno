@@ -1,8 +1,6 @@
 package fr.insee.eno.preprocessing;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
@@ -26,24 +24,16 @@ public class DDITitlingPreprocessor implements Preprocessor {
 	private static final String styleSheetPath = Constants.UTIL_DDI_TITLING_XSL;
 
 	@Override
-	public File process(File inputFile, byte[] parametersFile, String survey, String in2out) throws Exception {
-		logger.info("DDIPreprocessing Target : START");
+	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parameters, String survey, String in2out) throws Exception {
+		logger.info(String.format("%s Target : START",toString().toLowerCase()));
 
-		String outputTitling = null;
-		String titlingInput = inputFile.getAbsolutePath();
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-		outputTitling = titlingInput.replace(Constants.CLEANED_EXTENSION, Constants.FINAL_EXTENSION);
+		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
+			 byteArrayInputStream;){
 
-		logger.debug("Titling : -Input : " + titlingInput + " -Output : " + outputTitling + " -Stylesheet : "
-				+ styleSheetPath + " -Parameters : "
-				+ (parametersFile == null ? "Default parameters" : "Provided parameters"));
+			saxonService.transformLunaticXMLToLunaticXMLPost(byteArrayInputStream, byteArrayOutputStream, xslIS);
 
-		InputStream isCleaningTitling = FileUtils.openInputStream(new File(titlingInput));
-		InputStream isUTIL_DDI_TITLING_XSL = Constants.getInputStreamFromPath(styleSheetPath);
-		OutputStream osTitling = FileUtils.openOutputStream(new File(outputTitling));
-
-		try {
-			saxonService.transformTitling(isCleaningTitling, isUTIL_DDI_TITLING_XSL, osTitling, parametersFile);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),
@@ -53,11 +43,7 @@ public class DDITitlingPreprocessor implements Preprocessor {
 			throw new EnoGenerationException(errorMessage);
 		}
 
-		isCleaningTitling.close();
-		isUTIL_DDI_TITLING_XSL.close();
-		osTitling.close();
-		logger.debug("DDIPreprocessing titling: END");
-		return new File(outputTitling);
+		return byteArrayOutputStream;
 	}
 
 	public String toString() {

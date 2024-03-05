@@ -1,8 +1,6 @@
 package fr.insee.eno.preprocessing;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 import fr.insee.eno.exception.Utils;
 import org.apache.commons.io.FileUtils;
@@ -27,23 +25,16 @@ public class DDICleaningPreprocessor implements Preprocessor {
 	private static final String styleSheetPath = Constants.UTIL_DDI_CLEANING_XSL;
 
 	@Override
-	public File process(File inputFile, byte[] parametersFile, String survey, String in2out) throws Exception {
-		logger.info("DDIPreprocessing Target : START");
+	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parameters, String survey, String in2out) throws Exception {
+		logger.info(String.format("%s Target : START",toString().toLowerCase()));
 
-		String cleaningOutput=null;
-		String cleaningInput = inputFile.getAbsolutePath();
-		cleaningOutput = FilenameUtils.removeExtension(cleaningInput) + Constants.CLEANED_EXTENSION;
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-		logger.debug("Cleaned output file to be created : " + cleaningOutput);
-		logger.debug("Cleaning : -Input : " + cleaningInput + " -Output : " + cleaningOutput + " -Stylesheet : "
-				+ styleSheetPath);
+		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
+			 byteArrayInputStream;){
 
-		InputStream isCleaningIn = FileUtils.openInputStream(new File(cleaningInput));
-		OutputStream osCleaning = FileUtils.openOutputStream(new File(cleaningOutput));
-		InputStream isUTIL_DDI_CLEANING_XSL = Constants.getInputStreamFromPath(styleSheetPath);
+			saxonService.transformLunaticXMLToLunaticXMLPost(byteArrayInputStream, byteArrayOutputStream, xslIS);
 
-		try {
-			saxonService.transformCleaning(isCleaningIn, isUTIL_DDI_CLEANING_XSL, osCleaning, in2out);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),
@@ -53,12 +44,7 @@ public class DDICleaningPreprocessor implements Preprocessor {
 			throw new EnoGenerationException(errorMessage);
 		}
 
-		isCleaningIn.close();
-		isUTIL_DDI_CLEANING_XSL.close();
-		osCleaning.close();
-
-		logger.debug("DDIPreprocessing Cleaning: END");
-		return new File(cleaningOutput);
+		return byteArrayOutputStream;
 	}
 
 	public String toString() {
