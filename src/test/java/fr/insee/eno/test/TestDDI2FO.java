@@ -10,12 +10,12 @@ import fr.insee.eno.preprocessing.DDIMultimodalSelectionPreprocessor;
 import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
 import fr.insee.eno.preprocessing.Preprocessor;
 import fr.insee.eno.service.GenerationService;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.xmlunit.diff.Diff;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 public class TestDDI2FO {
 		
@@ -48,7 +48,13 @@ public class TestDDI2FO {
 					new FOInsertAccompanyingMailsPostprocessor()};
 			
 			GenerationService genService = new GenerationService(preprocessors, ddi2fo, postprocessors);
-			File outputFile = genService.generateQuestionnaire(in, "simpsons");
+			ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(in));
+			File outputFile = File.createTempFile("eno-",".xml");
+			ByteArrayOutputStream output = genService.generateQuestionnaire(inputStream, "simpsons");
+			try (FileOutputStream fos = new FileOutputStream(outputFile)) {
+				fos.write(output.toByteArray());
+			}
+			output.close();
 			File expectedFile = new File(String.format("%s/out.fo", basePath));
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 

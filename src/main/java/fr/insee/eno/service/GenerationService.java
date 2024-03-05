@@ -3,6 +3,9 @@ package fr.insee.eno.service;
 import java.io.*;
 import java.util.Arrays;
 
+import fr.insee.eno.preprocessing.DDIMappingPreprocessor;
+import fr.insee.eno.preprocessing.DDISplittingPreprocessor;
+import fr.insee.eno.preprocessing.PoguesXMLPreprocessorGoToTreatment;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -65,7 +68,7 @@ public class GenerationService {
 	/**
 	 * Launch every step needed in order to generate the target questionnaire.
 	 * 
-	 * @param inputFile
+	 * @param input
 	 *            The source file
 	 * 
 	 * @return The generated file
@@ -76,21 +79,37 @@ public class GenerationService {
 		logger.info(this.toString());
 		logger.info("Generating questionnaire for: " + surveyName);
 
-		ByteArrayOutputStream outputStream = this.preprocessors[0].process(input, parameters, surveyName,generator.in2out());
-		
-		for (int i = 1; i < preprocessors.length; i++) {
-			outputStream = this.preprocessors[i].process(new ByteArrayInputStream(outputStream.toByteArray()), parameters, surveyName,
-					generator.in2out());
+
+
+		if(this.preprocessors[0] instanceof DDIMappingPreprocessor){
+			ByteArrayOutputStream mappingOS = this.preprocessors[0].process(input, parameters, surveyName,generator.in2out());
+			setMapping(new ByteArrayInputStream(mappingOS.toByteArray()));
+			mappingOS.close();
+		} else {
+
 		}
 
-		ByteArrayOutputStream generatedForm = this.generator.generate(new ByteArrayInputStream(outputStream.toByteArray()), parameters, surveyName);
-		outputStream.close();
-		ByteArrayOutputStream outputForm = this.postprocessors[0].process(new ByteArrayInputStream(generatedForm.toByteArray()), parameters, metadata, specificTreatment, mapping, surveyName);
-		for (int i = 1; i < postprocessors.length; i++) {
-			outputForm = this.postprocessors[i].process(new ByteArrayInputStream(outputForm.toByteArray()), parameters, metadata, specificTreatment, mapping,surveyName);
+		// Pre-processing
+		ByteArrayOutputStream outputStream = null;
+		for (int i = 0; i < preprocessors.length; i++) {
+			ByteArrayInputStream inputProcessor = i == 0 ? input : new ByteArrayInputStream(outputStream.toByteArray());
+			if(this.preprocessors[i].getClass() == DDIMappingPreprocessor.class){
+				ByteArrayOutputStream mappingOS = this.preprocessors[0].process(input, parameters, surveyName,generator.in2out());
+				setMapping(new ByteArrayInputStream(mappingOS.toByteArray()));
+				mappingOS.close();
+			} else {
+				outputStream = this.preprocessors[i].process(inputProcessor, parameters, surveyName,generator.in2out());
+			}
 		}
 
-		return outputForm;
+		// Core-processing
+		outputStream = this.generator.generate(new ByteArrayInputStream(outputStream.toByteArray()), parameters, surveyName);
+
+		// Post-processings
+		for (int i = 0; i < postprocessors.length; i++) {
+			outputStream = this.postprocessors[i].process(new ByteArrayInputStream(outputStream.toByteArray()), parameters, metadata, specificTreatment, mapping, surveyName);
+		}
+		return outputStream;
 	}
 	
 	public void setParameters(ByteArrayOutputStream parametersBAOS) {

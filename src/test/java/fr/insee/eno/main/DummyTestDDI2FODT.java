@@ -1,7 +1,8 @@
 package fr.insee.eno.main;
 
-import java.io.File;
+import java.io.*;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 
 import fr.insee.eno.generation.DDI2FODTGenerator;
@@ -20,7 +21,7 @@ public class DummyTestDDI2FODT {
 	private DDI2FODTGenerator ddi2fodtGenerator = new DDI2FODTGenerator();
 
 	@Test
-	public void main() {
+	public void main() throws IOException {
 			
 		String basePathDDI2ODT = "src/test/resources/ddi-to-fodt";
 		
@@ -36,10 +37,15 @@ public class DummyTestDDI2FODT {
 		
 		GenerationService genServiceDDI2ODT = new GenerationService(preprocessors, ddi2fodtGenerator, postprocessors);
 		File in = new File(String.format("%s/in.xml", basePathDDI2ODT));
-		
+		ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(in));
 		try {
-			File output = genServiceDDI2ODT.generateQuestionnaire(in,"test");
-			System.out.println(output.getAbsolutePath());
+			ByteArrayOutputStream output = genServiceDDI2ODT.generateQuestionnaire(inputStream, "test");
+			File file = File.createTempFile("eno-",".xml");
+			try (FileOutputStream fos = new FileOutputStream(file)) {
+				fos.write(output.toByteArray());
+			}
+			output.close();
+			System.out.println(file.getAbsolutePath());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

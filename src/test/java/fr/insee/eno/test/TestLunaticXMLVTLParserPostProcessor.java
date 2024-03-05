@@ -1,7 +1,6 @@
 package fr.insee.eno.test;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -75,7 +74,13 @@ public class TestLunaticXMLVTLParserPostProcessor {
 			Files.deleteIfExists(outPath);
 			Path outputFilePath = Files.createFile(outPath);
 			File in = basePath.resolve("in.xml").toFile();
-			File outPostProcessing = lunaticXMLVtlParserPostprocessor.process(in, null, "test");
+			ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(in));
+			File outPostProcessing = File.createTempFile("eno-",".xml");
+			ByteArrayOutputStream output = lunaticXMLVtlParserPostprocessor.process(inputStream, null, "test");
+			try (FileOutputStream fos = new FileOutputStream(outPostProcessing)) {
+				fos.write(output.toByteArray());
+			}
+			output.close();
 			FileUtils.copyFile(outPostProcessing,outputFilePath.toFile());
 			FileUtils.forceDelete(outPostProcessing);
 			File expectedFile = basePath.resolve("out.xml").toFile();

@@ -1,8 +1,8 @@
 package fr.insee.eno.test;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.xmlunit.diff.Diff;
@@ -35,7 +35,13 @@ public class TestPoguesXMLToDDI {
 			GenerationService genService = new GenerationService(preprocessors, poguesXML2DDI, postprocessors);
 
 			File in = new File(String.format("%s/in.xml", basePath));
-			File outputFile = genService.generateQuestionnaire(in, "xml-pogues-2-ddi-test");
+			ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(in));
+			File outputFile = File.createTempFile("eno-",".xml");
+			ByteArrayOutputStream output = genService.generateQuestionnaire(inputStream, "xml-pogues-2-ddi-test");
+			try (FileOutputStream fos = new FileOutputStream(outputFile)) {
+				fos.write(output.toByteArray());
+			}
+			output.close();
 			File expectedFile = new File(String.format("%s/out.xml", basePath));
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 			Assertions.assertFalse(diff::hasDifferences, ()->getDiffMessage(diff, basePath));

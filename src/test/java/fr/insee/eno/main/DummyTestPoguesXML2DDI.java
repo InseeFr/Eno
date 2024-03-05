@@ -34,8 +34,6 @@ public class DummyTestPoguesXML2DDI {
 				fos.write(output.toByteArray());
 			}
 			output.close();
-
-
 			System.out.println(file.getAbsolutePath());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

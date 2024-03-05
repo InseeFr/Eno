@@ -1,11 +1,6 @@
 package fr.insee.eno.main;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.URI;
 
 import javax.xml.transform.Result;
@@ -15,6 +10,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
@@ -69,11 +65,17 @@ public class DummyTestDDI2PDF {
 		File in = new File(String.format("%s/in.xml", basePathddi2PDF));
 		File xconf = new File(String.format("%s/fop.xconf", basePathddi2PDF));
 
+
 		try {
 			InputStream isXconf = new FileInputStream(xconf);
 			URI imgFolderUri = new File(basePathImg).toURI();
-
-			File outputFO = genServiceDDI2PDF.generateQuestionnaire(in, "test");
+			ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(in));
+			ByteArrayOutputStream output = genServiceDDI2PDF.generateQuestionnaire(inputStream, "test");
+			File outputFO = File.createTempFile("eno-",".xml");
+			try (FileOutputStream fos = new FileOutputStream(outputFO)) {
+				fos.write(output.toByteArray());
+			}
+			output.close();
 
 			// Step 1: Construct a FopFactory by specifying a reference to the
 			// configuration file
