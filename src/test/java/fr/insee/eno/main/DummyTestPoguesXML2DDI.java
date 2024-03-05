@@ -1,7 +1,9 @@
 package fr.insee.eno.main;
 
-import java.io.File;
+import java.io.*;
+import java.util.Arrays;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 
 import fr.insee.eno.generation.PoguesXML2DDIGenerator;
@@ -18,15 +20,23 @@ public class DummyTestPoguesXML2DDI {
 	private NoopPostprocessor noopPostprocessor = new NoopPostprocessor();
 	
 	@Test
-	public void mainTest() {
+	public void mainTest() throws IOException {
 
 		String basePath = "src/test/resources/pogues-xml-to-ddi";
 		GenerationService genService = new GenerationService(poguesXMLPreprocessorGoToTreatment, poguesXML2DDIGenerator,
 				noopPostprocessor);
 		File in = new File(String.format("%s/in.xml", basePath));
+		ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(in));
 		try {
-			File output = genService.generateQuestionnaire(in, "test");
-			System.out.println(output.getAbsolutePath());
+			ByteArrayOutputStream output = genService.generateQuestionnaire(inputStream, "test");
+			File file = File.createTempFile("eno-",".xml");
+			try (FileOutputStream fos = new FileOutputStream(file)) {
+				fos.write(output.toByteArray());
+			}
+			output.close();
+
+
+			System.out.println(file.getAbsolutePath());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

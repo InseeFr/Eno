@@ -1,9 +1,6 @@
 package fr.insee.eno.service;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Arrays;
 
 import org.apache.commons.io.FilenameUtils;
@@ -75,38 +72,26 @@ public class GenerationService {
 	 * @throws Exception
 	 *             bim
 	 */
-	public File generateQuestionnaire(File inputFile, String surveyName) throws Exception {
+	public ByteArrayOutputStream generateQuestionnaire(ByteArrayInputStream input, String surveyName) throws Exception {
 		logger.info(this.toString());
 		logger.info("Generating questionnaire for: " + surveyName);
 
-		String tempFolder = System.getProperty("java.io.tmpdir") + "/" + surveyName;
-		logger.debug("Temp folder: " + tempFolder);
-		if(cleaningFolder) {
-			cleanTempFolder(surveyName);
-		}
-		File preprocessResultFileName = null;
-		
-		preprocessResultFileName = this.preprocessors[0].process(inputFile, parameters, surveyName,generator.in2out());	
+		ByteArrayOutputStream outputStream = this.preprocessors[0].process(input, parameters, surveyName,generator.in2out());
 		
 		for (int i = 1; i < preprocessors.length; i++) {
-			preprocessResultFileName = this.preprocessors[i].process(preprocessResultFileName, parameters, surveyName,
+			outputStream = this.preprocessors[i].process(new ByteArrayInputStream(outputStream.toByteArray()), parameters, surveyName,
 					generator.in2out());
 		}
 
-		File generatedForm = this.generator.generate(preprocessResultFileName, parameters, surveyName);
-		File outputForm = this.postprocessors[0].process(generatedForm, parameters, metadata, specificTreatment, mapping, surveyName);
+		ByteArrayOutputStream generatedForm = this.generator.generate(new ByteArrayInputStream(outputStream.toByteArray()), parameters, surveyName);
+		outputStream.close();
+		ByteArrayOutputStream outputForm = this.postprocessors[0].process(new ByteArrayInputStream(generatedForm.toByteArray()), parameters, metadata, specificTreatment, mapping, surveyName);
 		for (int i = 1; i < postprocessors.length; i++) {
-			outputForm = this.postprocessors[i].process(outputForm, parameters, metadata, specificTreatment, mapping,surveyName);
+			outputForm = this.postprocessors[i].process(new ByteArrayInputStream(outputForm.toByteArray()), parameters, metadata, specificTreatment, mapping,surveyName);
 		}
-		File finalForm = new File(outputForm.getParent()+Constants.BASE_NAME_FORM_FILE+"."+FilenameUtils.getExtension(outputForm.getAbsolutePath()));
-		if(!finalForm.equals(outputForm)) {
-			Files.move(outputForm, finalForm);
-		}
-		logger.debug("Path to generated questionnaire: " + finalForm.getAbsolutePath());
 
-		return finalForm;
+		return outputForm;
 	}
-	
 	
 	public void setParameters(ByteArrayOutputStream parametersBAOS) {
 		this.parameters = parametersBAOS.toByteArray();
