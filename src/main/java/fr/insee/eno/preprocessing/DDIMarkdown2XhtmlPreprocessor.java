@@ -46,21 +46,22 @@ public class DDIMarkdown2XhtmlPreprocessor implements Preprocessor {
 
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath_1);
+		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
 			 byteArrayInputStream){
 
-			saxonService.transformLunaticXMLToLunaticXMLPost(byteArrayInputStream, byteArrayOutputStream, xslIS);
+			saxonService.transform(byteArrayInputStream, xslIS, byteArrayOutputStream);
 
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),
 					e.getMessage(),
-					Utils.getErrorLocation(styleSheetPath_1,e));
+					Utils.getErrorLocation(styleSheetPath,e));
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
 
 		return byteArrayOutputStream;
 	}
+
 
 }

@@ -30,7 +30,7 @@ public class XFORMSFixAdherencePostprocessor implements Postprocessor {
 		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
 			 byteArrayInputStream;){
 
-			saxonService.transformLunaticXMLToLunaticXMLPost(byteArrayInputStream, byteArrayOutputStream, xslIS);
+			saxonService.transformSimple(byteArrayInputStream, byteArrayOutputStream, xslIS);
 
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",

@@ -28,12 +28,23 @@ public class DDICleaningPreprocessor implements Preprocessor {
 	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parameters, String survey, String in2out) throws Exception {
 		logger.info(String.format("%s Target : START",toString().toLowerCase()));
 
+
+		byte[] bytesOfInput = byteArrayInputStream.readAllBytes();
+		logger.info("Length");
+		logger.info(String.valueOf(bytesOfInput.length));
+
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+		File file = File.createTempFile("AAA-eno-",".xml");
+		try (FileOutputStream fos = new FileOutputStream(file)) {
+			fos.write(bytesOfInput);
+		}
+
+		ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(file));
 
 		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
 			 byteArrayInputStream;){
-
-			saxonService.transformLunaticXMLToLunaticXMLPost(byteArrayInputStream, byteArrayOutputStream, xslIS);
+			saxonService.transformCleaning(inputStream, xslIS, byteArrayOutputStream, in2out);
 
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",

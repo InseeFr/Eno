@@ -31,19 +31,10 @@ public class XFORMSInseeModelPostprocessor implements Postprocessor {
 	public ByteArrayOutputStream process(ByteArrayInputStream input, byte[] parametersFile, byte[] metadata, byte[] specificTreatmentXsl, byte[] mapping, String survey) throws Exception {
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-		String sUB_TEMP_FOLDER = Constants.tEMP_DDI_FOLDER(Constants.sUB_TEMP_FOLDER(survey));
-
 		InputStream FO_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 		InputStream mappingStream=null;
 		if(mapping!=null) {
 			mappingStream = new ByteArrayInputStream(mapping);
-		}
-		else {
-			File mappingFile = Constants.tEMP_MAPPING_TMP(sUB_TEMP_FOLDER);
-			if(mappingFile.exists()) {
-				logger.info("Loading mapping.xml file : "+mappingFile.getAbsolutePath());
-				mappingStream = FileUtils.openInputStream(mappingFile);
-			}
 		}
 
 		try(input; FO_XSL) {
@@ -56,7 +47,6 @@ public class XFORMSInseeModelPostprocessor implements Postprocessor {
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
-		FO_XSL.close();
 		logger.info("End of InseeModel post-processing ");
 
 		return byteArrayOutputStream;

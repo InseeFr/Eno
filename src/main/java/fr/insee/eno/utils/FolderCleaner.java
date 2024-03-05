@@ -60,6 +60,7 @@ public class FolderCleaner {
 		if (folder.exists() && Files.isDirectory(folder.toPath())) {
 			FileUtils.cleanDirectory(folder);
 		}
+		Files.deleteIfExists(Paths.get(folder.toURI()));
 	}
 
 	/**

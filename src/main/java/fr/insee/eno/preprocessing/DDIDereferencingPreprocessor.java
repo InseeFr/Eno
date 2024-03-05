@@ -35,7 +35,9 @@ public class DDIDereferencingPreprocessor implements Preprocessor {
 		InputStream isDDI_DEREFERENCING_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-		try(inputFile;isDDI_DEREFERENCING_XSL; byteArrayOutputStream) {
+		try(inputFile;
+			isDDI_DEREFERENCING_XSL;
+			byteArrayOutputStream) {
 			saxonService.transformDereferencing(inputFile, isDDI_DEREFERENCING_XSL, byteArrayOutputStream,
 					Constants.SUB_TEMP_FOLDER_FILE(survey));
 		}catch(Exception e) {
@@ -72,9 +74,13 @@ public class DDIDereferencingPreprocessor implements Preprocessor {
 
 		File outputFile = new File(cleaningInput);
 		ByteArrayOutputStream finalOutput = new ByteArrayOutputStream();
-		byteArrayOutputStream.write(FileUtils.readFileToByteArray(outputFile));
 
-		FolderCleaner.cleanOneFolder(f);
+		byte[] bytesDDI = FileUtils.readFileToByteArray(outputFile);
+		logger.info("Length");
+		logger.info(String.valueOf(bytesDDI.length));
+		byteArrayOutputStream.write(bytesDDI);
+
+		// FolderCleaner.cleanOneFolder(f);
 
 		logger.debug("DDIPreprocessing Dereferencing : END");
 		return finalOutput;

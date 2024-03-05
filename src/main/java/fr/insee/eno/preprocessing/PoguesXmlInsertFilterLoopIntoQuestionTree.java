@@ -30,7 +30,7 @@ public class PoguesXmlInsertFilterLoopIntoQuestionTree implements Preprocessor {
 		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
 			 byteArrayInputStream;){
 
-			saxonService.transformLunaticXMLToLunaticXMLPost(byteArrayInputStream, byteArrayOutputStream, xslIS);
+			saxonService.transform(byteArrayInputStream, xslIS, byteArrayOutputStream);
 
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
