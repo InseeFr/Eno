@@ -72,7 +72,7 @@ public class GenerationService {
 		for (int i = 0; i < preprocessors.length; i++) {
 			ByteArrayInputStream inputProcessor = i == 0 ? input : new ByteArrayInputStream(outputStream.toByteArray());
 			if(this.preprocessors[i].getClass() == DDIMappingPreprocessor.class){
-				ByteArrayOutputStream mappingOS = this.preprocessors[0].process(input, parameters, surveyName, generator.in2out());
+				ByteArrayOutputStream mappingOS = this.preprocessors[i].process(inputProcessor, parameters, surveyName, generator.in2out());
 				setMapping(new ByteArrayInputStream(mappingOS.toByteArray()));
 				mappingOS.close();
 			} else {
