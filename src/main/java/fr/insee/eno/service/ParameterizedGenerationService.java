@@ -8,14 +8,12 @@ import fr.insee.eno.params.ValorizatorParametersImpl;
 import fr.insee.eno.params.pipeline.PipeLineGeneratorImpl;
 import fr.insee.eno.params.pipeline.PipelineGenerator;
 import fr.insee.eno.params.validation.*;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.InputStream;
 
 /**

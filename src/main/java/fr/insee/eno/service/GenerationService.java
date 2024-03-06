@@ -1,17 +1,18 @@
 package fr.insee.eno.service;
 
 import com.google.inject.Inject;
-import fr.insee.eno.Constants;
 import fr.insee.eno.generation.Generator;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIMappingPreprocessor;
 import fr.insee.eno.preprocessing.Preprocessor;
-import fr.insee.eno.utils.FolderCleaner;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 
 /**

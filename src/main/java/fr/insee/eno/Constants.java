@@ -200,10 +200,6 @@ public final class Constants {
 	public static File createTempEnoFolder() throws IOException {
 		return Files.createTempDirectory(Paths.get(ENO_TEMP_FOLDER_PATH),"generation-folder-").toFile();
 	}
-
-	public static final File TEMP_FILE_PARAMS(String file) {
-		return getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH +"/"+file);
-	}
 	public static final File TEMP_PREFORMATE_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/temp/preformate.tmp");
 	public static final File TEMP_XML_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/temp/xml.tmp");
 	public static final File TEMP_TEMP_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/temp/temp.tmp");
@@ -270,77 +266,4 @@ public final class Constants {
 			return file;
 		}
 	}
-	
-	/********************************************************/
-	/*********************** Temp foder  ********************/
-	/********************************************************/
-	public static String tEMP_XFORMS_FOLDER (String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER + "/xforms";
-	}
-	public static String tEMP_ODT_FOLDER(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER + "/fodt";
-	}
-	public static String tEMP_JS_FOLDER(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER+ "/lunatic-xml";
-	}
-	public static String tEMP_PDF_FOLDER(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER+ "/fo";
-	}
-	public static String tEMP_DDI_FOLDER(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER + "/ddi";
-	}
-	public static String tEMP_POGUES_XML_FOLDER(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER + "/pogues-xml";
-	}
-	public static final String BASIC_FORM_TMP_FILENAME = "basic-form.xml";
-	
-	
-	
-	
-	/********************************************************/
-	/********************* File Extension *******************/
-	/************** (used during post-processing) ***********/
-	
-	public static final String BASE_NAME_FORM_FILE = "/form";
-
-	/************ DDI and pogues-xml extension ***************/
-	public static final String CLEANED_EXTENSION = "-cleaned.tmp";
-	public static final String MD_EXTENSION = "-md.tmp";
-	public static final String MD2_EXTENSION = "-md2.tmp";
-	public static final String FINAL_EXTENSION = "-final.tmp";
-	public static final String TEMP_EXTENSION = "-temp.xml";
-	public static final String FINAL_DDI_EXTENSION = "-final.xml";
-	public static final String DDI32_DDI33_EXTENSION = "-ddi33.xml";
-	public static final String MULTIMODAL_EXTENSION = "-modal.tmp";
-
-	/********************* pdf/fo extension *******************/
-	public static final String ACCOMPANYING_MAILS_FO_EXTENSION = "-accompanying-mails.fo";
-	public static final String COVER_PAGE_FO_EXTENSION = "-cover-page.fo";
-	public static final String EDIT_STRUCTURE_FO_EXTENSION = "-edit-structure.fo";
-	public static final String END_QUESTION_FO_EXTENSION = "-end-question.fo";
-	public static final String SPECIFIC_TREAT_PDF_EXTENSION = "-specific-form.fo";
-	public static final String TABLE_COL_SIZE_PDF_EXTENSION = "-temp.fo";
-	public static final String FINAL_PDF_EXTENSION = "-final-out.fo";
-	public static final String MAILING_FO_EXTENSION = "-mailing-vtl.fo";
-
-	/****************** js/xml-lunatic extension **************/
-	public static final String SORT_COMPONENTS_LUNATIC_XML_EXTENSION = "-sorted.xml";
-	public static final String INSERT_GENERIC_QUESTIONS_LUNATIC_XML_EXTENSION = "-insert-questions.xml";
-	public static final String EXTERNALIZE_VARIABLES_LUNATIC_XML_EXTENSION = "-ext-variables.xml";
-	public static final String INSERT_CLEANING_BLOCK_XML_EXTENSION = "-insert-cleaningblock.xml";
-	public static final String VTL_PARSER_LUNATIC_XML_EXTENSION = "-vtl-parsed.xml";
-	public static final String SPECIFIC_TREAT_LUNATIC_XML_EXTENSION = "-specific-form.xml";
-	public static final String PAGINATION_LUNATIC_XML_EXTENSION = "-sorted.xml";
-	public static final String FINAL_LUNATIC_XML_EXTENSION = "-lunatic.xml";
-
-	/******************** fr/xform extension ******************/
-	public static final String BROWSING_XFORMS_EXTENSION = "-browsing.xhtml";
-	public static final String INSEE_PATTERN_XFORMS_EXTENSION = "-insee-pattern.xhtml";
-	public static final String FIX_ADHERENCE_XFORMS_EXTENSION = "-fix-adherence.xhtml";
-	public static final String IDENTIFICATION_XFORMS_EXTENSION = "-identification.xhtml";
-	public static final String INSERT_END_XFORMS_EXTENSION = "-insert-end.xhtml";
-	public static final String INSERT_WELCOME_XFORMS_EXTENSION = "-insert-welcome.xhtml";
-	public static final String INSERT_GENERIC_QUESTIONS_XFORMS_EXTENSION = "-insert-questions.xhtml";
-	public static final String INSEE_MODEL_XFORMS_EXTENSION = "-insee-model.xhtml";
-	public static final String SPECIFIC_TREATMENT_XFORMS_EXTENSION = "-specific-treatment.xhtml";
 }

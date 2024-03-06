@@ -1,32 +1,21 @@
 package fr.insee.eno.service;
 
-import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.ENOParameters;
 import fr.insee.eno.params.ValorizatorParameters;
 import fr.insee.eno.params.ValorizatorParametersImpl;
 import fr.insee.eno.preprocessing.DDISplittingPreprocessor;
 import fr.insee.eno.utils.FileArchiver;
-import fr.insee.eno.utils.FolderCleaner;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.zip.ZipOutputStream;
-
-import static fr.insee.eno.Constants.createTempEnoFolder;
 
 public class MultiModelService {
 
