@@ -11,6 +11,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import static fr.insee.eno.Constants.createTempEnoFile;
+
 public class TestParameterizedGenerationServiceLunaticXML {
 	
 
@@ -26,7 +28,7 @@ public class TestParameterizedGenerationServiceLunaticXML {
 		File params = new File(String.format("%s/params-lunatic-xml.xml", basePathDDI));
 		
 		try {
-			File outputFile = File.createTempFile("eno-",".xml");
+			File outputFile = createTempEnoFile();
 			ByteArrayOutputStream output = parameterizedGenerationService.generateQuestionnaire(input, params, null, null, null);
 			try (FileOutputStream fos = new FileOutputStream(outputFile)) {
 				fos.write(output.toByteArray());

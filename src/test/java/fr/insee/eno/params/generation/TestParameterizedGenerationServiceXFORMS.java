@@ -12,6 +12,8 @@ import org.xmlunit.diff.Diff;
 import fr.insee.eno.service.ParameterizedGenerationService;
 import fr.insee.eno.test.XMLDiff;
 
+import static fr.insee.eno.Constants.createTempEnoFile;
+
 public class TestParameterizedGenerationServiceXFORMS {
 
 	private ParameterizedGenerationService parameterizedGenerationService = new ParameterizedGenerationService();
@@ -25,7 +27,7 @@ public class TestParameterizedGenerationServiceXFORMS {
 		File params = new File(String.format("%s/params-xforms.xml", basePathDDI));
 
 		try {
-			File outputFile = File.createTempFile("eno-",".xml");
+			File outputFile = createTempEnoFile();
 			ByteArrayOutputStream output = parameterizedGenerationService.generateQuestionnaire(input, params, null, null, null);
 			try (FileOutputStream fos = new FileOutputStream(outputFile)) {
 				fos.write(output.toByteArray());
@@ -50,7 +52,7 @@ public class TestParameterizedGenerationServiceXFORMS {
 		File params = new File(String.format("%s/params-xforms.xml", basePathDDI));
 		File metadata = new File(String.format("%s/metadata.xml", basePathDDI));
 
-		File outputFile = File.createTempFile("eno-",".xml");
+		File outputFile = createTempEnoFile();
 		ByteArrayOutputStream output = parameterizedGenerationService.generateQuestionnaire(input, params, metadata, null, null);
 		try (FileOutputStream fos = new FileOutputStream(outputFile)) {
 			fos.write(output.toByteArray());
@@ -72,7 +74,7 @@ public class TestParameterizedGenerationServiceXFORMS {
 		File specificTreatment = new File(String.format("%s/xforms-specific-treatment.xsl", basePathDDI));
 
 		try {
-			File outputFile = File.createTempFile("eno-",".xml");
+			File outputFile = createTempEnoFile();
 			ByteArrayOutputStream output = parameterizedGenerationService.generateQuestionnaire(input, params, metadata, specificTreatment, null);
 			try (FileOutputStream fos = new FileOutputStream(outputFile)) {
 				fos.write(output.toByteArray());

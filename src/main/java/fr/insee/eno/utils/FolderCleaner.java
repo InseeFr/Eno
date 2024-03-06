@@ -23,33 +23,6 @@ public class FolderCleaner {
 	private final static Logger logger = LoggerFactory.getLogger(FolderCleaner.class);
 
 	/**
-	 * Method representing the Clean ant target : Cleaning the current
-	 * questionnaireFolder (with the created survey name) Cleaning the temp folder
-	 * Cleaning the test folder
-	 * 
-	 * @param questionnaireFolder : the folder that has to be either created or
-	 *                            cleaned (having the survey's name)
-	 * @throws Exception : FileNotfound / NoAccess mainly
-	 */
-	public void cleanTarget(String questionnaireFolder) throws Exception {
-
-		String tempFolder = Constants.ENO_TEMP_FOLDER_PATH + "/temp";
-		String testFolder = Constants.ENO_TEMP_FOLDER_PATH + "/test";
-
-		logger.debug("Cleaning directories : " + tempFolder + " | " + testFolder + " | " + questionnaireFolder);
-
-		FileUtils.forceMkdir(new File(tempFolder));
-		FileUtils.cleanDirectory(new File(tempFolder));
-
-		FileUtils.forceMkdir(new File(testFolder));
-		FileUtils.cleanDirectory(new File(testFolder));
-
-		FileUtils.forceMkdir(new File(questionnaireFolder));
-		FileUtils.cleanDirectory(new File(questionnaireFolder));
-
-	}
-
-	/**
 	 * Generic method to clean one folder
 	 * 
 	 * @param folder : the folder to be cleaned

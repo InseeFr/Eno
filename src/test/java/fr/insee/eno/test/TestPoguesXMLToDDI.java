@@ -15,6 +15,8 @@ import fr.insee.eno.preprocessing.PoguesXmlInsertFilterLoopIntoQuestionTree;
 import fr.insee.eno.preprocessing.Preprocessor;
 import fr.insee.eno.service.GenerationService;
 
+import static fr.insee.eno.Constants.createTempEnoFile;
+
 public class TestPoguesXMLToDDI {
 
 	
@@ -36,7 +38,7 @@ public class TestPoguesXMLToDDI {
 
 			File in = new File(String.format("%s/in.xml", basePath));
 			ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(in));
-			File outputFile = File.createTempFile("eno-",".xml");
+			File outputFile = createTempEnoFile();
 			ByteArrayOutputStream output = genService.generateQuestionnaire(inputStream, "xml-pogues-2-ddi-test");
 			try (FileOutputStream fos = new FileOutputStream(outputFile)) {
 				fos.write(output.toByteArray());

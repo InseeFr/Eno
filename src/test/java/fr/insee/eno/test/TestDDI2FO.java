@@ -17,6 +17,8 @@ import org.xmlunit.diff.Diff;
 
 import java.io.*;
 
+import static fr.insee.eno.Constants.createTempEnoFile;
+
 public class TestDDI2FO {
 		
 	private DDI2FOGenerator ddi2fo = new DDI2FOGenerator();
@@ -49,7 +51,7 @@ public class TestDDI2FO {
 			
 			GenerationService genService = new GenerationService(preprocessors, ddi2fo, postprocessors);
 			ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(in));
-			File outputFile = File.createTempFile("eno-",".xml");
+			File outputFile = createTempEnoFile();
 			ByteArrayOutputStream output = genService.generateQuestionnaire(inputStream, "simpsons");
 			try (FileOutputStream fos = new FileOutputStream(outputFile)) {
 				fos.write(output.toByteArray());

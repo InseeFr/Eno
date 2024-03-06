@@ -11,6 +11,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import static fr.insee.eno.Constants.createTempEnoFile;
+
 public class TestParameterizedGenerationServicePDF {
 
 	private ParameterizedGenerationService parameterizedGenerationService = new ParameterizedGenerationService();
@@ -25,7 +27,7 @@ public class TestParameterizedGenerationServicePDF {
 		File params = new File(String.format("%s/params-fo.xml", basePathDDI));
 		
 		try {
-			File outputFile = File.createTempFile("eno-",".xml");
+			File outputFile = createTempEnoFile();
 			ByteArrayOutputStream output = parameterizedGenerationService.generateQuestionnaire(input, params, null, null, null);
 			try (FileOutputStream fos = new FileOutputStream(outputFile)) {
 				fos.write(output.toByteArray());
@@ -51,7 +53,7 @@ public class TestParameterizedGenerationServicePDF {
 		File specificTreatment = new File(String.format("%s/fo-specific-treatment.xsl", basePathDDI));
 		
 		try {
-			File outputFile = File.createTempFile("eno-",".xml");
+			File outputFile = createTempEnoFile();
 			ByteArrayOutputStream output = parameterizedGenerationService.generateQuestionnaire(input, params, null, specificTreatment, null);
 			try (FileOutputStream fos = new FileOutputStream(outputFile)) {
 				fos.write(output.toByteArray());
@@ -77,7 +79,7 @@ public class TestParameterizedGenerationServicePDF {
 		File specificTreatment = new File(String.format("%s/fo-specific-treatment.xsl", basePathDDI));
 		
 		try {
-			File outputFile = File.createTempFile("eno-",".xml");
+			File outputFile = createTempEnoFile();
 			ByteArrayOutputStream output = parameterizedGenerationService.generateQuestionnaire(input, params, null, specificTreatment, null);
 			try (FileOutputStream fos = new FileOutputStream(outputFile)) {
 				fos.write(output.toByteArray());

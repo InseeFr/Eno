@@ -15,6 +15,8 @@ import org.xmlunit.diff.Diff;
 import fr.insee.eno.Constants;
 import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLVTLParserPostprocessor;
 
+import static fr.insee.eno.Constants.createTempEnoFile;
+
 public class TestLunaticXMLVTLParserPostProcessor {
 
 	private LunaticXMLVTLParserPostprocessor lunaticXMLVtlParserPostprocessor = new LunaticXMLVTLParserPostprocessor();
@@ -75,7 +77,7 @@ public class TestLunaticXMLVTLParserPostProcessor {
 			Path outputFilePath = Files.createFile(outPath);
 			File in = basePath.resolve("in.xml").toFile();
 			ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(in));
-			File outPostProcessing = File.createTempFile("eno-",".xml");
+			File outPostProcessing = createTempEnoFile();
 			ByteArrayOutputStream output = lunaticXMLVtlParserPostprocessor.process(inputStream, null, "test");
 			try (FileOutputStream fos = new FileOutputStream(outPostProcessing)) {
 				fos.write(output.toByteArray());

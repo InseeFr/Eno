@@ -16,6 +16,8 @@ import org.xmlunit.diff.Diff;
 
 import java.io.*;
 
+import static fr.insee.eno.Constants.createTempEnoFile;
+
 public class TestLunaticXMLPaginationPostProcessor {
 
 	private XMLDiff xmlDiff = new XMLDiff();
@@ -64,7 +66,7 @@ public class TestLunaticXMLPaginationPostProcessor {
 			genService.setParameters(parametersBAOS);
 			File in = new File(String.format("%s/in.xml", basePath));
 			ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(in));
-			File outputFile = File.createTempFile("eno-",".xml");
+			File outputFile = createTempEnoFile();
 			ByteArrayOutputStream output = genService.generateQuestionnaire(inputStream, "simpsons");
 			try (FileOutputStream fos = new FileOutputStream(outputFile)) {
 				fos.write(output.toByteArray());

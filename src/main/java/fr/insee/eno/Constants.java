@@ -8,7 +8,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -194,11 +193,11 @@ public final class Constants {
 	// ----- Folders
 	public static final String ENO_TEMP_FOLDER_PATH = System.getProperty("java.io.tmpdir") + "/eno";
 
-	public static File createTempFile() throws IOException {
+	public static File createTempEnoFile() throws IOException {
 		return Files.createTempFile(Paths.get(ENO_TEMP_FOLDER_PATH), "eno", ".xml").toFile();
 	}
 
-	public static File createTempFolder() throws IOException {
+	public static File createTempEnoFolder() throws IOException {
 		return Files.createTempDirectory(Paths.get(ENO_TEMP_FOLDER_PATH),"generation-folder-").toFile();
 	}
 
