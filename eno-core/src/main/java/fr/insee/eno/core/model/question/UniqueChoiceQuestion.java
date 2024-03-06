@@ -51,7 +51,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * A unique choice question can be displayed as radio buttons, checkboxes (discouraged since checkboxes should be
      * only used for multiple choice questions), or dropdown.
      */
-    public enum DisplayFormat {RADIO, CHECKBOX, DROPDOWN, SUGGESTER}
+    public enum DisplayFormat {RADIO, CHECKBOX, DROPDOWN}
 
     /**
      * Property used to convert to unique choice question to the right Lunatic component.
@@ -84,17 +84,21 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
         Optional<DisplayFormat> convertedDisplayFormat = ddiValueToDisplayFormat(ddiOutputFormat);
         if (convertedDisplayFormat.isEmpty())
             throw new MappingException(String.format(
-                    "Unknown output format '%s' found in DDI question item '%s'.",
+                    "Invalid output format '%s' found in DDI question item '%s'.",
                     ddiOutputFormat, questionItemType.getIDArray(0).getStringValue()));
         return convertedDisplayFormat.get();
     }
 
+    /**
+     * Converts the DDI output format to an Eno-model display format.
+     * @param ddiOutputFormat Output format value in DDI.
+     * @return Eno display format corresponding to given DDI output format given.
+     */
     public static Optional<DisplayFormat> ddiValueToDisplayFormat(String ddiOutputFormat) {
         return switch (ddiOutputFormat) {
             case DDI_UCQ_RADIO_OUTPUT_FORMAT -> Optional.of(DisplayFormat.RADIO);
             case DDI_UCQ_CHECKBOX_OUTPUT_FORMAT -> Optional.of(DisplayFormat.CHECKBOX);
             case DDI_UCQ_DROPDOWN_OUTPUT_FORMAT -> Optional.of(DisplayFormat.DROPDOWN);
-            case DDI_UCQ_SUGGESTER_OUTPUT_FORMAT -> Optional.of(DisplayFormat.SUGGESTER);
             default -> Optional.empty();
         };
     }
@@ -109,7 +113,6 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
             case RADIO -> ComponentTypeEnum.RADIO;
             case DROPDOWN -> ComponentTypeEnum.DROPDOWN;
             case CHECKBOX -> ComponentTypeEnum.CHECKBOX_ONE;
-            case SUGGESTER -> ComponentTypeEnum.SUGGESTER;
         };
     }
 

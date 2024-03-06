@@ -100,6 +100,9 @@ public class LunaticConverter {
         if (enoQuestion instanceof UniqueChoiceQuestion uniqueChoiceQuestion) {
             return ucqComponentConversion(enoQuestion, uniqueChoiceQuestion);
         }
+        if (enoQuestion instanceof SuggesterQuestion) {
+            return new Suggester();
+        }
         if (enoQuestion instanceof PairwiseQuestion)
             return new PairwiseLinks();
         //
@@ -122,7 +125,6 @@ public class LunaticConverter {
             case RADIO -> new Radio();
             case CHECKBOX -> new CheckboxOne();
             case DROPDOWN -> new Dropdown();
-            case SUGGESTER -> new Suggester();
         };
     }
 
