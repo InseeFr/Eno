@@ -23,7 +23,7 @@ class UniqueChoiceQuestionTest {
         LunaticMapper lunaticMapper = new LunaticMapper();
         lunaticMapper.mapEnoObject(enoQuestionnaire, lunaticQuestionnaire);
         //
-        assertEquals(ComponentTypeEnum.RADIO, lunaticQuestionnaire.getComponents().get(0).getComponentType());
+        assertEquals(ComponentTypeEnum.RADIO, lunaticQuestionnaire.getComponents().getFirst().getComponentType());
     }
 
     @Test
@@ -38,7 +38,7 @@ class UniqueChoiceQuestionTest {
         LunaticMapper lunaticMapper = new LunaticMapper();
         lunaticMapper.mapEnoObject(enoQuestionnaire, lunaticQuestionnaire);
         //
-        assertEquals(ComponentTypeEnum.CHECKBOX_ONE, lunaticQuestionnaire.getComponents().get(0).getComponentType());
+        assertEquals(ComponentTypeEnum.CHECKBOX_ONE, lunaticQuestionnaire.getComponents().getFirst().getComponentType());
     }
 
     @Test
@@ -53,7 +53,7 @@ class UniqueChoiceQuestionTest {
         LunaticMapper lunaticMapper = new LunaticMapper();
         lunaticMapper.mapEnoObject(enoQuestionnaire, lunaticQuestionnaire);
         //
-        assertEquals(ComponentTypeEnum.DROPDOWN, lunaticQuestionnaire.getComponents().get(0).getComponentType());
+        assertEquals(ComponentTypeEnum.DROPDOWN, lunaticQuestionnaire.getComponents().getFirst().getComponentType());
     }
 
 }
