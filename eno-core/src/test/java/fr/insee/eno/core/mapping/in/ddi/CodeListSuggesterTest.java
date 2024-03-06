@@ -11,13 +11,14 @@ import instance33.DDIInstanceDocument;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-/** Code lists configurations are stored in code list objects in DDI.
- * This class tests the mapping of these between DDI and the Eno model. */
+/**
+ * Code lists configurations are stored in code list objects in DDI.
+ * This class tests the mapping of these between DDI and the Eno model.
+ * Note: few tests on the suggester configuration object here, would be redundant with DDISuggesterDeserializerTest.
+ */
 class CodeListSuggesterTest {
 
     private static EnoQuestionnaire enoQuestionnaire;
@@ -38,22 +39,98 @@ class CodeListSuggesterTest {
 
     @Test
     void activityCodeList() {
-        Optional<CodeList> searchedCodeList = enoQuestionnaire.getCodeLists().stream()
-                .filter(codeList -> "L_ACTIVITES-1-0-0".equals(codeList.getName())).findAny();
-        assertTrue(searchedCodeList.isPresent());
-        CodeList codeList = searchedCodeList.get();
+        CodeList codeList = enoQuestionnaire.getCodeLists().stream()
+                .filter(codeList1 -> "L_ACTIVITES-1-0-0".equals(codeList1.getName()))
+                .findAny().orElse(null);
+        assertNotNull(codeList);
         assertEquals("activité", codeList.getLabel());
     }
 
     @Test
     void cityCodeList() {
-        Optional<CodeList> searchedCodeList = enoQuestionnaire.getCodeLists().stream()
-                .filter(codeList -> "L_COMMUNEPASSEE-1-2-0".equals(codeList.getName())).findAny();
-        assertTrue(searchedCodeList.isPresent());
-        CodeList codeList = searchedCodeList.get();
+        CodeList codeList = enoQuestionnaire.getCodeLists().stream()
+                .filter(codeList1 -> "L_COMMUNEPASSEE-1-2-0".equals(codeList1.getName()))
+                .findAny().orElse(null);
+        assertNotNull(codeList);
         assertEquals("commune passée", codeList.getLabel());
         SuggesterConfigurationDTO suggesterConfiguration = codeList.getSuggesterConfiguration();
-        assertEquals("label", suggesterConfiguration.getFields().getFirst().getName());
+        assertEquals(1, suggesterConfiguration.getFields().size());
+        assertNotNull(suggesterConfiguration.getQueryParser());
+    }
+
+    @Test
+    void departmentCodeList() {
+        CodeList codeList = enoQuestionnaire.getCodeLists().stream()
+                .filter(codeList1 -> "L_DEPNAIS-1-1-0".equals(codeList1.getName()))
+                .findAny().orElse(null);
+        assertNotNull(codeList);
+        assertEquals("département de naissance", codeList.getLabel());
+        SuggesterConfigurationDTO suggesterConfiguration = codeList.getSuggesterConfiguration();
+        assertEquals(2, suggesterConfiguration.getFields().size());
+        assertNotNull(suggesterConfiguration.getOrder());
+        assertNotNull(suggesterConfiguration.getQueryParser());
+    }
+
+    @Test
+    void countryCodeList() {
+        CodeList codeList = enoQuestionnaire.getCodeLists().stream()
+                .filter(codeList1 -> "L_PAYS-1-2-0".equals(codeList1.getName()))
+                .findAny().orElse(null);
+        assertNotNull(codeList);
+        assertEquals("pays", codeList.getLabel());
+        SuggesterConfigurationDTO suggesterConfiguration = codeList.getSuggesterConfiguration();
+        assertEquals(1, suggesterConfiguration.getFields().size());
+        assertNotNull(suggesterConfiguration.getQueryParser());
+    }
+
+    @Test
+    void nationalityCodeList() {
+        CodeList codeList = enoQuestionnaire.getCodeLists().stream()
+                .filter(codeList1 -> "L_NATIONALITE-1-2-0".equals(codeList1.getName()))
+                .findAny().orElse(null);
+        assertNotNull(codeList);
+        assertEquals("nationalité", codeList.getLabel());
+        SuggesterConfigurationDTO suggesterConfiguration = codeList.getSuggesterConfiguration();
+        assertEquals(1, suggesterConfiguration.getFields().size());
+        assertNotNull(suggesterConfiguration.getQueryParser());
+    }
+
+    @Test
+    void professionMasculineFormCodeList() {
+        CodeList codeList = enoQuestionnaire.getCodeLists().stream()
+                .filter(codeList1 -> "L_PCS_HOMMES-1-5-0".equals(codeList1.getName()))
+                .findAny().orElse(null);
+        assertNotNull(codeList);
+        assertEquals("PCS hommes", codeList.getLabel());
+        SuggesterConfigurationDTO suggesterConfiguration = codeList.getSuggesterConfiguration();
+        assertEquals(1, suggesterConfiguration.getFields().size());
+        assertEquals(23, suggesterConfiguration.getStopWords().size());
+        assertNotNull(suggesterConfiguration.getQueryParser());
+    }
+
+    @Test
+    void professionFeminineFormCodeList() {
+        CodeList codeList = enoQuestionnaire.getCodeLists().stream()
+                .filter(codeList1 -> "L_PCS_FEMMES-1-5-0".equals(codeList1.getName()))
+                .findAny().orElse(null);
+        assertNotNull(codeList);
+        assertEquals("PCS femmes", codeList.getLabel());
+        SuggesterConfigurationDTO suggesterConfiguration = codeList.getSuggesterConfiguration();
+        assertEquals(1, suggesterConfiguration.getFields().size());
+        assertEquals(23, suggesterConfiguration.getStopWords().size());
+        assertNotNull(suggesterConfiguration.getQueryParser());
+    }
+
+    @Test
+    void diplomaCodeList() {
+        CodeList codeList = enoQuestionnaire.getCodeLists().stream()
+                .filter(codeList1 -> "L_DIPLOMES-1-0-0".equals(codeList1.getName()))
+                .findAny().orElse(null);
+        assertNotNull(codeList);
+        assertEquals("diplomes", codeList.getLabel());
+        SuggesterConfigurationDTO suggesterConfiguration = codeList.getSuggesterConfiguration();
+        assertEquals(2, suggesterConfiguration.getFields().size());
+        assertNotNull(suggesterConfiguration.getQueryParser());
     }
 
 }
