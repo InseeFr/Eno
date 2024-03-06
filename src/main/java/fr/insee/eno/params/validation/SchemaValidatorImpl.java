@@ -1,6 +1,9 @@
 package fr.insee.eno.params.validation;
 
-import java.io.InputStream;
+import fr.insee.eno.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.xml.sax.SAXException;
 
 import javax.xml.XMLConstants;
 import javax.xml.transform.Source;
@@ -12,12 +15,7 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.xml.sax.SAXException;
-
-import fr.insee.eno.Constants;
+import java.io.InputStream;
 
 public class SchemaValidatorImpl implements SchemaValidator {
 	

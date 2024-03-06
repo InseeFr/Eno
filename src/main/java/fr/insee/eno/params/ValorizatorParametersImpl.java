@@ -1,33 +1,19 @@
 package fr.insee.eno.params;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Field;
-
-import java.util.Arrays;
-import java.util.List;
+import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
+import fr.insee.eno.exception.Utils;
+import fr.insee.eno.parameters.ENOParameters;
+import fr.insee.eno.transform.xsl.XslTransformation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-
-import fr.insee.eno.exception.Utils;
-import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import fr.insee.eno.Constants;
-import fr.insee.eno.exception.EnoGenerationException;
-import fr.insee.eno.parameters.ENOParameters;
-import fr.insee.eno.transform.xsl.XslTransformation;
+import java.io.*;
 
 
 public class ValorizatorParametersImpl implements ValorizatorParameters {
@@ -70,24 +56,19 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 	}
 
 	/**
-	 * Only use in test
-	 * @param enoParameters xml file
+	 *
+	 * @param enoParametersIS (InputStream)
 	 * @return
-	 * @throws JAXBException
 	 * @throws IllegalArgumentException
-	 * @throws IllegalAccessException
 	 * @throws IOException
 	 */
 	@Override
-	public File mergeParameters(File enoParameters) throws JAXBException, IllegalArgumentException, IllegalAccessException, IOException   {
-		File finalParam = Constants.TEMP_FILE_PARAMS("new-params.xml");
-		
+	public ByteArrayOutputStream mergeParameters(InputStream enoParametersIS) throws IllegalArgumentException, IOException   {
 		InputStream PARAM_XSL = Constants.getInputStreamFromPath(styleSheetPath);
-		InputStream inputStream = FileUtils.openInputStream(enoParameters);
-		OutputStream outputStream = FileUtils.openOutputStream(finalParam);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		
-		try {
-			saxonService.mergeEnoParameters(inputStream, outputStream, PARAM_XSL);
+		try(enoParametersIS; PARAM_XSL) {
+			saxonService.mergeEnoParameters(enoParametersIS, outputStream, PARAM_XSL);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the valorisation of parameters. %s : %s",
 					e.getMessage(),
@@ -95,12 +76,7 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 			LOGGER.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
-		
-		inputStream.close();
-		outputStream.close();
-		PARAM_XSL.close();
-		
-		return finalParam;
+		return outputStream;
 	}
 
 	@Override
@@ -111,9 +87,6 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		outputStream.close();
 		return finalEnoParam;
 	}
-
-	
-
 
 	/**
 	 * 
@@ -135,8 +108,6 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 			return null;
 
 		LOGGER.debug("Preparing to translate from XML to java");
-		
-		
 
 		JAXBContext context = JAXBContext.newInstance(ENOParameters.class);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -174,14 +145,5 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		public void afterUnmarshal(Object target, Object parent) {
 			LOGGER.debug("After unmarshalling object " + target);
 		}
-	}
-
-	public List<Field> getAllFields(List<Field> fields, Class<?> type) {
-		fields.addAll(Arrays.asList(type.getDeclaredFields()));
-		if (type.getSuperclass() != null) {
-			getAllFields(fields, type.getSuperclass());
-		}
-
-		return fields;
 	}
 }

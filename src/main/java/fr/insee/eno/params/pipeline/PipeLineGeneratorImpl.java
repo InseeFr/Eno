@@ -1,55 +1,20 @@
 package fr.insee.eno.params.pipeline;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import fr.insee.eno.generation.*;
+import fr.insee.eno.parameters.*;
+import fr.insee.eno.postprocessing.NoopPostprocessor;
+import fr.insee.eno.postprocessing.Postprocessor;
+import fr.insee.eno.postprocessing.fo.*;
 import fr.insee.eno.postprocessing.lunaticxml.*;
+import fr.insee.eno.postprocessing.xforms.*;
+import fr.insee.eno.preprocessing.*;
+import fr.insee.eno.service.GenerationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.insee.eno.generation.DDI2FODTGenerator;
-import fr.insee.eno.generation.DDI2FOGenerator;
-import fr.insee.eno.generation.DDI2LunaticXMLGenerator;
-import fr.insee.eno.generation.DDI2XFORMSGenerator;
-import fr.insee.eno.generation.Generator;
-import fr.insee.eno.generation.IdentityGenerator;
-import fr.insee.eno.generation.PoguesXML2DDIGenerator;
-import fr.insee.eno.parameters.InFormat;
-import fr.insee.eno.parameters.OutFormat;
-import fr.insee.eno.parameters.Pipeline;
-import fr.insee.eno.parameters.PostProcessing;
-import fr.insee.eno.parameters.PreProcessing;
-import fr.insee.eno.postprocessing.NoopPostprocessor;
-import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.postprocessing.fo.FOEditStructurePagesPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOInsertAccompanyingMailsPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOInsertCoverPagePostprocessor;
-import fr.insee.eno.postprocessing.fo.FOInsertEndQuestionPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOMailingPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOSpecificTreatmentPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOTableColumnPostprocessorFake;
-import fr.insee.eno.postprocessing.xforms.XFORMSBrowsingPostprocessor;
-import fr.insee.eno.postprocessing.xforms.XFORMSFixAdherencePostprocessor;
-import fr.insee.eno.postprocessing.xforms.XFORMSIdentificationPostprocessor;
-import fr.insee.eno.postprocessing.xforms.XFORMSInseeModelPostprocessor;
-import fr.insee.eno.postprocessing.xforms.XFORMSInseePatternPostprocessor;
-import fr.insee.eno.postprocessing.xforms.XFORMSInsertEndPostprocessor;
-import fr.insee.eno.postprocessing.xforms.XFORMSInsertGenericQuestionsPostprocessor;
-import fr.insee.eno.postprocessing.xforms.XFORMSInsertWelcomePostprocessor;
-import fr.insee.eno.postprocessing.xforms.XFORMSSpecificTreatmentPostprocessor;
-import fr.insee.eno.preprocessing.DDI32ToDDI33Preprocessor;
-import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
-import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
-import fr.insee.eno.preprocessing.DDIMappingPreprocessor;
-import fr.insee.eno.preprocessing.DDIMarkdown2XhtmlPreprocessor;
-import fr.insee.eno.preprocessing.DDIMultimodalSelectionPreprocessor;
-import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
-import fr.insee.eno.preprocessing.NoopPreprocessor;
-import fr.insee.eno.preprocessing.PoguesXmlInsertFilterLoopIntoQuestionTree;
-import fr.insee.eno.preprocessing.PoguesXMLPreprocessorGoToTreatment;
-import fr.insee.eno.preprocessing.Preprocessor;
-import fr.insee.eno.service.GenerationService;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class PipeLineGeneratorImpl implements PipelineGenerator {
 	

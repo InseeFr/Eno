@@ -1,10 +1,6 @@
 package fr.insee.eno.params.validation;
 
-import fr.insee.eno.parameters.ENOParameters;
-import fr.insee.eno.parameters.InFormat;
-import fr.insee.eno.parameters.Mode;
-import fr.insee.eno.parameters.OutFormat;
-import fr.insee.eno.parameters.Pipeline;
+import fr.insee.eno.parameters.*;
 
 public interface Validator {
 	

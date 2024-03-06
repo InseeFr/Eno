@@ -1,10 +1,9 @@
 package fr.insee.eno.params;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.InputStream;
-
 import fr.insee.eno.parameters.ENOParameters;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 public interface ValorizatorParameters {
 
@@ -38,6 +37,6 @@ public interface ValorizatorParameters {
 	 * @return File (xml) which is the result of the merging of default xml parameter file and the param
 	 * @throws Exception
 	 */
-	File mergeParameters(File enoParameters) throws Exception;
+	ByteArrayOutputStream mergeParameters(InputStream enoParametersIS) throws Exception;
 	
 }
