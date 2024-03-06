@@ -2,8 +2,6 @@ package fr.insee.eno.service;
 
 import fr.insee.eno.parameters.ENOParameters;
 
-import java.nio.file.Path;
-
 public class NamingFileService {
 	
 	//Insee patterns integration TODO : parameterize file name

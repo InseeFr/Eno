@@ -8,7 +8,6 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
@@ -25,7 +24,7 @@ public class DDIMappingPreprocessor implements Preprocessor {
 
 	/**
 	 * Warning the output is not a kind of ddi but juste a mappging file (used later in post proccessing)
-	 * @param byteArrayInputStream
+	 * @param inputStream
 	 *            The file to preprocess
 	 * @param parameters
 	 *            An optional parameters file
@@ -36,15 +35,15 @@ public class DDIMappingPreprocessor implements Preprocessor {
 	 * @throws Exception
 	 */
 	@Override
-	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parameters, String survey, String in2out) throws Exception {
+	public ByteArrayOutputStream process(InputStream inputStream, byte[] parameters, String survey, String in2out) throws Exception {
 		logger.info(String.format("%s Target : START",toString().toLowerCase()));
 
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
 		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
-			 byteArrayInputStream;){
+			 inputStream;){
 
-			saxonService.transformMapping(byteArrayInputStream, xslIS, byteArrayOutputStream, parameters);
+			saxonService.transformMapping(inputStream, xslIS, byteArrayOutputStream, parameters);
 
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",

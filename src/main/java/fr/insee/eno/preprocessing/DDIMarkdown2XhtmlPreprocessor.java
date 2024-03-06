@@ -25,11 +25,11 @@ public class DDIMarkdown2XhtmlPreprocessor implements Preprocessor {
 
 
 	@Override
-	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parameters, String survey, String in2out) throws Exception {
+	public ByteArrayOutputStream process(InputStream inputStream, byte[] parameters, String survey, String in2out) throws Exception {
 		logger.info(String.format("%s Target : START",toString().toLowerCase()));
 
 		ByteArrayOutputStream byteArrayOutputStreamTemp = subProcess(
-				byteArrayInputStream,
+				inputStream,
 				styleSheetPath_1);
 		ByteArrayOutputStream byteArrayOutputStream = subProcess(
 				new ByteArrayInputStream(byteArrayOutputStreamTemp.toByteArray()),
@@ -40,15 +40,15 @@ public class DDIMarkdown2XhtmlPreprocessor implements Preprocessor {
 		return byteArrayOutputStream;
 	}
 
-	public ByteArrayOutputStream subProcess(ByteArrayInputStream byteArrayInputStream, String styleSheetPath) throws Exception {
+	public ByteArrayOutputStream subProcess(InputStream inputStream, String styleSheetPath) throws Exception {
 		logger.info(String.format("%s Target : step1 START",toString().toLowerCase()));
 
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
 		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
-			 byteArrayInputStream){
+			 inputStream){
 
-			saxonService.transform(byteArrayInputStream, xslIS, byteArrayOutputStream);
+			saxonService.transform(inputStream, xslIS, byteArrayOutputStream);
 
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",

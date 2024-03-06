@@ -9,7 +9,6 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
@@ -22,18 +21,18 @@ public class XFORMSInsertEndPostprocessor implements Postprocessor {
 	private static final String styleSheetPath = Constants.UTIL_XFORMS_INSERT_END_XSL;
 
 	@Override
-	public ByteArrayOutputStream process(ByteArrayInputStream input, byte[] parameters, String survey) throws Exception {
+	public ByteArrayOutputStream process(InputStream input, byte[] parameters, String survey) throws Exception {
 		return this.process(input, parameters, null, survey);
 	}
 
 	@Override
-	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parameters, byte[] metadata, String survey) throws Exception {
+	public ByteArrayOutputStream process(InputStream inputStream, byte[] parameters, byte[] metadata, String survey) throws Exception {
 
 		InputStream FO_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		try(byteArrayInputStream; FO_XSL) {
-			saxonService.transformWithMetadata(byteArrayInputStream, outputStream, FO_XSL, parameters, metadata);
+		try(inputStream; FO_XSL) {
+			saxonService.transformWithMetadata(inputStream, outputStream, FO_XSL, parameters, metadata);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),

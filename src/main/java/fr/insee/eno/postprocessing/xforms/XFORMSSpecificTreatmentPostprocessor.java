@@ -19,17 +19,17 @@ public class XFORMSSpecificTreatmentPostprocessor implements Postprocessor {
 	private XslTransformation saxonService = new XslTransformation();
 
 	@Override
-	public ByteArrayOutputStream process(ByteArrayInputStream input, byte[] parameters, String survey) throws Exception {
+	public ByteArrayOutputStream process(InputStream input, byte[] parameters, String survey) throws Exception {
 		return this.process(input, parameters, null, null, survey);
 	}
 
 	@Override
-	public ByteArrayOutputStream process(ByteArrayInputStream input, byte[] parametersFile, byte[] metadata, String survey) throws Exception {
+	public ByteArrayOutputStream process(InputStream input, byte[] parametersFile, byte[] metadata, String survey) throws Exception {
 		return this.process(input, parametersFile, metadata, null, survey);
 	}
 
 	@Override
-	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parametersFile, byte[] metadata, byte[] specificTreatmentXsl, String survey) throws Exception {
+	public ByteArrayOutputStream process(InputStream inputStream, byte[] parametersFile, byte[] metadata, byte[] specificTreatmentXsl, String survey) throws Exception {
 		logger.info(String.format("%s Target : START",toString().toLowerCase()));
 
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -39,8 +39,8 @@ public class XFORMSSpecificTreatmentPostprocessor implements Postprocessor {
 		if(specificTreatmentXsl!=null) {
 			specificTreatmentXslIS = new ByteArrayInputStream(specificTreatmentXsl);
 
-			try (byteArrayInputStream){
-				saxonService.transformWithFRSpecificTreatment(byteArrayInputStream, byteArrayOutputStream, specificTreatmentXslIS, parametersFile);
+			try (inputStream){
+				saxonService.transformWithFRSpecificTreatment(inputStream, byteArrayOutputStream, specificTreatmentXslIS, parametersFile);
 
 			} catch(Exception e) {
 				String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
@@ -53,8 +53,8 @@ public class XFORMSSpecificTreatmentPostprocessor implements Postprocessor {
 		}
 		else {
 			logger.info("Not specific treatment in params : simply return input");
-			byteArrayOutputStream.write(byteArrayInputStream.readAllBytes());
-			byteArrayInputStream.close();
+			byteArrayOutputStream.write(inputStream.readAllBytes());
+			inputStream.close();
 		}
 		logger.info("End of specific treatment post-processing ");
 		return byteArrayOutputStream;

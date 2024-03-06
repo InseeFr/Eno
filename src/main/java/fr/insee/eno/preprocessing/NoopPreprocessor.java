@@ -3,8 +3,8 @@ package fr.insee.eno.preprocessing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 /**
  * No-op preprocessor.
@@ -21,10 +21,10 @@ public class NoopPreprocessor implements Preprocessor {
 //	}
 
 	@Override
-	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parameters, String survey, String in2out) throws Exception {
+	public ByteArrayOutputStream process(InputStream inputStream, byte[] parameters, String survey, String in2out) throws Exception {
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-		byteArrayOutputStream.write(byteArrayInputStream.readAllBytes());
-		byteArrayInputStream.close();
+		byteArrayOutputStream.write(inputStream.readAllBytes());
+		inputStream.close();
 		return byteArrayOutputStream;
 	}
 

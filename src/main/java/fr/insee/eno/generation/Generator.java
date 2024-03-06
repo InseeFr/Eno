@@ -1,7 +1,7 @@
 package fr.insee.eno.generation;
 
-import java.io.*;
-import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 /**
  * This interface describes the API of a generator which main function is to
@@ -21,7 +21,7 @@ public interface Generator {
 	 * @return the generated file
 	 * @throws Exception Generic exception
 	 */
-	public ByteArrayOutputStream generate(ByteArrayInputStream input, byte[] parameters, String surveyName) throws Exception;
+	public ByteArrayOutputStream generate(InputStream input, byte[] parameters, String surveyName) throws Exception;
 
 	/**
 	 * This method return in2out implementation

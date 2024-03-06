@@ -63,14 +63,14 @@ public class GenerationService {
 	 * @throws Exception
 	 *             bim
 	 */
-	public ByteArrayOutputStream generateQuestionnaire(ByteArrayInputStream input, String surveyName) throws Exception {
+	public ByteArrayOutputStream generateQuestionnaire(InputStream input, String surveyName) throws Exception {
 		logger.info(this.toString());
 		logger.info("Generating questionnaire for: " + surveyName);
 
 		// Pre-processing
 		ByteArrayOutputStream outputStream = null;
 		for (int i = 0; i < preprocessors.length; i++) {
-			ByteArrayInputStream inputProcessor = i == 0 ? input : new ByteArrayInputStream(outputStream.toByteArray());
+			InputStream inputProcessor = i == 0 ? input : new ByteArrayInputStream(outputStream.toByteArray());
 			if(this.preprocessors[i].getClass() == DDIMappingPreprocessor.class){
 				ByteArrayOutputStream mappingOS = this.preprocessors[i].process(inputProcessor, parameters, surveyName, generator.in2out());
 				setMapping(new ByteArrayInputStream(mappingOS.toByteArray()));

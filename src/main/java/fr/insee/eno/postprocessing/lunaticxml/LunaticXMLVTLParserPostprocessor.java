@@ -6,9 +6,9 @@ import fr.insee.eno.postprocessing.Postprocessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 	private static final Logger logger = LoggerFactory.getLogger(LunaticXMLVTLParserPostprocessor.class);
 
 	@Override
-	public ByteArrayOutputStream process(ByteArrayInputStream input, byte[] parameters, String surveyName) throws EnoGenerationException, IOException {
+	public ByteArrayOutputStream process(InputStream input, byte[] parameters, String surveyName) throws EnoGenerationException, IOException {
 
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		String inputString = new String(input.readAllBytes(), StandardCharsets.UTF_8);

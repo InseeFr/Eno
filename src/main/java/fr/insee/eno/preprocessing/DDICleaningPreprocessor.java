@@ -5,11 +5,11 @@ import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.exception.Utils;
 import fr.insee.eno.parameters.PreProcessing;
 import fr.insee.eno.transform.xsl.XslTransformation;
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 /**
  * A DDI specific preprocessor.
@@ -23,25 +23,13 @@ public class DDICleaningPreprocessor implements Preprocessor {
 	private static final String styleSheetPath = Constants.UTIL_DDI_CLEANING_XSL;
 
 	@Override
-	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parameters, String survey, String in2out) throws Exception {
+	public ByteArrayOutputStream process(InputStream inputStream, byte[] parameters, String survey, String in2out) throws Exception {
 		logger.info(String.format("%s Target : START",toString().toLowerCase()));
-
-
-		byte[] bytesOfInput = byteArrayInputStream.readAllBytes();
-		logger.info("Length");
-		logger.info(String.valueOf(bytesOfInput.length));
 
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-		File file = File.createTempFile("AAA-eno-",".xml");
-		try (FileOutputStream fos = new FileOutputStream(file)) {
-			fos.write(bytesOfInput);
-		}
-
-		ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(file));
-
 		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
-			 byteArrayInputStream;){
+			 inputStream){
 			saxonService.transformCleaning(inputStream, xslIS, byteArrayOutputStream, in2out);
 
 		}catch(Exception e) {

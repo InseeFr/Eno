@@ -10,7 +10,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
@@ -28,7 +27,7 @@ public class DDISplittingPreprocessor  {
 
 	private static final String styleSheetPath = Constants.UTIL_DDI_SPLITTING_XSL;
 
-	public Map<String, ByteArrayOutputStream> splitDDI(ByteArrayInputStream inputFile) throws Exception {
+	public Map<String, ByteArrayOutputStream> splitDDI(InputStream inputFile) throws Exception {
 		LOGGER.info("DDI splitting preprocessing Target : START");
 
 		// UTIL_DDI_SPLITTING_XSL produced n files inside "output-folder" and there is no output...

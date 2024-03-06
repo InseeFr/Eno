@@ -23,12 +23,12 @@ public class XFORMSInseeModelPostprocessor implements Postprocessor {
 
 
 	@Override
-	public ByteArrayOutputStream process(ByteArrayInputStream input, byte[] parameters, String survey) throws Exception {
+	public ByteArrayOutputStream process(InputStream input, byte[] parameters, String survey) throws Exception {
 		return this.process(input, parameters, null, null, null, survey);
 	}
 
 	@Override
-	public ByteArrayOutputStream process(ByteArrayInputStream input, byte[] parametersFile, byte[] metadata, byte[] specificTreatmentXsl, byte[] mapping, String survey) throws Exception {
+	public ByteArrayOutputStream process(InputStream input, byte[] parametersFile, byte[] metadata, byte[] specificTreatmentXsl, byte[] mapping, String survey) throws Exception {
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
 		InputStream FO_XSL = Constants.getInputStreamFromPath(styleSheetPath);

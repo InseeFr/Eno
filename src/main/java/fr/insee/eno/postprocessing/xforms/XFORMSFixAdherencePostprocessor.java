@@ -9,7 +9,6 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
@@ -22,15 +21,15 @@ public class XFORMSFixAdherencePostprocessor implements Postprocessor {
 	private static final String styleSheetPath = Constants.UTIL_XFORMS_FIX_ADHERENCE_XSL;
 
 	@Override
-	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parameters, String surveyName) throws Exception {
+	public ByteArrayOutputStream process(InputStream inputStream, byte[] parameters, String surveyName) throws Exception {
 		logger.info(String.format("%s Target : START",toString().toLowerCase()));
 
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
 		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
-			 byteArrayInputStream;){
+			 inputStream;){
 
-			saxonService.transformSimple(byteArrayInputStream, byteArrayOutputStream, xslIS);
+			saxonService.transformSimple(inputStream, byteArrayOutputStream, xslIS);
 
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",

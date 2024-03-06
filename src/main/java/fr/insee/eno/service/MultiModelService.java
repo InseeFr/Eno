@@ -33,7 +33,7 @@ public class MultiModelService {
 	 * @return the Zip file which contains all generated files
 	 * @throws Exception
 	 */
-	public ByteArrayOutputStream generateQuestionnaire(ByteArrayInputStream inputFile, ENOParameters params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception{
+	public ByteArrayOutputStream generateQuestionnaire(InputStream inputFile, ENOParameters params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception{
 		LOGGER.info("MultiModel Generation of questionnaire -- STARTED --");
 
 		byte[] metadataBytes = metadata!=null ? IOUtils.toByteArray(metadata):null;
@@ -49,12 +49,12 @@ public class MultiModelService {
 
 		try {
 
-			Map<String, ByteArrayInputStream> ddiFilesStream = new HashMap<>();
+			Map<String, InputStream> ddiFilesStream = new HashMap<>();
 			ddiFilesOutputStream.forEach((key, outputStream) -> ddiFilesStream.put(key, new ByteArrayInputStream(outputStream.toByteArray())));
 
-			for (Map.Entry<String, ByteArrayInputStream> entry : ddiFilesStream.entrySet()) {
+			for (Map.Entry<String, InputStream> entry : ddiFilesStream.entrySet()) {
 				String modelName = entry.getKey();
-				ByteArrayInputStream stream = entry.getValue();
+				InputStream stream = entry.getValue();
 				ByteArrayOutputStream outputStream = null;
 				ParameterizedGenerationService parameterizedGenerationServiceThread = new ParameterizedGenerationService(modelName);
 				outputStream = parameterizedGenerationServiceThread.generateQuestionnaire(
@@ -90,7 +90,7 @@ public class MultiModelService {
 	 * @return the Zip file which contains all generated files
 	 * @throws Exception
 	 */
-	public ByteArrayOutputStream generateQuestionnaire(ByteArrayInputStream inputFile, InputStream params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception {
+	public ByteArrayOutputStream generateQuestionnaire(InputStream inputFile, InputStream params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception {
 		LOGGER.info("MultiModel Generation of questionnaire -- STARTED --");
 		ValorizatorParameters valorizatorParameters = new ValorizatorParametersImpl();
 		ENOParameters enoParameters = valorizatorParameters.getParameters(params);

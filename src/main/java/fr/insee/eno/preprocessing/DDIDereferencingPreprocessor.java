@@ -10,7 +10,6 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
@@ -26,7 +25,7 @@ public class DDIDereferencingPreprocessor implements Preprocessor {
 	private static final String styleSheetPath = Constants.UTIL_DDI_DEREFERENCING_XSL;
 
 	@Override
-	public ByteArrayOutputStream process(ByteArrayInputStream inputFile, byte[] parametersFile, String survey, String in2out) throws Exception {
+	public ByteArrayOutputStream process(InputStream inputFile, byte[] parametersFile, String survey, String in2out) throws Exception {
 		logger.info("DDIPreprocessing Target : START");
 
 		// UTIL_DDI_DEREFERENCING_XSL produced n files inside "output-folder" and there is no output...

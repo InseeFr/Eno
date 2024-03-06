@@ -8,7 +8,6 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
@@ -24,15 +23,15 @@ public class DDITitlingPreprocessor implements Preprocessor {
 	private static final String styleSheetPath = Constants.UTIL_DDI_TITLING_XSL;
 
 	@Override
-	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parameters, String survey, String in2out) throws Exception {
+	public ByteArrayOutputStream process(InputStream inputStream, byte[] parameters, String survey, String in2out) throws Exception {
 		logger.info(String.format("%s Target : START",toString().toLowerCase()));
 
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
 		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
-			 byteArrayInputStream;){
+			 inputStream;){
 
-			saxonService.transformTitling(byteArrayInputStream, xslIS, byteArrayOutputStream, parameters);
+			saxonService.transformTitling(inputStream, xslIS, byteArrayOutputStream, parameters);
 
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",

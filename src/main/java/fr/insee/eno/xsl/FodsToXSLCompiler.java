@@ -1,17 +1,16 @@
 package fr.insee.eno.xsl;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
+import fr.insee.eno.Constants;
+import fr.insee.eno.transform.xsl.XslTransformation;
+import fr.insee.eno.utils.FolderCleaner;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.insee.eno.Constants;
-import fr.insee.eno.transform.xsl.XslTransformation;
-import fr.insee.eno.utils.FolderCleaner;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import static fr.insee.eno.Constants.ENO_TEMP_FOLDER_PATH;
 

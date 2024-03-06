@@ -5,8 +5,8 @@ import fr.insee.eno.postprocessing.Postprocessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 /**
  * PDF postprocessor.
@@ -16,10 +16,10 @@ public class FOTableColumnPostprocessorFake implements Postprocessor {
 	private static final Logger logger = LoggerFactory.getLogger(FOTableColumnPostprocessorFake.class);
 
 	@Override
-	public ByteArrayOutputStream process(ByteArrayInputStream byteArrayInputStream, byte[] parameters, String survey) throws Exception {
+	public ByteArrayOutputStream process(InputStream inputStream, byte[] parameters, String survey) throws Exception {
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-		byteArrayOutputStream.write(byteArrayInputStream.readAllBytes());
-		byteArrayInputStream.close();
+		byteArrayOutputStream.write(inputStream.readAllBytes());
+		inputStream.close();
 		logger.debug("End of TableColumn post-processing (Fake)");
 		return byteArrayOutputStream;
 

@@ -58,7 +58,7 @@ public class ParameterizedGenerationService {
 	 * @return the file resulting from the xslt transformations
 	 * @throws Exception
 	 */
-	public ByteArrayOutputStream generateQuestionnaire(ByteArrayInputStream inputStream, ENOParameters params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception{
+	public ByteArrayOutputStream generateQuestionnaire(InputStream inputStream, ENOParameters params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception{
 		ByteArrayOutputStream output=null;
 		Pipeline pipeline = params.getPipeline();
 
@@ -97,7 +97,7 @@ public class ParameterizedGenerationService {
 	 * @return the file resulting from the xslt transformations
 	 * @throws Exception
 	 */
-	public ByteArrayOutputStream generateQuestionnaire(ByteArrayInputStream inputStream, InputStream params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception {
+	public ByteArrayOutputStream generateQuestionnaire(InputStream inputStream, InputStream params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception {
 		LOGGER.info("Parameterized Generation of questionnaire -- STARTED --");
 		ByteArrayOutputStream output=null;
 
