@@ -26,7 +26,7 @@ public class TestMultiModelGenerationService {
 		File params = new File(String.format("%s/params-xforms.xml", basePathDDI));
 
 		Assertions.assertAll(()->{
-			File outputFile = createTempEnoFile();
+			File outputFile = createTempEnoFile(".zip");
 			ByteArrayOutputStream output = multiModelService.generateQuestionnaire(
 					new ByteArrayInputStream(FileUtils.readFileToByteArray(input)),
 					new ByteArrayInputStream(FileUtils.readFileToByteArray(params)), null, null, null);

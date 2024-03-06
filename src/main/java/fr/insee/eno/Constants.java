@@ -193,8 +193,9 @@ public final class Constants {
 	// ----- Folders
 	public static final String ENO_TEMP_FOLDER_PATH = System.getProperty("java.io.tmpdir") + "/eno";
 
-	public static File createTempEnoFile() throws IOException {
-		return Files.createTempFile(Paths.get(ENO_TEMP_FOLDER_PATH), "eno", ".xml").toFile();
+	public static File createTempEnoFile(String... extension) throws IOException {
+		String fileExtension = extension != null && extension.length > 0 ? extension[0] : ".xml";
+		return Files.createTempFile(Paths.get(ENO_TEMP_FOLDER_PATH), "eno-", fileExtension).toFile();
 	}
 
 	public static File createTempEnoFolder() throws IOException {
