@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.xmlunit.diff.Diff;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,7 +30,10 @@ public class TestParameterizedGenerationServiceLunaticXML {
 		
 		try {
 			File outputFile = createTempEnoFile();
-			ByteArrayOutputStream output = parameterizedGenerationService.generateQuestionnaire(input, params, null, null, null);
+			ByteArrayOutputStream output = parameterizedGenerationService.generateQuestionnaire(
+					new ByteArrayInputStream(FileUtils.readFileToByteArray(input)),
+					new ByteArrayInputStream(FileUtils.readFileToByteArray(params)),
+					null, null, null);
 			try (FileOutputStream fos = new FileOutputStream(outputFile)) {
 				fos.write(output.toByteArray());
 			}

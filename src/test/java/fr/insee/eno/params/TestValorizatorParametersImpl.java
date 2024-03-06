@@ -5,6 +5,7 @@ import fr.insee.eno.parameters.*;
 import fr.insee.eno.parameters.Parameters.Languages;
 import fr.insee.eno.parameters.Table.Row;
 import fr.insee.eno.test.XMLDiff;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,12 +13,16 @@ import org.xmlunit.diff.Diff;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
+import java.io.FileOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+
+import static fr.insee.eno.Constants.createTempEnoFile;
 
 public class TestValorizatorParametersImpl {
 
@@ -203,12 +208,18 @@ public class TestValorizatorParametersImpl {
 	public void testValorizationXmlParameters() {
 		try {
 			String basePath = "src/test/resources/params/valorization";			
-			File in = new File(String.format("%s/parameters-input.xml", basePath));								
-			File outputFile = valorizatorParametersImpl.mergeParameters(in);
+			File in = new File(String.format("%s/parameters-input.xml", basePath));
+			File outputFile = createTempEnoFile();
+			ByteArrayOutputStream output = valorizatorParametersImpl.mergeParameters(
+					new ByteArrayInputStream(FileUtils.readFileToByteArray(in)));
+			try (FileOutputStream fos = new FileOutputStream(outputFile)) {
+				fos.write(output.toByteArray());
+			}
+			output.close();
 			File expectedFile = new File(String.format("%s/parameters-expected.xml", basePath));			
 			Diff diff = xmlDiff.getDiff(outputFile,expectedFile);
-
 			Assertions.assertFalse(diff::hasDifferences, ()->getDiffMessage(diff, basePath));
+			FileUtils.delete(outputFile);
 
 		} catch (NullPointerException e) {
 			e.printStackTrace();
@@ -219,30 +230,6 @@ public class TestValorizatorParametersImpl {
 			Assertions.fail();
 		}
 
-	}
-
-
-
-	public void testReadingDefaultParameters() {
-		try {
-			ENOParameters enoParameters = valorizatorParametersImpl.getDefaultParameters();			
-
-			Assertions.assertEquals(enoParameters.getPipeline().getInFormat(), InFormat.DDI);
-			Assertions.assertEquals(enoParameters.getPipeline().getOutFormat(), OutFormat.XFORMS);
-			Assertions.assertEquals(enoParameters.getPipeline().getOutFormat(), OutFormat.XFORMS);
-			Assertions.assertEquals(enoParameters.getParameters().getContext(), Context.DEFAULT);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-			Assertions.fail();
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			Assertions.fail();
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			Assertions.fail();
-		}
 	}
 
 	private String getDiffMessage(Diff diff, String path) {

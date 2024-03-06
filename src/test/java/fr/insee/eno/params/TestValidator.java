@@ -1,20 +1,14 @@
 package fr.insee.eno.params;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import fr.insee.eno.parameters.InFormat;
-import fr.insee.eno.parameters.Mode;
-import fr.insee.eno.parameters.OutFormat;
-import fr.insee.eno.parameters.Pipeline;
-import fr.insee.eno.parameters.PostProcessing;
-import fr.insee.eno.parameters.PreProcessing;
+import fr.insee.eno.parameters.*;
 import fr.insee.eno.params.validation.ValidationMessage;
 import fr.insee.eno.params.validation.Validator;
 import fr.insee.eno.params.validation.ValidatorImpl;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class TestValidator {
 	
