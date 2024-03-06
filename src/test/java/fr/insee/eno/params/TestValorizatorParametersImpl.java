@@ -121,7 +121,7 @@ public class TestValorizatorParametersImpl {
 			
 			
 			debut = System.currentTimeMillis();
-			Path outPath = Paths.get(Constants.TEMP_FOLDER_PATH + "/complexe-parameters-new.xml");
+			Path outPath = Paths.get(Constants.ENO_TEMP_FOLDER_PATH + "/complexe-parameters-new.xml");
 			Files.deleteIfExists(outPath);
 
 			JAXBContext context = JAXBContext.newInstance(ENOParameters.class);
@@ -156,7 +156,7 @@ public class TestValorizatorParametersImpl {
 
 
 			debut = System.currentTimeMillis();
-			Path outPath = Paths.get(Constants.TEMP_FOLDER_PATH + "/simple-parameters-new.xml");
+			Path outPath = Paths.get(Constants.ENO_TEMP_FOLDER_PATH + "/simple-parameters-new.xml");
 			Files.deleteIfExists(outPath);
 
 			JAXBContext context = JAXBContext.newInstance(ENOParameters.class);

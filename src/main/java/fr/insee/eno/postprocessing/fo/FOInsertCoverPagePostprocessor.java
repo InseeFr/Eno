@@ -3,7 +3,6 @@ package fr.insee.eno.postprocessing.fo;
 import java.io.*;
 
 import fr.insee.eno.exception.Utils;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

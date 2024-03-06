@@ -1,6 +1,5 @@
 package fr.insee.eno.preprocessing;
 
-import java.io.File;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 

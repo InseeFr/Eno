@@ -1,11 +1,14 @@
 package fr.insee.eno;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -189,62 +192,53 @@ public final class Constants {
 	
 	/********************* Temporary file system ******************/
 	// ----- Folders
-	public static final String TEMP_FOLDER_PATH = System.getProperty("java.io.tmpdir") + "/eno";
+	public static final String ENO_TEMP_FOLDER_PATH = System.getProperty("java.io.tmpdir") + "/eno";
 
-	public static final File TEMP_FOLDER = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH);
+	public static File createTempFile() throws IOException {
+		return Files.createTempFile(Paths.get(ENO_TEMP_FOLDER_PATH), "eno", ".xml").toFile();
+	}
+
+	public static File createTempFolder() throws IOException {
+		return Files.createTempDirectory(Paths.get(ENO_TEMP_FOLDER_PATH),"generation-folder-").toFile();
+	}
 
 	public static final File TEMP_FILE_PARAMS(String file) {
-		return getFileOrDirectoryFromPath(TEMP_FOLDER_PATH +"/"+file);
+		return getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH +"/"+file);
 	}
-	public static File SUB_TEMP_FOLDER_FILE (String survey){
-		return getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/"+survey);
-	}
-
-	public static String sUB_TEMP_FOLDER (String survey){
-		return TEMP_FOLDER_PATH + "/"+survey;
-	}
-
-	// ----- Files
-	public static File tEMP_NULL_TMP (String sUB_TEMP_FOLDER){
-		return getFileOrDirectoryFromPath(sUB_TEMP_FOLDER + "/null.tmp");
-	}
-	public static File tEMP_MAPPING_TMP (String sUB_TEMP_FOLDER){
-		return getFileOrDirectoryFromPath(sUB_TEMP_FOLDER + "/mapping.xml");
-	}
-	public static final File TEMP_PREFORMATE_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/preformate.tmp");
-	public static final File TEMP_XML_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/xml.tmp");
-	public static final File TEMP_TEMP_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/temp.tmp");
-	public static final File TEMP_TEMP_BIS_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/temp-bis.tmp");
+	public static final File TEMP_PREFORMATE_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/temp/preformate.tmp");
+	public static final File TEMP_XML_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/temp/xml.tmp");
+	public static final File TEMP_TEMP_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/temp/temp.tmp");
+	public static final File TEMP_TEMP_BIS_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/temp/temp-bis.tmp");
 
 	// Those files holds the XSL generated from FODS ; they will be then copied to resource directory when packaging to JAR
-	public static final File TRANSFORMATIONS_DDI2XFORMS_DDI2XFORMS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2xforms/ddi2xforms.xsl");
-	public static final File TRANSFORMATIONS_DDI2FODT_DDI2FODT_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fodt/ddi2fodt.xsl");
-	public static final File TRANSFORMATIONS_DDI2FO_DDI2FO_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fo/ddi2fo.xsl");
-	public static final File TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/pogues-xml2ddi.xsl");
-	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_DDI2LUNATIC_XML_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2lunatic-xml/ddi2lunatic-xml.xsl");
-	public static final File TRANSFORMATIONS_DDI2XFORMS_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2xforms/drivers.xsl");
-	public static final File TRANSFORMATIONS_DDI2FODT_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fodt/drivers.xsl");
-	public static final File TRANSFORMATIONS_DDI2FO_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fo/drivers.xsl");
-	public static final File TRANSFORMATIONS_POGUES_XML2DDI_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/drivers.xsl");
-	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2lunatic-xml/drivers.xsl");
-	public static final File TRANSFORMATIONS_DDI2XFORMS_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2xforms/functions.xsl");
-	public static final File TRANSFORMATIONS_DDI2FODT_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fodt/functions.xsl");
-	public static final File TRANSFORMATIONS_DDI2FO_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fo/functions.xsl");
-	public static final File TRANSFORMATIONS_POGUES_XML2DDI_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/functions.xsl");
-	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2lunatic-xml/functions.xsl");
-	public static final File TRANSFORMATIONS_DDI2XFORMS_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2xforms/tree-navigation.xsl");
-	public static final File TRANSFORMATIONS_DDI2FODT_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fodt/tree-navigation.xsl");
-	public static final File TRANSFORMATIONS_DDI2FO_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fo/tree-navigation.xsl");
-	public static final File TRANSFORMATIONS_POGUES_XML2DDI_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/tree-navigation.xsl");
-	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2lunatic-xml/tree-navigation.xsl");
+	public static final File TRANSFORMATIONS_DDI2XFORMS_DDI2XFORMS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2xforms/ddi2xforms.xsl");
+	public static final File TRANSFORMATIONS_DDI2FODT_DDI2FODT_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fodt/ddi2fodt.xsl");
+	public static final File TRANSFORMATIONS_DDI2FO_DDI2FO_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fo/ddi2fo.xsl");
+	public static final File TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/pogues-xml2ddi/pogues-xml2ddi.xsl");
+	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_DDI2LUNATIC_XML_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2lunatic-xml/ddi2lunatic-xml.xsl");
+	public static final File TRANSFORMATIONS_DDI2XFORMS_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2xforms/drivers.xsl");
+	public static final File TRANSFORMATIONS_DDI2FODT_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fodt/drivers.xsl");
+	public static final File TRANSFORMATIONS_DDI2FO_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fo/drivers.xsl");
+	public static final File TRANSFORMATIONS_POGUES_XML2DDI_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/pogues-xml2ddi/drivers.xsl");
+	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2lunatic-xml/drivers.xsl");
+	public static final File TRANSFORMATIONS_DDI2XFORMS_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2xforms/functions.xsl");
+	public static final File TRANSFORMATIONS_DDI2FODT_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fodt/functions.xsl");
+	public static final File TRANSFORMATIONS_DDI2FO_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fo/functions.xsl");
+	public static final File TRANSFORMATIONS_POGUES_XML2DDI_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/pogues-xml2ddi/functions.xsl");
+	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2lunatic-xml/functions.xsl");
+	public static final File TRANSFORMATIONS_DDI2XFORMS_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2xforms/tree-navigation.xsl");
+	public static final File TRANSFORMATIONS_DDI2FODT_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fodt/tree-navigation.xsl");
+	public static final File TRANSFORMATIONS_DDI2FO_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fo/tree-navigation.xsl");
+	public static final File TRANSFORMATIONS_POGUES_XML2DDI_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/pogues-xml2ddi/tree-navigation.xsl");
+	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2lunatic-xml/tree-navigation.xsl");
 
-	public static final File INPUTS_DDI_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi/functions.xsl");
-	public static final File INPUTS_DDI_TEMPLATES_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi/templates.xsl");
-	public static final File INPUTS_DDI_SOURCE_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi/source.xsl");
+	public static final File INPUTS_DDI_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi/functions.xsl");
+	public static final File INPUTS_DDI_TEMPLATES_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi/templates.xsl");
+	public static final File INPUTS_DDI_SOURCE_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi/source.xsl");
 
-	public static final File INPUTS_POGUES_XML_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml/functions.xsl");
-	public static final File INPUTS_POGUES_XML_TEMPLATES_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml/templates.xsl");
-	public static final File INPUTS_POGUES_XML_SOURCE_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml/source.xsl");
+	public static final File INPUTS_POGUES_XML_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/pogues-xml/functions.xsl");
+	public static final File INPUTS_POGUES_XML_TEMPLATES_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/pogues-xml/templates.xsl");
+	public static final File INPUTS_POGUES_XML_SOURCE_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/pogues-xml/source.xsl");
 
 	// ---------- Utilies
 	/** Generic file getter from classpath 
@@ -262,7 +256,7 @@ public final class Constants {
 
 
 	/** Generic getter for files or directories */
-	private static File getFileOrDirectoryFromPath(String path) {
+	public static File getFileOrDirectoryFromPath(String path) {
 		return Paths.get(path).toFile();
 	}
 

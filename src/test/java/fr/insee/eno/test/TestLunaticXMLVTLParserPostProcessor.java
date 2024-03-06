@@ -70,7 +70,7 @@ public class TestLunaticXMLVTLParserPostProcessor {
 		try {
 			Path basePath = Path.of(TestLunaticXMLVTLParserPostProcessor.class.getResource("/lunatic-xml-vtl-parsing").toURI());
 
-			Path outPath = Paths.get(Constants.TEMP_FOLDER_PATH + "/test-vtl.xml");
+			Path outPath = Paths.get(Constants.ENO_TEMP_FOLDER_PATH + "/test-vtl.xml");
 			Files.deleteIfExists(outPath);
 			Path outputFilePath = Files.createFile(outPath);
 			File in = basePath.resolve("in.xml").toFile();

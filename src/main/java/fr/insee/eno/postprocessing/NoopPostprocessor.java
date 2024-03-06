@@ -1,12 +1,10 @@
 package fr.insee.eno.postprocessing;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-
-import fr.insee.eno.parameters.PostProcessing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 
 /**
  * No-op postprocessor.

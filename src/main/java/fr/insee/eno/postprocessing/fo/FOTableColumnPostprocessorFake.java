@@ -1,16 +1,12 @@
 package fr.insee.eno.postprocessing.fo;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-
-import org.apache.commons.io.FileUtils;
+import fr.insee.eno.parameters.PostProcessing;
+import fr.insee.eno.postprocessing.Postprocessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.insee.eno.Constants;
-import fr.insee.eno.parameters.PostProcessing;
-import fr.insee.eno.postprocessing.Postprocessor;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 
 /**
  * PDF postprocessor.

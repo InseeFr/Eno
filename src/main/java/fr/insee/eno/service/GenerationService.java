@@ -4,14 +4,10 @@ import java.io.*;
 import java.util.Arrays;
 
 import fr.insee.eno.preprocessing.DDIMappingPreprocessor;
-import fr.insee.eno.preprocessing.DDISplittingPreprocessor;
-import fr.insee.eno.preprocessing.PoguesXMLPreprocessorGoToTreatment;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.io.Files;
 import com.google.inject.Inject;
 
 import fr.insee.eno.Constants;
@@ -143,8 +139,8 @@ public class GenerationService {
 	 * 
 	 */
 	public void cleanTempFolder(String name) throws IOException {
-		if (Constants.TEMP_FOLDER_PATH != null) {
-			File folderTemp = new File(Constants.TEMP_FOLDER_PATH + "/" + name);
+		if (Constants.ENO_TEMP_FOLDER_PATH != null) {
+			File folderTemp = new File(Constants.ENO_TEMP_FOLDER_PATH + "/" + name);
 			cleanTempFolder(folderTemp);
 		} else {
 			logger.debug("Temp Folder is null");
@@ -158,8 +154,8 @@ public class GenerationService {
 	 * 
 	 */
 	public void cleanTempFolder() throws IOException {
-		if (Constants.TEMP_FOLDER_PATH != null) {
-			File folderTemp = new File(Constants.TEMP_FOLDER_PATH);
+		if (Constants.ENO_TEMP_FOLDER_PATH != null) {
+			File folderTemp = new File(Constants.ENO_TEMP_FOLDER_PATH);
 			cleanTempFolder(folderTemp);
 		} else {
 			logger.debug("Temp Folder is null");

@@ -1,21 +1,19 @@
 package fr.insee.eno.postprocessing.lunaticxml;
 
-import java.io.*;
+import fr.insee.eno.exception.EnoGenerationException;
+import fr.insee.eno.parameters.PostProcessing;
+import fr.insee.eno.postprocessing.Postprocessor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import fr.insee.eno.exception.Utils;
-import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import fr.insee.eno.Constants;
-import fr.insee.eno.exception.EnoGenerationException;
-import fr.insee.eno.parameters.PostProcessing;
-import fr.insee.eno.postprocessing.Postprocessor;
 
 /**
  * Customization of JS postprocessor.

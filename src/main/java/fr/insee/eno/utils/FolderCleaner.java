@@ -33,8 +33,8 @@ public class FolderCleaner {
 	 */
 	public void cleanTarget(String questionnaireFolder) throws Exception {
 
-		String tempFolder = Constants.TEMP_FOLDER_PATH + "/temp";
-		String testFolder = Constants.TEMP_FOLDER_PATH + "/test";
+		String tempFolder = Constants.ENO_TEMP_FOLDER_PATH + "/temp";
+		String testFolder = Constants.ENO_TEMP_FOLDER_PATH + "/test";
 
 		logger.debug("Cleaning directories : " + tempFolder + " | " + testFolder + " | " + questionnaireFolder);
 
