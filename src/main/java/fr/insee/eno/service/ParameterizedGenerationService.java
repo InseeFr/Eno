@@ -1,16 +1,5 @@
 package fr.insee.eno.service;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.InputStream;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoParametersException;
 import fr.insee.eno.parameters.ENOParameters;
 import fr.insee.eno.parameters.Pipeline;
@@ -18,12 +7,16 @@ import fr.insee.eno.params.ValorizatorParameters;
 import fr.insee.eno.params.ValorizatorParametersImpl;
 import fr.insee.eno.params.pipeline.PipeLineGeneratorImpl;
 import fr.insee.eno.params.pipeline.PipelineGenerator;
-import fr.insee.eno.params.validation.SchemaValidator;
-import fr.insee.eno.params.validation.SchemaValidatorImpl;
-import fr.insee.eno.params.validation.ValidationMessage;
-import fr.insee.eno.params.validation.Validator;
-import fr.insee.eno.params.validation.ValidatorImpl;
-import fr.insee.eno.utils.FolderCleaner;
+import fr.insee.eno.params.validation.*;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.InputStream;
 
 /**
  * Orchestrates the whole parameterized generation process.
@@ -49,7 +42,7 @@ public class ParameterizedGenerationService {
 		this.schemaValidator = new SchemaValidatorImpl();
 	}
 
-	public ParameterizedGenerationService(boolean cleaningFolder, String surveyName) {
+	public ParameterizedGenerationService(String surveyName) {
 		this.pipelineGenerator = new PipeLineGeneratorImpl();
 		this.valorizatorParameters = new ValorizatorParametersImpl();
 		this.validator = new ValidatorImpl();
@@ -122,32 +115,7 @@ public class ParameterizedGenerationService {
 				ENOParameters enoParameters = null;
 				enoParameters = valorizatorParameters.getParameters(new ByteArrayInputStream(paramsBytes));
 				LOGGER.info("Parameters read.");
-
-				LOGGER.info("Second validation ...");
-				ValidationMessage valid = validator.validate(enoParameters);
-
-				if(valid.isValid()) {
-					LOGGER.info(valid.getMessage());
-					Pipeline pipeline = enoParameters.getPipeline();
-					GenerationService generationService = pipelineGenerator.setPipeLine(pipeline);
-					ByteArrayOutputStream paramsFinal =  valorizatorParameters.mergeParameters(enoParameters);
-					LOGGER.info("Setting paramaters to the pipeline.");
-					generationService.setParameters(paramsFinal);
-					LOGGER.info("Setting metadata to the pipeline.");
-					generationService.setMetadata(metadata);
-					LOGGER.info("Setting specific treamtment to the pipeline.");
-					generationService.setSpecificTreatment(specificTreatment);
-					LOGGER.info("Setting mapping file to the pipeline.");
-					generationService.setMapping(mapping);
-					String survey = surveyName!=null ? surveyName : enoParameters.getParameters().getCampagne();
-					output = generationService.generateQuestionnaire(inputStream, survey);
-					paramsFinal.close();
-
-				}
-				else {
-					LOGGER.error(valid.getMessage());
-					throw new EnoParametersException(valid.getMessage());
-				}
+				output = this.generateQuestionnaire(inputStream, enoParameters, metadata, specificTreatment, mapping);
 			}
 			else {
 				LOGGER.error(validSchema.getMessage());
@@ -166,36 +134,4 @@ public class ParameterizedGenerationService {
 
 	}
 
-	/**
-	 * This method is only used in test
-	 * It generates File using transformations defined in ENOParameters
-	 * @param inputFile : the xml input File (required)
-	 * @param params : xml File of ENOParameter (required)
-	 * @param metadata : xml File of metadata (optional)
-	 * @param specificTreatment : xsl file of the xsl sheet (optional)
-	 * @param mapping : a xml File using in XFORMSInseeModelProcessor (optional)
-	 * @return the file resulting from the xslt transformations
-	 * @throws Exception
-	 */
-	public ByteArrayOutputStream generateQuestionnaire(File inputFile, File params, File metadata, File specificTreatment, File mapping)  throws Exception{
-		ByteArrayOutputStream output = null;
-
-		ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(inputFile));
-		InputStream parametersIS = null;
-		InputStream metadataIS = null;
-		InputStream specificTreatmentIS = null;
-		InputStream mappingIS = null;
-		parametersIS = params!=null ? FileUtils.openInputStream(params):null;
-		metadataIS = metadata!=null ? FileUtils.openInputStream(metadata):null;
-		specificTreatmentIS = specificTreatment!=null ? FileUtils.openInputStream(specificTreatment):null;
-		mappingIS = mapping!=null ? FileUtils.openInputStream(mapping):null;
-		output = generateQuestionnaire(inputStream, parametersIS, metadataIS, specificTreatmentIS, mappingIS);
-
-		if(parametersIS!=null) {parametersIS.close();};
-		if(metadataIS!=null) {metadataIS.close();};
-		if(specificTreatmentIS!=null) {specificTreatmentIS.close();};
-		if(mappingIS!=null) {mappingIS.close();};
-
-		return output;
-	}
 }

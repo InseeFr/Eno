@@ -1,20 +1,18 @@
 package fr.insee.eno.service;
 
-import java.io.*;
-import java.util.Arrays;
-
+import com.google.inject.Inject;
+import fr.insee.eno.Constants;
+import fr.insee.eno.generation.Generator;
+import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIMappingPreprocessor;
+import fr.insee.eno.preprocessing.Preprocessor;
+import fr.insee.eno.utils.FolderCleaner;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.inject.Inject;
-
-import fr.insee.eno.Constants;
-import fr.insee.eno.generation.Generator;
-import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.preprocessing.Preprocessor;
-import fr.insee.eno.utils.FolderCleaner;
+import java.io.*;
+import java.util.Arrays;
 
 /**
  * Orchestrates the whole generation process.
@@ -130,51 +128,6 @@ public class GenerationService {
 	}
 	public byte[] getMapping() {
 		return mapping;
-	}
-
-	/**
-	 * Clean the temp dir if it exists
-	 * 
-	 * @throws IOException
-	 * 
-	 */
-	public void cleanTempFolder(String name) throws IOException {
-		if (Constants.ENO_TEMP_FOLDER_PATH != null) {
-			File folderTemp = new File(Constants.ENO_TEMP_FOLDER_PATH + "/" + name);
-			cleanTempFolder(folderTemp);
-		} else {
-			logger.debug("Temp Folder is null");
-		}
-	}
-
-	/**
-	 * Clean the temp dir if it exists
-	 * 
-	 * @throws IOException
-	 * 
-	 */
-	public void cleanTempFolder() throws IOException {
-		if (Constants.ENO_TEMP_FOLDER_PATH != null) {
-			File folderTemp = new File(Constants.ENO_TEMP_FOLDER_PATH);
-			cleanTempFolder(folderTemp);
-		} else {
-			logger.debug("Temp Folder is null");
-		}
-	}
-
-	/**
-	 * Clean the temp dir if it exists
-	 * 
-	 * @throws IOException
-	 * 
-	 */
-	private void cleanTempFolder(File folder) throws IOException {
-		FolderCleaner cleanService = new FolderCleaner();
-		if (folder != null) {
-			cleanService.cleanOneFolder(folder);
-		} else {
-			logger.debug("Temp Folder is null");
-		}
 	}
 
 	@Override
