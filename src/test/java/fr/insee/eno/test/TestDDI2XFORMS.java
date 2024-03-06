@@ -1,22 +1,16 @@
 package fr.insee.eno.test;
 
-import java.io.*;
-
+import fr.insee.eno.generation.DDI2XFORMSGenerator;
+import fr.insee.eno.postprocessing.Postprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSBrowsingPostprocessor;
+import fr.insee.eno.preprocessing.*;
+import fr.insee.eno.service.GenerationService;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.xmlunit.diff.Diff;
 
-import fr.insee.eno.generation.DDI2XFORMSGenerator;
-import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.postprocessing.xforms.XFORMSBrowsingPostprocessor;
-import fr.insee.eno.service.GenerationService;
-import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
-import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
-import fr.insee.eno.preprocessing.DDIMarkdown2XhtmlPreprocessor;
-import fr.insee.eno.preprocessing.DDIMultimodalSelectionPreprocessor;
-import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
-import fr.insee.eno.preprocessing.Preprocessor;
+import java.io.*;
 
 import static fr.insee.eno.Constants.createTempEnoFile;
 

@@ -1,19 +1,18 @@
 package fr.insee.eno.test;
 
-import java.io.*;
-
+import fr.insee.eno.generation.PoguesXML2DDIGenerator;
+import fr.insee.eno.postprocessing.NoopPostprocessor;
+import fr.insee.eno.postprocessing.Postprocessor;
+import fr.insee.eno.preprocessing.PoguesXMLPreprocessorGoToTreatment;
+import fr.insee.eno.preprocessing.PoguesXmlInsertFilterLoopIntoQuestionTree;
+import fr.insee.eno.preprocessing.Preprocessor;
+import fr.insee.eno.service.GenerationService;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.xmlunit.diff.Diff;
 
-import fr.insee.eno.generation.PoguesXML2DDIGenerator;
-import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.postprocessing.NoopPostprocessor;
-import fr.insee.eno.preprocessing.PoguesXMLPreprocessorGoToTreatment;
-import fr.insee.eno.preprocessing.PoguesXmlInsertFilterLoopIntoQuestionTree;
-import fr.insee.eno.preprocessing.Preprocessor;
-import fr.insee.eno.service.GenerationService;
+import java.io.*;
 
 import static fr.insee.eno.Constants.createTempEnoFile;
 

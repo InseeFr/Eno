@@ -1,15 +1,13 @@
 package fr.insee.eno.main;
 
-import java.io.*;
-import java.util.Arrays;
-
-import org.apache.commons.io.FileUtils;
-import org.junit.jupiter.api.Test;
-
 import fr.insee.eno.generation.PoguesXML2DDIGenerator;
 import fr.insee.eno.postprocessing.NoopPostprocessor;
 import fr.insee.eno.preprocessing.PoguesXMLPreprocessorGoToTreatment;
 import fr.insee.eno.service.GenerationService;
+import org.apache.commons.io.FileUtils;
+import org.junit.jupiter.api.Test;
+
+import java.io.*;
 
 public class DummyTestPoguesXML2DDI {
 	

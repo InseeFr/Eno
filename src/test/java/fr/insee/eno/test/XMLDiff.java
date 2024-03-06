@@ -1,12 +1,11 @@
 package fr.insee.eno.test;
 
-import java.io.File;
-
-import javax.xml.transform.stream.StreamSource;
-
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 import org.xmlunit.input.CommentLessSource;
+
+import javax.xml.transform.stream.StreamSource;
+import java.io.File;
 
 /**
  * Created by I6VWID on 15/01/18.

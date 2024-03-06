@@ -1,12 +1,12 @@
 package fr.insee.eno.main;
 
-import java.io.*;
-
 import fr.insee.eno.generation.IdentityGenerator;
 import fr.insee.eno.postprocessing.NoopPostprocessor;
 import fr.insee.eno.preprocessing.DDI32ToDDI33Preprocessor;
 import fr.insee.eno.service.GenerationService;
 import org.apache.commons.io.FileUtils;
+
+import java.io.*;
 
 public class DummyTestDDI32ToDDI33 {
 

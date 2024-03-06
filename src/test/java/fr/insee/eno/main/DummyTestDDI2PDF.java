@@ -1,15 +1,10 @@
 package fr.insee.eno.main;
 
-import java.io.*;
-import java.net.URI;
-
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.sax.SAXResult;
-import javax.xml.transform.stream.StreamSource;
-
+import fr.insee.eno.generation.DDI2FOGenerator;
+import fr.insee.eno.postprocessing.Postprocessor;
+import fr.insee.eno.postprocessing.fo.*;
+import fr.insee.eno.preprocessing.*;
+import fr.insee.eno.service.GenerationService;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.fop.apps.Fop;
@@ -17,22 +12,14 @@ import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
 import org.junit.jupiter.api.Test;
 
-import fr.insee.eno.generation.DDI2FOGenerator;
-import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.postprocessing.fo.FOEditStructurePagesPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOInsertAccompanyingMailsPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOInsertCoverPagePostprocessor;
-import fr.insee.eno.postprocessing.fo.FOInsertEndQuestionPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOMailingPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOSpecificTreatmentPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOTableColumnPostprocessorFake;
-import fr.insee.eno.service.GenerationService;
-import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
-import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
-import fr.insee.eno.preprocessing.DDIMarkdown2XhtmlPreprocessor;
-import fr.insee.eno.preprocessing.DDIMultimodalSelectionPreprocessor;
-import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
-import fr.insee.eno.preprocessing.Preprocessor;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.sax.SAXResult;
+import javax.xml.transform.stream.StreamSource;
+import java.io.*;
+import java.net.URI;
 
 public class DummyTestDDI2PDF {
 	
