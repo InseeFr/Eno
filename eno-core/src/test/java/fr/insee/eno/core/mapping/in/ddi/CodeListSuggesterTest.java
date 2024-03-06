@@ -4,6 +4,8 @@ import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.code.CodeList;
+import fr.insee.eno.core.model.suggester.SuggesterConfigurationDTO;
+import fr.insee.eno.core.processing.in.steps.ddi.DDIDeserializeSuggesterConfiguration;
 import fr.insee.eno.core.serialize.DDIDeserializer;
 import instance33.DDIInstanceDocument;
 import org.junit.jupiter.api.BeforeAll;
@@ -26,21 +28,32 @@ class CodeListSuggesterTest {
         DDIInstanceDocument ddiInstanceDocument = DDIDeserializer.deserialize(
                 CodeListSuggesterTest.class.getClassLoader().getResourceAsStream(
                         "integration/ddi/ddi-suggester.xml"));
-        // When mapping it to Eno
+        // When mapping it to Eno and deserializing xml suggester configuration
         DDIMapper ddiMapper = new DDIMapper();
         enoQuestionnaire = new EnoQuestionnaire();
         ddiMapper.mapDDI(ddiInstanceDocument, enoQuestionnaire);
+        new DDIDeserializeSuggesterConfiguration().apply(enoQuestionnaire);
         // Then -> tests
     }
 
     @Test
-    void renameMe() {
-        //
+    void activityCodeList() {
         Optional<CodeList> searchedCodeList = enoQuestionnaire.getCodeLists().stream()
                 .filter(codeList -> "L_ACTIVITES-1-0-0".equals(codeList.getName())).findAny();
         assertTrue(searchedCodeList.isPresent());
         CodeList codeList = searchedCodeList.get();
         assertEquals("activité", codeList.getLabel());
+    }
+
+    @Test
+    void cityCodeList() {
+        Optional<CodeList> searchedCodeList = enoQuestionnaire.getCodeLists().stream()
+                .filter(codeList -> "L_COMMUNEPASSEE-1-2-0".equals(codeList.getName())).findAny();
+        assertTrue(searchedCodeList.isPresent());
+        CodeList codeList = searchedCodeList.get();
+        assertEquals("commune passée", codeList.getLabel());
+        SuggesterConfigurationDTO suggesterConfiguration = codeList.getSuggesterConfiguration();
+        assertEquals("label", suggesterConfiguration.getFields().getFirst().getName());
     }
 
 }
