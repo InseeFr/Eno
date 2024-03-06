@@ -44,18 +44,6 @@ public class PoguesXML2DDIGenerator implements Generator {
 		return byteArrayOutputStream;
 	}
 
-	/**
-	 * @param finalInput
-	 * @return
-	 */
-	private String getFormNameFolder(File finalInput) {
-		String formNameFolder;
-		formNameFolder = FilenameUtils.getBaseName(finalInput.getAbsolutePath());
-		formNameFolder = FilenameUtils.removeExtension(formNameFolder);
-		formNameFolder = formNameFolder.replace(XslParameters.TITLED_EXTENSION, "");
-		return formNameFolder;
-	}
-
 	public String in2out() {
 		return "xml-pogues2ddi";
 	}

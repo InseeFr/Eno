@@ -68,7 +68,16 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 
 		return outputStream;
 	}
-	
+
+	/**
+	 * Only use in test
+	 * @param enoParameters xml file
+	 * @return
+	 * @throws JAXBException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 * @throws IOException
+	 */
 	@Override
 	public File mergeParameters(File enoParameters) throws JAXBException, IllegalArgumentException, IllegalAccessException, IOException   {
 		File finalParam = Constants.TEMP_FILE_PARAMS("new-params.xml");
