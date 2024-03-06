@@ -40,8 +40,6 @@ public class ParameterizedGenerationService {
 	
 	private SchemaValidator schemaValidator ;
 	
-	private boolean cleaningFolder;
-	
 	private String surveyName;
 
 	public ParameterizedGenerationService() {
@@ -49,7 +47,6 @@ public class ParameterizedGenerationService {
 		this.valorizatorParameters = new ValorizatorParametersImpl();
 		this.validator = new ValidatorImpl();
 		this.schemaValidator = new SchemaValidatorImpl();
-		this.cleaningFolder=true;
 	}
 
 	public ParameterizedGenerationService(boolean cleaningFolder, String surveyName) {
@@ -57,13 +54,12 @@ public class ParameterizedGenerationService {
 		this.valorizatorParameters = new ValorizatorParametersImpl();
 		this.validator = new ValidatorImpl();
 		this.schemaValidator = new SchemaValidatorImpl();
-		this.cleaningFolder=cleaningFolder;
 		this.surveyName=surveyName;
 	}
 
 	/**
 	 * It generates File using transformations defined in ENOParameters
-	 * @param inputFile : the xml input File (required)
+	 * @param inputStream : the xml inputStream as ByteArrayInputStream (required)
 	 * @param params : java object ENOParameter (required)
 	 * @param metadata : InputStream of metadata xml file (optional)
 	 * @param specificTreatment : InputStream of an xsl sheet (optional)
@@ -71,15 +67,13 @@ public class ParameterizedGenerationService {
 	 * @return the file resulting from the xslt transformations
 	 * @throws Exception
 	 */
-	public File generateQuestionnaire(File inputFile, ENOParameters params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception{
-		File output=null;
+	public ByteArrayOutputStream generateQuestionnaire(ByteArrayInputStream inputStream, ENOParameters params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception{
+		ByteArrayOutputStream output=null;
 		Pipeline pipeline = params.getPipeline();
 
 		ValidationMessage valid = validator.validate(params);
 		if(valid.isValid()) {
 			GenerationService generationService = pipelineGenerator.setPipeLine(pipeline);
-			generationService.setCleaningFolder(cleaningFolder);
-
 			ByteArrayOutputStream paramsFinal = valorizatorParameters.mergeParameters(params);
 			LOGGER.info("Setting paramaters to the pipeline.");
 			generationService.setParameters(paramsFinal);
@@ -90,7 +84,7 @@ public class ParameterizedGenerationService {
 			LOGGER.info("Setting mapping file to the pipeline.");
 			generationService.setMapping(mapping);
 			String survey = surveyName != null ? surveyName : params.getParameters() != null ? params.getParameters().getCampagne():"test";
-			output = generationService.generateQuestionnaire(inputFile, survey);
+			output = generationService.generateQuestionnaire(inputStream, survey);
 			paramsFinal.close();
 		}
 		else {
@@ -104,7 +98,7 @@ public class ParameterizedGenerationService {
 
 	/**
 	 * It generates File using transformations defined in ENOParameters
-	 * @param inputFile : the xml input File (required)
+	 * @param inputStream : the xml inputStream as ByteArrayInputStream (required)
 	 * @param params : InputStream of parameters xml file (required)
 	 * @param metadata : InputStream of metadata xml file (optional)
 	 * @param specificTreatment : InputStream of an xsl sheet (optional)
@@ -112,9 +106,9 @@ public class ParameterizedGenerationService {
 	 * @return the file resulting from the xslt transformations
 	 * @throws Exception
 	 */
-	public File generateQuestionnaire(File inputFile, InputStream params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception {
+	public ByteArrayOutputStream generateQuestionnaire(ByteArrayInputStream inputStream, InputStream params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception {
 		LOGGER.info("Parameterized Generation of questionnaire -- STARTED --");
-		File output=null;
+		ByteArrayOutputStream output=null;
 
 		if(params!=null) {
 			byte[] paramsBytes = IOUtils.toByteArray(params);
@@ -127,7 +121,7 @@ public class ParameterizedGenerationService {
 				LOGGER.info("Parameters reading ...");
 				ENOParameters enoParameters = null;
 				enoParameters = valorizatorParameters.getParameters(new ByteArrayInputStream(paramsBytes));
-				LOGGER.info("Parameters read.");			
+				LOGGER.info("Parameters read.");
 
 				LOGGER.info("Second validation ...");
 				ValidationMessage valid = validator.validate(enoParameters);
@@ -136,7 +130,6 @@ public class ParameterizedGenerationService {
 					LOGGER.info(valid.getMessage());
 					Pipeline pipeline = enoParameters.getPipeline();
 					GenerationService generationService = pipelineGenerator.setPipeLine(pipeline);
-					generationService.setCleaningFolder(cleaningFolder);
 					ByteArrayOutputStream paramsFinal =  valorizatorParameters.mergeParameters(enoParameters);
 					LOGGER.info("Setting paramaters to the pipeline.");
 					generationService.setParameters(paramsFinal);
@@ -146,13 +139,10 @@ public class ParameterizedGenerationService {
 					generationService.setSpecificTreatment(specificTreatment);
 					LOGGER.info("Setting mapping file to the pipeline.");
 					generationService.setMapping(mapping);
-					String survey = surveyName!=null ? surveyName : enoParameters.getParameters().getCampagne();					
-					output = generationService.generateQuestionnaire(inputFile, survey);
+					String survey = surveyName!=null ? surveyName : enoParameters.getParameters().getCampagne();
+					output = generationService.generateQuestionnaire(inputStream, survey);
 					paramsFinal.close();
-					FolderCleaner cleanerService = new FolderCleaner();
-					if(cleaningFolder) {
-						cleanerService.cleanOneFolderExceptGeneratedFile(new File(Constants.TEMP_FOLDER_PATH + "/" + survey), output);
-					}
+
 				}
 				else {
 					LOGGER.error(valid.getMessage());
@@ -177,6 +167,7 @@ public class ParameterizedGenerationService {
 	}
 
 	/**
+	 * This method is only used in test
 	 * It generates File using transformations defined in ENOParameters
 	 * @param inputFile : the xml input File (required)
 	 * @param params : xml File of ENOParameter (required)
@@ -186,9 +177,10 @@ public class ParameterizedGenerationService {
 	 * @return the file resulting from the xslt transformations
 	 * @throws Exception
 	 */
-	public File generateQuestionnaire(File inputFile, File params, File metadata, File specificTreatment, File mapping)  throws Exception{
-		File output = null;
+	public ByteArrayOutputStream generateQuestionnaire(File inputFile, File params, File metadata, File specificTreatment, File mapping)  throws Exception{
+		ByteArrayOutputStream output = null;
 
+		ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(inputFile));
 		InputStream parametersIS = null;
 		InputStream metadataIS = null;
 		InputStream specificTreatmentIS = null;
@@ -197,7 +189,7 @@ public class ParameterizedGenerationService {
 		metadataIS = metadata!=null ? FileUtils.openInputStream(metadata):null;
 		specificTreatmentIS = specificTreatment!=null ? FileUtils.openInputStream(specificTreatment):null;
 		mappingIS = mapping!=null ? FileUtils.openInputStream(mapping):null;
-		output = generateQuestionnaire(inputFile, parametersIS, metadataIS, specificTreatmentIS, mappingIS);
+		output = generateQuestionnaire(inputStream, parametersIS, metadataIS, specificTreatmentIS, mappingIS);
 
 		if(parametersIS!=null) {parametersIS.close();};
 		if(metadataIS!=null) {metadataIS.close();};
@@ -205,6 +197,5 @@ public class ParameterizedGenerationService {
 		if(mappingIS!=null) {mappingIS.close();};
 
 		return output;
-
 	}
 }

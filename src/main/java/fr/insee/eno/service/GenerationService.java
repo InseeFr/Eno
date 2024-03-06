@@ -26,17 +26,13 @@ import fr.insee.eno.utils.FolderCleaner;
 public class GenerationService {
 
 	private static final Logger logger = LoggerFactory.getLogger(GenerationService.class);
-
 	private final Preprocessor[] preprocessors;
 	private final Generator generator;
 	private final Postprocessor[] postprocessors;
-
 	private byte[] parameters;
 	private byte[] metadata;
 	private byte[] specificTreatment;
 	private byte[] mapping;
-	
-	private boolean cleaningFolder;
 
 	@Inject
 	public GenerationService(final Preprocessor[] preprocessors, final Generator generator,
@@ -44,7 +40,6 @@ public class GenerationService {
 		this.preprocessors = preprocessors;
 		this.generator = generator;
 		this.postprocessors = postprocessors;
-		this.cleaningFolder = true;
 	}
 
 	@Inject
@@ -53,7 +48,6 @@ public class GenerationService {
 		this.preprocessors = new Preprocessor[] { preprocessor };
 		this.generator = generator;
 		this.postprocessors = postprocessors;
-		this.cleaningFolder = true;
 	}
 
 	@Inject
@@ -62,7 +56,6 @@ public class GenerationService {
 		this.preprocessors = new Preprocessor[] { preprocessor };
 		this.generator = generator;
 		this.postprocessors = new Postprocessor[] { postprocessor };
-		this.cleaningFolder = true;
 	}
 
 	/**
@@ -78,16 +71,6 @@ public class GenerationService {
 	public ByteArrayOutputStream generateQuestionnaire(ByteArrayInputStream input, String surveyName) throws Exception {
 		logger.info(this.toString());
 		logger.info("Generating questionnaire for: " + surveyName);
-
-
-
-		if(this.preprocessors[0] instanceof DDIMappingPreprocessor){
-			ByteArrayOutputStream mappingOS = this.preprocessors[0].process(input, parameters, surveyName,generator.in2out());
-			setMapping(new ByteArrayInputStream(mappingOS.toByteArray()));
-			mappingOS.close();
-		} else {
-
-		}
 
 		// Pre-processing
 		ByteArrayOutputStream outputStream = null;
@@ -152,12 +135,6 @@ public class GenerationService {
 	public byte[] getMapping() {
 		return mapping;
 	}
-	
-	public void setCleaningFolder(boolean cleaning) {
-		this.cleaningFolder = cleaning;
-	}
-	
-
 
 	/**
 	 * Clean the temp dir if it exists
