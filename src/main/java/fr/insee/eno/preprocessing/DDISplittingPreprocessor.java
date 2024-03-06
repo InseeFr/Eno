@@ -1,20 +1,21 @@
 package fr.insee.eno.preprocessing;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-
+import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.exception.Utils;
+import fr.insee.eno.transform.xsl.XslTransformation;
+import fr.insee.eno.utils.FolderCleaner;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.insee.eno.Constants;
-import fr.insee.eno.exception.EnoGenerationException;
-import fr.insee.eno.transform.xsl.XslTransformation;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A DDI specific preprocessor.
@@ -27,21 +28,18 @@ public class DDISplittingPreprocessor  {
 
 	private static final String styleSheetPath = Constants.UTIL_DDI_SPLITTING_XSL;
 
-	public List<File> splitDDI(File inputFile, String survey) throws Exception {
+	public Map<String, ByteArrayOutputStream> splitDDI(ByteArrayInputStream inputFile) throws Exception {
 		LOGGER.info("DDI splitting preprocessing Target : START");
 
-		String sUB_TEMP_FOLDER = Constants.sUB_TEMP_FOLDER(survey);
-		// ----- Dereferencing
-		LOGGER.debug("Dereferencing : -Input : " + inputFile + " -Output : " + Constants.tEMP_NULL_TMP(sUB_TEMP_FOLDER)
-		+ " -Stylesheet : " + styleSheetPath + " -Parameters : " + sUB_TEMP_FOLDER);
+		// UTIL_DDI_SPLITTING_XSL produced n files inside "output-folder" and there is no output...
+		// We have to retrieve generated files to put them inside ByteArrayOutputStream and delete files
+		File tempFolderWhereAreDDI = Constants.createTempEnoFolder();
 
-		InputStream isDDI_DEREFERENCING_XSL = Constants.getInputStreamFromPath(styleSheetPath);
-		InputStream isInputFile = FileUtils.openInputStream(inputFile);
-		OutputStream osTEMP_NULL_TMP = FileUtils.openOutputStream(Constants.tEMP_NULL_TMP(sUB_TEMP_FOLDER));
+		InputStream splitting_XSL = Constants.getInputStreamFromPath(styleSheetPath);
+		ByteArrayOutputStream emptyByteArrayOutputStream = new ByteArrayOutputStream();
 		
-		try {
-			saxonService.transformDereferencing(isInputFile, isDDI_DEREFERENCING_XSL, osTEMP_NULL_TMP,
-					Constants.SUB_TEMP_FOLDER_FILE(survey));
+		try(splitting_XSL; splitting_XSL) {
+			saxonService.transformDereferencing(inputFile, splitting_XSL, emptyByteArrayOutputStream, tempFolderWhereAreDDI);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),
@@ -50,36 +48,31 @@ public class DDISplittingPreprocessor  {
 			LOGGER.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
+		emptyByteArrayOutputStream.close();
 
-		isInputFile.close();
-		isDDI_DEREFERENCING_XSL.close();
-		osTEMP_NULL_TMP.close();
+		// Transfomration produce N files, but none is inside outputStream, we have to build OutputStreamFrom File
 		// ----- Cleaning
 		LOGGER.debug("Cleaning target");
-		File f = Constants.SUB_TEMP_FOLDER_FILE(survey);
-		File[] matchCleaningInput = f.listFiles(new FilenameFilter() {
+		File[] matchCleaningInput = tempFolderWhereAreDDI.listFiles((dir, name) -> !name.startsWith("null"));
 
-			@Override
-			public boolean accept(File dir, String name) {
-				return !name.startsWith("null");
-			}
-		});
+		LOGGER.debug("Searching matching files in : " + tempFolderWhereAreDDI.getAbsolutePath());
 
-		List<File> outputFiles = new ArrayList<File>();
-
-		LOGGER.debug("Searching matching files in : " + sUB_TEMP_FOLDER);
+		HashMap<String, ByteArrayOutputStream> outputStreamHashMap = new HashMap<>();
 		for (File file : matchCleaningInput) {
 			if(!file.isDirectory()) {
-				LOGGER.debug("Found : " + file.getAbsolutePath());
-				outputFiles.add(file);
+				String modelName = FilenameUtils.removeExtension(file.getName());
+				ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+				outputStream.write(FileUtils.readFileToByteArray(file));
+				outputStreamHashMap.put(modelName,outputStream);
 			}
 		}
-		if(outputFiles.size()==0) {
+		if(outputStreamHashMap.isEmpty()) {
 			throw new EnoGenerationException("DDI Splitting produced no file.");
 		}
-
+		// Remove generated files
+		FolderCleaner.cleanOneFolder(tempFolderWhereAreDDI);
 		LOGGER.debug("DDI splitting preprocessing : END");
-		return outputFiles;
+		return outputStreamHashMap;
 	}
 
 	public String toString() {
