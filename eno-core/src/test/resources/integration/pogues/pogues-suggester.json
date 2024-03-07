@@ -1,0 +1,1111 @@
+{
+  "owner": "FAKEPERMISSION",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "lrud78ks",
+        "lrueihko",
+        "lruent2x",
+        "lrueotzf",
+        "lrueer0m",
+        "lruekois",
+        "lruefmjh",
+        "lruen7yc",
+        "lruexn64",
+        "idendquest"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "lrud84h6",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "suggester non multiple : questionnaire complet 8 nomenclatures, tableau + dynamique (ré-importé)"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "SUGGESTER_NSENAVE",
+  "Variables": {
+    "Variable": [
+      {
+        "Label": "ACTIVITE label",
+        "id": "lrue6zsh",
+        "type": "CollectedVariableType",
+        "CodeListReference": "L_ACTIVITES-1-0-0",
+        "Name": "ACTIVITE",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "COMMUNE label",
+        "id": "lrue6qsf",
+        "type": "CollectedVariableType",
+        "CodeListReference": "L_COMMUNEPASSEE-1-2-0",
+        "Name": "COMMUNE",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "DPARTEMENT label",
+        "id": "lruehe8s",
+        "type": "CollectedVariableType",
+        "CodeListReference": "L_DEPNAIS-1-1-0",
+        "Name": "DPARTEMENT",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "ligne-pays",
+        "id": "lsa4s27l",
+        "type": "CollectedVariableType",
+        "CodeListReference": "L_PAYS-1-2-0",
+        "Name": "PAYS11",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "ligne-combien de lettres dans le nom du pays",
+        "id": "lsa4gznk",
+        "type": "CollectedVariableType",
+        "Name": "PAYS12",
+        "Datatype": {
+          "Maximum": "40",
+          "Minimum": "1",
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Decimals": "0"
+        }
+      },
+      {
+        "Scope": "lruekois",
+        "Label": "nationalité",
+        "id": "lsa4q78s",
+        "type": "CollectedVariableType",
+        "CodeListReference": "L_NATIONALITE-1-2-0",
+        "Name": "NATIONALIT1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Scope": "lruekois",
+        "Label": "Européen ?",
+        "id": "lsa4ri2z",
+        "type": "CollectedVariableType",
+        "Name": "NATIONALIT2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "ligne-Homme",
+        "id": "lruel7i0",
+        "type": "CollectedVariableType",
+        "CodeListReference": "L_PCS_HOMMES-1-5-0",
+        "Name": "PCS11",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "ligne-Femme",
+        "id": "lruejrr6",
+        "type": "CollectedVariableType",
+        "CodeListReference": "L_PCS_FEMMES-1-5-0",
+        "Name": "PCS12",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Scope": "lruen7yc",
+        "Label": "Homme",
+        "id": "lruejbf0",
+        "type": "CollectedVariableType",
+        "CodeListReference": "L_PCS_HOMMES-1-5-0",
+        "Name": "PCSDYNAMIQ1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Scope": "lruen7yc",
+        "Label": "Femme",
+        "id": "lrueiwla",
+        "type": "CollectedVariableType",
+        "CodeListReference": "L_PCS_FEMMES-1-5-0",
+        "Name": "PCSDYNAMIQ2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "DIPLOMES label",
+        "id": "lruevu42",
+        "type": "CollectedVariableType",
+        "CodeListReference": "L_DIPLOMES-1-0-0",
+        "Name": "DIPLOMES",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Tue Feb 06 2024 10:24:43 GMT+0100 (heure normale d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "TCM",
+      "uri": "http://ddi:fr.insee:DataCollection.TCM"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "x0zwuadv",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "Urn": "urn:ddi:fr.insee:l_activites-1-0-0:1",
+        "SuggesterParameters": {
+          "stopWords": [
+            "a",
+            "au",
+            "dans",
+            "de",
+            "des",
+            "du",
+            "en",
+            "er",
+            "la",
+            "le",
+            "ou",
+            "sur",
+            "d",
+            "l",
+            "aux",
+            "dans",
+            "un",
+            "une",
+            "pour",
+            "avec",
+            "chez",
+            "par",
+            "les"
+          ],
+          "fields": [
+            {
+              "stemmer": false,
+              "min": 3,
+              "synonyms": {
+                "conseil": [
+                  "CONSULTING"
+                ],
+                "accueil": [
+                  "ACCEUIL",
+                  "ACCUEILLIR",
+                  "ACCUEILLANTE",
+                  "ACCUEILLANT",
+                  "ACCUEILLE"
+                ],
+                "ingenierie": [
+                  "INGENIEURIE",
+                  "INGENERIE",
+                  "INGIENERIE"
+                ],
+                "fabrication": [
+                  "FABRICANT"
+                ],
+                "abattage": [
+                  "ABATOIR",
+                  "ABBATOIR",
+                  "ABATTOIRS",
+                  "ABATOIRE",
+                  "ABATTOIRE",
+                  "ABBATTAGE"
+                ],
+                "prestation": [
+                  "PRESTATAIRE"
+                ],
+                "distribution": [
+                  "DISTRIBUTEUR"
+                ],
+                "pneumatique": [
+                  "PNEU",
+                  "PNEUS"
+                ],
+                "briqueterie": [
+                  "BRIQUETTERIE"
+                ],
+                "plaquisterie": [
+                  "PLACO",
+                  "PLACOPLATRE"
+                ],
+                "ascenseur": [
+                  "ASCENCEUR",
+                  "ASCENCEURS"
+                ],
+                "URSSAF": [
+                  "URSAF",
+                  "URSAFF"
+                ],
+                "joaillerie": [
+                  "JOAILLIER"
+                ],
+                "recherche-développement": [
+                  "R &amp D",
+                  "R&ampD"
+                ],
+                "alimentaire": [
+                  "ALIMANTAIRE"
+                ],
+                "construction": [
+                  "CONSTRUCTEUR"
+                ],
+                "agroalimentaire": [
+                  "AGGRO",
+                  "AGGROALIMANTAIRE",
+                  "AGRO",
+                  "AGROALIMENTAIRE"
+                ],
+                "EHPAD": [
+                  "EPHAD",
+                  "HEPAD",
+                  "EPAD",
+                  "EPAHD",
+                  "EPADH"
+                ],
+                "echafaudage": [
+                  "ECHAFFAUDAGE",
+                  "ECHAFFAUDEUR"
+                ]
+              },
+              "name": "label",
+              "rules": [
+                "[\\w]+"
+              ],
+              "language": "French"
+            }
+          ],
+          "queryParser": {
+            "type": "tokenized",
+            "params": {
+              "stemmer": false,
+              "min": 3,
+              "pattern": "[\\w.]+",
+              "language": "French"
+            }
+          }
+        },
+        "Label": "activité",
+        "id": "L_ACTIVITES-1-0-0",
+        "Name": "L_ACTIVITES-1-0-0"
+      },
+      {
+        "Urn": "urn:ddi:fr.insee:l_communepassee-1-2-0:1",
+        "SuggesterParameters": {
+          "fields": [
+            {
+              "stemmer": false,
+              "min": 3,
+              "name": "label",
+              "rules": [
+                "[\\w]+"
+              ],
+              "language": "French"
+            }
+          ],
+          "queryParser": {
+            "type": "tokenized",
+            "params": {
+              "stemmer": false,
+              "min": 3,
+              "pattern": "[\\w.]+",
+              "language": "French"
+            }
+          }
+        },
+        "Label": "commune passée",
+        "id": "L_COMMUNEPASSEE-1-2-0",
+        "Name": "L_COMMUNEPASSEE-1-2-0"
+      },
+      {
+        "Urn": "urn:ddi:fr.insee:l_depnais-1-1-0:1",
+        "SuggesterParameters": {
+          "fields": [
+            {
+              "name": "label",
+              "rules": "soft"
+            },
+            {
+              "name": "id",
+              "rules": "soft"
+            }
+          ],
+          "queryParser": {
+            "type": "soft"
+          },
+          "order": {
+            "field": "label",
+            "type": "ascending"
+          }
+        },
+        "Label": "département de naissance",
+        "id": "L_DEPNAIS-1-1-0",
+        "Name": "L_DEPNAIS-1-1-0"
+      },
+      {
+        "Label": "tab non dynamique",
+        "id": "lruelai2",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "ligne",
+            "Value": "0"
+          }
+        ]
+      },
+      {
+        "Urn": "urn:ddi:fr.insee:l_pays-1-2-0:1",
+        "SuggesterParameters": {
+          "fields": [
+            {
+              "stemmer": false,
+              "min": 3,
+              "name": "label",
+              "rules": [
+                "[\\w]+"
+              ],
+              "language": "French"
+            }
+          ],
+          "queryParser": {
+            "type": "tokenized",
+            "params": {
+              "stemmer": false,
+              "min": 3,
+              "pattern": "[\\w.]+",
+              "language": "French"
+            }
+          }
+        },
+        "Label": "pays",
+        "id": "L_PAYS-1-2-0",
+        "Name": "L_PAYS-1-2-0"
+      },
+      {
+        "Urn": "urn:ddi:fr.insee:l_nationalite-1-2-0:1",
+        "SuggesterParameters": {
+          "fields": [
+            {
+              "stemmer": false,
+              "min": 3,
+              "name": "label",
+              "rules": [
+                "[\\w]+"
+              ],
+              "language": "French"
+            }
+          ],
+          "queryParser": {
+            "type": "tokenized",
+            "params": {
+              "stemmer": false,
+              "min": 3,
+              "pattern": "[\\w.]+",
+              "language": "French"
+            }
+          }
+        },
+        "Label": "nationalité",
+        "id": "L_NATIONALITE-1-2-0",
+        "Name": "L_NATIONALITE-1-2-0"
+      },
+      {
+        "Label": "ouinon",
+        "id": "lsa4r887",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "oui",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "non",
+            "Value": "2"
+          }
+        ]
+      },
+      {
+        "Urn": "urn:ddi:fr.insee:l_pcs_hommes-1-5-0:1",
+        "SuggesterParameters": {
+          "stopWords": [
+            "a",
+            "au",
+            "dans",
+            "de",
+            "des",
+            "du",
+            "en",
+            "er",
+            "la",
+            "le",
+            "ou",
+            "sur",
+            "d",
+            "l",
+            "aux",
+            "dans",
+            "un",
+            "une",
+            "pour",
+            "avec",
+            "chez",
+            "par",
+            "les"
+          ],
+          "meloto": true,
+          "fields": [
+            {
+              "stemmer": false,
+              "min": 3,
+              "name": "label",
+              "rules": [
+                "[\\w]+"
+              ],
+              "language": "French"
+            }
+          ],
+          "queryParser": {
+            "type": "tokenized",
+            "params": {
+              "stemmer": false,
+              "min": 3,
+              "pattern": "[\\w.]+",
+              "language": "French"
+            }
+          }
+        },
+        "Label": "PCS hommes",
+        "id": "L_PCS_HOMMES-1-5-0",
+        "Name": "L_PCS_HOMMES-1-5-0"
+      },
+      {
+        "Urn": "urn:ddi:fr.insee:l_pcs_femmes-1-5-0:1",
+        "SuggesterParameters": {
+          "stopWords": [
+            "a",
+            "au",
+            "dans",
+            "de",
+            "des",
+            "du",
+            "en",
+            "er",
+            "la",
+            "le",
+            "ou",
+            "sur",
+            "d",
+            "l",
+            "aux",
+            "dans",
+            "un",
+            "une",
+            "pour",
+            "avec",
+            "chez",
+            "par",
+            "les"
+          ],
+          "meloto": true,
+          "fields": [
+            {
+              "stemmer": false,
+              "min": 3,
+              "name": "label",
+              "rules": [
+                "[\\w]+"
+              ],
+              "language": "French"
+            }
+          ],
+          "queryParser": {
+            "type": "tokenized",
+            "params": {
+              "stemmer": false,
+              "min": 3,
+              "pattern": "[\\w.]+",
+              "language": "French"
+            }
+          }
+        },
+        "Label": "PCS femmes",
+        "id": "L_PCS_FEMMES-1-5-0",
+        "Name": "L_PCS_FEMMES-1-5-0"
+      },
+      {
+        "Urn": "urn:ddi:fr.insee:l_diplomes-1-0-0:1",
+        "SuggesterParameters": {
+          "fields": [
+            {
+              "stemmer": false,
+              "min": 3,
+              "name": "label",
+              "rules": [
+                "[\\w]+"
+              ],
+              "language": "French"
+            },
+            {
+              "name": "id"
+            }
+          ],
+          "queryParser": {
+            "type": "tokenized",
+            "params": {
+              "stemmer": false,
+              "min": 3,
+              "pattern": "[\\w.]+",
+              "language": "French"
+            }
+          }
+        },
+        "Label": "diplomes",
+        "id": "L_DIPLOMES-1-0-0",
+        "Name": "L_DIPLOMES-1-0-0"
+      }
+    ]
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "seq0"
+      ],
+      "id": "lrud78ks",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lrue6zsh",
+              "id": "lruepj9w",
+              "mandatory": false,
+              "CodeListReference": "L_ACTIVITES-1-0-0",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "SUGGESTER",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "activite"
+          ],
+          "ClarificationQuestion": [],
+          "id": "lrueihko",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SINGLE_CHOICE",
+          "Name": "ACTIVITE"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lrue6qsf",
+              "id": "lruf0bsx",
+              "mandatory": false,
+              "CodeListReference": "L_COMMUNEPASSEE-1-2-0",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "SUGGESTER",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "commune"
+          ],
+          "ClarificationQuestion": [],
+          "id": "lruent2x",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SINGLE_CHOICE",
+          "Name": "COMMUNE"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lruehe8s",
+              "id": "lruewf2s",
+              "mandatory": false,
+              "CodeListReference": "L_DEPNAIS-1-1-0",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "SUGGESTER",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "département"
+          ],
+          "ClarificationQuestion": [],
+          "id": "lrueotzf",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SINGLE_CHOICE",
+          "Name": "DPARTEMENT"
+        },
+        {
+          "FlowControl": [],
+          "Label": [
+            "pays : tableau 1 var"
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "lsa4k89l",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "lsa4r3hv",
+                "MappingTarget": "1 2"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "0",
+                "CodeListReference": "lruelai2"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "pays",
+                "dynamic": "0"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "combien de lettres dans le nom du pays",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "PAYS",
+          "Response": [
+            {
+              "CollectedVariableReference": "lsa4s27l",
+              "id": "lsa4k89l",
+              "CodeListReference": "L_PAYS-1-2-0",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "SUGGESTER",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lsa4gznk",
+              "id": "lsa4r3hv",
+              "Datatype": {
+                "Maximum": "40",
+                "Minimum": "1",
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Decimals": "0"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "lrueer0m",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "questionType": "TABLE"
+        },
+        {
+          "FlowControl": [],
+          "Label": [
+            "nationalité : tab dynamique 1 variable"
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "lsa4yiyk",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "lsa4pkq3",
+                "MappingTarget": "1 2"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "1-5"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "nationalité",
+                "dynamic": "0"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "Européen ?",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "NATIONALIT",
+          "Response": [
+            {
+              "CollectedVariableReference": "lsa4q78s",
+              "id": "lsa4yiyk",
+              "CodeListReference": "L_NATIONALITE-1-2-0",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "SUGGESTER",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lsa4ri2z",
+              "id": "lsa4pkq3",
+              "CodeListReference": "lsa4r887",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "lruekois",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "questionType": "TABLE"
+        },
+        {
+          "FlowControl": [],
+          "Label": [
+            "PCS tableau non dynamique : PCS H + PCS F"
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "lruej86j",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "lruentjz",
+                "MappingTarget": "1 2"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "0",
+                "CodeListReference": "lruelai2"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "Homme",
+                "dynamic": "0"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "Femme",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "PCS",
+          "Response": [
+            {
+              "CollectedVariableReference": "lruel7i0",
+              "id": "lruej86j",
+              "CodeListReference": "L_PCS_HOMMES-1-5-0",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "SUGGESTER",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lruejrr6",
+              "id": "lruentjz",
+              "CodeListReference": "L_PCS_FEMMES-1-5-0",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "SUGGESTER",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "lruefmjh",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "questionType": "TABLE"
+        },
+        {
+          "FlowControl": [],
+          "Label": [
+            "PCS dynamique : les mêmes, mais tableau dynamique"
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "lruf2tue",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "lruewxu5",
+                "MappingTarget": "1 2"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "1-2"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "Homme",
+                "dynamic": "0"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "Femme",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "PCSDYNAMIQ",
+          "Response": [
+            {
+              "CollectedVariableReference": "lruejbf0",
+              "id": "lruf2tue",
+              "CodeListReference": "L_PCS_HOMMES-1-5-0",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "SUGGESTER",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            },
+            {
+              "CollectedVariableReference": "lrueiwla",
+              "id": "lruewxu5",
+              "CodeListReference": "L_PCS_FEMMES-1-5-0",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "SUGGESTER",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "lruen7yc",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "questionType": "TABLE"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lruevu42",
+              "id": "lruem2ta",
+              "mandatory": false,
+              "CodeListReference": "L_DIPLOMES-1-0-0",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "SUGGESTER",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "Diplomes"
+          ],
+          "ClarificationQuestion": [],
+          "id": "lruexn64",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SINGLE_CHOICE",
+          "Name": "DIPLOMES"
+        }
+      ],
+      "Name": "SEQ0"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

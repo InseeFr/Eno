@@ -93,17 +93,17 @@ class DDIResolveVariableReferencesInLabelsTest {
         @Test
         void declarationOnSequence() {
             assertEquals("\"Static declaration on sequence\"",
-                    enoQuestionnaire.getSequences().get(0).getInstructions().get(0).getLabel().getValue());
+                    enoQuestionnaire.getSequences().get(0).getInstructions().getFirst().getLabel().getValue());
             assertEquals("\"Dynamic declaration on sequence: \" || Q1",
-                    enoQuestionnaire.getSequences().get(1).getInstructions().get(0).getLabel().getValue().trim());
+                    enoQuestionnaire.getSequences().get(1).getInstructions().getFirst().getLabel().getValue().trim());
         }
 
         @Test
         void declarationOnSubsequence() {
             assertEquals("\"Static declaration on subsequence\"",
-                    enoQuestionnaire.getSubsequences().get(0).getInstructions().get(0).getLabel().getValue());
+                    enoQuestionnaire.getSubsequences().get(0).getInstructions().getFirst().getLabel().getValue());
             assertEquals("\"Dynamic declaration on subsequence: \" || Q1",
-                    enoQuestionnaire.getSubsequences().get(1).getInstructions().get(0).getLabel().getValue().trim());
+                    enoQuestionnaire.getSubsequences().get(1).getInstructions().getFirst().getLabel().getValue().trim());
         }
 
         /** Question label + declarations, instructions and controls within it
@@ -117,11 +117,11 @@ class DDIResolveVariableReferencesInLabelsTest {
             assertEquals("\"Static question name\"",
                     question1.get().getLabel().getValue());
             assertEquals("\"Static declaration before the question.\"",
-                    question1.get().getDeclarations().get(0).getLabel().getValue());
+                    question1.get().getDeclarations().getFirst().getLabel().getValue());
             assertEquals("\"Static declaration after the question.\"",
-                    question1.get().getInstructions().get(0).getLabel().getValue());
+                    question1.get().getInstructions().getFirst().getLabel().getValue());
             assertEquals("\"Static control message\"",
-                    question1.get().getControls().get(0).getMessage().getValue());
+                    question1.get().getControls().getFirst().getMessage().getValue());
             //
             Optional<SingleResponseQuestion> question2 = enoQuestionnaire.getSingleResponseQuestions().stream()
                     .filter(question -> "Q2".equals(question.getName())).findAny();
@@ -129,11 +129,11 @@ class DDIResolveVariableReferencesInLabelsTest {
             assertEquals("\"Dynamic question name: \" || Q1",
                     question2.get().getLabel().getValue().trim());
             assertEquals("\"Dynamic declaration before the question: \" || Q1",
-                    question2.get().getDeclarations().get(0).getLabel().getValue().trim());
+                    question2.get().getDeclarations().getFirst().getLabel().getValue().trim());
             assertEquals("\"Dynamic declaration after the question: \" || Q1",
-                    question2.get().getInstructions().get(0).getLabel().getValue().trim());
+                    question2.get().getInstructions().getFirst().getLabel().getValue().trim());
             assertEquals("\"Dynamic control message: \" || Q1",
-                    question2.get().getControls().get(0).getMessage().getValue().trim());
+                    question2.get().getControls().getFirst().getMessage().getValue().trim());
         }
 
         @Test
@@ -162,7 +162,7 @@ class DDIResolveVariableReferencesInLabelsTest {
         void multipleChoiceQuestion_codeResponsesLabel() {
             //
             SimpleMultipleChoiceQuestion mcq1 = (SimpleMultipleChoiceQuestion)
-                    enoQuestionnaire.getMultipleResponseQuestions().get(0);
+                    enoQuestionnaire.getMultipleResponseQuestions().getFirst();
             assertEquals("\"Static code 1\"", mcq1.getCodeResponses().get(0).getLabel().getValue());
             assertEquals("\"Static code 2\"", mcq1.getCodeResponses().get(1).getLabel().getValue());
             //

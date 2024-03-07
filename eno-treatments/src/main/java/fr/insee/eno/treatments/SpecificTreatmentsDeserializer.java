@@ -29,15 +29,13 @@ public class SpecificTreatmentsDeserializer {
     public SpecificTreatments deserialize(InputStream treatmentsStream) {
         ObjectMapper mapper = new ObjectMapper();
         JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
-        JsonSchema suggesterSchema = factory.getSchema(
-                classLoader.getResourceAsStream("schema.suggesters.json"));
         JsonSchema regroupingSchema = factory.getSchema(
                 classLoader.getResourceAsStream("schema.regrouping.json"));
 
         try {
             JsonNode jsonTreatments = mapper.readTree(treatmentsStream);
             if (jsonTreatments.has("suggesters"))
-                validateTreatmentInput(suggesterSchema, jsonTreatments.get("suggesters"));
+                throw new UnsupportedOperationException("Suggesters specific treatment is no longer supported.");
             if (jsonTreatments.has("regroupements")) {
                 validateTreatmentInput(regroupingSchema, jsonTreatments.get("regroupements"));
             }
@@ -49,8 +47,8 @@ public class SpecificTreatmentsDeserializer {
         }
     }
 
-    private static void validateTreatmentInput(JsonSchema suggesterSchema, JsonNode treatmentInput) {
-        Set<ValidationMessage> errors = suggesterSchema.validate(treatmentInput);
+    private static void validateTreatmentInput(JsonSchema jsonSchema, JsonNode treatmentInput) {
+        Set<ValidationMessage> errors = jsonSchema.validate(treatmentInput);
 
         if(!errors.isEmpty()) {
             StringBuilder messageBuilder = new StringBuilder();

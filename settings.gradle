@@ -8,7 +8,6 @@ pluginManagement {
 dependencyResolutionManagement {
 
     repositories {
-        mavenLocal()
         mavenCentral()
         maven {
             url "https://oss.sonatype.org/content/repositories/snapshots"
@@ -16,12 +15,13 @@ dependencyResolutionManagement {
                 snapshotsOnly()
             }
         }
+        mavenLocal()
     }
 
     versionCatalogs {
         libs {
-            version('lunatic-model', '3.3.5')
-            version('pogues-model', '1.0.5')
+            version('lunatic-model', '3.4.1')
+            version('pogues-model', '1.3.3')
             library('lunatic-model', 'fr.insee.lunatic', 'lunatic-model').versionRef('lunatic-model')
             library('pogues-model', 'fr.insee.pogues', 'pogues-model').versionRef('pogues-model')
         }
