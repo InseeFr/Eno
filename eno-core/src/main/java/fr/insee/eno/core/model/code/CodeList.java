@@ -9,6 +9,7 @@ import fr.insee.eno.core.parameter.Format;
 import logicalproduct33.CodeListType;
 import lombok.Getter;
 import lombok.Setter;
+import reusable33.impl.ContentTypeImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +25,29 @@ public class CodeList extends EnoIdentifiableObject {
 
     private static final String SUGGESTER_CODE_LIST_KEY = "SuggesterConfiguration";
 
-    @DDI("!getCodeListNameList().isEmpty() ? getCodeListNameArray(0).getStringArray(0).getStringValue() : null")
+    // This content can be put back later on:
+    // "!getCodeListNameList().isEmpty() ? getCodeListNameArray(0).getStringArray(0).getStringValue() : null"
+    @DDI("T(fr.insee.eno.core.model.code.CodeList).mapDDIName(#this)")
     String name;
 
     /** Code list label inputted in Pogues.
      * Not used in Lunatic, so it is directly mapped as a string for now. */
     @DDI("!getLabelList().isEmpty ? getLabelArray(0).getContentArray(0).getStringValue() : null")
     String label;
+
+    /** The code list name has been wrongly written in the "Label" DDI field in the past.
+     * This is changed in new DDI documents, yet this method ensures backward compatibility with this. */
+    public static String mapDDIName(CodeListType ddiCodeList) {
+        if (! ddiCodeList.getCodeListNameList().isEmpty()) {
+            return ddiCodeList.getCodeListNameArray(0).getStringArray(0).getStringValue();
+        }
+        if (! ddiCodeList.getLabelList().isEmpty()) {
+            // (for some reason the ContentType class doesn't have the getStringValue() method)
+            ContentTypeImpl contentArray = (ContentTypeImpl) ddiCodeList.getLabelArray(0).getContentArray(0);
+            return contentArray.getStringValue();
+        }
+        return null;
+    }
 
     @DDI("getCodeList()")
     List<CodeItem> codeItems = new ArrayList<>();
