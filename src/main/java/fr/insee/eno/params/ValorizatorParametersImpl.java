@@ -102,7 +102,7 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 
 	
 	@Override
-	public ENOParameters getParameters(InputStream inputStream) throws JAXBException, UnsupportedEncodingException {
+	public ENOParameters getParameters(InputStream inputStream) throws JAXBException {
 
 		if (inputStream == null)
 			return null;
