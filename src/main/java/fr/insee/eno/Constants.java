@@ -199,6 +199,8 @@ public final class Constants {
 	}
 
 	public static File createTempEnoFolder() throws IOException {
+		// create eno folder inside temp if not exists
+		if(!Files.exists(Paths.get(ENO_TEMP_FOLDER_PATH))) Files.createDirectory(Paths.get(ENO_TEMP_FOLDER_PATH));
 		return Files.createTempDirectory(Paths.get(ENO_TEMP_FOLDER_PATH),"generation-folder-").toFile();
 	}
 	public static final File TEMP_PREFORMATE_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/temp/preformate.tmp");
