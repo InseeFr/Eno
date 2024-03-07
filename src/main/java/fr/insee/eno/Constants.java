@@ -52,7 +52,7 @@ public final class Constants {
 	public static final String PARAMETERS_DEFAULT = PARAMS_DEFAULT_FOLDER_PATH + "/parameters.xml";
 	public static final String METADATA_DEFAULT = PARAMS_DEFAULT_FOLDER_PATH + "/metadata.xml";
 	public static final String MAPPING_DEFAULT = PARAMS_DEFAULT_FOLDER_PATH + "/mapping.xml";
-	public static final String LABELS_FOLDER = "/lang/xforms/";
+	public static final String LABELS_FOLDER = "/lang/xforms";
 
 
 	/********************************************************/
