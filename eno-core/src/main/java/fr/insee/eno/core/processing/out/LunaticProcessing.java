@@ -40,6 +40,7 @@ public class LunaticProcessing {
                 .then(new LunaticSortComponents(enoQuestionnaire))
                 .then(new LunaticLoopResolution(enoQuestionnaire))
                 .then(new LunaticTableProcessing(enoQuestionnaire))
+                .then(new LunaticSuggestersConfiguration(enoQuestionnaire))
                 .then(new LunaticVariablesValues())
                 .thenIf(parameters.isMissingVariables(), new LunaticAddMissingVariables(enoCatalog, parameters.isMissingVariables()))
                 .then(new LunaticAddResizing(enoQuestionnaire))

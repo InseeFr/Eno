@@ -20,10 +20,24 @@ class DDISuggesterDeserializerTest {
     // All the tests below work the same if the xml string input is wrapped with <![CDATA[...]]>
 
     @Test
-    void deserializeSuggesterConfiguration() {
+    void deserializeSuggesterConfiguration_empty() {
         String xmlString = "<fields/>";
         SuggesterConfigurationDTO suggesterConfigurationDTO = new DDISuggesterDeserializer().deserialize(xmlString);
         assertNotNull(suggesterConfigurationDTO);
+    }
+
+    @Test
+    void deserializeSuggesterConfiguration_rootProperties() {
+        String xmlString = """
+                <meloto>true</meloto>
+                <max>10</max>
+                <url>unused yet</url>
+                <version>1</version>""";
+        SuggesterConfigurationDTO suggesterConfigurationDTO = new DDISuggesterDeserializer().deserialize(xmlString);
+        assertEquals(true, suggesterConfigurationDTO.getMeloto());
+        assertEquals(10, suggesterConfigurationDTO.getMax());
+        assertEquals("unused yet", suggesterConfigurationDTO.getUrl());
+        assertEquals(1, suggesterConfigurationDTO.getVersion());
     }
 
     @Test

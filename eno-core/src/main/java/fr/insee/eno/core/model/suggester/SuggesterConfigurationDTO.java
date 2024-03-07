@@ -4,6 +4,7 @@ import fr.insee.eno.core.model.EnoObject;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,10 +14,13 @@ import java.util.List;
 @Setter
 public class SuggesterConfigurationDTO extends EnoObject {
 
-    List<SuggesterFieldDTO> fields;
+    List<SuggesterFieldDTO> fields = new ArrayList<>();
+    Boolean meloto;
     Integer max;
-    List<String> stopWords;
+    List<String> stopWords = new ArrayList<>();
     SuggesterOrderDTO order;
     SuggesterQueryParserDTO queryParser;
+    String url;
+    Integer version;
 
 }
