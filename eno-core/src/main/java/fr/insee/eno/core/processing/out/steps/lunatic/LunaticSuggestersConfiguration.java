@@ -45,7 +45,7 @@ public class LunaticSuggestersConfiguration implements ProcessingStep<Questionna
             lunaticSuggester.getFields().add(suggesterField);
         });
 
-        lunaticSuggester.setMeloto(enoSuggesterConfiguration.getMeloto()); // TODO: This property is missing in Pogues-Model (!!)
+        lunaticSuggester.setMeloto(enoSuggesterConfiguration.getMeloto());
         if (enoSuggesterConfiguration.getMax() != null)
             lunaticSuggester.setMax(BigInteger.valueOf(enoSuggesterConfiguration.getMax()));
         lunaticSuggester.setStopWords(enoSuggesterConfiguration.getStopWords());
@@ -56,10 +56,9 @@ public class LunaticSuggestersConfiguration implements ProcessingStep<Questionna
         SuggesterQueryParser suggesterQueryParser = createLunaticQueryParser(enoSuggesterConfiguration.getQueryParser());
         lunaticSuggester.setQueryParser(suggesterQueryParser);
 
-        lunaticSuggester.setUrl(enoSuggesterConfiguration.getUrl()); // TODO: This property is missing in Pogues-Model (!!)
+        lunaticSuggester.setUrl(enoSuggesterConfiguration.getUrl());
         if (enoSuggesterConfiguration.getVersion() != null)
-            lunaticSuggester.setVersion(String.valueOf(enoSuggesterConfiguration.getVersion())); // TODO: This property is missing in Pogues-Model (!!)
-        // TODO: this should be an integer in Lunatic-Model (!)
+            lunaticSuggester.setVersion(BigInteger.valueOf(enoSuggesterConfiguration.getVersion()));
 
         return lunaticSuggester;
     }
