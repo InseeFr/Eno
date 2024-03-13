@@ -9,13 +9,14 @@ import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLPaginationPostprocessor;
 import fr.insee.eno.preprocessing.NoopPreprocessor;
 import fr.insee.eno.preprocessing.Preprocessor;
 import fr.insee.eno.service.GenerationService;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.xmlunit.diff.Diff;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+
+import static fr.insee.eno.Constants.createTempEnoFile;
 
 public class TestLunaticXMLPaginationPostProcessor {
 
@@ -63,8 +64,14 @@ public class TestLunaticXMLPaginationPostProcessor {
 			parametersBAOS = valorizatorParameters.mergeParameters(enoParameters);
 			GenerationService genService = new GenerationService(preprocessors, identityGenerator, postprocessors);
 			genService.setParameters(parametersBAOS);
-		File in = new File(String.format("%s/in.xml", basePath));
-			File outputFile = genService.generateQuestionnaire(in, "ddi-2-lunatic-xml-test/"+pagination.value());
+			File in = new File(String.format("%s/in.xml", basePath));
+			ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(in));
+			File outputFile = createTempEnoFile();
+			ByteArrayOutputStream output = genService.generateQuestionnaire(inputStream, "simpsons");
+			try (FileOutputStream fos = new FileOutputStream(outputFile)) {
+				fos.write(output.toByteArray());
+			}
+			output.close();
 			File expectedFile = new File(String.format("%s/out-"+ pagination.value() +".xml", basePath));
 
 

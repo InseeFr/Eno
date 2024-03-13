@@ -1,32 +1,21 @@
 package fr.insee.eno.main;
 
-import java.io.File;
-
-import org.junit.jupiter.api.Test;
-
 import fr.insee.eno.generation.DDI2FOGenerator;
 import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.postprocessing.fo.FOEditStructurePagesPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOInsertAccompanyingMailsPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOInsertCoverPagePostprocessor;
-import fr.insee.eno.postprocessing.fo.FOInsertEndQuestionPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOMailingPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOSpecificTreatmentPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOTableColumnPostprocessorFake;
+import fr.insee.eno.postprocessing.fo.*;
+import fr.insee.eno.preprocessing.*;
 import fr.insee.eno.service.GenerationService;
-import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
-import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
-import fr.insee.eno.preprocessing.DDIMarkdown2XhtmlPreprocessor;
-import fr.insee.eno.preprocessing.DDIMultimodalSelectionPreprocessor;
-import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
-import fr.insee.eno.preprocessing.Preprocessor;
+import org.apache.commons.io.FileUtils;
+import org.junit.jupiter.api.Test;
+
+import java.io.*;
 
 public class DummyTestDDI2FO {
 	
 	private DDI2FOGenerator ddi2fo = new DDI2FOGenerator();
 	
 	@Test
-	public void mainTest() {		
+	public void mainTest() throws IOException {
 		String basePathDDI2FO = "src/test/resources/ddi-to-fo";
 		
 		Preprocessor[] preprocessors = {
@@ -48,9 +37,15 @@ public class DummyTestDDI2FO {
 		
 		GenerationService genServiceDDI2PDF = new GenerationService(preprocessors, ddi2fo, postprocessors);
 		File in = new File(String.format("%s/in.xml", basePathDDI2FO));
+		ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(in));
 		try {
-			File output = genServiceDDI2PDF.generateQuestionnaire(in, "test");
-			System.out.println(output.getAbsolutePath());
+			ByteArrayOutputStream output = genServiceDDI2PDF.generateQuestionnaire(inputStream, "test");
+			File file = File.createTempFile("eno-",".xml");
+			try (FileOutputStream fos = new FileOutputStream(file)) {
+				fos.write(output.toByteArray());
+			}
+			output.close();
+			System.out.println(file.getAbsolutePath());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

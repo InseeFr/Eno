@@ -1,19 +1,15 @@
 package fr.insee.eno.preprocessing;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
-
+import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.exception.Utils;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
+import fr.insee.eno.parameters.PreProcessing;
+import fr.insee.eno.transform.xsl.XslTransformation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.insee.eno.Constants;
-import fr.insee.eno.exception.EnoGenerationException;
-import fr.insee.eno.parameters.PreProcessing;
-import fr.insee.eno.transform.xsl.XslTransformation;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 /**
  * A DDI specific preprocessor.
@@ -26,23 +22,17 @@ public class DDI32ToDDI33Preprocessor implements Preprocessor {
 	private static XslTransformation saxonService = new XslTransformation();
 
 	private static final String styleSheetPath = Constants.UTIL_DDI32_TO_DDI33_XSL;
-
 	@Override
-	public File process(File inputFile, byte[] parametersFile, String survey, String in2out) throws Exception {
-		logger.info("DDI32ToDDI33Preprocessing Target : START");
+	public ByteArrayOutputStream process(InputStream inputStream, byte[] parameters, String survey, String in2out) throws Exception {
+		logger.info(String.format("%s Target : START",toString().toLowerCase()));
 
-		String sUB_TEMP_FOLDER = Constants.sUB_TEMP_FOLDER(survey);
-		String output = FilenameUtils.removeExtension(inputFile.getAbsolutePath()) + Constants.DDI32_DDI33_EXTENSION;;
-		
-		logger.debug("DDI32ToDDI33 : -Input : " + inputFile + " -Output : " +output
-				+ " -Stylesheet : " + styleSheetPath + " -Parameters : " + sUB_TEMP_FOLDER);
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-		InputStream isDDI32_TO_DDI33_XSL = Constants.getInputStreamFromPath(styleSheetPath);
-		InputStream isInputFile = FileUtils.openInputStream(inputFile);
-		OutputStream osDDI32DDI33 = FileUtils.openOutputStream(new File(output));
-		
-		try {
-			saxonService.transform(isInputFile, isDDI32_TO_DDI33_XSL, osDDI32DDI33);
+		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
+			 inputStream;){
+
+			saxonService.transform(inputStream, xslIS, byteArrayOutputStream);
+
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),
@@ -51,13 +41,8 @@ public class DDI32ToDDI33Preprocessor implements Preprocessor {
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
-		
-		isInputFile.close();
-		isDDI32_TO_DDI33_XSL.close();
-		osDDI32DDI33.close();
-		
-		logger.debug("DDI32ToDDI33Preprocessing : END");
-		return new File(output);
+
+		return byteArrayOutputStream;
 	}
 	
 	public String toString() {

@@ -1,20 +1,17 @@
 package fr.insee.eno.postprocessing.xforms;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import fr.insee.eno.exception.Utils;
-import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
+import fr.insee.eno.exception.Utils;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 public class XFORMSInseeModelPostprocessor implements Postprocessor {
 
@@ -26,38 +23,22 @@ public class XFORMSInseeModelPostprocessor implements Postprocessor {
 
 
 	@Override
-	public File process(File input, byte[] parameters, String survey) throws Exception {
+	public ByteArrayOutputStream process(InputStream input, byte[] parameters, String survey) throws Exception {
 		return this.process(input, parameters, null, null, null, survey);
 	}
 
 	@Override
-	public File process(File input, byte[] parametersFile, byte[] metadata, byte[] specificTreatmentXsl, byte[] mapping, String survey) throws Exception {
-		File outputForFRFile = new File(input.getParent(),
-				Constants.BASE_NAME_FORM_FILE +
-				Constants.INSEE_MODEL_XFORMS_EXTENSION);
-
-		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
-
-		String sUB_TEMP_FOLDER = Constants.tEMP_DDI_FOLDER(Constants.sUB_TEMP_FOLDER(survey));
+	public ByteArrayOutputStream process(InputStream input, byte[] parametersFile, byte[] metadata, byte[] specificTreatmentXsl, byte[] mapping, String survey) throws Exception {
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
 		InputStream FO_XSL = Constants.getInputStreamFromPath(styleSheetPath);
-
-		InputStream inputStream = FileUtils.openInputStream(input);
-		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
 		InputStream mappingStream=null;
 		if(mapping!=null) {
 			mappingStream = new ByteArrayInputStream(mapping);
 		}
-		else {
-			File mappingFile = Constants.tEMP_MAPPING_TMP(sUB_TEMP_FOLDER);
-			if(mappingFile.exists()) {
-				logger.info("Loading mapping.xml file : "+mappingFile.getAbsolutePath());
-				mappingStream = FileUtils.openInputStream(mappingFile);
-			}
-		}
 
-		try {
-			saxonService.transformInseeModelXforms(inputStream, outputStream, FO_XSL, mappingStream);
+		try(input; FO_XSL) {
+			saxonService.transformInseeModelXforms(input, byteArrayOutputStream, FO_XSL, mappingStream);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),
@@ -66,14 +47,9 @@ public class XFORMSInseeModelPostprocessor implements Postprocessor {
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
+		logger.info("End of InseeModel post-processing ");
 
-		inputStream.close();
-		outputStream.close();
-		FO_XSL.close();
-		mappingStream.close();
-		logger.info("End of InseeModel post-processing " + outputForFRFile.getAbsolutePath());
-
-		return outputForFRFile;
+		return byteArrayOutputStream;
 
 	}
 

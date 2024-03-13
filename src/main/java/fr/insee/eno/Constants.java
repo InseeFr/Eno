@@ -1,13 +1,15 @@
 package fr.insee.eno;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Paths;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * This class contains all the different paths used in the application Based on
@@ -50,7 +52,7 @@ public final class Constants {
 	public static final String PARAMETERS_DEFAULT = PARAMS_DEFAULT_FOLDER_PATH + "/parameters.xml";
 	public static final String METADATA_DEFAULT = PARAMS_DEFAULT_FOLDER_PATH + "/metadata.xml";
 	public static final String MAPPING_DEFAULT = PARAMS_DEFAULT_FOLDER_PATH + "/mapping.xml";
-	public static final String LABELS_FOLDER = "/lang/xforms/";
+	public static final String LABELS_FOLDER = "/lang/xforms";
 
 
 	/********************************************************/
@@ -189,62 +191,52 @@ public final class Constants {
 	
 	/********************* Temporary file system ******************/
 	// ----- Folders
-	public static final String TEMP_FOLDER_PATH = System.getProperty("java.io.tmpdir") + "/eno";
+	public static final String ENO_TEMP_FOLDER_PATH = System.getProperty("java.io.tmpdir") + "/eno";
 
-	public static final File TEMP_FOLDER = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH);
-
-	public static final File TEMP_FILE_PARAMS(String file) {
-		return getFileOrDirectoryFromPath(TEMP_FOLDER_PATH +"/"+file);
-	}
-	public static File SUB_TEMP_FOLDER_FILE (String survey){
-		return getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/"+survey);
+	public static File createTempEnoFile(String... extension) throws IOException {
+		String fileExtension = extension != null && extension.length > 0 ? extension[0] : ".xml";
+		return Files.createTempFile(Paths.get(ENO_TEMP_FOLDER_PATH), "eno-", fileExtension).toFile();
 	}
 
-	public static String sUB_TEMP_FOLDER (String survey){
-		return TEMP_FOLDER_PATH + "/"+survey;
+	public static File createTempEnoFolder() throws IOException {
+		// create eno folder inside temp if not exists
+		if(!Files.exists(Paths.get(ENO_TEMP_FOLDER_PATH))) Files.createDirectory(Paths.get(ENO_TEMP_FOLDER_PATH));
+		return Files.createTempDirectory(Paths.get(ENO_TEMP_FOLDER_PATH),"generation-folder-").toFile();
 	}
-
-	// ----- Files
-	public static File tEMP_NULL_TMP (String sUB_TEMP_FOLDER){
-		return getFileOrDirectoryFromPath(sUB_TEMP_FOLDER + "/null.tmp");
-	}
-	public static File tEMP_MAPPING_TMP (String sUB_TEMP_FOLDER){
-		return getFileOrDirectoryFromPath(sUB_TEMP_FOLDER + "/mapping.xml");
-	}
-	public static final File TEMP_PREFORMATE_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/preformate.tmp");
-	public static final File TEMP_XML_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/xml.tmp");
-	public static final File TEMP_TEMP_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/temp.tmp");
-	public static final File TEMP_TEMP_BIS_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/temp-bis.tmp");
+	public static final File TEMP_PREFORMATE_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/temp/preformate.tmp");
+	public static final File TEMP_XML_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/temp/xml.tmp");
+	public static final File TEMP_TEMP_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/temp/temp.tmp");
+	public static final File TEMP_TEMP_BIS_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/temp/temp-bis.tmp");
 
 	// Those files holds the XSL generated from FODS ; they will be then copied to resource directory when packaging to JAR
-	public static final File TRANSFORMATIONS_DDI2XFORMS_DDI2XFORMS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2xforms/ddi2xforms.xsl");
-	public static final File TRANSFORMATIONS_DDI2FODT_DDI2FODT_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fodt/ddi2fodt.xsl");
-	public static final File TRANSFORMATIONS_DDI2FO_DDI2FO_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fo/ddi2fo.xsl");
-	public static final File TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/pogues-xml2ddi.xsl");
-	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_DDI2LUNATIC_XML_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2lunatic-xml/ddi2lunatic-xml.xsl");
-	public static final File TRANSFORMATIONS_DDI2XFORMS_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2xforms/drivers.xsl");
-	public static final File TRANSFORMATIONS_DDI2FODT_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fodt/drivers.xsl");
-	public static final File TRANSFORMATIONS_DDI2FO_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fo/drivers.xsl");
-	public static final File TRANSFORMATIONS_POGUES_XML2DDI_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/drivers.xsl");
-	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2lunatic-xml/drivers.xsl");
-	public static final File TRANSFORMATIONS_DDI2XFORMS_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2xforms/functions.xsl");
-	public static final File TRANSFORMATIONS_DDI2FODT_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fodt/functions.xsl");
-	public static final File TRANSFORMATIONS_DDI2FO_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fo/functions.xsl");
-	public static final File TRANSFORMATIONS_POGUES_XML2DDI_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/functions.xsl");
-	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2lunatic-xml/functions.xsl");
-	public static final File TRANSFORMATIONS_DDI2XFORMS_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2xforms/tree-navigation.xsl");
-	public static final File TRANSFORMATIONS_DDI2FODT_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fodt/tree-navigation.xsl");
-	public static final File TRANSFORMATIONS_DDI2FO_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fo/tree-navigation.xsl");
-	public static final File TRANSFORMATIONS_POGUES_XML2DDI_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/tree-navigation.xsl");
-	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2lunatic-xml/tree-navigation.xsl");
+	public static final File TRANSFORMATIONS_DDI2XFORMS_DDI2XFORMS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2xforms/ddi2xforms.xsl");
+	public static final File TRANSFORMATIONS_DDI2FODT_DDI2FODT_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fodt/ddi2fodt.xsl");
+	public static final File TRANSFORMATIONS_DDI2FO_DDI2FO_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fo/ddi2fo.xsl");
+	public static final File TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/pogues-xml2ddi/pogues-xml2ddi.xsl");
+	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_DDI2LUNATIC_XML_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2lunatic-xml/ddi2lunatic-xml.xsl");
+	public static final File TRANSFORMATIONS_DDI2XFORMS_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2xforms/drivers.xsl");
+	public static final File TRANSFORMATIONS_DDI2FODT_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fodt/drivers.xsl");
+	public static final File TRANSFORMATIONS_DDI2FO_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fo/drivers.xsl");
+	public static final File TRANSFORMATIONS_POGUES_XML2DDI_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/pogues-xml2ddi/drivers.xsl");
+	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2lunatic-xml/drivers.xsl");
+	public static final File TRANSFORMATIONS_DDI2XFORMS_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2xforms/functions.xsl");
+	public static final File TRANSFORMATIONS_DDI2FODT_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fodt/functions.xsl");
+	public static final File TRANSFORMATIONS_DDI2FO_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fo/functions.xsl");
+	public static final File TRANSFORMATIONS_POGUES_XML2DDI_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/pogues-xml2ddi/functions.xsl");
+	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2lunatic-xml/functions.xsl");
+	public static final File TRANSFORMATIONS_DDI2XFORMS_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2xforms/tree-navigation.xsl");
+	public static final File TRANSFORMATIONS_DDI2FODT_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fodt/tree-navigation.xsl");
+	public static final File TRANSFORMATIONS_DDI2FO_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fo/tree-navigation.xsl");
+	public static final File TRANSFORMATIONS_POGUES_XML2DDI_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/pogues-xml2ddi/tree-navigation.xsl");
+	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2lunatic-xml/tree-navigation.xsl");
 
-	public static final File INPUTS_DDI_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi/functions.xsl");
-	public static final File INPUTS_DDI_TEMPLATES_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi/templates.xsl");
-	public static final File INPUTS_DDI_SOURCE_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi/source.xsl");
+	public static final File INPUTS_DDI_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi/functions.xsl");
+	public static final File INPUTS_DDI_TEMPLATES_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi/templates.xsl");
+	public static final File INPUTS_DDI_SOURCE_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi/source.xsl");
 
-	public static final File INPUTS_POGUES_XML_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml/functions.xsl");
-	public static final File INPUTS_POGUES_XML_TEMPLATES_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml/templates.xsl");
-	public static final File INPUTS_POGUES_XML_SOURCE_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml/source.xsl");
+	public static final File INPUTS_POGUES_XML_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/pogues-xml/functions.xsl");
+	public static final File INPUTS_POGUES_XML_TEMPLATES_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/pogues-xml/templates.xsl");
+	public static final File INPUTS_POGUES_XML_SOURCE_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/pogues-xml/source.xsl");
 
 	// ---------- Utilies
 	/** Generic file getter from classpath 
@@ -262,7 +254,7 @@ public final class Constants {
 
 
 	/** Generic getter for files or directories */
-	private static File getFileOrDirectoryFromPath(String path) {
+	public static File getFileOrDirectoryFromPath(String path) {
 		return Paths.get(path).toFile();
 	}
 
@@ -277,77 +269,4 @@ public final class Constants {
 			return file;
 		}
 	}
-	
-	/********************************************************/
-	/*********************** Temp foder  ********************/
-	/********************************************************/
-	public static String tEMP_XFORMS_FOLDER (String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER + "/xforms";
-	}
-	public static String tEMP_ODT_FOLDER(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER + "/fodt";
-	}
-	public static String tEMP_JS_FOLDER(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER+ "/lunatic-xml";
-	}
-	public static String tEMP_PDF_FOLDER(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER+ "/fo";
-	}
-	public static String tEMP_DDI_FOLDER(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER + "/ddi";
-	}
-	public static String tEMP_POGUES_XML_FOLDER(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER + "/pogues-xml";
-	}
-	public static final String BASIC_FORM_TMP_FILENAME = "basic-form.xml";
-	
-	
-	
-	
-	/********************************************************/
-	/********************* File Extension *******************/
-	/************** (used during post-processing) ***********/
-	
-	public static final String BASE_NAME_FORM_FILE = "/form";
-
-	/************ DDI and pogues-xml extension ***************/
-	public static final String CLEANED_EXTENSION = "-cleaned.tmp";
-	public static final String MD_EXTENSION = "-md.tmp";
-	public static final String MD2_EXTENSION = "-md2.tmp";
-	public static final String FINAL_EXTENSION = "-final.tmp";
-	public static final String TEMP_EXTENSION = "-temp.xml";
-	public static final String FINAL_DDI_EXTENSION = "-final.xml";
-	public static final String DDI32_DDI33_EXTENSION = "-ddi33.xml";
-	public static final String MULTIMODAL_EXTENSION = "-modal.tmp";
-
-	/********************* pdf/fo extension *******************/
-	public static final String ACCOMPANYING_MAILS_FO_EXTENSION = "-accompanying-mails.fo";
-	public static final String COVER_PAGE_FO_EXTENSION = "-cover-page.fo";
-	public static final String EDIT_STRUCTURE_FO_EXTENSION = "-edit-structure.fo";
-	public static final String END_QUESTION_FO_EXTENSION = "-end-question.fo";
-	public static final String SPECIFIC_TREAT_PDF_EXTENSION = "-specific-form.fo";
-	public static final String TABLE_COL_SIZE_PDF_EXTENSION = "-temp.fo";
-	public static final String FINAL_PDF_EXTENSION = "-final-out.fo";
-	public static final String MAILING_FO_EXTENSION = "-mailing-vtl.fo";
-
-	/****************** js/xml-lunatic extension **************/
-	public static final String SORT_COMPONENTS_LUNATIC_XML_EXTENSION = "-sorted.xml";
-	public static final String INSERT_GENERIC_QUESTIONS_LUNATIC_XML_EXTENSION = "-insert-questions.xml";
-	public static final String EXTERNALIZE_VARIABLES_LUNATIC_XML_EXTENSION = "-ext-variables.xml";
-	public static final String INSERT_CLEANING_BLOCK_XML_EXTENSION = "-insert-cleaningblock.xml";
-	public static final String VTL_PARSER_LUNATIC_XML_EXTENSION = "-vtl-parsed.xml";
-	public static final String SPECIFIC_TREAT_LUNATIC_XML_EXTENSION = "-specific-form.xml";
-	public static final String PAGINATION_LUNATIC_XML_EXTENSION = "-sorted.xml";
-	public static final String FINAL_LUNATIC_XML_EXTENSION = "-lunatic.xml";
-
-	/******************** fr/xform extension ******************/
-	public static final String BROWSING_XFORMS_EXTENSION = "-browsing.xhtml";
-	public static final String INSEE_PATTERN_XFORMS_EXTENSION = "-insee-pattern.xhtml";
-	public static final String FIX_ADHERENCE_XFORMS_EXTENSION = "-fix-adherence.xhtml";
-	public static final String IDENTIFICATION_XFORMS_EXTENSION = "-identification.xhtml";
-	public static final String INSERT_END_XFORMS_EXTENSION = "-insert-end.xhtml";
-	public static final String INSERT_WELCOME_XFORMS_EXTENSION = "-insert-welcome.xhtml";
-	public static final String INSERT_GENERIC_QUESTIONS_XFORMS_EXTENSION = "-insert-questions.xhtml";
-	public static final String INSEE_MODEL_XFORMS_EXTENSION = "-insee-model.xhtml";
-	public static final String SPECIFIC_TREATMENT_XFORMS_EXTENSION = "-specific-treatment.xhtml";
 }

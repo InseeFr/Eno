@@ -1,19 +1,16 @@
 package fr.insee.eno.postprocessing.xforms;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import fr.insee.eno.exception.Utils;
-import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
+import fr.insee.eno.exception.Utils;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 public class XFORMSInsertGenericQuestionsPostprocessor implements Postprocessor {
 
@@ -24,20 +21,16 @@ public class XFORMSInsertGenericQuestionsPostprocessor implements Postprocessor 
 	private static final String styleSheetPath = Constants.UTIL_XFORMS_INSERT_GENERIC_QUESTIONS_XSL;
 
 	@Override
-	public File process(File input, byte[] parameters, String surveyName) throws Exception {
+	public ByteArrayOutputStream process(InputStream inputStream, byte[] parameters, String surveyName) throws Exception {
+		logger.info(String.format("%s Target : START",toString().toLowerCase()));
 
-		File outputForFRFile = new File(input.getParent(),
-				Constants.BASE_NAME_FORM_FILE +
-				Constants.INSERT_GENERIC_QUESTIONS_XFORMS_EXTENSION);
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
+		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
+			 inputStream;){
 
-		InputStream inputStream = FileUtils.openInputStream(input);
-		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
+			saxonService.transformXformsToXformsSimplePost(inputStream, byteArrayOutputStream, xslIS, parameters);
 
-		InputStream FR_XSL = Constants.getInputStreamFromPath(styleSheetPath);
-		try {
-			saxonService.transformXformsToXformsSimplePost(inputStream,outputStream, FR_XSL,parameters);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),
@@ -46,12 +39,8 @@ public class XFORMSInsertGenericQuestionsPostprocessor implements Postprocessor 
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
-		inputStream.close();
-		outputStream.close();
-		FR_XSL.close();
-		logger.info("End of Insert-generic-questions post-processing." + outputForFRFile.getAbsolutePath());
 
-		return outputForFRFile;
+		return byteArrayOutputStream;
 	}
 
 	@Override

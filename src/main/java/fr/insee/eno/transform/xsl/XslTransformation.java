@@ -1,21 +1,18 @@
 package fr.insee.eno.transform.xsl;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
-
+import fr.insee.eno.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import fr.insee.eno.Constants;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Main Saxon Service used to perform XSLT transformations
@@ -122,18 +119,15 @@ public class XslTransformation {
 	 * @param input                 : the input xml file
 	 * @param xslSheet              : the xsl stylesheet that will be used
 	 * @param output                : the xml output that will be created
-	 * @param outputFolderParameter : Markdown to XHTML xsl parameter
 	 * @throws Exception : if the factory couldn't be found or if the paths are
 	 *                   incorrect
 	 */
-	public void transformMw2XHTML(InputStream input, InputStream xslSheet, OutputStream output,
-			File outputFolderParameter) throws Exception {
+	public void transformMw2XHTML(InputStream input, InputStream xslSheet, OutputStream output) throws Exception {
 		LOGGER.debug("Using the Markdown to XHTML transformer");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
 		transformer.setErrorListener(new EnoErrorListener());
-		transformer.setParameter(XslParameters.MW2XHTML_OUTPUT_FOLDER, outputFolderParameter);
 		xslTransform(transformer, input, output);
 	}
 
@@ -143,18 +137,15 @@ public class XslTransformation {
 	 * @param input                 : the input xml file
 	 * @param xslSheet              : the xsl stylesheet that will be used
 	 * @param output                : the xml output that will be created
-	 * @param outputFolderParameter : TweakXhtmlForDdi xsl parameter
 	 * @throws Exception : if the factory couldn't be found or if the paths are
 	 *                   incorrect
 	 */
-	public void transformTweakXhtmlForDdi(InputStream input, InputStream xslSheet, OutputStream output,
-			File outputFolderParameter) throws Exception {
+	public void transformTweakXhtmlForDdi(InputStream input, InputStream xslSheet, OutputStream output) throws Exception {
 		LOGGER.debug("Using the TweakXhtmlForDdi transformer");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
-		transformer.setErrorListener(new EnoErrorListener());
-		transformer.setParameter(XslParameters.TWEAK_XHTML_FOR_DDI_OUTPUT_FOLDER, outputFolderParameter);
+		transformer.setErrorListener(new EnoErrorListener());;
 		xslTransform(transformer, input, output);
 	}
 

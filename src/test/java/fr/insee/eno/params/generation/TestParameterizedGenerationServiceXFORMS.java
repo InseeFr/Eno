@@ -1,13 +1,18 @@
 package fr.insee.eno.params.generation;
 
-import java.io.File;
-
+import fr.insee.eno.service.ParameterizedGenerationService;
+import fr.insee.eno.test.XMLDiff;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.xmlunit.diff.Diff;
 
-import fr.insee.eno.service.ParameterizedGenerationService;
-import fr.insee.eno.test.XMLDiff;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+
+import static fr.insee.eno.Constants.createTempEnoFile;
 
 public class TestParameterizedGenerationServiceXFORMS {
 
@@ -22,10 +27,21 @@ public class TestParameterizedGenerationServiceXFORMS {
 		File params = new File(String.format("%s/params-xforms.xml", basePathDDI));
 
 		try {
-			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, null, null);
+			File outputFile = createTempEnoFile();
+			ByteArrayOutputStream output = parameterizedGenerationService.generateQuestionnaire(
+					new ByteArrayInputStream(FileUtils.readFileToByteArray(input)),
+					new ByteArrayInputStream(FileUtils.readFileToByteArray(params)),
+					null,
+					null,
+					null);
+			try (FileOutputStream fos = new FileOutputStream(outputFile)) {
+				fos.write(output.toByteArray());
+			}
+			output.close();
 			File expectedFile = new File(String.format("%s/form.xhtml", basePathDDI));
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 			Assertions.assertFalse(diff::hasDifferences, () -> getDiffMessage(diff, basePathDDI));
+			FileUtils.delete(outputFile);
 		} catch (Exception e) {
 			Assertions.fail();
 			// TODO Auto-generated catch block
@@ -41,10 +57,21 @@ public class TestParameterizedGenerationServiceXFORMS {
 		File params = new File(String.format("%s/params-xforms.xml", basePathDDI));
 		File metadata = new File(String.format("%s/metadata.xml", basePathDDI));
 
-		File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, metadata, null, null);
+		File outputFile = createTempEnoFile();
+		ByteArrayOutputStream output = parameterizedGenerationService.generateQuestionnaire(
+				new ByteArrayInputStream(FileUtils.readFileToByteArray(input)),
+				new ByteArrayInputStream(FileUtils.readFileToByteArray(params)),
+				new ByteArrayInputStream(FileUtils.readFileToByteArray(metadata)),
+				null,
+				null);
+		try (FileOutputStream fos = new FileOutputStream(outputFile)) {
+			fos.write(output.toByteArray());
+		}
+		output.close();
 		File expectedFile = new File(String.format("%s/form.xhtml", basePathDDI));
 		Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 		Assertions.assertFalse(diff::hasDifferences, () -> getDiffMessage(diff, basePathDDI));
+		FileUtils.delete(outputFile);
 
 	}
 
@@ -57,11 +84,21 @@ public class TestParameterizedGenerationServiceXFORMS {
 		File specificTreatment = new File(String.format("%s/xforms-specific-treatment.xsl", basePathDDI));
 
 		try {
-			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, metadata,
-					specificTreatment, null);
+			File outputFile = createTempEnoFile();
+			ByteArrayOutputStream output = parameterizedGenerationService.generateQuestionnaire(
+					new ByteArrayInputStream(FileUtils.readFileToByteArray(input)),
+					new ByteArrayInputStream(FileUtils.readFileToByteArray(params)),
+					new ByteArrayInputStream(FileUtils.readFileToByteArray(metadata)),
+					new ByteArrayInputStream(FileUtils.readFileToByteArray(specificTreatment)),
+					null);
+			try (FileOutputStream fos = new FileOutputStream(outputFile)) {
+				fos.write(output.toByteArray());
+			}
+			output.close();
 			File expectedFile = new File(String.format("%s/form.xhtml", basePathDDI));
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 			Assertions.assertFalse(diff::hasDifferences, () -> getDiffMessage(diff, basePathDDI));
+			FileUtils.delete(outputFile);
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assertions.fail();

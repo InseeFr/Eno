@@ -1,17 +1,18 @@
 package fr.insee.eno.xsl;
 
+import fr.insee.eno.Constants;
+import fr.insee.eno.transform.xsl.XslTransformation;
+import fr.insee.eno.utils.FolderCleaner;
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import fr.insee.eno.Constants;
-import fr.insee.eno.transform.xsl.XslTransformation;
-import fr.insee.eno.utils.FolderCleaner;
+import static fr.insee.eno.Constants.ENO_TEMP_FOLDER_PATH;
 
 /**
  * The core engine of Eno is based on XSL functions that are generated from a catalog
@@ -85,7 +86,7 @@ public class FodsToXSLCompiler {
 	 */
 	private static void cleaning() throws IOException {
 		logger.debug("Before compilation : Cleaning /temp folder");
-		cleanService.cleanOneFolder(Constants.TEMP_FOLDER);
+		cleanService.cleanOneFolder(Constants.getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH));
 		logger.debug("/temp folder cleaned");
 	}
 	

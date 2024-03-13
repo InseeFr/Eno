@@ -1,20 +1,13 @@
 package fr.insee.eno.params.validation;
 
+import fr.insee.eno.parameters.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import fr.insee.eno.parameters.ENOParameters;
-import fr.insee.eno.parameters.InFormat;
-import fr.insee.eno.parameters.Mode;
-import fr.insee.eno.parameters.OutFormat;
-import fr.insee.eno.parameters.Pipeline;
-import fr.insee.eno.parameters.PostProcessing;
-import fr.insee.eno.parameters.PreProcessing;
 
 public class ValidatorImpl implements Validator {
 

@@ -1,16 +1,12 @@
 package fr.insee.eno.params.pipeline;
 
-import java.util.List;
-
 import fr.insee.eno.generation.Generator;
-import fr.insee.eno.parameters.InFormat;
-import fr.insee.eno.parameters.OutFormat;
-import fr.insee.eno.parameters.Pipeline;
-import fr.insee.eno.parameters.PostProcessing;
-import fr.insee.eno.parameters.PreProcessing;
+import fr.insee.eno.parameters.*;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.Preprocessor;
 import fr.insee.eno.service.GenerationService;
+
+import java.util.List;
 
 public interface PipelineGenerator {
 	

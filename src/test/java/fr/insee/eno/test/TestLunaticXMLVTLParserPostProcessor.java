@@ -1,20 +1,20 @@
 package fr.insee.eno.test;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
+import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLVTLParserPostprocessor;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.xmlunit.diff.Diff;
 
-import fr.insee.eno.Constants;
-import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLVTLParserPostprocessor;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import static fr.insee.eno.Constants.createTempEnoFile;
 
 public class TestLunaticXMLVTLParserPostProcessor {
 
@@ -71,11 +71,17 @@ public class TestLunaticXMLVTLParserPostProcessor {
 		try {
 			Path basePath = Path.of(TestLunaticXMLVTLParserPostProcessor.class.getResource("/lunatic-xml-vtl-parsing").toURI());
 
-			Path outPath = Paths.get(Constants.TEMP_FOLDER_PATH + "/test-vtl.xml");
+			Path outPath = Paths.get(Constants.ENO_TEMP_FOLDER_PATH + "/test-vtl.xml");
 			Files.deleteIfExists(outPath);
 			Path outputFilePath = Files.createFile(outPath);
 			File in = basePath.resolve("in.xml").toFile();
-			File outPostProcessing = lunaticXMLVtlParserPostprocessor.process(in, null, "test");
+			ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(in));
+			File outPostProcessing = createTempEnoFile();
+			ByteArrayOutputStream output = lunaticXMLVtlParserPostprocessor.process(inputStream, null, "test");
+			try (FileOutputStream fos = new FileOutputStream(outPostProcessing)) {
+				fos.write(output.toByteArray());
+			}
+			output.close();
 			FileUtils.copyFile(outPostProcessing,outputFilePath.toFile());
 			FileUtils.forceDelete(outPostProcessing);
 			File expectedFile = basePath.resolve("out.xml").toFile();

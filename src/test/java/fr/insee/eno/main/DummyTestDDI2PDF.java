@@ -1,12 +1,16 @@
 package fr.insee.eno.main;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URI;
+import fr.insee.eno.generation.DDI2FOGenerator;
+import fr.insee.eno.postprocessing.Postprocessor;
+import fr.insee.eno.postprocessing.fo.*;
+import fr.insee.eno.preprocessing.*;
+import fr.insee.eno.service.GenerationService;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.fop.apps.Fop;
+import org.apache.fop.apps.FopFactory;
+import org.apache.fop.apps.MimeConstants;
+import org.junit.jupiter.api.Test;
 
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -14,29 +18,8 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
-
-import org.apache.commons.io.FilenameUtils;
-import org.apache.fop.apps.Fop;
-import org.apache.fop.apps.FopFactory;
-import org.apache.fop.apps.MimeConstants;
-import org.junit.jupiter.api.Test;
-
-import fr.insee.eno.generation.DDI2FOGenerator;
-import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.postprocessing.fo.FOEditStructurePagesPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOInsertAccompanyingMailsPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOInsertCoverPagePostprocessor;
-import fr.insee.eno.postprocessing.fo.FOInsertEndQuestionPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOMailingPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOSpecificTreatmentPostprocessor;
-import fr.insee.eno.postprocessing.fo.FOTableColumnPostprocessorFake;
-import fr.insee.eno.service.GenerationService;
-import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
-import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
-import fr.insee.eno.preprocessing.DDIMarkdown2XhtmlPreprocessor;
-import fr.insee.eno.preprocessing.DDIMultimodalSelectionPreprocessor;
-import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
-import fr.insee.eno.preprocessing.Preprocessor;
+import java.io.*;
+import java.net.URI;
 
 public class DummyTestDDI2PDF {
 	
@@ -69,11 +52,17 @@ public class DummyTestDDI2PDF {
 		File in = new File(String.format("%s/in.xml", basePathddi2PDF));
 		File xconf = new File(String.format("%s/fop.xconf", basePathddi2PDF));
 
+
 		try {
 			InputStream isXconf = new FileInputStream(xconf);
 			URI imgFolderUri = new File(basePathImg).toURI();
-
-			File outputFO = genServiceDDI2PDF.generateQuestionnaire(in, "test");
+			ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(in));
+			ByteArrayOutputStream output = genServiceDDI2PDF.generateQuestionnaire(inputStream, "test");
+			File outputFO = File.createTempFile("eno-",".xml");
+			try (FileOutputStream fos = new FileOutputStream(outputFO)) {
+				fos.write(output.toByteArray());
+			}
+			output.close();
 
 			// Step 1: Construct a FopFactory by specifying a reference to the
 			// configuration file

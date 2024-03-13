@@ -1,18 +1,15 @@
 package fr.insee.eno.preprocessing;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
-
+import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.exception.Utils;
-import org.apache.commons.io.FileUtils;
+import fr.insee.eno.parameters.PreProcessing;
+import fr.insee.eno.transform.xsl.XslTransformation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.insee.eno.Constants;
-import fr.insee.eno.exception.EnoGenerationException;
-import fr.insee.eno.parameters.PreProcessing;
-import fr.insee.eno.transform.xsl.XslTransformation;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 /**
  * A DDI specific preprocessor.
@@ -25,24 +22,29 @@ public class DDIMappingPreprocessor implements Preprocessor {
 
 	private static final String styleSheetPath = Constants.UTIL_DDI_MAPPING_XSL;
 
+	/**
+	 * Warning the output is not a kind of ddi but juste a mappging file (used later in post proccessing)
+	 * @param inputStream
+	 *            The file to preprocess
+	 * @param parameters
+	 *            An optional parameters file
+	 * @param survey
+	 *            An optional parameters file
+	 * @param in2out
+	 * @return
+	 * @throws Exception
+	 */
 	@Override
-	public File process(File inputFile, byte[] parametersFile, String survey, String in2out) throws Exception {
-		logger.info("DDIPreprocessing Target : START");
-		System.out.println(saxonService);
+	public ByteArrayOutputStream process(InputStream inputStream, byte[] parameters, String survey, String in2out) throws Exception {
+		logger.info(String.format("%s Target : START",toString().toLowerCase()));
 
-		String sUB_TEMP_FOLDER = Constants.tEMP_DDI_FOLDER(Constants.sUB_TEMP_FOLDER(survey));
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-		File mappingFile =Constants.tEMP_MAPPING_TMP(sUB_TEMP_FOLDER);
-		// ----- Dereferencing
-		logger.debug("Mapping : -Input : " + inputFile + " -Output : " + mappingFile
-				+ " -Stylesheet : " + styleSheetPath + " -Parameters : " + sUB_TEMP_FOLDER);
+		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
+			 inputStream;){
 
-		InputStream isDDI_MAPPING_XSL = Constants.getInputStreamFromPath(styleSheetPath);
-		InputStream isInputFile = FileUtils.openInputStream(inputFile);
-		OutputStream osTEMP_MAPPING_TMP = FileUtils.openOutputStream(mappingFile);
-		
-		try {
-			saxonService.transformMapping(isInputFile, isDDI_MAPPING_XSL, osTEMP_MAPPING_TMP,parametersFile);
+			saxonService.transformMapping(inputStream, xslIS, byteArrayOutputStream, parameters);
+
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
 					toString(),
@@ -52,14 +54,8 @@ public class DDIMappingPreprocessor implements Preprocessor {
 			throw new EnoGenerationException(errorMessage);
 		}
 
-		isInputFile.close();
-		isDDI_MAPPING_XSL.close();
-		osTEMP_MAPPING_TMP.close();
-
-		return inputFile;
-
+		return byteArrayOutputStream;
 	}
-
 	public String toString() {
 		return PreProcessing.DDI_MAPPING.name();
 	}

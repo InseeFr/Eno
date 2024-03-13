@@ -1,6 +1,7 @@
 package fr.insee.eno.preprocessing;
 
-import java.io.File;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 /**
  * Operates a set of transformation to prepare the generation.
@@ -21,7 +22,7 @@ public interface Preprocessor {
 	 * @throws Exception
 	 *             when it goes wrong
 	 */
-	public File process(File inputFile, byte[] parameters, String survey, String in2out) throws Exception;
+	public ByteArrayOutputStream process(InputStream inputFile, byte[] parameters, String survey, String in2out) throws Exception;
 
 	public String toString();
 }

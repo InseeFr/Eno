@@ -1,19 +1,16 @@
 package fr.insee.eno.postprocessing.xforms;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import fr.insee.eno.exception.Utils;
-import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
+import fr.insee.eno.exception.Utils;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 public class XFORMSInsertWelcomePostprocessor implements Postprocessor {
 
@@ -24,25 +21,17 @@ public class XFORMSInsertWelcomePostprocessor implements Postprocessor {
 	private static final String styleSheetPath = Constants.UTIL_XFORMS_INSERT_WELCOME_XSL;
 
 	@Override
-	public File process(File input, byte[] parameters, String survey) throws Exception {
+	public ByteArrayOutputStream process(InputStream input, byte[] parameters, String survey) throws Exception {
 		return this.process(input, parameters, null, survey);
 	}
 
 	@Override
-	public File process(File input, byte[] parameters, byte[] metadata, String survey) throws Exception {
-
-		File outputForFRFile = new File(input.getParent(),
-				Constants.BASE_NAME_FORM_FILE +
-				Constants.INSERT_WELCOME_XFORMS_EXTENSION);
-
-		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
+	public ByteArrayOutputStream process(InputStream inputStream, byte[] parameters, byte[] metadata, String survey) throws Exception {
 
 		InputStream FO_XSL = Constants.getInputStreamFromPath(styleSheetPath);
 
-		InputStream inputStream = FileUtils.openInputStream(input);
-		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
-
-		try {
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		try(inputStream; FO_XSL) {
 			saxonService.transformWithMetadata(inputStream, outputStream, FO_XSL, parameters, metadata);
 		}catch(Exception e) {
 			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
@@ -52,13 +41,9 @@ public class XFORMSInsertWelcomePostprocessor implements Postprocessor {
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
-
-		inputStream.close();
-		outputStream.close();
 		FO_XSL.close();
-		logger.info("End of insert welcome post-processing " + outputForFRFile.getAbsolutePath());
-
-		return outputForFRFile;
+		logger.info("End of EditPatron post-processing");
+		return outputStream;
 	}
 
 	@Override

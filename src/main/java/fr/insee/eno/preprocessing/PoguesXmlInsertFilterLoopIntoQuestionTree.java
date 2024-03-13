@@ -1,18 +1,15 @@
 package fr.insee.eno.preprocessing;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
+import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
+import fr.insee.eno.exception.Utils;
+import fr.insee.eno.parameters.PreProcessing;
+import fr.insee.eno.transform.xsl.XslTransformation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.insee.eno.Constants;
-import fr.insee.eno.exception.EnoGenerationException;
-import fr.insee.eno.parameters.PreProcessing;
-import fr.insee.eno.transform.xsl.XslTransformation;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 public class PoguesXmlInsertFilterLoopIntoQuestionTree implements Preprocessor {
 
@@ -20,41 +17,29 @@ public class PoguesXmlInsertFilterLoopIntoQuestionTree implements Preprocessor {
 
 	private XslTransformation saxonService = new XslTransformation();
 
+	private static final String styleSheetPath = Constants.UTIL_POGUES_XML_LOOP_FILTER_INTO_QUESTION_TREE_XSL;
+
 	@Override
-	public File process(File inputFile, byte[] parametersFile, String surveyName, String in2out) throws Exception {
+	public ByteArrayOutputStream process(InputStream inputStream, byte[] parameters, String survey, String in2out) throws Exception {
+		logger.info(String.format("%s Target : START",toString().toLowerCase()));
 
-		logger.info("PoguesXMLPreprocessing Target : START");
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-		String outputPreprocessINSERTLOOPFILTERTREE = null;
+		try (InputStream xslIS = Constants.getInputStreamFromPath(styleSheetPath);
+			 inputStream;){
 
-		outputPreprocessINSERTLOOPFILTERTREE = FilenameUtils.removeExtension(inputFile.getAbsolutePath())
-				+ Constants.TEMP_EXTENSION;
+			saxonService.transform(inputStream, xslIS, byteArrayOutputStream);
 
-		logger.debug("INSERT LOOP FILTER TREE : -Input : " + inputFile + " -Output : " + outputPreprocessINSERTLOOPFILTERTREE + " -Stylesheet : "
-				+ Constants.UTIL_POGUES_XML_LOOP_FILTER_INTO_QUESTION_TREE_XSL + " -Parameters : "
-				+ (parametersFile == null ? "Default parameters" : "Provided parameters"));
-
-		InputStream isInputFile = FileUtils.openInputStream(inputFile);
-		InputStream isUTIL_POGUES_XML_LOOP_FILTER_INTO_QUESTION_TREE_XSL = Constants
-				.getInputStreamFromPath(Constants.UTIL_POGUES_XML_LOOP_FILTER_INTO_QUESTION_TREE_XSL);
-		OutputStream osINSERTLOOPFILTERTREE = FileUtils.openOutputStream(new File(outputPreprocessINSERTLOOPFILTERTREE));
-
-		try {
-			saxonService.transform(isInputFile, isUTIL_POGUES_XML_LOOP_FILTER_INTO_QUESTION_TREE_XSL, osINSERTLOOPFILTERTREE);
 		}catch(Exception e) {
-			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
+					toString(),
+					e.getMessage(),
+					Utils.getErrorLocation(styleSheetPath,e));
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
-		
-		isInputFile.close();
-		isUTIL_POGUES_XML_LOOP_FILTER_INTO_QUESTION_TREE_XSL.close();
-		osINSERTLOOPFILTERTREE.close();
 
-
-		logger.debug("PoguesXMLPreprocessing : END");
-		return new File(outputPreprocessINSERTLOOPFILTERTREE);
-
+		return byteArrayOutputStream;
 	}
 
 	public String toString() {
