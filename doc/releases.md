@@ -1,5 +1,9 @@
 # Eno Releases note
 
+## [v2.8.0] - 2024-03-13
+### :memo: Documentation Changes
+
+
 ## [v2.7.3] - 2024-02-05
 ### :bug: Bug Fixes
 - [`e427bd3`](https://github.com/InseeFr/Eno/commit/e427bd397b421052147274234dacd05577adc3cc) - suggester *(PR [#900](https://github.com/InseeFr/Eno/pull/900) by [@nsenave](https://github.com/nsenave))*
@@ -235,3 +239,4 @@
 - **[ddi2lunaticXML][core]** Changing the lunatic-model, using v.2.0.0.
 
 [v2.7.3]: https://github.com/InseeFr/Eno/compare/v2.7.2...v2.7.3
+[v2.8.0]: https://github.com/InseeFr/Eno/compare/v2.7.3...v2.8.0
