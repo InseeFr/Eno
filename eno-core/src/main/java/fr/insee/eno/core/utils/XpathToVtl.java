@@ -5,6 +5,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Code copied from Eno v2, designed to convert expressions of questionnaire that use XPath to VTL expressions.
+ * Yey, the usage of XPath in questionnaires has been deprecated so this will be removed in a short while.
+ * Before that, it is used in an utility endpoint in the web-service for som users.
+ */
 public class XpathToVtl {
 
     public static final String XPATH_CONCAT_FUNCTION = "concat";
