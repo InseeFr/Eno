@@ -4,5 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public record SpecificTreatments(
-        @JsonProperty(value = "regroupements")  List<Regroupement> regroupements) {}
+public record SpecificTreatments(@JsonProperty(value = "suggesters") List<EnoSuggesterType> suggesters,
+                                 @JsonProperty(value = "regroupements")  List<Regroupement> regroupements) {
+}
