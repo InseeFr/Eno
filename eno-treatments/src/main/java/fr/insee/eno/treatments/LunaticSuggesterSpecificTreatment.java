@@ -11,7 +11,7 @@ import java.util.List;
  * Processing for suggesters
  */
 @Slf4j
-public class LunaticSuggesterProcessing implements ProcessingStep<Questionnaire> {
+public class LunaticSuggesterSpecificTreatment implements ProcessingStep<Questionnaire> {
 
     private final List<EnoSuggesterType> enoSuggesters;
 
@@ -19,7 +19,7 @@ public class LunaticSuggesterProcessing implements ProcessingStep<Questionnaire>
      * Initialize eno suggesters from input
      * @param suggesters suggester list
      */
-    public LunaticSuggesterProcessing(List<EnoSuggesterType> suggesters) {
+    public LunaticSuggesterSpecificTreatment(List<EnoSuggesterType> suggesters) {
         this.enoSuggesters = suggesters;
     }
 
