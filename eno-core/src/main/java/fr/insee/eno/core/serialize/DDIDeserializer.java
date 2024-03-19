@@ -9,11 +9,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+/**
+ * Wrapper class for the deserializer provided by the DDI lib.
+ */
 @Slf4j
 public class DDIDeserializer {
 
     private DDIDeserializer() {}
 
+    /**
+     * Deserializes the DDI document from given input stream.
+     * @param ddiInputStream Input stream of a DDI document.
+     * @return A DDI instance document.
+     * @throws DDIParsingException if an error occurs during deserialization.
+     */
     public static DDIInstanceDocument deserialize(InputStream ddiInputStream) throws DDIParsingException {
         log.info("Parsing DDI document from input stream given");
         try {
@@ -25,6 +34,12 @@ public class DDIDeserializer {
         }
     }
 
+    /**
+     * Deserializes the DDI document file from given URL.
+     * @param ddiUrl URL of a DDI instance document.
+     * @return A DDI instance document.
+     * @throws DDIParsingException if an error occurs during deserialization.
+     */
     public static DDIInstanceDocument deserialize(URL ddiUrl) throws DDIParsingException {
         log.info("Parsing DDI document from URL " + ddiUrl);
         log.atDebug().log(()->"Test DEBUG logs with lambdas");

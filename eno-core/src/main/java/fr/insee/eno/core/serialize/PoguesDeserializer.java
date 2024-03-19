@@ -10,11 +10,21 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 
+/**
+ * Wrapper class for Pogues-Model deserializer.
+ */
 @Slf4j
 public class PoguesDeserializer {
 
     private PoguesDeserializer() {}
 
+    /**
+     * Deserializes the Pogues json file from given URL.
+     * @param poguesFileUrl Url of a Pogues json questionnaire file.
+     * @return A Pogues-Model questionnaire.
+     * @throws PoguesDeserializationException if deserialization fails.
+     * @throws URISyntaxException if the given URL cannot be converted to an URI.
+     */
     public static Questionnaire deserialize(URL poguesFileUrl) throws PoguesDeserializationException, URISyntaxException {
         JSONDeserializer poguesDeserializer = new JSONDeserializer();
         log.info("Parsing Pogues files from URL " + poguesFileUrl);

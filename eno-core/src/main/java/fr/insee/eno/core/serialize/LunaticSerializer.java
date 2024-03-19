@@ -5,6 +5,10 @@ import fr.insee.lunatic.conversion.JsonSerializer;
 import fr.insee.lunatic.exception.SerializationException;
 import fr.insee.lunatic.model.flat.Questionnaire;
 
+/**
+ * Wrapper class for Lunatic-Model serializer.
+ */
+@Slf4j
 public class LunaticSerializer {
     private LunaticSerializer() {
         throw new IllegalArgumentException("Utility class");
