@@ -27,11 +27,11 @@ public class PoguesDeserializer {
      */
     public static Questionnaire deserialize(URL poguesFileUrl) throws PoguesDeserializationException, URISyntaxException {
         JSONDeserializer poguesDeserializer = new JSONDeserializer();
-        log.info("Parsing Pogues files from URL " + poguesFileUrl);
+        log.info("Deserializing Pogues json questionnaire from URL {}.", poguesFileUrl);
         try {
             Questionnaire poguesQuestionnaire = poguesDeserializer.deserialize(
                     Path.of(poguesFileUrl.toURI()).toString());
-            log.info("Successfully parsed DDI from URL " + poguesFileUrl);
+            log.info("Successfully deserialized Pogues questionnaire from URL {}.", poguesFileUrl);
             return poguesQuestionnaire;
         } catch (JAXBException e) {
             throw new PoguesDeserializationException("Unable to parse Pogues file from URL " + poguesFileUrl, e);

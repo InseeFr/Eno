@@ -24,7 +24,7 @@ public class DDIDeserializer {
      * @throws DDIParsingException if an error occurs during deserialization.
      */
     public static DDIInstanceDocument deserialize(InputStream ddiInputStream) throws DDIParsingException {
-        log.info("Parsing DDI document from input stream given");
+        log.info("Deserializing DDI document from input stream given.");
         try {
             return DDIInstanceDocument.Factory.parse(ddiInputStream);
         } catch (XmlException e) {
@@ -41,11 +41,10 @@ public class DDIDeserializer {
      * @throws DDIParsingException if an error occurs during deserialization.
      */
     public static DDIInstanceDocument deserialize(URL ddiUrl) throws DDIParsingException {
-        log.info("Parsing DDI document from URL " + ddiUrl);
-        log.atDebug().log(()->"Test DEBUG logs with lambdas");
+        log.info("Deserializing DDI document from URL {}.", ddiUrl);
         try (InputStream is = ddiUrl.openStream()) {
             DDIInstanceDocument ddiInstanceDocument = DDIInstanceDocument.Factory.parse(is);
-            log.info("Successfully parsed DDI from URL " + ddiUrl);
+            log.info("Successfully deserialized DDI from URL {}.", ddiUrl);
             return ddiInstanceDocument;
         } catch (XmlException e) {
             throw new DDIParsingException("Unable to parse DDI document from URL " + ddiUrl, e);
