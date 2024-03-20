@@ -27,7 +27,7 @@ class EnoSuggesterTypeTest {
         List<EnoSuggesterField> enoFields = List.of(enoField1, enoField2);
 
         EnoSuggesterType enoType = new EnoSuggesterType(responseNames, "name", enoFields, true,
-                BigInteger.ONE, List.of("stopWord1", "stopWord2"), order, queryParser, "url", "version");
+                BigInteger.ONE, List.of("stopWord1", "stopWord2"), order, queryParser, "url", BigInteger.ONE);
         SuggesterType type = EnoSuggesterType.toLunaticModel(enoType);
 
         assertEquals(type.getName(), enoType.getName());
