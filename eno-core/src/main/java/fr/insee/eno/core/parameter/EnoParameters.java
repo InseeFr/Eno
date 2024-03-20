@@ -186,9 +186,10 @@ public class EnoParameters {
         }
         //
         boolean isInterviewMode = ModeParameter.CAPI.equals(modeParameter) || ModeParameter.CATI.equals(modeParameter);
+        boolean isWebMode = ModeParameter.CAWI.equals(modeParameter);
         boolean isProcessMode = ModeParameter.PROCESS.equals(modeParameter);
         //
-        this.setIdentificationQuestion(Context.BUSINESS.equals(context));
+        this.setIdentificationQuestion(Context.BUSINESS.equals(context) && !isWebMode);
         this.setResponseTimeQuestion(Context.BUSINESS.equals(context));
         this.setCommentSection(Context.BUSINESS.equals(context) || (isInterviewMode || isProcessMode));
         this.setSequenceNumbering(true);
