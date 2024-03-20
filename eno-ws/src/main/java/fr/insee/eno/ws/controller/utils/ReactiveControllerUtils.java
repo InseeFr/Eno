@@ -4,7 +4,7 @@ import fr.insee.eno.core.exceptions.business.EnoParametersException;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.treatments.LunaticPostProcessing;
 import fr.insee.eno.treatments.LunaticRegroupementProcessing;
-import fr.insee.eno.treatments.LunaticSuggesterProcessing;
+import fr.insee.eno.treatments.LunaticSuggesterSpecificTreatment;
 import fr.insee.eno.treatments.SpecificTreatmentsDeserializer;
 import fr.insee.eno.treatments.dto.EnoSuggesterType;
 import fr.insee.eno.treatments.dto.Regroupement;
@@ -121,7 +121,7 @@ public class ReactiveControllerUtils {
                         SpecificTreatments treatments = deserializer.deserialize(specificTreatmentStream);
                         List<EnoSuggesterType> suggesters = treatments.suggesters();
                         if(suggesters != null && !suggesters.isEmpty()) {
-                            lunaticPostProcessings.addPostProcessing(new LunaticSuggesterProcessing(suggesters));
+                            lunaticPostProcessings.addPostProcessing(new LunaticSuggesterSpecificTreatment(suggesters));
                         }
 
                         List<Regroupement> regroupements = treatments.regroupements();

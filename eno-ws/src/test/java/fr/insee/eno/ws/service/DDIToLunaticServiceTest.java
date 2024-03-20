@@ -4,10 +4,9 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.treatments.LunaticPostProcessing;
 import fr.insee.eno.treatments.LunaticRegroupementProcessing;
-import fr.insee.eno.treatments.LunaticSuggesterProcessing;
+import fr.insee.eno.treatments.LunaticSuggesterSpecificTreatment;
 import fr.insee.eno.treatments.SpecificTreatmentsDeserializer;
 import fr.insee.eno.treatments.dto.SpecificTreatments;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -53,7 +52,7 @@ class DDIToLunaticServiceTest {
                 this.getClass().getClassLoader().getResourceAsStream(
                         "non-regression/suggester-processing/suggester-input.json"));
         LunaticPostProcessing lunaticPostProcessing = new LunaticPostProcessing();
-        lunaticPostProcessing.addPostProcessing(new LunaticSuggesterProcessing(postProcessingInput.suggesters()));
+        lunaticPostProcessing.addPostProcessing(new LunaticSuggesterSpecificTreatment(postProcessingInput.suggesters()));
 
         //
         DDIToLunaticService ddiToLunaticService = new DDIToLunaticService();

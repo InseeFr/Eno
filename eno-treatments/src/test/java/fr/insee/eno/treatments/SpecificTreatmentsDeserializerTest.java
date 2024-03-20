@@ -25,10 +25,10 @@ class SpecificTreatmentsDeserializerTest {
 
         assertNotNull(suggesters);
         assertEquals(2, suggesters.size());
-        EnoSuggesterType suggester = suggesters.get(0);
+        EnoSuggesterType suggester = suggesters.getFirst();
         assertEquals("L_PCS_HOMMES-1-3-0", suggester.getName());
         assertEquals("plop", suggester.getUrl());
-        assertEquals("1", suggester.getVersion());
+        assertEquals(BigInteger.ONE, suggester.getVersion());
         assertTrue(suggester.getResponseNames().contains("PCS"));
         assertEquals(BigInteger.TWO.longValue(), suggester.getMax().longValue());
 
@@ -39,7 +39,7 @@ class SpecificTreatmentsDeserializerTest {
 
         assertEquals(2, suggester.getFields().size());
 
-        EnoSuggesterField field = suggester.getFields().get(0);
+        EnoSuggesterField field = suggester.getFields().getFirst();
         assertEquals("French", field.getLanguage());
         assertEquals("label", field.getName());
         assertEquals(BigInteger.TWO.longValue(), field.getMin().longValue());

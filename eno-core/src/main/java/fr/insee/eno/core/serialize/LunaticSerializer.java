@@ -4,7 +4,12 @@ import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
 import fr.insee.lunatic.conversion.JsonSerializer;
 import fr.insee.lunatic.exception.SerializationException;
 import fr.insee.lunatic.model.flat.Questionnaire;
+import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Wrapper class for Lunatic-Model serializer.
+ */
+@Slf4j
 public class LunaticSerializer {
     private LunaticSerializer() {
         throw new IllegalArgumentException("Utility class");
@@ -17,6 +22,7 @@ public class LunaticSerializer {
      * @throws LunaticSerializationException if serialization fails.
      */
     public static String serializeToJson(Questionnaire lunaticQuestionnaire) throws LunaticSerializationException {
+        log.info("Serializing Lunatic questionnaire (id='{}').", lunaticQuestionnaire.getId());
         JsonSerializer jsonSerializer = new JsonSerializer();
         try {
             return jsonSerializer.serialize(lunaticQuestionnaire);

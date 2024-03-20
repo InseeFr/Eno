@@ -2,12 +2,23 @@ package fr.insee.eno.core.mapping.out.lunatic;
 
 import fr.insee.eno.core.DDIToLunatic;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
+import fr.insee.eno.core.mappers.DDIMapper;
+import fr.insee.eno.core.mappers.LunaticMapper;
+import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.eno.core.processing.in.steps.ddi.DDIDeserializeSuggesterConfiguration;
+import fr.insee.eno.core.processing.in.steps.ddi.DDIInsertCodeLists;
+import fr.insee.eno.core.processing.in.steps.ddi.DDIInsertResponseInTableCells;
+import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
+import fr.insee.eno.core.serialize.DDIDeserializer;
 import fr.insee.lunatic.model.flat.*;
+import instance33.DDIInstanceDocument;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -61,6 +72,54 @@ class DynamicTableIntegrationTest {
         // roster component should have 2 controls
         // dropdown cell should have 1 control
         // table cell should have 1 control
+    }
+
+    @Test
+    void dynamicTableWithSuggester() throws DDIParsingException {
+        //
+        DDIInstanceDocument ddiInstanceDocument = DDIDeserializer.deserialize(
+                this.getClass().getClassLoader().getResourceAsStream(
+                        "integration/ddi/ddi-suggester.xml"));
+        //
+        DDIMapper ddiMapper = new DDIMapper();
+        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
+        ddiMapper.mapDDI(ddiInstanceDocument, enoQuestionnaire);
+        new DDIInsertResponseInTableCells().apply(enoQuestionnaire);
+        new DDIDeserializeSuggesterConfiguration().apply(enoQuestionnaire);
+        new DDIInsertCodeLists().apply(enoQuestionnaire);
+        //
+        LunaticMapper lunaticMapper = new LunaticMapper();
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
+        lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
+        new LunaticTableProcessing(enoQuestionnaire).apply(lunaticQuestionnaire);
+
+        //
+        Map<String, RosterForLoop> rosterComponents = new HashMap<>();
+        lunaticQuestionnaire.getComponents().stream()
+                .filter(RosterForLoop.class::isInstance)
+                .map(RosterForLoop.class::cast)
+                .forEach(rosterForLoop -> {
+                    assertEquals(ComponentTypeEnum.ROSTER_FOR_LOOP, rosterForLoop.getComponentType());
+                    rosterComponents.put(rosterForLoop.getId(), rosterForLoop);
+                });
+        //
+        assertEquals(2, rosterComponents.size());
+        //
+        RosterForLoop roster1 = rosterComponents.get("lruekois");
+        BodyCell suggesterCell1 = roster1.getComponents().getFirst();
+        assertEquals(ComponentTypeEnum.SUGGESTER, suggesterCell1.getComponentType());
+        assertEquals("L_NATIONALITE-1-2-0", suggesterCell1.getStoreName());
+        assertEquals("NATIONALIT1", suggesterCell1.getResponse().getName());
+        //
+        RosterForLoop roster2 = rosterComponents.get("lruen7yc");
+        BodyCell suggesterCell21 = roster2.getComponents().get(0);
+        BodyCell suggesterCell22 = roster2.getComponents().get(1);
+        assertEquals(ComponentTypeEnum.SUGGESTER, suggesterCell21.getComponentType());
+        assertEquals("L_PCS_HOMMES-1-5-0", suggesterCell21.getStoreName());
+        assertEquals("PCSDYNAMIQ1", suggesterCell21.getResponse().getName());
+        assertEquals(ComponentTypeEnum.SUGGESTER, suggesterCell22.getComponentType());
+        assertEquals("L_PCS_FEMMES-1-5-0", suggesterCell22.getStoreName());
+        assertEquals("PCSDYNAMIQ2", suggesterCell22.getResponse().getName());
     }
 
 }

@@ -27,12 +27,19 @@ public class VariableGroup extends EnoObject {
 
     public static final String DDI_QUESTIONNAIRE_TYPE = "Questionnaire";
 
+    /** Business name of the variable group.
+     * In DDI, this is equal to the questionnaire business name for questionnaire-level variable group, otherwise
+     * is equal to the business name of the iteration object (e.g. main loop or dynamic table) that corresponds
+     * to the variable group. */
     @DDI("!getVariableGroupNameList().isEmpty ? getVariableGroupNameArray(0).getStringArray(0).getStringValue() : null")
     private String name;
 
+    /** Type of variable group.
+     * In DDI, this property provides a distinction between the questionnaire-level variable group and others. */
     @DDI("getTypeOfVariableGroup().getStringValue()")
     private String type;
 
+    /** List of variables that belong to the variable group. */
     @DDI("getVariableReferenceList().![#index.get(#this.getIDArray(0).getStringValue())]")
     private final List<Variable> variables = new ArrayList<>();
 

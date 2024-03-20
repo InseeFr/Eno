@@ -10,6 +10,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Utility class that provide some methods for Lunatic-Model objects.
+ */
 @Slf4j
 public class LunaticUtils {
 

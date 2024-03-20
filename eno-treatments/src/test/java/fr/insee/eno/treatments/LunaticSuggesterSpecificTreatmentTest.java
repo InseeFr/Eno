@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-class LunaticSuggesterProcessingTest {
+class LunaticSuggesterSpecificTreatmentTest {
 
     @Test
     void suggesterTest() throws DDIParsingException {
@@ -22,7 +22,7 @@ class LunaticSuggesterProcessingTest {
         SpecificTreatmentsDeserializer treatmentsDeserializer = new SpecificTreatmentsDeserializer();
         SpecificTreatments treatmentsInput = treatmentsDeserializer.deserialize(
                 this.getClass().getClassLoader().getResourceAsStream("suggester-treatment/suggesters.json"));
-        LunaticSuggesterProcessing suggesterProcessing = new LunaticSuggesterProcessing(treatmentsInput.suggesters());
+        LunaticSuggesterSpecificTreatment suggesterProcessing = new LunaticSuggesterSpecificTreatment(treatmentsInput.suggesters());
         suggesterProcessing.apply(lunaticQuestionnaire);
         //
         assertFalse(lunaticQuestionnaire.getSuggesters().isEmpty());
