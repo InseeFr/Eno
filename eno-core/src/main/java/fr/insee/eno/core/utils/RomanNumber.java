@@ -2,6 +2,10 @@ package fr.insee.eno.core.utils;
 
 import java.util.TreeMap;
 
+/**
+ * Utility class to convert decimal integers to roman numbers.
+ * Used for sequence numbering.
+ */
 public class RomanNumber { // https://stackoverflow.com/questions/12967896/converting-integers-to-roman-numerals-java
 
     private static final TreeMap<Integer, String> map = new TreeMap<>();
