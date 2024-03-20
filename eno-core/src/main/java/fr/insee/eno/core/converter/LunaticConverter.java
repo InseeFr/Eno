@@ -100,6 +100,9 @@ public class LunaticConverter {
         if (enoQuestion instanceof UniqueChoiceQuestion uniqueChoiceQuestion) {
             return ucqComponentConversion(enoQuestion, uniqueChoiceQuestion);
         }
+        if (enoQuestion instanceof SuggesterQuestion) {
+            return new Suggester();
+        }
         if (enoQuestion instanceof PairwiseQuestion)
             return new PairwiseLinks();
         //

@@ -24,6 +24,7 @@ public class DDIConverter {
     public static final String DDI_PAIRWISE_VALUE = "HouseholdPairing";
     public static final Set<String> DDI_DATE_TYPE_CODE = Set.of("date", "gYearMonth", "gYear");
     public static final Set<String> DDI_DURATION_TYPE_CODE = Set.of("duration");
+    public static final String DDI_SUGGESTER_OUTPUT_FORMAT = "suggester";
 
     private DDIConverter() {}
 
@@ -85,6 +86,7 @@ public class DDIConverter {
         }
 
         if (representationType instanceof CodeDomainType) {
+            // Pairwise case
             if (! questionItemType.getUserAttributePairList().isEmpty()) {
                 StandardKeyValuePairType userAttributePair = questionItemType.getUserAttributePairArray(0);
                 String attributeKey = userAttributePair.getAttributeKey().getStringValue();
@@ -99,9 +101,12 @@ public class DDIConverter {
                             questionItemType.getIDArray(0).getStringValue(), attributeValue, DDI_PAIRWISE_VALUE));
                 return new PairwiseQuestion();
             }
-            else {
-                return new UniqueChoiceQuestion();
-            }
+            // Suggester case
+            String ddiOutputFormat = questionItemType.getResponseDomain().getGenericOutputFormat().getStringValue();
+            if (DDI_SUGGESTER_OUTPUT_FORMAT.equals(ddiOutputFormat))
+                return new SuggesterQuestion();
+            //
+            return new UniqueChoiceQuestion();
 
         }
 
@@ -196,6 +201,9 @@ public class DDIConverter {
             return new DateCell();
         }
         else if (representationType instanceof CodeDomainType) {
+            String ddiOutputFormat = gridResponseDomainInMixedType.getResponseDomain().getGenericOutputFormat().getStringValue();
+            if (DDI_SUGGESTER_OUTPUT_FORMAT.equals(ddiOutputFormat))
+                return new SuggesterCell();
             return new UniqueChoiceCell();
         }
         else {
