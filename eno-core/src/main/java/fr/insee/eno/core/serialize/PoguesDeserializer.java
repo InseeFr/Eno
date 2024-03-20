@@ -6,6 +6,7 @@ import fr.insee.pogues.model.Questionnaire;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.xml.bind.JAXBException;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -25,6 +26,8 @@ public class PoguesDeserializer {
             return poguesQuestionnaire;
         } catch (JAXBException e) {
             throw new PoguesDeserializationException("Unable to parse Pogues file from URL " + poguesFileUrl, e);
+        } catch (IOException e) {
+            throw new PoguesDeserializationException("IO exception occurred with file: " + poguesFileUrl, e);
         }
     }
 

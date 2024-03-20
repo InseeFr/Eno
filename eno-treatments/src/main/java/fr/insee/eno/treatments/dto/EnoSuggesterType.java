@@ -21,7 +21,7 @@ public class EnoSuggesterType {
     private EnoSuggesterOrder order;
     private EnoSuggesterQueryParser queryParser;
     private String url;
-    private String version;
+    private BigInteger version;
 
     @JsonCreator
     public EnoSuggesterType(@JsonProperty(value = "responseNames", required = true) List<String> responseNames,
@@ -33,7 +33,7 @@ public class EnoSuggesterType {
                             @JsonProperty("order") EnoSuggesterOrder order,
                             @JsonProperty(value = "queryParser", required = true) EnoSuggesterQueryParser queryParser,
                             @JsonProperty("url") String url,
-                            @JsonProperty(value = "version", required = true) String version) {
+                            @JsonProperty(value = "version", required = true) BigInteger version) {
         this.responseNames = responseNames;
         this.name = name;
         this.fields = fields;

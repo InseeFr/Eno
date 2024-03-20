@@ -17,6 +17,7 @@ public class DDIInProcessing {
                 .then(new DDIResolveVariableReferencesInExpressions())
                 .then(new DDIInsertDeclarations())
                 .then(new DDIInsertControls())
+                .then(new DDIDeserializeSuggesterConfiguration())
                 .then(new DDIInsertCodeLists());
         //
         EnoCatalog enoCatalog = new EnoCatalog(enoQuestionnaire);

@@ -2,11 +2,14 @@ package fr.insee.eno.core.model.code;
 
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.exceptions.business.IllegalDDIElementException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
+import fr.insee.eno.core.model.suggester.SuggesterConfigurationDTO;
 import fr.insee.eno.core.parameter.Format;
 import logicalproduct33.CodeListType;
 import lombok.Getter;
 import lombok.Setter;
+import reusable33.impl.ContentTypeImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +23,55 @@ import java.util.List;
 @Context(format = Format.DDI, type = CodeListType.class)
 public class CodeList extends EnoIdentifiableObject {
 
-    @DDI("!getLabelList().isEmpty() ? getLabelArray(0).getContentArray(0).getStringValue() : null")
+    private static final String SUGGESTER_CODE_LIST_KEY = "SuggesterConfiguration";
+
+    // This content can be put back later on:
+    // "!getCodeListNameList().isEmpty() ? getCodeListNameArray(0).getStringArray(0).getStringValue() : null"
+    @DDI("T(fr.insee.eno.core.model.code.CodeList).mapDDIName(#this)")
     String name;
+
+    /** Code list label inputted in Pogues.
+     * Not used in Lunatic, so it is directly mapped as a string for now. */
+    @DDI("!getLabelList().isEmpty ? getLabelArray(0).getContentArray(0).getStringValue() : null")
+    String label;
+
+    /** The code list name has been wrongly written in the "Label" DDI field in the past.
+     * This is changed in new DDI documents, yet this method ensures backward compatibility with this. */
+    public static String mapDDIName(CodeListType ddiCodeList) {
+        if (! ddiCodeList.getCodeListNameList().isEmpty()) {
+            return ddiCodeList.getCodeListNameArray(0).getStringArray(0).getStringValue();
+        }
+        if (! ddiCodeList.getLabelList().isEmpty()) {
+            // (for some reason the ContentType class doesn't have the getStringValue() method)
+            ContentTypeImpl contentArray = (ContentTypeImpl) ddiCodeList.getLabelArray(0).getContentArray(0);
+            return contentArray.getStringValue();
+        }
+        return null;
+    }
 
     @DDI("getCodeList()")
     List<CodeItem> codeItems = new ArrayList<>();
+
+    /** In DDI, suggester configuration options are defined in code list object.
+     * Suggester configuration options are written in a CDATA in the "user attribute" property.
+     * This property contains the raw content of the CDATA, it is deserialized in the 'suggesterConfiguration'
+     * property through a processing. */
+    @DDI("T(fr.insee.eno.core.model.code.CodeList).mapDDISuggesterConfiguration(#this)")
+    String xmlSuggesterConfiguration;
+
+    /** Suggester configuration options. */
+    SuggesterConfigurationDTO suggesterConfiguration;
+
+    public static String mapDDISuggesterConfiguration(CodeListType codeListType) {
+        if (codeListType.getUserAttributePairList().isEmpty())
+            return null;
+        String userAttributeKey = codeListType.getUserAttributePairArray(0).getAttributeKey().getStringValue();
+        if (! SUGGESTER_CODE_LIST_KEY.equals(userAttributeKey))
+            throw new IllegalDDIElementException(String.format(
+                    "Unexpected user attribute key '%s' in user attribute key in code list '%s'.",
+                    userAttributeKey, codeListType.getIDArray(0).getStringValue()));
+        return codeListType.getUserAttributePairArray(0).getAttributeValue().getStringValue();
+    }
 
     /** Max depth of the code list. */
     private int maxDepth;
