@@ -1,6 +1,6 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
-import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
+import fr.insee.eno.core.exceptions.technical.LunaticPairwiseException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.PairwiseQuestion;
 import fr.insee.eno.core.reference.EnoIndex;
@@ -32,7 +32,11 @@ class LunaticFinalizePairwiseTest {
 
         lunaticQuestionnaire = new Questionnaire();
 
+        DeclarationType declarationType = new DeclarationType();
+        declarationType.setId("pairwise-declaration-id");
+
         pairwiseLinks1 = new PairwiseLinks();
+        pairwiseLinks1.getDeclarations().add(declarationType);
         pairwiseLinks1.setComponentType(ComponentTypeEnum.PAIRWISE_LINKS);
         pairwiseLinks1.setId(pairwiseId);
 
@@ -41,6 +45,7 @@ class LunaticFinalizePairwiseTest {
         processing = new LunaticFinalizePairwise(enoQuestionnaire);
 
         radioComponent = new Radio();
+        radioComponent.getDeclarations().add(declarationType);
         ResponseType responseType = new ResponseType();
         responseType.setName("pairwise-radio-name");
         radioComponent.setResponse(responseType);
@@ -54,7 +59,7 @@ class LunaticFinalizePairwiseTest {
     @Test
     void whenMultiplePairwiseThrowsException() {
         lunaticQuestionnaire.getComponents().addAll(List.of(pairwiseLinks1, pairwiseLinks2));
-        assertThrows(LunaticSerializationException.class, () -> processing.apply(lunaticQuestionnaire));
+        assertThrows(LunaticPairwiseException.class, () -> processing.apply(lunaticQuestionnaire));
     }
 
     @Test
@@ -64,10 +69,18 @@ class LunaticFinalizePairwiseTest {
     }
 
     @Test
-    void whenFinalizingSubComponentConditionFilterIsSet() {
+    void whenFinalizingSubComponentConditionFilterIsSetToNull() {
         lunaticQuestionnaire.getComponents().add(pairwiseLinks1);
         processing.apply(lunaticQuestionnaire);
         assertNull(radioComponent.getConditionFilter());
+    }
+
+    @Test
+    void whenFinalizingPairwiseComponentHasNoDeclarations() {
+        lunaticQuestionnaire.getComponents().add(pairwiseLinks1);
+        processing.apply(lunaticQuestionnaire);
+        assertNull(pairwiseLinks1.getDeclarations());
+        assertEquals(1, pairwiseLinks1.getComponents().getFirst().getDeclarations().size());
     }
 
     @Test
