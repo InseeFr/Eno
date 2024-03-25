@@ -1,6 +1,7 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.exceptions.business.LunaticSerializationException;
+import fr.insee.eno.core.exceptions.technical.LunaticPairwiseException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.PairwiseQuestion;
 import fr.insee.eno.core.processing.ProcessingStep;
@@ -24,22 +25,27 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
 
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
-        List<PairwiseLinks> pairwisesLinks = searchForPairwiseLinks(lunaticQuestionnaire.getComponents());
-        if(pairwisesLinks.isEmpty()) {
+        List<PairwiseLinks> pairwiseLinksList = searchForPairwiseLinks(lunaticQuestionnaire.getComponents());
+        if(pairwiseLinksList.isEmpty()) {
             return;
         }
 
-        // at this time, only one pairwise by questionnaire is allowed, will change soon
-        if(pairwisesLinks.size() > 1) {
-            throw new LunaticSerializationException("A questionnaire should not have more than one pairwise link");
+        // at this time, only one pairwise by questionnaire is allowed
+        if(pairwiseLinksList.size() > 1) {
+            throw new LunaticPairwiseException("A questionnaire should not have more than one pairwise link");
         }
 
+        PairwiseLinks pairwiseLinks = pairwiseLinksList.getFirst();
+
+        // Declarations are in the pairwise subcomponent
+        pairwiseLinks.setDeclarations(null);
+
         // create symlinks
-        PairwiseLinks pairwiseLinks = pairwisesLinks.get(0);
-        ComponentSimpleResponseType simpleResponseComponent = (ComponentSimpleResponseType) pairwiseLinks.getComponents().get(0);
+        ComponentSimpleResponseType simpleResponseComponent = (ComponentSimpleResponseType) pairwiseLinks.getComponents().getFirst();
         pairwiseLinks.setSymLinks(PairwiseLinks.createDefaultSymLinks(simpleResponseComponent.getResponse().getName()));
 
-        ComponentType pairwiseSubComponent = pairwiseLinks.getComponents().get(0);
+        // Filter is hold by the pairwise component only
+        ComponentType pairwiseSubComponent = pairwiseLinks.getComponents().getFirst();
         pairwiseSubComponent.setConditionFilter(null);
 
         List<IVariableType> variables = lunaticQuestionnaire.getVariables();
@@ -52,25 +58,25 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
      * @return pairwise links list
      */
     private List<PairwiseLinks> searchForPairwiseLinks(List<ComponentType> components) {
-        List<PairwiseLinks> pairwiseLinks = new ArrayList<>();
-        pairwiseLinks.addAll(components.stream()
+        List<PairwiseLinks> pairwiseLinksList = new ArrayList<>();
+        pairwiseLinksList.addAll(components.stream()
                 .filter(componentType -> ComponentTypeEnum.PAIRWISE_LINKS.equals(componentType.getComponentType()))
                 .map(PairwiseLinks.class::cast)
                 .toList());
 
-        pairwiseLinks.addAll(components.stream()
+        pairwiseLinksList.addAll(components.stream()
                 .filter(componentType -> ComponentTypeEnum.LOOP.equals(componentType.getComponentType()))
                 .map(Loop.class::cast)
                 .map(loop -> searchForPairwiseLinks(loop.getComponents()))
                 .flatMap(Collection::stream)
                 .toList());
-        return pairwiseLinks;
+        return pairwiseLinksList;
     }
 
     /**
-     * creation of calculated axis variables
-     * @param pairwiseLinks pairwiselink
-     * @return calculated axis variables
+     * Creation of calculated axis variables.
+     * @param pairwiseLinks Lunatic pairwise links component.
+     * @return calculated axis variables.
      */
     private List<VariableType> createCalculatedAxisVariables(PairwiseLinks pairwiseLinks) {
         PairwiseQuestion pairwiseQuestion = (PairwiseQuestion) enoIndex.get(pairwiseLinks.getId());
