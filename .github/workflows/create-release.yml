@@ -117,6 +117,13 @@ jobs:
           writeToFile: true
           changelogFilePath: 'CHANGELOG.md'
 
+      - name: Commit changelog file
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: 'v3-main'
+          commit_message: 'docs(changelog): ${{ needs.check-version.outputs.release-version }} update [skip ci]'
+          file_pattern: 'CHANGELOG.md'
+
       - name: Download build
         id: download
         uses: actions/download-artifact@v4
@@ -135,15 +142,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Commit changelog file
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          branch: 'v3-main'
-          commit_message: 'docs(changelog): ${{ needs.check-version.outputs.release-version }} update [skip ci]'
-          file_pattern: 'CHANGELOG.md'
-
   publish-docker:
-    needs: [ check-version, create-release ]
+    needs: [ check-version, build-sources ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
