@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.18.2] - 2024-03-25
+### :sparkles: New Features
+- [`936084d`](https://github.com/InseeFr/Eno/commit/936084d88f69632b4f5ca45b02c43731eb927347) - suggester *(PR [#925](https://github.com/InseeFr/Eno/pull/925) by [@nsenave](https://github.com/nsenave))*
+- [`1807758`](https://github.com/InseeFr/Eno/commit/1807758fbc5dccc50cecdd8ed9cbe60e6864a143) - business first page parameter *(PR [#935](https://github.com/InseeFr/Eno/pull/935) by [@nsenave](https://github.com/nsenave))*
+
+### :recycle: Refactors
+- [`779d9ae`](https://github.com/InseeFr/Eno/commit/779d9aedd79429f774d3a40e6861e4f58eb0f231) - more javadoc and little logging enhancement *(PR [#934](https://github.com/InseeFr/Eno/pull/934) by [@nsenave](https://github.com/nsenave))*
+
+### :construction_worker: Build System
+- [`87f6c4e`](https://github.com/InseeFr/Eno/commit/87f6c4ec3edbe6e4e40910b3d6c53c68578743e4) - update dependencies *(PR [#933](https://github.com/InseeFr/Eno/pull/933) by [@nsenave](https://github.com/nsenave))*
+- [`4892e6a`](https://github.com/InseeFr/Eno/commit/4892e6adf896c2d967763a355d441265e1e435f3) - update gradle build tool *(commit by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.17.3] - 2024-02-26
 ### :bug: Bug Fixes
 - [`73151aa`](https://github.com/InseeFr/Eno/commit/73151aa57586c68766392add5d70fdd4e09fb95a) - lunatic scalar variable values *(PR [#918](https://github.com/InseeFr/Eno/pull/918) by [@nsenave](https://github.com/nsenave))*
@@ -117,3 +130,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.17.1]: https://github.com/InseeFr/Eno/compare/3.17.0...3.17.1
 [3.17.2]: https://github.com/InseeFr/Eno/compare/3.17.1...3.17.2
 [3.17.3]: https://github.com/InseeFr/Eno/compare/3.17.2...3.17.3
+[3.18.2]: https://github.com/InseeFr/Eno/compare/3.17.3...3.18.2
