@@ -2,6 +2,8 @@ package fr.insee.eno.core.sandbox;
 
 import fr.insee.lunatic.conversion.JsonDeserializer;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
+import fr.insee.lunatic.model.flat.variable.VariableType;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -34,12 +36,10 @@ class LunaticTests {
         lunaticLabel.setType(LabelTypeEnum.VTL_MD);
         lunaticQuestionnaire.setLabel(lunaticLabel);
         // Variables list
-        List<IVariableType> lunaticVariables = lunaticQuestionnaire.getVariables();
         // Add a variable
-        IVariableType lunaticVariable = new VariableType();
+        VariableType lunaticVariable = new CollectedVariableType();
         lunaticVariable.setName("FOO_VARIABLE");
-        lunaticVariable.setComponentRef("azerty");
-        lunaticVariables.add(lunaticVariable);
+        lunaticQuestionnaire.getVariables().add(lunaticVariable);
         // Sequence
         Sequence sequence = new Sequence();
         ComponentTypeEnum sequenceType = ComponentTypeEnum.valueOf("SEQUENCE");

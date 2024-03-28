@@ -6,11 +6,16 @@ import fr.insee.eno.core.model.question.PairwiseQuestion;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.utils.LunaticUtils;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
+import fr.insee.lunatic.model.flat.variable.VariableType;
+import fr.insee.lunatic.model.flat.variable.VariableTypeEnum;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 
+@Slf4j
 public class LunaticPairwiseResizingLogic {
 
     private final Questionnaire lunaticQuestionnaire;
@@ -55,7 +60,7 @@ public class LunaticPairwiseResizingLogic {
         // Source variable of the pairwise
         String pairwiseSourceVariableName = enoPairwiseQuestion.getLoopVariableName();
         // Find corresponding variable object
-        Optional<IVariableType> correspondingVariable = lunaticQuestionnaire.getVariables().stream()
+        Optional<VariableType> correspondingVariable = lunaticQuestionnaire.getVariables().stream()
                 .filter(variable -> pairwiseSourceVariableName.equals(variable.getName()))
                 .findAny();
         if (correspondingVariable.isEmpty())
@@ -66,7 +71,9 @@ public class LunaticPairwiseResizingLogic {
         if (! VariableTypeEnum.CALCULATED.equals(correspondingVariable.get().getVariableType()))
             return Set.of(pairwiseSourceVariableName);
         // Otherwise return its binding dependencies (without the calculated variable)
-        VariableType pairwiseSourceVariable = (VariableType) correspondingVariable.get();
+        // Shouldn't happen with current modeling
+        log.warn("Source variable of a pairwise component should be a collected variable (not a calculated one).");
+        CalculatedVariableType pairwiseSourceVariable = (CalculatedVariableType) correspondingVariable.get();
         return new LinkedHashSet<>(pairwiseSourceVariable.getBindingDependencies().stream()
                 .filter(variableName -> !pairwiseSourceVariableName.equals(variableName))
                 .toList());

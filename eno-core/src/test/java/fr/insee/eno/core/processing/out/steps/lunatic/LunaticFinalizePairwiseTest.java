@@ -5,6 +5,7 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.PairwiseQuestion;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.variable.VariableType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -105,7 +106,7 @@ class LunaticFinalizePairwiseTest {
     void whenFinalizingCalculatedVariablesAreSet() {
         lunaticQuestionnaire.getComponents().add(pairwiseLinks1);
         processing.apply(lunaticQuestionnaire);
-        List<IVariableType> variables = lunaticQuestionnaire.getVariables();
+        List<VariableType> variables = lunaticQuestionnaire.getVariables();
         assertEquals(2, variables.size());
         assertEquals("xAxis", variables.get(0).getName());
         assertEquals("yAxis", variables.get(1).getName());

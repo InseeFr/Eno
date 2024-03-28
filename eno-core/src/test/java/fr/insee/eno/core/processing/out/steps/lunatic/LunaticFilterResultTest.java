@@ -9,13 +9,15 @@ import fr.insee.eno.core.model.variable.VariableGroup;
 import fr.insee.eno.core.processing.out.steps.lunatic.calculatedvariable.ShapefromAttributeRetrievalReturnVariableNameInVariable;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
+import fr.insee.lunatic.model.flat.variable.VariableType;
+import fr.insee.lunatic.model.flat.variable.VariableTypeEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LunaticFilterResultTest {
 
@@ -100,7 +102,7 @@ class LunaticFilterResultTest {
 
         processing.apply(lunaticQuestionnaire);
         assertEquals(1, lunaticQuestionnaire.getVariables().size());
-        VariableType variable = (VariableType) lunaticQuestionnaire.getVariables().get(0);
+        VariableType variable = lunaticQuestionnaire.getVariables().getFirst();
         testInputCalculatedVariable(variable);
     }
 
@@ -112,7 +114,7 @@ class LunaticFilterResultTest {
 
         processing.apply(lunaticQuestionnaire);
         assertEquals(1, lunaticQuestionnaire.getVariables().size());
-        VariableType variable = (VariableType) lunaticQuestionnaire.getVariables().get(0);
+        VariableType variable = lunaticQuestionnaire.getVariables().getFirst();
         testTableCalculatedVariable(variable);
     }
 
@@ -130,26 +132,28 @@ class LunaticFilterResultTest {
 
         processing.apply(lunaticQuestionnaire);
         assertEquals(2, lunaticQuestionnaire.getVariables().size());
-        testInputCalculatedVariable((VariableType) lunaticQuestionnaire.getVariables().get(0));
-        testTableCalculatedVariable((VariableType) lunaticQuestionnaire.getVariables().get(1));
+        testInputCalculatedVariable(lunaticQuestionnaire.getVariables().get(0));
+        testTableCalculatedVariable(lunaticQuestionnaire.getVariables().get(1));
     }
 
     private void testInputCalculatedVariable(VariableType variable) {
-        assertEquals(VariableTypeEnum.CALCULATED, variable.getVariableType());
         assertEquals("FILTER_RESULT_" + textQuestion.getName(), variable.getName());
-        assertEquals(1, variable.getBindingDependencies().size());
-        assertTrue(variable.getBindingDependencies().contains("CALCULATED_VARIABLE"));
-        assertEquals("input-name", variable.getShapeFrom());
-        assertEquals("count(CALCULATED_VARIABLE) < 2", variable.getExpression().getValue());
+        assertEquals(VariableTypeEnum.CALCULATED, variable.getVariableType());
+        CalculatedVariableType calculatedVariable = assertInstanceOf(CalculatedVariableType.class, variable);
+        assertEquals(1, calculatedVariable.getBindingDependencies().size());
+        assertTrue(calculatedVariable.getBindingDependencies().contains("CALCULATED_VARIABLE"));
+        assertEquals("input-name", calculatedVariable.getShapeFrom());
+        assertEquals("count(CALCULATED_VARIABLE) < 2", calculatedVariable.getExpression().getValue());
     }
 
     private void testTableCalculatedVariable(VariableType variable) {
-        assertEquals(VariableTypeEnum.CALCULATED, variable.getVariableType());
         assertEquals("FILTER_RESULT_" + tableQuestion.getName(), variable.getName());
-        assertEquals(2, variable.getBindingDependencies().size());
-        assertTrue(variable.getBindingDependencies().contains("CALCULATED_VARIABLE_2"));
-        assertTrue(variable.getBindingDependencies().contains("NUMERIC_USED_FOR_CALCULATED_VARIABLE_2"));
-        assertEquals("table-name", variable.getShapeFrom());
-        assertEquals("count(CALCULATED_VARIABLE_2) + NUMERIC_USED_FOR_CALCULATED_VARIABLE_2 < 4", variable.getExpression().getValue());
+        assertEquals(VariableTypeEnum.CALCULATED, variable.getVariableType());
+        CalculatedVariableType calculatedVariable = assertInstanceOf(CalculatedVariableType.class, variable);
+        assertEquals(2, calculatedVariable.getBindingDependencies().size());
+        assertTrue(calculatedVariable.getBindingDependencies().contains("CALCULATED_VARIABLE_2"));
+        assertTrue(calculatedVariable.getBindingDependencies().contains("NUMERIC_USED_FOR_CALCULATED_VARIABLE_2"));
+        assertEquals("table-name", calculatedVariable.getShapeFrom());
+        assertEquals("count(CALCULATED_VARIABLE_2) + NUMERIC_USED_FOR_CALCULATED_VARIABLE_2 < 4", calculatedVariable.getExpression().getValue());
     }
 }

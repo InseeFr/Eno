@@ -5,6 +5,10 @@ import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.model.question.TextQuestion;
 import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
+import fr.insee.lunatic.model.flat.variable.CollectedVariableValues;
+import fr.insee.lunatic.model.flat.variable.VariableType;
+import fr.insee.lunatic.model.flat.variable.VariableTypeEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -113,10 +117,9 @@ class LunaticAddMissingVariablesTest {
         components.addAll(List.of(input, textarea, inputNumber, datepicker, checkboxBoolean, radio, checkboxOne, dropdown));
         processing.apply(lunaticQuestionnaire);
 
-        List<IVariableType> variables = lunaticQuestionnaire.getVariables();
+        List<VariableType> variables = lunaticQuestionnaire.getVariables();
         // Each component should have a missing response that corresponds to a collected variable
         components.forEach(componentType -> assertTrue(variables.stream()
-                .filter(VariableType.class::isInstance)
                 .filter(variable -> variable.getVariableType().equals(VariableTypeEnum.COLLECTED))
                 .anyMatch(variable -> variable.getName().equals(componentType.getMissingResponse().getName()))));
     }
@@ -128,14 +131,16 @@ class LunaticAddMissingVariablesTest {
         components.addAll(List.of(checkboxGroup, table, rosterForLoop));
         processing.apply(lunaticQuestionnaire);
 
-        List<IVariableType> variables = lunaticQuestionnaire.getVariables();
-        components.forEach(componentType -> assertTrue(variables.stream()
-                    .filter(variable -> variable.getVariableType().equals(VariableTypeEnum.COLLECTED))
-                    .anyMatch(variable -> variable.getName().equals(componentType.getMissingResponse().getName()))));
+        List<CollectedVariableType> collectedVariables = lunaticQuestionnaire.getVariables().stream()
+                .filter(CollectedVariableType.class::isInstance)
+                .map(CollectedVariableType.class::cast)
+                .toList();
+        components.forEach(componentType -> assertTrue(collectedVariables.stream()
+                .anyMatch(variable -> variable.getName().equals(componentType.getMissingResponse().getName()))));
 
-        variables.forEach(variable -> {
+        collectedVariables.forEach(variable -> {
             if (rosterForLoop.getMissingResponse().getName().equals(variable.getName()))
-                assertInstanceOf(VariableTypeArray.class, variable);
+                assertInstanceOf(CollectedVariableValues.Array.class, variable.getValues());
             if (Set.of(checkboxGroup.getMissingResponse().getName(), table.getMissingResponse().getName())
                     .contains(variable.getName()))
                 assertInstanceOf(VariableType.class, variable);
@@ -153,10 +158,9 @@ class LunaticAddMissingVariablesTest {
         components.add(loop);
         processing.apply(lunaticQuestionnaire);
 
-        List<IVariableType> variables = lunaticQuestionnaire.getVariables();
-        loop.getComponents().forEach(componentType -> assertTrue(variables.stream()
-                .filter(VariableTypeArray.class::isInstance)
-                .filter(variable -> variable.getVariableType().equals(VariableTypeEnum.COLLECTED))
+        loop.getComponents().forEach(componentType -> assertTrue(lunaticQuestionnaire.getVariables().stream()
+                .filter(CollectedVariableType.class::isInstance)
+                .filter(variable -> ((CollectedVariableType) variable).getValues() instanceof CollectedVariableValues.Array)
                 .anyMatch(variable -> variable.getName().equals(componentType.getMissingResponse().getName()))));
     }
 

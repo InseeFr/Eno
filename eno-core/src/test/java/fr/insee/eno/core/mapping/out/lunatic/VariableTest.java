@@ -1,7 +1,7 @@
 package fr.insee.eno.core.mapping.out.lunatic;
 
 import fr.insee.eno.core.model.variable.Variable;
-import fr.insee.lunatic.model.flat.VariableTypeEnum;
+import fr.insee.lunatic.model.flat.variable.VariableTypeEnum;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,6 +1,8 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
+import fr.insee.lunatic.model.flat.variable.CollectedVariableValues;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -33,11 +35,13 @@ class LunaticAddMissingVariablesPairwiseTest {
         assertNotNull(dropdown.getMissingResponse());
         assertEquals("FOO_LINKS_MISSING", dropdown.getMissingResponse().getName());
         //
-        Optional<IVariableType> pairwiseMissingVariable = lunaticQuestionnaire.getVariables().stream()
+        Optional<CollectedVariableType> pairwiseMissingVariable = lunaticQuestionnaire.getVariables().stream()
+                .filter(CollectedVariableType.class::isInstance)
+                .map(CollectedVariableType.class::cast)
                 .filter(variable -> "FOO_LINKS_MISSING".equals(variable.getName()))
                 .findAny();
         assertTrue(pairwiseMissingVariable.isPresent());
-        assertInstanceOf(VariableTypeTwoDimensionsArray.class, pairwiseMissingVariable.get());
+        assertInstanceOf(CollectedVariableValues.DoubleArray.class, pairwiseMissingVariable.get().getValues());
         //
         MissingType missingType = lunaticQuestionnaire.getMissingBlock();
         assertEquals(2, missingType.countMissingEntries());

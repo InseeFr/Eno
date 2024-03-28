@@ -4,8 +4,7 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.processing.out.steps.lunatic.calculatedvariable.ShapefromAttributeRetrieval;
 import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.VariableType;
-import fr.insee.lunatic.model.flat.VariableTypeEnum;
+import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
 
 import java.util.List;
 
@@ -24,13 +23,12 @@ public class LunaticAddShapeToCalculatedVariables implements ProcessingStep<Ques
 
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
-        List<VariableType> lunaticCalculatedVariables = lunaticQuestionnaire.getVariables().stream()
-                .filter(VariableType.class::isInstance)
-                .map(VariableType.class::cast)
-                .filter(variableType -> variableType.getVariableType().equals(VariableTypeEnum.CALCULATED))
+        List<CalculatedVariableType> lunaticCalculatedVariables = lunaticQuestionnaire.getVariables().stream()
+                .filter(CalculatedVariableType.class::isInstance)
+                .map(CalculatedVariableType.class::cast)
                 .toList();
 
-        for(VariableType lunaticCalculatedVariable : lunaticCalculatedVariables) {
+        for(CalculatedVariableType lunaticCalculatedVariable : lunaticCalculatedVariables) {
             shapeFromAttributeRetrieval.getShapeFrom(lunaticCalculatedVariable.getName(), enoQuestionnaire)
                     .ifPresent(shapeFromVariable -> lunaticCalculatedVariable.setShapeFrom(shapeFromVariable.getName()));
         }

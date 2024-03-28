@@ -12,7 +12,13 @@ import fr.insee.eno.core.processing.in.steps.ddi.DDIInsertCodeLists;
 import fr.insee.eno.core.processing.in.steps.ddi.DDIInsertResponseInTableCells;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
 import fr.insee.eno.core.serialize.DDIDeserializer;
-import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.BodyCell;
+import fr.insee.lunatic.model.flat.ComponentTypeEnum;
+import fr.insee.lunatic.model.flat.Questionnaire;
+import fr.insee.lunatic.model.flat.RosterForLoop;
+import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
+import fr.insee.lunatic.model.flat.variable.CollectedVariableValues;
+import fr.insee.lunatic.model.flat.variable.VariableType;
 import instance33.DDIInstanceDocument;
 import org.junit.jupiter.api.Test;
 
@@ -63,10 +69,11 @@ class DynamicTableIntegrationTest {
 
         // Roster variables are present and are array variables
         List.of(rosterResponseName1, rosterResponseName2).forEach(rosterResponseName -> {
-            Optional<IVariableType> rosterVariable = lunaticQuestionnaire.getVariables().stream()
+            Optional<VariableType> searched = lunaticQuestionnaire.getVariables().stream()
                     .filter(variable -> rosterResponseName.equals(variable.getName())).findAny();
-            assertTrue(rosterVariable.isPresent());
-            assertInstanceOf(VariableTypeArray.class, rosterVariable.get());
+            assertTrue(searched.isPresent());
+            CollectedVariableType rosterVariable = assertInstanceOf(CollectedVariableType.class, searched.get());
+            assertInstanceOf(CollectedVariableValues.class, rosterVariable.getValues());
         });
 
         // roster component should have 2 controls
