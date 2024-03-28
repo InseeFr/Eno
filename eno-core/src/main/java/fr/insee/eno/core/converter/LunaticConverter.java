@@ -18,8 +18,14 @@ import fr.insee.eno.core.model.response.CodeResponse;
 import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.Subsequence;
+import fr.insee.eno.core.model.variable.CalculatedVariable;
+import fr.insee.eno.core.model.variable.CollectedVariable;
+import fr.insee.eno.core.model.variable.ExternalVariable;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
+import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
+import fr.insee.lunatic.model.flat.variable.ExternalVariableType;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -38,8 +44,8 @@ public class LunaticConverter {
         if (! enoObject.getClass().getPackageName().startsWith("fr.insee.eno.core.model"))
             throw new IllegalArgumentException("Not an Eno object.");
         //
-        if (enoObject instanceof Variable)
-            return new VariableType();
+        if (enoObject instanceof Variable enoVariable)
+            return instantiateFrom(enoVariable);
         if (enoObject instanceof Sequence)
             return new fr.insee.lunatic.model.flat.Sequence();
         if (enoObject instanceof Subsequence)
@@ -126,6 +132,16 @@ public class LunaticConverter {
             case CHECKBOX -> new CheckboxOne();
             case DROPDOWN -> new Dropdown();
         };
+    }
+
+    private static Object instantiateFrom(Variable enoVariable) {
+        if (enoVariable instanceof CollectedVariable)
+            return new CollectedVariableType();
+        if (enoVariable instanceof CalculatedVariable)
+            return new CalculatedVariableType();
+        if (enoVariable instanceof ExternalVariable)
+            return new ExternalVariableType();
+        throw new ConversionException(unimplementedMessage(enoVariable));
     }
 
     private static Object instantiateFrom(MultipleResponseQuestion enoQuestion) {

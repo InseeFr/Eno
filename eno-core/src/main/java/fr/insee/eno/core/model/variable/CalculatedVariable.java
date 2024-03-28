@@ -7,6 +7,7 @@ import fr.insee.eno.core.model.EnoObjectWithExpression;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Context(format = Format.DDI, type = logicalproduct33.VariableType.class)
-@Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.VariableType.class)
+@Context(format = Format.LUNATIC, type = CalculatedVariableType.class)
 public class CalculatedVariable extends Variable implements EnoObjectWithExpression {
 
     @Getter

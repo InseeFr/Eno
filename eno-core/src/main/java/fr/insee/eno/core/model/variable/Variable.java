@@ -5,14 +5,14 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.lunatic.model.flat.VariableTypeEnum;
+import fr.insee.lunatic.model.flat.variable.VariableTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Context(format = Format.DDI, type = logicalproduct33.VariableType.class)
-@Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.VariableType.class)
+@Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.variable.VariableType.class)
 public abstract class Variable extends EnoObject {
 
     public enum CollectionType {COLLECTED, CALCULATED, EXTERNAL}

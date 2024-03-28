@@ -5,6 +5,8 @@ import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.eno.core.utils.LunaticUtils;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
+import fr.insee.lunatic.model.flat.variable.CollectedVariableValues;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -84,27 +86,27 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
                 LunaticUtils.getResponseComponents(loop.getComponents()).forEach(loopComponent -> {
                     Question question = enoCatalog.getQuestion(loopComponent.getId());
                     String missingResponseName = setMissingResponse(loopComponent, question.getName());
-                    addMissingVariable(new VariableTypeArray(), missingResponseName, lunaticQuestionnaire);
+                    addMissingVariable(missingResponseName, new CollectedVariableValues.Array(), lunaticQuestionnaire);
                 });
             }
 
             case ROSTER_FOR_LOOP -> {
                 Question question = enoCatalog.getQuestion(component.getId());
                 String missingResponseName = setMissingResponse(component, question.getName());
-                addMissingVariable(new VariableTypeArray(), missingResponseName, lunaticQuestionnaire);
+                addMissingVariable(missingResponseName,new CollectedVariableValues.Array(), lunaticQuestionnaire);
             }
 
             case PAIRWISE_LINKS -> {
                 ComponentType pairwiseInnerComponent = LunaticUtils.getPairwiseInnerComponent((PairwiseLinks) component);
                 String pairwiseResponseName = ((ComponentSimpleResponseType) pairwiseInnerComponent).getResponse().getName();
                 String missingResponseName = setMissingResponse(pairwiseInnerComponent, pairwiseResponseName);
-                addMissingVariable(new VariableTypeTwoDimensionsArray(), missingResponseName, lunaticQuestionnaire);
+                addMissingVariable(missingResponseName, new CollectedVariableValues.DoubleArray(), lunaticQuestionnaire);
             }
 
             default -> {
                 Question question = enoCatalog.getQuestion(component.getId());
                 String missingResponseName = setMissingResponse(component, question.getName());
-                addMissingVariable(new VariableType(), missingResponseName, lunaticQuestionnaire);
+                addMissingVariable(missingResponseName, new CollectedVariableValues.Scalar(), lunaticQuestionnaire);
             }
         }
     }
@@ -124,10 +126,11 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
         return missingResponseName;
     }
 
-    private void addMissingVariable(IVariableType variable, String missingResponseName,
+    private void addMissingVariable(String missingResponseName, CollectedVariableValues values,
                                     Questionnaire lunaticQuestionnaire) {
+        CollectedVariableType variable = new CollectedVariableType();
         variable.setName(missingResponseName);
-        variable.setVariableType(VariableTypeEnum.COLLECTED);
+        variable.setValues(values);
         lunaticQuestionnaire.getVariables().add(variable);
     }
 
