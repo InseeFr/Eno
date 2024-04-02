@@ -3,6 +3,8 @@ package fr.insee.eno.core.processing.out.steps.lunatic.resizing;
 import fr.insee.eno.core.model.question.PairwiseQuestion;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
+import fr.insee.lunatic.model.flat.variable.VariableType;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -31,8 +33,7 @@ class LunaticPairwiseResizingLogicTest {
         lunaticPairwise.getComponents().add(dropdown);
         lunaticQuestionnaire.getComponents().add(lunaticPairwise);
         //
-        VariableType loopVariable = new VariableType();
-        loopVariable.setVariableType(VariableTypeEnum.COLLECTED);
+        VariableType loopVariable = new CollectedVariableType();
         loopVariable.setName("LOOP_VAR");
         lunaticQuestionnaire.getVariables().add(loopVariable);
 

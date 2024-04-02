@@ -11,6 +11,8 @@ import fr.insee.eno.core.processing.out.steps.lunatic.LunaticLoopResolution;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.utils.LunaticUtils;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.variable.VariableType;
+import fr.insee.lunatic.model.flat.variable.VariableTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedHashSet;
@@ -77,7 +79,7 @@ public class LunaticLoopResizingLogic {
                 .toList();
         return lunaticQuestionnaire.getVariables().stream()
                 .filter(variable -> VariableTypeEnum.COLLECTED.equals(variable.getVariableType()))
-                .map(IVariableType::getName)
+                .map(VariableType::getName)
                 .filter(maxIterationDependencies::contains)
                 .toList();
     }

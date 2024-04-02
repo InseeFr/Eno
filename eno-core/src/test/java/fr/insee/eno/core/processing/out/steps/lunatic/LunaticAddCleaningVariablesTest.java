@@ -1,6 +1,10 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
+import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
+import fr.insee.lunatic.model.flat.variable.ExternalVariableType;
+import fr.insee.lunatic.model.flat.variable.VariableTypeEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -376,22 +380,20 @@ class LunaticAddCleaningVariablesTest {
         return conditionFilter;
     }
 
-    private VariableType buildCollectedVariable(String variableName) {
-        VariableType variable = new VariableType();
-        variable.setVariableType(VariableTypeEnum.COLLECTED);
+    private CollectedVariableType buildCollectedVariable(String variableName) {
+        CollectedVariableType variable = new CollectedVariableType();
         variable.setName(variableName);
         return variable;
     }
 
-    private VariableType buildCalculatedVariable(String variableName) {
-        VariableType variable = new VariableType();
-        variable.setVariableType(VariableTypeEnum.CALCULATED);
+    private CalculatedVariableType buildCalculatedVariable(String variableName) {
+        CalculatedVariableType variable = new CalculatedVariableType();
         variable.setName(variableName);
         return variable;
     }
 
-    private VariableType buildExternalVariable(String variableName) {
-        VariableType variable = new VariableType();
+    private ExternalVariableType buildExternalVariable(String variableName) {
+        ExternalVariableType variable = new ExternalVariableType();
         variable.setVariableType(VariableTypeEnum.EXTERNAL);
         variable.setName(variableName);
         return variable;

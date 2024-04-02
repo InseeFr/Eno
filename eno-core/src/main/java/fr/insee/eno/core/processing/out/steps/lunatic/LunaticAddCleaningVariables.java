@@ -2,6 +2,8 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.variable.VariableType;
+import fr.insee.lunatic.model.flat.variable.VariableTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
@@ -114,7 +116,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
     private static List<String> filterNonCollectedVariables(List<String> variableNames, Questionnaire lunaticQuestionnaire) {
         return lunaticQuestionnaire.getVariables().stream()
                 .filter(variable -> VariableTypeEnum.COLLECTED.equals(variable.getVariableType()))
-                .map(IVariableType::getName)
+                .map(VariableType::getName)
                 .filter(variableNames::contains)
                 .toList();
     }
