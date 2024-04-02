@@ -1,5 +1,12 @@
 # Eno Releases note
 
+## [v2.8.1] - 2024-04-02
+### :construction_worker: Build System
+- [`51875ee`](https://github.com/InseeFr/Eno/commit/51875ee867c7b6182d40de8203893a3040cdfae8) - update dependencies *(PR [#950](https://github.com/InseeFr/Eno/pull/950) by [@nsenave](https://github.com/nsenave))*
+
+### :memo: Documentation Changes
+
+
 ## [v2.8.0] - 2024-03-13
 ### :memo: Documentation Changes
 
@@ -240,3 +247,4 @@
 
 [v2.7.3]: https://github.com/InseeFr/Eno/compare/v2.7.2...v2.7.3
 [v2.8.0]: https://github.com/InseeFr/Eno/compare/v2.7.3...v2.8.0
+[v2.8.1]: https://github.com/InseeFr/Eno/compare/v2.8.0...v2.8.1
