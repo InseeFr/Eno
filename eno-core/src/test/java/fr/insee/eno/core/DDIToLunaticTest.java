@@ -6,6 +6,7 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Loop;
 import fr.insee.lunatic.model.flat.Questionnaire;
@@ -57,6 +58,21 @@ class DDIToLunaticTest {
         EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
         // When + Then
         assertThrows(UnauthorizedHeaderException.class, () -> DDIToLunatic.transform(inputStream, enoParameters));
+    }
+
+    @Test
+    void componentWithBeforeQuestionDeclaration() throws DDIParsingException {
+        //
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+                this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-lqnje8yr.xml"),
+                EnoParameters.of(Context.DEFAULT, ModeParameter.CAPI, Format.LUNATIC));
+        //
+        assertNotNull(lunaticQuestionnaire);
+        ComponentType componentThatShouldHaveDeclaration = lunaticQuestionnaire.getComponents().stream()
+                .filter(component -> "lsa7m4oz".equals(component.getId()))
+                .findAny().orElse(null);
+        assertNotNull(componentThatShouldHaveDeclaration);
+        assertEquals(2, componentThatShouldHaveDeclaration.getDeclarations().size());
     }
 
     @Nested
