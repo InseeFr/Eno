@@ -11,6 +11,10 @@ import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
+import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
+import fr.insee.lunatic.model.flat.variable.ExternalVariableType;
+import fr.insee.lunatic.model.flat.variable.VariableType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -52,8 +56,7 @@ class LunaticLoopResizingLogicTest {
         simpleResponseComponent.getResponse().setName("RESPONSE_VAR");
         lunaticLoop.getComponents().add(simpleResponseComponent);
         //
-        VariableType numberVariable = new VariableType();
-        numberVariable.setVariableType(VariableTypeEnum.COLLECTED);
+        VariableType numberVariable = new CollectedVariableType();
         numberVariable.setName("LOOP_SIZE_VAR");
         lunaticQuestionnaire.getVariables().add(numberVariable);
         //
@@ -221,8 +224,7 @@ class LunaticLoopResizingLogicTest {
         // Adding a second variable in max size expression
         lunaticLoop.getLines().getMax().setValue("LOOP_SIZE_VAR + LOOP_SIZE_VAR2");
         //
-        VariableType numberVariable = new VariableType();
-        numberVariable.setVariableType(VariableTypeEnum.COLLECTED);
+        VariableType numberVariable = new CollectedVariableType();
         numberVariable.setName("LOOP_SIZE_VAR2");
         lunaticQuestionnaire.getVariables().add(numberVariable);
 
@@ -263,8 +265,7 @@ class LunaticLoopResizingLogicTest {
         //
         lunaticLoop.getLines().getMax().setValue("count(EXTERNAL_VAR)");
         //
-        VariableType externalVariable = new VariableType();
-        externalVariable.setVariableType(VariableTypeEnum.EXTERNAL);
+        VariableType externalVariable = new ExternalVariableType();
         externalVariable.setName("EXTERNAL_VAR");
         lunaticQuestionnaire.getVariables().add(externalVariable);
         //
@@ -285,16 +286,13 @@ class LunaticLoopResizingLogicTest {
         lunaticLoop.getLines().getMax().setValue("CALCULATED_VAR");
         //
         lunaticQuestionnaire.getVariables().clear();
-        VariableType calculatedVariable = new VariableType();
-        calculatedVariable.setVariableType(VariableTypeEnum.CALCULATED);
+        VariableType calculatedVariable = new CalculatedVariableType();
         calculatedVariable.setName("CALCULATED_VAR");
         lunaticQuestionnaire.getVariables().add(calculatedVariable);
-        VariableType collectedVariable = new VariableType();
-        collectedVariable.setVariableType(VariableTypeEnum.COLLECTED);
+        VariableType collectedVariable = new CollectedVariableType();
         collectedVariable.setName("COLLECTED_VAR");
         lunaticQuestionnaire.getVariables().add(collectedVariable);
-        VariableType externalVariable = new VariableType();
-        externalVariable.setVariableType(VariableTypeEnum.EXTERNAL);
+        VariableType externalVariable = new ExternalVariableType();
         externalVariable.setName("EXTERNAL_VAR");
         lunaticQuestionnaire.getVariables().add(externalVariable);
 
@@ -321,8 +319,7 @@ class LunaticLoopResizingLogicTest {
         // Adding an external variable
         lunaticLoop.getLines().getMax().setValue("LOOP_SIZE_VAR + EXTERNAL_VAR");
         //
-        VariableType externalVariable = new VariableType();
-        externalVariable.setVariableType(VariableTypeEnum.EXTERNAL);
+        VariableType externalVariable = new ExternalVariableType();
         externalVariable.setName("EXTERNAL_VAR");
         lunaticQuestionnaire.getVariables().add(externalVariable);
 

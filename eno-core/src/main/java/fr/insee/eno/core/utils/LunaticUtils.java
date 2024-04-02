@@ -112,7 +112,7 @@ public class LunaticUtils {
      * Return the response name of the component that belong to the given pairwise links. This method checks if
      * the inner component is valid.
      * @param pairwiseLinks A pairwise links component.
-     * @return The pairwise inner component.
+     * @return The response name of the pairwise inner component.
      * @throws LunaticPairwiseException if the component in the pairwise is invalid.
      */
     public static String getPairwiseResponseVariable(PairwiseLinks pairwiseLinks) {
@@ -130,7 +130,7 @@ public class LunaticUtils {
     public static ComponentType getPairwiseInnerComponent(PairwiseLinks pairwiseLinks) {
         // Get the pairwise inner component
         checkPairwiseComponentSize(pairwiseLinks);
-        ComponentType pairwiseComponent = pairwiseLinks.getComponents().get(0);
+        ComponentType pairwiseComponent = pairwiseLinks.getComponents().getFirst();
         // Check that this component has a complying type
         if (! (ComponentTypeEnum.DROPDOWN.equals(pairwiseComponent.getComponentType()) ||
                 ComponentTypeEnum.RADIO.equals(pairwiseComponent.getComponentType()) ||

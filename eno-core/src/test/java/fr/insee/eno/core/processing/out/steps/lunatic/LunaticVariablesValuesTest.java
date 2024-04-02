@@ -5,6 +5,9 @@ import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
+import fr.insee.lunatic.model.flat.variable.CollectedVariableValues;
+import fr.insee.lunatic.model.flat.variable.VariableType;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -20,11 +23,11 @@ class LunaticVariablesValuesTest {
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"),
                 EnoParameters.of(EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
         //
-        Optional<IVariableType> searchedVariable = lunaticQuestionnaire.getVariables().stream()
+        Optional<VariableType> searchedVariable = lunaticQuestionnaire.getVariables().stream()
                 .filter(variable -> "Q1".equals(variable.getName())).findAny();
         assertTrue(searchedVariable.isPresent());
-        VariableType variableType = assertInstanceOf(VariableType.class, searchedVariable.get());
-        assertNotNull(variableType.getValues());
+        CollectedVariableType variableType = assertInstanceOf(CollectedVariableType.class, searchedVariable.get());
+        assertInstanceOf(CollectedVariableValues.Scalar.class, variableType.getValues());
     }
 
     @Test
@@ -40,7 +43,7 @@ class LunaticVariablesValuesTest {
         loop.getComponents().add(textarea);
         lunaticQuestionnaire.getComponents().add(loop);
         //
-        VariableType variableType = new VariableType();
+        VariableType variableType = new CollectedVariableType();
         variableType.setName("FOO_VAR");
         lunaticQuestionnaire.getVariables().add(variableType);
 
@@ -50,13 +53,10 @@ class LunaticVariablesValuesTest {
         //
         assertFalse(lunaticQuestionnaire.getVariables().isEmpty());
         assertEquals(1, lunaticQuestionnaire.getVariables().size());
-        assertInstanceOf(VariableTypeArray.class, lunaticQuestionnaire.getVariables().getFirst());
-        //
-        VariableTypeArray loopVariable = (VariableTypeArray) lunaticQuestionnaire.getVariables().getFirst();
-        assertEquals(VariableTypeEnum.COLLECTED, loopVariable.getVariableType());
+        CollectedVariableType loopVariable = assertInstanceOf(CollectedVariableType.class, lunaticQuestionnaire.getVariables().getFirst());
         assertEquals("FOO_VAR", loopVariable.getName());
-        assertNotNull(loopVariable.getValues());
-        assertNotNull(loopVariable.getValues().getCollected());
+        CollectedVariableValues.Array values = assertInstanceOf(CollectedVariableValues.Array.class, loopVariable.getValues());
+        assertNotNull(values.getCollected());
     }
 
     @Test
@@ -72,7 +72,7 @@ class LunaticVariablesValuesTest {
         rosterForLoop.getComponents().add(dropdownCell);
         lunaticQuestionnaire.getComponents().add(rosterForLoop);
         //
-        VariableType variableType = new VariableType();
+        VariableType variableType = new CollectedVariableType();
         variableType.setName("COLUMN1_VAR");
         lunaticQuestionnaire.getVariables().add(variableType);
 
@@ -82,13 +82,10 @@ class LunaticVariablesValuesTest {
         //
         assertFalse(lunaticQuestionnaire.getVariables().isEmpty());
         assertEquals(1, lunaticQuestionnaire.getVariables().size());
-        assertInstanceOf(VariableTypeArray.class, lunaticQuestionnaire.getVariables().getFirst());
-        //
-        VariableTypeArray loopVariable = (VariableTypeArray) lunaticQuestionnaire.getVariables().getFirst();
-        assertEquals(VariableTypeEnum.COLLECTED, loopVariable.getVariableType());
+        CollectedVariableType loopVariable = assertInstanceOf(CollectedVariableType.class, lunaticQuestionnaire.getVariables().getFirst());
         assertEquals("COLUMN1_VAR", loopVariable.getName());
-        assertNotNull(loopVariable.getValues());
-        assertNotNull(loopVariable.getValues().getCollected());
+        CollectedVariableValues.Array values = assertInstanceOf(CollectedVariableValues.Array.class, loopVariable.getValues());
+        assertNotNull(values.getCollected());
     }
 
     @Test
@@ -103,6 +100,10 @@ class LunaticVariablesValuesTest {
         dropdown.getResponse().setName("LINKS_VAR");
         pairwiseLinks.getComponents().add(dropdown);
         lunaticQuestionnaire.getComponents().add(pairwiseLinks);
+        //
+        VariableType variableType = new CollectedVariableType();
+        variableType.setName("LINKS_VAR");
+        lunaticQuestionnaire.getVariables().add(variableType);
 
         //
         new LunaticVariablesValues().apply(lunaticQuestionnaire);
@@ -110,14 +111,10 @@ class LunaticVariablesValuesTest {
         //
         assertFalse(lunaticQuestionnaire.getVariables().isEmpty());
         assertEquals(1, lunaticQuestionnaire.getVariables().size());
-        assertInstanceOf(VariableTypeTwoDimensionsArray.class, lunaticQuestionnaire.getVariables().getFirst());
-        //
-        VariableTypeTwoDimensionsArray pairwiseVariable = (VariableTypeTwoDimensionsArray)
-                lunaticQuestionnaire.getVariables().getFirst();
-        assertEquals(VariableTypeEnum.COLLECTED, pairwiseVariable.getVariableType());
+        CollectedVariableType pairwiseVariable = assertInstanceOf(CollectedVariableType.class, lunaticQuestionnaire.getVariables().getFirst());
         assertEquals("LINKS_VAR", pairwiseVariable.getName());
-        assertNotNull(pairwiseVariable.getValues());
-        assertNotNull(pairwiseVariable.getValues().getCollected());
+        CollectedVariableValues.DoubleArray values = assertInstanceOf(CollectedVariableValues.DoubleArray.class, pairwiseVariable.getValues());
+        assertNotNull(values.getCollected());
     }
-    
+
 }
