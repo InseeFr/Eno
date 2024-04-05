@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.18.5] - 2024-04-05
+### :bug: Bug Fixes
+- [`2a108fb`](https://github.com/InseeFr/Eno/commit/2a108fbbc23d932d1de14644685293ff87f48682) - duplicate declarations in lunatic pairwise component *(PR [#941](https://github.com/InseeFr/Eno/pull/941) by [@nsenave](https://github.com/nsenave))*
+- [`ad41a45`](https://github.com/InseeFr/Eno/commit/ad41a45760c982b53510cb68945295240bef2dc4) - lunatic variables serialization *(PR [#943](https://github.com/InseeFr/Eno/pull/943) by [@nsenave](https://github.com/nsenave))*
+
+### :construction_worker: Build System
+- [`ac3d805`](https://github.com/InseeFr/Eno/commit/ac3d8057f8bd55b4b41e91d2dc3b3bd20344d414) - bump org.springframework.boot from 3.2.3 to 3.2.4 *(PR [#939](https://github.com/InseeFr/Eno/pull/939) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`9c03e81`](https://github.com/InseeFr/Eno/commit/9c03e81f86b21c80ac879f446d858f1d3da076d5) - update dependencies *(PR [#947](https://github.com/InseeFr/Eno/pull/947) by [@nsenave](https://github.com/nsenave))*
+- [`54f6e05`](https://github.com/InseeFr/Eno/commit/54f6e05f167042df026fd0a9e1bab4a36da04cb7) - lunatic-model 3.5.1 *(commit by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.18.2] - 2024-03-25
 ### :sparkles: New Features
 - [`936084d`](https://github.com/InseeFr/Eno/commit/936084d88f69632b4f5ca45b02c43731eb927347) - suggester *(PR [#925](https://github.com/InseeFr/Eno/pull/925) by [@nsenave](https://github.com/nsenave))*
@@ -131,3 +142,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.17.2]: https://github.com/InseeFr/Eno/compare/3.17.1...3.17.2
 [3.17.3]: https://github.com/InseeFr/Eno/compare/3.17.2...3.17.3
 [3.18.2]: https://github.com/InseeFr/Eno/compare/3.17.3...3.18.2
+[3.18.5]: https://github.com/InseeFr/Eno/compare/3.18.2...3.18.5
