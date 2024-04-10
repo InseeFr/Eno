@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.18.5] - 2024-04-05
 ### :bug: Bug Fixes
 - [`2a108fb`](https://github.com/InseeFr/Eno/commit/2a108fbbc23d932d1de14644685293ff87f48682) - duplicate declarations in lunatic pairwise component *(PR [#941](https://github.com/InseeFr/Eno/pull/941) by [@nsenave](https://github.com/nsenave))*
+- [`194a9c4`](https://github.com/InseeFr/Eno/commit/194a9c4f8625ea8521d1b20934c9f86867978fdd) - ddi before question declarations insertion *(PR [#948](https://github.com/InseeFr/Eno/pull/948) by [@nsenave](https://github.com/nsenave))*
 - [`ad41a45`](https://github.com/InseeFr/Eno/commit/ad41a45760c982b53510cb68945295240bef2dc4) - lunatic variables serialization *(PR [#943](https://github.com/InseeFr/Eno/pull/943) by [@nsenave](https://github.com/nsenave))*
 
 ### :construction_worker: Build System
