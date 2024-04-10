@@ -55,7 +55,8 @@ class LunaticPairwiseResizingLogicTest {
         assertEquals(1, resizingType.countResizingEntries());
         ResizingPairwiseEntry resizingPairwiseEntry = assertInstanceOf(ResizingPairwiseEntry.class,
                 resizingType.getResizingEntry("LOOP_VAR"));
-        assertEquals(List.of("count(LOOP_VAR)", "count(LOOP_VAR)"), resizingPairwiseEntry.getSizeForLinksVariables());
+        assertEquals("count(LOOP_VAR)", resizingPairwiseEntry.getSizeForLinksVariables().getXAxisSize());
+        assertEquals("count(LOOP_VAR)", resizingPairwiseEntry.getSizeForLinksVariables().getYAxisSize());
         assertEquals(List.of("LINKS_VAR"), resizingPairwiseEntry.getLinksVariables());
     }
 
