@@ -93,8 +93,9 @@ public class LunaticPairwiseResizingLogic {
         // If no entry for the resizing variable name given, create it
         if (lunaticResizing.getResizingEntry(resizingVariableName) == null) {
             ResizingPairwiseEntry resizingPairwiseEntry = new ResizingPairwiseEntry();
-            resizingPairwiseEntry.getSizeForLinksVariables().add(xSizeExpression);
-            resizingPairwiseEntry.getSizeForLinksVariables().add(ySizeExpression);
+            resizingPairwiseEntry.setSizeForLinksVariables(new ResizingPairwiseEntry.Size());
+            resizingPairwiseEntry.getSizeForLinksVariables().setXAxisSize(xSizeExpression);
+            resizingPairwiseEntry.getSizeForLinksVariables().setYAxisSize(ySizeExpression);
             resizingPairwiseEntry.getLinksVariables().add(linksVariableName);
             lunaticResizing.putResizingEntry(resizingVariableName, resizingPairwiseEntry);
             return;
@@ -106,8 +107,9 @@ public class LunaticPairwiseResizingLogic {
             ResizingPairwiseEntry resizingPairwiseEntry = new ResizingPairwiseEntry();
             resizingPairwiseEntry.setSize(previousEntry.getSize());
             resizingPairwiseEntry.getVariables().addAll(previousEntry.getVariables());
-            resizingPairwiseEntry.getSizeForLinksVariables().add(xSizeExpression);
-            resizingPairwiseEntry.getSizeForLinksVariables().add(ySizeExpression);
+            resizingPairwiseEntry.setSizeForLinksVariables(new ResizingPairwiseEntry.Size());
+            resizingPairwiseEntry.getSizeForLinksVariables().setXAxisSize(xSizeExpression);
+            resizingPairwiseEntry.getSizeForLinksVariables().setYAxisSize(ySizeExpression);
             resizingPairwiseEntry.getLinksVariables().add(linksVariableName);
             lunaticResizing.putResizingEntry(resizingVariableName, resizingPairwiseEntry);
         }
