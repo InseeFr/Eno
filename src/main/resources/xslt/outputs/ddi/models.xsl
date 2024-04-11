@@ -1021,6 +1021,10 @@
     <xsl:template name="ComputationItem" match="driver-ControlConstructScheme/Control" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+
+        <xsl:variable name="type" select="enoddi33:get-ci-type($source-context)"/>
+        <xsl:variable name="is-dynamic-array-line-check" select="enoddi33:is-dynamic-array-line-check($source-context)"/>
+
         <d:ComputationItem>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi33:get-ci-id($source-context)"/></r:ID>
@@ -1040,11 +1044,25 @@
                     <r:TypeOfObject>Instruction</r:TypeOfObject>
                 </d:InterviewerInstructionReference>
             </xsl:if>
-            <xsl:variable name="type" select="enoddi33:get-ci-type($source-context)"/>
             <xsl:choose>
-				<xsl:when test="normalize-space($type)='warn'"><d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem></xsl:when>
-				<xsl:when test="normalize-space($type)='error'"><d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-3">stumblingblock</d:TypeOfComputationItem></xsl:when>
-				<xsl:otherwise><d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem></xsl:otherwise>
+                <xsl:when test="$is-dynamic-array-line-check and normalize-space($type)='warn'">
+                    <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-5">line-warning</d:TypeOfComputationItem>
+                </xsl:when>
+                <xsl:when test="$is-dynamic-array-line-check and normalize-space($type)='error'">
+                    <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-6">line-stumblingblock</d:TypeOfComputationItem>
+                </xsl:when>
+                <xsl:when test="$is-dynamic-array-line-check">
+                    <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-4">line-informational</d:TypeOfComputationItem>
+                </xsl:when>
+                <xsl:when test="normalize-space($type)='warn'">
+                    <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem>
+                </xsl:when>
+				<xsl:when test="normalize-space($type)='error'">
+				    <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-3">stumblingblock</d:TypeOfComputationItem>
+				</xsl:when>
+				<xsl:otherwise>
+				    <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+				</xsl:otherwise>
             </xsl:choose>
             <!-- Have a simpler way to deal with regular controls & mandatory response. -->
             <!-- An apply-templates on Expression will Output CommandeCode for Regular Control. -->
