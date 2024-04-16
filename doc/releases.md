@@ -1,5 +1,19 @@
 # Eno Releases note
 
+## [v2.9.1] - 2024-04-16
+### :sparkles: New Features
+- [`3bd796a`](https://github.com/InseeFr/Eno/commit/3bd796abb968dcbb2ee74f9d0db1404838c9b8f9) - manage dynamic-array check on line *(PR [#966](https://github.com/InseeFr/Eno/pull/966) by [@BulotF](https://github.com/BulotF))*
+
+### :bug: Bug Fixes
+- [`b474db4`](https://github.com/InseeFr/Eno/commit/b474db41971b1e11f42703233092918bde948a2d) - remove xhtml bold for clarification label *(PR [#976](https://github.com/InseeFr/Eno/pull/976) by [@BulotF](https://github.com/BulotF))*
+  - :arrow_lower_right: *fixes issue [#975](https://github.com/InseeFr/Eno/issues/975) opened by [@nsenave](https://github.com/nsenave)*
+
+### :construction_worker: Build System
+- [`a4a267f`](https://github.com/InseeFr/Eno/commit/a4a267ff781f7e8cf453f990b618c1400ade7755) - update dependencies *(PR [#977](https://github.com/InseeFr/Eno/pull/977) by [@nsenave](https://github.com/nsenave))*
+
+### :memo: Documentation Changes
+
+
 ## [v2.8.2] - 2024-04-10
 ### :construction_worker: Build System
 - [`98d5afd`](https://github.com/InseeFr/Eno/commit/98d5afd82fd8a99925420cb98c3875390f914f7a) - update dependencies *(PR [#964](https://github.com/InseeFr/Eno/pull/964) by [@nsenave](https://github.com/nsenave))*
@@ -256,3 +270,4 @@
 [v2.8.0]: https://github.com/InseeFr/Eno/compare/v2.7.3...v2.8.0
 [v2.8.1]: https://github.com/InseeFr/Eno/compare/v2.8.0...v2.8.1
 [v2.8.2]: https://github.com/InseeFr/Eno/compare/v2.8.1...v2.8.2
+[v2.9.1]: https://github.com/InseeFr/Eno/compare/v2.8.2...v2.9.1
