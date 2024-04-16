@@ -1853,11 +1853,7 @@
         <d:TextDomain maxLength="{enoddi33:get-max-length($source-context)}">
             <xsl:if test="$clarification-label != ''">
                 <r:Label>
-                    <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
-                        <xhtml:p>
-                            <xhtml:b><xsl:value-of select="$clarification-label"/></xhtml:b>
-                        </xhtml:p>
-                    </r:Content>
+                    <r:Content xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="$clarification-label"/></r:Content>
                 </r:Label>
             </xsl:if>
             <r:OutParameter isArray="false">

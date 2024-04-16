@@ -2768,11 +2768,7 @@
                <d:ResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">Please specify:</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -3388,11 +3384,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">Please specify:</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -3677,11 +3669,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">Please specify:</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5193,11 +5181,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">Please specify:</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5221,11 +5205,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">Please specify:</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5249,11 +5229,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">Please specify:</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5277,11 +5253,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">Please specify:</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5305,11 +5277,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">Please specify:</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5333,11 +5301,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">Please specify:</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5361,11 +5325,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">Please specify:</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5389,11 +5349,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please specify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">Please specify:</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -7263,11 +7219,7 @@
                <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="249">
                      <r:Label>
-                        <r:Content xml:lang="fr-FR">
-                           <xhtml:p>
-                              <xhtml:b>Please clarify:</xhtml:b>
-                           </xhtml:p>
-                        </r:Content>
+                        <r:Content xml:lang="fr-FR">Please clarify:</r:Content>
                      </r:Label>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
