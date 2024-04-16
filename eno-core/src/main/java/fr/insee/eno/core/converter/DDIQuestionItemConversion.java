@@ -22,6 +22,12 @@ public class DDIQuestionItemConversion {
 
     private DDIQuestionItemConversion() {}
 
+    /**
+     * Instantiate an Eno object that corresponds to the given DDI question item.
+     * @param questionItemType DDI question item.
+     * @param ddiIndex DDI index used for the date/duration question cases.
+     * @return Eno object corresponding to the given DDI question item.
+     */
     static EnoObject instantiateFrom(QuestionItemType questionItemType, DDIIndex ddiIndex) {
         RepresentationType representationType = questionItemType.getResponseDomain();
         DomainReferenceType referenceType = questionItemType.getResponseDomainReference();
@@ -53,6 +59,9 @@ public class DDIQuestionItemConversion {
                 return new SuggesterQuestion();
             return new UniqueChoiceQuestion();
         }
+
+        if (hasMixedResponseDomain(questionItemType))
+            return new UniqueChoiceQuestion();
 
         throw new ConversionException(
                 "Unable to identify question type in DDI question item " +
@@ -108,6 +117,18 @@ public class DDIQuestionItemConversion {
     private static boolean isSuggesterQuestion(QuestionItemType ddiQuestionItem) {
         String ddiOutputFormat = ddiQuestionItem.getResponseDomain().getGenericOutputFormat().getStringValue();
         return DDI_SUGGESTER_OUTPUT_FORMAT.equals(ddiOutputFormat);
+    }
+
+    /**
+     * In DDI, a unique choice question normally has a "CodeDomain" response domain.
+     * However, if the unique choice question has modalities with a "please, specify", the response domain becomes
+     * a mixed response domain containing the code domain, and additional text domains for modalities that have this.
+     * This method checks the existence of such a mixed response domain in the question item object.
+     * @param ddiQuestionItem A DDI question item.
+     * @return True if the response domain is a mixed response domain.
+     */
+    private static boolean hasMixedResponseDomain(QuestionItemType ddiQuestionItem) {
+        return ddiQuestionItem.getStructuredMixedResponseDomain() != null;
     }
 
 }
