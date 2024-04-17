@@ -31,6 +31,7 @@ class UniqueChoiceQuestionTest {
         assertEquals(UniqueChoiceQuestion.DisplayFormat.RADIO, enoUniqueChoiceQuestion.getDisplayFormat());
         //
         assertEquals(3, enoUniqueChoiceQuestion.getDdiBindings().size());
+        assertEquals(3, enoUniqueChoiceQuestion.getDdiResponses().size());
         //
         assertEquals(2, enoUniqueChoiceQuestion.getDetailResponses().size());
     }

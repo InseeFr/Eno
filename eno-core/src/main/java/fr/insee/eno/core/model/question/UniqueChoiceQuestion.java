@@ -10,6 +10,7 @@ import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.navigation.Binding;
 import fr.insee.eno.core.model.response.DetailResponse;
+import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.CheckboxOne;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
@@ -78,6 +79,11 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     /** List of DDI bindings that contain the links between detail response name and label. */
     @DDI("getBindingList()")
     List<Binding> ddiBindings = new ArrayList<>();
+
+    /** List of responses defined in the DDI question item.
+     * Used in the processing that inserts detail response names. */
+    @DDI("getOutParameterList()")
+    List<Response> ddiResponses = new ArrayList<>();
 
     /** Detail responses for modalities that have a "please specify" field. */
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDetailResponses(#this)")
