@@ -8,6 +8,8 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.code.CodeItem;
+import fr.insee.eno.core.model.navigation.Binding;
+import fr.insee.eno.core.model.response.DetailResponse;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.CheckboxOne;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
@@ -73,6 +75,14 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     @Lunatic("getOptions()")
     List<CodeItem> codeItems = new ArrayList<>();
 
+    /** List of DDI bindings that contain the links between detail response name and label. */
+    @DDI("getBindingList()")
+    List<Binding> ddiBindings = new ArrayList<>();
+
+    /** Detail responses for modalities that have a "please specify" field. */
+    @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDetailResponses(#this)")
+    List<DetailResponse> detailResponses = new ArrayList<>();
+
     /**
      * From DDI question item (that correspond to a unique choice question),
      * return the eno model display format for the unique choice question.
@@ -118,6 +128,15 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
 
     public static String mapDDICodeListReference(QuestionItemType questionItemType) {
         return getDDICodeDomain(questionItemType).getCodeListReference().getIDArray(0).getStringValue();
+    }
+
+    public static List<ResponseDomainInMixedType> mapDetailResponses(QuestionItemType questionItemType) {
+        if (questionItemType.getStructuredMixedResponseDomain() == null)
+            return new ArrayList<>();
+        return questionItemType.getStructuredMixedResponseDomain().getResponseDomainInMixedList().stream()
+                .filter(responseDomainInMixedType ->
+                        !(responseDomainInMixedType.getResponseDomain() instanceof CodeDomainType))
+                .toList();
     }
 
     /**
