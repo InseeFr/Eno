@@ -12,13 +12,15 @@ import lombok.Setter;
 /**
  * Unique/multiple choice question modalities can have an additional field for a detailed response.
  * ("Other, please specify").
+ * DDI mapping annotations concern the unique choice case.
  */
 @Getter
 @Setter
 @Context(format = Format.DDI, type = ResponseDomainInMixedType.class)
 public class DetailResponse extends EnoObject {
 
-    /** Code list value associated to the detail response. */
+    /** Code list value associated to the detail response.
+     * Used to make the link between the detail and the option in Lunatic unique choice question components. */
     @DDI("getAttachmentLocation().getDomainSpecificValueArray(0).getValueArray(0).getStringValue()")
     String value;
 

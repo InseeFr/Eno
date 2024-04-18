@@ -4,7 +4,6 @@ import datacollection33.QuestionItemDocument;
 import datacollection33.QuestionItemType;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
-import fr.insee.eno.core.model.response.DetailResponse;
 import org.apache.xmlbeans.XmlException;
 import org.junit.jupiter.api.Test;
 
@@ -34,5 +33,11 @@ class UniqueChoiceQuestionTest {
         assertEquals(3, enoUniqueChoiceQuestion.getDdiResponses().size());
         //
         assertEquals(2, enoUniqueChoiceQuestion.getDetailResponses().size());
+        assertEquals("codeC", enoUniqueChoiceQuestion.getDetailResponses().get(0).getValue());
+        assertEquals("codeD", enoUniqueChoiceQuestion.getDetailResponses().get(1).getValue());
+        assertEquals("\"Please, specify about option C:\"",
+                enoUniqueChoiceQuestion.getDetailResponses().get(0).getLabel().getValue());
+        assertEquals("\"Please, specify about option D:\"",
+                enoUniqueChoiceQuestion.getDetailResponses().get(1).getLabel().getValue());
     }
 }

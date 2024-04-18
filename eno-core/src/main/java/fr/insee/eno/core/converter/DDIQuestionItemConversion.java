@@ -80,6 +80,10 @@ public class DDIQuestionItemConversion {
     }
 
     private static EnoObject convertDateTimeQuestion(DomainReferenceType referenceType, DDIIndex ddiIndex) {
+        if (ddiIndex == null)
+            throw new IllegalArgumentException(
+                    "Cannot convert date/time question with a reference domain without a DDI index.");
+
         AbstractIdentifiableType ddiObject = ddiIndex.get(referenceType.getIDArray(0).getStringValue());
         ManagedDateTimeRepresentationType dateTimeRepresentation = (ManagedDateTimeRepresentationType) ddiObject;
         String dateTypeCode = dateTimeRepresentation.getDateTypeCode().getStringValue();
