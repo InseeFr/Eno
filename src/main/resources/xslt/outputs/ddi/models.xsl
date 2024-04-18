@@ -159,7 +159,7 @@
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
-                    <xsl:apply-templates select="enoddi33:get-questions-table($source-context)" mode="source">
+                    <xsl:apply-templates select="enoddi33:get-questions($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableGroup', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
@@ -495,6 +495,37 @@
             <xsl:apply-templates select="enoddi33:get-scope-variables($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-TableLoopVariables', .)" tunnel="yes"/>
             </xsl:apply-templates>
+            <!-- Add VariableGroupReference to QuestionPairwise -->
+            <xsl:apply-templates select="enoddi33:get-questions-simple($source-context)" mode="source">
+                <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableGroupGlobal', .)" tunnel="yes"/>
+                <xsl:with-param name="loop-id" select="$id" tunnel="yes"/>
+            </xsl:apply-templates>
+        </l:VariableGroup>
+    </xsl:template>
+
+    <xsl:template match="driver-VariableGroup//QuestionPairwise[not(ancestor::driver-VariableGroupGlobal)]" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="id" select="enoddi33:get-id($source-context)"/>
+        <l:VariableGroup>
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+            <r:ID><xsl:value-of select="concat($id,'-vg')"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+            <r:BasedOnObject>
+                <r:BasedOnReference>
+                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                    <r:ID><xsl:value-of select="$id"/></r:ID>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                    <r:TypeOfObject><xsl:value-of select="'QuestionItem'"/></r:TypeOfObject>
+                </r:BasedOnReference>
+            </r:BasedOnObject>
+            <l:TypeOfVariableGroup>PairwiseLink</l:TypeOfVariableGroup>
+            <l:VariableGroupName>
+                <r:String><xsl:value-of select="enoddi33:get-name($source-context)"/></r:String>
+            </l:VariableGroupName>
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+            </xsl:apply-templates>
         </l:VariableGroup>
     </xsl:template>
 
@@ -523,7 +554,7 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="driver-VariableGroup//QuestionDynamicTable//ResponseDomain | driver-VariableGroup//QuestionDynamicTable//Clarification" mode="model">
+    <xsl:template match="driver-VariableGroup//QuestionDynamicTable//ResponseDomain | driver-VariableGroup//QuestionDynamicTable//Clarification | driver-VariableGroup//QuestionPairwise//ResponseDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <!-- Check if the variable isn't linked to a table or loop by scope to avoid duplication  -->
@@ -559,7 +590,7 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="driver-VariableGroupGlobal//QuestionDynamicTable | driver-VariableGroupGlobal//Loop" mode="model">
+    <xsl:template match="driver-VariableGroupGlobal//QuestionDynamicTable | driver-VariableGroupGlobal//Loop | driver-VariableGroupGlobal//QuestionPairwise" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <l:VariableGroupReference>
