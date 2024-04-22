@@ -63,7 +63,7 @@
 		<log4j-slf4j2.version>2.23.1</log4j-slf4j2.version>
 
 
-		<source.plugin.version>3.3.0</source.plugin.version>
+		<source.plugin.version>3.3.1</source.plugin.version>
 		<javadoc.plugin.version>3.6.3</javadoc.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>17</maven.compiler.source>
