@@ -1,5 +1,13 @@
 # Eno Releases note
 
+## [v2.9.2] - 2024-04-22
+### :sparkles: New Features
+- [`b71d04c`](https://github.com/InseeFr/Eno/commit/b71d04c1765a645c196e0e72b2f15afd1475db29) - manage pairwise VariableGroup *(PR [#979](https://github.com/InseeFr/Eno/pull/979) by [@BulotF](https://github.com/BulotF))*
+  - :arrow_lower_right: *addresses issue [#974](https://github.com/InseeFr/Eno/issues/974) opened by [@BulotF](https://github.com/BulotF)*
+
+### :memo: Documentation Changes
+
+
 ## [v2.9.1] - 2024-04-16
 ### :sparkles: New Features
 - [`3bd796a`](https://github.com/InseeFr/Eno/commit/3bd796abb968dcbb2ee74f9d0db1404838c9b8f9) - manage dynamic-array check on line *(PR [#966](https://github.com/InseeFr/Eno/pull/966) by [@BulotF](https://github.com/BulotF))*
@@ -271,3 +279,4 @@
 [v2.8.1]: https://github.com/InseeFr/Eno/compare/v2.8.0...v2.8.1
 [v2.8.2]: https://github.com/InseeFr/Eno/compare/v2.8.1...v2.8.2
 [v2.9.1]: https://github.com/InseeFr/Eno/compare/v2.8.2...v2.9.1
+[v2.9.2]: https://github.com/InseeFr/Eno/compare/v2.9.1...v2.9.2
