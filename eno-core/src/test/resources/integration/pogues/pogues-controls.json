@@ -1,0 +1,339 @@
+{
+  "owner": "DG75-L120",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "ltx652ow",
+        "ltx6oc58",
+        "ltx6cof9",
+        "lu6xrmto",
+        "lu6y5e4z",
+        "lu71az37",
+        "idendquest"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "ltx6eptz",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "Controles - Eno issue 942 "
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "VAROBLIGAT",
+  "Variables": {
+    "Variable": [
+      {
+        "Label": "INPUT_OB label",
+        "id": "ltx6ngpx",
+        "type": "CollectedVariableType",
+        "Name": "INPUT_OB",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "INPUT_NONOBI label",
+        "id": "lu6xoro0",
+        "type": "CollectedVariableType",
+        "Name": "INPUT_NONOBI",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "INPUT_NONOBA label",
+        "id": "lu6xuii8",
+        "type": "CollectedVariableType",
+        "Name": "INPUT_NONOBA",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "INPUT_NONOBE label",
+        "id": "lu7189fa",
+        "type": "CollectedVariableType",
+        "Name": "INPUT_NONOBE",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "INPUT_SANS label",
+        "id": "lu71itlo",
+        "type": "CollectedVariableType",
+        "Name": "INPUT_SANS",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Tue Mar 26 2024 10:12:39 GMT+0100 (heure normale d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "esa-dc-2018",
+      "uri": "http://ddi:fr.insee:DataCollection.esa-dc-2018",
+      "Name": "Enquête sectorielle annuelle 2018"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "ltx6820n",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI"
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "S1"
+      ],
+      "id": "ltx652ow",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "ltx6ngpx",
+              "id": "ltx6ep32",
+              "mandatory": true,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Input obligatoire\""
+          ],
+          "id": "ltx6oc58",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "INPUT_OB"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lu6xoro0",
+              "id": "ltx6m4pb",
+              "mandatory": true,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [
+            {
+              "post_collect": false,
+              "Description": "description du controle Information",
+              "Expression": "nvl($INPUT_NONOBI$,\"\")=\"I\"",
+              "during_collect": false,
+              "criticity": "INFO",
+              "FailMessage": "\"Information \" || $INPUT_NONOBI$ || \"doit être différente de I\"",
+              "id": "lu6xpjtk"
+            }
+          ],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Input controle information - tester I\""
+          ],
+          "id": "ltx6cof9",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "INPUT_NONOBI"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lu6xuii8",
+              "id": "lu6xjf4c",
+              "mandatory": true,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [
+            {
+              "post_collect": false,
+              "Description": "description du controle avertissement",
+              "Expression": "nvl($INPUT_NONOBA$,\"\")=\"A\"",
+              "during_collect": false,
+              "criticity": "WARN",
+              "FailMessage": "\"Avertissement \" || $INPUT_NONOBA$ || \"doit être différente de A\"",
+              "id": "lu6xl12a"
+            }
+          ],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Input controle avertissement - tester A\""
+          ],
+          "id": "lu6xrmto",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "INPUT_NONOBA"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lu7189fa",
+              "id": "lu6xr91h",
+              "mandatory": true,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [
+            {
+              "post_collect": false,
+              "Description": "description du controle erreur",
+              "Expression": "nvl($INPUT_NONOBE$,\"\") = \"E\"",
+              "during_collect": false,
+              "criticity": "ERROR",
+              "FailMessage": "\"Erreur \" || $INPUT_NONOBE$ || \"doit être différente de E\"",
+              "id": "lu6xusai"
+            }
+          ],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Input controle erreur - tester E\""
+          ],
+          "id": "lu6y5e4z",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "INPUT_NONOBE"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lu71itlo",
+              "id": "lu71km2r",
+              "mandatory": false,
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Input sans controle et non obli\""
+          ],
+          "id": "lu71az37",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "INPUT_SANS"
+        }
+      ],
+      "Name": "S1"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

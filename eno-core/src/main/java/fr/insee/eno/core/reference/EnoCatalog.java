@@ -15,6 +15,7 @@ import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.model.variable.Variable;
+import lombok.Getter;
 
 import java.util.*;
 
@@ -32,6 +33,7 @@ public class EnoCatalog {
     /** Map of collected variables stored by their reference (warning: keys = not ids). */
     Map<String, Variable> variableMap = new HashMap<>();
     /** List with all labels that are in the questionnaire. */
+    @Getter
     private final Collection<EnoLabel> labels = new ArrayDeque<>();
     // NB: https://stackoverflow.com/questions/6129805/what-is-the-fastest-java-collection-with-the-basic-functionality-of-a-queue
 
@@ -80,9 +82,6 @@ public class EnoCatalog {
     public Collection<EnoComponent> getComponents() {
         return componentMap.values();
     }
-    public Collection<EnoLabel> getLabels() {
-        return labels;
-    }
 
     private void gatherLabels(EnoQuestionnaire enoQuestionnaire) {
         // Sequences and subsequences
@@ -100,11 +99,6 @@ public class EnoCatalog {
                 labels.addAll(enoQuestion.getControls().stream().map(Control::getMessage).toList()));
         // Code lists
         enoQuestionnaire.getCodeLists().stream().map(CodeList::getCodeItems).forEach(this::gatherLabelsFromCodeItems);
-        // Code lists in multiple response questions (might be refactored afterward)
-        enoQuestionnaire.getMultipleResponseQuestions().stream()
-                .filter(SimpleMultipleChoiceQuestion.class::isInstance)
-                .map(SimpleMultipleChoiceQuestion.class::cast)
-                .forEach(this::gatherLabelsFromCodeResponses);
     }
 
     private void gatherLabelsFromCodeItems(List<CodeItem> codeItems) {
@@ -113,10 +107,6 @@ public class EnoCatalog {
             // Recursive call in case of nested code items
             gatherLabelsFromCodeItems(codeItem.getCodeItems());
         }
-    }
-
-    private void gatherLabelsFromCodeResponses(SimpleMultipleChoiceQuestion multipleChoiceQuestion) {
-        labels.addAll(multipleChoiceQuestion.getCodeResponses().stream().map(CodeResponse::getLabel).toList());
     }
 
 }
