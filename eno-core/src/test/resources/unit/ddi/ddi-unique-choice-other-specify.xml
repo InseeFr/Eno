@@ -1,0 +1,154 @@
+<d:QuestionItem xmlns:d="ddi:datacollection:3_3" xmlns:r="ddi:reusable:3_3">
+	<r:Agency>fr.insee</r:Agency>
+	<r:ID>lutkqj7u</r:ID>
+	<r:Version>1</r:Version>
+	<d:QuestionItemName>
+		<r:String xml:lang="fr-FR">UCQ_RADIO</r:String>
+	</d:QuestionItemName>
+	<r:OutParameter isArray="false">
+		<r:Agency>fr.insee</r:Agency>
+		<r:ID>lutkqj7u-QOP-lutlcmdc</r:ID>
+		<r:Version>1</r:Version>
+		<r:ParameterName>
+			<r:String xml:lang="fr-FR">UCQ_RADIO</r:String>
+		</r:ParameterName>
+	</r:OutParameter>
+	<r:OutParameter isArray="false">
+		<r:Agency>fr.insee</r:Agency>
+		<r:ID>lutl4boi-QOP-lutldzwz</r:ID>
+		<r:Version>1</r:Version>
+		<r:ParameterName>
+			<r:String xml:lang="fr-FR">UCQ_codeC_RADIO</r:String>
+		</r:ParameterName>
+	</r:OutParameter>
+	<r:OutParameter isArray="false">
+		<r:Agency>fr.insee</r:Agency>
+		<r:ID>lutl72ne-QOP-lutl513r</r:ID>
+		<r:Version>1</r:Version>
+		<r:ParameterName>
+			<r:String xml:lang="fr-FR">UCQ_codeD_RADIO</r:String>
+		</r:ParameterName>
+	</r:OutParameter>
+	<r:Binding>
+		<r:SourceParameterReference>
+			<r:Agency>fr.insee</r:Agency>
+			<r:ID>lutkqj7u-RDOP-lutlcmdc</r:ID>
+			<r:Version>1</r:Version>
+			<r:TypeOfObject>OutParameter</r:TypeOfObject>
+		</r:SourceParameterReference>
+		<r:TargetParameterReference>
+			<r:Agency>fr.insee</r:Agency>
+			<r:ID>lutkqj7u-QOP-lutlcmdc</r:ID>
+			<r:Version>1</r:Version>
+			<r:TypeOfObject>OutParameter</r:TypeOfObject>
+		</r:TargetParameterReference>
+	</r:Binding>
+	<r:Binding>
+		<r:SourceParameterReference>
+			<r:Agency>fr.insee</r:Agency>
+			<r:ID>lutl4boi-RDOP-lutldzwz</r:ID>
+			<r:Version>1</r:Version>
+			<r:TypeOfObject>OutParameter</r:TypeOfObject>
+		</r:SourceParameterReference>
+		<r:TargetParameterReference>
+			<r:Agency>fr.insee</r:Agency>
+			<r:ID>lutl4boi-QOP-lutldzwz</r:ID>
+			<r:Version>1</r:Version>
+			<r:TypeOfObject>OutParameter</r:TypeOfObject>
+		</r:TargetParameterReference>
+	</r:Binding>
+	<r:Binding>
+		<r:SourceParameterReference>
+			<r:Agency>fr.insee</r:Agency>
+			<r:ID>lutl72ne-RDOP-lutl513r</r:ID>
+			<r:Version>1</r:Version>
+			<r:TypeOfObject>OutParameter</r:TypeOfObject>
+		</r:SourceParameterReference>
+		<r:TargetParameterReference>
+			<r:Agency>fr.insee</r:Agency>
+			<r:ID>lutl72ne-QOP-lutl513r</r:ID>
+			<r:Version>1</r:Version>
+			<r:TypeOfObject>OutParameter</r:TypeOfObject>
+		</r:TargetParameterReference>
+	</r:Binding>
+	<d:QuestionText>
+		<d:LiteralText>
+			<d:Text xml:lang="fr-FR">"Unique choice question (radio buttons)"</d:Text>
+		</d:LiteralText>
+	</d:QuestionText>
+	<d:StructuredMixedResponseDomain>
+		<d:ResponseDomainInMixed attachmentBase="1">
+			<d:CodeDomain>
+				<r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
+				<r:CodeListReference>
+					<r:Agency>fr.insee</r:Agency>
+					<r:ID>lutkfklf</r:ID>
+					<r:Version>1</r:Version>
+					<r:TypeOfObject>CodeList</r:TypeOfObject>
+				</r:CodeListReference>
+				<r:OutParameter isArray="false">
+					<r:Agency>fr.insee</r:Agency>
+					<r:ID>lutkqj7u-RDOP-lutlcmdc</r:ID>
+					<r:Version>1</r:Version>
+					<r:CodeRepresentation>
+						<r:CodeListReference>
+							<r:Agency>fr.insee</r:Agency>
+							<r:ID>lutkfklf</r:ID>
+							<r:Version>1</r:Version>
+							<r:TypeOfObject>CodeList</r:TypeOfObject>
+						</r:CodeListReference>
+					</r:CodeRepresentation>
+				</r:OutParameter>
+				<r:ResponseCardinality maximumResponses="1"/>
+			</d:CodeDomain>
+		</d:ResponseDomainInMixed>
+		<d:ResponseDomainInMixed>
+			<d:TextDomain maxLength="20">
+				<r:Label>
+					<r:Content xml:lang="fr-FR">"Please, specify about option C:"</r:Content>
+				</r:Label>
+				<r:OutParameter isArray="false">
+					<r:Agency>fr.insee</r:Agency>
+					<r:ID>lutl4boi-RDOP-lutldzwz</r:ID>
+					<r:Version>1</r:Version>
+					<r:TextRepresentation maxLength="20"/>
+				</r:OutParameter>
+			</d:TextDomain>
+			<d:AttachmentLocation>
+				<d:DomainSpecificValue attachmentDomain="1">
+					<r:Value>codeC</r:Value>
+				</d:DomainSpecificValue>
+				<r:CodeReference>
+					<r:Agency>fr.insee</r:Agency>
+					<r:ID>lutkfklf-3</r:ID>
+					<r:Version>1</r:Version>
+					<r:TypeOfObject>Code</r:TypeOfObject>
+				</r:CodeReference>
+			</d:AttachmentLocation>
+		</d:ResponseDomainInMixed>
+		<d:ResponseDomainInMixed>
+			<d:TextDomain maxLength="30">
+				<r:Label>
+					<r:Content xml:lang="fr-FR">"Please, specify about option D:"</r:Content>
+				</r:Label>
+				<r:OutParameter isArray="false">
+					<r:Agency>fr.insee</r:Agency>
+					<r:ID>lutl72ne-RDOP-lutl513r</r:ID>
+					<r:Version>1</r:Version>
+					<r:TextRepresentation maxLength="30"/>
+				</r:OutParameter>
+			</d:TextDomain>
+			<d:AttachmentLocation>
+				<d:DomainSpecificValue attachmentDomain="1">
+					<r:Value>codeD</r:Value>
+				</d:DomainSpecificValue>
+				<r:CodeReference>
+					<r:Agency>fr.insee</r:Agency>
+					<r:ID>lutkfklf-4</r:ID>
+					<r:Version>1</r:Version>
+					<r:TypeOfObject>Code</r:TypeOfObject>
+				</r:CodeReference>
+			</d:AttachmentLocation>
+		</d:ResponseDomainInMixed>
+	</d:StructuredMixedResponseDomain>
+</d:QuestionItem>

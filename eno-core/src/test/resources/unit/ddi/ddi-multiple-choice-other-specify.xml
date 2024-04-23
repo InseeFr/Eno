@@ -1,0 +1,317 @@
+<d:QuestionGrid xmlns:d="ddi:datacollection:3_3" xmlns:r="ddi:reusable:3_3">
+	<r:Agency>fr.insee</r:Agency>
+	<r:ID>lutkxex2</r:ID>
+	<r:Version>1</r:Version>
+	<d:QuestionGridName>
+		<r:String xml:lang="fr-FR">MCQ</r:String>
+	</d:QuestionGridName>
+	<r:OutParameter isArray="false">
+		<r:Agency>fr.insee</r:Agency>
+		<r:ID>lutkxex2-QOP-lutlb389</r:ID>
+		<r:Version>1</r:Version>
+		<r:ParameterName>
+			<r:String xml:lang="fr-FR">MCQ1</r:String>
+		</r:ParameterName>
+	</r:OutParameter>
+	<r:OutParameter isArray="false">
+		<r:Agency>fr.insee</r:Agency>
+		<r:ID>lutkxex2-QOP-lutligr6</r:ID>
+		<r:Version>1</r:Version>
+		<r:ParameterName>
+			<r:String xml:lang="fr-FR">MCQ2</r:String>
+		</r:ParameterName>
+	</r:OutParameter>
+	<r:OutParameter isArray="false">
+		<r:Agency>fr.insee</r:Agency>
+		<r:ID>lutkxex2-QOP-lutllcqj</r:ID>
+		<r:Version>1</r:Version>
+		<r:ParameterName>
+			<r:String xml:lang="fr-FR">MCQ3</r:String>
+		</r:ParameterName>
+	</r:OutParameter>
+	<r:OutParameter isArray="false">
+		<r:Agency>fr.insee</r:Agency>
+		<r:ID>lutkxex2-QOP-lutle98i</r:ID>
+		<r:Version>1</r:Version>
+		<r:ParameterName>
+			<r:String xml:lang="fr-FR">MCQ4</r:String>
+		</r:ParameterName>
+	</r:OutParameter>
+	<r:OutParameter isArray="false">
+		<r:Agency>fr.insee</r:Agency>
+		<r:ID>lutlgqmy-QOP-lutl6p92</r:ID>
+		<r:Version>1</r:Version>
+		<r:ParameterName>
+			<r:String xml:lang="fr-FR">MCQ_codeC</r:String>
+		</r:ParameterName>
+	</r:OutParameter>
+	<r:OutParameter isArray="false">
+		<r:Agency>fr.insee</r:Agency>
+		<r:ID>lutljcf1-QOP-lutl8s82</r:ID>
+		<r:Version>1</r:Version>
+		<r:ParameterName>
+			<r:String xml:lang="fr-FR">MCQ_codeD</r:String>
+		</r:ParameterName>
+	</r:OutParameter>
+	<r:Binding>
+		<r:SourceParameterReference>
+			<r:Agency>fr.insee</r:Agency>
+			<r:ID>lutkxex2-RDOP-lutlb389</r:ID>
+			<r:Version>1</r:Version>
+			<r:TypeOfObject>OutParameter</r:TypeOfObject>
+		</r:SourceParameterReference>
+		<r:TargetParameterReference>
+			<r:Agency>fr.insee</r:Agency>
+			<r:ID>lutkxex2-QOP-lutlb389</r:ID>
+			<r:Version>1</r:Version>
+			<r:TypeOfObject>OutParameter</r:TypeOfObject>
+		</r:TargetParameterReference>
+	</r:Binding>
+	<r:Binding>
+		<r:SourceParameterReference>
+			<r:Agency>fr.insee</r:Agency>
+			<r:ID>lutkxex2-RDOP-lutligr6</r:ID>
+			<r:Version>1</r:Version>
+			<r:TypeOfObject>OutParameter</r:TypeOfObject>
+		</r:SourceParameterReference>
+		<r:TargetParameterReference>
+			<r:Agency>fr.insee</r:Agency>
+			<r:ID>lutkxex2-QOP-lutligr6</r:ID>
+			<r:Version>1</r:Version>
+			<r:TypeOfObject>OutParameter</r:TypeOfObject>
+		</r:TargetParameterReference>
+	</r:Binding>
+	<r:Binding>
+		<r:SourceParameterReference>
+			<r:Agency>fr.insee</r:Agency>
+			<r:ID>lutkxex2-RDOP-lutllcqj</r:ID>
+			<r:Version>1</r:Version>
+			<r:TypeOfObject>OutParameter</r:TypeOfObject>
+		</r:SourceParameterReference>
+		<r:TargetParameterReference>
+			<r:Agency>fr.insee</r:Agency>
+			<r:ID>lutkxex2-QOP-lutllcqj</r:ID>
+			<r:Version>1</r:Version>
+			<r:TypeOfObject>OutParameter</r:TypeOfObject>
+		</r:TargetParameterReference>
+	</r:Binding>
+	<r:Binding>
+		<r:SourceParameterReference>
+			<r:Agency>fr.insee</r:Agency>
+			<r:ID>lutkxex2-RDOP-lutle98i</r:ID>
+			<r:Version>1</r:Version>
+			<r:TypeOfObject>OutParameter</r:TypeOfObject>
+		</r:SourceParameterReference>
+		<r:TargetParameterReference>
+			<r:Agency>fr.insee</r:Agency>
+			<r:ID>lutkxex2-QOP-lutle98i</r:ID>
+			<r:Version>1</r:Version>
+			<r:TypeOfObject>OutParameter</r:TypeOfObject>
+		</r:TargetParameterReference>
+	</r:Binding>
+	<r:Binding>
+		<r:SourceParameterReference>
+			<r:Agency>fr.insee</r:Agency>
+			<r:ID>lutlgqmy-RDOP-lutl6p92</r:ID>
+			<r:Version>1</r:Version>
+			<r:TypeOfObject>OutParameter</r:TypeOfObject>
+		</r:SourceParameterReference>
+		<r:TargetParameterReference>
+			<r:Agency>fr.insee</r:Agency>
+			<r:ID>lutlgqmy-QOP-lutl6p92</r:ID>
+			<r:Version>1</r:Version>
+			<r:TypeOfObject>OutParameter</r:TypeOfObject>
+		</r:TargetParameterReference>
+	</r:Binding>
+	<r:Binding>
+		<r:SourceParameterReference>
+			<r:Agency>fr.insee</r:Agency>
+			<r:ID>lutljcf1-RDOP-lutl8s82</r:ID>
+			<r:Version>1</r:Version>
+			<r:TypeOfObject>OutParameter</r:TypeOfObject>
+		</r:SourceParameterReference>
+		<r:TargetParameterReference>
+			<r:Agency>fr.insee</r:Agency>
+			<r:ID>lutljcf1-QOP-lutl8s82</r:ID>
+			<r:Version>1</r:Version>
+			<r:TypeOfObject>OutParameter</r:TypeOfObject>
+		</r:TargetParameterReference>
+	</r:Binding>
+	<d:QuestionText>
+		<d:LiteralText>
+			<d:Text xml:lang="fr-FR">"Multiple choice question"</d:Text>
+		</d:LiteralText>
+	</d:QuestionText>
+	<d:GridDimension displayCode="false" displayLabel="false" rank="1">
+		<d:CodeDomain>
+			<r:CodeListReference>
+				<r:Agency>fr.insee</r:Agency>
+				<r:ID>lutkfklf</r:ID>
+				<r:Version>1</r:Version>
+				<r:TypeOfObject>CodeList</r:TypeOfObject>
+			</r:CodeListReference>
+		</d:CodeDomain>
+	</d:GridDimension>
+	<d:StructuredMixedGridResponseDomain>
+		<d:GridResponseDomainInMixed>
+			<d:NominalDomain>
+				<r:OutParameter isArray="false">
+					<r:Agency>fr.insee</r:Agency>
+					<r:ID>lutkxex2-RDOP-lutlb389</r:ID>
+					<r:Version>1</r:Version>
+					<r:CodeRepresentation>
+						<r:CodeSubsetInformation>
+							<r:IncludedCode>
+								<r:CodeReference>
+									<r:Agency>fr.insee</r:Agency>
+									<r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+									<r:Version>1</r:Version>
+									<r:TypeOfObject>Code</r:TypeOfObject>
+								</r:CodeReference>
+							</r:IncludedCode>
+						</r:CodeSubsetInformation>
+					</r:CodeRepresentation>
+					<r:DefaultValue/>
+				</r:OutParameter>
+				<r:ResponseCardinality maximumResponses="1"/>
+			</d:NominalDomain>
+			<d:GridAttachment>
+				<d:CellCoordinatesAsDefined>
+					<d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
+				</d:CellCoordinatesAsDefined>
+			</d:GridAttachment>
+		</d:GridResponseDomainInMixed>
+		<d:GridResponseDomainInMixed>
+			<d:NominalDomain>
+				<r:OutParameter isArray="false">
+					<r:Agency>fr.insee</r:Agency>
+					<r:ID>lutkxex2-RDOP-lutligr6</r:ID>
+					<r:Version>1</r:Version>
+					<r:CodeRepresentation>
+						<r:CodeSubsetInformation>
+							<r:IncludedCode>
+								<r:CodeReference>
+									<r:Agency>fr.insee</r:Agency>
+									<r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+									<r:Version>1</r:Version>
+									<r:TypeOfObject>Code</r:TypeOfObject>
+								</r:CodeReference>
+							</r:IncludedCode>
+						</r:CodeSubsetInformation>
+					</r:CodeRepresentation>
+					<r:DefaultValue/>
+				</r:OutParameter>
+				<r:ResponseCardinality maximumResponses="1"/>
+			</d:NominalDomain>
+			<d:GridAttachment>
+				<d:CellCoordinatesAsDefined>
+					<d:SelectDimension rank="1" rangeMinimum="2" rangeMaximum="2"/>
+				</d:CellCoordinatesAsDefined>
+			</d:GridAttachment>
+		</d:GridResponseDomainInMixed>
+		<d:GridResponseDomainInMixed attachmentBase="3">
+			<d:NominalDomain>
+				<r:OutParameter isArray="false">
+					<r:Agency>fr.insee</r:Agency>
+					<r:ID>lutkxex2-RDOP-lutllcqj</r:ID>
+					<r:Version>1</r:Version>
+					<r:CodeRepresentation>
+						<r:CodeSubsetInformation>
+							<r:IncludedCode>
+								<r:CodeReference>
+									<r:Agency>fr.insee</r:Agency>
+									<r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+									<r:Version>1</r:Version>
+									<r:TypeOfObject>Code</r:TypeOfObject>
+								</r:CodeReference>
+							</r:IncludedCode>
+						</r:CodeSubsetInformation>
+					</r:CodeRepresentation>
+					<r:DefaultValue/>
+				</r:OutParameter>
+				<r:ResponseCardinality maximumResponses="1"/>
+			</d:NominalDomain>
+			<d:GridAttachment>
+				<d:CellCoordinatesAsDefined>
+					<d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
+				</d:CellCoordinatesAsDefined>
+			</d:GridAttachment>
+		</d:GridResponseDomainInMixed>
+		<d:GridResponseDomainInMixed attachmentBase="4">
+			<d:NominalDomain>
+				<r:OutParameter isArray="false">
+					<r:Agency>fr.insee</r:Agency>
+					<r:ID>lutkxex2-RDOP-lutle98i</r:ID>
+					<r:Version>1</r:Version>
+					<r:CodeRepresentation>
+						<r:CodeSubsetInformation>
+							<r:IncludedCode>
+								<r:CodeReference>
+									<r:Agency>fr.insee</r:Agency>
+									<r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+									<r:Version>1</r:Version>
+									<r:TypeOfObject>Code</r:TypeOfObject>
+								</r:CodeReference>
+							</r:IncludedCode>
+						</r:CodeSubsetInformation>
+					</r:CodeRepresentation>
+					<r:DefaultValue/>
+				</r:OutParameter>
+				<r:ResponseCardinality maximumResponses="1"/>
+			</d:NominalDomain>
+			<d:GridAttachment>
+				<d:CellCoordinatesAsDefined>
+					<d:SelectDimension rank="1" rangeMinimum="4" rangeMaximum="4"/>
+				</d:CellCoordinatesAsDefined>
+			</d:GridAttachment>
+		</d:GridResponseDomainInMixed>
+		<d:GridResponseDomainInMixed>
+			<d:TextDomain maxLength="20">
+				<r:Label>
+					<r:Content xml:lang="fr-FR">"Please, specify about option C:"</r:Content>
+				</r:Label>
+				<r:OutParameter isArray="false">
+					<r:Agency>fr.insee</r:Agency>
+					<r:ID>lutlgqmy-RDOP-lutl6p92</r:ID>
+					<r:Version>1</r:Version>
+					<r:TextRepresentation maxLength="20"/>
+				</r:OutParameter>
+			</d:TextDomain>
+			<d:ResponseAttachmentLocation>
+				<d:DomainSpecificValue attachmentDomain="3">
+					<r:Value>1</r:Value>
+				</d:DomainSpecificValue>
+				<r:CodeReference>
+					<r:Agency>fr.insee</r:Agency>
+					<r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+					<r:Version>1</r:Version>
+					<r:TypeOfObject>Code</r:TypeOfObject>
+				</r:CodeReference>
+			</d:ResponseAttachmentLocation>
+		</d:GridResponseDomainInMixed>
+		<d:GridResponseDomainInMixed>
+			<d:TextDomain maxLength="30">
+				<r:Label>
+					<r:Content xml:lang="fr-FR">"Please, specify about option D:"</r:Content>
+				</r:Label>
+				<r:OutParameter isArray="false">
+					<r:Agency>fr.insee</r:Agency>
+					<r:ID>lutljcf1-RDOP-lutl8s82</r:ID>
+					<r:Version>1</r:Version>
+					<r:TextRepresentation maxLength="30"/>
+				</r:OutParameter>
+			</d:TextDomain>
+			<d:ResponseAttachmentLocation>
+				<d:DomainSpecificValue attachmentDomain="4">
+					<r:Value>1</r:Value>
+				</d:DomainSpecificValue>
+				<r:CodeReference>
+					<r:Agency>fr.insee</r:Agency>
+					<r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+					<r:Version>1</r:Version>
+					<r:TypeOfObject>Code</r:TypeOfObject>
+				</r:CodeReference>
+			</d:ResponseAttachmentLocation>
+		</d:GridResponseDomainInMixed>
+	</d:StructuredMixedGridResponseDomain>
+</d:QuestionGrid>
