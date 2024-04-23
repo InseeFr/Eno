@@ -16,6 +16,8 @@ public class DDIInProcessing {
                 .then(new DDICleanUpQuestionnaireId())
                 .then(new DDIMoveUnitInQuestions())
                 .then(new DDIInsertResponseInTableCells())
+                .then(new DDIInsertDetailResponses())
+                .then(new DDIInsertMultipleChoiceLabels())
                 .then(new DDIResolveVariableReferencesInExpressions())
                 .then(new DDIInsertDeclarations(enoIndex))
                 .then(new DDIInsertControls())

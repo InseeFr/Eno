@@ -3,6 +3,7 @@ package fr.insee.eno.core.converter;
 import datacollection33.QuestionItemDocument;
 import datacollection33.QuestionItemType;
 import fr.insee.eno.core.model.EnoObject;
+import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.model.question.TextQuestion;
 import org.apache.xmlbeans.XmlException;
 import org.junit.jupiter.api.Test;
@@ -65,7 +66,7 @@ class DDIConverterTest {
         QuestionItemType ddiQuestionItem = QuestionItemDocument.Factory.parse(
                 new ByteArrayInputStream(stringInput.getBytes())).getQuestionItem();
         //
-        EnoObject result = DDIConverter.instantiateFromDDIObject(ddiQuestionItem, null);
+        EnoObject result = DDIConverter.instantiateFromDDIObject(ddiQuestionItem, null, SingleResponseQuestion.class);
         //
         assertTrue(result instanceof TextQuestion);
     }
