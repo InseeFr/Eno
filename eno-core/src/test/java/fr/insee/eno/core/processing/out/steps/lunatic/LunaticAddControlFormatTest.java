@@ -51,8 +51,8 @@ class LunaticAddControlFormatTest {
         assertEquals(LabelTypeEnum.VTL, control.getControl().getTypeEnum());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getTypeEnum());
         assertEquals("number-id-format-decimal", control.getId());
-        assertEquals(ControlTypeOfControlEnum.FORMAT, control.getTypeOfControl());
-        assertEquals(ControlCriticityEnum.ERROR, control.getCriticality());
+        assertEquals(ControlTypeEnum.FORMAT, control.getTypeOfControl());
+        assertEquals(ControlCriticalityEnum.ERROR, control.getCriticality());
     }
 
     @Test
@@ -99,8 +99,8 @@ class LunaticAddControlFormatTest {
         assertEquals(LabelTypeEnum.VTL, control.getControl().getTypeEnum());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getTypeEnum());
         assertEquals("number-id-format-borne-inf-sup", control.getId());
-        assertEquals(ControlTypeOfControlEnum.FORMAT, control.getTypeOfControl());
-        assertEquals(ControlCriticityEnum.ERROR, control.getCriticality());
+        assertEquals(ControlTypeEnum.FORMAT, control.getTypeOfControl());
+        assertEquals(ControlCriticalityEnum.ERROR, control.getCriticality());
     }
 
     @Test
@@ -118,8 +118,8 @@ class LunaticAddControlFormatTest {
         assertEquals(LabelTypeEnum.VTL, control.getControl().getTypeEnum());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getTypeEnum());
         assertEquals("number-id-format-borne-inf", control.getId());
-        assertEquals(ControlTypeOfControlEnum.FORMAT, control.getTypeOfControl());
-        assertEquals(ControlCriticityEnum.ERROR, control.getCriticality());
+        assertEquals(ControlTypeEnum.FORMAT, control.getTypeOfControl());
+        assertEquals(ControlCriticalityEnum.ERROR, control.getCriticality());
     }
 
     @Test
@@ -137,8 +137,8 @@ class LunaticAddControlFormatTest {
         assertEquals(LabelTypeEnum.VTL, control.getControl().getTypeEnum());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getTypeEnum());
         assertEquals("number-id-format-borne-sup", control.getId());
-        assertEquals(ControlTypeOfControlEnum.FORMAT, control.getTypeOfControl());
-        assertEquals(ControlCriticityEnum.ERROR, control.getCriticality());
+        assertEquals(ControlTypeEnum.FORMAT, control.getTypeOfControl());
+        assertEquals(ControlCriticalityEnum.ERROR, control.getCriticality());
     }
 
     @Test
@@ -166,8 +166,8 @@ class LunaticAddControlFormatTest {
         assertEquals(LabelTypeEnum.VTL, control.getControl().getTypeEnum());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getTypeEnum());
         assertEquals("datepicker-id-format-date-borne-inf-sup", control.getId());
-        assertEquals(ControlTypeOfControlEnum.FORMAT, control.getTypeOfControl());
-        assertEquals(ControlCriticityEnum.ERROR, control.getCriticality());
+        assertEquals(ControlTypeEnum.FORMAT, control.getTypeOfControl());
+        assertEquals(ControlCriticalityEnum.ERROR, control.getCriticality());
     }
 
     @Test
@@ -186,8 +186,8 @@ class LunaticAddControlFormatTest {
         assertEquals(LabelTypeEnum.VTL, control.getControl().getTypeEnum());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getTypeEnum());
         assertEquals("datepicker-id-format-date-borne-inf", control.getId());
-        assertEquals(ControlTypeOfControlEnum.FORMAT, control.getTypeOfControl());
-        assertEquals(ControlCriticityEnum.ERROR, control.getCriticality());
+        assertEquals(ControlTypeEnum.FORMAT, control.getTypeOfControl());
+        assertEquals(ControlCriticalityEnum.ERROR, control.getCriticality());
     }
 
     @Test
@@ -206,8 +206,8 @@ class LunaticAddControlFormatTest {
         assertEquals(LabelTypeEnum.VTL, control.getControl().getTypeEnum());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getTypeEnum());
         assertEquals("datepicker-id-format-date-borne-sup", control.getId());
-        assertEquals(ControlTypeOfControlEnum.FORMAT, control.getTypeOfControl());
-        assertEquals(ControlCriticityEnum.ERROR, control.getCriticality());
+        assertEquals(ControlTypeEnum.FORMAT, control.getTypeOfControl());
+        assertEquals(ControlCriticalityEnum.ERROR, control.getCriticality());
     }
 
     @Test

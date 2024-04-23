@@ -10,9 +10,9 @@ import fr.insee.eno.core.model.EnoObjectWithExpression;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.lunatic.model.flat.ControlCriticityEnum;
+import fr.insee.lunatic.model.flat.ControlCriticalityEnum;
 import fr.insee.lunatic.model.flat.ControlType;
-import fr.insee.lunatic.model.flat.ControlTypeOfControlEnum;
+import fr.insee.lunatic.model.flat.ControlTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,18 +36,18 @@ public class Control extends EnoIdentifiableObject implements EnoObjectWithExpre
         };
     }
 
-    public static ControlCriticityEnum convertCriticalityToLunatic(Criticality criticality) {
+    public static ControlCriticalityEnum convertCriticalityToLunatic(Criticality criticality) {
         return switch (criticality) {
-            case INFO -> ControlCriticityEnum.INFO;
-            case WARN -> ControlCriticityEnum.WARN;
-            case ERROR -> ControlCriticityEnum.ERROR;
+            case INFO -> ControlCriticalityEnum.INFO;
+            case WARN -> ControlCriticalityEnum.WARN;
+            case ERROR -> ControlCriticalityEnum.ERROR;
         };
     }
 
-    public static ControlTypeOfControlEnum convertTypeOfControlToLunatic(TypeOfControl typeOfControl) {
+    public static ControlTypeEnum convertTypeOfControlToLunatic(TypeOfControl typeOfControl) {
         return switch (typeOfControl) {
-            case FORMAT -> ControlTypeOfControlEnum.FORMAT;
-            case CONSISTENCY -> ControlTypeOfControlEnum.CONSISTENCY;
+            case FORMAT -> ControlTypeEnum.FORMAT;
+            case CONSISTENCY -> ControlTypeEnum.CONSISTENCY;
         };
     }
 
