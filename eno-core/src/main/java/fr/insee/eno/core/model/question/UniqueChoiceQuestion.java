@@ -1,11 +1,16 @@
 package fr.insee.eno.core.model.question;
 
+import datacollection33.CodeDomainType;
 import datacollection33.QuestionItemType;
+import datacollection33.ResponseDomainInMixedType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.code.CodeItem;
+import fr.insee.eno.core.model.navigation.Binding;
+import fr.insee.eno.core.model.response.DetailResponse;
+import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.CheckboxOne;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
@@ -43,8 +48,6 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     public static final String DDI_UCQ_CHECKBOX_OUTPUT_FORMAT = "checkbox";
     /** DDI value for dropdown display format. */
     public static final String DDI_UCQ_DROPDOWN_OUTPUT_FORMAT = "drop-down-list";
-    /** DDI value for suggester display format. */
-    public static final String DDI_UCQ_SUGGESTER_OUTPUT_FORMAT = "suggester";
 
     /**
      * Enum for unique choice question display format.
@@ -63,7 +66,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     DisplayFormat displayFormat;
 
     /** Reference to the code list that contain the modalities of the question. */
-    @DDI("getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()")
+    @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDDICodeListReference(#this)")
     String codeListReference;
 
     /**
@@ -73,6 +76,21 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     @Lunatic("getOptions()")
     List<CodeItem> codeItems = new ArrayList<>();
 
+    /** List of DDI bindings that contain the links between detail response name and label. */
+    @DDI("getBindingList()")
+    List<Binding> ddiBindings = new ArrayList<>();
+
+    /** List of responses defined in the DDI question item.
+     * Used in the processing that inserts detail response names. */
+    @DDI("getOutParameterList()")
+    List<Response> ddiResponses = new ArrayList<>();
+
+    /** Detail responses for modalities that have a "please specify" field.
+     * In DDI, these are mapped at question level.
+     * In Lunatic, they are inserted in option in through a processing. */
+    @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDetailResponses(#this)")
+    List<DetailResponse> detailResponses = new ArrayList<>();
+
     /**
      * From DDI question item (that correspond to a unique choice question),
      * return the eno model display format for the unique choice question.
@@ -80,7 +98,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * @return A value of DisplayFormat.
      */
     public static DisplayFormat convertDDIOutputFormat(QuestionItemType questionItemType) {
-        String ddiOutputFormat = questionItemType.getResponseDomain().getGenericOutputFormat().getStringValue();
+        String ddiOutputFormat = getDDICodeDomain(questionItemType).getGenericOutputFormat().getStringValue();
         Optional<DisplayFormat> convertedDisplayFormat = ddiValueToDisplayFormat(ddiOutputFormat);
         if (convertedDisplayFormat.isEmpty())
             throw new MappingException(String.format(
@@ -114,6 +132,50 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
             case DROPDOWN -> ComponentTypeEnum.DROPDOWN;
             case CHECKBOX -> ComponentTypeEnum.CHECKBOX_ONE;
         };
+    }
+
+    public static String mapDDICodeListReference(QuestionItemType questionItemType) {
+        return getDDICodeDomain(questionItemType).getCodeListReference().getIDArray(0).getStringValue();
+    }
+
+    public static List<ResponseDomainInMixedType> mapDetailResponses(QuestionItemType questionItemType) {
+        if (questionItemType.getStructuredMixedResponseDomain() == null)
+            return new ArrayList<>();
+        return questionItemType.getStructuredMixedResponseDomain().getResponseDomainInMixedList().stream()
+                .filter(responseDomainInMixedType ->
+                        !(responseDomainInMixedType.getResponseDomain() instanceof CodeDomainType))
+                .toList();
+    }
+
+    /**
+     * Gets the code response domain of the DDI question item. In Insee modeling, a DDI unique choice question
+     * is expected to have exactly 1 code response domain.
+     * @param ddiUniqueChoiceQuestion A DDI question item that corresponds to a unique choice question.
+     * @return DDI code response domain object of the question.
+     */
+    private static CodeDomainType getDDICodeDomain(QuestionItemType ddiUniqueChoiceQuestion) {
+        // Default case:
+        if (ddiUniqueChoiceQuestion.getResponseDomain() != null) {
+            return (CodeDomainType) ddiUniqueChoiceQuestion.getResponseDomain();
+        }
+        // Case when some modalities have a detail ("please, specify") response:
+        if (ddiUniqueChoiceQuestion.getStructuredMixedResponseDomain() != null) {
+            List<CodeDomainType> searchedCodeDomain = ddiUniqueChoiceQuestion.getStructuredMixedResponseDomain()
+                    .getResponseDomainInMixedList().stream()
+                    .map(ResponseDomainInMixedType::getResponseDomain)
+                    .filter(CodeDomainType.class::isInstance)
+                    .map(CodeDomainType.class::cast)
+                    .toList();
+            if (searchedCodeDomain.size() != 1)
+                throw new MappingException(String.format(
+                        "DDI unique choice question '%s' has no or more than 1 code response domain.",
+                        ddiUniqueChoiceQuestion.getIDArray(0).getStringValue()));
+            return searchedCodeDomain.getFirst();
+        }
+        //
+        throw new MappingException(String.format(
+                "Cannot find code response domain in DDI unique choice question '%s'.",
+                ddiUniqueChoiceQuestion.getIDArray(0).getStringValue()));
     }
 
 }
