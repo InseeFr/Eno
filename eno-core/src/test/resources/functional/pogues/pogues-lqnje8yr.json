@@ -1,0 +1,3611 @@
+{
+  "owner": "EHIS2025",
+  "FlowControl": [
+    {
+      "Description": "Filtre retentissement",
+      "Expression": "$PHQSCORE$  > 4",
+      "id": "lfmfhiy5",
+      "IfTrue": "lfmcib00-lfmcib00"
+    },
+    {
+      "Description": "Filtre PL1 sur PL2",
+      "Expression": "$PL1$ = \"1\" or $PL1$ = \"2\" or $PL1$ =\"NSP\" or $PL1$ =\"REFUS\"",
+      "id": "ljh7smio",
+      "IfTrue": "leh7egmi-leh7egmi"
+    },
+    {
+      "Description": "Filtre PL3 sur PL4 et PL5",
+      "Expression": "$PL3$ = \"2\" or $PL3$ = \"1\" or $PL3$ = \"NSP\" or $PL3$ = \"REFUS\"",
+      "id": "ljh8ai6b",
+      "IfTrue": "lh0c3urb-lewsqmug"
+    },
+    {
+      "Description": "Filtre sur les mineurs",
+      "Expression": "$T_AGE$ < 18",
+      "id": "ljsi0o19",
+      "IfTrue": "lee4wdch-lee4wdch"
+    },
+    {
+      "Description": "Filtre sur les situations de proxy",
+      "Expression": "$PROXY1$ = \"1\"",
+      "id": "lluods0t",
+      "IfTrue": "lfl03l2q-lfl03l2q"
+    },
+    {
+      "Description": "Filtre sur les situations de proxy",
+      "Expression": "$PROXY1$ = \"1\"",
+      "id": "lluogd90",
+      "IfTrue": "lfl0bvys-ln4xgrko"
+    },
+    {
+      "Description": "Risque suicidaire",
+      "Expression": "nvl($SU1$, \"2\") = \"1\" or nvl($SU2BIS$, \"2\") = \"1\"",
+      "id": "lnexiob8",
+      "IfTrue": "llupmkii-llupmkii"
+    },
+    {
+      "Description": "Pas de risque suicidaire",
+      "Expression": "nvl($SU1$, \"2\") = \"2\" and nvl($SU2BIS$, \"2\") = \"2\"",
+      "id": "lnexnm5u",
+      "IfTrue": "ln4xgrko-ln4xgrko"
+    },
+    {
+      "Description": "filtre affichage",
+      "Expression": "$T_AGE$  > 54 or ($HS3$ = \"1\" or $HS3$ = \"2\")",
+      "id": "lqp3s5ik",
+      "IfTrue": "lsa7m4oz-lrrlzpuj"
+    },
+    {
+      "Description": "",
+      "Expression": "$SU2$ = \"1\"",
+      "id": "lrrjzm59",
+      "IfTrue": "lrrkgd5c-lrrkgd5c"
+    },
+    {
+      "Description": "",
+      "Expression": "nvl($PC1ABIS$, \"\") = \"2\" or nvl($PC1ABIS$, \"\") = \"3\" or nvl($PC1ABIS$, \"\") = \"4\" or nvl($PC1BBIS$, \"\") = \"2\" or nvl($PC1BBIS$, \"\") = \"3\" or nvl($PC1BBIS$, \"\") = \"4\" or nvl($PC1CBIS$, \"\") = \"2\" or nvl($PC1CBIS$, \"\") = \"3\" or nvl($PC1CBIS$, \"\") = \"4\" or nvl($PC1DBIS$, \"\") = \"2\" or nvl($PC1DBIS$, \"\") = \"3\" or nvl($PC1DBIS$, \"\") = \"4\" or nvl($PC1EBIS$, \"\")  = \"2\" or nvl($PC1EBIS$, \"\") = \"3\" or nvl($PC1EBIS$, \"\") = \"4\"",
+      "id": "lrrm4y0s",
+      "IfTrue": "lrrmagqp-lrrlzpuj"
+    }
+  ],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "lje2auud",
+        "lee4wdch",
+        "lfrzkxet",
+        "lee58bzv",
+        "lee53k32",
+        "lee58gzn",
+        "lfl03l2q",
+        "lfqnmoiy",
+        "leh6xerq",
+        "leh75pnz",
+        "leh7egmi",
+        "lewsv9y7",
+        "lh0c3urb",
+        "lewsqmug",
+        "lewtdfm4",
+        "lewtfn3f",
+        "lewtjrrs",
+        "lewtf3gx",
+        "lqzc2h5g",
+        "lfthri1f",
+        "lsa7m4oz",
+        "lsa816bs",
+        "lsa84bkt",
+        "lsa7zrcd",
+        "lsa7vu2q",
+        "lrrmagqp",
+        "lrrlzpuj",
+        "lfl0bvys",
+        "lfl0kslr",
+        "lfl0hxzb",
+        "lfl0ijc3",
+        "lfl0tmp0",
+        "lfl0u4in",
+        "lfl0pgo9",
+        "lfl0uv7t",
+        "lfmc62sn",
+        "lfmbwjt9",
+        "lfmcib00",
+        "lfmfxrr9",
+        "lrrjs9oe",
+        "lrrjusr7",
+        "lrrkgd5c",
+        "llupmkii",
+        "ln4xgrko",
+        "idendquest"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "lee4m2o9",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "EHIS 2025 - questionnaire test ES0 - séquence 1 "
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "EHIS2025_SEQ1_FINSEPTEMBRE",
+  "Variables": {
+    "Variable": [
+      {
+        "Formula": "(if(nvl($MH1A$, \"0\") = \"2\") then 1 else 0) + (if(nvl($MH1A$ , \"0\") = \"3\") then 2 else 0) + (if(nvl($MH1A$, \"0\") = \"4\") then 3 else 0) +\r\n(if(nvl($MH1B$, \"0\") = \"2\") then 1 else 0) + (if(nvl($MH1B$ , \"0\") = \"3\") then 2 else 0) + (if(nvl($MH1B$, \"0\") = \"4\") then 3 else 0) +\r\n(if(nvl($MH1C$, \"0\") = \"2\") then 1 else 0) + (if(nvl($MH1C$ , \"0\") = \"3\") then 2 else 0) + (if(nvl($MH1C$, \"0\") = \"4\") then 3 else 0) +\r\n(if(nvl($MH1D$, \"0\") = \"2\") then 1 else 0) + (if(nvl($MH1D$ , \"0\") = \"3\") then 2 else 0) + (if(nvl($MH1D$, \"0\") = \"4\") then 3 else 0) +\r\n(if(nvl($MH1E$, \"0\") = \"2\") then 1 else 0) + (if(nvl($MH1E$ , \"0\") = \"3\") then 2 else 0) + (if(nvl($MH1E$, \"0\") = \"4\") then 3 else 0) +\r\n(if(nvl($MH1F$, \"0\") = \"2\") then 1 else 0) + (if(nvl($MH1F$ , \"0\") = \"3\") then 2 else 0) + (if(nvl($MH1F$, \"0\") = \"4\") then 3 else 0) +\r\n(if(nvl($MH1G$, \"0\") = \"2\") then 1 else 0) + (if(nvl($MH1G$ , \"0\") = \"3\") then 2 else 0) + (if(nvl($MH1G$, \"0\") = \"4\") then 3 else 0) +\r\n(if(nvl($MH1H$, \"0\") = \"2\") then 1 else 0) + (if(nvl($MH1H$ , \"0\") = \"3\") then 2 else 0) + (if(nvl($MH1H$, \"0\") = \"4\") then 3 else 0) +\r\n(if(nvl($MH1I$, \"0\") = \"2\") then 1 else 0) + (if(nvl($MH1I$ , \"0\") = \"3\") then 2 else 0) + (if(nvl($MH1I$, \"0\") = \"4\") then 3 else 0)",
+        "Label": "PHQScore",
+        "id": "llunofnw",
+        "type": "CalculatedVariableType",
+        "Name": "PHQSCORE",
+        "Datatype": {
+          "Maximum": "27",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Formula": "if isnull($T_SEXE$) then \"(e)\"\r\nelse if $T_SEXE$ = \"1\" then \"\"\r\nelse \"e\"",
+        "Label": "Terminaisons en E (TER_E)",
+        "id": "lmhx22l5",
+        "type": "CalculatedVariableType",
+        "Name": "TER_E",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Formula": "if isnull($SEXEREF$) then \"(le)\"\r\nelse if $SEXEREF$ = \"1\" then \"\"\r\nelse \"le\"",
+        "Label": "Terminaisons en LE (TER_LLE)",
+        "id": "lmhx6wrr",
+        "type": "CalculatedVariableType",
+        "Name": "TER_LLE",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Formula": "if isnull($SEXEREF$) then \"x(se)\"\r\nelse if $SEXEREF$ = \"1\" then \"x\"\r\nelse \"se\"",
+        "Label": "Terminaisons en SE (TER_XSE)",
+        "id": "lmhwv3im",
+        "type": "CalculatedVariableType",
+        "Name": "TER_XSE",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Formula": "first_value($T_SEXE$ over())",
+        "Label": "Sexe du premier répondant (SEXEREF)",
+        "id": "lmhx702n",
+        "type": "CalculatedVariableType",
+        "Name": "SEXEREF",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Formula": "first_value($T_AGE$ over())",
+        "Label": "Age du premier répondant (AGEREF)",
+        "id": "lmhx970m",
+        "type": "CalculatedVariableType",
+        "Name": "AGEREF",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Formula": "if isnull($SEXEREF$) then \"s(che)\"\r\nelse if $SEXEREF$ = \"1\" then \"s\"\r\nelse \"che\"",
+        "Label": "Terminaisons en CHE (TER_CHE)",
+        "id": "lmhx7aab",
+        "type": "CalculatedVariableType",
+        "Name": "TER_CHE",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Formula": "first_value($LIB_PR$ over())",
+        "Label": "Pronom il/elle (TER_PR)",
+        "id": "lmhx5zn1",
+        "type": "CalculatedVariableType",
+        "Name": "TER_PR",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Formula": "first_value($T_EMPLOI$ over())",
+        "Label": "En emploi",
+        "id": "lmhww874",
+        "type": "CalculatedVariableType",
+        "Name": "EMPLOIREF",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "Label": "Si vous le souhaitez, vous pouvez vous opposer à ce que vos parents aient accès à vos réponses à ce questionnaire. Acceptez-vous que vos parents aient accès à vos réponses à ce questionnaire ? (ACCES_PAR)",
+        "id": "lje27whx",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lee5623y",
+        "Name": "ACCES_PAR",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "Comment est votre état de santé général ? (HS1)",
+        "id": "lee50pmk",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lee57gtp",
+        "Name": "HS1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "Avez-vous une maladie ou un problème de santé qui soit chronique ou de caractère durable ? (HS2)",
+        "id": "li003gif",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lhyoito4",
+        "Name": "HS2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "Êtes-vous limité(e), depuis au moins 6 mois, à cause d’un problème de santé, dans les activités que les gens font habituellement ? (HS3)",
+        "id": "ljct7205",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lee5e2lg",
+        "Name": "HS3",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "Sur une échelle de 0 à 10 où, le plus bas, le 0, représente la vie la pire pour vous, et le plus haut, le 10, représente la vie la meilleure possible pour vous. Sur quel échelon vous situez-vous en ce moment ? (CANTRIL)",
+        "id": "lhyk55cp",
+        "type": "CollectedVariableType",
+        "Name": "CANTRIL",
+        "Datatype": {
+          "Maximum": "10",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Label": "Portez-vous des lunettes ou des lentilles de contact pour corriger votre vue ? (PL1)",
+        "id": "ljfktgbr",
+        "type": "CollectedVariableType",
+        "CodeListReference": "leh7b48r",
+        "Name": "PL1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "Avez-vous des difficultés pour voir, y compris avec vos lunettes ou lentilles de contact ? (PL2)",
+        "id": "lhysf5q9",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lhyooimm",
+        "Name": "PL2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "PL3 label",
+        "id": "lrot14er",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lhyovfg3",
+        "Name": "PL3",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "Avez-vous des difficultés à entendre ce qui se dit dans une conversation avec une autre personne dans une pièce silencieuse ? (PL4)",
+        "id": "lhru98ky",
+        "type": "CollectedVariableType",
+        "CodeListReference": "leh72s6x",
+        "Name": "PL4",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "PL5 label",
+        "id": "lrot20bj",
+        "type": "CollectedVariableType",
+        "CodeListReference": "leh72s6x",
+        "Name": "PL5",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "Avez-vous des difficultés à marcher 500 mètres sur terrain plat, sans l’aide de quelqu’un, d’une canne ou d’une autre assistance technique ? (PL6)",
+        "id": "lewtj9nt",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lewtij4d",
+        "Name": "PL6",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "Avez-vous des difficultés pour monter ou descendre une douzaine de marches, sans l’aide de quelqu’un, d’une canne ou d’une autre assistance technique ? (PL7)",
+        "id": "lewt9t1y",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lewt6k0w",
+        "Name": "PL7",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "Avez-vous habituellement des difficultés à vous souvenir de quelque chose ou à vous concentrer ? (PL8)",
+        "id": "lewthhfq",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lewtdjjx",
+        "Name": "PL8",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "Avez-vous habituellement des difficultés à communiquer avec d’autres personnes parlant votre langue ? (PL8A)",
+        "id": "lewtg6pc",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lewtnelx",
+        "Name": "PL8A",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "PL9B label",
+        "id": "lqzc1gwp",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lewtgyeq",
+        "Name": "PL9B",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "Comment décririez-vous l’état de vos dents et de vos gencives ? (CD2)",
+        "id": "lfthb19g",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lfthsdk2",
+        "Name": "CD2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "PC1ABIS label",
+        "id": "lsk7s19i",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lsa7fexd",
+        "Name": "PC1ABIS",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "PC1BBIS label",
+        "id": "lsa865ve",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lsa7fexd",
+        "Name": "PC1BBIS",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "PC1CBIS label",
+        "id": "lsa87bkw",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lsa7fexd",
+        "Name": "PC1CBIS",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "PC1DBIS label",
+        "id": "lsa7y4ks",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lsa7fexd",
+        "Name": "PC1DBIS",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "PC1EBIS label",
+        "id": "lsa8czys",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lsa7fexd",
+        "Name": "PC1EBIS",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "PC2 label",
+        "id": "lrrlx9gh",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lrrlwf7b",
+        "Name": "PC2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "PC3_2 label",
+        "id": "lrrm7kvn",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lrrlxcnw",
+        "Name": "PC3_2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "MH1A label",
+        "id": "lroxm5g7",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lfl0qi9m",
+        "Name": "MH1A",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "MH1B label",
+        "id": "lroxoke9",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lfl0qi9m",
+        "Name": "MH1B",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "MH1C label",
+        "id": "lroxqe9b",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lfl0qi9m",
+        "Name": "MH1C",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "MH1D label",
+        "id": "lroxsalb",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lfl0qi9m",
+        "Name": "MH1D",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "MH1E label",
+        "id": "lroxff0d",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lfl0qi9m",
+        "Name": "MH1E",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "MH1F label",
+        "id": "lroxspgl",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lfl0qi9m",
+        "Name": "MH1F",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "MH1G label",
+        "id": "lroxsfyb",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lfl0qi9m",
+        "Name": "MH1G",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "MH1H label",
+        "id": "lroxh721",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lfl0qi9m",
+        "Name": "MH1H",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "MH1I label",
+        "id": "lroxfl9i",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lfl0qi9m",
+        "Name": "MH1I",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "À quel point ces problèmes ont-ils rendu votre travail, vos études, vos tâches à la maison ou votre capacité à vous entendre avec les autres difficile(s) ? (MH1Z)",
+        "id": "liacj6wx",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lfmcf8c9",
+        "Name": "MH1Z",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "SU1 label",
+        "id": "lrrk5eij",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lrrk007g",
+        "Name": "SU1",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "SU2 label",
+        "id": "lrrjz410",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lrrjvui5",
+        "Name": "SU2",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      },
+      {
+        "Label": "SU2BIS label",
+        "id": "lrrk85gw",
+        "type": "CollectedVariableType",
+        "CodeListReference": "lrrk1f83",
+        "Name": "SU2BIS",
+        "Datatype": {
+          "Pattern": "",
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Mon Feb 19 2024 17:18:50 GMT+0100 (heure normale d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "esa-dc-2018",
+      "uri": "http://ddi:fr.insee:DataCollection.esa-dc-2018"
+    },
+    {
+      "id": "d5225468-f2c0-4a1b-a662-7b892d9bd734",
+      "uri": "http://ddi:fr.insee:DataCollection.d5225468-f2c0-4a1b-a662-7b892d9bd734"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "lqnje8yr",
+  "TargetMode": [
+    "CATI",
+    "CAWI",
+    "CAPI"
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "Label": "ACCES_PAR",
+        "id": "lee5623y",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Oui, vous acceptez\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Non, vous refusez que vos parents aient accès à vos réponses\"",
+            "Value": "2"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "HS1",
+        "id": "lee57gtp",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Très bon\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Bon\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Assez bon\"",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Mauvais\"",
+            "Value": "4"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Très mauvais\"",
+            "Value": "5"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "HS2",
+        "id": "lhyoito4",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Oui\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Non\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "GALI",
+        "id": "lee5e2lg",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Oui, fortement limité\" || $LIB_E$",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Oui, limité\" || $LIB_E$ || \", mais pas fortement\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Non, pas limité\" || $LIB_E$ || \" du tout\"",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "PL1",
+        "id": "leh7b48r",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Oui\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Non\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne pouvez pas voir du tout\"",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "PL2",
+        "id": "lhyooimm",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Pas de difficultés\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Quelques difficultés\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Beaucoup de difficultés\"",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne pouvez pas voir du tout\"",
+            "Value": "4"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "PL3",
+        "id": "lhyovfg3",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Oui\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Non\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous n'entendez pas du tout\"",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "PL5",
+        "id": "leh72s6x",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Pas de difficultés\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Quelques difficultés\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Beaucoup de difficultés\"",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne pouvez pas du tout entendre ce qui se dit\"",
+            "Value": "4"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "PL6",
+        "id": "lewtij4d",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Pas de difficultés\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Quelques difficultés\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Beaucoup de difficultés\"",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne pouvez pas du tout marcher 500 mètres\"",
+            "Value": "4"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "PL7",
+        "id": "lewt6k0w",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Pas de difficultés\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Quelques difficultés\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Beaucoup de difficultés\"",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne pouvez pas du tout monter ou descendre une douzaine de marches\"",
+            "Value": "4"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "PL8",
+        "id": "lewtdjjx",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Pas de difficultés\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Quelques difficultés\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Beaucoup de difficultés\"",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne pouvez pas du tout vous souvenir de quelque chose ou vous concentrer\"",
+            "Value": "4"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "PL8A",
+        "id": "lewtnelx",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Pas de difficultés\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Quelques difficultés\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Beaucoup de difficultés\"",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne pouvez pas du tout communiquer avec d'autres personnes parlant votre langue\"",
+            "Value": "4"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "PL9B",
+        "id": "lewtgyeq",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Pas de difficultés\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Quelques difficultés\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Beaucoup de difficultés\"",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne pouvez pas du tout croquer ou mâcher des aliments durs\"",
+            "Value": "4"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "CD2",
+        "id": "lfthsdk2",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Très bon\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Bon\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Assez bon\"",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Mauvais\"",
+            "Value": "4"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Très mauvais\"",
+            "Value": "5"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "PCA1BIS",
+        "id": "lsa7fexd",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Pas de difficultés\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Quelques difficultés\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Beaucoup de difficultés\"",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne pouvez pas du tout le faire sans aide\"",
+            "Value": "4"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "PC2",
+        "id": "lrrlwf7b",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Oui\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Non\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "PC3",
+        "id": "lrrlxcnw",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Oui\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Non\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "MH1I",
+        "id": "lfl0qi9m",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Jamais\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Plusieurs jours\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Plus de la moitié des jours\"",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Presque tous les jours\"",
+            "Value": "4"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "MH1Z",
+        "id": "lfmcf8c9",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Pas du tout difficile(s)\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Assez difficile(s)\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Très difficile(s)\"",
+            "Value": "3"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Extrêmement difficile(s)\"",
+            "Value": "4"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "SU1",
+        "id": "lrrk007g",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Oui\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Non\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP "
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "SU2",
+        "id": "lrrjvui5",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Oui\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Non\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      },
+      {
+        "Label": "SU2BIS",
+        "id": "lrrk1f83",
+        "Code": [
+          {
+            "Parent": "",
+            "Label": "\"Oui\"",
+            "Value": "1"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Non\"",
+            "Value": "2"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne savez pas\"",
+            "Value": "NSP"
+          },
+          {
+            "Parent": "",
+            "Label": "\"Vous ne souhaitez pas répondre\"",
+            "Value": "REFUS"
+          }
+        ],
+        "Name": ""
+      }
+    ]
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Votre état de santé\""
+      ],
+      "id": "lje2auud",
+      "TargetMode": [
+        "CATI",
+        "CAWI",
+        "CAPI"
+      ],
+      "Declaration": [
+        {
+          "declarationType": "HELP",
+          "Text": "\"Dans le questionnaire à venir, la plupart des questions concernent votre santé, votre accès aux soins et vos habitudes de vie.\"",
+          "id": "lje27gy0",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CATI",
+            "CAWI",
+            "CAPI"
+          ]
+        },
+        {
+          "declarationType": "HELP",
+          "Text": "\"Certaines de ces questions ayant un caractère très personnel, il est préférable que vous soyez seul\" || $LIB_E$ || \" et dans un environnement calme et isolé pour y répondre.\"",
+          "id": "llw2i1pl",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAWI",
+            "CATI",
+            "CAPI"
+          ]
+        }
+      ],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lje27whx",
+              "id": "lee5fqss",
+              "mandatory": false,
+              "CodeListReference": "lee5623y",
+              "Datatype": {
+                "Pattern": "",
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Si vous le souhaitez, vous pouvez vous opposer à ce que vos parents aient accès à vos réponses à ce questionnaire. Acceptez-vous que vos parents aient accès à vos réponses à ce questionnaire ?\""
+          ],
+          "ClarificationQuestion": [],
+          "id": "lee4wdch",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Ce questionnaire porte sur votre santé, votre recours aux médecins et vos habitudes de vie (sport, consommation de tabac, d’alcool).\"",
+              "id": "lee4vk6v",
+              "position": "BEFORE_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ]
+            }
+          ],
+          "type": "QuestionType",
+          "questionType": "SINGLE_CHOICE",
+          "Name": "ACCES_PAR"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "\"État de santé général\""
+          ],
+          "id": "lfrzkxet",
+          "TargetMode": [
+            "CATI",
+            "CAPI",
+            "CAWI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Nous allons maintenant aborder votre état de santé.\"",
+              "id": "ljctq8x0",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CATI",
+                "CAPI"
+              ]
+            }
+          ],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lee50pmk",
+                  "id": "lee5k2be",
+                  "mandatory": false,
+                  "CodeListReference": "lee57gtp",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Comment est votre état de santé général ?\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lee58bzv",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°5",
+                  "id": "lnkk2p41",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "HS1"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "li003gif",
+                  "id": "lee5lg1j",
+                  "mandatory": false,
+                  "CodeListReference": "lhyoito4",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Avez-vous une maladie ou un problème de santé qui soit chronique ou de caractère durable ?\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lee53k32",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Une maladie chronique est une maladie qui a duré ou peut durer pendant 6 mois au moins.\"",
+                  "id": "lee5olq3",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI",
+                    "CAWI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "HS2"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "ljct7205",
+                  "id": "lee57r5n",
+                  "mandatory": false,
+                  "CodeListReference": "lee5e2lg",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Êtes-vous limité\" || $LIB_E$ ||\", depuis au moins 6 mois, à cause d’un problème de santé, dans les activités que les gens font habituellement ?\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lee58gzn",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°6",
+                  "id": "lrt3092t",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "HS3"
+            }
+          ],
+          "Name": "INTROHS"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "\"Bien-être ressenti\""
+          ],
+          "id": "lfl03l2q",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Les prochaines questions vont porter sur votre état d'esprit général au cours des deux dernières semaines.\"",
+              "id": "lfkzrtrc",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ]
+            }
+          ],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lhyk55cp",
+                  "id": "lfqnlkzp",
+                  "mandatory": false,
+                  "Datatype": {
+                    "Maximum": "10",
+                    "Minimum": "0",
+                    "typeName": "NUMERIC",
+                    "Unit": "",
+                    "type": "NumericDatatypeType",
+                    "Decimals": ""
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Sur une échelle allant de 0 (pas du tout satisfait(e)) à 10 (entièrement satisfait(e)) indiquez votre satisfaction concernant la vie que vous menez actuellement ?\""
+              ],
+              "id": "lfqnmoiy",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°7",
+                  "id": "lfqnk8rd",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Name": "CANTRIL"
+            }
+          ],
+          "Name": "INTROMH"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "\"Difficultés dans les activités de la vie quotidienne\""
+          ],
+          "id": "leh6xerq",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Les questions suivantes portent sur les difficultés que vous pouvez rencontrer dans certaines situations en raison de votre état de santé.\"",
+              "id": "leh6xjx7",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ]
+            },
+            {
+              "declarationType": "HELP",
+              "Text": "\" Pour y répondre, veuillez ne pas tenir compte de problèmes passagers.\"",
+              "id": "lh0bv5mp",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                ""
+              ]
+            }
+          ],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "ljfktgbr",
+                  "id": "leh70hnj",
+                  "mandatory": false,
+                  "CodeListReference": "leh7b48r",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Portez-vous des lunettes ou des lentilles de contact pour corriger votre vue ?\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "leh75pnz",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "PL1"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lhysf5q9",
+                  "id": "leh7jmf2",
+                  "mandatory": false,
+                  "CodeListReference": "lhyooimm",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Avez-vous des difficultés pour voir\" || ( if ($PL1$ = \"1\" ) then \", y compris avec vos lunettes ou lentilles de contact ?\" else  \" ?\")"
+              ],
+              "ClarificationQuestion": [],
+              "id": "leh7egmi",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°8",
+                  "id": "lhzzrdmq",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "PL2"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lrot14er",
+                  "id": "lewsxufb",
+                  "mandatory": false,
+                  "CodeListReference": "lhyovfg3",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Portez-vous un appareil auditif ?\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lewsv9y7",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "PL3"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lhru98ky",
+                  "id": "lh0bsw70",
+                  "mandatory": false,
+                  "CodeListReference": "leh72s6x",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Avez-vous des difficultés à entendre ce qui se dit dans une conversation avec une autre personne dans une pièce silencieuse\" || (if ($PL3$ = \"1\") then \", y compris avec votre appareil auditif ?\" else \"\") || (if ($PL3$ = \"2\" or $PL3$ = \"NSP\" or $PL3$ = \"REFUS\") then \" ?\" else \"\")"
+              ],
+              "ClarificationQuestion": [],
+              "id": "lh0c3urb",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°8",
+                  "id": "lhzzqfu7",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "PL4"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lrot20bj",
+                  "id": "lewsrnt8",
+                  "mandatory": false,
+                  "CodeListReference": "leh72s6x",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Avez-vous des difficultés à entendre ce qui se dit dans une conversation avec une autre personne dans une pièce où il y a du bruit\" || ( if ($PL3$ = \"1\") then \", y compris avec votre appareil auditif ?\" else \"\") || (if ($PL3$ = \"2\" or $PL3$ = \"NSP\" or $PL3$ = \"REFUS\") then \" ?\" else \"\")"
+              ],
+              "ClarificationQuestion": [],
+              "id": "lewsqmug",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Une pièce où il y a du bruit est par exemple une pièce dans laquelle plusieurs personnes discutent entre elles en même temps.\"",
+                  "id": "lh0c2y9k",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI",
+                    "CAWI"
+                  ]
+                },
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°8",
+                  "id": "lhzzmuaq",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "PL5"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lewtj9nt",
+                  "id": "lewttx88",
+                  "mandatory": false,
+                  "CodeListReference": "lewtij4d",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Avez-vous des difficultés à marcher 500 mètres sur terrain plat, sans l’aide de quelqu’un, d’une canne ou d’une autre assistance technique ?\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lewtdfm4",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Sans difficultés de marche, 500 mètres correspondent à 7 à 8 minutes de marche. Il s’agit ici de mesurer les difficultés liées à l’action de marcher.\"",
+                  "id": "lh0c76lp",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI",
+                    "CAWI"
+                  ]
+                },
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Les difficultés liées à d’autres limitations, par exemple des problèmes de vue, ne doivent pas être prises en compte.\"",
+                  "id": "ljik8wgx",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI",
+                    "CAWI"
+                  ]
+                },
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°8",
+                  "id": "ljik77ut",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "PL6"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lewt9t1y",
+                  "id": "lewty3f9",
+                  "mandatory": false,
+                  "CodeListReference": "lewt6k0w",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Avez-vous des difficultés pour monter ou descendre une douzaine de marches, sans l’aide de quelqu’un, d’une canne ou d’une autre assistance technique ?\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lewtfn3f",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Il s’agit ici de mesurer les difficultés liées à l’action de monter ou descendre les marches.\"",
+                  "id": "lh0chnxs",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI",
+                    "CAWI"
+                  ]
+                },
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Les difficultés liées à d’autres limitations, par exemple des problèmes de vue, ne doivent pas être prises en compte.\"",
+                  "id": "ljik2so7",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI",
+                    "CAWI"
+                  ]
+                },
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°8",
+                  "id": "ljik1vkm",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "PL7"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lewthhfq",
+                  "id": "lewtu2uh",
+                  "mandatory": false,
+                  "CodeListReference": "lewtdjjx",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Avez-vous habituellement des difficultés à vous souvenir de quelque chose ou à vous concentrer ?\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lewtjrrs",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°8",
+                  "id": "lhzzufbw",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "PL8"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lewtg6pc",
+                  "id": "lewtn22a",
+                  "mandatory": false,
+                  "CodeListReference": "lewtnelx",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Avez-vous habituellement des difficultés à communiquer avec d’autres personnes parlant votre langue ?\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lewtf3gx",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Il s’agit ici de mesurer les difficultés liées à la compréhension des personnes autour de soi, ou à se faire comprendre d’elles.\"",
+                  "id": "lh0cbpwc",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI",
+                    "CAWI"
+                  ]
+                },
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°8",
+                  "id": "lhzzqhz7",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "PL8A"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lqzc1gwp",
+                  "id": "lqzc73ob",
+                  "mandatory": false,
+                  "CodeListReference": "lewtgyeq",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Avez-vous des difficultés à croquer ou à mâcher des aliments durs comme une pomme ferme ?\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lqzc2h5g",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°8",
+                  "id": "lrt3v5od",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "PL9B"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lfthb19g",
+                  "id": "lfth9h6m",
+                  "mandatory": false,
+                  "CodeListReference": "lfthsdk2",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Comment décririez-vous l’état de vos dents et de vos gencives ?\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lfthri1f",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°9",
+                  "id": "lnkk3qff",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "CD2"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lsk7s19i",
+                  "id": "lsa816r8",
+                  "mandatory": false,
+                  "CodeListReference": "lsa7fexd",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Manger\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lsa7m4oz",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Avez-vous habituellement des difficultés à réaliser une ou plusieurs des 5 activités suivantes sans l’aide de quelqu’un ou d’une assistance technique ?\"",
+                  "id": "lsa7p1th",
+                  "position": "BEFORE_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°10",
+                  "id": "lsj5606z",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "PC1ABIS"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lsa865ve",
+                  "id": "lsa8etn0",
+                  "mandatory": false,
+                  "CodeListReference": "lsa7fexd",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Vous coucher ou vous lever du lit / vous asseoir ou vous lever d'un siège\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lsa816bs",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Avez-vous habituellement des difficultés à réaliser une ou plusieurs des 5 activités suivantes sans l’aide de quelqu’un ou d’une assistance technique ?\"",
+                  "id": "lsa86kcc",
+                  "position": "BEFORE_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAWI",
+                    "CAPI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°10",
+                  "id": "lsk5h43g",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "PC1BBIS"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lsa87bkw",
+                  "id": "lsa8dc0n",
+                  "mandatory": false,
+                  "CodeListReference": "lsa7fexd",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Vous habiller ou vous déshabiller\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lsa84bkt",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Avez-vous habituellement des difficultés à réaliser une ou plusieurs des 5 activités suivantes sans l’aide de quelqu’un ou d’une assistance technique ?\"",
+                  "id": "lsa8233e",
+                  "position": "BEFORE_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°10",
+                  "id": "lsk5goyr",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "PC1CBIS"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lsa7y4ks",
+                  "id": "lsa831hb",
+                  "mandatory": false,
+                  "CodeListReference": "lsa7fexd",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Aller aux toilettes\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lsa7zrcd",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Avez-vous habituellement des difficultés à réaliser une ou plusieurs des 5 activités suivantes sans l’aide de quelqu’un ou d’une assistance technique ?\"",
+                  "id": "lsa7urjr",
+                  "position": "BEFORE_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°10",
+                  "id": "lsk5e8ue",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "PC1DBIS"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lsa8czys",
+                  "id": "lsa81p4a",
+                  "mandatory": false,
+                  "CodeListReference": "lsa7fexd",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Prendre un bain ou une douche\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lsa7vu2q",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Avez-vous habituellement des difficultés à réaliser une ou plusieurs des 5 activités suivantes sans l’aide de quelqu’un ou d’une assistance technique ?\"",
+                  "id": "lsa7ylt0",
+                  "position": "BEFORE_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°10",
+                  "id": "lsk5pbor",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "PC1EBIS"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lrrlx9gh",
+                  "id": "lrrmi45l",
+                  "mandatory": false,
+                  "CodeListReference": "lrrlwf7b",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Avez-vous habituellement l'aide de quelqu'un ou une assitance technique pour le faire ?\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lrrmagqp",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Vous avez dit rencontrer des difficultés pour : \" || (if ($PC1ABIS$ = \"2\" or $PC1ABIS$ = \"3\" or $PC1ABIS$ = \"4\")then (\"manger\") else (\" \") ) || ( if ( ($PC1ABIS$ = \"2\" or $PC1ABIS$ = \"3\" or $PC1ABIS$ = \"4\") and (($PC1BBIS$ = \"2\" or $PC1BBIS$ = \"3\" or $PC1BBIS$ = \"4\") or ($PC1CBIS$ = \"2\" or $PC1CBIS$ = \"3\" or $PC1CBIS$ = \"4\") or ($PC1DBIS$ = \"2\" or $PC1DBIS$ = \"3\" or $PC1DBIS$ = \"4\") or ($PC1EBIS$ = \"2\" or $PC1EBIS$ = \"3\" or $PC1EBIS$ = \"4\")) ) then (\",\") else (\" \") ) || ( if ( ($PC1BBIS$ = \"2\" or $PC1BBIS$ = \"3\" or $PC1BBIS$ = \"4\")) then (\"vous coucher ou vous lever du lit, vous asseoir ou vous lever d'un siège\") else (\" \") ) || ( if ( ($PC1BBIS$ = \"2\" or $PC1BBIS$ = \"3\" or $PC1BBIS$ = \"4\") and ( ($PC1CBIS$ = \"2\" or $PC1CBIS$ = \"3\" or $PC1CBIS$ = \"4\") or ($PC1DBIS$ = \"2\" or $PC1DBIS$ = \"3\" or $PC1DBIS$ = \"4\") or ($PC1EBIS$ = \"2\" or $PC1EBIS$ = \"3\" or $PC1EBIS$ = \"4\")) ) then (\", \") else (\"\") ) || ( if ($PC1CBIS$ = \"2\" or $PC1CBIS$ = \"3\" or $PC1CBIS$ = \"4\")then (\"vous habiller ou vous déshabiller\") else (\" \") ) || ( if ( ($PC1CBIS$ = \"2\" or $PC1CBIS$ = \"3\" or $PC1CBIS$ = \"4\") and ( ($PC1DBIS$ = \"2\" or $PC1DBIS$ = \"3\" or $PC1DBIS$ = \"4\") or ($PC1EBIS$ = \"2\" or $PC1EBIS$ = \"3\" or $PC1EBIS$ = \"4\")) ) then (\", \") else (\" \") ) || ( if  ($PC1DBIS$ = \"2\" or $PC1DBIS$ = \"3\" or $PC1DBIS$ = \"4\")then (\"aller aux toilettes\") else (\"\") ) || ( if ( ($PC1DBIS$ = \"2\" or $PC1DBIS$ = \"3\" or $PC1DBIS$ = \"4\") and ($PC1EBIS$ = \"2\" or $PC1EBIS$ = \"3\" or $PC1EBIS$ = \"4\") ) then (\", \") else (\"\") ) || ( if ($PC1EBIS$ = \"2\" or $PC1EBIS$ = \"3\" or $PC1EBIS$ = \"4\") then (\"prendre un bain ou une douche \") else (\" \") ) || (\".\")\r\n",
+                  "id": "lskhh124",
+                  "position": "BEFORE_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAWI",
+                    "CAPI",
+                    "PAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "PC2"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lrrm7kvn",
+                  "id": "lrrm271z",
+                  "mandatory": false,
+                  "CodeListReference": "lrrlxcnw",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Auriez-vous besoin de\" || (if ($PC2$= \"1\" ) then (\" plus d’aide de quelqu’un ou de plus d’assistance technique ?\") else (\" l'aide de quelqu'un ou d'une assistance technique ?\"))"
+              ],
+              "ClarificationQuestion": [],
+              "id": "lrrlzpuj",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "PC3_2"
+            }
+          ],
+          "Name": "INTROPL"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "\"Santé mentale\""
+          ],
+          "id": "lfl0bvys",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Les prochaines questions vont revenir plus spécifiquement sur d’éventuelles difficultés d’ordre psychologiques.\"",
+              "id": "lfl0ahhx",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ]
+            }
+          ],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lroxm5g7",
+                  "id": "lfl20l0z",
+                  "mandatory": false,
+                  "CodeListReference": "lfl0qi9m",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Avoir peu d'intérêt ou de plaisir à faire les choses\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lfl0kslr",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Au cours de ces deux dernières semaines, à quelle fréquence avez-vous été gêné\" || $LIB_E$ || \" par les problèmes suivants ?\"",
+                  "id": "ls1wbfpa",
+                  "position": "BEFORE_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°11",
+                  "id": "lsk6filu",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "MH1A"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lroxoke9",
+                  "id": "lfl1px8k",
+                  "mandatory": false,
+                  "CodeListReference": "lfl0qi9m",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Être triste, déprimé\" || $LIB_E$ || \" ou désespéré\" || $LIB_E$ "
+              ],
+              "ClarificationQuestion": [],
+              "id": "lfl0hxzb",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Au cours de ces deux dernières semaines, à quelle fréquence avez-vous été gêné\" || $LIB_E$ || \" par les problèmes suivants ?\"",
+                  "id": "ls1wnfsb",
+                  "position": "BEFORE_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°11",
+                  "id": "lsk6dgxh",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "MH1B"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lroxqe9b",
+                  "id": "lfl1pbwp",
+                  "mandatory": false,
+                  "CodeListReference": "lfl0qi9m",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Avoir des difficultés à s'endormir ou à rester endormi\" || $LIB_E$ || \", ou dormir trop\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lfl0ijc3",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Au cours de ces deux dernières semaines, à quelle fréquence avez-vous été gêné\" || $LIB_E$ || \" par les problèmes suivants ?\"",
+                  "id": "ls1wephk",
+                  "position": "BEFORE_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°11",
+                  "id": "lsk65k40",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "MH1C"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lroxsalb",
+                  "id": "lfl1s7n5",
+                  "mandatory": false,
+                  "CodeListReference": "lfl0qi9m",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Se sentir fatigué\" || $LIB_E$ || \" ou manquer d'énergie\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lfl0tmp0",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Au cours de ces deux dernières semaines, à quelle fréquence avez-vous été gêné\" || $LIB_E$ || \" par les problèmes suivants ?\"",
+                  "id": "ls1wb5ne",
+                  "position": "BEFORE_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°11",
+                  "id": "lsk6frb0",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "MH1D"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lroxff0d",
+                  "id": "lfl1pegj",
+                  "mandatory": false,
+                  "CodeListReference": "lfl0qi9m",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Avoir peu d'appétit ou manger trop\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lfl0u4in",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Au cours de ces deux dernières semaines, à quelle fréquence avez-vous été gêné\" || $LIB_E$ || \" par les problèmes suivants ?\"",
+                  "id": "ls1whjeh",
+                  "position": "BEFORE_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°11",
+                  "id": "lsk6fe6l",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "MH1E"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lroxspgl",
+                  "id": "lfl23bxn",
+                  "mandatory": false,
+                  "CodeListReference": "lfl0qi9m",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Avoir une mauvaise opinion de soi-même, ou avoir le sentiment d'être nul\" || $LIB_LLE$ || \", d'avoir déçu sa famille ou s'être déçu\" || $LIB_E$ || \" soi-même\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lfl0pgo9",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Au cours de ces deux dernières semaines, à quelle fréquence avez-vous été gêné\" || $LIB_E$ || \" par les problèmes suivants ?\"",
+                  "id": "ls1wmqdq",
+                  "position": "BEFORE_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°11",
+                  "id": "lsk6p6i2",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "MH1F"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lroxsfyb",
+                  "id": "lfl1nvos",
+                  "mandatory": false,
+                  "CodeListReference": "lfl0qi9m",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Avoir du mal à se concentrer, par exemple pour lire le journal ou regarder la télévision\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lfl0uv7t",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Au cours de ces deux dernières semaines, à quelle fréquence avez-vous été gêné\" || $LIB_E$ || \" par les problèmes suivants ?\"",
+                  "id": "ls1wnltn",
+                  "position": "BEFORE_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°11",
+                  "id": "lsk67e9i",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "MH1G"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lroxh721",
+                  "id": "lfmbvmj1",
+                  "mandatory": false,
+                  "CodeListReference": "lfl0qi9m",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Bouger ou parler si lentement que les autres auraient pu le remarquer. Ou au contraire, être si agité\" || $LIB_E$ || \" que vous avez du mal à tenir en place par rapport à d’habitude\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lfmc62sn",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Au cours de ces deux dernières semaines, à quelle fréquence avez-vous été gêné\" || $LIB_E$ || \" par les problèmes suivants ?\"",
+                  "id": "ls1wrziw",
+                  "position": "BEFORE_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°11",
+                  "id": "lsk6hr0v",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "MH1H"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lroxfl9i",
+                  "id": "lfmc35li",
+                  "mandatory": false,
+                  "CodeListReference": "lfl0qi9m",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Penser qu’il vaudrait mieux mourir ou envisager de vous faire du mal d’une manière ou d’une autre\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lfmbwjt9",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "HELP",
+                  "Text": "\"Au cours de ces deux dernières semaines, à quelle fréquence avez-vous été gêné\" || $LIB_E$ || \" par les problèmes suivants ?\"",
+                  "id": "ls1wlv4t",
+                  "position": "BEFORE_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI",
+                    "CAWI",
+                    "PAPI"
+                  ]
+                },
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°11",
+                  "id": "lsk6cffc",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CATI",
+                    "CAPI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "MH1I"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "liacj6wx",
+                  "id": "lfmd4hvk",
+                  "mandatory": false,
+                  "CodeListReference": "lfmcf8c9",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"À quel point ces problèmes ont-ils rendu votre travail, vos études, vos tâches à la maison ou votre capacité à vous entendre avec les autres difficile(s) ?\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lfmcib00",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [
+                {
+                  "declarationType": "CODECARD",
+                  "Text": "n°12",
+                  "id": "lnkk5rld",
+                  "position": "AFTER_QUESTION_TEXT",
+                  "DeclarationMode": [
+                    "CAPI",
+                    "CATI"
+                  ]
+                }
+              ],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "MH1Z"
+            }
+          ],
+          "Name": "INTROMH2"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "\"Suicide\""
+          ],
+          "id": "lfmfxrr9",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Avant de terminer le questionnaire d’aujourd’hui, il reste quelques questions à vous poser sur les pensées et comportements suicidaires que vous avez pu avoir par le passé.\"",
+              "id": "lfmg1q8w",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAWI"
+              ]
+            },
+            {
+              "declarationType": "HELP",
+              "Text": "\"Avant de passer à un autre sujet, il reste quelques questions relatives aux pensées et comportements suicidaires que vous avez pu avoir par le passé.\"",
+              "id": "ljctnwo8",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CATI",
+                "CAPI"
+              ]
+            }
+          ],
+          "type": "SequenceType",
+          "Child": [
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lrrk5eij",
+                  "id": "lrrk1ep4",
+                  "mandatory": false,
+                  "CodeListReference": "lrrk007g",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Au cours des douze derniers mois, avez-vous pensé à mettre fin à vos jours ?\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lrrjs9oe",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "SU1"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lrrjz410",
+                  "id": "lrrk449t",
+                  "mandatory": false,
+                  "CodeListReference": "lrrjvui5",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Avez-vous déjà fait une tentative de suicide ?\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lrrjusr7",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "SU2"
+            },
+            {
+              "Response": [
+                {
+                  "CollectedVariableReference": "lrrk85gw",
+                  "id": "lrrkcbqc",
+                  "mandatory": false,
+                  "CodeListReference": "lrrk1f83",
+                  "Datatype": {
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "visualizationHint": "RADIO",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 1
+                  }
+                }
+              ],
+              "Control": [],
+              "depth": 3,
+              "FlowControl": [],
+              "Label": [
+                "\"Est-ce que c'est arrivé dans les douze derniers mois ?\""
+              ],
+              "ClarificationQuestion": [],
+              "id": "lrrkgd5c",
+              "TargetMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ],
+              "Declaration": [],
+              "type": "QuestionType",
+              "questionType": "SINGLE_CHOICE",
+              "Name": "SU2BIS"
+            }
+          ],
+          "Name": "INTROSU"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Obtenir de l'aide sur le sujet de la santé mentale"
+          ],
+          "id": "llupmkii",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"Pour faire face à ces problématiques, vous pouvez obtenir de l’aide. Il est important d'aborder dès que possible cette question avec un professionnel de santé ou en appelant le 3114 (l’appel est gratuit et confidentiel).\"",
+              "id": "llupfrld",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAWI",
+                "CATI",
+                "CAPI"
+              ]
+            },
+            {
+              "declarationType": "HELP",
+              "Text": "\"Vous pouvez aussi vous référer à cette [page](https://sante.gouv.fr/prevention-en-sante/sante-mentale/la-prevention-du-suicide/article/que-faire-et-a-qui-s-adresser-face-a-une-crise-suicidaire) pour obtenir plus d'informations.\"",
+              "id": "ln4xf0l4",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAWI"
+              ]
+            },
+            {
+              "declarationType": "HELP",
+              "Text": "\"Vous pouvez aussi vous trouver des informations et des contacts sur le site du ministère de la Santé.\"",
+              "id": "lo5xkuus",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CATI",
+                "CAPI"
+              ]
+            }
+          ],
+          "type": "SequenceType",
+          "Child": [],
+          "Name": "PREVENTION_SU"
+        },
+        {
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "genericName": "SUBMODULE",
+          "Label": [
+            "Obtenir de l'aide sur le sujet de la santé mentale"
+          ],
+          "id": "ln4xgrko",
+          "TargetMode": [
+            "CATI",
+            "CAWI",
+            "CAPI"
+          ],
+          "Declaration": [
+            {
+              "declarationType": "HELP",
+              "Text": "\"La santé mentale est un sujet qui peut affecter chacun de nous. Si vous en ressentez un jour le besoin, ou si vous voulez aider un de vos proches dans cette situation, vous pouvez appeler le 31 14 (numéro gratuit et confidentiel) pour obtenir de l’aide. Vous pouvez également en parler avec votre médecin généraliste.\"",
+              "id": "ln4xkej1",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CATI",
+                "CAWI",
+                "CAPI"
+              ]
+            },
+            {
+              "declarationType": "HELP",
+              "Text": "\"Vous pouvez aussi vous référer à cette [page](https://sante.gouv.fr/prevention-en-sante/sante-mentale/la-prevention-du-suicide/article/que-faire-et-a-qui-s-adresser-face-a-une-crise-suicidaire) pour obtenir plus d'informations.\"",
+              "id": "ln4xlb06",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAWI"
+              ]
+            },
+            {
+              "declarationType": "HELP",
+              "Text": "\"Vous pouvez aussi vous trouver des informations et des contacts sur le site du ministère de la Santé.\"",
+              "id": "lo5xzexi",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CATI",
+                "CAPI",
+                "CAWI"
+              ]
+            }
+          ],
+          "type": "SequenceType",
+          "Child": [],
+          "Name": "PREVENTION_NSU"
+        }
+      ],
+      "Name": "INTROCONT"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CATI",
+        "CAWI",
+        "CAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

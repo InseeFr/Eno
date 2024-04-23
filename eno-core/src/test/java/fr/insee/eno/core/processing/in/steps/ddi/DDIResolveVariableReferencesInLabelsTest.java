@@ -67,6 +67,7 @@ class DDIResolveVariableReferencesInLabelsTest {
             new DDIInsertDeclarations(enoQuestionnaire.getIndex()).apply(enoQuestionnaire);
             new DDIInsertControls().apply(enoQuestionnaire);
             new DDIInsertCodeLists().apply(enoQuestionnaire);
+            new DDIInsertMultipleChoiceLabels().apply(enoQuestionnaire);
             EnoCatalog enoCatalog = new EnoCatalog(enoQuestionnaire);
             // When
             new DDIResolveVariableReferencesInLabels(enoCatalog).apply(enoQuestionnaire);
