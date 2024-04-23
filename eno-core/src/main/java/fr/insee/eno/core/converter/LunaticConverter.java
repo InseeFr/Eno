@@ -15,6 +15,7 @@ import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.*;
 import fr.insee.eno.core.model.question.table.TableCell;
 import fr.insee.eno.core.model.response.CodeResponse;
+import fr.insee.eno.core.model.response.DetailResponse;
 import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.Subsequence;
@@ -68,6 +69,8 @@ public class LunaticConverter {
             return new BodyCell();
         if (enoObject instanceof Response)
             return new ResponseType();
+        if (enoObject instanceof DetailResponse)
+            return new fr.insee.lunatic.model.flat.DetailResponse();
         if (enoObject instanceof CodeItem)
             return new Options();
         if (enoObject instanceof CodeResponse)

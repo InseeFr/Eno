@@ -21,4 +21,8 @@ public class Response extends EnoObject {
     @Lunatic("setName(#param)")
     String variableName;
 
+    /** DDI reference of the response. */
+    @DDI("getIDArray(0).getStringValue()")
+    String ddiReference;
+
 }

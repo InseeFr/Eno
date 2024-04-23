@@ -68,8 +68,8 @@ class LunaticAddResizingTest {
         //
         ResizingPairwiseEntry resizingPairwiseEntry = assertInstanceOf(ResizingPairwiseEntry.class,
                 resizingType.getResizingEntry("PAIRWISE_SOURCE"));
-        assertEquals(List.of("count(PAIRWISE_SOURCE)", "count(PAIRWISE_SOURCE)"),
-                resizingPairwiseEntry.getSizeForLinksVariables());
+        assertEquals("count(PAIRWISE_SOURCE)", resizingPairwiseEntry.getSizeForLinksVariables().getXAxisSize());
+        assertEquals("count(PAIRWISE_SOURCE)", resizingPairwiseEntry.getSizeForLinksVariables().getYAxisSize());
         assertEquals(List.of("LINKS"), resizingPairwiseEntry.getLinksVariables());
     }
 
