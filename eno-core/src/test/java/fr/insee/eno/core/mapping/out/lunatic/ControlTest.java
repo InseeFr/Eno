@@ -6,8 +6,8 @@ import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.lunatic.model.flat.ComponentType;
-import fr.insee.lunatic.model.flat.ControlCriticityEnum;
-import fr.insee.lunatic.model.flat.ControlTypeOfControlEnum;
+import fr.insee.lunatic.model.flat.ControlCriticalityEnum;
+import fr.insee.lunatic.model.flat.ControlTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -51,17 +51,17 @@ class ControlTest {
     @Test
     void typeOfControlTest() {
         List.of("ltx6cof9", "lu6xrmto", "lu6y5e4z").forEach(componentId ->
-                assertEquals(ControlTypeOfControlEnum.CONSISTENCY,
+                assertEquals(ControlTypeEnum.CONSISTENCY,
                         lunaticComponents.get(componentId).getControls().getFirst().getTypeOfControl()));
     }
 
     @Test
     void controlCriticalityTest() {
-        assertEquals(ControlCriticityEnum.INFO,
+        assertEquals(ControlCriticalityEnum.INFO,
                 lunaticComponents.get("ltx6cof9").getControls().getFirst().getCriticality());
-        assertEquals(ControlCriticityEnum.WARN,
+        assertEquals(ControlCriticalityEnum.WARN,
                 lunaticComponents.get("lu6xrmto").getControls().getFirst().getCriticality());
-        assertEquals(ControlCriticityEnum.ERROR,
+        assertEquals(ControlCriticalityEnum.ERROR,
                 lunaticComponents.get("lu6y5e4z").getControls().getFirst().getCriticality());
     }
 
