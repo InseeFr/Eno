@@ -16,7 +16,7 @@ tasks.withType(JavaCompile).configureEach {
 
 allprojects {
     group = 'fr.insee.eno'
-    version = '3.18.6'
+    version = '3.19.0'
 }
 
 subprojects {

@@ -5,9 +5,8 @@ import datacollection33.LoopType;
 import datacollection33.QuestionGridType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
-import fr.insee.eno.core.converter.DDIConverter;
+import fr.insee.eno.core.converter.DDIQuestionGridConversion;
 import fr.insee.eno.core.exceptions.technical.MappingException;
-import fr.insee.eno.core.model.question.DynamicTableQuestion;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.DDIIndex;
 import group33.ResourcePackageType;
@@ -80,7 +79,7 @@ public class LinkedLoop extends Loop {
         if (! (
                 loopReference instanceof LoopType ||
                 (loopReference instanceof QuestionGridType questionGridType
-                && DDIConverter.instantiateFrom(questionGridType) instanceof DynamicTableQuestion)
+                && DDIQuestionGridConversion.isDynamicTableQuestion(questionGridType))
         )) {
             throw new MappingException(String.format(
                     "Loop '%s' is based on object '%s' (type '%s'), which is neither a loop nor a dynamic table.",
