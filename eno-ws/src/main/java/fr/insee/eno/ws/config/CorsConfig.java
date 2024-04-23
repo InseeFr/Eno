@@ -14,7 +14,7 @@ import java.util.List;
 @Configuration
 @AllArgsConstructor
 public class CorsConfig {
-    @Value("${eno.corsOrigins}")
+    @Value("${eno.cors.origins}")
     private List<String> corsOrigins;
     @Bean
     protected CorsWebFilter corsWebFilter () {
