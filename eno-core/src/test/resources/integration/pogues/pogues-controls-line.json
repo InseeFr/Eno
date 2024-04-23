@@ -1,0 +1,215 @@
+{
+  "owner": "ENO-INTEGRATION-TESTS",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "idendquest",
+        "lvciayue",
+        "lvcizkii"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "lvcint3e",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "Eno - Dynamic table line controls"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "ENO_LINE_CONTROLS",
+  "Variables": {
+    "Variable": [
+      {
+        "Scope": "lvcizkii",
+        "Label": "\"Percentage A\"",
+        "id": "lvcighbx",
+        "type": "CollectedVariableType",
+        "Name": "DYNAMIC_TABLE1",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "http://id.insee.fr/unit/percent",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      },
+      {
+        "Scope": "lvcizkii",
+        "Label": "\"Percentage B\"",
+        "id": "lvciiw6b",
+        "type": "CollectedVariableType",
+        "Name": "DYNAMIC_TABLE2",
+        "Datatype": {
+          "Maximum": "100",
+          "Minimum": "0",
+          "typeName": "NUMERIC",
+          "Unit": "http://id.insee.fr/unit/percent",
+          "type": "NumericDatatypeType",
+          "Decimals": ""
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Tue Apr 23 2024 16:57:44 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "esa-dc-2018",
+      "uri": "http://ddi:fr.insee:DataCollection.esa-dc-2018",
+      "Name": "Enquête sectorielle annuelle 2018"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "lvciecz7",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI"
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence\""
+      ],
+      "id": "lvciayue",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "FlowControl": [],
+          "Label": [
+            "\"Dynamic table\""
+          ],
+          "ResponseStructure": {
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "lvciyzov",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "lvcik7yg",
+                "MappingTarget": "1 2"
+              }
+            ],
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "1-5"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Percentage A\"",
+                "dynamic": "0"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Percentage B\"",
+                "dynamic": "0"
+              }
+            ]
+          },
+          "type": "QuestionType",
+          "Name": "DYNAMIC_TABLE",
+          "Response": [
+            {
+              "CollectedVariableReference": "lvcighbx",
+              "id": "lvciyzov",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "http://id.insee.fr/unit/percent",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            },
+            {
+              "CollectedVariableReference": "lvciiw6b",
+              "id": "lvcik7yg",
+              "Datatype": {
+                "Maximum": "100",
+                "Minimum": "0",
+                "typeName": "NUMERIC",
+                "Unit": "http://id.insee.fr/unit/percent",
+                "type": "NumericDatatypeType",
+                "Decimals": ""
+              }
+            }
+          ],
+          "Control": [
+            {
+              "post_collect": false,
+              "Description": "Table level control",
+              "Expression": "true",
+              "scope": false,
+              "during_collect": false,
+              "criticity": "INFO",
+              "FailMessage": "\"Table level control\"",
+              "id": "lvcir2te"
+            },
+            {
+              "post_collect": false,
+              "Description": "Line level control",
+              "Expression": "cast($DYNAMIC_TABLE1$, integer) + cast($DYNAMIC_TABLE2$, integer) > 100",
+              "scope": "line",
+              "during_collect": false,
+              "criticity": "ERROR",
+              "FailMessage": "\"Sum of percentages cannot be > 100%.\"",
+              "id": "lvcinr8r"
+            }
+          ],
+          "depth": 2,
+          "ClarificationQuestion": [],
+          "id": "lvcizkii",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI"
+          ],
+          "Declaration": [],
+          "questionType": "TABLE"
+        }
+      ],
+      "Name": "SEQUENCE"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}
