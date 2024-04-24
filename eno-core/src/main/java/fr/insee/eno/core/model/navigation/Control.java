@@ -42,8 +42,8 @@ public class Control extends EnoIdentifiableObject implements EnoObjectWithExpre
     public static ControlCriticalityEnum convertCriticalityToLunatic(Criticality criticality) {
         return switch (criticality) {
             case INFO -> ControlCriticalityEnum.INFO;
-            case WARN -> ControlCriticalityEnum.WARN;
-            case ERROR -> ControlCriticalityEnum.ERROR;
+            case WARN, ERROR -> ControlCriticalityEnum.WARN;
+            // TODO: temporary error -> warn in Lunatic for non blocking controls (to be set back at error later on)
         };
     }
 

@@ -61,7 +61,7 @@ class ControlTest {
                 lunaticComponents.get("ltx6cof9").getControls().getFirst().getCriticality());
         assertEquals(ControlCriticalityEnum.WARN,
                 lunaticComponents.get("lu6xrmto").getControls().getFirst().getCriticality());
-        assertEquals(ControlCriticalityEnum.ERROR,
+        assertEquals(ControlCriticalityEnum.WARN,
                 lunaticComponents.get("lu6y5e4z").getControls().getFirst().getCriticality());
     }
 
