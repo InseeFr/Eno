@@ -41,7 +41,7 @@ class ControlRowTest {
         assertEquals(1, rowControls.size());
         //
         ControlType rowControl = rowControls.getFirst();
-        assertEquals(ControlCriticalityEnum.ERROR, rowControl.getCriticality());
+        assertEquals(ControlCriticalityEnum.WARN, rowControl.getCriticality());
         assertEquals("cast(DYNAMIC_TABLE1, integer) + cast(DYNAMIC_TABLE2, integer) > 100",
                 rowControl.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, rowControl.getControl().getTypeEnum());
