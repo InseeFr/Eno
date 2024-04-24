@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.19.4] - 2024-04-24
+### :sparkles: New Features
+- [`92d7c21`](https://github.com/InseeFr/Eno/commit/92d7c21e0477c4d7d3b5209d508b760b6adf814a) - other specify modality *(PR [#980](https://github.com/InseeFr/Eno/pull/980) by [@nsenave](https://github.com/nsenave))*
+- [`0732daf`](https://github.com/InseeFr/Eno/commit/0732daf87be05c778fe75b2f2672b17eb8a62544) - add cors for Eno-WS *(PR [#973](https://github.com/InseeFr/Eno/pull/973) by [@laurentC35](https://github.com/laurentC35))*
+  - :arrow_lower_right: *addresses issue [#867](https://github.com/InseeFr/Eno/issues/867) opened by [@laurentC35](https://github.com/laurentC35)*
+- [`0cd00e6`](https://github.com/InseeFr/Eno/commit/0cd00e6859a18cd128996071f484b7050f476b43) - restore controls criticality *(PR [#985](https://github.com/InseeFr/Eno/pull/985) by [@nsenave](https://github.com/nsenave))*
+- [`c48be9c`](https://github.com/InseeFr/Eno/commit/c48be9c93d18a5929dba9c828b109dfef23a0e71) - dynamic table line controls *(PR [#986](https://github.com/InseeFr/Eno/pull/986) by [@nsenave](https://github.com/nsenave))*
+
+### :bug: Bug Fixes
+- [`9dc1480`](https://github.com/InseeFr/Eno/commit/9dc1480095469e6049e294ec231ae2ea6c5fdd80) - resizing pairwise variables size *(PR [#965](https://github.com/InseeFr/Eno/pull/965) by [@nsenave](https://github.com/nsenave))*
+- [`0622ec5`](https://github.com/InseeFr/Eno/commit/0622ec5aee8102769c9de077ce4b065332346990) - lunatic non blocking consistency controls *(commit by [@nsenave](https://github.com/nsenave))*
+
+### :white_check_mark: Tests
+- [`2beeaf5`](https://github.com/InseeFr/Eno/commit/2beeaf59353d9cbb71553b15ff44174415bcb00d) - pogues source of some ddi used in tests *(commit by [@nsenave](https://github.com/nsenave))*
+
+### :construction_worker: Build System
+- [`bfe211a`](https://github.com/InseeFr/Eno/commit/bfe211a654d65ed01889ca11fd882a1f52d1531d) - bump org.springdoc:springdoc-openapi-starter-webflux-ui *(PR [#972](https://github.com/InseeFr/Eno/pull/972) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`0fbcbc4`](https://github.com/InseeFr/Eno/commit/0fbcbc4c6e84fdef159a9b4bd042bb00cfb439e2) - bump org.springframework.boot from 3.2.4 to 3.2.5 *(PR [#983](https://github.com/InseeFr/Eno/pull/983) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+
+
 ## [3.18.5] - 2024-04-05
 ### :bug: Bug Fixes
 - [`2a108fb`](https://github.com/InseeFr/Eno/commit/2a108fbbc23d932d1de14644685293ff87f48682) - duplicate declarations in lunatic pairwise component *(PR [#941](https://github.com/InseeFr/Eno/pull/941) by [@nsenave](https://github.com/nsenave))*
@@ -144,3 +164,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.17.3]: https://github.com/InseeFr/Eno/compare/3.17.2...3.17.3
 [3.18.2]: https://github.com/InseeFr/Eno/compare/3.17.3...3.18.2
 [3.18.5]: https://github.com/InseeFr/Eno/compare/3.18.2...3.18.5
+[3.19.4]: https://github.com/InseeFr/Eno/compare/3.18.5...3.19.4
