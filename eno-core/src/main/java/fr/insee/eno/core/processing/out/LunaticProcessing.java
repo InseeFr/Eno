@@ -53,7 +53,8 @@ public class LunaticProcessing {
                 .then(new LunaticReverseConsistencyControlLabel())
                 .then(new LunaticAddShapeToCalculatedVariables(enoQuestionnaire, shapefromAttributeRetrieval))
                 .then(new LunaticFinalizePairwise(enoQuestionnaire))
-                .thenIf(parameters.isFilterResult(), new LunaticFilterResult(enoQuestionnaire, shapefromAttributeRetrieval));
+                .thenIf(parameters.isFilterResult(), new LunaticFilterResult(enoQuestionnaire, shapefromAttributeRetrieval))
+                .thenIf(parameters.isLunaticV3(), new LunaticQuestionComponent());
     }
 
 }
