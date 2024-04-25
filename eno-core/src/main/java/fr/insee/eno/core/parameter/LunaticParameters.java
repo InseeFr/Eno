@@ -1,5 +1,6 @@
 package fr.insee.eno.core.parameter;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +17,10 @@ public class LunaticParameters {
     private boolean filterResult;
     private boolean filterDescription;
     private LunaticPaginationMode lunaticPaginationMode;
+
+    /** Parameter to enable Lunatic v3 (known as Lunatic-DSFR) features. */
+    @JsonProperty("DSFR")
+    private boolean lunaticV3;
 
     private LunaticParameters() {}
 
@@ -39,6 +44,7 @@ public class LunaticParameters {
         this.setFilterResult(isWeb || isProcess);
         this.setMissingVariables(isInterview || isProcess);
         this.setLunaticPaginationMode(paginationValue(context, modeParameter));
+        this.setLunaticV3(false);
     }
 
     private LunaticPaginationMode paginationValue(EnoParameters.Context context, EnoParameters.ModeParameter modeParameter) {

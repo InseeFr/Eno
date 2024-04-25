@@ -53,7 +53,7 @@ class MultipleChoiceQuestionTest {
         assertEquals("\"Code D\"", lunaticCheckboxGroup.getResponses().get(3).getLabel().getValue());
         //
         lunaticCheckboxGroup.getResponses().forEach(responsesCheckboxGroup ->
-                assertEquals(LabelTypeEnum.VTL_MD, responsesCheckboxGroup.getLabel().getTypeEnum()));
+                assertEquals(LabelTypeEnum.VTL_MD, responsesCheckboxGroup.getLabel().getType()));
         //
         assertEquals("MCQ_BOOL1", lunaticCheckboxGroup.getResponses().get(0).getResponse().getName());
         assertEquals("MCQ_BOOL2", lunaticCheckboxGroup.getResponses().get(1).getResponse().getName());

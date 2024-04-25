@@ -44,10 +44,10 @@ class ControlRowTest {
         assertEquals(ControlCriticalityEnum.WARN, rowControl.getCriticality());
         assertEquals("cast(DYNAMIC_TABLE1, integer) + cast(DYNAMIC_TABLE2, integer) > 100",
                 rowControl.getControl().getValue());
-        assertEquals(LabelTypeEnum.VTL, rowControl.getControl().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL, rowControl.getControl().getType());
         assertEquals("\"Sum of percentages cannot be > 100%.\"",
                 rowControl.getErrorMessage().getValue());
-        assertEquals(LabelTypeEnum.VTL_MD, rowControl.getErrorMessage().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL_MD, rowControl.getErrorMessage().getType());
     }
 
 }
