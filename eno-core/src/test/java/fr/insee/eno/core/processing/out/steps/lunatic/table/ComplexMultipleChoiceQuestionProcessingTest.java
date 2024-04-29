@@ -96,7 +96,7 @@ class ComplexMultipleChoiceQuestionProcessingTest {
         assertEquals("\"Code 1\"",
                 lunaticTable.getBodyLines().get(0).getBodyCells().get(0).getLabel().getValue());
         assertEquals(LabelTypeEnum.VTL_MD,
-                lunaticTable.getBodyLines().get(0).getBodyCells().get(0).getLabel().getTypeEnum());
+                lunaticTable.getBodyLines().get(0).getBodyCells().get(0).getLabel().getType());
         // Only look at the modality value for the others
         assertEquals("c2", lunaticTable.getBodyLines().get(1).getBodyCells().get(0).getValue());
         assertEquals("c21", lunaticTable.getBodyLines().get(1).getBodyCells().get(1).getValue());

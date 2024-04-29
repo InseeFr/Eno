@@ -46,8 +46,8 @@ class DynamicTableQuestionProcessingTest {
     void minAndMaxIterations() {
         assertEquals("1", lunaticDynamicTable.getLines().getMin().getValue());
         assertEquals("5", lunaticDynamicTable.getLines().getMax().getValue());
-        assertEquals(LabelTypeEnum.VTL, lunaticDynamicTable.getLines().getMin().getTypeEnum());
-        assertEquals(LabelTypeEnum.VTL, lunaticDynamicTable.getLines().getMax().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL, lunaticDynamicTable.getLines().getMin().getType());
+        assertEquals(LabelTypeEnum.VTL, lunaticDynamicTable.getLines().getMax().getType());
     }
 
     @Test
