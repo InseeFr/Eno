@@ -1,10 +1,7 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.processing.ProcessingStep;
-import fr.insee.lunatic.model.flat.ComponentType;
-import fr.insee.lunatic.model.flat.Loop;
-import fr.insee.lunatic.model.flat.Question;
-import fr.insee.lunatic.model.flat.Questionnaire;
+import fr.insee.lunatic.model.flat.*;
 
 import java.util.List;
 
@@ -28,6 +25,11 @@ public class LunaticQuestionComponent implements ProcessingStep<Questionnaire> {
                 .forEach(loop -> wrapComponentsInQuestions(loop.getComponents()));
     }
 
+    /**
+     * Wraps each response component (e.g. Input, InputNumber, Table, etc.) is a question component.
+     * Some properties are moved in the question component, others remain in the response component.
+     * @param components A list of Lunatic components.
+     */
     private static void wrapComponentsInQuestions(List<ComponentType> components) {
         components.replaceAll(componentType -> {
             //
@@ -38,9 +40,28 @@ public class LunaticQuestionComponent implements ProcessingStep<Questionnaire> {
             question.setId("question-"+componentType.getId());
             question.setPage(componentType.getPage());
             question.setConditionFilter(question.getConditionFilter());
+            question.setLabel(componentType.getLabel());
+            componentType.getDeclarations().forEach(declarationType ->
+                    insertQuestionDeclaration(declarationType, question));
             question.addComponent(componentType);
+            //
+            componentType.setLabel(null);
+            componentType.getDeclarations().clear();
+            //
             return question;
         });
+    }
+
+    /**
+     * Insert the given declaration in the question component.
+     * If the declaration type is "STATEMENT", it is changed to "HELP".
+     * @param declarationType Lunatic declaration.
+     * @param question Lunatic question.
+     */
+    private static void insertQuestionDeclaration(DeclarationType declarationType, Question question) {
+        if (DeclarationTypeEnum.STATEMENT.equals(declarationType.getDeclarationType()))
+            declarationType.setDeclarationType(DeclarationTypeEnum.HELP);
+        question.getDeclarations().add(declarationType);
     }
 
 }
