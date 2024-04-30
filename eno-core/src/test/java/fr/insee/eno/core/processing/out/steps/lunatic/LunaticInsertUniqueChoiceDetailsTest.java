@@ -41,14 +41,14 @@ public class LunaticInsertUniqueChoiceDetailsTest {
         assertEquals("UCQ_codeC_RADIO", radio.getOptions().get(2).getDetail().getResponse().getName());
         assertEquals("\"Please, specify about option C:\"",
                 radio.getOptions().get(2).getDetail().getLabel().getValue());
-        assertEquals(LabelTypeEnum.VTL_MD, radio.getOptions().get(3).getDetail().getLabel().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL_MD, radio.getOptions().get(3).getDetail().getLabel().getType());
         //
         assertNull(checkboxOne.getOptions().get(0).getDetail());
         assertNull(checkboxOne.getOptions().get(1).getDetail());
         assertEquals("UCQ_codeC_CHECKBOX", checkboxOne.getOptions().get(2).getDetail().getResponse().getName());
         assertEquals("\"Please, specify about option C:\"",
                 checkboxOne.getOptions().get(2).getDetail().getLabel().getValue());
-        assertEquals(LabelTypeEnum.VTL_MD, checkboxOne.getOptions().get(3).getDetail().getLabel().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL_MD, checkboxOne.getOptions().get(3).getDetail().getLabel().getType());
     }
 
 }
