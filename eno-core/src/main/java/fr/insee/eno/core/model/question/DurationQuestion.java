@@ -3,21 +3,25 @@ package fr.insee.eno.core.model.question;
 import datacollection33.QuestionItemType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.lunatic.model.flat.Duration;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  * Duration question.
  * In DDI, it is very similar to date questions.
- * It is not supported in Lunatic yet. */
+ */
 @Getter
 @Setter
 @Context(format = Format.DDI, type = QuestionItemType.class)
+@Context(format = Format.LUNATIC, type = Duration.class)
 public class DurationQuestion extends SingleResponseQuestion {
 
     /**
      * Minimum duration value allowed.
+     * Unused in Lunatic for now.
      */
     @DDI("getResponseDomain() != null ? " +
             "getResponseDomain().getRangeArray(0)?.getMinimumValue()?.getStringValue() : " +
@@ -27,6 +31,7 @@ public class DurationQuestion extends SingleResponseQuestion {
 
     /**
      * Maximum duration value allowed.
+     * Unused in Lunatic for now.
      */
     @DDI("getResponseDomain() != null ? " +
             "getResponseDomain().getRangeArray(0)?.getMaximumValue()?.getStringValue() : " +
@@ -41,5 +46,7 @@ public class DurationQuestion extends SingleResponseQuestion {
             "getResponseDomain().getDateFieldFormat().getStringValue() : " +
             "#index.get(#this.getResponseDomainReference().getIDArray(0).getStringValue())" +
             ".getDateFieldFormat().getStringValue()")
+    @Lunatic("setFormat(T(fr.insee.lunatic.model.flat.DurationFormat).fromValue(#param))")
     private String format;
+
 }
