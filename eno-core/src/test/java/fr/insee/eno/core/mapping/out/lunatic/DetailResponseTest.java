@@ -34,7 +34,7 @@ class DetailResponseTest {
         //
         assertEquals("FOO_DETAIL", lunaticDetailResponse.getResponse().getName());
         assertEquals("\"Please specify\"", lunaticDetailResponse.getLabel().getValue());
-        assertEquals(LabelTypeEnum.VTL_MD, lunaticDetailResponse.getLabel().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL_MD, lunaticDetailResponse.getLabel().getType());
     }
 
 }

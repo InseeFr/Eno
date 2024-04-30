@@ -41,7 +41,7 @@ class ComponentFilterTest {
         lunaticMapper.mapEnoObject(enoComponentFilter, lunaticConditionFilter);
         //
         assertEquals(ComponentFilter.DEFAULT_FILTER_VALUE, lunaticConditionFilter.getValue());
-        assertEquals(LabelTypeEnum.VTL, lunaticConditionFilter.getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL, lunaticConditionFilter.getType());
         assertTrue(lunaticConditionFilter.getBindingDependencies().isEmpty());
     }
 
@@ -92,7 +92,7 @@ class ComponentFilterTest {
             lunaticQuestionnaire.getComponents().stream()
                     .map(ComponentType::getConditionFilter)
                     .forEach(conditionFilterType ->
-                            assertEquals(LabelTypeEnum.VTL, conditionFilterType.getTypeEnum()));
+                            assertEquals(LabelTypeEnum.VTL, conditionFilterType.getType()));
         }
 
         @Test
@@ -177,7 +177,7 @@ class ComponentFilterTest {
         void filterWithCalculatedVariable(int index) {
             ConditionFilterType conditionFilter = lunaticQuestionnaire.getComponents().get(index).getConditionFilter();
             assertEquals("(SUM_Q11_Q12 < 10)", conditionFilter.getValue());
-            assertEquals(LabelTypeEnum.VTL, conditionFilter.getTypeEnum());
+            assertEquals(LabelTypeEnum.VTL, conditionFilter.getType());
             assertEquals(3, conditionFilter.getBindingDependencies().size());
             assertTrue(conditionFilter.getBindingDependencies().containsAll(List.of("SUM_Q11_Q12", "Q11", "Q12")));
         }

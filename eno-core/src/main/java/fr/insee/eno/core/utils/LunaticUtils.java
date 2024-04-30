@@ -27,7 +27,6 @@ public class LunaticUtils {
         return components.stream()
                 .filter(component -> !component.getComponentType().equals(ComponentTypeEnum.SEQUENCE))
                 .filter(component -> !component.getComponentType().equals(ComponentTypeEnum.SUBSEQUENCE))
-                .filter(component -> !component.getComponentType().equals(ComponentTypeEnum.FILTER_DESCRIPTION))
                 .toList();
     }
 
