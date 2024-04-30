@@ -103,8 +103,7 @@ public class LunaticConverter {
         if (enoQuestion instanceof DateQuestion)
             return new Datepicker();
         if (enoQuestion instanceof DurationQuestion) {
-            log.warn("Duration questions is not supported in Lunatic yet. " + enoQuestion);
-            return null;
+            return new Duration();
         }
         if (enoQuestion instanceof UniqueChoiceQuestion uniqueChoiceQuestion) {
             return ucqComponentConversion(enoQuestion, uniqueChoiceQuestion);
