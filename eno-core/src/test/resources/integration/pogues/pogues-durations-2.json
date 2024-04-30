@@ -1,0 +1,185 @@
+{
+  "owner": "ENO-INTEGRATION-TESTS",
+  "FlowControl": [],
+  "ComponentGroup": [
+    {
+      "MemberReference": [
+        "lvl60y5h",
+        "lvl85wq1",
+        "lvl80mbm",
+        "idendquest"
+      ],
+      "Label": [
+        "Components for page 1"
+      ],
+      "id": "lvl7q9rk",
+      "Name": "PAGE_1"
+    }
+  ],
+  "agency": "fr.insee",
+  "genericName": "QUESTIONNAIRE",
+  "Label": [
+    "Eno - Duration"
+  ],
+  "childQuestionnaireRef": [],
+  "Name": "ENO_DURATION",
+  "Variables": {
+    "Variable": [
+      {
+        "Label": "DURATION_YM label",
+        "id": "lvl7zq78",
+        "type": "CollectedVariableType",
+        "Name": "DURATION_YM",
+        "Datatype": {
+          "Maximum": "P2Y6M",
+          "Minimum": "P0Y0M",
+          "Format": "PnYnM",
+          "typeName": "DURATION",
+          "type": "DurationDatatypeType"
+        }
+      },
+      {
+        "Label": "DURATION_HM label",
+        "id": "lvl7oip5",
+        "type": "CollectedVariableType",
+        "Name": "DURATION_HM",
+        "Datatype": {
+          "Maximum": "PT1H30M",
+          "Minimum": "PT0H0M",
+          "Format": "PTnHnM",
+          "typeName": "DURATION",
+          "type": "DurationDatatypeType"
+        }
+      }
+    ]
+  },
+  "lastUpdatedDate": "Tue Apr 30 2024 09:48:54 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "esa-dc-2018",
+      "uri": "http://ddi:fr.insee:DataCollection.esa-dc-2018"
+    }
+  ],
+  "final": false,
+  "flowLogic": "FILTER",
+  "id": "lvl5pvgm",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "formulasLanguage": "VTL",
+  "Child": [
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "\"Sequence\""
+      ],
+      "id": "lvl60y5h",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lvl7zq78",
+              "id": "lvl7y140",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "P2Y6M",
+                "Minimum": "P0Y0M",
+                "Format": "PnYnM",
+                "typeName": "DURATION",
+                "type": "DurationDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Duration (years/months)\""
+          ],
+          "id": "lvl85wq1",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "DURATION_YM"
+        },
+        {
+          "Response": [
+            {
+              "CollectedVariableReference": "lvl7oip5",
+              "id": "lvl7qfn9",
+              "mandatory": false,
+              "Datatype": {
+                "Maximum": "PT1H30M",
+                "Minimum": "PT0H0M",
+                "Format": "PTnHnM",
+                "typeName": "DURATION",
+                "type": "DurationDatatypeType"
+              }
+            }
+          ],
+          "Control": [],
+          "depth": 2,
+          "FlowControl": [],
+          "Label": [
+            "\"Duration (hours/minutes)\""
+          ],
+          "id": "lvl80mbm",
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Name": "DURATION_HM"
+        }
+      ],
+      "Name": "SEQUENCE"
+    },
+    {
+      "Control": [],
+      "depth": 1,
+      "FlowControl": [],
+      "genericName": "MODULE",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "id": "idendquest",
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "type": "SequenceType",
+      "Child": [],
+      "Name": "QUESTIONNAIRE_END"
+    }
+  ]
+}

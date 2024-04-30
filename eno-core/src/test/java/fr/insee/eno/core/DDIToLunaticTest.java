@@ -91,7 +91,7 @@ class DDIToLunaticTest {
         @Test
         @DisplayName("We should have the correct number of components")
         void testComponentsSize() {
-            assertEquals(51, lunaticQuestionnaire.getComponents().size());
+            assertEquals(53, lunaticQuestionnaire.getComponents().size());
         }
 
         @Test // This test is tedious => we should figure out a way to automate this kind of tests
@@ -101,7 +101,7 @@ class DDIToLunaticTest {
                     SEQUENCE,
                     SUBSEQUENCE, INPUT, TEXTAREA,
                     SUBSEQUENCE, INPUT_NUMBER, INPUT_NUMBER, INPUT_NUMBER,
-                    SUBSEQUENCE, DATEPICKER, DATEPICKER, DATEPICKER, CHECKBOX_BOOLEAN,
+                    SUBSEQUENCE, DATEPICKER, DATEPICKER, DATEPICKER, DURATION, DURATION, CHECKBOX_BOOLEAN,
                     SEQUENCE,
                     SUBSEQUENCE, RADIO, CHECKBOX_ONE, CHECKBOX_ONE, CHECKBOX_ONE, INPUT, DROPDOWN, INPUT,
                     SUBSEQUENCE, CHECKBOX_GROUP, TABLE, TABLE,
