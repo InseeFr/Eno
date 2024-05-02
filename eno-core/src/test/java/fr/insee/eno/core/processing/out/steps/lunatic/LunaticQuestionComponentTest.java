@@ -25,6 +25,10 @@ class LunaticQuestionComponentTest {
         inputNumber.setLabel(new LabelType());
         inputNumber.getLabel().setValue("\"Question label.\"");
         inputNumber.getLabel().setType(LabelTypeEnum.VTL_MD);
+        inputNumber.setConditionFilter(new ConditionFilterType());
+        inputNumber.getConditionFilter().setValue("FOO = 1");
+        inputNumber.getConditionFilter().setType(LabelTypeEnum.VTL);
+        inputNumber.getConditionFilter().getBindingDependencies().add("FOO");
         //
         DeclarationType beforeQuestionDeclaration = new DeclarationType();
         beforeQuestionDeclaration.setId("declaration-1-id");
@@ -56,10 +60,12 @@ class LunaticQuestionComponentTest {
         assertEquals(ComponentTypeEnum.QUESTION, questionnaire.getComponents().get(1).getComponentType());
         assertEquals(1, question.getComponents().size());
         assertEquals(ComponentTypeEnum.INPUT_NUMBER, question.getComponents().getFirst().getComponentType());
-        // Label should be at the Question level
+        // Label and condition filter should be at the Question level
         assertEquals("\"Question label.\"", question.getLabel().getValue());
         assertEquals(LabelTypeEnum.VTL_MD, question.getLabel().getType());
         assertNull(question.getComponents().getFirst().getLabel());
+        assertEquals("FOO = 1", question.getConditionFilter().getValue());
+        assertNull(question.getComponents().getFirst().getConditionFilter());
         // Declarations too (plus "STATEMENT" should be changed to "HELP")
         assertEquals(2, question.getDeclarations().size());
         assertEquals(DeclarationTypeEnum.HELP, question.getDeclarations().get(0).getDeclarationType());
