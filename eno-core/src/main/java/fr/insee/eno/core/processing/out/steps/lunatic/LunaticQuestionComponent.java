@@ -41,11 +41,13 @@ public class LunaticQuestionComponent implements ProcessingStep<Questionnaire> {
             question.setPage(componentType.getPage());
             question.setConditionFilter(question.getConditionFilter());
             question.setLabel(componentType.getLabel());
+            question.setConditionFilter(componentType.getConditionFilter());
             componentType.getDeclarations().forEach(declarationType ->
                     insertQuestionDeclaration(declarationType, question));
             question.addComponent(componentType);
             //
             componentType.setLabel(null);
+            componentType.setConditionFilter(null); // not an obligation but for slight performance improvement in Lunatic
             componentType.getDeclarations().clear();
             //
             return question;
