@@ -100,13 +100,14 @@ class LunaticLoopResolutionTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTest1 {
 
-        static final Questionnaire lunaticQuestionnaire = new Questionnaire();
-        static List<Loop> lunaticLoops;
+        private final Questionnaire lunaticQuestionnaire = new Questionnaire();
+        private List<Loop> lunaticLoops;
 
         @BeforeAll
-        static void mapLunaticQuestionnaire() throws DDIParsingException {
+        void mapLunaticQuestionnaire() throws DDIParsingException {
             // Given: a mapped and sorted Lunatic questionnaire
             EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
                     LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
@@ -193,13 +194,14 @@ class LunaticLoopResolutionTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTest2 {
 
-        static final Questionnaire lunaticQuestionnaire = new Questionnaire();
-        static List<Loop> lunaticLoops;
+        private final Questionnaire lunaticQuestionnaire = new Questionnaire();
+        private List<Loop> lunaticLoops;
 
         @BeforeAll
-        static void mapLunaticQuestionnaire() throws DDIParsingException {
+        void mapLunaticQuestionnaire() throws DDIParsingException {
             // Given: a mapped and sorted Lunatic questionnaire
             EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
                     LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
@@ -275,13 +277,14 @@ class LunaticLoopResolutionTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTest3 {
 
-        static final Questionnaire lunaticQuestionnaire = new Questionnaire();
-        static List<Loop> lunaticLoops;
+        private final Questionnaire lunaticQuestionnaire = new Questionnaire();
+        private List<Loop> lunaticLoops;
 
         @BeforeAll
-        static void mapLunaticQuestionnaire() throws DDIParsingException {
+        void mapLunaticQuestionnaire() throws DDIParsingException {
             // Given: a mapped and sorted Lunatic questionnaire
             EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
                     LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
@@ -346,13 +349,14 @@ class LunaticLoopResolutionTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTest4 {
 
-        static final Questionnaire lunaticQuestionnaire = new Questionnaire();
-        static List<Loop> lunaticLoops;
+        private final Questionnaire lunaticQuestionnaire = new Questionnaire();
+        private List<Loop> lunaticLoops;
 
         @BeforeAll
-        static void mapLunaticQuestionnaire() throws DDIParsingException {
+        void mapLunaticQuestionnaire() throws DDIParsingException {
             // Given: a mapped and sorted Lunatic questionnaire
             EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
                     LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(

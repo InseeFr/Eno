@@ -10,10 +10,7 @@ import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Loop;
 import fr.insee.lunatic.model.flat.Questionnaire;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -76,13 +73,14 @@ class DDIToLunaticTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @DisplayName("DDI to Lunatic, functional test with 'l20g2ba7'")
     class FunctionalTest1 {
 
-        private static Questionnaire lunaticQuestionnaire;
+        private Questionnaire lunaticQuestionnaire;
 
         @BeforeAll
-        static void mapLunaticQuestionnaire() throws DDIParsingException {
+        void mapLunaticQuestionnaire() throws DDIParsingException {
             lunaticQuestionnaire = DDIToLunatic.transform(
                     DDIToLunaticTest.class.getClassLoader().getResourceAsStream("functional/ddi/ddi-l20g2ba7.xml"),
                     EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));

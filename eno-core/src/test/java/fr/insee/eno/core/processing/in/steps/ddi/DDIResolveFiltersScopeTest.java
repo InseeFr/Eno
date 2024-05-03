@@ -6,10 +6,7 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType;
 import fr.insee.eno.core.serialize.DDIDeserializer;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -23,13 +20,14 @@ class DDIResolveFiltersScopeTest {
      */
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @DisplayName("Simple filters")
     class IntegrationsTest1 {
 
-        static EnoQuestionnaire enoQuestionnaire;
+        private EnoQuestionnaire enoQuestionnaire;
 
         @BeforeAll
-        static void mapTestQuestionnaire() throws DDIParsingException {
+        void mapTestQuestionnaire() throws DDIParsingException {
             // Given
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();
@@ -77,13 +75,14 @@ class DDIResolveFiltersScopeTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @DisplayName("Filters on several items")
     class IntegrationsTest2 {
 
-        static EnoQuestionnaire enoQuestionnaire;
+        private EnoQuestionnaire enoQuestionnaire;
 
         @BeforeAll
-        static void mapTestQuestionnaire() throws DDIParsingException {
+        void mapTestQuestionnaire() throws DDIParsingException {
             // Given
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();
@@ -137,13 +136,14 @@ class DDIResolveFiltersScopeTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @DisplayName("Nested filters")
     class IntegrationsTest3 {
 
-        static EnoQuestionnaire enoQuestionnaire;
+        private EnoQuestionnaire enoQuestionnaire;
 
         @BeforeAll
-        static void mapTestQuestionnaire() throws DDIParsingException {
+        void mapTestQuestionnaire() throws DDIParsingException {
             // Given
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();

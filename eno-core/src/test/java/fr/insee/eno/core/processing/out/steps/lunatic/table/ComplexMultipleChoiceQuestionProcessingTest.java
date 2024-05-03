@@ -7,6 +7,7 @@ import fr.insee.eno.core.model.question.ComplexMultipleChoiceQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -17,12 +18,13 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ComplexMultipleChoiceQuestionProcessingTest {
 
-    private static List<Table> lunaticTableList;
+    private List<Table> lunaticTableList;
 
     @BeforeAll
-    static void complexMCQ_integrationTestFromDDI() throws DDIParsingException {
+    void complexMCQ_integrationTestFromDDI() throws DDIParsingException {
         // Given
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
                 ComplexMultipleChoiceQuestionProcessingTest.class.getClassLoader().getResourceAsStream(

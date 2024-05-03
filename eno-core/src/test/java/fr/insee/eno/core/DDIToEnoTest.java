@@ -42,13 +42,14 @@ class DDIToEnoTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @DisplayName("DDI to Eno, functional test with 'l20g2ba7'")
     class FunctionalTest1 {
 
-        private static EnoQuestionnaire enoQuestionnaire;
+        private EnoQuestionnaire enoQuestionnaire;
 
         @BeforeAll
-        static void mapDDI() throws DDIParsingException {
+        void mapDDI() throws DDIParsingException {
             // The focus is on the mapping part here, so business processing (that may be enabled by default) are disabled.
             EnoParameters enoParameters = EnoParameters.emptyValues();
             enoParameters.setModeParameter(ModeParameter.PROCESS);
