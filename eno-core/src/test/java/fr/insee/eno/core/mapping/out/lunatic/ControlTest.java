@@ -12,6 +12,7 @@ import fr.insee.lunatic.model.flat.Questionnaire;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,12 +21,13 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ControlTest {
 
-    private static Map<String, ComponentType> lunaticComponents;
+    private Map<String, ComponentType> lunaticComponents;
 
     @BeforeAll
-    static void ddiToLunaticMapping() throws DDIParsingException {
+    void ddiToLunaticMapping() throws DDIParsingException {
         //
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
@@ -65,8 +67,4 @@ class ControlTest {
                 lunaticComponents.get("lu6y5e4z").getControls().getFirst().getCriticality());
     }
 
-    @AfterAll
-    static void clear() {
-        lunaticComponents = null;
-    }
 }

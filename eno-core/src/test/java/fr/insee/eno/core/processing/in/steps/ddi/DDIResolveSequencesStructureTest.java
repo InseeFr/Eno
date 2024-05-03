@@ -13,10 +13,7 @@ import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType
 import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.serialize.DDIDeserializer;
 import fr.insee.eno.core.reference.EnoIndex;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -164,13 +161,14 @@ class DDIResolveSequencesStructureTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @DisplayName("Larger tests with 'l20g2ba7'")
     class IntegrationTests {
 
-        static EnoQuestionnaire enoQuestionnaire;
+        private EnoQuestionnaire enoQuestionnaire;
 
         @BeforeAll
-        static void mapQuestionnaire() throws DDIParsingException {
+        void mapQuestionnaire() throws DDIParsingException {
             // Given
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();

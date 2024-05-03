@@ -9,18 +9,20 @@ import instance33.DDIInstanceDocument;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ControlTest {
 
-    private static Map<String, Control> controls;
+    private Map<String, Control> controls;
 
     @BeforeAll
-    static void mapDDI() throws DDIParsingException {
+    void mapDDI() throws DDIParsingException {
         //
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         DDIInstanceDocument ddiInstance = DDIDeserializer.deserialize(
@@ -51,8 +53,4 @@ class ControlTest {
         assertEquals(Control.Criticality.ERROR, controls.get("lu6y5e4z-CI-0").getCriticality());
     }
 
-    @AfterAll
-    static void clear() {
-        controls = null;
-    }
 }

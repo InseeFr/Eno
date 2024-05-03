@@ -10,10 +10,7 @@ import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.ConditionFilterType;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -46,12 +43,13 @@ class ComponentFilterTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTestSimple {
 
-        private static Questionnaire lunaticQuestionnaire;
+        private Questionnaire lunaticQuestionnaire;
 
         @BeforeAll
-        static void mapQuestionnaire() throws DDIParsingException {
+        void mapQuestionnaire() throws DDIParsingException {
             lunaticQuestionnaire = DDIToLunatic.transform(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-filters-simple.xml"),
@@ -117,12 +115,13 @@ class ComponentFilterTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTestExtended {
 
-        private static Questionnaire lunaticQuestionnaire;
+        private Questionnaire lunaticQuestionnaire;
 
         @BeforeAll
-        static void mapQuestionnaire() throws DDIParsingException {
+        void mapQuestionnaire() throws DDIParsingException {
             lunaticQuestionnaire = DDIToLunatic.transform(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-filters-extended.xml"),
@@ -160,12 +159,13 @@ class ComponentFilterTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTestCalculated {
 
-        private static Questionnaire lunaticQuestionnaire;
+        private Questionnaire lunaticQuestionnaire;
 
         @BeforeAll
-        static void mapQuestionnaire() throws DDIParsingException {
+        void mapQuestionnaire() throws DDIParsingException {
             lunaticQuestionnaire = DDIToLunatic.transform(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-filters-calculated.xml"),
