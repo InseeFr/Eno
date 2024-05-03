@@ -194,7 +194,7 @@ public class EnoParameters {
         this.setCommentSection(Context.BUSINESS.equals(context) || (isInterviewMode || isProcessMode));
         this.setSequenceNumbering(true);
         this.setQuestionNumberingMode(questionNumberingModeValue(context, modeParameter));
-        this.setArrowCharInQuestions(arrowCharValue(context, modeParameter));
+        this.setArrowCharInQuestions(!isWebMode);
     }
 
     private QuestionNumberingMode questionNumberingModeValue(Context context, ModeParameter modeParameter) {
@@ -205,13 +205,6 @@ public class EnoParameters {
                             QuestionNumberingMode.ALL :
                             QuestionNumberingMode.NONE;
             case BUSINESS -> QuestionNumberingMode.SEQUENCE;
-        };
-    }
-
-    private boolean arrowCharValue(Context context, ModeParameter modeParameter) {
-        return switch (context) {
-            case DEFAULT, BUSINESS -> true;
-            case HOUSEHOLD -> ! ModeParameter.CAWI.equals(modeParameter);
         };
     }
 

@@ -72,7 +72,7 @@ class CalculatedVariableTest {
         lunaticMapper.mapEnoObject(enoVariable, lunaticVariable);
         //
         assertEquals("BAR = 1 or BAZ = 1", lunaticVariable.getExpression().getValue());
-        assertEquals(LabelTypeEnum.VTL, lunaticVariable.getExpression().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL, lunaticVariable.getExpression().getType());
     }
 
     @Test
@@ -130,7 +130,7 @@ class CalculatedVariableTest {
         @Test
         void calculatedExpressionType() {
             filterResultVariables.values().forEach(variableType ->
-                    assertEquals(LabelTypeEnum.VTL, variableType.getExpression().getTypeEnum()));
+                    assertEquals(LabelTypeEnum.VTL, variableType.getExpression().getType()));
         }
 
         @Test
@@ -201,7 +201,7 @@ class CalculatedVariableTest {
             assertEquals(VariableTypeEnum.CALCULATED, lunaticVariable.get().getVariableType());
             assertEquals("CALCULATED1", lunaticVariable.get().getName());
             assertEquals("cast(Q3, integer) + 5", lunaticVariable.get().getExpression().getValue());
-            assertEquals(LabelTypeEnum.VTL, lunaticVariable.get().getExpression().getTypeEnum());
+            assertEquals(LabelTypeEnum.VTL, lunaticVariable.get().getExpression().getType());
             assertEquals(1, lunaticVariable.get().getBindingDependencies().size());
             assertEquals("Q3", lunaticVariable.get().getBindingDependencies().getFirst());
         }

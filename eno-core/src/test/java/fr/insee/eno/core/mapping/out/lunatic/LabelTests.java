@@ -22,7 +22,7 @@ class LabelTests {
         LunaticMapper lunaticMapper = new LunaticMapper();
         lunaticMapper.mapEnoObject(enoLabel, lunaticLabel);
         //
-        assertEquals(LabelTypeEnum.VTL_MD, lunaticLabel.getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL_MD, lunaticLabel.getType());
     }
 
     @Test
@@ -34,7 +34,7 @@ class LabelTests {
         LunaticMapper lunaticMapper = new LunaticMapper();
         lunaticMapper.mapEnoObject(enoLabel, lunaticLabel);
         //
-        assertEquals(LabelTypeEnum.VTL_MD, lunaticLabel.getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL_MD, lunaticLabel.getType());
     }
 
     @Test
@@ -46,7 +46,7 @@ class LabelTests {
         LunaticMapper lunaticMapper = new LunaticMapper();
         lunaticMapper.mapEnoObject(enoLabel, lunaticLabel);
         //
-        assertEquals(LabelTypeEnum.VTL_MD, lunaticLabel.getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL_MD, lunaticLabel.getType());
     }
 
     @Test
@@ -58,7 +58,7 @@ class LabelTests {
         LunaticMapper lunaticMapper = new LunaticMapper();
         lunaticMapper.mapEnoObject(enoCalculatedExpression, lunaticLabel);
         //
-        assertEquals(LabelTypeEnum.VTL, lunaticLabel.getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL, lunaticLabel.getType());
     }
 
 }
