@@ -43,7 +43,7 @@ public class ShapefromAttributeRetrievalFromVariableGroups implements ShapefromA
         // retrieve the variable group in which the variable is present, excluding the "Questionnaire"
         // variable group which does not correspond to a "loop" variable group
         Optional<VariableGroup> variableGroup = enoQuestionnaire.getVariableGroups().stream()
-                .filter(vGroup -> !vGroup.getType().equals(VariableGroup.DDI_QUESTIONNAIRE_TYPE))
+                .filter(vGroup -> !VariableGroup.Type.QUESTIONNAIRE.equals(vGroup.getType()))
                 .filter(vGroup -> vGroup.getVariableByName(lunaticCalculatedVariableName).isPresent())
                 .findFirst();
 
