@@ -80,7 +80,7 @@ class LunaticFinalizePairwiseTest {
     void whenFinalizingPairwiseComponentHasNoDeclarations() {
         lunaticQuestionnaire.getComponents().add(pairwiseLinks1);
         processing.apply(lunaticQuestionnaire);
-        assertNull(pairwiseLinks1.getDeclarations());
+        assertTrue(pairwiseLinks1.getDeclarations().isEmpty());
         assertEquals(1, pairwiseLinks1.getComponents().getFirst().getDeclarations().size());
     }
 
