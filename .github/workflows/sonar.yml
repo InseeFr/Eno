@@ -32,7 +32,9 @@ jobs:
           repository: InseeFr/Lunatic-Model
           path: lunatic-model
       - name: Install Lunatic-Model
-        run: mvn clean install --no-transfer-progress
+        run: |
+          cd lunatic-model
+          mvn clean install --no-transfer-progress
 
       - uses: actions/checkout@v4
         with:
