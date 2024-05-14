@@ -17,13 +17,9 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <p>Processing step aimed to replace "shape from" and "variable values" steps.</p>
- * <ul>
- *     <li>The "shape from" from property can be replaced by the "iteration reference"
- *     that has been introduced in Lunatic variables.</li>
- *     <li>The "values/value" property represents the same information as the "dimension" does,
- *     so both can be done in the same step.</li>
- * </ul>
+ * Processing that sets the variable properties that are relative to their dimension,
+ * i.e. the "dimension" and "iteration reference" properties, plus values/value for collected/external variables.
+ * The "shape from" from property (and thus the "shape from" processing step) could be removed later on.
  */
 public class LunaticVariablesDimension implements ProcessingStep<Questionnaire> {
 
