@@ -38,7 +38,7 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
         PairwiseLinks pairwiseLinks = pairwiseLinksList.getFirst();
 
         // Declarations are in the pairwise subcomponent
-        pairwiseLinks.setDeclarations(null);
+        pairwiseLinks.getDeclarations().clear();
 
         // create symlinks
         ComponentSimpleResponseType simpleResponseComponent = (ComponentSimpleResponseType) pairwiseLinks.getComponents().getFirst();
