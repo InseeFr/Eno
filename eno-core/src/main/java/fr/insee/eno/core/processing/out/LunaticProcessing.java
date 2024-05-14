@@ -42,7 +42,7 @@ public class LunaticProcessing {
                 .then(new LunaticTableProcessing(enoQuestionnaire))
                 .then(new LunaticInsertUniqueChoiceDetails(enoQuestionnaire))
                 .then(new LunaticSuggestersConfiguration(enoQuestionnaire))
-                .then(new LunaticVariablesValues())
+                .then(new LunaticVariablesDimension(enoQuestionnaire))
                 .thenIf(parameters.isMissingVariables(), new LunaticAddMissingVariables(enoCatalog, parameters.isMissingVariables()))
                 .then(new LunaticAddResizing(enoQuestionnaire))
                 .then(new LunaticAddHierarchy())
@@ -53,7 +53,8 @@ public class LunaticProcessing {
                 .then(new LunaticReverseConsistencyControlLabel())
                 .then(new LunaticAddShapeToCalculatedVariables(enoQuestionnaire, shapefromAttributeRetrieval))
                 .then(new LunaticFinalizePairwise(enoQuestionnaire))
-                .thenIf(parameters.isFilterResult(), new LunaticFilterResult(enoQuestionnaire, shapefromAttributeRetrieval));
+                .thenIf(parameters.isFilterResult(), new LunaticFilterResult(enoQuestionnaire, shapefromAttributeRetrieval))
+                .thenIf(parameters.isLunaticV3(), new LunaticQuestionComponent());
     }
 
 }

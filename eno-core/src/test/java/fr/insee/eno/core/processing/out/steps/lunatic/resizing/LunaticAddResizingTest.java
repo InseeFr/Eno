@@ -13,6 +13,7 @@ import fr.insee.lunatic.model.flat.ResizingPairwiseEntry;
 import fr.insee.lunatic.model.flat.ResizingType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import java.util.List;
 
@@ -20,12 +21,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class LunaticAddResizingTest {
 
-    private static ResizingType resizingType;
+    private ResizingType resizingType;
 
     @BeforeAll
-    static void init() throws DDIParsingException {
+    void init() throws DDIParsingException {
 
         // Given
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(

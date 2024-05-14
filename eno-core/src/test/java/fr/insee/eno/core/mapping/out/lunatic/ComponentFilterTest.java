@@ -10,10 +10,7 @@ import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.ConditionFilterType;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -41,17 +38,18 @@ class ComponentFilterTest {
         lunaticMapper.mapEnoObject(enoComponentFilter, lunaticConditionFilter);
         //
         assertEquals(ComponentFilter.DEFAULT_FILTER_VALUE, lunaticConditionFilter.getValue());
-        assertEquals(LabelTypeEnum.VTL, lunaticConditionFilter.getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL, lunaticConditionFilter.getType());
         assertTrue(lunaticConditionFilter.getBindingDependencies().isEmpty());
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTestSimple {
 
-        private static Questionnaire lunaticQuestionnaire;
+        private Questionnaire lunaticQuestionnaire;
 
         @BeforeAll
-        static void mapQuestionnaire() throws DDIParsingException {
+        void mapQuestionnaire() throws DDIParsingException {
             lunaticQuestionnaire = DDIToLunatic.transform(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-filters-simple.xml"),
@@ -92,7 +90,7 @@ class ComponentFilterTest {
             lunaticQuestionnaire.getComponents().stream()
                     .map(ComponentType::getConditionFilter)
                     .forEach(conditionFilterType ->
-                            assertEquals(LabelTypeEnum.VTL, conditionFilterType.getTypeEnum()));
+                            assertEquals(LabelTypeEnum.VTL, conditionFilterType.getType()));
         }
 
         @Test
@@ -117,12 +115,13 @@ class ComponentFilterTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTestExtended {
 
-        private static Questionnaire lunaticQuestionnaire;
+        private Questionnaire lunaticQuestionnaire;
 
         @BeforeAll
-        static void mapQuestionnaire() throws DDIParsingException {
+        void mapQuestionnaire() throws DDIParsingException {
             lunaticQuestionnaire = DDIToLunatic.transform(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-filters-extended.xml"),
@@ -160,12 +159,13 @@ class ComponentFilterTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTestCalculated {
 
-        private static Questionnaire lunaticQuestionnaire;
+        private Questionnaire lunaticQuestionnaire;
 
         @BeforeAll
-        static void mapQuestionnaire() throws DDIParsingException {
+        void mapQuestionnaire() throws DDIParsingException {
             lunaticQuestionnaire = DDIToLunatic.transform(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-filters-calculated.xml"),
@@ -177,7 +177,7 @@ class ComponentFilterTest {
         void filterWithCalculatedVariable(int index) {
             ConditionFilterType conditionFilter = lunaticQuestionnaire.getComponents().get(index).getConditionFilter();
             assertEquals("(SUM_Q11_Q12 < 10)", conditionFilter.getValue());
-            assertEquals(LabelTypeEnum.VTL, conditionFilter.getTypeEnum());
+            assertEquals(LabelTypeEnum.VTL, conditionFilter.getType());
             assertEquals(3, conditionFilter.getBindingDependencies().size());
             assertTrue(conditionFilter.getBindingDependencies().containsAll(List.of("SUM_Q11_Q12", "Q11", "Q12")));
         }

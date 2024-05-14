@@ -10,18 +10,20 @@ import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.RosterForLoop;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class DynamicTableQuestionProcessingTest {
 
-    private static RosterForLoop lunaticDynamicTable;
+    private RosterForLoop lunaticDynamicTable;
 
     @BeforeAll
-    static void complexMCQ_integrationTestFromDDI() throws DDIParsingException {
+    void complexMCQ_integrationTestFromDDI() throws DDIParsingException {
         // Given
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
                 DynamicTableQuestionProcessingTest.class.getClassLoader().getResourceAsStream(
@@ -46,8 +48,8 @@ class DynamicTableQuestionProcessingTest {
     void minAndMaxIterations() {
         assertEquals("1", lunaticDynamicTable.getLines().getMin().getValue());
         assertEquals("5", lunaticDynamicTable.getLines().getMax().getValue());
-        assertEquals(LabelTypeEnum.VTL, lunaticDynamicTable.getLines().getMin().getTypeEnum());
-        assertEquals(LabelTypeEnum.VTL, lunaticDynamicTable.getLines().getMax().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL, lunaticDynamicTable.getLines().getMin().getType());
+        assertEquals(LabelTypeEnum.VTL, lunaticDynamicTable.getLines().getMax().getType());
     }
 
     @Test

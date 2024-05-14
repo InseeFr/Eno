@@ -11,6 +11,7 @@ import fr.insee.eno.core.serialize.DDIDeserializer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import java.util.Optional;
 
@@ -19,12 +20,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DDIResolveLoopsScopeTest {
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class SequenceLoopsTest {
 
-        private static EnoQuestionnaire enoQuestionnaire;
+        private EnoQuestionnaire enoQuestionnaire;
 
         @BeforeAll
-        static void mapQuestionnaire() throws DDIParsingException {
+        void mapQuestionnaire() throws DDIParsingException {
             // Given
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();
@@ -69,12 +71,13 @@ public class DDIResolveLoopsScopeTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class SubsequenceLoopsTest {
 
-        private static EnoQuestionnaire enoQuestionnaire;
+        private EnoQuestionnaire enoQuestionnaire;
 
         @BeforeAll
-        static void mapQuestionnaire() throws DDIParsingException {
+        void mapQuestionnaire() throws DDIParsingException {
             // Given
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();
@@ -119,12 +122,13 @@ public class DDIResolveLoopsScopeTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class SequenceExtendedLoopsTest {
 
-        private static EnoQuestionnaire enoQuestionnaire;
+        private EnoQuestionnaire enoQuestionnaire;
 
         @BeforeAll
-        static void mapQuestionnaire() throws DDIParsingException {
+        void mapQuestionnaire() throws DDIParsingException {
             // Given
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();
@@ -169,12 +173,13 @@ public class DDIResolveLoopsScopeTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class SubsequenceExtendedLoopsTest {
 
-        private static EnoQuestionnaire enoQuestionnaire;
+        private EnoQuestionnaire enoQuestionnaire;
 
         @BeforeAll
-        static void mapQuestionnaire() throws DDIParsingException {
+        void mapQuestionnaire() throws DDIParsingException {
             // Given
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();

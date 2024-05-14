@@ -15,6 +15,7 @@ import fr.insee.eno.core.serialize.DDIDeserializer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import java.util.Optional;
 
@@ -51,12 +52,13 @@ class DDIResolveVariableReferencesInLabelsTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTestLabels {
 
-        private static EnoQuestionnaire enoQuestionnaire;
+        private EnoQuestionnaire enoQuestionnaire;
 
         @BeforeAll
-        static void mapQuestionnaire() throws DDIParsingException {
+        void mapQuestionnaire() throws DDIParsingException {
             // Given
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();

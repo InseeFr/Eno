@@ -9,18 +9,20 @@ import fr.insee.eno.core.serialize.DDIDeserializer;
 import instance33.DDIInstanceDocument;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class DDIInsertDetailResponsesTest {
 
-    private static EnoQuestionnaire enoQuestionnaire;
+    private EnoQuestionnaire enoQuestionnaire;
 
     @BeforeAll
-    static void mapAndProcessDDI() throws DDIParsingException {
+    void mapAndProcessDDI() throws DDIParsingException {
         //
         enoQuestionnaire = new EnoQuestionnaire();
         DDIInstanceDocument ddiInstance = DDIDeserializer.deserialize(
