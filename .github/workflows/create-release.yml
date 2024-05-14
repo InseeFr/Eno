@@ -25,17 +25,6 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      # Temporary step while InseeFr gpg key for maven central publishing has not been replaced
-      - name: Checkout Lunatic-Model repo
-        uses: actions/checkout@v4
-        with:
-          repository: InseeFr/Lunatic-Model
-          path: lunatic-model
-      - name: Install Lunatic-Model
-        run: |
-          cd lunatic-model
-          mvn clean install --no-transfer-progress
-
       - name: Checkout Eno repo
         uses: actions/checkout@v4
 
@@ -79,6 +68,17 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
+
+      # Temporary step while InseeFr gpg key for maven central publishing has not been replaced
+      - name: Checkout Lunatic-Model repo
+        uses: actions/checkout@v4
+        with:
+          repository: InseeFr/Lunatic-Model
+          path: lunatic-model
+      - name: Install Lunatic-Model
+        run: |
+          cd lunatic-model
+          mvn clean install --no-transfer-progress
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v3
