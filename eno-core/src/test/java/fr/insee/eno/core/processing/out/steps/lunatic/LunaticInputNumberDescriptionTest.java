@@ -64,4 +64,21 @@ class LunaticInputNumberDescriptionTest {
                 lunaticQuestionnaire.getComponents().getFirst().getDescription().getValue());
     }
 
+    @Test
+    void negativeMin() {
+        //
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
+        InputNumber inputNumber = new InputNumber();
+        inputNumber.setMin(-100d);
+        inputNumber.setMax(100d);
+        inputNumber.setDecimals(BigInteger.ZERO);
+        lunaticQuestionnaire.getComponents().add(inputNumber);
+        //
+        LunaticInputNumberDescription processing = new LunaticInputNumberDescription(EnoParameters.Language.FR);
+        processing.apply(lunaticQuestionnaire);
+        //
+        assertEquals("Format attendu : un nombre entre -100 et 100",
+                lunaticQuestionnaire.getComponents().getFirst().getDescription().getValue());
+    }
+
 }
