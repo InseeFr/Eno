@@ -1,6 +1,7 @@
 package fr.insee.eno.core.processing.out;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.LunaticParameters;
 import fr.insee.eno.core.processing.ProcessingPipeline;
 import fr.insee.eno.core.processing.out.steps.lunatic.*;
@@ -15,10 +16,12 @@ import fr.insee.lunatic.model.flat.Questionnaire;
 
 public class LunaticProcessing {
 
-    private final LunaticParameters parameters;
+    private final EnoParameters enoParameters;
+    private final LunaticParameters lunaticParameters;
 
-    public LunaticProcessing(LunaticParameters parameters) {
-        this.parameters = parameters;
+    public LunaticProcessing(EnoParameters enoParameters) {
+        this.enoParameters = enoParameters;
+        this.lunaticParameters = enoParameters.getLunaticParameters();
     }
 
     /**
@@ -43,18 +46,22 @@ public class LunaticProcessing {
                 .then(new LunaticInsertUniqueChoiceDetails(enoQuestionnaire))
                 .then(new LunaticSuggestersConfiguration(enoQuestionnaire))
                 .then(new LunaticVariablesDimension(enoQuestionnaire))
-                .thenIf(parameters.isMissingVariables(), new LunaticAddMissingVariables(enoCatalog, parameters.isMissingVariables()))
+                .thenIf(lunaticParameters.isMissingVariables(),
+                        new LunaticAddMissingVariables(enoCatalog, lunaticParameters.isMissingVariables()))
                 .then(new LunaticAddResizing(enoQuestionnaire))
                 .then(new LunaticAddHierarchy())
-                .then(new LunaticAddPageNumbers(parameters.getLunaticPaginationMode()))
+                .then(new LunaticAddPageNumbers(lunaticParameters.getLunaticPaginationMode()))
                 .then(new LunaticResponseTimeQuestionPagination())
                 .then(new LunaticAddCleaningVariables())
-                .thenIf(parameters.isControls(), new LunaticAddControlFormat())
+                .thenIf(lunaticParameters.isControls(), new LunaticAddControlFormat())
                 .then(new LunaticReverseConsistencyControlLabel())
                 .then(new LunaticAddShapeToCalculatedVariables(enoQuestionnaire, shapefromAttributeRetrieval))
                 .then(new LunaticFinalizePairwise(enoQuestionnaire))
-                .thenIf(parameters.isFilterResult(), new LunaticFilterResult(enoQuestionnaire, shapefromAttributeRetrieval))
-                .thenIf(parameters.isLunaticV3(), new LunaticQuestionComponent());
+                .thenIf(lunaticParameters.isFilterResult(),
+                        new LunaticFilterResult(enoQuestionnaire, shapefromAttributeRetrieval))
+
+                .thenIf(lunaticParameters.isLunaticV3(), new LunaticInputNumberDescription(enoParameters.getLanguage()))
+                .thenIf(lunaticParameters.isLunaticV3(), new LunaticQuestionComponent());
     }
 
 }
