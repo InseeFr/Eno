@@ -61,8 +61,8 @@ class PairwiseQuestionTest {
         assertEquals("lo9tyy1v", lunaticPairwise.getId());
         assertEquals("count(PAIRWISE_SOURCE)", lunaticPairwise.getXAxisIterations().getValue());
         assertEquals("count(PAIRWISE_SOURCE)", lunaticPairwise.getYAxisIterations().getValue());
-        assertEquals(LabelTypeEnum.VTL, lunaticPairwise.getXAxisIterations().getTypeEnum());
-        assertEquals(LabelTypeEnum.VTL, lunaticPairwise.getYAxisIterations().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL, lunaticPairwise.getXAxisIterations().getType());
+        assertEquals(LabelTypeEnum.VTL, lunaticPairwise.getYAxisIterations().getType());
         assertEquals(1, lunaticPairwise.getComponents().size());
         //
         ComponentType pairwiseInnerComponent = lunaticPairwise.getComponents().get(0);

@@ -8,8 +8,10 @@ import fr.insee.eno.core.model.suggester.SuggesterConfigurationDTO;
 import fr.insee.eno.core.processing.in.steps.ddi.DDIDeserializeSuggesterConfiguration;
 import fr.insee.eno.core.serialize.DDIDeserializer;
 import instance33.DDIInstanceDocument;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -19,12 +21,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * This class tests the mapping of these between DDI and the Eno model.
  * Note: few tests on the suggester configuration object here, would be redundant with DDISuggesterDeserializerTest.
  */
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CodeListSuggesterTest {
 
-    private static EnoQuestionnaire enoQuestionnaire;
+    private EnoQuestionnaire enoQuestionnaire;
 
     @BeforeAll
-    static void mapDDI() throws DDIParsingException {
+    void mapDDI() throws DDIParsingException {
         // Given a DDI with suggester code lists
         DDIInstanceDocument ddiInstanceDocument = DDIDeserializer.deserialize(
                 CodeListSuggesterTest.class.getClassLoader().getResourceAsStream(

@@ -42,8 +42,8 @@ public class SimpleUniqueChoiceQuestionTest {
                 checkboxGroup.getResponses().get(2).getDetail().getLabel().getValue());
         assertEquals("\"Please, specify about option D:\"",
                 checkboxGroup.getResponses().get(3).getDetail().getLabel().getValue());
-        assertEquals(LabelTypeEnum.VTL_MD, checkboxGroup.getResponses().get(2).getDetail().getLabel().getTypeEnum());
-        assertEquals(LabelTypeEnum.VTL_MD, checkboxGroup.getResponses().get(3).getDetail().getLabel().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL_MD, checkboxGroup.getResponses().get(2).getDetail().getLabel().getType());
+        assertEquals(LabelTypeEnum.VTL_MD, checkboxGroup.getResponses().get(3).getDetail().getLabel().getType());
         assertEquals("MCQ_codeC", checkboxGroup.getResponses().get(2).getDetail().getResponse().getName());
         assertEquals("MCQ_codeD", checkboxGroup.getResponses().get(3).getDetail().getResponse().getName());
     }

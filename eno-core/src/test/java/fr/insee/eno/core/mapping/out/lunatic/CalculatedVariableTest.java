@@ -13,10 +13,7 @@ import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
 import fr.insee.lunatic.model.flat.variable.VariableTypeEnum;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.*;
 
@@ -72,7 +69,7 @@ class CalculatedVariableTest {
         lunaticMapper.mapEnoObject(enoVariable, lunaticVariable);
         //
         assertEquals("BAR = 1 or BAZ = 1", lunaticVariable.getExpression().getValue());
-        assertEquals(LabelTypeEnum.VTL, lunaticVariable.getExpression().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL, lunaticVariable.getExpression().getType());
     }
 
     @Test
@@ -88,12 +85,13 @@ class CalculatedVariableTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTest1 {
 
-        private static Map<String, CalculatedVariableType> filterResultVariables;
+        private Map<String, CalculatedVariableType> filterResultVariables;
 
         @BeforeAll
-        static void mapQuestionnaire() throws DDIParsingException {
+        void mapQuestionnaire() throws DDIParsingException {
             Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
                     CalculatedVariableTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-variables.xml"),
@@ -130,7 +128,7 @@ class CalculatedVariableTest {
         @Test
         void calculatedExpressionType() {
             filterResultVariables.values().forEach(variableType ->
-                    assertEquals(LabelTypeEnum.VTL, variableType.getExpression().getTypeEnum()));
+                    assertEquals(LabelTypeEnum.VTL, variableType.getExpression().getType()));
         }
 
         @Test
@@ -201,7 +199,7 @@ class CalculatedVariableTest {
             assertEquals(VariableTypeEnum.CALCULATED, lunaticVariable.get().getVariableType());
             assertEquals("CALCULATED1", lunaticVariable.get().getName());
             assertEquals("cast(Q3, integer) + 5", lunaticVariable.get().getExpression().getValue());
-            assertEquals(LabelTypeEnum.VTL, lunaticVariable.get().getExpression().getTypeEnum());
+            assertEquals(LabelTypeEnum.VTL, lunaticVariable.get().getExpression().getType());
             assertEquals(1, lunaticVariable.get().getBindingDependencies().size());
             assertEquals("Q3", lunaticVariable.get().getBindingDependencies().getFirst());
         }
