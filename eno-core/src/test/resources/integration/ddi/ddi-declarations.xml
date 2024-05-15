@@ -51,7 +51,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">"Static label  of type 'Aide' in Pogues"</d:Text>
+                  <d:Text xml:lang="fr-FR">"Static label of type 'Aide' in Pogues"</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
