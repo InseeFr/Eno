@@ -59,7 +59,7 @@ public class LunaticProcessing {
                 .then(new LunaticFinalizePairwise(enoQuestionnaire))
                 .thenIf(lunaticParameters.isFilterResult(),
                         new LunaticFilterResult(enoQuestionnaire, shapefromAttributeRetrieval))
-
+                .thenIf(lunaticParameters.isLunaticV3(), new LunaticSequenceDescription())
                 .thenIf(lunaticParameters.isLunaticV3(), new LunaticInputNumberDescription(enoParameters.getLanguage()))
                 .thenIf(lunaticParameters.isLunaticV3(), new LunaticQuestionComponent());
     }
