@@ -25,7 +25,7 @@ class LunaticResponseTimeQuestionPaginationTest {
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         enoQuestionnaire.setIndex(new EnoIndex());
         new EnoAddResponseTimeSection(new EnoAddPrefixInQuestionLabels(
-                true, EnoParameters.QuestionNumberingMode.NONE, EnoParameters.ModeParameter.CAWI))
+                true, EnoParameters.QuestionNumberingMode.NONE, EnoParameters.ModeParameter.CAWI, null))
                 .apply(enoQuestionnaire);
         //
         Questionnaire lunaticQuestionnaire = new Questionnaire();
