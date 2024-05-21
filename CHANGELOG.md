@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.21.5] - 2024-05-21
+### :sparkles: New Features
+- [`80e8e8a`](https://github.com/InseeFr/Eno/commit/80e8e8a922b7a7bfadf9f74eec7ca8ebef93885d) - lunatic dsfr question component *(PR [#987](https://github.com/InseeFr/Eno/pull/987) by [@nsenave](https://github.com/nsenave))*
+- [`f40f0d4`](https://github.com/InseeFr/Eno/commit/f40f0d4e58de742c4c446062fed41802cef3efe8) - duration component *(PR [#991](https://github.com/InseeFr/Eno/pull/991) by [@nsenave](https://github.com/nsenave))*
+- [`4c6141d`](https://github.com/InseeFr/Eno/commit/4c6141d511e0b8c37cfa1c0e9a6a1ecb5a445216) - lunatic variables dimension *(PR [#1001](https://github.com/InseeFr/Eno/pull/1001) by [@nsenave](https://github.com/nsenave))*
+- [`a6cfea5`](https://github.com/InseeFr/Eno/commit/a6cfea5b2693f4b085f15499f457ff71978e0b11) - generate description for lunatic input numbers *(PR [#1004](https://github.com/InseeFr/Eno/pull/1004) by [@nsenave](https://github.com/nsenave))*
+- [`1c680f8`](https://github.com/InseeFr/Eno/commit/1c680f82ab0363bfc0015c9595173b8d1f8ca828) - move declaration to description for dsfr sequences *(PR [#1005](https://github.com/InseeFr/Eno/pull/1005) by [@nsenave](https://github.com/nsenave))*
+
+### :bug: Bug Fixes
+- [`7c47c71`](https://github.com/InseeFr/Eno/commit/7c47c71b8981569501e49b9fd10c71e8462389c2) - question component filter *(commit by [@nsenave](https://github.com/nsenave))*
+- [`4cee633`](https://github.com/InseeFr/Eno/commit/4cee63367ae40818e1b10565989a053488ecdc74) - null pointer exception in "dsfr" processing for pairwise *(PR [#1002](https://github.com/InseeFr/Eno/pull/1002) by [@nsenave](https://github.com/nsenave))*
+
+### :recycle: Refactors
+- [`a595009`](https://github.com/InseeFr/Eno/commit/a5950099f449f68fd471407fbb5b8d4881d4f7b2) - arrow char parameter false for CAWI mode *(commit by [@nsenave](https://github.com/nsenave))*
+
+### :white_check_mark: Tests
+- [`6820b2c`](https://github.com/InseeFr/Eno/commit/6820b2cbc19ec0bba29b21809eba11a0ea026dff) - improve memory management *(commit by [@nsenave](https://github.com/nsenave))*
+
+### :construction_worker: Build System
+- [`069bc77`](https://github.com/InseeFr/Eno/commit/069bc77db0cf4b52f1db2b86338f14eca4a48d02) - bump io.spring.dependency-management from 1.1.4 to 1.1.5 *(PR [#999](https://github.com/InseeFr/Eno/pull/999) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+
+
 ## [3.19.4] - 2024-04-24
 ### :sparkles: New Features
 - [`92d7c21`](https://github.com/InseeFr/Eno/commit/92d7c21e0477c4d7d3b5209d508b760b6adf814a) - other specify modality *(PR [#980](https://github.com/InseeFr/Eno/pull/980) by [@nsenave](https://github.com/nsenave))*
@@ -165,3 +187,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.18.2]: https://github.com/InseeFr/Eno/compare/3.17.3...3.18.2
 [3.18.5]: https://github.com/InseeFr/Eno/compare/3.18.2...3.18.5
 [3.19.4]: https://github.com/InseeFr/Eno/compare/3.18.5...3.19.4
+[3.21.5]: https://github.com/InseeFr/Eno/compare/3.19.4...3.21.5
