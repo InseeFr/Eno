@@ -28,4 +28,22 @@ class LunaticSuggesterSpecificTreatmentTest {
         assertFalse(lunaticQuestionnaire.getSuggesters().isEmpty());
     }
 
+    @Test
+    void suggesterTest_lunaticV3() throws DDIParsingException {
+        //
+        EnoParameters enoParameters = EnoParameters.of(EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
+        enoParameters.getLunaticParameters().setLunaticV3(true);
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+                this.getClass().getClassLoader().getResourceAsStream("suggester-treatment/ddi-lgl1kmol.xml"),
+                enoParameters);
+        //
+        SpecificTreatmentsDeserializer treatmentsDeserializer = new SpecificTreatmentsDeserializer();
+        SpecificTreatments treatmentsInput = treatmentsDeserializer.deserialize(
+                this.getClass().getClassLoader().getResourceAsStream("suggester-treatment/suggesters.json"));
+        LunaticSuggesterSpecificTreatment suggesterProcessing = new LunaticSuggesterSpecificTreatment(treatmentsInput.suggesters());
+        suggesterProcessing.apply(lunaticQuestionnaire);
+        //
+        assertFalse(lunaticQuestionnaire.getSuggesters().isEmpty());
+    }
+
 }
