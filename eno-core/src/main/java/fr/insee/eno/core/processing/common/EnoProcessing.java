@@ -34,7 +34,7 @@ public class EnoProcessing {
         // This step will be re-used after for question numbering reasons
         EnoAddPrefixInQuestionLabels prefixingStep = new EnoAddPrefixInQuestionLabels(
                 parameters.isArrowCharInQuestions(), parameters.getQuestionNumberingMode(),
-                parameters.getModeParameter());
+                parameters.getModeParameter(), parameters.getOutFormat());
         processingPipeline.then(prefixingStep)
                 .thenIf(parameters.isResponseTimeQuestion(), new EnoAddResponseTimeSection(prefixingStep))
                 .thenIf(parameters.isCommentSection(), new EnoAddCommentSection(prefixingStep))
