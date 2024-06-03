@@ -21,15 +21,9 @@ class EnoAddResponseTimeSectionTest {
 
     @Test
     void hoursQuestionLabel_noPrefix() {
-        // Given
-        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-        enoQuestionnaire.setIndex(new EnoIndex());
-        EnoAddPrefixInQuestionLabels prefixingStep = new EnoAddPrefixInQuestionLabels(
-                false, EnoParameters.QuestionNumberingMode.NONE, EnoParameters.ModeParameter.PROCESS);
-        prefixingStep.apply(enoQuestionnaire);
-        EnoAddResponseTimeSection processing = new EnoAddResponseTimeSection(prefixingStep);
-        // When
-        processing.apply(enoQuestionnaire);
+        // Given + When
+        EnoQuestionnaire enoQuestionnaire = applyResponseTimeQuestionStep(
+                false, EnoParameters.QuestionNumberingMode.NONE, null);
         // Then
         Optional<NumericQuestion> hoursQuestion = enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(NumericQuestion.class::isInstance)
@@ -49,15 +43,9 @@ class EnoAddResponseTimeSectionTest {
 
     @Test
     void hoursQuestionLabel_arrowPrefix() {
-        // Given
-        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-        enoQuestionnaire.setIndex(new EnoIndex());
-        EnoAddPrefixInQuestionLabels prefixingStep = new EnoAddPrefixInQuestionLabels(
-                true, EnoParameters.QuestionNumberingMode.NONE, EnoParameters.ModeParameter.PROCESS);
-        prefixingStep.apply(enoQuestionnaire);
-        EnoAddResponseTimeSection processing = new EnoAddResponseTimeSection(prefixingStep);
-        // When
-        processing.apply(enoQuestionnaire);
+        // Given + When
+        EnoQuestionnaire enoQuestionnaire = applyResponseTimeQuestionStep(
+                true, EnoParameters.QuestionNumberingMode.NONE, null);
         // Then
         Optional<NumericQuestion> hoursQuestion = enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(NumericQuestion.class::isInstance)
@@ -71,15 +59,9 @@ class EnoAddResponseTimeSectionTest {
 
     @Test
     void hoursQuestionLabel_arrowAndNumberPrefix() {
-        // Given
-        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-        enoQuestionnaire.setIndex(new EnoIndex());
-        EnoAddPrefixInQuestionLabels prefixingStep = new EnoAddPrefixInQuestionLabels(
-                true, EnoParameters.QuestionNumberingMode.SEQUENCE, EnoParameters.ModeParameter.PROCESS);
-        prefixingStep.apply(enoQuestionnaire);
-        EnoAddResponseTimeSection processing = new EnoAddResponseTimeSection(prefixingStep);
-        // When
-        processing.apply(enoQuestionnaire);
+        // Given + When
+        EnoQuestionnaire enoQuestionnaire = applyResponseTimeQuestionStep(
+                true, EnoParameters.QuestionNumberingMode.SEQUENCE, null);
         // Then
         Optional<NumericQuestion> hoursQuestion = enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(NumericQuestion.class::isInstance)
@@ -89,6 +71,37 @@ class EnoAddResponseTimeSectionTest {
         assertTrue(hoursQuestion.isPresent());
         String expected = "\"➡ 1. \" || " + EnoAddResponseTimeSection.RESPONSE_TIME_QUESTION_LABEL;
         assertEquals(expected, hoursQuestion.get().getLabel().getValue());
+    }
+
+    @Test
+    void hoursQuestionLabel_numberPrefix_lunaticFormat() {
+        // Given + When
+        EnoQuestionnaire enoQuestionnaire = applyResponseTimeQuestionStep(
+                true, EnoParameters.QuestionNumberingMode.SEQUENCE, Format.LUNATIC);
+        // Then
+        Optional<NumericQuestion> hoursQuestion = enoQuestionnaire.getSingleResponseQuestions().stream()
+                .filter(NumericQuestion.class::isInstance)
+                .map(NumericQuestion.class::cast)
+                .filter(singleResponseQuestion -> EnoAddResponseTimeSection.HOURS_QUESTION_ID.equals(singleResponseQuestion.getId()))
+                .findAny();
+        assertTrue(hoursQuestion.isPresent());
+        String expected = "\"➡ 1\\. \" || " + EnoAddResponseTimeSection.RESPONSE_TIME_QUESTION_LABEL;
+        assertEquals(expected, hoursQuestion.get().getLabel().getValue());
+    }
+
+    private static EnoQuestionnaire applyResponseTimeQuestionStep(boolean arrowCharInQuestions,
+                                                                  EnoParameters.QuestionNumberingMode questionNumberingMode,
+                                                                  Format outFormat) {
+        // Given
+        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
+        enoQuestionnaire.setIndex(new EnoIndex());
+        EnoAddPrefixInQuestionLabels prefixingStep = new EnoAddPrefixInQuestionLabels(
+                arrowCharInQuestions, questionNumberingMode, EnoParameters.ModeParameter.PROCESS, outFormat);
+        prefixingStep.apply(enoQuestionnaire);
+        EnoAddResponseTimeSection processing = new EnoAddResponseTimeSection(prefixingStep);
+        // When
+        processing.apply(enoQuestionnaire);
+        return enoQuestionnaire;
     }
 
     @Test

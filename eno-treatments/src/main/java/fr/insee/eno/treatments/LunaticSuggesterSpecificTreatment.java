@@ -39,12 +39,8 @@ public class LunaticSuggesterSpecificTreatment implements ProcessingStep<Questio
      */
     private void transformComponentsToSuggesters(List<ComponentType> components) {
         enoSuggesters.forEach(enoSuggester -> {
-            components.stream()
-                    .filter(component -> shouldApplySuggester(component, enoSuggester))
-                    .forEach(component -> {
-                        component.setComponentType(ComponentTypeEnum.SUGGESTER);
-                        component.setStoreName(enoSuggester.getName());
-                    });
+
+            components.forEach(component -> applySuggesterProperties(component, enoSuggester));
 
             components.stream()
                     .filter(component -> component.getComponentType().equals(ComponentTypeEnum.LOOP))
@@ -55,15 +51,23 @@ public class LunaticSuggesterSpecificTreatment implements ProcessingStep<Questio
 
 
     /**
-     * check if suggester can be applied to specific component.
+     * Checks if suggester can be applied to specific component,
+     * and sets suggester properties to this component if so.
      * @param component component to check
-     * @param suggester suggester to apply
+     * @param enoSuggester suggester to apply
      */
-    private boolean shouldApplySuggester(ComponentType component, EnoSuggesterType suggester) {
-        if(component instanceof ComponentSimpleResponseType simpleResponse) {
+    private static void applySuggesterProperties(ComponentType component, EnoSuggesterType enoSuggester) {
+        // Component to be replaced by a suggester component must be a simple response component
+        if (component instanceof ComponentSimpleResponseType simpleResponse) {
             String responseName = simpleResponse.getResponse().getName();
-            return suggester.getResponseNames().contains(responseName);
+            if (enoSuggester.getResponseNames().contains(responseName)) {
+                component.setComponentType(ComponentTypeEnum.SUGGESTER);
+                component.setStoreName(enoSuggester.getName());
+            }
         }
-        return false;
+        // If Lunatic V3 question processing has been applied, look at the component within the question
+        if (component instanceof Question question)
+            applySuggesterProperties(question.getComponents().getFirst(), enoSuggester);
     }
+
 }
