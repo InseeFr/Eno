@@ -44,6 +44,7 @@ public class LunaticProcessing {
                 .then(new LunaticLoopResolution(enoQuestionnaire))
                 .then(new LunaticTableProcessing(enoQuestionnaire))
                 .then(new LunaticInsertUniqueChoiceDetails(enoQuestionnaire))
+                .then(new LunaticDropdownLabels()) // this step should be temporary
                 .then(new LunaticSuggestersConfiguration(enoQuestionnaire))
                 .then(new LunaticVariablesDimension(enoQuestionnaire))
                 .thenIf(lunaticParameters.isMissingVariables(),
