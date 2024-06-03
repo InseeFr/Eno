@@ -38,7 +38,7 @@ class EnoAddCommentSectionTest {
         enoQuestionnaire.getSingleResponseQuestions().add(question);
         //
         EnoAddPrefixInQuestionLabels prefixingStep = new EnoAddPrefixInQuestionLabels(
-                true, EnoParameters.QuestionNumberingMode.ALL, EnoParameters.ModeParameter.PROCESS);
+                true, EnoParameters.QuestionNumberingMode.ALL, EnoParameters.ModeParameter.PROCESS, null);
         prefixingStep.apply(enoQuestionnaire);
 
         // When
