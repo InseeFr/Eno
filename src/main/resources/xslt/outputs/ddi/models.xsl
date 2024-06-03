@@ -686,6 +686,33 @@
         </d:InterviewerInstructionReference>
     </xsl:template>
 
+    <xsl:template match="driver-CellLabel//*" mode="model" priority="3"/>
+    
+    <xsl:template match="driver-CellLabel//ResponseDomain" mode="model" priority="4">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="cell-label" select="enoddi33:get-cell-label($source-context)"/>
+        <xsl:variable name="cell-filter" select="enoddi33:get-cell-filter($source-context)"/>
+        <xsl:if test="$cell-label != '' or $cell-filter != ''">
+            <d:CellLabel>
+                <xsl:if test="$cell-filter != ''">
+                    <r:Content textFormat="VTL"><xsl:value-of select="$cell-filter"/></r:Content>
+                </xsl:if>
+                <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
+                    <xsl:value-of select="$cell-label"/>
+                </r:Content>
+                <r:TypeOfLabel>fixedcell</r:TypeOfLabel>
+                <d:GridAttachment>
+                    <d:CellCoordinatesAsDefined>
+                        <xsl:for-each select="enoddi33:get-cell-coordinates($source-context)">
+                            <d:SelectDimension rank="{position()}" rangeMinimum="{.}" rangeMaximum="{.}"/>
+                        </xsl:for-each>
+                    </d:CellCoordinatesAsDefined>
+                </d:GridAttachment>
+            </d:CellLabel>            
+        </xsl:if>
+    </xsl:template>
+
     <xsl:template match="driver-ExternalAid//*" mode="model" priority="3"/>
 
     <xsl:template match="driver-ExternalAid//FlowControl" mode="model" priority="4">
@@ -1770,6 +1797,10 @@
              <xsl:apply-templates select="$source-context" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-ResponseDomain', .)" tunnel="yes"/>
              </xsl:apply-templates>
+            <!-- here for CellLabel -->
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="eno:append-empty-element('driver-CellLabel', .)" tunnel="yes"/>
+            </xsl:apply-templates>
             <!--External-Aid part - Used to store specific Pogues UI element -->
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-ExternalAid', .)" tunnel="yes"/>
