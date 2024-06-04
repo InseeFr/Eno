@@ -1,5 +1,12 @@
 # Eno Releases note
 
+## [v2.9.4] - 2024-06-04
+### :bug: Bug Fixes
+- [`632c7f7`](https://github.com/InseeFr/Eno/commit/632c7f728f65a16b515581e7e652b94a23919b4a) - celllabel address for nodatabydefinition, Label instead of AlternativeLabel *(PR [#1027](https://github.com/InseeFr/Eno/pull/1027) by [@BulotF](https://github.com/BulotF))*
+
+### :memo: Documentation Changes
+
+
 ## [v2.9.3] - 2024-06-03
 ### :sparkles: New Features
 - [`ef0fc8e`](https://github.com/InseeFr/Eno/commit/ef0fc8e1ec1e570fd5e8a6690d32dc145a73d2d3) - manage cell label *(PR [#988](https://github.com/InseeFr/Eno/pull/988) by [@BulotF](https://github.com/BulotF))*
@@ -288,3 +295,4 @@
 [v2.9.1]: https://github.com/InseeFr/Eno/compare/v2.8.2...v2.9.1
 [v2.9.2]: https://github.com/InseeFr/Eno/compare/v2.9.1...v2.9.2
 [v2.9.3]: https://github.com/InseeFr/Eno/compare/v2.9.2...v2.9.3
+[v2.9.4]: https://github.com/InseeFr/Eno/compare/v2.9.3...v2.9.4
