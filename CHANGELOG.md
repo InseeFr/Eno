@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.21.8] - 2024-06-05
+### :bug: Bug Fixes
+- [`690f72e`](https://github.com/InseeFr/Eno/commit/690f72e341e3765b446942015ac71f5599e92551) - lunatic question numbering *(PR [#1023](https://github.com/InseeFr/Eno/pull/1023) by [@nsenave](https://github.com/nsenave))*
+- [`383fa88`](https://github.com/InseeFr/Eno/commit/383fa886e6404d0fe317bc590720a50458227c88) - lunatic dropdown label type *(PR [#1024](https://github.com/InseeFr/Eno/pull/1024) by [@nsenave](https://github.com/nsenave))*
+- [`f785cc4`](https://github.com/InseeFr/Eno/commit/f785cc498f2cf2bdbc321a97f7ef90624c2125aa) - suggester specific treatment dsfr *(PR [#1025](https://github.com/InseeFr/Eno/pull/1025) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.21.5] - 2024-05-21
 ### :sparkles: New Features
 - [`80e8e8a`](https://github.com/InseeFr/Eno/commit/80e8e8a922b7a7bfadf9f74eec7ca8ebef93885d) - lunatic dsfr question component *(PR [#987](https://github.com/InseeFr/Eno/pull/987) by [@nsenave](https://github.com/nsenave))*
@@ -188,3 +195,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.18.5]: https://github.com/InseeFr/Eno/compare/3.18.2...3.18.5
 [3.19.4]: https://github.com/InseeFr/Eno/compare/3.18.5...3.19.4
 [3.21.5]: https://github.com/InseeFr/Eno/compare/3.19.4...3.21.5
+[3.21.8]: https://github.com/InseeFr/Eno/compare/3.21.5...3.21.8
