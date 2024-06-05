@@ -2445,38 +2445,6 @@
       <text:p>Returns the label of the cell</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>pogues:Response[not(../pogues:ResponseStructure/pogues:Attribute[pogues:AttributeValue=&apos;NoDataByDefinition&apos; and pogues:AttributeTarget = current()/../pogues:ResponseStructure/pogues:Mapping[pogues:MappingSource = current()/@id]/pogues:MappingTarget])]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
-      <text:p>enopogues:get-cell-label</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>../pogues:ResponseStructure/pogues:Mapping[pogues:MappingSource = current()/@id]/pogues:AlternativeLabel</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>id-variable</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
-      <text:p>Returns the label of the cell</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>pogues:Response[../pogues:ResponseStructure]</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enopogues:get-cell-filter</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>../pogues:ResponseStructure/pogues:Mapping[pogues:MappingSource = current()/@id]/pogues:Filter</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
-      <text:p>Returns the filter for the collected variable in the cell</text:p>
-     </table:table-cell>
-    </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="36">
      <table:table-cell table:number-columns-repeated="5"/>
     </table:table-row>

@@ -692,12 +692,8 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="cell-label" select="enoddi33:get-cell-label($source-context)"/>
-        <xsl:variable name="cell-filter" select="enoddi33:get-cell-filter($source-context)"/>
-        <xsl:if test="$cell-label != '' or $cell-filter != ''">
+        <xsl:if test="$cell-label != ''">
             <d:CellLabel>
-                <xsl:if test="$cell-filter != ''">
-                    <r:Content textFormat="VTL"><xsl:value-of select="$cell-filter"/></r:Content>
-                </xsl:if>
                 <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
                     <xsl:value-of select="$cell-label"/>
                 </r:Content>
