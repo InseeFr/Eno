@@ -2437,15 +2437,12 @@
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>../pogues:ResponseStructure/pogues:Attribute[pogues:AttributeValue=&apos;NoDataByDefinition&apos; and pogues:AttributeTarget = current()/../pogues:ResponseStructure/pogues:Mapping[pogues:MappingSource = current()/@id]/pogues:MappingTarget]/pogues:Label</text:p>
-<<<<<<< fix-nodata-celllabel
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>id-variable</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
       <text:p>Returns the label of the cell</text:p>
-=======
->>>>>>> v2-main
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
