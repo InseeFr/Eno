@@ -22,6 +22,7 @@ public class DDIInProcessing {
                 .then(new DDIInsertDeclarations(enoIndex))
                 .then(new DDIInsertControls())
                 .then(new DDIDeserializeSuggesterConfiguration())
+                .then(new DDIInsertNoDataCellLabels())
                 .then(new DDIInsertCodeLists());
         //
         EnoCatalog enoCatalog = new EnoCatalog(enoQuestionnaire);
