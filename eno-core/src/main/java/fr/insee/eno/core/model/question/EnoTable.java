@@ -1,6 +1,8 @@
 package fr.insee.eno.core.model.question;
 
 import fr.insee.eno.core.model.code.CodeList;
+import fr.insee.eno.core.model.question.table.CellLabel;
+import fr.insee.eno.core.model.question.table.NoDataCell;
 import fr.insee.eno.core.model.question.table.TableCell;
 
 import java.util.List;
@@ -15,6 +17,8 @@ public interface EnoTable {
     void setHeader(CodeList codeList);
     List<String> getVariableNames();
     List<TableCell> getTableCells();
+    List<NoDataCell> getNoDataCells();
+    List<CellLabel> getCellLabels();
 
     // No left column since it is not a property of dynamic tables
 
