@@ -6,10 +6,7 @@ import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.lunatic.model.flat.ComponentType;
-import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.RosterForLoop;
-import fr.insee.lunatic.model.flat.Table;
+import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -39,7 +36,9 @@ class LunaticTableProcessingTest {
         Table table = assertInstanceOf(Table.class, components.get("lx1jpb68"));
         assertEquals(2, table.getBodyLines().size());
         table.getBodyLines().forEach(bodyLine ->
-                assertEquals(3, bodyLine.getBodyCells().size()));
+                assertEquals(4, bodyLine.getBodyCells().size()));
+        assertEquals(ComponentTypeEnum.TEXT, table.getBodyLines().get(1).getBodyCells().get(2).getComponentType());
+        assertEquals(ComponentTypeEnum.TEXT, table.getBodyLines().get(0).getBodyCells().get(3).getComponentType());
         //
         RosterForLoop fixedSizeRoster = assertInstanceOf(RosterForLoop.class, components.get("lwys4n6q"));
         //
