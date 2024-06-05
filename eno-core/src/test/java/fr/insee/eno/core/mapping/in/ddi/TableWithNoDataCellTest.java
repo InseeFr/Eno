@@ -37,7 +37,7 @@ class TableWithNoDataCellTest {
         TableQuestion tableQuestion = assertInstanceOf(TableQuestion.class,
                 enoQuestionnaire.getMultipleResponseQuestions().getFirst());
         //
-        assertEquals(4, tableQuestion.getTableCells().size());
+        assertEquals(4, tableQuestion.getResponseCells().size());
         //
         assertEquals(2, tableQuestion.getNoDataCells().size());
         assertEquals(2, tableQuestion.getNoDataCells().get(0).getRowNumber());
@@ -63,7 +63,7 @@ class TableWithNoDataCellTest {
         DynamicTableQuestion tableQuestion = assertInstanceOf(DynamicTableQuestion.class,
                 enoQuestionnaire.getMultipleResponseQuestions().get(1));
         //
-        assertEquals(2, tableQuestion.getTableCells().size());
+        assertEquals(2, tableQuestion.getResponseCells().size());
         //
         assertEquals(2, tableQuestion.getNoDataCells().size());
         assertEquals(1, tableQuestion.getNoDataCells().get(0).getRowNumber());
@@ -89,7 +89,7 @@ class TableWithNoDataCellTest {
         DynamicTableQuestion tableQuestion = assertInstanceOf(DynamicTableQuestion.class,
                 enoQuestionnaire.getMultipleResponseQuestions().get(2));
         //
-        assertEquals(2, tableQuestion.getTableCells().size());
+        assertEquals(2, tableQuestion.getResponseCells().size());
         //
         assertEquals(2, tableQuestion.getNoDataCells().size());
         assertEquals(1, tableQuestion.getNoDataCells().get(0).getRowNumber());

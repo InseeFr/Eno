@@ -4,6 +4,7 @@ import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.ComplexMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.EnoTable;
+import fr.insee.eno.core.model.question.table.ResponseCell;
 import fr.insee.eno.core.model.question.table.TableCell;
 import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.processing.ProcessingStep;
@@ -27,32 +28,32 @@ public class DDIInsertResponseInTableCells implements ProcessingStep<EnoQuestion
     }
 
     private void insertResponsesInCells(EnoTable enoTable) {
-        insertResponsesInCells(enoTable.getTableCells(), enoTable.getVariableNames(), enoTable.getId());
+        insertResponsesInCells(enoTable.getResponseCells(), enoTable.getVariableNames(), enoTable.getId());
     }
 
     private void insertResponsesInCells(ComplexMultipleChoiceQuestion enoComplexMCQ) {
-        insertResponsesInCells(enoComplexMCQ.getTableCells(), enoComplexMCQ.getVariableNames(), enoComplexMCQ.getId());
+        insertResponsesInCells(enoComplexMCQ.getResponseCells(), enoComplexMCQ.getVariableNames(), enoComplexMCQ.getId());
     }
 
     /**
      * Insert the response name property in table cells, using the ordered list of variable names.
-     * @param tableCells List of Eno table cells objects.
+     * @param responseCells List of Eno table cells objects.
      * @param variableNames List of variable names such as its n-th value is the response name of the n-th table cell.
      * @param questionId The identifier of the question object holding the table cells (for logging purposes).
      */
-    private void insertResponsesInCells(List<TableCell> tableCells, List<String> variableNames, String questionId) {
-        int cellsCount = tableCells.size();
+    private void insertResponsesInCells(List<ResponseCell> responseCells, List<String> variableNames, String questionId) {
+        int cellsCount = responseCells.size();
         int variableNamesCount = variableNames.size();
         if (cellsCount != variableNamesCount)
             throw new MappingException(String.format(
                     "Table question '%s' mapped from DDI has %s cells and %s response names (the two must be equal).",
                     questionId, cellsCount, variableNamesCount));
         for (int k = 0; k< cellsCount; k++) {
-            TableCell tableCell = tableCells.get(k);
+            ResponseCell responseCell = responseCells.get(k);
             String variableName = variableNames.get(k);
             Response response = new Response();
             response.setVariableName(variableName);
-            tableCell.setResponse(response);
+            responseCell.setResponse(response);
         }
     }
 

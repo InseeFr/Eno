@@ -15,7 +15,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @Setter
 @Context(format = Format.DDI, type = GridResponseDomainInMixedType.class)
 @Context(format = Format.LUNATIC, type = BodyCell.class)
-public class BooleanCell extends TableCell {
+public class BooleanCell extends ResponseCell {
 
     @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     String lunaticComponentType = "CHECKBOX_BOOLEAN";

@@ -8,7 +8,7 @@ import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.navigation.Binding;
 import fr.insee.eno.core.model.question.table.CellLabel;
 import fr.insee.eno.core.model.question.table.NoDataCell;
-import fr.insee.eno.core.model.question.table.TableCell;
+import fr.insee.eno.core.model.question.table.ResponseCell;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.Table;
 import lombok.Getter;
@@ -82,9 +82,9 @@ public class TableQuestion extends MultipleResponseQuestion implements EnoTable 
     @DDI("getBindingArray()")
     List<Binding> bindings = new ArrayList<>();
 
-    /** Table cells. */
+    /** Response cells. */
     @DDI("getStructuredMixedGridResponseDomain().getGridResponseDomainInMixedList()")
-    List<TableCell> tableCells = new ArrayList<>();
+    List<ResponseCell> responseCells = new ArrayList<>();
 
     /** No data cells */
     @DDI("getStructuredMixedGridResponseDomain().getNoDataByDefinitionList()")

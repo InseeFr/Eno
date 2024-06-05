@@ -6,6 +6,7 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.lunatic.model.flat.BodyCell;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,9 +17,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Context(format = Format.DDI, type = GridAttachmentType.class)
-public class NoDataCell extends EnoObject {
+@Context(format = Format.LUNATIC, type = BodyCell.class)
+public class NoDataCell extends EnoObject implements TableCell {
 
-    // TODO: creating a ResponseCell that extends TableCell and make this class also extend it would avoid code duplication.
+    /** Identifier of the no data cell. **/
+    @Lunatic("setId(#param)")
+    String id;
+
+    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
+    String lunaticComponentType = "TEXT";
 
     /** Row position in the table. Starts at 1. */
     @DDI("T(fr.insee.eno.core.model.question.table.TableCell).convertDDIDimension(#this, 1)")

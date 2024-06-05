@@ -30,8 +30,8 @@ public class DynamicTableQuestionProcessing {
         lines.setMax(maxLabel);
         lunaticRoster.setLines(lines);
 
-        for (TableCell enoCell : enoTable.getTableCells()) {
-            BodyCell lunaticCell = TableQuestionProcessing.convertEnoCell(enoCell);
+        for (TableCell enoCell : enoTable.getResponseCells()) {
+            BodyCell lunaticCell = TableQuestionProcessing.convertResponseCell(enoCell);
             lunaticRoster.getComponents().add(lunaticCell);
         }
     }
