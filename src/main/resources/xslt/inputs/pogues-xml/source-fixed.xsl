@@ -235,7 +235,7 @@
         <xsl:sequence select="//pogues:Variable[@id = $idVariable]"/>
     </xsl:template>
 
-    <xsl:template match="pogues:Expression | pogues:Formula | pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label | pogues:Maximum[parent::pogues:Loop] | pogues:Minimum[parent::pogues:Loop] | pogues:Filter[parent::pogues:Loop]" mode="enopogues:get-related-variable">
+    <xsl:template match="pogues:Expression | pogues:Formula | pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label | pogues:Loop/pogues:Maximum | pogues:Loop/pogues:Minimum | pogues:Loop/pogues:Filter" mode="enopogues:get-related-variable">
         <xsl:variable name="expressionVariable" select="tokenize(., '\$')"/>
         <xsl:variable name="variables" select="//pogues:Variables"/>
 

@@ -1530,18 +1530,6 @@
       <text:p>Returns the label of the cell</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi33:get-cell-filter</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enopogues:get-cell-filter</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
-      <text:p>Returns the filter for the collected variable in the cell</text:p>
-     </table:table-cell>
-    </table:table-row>
    </table:table>
    <table:named-expressions/>
    <table:database-ranges>
