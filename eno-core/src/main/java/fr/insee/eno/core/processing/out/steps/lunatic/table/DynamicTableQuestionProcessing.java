@@ -5,6 +5,10 @@ import fr.insee.eno.core.model.question.table.TableCell;
 import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 /** Class that holds the conversion logic between model dynamic tables and Lunatic 'roster' tables. */
 @Slf4j
 public class DynamicTableQuestionProcessing {
@@ -30,8 +34,12 @@ public class DynamicTableQuestionProcessing {
         lines.setMax(maxLabel);
         lunaticRoster.setLines(lines);
 
-        for (TableCell enoCell : enoTable.getResponseCells()) {
-            BodyCell lunaticCell = TableQuestionProcessing.convertResponseCell(enoCell);
+        List<TableCell> enoTableCells = new ArrayList<>();
+        enoTableCells.addAll(enoTable.getResponseCells());
+        enoTableCells.addAll(enoTable.getNoDataCells());
+        enoTableCells.sort(Comparator.comparing(TableCell::getColumnNumber));
+        for (TableCell enoCell : enoTableCells) {
+            BodyCell lunaticCell = TableQuestionProcessing.convertEnoCell(enoCell);
             lunaticRoster.getComponents().add(lunaticCell);
         }
     }

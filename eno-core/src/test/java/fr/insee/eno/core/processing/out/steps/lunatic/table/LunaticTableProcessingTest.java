@@ -50,9 +50,25 @@ class LunaticTableProcessingTest {
 
         //
         RosterForLoop fixedSizeRoster = assertInstanceOf(RosterForLoop.class, components.get("lwys4n6q"));
+        assertEquals(4, fixedSizeRoster.getComponents().size());
+        // Non collected columns
+        assertEquals(ComponentTypeEnum.TEXT, fixedSizeRoster.getComponents().get(2).getComponentType());
+        assertEquals(ComponentTypeEnum.TEXT, fixedSizeRoster.getComponents().get(3).getComponentType());
+        assertEquals("\"Foo\"", fixedSizeRoster.getComponents().get(2).getLabel().getValue());
+        assertEquals("Q1", fixedSizeRoster.getComponents().get(3).getLabel().getValue().stripTrailing());
+        assertEquals(LabelTypeEnum.VTL_MD, fixedSizeRoster.getComponents().get(2).getLabel().getType());
+        assertEquals(LabelTypeEnum.VTL_MD, fixedSizeRoster.getComponents().get(3).getLabel().getType());
 
         //
         RosterForLoop dynamicRoster = assertInstanceOf(RosterForLoop.class, components.get("lx1jrc4l"));
+        assertEquals(4, dynamicRoster.getComponents().size());
+        // Non collected columns
+        assertEquals(ComponentTypeEnum.TEXT, dynamicRoster.getComponents().get(2).getComponentType());
+        assertEquals(ComponentTypeEnum.TEXT, dynamicRoster.getComponents().get(3).getComponentType());
+        assertEquals("\"Bar\"", dynamicRoster.getComponents().get(2).getLabel().getValue());
+        assertEquals("Q1", dynamicRoster.getComponents().get(3).getLabel().getValue().stripTrailing());
+        assertEquals(LabelTypeEnum.VTL_MD, dynamicRoster.getComponents().get(2).getLabel().getType());
+        assertEquals(LabelTypeEnum.VTL_MD, dynamicRoster.getComponents().get(3).getLabel().getType());
     }
 
 }

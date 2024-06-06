@@ -48,7 +48,7 @@ public class TableQuestionProcessing {
         for (int i=0; i<enoCellMatrix.length; i++) {
             for (int j=0; j<enoCellMatrix[i].length; j++) {
                 TableCell enoCell = enoCellMatrix[i][j];
-                BodyCell lunaticCell = convertResponseCell(enoCell);
+                BodyCell lunaticCell = convertEnoCell(enoCell);
                 lunaticTable.getBodyLines().get(i).getBodyCells().add(lunaticCell);
             }
         }
@@ -57,7 +57,7 @@ public class TableQuestionProcessing {
 
     /** Uses eno cell and variable name give + annotations on the TableCell classes
      * to return a fulfilled BodyCell object. */
-    public static BodyCell convertResponseCell(TableCell enoCell) {
+    public static BodyCell convertEnoCell(TableCell enoCell) {
         BodyCell bodyCell = new BodyCell();
         new LunaticMapper().mapEnoObject((EnoObject) enoCell, bodyCell);
         return bodyCell;

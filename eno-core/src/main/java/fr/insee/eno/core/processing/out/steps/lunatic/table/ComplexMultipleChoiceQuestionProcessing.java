@@ -26,7 +26,7 @@ public class ComplexMultipleChoiceQuestionProcessing {
         for (int i = 0; i < enoMCQ.getResponseCells().size(); i++) {
             BodyLine lunaticLine = lunaticBody.get(i);
             TableCell enoCell = enoMCQ.getResponseCells().get(i);
-            BodyCell lunaticCell = TableQuestionProcessing.convertResponseCell(enoCell);
+            BodyCell lunaticCell = TableQuestionProcessing.convertEnoCell(enoCell);
             lunaticLine.getBodyCells().add(lunaticCell);
         }
 
