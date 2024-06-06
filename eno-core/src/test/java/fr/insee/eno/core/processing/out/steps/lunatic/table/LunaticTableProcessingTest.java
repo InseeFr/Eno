@@ -32,15 +32,25 @@ class LunaticTableProcessingTest {
         // Then
         Map<String, ComponentType> components = new HashMap<>();
         lunaticQuestionnaire.getComponents().forEach(component -> components.put(component.getId(), component));
+
         //
         Table table = assertInstanceOf(Table.class, components.get("lx1jpb68"));
         assertEquals(2, table.getBodyLines().size());
         table.getBodyLines().forEach(bodyLine ->
                 assertEquals(4, bodyLine.getBodyCells().size()));
-        assertEquals(ComponentTypeEnum.TEXT, table.getBodyLines().get(1).getBodyCells().get(2).getComponentType());
-        assertEquals(ComponentTypeEnum.TEXT, table.getBodyLines().get(0).getBodyCells().get(3).getComponentType());
+        // Non-collected cells
+        BodyCell cell12 = table.getBodyLines().get(1).getBodyCells().get(2);
+        BodyCell cell03 = table.getBodyLines().get(0).getBodyCells().get(3);
+        assertEquals(ComponentTypeEnum.TEXT, cell12.getComponentType());
+        assertEquals(ComponentTypeEnum.TEXT, cell03.getComponentType());
+        assertEquals("\"20\"", cell12.getLabel().getValue());
+        assertEquals("\"Fixed value for A: \" || Q1", cell03.getLabel().getValue().stripTrailing());
+        assertEquals(LabelTypeEnum.VTL_MD, cell12.getLabel().getType());
+        assertEquals(LabelTypeEnum.VTL_MD, cell03.getLabel().getType());
+
         //
         RosterForLoop fixedSizeRoster = assertInstanceOf(RosterForLoop.class, components.get("lwys4n6q"));
+
         //
         RosterForLoop dynamicRoster = assertInstanceOf(RosterForLoop.class, components.get("lx1jrc4l"));
     }
