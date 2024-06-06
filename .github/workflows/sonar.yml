@@ -25,17 +25,6 @@ jobs:
           java-version: 21
           distribution: 'temurin'
 
-      # Temporary step while InseeFr gpg key for maven central publishing has not been replaced
-      - name: Checkout Lunatic-Model repo
-        uses: actions/checkout@v4
-        with:
-          repository: InseeFr/Lunatic-Model
-          path: lunatic-model
-      - name: Install Lunatic-Model
-        run: |
-          cd lunatic-model
-          mvn clean install --no-transfer-progress
-
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis

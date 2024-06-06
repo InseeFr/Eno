@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @Context(format = Format.DDI, type = GridResponseDomainInMixedType.class)
 @Context(format = Format.LUNATIC, type = BodyCell.class)
-public class DateCell extends TableCell {
+public class DateCell extends ResponseCell {
 
     @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     String lunaticComponentType = "DATEPICKER";

@@ -8,9 +8,11 @@ import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.declaration.Instruction;
 import fr.insee.eno.core.model.label.EnoLabel;
 import fr.insee.eno.core.model.navigation.Control;
+import fr.insee.eno.core.model.question.DynamicTableQuestion;
+import fr.insee.eno.core.model.question.EnoTable;
 import fr.insee.eno.core.model.question.Question;
-import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
-import fr.insee.eno.core.model.response.CodeResponse;
+import fr.insee.eno.core.model.question.TableQuestion;
+import fr.insee.eno.core.model.question.table.NoDataCell;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.Subsequence;
@@ -97,6 +99,10 @@ public class EnoCatalog {
         // Controls
         this.getQuestions().forEach(enoQuestion ->
                 labels.addAll(enoQuestion.getControls().stream().map(Control::getMessage).toList()));
+        // Cell label in no data cells
+        enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .filter(question -> question instanceof TableQuestion || question instanceof DynamicTableQuestion)
+                .map(EnoTable.class::cast).map(EnoTable::getNoDataCells).forEach(this::gatherLabelsFromNoDataCells);
         // Code lists
         enoQuestionnaire.getCodeLists().stream().map(CodeList::getCodeItems).forEach(this::gatherLabelsFromCodeItems);
     }
@@ -106,6 +112,12 @@ public class EnoCatalog {
             labels.add(codeItem.getLabel());
             // Recursive call in case of nested code items
             gatherLabelsFromCodeItems(codeItem.getCodeItems());
+        }
+    }
+
+    private void gatherLabelsFromNoDataCells(List<NoDataCell> noDataCells) {
+        for (NoDataCell noDataCell : noDataCells) {
+            labels.add(noDataCell.getCellLabel());
         }
     }
 
