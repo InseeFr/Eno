@@ -199,11 +199,12 @@ class DDIResolveVariableReferencesInLabelsTest {
         // Then
         List<EnoTable> tableQuestions = enoQuestionnaire.getMultipleResponseQuestions().stream()
                 .map(EnoTable.class::cast).toList();
-        // TODO: waiting a fix in the generated DDI to have the correct values
-        assertEquals("\"Fixed value for A: \" || $Q1$\"",
-                tableQuestions.get(0).getNoDataCells().get(1).getCellLabel().getValue());
-        assertEquals("\"$Q1$\"", tableQuestions.get(1).getNoDataCells().get(1).getCellLabel().getValue());
-        assertEquals("\"$Q1$\"", tableQuestions.get(2).getNoDataCells().get(1).getCellLabel().getValue());
+        //
+        assertEquals("\"Fixed value for A: \" || Q1",
+                tableQuestions.get(0).getNoDataCells().get(1).getCellLabel().getValue().stripTrailing());
+        assertEquals("Q1", tableQuestions.get(1).getNoDataCells().get(1).getCellLabel().getValue().stripTrailing());
+        assertEquals("Q1", tableQuestions.get(2).getNoDataCells().get(1).getCellLabel().getValue().stripTrailing());
+        // strip trailing since extra whitespace can be added at some point which is not a problem
     }
 
 }
