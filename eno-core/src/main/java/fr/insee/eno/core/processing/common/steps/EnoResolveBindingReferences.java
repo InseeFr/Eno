@@ -1,5 +1,6 @@
 package fr.insee.eno.core.processing.common.steps;
 
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoComponent;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.BindingReference;
@@ -53,6 +54,10 @@ public class EnoResolveBindingReferences implements ProcessingStep<EnoQuestionna
         //
         for (BindingReference bindingReference : initialBindingReferences) {
             Variable variable = variableMap.get(bindingReference.getVariableName());
+            if (variable == null)
+                throw new MappingException(String.format(
+                        "Unable to retrieve the variable '%s' when resolving dependencies of calculated variable '%s'.",
+                        bindingReference.getVariableName(), calculatedVariable.getName()));
             if (Variable.CollectionType.CALCULATED.equals(variable.getCollectionType())) {
                 insertReferences(((CalculatedVariable) variable).getExpression().getBindingReferences(), expression);
             }

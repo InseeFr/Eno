@@ -15,7 +15,7 @@ import java.math.BigInteger;
 @Setter
 @Context(format = Format.DDI, type = GridResponseDomainInMixedType.class)
 @Context(format = Format.LUNATIC, type = BodyCell.class)
-public class NumericCell extends TableCell {
+public class NumericCell extends ResponseCell {
 
     @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     String lunaticComponentType = "INPUT_NUMBER";

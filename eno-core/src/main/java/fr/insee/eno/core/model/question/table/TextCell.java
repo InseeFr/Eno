@@ -16,7 +16,7 @@ import java.math.BigInteger;
 @Setter
 @Context(format = Format.DDI, type = GridResponseDomainInMixedType.class)
 @Context(format = Format.LUNATIC, type = BodyCell.class)
-public class TextCell extends TableCell {
+public class TextCell extends ResponseCell {
 
     @DDI("getResponseDomain().getMaxLength().intValue()")
     @Lunatic("setMaxLength(#param)")
