@@ -5,6 +5,7 @@ import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.label.Label;
+import fr.insee.eno.core.model.question.EnoTable;
 import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.model.sequence.Sequence;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -177,6 +179,32 @@ class DDIResolveVariableReferencesInLabelsTest {
                     mcq2.getCodeResponses().get(1).getLabel().getValue().trim());
         }
 
+    }
+
+    @Test
+    void integrationTestTables() throws DDIParsingException {
+        // Given
+        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
+        DDIMapper ddiMapper = new DDIMapper();
+        ddiMapper.mapDDI(
+                DDIDeserializer.deserialize(DDIResolveVariableReferencesInLabelsTest.class.getClassLoader()
+                        .getResourceAsStream("integration/ddi/ddi-no-data-cell.xml")),
+                enoQuestionnaire);
+        new DDIInsertNoDataCellLabels().apply(enoQuestionnaire);
+
+        // When
+        EnoCatalog enoCatalog = new EnoCatalog(enoQuestionnaire);
+        new DDIResolveVariableReferencesInLabels(enoCatalog).apply(enoQuestionnaire);
+
+        // Then
+        List<EnoTable> tableQuestions = enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .map(EnoTable.class::cast).toList();
+        //
+        assertEquals("\"Fixed value for A: \" || Q1",
+                tableQuestions.get(0).getNoDataCells().get(1).getCellLabel().getValue().stripTrailing());
+        assertEquals("Q1", tableQuestions.get(1).getNoDataCells().get(1).getCellLabel().getValue().stripTrailing());
+        assertEquals("Q1", tableQuestions.get(2).getNoDataCells().get(1).getCellLabel().getValue().stripTrailing());
+        // strip trailing since extra whitespace can be added at some point which is not a problem
     }
 
 }

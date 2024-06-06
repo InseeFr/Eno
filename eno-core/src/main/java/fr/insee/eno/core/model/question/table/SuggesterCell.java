@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @Contexts.Context(format = Format.DDI, type = GridResponseDomainInMixedType.class)
 @Contexts.Context(format = Format.LUNATIC, type = BodyCell.class)
-public class SuggesterCell extends TableCell {
+public class SuggesterCell extends ResponseCell {
 
     @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     String lunaticComponentType = "SUGGESTER";

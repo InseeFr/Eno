@@ -13,6 +13,7 @@ import fr.insee.eno.core.model.navigation.Control;
 import fr.insee.eno.core.model.navigation.Loop;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.*;
+import fr.insee.eno.core.model.question.table.CellLabel;
 import fr.insee.eno.core.model.question.table.TableCell;
 import fr.insee.eno.core.model.response.CodeResponse;
 import fr.insee.eno.core.model.response.DetailResponse;
@@ -88,7 +89,7 @@ public class LunaticConverter {
 
     private static boolean isInstanceOfLunaticLAbel(Object enoObject) {
         return enoObject instanceof Label || enoObject instanceof QuestionnaireLabel
-                || enoObject instanceof DynamicLabel
+                || enoObject instanceof DynamicLabel || enoObject instanceof CellLabel
                 || enoObject instanceof CalculatedExpression;
     }
 
