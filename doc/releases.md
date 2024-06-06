@@ -1,5 +1,12 @@
 # Eno Releases note
 
+## [v2.9.6] - 2024-06-06
+### :construction_worker: Build System
+- [`20ef50f`](https://github.com/InseeFr/Eno/commit/20ef50fbea9547b9b6f8aeb1009e7825e51a9cfa) - update dependencies *(PR [#1030](https://github.com/InseeFr/Eno/pull/1030) by [@nsenave](https://github.com/nsenave))*
+
+### :memo: Documentation Changes
+
+
 ## [v2.9.5] - 2024-06-06
 ### :bug: Bug Fixes
 - [`34672c2`](https://github.com/InseeFr/Eno/commit/34672c271a26660bc3651a1c648bf78151cab697) - nodata celllabel *(PR [#1028](https://github.com/InseeFr/Eno/pull/1028) by [@BulotF](https://github.com/BulotF))*
@@ -304,3 +311,4 @@
 [v2.9.3]: https://github.com/InseeFr/Eno/compare/v2.9.2...v2.9.3
 [v2.9.4]: https://github.com/InseeFr/Eno/compare/v2.9.3...v2.9.4
 [v2.9.5]: https://github.com/InseeFr/Eno/compare/v2.9.4...v2.9.5
+[v2.9.6]: https://github.com/InseeFr/Eno/compare/v2.9.5...v2.9.6
