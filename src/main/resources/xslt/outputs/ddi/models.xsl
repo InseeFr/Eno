@@ -53,7 +53,7 @@
                     <r:ID><xsl:value-of select="concat('InterviewerInstructionScheme-', enoddi33:get-id($source-context))"/></r:ID>
                     <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                     <r:Label><r:Content xml:lang="{enoddi33:get-lang($source-context)}">A définir</r:Content></r:Label>
-                    <xsl:apply-templates select="enoddi33:get-instructions($source-context)[not(enoddi33:get-position(.) = 'BEFORE_QUESTION_TEXT')] | enoddi33:get-controls($source-context)" mode="source">
+                    <xsl:apply-templates select="enoddi33:get-instructions($source-context)[not(enoddi33:get-position(.) = 'BEFORE_QUESTION_TEXT')] | enoddi33:get-controls($source-context) | enoddi33:get-roundabouts($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
@@ -80,6 +80,10 @@
                     </d:Sequence>
                     <!--creation of control construct from children (everything since we are at the root node), whose reference were created sooner-->
                     <xsl:apply-templates select="enoddi33:get-sequences($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-ControlConstructScheme', .)" tunnel="yes"/>
+                        <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+                    </xsl:apply-templates>
+                    <xsl:apply-templates select="enoddi33:get-roundabouts($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-ControlConstructScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
@@ -672,6 +676,67 @@
         </d:Instruction>
     </xsl:template>
 
+    <xsl:template match="driver-InterviewerInstructionScheme//Roundabout" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <d:Instruction>
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+            <r:ID><xsl:value-of select="concat(enoddi33:get-id($source-context) , '-OL')"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+            <d:InstructionName>
+                <r:String xml:lang="{enoddi33:get-lang($source-context)}">loop.instanceLabel</r:String>
+            </d:InstructionName>
+            <!-- Adding instruction modes -->
+            <xsl:if test="contains(enoddi33:get-instruction-modes($source-context),'CAWI')">
+                <d:InstructionName>
+                    <r:String xml:lang="{enoddi33:get-lang($source-context)}">SelfAdministeredQuestionnaire.WebBased</r:String>
+                </d:InstructionName>
+            </xsl:if>
+            <xsl:if test="contains(enoddi33:get-instruction-modes($source-context),'PAPI')">
+                <d:InstructionName>
+                    <r:String xml:lang="{enoddi33:get-lang($source-context)}">SelfAdministeredQuestionnaire.Paper</r:String>
+                </d:InstructionName>
+            </xsl:if>
+            <xsl:if test="contains(enoddi33:get-instruction-modes($source-context),'CATI')">
+                <d:InstructionName>
+                    <r:String xml:lang="{enoddi33:get-lang($source-context)}">Interview.Telephone.CATI</r:String>
+                </d:InstructionName>
+            </xsl:if>
+            <xsl:if test="contains(enoddi33:get-instruction-modes($source-context),'CAPI')">
+                <d:InstructionName>
+                    <r:String xml:lang="{enoddi33:get-lang($source-context)}">Interview.FaceToFace.CAPIorCAMI</r:String>
+                </d:InstructionName>
+            </xsl:if>
+            <d:InstructionText>
+                <d:LiteralText>
+                    <d:Text xml:lang="{enoddi33:get-lang($source-context)}">
+                        <xsl:value-of select="enoddi33:get-occurrence-label($source-context)"/>
+                    </d:Text>
+                </d:LiteralText>
+                <xsl:for-each select="enoddi33:get-related-variable($source-context)[enoddi33:get-type(.) = ('CollectedVariableType', 'CalculatedVariableType')]">
+                    <d:ConditionalText>
+                        <r:SourceParameterReference>
+                            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                            <r:ID><xsl:value-of select="enoddi33:get-qop-id(.)"/></r:ID>
+                            <r:Version><xsl:value-of select="enoddi33:get-version(.)"/></r:Version>
+                            <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                        </r:SourceParameterReference>
+                    </d:ConditionalText>
+                </xsl:for-each>
+                <xsl:for-each select="enoddi33:get-related-variable($source-context)[enoddi33:get-type(.) = ('ExternalVariableType')]">
+                    <d:ConditionalText>
+                        <r:SourceParameterReference>
+                            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                            <r:ID><xsl:value-of select="enoddi33:get-name(.)"/></r:ID>
+                            <r:Version><xsl:value-of select="enoddi33:get-version(.)"/></r:Version>
+                            <r:TypeOfObject>InParameter</r:TypeOfObject>
+                        </r:SourceParameterReference>
+                    </d:ConditionalText>
+                </xsl:for-each>
+            </d:InstructionText>
+        </d:Instruction>
+    </xsl:template>
+    
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.3 xsd schema-->
     <xsl:template match="driver-InterviewerInstructionReference//*" mode="model" priority="2"/>
 
@@ -1030,6 +1095,38 @@
         </xsl:if>
     </xsl:template>
 
+    <xsl:template match="driver-ControlConstructScheme//Roundabout" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="idRoundabout" select="enoddi33:get-id($source-context)"/>
+        <d:Sequence>
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+            <r:ID><xsl:value-of select="$idRoundabout"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+            <r:Label>
+                <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
+                    <xsl:value-of select="enoddi33:get-label($source-context)"/>
+                </r:Content>
+            </r:Label>
+            <d:InterviewerInstructionReference>
+                <r:Agency>fr.insee</r:Agency>
+                <r:ID><xsl:value-of select="concat($idRoundabout , '-OL')"/></r:ID>
+                <r:Version>1</r:Version>
+                <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionReference', .)" tunnel="yes"/>
+            </xsl:apply-templates>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-9">
+                <xsl:value-of select="'roundabout'"/>
+            </d:TypeOfSequence>
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+            </xsl:apply-templates>
+        </d:Sequence>
+    </xsl:template>
+    
+
     <xsl:template name="StatementItem" match="driver-StatementItem//Instruction[not(ancestor::driver-InterviewerInstructionReference)]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -1380,27 +1477,36 @@
     <xsl:template match="driver-ControlConstructScheme//IfThenElse | driver-LoopFilter//Loop" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="loop-id">
+            <xsl:if test="name()='Loop'"><xsl:value-of select="enoddi33:get-id($source-context)"/></xsl:if>
+        </xsl:variable>
         <xsl:variable name="id">
             <xsl:choose>
-                <xsl:when test="name()='Loop'"><xsl:value-of select="concat(enoddi33:get-id($source-context),'-ITE')"/></xsl:when>
+                <xsl:when test="name()='Loop'"><xsl:value-of select="concat($loop-id,'-ITE')"/></xsl:when>
                 <xsl:otherwise><xsl:value-of select="enoddi33:get-id($source-context)"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="idSeq">
             <xsl:choose>
-                <xsl:when test="name()='Loop'"><xsl:value-of select="concat($id,'-THEN')"/></xsl:when>
+                <xsl:when test="name()='Loop'"><xsl:value-of select="concat($loop-id,'-ITE-THEN')"/></xsl:when>
                 <xsl:otherwise><xsl:value-of select="enoddi33:get-then-sequence-id($source-context)"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
+
+        <xsl:variable name="excludedOccurrenceLabel" select="enoddi33:get-loop-excluded-occurrence-label($source-context)"/>
 
         <xsl:if test="name()='IfThenElse' or (name()='Loop' and enoddi33:get-loop-filter($source-context) != '')">
             <d:IfThenElse>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="$id"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
-                <r:Label>
-                    <r:Content xml:lang="{enoddi33:get-lang($source-context)}">A définir</r:Content>
-                </r:Label>
+                <xsl:if test="$excludedOccurrenceLabel != ''">
+                    <r:Label>
+                        <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
+                            <xsl:value-of select="$excludedOccurrenceLabel"/>
+                        </r:Content>
+                    </r:Label>
+                </xsl:if>
                 <r:Description>
                     <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
                         <xsl:value-of select="enoddi33:get-description($source-context)"/>
@@ -1444,7 +1550,7 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template name="ControlConstructReference" match="*[name()=('Sequence','IfThenElse','Loop')]//*[name() =('Sequence','IfThenElse','Loop','QuestionMultipleChoice','QuestionSingleChoice','QuestionOtherDetails','QuestionPairwise','QuestionTable','QuestionDynamicTable','QuestionSimple','Control')
+    <xsl:template name="ControlConstructReference" match="*[name()=('Sequence','IfThenElse','Loop','Roundabout')]//*[name() =('Sequence','IfThenElse','Loop','Roundabout','QuestionMultipleChoice','QuestionSingleChoice','QuestionOtherDetails','QuestionPairwise','QuestionTable','QuestionDynamicTable','QuestionSimple','Control')
         and not(ancestor::driver-ManagedRepresentationScheme) and not(ancestor::driver-VariableGroup)]" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
