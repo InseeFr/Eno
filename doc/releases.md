@@ -1,5 +1,9 @@
 # Eno Releases note
 
+## [v2.9.7] - 2024-06-07
+### :memo: Documentation Changes
+
+
 ## [v2.9.6] - 2024-06-06
 ### :construction_worker: Build System
 - [`20ef50f`](https://github.com/InseeFr/Eno/commit/20ef50fbea9547b9b6f8aeb1009e7825e51a9cfa) - update dependencies *(PR [#1030](https://github.com/InseeFr/Eno/pull/1030) by [@nsenave](https://github.com/nsenave))*
@@ -312,3 +316,4 @@
 [v2.9.4]: https://github.com/InseeFr/Eno/compare/v2.9.3...v2.9.4
 [v2.9.5]: https://github.com/InseeFr/Eno/compare/v2.9.4...v2.9.5
 [v2.9.6]: https://github.com/InseeFr/Eno/compare/v2.9.5...v2.9.6
+[v2.9.7]: https://github.com/InseeFr/Eno/compare/v2.9.6...v2.9.7
