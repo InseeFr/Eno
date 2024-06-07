@@ -951,9 +951,6 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>j6p6my1d-a-j6p0np9q</r:ID>
             <r:Version>1</r:Version>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">A définir</r:Content>
-            </r:Label>
             <r:Description>
                <r:Content xml:lang="fr-FR"/>
             </r:Description>
@@ -1011,9 +1008,6 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>j6p6my1d-a-j6p0ti5h</r:ID>
             <r:Version>1</r:Version>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">A définir</r:Content>
-            </r:Label>
             <r:Description>
                <r:Content xml:lang="fr-FR"/>
             </r:Description>

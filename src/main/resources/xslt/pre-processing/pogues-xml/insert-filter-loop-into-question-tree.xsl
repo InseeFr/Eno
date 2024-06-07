@@ -5,6 +5,7 @@
     xmlns:poguesFilterLoop="http://xml.insee.fr/schema/applis/poguesFilterLoop"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     exclude-result-prefixes="xs" version="2.0">
     <xsl:output indent="yes"/>
     <xsl:strip-space elements="*"/>
@@ -31,11 +32,31 @@
                 <xsl:if test="local-name(.)='Child' or local-name(.)='Questionnaire'">
                     <poguesFilterLoop:idElement id="{./@id}" position="{position()}">
                         <poguesFilterLoop:childrenId>
-                            <xsl:for-each select="pogues:Child">
-                                <poguesFilterLoop:childId>
-                                    <xsl:value-of select="./@id"/>
-                                </poguesFilterLoop:childId>
-                            </xsl:for-each>
+                            <xsl:choose>
+                                <xsl:when test="@xsi:type='RoundaboutType'">
+                                    <xsl:variable name="lastRoundaboutElement" select="pogues:Loop/pogues:MemberReference[2]"/>
+                                <xsl:for-each select="following-sibling::pogues:Child[@id = $lastRoundaboutElement
+                                                                                       or following-sibling::pogues:Child/@id = $lastRoundaboutElement]">
+                                        <poguesFilterLoop:childId>
+                                            <xsl:value-of select="./@id"/>
+                                        </poguesFilterLoop:childId>
+                                    </xsl:for-each>
+                                </xsl:when>
+                            <xsl:otherwise>
+                                    <xsl:for-each select="pogues:Child">
+                                        <xsl:variable name="childId" select="@id"/>
+                                        <xsl:if test="not(preceding-sibling::pogues:Child
+                                                          [@xsi:type='RoundaboutType'
+                                                       and pogues:Loop[pogues:MemberReference = $childId 
+                                                                    or pogues:MemberReference = $root//pogues:Child[preceding-sibling::pogues:Child/@id = $childId]/@id]
+                                                          ])">
+                                            <poguesFilterLoop:childId>
+                                                <xsl:value-of select="./@id"/>
+                                            </poguesFilterLoop:childId>
+                                        </xsl:if>
+                                    </xsl:for-each>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </poguesFilterLoop:childrenId>
                     </poguesFilterLoop:idElement>
                 </xsl:if>
@@ -182,6 +203,29 @@
             <xsl:with-param name="stop-position" select="$stop-position"/>
         </xsl:apply-templates>
     </xsl:template>
+
+    <xd:doc>
+        <xd:desc>Roundabout</xd:desc>
+    </xd:doc>
+    <xsl:template match="pogues:Child[@xsi:type='RoundaboutType']" priority="2" mode="first-child-next-brother">
+        <xsl:param name="stop-position"/>
+        
+        <xsl:variable name="roundabout-last-member" select="pogues:Loop/pogues:MemberReference[2]"/>
+        <xsl:copy>
+            <xsl:copy-of select="@* | text() | comment() | processing-instruction() | node()[not(self::pogues:Loop)]"/>
+            <xsl:element name="Loop" namespace="http://xml.insee.fr/schema/applis/pogues">
+                <xsl:attribute name="id" select="concat(@id,'-',pogues:Loop/pogues:Name)"/>
+                <xsl:copy-of select="pogues:Loop/*[not(self::pogues:MemberReference)]"/>
+                <xsl:apply-templates select="following-sibling::node()[1]" mode="first-child-next-brother">
+                    <xsl:with-param name="stop-position" select="$roundabout-last-member"/>
+                </xsl:apply-templates>                
+            </xsl:element>
+        </xsl:copy>
+        <xsl:apply-templates select="following-sibling::pogues:Child[@id = $roundabout-last-member]/following-sibling::*[1]" mode="first-child-next-brother">
+            <xsl:with-param name="stop-position" select="$stop-position"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
 
     <xd:doc>
         Child : Sequence or Question
