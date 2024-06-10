@@ -1,5 +1,9 @@
 # Eno Releases note
 
+## [v2.9.8] - 2024-06-10
+### :memo: Documentation Changes
+
+
 ## [v2.9.7] - 2024-06-07
 ### :memo: Documentation Changes
 
@@ -317,3 +321,4 @@
 [v2.9.5]: https://github.com/InseeFr/Eno/compare/v2.9.4...v2.9.5
 [v2.9.6]: https://github.com/InseeFr/Eno/compare/v2.9.5...v2.9.6
 [v2.9.7]: https://github.com/InseeFr/Eno/compare/v2.9.6...v2.9.7
+[v2.9.8]: https://github.com/InseeFr/Eno/compare/v2.9.7...v2.9.8
