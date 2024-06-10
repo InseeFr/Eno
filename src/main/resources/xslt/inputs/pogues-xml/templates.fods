@@ -2007,6 +2007,18 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Child[@xsi:type=&apos;RoundaboutType&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enopogues:is-sequence</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>&apos;true&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="2"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*[pogues:Text or pogues:FailMessage]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2092,7 +2104,7 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Return questionnaire id</text:p>
+      <text:p>Calculated variable without Scope : Returns questionnaire id</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -2107,7 +2119,7 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Return questionnaire id</text:p>
+      <text:p>External variable without Scope : Returns questionnaire id</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -2122,7 +2134,7 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Return question of type table id</text:p>
+      <text:p>Variable collected in a dynamic array : returns its question id</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -2137,7 +2149,7 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Return questionnaire id</text:p>
+      <text:p>Variable collected out of a dynamic array or a pairwise : returns questionnaire id</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -2152,7 +2164,7 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Return questionnaire id</text:p>
+      <text:p>Variable from a clarification question, collected out of a dynamic array or a pairwise : returns questionnaire id</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -2470,7 +2482,7 @@
       <text:p>enopogues:get-loop-excluded-occurrence-label</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>pogues:ExcludedOccurrenceLabel </text:p>
+      <text:p>pogues:ExcludedOccurrenceLabel</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>id-variable</text:p>
