@@ -1,5 +1,9 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
+import fr.insee.eno.core.DDIToLunatic;
+import fr.insee.eno.core.exceptions.business.DDIParsingException;
+import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.Test;
 
@@ -107,6 +111,32 @@ class LunaticQuestionComponentTest {
         assertEquals(sequence, loop.getComponents().get(0));
         // Input number should be replaced by a Question component
         assertEquals(ComponentTypeEnum.QUESTION, loop.getComponents().get(1).getComponentType());
+    }
+
+    @Test
+    void integrationTestPairwise() throws DDIParsingException {
+        //
+        EnoParameters parameters = EnoParameters.of(
+                EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
+        parameters.getLunaticParameters().setLunaticV3(true);
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-pairwise.xml"),
+                parameters);
+
+        // (This questionnaire has a loop, then a sequence with a single question which is a pairwise question.)
+        Question question = lunaticQuestionnaire.getComponents().stream()
+                .filter(Question.class::isInstance).map(Question.class::cast)
+                .findAny().orElse(null);
+        assertNotNull(question);
+
+        //
+        assertEquals(1, question.getComponents().size());
+        assertNull(question.getLabel());
+        PairwiseLinks pairwiseLinks = assertInstanceOf(PairwiseLinks.class, question.getComponents().getFirst());
+        assertNull(pairwiseLinks.getLabel());
+        assertEquals("\"Pairwise link between \" || xAxis || \" and \" || yAxis",
+                pairwiseLinks.getComponents().getFirst().getLabel().getValue());
+        assertEquals(LabelTypeEnum.VTL_MD, pairwiseLinks.getComponents().getFirst().getLabel().getType());
     }
 
 }
