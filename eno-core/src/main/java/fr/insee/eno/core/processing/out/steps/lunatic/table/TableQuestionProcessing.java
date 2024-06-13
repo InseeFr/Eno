@@ -1,5 +1,6 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.table;
 
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.question.TableQuestion;
@@ -48,6 +49,10 @@ public class TableQuestionProcessing {
         for (int i=0; i<enoCellMatrix.length; i++) {
             for (int j=0; j<enoCellMatrix[i].length; j++) {
                 TableCell enoCell = enoCellMatrix[i][j];
+                if (enoCell == null)
+                    throw new MappingException(String.format(
+                            "Table question '%s' has a null cell at row of index %s and column of index %s.",
+                            enoTable.getName(), i, j));
                 BodyCell lunaticCell = convertEnoCell(enoCell);
                 lunaticTable.getBodyLines().get(i).getBodyCells().add(lunaticCell);
             }
