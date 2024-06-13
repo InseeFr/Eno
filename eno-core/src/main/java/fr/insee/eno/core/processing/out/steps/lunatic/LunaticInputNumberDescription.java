@@ -4,7 +4,10 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.lunatic.model.flat.*;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -19,14 +22,17 @@ public class LunaticInputNumberDescription implements ProcessingStep<Questionnai
     private static final Map<EnoParameters.Language, String> UNIT_DESCRIPTION_PREFIX = Map.of(
             EnoParameters.Language.FR, " en ",
             EnoParameters.Language.EN, " in ");
-    private static final Map<EnoParameters.Language, String> NUMBER_COMMA = Map.of(
-            EnoParameters.Language.FR, ",",
-            EnoParameters.Language.EN, ".");
 
     private final EnoParameters.Language language;
+    private final Locale locale;
 
     public LunaticInputNumberDescription(EnoParameters.Language language) {
         this.language = language;
+        locale = switch (language) {
+            case FR -> Locale.FRENCH;
+            case EN -> Locale.ENGLISH;
+            case IT, ES, DE -> throw new UnsupportedOperationException("Language " + language + " is not supported.");
+        };
     }
 
     @Override
@@ -50,13 +56,14 @@ public class LunaticInputNumberDescription implements ProcessingStep<Questionnai
         //
         String unit = inputNumber.getUnit();
         int decimals = inputNumber.getDecimals() != null ? inputNumber.getDecimals().intValue() : 0;
-        int minValue = inputNumber.getMin().intValue();
-        int maxValue = inputNumber.getMax().intValue();
+        DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getNumberInstance(locale);
+        decimalFormat.setMinimumFractionDigits(decimals);
+        String minDescription = decimalFormat.format(inputNumber.getMin());
+        String maxDescription = decimalFormat.format(inputNumber.getMax());
         //
         String unitDescription = unit != null ? UNIT_DESCRIPTION_PREFIX.get(language) + unit : "";
-        String afterComma = decimals > 0 ? NUMBER_COMMA.get(language) + "0".repeat(decimals) : "";
         String generatedDescription = String.format(INPUT_NUMBER_DESCRIPTION_CANVAS.get(language),
-                unitDescription, minValue + afterComma, maxValue + afterComma);
+                unitDescription, minDescription, maxDescription);
         //
         LabelType description = new LabelType();
         description.setValue(generatedDescription);
