@@ -7,6 +7,7 @@ import fr.insee.eno.core.model.question.ComplexMultipleChoiceQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -49,7 +50,7 @@ class ComplexMultipleChoiceQuestionProcessingTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 1}) // First two MCQ are identical except first has radio format, second dropdown
+    @ValueSource(ints = {0, 1})
     void simpleLeftColumnCodeList(int i) {
         //
         Table lunaticTable = lunaticTableList.get(i);
@@ -60,10 +61,30 @@ class ComplexMultipleChoiceQuestionProcessingTest {
             assertEquals(2, bodyLine.getBodyCells().size());
             assertNotNull(bodyLine.getBodyCells().get(0).getValue());
             assertNotNull(bodyLine.getBodyCells().get(0).getLabel().getValue());
-            assertEquals(i == 0 ? ComponentTypeEnum.RADIO : ComponentTypeEnum.DROPDOWN,
-                    bodyLine.getBodyCells().get(1).getComponentType());
             assertEquals(5, bodyLine.getBodyCells().get(1).getOptions().size());
         });
+    }
+
+    @Test
+    void simpleLeftColumn_radio() {
+        //
+        Table lunaticTable = lunaticTableList.get(0);
+        //
+        lunaticTable.getBodyLines().forEach(bodyLine -> {
+            assertEquals(2, bodyLine.getBodyCells().size());
+            assertEquals(ComponentTypeEnum.RADIO, bodyLine.getBodyCells().get(1).getComponentType());
+            assertEquals(Orientation.HORIZONTAL, bodyLine.getBodyCells().get(1).getOrientation());
+            assertEquals(5, bodyLine.getBodyCells().get(1).getOptions().size());
+        });
+    }
+
+    @Test
+    void simpleLeftColumn_dropdown() {
+        //
+        Table lunaticTable = lunaticTableList.get(1);
+        //
+        lunaticTable.getBodyLines().forEach(bodyLine ->
+                assertEquals(ComponentTypeEnum.DROPDOWN, bodyLine.getBodyCells().get(1).getComponentType()));
     }
 
     @ParameterizedTest
