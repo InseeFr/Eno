@@ -69,12 +69,12 @@ class TableQuestionProcessingTest {
         cell23.setLengthType(TextQuestion.LengthType.SHORT);
         cell23.setRowNumber(2);
         cell23.setColumnNumber(3);
-        enoTable.getTableCells().add(cell11);
-        enoTable.getTableCells().add(cell21);
-        enoTable.getTableCells().add(cell12);
-        enoTable.getTableCells().add(cell22);
-        enoTable.getTableCells().add(cell13);
-        enoTable.getTableCells().add(cell23);
+        enoTable.getResponseCells().add(cell11);
+        enoTable.getResponseCells().add(cell21);
+        enoTable.getResponseCells().add(cell12);
+        enoTable.getResponseCells().add(cell22);
+        enoTable.getResponseCells().add(cell13);
+        enoTable.getResponseCells().add(cell23);
         //
         enoTable.setVariableNames(List.of("BOOLEAN_1", "BOOLEAN_2", "NUMERIC_1", "NUMERIC_2", "TEXT_1", "TEXT_2"));
         //

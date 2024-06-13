@@ -22,7 +22,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @Getter @Setter
 @Context(format = Format.DDI, type = GridResponseDomainInMixedType.class)
 @Context(format = Format.LUNATIC, type = BodyCell.class)
-public class UniqueChoiceCell extends TableCell {
+public class UniqueChoiceCell extends ResponseCell {
 
     /**
      * Mapping uses the same logic as in unique choice question.
