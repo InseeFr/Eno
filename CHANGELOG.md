@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.22.4] - 2024-06-13
+### :sparkles: New Features
+- [`d147415`](https://github.com/InseeFr/Eno/commit/d147415922ea59a2051f6608a216a31cc888fe8b) - tables with no data cells *(PR [#1029](https://github.com/InseeFr/Eno/pull/1029) by [@nsenave](https://github.com/nsenave))*
+
+### :bug: Bug Fixes
+- [`c7186ff`](https://github.com/InseeFr/Eno/commit/c7186ff07462cc008efaca2256cdae8d66513d8b) - lunatic pairwise label *(PR [#1038](https://github.com/InseeFr/Eno/pull/1038) by [@nsenave](https://github.com/nsenave))*
+- [`4207e15`](https://github.com/InseeFr/Eno/commit/4207e15d2c60a9ab687514e5ab8f01cb156df141) - lunatic pairwise symlinks default values *(commit by [@nsenave](https://github.com/nsenave))*
+
+### :construction_worker: Build System
+- [`c042020`](https://github.com/InseeFr/Eno/commit/c042020200aec7e4006f195cca6ba5f426683d32) - bump org.springframework.boot from 3.2.5 to 3.3.0 *(PR [#1016](https://github.com/InseeFr/Eno/pull/1016) by [@dependabot[bot]](https://github.com/apps/dependabot))*
+
+
 ## [3.21.8] - 2024-06-05
 ### :bug: Bug Fixes
 - [`690f72e`](https://github.com/InseeFr/Eno/commit/690f72e341e3765b446942015ac71f5599e92551) - lunatic question numbering *(PR [#1023](https://github.com/InseeFr/Eno/pull/1023) by [@nsenave](https://github.com/nsenave))*
@@ -196,3 +208,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.19.4]: https://github.com/InseeFr/Eno/compare/3.18.5...3.19.4
 [3.21.5]: https://github.com/InseeFr/Eno/compare/3.19.4...3.21.5
 [3.21.8]: https://github.com/InseeFr/Eno/compare/3.21.5...3.21.8
+[3.22.4]: https://github.com/InseeFr/Eno/compare/3.21.8...3.22.4
