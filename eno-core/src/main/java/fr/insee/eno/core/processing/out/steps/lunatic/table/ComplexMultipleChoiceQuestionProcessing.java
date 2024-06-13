@@ -23,9 +23,9 @@ public class ComplexMultipleChoiceQuestionProcessing {
         List<BodyLine> lunaticBody = LeftColumnCellsProcessing.from(enoMCQ.getLeftColumn()).getLunaticBody();
 
         // For each line, just add the response cell (that is either a radio, dropdown, or checkboxOne)
-        for (int i = 0; i < enoMCQ.getTableCells().size(); i++) {
+        for (int i = 0; i < enoMCQ.getResponseCells().size(); i++) {
             BodyLine lunaticLine = lunaticBody.get(i);
-            TableCell enoCell = enoMCQ.getTableCells().get(i);
+            TableCell enoCell = enoMCQ.getResponseCells().get(i);
             BodyCell lunaticCell = TableQuestionProcessing.convertEnoCell(enoCell);
             lunaticLine.getBodyCells().add(lunaticCell);
         }

@@ -57,11 +57,11 @@ public class DDIInsertCodeLists implements ProcessingStep<EnoQuestionnaire> {
         enoComplexMCQList.forEach(this::insertLeftColumn);
         // Insert code lists in table cells that are a unique choice question
         enoTables.forEach(enoTable ->
-                enoTable.getTableCells().stream()
+                enoTable.getResponseCells().stream()
                         .filter(UniqueChoiceCell.class::isInstance)
                         .map(UniqueChoiceCell.class::cast)
                         .forEach(this::insertCodeItems));
-        enoComplexMCQList.forEach(enoComplexMCQ -> enoComplexMCQ.getTableCells().stream()
+        enoComplexMCQList.forEach(enoComplexMCQ -> enoComplexMCQ.getResponseCells().stream()
                 .map(UniqueChoiceCell.class::cast) // No filtering here since in complex MCQ cells are always UCQ
                 .forEach(this::insertCodeItems));
     }

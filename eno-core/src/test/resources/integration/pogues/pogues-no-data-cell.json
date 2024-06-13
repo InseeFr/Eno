@@ -1,0 +1,728 @@
+{
+  "id": "lwyrzaic",
+  "Name": "ENO_NO_DATA_CELL",
+  "Child": [
+    {
+      "id": "lwyruh2k",
+      "Name": "SEQUENCE",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "lx0gp1fm",
+          "Name": "Q1",
+          "type": "QuestionType",
+          "Label": [
+            "\"Question 1\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "lx0i04vt",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "lx1j9u6j"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
+          "id": "lx1jpb68",
+          "Name": "TABLE_LIST",
+          "type": "QuestionType",
+          "Label": [
+            "\"Table (based on code list)\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "lx1k81yf",
+              "Datatype": {
+                "type": "NumericDatatypeType",
+                "Maximum": "100",
+                "Minimum": "0",
+                "Decimals": "",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "lx1july2"
+            },
+            {
+              "id": "lx1jsany",
+              "Datatype": {
+                "type": "NumericDatatypeType",
+                "Maximum": "100",
+                "Minimum": "0",
+                "Decimals": "",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "lx1jez6k"
+            },
+            {
+              "id": "lx1k14zk",
+              "Datatype": {
+                "type": "NumericDatatypeType",
+                "Maximum": "20",
+                "Minimum": "-20",
+                "Decimals": "",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "lx1jw37c"
+            },
+            {
+              "id": "lx1jxszz",
+              "Datatype": {
+                "type": "NumericDatatypeType",
+                "Maximum": "20",
+                "Minimum": "-20",
+                "Decimals": "",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "lx1jnrds"
+            },
+            {
+              "id": "lx1jt2db",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "lx1juwjb"
+            },
+            {
+              "id": "lx1jutv5",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "lx1jlgwm"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "TABLE",
+          "ResponseStructure": {
+            "Mapping": [
+              {
+                "MappingSource": "lx1k81yf",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "lx1jsany",
+                "MappingTarget": "2 1"
+              },
+              {
+                "MappingSource": "lx1k14zk",
+                "MappingTarget": "1 2"
+              },
+              {
+                "MappingSource": "lx1jxszz",
+                "MappingTarget": "2 2"
+              },
+              {
+                "MappingSource": "lx1jt2db",
+                "MappingTarget": "1 3"
+              },
+              {
+                "MappingSource": "lx1jutv5",
+                "MappingTarget": "2 3"
+              }
+            ],
+            "Attribute": [
+              {
+                "Label": "20",
+                "AttributeValue": "NoDataByDefinition",
+                "AttributeTarget": "2 2"
+              },
+              {
+                "Label": "\"Fixed value for A: \" || $Q1$",
+                "AttributeValue": "NoDataByDefinition",
+                "AttributeTarget": "1 3"
+              }
+            ],
+            "Dimension": [
+              {
+                "dynamic": "0",
+                "dimensionType": "PRIMARY",
+                "CodeListReference": "lx1j7nb1"
+              },
+              {
+                "Label": "\"Number column\"",
+                "dynamic": "0",
+                "dimensionType": "MEASURE"
+              },
+              {
+                "Label": "\"Number column with non collected cell\"",
+                "dynamic": "0",
+                "dimensionType": "MEASURE"
+              },
+              {
+                "Label": "\"Text column with non collected cell\"",
+                "dynamic": "0",
+                "dimensionType": "MEASURE"
+              }
+            ]
+          },
+          "ClarificationQuestion": []
+        },
+        {
+          "id": "lwys4n6q",
+          "Name": "TABLE_FIXED",
+          "type": "QuestionType",
+          "Label": [
+            "\"Table (fixed size)\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "lx1k6mgx",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "lx1jiqof"
+            },
+            {
+              "id": "lx1ka8id",
+              "Datatype": {
+                "type": "NumericDatatypeType",
+                "Maximum": "100",
+                "Minimum": "0",
+                "Decimals": "",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "lx1j0zbd"
+            },
+            {
+              "id": "lx1kb72y",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "lx1j2bgk"
+            },
+            {
+              "id": "lx1k0js6",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "lx1jlnu3"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "TABLE",
+          "ResponseStructure": {
+            "Mapping": [
+              {
+                "MappingSource": "lx1k6mgx",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "lx1ka8id",
+                "MappingTarget": "1 2"
+              },
+              {
+                "MappingSource": "lx1kb72y",
+                "MappingTarget": "1 3"
+              },
+              {
+                "MappingSource": "lx1k0js6",
+                "MappingTarget": "1 4"
+              }
+            ],
+            "Attribute": [
+              {
+                "Label": "\"Foo\"",
+                "AttributeValue": "NoDataByDefinition",
+                "AttributeTarget": "1 3"
+              },
+              {
+                "Label": "$Q1$",
+                "AttributeValue": "NoDataByDefinition",
+                "AttributeTarget": "1 4"
+              }
+            ],
+            "Dimension": [
+              {
+                "dynamic": "4-4",
+                "dimensionType": "PRIMARY"
+              },
+              {
+                "Label": "\"Text column\"",
+                "dynamic": "0",
+                "dimensionType": "MEASURE"
+              },
+              {
+                "Label": "\"Number column\"",
+                "dynamic": "0",
+                "dimensionType": "MEASURE"
+              },
+              {
+                "Label": "\"Non collected column (with static label)\"",
+                "dynamic": "0",
+                "dimensionType": "MEASURE"
+              },
+              {
+                "Label": "\"Non collected column (with dynamic label)\"",
+                "dynamic": "0",
+                "dimensionType": "MEASURE"
+              }
+            ]
+          },
+          "ClarificationQuestion": []
+        },
+        {
+          "id": "lx1jrc4l",
+          "Name": "TABLE_DYNAMIC",
+          "type": "QuestionType",
+          "Label": [
+            "\"Table (dynamic size)\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "lx1kala0",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "lx1jta5x"
+            },
+            {
+              "id": "lx1k2gr3",
+              "Datatype": {
+                "type": "NumericDatatypeType",
+                "Maximum": "100",
+                "Minimum": "0",
+                "Decimals": "",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "lx1jjyq5"
+            },
+            {
+              "id": "lx1k64po",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "lx1jssyv"
+            },
+            {
+              "id": "lx1k75i1",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "lx1jskdn"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "TABLE",
+          "ResponseStructure": {
+            "Mapping": [
+              {
+                "MappingSource": "lx1kala0",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "lx1k2gr3",
+                "MappingTarget": "1 2"
+              },
+              {
+                "MappingSource": "lx1k64po",
+                "MappingTarget": "1 3"
+              },
+              {
+                "MappingSource": "lx1k75i1",
+                "MappingTarget": "1 4"
+              }
+            ],
+            "Attribute": [
+              {
+                "Label": "\"Bar\"",
+                "AttributeValue": "NoDataByDefinition",
+                "AttributeTarget": "1 3"
+              },
+              {
+                "Label": "$Q1$",
+                "AttributeValue": "NoDataByDefinition",
+                "AttributeTarget": "1 4"
+              }
+            ],
+            "Dimension": [
+              {
+                "dynamic": "1-5",
+                "dimensionType": "PRIMARY"
+              },
+              {
+                "Label": "\"Text column\"",
+                "dynamic": "0",
+                "dimensionType": "MEASURE"
+              },
+              {
+                "Label": "\"Number column\"",
+                "dynamic": "0",
+                "dimensionType": "MEASURE"
+              },
+              {
+                "Label": "\"Non collected column (with static label)\"",
+                "dynamic": "0",
+                "dimensionType": "MEASURE"
+              },
+              {
+                "Label": "\"Non collected column (with dynamic label)\"",
+                "dynamic": "0",
+                "dimensionType": "MEASURE"
+              }
+            ]
+          },
+          "ClarificationQuestion": []
+        }
+      ],
+      "Label": [
+        "\"Sequence\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "idendquest",
+      "Name": "QUESTIONNAIRE_END",
+      "type": "SequenceType",
+      "Child": [],
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    }
+  ],
+  "Label": [
+    "Eno - No data cell"
+  ],
+  "final": false,
+  "owner": "ENO-INTEGRATION-TESTS",
+  "agency": "fr.insee",
+  "CodeLists": {
+    "CodeList": [
+      {
+        "id": "lx1j7nb1",
+        "Code": [
+          {
+            "Label": "\"Code A\"",
+            "Value": "A",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Code B\"",
+            "Value": "B",
+            "Parent": ""
+          }
+        ],
+        "Label": "TABLE_CODE_LIST"
+      }
+    ]
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "lx1j9u6j",
+        "Name": "Q1",
+        "type": "CollectedVariableType",
+        "Label": "Q1 label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "lx1jiqof",
+        "Name": "TABLE_FIXED1",
+        "type": "CollectedVariableType",
+        "Label": "Text column",
+        "Scope": "lwys4n6q",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "lx1j0zbd",
+        "Name": "TABLE_FIXED2",
+        "type": "CollectedVariableType",
+        "Label": "Number column",
+        "Scope": "lwys4n6q",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "100",
+          "Minimum": "0",
+          "Decimals": "",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "lx1j2bgk",
+        "Name": "TABLE_FIXED3",
+        "type": "CollectedVariableType",
+        "Label": "Non collected column (with static label)",
+        "Scope": "lwys4n6q",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "lx1jlnu3",
+        "Name": "TABLE_FIXED4",
+        "type": "CollectedVariableType",
+        "Label": "Non collected column (with dynamic label)",
+        "Scope": "lwys4n6q",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "lx1july2",
+        "Name": "TABLE_LIST11",
+        "type": "CollectedVariableType",
+        "Label": "Code A-Number column",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "100",
+          "Minimum": "0",
+          "Decimals": "",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "lx1jez6k",
+        "Name": "TABLE_LIST21",
+        "type": "CollectedVariableType",
+        "Label": "Code B-Number column",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "100",
+          "Minimum": "0",
+          "Decimals": "",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "lx1jw37c",
+        "Name": "TABLE_LIST12",
+        "type": "CollectedVariableType",
+        "Label": "Code A-Number column with non collected cell",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "20",
+          "Minimum": "-20",
+          "Decimals": "",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "lx1jnrds",
+        "Name": "TABLE_LIST22",
+        "type": "CollectedVariableType",
+        "Label": "Code B-Number column with non collected cell",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "20",
+          "Minimum": "-20",
+          "Decimals": "",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "lx1juwjb",
+        "Name": "TABLE_LIST13",
+        "type": "CollectedVariableType",
+        "Label": "Code A-Text column with non collected cell",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "lx1jlgwm",
+        "Name": "TABLE_LIST23",
+        "type": "CollectedVariableType",
+        "Label": "Code B-Text column with non collected cell",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "lx1jta5x",
+        "Name": "TABLE_DYNAMIC1",
+        "type": "CollectedVariableType",
+        "Label": "Text column",
+        "Scope": "lx1jrc4l",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "lx1jjyq5",
+        "Name": "TABLE_DYNAMIC2",
+        "type": "CollectedVariableType",
+        "Label": "Number column",
+        "Scope": "lx1jrc4l",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "100",
+          "Minimum": "0",
+          "Decimals": "",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "lx1jssyv",
+        "Name": "TABLE_DYNAMIC3",
+        "type": "CollectedVariableType",
+        "Label": "Non collected column (with static label)",
+        "Scope": "lx1jrc4l",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "lx1jskdn",
+        "Name": "TABLE_DYNAMIC4",
+        "type": "CollectedVariableType",
+        "Label": "Non collected column (with dynamic label)",
+        "Scope": "lx1jrc4l",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "flowLogic": "FILTER",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "FlowControl": [],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "lwysh6xi",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "lwyruh2k",
+        "lx0gp1fm",
+        "lx1jpb68",
+        "lwys4n6q",
+        "lx1jrc4l",
+        "idendquest"
+      ]
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "esa-dc-2018",
+      "uri": "http://ddi:fr.insee:DataCollection.esa-dc-2018"
+    }
+  ],
+  "lastUpdatedDate": "Wed Jun 05 2024 10:07:55 GMT+0200 (heure d’été d’Europe centrale)",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": []
+}

@@ -4,6 +4,7 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.navigation.Binding;
 import fr.insee.eno.core.model.question.*;
 import fr.insee.eno.core.model.question.table.NumericCell;
+import fr.insee.eno.core.model.question.table.ResponseCell;
 import fr.insee.eno.core.model.question.table.TableCell;
 import fr.insee.eno.core.model.variable.CollectedVariable;
 import fr.insee.eno.core.model.variable.Variable;
@@ -37,17 +38,17 @@ public class DDIMoveUnitInQuestions implements ProcessingStep<EnoQuestionnaire> 
                     }
 
                     if (question instanceof TableQuestion tableQuestion) {
-                        applyUnitOnNumericCell(variable, tableQuestion.getBindings(), tableQuestion.getTableCells());
+                        applyUnitOnNumericCell(variable, tableQuestion.getBindings(), tableQuestion.getResponseCells());
                         return;
                     }
 
                     if (question instanceof DynamicTableQuestion rosterQuestion) {
-                        applyUnitOnNumericCell(variable, rosterQuestion.getBindings(), rosterQuestion.getTableCells());
+                        applyUnitOnNumericCell(variable, rosterQuestion.getBindings(), rosterQuestion.getResponseCells());
                         return;
                     }
 
                     if (question instanceof ComplexMultipleChoiceQuestion mcqQuestion) {
-                        applyUnitOnNumericCell(variable, mcqQuestion.getBindings(), mcqQuestion.getTableCells());
+                        applyUnitOnNumericCell(variable, mcqQuestion.getBindings(), mcqQuestion.getResponseCells());
                         return;
                     }
                     log.warn(String.format(
@@ -62,9 +63,9 @@ public class DDIMoveUnitInQuestions implements ProcessingStep<EnoQuestionnaire> 
      * search for the table celle component linked to the variable and apply unit attribute on it
      * @param variable variable with unit parameter
      * @param bindings bindings of the question, link the variable to a table cell vie the source/target parameter id
-     * @param tableCells table cells of the question
+     * @param responseCells table cells of the question
      */
-    private void applyUnitOnNumericCell(Variable variable, List<Binding> bindings, List<TableCell> tableCells) {
+    private void applyUnitOnNumericCell(Variable variable, List<Binding> bindings, List<ResponseCell> responseCells) {
         Optional<Binding> cellBinding = bindings.stream()
                 .filter(binding -> binding.getTargetParameterId().equals(variable.getReference()))
                 .findFirst();
@@ -74,7 +75,7 @@ public class DDIMoveUnitInQuestions implements ProcessingStep<EnoQuestionnaire> 
             return;
         }
 
-        Optional<NumericCell> numericCell = tableCells.stream()
+        Optional<NumericCell> numericCell = responseCells.stream()
                 .filter(NumericCell.class::isInstance)
                 .map(NumericCell.class::cast)
                 .filter(nCell -> nCell.getId().equals(cellBinding.get().getSourceParameterId()))
