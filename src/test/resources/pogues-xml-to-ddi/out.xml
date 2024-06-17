@@ -915,6 +915,7 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>kiq7bjam-SEQ</r:ID>
             <r:Version>1</r:Version>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">loopContent</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>kiq5u8d5</r:ID>
@@ -940,6 +941,7 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>kiq7cbgo-SEQ</r:ID>
             <r:Version>1</r:Version>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">loopContent</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>kiq5xw5p</r:ID>
@@ -951,6 +953,9 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>j6p6my1d-a-j6p0np9q</r:ID>
             <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">A définir</r:Content>
+            </r:Label>
             <r:Description>
                <r:Content xml:lang="fr-FR"/>
             </r:Description>
@@ -997,6 +1002,7 @@
             <r:Label>
                <r:Content xml:lang="fr-FR"/>
             </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">filterContent</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>j6p0s7o5</r:ID>
@@ -1008,6 +1014,9 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>j6p6my1d-a-j6p0ti5h</r:ID>
             <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">A définir</r:Content>
+            </r:Label>
             <r:Description>
                <r:Content xml:lang="fr-FR"/>
             </r:Description>
@@ -1054,6 +1063,7 @@
             <r:Label>
                <r:Content xml:lang="fr-FR"/>
             </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">filterContent</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>j3341528</r:ID>
