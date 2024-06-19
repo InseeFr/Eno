@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.22.7] - 2024-06-18
+### :sparkles: New Features
+- horizontal unique choice cells in lunatic tables *(PR [#1042](https://github.com/InseeFr/Eno/pull/1042) by [@nsenave](https://github.com/nsenave))*
+
+### :bug: Bug Fixes
+- lunatic input number description with large numbers *(PR [#1040](https://github.com/InseeFr/Eno/pull/1040) by [@nsenave](https://github.com/nsenave))*
+
+### :recycle: Refactors
+- improve null management in table cells mapping *(commit by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.22.4] - 2024-06-13
 ### :sparkles: New Features
 - [`d147415`](https://github.com/InseeFr/Eno/commit/d147415922ea59a2051f6608a216a31cc888fe8b) - tables with no data cells *(PR [#1029](https://github.com/InseeFr/Eno/pull/1029) by [@nsenave](https://github.com/nsenave))*
@@ -197,9 +208,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.15.10]: https://github.com/InseeFr/Eno/compare/3.15.9...3.15.10
 [3.16.0]: https://github.com/InseeFr/Eno/compare/3.15.10...3.16.0
 [3.16.1]: https://github.com/InseeFr/Eno/compare/3.16.0...3.16.1
-
 [3.17.0]: https://github.com/InseeFr/Eno/compare/3.16.1...3.17.0
-
 [3.17.1]: https://github.com/InseeFr/Eno/compare/3.17.0...3.17.1
 [3.17.2]: https://github.com/InseeFr/Eno/compare/3.17.1...3.17.2
 [3.17.3]: https://github.com/InseeFr/Eno/compare/3.17.2...3.17.3
@@ -209,3 +218,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.21.5]: https://github.com/InseeFr/Eno/compare/3.19.4...3.21.5
 [3.21.8]: https://github.com/InseeFr/Eno/compare/3.21.5...3.21.8
 [3.22.4]: https://github.com/InseeFr/Eno/compare/3.21.8...3.22.4
+[3.22.7]: https://github.com/InseeFr/Eno/compare/3.22.4...3.22.7
