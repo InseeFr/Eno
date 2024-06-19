@@ -36,7 +36,7 @@ class ControlRowTest {
         assertEquals(2, rosterForLoop.getControls().size());
         // This question has one control of type "row"
         List<ControlType> rowControls = rosterForLoop.getControls().stream()
-                .filter(controlType -> ControlTypeEnum.ROW.equals(controlType.getTypeOfControl()))
+                .filter(controlType -> ControlContextType.ROW.equals(controlType.getType()))
                 .toList();
         assertEquals(1, rowControls.size());
         //
