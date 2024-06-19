@@ -26,4 +26,4 @@ Projet V3 "Eno Java" : changement de technologie de XSLT vers Java.
 
 ## Configuration
 
-[Setup](./README#Setup)
+[Setup](./README.md#Setup)
