@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.22.8] - 2024-06-21
+### :bug: Bug Fixes
+- [`1564e4e`](https://github.com/InseeFr/Eno/commit/1564e4eb64003db5c6a4254e88dd059635ae9acf) - 'row' type property for lunatic controls *(PR [#1047](https://github.com/InseeFr/Eno/pull/1047) by [@nsenave](https://github.com/nsenave))*
+
+### :white_check_mark: Tests
+- [`7b9ca60`](https://github.com/InseeFr/Eno/commit/7b9ca603786ee2913a192fd70f5b34dc17aaa1a2) - lunatic dynamic table row control inversion *(PR [#1048](https://github.com/InseeFr/Eno/pull/1048) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.22.7] - 2024-06-18
 ### :sparkles: New Features
 - horizontal unique choice cells in lunatic tables *(PR [#1042](https://github.com/InseeFr/Eno/pull/1042) by [@nsenave](https://github.com/nsenave))*
@@ -219,3 +227,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.21.8]: https://github.com/InseeFr/Eno/compare/3.21.5...3.21.8
 [3.22.4]: https://github.com/InseeFr/Eno/compare/3.21.8...3.22.4
 [3.22.7]: https://github.com/InseeFr/Eno/compare/3.22.4...3.22.7
+[3.22.8]: https://github.com/InseeFr/Eno/compare/3.22.7...3.22.8
