@@ -1587,7 +1587,7 @@
       <text:p>enopogues:is-roundabout-locked</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
-      <text:p>Returns is a roundabout is locked</text:p>
+      <text:p>Returns if a roundabout is locked</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
