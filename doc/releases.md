@@ -1,5 +1,15 @@
 # Eno Releases note
 
+## [v2.9.10] - 2024-06-24
+### :bug: Bug Fixes
+- [`f5efddf`](https://github.com/InseeFr/Eno/commit/f5efddf7155892b8efb39c91562568e630328209) - roundabout *(PR [#1043](https://github.com/InseeFr/Eno/pull/1043) by [@BulotF](https://github.com/BulotF))*
+
+### :construction_worker: Build System
+- [`a00ff8e`](https://github.com/InseeFr/Eno/commit/a00ff8e815ad87e3fff20ebec1335ef6b367225b) - update dependencies *(PR [#1052](https://github.com/InseeFr/Eno/pull/1052) by [@nsenave](https://github.com/nsenave))*
+
+### :memo: Documentation Changes
+
+
 ## [v2.9.8] - 2024-06-10
 ### :memo: Documentation Changes
 
@@ -322,3 +332,4 @@
 [v2.9.6]: https://github.com/InseeFr/Eno/compare/v2.9.5...v2.9.6
 [v2.9.7]: https://github.com/InseeFr/Eno/compare/v2.9.6...v2.9.7
 [v2.9.8]: https://github.com/InseeFr/Eno/compare/v2.9.7...v2.9.8
+[v2.9.10]: https://github.com/InseeFr/Eno/compare/v2.9.8...v2.9.10
