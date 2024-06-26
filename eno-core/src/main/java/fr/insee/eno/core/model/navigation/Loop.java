@@ -41,6 +41,13 @@ public abstract class Loop extends EnoIdentifiableObject {
     @DDI("T(fr.insee.eno.core.model.navigation.Loop).mapLoopItemReferences(#this, #index)")
     private final List<ItemReference> loopItems = new ArrayList<>();
 
+    /** The occurrences of a loop can be filtered.
+     * This attribute holds the identifier of the occurrence filter object.
+     * null if there is no occurrence filter in the loop. */
+    @DDI("getControlConstructReference().getTypeOfObject().toString() == 'IfThenElse' ? " +
+            "getControlConstructReference().getIDArray(0).getStringValue() : null")
+    private String occurrenceFilterId;
+
     /** References of sequences or subsequences that are in the scope of the loop.
      * Note: in Pogues a loop can only be defined on sequence or subsequences.
      * (In other formats, nothing makes it formally impossible to have loops defined directly on questions.)
