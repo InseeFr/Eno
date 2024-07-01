@@ -58,7 +58,7 @@
 		<jaxb-api.version>2.3.1</jaxb-api.version>
 
 		<apache-commons.version>3.14.0</apache-commons.version>
-		<junit.version>5.10.2</junit.version>
+		<junit.version>5.10.3</junit.version>
 		<xmlunit.version>2.10.0</xmlunit.version>
 		<log4j-slf4j2.version>2.23.1</log4j-slf4j2.version>
 
