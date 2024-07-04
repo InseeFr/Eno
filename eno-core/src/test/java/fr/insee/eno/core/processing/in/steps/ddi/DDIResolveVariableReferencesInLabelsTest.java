@@ -5,17 +5,20 @@ import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.label.Label;
+import fr.insee.eno.core.model.question.EnoTable;
 import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.variable.CollectedVariable;
 import fr.insee.eno.core.model.variable.Variable;
-import fr.insee.eno.core.serialize.DDIDeserializer;
 import fr.insee.eno.core.reference.EnoCatalog;
+import fr.insee.eno.core.serialize.DDIDeserializer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -51,12 +54,13 @@ class DDIResolveVariableReferencesInLabelsTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTestLabels {
 
-        private static EnoQuestionnaire enoQuestionnaire;
+        private EnoQuestionnaire enoQuestionnaire;
 
         @BeforeAll
-        static void mapQuestionnaire() throws DDIParsingException {
+        void mapQuestionnaire() throws DDIParsingException {
             // Given
             enoQuestionnaire = new EnoQuestionnaire();
             DDIMapper ddiMapper = new DDIMapper();
@@ -64,9 +68,10 @@ class DDIResolveVariableReferencesInLabelsTest {
                     DDIDeserializer.deserialize(DDIResolveVariableReferencesInLabelsTest.class.getClassLoader()
                             .getResourceAsStream("integration/ddi/ddi-labels.xml")),
                     enoQuestionnaire);
-            new DDIInsertDeclarations().apply(enoQuestionnaire);
+            new DDIInsertDeclarations(enoQuestionnaire.getIndex()).apply(enoQuestionnaire);
             new DDIInsertControls().apply(enoQuestionnaire);
             new DDIInsertCodeLists().apply(enoQuestionnaire);
+            new DDIInsertMultipleChoiceLabels().apply(enoQuestionnaire);
             EnoCatalog enoCatalog = new EnoCatalog(enoQuestionnaire);
             // When
             new DDIResolveVariableReferencesInLabels(enoCatalog).apply(enoQuestionnaire);
@@ -93,17 +98,17 @@ class DDIResolveVariableReferencesInLabelsTest {
         @Test
         void declarationOnSequence() {
             assertEquals("\"Static declaration on sequence\"",
-                    enoQuestionnaire.getSequences().get(0).getInstructions().get(0).getLabel().getValue());
+                    enoQuestionnaire.getSequences().get(0).getInstructions().getFirst().getLabel().getValue());
             assertEquals("\"Dynamic declaration on sequence: \" || Q1",
-                    enoQuestionnaire.getSequences().get(1).getInstructions().get(0).getLabel().getValue().trim());
+                    enoQuestionnaire.getSequences().get(1).getInstructions().getFirst().getLabel().getValue().trim());
         }
 
         @Test
         void declarationOnSubsequence() {
             assertEquals("\"Static declaration on subsequence\"",
-                    enoQuestionnaire.getSubsequences().get(0).getInstructions().get(0).getLabel().getValue());
+                    enoQuestionnaire.getSubsequences().get(0).getInstructions().getFirst().getLabel().getValue());
             assertEquals("\"Dynamic declaration on subsequence: \" || Q1",
-                    enoQuestionnaire.getSubsequences().get(1).getInstructions().get(0).getLabel().getValue().trim());
+                    enoQuestionnaire.getSubsequences().get(1).getInstructions().getFirst().getLabel().getValue().trim());
         }
 
         /** Question label + declarations, instructions and controls within it
@@ -117,11 +122,11 @@ class DDIResolveVariableReferencesInLabelsTest {
             assertEquals("\"Static question name\"",
                     question1.get().getLabel().getValue());
             assertEquals("\"Static declaration before the question.\"",
-                    question1.get().getDeclarations().get(0).getLabel().getValue());
+                    question1.get().getDeclarations().getFirst().getLabel().getValue());
             assertEquals("\"Static declaration after the question.\"",
-                    question1.get().getInstructions().get(0).getLabel().getValue());
+                    question1.get().getInstructions().getFirst().getLabel().getValue());
             assertEquals("\"Static control message\"",
-                    question1.get().getControls().get(0).getMessage().getValue());
+                    question1.get().getControls().getFirst().getMessage().getValue());
             //
             Optional<SingleResponseQuestion> question2 = enoQuestionnaire.getSingleResponseQuestions().stream()
                     .filter(question -> "Q2".equals(question.getName())).findAny();
@@ -129,11 +134,11 @@ class DDIResolveVariableReferencesInLabelsTest {
             assertEquals("\"Dynamic question name: \" || Q1",
                     question2.get().getLabel().getValue().trim());
             assertEquals("\"Dynamic declaration before the question: \" || Q1",
-                    question2.get().getDeclarations().get(0).getLabel().getValue().trim());
+                    question2.get().getDeclarations().getFirst().getLabel().getValue().trim());
             assertEquals("\"Dynamic declaration after the question: \" || Q1",
-                    question2.get().getInstructions().get(0).getLabel().getValue().trim());
+                    question2.get().getInstructions().getFirst().getLabel().getValue().trim());
             assertEquals("\"Dynamic control message: \" || Q1",
-                    question2.get().getControls().get(0).getMessage().getValue().trim());
+                    question2.get().getControls().getFirst().getMessage().getValue().trim());
         }
 
         @Test
@@ -162,7 +167,7 @@ class DDIResolveVariableReferencesInLabelsTest {
         void multipleChoiceQuestion_codeResponsesLabel() {
             //
             SimpleMultipleChoiceQuestion mcq1 = (SimpleMultipleChoiceQuestion)
-                    enoQuestionnaire.getMultipleResponseQuestions().get(0);
+                    enoQuestionnaire.getMultipleResponseQuestions().getFirst();
             assertEquals("\"Static code 1\"", mcq1.getCodeResponses().get(0).getLabel().getValue());
             assertEquals("\"Static code 2\"", mcq1.getCodeResponses().get(1).getLabel().getValue());
             //
@@ -174,6 +179,32 @@ class DDIResolveVariableReferencesInLabelsTest {
                     mcq2.getCodeResponses().get(1).getLabel().getValue().trim());
         }
 
+    }
+
+    @Test
+    void integrationTestTables() throws DDIParsingException {
+        // Given
+        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
+        DDIMapper ddiMapper = new DDIMapper();
+        ddiMapper.mapDDI(
+                DDIDeserializer.deserialize(DDIResolveVariableReferencesInLabelsTest.class.getClassLoader()
+                        .getResourceAsStream("integration/ddi/ddi-no-data-cell.xml")),
+                enoQuestionnaire);
+        new DDIInsertNoDataCellLabels().apply(enoQuestionnaire);
+
+        // When
+        EnoCatalog enoCatalog = new EnoCatalog(enoQuestionnaire);
+        new DDIResolveVariableReferencesInLabels(enoCatalog).apply(enoQuestionnaire);
+
+        // Then
+        List<EnoTable> tableQuestions = enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .map(EnoTable.class::cast).toList();
+        //
+        assertEquals("\"Fixed value for A: \" || Q1",
+                tableQuestions.get(0).getNoDataCells().get(1).getCellLabel().getValue().stripTrailing());
+        assertEquals("Q1", tableQuestions.get(1).getNoDataCells().get(1).getCellLabel().getValue().stripTrailing());
+        assertEquals("Q1", tableQuestions.get(2).getNoDataCells().get(1).getCellLabel().getValue().stripTrailing());
+        // strip trailing since extra whitespace can be added at some point which is not a problem
     }
 
 }

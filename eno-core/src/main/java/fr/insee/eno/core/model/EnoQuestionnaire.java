@@ -10,6 +10,7 @@ import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.navigation.Loop;
 import fr.insee.eno.core.model.question.MultipleResponseQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
+import fr.insee.eno.core.model.sequence.RoundaboutSequence;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.model.variable.Variable;
@@ -71,6 +72,14 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
             ".?[#this.getTypeOfSequenceArray(0).getStringValue() == 'submodule']")
     @Lunatic("getComponents()")
     private final List<Subsequence> subsequences = new ArrayList<>();
+
+    /** Roundabouts are described as a special type of sequence in DDI.
+     * These are resolved in Lunatic through a dedicated processing step. */
+    @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
+            ".?[#this instanceof T(datacollection33.SequenceType) " +
+            "and not #this.getTypeOfSequenceList().isEmpty()]" +
+            ".?[#this.getTypeOfSequenceArray(0).getStringValue() == 'roundabout']")
+    private final List<RoundaboutSequence> roundaboutSequences = new ArrayList<>();
 
     /** Loops defined in the questionnaire.
      * In DDI, a loop is defined at the questionnaire level.

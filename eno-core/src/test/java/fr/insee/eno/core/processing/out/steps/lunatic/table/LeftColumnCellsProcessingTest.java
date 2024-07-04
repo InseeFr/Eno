@@ -4,6 +4,7 @@ import fr.insee.eno.core.model.question.TableQuestion;
 import fr.insee.lunatic.model.flat.BodyLine;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -11,11 +12,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class LeftColumnCellsProcessingTest {
 
-    private static List<BodyLine> lunaticBody;
+    private List<BodyLine> lunaticBody;
+
     @BeforeAll
-    static void processComplexCodeList() {
+    void processComplexCodeList() {
         // Given
         TableQuestion enoTable = new TableQuestion();
         enoTable.setLeftColumn(ComputeCodeListSizesTest.createComplexNestedCodeList());

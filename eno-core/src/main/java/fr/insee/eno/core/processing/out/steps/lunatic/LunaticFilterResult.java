@@ -7,6 +7,8 @@ import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.processing.out.steps.lunatic.calculatedvariable.ShapefromAttributeRetrieval;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
+import fr.insee.lunatic.model.flat.variable.VariableTypeEnum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,7 @@ public class LunaticFilterResult implements ProcessingStep<Questionnaire> {
 
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
-        List<VariableType> calculatedVariables = generateFilterVariables(lunaticQuestionnaire.getComponents());
+        List<CalculatedVariableType> calculatedVariables = generateFilterVariables(lunaticQuestionnaire.getComponents());
         lunaticQuestionnaire.getVariables().addAll(calculatedVariables);
     }
 
@@ -34,8 +36,8 @@ public class LunaticFilterResult implements ProcessingStep<Questionnaire> {
      * @param components list of components
      * @return filter result calculated variables
      */
-    private List<VariableType> generateFilterVariables(List<ComponentType> components) {
-        List<VariableType> filterVariables = new ArrayList<>();
+    private List<CalculatedVariableType> generateFilterVariables(List<ComponentType> components) {
+        List<CalculatedVariableType> filterVariables = new ArrayList<>();
         for(ComponentType component : components) {
             generateFilterVariable(component)
                     .ifPresent(filterVariables::add);
@@ -51,12 +53,12 @@ public class LunaticFilterResult implements ProcessingStep<Questionnaire> {
      * @param component generate a filter variable from this component
      * @return a filter variable if the component is a question with condition filter, otherwise none
      */
-    private Optional<VariableType> generateFilterVariable(ComponentType component) {
+    private Optional<CalculatedVariableType> generateFilterVariable(ComponentType component) {
         if(!isQuestionWithConditionFilter(component)) {
             return Optional.empty();
         }
 
-        VariableType filterVariable = new VariableType();
+        CalculatedVariableType filterVariable = new CalculatedVariableType();
         filterVariable.setVariableType(VariableTypeEnum.CALCULATED);
         Question question = (Question) enoQuestionnaire.getIndex().get(component.getId());
         String questionName = question.getName();
@@ -71,7 +73,7 @@ public class LunaticFilterResult implements ProcessingStep<Questionnaire> {
                     .forEach(variableName -> filterVariable.getBindingDependencies().add(variableName));
         }
         LabelType expression = new LabelType();
-        expression.setType(conditionFilter.getTypeEnum());
+        expression.setType(conditionFilter.getType());
         expression.setValue(conditionFilter.getValue());
         filterVariable.setExpression(expression);
         return Optional.of(filterVariable);

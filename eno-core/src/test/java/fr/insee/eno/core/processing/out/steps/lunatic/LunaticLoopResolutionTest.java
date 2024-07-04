@@ -100,13 +100,14 @@ class LunaticLoopResolutionTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTest1 {
 
-        static final Questionnaire lunaticQuestionnaire = new Questionnaire();
-        static List<Loop> lunaticLoops;
+        private final Questionnaire lunaticQuestionnaire = new Questionnaire();
+        private List<Loop> lunaticLoops;
 
         @BeforeAll
-        static void mapLunaticQuestionnaire() throws DDIParsingException {
+        void mapLunaticQuestionnaire() throws DDIParsingException {
             // Given: a mapped and sorted Lunatic questionnaire
             EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
                     LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
@@ -143,8 +144,8 @@ class LunaticLoopResolutionTest {
         void linkedLoopsIterations() {
             assertEquals("count(Q1A)", lunaticLoops.get(1).getIterations().getValue());
             assertEquals("count(Q3A)", lunaticLoops.get(3).getIterations().getValue());
-            assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(1).getIterations().getTypeEnum());
-            assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(3).getIterations().getTypeEnum());
+            assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(1).getIterations().getType());
+            assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(3).getIterations().getType());
         }
 
         @Test
@@ -193,13 +194,14 @@ class LunaticLoopResolutionTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTest2 {
 
-        static final Questionnaire lunaticQuestionnaire = new Questionnaire();
-        static List<Loop> lunaticLoops;
+        private final Questionnaire lunaticQuestionnaire = new Questionnaire();
+        private List<Loop> lunaticLoops;
 
         @BeforeAll
-        static void mapLunaticQuestionnaire() throws DDIParsingException {
+        void mapLunaticQuestionnaire() throws DDIParsingException {
             // Given: a mapped and sorted Lunatic questionnaire
             EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
                     LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
@@ -237,8 +239,8 @@ class LunaticLoopResolutionTest {
         void linkedLoopsIterations() {
             assertEquals("count(Q1A)", lunaticLoops.get(1).getIterations().getValue());
             assertEquals("count(Q2A)", lunaticLoops.get(3).getIterations().getValue());
-            assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(1).getIterations().getTypeEnum());
-            assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(3).getIterations().getTypeEnum());
+            assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(1).getIterations().getType());
+            assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(3).getIterations().getType());
         }
 
         @Test
@@ -275,13 +277,14 @@ class LunaticLoopResolutionTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTest3 {
 
-        static final Questionnaire lunaticQuestionnaire = new Questionnaire();
-        static List<Loop> lunaticLoops;
+        private final Questionnaire lunaticQuestionnaire = new Questionnaire();
+        private List<Loop> lunaticLoops;
 
         @BeforeAll
-        static void mapLunaticQuestionnaire() throws DDIParsingException {
+        void mapLunaticQuestionnaire() throws DDIParsingException {
             // Given: a mapped and sorted Lunatic questionnaire
             EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
                     LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
@@ -320,7 +323,7 @@ class LunaticLoopResolutionTest {
             assertThat(lunaticLoops.get(0).getLoopDependencies()).isEmpty();
             // Linked loop
             assertEquals(List.of("Q1"), lunaticLoops.get(1).getLoopDependencies());
-            assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(1).getIterations().getTypeEnum());
+            assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(1).getIterations().getType());
         }
 
         @Test
@@ -346,13 +349,14 @@ class LunaticLoopResolutionTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTest4 {
 
-        static final Questionnaire lunaticQuestionnaire = new Questionnaire();
-        static List<Loop> lunaticLoops;
+        private final Questionnaire lunaticQuestionnaire = new Questionnaire();
+        private List<Loop> lunaticLoops;
 
         @BeforeAll
-        static void mapLunaticQuestionnaire() throws DDIParsingException {
+        void mapLunaticQuestionnaire() throws DDIParsingException {
             // Given: a mapped and sorted Lunatic questionnaire
             EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
                     LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
@@ -393,7 +397,7 @@ class LunaticLoopResolutionTest {
             assertThat(lunaticLoops.get(0).getLoopDependencies()).isEmpty();
             // Linked loop
             assertEquals(List.of("Q11"), lunaticLoops.get(1).getLoopDependencies());
-            assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(1).getIterations().getTypeEnum());
+            assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(1).getIterations().getType());
         }
 
         @Test
@@ -484,7 +488,7 @@ class LunaticLoopResolutionTest {
             //
             lunaticLinkedLoop.getComponents().forEach(component -> {
                 assertEquals("(not(nvl(AGE, 0) < 18))", component.getConditionFilter().getValue());
-                assertEquals(LabelTypeEnum.VTL, component.getConditionFilter().getTypeEnum());
+                assertEquals(LabelTypeEnum.VTL, component.getConditionFilter().getType());
             });
         }
 
@@ -516,7 +520,7 @@ class LunaticLoopResolutionTest {
             assertEquals(List.of("DYNAMIC_TABLE1", "DYNAMIC_TABLE2", "DYNAMIC_TABLE3"),
                     lunaticLinkedLoop.getLoopDependencies());
             assertEquals("count(DYNAMIC_TABLE1)", lunaticLinkedLoop.getIterations().getValue());
-            assertEquals(LabelTypeEnum.VTL, lunaticLinkedLoop.getIterations().getTypeEnum());
+            assertEquals(LabelTypeEnum.VTL, lunaticLinkedLoop.getIterations().getType());
         }
 
     }

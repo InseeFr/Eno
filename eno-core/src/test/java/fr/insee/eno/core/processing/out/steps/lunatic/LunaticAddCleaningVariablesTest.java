@@ -1,13 +1,17 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
-import fr.insee.eno.core.model.lunatic.CleaningConcernedVariable;
-import fr.insee.eno.core.model.lunatic.CleaningEntry;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
+import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
+import fr.insee.lunatic.model.flat.variable.ExternalVariableType;
+import fr.insee.lunatic.model.flat.variable.VariableTypeEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,8 +26,6 @@ class LunaticAddCleaningVariablesTest {
     Table table;
     CheckboxGroup checkboxGroup;
     Loop loop;
-
-    Questionnaire lunaticQuestionnaire;
 
     @BeforeEach
     void init() {
@@ -47,7 +49,7 @@ class LunaticAddCleaningVariablesTest {
         for (ComponentType component : components) {
             component.setConditionFilter(null);
         }
-        lunaticQuestionnaire = new Questionnaire();
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().addAll(components);
 
         processing.apply(lunaticQuestionnaire);
@@ -62,7 +64,7 @@ class LunaticAddCleaningVariablesTest {
         for (ComponentType component : components) {
             component.setConditionFilter(buildConditionFilter("true", new ArrayList<>()));
         }
-        lunaticQuestionnaire = new Questionnaire();
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().addAll(components);
 
         processing.apply(lunaticQuestionnaire);
@@ -72,8 +74,8 @@ class LunaticAddCleaningVariablesTest {
 
     @Test
     void simpleResponseComponentWithBindingDependencies_shouldHaveCleaningEntries() {
-
-        lunaticQuestionnaire = new Questionnaire();
+        //
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(input);
 
         input.setConditionFilter(buildConditionFilter("(SUM1 < 10)", List.of("Q11", "Q12")));
@@ -82,67 +84,69 @@ class LunaticAddCleaningVariablesTest {
         lunaticQuestionnaire.getVariables().add(buildCollectedVariable("Q11"));
         lunaticQuestionnaire.getVariables().add(buildCollectedVariable("Q12"));
 
+        //
         processing.apply(lunaticQuestionnaire);
-        List<CleaningEntry> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
-                .map(CleaningEntry.class::cast)
-                .toList();
 
-        assertEquals(2, variables.size());
+        //
+        CleaningType cleaningType = lunaticQuestionnaire.getCleaning();
 
-        CleaningEntry variable = variables.get(0);
-        assertEquals("Q11", variable.getVariableName());
-        assertEquals(1, variable.getConcernedVariables().size());
-        assertEquals("SHORT_TEXT", variable.getConcernedVariables().get(0).getName());
-        assertEquals("(SUM1 < 10)", variable.getConcernedVariables().get(0).getFilter());
+        assertEquals(2, cleaningType.countCleaningVariables());
 
-        variable = variables.get(1);
-        assertEquals("Q12", variable.getVariableName());
-        assertEquals(1, variable.getConcernedVariables().size());
-        assertEquals("SHORT_TEXT", variable.getConcernedVariables().get(0).getName());
-        assertEquals("(SUM1 < 10)", variable.getConcernedVariables().get(0).getFilter());
+        CleaningVariableEntry q11Entry = cleaningType.getCleaningEntry("Q11");
+        assertNotNull(q11Entry);
+        assertEquals(1, q11Entry.countCleanedVariables());
+        assertNotNull(q11Entry.getCleanedVariable("SHORT_TEXT"));
+        assertEquals("(SUM1 < 10)", q11Entry.getCleanedVariable("SHORT_TEXT").filterExpression());
+
+        CleaningVariableEntry q12Entry = cleaningType.getCleaningEntry("Q12");
+        assertNotNull(q12Entry);
+        assertEquals(1, q12Entry.countCleanedVariables());
+        assertNotNull(q12Entry.getCleanedVariable("SHORT_TEXT"));
+        assertEquals("(SUM1 < 10)", q12Entry.getCleanedVariable("SHORT_TEXT").filterExpression());
     }
 
     @Test
     void componentWithBindingDependenciesWithinLoop_shouldHaveCleaningEntries() {
-
+        //
         dropdown.setConditionFilter(buildConditionFilter("(SUM1 < 10)", List.of("Q1", "Q2")));
 
-        lunaticQuestionnaire = new Questionnaire();
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(loop);
 
         lunaticQuestionnaire.getVariables().add(buildCalculatedVariable("SUM1"));
         lunaticQuestionnaire.getVariables().add(buildCollectedVariable("Q1"));
         lunaticQuestionnaire.getVariables().add(buildCollectedVariable("Q2"));
 
+        //
         processing.apply(lunaticQuestionnaire);
-        List<CleaningEntry> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
-                .map(CleaningEntry.class::cast)
-                .toList();
 
-        assertEquals(2, variables.size());
+        //
+        CleaningType cleaningType = lunaticQuestionnaire.getCleaning();
 
-        CleaningEntry variable = variables.get(0);
-        assertEquals("Q1", variable.getVariableName());
-        assertEquals(1, variable.getConcernedVariables().size());
-        assertEquals("DROPDOWN", variable.getConcernedVariables().get(0).getName());
-        assertEquals("(SUM1 < 10)", variable.getConcernedVariables().get(0).getFilter());
+        assertEquals(2, cleaningType.countCleaningVariables());
 
-        variable = variables.get(1);
-        assertEquals("Q2", variable.getVariableName());
-        assertEquals(1, variable.getConcernedVariables().size());
-        assertEquals("DROPDOWN", variable.getConcernedVariables().get(0).getName());
-        assertEquals("(SUM1 < 10)", variable.getConcernedVariables().get(0).getFilter());
+        CleaningVariableEntry q1Entry = cleaningType.getCleaningEntry("Q1");
+        assertNotNull(q1Entry);
+        assertEquals(1, q1Entry.countCleanedVariables());
+        assertNotNull(q1Entry.getCleanedVariable("DROPDOWN"));
+        assertEquals("(SUM1 < 10)", q1Entry.getCleanedVariable("DROPDOWN").filterExpression());
+
+        CleaningVariableEntry q2Entry = cleaningType.getCleaningEntry("Q2");
+        assertNotNull(q2Entry);
+        assertEquals(1, q2Entry.countCleanedVariables());
+        assertNotNull(q2Entry.getCleanedVariable("DROPDOWN"));
+        assertEquals("(SUM1 < 10)", q2Entry.getCleanedVariable("DROPDOWN").filterExpression());
     }
 
     @Nested
     class ComponentsWithCommonDependencies {
 
-        private Map<String, CleaningEntry> cleaningEntries;
+        private CleaningType cleaningType;
 
         @BeforeEach
         void setupComponentsHavingCommonDependencies() {
-
-            lunaticQuestionnaire = new Questionnaire();
+            //
+            Questionnaire lunaticQuestionnaire = new Questionnaire();
             lunaticQuestionnaire.getComponents().addAll(List.of(input, loop));
 
             input.setConditionFilter(buildConditionFilter("(TEST > 30)", List.of("Q1", "Q2")));
@@ -155,121 +159,100 @@ class LunaticAddCleaningVariablesTest {
             lunaticQuestionnaire.getVariables().add(buildCollectedVariable("Q1"));
             lunaticQuestionnaire.getVariables().add(buildCollectedVariable("Q2"));
 
+            //
             processing.apply(lunaticQuestionnaire);
 
-            cleaningEntries = new HashMap<>();
-            lunaticQuestionnaire.getCleaning().getAny().stream()
-                    .map(CleaningEntry.class::cast)
-                    .forEach(cleaningEntry -> cleaningEntries.put(cleaningEntry.getVariableName(), cleaningEntry));
+            //
+            cleaningType = lunaticQuestionnaire.getCleaning();
         }
 
         @Test
         void shouldHaveGroupedCleaningVariables_count(){
-            assertEquals(2, cleaningEntries.size());
+            assertEquals(2, cleaningType.countCleaningVariables());
         }
 
         @Test
         void shouldHaveGroupedCleaningVariables_keys() {
-            assertThat(cleaningEntries.keySet()).containsExactlyInAnyOrderElementsOf(
+            assertThat(cleaningType.getCleaningVariableNames()).containsExactlyInAnyOrderElementsOf(
                     Set.of("Q1", "Q2"));
         }
 
         @Test
         void shouldHaveGroupedCleaningVariables_values() {
 
-            CleaningEntry cleaningEntry1 = cleaningEntries.get("Q1");
-            assertEquals(2, cleaningEntry1.getConcernedVariables().size());
-            assertEquals("SHORT_TEXT", cleaningEntry1.getConcernedVariables().get(0).getName());
-            assertEquals("(TEST > 30)", cleaningEntry1.getConcernedVariables().get(0).getFilter());
-            assertEquals("DROPDOWN", cleaningEntry1.getConcernedVariables().get(1).getName());
-            assertEquals("(SUM1 < 10)", cleaningEntry1.getConcernedVariables().get(1).getFilter());
+            CleaningVariableEntry cleaningEntry1 = cleaningType.getCleaningEntry("Q1");
+            assertEquals(2, cleaningEntry1.countCleanedVariables());
+            assertEquals("(TEST > 30)", cleaningEntry1.getCleanedVariable("SHORT_TEXT").filterExpression());
+            assertEquals("(SUM1 < 10)", cleaningEntry1.getCleanedVariable("DROPDOWN").filterExpression());
 
-            CleaningEntry cleaningEntry2 = cleaningEntries.get("Q2");
-            assertEquals(2, cleaningEntry2.getConcernedVariables().size());
-            assertEquals("SHORT_TEXT", cleaningEntry2.getConcernedVariables().get(0).getName());
-            assertEquals("(TEST > 30)", cleaningEntry2.getConcernedVariables().get(0).getFilter());
-            assertEquals("INTEGER", cleaningEntry2.getConcernedVariables().get(1).getName());
-            assertEquals("(SUM2 < 10)", cleaningEntry2.getConcernedVariables().get(1).getFilter());
+            CleaningVariableEntry cleaningEntry2 = cleaningType.getCleaningEntry("Q2");
+            assertEquals(2, cleaningEntry2.countCleanedVariables());
+            assertEquals("(TEST > 30)", cleaningEntry2.getCleanedVariable("SHORT_TEXT").filterExpression());
+            assertEquals("(SUM2 < 10)", cleaningEntry2.getCleanedVariable("INTEGER").filterExpression());
         }
 
     }
 
     @Test
     void checkboxGroupWithBindingDependencies_shouldHaveCleaningEntries() {
-
-        lunaticQuestionnaire = new Questionnaire();
+        //
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(checkboxGroup);
 
         checkboxGroup.setConditionFilter(buildConditionFilter("(SUM1 < 10)", List.of("Q11", "Q12")));
 
+        //
         processing.apply(lunaticQuestionnaire);
-        List<CleaningEntry> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
-                .map(CleaningEntry.class::cast)
-                .toList();
 
-        assertEquals(2, variables.size());
+        //
+        CleaningType cleaningType = lunaticQuestionnaire.getCleaning();
 
-        CleaningEntry variable = variables.get(0);
-        assertEquals("Q11", variable.getVariableName());
-        List<CleaningConcernedVariable> concernedVariables = variable.getConcernedVariables();
-        assertEquals(2, concernedVariables.size());
-        assertEquals("MODALITY1", concernedVariables.get(0).getName());
-        assertEquals("(SUM1 < 10)", concernedVariables.get(0).getFilter());
-        assertEquals("MODALITY2", concernedVariables.get(1).getName());
-        assertEquals("(SUM1 < 10)", concernedVariables.get(1).getFilter());
+        assertEquals(2, cleaningType.countCleaningVariables());
 
-        variable = variables.get(1);
-        assertEquals("Q12", variable.getVariableName());
-        concernedVariables = variable.getConcernedVariables();
-        assertEquals(2, concernedVariables.size());
-        assertEquals("MODALITY1", concernedVariables.get(0).getName());
-        assertEquals("(SUM1 < 10)", concernedVariables.get(0).getFilter());
-        assertEquals("MODALITY2", concernedVariables.get(1).getName());
-        assertEquals("(SUM1 < 10)", concernedVariables.get(1).getFilter());
+        CleaningVariableEntry q11Entry = cleaningType.getCleaningEntry("Q11");
+        assertEquals(2, q11Entry.countCleanedVariables());
+        assertEquals("(SUM1 < 10)", q11Entry.getCleanedVariable("MODALITY1").filterExpression());
+        assertEquals("(SUM1 < 10)", q11Entry.getCleanedVariable("MODALITY2").filterExpression());
+
+        CleaningVariableEntry q12Entry = cleaningType.getCleaningEntry("Q11");
+        assertEquals(2, q12Entry.countCleanedVariables());
+        assertEquals("(SUM1 < 10)", q12Entry.getCleanedVariable("MODALITY1").filterExpression());
+        assertEquals("(SUM1 < 10)", q12Entry.getCleanedVariable("MODALITY2").filterExpression());
     }
 
     @Test
     void tableWithBindingDependencies_shouldHaveCleaningEntries() {
-
-        lunaticQuestionnaire = new Questionnaire();
+        //
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(table);
 
         table.setConditionFilter(buildConditionFilter("(SUM1 < 10)", List.of("Q11", "Q12")));
 
+        //
         processing.apply(lunaticQuestionnaire);
-        List<CleaningEntry> variables = lunaticQuestionnaire.getCleaning().getAny().stream()
-                .map(CleaningEntry.class::cast)
-                .toList();
 
-        assertEquals(2, variables.size());
+        //
+        CleaningType cleaningType = lunaticQuestionnaire.getCleaning();
 
-        CleaningEntry variable = variables.get(0);
-        assertEquals("Q11", variable.getVariableName());
-        List<CleaningConcernedVariable> concernedVariables = variable.getConcernedVariables();
-        assertEquals(3, concernedVariables.size());
-        assertEquals("CELL1", concernedVariables.get(0).getName());
-        assertEquals("(SUM1 < 10)", concernedVariables.get(0).getFilter());
-        assertEquals("CELL2", concernedVariables.get(1).getName());
-        assertEquals("(SUM1 < 10)", concernedVariables.get(1).getFilter());
-        assertEquals("CELL3", concernedVariables.get(2).getName());
-        assertEquals("(SUM1 < 10)", concernedVariables.get(2).getFilter());
+        assertEquals(2, cleaningType.countCleaningVariables());
 
-        variable = variables.get(1);
-        assertEquals("Q12", variable.getVariableName());
-        concernedVariables = variable.getConcernedVariables();
-        assertEquals(3, concernedVariables.size());
-        assertEquals("CELL1", concernedVariables.get(0).getName());
-        assertEquals("(SUM1 < 10)", concernedVariables.get(0).getFilter());
-        assertEquals("CELL2", concernedVariables.get(1).getName());
-        assertEquals("(SUM1 < 10)", concernedVariables.get(1).getFilter());
-        assertEquals("CELL3", concernedVariables.get(2).getName());
-        assertEquals("(SUM1 < 10)", concernedVariables.get(2).getFilter());
+        CleaningVariableEntry q11Entry = cleaningType.getCleaningEntry("Q11");
+        assertEquals(3, q11Entry.countCleanedVariables());
+        assertEquals("(SUM1 < 10)", q11Entry.getCleanedVariable("CELL1").filterExpression());
+        assertEquals("(SUM1 < 10)", q11Entry.getCleanedVariable("CELL2").filterExpression());
+        assertEquals("(SUM1 < 10)", q11Entry.getCleanedVariable("CELL3").filterExpression());
+
+        CleaningVariableEntry q12Entry = cleaningType.getCleaningEntry("Q12");
+        assertEquals(3, q12Entry.countCleanedVariables());
+        assertEquals("(SUM1 < 10)", q12Entry.getCleanedVariable("CELL1").filterExpression());
+        assertEquals("(SUM1 < 10)", q12Entry.getCleanedVariable("CELL2").filterExpression());
+        assertEquals("(SUM1 < 10)", q12Entry.getCleanedVariable("CELL3").filterExpression());
     }
 
     @Test
     void externalBindingDependency_shouldNotBeInCleaningEntries() {
-
-        lunaticQuestionnaire = new Questionnaire();
+        //
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(input);
 
         input.setConditionFilter(buildConditionFilter("(SUM1 < 10)", List.of("Q1", "EXTERNAL1")));
@@ -278,18 +261,17 @@ class LunaticAddCleaningVariablesTest {
         lunaticQuestionnaire.getVariables().add(buildCollectedVariable("Q1"));
         lunaticQuestionnaire.getVariables().add(buildExternalVariable("EXTERNAL1"));
 
+        //
         processing.apply(lunaticQuestionnaire);
-        List<CleaningEntry> cleaningEntries = lunaticQuestionnaire.getCleaning().getAny().stream()
-                .map(CleaningEntry.class::cast)
-                .toList();
 
-        assertEquals(1, cleaningEntries.size());
+        //
+        CleaningType cleaningType = lunaticQuestionnaire.getCleaning();
 
-        CleaningEntry variable = cleaningEntries.get(0);
-        assertEquals("Q1", variable.getVariableName());
-        assertEquals(1, variable.getConcernedVariables().size());
-        assertEquals("SHORT_TEXT", variable.getConcernedVariables().get(0).getName());
-        assertEquals("(SUM1 < 10)", variable.getConcernedVariables().get(0).getFilter());
+        assertEquals(1, cleaningType.countCleaningVariables());
+
+        CleaningVariableEntry q1Entry = cleaningType.getCleaningEntry("Q1");
+        assertEquals(1, q1Entry.countCleanedVariables());
+        assertEquals("(SUM1 < 10)", q1Entry.getCleanedVariable("SHORT_TEXT").filterExpression());
     }
 
     /* ----- Private utility methods below ----- */
@@ -392,28 +374,26 @@ class LunaticAddCleaningVariablesTest {
 
     private ConditionFilterType buildConditionFilter(String vtlExpression, List<String> bindingDependencies) {
         ConditionFilterType conditionFilter = new ConditionFilterType();
-        conditionFilter.setType("VTL");
+        conditionFilter.setType(LabelTypeEnum.VTL);
         conditionFilter.setValue(vtlExpression);
         conditionFilter.getBindingDependencies().addAll(bindingDependencies);
         return conditionFilter;
     }
 
-    private VariableType buildCollectedVariable(String variableName) {
-        VariableType variable = new VariableType();
-        variable.setVariableType(VariableTypeEnum.COLLECTED);
+    private CollectedVariableType buildCollectedVariable(String variableName) {
+        CollectedVariableType variable = new CollectedVariableType();
         variable.setName(variableName);
         return variable;
     }
 
-    private VariableType buildCalculatedVariable(String variableName) {
-        VariableType variable = new VariableType();
-        variable.setVariableType(VariableTypeEnum.CALCULATED);
+    private CalculatedVariableType buildCalculatedVariable(String variableName) {
+        CalculatedVariableType variable = new CalculatedVariableType();
         variable.setName(variableName);
         return variable;
     }
 
-    private VariableType buildExternalVariable(String variableName) {
-        VariableType variable = new VariableType();
+    private ExternalVariableType buildExternalVariable(String variableName) {
+        ExternalVariableType variable = new ExternalVariableType();
         variable.setVariableType(VariableTypeEnum.EXTERNAL);
         variable.setName(variableName);
         return variable;

@@ -6,6 +6,7 @@ import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.label.Label;
 import fr.insee.eno.core.model.label.QuestionnaireLabel;
 import fr.insee.lunatic.model.flat.LabelType;
+import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,7 +22,7 @@ class LabelTests {
         LunaticMapper lunaticMapper = new LunaticMapper();
         lunaticMapper.mapEnoObject(enoLabel, lunaticLabel);
         //
-        assertEquals("VTL|MD", lunaticLabel.getType());
+        assertEquals(LabelTypeEnum.VTL_MD, lunaticLabel.getType());
     }
 
     @Test
@@ -33,7 +34,7 @@ class LabelTests {
         LunaticMapper lunaticMapper = new LunaticMapper();
         lunaticMapper.mapEnoObject(enoLabel, lunaticLabel);
         //
-        assertEquals("VTL|MD", lunaticLabel.getType());
+        assertEquals(LabelTypeEnum.VTL_MD, lunaticLabel.getType());
     }
 
     @Test
@@ -45,7 +46,7 @@ class LabelTests {
         LunaticMapper lunaticMapper = new LunaticMapper();
         lunaticMapper.mapEnoObject(enoLabel, lunaticLabel);
         //
-        assertEquals("VTL|MD", lunaticLabel.getType());
+        assertEquals(LabelTypeEnum.VTL_MD, lunaticLabel.getType());
     }
 
     @Test
@@ -57,7 +58,7 @@ class LabelTests {
         LunaticMapper lunaticMapper = new LunaticMapper();
         lunaticMapper.mapEnoObject(enoCalculatedExpression, lunaticLabel);
         //
-        assertEquals("VTL", lunaticLabel.getType());
+        assertEquals(LabelTypeEnum.VTL, lunaticLabel.getType());
     }
 
 }

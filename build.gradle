@@ -1,9 +1,9 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.2.2' apply false
-    id 'io.spring.dependency-management' version '1.1.4' apply false
+    id 'org.springframework.boot' version '3.3.1' apply false
+    id 'io.spring.dependency-management' version '1.1.5' apply false
     id 'jacoco'
-    id "org.sonarqube" version '4.4.1.3373'
+    id "org.sonarqube" version '5.0.0.4638'
 }
 
 java {
@@ -16,7 +16,7 @@ tasks.withType(JavaCompile).configureEach {
 
 allprojects {
     group = 'fr.insee.eno'
-    version = '3.17.1'
+    version = '3.23.1-SNAPSHOT'
 }
 
 subprojects {

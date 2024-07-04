@@ -40,7 +40,7 @@ jobs:
       - name: Print Eno Version
         run: echo ${{ steps.version-step.outputs.version }}
 
-      - uses: mukunku/tag-exists-action@v1.5.0
+      - uses: mukunku/tag-exists-action@v1.6.0
         name: Check tag existence
         id: check-tag-exists
         with:
@@ -112,11 +112,17 @@ jobs:
         with:
           fromTag: ${{ needs.check-version.outputs.release-version }}
           toTag: ${{ steps.previousTag.outputs.previousTag}}
-          excludeTypes: style,chore,other
-          excludeScopes: changelog # do not include changelog commits
+          excludeTypes: docs,style,chore,other
           token: ${{ secrets.GITHUB_TOKEN }}
           writeToFile: true
           changelogFilePath: 'CHANGELOG.md'
+
+      - name: Commit changelog file
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: 'v3-main'
+          commit_message: 'docs(changelog): ${{ needs.check-version.outputs.release-version }} update [skip ci]'
+          file_pattern: 'CHANGELOG.md'
 
       - name: Download build
         id: download
@@ -126,7 +132,7 @@ jobs:
           path: eno-ws/build/libs/
 
       - name: Create GitHub release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ needs.check-version.outputs.release-version }}
           target_commitish: ${{ github.head_ref || github.ref }}
@@ -136,15 +142,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Commit changelog file
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          branch: 'v3-main'
-          commit_message: 'docs(changelog): ${{ needs.check-version.outputs.release-version }} update [skip ci]'
-          file_pattern: 'CHANGELOG.md'
-
   publish-docker:
-    needs: [ check-version, create-release ]
+    needs: [ check-version, build-sources ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

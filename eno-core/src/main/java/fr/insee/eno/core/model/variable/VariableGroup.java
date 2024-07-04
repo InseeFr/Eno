@@ -2,6 +2,7 @@ package fr.insee.eno.core.model.variable;
 
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.exceptions.business.IllegalDDIElementException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
 import logicalproduct33.VariableGroupType;
@@ -25,14 +26,36 @@ import java.util.Optional;
 @Context(format = Format.DDI, type = VariableGroupType.class)
 public class VariableGroup extends EnoObject {
 
-    public static final String DDI_QUESTIONNAIRE_TYPE = "Questionnaire";
+    private static final String DDI_QUESTIONNAIRE_TYPE = "Questionnaire";
+    private static final String DDI_LOOP_TYPE = "Loop";
+    private static final String DDI_PAIRWISE_TYPE = "PairwiseLink";
 
+    /** Type of variable group. */
+    public enum Type {
+
+        /** Questionnaire-level variable group. */
+        QUESTIONNAIRE,
+
+        /** Loop or dynamic table variable group. */
+        LOOP,
+
+        /** Pairwise links variable group. */
+        PAIRWISE_LINKS
+    }
+
+    /** Business name of the variable group.
+     * In DDI, this is equal to the questionnaire business name for questionnaire-level variable group, otherwise
+     * is equal to the business name of the iteration object (e.g. main loop or dynamic table) that corresponds
+     * to the variable group. */
     @DDI("!getVariableGroupNameList().isEmpty ? getVariableGroupNameArray(0).getStringArray(0).getStringValue() : null")
     private String name;
 
-    @DDI("getTypeOfVariableGroup().getStringValue()")
-    private String type;
+    /** Type of variable group.
+     * In DDI, this property provides a distinction between the questionnaire-level variable group and others. */
+    @DDI("T(fr.insee.eno.core.model.variable.VariableGroup).convertDDITypeOfVariableGroup(#this)")
+    private Type type;
 
+    /** List of variables that belong to the variable group. */
     @DDI("getVariableReferenceList().![#index.get(#this.getIDArray(0).getStringValue())]")
     private final List<Variable> variables = new ArrayList<>();
 
@@ -57,6 +80,18 @@ public class VariableGroup extends EnoObject {
             iterableReferences.add(reference.getIDArray(0).getStringValue());
         }
         return iterableReferences;
+    }
+
+    public static Type convertDDITypeOfVariableGroup(VariableGroupType ddiVariableGroup) {
+        String ddiTypeOfGroup = ddiVariableGroup.getTypeOfVariableGroup().getStringValue();
+        return switch (ddiTypeOfGroup) {
+            case DDI_QUESTIONNAIRE_TYPE -> Type.QUESTIONNAIRE;
+            case DDI_LOOP_TYPE -> Type.LOOP;
+            case DDI_PAIRWISE_TYPE -> Type.PAIRWISE_LINKS;
+            default -> throw new IllegalDDIElementException(String.format(
+                    "Invalid type of variable group '%s' in DDI variable group '%s'.",
+                    ddiTypeOfGroup, ddiVariableGroup.getIDArray(0).getStringValue()));
+        };
     }
 
 }

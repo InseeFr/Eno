@@ -1,7 +1,11 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.table;
 
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.mappers.LunaticMapper;
+import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.question.TableQuestion;
+import fr.insee.eno.core.model.question.table.NoDataCell;
+import fr.insee.eno.core.model.question.table.ResponseCell;
 import fr.insee.eno.core.model.question.table.TableCell;
 import fr.insee.lunatic.model.flat.BodyCell;
 import fr.insee.lunatic.model.flat.BodyLine;
@@ -39,10 +43,16 @@ public class TableQuestionProcessing {
         int columnNumber = lunaticHeader.size() - 1; // (not counting the top left cell)
         int rowNumber = lunaticBody.size();
 
-        TableCell[][] enoCellMatrix = putCellsInMatrix(enoTable.getTableCells(), rowNumber, columnNumber);
+        TableCell[][] enoCellMatrix = createCellsMatrix(rowNumber, columnNumber);
+        putResponseCells(enoTable.getResponseCells(), enoCellMatrix);
+        putNoDataCells(enoTable.getNoDataCells(), enoCellMatrix);
         for (int i=0; i<enoCellMatrix.length; i++) {
             for (int j=0; j<enoCellMatrix[i].length; j++) {
                 TableCell enoCell = enoCellMatrix[i][j];
+                if (enoCell == null)
+                    throw new MappingException(String.format(
+                            "Table question '%s' has a null cell at row of index %s and column of index %s.",
+                            enoTable.getName(), i, j));
                 BodyCell lunaticCell = convertEnoCell(enoCell);
                 lunaticTable.getBodyLines().get(i).getBodyCells().add(lunaticCell);
             }
@@ -54,18 +64,26 @@ public class TableQuestionProcessing {
      * to return a fulfilled BodyCell object. */
     public static BodyCell convertEnoCell(TableCell enoCell) {
         BodyCell bodyCell = new BodyCell();
-        new LunaticMapper().mapEnoObject(enoCell, bodyCell);
+        new LunaticMapper().mapEnoObject((EnoObject) enoCell, bodyCell);
         return bodyCell;
     }
 
-    private static TableCell[][] putCellsInMatrix(List<TableCell> flatCellsList, int rowNumber, int columnNumber) {
-        TableCell[][] matrix = new TableCell[rowNumber][columnNumber];
-        for (TableCell tableCell : flatCellsList) {
-            int rowIndex = tableCell.getRowNumber() - 1;
-            int columnIndex = tableCell.getColumnNumber() - 1;
-            matrix[rowIndex][columnIndex] = tableCell;
-        }
-        return matrix;
+    private static void putResponseCells(List<ResponseCell> flatCellsList, TableCell[][] matrix) {
+        flatCellsList.forEach(tableCell -> putCellInMatrix(matrix, tableCell));
+    }
+
+    private static void putNoDataCells(List<NoDataCell> flatCellsList, TableCell[][] matrix) {
+        flatCellsList.forEach(tableCell -> putCellInMatrix(matrix, tableCell));
+    }
+
+    private static void putCellInMatrix(TableCell[][] matrix, TableCell tableCell) {
+        int rowIndex = tableCell.getRowNumber() - 1;
+        int columnIndex = tableCell.getColumnNumber() - 1;
+        matrix[rowIndex][columnIndex] = tableCell;
+    }
+
+    private static TableCell[][] createCellsMatrix(int rowNumber, int columnNumber) {
+        return new TableCell[rowNumber][columnNumber];
     }
 
 }

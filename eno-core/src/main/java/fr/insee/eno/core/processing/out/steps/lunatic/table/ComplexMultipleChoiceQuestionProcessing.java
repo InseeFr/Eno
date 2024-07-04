@@ -1,5 +1,6 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.table;
 
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.question.ComplexMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.table.TableCell;
 import fr.insee.lunatic.model.flat.BodyCell;
@@ -23,9 +24,13 @@ public class ComplexMultipleChoiceQuestionProcessing {
         List<BodyLine> lunaticBody = LeftColumnCellsProcessing.from(enoMCQ.getLeftColumn()).getLunaticBody();
 
         // For each line, just add the response cell (that is either a radio, dropdown, or checkboxOne)
-        for (int i = 0; i < enoMCQ.getTableCells().size(); i++) {
+        for (int i = 0; i < enoMCQ.getResponseCells().size(); i++) {
             BodyLine lunaticLine = lunaticBody.get(i);
-            TableCell enoCell = enoMCQ.getTableCells().get(i);
+            TableCell enoCell = enoMCQ.getResponseCells().get(i);
+            if (enoCell == null)
+                throw new MappingException(String.format(
+                        "Multiple choice question '%s' has a null response at index %s.",
+                        enoMCQ.getName(), i));
             BodyCell lunaticCell = TableQuestionProcessing.convertEnoCell(enoCell);
             lunaticLine.getBodyCells().add(lunaticCell);
         }

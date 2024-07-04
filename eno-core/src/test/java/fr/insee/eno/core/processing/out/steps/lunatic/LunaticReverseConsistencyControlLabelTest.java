@@ -1,6 +1,5 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
-import fr.insee.eno.core.processing.out.steps.lunatic.LunaticReverseConsistencyControlLabel;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -53,9 +52,9 @@ class LunaticReverseConsistencyControlLabelTest {
 
     @Test
     void shouldComponentsWithConsistencyReverseControlLabel() {
-        i.getControls().add(buildControl("control-input", "COUNT(plop)", ControlTypeOfControlEnum.CONSISTENCY, ControlCriticityEnum.ERROR));
-        i.getControls().add(buildControl("control-input2", "SUM1 > 10", ControlTypeOfControlEnum.CONSISTENCY, ControlCriticityEnum.ERROR));
-        t.getControls().add(buildControl("control-checkgroup", "SUM2 > 20", ControlTypeOfControlEnum.CONSISTENCY, ControlCriticityEnum.ERROR));
+        i.getControls().add(buildControl("control-input", "COUNT(plop)", ControlTypeEnum.CONSISTENCY, ControlCriticalityEnum.ERROR));
+        i.getControls().add(buildControl("control-input2", "SUM1 > 10", ControlTypeEnum.CONSISTENCY, ControlCriticalityEnum.ERROR));
+        t.getControls().add(buildControl("control-checkgroup", "SUM2 > 20", ControlTypeEnum.CONSISTENCY, ControlCriticalityEnum.ERROR));
 
         lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().addAll(List.of(i, t));
@@ -68,9 +67,9 @@ class LunaticReverseConsistencyControlLabelTest {
 
     @Test
     void shouldLoopComponentsWithConsistencyReverseControlLabel() {
-        ln.getControls().add(buildControl("control-input", "COUNT(plop)", ControlTypeOfControlEnum.CONSISTENCY, ControlCriticityEnum.ERROR));
-        l.getControls().add(buildControl("control-input2", "SUM1 > 10", ControlTypeOfControlEnum.CONSISTENCY, ControlCriticityEnum.ERROR));
-        ldd.getControls().add(buildControl("control-checkgroup", "SUM2 > 20", ControlTypeOfControlEnum.CONSISTENCY, ControlCriticityEnum.ERROR));
+        ln.getControls().add(buildControl("control-input", "COUNT(plop)", ControlTypeEnum.CONSISTENCY, ControlCriticalityEnum.ERROR));
+        l.getControls().add(buildControl("control-input2", "SUM1 > 10", ControlTypeEnum.CONSISTENCY, ControlCriticalityEnum.ERROR));
+        ldd.getControls().add(buildControl("control-checkgroup", "SUM2 > 20", ControlTypeEnum.CONSISTENCY, ControlCriticalityEnum.ERROR));
 
         lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(l);
@@ -83,9 +82,9 @@ class LunaticReverseConsistencyControlLabelTest {
 
     @Test
     void shouldComponentsWithFormatControlsDoNothing() {
-        i.getControls().add(buildControl("control-input", "COUNT(plop)", ControlTypeOfControlEnum.FORMAT, ControlCriticityEnum.ERROR));
-        i.getControls().add(buildControl("control-input2", "SUM1 > 10", ControlTypeOfControlEnum.FORMAT, ControlCriticityEnum.ERROR));
-        co.getControls().add(buildControl("control-checkgroup", "SUM2 > 20", ControlTypeOfControlEnum.FORMAT, ControlCriticityEnum.ERROR));
+        i.getControls().add(buildControl("control-input", "COUNT(plop)", ControlTypeEnum.FORMAT, ControlCriticalityEnum.ERROR));
+        i.getControls().add(buildControl("control-input2", "SUM1 > 10", ControlTypeEnum.FORMAT, ControlCriticalityEnum.ERROR));
+        co.getControls().add(buildControl("control-checkgroup", "SUM2 > 20", ControlTypeEnum.FORMAT, ControlCriticalityEnum.ERROR));
         lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().addAll(List.of(i, co));
         processing.apply(lunaticQuestionnaire);
@@ -97,9 +96,9 @@ class LunaticReverseConsistencyControlLabelTest {
 
     @Test
     void shouldLoopComponentsWithFormatControlsDoNothing() {
-        ln.getControls().add(buildControl("control-input", "COUNT(plop)", ControlTypeOfControlEnum.FORMAT, ControlCriticityEnum.ERROR));
-        l.getControls().add(buildControl("control-input2", "SUM1 > 10", ControlTypeOfControlEnum.FORMAT, ControlCriticityEnum.ERROR));
-        ldd.getControls().add(buildControl("control-checkgroup", "SUM2 > 20", ControlTypeOfControlEnum.FORMAT, ControlCriticityEnum.ERROR));
+        ln.getControls().add(buildControl("control-input", "COUNT(plop)", ControlTypeEnum.FORMAT, ControlCriticalityEnum.ERROR));
+        l.getControls().add(buildControl("control-input2", "SUM1 > 10", ControlTypeEnum.FORMAT, ControlCriticalityEnum.ERROR));
+        ldd.getControls().add(buildControl("control-checkgroup", "SUM2 > 20", ControlTypeEnum.FORMAT, ControlCriticalityEnum.ERROR));
 
         lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(l);
@@ -194,13 +193,13 @@ class LunaticReverseConsistencyControlLabelTest {
         return loop;
     }
 
-    private ControlType buildControl(String id, String errorMessage, ControlTypeOfControlEnum typeOfControl, ControlCriticityEnum criticality ) {
+    private ControlType buildControl(String id, String errorMessage, ControlTypeEnum typeOfControl, ControlCriticalityEnum criticality ) {
         ControlType control = new ControlType();
         control.setTypeOfControl(typeOfControl);
         control.setId(id);
         control.setCriticality(criticality);
         LabelType label = new LabelType();
-        label.setType("VTL");
+        label.setType(LabelTypeEnum.VTL);
         label.setValue(errorMessage);
         control.setControl(label);
         return control;

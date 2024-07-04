@@ -6,13 +6,11 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Loop;
 import fr.insee.lunatic.model.flat.Questionnaire;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -42,9 +40,11 @@ class DDIToLunaticTest {
     @DisplayName("Large questionnaires, DDI to Lunatic, transformation should succeed")
     void transformQuestionnaire_nonNullOutput(String questionnaireId) throws DDIParsingException {
         //
+        EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
+        enoParameters.getLunaticParameters().setLunaticV3(true);
         Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
                 this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-" +questionnaireId+".xml"),
-                EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
+                enoParameters);
         //
         assertNotNull(lunaticQuestionnaire);
     }
@@ -59,14 +59,30 @@ class DDIToLunaticTest {
         assertThrows(UnauthorizedHeaderException.class, () -> DDIToLunatic.transform(inputStream, enoParameters));
     }
 
+    @Test
+    void componentWithBeforeQuestionDeclaration() throws DDIParsingException {
+        //
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+                this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-lqnje8yr.xml"),
+                EnoParameters.of(Context.DEFAULT, ModeParameter.CAPI, Format.LUNATIC));
+        //
+        assertNotNull(lunaticQuestionnaire);
+        ComponentType componentThatShouldHaveDeclaration = lunaticQuestionnaire.getComponents().stream()
+                .filter(component -> "lsa7m4oz".equals(component.getId()))
+                .findAny().orElse(null);
+        assertNotNull(componentThatShouldHaveDeclaration);
+        assertEquals(2, componentThatShouldHaveDeclaration.getDeclarations().size());
+    }
+
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @DisplayName("DDI to Lunatic, functional test with 'l20g2ba7'")
     class FunctionalTest1 {
 
-        private static Questionnaire lunaticQuestionnaire;
+        private Questionnaire lunaticQuestionnaire;
 
         @BeforeAll
-        static void mapLunaticQuestionnaire() throws DDIParsingException {
+        void mapLunaticQuestionnaire() throws DDIParsingException {
             lunaticQuestionnaire = DDIToLunatic.transform(
                     DDIToLunaticTest.class.getClassLoader().getResourceAsStream("functional/ddi/ddi-l20g2ba7.xml"),
                     EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
@@ -75,7 +91,7 @@ class DDIToLunaticTest {
         @Test
         @DisplayName("We should have the correct number of components")
         void testComponentsSize() {
-            assertEquals(51, lunaticQuestionnaire.getComponents().size());
+            assertEquals(53, lunaticQuestionnaire.getComponents().size());
         }
 
         @Test // This test is tedious => we should figure out a way to automate this kind of tests
@@ -85,7 +101,7 @@ class DDIToLunaticTest {
                     SEQUENCE,
                     SUBSEQUENCE, INPUT, TEXTAREA,
                     SUBSEQUENCE, INPUT_NUMBER, INPUT_NUMBER, INPUT_NUMBER,
-                    SUBSEQUENCE, DATEPICKER, DATEPICKER, DATEPICKER, CHECKBOX_BOOLEAN,
+                    SUBSEQUENCE, DATEPICKER, DATEPICKER, DATEPICKER, DURATION, DURATION, CHECKBOX_BOOLEAN,
                     SEQUENCE,
                     SUBSEQUENCE, RADIO, CHECKBOX_ONE, CHECKBOX_ONE, CHECKBOX_ONE, INPUT, DROPDOWN, INPUT,
                     SUBSEQUENCE, CHECKBOX_GROUP, TABLE, TABLE,

@@ -216,12 +216,9 @@ public class DDIMapper extends Mapper {
         // Collection of complex types
         else if (EnoObject.class.isAssignableFrom(modelTargetType)) {
             // Iterate on the DDI collection
-            for (int i=0; i<collectionSize; i++) {
+            for (Object ddiObject2 : ddiCollection) {
                 log.debug("Iterating on "+collectionSize+" DDI objects "
                         + propertyDescription(propertyName, modelContextType.getSimpleName()));
-                Object ddiObject2 = ddiCollection.get(i);
-                // Put current DDI list index in context TODO: I don't really like this but... :(((
-                spelEngine.getContext().setVariable("listIndex", i);
                 // Instantiate a model object per DDI object and add it in the model collection
                 EnoObject enoObject2 = convert(ddiObject2, modelTargetType);
                 // Add the created instance in the model collection
@@ -239,7 +236,7 @@ public class DDIMapper extends Mapper {
     private EnoObject convert(Object ddiObject, Class<?> enoTargetType) {
         // If the Eno type is abstract call the converter
         if (Modifier.isAbstract(enoTargetType.getModifiers()))
-            return DDIConverter.instantiateFromDDIObject(ddiObject, ddiIndex); //TODO: remove usage of this (conversion using annotations)
+            return DDIConverter.instantiateFromDDIObject(ddiObject, ddiIndex, enoTargetType); //TODO: remove usage of this (conversion using annotations)
         // Else, call class constructor
         return callConstructor(enoTargetType);
     }

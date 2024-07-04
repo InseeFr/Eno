@@ -11,12 +11,9 @@ import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticFilterResult;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.VariableType;
-import fr.insee.lunatic.model.flat.VariableTypeEnum;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
+import fr.insee.lunatic.model.flat.variable.VariableTypeEnum;
+import org.junit.jupiter.api.*;
 
 import java.util.*;
 
@@ -27,12 +24,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class CalculatedVariableTest {
 
     private CalculatedVariable enoVariable;
-    private VariableType lunaticVariable;
+    private CalculatedVariableType lunaticVariable;
 
     @BeforeEach
     void createObjects() {
         enoVariable = new CalculatedVariable();
-        lunaticVariable = new VariableType();
+        lunaticVariable = new CalculatedVariableType();
     }
 
     @Test
@@ -72,7 +69,7 @@ class CalculatedVariableTest {
         lunaticMapper.mapEnoObject(enoVariable, lunaticVariable);
         //
         assertEquals("BAR = 1 or BAZ = 1", lunaticVariable.getExpression().getValue());
-        assertEquals(LabelTypeEnum.VTL, lunaticVariable.getExpression().getTypeEnum());
+        assertEquals(LabelTypeEnum.VTL, lunaticVariable.getExpression().getType());
     }
 
     @Test
@@ -88,28 +85,29 @@ class CalculatedVariableTest {
     }
 
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTest1 {
 
-        private static Map<String, VariableType> calculatedVariables;
+        private Map<String, CalculatedVariableType> filterResultVariables;
 
         @BeforeAll
-        static void mapQuestionnaire() throws DDIParsingException {
+        void mapQuestionnaire() throws DDIParsingException {
             Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
                     CalculatedVariableTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-variables.xml"),
                     EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
             //
-            calculatedVariables = new HashMap<>();
+            filterResultVariables = new HashMap<>();
             lunaticQuestionnaire.getVariables().stream()
-                    .map(VariableType.class::cast)
-                    .filter(variableType -> VariableTypeEnum.CALCULATED.equals(variableType.getVariableType()))
+                    .filter(CalculatedVariableType.class::isInstance)
+                    .map(CalculatedVariableType.class::cast)
                     .filter(variableType -> !variableType.getName().startsWith(LunaticFilterResult.FILTER_RESULT_PREFIX))
-                    .forEach(variableType -> calculatedVariables.put(variableType.getName(), variableType));
+                    .forEach(variableType -> filterResultVariables.put(variableType.getName(), variableType));
         }
 
         @Test
         void variablesCount() {
-            assertEquals(9, calculatedVariables.size());
+            assertEquals(9, filterResultVariables.size());
         }
 
         @Test
@@ -117,65 +115,65 @@ class CalculatedVariableTest {
             assertEquals(
                     Set.of("CALCULATED1", "CALCULATED2", "CALCULATED3", "CALCULATED4",
                             "CALCULATED5", "CALCULATED6", "CALCULATED7", "CALCULATED8", "CALCULATED9"),
-                    calculatedVariables.keySet());
+                    filterResultVariables.keySet());
         }
 
         @Test
         void calculatedExpressions() {
             assertEquals("cast(NUMBER1, number) * 10",
-                    calculatedVariables.get("CALCULATED1").getExpression().getValue());
+                    filterResultVariables.get("CALCULATED1").getExpression().getValue());
             // ...
         }
 
         @Test
         void calculatedExpressionType() {
-            calculatedVariables.values().forEach(variableType ->
-                    assertEquals(LabelTypeEnum.VTL, variableType.getExpression().getTypeEnum()));
+            filterResultVariables.values().forEach(variableType ->
+                    assertEquals(LabelTypeEnum.VTL, variableType.getExpression().getType()));
         }
 
         @Test
         void bindingDependencies_collectedOnly() {
-            assertThat(calculatedVariables.get("CALCULATED1").getBindingDependencies())
+            assertThat(filterResultVariables.get("CALCULATED1").getBindingDependencies())
                     .containsExactlyInAnyOrderElementsOf(List.of("NUMBER1"));
-            assertThat(calculatedVariables.get("CALCULATED2").getBindingDependencies())
+            assertThat(filterResultVariables.get("CALCULATED2").getBindingDependencies())
                     .containsExactlyInAnyOrderElementsOf(List.of("NUMBER1", "NUMBER2"));
         }
 
         @Test
         void bindingDependencies_withCalculated() {
-            assertThat(calculatedVariables.get("CALCULATED3").getBindingDependencies())
+            assertThat(filterResultVariables.get("CALCULATED3").getBindingDependencies())
                     .containsExactlyInAnyOrderElementsOf(List.of("CALCULATED1", "NUMBER1"));
-            assertThat(calculatedVariables.get("CALCULATED4").getBindingDependencies())
+            assertThat(filterResultVariables.get("CALCULATED4").getBindingDependencies())
                     .containsExactlyInAnyOrderElementsOf(List.of("CALCULATED2", "NUMBER1", "NUMBER2"));
         }
 
         @Test
         void bindingDependencies_intermediateCalculatedReference() {
-            assertThat(calculatedVariables.get("CALCULATED5").getBindingDependencies())
+            assertThat(filterResultVariables.get("CALCULATED5").getBindingDependencies())
                     .containsExactlyInAnyOrderElementsOf(List.of("CALCULATED4", "NUMBER1", "NUMBER2"));
         }
 
         @Test
         void bindingDependencies_external() {
-            assertThat(calculatedVariables.get("CALCULATED6").getBindingDependencies())
+            assertThat(filterResultVariables.get("CALCULATED6").getBindingDependencies())
                     .containsExactlyInAnyOrderElementsOf(List.of("EXTERNAL_TEXT"));
         }
 
         @Test
         void bindingDependencies_externalAndCollected() {
-            assertThat(calculatedVariables.get("CALCULATED7").getBindingDependencies())
+            assertThat(filterResultVariables.get("CALCULATED7").getBindingDependencies())
                     .containsExactlyInAnyOrderElementsOf(List.of("EXTERNAL_NUMBER", "NUMBER1"));
         }
 
         @Test
         void bindingDependencies_externalAndCollectedAndCalculated() {
-            assertThat(calculatedVariables.get("CALCULATED8").getBindingDependencies())
+            assertThat(filterResultVariables.get("CALCULATED8").getBindingDependencies())
                     .containsExactlyInAnyOrderElementsOf(List.of("EXTERNAL_NUMBER", "NUMBER1", "CALCULATED7"));
         }
 
         @Test
         void bindingDependencies_finalBoss() {
-            assertThat(calculatedVariables.get("CALCULATED9").getBindingDependencies())
+            assertThat(filterResultVariables.get("CALCULATED9").getBindingDependencies())
                     .containsExactlyInAnyOrderElementsOf(List.of("EXTERNAL_NUMBER", "NUMBER1", "NUMBER2",
                             "CALCULATED4", "CALCULATED7"));
         }
@@ -193,17 +191,17 @@ class CalculatedVariableTest {
                             "integration/ddi/ddi-declarations.xml"),
                     EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
             // Then
-            Optional<VariableType> lunaticVariable = lunaticQuestionnaire.getVariables().stream()
+            Optional<CalculatedVariableType> lunaticVariable = lunaticQuestionnaire.getVariables().stream()
                     .filter(variableType -> "CALCULATED1".equals(variableType.getName()))
-                    .map(VariableType.class::cast)
+                    .map(CalculatedVariableType.class::cast)
                     .findAny();
             assertTrue(lunaticVariable.isPresent());
             assertEquals(VariableTypeEnum.CALCULATED, lunaticVariable.get().getVariableType());
             assertEquals("CALCULATED1", lunaticVariable.get().getName());
             assertEquals("cast(Q3, integer) + 5", lunaticVariable.get().getExpression().getValue());
-            assertEquals(LabelTypeEnum.VTL, lunaticVariable.get().getExpression().getTypeEnum());
+            assertEquals(LabelTypeEnum.VTL, lunaticVariable.get().getExpression().getType());
             assertEquals(1, lunaticVariable.get().getBindingDependencies().size());
-            assertEquals("Q3", lunaticVariable.get().getBindingDependencies().get(0));
+            assertEquals("Q3", lunaticVariable.get().getBindingDependencies().getFirst());
         }
 
     }

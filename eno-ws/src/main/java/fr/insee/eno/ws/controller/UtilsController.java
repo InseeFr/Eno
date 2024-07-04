@@ -37,10 +37,18 @@ public class UtilsController {
         return passThrough.passePlatPost(request, response);
     }
 
+    /**
+     * Converts XPath expression to VTL.
+     * @param xpath A XPath expression.
+     * @return The XPath expression converted to VTL in a reactive response entity.
+     * @deprecated The usage of XPath in questionnaires is deprecated.
+     */
     @Operation(
             summary = "Conversion of Xpath expression to VTL expression.",
-            description = "Converts the given Xpath 1.1 expression to a VTL 2.0 expression.")
+            description = "Converts the given Xpath 1.1 expression to a VTL 2.0 expression. " +
+                    "_Note: The usage of XPath in questionnaires is now deprecated._")
     @PostMapping(value = "xpath-2-vtl")
+    @Deprecated(since = "3.18.1")
     public Mono<ResponseEntity<String>> convertXpathToVTL(
             @RequestParam(value="xpath") String xpath) {
         String result = XpathToVtl.parseToVTL(xpath);

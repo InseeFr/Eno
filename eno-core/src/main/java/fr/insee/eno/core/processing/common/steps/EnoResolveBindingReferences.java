@@ -1,5 +1,6 @@
 package fr.insee.eno.core.processing.common.steps;
 
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoComponent;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.BindingReference;
@@ -18,6 +19,36 @@ import java.util.*;
 public class EnoResolveBindingReferences implements ProcessingStep<EnoQuestionnaire> {
 
     private final Map<String, Variable> variableMap = new HashMap<>();
+
+    /**
+     * Searches the variable in the variables map using the binding reference given.
+     * Throws an exception if the variable is not found.
+     * @param bindingReference binding reference.
+     * @param calculatedVariable the variable whose dependencies are being resolved, passed for logging purposes.
+     * @return The variable which has the name defined in the binding reference.
+     */
+    private Variable findVariable(BindingReference bindingReference, CalculatedVariable calculatedVariable) {
+        Variable variable = variableMap.get(bindingReference.getVariableName());
+        if (variable == null)
+            throw new MappingException(String.format(
+                    "Unable to retrieve the variable '%s' when resolving dependencies of calculated variable '%s'.",
+                    bindingReference.getVariableName(), calculatedVariable.getName()));
+        return variable;
+    }
+
+    /**
+     * Searches the variable in the variables map using the binding reference given.
+     * Throws an exception if the variable is not found.
+     * @param bindingReference binding reference.
+     * @return The variable which has the name defined in the binding reference.
+     */
+    private Variable findVariable(BindingReference bindingReference) {
+        Variable variable = variableMap.get(bindingReference.getVariableName());
+        if (variable == null)
+            throw new MappingException(String.format(
+                    "Unable to retrieve the variable '%s'.", bindingReference.getVariableName()));
+        return variable;
+    }
 
     /** Resolves the binding references of all CalculatedVariable and ComponentFilter objects defined in
      * the questionnaire. */
@@ -52,7 +83,7 @@ public class EnoResolveBindingReferences implements ProcessingStep<EnoQuestionna
         List<BindingReference> initialBindingReferences = new ArrayList<>(expression.getBindingReferences());
         //
         for (BindingReference bindingReference : initialBindingReferences) {
-            Variable variable = variableMap.get(bindingReference.getVariableName());
+            Variable variable = findVariable(bindingReference, calculatedVariable);
             if (Variable.CollectionType.CALCULATED.equals(variable.getCollectionType())) {
                 insertReferences(((CalculatedVariable) variable).getExpression().getBindingReferences(), expression);
             }
@@ -67,7 +98,7 @@ public class EnoResolveBindingReferences implements ProcessingStep<EnoQuestionna
      */
     private void insertReferences(Set<BindingReference> bindingReferences, CalculatedExpression expression) {
         for (BindingReference bindingReference : bindingReferences) {
-            Variable variable = variableMap.get(bindingReference.getVariableName());
+            Variable variable = findVariable(bindingReference);
             if (Variable.CollectionType.CALCULATED.equals(variable.getCollectionType())) {
                 insertReferences(((CalculatedVariable) variable).getExpression().getBindingReferences(), expression);
                 return;
@@ -105,7 +136,7 @@ public class EnoResolveBindingReferences implements ProcessingStep<EnoQuestionna
         Set<BindingReference> resolvedBindingReferences = new HashSet<>(bindingReferences);
         //
         for (BindingReference bindingReference : bindingReferences) {
-            Variable variable = variableMap.get(bindingReference.getVariableName());
+            Variable variable = findVariable(bindingReference);
             if (Variable.CollectionType.CALCULATED.equals(variable.getCollectionType()))
                 resolvedBindingReferences.addAll(
                         ((CalculatedVariable) variable).getExpression().getBindingReferences());

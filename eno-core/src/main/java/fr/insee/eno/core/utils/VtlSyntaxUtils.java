@@ -1,6 +1,11 @@
 package fr.insee.eno.core.utils;
 
+/**
+ * Utility class that provide methods for writing VTL expressions.
+ */
 public class VtlSyntaxUtils {
+
+    private VtlSyntaxUtils() {}
 
     private static final String VTL_CONCATENATION_OPERATOR = "||";
 

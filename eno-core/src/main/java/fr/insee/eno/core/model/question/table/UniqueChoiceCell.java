@@ -8,6 +8,7 @@ import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.BodyCell;
+import fr.insee.lunatic.model.flat.Orientation;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +23,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @Getter @Setter
 @Context(format = Format.DDI, type = GridResponseDomainInMixedType.class)
 @Context(format = Format.LUNATIC, type = BodyCell.class)
-public class UniqueChoiceCell extends TableCell {
+public class UniqueChoiceCell extends ResponseCell {
 
     /**
      * Mapping uses the same logic as in unique choice question.
@@ -33,6 +34,11 @@ public class UniqueChoiceCell extends TableCell {
     @Lunatic("setComponentType(" +
             "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
     UniqueChoiceQuestion.DisplayFormat displayFormat;
+
+    /** Lunatic property for the orientation of modalities.
+     * Horizontal for table cells. */
+    @Lunatic("setOrientation(T(fr.insee.lunatic.model.flat.Orientation).valueOf(#param))")
+    String orientation = Orientation.HORIZONTAL.toString();
 
     @DDI("getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()")
     String codeListReference;

@@ -53,7 +53,8 @@ public class GenerationStandardController {
             @Parameter(name = "specificTreatment", schema = @Schema(type="string", format="binary"))
             @RequestPart(value="specificTreatment", required = false) Mono<Part> specificTreatment,
             @PathVariable EnoParameters.Context context,
-            @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter) {
+            @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter,
+            @RequestParam(defaultValue = "false") boolean dsfr) {
         if (EnoParameters.ModeParameter.PAPI.equals(modeParameter))
             return Mono.error(new ModeParameterException("Lunatic format is not compatible with the mode 'PAPER'."));
 
@@ -67,6 +68,7 @@ public class GenerationStandardController {
         Mono<LunaticPostProcessing> lunaticPostProcessing = controllerUtils.generateLunaticPostProcessings(specificTreatment);
         //
         EnoParameters enoParameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
+        enoParameters.getLunaticParameters().setLunaticV3(dsfr);
         //
         return controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessing);
     }

@@ -60,7 +60,7 @@ class ShapefromAttributeRetrievalFromVariableGroupsTest {
         enoQuestionnaire.getLoops().add(loop);
 
         variableGroup1 = new VariableGroup();
-        variableGroup1.setType("Loop");
+        variableGroup1.setType(VariableGroup.Type.LOOP);
         variableGroup1.getLoopReferences().addAll(List.of("loop-id", "linked-loop-id"));
         // (the linked loop reference should be ignored as only the "main" loop counts for retrieving the 'shapeFrom')
         variable1 = new CalculatedVariable();
@@ -70,7 +70,7 @@ class ShapefromAttributeRetrievalFromVariableGroupsTest {
         variableGroup1.getVariables().addAll(List.of(variable1, variable2));
 
         variableGroup2 = new VariableGroup();
-        variableGroup2.setType("Questionnaire");
+        variableGroup2.setType(VariableGroup.Type.QUESTIONNAIRE);
         variable3 = new CollectedVariable();
         variable3.setName("variable3");
         variableGroup2.getVariables().add(variable3);
@@ -81,7 +81,7 @@ class ShapefromAttributeRetrievalFromVariableGroupsTest {
         enoQuestionnaire.getMultipleResponseQuestions().add(dynamicTableQuestion);
 
         variableGroup3 = new VariableGroup();
-        variableGroup3.setType("Loop");
+        variableGroup3.setType(VariableGroup.Type.LOOP);
         variableGroup3.getLoopReferences().add("dynamic-table-id");
         variable4 = new CollectedVariable();
         variable4.setName("variable4");

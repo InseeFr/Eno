@@ -7,6 +7,8 @@ import fr.insee.eno.core.model.question.ComplexMultipleChoiceQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -17,12 +19,13 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ComplexMultipleChoiceQuestionProcessingTest {
 
-    private static List<Table> lunaticTableList;
+    private List<Table> lunaticTableList;
 
     @BeforeAll
-    static void complexMCQ_integrationTestFromDDI() throws DDIParsingException {
+    void complexMCQ_integrationTestFromDDI() throws DDIParsingException {
         // Given
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
                 ComplexMultipleChoiceQuestionProcessingTest.class.getClassLoader().getResourceAsStream(
@@ -47,7 +50,7 @@ class ComplexMultipleChoiceQuestionProcessingTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 1}) // First two MCQ are identical except first has radio format, second dropdown
+    @ValueSource(ints = {0, 1})
     void simpleLeftColumnCodeList(int i) {
         //
         Table lunaticTable = lunaticTableList.get(i);
@@ -58,10 +61,30 @@ class ComplexMultipleChoiceQuestionProcessingTest {
             assertEquals(2, bodyLine.getBodyCells().size());
             assertNotNull(bodyLine.getBodyCells().get(0).getValue());
             assertNotNull(bodyLine.getBodyCells().get(0).getLabel().getValue());
-            assertEquals(i == 0 ? ComponentTypeEnum.RADIO : ComponentTypeEnum.DROPDOWN,
-                    bodyLine.getBodyCells().get(1).getComponentType());
             assertEquals(5, bodyLine.getBodyCells().get(1).getOptions().size());
         });
+    }
+
+    @Test
+    void simpleLeftColumn_radio() {
+        //
+        Table lunaticTable = lunaticTableList.get(0);
+        //
+        lunaticTable.getBodyLines().forEach(bodyLine -> {
+            assertEquals(2, bodyLine.getBodyCells().size());
+            assertEquals(ComponentTypeEnum.RADIO, bodyLine.getBodyCells().get(1).getComponentType());
+            assertEquals(Orientation.HORIZONTAL, bodyLine.getBodyCells().get(1).getOrientation());
+            assertEquals(5, bodyLine.getBodyCells().get(1).getOptions().size());
+        });
+    }
+
+    @Test
+    void simpleLeftColumn_dropdown() {
+        //
+        Table lunaticTable = lunaticTableList.get(1);
+        //
+        lunaticTable.getBodyLines().forEach(bodyLine ->
+                assertEquals(ComponentTypeEnum.DROPDOWN, bodyLine.getBodyCells().get(1).getComponentType()));
     }
 
     @ParameterizedTest
@@ -96,7 +119,7 @@ class ComplexMultipleChoiceQuestionProcessingTest {
         assertEquals("\"Code 1\"",
                 lunaticTable.getBodyLines().get(0).getBodyCells().get(0).getLabel().getValue());
         assertEquals(LabelTypeEnum.VTL_MD,
-                lunaticTable.getBodyLines().get(0).getBodyCells().get(0).getLabel().getTypeEnum());
+                lunaticTable.getBodyLines().get(0).getBodyCells().get(0).getLabel().getType());
         // Only look at the modality value for the others
         assertEquals("c2", lunaticTable.getBodyLines().get(1).getBodyCells().get(0).getValue());
         assertEquals("c21", lunaticTable.getBodyLines().get(1).getBodyCells().get(1).getValue());

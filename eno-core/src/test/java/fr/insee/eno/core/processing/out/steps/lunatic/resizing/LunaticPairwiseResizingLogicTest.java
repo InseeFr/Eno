@@ -1,15 +1,16 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.resizing;
 
-import fr.insee.eno.core.model.lunatic.LunaticResizingPairwiseEntry;
 import fr.insee.eno.core.model.question.PairwiseQuestion;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
+import fr.insee.lunatic.model.flat.variable.VariableType;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 class LunaticPairwiseResizingLogicTest {
 
@@ -17,6 +18,7 @@ class LunaticPairwiseResizingLogicTest {
     void pairwiseResizingTest() {
         //
         Questionnaire lunaticQuestionnaire = new Questionnaire();
+        ResizingType resizingType = new ResizingType();
         //
         PairwiseLinks lunaticPairwise = new PairwiseLinks();
         lunaticPairwise.setId("pairwise-id");
@@ -31,8 +33,7 @@ class LunaticPairwiseResizingLogicTest {
         lunaticPairwise.getComponents().add(dropdown);
         lunaticQuestionnaire.getComponents().add(lunaticPairwise);
         //
-        VariableType loopVariable = new VariableType();
-        loopVariable.setVariableType(VariableTypeEnum.COLLECTED);
+        VariableType loopVariable = new CollectedVariableType();
         loopVariable.setName("LOOP_VAR");
         lunaticQuestionnaire.getVariables().add(loopVariable);
 
@@ -48,15 +49,15 @@ class LunaticPairwiseResizingLogicTest {
         // When
         LunaticPairwiseResizingLogic pairwiseResizingLogic = new LunaticPairwiseResizingLogic(
                 lunaticQuestionnaire, enoIndex);
-        List<LunaticResizingPairwiseEntry> pairwiseResizingEntries = pairwiseResizingLogic
-                .buildPairwiseResizingEntries(lunaticPairwise);
+        pairwiseResizingLogic.buildPairwiseResizingEntries(lunaticPairwise, resizingType);
 
         // Test
-        assertEquals(1, pairwiseResizingEntries.size());
-        assertEquals("LOOP_VAR", pairwiseResizingEntries.get(0).getName());
-        assertEquals(List.of("count(LOOP_VAR)", "count(LOOP_VAR)"), pairwiseResizingEntries.get(0).getSizeForLinksVariables());
-        assertThat(pairwiseResizingEntries.get(0).getLinksVariables())
-                .containsExactlyInAnyOrderElementsOf(List.of("LINKS_VAR"));
+        assertEquals(1, resizingType.countResizingEntries());
+        ResizingPairwiseEntry resizingPairwiseEntry = assertInstanceOf(ResizingPairwiseEntry.class,
+                resizingType.getResizingEntry("LOOP_VAR"));
+        assertEquals("count(LOOP_VAR)", resizingPairwiseEntry.getSizeForLinksVariables().getXAxisSize());
+        assertEquals("count(LOOP_VAR)", resizingPairwiseEntry.getSizeForLinksVariables().getYAxisSize());
+        assertEquals(List.of("LINKS_VAR"), resizingPairwiseEntry.getLinksVariables());
     }
 
 }

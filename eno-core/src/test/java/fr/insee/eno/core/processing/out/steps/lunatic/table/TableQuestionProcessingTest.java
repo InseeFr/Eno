@@ -69,12 +69,12 @@ class TableQuestionProcessingTest {
         cell23.setLengthType(TextQuestion.LengthType.SHORT);
         cell23.setRowNumber(2);
         cell23.setColumnNumber(3);
-        enoTable.getTableCells().add(cell11);
-        enoTable.getTableCells().add(cell21);
-        enoTable.getTableCells().add(cell12);
-        enoTable.getTableCells().add(cell22);
-        enoTable.getTableCells().add(cell13);
-        enoTable.getTableCells().add(cell23);
+        enoTable.getResponseCells().add(cell11);
+        enoTable.getResponseCells().add(cell21);
+        enoTable.getResponseCells().add(cell12);
+        enoTable.getResponseCells().add(cell22);
+        enoTable.getResponseCells().add(cell13);
+        enoTable.getResponseCells().add(cell23);
         //
         enoTable.setVariableNames(List.of("BOOLEAN_1", "BOOLEAN_2", "NUMERIC_1", "NUMERIC_2", "TEXT_1", "TEXT_2"));
         //
@@ -95,16 +95,16 @@ class TableQuestionProcessingTest {
         assertEquals("h2", lunaticTable.getHeader().get(2).getLabel().getValue());
         assertEquals("h3", lunaticTable.getHeader().get(3).getLabel().getValue());
         lunaticTable.getHeader().forEach(headerType ->
-                assertEquals(LabelTypeEnum.VTL_MD, headerType.getLabel().getTypeEnum()));
+                assertEquals(LabelTypeEnum.VTL_MD, headerType.getLabel().getType()));
         //
         assertEquals("1", lunaticTable.getBodyLines().get(0).getBodyCells().get(0).getValue());
         assertEquals("2", lunaticTable.getBodyLines().get(1).getBodyCells().get(0).getValue());
         assertEquals("l1", lunaticTable.getBodyLines().get(0).getBodyCells().get(0).getLabel().getValue());
         assertEquals("l2", lunaticTable.getBodyLines().get(1).getBodyCells().get(0).getLabel().getValue());
         assertEquals(LabelTypeEnum.VTL_MD,
-                lunaticTable.getBodyLines().get(0).getBodyCells().get(0).getLabel().getTypeEnum());
+                lunaticTable.getBodyLines().get(0).getBodyCells().get(0).getLabel().getType());
         assertEquals(LabelTypeEnum.VTL_MD,
-                lunaticTable.getBodyLines().get(1).getBodyCells().get(0).getLabel().getTypeEnum());
+                lunaticTable.getBodyLines().get(1).getBodyCells().get(0).getLabel().getType());
         //
         assertEquals(ComponentTypeEnum.CHECKBOX_BOOLEAN, lunaticTable.getBodyLines().get(0).getBodyCells().get(1).getComponentType());
         assertEquals(ComponentTypeEnum.CHECKBOX_BOOLEAN, lunaticTable.getBodyLines().get(1).getBodyCells().get(1).getComponentType());

@@ -10,6 +10,7 @@ import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.QuestionNumberingMode;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.utils.VtlSyntaxUtils;
 
@@ -23,14 +24,16 @@ public class EnoAddPrefixInQuestionLabels implements ProcessingStep<EnoQuestionn
     private final boolean arrowCharInQuestions;
     private final QuestionNumberingMode questionNumberingMode;
     private final EnoParameters.ModeParameter modeParameter;
+    private final Format outFormat;
 
     private int questionNumber;
 
     public EnoAddPrefixInQuestionLabels(boolean arrowCharInQuestions, QuestionNumberingMode questionNumberingMode,
-                                        EnoParameters.ModeParameter modeParameter) {
+                                        EnoParameters.ModeParameter modeParameter, Format outFormat) {
         this.arrowCharInQuestions = arrowCharInQuestions;
         this.questionNumberingMode = questionNumberingMode;
         this.modeParameter = modeParameter;
+        this.outFormat = outFormat;
     }
 
     public void apply(EnoQuestionnaire enoQuestionnaire) {
@@ -95,9 +98,16 @@ public class EnoAddPrefixInQuestionLabels implements ProcessingStep<EnoQuestionn
         if (arrowCharInQuestions)
             prefix.append(QUESTION_ARROW_CHAR).append(" ");
         if (questionNumberingMode != QuestionNumberingMode.NONE)
-            prefix.append(questionNumber).append(QUESTION_NUMBERING_SEPARATOR).append(" ");
+            prefix.append(questionNumber).append(questionNumberingSeparator(outFormat)).append(" ");
         prefix.append("\"");
         return VtlSyntaxUtils.concatenateStrings(prefix.toString(), questionLabelValue);
+    }
+
+    private static String questionNumberingSeparator(Format outFormat) {
+        // In Lunatic the dot need to be escaped for markdown interpretation
+        if (Format.LUNATIC.equals(outFormat))
+            return "\\" + QUESTION_NUMBERING_SEPARATOR;
+        return QUESTION_NUMBERING_SEPARATOR;
     }
 
     /** Raw string prefixing for the paper format where there is no VTL.
