@@ -36,7 +36,7 @@ public class Control extends EnoIdentifiableObject implements EnoObjectWithExpre
         return switch (ddiTypeOfComputationItem) {
             case "informational", "line-informational" -> Criticality.INFO;
             case "warning", "line-warning" -> Criticality.WARN;
-            case "stumblingblock", "line-stumblingblock" -> Criticality.ERROR;
+            case "stumblingblock", "line-stumblingblock", "roundabout-locked" -> Criticality.ERROR;
             default -> throw new MappingException(String.format(
                     "Unknown DDI criticality '%s'", ddiTypeOfComputationItem));
         };
@@ -101,7 +101,7 @@ public class Control extends EnoIdentifiableObject implements EnoObjectWithExpre
     private Context context;
 
     /** Label typed in Pogues, unused in Lunatic. */
-    @DDI("getDescription().getContentArray(0).getStringValue()") // NOTE: getConstructNameArray(0).getStringArray(0).getStringValue() has the same information
+    @DDI("getDescription()?.getContentArray(0)?.getStringValue()") // NOTE: getConstructNameArray(0).getStringArray(0).getStringValue() has the same information
     private String label;
 
     /** Expression that determines if the control is triggered or not. */
@@ -110,8 +110,10 @@ public class Control extends EnoIdentifiableObject implements EnoObjectWithExpre
     private CalculatedExpression expression;
 
     /** Message displayed if the control is triggered. */
-    @DDI("#index.get(#this.getInterviewerInstructionReferenceArray(0).getIDArray(0).getStringValue())" +
-            ".getInstructionTextArray(0)")
+    @DDI("!#this.getInterviewerInstructionReferenceList().isEmpty() ? " +
+            "#index.get(#this.getInterviewerInstructionReferenceArray(0).getIDArray(0).getStringValue())" +
+            ".getInstructionTextArray(0) : " +
+            "null")
     @Lunatic("setErrorMessage(#param)")
     private DynamicLabel message;
 

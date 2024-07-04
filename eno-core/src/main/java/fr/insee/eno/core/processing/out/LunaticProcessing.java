@@ -42,6 +42,7 @@ public class LunaticProcessing {
                 .then(new LunaticAddGeneratingDate())
                 .then(new LunaticSortComponents(enoQuestionnaire))
                 .then(new LunaticLoopResolution(enoQuestionnaire))
+                .then(new LunaticRoundaboutLoops(enoQuestionnaire))
                 .then(new LunaticTableProcessing(enoQuestionnaire))
                 .then(new LunaticInsertUniqueChoiceDetails(enoQuestionnaire))
                 .then(new LunaticDropdownLabels()) // this step should be temporary
