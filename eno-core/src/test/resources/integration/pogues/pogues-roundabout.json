@@ -1,0 +1,381 @@
+{
+  "id": "lxsxhihx",
+  "Name": "ENO_ROUNDABOUT",
+  "Child": [
+    {
+      "id": "lxsxus42",
+      "Name": "S0",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "lxsxzole",
+          "Name": "FIRST_NAME_REF",
+          "type": "QuestionType",
+          "Label": [
+            "\"First name of the referring person\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "lxsycjgz",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "lxsy9vgx"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"Initial sequence\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "lxd3813g",
+      "Name": "S1",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "lxsxxsft",
+          "Name": "FIRST_NAME",
+          "type": "QuestionType",
+          "Label": [
+            "\"First name\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "lxsxzlbw",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "lxsxpl7e"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"Sequence (main loop)\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "lxsy3t24",
+      "Loop": {
+        "Name": "ROUNDABOUT_LOOP",
+        "Filter": "$FIRST_NAME$ <> $FIRST_NAME_REF$",
+        "MemberReference": [
+          "lxsxyttl",
+          "lxsxyttl"
+        ],
+        "IterableReference": "lxsy9d6g"
+      },
+      "Name": "ROUNDABOUT_S2",
+      "type": "RoundaboutType",
+      "Label": [
+        "\"Roundabout on S2\""
+      ],
+      "depth": 1,
+      "Locked": true,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "OccurrenceLabel": "$FIRST_NAME$",
+      "OccurrenceDescription": "\"Occurrence description of \" || $FIRST_NAME$"
+    },
+    {
+      "id": "lxsxyttl",
+      "Name": "S2",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "lxsy7ups",
+          "Name": "Q_FOO",
+          "type": "QuestionType",
+          "Label": [
+            "\"Foo question\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "lxsyhyuk",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "lxsxpdzq"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"Sequence (roundabout)\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "lxsy51os",
+      "Name": "S_LAST",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "lxsy6oh7",
+          "Name": "Q_LAST",
+          "type": "QuestionType",
+          "Label": [
+            "\"Last question\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "lxsy7tmx",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "lxsy6ltp"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"Last sequence\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "idendquest",
+      "Name": "QUESTIONNAIRE_END",
+      "type": "SequenceType",
+      "Child": [],
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    }
+  ],
+  "Label": [
+    "Eno - Roundabout"
+  ],
+  "final": false,
+  "owner": "ENO-INTEGRATION-TESTS",
+  "agency": "fr.insee",
+  "CodeLists": {
+    "CodeList": []
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "lxsxpl7e",
+        "Name": "FIRST_NAME",
+        "type": "CollectedVariableType",
+        "Label": "FIRST_NAME label",
+        "Scope": "lxsy9d6g",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "lxsxpdzq",
+        "Name": "Q_FOO",
+        "type": "CollectedVariableType",
+        "Label": "Q_FOO label",
+        "Scope": "lxsy9d6g",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "lxsy9vgx",
+        "Name": "FIRST_NAME_REF",
+        "type": "CollectedVariableType",
+        "Label": "FIRST_NAME_REF label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "lxsy6ltp",
+        "Name": "Q_LAST",
+        "type": "CollectedVariableType",
+        "Label": "Q_LAST label",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      }
+    ]
+  },
+  "flowLogic": "FILTER",
+  "Iterations": {
+    "Iteration": [
+      {
+        "id": "lxsy9d6g",
+        "Name": "MAIN_LOOP",
+        "Step": "1",
+        "type": "DynamicIterationType",
+        "Maximum": "10",
+        "Minimum": "1",
+        "MemberReference": [
+          "lxd3813g",
+          "lxd3813g"
+        ]
+      }
+    ]
+  },
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "FlowControl": [],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "lxd36bvu",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "lxsxus42",
+        "lxsxzole",
+        "lxd3813g",
+        "lxsxxsft",
+        "idendquest",
+        "lxsxyttl",
+        "lxsy7ups",
+        "lxsy51os",
+        "lxsy6oh7"
+      ]
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "s2106-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2106-dc"
+    }
+  ],
+  "lastUpdatedDate": "Mon Jun 24 2024 14:16:21 GMT+0200 (heure d’été d’Europe centrale)",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": []
+}

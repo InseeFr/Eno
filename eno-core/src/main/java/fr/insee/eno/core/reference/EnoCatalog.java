@@ -14,6 +14,7 @@ import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.model.question.TableQuestion;
 import fr.insee.eno.core.model.question.table.NoDataCell;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
+import fr.insee.eno.core.model.sequence.RoundaboutSequence;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.model.variable.Variable;
@@ -24,13 +25,15 @@ import java.util.*;
 /** Class designed to be used in processing to easily access different kinds of Eno objects. */
 public class EnoCatalog {
 
-    /** Map of sequences stored bt id. */
+    /** Map of sequences stored by id. */
     Map<String, Sequence> sequenceMap = new HashMap<>();
-    /** Map of subsequences stored bt id. */
+    /** Map of subsequences stored by id. */
     Map<String, Subsequence> subsequenceMap = new HashMap<>();
-    /** Map of questions stored bt id. */
+    /** Map of roundabout sequences stored by id. */
+    Map<String, RoundaboutSequence> roundaboutSequenceMap = new HashMap<>();
+    /** Map of questions stored by id. */
     Map<String, Question> questionMap = new HashMap<>();
-    /** Map of Eno components stored bt id. */
+    /** Map of Eno components stored by id. */
     Map<String, EnoComponent> componentMap = new HashMap<>();
     /** Map of collected variables stored by their reference (warning: keys = not ids). */
     Map<String, Variable> variableMap = new HashMap<>();
@@ -48,10 +51,12 @@ public class EnoCatalog {
         // Questionnaire components (sequences, subsequences and questions)
         enoQuestionnaire.getSequences().forEach(sequence -> sequenceMap.put(sequence.getId(), sequence));
         enoQuestionnaire.getSubsequences().forEach(subsequence -> subsequenceMap.put(subsequence.getId(), subsequence));
+        enoQuestionnaire.getRoundaboutSequences().forEach(roundaboutSequence -> roundaboutSequenceMap.put(roundaboutSequence.getId(), roundaboutSequence));
         enoQuestionnaire.getSingleResponseQuestions().forEach(question -> questionMap.put(question.getId(), question));
         enoQuestionnaire.getMultipleResponseQuestions().forEach(question -> questionMap.put(question.getId(), question));
         componentMap.putAll(sequenceMap);
         componentMap.putAll(subsequenceMap);
+        componentMap.putAll(roundaboutSequenceMap);
         componentMap.putAll(questionMap);
         // Labels
         gatherLabels(enoQuestionnaire);
@@ -89,6 +94,7 @@ public class EnoCatalog {
         // Sequences and subsequences
         labels.addAll(enoQuestionnaire.getSequences().stream().map(AbstractSequence::getLabel).toList());
         labels.addAll(enoQuestionnaire.getSubsequences().stream().map(AbstractSequence::getLabel).toList());
+        labels.addAll(enoQuestionnaire.getRoundaboutSequences().stream().map(AbstractSequence::getLabel).toList());
         // Questions
         labels.addAll(this.getQuestions().stream().map(Question::getLabel).filter(Objects::nonNull).toList());
         // Declarations, instructions and controls within components
