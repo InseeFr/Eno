@@ -35,6 +35,9 @@ public class EnoModeSelection implements ProcessingStep<EnoQuestionnaire> {
      * Return true if the given instruction matches the selected modes from parameters.
      */
     private boolean hasNoSelectedMode(DeclarationInterface declaration) {
+        // If no mode is declared, the declaration is considered valid for all modes
+        if (declaration.getModes().isEmpty())
+            return false;
         return declaration.getModes().stream().noneMatch(selectedModes::contains);
     }
 

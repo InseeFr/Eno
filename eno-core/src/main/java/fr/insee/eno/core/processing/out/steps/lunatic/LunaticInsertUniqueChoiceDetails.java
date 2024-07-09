@@ -34,6 +34,7 @@ public class LunaticInsertUniqueChoiceDetails implements ProcessingStep<Question
         enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(UniqueChoiceQuestion.class::isInstance)
                 .map(UniqueChoiceQuestion.class::cast)
+                .filter(uniqueChoiceQuestion -> !uniqueChoiceQuestion.getDetailResponses().isEmpty())
                 .forEach(this::insertDetailInOptions);
     }
 
@@ -85,32 +86,26 @@ public class LunaticInsertUniqueChoiceDetails implements ProcessingStep<Question
         return false;
     }
 
-    // May be refactored in Lunatic utils at some point,
-    // yet it is a bit too specific as it's currently written so better let it private here.
+    // May be refactored in Lunatic utils at some point
     private static Optional<ComponentType> findComponentById(Questionnaire lunaticQuestionnaire, String id) {
         // Search in questionnaire components
         List<ComponentType> components = lunaticQuestionnaire.getComponents();
         Optional<ComponentType> searchedComponent = findComponentInList(id, components);
         if (searchedComponent.isPresent())
             return searchedComponent;
-        // If not found, may be in a loop
-        List<Loop> loops = lunaticQuestionnaire.getComponents().stream()
-                .filter(Loop.class::isInstance)
-                .map(Loop.class::cast)
-                .toList();
-        for (Loop loop : loops) {
-            List<ComponentType> loopComponents = loop.getComponents();
-            searchedComponent = findComponentInList(id, loopComponents);
-            if (searchedComponent.isPresent())
-                return searchedComponent;
-        }
-        // If still not found, return empty
-        return Optional.empty();
+        // If not found, may be in a nesting component (such as loop, roundabout, pairwise)
+        return lunaticQuestionnaire.getComponents().stream()
+                .filter(ComponentNestingType.class::isInstance)
+                .map(ComponentNestingType.class::cast)
+                .map(ComponentNestingType::getComponents)
+                .map(componentList -> findComponentInList(id, componentList))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .findAny();
     }
 
-    private static Optional<ComponentType> findComponentInList(String id, List<ComponentType> loopComponents) {
-        return loopComponents.stream()
-                .filter(component -> id.equals(component.getId())).findAny();
+    private static Optional<ComponentType> findComponentInList(String id, List<ComponentType> componentList) {
+        return componentList.stream().filter(component -> id.equals(component.getId())).findAny();
     }
 
 }

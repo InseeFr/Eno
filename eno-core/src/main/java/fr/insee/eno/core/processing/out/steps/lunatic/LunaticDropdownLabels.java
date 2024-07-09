@@ -18,19 +18,14 @@ public class LunaticDropdownLabels implements ProcessingStep<Questionnaire> {
         editDropdownLabels(lunaticQuestionnaire.getComponents());
         //
         lunaticQuestionnaire.getComponents().stream()
-                .filter(Loop.class::isInstance).map(Loop.class::cast)
-                .map(Loop::getComponents)
+                .filter(ComponentNestingType.class::isInstance).map(ComponentNestingType.class::cast)
+                .map(ComponentNestingType::getComponents)
                 .forEach(this::editDropdownLabels);
         //
         lunaticQuestionnaire.getComponents().stream()
                 .filter(RosterForLoop.class::isInstance).map(RosterForLoop.class::cast)
                 .map(RosterForLoop::getComponents)
                 .forEach(this::editDropdownCellLabels);
-        //
-        lunaticQuestionnaire.getComponents().stream()
-                .filter(PairwiseLinks.class::isInstance).map(PairwiseLinks.class::cast)
-                .map(PairwiseLinks::getComponents)
-                .forEach(this::editDropdownLabels);
     }
 
     private void editDropdownLabels(List<ComponentType> lunaticComponents) {
