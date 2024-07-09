@@ -39,4 +39,12 @@ public class Filter extends EnoIdentifiableObject implements EnoObjectWithExpres
      * In DDI, this property is filled by a processing using the "filterItems" property. */
     private final List<StructureItemReference> filterScope = new ArrayList<>();
 
+    // Note: this is a dirty patch, a deeper refactor is necessary to handle this properly
+    /** Boolean to mark a filter that correspond to a roundabout.
+     * Used so that such filters are not added into component filter objects.
+     * In DDI, it is set to true if the filter's identifier matches a roundabout sequence's identifier
+     * in a dedicated processing step.
+     * @see ComponentFilter */
+    private boolean isRoundaboutFilter = false;
+
 }

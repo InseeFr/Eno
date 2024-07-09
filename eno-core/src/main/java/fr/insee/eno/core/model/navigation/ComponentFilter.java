@@ -63,6 +63,8 @@ public class ComponentFilter extends EnoObject {
     }
 
     private void addFilterExpression(Filter filter) {
+        if (filter.isRoundaboutFilter()) // dirty patch cf. comment on the corresponding property
+            return;
         String expressionToBeAdded = "(" + filter.getExpression().getValue() + ")";
         if (isValueAtDefault) {
             isValueAtDefault = false;
