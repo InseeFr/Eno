@@ -42,7 +42,6 @@ public class LunaticProcessing {
                 .then(new LunaticAddGeneratingDate())
                 .then(new LunaticSortComponents(enoQuestionnaire))
                 .then(new LunaticLoopResolution(enoQuestionnaire))
-                .then(new LunaticRoundaboutLoops(enoQuestionnaire))
                 .then(new LunaticTableProcessing(enoQuestionnaire))
                 .then(new LunaticInsertUniqueChoiceDetails(enoQuestionnaire))
                 .then(new LunaticDropdownLabels()) // this step should be temporary
@@ -63,7 +62,8 @@ public class LunaticProcessing {
                         new LunaticFilterResult(enoQuestionnaire, shapefromAttributeRetrieval))
                 .thenIf(lunaticParameters.isLunaticV3(), new LunaticSequenceDescription())
                 .thenIf(lunaticParameters.isLunaticV3(), new LunaticInputNumberDescription(enoParameters.getLanguage()))
-                .thenIf(lunaticParameters.isLunaticV3(), new LunaticQuestionComponent());
+                .thenIf(lunaticParameters.isLunaticV3(), new LunaticQuestionComponent())
+                .then(new LunaticRoundaboutLoops(enoQuestionnaire));
     }
 
 }
