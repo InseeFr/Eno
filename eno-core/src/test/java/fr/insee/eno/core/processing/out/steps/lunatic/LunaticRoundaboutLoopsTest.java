@@ -17,8 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static fr.insee.lunatic.model.flat.ComponentTypeEnum.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class LunaticRoundaboutLoopsTest {
@@ -66,6 +65,7 @@ class LunaticRoundaboutLoopsTest {
         assertEquals("4", roundabout.getPage());
         assertEquals("\"Roundabout on S2\"", roundabout.getLabel().getValue());
         assertEquals(LabelTypeEnum.VTL_MD, roundabout.getLabel().getType());
+        assertEquals("true", roundabout.getConditionFilter().getValue());
         // roundabout specific ones
         assertEquals("count(FIRST_NAME)", roundabout.getIterations().getValue());
         assertEquals(LabelTypeEnum.VTL, roundabout.getIterations().getType());
@@ -91,6 +91,8 @@ class LunaticRoundaboutLoopsTest {
         assertEquals(2, roundabout.getComponents().size());
         assertEquals(SEQUENCE, roundabout.getComponents().get(0).getComponentType());
         assertEquals(INPUT, roundabout.getComponents().get(1).getComponentType());
+        roundabout.getComponents().forEach(component ->
+                assertEquals("true", component.getConditionFilter().getValue()));
     }
 
     @Test
