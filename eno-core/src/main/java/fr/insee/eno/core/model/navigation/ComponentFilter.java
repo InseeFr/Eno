@@ -58,13 +58,13 @@ public class ComponentFilter extends EnoObject {
      * @param filter Questionnaire filter.
      */
     public void addFilter(Filter filter) {
+        if (filter.isRoundaboutFilter()) // dirty patch cf. comment on the corresponding property
+            return;
         addFilterExpression(filter);
         addFilterBindingReferences(filter);
     }
 
     private void addFilterExpression(Filter filter) {
-        if (filter.isRoundaboutFilter()) // dirty patch cf. comment on the corresponding property
-            return;
         String expressionToBeAdded = "(" + filter.getExpression().getValue() + ")";
         if (isValueAtDefault) {
             isValueAtDefault = false;
