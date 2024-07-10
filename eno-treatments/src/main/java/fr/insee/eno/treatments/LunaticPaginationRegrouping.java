@@ -1,6 +1,6 @@
 package fr.insee.eno.treatments;
 
-import fr.insee.eno.core.processing.out.steps.lunatic.pagination.LunaticAddPageNumbersQuestionMode;
+import fr.insee.eno.core.processing.out.steps.lunatic.pagination.LunaticPaginationQuestionMode;
 import fr.insee.eno.treatments.dto.Regroupement;
 import fr.insee.eno.treatments.dto.Regroupements;
 import fr.insee.lunatic.model.flat.*;
@@ -13,15 +13,15 @@ import java.util.*;
  * /!\ We assume variables defined in a regroupement are consecutive and in the same order as their
  * corresponding components in the questionnaire
  */
-public class LunaticRegroupementProcessing extends LunaticAddPageNumbersQuestionMode {
+public class LunaticPaginationRegrouping extends LunaticPaginationQuestionMode {
     private final Regroupements regroupements;
 
     /**
      * @param regroupements questions regroupements for a questionnaire
      */
-    public LunaticRegroupementProcessing(List<Regroupement> regroupements) {
+    public LunaticPaginationRegrouping(Regroupements regroupements) {
         super();
-        this.regroupements = new Regroupements(regroupements);
+        this.regroupements = regroupements;
     }
 
     /**
@@ -41,6 +41,9 @@ public class LunaticRegroupementProcessing extends LunaticAddPageNumbersQuestion
         if(component instanceof ComponentSimpleResponseType simpleResponse) {
             responseName = simpleResponse.getResponse().getName();
         }
+
+        if(component instanceof Question question)
+            return canIncrementPageCount(question.getComponents().getFirst(), isParentPaginated);
 
         // no response name, so no regroupement, we can increment
         if(responseName == null) {

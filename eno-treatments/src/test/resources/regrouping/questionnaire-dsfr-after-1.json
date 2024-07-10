@@ -1,0 +1,88 @@
+{
+    "id": "questionnaire-id",
+    "componentType": "Questionnaire",
+    "modele": "REGROUPING_EXAMPLE_DSFR_AFTER",
+    "pagination": "question",
+    "maxPage": "2",
+    "label": {
+        "value": "Eno - Regrouping example, DSFR (after regrouping)",
+        "type": "VTL|MD"
+    },
+    "components": [
+        {
+            "id": "sequence-id",
+            "componentType": "Sequence",
+            "page": "1",
+            "label": {
+                "value": "\"Some sequence\"",
+                "type": "VTL|MD"
+            }
+        },
+        {
+            "id": "question-1-id",
+            "componentType": "Question",
+            "page": "2",
+            "label": {
+                "value": "\"What is your first name?\"",
+                "type": "VTL|MD"
+            },
+            "components": [
+                {
+                    "id": "input-1-id",
+                    "componentType": "Input",
+                    "page": "2",
+                    "maxLength": 249,
+                    "response": {
+                        "name": "FIRST_NAME"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "question-2-id",
+            "componentType": "Question",
+            "page": "2",
+            "label": {
+                "value": "\"What is your last name?\"",
+                "type": "VTL|MD"
+            },
+            "components": [
+                {
+                    "id": "input-2-id",
+                    "componentType": "Input",
+                    "page": "2",
+                    "maxLength": 249,
+                    "response": {
+                        "name": "LAST_NAME"
+                    }
+                }
+            ]
+        }
+    ],
+    "variables": [
+        {
+            "name": "FIRST_NAME",
+            "variableType": "COLLECTED",
+            "values": {
+                "PREVIOUS": null,
+                "COLLECTED": null,
+                "FORCED": null,
+                "EDITED": null,
+                "INPUTTED": null
+            },
+            "dimension": 0
+        },
+        {
+            "name": "LAST_NAME",
+            "variableType": "COLLECTED",
+            "values": {
+                "PREVIOUS": null,
+                "COLLECTED": null,
+                "FORCED": null,
+                "EDITED": null,
+                "INPUTTED": null
+            },
+            "dimension": 0
+        }
+    ]
+}

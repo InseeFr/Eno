@@ -27,11 +27,11 @@ public class LunaticAddPageNumbers implements ProcessingStep<Questionnaire> {
             case NONE -> log.info("No pagination.");
             case QUESTION -> {
                 log.info("Adding page numbers by question.");
-                new LunaticAddPageNumbersQuestionMode().apply(lunaticQuestionnaire);
+                new LunaticPaginationQuestionMode().apply(lunaticQuestionnaire);
             }
             case SEQUENCE -> {
                 log.info("Adding page numbers by sequence.");
-                new LunaticAddPageNumbersSequenceMode().apply(lunaticQuestionnaire);
+                new LunaticPaginationSequenceMode().apply(lunaticQuestionnaire);
             }
         }
     }
