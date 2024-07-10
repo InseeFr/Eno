@@ -42,6 +42,9 @@ public class LunaticPaginationRegrouping extends LunaticPaginationQuestionMode {
             responseName = simpleResponse.getResponse().getName();
         }
 
+        if(component instanceof Question question)
+            return canIncrementPageCount(question.getComponents().getFirst(), isParentPaginated);
+
         // no response name, so no regroupement, we can increment
         if(responseName == null) {
             return true;
