@@ -5,9 +5,9 @@ import fr.insee.lunatic.model.flat.*;
 /**
  * Post processing of a lunatic questionnaire. With this processing, one question is displayed on each page.
  */
-public class LunaticAddPageNumbersQuestionMode extends LunaticAddPageNumbersAllModes {
+public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
 
-    public LunaticAddPageNumbersQuestionMode() {
+    public LunaticPaginationQuestionMode() {
         super(true, "question");
     }
 

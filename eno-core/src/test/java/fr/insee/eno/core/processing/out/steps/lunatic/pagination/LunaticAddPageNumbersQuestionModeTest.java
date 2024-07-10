@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,15 +20,14 @@ class LunaticAddPageNumbersQuestionModeTest {
     private Input i6;
     private CheckboxOne co71, co73;
     private PairwiseLinks p73;
-    private List<ComponentType> components;
 
     @BeforeEach
     void init() {
-        LunaticAddPageNumbersQuestionMode processing = new LunaticAddPageNumbersQuestionMode();
+        LunaticPaginationQuestionMode processing = new LunaticPaginationQuestionMode();
 
         questionnaire = new Questionnaire();
 
-        components = new ArrayList<>();
+        List<ComponentType> components = new ArrayList<>();
         List<ComponentType> l6Components = new ArrayList<>();
         List<ComponentType> l7Components = new ArrayList<>();
         List<ComponentType> p73Components = new ArrayList<>();
@@ -37,50 +35,50 @@ class LunaticAddPageNumbersQuestionModeTest {
         s1 = LunaticAddPageNumbersUtils.buildSequence("jfaz9kv9");
         components.add(s1);
 
-        n2 = LunaticAddPageNumbersUtils.buildNumber("jfazk91m", "Q1", s1, null);
+        n2 = LunaticAddPageNumbersUtils.buildNumber("jfazk91m", "Q1");
         components.add(n2);
 
-        n3 = LunaticAddPageNumbersUtils.buildNumber("lhpz37kh", "Q2", s1, null);
+        n3 = LunaticAddPageNumbersUtils.buildNumber("lhpz37kh", "Q2");
         components.add(n3);
 
         s4 = LunaticAddPageNumbersUtils.buildSequence("li1w5tqk");
         components.add(s4);
 
-        n5 = LunaticAddPageNumbersUtils.buildNumber("li1w3tmf", "NB", s4, null);
+        n5 = LunaticAddPageNumbersUtils.buildNumber("li1w3tmf", "NB");
         components.add(n5);
 
-        l6 = LunaticAddPageNumbersUtils.buildEmptyLoop("li1wjxs2", s4);
+        l6 = LunaticAddPageNumbersUtils.buildEmptyLoop("li1wjxs2");
         // to consider this loop as main loop
         l6.setLines(new LinesLoop());
 
         // build loop 6 components
-        ss6 = LunaticAddPageNumbersUtils.buildSubsequence("li1wbv47", s4);
+        ss6 = LunaticAddPageNumbersUtils.buildSubsequence("li1wbv47");
         //set a declaration for this subsequence
         ss6.getDeclarations().add(new DeclarationType());
         l6Components.add(ss6);
 
-        i6 = LunaticAddPageNumbersUtils.buildInput("li1wptdt", "PRENOM", s4, ss6);
+        i6 = LunaticAddPageNumbersUtils.buildInput("li1wptdt", "PRENOM");
         l6Components.add(i6);
 
         l6.getComponents().addAll(l6Components);
         components.add(l6);
 
-        l7 = LunaticAddPageNumbersUtils.buildEmptyLoop("li1wsotd", s4);
+        l7 = LunaticAddPageNumbersUtils.buildEmptyLoop("li1wsotd");
         // to make this loop considered as linked
         l7.setIterations(new LabelType());
 
-        ss71 = LunaticAddPageNumbersUtils.buildSubsequence("li1wfnbk", s4);
+        ss71 = LunaticAddPageNumbersUtils.buildSubsequence("li1wfnbk");
         l7Components.add(ss71);
 
-        co71 = LunaticAddPageNumbersUtils.buildCheckboxOne("lhpyz9b0", "Q5", s4, ss71);
+        co71 = LunaticAddPageNumbersUtils.buildCheckboxOne("lhpyz9b0", "Q5");
         l7Components.add(co71);
 
-        n72 = LunaticAddPageNumbersUtils.buildNumber("lhpzan4t", "Q6", s4, ss71);
+        n72 = LunaticAddPageNumbersUtils.buildNumber("lhpzan4t", "Q6");
         l7Components.add(n72);
 
-        p73 = LunaticAddPageNumbersUtils.buildEmptyPairWiseLinks("pairwise-links", s4, ss71);
-        co73 = LunaticAddPageNumbersUtils.buildCheckboxOne("lhpyz9b73", "QQCO", s4, ss71);
-        n73 = LunaticAddPageNumbersUtils.buildNumber("lhpzan73", "QQN", s4, ss71);
+        p73 = LunaticAddPageNumbersUtils.buildEmptyPairWiseLinks("pairwise-links");
+        co73 = LunaticAddPageNumbersUtils.buildCheckboxOne("lhpyz9b73", "QQCO");
+        n73 = LunaticAddPageNumbersUtils.buildNumber("lhpzan73", "QQN");
 
         p73Components.add(co73);
         p73Components.add(n73);
@@ -96,7 +94,7 @@ class LunaticAddPageNumbersQuestionModeTest {
         s9 = LunaticAddPageNumbersUtils.buildSequence("COMMENT-SEQ");
         components.add(s9);
 
-        t10 = LunaticAddPageNumbersUtils.buildTextarea("COMMENT-QUESTION", "COMMENT_QE", s9);
+        t10 = LunaticAddPageNumbersUtils.buildTextarea("COMMENT-QUESTION", "COMMENT_QE");
         components.add(t10);
 
         questionnaire.getComponents().addAll(components);
@@ -199,42 +197,5 @@ class LunaticAddPageNumbersQuestionModeTest {
         assertEquals("8", s8.getPage());
         assertEquals("9", s9.getPage());
         assertEquals("10", t10.getPage());
-    }
-
-    @Test
-    void shouldHierarchiesPageHaveSamePageOfCorrespondingSequences() {
-        List<Sequence> sequences = List.of(s1, s4, s8, s9);
-
-        // check hierarchies page against sequences/subsequences page
-        for(Sequence sequence : sequences) {
-            components.stream()
-                    .map(ComponentType::getHierarchy)
-                    .filter(Objects::nonNull)
-                    .forEach(hierarchy -> {
-                        SequenceDescription hierarchySequence = hierarchy.getSequence();
-
-                        if(hierarchySequence != null && hierarchySequence.getId().equals(sequence.getId())) {
-                            assertEquals(sequence.getPage(), hierarchySequence.getPage());
-                        }
-                    });
-        }
-    }
-
-    @Test
-    void shouldHierarchiesPageHaveSamePageOfCorrespondingSubsequences() {
-        List<Subsequence> subsequences = List.of(ss6, ss71);
-
-        for(Subsequence subsequence : subsequences) {
-            components.stream()
-                    .map(ComponentType::getHierarchy)
-                    .filter(Objects::nonNull)
-                    .forEach(hierarchy -> {
-                        SequenceDescription hierarchySubsequence = hierarchy.getSubSequence();
-
-                        if(hierarchySubsequence != null && hierarchySubsequence.getId().equals(subsequence.getId())) {
-                            assertEquals(subsequence.getPage(), hierarchySubsequence.getPage());
-                        }
-                    });
-        }
     }
 }
