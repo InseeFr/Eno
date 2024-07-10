@@ -50,7 +50,6 @@ public class LunaticProcessing {
                 .thenIf(lunaticParameters.isMissingVariables(),
                         new LunaticAddMissingVariables(enoCatalog, lunaticParameters.isMissingVariables()))
                 .then(new LunaticAddResizing(enoQuestionnaire))
-                .then(new LunaticAddHierarchy())
                 .then(new LunaticAddPageNumbers(lunaticParameters.getLunaticPaginationMode()))
                 .then(new LunaticResponseTimeQuestionPagination())
                 .then(new LunaticAddCleaningVariables())
