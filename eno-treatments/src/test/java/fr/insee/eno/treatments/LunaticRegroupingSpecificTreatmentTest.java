@@ -1,6 +1,8 @@
 package fr.insee.eno.treatments;
 
 import fr.insee.eno.treatments.dto.Regroupement;
+import fr.insee.lunatic.conversion.JsonDeserializer;
+import fr.insee.lunatic.exception.SerializationException;
 import fr.insee.lunatic.model.flat.Input;
 import fr.insee.lunatic.model.flat.Question;
 import fr.insee.lunatic.model.flat.Questionnaire;
@@ -70,8 +72,29 @@ class LunaticRegroupingSpecificTreatmentTest {
 
         //
         assertEquals("1", questionnaire.getComponents().get(0).getPage());
+        assertEquals("1", ((Question) questionnaire.getComponents().get(0)).getComponents().getFirst().getPage());
         assertEquals("1", questionnaire.getComponents().get(1).getPage());
+        assertEquals("1", ((Question) questionnaire.getComponents().get(1)).getComponents().getFirst().getPage());
         assertEquals("1", questionnaire.getMaxPage());
+    }
+
+    @Test
+    void integrationTest_dsfrMode() throws SerializationException {
+        //
+        Questionnaire lunaticQuestionnaire = new JsonDeserializer().deserialize(
+                this.getClass().getClassLoader().getResourceAsStream(
+                        "regrouping/questionnaire-dsfr-before.json"));
+        List<Regroupement> regroupementList = new SpecificTreatmentsDeserializer().deserialize(
+                this.getClass().getClassLoader().getResourceAsStream(
+                        "regrouping/regrouping-treatment.json")).regroupements();
+        //
+        new LunaticRegroupingSpecificTreatment(regroupementList, true).apply(lunaticQuestionnaire);
+        //
+        assertEquals("2", lunaticQuestionnaire.getComponents().get(1).getPage());
+        assertEquals("2", ((Question) lunaticQuestionnaire.getComponents().get(1)).getComponents().getFirst().getPage());
+        assertEquals("2", lunaticQuestionnaire.getComponents().get(2).getPage());
+        assertEquals("2", ((Question) lunaticQuestionnaire.getComponents().get(2)).getComponents().getFirst().getPage());
+        assertEquals("2", lunaticQuestionnaire.getMaxPage());
     }
 
 }
