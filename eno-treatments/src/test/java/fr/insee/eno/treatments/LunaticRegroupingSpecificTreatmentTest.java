@@ -33,7 +33,7 @@ class LunaticRegroupingSpecificTreatmentTest {
         questionnaire.setMaxPage("2");
         //
         Regroupement regroupement = new Regroupement(List.of("RESPONSE1", "RESPONSE2"));
-        new LunaticRegroupingSpecificTreatment(List.of(regroupement), false).apply(questionnaire);
+        new LunaticRegroupingSpecificTreatment(List.of(regroupement)).apply(questionnaire);
         //
         assertEquals("1", questionnaire.getComponents().get(0).getPage());
         assertEquals("1", questionnaire.getComponents().get(1).getPage());
@@ -68,7 +68,7 @@ class LunaticRegroupingSpecificTreatmentTest {
 
         //
         Regroupement regroupement = new Regroupement(List.of("RESPONSE1", "RESPONSE2"));
-        new LunaticRegroupingSpecificTreatment(List.of(regroupement), true).apply(questionnaire);
+        new LunaticRegroupingSpecificTreatment(List.of(regroupement)).apply(questionnaire);
 
         //
         assertEquals("1", questionnaire.getComponents().get(0).getPage());
@@ -88,7 +88,7 @@ class LunaticRegroupingSpecificTreatmentTest {
                 this.getClass().getClassLoader().getResourceAsStream(
                         "regrouping/regrouping-treatment.json")).regroupements();
         //
-        new LunaticRegroupingSpecificTreatment(regroupementList, true).apply(lunaticQuestionnaire);
+        new LunaticRegroupingSpecificTreatment(regroupementList).apply(lunaticQuestionnaire);
         //
         assertEquals("2", lunaticQuestionnaire.getComponents().get(1).getPage());
         assertEquals("2", ((Question) lunaticQuestionnaire.getComponents().get(1)).getComponents().getFirst().getPage());

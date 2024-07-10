@@ -1,6 +1,5 @@
 package fr.insee.eno.ws.service;
 
-import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.treatments.LunaticPostProcessing;
 import fr.insee.eno.treatments.LunaticRegroupingSpecificTreatment;
 import fr.insee.eno.treatments.LunaticSuggesterSpecificTreatment;
@@ -19,9 +18,8 @@ import java.util.List;
 @Service
 public class SpecificTreatmentsService {
 
-    public Mono<LunaticPostProcessing> generateFrom(InputStream specificTreatmentStream, EnoParameters enoParameters) {
+    public Mono<LunaticPostProcessing> generateFrom(InputStream specificTreatmentStream) {
         LunaticPostProcessing lunaticPostProcessings = new LunaticPostProcessing();
-        boolean dsfrParameter = enoParameters.getLunaticParameters().isDsfr();
 
         try {
             SpecificTreatmentsDeserializer deserializer = new SpecificTreatmentsDeserializer();
@@ -33,7 +31,7 @@ public class SpecificTreatmentsService {
 
             List<Regroupement> regroupements = treatments.regroupements();
             if(regroupements != null && !regroupements.isEmpty()) {
-                lunaticPostProcessings.addPostProcessing(new LunaticRegroupingSpecificTreatment(regroupements, dsfrParameter));
+                lunaticPostProcessings.addPostProcessing(new LunaticRegroupingSpecificTreatment(regroupements));
             }
 
             return Mono.just(lunaticPostProcessings);

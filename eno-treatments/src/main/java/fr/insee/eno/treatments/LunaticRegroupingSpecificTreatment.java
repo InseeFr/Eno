@@ -10,12 +10,10 @@ import java.util.List;
 public class LunaticRegroupingSpecificTreatment implements ProcessingStep<Questionnaire> {
 
     private final Regroupements regroupements;
-    private final boolean dsfrParameter;
 
-    public LunaticRegroupingSpecificTreatment(List<Regroupement> regroupementList, boolean dsfrParameter) {
+    public LunaticRegroupingSpecificTreatment(List<Regroupement> regroupementList) {
         super();
         this.regroupements = new Regroupements(regroupementList);
-        this.dsfrParameter = dsfrParameter;
     }
 
     @Override
@@ -24,13 +22,6 @@ public class LunaticRegroupingSpecificTreatment implements ProcessingStep<Questi
             throw new IllegalArgumentException(
                     "Regrouping questions is only possible for a questionnaire paginated in 'question' mode.");
         new LunaticPaginationRegrouping(regroupements).apply(lunaticQuestionnaire);
-        if (dsfrParameter)
-            groupQuestionsComponents(lunaticQuestionnaire);
-    }
-
-    /** In DSFR mode, question components that are on the same page should be grouped in a single question component. */
-    private void groupQuestionsComponents(Questionnaire lunaticQuestionnaire) {
-        // TODO
     }
 
 }

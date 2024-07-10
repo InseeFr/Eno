@@ -57,13 +57,12 @@ public class ReactiveControllerUtils {
         return Mono.just(filePart);
     }
 
-    private Mono<LunaticPostProcessing> createLunaticPostProcessing(Mono<Part> specificTreatment, EnoParameters enoParameters) {
+    private Mono<LunaticPostProcessing> createLunaticPostProcessing(Mono<Part> specificTreatment) {
         return specificTreatment
                 .filter(FilePart.class::isInstance)
                 .map(FilePart.class::cast)
                 .flatMap(this::filePartToInputStream)
-                .flatMap(specificTreatmentStream ->
-                        specificTreatmentsService.generateFrom(specificTreatmentStream, enoParameters))
+                .flatMap(specificTreatmentsService::generateFrom)
                 .switchIfEmpty(Mono.just(new LunaticPostProcessing()));
         /*
          * This workaround (next filter) is used to make swagger works when empty value is checked for this input file on the endpoint
@@ -76,15 +75,14 @@ public class ReactiveControllerUtils {
     public Mono<ResponseEntity<String>> ddiToLunaticJson(Mono<FilePart> ddiFile, Mono<FilePart> parametersFile,
                                                          Mono<Part> specificTreatmentsFile) {
         Mono<EnoParameters> parametersMono = readEnoJavaParametersFile(parametersFile);
-        Mono<LunaticPostProcessing> postProcessingMono = parametersMono.flatMap(enoParameters ->
-                createLunaticPostProcessing(specificTreatmentsFile, enoParameters));
+        Mono<LunaticPostProcessing> postProcessingMono = createLunaticPostProcessing(specificTreatmentsFile);
         return Mono.zip(parametersMono, postProcessingMono).flatMap(tuple ->
                 ddiToLunaticJson(ddiFile, tuple.getT1(), tuple.getT2()));
     }
 
     public Mono<ResponseEntity<String>> ddiToLunaticJson(Mono<FilePart> ddiFile, EnoParameters enoParameters,
                                                          Mono<Part> specificTreatmentsFile) {
-        return createLunaticPostProcessing(specificTreatmentsFile, enoParameters).flatMap(lunaticPostProcessing ->
+        return createLunaticPostProcessing(specificTreatmentsFile).flatMap(lunaticPostProcessing ->
                 ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessing));
     }
 

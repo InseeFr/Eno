@@ -2,7 +2,10 @@ package fr.insee.eno.ws.service;
 
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.eno.treatments.*;
+import fr.insee.eno.treatments.LunaticPostProcessing;
+import fr.insee.eno.treatments.LunaticRegroupingSpecificTreatment;
+import fr.insee.eno.treatments.LunaticSuggesterSpecificTreatment;
+import fr.insee.eno.treatments.SpecificTreatmentsDeserializer;
 import fr.insee.eno.treatments.dto.SpecificTreatments;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -76,7 +79,7 @@ class DDIToLunaticServiceTest {
                         "non-regression/group-processing/" + groupProcessingFileName));
         LunaticPostProcessing lunaticPostProcessing = new LunaticPostProcessing();
         lunaticPostProcessing.addPostProcessing(
-                new LunaticRegroupingSpecificTreatment(postProcessingInput.regroupements(), false));
+                new LunaticRegroupingSpecificTreatment(postProcessingInput.regroupements()));
 
         //
         DDIToLunaticService ddiToLunaticService = new DDIToLunaticService();
