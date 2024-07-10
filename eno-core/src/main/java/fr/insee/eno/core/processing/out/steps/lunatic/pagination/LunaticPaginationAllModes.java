@@ -56,10 +56,7 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
                 case LOOP -> applyNumPageOnLoop((Loop) component, numPagePrefix, pageCount);
                 case ROUNDABOUT -> applyNumPageOnRoundabout((Roundabout) component, numPagePrefix, pageCount);
                 case PAIRWISE_LINKS -> applyNumPageOnPairwiseLinks((PairwiseLinks) component, numPagePrefix, pageCount);
-                case QUESTION -> {
-                    component.setPage(numPagePrefix + pageCount);
-                    applyNumPageOnComponents(((Question) component).getComponents(), numPagePrefix, pageCount, isParentPaginated);
-                }
+                case QUESTION -> applyNumPageOnQuestion((Question) component, numPagePrefix, pageCount);
                 default -> component.setPage(numPagePrefix + pageCount);
             }
         }
@@ -84,6 +81,12 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
      * @param isParentPaginated is the parent component paginated or not
      */
     public abstract void applyNumPageOnSubsequence(Subsequence subsequence, String numPagePrefix, int pageCount, boolean isParentPaginated);
+
+    public void applyNumPageOnQuestion(Question question, String numPagePrefix, int pageCount) {
+        String pageNumber = numPagePrefix + pageCount;
+        question.setPage(pageNumber);
+        question.getComponents().forEach(component -> component.setPage(pageNumber));
+    }
 
     /**
      * Apply numpage on a loop
