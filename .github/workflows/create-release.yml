@@ -79,7 +79,7 @@ jobs:
           gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
       - name: Build and deploy with Maven
-        run: mvn clean process-classes package deploy -Prelease -DskipTests=true --no-transfer-progress
+        run: mvn clean process-classes deploy -Prelease -DskipTests=true --no-transfer-progress
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
