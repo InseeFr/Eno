@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Optional;
 
 /** Lunatic technical processing for loops.
- * Requires: sorted components, hierarchy. */
+ * Requires: sorted components. */
 @Slf4j
 public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
 

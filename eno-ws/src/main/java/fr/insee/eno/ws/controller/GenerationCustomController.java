@@ -1,6 +1,5 @@
 package fr.insee.eno.ws.controller;
 
-import fr.insee.eno.treatments.LunaticPostProcessing;
 import fr.insee.eno.ws.PassThrough;
 import fr.insee.eno.ws.controller.utils.ReactiveControllerUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,7 +47,6 @@ public class GenerationCustomController {
 			@RequestPart(value="params") Mono<FilePart> parametersFile,
 			@Parameter(name = "specificTreatment", schema = @Schema(type="string", format="binary"))
 			@RequestPart(value="specificTreatment", required=false) Mono<Part> specificTreatment) {
-
         /*
            specificTreatment parameter is a part instead of a FilePart. This workaround is used to make swagger work
            when empty value is checked for this input file on the endpoint.
@@ -56,11 +54,7 @@ public class GenerationCustomController {
            Spring considers having a DefaultFormField object instead of FilePart and exceptions is thrown
            There is no way at this moment to disable the allow empty value when filed is not required.
          */
-		Mono<LunaticPostProcessing> lunaticPostProcessing = controllerUtils.generateLunaticPostProcessings(specificTreatment);
-
-		return controllerUtils.readEnoJavaParametersFile(parametersFile)
-				.flatMap(enoParameters ->
-						controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessing));
+		return controllerUtils.ddiToLunaticJson(ddiFile, parametersFile, specificTreatment);
 	}
 
 	@Operation(
