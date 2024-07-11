@@ -18,9 +18,9 @@ public class LunaticParameters {
     private boolean filterDescription;
     private LunaticPaginationMode lunaticPaginationMode;
 
-    /** Parameter to enable Lunatic v3 (known as Lunatic-DSFR) features. */
+    /** Parameter to enable Lunatic-DSFR features. */
     @JsonProperty("DSFR")
-    private boolean lunaticV3;
+    private boolean dsfr;
 
     private LunaticParameters() {}
 
@@ -44,7 +44,7 @@ public class LunaticParameters {
         this.setFilterResult(isWeb || isProcess);
         this.setMissingVariables(isInterview || isProcess);
         this.setLunaticPaginationMode(paginationValue(context, modeParameter));
-        this.setLunaticV3(false);
+        this.setDsfr(false);
     }
 
     private LunaticPaginationMode paginationValue(EnoParameters.Context context, EnoParameters.ModeParameter modeParameter) {

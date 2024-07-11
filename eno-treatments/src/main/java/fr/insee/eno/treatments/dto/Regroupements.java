@@ -46,20 +46,12 @@ public class Regroupements {
     }
 
     /**
-     *
-     * @return true if list is empty, false otherwise
-     */
-    public boolean isEmpty() {
-        return regroupementsList.isEmpty();
-    }
-
-    /**
      * Check if a variable exist in multiple regroupements (should not happen)
-     * @param variable variable to find
+     * @param variableName variable to find
      */
-    private void checkVariableExistsOnlyInOneRegroupement(String variable) {
+    private void checkVariableExistsOnlyInOneRegroupement(String variableName) {
         long variableAppearsInRegroupementsCount = regroupementsList.stream()
-                .filter(regroupement -> regroupement.hasVariable(variable))
+                .filter(regroupement -> regroupement.hasVariable(variableName))
                 .count();
 
         if (variableAppearsInRegroupementsCount > 1) {

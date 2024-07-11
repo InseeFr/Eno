@@ -6,7 +6,6 @@ import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.eno.core.processing.out.steps.lunatic.LunaticAddHierarchy;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticLoopResolution;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticSortComponents;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
@@ -33,7 +32,6 @@ class LunaticPaginationFunctionalTests {
         new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);
         new LunaticLoopResolution(enoQuestionnaire).apply(lunaticQuestionnaire);
         new LunaticTableProcessing(enoQuestionnaire).apply(lunaticQuestionnaire);
-        new LunaticAddHierarchy().apply(lunaticQuestionnaire);
 
         // When
         new LunaticAddPageNumbers(enoParameters.getLunaticParameters().getLunaticPaginationMode())

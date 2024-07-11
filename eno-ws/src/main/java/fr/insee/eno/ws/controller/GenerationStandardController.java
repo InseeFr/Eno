@@ -2,14 +2,13 @@ package fr.insee.eno.ws.controller;
 
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.eno.legacy.parameters.CaptureEnum;
+import fr.insee.eno.legacy.parameters.Context;
+import fr.insee.eno.ws.PassThrough;
+import fr.insee.eno.ws.controller.utils.ReactiveControllerUtils;
 import fr.insee.eno.ws.exception.ContextException;
 import fr.insee.eno.ws.exception.MetadataFileException;
 import fr.insee.eno.ws.exception.ModeParameterException;
-import fr.insee.eno.legacy.parameters.CaptureEnum;
-import fr.insee.eno.legacy.parameters.Context;
-import fr.insee.eno.treatments.LunaticPostProcessing;
-import fr.insee.eno.ws.PassThrough;
-import fr.insee.eno.ws.controller.utils.ReactiveControllerUtils;
 import fr.insee.eno.ws.exception.MultiModelException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -55,9 +54,6 @@ public class GenerationStandardController {
             @PathVariable EnoParameters.Context context,
             @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter,
             @RequestParam(defaultValue = "false") boolean dsfr) {
-        if (EnoParameters.ModeParameter.PAPI.equals(modeParameter))
-            return Mono.error(new ModeParameterException("Lunatic format is not compatible with the mode 'PAPER'."));
-
         /*
            specificTreatment parameter is a part instead of a FilePart. This workaround is used to make swagger work
            when empty value is checked for this input file on the endpoint.
@@ -65,12 +61,14 @@ public class GenerationStandardController {
            Spring considers having a DefaultFormField object instead of FilePart and exceptions is thrown
            There is no way at this moment to disable the allow empty value when filed is not required.
          */
-        Mono<LunaticPostProcessing> lunaticPostProcessing = controllerUtils.generateLunaticPostProcessings(specificTreatment);
+
+        if (EnoParameters.ModeParameter.PAPI.equals(modeParameter))
+            return Mono.error(new ModeParameterException("Lunatic format is not compatible with the mode 'PAPER'."));
         //
         EnoParameters enoParameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
-        enoParameters.getLunaticParameters().setLunaticV3(dsfr);
+        enoParameters.getLunaticParameters().setDsfr(dsfr);
         //
-        return controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessing);
+        return controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, specificTreatment);
     }
 
     @Operation(

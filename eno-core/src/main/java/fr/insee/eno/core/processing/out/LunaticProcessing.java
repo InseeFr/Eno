@@ -50,7 +50,6 @@ public class LunaticProcessing {
                 .thenIf(lunaticParameters.isMissingVariables(),
                         new LunaticAddMissingVariables(enoCatalog, lunaticParameters.isMissingVariables()))
                 .then(new LunaticAddResizing(enoQuestionnaire))
-                .then(new LunaticAddHierarchy())
                 .then(new LunaticAddPageNumbers(lunaticParameters.getLunaticPaginationMode()))
                 .then(new LunaticResponseTimeQuestionPagination())
                 .then(new LunaticAddCleaningVariables())
@@ -60,9 +59,9 @@ public class LunaticProcessing {
                 .then(new LunaticFinalizePairwise(enoQuestionnaire))
                 .thenIf(lunaticParameters.isFilterResult(),
                         new LunaticFilterResult(enoQuestionnaire, shapefromAttributeRetrieval))
-                .thenIf(lunaticParameters.isLunaticV3(), new LunaticSequenceDescription())
-                .thenIf(lunaticParameters.isLunaticV3(), new LunaticInputNumberDescription(enoParameters.getLanguage()))
-                .thenIf(lunaticParameters.isLunaticV3(), new LunaticQuestionComponent())
+                .thenIf(lunaticParameters.isDsfr(), new LunaticSequenceDescription())
+                .thenIf(lunaticParameters.isDsfr(), new LunaticInputNumberDescription(enoParameters.getLanguage()))
+                .thenIf(lunaticParameters.isDsfr(), new LunaticQuestionComponent())
                 .then(new LunaticRoundaboutLoops(enoQuestionnaire));
     }
 

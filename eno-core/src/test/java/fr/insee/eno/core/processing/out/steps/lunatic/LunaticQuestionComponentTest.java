@@ -118,7 +118,7 @@ class LunaticQuestionComponentTest {
         //
         EnoParameters parameters = EnoParameters.of(
                 EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
-        parameters.getLunaticParameters().setLunaticV3(true);
+        parameters.getLunaticParameters().setDsfr(true);
         Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-pairwise.xml"),
                 parameters);
