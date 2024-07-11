@@ -59,7 +59,7 @@ jobs:
           fi
 
           if [[ "${{ steps.check-tag-exists.outputs.exists }}" == "true" ]]; then
-            echo "Nothing to tag/release, the tag ${{ steps.version.outputs.version }} already exists"
+            echo "Nothing to tag/release, the tag v${{ steps.version.outputs.version }} already exists"
             exit 1
           fi
 
