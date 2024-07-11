@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.23.5] - 2024-07-11
+### :sparkles: New Features
+- [`608b5b5`](https://github.com/InseeFr/Eno/commit/608b5b5afa1c3015dea36883f159a40b524e4a79) - roundabout *(PR [#1054](https://github.com/InseeFr/Eno/pull/1054) by [@nsenave](https://github.com/nsenave))*
+
+### :bug: Bug Fixes
+- [`8f807cc`](https://github.com/InseeFr/Eno/commit/8f807cc7df0c6e4f370efee2172e47749bbc36e8) - update detail response processing with roundabout *(PR [#1062](https://github.com/InseeFr/Eno/pull/1062) by [@nsenave](https://github.com/nsenave))*
+- [`5b2b35e`](https://github.com/InseeFr/Eno/commit/5b2b35e7ea9e402432390bc1ce4e8f1b5fb70666) - roundabout filter *(PR [#1068](https://github.com/InseeFr/Eno/pull/1068) by [@nsenave](https://github.com/nsenave))*
+- [`f66ade4`](https://github.com/InseeFr/Eno/commit/f66ade4e61b90ef95c3f4782c4be464233869e1d) - **roundabout**: reorder lunatic processing steps *(commit by [@nsenave](https://github.com/nsenave))*
+- [`457e743`](https://github.com/InseeFr/Eno/commit/457e743653ec3203f26260e4116dae8974cd87f6) - grouping treatment dsfr *(PR [#1070](https://github.com/InseeFr/Eno/pull/1070) by [@nsenave](https://github.com/nsenave))*
+
+### :construction_worker: Build System
+- [`8045864`](https://github.com/InseeFr/Eno/commit/8045864eef096c93bca3ef5e266ac3f505c81f95) - update dependencies *(PR [#1060](https://github.com/InseeFr/Eno/pull/1060) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.22.8] - 2024-06-21
 ### :bug: Bug Fixes
 - [`1564e4e`](https://github.com/InseeFr/Eno/commit/1564e4eb64003db5c6a4254e88dd059635ae9acf) - 'row' type property for lunatic controls *(PR [#1047](https://github.com/InseeFr/Eno/pull/1047) by [@nsenave](https://github.com/nsenave))*
@@ -228,3 +242,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.22.4]: https://github.com/InseeFr/Eno/compare/3.21.8...3.22.4
 [3.22.7]: https://github.com/InseeFr/Eno/compare/3.22.4...3.22.7
 [3.22.8]: https://github.com/InseeFr/Eno/compare/3.22.7...3.22.8
+[3.23.5]: https://github.com/InseeFr/Eno/compare/3.22.8...3.23.5
