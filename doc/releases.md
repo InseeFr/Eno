@@ -1,5 +1,11 @@
 # Eno Releases note
 
+## [v2.9.11] - 2024-07-12
+### :construction_worker: Build System
+- [`68fd49e`](https://github.com/InseeFr/Eno/commit/68fd49e2090785e9307a1897fd2b16f311b60846) - update dependencies *(PR [#1071](https://github.com/InseeFr/Eno/pull/1071) by [@nsenave](https://github.com/nsenave))*
+- [`85a5837`](https://github.com/InseeFr/Eno/commit/85a583719024d4d457f2643e2bfdccc4110e248a) - maven central deploy *(PR [#1072](https://github.com/InseeFr/Eno/pull/1072) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [v2.9.10] - 2024-06-24
 ### :bug: Bug Fixes
 - [`f5efddf`](https://github.com/InseeFr/Eno/commit/f5efddf7155892b8efb39c91562568e630328209) - roundabout *(PR [#1043](https://github.com/InseeFr/Eno/pull/1043) by [@BulotF](https://github.com/BulotF))*
@@ -333,3 +339,4 @@
 [v2.9.7]: https://github.com/InseeFr/Eno/compare/v2.9.6...v2.9.7
 [v2.9.8]: https://github.com/InseeFr/Eno/compare/v2.9.7...v2.9.8
 [v2.9.10]: https://github.com/InseeFr/Eno/compare/v2.9.8...v2.9.10
+[v2.9.11]: https://github.com/InseeFr/Eno/compare/v2.9.10...v2.9.11
