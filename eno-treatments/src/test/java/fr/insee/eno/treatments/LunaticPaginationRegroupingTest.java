@@ -1,6 +1,7 @@
 package fr.insee.eno.treatments;
 
 import fr.insee.eno.treatments.dto.Regroupement;
+import fr.insee.eno.treatments.dto.Regroupements;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LunaticRegroupementProcessingTest {
+class LunaticPaginationRegroupingTest {
 
     private Questionnaire questionnaire;
     private Sequence s1, s4, s8, s9;
@@ -29,7 +30,8 @@ class LunaticRegroupementProcessingTest {
         regroupementList.add(new Regroupement(List.of("Q1", "Q2")));
         regroupementList.add(new Regroupement(List.of("Q5", "Q6")));
 
-        LunaticRegroupementProcessing processing = new LunaticRegroupementProcessing(regroupementList);
+        Regroupements regroupements = new Regroupements(regroupementList);
+        LunaticPaginationRegrouping processing = new LunaticPaginationRegrouping(regroupements);
 
         questionnaire = new Questionnaire();
 
@@ -41,50 +43,50 @@ class LunaticRegroupementProcessingTest {
         s1 = buildSequence("jfaz9kv9");
         components.add(s1);
 
-        n2 = buildNumber("jfazk91m", "Q1", s1, null);
+        n2 = buildNumber("jfazk91m", "Q1");
         components.add(n2);
 
-        n3 = buildNumber("lhpz37kh", "Q2", s1, null);
+        n3 = buildNumber("lhpz37kh", "Q2");
         components.add(n3);
 
         s4 = buildSequence("li1w5tqk");
         components.add(s4);
 
-        n5 = buildNumber("li1w3tmf", "NB", s4, null);
+        n5 = buildNumber("li1w3tmf", "NB");
         components.add(n5);
 
-        l6 = buildEmptyLoop("li1wjxs2", s4);
+        l6 = buildEmptyLoop("li1wjxs2");
         // to consider this loop as main loop
         l6.setLines(new LinesLoop());
 
         // build loop 6 components
-        ss6 = buildSubsequence("li1wbv47", s4);
+        ss6 = buildSubsequence("li1wbv47");
         //set a declaration for this subsequence
         ss6.getDeclarations().add(new DeclarationType());
         l6Components.add(ss6);
 
-        i6 = buildInput("li1wptdt", "PRENOM", s4, ss6);
+        i6 = buildInput("li1wptdt", "PRENOM");
         l6Components.add(i6);
 
         l6.getComponents().addAll(l6Components);
         components.add(l6);
 
-        l7 = buildEmptyLoop("li1wsotd", s4);
+        l7 = buildEmptyLoop("li1wsotd");
         // to make this loop considered as linked
         l7.setIterations(new LabelType());
 
-        ss71 = buildSubsequence("li1wfnbk", s4);
+        ss71 = buildSubsequence("li1wfnbk");
         l7Components.add(ss71);
 
-        co71 = buildCheckboxOne("lhpyz9b0", "Q5", s4, ss71);
+        co71 = buildCheckboxOne("lhpyz9b0", "Q5");
         l7Components.add(co71);
 
-        n72 = buildNumber("lhpzan4t", "Q6", s4, ss71);
+        n72 = buildNumber("lhpzan4t", "Q6");
         l7Components.add(n72);
 
-        p73 = buildEmptyPairWiseLinks("pairwise-links", s4, ss71);
-        co73 = buildCheckboxOne("lhpyz9b73", "QQCO", s4, ss71);
-        n73 = buildNumber("lhpzan73", "QQN", s4, ss71);
+        p73 = buildEmptyPairWiseLinks("pairwise-links");
+        co73 = buildCheckboxOne("lhpyz9b73", "QQCO");
+        n73 = buildNumber("lhpzan73", "QQN");
 
         p73Components.add(co73);
         p73Components.add(n73);
@@ -100,15 +102,12 @@ class LunaticRegroupementProcessingTest {
         s9 = buildSequence("COMMENT-SEQ");
         components.add(s9);
 
-        t10 = buildTextarea("COMMENT-QUESTION", "COMMENT_QE", s9);
+        t10 = buildTextarea("COMMENT-QUESTION", "COMMENT_QE");
         components.add(t10);
 
         questionnaire.getComponents().addAll(components);
 
-        //JSONSerializer jsonSerializer = new JSONSerializer();
-        //System.out.println(jsonSerializer.serialize2(questionnaire));
         processing.apply(questionnaire);
-        //System.out.println(jsonSerializer.serialize2(questionnaire));
     }
 
     @Test
@@ -187,29 +186,26 @@ class LunaticRegroupementProcessingTest {
         assertEquals("9", t10.getPage());
     }
 
-    private CheckboxOne buildCheckboxOne(String id, String name, Sequence sequence, Subsequence subsequence) {
+    private CheckboxOne buildCheckboxOne(String id, String name) {
         CheckboxOne co = new CheckboxOne();
         co.setComponentType(ComponentTypeEnum.CHECKBOX_ONE);
         co.setId(id);
-        co.setHierarchy(buildHierarchy(sequence, subsequence));
         co.setResponse(buildResponse(name));
         return co;
     }
 
-    private Textarea buildTextarea(String id, String name, Sequence sequence) {
+    private Textarea buildTextarea(String id, String name) {
         Textarea textarea = new Textarea();
         textarea.setComponentType(ComponentTypeEnum.TEXTAREA);
         textarea.setId(id);
-        textarea.setHierarchy(buildHierarchy(sequence));
         textarea.setResponse(buildResponse(name));
         return textarea;
     }
 
-    private Input buildInput(String id, String name, Sequence sequence, Subsequence subsequence) {
+    private Input buildInput(String id, String name) {
         Input input = new Input();
         input.setComponentType(ComponentTypeEnum.INPUT);
         input.setId(id);
-        input.setHierarchy(buildHierarchy(sequence, subsequence));
         input.setResponse(buildResponse(name));
         return input;
     }
@@ -218,55 +214,29 @@ class LunaticRegroupementProcessingTest {
         Sequence sequence = new Sequence();
         sequence.setId(id);
         sequence.setComponentType(ComponentTypeEnum.SEQUENCE);
-        sequence.setHierarchy(buildHierarchy(sequence));
         return sequence;
     }
 
-    private Subsequence buildSubsequence(String id, Sequence sequence) {
+    private Subsequence buildSubsequence(String id) {
         Subsequence subsequence = new Subsequence();
         subsequence.setId(id);
         subsequence.setComponentType(ComponentTypeEnum.SUBSEQUENCE);
-        subsequence.setHierarchy(buildHierarchy(sequence, subsequence));
         return subsequence;
     }
 
-    private InputNumber buildNumber(String id, String name, Sequence sequence, Subsequence subsequence) {
+    private InputNumber buildNumber(String id, String name) {
         InputNumber number = new InputNumber();
         number.setComponentType(ComponentTypeEnum.INPUT_NUMBER);
         number.setId(id);
-        number.setHierarchy(buildHierarchy(sequence, subsequence));
         number.setResponse(buildResponse(name));
         return number;
     }
 
-    private Loop buildEmptyLoop(String id, Sequence sequence) {
+    private Loop buildEmptyLoop(String id) {
         Loop loop = new Loop();
         loop.setComponentType(ComponentTypeEnum.LOOP);
         loop.setId(id);
-        loop.setHierarchy(buildHierarchy(sequence));
         return loop;
-    }
-
-    private Hierarchy buildHierarchy(Sequence sequence) {
-        SequenceDescription sequenceDescription = new SequenceDescription();
-        sequenceDescription.setId(sequence.getId());
-        Hierarchy hierarchy = new Hierarchy();
-        hierarchy.setSequence(sequenceDescription);
-        return hierarchy;
-    }
-
-    private Hierarchy buildHierarchy(Sequence sequence, Subsequence subsequence) {
-        Hierarchy hierarchy = buildHierarchy(sequence);
-
-        if(subsequence == null) {
-            return hierarchy;
-        }
-
-        SequenceDescription subsequenceDescription = new SequenceDescription();
-        subsequenceDescription.setId(subsequence.getId());
-
-        hierarchy.setSubSequence(subsequenceDescription);
-        return hierarchy;
     }
 
     private ResponseType buildResponse(String name) {
@@ -275,11 +245,10 @@ class LunaticRegroupementProcessingTest {
         return response;
     }
 
-    private PairwiseLinks buildEmptyPairWiseLinks(String id, Sequence sequence, Subsequence subsequence) {
+    private PairwiseLinks buildEmptyPairWiseLinks(String id) {
         PairwiseLinks pairwiseLinks = new PairwiseLinks();
         pairwiseLinks.setId(id);
         pairwiseLinks.setComponentType(ComponentTypeEnum.PAIRWISE_LINKS);
-        pairwiseLinks.setHierarchy(buildHierarchy(sequence, subsequence));
         return pairwiseLinks;
     }
 }

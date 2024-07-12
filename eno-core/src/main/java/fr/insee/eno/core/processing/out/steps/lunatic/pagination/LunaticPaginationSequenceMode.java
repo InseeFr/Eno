@@ -11,9 +11,9 @@
 /**
  * Post processing of a lunatic questionnaire. With this processing, one sequence is displayed on each page.
  */
-public class LunaticAddPageNumbersSequenceMode extends LunaticAddPageNumbersAllModes {
+public class LunaticPaginationSequenceMode extends LunaticPaginationAllModes {
 
-    public LunaticAddPageNumbersSequenceMode() {
+    public LunaticPaginationSequenceMode() {
         super(false, "sequence");
     }
 

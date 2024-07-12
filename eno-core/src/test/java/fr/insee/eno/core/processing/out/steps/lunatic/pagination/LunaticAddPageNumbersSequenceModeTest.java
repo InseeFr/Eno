@@ -20,15 +20,14 @@ class LunaticAddPageNumbersSequenceModeTest {
     private Input i6;
     private CheckboxOne co71, co73;
     private PairwiseLinks p73;
-    private List<ComponentType> components;
 
     @BeforeEach
     void init() {
-        LunaticAddPageNumbersSequenceMode processing = new LunaticAddPageNumbersSequenceMode();
+        LunaticPaginationSequenceMode processing = new LunaticPaginationSequenceMode();
 
         questionnaire = new Questionnaire();
 
-        components = new ArrayList<>();
+        List<ComponentType> components = new ArrayList<>();
         List<ComponentType> l6Components = new ArrayList<>();
         List<ComponentType> l7Components = new ArrayList<>();
         List<ComponentType> p73Components = new ArrayList<>();
@@ -36,49 +35,49 @@ class LunaticAddPageNumbersSequenceModeTest {
         s1 = LunaticAddPageNumbersUtils.buildSequence("jfaz9kv9");
         components.add(s1);
 
-        n2 = LunaticAddPageNumbersUtils.buildNumber("jfazk91m", "Q1", s1, null);
+        n2 = LunaticAddPageNumbersUtils.buildNumber("jfazk91m", "Q1");
         components.add(n2);
 
-        n3 = LunaticAddPageNumbersUtils.buildNumber("lhpz37kh", "Q2", s1, null);
+        n3 = LunaticAddPageNumbersUtils.buildNumber("lhpz37kh", "Q2");
         components.add(n3);
 
         s4 = LunaticAddPageNumbersUtils.buildSequence("li1w5tqk");
         components.add(s4);
 
-        n5 = LunaticAddPageNumbersUtils.buildNumber("li1w3tmf", "NB", s4, null);
+        n5 = LunaticAddPageNumbersUtils.buildNumber("li1w3tmf", "NB");
         components.add(n5);
 
-        l6 = LunaticAddPageNumbersUtils.buildEmptyLoop("li1wjxs2", s4);
+        l6 = LunaticAddPageNumbersUtils.buildEmptyLoop("li1wjxs2");
         // to consider this loop as main loop
         l6.setLines(new LinesLoop());
 
         // build loop 6 components
-        ss6 = LunaticAddPageNumbersUtils.buildSubsequence("li1wbv47", s4);
+        ss6 = LunaticAddPageNumbersUtils.buildSubsequence("li1wbv47");
         //set a declaration for this subsequence
         ss6.getDeclarations().add(new DeclarationType());
         l6Components.add(ss6);
 
-        i6 = LunaticAddPageNumbersUtils.buildInput("li1wptdt", "PRENOM", s4, ss6);
+        i6 = LunaticAddPageNumbersUtils.buildInput("li1wptdt", "PRENOM");
         l6Components.add(i6);
 
         l6.getComponents().addAll(l6Components);
         components.add(l6);
 
-        l7 = LunaticAddPageNumbersUtils.buildEmptyLoop("li1wsotd", s4);
+        l7 = LunaticAddPageNumbersUtils.buildEmptyLoop("li1wsotd");
 
         // to make this loop considered as linked
         s71 = LunaticAddPageNumbersUtils.buildSequence("li1wfnbk");
         l7Components.add(s71);
 
-        co71 = LunaticAddPageNumbersUtils.buildCheckboxOne("lhpyz9b0", "Q5", s71, null);
+        co71 = LunaticAddPageNumbersUtils.buildCheckboxOne("lhpyz9b0", "Q5");
         l7Components.add(co71);
 
-        n72 = LunaticAddPageNumbersUtils.buildNumber("lhpzan4t", "Q6", s71, null);
+        n72 = LunaticAddPageNumbersUtils.buildNumber("lhpzan4t", "Q6");
         l7Components.add(n72);
 
-        p73 = LunaticAddPageNumbersUtils.buildEmptyPairWiseLinks("pairwise-links", s71, null);
-        co73 = LunaticAddPageNumbersUtils.buildCheckboxOne("lhpyz9b73", "QQCO", s71, null);
-        n73 = LunaticAddPageNumbersUtils.buildNumber("lhpzan73", "QQN", s71, null);
+        p73 = LunaticAddPageNumbersUtils.buildEmptyPairWiseLinks("pairwise-links");
+        co73 = LunaticAddPageNumbersUtils.buildCheckboxOne("lhpyz9b73", "QQCO");
+        n73 = LunaticAddPageNumbersUtils.buildNumber("lhpzan73", "QQN");
 
         p73Components.add(co73);
         p73Components.add(n73);
@@ -94,15 +93,12 @@ class LunaticAddPageNumbersSequenceModeTest {
         s9 = LunaticAddPageNumbersUtils.buildSequence("COMMENT-SEQ");
         components.add(s9);
 
-        t10 = LunaticAddPageNumbersUtils.buildTextarea("COMMENT-QUESTION", "COMMENT_QE", s9);
+        t10 = LunaticAddPageNumbersUtils.buildTextarea("COMMENT-QUESTION", "COMMENT_QE");
         components.add(t10);
 
         questionnaire.getComponents().addAll(components);
 
-        //JSONSerializer jsonSerializer = new JSONSerializer();
-        //System.out.println(jsonSerializer.serialize2(questionnaire));
         processing.apply(questionnaire);
-        //System.out.println(jsonSerializer.serialize2(questionnaire));
     }
 
     @Test
@@ -113,7 +109,7 @@ class LunaticAddPageNumbersSequenceModeTest {
     @Test
     void shouldLoopWithFirstElementSequenceIsConsideredAsPaginatedLoop() {
         assertTrue(l7.getPaginatedLoop());
-        assertEquals(ComponentTypeEnum.SEQUENCE, l7.getComponents().get(0).getComponentType());
+        assertEquals(ComponentTypeEnum.SEQUENCE, l7.getComponents().getFirst().getComponentType());
     }
 
     @Test
@@ -126,7 +122,7 @@ class LunaticAddPageNumbersSequenceModeTest {
     @Test
     void shouldLoopWithNonFirstElementSequenceIsConsideredAsNonPaginatedLoop() {
         assertFalse(l6.getPaginatedLoop());
-        assertNotEquals(ComponentTypeEnum.SEQUENCE, l6.getComponents().get(0).getComponentType());
+        assertNotEquals(ComponentTypeEnum.SEQUENCE, l6.getComponents().getFirst().getComponentType());
     }
 
     @Test
