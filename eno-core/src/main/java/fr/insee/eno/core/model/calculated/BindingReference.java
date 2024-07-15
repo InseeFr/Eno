@@ -1,5 +1,6 @@
 package fr.insee.eno.core.model.calculated;
 
+import fr.insee.ddi.lifecycle33.reusable.InParameterType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.model.EnoObject;
@@ -8,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import reusable33.InParameterType;
 
 import java.util.Objects;
 

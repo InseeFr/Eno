@@ -17,8 +17,6 @@ jar {
 description = 'eno-treatments'
 
 dependencies {
-    // DDI
-    implementation project(':ddi-beans')
     // Eno core
     implementation project(':eno-core')
     // Lunatic

@@ -1,5 +1,6 @@
 package fr.insee.eno.core.model.calculated;
 
+import fr.insee.ddi.lifecycle33.reusable.CommandType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoObject;
@@ -8,7 +9,6 @@ import fr.insee.lunatic.model.flat.LabelType;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
-import reusable33.CommandType;
 
 import java.util.HashSet;
 import java.util.Set;

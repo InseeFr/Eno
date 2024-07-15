@@ -125,15 +125,15 @@ Choix de [`gradle`](https://gradle.org/maven-vs-gradle/) pour la gestion des dé
 
 Composition du projet : 
 - `eno-core` : module principal
-- `ddi-beans` : module pour générer les classes DDI à partir des schémas
+- `ddi-lifecycle` : module pour générer les classes DDI à partir des schémas
 
 Les classes Java in et out sont générées à partir des schémas existants : 
-- [sources DDI](https://ddialliance.org/Specification/DDI-Lifecycle/3.3/)
-    - [module ddi-beans](https://github.com/InseeFr/Eno/tree/v3-develop/ddi-beans)
+- [sources DDI](https://github.com/InseeFr/DDI-Lifecycle-Java)
+    - Mise en dépendance d'Eno de la lib DDI-Lifecycle-Java (classes Java déjà générées)
 - [sources Pogues-model](https://github.com/InseeFr/Pogues-model)
-    - Mise en dépendance d'Eno de la lib Pogues-model (classe Java déjà générées)
+    - Mise en dépendance d'Eno de la lib Pogues-model (classes Java déjà générées)
 - [sources Lunatic-model](https://github.com/InseeFr/Lunatic-model)
-    - Mise en dépendance d'Eno de la lib Lunatic-model (classe Java déjà générées)
+    - Mise en dépendance d'Eno de la lib Lunatic-model (classes Java déjà générées)
 - [Normes XSL-FO](https://www.w3.org/TR/xslfo20/) **pas de schéma XSD** existants 
 Pas de schéma pour le format spécification (fodt)
 

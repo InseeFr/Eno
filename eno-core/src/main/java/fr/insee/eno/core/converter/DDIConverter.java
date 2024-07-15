@@ -1,15 +1,15 @@
 package fr.insee.eno.core.converter;
 
-import datacollection33.GridResponseDomainInMixedType;
-import datacollection33.LoopType;
-import datacollection33.QuestionGridType;
-import datacollection33.QuestionItemType;
+import fr.insee.ddi.lifecycle33.datacollection.GridResponseDomainInMixedType;
+import fr.insee.ddi.lifecycle33.datacollection.LoopType;
+import fr.insee.ddi.lifecycle33.datacollection.QuestionGridType;
+import fr.insee.ddi.lifecycle33.datacollection.QuestionItemType;
+import fr.insee.ddi.lifecycle33.logicalproduct.VariableType;
 import fr.insee.eno.core.exceptions.technical.ConversionException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.question.table.TableCell;
 import fr.insee.eno.core.model.response.ModalityAttachment;
 import fr.insee.eno.core.reference.DDIIndex;
-import logicalproduct33.VariableType;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

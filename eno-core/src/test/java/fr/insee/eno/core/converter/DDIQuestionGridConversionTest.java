@@ -1,7 +1,7 @@
 package fr.insee.eno.core.converter;
 
-import datacollection33.QuestionGridDocument;
-import datacollection33.QuestionGridType;
+import fr.insee.ddi.lifecycle33.datacollection.QuestionGridDocument;
+import fr.insee.ddi.lifecycle33.datacollection.QuestionGridType;
 import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import org.apache.xmlbeans.XmlException;
 import org.junit.jupiter.api.Test;

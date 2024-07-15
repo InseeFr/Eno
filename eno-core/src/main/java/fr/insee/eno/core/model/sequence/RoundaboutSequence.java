@@ -1,6 +1,6 @@
 package fr.insee.eno.core.model.sequence;
 
-import datacollection33.SequenceType;
+import fr.insee.ddi.lifecycle33.datacollection.SequenceType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.parameter.Format;

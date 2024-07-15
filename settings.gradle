@@ -31,7 +31,6 @@ dependencyResolutionManagement {
 
 rootProject.name = 'Eno'
 
-include 'ddi-beans'
 include 'eno-core'
 include 'eno-treatments'
 include 'eno-ws'

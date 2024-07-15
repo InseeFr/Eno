@@ -1,7 +1,7 @@
 package fr.insee.eno.core.serialize;
 
+import fr.insee.ddi.lifecycle33.instance.DDIInstanceType;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
-import instance33.DDIInstanceType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

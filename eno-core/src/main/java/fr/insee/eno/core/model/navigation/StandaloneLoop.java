@@ -1,6 +1,6 @@
 package fr.insee.eno.core.model.navigation;
 
-import datacollection33.LoopType;
+import fr.insee.ddi.lifecycle33.datacollection.LoopType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;

@@ -18,7 +18,7 @@ description = 'eno-core'
 
 dependencies {
     // DDI
-    implementation project(':ddi-beans')
+    implementation 'fr.insee.ddi:ddi-lifecycle:1.0.0'
     // Pogues
     implementation libs.pogues.model
     // Lunatic

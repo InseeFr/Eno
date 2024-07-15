@@ -1,6 +1,6 @@
 package fr.insee.eno.core.model.response;
 
-import datacollection33.GridResponseDomainInMixedType;
+import fr.insee.ddi.lifecycle33.datacollection.GridResponseDomainInMixedType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.model.EnoObject;

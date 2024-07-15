@@ -1,5 +1,8 @@
 package fr.insee.eno.core.mappers;
 
+import fr.insee.ddi.lifecycle33.instance.DDIInstanceDocument;
+import fr.insee.ddi.lifecycle33.instance.DDIInstanceType;
+import fr.insee.ddi.lifecycle33.reusable.AbstractIdentifiableType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.converter.DDIConverter;
 import fr.insee.eno.core.exceptions.technical.MappingException;
@@ -11,8 +14,6 @@ import fr.insee.eno.core.reference.DDIIndex;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.utils.DDIUtils;
 import fr.insee.eno.core.utils.EnoSpelEngine;
-import instance33.DDIInstanceDocument;
-import instance33.DDIInstanceType;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanWrapper;
@@ -20,7 +21,6 @@ import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
-import reusable33.AbstractIdentifiableType;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;

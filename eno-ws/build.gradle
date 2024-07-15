@@ -29,7 +29,6 @@ configurations {
 
 dependencies {
 	//
-	implementation project(':ddi-beans')
 	implementation project(':eno-core')
 	implementation project(':eno-treatments')
 	// Lunatic

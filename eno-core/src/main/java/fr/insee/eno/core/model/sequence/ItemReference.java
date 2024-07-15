@@ -1,6 +1,7 @@
 package fr.insee.eno.core.model.sequence;
 
-import datacollection33.SequenceType;
+import fr.insee.ddi.lifecycle33.datacollection.SequenceType;
+import fr.insee.ddi.lifecycle33.reusable.ReferenceType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.exceptions.technical.MappingException;
@@ -8,7 +9,6 @@ import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.DDIIndex;
 import lombok.*;
-import reusable33.ReferenceType;
 
 /** Class designed to map DDI ControlConstructReference tags.
  * Note: The ControlConstructReference tag corresponds to the ReferenceType class.
