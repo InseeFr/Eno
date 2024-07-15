@@ -174,8 +174,7 @@ public class LunaticRoundaboutLoops implements ProcessingStep<Questionnaire> {
         String occurrenceFilterExpression = getOccurrenceFilterExpression(enoLoop);
         if (occurrenceFilterExpression != null) {
             lunaticRoundaboutItem.setDisabled(new LabelType());
-            lunaticRoundaboutItem.getDisabled().setValue(
-                    VtlSyntaxUtils.invertBooleanExpression(occurrenceFilterExpression));
+            lunaticRoundaboutItem.getDisabled().setValue(occurrenceFilterExpression);
             lunaticRoundaboutItem.getDisabled().setType(LabelTypeEnum.VTL);
         }
         lunaticRoundabout.setItem(lunaticRoundaboutItem);

@@ -3,11 +3,11 @@ package fr.insee.eno.core.processing.in.steps.ddi;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.serialize.DDIDeserializer;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class DDIMarkRoundaboutFiltersTest {
 
@@ -25,7 +25,9 @@ class DDIMarkRoundaboutFiltersTest {
         // Then
         // this questionnaire has no filters except the "occurrence" filter added for the roundabout
         assertEquals(1, enoQuestionnaire.getFilters().size());
-        assertTrue(enoQuestionnaire.getFilters().getFirst().isRoundaboutFilter());
+        Filter enoFilter = enoQuestionnaire.getFilters().getFirst();
+        assertTrue(enoFilter.isRoundaboutFilter());
+        assertFalse(enoFilter.getExpression().getValue().startsWith("not"));
     }
 
 }
