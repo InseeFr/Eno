@@ -1,13 +1,10 @@
 package fr.insee.eno.core.model.question.table;
 
-import datacollection33.GridAttachmentType;
-import datacollection33.GridResponseDomainInMixedType;
-import datacollection33.SelectDimensionType;
-import fr.insee.eno.core.model.EnoObjectWithId;
+import fr.insee.ddi.lifecycle33.datacollection.GridAttachmentType;
+import fr.insee.ddi.lifecycle33.datacollection.GridResponseDomainInMixedType;
+import fr.insee.ddi.lifecycle33.datacollection.SelectDimensionType;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.BodyCell;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.math.BigInteger;
 import java.util.Optional;

@@ -1,8 +1,8 @@
 package fr.insee.eno.core.utils;
 
-import reusable33.AbstractIdentifiableType;
-import reusable33.IDType;
-import reusable33.ReferenceType;
+import fr.insee.ddi.lifecycle33.reusable.AbstractIdentifiableType;
+import fr.insee.ddi.lifecycle33.reusable.IDType;
+import fr.insee.ddi.lifecycle33.reusable.ReferenceType;
 
 public class DDITestUtils {
 

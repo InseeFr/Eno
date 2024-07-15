@@ -1,5 +1,6 @@
 package fr.insee.eno.core.mapping.out.lunatic;
 
+import fr.insee.ddi.lifecycle33.instance.DDIInstanceDocument;
 import fr.insee.eno.core.DDIToLunatic;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.DDIMapper;
@@ -19,7 +20,6 @@ import fr.insee.lunatic.model.flat.RosterForLoop;
 import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
 import fr.insee.lunatic.model.flat.variable.CollectedVariableValues;
 import fr.insee.lunatic.model.flat.variable.VariableType;
-import instance33.DDIInstanceDocument;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;

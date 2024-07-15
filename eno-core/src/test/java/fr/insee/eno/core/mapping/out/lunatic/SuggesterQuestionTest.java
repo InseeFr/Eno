@@ -1,5 +1,6 @@
 package fr.insee.eno.core.mapping.out.lunatic;
 
+import fr.insee.ddi.lifecycle33.instance.DDIInstanceDocument;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.mappers.LunaticMapper;
@@ -9,7 +10,6 @@ import fr.insee.eno.core.serialize.DDIDeserializer;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.Suggester;
-import instance33.DDIInstanceDocument;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;

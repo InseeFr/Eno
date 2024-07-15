@@ -1,12 +1,12 @@
 package fr.insee.eno.core.converter;
 
-import datacollection33.*;
+import fr.insee.ddi.lifecycle33.datacollection.*;
+import fr.insee.ddi.lifecycle33.reusable.*;
 import fr.insee.eno.core.exceptions.technical.ConversionException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.question.*;
 import fr.insee.eno.core.reference.DDIIndex;
 import lombok.extern.slf4j.Slf4j;
-import reusable33.*;
 
 import java.util.Set;
 

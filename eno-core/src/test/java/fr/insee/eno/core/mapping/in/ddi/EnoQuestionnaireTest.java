@@ -1,20 +1,20 @@
 package fr.insee.eno.core.mapping.in.ddi;
 
-import datacollection33.ControlConstructSchemeType;
-import datacollection33.QuestionSchemeType;
+import fr.insee.ddi.lifecycle33.datacollection.ControlConstructSchemeType;
+import fr.insee.ddi.lifecycle33.datacollection.QuestionSchemeType;
+import fr.insee.ddi.lifecycle33.group.ResourcePackageType;
+import fr.insee.ddi.lifecycle33.instance.DDIInstanceType;
+import fr.insee.ddi.lifecycle33.logicalproduct.CodeListSchemeType;
+import fr.insee.ddi.lifecycle33.logicalproduct.VariableGroupType;
+import fr.insee.ddi.lifecycle33.logicalproduct.VariableSchemeType;
+import fr.insee.ddi.lifecycle33.logicalproduct.VariableType;
+import fr.insee.ddi.lifecycle33.reusable.*;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import group33.ResourcePackageType;
-import instance33.DDIInstanceType;
-import logicalproduct33.CodeListSchemeType;
-import logicalproduct33.VariableGroupType;
-import logicalproduct33.VariableSchemeType;
-import logicalproduct33.VariableType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import reusable33.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EnoQuestionnaireTest {
 

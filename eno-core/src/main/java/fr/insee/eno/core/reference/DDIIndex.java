@@ -1,14 +1,14 @@
 package fr.insee.eno.core.reference;
 
+import fr.insee.ddi.lifecycle33.instance.DDIInstanceDocument;
+import fr.insee.ddi.lifecycle33.reusable.AbstractIdentifiableType;
 import fr.insee.eno.core.exceptions.business.DuplicateIdException;
 import fr.insee.eno.core.exceptions.technical.IndexingException;
 import fr.insee.eno.core.mappers.Mapper;
-import instance33.DDIInstanceDocument;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.core.convert.TypeDescriptor;
-import reusable33.AbstractIdentifiableType;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;

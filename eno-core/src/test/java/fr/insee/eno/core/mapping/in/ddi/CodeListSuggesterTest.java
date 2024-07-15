@@ -1,5 +1,6 @@
 package fr.insee.eno.core.mapping.in.ddi;
 
+import fr.insee.ddi.lifecycle33.instance.DDIInstanceDocument;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
@@ -7,8 +8,6 @@ import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.suggester.SuggesterConfigurationDTO;
 import fr.insee.eno.core.processing.in.steps.ddi.DDIDeserializeSuggesterConfiguration;
 import fr.insee.eno.core.serialize.DDIDeserializer;
-import instance33.DDIInstanceDocument;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;

@@ -1,7 +1,7 @@
 package fr.insee.eno.core.mapping.in.ddi;
 
-import datacollection33.QuestionItemDocument;
-import datacollection33.QuestionItemType;
+import fr.insee.ddi.lifecycle33.datacollection.QuestionItemDocument;
+import fr.insee.ddi.lifecycle33.datacollection.QuestionItemType;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import org.apache.xmlbeans.XmlException;

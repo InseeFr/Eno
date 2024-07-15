@@ -2,7 +2,6 @@
 
 ## Modules
 
-- [DDI Java](ddi-java/index.md)
 - [Eno Java](eno-core/index.md)
 - [Eno Web-Service](eno-ws/index.md)
 

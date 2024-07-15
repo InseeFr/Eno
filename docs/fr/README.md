@@ -6,8 +6,8 @@
 
 Eno est un projet multi-modules, se reporter à la documentation du module selon le besoin :
 
-- [`ddi-java`](./ddi-java/index.md) : Librairie qui offre des classes java pour DDI, maintenue au sein du projet.
 - [`eno-core`](./eno-core/index.md) : Librairie java de transformation de questionnaires.
+- [`eno-treatments`](./eno-treatments/index.md) : Module annexes pour des traitements temporaires sur les questionnaires.
 - [`eno-ws`](./eno-ws/index.md) : Service web d'Eno.
 
 ## Je souhaite contribuer

@@ -1,5 +1,6 @@
 package fr.insee.eno.core.model.label;
 
+import fr.insee.ddi.lifecycle33.reusable.InternationalStringType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoObject;
@@ -8,7 +9,6 @@ import fr.insee.lunatic.model.flat.LabelType;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
-import reusable33.InternationalStringType;
 
 import static fr.insee.eno.core.annotations.Contexts.Context;
 

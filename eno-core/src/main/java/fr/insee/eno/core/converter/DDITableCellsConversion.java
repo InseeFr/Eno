@@ -1,11 +1,11 @@
 package fr.insee.eno.core.converter;
 
-import datacollection33.*;
+import fr.insee.ddi.lifecycle33.datacollection.*;
+import fr.insee.ddi.lifecycle33.reusable.RepresentationType;
+import fr.insee.ddi.lifecycle33.reusable.TextDomainType;
 import fr.insee.eno.core.exceptions.technical.ConversionException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.question.table.*;
-import reusable33.RepresentationType;
-import reusable33.TextDomainType;
 
 public class DDITableCellsConversion {
 
