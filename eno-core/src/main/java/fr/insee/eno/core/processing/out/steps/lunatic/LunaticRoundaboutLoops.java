@@ -8,6 +8,7 @@ import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.navigation.LinkedLoop;
 import fr.insee.eno.core.model.sequence.RoundaboutSequence;
 import fr.insee.eno.core.processing.ProcessingStep;
+import fr.insee.eno.core.utils.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
 import fr.insee.lunatic.model.flat.variable.CollectedVariableValues;
@@ -173,7 +174,8 @@ public class LunaticRoundaboutLoops implements ProcessingStep<Questionnaire> {
         String occurrenceFilterExpression = getOccurrenceFilterExpression(enoLoop);
         if (occurrenceFilterExpression != null) {
             lunaticRoundaboutItem.setDisabled(new LabelType());
-            lunaticRoundaboutItem.getDisabled().setValue(occurrenceFilterExpression);
+            lunaticRoundaboutItem.getDisabled().setValue(
+                    VtlSyntaxUtils.invertBooleanExpression(occurrenceFilterExpression));
             lunaticRoundaboutItem.getDisabled().setType(LabelTypeEnum.VTL);
         }
         lunaticRoundabout.setItem(lunaticRoundaboutItem);
