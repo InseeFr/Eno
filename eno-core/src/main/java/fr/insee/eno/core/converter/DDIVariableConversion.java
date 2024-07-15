@@ -1,10 +1,10 @@
 package fr.insee.eno.core.converter;
 
+import fr.insee.ddi.lifecycle33.logicalproduct.VariableType;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.variable.CalculatedVariable;
 import fr.insee.eno.core.model.variable.CollectedVariable;
 import fr.insee.eno.core.model.variable.ExternalVariable;
-import logicalproduct33.VariableType;
 
 public class DDIVariableConversion {
 

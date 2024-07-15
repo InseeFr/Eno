@@ -1,6 +1,6 @@
 package fr.insee.eno.core.converter;
 
-import datacollection33.LoopType;
+import fr.insee.ddi.lifecycle33.datacollection.LoopType;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.navigation.LinkedLoop;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;

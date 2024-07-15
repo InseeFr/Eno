@@ -1,11 +1,9 @@
 package fr.insee.eno.core.mappers;
 
-import datacollection33.QuestionItemType;
+import fr.insee.ddi.lifecycle33.datacollection.QuestionItemType;
 import fr.insee.eno.core.exceptions.technical.MethodBindingException;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import org.springframework.expression.EvaluationContext;
-
-import java.lang.reflect.Method;
 
 /** Class to set context variables to be used by DDI mapper.
  * Reason for this class: Refactor -> Rename a class will not update mapping annotations,

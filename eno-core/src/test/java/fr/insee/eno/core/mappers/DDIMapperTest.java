@@ -1,6 +1,6 @@
 package fr.insee.eno.core.mappers;
 
-import datacollection33.SequenceType;
+import fr.insee.ddi.lifecycle33.datacollection.SequenceType;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import org.junit.jupiter.api.Test;
 

@@ -1,15 +1,15 @@
 package fr.insee.eno.core.model.code;
 
+import fr.insee.ddi.lifecycle33.logicalproduct.CodeListType;
+import fr.insee.ddi.lifecycle33.reusable.impl.ContentTypeImpl;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.exceptions.business.IllegalDDIElementException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.suggester.SuggesterConfigurationDTO;
 import fr.insee.eno.core.parameter.Format;
-import logicalproduct33.CodeListType;
 import lombok.Getter;
 import lombok.Setter;
-import reusable33.impl.ContentTypeImpl;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package fr.insee.eno.core.model.question.table;
 
-import datacollection33.GridResponseDomainInMixedType;
+import fr.insee.ddi.lifecycle33.datacollection.GridResponseDomainInMixedType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.exceptions.technical.MappingException;

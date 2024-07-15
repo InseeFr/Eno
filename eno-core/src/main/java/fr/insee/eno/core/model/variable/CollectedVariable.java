@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Context(format = Format.DDI, type = logicalproduct33.VariableType.class)
+@Context(format = Format.DDI, type = fr.insee.ddi.lifecycle33.logicalproduct.VariableType.class)
 @Context(format = Format.LUNATIC, type = CollectedVariableType.class)
 public class CollectedVariable extends Variable {
 

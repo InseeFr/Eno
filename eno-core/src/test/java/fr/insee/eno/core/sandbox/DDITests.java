@@ -1,22 +1,23 @@
 package fr.insee.eno.core.sandbox;
 
-import datacollection33.*;
-import datacollection33.impl.TextTypeImpl;
+import fr.insee.ddi.lifecycle33.datacollection.*;
+import fr.insee.ddi.lifecycle33.datacollection.impl.TextTypeImpl;
+import fr.insee.ddi.lifecycle33.group.ResourcePackageType;
+import fr.insee.ddi.lifecycle33.instance.DDIInstanceDocument;
+import fr.insee.ddi.lifecycle33.instance.DDIInstanceType;
+import fr.insee.ddi.lifecycle33.logicalproduct.VariableGroupType;
+import fr.insee.ddi.lifecycle33.logicalproduct.VariableSchemeType;
+import fr.insee.ddi.lifecycle33.reusable.*;
+import fr.insee.ddi.lifecycle33.reusable.impl.ContentTypeImpl;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
-import fr.insee.eno.core.serialize.DDIDeserializer;
 import fr.insee.eno.core.reference.DDIIndex;
-import group33.ResourcePackageType;
-import instance33.DDIInstanceDocument;
-import instance33.DDIInstanceType;
-import logicalproduct33.VariableGroupType;
-import logicalproduct33.VariableSchemeType;
+import fr.insee.eno.core.serialize.DDIDeserializer;
 import org.junit.jupiter.api.Test;
-import reusable33.*;
-import reusable33.impl.ContentTypeImpl;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class DDITests {
 

@@ -1,6 +1,6 @@
 package fr.insee.eno.core.model.navigation;
 
-import datacollection33.IfThenElseType;
+import fr.insee.ddi.lifecycle33.datacollection.IfThenElseType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
