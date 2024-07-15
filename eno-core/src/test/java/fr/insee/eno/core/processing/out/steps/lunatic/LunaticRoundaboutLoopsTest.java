@@ -17,7 +17,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static fr.insee.lunatic.model.flat.ComponentTypeEnum.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class LunaticRoundaboutLoopsTest {
@@ -81,7 +82,7 @@ class LunaticRoundaboutLoopsTest {
         assertEquals("\"Occurrence description of \" || FIRST_NAME",
                 roundaboutItem.getDescription().getValue().stripTrailing());
         assertEquals(LabelTypeEnum.VTL_MD, roundaboutItem.getDescription().getType());
-        assertEquals("not(FIRST_NAME <> FIRST_NAME_REF)",
+        assertEquals("FIRST_NAME <> FIRST_NAME_REF",
                 roundaboutItem.getDisabled().getValue().stripTrailing());
         assertEquals(LabelTypeEnum.VTL, roundaboutItem.getDisabled().getType());
     }
