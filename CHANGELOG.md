@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.23.7] - 2024-07-15
+### :bug: Bug Fixes
+- [`3daa426`](https://github.com/InseeFr/Eno/commit/3daa42655477a927c01fc44b8b2da569e7c4e02d) - **roundabout**: disabled condition *(PR [#1078](https://github.com/InseeFr/Eno/pull/1078) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.23.6] - 2024-07-15
 ### :construction_worker: Build System
 - [`7fef34c`](https://github.com/InseeFr/Eno/commit/7fef34cbc1f3789a289b7601631060024f5dee0a) - **deps**: bump json-schema-validator from 1.4.0 to 1.5.0 *(PR [#1067](https://github.com/InseeFr/Eno/pull/1067) by [@dependabot[bot]](https://github.com/apps/dependabot))*
@@ -250,3 +255,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.22.8]: https://github.com/InseeFr/Eno/compare/3.22.7...3.22.8
 [3.23.5]: https://github.com/InseeFr/Eno/compare/3.22.8...3.23.5
 [3.23.6]: https://github.com/InseeFr/Eno/compare/3.23.5...3.23.6
+[3.23.7]: https://github.com/InseeFr/Eno/compare/3.23.6...3.23.7
