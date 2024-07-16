@@ -2,6 +2,7 @@ package fr.insee.eno.core.utils;
 
 import fr.insee.eno.core.exceptions.business.LunaticLoopException;
 import fr.insee.eno.core.exceptions.technical.LunaticPairwiseException;
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -62,6 +63,8 @@ public class LunaticUtils {
                     throw new IllegalArgumentException(String.format(
                             "Method to get response names cannot be called on a component of type %s.",
                             component.getComponentType()));
+                if (simpleResponseComponent.getResponse() == null)
+                    throw new MappingException("Lunatic component '" + component.getId() + "' has no response.");
                 names = List.of(simpleResponseComponent.getResponse().getName());
             }
         }
