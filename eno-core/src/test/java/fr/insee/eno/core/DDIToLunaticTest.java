@@ -14,6 +14,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -50,13 +51,16 @@ class DDIToLunaticTest {
     }
 
     @Test
-    void ddiWithTableWithNestedCodeListHeader_shouldThrowException() {
+    void ddiWithTableWithNestedCodeListHeader_shouldThrowException() throws IOException {
         // Given
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(
-                "functional/ddi/ddi-l8x6fhtd.xml");
-        EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
-        // When + Then
-        assertThrows(UnauthorizedHeaderException.class, () -> DDIToLunatic.transform(inputStream, enoParameters));
+        try (InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(
+                "functional/ddi/ddi-l8x6fhtd.xml")) {
+            EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
+            // When + Then
+            assertThrows(UnauthorizedHeaderException.class, () -> DDIToLunatic.transform(inputStream, enoParameters));
+        } catch (IOException e) {
+            throw new IOException("IOException occurred with test DDI file 'l8x6fhtd'.");
+        }
     }
 
     @Test
