@@ -1,7 +1,7 @@
 package fr.insee.eno.core.serialize;
 
+import fr.insee.ddi.lifecycle33.instance.DDIInstanceDocument;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
-import instance33.DDIInstanceDocument;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.xmlbeans.XmlException;
 

@@ -1,9 +1,9 @@
 package fr.insee.eno.core.reference;
 
-import datacollection33.SequenceType;
+import fr.insee.ddi.lifecycle33.datacollection.SequenceType;
+import fr.insee.ddi.lifecycle33.instance.DDIInstanceDocument;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.serialize.DDIDeserializer;
-import instance33.DDIInstanceDocument;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;

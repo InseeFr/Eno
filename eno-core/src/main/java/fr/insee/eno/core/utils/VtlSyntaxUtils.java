@@ -19,4 +19,19 @@ public class VtlSyntaxUtils {
         return vtlString1 + " " + VTL_CONCATENATION_OPERATOR + " " + vtlString2;
     }
 
+    /**
+     * Inverts the given expression (which is supposed to be a VTL expression that returns a boolean)
+     * by adding a 'not()' around it, or eventually removing one if the entire expression is in a "not".
+     * @param expression VTL boolean expression.
+     * @return The inverted VTL expression.
+     */
+    public static String invertBooleanExpression(String expression) {
+        String trimmed = expression.trim();
+        // If the whole expression is within a not(), remove it
+        if (trimmed.startsWith("not(") && trimmed.endsWith(")"))
+            return trimmed.substring(4, trimmed.length() - 1);
+        // Otherwise, add a not() around the expression
+        return "not(" + trimmed + ")";
+    }
+
 }

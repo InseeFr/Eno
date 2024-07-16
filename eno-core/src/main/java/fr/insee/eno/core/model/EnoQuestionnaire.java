@@ -1,5 +1,6 @@
 package fr.insee.eno.core.model;
 
+import fr.insee.ddi.lifecycle33.instance.DDIInstanceType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.code.CodeList;
@@ -16,7 +17,6 @@ import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.model.variable.VariableGroup;
 import fr.insee.eno.core.parameter.Format;
-import instance33.DDIInstanceType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -58,7 +58,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
 
     /** List of questionnaire's sequences. */
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
-            ".?[#this instanceof T(datacollection33.SequenceType) " +
+            ".?[#this instanceof T(fr.insee.ddi.lifecycle33.datacollection.SequenceType) " +
             "and not #this.getTypeOfSequenceList().isEmpty()]" +
             ".?[#this.getTypeOfSequenceArray(0).getStringValue() == 'module']")
     @Lunatic("getComponents()")
@@ -67,7 +67,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     /** List of questionnaire's subsequences.
      * Note: the order and hierarchy of the sequences and subsequences is stored in the sequence objects. */
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
-            ".?[#this instanceof T(datacollection33.SequenceType) " +
+            ".?[#this instanceof T(fr.insee.ddi.lifecycle33.datacollection.SequenceType) " +
             "and not #this.getTypeOfSequenceList().isEmpty()]" +
             ".?[#this.getTypeOfSequenceArray(0).getStringValue() == 'submodule']")
     @Lunatic("getComponents()")
@@ -76,7 +76,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     /** Roundabouts are described as a special type of sequence in DDI.
      * These are resolved in Lunatic through a dedicated processing step. */
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
-            ".?[#this instanceof T(datacollection33.SequenceType) " +
+            ".?[#this instanceof T(fr.insee.ddi.lifecycle33.datacollection.SequenceType) " +
             "and not #this.getTypeOfSequenceList().isEmpty()]" +
             ".?[#this.getTypeOfSequenceArray(0).getStringValue() == 'roundabout']")
     private final List<RoundaboutSequence> roundaboutSequences = new ArrayList<>();
@@ -86,7 +86,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
      * In Lunatic, a loop is a component containing components within its scope.
      */
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
-            ".?[#this instanceof T(datacollection33.LoopType)]")
+            ".?[#this instanceof T(fr.insee.ddi.lifecycle33.datacollection.LoopType)]")
     @Lunatic("getComponents()")
     private final List<Loop> loops = new ArrayList<>();
 
@@ -96,21 +96,21 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
      * objects that are inserted in components (sequences, questions etc.)
      */
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
-            ".?[#this instanceof T(datacollection33.IfThenElseType)]")
+            ".?[#this instanceof T(fr.insee.ddi.lifecycle33.datacollection.IfThenElseType)]")
     private final List<Filter> filters = new ArrayList<>();
 
     /** In DDI, all controls are mapped at the questionnaire level.
      * They are inserted in the objects they belong to through a DDI processing.
      */
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
-            ".?[#this instanceof T(datacollection33.ComputationItemType)]")
+            ".?[#this instanceof T(fr.insee.ddi.lifecycle33.datacollection.ComputationItemType)]")
     private final List<Control> controls = new ArrayList<>();
 
     /** In DDI, all declarations are mapped at the questionnaire level.
      * They are inserted in the objects they belong to through a DDI processing.
      */
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
-            ".?[#this instanceof T(datacollection33.StatementItemType)]")
+            ".?[#this instanceof T(fr.insee.ddi.lifecycle33.datacollection.StatementItemType)]")
     private final List<Declaration> declarations = new ArrayList<>();
 
     /** Single response questions.

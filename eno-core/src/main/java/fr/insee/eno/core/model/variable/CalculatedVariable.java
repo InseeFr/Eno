@@ -14,7 +14,7 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
-@Context(format = Format.DDI, type = logicalproduct33.VariableType.class)
+@Context(format = Format.DDI, type = fr.insee.ddi.lifecycle33.logicalproduct.VariableType.class)
 @Context(format = Format.LUNATIC, type = CalculatedVariableType.class)
 public class CalculatedVariable extends Variable implements EnoObjectWithExpression {
 

@@ -1,8 +1,8 @@
 package fr.insee.eno.core.model.question;
 
-import datacollection33.CodeDomainType;
-import datacollection33.QuestionItemType;
-import datacollection33.ResponseDomainInMixedType;
+import fr.insee.ddi.lifecycle33.datacollection.CodeDomainType;
+import fr.insee.ddi.lifecycle33.datacollection.QuestionItemType;
+import fr.insee.ddi.lifecycle33.datacollection.ResponseDomainInMixedType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;

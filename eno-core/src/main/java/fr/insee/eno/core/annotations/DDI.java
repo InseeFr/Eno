@@ -18,4 +18,7 @@ public @interface DDI {
      * The mapper will not throw an exception if the property is set to true. */
     boolean allowNullList() default true;
 
+    /** To activate or not debug logging for this annotation. */
+    boolean debug() default false;
+
 }

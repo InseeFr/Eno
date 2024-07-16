@@ -1,5 +1,6 @@
 package fr.insee.eno.core.model.code;
 
+import fr.insee.ddi.lifecycle33.logicalproduct.CodeType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
@@ -9,7 +10,6 @@ import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.BodyCell;
 import fr.insee.lunatic.model.flat.HeaderType;
 import fr.insee.lunatic.model.flat.Options;
-import logicalproduct33.CodeType;
 import lombok.Getter;
 import lombok.Setter;
 

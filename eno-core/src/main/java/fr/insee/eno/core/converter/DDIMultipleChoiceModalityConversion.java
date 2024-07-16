@@ -1,6 +1,6 @@
 package fr.insee.eno.core.converter;
 
-import datacollection33.GridResponseDomainInMixedType;
+import fr.insee.ddi.lifecycle33.datacollection.GridResponseDomainInMixedType;
 import fr.insee.eno.core.model.response.ModalityAttachment;
 
 public class DDIMultipleChoiceModalityConversion {

@@ -1,20 +1,20 @@
 package fr.insee.eno.core.model.navigation;
 
-import datacollection33.ControlConstructSchemeType;
-import datacollection33.LoopType;
-import datacollection33.QuestionGridType;
+import fr.insee.ddi.lifecycle33.datacollection.ControlConstructSchemeType;
+import fr.insee.ddi.lifecycle33.datacollection.LoopType;
+import fr.insee.ddi.lifecycle33.datacollection.QuestionGridType;
+import fr.insee.ddi.lifecycle33.group.ResourcePackageType;
+import fr.insee.ddi.lifecycle33.logicalproduct.VariableGroupType;
+import fr.insee.ddi.lifecycle33.reusable.AbstractIdentifiableType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.converter.DDIQuestionGridConversion;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.DDIIndex;
-import group33.ResourcePackageType;
-import logicalproduct33.VariableGroupType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import reusable33.AbstractIdentifiableType;
 
 import java.util.List;
 import java.util.Optional;

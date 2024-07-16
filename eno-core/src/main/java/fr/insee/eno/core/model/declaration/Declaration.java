@@ -1,6 +1,6 @@
 package fr.insee.eno.core.model.declaration;
 
-import datacollection33.StatementItemType;
+import fr.insee.ddi.lifecycle33.datacollection.StatementItemType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;

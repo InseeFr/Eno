@@ -1,6 +1,6 @@
 package fr.insee.eno.core.model.question.table;
 
-import datacollection33.CellLabelType;
+import fr.insee.ddi.lifecycle33.datacollection.CellLabelType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;

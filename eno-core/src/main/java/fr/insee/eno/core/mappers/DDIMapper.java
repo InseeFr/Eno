@@ -1,5 +1,8 @@
 package fr.insee.eno.core.mappers;
 
+import fr.insee.ddi.lifecycle33.instance.DDIInstanceDocument;
+import fr.insee.ddi.lifecycle33.instance.DDIInstanceType;
+import fr.insee.ddi.lifecycle33.reusable.AbstractIdentifiableType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.converter.DDIConverter;
 import fr.insee.eno.core.exceptions.technical.MappingException;
@@ -11,8 +14,6 @@ import fr.insee.eno.core.reference.DDIIndex;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.utils.DDIUtils;
 import fr.insee.eno.core.utils.EnoSpelEngine;
-import instance33.DDIInstanceDocument;
-import instance33.DDIInstanceType;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanWrapper;
@@ -20,7 +21,6 @@ import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
-import reusable33.AbstractIdentifiableType;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
@@ -84,9 +84,6 @@ public class DDIMapper extends Mapper {
 
     private void recursiveMapping(Object ddiObject, EnoObject enoObject) {
 
-        log.debug("Start mapping for "+ DDIUtils.ddiToString(ddiObject)
-                +" with model context type '"+enoObject.getClass().getSimpleName()+"'");
-
         // Use Spring BeanWrapper to iterate on property descriptors of the model object
         BeanWrapper beanWrapper = new BeanWrapperImpl(enoObject);
         for (Iterator<PropertyDescriptor> iterator = propertyDescriptorIterator(beanWrapper); iterator.hasNext();) {
@@ -123,24 +120,26 @@ public class DDIMapper extends Mapper {
         DDI ddiAnnotation = typeDescriptor.getAnnotation(DDI.class);
         if (ddiAnnotation != null) {
 
-            log.debug("Processing property '"+ propertyName +"' of class '"+ modelContextType.getSimpleName()+"' ");
+            boolean debug = ddiAnnotation.debug();
+            if (debug)
+                log.debug("Processing property '"+ propertyName +"' of class '"+ modelContextType.getSimpleName()+"' ");
 
             // Instantiate a Spring expression with the annotation content
             Expression expression = new SpelExpressionParser().parseExpression(ddiAnnotation.value());
 
             // Simple types
             if (isSimpleType(classType)) {
-                simpleTypeMapping(ddiObject, modelContextType, beanWrapper, propertyName, expression);
+                simpleTypeMapping(ddiObject, modelContextType, beanWrapper, propertyName, expression, debug);
             }
 
             // Complex types
             else if (EnoObject.class.isAssignableFrom(classType)) {
-                complexTypeMapping(ddiObject, modelContextType, beanWrapper, propertyName, expression, classType);
+                complexTypeMapping(ddiObject, modelContextType, beanWrapper, propertyName, expression, classType, debug);
             }
 
             // Collections
             else if (Collection.class.isAssignableFrom(classType)) {
-                collectionMapping(ddiObject, enoObject, propertyDescriptor, typeDescriptor, ddiAnnotation, expression);
+                collectionMapping(ddiObject, enoObject, propertyDescriptor, typeDescriptor, ddiAnnotation, expression, debug);
             }
 
             else {
@@ -150,40 +149,43 @@ public class DDIMapper extends Mapper {
         }
     }
 
-    private void simpleTypeMapping(Object ddiObject, Class<?> modelContextType, BeanWrapper beanWrapper, String propertyName, Expression expression) {
+    private void simpleTypeMapping(Object ddiObject, Class<?> modelContextType, BeanWrapper beanWrapper, String propertyName, Expression expression, boolean debug) {
         // Read DDI value by evaluating mapping expression
         Object ddiValue = spelEngine.evaluate(expression, ddiObject, modelContextType, propertyName);
         // It is allowed to have null values (a DDI property can be present or not depending on the case)
-        if (ddiValue == null) {
+        if (ddiValue == null && debug) {
             log.debug("null value got from evaluating DDI annotation expression "
                     + propertyDescription(propertyName, modelContextType.getSimpleName()));
         }
         // Simply set the value in the field
         beanWrapper.setPropertyValue(propertyName, ddiValue);
-        log.debug("Value '"+ beanWrapper.getPropertyValue(propertyName)+"' set "
-                + propertyDescription(propertyName, modelContextType.getSimpleName()));
+        if (debug)
+            log.debug("Value '"+ beanWrapper.getPropertyValue(propertyName)+"' set "
+                    + propertyDescription(propertyName, modelContextType.getSimpleName()));
     }
 
-    private void complexTypeMapping(Object ddiObject, Class<?> modelContextType, BeanWrapper beanWrapper, String propertyName, Expression expression, Class<?> classType) {
+    private void complexTypeMapping(Object ddiObject, Class<?> modelContextType, BeanWrapper beanWrapper, String propertyName, Expression expression, Class<?> classType, boolean debug) {
         // Get the DDI object from annotation expression
         Object ddiObject2 = spelEngine.evaluate(expression, ddiObject, modelContextType, propertyName);
         // It is now allowed to have a null DDI object on complex type properties
         if (ddiObject2 == null) {
-            log.debug("DDI object mapped by the annotation is null "
-                    + propertyDescription(propertyName, modelContextType.getName()));
+            if (debug)
+                log.debug("DDI object mapped by the annotation is null "
+                        + propertyDescription(propertyName, modelContextType.getName()));
             return;
         }
         // Instantiate the model target object
         EnoObject enoObject2 = convert(ddiObject2, classType);
         // Attach it to the current object
         beanWrapper.setPropertyValue(propertyName, enoObject2);
-        log.debug("New instance of '"+enoObject2.getClass().getSimpleName()+"' set "
-                + propertyDescription(propertyName, modelContextType.getSimpleName()));
+        if (debug)
+            log.debug("New instance of '"+enoObject2.getClass().getSimpleName()+"' set "
+                    + propertyDescription(propertyName, modelContextType.getSimpleName()));
         // Recursive call of the mapper to dive into this object
         recursiveMapping(ddiObject2, enoObject2);
     }
 
-    private void collectionMapping(Object ddiObject, EnoObject enoObject, PropertyDescriptor propertyDescriptor, TypeDescriptor typeDescriptor, DDI ddiAnnotation, Expression expression) {
+    private void collectionMapping(Object ddiObject, EnoObject enoObject, PropertyDescriptor propertyDescriptor, TypeDescriptor typeDescriptor, DDI ddiAnnotation, Expression expression, boolean debug) {
         // Local variables used for logging purposes
         Class<?> modelContextType = enoObject.getClass();
         String propertyName = propertyDescriptor.getName();
@@ -210,15 +212,17 @@ public class DDIMapper extends Mapper {
         // Collection of simple types
         if (isSimpleType(modelTargetType)) {
             modelCollection.addAll(ddiCollection);
-            log.debug(collectionSize+" values set "
-                    + propertyDescription(propertyName, modelContextType.getSimpleName()));
+            if (debug)
+                log.debug(collectionSize+" values set "
+                        + propertyDescription(propertyName, modelContextType.getSimpleName()));
         }
         // Collection of complex types
         else if (EnoObject.class.isAssignableFrom(modelTargetType)) {
             // Iterate on the DDI collection
             for (Object ddiObject2 : ddiCollection) {
-                log.debug("Iterating on "+collectionSize+" DDI objects "
-                        + propertyDescription(propertyName, modelContextType.getSimpleName()));
+                if (debug)
+                    log.debug("Iterating on "+collectionSize+" DDI objects "
+                            + propertyDescription(propertyName, modelContextType.getSimpleName()));
                 // Instantiate a model object per DDI object and add it in the model collection
                 EnoObject enoObject2 = convert(ddiObject2, modelTargetType);
                 // Add the created instance in the model collection

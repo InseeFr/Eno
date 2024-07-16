@@ -1,7 +1,7 @@
 package fr.insee.eno.core.utils;
 
+import fr.insee.ddi.lifecycle33.reusable.AbstractIdentifiableType;
 import lombok.NonNull;
-import reusable33.AbstractIdentifiableType;
 
 // TODO: to be refactored in the ddi java library
 

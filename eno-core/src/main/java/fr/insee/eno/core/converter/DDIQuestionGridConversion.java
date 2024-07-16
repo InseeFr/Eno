@@ -1,16 +1,16 @@
 package fr.insee.eno.core.converter;
 
-import datacollection33.CodeDomainType;
-import datacollection33.GridDimensionType;
-import datacollection33.NominalDomainType;
-import datacollection33.QuestionGridType;
+import fr.insee.ddi.lifecycle33.datacollection.CodeDomainType;
+import fr.insee.ddi.lifecycle33.datacollection.GridDimensionType;
+import fr.insee.ddi.lifecycle33.datacollection.NominalDomainType;
+import fr.insee.ddi.lifecycle33.datacollection.QuestionGridType;
+import fr.insee.ddi.lifecycle33.reusable.RepresentationType;
 import fr.insee.eno.core.exceptions.technical.ConversionException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.question.ComplexMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
 import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.TableQuestion;
-import reusable33.RepresentationType;
 
 public class DDIQuestionGridConversion {
 

@@ -1,5 +1,6 @@
 package fr.insee.eno.core.model.response;
 
+import fr.insee.ddi.lifecycle33.reusable.ParameterType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
@@ -9,7 +10,6 @@ import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.ResponsesCheckboxGroup;
 import lombok.Getter;
 import lombok.Setter;
-import reusable33.ParameterType;
 
 /**
  * Object that represents a modality of a "simple" multiple choice question

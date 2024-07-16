@@ -4,22 +4,16 @@ import fr.insee.eno.core.DDIToEno;
 import fr.insee.eno.core.DDIToLunatic;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.label.DynamicLabel;
-import fr.insee.eno.core.model.question.TextQuestion;
 import fr.insee.eno.core.model.sequence.Sequence;
-import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
+import fr.insee.lunatic.model.flat.Textarea;
 import org.junit.jupiter.api.Test;
 
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class EnoAddIdentificationSectionTest {
 
@@ -34,7 +28,7 @@ class EnoAddIdentificationSectionTest {
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"),
                 enoParameters);
         //
-        Sequence identificationSequence = enoQuestionnaire.getSequences().get(0);
+        Sequence identificationSequence = enoQuestionnaire.getSequences().getFirst();
         assertEquals(EnoAddIdentificationSection.IDENTIFICATION_SEQUENCE_ID, identificationSequence.getId());
     }
 
@@ -49,10 +43,19 @@ class EnoAddIdentificationSectionTest {
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"),
                 enoParameters);
         //
-        ComponentType identificationSequence = lunaticQuestionnaire.getComponents().get(0);
-        assertTrue(identificationSequence instanceof fr.insee.lunatic.model.flat.Sequence);
+        ComponentType identificationSequence = lunaticQuestionnaire.getComponents().getFirst();
+        assertInstanceOf(fr.insee.lunatic.model.flat.Sequence.class, identificationSequence);
         assertEquals(ComponentTypeEnum.SEQUENCE, identificationSequence.getComponentType());
         assertEquals(EnoAddIdentificationSection.IDENTIFICATION_SEQUENCE_ID, identificationSequence.getId());
+        //
+        Textarea identificationQuestion = lunaticQuestionnaire.getComponents().stream()
+                .filter(Textarea.class::isInstance).map(Textarea.class::cast)
+                .filter(component -> "COMMENT-UE-QUESTION".equals(component.getId())).findAny().orElse(null);
+        assertNotNull(identificationQuestion);
+        assertEquals("COMMENT_UE", identificationQuestion.getResponse().getName());
+        //
+        assertTrue(lunaticQuestionnaire.getVariables().stream()
+                .anyMatch(variable -> variable.getName().equals("COMMENT_UE")));
     }
 
 }

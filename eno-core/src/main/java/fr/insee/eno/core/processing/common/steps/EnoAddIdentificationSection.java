@@ -4,6 +4,7 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.label.Label;
 import fr.insee.eno.core.model.question.TextQuestion;
+import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType;
@@ -49,7 +50,7 @@ public class EnoAddIdentificationSection implements ProcessingStep<EnoQuestionna
         sequence.getLabel().setType(LabelTypeEnum.VTL_MD.value());
         sequence.getSequenceStructure().add(
                 StructureItemReference.builder().id(IDENTIFICATION_SUBSEQUENCE_ID).type(StructureItemType.SUBSEQUENCE).build());
-        enoQuestionnaire.getSequences().add(0, sequence);
+        enoQuestionnaire.getSequences().addFirst(sequence);
         enoQuestionnaire.getIndex().put(IDENTIFICATION_SEQUENCE_ID, sequence);
         //
         Subsequence subsequence = new Subsequence();
@@ -59,7 +60,7 @@ public class EnoAddIdentificationSection implements ProcessingStep<EnoQuestionna
         subsequence.getLabel().setType(LabelTypeEnum.VTL_MD.value());
         subsequence.getSequenceStructure().add(
                 StructureItemReference.builder().id(IDENTIFICATION_QUESTION_ID).type(StructureItemType.QUESTION).build());
-        enoQuestionnaire.getSubsequences().add(0, subsequence);
+        enoQuestionnaire.getSubsequences().addFirst(subsequence);
         enoQuestionnaire.getIndex().put(IDENTIFICATION_SUBSEQUENCE_ID, subsequence);
         //
         TextQuestion question = new TextQuestion();
@@ -70,7 +71,9 @@ public class EnoAddIdentificationSection implements ProcessingStep<EnoQuestionna
         question.setLengthType(TextQuestion.qualifyLength(IDENTIFICATION_QUESTION_LENGTH));
         question.setMaxLength(BigInteger.valueOf(IDENTIFICATION_QUESTION_LENGTH));
         question.setMandatory(IDENTIFICATION_QUESTION_MANDATORY);
-        enoQuestionnaire.getSingleResponseQuestions().add(0, question);
+        question.setResponse(new Response());
+        question.getResponse().setVariableName(IDENTIFICATION_COMMENT_VARIABLE);
+        enoQuestionnaire.getSingleResponseQuestions().addFirst(question);
         enoQuestionnaire.getIndex().put(IDENTIFICATION_QUESTION_ID, question);
     }
 

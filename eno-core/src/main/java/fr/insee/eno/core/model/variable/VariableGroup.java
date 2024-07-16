@@ -1,14 +1,14 @@
 package fr.insee.eno.core.model.variable;
 
+import fr.insee.ddi.lifecycle33.logicalproduct.VariableGroupType;
+import fr.insee.ddi.lifecycle33.reusable.ReferenceType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.exceptions.business.IllegalDDIElementException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
-import logicalproduct33.VariableGroupType;
 import lombok.Getter;
 import lombok.Setter;
-import reusable33.ReferenceType;
 
 import java.util.ArrayList;
 import java.util.List;

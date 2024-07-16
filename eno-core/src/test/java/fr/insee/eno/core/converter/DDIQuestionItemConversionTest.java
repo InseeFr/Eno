@@ -1,7 +1,7 @@
 package fr.insee.eno.core.converter;
 
-import datacollection33.QuestionItemDocument;
-import datacollection33.QuestionItemType;
+import fr.insee.ddi.lifecycle33.datacollection.QuestionItemDocument;
+import fr.insee.ddi.lifecycle33.datacollection.QuestionItemType;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import org.apache.xmlbeans.XmlException;
 import org.junit.jupiter.api.Test;

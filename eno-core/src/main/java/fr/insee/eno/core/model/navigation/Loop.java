@@ -1,7 +1,8 @@
 package fr.insee.eno.core.model.navigation;
 
-import datacollection33.LoopType;
-import datacollection33.SequenceType;
+import fr.insee.ddi.lifecycle33.datacollection.LoopType;
+import fr.insee.ddi.lifecycle33.datacollection.SequenceType;
+import fr.insee.ddi.lifecycle33.reusable.ReferenceType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
@@ -14,7 +15,6 @@ import fr.insee.eno.core.reference.DDIIndex;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import reusable33.ReferenceType;
 
 import java.util.ArrayList;
 import java.util.List;
