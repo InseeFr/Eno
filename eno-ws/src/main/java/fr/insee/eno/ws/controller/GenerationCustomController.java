@@ -1,7 +1,10 @@
 package fr.insee.eno.ws.controller;
 
+import fr.insee.eno.core.exceptions.business.EnoParametersException;
 import fr.insee.eno.ws.PassThrough;
 import fr.insee.eno.ws.controller.utils.ReactiveControllerUtils;
+import fr.insee.eno.ws.exception.DDIToLunaticException;
+import fr.insee.eno.ws.exception.EnoControllerException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,14 +13,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.FilePart;
-import org.springframework.http.codec.multipart.Part;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
+
+import java.io.IOException;
 
 @Tag(name = "Generation from DDI (custom parameters)")
 @Controller
@@ -42,11 +47,12 @@ public class GenerationCustomController {
 					"You can get a parameters file by using the endpoint `/parameters/java/{context}/LUNATIC/{mode}`")
 	@PostMapping(value = "ddi-2-lunatic-json",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public Mono<ResponseEntity<String>> generateLunaticCustomParams(
-			@RequestPart(value="in") Mono<FilePart> ddiFile,
-			@RequestPart(value="params") Mono<FilePart> parametersFile,
+	public ResponseEntity<String> generateLunaticCustomParams(
+			@RequestPart(value="in") MultipartFile ddiFile,
+			@RequestPart(value="params") MultipartFile parametersFile,
 			@Parameter(name = "specificTreatment", schema = @Schema(type="string", format="binary"))
-			@RequestPart(value="specificTreatment", required=false) Mono<Part> specificTreatment) {
+			@RequestPart(value="specificTreatment", required=false) MultipartFile specificTreatment)
+			throws DDIToLunaticException, EnoControllerException, EnoParametersException, IOException {
         /*
            specificTreatment parameter is a part instead of a FilePart. This workaround is used to make swagger work
            when empty value is checked for this input file on the endpoint.

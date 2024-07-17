@@ -34,9 +34,12 @@ dependencies {
 	// Lunatic
 	implementation libs.lunatic.model
 	// Spring Web
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// Web Client
+	// since Spring MVC RestTemplate class is deprecated, the webflux dependency is added to import WebClient
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	// Open API // https://springdoc.org/v2/#spring-webflux-support
-	implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.6.0'
+	// Open API
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -44,7 +47,6 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	// Tests
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'io.projectreactor:reactor-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 

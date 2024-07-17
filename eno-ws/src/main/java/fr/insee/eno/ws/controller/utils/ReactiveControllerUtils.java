@@ -3,19 +3,18 @@ package fr.insee.eno.ws.controller.utils;
 import fr.insee.eno.core.exceptions.business.EnoParametersException;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.treatments.LunaticPostProcessing;
+import fr.insee.eno.ws.exception.DDIToLunaticException;
+import fr.insee.eno.ws.exception.EnoControllerException;
 import fr.insee.eno.ws.service.DDIToLunaticService;
 import fr.insee.eno.ws.service.ParameterService;
 import fr.insee.eno.ws.service.SpecificTreatmentsService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.codec.multipart.FilePart;
-import org.springframework.http.codec.multipart.Part;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Mono;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.InputStream;
-import java.io.SequenceInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 /** Class to factorize code in Eno Java controllers' methods. */
 @Component
@@ -36,66 +35,56 @@ public class ReactiveControllerUtils {
         this.specificTreatmentsService = specificTreatmentsService;
     }
 
-    // NB: code is quite well factored here, notice that most methods are private
-
-    private Mono<InputStream> filePartToInputStream(FilePart filePart) {
-        return filePart.content()
-                .map(dataBuffer -> dataBuffer.asInputStream(true))
-                .reduce(SequenceInputStream::new);
+    private EnoParameters readEnoJavaParametersFile(MultipartFile parametersFile)
+            throws EnoParametersException, IOException {
+        if (parametersFile == null || parametersFile.isEmpty())
+            throw new EnoParametersException("Parameters file is missing.");
+        String fileName = parametersFile.getOriginalFilename();
+        if (fileName == null)
+            throw new EnoParametersException("Parameters file names is null.");
+        if (! fileName.endsWith(".json"))
+            throw new EnoParametersException("Eno Java parameters file name must end with '.json'.");
+        return parameterService.parse(new ByteArrayInputStream(parametersFile.getBytes()));
     }
 
-    private Mono<EnoParameters> readEnoJavaParametersFile(Mono<FilePart> parametersFile) {
-        return parametersFile
-                .flatMap(this::validateEnoJavaParametersFileName)
-                .flatMap(this::filePartToInputStream)
-                .flatMap(parameterService::parse);
-    }
-
-    private Mono<FilePart> validateEnoJavaParametersFileName(FilePart filePart) {
-        if (! filePart.filename().endsWith(".json"))
-            return Mono.error(new EnoParametersException("Eno Java parameters file name must end with '.json'."));
-        return Mono.just(filePart);
-    }
-
-    private Mono<LunaticPostProcessing> createLunaticPostProcessing(Mono<Part> specificTreatment) {
-        return specificTreatment
-                .filter(FilePart.class::isInstance)
-                .map(FilePart.class::cast)
-                .flatMap(this::filePartToInputStream)
-                .flatMap(specificTreatmentsService::generateFrom)
-                .switchIfEmpty(Mono.just(new LunaticPostProcessing()));
+    private LunaticPostProcessing createLunaticPostProcessing(MultipartFile specificTreatmentsFile)
+            throws IOException {
+        if (specificTreatmentsFile == null || specificTreatmentsFile.isEmpty())
+            return new LunaticPostProcessing();
         /*
          * This workaround (next filter) is used to make swagger works when empty value is checked for this input file on the endpoint
          * - there is no way to disallow empty checkbox value at this moment on swagger (though openAPI support configuring this)
          * - when empty value, spring boot considers the input as a DefaultFormField and not a file part, causing exceptions
          * if trying to cast to file part :-/
          */
+        return specificTreatmentsService.generateFrom(new ByteArrayInputStream(specificTreatmentsFile.getBytes()));
     }
 
-    public Mono<ResponseEntity<String>> ddiToLunaticJson(Mono<FilePart> ddiFile, Mono<FilePart> parametersFile,
-                                                         Mono<Part> specificTreatmentsFile) {
-        Mono<EnoParameters> parametersMono = readEnoJavaParametersFile(parametersFile);
-        Mono<LunaticPostProcessing> postProcessingMono = createLunaticPostProcessing(specificTreatmentsFile);
-        return Mono.zip(parametersMono, postProcessingMono).flatMap(tuple ->
-                ddiToLunaticJson(ddiFile, tuple.getT1(), tuple.getT2()));
+    public ResponseEntity<String> ddiToLunaticJson(MultipartFile ddiFile, MultipartFile parametersFile,
+                                                   MultipartFile specificTreatmentsFile)
+            throws EnoParametersException, IOException, EnoControllerException, DDIToLunaticException {
+        EnoParameters enoParameters = readEnoJavaParametersFile(parametersFile);
+        LunaticPostProcessing lunaticPostProcessing = createLunaticPostProcessing(specificTreatmentsFile);
+        return ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessing);
     }
 
-    public Mono<ResponseEntity<String>> ddiToLunaticJson(Mono<FilePart> ddiFile, EnoParameters enoParameters,
-                                                         Mono<Part> specificTreatmentsFile) {
-        return createLunaticPostProcessing(specificTreatmentsFile).flatMap(lunaticPostProcessing ->
-                ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessing));
+    public ResponseEntity<String> ddiToLunaticJson(MultipartFile ddiFile, EnoParameters enoParameters,
+                                                   MultipartFile specificTreatmentsFile)
+            throws IOException, EnoControllerException, DDIToLunaticException {
+        LunaticPostProcessing lunaticPostProcessing = createLunaticPostProcessing(specificTreatmentsFile);
+        return ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessing);
     }
 
-    private Mono<ResponseEntity<String>> ddiToLunaticJson(Mono<FilePart> ddiFile, EnoParameters enoParameters,
-                                                         LunaticPostProcessing lunaticPostProcessing) {
-        return ddiFile
-                .flatMap(this::filePartToInputStream)
-                .flatMap(inputStream -> ddiToLunaticService.transformToJson(inputStream, enoParameters, lunaticPostProcessing))
-                .map(result -> ResponseEntity
-                        .ok()
-                        .cacheControl(CacheControl.noCache())
-                        .headers(HeadersUtils.with(LUNATIC_JSON_FILE_NAME))
-                        .body(result));
+    private ResponseEntity<String> ddiToLunaticJson(MultipartFile ddiFile, EnoParameters enoParameters,
+                                                    LunaticPostProcessing lunaticPostProcessing)
+            throws EnoControllerException, IOException, DDIToLunaticException {
+        if (ddiFile.isEmpty())
+            throw new EnoControllerException("DDI file is missing.");
+        String lunaticJson = ddiToLunaticService.transformToJson(
+                new ByteArrayInputStream(ddiFile.getBytes()), enoParameters, lunaticPostProcessing);
+        return ResponseEntity.ok()
+                .headers(HeadersUtils.with(LUNATIC_JSON_FILE_NAME))
+                .body(lunaticJson);
     }
 
 }

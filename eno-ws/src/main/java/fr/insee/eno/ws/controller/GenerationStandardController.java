@@ -6,10 +6,7 @@ import fr.insee.eno.legacy.parameters.CaptureEnum;
 import fr.insee.eno.legacy.parameters.Context;
 import fr.insee.eno.ws.PassThrough;
 import fr.insee.eno.ws.controller.utils.ReactiveControllerUtils;
-import fr.insee.eno.ws.exception.ContextException;
-import fr.insee.eno.ws.exception.MetadataFileException;
-import fr.insee.eno.ws.exception.ModeParameterException;
-import fr.insee.eno.ws.exception.MultiModelException;
+import fr.insee.eno.ws.exception.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,12 +15,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.FilePart;
-import org.springframework.http.codec.multipart.Part;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
+
+import java.io.IOException;
 
 @Tag(name = "Generation from DDI (standard parameters)")
 @Controller
@@ -47,13 +46,14 @@ public class GenerationStandardController {
                     "in function of context and mode. An optional specific treatment `json` file can be added.")
     @PostMapping(value = "{context}/lunatic-json/{mode}",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Mono<ResponseEntity<String>> generateLunatic(
-            @RequestPart(value="in") Mono<FilePart> ddiFile,
+    public ResponseEntity<String> generateLunatic(
+            @RequestPart(value="in") MultipartFile ddiFile,
             @Parameter(name = "specificTreatment", schema = @Schema(type="string", format="binary"))
-            @RequestPart(value="specificTreatment", required = false) Mono<Part> specificTreatment,
+            @RequestPart(value="specificTreatment", required = false) MultipartFile specificTreatment,
             @PathVariable EnoParameters.Context context,
             @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter,
-            @RequestParam(defaultValue = "false") boolean dsfr) {
+            @RequestParam(defaultValue = "false") boolean dsfr)
+            throws ModeParameterException, DDIToLunaticException, EnoControllerException, IOException {
         /*
            specificTreatment parameter is a part instead of a FilePart. This workaround is used to make swagger work
            when empty value is checked for this input file on the endpoint.
@@ -63,7 +63,7 @@ public class GenerationStandardController {
          */
 
         if (EnoParameters.ModeParameter.PAPI.equals(modeParameter))
-            return Mono.error(new ModeParameterException("Lunatic format is not compatible with the mode 'PAPER'."));
+            throw new ModeParameterException("Lunatic format is not compatible with the mode 'PAPER'.");
         //
         EnoParameters enoParameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
         enoParameters.getLunaticParameters().setDsfr(dsfr);
