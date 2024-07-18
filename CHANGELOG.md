@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.23.8] - 2024-07-18
+### :bug: Bug Fixes
+- [`e952748`](https://github.com/InseeFr/Eno/commit/e952748a344c06d89959c42cf25c8efdf32d2d2c) - response in identification question *(PR [#1081](https://github.com/InseeFr/Eno/pull/1081) by [@nsenave](https://github.com/nsenave))*
+
+### :recycle: Refactors
+- [`3c1e97d`](https://github.com/InseeFr/Eno/commit/3c1e97df0901d1a4a6ec8d77c2aa109ca8b4c02c) - remove local ddi-beans module *(PR [#1080](https://github.com/InseeFr/Eno/pull/1080) by [@nsenave](https://github.com/nsenave))*
+- [`d71fd20`](https://github.com/InseeFr/Eno/commit/d71fd2078c1448a3f0773b81201faf671b22cbaa) - **logging**: improve ddi mapper debug log *(commit by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.23.7] - 2024-07-15
 ### :bug: Bug Fixes
 - [`3daa426`](https://github.com/InseeFr/Eno/commit/3daa42655477a927c01fc44b8b2da569e7c4e02d) - **roundabout**: disabled condition *(PR [#1078](https://github.com/InseeFr/Eno/pull/1078) by [@nsenave](https://github.com/nsenave))*
@@ -256,3 +265,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.23.5]: https://github.com/InseeFr/Eno/compare/3.22.8...3.23.5
 [3.23.6]: https://github.com/InseeFr/Eno/compare/3.23.5...3.23.6
 [3.23.7]: https://github.com/InseeFr/Eno/compare/3.23.6...3.23.7
+[3.23.8]: https://github.com/InseeFr/Eno/compare/3.23.7...3.23.8
