@@ -1,19 +1,46 @@
 # Listes des paramètres Eno 
 
-**Version au 31 mai 2022** 
 
-Une partie des paramètres Eno sont communs à tous les pipelines, d'autres spécifiques au format de sortie. 
+## Paramètres Eno-Java
 
-Le paramètrage d'un pipeline Eno complet comprend donc à chaque lancement : 
+Suite au passage en java de la transformation DDI2Lunatic, les paramètres ont été revus.
+`GET /parameter/java/{context}/{outFormat}/default`
+
+
+|**Parameters**|**valeurs**|**description**|
+|--|--|--|
+|context|household, business, default|Le contexte métier dans lequel est généré le questionnaire, respectivement enquêtes ménages, enquêtes entreprises, visualisation pogues. Il permet de récupérer le paramétrage par défaut en cas d'absence d'un paramètre.|
+|modeParameter|cawi, capi, cati, papi,process|Mode de collecte pour le questionnaire généré |
+|outFormat| LUNATIC| format de sortie|
+|campaignName|*champ texte* exemple : test-2020-x00|Nom de la campagne. Il sert notamment au nommage de l'output.|
+|language|fr|Langage du questionnaire|
+|identificationQuestion"|true, false|ajoute une question de début (zone de commentaires)|
+|responseTimeQuestion"|true, false|Ajouter une question de fin : temps de réponse|
+|commentSection|true, false|Ajouter une question de fin : page de commentaires|
+|sequenceNumbering|true, false|  Numérotation des séquences|
+|questionNumberingMode|NONE,SEQUENCE,ALL| Numérotation des questions : aucune, continue sur le questionnaire, continue par séquence |
+|selectedModes| CAWI, CAPI, CATI | mode de collecte|
+|controls | true, false | génération des controles|
+|toolTip | true, false | génération des infobulles|
+|missingVariables  | true, false | génération des variables missing|
+|filterResult | true, false | génération des variables filter_result|
+|filterDescription| true, false | génération des filterDescription|
+|lunaticPaginationMode| QUESTION, SEQUENCE, NONE| découpage une question par page, 1 séquence par page|
+|DSFR | true, false | génération format DSFR|
+	 
+
+## Paramètres Eno-Xml
+
+Une partie des paramètres Eno sont communs à tous les pipelines, d'autres spécifiques au format de sortie. Le paramètrage d'un pipeline Eno complet comprend donc à chaque lancement : 
 - les paramètres au niveau de la racine <EnoParameters/> communs à tous les formats
-- les paramètres au niveau de de <Parameters/> communs à tous les formats
+- les paramètres au niveau de <Parameters/> communs à tous les formats
 - le paramétrage spécifique (au format Out)
 Il n'existe pas de paramétrage spécifique pour ddi2fodt ni pour poguesxml2ddi. 
 
 Vous trouverez le paramétrage par défaut via le web-service d'Eno-WS : 
-`GET /parameter/{context}/{outFormat}/default`
+`GET /parameter/xml/{context}/{outFormat}/default`
 
-## Paramètres au niveau de la racine `<EnoParameters/>` communs à tous les formats
+### Paramètres au niveau de la racine `<EnoParameters/>` communs à tous les formats
 |**Parameters**|**valeurs**|**defaut**|**description**|
 |--|--|--|--|
 |      Context|household, business, default||Le contexte métier dans lequel est généré le questionnaire, respectivement enquêtes ménages, enquêtes entreprises, visualisation pogues. Il permet de récupérer le paramétrage par défaut en cas d'absence d'un paramètre.||
@@ -22,7 +49,7 @@ Vous trouverez le paramétrage par défaut via le web-service d'Eno-WS :
 |         Languages/Language|fr, en, it, es, de  | fr|Langage du questionnaire|
 
 
-## Paramètres au niveau de de `<Parameters/>` communs à tous les formats
+### Paramètres au niveau de de `<Parameters/>` communs à tous les formats
 |**Parameters**|**valeurs**|**défaut**|**description**|
 |--|--|--|--|
 |         BeginQuestion/Identification|true, false|default et household : false, business : true |Ajoute une question de début (zone de commentaires)|
@@ -32,19 +59,7 @@ Vous trouverez le paramétrage par défaut via le web-service d'Eno-WS :
 |         Numerotation/SeqNum|true, false| true |Numérotation des séquences|
 |         Numerotation/PreQuestSymbol|true,false| true |Symbole (flèche) avant chaque question|
 
-## Paramètres spécifique au pipeline ddi2lunaticXML (`<lunatic-xml-parameters/>`) 
-|**Parameters**|**valeurs**|**defaut**|**description**|
-|--|--|--|--|
-|         Control|true, false|cawi et process : true, cati et capi : false|Ajouter les contrôles|
-|         Tooltip|true, false|cawi et process : true, cati et capi : false|Ajouter les infobulles (non implémenté)|
-|         FilterDescription|true,false|cawi, cati et capi : false, process : true|Ajouter la description des filtres|
-|         AddFilterResult|true,false|cawi : true, cati, capi et process : false|Ajouter des variables précisant si la question a été affichée sur le web|
-|         MissingVar|true, false|cawi : false, cati et capi : true|Ajouter des variables pour enregistrer le NSP refus|
-|         Pagination|none, sequence, question|cawi, capi et cati : question, process : none|Pagination (par question, séquence ou sans) -  (subsequence : non implementé)|
-|         UnusedVars|true,false| |Garder les variables inutilisées (true=garder toutes les variables décrites)|
-
-
-## Paramètres spécifique au pipeline ddi2fo (`<fo-parameters/>`)
+### Paramètres spécifique au pipeline ddi2fo (`<fo-parameters/>`)
 |**Parameters**|**valeurs**|**defaut**|**description**|
 |--|--|--|--|
 |         InitializeAllVariables|true, false|false |Possibilité de préremplir des variables collectées (à partir du fichier de personnalisation)|
@@ -61,10 +76,7 @@ Vous trouverez le paramétrage par défaut via le web-service d'Eno-WS :
 |         AccompanyingMail|vide ou entreeCOL, ouvertureCOL, relanceCOL, medCOL, cnrCOL, accompagnementCOL|vide |Entreprises : choix du courrier d’accompagnement|
 |         Style||vide |Exceptionnel : appliquer un style|
 
-
-
-## Paramètres spécifique au pipeline ddi2xforms (`<xforms-parameters/>`)
-
+### Paramètres spécifiques au pipeline ddi2xforms (`<xforms-parameters/>`)
 |**Parameters**|**valeurs**|**defaut**|**description**|
 |--|--|--|--|
 |         NumericExample|true, false|false|Affichage d’un exemple pour les variables numériques|
