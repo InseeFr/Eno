@@ -8,7 +8,6 @@ import fr.insee.eno.ws.exception.EnoControllerException;
 import fr.insee.eno.ws.service.DDIToLunaticService;
 import fr.insee.eno.ws.service.ParameterService;
 import fr.insee.eno.ws.service.SpecificTreatmentsService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,10 +15,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-/** Class to factorize code in Eno Java controllers' methods. */
+/**
+ * Class to factorize code in Eno Java controllers' methods.
+ */
 @Component
-@Slf4j
-public class ReactiveControllerUtils {
+public class EnoJavaControllerUtils {
 
     public static final String LUNATIC_JSON_FILE_NAME = "lunatic-form.json";
 
@@ -27,9 +27,9 @@ public class ReactiveControllerUtils {
     private final ParameterService parameterService;
     private final SpecificTreatmentsService specificTreatmentsService;
 
-    public ReactiveControllerUtils(DDIToLunaticService ddiToLunaticService,
-                                   ParameterService parameterService,
-                                   SpecificTreatmentsService specificTreatmentsService) {
+    public EnoJavaControllerUtils(DDIToLunaticService ddiToLunaticService,
+                                  ParameterService parameterService,
+                                  SpecificTreatmentsService specificTreatmentsService) {
         this.ddiToLunaticService = ddiToLunaticService;
         this.parameterService = parameterService;
         this.specificTreatmentsService = specificTreatmentsService;
@@ -50,13 +50,7 @@ public class ReactiveControllerUtils {
     private LunaticPostProcessing createLunaticPostProcessing(MultipartFile specificTreatmentsFile)
             throws IOException {
         if (specificTreatmentsFile == null || specificTreatmentsFile.isEmpty())
-            return new LunaticPostProcessing();
-        /*
-         * This workaround (next filter) is used to make swagger works when empty value is checked for this input file on the endpoint
-         * - there is no way to disallow empty checkbox value at this moment on swagger (though openAPI support configuring this)
-         * - when empty value, spring boot considers the input as a DefaultFormField and not a file part, causing exceptions
-         * if trying to cast to file part :-/
-         */
+            return null;
         return specificTreatmentsService.generateFrom(new ByteArrayInputStream(specificTreatmentsFile.getBytes()));
     }
 

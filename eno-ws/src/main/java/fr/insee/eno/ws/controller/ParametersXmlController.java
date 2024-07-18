@@ -2,6 +2,8 @@ package fr.insee.eno.ws.controller;
 
 import fr.insee.eno.legacy.parameters.Context;
 import fr.insee.eno.legacy.parameters.Mode;
+import fr.insee.eno.legacy.parameters.OutFormat;
+import fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
@@ -13,7 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.reactive.function.client.WebClient;
+
+import java.net.URI;
 
 @Tag(name="Parameters (Eno Xml)")
 @Controller
@@ -22,11 +25,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class ParametersXmlController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ParametersXmlController.class);
+	private final EnoXmlControllerUtils xmlControllerUtils;
 
-	private final WebClient webClient;
-
-	public ParametersXmlController(WebClient webClient) {
-		this.webClient = webClient;
+	public ParametersXmlController(EnoXmlControllerUtils xmlControllerUtils) {
+		this.xmlControllerUtils = xmlControllerUtils;
 	}
 
 	@Operation(
@@ -35,12 +37,8 @@ public class ParametersXmlController {
 					"you have to fill the `Pipeline` section according to the desired transformation.")
 	@GetMapping(value="all", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public ResponseEntity<String> getAllXmlParameters() {
-		String responseBody = webClient.get()
-				.uri("parameters/xml/all")
-				.accept(MediaType.APPLICATION_OCTET_STREAM)
-				.exchangeToMono(clientResponse -> clientResponse.bodyToMono(String.class))
-				.block();
-		return ResponseEntity.ok(responseBody);
+		URI uri = xmlControllerUtils.newUriBuilder().path("parameters/xml/all").build().toUri();
+		return xmlControllerUtils.sendGetRequest(uri, "eno-parameters-ALL.xml");
 	}
 
 	@Operation(
@@ -50,17 +48,20 @@ public class ParametersXmlController {
 	@GetMapping(value="{context}/{outFormat}", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public ResponseEntity<String> getXmlParameters(
 			@PathVariable Context context,
-			@PathVariable fr.insee.eno.legacy.parameters.OutFormat outFormat,
+			@PathVariable OutFormat outFormat,
 			@RequestParam(value="Mode",required=false) Mode mode) {
-		String responseBody = webClient.get()
-				.uri(uriBuilder -> uriBuilder
-						.path("parameters/xml/{context}/{outFormat}")
-						.queryParam("Mode", mode)
-						.build(context, outFormat))
-				.accept(MediaType.APPLICATION_OCTET_STREAM)
-				.exchangeToMono(clientResponse -> clientResponse.bodyToMono(String.class))
-				.block();
-		return ResponseEntity.ok(responseBody);
+		URI uri = xmlControllerUtils.newUriBuilder()
+				.path("parameters/xml/{context}/{outFormat}")
+				.queryParam("Mode", mode)
+				.build(context, outFormat);
+		return xmlControllerUtils.sendGetRequest(uri, enoXmlParametersFilename(context, mode, outFormat));
+	}
+
+	private String enoXmlParametersFilename(Context context, Mode mode, OutFormat outFormat) {
+		String contextSuffix = "-" + context;
+		String modeSuffix = mode != null ? "-" + mode : "";
+		String outFormatSuffix = "-" + outFormat;
+		return "eno-parameters" + contextSuffix + modeSuffix + outFormatSuffix + ".xml";
 	}
 
 }

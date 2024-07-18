@@ -1,28 +1,28 @@
 package fr.insee.eno.ws.controller;
 
 import fr.insee.eno.core.exceptions.business.EnoParametersException;
-import fr.insee.eno.ws.PassThrough;
-import fr.insee.eno.ws.controller.utils.ReactiveControllerUtils;
+import fr.insee.eno.legacy.parameters.OutFormat;
+import fr.insee.eno.ws.controller.utils.EnoJavaControllerUtils;
+import fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils;
 import fr.insee.eno.ws.exception.DDIToLunaticException;
 import fr.insee.eno.ws.exception.EnoControllerException;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.codec.multipart.FilePart;
-import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
-import reactor.core.publisher.Mono;
 
 import java.io.IOException;
+import java.net.URI;
+
+import static fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils.addMultipartToBody;
+import static fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils.questionnaireFilename;
 
 @Tag(name = "Generation from DDI (custom parameters)")
 @Controller
@@ -31,12 +31,12 @@ import java.io.IOException;
 @SuppressWarnings("unused")
 public class GenerationCustomController {
 
-	private final PassThrough passePlat;
-	private final ReactiveControllerUtils controllerUtils;
+	private final EnoJavaControllerUtils javaControllerUtils;
+	private final EnoXmlControllerUtils xmlControllerUtils;
 
-	public GenerationCustomController(PassThrough passePlat, ReactiveControllerUtils controllerUtils) {
-		this.passePlat = passePlat;
-		this.controllerUtils = controllerUtils;
+	public GenerationCustomController(EnoJavaControllerUtils javaControllerUtils, EnoXmlControllerUtils xmlControllerUtils) {
+		this.javaControllerUtils = javaControllerUtils;
+		this.xmlControllerUtils = xmlControllerUtils;
 	}
 
 	@Operation(
@@ -50,17 +50,9 @@ public class GenerationCustomController {
 	public ResponseEntity<String> generateLunaticCustomParams(
 			@RequestPart(value="in") MultipartFile ddiFile,
 			@RequestPart(value="params") MultipartFile parametersFile,
-			@Parameter(name = "specificTreatment", schema = @Schema(type="string", format="binary"))
 			@RequestPart(value="specificTreatment", required=false) MultipartFile specificTreatment)
 			throws DDIToLunaticException, EnoControllerException, EnoParametersException, IOException {
-        /*
-           specificTreatment parameter is a part instead of a FilePart. This workaround is used to make swagger work
-           when empty value is checked for this input file on the endpoint.
-           When empty value is checked, swagger send no content-type nor filename for this multipart file. In this case,
-           Spring considers having a DefaultFormField object instead of FilePart and exceptions is thrown
-           There is no way at this moment to disable the allow empty value when filed is not required.
-         */
-		return controllerUtils.ddiToLunaticJson(ddiFile, parametersFile, specificTreatment);
+		return javaControllerUtils.ddiToLunaticJson(ddiFile, parametersFile, specificTreatment);
 	}
 
 	@Operation(
@@ -72,13 +64,24 @@ public class GenerationCustomController {
 					"You can get a parameters file by using the endpoint `/parameters/xml/BUSINESS/XFORMS`")
 	@PostMapping(value = "ddi-2-xforms",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public Mono<Void> generateXformsCustomParams(
-			@RequestPart(value="in") Mono<FilePart> in,
-			@RequestPart(value="params") Mono<FilePart> params,
-			@RequestPart(value="metadata") Mono<FilePart> metadata,
-			@RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
-			ServerHttpRequest request, ServerHttpResponse response) {
-		return passePlat.passePlatPost(request, response);
+	public ResponseEntity<String> generateXformsCustomParams(
+			@RequestPart(value="in") MultipartFile in,
+			@RequestPart(value="params") MultipartFile params,
+			@RequestPart(value="metadata") MultipartFile metadata,
+			@RequestPart(value="specificTreatment", required=false) MultipartFile specificTreatment)
+			throws EnoControllerException {
+		//
+		MultipartBodyBuilder multipartBodyBuilder = new MultipartBodyBuilder();
+		addMultipartToBody(multipartBodyBuilder, in, "in");
+		addMultipartToBody(multipartBodyBuilder, params, "params");
+		if (metadata != null)
+			addMultipartToBody(multipartBodyBuilder, metadata, "metadata");
+		if (specificTreatment != null)
+			addMultipartToBody(multipartBodyBuilder, specificTreatment, "specificTreatment");
+		//
+		URI uri = xmlControllerUtils.newUriBuilder().path("questionnaire/ddi-2-xforms").build().toUri();
+		String outFilename = questionnaireFilename(OutFormat.XFORMS, false);
+		return xmlControllerUtils.sendPostRequest(uri, multipartBodyBuilder, outFilename);
 	}
 
 	@Operation(
@@ -90,13 +93,24 @@ public class GenerationCustomController {
 					"You can get a parameters file by using the endpoint `/parameters/xml/{context}/FO`")
 	@PostMapping(value = "ddi-2-fo",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public Mono<Void> generateFOCustomParams(
-			@RequestPart(value="in") Mono<FilePart> in,
-			@RequestPart(value="params") Mono<FilePart> params,
-			@RequestPart(value="metadata") Mono<FilePart> metadata,
-			@RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
-			ServerHttpRequest request, ServerHttpResponse response) {
-		return passePlat.passePlatPost(request, response);
+	public ResponseEntity<String> generateFOCustomParams(
+			@RequestPart(value="in") MultipartFile in,
+			@RequestPart(value="params") MultipartFile params,
+			@RequestPart(value="metadata") MultipartFile metadata,
+			@RequestPart(value="specificTreatment", required=false) MultipartFile specificTreatment)
+			throws EnoControllerException {
+		//
+		MultipartBodyBuilder multipartBodyBuilder = new MultipartBodyBuilder();
+		addMultipartToBody(multipartBodyBuilder, in, "in");
+		addMultipartToBody(multipartBodyBuilder, params, "params");
+		if (metadata != null)
+			addMultipartToBody(multipartBodyBuilder, metadata, "metadata");
+		if (specificTreatment != null)
+			addMultipartToBody(multipartBodyBuilder, specificTreatment, "specificTreatment");
+		//
+		URI uri = xmlControllerUtils.newUriBuilder().path("questionnaire/ddi-2-fo").build().toUri();
+		String outFilename = questionnaireFilename(OutFormat.XFORMS, false);
+		return xmlControllerUtils.sendPostRequest(uri, multipartBodyBuilder, outFilename);
 	}
 
 }
