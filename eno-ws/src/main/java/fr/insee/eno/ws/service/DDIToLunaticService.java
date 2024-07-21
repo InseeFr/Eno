@@ -21,13 +21,14 @@ public class DDIToLunaticService {
     @Value("${version.lunatic.model}")
     String lunaticModelVersion;
 
-    public String transformToJson(InputStream ddiInputStream, EnoParameters enoParameters, LunaticPostProcessing lunaticPostProcessings)
+    public String transformToJson(InputStream ddiInputStream, EnoParameters enoParameters, LunaticPostProcessing lunaticPostProcessing)
             throws DDIToLunaticException {
         try {
             Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(ddiInputStream, enoParameters);
             lunaticQuestionnaire.setEnoCoreVersion(enoVersion);
             lunaticQuestionnaire.setLunaticModelVersion(lunaticModelVersion);
-            lunaticPostProcessings.apply(lunaticQuestionnaire);
+            if (lunaticPostProcessing != null)
+                lunaticPostProcessing.apply(lunaticQuestionnaire);
             return LunaticSerializer.serializeToJson(lunaticQuestionnaire);
         } catch (Exception e) {
             throw new DDIToLunaticException(e);
