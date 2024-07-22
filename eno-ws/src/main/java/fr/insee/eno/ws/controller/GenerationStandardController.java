@@ -4,26 +4,25 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.legacy.parameters.CaptureEnum;
 import fr.insee.eno.legacy.parameters.Context;
-import fr.insee.eno.ws.PassThrough;
-import fr.insee.eno.ws.controller.utils.ReactiveControllerUtils;
-import fr.insee.eno.ws.exception.ContextException;
-import fr.insee.eno.ws.exception.MetadataFileException;
-import fr.insee.eno.ws.exception.ModeParameterException;
-import fr.insee.eno.ws.exception.MultiModelException;
+import fr.insee.eno.legacy.parameters.OutFormat;
+import fr.insee.eno.ws.controller.utils.EnoJavaControllerUtils;
+import fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils;
+import fr.insee.eno.ws.exception.*;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.codec.multipart.FilePart;
-import org.springframework.http.codec.multipart.Part;
-import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Mono;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.net.URI;
+
+import static fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils.addMultipartToBody;
+import static fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils.questionnaireFilename;
 
 @Tag(name = "Generation from DDI (standard parameters)")
 @Controller
@@ -32,12 +31,13 @@ import reactor.core.publisher.Mono;
 @SuppressWarnings("unused")
 public class GenerationStandardController {
 
-    private final ReactiveControllerUtils controllerUtils;
-    private final PassThrough passThrough;
+    private final EnoJavaControllerUtils javaControllerUtils;
+    private final EnoXmlControllerUtils xmlControllerUtils;
 
-    public GenerationStandardController(ReactiveControllerUtils controllerUtils, PassThrough passThrough) {
-        this.controllerUtils = controllerUtils;
-        this.passThrough = passThrough;
+    public GenerationStandardController(EnoJavaControllerUtils javaControllerUtils,
+                                        EnoXmlControllerUtils xmlControllerUtils) {
+        this.javaControllerUtils = javaControllerUtils;
+        this.xmlControllerUtils = xmlControllerUtils;
     }
 
     @Operation(
@@ -47,28 +47,21 @@ public class GenerationStandardController {
                     "in function of context and mode. An optional specific treatment `json` file can be added.")
     @PostMapping(value = "{context}/lunatic-json/{mode}",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Mono<ResponseEntity<String>> generateLunatic(
-            @RequestPart(value="in") Mono<FilePart> ddiFile,
-            @Parameter(name = "specificTreatment", schema = @Schema(type="string", format="binary"))
-            @RequestPart(value="specificTreatment", required = false) Mono<Part> specificTreatment,
+    public ResponseEntity<String> generateLunatic(
+            @RequestPart(value="in") MultipartFile ddiFile,
+            @RequestPart(value="specificTreatment", required = false) MultipartFile specificTreatment,
             @PathVariable EnoParameters.Context context,
             @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter,
-            @RequestParam(defaultValue = "false") boolean dsfr) {
-        /*
-           specificTreatment parameter is a part instead of a FilePart. This workaround is used to make swagger work
-           when empty value is checked for this input file on the endpoint.
-           When empty value is checked, swagger send no content-type nor filename for this multipart file. In this case,
-           Spring considers having a DefaultFormField object instead of FilePart and exceptions is thrown
-           There is no way at this moment to disable the allow empty value when filed is not required.
-         */
-
+            @RequestParam(defaultValue = "false") boolean dsfr)
+            throws ModeParameterException, DDIToLunaticException, EnoControllerException, IOException {
+        //
         if (EnoParameters.ModeParameter.PAPI.equals(modeParameter))
-            return Mono.error(new ModeParameterException("Lunatic format is not compatible with the mode 'PAPER'."));
+            throw new ModeParameterException("Lunatic format is not compatible with the mode 'PAPER'.");
         //
         EnoParameters enoParameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
         enoParameters.getLunaticParameters().setDsfr(dsfr);
         //
-        return controllerUtils.ddiToLunaticJson(ddiFile, enoParameters, specificTreatment);
+        return javaControllerUtils.ddiToLunaticJson(ddiFile, enoParameters, specificTreatment);
     }
 
     @Operation(
@@ -81,25 +74,34 @@ public class GenerationStandardController {
                     "If the multi-model option is set to true, the output questionnaire(s) are put in a zip file.")
     @PostMapping(value = "{context}/xforms",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Mono<Void> generateXforms(
-            @RequestPart(value="in") Mono<FilePart> in,
-            @RequestPart(value="metadata", required = false) Mono<FilePart> metadata,
-            @RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
+    public ResponseEntity<String> generateXforms(
+            @RequestPart(value="in") MultipartFile in,
+            @RequestPart(value="metadata", required = false) MultipartFile metadata,
+            @RequestPart(value="specificTreatment", required=false) MultipartFile specificTreatment,
             @PathVariable Context context,
-            @RequestParam(value="multi-model", required=false, defaultValue="false") boolean multiModel,
-            ServerHttpRequest request, ServerHttpResponse response) {
+            @RequestParam(value="multi-model", required=false, defaultValue="false") boolean multiModel)
+            throws MetadataFileException, ContextException, MultiModelException, EnoControllerException {
+        //
         if (Context.HOUSEHOLD.equals(context))
-            return Mono.error(new ContextException("Xforms format is not compatible with 'HOUSEHOLD' context."));
+            throw new ContextException("Xforms format is not compatible with 'HOUSEHOLD' context.");
         if (Context.BUSINESS.equals(context) && (! multiModel))
-            return Mono.error(new MultiModelException("Multi-model option must be 'true' in 'BUSINESS' context."));
-        metadata.hasElement()
-                .flatMap(hasElementValue -> {
-                    if (Context.BUSINESS.equals(context) && Boolean.FALSE.equals(hasElementValue))
-                        return Mono.error(new MetadataFileException(
-                                "The metadata file is required in 'BUSINESS' context."));
-                    return null;
-                });
-        return passThrough.passePlatPost(request, response);
+            throw new MultiModelException("Multi-model option must be 'true' in 'BUSINESS' context.");
+        if (Context.BUSINESS.equals(context) && (metadata == null))
+            throw new MetadataFileException("The metadata file is required in 'BUSINESS' context.");
+        //
+        MultipartBodyBuilder multipartBodyBuilder = new MultipartBodyBuilder();
+        addMultipartToBody(multipartBodyBuilder, in, "in");
+        if (metadata != null)
+            addMultipartToBody(multipartBodyBuilder, metadata, "metadata");
+        if (specificTreatment != null)
+            addMultipartToBody(multipartBodyBuilder, specificTreatment, "specificTreatment");
+        //
+        URI uri = xmlControllerUtils.newUriBuilder()
+                .path("/questionnaire/{context}/xforms")
+                .queryParam("multi-model", multiModel)
+                .build(context);
+        String outFilename = questionnaireFilename(OutFormat.XFORMS, multiModel);
+        return xmlControllerUtils.sendPostRequest(uri, multipartBodyBuilder, outFilename);
     }
 
     @Operation(
@@ -113,25 +115,36 @@ public class GenerationStandardController {
                     "If the multi-model option is set to true, the output questionnaire(s) are put in a zip file." )
     @PostMapping(value = "{context}/fo",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Mono<Void> generateFO(
-            @RequestPart(value="in") Mono<FilePart> in,
-            @RequestPart(value="metadata", required = false) Mono<FilePart> metadata,
-            @RequestPart(value="specificTreatment", required=false) Mono<FilePart> specificTreatment,
+    public ResponseEntity<String> generateFO(
+            @RequestPart(value="in") MultipartFile in,
+            @RequestPart(value="metadata", required = false) MultipartFile metadata,
+            @RequestPart(value="specificTreatment", required=false) MultipartFile specificTreatment,
             @RequestParam(value="Format-column", required=false) Integer nbColumn,
             @RequestParam(value="Capture", required=false) CaptureEnum capture,
             @PathVariable Context context,
-            @RequestParam(value="multi-model", required=false, defaultValue="false") boolean multiModel,
-            ServerHttpRequest request, ServerHttpResponse response) {
+            @RequestParam(value="multi-model", required=false, defaultValue="false") boolean multiModel)
+            throws MultiModelException, MetadataFileException, EnoControllerException {
+        //
         if (Context.BUSINESS.equals(context) && (! multiModel))
-            return Mono.error(new MultiModelException("Multi-model option must be 'true' in 'BUSINESS' context."));
-        metadata.hasElement()
-                .flatMap(hasElementValue -> {
-                    if (Context.BUSINESS.equals(context) && Boolean.FALSE.equals(hasElementValue))
-                        return Mono.error(new MetadataFileException(
-                                "The metadata file is required in 'BUSINESS' context."));
-                    return null;
-                });
-        return passThrough.passePlatPost(request, response);
+            throw new MultiModelException("Multi-model option must be 'true' in 'BUSINESS' context.");
+        if (Context.BUSINESS.equals(context) && metadata != null)
+            throw new MetadataFileException("The metadata file is required in 'BUSINESS' context.");
+        //
+        MultipartBodyBuilder multipartBodyBuilder = new MultipartBodyBuilder();
+        addMultipartToBody(multipartBodyBuilder, in, "in");
+        if (metadata != null)
+            addMultipartToBody(multipartBodyBuilder, metadata, "metadata");
+        if (specificTreatment != null)
+            addMultipartToBody(multipartBodyBuilder, specificTreatment, "specificTreatment");
+        //
+        URI uri = xmlControllerUtils.newUriBuilder()
+                .path("/questionnaire/{context}/fo")
+                .queryParam("Format-column", nbColumn)
+                .queryParam("Capture", capture)
+                .queryParam("multi-model", multiModel)
+                .build(context);
+        String outFilename = questionnaireFilename(OutFormat.FO, multiModel);
+        return xmlControllerUtils.sendPostRequest(uri, multipartBodyBuilder, outFilename);
     }
 
     @Operation(
@@ -141,11 +154,16 @@ public class GenerationStandardController {
                     "context.")
     @PostMapping(value = "{context}/fodt",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Mono<Void> generateFODT(
-            @RequestPart(value="in") Mono<FilePart> in,
-            @PathVariable Context context,
-            ServerHttpRequest request, ServerHttpResponse response) {
-        return passThrough.passePlatPost(request, response);
+    public ResponseEntity<String> generateFODT(
+            @RequestPart(value="in") MultipartFile in,
+            @PathVariable Context context) throws EnoControllerException {
+        //
+        MultipartBodyBuilder multipartBodyBuilder = new MultipartBodyBuilder();
+        addMultipartToBody(multipartBodyBuilder, in, "in");
+        //
+        URI uri = xmlControllerUtils.newUriBuilder().path("/questionnaire/{context}/fodt").build(context);
+        String outFilename = questionnaireFilename(OutFormat.FODT, false);
+        return xmlControllerUtils.sendPostRequest(uri, multipartBodyBuilder, outFilename);
     }
 
 }

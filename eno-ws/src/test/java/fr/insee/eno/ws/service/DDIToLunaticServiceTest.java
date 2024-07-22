@@ -33,19 +33,18 @@ class DDIToLunaticServiceTest {
             "kzguw1v7", // non-numeric controls
             "kanye31s_1", // declarations
     })
-    void nonRegression_DefaultCAWI(String questionnaireId) {
+    void nonRegression_DefaultCAWI(String questionnaireId) throws Exception {
         //
         DDIToLunaticService ddiToLunaticService = new DDIToLunaticService();
         String result = ddiToLunaticService.transformToJson(
                         this.getClass().getClassLoader().getResourceAsStream("non-regression/ddi-"+questionnaireId+".xml"),
-                        EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC))
-                .block();
+                        EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
         //
         assertNotNull(result);
     }
 
     @Test
-    void nonRegression_suggesterProcessing() {
+    void nonRegression_suggesterProcessing() throws Exception {
         //
         SpecificTreatmentsDeserializer deserializer = new SpecificTreatmentsDeserializer();
         SpecificTreatments postProcessingInput = deserializer.deserialize(
@@ -59,8 +58,7 @@ class DDIToLunaticServiceTest {
         String result = ddiToLunaticService.transformToJson(
                         this.getClass().getClassLoader().getResourceAsStream("non-regression/suggester-processing/ddi-l7ugetj0.xml"),
                         EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC),
-                        lunaticPostProcessing)
-                .block();
+                        lunaticPostProcessing);
 
         //
         assertNotNull(result);
@@ -71,7 +69,7 @@ class DDIToLunaticServiceTest {
             "group-input.json",
             "group-input-outside-loop.json"
     })
-    void nonRegression_groupProcessing(String groupProcessingFileName) {
+    void nonRegression_groupProcessing(String groupProcessingFileName) throws Exception {
         //
         SpecificTreatmentsDeserializer deserializer = new SpecificTreatmentsDeserializer();
         SpecificTreatments postProcessingInput = deserializer.deserialize(
@@ -85,8 +83,7 @@ class DDIToLunaticServiceTest {
         DDIToLunaticService ddiToLunaticService = new DDIToLunaticService();
         String result = ddiToLunaticService.transformToJson(
                         this.getClass().getClassLoader().getResourceAsStream("non-regression/group-processing/ddi-lhpz68wp.xml"),
-                        EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC))
-                .block();
+                        EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
 
         //
         assertNotNull(result);
