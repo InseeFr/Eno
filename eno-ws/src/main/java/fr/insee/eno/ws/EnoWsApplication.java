@@ -10,6 +10,7 @@ import org.springframework.web.reactive.config.ViewResolverRegistry;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.result.view.UrlBasedViewResolver;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.InetSocketAddress;
 import java.net.ProxySelector;
@@ -26,8 +27,12 @@ public class EnoWsApplication {
 	}
 
 	@Bean
-	public WebClient webClient(@Value("${eno.legacy.ws.url}") String baseUrl,
-							   @Value("${proxy.host}") Optional<String> proxyHost,
+	public UriComponentsBuilder uriBuilderWithBaseUrl(@Value("${eno.legacy.ws.url}") String baseUrl) {
+		return UriComponentsBuilder.fromHttpUrl(baseUrl);
+	}
+
+	@Bean
+	public WebClient webClient(@Value("${proxy.host}") Optional<String> proxyHost,
 							   @Value("${proxy.port}") Optional<Integer> proxyPort,
 							   WebClient.Builder builder) {
 		if (proxyHost.isPresent() && proxyPort.isPresent()) {
@@ -38,8 +43,7 @@ public class EnoWsApplication {
 		} else {
 			builder.clientConnector(new JdkClientHttpConnector());
 		}
-		return builder.baseUrl(baseUrl)
-				.build();
+		return builder.build();
 	}
 
 	@Configuration

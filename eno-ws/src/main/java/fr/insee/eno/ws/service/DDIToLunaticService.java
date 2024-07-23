@@ -4,11 +4,11 @@ import fr.insee.eno.core.DDIToLunatic;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.serialize.LunaticSerializer;
 import fr.insee.eno.treatments.LunaticPostProcessing;
+import fr.insee.eno.ws.exception.DDIToLunaticException;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Mono;
 
 import java.io.InputStream;
 
@@ -21,26 +21,29 @@ public class DDIToLunaticService {
     @Value("${version.lunatic.model}")
     String lunaticModelVersion;
 
-    public Mono<String> transformToJson(InputStream ddiInputStream, EnoParameters enoParameters, LunaticPostProcessing lunaticPostProcessings) {
+    public String transformToJson(InputStream ddiInputStream, EnoParameters enoParameters, LunaticPostProcessing lunaticPostProcessing)
+            throws DDIToLunaticException {
         try {
             Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(ddiInputStream, enoParameters);
             lunaticQuestionnaire.setEnoCoreVersion(enoVersion);
             lunaticQuestionnaire.setLunaticModelVersion(lunaticModelVersion);
-            lunaticPostProcessings.apply(lunaticQuestionnaire);
-            return Mono.just(LunaticSerializer.serializeToJson(lunaticQuestionnaire));
+            if (lunaticPostProcessing != null)
+                lunaticPostProcessing.apply(lunaticQuestionnaire);
+            return LunaticSerializer.serializeToJson(lunaticQuestionnaire);
         } catch (Exception e) {
-            return Mono.error(e);
+            throw new DDIToLunaticException(e);
         }
     }
 
-    public Mono<String> transformToJson(InputStream ddiInputStream, EnoParameters enoParameters) {
+    public String transformToJson(InputStream ddiInputStream, EnoParameters enoParameters)
+            throws DDIToLunaticException {
         try {
             Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(ddiInputStream, enoParameters);
             lunaticQuestionnaire.setEnoCoreVersion(enoVersion);
             lunaticQuestionnaire.setLunaticModelVersion(lunaticModelVersion);
-            return Mono.just(LunaticSerializer.serializeToJson(lunaticQuestionnaire));
+            return LunaticSerializer.serializeToJson(lunaticQuestionnaire);
         } catch (Exception e) {
-            return Mono.error(e);
+            throw new DDIToLunaticException(e);
         }
     }
 

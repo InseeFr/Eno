@@ -1,13 +1,13 @@
 package fr.insee.eno.ws.controller.exception;
 
 import fr.insee.eno.core.exceptions.business.EnoParametersException;
-import fr.insee.eno.ws.exception.ContextException;
-import fr.insee.eno.ws.exception.MetadataFileException;
-import fr.insee.eno.ws.exception.ModeParameterException;
 import fr.insee.eno.legacy.exception.EnoGenerationException;
 import fr.insee.eno.legacy.exception.EnoLegacyParametersException;
 import fr.insee.eno.treatments.exceptions.SpecificTreatmentsDeserializationException;
 import fr.insee.eno.treatments.exceptions.SpecificTreatmentsValidationException;
+import fr.insee.eno.ws.exception.ContextException;
+import fr.insee.eno.ws.exception.MetadataFileException;
+import fr.insee.eno.ws.exception.ModeParameterException;
 import fr.insee.eno.ws.exception.MultiModelException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.io.IOException;
 
 @ControllerAdvice
 @Slf4j
@@ -63,6 +64,11 @@ public class EnoExceptionController {
 	@ExceptionHandler(value = SpecificTreatmentsValidationException.class)
 	public ResponseEntity<Object> exception(SpecificTreatmentsValidationException exception) {
 		return new ResponseEntity<>("Erreur durant la vérification du json de traitement spécifique :  "+exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@ExceptionHandler(IOException.class)
+	public ResponseEntity<Object> exception(IOException ioException) {
+		return new ResponseEntity<>("I/O error: " + ioException.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@ExceptionHandler(value = Exception.class)
