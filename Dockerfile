@@ -2,7 +2,7 @@ FROM eclipse-temurin:21.0.4_7-jre
 
 ENV PATH_TO_JAR=/opt/eno-ws/eno-ws.jar
 WORKDIR /opt/eno-ws/
-COPY ./eno-ws/build/libs/*.jar /opt/eno-ws/eno-ws.jar
+COPY ./eno-ws/build/libs/*.jar $PATH_TO_JAR
 EXPOSE 8080
 
 RUN addgroup eno
