@@ -8,7 +8,6 @@ import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.navigation.LinkedLoop;
 import fr.insee.eno.core.model.sequence.RoundaboutSequence;
 import fr.insee.eno.core.processing.ProcessingStep;
-import fr.insee.eno.core.utils.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
 import fr.insee.lunatic.model.flat.variable.CollectedVariableValues;
@@ -65,7 +64,8 @@ public class LunaticRoundaboutLoops implements ProcessingStep<Questionnaire> {
         Roundabout lunaticRoundabout = createRoundabout(roundaboutSequence, lunaticLoop, enoLoop, progressVariableName);
         components.add(index, lunaticRoundabout);
         //
-        CollectedVariableType lunaticProgressVariable = createProgressVariable(lunaticQuestionnaire, progressVariableName);
+        variableNotPresentCheck(lunaticQuestionnaire, progressVariableName);
+        CollectedVariableType lunaticProgressVariable = createProgressVariable(progressVariableName, enoLoop);
         lunaticQuestionnaire.getVariables().add(lunaticProgressVariable);
     }
 
@@ -230,16 +230,16 @@ public class LunaticRoundaboutLoops implements ProcessingStep<Questionnaire> {
 
     /**
      * Creates the progress variable object for a roundabout.
-     * @param lunaticQuestionnaire Lunatic questionnaire.
      * @param progressVariableName Name of the progress variable.
-     * @return Variable object.
+     * @param enoLoop Eno linked loop object passed to set the iteration reference of the Lunatic variable.
+     * @return Lunatic variable object.
      */
-    private static CollectedVariableType createProgressVariable(Questionnaire lunaticQuestionnaire, String progressVariableName) {
-        variableNotPresentCheck(lunaticQuestionnaire, progressVariableName);
+    private static CollectedVariableType createProgressVariable(String progressVariableName, LinkedLoop enoLoop) {
         CollectedVariableType lunaticProgressVariable = new CollectedVariableType();
         lunaticProgressVariable.setName(progressVariableName);
         lunaticProgressVariable.setDimension(VariableDimension.ARRAY);
         lunaticProgressVariable.setValues(new CollectedVariableValues.Array());
+        lunaticProgressVariable.setIterationReference(enoLoop.getReference());
         return lunaticProgressVariable;
     }
 

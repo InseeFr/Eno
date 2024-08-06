@@ -66,7 +66,7 @@ public class LunaticLoopResizingLogic {
 
         // Concerned variables to be resized
         // Note: external variables are not concerned since their values are not designed to be changed dynamically
-        List<String> resizedVariableNames = LunaticUtils.getCollectedVariablesInLoop(lunaticLoop).stream().toList();
+        List<String> resizedVariableNames = LunaticUtils.getCollectedVariablesInLoop(lunaticLoop);
 
         String finalSizeExpression = sizeExpression; // (due to usage in lambda)
         resizingVariableNames.forEach(variableName -> insertIterationEntry(
