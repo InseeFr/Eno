@@ -4,12 +4,12 @@ import fr.insee.eno.core.exceptions.business.LunaticLoopException;
 import fr.insee.eno.core.exceptions.technical.LunaticPairwiseException;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.lunatic.model.flat.*;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Utility class that provide some methods for Lunatic-Model objects.
@@ -19,82 +19,112 @@ public class LunaticUtils {
 
     private LunaticUtils() {}
 
+    private static void nonNullTypeCheck(ComponentType component) {
+        if (component.getComponentType() == null)
+            throw new MappingException("Lunatic component " + component + " has a null component type.");
+    }
+
     /**
-     * Return the list of components that contain a response (questions/loops) from the given component list.
-     * @param components A list of Lunatic components.
-     * @return A new list with only components that contain a response.
+     * Returns true if the component has responses, false otherwise.
+     * @param component A Lunatic component.
+     * @return True if the component has responses, false otherwise.
      */
-    public static List<ComponentType> getResponseComponents(List<ComponentType> components) {
-        return components.stream()
-                .filter(component -> !component.getComponentType().equals(ComponentTypeEnum.SEQUENCE))
-                .filter(component -> !component.getComponentType().equals(ComponentTypeEnum.SUBSEQUENCE))
-                .toList();
+    public static boolean isResponseComponent(@NonNull ComponentType component) {
+        nonNullTypeCheck(component);
+        return switch (component.getComponentType()) {
+            case QUESTIONNAIRE, LOOP, ROUNDABOUT, SEQUENCE, SUBSEQUENCE, TEXT, ACCORDION -> false;
+            case CHECKBOX_BOOLEAN, INPUT, TEXTAREA, SUGGESTER, INPUT_NUMBER, DATEPICKER, DURATION,
+                    DROPDOWN, RADIO, CHECKBOX_ONE,
+                    CHECKBOX_GROUP, TABLE, ROSTER_FOR_LOOP, PAIRWISE_LINKS,
+                    QUESTION -> true;
+        };
     }
 
     /**
      * Get the list of response names that belong to the component.
-     * @param component A Lunatic component which hold responses.
+     * If the component is a questionnaire or a loop, this function iterates on the inner components recursively.
+     * @param component A Lunatic component.
      * @return List of response names that belong to the given component.
-     * @throws IllegalArgumentException if the given component is of a type that does not contain responses.
      */
-    public static List<String> getResponseNames(ComponentType component) {
-        List<String> names;
-        switch (component.getComponentType()) {
-            case CHECKBOX_GROUP -> names = ((CheckboxGroup) component).getResponses().stream()
+    public static List<String> getResponseNames(@NonNull ComponentType component) {
+        nonNullTypeCheck(component);
+        return switch (component.getComponentType()) {
+            case QUESTIONNAIRE, LOOP, ROUNDABOUT -> ((ComponentNestingType) component).getComponents().stream()
+                    .map(LunaticUtils::getDirectResponseNames)
+                    .flatMap(Collection::stream)
+                    .toList();
+            default -> getDirectResponseNames(component);
+        };
+    }
+
+    /**
+     * Returns the list of response names of the component. The result will be an empty list if the given component has
+     * no direct responses (e.g. questionnaire, loop, sequence, text etc.).
+     * @param component Lunatic response component (such as Input, Table, PairwiseLinks).
+     * @return The list of response names of the component.
+     */
+    public static List<String> getDirectResponseNames(@NonNull ComponentType component) {
+        nonNullTypeCheck(component);
+
+        if (! isResponseComponent(component))
+            return new ArrayList<>();
+
+        return switch (component.getComponentType()) {
+            // Single response components
+            case CHECKBOX_BOOLEAN, INPUT, TEXTAREA, SUGGESTER, INPUT_NUMBER, DATEPICKER, DURATION,
+                    DROPDOWN, RADIO, CHECKBOX_ONE -> {
+                ComponentSimpleResponseType simpleResponseComponent = (ComponentSimpleResponseType) component;
+                if (simpleResponseComponent.getResponse() == null)
+                    throw new MappingException("Lunatic component '" + component.getId() + "' has no response.");
+                yield List.of(simpleResponseComponent.getResponse().getName());
+            }
+            // Multiple response components
+            case CHECKBOX_GROUP -> ((CheckboxGroup) component).getResponses().stream()
                     .map(ResponsesCheckboxGroup::getResponse)
                     .map(ResponseType::getName)
                     .toList();
-            case ROSTER_FOR_LOOP -> names = ((RosterForLoop) component).getComponents().stream()
+            case ROSTER_FOR_LOOP -> ((RosterForLoop) component).getComponents().stream()
                     .filter(subcomponent -> subcomponent.getResponse() != null)
                     .map(subcomponent -> subcomponent.getResponse().getName())
                     .toList();
-            case LOOP -> names = getResponseComponents(((Loop) component).getComponents()).stream()
-                    .map(LunaticUtils::getResponseNames)
-                    .flatMap(Collection::stream)
-                    .toList();
-            case TABLE -> names = ((Table) component).getBodyLines().stream()
+            case TABLE -> ((Table) component).getBodyLines().stream()
                     .map(BodyLine::getBodyCells)
                     .flatMap(Collection::stream)
                     .filter(subcomponent -> subcomponent.getResponse() != null)
                     .map(subcomponent -> subcomponent.getResponse().getName())
                     .toList();
-            default -> {
-                if (! (component instanceof ComponentSimpleResponseType simpleResponseComponent))
-                    throw new IllegalArgumentException(String.format(
-                            "Method to get response names cannot be called on a component of type %s.",
-                            component.getComponentType()));
-                if (simpleResponseComponent.getResponse() == null)
-                    throw new MappingException("Lunatic component '" + component.getId() + "' has no response.");
-                names = List.of(simpleResponseComponent.getResponse().getName());
-            }
-        }
-        return names;
+            case PAIRWISE_LINKS -> List.of(getPairwiseResponseVariable((PairwiseLinks) component));
+            // Question component -> look at inner components
+            case QUESTION -> ((Question) component).getComponents().stream()
+                    .map(LunaticUtils::getDirectResponseNames)
+                    .flatMap(Collection::stream)
+                    .toList();
+            // Default = unexpected type
+            default -> throw new IllegalArgumentException(
+                    "Unexpected component type '" + component.getComponentType() + "'.");
+        };
     }
+
+    // ----- Above method should be refactored within the Lunatic-Model lib
+    // ----- Below methods contain come Eno business rules and should stay here
 
     /**
      * From a Lunatic loop object given, returns the list of collected variable names that belong to this loop.
      * @param loop A Lunatic loop.
      * @return A list of collected variable names.
      */
-    public static Set<String> getCollectedVariablesInLoop(Loop loop) {
-        Set<String> result = new HashSet<>();
+    public static List<String> getCollectedVariablesInLoop(Loop loop) {
+        List<String> result = new ArrayList<>();
         loop.getComponents().forEach(component -> {
             switch (component.getComponentType()) {
-                case CHECKBOX_BOOLEAN, INPUT_NUMBER, INPUT, TEXTAREA, DATEPICKER, RADIO, CHECKBOX_ONE, DROPDOWN ->
-                        result.add(((ComponentSimpleResponseType) component).getResponse().getName());
-                case CHECKBOX_GROUP ->
-                        ((CheckboxGroup) component).getResponses().forEach(responsesCheckboxGroup ->
-                                result.add(responsesCheckboxGroup.getResponse().getName()));
-                case TABLE ->
-                        ((Table) component).getBodyLines().forEach(bodyLine ->
-                                bodyLine.getBodyCells().stream()
-                                        .filter(bodyCell -> bodyCell.getResponse() != null)
-                                        .forEach(bodyCell -> result.add(bodyCell.getResponse().getName())));
+                case CHECKBOX_BOOLEAN, INPUT_NUMBER, INPUT, TEXTAREA, DATEPICKER, RADIO, CHECKBOX_ONE, DROPDOWN,
+                        CHECKBOX_GROUP, TABLE ->
+                        result.addAll(getDirectResponseNames(component));
                 case ROSTER_FOR_LOOP ->
                         throw new LunaticLoopException(String.format(
                                 "Dynamic tables are forbidden in loops: loop '%s' contains a dynamic table.",
                                 loop.getId()));
-                case LOOP ->
+                case LOOP, ROUNDABOUT ->
                         throw new LunaticLoopException(String.format(
                                 "Nested loop are forbidden: loop '%s' contains an other loop.",
                                 loop.getId()));
