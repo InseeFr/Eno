@@ -18,6 +18,12 @@ public class EnoIndex {
         index.put(enoObjectId, enoIdentifiableObject);
     }
 
+    public void put(EnoIdentifiableObject enoIdentifiableObject) {
+        if (enoIdentifiableObject.getId() == null)
+            throw new IllegalArgumentException("Cannot put an Eno object in the index of the id is null.");
+        index.put(enoIdentifiableObject.getId(), enoIdentifiableObject);
+    }
+
     public EnoIdentifiableObject get(String enoObjectId) {
         if (! index.containsKey(enoObjectId)) {
             log.debug("No Eno object with id '"+enoObjectId+"' in the index.");
