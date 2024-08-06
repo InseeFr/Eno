@@ -101,7 +101,7 @@ class CalculatedVariableTest {
             lunaticQuestionnaire.getVariables().stream()
                     .filter(CalculatedVariableType.class::isInstance)
                     .map(CalculatedVariableType.class::cast)
-                    .filter(variableType -> !variableType.getName().startsWith(LunaticFilterResult.FILTER_RESULT_PREFIX))
+                    .filter(variableType -> !variableType.getName().startsWith("FILTER_RESULT_"))
                     .forEach(variableType -> filterResultVariables.put(variableType.getName(), variableType));
         }
 
