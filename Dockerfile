@@ -10,8 +10,8 @@ ENV JAVA_TOOL_OPTIONS_DEFAULT \
 
 ENV JAVA_USER_ID=10001
 ENV JAVA_USER=java
-RUN groupadd -g $JAVA_USER_ID $JAVA_USER && \
-    useradd -r -u $JAVA_USER_ID -g $JAVA_USER $JAVA_USER
+RUN groupadd -g "$JAVA_USER_ID" "$JAVA_USER" && \
+    useradd -r -u "$JAVA_USER_ID" -g "$JAVA_USER" "$JAVA_USER"
 
 USER $JAVA_USER_ID
 
