@@ -1,6 +1,5 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
-import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.eno.core.model.question.TableQuestion;
@@ -27,7 +26,6 @@ class LunaticFilterResultTest {
 
     @BeforeEach
     void init() {
-        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         EnoIndex enoIndex = new EnoIndex();
 
         TextQuestion textQuestion = new TextQuestion();
@@ -44,7 +42,6 @@ class LunaticFilterResultTest {
         tableQuestionFilter.getBindingReferences().add(new BindingReference("ref-2-2", "VAR22"));
         tableQuestion.setComponentFilter(tableQuestionFilter);
         enoIndex.put(tableQuestion);
-        enoQuestionnaire.setIndex(enoIndex);
 
         lunaticQuestionnaire = new Questionnaire();
 
@@ -86,7 +83,7 @@ class LunaticFilterResultTest {
         tableVariable2 = new CollectedVariableType();
         tableVariable2.setName("TABLE_QUESTION_2");
 
-        processing = new LunaticFilterResult(enoQuestionnaire);
+        processing = new LunaticFilterResult(enoIndex);
     }
 
     @Test
