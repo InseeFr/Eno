@@ -18,6 +18,12 @@ import java.util.Map;
 
 import static fr.insee.eno.core.utils.LunaticUtils.getDirectResponseNames;
 
+/**
+ * Processing step to add the "filter result" variables in a Lunatic questionnaire.
+ * Filter result variables are calculated variables, whose expression is the corresponding filter. Their name is a
+ * prefix indicating the variable is a "filter result" + a response component name.
+ * Needs to be called <b>after</b> the "dimension" step, and <b>before</b> the "shape from" step.
+ */
 public class LunaticFilterResult implements ProcessingStep<Questionnaire> {
 
     private static final String FILTER_RESULT_PREFIX = "FILTER_RESULT_";
@@ -30,6 +36,10 @@ public class LunaticFilterResult implements ProcessingStep<Questionnaire> {
         this.enoIndex = enoIndex;
     }
 
+    /**
+     * Adds the "filter result" variables in the given Lunatic questionnaire.
+     * @param lunaticQuestionnaire A Lunatic questionnaire.
+     */
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
         //
