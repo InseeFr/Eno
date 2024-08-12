@@ -53,7 +53,7 @@ public class LunaticProcessing {
                 .thenIf(lunaticParameters.isControls(), new LunaticAddControlFormat())
                 .then(new LunaticReverseConsistencyControlLabel())
                 .then(new LunaticFinalizePairwise(enoQuestionnaire))
-                .thenIf(lunaticParameters.isFilterResult(), new LunaticFilterResult(enoQuestionnaire))
+                .thenIf(lunaticParameters.isFilterResult(), new LunaticFilterResult(enoIndex))
                 .then(new LunaticShapeFrom())
                 .thenIf(lunaticParameters.isDsfr(), new LunaticSequenceDescription())
                 .thenIf(lunaticParameters.isDsfr(), new LunaticInputNumberDescription(enoParameters.getLanguage()))
