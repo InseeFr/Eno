@@ -1,7 +1,6 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.exceptions.technical.MappingException;
-import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.eno.core.model.question.Question;
@@ -27,8 +26,8 @@ public class LunaticFilterResult implements ProcessingStep<Questionnaire> {
 
     private Map<String, CollectedVariableType> collectedVariableMap;
 
-    public LunaticFilterResult(EnoQuestionnaire enoQuestionnaire) {
-        this.enoIndex = enoQuestionnaire.getIndex();
+    public LunaticFilterResult(EnoIndex enoIndex) {
+        this.enoIndex = enoIndex;
     }
 
     @Override
