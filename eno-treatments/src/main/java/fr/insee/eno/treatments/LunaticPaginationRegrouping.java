@@ -32,6 +32,9 @@ public class LunaticPaginationRegrouping extends LunaticPaginationQuestionMode {
      */
     @Override
     public boolean canIncrementPageCount(ComponentType component, boolean isParentPaginated) {
+        if(component instanceof Question question)
+            return canIncrementPageCount(question.getComponents().getFirst(), isParentPaginated);
+
         if(!super.canIncrementPageCount(component, isParentPaginated)) {
             return false;
         }
@@ -41,9 +44,6 @@ public class LunaticPaginationRegrouping extends LunaticPaginationQuestionMode {
         if(component instanceof ComponentSimpleResponseType simpleResponse) {
             responseName = simpleResponse.getResponse().getName();
         }
-
-        if(component instanceof Question question)
-            return canIncrementPageCount(question.getComponents().getFirst(), isParentPaginated);
 
         // no response name, so no regroupement, we can increment
         if(responseName == null) {

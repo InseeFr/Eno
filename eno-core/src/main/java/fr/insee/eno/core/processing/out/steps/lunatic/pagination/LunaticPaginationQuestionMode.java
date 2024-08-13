@@ -26,7 +26,7 @@ public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
         // if component is a subsequence and has no declarations set, it will regroup with next component, so no
         // increment in this specific case
         return !component.getComponentType().equals(ComponentTypeEnum.SUBSEQUENCE) ||
-                (component.getDeclarations() != null && !component.getDeclarations().isEmpty());
+                hasDeclarationOrDescription(component);
     }
 
     @Override
@@ -40,23 +40,39 @@ public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
 
     @Override
     public void applyNumPageOnSubsequence(Subsequence subsequence, String numPagePrefix, int pageCount, boolean isParentPaginated) {
+        // Clear page attributes in case of previous pagination
+        subsequence.setPage(null);
+        subsequence.setGoToPage(null);
 
         String numPage = numPagePrefix + pageCount;
         // special case where a subsequence has no declarations (so no page attribute set) and must link to next component
-        if(isParentPaginated && (subsequence.getDeclarations() == null || subsequence.getDeclarations().isEmpty())) {
+        if (isParentPaginated && !hasDeclarationOrDescription(subsequence)) {
             int pageSequence = pageCount + 1;
             numPage = numPagePrefix + pageSequence;
         }
 
         // if parent paginated or empty declarations
-        if (subsequence.getDeclarations() == null || subsequence.getDeclarations().isEmpty() || isParentPaginated) {
+        if (isParentPaginated || !hasDeclarationOrDescription(subsequence)) {
             subsequence.setGoToPage(numPage);
         }
 
         // if parent not paginated and declarations set
-        if(!isParentPaginated || (subsequence.getDeclarations() != null && !subsequence.getDeclarations().isEmpty())) {
+        if (!isParentPaginated || hasDeclarationOrDescription(subsequence)) {
             subsequence.setPage(numPage);
         }
+    }
+
+    /**
+     * Checks if the given component has a declaration (one or more) or a description.
+     * @param component Lunatic component.
+     * @return True if the component has a declaration or a description.
+     */
+    private static boolean hasDeclarationOrDescription(ComponentType component) {
+        if (component.getDescription() != null)
+            return true;
+        if (component.getDeclarations() != null)
+            return !component.getDeclarations().isEmpty();
+        return false;
     }
 
     /**
