@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LunaticPaginationRegroupingTest {
+class LunaticPaginationRegroupingIntegrationTest {
 
     private Questionnaire questionnaire;
     private Sequence s1, s4, s8, s9;
