@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.24.2] - 2024-08-13
+### :bug: Bug Fixes
+- [`4e7f570`](https://github.com/InseeFr/Eno/commit/4e7f570a18ae647716aa96e30c8929d70ebd91f5) - subsequence pagination in regrouping treatment *(PR [#1095](https://github.com/InseeFr/Eno/pull/1095) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.24.0] - 2024-07-23
 ### :construction_worker: Build System
 - [`2066636`](https://github.com/InseeFr/Eno/commit/2066636eb8a87952c8303916ee1346cfd6e1465b) - **refactor**: switch to web mvc *(PR [#1084](https://github.com/InseeFr/Eno/pull/1084) by [@nsenave](https://github.com/nsenave))*
@@ -272,3 +277,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.23.7]: https://github.com/InseeFr/Eno/compare/3.23.6...3.23.7
 [3.23.8]: https://github.com/InseeFr/Eno/compare/3.23.7...3.23.8
 [3.24.0]: https://github.com/InseeFr/Eno/compare/3.23.8...3.24.0
+[3.24.2]: https://github.com/InseeFr/Eno/compare/3.24.1...3.24.2
