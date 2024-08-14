@@ -35,22 +35,27 @@ public class EnoJavaControllerUtils {
         this.specificTreatmentsService = specificTreatmentsService;
     }
 
-    private EnoParameters readEnoJavaParametersFile(MultipartFile parametersFile)
+    public EnoParameters readEnoJavaParametersFile(MultipartFile parametersFile)
             throws EnoParametersException, IOException {
         if (parametersFile == null || parametersFile.isEmpty())
             throw new EnoParametersException("Parameters file is missing.");
         String fileName = parametersFile.getOriginalFilename();
         if (fileName == null)
-            throw new EnoParametersException("Parameters file names is null.");
+            throw new EnoParametersException("Parameters file name is null.");
         if (! fileName.endsWith(".json"))
             throw new EnoParametersException("Eno Java parameters file name must end with '.json'.");
         return parameterService.parse(new ByteArrayInputStream(parametersFile.getBytes()));
     }
 
     private LunaticPostProcessing createLunaticPostProcessing(MultipartFile specificTreatmentsFile)
-            throws IOException {
+            throws EnoControllerException, IOException {
         if (specificTreatmentsFile == null || specificTreatmentsFile.isEmpty())
             return null;
+        String fileName = specificTreatmentsFile.getOriginalFilename();
+        if (fileName == null)
+            throw new EnoControllerException("Specific treatments file name is null.");
+        if (! fileName.endsWith(".json"))
+            throw new EnoControllerException("Eno Java specific treatments file name must end with '.json'.");
         return specificTreatmentsService.generateFrom(new ByteArrayInputStream(specificTreatmentsFile.getBytes()));
     }
 
@@ -59,23 +64,30 @@ public class EnoJavaControllerUtils {
             throws EnoParametersException, IOException, EnoControllerException, DDIToLunaticException {
         EnoParameters enoParameters = readEnoJavaParametersFile(parametersFile);
         LunaticPostProcessing lunaticPostProcessing = createLunaticPostProcessing(specificTreatmentsFile);
-        return ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessing);
+        return ddiToLunaticJson(ddiFile.getBytes(), enoParameters, lunaticPostProcessing);
     }
 
     public ResponseEntity<String> ddiToLunaticJson(MultipartFile ddiFile, EnoParameters enoParameters,
                                                    MultipartFile specificTreatmentsFile)
             throws IOException, EnoControllerException, DDIToLunaticException {
         LunaticPostProcessing lunaticPostProcessing = createLunaticPostProcessing(specificTreatmentsFile);
-        return ddiToLunaticJson(ddiFile, enoParameters, lunaticPostProcessing);
+        return ddiToLunaticJson(ddiFile.getBytes(), enoParameters, lunaticPostProcessing);
     }
 
-    private ResponseEntity<String> ddiToLunaticJson(MultipartFile ddiFile, EnoParameters enoParameters,
+    public ResponseEntity<String> ddiToLunaticJson(String ddiContent, EnoParameters enoParameters,
+                                                   MultipartFile specificTreatmentsFile)
+            throws IOException, EnoControllerException, DDIToLunaticException {
+        LunaticPostProcessing lunaticPostProcessing = createLunaticPostProcessing(specificTreatmentsFile);
+        return ddiToLunaticJson(ddiContent.getBytes(), enoParameters, lunaticPostProcessing);
+    }
+
+    private ResponseEntity<String> ddiToLunaticJson(byte[] ddiBytes, EnoParameters enoParameters,
                                                     LunaticPostProcessing lunaticPostProcessing)
-            throws EnoControllerException, IOException, DDIToLunaticException {
-        if (ddiFile.isEmpty())
-            throw new EnoControllerException("DDI file is missing.");
+            throws EnoControllerException, DDIToLunaticException {
+        if (ddiBytes == null || ddiBytes.length == 0)
+            throw new EnoControllerException("DDI content is missing.");
         String lunaticJson = ddiToLunaticService.transformToJson(
-                new ByteArrayInputStream(ddiFile.getBytes()), enoParameters, lunaticPostProcessing);
+                new ByteArrayInputStream(ddiBytes), enoParameters, lunaticPostProcessing);
         return ResponseEntity.ok()
                 .headers(HeadersUtils.with(LUNATIC_JSON_FILE_NAME))
                 .body(lunaticJson);

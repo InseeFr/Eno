@@ -20,7 +20,7 @@ import java.net.URI;
 import static fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils.addMultipartToBody;
 import static fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils.questionnaireFilename;
 
-@Tag(name = "Generation from Pogues")
+@Tag(name = "Generation of DDI")
 @Controller
 @RequestMapping("/questionnaire")
 @Slf4j
@@ -46,7 +46,7 @@ public class GenerationPoguesController {
         addMultipartToBody(multipartBodyBuilder, in, "in");
         //
         URI uri = xmlControllerUtils.newUriBuilder().path("questionnaire/poguesxml-2-ddi").build().toUri();
-        String outFilename = questionnaireFilename(OutFormat.XFORMS, false);
+        String outFilename = questionnaireFilename(OutFormat.DDI, false);
         return xmlControllerUtils.sendPostRequest(uri, multipartBodyBuilder, outFilename);
     }
 
