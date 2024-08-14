@@ -1,11 +1,13 @@
 package fr.insee.eno.ws.controller;
 
 import fr.insee.eno.core.exceptions.business.EnoParametersException;
+import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.legacy.parameters.OutFormat;
 import fr.insee.eno.ws.controller.utils.EnoJavaControllerUtils;
 import fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils;
 import fr.insee.eno.ws.exception.DDIToLunaticException;
 import fr.insee.eno.ws.exception.EnoControllerException;
+import fr.insee.eno.ws.exception.EnoRedirectionException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -24,19 +26,44 @@ import java.net.URI;
 import static fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils.addMultipartToBody;
 import static fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils.questionnaireFilename;
 
-@Tag(name = "Generation from DDI (custom parameters)")
+@Tag(name = "Generation of questionnaire (custom parameters)")
 @Controller
 @RequestMapping("/questionnaire")
 @Slf4j
 @SuppressWarnings("unused")
 public class GenerationCustomController {
 
+	private final GenerationPoguesController generationPoguesController;
 	private final EnoJavaControllerUtils javaControllerUtils;
 	private final EnoXmlControllerUtils xmlControllerUtils;
 
-	public GenerationCustomController(EnoJavaControllerUtils javaControllerUtils, EnoXmlControllerUtils xmlControllerUtils) {
+	public GenerationCustomController(GenerationPoguesController generationPoguesController,
+									  EnoJavaControllerUtils javaControllerUtils,
+									  EnoXmlControllerUtils xmlControllerUtils) {
+		this.generationPoguesController = generationPoguesController;
 		this.javaControllerUtils = javaControllerUtils;
 		this.xmlControllerUtils = xmlControllerUtils;
+	}
+
+	@Operation(
+			summary = "Lunatic questionnaire generation from Pogues.",
+			description= "Generation a Lunatic questionnaire from the Pogues `json` source, using a custom " +
+					"parameters `json` file _(required)_ and a specific treatment `json` file _(optional)_. " +
+					"You can get a parameters file by using the endpoint `/parameters/java/{context}/LUNATIC/{mode}`")
+	@PostMapping(value = "pogues-2-lunatic",
+			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<String> generateLunaticFromPoguesCustomParams(
+			@RequestPart(value="in") MultipartFile poguesFile,
+			@RequestPart(value="params") MultipartFile parametersFile,
+			@RequestPart(value="specificTreatment", required=false) MultipartFile specificTreatment)
+			throws DDIToLunaticException, EnoControllerException, EnoParametersException, IOException {
+		//
+		String ddiContent = generationPoguesController.generateDDIQuestionnaire(poguesFile).getBody();
+		if (ddiContent == null)
+			throw new EnoRedirectionException("Result of the Pogues to DDI transformation is null.");
+		//
+		EnoParameters enoParameters = javaControllerUtils.readEnoJavaParametersFile(parametersFile);
+		return javaControllerUtils.ddiToLunaticJson(ddiContent, enoParameters, specificTreatment);
 	}
 
 	@Operation(

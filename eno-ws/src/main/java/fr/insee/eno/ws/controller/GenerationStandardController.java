@@ -24,20 +24,51 @@ import java.net.URI;
 import static fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils.addMultipartToBody;
 import static fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils.questionnaireFilename;
 
-@Tag(name = "Generation from DDI (standard parameters)")
+@Tag(name = "Generation of questionnaire (standard parameters)")
 @Controller
 @RequestMapping("/questionnaire")
 @Slf4j
 @SuppressWarnings("unused")
 public class GenerationStandardController {
 
+    private final GenerationPoguesController generationPoguesController;
     private final EnoJavaControllerUtils javaControllerUtils;
     private final EnoXmlControllerUtils xmlControllerUtils;
 
-    public GenerationStandardController(EnoJavaControllerUtils javaControllerUtils,
+    public GenerationStandardController(GenerationPoguesController generationPoguesController,
+                                        EnoJavaControllerUtils javaControllerUtils,
                                         EnoXmlControllerUtils xmlControllerUtils) {
+        this.generationPoguesController = generationPoguesController;
         this.javaControllerUtils = javaControllerUtils;
         this.xmlControllerUtils = xmlControllerUtils;
+    }
+
+    @Operation(
+            summary = "Lunatic questionnaire generation from Pogues.",
+            description = "Generation of a Lunatic questionnaire from the Pogues `json` questionnaire with standard " +
+                    "parameters, in function of context and mode. An optional specific treatment `json` file can be " +
+                    "added.")
+    @PostMapping(value = "pogues-2-lunatic/{context}/{mode}",
+            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<String> generateLunaticFromPogues(
+            @RequestPart(value="in") MultipartFile poguesFile,
+            @RequestPart(value="specificTreatment", required = false) MultipartFile specificTreatment,
+            @PathVariable EnoParameters.Context context,
+            @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter,
+            @RequestParam(defaultValue = "false") boolean dsfr)
+            throws ModeParameterException, DDIToLunaticException, EnoControllerException, IOException {
+        //
+        if (EnoParameters.ModeParameter.PAPI.equals(modeParameter))
+            throw new ModeParameterException("Lunatic format is not compatible with the mode 'PAPER'.");
+        //
+        String ddiContent = generationPoguesController.generateDDIQuestionnaire(poguesFile).getBody();
+        if (ddiContent == null)
+            throw new EnoRedirectionException("Result of the Pogues to DDI transformation is null.");
+        //
+        EnoParameters enoParameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
+        enoParameters.getLunaticParameters().setDsfr(dsfr);
+        //
+        return javaControllerUtils.ddiToLunaticJson(ddiContent, enoParameters, specificTreatment);
     }
 
     @Operation(
