@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -18,6 +19,24 @@ import java.nio.file.Path;
 public class PoguesDeserializer {
 
     private PoguesDeserializer() {}
+
+    /**
+     * Deserializes the Pogues json file from given input stream.
+     * @param poguesInputStream Input stream of a Pogues json questionnaire.
+     * @return A Pogues-Model questionnaire.
+     * @throws PoguesDeserializationException if deserialization fails.
+     */
+    public static Questionnaire deserialize(InputStream poguesInputStream) throws PoguesDeserializationException {
+        JSONDeserializer poguesDeserializer = new JSONDeserializer();
+        log.info("Deserializing Pogues json questionnaire from input stream given.");
+        try {
+            Questionnaire poguesQuestionnaire = poguesDeserializer.deserialize(poguesInputStream);
+            log.info("Successfully deserialized Pogues questionnaire from input stream.");
+            return poguesQuestionnaire;
+        } catch (JAXBException e) {
+            throw new PoguesDeserializationException("Unable to parse Pogues file  from input stream given.", e);
+        }
+    }
 
     /**
      * Deserializes the Pogues json file from given URL.

@@ -63,19 +63,24 @@ public class EnoXmlControllerUtils {
     public static void addMultipartToBody(MultipartBodyBuilder multipartBodyBuilder, MultipartFile multipartFile,
                                           String partName) throws EnoControllerException {
         try {
-            multipartBodyBuilder.part(partName, multipartFileToByteArray(multipartFile));
+            multipartBodyBuilder.part(partName, byteArrayResourceWithFileName(multipartFile.getBytes(), multipartFile.getOriginalFilename()));
         } catch (IOException e) {
             throw new EnoControllerException(
                     "Unable to access content of given file " + multipartFile.getOriginalFilename());
         }
     }
 
-    private static ByteArrayResource multipartFileToByteArray(MultipartFile multipartFile) throws IOException {
+    public static void addStringToMultipartBody(
+            MultipartBodyBuilder multipartBodyBuilder, String content, String fileName, String partName) {
+        multipartBodyBuilder.part(partName, byteArrayResourceWithFileName(content.getBytes(), fileName));
+    }
+
+    private static ByteArrayResource byteArrayResourceWithFileName(byte[] bytes, String fileName) {
         // Ugly but I didn't find anything better
-        return new ByteArrayResource(multipartFile.getBytes()) {
+        return new ByteArrayResource(bytes) {
             @Override
             public String getFilename() {
-                return multipartFile.getOriginalFilename();
+                return fileName;
             }
         };
     }

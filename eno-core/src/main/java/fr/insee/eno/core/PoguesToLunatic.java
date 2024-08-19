@@ -1,0 +1,29 @@
+package fr.insee.eno.core;
+
+import fr.insee.eno.core.exceptions.business.PoguesDeserializationException;
+import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.lunatic.model.flat.Questionnaire;
+
+import java.io.InputStream;
+
+public class PoguesToLunatic {
+
+    private PoguesToLunatic() {}
+
+    /**
+     * Transform given Pogues input stream into a Lunatic questionnaire object using parameters given.
+     * @param ddiInputStream Input stream of a Pogues json questionnaire.
+     * @param enoParameters Eno parameters object.
+     * @return Lunatic questionnaire object.
+     * @throws PoguesDeserializationException if the input stream given cannot be parsed to a Pogues questionnaire.
+     */
+    public static Questionnaire transform(InputStream ddiInputStream, EnoParameters enoParameters)
+            throws PoguesDeserializationException {
+        //
+        EnoQuestionnaire enoQuestionnaire = PoguesToEno.transform(ddiInputStream, enoParameters);
+        //
+        return EnoToLunatic.transform(enoQuestionnaire, enoParameters);
+    }
+
+}
