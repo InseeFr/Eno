@@ -36,7 +36,7 @@ class DDIToLunaticServiceTest {
     void nonRegression_DefaultCAWI(String questionnaireId) throws Exception {
         //
         DDIToLunaticService ddiToLunaticService = new DDIToLunaticService();
-        String result = ddiToLunaticService.transformToJson(
+        String result = ddiToLunaticService.transform(
                         this.getClass().getClassLoader().getResourceAsStream("non-regression/ddi-"+questionnaireId+".xml"),
                         EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
         //
@@ -55,7 +55,7 @@ class DDIToLunaticServiceTest {
 
         //
         DDIToLunaticService ddiToLunaticService = new DDIToLunaticService();
-        String result = ddiToLunaticService.transformToJson(
+        String result = ddiToLunaticService.transform(
                         this.getClass().getClassLoader().getResourceAsStream("non-regression/suggester-processing/ddi-l7ugetj0.xml"),
                         EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC),
                         lunaticPostProcessing);
@@ -81,7 +81,7 @@ class DDIToLunaticServiceTest {
 
         //
         DDIToLunaticService ddiToLunaticService = new DDIToLunaticService();
-        String result = ddiToLunaticService.transformToJson(
+        String result = ddiToLunaticService.transform(
                         this.getClass().getClassLoader().getResourceAsStream("non-regression/group-processing/ddi-lhpz68wp.xml"),
                         EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
 
