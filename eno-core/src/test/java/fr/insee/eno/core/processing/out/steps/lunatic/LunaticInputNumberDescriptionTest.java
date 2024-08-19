@@ -2,6 +2,8 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.lunatic.model.flat.InputNumber;
+import fr.insee.lunatic.model.flat.LabelType;
+import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +26,9 @@ class LunaticInputNumberDescriptionTest {
         LunaticInputNumberDescription processing = new LunaticInputNumberDescription(EnoParameters.Language.FR);
         processing.apply(lunaticQuestionnaire);
         //
-        assertEquals("Format attendu : un nombre entre 0 et 100",
-                lunaticQuestionnaire.getComponents().getFirst().getDescription().getValue());
+        LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
+        assertEquals("Format attendu : un nombre entre 0 et 100", description.getValue());
+        assertEquals(LabelTypeEnum.TXT, description.getType());
     }
 
     @Test
@@ -42,8 +45,9 @@ class LunaticInputNumberDescriptionTest {
         LunaticInputNumberDescription processing = new LunaticInputNumberDescription(EnoParameters.Language.FR);
         processing.apply(lunaticQuestionnaire);
         //
-        assertEquals("Format attendu : un nombre en € entre 0,0 et 10,0",
-                lunaticQuestionnaire.getComponents().getFirst().getDescription().getValue());
+        LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
+        assertEquals("Format attendu : un nombre en € entre 0,0 et 10,0", description.getValue());
+        assertEquals(LabelTypeEnum.TXT, description.getType());
     }
 
     @Test
@@ -60,8 +64,9 @@ class LunaticInputNumberDescriptionTest {
         LunaticInputNumberDescription processing = new LunaticInputNumberDescription(EnoParameters.Language.FR);
         processing.apply(lunaticQuestionnaire);
         //
-        assertEquals("Format attendu : un nombre en k€ entre 20 et 1 000",
-                lunaticQuestionnaire.getComponents().getFirst().getDescription().getValue());
+        LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
+        assertEquals("Format attendu : un nombre en k€ entre 20 et 1 000", description.getValue());
+        assertEquals(LabelTypeEnum.TXT, description.getType());
     }
 
     @Test
@@ -77,8 +82,9 @@ class LunaticInputNumberDescriptionTest {
         LunaticInputNumberDescription processing = new LunaticInputNumberDescription(EnoParameters.Language.FR);
         processing.apply(lunaticQuestionnaire);
         //
-        assertEquals("Format attendu : un nombre entre -100 et 100",
-                lunaticQuestionnaire.getComponents().getFirst().getDescription().getValue());
+        LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
+        assertEquals("Format attendu : un nombre entre -100 et 100", description.getValue());
+        assertEquals(LabelTypeEnum.TXT, description.getType());
     }
 
     @Test
@@ -95,8 +101,10 @@ class LunaticInputNumberDescriptionTest {
         LunaticInputNumberDescription processing = new LunaticInputNumberDescription(EnoParameters.Language.FR);
         processing.apply(lunaticQuestionnaire);
         //
+        LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
         assertEquals("Format attendu : un nombre en € entre 0 et 10 000 000 000",
-                lunaticQuestionnaire.getComponents().getFirst().getDescription().getValue());
+                description.getValue());
+        assertEquals(LabelTypeEnum.TXT, description.getType());
     }
 
 }
