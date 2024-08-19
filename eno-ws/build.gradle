@@ -33,6 +33,7 @@ dependencies {
 	implementation project(':eno-treatments')
 	// Lunatic
 	implementation libs.lunatic.model
+	implementation libs.pogues.model
 	// Spring Web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	// Web Client

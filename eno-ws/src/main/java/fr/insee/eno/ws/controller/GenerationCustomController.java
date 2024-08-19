@@ -8,9 +8,12 @@ import fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils;
 import fr.insee.eno.ws.exception.DDIToLunaticException;
 import fr.insee.eno.ws.exception.EnoControllerException;
 import fr.insee.eno.ws.exception.EnoRedirectionException;
+import fr.insee.eno.ws.service.DDIToLunaticService;
+import fr.insee.eno.ws.service.PoguesToLunaticService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.MultipartBodyBuilder;
@@ -33,13 +36,23 @@ import static fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils.questionnai
 @SuppressWarnings("unused")
 public class GenerationCustomController {
 
+	@Value("${eno.direct.pogues.lunatic}")
+	private Boolean directPoguesToLunatic;
+
+	private final DDIToLunaticService ddiToLunaticService;
+	private final PoguesToLunaticService poguesToLunaticService;
 	private final GenerationPoguesController generationPoguesController;
 	private final EnoJavaControllerUtils javaControllerUtils;
 	private final EnoXmlControllerUtils xmlControllerUtils;
 
-	public GenerationCustomController(GenerationPoguesController generationPoguesController,
-									  EnoJavaControllerUtils javaControllerUtils,
-									  EnoXmlControllerUtils xmlControllerUtils) {
+	public GenerationCustomController(
+			DDIToLunaticService ddiToLunaticService,
+			PoguesToLunaticService poguesToLunaticService,
+			GenerationPoguesController generationPoguesController,
+			EnoJavaControllerUtils javaControllerUtils,
+			EnoXmlControllerUtils xmlControllerUtils) {
+		this.ddiToLunaticService = ddiToLunaticService;
+		this.poguesToLunaticService = poguesToLunaticService;
 		this.generationPoguesController = generationPoguesController;
 		this.javaControllerUtils = javaControllerUtils;
 		this.xmlControllerUtils = xmlControllerUtils;
@@ -57,13 +70,16 @@ public class GenerationCustomController {
 			@RequestPart(value="params") MultipartFile parametersFile,
 			@RequestPart(value="specificTreatment", required=false) MultipartFile specificTreatment)
 			throws DDIToLunaticException, EnoControllerException, EnoParametersException, IOException {
-		//
+
+		if (Boolean.TRUE.equals(directPoguesToLunatic))
+			return javaControllerUtils.transformToLunatic(
+					poguesFile, parametersFile, specificTreatment, poguesToLunaticService);
+
 		String ddiContent = generationPoguesController.generateDDIQuestionnaire(poguesFile).getBody();
 		if (ddiContent == null)
 			throw new EnoRedirectionException("Result of the Pogues to DDI transformation is null.");
-		//
 		EnoParameters enoParameters = javaControllerUtils.readEnoJavaParametersFile(parametersFile);
-		return javaControllerUtils.ddiToLunaticJson(ddiContent, enoParameters, specificTreatment);
+		return javaControllerUtils.transformToLunatic(ddiContent, enoParameters, specificTreatment, ddiToLunaticService);
 	}
 
 	@Operation(
@@ -79,7 +95,7 @@ public class GenerationCustomController {
 			@RequestPart(value="params") MultipartFile parametersFile,
 			@RequestPart(value="specificTreatment", required=false) MultipartFile specificTreatment)
 			throws DDIToLunaticException, EnoControllerException, EnoParametersException, IOException {
-		return javaControllerUtils.ddiToLunaticJson(ddiFile, parametersFile, specificTreatment);
+		return javaControllerUtils.transformToLunatic(ddiFile, parametersFile, specificTreatment, ddiToLunaticService);
 	}
 
 	@Operation(
