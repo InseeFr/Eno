@@ -1,9 +1,9 @@
 plugins {
-    id 'java'
-    id 'org.springframework.boot' version '3.3.1' apply false
-    id 'io.spring.dependency-management' version '1.1.6' apply false
-    id 'jacoco'
-    id "org.sonarqube" version '5.1.0.4882'
+    id "java"
+    id "org.springframework.boot" version "3.3.1" apply false
+    id "io.spring.dependency-management" version "1.1.6" apply false
+    id "jacoco"
+    id "org.sonarqube" version "5.1.0.4882"
 }
 
 java {
@@ -15,15 +15,15 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 allprojects {
-    group = 'fr.insee.eno'
-    version = '3.26.1-SNAPSHOT'
+    group = "fr.insee.eno"
+    version = "3.26.1-SNAPSHOT"
 }
 
 subprojects {
-    apply plugin: 'org.sonarqube'
+    apply plugin: "org.sonarqube"
     sonar {
         properties {
-            property 'sonar.coverage.jacoco.xmlReportPaths', "$projectDir.parentFile.path/build/reports/jacoco/codeCoverageReport/codeCoverageReport.xml"
+            property "sonar.coverage.jacoco.xmlReportPaths", "$projectDir.parentFile.path/build/reports/jacoco/codeCoverageReport/codeCoverageReport.xml"
         }
     }
 
@@ -36,7 +36,7 @@ subprojects {
     }
     tasks.withType(JavaCompile).tap {
         configureEach {
-            options.encoding = 'UTF-8'
+            options.encoding = "UTF-8"
         }
     }
 }
@@ -49,7 +49,7 @@ subprojects {
 // You can achieve this by calling the `test` lifecycle task manually
 // $ ./gradlew test codeCoverageReport
 tasks.register("codeCoverageReport", JacocoReport) {
-    // If a subproject applies the 'jacoco' plugin, add the result it to the report
+    // If a subproject applies the "jacoco" plugin, add the result it to the report
     subprojects { subproject ->
         subproject.plugins.withType(JacocoPlugin).configureEach {
             subproject.tasks.matching({ t -> t.extensions.findByType(JacocoTaskExtension) }).configureEach { testTask ->
@@ -58,7 +58,7 @@ tasks.register("codeCoverageReport", JacocoReport) {
                     sourceSets subproject.sourceSets.main
                     executionData(testTask)
                 } else {
-                    logger.warn('Jacoco extension is disabled for test task \'{}\' in project \'{}\'. this test task will be excluded from jacoco report.',testTask.getName(),subproject.getName())
+                    logger.warn("Jacoco extension is disabled for test task \"{}\" in project \"{}\". this test task will be excluded from jacoco report.",testTask.getName(),subproject.getName())
                 }
             }
 
@@ -76,11 +76,10 @@ tasks.register("codeCoverageReport", JacocoReport) {
     reports {
         xml.required = true
         html.required = true
-        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+        html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
     }
 }
 
-tasks.register('printVersion') {
 sonar {
     properties {
         property("sonar.projectKey", "InseeFr_Eno")
@@ -89,7 +88,9 @@ sonar {
     }
 }
 
+
+tasks.register("printVersion") {
     doLast {
-        println project.version
+        println(project.version)
     }
 }
