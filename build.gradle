@@ -41,8 +41,6 @@ subprojects {
     }
 }
 
-apply from: "$project.rootDir/sonar.gradle"
-
 // See here for more info: https://docs.gradle.org/6.4-rc-1/samples/sample_jvm_multi_project_with_code_coverage.html
 //
 // task to gather code coverage from multiple subprojects
@@ -83,6 +81,14 @@ tasks.register("codeCoverageReport", JacocoReport) {
 }
 
 tasks.register('printVersion') {
+sonar {
+    properties {
+        property("sonar.projectKey", "InseeFr_Eno")
+        property( "sonar.host.url", "https://sonarcloud.io")
+        property("sonar.organization", "inseefr")
+    }
+}
+
     doLast {
         println project.version
     }
