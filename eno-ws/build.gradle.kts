@@ -5,6 +5,8 @@ plugins {
     id("jacoco-report-aggregation")
 }
 
+description = "Eno REST web-service application."
+
 val javaMainClass by extra("fr.insee.eno.ws.EnoWsApplication")
 
 application {

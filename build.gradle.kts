@@ -19,6 +19,18 @@ allprojects {
     version = "3.26.2-SNAPSHOT"
 }
 
+subprojects {
+    repositories {
+        mavenCentral()
+        maven {
+            url = uri("https://oss.sonatype.org/content/repositories/snapshots")
+            mavenContent {
+                snapshotsOnly()
+            }
+        }
+        mavenLocal()
+    }
+}
 
 sonar {
     properties {
@@ -39,5 +51,4 @@ tasks.register("printVersion") {
     doLast {
         println(project.version)
     }
-
 }

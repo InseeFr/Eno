@@ -6,18 +6,6 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
-
-    repositories {
-        mavenCentral()
-        maven {
-            url = uri("https://oss.sonatype.org/content/repositories/snapshots")
-            mavenContent {
-                snapshotsOnly()
-            }
-        }
-        mavenLocal()
-    }
-
     versionCatalogs {
         create("libs") {
             version("lunatic-model", "3.13.0")
@@ -26,7 +14,6 @@ dependencyResolutionManagement {
             library("pogues-model", "fr.insee.pogues", "pogues-model").versionRef("pogues-model")
         }
     }
-
 }
 
 rootProject.name = "Eno"

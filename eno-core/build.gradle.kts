@@ -8,6 +8,8 @@ plugins {
     id("jacoco")
 }
 
+description = "Eno core module that contains the logic of transformations."
+
 // https://stackoverflow.com/a/61671513/13425151
 // https://docs.gradle.org/8.10/userguide/migrating_from_groovy_to_kotlin_dsl.html#configuring-tasks
 tasks.named<BootJar>("bootJar") {
@@ -16,8 +18,6 @@ tasks.named<BootJar>("bootJar") {
 tasks.named<Jar>("jar") {
     enabled = true
 }
-
-description = "eno-core"
 
 val ddiJavaLibVersion = "1.0.0"
 val modelMapperVersion = "3.2.0"
