@@ -1,8 +1,6 @@
 package fr.insee.eno.ws.controller.exception;
 
 import fr.insee.eno.core.exceptions.business.EnoParametersException;
-import fr.insee.eno.legacy.exception.EnoGenerationException;
-import fr.insee.eno.legacy.exception.EnoLegacyParametersException;
 import fr.insee.eno.treatments.exceptions.SpecificTreatmentsDeserializationException;
 import fr.insee.eno.treatments.exceptions.SpecificTreatmentsValidationException;
 import fr.insee.eno.ws.exception.ContextException;
@@ -20,11 +18,6 @@ import java.io.IOException;
 @ControllerAdvice
 @Slf4j
 public class EnoExceptionController {
-
-	@ExceptionHandler(value = EnoLegacyParametersException.class)
-	public ResponseEntity<Object> exception(EnoLegacyParametersException exception) {
-		return new ResponseEntity<>("Parameters file is invalid: "+exception.getMessage(), HttpStatus.BAD_REQUEST);
-	}
 
 	@ExceptionHandler(value = EnoParametersException.class)
 	public ResponseEntity<Object> exception(EnoParametersException exception) {
@@ -49,11 +42,6 @@ public class EnoExceptionController {
 	@ExceptionHandler(value = MultiModelException.class)
 	public ResponseEntity<Object> exception(MultiModelException exception) {
 		return new ResponseEntity<>("Multi-model option error: "+exception.getMessage(), HttpStatus.BAD_REQUEST);
-	}
-
-	@ExceptionHandler(value = EnoGenerationException.class)
-	public ResponseEntity<Object> exception(EnoGenerationException exception) {
-		return new ResponseEntity<>("EnoGeneration error : "+exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@ExceptionHandler(value = SpecificTreatmentsDeserializationException.class)

@@ -1,8 +1,7 @@
 package fr.insee.eno.ws.controller.utils;
 
-import org.springframework.http.MediaType;
-
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 
 public class HeadersUtils {
 

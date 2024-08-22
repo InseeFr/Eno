@@ -2,12 +2,12 @@ package fr.insee.eno.ws.controller;
 
 import fr.insee.eno.core.exceptions.business.EnoParametersException;
 import fr.insee.eno.core.parameter.EnoParameters;
-import fr.insee.eno.legacy.parameters.OutFormat;
 import fr.insee.eno.ws.controller.utils.EnoJavaControllerUtils;
 import fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils;
 import fr.insee.eno.ws.exception.DDIToLunaticException;
 import fr.insee.eno.ws.exception.EnoControllerException;
 import fr.insee.eno.ws.exception.EnoRedirectionException;
+import fr.insee.eno.ws.legacy.parameters.OutFormat;
 import fr.insee.eno.ws.service.DDIToLunaticService;
 import fr.insee.eno.ws.service.PoguesToLunaticService;
 import io.swagger.v3.oas.annotations.Operation;
