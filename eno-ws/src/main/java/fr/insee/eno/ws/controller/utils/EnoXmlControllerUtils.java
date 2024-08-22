@@ -60,6 +60,14 @@ public class EnoXmlControllerUtils {
                 .body(result);
     }
 
+    public ResponseEntity<String> sendPostRequest(URI uri) {
+        String result = webClient.post()
+                .uri(uri)
+                .exchangeToMono(clientResponse -> clientResponse.bodyToMono(String.class))
+                .block();
+        return ResponseEntity.ok().body(result);
+    }
+
     public static void addMultipartToBody(MultipartBodyBuilder multipartBodyBuilder, MultipartFile multipartFile,
                                           String partName) throws EnoControllerException {
         try {
