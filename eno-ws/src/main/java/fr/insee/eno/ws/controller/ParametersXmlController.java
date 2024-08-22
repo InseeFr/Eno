@@ -1,9 +1,9 @@
 package fr.insee.eno.ws.controller;
 
-import fr.insee.eno.legacy.parameters.Context;
-import fr.insee.eno.legacy.parameters.Mode;
-import fr.insee.eno.legacy.parameters.OutFormat;
+import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils;
+import fr.insee.eno.ws.legacy.parameters.OutFormat;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
@@ -49,7 +49,7 @@ public class ParametersXmlController {
 	public ResponseEntity<String> getXmlParameters(
 			@PathVariable Context context,
 			@PathVariable OutFormat outFormat,
-			@RequestParam(value="Mode",required=false) Mode mode) {
+			@RequestParam(value="Mode",required=false) EnoParameters.ModeParameter mode) {
 		URI uri = xmlControllerUtils.newUriBuilder()
 				.path("parameters/xml/{context}/{outFormat}")
 				.queryParam("Mode", mode)
@@ -57,7 +57,7 @@ public class ParametersXmlController {
 		return xmlControllerUtils.sendGetRequest(uri, enoXmlParametersFilename(context, mode, outFormat));
 	}
 
-	private String enoXmlParametersFilename(Context context, Mode mode, OutFormat outFormat) {
+	private String enoXmlParametersFilename(Context context, EnoParameters.ModeParameter mode, OutFormat outFormat) {
 		String contextSuffix = "-" + context;
 		String modeSuffix = mode != null ? "-" + mode : "";
 		String outFormatSuffix = "-" + outFormat;

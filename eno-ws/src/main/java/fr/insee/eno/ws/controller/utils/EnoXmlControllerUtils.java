@@ -1,7 +1,7 @@
 package fr.insee.eno.ws.controller.utils;
 
-import fr.insee.eno.legacy.parameters.OutFormat;
 import fr.insee.eno.ws.exception.EnoControllerException;
+import fr.insee.eno.ws.legacy.parameters.OutFormat;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.MediaType;

@@ -1,13 +1,13 @@
 package fr.insee.eno.ws.controller;
 
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.eno.legacy.parameters.CaptureEnum;
-import fr.insee.eno.legacy.parameters.Context;
-import fr.insee.eno.legacy.parameters.OutFormat;
 import fr.insee.eno.ws.controller.utils.EnoJavaControllerUtils;
 import fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils;
 import fr.insee.eno.ws.exception.*;
+import fr.insee.eno.ws.legacy.parameters.CaptureEnum;
+import fr.insee.eno.ws.legacy.parameters.OutFormat;
 import fr.insee.eno.ws.service.DDIToLunaticService;
 import fr.insee.eno.ws.service.PoguesToLunaticService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -66,7 +66,7 @@ public class GenerationStandardController {
     public ResponseEntity<String> generateLunaticFromPogues(
             @RequestPart(value="in") MultipartFile poguesFile,
             @RequestPart(value="specificTreatment", required = false) MultipartFile specificTreatment,
-            @PathVariable EnoParameters.Context context,
+            @PathVariable Context context,
             @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter,
             @RequestParam(defaultValue = "false") boolean dsfr)
             throws ModeParameterException, DDIToLunaticException, EnoControllerException, IOException {
@@ -99,7 +99,7 @@ public class GenerationStandardController {
     public ResponseEntity<String> generateLunatic(
             @RequestPart(value="in") MultipartFile ddiFile,
             @RequestPart(value="specificTreatment", required = false) MultipartFile specificTreatment,
-            @PathVariable EnoParameters.Context context,
+            @PathVariable Context context,
             @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter,
             @RequestParam(defaultValue = "false") boolean dsfr)
             throws ModeParameterException, DDIToLunaticException, EnoControllerException, IOException {

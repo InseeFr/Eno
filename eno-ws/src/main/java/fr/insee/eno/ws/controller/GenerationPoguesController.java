@@ -1,9 +1,9 @@
 package fr.insee.eno.ws.controller;
 
-import fr.insee.eno.legacy.parameters.OutFormat;
 import fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils;
 import fr.insee.eno.ws.exception.EnoControllerException;
 import fr.insee.eno.ws.exception.PoguesToLunaticException;
+import fr.insee.eno.ws.legacy.parameters.OutFormat;
 import fr.insee.eno.ws.service.PoguesToLunaticService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
