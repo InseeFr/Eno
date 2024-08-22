@@ -19,7 +19,7 @@ dependencyResolutionManagement {
     }
 
     versionCatalogs {
-        libs {
+        create("libs") {
             version("lunatic-model", "3.13.0")
             version("pogues-model", "1.3.14")
             library("lunatic-model", "fr.insee.lunatic", "lunatic-model").versionRef("lunatic-model")
@@ -32,5 +32,5 @@ dependencyResolutionManagement {
 rootProject.name = "Eno"
 
 include("eno-core")
-include( "eno-treatments")
+include("eno-treatments")
 include("eno-ws")
