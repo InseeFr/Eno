@@ -56,6 +56,13 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
 }
 
+tasks.named<Test>("test") {
+    useJUnitPlatform()
+}
+tasks.named("check") {
+    dependsOn(tasks.test, tasks.jacocoTestReport)
+}
+
 publishing {
     publications {
         create<MavenPublication>("maven") {
