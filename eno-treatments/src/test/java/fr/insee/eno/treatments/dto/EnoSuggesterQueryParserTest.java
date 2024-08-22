@@ -16,7 +16,7 @@ class EnoSuggesterQueryParserTest {
     void whenConvertingToLunaticMappingIsCorrect() {
         EnoSuggesterQueryParser enoParser = new EnoSuggesterQueryParser("type", params);
         SuggesterQueryParser parser = EnoSuggesterQueryParser.toLunaticModel(enoParser);
-        assertEquals(parser.getType(), enoParser.getType());
+        assertEquals(parser.getType(), enoParser.type());
     }
 
     @Test

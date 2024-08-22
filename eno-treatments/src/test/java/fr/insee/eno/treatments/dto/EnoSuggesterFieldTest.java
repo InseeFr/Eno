@@ -24,12 +24,12 @@ class EnoSuggesterFieldTest {
         List<String> rules = List.of("rule1", "rule2");
         EnoSuggesterField enoField = new EnoSuggesterField("name", rules, "French", BigInteger.ONE, true, synonyms);
         SuggesterField field = EnoSuggesterField.toLunaticModel(enoField);
-        assertEquals(field.getName(), enoField.getName());
+        assertEquals(field.getName(), enoField.name());
         assertTrue(field.getRules().getPatterns().contains("rule1"));
         assertTrue(field.getRules().getPatterns().contains("rule2"));
-        assertEquals(field.getLanguage(), enoField.getLanguage());
-        assertEquals(field.getMin(), enoField.getMin());
-        assertEquals(field.getStemmer(), enoField.getStemmer());
+        assertEquals(field.getLanguage(), enoField.language());
+        assertEquals(field.getMin(), enoField.min());
+        assertEquals(field.getStemmer(), enoField.stemmer());
     }
 
     @ParameterizedTest

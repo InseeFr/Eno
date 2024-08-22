@@ -60,9 +60,9 @@ public class LunaticSuggesterSpecificTreatment implements ProcessingStep<Questio
         // Component to be replaced by a suggester component must be a simple response component
         if (component instanceof ComponentSimpleResponseType simpleResponse) {
             String responseName = simpleResponse.getResponse().getName();
-            if (enoSuggester.getResponseNames().contains(responseName)) {
+            if (enoSuggester.responseNames().contains(responseName)) {
                 component.setComponentType(ComponentTypeEnum.SUGGESTER);
-                component.setStoreName(enoSuggester.getName());
+                component.setStoreName(enoSuggester.name());
             }
         }
         // If Lunatic V3 question processing has been applied, look at the component within the question

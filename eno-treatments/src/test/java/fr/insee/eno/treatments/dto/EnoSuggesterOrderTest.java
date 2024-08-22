@@ -12,8 +12,8 @@ class EnoSuggesterOrderTest {
     void whenConvertingToLunaticMappingIsCorrect() {
         EnoSuggesterOrder enoOrder = new EnoSuggesterOrder("field", "type");
         SuggesterOrder order = EnoSuggesterOrder.toLunaticModel(enoOrder);
-        assertEquals(order.getField(), enoOrder.getField());
-        assertEquals(order.getType(), enoOrder.getType());
+        assertEquals(order.getField(), enoOrder.field());
+        assertEquals(order.getType(), enoOrder.type());
     }
 
     @Test
