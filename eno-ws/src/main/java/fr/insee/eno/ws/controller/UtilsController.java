@@ -1,6 +1,5 @@
 package fr.insee.eno.ws.controller;
 
-import fr.insee.eno.core.utils.XpathToVtl;
 import fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils;
 import fr.insee.eno.ws.exception.EnoControllerException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -66,9 +65,14 @@ public class UtilsController {
     @Deprecated(since = "3.18.1")
     public ResponseEntity<String> convertXpathToVTL(
             @RequestParam(value="xpath") String xpath) {
-        String result = XpathToVtl.parseToVTL(xpath);
-        log.info("Xpath expression given parsed to VTL: {}", result);
-        return ResponseEntity.ok().body(result);
+        log.info("Sending Xpath expression to Eno legacy service: {}", xpath);
+        URI uri = xmlControllerUtils.newUriBuilder()
+                .path("/utils/xpath-2-vtl")
+                .queryParam("xpath", xpath)
+                .build().toUri();
+        ResponseEntity<String> response = xmlControllerUtils.sendPostRequest(uri);
+        log.info("VTL expression received: {}", response.getBody());
+        return response;
     }
 
 }
