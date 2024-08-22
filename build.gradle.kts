@@ -1,10 +1,10 @@
 import org.sonarqube.gradle.SonarTask
 
 plugins {
-    id("java")
-    id("java-library")
     id("org.springframework.boot") version "3.3.1" apply false
     id("io.spring.dependency-management") version "1.1.6" apply false
+    id("application")
+    id("jacoco-report-aggregation")
     id("org.sonarqube") version "5.1.0.4882"
 }
 
@@ -22,6 +22,7 @@ allprojects {
 
 sonar {
     properties {
+        // The Jacoco coverage report is aggreated in the eno-ws module
         val codeCoveragePath = "$projectDir/eno-ws/build/reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml"
         println("Aggregated code coverage report location:$codeCoveragePath")
         property("sonar.coverage.jacoco.xmlReportPaths", codeCoveragePath)
