@@ -59,8 +59,46 @@ jobs:
             exit 1
           fi
 
+  sonar:
+    name: Sonar analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'temurin'
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_HOST_URL: "https://sonarcloud.io"
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew clean build sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr
+
   build-sources:
-    needs: check-version
+    needs: sonar
     runs-on: ubuntu-latest
     steps:
       - name: Set up JDK 21
@@ -75,7 +113,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build Eno modules
         run: |
-          ./gradlew build
+          ./gradlew build -x test
           mv ./eno-ws/build/libs/*.jar ./eno-ws/build/libs/eno-ws.jar
 
       - name: Upload Eno-WS jar
