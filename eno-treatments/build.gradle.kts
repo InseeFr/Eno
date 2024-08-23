@@ -25,14 +25,7 @@ dependencies {
     // Eno core
     implementation(project(":eno-core"))
     // Lunatic
-    implementation(libs.pogues.model)
-    // Pogues
     implementation(libs.lunatic.model)
-
-    // Spring
-    implementation("org.springframework:spring-core")
-    implementation("org.springframework:spring-beans")
-    implementation("org.springframework:spring-expression")
 
     // Jackson
     implementation("com.fasterxml.jackson.core:jackson-databind")
