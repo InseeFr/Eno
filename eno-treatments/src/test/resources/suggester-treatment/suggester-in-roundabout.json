@@ -1,0 +1,27 @@
+{
+  "suggesters": [
+    {
+      "responseNames": [
+        "Q2"
+      ],
+      "name": "FOO_CODE_LIST",
+      "fields": [
+        {
+          "name": "label",
+          "rules": [
+            "soft"
+          ],
+          "min": 2
+        },
+        {
+          "name": "id",
+          "rules": "soft"
+        }
+      ],
+      "queryParser": {
+        "type": "soft"
+      },
+      "version": "1"
+    }
+  ]
+}

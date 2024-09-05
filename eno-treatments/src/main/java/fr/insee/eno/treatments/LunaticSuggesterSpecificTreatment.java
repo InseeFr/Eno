@@ -43,9 +43,13 @@ public class LunaticSuggesterSpecificTreatment implements ProcessingStep<Questio
             components.forEach(component -> applySuggesterProperties(component, enoSuggester));
 
             components.stream()
-                    .filter(component -> component.getComponentType().equals(ComponentTypeEnum.LOOP))
+                    .filter(Loop.class::isInstance)
                     .map(Loop.class::cast)
                     .forEach(loop -> transformComponentsToSuggesters(loop.getComponents()));
+            components.stream()
+                    .filter(Roundabout.class::isInstance)
+                    .map(Roundabout.class::cast)
+                    .forEach(roundabout -> transformComponentsToSuggesters(roundabout.getComponents()));
         });
     }
 

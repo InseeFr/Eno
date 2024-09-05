@@ -5,9 +5,13 @@ import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.treatments.dto.SpecificTreatments;
+import fr.insee.lunatic.model.flat.ComponentTypeEnum;
+import fr.insee.lunatic.model.flat.Question;
 import fr.insee.lunatic.model.flat.Questionnaire;
+import fr.insee.lunatic.model.flat.Roundabout;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class LunaticSuggesterSpecificTreatmentTest {
@@ -44,6 +48,29 @@ class LunaticSuggesterSpecificTreatmentTest {
         suggesterProcessing.apply(lunaticQuestionnaire);
         //
         assertFalse(lunaticQuestionnaire.getSuggesters().isEmpty());
+    }
+
+    /** Integration test with a questionnaire that has a roundabout, and a suggester specific treatment on a question
+     * within the roundabout. */
+    @Test
+    void suggesterTest_lunaticV3_roundabout() throws DDIParsingException {
+        //
+        EnoParameters enoParameters = EnoParameters.of(EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
+        enoParameters.getLunaticParameters().setDsfr(true);
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+                this.getClass().getClassLoader().getResourceAsStream("suggester-treatment/ddi-m0p3wmjl.xml"),
+                enoParameters);
+        //
+        SpecificTreatmentsDeserializer treatmentsDeserializer = new SpecificTreatmentsDeserializer();
+        SpecificTreatments treatmentsInput = treatmentsDeserializer.deserialize(
+                this.getClass().getClassLoader().getResourceAsStream("suggester-treatment/suggester-in-roundabout.json"));
+        LunaticSuggesterSpecificTreatment suggesterProcessing = new LunaticSuggesterSpecificTreatment(treatmentsInput.suggesters());
+        suggesterProcessing.apply(lunaticQuestionnaire);
+        //
+        assertFalse(lunaticQuestionnaire.getSuggesters().isEmpty());
+        Roundabout roundabout = (Roundabout) lunaticQuestionnaire.getComponents().get(1);
+        assertEquals(ComponentTypeEnum.SUGGESTER,
+                ((Question) roundabout.getComponents().get(1)).getComponents().getFirst().getComponentType());
     }
 
 }
