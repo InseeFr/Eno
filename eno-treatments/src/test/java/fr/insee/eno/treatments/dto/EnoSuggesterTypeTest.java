@@ -30,12 +30,12 @@ class EnoSuggesterTypeTest {
                 BigInteger.ONE, List.of("stopWord1", "stopWord2"), order, queryParser, "url", BigInteger.ONE);
         SuggesterType type = EnoSuggesterType.toLunaticModel(enoType);
 
-        assertEquals(type.getName(), enoType.getName());
-        assertEquals(type.getMax(), enoType.getMax());
+        assertEquals(type.getName(), enoType.name());
+        assertEquals(type.getMax(), enoType.max());
         assertTrue(type.getStopWords().contains("stopWord1"));
         assertTrue(type.getStopWords().contains("stopWord2"));
-        assertEquals(type.getUrl(), enoType.getUrl());
-        assertEquals(type.getVersion(), enoType.getVersion());
+        assertEquals(type.getUrl(), enoType.url());
+        assertEquals(type.getVersion(), enoType.version());
     }
 
     @Test

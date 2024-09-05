@@ -5,8 +5,6 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.LunaticParameters;
 import fr.insee.eno.core.processing.ProcessingPipeline;
 import fr.insee.eno.core.processing.out.steps.lunatic.*;
-import fr.insee.eno.core.processing.out.steps.lunatic.calculatedvariable.ShapefromAttributeRetrieval;
-import fr.insee.eno.core.processing.out.steps.lunatic.calculatedvariable.ShapefromAttributeRetrievalFromVariableGroups;
 import fr.insee.eno.core.processing.out.steps.lunatic.pagination.LunaticAddPageNumbers;
 import fr.insee.eno.core.processing.out.steps.lunatic.resizing.LunaticAddResizing;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
@@ -35,7 +33,6 @@ public class LunaticProcessing {
         EnoIndex enoIndex = enoQuestionnaire.getIndex();
         assert enoIndex != null;
         EnoCatalog enoCatalog = new EnoCatalog(enoQuestionnaire);
-        ShapefromAttributeRetrieval shapefromAttributeRetrieval = new ShapefromAttributeRetrievalFromVariableGroups();
         //
         ProcessingPipeline<Questionnaire> processingPipeline = new ProcessingPipeline<>();
         processingPipeline.start(lunaticQuestionnaire)
@@ -44,7 +41,7 @@ public class LunaticProcessing {
                 .then(new LunaticLoopResolution(enoQuestionnaire))
                 .then(new LunaticTableProcessing(enoQuestionnaire))
                 .then(new LunaticInsertUniqueChoiceDetails(enoQuestionnaire))
-                .then(new LunaticDropdownLabels()) // this step should be temporary
+                .then(new LunaticEditLabelTypes()) // this step should be temporary
                 .then(new LunaticSuggestersConfiguration(enoQuestionnaire))
                 .then(new LunaticVariablesDimension(enoQuestionnaire))
                 .thenIf(lunaticParameters.isMissingVariables(),
@@ -55,10 +52,9 @@ public class LunaticProcessing {
                 .then(new LunaticAddCleaningVariables())
                 .thenIf(lunaticParameters.isControls(), new LunaticAddControlFormat())
                 .then(new LunaticReverseConsistencyControlLabel())
-                .then(new LunaticAddShapeToCalculatedVariables(enoQuestionnaire, shapefromAttributeRetrieval))
                 .then(new LunaticFinalizePairwise(enoQuestionnaire))
-                .thenIf(lunaticParameters.isFilterResult(),
-                        new LunaticFilterResult(enoQuestionnaire, shapefromAttributeRetrieval))
+                .thenIf(lunaticParameters.isFilterResult(), new LunaticFilterResult(enoIndex))
+                .then(new LunaticShapeFrom())
                 .thenIf(lunaticParameters.isDsfr(), new LunaticSequenceDescription())
                 .thenIf(lunaticParameters.isDsfr(), new LunaticInputNumberDescription(enoParameters.getLanguage()))
                 .thenIf(lunaticParameters.isDsfr(), new LunaticQuestionComponent())

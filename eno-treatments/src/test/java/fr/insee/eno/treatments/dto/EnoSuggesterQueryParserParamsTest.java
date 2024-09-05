@@ -15,9 +15,9 @@ class EnoSuggesterQueryParserParamsTest {
         EnoSuggesterQueryParserParams enoParams = new EnoSuggesterQueryParserParams(
                 "French", BigInteger.ONE, "pattern", false);
         SuggesterQueryParserParams params = EnoSuggesterQueryParserParams.toLunaticModel(enoParams);
-        assertEquals(params.getLanguage(), enoParams.getLanguage());
-        assertEquals(params.getMin(), enoParams.getMin());
-        assertEquals(params.getPattern(), enoParams.getPattern());
+        assertEquals(params.getLanguage(), enoParams.language());
+        assertEquals(params.getMin(), enoParams.min());
+        assertEquals(params.getPattern(), enoParams.pattern());
     }
 
     @Test

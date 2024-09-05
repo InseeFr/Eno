@@ -98,13 +98,18 @@ class LunaticAddMissingVariablesTest {
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         List<ComponentType> questionnaireComponents = lunaticQuestionnaire.getComponents();
 
+        // Add a non-response component to test if its presence doesn't generate a bug
+        Subsequence subsequence = new Subsequence();
+        subsequence.setComponentType(ComponentTypeEnum.SUBSEQUENCE);
+        subsequence.setId("subsequence-id");
 
-        List<ComponentType> loopComponents = new ArrayList<>(List.of(input, textarea, inputNumber, datepicker, checkboxBoolean, radio, checkboxOne, dropdown));
+        List<ComponentType> loopComponents = new ArrayList<>(List.of(subsequence, input, textarea, inputNumber, datepicker, checkboxBoolean, radio, checkboxOne, dropdown));
         Loop loop = buildLoop("jghdkmdf", loopComponents, paginatedLoop);
         questionnaireComponents.add(loop);
         processing.apply(lunaticQuestionnaire);
 
-        for (ComponentType component : loopComponents) {
+        for (int i = 1; i < loopComponents.size(); i ++) {
+            ComponentType component = loopComponents.get(i);
             assertEquals(component.getMissingResponse().getName(), enoCatalog.getQuestion(component.getId()).getName() + "_MISSING");
         }
         assertNull(loop.getMissingResponse());

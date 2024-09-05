@@ -1,7 +1,7 @@
 package fr.insee.eno.ws.controller.utils;
 
-import fr.insee.eno.legacy.parameters.OutFormat;
 import fr.insee.eno.ws.exception.EnoControllerException;
+import fr.insee.eno.ws.legacy.parameters.OutFormat;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.MediaType;
@@ -60,22 +60,35 @@ public class EnoXmlControllerUtils {
                 .body(result);
     }
 
+    public ResponseEntity<String> sendPostRequest(URI uri) {
+        String result = webClient.post()
+                .uri(uri)
+                .exchangeToMono(clientResponse -> clientResponse.bodyToMono(String.class))
+                .block();
+        return ResponseEntity.ok().body(result);
+    }
+
     public static void addMultipartToBody(MultipartBodyBuilder multipartBodyBuilder, MultipartFile multipartFile,
                                           String partName) throws EnoControllerException {
         try {
-            multipartBodyBuilder.part(partName, multipartFileToByteArray(multipartFile));
+            multipartBodyBuilder.part(partName, byteArrayResourceWithFileName(multipartFile.getBytes(), multipartFile.getOriginalFilename()));
         } catch (IOException e) {
             throw new EnoControllerException(
                     "Unable to access content of given file " + multipartFile.getOriginalFilename());
         }
     }
 
-    private static ByteArrayResource multipartFileToByteArray(MultipartFile multipartFile) throws IOException {
+    public static void addStringToMultipartBody(
+            MultipartBodyBuilder multipartBodyBuilder, String content, String fileName, String partName) {
+        multipartBodyBuilder.part(partName, byteArrayResourceWithFileName(content.getBytes(), fileName));
+    }
+
+    private static ByteArrayResource byteArrayResourceWithFileName(byte[] bytes, String fileName) {
         // Ugly but I didn't find anything better
-        return new ByteArrayResource(multipartFile.getBytes()) {
+        return new ByteArrayResource(bytes) {
             @Override
             public String getFilename() {
-                return multipartFile.getOriginalFilename();
+                return fileName;
             }
         };
     }

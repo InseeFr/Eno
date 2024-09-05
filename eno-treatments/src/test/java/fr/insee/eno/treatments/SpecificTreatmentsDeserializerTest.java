@@ -26,34 +26,34 @@ class SpecificTreatmentsDeserializerTest {
         assertNotNull(suggesters);
         assertEquals(2, suggesters.size());
         EnoSuggesterType suggester = suggesters.getFirst();
-        assertEquals("L_PCS_HOMMES-1-3-0", suggester.getName());
-        assertEquals("plop", suggester.getUrl());
-        assertEquals(BigInteger.ONE, suggester.getVersion());
-        assertTrue(suggester.getResponseNames().contains("PCS"));
-        assertEquals(BigInteger.TWO.longValue(), suggester.getMax().longValue());
+        assertEquals("L_PCS_HOMMES-1-3-0", suggester.name());
+        assertEquals("plop", suggester.url());
+        assertEquals(BigInteger.ONE, suggester.version());
+        assertTrue(suggester.responseNames().contains("PCS"));
+        assertEquals(BigInteger.TWO.longValue(), suggester.max().longValue());
 
-        assertEquals(23, suggester.getStopWords().size());
-        assertTrue(suggester.getStopWords().contains("a"));
-        assertTrue(suggester.getStopWords().contains("les"));
-        assertTrue(suggester.getStopWords().contains("du"));
+        assertEquals(23, suggester.stopWords().size());
+        assertTrue(suggester.stopWords().contains("a"));
+        assertTrue(suggester.stopWords().contains("les"));
+        assertTrue(suggester.stopWords().contains("du"));
 
-        assertEquals(2, suggester.getFields().size());
+        assertEquals(2, suggester.fields().size());
 
-        EnoSuggesterField field = suggester.getFields().getFirst();
-        assertEquals("French", field.getLanguage());
-        assertEquals("label", field.getName());
-        assertEquals(BigInteger.TWO.longValue(), field.getMin().longValue());
-        assertTrue(field.getStemmer());
-        assertEquals(2, field.getSynonyms().size());
-        assertEquals(1, field.getRules().size());
-        assertEquals("field", suggester.getOrder().getField());
-        assertEquals("ascending", suggester.getOrder().getType());
-        assertEquals("tokenized", suggester.getQueryParser().getType());
+        EnoSuggesterField field = suggester.fields().getFirst();
+        assertEquals("French", field.language());
+        assertEquals("label", field.name());
+        assertEquals(BigInteger.TWO.longValue(), field.min().longValue());
+        assertTrue(field.stemmer());
+        assertEquals(2, field.synonyms().size());
+        assertEquals(1, field.rules().size());
+        assertEquals("field", suggester.order().field());
+        assertEquals("ascending", suggester.order().type());
+        assertEquals("tokenized", suggester.queryParser().type());
 
-        EnoSuggesterQueryParserParams params = suggester.getQueryParser().getParams();
-        assertEquals("pattern", params.getPattern());
-        assertEquals("French", params.getLanguage());
-        assertEquals(BigInteger.ONE.longValue(), params.getMin().longValue());
+        EnoSuggesterQueryParserParams params = suggester.queryParser().params();
+        assertEquals("pattern", params.pattern());
+        assertEquals("French", params.language());
+        assertEquals(BigInteger.ONE.longValue(), params.min().longValue());
 
     }
 

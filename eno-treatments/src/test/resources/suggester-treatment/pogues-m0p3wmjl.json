@@ -1,0 +1,313 @@
+{
+  "id": "m0p3wmjl",
+  "Name": "ENO_SUGGESTER_ROUNDABOUT",
+  "Child": [
+    {
+      "id": "m0p7gzjz",
+      "Name": "S1",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m0p7alwr",
+          "Name": "Q1",
+          "type": "QuestionType",
+          "Label": [
+            "\"Question 1\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m0pi0g78",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m0p7ht2q"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"Loop sequence\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "m0p7dz81",
+      "Loop": {
+        "Name": "ROUNDABOUT_LOOP",
+        "MemberReference": [
+          "m0p7bori",
+          "m0p7bori"
+        ],
+        "IterableReference": "m0p7frb3"
+      },
+      "Name": "ROUNDABOUT",
+      "type": "RoundaboutType",
+      "Label": [
+        "\"Roundabout on S2\""
+      ],
+      "depth": 1,
+      "Locked": false,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "OccurrenceLabel": "\"Q1 answer: \" || $Q1$ ",
+      "OccurrenceDescription": ""
+    },
+    {
+      "id": "m0p7bori",
+      "Name": "S2",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m0p7qeou",
+          "Name": "Q2",
+          "type": "QuestionType",
+          "Label": [
+            "\"Question 2 (to be transformed into a suggester via specific treatment)\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m0pi0w27",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m0p79w46"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"Roundabout sequence\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "m0p7ou0q",
+      "Name": "S_LAST",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m0p7r6ph",
+          "Name": "Q_LAST",
+          "type": "QuestionType",
+          "Label": [
+            "\"Last question\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m0pi5wul",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m0p7beg0"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"Last sequence\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CATI",
+        "CAWI",
+        "PAPI",
+        "CAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "idendquest",
+      "Name": "QUESTIONNAIRE_END",
+      "type": "SequenceType",
+      "Child": [],
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    }
+  ],
+  "Label": [
+    "Eno - Suggester in roundabout"
+  ],
+  "final": false,
+  "owner": "DR59-SNDI80",
+  "agency": "fr.insee",
+  "CodeLists": {
+    "CodeList": []
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "m0p7ht2q",
+        "Name": "Q1",
+        "type": "CollectedVariableType",
+        "Label": "Q1 label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m0p79w46",
+        "Name": "Q2",
+        "type": "CollectedVariableType",
+        "Label": "Q2 label",
+        "Scope": "m0p7frb3",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m0p7beg0",
+        "Name": "Q_LAST",
+        "type": "CollectedVariableType",
+        "Label": "Q_LAST label",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      }
+    ]
+  },
+  "flowLogic": "FILTER",
+  "Iterations": {
+    "Iteration": [
+      {
+        "id": "m0p7frb3",
+        "Name": "LOOP",
+        "Step": "1",
+        "type": "DynamicIterationType",
+        "Maximum": "5",
+        "Minimum": "1",
+        "MemberReference": [
+          "m0p7gzjz",
+          "m0p7gzjz"
+        ]
+      }
+    ]
+  },
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "FlowControl": [],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "m0pi1i5k",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "idendquest",
+        "m0p7gzjz",
+        "m0p7alwr",
+        "m0p7bori",
+        "m0p7qeou",
+        "m0p7ou0q",
+        "m0p7r6ph"
+      ]
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "s2106-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2106-dc",
+      "Name": "Enquête capacité à innover et stratégie 2022"
+    }
+  ],
+  "lastUpdatedDate": "Thu Sep 05 2024 18:24:33 GMT+0200 (heure d’été d’Europe centrale)",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": []
+}

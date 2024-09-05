@@ -54,7 +54,7 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
         // Note: the concept of missing block and reversed missing block is quite tricky to understand as it is now.
         // This will be properly implemented in Lunatic-Model later on.
 
-        List<ComponentType> components = LunaticUtils.getResponseComponents(lunaticQuestionnaire.getComponents());
+        List<ComponentType> components = lunaticQuestionnaire.getComponents();
 
         components.forEach(component -> processComponentsMissingResponse(component, lunaticQuestionnaire));
 
@@ -83,7 +83,9 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
 
             case LOOP -> {
                 Loop loop = (Loop) component;
-                LunaticUtils.getResponseComponents(loop.getComponents()).forEach(loopComponent -> {
+                loop.getComponents().stream()
+                        .filter(LunaticUtils::isResponseComponent)
+                        .forEach(loopComponent -> {
                     Question question = enoCatalog.getQuestion(loopComponent.getId());
                     String missingResponseName = setMissingResponse(loopComponent, question.getName());
                     addMissingVariable(missingResponseName, new CollectedVariableValues.Array(), lunaticQuestionnaire);
@@ -104,6 +106,10 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
             }
 
             default -> {
+                // Ignore non response components
+                if (! LunaticUtils.isResponseComponent(component))
+                    return;
+                //
                 Question question = enoCatalog.getQuestion(component.getId());
                 String missingResponseName = setMissingResponse(component, question.getName());
                 addMissingVariable(missingResponseName, new CollectedVariableValues.Scalar(), lunaticQuestionnaire);
@@ -147,7 +153,7 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
                 .filter(componentType -> componentType.getMissingResponse() != null)
                 .map(component -> {
                     String missingResponseName = component.getMissingResponse().getName();
-                    List<String> names = LunaticUtils.getResponseNames(component);
+                    List<String> names = LunaticUtils.getDirectResponseNames(component);
                     MissingEntry missingEntry = new MissingEntry(missingResponseName);
                     names.forEach(name -> missingEntry.getCorrespondingVariables().add(name));
                     return missingEntry;
@@ -158,7 +164,7 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
         missingBlocks.addAll(components.stream()
                 .filter(componentType -> componentType.getComponentType().equals(ComponentTypeEnum.LOOP))
                 .map(Loop.class::cast)
-                .map(linkedLoop -> createMissingBlocks(LunaticUtils.getResponseComponents(linkedLoop.getComponents())))
+                .map(loop -> createMissingBlocks(loop.getComponents()))
                 .flatMap(Collection::stream)
                 .toList());
 
@@ -166,7 +172,7 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
         missingBlocks.addAll(components.stream()
                 .filter(componentType -> componentType.getComponentType().equals(ComponentTypeEnum.PAIRWISE_LINKS))
                 .map(PairwiseLinks.class::cast)
-                .map(pairwiseLinks -> createMissingBlocks(LunaticUtils.getResponseComponents(pairwiseLinks.getComponents())))
+                .map(pairwiseLinks -> createMissingBlocks(pairwiseLinks.getComponents()))
                 .flatMap(Collection::stream)
                 .toList());
 
