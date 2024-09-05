@@ -10,7 +10,7 @@
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
-             isMaintainable="true"><!--Eno version : 2.9.10. Generation date : 05/09/2024 - 11:24:33-->
+             isMaintainable="true"><!--Eno version : 2.9.10. Generation date : 05/09/2024 - 16:25:17-->
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-m0p3wmjl</r:ID>
    <r:Version>1</r:Version>
@@ -39,12 +39,12 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">"Q1 answer: " || ¤m0p7alwr-QOP-m0p7cbx3¤  </d:Text>
+                  <d:Text xml:lang="fr-FR">"Q1 answer: " || ¤m0p7alwr-QOP-m0pi99lp¤  </d:Text>
                </d:LiteralText>
                <d:ConditionalText>
                   <r:SourceParameterReference>
                      <r:Agency>fr.insee</r:Agency>
-                     <r:ID>m0p7alwr-QOP-m0p7cbx3</r:ID>
+                     <r:ID>m0p7alwr-QOP-m0pi99lp</r:ID>
                      <r:Version>1</r:Version>
                      <r:TypeOfObject>OutParameter</r:TypeOfObject>
                   </r:SourceParameterReference>
@@ -287,7 +287,7 @@
             </d:QuestionItemName>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m0p7alwr-QOP-m0p7cbx3</r:ID>
+               <r:ID>m0p7alwr-QOP-m0pi99lp</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">Q1</r:String>
@@ -296,13 +296,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m0p7alwr-RDOP-m0p7cbx3</r:ID>
+                  <r:ID>m0p7alwr-RDOP-m0pi99lp</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m0p7alwr-QOP-m0p7cbx3</r:ID>
+                  <r:ID>m0p7alwr-QOP-m0pi99lp</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -315,7 +315,7 @@
             <d:TextDomain maxLength="249">
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m0p7alwr-RDOP-m0p7cbx3</r:ID>
+                  <r:ID>m0p7alwr-RDOP-m0pi99lp</r:ID>
                   <r:Version>1</r:Version>
                   <r:TextRepresentation maxLength="249"/>
                </r:OutParameter>
@@ -330,7 +330,7 @@
             </d:QuestionItemName>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m0p7qeou-QOP-m0p7kpcm</r:ID>
+               <r:ID>m0p7qeou-QOP-m0pi70f0</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">Q2</r:String>
@@ -339,26 +339,26 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m0p7qeou-RDOP-m0p7kpcm</r:ID>
+                  <r:ID>m0p7qeou-RDOP-m0pi70f0</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m0p7qeou-QOP-m0p7kpcm</r:ID>
+                  <r:ID>m0p7qeou-QOP-m0pi70f0</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">"Question 2"</d:Text>
+                  <d:Text xml:lang="fr-FR">"Question 2 (to be transformed into a suggester via specific treatment)"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:TextDomain maxLength="249">
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m0p7qeou-RDOP-m0p7kpcm</r:ID>
+                  <r:ID>m0p7qeou-RDOP-m0pi70f0</r:ID>
                   <r:Version>1</r:Version>
                   <r:TextRepresentation maxLength="249"/>
                </r:OutParameter>
@@ -373,7 +373,7 @@
             </d:QuestionItemName>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m0p7r6ph-QOP-m0p7cppg</r:ID>
+               <r:ID>m0p7r6ph-QOP-m0pi9pwr</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">Q_LAST</r:String>
@@ -382,13 +382,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m0p7r6ph-RDOP-m0p7cppg</r:ID>
+                  <r:ID>m0p7r6ph-RDOP-m0pi9pwr</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m0p7r6ph-QOP-m0p7cppg</r:ID>
+                  <r:ID>m0p7r6ph-QOP-m0pi9pwr</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -401,7 +401,7 @@
             <d:NominalDomain>
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m0p7r6ph-RDOP-m0p7cppg</r:ID>
+                  <r:ID>m0p7r6ph-RDOP-m0pi9pwr</r:ID>
                   <r:Version>1</r:Version>
                   <r:CodeRepresentation>
                      <r:CodeSubsetInformation>
@@ -488,7 +488,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m0p7alwr-QOP-m0p7cbx3</r:ID>
+               <r:ID>m0p7alwr-QOP-m0pi99lp</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -514,7 +514,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m0p7qeou-QOP-m0p7kpcm</r:ID>
+               <r:ID>m0p7qeou-QOP-m0pi70f0</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -540,7 +540,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m0p7r6ph-QOP-m0p7cppg</r:ID>
+               <r:ID>m0p7r6ph-QOP-m0pi9pwr</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
