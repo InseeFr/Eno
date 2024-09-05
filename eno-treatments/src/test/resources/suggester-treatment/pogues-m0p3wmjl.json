@@ -18,7 +18,7 @@
           "Control": [],
           "Response": [
             {
-              "id": "m0p7m6tj",
+              "id": "m0pi0g78",
               "Datatype": {
                 "type": "TextDatatypeType",
                 "Pattern": "",
@@ -94,13 +94,13 @@
           "Name": "Q2",
           "type": "QuestionType",
           "Label": [
-            "\"Question 2\""
+            "\"Question 2 (to be transformed into a suggester via specific treatment)\""
           ],
           "depth": 2,
           "Control": [],
           "Response": [
             {
-              "id": "m0p7a4hc",
+              "id": "m0pi0w27",
               "Datatype": {
                 "type": "TextDatatypeType",
                 "Pattern": "",
@@ -153,7 +153,7 @@
           "Control": [],
           "Response": [
             {
-              "id": "m0p7khi0",
+              "id": "m0pi5wul",
               "Datatype": {
                 "type": "BooleanDatatypeType",
                 "typeName": "BOOLEAN"
@@ -284,7 +284,7 @@
   "genericName": "QUESTIONNAIRE",
   "ComponentGroup": [
     {
-      "id": "m0p7mmkz",
+      "id": "m0pi1i5k",
       "Name": "PAGE_1",
       "Label": [
         "Components for page 1"
@@ -307,7 +307,7 @@
       "Name": "Enquête capacité à innover et stratégie 2022"
     }
   ],
-  "lastUpdatedDate": "Thu Sep 05 2024 13:24:28 GMT+0200 (heure d’été d’Europe centrale)",
+  "lastUpdatedDate": "Thu Sep 05 2024 18:24:33 GMT+0200 (heure d’été d’Europe centrale)",
   "formulasLanguage": "VTL",
   "childQuestionnaireRef": []
 }
