@@ -83,7 +83,9 @@ public class LunaticAddMissingVariables implements ProcessingStep<Questionnaire>
 
             case LOOP -> {
                 Loop loop = (Loop) component;
-                loop.getComponents().forEach(loopComponent -> {
+                loop.getComponents().stream()
+                        .filter(LunaticUtils::isResponseComponent)
+                        .forEach(loopComponent -> {
                     Question question = enoCatalog.getQuestion(loopComponent.getId());
                     String missingResponseName = setMissingResponse(loopComponent, question.getName());
                     addMissingVariable(missingResponseName, new CollectedVariableValues.Array(), lunaticQuestionnaire);
