@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.26.3] - 2024-09-06
+### :sparkles: New Features
+- [`544f76f`](https://github.com/InseeFr/Eno/commit/544f76f823abf05aa211ba1791a6afd470c30eb2) - list of variables in lunatic shape from *(commit by [@nsenave](https://github.com/nsenave))*
+- [`bc8eabd`](https://github.com/InseeFr/Eno/commit/bc8eabdbc2043fb15ddacb6a14a4c09d6e6137aa) - improve generation of filter result variables *(commit by [@nsenave](https://github.com/nsenave))*
+- [`e015eb0`](https://github.com/InseeFr/Eno/commit/e015eb04c8f0d1d402c473fccb8f2257c134a3b3) - **ws**: direct pogues to lunatic endpoints *(commit by [@nsenave](https://github.com/nsenave))*
+
+### :bug: Bug Fixes
+- [`8461180`](https://github.com/InseeFr/Eno/commit/8461180843f34287c5aa7f8056e2ce4d8030ea4a) - set sequence label type to VTL *(PR [#1092](https://github.com/InseeFr/Eno/pull/1092) by [@nsenave](https://github.com/nsenave))*
+- [`69749c2`](https://github.com/InseeFr/Eno/commit/69749c2455ec953b7b1738bcc0f1900e027ec08c) - set type of generated descriptions to TXT *(PR [#1093](https://github.com/InseeFr/Eno/pull/1093) by [@nsenave](https://github.com/nsenave))*
+- [`3eee914`](https://github.com/InseeFr/Eno/commit/3eee914ea604b286384d1ba539bb5763557067a5) - null pointer exception in lunatic missing variables processing *(commit by [@nsenave](https://github.com/nsenave))*
+- [`fab1847`](https://github.com/InseeFr/Eno/commit/fab1847a17a5d50ab83d34ebfa8ad2f2a5da1feb) - suggester specific treatment with roundabout *(commit by [@nsenave](https://github.com/nsenave))*
+
+### :recycle: Refactors
+- [`bcb995b`](https://github.com/InseeFr/Eno/commit/bcb995bde852639d71c34efdb55ae3281d6a33bf) - update shape from for pairwise *(commit by [@nsenave](https://github.com/nsenave))*
+- [`3f72ddf`](https://github.com/InseeFr/Eno/commit/3f72ddfac52bf16d2b03efb0b3330c6b40ac7b64) - canvas for java pogues to lunatic transformation *(commit by [@nsenave](https://github.com/nsenave))*
+
+### :construction_worker: Build System
+- [`a9f038a`](https://github.com/InseeFr/Eno/commit/a9f038a5d3aa8433caf4922e5fc3b88fb3d0c7ce) - switch to gradle kotlin dsl *(PR [#1098](https://github.com/InseeFr/Eno/pull/1098) by [@nsenave](https://github.com/nsenave))*
+- [`c060bc2`](https://github.com/InseeFr/Eno/commit/c060bc272a17d8441889100c949cd67f3097c837) - run sonar analysis in release workflow *(commit by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.24.2] - 2024-08-13
 ### :bug: Bug Fixes
 - [`4e7f570`](https://github.com/InseeFr/Eno/commit/4e7f570a18ae647716aa96e30c8929d70ebd91f5) - subsequence pagination in regrouping treatment *(PR [#1095](https://github.com/InseeFr/Eno/pull/1095) by [@nsenave](https://github.com/nsenave))*
@@ -278,3 +299,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.23.8]: https://github.com/InseeFr/Eno/compare/3.23.7...3.23.8
 [3.24.0]: https://github.com/InseeFr/Eno/compare/3.23.8...3.24.0
 [3.24.2]: https://github.com/InseeFr/Eno/compare/3.24.1...3.24.2
+[3.26.3]: https://github.com/InseeFr/Eno/compare/3.24.2...3.26.3
