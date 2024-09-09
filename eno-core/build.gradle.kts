@@ -19,8 +19,8 @@ tasks.named<Jar>("jar") {
     enabled = true
 }
 
-val ddiJavaLibVersion = "1.0.0"
-val modelMapperVersion = "3.2.0"
+val ddiJavaLibVersion = "1.1.0"
+val modelMapperVersion = "3.2.1"
 
 dependencies {
     // DDI
