@@ -73,7 +73,7 @@ class PairwiseQuestionTest {
         assertEquals("PAIRWISE_QUESTION", lunaticPairwiseDropDown.getResponse().getName());
         assertEquals(4, lunaticPairwiseDropDown.getOptions().size());
         assertEquals(List.of("linkA", "linkB", "linkC", "linkD"),
-                lunaticPairwiseDropDown.getOptions().stream().map(Options::getValue).toList());
+                lunaticPairwiseDropDown.getOptions().stream().map(Option::getValue).toList());
         // Note: for now the symLinks property is added (hard-coded values) by Lunatic-Model
     }
 

@@ -113,9 +113,9 @@ class LunaticReverseConsistencyControlLabelTest {
         CheckboxGroup input = new CheckboxGroup();
         input.setComponentType(ComponentTypeEnum.CHECKBOX_GROUP);
         input.setId(id);
-        List<ResponsesCheckboxGroup> responses = names.stream()
+        List<ResponseCheckboxGroup> responses = names.stream()
                 .map(name -> {
-                    ResponsesCheckboxGroup response = new ResponsesCheckboxGroup();
+                    ResponseCheckboxGroup response = new ResponseCheckboxGroup();
                     response.setId(id+"-"+name);
                     return response;
                 }).toList();

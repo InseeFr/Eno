@@ -156,7 +156,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                     .toList();
 
             case CHECKBOX_GROUP -> cleanedVariableEntries = ((CheckboxGroup) componentType).getResponses().stream()
-                    .map(ResponsesCheckboxGroup::getResponse)
+                    .map(ResponseCheckboxGroup::getResponse)
                     .map(ResponseType::getName)
                     .map(name -> new CleanedVariableEntry(name, conditionFilter))
                     .toList();
