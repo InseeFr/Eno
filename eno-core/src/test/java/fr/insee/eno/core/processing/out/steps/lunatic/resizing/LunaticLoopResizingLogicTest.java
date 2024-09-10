@@ -171,8 +171,8 @@ class LunaticLoopResizingLogicTest {
         //
         CheckboxGroup checkboxGroup = new CheckboxGroup();
         checkboxGroup.setComponentType(ComponentTypeEnum.CHECKBOX_GROUP);
-        checkboxGroup.getResponses().add(new ResponsesCheckboxGroup());
-        checkboxGroup.getResponses().add(new ResponsesCheckboxGroup());
+        checkboxGroup.getResponses().add(new ResponseCheckboxGroup());
+        checkboxGroup.getResponses().add(new ResponseCheckboxGroup());
         checkboxGroup.getResponses().forEach(responses -> responses.setResponse(new ResponseType()));
         checkboxGroup.getResponses().get(0).getResponse().setName("RESPONSE_VAR1");
         checkboxGroup.getResponses().get(1).getResponse().setName("RESPONSE_VAR2");

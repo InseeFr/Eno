@@ -75,10 +75,10 @@ public class LunaticInsertUniqueChoiceDetails implements ProcessingStep<Question
      * @param optionsList List of Lunatic unique choice options.
      * @return True if insertion failed.
      */
-    private static boolean insertDetailInOption(DetailResponse detailResponse, String value, List<Options> optionsList) {
+    private static boolean insertDetailInOption(DetailResponse detailResponse, String value, List<Option> optionsList) {
         // Note: 'Options' class name should be singular in Lunatic-Model...
-        Optional<Options> correspondingOption = optionsList.stream()
-                .filter(options -> value.equals(options.getValue()))
+        Optional<Option> correspondingOption = optionsList.stream()
+                .filter(option -> value.equals(option.getValue()))
                 .findAny();
         if (correspondingOption.isEmpty())
             return true;

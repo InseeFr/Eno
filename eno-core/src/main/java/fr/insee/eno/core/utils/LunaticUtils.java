@@ -80,7 +80,7 @@ public class LunaticUtils {
             }
             // Multiple response components
             case CHECKBOX_GROUP -> ((CheckboxGroup) component).getResponses().stream()
-                    .map(ResponsesCheckboxGroup::getResponse)
+                    .map(ResponseCheckboxGroup::getResponse)
                     .map(ResponseType::getName)
                     .toList();
             case ROSTER_FOR_LOOP -> ((RosterForLoop) component).getComponents().stream()
