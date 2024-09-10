@@ -32,8 +32,6 @@ public class LinkedLoop extends Loop {
     @DDI("T(fr.insee.eno.core.model.navigation.LinkedLoop).findLoopReference(#this, #index)")
     private String reference;
 
-    // TODO: method bindings -> no fully qualified classes in spel in annotations
-
     /**
      * In current DDI modeling, a loop object that is based on another loop does not directly have a reference towards
      * the loop it is "based on".
