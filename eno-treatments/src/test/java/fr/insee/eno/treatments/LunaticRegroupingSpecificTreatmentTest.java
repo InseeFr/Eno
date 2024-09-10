@@ -3,10 +3,7 @@ package fr.insee.eno.treatments;
 import fr.insee.eno.treatments.dto.Regroupement;
 import fr.insee.lunatic.conversion.JsonDeserializer;
 import fr.insee.lunatic.exception.SerializationException;
-import fr.insee.lunatic.model.flat.Input;
-import fr.insee.lunatic.model.flat.Question;
-import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.ResponseType;
+import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -19,7 +16,7 @@ class LunaticRegroupingSpecificTreatmentTest {
     void regroupQuestions() {
         //
         Questionnaire questionnaire = new Questionnaire();
-        questionnaire.setPagination("question");
+        questionnaire.setPagination(Pagination.QUESTION);
         Input input1 = new Input();
         input1.setPage("1");
         input1.setResponse(new ResponseType());
@@ -44,7 +41,7 @@ class LunaticRegroupingSpecificTreatmentTest {
     void regroupQuestions_dsfrMode() {
         //
         Questionnaire questionnaire = new Questionnaire();
-        questionnaire.setPagination("question");
+        questionnaire.setPagination(Pagination.QUESTION);
         //
         Question question1 = new Question();
         question1.setPage("1");

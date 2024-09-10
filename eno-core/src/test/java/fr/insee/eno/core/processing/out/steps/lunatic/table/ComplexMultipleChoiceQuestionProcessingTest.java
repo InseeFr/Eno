@@ -179,7 +179,7 @@ class ComplexMultipleChoiceQuestionProcessingTest {
             int responseCellIndex = bodyLine.getBodyCells().size() - 1;
             BodyCell responseCell = bodyLine.getBodyCells().get(responseCellIndex);
             assertEquals(5, responseCell.getOptions().size());
-            assertThat(responseCell.getOptions().stream().map(Options::getValue).toList())
+            assertThat(responseCell.getOptions().stream().map(Option::getValue).toList())
                     .containsExactlyElementsOf(expectedResponseCellValues);
         });
     }

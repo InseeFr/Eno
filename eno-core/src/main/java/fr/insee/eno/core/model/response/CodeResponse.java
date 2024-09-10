@@ -7,7 +7,7 @@ import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.label.Label;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.lunatic.model.flat.ResponsesCheckboxGroup;
+import fr.insee.lunatic.model.flat.ResponseCheckboxGroup;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Context(format = Format.DDI, type = ParameterType.class)
-@Context(format = Format.LUNATIC, type = ResponsesCheckboxGroup.class)
+@Context(format = Format.LUNATIC, type = ResponseCheckboxGroup.class)
 public class CodeResponse extends EnoIdentifiableObject {
 
     /** Label of this modality.

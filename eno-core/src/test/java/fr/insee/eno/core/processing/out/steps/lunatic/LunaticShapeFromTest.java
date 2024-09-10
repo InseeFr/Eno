@@ -33,8 +33,8 @@ class LunaticShapeFromTest {
         CheckboxGroup checkboxGroup = new CheckboxGroup();
         checkboxGroup.setId("checkbox-group-id");
         checkboxGroup.setComponentType(ComponentTypeEnum.CHECKBOX_GROUP);
-        checkboxGroup.getResponses().add(new ResponsesCheckboxGroup());
-        checkboxGroup.getResponses().add(new ResponsesCheckboxGroup());
+        checkboxGroup.getResponses().add(new ResponseCheckboxGroup());
+        checkboxGroup.getResponses().add(new ResponseCheckboxGroup());
         checkboxGroup.getResponses().get(0).setResponse(new ResponseType());
         checkboxGroup.getResponses().get(0).getResponse().setName("BAR1");
         checkboxGroup.getResponses().get(1).setResponse(new ResponseType());

@@ -9,7 +9,7 @@ import fr.insee.eno.core.model.label.Label;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.BodyCell;
 import fr.insee.lunatic.model.flat.HeaderType;
-import fr.insee.lunatic.model.flat.Options;
+import fr.insee.lunatic.model.flat.Option;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +24,7 @@ import java.util.List;
 @Getter
 @Setter
 @Context(format = Format.DDI, type = CodeType.class)
-@Context(format = Format.LUNATIC, type = {Options.class, HeaderType.class, BodyCell.class})
+@Context(format = Format.LUNATIC, type = {Option.class, HeaderType.class, BodyCell.class})
 public class CodeItem extends EnoObject {
 
     @DDI("getIDArray(0).getStringValue()")

@@ -73,9 +73,9 @@ public class LunaticConverter {
         if (enoObject instanceof DetailResponse)
             return new fr.insee.lunatic.model.flat.DetailResponse();
         if (enoObject instanceof CodeItem)
-            return new Options();
+            return new Option();
         if (enoObject instanceof CodeResponse)
-            return new ResponsesCheckboxGroup();
+            return new ResponseCheckboxGroup();
         if (isInstanceOfLunaticLAbel(enoObject))
             return new LabelType();
         //
