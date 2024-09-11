@@ -13,15 +13,15 @@ public class PoguesToLunatic {
 
     /**
      * Transform given Pogues input stream into a Lunatic questionnaire object using parameters given.
-     * @param ddiInputStream Input stream of a Pogues json questionnaire.
+     * @param poguesInputStream Input stream of a Pogues json questionnaire.
      * @param enoParameters Eno parameters object.
      * @return Lunatic questionnaire object.
      * @throws PoguesDeserializationException if the input stream given cannot be parsed to a Pogues questionnaire.
      */
-    public static Questionnaire transform(InputStream ddiInputStream, EnoParameters enoParameters)
+    public static Questionnaire transform(InputStream poguesInputStream, EnoParameters enoParameters)
             throws PoguesDeserializationException {
         //
-        EnoQuestionnaire enoQuestionnaire = PoguesToEno.transform(ddiInputStream, enoParameters);
+        EnoQuestionnaire enoQuestionnaire = PoguesToEno.transform(poguesInputStream, enoParameters);
         //
         return EnoToLunatic.transform(enoQuestionnaire, enoParameters);
     }
