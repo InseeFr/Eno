@@ -15,8 +15,6 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.convert.TypeDescriptor;
 
-import java.lang.reflect.Modifier;
-
 /**
  * Mapper implementation for the DDI input format.
  * While mapping a DDI object to an Eno object, the mapper builds an index of Eno objects.
@@ -24,18 +22,17 @@ import java.lang.reflect.Modifier;
 @Slf4j
 public class DDIMapper extends InMapper {
 
-    private DDIIndex ddiIndex;
-
     public DDIMapper() {
-        super(Format.DDI);
+        super(Format.DDI, new DDIConverter());
     }
 
     @Override
     void specificSetup(Object inputObject) {
         AbstractIdentifiableType ddiObject = (AbstractIdentifiableType) inputObject;
         log.debug("DDI mapping entry object: " + DDIUtils.ddiToString(ddiObject));
-        ddiIndex = new DDIIndex();
+        DDIIndex ddiIndex = new DDIIndex();
         ddiIndex.indexDDIObject(ddiObject);
+        ((DDIConverter) inConverter).setIndex(ddiIndex);
         spelEngine.getContext().setVariable("index", ddiIndex);
     }
 
@@ -59,15 +56,6 @@ public class DDIMapper extends InMapper {
         if (ddiAnnotation == null)
             return null;
         return new InAnnotationValues(ddiAnnotation.value(), ddiAnnotation.allowNullList(), ddiAnnotation.debug());
-    }
-
-    @Override
-    EnoObject convert(Object ddiObject, Class<?> enoTargetType) {
-        // If the Eno type is abstract call the converter
-        if (Modifier.isAbstract(enoTargetType.getModifiers()))
-            return DDIConverter.instantiateFromDDIObject(ddiObject, ddiIndex, enoTargetType); //TODO: remove usage of this (conversion using annotations)
-        // Else, call class constructor
-        return callConstructor(enoTargetType);
     }
 
 }
