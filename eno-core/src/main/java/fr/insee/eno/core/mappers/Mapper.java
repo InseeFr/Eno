@@ -18,8 +18,13 @@ import java.util.Optional;
 @Slf4j
 public class Mapper {
 
-    Format format;
-    EnoSpelEngine spelEngine;
+    final Format format;
+    final EnoSpelEngine spelEngine;
+
+    public Mapper(Format format) {
+        this.format = format;
+        this.spelEngine = new EnoSpelEngine(format);
+    }
 
     public static Iterator<PropertyDescriptor> propertyDescriptorIterator(BeanWrapper beanWrapper) {
         return Arrays.stream(beanWrapper.getPropertyDescriptors())

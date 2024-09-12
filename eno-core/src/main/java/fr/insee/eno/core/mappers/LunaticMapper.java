@@ -5,7 +5,6 @@ import fr.insee.eno.core.converter.LunaticConverter;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.eno.core.utils.EnoSpelEngine;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanWrapper;
@@ -27,8 +26,7 @@ import java.util.List;
 public class LunaticMapper extends Mapper {
 
     public LunaticMapper() {
-        this.format = Format.LUNATIC;
-        spelEngine = new EnoSpelEngine(format);
+        super(Format.LUNATIC);
     }
 
     /**

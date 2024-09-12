@@ -1,12 +1,12 @@
 package fr.insee.eno.core.mappers;
 
 import fr.insee.eno.core.annotations.InAnnotationValues;
+import fr.insee.eno.core.converter.InConverter;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.EnoIndex;
-import fr.insee.eno.core.utils.EnoSpelEngine;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
@@ -16,6 +16,7 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -26,16 +27,20 @@ import java.util.List;
 @Slf4j
 public abstract class InMapper extends Mapper {
 
+    /** Converter class to convert input objects into Eno model objects. */
+    final InConverter inConverter;
+
     /** Index created in the entry object of mapping functions. */
     private EnoIndex enoIndex;
 
-    InMapper(Format format) {
-        this.format = format;
+    InMapper(Format format, InConverter inConverter) {
+        super(format);
+        this.inConverter = inConverter;
     }
 
     private void setup(Object inputObject, EnoObject enoObject) {
         // Init the context
-        spelEngine = new EnoSpelEngine(format);
+        spelEngine.resetContext();
         // Eno index to be filled by the mapper
         enoIndex = new EnoIndex();
         enoObject.setIndex(enoIndex);
@@ -221,7 +226,13 @@ public abstract class InMapper extends Mapper {
         }
     }
 
-    abstract EnoObject convert(Object inputObject, Class<?> enoTargetType);
+    private EnoObject convert(Object ddiObject, Class<?> enoTargetType) {
+        // If the Eno type is abstract call the converter
+        if (Modifier.isAbstract(enoTargetType.getModifiers()))
+            return inConverter.convertToEno(ddiObject, enoTargetType);
+        // Else, call class constructor
+        return callConstructor(enoTargetType);
+    }
 
     EnoObject callConstructor(Class<?> classType) {
         try {
