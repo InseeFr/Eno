@@ -10,24 +10,28 @@ import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.question.table.TableCell;
 import fr.insee.eno.core.model.response.ModalityAttachment;
 import fr.insee.eno.core.reference.DDIIndex;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
+@Setter
 @Slf4j
-public class DDIConverter {
+public class DDIConverter implements InConverter {
 
-    private DDIConverter() {}
+    /** DDI index, required to retrieve information across a DDI for certain conversions. */
+    private DDIIndex index;
 
     /**
-     * Return an Eno instance corresponding to the given DDI object.
+     * Returns an Eno instance corresponding to the given DDI object.
      * @return A Eno model object.
      */
-    public static EnoObject instantiateFromDDIObject(Object ddiObject, DDIIndex ddiIndex, Class<?> enoType) {
+    @Override
+    public EnoObject convertToEno(Object ddiObject, Class<?> enoType) {
 
         if (ddiObject instanceof LoopType loopType)
             return DDILoopConversion.instantiateFrom(loopType);
 
         if (ddiObject instanceof QuestionItemType questionItemType)
-            return DDIQuestionItemConversion.instantiateFrom(questionItemType, ddiIndex);
+            return DDIQuestionItemConversion.instantiateFrom(questionItemType, index);
 
         if (ddiObject instanceof QuestionGridType questionGridType)
             return DDIQuestionGridConversion.instantiateFrom(questionGridType);

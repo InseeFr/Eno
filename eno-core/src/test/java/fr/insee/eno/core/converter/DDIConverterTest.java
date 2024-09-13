@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DDIConverterTest {
@@ -66,9 +67,9 @@ class DDIConverterTest {
         QuestionItemType ddiQuestionItem = QuestionItemDocument.Factory.parse(
                 new ByteArrayInputStream(stringInput.getBytes())).getQuestionItem();
         //
-        EnoObject result = DDIConverter.instantiateFromDDIObject(ddiQuestionItem, null, SingleResponseQuestion.class);
+        EnoObject result = new DDIConverter().convertToEno(ddiQuestionItem, SingleResponseQuestion.class);
         //
-        assertTrue(result instanceof TextQuestion);
+        assertInstanceOf(TextQuestion.class, result);
     }
 
 }
