@@ -14,13 +14,6 @@ public class PoguesMapper extends InMapper {
         super(Format.POGUES, new PoguesConverter());
     }
 
-    /**
-     * Nothing special to do
-     * @param inputObject Pogues model object.
-     */
-    @Override
-    void specificSetup(Object inputObject) {}
-
     public void mapPoguesQuestionnaire(Questionnaire poguesQuestionnaire, EnoQuestionnaire enoQuestionnaire) {
         mapInputObject(poguesQuestionnaire, enoQuestionnaire);
     }
