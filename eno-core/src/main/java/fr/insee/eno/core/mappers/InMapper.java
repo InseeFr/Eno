@@ -52,7 +52,7 @@ public abstract class InMapper extends Mapper {
      * Method called at the end of the setup method.
      * Designed to add setup steps that are specific to concrete mappers.
      */
-    abstract void specificSetup(Object inputObject);
+    void specificSetup(Object inputObject) {}
 
     void mapInputObject(Object inputObject, EnoObject enoObject) {
         //
