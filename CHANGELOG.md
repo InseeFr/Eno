@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.26.4] - 2024-09-17
+### :sparkles: New Features
+- [`ef4794d`](https://github.com/InseeFr/Eno/commit/ef4794daddb3c70f324b92f6d76afcf615941474) - init pogues mapper *(PR [#1103](https://github.com/InseeFr/Eno/pull/1103) by [@nsenave](https://github.com/nsenave))*
+
+### :recycle: Refactors
+- [`b11706a`](https://github.com/InseeFr/Eno/commit/b11706a270d5b3c0ec7f556b6f73ed7805190ad3) - converter classes *(commit by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.26.3] - 2024-09-06
 ### :sparkles: New Features
 - [`544f76f`](https://github.com/InseeFr/Eno/commit/544f76f823abf05aa211ba1791a6afd470c30eb2) - list of variables in lunatic shape from *(commit by [@nsenave](https://github.com/nsenave))*
@@ -300,3 +308,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.24.0]: https://github.com/InseeFr/Eno/compare/3.23.8...3.24.0
 [3.24.2]: https://github.com/InseeFr/Eno/compare/3.24.1...3.24.2
 [3.26.3]: https://github.com/InseeFr/Eno/compare/3.24.2...3.26.3
+[3.26.4]: https://github.com/InseeFr/Eno/compare/3.26.3...3.26.4
