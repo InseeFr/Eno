@@ -1,21 +1,24 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
+import fr.insee.eno.core.DDIToEno;
+import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.exceptions.business.InvalidSuggesterExpression;
+import fr.insee.eno.core.mappers.LunaticMapper;
+import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticSuggesterOptionResponses.SuggesterResponseExpression;
-import fr.insee.lunatic.model.flat.LabelType;
-import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.ResponseType;
-import fr.insee.lunatic.model.flat.Suggester;
+import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.variable.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import static fr.insee.eno.core.processing.out.steps.lunatic.LunaticSuggesterOptionResponses.unpackSuggesterResponseExpression;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LunaticSuggesterOptionResponsesTest {
 
@@ -102,6 +105,54 @@ class LunaticSuggesterOptionResponsesTest {
                     assertEquals(VariableDimension.SCALAR, collectedVariable.getDimension());
                     assertInstanceOf(CollectedVariableValues.Scalar.class, collectedVariable.getValues());
         });
+    }
+
+    @Test
+    void integrationTest() throws DDIParsingException {
+        //
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-suggester-options.xml"),
+                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
+        new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
+        new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);
+        new LunaticLoopResolution(enoQuestionnaire).apply(lunaticQuestionnaire);
+        new LunaticVariablesDimension(enoQuestionnaire).apply(lunaticQuestionnaire);
+
+        //
+        new LunaticSuggesterOptionResponses().apply(lunaticQuestionnaire);
+
+        // Suggester components option responses
+        Suggester citySuggester1 = (Suggester) lunaticQuestionnaire.getComponents().get(1);
+        Suggester citySuggester2 = (Suggester) lunaticQuestionnaire.getComponents().get(2);
+        Suggester nationalitySuggester = (Suggester) lunaticQuestionnaire.getComponents().get(3);
+        Loop loop = (Loop) lunaticQuestionnaire.getComponents().get(4);
+        Suggester activitySuggester = (Suggester) loop.getComponents().get(1);
+        //
+        List.of(citySuggester1, citySuggester2, nationalitySuggester, activitySuggester).forEach(suggester -> {
+            assertEquals(1, suggester.getOptionResponses().size());
+            assertEquals("label", suggester.getOptionResponses().getFirst().attribute());
+        });
+        assertEquals("CITY_OF_BIRTH_LABEL", citySuggester1.getOptionResponses().getFirst().name());
+        assertEquals("CURRENT_CITY_LABEL", citySuggester2.getOptionResponses().getFirst().name());
+        assertEquals("NATIONALITY_LABEL", nationalitySuggester.getOptionResponses().getFirst().name());
+        assertEquals("ACTIVITY_LABEL", activitySuggester.getOptionResponses().getFirst().name());
+
+        // Corresponding variables
+        assertTrue(lunaticQuestionnaire.getVariables().stream().noneMatch(CalculatedVariableType.class::isInstance));
+        //
+        Map<String, CollectedVariableType> variables = new HashMap<>();
+        lunaticQuestionnaire.getVariables().forEach(variable ->
+                variables.put(variable.getName(), (CollectedVariableType) variable));
+        //
+        List.of("CITY_OF_BIRTH_LABEL", "CURRENT_CITY_LABEL", "NATIONALITY_LABEL").forEach(variableName -> {
+            assertNull(variables.get(variableName).getIterationReference());
+            assertEquals(VariableDimension.SCALAR, variables.get(variableName).getDimension());
+            assertInstanceOf(CollectedVariableValues.Scalar.class, variables.get(variableName).getValues());
+        });
+        assertEquals(loop.getId(), variables.get("ACTIVITY_LABEL").getIterationReference());
+        assertEquals(VariableDimension.ARRAY, variables.get("ACTIVITY_LABEL").getDimension());
+        assertInstanceOf(CollectedVariableValues.Array.class, variables.get("ACTIVITY_LABEL").getValues());
     }
 
 }
