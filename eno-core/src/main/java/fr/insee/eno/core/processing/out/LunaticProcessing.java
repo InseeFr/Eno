@@ -44,6 +44,7 @@ public class LunaticProcessing {
                 .then(new LunaticEditLabelTypes()) // this step should be temporary
                 .then(new LunaticSuggestersConfiguration(enoQuestionnaire))
                 .then(new LunaticVariablesDimension(enoQuestionnaire))
+                .then(new LunaticSuggesterOptionResponses())
                 .thenIf(lunaticParameters.isMissingVariables(),
                         new LunaticAddMissingVariables(enoCatalog, lunaticParameters.isMissingVariables()))
                 .then(new LunaticAddResizing(enoQuestionnaire))
