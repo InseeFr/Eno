@@ -5,6 +5,9 @@ package fr.insee.eno.core.utils;
  */
 public class VtlSyntaxUtils {
 
+    public static final String LEFT_JOIN_OPERATOR = "left_join";
+    public static final String USING_KEYWORD = "using";
+
     private VtlSyntaxUtils() {}
 
     private static final String VTL_CONCATENATION_OPERATOR = "||";
