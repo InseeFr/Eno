@@ -1,6 +1,7 @@
 package fr.insee.eno.core.processing.in.steps.ddi;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.navigation.Binding;
 import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import fr.insee.eno.core.model.response.CodeResponse;
@@ -10,8 +11,8 @@ import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.processing.ProcessingStep;
 
 import java.math.BigInteger;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Processing class to insert the detail ("please specify") responses at the right place.
@@ -38,13 +39,11 @@ public class DDIInsertDetailResponses implements ProcessingStep<EnoQuestionnaire
 
     private void insertDetailResponses(UniqueChoiceQuestion uniqueChoiceQuestion) {
         //
-        Map<String, String> bindingsMap = new HashMap<>();
-        uniqueChoiceQuestion.getDdiBindings().forEach(binding ->
-                bindingsMap.put(binding.getSourceParameterId(), binding.getTargetParameterId()));
+        Map<String, String> bindingsMap = uniqueChoiceQuestion.getDdiBindings().stream()
+                .collect(Collectors.toMap(Binding::getSourceParameterId, Binding::getTargetParameterId));
         //
-        Map<String, String> responsesMap = new HashMap<>();
-        uniqueChoiceQuestion.getDdiResponses().forEach(response ->
-                responsesMap.put(response.getDdiReference(), response.getVariableName()));
+        Map<String, String> responsesMap = uniqueChoiceQuestion.getDdiResponses().stream()
+                .collect(Collectors.toMap(Response::getDdiReference, Response::getVariableName));
         //
         uniqueChoiceQuestion.getDetailResponses().forEach(detailResponse -> {
             String variableName = responsesMap.get(bindingsMap.get(detailResponse.getResponseReference()));
@@ -60,25 +59,20 @@ public class DDIInsertDetailResponses implements ProcessingStep<EnoQuestionnaire
      * Thus, the DDI mapping creates additional code responses objects that need inserted at the right place.
      * */
     private void resolveDetailResponses(SimpleMultipleChoiceQuestion simpleMultipleChoiceQuestion) {
-        /* This is very complex since information is spread across multiple places in DDI.
-         * This method first creates maps to ease the link between these pieces of information,
-         * then calls the resolving method. */
-
         //
-        Map<BigInteger, ModalityAttachment.CodeAttachment> codeAttachmentMap = new HashMap<>();
-        simpleMultipleChoiceQuestion.getModalityAttachments().stream()
+        Map<BigInteger, ModalityAttachment.CodeAttachment> codeAttachmentMap = simpleMultipleChoiceQuestion
+                .getModalityAttachments()
+                .stream()
                 .filter(ModalityAttachment.CodeAttachment.class::isInstance)
                 .map(ModalityAttachment.CodeAttachment.class::cast)
-                .forEach(modalityAttachment ->
-                        codeAttachmentMap.put(modalityAttachment.getAttachmentBase(), modalityAttachment));
+                .collect(Collectors.toMap(
+                        ModalityAttachment.CodeAttachment::getAttachmentBase, codeAttachment -> codeAttachment));
         //
-        Map<String, String> bindingMap = new HashMap<>();
-        simpleMultipleChoiceQuestion.getDdiBindings().forEach(binding ->
-                bindingMap.put(binding.getSourceParameterId(), binding.getTargetParameterId()));
+        Map<String, String> bindingMap = simpleMultipleChoiceQuestion.getDdiBindings().stream()
+                .collect(Collectors.toMap(Binding::getSourceParameterId, Binding::getTargetParameterId));
         //
-        Map<String, CodeResponse> codeResponseMap = new HashMap<>();
-        simpleMultipleChoiceQuestion.getCodeResponses().forEach(codeResponse ->
-                codeResponseMap.put(codeResponse.getId(), codeResponse));
+        Map<String, CodeResponse> codeResponseMap = simpleMultipleChoiceQuestion.getCodeResponses().stream()
+                .collect(Collectors.toMap(CodeResponse::getId, codeResponse -> codeResponse));
         //
         simpleMultipleChoiceQuestion.getModalityAttachments().stream()
                 .filter(ModalityAttachment.DetailAttachment.class::isInstance)
