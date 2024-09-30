@@ -1,0 +1,544 @@
+{
+  "id": "m16kx7hl",
+  "Name": "ENO_SUGGESTER_MULTI",
+  "Child": [
+    {
+      "id": "m16kqzg7",
+      "Name": "S1",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m16kjhib",
+          "Name": "CITY_OF_BIRTH",
+          "type": "QuestionType",
+          "Label": [
+            "\"City of birth\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m16kfwqf",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 1,
+                "visualizationHint": "SUGGESTER"
+              },
+              "mandatory": false,
+              "CodeListReference": "L_COMMUNES-2024",
+              "CollectedVariableReference": "m1acyc1z"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SINGLE_CHOICE",
+          "ClarificationQuestion": []
+        },
+        {
+          "id": "m1adj8d6",
+          "Name": "CURRENT_CITY",
+          "type": "QuestionType",
+          "Label": [
+            "\"Current city\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m1adayn7",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 1,
+                "visualizationHint": "SUGGESTER"
+              },
+              "mandatory": false,
+              "CodeListReference": "L_COMMUNES-2024",
+              "CollectedVariableReference": "m1adjivd"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SINGLE_CHOICE",
+          "ClarificationQuestion": []
+        },
+        {
+          "id": "m1ad9dyh",
+          "Name": "NATIONALITY",
+          "type": "QuestionType",
+          "Label": [
+            "\"Nationality\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m1adexql",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 1,
+                "visualizationHint": "SUGGESTER"
+              },
+              "mandatory": false,
+              "CodeListReference": "L_NATIONALITE-1-2-0",
+              "CollectedVariableReference": "m1adfh5f"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SINGLE_CHOICE",
+          "ClarificationQuestion": []
+        },
+        {
+          "id": "m1ag6y3a",
+          "Name": "SS1",
+          "type": "SequenceType",
+          "Child": [
+            {
+              "id": "m1ageu2g",
+              "Name": "ACTIVITY",
+              "type": "QuestionType",
+              "Label": [
+                "\"Activity\""
+              ],
+              "depth": 3,
+              "Control": [],
+              "Response": [
+                {
+                  "id": "m1ajfscg",
+                  "Datatype": {
+                    "type": "TextDatatypeType",
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "MaxLength": 1,
+                    "visualizationHint": "SUGGESTER"
+                  },
+                  "mandatory": false,
+                  "CodeListReference": "L_ACTIVITES-2-0-0",
+                  "CollectedVariableReference": "m1agq89j"
+                }
+              ],
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "FlowControl": [],
+              "questionType": "SINGLE_CHOICE",
+              "ClarificationQuestion": []
+            }
+          ],
+          "Label": [
+            "\"Sub-sequence\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "genericName": "SUBMODULE"
+        }
+      ],
+      "Label": [
+        "\"Sequence\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "idendquest",
+      "Name": "QUESTIONNAIRE_END",
+      "type": "SequenceType",
+      "Child": [],
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    }
+  ],
+  "Label": [
+    "Eno - Suggester multiple variables"
+  ],
+  "final": false,
+  "owner": "DR59-SNDI59",
+  "agency": "fr.insee",
+  "CodeLists": {
+    "CodeList": [
+      {
+        "id": "L_COMMUNES-2024",
+        "Urn": "urn:ddi:fr.insee:l_communes-2024:1",
+        "Name": "L_COMMUNES-2024",
+        "Label": "Communes 2024",
+        "SuggesterParameters": {
+          "fields": [
+            {
+              "min": 3,
+              "name": "label",
+              "rules": [
+                "[\\w]+"
+              ],
+              "stemmer": false,
+              "language": "French"
+            }
+          ],
+          "version": 1,
+          "queryParser": {
+            "type": "tokenized",
+            "params": {
+              "min": 3,
+              "pattern": "[\\w.]+",
+              "stemmer": false,
+              "language": "French"
+            }
+          }
+        }
+      },
+      {
+        "id": "L_NATIONALITE-1-2-0",
+        "Urn": "urn:ddi:fr.insee:l_nationalite-1-2-0:1",
+        "Name": "L_NATIONALITE-1-2-0",
+        "Label": "Nationalités",
+        "SuggesterParameters": {
+          "fields": [
+            {
+              "min": 3,
+              "name": "label",
+              "rules": [
+                "[\\w]+"
+              ],
+              "stemmer": false,
+              "language": "French"
+            }
+          ],
+          "version": 1,
+          "queryParser": {
+            "type": "tokenized",
+            "params": {
+              "min": 3,
+              "pattern": "[\\w.]+",
+              "stemmer": false,
+              "language": "French"
+            }
+          }
+        }
+      },
+      {
+        "id": "L_ACTIVITES-2-0-0",
+        "Urn": "urn:ddi:fr.insee:l_activites-2-0-0:1",
+        "Name": "L_ACTIVITES-2-0-0",
+        "Label": "Activités",
+        "SuggesterParameters": {
+          "fields": [
+            {
+              "min": 3,
+              "name": "label",
+              "rules": [
+                "[\\w]+"
+              ],
+              "stemmer": false,
+              "language": "French",
+              "synonyms": {
+                "EHPAD": [
+                  "EPHAD",
+                  "HEPAD",
+                  "EPAD",
+                  "EPAHD",
+                  "EPADH"
+                ],
+                "URSSAF": [
+                  "URSAF",
+                  "URSAFF"
+                ],
+                "ascenseurs": [
+                  "ASCENCEUR",
+                  "ASSENCEUR",
+                  "ACSENCEUR"
+                ],
+                "joaillerie": [
+                  "JOAILLIER"
+                ],
+                "alimentaire": [
+                  "ALIMANTAIRE"
+                ],
+                "briqueterie": [
+                  "BRIQUETTERIE"
+                ],
+                "prestations": [
+                  "PRESTATAIRE"
+                ],
+                "alimentaires": [
+                  "ALIMANTAIRES"
+                ],
+                "echafaudages": [
+                  "ECHAFFAUDAGE",
+                  "ECHAFFAUDEUR"
+                ],
+                "plaquisterie": [
+                  "PLACO",
+                  "PLACOPLATRE"
+                ],
+                "pneumatiques": [
+                  "PNEUS"
+                ],
+                "agroalimentaire": [
+                  "AGGROALIMANTAIRE",
+                  "AGROALIMANTAIRE"
+                ],
+                "agroalimentaires": [
+                  "AGGROALIMANTAIRES",
+                  "AGROALIMENTAIRES"
+                ]
+              }
+            }
+          ],
+          "version": 1,
+          "stopWords": [
+            "a",
+            "au",
+            "dans",
+            "de",
+            "des",
+            "du",
+            "en",
+            "et",
+            "la",
+            "le",
+            "ou",
+            "sur",
+            "d",
+            "l",
+            "aux",
+            "dans",
+            "un",
+            "une",
+            "pour",
+            "avec",
+            "chez",
+            "par",
+            "les"
+          ],
+          "queryParser": {
+            "type": "tokenized",
+            "params": {
+              "min": 3,
+              "pattern": "[\\w.]+",
+              "stemmer": false,
+              "language": "French"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "m1agh821",
+        "Name": "CITY_OF_BIRTH_LABEL",
+        "type": "CalculatedVariableType",
+        "Label": "\"City of birth label\"",
+        "Formula": "left_join($CITY_OF_BIRTH$, \"L_COMMUNES-2024\" using id, label)",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m1ajd442",
+        "Name": "CURRENT_CITY_LABEL",
+        "type": "CalculatedVariableType",
+        "Label": "\"Current city label\"",
+        "Formula": "left_join($CURRENT_CITY$, \"L_COMMUNES-2024\" using id, label)",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m1awka9n",
+        "Name": "NATIONALITY_LABEL",
+        "type": "CalculatedVariableType",
+        "Label": "\"Nationality label\"",
+        "Formula": "left_join($NATIONALITY$, \"L_NATIONALITE-1-2-0\" using id, label)",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m1awevi4",
+        "Name": "ACTIVITY_LABEL",
+        "type": "CalculatedVariableType",
+        "Label": "\"Activity label\"",
+        "Scope": "m1ageurs",
+        "Formula": "left_join($ACTIVITY$, \"L_ACTIVITES-2-0-0\" using id, label)",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m1acyc1z",
+        "Name": "CITY_OF_BIRTH",
+        "type": "CollectedVariableType",
+        "Label": "CITY_OF_BIRTH label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 1
+        },
+        "CodeListReference": "L_COMMUNES-2024"
+      },
+      {
+        "id": "m1adjivd",
+        "Name": "CURRENT_CITY",
+        "type": "CollectedVariableType",
+        "Label": "CURRENT_CITY label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 1
+        },
+        "CodeListReference": "L_COMMUNES-2024"
+      },
+      {
+        "id": "m1adfh5f",
+        "Name": "NATIONALITY",
+        "type": "CollectedVariableType",
+        "Label": "NATIONALITY label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 1
+        },
+        "CodeListReference": "L_NATIONALITE-1-2-0"
+      },
+      {
+        "id": "m1agq89j",
+        "Name": "ACTIVITY",
+        "type": "CollectedVariableType",
+        "Label": "ACTIVITY label",
+        "Scope": "m1ageurs",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 1
+        },
+        "CodeListReference": "L_ACTIVITES-2-0-0"
+      }
+    ]
+  },
+  "flowLogic": "FILTER",
+  "Iterations": {
+    "Iteration": [
+      {
+        "id": "m1ageurs",
+        "Name": "ACTIVITY_LOOP",
+        "Step": "1",
+        "type": "DynamicIterationType",
+        "Maximum": "10",
+        "Minimum": "1",
+        "MemberReference": [
+          "m1ag6y3a",
+          "m1ag6y3a"
+        ]
+      }
+    ]
+  },
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "FlowControl": [],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "m16kx30l",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "m16kqzg7",
+        "m16kjhib",
+        "m1adj8d6",
+        "m1ad9dyh",
+        "m1ag6y3a",
+        "m1ageu2g",
+        "idendquest"
+      ]
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "s2106-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2106-dc"
+    }
+  ],
+  "lastUpdatedDate": "Fri Sep 20 2024 17:46:28 GMT+0200 (heure d’été d’Europe centrale)",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": []
+}
