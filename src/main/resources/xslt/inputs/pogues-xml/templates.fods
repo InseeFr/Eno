@@ -1843,7 +1843,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>pogues:Unit</text:p>
+      <text:p>pogues:Unit[not(../pogues:IsDynamicUnit=&apos;true&apos;)]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-unit</text:p>
@@ -1854,7 +1854,9 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>conversion-table</text:p>
      </table:table-cell>
-     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Non dynamic Unit : returns the value corresponding to the Uri</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
