@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.27.1] - 2024-09-30
+### :bug: Bug Fixes
+- [`603e2eb`](https://github.com/InseeFr/Eno/commit/603e2eb23794c6ac0404ed10fbecda32259f1293) - restrict to get requests for swagger redirection *(commit by [@nsenave](https://github.com/nsenave))*
+- [`670e229`](https://github.com/InseeFr/Eno/commit/670e229c7f38f32e4b902cab85a1e5b332a08eaa) - filter null references for detail responses *(commit by [@nsenave](https://github.com/nsenave))*
+
+### :recycle: Refactors
+- [`69ef7f8`](https://github.com/InseeFr/Eno/commit/69ef7f871d0e1676da1f4f3fd2dc70d072764f7f) - usage of java stream api *(commit by [@nsenave](https://github.com/nsenave))*
+
+### :construction_worker: Build System
+- [`d58141c`](https://github.com/InseeFr/Eno/commit/d58141cf3b0b0fec464e42322ad95e88c89e1185) - **deps**: update all minor dependencies *(PR [#1105](https://github.com/InseeFr/Eno/pull/1105) by [@renovate[bot]](https://github.com/apps/renovate))*
+
+
 ## [3.27.0] - 2024-09-30
 ### :sparkles: New Features
 - [`f46be51`](https://github.com/InseeFr/Eno/commit/f46be510746391ee7aaa33785e9ee40359966eab) - **lunatic**: option responses in suggesters *(PR [#1108](https://github.com/InseeFr/Eno/pull/1108) by [@nsenave](https://github.com/nsenave))*
@@ -318,3 +330,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.26.3]: https://github.com/InseeFr/Eno/compare/3.24.2...3.26.3
 [3.26.4]: https://github.com/InseeFr/Eno/compare/3.26.3...3.26.4
 [3.27.0]: https://github.com/InseeFr/Eno/compare/3.26.4...3.27.0
+[3.27.1]: https://github.com/InseeFr/Eno/compare/3.27.0...3.27.1
