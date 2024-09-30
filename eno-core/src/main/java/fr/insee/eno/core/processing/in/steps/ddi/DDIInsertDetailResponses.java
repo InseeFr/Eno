@@ -65,6 +65,7 @@ public class DDIInsertDetailResponses implements ProcessingStep<EnoQuestionnaire
                 .stream()
                 .filter(ModalityAttachment.CodeAttachment.class::isInstance)
                 .map(ModalityAttachment.CodeAttachment.class::cast)
+                .filter(codeAttachment -> codeAttachment.getAttachmentBase() != null)
                 .collect(Collectors.toMap(
                         ModalityAttachment.CodeAttachment::getAttachmentBase, codeAttachment -> codeAttachment));
         //
