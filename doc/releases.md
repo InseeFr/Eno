@@ -1,5 +1,17 @@
 # Eno Releases note
 
+## [v2.10.0] - 2024-09-30
+### :sparkles: New Features
+- [`4869a35`](https://github.com/InseeFr/Eno/commit/4869a355b1ea5b202dc2b6cf2d97d1720d2a3066) - manage dynamic unit *(PR [#1106](https://github.com/InseeFr/Eno/pull/1106) by [@BulotF](https://github.com/BulotF))*
+- [`92c4080`](https://github.com/InseeFr/Eno/commit/92c408059546ca21b71b2611e7caa29b6ccaff6e) - add checks for roundabout *(PR [#1107](https://github.com/InseeFr/Eno/pull/1107) by [@BulotF](https://github.com/BulotF))*
+
+### :bug: Bug Fixes
+- [`9a09cc9`](https://github.com/InseeFr/Eno/commit/9a09cc9cea7038949b8694c78c9fe88674225ca3) - remove unused empty elements becoming visible in Orbeon 2022 *(PR [#1102](https://github.com/InseeFr/Eno/pull/1102) by [@BulotF](https://github.com/BulotF))*
+
+### :construction_worker: Build System
+- [`8a90dfe`](https://github.com/InseeFr/Eno/commit/8a90dfe95c2c1fd1ff7adfd5199c3a042d4a3c5b) - **deps**: update all minor dependencies *(PR [#1077](https://github.com/InseeFr/Eno/pull/1077) by [@renovate[bot]](https://github.com/apps/renovate))*
+
+
 ## [v2.9.11] - 2024-07-12
 ### :construction_worker: Build System
 - [`68fd49e`](https://github.com/InseeFr/Eno/commit/68fd49e2090785e9307a1897fd2b16f311b60846) - update dependencies *(PR [#1071](https://github.com/InseeFr/Eno/pull/1071) by [@nsenave](https://github.com/nsenave))*
@@ -340,3 +352,4 @@
 [v2.9.8]: https://github.com/InseeFr/Eno/compare/v2.9.7...v2.9.8
 [v2.9.10]: https://github.com/InseeFr/Eno/compare/v2.9.8...v2.9.10
 [v2.9.11]: https://github.com/InseeFr/Eno/compare/v2.9.10...v2.9.11
+[v2.10.0]: https://github.com/InseeFr/Eno/compare/v2.9.11...v2.10.0
