@@ -38,7 +38,7 @@ public class FodsToXSLCompiler {
 
 		try {
 			cleaning();
-			logger.info("Fods to XSL: START");			
+			logger.info("Fods to XSL: START");
 			// Fods2Xsl for /transformations/ddi/.fods files
 			generateDDI2XFORMSDrivers();
 			generateDDI2FODTDrivers();
@@ -481,7 +481,7 @@ public class FodsToXSLCompiler {
 	 * @throws Exception : XSL related exceptions
 	 */
 	public static void fods2XslTarget(InputStream inputFods, OutputStream outputXsl) throws Exception {
-		logger.info("Entering Fods2Xsl");
+		logger.debug("Entering Fods2Xsl");
 		// From inputfile.fods to preformate.tmp using preformatting.xsl
 		logger.debug(
 				FIVE_SPACES +
@@ -535,7 +535,7 @@ public class FodsToXSLCompiler {
 		
 		isTEMP_XML_TMP.close();
 		isXML_2_XSL_XSL.close();
-		logger.info("Leaving Fods2Xsl");
+		logger.debug("Leaving Fods2Xsl");
 	}
 
 	/**

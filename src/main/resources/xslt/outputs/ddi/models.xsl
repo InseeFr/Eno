@@ -1139,6 +1139,9 @@
                 <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                     <xsl:with-param name="driver" select="." tunnel="yes"/>
                 </xsl:apply-templates>
+                <xsl:apply-templates select="enoddi33:get-related-controls($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="." tunnel="yes"/>
+                </xsl:apply-templates>
             </d:Sequence>
         </xsl:if>
     </xsl:template>
@@ -1190,6 +1193,9 @@
                     <r:TypeOfObject>ComputationItem</r:TypeOfObject>
                 </d:ControlConstructReference>
             </xsl:if>
+            <xsl:apply-templates select="enoddi33:get-related-controls($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+            </xsl:apply-templates>
         </d:Sequence>
         <xsl:if test="$is-roundabout-locked">
             <d:ComputationItem>
@@ -1625,6 +1631,9 @@
                 <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                     <xsl:with-param name="driver" select="eno:append-empty-element('driver-ThenSequence',.)" tunnel="yes"/>
                 </xsl:apply-templates>
+                <xsl:apply-templates select="enoddi33:get-related-controls($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="." tunnel="yes"/>
+                </xsl:apply-templates>
             </d:Sequence>
         </xsl:if>
     </xsl:template>
@@ -1648,7 +1657,7 @@
             <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <r:TypeOfObject><xsl:value-of select="enoddi33:get-reference-element-name($source-context)"/></r:TypeOfObject>
         </d:ControlConstructReference>
-        <xsl:if test="not(name()=('Sequence','IfThenElse','Loop'))">
+        <xsl:if test="not(name()=('Sequence','IfThenElse','Loop','Roundabout'))">
             <xsl:apply-templates select="enoddi33:get-related-controls($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>

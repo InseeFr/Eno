@@ -236,7 +236,7 @@
         <xsl:sequence select="//pogues:Variable[@id = $idVariable]"/>
     </xsl:template>
 
-    <xsl:template match="pogues:Expression | pogues:Formula | pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label | pogues:Loop/pogues:Maximum | pogues:Loop/pogues:Minimum | pogues:Loop/pogues:Filter | pogues:OccurrenceLabel | pogues:OccurrenceDescription | pogues:FixedLength" mode="enopogues:get-related-variable">
+    <xsl:template match="pogues:Expression | pogues:Formula | pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label | pogues:Loop/pogues:Maximum | pogues:Loop/pogues:Minimum | pogues:Loop/pogues:Filter | pogues:OccurrenceLabel | pogues:OccurrenceDescription | pogues:Unit | pogues:FixedLength" mode="enopogues:get-related-variable">
         <xsl:variable name="expressionVariable" select="tokenize(., '\$')"/>
         <xsl:variable name="variables" select="//pogues:Variables"/>
 
@@ -302,7 +302,7 @@
             select="concat($context/parent::pogues:Child/@id, '-secondDimension-fakeCL-1')"/>
     </xsl:function>
 
-    <xsl:template match="pogues:Declaration/pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label | pogues:OccurrenceLabel | pogues:OccurrenceDescription | pogues:FixedLength" mode="id-variable">
+    <xsl:template match="pogues:Declaration/pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label | pogues:OccurrenceLabel | pogues:OccurrenceDescription | pogues:Unit[../pogues:IsDynamicUnit='true'] | pogues:FixedLength" mode="id-variable">
         <xsl:variable name="variables" select="enopogues:get-related-variable(.)"/>
         <xsl:choose>
             <xsl:when test="$variables">
@@ -317,7 +317,7 @@
         </xsl:choose>
 
     </xsl:template>
-
+    
     <xsl:template name="enopogues:id-variable-to-ddi">
         <xsl:param name="variables" as="item()*"/>
         <xsl:param name="index" select="1"/>

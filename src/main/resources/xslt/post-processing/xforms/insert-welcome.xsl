@@ -364,9 +364,8 @@
     <xsl:template match="fr:section[@name='beginning']">
         <fr:section id="ACCUEIL-control" bind="ACCUEIL-bind" name="ACCUEIL">
             <xf:label ref="$form-resources/ACCUEIL/label" />
-            <xf:output id="ACCUEIL-1-control" name="ACCUEIL-1" bind="ACCUEIL-1-bind" class="icone-help">
+            <xf:output id="ACCUEIL-1-control" name="ACCUEIL-1" bind="ACCUEIL-1-bind">
                 <xf:label ref="$form-resources/ACCUEIL-1/label" mediatype="text/html" />
-                <xf:help ref="$form-resources/ACCUEIL-1/help" mediatype="text/html" />
             </xf:output>
             <xf:output id="ACCUEIL-2-control" name="ACCUEIL-2" bind="ACCUEIL-2-bind">
                 <xsl:if test="$context=$household">
