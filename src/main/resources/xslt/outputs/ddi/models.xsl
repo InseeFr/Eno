@@ -1420,7 +1420,7 @@
                 <xsl:variable name="result">
                     <xsl:choose>
                         <!-- Calling the specifc template to handle CommandContent when in regular Command case. -->
-                        <xsl:when test="self::Command or ancestor-or-self::IfThenElse or self::Loop">
+                        <xsl:when test="self::Command or ancestor-or-self::IfThenElse or self::Loop or self::RosterDimension">
                             <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
                                 <xsl:with-param name="expression" select="concat($source-context,' ')"/>
                                 <xsl:with-param name="current-variable-with-id" select="$related-variables-with-id/*[1]"/>
@@ -1437,7 +1437,7 @@
                     </xsl:choose>
                 </xsl:variable>
                 <xsl:choose>
-                    <xsl:when test="contains($result,'-ITE-IP-')"><xsl:value-of select="concat('not(',normalize-space($result),')')"/></xsl:when>
+                    <xsl:when test="contains($result,'-ITE-IP-') and not(self::RosterDimension)"><xsl:value-of select="concat('not(',normalize-space($result),')')"/></xsl:when>
                     <xsl:otherwise><xsl:value-of select="normalize-space($result)"/></xsl:otherwise>
                 </xsl:choose>
             </r:CommandContent>
@@ -2414,12 +2414,26 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <d:GridDimension displayCode="false" displayLabel="false" rank="{enoddi33:get-rank($source-context)}">
             <d:Roster baseCodeValue="1" codeIterationValue="1">
-                <xsl:attribute name="minimumRequired">
-                    <xsl:value-of select="substring-before(enoddi33:get-dynamic($source-context), '-')"/>
-                </xsl:attribute>
-                <xsl:attribute name="maximumAllowed">
-                    <xsl:value-of select="substring-after(enoddi33:get-dynamic($source-context), '-')"/>
-                </xsl:attribute>
+                <xsl:variable name="minimumRequired" select="enoddi33:get-minimum-lines($source-context)"/>
+                <xsl:variable name="maximumAllowed" select="enoddi33:get-maximum-lines($source-context)"/>
+                <xsl:variable name="ConditionForContinuation" select="enoddi33:get-fixed-lines($source-context)"/>
+                <xsl:if test="$minimumRequired != ''">
+                    <xsl:attribute name="minimumRequired">
+                        <xsl:value-of select="$minimumRequired"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="$maximumAllowed != ''">
+                    <xsl:attribute name="maximumAllowed">
+                        <xsl:value-of select="$maximumAllowed"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="$ConditionForContinuation != ''">
+                    <d:ConditionForContinuation>
+                        <xsl:call-template name="Command">
+                            <xsl:with-param name="source-context" tunnel="yes" select="$ConditionForContinuation"/>
+                        </xsl:call-template>
+                    </d:ConditionForContinuation>
+                </xsl:if>
             </d:Roster>
        </d:GridDimension>
     </xsl:template>
