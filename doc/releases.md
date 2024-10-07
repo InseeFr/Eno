@@ -1,5 +1,14 @@
 # Eno Releases note
 
+## [v2.10.1] - 2024-10-07
+### :bug: Bug Fixes
+- [`b81acf3`](https://github.com/InseeFr/Eno/commit/b81acf339eb3306770a1a92b282490c52b0ea5c3) - jaxb2 issues *(commit by [@nsenave](https://github.com/nsenave))*
+
+### :recycle: Refactors
+- [`0c50308`](https://github.com/InseeFr/Eno/commit/0c50308d296fc4a191083e364f2c952beb483b86) - improve logging when building and testing the lib *(commit by [@nsenave](https://github.com/nsenave))*
+- [`1fa10a5`](https://github.com/InseeFr/Eno/commit/1fa10a598a0c9330b6a63cb19394f3828861e202) - make logging a bit less verbose *(commit by [@nsenave](https://github.com/nsenave))*
+
+
 ## [v2.10.0] - 2024-09-30
 ### :sparkles: New Features
 - [`4869a35`](https://github.com/InseeFr/Eno/commit/4869a355b1ea5b202dc2b6cf2d97d1720d2a3066) - manage dynamic unit *(PR [#1106](https://github.com/InseeFr/Eno/pull/1106) by [@BulotF](https://github.com/BulotF))*
@@ -353,3 +362,4 @@
 [v2.9.10]: https://github.com/InseeFr/Eno/compare/v2.9.8...v2.9.10
 [v2.9.11]: https://github.com/InseeFr/Eno/compare/v2.9.10...v2.9.11
 [v2.10.0]: https://github.com/InseeFr/Eno/compare/v2.9.11...v2.10.0
+[v2.10.1]: https://github.com/InseeFr/Eno/compare/v2.10.0...v2.10.1
