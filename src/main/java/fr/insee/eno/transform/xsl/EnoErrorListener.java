@@ -10,12 +10,12 @@ import javax.xml.transform.TransformerException;
 
 public class EnoErrorListener implements ErrorListener {
 
-	private final static Marker fatal = MarkerFactory.getMarker("FATAL");
-    private final static Logger logger = LoggerFactory.getLogger(EnoErrorListener.class);
+    private static final Marker fatal = MarkerFactory.getMarker("FATAL");
+    private static final Logger logger = LoggerFactory.getLogger(EnoErrorListener.class);
 
     @Override
     public void warning(TransformerException e) throws TransformerException {
-        logger.warn(e.getMessage(), e);
+        logger.warn(e.getMessage());
     }
 
     @Override

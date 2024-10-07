@@ -8,13 +8,20 @@ import fr.insee.eno.service.GenerationService;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xmlunit.diff.Diff;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 
 import static fr.insee.eno.Constants.createTempEnoFile;
 
-public class TestDDI2FODT {
+class TestDDI2FODT {
+
+	final Logger logger = LoggerFactory.getLogger(TestDDI2FODT.class);
 	
 	private DDI2FODTGenerator ddi2fodt = new DDI2FODTGenerator();
 	
@@ -22,7 +29,7 @@ public class TestDDI2FODT {
 
 	
 	@Test
-	public void simpleDiffTest() {
+	void simpleDiffTest() {
 		try {
 			String basePath = "src/test/resources/ddi-to-fodt";
 			
@@ -49,15 +56,8 @@ public class TestDDI2FODT {
 			Diff diff = xmlDiff.getDiff(outputFile,expectedFile);
 			Assertions.assertFalse(diff::hasDifferences, ()->getDiffMessage(diff, basePath));
 			
-		} catch (IOException e) {
-			e.printStackTrace();
-			Assertions.fail();
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			Assertions.fail();
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 			Assertions.fail();
 		}
 	}

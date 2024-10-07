@@ -38,7 +38,7 @@ public class FodsToXSLCompiler {
 
 		try {
 			cleaning();
-			logger.info("Fods to XSL: START");			
+			logger.info("Fods to XSL: START");
 			// Fods2Xsl for /transformations/ddi/.fods files
 			generateDDI2XFORMSDrivers();
 			generateDDI2FODTDrivers();
