@@ -1,5 +1,9 @@
 # Eno Releases note
 
+## [v2.10.1] - 2024-10-10
+### :bug: Bug Fixes
+- [`0f81c06`](https://github.com/InseeFr/Eno/commit/0f81c065efcdb8209efa329787ed663b1dc596b0) - clean up jaxb dependencies *(PR [#1118](https://github.com/InseeFr/Eno/pull/1118) by [@nsenave](https://github.com/nsenave))*
+
 ## [v2.10.1] - 2024-10-07
 ### :bug: Bug Fixes
 - [`b81acf3`](https://github.com/InseeFr/Eno/commit/b81acf339eb3306770a1a92b282490c52b0ea5c3) - jaxb2 issues *(commit by [@nsenave](https://github.com/nsenave))*
