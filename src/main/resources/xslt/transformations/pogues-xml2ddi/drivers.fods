@@ -454,7 +454,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>pogues:Child[@xsi:type=&apos;QuestionType&apos; and @questionType=&apos;TABLE&apos; and not(pogues:ResponseStructure/pogues:Dimension[@dimensionType=&quot;PRIMARY&quot; and @dynamic != &apos;0&apos;])]</text:p>
+      <text:p>pogues:Child[@xsi:type=&apos;QuestionType&apos; and @questionType=&apos;TABLE&apos; and not(pogues:ResponseStructure/pogues:Dimension[@dimensionType=&quot;PRIMARY&quot; and @dynamic != &apos;0&apos; and @dynamic != &apos;NON_DYNAMIC&apos;])]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>QuestionTable</text:p>
@@ -465,7 +465,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>pogues:Child[@xsi:type=&apos;QuestionType&apos; and @questionType=&apos;TABLE&apos; and pogues:ResponseStructure/pogues:Dimension[@dimensionType=&quot;PRIMARY&quot; and @dynamic != &apos;0&apos;]]</text:p>
+      <text:p>pogues:Child[@xsi:type=&apos;QuestionType&apos; and @questionType=&apos;TABLE&apos; and pogues:ResponseStructure/pogues:Dimension[@dimensionType=&quot;PRIMARY&quot; and @dynamic != &apos;0&apos; and @dynamic != &apos;NON_DYNAMIC&apos;]]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>QuestionDynamicTable</text:p>
@@ -601,7 +601,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>pogues:Dimension[@dimensionType=&apos;PRIMARY&apos; and @dynamic != &apos;0&apos;]</text:p>
+      <text:p>pogues:Dimension[@dimensionType=&apos;PRIMARY&apos; and @dynamic != &apos;0&apos; and @dynamic != &apos;NON_DYNAMIC&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>RosterDimension</text:p>
@@ -612,7 +612,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>pogues:Dimension[@dimensionType=&apos;MEASURE&apos; and @dynamic=&apos;0&apos;]</text:p>
+      <text:p>pogues:Dimension[@dimensionType=&apos;MEASURE&apos; and not(@dynamic!=&apos;0&apos; and @dynamic != &apos;NON_DYNAMIC&apos;)]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>UnknownDimension</text:p>
@@ -623,7 +623,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>pogues:Dimension[@dimensionType=(&apos;PRIMARY&apos;,&apos;SECONDARY&apos;) and @dynamic=&apos;0&apos;][pogues:CodeListReference]</text:p>
+      <text:p>pogues:Dimension[@dimensionType=(&apos;PRIMARY&apos;,&apos;SECONDARY&apos;) and not(@dynamic!=&apos;0&apos; and @dynamic != &apos;NON_DYNAMIC&apos;)][pogues:CodeListReference]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>CodeDomainDimension</text:p>
