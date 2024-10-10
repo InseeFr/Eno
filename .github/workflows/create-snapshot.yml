@@ -42,7 +42,7 @@ jobs:
       - name: Tag verification
         id: check-tag
         run: |
-          if ! [[ "${{ steps.version.outputs.version }}" =~ ^2.[0-9]+.[0-9]+-SNAPSHOT$ ]]; then
+          if ! [[ "${{ steps.version.outputs.version }}" =~ ^2.[0-9]+.[0-9]+-SNAPSHOT.?[0-9]*$ ]]; then
             echo "Version on v2-main ${{ steps.version.outputs.version }} branch does not match the format 2.Y.Z-SNAPSHOT"
             exit 1
           fi
