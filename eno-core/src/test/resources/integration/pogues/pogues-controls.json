@@ -1,5 +1,5 @@
 {
-  "owner": "DG75-L120",
+  "owner": "ENO-INTEGRATION-TESTS",
   "FlowControl": [],
   "ComponentGroup": [
     {
@@ -100,7 +100,7 @@
   ],
   "final": false,
   "flowLogic": "FILTER",
-  "id": "ltx6820n",
+  "id": "ltx6821m",
   "TargetMode": [
     "CAPI",
     "CATI",
