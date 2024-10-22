@@ -21,6 +21,7 @@ tasks.named<Jar>("jar") {
 
 val ddiJavaLibVersion = "1.1.0"
 val modelMapperVersion = "3.2.1"
+val cucumberVersion = "7.20.1"
 
 dependencies {
     // DDI
@@ -48,6 +49,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.assertj:assertj-core")
     testImplementation("org.skyscreamer:jsonassert")
+    testImplementation("io.cucumber:cucumber-java:$cucumberVersion")
+    testImplementation("io.cucumber:cucumber-junit:$cucumberVersion")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testRuntimeOnly("ch.qos.logback:logback-classic")
 
