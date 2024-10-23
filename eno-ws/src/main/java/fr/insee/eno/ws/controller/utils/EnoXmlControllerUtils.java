@@ -60,6 +60,19 @@ public class EnoXmlControllerUtils {
                 .body(result);
     }
 
+    public ResponseEntity<Byte[]> sendPostRequestByte(URI uri, MultipartBodyBuilder multipartBodyBuilder, String outFilename) {
+        Byte[] result = webClient.post()
+                .uri(uri)
+                .accept(MediaType.APPLICATION_OCTET_STREAM)
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+                .body(BodyInserters.fromMultipartData(multipartBodyBuilder.build()))
+                .exchangeToMono(clientResponse -> clientResponse.bodyToMono(Byte[].class))
+                .block();
+        return ResponseEntity.ok()
+                .headers(HeadersUtils.with(outFilename))
+                .body(result);
+    }
+
     public ResponseEntity<String> sendPostRequest(URI uri) {
         String result = webClient.post()
                 .uri(uri)
