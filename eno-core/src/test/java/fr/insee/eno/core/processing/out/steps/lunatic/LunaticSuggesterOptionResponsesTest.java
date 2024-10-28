@@ -8,6 +8,7 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticSuggesterOptionResponses.SuggesterResponseExpression;
+import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.variable.*;
 import org.junit.jupiter.api.Test;
@@ -153,6 +154,40 @@ class LunaticSuggesterOptionResponsesTest {
         assertEquals(loop.getId(), variables.get("ACTIVITY_LABEL").getIterationReference());
         assertEquals(VariableDimension.ARRAY, variables.get("ACTIVITY_LABEL").getDimension());
         assertInstanceOf(CollectedVariableValues.Array.class, variables.get("ACTIVITY_LABEL").getValues());
+    }
+
+    @Test
+    void integrationTest_table() throws DDIParsingException {
+        //
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+                this.getClass().getClassLoader().getResourceAsStream(
+                        "integration/ddi/ddi-suggester-options-table.xml"),
+                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
+        new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
+        new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);
+        new LunaticLoopResolution(enoQuestionnaire).apply(lunaticQuestionnaire);
+        new LunaticVariablesDimension(enoQuestionnaire).apply(lunaticQuestionnaire);
+
+        //
+        new LunaticTableProcessing(enoQuestionnaire).apply(lunaticQuestionnaire);
+        new LunaticSuggesterOptionResponses().apply(lunaticQuestionnaire);
+
+        // Suggester cells in table
+        Table table = (Table) lunaticQuestionnaire.getComponents().get(1);
+        table.getBodyLines().forEach(bodyLine -> {
+            BodyCell suggesterCell = bodyLine.getBodyCells().get(1);
+            assertEquals(ComponentTypeEnum.SUGGESTER, suggesterCell.getComponentType());
+            assertEquals(1, suggesterCell.getOptionResponses().size());
+            assertEquals("label", suggesterCell.getOptionResponses().getFirst().attribute());
+        });
+        // Suggester cells in dynamic table
+        RosterForLoop roster = (RosterForLoop) lunaticQuestionnaire.getComponents().get(2);
+        BodyCell suggesterColumn = roster.getComponents().getFirst();
+        assertEquals(ComponentTypeEnum.SUGGESTER, suggesterColumn.getComponentType());
+        assertEquals(1, suggesterColumn.getOptionResponses().size());
+        assertEquals("label", suggesterColumn.getOptionResponses().getFirst().attribute());
+        assertEquals("Q_ROSTER1_LABEL", suggesterColumn.getOptionResponses().getFirst().name());
     }
 
 }

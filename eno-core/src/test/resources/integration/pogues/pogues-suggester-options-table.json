@@ -1,0 +1,487 @@
+{
+  "id": "m2km3wwn",
+  "Name": "ENO_SUGGESTER_OPTIONS_TABLE",
+  "Child": [
+    {
+      "id": "m2km0d8e",
+      "Name": "S1",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m2kmba1j",
+          "Name": "Q_TABLE",
+          "type": "QuestionType",
+          "Label": [
+            "\"Table question\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m2kmf9f3",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 1,
+                "visualizationHint": "SUGGESTER"
+              },
+              "CodeListReference": "L_COMMUNES-2024",
+              "CollectedVariableReference": "m2km49uq"
+            },
+            {
+              "id": "m2kmg1bf",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 1,
+                "visualizationHint": "SUGGESTER"
+              },
+              "CodeListReference": "L_COMMUNES-2024",
+              "CollectedVariableReference": "m2kmctf1"
+            },
+            {
+              "id": "m2kmeq97",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 1,
+                "visualizationHint": "SUGGESTER"
+              },
+              "CodeListReference": "L_COMMUNES-2024",
+              "CollectedVariableReference": "m2klz161"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "PAPI",
+            "CAWI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "TABLE",
+          "ResponseStructure": {
+            "Mapping": [
+              {
+                "MappingSource": "m2kmf9f3",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "m2kmg1bf",
+                "MappingTarget": "2 1"
+              },
+              {
+                "MappingSource": "m2kmeq97",
+                "MappingTarget": "3 1"
+              }
+            ],
+            "Attribute": [],
+            "Dimension": [
+              {
+                "dynamic": "0",
+                "dimensionType": "PRIMARY",
+                "CodeListReference": "m2kmcbtl"
+              },
+              {
+                "Label": "\"City suggester\"",
+                "dynamic": "0",
+                "dimensionType": "MEASURE"
+              }
+            ]
+          },
+          "ClarificationQuestion": []
+        },
+        {
+          "id": "m2ngzsse",
+          "Name": "Q_ROSTER",
+          "type": "QuestionType",
+          "Label": [
+            "\"Dynamic table question\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m2ngz0rf",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 1,
+                "visualizationHint": "SUGGESTER"
+              },
+              "CodeListReference": "L_DIPLOMES-2-0-0",
+              "CollectedVariableReference": "m2ngugy8"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "PAPI",
+            "CAWI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "TABLE",
+          "ResponseStructure": {
+            "Mapping": [
+              {
+                "MappingSource": "m2ngz0rf",
+                "MappingTarget": "1 1"
+              }
+            ],
+            "Attribute": [],
+            "Dimension": [
+              {
+                "dynamic": "1-5",
+                "dimensionType": "PRIMARY"
+              },
+              {
+                "Label": "\"Diploma suggester\"",
+                "dynamic": "0",
+                "dimensionType": "MEASURE"
+              }
+            ]
+          },
+          "ClarificationQuestion": []
+        }
+      ],
+      "Label": [
+        "\"Sequence\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "PAPI",
+        "CAWI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "m2nh0ouu",
+      "Name": "S_LAST",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m2nh7vkg",
+          "Name": "Q_LAST",
+          "type": "QuestionType",
+          "Label": [
+            "\"Last question\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m2nh0s7d",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m2ngzmgg"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "PAPI",
+            "CAWI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"Last sequence\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "PAPI",
+        "CAWI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "idendquest",
+      "Name": "QUESTIONNAIRE_END",
+      "type": "SequenceType",
+      "Child": [],
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "PAPI",
+        "CAWI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    }
+  ],
+  "Label": [
+    "Eno - Suggester options in tables"
+  ],
+  "final": false,
+  "owner": "ENO-INTEGRATION-TESTS",
+  "agency": "fr.insee",
+  "CodeLists": {
+    "CodeList": [
+      {
+        "id": "m2kmcbtl",
+        "Code": [
+          {
+            "Label": "\"Code A\"",
+            "Value": "A",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Code B\"",
+            "Value": "B",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Code C\"",
+            "Value": "C",
+            "Parent": ""
+          }
+        ],
+        "Label": "TABLE_CODE_LIST"
+      },
+      {
+        "id": "L_COMMUNES-2024",
+        "Urn": "urn:ddi:fr.insee:l_communes-2024:1",
+        "Name": "L_COMMUNES-2024",
+        "Label": "Communes 2024",
+        "SuggesterParameters": {
+          "fields": [
+            {
+              "min": 3,
+              "name": "label",
+              "rules": [
+                "[\\w]+"
+              ],
+              "stemmer": false,
+              "language": "French"
+            }
+          ],
+          "version": 1,
+          "queryParser": {
+            "type": "tokenized",
+            "params": {
+              "min": 3,
+              "pattern": "[\\w.]+",
+              "stemmer": false,
+              "language": "French"
+            }
+          }
+        }
+      },
+      {
+        "id": "L_DIPLOMES-2-0-0",
+        "Urn": "urn:ddi:fr.insee:l_diplomes-2-0-0:1",
+        "Name": "L_DIPLOMES-2-0-0",
+        "Label": "Diplomes",
+        "SuggesterParameters": {
+          "fields": [
+            {
+              "min": 3,
+              "name": "label",
+              "rules": [
+                "[\\w]+"
+              ],
+              "stemmer": false,
+              "language": "French"
+            }
+          ],
+          "version": 1,
+          "queryParser": {
+            "type": "tokenized",
+            "params": {
+              "min": 3,
+              "pattern": "[\\w.]+",
+              "stemmer": false,
+              "language": "French"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "m2ngr0no",
+        "Name": "Q_TABLE11_LABEL",
+        "type": "CalculatedVariableType",
+        "Label": "\"City label of code A\"",
+        "Formula": "left_join($Q_TABLE11$, \"COMMUNES-2024\" using id, label)",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m2ngto13",
+        "Name": "Q_TABLE21_LABEL",
+        "type": "CalculatedVariableType",
+        "Label": "\"City label of code B\"",
+        "Formula": "left_join($Q_TABLE21$, \"COMMUNES-2024\" using id, label)",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m2ngmao4",
+        "Name": "Q_TABLE31_LABEL",
+        "type": "CalculatedVariableType",
+        "Label": "\"City label of code C\"",
+        "Formula": "left_join($Q_TABLE31$, \"COMMUNES-2024\" using id, label)",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m2ngv63r",
+        "Name": "Q_ROSTER1_LABEL",
+        "type": "CalculatedVariableType",
+        "Label": "\"Diploma label\"",
+        "Scope": "m2ngzsse",
+        "Formula": "left_join($Q_ROSTER1$, \"L_DIPLOMES-2-0-0\" using id, label)",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m2km49uq",
+        "Name": "Q_TABLE11",
+        "type": "CollectedVariableType",
+        "Label": "Code A-City suggester",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 1
+        },
+        "CodeListReference": "L_COMMUNES-2024"
+      },
+      {
+        "id": "m2kmctf1",
+        "Name": "Q_TABLE21",
+        "type": "CollectedVariableType",
+        "Label": "Code B-City suggester",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 1
+        },
+        "CodeListReference": "L_COMMUNES-2024"
+      },
+      {
+        "id": "m2klz161",
+        "Name": "Q_TABLE31",
+        "type": "CollectedVariableType",
+        "Label": "Code C-City suggester",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 1
+        },
+        "CodeListReference": "L_COMMUNES-2024"
+      },
+      {
+        "id": "m2ngugy8",
+        "Name": "Q_ROSTER1",
+        "type": "CollectedVariableType",
+        "Label": "Diploma suggester",
+        "Scope": "m2ngzsse",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 1
+        },
+        "CodeListReference": "L_DIPLOMES-2-0-0"
+      },
+      {
+        "id": "m2ngzmgg",
+        "Name": "Q_LAST",
+        "type": "CollectedVariableType",
+        "Label": "Q_LAST label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "flowLogic": "FILTER",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "PAPI",
+    "CAWI"
+  ],
+  "FlowControl": [],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "m2km38c4",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "m2km0d8e",
+        "m2kmba1j",
+        "m2ngzsse",
+        "idendquest",
+        "m2nh0ouu",
+        "m2nh7vkg"
+      ]
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "s2106-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2106-dc"
+    }
+  ],
+  "lastUpdatedDate": "Thu Oct 24 2024 17:34:07 GMT+0200 (heure d’été d’Europe centrale)",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": []
+}
