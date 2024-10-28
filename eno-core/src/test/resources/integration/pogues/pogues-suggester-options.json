@@ -209,7 +209,7 @@
     "Eno - Suggester multiple variables"
   ],
   "final": false,
-  "owner": "DR59-SNDI59",
+  "owner": "ENO-INTEGRATION-TESTS",
   "agency": "fr.insee",
   "CodeLists": {
     "CodeList": [
