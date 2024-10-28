@@ -123,7 +123,7 @@ public class GenerationStandardController {
                     "If the multi-model option is set to true, the output questionnaire(s) are put in a zip file.")
     @PostMapping(value = "{context}/xforms",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Byte[]> generateXforms(
+    public ResponseEntity<byte[]> generateXforms(
             @RequestPart(value="in") MultipartFile in,
             @RequestPart(value="metadata", required = false) MultipartFile metadata,
             @RequestPart(value="specificTreatment", required=false) MultipartFile specificTreatment,

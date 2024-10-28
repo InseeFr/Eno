@@ -107,7 +107,7 @@ public class GenerationCustomController {
 					"You can get a parameters file by using the endpoint `/parameters/xml/BUSINESS/XFORMS`")
 	@PostMapping(value = "ddi-2-xforms",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<Byte[]> generateXformsCustomParams(
+	public ResponseEntity<byte[]> generateXformsCustomParams(
 			@RequestPart(value="in") MultipartFile in,
 			@RequestPart(value="params") MultipartFile params,
 			@RequestPart(value="metadata") MultipartFile metadata,
