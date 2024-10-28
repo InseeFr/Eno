@@ -1,0 +1,416 @@
+{
+  "id": "m2c26y4n",
+  "Name": "ENO_ROUNDABOUT_SUBSEQUENCE",
+  "Child": [
+    {
+      "id": "m2c2jccv",
+      "Name": "S1",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m2c2nmv8",
+          "Name": "HOW_MANY",
+          "type": "QuestionType",
+          "Label": [
+            "\"How many?\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m2c2ddwd",
+              "Datatype": {
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Maximum": "5",
+                "Minimum": "1",
+                "Decimals": "",
+                "typeName": "NUMERIC"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m2c2ij3x"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
+          "id": "m2c2ij4g",
+          "Name": "SS1",
+          "type": "SequenceType",
+          "Child": [
+            {
+              "id": "m2c25w8u",
+              "Name": "Q1",
+              "type": "QuestionType",
+              "Label": [
+                "\"Question 1\""
+              ],
+              "depth": 3,
+              "Control": [],
+              "Response": [
+                {
+                  "id": "m2c2tzvk",
+                  "Datatype": {
+                    "type": "TextDatatypeType",
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "MaxLength": 249
+                  },
+                  "mandatory": false,
+                  "CollectedVariableReference": "m2c2qr2g"
+                }
+              ],
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "FlowControl": [],
+              "questionType": "SIMPLE"
+            }
+          ],
+          "Label": [
+            "\"Subsequence (with loop)\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "id": "m2c2tvjk",
+              "Text": "\"Declaration of subsequence 1\"",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "declarationType": "HELP"
+            }
+          ],
+          "FlowControl": [],
+          "genericName": "SUBMODULE"
+        },
+        {
+          "id": "m2c2ozay",
+          "Loop": {
+            "Name": "LOOP_SS2",
+            "MemberReference": [
+              "m2c27pvz",
+              "m2c27pvz"
+            ],
+            "IterableReference": "m2c2lssx"
+          },
+          "Name": "ROUNDABOUT_SS2",
+          "type": "RoundaboutType",
+          "Label": [
+            "\"Roundabout on SS2\""
+          ],
+          "depth": 2,
+          "Locked": false,
+          "Control": [],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "OccurrenceLabel": "\"Hello\"",
+          "OccurrenceDescription": ""
+        },
+        {
+          "id": "m2c27pvz",
+          "Name": "SS2",
+          "type": "SequenceType",
+          "Child": [
+            {
+              "id": "m2c281yl",
+              "Name": "Q2",
+              "type": "QuestionType",
+              "Label": [
+                "\"Question 2\""
+              ],
+              "depth": 3,
+              "Control": [],
+              "Response": [
+                {
+                  "id": "m2c2hsjv",
+                  "Datatype": {
+                    "type": "TextDatatypeType",
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "MaxLength": 249
+                  },
+                  "mandatory": false,
+                  "CollectedVariableReference": "m2c26ack"
+                }
+              ],
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "FlowControl": [],
+              "questionType": "SIMPLE"
+            }
+          ],
+          "Label": [
+            "\"Subsequence 2 (with roundabout)\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "id": "m2c2wfk1",
+              "Text": "\"Declaration of subsequence 2\"",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "declarationType": "HELP"
+            }
+          ],
+          "FlowControl": [],
+          "genericName": "SUBMODULE"
+        }
+      ],
+      "Label": [
+        "\"Sequence\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "m2c29ajr",
+      "Name": "S_LAST",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m2c296z7",
+          "Name": "Q_LAST",
+          "type": "QuestionType",
+          "Label": [
+            "\"Last question\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m2c2lyyr",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m2c2k56s"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"Last sequence\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "idendquest",
+      "Name": "QUESTIONNAIRE_END",
+      "type": "SequenceType",
+      "Child": [],
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    }
+  ],
+  "Label": [
+    "Eno - Roundabout on subsequence"
+  ],
+  "final": false,
+  "owner": "ENO-INTEGRATION-TESTS",
+  "agency": "fr.insee",
+  "CodeLists": {
+    "CodeList": []
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "m2c2ij3x",
+        "Name": "HOW_MANY",
+        "type": "CollectedVariableType",
+        "Label": "HOW_MANY label",
+        "Datatype": {
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Maximum": "5",
+          "Minimum": "1",
+          "Decimals": "",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "m2c2qr2g",
+        "Name": "Q1",
+        "type": "CollectedVariableType",
+        "Label": "Q1 label",
+        "Scope": "m2c2lssx",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m2c26ack",
+        "Name": "Q2",
+        "type": "CollectedVariableType",
+        "Label": "Q2 label",
+        "Scope": "m2c2lssx",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m2c2k56s",
+        "Name": "Q_LAST",
+        "type": "CollectedVariableType",
+        "Label": "Q_LAST label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "flowLogic": "FILTER",
+  "Iterations": {
+    "Iteration": [
+      {
+        "id": "m2c2lssx",
+        "Name": "LOOP_SS1",
+        "Step": "1",
+        "type": "DynamicIterationType",
+        "Maximum": "$HOW_MANY$",
+        "Minimum": "$HOW_MANY$",
+        "MemberReference": [
+          "m2c2ij4g",
+          "m2c2ij4g"
+        ]
+      }
+    ]
+  },
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "FlowControl": [],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "m2c2s4px",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "m2c2jccv",
+        "m2c2nmv8",
+        "m2c2ij4g",
+        "m2c25w8u",
+        "m2c2ozay",
+        "m2c27pvz",
+        "m2c281yl",
+        "m2c29ajr",
+        "m2c296z7",
+        "idendquest"
+      ]
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "s2106-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2106-dc",
+      "Name": "Enquête capacité à innover et stratégie 2022"
+    }
+  ],
+  "lastUpdatedDate": "Thu Oct 24 2024 18:04:56 GMT+0200 (heure d’été d’Europe centrale)",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": []
+}

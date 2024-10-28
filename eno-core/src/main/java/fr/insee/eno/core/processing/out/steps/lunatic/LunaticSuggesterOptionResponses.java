@@ -86,25 +86,25 @@ public class LunaticSuggesterOptionResponses implements ProcessingStep<Questionn
     public void apply(Questionnaire lunaticQuestionnaire) {
         //
         Map<String, SuggesterResponseExpression> suggesterResponseExpressions = mapSuggesterResponseExpressions(lunaticQuestionnaire);
-        Map<String, Suggester> suggesterComponents = gatherSuggesterComponents(lunaticQuestionnaire);
+        Map<String, Object> suggesterComponents = gatherSuggesterComponents(lunaticQuestionnaire);
         //
         suggesterResponseExpressions.keySet().forEach(optionResponseName -> {
             SuggesterResponseExpression suggesterResponseExpression = suggesterResponseExpressions.get(optionResponseName);
-            Suggester suggester = suggesterComponents.get(suggesterResponseExpression.responseName());
-            suggester.getOptionResponses().add(new Suggester.OptionResponse(
+            List<Suggester.OptionResponse> optionResponses = getOptionResponses(suggesterComponents, suggesterResponseExpression.responseName());
+            optionResponses.add(new Suggester.OptionResponse(
                     optionResponseName, suggesterResponseExpression.fieldName()));
             convertOptionResponseVariable(lunaticQuestionnaire, optionResponseName);
         });
     }
 
-    private Map<String, Suggester> gatherSuggesterComponents(Questionnaire lunaticQuestionnaire) {
-        Map<String, Suggester> suggesterComponents = new HashMap<>();
+    private Map<String, Object> gatherSuggesterComponents(Questionnaire lunaticQuestionnaire) {
+        Map<String, Object> suggesterComponents = new HashMap<>();
         putSuggesterComponents(suggesterComponents, lunaticQuestionnaire.getComponents());
         return suggesterComponents;
     }
-    private void putSuggesterComponents(Map<String, Suggester> suggesterComponents, List<ComponentType> lunaticComponents) {
+    private void putSuggesterComponents(Map<String, Object> suggesterComponents, List<ComponentType> lunaticComponents) {
         lunaticComponents.forEach(component -> {
-            if (component instanceof Suggester suggester){
+            if (component instanceof Suggester suggester) {
                 ResponseType suggesterResponse = suggester.getResponse();
                 if (suggesterResponse == null)
                     throw new MappingException("Suggester '" + suggester.getId() + "' has no response.");
@@ -114,7 +114,47 @@ public class LunaticSuggesterOptionResponses implements ProcessingStep<Questionn
                 putSuggesterComponents(suggesterComponents, loop.getComponents());
             if (component instanceof Roundabout roundabout)
                 putSuggesterComponents(suggesterComponents, roundabout.getComponents());
+            if (component instanceof Table table)
+                table.getBodyLines().forEach(bodyLine -> putSuggesterComponents(
+                        suggesterComponents, bodyLine.getBodyCells(), table.getId()));
+            if (component instanceof RosterForLoop rosterForLoop)
+                putSuggesterComponents(
+                        suggesterComponents, rosterForLoop.getComponents(), rosterForLoop.getId());
         });
+    }
+
+    /**
+     * Inserts the body cells that have the component type "suggester" in the map.
+     * @param suggesterComponents Map of suggester (regular suggester components or body cells).
+     * @param bodyCells List of body cells.
+     * @param tableId Identifier of the table in which the cell belongs for logging purposes.
+     */
+    private void putSuggesterComponents(Map<String, Object> suggesterComponents, List<BodyCell> bodyCells, String tableId) {
+        bodyCells.forEach(bodyCell -> {
+            if (ComponentTypeEnum.SUGGESTER.equals(bodyCell.getComponentType())) {
+                ResponseType response = bodyCell.getResponse();
+                if (response == null)
+                    throw new MappingException("Suggester cell in table '" + tableId + "' has no response.");
+                suggesterComponents.put(response.getName(), bodyCell);
+            }
+        });
+    }
+
+    /**
+     * Suggester components in table objects are not <code>Suggester</code> objects but <code>BodyCell</code> objects.
+     * Then, there is no polymorphism for these.
+     * This method returns the option responses of the suggester with the given response name, whether it is a
+     * 'regular' suggester component or a body cell.
+     * @param suggesterComponents Map of suggester components/body cells indexed by response name.
+     * @param responseName String response name.
+     */
+    private List<Suggester.OptionResponse> getOptionResponses(Map<String, Object> suggesterComponents, String responseName) {
+        Object searched = suggesterComponents.get(responseName);
+        if (searched instanceof Suggester suggester)
+            return suggester.getOptionResponses();
+        if (searched instanceof BodyCell suggesterCell && ComponentTypeEnum.SUGGESTER.equals(suggesterCell.getComponentType()))
+            return  suggesterCell.getOptionResponses();
+        throw new IllegalArgumentException("Component with response '" + responseName + "' is not a suggester.");
     }
 
     /**
