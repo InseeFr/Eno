@@ -14,6 +14,7 @@ public class DDIInProcessing {
         EnoIndex enoIndex = enoQuestionnaire.getIndex();
         processingPipeline.start(enoQuestionnaire)
                 .then(new DDICleanUpQuestionnaireId())
+                .then(new DDIMarkRowControls())
                 .then(new DDIMarkRoundaboutFilters())
                 .then(new DDIMoveUnitInQuestions())
                 .then(new DDIInsertResponseInTableCells())

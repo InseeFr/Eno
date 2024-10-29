@@ -5,6 +5,7 @@ import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.navigation.Control;
 import fr.insee.eno.core.model.question.Question;
+import fr.insee.eno.core.model.sequence.RoundaboutSequence;
 import fr.insee.eno.core.serialize.DDIDeserializer;
 import org.junit.jupiter.api.Test;
 
@@ -35,25 +36,43 @@ class DDIInsertControlsTest {
         assertTrue(questions.get(0).getControls().isEmpty());
         //
         assertEquals(1, questions.get(1).getControls().size());
-        assertEquals(Control.Criticality.INFO, questions.get(1).getControls().get(0).getCriticality());
+        assertEquals(Control.Criticality.INFO, questions.get(1).getControls().getFirst().getCriticality());
         //
         assertEquals(1, questions.get(2).getControls().size());
-        assertEquals(Control.Criticality.INFO, questions.get(2).getControls().get(0).getCriticality());
+        assertEquals(Control.Criticality.INFO, questions.get(2).getControls().getFirst().getCriticality());
         //
         assertEquals(2, questions.get(3).getControls().size());
         assertEquals(Control.Criticality.INFO, questions.get(3).getControls().get(0).getCriticality());
         assertEquals(Control.Criticality.INFO, questions.get(3).getControls().get(1).getCriticality());
         //
         assertEquals(1, questions.get(4).getControls().size());
-        assertEquals(Control.Criticality.INFO, questions.get(4).getControls().get(0).getCriticality());
+        assertEquals(Control.Criticality.INFO, questions.get(4).getControls().getFirst().getCriticality());
         //
         assertEquals(1, questions.get(5).getControls().size());
-        assertEquals(Control.Criticality.INFO, questions.get(5).getControls().get(0).getCriticality());
+        assertEquals(Control.Criticality.INFO, questions.get(5).getControls().getFirst().getCriticality());
         //
         assertEquals(1, questions.get(6).getControls().size());
-        assertEquals(Control.Criticality.INFO, questions.get(6).getControls().get(0).getCriticality());
+        assertEquals(Control.Criticality.INFO, questions.get(6).getControls().getFirst().getCriticality());
         //
         assertTrue(questions.get(7).getControls().isEmpty());
+    }
+
+    @Test
+    void questionnaireWithRoundabout() throws DDIParsingException {
+        //
+        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
+        DDIMapper ddiMapper = new DDIMapper();
+        ddiMapper.mapDDI(
+                DDIDeserializer.deserialize(this.getClass().getClassLoader().getResourceAsStream(
+                        "integration/ddi/ddi-roundabout-controls.xml")),
+                enoQuestionnaire);
+
+        //
+        new DDIInsertControls().apply(enoQuestionnaire);
+
+        //
+        RoundaboutSequence roundaboutSequence = enoQuestionnaire.getRoundaboutSequences().getFirst();
+        assertEquals(2, roundaboutSequence.getControls().size());
     }
 
 }
