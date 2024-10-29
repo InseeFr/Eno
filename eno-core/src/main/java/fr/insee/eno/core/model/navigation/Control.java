@@ -66,6 +66,8 @@ public class Control extends EnoIdentifiableObject implements EnoObjectWithExpre
 
     public static ControlContextType convertContextToLunatic(Context context) {
         return switch (context) {
+            // Note: "simple" and null are equivalent in Lunatic
+            case null -> ControlContextType.SIMPLE;
             case SIMPLE -> ControlContextType.SIMPLE;
             case ROW -> ControlContextType.ROW;
         };
@@ -73,7 +75,7 @@ public class Control extends EnoIdentifiableObject implements EnoObjectWithExpre
 
     /** In DDI, there is only one concept for the type of controls.
      * The computation item type has a 'type of computation item' property.
-     * The value of this property determines the control's context. */
+     * If this property stats with 'line', it is a dynamic table line control that can be marked as a row control. */
     public static Context mapContextFromDDI(ComputationItemType computationItemType) {
         String ddiTypeOfComputationItem = computationItemType.getTypeOfComputationItem().getStringValue();
         //
@@ -96,9 +98,12 @@ public class Control extends EnoIdentifiableObject implements EnoObjectWithExpre
     @Lunatic("setTypeOfControl(T(fr.insee.eno.core.model.navigation.Control).convertTypeOfControlToLunatic(#param))")
     private TypeOfControl typeOfControl;
 
+    /** The context of a control is "simple" by default.
+     * In DDI, "row" controls are marked with both the mapping annotation and a processing step.
+     * @see fr.insee.eno.core.processing.in.steps.ddi.DDIMarkRowControls */
     @DDI("T(fr.insee.eno.core.model.navigation.Control).mapContextFromDDI(#this)")
     @Lunatic("setType(T(fr.insee.eno.core.model.navigation.Control).convertContextToLunatic(#param))")
-    private Context context;
+    private Context context = Context.SIMPLE;
 
     /** Label typed in Pogues, unused in Lunatic. */
     @DDI("getDescription()?.getContentArray(0)?.getStringValue()") // NOTE: getConstructNameArray(0).getStringArray(0).getStringValue() has the same information
