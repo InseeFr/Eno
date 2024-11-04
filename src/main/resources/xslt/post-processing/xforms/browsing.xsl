@@ -182,7 +182,7 @@
                         <xsl:when test="$ancestor-loops//Loop and @relevant">
                             <xsl:attribute name="relevant">
                                 <xsl:call-template name="improve-bind-formula">
-                                    <xsl:with-param name="attribute" select="concat($ancestor-loop-relevant,' and ',@relevant)"/>
+                                    <xsl:with-param name="attribute" select="concat($ancestor-loop-relevant,' and (',@relevant,')')"/>
                                     <xsl:with-param name="ancestor-loops" as="node()" select="$ancestor-loops"/>
                                 </xsl:call-template>
                             </xsl:attribute>
