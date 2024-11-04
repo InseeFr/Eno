@@ -9,7 +9,6 @@ import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.ControlCriticalityEnum;
 import fr.insee.lunatic.model.flat.ControlTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;

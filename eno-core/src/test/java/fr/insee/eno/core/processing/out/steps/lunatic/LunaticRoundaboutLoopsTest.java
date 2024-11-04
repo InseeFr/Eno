@@ -147,7 +147,7 @@ class LunaticRoundaboutLoopsTest {
         @Test
         void roundaboutProperties() {
             // component properties
-            //assertEquals("4", roundabout.getPage());
+            assertEquals("4", roundabout.getPage());
             assertEquals("\"Roundabout on SS2\"", roundabout.getLabel().getValue());
             assertEquals(LabelTypeEnum.VTL_MD, roundabout.getLabel().getType());
             assertEquals("true", roundabout.getConditionFilter().getValue());
