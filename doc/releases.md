@@ -1,5 +1,15 @@
 # Eno Releases note
 
+## [v2.11.0] - 2024-11-04
+### :sparkles: New Features
+- [`86c6f82`](https://github.com/InseeFr/Eno/commit/86c6f82bc97a61d69f4aa5a9e4b8d1583dc3cfa1) - **pogues2ddi**: table dynamic size defined with an expression *(PR [#1117](https://github.com/InseeFr/Eno/pull/1117) by [@BulotF](https://github.com/BulotF))*
+  - :arrow_lower_right: *addresses issue [#1114](https://github.com/InseeFr/Eno/issues/1114) opened by [@BulotF](https://github.com/BulotF)*
+
+### :bug: Bug Fixes
+- [`bb988a4`](https://github.com/InseeFr/Eno/commit/bb988a4a1d8a460111d5807c66f87883cffa5c4e) - filter for loop of pages (xforms) *(PR [#1137](https://github.com/InseeFr/Eno/pull/1137) by [@BulotF](https://github.com/BulotF))*
+  - :arrow_lower_right: *fixes issue [#1134](https://github.com/InseeFr/Eno/issues/1134) opened by [@JulienCarmona](https://github.com/JulienCarmona)*
+
+
 ## [v2.10.1] - 2024-10-10
 ### :bug: Bug Fixes
 - [`0f81c06`](https://github.com/InseeFr/Eno/commit/0f81c065efcdb8209efa329787ed663b1dc596b0) - clean up jaxb dependencies *(PR [#1118](https://github.com/InseeFr/Eno/pull/1118) by [@nsenave](https://github.com/nsenave))*
@@ -367,3 +377,4 @@
 [v2.9.11]: https://github.com/InseeFr/Eno/compare/v2.9.10...v2.9.11
 [v2.10.0]: https://github.com/InseeFr/Eno/compare/v2.9.11...v2.10.0
 [v2.10.1]: https://github.com/InseeFr/Eno/compare/v2.10.0...v2.10.1
+[v2.11.0]: https://github.com/InseeFr/Eno/compare/v2.10.2...v2.11.0
