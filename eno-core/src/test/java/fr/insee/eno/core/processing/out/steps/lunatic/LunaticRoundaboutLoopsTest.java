@@ -221,7 +221,7 @@ class LunaticRoundaboutLoopsTest {
                     .toList();
             assertEquals(1, roundaboutControls.size());
             ControlType roundaboutControl = roundaboutControls.getFirst();
-            assertEquals("sum(Q2) <= 3", roundaboutControl.getControl().getValue());
+            assertEquals("count(Q2) < 3", roundaboutControl.getControl().getValue());
             assertEquals(LabelTypeEnum.VTL, roundaboutControl.getControl().getType());
             assertEquals("\"There is less than 3 answers in the roundabout.\"",
                     roundaboutControl.getErrorMessage().getValue());

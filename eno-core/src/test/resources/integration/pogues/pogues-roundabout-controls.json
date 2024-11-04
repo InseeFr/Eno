@@ -77,7 +77,7 @@
           "id": "m2t88c01",
           "scope": false,
           "criticity": "INFO",
-          "Expression": "sum($Q2$) <= 3",
+          "Expression": "count($Q2$) < 3",
           "Description": "\"Roundabout-level control\"",
           "FailMessage": "\"There is less than 3 answers in the roundabout.\"",
           "post_collect": false,
