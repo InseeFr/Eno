@@ -358,7 +358,7 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>sum(m2t82uvw-CI-0-IP-1) &lt;= 3</r:CommandContent>
+                  <r:CommandContent>count(m2t82uvw-CI-0-IP-1) &lt; 3</r:CommandContent>
                </r:Command>
             </r:CommandCode>
          </d:ComputationItem>
