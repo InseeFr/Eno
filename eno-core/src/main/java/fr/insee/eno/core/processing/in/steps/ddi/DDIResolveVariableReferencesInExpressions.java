@@ -5,14 +5,12 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
+import fr.insee.eno.core.model.question.DynamicTableQuestion;
 import fr.insee.eno.core.model.variable.CalculatedVariable;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.ProcessingStep;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class DDIResolveVariableReferencesInExpressions implements ProcessingStep<EnoQuestionnaire> {
 
@@ -35,6 +33,12 @@ public class DDIResolveVariableReferencesInExpressions implements ProcessingStep
                 .filter(StandaloneLoop.class::isInstance)
                 .map(StandaloneLoop.class::cast)
                 .forEach(this::resolveExpression);
+        // Dynamic tables with size expression
+        enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .filter(DynamicTableQuestion.class::isInstance).map(DynamicTableQuestion.class::cast)
+                .map(DynamicTableQuestion::getSizeExpression)
+                .filter(Objects::nonNull)
+                .forEach(this::resolveExpression);
     }
 
     /**
@@ -50,7 +54,7 @@ public class DDIResolveVariableReferencesInExpressions implements ProcessingStep
         resolveExpression(standaloneLoop.getMaxIteration());
     }
 
-    private static void resolveExpression(CalculatedExpression expression) {
+    private void resolveExpression(CalculatedExpression expression) {
         String value = expression.getValue();
         List<BindingReference> orderedBindingReferences = orderById(expression.getBindingReferences());
         // Iterate on the reverse order, so that if some references overlap, the longer one is replaced first
