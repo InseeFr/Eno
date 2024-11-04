@@ -4,10 +4,7 @@ import fr.insee.eno.core.DDIToLunatic;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.lunatic.model.flat.ComponentType;
-import fr.insee.lunatic.model.flat.LabelTypeEnum;
-import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.Roundabout;
+import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.variable.VariableType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
@@ -188,5 +185,66 @@ class LunaticRoundaboutLoopsTest {
         }
     }
 
+    // Integration test from a DDI questionnaire with a roundabout that contains controls
+    @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    class RoundaboutWithControls {
+        private Roundabout roundabout;
+
+        @BeforeAll
+        void ddiToLunatic() throws DDIParsingException {
+            //
+            EnoParameters parameters = EnoParameters.of(
+                    EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
+            //
+            Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+                    this.getClass().getClassLoader().getResourceAsStream(
+                            "integration/ddi/ddi-roundabout-controls.xml"),
+                    parameters);
+            // the questionnaire should have 1 roundabout component
+            List<Roundabout> roundabouts = lunaticQuestionnaire.getComponents().stream()
+                    .filter(Roundabout.class::isInstance).map(Roundabout.class::cast)
+                    .toList();
+            assertEquals(1, roundabouts.size());
+            roundabout = roundabouts.getFirst();
+        }
+
+        @Test
+        void controlsCount() {
+            assertEquals(2, roundabout.getControls().size());
+        }
+
+        @Test
+        void roundaboutControlTest() {
+            List<ControlType> roundaboutControls = roundabout.getControls().stream()
+                    .filter(controlType -> ControlContextType.SIMPLE.equals(controlType.getType()))
+                    .toList();
+            assertEquals(1, roundaboutControls.size());
+            ControlType roundaboutControl = roundaboutControls.getFirst();
+            assertEquals("sum(Q2) <= 3", roundaboutControl.getControl().getValue());
+            assertEquals(LabelTypeEnum.VTL, roundaboutControl.getControl().getType());
+            assertEquals("\"There is less than 3 answers in the roundabout.\"",
+                    roundaboutControl.getErrorMessage().getValue());
+            assertEquals(LabelTypeEnum.VTL_MD, roundaboutControl.getErrorMessage().getType());
+            assertEquals(ControlTypeEnum.CONSISTENCY, roundaboutControl.getTypeOfControl());
+            assertEquals(ControlCriticalityEnum.INFO, roundaboutControl.getCriticality());
+        }
+
+        @Test
+        void occurrenceControlTest() {
+            List<ControlType> occurrenceControls = roundabout.getControls().stream()
+                    .filter(controlType -> ControlContextType.ROW.equals(controlType.getType()))
+                    .toList();
+            assertEquals(1, occurrenceControls.size());
+            ControlType occurrenceControl = occurrenceControls.getFirst();
+            assertEquals("Q2 = \"bar\"", occurrenceControl.getControl().getValue());
+            assertEquals(LabelTypeEnum.VTL, occurrenceControl.getControl().getType());
+            assertEquals("\"Occurrence with question 1 = '\" || Q1 || \"' answered 'bar' at question 2.\"",
+                    occurrenceControl.getErrorMessage().getValue().stripTrailing());
+            assertEquals(LabelTypeEnum.VTL_MD, occurrenceControl.getErrorMessage().getType());
+            assertEquals(ControlTypeEnum.CONSISTENCY, occurrenceControl.getTypeOfControl());
+            assertEquals(ControlCriticalityEnum.INFO, occurrenceControl.getCriticality());
+        }
+    }
 
 }
