@@ -1154,6 +1154,18 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enopogues:is-dynamic-unit</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>xs:boolean</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Returns if a unit is dynamic</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-value</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
