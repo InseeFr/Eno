@@ -9,6 +9,7 @@ import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.navigation.LinkedLoop;
 import fr.insee.eno.core.model.sequence.RoundaboutSequence;
 import fr.insee.eno.core.processing.ProcessingStep;
+import fr.insee.eno.core.utils.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
 import fr.insee.lunatic.model.flat.variable.CollectedVariableValues;
@@ -167,6 +168,9 @@ public class LunaticRoundaboutLoops implements ProcessingStep<Questionnaire> {
             ControlType lunaticControl = new ControlType();
             lunaticMapper.mapEnoObject(enoControl, lunaticControl);
             lunaticRoundabout.getControls().add(lunaticControl);
+            // Control expressions have to be inverted in Lunatic
+            lunaticControl.getControl().setValue(
+                    VtlSyntaxUtils.invertBooleanExpression(lunaticControl.getControl().getValue()));
         });
         //
         Roundabout.Item lunaticRoundaboutItem = new Roundabout.Item();
