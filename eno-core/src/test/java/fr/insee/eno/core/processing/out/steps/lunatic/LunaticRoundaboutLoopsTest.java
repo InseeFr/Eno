@@ -210,6 +210,11 @@ class LunaticRoundaboutLoopsTest {
         }
 
         @Test
+        void lockedPropertyTest() {
+            assertFalse(roundabout.getLocked());
+        }
+
+        @Test
         void controlsCount() {
             assertEquals(2, roundabout.getControls().size());
         }
