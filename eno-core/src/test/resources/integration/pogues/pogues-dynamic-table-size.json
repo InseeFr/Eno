@@ -1,0 +1,295 @@
+{
+  "id": "m332q6bo",
+  "Name": "ENO_DYNAMIC_TABLE_SIZE",
+  "Child": [
+    {
+      "id": "m332sbit",
+      "Name": "S1",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m332raks",
+          "Name": "DYNAMIC_TABLE_MIN_MAX",
+          "type": "QuestionType",
+          "Label": [
+            "\"Regular dynamic table\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m333hpwf",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "m332noyi"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "TABLE",
+          "ResponseStructure": {
+            "Mapping": [
+              {
+                "MappingSource": "m333hpwf",
+                "MappingTarget": "1 1"
+              }
+            ],
+            "Attribute": [],
+            "Dimension": [
+              {
+                "dynamic": "DYNAMIC_LENGTH",
+                "MaxLines": 5,
+                "MinLines": 1,
+                "dimensionType": "PRIMARY"
+              },
+              {
+                "Label": "\"Foo\"",
+                "dimensionType": "MEASURE"
+              }
+            ]
+          },
+          "ClarificationQuestion": []
+        }
+      ],
+      "Label": [
+        "\"Sequence 1\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "m332os3s",
+      "Name": "S2",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m333cu10",
+          "Name": "HOW_MANY",
+          "type": "QuestionType",
+          "Label": [
+            "\"How many lines in the next table?\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m333g4uu",
+              "Datatype": {
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Maximum": "10",
+                "Minimum": "1",
+                "Decimals": "",
+                "typeName": "NUMERIC"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m333r0sf"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
+          "id": "m333nmhe",
+          "Name": "DYNAMIC_TABLE_VTL_SIZE",
+          "type": "QuestionType",
+          "Label": [
+            "\"Dynamic table with size defined by a VTL expression\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m333qxeo",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "m333bep2"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "TABLE",
+          "ResponseStructure": {
+            "Mapping": [
+              {
+                "MappingSource": "m333qxeo",
+                "MappingTarget": "1 1"
+              }
+            ],
+            "Attribute": [],
+            "Dimension": [
+              {
+                "dynamic": "FIXED_LENGTH",
+                "FixedLength": "cast($HOW_MANY$, integer)",
+                "dimensionType": "PRIMARY"
+              },
+              {
+                "Label": "\"Bar\"",
+                "dimensionType": "MEASURE"
+              }
+            ]
+          },
+          "ClarificationQuestion": []
+        }
+      ],
+      "Label": [
+        "\"Sequence 2\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "idendquest",
+      "Name": "QUESTIONNAIRE_END",
+      "type": "SequenceType",
+      "Child": [],
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    }
+  ],
+  "Label": [
+    "Eno - Dynamic table with size expression"
+  ],
+  "final": false,
+  "owner": "ENO-INTEGRATION-TESTS",
+  "agency": "fr.insee",
+  "CodeLists": {
+    "CodeList": []
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "m332noyi",
+        "Name": "DYNAMIC_TABLE_MIN_MAX1",
+        "type": "CollectedVariableType",
+        "Label": "Foo",
+        "Scope": "m332raks",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m333r0sf",
+        "Name": "HOW_MANY",
+        "type": "CollectedVariableType",
+        "Label": "HOW_MANY label",
+        "Datatype": {
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Maximum": "10",
+          "Minimum": "1",
+          "Decimals": "",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "m333bep2",
+        "Name": "DYNAMIC_TABLE_VTL_SIZE1",
+        "type": "CollectedVariableType",
+        "Label": "Bar",
+        "Scope": "m333nmhe",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "flowLogic": "FILTER",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "FlowControl": [],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "m333sumk",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "m332sbit",
+        "m332raks",
+        "m332os3s",
+        "m333cu10",
+        "m333nmhe",
+        "idendquest"
+      ]
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "s2106-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2106-dc"
+    }
+  ],
+  "lastUpdatedDate": "Mon Nov 04 2024 15:37:40 GMT+0100 (heure normale d’Europe centrale)",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": []
+}
