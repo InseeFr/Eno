@@ -221,7 +221,7 @@ class LunaticRoundaboutLoopsTest {
                     .toList();
             assertEquals(1, roundaboutControls.size());
             ControlType roundaboutControl = roundaboutControls.getFirst();
-            assertEquals("count(Q2) < 3", roundaboutControl.getControl().getValue());
+            assertEquals("not(count(Q2) < 3)", roundaboutControl.getControl().getValue());
             assertEquals(LabelTypeEnum.VTL, roundaboutControl.getControl().getType());
             assertEquals("\"There is less than 3 answers in the roundabout.\"",
                     roundaboutControl.getErrorMessage().getValue());
@@ -237,7 +237,7 @@ class LunaticRoundaboutLoopsTest {
                     .toList();
             assertEquals(1, occurrenceControls.size());
             ControlType occurrenceControl = occurrenceControls.getFirst();
-            assertEquals("Q2 = \"bar\"", occurrenceControl.getControl().getValue());
+            assertEquals("not(Q2 = \"bar\")", occurrenceControl.getControl().getValue());
             assertEquals(LabelTypeEnum.VTL, occurrenceControl.getControl().getType());
             assertEquals("\"Occurrence with question 1 = '\" || Q1 || \"' answered 'bar' at question 2.\"",
                     occurrenceControl.getErrorMessage().getValue().stripTrailing());
