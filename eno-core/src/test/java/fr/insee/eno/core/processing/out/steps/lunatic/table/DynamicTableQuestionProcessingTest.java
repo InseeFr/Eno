@@ -8,22 +8,18 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.RosterForLoop;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class DynamicTableQuestionProcessingTest {
 
-    private RosterForLoop lunaticDynamicTable;
-
-    @BeforeAll
-    void complexMCQ_integrationTestFromDDI() throws DDIParsingException {
+    @Test
+    void integrationTestFromDDI() throws DDIParsingException {
         // Given
         EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
                 DynamicTableQuestionProcessingTest.class.getClassLoader().getResourceAsStream(
@@ -37,32 +33,49 @@ class DynamicTableQuestionProcessingTest {
         assertTrue(enoDynamicTable.isPresent());
 
         // When
-        lunaticDynamicTable = new RosterForLoop();
+        RosterForLoop lunaticDynamicTable = new RosterForLoop();
         DynamicTableQuestionProcessing.process(lunaticDynamicTable, enoDynamicTable.get());
 
         // Then
-        // -> tests
-    }
-
-    @Test
-    void minAndMaxIterations() {
+        // Min and max
         assertEquals("1", lunaticDynamicTable.getLines().getMin().getValue());
         assertEquals("5", lunaticDynamicTable.getLines().getMax().getValue());
         assertEquals(LabelTypeEnum.VTL, lunaticDynamicTable.getLines().getMin().getType());
         assertEquals(LabelTypeEnum.VTL, lunaticDynamicTable.getLines().getMax().getType());
-    }
-
-    @Test
-    void dynamicTableHeader() {
+        // Header
         assertEquals(3, lunaticDynamicTable.getHeader().size());
-    }
-
-    @Test
-    void dynamicTableCells() {
+        // Cells
         assertEquals(3, lunaticDynamicTable.getComponents().size());
         assertEquals(ComponentTypeEnum.INPUT, lunaticDynamicTable.getComponents().get(0).getComponentType());
         assertEquals(ComponentTypeEnum.INPUT_NUMBER, lunaticDynamicTable.getComponents().get(1).getComponentType());
         assertEquals(ComponentTypeEnum.RADIO, lunaticDynamicTable.getComponents().get(2).getComponentType());
+    }
+
+    @Test
+    void integrationTestFromDDI_sizeExpression() throws DDIParsingException {
+        // Given
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+                DynamicTableQuestionProcessingTest.class.getClassLoader().getResourceAsStream(
+                        "integration/ddi/ddi-dynamic-table-size.xml"),
+                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
+        //
+        List<DynamicTableQuestion> enoDynamicTable = enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .filter(DynamicTableQuestion.class::isInstance)
+                .map(DynamicTableQuestion.class::cast)
+                .toList();
+        assertEquals(2, enoDynamicTable.size());
+
+        // When
+        RosterForLoop lunaticDynamicTable1 = new RosterForLoop();
+        RosterForLoop lunaticDynamicTable2 = new RosterForLoop();
+        DynamicTableQuestionProcessing.process(lunaticDynamicTable1, enoDynamicTable.get(0));
+        DynamicTableQuestionProcessing.process(lunaticDynamicTable2, enoDynamicTable.get(1));
+
+        // Then
+        assertEquals("1", lunaticDynamicTable1.getLines().getMin().getValue());
+        assertEquals("5", lunaticDynamicTable1.getLines().getMax().getValue());
+        assertEquals("cast(HOW_MANY, integer)", lunaticDynamicTable2.getLines().getMin().getValue());
+        assertEquals("cast(HOW_MANY, integer)", lunaticDynamicTable2.getLines().getMax().getValue());
     }
 
 }
