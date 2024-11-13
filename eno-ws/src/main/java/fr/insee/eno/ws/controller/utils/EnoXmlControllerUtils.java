@@ -4,17 +4,20 @@ import fr.insee.eno.ws.exception.EnoControllerException;
 import fr.insee.eno.ws.legacy.parameters.OutFormat;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Objects;
 
 /**
  * Class to factorize code in Eno Xml controllers' (which consist in redirection to the legacy Xml web-service)
@@ -60,16 +63,33 @@ public class EnoXmlControllerUtils {
                 .body(result);
     }
 
-    public ResponseEntity<byte[]> sendPostRequestByte(URI uri, MultipartBodyBuilder multipartBodyBuilder, String outFilename) {
+    public ResponseEntity<byte[]> sendPostRequestByte(URI uri, MultipartBodyBuilder multipartBodyBuilder) {
         byte[] result = webClient.post()
                 .uri(uri)
                 .accept(MediaType.APPLICATION_OCTET_STREAM)
                 .contentType(MediaType.MULTIPART_FORM_DATA)
                 .body(BodyInserters.fromMultipartData(multipartBodyBuilder.build()))
-                .exchangeToMono(clientResponse -> clientResponse.bodyToMono(byte[].class))
+                .retrieve()
+                .bodyToMono(byte[].class)
                 .block();
+
+        // Récupération du header Content-Disposition
+        String contentDisposition = Objects.requireNonNull(webClient.head()
+                        .uri(uri)
+                        .retrieve()
+                        .toEntity(String.class)
+                        .block())
+                .getHeaders()
+                .getFirst(HttpHeaders.CONTENT_DISPOSITION);
+
+        // Extraction du filename
+        String fileName = HeadersUtils.extractFileName(contentDisposition);
+
+        // Création des headers avec le filename extrait
+        HttpHeaders headers = HeadersUtils.with(fileName);
+
         return ResponseEntity.ok()
-                .headers(HeadersUtils.with(outFilename))
+                .headers(headers)
                 .body(result);
     }
 

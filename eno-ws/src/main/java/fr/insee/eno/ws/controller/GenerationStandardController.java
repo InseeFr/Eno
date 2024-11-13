@@ -149,8 +149,7 @@ public class GenerationStandardController {
                 .path("/questionnaire/{context}/xforms")
                 .queryParam("multi-model", multiModel)
                 .build(context);
-        String outFilename = questionnaireFilename(OutFormat.XFORMS, multiModel);
-        return xmlControllerUtils.sendPostRequestByte(uri, multipartBodyBuilder, outFilename);
+        return xmlControllerUtils.sendPostRequestByte(uri, multipartBodyBuilder);
     }
 
     @Operation(
