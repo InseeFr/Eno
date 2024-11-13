@@ -377,4 +377,5 @@
 [v2.9.11]: https://github.com/InseeFr/Eno/compare/v2.9.10...v2.9.11
 [v2.10.0]: https://github.com/InseeFr/Eno/compare/v2.9.11...v2.10.0
 [v2.10.1]: https://github.com/InseeFr/Eno/compare/v2.10.0...v2.10.1
+[v2.10.2]: https://github.com/InseeFr/Eno/compare/v2.10.1...v2.10.2
 [v2.11.0]: https://github.com/InseeFr/Eno/compare/v2.10.2...v2.11.0
