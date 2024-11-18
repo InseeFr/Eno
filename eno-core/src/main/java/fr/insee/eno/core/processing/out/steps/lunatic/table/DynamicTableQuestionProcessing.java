@@ -52,12 +52,12 @@ public class DynamicTableQuestionProcessing {
     private static void setMinMaxProperties(DynamicTableQuestion enoTable, LinesRoster lines) {
         LabelType minLabel = new LabelType();
         minLabel.setType(LabelTypeEnum.VTL);
-        minLabel.setValue(Integer.toString(enoTable.getMinLines().intValue()));
+        minLabel.setValue(enoTable.getMinLines().toString());
         lines.setMin(minLabel);
 
         LabelType maxLabel = new LabelType();
         maxLabel.setType(LabelTypeEnum.VTL);
-        maxLabel.setValue(Integer.toString(enoTable.getMaxLines().intValue()));
+        maxLabel.setValue(enoTable.getMaxLines().toString());
         lines.setMax(maxLabel);
     }
 
