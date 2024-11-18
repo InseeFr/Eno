@@ -3,7 +3,6 @@ name: Feature request
 about: Suggest an idea for this project
 title: ''
 labels: enhancement
-assignees: nsenave
 
 ---
 
@@ -26,12 +25,6 @@ Have you considered any alternative solutions or workarounds? If yes, please des
 ## Additional Context
 
 Provide any additional information or context that might help in understanding the feature request.
-
-## Priority
-
-- [ ] Low
-- [ ] Medium
-- [ ] High
 
 ## Attachments
 
