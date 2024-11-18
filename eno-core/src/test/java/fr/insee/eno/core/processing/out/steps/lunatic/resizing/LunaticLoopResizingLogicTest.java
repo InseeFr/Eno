@@ -121,6 +121,10 @@ class LunaticLoopResizingLogicTest {
         input.setResponse(new ResponseType());
         input.getResponse().setName("INPUT_VAR");
         lunaticLoop.getComponents().add(input);
+        Suggester suggester = new Suggester(); // The suggester component type is set by the constructor
+        suggester.setResponse(new ResponseType());
+        suggester.getResponse().setName("SUGGESTER_VAR");
+        lunaticLoop.getComponents().add(suggester);
         Textarea textarea = new Textarea();
         textarea.setComponentType(ComponentTypeEnum.TEXTAREA);
         textarea.setResponse(new ResponseType());
@@ -136,6 +140,11 @@ class LunaticLoopResizingLogicTest {
         datepicker.setResponse(new ResponseType());
         datepicker.getResponse().setName("DATE_VAR");
         lunaticLoop.getComponents().add(datepicker);
+        Duration duration = new Duration();
+        duration.setComponentType(ComponentTypeEnum.DURATION);
+        duration.setResponse(new ResponseType());
+        duration.getResponse().setName("DURATION_VAR");
+        lunaticLoop.getComponents().add(duration);
         Dropdown dropdown = new Dropdown();
         dropdown.setComponentType(ComponentTypeEnum.DROPDOWN);
         dropdown.setResponse(new ResponseType());
@@ -160,8 +169,8 @@ class LunaticLoopResizingLogicTest {
         // Then
         assertThat(lunaticResizing.getResizingEntry("LOOP_SIZE_VAR").getVariables())
                 .containsExactlyInAnyOrderElementsOf(Set.of(
-                        "BOOLEAN_VAR", "INPUT_VAR", "TEXT_VAR", "NUMBER_VAR", "DATE_VAR",
-                        "DROPDOWN_VAR", "RADIO_VAR", "CHECKBOX_VAR"));
+                        "BOOLEAN_VAR", "INPUT_VAR", "SUGGESTER_VAR", "TEXT_VAR", "NUMBER_VAR",
+                        "DATE_VAR", "DURATION_VAR", "DROPDOWN_VAR", "RADIO_VAR", "CHECKBOX_VAR"));
     }
 
     @Test
