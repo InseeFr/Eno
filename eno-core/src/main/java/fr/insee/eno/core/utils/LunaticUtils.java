@@ -117,9 +117,13 @@ public class LunaticUtils {
         List<String> result = new ArrayList<>();
         loop.getComponents().forEach(component -> {
             switch (component.getComponentType()) {
-                case CHECKBOX_BOOLEAN, INPUT_NUMBER, INPUT, TEXTAREA, DATEPICKER, DURATION, RADIO,
+                case CHECKBOX_BOOLEAN, INPUT_NUMBER, INPUT, TEXTAREA, SUGGESTER, DATEPICKER, DURATION, RADIO,
                         CHECKBOX_ONE, DROPDOWN, CHECKBOX_GROUP, TABLE ->
                         result.addAll(getDirectResponseNames(component));
+                case QUESTIONNAIRE, SEQUENCE, SUBSEQUENCE, TEXT, ACCORDION ->
+                        doNothing();
+                case QUESTION ->
+                        throw new IllegalStateException("This method does not support the question component.");
                 case ROSTER_FOR_LOOP ->
                         throw new LunaticLoopException(String.format(
                                 "Dynamic tables are forbidden in loops: loop '%s' contains a dynamic table.",
@@ -132,12 +136,13 @@ public class LunaticUtils {
                         throw new LunaticLoopException(String.format(
                                 "Pairwise components are forbidden in loops: loop '%s' contains a pairwise component.",
                                 loop.getId()));
-                default ->
-                        throw new IllegalArgumentException(
-                                "Unexpected component type '" + component.getComponentType() + "'.");
             }
         });
         return result;
+    }
+
+    private static void doNothing() {
+        /* No-op method */
     }
 
     /**
