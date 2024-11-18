@@ -117,8 +117,8 @@ public class LunaticUtils {
         List<String> result = new ArrayList<>();
         loop.getComponents().forEach(component -> {
             switch (component.getComponentType()) {
-                case CHECKBOX_BOOLEAN, INPUT_NUMBER, INPUT, TEXTAREA, DATEPICKER, RADIO, CHECKBOX_ONE, DROPDOWN,
-                        CHECKBOX_GROUP, TABLE ->
+                case CHECKBOX_BOOLEAN, INPUT_NUMBER, INPUT, TEXTAREA, DATEPICKER, DURATION, RADIO,
+                        CHECKBOX_ONE, DROPDOWN, CHECKBOX_GROUP, TABLE ->
                         result.addAll(getDirectResponseNames(component));
                 case ROSTER_FOR_LOOP ->
                         throw new LunaticLoopException(String.format(
@@ -133,8 +133,8 @@ public class LunaticUtils {
                                 "Pairwise components are forbidden in loops: loop '%s' contains a pairwise component.",
                                 loop.getId()));
                 default ->
-                        log.debug("(Variables in Lunatic loop) Component of type {} has no response.",
-                                component.getComponentType());
+                        throw new IllegalArgumentException(
+                                "Unexpected component type '" + component.getComponentType() + "'.");
             }
         });
         return result;
