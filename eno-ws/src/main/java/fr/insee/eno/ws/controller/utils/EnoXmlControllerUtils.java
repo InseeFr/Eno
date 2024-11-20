@@ -64,33 +64,14 @@ public class EnoXmlControllerUtils {
     }
 
     public ResponseEntity<byte[]> sendPostRequestByte(URI uri, MultipartBodyBuilder multipartBodyBuilder) {
-        byte[] result = webClient.post()
+         return webClient.post()
                 .uri(uri)
                 .accept(MediaType.APPLICATION_OCTET_STREAM)
                 .contentType(MediaType.MULTIPART_FORM_DATA)
                 .body(BodyInserters.fromMultipartData(multipartBodyBuilder.build()))
                 .retrieve()
-                .bodyToMono(byte[].class)
+                .toEntity(byte[].class)
                 .block();
-
-        // Récupération du header Content-Disposition
-        String contentDisposition = Objects.requireNonNull(webClient.head()
-                        .uri(uri)
-                        .retrieve()
-                        .toEntity(String.class)
-                        .block())
-                .getHeaders()
-                .getFirst(HttpHeaders.CONTENT_DISPOSITION);
-
-        // Extraction du filename
-        String fileName = HeadersUtils.extractFileName(contentDisposition);
-
-        // Création des headers avec le filename extrait
-        HttpHeaders headers = HeadersUtils.with(fileName);
-
-        return ResponseEntity.ok()
-                .headers(headers)
-                .body(result);
     }
 
     public ResponseEntity<String> sendPostRequest(URI uri) {

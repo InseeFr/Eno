@@ -13,13 +13,4 @@ public class HeadersUtils {
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         return headers;
     }
-
-    public static String extractFileName(String contentDisposition) {
-        if (contentDisposition != null && contentDisposition.contains("filename=")) {
-            return contentDisposition.substring(contentDisposition.indexOf("filename=") + 9)
-                    .replace("\"", "");
-        }
-        return null;
-    }
-
 }
