@@ -1,12 +1,12 @@
 package fr.insee.eno.ws.controller.utils;
 
+import fr.insee.eno.core.exceptions.business.EnoParametersException;
 import fr.insee.eno.ws.exception.EnoControllerException;
+import fr.insee.eno.ws.exception.EnoRedirectionException;
 import fr.insee.eno.ws.legacy.parameters.OutFormat;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,10 +14,10 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
+import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.Objects;
 
 /**
  * Class to factorize code in Eno Xml controllers' (which consist in redirection to the legacy Xml web-service)
@@ -64,12 +64,24 @@ public class EnoXmlControllerUtils {
     }
 
     public ResponseEntity<byte[]> sendPostRequestByte(URI uri, MultipartBodyBuilder multipartBodyBuilder) {
-         return webClient.post()
+        return webClient.post()
                 .uri(uri)
                 .accept(MediaType.APPLICATION_OCTET_STREAM)
                 .contentType(MediaType.MULTIPART_FORM_DATA)
                 .body(BodyInserters.fromMultipartData(multipartBodyBuilder.build()))
                 .retrieve()
+                .onStatus(
+                        HttpStatusCode::is4xxClientError,
+                        clientResponse -> clientResponse.bodyToMono(String.class)
+                                .flatMap(responseBody -> Mono.error(new EnoRedirectionException(
+                                        responseBody, clientResponse.statusCode())))
+                )
+                .onStatus(
+                        HttpStatusCode::is5xxServerError,
+                        clientResponse -> clientResponse.bodyToMono(String.class)
+                                .flatMap(responseBody -> Mono.error(new EnoRedirectionException(
+                                        "Server error: " + responseBody, clientResponse.statusCode())))
+                )
                 .toEntity(byte[].class)
                 .block();
     }

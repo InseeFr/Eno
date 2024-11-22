@@ -3,10 +3,7 @@ package fr.insee.eno.ws.controller.exception;
 import fr.insee.eno.core.exceptions.business.EnoParametersException;
 import fr.insee.eno.treatments.exceptions.SpecificTreatmentsDeserializationException;
 import fr.insee.eno.treatments.exceptions.SpecificTreatmentsValidationException;
-import fr.insee.eno.ws.exception.ContextException;
-import fr.insee.eno.ws.exception.MetadataFileException;
-import fr.insee.eno.ws.exception.ModeParameterException;
-import fr.insee.eno.ws.exception.MultiModelException;
+import fr.insee.eno.ws.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +54,13 @@ public class EnoExceptionController {
 	@ExceptionHandler(IOException.class)
 	public ResponseEntity<Object> exception(IOException ioException) {
 		return new ResponseEntity<>("I/O error: " + ioException.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@ExceptionHandler(EnoRedirectionException.class)
+	public ResponseEntity<Object> exception(EnoRedirectionException enoRedirectionException) {
+		String message = enoRedirectionException.getMessage();
+		log.error(message, enoRedirectionException);
+		return new ResponseEntity<>(message, enoRedirectionException.getHttpStatusCode());
 	}
 
 	@ExceptionHandler(value = Exception.class)

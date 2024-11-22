@@ -28,7 +28,6 @@ import java.net.URI;
 
 import static fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils.addMultipartToBody;
 import static fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils.questionnaireFilename;
-
 @Tag(name = "Generation of questionnaire (custom parameters)")
 @Controller
 @RequestMapping("/questionnaire")
