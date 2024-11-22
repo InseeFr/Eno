@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.29.0] - 2024-11-12
+### :sparkles: New Features
+- [`10ded46`](https://github.com/InseeFr/Eno/commit/10ded46bb9323bda96966f76100ac2821fa4ebb1) - calculated expression for dynamic table size *(PR [#1148](https://github.com/InseeFr/Eno/pull/1148) by [@nsenave](https://github.com/nsenave))*
+
+
+## [3.28.0] - 2024-11-08
+### :sparkles: New Features
+- [`d2bde07`](https://github.com/InseeFr/Eno/commit/d2bde07274042b207efb1cee21ceac350d474ff3) - roundabout controls *(PR [#1142](https://github.com/InseeFr/Eno/pull/1142) by [@nsenave](https://github.com/nsenave))*
+
+### :bug: Bug Fixes
+- [`5cd3739`](https://github.com/InseeFr/Eno/commit/5cd3739b9b3100132c927d6c403f90b707324fb1) - roundabout on subsequence *(PR [#1133](https://github.com/InseeFr/Eno/pull/1133) by [@nsenave](https://github.com/nsenave))*
+- [`4535533`](https://github.com/InseeFr/Eno/commit/45355332b40b25239b206736244c695e0279faae) - allow suggester with option responses in tables *(PR [#1135](https://github.com/InseeFr/Eno/pull/1135) by [@nsenave](https://github.com/nsenave))*
+- [`67fd88f`](https://github.com/InseeFr/Eno/commit/67fd88f7097ab8c86e34f1b9a6dd24b257d82eb1) - eno xforms zip incorrect *(PR [#1139](https://github.com/InseeFr/Eno/pull/1139) by [@RemiVerriez](https://github.com/RemiVerriez))*
+- [`608fcac`](https://github.com/InseeFr/Eno/commit/608fcac2f487d6f1a05ebbfc3f3067f868dc34ed) - roundabout controls *(PR [#1150](https://github.com/InseeFr/Eno/pull/1150) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.27.1] - 2024-09-30
 ### :bug: Bug Fixes
 - [`603e2eb`](https://github.com/InseeFr/Eno/commit/603e2eb23794c6ac0404ed10fbecda32259f1293) - restrict to get requests for swagger redirection *(commit by [@nsenave](https://github.com/nsenave))*
@@ -331,3 +347,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.26.4]: https://github.com/InseeFr/Eno/compare/3.26.3...3.26.4
 [3.27.0]: https://github.com/InseeFr/Eno/compare/3.26.4...3.27.0
 [3.27.1]: https://github.com/InseeFr/Eno/compare/3.27.0...3.27.1
+[3.28.0]: https://github.com/InseeFr/Eno/compare/3.27.1...3.28.0
+[3.29.0]: https://github.com/InseeFr/Eno/compare/3.28.0...3.29.0

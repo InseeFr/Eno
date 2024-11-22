@@ -1,0 +1,339 @@
+{
+  "id": "m2t7iyrt",
+  "Name": "ENO_ROUNDABOUT_CONTROLS",
+  "Child": [
+    {
+      "id": "m2t7o6y7",
+      "Name": "S1",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m2t83bbq",
+          "Name": "Q1",
+          "type": "QuestionType",
+          "Label": [
+            "\"Question 1\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m2t8dmam",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m2t7w51m"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"Sequence (main loop)\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "m2t82uvw",
+      "Loop": {
+        "Name": "ROUNDABOUT_LOOP",
+        "MemberReference": [
+          "m2t7urpg",
+          "m2t7urpg"
+        ],
+        "IterableReference": "m2t7t4yz"
+      },
+      "Name": "ROUNDABOUT",
+      "type": "RoundaboutType",
+      "Label": [
+        "\"Roundabout on S2\""
+      ],
+      "depth": 1,
+      "Locked": false,
+      "Control": [
+        {
+          "id": "m2t88c01",
+          "scope": false,
+          "criticity": "INFO",
+          "Expression": "count($Q2$) < 3",
+          "Description": "\"Roundabout-level control\"",
+          "FailMessage": "\"There is less than 3 answers in the roundabout.\"",
+          "post_collect": false,
+          "during_collect": false
+        },
+        {
+          "id": "m2t883p8",
+          "scope": "occurrence",
+          "criticity": "INFO",
+          "Expression": "$Q2$ = \"bar\"",
+          "Description": "\"Occurrence-level control\"",
+          "FailMessage": "\"Occurrence with question 1 = '\" || $Q1$ || \"' answered 'bar' at question 2.\"",
+          "post_collect": false,
+          "during_collect": false
+        }
+      ],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "OccurrenceLabel": "\"Question 1 answer: \" || $Q1$",
+      "OccurrenceDescription": ""
+    },
+    {
+      "id": "m2t7urpg",
+      "Name": "S2",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m2t7kage",
+          "Name": "Q2",
+          "type": "QuestionType",
+          "Label": [
+            "\"Question 2\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m2t8a82i",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m2t84knv"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"Sequence (roundabout)\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "m2t8ns57",
+      "Name": "S_LAST",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m2t8grnt",
+          "Name": "Q_LAST",
+          "type": "QuestionType",
+          "Label": [
+            "\"Last question\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m2t8hr0x",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m2t8b1xv"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"Last sequence\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "idendquest",
+      "Name": "QUESTIONNAIRE_END",
+      "type": "SequenceType",
+      "Child": [],
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    }
+  ],
+  "Label": [
+    "Eno - Roundabout controls"
+  ],
+  "final": false,
+  "owner": "ENO-INTEGRATION-TESTS",
+  "agency": "fr.insee",
+  "CodeLists": {
+    "CodeList": []
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "m2t7w51m",
+        "Name": "Q1",
+        "type": "CollectedVariableType",
+        "Label": "Q1 label",
+        "Scope": "m2t7t4yz",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m2t84knv",
+        "Name": "Q2",
+        "type": "CollectedVariableType",
+        "Label": "Q2 label",
+        "Scope": "m2t7t4yz",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m2t8b1xv",
+        "Name": "Q_LAST",
+        "type": "CollectedVariableType",
+        "Label": "Q_LAST label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "flowLogic": "FILTER",
+  "Iterations": {
+    "Iteration": [
+      {
+        "id": "m2t7t4yz",
+        "Name": "MAIN_LOOP",
+        "Step": "1",
+        "type": "DynamicIterationType",
+        "Maximum": "5",
+        "Minimum": "1",
+        "MemberReference": [
+          "m2t7o6y7",
+          "m2t7o6y7"
+        ]
+      }
+    ]
+  },
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "FlowControl": [],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "m2t7zd6c",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "m2t7o6y7",
+        "m2t83bbq",
+        "m2t7urpg",
+        "m2t7kage",
+        "idendquest",
+        "m2t8ns57",
+        "m2t8grnt"
+      ]
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "s2106-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2106-dc",
+      "Name": "Enquête capacité à innover et stratégie 2022"
+    }
+  ],
+  "lastUpdatedDate": "Mon Oct 28 2024 17:21:33 GMT+0100 (heure normale d’Europe centrale)",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": []
+}

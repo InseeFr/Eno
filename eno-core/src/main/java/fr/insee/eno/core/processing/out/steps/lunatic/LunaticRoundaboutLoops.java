@@ -2,12 +2,14 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.exceptions.business.LunaticVariableConflictException;
 import fr.insee.eno.core.exceptions.technical.MappingException;
+import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.declaration.Instruction;
 import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.navigation.LinkedLoop;
 import fr.insee.eno.core.model.sequence.RoundaboutSequence;
 import fr.insee.eno.core.processing.ProcessingStep;
+import fr.insee.eno.core.utils.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
 import fr.insee.lunatic.model.flat.variable.CollectedVariableValues;
@@ -160,6 +162,16 @@ public class LunaticRoundaboutLoops implements ProcessingStep<Questionnaire> {
         lunaticRoundabout.getLabel().setValue(roundaboutSequence.getLabel().getValue());
         lunaticRoundabout.getLabel().setType(LabelTypeEnum.VTL_MD);
         lunaticRoundabout.setProgressVariable(progressVariableName);
+        //
+        LunaticMapper lunaticMapper = new LunaticMapper();
+        roundaboutSequence.getControls().forEach(enoControl -> {
+            ControlType lunaticControl = new ControlType();
+            lunaticMapper.mapEnoObject(enoControl, lunaticControl);
+            lunaticRoundabout.getControls().add(lunaticControl);
+            // Control expressions have to be inverted in Lunatic
+            lunaticControl.getControl().setValue(
+                    VtlSyntaxUtils.invertBooleanExpression(lunaticControl.getControl().getValue()));
+        });
         //
         Roundabout.Item lunaticRoundaboutItem = new Roundabout.Item();
         lunaticRoundaboutItem.setLabel(new LabelType());

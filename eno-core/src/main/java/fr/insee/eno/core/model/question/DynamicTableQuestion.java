@@ -1,9 +1,14 @@
 package fr.insee.eno.core.model.question;
 
+import fr.insee.ddi.lifecycle33.datacollection.GridDimensionType;
 import fr.insee.ddi.lifecycle33.datacollection.QuestionGridType;
+import fr.insee.ddi.lifecycle33.reusable.CommandCodeType;
+import fr.insee.ddi.lifecycle33.reusable.CommandType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.exceptions.business.IllegalDDIElementException;
+import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.navigation.Binding;
 import fr.insee.eno.core.model.question.table.CellLabel;
@@ -21,8 +26,8 @@ import java.util.List;
 /**
  * Eno model class to represent dynamic table questions.
  * A dynamic table question is a table question where lines can be dynamically added/removed during data collection.
- * In DDI, it corresponds to a QuestionGrid similar to table questions (to be verified).
- * In Lunatic, it corresponds to the RosterForLoop component (to be verified).
+ * In DDI, it corresponds to a QuestionGrid similar to table questions.
+ * In Lunatic, it corresponds to the RosterForLoop component.
  */
 @Getter
 @Setter
@@ -50,13 +55,24 @@ public class DynamicTableQuestion extends MultipleResponseQuestion implements En
     @Lunatic("setMandatory(#param)")
     boolean mandatory;
 
+    /** Maximum number of lines of the dynamic table.
+     * Note: In DDI, for some reason, if this information is missing in the xml file, the default value is 1.
+     * In Lunatic, this property is set in a processing class.
+     * @see fr.insee.eno.core.processing.out.steps.lunatic.table.DynamicTableQuestionProcessing */
     @DDI("getGridDimensionList().?[#this.getRank().intValue() == 1].get(0)" +
             ".getRoster().getMinimumRequired()")
     BigInteger minLines;
 
+    /** Minimum number of lines of the dynamic table.
+     * In Lunatic, this property is set in a processing class.
+     * @see fr.insee.eno.core.processing.out.steps.lunatic.table.DynamicTableQuestionProcessing */
     @DDI("getGridDimensionList().?[#this.getRank().intValue() == 1].get(0)" +
             ".getRoster().getMaximumAllowed()")
     BigInteger maxLines;
+
+    /** VTL expression that defines the size the dynamic table. */
+    @DDI("T(fr.insee.eno.core.model.question.DynamicTableQuestion).mapDDISizeExpression(#this)")
+    CalculatedExpression sizeExpression;
 
     @DDI("getOutParameterList().![#this.getParameterNameArray(0).getStringArray(0).getStringValue()]")
     List<String> variableNames = new ArrayList<>();
@@ -75,5 +91,22 @@ public class DynamicTableQuestion extends MultipleResponseQuestion implements En
      * These labels are mapped here in DDI but are then moved within cell objects through a processing. */
     @DDI("getCellLabelList()")
     List<CellLabel> cellLabels = new ArrayList<>();
+
+    public static CommandType mapDDISizeExpression(QuestionGridType ddiDynamicTableQuestion) {
+        GridDimensionType rank1Dimension = checkRank1Dimension(ddiDynamicTableQuestion);
+        CommandCodeType conditionForContinuation = rank1Dimension.getRoster().getConditionForContinuation();
+        if (conditionForContinuation == null)
+            return null;
+        return conditionForContinuation.getCommandArray(0);
+    }
+
+    private static GridDimensionType checkRank1Dimension(QuestionGridType ddiDynamicTableQuestion) {
+        return ddiDynamicTableQuestion.getGridDimensionList().stream()
+                .filter(gridDimensionType -> BigInteger.ONE.equals(gridDimensionType.getRank()))
+                .findAny()
+                .orElseThrow(() -> new IllegalDDIElementException(
+                        "DDI dynamic table question '" + ddiDynamicTableQuestion.getIDArray(0).getStringValue() +
+                                "' has no rank 1 dimension."));
+    }
 
 }

@@ -1,6 +1,7 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.processing.ProcessingStep;
+import fr.insee.eno.core.utils.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.*;
 
 import java.util.Collection;
@@ -27,7 +28,7 @@ public class LunaticReverseConsistencyControlLabel implements ProcessingStep<Que
                 .filter(control -> control.getTypeOfControl().equals(ControlTypeEnum.CONSISTENCY))
                 .forEach(control -> {
                     LabelType label = control.getControl();
-                    label.setValue("not(" + label.getValue() + ")");
+                    label.setValue(VtlSyntaxUtils.invertBooleanExpression(label.getValue()));
                 });
 
         components.stream()
@@ -35,4 +36,5 @@ public class LunaticReverseConsistencyControlLabel implements ProcessingStep<Que
                 .map(ComponentNestingType.class::cast)
                 .forEach(componentNesting -> processComponents(componentNesting.getComponents()));
     }
+
 }
