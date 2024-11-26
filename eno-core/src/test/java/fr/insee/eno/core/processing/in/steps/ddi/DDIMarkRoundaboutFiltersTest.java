@@ -27,7 +27,7 @@ class DDIMarkRoundaboutFiltersTest {
         assertEquals(1, enoQuestionnaire.getFilters().size());
         Filter enoFilter = enoQuestionnaire.getFilters().getFirst();
         assertTrue(enoFilter.isRoundaboutFilter());
-        assertFalse(enoFilter.getExpression().getValue().startsWith("not"));
+        assertTrue(enoFilter.getExpression().getValue().startsWith("not"));
     }
 
 }
