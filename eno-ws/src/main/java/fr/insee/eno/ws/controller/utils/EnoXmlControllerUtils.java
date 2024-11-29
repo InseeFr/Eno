@@ -1,6 +1,5 @@
 package fr.insee.eno.ws.controller.utils;
 
-import fr.insee.eno.core.exceptions.business.EnoParametersException;
 import fr.insee.eno.ws.exception.EnoControllerException;
 import fr.insee.eno.ws.exception.EnoRedirectionException;
 import fr.insee.eno.ws.legacy.parameters.OutFormat;
@@ -11,7 +10,6 @@ import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Mono;
