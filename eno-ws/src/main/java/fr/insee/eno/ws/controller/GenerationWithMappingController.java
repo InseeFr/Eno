@@ -61,7 +61,7 @@ public class GenerationWithMappingController {
             addMultipartToBody(multipartBodyBuilder, mapping, "mapping");
         //
         URI uri = xmlControllerUtils.newUriBuilder().path("questionnaire/in-2-out").build().toUri();
-        String outFilename = multiModel ? "questionnaire.zip" : "questionnaire.txt";
+        String outFilename = multiModel ? "questionnaires.zip" : "questionnaire.txt";
         return xmlControllerUtils.sendPostRequest(uri, multipartBodyBuilder, outFilename);
     }
 
