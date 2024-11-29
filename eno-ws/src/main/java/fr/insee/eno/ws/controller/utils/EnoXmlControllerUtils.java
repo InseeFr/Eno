@@ -5,14 +5,15 @@ import fr.insee.eno.ws.exception.EnoRedirectionException;
 import fr.insee.eno.ws.legacy.parameters.OutFormat;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
-import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 import java.net.URI;
@@ -62,7 +63,7 @@ public class EnoXmlControllerUtils {
     }
 
     public ResponseEntity<byte[]> sendPostRequestByte(URI uri, MultipartBodyBuilder multipartBodyBuilder) {
-        return webClient.post()
+        ResponseEntity<byte[]> responseEntity =  webClient.post()
                 .uri(uri)
                 .accept(MediaType.APPLICATION_OCTET_STREAM)
                 .contentType(MediaType.MULTIPART_FORM_DATA)
@@ -71,17 +72,23 @@ public class EnoXmlControllerUtils {
                 .onStatus(
                         HttpStatusCode::is4xxClientError,
                         clientResponse -> clientResponse.bodyToMono(String.class)
-                                .flatMap(responseBody -> Mono.error(new EnoRedirectionException(
-                                        responseBody, clientResponse.statusCode())))
+                                .map(responseBody ->
+                                        new EnoRedirectionException(responseBody, clientResponse.statusCode()))
                 )
                 .onStatus(
                         HttpStatusCode::is5xxServerError,
                         clientResponse -> clientResponse.bodyToMono(String.class)
-                                .flatMap(responseBody -> Mono.error(new EnoRedirectionException(
-                                        "Server error: " + responseBody, clientResponse.statusCode())))
+                                .map(responseBody ->
+                                        new EnoRedirectionException("Server error: " + responseBody, clientResponse.statusCode()))
                 )
                 .toEntity(byte[].class)
                 .block();
+        if (responseEntity == null)
+            throw new EnoRedirectionException("null result from Eno Xml call.");
+        String fileName = responseEntity.getHeaders().getContentDisposition().getFilename();
+        return ResponseEntity.ok()
+                .headers(HeadersUtils.with(fileName))
+                .body(responseEntity.getBody());
     }
 
     public ResponseEntity<String> sendPostRequest(URI uri) {
