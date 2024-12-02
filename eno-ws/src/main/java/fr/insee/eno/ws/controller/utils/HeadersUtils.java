@@ -13,5 +13,4 @@ public class HeadersUtils {
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         return headers;
     }
-
 }
