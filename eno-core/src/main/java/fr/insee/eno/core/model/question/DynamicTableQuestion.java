@@ -1,5 +1,6 @@
 package fr.insee.eno.core.model.question;
 
+import fr.insee.ddi.lifecycle33.datacollection.GridDimensionType;
 import fr.insee.ddi.lifecycle33.datacollection.QuestionGridType;
 import fr.insee.ddi.lifecycle33.reusable.CommandCodeType;
 import fr.insee.ddi.lifecycle33.reusable.CommandType;
@@ -92,22 +93,20 @@ public class DynamicTableQuestion extends MultipleResponseQuestion implements En
     List<CellLabel> cellLabels = new ArrayList<>();
 
     public static CommandType mapDDISizeExpression(QuestionGridType ddiDynamicTableQuestion) {
-        checkRank1Dimension(ddiDynamicTableQuestion);
-        CommandCodeType conditionForContinuation = ddiDynamicTableQuestion.getGridDimensionArray(0).getRoster()
-                .getConditionForContinuation();
+        GridDimensionType rank1Dimension = checkRank1Dimension(ddiDynamicTableQuestion);
+        CommandCodeType conditionForContinuation = rank1Dimension.getRoster().getConditionForContinuation();
         if (conditionForContinuation == null)
             return null;
         return conditionForContinuation.getCommandArray(0);
     }
 
-    private static void checkRank1Dimension(QuestionGridType ddiDynamicTableQuestion) {
-        boolean hasRank1Dimension = ddiDynamicTableQuestion.getGridDimensionList().stream()
-                .filter(gridDimensionType -> gridDimensionType.getRank() != null)
-                .anyMatch(gridDimensionType -> 1 == gridDimensionType.getRank().intValue());
-        if (! hasRank1Dimension)
-            throw new IllegalDDIElementException(
-                    "DDI dynamic table question '" + ddiDynamicTableQuestion.getIDArray(0).getStringValue() +
-                            "' has no rank 1 dimension.");
+    private static GridDimensionType checkRank1Dimension(QuestionGridType ddiDynamicTableQuestion) {
+        return ddiDynamicTableQuestion.getGridDimensionList().stream()
+                .filter(gridDimensionType -> BigInteger.ONE.equals(gridDimensionType.getRank()))
+                .findAny()
+                .orElseThrow(() -> new IllegalDDIElementException(
+                        "DDI dynamic table question '" + ddiDynamicTableQuestion.getIDArray(0).getStringValue() +
+                                "' has no rank 1 dimension."));
     }
 
 }

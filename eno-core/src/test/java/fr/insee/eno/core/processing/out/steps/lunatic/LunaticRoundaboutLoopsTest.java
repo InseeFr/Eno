@@ -80,7 +80,7 @@ class LunaticRoundaboutLoopsTest {
             assertEquals("\"Occurrence description of \" || FIRST_NAME",
                     roundaboutItem.getDescription().getValue().stripTrailing());
             assertEquals(LabelTypeEnum.VTL_MD, roundaboutItem.getDescription().getType());
-            assertEquals("FIRST_NAME <> FIRST_NAME_REF",
+            assertEquals("not(not(FIRST_NAME <> FIRST_NAME_REF))",
                     roundaboutItem.getDisabled().getValue().stripTrailing());
             assertEquals(LabelTypeEnum.VTL, roundaboutItem.getDisabled().getType());
         }
