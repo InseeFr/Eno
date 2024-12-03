@@ -1,5 +1,6 @@
 package fr.insee.eno.core.processing.in.steps.ddi;
 
+import fr.insee.eno.core.exceptions.business.IllegalDDIElementException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.code.CodeList;
@@ -37,7 +38,14 @@ public class DDIInsertMultipleChoiceLabels implements ProcessingStep<EnoQuestion
 
     private void insertModalityLabels(SimpleMultipleChoiceQuestion simpleMultipleChoiceQuestion) {
         CodeList codeList = codeListMap.get(simpleMultipleChoiceQuestion.getCodeListReference());
-        for (int i = 0; i < codeList.size(); i ++) {
+        int codeListSize = codeList.size();
+        int responsesSize = simpleMultipleChoiceQuestion.getCodeResponses().size();
+        if (codeListSize != responsesSize)
+            throw new IllegalDDIElementException(String.format(
+                    "Code list '%s' (id=%s) has %s codes, and is used in multiple choice question '%s' (id=%s) that has %s responses.",
+                    codeList.getName(), codeList.getId(), codeListSize,
+                    simpleMultipleChoiceQuestion.getName(), simpleMultipleChoiceQuestion.getId(), responsesSize));
+        for (int i = 0; i < codeListSize; i ++) {
             CodeItem codeItem = codeList.getCodeItems().get(i);
             CodeResponse codeResponse = simpleMultipleChoiceQuestion.getCodeResponses().get(i);
             codeResponse.setLabel(codeItem.getLabel());
