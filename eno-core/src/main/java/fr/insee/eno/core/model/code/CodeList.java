@@ -134,4 +134,11 @@ public class CodeList extends EnoIdentifiableObject {
         }
     }
 
+    @Override
+    public String toString() {
+        return "CodeList[" +
+                "id='" + this.getId() + '\'' +
+                ", name='" + name + '\'' +
+                ']';
+    }
 }
