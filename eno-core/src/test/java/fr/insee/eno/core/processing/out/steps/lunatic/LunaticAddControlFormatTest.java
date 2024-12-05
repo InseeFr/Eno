@@ -32,7 +32,7 @@ class LunaticAddControlFormatTest {
         number.setComponentType(ComponentTypeEnum.INPUT_NUMBER);
         number.setId("number-id");
         number.setDecimals(BigInteger.ZERO);
-        number.setResponse(buildResponse("NUMBERVAR"));
+        number.setResponse(buildResponse("NUMBER_VAR"));
     }
 
     @Test
@@ -48,7 +48,7 @@ class LunaticAddControlFormatTest {
         assertEquals(1, controls.size());
         ControlType control = controls.getFirst();
 
-        assertEquals("not(not(isnull(NUMBERVAR))  and round(NUMBERVAR,10)<>NUMBERVAR)", control.getControl().getValue());
+        assertEquals("not(not(isnull(NUMBER_VAR))  and round(NUMBER_VAR,10)<>NUMBER_VAR)", control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getType());
         assertEquals("number-id-format-decimal", control.getId());
@@ -70,7 +70,7 @@ class LunaticAddControlFormatTest {
         List<ControlType> controls = number.getControls();
 
         ControlType control = controls.getFirst();
-        assertEquals("not(not(isnull(NUMBERVAR)) and (5.2400000000>NUMBERVAR or 10.1200000000<NUMBERVAR))", control.getControl().getValue());
+        assertEquals("not(not(isnull(NUMBER_VAR)) and (5.2400000000>NUMBER_VAR or 10.1200000000<NUMBER_VAR))", control.getControl().getValue());
     }
 
     @Test
@@ -96,7 +96,7 @@ class LunaticAddControlFormatTest {
         assertEquals(2, controls.size());
         ControlType control = controls.getFirst();
 
-        assertEquals("not(not(isnull(NUMBERVAR)) and (5>NUMBERVAR or 10<NUMBERVAR))", control.getControl().getValue());
+        assertEquals("not(not(isnull(NUMBER_VAR)) and (5>NUMBER_VAR or 10<NUMBER_VAR))", control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getType());
         assertEquals("number-id-format-borne-inf-sup", control.getId());
@@ -115,7 +115,7 @@ class LunaticAddControlFormatTest {
         assertEquals(2, controls.size());
         ControlType control = controls.getFirst();
 
-        assertEquals("not(not(isnull(NUMBERVAR)) and 5>NUMBERVAR)", control.getControl().getValue());
+        assertEquals("not(not(isnull(NUMBER_VAR)) and 5>NUMBER_VAR)", control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getType());
         assertEquals("number-id-format-borne-inf", control.getId());
@@ -134,7 +134,7 @@ class LunaticAddControlFormatTest {
         assertEquals(2, controls.size());
         ControlType control = controls.getFirst();
 
-        assertEquals("not(not(isnull(NUMBERVAR)) and 10<NUMBERVAR)", control.getControl().getValue());
+        assertEquals("not(not(isnull(NUMBER_VAR)) and 10<NUMBER_VAR)", control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getType());
         assertEquals("number-id-format-borne-sup", control.getId());
@@ -233,7 +233,6 @@ class LunaticAddControlFormatTest {
 
         List<ControlType> controls = datePicker.getControls();
         assertEquals(2, controls.size());
-        ControlType yearControl = controls.get(0);
         ControlType boundsControl = controls.get(1);
 
         assertEquals("datepicker-id-format-date-borne-sup", boundsControl.getId());
@@ -294,12 +293,12 @@ class LunaticAddControlFormatTest {
 
         List<BodyCell> bodyCells = new ArrayList<>();
         bodyCells.add(buildBodyCell("line1"));
-        bodyCells.add(buildBodyCell(table.getId()+"-co", "CHECKVAR", ComponentTypeEnum.CHECKBOX_ONE));
+        bodyCells.add(buildBodyCell(table.getId()+"-co", "CHECKBOX_VAR", ComponentTypeEnum.CHECKBOX_ONE));
         bodyLines.add(buildBodyLine(bodyCells));
 
         bodyCells = new ArrayList<>();
         bodyCells.add(buildBodyCell("line2"));
-        bodyCells.add(buildBodyCell(table.getId()+"-number", "NUMBERVAR", ComponentTypeEnum.INPUT_NUMBER, BigInteger.TWO, 2.0, 5.0));
+        bodyCells.add(buildBodyCell(table.getId()+"-number", "NUMBER_VAR", ComponentTypeEnum.INPUT_NUMBER, BigInteger.TWO, 2.0, 5.0));
         bodyLines.add(buildBodyLine(bodyCells));
 
         lunaticQuestionnaire = new Questionnaire();
@@ -320,8 +319,8 @@ class LunaticAddControlFormatTest {
 
         List<BodyCell> bodyCells = roster.getComponents();
         bodyCells.add(buildBodyCell("line1"));
-        bodyCells.add(buildBodyCell(roster.getId()+"-number", "NUMBERVAR", ComponentTypeEnum.INPUT_NUMBER, BigInteger.TWO, 2.0, 5.0));
-        bodyCells.add(buildBodyCell(roster.getId()+"-co", "CHECKVAR", ComponentTypeEnum.CHECKBOX_ONE));
+        bodyCells.add(buildBodyCell(roster.getId()+"-number", "NUMBER_VAR", ComponentTypeEnum.INPUT_NUMBER, BigInteger.TWO, 2.0, 5.0));
+        bodyCells.add(buildBodyCell(roster.getId()+"-co", "CHECKBOX_VAR", ComponentTypeEnum.CHECKBOX_ONE));
 
         lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(roster);
