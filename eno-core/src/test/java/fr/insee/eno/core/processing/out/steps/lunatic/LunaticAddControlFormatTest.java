@@ -46,7 +46,7 @@ class LunaticAddControlFormatTest {
 
         List<ControlType> controls = number.getControls();
         assertEquals(1, controls.size());
-        ControlType control = controls.get(0);
+        ControlType control = controls.getFirst();
 
         assertEquals("not(not(isnull(NUMBERVAR))  and round(NUMBERVAR,10)<>NUMBERVAR)", control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
@@ -69,7 +69,7 @@ class LunaticAddControlFormatTest {
 
         List<ControlType> controls = number.getControls();
 
-        ControlType control = controls.get(0);
+        ControlType control = controls.getFirst();
         assertEquals("not(not(isnull(NUMBERVAR)) and (5.2400000000>NUMBERVAR or 10.1200000000<NUMBERVAR))", control.getControl().getValue());
     }
 
@@ -94,7 +94,7 @@ class LunaticAddControlFormatTest {
 
         List<ControlType> controls = number.getControls();
         assertEquals(2, controls.size());
-        ControlType control = controls.get(0);
+        ControlType control = controls.getFirst();
 
         assertEquals("not(not(isnull(NUMBERVAR)) and (5>NUMBERVAR or 10<NUMBERVAR))", control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
@@ -113,7 +113,7 @@ class LunaticAddControlFormatTest {
 
         List<ControlType> controls = number.getControls();
         assertEquals(2, controls.size());
-        ControlType control = controls.get(0);
+        ControlType control = controls.getFirst();
 
         assertEquals("not(not(isnull(NUMBERVAR)) and 5>NUMBERVAR)", control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
@@ -132,7 +132,7 @@ class LunaticAddControlFormatTest {
 
         List<ControlType> controls = number.getControls();
         assertEquals(2, controls.size());
-        ControlType control = controls.get(0);
+        ControlType control = controls.getFirst();
 
         assertEquals("not(not(isnull(NUMBERVAR)) and 10<NUMBERVAR)", control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());

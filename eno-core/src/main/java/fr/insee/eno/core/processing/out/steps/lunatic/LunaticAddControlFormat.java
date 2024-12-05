@@ -116,21 +116,21 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
             String maxValue = formatDoubleValue(max, decimalsCount);
             String controlExpression = String.format("not(not(isnull(%s)) and (%s>%s or %s<%s))", responseName, minValue, responseName, maxValue, responseName);
             String controlErrorMessage = String.format("\" La valeur doit être comprise entre %s et %s.\"", minValue, maxValue);
-            controls.add(0, createFormatControl(controlIdPrefix+"-borne-inf-sup", controlExpression, controlErrorMessage));
+            controls.addFirst(createFormatControl(controlIdPrefix+"-borne-inf-sup", controlExpression, controlErrorMessage));
         }
 
         if(min == null && max != null) {
             String maxValue = formatDoubleValue(max, decimalsCount);
             String controlExpression = String.format("not(not(isnull(%s)) and %s<%s)", responseName, maxValue, responseName);
             String controlErrorMessage = String.format("\" La valeur doit être inférieure à %s.\"", maxValue);
-            controls.add(0, createFormatControl(controlIdPrefix+"-borne-sup", controlExpression, controlErrorMessage));
+            controls.addFirst(createFormatControl(controlIdPrefix+"-borne-sup", controlExpression, controlErrorMessage));
         }
 
         if(min != null && max == null) {
             String minValue = formatDoubleValue(min, decimalsCount);
             String controlExpression = String.format("not(not(isnull(%s)) and %s>%s)", responseName, minValue, responseName);
             String controlErrorMessage = String.format("\" La valeur doit être supérieure à %s.\"", minValue);
-            controls.add(0, createFormatControl(controlIdPrefix+"-borne-inf", controlExpression, controlErrorMessage));
+            controls.addFirst(createFormatControl(controlIdPrefix+"-borne-inf", controlExpression, controlErrorMessage));
         }
 
         controls.add(createDecimalsFormatControl(controlIdPrefix, responseName, decimalsCount));
