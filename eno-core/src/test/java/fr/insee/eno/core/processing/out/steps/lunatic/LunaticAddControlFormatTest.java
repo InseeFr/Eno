@@ -165,8 +165,9 @@ class LunaticAddControlFormatTest {
         ControlType yearControl = controls.getFirst();
 
         assertEquals("datepicker-id-format-year", yearControl.getId());
-        String expected = "not(not(isnull(DATE_VAR)) " +
-                "and cast(cast(cast(DATE_VAR, date, \"YYYY-MM-DD\"), string, \"YYYY\"), integer) <= 999)";
+        String expected = "not(not(isnull(DATE_VAR)) and (" +
+                "cast(cast(cast(DATE_VAR, date, \"YYYY-MM-DD\"), string, \"YYYY\"), integer) <= 999 or " +
+                "cast(cast(cast(DATE_VAR, date, \"YYYY-MM-DD\"), string, \"YYYY\"), integer) > 9999))";
         assertEquals(expected, yearControl.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, yearControl.getControl().getType());
         assertEquals(LabelTypeEnum.VTL_MD, yearControl.getErrorMessage().getType());

@@ -154,6 +154,8 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
         Optional<ControlType> controlBounds = getFormatControlFromDatepickerAttributes(id, minValue, maxValue, format, responseName);
         controlBounds.ifPresent(controls::addFirst);
         controlYearFormat.ifPresent(controls::addFirst);
+        // Note: it's important that the year format is added in first position, since in some cases only the message
+        // of the first control is displayed.
     }
 
     /**
@@ -198,9 +200,10 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
             return Optional.empty();
         }
         String controlId = id + "-format-year";
-        String expression = String.format(
-                "not(not(isnull(%s)) and cast(cast(cast(%s, date, \"%s\"), string, \"YYYY\"), integer) <= 999)",
-                responseName, responseName, format);
+        String expression = String.format("not(not(isnull(%s)) and (" +
+                        "cast(cast(cast(%s, date, \"%s\"), string, \"YYYY\"), integer) <= 999 or " +
+                        "cast(cast(cast(%s, date, \"%s\"), string, \"YYYY\"), integer) > 9999))",
+                responseName, responseName, format, responseName, format);
         String message = "\"L'année doit être saisie avec 4 chiffres.\"";
         return Optional.of(createFormatControl(controlId, expression, message));
     }
