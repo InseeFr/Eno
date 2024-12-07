@@ -5,7 +5,7 @@
 
 	<groupId>fr.insee.eno</groupId>
 	<artifactId>eno-core</artifactId>
-	<version>2.11.0</version>
+	<version>2.11.1</version>
 	<packaging>jar</packaging>
 
 	<name>Eno – Questionnaire generator</name>
@@ -108,7 +108,7 @@
 		<eclipse.version>2.7.15</eclipse.version>
 		<jaxb-api.version>2.3.1</jaxb-api.version>
 		<fop.version>2.10</fop.version>
-		<commons-io.version>2.17.0</commons-io.version>
+		<commons-io.version>2.18.0</commons-io.version>
 		<guice.version>7.0.0</guice.version>
 		<!-- Logging API -->
 		<slf4j.version>2.0.16</slf4j.version>
@@ -116,10 +116,10 @@
 		<junit.version>5.11.3</junit.version>
 		<xmlunit.version>2.10.0</xmlunit.version>
 		<apache-commons.version>3.17.0</apache-commons.version>
-		<log4j-slf4j2.version>2.24.1</log4j-slf4j2.version>
+		<log4j-slf4j2.version>2.24.2</log4j-slf4j2.version>
 		<!-- Build plugins -->
 		<source.plugin.version>3.3.1</source.plugin.version>
-		<javadoc.plugin.version>3.11.1</javadoc.plugin.version>
+		<javadoc.plugin.version>3.11.2</javadoc.plugin.version>
 		<!-- Sonar -->
 		<jacoco.version>0.8.12</jacoco.version>	
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
