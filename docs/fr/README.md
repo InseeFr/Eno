@@ -1,6 +1,6 @@
 # Eno
 
-[Introduction](https://github.com/Eno/README.fr.md)
+[Introduction](https://github.com/InseeFr/Eno/blob/v3-main/README.md)
 
 ## Je suis utilisateur d'Eno
 
