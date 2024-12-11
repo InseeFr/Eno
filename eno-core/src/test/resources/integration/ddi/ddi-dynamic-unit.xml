@@ -999,7 +999,7 @@
             </r:QuestionReference>
             <l:VariableRepresentation>
                <r:NumericRepresentation>
-                  <r:MeasurementUnit ControlledVocabularyName="personalizedUnit">¤m4k4zcl6-QOP-m4k57q2u¤ </r:MeasurementUnit>
+                  <r:MeasurementUnit controlledVocabularyName="personalizedUnit">¤m4k4zcl6-QOP-m4k57q2u¤ </r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">1</r:Low>
                      <r:High isInclusive="true">10</r:High>
@@ -1124,7 +1124,7 @@
             </r:QuestionReference>
             <l:VariableRepresentation>
                <r:NumericRepresentation>
-                  <r:MeasurementUnit ControlledVocabularyName="personalizedUnit">¤m4k4zcl6-QOP-m4k57q2u¤ </r:MeasurementUnit>
+                  <r:MeasurementUnit controlledVocabularyName="personalizedUnit">¤m4k4zcl6-QOP-m4k57q2u¤ </r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000</r:Low>
                      <r:High isInclusive="true">1000</r:High>
@@ -1157,7 +1157,7 @@
             </r:QuestionReference>
             <l:VariableRepresentation>
                <r:NumericRepresentation>
-                  <r:MeasurementUnit ControlledVocabularyName="personalizedUnit">¤m4k4zcl6-QOP-m4k57q2u¤ </r:MeasurementUnit>
+                  <r:MeasurementUnit controlledVocabularyName="personalizedUnit">¤m4k4zcl6-QOP-m4k57q2u¤ </r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000</r:Low>
                      <r:High isInclusive="true">1000</r:High>
@@ -1223,7 +1223,7 @@
             </r:QuestionReference>
             <l:VariableRepresentation>
                <r:NumericRepresentation>
-                  <r:MeasurementUnit ControlledVocabularyName="personalizedUnit">¤m4k4zcl6-QOP-m4k57q2u¤ </r:MeasurementUnit>
+                  <r:MeasurementUnit controlledVocabularyName="personalizedUnit">¤m4k4zcl6-QOP-m4k57q2u¤ </r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-10000</r:Low>
                      <r:High isInclusive="true">10000</r:High>
