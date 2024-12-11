@@ -4,6 +4,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.30.0] - 2024-12-11
+
+### :sparkles: New Features
+- [`6cc98e1`](https://github.com/InseeFr/Eno/commit/6cc98e13aed7d66b40bd7689cfdc234e472e396d) - **lunatic**: format control for the year of date questions (#1168)
+
+### :bug: Bug Fixes
+- [`a77584d`](https://github.com/InseeFr/Eno/commit/a77584da6bdbf4e48cd45a1d6d32df0ae16ea577) - eno xml wrong zip name (#1163)
+
+### :recycle: Refactors
+- [`b6f918c`](https://github.com/InseeFr/Eno/commit/b6f918c77baaf82eb1170bf601fc64b0da4c9ced) - improve exception handling in ddi insert labels step (#1167)
+
+
+## [3.29.1] - 2024-12-06
+
+### :bug: Bug Fixes
+- [`03d0828`](https://github.com/InseeFr/Eno/commit/03d0828ac0bb2835f0a764d489738bce65afd83a) - duration and suggester components in resizing (#1159)
+
+### :recycle: Refactors
+- [`f226a9e`](https://github.com/InseeFr/Eno/commit/f226a9edeb0084f395a628e00d2b92430d0a4912) - refactor: dynamic table mapping (#1152)
+
+
+## [3.29.0-hotfix] - 2024-11-27
+
+### :bug: Bug Fixes
+- [`bba372d`](https://github.com/InseeFr/Eno/commit/bba372d6d844890a14cb05a920b404162fb02506) - vtl inversion regression (#1166)
+
+
 ## [3.29.0] - 2024-11-12
 ### :sparkles: New Features
 - [`10ded46`](https://github.com/InseeFr/Eno/commit/10ded46bb9323bda96966f76100ac2821fa4ebb1) - calculated expression for dynamic table size *(PR [#1148](https://github.com/InseeFr/Eno/pull/1148) by [@nsenave](https://github.com/nsenave))*
@@ -349,3 +376,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.27.1]: https://github.com/InseeFr/Eno/compare/3.27.0...3.27.1
 [3.28.0]: https://github.com/InseeFr/Eno/compare/3.27.1...3.28.0
 [3.29.0]: https://github.com/InseeFr/Eno/compare/3.28.0...3.29.0
+[3.29.0-hotfix]: https://github.com/InseeFr/Eno/compare/3.29.0...3.29.0-hotfix.2
+[3.29.1]: https://github.com/InseeFr/Eno/compare/3.29.0-hotfix.2...3.29.1
+[3.30.0]: https://github.com/InseeFr/Eno/compare/3.29.1...3.30.0
