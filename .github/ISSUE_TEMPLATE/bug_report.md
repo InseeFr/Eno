@@ -3,32 +3,32 @@ name: Bug report
 about: Create a report to help us improve
 title: ''
 labels: bug
-assignees: nsenave
 
 ---
 
 ## Describe the bug
 
-A clear and concise description of what the bug is.
+A clear and concise description of the bug.
 
-- [ ] I tested it on the storybook, which leads me to believe that it's a lunatic bug.
+Please indicate which formats are concerned:
+
+- Input : Pogues / DDI (if you don't knwo, leave both)
+- Output : Lunatic / Xforms / Paper / Specifications / All formats
 
 ## To Reproduce
 
-Steps to reproduce the behavior:
+Please provide a clear description of the case where the generation is wrong, including:
 
-1. With the survey available here/uploaded in issue
-2. Go to '...'
-3. Click on '....'
-4. See error ...
+- Context: DEFAULT / HOUSEHOLD / BUSINESS
+- Mode: CAPI / CATI / CAWI / PAPI
 
-## Expected behavior
+or a parameters file if the error occurs with specific parameters.
 
-A clear and concise description of what you expected to happen.
+If the case is not precisely identified, please provide a Pogues json questionnaire, or eventually a DDI.
 
-## Screenshots
+## Expected output
 
-If applicable, add screenshots to help explain your problem.
+A clear and concise description of what should be generated.
 
 ## Version where the bug appeared
 
