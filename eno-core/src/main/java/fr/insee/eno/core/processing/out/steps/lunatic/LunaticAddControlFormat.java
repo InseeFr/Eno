@@ -2,9 +2,14 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.lunatic.model.flat.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -153,39 +158,91 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
         control.ifPresent(controlType -> controls.add(0, controlType));
     }
 
+    private static final Logger logger = LoggerFactory.getLogger(LunaticAddControlFormat.class);
+
+    String formatDateToFrench(String date) {
+
+        if (date == null) {
+            logger.warn("La date fournie est nulle. Elle sera ignorée.");
+            return null;
+        }
+
+        if (date.matches("format-date\\(current-date\\(\\),\\s*'\\[Y0001]-\\[M01]-\\[D01]'\\)")) {
+            logger.warn("Date dynamique non prise en charge : {}. Elle sera ignorée.", date);
+            return null;
+        }
+
+        if (date.matches("\\d{4}")) {
+            return date;
+        } else if (date.matches("\\d{4}-\\d{2}")) {
+            YearMonth parsedDate = YearMonth.parse(date);
+            return parsedDate.format(DateTimeFormatter.ofPattern("MM-yyyy"));
+        } else if (date.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            LocalDate parsedDate = LocalDate.parse(date);
+            return parsedDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        } else {
+            throw new IllegalArgumentException("Le format de la date est invalide. Attendu : AAAA, AAAA-MM, ou AAAA-MM-JJ. Reçu : " + date);
+        }
+    }
+
     /**
      * Create controls from date picker attributes
      * @param id date picker id
      * @param minValue min value
      * @param maxValue max value
      * @param format format string
-     * @param responseName date picker reponse attribute
+     * @param responseName date picker response attribute
      */
-    private Optional<ControlType> getFormatControlFromDatepickerAttributes(String id, String minValue, String maxValue, String format, String responseName) {
+    Optional<ControlType> getFormatControlFromDatepickerAttributes(String id, String minValue, String maxValue, String format, String responseName) {
         String controlIdPrefix = id + "-format-date";
 
-        if(minValue != null && maxValue != null) {
-            String controlExpression = String.format("not(not(isnull(%s)) and " +
-                    "(cast(%s, date, \"%s\")<cast(\"%s\", date, \"%s\") or " +
-                    "cast(%s, date, \"%s\")>cast(\"%s\", date, \"%s\")))",
-                    responseName, responseName, format, minValue, format, responseName, format, maxValue, format);
-            String controlErrorMessage = String.format("\"La date saisie doit être comprise entre %s et %s.\"", minValue, maxValue);
-            return Optional.of(createFormatControl(controlIdPrefix+"-borne-inf-sup", controlExpression, controlErrorMessage));
+        String formattedMinValue = minValue != null ? formatDateToFrench(minValue) : null;
+        String formattedMaxValue = maxValue != null ? formatDateToFrench(maxValue) : null;
+
+        if (minValue == null && maxValue == null) {
+            logger.warn("Aucune contrainte de date définie pour l'id : {}", id);
+            return Optional.empty();
         }
 
-        if(minValue == null && maxValue != null) {
-            String controlExpression = String.format("not(not(isnull(%s)) and (cast(%s, date, \"%s\")>cast(\"%s\", date, \"%s\")))",
-                    responseName, responseName, format, maxValue, format);
-            String controlErrorMessage = String.format("\"La date saisie doit être antérieure à à %s.\"", maxValue);
-            return Optional.of(createFormatControl(controlIdPrefix+"-borne-sup", controlExpression, controlErrorMessage));
+        if (minValue != null && maxValue != null) {
+
+            String controlExpression = String.format(
+                    "not(not(isnull(%s)) and " +
+                            "(cast(%s, date, \"%s\")<cast(\"%s\", date, \"%s\") or " +
+                            "cast(%s, date, \"%s\")>cast(\"%s\", date, \"%s\")))",
+                    responseName, responseName, format, minValue, format, responseName, format, maxValue, format
+            );
+            String controlErrorMessage = String.format(
+                    "\"La date saisie doit être comprise entre %s et %s.\"",
+                    formattedMinValue, formattedMaxValue
+            );
+            return Optional.of(createFormatControl(controlIdPrefix + "-borne-inf-sup", controlExpression, controlErrorMessage));
         }
 
-        if(minValue != null && maxValue == null) {
-            String controlExpression = String.format("not(not(isnull(%s)) and (cast(%s, date, \"%s\")<cast(\"%s\", date, \"%s\")))",
-                    responseName, responseName, format, minValue, format);
-            String controlErrorMessage = String.format("\"La date saisie doit être postérieure à %s.\"", minValue);
-            return Optional.of(createFormatControl(controlIdPrefix+"-borne-inf", controlExpression, controlErrorMessage));
+        if (minValue == null && maxValue != null) {
+            String controlExpression = String.format(
+                    "not(not(isnull(%s)) and (cast(%s, date, \"%s\")>cast(\"%s\", date, \"%s\")))",
+                    responseName, responseName, format, maxValue, format
+            );
+            String controlErrorMessage = String.format(
+                    "\"La date saisie doit être antérieure à %s.\"",
+                    formattedMaxValue
+            );
+            return Optional.of(createFormatControl(controlIdPrefix + "-borne-sup", controlExpression, controlErrorMessage));
         }
+
+        if (minValue != null && maxValue == null) {
+            String controlExpression = String.format(
+                    "not(not(isnull(%s)) and (cast(%s, date, \"%s\")<cast(\"%s\", date, \"%s\")))",
+                    responseName, responseName, format, minValue, format
+            );
+            String controlErrorMessage = String.format(
+                    "\"La date saisie doit être postérieure à %s.\"",
+                    formattedMinValue
+            );
+            return Optional.of(createFormatControl(controlIdPrefix + "-borne-inf", controlExpression, controlErrorMessage));
+        }
+
         return Optional.empty();
     }
 

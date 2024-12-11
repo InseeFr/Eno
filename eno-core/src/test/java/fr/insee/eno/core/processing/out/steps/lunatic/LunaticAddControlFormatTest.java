@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -312,4 +313,59 @@ class LunaticAddControlFormatTest {
         bodyLine.getBodyCells().addAll(bodyCells);
         return bodyLine;
     }
+
+    @Test
+    void testFormatDateToFrench_validDate() {
+        String input = "2024-12-10";
+        String expected = "10-12-2024";
+        String result = processing.formatDateToFrench(input);
+        assertEquals(expected, result, "La date doit être formatée correctement en JJ-MM-AAAA");
+    }
+
+    @Test
+    void shouldReturnEmptyWhenNoConstraints() {
+        Optional<ControlType> result = processing.getFormatControlFromDatepickerAttributes(
+                "datepicker-id", null, null, "YYYY-MM-DD", "DATEVAR");
+        assertTrue(result.isEmpty(), "Expected no control when no constraints are provided.");
+    }
+
+    @Test
+    void shouldReturnControlWithMinOnly() {
+        Optional<ControlType> result = processing.getFormatControlFromDatepickerAttributes(
+                "datepicker-id", "2020-01-01", null, "YYYY-MM-DD", "DATEVAR");
+
+        assertTrue(result.isPresent());
+        ControlType control = result.get();
+        assertEquals("not(not(isnull(DATEVAR)) and (cast(DATEVAR, date, \"YYYY-MM-DD\")<cast(\"2020-01-01\", date, \"YYYY-MM-DD\")))",
+                control.getControl().getValue());
+        assertEquals("\"La date saisie doit être postérieure à 01-01-2020.\"",
+                control.getErrorMessage().getValue());
+    }
+
+    @Test
+    void shouldReturnControlWithMaxOnly() {
+        Optional<ControlType> result = processing.getFormatControlFromDatepickerAttributes(
+                "datepicker-id", null, "2023-01-01", "YYYY-MM-DD", "DATEVAR");
+
+        assertTrue(result.isPresent());
+        ControlType control = result.get();
+        assertEquals("not(not(isnull(DATEVAR)) and (cast(DATEVAR, date, \"YYYY-MM-DD\")>cast(\"2023-01-01\", date, \"YYYY-MM-DD\")))",
+                control.getControl().getValue());
+        assertEquals("\"La date saisie doit être antérieure à 01-01-2023.\"",
+                control.getErrorMessage().getValue());
+    }
+
+    @Test
+    void shouldReturnControlWithBothMinAndMax() {
+        Optional<ControlType> result = processing.getFormatControlFromDatepickerAttributes(
+                "datepicker-id", "2020-01-01", "2023-01-01", "YYYY-MM-DD", "DATEVAR");
+
+        assertTrue(result.isPresent());
+        ControlType control = result.get();
+        assertEquals("not(not(isnull(DATEVAR)) and (cast(DATEVAR, date, \"YYYY-MM-DD\")<cast(\"2020-01-01\", date, \"YYYY-MM-DD\") or cast(DATEVAR, date, \"YYYY-MM-DD\")>cast(\"2023-01-01\", date, \"YYYY-MM-DD\")))",
+                control.getControl().getValue());
+        assertEquals("\"La date saisie doit être comprise entre 01-01-2020 et 01-01-2023.\"",
+                control.getErrorMessage().getValue());
+    }
 }
+
