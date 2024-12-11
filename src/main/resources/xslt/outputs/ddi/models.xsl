@@ -456,7 +456,12 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="unit" select="enoddi33:get-unit($source-context)"/>
         <xsl:if test="not(normalize-space($unit) = ('',' '))">
-            <r:MeasurementUnit><xsl:value-of select="$unit"/></r:MeasurementUnit>
+            <r:MeasurementUnit>
+                <xsl:if test="enoddi33:is-dynamic-unit($source-context)">
+                    <xsl:attribute name="ControlledVocabularyName">personalizedUnit</xsl:attribute>    
+                </xsl:if>
+                <xsl:value-of select="$unit"/>
+            </r:MeasurementUnit>
         </xsl:if>
     </xsl:template>
 
