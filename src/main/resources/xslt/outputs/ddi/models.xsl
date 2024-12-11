@@ -458,7 +458,7 @@
         <xsl:if test="not(normalize-space($unit) = ('',' '))">
             <r:MeasurementUnit>
                 <xsl:if test="enoddi33:is-dynamic-unit($source-context)">
-                    <xsl:attribute name="ControlledVocabularyName">personalizedUnit</xsl:attribute>    
+                    <xsl:attribute name="controlledVocabularyName">personalizedUnit</xsl:attribute>    
                 </xsl:if>
                 <xsl:value-of select="$unit"/>
             </r:MeasurementUnit>
