@@ -1,5 +1,10 @@
 # Eno Releases note
 
+## [v2.12.1] - 2024-12-11
+### :bug: Bug Fixes
+- [`4273a60`](https://github.com/InseeFr/Eno/commit/4273a60dea22909b74b87ff0fbcaf1ba717536b6) - **dynamic unit**: controlledVocabularyName attribute *(PR [#1174](https://github.com/InseeFr/Eno/pull/1174) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [v2.11.0] - 2024-11-04
 ### :sparkles: New Features
 - [`86c6f82`](https://github.com/InseeFr/Eno/commit/86c6f82bc97a61d69f4aa5a9e4b8d1583dc3cfa1) - **pogues2ddi**: table dynamic size defined with an expression *(PR [#1117](https://github.com/InseeFr/Eno/pull/1117) by [@BulotF](https://github.com/BulotF))*
@@ -379,3 +384,4 @@
 [v2.10.1]: https://github.com/InseeFr/Eno/compare/v2.10.0...v2.10.1
 [v2.10.2]: https://github.com/InseeFr/Eno/compare/v2.10.1...v2.10.2
 [v2.11.0]: https://github.com/InseeFr/Eno/compare/v2.10.2...v2.11.0
+[v2.12.1]: https://github.com/InseeFr/Eno/compare/v2.12.0...v2.12.1
