@@ -10,7 +10,7 @@
   - :arrow_lower_right: *fixes issue [#1134](https://github.com/InseeFr/Eno/issues/1134) opened by [@JulienCarmona](https://github.com/JulienCarmona)*
 
 
-## [v2.10.1] - 2024-10-10
+## [v2.10.2] - 2024-10-10
 ### :bug: Bug Fixes
 - [`0f81c06`](https://github.com/InseeFr/Eno/commit/0f81c065efcdb8209efa329787ed663b1dc596b0) - clean up jaxb dependencies *(PR [#1118](https://github.com/InseeFr/Eno/pull/1118) by [@nsenave](https://github.com/nsenave))*
 
@@ -377,4 +377,5 @@
 [v2.9.11]: https://github.com/InseeFr/Eno/compare/v2.9.10...v2.9.11
 [v2.10.0]: https://github.com/InseeFr/Eno/compare/v2.9.11...v2.10.0
 [v2.10.1]: https://github.com/InseeFr/Eno/compare/v2.10.0...v2.10.1
+[v2.10.2]: https://github.com/InseeFr/Eno/compare/v2.10.1...v2.10.2
 [v2.11.0]: https://github.com/InseeFr/Eno/compare/v2.10.2...v2.11.0
