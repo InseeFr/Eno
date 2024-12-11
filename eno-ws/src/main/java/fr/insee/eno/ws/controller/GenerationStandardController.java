@@ -149,8 +149,7 @@ public class GenerationStandardController {
                 .path("/questionnaire/{context}/xforms")
                 .queryParam("multi-model", multiModel)
                 .build(context);
-        String outFilename = questionnaireFilename(OutFormat.XFORMS, multiModel);
-        return xmlControllerUtils.sendPostRequestByte(uri, multipartBodyBuilder, outFilename);
+        return xmlControllerUtils.sendPostRequestByte(uri, multipartBodyBuilder);
     }
 
     @Operation(
@@ -164,7 +163,7 @@ public class GenerationStandardController {
                     "If the multi-model option is set to true, the output questionnaire(s) are put in a zip file." )
     @PostMapping(value = "{context}/fo",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> generateFO(
+    public ResponseEntity<byte[]> generateFO(
             @RequestPart(value="in") MultipartFile in,
             @RequestPart(value="metadata", required = false) MultipartFile metadata,
             @RequestPart(value="specificTreatment", required=false) MultipartFile specificTreatment,
@@ -192,8 +191,7 @@ public class GenerationStandardController {
                 .queryParam("Capture", capture)
                 .queryParam("multi-model", multiModel)
                 .build(context);
-        String outFilename = questionnaireFilename(OutFormat.FO, multiModel);
-        return xmlControllerUtils.sendPostRequest(uri, multipartBodyBuilder, outFilename);
+        return xmlControllerUtils.sendPostRequestByte(uri, multipartBodyBuilder);
     }
 
     @Operation(
@@ -203,7 +201,7 @@ public class GenerationStandardController {
                     "context.")
     @PostMapping(value = "{context}/fodt",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> generateFODT(
+    public ResponseEntity<byte[]> generateFODT(
             @RequestPart(value="in") MultipartFile in,
             @PathVariable Context context) throws EnoControllerException {
         //
@@ -211,8 +209,7 @@ public class GenerationStandardController {
         addMultipartToBody(multipartBodyBuilder, in, "in");
         //
         URI uri = xmlControllerUtils.newUriBuilder().path("/questionnaire/{context}/fodt").build(context);
-        String outFilename = questionnaireFilename(OutFormat.FODT, false);
-        return xmlControllerUtils.sendPostRequest(uri, multipartBodyBuilder, outFilename);
+        return xmlControllerUtils.sendPostRequestByte(uri, multipartBodyBuilder);
     }
 
 }

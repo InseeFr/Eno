@@ -53,10 +53,10 @@ jobs:
             exit 1
           fi
 
-#          if ! [[ "${{ steps.version-step.outputs.version }}" =~ ^[0-9]+.[0-9]+.[0-9]+(-hotfix\.\d+)?$ ]]; then
-#            echo "Nothing to tag/release, the tag ${{ steps.version-step.outputs.version }} is not in correct format X.Y.Z"
-#            exit 1
-#          fi
+          if ! [[ "${{ steps.version-step.outputs.version }}" =~ ^[0-9]+.[0-9]+.[0-9]+$ ]]; then
+            echo "Nothing to tag/release, the tag ${{ steps.version-step.outputs.version }} is not in correct format X.Y.Z"
+            exit 1
+          fi
 
   sonar:
     name: Sonar analysis
@@ -135,7 +135,7 @@ jobs:
 
       - name: Get previous final release tag
         id: previousTag
-        run: echo "previousTag=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | grep "^[3-9]\.[0-9]+\.[0-9]+(-hotfix\.\d+)?$" | tail -1)" >> $GITHUB_OUTPUT
+        run: echo "previousTag=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | grep "^[3-9]\.[0-9]\+\.[0-9]\+$" | tail -1)" >> $GITHUB_OUTPUT
         # Note: the regex works for single digit major version, to be updated if the version goes 10.0.0 or more
 
       - name: Create tag

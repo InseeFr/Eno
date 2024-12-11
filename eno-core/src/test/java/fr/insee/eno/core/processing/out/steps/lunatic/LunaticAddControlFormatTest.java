@@ -2,6 +2,7 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
@@ -26,13 +27,13 @@ class LunaticAddControlFormatTest {
         datePicker = new Datepicker();
         datePicker.setComponentType(ComponentTypeEnum.DATEPICKER);
         datePicker.setId("datepicker-id");
-        datePicker.setResponse(buildResponse("DATEVAR"));
+        datePicker.setResponse(buildResponse("DATE_VAR"));
 
         number = new InputNumber();
         number.setComponentType(ComponentTypeEnum.INPUT_NUMBER);
         number.setId("number-id");
         number.setDecimals(BigInteger.ZERO);
-        number.setResponse(buildResponse("NUMBERVAR"));
+        number.setResponse(buildResponse("NUMBER_VAR"));
     }
 
     @Test
@@ -46,9 +47,9 @@ class LunaticAddControlFormatTest {
 
         List<ControlType> controls = number.getControls();
         assertEquals(1, controls.size());
-        ControlType control = controls.get(0);
+        ControlType control = controls.getFirst();
 
-        assertEquals("not(not(isnull(NUMBERVAR))  and round(NUMBERVAR,10)<>NUMBERVAR)", control.getControl().getValue());
+        assertEquals("not(not(isnull(NUMBER_VAR))  and round(NUMBER_VAR,10)<>NUMBER_VAR)", control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getType());
         assertEquals("number-id-format-decimal", control.getId());
@@ -69,8 +70,8 @@ class LunaticAddControlFormatTest {
 
         List<ControlType> controls = number.getControls();
 
-        ControlType control = controls.get(0);
-        assertEquals("not(not(isnull(NUMBERVAR)) and (5.2400000000>NUMBERVAR or 10.1200000000<NUMBERVAR))", control.getControl().getValue());
+        ControlType control = controls.getFirst();
+        assertEquals("not(not(isnull(NUMBER_VAR)) and (5.2400000000>NUMBER_VAR or 10.1200000000<NUMBER_VAR))", control.getControl().getValue());
     }
 
     @Test
@@ -94,9 +95,9 @@ class LunaticAddControlFormatTest {
 
         List<ControlType> controls = number.getControls();
         assertEquals(2, controls.size());
-        ControlType control = controls.get(0);
+        ControlType control = controls.getFirst();
 
-        assertEquals("not(not(isnull(NUMBERVAR)) and (5>NUMBERVAR or 10<NUMBERVAR))", control.getControl().getValue());
+        assertEquals("not(not(isnull(NUMBER_VAR)) and (5>NUMBER_VAR or 10<NUMBER_VAR))", control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getType());
         assertEquals("number-id-format-borne-inf-sup", control.getId());
@@ -113,9 +114,9 @@ class LunaticAddControlFormatTest {
 
         List<ControlType> controls = number.getControls();
         assertEquals(2, controls.size());
-        ControlType control = controls.get(0);
+        ControlType control = controls.getFirst();
 
-        assertEquals("not(not(isnull(NUMBERVAR)) and 5>NUMBERVAR)", control.getControl().getValue());
+        assertEquals("not(not(isnull(NUMBER_VAR)) and 5>NUMBER_VAR)", control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getType());
         assertEquals("number-id-format-borne-inf", control.getId());
@@ -132,9 +133,9 @@ class LunaticAddControlFormatTest {
 
         List<ControlType> controls = number.getControls();
         assertEquals(2, controls.size());
-        ControlType control = controls.get(0);
+        ControlType control = controls.getFirst();
 
-        assertEquals("not(not(isnull(NUMBERVAR)) and 10<NUMBERVAR)", control.getControl().getValue());
+        assertEquals("not(not(isnull(NUMBER_VAR)) and 10<NUMBER_VAR)", control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getType());
         assertEquals("number-id-format-borne-sup", control.getId());
@@ -143,7 +144,8 @@ class LunaticAddControlFormatTest {
     }
 
     @Test
-    void shouldDatepickerNotHaveControlsWhenMinMaxNotSet() {
+    @DisplayName("Datepicker: no format nor min/max, should have no controls")
+    void datepickerNoFormatNorMinMax() {
         lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(datePicker);
         processing.apply(lunaticQuestionnaire);
@@ -151,7 +153,32 @@ class LunaticAddControlFormatTest {
     }
 
     @Test
-    void shouldDatepickerHaveMinMaxFormatControl() {
+    @DisplayName("Datepicker: year format control only")
+    void datepickerYearFormatControl() {
+        lunaticQuestionnaire = new Questionnaire();
+        lunaticQuestionnaire.getComponents().add(datePicker);
+        datePicker.setDateFormat("YYYY-MM-DD");
+
+        processing.apply(lunaticQuestionnaire);
+
+        List<ControlType> controls = datePicker.getControls();
+        assertEquals(1, controls.size());
+        ControlType yearControl = controls.getFirst();
+
+        assertEquals("datepicker-id-format-year", yearControl.getId());
+        String expected = "not(not(isnull(DATE_VAR)) and (" +
+                "cast(cast(cast(DATE_VAR, date, \"YYYY-MM-DD\"), string, \"YYYY\"), integer) <= 999 or " +
+                "cast(cast(cast(DATE_VAR, date, \"YYYY-MM-DD\"), string, \"YYYY\"), integer) > 9999))";
+        assertEquals(expected, yearControl.getControl().getValue());
+        assertEquals(LabelTypeEnum.VTL, yearControl.getControl().getType());
+        assertEquals(LabelTypeEnum.VTL_MD, yearControl.getErrorMessage().getType());
+        assertEquals(ControlTypeEnum.FORMAT, yearControl.getTypeOfControl());
+        assertEquals(ControlCriticalityEnum.ERROR, yearControl.getCriticality());
+    }
+
+    @Test
+    @DisplayName("Datepicker: min and max format control")
+    void datepickerMinMaxFormatControl() {
         lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(datePicker);
         datePicker.setMin("2020-01-01");
@@ -160,19 +187,23 @@ class LunaticAddControlFormatTest {
         processing.apply(lunaticQuestionnaire);
 
         List<ControlType> controls = datePicker.getControls();
-        assertEquals(1, controls.size());
-        ControlType control = controls.get(0);
+        assertEquals(2, controls.size());
+        ControlType control = controls.get(1);
 
-        assertEquals("not(not(isnull(DATEVAR)) and (cast(DATEVAR, date, \"YYYY-MM-DD\")<cast(\"2020-01-01\", date, \"YYYY-MM-DD\") or cast(DATEVAR, date, \"YYYY-MM-DD\")>cast(\"2023-01-01\", date, \"YYYY-MM-DD\")))", control.getControl().getValue());
-        assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
-        assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getType());
         assertEquals("datepicker-id-format-date-borne-inf-sup", control.getId());
+        String expected = "not(not(isnull(DATE_VAR)) and " +
+                "(cast(DATE_VAR, date, \"YYYY-MM-DD\")<cast(\"2020-01-01\", date, \"YYYY-MM-DD\") or " +
+                "cast(DATE_VAR, date, \"YYYY-MM-DD\")>cast(\"2023-01-01\", date, \"YYYY-MM-DD\")))";
+        assertEquals(expected, control.getControl().getValue());
+        assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
+        assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getType());
         assertEquals(ControlTypeEnum.FORMAT, control.getTypeOfControl());
         assertEquals(ControlCriticalityEnum.ERROR, control.getCriticality());
     }
 
     @Test
-    void shouldDatepickerHaveMinFormatControl() {
+    @DisplayName("Datepicker: min format control")
+    void datepickerMinFormatControl() {
         lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(datePicker);
         datePicker.setMin("2020-01-01");
@@ -180,19 +211,22 @@ class LunaticAddControlFormatTest {
         processing.apply(lunaticQuestionnaire);
 
         List<ControlType> controls = datePicker.getControls();
-        assertEquals(1, controls.size());
-        ControlType control = controls.get(0);
+        assertEquals(2, controls.size());
+        ControlType control = controls.get(1);
 
-        assertEquals("not(not(isnull(DATEVAR)) and (cast(DATEVAR, date, \"YYYY-MM-DD\")<cast(\"2020-01-01\", date, \"YYYY-MM-DD\")))", control.getControl().getValue());
+        assertEquals("datepicker-id-format-date-borne-inf", control.getId());
+        String expected = "not(not(isnull(DATE_VAR)) and " +
+                "(cast(DATE_VAR, date, \"YYYY-MM-DD\")<cast(\"2020-01-01\", date, \"YYYY-MM-DD\")))";
+        assertEquals(expected, control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getType());
-        assertEquals("datepicker-id-format-date-borne-inf", control.getId());
         assertEquals(ControlTypeEnum.FORMAT, control.getTypeOfControl());
         assertEquals(ControlCriticalityEnum.ERROR, control.getCriticality());
     }
 
     @Test
-    void shouldDatepickerNumberHaveMaxFormatControl() {
+    @DisplayName("Datepicker: max format control")
+    void datepickerMaxFormatControl() {
         lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(datePicker);
         datePicker.setMax("2023-01-01");
@@ -200,15 +234,35 @@ class LunaticAddControlFormatTest {
         processing.apply(lunaticQuestionnaire);
 
         List<ControlType> controls = datePicker.getControls();
-        assertEquals(1, controls.size());
-        ControlType control = controls.get(0);
+        assertEquals(2, controls.size());
+        ControlType boundsControl = controls.get(1);
 
-        assertEquals("not(not(isnull(DATEVAR)) and (cast(DATEVAR, date, \"YYYY-MM-DD\")>cast(\"2023-01-01\", date, \"YYYY-MM-DD\")))", control.getControl().getValue());
-        assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
-        assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getType());
-        assertEquals("datepicker-id-format-date-borne-sup", control.getId());
-        assertEquals(ControlTypeEnum.FORMAT, control.getTypeOfControl());
-        assertEquals(ControlCriticalityEnum.ERROR, control.getCriticality());
+        assertEquals("datepicker-id-format-date-borne-sup", boundsControl.getId());
+        String expected = "not(not(isnull(DATE_VAR)) " +
+                "and (cast(DATE_VAR, date, \"YYYY-MM-DD\")>cast(\"2023-01-01\", date, \"YYYY-MM-DD\")))";
+        assertEquals(expected, boundsControl.getControl().getValue());
+        assertEquals(LabelTypeEnum.VTL, boundsControl.getControl().getType());
+        assertEquals(LabelTypeEnum.VTL_MD, boundsControl.getErrorMessage().getType());
+        assertEquals(ControlTypeEnum.FORMAT, boundsControl.getTypeOfControl());
+        assertEquals(ControlCriticalityEnum.ERROR, boundsControl.getCriticality());
+    }
+
+    @Test
+    @DisplayName("Datepicker: year format control when min/max is set")
+    void datepickerYearAndMinMaxFormatControl() {
+        lunaticQuestionnaire = new Questionnaire();
+        lunaticQuestionnaire.getComponents().add(datePicker);
+        datePicker.setMax("2023-01-01");
+        datePicker.setDateFormat("YYYY-MM-DD");
+        processing.apply(lunaticQuestionnaire);
+
+        List<ControlType> controls = datePicker.getControls();
+        assertEquals(2, controls.size());
+        ControlType yearControl = controls.get(0);
+        ControlType boundsControl = controls.get(1);
+        // Only testing ids here to check that the order is right, content is tested in other tests
+        assertEquals("datepicker-id-format-year", yearControl.getId());
+        assertEquals("datepicker-id-format-date-borne-sup", boundsControl.getId());
     }
 
     @Test
@@ -227,7 +281,7 @@ class LunaticAddControlFormatTest {
 
         processing.apply(lunaticQuestionnaire);
 
-        assertEquals(1, datePicker.getControls().size());
+        assertEquals(2, datePicker.getControls().size());
         assertEquals(2, number.getControls().size());
     }
 
@@ -241,12 +295,12 @@ class LunaticAddControlFormatTest {
 
         List<BodyCell> bodyCells = new ArrayList<>();
         bodyCells.add(buildBodyCell("line1"));
-        bodyCells.add(buildBodyCell(table.getId()+"-co", "CHECKVAR", ComponentTypeEnum.CHECKBOX_ONE));
+        bodyCells.add(buildBodyCell(table.getId()+"-co", "CHECKBOX_VAR", ComponentTypeEnum.CHECKBOX_ONE));
         bodyLines.add(buildBodyLine(bodyCells));
 
         bodyCells = new ArrayList<>();
         bodyCells.add(buildBodyCell("line2"));
-        bodyCells.add(buildBodyCell(table.getId()+"-number", "NUMBERVAR", ComponentTypeEnum.INPUT_NUMBER, BigInteger.TWO, 2.0, 5.0));
+        bodyCells.add(buildBodyCell(table.getId()+"-number", "NUMBER_VAR", ComponentTypeEnum.INPUT_NUMBER, BigInteger.TWO, 2.0, 5.0));
         bodyLines.add(buildBodyLine(bodyCells));
 
         lunaticQuestionnaire = new Questionnaire();
@@ -267,8 +321,8 @@ class LunaticAddControlFormatTest {
 
         List<BodyCell> bodyCells = roster.getComponents();
         bodyCells.add(buildBodyCell("line1"));
-        bodyCells.add(buildBodyCell(roster.getId()+"-number", "NUMBERVAR", ComponentTypeEnum.INPUT_NUMBER, BigInteger.TWO, 2.0, 5.0));
-        bodyCells.add(buildBodyCell(roster.getId()+"-co", "CHECKVAR", ComponentTypeEnum.CHECKBOX_ONE));
+        bodyCells.add(buildBodyCell(roster.getId()+"-number", "NUMBER_VAR", ComponentTypeEnum.INPUT_NUMBER, BigInteger.TWO, 2.0, 5.0));
+        bodyCells.add(buildBodyCell(roster.getId()+"-co", "CHECKBOX_VAR", ComponentTypeEnum.CHECKBOX_ONE));
 
         lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(roster);
