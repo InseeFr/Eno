@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class VariableTest {
 
@@ -30,6 +29,13 @@ class VariableTest {
         // Index variables by name to ease testing
         Map<String, Variable> variableMap = enoQuestionnaire.getVariables().stream()
                 .collect(Collectors.toMap(Variable::getName, variable -> variable));
+        //
+        assertEquals("€", variableMap.get("NUMBER_FIXED_UNIT").getUnit());
+        assertEquals("%", variableMap.get("TABLE11").getUnit());
+        assertEquals("%", variableMap.get("TABLE21").getUnit());
+        assertEquals("€", variableMap.get("DYNAMIC_TABLE1").getUnit());
+        List.of("NUMBER_DYNAMIC_UNIT", "TABLE12", "TABLE22", "DYNAMIC_TABLE2").forEach(variableName ->
+                assertTrue(variableMap.get(variableName).getUnit().contains("¤")));
         //
         List.of("NUMBER_FIXED_UNIT", "TABLE11", "TABLE21", "DYNAMIC_TABLE1").forEach(variableName ->
                 assertFalse(variableMap.get(variableName).getIsUnitDynamic()));
