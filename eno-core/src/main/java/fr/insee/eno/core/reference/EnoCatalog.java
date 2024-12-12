@@ -8,11 +8,9 @@ import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.declaration.Instruction;
 import fr.insee.eno.core.model.label.EnoLabel;
 import fr.insee.eno.core.model.navigation.Control;
-import fr.insee.eno.core.model.question.DynamicTableQuestion;
-import fr.insee.eno.core.model.question.EnoTable;
-import fr.insee.eno.core.model.question.Question;
-import fr.insee.eno.core.model.question.TableQuestion;
+import fr.insee.eno.core.model.question.*;
 import fr.insee.eno.core.model.question.table.NoDataCell;
+import fr.insee.eno.core.model.question.table.NumericCell;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.sequence.RoundaboutSequence;
 import fr.insee.eno.core.model.sequence.Sequence;
@@ -102,6 +100,18 @@ public class EnoCatalog {
             labels.addAll(enoComponent.getDeclarations().stream().map(Declaration::getLabel).toList());
             labels.addAll(enoComponent.getInstructions().stream().map(Instruction::getLabel).toList());
         });
+        // Units
+        enoQuestionnaire.getSingleResponseQuestions().stream()
+                .filter(NumericQuestion.class::isInstance).map(NumericQuestion.class::cast)
+                .map(NumericQuestion::getUnit)
+                .forEach(labels::add);
+        enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .filter(question -> question instanceof TableQuestion || question instanceof DynamicTableQuestion)
+                .map(EnoTable.class::cast)
+                .map(EnoTable::getResponseCells).forEach(responseCells -> responseCells.stream()
+                        .filter(NumericCell.class::isInstance).map(NumericCell.class::cast)
+                        .map(NumericCell::getUnit)
+                        .forEach(labels::add));
         // Controls
         this.getQuestions().forEach(enoQuestion ->
                 labels.addAll(enoQuestion.getControls().stream().map(Control::getMessage).toList()));
