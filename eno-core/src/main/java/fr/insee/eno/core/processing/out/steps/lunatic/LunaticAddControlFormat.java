@@ -162,16 +162,10 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
 
     String formatDateToFrench(String date) {
 
-        if (date == null) {
-            logger.warn("La date fournie est nulle. Elle sera ignorée.");
+        if (date == null || date.isEmpty()) {
+            logger.warn("Date nulle ou vide reçue. Elle sera ignorée.");
             return null;
         }
-
-        if (date.matches("format-date\\(current-date\\(\\),\\s*'\\[Y0001]-\\[M01]-\\[D01]'\\)")) {
-            logger.warn("Date dynamique non prise en charge : {}. Elle sera ignorée.", date);
-            return null;
-        }
-
         if (date.matches("\\d{4}")) {
             return date;
         } else if (date.matches("\\d{4}-\\d{2}")) {
@@ -181,7 +175,8 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
             LocalDate parsedDate = LocalDate.parse(date);
             return parsedDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         } else {
-            throw new IllegalArgumentException("Le format de la date est invalide. Attendu : AAAA, AAAA-MM, ou AAAA-MM-JJ. Reçu : " + date);
+            logger.warn("Format de date non pris en charge. Attendu : AAAA, AAAA-MM, ou AAAA-MM-JJ. Reçu : {}. La date sera ignorée.", date);
+            return null;
         }
     }
 
@@ -193,6 +188,7 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
      * @param format format string
      * @param responseName date picker response attribute
      */
+
     Optional<ControlType> getFormatControlFromDatepickerAttributes(String id, String minValue, String maxValue, String format, String responseName) {
         String controlIdPrefix = id + "-format-date";
 
@@ -200,7 +196,7 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
         String formattedMaxValue = maxValue != null ? formatDateToFrench(maxValue) : null;
 
         if (minValue == null && maxValue == null) {
-            logger.warn("Aucune contrainte de date définie pour l'id : {}", id);
+            logger.warn("Aucune contrainte de date définie pour l'id : {}.", id);
             return Optional.empty();
         }
 

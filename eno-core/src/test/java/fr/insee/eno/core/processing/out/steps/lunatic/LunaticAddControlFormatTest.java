@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LunaticAddControlFormatTest {
 
@@ -319,14 +318,14 @@ class LunaticAddControlFormatTest {
         String input = "2024-12-10";
         String expected = "10-12-2024";
         String result = processing.formatDateToFrench(input);
-        assertEquals(expected, result, "La date doit être formatée correctement en JJ-MM-AAAA");
+        assertEquals(expected, result, "La date doit être formatée correctement en JJ-MM-AAAA.");
     }
 
     @Test
     void shouldReturnEmptyWhenNoConstraints() {
         Optional<ControlType> result = processing.getFormatControlFromDatepickerAttributes(
                 "datepicker-id", null, null, "YYYY-MM-DD", "DATEVAR");
-        assertTrue(result.isEmpty(), "Expected no control when no constraints are provided.");
+        assertTrue(result.isEmpty(), "Aucun contrôle attendu lorsqu'aucune contrainte n'est fournie.");
     }
 
     @Test
@@ -366,6 +365,12 @@ class LunaticAddControlFormatTest {
                 control.getControl().getValue());
         assertEquals("\"La date saisie doit être comprise entre 01-01-2020 et 01-01-2023.\"",
                 control.getErrorMessage().getValue());
+    }
+
+    @Test
+    void shouldLogWarningForUnknownFormat() {
+        String result = processing.formatDateToFrench("year-from-date(current-date())");
+        assertNull(result);
     }
 }
 
