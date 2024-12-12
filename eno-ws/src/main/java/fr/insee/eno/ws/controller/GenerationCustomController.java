@@ -123,8 +123,7 @@ public class GenerationCustomController {
 			addMultipartToBody(multipartBodyBuilder, specificTreatment, "specificTreatment");
 		//
 		URI uri = xmlControllerUtils.newUriBuilder().path("questionnaire/ddi-2-xforms").build().toUri();
-		String outFilename = questionnaireFilename(OutFormat.XFORMS, true);
-		return xmlControllerUtils.sendPostRequestByte(uri, multipartBodyBuilder, outFilename);
+		return xmlControllerUtils.sendPostRequestByte(uri, multipartBodyBuilder);
 	}
 
 	@Operation(
@@ -136,7 +135,7 @@ public class GenerationCustomController {
 					"You can get a parameters file by using the endpoint `/parameters/xml/{context}/FO`")
 	@PostMapping(value = "ddi-2-fo",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<String> generateFOCustomParams(
+	public ResponseEntity<byte[]> generateFOCustomParams(
 			@RequestPart(value="in") MultipartFile in,
 			@RequestPart(value="params") MultipartFile params,
 			@RequestPart(value="metadata") MultipartFile metadata,
@@ -152,8 +151,7 @@ public class GenerationCustomController {
 			addMultipartToBody(multipartBodyBuilder, specificTreatment, "specificTreatment");
 		//
 		URI uri = xmlControllerUtils.newUriBuilder().path("questionnaire/ddi-2-fo").build().toUri();
-		String outFilename = questionnaireFilename(OutFormat.XFORMS, false);
-		return xmlControllerUtils.sendPostRequest(uri, multipartBodyBuilder, outFilename);
+		return xmlControllerUtils.sendPostRequestByte(uri, multipartBodyBuilder);
 	}
 
 }

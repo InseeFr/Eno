@@ -57,7 +57,7 @@ public abstract class Question extends EnoIdentifiableObject implements EnoCompo
 
     @Override
     public String toString() {
-        return this.getClass() + "[id="+this.getId()+", name="+getName()+"]";
+        return this.getClass().getSimpleName() + "[id="+this.getId()+", name="+getName()+"]";
     }
 
 }
