@@ -42,7 +42,7 @@ class NumberQuestionTest {
         inputNumbersNoUnit.forEach(inputNumber -> assertNull(inputNumber.getUnitLabel()));
         assertTrue(inputNumberWithUnit.isPresent());
         assertNotNull(inputNumberWithUnit.get().getUnitLabel());
-        assertEquals("kg", inputNumberWithUnit.get().getUnitLabel().getValue());
+        assertEquals("\"kg\"", inputNumberWithUnit.get().getUnitLabel().getValue());
     }
 
     @Test
