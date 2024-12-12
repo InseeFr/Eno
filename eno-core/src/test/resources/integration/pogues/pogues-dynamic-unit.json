@@ -221,13 +221,13 @@
           "Name": "DYNAMIC_TABLE",
           "type": "QuestionType",
           "Label": [
-            "\"DYNAMIC_TABLE\""
+            "\"Dynamic table\""
           ],
           "depth": 2,
           "Control": [],
           "Response": [
             {
-              "id": "m4k56hrf",
+              "id": "m4le3dbw",
               "Datatype": {
                 "Unit": "http://id.insee.fr/unit/euro",
                 "type": "NumericDatatypeType",
@@ -236,10 +236,10 @@
                 "Decimals": "",
                 "typeName": "NUMERIC"
               },
-              "CollectedVariableReference": "m4k5e8zb"
+              "CollectedVariableReference": "m4le9geq"
             },
             {
-              "id": "m4k5ew4z",
+              "id": "m4ledl1e",
               "Datatype": {
                 "Unit": "$WHICH_UNIT$",
                 "type": "NumericDatatypeType",
@@ -249,7 +249,7 @@
                 "typeName": "NUMERIC",
                 "IsDynamicUnit": true
               },
-              "CollectedVariableReference": "m4k5ft5u"
+              "CollectedVariableReference": "m4le2oaf"
             }
           ],
           "TargetMode": [
@@ -264,11 +264,11 @@
           "ResponseStructure": {
             "Mapping": [
               {
-                "MappingSource": "m4k56hrf",
+                "MappingSource": "m4le3dbw",
                 "MappingTarget": "1 1"
               },
               {
-                "MappingSource": "m4k5ew4z",
+                "MappingSource": "m4ledl1e",
                 "MappingTarget": "1 2"
               }
             ],
@@ -425,6 +425,18 @@
         }
       },
       {
+        "id": "m4k5alw4",
+        "Name": "WHICH_UNIT",
+        "type": "CollectedVariableType",
+        "Label": "WHICH_UNIT label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": "10"
+        }
+      },
+      {
         "id": "m4k4z3gv",
         "Name": "NUMBER_DYNAMIC_UNIT",
         "type": "CollectedVariableType",
@@ -437,18 +449,6 @@
           "Decimals": "",
           "typeName": "NUMERIC",
           "IsDynamicUnit": true
-        }
-      },
-      {
-        "id": "m4k5alw4",
-        "Name": "WHICH_UNIT",
-        "type": "CollectedVariableType",
-        "Label": "WHICH_UNIT label",
-        "Datatype": {
-          "type": "TextDatatypeType",
-          "Pattern": "",
-          "typeName": "TEXT",
-          "MaxLength": "10"
         }
       },
       {
@@ -510,7 +510,7 @@
         }
       },
       {
-        "id": "m4k5e8zb",
+        "id": "m4le9geq",
         "Name": "DYNAMIC_TABLE1",
         "type": "CollectedVariableType",
         "Label": "Number column B (fixed unit)",
@@ -525,7 +525,7 @@
         }
       },
       {
-        "id": "m4k5ft5u",
+        "id": "m4le2oaf",
         "Name": "DYNAMIC_TABLE2",
         "type": "CollectedVariableType",
         "Label": "Number column B (dynamic unit)",
@@ -577,9 +577,9 @@
         "m4k17d1t",
         "m4k5jrzz",
         "m4k53xg9",
-        "idendquest",
         "m4k59ozs",
-        "m4k5i75n"
+        "m4k5i75n",
+        "idendquest"
       ]
     }
   ],
@@ -589,7 +589,7 @@
       "uri": "http://ddi:fr.insee:DataCollection.s2106-dc"
     }
   ],
-  "lastUpdatedDate": "Wed Dec 11 2024 18:03:31 GMT+0100 (heure normale d’Europe centrale)",
+  "lastUpdatedDate": "Thu Dec 12 2024 15:02:20 GMT+0100 (heure normale d’Europe centrale)",
   "formulasLanguage": "VTL",
   "childQuestionnaireRef": []
 }
