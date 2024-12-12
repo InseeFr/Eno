@@ -6,18 +6,12 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.navigation.Binding;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
 import fr.insee.eno.core.model.question.NumericQuestion;
-import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.model.question.TableQuestion;
 import fr.insee.eno.core.model.question.table.NumericCell;
 import fr.insee.eno.core.model.variable.CollectedVariable;
-import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.serialize.DDIDeserializer;
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
