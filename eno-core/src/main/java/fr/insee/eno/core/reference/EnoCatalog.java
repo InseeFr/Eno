@@ -103,14 +103,14 @@ public class EnoCatalog {
         // Units
         enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(NumericQuestion.class::isInstance).map(NumericQuestion.class::cast)
-                .map(NumericQuestion::getUnit)
+                .map(NumericQuestion::getUnit).filter(Objects::nonNull)
                 .forEach(labels::add);
         enoQuestionnaire.getMultipleResponseQuestions().stream()
                 .filter(question -> question instanceof TableQuestion || question instanceof DynamicTableQuestion)
                 .map(EnoTable.class::cast)
                 .map(EnoTable::getResponseCells).forEach(responseCells -> responseCells.stream()
                         .filter(NumericCell.class::isInstance).map(NumericCell.class::cast)
-                        .map(NumericCell::getUnit)
+                        .map(NumericCell::getUnit).filter(Objects::nonNull)
                         .forEach(labels::add));
         // Controls
         this.getQuestions().forEach(enoQuestion ->
