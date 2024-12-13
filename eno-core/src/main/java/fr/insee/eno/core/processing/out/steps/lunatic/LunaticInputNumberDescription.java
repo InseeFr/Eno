@@ -20,8 +20,8 @@ public class LunaticInputNumberDescription implements ProcessingStep<Questionnai
             EnoParameters.Language.FR, "Format attendu : un nombre%s entre %s et %s",
             EnoParameters.Language.EN, "Expected format: a number%s between %s and %s");
     private static final Map<EnoParameters.Language, String> UNIT_DESCRIPTION_PREFIX = Map.of(
-            EnoParameters.Language.FR, " en ",
-            EnoParameters.Language.EN, " in ");
+            EnoParameters.Language.FR, "en",
+            EnoParameters.Language.EN, "in");
 
     private final EnoParameters.Language language;
     private final Locale locale;
@@ -54,21 +54,30 @@ public class LunaticInputNumberDescription implements ProcessingStep<Questionnai
 
     private void generateInputNumberDescription(InputNumber inputNumber) {
         //
-        String unit = inputNumber.getUnit();
+        LabelType unitLabel = inputNumber.getUnitLabel();
+        boolean noUnit = unitLabel == null;
         int decimals = inputNumber.getDecimals() != null ? inputNumber.getDecimals().intValue() : 0;
         DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getNumberInstance(locale);
         decimalFormat.setMinimumFractionDigits(decimals);
         String minDescription = decimalFormat.format(inputNumber.getMin());
         String maxDescription = decimalFormat.format(inputNumber.getMax());
         //
-        String unitDescription = unit != null ? UNIT_DESCRIPTION_PREFIX.get(language) + unit : "";
+        String unitDescription = generateUnitDescription(unitLabel);
         String generatedDescription = String.format(INPUT_NUMBER_DESCRIPTION_CANVAS.get(language),
                 unitDescription, minDescription, maxDescription);
+        if (!noUnit)
+            generatedDescription = "\"" + generatedDescription + "\"";
         //
         LabelType description = new LabelType();
         description.setValue(generatedDescription);
-        description.setType(LabelTypeEnum.TXT);
+        description.setType(noUnit ? LabelTypeEnum.TXT : LabelTypeEnum.VTL_MD);
         inputNumber.setDescription(description);
+    }
+
+    private String generateUnitDescription(LabelType unitLabel) {
+        if (unitLabel == null)
+            return "";
+        return " " + UNIT_DESCRIPTION_PREFIX.get(language) + " \" || " + unitLabel.getValue() + " || \"";
     }
 
 }
