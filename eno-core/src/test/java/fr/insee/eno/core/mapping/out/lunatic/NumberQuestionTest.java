@@ -7,6 +7,7 @@ import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.eno.core.processing.out.steps.lunatic.LunaticEditLabelTypes;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticSortComponents;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
 import fr.insee.lunatic.model.flat.*;
@@ -55,6 +56,7 @@ class NumberQuestionTest {
         new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
         new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);
         new LunaticTableProcessing(enoQuestionnaire).apply(lunaticQuestionnaire);
+        new LunaticEditLabelTypes().apply(lunaticQuestionnaire); // to set unit type to VTL
 
         // Then
         InputNumber inputNumber1 = (InputNumber) lunaticQuestionnaire.getComponents().get(1);
@@ -76,7 +78,7 @@ class NumberQuestionTest {
     }
     private void testUnitContent(String expectedValue, LabelType unitLabel) {
         assertEquals(expectedValue, unitLabel.getValue().trim());
-        assertEquals(LabelTypeEnum.VTL_MD, unitLabel.getType());
+        assertEquals(LabelTypeEnum.VTL, unitLabel.getType());
     }
 
 }

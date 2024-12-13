@@ -70,7 +70,7 @@ public class LunaticInputNumberDescription implements ProcessingStep<Questionnai
         //
         LabelType description = new LabelType();
         description.setValue(generatedDescription);
-        description.setType(noUnit ? LabelTypeEnum.TXT : LabelTypeEnum.VTL_MD);
+        description.setType(noUnit ? LabelTypeEnum.TXT : LabelTypeEnum.VTL);
         inputNumber.setDescription(description);
     }
 

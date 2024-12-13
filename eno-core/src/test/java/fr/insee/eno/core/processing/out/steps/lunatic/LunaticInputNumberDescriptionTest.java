@@ -54,7 +54,7 @@ class LunaticInputNumberDescriptionTest {
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
         assertEquals("\"Format attendu : un nombre en \" || \"€\" || \" entre 0,0 et 10,0\"",
                 description.getValue());
-        assertEquals(LabelTypeEnum.VTL_MD, description.getType());
+        assertEquals(LabelTypeEnum.VTL, description.getType());
     }
 
     @Test
@@ -75,7 +75,7 @@ class LunaticInputNumberDescriptionTest {
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
         assertEquals("\"Format attendu : un nombre en \" || \"k€\" || \" entre 20 et 1 000\"",
                 description.getValue());
-        assertEquals(LabelTypeEnum.VTL_MD, description.getType());
+        assertEquals(LabelTypeEnum.VTL, description.getType());
     }
 
     @Test
@@ -114,7 +114,7 @@ class LunaticInputNumberDescriptionTest {
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
         assertEquals("\"Format attendu : un nombre en \" || \"€\" || \" entre 0 et 10 000 000 000\"",
                 description.getValue());
-        assertEquals(LabelTypeEnum.VTL_MD, description.getType());
+        assertEquals(LabelTypeEnum.VTL, description.getType());
     }
 
     @Test
@@ -138,8 +138,8 @@ class LunaticInputNumberDescriptionTest {
                 inputNumber1.getDescription().getValue());
         assertEquals("\"Format attendu : un nombre en \" || WHICH_UNIT  || \" entre 1 et 10\"",
                 inputNumber2.getDescription().getValue());
-        assertEquals(LabelTypeEnum.VTL_MD, inputNumber1.getDescription().getType());
-        assertEquals(LabelTypeEnum.VTL_MD, inputNumber2.getDescription().getType());
+        assertEquals(LabelTypeEnum.VTL, inputNumber1.getDescription().getType());
+        assertEquals(LabelTypeEnum.VTL, inputNumber2.getDescription().getType());
     }
 
 }
