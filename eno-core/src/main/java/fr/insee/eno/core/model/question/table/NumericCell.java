@@ -4,6 +4,7 @@ import fr.insee.ddi.lifecycle33.datacollection.GridResponseDomainInMixedType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.BodyCell;
 import lombok.Getter;
@@ -36,6 +37,6 @@ public class NumericCell extends ResponseCell {
 
     /** Unit not accessible here in DDI, the value is set there during a processing. */
     @Lunatic("setUnit(#param)")
-    String unit;
+    DynamicLabel unit;
 
 }

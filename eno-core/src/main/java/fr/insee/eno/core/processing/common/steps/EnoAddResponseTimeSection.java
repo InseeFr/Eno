@@ -14,6 +14,8 @@ import fr.insee.eno.core.reference.EnoIndex;
 
 import java.math.BigInteger;
 
+import static fr.insee.eno.core.processing.in.steps.ddi.DDIMoveUnitInQuestions.createUnit;
+
 public class EnoAddResponseTimeSection implements ProcessingStep<EnoQuestionnaire> {
 
     public static final String HOURS_VARIABLE_NAME = "HEURE_REMPL";
@@ -79,7 +81,7 @@ public class EnoAddResponseTimeSection implements ProcessingStep<EnoQuestionnair
         hoursQuestion.setMinValue(HOURS_QUESTION_MIN_VALUE);
         hoursQuestion.setMaxValue(HOURS_QUESTION_MAX_VALUE);
         hoursQuestion.setNumberOfDecimals(HOURS_QUESTION_DECIMALS);
-        hoursQuestion.setUnit(HOURS_VARIABLE_UNIT);
+        hoursQuestion.setUnit(createUnit(HOURS_VARIABLE_UNIT));
         hoursQuestion.setResponse(new Response());
         hoursQuestion.getResponse().setVariableName(HOURS_VARIABLE_NAME);
         enoQuestionnaire.getSingleResponseQuestions().add(hoursQuestion);
@@ -94,7 +96,7 @@ public class EnoAddResponseTimeSection implements ProcessingStep<EnoQuestionnair
         minutesQuestion.setMinValue(TIME_MINUTES_QUESTION_MIN_VALUE);
         minutesQuestion.setMaxValue(RESPONSE_TIME_MINUTES_QUESTION_MAX_VALUE);
         minutesQuestion.setNumberOfDecimals(RESPONSE_TIME_MINUTES_QUESTION_DECIMALS);
-        minutesQuestion.setUnit(MINUTES_VARIABLE_UNIT);
+        minutesQuestion.setUnit(createUnit(MINUTES_VARIABLE_UNIT));
         minutesQuestion.setResponse(new Response());
         minutesQuestion.getResponse().setVariableName(MINUTES_VARIABLE_NAME);
         enoQuestionnaire.getSingleResponseQuestions().add(minutesQuestion);
