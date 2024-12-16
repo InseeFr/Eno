@@ -1,15 +1,18 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
+import fr.insee.eno.core.exceptions.business.InvalidValueException;
+import fr.insee.eno.core.exceptions.business.RequiredPropertyException;
+import fr.insee.eno.core.i18n.date.DateFormatter;
+import fr.insee.eno.core.i18n.date.DateFormatterFactory;
+import fr.insee.eno.core.model.question.DateQuestion;
+import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.lunatic.model.flat.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -21,6 +24,18 @@ import java.util.Optional;
  */
 @Slf4j
 public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
+
+    private final DateFormatter dateFormatter;
+
+    /** Using french as default value for date formatting. */
+    public LunaticAddControlFormat() {
+        dateFormatter = DateFormatterFactory.forLanguage(EnoParameters.Language.FR);
+    }
+
+    public LunaticAddControlFormat(EnoParameters.Language language) {
+        dateFormatter = DateFormatterFactory.forLanguage(language);
+    }
+
     /**
      *
      * @param lunaticQuestionnaire lunatic questionnaire to be processed.
@@ -94,6 +109,8 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
         return controls;
     }
 
+    // TODO: internationalization in the generated messages
+
     /**
      * Create controls for a input number component
      * @param number input number to process
@@ -162,26 +179,15 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
         // of the first control is displayed.
     }
 
-    private static final Logger logger = LoggerFactory.getLogger(LunaticAddControlFormat.class);
-
-    String formatDateToFrench(String date) {
-
-        if (date == null || date.isEmpty()) {
-            logger.warn("Date nulle ou vide reçue. Elle sera ignorée.");
-            return null;
-        }
-        if (date.matches("\\d{4}")) {
-            return date;
-        } else if (date.matches("\\d{4}-\\d{2}")) {
-            YearMonth parsedDate = YearMonth.parse(date);
-            return parsedDate.format(DateTimeFormatter.ofPattern("MM-yyyy"));
-        } else if (date.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            LocalDate parsedDate = LocalDate.parse(date);
-            return parsedDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        } else {
-            logger.warn("Format de date non pris en charge. Attendu : AAAA, AAAA-MM, ou AAAA-MM-JJ. Reçu : {}. La date sera ignorée.", date);
-            return null;
-        }
+    private DateFormatter.Result validateAndConvertDate(String date, @NonNull String format) {
+        if (date == null)
+            return null; // The min/max date properties can eventually be null (not 'required' in Pogues)
+        return switch (format) {
+            case DateQuestion.YEAR_MONTH_DAY_FORMAT -> dateFormatter.convertYearMontDayDate(date);
+            case DateQuestion.YEAR_MONTH_FORMAT -> dateFormatter.convertYearMontDate(date);
+            case DateQuestion.YEAR_FORMAT -> dateFormatter.convertYearDate(date);
+            default -> throw new InvalidValueException("Date format '" + format + "' is invalid.");
+        };
     }
 
     /**
@@ -194,18 +200,27 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
      */
 
     Optional<ControlType> getFormatControlFromDatepickerAttributes(String id, String minValue, String maxValue, String format, String responseName) {
+        if (format == null)
+            throw new RequiredPropertyException("Format is missing in date question '" + id + "'");
+
         String controlIdPrefix = id + "-format-date";
 
-        String formattedMinValue = minValue != null ? formatDateToFrench(minValue) : null;
-        String formattedMaxValue = maxValue != null ? formatDateToFrench(maxValue) : null;
-
-        if (minValue == null && maxValue == null) {
-            logger.warn("Aucune contrainte de date définie pour l'id : {}.", id);
-            return Optional.empty();
+        DateFormatter.Result formattedMinValue = validateAndConvertDate(minValue, format);
+        if (formattedMinValue != null && !formattedMinValue.isValid()) {
+            String message = "Invalid value for min date of question '" + id + "': " + formattedMinValue.getErrorMessage();
+            log.error(message);
+            throw new InvalidValueException(message);
+        }
+        DateFormatter.Result formattedMaxValue = validateAndConvertDate(maxValue, format);
+        if (formattedMaxValue != null && !formattedMaxValue.isValid()) {
+            // Due to a bug in the Pogues -> DDI transformation, an invalid max date doesn't throw an exception for now
+            log.warn("Invalid value for max date of question '" + id + "': " + maxValue);
         }
 
-        if (minValue != null && maxValue != null) {
+        boolean generateMin = formattedMinValue != null && formattedMinValue.isValid();
+        boolean generateMax = formattedMaxValue != null && formattedMaxValue.isValid();
 
+        if (generateMin && generateMax) {
             String controlExpression = String.format(
                     "not(not(isnull(%s)) and " +
                             "(cast(%s, date, \"%s\")<cast(\"%s\", date, \"%s\") or " +
@@ -214,31 +229,31 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
             );
             String controlErrorMessage = String.format(
                     "\"La date saisie doit être comprise entre %s et %s.\"",
-                    formattedMinValue, formattedMaxValue
+                    formattedMinValue.getValue(), formattedMaxValue.getValue()
             );
             return Optional.of(createFormatControl(controlIdPrefix + "-borne-inf-sup", controlExpression, controlErrorMessage));
         }
 
-        if (minValue == null && maxValue != null) {
+        if (generateMax) {
             String controlExpression = String.format(
                     "not(not(isnull(%s)) and (cast(%s, date, \"%s\")>cast(\"%s\", date, \"%s\")))",
                     responseName, responseName, format, maxValue, format
             );
             String controlErrorMessage = String.format(
                     "\"La date saisie doit être antérieure à %s.\"",
-                    formattedMaxValue
+                    formattedMaxValue.getValue()
             );
             return Optional.of(createFormatControl(controlIdPrefix + "-borne-sup", controlExpression, controlErrorMessage));
         }
 
-        if (minValue != null && maxValue == null) {
+        if (generateMin) {
             String controlExpression = String.format(
                     "not(not(isnull(%s)) and (cast(%s, date, \"%s\")<cast(\"%s\", date, \"%s\")))",
                     responseName, responseName, format, minValue, format
             );
             String controlErrorMessage = String.format(
                     "\"La date saisie doit être postérieure à %s.\"",
-                    formattedMinValue
+                    formattedMinValue.getValue()
             );
             return Optional.of(createFormatControl(controlIdPrefix + "-borne-inf", controlExpression, controlErrorMessage));
         }
