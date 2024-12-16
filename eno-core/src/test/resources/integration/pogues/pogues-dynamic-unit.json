@@ -1,0 +1,595 @@
+{
+  "id": "m4k0xs5k",
+  "Name": "ENO_DYNAMIC_UNIT",
+  "Child": [
+    {
+      "id": "m4k11sy9",
+      "Name": "S1",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m4k1c476",
+          "Name": "NUMBER_FIXED_UNIT",
+          "type": "QuestionType",
+          "Label": [
+            "\"Number question with fixed unit\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4k0ural",
+              "Datatype": {
+                "Unit": "http://id.insee.fr/unit/euro",
+                "type": "NumericDatatypeType",
+                "Maximum": "10",
+                "Minimum": "1",
+                "Decimals": "",
+                "typeName": "NUMERIC"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m4k0qrdf"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
+          "id": "m4k4zcl6",
+          "Name": "WHICH_UNIT",
+          "type": "QuestionType",
+          "Label": [
+            "\"Which unit do you want in the next question?\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4k5disb",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": "10"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m4k5alw4"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
+          "id": "m4k17d1t",
+          "Name": "NUMBER_DYNAMIC_UNIT",
+          "type": "QuestionType",
+          "Label": [
+            "\"Number question with dynamic unit\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4k14nmx",
+              "Datatype": {
+                "Unit": "$WHICH_UNIT$",
+                "type": "NumericDatatypeType",
+                "Maximum": "10",
+                "Minimum": "1",
+                "Decimals": "",
+                "typeName": "NUMERIC",
+                "IsDynamicUnit": true
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m4k4z3gv"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
+          "id": "m4k5jrzz",
+          "Name": "TABLE",
+          "type": "QuestionType",
+          "Label": [
+            "\"Table question\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4k56n08",
+              "Datatype": {
+                "Unit": "http://id.insee.fr/unit/percent",
+                "type": "NumericDatatypeType",
+                "Maximum": "100",
+                "Minimum": "0",
+                "Decimals": "",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "m4k5k6jf"
+            },
+            {
+              "id": "m4k5m8f8",
+              "Datatype": {
+                "Unit": "http://id.insee.fr/unit/percent",
+                "type": "NumericDatatypeType",
+                "Maximum": "100",
+                "Minimum": "0",
+                "Decimals": "",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "m4k5i89b"
+            },
+            {
+              "id": "m4k5gw4x",
+              "Datatype": {
+                "Unit": "$WHICH_UNIT$",
+                "type": "NumericDatatypeType",
+                "Maximum": "1000",
+                "Minimum": "-1000",
+                "Decimals": "",
+                "typeName": "NUMERIC",
+                "IsDynamicUnit": true
+              },
+              "CollectedVariableReference": "m4k5ic92"
+            },
+            {
+              "id": "m4k588jh",
+              "Datatype": {
+                "Unit": "$WHICH_UNIT$",
+                "type": "NumericDatatypeType",
+                "Maximum": "1000",
+                "Minimum": "-1000",
+                "Decimals": "",
+                "typeName": "NUMERIC",
+                "IsDynamicUnit": true
+              },
+              "CollectedVariableReference": "m4k52ltl"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "TABLE",
+          "ResponseStructure": {
+            "Mapping": [
+              {
+                "MappingSource": "m4k56n08",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "m4k5m8f8",
+                "MappingTarget": "2 1"
+              },
+              {
+                "MappingSource": "m4k5gw4x",
+                "MappingTarget": "1 2"
+              },
+              {
+                "MappingSource": "m4k588jh",
+                "MappingTarget": "2 2"
+              }
+            ],
+            "Attribute": [],
+            "Dimension": [
+              {
+                "dynamic": "NON_DYNAMIC",
+                "dimensionType": "PRIMARY",
+                "CodeListReference": "m4k53o6a"
+              },
+              {
+                "Label": "\"Number column A (fixed unit)\"",
+                "dimensionType": "MEASURE"
+              },
+              {
+                "Label": "\"Number column A (dynamic unit)\"",
+                "dimensionType": "MEASURE"
+              }
+            ]
+          },
+          "ClarificationQuestion": []
+        },
+        {
+          "id": "m4k53xg9",
+          "Name": "DYNAMIC_TABLE",
+          "type": "QuestionType",
+          "Label": [
+            "\"Dynamic table\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4le3dbw",
+              "Datatype": {
+                "Unit": "http://id.insee.fr/unit/euro",
+                "type": "NumericDatatypeType",
+                "Maximum": "100000",
+                "Minimum": "0",
+                "Decimals": "",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "m4le9geq"
+            },
+            {
+              "id": "m4ledl1e",
+              "Datatype": {
+                "Unit": "$WHICH_UNIT$",
+                "type": "NumericDatatypeType",
+                "Maximum": "10000",
+                "Minimum": "-10000",
+                "Decimals": "",
+                "typeName": "NUMERIC",
+                "IsDynamicUnit": true
+              },
+              "CollectedVariableReference": "m4le2oaf"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "TABLE",
+          "ResponseStructure": {
+            "Mapping": [
+              {
+                "MappingSource": "m4le3dbw",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "m4ledl1e",
+                "MappingTarget": "1 2"
+              }
+            ],
+            "Attribute": [],
+            "Dimension": [
+              {
+                "dynamic": "DYNAMIC_LENGTH",
+                "MaxLines": "5",
+                "MinLines": "1",
+                "dimensionType": "PRIMARY"
+              },
+              {
+                "Label": "\"Number column B (fixed unit)\"",
+                "dimensionType": "MEASURE"
+              },
+              {
+                "Label": "\"Number column B (dynamic unit)\"",
+                "dimensionType": "MEASURE"
+              }
+            ]
+          },
+          "ClarificationQuestion": []
+        }
+      ],
+      "Label": [
+        "\"Sequence\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "m4k59ozs",
+      "Name": "END",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m4k5i75n",
+          "Name": "Q_LAST",
+          "type": "QuestionType",
+          "Label": [
+            "\"Last question\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4k565da",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m4k5ag53"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"End\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "idendquest",
+      "Name": "QUESTIONNAIRE_END",
+      "type": "SequenceType",
+      "Child": [],
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    }
+  ],
+  "Label": [
+    "Eno - Dynamic unit"
+  ],
+  "final": false,
+  "owner": "ENO-INTEGRATION-TESTS",
+  "agency": "fr.insee",
+  "CodeLists": {
+    "CodeList": [
+      {
+        "id": "m4k53o6a",
+        "Code": [
+          {
+            "Label": "\"Code A\"",
+            "Value": "A",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Code B\"",
+            "Value": "B",
+            "Parent": ""
+          }
+        ],
+        "Label": "TABLE_CODE_LIST"
+      }
+    ]
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "m4k0qrdf",
+        "Name": "NUMBER_FIXED_UNIT",
+        "type": "CollectedVariableType",
+        "Label": "NUMBER_FIXED_UNIT label",
+        "Datatype": {
+          "Unit": "http://id.insee.fr/unit/euro",
+          "type": "NumericDatatypeType",
+          "Maximum": "10",
+          "Minimum": "1",
+          "Decimals": "",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "m4k5alw4",
+        "Name": "WHICH_UNIT",
+        "type": "CollectedVariableType",
+        "Label": "WHICH_UNIT label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": "10"
+        }
+      },
+      {
+        "id": "m4k4z3gv",
+        "Name": "NUMBER_DYNAMIC_UNIT",
+        "type": "CollectedVariableType",
+        "Label": "NUMBER_DYNAMIC_UNIT label",
+        "Datatype": {
+          "Unit": "$WHICH_UNIT$",
+          "type": "NumericDatatypeType",
+          "Maximum": "10",
+          "Minimum": "1",
+          "Decimals": "",
+          "typeName": "NUMERIC",
+          "IsDynamicUnit": true
+        }
+      },
+      {
+        "id": "m4k5k6jf",
+        "Name": "TABLE11",
+        "type": "CollectedVariableType",
+        "Label": "Code A-Number column A (fixed unit)",
+        "Datatype": {
+          "Unit": "http://id.insee.fr/unit/percent",
+          "type": "NumericDatatypeType",
+          "Maximum": "100",
+          "Minimum": "0",
+          "Decimals": "",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "m4k5i89b",
+        "Name": "TABLE21",
+        "type": "CollectedVariableType",
+        "Label": "Code B-Number column A (fixed unit)",
+        "Datatype": {
+          "Unit": "http://id.insee.fr/unit/percent",
+          "type": "NumericDatatypeType",
+          "Maximum": "100",
+          "Minimum": "0",
+          "Decimals": "",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "m4k5ic92",
+        "Name": "TABLE12",
+        "type": "CollectedVariableType",
+        "Label": "Code A-Number column A (dynamic unit)",
+        "Datatype": {
+          "Unit": "$WHICH_UNIT$",
+          "type": "NumericDatatypeType",
+          "Maximum": "1000",
+          "Minimum": "-1000",
+          "Decimals": "",
+          "typeName": "NUMERIC",
+          "IsDynamicUnit": true
+        }
+      },
+      {
+        "id": "m4k52ltl",
+        "Name": "TABLE22",
+        "type": "CollectedVariableType",
+        "Label": "Code B-Number column A (dynamic unit)",
+        "Datatype": {
+          "Unit": "$WHICH_UNIT$",
+          "type": "NumericDatatypeType",
+          "Maximum": "1000",
+          "Minimum": "-1000",
+          "Decimals": "",
+          "typeName": "NUMERIC",
+          "IsDynamicUnit": true
+        }
+      },
+      {
+        "id": "m4le9geq",
+        "Name": "DYNAMIC_TABLE1",
+        "type": "CollectedVariableType",
+        "Label": "Number column B (fixed unit)",
+        "Scope": "m4k53xg9",
+        "Datatype": {
+          "Unit": "http://id.insee.fr/unit/euro",
+          "type": "NumericDatatypeType",
+          "Maximum": "100000",
+          "Minimum": "0",
+          "Decimals": "",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "m4le2oaf",
+        "Name": "DYNAMIC_TABLE2",
+        "type": "CollectedVariableType",
+        "Label": "Number column B (dynamic unit)",
+        "Scope": "m4k53xg9",
+        "Datatype": {
+          "Unit": "$WHICH_UNIT$",
+          "type": "NumericDatatypeType",
+          "Maximum": "10000",
+          "Minimum": "-10000",
+          "Decimals": "",
+          "typeName": "NUMERIC",
+          "IsDynamicUnit": true
+        }
+      },
+      {
+        "id": "m4k5ag53",
+        "Name": "Q_LAST",
+        "type": "CollectedVariableType",
+        "Label": "Q_LAST label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "flowLogic": "FILTER",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "FlowControl": [],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "m4k0xys2",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "m4k11sy9",
+        "m4k1c476",
+        "m4k4zcl6",
+        "m4k17d1t",
+        "m4k5jrzz",
+        "m4k53xg9",
+        "m4k59ozs",
+        "m4k5i75n",
+        "idendquest"
+      ]
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "s2106-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2106-dc"
+    }
+  ],
+  "lastUpdatedDate": "Thu Dec 12 2024 15:02:20 GMT+0100 (heure normale d’Europe centrale)",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": []
+}

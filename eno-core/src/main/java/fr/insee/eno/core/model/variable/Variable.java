@@ -39,6 +39,11 @@ public abstract class Variable extends EnoObject {
     @DDI("getVariableRepresentation()?.getValueRepresentation()?.getMeasurementUnit()?.getStringValue()")
     private String unit;
 
+    /** A unit can be either fixed or dynamic. */
+    @DDI("getVariableRepresentation()?.getValueRepresentation()?.getMeasurementUnit()?.getControlledVocabularyName() != null ? " +
+            "getVariableRepresentation().getValueRepresentation().getMeasurementUnit().getControlledVocabularyName() == 'personalizedUnit' : false")
+    private Boolean isUnitDynamic;
+
     /** Method to convert an Eno-model CollectionType object (from the enum class)
      * to the value expected in Lunatic-Model. */
     public static VariableTypeEnum lunaticCollectionType(CollectionType enoCollectionType) {
