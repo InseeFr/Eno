@@ -5,7 +5,7 @@
 
 	<groupId>fr.insee.eno</groupId>
 	<artifactId>eno-core</artifactId>
-	<version>2.12.1</version>
+	<version>2.12.2</version>
 	<packaging>jar</packaging>
 
 	<name>Eno – Questionnaire generator</name>
@@ -113,10 +113,10 @@
 		<!-- Logging API -->
 		<slf4j.version>2.0.16</slf4j.version>
 		<!-- Test dependencies -->
-		<junit.version>5.11.3</junit.version>
+		<junit.version>5.11.4</junit.version>
 		<xmlunit.version>2.10.0</xmlunit.version>
 		<apache-commons.version>3.17.0</apache-commons.version>
-		<log4j-slf4j2.version>2.24.2</log4j-slf4j2.version>
+		<log4j-slf4j2.version>2.24.3</log4j-slf4j2.version>
 		<!-- Build plugins -->
 		<source.plugin.version>3.3.1</source.plugin.version>
 		<javadoc.plugin.version>3.11.2</javadoc.plugin.version>
