@@ -109,7 +109,7 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
         return controls;
     }
 
-    // TODO: internationalization in the generated messages
+    // TODO: internationalization of the generated messages
 
     /**
      * Create controls for a input number component
@@ -198,8 +198,7 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
      * @param format format string
      * @param responseName date picker response attribute
      */
-
-    Optional<ControlType> getFormatControlFromDatepickerAttributes(String id, String minValue, String maxValue, String format, String responseName) {
+    private Optional<ControlType> getFormatControlFromDatepickerAttributes(String id, String minValue, String maxValue, String format, String responseName) {
         if (format == null)
             throw new RequiredPropertyException("Format is missing in date question '" + id + "'");
 
