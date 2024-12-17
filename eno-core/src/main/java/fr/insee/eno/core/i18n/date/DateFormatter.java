@@ -1,6 +1,6 @@
 package fr.insee.eno.core.i18n.date;
 
-import lombok.Getter;
+import fr.insee.eno.core.parameter.EnoParameters;
 import lombok.NonNull;
 
 /**
@@ -8,17 +8,22 @@ import lombok.NonNull;
  */
 public interface DateFormatter {
 
-    @Getter
-    class Result {
-        private final boolean valid;
-        private final String value;
-        private final String errorMessage;
+    class Factory {
 
-        private Result(boolean valid, String value, String errorMessage) {
-            this.valid = valid;
-            this.value = value;
-            this.errorMessage = errorMessage;
+        private Factory() {}
+
+        public static DateFormatter forLanguage(EnoParameters.Language language) {
+            if (EnoParameters.Language.FR.equals(language))
+                return new Iso8601ToFrench();
+            // By default, return the implementation that returns date values in ISO-8601 format
+            return new Iso8601Formatter();
         }
+    }
+
+    record Result(
+            boolean isValid,
+            String value,
+            String errorMessage) {
 
         public static Result success(String value) {
             return new Result(true, value, null);
@@ -42,5 +47,4 @@ public interface DateFormatter {
     default String errorMessage(String date, String format) {
         return "Date '" + date + "' is invalid or doesn't match format '" + format + "'.";
     }
-
 }

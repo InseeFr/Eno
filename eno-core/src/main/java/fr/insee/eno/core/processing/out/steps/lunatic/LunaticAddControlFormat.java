@@ -3,7 +3,6 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 import fr.insee.eno.core.exceptions.business.InvalidValueException;
 import fr.insee.eno.core.exceptions.business.RequiredPropertyException;
 import fr.insee.eno.core.i18n.date.DateFormatter;
-import fr.insee.eno.core.i18n.date.DateFormatterFactory;
 import fr.insee.eno.core.model.question.DateQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.ProcessingStep;
@@ -29,11 +28,11 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
 
     /** Using french as default value for date formatting. */
     public LunaticAddControlFormat() {
-        dateFormatter = DateFormatterFactory.forLanguage(EnoParameters.Language.FR);
+        dateFormatter = DateFormatter.Factory.forLanguage(EnoParameters.Language.FR);
     }
 
     public LunaticAddControlFormat(EnoParameters.Language language) {
-        dateFormatter = DateFormatterFactory.forLanguage(language);
+        dateFormatter = DateFormatter.Factory.forLanguage(language);
     }
 
     /**
@@ -206,7 +205,7 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
 
         DateFormatter.Result formattedMinValue = validateAndConvertDate(minValue, format);
         if (formattedMinValue != null && !formattedMinValue.isValid()) {
-            String message = "Invalid value for min date of question '" + id + "': " + formattedMinValue.getErrorMessage();
+            String message = "Invalid value for min date of question '" + id + "': " + formattedMinValue.errorMessage();
             log.error(message);
             throw new InvalidValueException(message);
         }
@@ -216,8 +215,8 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
             log.warn("Invalid value for max date of question '" + id + "': " + maxValue);
         }
 
-        boolean generateMin = formattedMinValue != null && formattedMinValue.isValid();
-        boolean generateMax = formattedMaxValue != null && formattedMaxValue.isValid();
+        boolean generateMin = formattedMinValue != null; // always valid when reached
+        boolean generateMax = formattedMaxValue != null && formattedMaxValue.isValid(); // can be invalid
 
         if (generateMin && generateMax) {
             String controlExpression = String.format(
@@ -228,7 +227,7 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
             );
             String controlErrorMessage = String.format(
                     "\"La date saisie doit être comprise entre %s et %s.\"",
-                    formattedMinValue.getValue(), formattedMaxValue.getValue()
+                    formattedMinValue.value(), formattedMaxValue.value()
             );
             return Optional.of(createFormatControl(controlIdPrefix + "-borne-inf-sup", controlExpression, controlErrorMessage));
         }
@@ -240,7 +239,7 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
             );
             String controlErrorMessage = String.format(
                     "\"La date saisie doit être antérieure à %s.\"",
-                    formattedMaxValue.getValue()
+                    formattedMaxValue.value()
             );
             return Optional.of(createFormatControl(controlIdPrefix + "-borne-sup", controlExpression, controlErrorMessage));
         }
@@ -252,7 +251,7 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
             );
             String controlErrorMessage = String.format(
                     "\"La date saisie doit être postérieure à %s.\"",
-                    formattedMinValue.getValue()
+                    formattedMinValue.value()
             );
             return Optional.of(createFormatControl(controlIdPrefix + "-borne-inf", controlExpression, controlErrorMessage));
         }
