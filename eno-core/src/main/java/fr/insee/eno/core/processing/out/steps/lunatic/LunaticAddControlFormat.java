@@ -111,7 +111,7 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
     // TODO: internationalization of the generated messages
 
     /**
-     * Create controls for a input number component
+     * Create controls for an input number component
      * @param number input number to process
      */
     private void createFormatControlsForInputNumber(InputNumber number) {
