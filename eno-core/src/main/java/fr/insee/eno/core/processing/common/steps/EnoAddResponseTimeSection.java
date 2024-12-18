@@ -14,7 +14,7 @@ import fr.insee.eno.core.reference.EnoIndex;
 
 import java.math.BigInteger;
 
-import static fr.insee.eno.core.processing.in.steps.ddi.DDIMoveUnitInQuestions.createUnit;
+import static fr.insee.eno.core.model.question.NumericQuestion.createUnit;
 
 public class EnoAddResponseTimeSection implements ProcessingStep<EnoQuestionnaire> {
 
