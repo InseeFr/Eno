@@ -3,6 +3,8 @@ package fr.insee.eno.core.i18n.date;
 import fr.insee.eno.core.parameter.EnoParameters;
 import lombok.NonNull;
 
+import java.util.regex.Pattern;
+
 /**
  * Interface to validate and format dates.
  */
@@ -34,8 +36,10 @@ public interface DateFormatter {
         }
     }
 
+    Pattern yearDatePattern = Pattern.compile("\\d{4}");
+
     default Result convertYearDate(@NonNull String date) {
-        if (date.length() != 4 || !date.matches("\\d{4}"))
+        if (date.length() != 4 || !yearDatePattern.matcher(date).matches())
             return Result.failure(errorMessage(date, "YYYY"));
         return Result.success(date);
     }
