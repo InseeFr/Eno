@@ -178,15 +178,16 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
         // of the first control is displayed.
     }
 
-    private DateFormatter.Result validateAndConvertDate(String date, @NonNull String format) {
+    private Optional<DateFormatter.Result> validateAndConvertDate(String date, @NonNull String format) {
         if (date == null)
-            return null; // The min/max date properties can eventually be null (not 'required' in Pogues)
-        return switch (format) {
+            return Optional.empty(); // The min/max date properties can eventually be null (not 'required' in Pogues)
+        DateFormatter.Result result = switch (format) {
             case DateQuestion.YEAR_MONTH_DAY_FORMAT -> dateFormatter.convertYearMontDayDate(date);
             case DateQuestion.YEAR_MONTH_FORMAT -> dateFormatter.convertYearMontDate(date);
             case DateQuestion.YEAR_FORMAT -> dateFormatter.convertYearDate(date);
             default -> throw new InvalidValueException("Date format '" + format + "' is invalid.");
         };
+        return Optional.of(result);
     }
 
     /**
@@ -203,20 +204,20 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
 
         String controlIdPrefix = id + "-format-date";
 
-        DateFormatter.Result formattedMinValue = validateAndConvertDate(minValue, format);
-        if (formattedMinValue != null && !formattedMinValue.isValid()) {
-            String message = "Invalid value for min date of question '" + id + "': " + formattedMinValue.errorMessage();
+        Optional<DateFormatter.Result> formattedMinValue = validateAndConvertDate(minValue, format);
+        if (formattedMinValue.isPresent() && !formattedMinValue.get().isValid()) {
+            String message = "Invalid value for min date of question '" + id + "': " + formattedMinValue.get().errorMessage();
             log.error(message);
             throw new InvalidValueException(message);
         }
-        DateFormatter.Result formattedMaxValue = validateAndConvertDate(maxValue, format);
-        if (formattedMaxValue != null && !formattedMaxValue.isValid()) {
+        Optional<DateFormatter.Result> formattedMaxValue = validateAndConvertDate(maxValue, format);
+        if (formattedMaxValue.isPresent() && !formattedMaxValue.get().isValid()) {
             // Due to a bug in the Pogues -> DDI transformation, an invalid max date doesn't throw an exception for now
             log.warn("Invalid value for max date of question '" + id + "': " + maxValue);
         }
 
-        boolean generateMin = formattedMinValue != null; // always valid when reached
-        boolean generateMax = formattedMaxValue != null && formattedMaxValue.isValid(); // can be invalid
+        boolean generateMin = formattedMinValue.isPresent(); // always valid when reached
+        boolean generateMax = formattedMaxValue.isPresent() && formattedMaxValue.get().isValid(); // can be invalid
 
         if (generateMin && generateMax) {
             String controlExpression = String.format(
@@ -227,7 +228,7 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
             );
             String controlErrorMessage = String.format(
                     "\"La date saisie doit être comprise entre %s et %s.\"",
-                    formattedMinValue.value(), formattedMaxValue.value()
+                    formattedMinValue.get().value(), formattedMaxValue.get().value()
             );
             return Optional.of(createFormatControl(controlIdPrefix + "-borne-inf-sup", controlExpression, controlErrorMessage));
         }
@@ -239,7 +240,7 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
             );
             String controlErrorMessage = String.format(
                     "\"La date saisie doit être antérieure à %s.\"",
-                    formattedMaxValue.value()
+                    formattedMaxValue.get().value()
             );
             return Optional.of(createFormatControl(controlIdPrefix + "-borne-sup", controlExpression, controlErrorMessage));
         }
@@ -251,7 +252,7 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
             );
             String controlErrorMessage = String.format(
                     "\"La date saisie doit être postérieure à %s.\"",
-                    formattedMinValue.value()
+                    formattedMinValue.get().value()
             );
             return Optional.of(createFormatControl(controlIdPrefix + "-borne-inf", controlExpression, controlErrorMessage));
         }
