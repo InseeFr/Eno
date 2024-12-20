@@ -1,7 +1,6 @@
 package fr.insee.eno.core.processing.in.steps.ddi;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.navigation.Binding;
 import fr.insee.eno.core.model.question.*;
 import fr.insee.eno.core.model.question.table.NumericCell;
@@ -14,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Optional;
+
+import static fr.insee.eno.core.model.question.NumericQuestion.createUnit;
 
 /** Processing step to move units which are mapped in variable objects to numeric questions. */
 @Slf4j
@@ -90,15 +91,6 @@ public class DDIMoveUnitInQuestions implements ProcessingStep<EnoQuestionnaire> 
         }
 
         numericCell.get().setUnit(createUnit(variable.getUnit()));
-    }
-
-    public static DynamicLabel createUnit(String value) {
-        if (value == null)
-            return null;
-        DynamicLabel label = new DynamicLabel();
-        label.setValue(value);
-        // (type is left at its default value)
-        return label;
     }
 
 }

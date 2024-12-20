@@ -1,5 +1,7 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
+import fr.insee.eno.core.exceptions.business.InvalidValueException;
+import fr.insee.eno.core.exceptions.business.RequiredPropertyException;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -9,8 +11,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LunaticAddControlFormatTest {
 
@@ -143,12 +144,11 @@ class LunaticAddControlFormatTest {
     }
 
     @Test
-    @DisplayName("Datepicker: no format nor min/max, should have no controls")
+    @DisplayName("Datepicker: no format, should throw exception")
     void datepickerNoFormatNorMinMax() {
         lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(datePicker);
-        processing.apply(lunaticQuestionnaire);
-        assertTrue(datePicker.getControls() == null || datePicker.getControls().isEmpty());
+        assertThrows(RequiredPropertyException.class, () -> processing.apply(lunaticQuestionnaire));
     }
 
     @Test
@@ -195,9 +195,25 @@ class LunaticAddControlFormatTest {
                 "cast(DATE_VAR, date, \"YYYY-MM-DD\")>cast(\"2023-01-01\", date, \"YYYY-MM-DD\")))";
         assertEquals(expected, control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
+        assertEquals("\"La date saisie doit être comprise entre 01/01/2020 et 01/01/2023.\"",
+                control.getErrorMessage().getValue());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getType());
         assertEquals(ControlTypeEnum.FORMAT, control.getTypeOfControl());
         assertEquals(ControlCriticalityEnum.ERROR, control.getCriticality());
+    }
+
+    @Test
+    @DisplayName("Datepicker: invalid max value should be ignored")
+    void datepickerInvalidMaxValue() {
+        lunaticQuestionnaire = new Questionnaire();
+        lunaticQuestionnaire.getComponents().add(datePicker);
+        datePicker.setMax("year-from-date(current-date())");
+        datePicker.setDateFormat("YYYY-MM-DD");
+        processing.apply(lunaticQuestionnaire);
+
+        // Only year format control should be present
+        assertEquals(1, datePicker.getControls().size());
+        assertNotEquals("datepicker-id-format-date-borne-sup", datePicker.getControls().getFirst().getId());
     }
 
     @Test
@@ -218,9 +234,22 @@ class LunaticAddControlFormatTest {
                 "(cast(DATE_VAR, date, \"YYYY-MM-DD\")<cast(\"2020-01-01\", date, \"YYYY-MM-DD\")))";
         assertEquals(expected, control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
+        assertEquals("\"La date saisie doit être postérieure à 01/01/2020.\"",
+                control.getErrorMessage().getValue());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getType());
         assertEquals(ControlTypeEnum.FORMAT, control.getTypeOfControl());
         assertEquals(ControlCriticalityEnum.ERROR, control.getCriticality());
+    }
+
+    @Test
+    @DisplayName("Datepicker: invalid min value should throw exception")
+    void datepickerInvalidMinValue() {
+        lunaticQuestionnaire = new Questionnaire();
+        lunaticQuestionnaire.getComponents().add(datePicker);
+        datePicker.setMin("invalid-min");
+        datePicker.setDateFormat("YYYY-MM-DD");
+
+        assertThrows(InvalidValueException.class, () -> processing.apply(lunaticQuestionnaire));
     }
 
     @Test
@@ -241,13 +270,15 @@ class LunaticAddControlFormatTest {
                 "and (cast(DATE_VAR, date, \"YYYY-MM-DD\")>cast(\"2023-01-01\", date, \"YYYY-MM-DD\")))";
         assertEquals(expected, boundsControl.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, boundsControl.getControl().getType());
+        assertEquals("\"La date saisie doit être antérieure à 01/01/2023.\"",
+                boundsControl.getErrorMessage().getValue());
         assertEquals(LabelTypeEnum.VTL_MD, boundsControl.getErrorMessage().getType());
         assertEquals(ControlTypeEnum.FORMAT, boundsControl.getTypeOfControl());
         assertEquals(ControlCriticalityEnum.ERROR, boundsControl.getCriticality());
     }
 
     @Test
-    @DisplayName("Datepicker: year format control when min/max is set")
+    @DisplayName("Datepicker: year format control when max is set")
     void datepickerYearAndMinMaxFormatControl() {
         lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(datePicker);
@@ -366,4 +397,5 @@ class LunaticAddControlFormatTest {
         bodyLine.getBodyCells().addAll(bodyCells);
         return bodyLine;
     }
+
 }

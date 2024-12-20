@@ -7,6 +7,7 @@ import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.InputNumber;
+import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -59,5 +60,21 @@ public class NumericQuestion extends SingleResponseQuestion {
      * This should be inserted by Lunatic-Model serializer later on. */
     @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     String lunaticComponentType = "INPUT_NUMBER";
+
+    /**
+     * Creates a dynamic label object that fits the 'unit' property of numeric questions with the label value given.
+     * A number question doesn't necessarily have a unit, so the result can be null if the value given is null.
+     * In Lunatic, unit labels must be of type 'VTL', so the type of the returned dynamic label is set to this value.
+     * @param value Label value. Can be null.
+     * @return Dynamic label object with given value. null if the given value is null.
+     */
+    public static DynamicLabel createUnit(String value) {
+        if (value == null)
+            return null;
+        DynamicLabel label = new DynamicLabel();
+        label.setValue(value);
+        label.setType(LabelTypeEnum.VTL.value());
+        return label;
+    }
 
 }
