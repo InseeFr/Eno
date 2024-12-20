@@ -20,6 +20,10 @@ import lombok.Setter;
 @Context(format = Format.LUNATIC, type = Datepicker.class)
 public class DateQuestion extends SingleResponseQuestion {
 
+    public static final String YEAR_FORMAT = "YYYY";
+    public static final String YEAR_MONTH_FORMAT = "YYYY-MM";
+    public static final String YEAR_MONTH_DAY_FORMAT = "YYYY-MM-DD";
+
     /**
      * Minimum date value allowed.
      */
