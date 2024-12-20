@@ -5,35 +5,39 @@ import fr.insee.eno.core.model.navigation.Binding;
 import fr.insee.eno.core.model.question.*;
 import fr.insee.eno.core.model.question.table.NumericCell;
 import fr.insee.eno.core.model.question.table.ResponseCell;
-import fr.insee.eno.core.model.question.table.TableCell;
 import fr.insee.eno.core.model.variable.CollectedVariable;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.ProcessingStep;
+import fr.insee.eno.core.reference.EnoIndex;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Optional;
 
+import static fr.insee.eno.core.model.question.NumericQuestion.createUnit;
+
+/** Processing step to move units which are mapped in variable objects to numeric questions. */
 @Slf4j
 public class DDIMoveUnitInQuestions implements ProcessingStep<EnoQuestionnaire> {
 
-    // TODO: JavaDoc on method or on class?
+    private final EnoIndex enoIndex;
+
+    public DDIMoveUnitInQuestions(EnoIndex enoIndex) {
+        this.enoIndex = enoIndex;
+    }
 
     /** In DDI, the 'unit' information is accessible in variables.
      * This information must also belong in concerned questions in the Eno model.
      * In Lunatic, this information is required in some numeric questions. */
     public void apply(EnoQuestionnaire enoQuestionnaire) {
-        // TODO: assert or proper log + exception?
-        assert enoQuestionnaire.getIndex() != null;
-        //
         enoQuestionnaire.getVariables().stream()
                 .filter(variable -> Variable.CollectionType.COLLECTED.equals(variable.getCollectionType()))
                 .map(CollectedVariable.class::cast)
                 .filter(variable -> variable.getUnit() != null)
                 .forEach(variable -> {
-                    Question question = (Question) enoQuestionnaire.get(variable.getQuestionReference());
+                    Question question = (Question) enoIndex.get(variable.getQuestionReference());
                     if (question instanceof NumericQuestion numericQuestion) {
-                        numericQuestion.setUnit(variable.getUnit());
+                        numericQuestion.setUnit(createUnit(variable.getUnit()));
                         return;
                     }
 
@@ -86,6 +90,7 @@ public class DDIMoveUnitInQuestions implements ProcessingStep<EnoQuestionnaire> 
             return;
         }
 
-        numericCell.get().setUnit(variable.getUnit());
+        numericCell.get().setUnit(createUnit(variable.getUnit()));
     }
+
 }

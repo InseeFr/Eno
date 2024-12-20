@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.31.0] - 2024-12-18
+### :sparkles: New Features
+- [`8ad732a`](https://github.com/InseeFr/Eno/commit/8ad732a2eb1b2c8814e4bcd578cfbe0f05fc9592) - **ddi to lunatic**: dynamic units *(PR [#1175](https://github.com/InseeFr/Eno/pull/1175) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.30.0] - 2024-12-11
 
 ### :sparkles: New Features
@@ -379,3 +384,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.29.0-hotfix]: https://github.com/InseeFr/Eno/compare/3.29.0...3.29.0-hotfix.2
 [3.29.1]: https://github.com/InseeFr/Eno/compare/3.29.0-hotfix.2...3.29.1
 [3.30.0]: https://github.com/InseeFr/Eno/compare/3.29.1...3.30.0
+[3.31.0]: https://github.com/InseeFr/Eno/compare/3.30.0...3.31.0
