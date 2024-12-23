@@ -20,7 +20,7 @@ tasks.named<Jar>("jar") {
 }
 
 val ddiJavaLibVersion = "1.1.0"
-val modelMapperVersion = "3.2.1"
+val modelMapperVersion = "3.2.2"
 
 dependencies {
     // DDI
