@@ -35,31 +35,6 @@ public class LunaticEditLabelTypes implements ProcessingStep<Questionnaire> {
         lunaticComponents.stream()
                 .filter(Sequence.class::isInstance).map(Sequence.class::cast)
                 .forEach(this::editSequenceLabel);
-        lunaticComponents.stream()
-                .filter(InputNumber.class::isInstance).map(InputNumber.class::cast)
-                .forEach(this::editInputNumberUnit);
-        lunaticComponents.stream()
-                .filter(Table.class::isInstance).map(Table.class::cast)
-                .map(Table::getBodyLines)
-                .forEach(bodyLines -> bodyLines.stream()
-                        .map(BodyLine::getBodyCells)
-                        .forEach(this::editCellUnits));
-        lunaticComponents.stream()
-                .filter(RosterForLoop.class::isInstance).map(RosterForLoop.class::cast)
-                .map(RosterForLoop::getComponents)
-                .forEach(this::editCellUnits);
-    }
-
-    private void editCellUnits(List<BodyCell> bodyCells) {
-        bodyCells.stream()
-                .filter(bodyCell -> bodyCell.getUnitLabel() != null)
-                .forEach(bodyCell -> bodyCell.getUnitLabel().setType(LabelTypeEnum.VTL));
-    }
-
-    private void editInputNumberUnit(InputNumber inputNumber) {
-        if (inputNumber.getUnitLabel() == null)
-            return;
-        inputNumber.getUnitLabel().setType(LabelTypeEnum.VTL);
     }
 
     private void editSequenceLabel(Sequence sequence) {
