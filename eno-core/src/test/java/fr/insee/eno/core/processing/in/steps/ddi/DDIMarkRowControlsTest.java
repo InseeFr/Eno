@@ -38,4 +38,26 @@ class DDIMarkRowControlsTest {
         ));
     }
 
+    /** When a roundabout has an occurrence filter, it has an intermediate reference to a filter object that references
+     * the controls that belong to the loop. */
+    @Test
+    void roundaboutLevelControlWithFilter() throws DDIParsingException {
+        // Given
+        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
+        DDIInstanceDocument ddiInstance = DDIDeserializer.deserialize(
+                this.getClass().getClassLoader().getResourceAsStream(
+                        "integration/ddi/ddi-roundabout-except.xml"));
+        //
+        DDIMapper ddiMapper = new DDIMapper();
+        ddiMapper.mapDDI(ddiInstance, enoQuestionnaire);
+
+        // When
+        new DDIMarkRowControls().apply(enoQuestionnaire);
+
+        // Then
+        // The questionnaire should have two controls (that are created for a roundabout)
+        assertEquals(1, enoQuestionnaire.getControls().size());
+        assertEquals(Control.Context.ROW, enoQuestionnaire.getControls().getFirst().getContext());
+    }
+
 }
