@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.31.2] - 2024-12-24
+### :bug: Bug Fixes
+- [`e8e04bd`](https://github.com/InseeFr/Eno/commit/e8e04bd4db0fb0e1114fedd1d45637cb39109a8c) - **deps**: update all minor dependencies *(PR [#1171](https://github.com/InseeFr/Eno/pull/1171) by [@renovate[bot]](https://github.com/apps/renovate))*
+- [`cc03575`](https://github.com/InseeFr/Eno/commit/cc035756628c1eaae58f9ac99edde4733cd3bd48) - roundabout with except *(PR [#1179](https://github.com/InseeFr/Eno/pull/1179) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.31.1] - 2024-12-23
 ### :bug: Bug Fixes
 - [`691305d`](https://github.com/InseeFr/Eno/commit/691305d6cb29eb95bd7fa9651425d0b69f55f56b) - date format in french *(PR [#1173](https://github.com/InseeFr/Eno/pull/1173) by [@RemiVerriez](https://github.com/RemiVerriez))*
@@ -391,3 +397,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.30.0]: https://github.com/InseeFr/Eno/compare/3.29.1...3.30.0
 [3.31.0]: https://github.com/InseeFr/Eno/compare/3.30.0...3.31.0
 [3.31.1]: https://github.com/InseeFr/Eno/compare/3.31.0...3.31.1
+[3.31.2]: https://github.com/InseeFr/Eno/compare/3.31.1...3.31.2
