@@ -16,7 +16,7 @@ java {
 
 allprojects {
     group = "fr.insee.eno"
-    version = "3.31.1"
+    version = "3.31.2-SNAPSHOT"
 }
 
 subprojects {
@@ -34,7 +34,7 @@ subprojects {
 
 sonar {
     properties {
-        // The Jacoco coverage report is aggreated in the eno-ws module
+        // The Jacoco coverage report is aggregated in the eno-ws module
         val codeCoveragePath = "$projectDir/eno-ws/build/reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml"
         println("Aggregated code coverage report location:$codeCoveragePath")
         property("sonar.coverage.jacoco.xmlReportPaths", codeCoveragePath)
