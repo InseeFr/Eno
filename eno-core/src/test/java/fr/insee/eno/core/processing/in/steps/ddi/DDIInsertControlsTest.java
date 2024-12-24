@@ -75,4 +75,21 @@ class DDIInsertControlsTest {
         assertEquals(2, roundaboutSequence.getControls().size());
     }
 
+    @Test
+    void questionnaireWithRoundaboutWithOccurrenceFilter() throws DDIParsingException {
+        //
+        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
+        DDIMapper ddiMapper = new DDIMapper();
+        ddiMapper.mapDDI(
+                DDIDeserializer.deserialize(this.getClass().getClassLoader().getResourceAsStream(
+                        "integration/ddi/ddi-roundabout-except.xml")),
+                enoQuestionnaire);
+
+        //
+        new DDIInsertControls().apply(enoQuestionnaire);
+
+        //
+        RoundaboutSequence roundaboutSequence = enoQuestionnaire.getRoundaboutSequences().getFirst();
+        assertEquals(1, roundaboutSequence.getControls().size());
+    }
 }

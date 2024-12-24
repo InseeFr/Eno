@@ -252,4 +252,50 @@ class LunaticRoundaboutLoopsTest {
         }
     }
 
+    @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    class RoundaboutWithExcept {
+        private Roundabout roundabout;
+
+        @BeforeAll
+        void ddiToLunatic() throws DDIParsingException {
+            //
+            EnoParameters parameters = EnoParameters.of(
+                    EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
+            //
+            Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+                    this.getClass().getClassLoader().getResourceAsStream(
+                            "integration/ddi/ddi-roundabout-except.xml"),
+                    parameters);
+            // the questionnaire should have 1 roundabout component
+            List<Roundabout> roundabouts = lunaticQuestionnaire.getComponents().stream()
+                    .filter(Roundabout.class::isInstance).map(Roundabout.class::cast)
+                    .toList();
+            assertEquals(1, roundabouts.size());
+            roundabout = roundabouts.getFirst();
+        }
+
+        /** The "except" field in Pogues corresponds to the "disabled" expression in Lunatic. */
+        @Test
+        void disabledCondition() {
+            assertEquals("not(not(Q1 = \"foo\"))", roundabout.getItem().getDisabled().getValue());
+            assertEquals(LabelTypeEnum.VTL, roundabout.getItem().getDisabled().getType());
+        }
+
+        /** The DDI modeling describes both disabled condition and occurrence-level controls as control objects,
+         * hence this test. */
+        @Test
+        void occurrenceControl_shouldBePresent() {
+            Optional<ControlType> rowControl = roundabout.getControls().stream()
+                    .filter(control -> ControlContextType.ROW.equals(control.getType())).findAny();
+            assertTrue(rowControl.isPresent());
+            assertEquals(ControlCriticalityEnum.INFO, rowControl.get().getCriticality());
+            assertEquals("not(true)", rowControl.get().getControl().getValue());
+            assertEquals(LabelTypeEnum.VTL, rowControl.get().getControl().getType());
+            assertEquals("\"This control should always be displayed.\"",
+                    rowControl.get().getErrorMessage().getValue());
+            assertEquals(LabelTypeEnum.VTL_MD, rowControl.get().getErrorMessage().getType());
+        }
+    }
+
 }

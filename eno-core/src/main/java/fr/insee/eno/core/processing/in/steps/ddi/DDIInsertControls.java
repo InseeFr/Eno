@@ -107,7 +107,7 @@ public class DDIInsertControls implements ProcessingStep<EnoQuestionnaire> {
             throw new MappingException("Cannot find loop '" + roundaboutSequence.getLoopReference() + "' " +
                     "referenced in roundabout sequence '" + roundaboutSequence.getId() + "'");
         // Insert all the controls that are referenced in the loop in the roundabout sequence object
-        DDIMarkRowControls.controlReferencesStream(roundaboutLoop.get())
+        DDIMarkRowControls.getLoopControlReferences(roundaboutLoop.get(), enoQuestionnaire)
                 .forEach(itemReference -> roundaboutSequence.getControls().add(controlMap.get(itemReference.getId())));
     }
 
