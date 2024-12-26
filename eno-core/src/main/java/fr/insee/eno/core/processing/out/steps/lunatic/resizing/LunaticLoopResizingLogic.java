@@ -49,7 +49,7 @@ public class LunaticLoopResizingLogic {
 
         // Variable names that are the keys of the resizing (using a set to make sure there is no duplicates)
         Set<String> resizingVariableNames = new LinkedHashSet<>();
-        // Expression that resize the concerned variables
+        // Expression that resizes the concerned variables
         String sizeExpression = null;
 
         if (enoLoop instanceof StandaloneLoop enoStandaloneLoop) {
@@ -115,7 +115,7 @@ public class LunaticLoopResizingLogic {
                 enoLinkedLoop.getReference(), enoLinkedLoop.getId()));
     }
 
-    private static void insertIterationEntry(ResizingType lunaticResizing,
+    static void insertIterationEntry(ResizingType lunaticResizing,
                                              String resizingVariableName, String sizeExpression, List<String> resizedVariableNames) {
         // If no entry for the resizing variable name given, create it
         if (lunaticResizing.getResizingEntry(resizingVariableName) == null) {
