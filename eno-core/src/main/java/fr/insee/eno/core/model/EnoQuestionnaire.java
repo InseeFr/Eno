@@ -53,6 +53,16 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     @Lunatic("setLabel(#param)")
     private QuestionnaireLabel label;
 
+    /** Metadata that is specific to Pogues and indicates how filters are described in the questionnaire.
+     * Mapped to be used as a safety net (only 'FILTER' mode is allowed) in a processing step. */
+    @Pogues("getFlowLogic()?.value()")
+    private String filterMode;
+
+    /** Metadata that is specific to Pogues and indicates which language is used for expressions.
+     * Mapped to be used as a safety net (only 'VTL' is allowed) in a processing step. */
+    @Pogues("getFormulasLanguage()?.value()")
+    private String expressionLanguage;
+
     /** Questionnaire variables. Note: variables can have different "scope" (questionnaire-level, loop or dynamic
      * table level), yet all variables are defined in this list. */
     @DDI("getResourcePackageArray(0).getVariableSchemeArray(0).getVariableList()")
