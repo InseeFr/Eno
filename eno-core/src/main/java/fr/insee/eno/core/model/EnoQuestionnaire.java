@@ -43,6 +43,10 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     @Lunatic("setModele(#param)")
     private String questionnaireModel;
 
+    /** Agency producing the questionnaire. */
+    @Pogues("getAgency()")
+    private String agency;
+
     /** Short description of the questionnaire. */
     @DDI("getCitation()?.getTitle()")
     @Lunatic("setLabel(#param)")

@@ -23,6 +23,19 @@ class EnoQuestionnaireTest {
     }
 
     @Test
+    void mapAgencyFromPogues() {
+        //
+        Questionnaire poguesQuestionnaire = new Questionnaire();
+        poguesQuestionnaire.setAgency("fr.insee");
+        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
+        //
+        PoguesMapper poguesMapper = new PoguesMapper();
+        poguesMapper.mapPoguesQuestionnaire(poguesQuestionnaire, enoQuestionnaire);
+        //
+        assertEquals("fr.insee", enoQuestionnaire.getAgency());
+    }
+
+    @Test
     void mapQuestionnaireModelFromPogues() {
         //
         Questionnaire poguesQuestionnaire = new Questionnaire();
