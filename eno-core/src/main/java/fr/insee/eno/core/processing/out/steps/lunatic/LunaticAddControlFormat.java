@@ -81,6 +81,10 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
 
     private void createFormatControlsForRoster(RosterForLoop roster) {
         List<ControlType> controls = getFormatControlsForBodyCells(roster.getComponents());
+
+        // The format controls of a roster for loop (dynamic table) are row-level controls
+        controls.forEach(control -> control.setType(ControlContextType.ROW));
+
         roster.getControls().addAll(0, controls);
     }
 

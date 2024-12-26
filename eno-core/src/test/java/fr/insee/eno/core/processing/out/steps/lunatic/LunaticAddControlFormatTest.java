@@ -362,6 +362,7 @@ class LunaticAddControlFormatTest {
         assertEquals(2, roster.getControls().size());
         assertEquals("roster-id-number-format-borne-inf-sup", roster.getControls().get(0).getId());
         assertEquals("roster-id-number-format-decimal", roster.getControls().get(1).getId());
+        roster.getControls().forEach(control -> assertEquals(ControlContextType.ROW, control.getType()));
     }
 
     private ResponseType buildResponse(String name) {
