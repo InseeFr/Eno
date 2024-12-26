@@ -133,7 +133,20 @@
         "CAWI",
         "PAPI"
       ],
-      "Declaration": [],
+      "Declaration": [
+        {
+          "id": "m55ba6zt",
+          "Text": "\"Roundabout declaration\"",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "declarationType": "HELP"
+        }
+      ],
       "FlowControl": [],
       "OccurrenceLabel": "$FIRST_NAME$",
       "OccurrenceDescription": "\"Occurrence description of \" || $FIRST_NAME$"
