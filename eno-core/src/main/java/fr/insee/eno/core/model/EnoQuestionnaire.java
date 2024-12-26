@@ -48,6 +48,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     private String agency;
 
     /** Short description of the questionnaire. */
+    @Pogues("!getLabel().isEmpty() ? #this : null")
     @DDI("getCitation()?.getTitle()")
     @Lunatic("setLabel(#param)")
     private QuestionnaireLabel label;

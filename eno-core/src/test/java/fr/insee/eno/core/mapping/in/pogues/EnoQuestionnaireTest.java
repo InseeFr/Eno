@@ -23,6 +23,19 @@ class EnoQuestionnaireTest {
     }
 
     @Test
+    void mapQuestionnaireLabelFromPogues() {
+        //
+        Questionnaire poguesQuestionnaire = new Questionnaire();
+        poguesQuestionnaire.getLabel().add("Questionnaire label");
+        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
+        //
+        PoguesMapper poguesMapper = new PoguesMapper();
+        poguesMapper.mapPoguesQuestionnaire(poguesQuestionnaire, enoQuestionnaire);
+        //
+        assertEquals("Questionnaire label", enoQuestionnaire.getLabel().getValue());
+    }
+
+    @Test
     void mapAgencyFromPogues() {
         //
         Questionnaire poguesQuestionnaire = new Questionnaire();

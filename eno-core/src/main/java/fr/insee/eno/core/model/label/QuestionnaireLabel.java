@@ -3,10 +3,12 @@ package fr.insee.eno.core.model.label;
 import fr.insee.ddi.lifecycle33.reusable.InternationalStringType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.LabelType;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
+import fr.insee.pogues.model.Questionnaire;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +19,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
  * @see Label */
 @Getter
 @Setter
+@Context(format = Format.POGUES, type = Questionnaire.class)
 @Context(format = Format.DDI, type = InternationalStringType.class)
 @Context(format = Format.LUNATIC, type = LabelType.class)
 public class QuestionnaireLabel extends EnoObject implements EnoLabel {
@@ -24,6 +27,7 @@ public class QuestionnaireLabel extends EnoObject implements EnoLabel {
     /** Label content.
      * @see Label for details.
      */
+    @Pogues("getLabel().getFirst()")
     @DDI("getStringArray(0).getStringValue()")
     @Lunatic("setValue(#param)")
     String value;
