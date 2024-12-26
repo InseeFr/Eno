@@ -10,7 +10,7 @@
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
-             isMaintainable="true"><!--Eno version : 2.9.10. Generation date : 24/06/2024 - 13:32:16-->
+             isMaintainable="true"><!--Eno version : 2.12.1. Generation date : 26/12/2024 - 12:24:17-->
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-lxsxhihx</r:ID>
    <r:Version>1</r:Version>
@@ -70,6 +70,31 @@
                      <r:TypeOfObject>OutParameter</r:TypeOfObject>
                   </r:SourceParameterReference>
                </d:ConditionalText>
+            </d:InstructionText>
+         </d:Instruction>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>m55ba6zt</r:ID>
+            <r:Version>1</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">help</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">SelfAdministeredQuestionnaire.WebBased</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">SelfAdministeredQuestionnaire.Paper</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">Interview.Telephone.CATI</r:String>
+            </d:InstructionName>
+            <d:InstructionName>
+               <r:String xml:lang="fr-FR">Interview.FaceToFace.CAPIorCAMI</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Roundabout declaration"</d:Text>
+               </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
       </d:InterviewerInstructionScheme>
@@ -198,6 +223,12 @@
             <d:InterviewerInstructionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>lxsy3t24-OD</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m55ba6zt</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
