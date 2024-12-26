@@ -19,9 +19,9 @@ import static fr.insee.eno.core.model.question.NumericQuestion.createUnit;
 public class EnoAddResponseTimeSection implements ProcessingStep<EnoQuestionnaire> {
 
     public static final String HOURS_VARIABLE_NAME = "HEURE_REMPL";
-    public static final String HOURS_VARIABLE_UNIT = "heures";
+    public static final String HOURS_VARIABLE_UNIT = "\"heures\"";
     public static final String MINUTES_VARIABLE_NAME = "MIN_REMPL";
-    public static final String MINUTES_VARIABLE_UNIT = "minutes";
+    public static final String MINUTES_VARIABLE_UNIT = "\"minutes\"";
     public static final String RESPONSE_TIME_SEQUENCE_ID = "TIME-SEQ";
     public static final String RESPONSE_TIME_SEQUENCE_LABEL = "\"Temps de réponse\"";
     public static final String HOURS_QUESTION_ID = "TIME-QUESTION-HEURE-REMPL";
