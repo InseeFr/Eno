@@ -22,4 +22,17 @@ class EnoQuestionnaireTest {
         assertEquals("foo-questionnaire-id", enoQuestionnaire.getId());
     }
 
+    @Test
+    void mapQuestionnaireModelFromPogues() {
+        //
+        Questionnaire poguesQuestionnaire = new Questionnaire();
+        poguesQuestionnaire.setName("QUESTIONNAIRE_MODEL");
+        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
+        //
+        PoguesMapper poguesMapper = new PoguesMapper();
+        poguesMapper.mapPoguesQuestionnaire(poguesQuestionnaire, enoQuestionnaire);
+        //
+        assertEquals("QUESTIONNAIRE_MODEL", enoQuestionnaire.getQuestionnaireModel());
+    }
+
 }

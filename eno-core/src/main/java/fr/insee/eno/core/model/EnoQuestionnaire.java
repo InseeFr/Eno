@@ -3,6 +3,7 @@ package fr.insee.eno.core.model;
 import fr.insee.ddi.lifecycle33.instance.DDIInstanceType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.label.QuestionnaireLabel;
@@ -36,6 +37,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 public class EnoQuestionnaire extends EnoIdentifiableObject {
 
     /** Name of the questionnaire model. */
+    @Pogues("getName()")
     @DDI("getResourcePackageArray(0).getCodeListSchemeArray(0)" +
             ".getCodeListSchemeNameArray(0).getStringArray(0).getStringValue()") //TODO: see if it's that one
     @Lunatic("setModele(#param)")
