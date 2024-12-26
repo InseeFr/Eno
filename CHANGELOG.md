@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.31.5] - 2024-12-26
+### :bug: Bug Fixes
+- [`2484d0a`](https://github.com/InseeFr/Eno/commit/2484d0a680ca9f4c515da80ef31d38d69e5e77fb) - **dynamic table**: resizing for size expression *(PR [#1181](https://github.com/InseeFr/Eno/pull/1181) by [@nsenave](https://github.com/nsenave))*
+- [`2726dc8`](https://github.com/InseeFr/Eno/commit/2726dc895ab8f5fe7453e92867511ffc415cc3a6) - response time question unit *(commit by [@nsenave](https://github.com/nsenave))*
+- [`3a1707c`](https://github.com/InseeFr/Eno/commit/3a1707c0264785423a4b27bc35dbac1cf1b7dd56) - **dynamic table**: row level format controls *(commit by [@nsenave](https://github.com/nsenave))*
+- [`9d6029c`](https://github.com/InseeFr/Eno/commit/9d6029ca5a382b6c48147eb574af99473e38985e) - roundabout description *(PR [#1183](https://github.com/InseeFr/Eno/pull/1183) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.31.2] - 2024-12-24
 ### :bug: Bug Fixes
 - [`e8e04bd`](https://github.com/InseeFr/Eno/commit/e8e04bd4db0fb0e1114fedd1d45637cb39109a8c) - **deps**: update all minor dependencies *(PR [#1171](https://github.com/InseeFr/Eno/pull/1171) by [@renovate[bot]](https://github.com/apps/renovate))*
@@ -398,3 +406,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.31.0]: https://github.com/InseeFr/Eno/compare/3.30.0...3.31.0
 [3.31.1]: https://github.com/InseeFr/Eno/compare/3.31.0...3.31.1
 [3.31.2]: https://github.com/InseeFr/Eno/compare/3.31.1...3.31.2
+[3.31.5]: https://github.com/InseeFr/Eno/compare/3.31.2...3.31.5
