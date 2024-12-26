@@ -64,6 +64,8 @@ class LunaticRoundaboutLoopsTest {
             assertEquals("4", roundabout.getPage());
             assertEquals("\"Roundabout on S2\"", roundabout.getLabel().getValue());
             assertEquals(LabelTypeEnum.VTL_MD, roundabout.getLabel().getType());
+            assertEquals("\"Roundabout declaration\"", roundabout.getDescription().getValue());
+            assertEquals(LabelTypeEnum.VTL_MD, roundabout.getDescription().getType());
             assertEquals("true", roundabout.getConditionFilter().getValue());
             // roundabout specific ones
             assertEquals("count(FIRST_NAME)", roundabout.getIterations().getValue());

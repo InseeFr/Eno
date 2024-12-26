@@ -15,6 +15,7 @@ import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
 import fr.insee.lunatic.model.flat.variable.CollectedVariableValues;
 import fr.insee.lunatic.model.flat.variable.VariableDimension;
 import fr.insee.lunatic.model.flat.variable.VariableType;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +27,7 @@ import java.util.stream.IntStream;
  * This processing step replaces these loops by roundabout components, and adds the roundabout-specific information
  * using the Eno questionnaire.
  */
+@Slf4j
 public class LunaticRoundaboutLoops implements ProcessingStep<Questionnaire> {
 
     private static final String DDI_INSTANCE_LABEL_TYPE = "loop.instanceLabel";
@@ -161,6 +163,9 @@ public class LunaticRoundaboutLoops implements ProcessingStep<Questionnaire> {
         lunaticRoundabout.setLabel(new LabelType());
         lunaticRoundabout.getLabel().setValue(roundaboutSequence.getLabel().getValue());
         lunaticRoundabout.getLabel().setType(LabelTypeEnum.VTL_MD);
+        //
+        mapRoundaboutDescription(roundaboutSequence, lunaticRoundabout);
+        //
         lunaticRoundabout.setProgressVariable(progressVariableName);
         //
         LunaticMapper lunaticMapper = new LunaticMapper();
@@ -194,6 +199,15 @@ public class LunaticRoundaboutLoops implements ProcessingStep<Questionnaire> {
         return lunaticRoundabout;
     }
 
+    private static void mapRoundaboutDescription(RoundaboutSequence roundaboutSequence, Roundabout lunaticRoundabout) {
+        Optional<String> descriptionValue = getRoundaboutDescription(roundaboutSequence);
+        if (descriptionValue.isEmpty())
+            return;
+        lunaticRoundabout.setDescription(new LabelType());
+        lunaticRoundabout.getDescription().setValue(descriptionValue.get());
+        lunaticRoundabout.getDescription().setType(LabelTypeEnum.VTL_MD);
+    }
+
     /**
      * Return the label value of the instruction that holds the label of instances of the roundabout.
      * @param roundaboutSequence A Eno roundabout sequence.
@@ -220,6 +234,28 @@ public class LunaticRoundaboutLoops implements ProcessingStep<Questionnaire> {
                 .filter(instruction -> DDI_INSTANCE_DESCRIPTION_TYPE.equals(instruction.getDeclarationType()))
                 .findAny();
         return labelInstruction.map(instruction -> instruction.getLabel().getValue()).orElse(null);
+    }
+
+    /**
+     * Return the eventual value of the description of the roundabout.
+     * In the roundabout sequence object, this description is an "instruction" object.
+     * Note: Pogues may let the user input several of such instructions, yet Lunatic only accepts one description.
+     * @param roundaboutSequence A Eno roundabout sequence.
+     * @return String value of the description. Can be null if there is no description.
+     */
+    private static Optional<String> getRoundaboutDescription(RoundaboutSequence roundaboutSequence) {
+        List<Instruction> roundaboutInstructions = roundaboutSequence.getInstructions().stream()
+                .filter(instruction -> !DDI_INSTANCE_LABEL_TYPE.equals(instruction.getDeclarationType()))
+                .filter(instruction -> !DDI_INSTANCE_DESCRIPTION_TYPE.equals(instruction.getDeclarationType()))
+                .toList();
+        if (roundaboutInstructions.isEmpty())
+            return Optional.empty();
+        if (roundaboutInstructions.size() > 1)
+            log.warn("Roundabout {} has more than 1 instructions. Only the first one will be mapped.",
+                    roundaboutSequence.getId());
+        if (!roundaboutSequence.getDeclarations().isEmpty()) // some check on passing
+            log.warn("Roundabout {} has declarations which is unexpected.", roundaboutSequence.getId());
+        return Optional.of(roundaboutInstructions.getFirst().getLabel().getValue());
     }
 
     /**
