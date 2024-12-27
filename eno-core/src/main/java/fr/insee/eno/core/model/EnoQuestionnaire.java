@@ -3,6 +3,7 @@ package fr.insee.eno.core.model;
 import fr.insee.ddi.lifecycle33.instance.DDIInstanceType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.label.QuestionnaireLabel;
@@ -36,15 +37,31 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 public class EnoQuestionnaire extends EnoIdentifiableObject {
 
     /** Name of the questionnaire model. */
+    @Pogues("getName()")
     @DDI("getResourcePackageArray(0).getCodeListSchemeArray(0)" +
             ".getCodeListSchemeNameArray(0).getStringArray(0).getStringValue()") //TODO: see if it's that one
     @Lunatic("setModele(#param)")
     private String questionnaireModel;
 
+    /** Agency producing the questionnaire. */
+    @Pogues("getAgency()")
+    private String agency;
+
     /** Short description of the questionnaire. */
+    @Pogues("!getLabel().isEmpty() ? #this : null")
     @DDI("getCitation()?.getTitle()")
     @Lunatic("setLabel(#param)")
     private QuestionnaireLabel label;
+
+    /** Metadata that is specific to Pogues and indicates how filters are described in the questionnaire.
+     * Mapped to be used as a safety net (only 'FILTER' mode is allowed) in a processing step. */
+    @Pogues("getFlowLogic()?.value()")
+    private String filterMode;
+
+    /** Metadata that is specific to Pogues and indicates which language is used for expressions.
+     * Mapped to be used as a safety net (only 'VTL' is allowed) in a processing step. */
+    @Pogues("getFormulasLanguage()?.value()")
+    private String expressionLanguage;
 
     /** Questionnaire variables. Note: variables can have different "scope" (questionnaire-level, loop or dynamic
      * table level), yet all variables are defined in this list. */
