@@ -11,6 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Context(format = Format.POGUES, type = fr.insee.pogues.model.VariableType.class)
 @Context(format = Format.DDI, type = fr.insee.ddi.lifecycle33.logicalproduct.VariableType.class)
 @Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.variable.VariableType.class)
 public abstract class Variable extends EnoObject {
