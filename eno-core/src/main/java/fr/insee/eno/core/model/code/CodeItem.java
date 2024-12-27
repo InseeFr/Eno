@@ -37,6 +37,11 @@ public class CodeItem extends EnoObject {
     @Lunatic("setValue(#param)")
     String value;
 
+    /** Pogues specific property for nested code lists.
+     * Used in a processing step to insert nested code items at the right place. */
+    @Pogues("getParent()")
+    String parentValue;
+
     @Pogues("getLabel()")
     @DDI("#index.get(#this.getCategoryReference().getIDArray(0).getStringValue()).getLabelArray(0)")
     @Lunatic("setLabel(#param)")
