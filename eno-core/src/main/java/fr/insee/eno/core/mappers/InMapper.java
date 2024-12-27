@@ -91,7 +91,6 @@ public abstract class InMapper extends Mapper {
 
         // Spring TypeDescriptor of the current property descriptor (several usages below)
         TypeDescriptor typeDescriptor = beanWrapper.getPropertyTypeDescriptor(propertyName);
-        assert typeDescriptor != null;
 
         // Identify the class type of the property
         Class<?> classType = propertyDescriptor.getPropertyType();
@@ -102,7 +101,7 @@ public abstract class InMapper extends Mapper {
 
             boolean debug = inAnnotationValues.debug();
             if (debug)
-                log.debug("Processing property '"+ propertyName +"' of class '"+ modelContextType.getSimpleName()+"' ");
+                log.debug("Processing property '{}' of class '{}' ", propertyName, modelContextType.getSimpleName());
 
             // Instantiate a Spring expression with the annotation content
             Expression expression = new SpelExpressionParser().parseExpression(inAnnotationValues.expression());
@@ -143,14 +142,14 @@ public abstract class InMapper extends Mapper {
         Object inputValue = spelEngine.evaluate(expression, inputObject, modelContextType, propertyName);
         // It is allowed to have null values (a property can be present or not depending on the case)
         if (inputValue == null && debug) {
-            log.debug("null expression got from evaluating "+format+" annotation expression "
-                    + propertyDescription(propertyName, modelContextType.getSimpleName()));
+            log.debug("null expression got from evaluating {} annotation expression {}",
+                    format, propertyDescription(propertyName, modelContextType.getSimpleName()));
         }
         // Simply set the expression in the field
         beanWrapper.setPropertyValue(propertyName, inputValue);
         if (debug)
-            log.debug("Value '"+ beanWrapper.getPropertyValue(propertyName)+"' set "
-                    + propertyDescription(propertyName, modelContextType.getSimpleName()));
+            log.debug("Value '{}' set {}", beanWrapper.getPropertyValue(propertyName),
+                    propertyDescription(propertyName, modelContextType.getSimpleName()));
     }
 
     private void complexTypeMapping(Object inputObject, Class<?> modelContextType, BeanWrapper beanWrapper, String propertyName, Expression expression, Class<?> classType, boolean debug) {
@@ -159,8 +158,8 @@ public abstract class InMapper extends Mapper {
         // It is allowed to have a null input object on complex type properties
         if (inputObject2 == null) {
             if (debug)
-                log.debug(format+" object mapped by the annotation is null "
-                        + propertyDescription(propertyName, modelContextType.getName()));
+                log.debug("{} object mapped by the annotation is null {}",
+                        format, propertyDescription(propertyName, modelContextType.getName()));
             return;
         }
         // Instantiate the model target object
@@ -168,8 +167,8 @@ public abstract class InMapper extends Mapper {
         // Attach it to the current object
         beanWrapper.setPropertyValue(propertyName, enoObject2);
         if (debug)
-            log.debug("New instance of '"+enoObject2.getClass().getSimpleName()+"' set "
-                    + propertyDescription(propertyName, modelContextType.getSimpleName()));
+            log.debug("New instance of '{}' set {}", enoObject2.getClass().getSimpleName(),
+                    propertyDescription(propertyName, modelContextType.getSimpleName()));
         // Recursive call of the mapper to dive into this object
         recursiveMapping(inputObject2, enoObject2);
     }
@@ -182,9 +181,9 @@ public abstract class InMapper extends Mapper {
         List<?> inputCollection = spelEngine.evaluateToList(expression, inputObject, modelContextType, propertyName);
         // If the input collection is null and null is not allowed by the annotation, exception
         if (inputCollection == null && !allowNullList) {
-            log.error("Incoherent expression in field of "+format+" annotation "
-                    + propertyDescription(propertyName, modelContextType.getName()));
-            log.error("If the "+format+" collection can actually be null, use the annotation property to allow it.");
+            log.error("Incoherent expression in field of {} annotation {}", format,
+                    propertyDescription(propertyName, modelContextType.getName()));
+            log.error("If the {} collection can actually be null, use the annotation property to allow it.", format);
             throw new MappingException(format+" collection mapped by the annotation is null "
                     + propertyDescription(propertyName, modelContextType.getName()));
         }
@@ -197,22 +196,21 @@ public abstract class InMapper extends Mapper {
         Collection<Object> modelCollection = readCollection(propertyDescriptor, enoObject);
         // Get the content type of the model collection
         Class<?> modelTargetType = typeDescriptor.getResolvableType().getGeneric(0).getRawClass();
-        assert modelTargetType != null;
         // Collection of simple types
         if (isSimpleType(modelTargetType)) {
             modelCollection.addAll(inputCollection);
             if (debug)
-                log.debug(collectionSize+" values set "
-                        + propertyDescription(propertyName, modelContextType.getSimpleName()));
+                log.debug("{} values set {}", collectionSize,
+                        propertyDescription(propertyName, modelContextType.getSimpleName()));
         }
         // Collection of complex types
         else if (EnoObject.class.isAssignableFrom(modelTargetType)) {
             // Iterate on the input collection
             for (Object inputObject2 : inputCollection) {
                 if (debug)
-                    log.debug("Iterating on "+collectionSize+" "+format+" objects "
-                            + propertyDescription(propertyName, modelContextType.getSimpleName()));
-                // Instantiate a Eno object per input object and add it in the model collection
+                    log.debug("Iterating on {} {} objects {}", collectionSize, format,
+                            propertyDescription(propertyName, modelContextType.getSimpleName()));
+                // Instantiate an Eno object per input object and add it in the model collection
                 EnoObject enoObject2 = convert(inputObject2, modelTargetType);
                 // Add the created instance in the model collection
                 modelCollection.add(enoObject2);
@@ -238,7 +236,7 @@ public abstract class InMapper extends Mapper {
         try {
             return (EnoObject) classType.getDeclaredConstructor().newInstance();
         } catch (NoSuchMethodException e) {
-            log.debug("Default constructor may be missing in class " + classType);
+            log.debug("Default constructor may be missing in class {}", classType);
             throw new MappingException("Unable to create instance for class " + classType, e);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             throw new MappingException("Unable to create instance for class " + classType, e);
