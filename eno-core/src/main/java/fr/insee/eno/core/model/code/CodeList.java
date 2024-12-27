@@ -4,6 +4,7 @@ import fr.insee.ddi.lifecycle33.logicalproduct.CodeListType;
 import fr.insee.ddi.lifecycle33.reusable.impl.ContentTypeImpl;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.exceptions.business.IllegalDDIElementException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.suggester.SuggesterConfigurationDTO;
@@ -20,11 +21,13 @@ import java.util.List;
  * */
 @Getter
 @Setter
+@Context(format = Format.POGUES, type = fr.insee.pogues.model.CodeList.class)
 @Context(format = Format.DDI, type = CodeListType.class)
 public class CodeList extends EnoIdentifiableObject {
 
     private static final String SUGGESTER_CODE_LIST_KEY = "SuggesterConfiguration";
 
+    @Pogues("getLabel()")
     // This content can be put back later on:
     // "!getCodeListNameList().isEmpty() ? getCodeListNameArray(0).getStringArray(0).getStringValue() : null"
     @DDI("T(fr.insee.eno.core.model.code.CodeList).mapDDIName(#this)")
@@ -49,6 +52,7 @@ public class CodeList extends EnoIdentifiableObject {
         return null;
     }
 
+    @Pogues("getCode()")
     @DDI("getCodeList()")
     List<CodeItem> codeItems = new ArrayList<>();
 
