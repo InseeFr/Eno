@@ -152,10 +152,10 @@
       </l:CategoryScheme>
       <l:CodeListScheme>
          <r:Agency>fr.insee</r:Agency>
-         <r:ID>ENOSIMPLE-CLS</r:ID>
+         <r:ID>ENO_SIMPLE-CLS</r:ID>
          <r:Version>1</r:Version>
          <l:CodeListSchemeName>
-            <r:String xml:lang="en-IE">ENOSIMPLE</r:String>
+            <r:String xml:lang="en-IE">ENO_SIMPLE</r:String>
          </l:CodeListSchemeName>
          <l:CodeList>
             <r:Agency>fr.insee</r:Agency>
@@ -229,7 +229,7 @@
             </r:BasedOnObject>
             <l:TypeOfVariableGroup>Questionnaire</l:TypeOfVariableGroup>
             <l:VariableGroupName>
-               <r:String>ENOSIMPLE</r:String>
+               <r:String>ENO_SIMPLE</r:String>
             </l:VariableGroupName>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
@@ -300,7 +300,7 @@
                <r:ID>Instrument-lmyoceix</r:ID>
                <r:Version>1</r:Version>
                <d:InstrumentName>
-                  <r:String>ENOSIMPLE</r:String>
+                  <r:String>ENO_SIMPLE</r:String>
                </d:InstrumentName>
                <r:Label>
                   <r:Content xml:lang="fr-FR">Eno - Simple questionnaire questionnaire</r:Content>
