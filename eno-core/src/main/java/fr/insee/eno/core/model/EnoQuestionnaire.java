@@ -149,7 +149,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     /** In DDI, code lists are mapped at the questionnaire level.
      * They are inserted in objects that rely on a code list through a DDI processing.
      */
-    @Pogues("getCodeLists().getCodeList()")
+    @Pogues("getCodeLists()?.getCodeList()")
     @DDI("getResourcePackageArray(0).getCodeListSchemeArray(0).getCodeListList()")
     List<CodeList> codeLists = new ArrayList<>();
 
