@@ -22,7 +22,7 @@ class LunaticPaginationFunctionalTests {
     private Questionnaire mapDDIAndApplyPagination(String id) throws DDIParsingException {
         // Given
         EnoParameters enoParameters = EnoParameters.of(EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                 LunaticPaginationFunctionalTests.class.getClassLoader().getResourceAsStream(
                         "functional/ddi/pagination/ddi-"+id+".xml"),
                 enoParameters);

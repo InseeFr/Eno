@@ -49,7 +49,7 @@ class NumberQuestionTest {
     @Test
     void integrationTest_dynamicUnit() throws DDIParsingException {
         // Given + When
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-dynamic-unit.xml"),
                 EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
         Questionnaire lunaticQuestionnaire = new Questionnaire();

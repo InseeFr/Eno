@@ -23,7 +23,7 @@ public class DDIToLunatic {
     public static Questionnaire transform(InputStream ddiInputStream, EnoParameters enoParameters)
             throws DDIParsingException {
         //
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(ddiInputStream, enoParameters);
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(ddiInputStream, enoParameters);
         //
         return EnoToLunatic.transform(enoQuestionnaire, enoParameters);
     }

@@ -13,8 +13,6 @@ import java.io.InputStream;
 
 public class DDIToEno {
 
-    private DDIToEno() {}
-
     /**
      * Transform given DDI input stream into a Eno questionnaire object using parameters given.
      * @param ddiInputStream Input stream of a DDI document.
@@ -22,7 +20,7 @@ public class DDIToEno {
      * @return Lunatic questionnaire object.
      * @throws DDIParsingException if the input stream given cannot be parsed to a DDI object.
      */
-    public static EnoQuestionnaire transform(InputStream ddiInputStream, EnoParameters enoParameters)
+    public EnoQuestionnaire transform(InputStream ddiInputStream, EnoParameters enoParameters)
             throws DDIParsingException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIDeserializer.deserialize(ddiInputStream);
@@ -39,5 +37,4 @@ public class DDIToEno {
         //
         return enoQuestionnaire;
     }
-
 }

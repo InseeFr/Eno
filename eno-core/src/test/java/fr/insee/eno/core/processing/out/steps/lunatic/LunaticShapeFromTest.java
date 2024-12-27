@@ -57,7 +57,7 @@ class LunaticShapeFromTest {
     @Test
     void integrationTest_fromDDI() throws DDIParsingException {
         //
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-dimensions.xml"),
                 EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
         LunaticMapper lunaticMapper = new LunaticMapper();
