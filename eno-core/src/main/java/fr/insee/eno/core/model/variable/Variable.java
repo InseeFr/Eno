@@ -71,6 +71,7 @@ public abstract class Variable extends EnoObject {
         // Otherwise it is a fixed unit represented as a URI thing
         return switch (poguesUnit) {
             case null -> null;
+            case "" -> null;
             case "http://id.insee.fr/unit/euro" -> "€";
             case "http://id.insee.fr/unit/keuro" -> "k€";
             case "http://id.insee.fr/unit/percent" -> "%";

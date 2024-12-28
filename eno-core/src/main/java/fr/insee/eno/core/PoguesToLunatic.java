@@ -9,8 +9,6 @@ import java.io.InputStream;
 
 public class PoguesToLunatic {
 
-    private PoguesToLunatic() {}
-
     /**
      * Transform given Pogues input stream into a Lunatic questionnaire object using parameters given.
      * @param poguesInputStream Input stream of a Pogues json questionnaire.
