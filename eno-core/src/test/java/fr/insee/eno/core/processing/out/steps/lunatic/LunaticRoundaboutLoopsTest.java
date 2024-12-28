@@ -35,7 +35,7 @@ class LunaticRoundaboutLoopsTest {
             parameters.setResponseTimeQuestion(false);
             parameters.setCommentSection(false);
             //
-            lunaticQuestionnaire = DDIToLunatic.transform(
+            lunaticQuestionnaire = new DDIToLunatic().transform(
                     this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-roundabout.xml"),
                     parameters);
             // the questionnaire should have 1 roundabout component
@@ -122,7 +122,7 @@ class LunaticRoundaboutLoopsTest {
             parameters.setResponseTimeQuestion(false);
             parameters.setCommentSection(false);
             //
-            lunaticQuestionnaire = DDIToLunatic.transform(
+            lunaticQuestionnaire = new DDIToLunatic().transform(
                     this.getClass().getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-roundabout-subsequence.xml"),
                     parameters);
@@ -199,7 +199,7 @@ class LunaticRoundaboutLoopsTest {
             EnoParameters parameters = EnoParameters.of(
                     EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
             //
-            Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+            Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
                     this.getClass().getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-roundabout-controls.xml"),
                     parameters);
@@ -265,7 +265,7 @@ class LunaticRoundaboutLoopsTest {
             EnoParameters parameters = EnoParameters.of(
                     EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
             //
-            Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+            Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
                     this.getClass().getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-roundabout-except.xml"),
                     parameters);

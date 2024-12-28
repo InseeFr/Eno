@@ -39,7 +39,7 @@ class EnoAddIdentificationSectionTest {
                 EnoParameters.Context.BUSINESS, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
         enoParameters.setIdentificationQuestion(true);
         //
-        Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"),
                 enoParameters);
         //

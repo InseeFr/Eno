@@ -18,12 +18,11 @@ public class PoguesToLunatic {
      * @return Lunatic questionnaire object.
      * @throws PoguesDeserializationException if the input stream given cannot be parsed to a Pogues questionnaire.
      */
-    public static Questionnaire transform(InputStream poguesInputStream, EnoParameters enoParameters)
+    public Questionnaire transform(InputStream poguesInputStream, EnoParameters enoParameters)
             throws PoguesDeserializationException {
         //
         EnoQuestionnaire enoQuestionnaire = new PoguesToEno().transform(poguesInputStream, enoParameters);
         //
         return new EnoToLunatic().transform(enoQuestionnaire, enoParameters);
     }
-
 }
