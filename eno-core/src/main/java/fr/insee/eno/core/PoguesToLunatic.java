@@ -21,7 +21,7 @@ public class PoguesToLunatic {
     public static Questionnaire transform(InputStream poguesInputStream, EnoParameters enoParameters)
             throws PoguesDeserializationException {
         //
-        EnoQuestionnaire enoQuestionnaire = PoguesToEno.transform(poguesInputStream, enoParameters);
+        EnoQuestionnaire enoQuestionnaire = new PoguesToEno().transform(poguesInputStream, enoParameters);
         //
         return EnoToLunatic.transform(enoQuestionnaire, enoParameters);
     }

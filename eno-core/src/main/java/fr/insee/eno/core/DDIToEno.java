@@ -11,7 +11,7 @@ import fr.insee.eno.core.serialize.DDIDeserializer;
 
 import java.io.InputStream;
 
-public class DDIToEno {
+public class DDIToEno implements InToEno {
 
     /**
      * Transform given DDI input stream into a Eno questionnaire object using parameters given.
