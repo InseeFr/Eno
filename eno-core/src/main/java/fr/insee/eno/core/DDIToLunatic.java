@@ -25,7 +25,7 @@ public class DDIToLunatic {
         //
         EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(ddiInputStream, enoParameters);
         //
-        return EnoToLunatic.transform(enoQuestionnaire, enoParameters);
+        return new EnoToLunatic().transform(enoQuestionnaire, enoParameters);
     }
 
 }

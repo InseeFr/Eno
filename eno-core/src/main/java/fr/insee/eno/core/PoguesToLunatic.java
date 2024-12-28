@@ -23,7 +23,7 @@ public class PoguesToLunatic {
         //
         EnoQuestionnaire enoQuestionnaire = new PoguesToEno().transform(poguesInputStream, enoParameters);
         //
-        return EnoToLunatic.transform(enoQuestionnaire, enoParameters);
+        return new EnoToLunatic().transform(enoQuestionnaire, enoParameters);
     }
 
 }

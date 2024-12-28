@@ -8,15 +8,13 @@ import fr.insee.lunatic.model.flat.Questionnaire;
 
 public class EnoToLunatic {
 
-    private EnoToLunatic() {}
-
     /**
      * Transform given Eno questionnaire into a Lunatic questionnaire object using parameters given.
      * @param enoQuestionnaire An Eno Questionnaire object.
      * @param enoParameters Eno parameters object.
      * @return Lunatic questionnaire object.
      */
-    public static Questionnaire transform(EnoQuestionnaire enoQuestionnaire, EnoParameters enoParameters) {
+    public Questionnaire transform(EnoQuestionnaire enoQuestionnaire, EnoParameters enoParameters) {
         //
         LunaticMapper lunaticMapper = new LunaticMapper();
         Questionnaire lunaticQuestionnaire = new Questionnaire();
@@ -27,5 +25,4 @@ public class EnoToLunatic {
         //
         return lunaticQuestionnaire;
     }
-
 }
