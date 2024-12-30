@@ -27,7 +27,7 @@ class ComplexMultipleChoiceQuestionProcessingTest {
     @BeforeAll
     void complexMCQ_integrationTestFromDDI() throws DDIParsingException {
         // Given
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                 ComplexMultipleChoiceQuestionProcessingTest.class.getClassLoader().getResourceAsStream(
                         "integration/ddi/ddi-mcq.xml"),
                 EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));

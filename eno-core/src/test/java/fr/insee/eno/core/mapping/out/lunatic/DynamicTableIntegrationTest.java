@@ -38,7 +38,7 @@ class DynamicTableIntegrationTest {
         String rosterResponseName2 = "TABLEAUBASIQUE2";
 
         // When
-        Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
                 this.getClass().getClassLoader().getResourceAsStream(
                         "integration/ddi/ddi-dynamic-table-2.xml"),
                 EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));

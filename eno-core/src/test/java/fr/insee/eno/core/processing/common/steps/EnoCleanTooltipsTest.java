@@ -22,7 +22,7 @@ class EnoCleanTooltipsTest {
         enoParameters.setQuestionNumberingMode(EnoParameters.QuestionNumberingMode.NONE);
         enoParameters.setArrowCharInQuestions(false);
         //
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-tooltips.xml"),
                 enoParameters);
 

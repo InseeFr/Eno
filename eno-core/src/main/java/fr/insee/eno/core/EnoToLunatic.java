@@ -4,11 +4,10 @@ import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.out.LunaticProcessing;
+import fr.insee.eno.core.serialize.LunaticSerializer;
 import fr.insee.lunatic.model.flat.Questionnaire;
 
-public class EnoToLunatic {
-
-    private EnoToLunatic() {}
+public class EnoToLunatic implements EnoToOut<Questionnaire> {
 
     /**
      * Transform given Eno questionnaire into a Lunatic questionnaire object using parameters given.
@@ -16,7 +15,7 @@ public class EnoToLunatic {
      * @param enoParameters Eno parameters object.
      * @return Lunatic questionnaire object.
      */
-    public static Questionnaire transform(EnoQuestionnaire enoQuestionnaire, EnoParameters enoParameters) {
+    public Questionnaire transform(EnoQuestionnaire enoQuestionnaire, EnoParameters enoParameters) {
         //
         LunaticMapper lunaticMapper = new LunaticMapper();
         Questionnaire lunaticQuestionnaire = new Questionnaire();
@@ -27,5 +26,4 @@ public class EnoToLunatic {
         //
         return lunaticQuestionnaire;
     }
-
 }

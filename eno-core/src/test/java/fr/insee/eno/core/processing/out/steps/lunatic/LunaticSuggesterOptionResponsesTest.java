@@ -111,7 +111,7 @@ class LunaticSuggesterOptionResponsesTest {
     @Test
     void integrationTest() throws DDIParsingException {
         //
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-suggester-options.xml"),
                 EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
         Questionnaire lunaticQuestionnaire = new Questionnaire();
@@ -159,7 +159,7 @@ class LunaticSuggesterOptionResponsesTest {
     @Test
     void integrationTest_table() throws DDIParsingException {
         //
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                 this.getClass().getClassLoader().getResourceAsStream(
                         "integration/ddi/ddi-suggester-options-table.xml"),
                 EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));

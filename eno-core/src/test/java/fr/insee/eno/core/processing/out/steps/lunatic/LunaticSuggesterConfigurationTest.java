@@ -29,7 +29,7 @@ class LunaticSuggesterConfigurationTest {
     @BeforeAll
     void suggestersIntegrationTest() throws DDIParsingException {
         //
-        Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-suggester.xml"),
                 EnoParameters.of(EnoParameters.Context.BUSINESS, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
         //

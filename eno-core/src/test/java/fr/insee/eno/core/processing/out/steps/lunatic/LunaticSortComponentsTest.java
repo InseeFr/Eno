@@ -72,7 +72,7 @@ class LunaticSortComponentsTest {
         @DisplayName("Questionnaire 'l20g2ba7': no component lost after sorting")
         void largeCoverageQuestionnaire() throws DDIParsingException {
             // Given
-            EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+            EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                     this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-l20g2ba7.xml"),
                     EnoParameters.of(Context.DEFAULT, ModeParameter.PROCESS, Format.LUNATIC));
             Questionnaire lunaticQuestionnaire = new Questionnaire();

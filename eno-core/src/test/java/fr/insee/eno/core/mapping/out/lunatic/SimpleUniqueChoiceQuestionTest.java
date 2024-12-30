@@ -20,7 +20,7 @@ public class SimpleUniqueChoiceQuestionTest {
     @Test
     void detailResponses_integrationTest() throws DDIParsingException {
         //
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-other-specify.xml"),
                 EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
         Questionnaire lunaticQuestionnaire = new Questionnaire();
