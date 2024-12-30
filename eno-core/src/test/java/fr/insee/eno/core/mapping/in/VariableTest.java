@@ -1,4 +1,4 @@
-package fr.insee.eno.core.mapping.in.pogues;
+package fr.insee.eno.core.mapping.in;
 
 import fr.insee.ddi.lifecycle33.instance.DDIInstanceType;
 import fr.insee.eno.core.exceptions.business.ParsingException;
