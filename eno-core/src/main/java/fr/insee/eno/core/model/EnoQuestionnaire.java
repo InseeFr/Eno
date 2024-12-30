@@ -65,6 +65,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
 
     /** Questionnaire variables. Note: variables can have different "scope" (questionnaire-level, loop or dynamic
      * table level), yet all variables are defined in this list. */
+    @Pogues("getVariables()?.getVariable()")
     @DDI("getResourcePackageArray(0).getVariableSchemeArray(0).getVariableList()")
     @Lunatic("getVariables()")
     private final List<Variable> variables = new ArrayList<>();

@@ -19,7 +19,7 @@ class DurationQuestionTest {
     @Test
     void mapFromDDI() throws DDIParsingException {
         //
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-durations-2.xml"),
                 EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
         //

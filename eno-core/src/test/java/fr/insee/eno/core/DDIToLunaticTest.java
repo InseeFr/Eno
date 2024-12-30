@@ -43,7 +43,7 @@ class DDIToLunaticTest {
         //
         EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
         enoParameters.getLunaticParameters().setDsfr(true);
-        Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
                 this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-" +questionnaireId+".xml"),
                 enoParameters);
         //
@@ -57,7 +57,7 @@ class DDIToLunaticTest {
                 "functional/ddi/ddi-l8x6fhtd.xml")) {
             EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
             // When + Then
-            assertThrows(UnauthorizedHeaderException.class, () -> DDIToLunatic.transform(inputStream, enoParameters));
+            assertThrows(UnauthorizedHeaderException.class, () -> new DDIToLunatic().transform(inputStream, enoParameters));
         } catch (IOException e) {
             throw new IOException("IOException occurred with test DDI file 'l8x6fhtd'.");
         }
@@ -66,7 +66,7 @@ class DDIToLunaticTest {
     @Test
     void componentWithBeforeQuestionDeclaration() throws DDIParsingException {
         //
-        Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
                 this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-lqnje8yr.xml"),
                 EnoParameters.of(Context.DEFAULT, ModeParameter.CAPI, Format.LUNATIC));
         //
@@ -87,7 +87,7 @@ class DDIToLunaticTest {
 
         @BeforeAll
         void mapLunaticQuestionnaire() throws DDIParsingException {
-            lunaticQuestionnaire = DDIToLunatic.transform(
+            lunaticQuestionnaire = new DDIToLunatic().transform(
                     DDIToLunaticTest.class.getClassLoader().getResourceAsStream("functional/ddi/ddi-l20g2ba7.xml"),
                     EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
         }

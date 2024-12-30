@@ -10,9 +10,7 @@ import fr.insee.pogues.model.Questionnaire;
 
 import java.io.InputStream;
 
-public class PoguesToEno {
-
-    private PoguesToEno() {}
+public class PoguesToEno implements InToEno {
 
     /**
      * Transform given Pogues input stream into a Eno questionnaire object using parameters given.
@@ -21,7 +19,7 @@ public class PoguesToEno {
      * @return Lunatic questionnaire object.
      * @throws PoguesDeserializationException if the input stream given cannot be parsed to a Pogues questionnaire.
      */
-    public static EnoQuestionnaire transform(InputStream poguesInputStream, EnoParameters enoParameters)
+    public EnoQuestionnaire transform(InputStream poguesInputStream, EnoParameters enoParameters)
             throws PoguesDeserializationException {
         //
         Questionnaire poguesQuestionnaire = PoguesDeserializer.deserialize(poguesInputStream);

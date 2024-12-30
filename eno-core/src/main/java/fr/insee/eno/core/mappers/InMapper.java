@@ -54,7 +54,7 @@ public abstract class InMapper extends Mapper {
      */
     void specificSetup(Object inputObject) {}
 
-    void mapInputObject(Object inputObject, EnoObject enoObject) {
+    public void mapInputObject(Object inputObject, EnoObject enoObject) {
         //
         compatibilityCheck(inputObject, enoObject);
         //

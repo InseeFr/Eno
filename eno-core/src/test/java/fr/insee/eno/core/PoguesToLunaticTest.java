@@ -19,7 +19,7 @@ class PoguesToLunaticTest {
         //
         String jsonPogues = "{\"id\": \"foo-id\"}";
         //
-        Questionnaire lunaticQuestionnaire = PoguesToLunatic.transform(
+        Questionnaire lunaticQuestionnaire = new PoguesToLunatic().transform(
                 new ByteArrayInputStream(jsonPogues.getBytes()),
                 EnoParameters.of(EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.PROCESS, Format.LUNATIC));
         //
@@ -33,7 +33,7 @@ class PoguesToLunaticTest {
     })
     void testIdMapping(String relativePath, String expectedId) throws PoguesDeserializationException {
         //
-        Questionnaire lunaticQuestionnaire = PoguesToLunatic.transform(
+        Questionnaire lunaticQuestionnaire = new PoguesToLunatic().transform(
                 this.getClass().getClassLoader().getResourceAsStream(relativePath),
                 EnoParameters.of(EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.PROCESS, Format.LUNATIC));
         //

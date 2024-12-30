@@ -3,6 +3,7 @@ package fr.insee.eno.core.model.variable;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.EnoObjectWithExpression;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
@@ -33,6 +34,7 @@ public class CalculatedVariable extends Variable implements EnoObjectWithExpress
 
     /** Expression to evaluate the variable if it is a calculated variable. */
     @Getter @Setter
+    @Pogues("getFormula()")
     @DDI("#index.get(#this.getVariableRepresentation().getProcessingInstructionReference().getIDArray(0).getStringValue())" +
             ".getCommandCodeArray(0).getCommandArray(0)")
     @Lunatic("setExpression(#param)")

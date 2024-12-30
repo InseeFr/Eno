@@ -120,7 +120,7 @@ class LunaticInputNumberDescriptionTest {
     @Test
     void integrationTest() throws DDIParsingException {
         // Given
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-dynamic-unit.xml"),
                 EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
         Questionnaire lunaticQuestionnaire = new Questionnaire();

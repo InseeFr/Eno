@@ -7,11 +7,7 @@ import fr.insee.lunatic.model.flat.Questionnaire;
 
 import java.io.InputStream;
 
-public class DDIToLunatic {
-
-    private DDIToLunatic() {
-        throw new UnsupportedOperationException("Utility class");
-    }
+public class DDIToLunatic implements InToOut<Questionnaire> {
 
     /**
      * Transform given DDI input stream into a Lunatic questionnaire object using parameters given.
@@ -20,12 +16,11 @@ public class DDIToLunatic {
      * @return Lunatic questionnaire object.
      * @throws DDIParsingException if the input stream given cannot be parsed to a DDI object.
      */
-    public static Questionnaire transform(InputStream ddiInputStream, EnoParameters enoParameters)
+    public Questionnaire transform(InputStream ddiInputStream, EnoParameters enoParameters)
             throws DDIParsingException {
         //
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(ddiInputStream, enoParameters);
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(ddiInputStream, enoParameters);
         //
-        return EnoToLunatic.transform(enoQuestionnaire, enoParameters);
+        return new EnoToLunatic().transform(enoQuestionnaire, enoParameters);
     }
-
 }

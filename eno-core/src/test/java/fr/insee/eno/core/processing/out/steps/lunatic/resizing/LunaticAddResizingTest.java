@@ -30,7 +30,7 @@ class LunaticAddResizingTest {
     void init() throws DDIParsingException {
 
         // Given
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                 LunaticAddResizingTest.class.getClassLoader().getResourceAsStream(
                         "integration/ddi/ddi-resizing.xml"),
                 EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
