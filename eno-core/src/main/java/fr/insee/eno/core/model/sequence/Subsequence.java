@@ -1,7 +1,7 @@
 package fr.insee.eno.core.model.sequence;
 
 import fr.insee.ddi.lifecycle33.datacollection.SequenceType;
-import fr.insee.eno.core.annotations.Contexts;
+import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.parameter.Format;
 import lombok.Getter;
@@ -14,8 +14,9 @@ import lombok.Setter;
  * In Lunatic, a subsequence is a Subsequence object. */
 @Getter
 @Setter
-@Contexts.Context(format = Format.DDI, type = SequenceType.class)
-@Contexts.Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.Subsequence.class)
+@Context(format = Format.POGUES, type = fr.insee.pogues.model.SequenceType.class)
+@Context(format = Format.DDI, type = SequenceType.class)
+@Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.Subsequence.class)
 public class Subsequence extends AbstractSequence {
 
     /** Field specific to Lunatic.
