@@ -57,7 +57,8 @@ class DDIToLunaticTest {
                 "functional/ddi/ddi-l8x6fhtd.xml")) {
             EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
             // When + Then
-            assertThrows(UnauthorizedHeaderException.class, () -> new DDIToLunatic().transform(inputStream, enoParameters));
+            DDIToLunatic ddiToLunatic = new DDIToLunatic();
+            assertThrows(UnauthorizedHeaderException.class, () -> ddiToLunatic.transform(inputStream, enoParameters));
         } catch (IOException e) {
             throw new IOException("IOException occurred with test DDI file 'l8x6fhtd'.");
         }

@@ -4,7 +4,6 @@ import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.out.LunaticProcessing;
-import fr.insee.eno.core.serialize.LunaticSerializer;
 import fr.insee.lunatic.model.flat.Questionnaire;
 
 public class EnoToLunatic implements EnoToOut<Questionnaire> {
