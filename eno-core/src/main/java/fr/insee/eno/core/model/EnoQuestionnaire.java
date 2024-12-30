@@ -4,6 +4,7 @@ import fr.insee.ddi.lifecycle33.instance.DDIInstanceType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.annotations.Pogues;
+import fr.insee.eno.core.exceptions.business.IllegalPoguesElementException;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.label.QuestionnaireLabel;
@@ -18,6 +19,9 @@ import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.model.variable.VariableGroup;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.pogues.model.GenericNameEnum;
+import fr.insee.pogues.model.Questionnaire;
+import fr.insee.pogues.model.SequenceType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -75,6 +79,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     private final List<VariableGroup> variableGroups = new ArrayList<>();
 
     /** List of questionnaire's sequences. */
+    @Pogues("T(fr.insee.eno.core.model.EnoQuestionnaire).mapPoguesSequences(#this)")
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
             ".?[#this instanceof T(fr.insee.ddi.lifecycle33.datacollection.SequenceType) " +
             "and not #this.getTypeOfSequenceList().isEmpty()]" +
@@ -153,5 +158,19 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     @Pogues("getCodeLists()?.getCodeList()")
     @DDI("getResourcePackageArray(0).getCodeListSchemeArray(0).getCodeListList()")
     List<CodeList> codeLists = new ArrayList<>();
+
+    public static List<SequenceType> mapPoguesSequences(Questionnaire poguesQuestionnaire) {
+        List<SequenceType> poguesSequences = poguesQuestionnaire.getChild().stream()
+                .filter(SequenceType.class::isInstance).map(SequenceType.class::cast)
+                .filter(poguesComponent -> !Sequence.POGUES_FAKE_END_SEQUENCE_ID.equals(poguesComponent.getId()))
+                .toList();
+        poguesSequences.forEach(poguesComponent -> { // safety check
+            GenericNameEnum genericName = poguesComponent.getGenericName();
+            if (! GenericNameEnum.MODULE.equals(genericName))
+                throw new IllegalPoguesElementException("Element of type " + genericName +
+                        " cannot be preset at first level of Pogues components tree.");
+        });
+        return poguesSequences;
+    }
 
 }

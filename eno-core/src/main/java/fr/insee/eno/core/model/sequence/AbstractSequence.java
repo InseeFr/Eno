@@ -4,6 +4,7 @@ import fr.insee.ddi.lifecycle33.datacollection.SequenceType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.EnoComponent;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.declaration.Declaration;
@@ -24,11 +25,18 @@ import java.util.List;
  * In Lunatic, a sequence is a Sequence object, a subsequence is a Subsequence object. */
 @Getter
 @Setter
+@Context(format = Format.POGUES, type = fr.insee.pogues.model.SequenceType.class)
 @Context(format = Format.DDI, type = SequenceType.class)
 @Context(format = Format.LUNATIC, type = {Sequence.class, Subsequence.class})
 public abstract class AbstractSequence extends EnoIdentifiableObject implements EnoComponent {
 
+    /** Business identifier name of the sequence/subsequence. */
+    @Pogues("getName()")
+    @DDI("getConstructNameArray(0).getStringArray(0).getStringValue()")
+    private String name;
+
     /** Sequence / subsequence label. */
+    @Pogues("getLabel().getFirst()")
     @DDI("getLabelArray(0)")
     @Lunatic("setLabel(#param)")
     Label label;
