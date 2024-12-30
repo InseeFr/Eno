@@ -89,6 +89,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
 
     /** List of questionnaire's subsequences.
      * Note: the order and hierarchy of the sequences and subsequences is stored in the sequence objects. */
+    @Pogues("T(fr.insee.eno.core.model.EnoQuestionnaire).mapPoguesSubsequences(#this)")
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
             ".?[#this instanceof T(fr.insee.ddi.lifecycle33.datacollection.SequenceType) " +
             "and not #this.getTypeOfSequenceList().isEmpty()]" +
@@ -171,6 +172,15 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
                         " cannot be preset at first level of Pogues components tree.");
         });
         return poguesSequences;
+    }
+
+    public static List<SequenceType> mapPoguesSubsequences(Questionnaire poguesQuestionnaire) {
+        return poguesQuestionnaire.getChild().stream()
+                .filter(SequenceType.class::isInstance).map(SequenceType.class::cast)
+                .flatMap(poguesSequence -> poguesSequence.getChild().stream()
+                        .filter(SequenceType.class::isInstance).map(SequenceType.class::cast)
+                        .filter(poguesComponent -> GenericNameEnum.SUBMODULE.equals(poguesComponent.getGenericName())))
+                .toList();
     }
 
 }
