@@ -32,7 +32,7 @@ public abstract class AbstractSequence extends EnoIdentifiableObject implements 
 
     /** Business identifier name of the sequence/subsequence. */
     @Pogues("getName()")
-    @DDI("getConstructNameArray(0).getStringArray(0).getStringValue()")
+    @DDI("!getConstructNameList().isEmpty() ? getConstructNameArray(0).getStringArray(0).getStringValue() : null")
     private String name;
 
     /** Sequence / subsequence label. */
