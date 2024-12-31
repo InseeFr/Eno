@@ -19,9 +19,8 @@ import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.model.variable.VariableGroup;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.pogues.model.GenericNameEnum;
-import fr.insee.pogues.model.Questionnaire;
-import fr.insee.pogues.model.SequenceType;
+import fr.insee.eno.core.utils.PoguesUtils;
+import fr.insee.pogues.model.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -141,6 +140,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
      * This corresponds to DDI "QuestionItem" objects.
      * Question objects are components in the Lunatic questionnaire.
      */
+    @Pogues("T(fr.insee.eno.core.model.EnoQuestionnaire).mapPoguesSingleResponseQuestions(#this)")
     @DDI("getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionItemList()")
     @Lunatic("getComponents()")
     private final List<SingleResponseQuestion> singleResponseQuestions = new ArrayList<>();
@@ -169,17 +169,33 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
             GenericNameEnum genericName = poguesComponent.getGenericName();
             if (! GenericNameEnum.MODULE.equals(genericName))
                 throw new IllegalPoguesElementException("Element of type " + genericName +
-                        " cannot be preset at first level of Pogues components tree.");
+                        " cannot be present at first level of Pogues components tree.");
         });
         return poguesSequences;
     }
 
     public static List<SequenceType> mapPoguesSubsequences(Questionnaire poguesQuestionnaire) {
+        return PoguesUtils.poguesSequenceStream(poguesQuestionnaire)
+                .flatMap(poguesSequence -> PoguesUtils.poguesSequenceStream(poguesSequence)
+                        .filter(poguesComponent -> GenericNameEnum.SUBMODULE.equals(poguesComponent.getGenericName())))
+                .toList();
+    }
+
+    public static List<QuestionType> mapPoguesSingleResponseQuestions(Questionnaire poguesQuestionnaire) {
         return poguesQuestionnaire.getChild().stream()
                 .filter(SequenceType.class::isInstance).map(SequenceType.class::cast)
-                .flatMap(poguesSequence -> poguesSequence.getChild().stream()
-                        .filter(SequenceType.class::isInstance).map(SequenceType.class::cast)
-                        .filter(poguesComponent -> GenericNameEnum.SUBMODULE.equals(poguesComponent.getGenericName())))
+                .flatMap(poguesSequence -> {
+                    // Get questions within the sequence
+                    List<QuestionType> sequenceQuestions = new ArrayList<>(PoguesUtils.poguesQuestionStream(poguesSequence)
+                            .filter(poguesQuestion -> QuestionTypeEnum.SIMPLE.equals(poguesQuestion.getQuestionType()))
+                            .toList());
+                    // and its subsequences
+                    sequenceQuestions.addAll(PoguesUtils.poguesSequenceStream(poguesSequence)
+                            .flatMap(PoguesUtils::poguesQuestionStream)
+                            .filter(poguesQuestion -> QuestionTypeEnum.SIMPLE.equals(poguesQuestion.getQuestionType()))
+                            .toList());
+                    return sequenceQuestions.stream();
+                })
                 .toList();
     }
 
