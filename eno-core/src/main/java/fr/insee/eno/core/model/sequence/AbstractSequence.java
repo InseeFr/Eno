@@ -36,7 +36,7 @@ public abstract class AbstractSequence extends EnoIdentifiableObject implements 
     private String name;
 
     /** Sequence / subsequence label. */
-    @Pogues("getLabel().getFirst()")
+    @Pogues("!getLabel().isEmpty ? getLabel().getFirst() : null")
     @DDI("getLabelArray(0)")
     @Lunatic("setLabel(#param)")
     Label label;
