@@ -1,22 +1,17 @@
 package fr.insee.eno.core.mapping.in.ddi;
 
-import fr.insee.eno.core.DDIToEno;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
-import fr.insee.eno.core.model.EnoObject;
+import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.DateQuestion;
-import fr.insee.eno.core.parameter.EnoParameters;
-import fr.insee.eno.core.parameter.EnoParameters.Context;
-import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.reference.EnoIndex;
+import fr.insee.eno.core.serialize.DDIDeserializer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import java.io.InputStream;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class DateQuestionTest {
@@ -25,18 +20,17 @@ class DateQuestionTest {
 
     @BeforeAll
     void init() throws DDIParsingException {
-        InputStream ddiStream = this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-dates.xml");
-        EnoQuestionnaire questionnaire = new DDIToEno().transform(ddiStream,
-                EnoParameters.of(Context.DEFAULT, ModeParameter.PROCESS));
-        index = questionnaire.getIndex();
+        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
+        new DDIMapper().mapDDI(
+                DDIDeserializer.deserialize(this.getClass().getClassLoader().getResourceAsStream(
+                        "integration/ddi/ddi-dates.xml")).getDDIInstance(),
+                enoQuestionnaire);
+        index = enoQuestionnaire.getIndex();
     }
 
     @Test
     void parseDayDateWithAllParams() {
-        EnoObject dateObject = index.get("jfjfckyw");
-        assertTrue(dateObject instanceof DateQuestion);
-
-        DateQuestion dateQuestion = (DateQuestion) dateObject;
+        DateQuestion dateQuestion = assertInstanceOf(DateQuestion.class, index.get("jfjfckyw"));
         assertEquals("YYYY-MM-DD", dateQuestion.getFormat());
         assertEquals("2000-01-01", dateQuestion.getMinValue());
         assertEquals("2020-03-31", dateQuestion.getMaxValue());
@@ -44,10 +38,7 @@ class DateQuestionTest {
 
     @Test
     void parseMonthDateWithAllParams() {
-        EnoObject dateObject = index.get("k6c1guqb");
-        assertTrue(dateObject instanceof DateQuestion);
-
-        DateQuestion dateQuestion = (DateQuestion) dateObject;
+        DateQuestion dateQuestion = assertInstanceOf(DateQuestion.class, index.get("k6c1guqb"));
         assertEquals("YYYY-MM", dateQuestion.getFormat());
         assertEquals("2000-01", dateQuestion.getMinValue());
         assertEquals("2020-03", dateQuestion.getMaxValue());
@@ -55,10 +46,7 @@ class DateQuestionTest {
 
     @Test
     void parseYearDateWithAllParams() {
-        EnoObject dateObject = index.get("k6c1che6");
-        assertTrue(dateObject instanceof DateQuestion);
-
-        DateQuestion dateQuestion = (DateQuestion) dateObject;
+        DateQuestion dateQuestion = assertInstanceOf(DateQuestion.class, index.get("k6c1che6"));
         assertEquals("YYYY", dateQuestion.getFormat());
         assertEquals("2000", dateQuestion.getMinValue());
         assertEquals("2020", dateQuestion.getMaxValue());
@@ -66,13 +54,11 @@ class DateQuestionTest {
 
     @Test
     void parseYearDateWithNoMinMax() {
-        EnoObject dateObject = index.get("ljwv6q99");
-        assertTrue(dateObject instanceof DateQuestion);
-
         // should retrieve data in reference date time object
-        DateQuestion dateQuestion = (DateQuestion) dateObject;
+        DateQuestion dateQuestion = assertInstanceOf(DateQuestion.class, index.get("ljwv6q99"));
         assertEquals("YYYY-MM-DD", dateQuestion.getFormat());
         assertEquals("1900-01-01", dateQuestion.getMinValue());
         assertEquals("format-date(current-date(),'[Y0001]-[M01]-[D01]')", dateQuestion.getMaxValue());
     }
+
 }
