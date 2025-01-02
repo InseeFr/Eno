@@ -16,7 +16,7 @@ public class PoguesToLunaticService extends LunaticGenerationService {
 
     @Override
     Questionnaire mainTransformation(InputStream poguesInputStream, EnoParameters enoParameters) throws Exception {
-        return PoguesToLunatic.transform(poguesInputStream, enoParameters);
+        return new PoguesToLunatic().transform(poguesInputStream, enoParameters);
     }
 
     @Override

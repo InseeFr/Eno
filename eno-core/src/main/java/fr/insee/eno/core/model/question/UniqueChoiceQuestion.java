@@ -6,6 +6,8 @@ import fr.insee.ddi.lifecycle33.datacollection.ResponseDomainInMixedType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
+import fr.insee.eno.core.exceptions.technical.ConversionException;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.navigation.Binding;
@@ -16,6 +18,7 @@ import fr.insee.lunatic.model.flat.CheckboxOne;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Dropdown;
 import fr.insee.lunatic.model.flat.Radio;
+import fr.insee.pogues.model.QuestionType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +35,7 @@ import java.util.Optional;
 @Getter
 @Setter
 @Slf4j
+@Context(format = Format.POGUES, type = QuestionType.class)
 @Context(format = Format.DDI, type = QuestionItemType.class)
 @Context(format = Format.LUNATIC, type = {CheckboxOne.class, Radio.class, Dropdown.class})
 public class UniqueChoiceQuestion extends SingleResponseQuestion {
@@ -60,6 +64,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * Property used to convert to unique choice question to the right Lunatic component.
      * In DDI, there are conventional values in the "generic output format" property.
      * In Lunatic, it is used by the converter to create the right object, and to set the component type property. */
+    @Pogues("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertPoguesVisualizationHint(#this)")
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDDIOutputFormat(#this)")
     @Lunatic("setComponentType(" +
             "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
@@ -90,6 +95,17 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * In Lunatic, they are inserted in option in through a processing. */
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDetailResponses(#this)")
     List<DetailResponse> detailResponses = new ArrayList<>();
+
+    public static DisplayFormat convertPoguesVisualizationHint(QuestionType poguesQuestion) {
+        return switch (poguesQuestion.getResponse().getFirst().getDatatype().getVisualizationHint()) {
+            case CHECKBOX -> DisplayFormat.CHECKBOX;
+            case DROPDOWN -> DisplayFormat.DROPDOWN;
+            case RADIO -> DisplayFormat.RADIO;
+            case SUGGESTER -> throw new ConversionException(
+                    "Question should have been converted to a suggester question and not a unique choice question.");
+        };
+    }
+
 
     /**
      * From DDI question item (that correspond to a unique choice question),

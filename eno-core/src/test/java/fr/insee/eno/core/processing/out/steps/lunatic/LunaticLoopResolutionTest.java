@@ -109,7 +109,7 @@ class LunaticLoopResolutionTest {
         @BeforeAll
         void mapLunaticQuestionnaire() throws DDIParsingException {
             // Given: a mapped and sorted Lunatic questionnaire
-            EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+            EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                     LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-loops-sequence.xml"),
                     EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
@@ -203,7 +203,7 @@ class LunaticLoopResolutionTest {
         @BeforeAll
         void mapLunaticQuestionnaire() throws DDIParsingException {
             // Given: a mapped and sorted Lunatic questionnaire
-            EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+            EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                     LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-loops-subsequence.xml"),
                     EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
@@ -286,7 +286,7 @@ class LunaticLoopResolutionTest {
         @BeforeAll
         void mapLunaticQuestionnaire() throws DDIParsingException {
             // Given: a mapped and sorted Lunatic questionnaire
-            EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+            EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                     LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-loops-extended-sequence.xml"),
                     EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
@@ -358,7 +358,7 @@ class LunaticLoopResolutionTest {
         @BeforeAll
         void mapLunaticQuestionnaire() throws DDIParsingException {
             // Given: a mapped and sorted Lunatic questionnaire
-            EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+            EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                     LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-loops-extended-subsequence.xml"),
                     EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
@@ -429,7 +429,7 @@ class LunaticLoopResolutionTest {
         @DisplayName("Questionnaire 'l20g2ba7': loops are inserted and contain the right components")
         void largeCoverageQuestionnaire() throws DDIParsingException {
             // Given
-            EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+            EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                     this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-l20g2ba7.xml"),
                     EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
             Questionnaire lunaticQuestionnaire = new Questionnaire();
@@ -467,7 +467,7 @@ class LunaticLoopResolutionTest {
         @Test
         void componentsInLinkedLoopShouldHaveFilter() throws DDIParsingException {
             // Given
-            EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+            EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                     this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-loop-except.xml"),
                     EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
             Questionnaire lunaticQuestionnaire = new Questionnaire();
@@ -500,7 +500,7 @@ class LunaticLoopResolutionTest {
         @Test
         void mapLunaticQuestionnaire() throws DDIParsingException {
             // Given: a mapped and sorted Lunatic questionnaire
-            EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+            EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                     LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-dynamic-table.xml"),
                     EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));

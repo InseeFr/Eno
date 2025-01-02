@@ -1,0 +1,762 @@
+{
+  "id": "m4be599z",
+  "Name": "ENODATES",
+  "Child": [
+    {
+      "id": "m4be1589",
+      "Name": "S1",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m4bg8e7q",
+          "Name": "SKIP",
+          "type": "QuestionType",
+          "Label": [
+            "\"Skip date questions without min and max?\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4bg25vq",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m4bg6hr1"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "id": "m4bg5l4p",
+              "Text": "\"Date questions without an explicit min and max are not recommended \" || \r\n\"and may get deprecated or even forbidden later on.\"",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "declarationType": "HELP"
+            }
+          ],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"First sequence\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "m4bft4uc",
+      "Name": "S2",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m4be3n1t",
+          "Name": "DATE_YMD",
+          "type": "QuestionType",
+          "Label": [
+            "\"Date with day, month and year, no min/max\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4be4iy0",
+              "Datatype": {
+                "type": "DateDatatypeType",
+                "Format": "YYYY-MM-DD",
+                "typeName": "DATE"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m4be1u9w"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
+          "id": "m4behj1c",
+          "Name": "DATE_YM",
+          "type": "QuestionType",
+          "Label": [
+            "\"Date with year and month, no min/max\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4bgaybq",
+              "Datatype": {
+                "type": "DateDatatypeType",
+                "Format": "YYYY-MM",
+                "typeName": "DATE"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m4bdzzue"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
+          "id": "m4beg559",
+          "Name": "DATE_Y",
+          "type": "QuestionType",
+          "Label": [
+            "\"Date with year, no min/max\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4bgjiq7",
+              "Datatype": {
+                "type": "DateDatatypeType",
+                "Format": "YYYY",
+                "typeName": "DATE"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m4be52mj"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
+          "id": "m4bej1du",
+          "Name": "DATE_YMD_MIN",
+          "type": "QuestionType",
+          "Label": [
+            "\"Date after 01/01/1950\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4bg9xxi",
+              "Datatype": {
+                "type": "DateDatatypeType",
+                "Format": "YYYY-MM-DD",
+                "Minimum": "1950-01-01",
+                "typeName": "DATE"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m4beibfq"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
+          "id": "m4be5y4y",
+          "Name": "DATE_YMD_MAX",
+          "type": "QuestionType",
+          "Label": [
+            "\"Date before 01/01/2050\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4bgltxk",
+              "Datatype": {
+                "type": "DateDatatypeType",
+                "Format": "YYYY-MM-DD",
+                "Maximum": "2050-01-01",
+                "typeName": "DATE"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m4belt3f"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
+          "id": "m4bepnx0",
+          "Name": "DATE_YM_MIN",
+          "type": "QuestionType",
+          "Label": [
+            "\"Date after 01/1950\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4bgjdpw",
+              "Datatype": {
+                "type": "DateDatatypeType",
+                "Format": "YYYY-MM",
+                "Minimum": "1950-01",
+                "typeName": "DATE"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m4beoogz"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
+          "id": "m4bekunf",
+          "Name": "DATE_YM_MAX",
+          "type": "QuestionType",
+          "Label": [
+            "\"Date before 01/2050\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4bgfzfj",
+              "Datatype": {
+                "type": "DateDatatypeType",
+                "Format": "YYYY-MM",
+                "Maximum": "2050-01",
+                "typeName": "DATE"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m4bed98m"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
+          "id": "m4besach",
+          "Name": "DATE_Y_MIN",
+          "type": "QuestionType",
+          "Label": [
+            "\"Date after 1950\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4bge9f4",
+              "Datatype": {
+                "type": "DateDatatypeType",
+                "Format": "YYYY",
+                "Minimum": "1950",
+                "typeName": "DATE"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m4beeplf"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
+          "id": "m4beobgk",
+          "Name": "DATE_Y_MAX",
+          "type": "QuestionType",
+          "Label": [
+            "\"Date before 2050\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4bgaxeg",
+              "Datatype": {
+                "type": "DateDatatypeType",
+                "Format": "YYYY",
+                "Maximum": "2050",
+                "typeName": "DATE"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m4bek6t3"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"Dates without bounds\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "id": "m4bg3lwv",
+          "Text": "\"Dates with no bounds, or only a min or a max.\"",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "declarationType": "HELP"
+        }
+      ],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "m4bgelov",
+      "Name": "S3",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m4bej9vw",
+          "Name": "DATE_YMD_MIN_MAX",
+          "type": "QuestionType",
+          "Label": [
+            "\"Date between 01/01/1950 and 01/01/2050\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4bgb41j",
+              "Datatype": {
+                "type": "DateDatatypeType",
+                "Format": "YYYY-MM-DD",
+                "Maximum": "2050-01-01",
+                "Minimum": "1950-01-01",
+                "typeName": "DATE"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m4bedaxq"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
+          "id": "m4benkl2",
+          "Name": "DATE_YM_MIN_MAX",
+          "type": "QuestionType",
+          "Label": [
+            "\"Date between 01/1950 and 01/2050\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4bg8khk",
+              "Datatype": {
+                "type": "DateDatatypeType",
+                "Format": "YYYY-MM",
+                "Maximum": "2050-01",
+                "Minimum": "1950-01",
+                "typeName": "DATE"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m4berjw3"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
+          "id": "m4bes8ko",
+          "Name": "DATE_Y_MIN_MAX",
+          "type": "QuestionType",
+          "Label": [
+            "\"Date between 1950 and 2050\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m4bgct0j",
+              "Datatype": {
+                "type": "DateDatatypeType",
+                "Format": "YYYY",
+                "Maximum": "2050",
+                "Minimum": "1950",
+                "typeName": "DATE"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m4becn2b"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"Dates with bounds\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "id": "m4bg83ue",
+          "Text": "\"Dates with min and max\"",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "declarationType": "HELP"
+        }
+      ],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "idendquest",
+      "Name": "QUESTIONNAIRE_END",
+      "type": "SequenceType",
+      "Child": [],
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    }
+  ],
+  "Label": [
+    "Eno - Dates"
+  ],
+  "final": false,
+  "owner": "ENO-INTEGRATION-TESTS",
+  "agency": "fr.insee",
+  "CodeLists": {
+    "CodeList": []
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "m4be1u9w",
+        "Name": "DATE_YMD",
+        "type": "CollectedVariableType",
+        "Label": "DATE_YMD label",
+        "Datatype": {
+          "type": "DateDatatypeType",
+          "Format": "YYYY-MM-DD",
+          "typeName": "DATE"
+        }
+      },
+      {
+        "id": "m4bdzzue",
+        "Name": "DATE_YM",
+        "type": "CollectedVariableType",
+        "Label": "DATE_YM label",
+        "Datatype": {
+          "type": "DateDatatypeType",
+          "Format": "YYYY-MM",
+          "typeName": "DATE"
+        }
+      },
+      {
+        "id": "m4be52mj",
+        "Name": "DATE_Y",
+        "type": "CollectedVariableType",
+        "Label": "DATE_Y label",
+        "Datatype": {
+          "type": "DateDatatypeType",
+          "Format": "YYYY",
+          "typeName": "DATE"
+        }
+      },
+      {
+        "id": "m4beibfq",
+        "Name": "DATE_YMD_MIN",
+        "type": "CollectedVariableType",
+        "Label": "DATE_YMD_MIN label",
+        "Datatype": {
+          "type": "DateDatatypeType",
+          "Format": "YYYY-MM-DD",
+          "Minimum": "1950-01-01",
+          "typeName": "DATE"
+        }
+      },
+      {
+        "id": "m4belt3f",
+        "Name": "DATE_YMD_MAX",
+        "type": "CollectedVariableType",
+        "Label": "DATE_YMD_MAX label",
+        "Datatype": {
+          "type": "DateDatatypeType",
+          "Format": "YYYY-MM-DD",
+          "Maximum": "2050-01-01",
+          "typeName": "DATE"
+        }
+      },
+      {
+        "id": "m4bedaxq",
+        "Name": "DATE_YMD_MIN_MAX",
+        "type": "CollectedVariableType",
+        "Label": "DATE_YMD_MIN_MAX label",
+        "Datatype": {
+          "type": "DateDatatypeType",
+          "Format": "YYYY-MM-DD",
+          "Maximum": "2050-01-01",
+          "Minimum": "1950-01-01",
+          "typeName": "DATE"
+        }
+      },
+      {
+        "id": "m4beoogz",
+        "Name": "DATE_YM_MIN",
+        "type": "CollectedVariableType",
+        "Label": "DATE_YM_MIN label",
+        "Datatype": {
+          "type": "DateDatatypeType",
+          "Format": "YYYY-MM",
+          "Minimum": "1950-01",
+          "typeName": "DATE"
+        }
+      },
+      {
+        "id": "m4bed98m",
+        "Name": "DATE_YM_MAX",
+        "type": "CollectedVariableType",
+        "Label": "DATE_YM_MAX label",
+        "Datatype": {
+          "type": "DateDatatypeType",
+          "Format": "YYYY-MM",
+          "Maximum": "2050-01",
+          "typeName": "DATE"
+        }
+      },
+      {
+        "id": "m4berjw3",
+        "Name": "DATE_YM_MIN_MAX",
+        "type": "CollectedVariableType",
+        "Label": "DATE_YM_MIN_MAX label",
+        "Datatype": {
+          "type": "DateDatatypeType",
+          "Format": "YYYY-MM",
+          "Maximum": "2050-01",
+          "Minimum": "1950-01",
+          "typeName": "DATE"
+        }
+      },
+      {
+        "id": "m4beeplf",
+        "Name": "DATE_Y_MIN",
+        "type": "CollectedVariableType",
+        "Label": "DATE_Y_MIN label",
+        "Datatype": {
+          "type": "DateDatatypeType",
+          "Format": "YYYY",
+          "Minimum": "1950",
+          "typeName": "DATE"
+        }
+      },
+      {
+        "id": "m4bek6t3",
+        "Name": "DATE_Y_MAX",
+        "type": "CollectedVariableType",
+        "Label": "DATE_Y_MAX label",
+        "Datatype": {
+          "type": "DateDatatypeType",
+          "Format": "YYYY",
+          "Maximum": "2050",
+          "typeName": "DATE"
+        }
+      },
+      {
+        "id": "m4becn2b",
+        "Name": "DATE_Y_MIN_MAX",
+        "type": "CollectedVariableType",
+        "Label": "DATE_Y_MIN_MAX label",
+        "Datatype": {
+          "type": "DateDatatypeType",
+          "Format": "YYYY",
+          "Maximum": "2050",
+          "Minimum": "1950",
+          "typeName": "DATE"
+        }
+      },
+      {
+        "id": "m4bg6hr1",
+        "Name": "SKIP",
+        "type": "CollectedVariableType",
+        "Label": "SKIP label",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      }
+    ]
+  },
+  "flowLogic": "FILTER",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "FlowControl": [
+    {
+      "id": "m4bgmjw4",
+      "IfTrue": "m4bft4uc-m4bft4uc",
+      "Expression": "not($SKIP$)",
+      "Description": "\"Skip date with no bounds sequence\""
+    }
+  ],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "m4be9yrp",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "m4be1589",
+        "m4bg8e7q",
+        "idendquest",
+        "m4bft4uc",
+        "m4be3n1t",
+        "m4behj1c",
+        "m4beg559",
+        "m4bej1du",
+        "m4be5y4y",
+        "m4bepnx0",
+        "m4bekunf",
+        "m4besach",
+        "m4beobgk",
+        "m4bgelov",
+        "m4bej9vw",
+        "m4benkl2",
+        "m4bes8ko"
+      ]
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "s2106-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2106-dc"
+    }
+  ],
+  "lastUpdatedDate": "Thu Dec 05 2024 16:00:36 GMT+0100 (heure normale d’Europe centrale)",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": []
+}

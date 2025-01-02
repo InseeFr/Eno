@@ -62,7 +62,7 @@ class EnoAddCommentSectionTest {
                 EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI);
         enoParameters.setCommentSection(true);
         //
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"),
                 enoParameters);
         //
@@ -79,7 +79,7 @@ class EnoAddCommentSectionTest {
                 EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
         enoParameters.setCommentSection(true);
         //
-        Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"),
                 enoParameters);
         //

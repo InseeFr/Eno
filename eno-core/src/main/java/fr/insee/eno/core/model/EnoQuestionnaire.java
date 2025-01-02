@@ -3,6 +3,8 @@ package fr.insee.eno.core.model;
 import fr.insee.ddi.lifecycle33.instance.DDIInstanceType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
+import fr.insee.eno.core.exceptions.business.IllegalPoguesElementException;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.label.QuestionnaireLabel;
@@ -17,6 +19,8 @@ import fr.insee.eno.core.model.sequence.Subsequence;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.model.variable.VariableGroup;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.eno.core.utils.PoguesUtils;
+import fr.insee.pogues.model.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,18 +40,35 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 public class EnoQuestionnaire extends EnoIdentifiableObject {
 
     /** Name of the questionnaire model. */
+    @Pogues("getName()")
     @DDI("getResourcePackageArray(0).getCodeListSchemeArray(0)" +
             ".getCodeListSchemeNameArray(0).getStringArray(0).getStringValue()") //TODO: see if it's that one
     @Lunatic("setModele(#param)")
     private String questionnaireModel;
 
+    /** Agency producing the questionnaire. */
+    @Pogues("getAgency()")
+    private String agency;
+
     /** Short description of the questionnaire. */
+    @Pogues("!getLabel().isEmpty() ? #this : null")
     @DDI("getCitation()?.getTitle()")
     @Lunatic("setLabel(#param)")
     private QuestionnaireLabel label;
 
+    /** Metadata that is specific to Pogues and indicates how filters are described in the questionnaire.
+     * Mapped to be used as a safety net (only 'FILTER' mode is allowed) in a processing step. */
+    @Pogues("getFlowLogic()?.value()")
+    private String filterMode;
+
+    /** Metadata that is specific to Pogues and indicates which language is used for expressions.
+     * Mapped to be used as a safety net (only 'VTL' is allowed) in a processing step. */
+    @Pogues("getFormulasLanguage()?.value()")
+    private String expressionLanguage;
+
     /** Questionnaire variables. Note: variables can have different "scope" (questionnaire-level, loop or dynamic
      * table level), yet all variables are defined in this list. */
+    @Pogues("getVariables()?.getVariable()")
     @DDI("getResourcePackageArray(0).getVariableSchemeArray(0).getVariableList()")
     @Lunatic("getVariables()")
     private final List<Variable> variables = new ArrayList<>();
@@ -57,6 +78,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     private final List<VariableGroup> variableGroups = new ArrayList<>();
 
     /** List of questionnaire's sequences. */
+    @Pogues("T(fr.insee.eno.core.model.EnoQuestionnaire).mapPoguesSequences(#this)")
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
             ".?[#this instanceof T(fr.insee.ddi.lifecycle33.datacollection.SequenceType) " +
             "and not #this.getTypeOfSequenceList().isEmpty()]" +
@@ -66,6 +88,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
 
     /** List of questionnaire's subsequences.
      * Note: the order and hierarchy of the sequences and subsequences is stored in the sequence objects. */
+    @Pogues("T(fr.insee.eno.core.model.EnoQuestionnaire).mapPoguesSubsequences(#this)")
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
             ".?[#this instanceof T(fr.insee.ddi.lifecycle33.datacollection.SequenceType) " +
             "and not #this.getTypeOfSequenceList().isEmpty()]" +
@@ -117,6 +140,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
      * This corresponds to DDI "QuestionItem" objects.
      * Question objects are components in the Lunatic questionnaire.
      */
+    @Pogues("T(fr.insee.eno.core.model.EnoQuestionnaire).mapPoguesSingleResponseQuestions(#this)")
     @DDI("getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionItemList()")
     @Lunatic("getComponents()")
     private final List<SingleResponseQuestion> singleResponseQuestions = new ArrayList<>();
@@ -125,6 +149,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
      * This corresponds to DDI "QuestionGrid" objects.
      * Question objects are components in the Lunatic questionnaire.
      */
+    @Pogues("T(fr.insee.eno.core.model.EnoQuestionnaire).mapPoguesMultipleResponseQuestions(#this)")
     @DDI("getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionGridList()")
     @Lunatic("getComponents()")
     private final List<MultipleResponseQuestion> multipleResponseQuestions = new ArrayList<>();
@@ -132,7 +157,73 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     /** In DDI, code lists are mapped at the questionnaire level.
      * They are inserted in objects that rely on a code list through a DDI processing.
      */
+    @Pogues("getCodeLists()?.getCodeList()")
     @DDI("getResourcePackageArray(0).getCodeListSchemeArray(0).getCodeListList()")
     List<CodeList> codeLists = new ArrayList<>();
+
+    public static List<SequenceType> mapPoguesSequences(Questionnaire poguesQuestionnaire) {
+        List<SequenceType> poguesSequences = poguesQuestionnaire.getChild().stream()
+                .filter(SequenceType.class::isInstance).map(SequenceType.class::cast)
+                .filter(poguesComponent -> !Sequence.POGUES_FAKE_END_SEQUENCE_ID.equals(poguesComponent.getId()))
+                .toList();
+        poguesSequences.forEach(poguesComponent -> { // safety check
+            GenericNameEnum genericName = poguesComponent.getGenericName();
+            if (! GenericNameEnum.MODULE.equals(genericName))
+                throw new IllegalPoguesElementException("Element of type " + genericName +
+                        " cannot be present at first level of Pogues components tree.");
+        });
+        return poguesSequences;
+    }
+
+    public static List<SequenceType> mapPoguesSubsequences(Questionnaire poguesQuestionnaire) {
+        return PoguesUtils.poguesSequenceStream(poguesQuestionnaire)
+                .flatMap(poguesSequence -> PoguesUtils.poguesSequenceStream(poguesSequence)
+                        .filter(poguesComponent -> GenericNameEnum.SUBMODULE.equals(poguesComponent.getGenericName())))
+                .toList();
+    }
+
+    public static List<QuestionType> mapPoguesSingleResponseQuestions(Questionnaire poguesQuestionnaire) {
+        return poguesQuestionnaire.getChild().stream()
+                .filter(SequenceType.class::isInstance).map(SequenceType.class::cast)
+                .flatMap(poguesSequence -> {
+                    // Get questions within the sequence
+                    List<QuestionType> sequenceQuestions = new ArrayList<>(PoguesUtils.poguesQuestionStream(poguesSequence)
+                            .filter(EnoQuestionnaire::isSingleResponseQuestion)
+                            .toList());
+                    // and its subsequences
+                    sequenceQuestions.addAll(PoguesUtils.poguesSequenceStream(poguesSequence)
+                            .flatMap(PoguesUtils::poguesQuestionStream)
+                            .filter(EnoQuestionnaire::isSingleResponseQuestion)
+                            .toList());
+                    return sequenceQuestions.stream();
+                })
+                .toList();
+    }
+    public static boolean isSingleResponseQuestion(QuestionType poguesQuestion) {
+        return QuestionTypeEnum.SIMPLE.equals(poguesQuestion.getQuestionType())
+                || QuestionTypeEnum.SINGLE_CHOICE.equals(poguesQuestion.getQuestionType());
+    }
+
+    public static List<QuestionType> mapPoguesMultipleResponseQuestions(Questionnaire poguesQuestionnaire) {
+        return poguesQuestionnaire.getChild().stream()
+                .filter(SequenceType.class::isInstance).map(SequenceType.class::cast)
+                .flatMap(poguesSequence -> {
+                    // Get questions within the sequence
+                    List<QuestionType> sequenceQuestions = new ArrayList<>(PoguesUtils.poguesQuestionStream(poguesSequence)
+                            .filter(EnoQuestionnaire::isMultipleResponseQuestion)
+                            .toList());
+                    // and its subsequences
+                    sequenceQuestions.addAll(PoguesUtils.poguesSequenceStream(poguesSequence)
+                            .flatMap(PoguesUtils::poguesQuestionStream)
+                            .filter(EnoQuestionnaire::isMultipleResponseQuestion)
+                            .toList());
+                    return sequenceQuestions.stream();
+                })
+                .toList();
+    }
+    public static boolean isMultipleResponseQuestion(QuestionType poguesQuestion) {
+        return QuestionTypeEnum.MULTIPLE_CHOICE.equals(poguesQuestion.getQuestionType())
+                || QuestionTypeEnum.TABLE.equals(poguesQuestion.getQuestionType());
+    }
 
 }

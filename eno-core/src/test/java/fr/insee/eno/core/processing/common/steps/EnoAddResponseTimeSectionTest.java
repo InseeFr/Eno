@@ -111,7 +111,7 @@ class EnoAddResponseTimeSectionTest {
                 EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI);
         enoParameters.setResponseTimeQuestion(true);
         //
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"),
                 enoParameters);
         //
@@ -128,7 +128,7 @@ class EnoAddResponseTimeSectionTest {
                 EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
         enoParameters.setResponseTimeQuestion(true);
         //
-        Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"),
                 enoParameters);
         //

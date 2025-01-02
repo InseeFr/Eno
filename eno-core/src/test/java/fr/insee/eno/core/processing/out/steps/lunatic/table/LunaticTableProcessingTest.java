@@ -20,7 +20,7 @@ class LunaticTableProcessingTest {
     @Test
     void tablesWithNonCollectedCells() throws DDIParsingException {
         // Given
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-no-data-cell.xml"),
                 EnoParameters.of(EnoParameters.Context.BUSINESS, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
         Questionnaire lunaticQuestionnaire = new Questionnaire();

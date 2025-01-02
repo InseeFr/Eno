@@ -4,6 +4,7 @@ import fr.insee.ddi.lifecycle33.logicalproduct.CodeType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.label.Label;
 import fr.insee.eno.core.parameter.Format;
@@ -23,6 +24,7 @@ import java.util.List;
  */
 @Getter
 @Setter
+@Context(format = Format.POGUES, type = fr.insee.pogues.model.CodeType.class)
 @Context(format = Format.DDI, type = CodeType.class)
 @Context(format = Format.LUNATIC, type = {Option.class, HeaderType.class, BodyCell.class})
 public class CodeItem extends EnoObject {
@@ -30,10 +32,17 @@ public class CodeItem extends EnoObject {
     @DDI("getIDArray(0).getStringValue()")
     String id;
 
+    @Pogues("getValue()")
     @DDI("getValue().getStringValue()")
     @Lunatic("setValue(#param)")
     String value;
 
+    /** Pogues specific property for nested code lists.
+     * Used in a processing step to insert nested code items at the right place. */
+    @Pogues("getParent()")
+    String parentValue;
+
+    @Pogues("getLabel()")
     @DDI("#index.get(#this.getCategoryReference().getIDArray(0).getStringValue()).getLabelArray(0)")
     @Lunatic("setLabel(#param)")
     Label label;

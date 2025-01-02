@@ -21,7 +21,7 @@
     "Eno - Simple questionnaire"
   ],
   "childQuestionnaireRef": [],
-  "Name": "ENOSIMPLE",
+  "Name": "ENO_SIMPLE",
   "Variables": {
     "Variable": [
       {

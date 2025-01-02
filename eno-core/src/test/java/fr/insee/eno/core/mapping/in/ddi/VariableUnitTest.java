@@ -13,11 +13,10 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class VariableTest {
+class VariableUnitTest {
 
     @Test
-    void variableUnitIntegrationTest() throws DDIParsingException {
-        // Given + When
+    void ddiMapping() throws DDIParsingException {
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         DDIMapper ddiMapper = new DDIMapper();
         ddiMapper.mapDDI(
@@ -25,10 +24,10 @@ class VariableTest {
                         "integration/ddi/ddi-dynamic-unit.xml")),
                 enoQuestionnaire);
 
-        // Then
         // Index variables by name to ease testing
         Map<String, Variable> variableMap = enoQuestionnaire.getVariables().stream()
                 .collect(Collectors.toMap(Variable::getName, variable -> variable));
+
         //
         assertEquals("€", variableMap.get("NUMBER_FIXED_UNIT").getUnit());
         assertEquals("%", variableMap.get("TABLE11").getUnit());
@@ -42,4 +41,5 @@ class VariableTest {
         List.of("NUMBER_DYNAMIC_UNIT", "TABLE12", "TABLE22", "DYNAMIC_TABLE2").forEach(variableName ->
                 assertTrue(variableMap.get(variableName).getIsUnitDynamic()));
     }
+
 }

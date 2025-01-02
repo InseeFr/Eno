@@ -1,6 +1,6 @@
 package fr.insee.eno.core.exceptions.business;
 
-public class DDIParsingException extends Exception {
+public class DDIParsingException extends ParsingException {
 
     public DDIParsingException(String message) {
         super(message);

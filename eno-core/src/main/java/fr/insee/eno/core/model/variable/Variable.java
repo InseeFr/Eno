@@ -3,6 +3,7 @@ package fr.insee.eno.core.model.variable;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.variable.VariableTypeEnum;
@@ -11,6 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Context(format = Format.POGUES, type = fr.insee.pogues.model.VariableType.class)
 @Context(format = Format.DDI, type = fr.insee.ddi.lifecycle33.logicalproduct.VariableType.class)
 @Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.variable.VariableType.class)
 public abstract class Variable extends EnoObject {
@@ -21,6 +23,7 @@ public abstract class Variable extends EnoObject {
     private CollectionType collectionType;
 
     /** Variables doesn't have an identifier in Lunatic. */
+    @Pogues("getId()")
     @DDI("getIDArray(0).getStringValue()")
     private String id;
 
@@ -31,9 +34,15 @@ public abstract class Variable extends EnoObject {
     // TODO: see pairwise DDI with variable 'l0v32sjd': mistake or actual case?
 
     /** Variable name. */
+    @Pogues("getName()")
     @DDI("!getVariableNameList().isEmpty() ? getVariableNameArray(0).getStringArray(0)?.getStringValue() : null")
     @Lunatic("setName(#param)")
     private String name;
+
+    // Note about unit:
+    // In DDI, there isn't really a better solution to map the information here and insert in the corresponding
+    // question through a processing step.
+    // In Pogues, it is actually not useful to have the unit information here.
 
     /** Measurement unit (for numeric variables). */
     @DDI("getVariableRepresentation()?.getValueRepresentation()?.getMeasurementUnit()?.getStringValue()")

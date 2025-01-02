@@ -122,8 +122,9 @@ class DDIMoveUnitInQuestionsTest {
         new DDIMoveUnitInQuestions(enoIndex).apply(enoQuestionnaire);
 
         // Then
-        assertEquals("€", ((NumericQuestion) enoQuestionnaire.getSingleResponseQuestions().get(0)).getUnit().getValue());
-        assertTrue(((NumericQuestion) enoQuestionnaire.getSingleResponseQuestions().get(2)).getUnit().getValue().contains("¤"));
+        assertNull(((NumericQuestion) enoQuestionnaire.getSingleResponseQuestions().get(0)).getUnit());
+        assertEquals("€", ((NumericQuestion) enoQuestionnaire.getSingleResponseQuestions().get(1)).getUnit().getValue());
+        assertTrue(((NumericQuestion) enoQuestionnaire.getSingleResponseQuestions().get(3)).getUnit().getValue().contains("¤"));
 
         TableQuestion tableQuestion = (TableQuestion) enoQuestionnaire.getMultipleResponseQuestions().get(0);
         DynamicTableQuestion dynamicTableQuestion = (DynamicTableQuestion) enoQuestionnaire.getMultipleResponseQuestions().get(1);

@@ -50,7 +50,7 @@ class ComponentFilterTest {
 
         @BeforeAll
         void mapQuestionnaire() throws DDIParsingException {
-            lunaticQuestionnaire = DDIToLunatic.transform(
+            lunaticQuestionnaire = new DDIToLunatic().transform(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-filters-simple.xml"),
                     EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
@@ -122,7 +122,7 @@ class ComponentFilterTest {
 
         @BeforeAll
         void mapQuestionnaire() throws DDIParsingException {
-            lunaticQuestionnaire = DDIToLunatic.transform(
+            lunaticQuestionnaire = new DDIToLunatic().transform(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-filters-extended.xml"),
                     EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
@@ -166,7 +166,7 @@ class ComponentFilterTest {
 
         @BeforeAll
         void mapQuestionnaire() throws DDIParsingException {
-            lunaticQuestionnaire = DDIToLunatic.transform(
+            lunaticQuestionnaire = new DDIToLunatic().transform(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-filters-calculated.xml"),
                     EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
