@@ -1,6 +1,5 @@
 package fr.insee.eno.core.converter;
 
-import fr.insee.eno.core.exceptions.technical.ConversionException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.question.*;
 import fr.insee.pogues.model.DatatypeTypeEnum;

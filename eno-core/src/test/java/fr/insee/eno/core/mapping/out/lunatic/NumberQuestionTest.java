@@ -56,6 +56,7 @@ class NumberQuestionTest {
         return Stream.of(
                 Arguments.of(new DDIToEno(), "integration/ddi/ddi-dynamic-unit.xml")
                 //,Arguments.of(new PoguesToEno(), "integration/pogues/pogues-dynamic-unit.json")
+                // disabled while questionnaire's structure is not fully mapped in Pogues
         );
     }
     @ParameterizedTest
@@ -72,11 +73,13 @@ class NumberQuestionTest {
         new LunaticEditLabelTypes().apply(lunaticQuestionnaire); // to set unit type to VTL
 
         // Then
-        InputNumber inputNumber1 = (InputNumber) lunaticQuestionnaire.getComponents().get(1);
-        InputNumber inputNumber2 = (InputNumber) lunaticQuestionnaire.getComponents().get(3);
-        Table table = (Table) lunaticQuestionnaire.getComponents().get(4);
-        RosterForLoop rosterForLoop = (RosterForLoop) lunaticQuestionnaire.getComponents().get(5);
+        InputNumber inputNumber0 = (InputNumber) lunaticQuestionnaire.getComponents().get(1);
+        InputNumber inputNumber1 = (InputNumber) lunaticQuestionnaire.getComponents().get(2);
+        InputNumber inputNumber2 = (InputNumber) lunaticQuestionnaire.getComponents().get(4);
+        Table table = (Table) lunaticQuestionnaire.getComponents().get(5);
+        RosterForLoop rosterForLoop = (RosterForLoop) lunaticQuestionnaire.getComponents().get(6);
 
+        assertNull(inputNumber0.getUnitWrapper());
         testUnitContent("\"€\"", inputNumber1.getUnitLabel());
         testUnitContent("WHICH_UNIT", inputNumber2.getUnitLabel());
 

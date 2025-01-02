@@ -4,11 +4,9 @@ import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.annotations.Pogues;
-import fr.insee.eno.core.exceptions.business.IllegalPoguesElementException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.variable.VariableTypeEnum;
-import fr.insee.pogues.model.NumericDatatypeType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -41,15 +39,16 @@ public abstract class Variable extends EnoObject {
     @Lunatic("setName(#param)")
     private String name;
 
+    // Note about unit:
+    // In DDI, there isn't really a better solution to map the information here and insert in the corresponding
+    // question through a processing step.
+    // In Pogues, it is actually not useful to have the unit information here.
+
     /** Measurement unit (for numeric variables). */
-    @Pogues("T(fr.insee.pogues.model.DatatypeTypeEnum).NUMERIC.equals(#this.getDatatype().getTypeName()) ? " +
-            "T(fr.insee.eno.core.model.variable.Variable).mapPoguesUnit(#this.getDatatype()) : null")
     @DDI("getVariableRepresentation()?.getValueRepresentation()?.getMeasurementUnit()?.getStringValue()")
     private String unit;
 
     /** A unit can be either fixed or dynamic. */
-    @Pogues("T(fr.insee.pogues.model.DatatypeTypeEnum).NUMERIC.equals(#this.getDatatype().getTypeName()) ? " +
-            "getDatatype().isIsDynamicUnit() != null ? getDatatype().isIsDynamicUnit() : false : null") // TODO: extract this double ternary to simplify
     @DDI("getVariableRepresentation()?.getValueRepresentation()?.getMeasurementUnit()?.getControlledVocabularyName() != null ? " +
             "getVariableRepresentation().getValueRepresentation().getMeasurementUnit().getControlledVocabularyName() == 'personalizedUnit' : false")
     private Boolean isUnitDynamic;
@@ -58,47 +57,6 @@ public abstract class Variable extends EnoObject {
      * to the value expected in Lunatic-Model. */
     public static VariableTypeEnum lunaticCollectionType(CollectionType enoCollectionType) {
         return VariableTypeEnum.valueOf(enoCollectionType.name()); // (For now names coincide.)
-    }
-
-    // TODO: actual unit should be saved in the pogues questionnaire file
-    // currently Pogues is dependent of some RMeS web-service to get units
-    // Eno transformation don't rely on a external API, so the conversion is duplicated and hard-coded here for now
-    public static String mapPoguesUnit(NumericDatatypeType poguesNumericDatatype) {
-        String poguesUnit = poguesNumericDatatype.getUnit();
-        // If it is a dynamic unit, the VTL expression is stored in the unit property
-        if (Boolean.TRUE.equals(poguesNumericDatatype.isIsDynamicUnit()))
-            return poguesUnit;
-        // Otherwise it is a fixed unit represented as a URI thing
-        return switch (poguesUnit) {
-            case null -> null;
-            case "" -> null;
-            case "http://id.insee.fr/unit/euro" -> "€";
-            case "http://id.insee.fr/unit/keuro" -> "k€";
-            case "http://id.insee.fr/unit/percent" -> "%";
-            case "http://id.insee.fr/unit/heure" -> "heures";
-            case "http://id.insee.fr/unit/jour" -> "jours";
-            case "http://id.insee.fr/unit/semaine" -> "semaines";
-            case "http://id.insee.fr/unit/mois" -> "mois";
-            case "http://id.insee.fr/unit/annee" -> "années";
-            case "http://id.insee.fr/unit/an" -> "ans";
-            case "http://id.insee.fr/unit/watt" -> "W";
-            case "http://id.insee.fr/unit/kilowatt" -> "kW";
-            case "http://id.insee.fr/unit/megawarr" -> "MW";
-            case "http://id.insee.fr/unit/megawattheurepcs" -> "MWh PCS";
-            case "http://id.insee.fr/unit/megawattheure" -> "MWh";
-            case "http://id.insee.fr/unit/megawattpcs" -> "MW PCS";
-            case "http://id.insee.fr/unit/kilowattthermique" -> "kWth";
-            case "http://id.insee.fr/unit/kg" -> "kg";
-            case "http://id.insee.fr/unit/tonne" -> "tonnes";
-            case "http://id.insee.fr/unit/tonnematiereseche" -> "tonnes matières sèches";
-            case "http://id.insee.fr/unit/degrecelsius" -> "°C";
-            case "http://id.insee.fr/unit/bar" -> "bars";
-            case "http://id.insee.fr/unit/litre" -> "litres";
-            case "http://id.insee.fr/unit/metre" -> "mètres";
-            case "http://id.insee.fr/unit/centimetre" -> "centimètres";
-            case "http://id.insee.fr/unit/metrecarre" -> "mètres carrés";
-            default -> throw new IllegalPoguesElementException("Unknown unit: " + poguesUnit);
-        };
     }
 
 }
