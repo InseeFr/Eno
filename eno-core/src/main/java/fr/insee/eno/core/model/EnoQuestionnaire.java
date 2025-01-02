@@ -149,6 +149,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
      * This corresponds to DDI "QuestionGrid" objects.
      * Question objects are components in the Lunatic questionnaire.
      */
+    @Pogues("T(fr.insee.eno.core.model.EnoQuestionnaire).mapPoguesMultipleResponseQuestions(#this)")
     @DDI("getResourcePackageArray(0).getQuestionSchemeArray(0).getQuestionGridList()")
     @Lunatic("getComponents()")
     private final List<MultipleResponseQuestion> multipleResponseQuestions = new ArrayList<>();
@@ -187,16 +188,42 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
                 .flatMap(poguesSequence -> {
                     // Get questions within the sequence
                     List<QuestionType> sequenceQuestions = new ArrayList<>(PoguesUtils.poguesQuestionStream(poguesSequence)
-                            .filter(poguesQuestion -> QuestionTypeEnum.SIMPLE.equals(poguesQuestion.getQuestionType()))
+                            .filter(EnoQuestionnaire::isSingleResponseQuestion)
                             .toList());
                     // and its subsequences
                     sequenceQuestions.addAll(PoguesUtils.poguesSequenceStream(poguesSequence)
                             .flatMap(PoguesUtils::poguesQuestionStream)
-                            .filter(poguesQuestion -> QuestionTypeEnum.SIMPLE.equals(poguesQuestion.getQuestionType()))
+                            .filter(EnoQuestionnaire::isSingleResponseQuestion)
                             .toList());
                     return sequenceQuestions.stream();
                 })
                 .toList();
+    }
+    public static boolean isSingleResponseQuestion(QuestionType poguesQuestion) {
+        return QuestionTypeEnum.SIMPLE.equals(poguesQuestion.getQuestionType())
+                || QuestionTypeEnum.SINGLE_CHOICE.equals(poguesQuestion.getQuestionType());
+    }
+
+    public static List<QuestionType> mapPoguesMultipleResponseQuestions(Questionnaire poguesQuestionnaire) {
+        return poguesQuestionnaire.getChild().stream()
+                .filter(SequenceType.class::isInstance).map(SequenceType.class::cast)
+                .flatMap(poguesSequence -> {
+                    // Get questions within the sequence
+                    List<QuestionType> sequenceQuestions = new ArrayList<>(PoguesUtils.poguesQuestionStream(poguesSequence)
+                            .filter(EnoQuestionnaire::isMultipleResponseQuestion)
+                            .toList());
+                    // and its subsequences
+                    sequenceQuestions.addAll(PoguesUtils.poguesSequenceStream(poguesSequence)
+                            .flatMap(PoguesUtils::poguesQuestionStream)
+                            .filter(EnoQuestionnaire::isMultipleResponseQuestion)
+                            .toList());
+                    return sequenceQuestions.stream();
+                })
+                .toList();
+    }
+    public static boolean isMultipleResponseQuestion(QuestionType poguesQuestion) {
+        return QuestionTypeEnum.MULTIPLE_CHOICE.equals(poguesQuestion.getQuestionType())
+                || QuestionTypeEnum.TABLE.equals(poguesQuestion.getQuestionType());
     }
 
 }
