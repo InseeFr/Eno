@@ -132,12 +132,16 @@ class LunaticInputNumberDescriptionTest {
         new LunaticInputNumberDescription(EnoParameters.Language.FR).apply(lunaticQuestionnaire);
 
         // Then
-        InputNumber inputNumber1 = (InputNumber) lunaticQuestionnaire.getComponents().get(1);
-        InputNumber inputNumber2 = (InputNumber) lunaticQuestionnaire.getComponents().get(3);
+        InputNumber inputNumber0 = (InputNumber) lunaticQuestionnaire.getComponents().get(1);
+        InputNumber inputNumber1 = (InputNumber) lunaticQuestionnaire.getComponents().get(2);
+        InputNumber inputNumber2 = (InputNumber) lunaticQuestionnaire.getComponents().get(4);
+        assertEquals("Format attendu : un nombre entre 0 et 10",
+                inputNumber0.getDescription().getValue());
         assertEquals("\"Format attendu : un nombre en \" || \"€\" || \" entre 1 et 10\"",
                 inputNumber1.getDescription().getValue());
         assertEquals("\"Format attendu : un nombre en \" || WHICH_UNIT  || \" entre 1 et 10\"",
                 inputNumber2.getDescription().getValue());
+        assertEquals(LabelTypeEnum.TXT, inputNumber0.getDescription().getType());
         assertEquals(LabelTypeEnum.VTL, inputNumber1.getDescription().getType());
         assertEquals(LabelTypeEnum.VTL, inputNumber2.getDescription().getType());
     }
