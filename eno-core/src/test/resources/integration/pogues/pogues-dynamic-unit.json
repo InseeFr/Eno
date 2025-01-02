@@ -8,6 +8,41 @@
       "type": "SequenceType",
       "Child": [
         {
+          "id": "m5ck5ljk",
+          "Name": "NUMBER_NO_UNIT",
+          "type": "QuestionType",
+          "Label": [
+            "\"Number question with no unit\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m5cjsv0e",
+              "Datatype": {
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Maximum": "10",
+                "Minimum": "0",
+                "Decimals": "",
+                "typeName": "NUMERIC",
+                "IsDynamicUnit": false
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m5ck9025"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
           "id": "m4k1c476",
           "Name": "NUMBER_FIXED_UNIT",
           "type": "QuestionType",
@@ -551,6 +586,21 @@
           "typeName": "TEXT",
           "MaxLength": 249
         }
+      },
+      {
+        "id": "m5ck9025",
+        "Name": "NUMBER_NO_UNIT",
+        "type": "CollectedVariableType",
+        "Label": "NUMBER_NO_UNIT label",
+        "Datatype": {
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Maximum": "10",
+          "Minimum": "0",
+          "Decimals": "",
+          "typeName": "NUMERIC",
+          "IsDynamicUnit": false
+        }
       }
     ]
   },
@@ -572,6 +622,7 @@
       ],
       "MemberReference": [
         "m4k11sy9",
+        "m5ck5ljk",
         "m4k1c476",
         "m4k4zcl6",
         "m4k17d1t",
@@ -589,7 +640,7 @@
       "uri": "http://ddi:fr.insee:DataCollection.s2106-dc"
     }
   ],
-  "lastUpdatedDate": "Thu Dec 12 2024 15:02:20 GMT+0100 (heure normale d’Europe centrale)",
+  "lastUpdatedDate": "Tue Dec 31 2024 15:12:29 GMT+0100 (heure normale d’Europe centrale)",
   "formulasLanguage": "VTL",
   "childQuestionnaireRef": []
 }
