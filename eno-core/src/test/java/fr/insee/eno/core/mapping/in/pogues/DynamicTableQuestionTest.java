@@ -3,7 +3,6 @@ package fr.insee.eno.core.mapping.in.pogues;
 import fr.insee.eno.core.mappers.PoguesMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
-import fr.insee.eno.core.model.question.TableQuestion;
 import fr.insee.pogues.model.*;
 import org.junit.jupiter.api.Test;
 
