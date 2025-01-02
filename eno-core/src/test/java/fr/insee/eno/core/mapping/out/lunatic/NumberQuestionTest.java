@@ -56,6 +56,7 @@ class NumberQuestionTest {
         return Stream.of(
                 Arguments.of(new DDIToEno(), "integration/ddi/ddi-dynamic-unit.xml")
                 //,Arguments.of(new PoguesToEno(), "integration/pogues/pogues-dynamic-unit.json")
+                // disabled while questionnaire's structure is not fully mapped in Pogues
         );
     }
     @ParameterizedTest
