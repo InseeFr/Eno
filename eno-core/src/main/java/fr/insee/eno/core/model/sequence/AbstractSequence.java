@@ -72,6 +72,7 @@ public abstract class AbstractSequence extends EnoIdentifiableObject implements 
     /** Ordered list of only subsequence and question items.
      * TODO: proper oop to make a difference between subsequences/question, loops/filters and controls/declarations
      * In DDI, this list is filled in a processing class using the 'sequenceItems' list. */
+    @Pogues("getChild()")
     private final List<StructureItemReference> sequenceStructure = new ArrayList<>();
 
 }
