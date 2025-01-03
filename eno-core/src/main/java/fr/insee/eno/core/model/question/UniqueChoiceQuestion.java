@@ -71,12 +71,13 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     DisplayFormat displayFormat;
 
     /** Reference to the code list that contain the modalities of the question. */
+    @Pogues("getResponse().getFirst().getDatatype().getCodeListReference()")
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDDICodeListReference(#this)")
     String codeListReference;
 
     /**
      * List of modalities of the unique choice question.
-     * In DDI, these are inserted here through a processing.
+     * In Pogues and DDI, these are inserted here through a processing.
      */
     @Lunatic("getOptions()")
     List<CodeItem> codeItems = new ArrayList<>();
@@ -93,6 +94,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     /** Detail responses for modalities that have a "please specify" field.
      * In DDI, these are mapped at question level.
      * In Lunatic, they are inserted in option in through a processing. */
+    @Pogues("getClarificationQuestion()")
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDetailResponses(#this)")
     List<DetailResponse> detailResponses = new ArrayList<>();
 
@@ -105,7 +107,6 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
                     "Question should have been converted to a suggester question and not a unique choice question.");
         };
     }
-
 
     /**
      * From DDI question item (that correspond to a unique choice question),
