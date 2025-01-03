@@ -51,4 +51,10 @@ public class DetailResponse extends EnoObject {
     @DDI("getResponseDomain().getOutParameter().getIDArray(0).getStringValue()")
     String responseReference;
 
+    @Override
+    public String toString() {
+        return "DetailResponse[" +
+                "value='" + value + '\'' +
+                ']';
+    }
 }
