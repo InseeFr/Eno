@@ -71,7 +71,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     DisplayFormat displayFormat;
 
     /** Reference to the code list that contain the modalities of the question. */
-    @Pogues("getResponse().getFirst().getDatatype().getCodeListReference()")
+    @Pogues("getResponse().getFirst().getCodeListReference()")
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDDICodeListReference(#this)")
     String codeListReference;
 
