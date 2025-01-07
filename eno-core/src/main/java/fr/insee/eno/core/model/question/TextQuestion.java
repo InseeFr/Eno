@@ -4,10 +4,12 @@ import fr.insee.ddi.lifecycle33.datacollection.QuestionItemType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Input;
 import fr.insee.lunatic.model.flat.Textarea;
+import fr.insee.pogues.model.QuestionType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +22,7 @@ import java.math.BigInteger;
  */
 @Getter
 @Setter
+@Context(format = Format.POGUES, type = QuestionType.class)
 @Context(format = Format.DDI, type = QuestionItemType.class)
 @Context(format = Format.LUNATIC, type = {Input.class, Textarea.class})
 public class TextQuestion extends SingleResponseQuestion {
@@ -32,10 +35,13 @@ public class TextQuestion extends SingleResponseQuestion {
     /** Maximal length authorized.
      * BigInteger since it is like this in both DDI and Lunatic.
      * See Lunatic converter about Input vs Textarea. */
-    @DDI("getResponseDomain().getMaxLength().intValue()")
+    @Pogues("getResponse().getFirst().getDatatype().getMaxLength()")
+    @DDI("getResponseDomain().getMaxLength()")
     @Lunatic("setMaxLength(#param)")
     BigInteger maxLength;
 
+    @Pogues("T(fr.insee.eno.core.model.question.TextQuestion).qualifyLength(" +
+            "#this.getResponse().getFirst().getDatatype().getMaxLength().intValue())")
     @DDI("T(fr.insee.eno.core.model.question.TextQuestion).qualifyLength(" +
             "#this.getResponseDomain()?.getMaxLength()?.intValue())")
     @Lunatic("setComponentType(" +

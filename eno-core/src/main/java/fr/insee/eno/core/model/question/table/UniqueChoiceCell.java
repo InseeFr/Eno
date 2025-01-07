@@ -3,12 +3,14 @@ package fr.insee.eno.core.model.question.table;
 import fr.insee.ddi.lifecycle33.datacollection.GridResponseDomainInMixedType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.BodyCell;
 import fr.insee.lunatic.model.flat.Orientation;
+import fr.insee.pogues.model.ResponseType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +23,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 /** A UniqueChoiceCell object is the content of a table.
  * A cell is neither part of the header nor of the left column. */
 @Getter @Setter
+@Context(format = Format.POGUES, type = ResponseType.class)
 @Context(format = Format.DDI, type = GridResponseDomainInMixedType.class)
 @Context(format = Format.LUNATIC, type = BodyCell.class)
 public class UniqueChoiceCell extends ResponseCell {
@@ -30,6 +33,7 @@ public class UniqueChoiceCell extends ResponseCell {
      * For DDI, an analog method defined for the GridResponseDomainInMixed object is used.
      * For Lunatic, method from Eno unique choice question class is reused.
      * */
+    @Pogues("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertPoguesVisualizationHint(#this)")
     @DDI("T(fr.insee.eno.core.model.question.table.UniqueChoiceCell).convertDDIOutputFormat(#this)")
     @Lunatic("setComponentType(" +
             "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
@@ -40,6 +44,7 @@ public class UniqueChoiceCell extends ResponseCell {
     @Lunatic("setOrientation(T(fr.insee.lunatic.model.flat.Orientation).valueOf(#param))")
     String orientation = Orientation.HORIZONTAL.toString();
 
+    @Pogues("getCodeListReference()")
     @DDI("getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()")
     String codeListReference;
 

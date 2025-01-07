@@ -3,10 +3,12 @@ package fr.insee.eno.core.model.calculated;
 import fr.insee.ddi.lifecycle33.reusable.CommandType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.LabelType;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
+import fr.insee.pogues.model.ExpressionType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +21,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
  * calculated variables, controls, filters. */
 @Getter
 @Setter
+@Context(format = Format.POGUES, type = ExpressionType.class)
 @Context(format = Format.DDI, type = CommandType.class)
 @Context(format = Format.LUNATIC, type = LabelType.class)
 public class CalculatedExpression extends EnoObject {
@@ -31,6 +34,7 @@ public class CalculatedExpression extends EnoObject {
     }
 
     /** Expression. */
+    @Pogues("getValue()")
     @DDI("getCommandContent()")
     @Lunatic("setValue(#param)")
     private String value;

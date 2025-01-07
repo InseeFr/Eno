@@ -43,7 +43,7 @@ class PairwiseQuestionTest {
     @Test
     void pairwiseMapping_integrationTest() throws DDIParsingException {
         // Given
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-pairwise.xml"),
                 EnoParameters.of(EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI));
         Optional<PairwiseQuestion> enoPairwise = enoQuestionnaire.getSingleResponseQuestions().stream()

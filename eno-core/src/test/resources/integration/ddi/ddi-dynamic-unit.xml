@@ -10,7 +10,7 @@
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
-             isMaintainable="true"><!--Eno version : 2.12.1. Generation date : 12/12/2024 - 14:02:22-->
+             isMaintainable="true"><!--Eno version : 2.12.1. Generation date : 31/12/2024 - 14:12:37-->
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-m4k0xs5k</r:ID>
    <r:Version>1</r:Version>
@@ -69,6 +69,12 @@
             <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
+               <r:ID>m5ck5ljk-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
                <r:ID>m4k1c476-QC</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
@@ -116,6 +122,20 @@
                <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
             </d:ControlConstructReference>
          </d:Sequence>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>m5ck5ljk-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">NUMBER_NO_UNIT</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m5ck5ljk</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
          <d:QuestionConstruct>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>m4k1c476-QC</r:ID>
@@ -208,6 +228,53 @@
          <r:Label>
             <r:Content xml:lang="fr-FR">A définir</r:Content>
          </r:Label>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>m5ck5ljk</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">NUMBER_NO_UNIT</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m5ck5ljk-QOP-m5cjwucz</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">NUMBER_NO_UNIT</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>m5ck5ljk-RDOP-m5cjwucz</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>m5ck5ljk-QOP-m5cjwucz</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Number question with no unit"</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:NumericDomain>
+               <r:NumberRange>
+                  <r:Low isInclusive="true">0</r:Low>
+                  <r:High isInclusive="true">10</r:High>
+               </r:NumberRange>
+               <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>m5ck5ljk-RDOP-m5cjwucz</r:ID>
+                  <r:Version>1</r:Version>
+               </r:OutParameter>
+            </d:NumericDomain>
+         </d:QuestionItem>
          <d:QuestionItem>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>m4k1c476</r:ID>
@@ -600,7 +667,7 @@
             </d:QuestionGridName>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m4k53xg9-QOP-m4lehxxz</r:ID>
+               <r:ID>m4k53xg9-QOP-m4le3dbw</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">DYNAMIC_TABLE1</r:String>
@@ -608,7 +675,7 @@
             </r:OutParameter>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m4k53xg9-QOP-m4le490x</r:ID>
+               <r:ID>m4k53xg9-QOP-m4ledl1e</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">DYNAMIC_TABLE2</r:String>
@@ -617,13 +684,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m4k53xg9-RDOP-m4lehxxz</r:ID>
+                  <r:ID>m4k53xg9-RDOP-m4le3dbw</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m4k53xg9-QOP-m4lehxxz</r:ID>
+                  <r:ID>m4k53xg9-QOP-m4le3dbw</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -631,13 +698,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m4k53xg9-RDOP-m4le490x</r:ID>
+                  <r:ID>m4k53xg9-RDOP-m4ledl1e</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m4k53xg9-QOP-m4le490x</r:ID>
+                  <r:ID>m4k53xg9-QOP-m4ledl1e</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -673,7 +740,7 @@
                      <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>m4k53xg9-RDOP-m4lehxxz</r:ID>
+                        <r:ID>m4k53xg9-RDOP-m4le3dbw</r:ID>
                         <r:Version>1</r:Version>
                      </r:OutParameter>
                   </d:NumericDomain>
@@ -693,7 +760,7 @@
                      <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>m4k53xg9-RDOP-m4le490x</r:ID>
+                        <r:ID>m4k53xg9-RDOP-m4ledl1e</r:ID>
                         <r:Version>1</r:Version>
                      </r:OutParameter>
                   </d:NumericDomain>
@@ -1178,7 +1245,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m4k53xg9-QOP-m4lehxxz</r:ID>
+               <r:ID>m4k53xg9-QOP-m4le3dbw</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -1211,7 +1278,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m4k53xg9-QOP-m4le490x</r:ID>
+               <r:ID>m4k53xg9-QOP-m4ledl1e</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -1256,6 +1323,38 @@
             </r:QuestionReference>
             <l:VariableRepresentation>
                <r:TextRepresentation maxLength="249"/>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>m5ck9025</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">NUMBER_NO_UNIT</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">NUMBER_NO_UNIT label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m5ck5ljk-QOP-m5cjwucz</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m5ck5ljk</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">10</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:VariableGroup>
@@ -1348,6 +1447,12 @@
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>m4k5ag53</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m5ck9025</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>

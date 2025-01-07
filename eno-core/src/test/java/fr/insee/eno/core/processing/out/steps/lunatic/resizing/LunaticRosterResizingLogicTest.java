@@ -102,7 +102,7 @@ class LunaticRosterResizingLogicTest {
     @Test
     void integrationTest() throws DDIParsingException {
         // Given
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                 LunaticAddResizingTest.class.getClassLoader().getResourceAsStream(
                         "integration/ddi/ddi-dynamic-table-size.xml"),
                 EnoParameters.of(EnoParameters.Context.BUSINESS, EnoParameters.ModeParameter.CAWI));

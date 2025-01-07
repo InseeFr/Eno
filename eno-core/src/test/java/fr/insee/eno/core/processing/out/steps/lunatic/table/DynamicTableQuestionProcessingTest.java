@@ -21,7 +21,7 @@ class DynamicTableQuestionProcessingTest {
     @Test
     void integrationTestFromDDI() throws DDIParsingException {
         // Given
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                 DynamicTableQuestionProcessingTest.class.getClassLoader().getResourceAsStream(
                         "integration/ddi/ddi-dynamic-table.xml"),
                 EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
@@ -54,7 +54,7 @@ class DynamicTableQuestionProcessingTest {
     @Test
     void integrationTestFromDDI_sizeExpression() throws DDIParsingException {
         // Given
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
+        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
                 DynamicTableQuestionProcessingTest.class.getClassLoader().getResourceAsStream(
                         "integration/ddi/ddi-dynamic-table-size.xml"),
                 EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));

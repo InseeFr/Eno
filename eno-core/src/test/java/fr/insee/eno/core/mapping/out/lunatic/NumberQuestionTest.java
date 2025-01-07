@@ -2,7 +2,9 @@ package fr.insee.eno.core.mapping.out.lunatic;
 
 import fr.insee.eno.core.DDIToEno;
 import fr.insee.eno.core.DDIToLunatic;
+import fr.insee.eno.core.InToEno;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
+import fr.insee.eno.core.exceptions.business.ParsingException;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
@@ -12,9 +14,13 @@ import fr.insee.eno.core.processing.out.steps.lunatic.LunaticSortComponents;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,7 +29,7 @@ class NumberQuestionTest {
     @Test
     void integrationTest_unit() throws DDIParsingException {
         // Given + When
-        Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-variables.xml"),
                 EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
         // Then
@@ -46,11 +52,19 @@ class NumberQuestionTest {
         assertEquals("\"kg\"", inputNumberWithUnit.get().getUnitLabel().getValue());
     }
 
-    @Test
-    void integrationTest_dynamicUnit() throws DDIParsingException {
+    private static Stream<Arguments> integrationTest_dynamicUnit() {
+        return Stream.of(
+                Arguments.of(new DDIToEno(), "integration/ddi/ddi-dynamic-unit.xml")
+                //,Arguments.of(new PoguesToEno(), "integration/pogues/pogues-dynamic-unit.json")
+                // disabled while questionnaire's structure is not fully mapped in Pogues
+        );
+    }
+    @ParameterizedTest
+    @MethodSource
+    void integrationTest_dynamicUnit(InToEno inToEno, String relativePath) throws ParsingException {
         // Given + When
-        EnoQuestionnaire enoQuestionnaire = DDIToEno.transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-dynamic-unit.xml"),
+        EnoQuestionnaire enoQuestionnaire = inToEno.transform(
+                this.getClass().getClassLoader().getResourceAsStream(relativePath),
                 EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
@@ -59,11 +73,13 @@ class NumberQuestionTest {
         new LunaticEditLabelTypes().apply(lunaticQuestionnaire); // to set unit type to VTL
 
         // Then
-        InputNumber inputNumber1 = (InputNumber) lunaticQuestionnaire.getComponents().get(1);
-        InputNumber inputNumber2 = (InputNumber) lunaticQuestionnaire.getComponents().get(3);
-        Table table = (Table) lunaticQuestionnaire.getComponents().get(4);
-        RosterForLoop rosterForLoop = (RosterForLoop) lunaticQuestionnaire.getComponents().get(5);
+        InputNumber inputNumber0 = (InputNumber) lunaticQuestionnaire.getComponents().get(1);
+        InputNumber inputNumber1 = (InputNumber) lunaticQuestionnaire.getComponents().get(2);
+        InputNumber inputNumber2 = (InputNumber) lunaticQuestionnaire.getComponents().get(4);
+        Table table = (Table) lunaticQuestionnaire.getComponents().get(5);
+        RosterForLoop rosterForLoop = (RosterForLoop) lunaticQuestionnaire.getComponents().get(6);
 
+        assertNull(inputNumber0.getUnitWrapper());
         testUnitContent("\"€\"", inputNumber1.getUnitLabel());
         testUnitContent("WHICH_UNIT", inputNumber2.getUnitLabel());
 

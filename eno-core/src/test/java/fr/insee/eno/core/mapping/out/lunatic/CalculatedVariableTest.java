@@ -8,7 +8,6 @@ import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.variable.CalculatedVariable;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.eno.core.processing.out.steps.lunatic.LunaticFilterResult;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
@@ -92,7 +91,7 @@ class CalculatedVariableTest {
 
         @BeforeAll
         void mapQuestionnaire() throws DDIParsingException {
-            Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+            Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
                     CalculatedVariableTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-variables.xml"),
                     EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
@@ -186,7 +185,7 @@ class CalculatedVariableTest {
         @Test
         void oneCalculated_testAllProperties() throws DDIParsingException {
             // Given + When
-            Questionnaire lunaticQuestionnaire = DDIToLunatic.transform(
+            Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
                     CalculatedVariableTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-declarations.xml"),
                     EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));

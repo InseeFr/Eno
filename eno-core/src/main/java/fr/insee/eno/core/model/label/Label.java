@@ -3,6 +3,7 @@ package fr.insee.eno.core.model.label;
 import fr.insee.ddi.lifecycle33.reusable.LabelType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
@@ -21,6 +22,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
  */
 @Getter
 @Setter
+@Context(format = Format.POGUES, type = String.class)
 @Context(format = Format.DDI, type = LabelType.class)
 @Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.LabelType.class)
 public class Label extends EnoObject implements EnoLabel {
@@ -28,6 +30,7 @@ public class Label extends EnoObject implements EnoLabel {
     /** Text content of the label, which can be either static or dynamic.
      * In DDI, if the label contains variables, their names are replaced by references.
      * There is a processing class to resolve the references and put back variable names instead. */
+    @Pogues("#this")
     @DDI("getContentArray(0).getStringValue()")
     @Lunatic("setValue(#param)")
     String value;
