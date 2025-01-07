@@ -19,6 +19,7 @@ import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Dropdown;
 import fr.insee.lunatic.model.flat.Radio;
 import fr.insee.pogues.model.QuestionType;
+import fr.insee.pogues.model.ResponseType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +65,8 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * Property used to convert to unique choice question to the right Lunatic component.
      * In DDI, there are conventional values in the "generic output format" property.
      * In Lunatic, it is used by the converter to create the right object, and to set the component type property. */
-    @Pogues("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertPoguesVisualizationHint(#this)")
+    @Pogues("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertPoguesVisualizationHint(" +
+            "#this.getResponse().getFirst())")
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDDIOutputFormat(#this)")
     @Lunatic("setComponentType(" +
             "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
@@ -98,8 +100,8 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDetailResponses(#this)")
     List<DetailResponse> detailResponses = new ArrayList<>();
 
-    public static DisplayFormat convertPoguesVisualizationHint(QuestionType poguesQuestion) {
-        return switch (poguesQuestion.getResponse().getFirst().getDatatype().getVisualizationHint()) {
+    public static DisplayFormat convertPoguesVisualizationHint(ResponseType poguesResponse) {
+        return switch (poguesResponse.getDatatype().getVisualizationHint()) {
             case CHECKBOX -> DisplayFormat.CHECKBOX;
             case DROPDOWN -> DisplayFormat.DROPDOWN;
             case RADIO -> DisplayFormat.RADIO;

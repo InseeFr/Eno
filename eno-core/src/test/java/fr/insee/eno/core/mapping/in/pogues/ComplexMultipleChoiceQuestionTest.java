@@ -18,7 +18,11 @@ class ComplexMultipleChoiceQuestionTest {
         poguesMCQ.setQuestionType(QuestionTypeEnum.MULTIPLE_CHOICE);
         poguesMCQ.setName("MCQ_TABLE_NAME");
         poguesMCQ.getLabel().add("Complex multiple choice question.");
+        poguesMCQ.setResponseStructure(new ResponseStructureType());
+        poguesMCQ.getResponseStructure().getDimension().add(new DimensionType());
+        poguesMCQ.getResponseStructure().getDimension().getFirst().setCodeListReference("code-list-id");
         poguesMCQ.getResponse().add(new ResponseType());
+        poguesMCQ.getResponse().getFirst().setCollectedVariableReference("variable-1-id");
         TextDatatypeType datatype = new TextDatatypeType();
         datatype.setTypeName(DatatypeTypeEnum.TEXT);
         poguesMCQ.getResponse().getFirst().setDatatype(datatype);
@@ -28,6 +32,12 @@ class ComplexMultipleChoiceQuestionTest {
         poguesSequence.setGenericName(GenericNameEnum.MODULE);
         poguesSequence.getChild().add(poguesMCQ);
         poguesQuestionnaire.getChild().add(poguesSequence);
+
+        poguesQuestionnaire.setVariables(new Questionnaire.Variables());
+        CollectedVariableType poguesVariable = new CollectedVariableType();
+        poguesVariable.setId("variable-1-id");
+        poguesVariable.setName("VARIABLE_1");
+        poguesQuestionnaire.getVariables().getVariable().add(poguesVariable);
 
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
 
@@ -39,6 +49,9 @@ class ComplexMultipleChoiceQuestionTest {
                 enoQuestionnaire.getMultipleResponseQuestions().getFirst());
         assertEquals("MCQ_TABLE_NAME", enoMCQ.getName());
         assertEquals("Complex multiple choice question.", enoMCQ.getLabel().getValue());
+        assertEquals("code-list-id", enoMCQ.getLeftColumnCodeListReference());
+        assertEquals(1, enoMCQ.getVariableNames().size());
+        assertEquals("VARIABLE_1", enoMCQ.getVariableNames().getFirst());
     }
 
 }

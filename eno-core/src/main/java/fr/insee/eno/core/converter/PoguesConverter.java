@@ -4,6 +4,7 @@ import fr.insee.eno.core.exceptions.technical.ConversionException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.pogues.model.QuestionType;
+import fr.insee.pogues.model.ResponseType;
 import fr.insee.pogues.model.VariableType;
 
 public class PoguesConverter implements InConverter {
@@ -18,6 +19,8 @@ public class PoguesConverter implements InConverter {
         if (poguesObject instanceof QuestionType poguesQuestion
                 && EnoQuestionnaire.isMultipleResponseQuestion(poguesQuestion))
             return PoguesMultipleChoiceQuestionConverter.instantiateFrom(poguesQuestion);
+        if (poguesObject instanceof ResponseType poguesResponse)
+            return PoguesTableCellConversion.instantiateFrom(poguesResponse);
         throw new ConversionException("Eno conversion for Pogues type " + poguesObject.getClass() + " not implemented.");
     }
 
