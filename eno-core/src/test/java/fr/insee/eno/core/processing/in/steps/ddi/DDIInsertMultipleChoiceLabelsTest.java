@@ -1,18 +1,24 @@
 package fr.insee.eno.core.processing.in.steps.ddi;
 
-import fr.insee.ddi.lifecycle33.instance.DDIInstanceDocument;
-import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.exceptions.business.IllegalDDIElementException;
+import fr.insee.eno.core.exceptions.business.ParsingException;
 import fr.insee.eno.core.mappers.DDIMapper;
+import fr.insee.eno.core.mappers.InMapper;
+import fr.insee.eno.core.mappers.PoguesMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.eno.core.model.response.CodeResponse;
 import fr.insee.eno.core.serialize.DDIDeserializer;
+import fr.insee.eno.core.serialize.PoguesDeserializer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -47,16 +53,22 @@ class DDIInsertMultipleChoiceLabelsTest {
                 .hasMessageContaining("QUESTION_NAME");
     }
 
-    @Test
-    void integrationTest() throws DDIParsingException {
+    private static Stream<Arguments> integrationTest() throws ParsingException {
+        return Stream.of(
+                Arguments.of(new DDIMapper(), DDIDeserializer.deserialize(
+                        DDIInsertMultipleChoiceLabelsTest.class.getClassLoader().getResourceAsStream(
+                                "integration/ddi/ddi-mcq.xml")).getDDIInstance()),
+                Arguments.of(new PoguesMapper(), PoguesDeserializer.deserialize(
+                        DDIInsertMultipleChoiceLabelsTest.class.getClassLoader().getResourceAsStream(
+                                "integration/pogues/pogues-mcq.json")))
+        );
+    }
+    @ParameterizedTest
+    @MethodSource
+    void integrationTest(InMapper inMapper, Object inputObject) {
         //
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-        DDIInstanceDocument ddiInstance = DDIDeserializer.deserialize(
-                DDIInsertDetailResponsesTest.class.getClassLoader().getResourceAsStream(
-                        "integration/ddi/ddi-other-specify.xml"));
-        DDIMapper ddiMapper = new DDIMapper();
-        ddiMapper.mapDDI(ddiInstance, enoQuestionnaire);
-        new DDIInsertDetailResponses().apply(enoQuestionnaire);
+        inMapper.mapInputObject(inputObject, enoQuestionnaire);
 
         //
         new DDIInsertMultipleChoiceLabels().apply(enoQuestionnaire);
@@ -69,10 +81,10 @@ class DDIInsertMultipleChoiceLabelsTest {
         assertEquals(1, simpleMCQList.size());
         SimpleMultipleChoiceQuestion simpleMCQ = simpleMCQList.getFirst();
         //
-        assertEquals("\"Option A\"", simpleMCQ.getCodeResponses().get(0).getLabel().getValue());
-        assertEquals("\"Option B\"", simpleMCQ.getCodeResponses().get(1).getLabel().getValue());
-        assertEquals("\"Option C (with detail)\"", simpleMCQ.getCodeResponses().get(2).getLabel().getValue());
-        assertEquals("\"Option D (with detail)\"", simpleMCQ.getCodeResponses().get(3).getLabel().getValue());
+        assertEquals("\"Code A\"", simpleMCQ.getCodeResponses().get(0).getLabel().getValue());
+        assertEquals("\"Code B\"", simpleMCQ.getCodeResponses().get(1).getLabel().getValue());
+        assertEquals("\"Code C\"", simpleMCQ.getCodeResponses().get(2).getLabel().getValue());
+        assertEquals("\"Code D\"", simpleMCQ.getCodeResponses().get(3).getLabel().getValue());
     }
 
 }

@@ -20,6 +20,9 @@ class SimpleMultipleChoiceQuestionTest {
         poguesMCQ.setQuestionType(QuestionTypeEnum.MULTIPLE_CHOICE);
         poguesMCQ.setName("MCQ_NAME");
         poguesMCQ.getLabel().add("Simple multiple choice question.");
+        poguesMCQ.setResponseStructure(new ResponseStructureType());
+        poguesMCQ.getResponseStructure().getDimension().add(new DimensionType());
+        poguesMCQ.getResponseStructure().getDimension().getFirst().setCodeListReference("code-list-id");
         poguesSequence.getChild().add(poguesMCQ);
         poguesQuestionnaire.getChild().add(poguesSequence);
 
@@ -31,6 +34,7 @@ class SimpleMultipleChoiceQuestionTest {
                 enoQuestionnaire.getMultipleResponseQuestions().getFirst());
         assertEquals("MCQ_NAME", enoMCQ.getName());
         assertEquals("Simple multiple choice question.", enoMCQ.getLabel().getValue());
+        assertEquals("code-list-id", enoMCQ.getCodeListReference());
     }
 
 }
