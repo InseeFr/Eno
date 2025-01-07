@@ -19,6 +19,7 @@ import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Dropdown;
 import fr.insee.lunatic.model.flat.Radio;
 import fr.insee.pogues.model.QuestionType;
+import fr.insee.pogues.model.ResponseType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -64,19 +65,21 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * Property used to convert to unique choice question to the right Lunatic component.
      * In DDI, there are conventional values in the "generic output format" property.
      * In Lunatic, it is used by the converter to create the right object, and to set the component type property. */
-    @Pogues("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertPoguesVisualizationHint(#this)")
+    @Pogues("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertPoguesVisualizationHint(" +
+            "#this.getResponse().getFirst())")
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDDIOutputFormat(#this)")
     @Lunatic("setComponentType(" +
             "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
     DisplayFormat displayFormat;
 
     /** Reference to the code list that contain the modalities of the question. */
+    @Pogues("getResponse().getFirst().getCodeListReference()")
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDDICodeListReference(#this)")
     String codeListReference;
 
     /**
      * List of modalities of the unique choice question.
-     * In DDI, these are inserted here through a processing.
+     * In Pogues and DDI, these are inserted here through a processing.
      */
     @Lunatic("getOptions()")
     List<CodeItem> codeItems = new ArrayList<>();
@@ -92,12 +95,13 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
 
     /** Detail responses for modalities that have a "please specify" field.
      * In DDI, these are mapped at question level.
-     * In Lunatic, they are inserted in option in through a processing. */
+     * In Lunatic, they are inserted in option through a processing. */
+    @Pogues("getClarificationQuestion()")
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDetailResponses(#this)")
     List<DetailResponse> detailResponses = new ArrayList<>();
 
-    public static DisplayFormat convertPoguesVisualizationHint(QuestionType poguesQuestion) {
-        return switch (poguesQuestion.getResponse().getFirst().getDatatype().getVisualizationHint()) {
+    public static DisplayFormat convertPoguesVisualizationHint(ResponseType poguesResponse) {
+        return switch (poguesResponse.getDatatype().getVisualizationHint()) {
             case CHECKBOX -> DisplayFormat.CHECKBOX;
             case DROPDOWN -> DisplayFormat.DROPDOWN;
             case RADIO -> DisplayFormat.RADIO;
@@ -105,7 +109,6 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
                     "Question should have been converted to a suggester question and not a unique choice question.");
         };
     }
-
 
     /**
      * From DDI question item (that correspond to a unique choice question),

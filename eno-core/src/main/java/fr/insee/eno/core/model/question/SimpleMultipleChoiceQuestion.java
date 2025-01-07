@@ -4,11 +4,14 @@ import fr.insee.ddi.lifecycle33.datacollection.QuestionGridType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.navigation.Binding;
 import fr.insee.eno.core.model.response.CodeResponse;
+import fr.insee.eno.core.model.response.DetailResponse;
 import fr.insee.eno.core.model.response.ModalityAttachment;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.CheckboxGroup;
+import fr.insee.pogues.model.QuestionType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,11 +26,13 @@ import java.util.List;
  */
 @Getter
 @Setter
+@Context(format = Format.POGUES, type = QuestionType.class)
 @Context(format = Format.DDI, type = QuestionGridType.class)
 @Context(format = Format.LUNATIC, type = CheckboxGroup.class)
 public class SimpleMultipleChoiceQuestion extends MultipleResponseQuestion {
 
     /** Reference to the code list upon which modalities are based. */
+    @Pogues("getResponseStructure().getDimension().getFirst().getCodeListReference()")
     @DDI("getGridDimensionArray(0).getCodeDomain().getCodeListReference().getIDArray(0).getStringValue()")
     String codeListReference;
 
@@ -39,9 +44,18 @@ public class SimpleMultipleChoiceQuestion extends MultipleResponseQuestion {
      * In Lunatic, the additional field is inside the response object of the modality.
      * A DDI processing does the insertion of detail responses at the right place.
      */
+    @Pogues("getResponse()")
     @DDI("getOutParameterList()")
     @Lunatic("getResponses()")
     List<CodeResponse> codeResponses = new ArrayList<>();
+
+    /**
+     * Detail responses for modalities that have a "please specify" field.
+     * In DDI, this information is mapped in a processing step.
+     * In Lunatic, they are inserted in code response objects through a processing.
+     */
+    @Pogues("getClarificationQuestion()")
+    List<DetailResponse> detailResponses = new ArrayList<>();
 
     /** DDI bindings used to keep the link between detail responses and the code response modality they belong to. */
     @DDI("getBindingList()")

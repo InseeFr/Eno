@@ -25,6 +25,7 @@ class UniqueChoiceQuestionTest {
         poguesUCQ.setName("UCQ_NAME");
         poguesUCQ.getLabel().add("Unique choice question label.");
         ResponseType response = new ResponseType();
+        response.setCodeListReference("code-list-id");
         TextDatatypeType datatype = new TextDatatypeType();
         datatype.setVisualizationHint(VisualizationHintEnum.RADIO);
         response.setDatatype(datatype);
@@ -57,6 +58,7 @@ class UniqueChoiceQuestionTest {
         assertEquals("UCQ_NAME", enoUCQ.getName());
         assertEquals("Unique choice question label.", enoUCQ.getLabel().getValue());
         assertEquals(UniqueChoiceQuestion.DisplayFormat.RADIO, enoUCQ.getDisplayFormat());
+        assertEquals("code-list-id", enoUCQ.getCodeListReference());
     }
 
 }

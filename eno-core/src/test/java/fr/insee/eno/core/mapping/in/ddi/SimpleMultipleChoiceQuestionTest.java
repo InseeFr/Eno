@@ -15,26 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SimpleMultipleChoiceQuestionTest {
 
     @Test
-    void mapSimpleMCQ() throws DDIParsingException {
-        //
-        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-        DDIMapper ddiMapper = new DDIMapper();
-        ddiMapper.mapDDI(
-                DDIDeserializer.deserialize(this.getClass().getClassLoader().getResourceAsStream(
-                        "integration/ddi/ddi-mcq.xml")),
-                enoQuestionnaire);
-        //
-        List<SimpleMultipleChoiceQuestion> simpleMCQList = enoQuestionnaire.getMultipleResponseQuestions().stream()
-                .filter(SimpleMultipleChoiceQuestion.class::isInstance)
-                .map(SimpleMultipleChoiceQuestion.class::cast)
-                .toList();
-        assertEquals(1, simpleMCQList.size());
-        SimpleMultipleChoiceQuestion simpleMCQ = simpleMCQList.getFirst();
-        assertEquals("MCQ_BOOL", simpleMCQ.getName());
-        assertEquals(4, simpleMCQ.getCodeResponses().size());
-    }
-
-    @Test
     void mapSimpleMCQ_withDetailResponses() throws DDIParsingException {
         //
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();

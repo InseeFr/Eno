@@ -5,6 +5,7 @@ import fr.insee.eno.core.mappers.PoguesMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.common.EnoProcessing;
+import fr.insee.eno.core.processing.in.PoguesInProcessing;
 import fr.insee.eno.core.serialize.PoguesDeserializer;
 import fr.insee.pogues.model.Questionnaire;
 
@@ -27,6 +28,9 @@ public class PoguesToEno implements InToEno {
         PoguesMapper poguesMapper = new PoguesMapper();
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         poguesMapper.mapPoguesQuestionnaire(poguesQuestionnaire, enoQuestionnaire);
+        //
+        PoguesInProcessing poguesInProcessing = new PoguesInProcessing();
+        poguesInProcessing.applyProcessing(enoQuestionnaire);
         //
         EnoProcessing enoProcessing = new EnoProcessing(enoParameters);
         enoProcessing.applyProcessing(enoQuestionnaire);
