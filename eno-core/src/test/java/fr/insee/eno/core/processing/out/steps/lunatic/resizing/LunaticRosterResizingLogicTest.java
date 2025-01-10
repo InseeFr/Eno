@@ -1,6 +1,7 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.resizing;
 
 import fr.insee.eno.core.DDIToEno;
+import fr.insee.eno.core.DDIToLunatic;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
@@ -8,6 +9,7 @@ import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticLoopResolution;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticSortComponents;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
@@ -16,9 +18,11 @@ import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LunaticRosterResizingLogicTest {
@@ -123,6 +127,18 @@ class LunaticRosterResizingLogicTest {
                 lunaticResizing.getResizingEntry("HOW_MANY").getSize());
         assertEquals(List.of("DYNAMIC_TABLE_VTL_SIZE1"),
                 lunaticResizing.getResizingEntry("HOW_MANY").getVariables());
+    }
+
+    @Test
+    void nonCollectedColumnCase_functionalTest() {
+        // Given
+        EnoParameters enoParameters = EnoParameters.of(
+                EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
+        InputStream ddiInputStream = this.getClass().getClassLoader().getResourceAsStream(
+                "functional/ddi/ddi-m5o3qhu0.xml"); // DDI with non-collected column within a dynamic table
+        // When + then
+        DDIToLunatic ddiToLunatic = new DDIToLunatic();
+        assertDoesNotThrow(() -> ddiToLunatic.transform(ddiInputStream, enoParameters));
     }
 
 }
