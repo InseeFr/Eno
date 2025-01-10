@@ -4,6 +4,7 @@ import fr.insee.ddi.lifecycle33.datacollection.StatementItemType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.mode.Mode;
@@ -18,10 +19,12 @@ import java.util.List;
 /** Text displayed before a question or sequence. */
 @Getter
 @Setter
+@Context(format = Format.POGUES, type = fr.insee.pogues.model.DeclarationType.class)
 @Context(format = Format.DDI, type = StatementItemType.class)
 @Context(format = Format.LUNATIC, type = DeclarationType.class)
 public class Declaration extends EnoIdentifiableObject implements DeclarationInterface {
 
+    @Pogues("")
     @DDI("getDisplayTextArray(0)")
     @Lunatic("setLabel(#param)")
     DynamicLabel label;
@@ -36,6 +39,7 @@ public class Declaration extends EnoIdentifiableObject implements DeclarationInt
      * Only exists in 'in' formats, then used to do mode selection processing on the model.
      * In DDI, a StatementItem has a list of ConstructName that contains this information.
      * (Difference with Instruction: no selection to do.) */
+    @Pogues("getDeclarationMode()")
     @DDI("getConstructNameList()" +
             ".![T(fr.insee.eno.core.model.mode.Mode).convertDDIMode(#this.getStringArray(0).getStringValue())]")
     private final List<Mode> modes = new ArrayList<>();
