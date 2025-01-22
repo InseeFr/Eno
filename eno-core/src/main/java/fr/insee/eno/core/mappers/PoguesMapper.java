@@ -24,7 +24,7 @@ public class PoguesMapper extends InMapper {
 
     @Override
     void specificSetup(Object poguesObject) {
-        if (! (poguesObject instanceof Questionnaire poguesQuestionnaire))
+        if (!(poguesObject instanceof Questionnaire poguesQuestionnaire))
             return;
         if (poguesQuestionnaire.getVariables() == null)
             return;

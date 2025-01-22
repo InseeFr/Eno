@@ -24,16 +24,22 @@ import java.util.List;
 @Context(format = Format.LUNATIC, type = DeclarationType.class)
 public class Declaration extends EnoIdentifiableObject implements DeclarationInterface {
 
-    @Pogues("")
+//    void foo() {
+//        fr.insee.pogues.model.DeclarationType q = q.getDeclarationMode()
+//
+
+    @Pogues("getText()")
     @DDI("getDisplayTextArray(0)")
     @Lunatic("setLabel(#param)")
-    DynamicLabel label;
+    private DynamicLabel label;
 
+    @Pogues("getDeclarationType().value()")
     @Lunatic("setDeclarationType(T(fr.insee.lunatic.model.flat.DeclarationTypeEnum).valueOf(#param))")
-    String declarationType = "STATEMENT";
+    private String declarationType;
 
+    @Pogues("getPosition().value()")
     @Lunatic("setPosition(T(fr.insee.lunatic.model.flat.DeclarationPositionEnum).valueOf(#param))")
-    String position = "BEFORE_QUESTION_TEXT";
+    private String position;
 
     /** List of concerned modes.
      * Only exists in 'in' formats, then used to do mode selection processing on the model.
