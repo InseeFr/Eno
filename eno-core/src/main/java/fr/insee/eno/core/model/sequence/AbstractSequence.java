@@ -44,6 +44,7 @@ public abstract class AbstractSequence extends EnoIdentifiableObject implements 
     /** Sequence / subsequence instructions.
      * In DDI, the SequenceType object contains the list of references to the instructions.
      * In Lunatic, instructions and declarations belongs to the same list. */
+    @Pogues("getDeclaration().?[#this.getPosition().value() == 'AFTER_QUESTION_TEXT']")
     @DDI("getInterviewerInstructionReferenceList().![#index.get(#this.getIDArray(0).getStringValue())]")
     @Lunatic("getDeclarations()")
     private final List<Instruction> instructions = new ArrayList<>();
@@ -52,6 +53,7 @@ public abstract class AbstractSequence extends EnoIdentifiableObject implements 
      * In DDI, the declarations are mapped in the questionnaire object, and are put here through a 'processing' class.
      * In Lunatic, instructions and declarations belongs to the same list.
      * TODO: NOTE: seems like a sequence or subsequence cannot have declarations (Pogues). */
+    @Pogues("getDeclaration().?[#this.getPosition().value() == 'BEFORE_QUESTION_TEXT']")
     @Lunatic("getDeclarations()")
     private final List<Declaration> declarations = new ArrayList<>();
 

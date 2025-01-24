@@ -1,5 +1,7 @@
 package fr.insee.eno.core.model.mode;
 
+import fr.insee.pogues.model.SurveyModeEnum;
+
 import java.util.Map;
 
 public enum Mode {
@@ -21,5 +23,15 @@ public enum Mode {
 
     public static Mode convertDDIMode(String ddiMode) {
         return ddiModes.get(ddiMode);
+    }
+
+    private static final Map<SurveyModeEnum, Mode> poguesModes = Map.of(
+            SurveyModeEnum.CATI, CATI,
+            SurveyModeEnum.CAPI, CAPI,
+            SurveyModeEnum.PAPI, PAPI,
+            SurveyModeEnum.CAWI, CAWI);
+
+    public  static Mode convertSurveyModeEnumMode(SurveyModeEnum poguesMode){
+        return poguesModes.get(poguesMode);
     }
 }
