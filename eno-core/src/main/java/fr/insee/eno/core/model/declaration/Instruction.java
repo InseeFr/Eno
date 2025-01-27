@@ -46,6 +46,9 @@ public class Instruction extends EnoIdentifiableObject implements DeclarationInt
     @Lunatic("setLabel(#param)")
     private DynamicLabel label;
 
+    /** An instruction is systematically associated with the position 'AFTER_QUESTION_TEXT':
+     * this information is therefore hardcoded. Conversely, a declaration always follows
+     * the assertion 'BEFORE_QUESTION_TEXT'. */
     @Lunatic("setPosition(T(fr.insee.lunatic.model.flat.DeclarationPositionEnum).valueOf(#param))")
     private String position = "AFTER_QUESTION_TEXT";
 

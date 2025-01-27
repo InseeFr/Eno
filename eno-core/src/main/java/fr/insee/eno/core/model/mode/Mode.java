@@ -25,6 +25,10 @@ public enum Mode {
         return ddiModes.get(ddiMode);
     }
 
+    /** A logical check raises an error in a flow step of the hasNoSelectedMode method
+     * (class EnoModeSelection): indeed, the code handles objects of type SurveyModeEnum
+     *  as if they were instances of the Mode class. Therefore, it is necessary to perform
+     *  a conversion of these modes beforehand, even though they are quite similar. */
     private static final Map<SurveyModeEnum, Mode> poguesModes = Map.of(
             SurveyModeEnum.CATI, CATI,
             SurveyModeEnum.CAPI, CAPI,

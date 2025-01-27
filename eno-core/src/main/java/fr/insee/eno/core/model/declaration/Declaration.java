@@ -30,9 +30,15 @@ public class Declaration extends EnoIdentifiableObject implements DeclarationInt
     @Lunatic("setLabel(#param)")
     private DynamicLabel label;
 
+    /** This information is missing in the DDI. The 'rule' is therefore to hardcode 'STATEMENT' as
+     * the default declaration type. As such, the details provided by Pogues on this matter are
+     * not taken into account. */
     @Lunatic("setDeclarationType(T(fr.insee.lunatic.model.flat.DeclarationTypeEnum).valueOf(#param))")
     private String declarationType = "STATEMENT";
 
+    /** A declaration is systematically associated with the position 'BEFORE_QUESTION_TEXT':
+     * this information is therefore hardcoded. Conversely, an instruction always follows
+     * the assertion 'AFTER_QUESTION_TEXT'. */
     @Lunatic("setPosition(T(fr.insee.lunatic.model.flat.DeclarationPositionEnum).valueOf(#param))")
     private String position = "BEFORE_QUESTION_TEXT";
 

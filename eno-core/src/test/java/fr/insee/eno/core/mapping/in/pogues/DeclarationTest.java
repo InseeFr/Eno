@@ -7,6 +7,7 @@ import fr.insee.eno.core.mappers.PoguesMapper;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.declaration.Declaration;
+import fr.insee.eno.core.model.declaration.Instruction;
 import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.model.sequence.Sequence;
@@ -36,50 +37,34 @@ class DeclarationTest {
                 EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.PROCESS));
        index = questionnaire.getIndex();
    }
+
    @Test
-   void parseText() {
+   void testQuestionHasCorrectDeclarationsAndInstructionsCount(){
        Question question1 = (Question) index.get("lk6zkkfr");
        assertEquals(3, question1.getDeclarations().size());
        assertEquals(3, question1.getInstructions().size());
+   }
+
+   @Test
+   void testDeclarationLabelAndModes() {
        Declaration declaration1 = (Declaration) index.get("lk706b3k");
        assertEquals("\"Static label 'Aide' before the question\"", declaration1.getLabel().getValue());
-       assertEquals(List.of(Mode.CAPI,Mode.CATI, Mode.CAWI, Mode.PAPI),declaration1.getModes());
+       assertEquals(List.of(Mode.CAPI, Mode.CATI, Mode.CAWI, Mode.PAPI), declaration1.getModes());
+   }
+
+   @Test
+   void testInstructionPosition(){
+       Instruction instruction1 = (Instruction) index.get("lk6zp25f");
+       assertEquals("AFTER_QUESTION_TEXT", instruction1.getPosition());
+    }
+
+   @Test
+   void testSequenceHasCorrectDeclarationsAndInstructionsCount() {
        Sequence sequence1 = (Sequence) index.get("lk6zlgzm");
        assertEquals(0, sequence1.getDeclarations().size());
        assertEquals(3, sequence1.getInstructions().size());
 
     }
 }
-
-//        @Test
-//        void unitTest() throws PoguesDeserializationException {
-//            // Given
-//            InputStream poguesStream = this.getClass().getClassLoader().getResourceAsStream("integration/pogues/pogues-declarations.json");
-//            if (poguesStream == null) {
-//                throw new IllegalArgumentException("Le fichier JSON des déclarations est introuvable.");
-//            }
-//
-//            // When
-//            PoguesMapper poguesMapper = new PoguesMapper();
-//            EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-//            Questionnaire poguesQuestionnaire = PoguesDeserializer.deserialize(poguesStream);
-//            poguesMapper.mapPoguesQuestionnaire(poguesQuestionnaire, enoQuestionnaire);
-//
-//            // Then
-//            EnoIndex index = enoQuestionnaire.getIndex();
-//
-//            //
-////            EnoObject declarationObject = index.get("lk706b3k");
-////            assertInstanceOf(Declaration.class, declarationObject);
-////            Declaration declaration = (Declaration) declarationObject;
-////            assertEquals("\"Static label 'Aide' before the question\"", declaration.getLabel().getValue());
-//
-//            //
-//
-//            Question question1 = (Question) index.get("lk6zkkfr");
-//            assertEquals(3, question1.getDeclarations().size());
-//            assertEquals(3, question1.getInstructions().size());
-//        }
-//    }
 
 
