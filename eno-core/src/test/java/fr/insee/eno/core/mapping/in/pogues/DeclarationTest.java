@@ -1,8 +1,11 @@
 package fr.insee.eno.core.mapping.in.pogues;
 
+import fr.insee.eno.core.DDIToEno;
+import fr.insee.eno.core.InToEno;
 import fr.insee.eno.core.PoguesToEno;
 import fr.insee.eno.core.exceptions.business.ParsingException;
 import fr.insee.eno.core.exceptions.business.PoguesDeserializationException;
+import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.mappers.PoguesMapper;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
@@ -12,15 +15,23 @@ import fr.insee.eno.core.model.mode.Mode;
 import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.serialize.PoguesDeserializer;
-import fr.insee.pogues.model.Questionnaire;
+import fr.insee.lunatic.model.flat.Input;
+import fr.insee.lunatic.model.flat.LabelTypeEnum;
+import fr.insee.lunatic.model.flat.Questionnaire;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.InputStream;
+import java.math.BigInteger;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -64,6 +75,29 @@ class DeclarationTest {
        assertEquals(0, sequence1.getDeclarations().size());
        assertEquals(3, sequence1.getInstructions().size());
 
+    }
+
+    private static Stream<Arguments> integrationTest() {
+        return Stream.of(
+                Arguments.of(new PoguesToEno(), "integration/pogues/pogues-declarations.json")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void integrationTest(InToEno inToEno, String resourcePath) throws ParsingException {
+        //
+        EnoQuestionnaire enoQuestionnaire = inToEno.transform(
+                this.getClass().getClassLoader().getResourceAsStream(resourcePath),
+                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+        fr.insee.lunatic.model.flat.Questionnaire lunaticQuestionnaire = new Questionnaire();
+        new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
+        //
+        Input lunaticInput1 = assertInstanceOf(Input.class, lunaticQuestionnaire.getComponents().get(2));
+        assertEquals("lk6zkkfr", lunaticInput1.getId());
+        assertEquals(4, lunaticInput1.getDeclarations().size());
+        assertEquals("BEFORE_QUESTION_TEXT", lunaticInput1.getDeclarations().getFirst().getPosition().value());
+        assertEquals("\"Static label 'Aide' before the question\"", lunaticInput1.getDeclarations().getFirst().getLabel().getValue());
     }
 }
 
