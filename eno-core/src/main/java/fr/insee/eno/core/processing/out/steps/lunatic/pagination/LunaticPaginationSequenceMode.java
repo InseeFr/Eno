@@ -1,10 +1,7 @@
  package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 
  import fr.insee.eno.core.exceptions.business.LunaticLoopException;
- import fr.insee.lunatic.model.flat.ComponentType;
- import fr.insee.lunatic.model.flat.ComponentTypeEnum;
- import fr.insee.lunatic.model.flat.Loop;
- import fr.insee.lunatic.model.flat.Subsequence;
+ import fr.insee.lunatic.model.flat.*;
 
  import java.util.List;
 
@@ -36,6 +33,15 @@ public class LunaticPaginationSequenceMode extends LunaticPaginationAllModes {
     public void applyLoopPaginationProperty(Loop loop) {
         if(shouldLoopBePaginated(loop)) {
             loop.setPaginatedLoop(true);
+            // Replace lines by iteration for loop which should be paginated (first child is a sequence) and min = max
+            if(loop.getLines() != null) {
+                LabelType min = loop.getLines().getMin();
+                LabelType max = loop.getLines().getMax();
+                if(min != null && max != null && min.getValue().equals(max.getValue())){
+                    loop.setIterations(loop.getLines().getMax());
+                    loop.setLines(null);
+                }
+            }
             return;
         }
         loop.setPaginatedLoop(false);

@@ -128,6 +128,66 @@ class LunaticPaginationTest {
             assertEquals("1.2", loop.getComponents().get(2).getPage());
             assertEquals("1.2", loop.getComponents().get(3).getPage());
         }
+
+    }
+
+    @Nested
+    class LoopOnSequenceMinMaxEquals {
+
+        private Questionnaire questionnaire;
+
+        @BeforeEach
+        void createLoopWithSequence() {
+            questionnaire = new Questionnaire();
+            Sequence sequence = new Sequence();
+            sequence.setComponentType(ComponentTypeEnum.SEQUENCE);
+            Input input1 = new Input();
+            input1.setComponentType(ComponentTypeEnum.INPUT);
+            Loop loop = new Loop();
+            loop.setComponentType(ComponentTypeEnum.LOOP);
+            LinesLoop linesLoop = new LinesLoop();
+            LabelType minMax = new LabelType();
+            minMax.setType(LabelTypeEnum.VTL);
+            minMax.setValue("count(NAME)");
+            linesLoop.setMin(minMax);
+            linesLoop.setMax(minMax);
+            loop.setLines(linesLoop);
+            loop.getComponents().add(sequence);
+            loop.getComponents().add(input1);
+            questionnaire.getComponents().add(loop);
+        }
+
+        @Test
+        void questionMode() {
+            //
+            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION).apply(questionnaire);
+            //
+            assertEquals("question", questionnaire.getPagination());
+            Loop loop = (Loop) questionnaire.getComponents().get(0);
+            assertFalse(loop.getPaginatedLoop());
+            assertNotNull(loop.getLines());
+            assertNull(loop.getIterations());
+            assertEquals(LabelTypeEnum.VTL, loop.getLines().getMin().getType());
+            assertEquals(LabelTypeEnum.VTL, loop.getLines().getMax().getType());
+            assertEquals("count(NAME)", loop.getLines().getMin().getValue());
+            assertEquals("count(NAME)", loop.getLines().getMax().getValue());
+        }
+
+        @Test
+        void sequenceMode() {
+            //
+            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.SEQUENCE).apply(questionnaire);
+            //
+            assertEquals("sequence", questionnaire.getPagination());
+            Loop loop = (Loop) questionnaire.getComponents().get(0);
+            assertTrue(loop.getPaginatedLoop());
+            // Paginated loops have a "max page"
+            assertNull(loop.getLines());
+            assertNotNull(loop.getIterations());
+            assertEquals(LabelTypeEnum.VTL, loop.getIterations().getType());
+            assertEquals("count(NAME)", loop.getIterations().getValue());
+        }
+
     }
 
     @Nested
