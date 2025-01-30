@@ -35,7 +35,7 @@ public enum Mode {
             SurveyModeEnum.PAPI, PAPI,
             SurveyModeEnum.CAWI, CAWI);
 
-    public  static Mode convertSurveyModeEnumMode(SurveyModeEnum poguesMode){
+    public static Mode convertSurveyModeEnumMode(SurveyModeEnum poguesMode){
         return poguesModes.get(poguesMode);
     }
 }
