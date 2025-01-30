@@ -4,6 +4,7 @@ import fr.insee.ddi.lifecycle33.datacollection.ComputationItemType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.exceptions.business.IllegalDDIElementException;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
@@ -16,12 +17,16 @@ import fr.insee.lunatic.model.flat.ControlContextType;
 import fr.insee.lunatic.model.flat.ControlCriticalityEnum;
 import fr.insee.lunatic.model.flat.ControlType;
 import fr.insee.lunatic.model.flat.ControlTypeEnum;
+import fr.insee.pogues.model.ControlCriticityEnum;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Map;
 
 /** Consistency check. */
 @Getter
 @Setter
+@Context(format = Format.POGUES, type = fr.insee.pogues.model.ControlType.class)
 @Context(format = Format.DDI, type = ComputationItemType.class)
 @Context(format = Format.LUNATIC, type = ControlType.class)
 public class Control extends EnoIdentifiableObject implements EnoObjectWithExpression {
@@ -88,11 +93,26 @@ public class Control extends EnoIdentifiableObject implements EnoObjectWithExpre
         return Context.SIMPLE;
     }
 
+    private static final Map<ControlCriticityEnum, Criticality> poguesCriticalities = Map.of(
+            ControlCriticityEnum.INFO, Criticality.INFO,
+            ControlCriticityEnum.WARN, Criticality.WARN,
+            ControlCriticityEnum.ERROR,Criticality.ERROR);
+
+    public static Criticality convertPoguesCriticality(ControlCriticityEnum poguesCriticality){
+        return poguesCriticalities.get(poguesCriticality);
+    }
+
     /** Control criticality. */
+    @Pogues("T(fr.insee.eno.core.model.navigation.Control).convertPoguesCriticality(" +
+            "getCriticity())")
     @DDI("T(fr.insee.eno.core.model.navigation.Control).convertDDICriticality(" +
             "getTypeOfComputationItem().getStringValue())")
     @Lunatic("setCriticality(T(fr.insee.eno.core.model.navigation.Control).convertCriticalityToLunatic(#param))")
     private Criticality criticality;
+
+//    void foo() {
+//        fr.insee.pogues.model.ControlType c = c
+//    }
 
     @DDI("T(fr.insee.eno.core.model.navigation.Control).mapTypeFromDDI()")
     @Lunatic("setTypeOfControl(T(fr.insee.eno.core.model.navigation.Control).convertTypeOfControlToLunatic(#param))")
@@ -106,15 +126,18 @@ public class Control extends EnoIdentifiableObject implements EnoObjectWithExpre
     private Context context = Context.SIMPLE;
 
     /** Label typed in Pogues, unused in Lunatic. */
+    @Pogues("getDescription()")
     @DDI("getDescription()?.getContentArray(0)?.getStringValue()") // NOTE: getConstructNameArray(0).getStringArray(0).getStringValue() has the same information
     private String label;
 
     /** Expression that determines if the control is triggered or not. */
+    @Pogues("getExpression()")
     @DDI("getCommandCode().getCommandArray(0)")
     @Lunatic("setControl(#param)")
     private CalculatedExpression expression;
 
     /** Message displayed if the control is triggered. */
+    @Pogues("getFailMessage()")
     @DDI("!#this.getInterviewerInstructionReferenceList().isEmpty() ? " +
             "#index.get(#this.getInterviewerInstructionReferenceArray(0).getIDArray(0).getStringValue())" +
             ".getInstructionTextArray(0) : " +
