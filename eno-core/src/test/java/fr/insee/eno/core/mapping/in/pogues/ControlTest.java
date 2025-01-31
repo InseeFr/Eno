@@ -10,6 +10,7 @@ import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.EnoIndex;
+import fr.insee.lunatic.model.flat.ControlTypeEnum;
 import fr.insee.lunatic.model.flat.Input;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import org.junit.jupiter.api.BeforeAll;
@@ -95,6 +96,8 @@ void integrationTest(InToEno inToEno, String resourcePath) throws ParsingExcepti
     assertEquals("WARN", lunaticInput.getControls().getFirst().getCriticality().name());
     assertEquals("\"Erreur \" || $INPUT_NONOBE$ || \"doit être différente de E\"", lunaticInput.getControls().getFirst().getErrorMessage().getValue());
     assertEquals("nvl($INPUT_NONOBE$,\"\") = \"E\"", lunaticInput.getControls().getFirst().getControl().getValue());
+    assertEquals(ControlTypeEnum.CONSISTENCY, lunaticInput.getControls().getFirst().getTypeOfControl());
+
 }
 }
 
