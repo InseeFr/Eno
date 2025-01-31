@@ -36,7 +36,7 @@ public class DDIToEno implements InToEno {
      * @deprecated use other transform method.
      */
     @Deprecated(since = "3.33.0")
-    public EnoQuestionnaire transform(InputStream ddiInputStream, EnoParameters enoParameters)
+    public EnoQuestionnaire transform(InputStream ddiInputStream, EnoParameters enoParameters) {
         return transform(enoParameters);
     }
 
