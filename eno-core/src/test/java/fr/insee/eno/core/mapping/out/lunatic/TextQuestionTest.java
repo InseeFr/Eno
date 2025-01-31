@@ -10,6 +10,8 @@ import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.TextQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.serialize.DDIDeserializer;
 import fr.insee.eno.core.serialize.PoguesDeserializer;
@@ -68,40 +70,15 @@ class TextQuestionTest {
                 classLoader.getResourceAsStream("integration/pogues/pogues-simple.json"));
         return Stream.of(
                 Arguments.of(DDIToEno.fromObject(ddiQuestionnaire)),
-                Arguments.of(PoguesToEno.fromObject(poguesQuestionnaire)),
-                Arguments.of(PoguesDDIToEno.fromObjects(poguesQuestionnaire, ddiQuestionnaire))
+                Arguments.of(PoguesDDIToEno.fromObjects(poguesQuestionnaire, ddiQuestionnaire)),
+                Arguments.of(PoguesToEno.fromObject(poguesQuestionnaire))
         );
     }
     @ParameterizedTest
     @MethodSource
     void integrationTest(InToEno inToEno) {
         //
-        EnoQuestionnaire enoQuestionnaire = inToEno.transform(
-                EnoParameters.of(EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
-        Questionnaire lunaticQuestionnaire = new Questionnaire();
-        new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
-        //
-        Input lunaticInput = assertInstanceOf(Input.class, lunaticQuestionnaire.getComponents().get(1));
-        assertEquals("lmyo3e0y", lunaticInput.getId());
-        assertEquals("\"Unique question\"", lunaticInput.getLabel().getValue());
-        assertEquals(LabelTypeEnum.VTL_MD, lunaticInput.getLabel().getType());
-        assertEquals(BigInteger.valueOf(249), lunaticInput.getMaxLength());
-        assertEquals("Q1", lunaticInput.getResponse().getName());
-    }
-
-    private static Stream<Arguments> integrationTest() {
-        return Stream.of(
-                Arguments.of(new DDIToEno(), "integration/ddi/ddi-simple.xml"),
-                Arguments.of(new PoguesToEno(), "integration/pogues/pogues-simple.json")
-        );
-    }
-    @ParameterizedTest
-    @MethodSource
-    void integrationTest(InToEno inToEno, String resourcePath) throws ParsingException {
-        //
-        EnoQuestionnaire enoQuestionnaire = inToEno.transform(
-                this.getClass().getClassLoader().getResourceAsStream(resourcePath),
-                EnoParameters.of(EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+        EnoQuestionnaire enoQuestionnaire = inToEno.transform(EnoParameters.of(Context.HOUSEHOLD, ModeParameter.CAWI, Format.LUNATIC));
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
         //

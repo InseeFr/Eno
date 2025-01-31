@@ -11,6 +11,7 @@ import fr.insee.eno.core.model.question.DynamicTableQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticLoopResolution;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticSortComponents;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
@@ -131,15 +132,15 @@ class LunaticRosterResizingLogicTest {
     }
 
     @Test
-    void nonCollectedColumnCase_functionalTest() {
+    void nonCollectedColumnCase_functionalTest() throws DDIParsingException {
         // Given
         EnoParameters enoParameters = EnoParameters.of(
                 EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
         InputStream ddiInputStream = this.getClass().getClassLoader().getResourceAsStream(
                 "functional/ddi/ddi-m5o3qhu0.xml"); // DDI with non-collected column within a dynamic table
         // When + then
-        DDIToLunatic ddiToLunatic = new DDIToLunatic();
-        assertDoesNotThrow(() -> ddiToLunatic.transform(ddiInputStream, enoParameters));
+        DDIToLunatic ddiToLunatic = DDIToLunatic.fromInputStream(ddiInputStream);
+        assertDoesNotThrow(() -> ddiToLunatic.transform(enoParameters));
     }
 
 }
