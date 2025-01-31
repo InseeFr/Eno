@@ -35,7 +35,7 @@ public class PoguesToEno implements InToEno {
      * @throws PoguesDeserializationException if the input stream given cannot be parsed to a Pogues questionnaire.
      * @deprecated use other transform method.
      */
-    @Deprecated(since = "3.23.0")
+    @Deprecated(since = "3.33.0")
     public EnoQuestionnaire transform(InputStream poguesInputStream, EnoParameters enoParameters)
             throws PoguesDeserializationException {
         poguesQuestionnaire = PoguesDeserializer.deserialize(poguesInputStream);

@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.32.1] - 2025-01-15
+### :sparkles: New Features
+- [`9493b61`](https://github.com/InseeFr/Eno/commit/9493b618b28c6f0560b78d296a13698475e86fc3) - **pogues mapping**: questionnaire properties *(PR [#1184](https://github.com/InseeFr/Eno/pull/1184) by [@nsenave](https://github.com/nsenave))*
+- [`4de19f8`](https://github.com/InseeFr/Eno/commit/4de19f8f05f5699b9d80248510c90e4138d0424e) - **pogues mapping**: code lists *(PR [#1186](https://github.com/InseeFr/Eno/pull/1186) by [@nsenave](https://github.com/nsenave))*
+- [`10dff45`](https://github.com/InseeFr/Eno/commit/10dff456098edda1680e31f496398518d921477e) - **pogues mapping**: variables *(PR [#1187](https://github.com/InseeFr/Eno/pull/1187) by [@nsenave](https://github.com/nsenave))*
+- [`8c24928`](https://github.com/InseeFr/Eno/commit/8c24928890721026e5c0946b1153b686d29cce80) - **pogues mapping**: sequences  *(PR [#1188](https://github.com/InseeFr/Eno/pull/1188) by [@nsenave](https://github.com/nsenave))*
+- [`d899226`](https://github.com/InseeFr/Eno/commit/d899226e31598406dd9e258537badd0406cc1e0b) - **pogues mapping**: text questions *(PR [#1189](https://github.com/InseeFr/Eno/pull/1189) by [@nsenave](https://github.com/nsenave))*
+- [`f39f9b5`](https://github.com/InseeFr/Eno/commit/f39f9b584d35387f946371e2b20461990cac815d) - **pogues mapping**: numeric questions *(PR [#1190](https://github.com/InseeFr/Eno/pull/1190) by [@nsenave](https://github.com/nsenave))*
+- [`3c337bd`](https://github.com/InseeFr/Eno/commit/3c337bdab839e583a608a51bfdf6473f71a2e002) - **pogues mapping**: sequences structure *(PR [#1191](https://github.com/InseeFr/Eno/pull/1191) by [@nsenave](https://github.com/nsenave))*
+- [`95e132c`](https://github.com/InseeFr/Eno/commit/95e132c9e9f8e79ffce356d4cbe8ba4ed59a0883) - **pogues mapping**: multiple response questions conversion *(PR [#1192](https://github.com/InseeFr/Eno/pull/1192) by [@nsenave](https://github.com/nsenave))*
+- [`d6a1f35`](https://github.com/InseeFr/Eno/commit/d6a1f35961fee8c3afbc556632fcab573dedf61c) - **pogues mapping**: date questions *(PR [#1193](https://github.com/InseeFr/Eno/pull/1193) by [@nsenave](https://github.com/nsenave))*
+- [`da1681c`](https://github.com/InseeFr/Eno/commit/da1681c25b806d34e041c00b9d1d82b6a8db256e) - **pogues mapping**: unique and multiple choice questions *(PR [#1195](https://github.com/InseeFr/Eno/pull/1195) by [@nsenave](https://github.com/nsenave))*
+
+### :bug: Bug Fixes
+- [`3fea381`](https://github.com/InseeFr/Eno/commit/3fea3813dc66c31f68bf2a7cfb874c13ac8a13eb) - null pointer exception with non collected cells in dynamic table *(PR [#1196](https://github.com/InseeFr/Eno/pull/1196) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.31.5] - 2024-12-26
 ### :bug: Bug Fixes
 - [`2484d0a`](https://github.com/InseeFr/Eno/commit/2484d0a680ca9f4c515da80ef31d38d69e5e77fb) - **dynamic table**: resizing for size expression *(PR [#1181](https://github.com/InseeFr/Eno/pull/1181) by [@nsenave](https://github.com/nsenave))*
@@ -407,3 +424,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.31.1]: https://github.com/InseeFr/Eno/compare/3.31.0...3.31.1
 [3.31.2]: https://github.com/InseeFr/Eno/compare/3.31.1...3.31.2
 [3.31.5]: https://github.com/InseeFr/Eno/compare/3.31.2...3.31.5
+[3.32.1]: https://github.com/InseeFr/Eno/compare/3.31.5...3.32.1

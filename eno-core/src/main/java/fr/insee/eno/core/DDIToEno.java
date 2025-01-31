@@ -35,10 +35,8 @@ public class DDIToEno implements InToEno {
      * @throws DDIParsingException if the input stream given cannot be parsed to a DDI object.
      * @deprecated use other transform method.
      */
-    @Deprecated(since = "3.23.0")
+    @Deprecated(since = "3.33.0")
     public EnoQuestionnaire transform(InputStream ddiInputStream, EnoParameters enoParameters)
-            throws DDIParsingException {
-        ddiQuestionnaire = DDIDeserializer.deserialize(ddiInputStream);
         return transform(enoParameters);
     }
 

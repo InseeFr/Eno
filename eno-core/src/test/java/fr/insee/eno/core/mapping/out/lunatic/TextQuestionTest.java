@@ -89,4 +89,28 @@ class TextQuestionTest {
         assertEquals("Q1", lunaticInput.getResponse().getName());
     }
 
+    private static Stream<Arguments> integrationTest() {
+        return Stream.of(
+                Arguments.of(new DDIToEno(), "integration/ddi/ddi-simple.xml"),
+                Arguments.of(new PoguesToEno(), "integration/pogues/pogues-simple.json")
+        );
+    }
+    @ParameterizedTest
+    @MethodSource
+    void integrationTest(InToEno inToEno, String resourcePath) throws ParsingException {
+        //
+        EnoQuestionnaire enoQuestionnaire = inToEno.transform(
+                this.getClass().getClassLoader().getResourceAsStream(resourcePath),
+                EnoParameters.of(EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
+        new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
+        //
+        Input lunaticInput = assertInstanceOf(Input.class, lunaticQuestionnaire.getComponents().get(1));
+        assertEquals("lmyo3e0y", lunaticInput.getId());
+        assertEquals("\"Unique question\"", lunaticInput.getLabel().getValue());
+        assertEquals(LabelTypeEnum.VTL_MD, lunaticInput.getLabel().getType());
+        assertEquals(BigInteger.valueOf(249), lunaticInput.getMaxLength());
+        assertEquals("Q1", lunaticInput.getResponse().getName());
+    }
+
 }

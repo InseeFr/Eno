@@ -8,10 +8,7 @@ import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.variable.VariableType;
 import fr.insee.lunatic.model.flat.variable.VariableTypeEnum;
 
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static fr.insee.eno.core.processing.out.steps.lunatic.resizing.LunaticLoopResizingLogic.insertIterationEntry;
@@ -48,7 +45,10 @@ public class LunaticRosterResizingLogic {
 
         // Concerned variables to be resized: responses of the roster component
         List<String> resizedVariableNames = lunaticRoster.getComponents().stream()
-                .map(BodyCell::getResponse).map(ResponseType::getName).toList();
+                .map(BodyCell::getResponse)
+                .filter(Objects::nonNull)
+                .map(ResponseType::getName)
+                .toList();
 
         // Insert resizing entries (the logic is the same as for loops)
         resizingVariableNames.forEach(variableName -> insertIterationEntry(
