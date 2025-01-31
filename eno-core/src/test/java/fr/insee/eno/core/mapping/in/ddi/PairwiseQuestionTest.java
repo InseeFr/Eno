@@ -5,6 +5,7 @@ import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.PairwiseQuestion;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
+import fr.insee.eno.core.processing.in.steps.ddi.DDIManagePairwiseId;
 import fr.insee.eno.core.serialize.DDIDeserializer;
 import org.junit.jupiter.api.Test;
 
@@ -23,6 +24,7 @@ class PairwiseQuestionTest {
                 DDIDeserializer.deserialize(this.getClass().getClassLoader().getResourceAsStream(
                         "integration/ddi/ddi-pairwise.xml")),
                 enoQuestionnaire);
+        new DDIManagePairwiseId(enoQuestionnaire.getIndex()).apply(enoQuestionnaire);
 
         // Then
         Optional<PairwiseQuestion> searchedPairwiseQuestion = enoQuestionnaire.getSingleResponseQuestions().stream()

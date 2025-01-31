@@ -22,9 +22,9 @@ class EnoCleanTooltipsTest {
         enoParameters.setQuestionNumberingMode(EnoParameters.QuestionNumberingMode.NONE);
         enoParameters.setArrowCharInQuestions(false);
         //
-        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-tooltips.xml"),
-                enoParameters);
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-tooltips.xml"))
+                .transform(enoParameters);
 
         // Then
         // NB: pay attention to the difference between simple quote and apostrophe

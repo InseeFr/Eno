@@ -13,21 +13,40 @@ import java.io.InputStream;
 
 public class DDIToEno implements InToEno {
 
+    private DDIInstanceDocument ddiQuestionnaire;
+
+    private DDIToEno(DDIInstanceDocument ddiQuestionnaire) {
+        this.ddiQuestionnaire = ddiQuestionnaire;
+    }
+
+    public static DDIToEno fromInputStream(InputStream ddiInputStream) throws DDIParsingException {
+        return new DDIToEno(DDIDeserializer.deserialize(ddiInputStream));
+    }
+
+    public static DDIToEno fromObject(DDIInstanceDocument ddiInstanceDocument) {
+        return new DDIToEno(ddiInstanceDocument);
+    }
+
     /**
      * Transform given DDI input stream into a Eno questionnaire object using parameters given.
      * @param ddiInputStream Input stream of a DDI document.
      * @param enoParameters Eno parameters object.
      * @return Lunatic questionnaire object.
      * @throws DDIParsingException if the input stream given cannot be parsed to a DDI object.
+     * @deprecated use other transform method.
      */
+    @Deprecated(since = "3.23.0")
     public EnoQuestionnaire transform(InputStream ddiInputStream, EnoParameters enoParameters)
             throws DDIParsingException {
-        //
-        DDIInstanceDocument ddiInstanceDocument = DDIDeserializer.deserialize(ddiInputStream);
+        ddiQuestionnaire = DDIDeserializer.deserialize(ddiInputStream);
+        return transform(enoParameters);
+    }
+
+    public EnoQuestionnaire transform(EnoParameters enoParameters) {
         //
         DDIMapper ddiMapper = new DDIMapper();
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
-        ddiMapper.mapDDI(ddiInstanceDocument, enoQuestionnaire);
+        ddiMapper.mapDDI(ddiQuestionnaire, enoQuestionnaire);
         //
         DDIInProcessing ddiInProcessing = new DDIInProcessing();
         ddiInProcessing.applyProcessing(enoQuestionnaire);

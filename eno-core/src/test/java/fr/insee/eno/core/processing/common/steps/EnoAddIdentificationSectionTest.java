@@ -24,9 +24,9 @@ class EnoAddIdentificationSectionTest {
                 EnoParameters.Context.BUSINESS, EnoParameters.ModeParameter.CAWI);
         enoParameters.setIdentificationQuestion(true);
         //
-        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"),
-                enoParameters);
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"))
+                .transform(enoParameters);
         //
         Sequence identificationSequence = enoQuestionnaire.getSequences().getFirst();
         assertEquals(EnoAddIdentificationSection.IDENTIFICATION_SEQUENCE_ID, identificationSequence.getId());
@@ -39,9 +39,9 @@ class EnoAddIdentificationSectionTest {
                 EnoParameters.Context.BUSINESS, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
         enoParameters.setIdentificationQuestion(true);
         //
-        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"),
-                enoParameters);
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"))
+                .transform(enoParameters);
         //
         ComponentType identificationSequence = lunaticQuestionnaire.getComponents().getFirst();
         assertInstanceOf(fr.insee.lunatic.model.flat.Sequence.class, identificationSequence);

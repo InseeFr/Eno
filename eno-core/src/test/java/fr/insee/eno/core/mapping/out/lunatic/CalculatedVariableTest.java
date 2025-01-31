@@ -7,6 +7,8 @@ import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.variable.CalculatedVariable;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
@@ -91,10 +93,10 @@ class CalculatedVariableTest {
 
         @BeforeAll
         void mapQuestionnaire() throws DDIParsingException {
-            Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
+            Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
                     CalculatedVariableTest.class.getClassLoader().getResourceAsStream(
-                            "integration/ddi/ddi-variables.xml"),
-                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+                            "integration/ddi/ddi-variables.xml"))
+                    .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
             //
             filterResultVariables = new HashMap<>();
             lunaticQuestionnaire.getVariables().stream()
@@ -185,10 +187,10 @@ class CalculatedVariableTest {
         @Test
         void oneCalculated_testAllProperties() throws DDIParsingException {
             // Given + When
-            Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
+            Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
                     CalculatedVariableTest.class.getClassLoader().getResourceAsStream(
-                            "integration/ddi/ddi-declarations.xml"),
-                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+                            "integration/ddi/ddi-declarations.xml"))
+                    .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
             // Then
             Optional<CalculatedVariableType> lunaticVariable = lunaticQuestionnaire.getVariables().stream()
                     .filter(variableType -> "CALCULATED1".equals(variableType.getName()))

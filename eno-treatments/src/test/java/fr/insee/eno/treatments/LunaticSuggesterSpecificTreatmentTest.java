@@ -3,6 +3,8 @@ package fr.insee.eno.treatments;
 import fr.insee.eno.core.DDIToLunatic;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.treatments.dto.SpecificTreatments;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
@@ -19,9 +21,9 @@ class LunaticSuggesterSpecificTreatmentTest {
     @Test
     void suggesterTest() throws DDIParsingException {
         //
-        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
-                this.getClass().getClassLoader().getResourceAsStream("suggester-treatment/ddi-lgl1kmol.xml"),
-                EnoParameters.of(EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("suggester-treatment/ddi-lgl1kmol.xml"))
+                .transform(EnoParameters.of(Context.HOUSEHOLD, ModeParameter.CAWI, Format.LUNATIC));
         //
         SpecificTreatmentsDeserializer treatmentsDeserializer = new SpecificTreatmentsDeserializer();
         SpecificTreatments treatmentsInput = treatmentsDeserializer.deserialize(
@@ -35,11 +37,11 @@ class LunaticSuggesterSpecificTreatmentTest {
     @Test
     void suggesterTest_lunaticV3() throws DDIParsingException {
         //
-        EnoParameters enoParameters = EnoParameters.of(EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
+        EnoParameters enoParameters = EnoParameters.of(Context.HOUSEHOLD, ModeParameter.CAWI, Format.LUNATIC);
         enoParameters.getLunaticParameters().setDsfr(true);
-        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
-                this.getClass().getClassLoader().getResourceAsStream("suggester-treatment/ddi-lgl1kmol.xml"),
-                enoParameters);
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("suggester-treatment/ddi-lgl1kmol.xml"))
+                .transform(enoParameters);
         //
         SpecificTreatmentsDeserializer treatmentsDeserializer = new SpecificTreatmentsDeserializer();
         SpecificTreatments treatmentsInput = treatmentsDeserializer.deserialize(
@@ -55,11 +57,11 @@ class LunaticSuggesterSpecificTreatmentTest {
     @Test
     void suggesterTest_lunaticV3_roundabout() throws DDIParsingException {
         //
-        EnoParameters enoParameters = EnoParameters.of(EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
+        EnoParameters enoParameters = EnoParameters.of(Context.HOUSEHOLD, ModeParameter.CAWI, Format.LUNATIC);
         enoParameters.getLunaticParameters().setDsfr(true);
-        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
-                this.getClass().getClassLoader().getResourceAsStream("suggester-treatment/ddi-m0p3wmjl.xml"),
-                enoParameters);
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("suggester-treatment/ddi-m0p3wmjl.xml"))
+                .transform(enoParameters);
         //
         SpecificTreatmentsDeserializer treatmentsDeserializer = new SpecificTreatmentsDeserializer();
         SpecificTreatments treatmentsInput = treatmentsDeserializer.deserialize(

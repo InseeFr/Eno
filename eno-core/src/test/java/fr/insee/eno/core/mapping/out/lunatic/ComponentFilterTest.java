@@ -5,6 +5,8 @@ import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.ConditionFilterType;
@@ -50,10 +52,10 @@ class ComponentFilterTest {
 
         @BeforeAll
         void mapQuestionnaire() throws DDIParsingException {
-            lunaticQuestionnaire = new DDIToLunatic().transform(
+            lunaticQuestionnaire = DDIToLunatic.fromInputStream(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
-                            "integration/ddi/ddi-filters-simple.xml"),
-                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+                            "integration/ddi/ddi-filters-simple.xml"))
+                    .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
         }
 
         @Test
@@ -122,10 +124,10 @@ class ComponentFilterTest {
 
         @BeforeAll
         void mapQuestionnaire() throws DDIParsingException {
-            lunaticQuestionnaire = new DDIToLunatic().transform(
+            lunaticQuestionnaire = DDIToLunatic.fromInputStream(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
-                            "integration/ddi/ddi-filters-extended.xml"),
-                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+                            "integration/ddi/ddi-filters-extended.xml"))
+                    .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
         }
 
         @Test
@@ -166,10 +168,10 @@ class ComponentFilterTest {
 
         @BeforeAll
         void mapQuestionnaire() throws DDIParsingException {
-            lunaticQuestionnaire = new DDIToLunatic().transform(
+            lunaticQuestionnaire = DDIToLunatic.fromInputStream(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
-                            "integration/ddi/ddi-filters-calculated.xml"),
-                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+                            "integration/ddi/ddi-filters-calculated.xml"))
+                    .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
         }
 
         @ParameterizedTest
