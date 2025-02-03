@@ -1,6 +1,9 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 
-import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.ComponentType;
+import fr.insee.lunatic.model.flat.ComponentTypeEnum;
+import fr.insee.lunatic.model.flat.Loop;
+import fr.insee.lunatic.model.flat.Subsequence;
 
 /**
  * Post processing of a lunatic questionnaire. With this processing, one question is displayed on each page.
