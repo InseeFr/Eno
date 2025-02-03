@@ -2,6 +2,8 @@ package fr.insee.eno.core;
 
 import fr.insee.eno.core.exceptions.business.PoguesDeserializationException;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import org.junit.jupiter.api.Test;
@@ -18,10 +20,11 @@ class PoguesToLunaticTest {
     void simplestCase() throws PoguesDeserializationException {
         //
         String jsonPogues = "{\"id\": \"foo-id\"}";
+        EnoParameters enoParameters = EnoParameters.of(Context.HOUSEHOLD, ModeParameter.PROCESS, Format.LUNATIC);
         //
-        Questionnaire lunaticQuestionnaire = new PoguesToLunatic().transform(
-                new ByteArrayInputStream(jsonPogues.getBytes()),
-                EnoParameters.of(EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.PROCESS, Format.LUNATIC));
+        Questionnaire lunaticQuestionnaire = PoguesToLunatic
+                .fromInputStream(new ByteArrayInputStream(jsonPogues.getBytes()))
+                .transform(enoParameters);
         //
         assertEquals("foo-id", lunaticQuestionnaire.getId());
     }
@@ -33,9 +36,9 @@ class PoguesToLunaticTest {
     })
     void testIdMapping(String relativePath, String expectedId) throws PoguesDeserializationException {
         //
-        Questionnaire lunaticQuestionnaire = new PoguesToLunatic().transform(
-                this.getClass().getClassLoader().getResourceAsStream(relativePath),
-                EnoParameters.of(EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.PROCESS, Format.LUNATIC));
+        Questionnaire lunaticQuestionnaire = PoguesToLunatic
+                .fromInputStream(this.getClass().getClassLoader().getResourceAsStream(relativePath))
+                .transform(EnoParameters.of(Context.HOUSEHOLD, ModeParameter.PROCESS, Format.LUNATIC));
         //
         assertEquals(expectedId, lunaticQuestionnaire.getId());
     }

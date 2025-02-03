@@ -2,8 +2,6 @@ name: Test and Sonar Analysis
 
 on:
   pull_request:
-    branches:
-      - 'v3-main'
     types: [opened, synchronize, reopened, ready_for_review]
     paths-ignore:
       - 'logo/**'

@@ -7,6 +7,8 @@ import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.processing.in.steps.ddi.DDIDeserializeSuggesterConfiguration;
 import fr.insee.eno.core.processing.in.steps.ddi.DDIInsertCodeLists;
@@ -38,10 +40,10 @@ class DynamicTableIntegrationTest {
         String rosterResponseName2 = "TABLEAUBASIQUE2";
 
         // When
-        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
                 this.getClass().getClassLoader().getResourceAsStream(
-                        "integration/ddi/ddi-dynamic-table-2.xml"),
-                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+                        "integration/ddi/ddi-dynamic-table-2.xml"))
+                .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
 
         // Then
         // There is one roster for loop component

@@ -1,6 +1,7 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.table;
 
 import fr.insee.eno.core.DDIToEno;
+import fr.insee.eno.core.PoguesDDIToEno;
 import fr.insee.eno.core.PoguesToEno;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.exceptions.business.ParsingException;
@@ -8,6 +9,8 @@ import fr.insee.eno.core.exceptions.business.PoguesDeserializationException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.ComplexMultipleChoiceQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -53,20 +56,31 @@ abstract class ComplexMultipleChoiceQuestionProcessingTest {
     static class DDITest extends ComplexMultipleChoiceQuestionProcessingTest {
         @Override
         EnoQuestionnaire mapQuestionnaire() throws DDIParsingException {
-            return new DDIToEno().transform(
+            return DDIToEno.fromInputStream(
                     ComplexMultipleChoiceQuestionProcessingTest.class.getClassLoader().getResourceAsStream(
-                            "integration/ddi/ddi-mcq.xml"),
-                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
+                            "integration/ddi/ddi-mcq.xml"))
+                    .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI));
         }
     }
 
     static class PoguesTest extends ComplexMultipleChoiceQuestionProcessingTest {
         @Override
         EnoQuestionnaire mapQuestionnaire() throws PoguesDeserializationException {
-            return new PoguesToEno().transform(
+            return PoguesToEno.fromInputStream(
                     ComplexMultipleChoiceQuestionProcessingTest.class.getClassLoader().getResourceAsStream(
-                            "integration/pogues/pogues-mcq.json"),
-                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
+                            "integration/pogues/pogues-mcq.json"))
+                    .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI));
+        }
+    }
+
+    static class PoguesDDITest extends ComplexMultipleChoiceQuestionProcessingTest {
+        @Override
+        EnoQuestionnaire mapQuestionnaire() throws ParsingException {
+            ClassLoader classLoader = ComplexMultipleChoiceQuestionProcessingTest.class.getClassLoader();
+            return PoguesDDIToEno.fromInputStreams(
+                            classLoader.getResourceAsStream("integration/pogues/pogues-mcq.json"),
+                            classLoader.getResourceAsStream("integration/ddi/ddi-mcq.xml"))
+                    .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI));
         }
     }
 
