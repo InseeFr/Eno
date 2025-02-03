@@ -12,8 +12,12 @@ import fr.insee.pogues.model.ExpressionType;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static fr.insee.eno.core.annotations.Contexts.Context;
 
@@ -31,6 +35,18 @@ public class CalculatedExpression extends EnoObject {
         res.setValue("true");
         res.setType(LabelTypeEnum.VTL.value());
         return res;
+    }
+
+    public static List<String> extractVariables(String expression) {
+        List<String> variables = new ArrayList<>();
+        Pattern pattern = Pattern.compile("\\$(\\w+)\\$");
+        Matcher matcher = pattern.matcher(expression);
+
+        while (matcher.find()) {
+            variables.add(matcher.group(1));
+        }
+
+        return variables;
     }
 
     /** Expression. */
