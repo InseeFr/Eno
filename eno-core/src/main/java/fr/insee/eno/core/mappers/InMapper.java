@@ -194,6 +194,8 @@ public abstract class InMapper extends Mapper {
         int collectionSize = inputCollection.size();
         // Get the Eno model collection
         Collection<Object> modelCollection = readCollection(propertyDescriptor, enoObject);
+        if (! inputCollection.isEmpty())
+            modelCollection.clear(); // added for the case when two inputs are used (Pogues + DDI)
         // Get the content type of the model collection
         Class<?> modelTargetType = typeDescriptor.getResolvableType().getGeneric(0).getRawClass();
         // Collection of simple types

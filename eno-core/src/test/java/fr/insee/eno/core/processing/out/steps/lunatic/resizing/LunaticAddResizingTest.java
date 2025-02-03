@@ -5,6 +5,8 @@ import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticLoopResolution;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticSortComponents;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
@@ -30,10 +32,10 @@ class LunaticAddResizingTest {
     void init() throws DDIParsingException {
 
         // Given
-        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
                 LunaticAddResizingTest.class.getClassLoader().getResourceAsStream(
-                        "integration/ddi/ddi-resizing.xml"),
-                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
+                        "integration/ddi/ddi-resizing.xml"))
+                .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI));
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         LunaticMapper lunaticMapper = new LunaticMapper();
         lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);

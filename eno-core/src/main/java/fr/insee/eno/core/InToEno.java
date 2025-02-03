@@ -8,6 +8,12 @@ import java.io.InputStream;
 
 public interface InToEno {
 
+    /**
+     * @deprecated use other transform method.
+     */
+    @Deprecated(since = "3.33.0")
     EnoQuestionnaire transform(InputStream inputStream, EnoParameters enoParameters) throws ParsingException;
+
+    EnoQuestionnaire transform(EnoParameters enoParameters);
 
 }

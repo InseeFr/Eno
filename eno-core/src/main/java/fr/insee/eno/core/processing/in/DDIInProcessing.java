@@ -23,6 +23,7 @@ public class DDIInProcessing {
                 .then(new DDIResolveVariableReferencesInExpressions())
                 .then(new DDIInsertDeclarations(enoIndex))
                 .then(new DDIInsertControls())
+                .then(new DDIManagePairwiseId(enoIndex))
                 .then(new DDIDeserializeSuggesterConfiguration())
                 .then(new DDIInsertNoDataCellLabels())
                 .then(new DDIInsertCodeLists());

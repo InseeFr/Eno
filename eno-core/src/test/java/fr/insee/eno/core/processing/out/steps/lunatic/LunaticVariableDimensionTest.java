@@ -3,6 +3,8 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 import fr.insee.eno.core.DDIToLunatic;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.variable.*;
@@ -23,9 +25,9 @@ class LunaticVariableDimensionTest {
     @BeforeAll
     void integrationTestFromDDI() throws DDIParsingException {
         //
-        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-dimensions.xml"),
-                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-dimensions.xml"))
+                .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
         //
         lunaticVariables = new HashMap<>();
         lunaticQuestionnaire.getVariables().forEach(variableType ->

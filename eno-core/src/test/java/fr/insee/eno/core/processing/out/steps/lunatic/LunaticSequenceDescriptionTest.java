@@ -4,7 +4,9 @@ import fr.insee.eno.core.DDIToLunatic;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.Question;
+import fr.insee.lunatic.model.flat.Questionnaire;
+import fr.insee.lunatic.model.flat.Sequence;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,9 +19,9 @@ class LunaticSequenceDescriptionTest {
         EnoParameters enoParameters = EnoParameters.of(
                 EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
         enoParameters.getLunaticParameters().setDsfr(true);
-        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-declarations.xml"),
-                enoParameters);
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-declarations.xml"))
+                .transform(enoParameters);
         //
         Sequence sequence = (Sequence) lunaticQuestionnaire.getComponents().getFirst();
         assertTrue(sequence.getDeclarations().isEmpty());
