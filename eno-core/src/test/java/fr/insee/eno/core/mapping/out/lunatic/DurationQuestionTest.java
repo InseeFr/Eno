@@ -7,6 +7,8 @@ import fr.insee.eno.core.exceptions.business.PoguesDeserializationException;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Duration;
 import fr.insee.lunatic.model.flat.Questionnaire;
@@ -24,17 +26,17 @@ class DurationQuestionTest {
 
     @Test
     void mapFromDDI() throws DDIParsingException {
-        enoQuestionnaire = new DDIToEno().transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-durations-2.xml"),
-                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
+        enoQuestionnaire = DDIToEno.fromInputStream(this.getClass().getClassLoader().getResourceAsStream(
+                "integration/ddi/ddi-durations-2.xml"))
+                .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI));
         assertNotNull(enoQuestionnaire);
     }
 
     @Test
     void mapFromPogues() throws PoguesDeserializationException {
-        enoQuestionnaire = new PoguesToEno().transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/pogues/pogues-durations-2.json"),
-                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
+        enoQuestionnaire = PoguesToEno.fromInputStream(this.getClass().getClassLoader().getResourceAsStream(
+                "integration/pogues/pogues-durations-2.json"))
+                .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI));
         assertNotNull(enoQuestionnaire);
     }
 
