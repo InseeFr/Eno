@@ -15,7 +15,7 @@ public class DDIToLunaticService extends LunaticGenerationService {
 
     @Override
     Questionnaire mainTransformation(InputStream ddiInputStream, EnoParameters enoParameters) throws Exception {
-        return new DDIToLunatic().transform(ddiInputStream, enoParameters);
+        return DDIToLunatic.fromInputStream(ddiInputStream).transform(enoParameters);
     }
 
     @Override

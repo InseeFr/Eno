@@ -25,15 +25,15 @@ class DurationQuestionTest {
     @BeforeAll
     void init() throws DDIParsingException {
         InputStream ddiStream = this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-durations.xml");
-        EnoQuestionnaire questionnaire = new DDIToEno().transform(ddiStream,
-                EnoParameters.of(Context.DEFAULT, ModeParameter.PROCESS));
+        EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.PROCESS);
+        EnoQuestionnaire questionnaire = DDIToEno.fromInputStream(ddiStream).transform(enoParameters);
         index = questionnaire.getIndex();
     }
 
     @Test
     void parseHourMinuteDurationWithMaxParam() {
         EnoObject dateObject = index.get("k6c0ysf3");
-        assertTrue(dateObject instanceof DurationQuestion);
+        assertInstanceOf(DurationQuestion.class, dateObject);
 
         DurationQuestion question = (DurationQuestion) dateObject;
         assertEquals("PTnHnM", question.getFormat());
@@ -44,7 +44,7 @@ class DurationQuestionTest {
     @Test
     void parseYearMonthDurationWithMinParam() {
         EnoObject dateObject = index.get("k6c10exe");
-        assertTrue(dateObject instanceof DurationQuestion);
+        assertInstanceOf(DurationQuestion.class, dateObject);
 
         DurationQuestion question = (DurationQuestion) dateObject;
         assertEquals("PnYnM", question.getFormat());
@@ -55,7 +55,7 @@ class DurationQuestionTest {
     @Test
     void parseYearDateWithAllParams() {
         EnoObject dateObject = index.get("ljwweb92");
-        assertTrue(dateObject instanceof DurationQuestion);
+        assertInstanceOf(DurationQuestion.class, dateObject);
 
         DurationQuestion question = (DurationQuestion) dateObject;
         assertEquals("HH:CH", question.getFormat());
@@ -67,7 +67,7 @@ class DurationQuestionTest {
     void parseHourMinuteDurationWithAllParams() {
         EnoObject dateObject = index.get("ljwwfchy");
 
-        assertTrue(dateObject instanceof DurationQuestion);
+        assertInstanceOf(DurationQuestion.class, dateObject);
 
         // should retrieve data in reference date time object
         DurationQuestion question = (DurationQuestion) dateObject;

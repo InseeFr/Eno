@@ -19,7 +19,7 @@ tasks.named<Jar>("jar") {
     enabled = true
 }
 
-val jsonSchemaValidatorVersion = "1.5.4"
+val jsonSchemaValidatorVersion = "1.5.5"
 
 dependencies {
     // Eno core

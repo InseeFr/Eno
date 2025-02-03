@@ -43,22 +43,22 @@ class DDIToLunaticTest {
         //
         EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
         enoParameters.getLunaticParameters().setDsfr(true);
-        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
-                this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-" +questionnaireId+".xml"),
-                enoParameters);
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-" +questionnaireId+".xml"))
+                .transform(enoParameters);
         //
         assertNotNull(lunaticQuestionnaire);
     }
 
     @Test
-    void ddiWithTableWithNestedCodeListHeader_shouldThrowException() throws IOException {
+    void ddiWithTableWithNestedCodeListHeader_shouldThrowException() throws IOException, DDIParsingException {
         // Given
         try (InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(
                 "functional/ddi/ddi-l8x6fhtd.xml")) {
             EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
             // When + Then
-            DDIToLunatic ddiToLunatic = new DDIToLunatic();
-            assertThrows(UnauthorizedHeaderException.class, () -> ddiToLunatic.transform(inputStream, enoParameters));
+            DDIToLunatic ddiToLunatic = DDIToLunatic.fromInputStream(inputStream);
+            assertThrows(UnauthorizedHeaderException.class, () -> ddiToLunatic.transform(enoParameters));
         } catch (IOException e) {
             throw new IOException("IOException occurred with test DDI file 'l8x6fhtd'.");
         }
@@ -67,9 +67,9 @@ class DDIToLunaticTest {
     @Test
     void componentWithBeforeQuestionDeclaration() throws DDIParsingException {
         //
-        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
-                this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-lqnje8yr.xml"),
-                EnoParameters.of(Context.DEFAULT, ModeParameter.CAPI, Format.LUNATIC));
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-lqnje8yr.xml"))
+                .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAPI, Format.LUNATIC));
         //
         assertNotNull(lunaticQuestionnaire);
         ComponentType componentThatShouldHaveDeclaration = lunaticQuestionnaire.getComponents().stream()
@@ -88,9 +88,9 @@ class DDIToLunaticTest {
 
         @BeforeAll
         void mapLunaticQuestionnaire() throws DDIParsingException {
-            lunaticQuestionnaire = new DDIToLunatic().transform(
-                    DDIToLunaticTest.class.getClassLoader().getResourceAsStream("functional/ddi/ddi-l20g2ba7.xml"),
-                    EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
+            lunaticQuestionnaire = DDIToLunatic.fromInputStream(
+                    DDIToLunaticTest.class.getClassLoader().getResourceAsStream("functional/ddi/ddi-l20g2ba7.xml"))
+                    .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
         }
 
         @Test

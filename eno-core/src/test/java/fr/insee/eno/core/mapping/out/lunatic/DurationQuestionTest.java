@@ -19,9 +19,9 @@ class DurationQuestionTest {
     @Test
     void mapFromDDI() throws DDIParsingException {
         //
-        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-durations-2.xml"),
-                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-durations-2.xml"))
+                .transform(EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
         //
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         LunaticMapper lunaticMapper = new LunaticMapper();

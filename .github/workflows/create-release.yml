@@ -11,6 +11,9 @@ on:
       - 'README**.md'
       - 'Dockerfile'
 
+env:
+  RELEASE_NOTE_EXCLUDED_TYPES: docs,style,chore,other
+
 jobs:
 
   check-version:
@@ -126,6 +129,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    outputs:
+      previous-release-tag: ${{ steps.previousTag.outputs.previousTag }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -149,17 +154,9 @@ jobs:
         with:
           fromTag: ${{ needs.check-version.outputs.release-version }}
           toTag: ${{ steps.previousTag.outputs.previousTag}}
-          excludeTypes: docs,style,chore,other
+          excludeTypes: ${{ env.RELEASE_NOTE_EXCLUDED_TYPES }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          writeToFile: true
-          changelogFilePath: 'CHANGELOG.md'
-
-      - name: Commit changelog file
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          branch: 'v3-main'
-          commit_message: 'docs(changelog): ${{ needs.check-version.outputs.release-version }} update [skip ci]'
-          file_pattern: 'CHANGELOG.md'
+          writeToFile: false
 
       - name: Download build
         id: download
@@ -174,10 +171,41 @@ jobs:
           tag_name: ${{ needs.check-version.outputs.release-version }}
           target_commitish: ${{ github.head_ref || github.ref }}
           name: ${{ needs.check-version.outputs.release-version }}
-          body: ${{steps.changelog.outputs.changes}}
+          body: ${{ steps.changelog.outputs.changes }}
           files: eno-ws/build/libs/eno-ws.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Separate job for committing in the changelog file since I got bored that auto commit action randomly fails
+  commit-changelog:
+    needs: [ check-version, create-release ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create release note
+        id: changelog
+        uses: requarks/changelog-action@v1
+        with:
+          fromTag: ${{ needs.check-version.outputs.release-version }}
+          toTag: ${{ needs.create-release.outputs.previous-release-tag }}
+          excludeTypes: ${{ env.RELEASE_NOTE_EXCLUDED_TYPES }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          writeToFile: true
+          changelogFilePath: 'CHANGELOG.md'
+
+      - name: Commit changelog file
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: 'v3-main'
+          commit_message: 'docs(changelog): ${{ needs.check-version.outputs.release-version }} update [skip ci]'
+          file_pattern: 'CHANGELOG.md'
 
   publish-docker:
     needs: [ check-version, build-sources ]
