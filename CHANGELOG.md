@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.32.2] - 2025-02-03
+### :bug: Bug Fixes
+- [`3824f68`](https://github.com/InseeFr/Eno/commit/3824f68d7dc886f5fee1c58a3c7ea20ef381f9c0) - loop attributes change according to pagination *(PR [#1197](https://github.com/InseeFr/Eno/pull/1197) by [@laurentC35](https://github.com/laurentC35))*
+
 ## [3.32.1] - 2025-01-15
 ### :sparkles: New Features
 - [`9493b61`](https://github.com/InseeFr/Eno/commit/9493b618b28c6f0560b78d296a13698475e86fc3) - **pogues mapping**: questionnaire properties *(PR [#1184](https://github.com/InseeFr/Eno/pull/1184) by [@nsenave](https://github.com/nsenave))*
@@ -425,3 +429,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.31.2]: https://github.com/InseeFr/Eno/compare/3.31.1...3.31.2
 [3.31.5]: https://github.com/InseeFr/Eno/compare/3.31.2...3.31.5
 [3.32.1]: https://github.com/InseeFr/Eno/compare/3.31.5...3.32.1
+[3.32.1]: https://github.com/InseeFr/Eno/compare/3.32.1...3.32.2
