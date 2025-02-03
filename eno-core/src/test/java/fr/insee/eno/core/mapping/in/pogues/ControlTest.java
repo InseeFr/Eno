@@ -8,6 +8,8 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.navigation.Control;
 import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.ControlTypeEnum;
@@ -29,29 +31,29 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ControlTest {
 
-        private EnoIndex index;
+    private EnoIndex index;
 
-        @BeforeAll
-        void init() throws ParsingException {
-            InputStream poguesStream = this.getClass().getClassLoader().getResourceAsStream("integration/pogues/pogues-controls.json");
-            EnoQuestionnaire questionnaire = new PoguesToEno().transform(poguesStream,
-                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.PROCESS));
-            index = questionnaire.getIndex();
-        }
+    @BeforeAll
+    void init() throws ParsingException {
+        InputStream poguesStream = this.getClass().getClassLoader().getResourceAsStream("integration/pogues/pogues-controls.json");
+        EnoQuestionnaire questionnaire = PoguesToEno.fromInputStream(poguesStream)
+                .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.PROCESS));
+        index = questionnaire.getIndex();
+    }
 
-        @Test
-        void testInputHasCorrectControlsCount(){
-            Question question4 = (Question) index.get("lu6y5e4z");
-            Question question1 = (Question) index.get("ltx6oc58");
-            assertEquals(1, question4.getControls().size());
-            assertEquals(0, question1.getControls().size());
-        }
+    @Test
+    void testInputHasCorrectControlsCount(){
+        Question question4 = (Question) index.get("lu6y5e4z");
+        Question question1 = (Question) index.get("ltx6oc58");
+        assertEquals(1, question4.getControls().size());
+        assertEquals(0, question1.getControls().size());
+    }
 
-        @Test
-        void testInputCriticality(){
-            Control control = (Control) index.get("lu6xusai");
-            assertEquals("ERROR", control.getCriticality().name());
-        }
+    @Test
+    void testInputCriticality(){
+        Control control = (Control) index.get("lu6xusai");
+        assertEquals("ERROR", control.getCriticality().name());
+    }
 
     @Test
     void testInputFailMessage(){
@@ -71,33 +73,30 @@ class ControlTest {
         assertEquals("description du controle erreur", control.getLabel());
     }
 
+    private static Stream<Arguments> integrationTest() throws ParsingException {
+        ClassLoader classLoader = ControlTest.class.getClassLoader();
+        return Stream.of(
+                Arguments.of(PoguesToEno.fromInputStream(classLoader.getResourceAsStream(
+                        "integration/pogues/pogues-controls.json")))
+        );
+    }
+    @ParameterizedTest
+    @MethodSource
+    void integrationTest(InToEno inToEno) {
+        //
+        EnoQuestionnaire enoQuestionnaire = inToEno
+                .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
+        fr.insee.lunatic.model.flat.Questionnaire lunaticQuestionnaire = new Questionnaire();
+        new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
+        //
+        Input lunaticInput = assertInstanceOf(Input.class, lunaticQuestionnaire.getComponents().get(4));
+        assertEquals("lu6y5e4z", lunaticInput.getId());
+        assertEquals(1, lunaticInput.getControls().size());
+        assertEquals("lu6xusai", lunaticInput.getControls().getFirst().getId());
+        assertEquals("WARN", lunaticInput.getControls().getFirst().getCriticality().name());
+        assertEquals("\"Erreur \" || $INPUT_NONOBE$ || \"doit être différente de E\"", lunaticInput.getControls().getFirst().getErrorMessage().getValue());
+        assertEquals("nvl($INPUT_NONOBE$,\"\") = \"E\"", lunaticInput.getControls().getFirst().getControl().getValue());
+        assertEquals(ControlTypeEnum.CONSISTENCY, lunaticInput.getControls().getFirst().getTypeOfControl());
+    }
 
-private static Stream<Arguments> integrationTest() {
-    return Stream.of(
-            Arguments.of(new PoguesToEno(), "integration/pogues/pogues-controls.json")
-    );
 }
-
-
-@ParameterizedTest
-@MethodSource
-void integrationTest(InToEno inToEno, String resourcePath) throws ParsingException {
-    //
-    EnoQuestionnaire enoQuestionnaire = inToEno.transform(
-            this.getClass().getClassLoader().getResourceAsStream(resourcePath),
-            EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
-    fr.insee.lunatic.model.flat.Questionnaire lunaticQuestionnaire = new Questionnaire();
-    new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
-    //
-    Input lunaticInput = assertInstanceOf(Input.class, lunaticQuestionnaire.getComponents().get(4));
-    assertEquals("lu6y5e4z", lunaticInput.getId());
-    assertEquals(1, lunaticInput.getControls().size());
-    assertEquals("lu6xusai", lunaticInput.getControls().getFirst().getId());
-    assertEquals("WARN", lunaticInput.getControls().getFirst().getCriticality().name());
-    assertEquals("\"Erreur \" || $INPUT_NONOBE$ || \"doit être différente de E\"", lunaticInput.getControls().getFirst().getErrorMessage().getValue());
-    assertEquals("nvl($INPUT_NONOBE$,\"\") = \"E\"", lunaticInput.getControls().getFirst().getControl().getValue());
-    assertEquals(ControlTypeEnum.CONSISTENCY, lunaticInput.getControls().getFirst().getTypeOfControl());
-
-}
-}
-
