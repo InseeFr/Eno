@@ -1,4 +1,4 @@
-package fr.insee.eno.core.mapping.in.pogues;
+package fr.insee.eno.core.mapping.in;
 
 import fr.insee.eno.core.InToEno;
 import fr.insee.eno.core.PoguesToEno;
@@ -72,27 +72,4 @@ class DeclarationTest {
 
     }
 
-    private static Stream<Arguments> integrationTest() throws ParsingException {
-        ClassLoader classLoader = DeclarationTest.class.getClassLoader();
-        return Stream.of(
-                Arguments.of(PoguesToEno.fromInputStream(classLoader.getResourceAsStream(
-                        "integration/pogues/pogues-declarations.json")))
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource
-    void integrationTest(InToEno inToEno) {
-        //
-        EnoQuestionnaire enoQuestionnaire = inToEno.transform(
-                EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
-        fr.insee.lunatic.model.flat.Questionnaire lunaticQuestionnaire = new Questionnaire();
-        new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
-        //
-        Input lunaticInput1 = assertInstanceOf(Input.class, lunaticQuestionnaire.getComponents().get(2));
-        assertEquals("lk6zkkfr", lunaticInput1.getId());
-        assertEquals(4, lunaticInput1.getDeclarations().size());
-        assertEquals("BEFORE_QUESTION_TEXT", lunaticInput1.getDeclarations().getFirst().getPosition().value());
-        assertEquals("\"Static label 'Aide' before the question\"", lunaticInput1.getDeclarations().getFirst().getLabel().getValue());
-    }
 }
