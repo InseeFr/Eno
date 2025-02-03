@@ -9,6 +9,8 @@ import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticLoopResolution;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticSortComponents;
@@ -106,10 +108,10 @@ class LunaticRosterResizingLogicTest {
     @Test
     void integrationTest() throws DDIParsingException {
         // Given
-        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
                 LunaticAddResizingTest.class.getClassLoader().getResourceAsStream(
-                        "integration/ddi/ddi-dynamic-table-size.xml"),
-                EnoParameters.of(EnoParameters.Context.BUSINESS, EnoParameters.ModeParameter.CAWI));
+                        "integration/ddi/ddi-dynamic-table-size.xml"))
+                .transform(EnoParameters.of(Context.BUSINESS, ModeParameter.CAWI));
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         LunaticMapper lunaticMapper = new LunaticMapper();
         lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
@@ -130,15 +132,15 @@ class LunaticRosterResizingLogicTest {
     }
 
     @Test
-    void nonCollectedColumnCase_functionalTest() {
+    void nonCollectedColumnCase_functionalTest() throws DDIParsingException {
         // Given
         EnoParameters enoParameters = EnoParameters.of(
                 EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
         InputStream ddiInputStream = this.getClass().getClassLoader().getResourceAsStream(
                 "functional/ddi/ddi-m5o3qhu0.xml"); // DDI with non-collected column within a dynamic table
         // When + then
-        DDIToLunatic ddiToLunatic = new DDIToLunatic();
-        assertDoesNotThrow(() -> ddiToLunatic.transform(ddiInputStream, enoParameters));
+        DDIToLunatic ddiToLunatic = DDIToLunatic.fromInputStream(ddiInputStream);
+        assertDoesNotThrow(() -> ddiToLunatic.transform(enoParameters));
     }
 
 }

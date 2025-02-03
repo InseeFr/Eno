@@ -73,8 +73,9 @@ public abstract class AbstractSequence extends EnoIdentifiableObject implements 
 
     /** Ordered list of only subsequence and question items.
      * TODO: proper oop to make a difference between subsequences/question, loops/filters and controls/declarations
-     * In DDI, this list is filled in a processing class using the 'sequenceItems' list. */
-    @Pogues("getChild()")
+     * In DDI, this list is filled in a processing class using the 'sequenceItems' list.
+     * In Pogues, for now roundabouts are filtered (we'll see how we want to manage these later). */
+    @Pogues("getChild().?[! (#this instanceof T(fr.insee.pogues.model.RoundaboutType))]")
     private final List<StructureItemReference> sequenceStructure = new ArrayList<>();
 
 }
