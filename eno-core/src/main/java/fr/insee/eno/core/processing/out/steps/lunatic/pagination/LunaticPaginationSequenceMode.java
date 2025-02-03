@@ -33,15 +33,7 @@ public class LunaticPaginationSequenceMode extends LunaticPaginationAllModes {
     public void applyLoopPaginationProperty(Loop loop) {
         if(shouldLoopBePaginated(loop)) {
             loop.setPaginatedLoop(true);
-            // Replace lines by iteration for loop which should be paginated (first child is a sequence) and min = max
-            if(loop.getLines() != null) {
-                LabelType min = loop.getLines().getMin();
-                LabelType max = loop.getLines().getMax();
-                if(min != null && max != null && min.getValue().equals(max.getValue())){
-                    loop.setIterations(loop.getLines().getMax());
-                    loop.setLines(null);
-                }
-            }
+            replaceLinesByIterationIfMinEqualsMax(loop);
             return;
         }
         loop.setPaginatedLoop(false);
@@ -60,5 +52,20 @@ public class LunaticPaginationSequenceMode extends LunaticPaginationAllModes {
         }
 
         return loopComponents.get(0).getComponentType().equals(ComponentTypeEnum.SEQUENCE);
+    }
+
+    /**
+     * Replace lines by iteration for loop which should be paginated (first child is a sequence) and min = max
+     * @param loop
+     */
+    private void replaceLinesByIterationIfMinEqualsMax(Loop loop){
+        if(loop.getLines() != null) {
+            LabelType min = loop.getLines().getMin();
+            LabelType max = loop.getLines().getMax();
+            if(min != null && max != null && min.getValue().equals(max.getValue())){
+                loop.setIterations(loop.getLines().getMax());
+                loop.setLines(null);
+            }
+        }
     }
 }
