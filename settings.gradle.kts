@@ -21,3 +21,4 @@ rootProject.name = "Eno"
 include("eno-core")
 include("eno-treatments")
 include("eno-ws")
+include("eno-fo")

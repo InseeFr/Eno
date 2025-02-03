@@ -2,6 +2,7 @@ package fr.insee.eno.core.model;
 
 import fr.insee.ddi.lifecycle33.instance.DDIInstanceType;
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.annotations.FO;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.exceptions.business.IllegalPoguesElementException;
@@ -37,6 +38,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @Context(format = Format.POGUES, type = fr.insee.pogues.model.Questionnaire.class)
 @Context(format = Format.DDI, type = DDIInstanceType.class)
 @Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.Questionnaire.class)
+@Context(format = Format.FO, type = fr.insee.eno.model.fo.Questionnaire.class)
 public class EnoQuestionnaire extends EnoIdentifiableObject {
 
     /** Name of the questionnaire model. */
@@ -54,6 +56,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     @Pogues("!getLabel().isEmpty() ? #this : null")
     @DDI("getCitation()?.getTitle()")
     @Lunatic("setLabel(#param)")
+    @FO("getPageSequence().setTitle(#param)")
     private QuestionnaireLabel label;
 
     /** Metadata that is specific to Pogues and indicates how filters are described in the questionnaire.

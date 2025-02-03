@@ -1,0 +1,6 @@
+logs/
+# Generated sources
+src/main/java/org
+src/main/java/com
+# Generated resources
+src/main/resources/org/apache/xmlbeans/*

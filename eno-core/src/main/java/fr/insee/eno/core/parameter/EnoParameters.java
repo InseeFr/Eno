@@ -162,12 +162,13 @@ public class EnoParameters {
         log.info("Parameters with context {}, out format {}, mode {}", context, outFormat, modeParameter);
         EnoParameters enoParameters = new EnoParameters();
         //
-        if (! Format.LUNATIC.equals(outFormat))
-            throw new UnsupportedOperationException("Only Lunatic out format is supported for now.");
+//        if (! Format.LUNATIC.equals(outFormat))
+//            throw new UnsupportedOperationException("Only Lunatic out format is supported for now.");
         enoParameters.setOutFormat(outFormat);
         //
         enoParameters.enoValues(context, modeParameter);
-        enoParameters.setLunaticParameters(LunaticParameters.of(context, modeParameter));
+        if(Format.LUNATIC.equals(outFormat))
+            enoParameters.setLunaticParameters(LunaticParameters.of(context, modeParameter));
         //
         return enoParameters;
     }

@@ -9,6 +9,7 @@ public enum Format {
 
     POGUES,
     DDI,
-    LUNATIC
+    LUNATIC,
+    FO
 
 }

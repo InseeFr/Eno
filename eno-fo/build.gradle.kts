@@ -8,7 +8,7 @@ plugins {
     id("jacoco")
 }
 
-description = "Eno core module that contains the logic of transformations."
+description = "Eno XSL-FO module that contains models of XslFO."
 
 // https://stackoverflow.com/a/61671513/13425151
 // https://docs.gradle.org/8.10/userguide/migrating_from_groovy_to_kotlin_dsl.html#configuring-tasks
@@ -19,19 +19,12 @@ tasks.named<Jar>("jar") {
     enabled = true
 }
 
-val ddiJavaLibVersion = "1.1.0"
 val modelMapperVersion = "3.2.2"
 
 dependencies {
-    // DDI
-    implementation("fr.insee.ddi:ddi-lifecycle:$ddiJavaLibVersion")
-    // Pogues
-    implementation(libs.pogues.model)
-    // Lunatic
-    implementation(libs.lunatic.model)
-    // fo
-    implementation(project(":eno-fo"))
 
+
+    api("org.apache.xmlbeans:xmlbeans:5.2.0")
     // Spring
     implementation("org.springframework:spring-core")
     implementation("org.springframework:spring-beans")
@@ -58,17 +51,64 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs("src/main/java")
+        }
+        resources {
+            srcDirs("src/main/resources")
+            srcDir("src/main/fo-sources")
+        }
+    }
+}
+
+
+tasks.register("generateSources", type = JavaExec::class) {
+
+    group = "build"
+    description = "Generate java sources from FOP xsd"
+    classpath = sourceSets["main"].compileClasspath
+    mainClass = "org.apache.xmlbeans.impl.tool.SchemaCompiler"
+    args(
+        "-srconly",
+        "-src",
+        sourceSets["main"].java.sourceDirectories.asPath,
+        "-d",
+        sourceSets["main"].resources.sourceDirectories.toList()[0].toPath(),
+        sourceSets["main"].resources.sourceDirectories.toList()[1].toPath()
+    )
+
+    // Ajouter des logs pour le débogage
+    doFirst {
+        println ("Source directories: ${sourceSets["main"].java.srcDirs}")
+        println ("Schema directory: ${sourceSets["main"].resources.srcDirs}")
+    }
+}
+
+tasks.named("generateSources").configure {
+    onlyIf {
+        fileTree(sourceSets["main"].resources.sourceDirectories.toList()[0]) {
+            include("**/*.xsb")
+        }.isEmpty
+    }
+}
+
+tasks.named("compileJava") {
+    dependsOn("generateSources")
+}
+
+tasks.withType<Copy> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+tasks.withType<Jar> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 tasks.named<Test>("test") {
     useJUnitPlatform()
 }
+
 tasks.named("check") {
     dependsOn(tasks.test, tasks.jacocoTestReport)
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
-        }
-    }
 }
