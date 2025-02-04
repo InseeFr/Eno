@@ -12,10 +12,10 @@ public enum Mode {
     PAPI;
 
     private static final Map<String, Mode> ddiModes = Map.of(
-            "SelfAdministeredQuestionnaire.WebBased", CAWI,
-            "SelfAdministeredQuestionnaire.Paper", PAPI,
+            "Interview.FaceToFace.CAPIorCAMI", CAPI,
             "Interview.Telephone.CATI", CATI,
-            "Interview.FaceToFace.CAPIorCAMI", CAPI);
+            "SelfAdministeredQuestionnaire.WebBased", CAWI,
+            "SelfAdministeredQuestionnaire.Paper", PAPI);
 
     public static boolean isDDIMode(String ddiMode) {
         return ddiModes.containsKey(ddiMode);
@@ -30,10 +30,10 @@ public enum Mode {
      *  as if they were instances of the Mode class. Therefore, it is necessary to perform
      *  a conversion of these modes beforehand, even though they are quite similar. */
     private static final Map<SurveyModeEnum, Mode> poguesModes = Map.of(
-            SurveyModeEnum.CATI, CATI,
             SurveyModeEnum.CAPI, CAPI,
-            SurveyModeEnum.PAPI, PAPI,
-            SurveyModeEnum.CAWI, CAWI);
+            SurveyModeEnum.CATI, CATI,
+            SurveyModeEnum.CAWI, CAWI,
+            SurveyModeEnum.PAPI, PAPI);
 
     public static Mode convertSurveyModeEnumMode(SurveyModeEnum poguesMode){
         return poguesModes.get(poguesMode);
