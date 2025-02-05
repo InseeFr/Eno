@@ -32,11 +32,7 @@ import static fr.insee.eno.ws.controller.utils.ControllerUtils.addMultipartToBod
 @RequestMapping("/questionnaire")
 @RequiredArgsConstructor
 @Slf4j
-@SuppressWarnings("unused")
 public class GenerationStandardController {
-
-    @Value("${eno.direct.pogues.lunatic}")
-    private Boolean directPoguesToLunatic;
 
     private final PoguesToDDIService poguesToDDIService;
     private final PoguesToLunaticService poguesToLunaticService;
@@ -68,17 +64,9 @@ public class GenerationStandardController {
         enoParameters.getLunaticParameters().setDsfr(dsfr);
         //
         LunaticPostProcessing lunaticPostProcessing = specificTreatmentsService.generateFrom(specificTreatment);
-
         //
-        if (Boolean.TRUE.equals(directPoguesToLunatic))
-            return ResponseUtils.okFromFileDto(poguesToLunaticService.transform(
-                    poguesFile, enoParameters, lunaticPostProcessing));
-
-        //
-        FileDto ddiFileDto = poguesToDDIService.transform(poguesFile);
-        InputStream ddiStream = new ByteArrayInputStream(ddiFileDto.getContent());
         return ResponseUtils.okFromFileDto(
-                ddiToLunaticService.transform(ddiStream, enoParameters, lunaticPostProcessing));
+                poguesToLunaticService.transform(poguesFile, enoParameters, lunaticPostProcessing));
     }
 
     @Operation(

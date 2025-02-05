@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 
 import static fr.insee.eno.ws.controller.utils.ControllerUtils.addStringToMultipartBody;
@@ -26,6 +27,7 @@ public class PoguesToDDIService {
             JSONToXMLTranslator jsonToXmlTranslator = new JSONToXMLTranslator();
             return jsonToXmlTranslator.translate(poguesJson);
         } catch (Exception e) {
+            log.error("Pogues json to xml conversion failed.");
             throw new PoguesToLunaticException(e);
         }
     }
@@ -37,14 +39,12 @@ public class PoguesToDDIService {
                 .build();
     }
 
-    public FileDto transform(MultipartFile poguesFile) {
-        String poguesXml;
-        try {
-            poguesXml = poguesJsonToXml(new String(poguesFile.getBytes()));
-        } catch (IOException e) {
-            log.error("Pogues json to xml conversion failed.");
-            throw new PoguesToLunaticException(e);
-        }
+    public FileDto transform(MultipartFile poguesFile) throws IOException {
+        String poguesXml = poguesJsonToXml(new String(poguesFile.getBytes()));
+        return sendPoguesXmlToDDIRequest(poguesXml);
+    }
+    public FileDto transform(InputStream poguesStream) throws IOException {
+        String poguesXml = poguesJsonToXml(new String(poguesStream.readAllBytes()));
         return sendPoguesXmlToDDIRequest(poguesXml);
     }
 
