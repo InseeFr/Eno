@@ -38,8 +38,9 @@ class DDIToLunaticServiceTest {
         //
         DDIToLunaticService ddiToLunaticService = new DDIToLunaticService();
         FileDto result = ddiToLunaticService.transform(
-                        this.getClass().getClassLoader().getResourceAsStream("non-regression/ddi-"+questionnaireId+".xml"),
-                        EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+                this.getClass().getClassLoader().getResourceAsStream("non-regression/ddi-"+questionnaireId+".xml"),
+                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC),
+                null);
         //
         assertNotNull(result);
         assertNotNull(result.getContent());
@@ -85,8 +86,9 @@ class DDIToLunaticServiceTest {
         //
         DDIToLunaticService ddiToLunaticService = new DDIToLunaticService();
         FileDto result = ddiToLunaticService.transform(
-                        this.getClass().getClassLoader().getResourceAsStream("non-regression/group-processing/ddi-lhpz68wp.xml"),
-                        EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+                this.getClass().getClassLoader().getResourceAsStream("non-regression/group-processing/ddi-lhpz68wp.xml"),
+                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC),
+                lunaticPostProcessing);
 
         //
         assertNotNull(result);
