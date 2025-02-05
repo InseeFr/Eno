@@ -5,7 +5,6 @@ import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.treatments.LunaticPostProcessing;
 import fr.insee.eno.ws.controller.utils.ResponseUtils;
-import fr.insee.eno.ws.dto.FileDto;
 import fr.insee.eno.ws.exception.*;
 import fr.insee.eno.ws.legacy.parameters.CaptureEnum;
 import fr.insee.eno.ws.service.*;
@@ -13,7 +12,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.MultipartBodyBuilder;
@@ -21,9 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import static fr.insee.eno.ws.controller.utils.ControllerUtils.addMultipartToBody;
 
@@ -69,13 +65,17 @@ public class GenerationStandardController {
                 poguesToLunaticService.transform(poguesFile, enoParameters, lunaticPostProcessing));
     }
 
+    /**
+     * @deprecated Some features are not fully described in DDI. The Pogues to Lunatic endpoint should be used instead.
+     * */
     @Operation(
             summary = "[Eno Java service] Lunatic questionnaire generation from DDI.",
-            description = "**This endpoint uses the 'Java' version of Eno.** " +
+            description = "**This endpoint is deprecated: use the `pogues-2-lunatic` endpoint.** " +
                     "Generation a Lunatic questionnaire from the given DDI with standard parameters, " +
                     "in function of context and mode. An optional specific treatment `json` file can be added.")
     @PostMapping(value = "{context}/lunatic-json/{mode}",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Deprecated(since = "3.33.0")
     public ResponseEntity<byte[]> generateLunatic(
             @RequestPart(value="in") MultipartFile ddiFile,
             @RequestPart(value="specificTreatment", required = false) MultipartFile specificTreatment,
