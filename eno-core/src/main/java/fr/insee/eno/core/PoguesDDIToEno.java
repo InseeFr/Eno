@@ -43,7 +43,7 @@ public class PoguesDDIToEno implements InToEno {
      * @deprecated For this class, the old transform method is not implemented.
      */
     @Override
-    @Deprecated(since = "3.23.0", forRemoval = true)
+    @Deprecated(since = "3.33.0", forRemoval = true)
     public EnoQuestionnaire transform(InputStream inputStream, EnoParameters enoParameters) throws ParsingException {
         throw new UnsupportedOperationException("Use the other transform method.");
     }

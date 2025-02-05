@@ -6,7 +6,6 @@ import fr.insee.eno.treatments.LunaticPostProcessing;
 import fr.insee.eno.ws.controller.utils.ResponseUtils;
 import fr.insee.eno.ws.exception.DDIToLunaticException;
 import fr.insee.eno.ws.exception.EnoControllerException;
-import fr.insee.eno.ws.exception.EnoRedirectionException;
 import fr.insee.eno.ws.service.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,9 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import static fr.insee.eno.ws.controller.utils.ControllerUtils.addMultipartToBody;
 
@@ -33,7 +30,6 @@ import static fr.insee.eno.ws.controller.utils.ControllerUtils.addMultipartToBod
 @RequestMapping("/questionnaire")
 @RequiredArgsConstructor
 @Slf4j
-@SuppressWarnings("unused")
 public class GenerationCustomController {
 
 	@Value("${eno.direct.pogues.lunatic}")
@@ -63,27 +59,22 @@ public class GenerationCustomController {
 		EnoParameters enoParameters = parameterService.parse(parametersFile);
 		LunaticPostProcessing lunaticPostProcessing = specificTreatmentsService.generateFrom(specificTreatment);
 
-		if (Boolean.TRUE.equals(directPoguesToLunatic))
-			return ResponseUtils.okFromFileDto(poguesToLunaticService.transform(
-					poguesFile, enoParameters, lunaticPostProcessing));
-
-		byte[] ddiContent = poguesToDDIService.transform(poguesFile).getContent();
-		if (ddiContent == null)
-			throw new EnoRedirectionException("Result of the Pogues to DDI transformation is null.");
-
-		InputStream ddiStream = new ByteArrayInputStream(ddiContent);
 		return ResponseUtils.okFromFileDto(
-				ddiToLunaticService.transform(ddiStream, enoParameters, lunaticPostProcessing));
+				poguesToLunaticService.transform(poguesFile, enoParameters, lunaticPostProcessing));
 	}
 
+	/**
+	 * @deprecated Some features are not fully described in DDI. The Pogues to Lunatic endpoint should be used instead.
+	 * */
 	@Operation(
 			summary = "[Eno Java service] Lunatic questionnaire generation from DDI.",
-			description= "**This endpoint uses the 'Java' version of Eno.** " +
+			description= "**This endpoint is deprecated: use the `pogues-2-lunatic` endpoint.** " +
 					"Generation a Lunatic questionnaire from the given DDI, using a custom parameters `json` file " +
 					"_(required)_ and a specific treatment `json` file _(optional)_. " +
 					"You can get a parameters file by using the endpoint `/parameters/java/{context}/LUNATIC/{mode}`")
 	@PostMapping(value = "ddi-2-lunatic-json",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@Deprecated(since = "3.33.0")
 	public ResponseEntity<byte[]> generateLunaticCustomParams(
 			@RequestPart(value="in") MultipartFile ddiFile,
 			@RequestPart(value="params") MultipartFile parametersFile,
