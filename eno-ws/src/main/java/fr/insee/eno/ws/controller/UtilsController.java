@@ -1,9 +1,11 @@
 package fr.insee.eno.ws.controller;
 
-import fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils;
+import fr.insee.eno.ws.controller.utils.ResponseUtils;
 import fr.insee.eno.ws.exception.EnoControllerException;
+import fr.insee.eno.ws.service.EnoXmlClient;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,20 +15,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URI;
 
-import static fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils.addMultipartToBody;
+import static fr.insee.eno.ws.controller.utils.ControllerUtils.addMultipartToBody;
 
 @Tag(name = "Utils")
 @RestController
 @RequestMapping("/utils")
+@RequiredArgsConstructor
 @Slf4j
 @SuppressWarnings("unused")
 public class UtilsController {
 
-    private final EnoXmlControllerUtils xmlControllerUtils;
-
-    public UtilsController(EnoXmlControllerUtils xmlControllerUtils) {
-        this.xmlControllerUtils = xmlControllerUtils;
-    }
+    private final EnoXmlClient enoXmlClient;
 
     /**
      * Converts a DDI 3.2 file to a DDI 3.3 file.
@@ -41,14 +40,14 @@ public class UtilsController {
     @PostMapping(value = "ddi32-2-ddi33",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Deprecated(since = "3.24.0")
-    public ResponseEntity<String> convertDDI32ToDDI33(
+    public ResponseEntity<byte[]> convertDDI32ToDDI33(
             @RequestPart(value="in") MultipartFile in) throws EnoControllerException {
         //
         MultipartBodyBuilder multipartBodyBuilder = new MultipartBodyBuilder();
         addMultipartToBody(multipartBodyBuilder, in, "in");
         //
-        URI uri = xmlControllerUtils.newUriBuilder().path("utils/ddi32-2-ddi33").build().toUri();
-        return xmlControllerUtils.sendPostRequest(uri, multipartBodyBuilder, "ddi33.xml");
+        URI uri = enoXmlClient.newUriBuilder().path("utils/ddi32-2-ddi33").build().toUri();
+        return ResponseUtils.okFromFileDto(enoXmlClient.sendPostRequest(uri, multipartBodyBuilder));
     }
 
     /**
@@ -66,11 +65,11 @@ public class UtilsController {
     public ResponseEntity<String> convertXpathToVTL(
             @RequestParam(value="xpath") String xpath) {
         log.info("Sending Xpath expression to Eno legacy service: {}", xpath);
-        URI uri = xmlControllerUtils.newUriBuilder()
+        URI uri = enoXmlClient.newUriBuilder()
                 .path("/utils/xpath-2-vtl")
                 .queryParam("xpath", xpath)
                 .build().toUri();
-        ResponseEntity<String> response = xmlControllerUtils.sendPostRequest(uri);
+        ResponseEntity<String> response = enoXmlClient.sendPostRequest(uri);
         log.info("VTL expression received: {}", response.getBody());
         return response;
     }
