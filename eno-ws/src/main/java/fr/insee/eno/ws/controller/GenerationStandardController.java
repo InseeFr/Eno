@@ -3,15 +3,15 @@ package fr.insee.eno.ws.controller;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.eno.ws.controller.utils.EnoJavaControllerUtils;
-import fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils;
+import fr.insee.eno.treatments.LunaticPostProcessing;
+import fr.insee.eno.ws.controller.utils.ResponseUtils;
+import fr.insee.eno.ws.dto.FileDto;
 import fr.insee.eno.ws.exception.*;
 import fr.insee.eno.ws.legacy.parameters.CaptureEnum;
-import fr.insee.eno.ws.legacy.parameters.OutFormat;
-import fr.insee.eno.ws.service.DDIToLunaticService;
-import fr.insee.eno.ws.service.PoguesToLunaticService;
+import fr.insee.eno.ws.service.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -21,15 +21,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.net.URI;
+import java.io.InputStream;
 
-import static fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils.addMultipartToBody;
-import static fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils.questionnaireFilename;
+import static fr.insee.eno.ws.controller.utils.ControllerUtils.addMultipartToBody;
 
 @Tag(name = "Generation of questionnaire (standard parameters)")
 @Controller
 @RequestMapping("/questionnaire")
+@RequiredArgsConstructor
 @Slf4j
 @SuppressWarnings("unused")
 public class GenerationStandardController {
@@ -37,24 +38,13 @@ public class GenerationStandardController {
     @Value("${eno.direct.pogues.lunatic}")
     private Boolean directPoguesToLunatic;
 
-    private final DDIToLunaticService ddiToLunaticService;
+    private final PoguesToDDIService poguesToDDIService;
     private final PoguesToLunaticService poguesToLunaticService;
-    private final GenerationPoguesController generationPoguesController;
-    private final EnoJavaControllerUtils javaControllerUtils;
-    private final EnoXmlControllerUtils xmlControllerUtils;
-
-    public GenerationStandardController(
-            DDIToLunaticService ddiToLunaticService,
-            PoguesToLunaticService poguesToLunaticService,
-            GenerationPoguesController generationPoguesController,
-            EnoJavaControllerUtils javaControllerUtils,
-            EnoXmlControllerUtils xmlControllerUtils) {
-        this.ddiToLunaticService = ddiToLunaticService;
-        this.poguesToLunaticService = poguesToLunaticService;
-        this.generationPoguesController = generationPoguesController;
-        this.javaControllerUtils = javaControllerUtils;
-        this.xmlControllerUtils = xmlControllerUtils;
-    }
+    private final DDIToLunaticService ddiToLunaticService;
+    private final SpecificTreatmentsService specificTreatmentsService;
+    private final DDIToXformsService ddiToXformsService;
+    private final DDIToFOService ddiToFOService;
+    private final DDIToFODTService ddiToFODTService;
 
     @Operation(
             summary = "Lunatic questionnaire generation from Pogues.",
@@ -62,8 +52,8 @@ public class GenerationStandardController {
                     "parameters, in function of context and mode. An optional specific treatment `json` file can be " +
                     "added.")
     @PostMapping(value = "pogues-2-lunatic/{context}/{mode}",
-            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> generateLunaticFromPogues(
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<byte[]> generateLunaticFromPogues(
             @RequestPart(value="in") MultipartFile poguesFile,
             @RequestPart(value="specificTreatment", required = false) MultipartFile specificTreatment,
             @PathVariable Context context,
@@ -76,17 +66,19 @@ public class GenerationStandardController {
         //
         EnoParameters enoParameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
         enoParameters.getLunaticParameters().setDsfr(dsfr);
+        //
+        LunaticPostProcessing lunaticPostProcessing = specificTreatmentsService.generateFrom(specificTreatment);
 
         //
         if (Boolean.TRUE.equals(directPoguesToLunatic))
-            return javaControllerUtils.transformToLunatic(
-                    poguesFile, enoParameters, specificTreatment, poguesToLunaticService);
+            return ResponseUtils.okFromFileDto(poguesToLunaticService.transform(
+                    poguesFile, enoParameters, lunaticPostProcessing));
 
         //
-        String ddiContent = generationPoguesController.generateDDIQuestionnaire(poguesFile).getBody();
-        if (ddiContent == null)
-            throw new EnoRedirectionException("Result of the Pogues to DDI transformation is null.");
-        return javaControllerUtils.transformToLunatic(ddiContent, enoParameters, specificTreatment, ddiToLunaticService);
+        FileDto ddiFileDto = poguesToDDIService.transform(poguesFile);
+        InputStream ddiStream = new ByteArrayInputStream(ddiFileDto.getContent());
+        return ResponseUtils.okFromFileDto(
+                ddiToLunaticService.transform(ddiStream, enoParameters, lunaticPostProcessing));
     }
 
     @Operation(
@@ -96,7 +88,7 @@ public class GenerationStandardController {
                     "in function of context and mode. An optional specific treatment `json` file can be added.")
     @PostMapping(value = "{context}/lunatic-json/{mode}",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> generateLunatic(
+    public ResponseEntity<byte[]> generateLunatic(
             @RequestPart(value="in") MultipartFile ddiFile,
             @RequestPart(value="specificTreatment", required = false) MultipartFile specificTreatment,
             @PathVariable Context context,
@@ -110,7 +102,10 @@ public class GenerationStandardController {
         EnoParameters enoParameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
         enoParameters.getLunaticParameters().setDsfr(dsfr);
         //
-        return javaControllerUtils.transformToLunatic(ddiFile, enoParameters, specificTreatment, ddiToLunaticService);
+        LunaticPostProcessing lunaticPostProcessing = specificTreatmentsService.generateFrom(specificTreatment);
+        //
+        return ResponseUtils.okFromFileDto(
+                ddiToLunaticService.transform(ddiFile, enoParameters, lunaticPostProcessing));
     }
 
     @Operation(
@@ -145,11 +140,7 @@ public class GenerationStandardController {
         if (specificTreatment != null)
             addMultipartToBody(multipartBodyBuilder, specificTreatment, "specificTreatment");
         //
-        URI uri = xmlControllerUtils.newUriBuilder()
-                .path("/questionnaire/{context}/xforms")
-                .queryParam("multi-model", multiModel)
-                .build(context);
-        return xmlControllerUtils.sendPostRequestByte(uri, multipartBodyBuilder);
+        return ResponseUtils.okFromFileDto(ddiToXformsService.transform(multipartBodyBuilder, context, multiModel));
     }
 
     @Operation(
@@ -185,13 +176,8 @@ public class GenerationStandardController {
         if (specificTreatment != null)
             addMultipartToBody(multipartBodyBuilder, specificTreatment, "specificTreatment");
         //
-        URI uri = xmlControllerUtils.newUriBuilder()
-                .path("/questionnaire/{context}/fo")
-                .queryParam("Format-column", nbColumn)
-                .queryParam("Capture", capture)
-                .queryParam("multi-model", multiModel)
-                .build(context);
-        return xmlControllerUtils.sendPostRequestByte(uri, multipartBodyBuilder);
+        return ResponseUtils.okFromFileDto(
+                ddiToFOService.transform(multipartBodyBuilder, context, nbColumn, capture, multiModel));
     }
 
     @Operation(
@@ -208,8 +194,7 @@ public class GenerationStandardController {
         MultipartBodyBuilder multipartBodyBuilder = new MultipartBodyBuilder();
         addMultipartToBody(multipartBodyBuilder, in, "in");
         //
-        URI uri = xmlControllerUtils.newUriBuilder().path("/questionnaire/{context}/fodt").build(context);
-        return xmlControllerUtils.sendPostRequestByte(uri, multipartBodyBuilder);
+        return ResponseUtils.okFromFileDto(ddiToFODTService.transform(multipartBodyBuilder, context));
     }
 
 }

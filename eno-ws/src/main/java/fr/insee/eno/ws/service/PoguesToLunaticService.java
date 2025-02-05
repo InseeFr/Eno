@@ -4,7 +4,6 @@ import fr.insee.eno.core.PoguesToLunatic;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.ws.exception.PoguesToLunaticException;
 import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.pogues.conversion.JSONToXMLTranslator;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
@@ -22,15 +21,6 @@ public class PoguesToLunaticService extends LunaticGenerationService {
     @Override
     void handleException(Exception e) {
         throw new PoguesToLunaticException(e);
-    }
-
-    public String poguesJsonToXml(String poguesJson) {
-        try {
-            JSONToXMLTranslator jsonToXmlTranslator = new JSONToXMLTranslator();
-            return jsonToXmlTranslator.translate(poguesJson);
-        } catch (Exception e) {
-            throw new PoguesToLunaticException(e);
-        }
     }
 
 }
