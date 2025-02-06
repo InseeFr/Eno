@@ -25,31 +25,7 @@ public abstract class LunaticGenerationService {
      * Transform given input stream to a Lunatic questionnaire.
      * @param inputStream Input stream, e.g. of a DDI or Pogues questionnaire.
      * @param enoParameters Eno parameters object.
-     * @return String Lunatic questionnaire.
-     */
-    public final FileDto transform(InputStream inputStream, EnoParameters enoParameters) {
-        try {
-            Questionnaire lunaticQuestionnaire = mainTransformation(inputStream, enoParameters);
-            lunaticQuestionnaire.setEnoCoreVersion(enoVersion);
-            lunaticQuestionnaire.setLunaticModelVersion(lunaticModelVersion);
-            return FileDto.builder()
-                    .name(LUNATIC_JSON_FILE_NAME)
-                    .content(LunaticSerializer.serializeToJson(lunaticQuestionnaire).getBytes())
-                    .build();
-        } catch (Exception e) {
-            handleException(e);
-            return null;
-        }
-    }
-    public final FileDto transform(MultipartFile inputFile, EnoParameters enoParameters) throws IOException {
-        return transform(inputFile.getInputStream(), enoParameters);
-    }
-
-    /**
-     * Transform given input stream to a Lunatic questionnaire.
-     * @param inputStream Input stream, e.g. of a DDI or Pogues questionnaire.
-     * @param enoParameters Eno parameters object.
-     * @param lunaticPostProcessing Specific treatments to be applied.
+     * @param lunaticPostProcessing Specific treatments to be applied. Can be null.
      * @return String Lunatic questionnaire.
      */
     public FileDto transform(InputStream inputStream, EnoParameters enoParameters, LunaticPostProcessing lunaticPostProcessing) {
