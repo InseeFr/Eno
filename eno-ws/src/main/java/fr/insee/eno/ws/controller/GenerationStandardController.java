@@ -30,7 +30,6 @@ import static fr.insee.eno.ws.controller.utils.ControllerUtils.addMultipartToBod
 @Slf4j
 public class GenerationStandardController {
 
-    private final PoguesToDDIService poguesToDDIService;
     private final PoguesToLunaticService poguesToLunaticService;
     private final DDIToLunaticService ddiToLunaticService;
     private final SpecificTreatmentsService specificTreatmentsService;
@@ -44,7 +43,7 @@ public class GenerationStandardController {
                     "parameters, in function of context and mode. An optional specific treatment `json` file can be " +
                     "added.")
     @PostMapping(value = "pogues-2-lunatic/{context}/{mode}",
-            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<byte[]> generateLunaticFromPogues(
             @RequestPart(value="in") MultipartFile poguesFile,
             @RequestPart(value="specificTreatment", required = false) MultipartFile specificTreatment,

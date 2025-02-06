@@ -35,7 +35,6 @@ public class GenerationCustomController {
 	@Value("${eno.direct.pogues.lunatic}")
 	private Boolean directPoguesToLunatic;
 
-	private final PoguesToDDIService poguesToDDIService;
 	private final PoguesToLunaticService poguesToLunaticService;
 	private final DDIToLunaticService ddiToLunaticService;
 	private final DDIToXformsService ddiToXformsService;
