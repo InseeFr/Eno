@@ -28,6 +28,9 @@ public class SpecificTreatmentsService {
 
     public LunaticPostProcessing generateFrom(MultipartFile specificTreatmentsFile)
             throws EnoControllerException, IOException {
+        if (specificTreatmentsFile == null)
+            return null;
+
         validatePostProcessingFile(specificTreatmentsFile);
 
         LunaticPostProcessing lunaticPostProcessings = new LunaticPostProcessing();
