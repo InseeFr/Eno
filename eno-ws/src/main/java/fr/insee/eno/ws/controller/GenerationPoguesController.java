@@ -27,11 +27,9 @@ import static fr.insee.eno.ws.controller.utils.ControllerUtils.addMultipartToBod
 @RequestMapping("/questionnaire")
 @RequiredArgsConstructor
 @Slf4j
-@SuppressWarnings("unused")
 public class GenerationPoguesController {
 
     private final PoguesToDDIService poguesToDDIService;
-    private final PoguesToLunaticService poguesToLunaticService;
 
     @Operation(
             summary = "[Eno Xml service] DDI Generation from Pogues xml questionnaire.",

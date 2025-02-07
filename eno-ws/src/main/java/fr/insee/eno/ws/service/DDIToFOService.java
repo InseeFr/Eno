@@ -17,7 +17,7 @@ public class DDIToFOService {
 
     public FileDto transform(
             MultipartBodyBuilder multipartBodyBuilder, EnoParameters.Context context,
-            int numberOfColumns, CaptureEnum captureMode, boolean multiModel) {
+            Integer numberOfColumns, CaptureEnum captureMode, boolean multiModel) {
         URI uri = enoXmlClient.newUriBuilder()
                 .path("/questionnaire/{context}/fo")
                 .queryParam("Format-column", numberOfColumns)
