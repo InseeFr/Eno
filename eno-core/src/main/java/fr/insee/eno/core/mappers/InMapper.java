@@ -113,7 +113,7 @@ public abstract class InMapper extends Mapper {
 
             // Complex types
             else if (EnoObject.class.isAssignableFrom(classType)) {
-                complexTypeMapping(inputObject, modelContextType, beanWrapper, propertyName, expression, classType, debug);
+                complexTypeMapping(inputObject, modelContextType, beanWrapper, propertyDescriptor, expression, debug);
             }
 
             // Collections
@@ -152,8 +152,9 @@ public abstract class InMapper extends Mapper {
                     propertyDescription(propertyName, modelContextType.getSimpleName()));
     }
 
-    private void complexTypeMapping(Object inputObject, Class<?> modelContextType, BeanWrapper beanWrapper, String propertyName, Expression expression, Class<?> classType, boolean debug) {
+    private void complexTypeMapping(Object inputObject, Class<?> modelContextType, BeanWrapper beanWrapper, PropertyDescriptor propertyDescriptor, Expression expression, boolean debug) {
         // Get the input object from annotation expression
+        String propertyName = propertyDescriptor.getName();
         Object inputObject2 = spelEngine.evaluate(expression, inputObject, modelContextType, propertyName);
         // It is allowed to have a null input object on complex type properties
         if (inputObject2 == null) {
@@ -163,7 +164,7 @@ public abstract class InMapper extends Mapper {
             return;
         }
         // Instantiate the model target object
-        EnoObject enoObject2 = convert(inputObject2, classType);
+        EnoObject enoObject2 = getEnoModelObject(beanWrapper.getWrappedInstance(), propertyDescriptor, inputObject);
         // Attach it to the current object
         beanWrapper.setPropertyValue(propertyName, enoObject2);
         if (debug)
@@ -193,11 +194,13 @@ public abstract class InMapper extends Mapper {
         // Else
         int collectionSize = inputCollection.size();
         // Get the Eno model collection
-        Collection<Object> modelCollection = readCollection(propertyDescriptor, enoObject);
-        if (! inputCollection.isEmpty())
-            modelCollection.clear(); // added for the case when two inputs are used (Pogues + DDI)
+        List<Object> modelCollection = readList(propertyDescriptor, enoObject);
+        boolean initiallyEmpty = modelCollection.isEmpty();
         // Get the content type of the model collection
         Class<?> modelTargetType = typeDescriptor.getResolvableType().getGeneric(0).getRawClass();
+        // If the model collection is not empty, it should have the same length as the input collection
+        if (!initiallyEmpty && modelCollection.size() != collectionSize)
+            throw new IllegalStateException("hmm");
         // Collection of simple types
         if (isSimpleType(modelTargetType)) {
             modelCollection.addAll(inputCollection);
@@ -208,12 +211,14 @@ public abstract class InMapper extends Mapper {
         // Collection of complex types
         else if (EnoObject.class.isAssignableFrom(modelTargetType)) {
             // Iterate on the input collection
-            for (Object inputObject2 : inputCollection) {
+            for (int i = 0; i < inputCollection.size(); i ++) {
+                Object inputObject2 = inputCollection.get(i);
                 if (debug)
                     log.debug("Iterating on {} {} objects {}", collectionSize, format,
                             propertyDescription(propertyName, modelContextType.getSimpleName()));
                 // Instantiate an Eno object per input object and add it in the model collection
-                EnoObject enoObject2 = convert(inputObject2, modelTargetType);
+                // If Eno model objects are already instantiated, simply get them
+                EnoObject enoObject2 = initiallyEmpty ? convert(inputObject2, modelTargetType) : (EnoObject) modelCollection.get(i);
                 // Add the created instance in the model collection
                 modelCollection.add(enoObject2);
                 // Recursive call on these instances
@@ -226,10 +231,31 @@ public abstract class InMapper extends Mapper {
         }
     }
 
-    private EnoObject convert(Object ddiObject, Class<?> enoTargetType) {
+    private EnoObject getEnoModelObject(Object enoParentObject, PropertyDescriptor propertyDescriptor, Object inObject) {
+        assert enoParentObject instanceof EnoObject; // check but no need to cast
+        Object propertyObject;
+        try {
+            propertyObject = propertyDescriptor.getReadMethod().invoke(enoParentObject);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw new MappingException(
+                    String.format("Unable to call get method of property '%s' in class '%s'",
+                            propertyDescriptor.getName(), enoParentObject.getClass().getSimpleName()),
+                    e);
+        }
+        // If the Eno property object is null, create a new instance by converting the input object
+        if (propertyObject == null)
+            return convert(inObject, propertyDescriptor.getPropertyType());
+        // Otherwise return this object
+        if (! (propertyObject instanceof EnoObject enoObject2))
+            throw new IllegalArgumentException(
+                    String.format("Property '%s' of class '%s' is not an Eno object.",
+                            propertyDescriptor.getName(), enoParentObject.getClass().getSimpleName()));
+        return enoObject2;
+    }
+    private EnoObject convert(Object inObject, Class<?> enoTargetType) {
         // If the Eno type is abstract call the converter
         if (Modifier.isAbstract(enoTargetType.getModifiers()))
-            return inConverter.convertToEno(ddiObject, enoTargetType);
+            return inConverter.convertToEno(inObject, enoTargetType);
         // Else, call class constructor
         return callConstructor(enoTargetType);
     }
