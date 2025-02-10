@@ -1769,7 +1769,7 @@
       <text:p>enopogues:get-related-response</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>//pogues:Response[pogues:CollectedVariableReference = current()/@id]</text:p>
+      <text:p>//pogues:Response[pogues:CollectedVariableReference = current()/@id]|//pogues:ArbitraryResponse[pogues:CollectedVariableReference = current()/@id]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>with-tag</text:p>
