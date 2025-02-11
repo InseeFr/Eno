@@ -37,32 +37,45 @@ public class CalculatedExpression extends EnoObject {
         return res;
     }
 
-    public static List<String> extractVariables(String expression) {
-        List<String> variables = new ArrayList<>();
+    public static Set<BindingReference> extractBindingReferences(String expression) {
+        Set<BindingReference> references = new HashSet<>();
         Pattern pattern = Pattern.compile("\\$(\\w+)\\$");
         Matcher matcher = pattern.matcher(expression);
 
         while (matcher.find()) {
-            variables.add(matcher.group(1));
+            String variableName = matcher.group(1);
+            references.add(new BindingReference(null, variableName));
         }
 
-        return variables;
+        return references;
     }
 
-    /** Expression. */
-    @Pogues("getValue()")
+    public static String removeSurroundingDollarSigns(String expression) {
+        return expression.replaceAll("\\$(\\w+)\\$", "$1");
+    }
+
+    /**
+     * Expression.
+     */
+    @Pogues("T(fr.insee.eno.core.model.calculated.CalculatedExpression).removeSurroundingDollarSigns(" +
+            "getValue())")
     @DDI("getCommandContent()")
     @Lunatic("setValue(#param)")
     private String value;
 
-    /** For now, Lunatic type in label objects does not come from metadata, but is hardcoded here in Eno.
-     * See labels documentation. */
+    /**
+     * For now, Lunatic type in label objects does not come from metadata, but is hardcoded here in Eno.
+     * See labels documentation.
+     */
     @Lunatic("setType(T(fr.insee.lunatic.model.flat.LabelTypeEnum).fromValue(#param))")
     String type = LabelTypeEnum.VTL.value();
 
-    /** In DDI, the expression contains variable references instead of variables names.
-     * This list contains the references of these variables. */
+    /**
+     * In DDI, the expression contains variable references instead of variables names.
+     * This list contains the references of these variables.
+     */
+    @Pogues("T(fr.insee.eno.core.model.calculated.CalculatedExpression).extractBindingReferences(" +
+            "getValue())")
     @DDI("getInParameterList()")
     private Set<BindingReference> bindingReferences = new HashSet<>();
-
 }

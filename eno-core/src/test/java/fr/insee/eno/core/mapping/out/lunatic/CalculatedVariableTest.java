@@ -1,7 +1,7 @@
 package fr.insee.eno.core.mapping.out.lunatic;
 
 import fr.insee.eno.core.DDIToLunatic;
-import fr.insee.eno.core.exceptions.business.DDIParsingException;
+import fr.insee.eno.core.PoguesToLunatic;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
@@ -14,11 +14,12 @@ import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
 import fr.insee.lunatic.model.flat.variable.VariableTypeEnum;
 import org.junit.jupiter.api.*;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatedVariableTest {
 
@@ -90,13 +91,28 @@ class CalculatedVariableTest {
         private Map<String, CalculatedVariableType> filterResultVariables;
 
         @BeforeAll
-        void mapQuestionnaire() throws DDIParsingException {
-            Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
-                    CalculatedVariableTest.class.getClassLoader().getResourceAsStream(
-                            "integration/ddi/ddi-variables.xml"),
-                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
-            //
+        void mapQuestionnaire() throws Exception {
             filterResultVariables = new HashMap<>();
+
+            loadCalculatedVariables("integration/ddi/ddi-variables.xml", true);
+            loadCalculatedVariables("integration/pogues/pogues-variables.json", false);
+        }
+
+        private void loadCalculatedVariables(String resourcePath, boolean isDDI) throws Exception {
+            InputStream resourceStream = CalculatedVariableTest.class.getClassLoader().getResourceAsStream(resourcePath);
+            if (resourceStream == null) {
+                throw new FileNotFoundException("Resource not found: " + resourcePath);
+            }
+
+            Questionnaire lunaticQuestionnaire;
+            if (isDDI) {
+                lunaticQuestionnaire = new DDIToLunatic().transform(resourceStream,
+                        EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+            } else {
+                lunaticQuestionnaire = new PoguesToLunatic().transform(resourceStream,
+                        EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+            }
+
             lunaticQuestionnaire.getVariables().stream()
                     .filter(CalculatedVariableType.class::isInstance)
                     .map(CalculatedVariableType.class::cast)
@@ -104,7 +120,7 @@ class CalculatedVariableTest {
                     .forEach(variableType -> filterResultVariables.put(variableType.getName(), variableType));
         }
 
-        @Test
+            @Test
         void variablesCount() {
             assertEquals(9, filterResultVariables.size());
         }
@@ -183,24 +199,33 @@ class CalculatedVariableTest {
     class IntegrationTest2 {
 
         @Test
-        void oneCalculated_testAllProperties() throws DDIParsingException {
-            // Given + When
-            Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
-                    CalculatedVariableTest.class.getClassLoader().getResourceAsStream(
-                            "integration/ddi/ddi-declarations.xml"),
+        void oneCalculated_testAllProperties() throws Exception {
+            testAllProperties("integration/ddi/ddi-declarations.xml", true);
+            testAllProperties("integration/pogues/pogues-declarations.json", false);
+        }
+
+        private void testAllProperties(String resourcePath, boolean isDDI) throws Exception {
+            InputStream resourceStream = CalculatedVariableTest.class.getClassLoader().getResourceAsStream(resourcePath);
+            assertNotNull(resourceStream, "Resource not found: " + resourcePath);
+
+            Questionnaire lunaticQuestionnaire = isDDI
+                    ? new DDIToLunatic().transform(resourceStream,
+                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC))
+                    : new PoguesToLunatic().transform(resourceStream,
                     EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
-            // Then
-            Optional<CalculatedVariableType> lunaticVariable = lunaticQuestionnaire.getVariables().stream()
+
+            Optional<CalculatedVariableType> lunaticVariable1 = lunaticQuestionnaire.getVariables().stream()
                     .filter(variableType -> "CALCULATED1".equals(variableType.getName()))
                     .map(CalculatedVariableType.class::cast)
                     .findAny();
-            assertTrue(lunaticVariable.isPresent());
-            assertEquals(VariableTypeEnum.CALCULATED, lunaticVariable.get().getVariableType());
-            assertEquals("CALCULATED1", lunaticVariable.get().getName());
-            assertEquals("cast(Q3, integer) + 5", lunaticVariable.get().getExpression().getValue());
-            assertEquals(LabelTypeEnum.VTL, lunaticVariable.get().getExpression().getType());
-            assertEquals(1, lunaticVariable.get().getBindingDependencies().size());
-            assertEquals("Q3", lunaticVariable.get().getBindingDependencies().getFirst());
+
+            assertTrue(lunaticVariable1.isPresent());
+            assertEquals(VariableTypeEnum.CALCULATED, lunaticVariable1.get().getVariableType());
+            assertEquals("CALCULATED1", lunaticVariable1.get().getName());
+            assertEquals("cast(Q3, integer) + 5", lunaticVariable1.get().getExpression().getValue());
+            assertEquals(LabelTypeEnum.VTL, lunaticVariable1.get().getExpression().getType());
+            assertEquals(1, lunaticVariable1.get().getBindingDependencies().size());
+            assertEquals("Q3", lunaticVariable1.get().getBindingDependencies().getFirst());
         }
 
     }
