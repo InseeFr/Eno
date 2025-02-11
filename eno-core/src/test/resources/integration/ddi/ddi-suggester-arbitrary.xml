@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DDIInstance xmlns="ddi:instance:3_3"
+             xmlns:a="ddi:archive:3_3"
+             xmlns:d="ddi:datacollection:3_3"
+             xmlns:g="ddi:group:3_3"
+             xmlns:l="ddi:logicalproduct:3_3"
+             xmlns:r="ddi:reusable:3_3"
+             xmlns:s="ddi:studyunit:3_3"
+             xmlns:xhtml="http://www.w3.org/1999/xhtml"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
+             isMaintainable="true"><!--Eno version : 2.12.3-SNAPSHOT.3. Generation date : 10/02/2025 - 18:46:25-->
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-m6uw1hiz</r:ID>
+   <r:Version>1</r:Version>
+   <r:Citation>
+      <r:Title>
+         <r:String>Eno - Suggester with arbitrary</r:String>
+      </r:Title>
+   </r:Citation>
+   <g:ResourcePackage isMaintainable="true" versionDate="2018-01-25+01:00">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>RessourcePackage-m6uw1hiz</r:ID>
+      <r:Version>1</r:Version>
+      <d:InterviewerInstructionScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>InterviewerInstructionScheme-m6uw1hiz</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">A définir</r:Content>
+         </r:Label>
+      </d:InterviewerInstructionScheme>
+      <d:ControlConstructScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>ControlConstructScheme-m6uw1hiz</r:ID>
+         <r:Version>1</r:Version>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>Sequence-m6uw1hiz</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Eno - Suggester with arbitrary</r:Content>
+            </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">template</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m6uwl291</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m6uxuwt1</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>m6uwl291</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">S1</r:String>
+            </d:ConstructName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">"Sequence"</r:Content>
+            </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m6uw3z0d-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m6uwmbzo-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>m6uxuwt1</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">END</r:String>
+            </d:ConstructName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">"End"</r:Content>
+            </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
+         </d:Sequence>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>m6uw3z0d-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">COUNTRY</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m6uw3z0d</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>m6uwmbzo-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">ACTIVITY</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m6uwmbzo</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+      </d:ControlConstructScheme>
+      <d:QuestionScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>QuestionScheme-m6uw1hiz</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">A définir</r:Content>
+         </r:Label>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>m6uw3z0d</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">COUNTRY</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m6uw3z0d-QOP-m6uw9cka</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">COUNTRY</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>m6uw3z0d-RDOP-m6uw9cka</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>m6uw3z0d-QOP-m6uw9cka</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Suggester question (country)"</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:CodeDomain>
+               <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">suggester</r:GenericOutputFormat>
+               <r:CodeListReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>L_PAYS-1-2-0</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>CodeList</r:TypeOfObject>
+               </r:CodeListReference>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>m6uw3z0d-RDOP-m6uw9cka</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:CodeRepresentation>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>L_PAYS-1-2-0</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                  </r:CodeRepresentation>
+               </r:OutParameter>
+               <r:ResponseCardinality maximumResponses="1"/>
+            </d:CodeDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>m6uwmbzo</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">ACTIVITY</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m6uwmbzo-QOP-m6uw7qbe</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">ACTIVITY</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>m6uwmbzo-RDOP-m6uw7qbe</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>m6uwmbzo-QOP-m6uw7qbe</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Suggester question (activity) with arbitrary response"</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:CodeDomain>
+               <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">suggester</r:GenericOutputFormat>
+               <r:CodeListReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>L_ACTIVITES-2-0-0</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>CodeList</r:TypeOfObject>
+               </r:CodeListReference>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>m6uwmbzo-RDOP-m6uw7qbe</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:CodeRepresentation>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>L_ACTIVITES-2-0-0</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                  </r:CodeRepresentation>
+               </r:OutParameter>
+               <r:ResponseCardinality maximumResponses="1"/>
+            </d:CodeDomain>
+            <d:TextDomain maxLength="249">
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID/>
+                  <r:Version>1</r:Version>
+                  <r:TextRepresentation maxLength="249"/>
+               </r:OutParameter>
+            </d:TextDomain>
+         </d:QuestionItem>
+      </d:QuestionScheme>
+      <l:CategoryScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>CategoryScheme-m6uw1hiz</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">A définir</r:Content>
+         </r:Label>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR"/>
+            </r:Label>
+         </l:Category>
+      </l:CategoryScheme>
+      <l:CodeListScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>ENO_SUGGESTER_ARBITRARY-CLS</r:ID>
+         <r:Version>1</r:Version>
+         <l:CodeListSchemeName>
+            <r:String xml:lang="en-IE">ENO_SUGGESTER_ARBITRARY</r:String>
+         </l:CodeListSchemeName>
+         <l:CodeList>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>L_PAYS-1-2-0</r:ID>
+            <r:Version>1</r:Version>
+            <r:UserAttributePair>
+               <r:AttributeKey>SuggesterConfiguration</r:AttributeKey>
+               <r:AttributeValue><![CDATA[<fields xmlns="http://xml.insee.fr/schema/applis/lunatic-h">
+                     <name>label</name>
+                     <rules>[\w]+</rules>
+                     <language>French</language>
+                     <min>3</min>
+                     <stemmer>false</stemmer>
+                  </fields>
+                  <queryParser xmlns="http://xml.insee.fr/schema/applis/lunatic-h">
+                     <type>tokenized</type>
+                     <params>
+                        <language>French</language>
+                        <min>3</min>
+                        <pattern>[\w.]+</pattern>
+                        <stemmer>false</stemmer>
+                     </params>
+                  </queryParser>
+                  <version xmlns="http://xml.insee.fr/schema/applis/lunatic-h">1</version>]]></r:AttributeValue>
+            </r:UserAttributePair>
+            <l:CodeListName>
+               <r:String xml:lang="fr-FR">L_PAYS-1-2-0</r:String>
+            </l:CodeListName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Pays</r:Content>
+            </r:Label>
+            <r:CodeListReference isExternal="true">
+               <r:URN>urn:ddi:fr.insee:l_pays-1-2-0:1</r:URN>
+               <r:TypeOfObject>CodeList</r:TypeOfObject>
+            </r:CodeListReference>
+            <l:HierarchyType>Regular</l:HierarchyType>
+            <l:Level levelNumber="1">
+               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>
+         </l:CodeList>
+         <l:CodeList>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>L_ACTIVITES-2-0-0</r:ID>
+            <r:Version>1</r:Version>
+            <r:UserAttributePair>
+               <r:AttributeKey>SuggesterConfiguration</r:AttributeKey>
+               <r:AttributeValue><![CDATA[<fields xmlns="http://xml.insee.fr/schema/applis/lunatic-h">
+                     <name>label</name>
+                     <rules>[\w]+</rules>
+                     <language>French</language>
+                     <min>3</min>
+                     <stemmer>false</stemmer>
+                     <synonyms>
+                        <source>EHPAD</source>
+                        <target>EPHAD</target>
+                        <target>HEPAD</target>
+                        <target>EPAD</target>
+                        <target>EPAHD</target>
+                        <target>EPADH</target>
+                     </synonyms>
+                     <synonyms>
+                        <source>URSSAF</source>
+                        <target>URSAF</target>
+                        <target>URSAFF</target>
+                     </synonyms>
+                     <synonyms>
+                        <source>ascenseurs</source>
+                        <target>ASCENCEUR</target>
+                        <target>ASSENCEUR</target>
+                        <target>ACSENCEUR</target>
+                     </synonyms>
+                     <synonyms>
+                        <source>joaillerie</source>
+                        <target>JOAILLIER</target>
+                     </synonyms>
+                     <synonyms>
+                        <source>alimentaire</source>
+                        <target>ALIMANTAIRE</target>
+                     </synonyms>
+                     <synonyms>
+                        <source>briqueterie</source>
+                        <target>BRIQUETTERIE</target>
+                     </synonyms>
+                     <synonyms>
+                        <source>prestations</source>
+                        <target>PRESTATAIRE</target>
+                     </synonyms>
+                     <synonyms>
+                        <source>alimentaires</source>
+                        <target>ALIMANTAIRES</target>
+                     </synonyms>
+                     <synonyms>
+                        <source>echafaudages</source>
+                        <target>ECHAFFAUDAGE</target>
+                        <target>ECHAFFAUDEUR</target>
+                     </synonyms>
+                     <synonyms>
+                        <source>plaquisterie</source>
+                        <target>PLACO</target>
+                        <target>PLACOPLATRE</target>
+                     </synonyms>
+                     <synonyms>
+                        <source>pneumatiques</source>
+                        <target>PNEUS</target>
+                     </synonyms>
+                     <synonyms>
+                        <source>agroalimentaire</source>
+                        <target>AGGROALIMANTAIRE</target>
+                        <target>AGROALIMANTAIRE</target>
+                     </synonyms>
+                     <synonyms>
+                        <source>agroalimentaires</source>
+                        <target>AGGROALIMANTAIRES</target>
+                        <target>AGROALIMENTAIRES</target>
+                     </synonyms>
+                  </fields>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">a</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">au</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">dans</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">de</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">des</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">du</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">en</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">et</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">la</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">le</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">ou</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">sur</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">d</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">l</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">aux</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">dans</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">un</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">une</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">pour</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">avec</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">chez</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">par</stopWords>
+                  <stopWords xmlns="http://xml.insee.fr/schema/applis/lunatic-h">les</stopWords>
+                  <queryParser xmlns="http://xml.insee.fr/schema/applis/lunatic-h">
+                     <type>tokenized</type>
+                     <params>
+                        <language>French</language>
+                        <min>3</min>
+                        <pattern>[\w.]+</pattern>
+                        <stemmer>false</stemmer>
+                     </params>
+                  </queryParser>
+                  <version xmlns="http://xml.insee.fr/schema/applis/lunatic-h">1</version>]]></r:AttributeValue>
+            </r:UserAttributePair>
+            <l:CodeListName>
+               <r:String xml:lang="fr-FR">L_ACTIVITES-2-0-0</r:String>
+            </l:CodeListName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Activités</r:Content>
+            </r:Label>
+            <r:CodeListReference isExternal="true">
+               <r:URN>urn:ddi:fr.insee:l_activites-2-0-0:1</r:URN>
+               <r:TypeOfObject>CodeList</r:TypeOfObject>
+            </r:CodeListReference>
+            <l:HierarchyType>Regular</l:HierarchyType>
+            <l:Level levelNumber="1">
+               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>
+         </l:CodeList>
+         <l:CodeList>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-COMMUN-CL-Booleen</r:ID>
+            <r:Version>1</r:Version>
+            <l:CodeListName>
+               <r:String xml:lang="fr-FR">Booleen</r:String>
+            </l:CodeListName>
+            <l:HierarchyType>Regular</l:HierarchyType>
+            <l:Level levelNumber="1">
+               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+               <r:Version>1</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>1</r:Value>
+            </l:Code>
+         </l:CodeList>
+      </l:CodeListScheme>
+      <l:VariableScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>VariableScheme-m6uw1hiz</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="fr-FR">Variable Scheme for the survey</r:Content>
+         </r:Label>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>m6uxkrge</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">COUNTRY</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">COUNTRY label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m6uw3z0d-QOP-m6uw9cka</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m6uw3z0d</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>L_PAYS-1-2-0</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>m6uxo8wf</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">ACTIVITY</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">ACTIVITY label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m6uwmbzo-QOP-m6uw7qbe</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m6uwmbzo</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>L_ACTIVITES-2-0-0</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>m6uxax4o</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">ACTIVITY_ARBITRARY</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">ACTIVITY_ARBITRARY label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m6uwmbzo-QOP-m6uxal31</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m6uwmbzo</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="249"/>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:VariableGroup>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-Instrument-m6uw1hiz-vg</r:ID>
+            <r:Version>1</r:Version>
+            <r:BasedOnObject>
+               <r:BasedOnReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>Instrument-m6uw1hiz</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Instrument</r:TypeOfObject>
+               </r:BasedOnReference>
+            </r:BasedOnObject>
+            <l:TypeOfVariableGroup>Questionnaire</l:TypeOfVariableGroup>
+            <l:VariableGroupName>
+               <r:String>ENO_SUGGESTER_ARBITRARY</r:String>
+            </l:VariableGroupName>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m6uxkrge</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m6uxo8wf</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m6uxax4o</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+         </l:VariableGroup>
+      </l:VariableScheme>
+      <d:ProcessingInstructionScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-PIS-1</r:ID>
+         <r:Version>1</r:Version>
+         <d:ProcessingInstructionSchemeName>
+            <r:String xml:lang="en-IE">SIMPSONS</r:String>
+         </d:ProcessingInstructionSchemeName>
+         <r:Label>
+            <r:Content xml:lang="en-IE">Processing instructions of the Simpsons questionnaire</r:Content>
+         </r:Label>
+      </d:ProcessingInstructionScheme>
+      <r:ManagedRepresentationScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-MRS</r:ID>
+         <r:Version>1</r:Version>
+         <r:Label>
+            <r:Content xml:lang="en-IE">Liste de formats numériques et dates de
+                            l'enquête</r:Content>
+            <r:Content xml:lang="en-IE">Numeric and DateTime list for the survey</r:Content>
+         </r:Label>
+      </r:ManagedRepresentationScheme>
+   </g:ResourcePackage>
+   <s:StudyUnit>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>StudyUnit-m6uw1hiz</r:ID>
+      <r:Version>1</r:Version>
+      <r:ExPostEvaluation/>
+      <d:DataCollection>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>DataCollection-m6uw1hiz</r:ID>
+         <r:Version>1</r:Version>
+         <r:QuestionSchemeReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>QuestionScheme-m6uw1hiz</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>QuestionScheme</r:TypeOfObject>
+         </r:QuestionSchemeReference>
+         <r:ControlConstructSchemeReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>ControlConstructScheme-m6uw1hiz</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>ControlConstructScheme</r:TypeOfObject>
+         </r:ControlConstructSchemeReference>
+         <r:InterviewerInstructionSchemeReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>InterviewerInstructionScheme-m6uw1hiz</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>InterviewerInstructionScheme</r:TypeOfObject>
+         </r:InterviewerInstructionSchemeReference>
+         <d:InstrumentScheme xml:lang="fr-FR">
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>InstrumentScheme-m6uw1hiz</r:ID>
+            <r:Version>1</r:Version>
+            <d:Instrument xmlns:c="ddi:conceptualcomponent:3_3"
+                          xmlns:cm="ddi:comparative:3_3"
+                          xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
+                          xmlns:pr="ddi:ddiprofile:3_3">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>Instrument-m6uw1hiz</r:ID>
+               <r:Version>1</r:Version>
+               <d:InstrumentName>
+                  <r:String>ENO_SUGGESTER_ARBITRARY</r:String>
+               </d:InstrumentName>
+               <r:Label>
+                  <r:Content xml:lang="fr-FR">Eno - Suggester with arbitrary questionnaire</r:Content>
+               </r:Label>
+               <d:TypeOfInstrument>A définir</d:TypeOfInstrument>
+               <d:ControlConstructReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>Sequence-m6uw1hiz</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Sequence</r:TypeOfObject>
+               </d:ControlConstructReference>
+            </d:Instrument>
+         </d:InstrumentScheme>
+      </d:DataCollection>
+   </s:StudyUnit>
+</DDIInstance>

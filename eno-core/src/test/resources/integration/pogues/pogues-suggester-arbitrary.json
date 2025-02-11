@@ -1,0 +1,369 @@
+{
+  "id": "m6uw1hiz",
+  "Name": "ENO_SUGGESTER_ARBITRARY",
+  "Child": [
+    {
+      "id": "m6uwl291",
+      "Name": "S1",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m6uw3z0d",
+          "Name": "COUNTRY",
+          "type": "QuestionType",
+          "Label": [
+            "\"Suggester question (country)\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m6uw9cka",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 1,
+                "visualizationHint": "SUGGESTER",
+                "allowArbitraryResponse": false
+              },
+              "mandatory": false,
+              "CodeListReference": "L_PAYS-1-2-0",
+              "CollectedVariableReference": "m6uxkrge"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SINGLE_CHOICE",
+          "ClarificationQuestion": []
+        },
+        {
+          "id": "m6uwmbzo",
+          "Name": "ACTIVITY",
+          "type": "QuestionType",
+          "Label": [
+            "\"Suggester question (activity) with arbitrary response\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m6uw7qbe",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 1,
+                "visualizationHint": "SUGGESTER",
+                "allowArbitraryResponse": true
+              },
+              "mandatory": false,
+              "CodeListReference": "L_ACTIVITES-2-0-0",
+              "CollectedVariableReference": "m6uxo8wf"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SINGLE_CHOICE",
+          "ArbitraryResponse": {
+            "id": "m6uxal31",
+            "Datatype": {
+              "type": "TextDatatypeType",
+              "typeName": "TEXT",
+              "MaxLength": 249
+            },
+            "mandatory": false,
+            "CollectedVariableReference": "m6uxax4o"
+          },
+          "ClarificationQuestion": []
+        }
+      ],
+      "Label": [
+        "\"Sequence\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "m6uxuwt1",
+      "Name": "END",
+      "type": "SequenceType",
+      "Child": [],
+      "Label": [
+        "\"End\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "idendquest",
+      "Name": "QUESTIONNAIRE_END",
+      "type": "SequenceType",
+      "Child": [],
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    }
+  ],
+  "Label": [
+    "Eno - Suggester with arbitrary"
+  ],
+  "final": false,
+  "owner": "ENO-INTEGRATION-TESTS",
+  "agency": "fr.insee",
+  "CodeLists": {
+    "CodeList": [
+      {
+        "id": "L_PAYS-1-2-0",
+        "Urn": "urn:ddi:fr.insee:l_pays-1-2-0:1",
+        "Name": "L_PAYS-1-2-0",
+        "Label": "Pays",
+        "SuggesterParameters": {
+          "fields": [
+            {
+              "min": 3,
+              "name": "label",
+              "rules": [
+                "[\\w]+"
+              ],
+              "stemmer": false,
+              "language": "French"
+            }
+          ],
+          "version": 1,
+          "queryParser": {
+            "type": "tokenized",
+            "params": {
+              "min": 3,
+              "pattern": "[\\w.]+",
+              "stemmer": false,
+              "language": "French"
+            }
+          }
+        }
+      },
+      {
+        "id": "L_ACTIVITES-2-0-0",
+        "Urn": "urn:ddi:fr.insee:l_activites-2-0-0:1",
+        "Name": "L_ACTIVITES-2-0-0",
+        "Label": "Activités",
+        "SuggesterParameters": {
+          "fields": [
+            {
+              "min": 3,
+              "name": "label",
+              "rules": [
+                "[\\w]+"
+              ],
+              "stemmer": false,
+              "language": "French",
+              "synonyms": {
+                "EHPAD": [
+                  "EPHAD",
+                  "HEPAD",
+                  "EPAD",
+                  "EPAHD",
+                  "EPADH"
+                ],
+                "URSSAF": [
+                  "URSAF",
+                  "URSAFF"
+                ],
+                "ascenseurs": [
+                  "ASCENCEUR",
+                  "ASSENCEUR",
+                  "ACSENCEUR"
+                ],
+                "joaillerie": [
+                  "JOAILLIER"
+                ],
+                "alimentaire": [
+                  "ALIMANTAIRE"
+                ],
+                "briqueterie": [
+                  "BRIQUETTERIE"
+                ],
+                "prestations": [
+                  "PRESTATAIRE"
+                ],
+                "alimentaires": [
+                  "ALIMANTAIRES"
+                ],
+                "echafaudages": [
+                  "ECHAFFAUDAGE",
+                  "ECHAFFAUDEUR"
+                ],
+                "plaquisterie": [
+                  "PLACO",
+                  "PLACOPLATRE"
+                ],
+                "pneumatiques": [
+                  "PNEUS"
+                ],
+                "agroalimentaire": [
+                  "AGGROALIMANTAIRE",
+                  "AGROALIMANTAIRE"
+                ],
+                "agroalimentaires": [
+                  "AGGROALIMANTAIRES",
+                  "AGROALIMENTAIRES"
+                ]
+              }
+            }
+          ],
+          "version": 1,
+          "stopWords": [
+            "a",
+            "au",
+            "dans",
+            "de",
+            "des",
+            "du",
+            "en",
+            "et",
+            "la",
+            "le",
+            "ou",
+            "sur",
+            "d",
+            "l",
+            "aux",
+            "dans",
+            "un",
+            "une",
+            "pour",
+            "avec",
+            "chez",
+            "par",
+            "les"
+          ],
+          "queryParser": {
+            "type": "tokenized",
+            "params": {
+              "min": 3,
+              "pattern": "[\\w.]+",
+              "stemmer": false,
+              "language": "French"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "m6uxkrge",
+        "Name": "COUNTRY",
+        "type": "CollectedVariableType",
+        "Label": "COUNTRY label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 1
+        },
+        "CodeListReference": "L_PAYS-1-2-0"
+      },
+      {
+        "id": "m6uxo8wf",
+        "Name": "ACTIVITY",
+        "type": "CollectedVariableType",
+        "Label": "ACTIVITY label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 1
+        },
+        "CodeListReference": "L_ACTIVITES-2-0-0"
+      },
+      {
+        "id": "m6uxax4o",
+        "Name": "ACTIVITY_ARBITRARY",
+        "type": "CollectedVariableType",
+        "Label": "ACTIVITY_ARBITRARY label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "flowLogic": "FILTER",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "FlowControl": [],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "m6uwp0c8",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "m6uwl291",
+        "m6uw3z0d",
+        "m6uwmbzo",
+        "idendquest",
+        "m6uxuwt1"
+      ]
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "s2106-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2106-dc"
+    }
+  ],
+  "lastUpdatedDate": "Fri Feb 07 2025 16:29:40 GMT+0100 (heure normale d’Europe centrale)",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": []
+}
