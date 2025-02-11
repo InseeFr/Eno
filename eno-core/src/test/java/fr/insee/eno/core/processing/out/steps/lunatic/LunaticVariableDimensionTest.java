@@ -1,7 +1,9 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.DDIToLunatic;
+import fr.insee.eno.core.PoguesToLunatic;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
+import fr.insee.eno.core.exceptions.business.ParsingException;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.Questionnaire;
@@ -21,12 +23,17 @@ class LunaticVariableDimensionTest {
     private Map<String, VariableType> lunaticVariables;
 
     @BeforeAll
-    void integrationTestFromDDI() throws DDIParsingException {
+//    void integrationTestFromDDI() throws DDIParsingException {
         //
-        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-dimensions.xml"),
-                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
-        //
+//        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
+//                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-dimensions.xml"),
+//                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+        void integrationTestFromDDI() throws ParsingException {
+            //
+            Questionnaire lunaticQuestionnaire = new PoguesToLunatic().transform(
+                    this.getClass().getClassLoader().getResourceAsStream("integration/pogues/pogues-dimensions.json"),
+                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+//        //
         lunaticVariables = new HashMap<>();
         lunaticQuestionnaire.getVariables().forEach(variableType ->
                 lunaticVariables.put(variableType.getName(), variableType));
