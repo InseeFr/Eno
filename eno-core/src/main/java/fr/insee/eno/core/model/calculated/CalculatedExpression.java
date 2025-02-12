@@ -37,6 +37,9 @@ public class CalculatedExpression extends EnoObject {
         return res;
     }
 
+    /** The method "extractBindingReferences" allows, from the expression of a "CalculatedVariable",
+     * to construct the associated "BindingReferences". Note that the identifier (a concept derived from DDI)
+     * is null for each reference. */
     public static Set<BindingReference> extractBindingReferences(String expression) {
         Set<BindingReference> references = new HashSet<>();
         Pattern pattern = Pattern.compile("\\$(\\w+)\\$");
@@ -50,6 +53,8 @@ public class CalculatedExpression extends EnoObject {
         return references;
     }
 
+    /** The removeSurroundingDollarSigns method removes the "$" symbols surrounding the reference to
+     * a variable in the expression of the "CalculatedVariable". */
     public static String removeSurroundingDollarSigns(String expression) {
         return expression.replaceAll("\\$(\\w+)\\$", "$1");
     }

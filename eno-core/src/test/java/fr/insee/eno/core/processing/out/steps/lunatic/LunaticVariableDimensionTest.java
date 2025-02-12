@@ -23,17 +23,12 @@ class LunaticVariableDimensionTest {
     private Map<String, VariableType> lunaticVariables;
 
     @BeforeAll
-//    void integrationTestFromDDI() throws DDIParsingException {
-        //
-//        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
-//                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-dimensions.xml"),
-//                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
-        void integrationTestFromDDI() throws ParsingException {
-            //
-            Questionnaire lunaticQuestionnaire = new PoguesToLunatic().transform(
-                    this.getClass().getClassLoader().getResourceAsStream("integration/pogues/pogues-dimensions.json"),
-                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
-//        //
+    void integrationTestFromDDI() throws DDIParsingException {
+
+        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-dimensions.xml"),
+                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+
         lunaticVariables = new HashMap<>();
         lunaticQuestionnaire.getVariables().forEach(variableType ->
                 lunaticVariables.put(variableType.getName(), variableType));
