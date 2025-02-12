@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Questionnaire xmlns="http://xml.insee.fr/schema/applis/pogues" id="m721awnn" genericName="QUESTIONNAIRE" agency="fr.insee" final="false" flowLogic="FILTER" formulasLanguage="VTL" lastUpdatedDate="Wed Feb 12 2025 17:02:54 GMT+0100 (heure normale d’Europe centrale)" owner="ENO-INTEGRATION-TESTS">
+   <Name>ENO_SUGGESTER_ARBITRARY</Name>
+   <Label>Eno - Suggester with arbitrary inside Loop</Label>
+   <TargetMode>CAPI</TargetMode>
+   <TargetMode>CATI</TargetMode>
+   <TargetMode>CAWI</TargetMode>
+   <TargetMode>PAPI</TargetMode>
+   <Child id="m6uwl291" depth="1" genericName="MODULE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SequenceType">
+      <Name>S1</Name>
+      <Label>&quot;Sequence&quot;</Label>
+      <TargetMode>CAPI</TargetMode>
+      <TargetMode>CATI</TargetMode>
+      <TargetMode>CAWI</TargetMode>
+      <TargetMode>PAPI</TargetMode>
+      <Child id="m6uw3z0d" questionType="SINGLE_CHOICE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="QuestionType">
+         <Name>COUNTRY</Name>
+         <Label>&quot;Suggester question (country)&quot;</Label>
+         <TargetMode>CAPI</TargetMode>
+         <TargetMode>CATI</TargetMode>
+         <TargetMode>CAWI</TargetMode>
+         <TargetMode>PAPI</TargetMode>
+         <Response id="m6uw9cka" mandatory="false">
+            <CodeListReference>L_PAYS-1-2-0</CodeListReference>
+            <Datatype typeName="TEXT" visualizationHint="SUGGESTER" allowArbitraryResponse="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+               <MaxLength>1</MaxLength>
+               <Pattern></Pattern>
+            </Datatype>
+            <CollectedVariableReference>m6uxkrge</CollectedVariableReference>
+         </Response>
+      </Child>
+      <Child id="m6uwmbzo" questionType="SINGLE_CHOICE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="QuestionType">
+         <Name>ACTIVITY</Name>
+         <Label>&quot;Suggester question (activity) with arbitrary response&quot;</Label>
+         <TargetMode>CAPI</TargetMode>
+         <TargetMode>CATI</TargetMode>
+         <TargetMode>CAWI</TargetMode>
+         <TargetMode>PAPI</TargetMode>
+         <Response id="m6uw7qbe" mandatory="false">
+            <CodeListReference>L_ACTIVITES-2-0-0</CodeListReference>
+            <Datatype typeName="TEXT" visualizationHint="SUGGESTER" allowArbitraryResponse="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+               <MaxLength>1</MaxLength>
+               <Pattern></Pattern>
+            </Datatype>
+            <CollectedVariableReference>m6uxo8wf</CollectedVariableReference>
+         </Response>
+         <ArbitraryResponse id="m723w1qs" mandatory="false">
+            <Datatype typeName="TEXT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+               <MaxLength>249</MaxLength>
+            </Datatype>
+            <CollectedVariableReference>m6uxax4o</CollectedVariableReference>
+         </ArbitraryResponse>
+      </Child>
+   </Child>
+   <Child id="m721c9xk" depth="1" genericName="MODULE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SequenceType">
+      <Name>HABITANT</Name>
+      <Label>&quot;Habitant&quot;</Label>
+      <TargetMode>CAPI</TargetMode>
+      <TargetMode>CATI</TargetMode>
+      <TargetMode>CAWI</TargetMode>
+      <TargetMode>PAPI</TargetMode>
+      <Child id="m721kwx3" questionType="TABLE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="QuestionType">
+         <Name>LISTEDESHA</Name>
+         <Label>&quot;Liste des habitants&quot;</Label>
+         <TargetMode>CAPI</TargetMode>
+         <TargetMode>CATI</TargetMode>
+         <TargetMode>CAWI</TargetMode>
+         <TargetMode>PAPI</TargetMode>
+         <Response id="m7233p81">
+            <Datatype typeName="TEXT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+               <MaxLength>249</MaxLength>
+               <Pattern></Pattern>
+            </Datatype>
+            <CollectedVariableReference>m72170v3</CollectedVariableReference>
+         </Response>
+         <ResponseStructure>
+            <Dimension dimensionType="PRIMARY" dynamic="DYNAMIC_LENGTH">
+               <MinLines>1</MinLines>
+               <MaxLines>2</MaxLines>
+            </Dimension>
+            <Dimension dimensionType="MEASURE">
+               <Label>&quot;Prénom ?&quot;</Label>
+            </Dimension>
+            <Mapping>
+               <MappingSource>m7233p81</MappingSource>
+               <MappingTarget>1 1</MappingTarget>
+            </Mapping>
+         </ResponseStructure>
+      </Child>
+   </Child>
+   <Child id="m721eos5" depth="1" genericName="MODULE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SequenceType">
+      <Name>BONJOURPRE</Name>
+      <Label>&quot;Bonjour &quot; || PRENOM</Label>
+      <TargetMode>CAPI</TargetMode>
+      <TargetMode>CATI</TargetMode>
+      <TargetMode>CAWI</TargetMode>
+      <TargetMode>PAPI</TargetMode>
+      <Child id="m721l8n5" questionType="SINGLE_CHOICE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="QuestionType">
+         <Name>ACTIVITY_LOOP</Name>
+         <Label>&quot;LOOP Suggester question (activity) with arbitrary response&quot;</Label>
+         <TargetMode>CAPI</TargetMode>
+         <TargetMode>CATI</TargetMode>
+         <TargetMode>CAWI</TargetMode>
+         <TargetMode>PAPI</TargetMode>
+         <Response id="m7214v7q" mandatory="false">
+            <CodeListReference>L_ACTIVITES-2-0-0</CodeListReference>
+            <Datatype typeName="TEXT" visualizationHint="SUGGESTER" allowArbitraryResponse="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+               <MaxLength>1</MaxLength>
+               <Pattern></Pattern>
+            </Datatype>
+            <CollectedVariableReference>m721avl2</CollectedVariableReference>
+         </Response>
+         <ArbitraryResponse id="m723qv7z" mandatory="false">
+            <Datatype typeName="TEXT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+               <MaxLength>249</MaxLength>
+            </Datatype>
+            <CollectedVariableReference>m721dstu</CollectedVariableReference>
+         </ArbitraryResponse>
+      </Child>
+      <Child id="m722vlnr" questionType="SIMPLE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="QuestionType">
+         <Name>AGE</Name>
+         <Label>&quot;Quel âge as-tu ?&quot;</Label>
+         <TargetMode>CAPI</TargetMode>
+         <TargetMode>CATI</TargetMode>
+         <TargetMode>CAWI</TargetMode>
+         <TargetMode>PAPI</TargetMode>
+         <Response id="m722uy45" mandatory="false">
+            <Datatype typeName="TEXT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+               <MaxLength>249</MaxLength>
+               <Pattern></Pattern>
+            </Datatype>
+            <CollectedVariableReference>m722wgb3</CollectedVariableReference>
+         </Response>
+      </Child>
+   </Child>
+   <Child id="m6uxuwt1" depth="1" genericName="MODULE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SequenceType">
+      <Name>END</Name>
+      <Label>&quot;End&quot;</Label>
+      <TargetMode>CAPI</TargetMode>
+      <TargetMode>CATI</TargetMode>
+      <TargetMode>CAWI</TargetMode>
+      <TargetMode>PAPI</TargetMode>
+      <Child id="m723ou03" questionType="SIMPLE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="QuestionType">
+         <Name>Q_END</Name>
+         <Label>&quot;Q_END&quot;</Label>
+         <TargetMode>CAPI</TargetMode>
+         <TargetMode>CATI</TargetMode>
+         <TargetMode>CAWI</TargetMode>
+         <TargetMode>PAPI</TargetMode>
+         <Response id="m723hzer" mandatory="false">
+            <Datatype typeName="TEXT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+               <MaxLength>249</MaxLength>
+               <Pattern></Pattern>
+            </Datatype>
+            <CollectedVariableReference>m723babu</CollectedVariableReference>
+         </Response>
+      </Child>
+   </Child>
+   <Child id="idendquest" depth="1" genericName="MODULE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SequenceType">
+      <Name>QUESTIONNAIRE_END</Name>
+      <Label>QUESTIONNAIRE_END</Label>
+      <TargetMode>CAPI</TargetMode>
+      <TargetMode>CATI</TargetMode>
+      <TargetMode>CAWI</TargetMode>
+      <TargetMode>PAPI</TargetMode>
+   </Child>
+   <DataCollection id="s2106-dc" uri="http://ddi:fr.insee:DataCollection.s2106-dc"/>
+   <ComponentGroup id="m6uwp0c8">
+      <Name>PAGE_1</Name>
+      <Label>Components for page 1</Label>
+      <MemberReference>m6uwl291</MemberReference>
+      <MemberReference>m6uw3z0d</MemberReference>
+      <MemberReference>m6uwmbzo</MemberReference>
+      <MemberReference>m721c9xk</MemberReference>
+      <MemberReference>m721kwx3</MemberReference>
+      <MemberReference>m721eos5</MemberReference>
+      <MemberReference>m721l8n5</MemberReference>
+      <MemberReference>m722vlnr</MemberReference>
+      <MemberReference>m6uxuwt1</MemberReference>
+      <MemberReference>m723ou03</MemberReference>
+      <MemberReference>idendquest</MemberReference>
+   </ComponentGroup>
+   <CodeLists>
+      <CodeList id="L_PAYS-1-2-0" Urn="urn:ddi:fr.insee:l_pays-1-2-0:1">
+         <Name>L_PAYS-1-2-0</Name>
+         <Label>Pays</Label>
+         <SuggesterParameters>
+            <fields>
+               <name>label</name>
+               <rules>[\w]+</rules>
+               <language>French</language>
+               <min>3</min>
+               <stemmer>false</stemmer>
+            </fields>
+            <queryParser>
+               <type>tokenized</type>
+               <params>
+                  <language>French</language>
+                  <min>3</min>
+                  <pattern>[\w.]+</pattern>
+                  <stemmer>false</stemmer>
+               </params>
+            </queryParser>
+            <version>1</version>
+         </SuggesterParameters>
+      </CodeList>
+      <CodeList id="L_ACTIVITES-2-0-0" Urn="urn:ddi:fr.insee:l_activites-2-0-0:1">
+         <Name>L_ACTIVITES-2-0-0</Name>
+         <Label>Activités</Label>
+         <SuggesterParameters>
+            <fields>
+               <name>label</name>
+               <rules>[\w]+</rules>
+               <language>French</language>
+               <min>3</min>
+               <stemmer>false</stemmer>
+               <synonyms>
+                  <source>EHPAD</source>
+                  <target>EPHAD</target>
+                  <target>HEPAD</target>
+                  <target>EPAD</target>
+                  <target>EPAHD</target>
+                  <target>EPADH</target>
+               </synonyms>
+               <synonyms>
+                  <source>URSSAF</source>
+                  <target>URSAF</target>
+                  <target>URSAFF</target>
+               </synonyms>
+               <synonyms>
+                  <source>ascenseurs</source>
+                  <target>ASCENCEUR</target>
+                  <target>ASSENCEUR</target>
+                  <target>ACSENCEUR</target>
+               </synonyms>
+               <synonyms>
+                  <source>joaillerie</source>
+                  <target>JOAILLIER</target>
+               </synonyms>
+               <synonyms>
+                  <source>alimentaire</source>
+                  <target>ALIMANTAIRE</target>
+               </synonyms>
+               <synonyms>
+                  <source>briqueterie</source>
+                  <target>BRIQUETTERIE</target>
+               </synonyms>
+               <synonyms>
+                  <source>prestations</source>
+                  <target>PRESTATAIRE</target>
+               </synonyms>
+               <synonyms>
+                  <source>alimentaires</source>
+                  <target>ALIMANTAIRES</target>
+               </synonyms>
+               <synonyms>
+                  <source>echafaudages</source>
+                  <target>ECHAFFAUDAGE</target>
+                  <target>ECHAFFAUDEUR</target>
+               </synonyms>
+               <synonyms>
+                  <source>plaquisterie</source>
+                  <target>PLACO</target>
+                  <target>PLACOPLATRE</target>
+               </synonyms>
+               <synonyms>
+                  <source>pneumatiques</source>
+                  <target>PNEUS</target>
+               </synonyms>
+               <synonyms>
+                  <source>agroalimentaire</source>
+                  <target>AGGROALIMANTAIRE</target>
+                  <target>AGROALIMANTAIRE</target>
+               </synonyms>
+               <synonyms>
+                  <source>agroalimentaires</source>
+                  <target>AGGROALIMANTAIRES</target>
+                  <target>AGROALIMENTAIRES</target>
+               </synonyms>
+            </fields>
+            <stopWords>a</stopWords>
+            <stopWords>au</stopWords>
+            <stopWords>dans</stopWords>
+            <stopWords>de</stopWords>
+            <stopWords>des</stopWords>
+            <stopWords>du</stopWords>
+            <stopWords>en</stopWords>
+            <stopWords>et</stopWords>
+            <stopWords>la</stopWords>
+            <stopWords>le</stopWords>
+            <stopWords>ou</stopWords>
+            <stopWords>sur</stopWords>
+            <stopWords>d</stopWords>
+            <stopWords>l</stopWords>
+            <stopWords>aux</stopWords>
+            <stopWords>dans</stopWords>
+            <stopWords>un</stopWords>
+            <stopWords>une</stopWords>
+            <stopWords>pour</stopWords>
+            <stopWords>avec</stopWords>
+            <stopWords>chez</stopWords>
+            <stopWords>par</stopWords>
+            <stopWords>les</stopWords>
+            <queryParser>
+               <type>tokenized</type>
+               <params>
+                  <language>French</language>
+                  <min>3</min>
+                  <pattern>[\w.]+</pattern>
+                  <stemmer>false</stemmer>
+               </params>
+            </queryParser>
+            <version>1</version>
+         </SuggesterParameters>
+      </CodeList>
+   </CodeLists>
+   <Variables>
+      <Variable id="m6uxkrge" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CollectedVariableType">
+         <CodeListReference>L_PAYS-1-2-0</CodeListReference>
+         <Datatype typeName="TEXT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+            <MaxLength>1</MaxLength>
+            <Pattern></Pattern>
+         </Datatype>
+         <Name>COUNTRY</Name>
+         <Label>COUNTRY label</Label>
+      </Variable>
+      <Variable id="m6uxo8wf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CollectedVariableType">
+         <CodeListReference>L_ACTIVITES-2-0-0</CodeListReference>
+         <Datatype typeName="TEXT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+            <MaxLength>1</MaxLength>
+            <Pattern></Pattern>
+         </Datatype>
+         <Name>ACTIVITY</Name>
+         <Label>ACTIVITY label</Label>
+      </Variable>
+      <Variable id="m6uxax4o" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CollectedVariableType">
+         <Datatype typeName="TEXT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+            <MaxLength>249</MaxLength>
+         </Datatype>
+         <Name>ACTIVITY_ARBITRARY</Name>
+         <Label>ACTIVITY_ARBITRARY label</Label>
+      </Variable>
+      <Variable id="m72170v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CollectedVariableType">
+         <Datatype typeName="TEXT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+            <MaxLength>249</MaxLength>
+            <Pattern></Pattern>
+         </Datatype>
+         <Name>PRENOM</Name>
+         <Label>Prénom ?</Label>
+         <Scope>m721kwx3</Scope>
+      </Variable>
+      <Variable id="m721avl2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CollectedVariableType">
+         <CodeListReference>L_ACTIVITES-2-0-0</CodeListReference>
+         <Datatype typeName="TEXT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+            <MaxLength>1</MaxLength>
+            <Pattern></Pattern>
+         </Datatype>
+         <Name>ACTIVITY_LOOP</Name>
+         <Label>ACTIVITY_LOOP label</Label>
+         <Scope>m721kwx3</Scope>
+      </Variable>
+      <Variable id="m721dstu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CollectedVariableType">
+         <Datatype typeName="TEXT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+            <MaxLength>249</MaxLength>
+         </Datatype>
+         <Name>ACTIVITY_LOOP_ARBITRARY</Name>
+         <Label>ACTIVITY_LOOP_ARBITRARY label</Label>
+         <Scope>m721kwx3</Scope>
+      </Variable>
+      <Variable id="m722wgb3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CollectedVariableType">
+         <Datatype typeName="TEXT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+            <MaxLength>249</MaxLength>
+            <Pattern></Pattern>
+         </Datatype>
+         <Name>AGE</Name>
+         <Label>AGE label</Label>
+         <Scope>m721kwx3</Scope>
+      </Variable>
+      <Variable id="m723babu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CollectedVariableType">
+         <Datatype typeName="TEXT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+            <MaxLength>249</MaxLength>
+            <Pattern></Pattern>
+         </Datatype>
+         <Name>Q_END</Name>
+         <Label>Q_END label</Label>
+      </Variable>
+   </Variables>
+   <Iterations>
+      <Iteration id="m721ydpl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="DynamicIterationType">
+         <Name>BOUCLE_PRENOM</Name>
+         <MemberReference>m721eos5</MemberReference>
+         <MemberReference>m721eos5</MemberReference>
+         <IterableReference>m721kwx3</IterableReference>
+      </Iteration>
+   </Iterations>
+</Questionnaire>
