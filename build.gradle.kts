@@ -16,7 +16,7 @@ java {
 
 allprojects {
     group = "fr.insee.eno"
-    version = "3.32.1"
+    version = "à modifier selon l'évolution/retour de la recette"
 }
 
 subprojects {
