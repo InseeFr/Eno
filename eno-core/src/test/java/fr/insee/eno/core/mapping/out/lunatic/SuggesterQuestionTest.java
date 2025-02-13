@@ -1,12 +1,19 @@
 package fr.insee.eno.core.mapping.out.lunatic;
 
 import fr.insee.ddi.lifecycle33.instance.DDIInstanceDocument;
+import fr.insee.eno.core.PoguesDDIToLunatic;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
+import fr.insee.eno.core.exceptions.business.ParsingException;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.processing.in.steps.ddi.DDIDeserializeSuggesterConfiguration;
 import fr.insee.eno.core.serialize.DDIDeserializer;
+import fr.insee.lunatic.model.flat.ArbitraryType;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.Suggester;
@@ -15,16 +22,17 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class SuggesterQuestionTest {
+
+    private final ClassLoader classLoader = this.getClass().getClassLoader();
 
     @Test
     void suggester_integrationTest() throws DDIParsingException {
         //
         DDIInstanceDocument ddiInstanceDocument = DDIDeserializer.deserialize(
-                this.getClass().getClassLoader().getResourceAsStream(
-                        "integration/ddi/ddi-suggester.xml"));
+                classLoader.getResourceAsStream("integration/ddi/ddi-suggester.xml"));
         //
         DDIMapper ddiMapper = new DDIMapper();
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
@@ -62,6 +70,27 @@ class SuggesterQuestionTest {
         Suggester suggester4 = suggesterComponents.get("lruexn64");
         assertEquals("L_DIPLOMES-1-0-0", suggester4.getStoreName());
         assertEquals("DIPLOMES", suggester4.getResponse().getName());
+    }
+
+    @Test
+    void suggesterWithArbitrary() throws ParsingException {
+        // Given + When
+        Questionnaire lunaticQuestionnaire = PoguesDDIToLunatic.fromInputStreams(
+                classLoader.getResourceAsStream("integration/pogues/pogues-suggester-arbitrary.json"),
+                classLoader.getResourceAsStream("integration/ddi/ddi-suggester-arbitrary.xml"))
+                .transform(EnoParameters.of(Context.HOUSEHOLD, ModeParameter.CAWI, Format.LUNATIC));
+        // Then
+        Suggester suggester1 = assertInstanceOf(Suggester.class, lunaticQuestionnaire.getComponents().get(1));
+        Suggester suggester2 = assertInstanceOf(Suggester.class, lunaticQuestionnaire.getComponents().get(2));
+        //
+        assertEquals("COUNTRY", suggester1.getResponse().getName());
+        assertNull(suggester1.getArbitrary());
+        //
+        ArbitraryType arbitrary = suggester2.getArbitrary();
+        assertEquals("ACTIVITY", suggester2.getResponse().getName());
+        assertEquals("ACTIVITY_ARBITRARY", arbitrary.getResponse().getName());
+        assertNull(arbitrary.getLabel());
+        assertNull(arbitrary.getInputLabel());
     }
 
 }
