@@ -7,6 +7,8 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.ComplexMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.lunatic.model.flat.CheckboxGroup;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
@@ -32,12 +34,12 @@ class MultipleChoiceQuestionTest {
     @Test
     void simpleMCQ_integrationTestFromDDI() throws DDIParsingException {
         //
-        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-mcq.xml"),
-                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-mcq.xml"))
+                .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI));
         //
         SimpleMultipleChoiceQuestion simpleMultipleChoiceQuestion = (SimpleMultipleChoiceQuestion)
-                enoQuestionnaire.getMultipleResponseQuestions().get(0);
+                enoQuestionnaire.getMultipleResponseQuestions().getFirst();
         CheckboxGroup lunaticCheckboxGroup = new CheckboxGroup();
 
         //

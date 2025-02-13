@@ -5,6 +5,8 @@ import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
 import fr.insee.lunatic.model.flat.InputNumber;
 import fr.insee.lunatic.model.flat.LabelType;
@@ -120,9 +122,9 @@ class LunaticInputNumberDescriptionTest {
     @Test
     void integrationTest() throws DDIParsingException {
         // Given
-        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-dynamic-unit.xml"),
-                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-dynamic-unit.xml"))
+                .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI));
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
         new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);

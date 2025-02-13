@@ -6,6 +6,8 @@ import fr.insee.eno.core.exceptions.business.InvalidSuggesterExpression;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticSuggesterOptionResponses.SuggesterResponseExpression;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
@@ -111,9 +113,9 @@ class LunaticSuggesterOptionResponsesTest {
     @Test
     void integrationTest() throws DDIParsingException {
         //
-        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-suggester-options.xml"),
-                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-suggester-options.xml"))
+                .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
         new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);
@@ -159,10 +161,10 @@ class LunaticSuggesterOptionResponsesTest {
     @Test
     void integrationTest_table() throws DDIParsingException {
         //
-        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
                 this.getClass().getClassLoader().getResourceAsStream(
-                        "integration/ddi/ddi-suggester-options-table.xml"),
-                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+                        "integration/ddi/ddi-suggester-options-table.xml"))
+                .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
         new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);

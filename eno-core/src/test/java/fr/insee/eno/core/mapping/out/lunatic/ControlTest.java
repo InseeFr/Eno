@@ -29,9 +29,9 @@ class ControlTest {
     void ddiToLunaticMapping() throws DDIParsingException {
         //
         Questionnaire lunaticQuestionnaire = new Questionnaire();
-        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
-                ControlTest.class.getClassLoader().getResourceAsStream("integration/ddi/ddi-controls.xml"),
-                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
+                ControlTest.class.getClassLoader().getResourceAsStream("integration/ddi/ddi-controls.xml"))
+                .transform(EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
         //
         LunaticMapper lunaticMapper = new LunaticMapper();
         lunaticMapper.mapEnoObject(enoQuestionnaire, lunaticQuestionnaire);

@@ -1,9 +1,11 @@
 package fr.insee.eno.ws.controller;
 
-import fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils;
+import fr.insee.eno.ws.controller.utils.ResponseUtils;
 import fr.insee.eno.ws.exception.EnoControllerException;
+import fr.insee.eno.ws.service.EnoXmlClient;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,20 +19,18 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URI;
 
-import static fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils.addMultipartToBody;
+import static fr.insee.eno.ws.controller.utils.ControllerUtils.addMultipartToBody;
 
 @Tag(name = "Generation with custom mapping")
 @Controller
 @RequestMapping("/questionnaire")
+@RequiredArgsConstructor
 @Slf4j
 @SuppressWarnings("unused")
 public class GenerationWithMappingController {
 
-    private final EnoXmlControllerUtils xmlControllerUtils;
-
-    public GenerationWithMappingController(EnoXmlControllerUtils xmlControllerUtils) {
-        this.xmlControllerUtils = xmlControllerUtils;
-    }
+    // No service for the endpoint of the class: direct usage of the Eno xml client
+    private final EnoXmlClient enoXmlClient;
 
     @Operation(
             summary = "[Eno Xml service] Generation of questionnaire according to parameters.",
@@ -41,7 +41,7 @@ public class GenerationWithMappingController {
                     "If the multi-model option is set to true, the output questionnaire(s) are put in a zip file.")
     @PostMapping(value = "in-2-out",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> generate(
+    public ResponseEntity<byte[]> generate(
             @RequestPart(value="in") MultipartFile in,
             @RequestPart(value="params") MultipartFile params,
             @RequestPart(value="metadata", required=false) MultipartFile metadata,
@@ -60,9 +60,8 @@ public class GenerationWithMappingController {
         if (mapping != null)
             addMultipartToBody(multipartBodyBuilder, mapping, "mapping");
         //
-        URI uri = xmlControllerUtils.newUriBuilder().path("questionnaire/in-2-out").build().toUri();
-        String outFilename = multiModel ? "questionnaires.zip" : "questionnaire.txt";
-        return xmlControllerUtils.sendPostRequest(uri, multipartBodyBuilder, outFilename);
+        URI uri = enoXmlClient.newUriBuilder().path("questionnaire/in-2-out").build().toUri();
+        return ResponseUtils.okFromFileDto(enoXmlClient.sendPostRequest(uri, multipartBodyBuilder));
     }
 
 }

@@ -35,9 +35,9 @@ class LunaticRoundaboutLoopsTest {
             parameters.setResponseTimeQuestion(false);
             parameters.setCommentSection(false);
             //
-            lunaticQuestionnaire = new DDIToLunatic().transform(
-                    this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-roundabout.xml"),
-                    parameters);
+            lunaticQuestionnaire = DDIToLunatic.fromInputStream(
+                    this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-roundabout.xml"))
+                    .transform(parameters);
             // the questionnaire should have 1 roundabout component
             List<Roundabout> roundabouts = lunaticQuestionnaire.getComponents().stream()
                     .filter(Roundabout.class::isInstance).map(Roundabout.class::cast)
@@ -122,10 +122,10 @@ class LunaticRoundaboutLoopsTest {
             parameters.setResponseTimeQuestion(false);
             parameters.setCommentSection(false);
             //
-            lunaticQuestionnaire = new DDIToLunatic().transform(
+            lunaticQuestionnaire = DDIToLunatic.fromInputStream(
                     this.getClass().getClassLoader().getResourceAsStream(
-                            "integration/ddi/ddi-roundabout-subsequence.xml"),
-                    parameters);
+                            "integration/ddi/ddi-roundabout-subsequence.xml"))
+                    .transform(parameters);
             // the questionnaire should have 1 roundabout component
             List<Roundabout> roundabouts = lunaticQuestionnaire.getComponents().stream()
                     .filter(Roundabout.class::isInstance).map(Roundabout.class::cast)
@@ -199,10 +199,10 @@ class LunaticRoundaboutLoopsTest {
             EnoParameters parameters = EnoParameters.of(
                     EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
             //
-            Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
+            Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
                     this.getClass().getClassLoader().getResourceAsStream(
-                            "integration/ddi/ddi-roundabout-controls.xml"),
-                    parameters);
+                            "integration/ddi/ddi-roundabout-controls.xml"))
+                    .transform(parameters);
             // the questionnaire should have 1 roundabout component
             List<Roundabout> roundabouts = lunaticQuestionnaire.getComponents().stream()
                     .filter(Roundabout.class::isInstance).map(Roundabout.class::cast)
@@ -265,10 +265,10 @@ class LunaticRoundaboutLoopsTest {
             EnoParameters parameters = EnoParameters.of(
                     EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
             //
-            Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
+            Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
                     this.getClass().getClassLoader().getResourceAsStream(
-                            "integration/ddi/ddi-roundabout-except.xml"),
-                    parameters);
+                            "integration/ddi/ddi-roundabout-except.xml"))
+                    .transform(parameters);
             // the questionnaire should have 1 roundabout component
             List<Roundabout> roundabouts = lunaticQuestionnaire.getComponents().stream()
                     .filter(Roundabout.class::isInstance).map(Roundabout.class::cast)

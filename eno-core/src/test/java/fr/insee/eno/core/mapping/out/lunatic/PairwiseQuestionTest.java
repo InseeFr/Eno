@@ -6,6 +6,8 @@ import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.PairwiseQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -43,9 +45,9 @@ class PairwiseQuestionTest {
     @Test
     void pairwiseMapping_integrationTest() throws DDIParsingException {
         // Given
-        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-pairwise.xml"),
-                EnoParameters.of(EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI));
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-pairwise.xml"))
+                .transform(EnoParameters.of(Context.HOUSEHOLD, ModeParameter.CAWI));
         Optional<PairwiseQuestion> enoPairwise = enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(PairwiseQuestion.class::isInstance)
                 .map(PairwiseQuestion.class::cast)

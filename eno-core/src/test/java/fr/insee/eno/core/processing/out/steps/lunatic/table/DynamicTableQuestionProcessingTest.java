@@ -5,6 +5,8 @@ import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.RosterForLoop;
@@ -21,10 +23,10 @@ class DynamicTableQuestionProcessingTest {
     @Test
     void integrationTestFromDDI() throws DDIParsingException {
         // Given
-        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
                 DynamicTableQuestionProcessingTest.class.getClassLoader().getResourceAsStream(
-                        "integration/ddi/ddi-dynamic-table.xml"),
-                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
+                        "integration/ddi/ddi-dynamic-table.xml"))
+                .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI));
         //
         Optional<DynamicTableQuestion> enoDynamicTable = enoQuestionnaire.getMultipleResponseQuestions().stream()
                 .filter(DynamicTableQuestion.class::isInstance)
@@ -54,10 +56,10 @@ class DynamicTableQuestionProcessingTest {
     @Test
     void integrationTestFromDDI_sizeExpression() throws DDIParsingException {
         // Given
-        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
                 DynamicTableQuestionProcessingTest.class.getClassLoader().getResourceAsStream(
-                        "integration/ddi/ddi-dynamic-table-size.xml"),
-                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI));
+                        "integration/ddi/ddi-dynamic-table-size.xml"))
+                .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI));
         //
         List<DynamicTableQuestion> enoDynamicTable = enoQuestionnaire.getMultipleResponseQuestions().stream()
                 .filter(DynamicTableQuestion.class::isInstance)

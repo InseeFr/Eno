@@ -1,12 +1,13 @@
 package fr.insee.eno.ws.controller;
 
-import fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils;
+import fr.insee.eno.ws.controller.utils.ResponseUtils;
+import fr.insee.eno.ws.dto.FileDto;
 import fr.insee.eno.ws.exception.EnoControllerException;
-import fr.insee.eno.ws.exception.PoguesToLunaticException;
-import fr.insee.eno.ws.legacy.parameters.OutFormat;
+import fr.insee.eno.ws.service.PoguesToDDIService;
 import fr.insee.eno.ws.service.PoguesToLunaticService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,26 +19,17 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.net.URI;
 
-import static fr.insee.eno.ws.controller.utils.EnoXmlControllerUtils.*;
+import static fr.insee.eno.ws.controller.utils.ControllerUtils.addMultipartToBody;
 
 @Tag(name = "Generation of DDI")
 @Controller
 @RequestMapping("/questionnaire")
+@RequiredArgsConstructor
 @Slf4j
-@SuppressWarnings("unused")
 public class GenerationPoguesController {
 
-    private final PoguesToLunaticService poguesToLunaticService;
-    private final EnoXmlControllerUtils xmlControllerUtils;
-
-    public GenerationPoguesController(
-            PoguesToLunaticService poguesToLunaticService,
-            EnoXmlControllerUtils xmlControllerUtils) {
-        this.poguesToLunaticService = poguesToLunaticService;
-        this.xmlControllerUtils = xmlControllerUtils;
-    }
+    private final PoguesToDDIService poguesToDDIService;
 
     @Operation(
             summary = "[Eno Xml service] DDI Generation from Pogues xml questionnaire.",
@@ -45,15 +37,13 @@ public class GenerationPoguesController {
                     "Generation of a DDI from a Pogues questionnaire (in the xml format).")
     @PostMapping(value="poguesxml-2-ddi",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> generateDDIQuestionnaireFromXml(
-            @RequestPart(value="in") MultipartFile poguesXmlFile) throws EnoControllerException {
+    public ResponseEntity<byte[]> generateDDIQuestionnaireFromXml(
+            @RequestPart(value="in") MultipartFile poguesXmlFile) throws EnoControllerException, IOException {
         //
         MultipartBodyBuilder multipartBodyBuilder = new MultipartBodyBuilder();
         addMultipartToBody(multipartBodyBuilder, poguesXmlFile, "in");
         //
-        URI uri = xmlControllerUtils.newUriBuilder().path("questionnaire/poguesxml-2-ddi").build().toUri();
-        String outFilename = questionnaireFilename(OutFormat.DDI, false);
-        return xmlControllerUtils.sendPostRequest(uri, multipartBodyBuilder, outFilename);
+        return ResponseUtils.okFromFileDto(poguesToDDIService.transformFromXml(poguesXmlFile));
     }
 
     @Operation(
@@ -62,23 +52,15 @@ public class GenerationPoguesController {
                     "Generation of a DDI from a Pogues questionnaire (in the json format).")
     @PostMapping(value="pogues-2-ddi",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> generateDDIQuestionnaire(
-            @RequestPart(value="in") MultipartFile poguesJsonFile) {
-        // Convert json to xml
-        String poguesXml;
-        try {
-            poguesXml = poguesToLunaticService.poguesJsonToXml(new String(poguesJsonFile.getBytes()));
-        } catch (IOException e) {
-            log.error("Pogues json to xml conversion failed.");
-            throw new PoguesToLunaticException(e);
-        }
-        // Attach Pogues xml content in a multipart
+    public ResponseEntity<byte[]> generateDDIQuestionnaire(
+            @RequestPart(value="in") MultipartFile poguesJsonFile) throws IOException {
+        //
+        FileDto poguesXmlFileDto = poguesToDDIService.convertPoguesFileToXml(poguesJsonFile);
+        //
         MultipartBodyBuilder multipartBodyBuilder = new MultipartBodyBuilder();
-        addStringToMultipartBody(multipartBodyBuilder, poguesXml, "pogues.xml", "in");
-        // Send request to the legacy pogues xml to ddi endpoint
-        URI uri = xmlControllerUtils.newUriBuilder().path("questionnaire/poguesxml-2-ddi").build().toUri();
-        String outFilename = questionnaireFilename(OutFormat.DDI, false);
-        return xmlControllerUtils.sendPostRequest(uri, multipartBodyBuilder, outFilename);
+        addMultipartToBody(multipartBodyBuilder, poguesXmlFileDto, "in");
+        //
+        return ResponseUtils.okFromFileDto(poguesToDDIService.transform(poguesJsonFile));
     }
 
 }

@@ -7,6 +7,7 @@ import fr.insee.eno.treatments.LunaticRegroupingSpecificTreatment;
 import fr.insee.eno.treatments.LunaticSuggesterSpecificTreatment;
 import fr.insee.eno.treatments.SpecificTreatmentsDeserializer;
 import fr.insee.eno.treatments.dto.SpecificTreatments;
+import fr.insee.eno.ws.dto.FileDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -36,11 +37,13 @@ class DDIToLunaticServiceTest {
     void nonRegression_DefaultCAWI(String questionnaireId) throws Exception {
         //
         DDIToLunaticService ddiToLunaticService = new DDIToLunaticService();
-        String result = ddiToLunaticService.transform(
-                        this.getClass().getClassLoader().getResourceAsStream("non-regression/ddi-"+questionnaireId+".xml"),
-                        EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+        FileDto result = ddiToLunaticService.transform(
+                this.getClass().getClassLoader().getResourceAsStream("non-regression/ddi-"+questionnaireId+".xml"),
+                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC),
+                null);
         //
         assertNotNull(result);
+        assertNotNull(result.getContent());
     }
 
     @Test
@@ -55,13 +58,14 @@ class DDIToLunaticServiceTest {
 
         //
         DDIToLunaticService ddiToLunaticService = new DDIToLunaticService();
-        String result = ddiToLunaticService.transform(
+        FileDto result = ddiToLunaticService.transform(
                         this.getClass().getClassLoader().getResourceAsStream("non-regression/suggester-processing/ddi-l7ugetj0.xml"),
                         EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC),
                         lunaticPostProcessing);
 
         //
         assertNotNull(result);
+        assertNotNull(result.getContent());
     }
 
     @ParameterizedTest
@@ -81,12 +85,14 @@ class DDIToLunaticServiceTest {
 
         //
         DDIToLunaticService ddiToLunaticService = new DDIToLunaticService();
-        String result = ddiToLunaticService.transform(
-                        this.getClass().getClassLoader().getResourceAsStream("non-regression/group-processing/ddi-lhpz68wp.xml"),
-                        EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+        FileDto result = ddiToLunaticService.transform(
+                this.getClass().getClassLoader().getResourceAsStream("non-regression/group-processing/ddi-lhpz68wp.xml"),
+                EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC),
+                lunaticPostProcessing);
 
         //
         assertNotNull(result);
+        assertNotNull(result.getContent());
     }
 
 }

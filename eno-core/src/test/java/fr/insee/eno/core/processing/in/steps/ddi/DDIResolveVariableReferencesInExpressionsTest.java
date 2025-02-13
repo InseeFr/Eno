@@ -7,8 +7,8 @@ import fr.insee.eno.core.model.navigation.Filter;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -49,7 +49,7 @@ class DDIResolveVariableReferencesInExpressionsTest {
             Filter filter = new Filter();
             CalculatedExpression calculatedExpression= new CalculatedExpression();
             calculatedExpression.setValue("foo-ref-1 = 1 and foo-ref-10 = 1");
-            Set<BindingReference> bindingReferences = new LinkedHashSet<>();
+            List<BindingReference> bindingReferences = new ArrayList<>();
             bindingReferences.add(new BindingReference("foo-ref-1", "FOO_A"));
             bindingReferences.add(new BindingReference("foo-ref-10", "FOO_K"));
             calculatedExpression.setBindingReferences(bindingReferences);
@@ -59,7 +59,7 @@ class DDIResolveVariableReferencesInExpressionsTest {
             new DDIResolveVariableReferencesInExpressions().apply(enoQuestionnaire);
             //
             assertEquals("FOO_A = 1 and FOO_K = 1",
-                    enoQuestionnaire.getFilters().get(0).getExpression().getValue());
+                    enoQuestionnaire.getFilters().getFirst().getExpression().getValue());
         }
 
         /**
@@ -73,7 +73,7 @@ class DDIResolveVariableReferencesInExpressionsTest {
             Filter filter = new Filter();
             CalculatedExpression calculatedExpression= new CalculatedExpression();
             calculatedExpression.setValue("foo-ref-1 = 1 and foo-ref-10 = 1");
-            Set<BindingReference> bindingReferences = new LinkedHashSet<>();
+            List<BindingReference> bindingReferences = new ArrayList<>();
             bindingReferences.add(new BindingReference("foo-ref-10", "FOO_K"));
             bindingReferences.add(new BindingReference("foo-ref-1", "FOO_A"));
             calculatedExpression.setBindingReferences(bindingReferences);

@@ -19,7 +19,7 @@ class DynamicTableQuestionTest {
         poguesTable.getLabel().add("Dynamic table question.");
         ResponseStructureType responseStructure = new ResponseStructureType();
         DimensionType dimension = new DimensionType();
-        dimension.setDynamic("1-5");
+        dimension.setDynamic("DYNAMIC_LENGTH");
         responseStructure.getDimension().add(dimension);
         poguesTable.setResponseStructure(responseStructure);
 
