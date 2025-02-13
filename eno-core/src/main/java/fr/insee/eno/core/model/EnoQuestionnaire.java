@@ -158,8 +158,18 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
      * They are inserted in objects that rely on a code list through a DDI processing.
      */
     @Pogues("getCodeLists()?.getCodeList()")
-    @DDI("getResourcePackageArray(0).getCodeListSchemeArray(0).getCodeListList()")
+    @DDI("getResourcePackageArray(0).getCodeListSchemeArray(0).getCodeListList()" +
+            ".?[#this.getIDArray(0).getStringValue() != 'INSEE-COMMUN-CL-Booleen']" +
+            ".?[! #this.getIDArray(0).getStringValue().contains('secondDimension-fakeCL')]")
     List<CodeList> codeLists = new ArrayList<>();
+
+    /** In addition to the code lists defined in Pogues, there are 'fake' code lists added by Eno xml in the
+     * Pogues to DDI transformation to represent the second dimension of tables.
+     */
+    @DDI("getResourcePackageArray(0).getCodeListSchemeArray(0).getCodeListList()" +
+            ".?[#this.getIDArray(0).getStringValue() != 'INSEE-COMMUN-CL-Booleen']" +
+            ".?[#this.getIDArray(0).getStringValue().contains('secondDimension-fakeCL')]")
+    List<CodeList> fakeCodeLists = new ArrayList<>();
 
     public static List<SequenceType> mapPoguesSequences(Questionnaire poguesQuestionnaire) {
         List<SequenceType> poguesSequences = poguesQuestionnaire.getChild().stream()
