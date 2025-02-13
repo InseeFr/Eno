@@ -211,7 +211,8 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     }
     public static boolean isSingleResponseQuestion(QuestionType poguesQuestion) {
         return QuestionTypeEnum.SIMPLE.equals(poguesQuestion.getQuestionType())
-                || QuestionTypeEnum.SINGLE_CHOICE.equals(poguesQuestion.getQuestionType());
+                || QuestionTypeEnum.SINGLE_CHOICE.equals(poguesQuestion.getQuestionType())
+                || QuestionTypeEnum.PAIRWISE.equals(poguesQuestion.getQuestionType());
     }
 
     public static List<QuestionType> mapPoguesMultipleResponseQuestions(Questionnaire poguesQuestionnaire) {
