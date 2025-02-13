@@ -9657,8 +9657,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "lbglwey5"
               },
               {
@@ -10516,8 +10516,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "kz2mu4s7"
               },
               {
@@ -10904,8 +10904,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "kz2otmvz"
               },
               {
@@ -12396,8 +12396,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "lbglwey5"
               },
               {
@@ -13458,8 +13458,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "kz2mu4s7"
               },
               {
@@ -13890,8 +13890,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "kz2otmvz"
               },
               {
@@ -16610,8 +16610,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "kz4bpb1d"
               },
               {
@@ -17474,8 +17474,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "lbgid6s3"
               },
               {
@@ -17580,8 +17580,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "lbgi97ke"
               },
               {
@@ -17745,8 +17745,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "lbkjkhix"
               },
               {
@@ -17945,8 +17945,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "lbkkg2tb"
               },
               {
