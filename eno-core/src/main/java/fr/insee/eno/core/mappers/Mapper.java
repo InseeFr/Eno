@@ -68,8 +68,7 @@ public class Mapper {
     @SuppressWarnings("unchecked")
     List<Object> readList(PropertyDescriptor propertyDescriptor, EnoObject enoObject) {
         try {
-            Collection<Object> collection = (Collection<Object>) propertyDescriptor.getReadMethod().invoke(enoObject);
-            return new ArrayList<>(collection);
+            return (List<Object>) propertyDescriptor.getReadMethod().invoke(enoObject);
         } catch (IllegalAccessException | InvocationTargetException e) {
             log.debug("hint: Make sure that collection has been initialized (i.e. is not null) in model class.");
             log.debug("hint: Example: List<SomeEnoObject> = new ArrayList<>();");
