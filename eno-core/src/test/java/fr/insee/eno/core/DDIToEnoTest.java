@@ -76,7 +76,8 @@ class DDIToEnoTest {
         }
         @Test
         void codeLists() {
-            assertEquals(16, enoQuestionnaire.getCodeLists().size()); // Code lists should be refactored at questionnaire level
+            assertEquals(10, enoQuestionnaire.getCodeLists().size());
+            assertEquals(5, enoQuestionnaire.getFakeCodeLists().size());
         }
         @Test
         void sequencesCount() {

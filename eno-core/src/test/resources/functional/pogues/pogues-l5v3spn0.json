@@ -667,8 +667,10 @@
             ],
             "Dimension": [
               {
-                "dimensionType": "PRIMARY",
-                "dynamic": "1-5"
+                "dynamic": "DYNAMIC_LENGTH",
+                "MaxLines": "5",
+                "MinLines": "1",
+                "dimensionType": "PRIMARY"
               },
               {
                 "dimensionType": "MEASURE",

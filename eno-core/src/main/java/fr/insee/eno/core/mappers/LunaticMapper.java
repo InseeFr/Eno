@@ -145,7 +145,7 @@ public class LunaticMapper extends Mapper {
                 expression, lunaticObject, enoObject.getClass(), propertyDescriptor.getName());
         assert lunaticCollection != null : "Lunatic collections are expected to be initialized.";
         // Get the model collection
-        Collection<Object> enoCollection = readCollection(propertyDescriptor, enoObject);
+        Collection<Object> enoCollection = readList(propertyDescriptor, enoObject);
         assert enoCollection != null : "Model collections are expected to be initialized.";
         if (! enoCollection.isEmpty()) {
             // Content type of the model collection

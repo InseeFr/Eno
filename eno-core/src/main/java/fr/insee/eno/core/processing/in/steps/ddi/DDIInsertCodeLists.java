@@ -17,11 +17,13 @@ import java.util.Map;
 public class DDIInsertCodeLists implements ProcessingStep<EnoQuestionnaire> {
 
     private final Map<String, CodeList> codeListMap = new HashMap<>();
+    private final Map<String, CodeList> fakeCodeListMap = new HashMap<>();
 
     @Override
     public void apply(EnoQuestionnaire enoQuestionnaire) {
         // Put code lists in a local map
         enoQuestionnaire.getCodeLists().forEach(codeList -> codeListMap.put(codeList.getId(), codeList));
+        enoQuestionnaire.getFakeCodeLists().forEach(codeList -> fakeCodeListMap.put(codeList.getId(), codeList));
         // Insert code lists in unique choice questions
         enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(UniqueChoiceQuestion.class::isInstance)
@@ -76,10 +78,14 @@ public class DDIInsertCodeLists implements ProcessingStep<EnoQuestionnaire> {
      */
     private CodeList getCodeListFromMap(String codeListReference, String enoComponentId) {
         if (codeListReference == null)
-            throw new MappingException(String.format(
+            return null;
+            // TODO: restore this exception when Pogues table mapping is done
+            /*throw new MappingException(String.format(
                     "Eno component '%s' has no referenced code list.",
-                    enoComponentId));
+                    enoComponentId));*/
         CodeList searchedCodeList = codeListMap.get(codeListReference);
+        if (searchedCodeList == null)
+            searchedCodeList = fakeCodeListMap.get(codeListReference);
         if (searchedCodeList == null)
             throw new MappingException(String.format(
                     "Code list referenced in Eno component '%s' with id '%s' cannot be found.",
@@ -88,28 +94,33 @@ public class DDIInsertCodeLists implements ProcessingStep<EnoQuestionnaire> {
     }
 
     private void insertCodeItems(UniqueChoiceQuestion uniqueChoiceQuestion) {
-        uniqueChoiceQuestion.setCodeItems(
-                getCodeListFromMap(uniqueChoiceQuestion.getCodeListReference(), uniqueChoiceQuestion.getId())
-                        .getCodeItems());
+        CodeList codeList = getCodeListFromMap(uniqueChoiceQuestion.getCodeListReference(), uniqueChoiceQuestion.getId());
+        if (codeList == null)
+            return;
+        uniqueChoiceQuestion.setCodeItems(codeList.getCodeItems());
     }
 
     private void insertCodeItems(UniqueChoiceCell uniqueChoiceCell) {
-        uniqueChoiceCell.setCodeItems(
-                getCodeListFromMap(uniqueChoiceCell.getCodeListReference(), uniqueChoiceCell.getId())
-                        .getCodeItems());
+        CodeList codeList = getCodeListFromMap(uniqueChoiceCell.getCodeListReference(), uniqueChoiceCell.getId());
+        if (codeList == null)
+            return;
+        uniqueChoiceCell.setCodeItems(codeList.getCodeItems());
     }
 
     private void insertHeader(EnoTable enoTable) {
-        enoTable.setHeader(codeListMap.get(enoTable.getHeaderCodeListReference()));
+        String id = enoTable.getId();
+        enoTable.setHeader(getCodeListFromMap(enoTable.getHeaderCodeListReference(), id));
     }
 
     private void insertLeftColumn(TableQuestion tableQuestion) {
-        tableQuestion.setLeftColumn(codeListMap.get(tableQuestion.getLeftColumnCodeListReference()));
+        String id = tableQuestion.getId();
+        tableQuestion.setLeftColumn(getCodeListFromMap(tableQuestion.getLeftColumnCodeListReference(), id));
     }
 
     private void insertLeftColumn(ComplexMultipleChoiceQuestion complexMultipleChoiceQuestion) {
+        String id = complexMultipleChoiceQuestion.getId();
         complexMultipleChoiceQuestion.setLeftColumn(
-                codeListMap.get(complexMultipleChoiceQuestion.getLeftColumnCodeListReference()));
+                getCodeListFromMap(complexMultipleChoiceQuestion.getLeftColumnCodeListReference(), id));
     }
 
 }

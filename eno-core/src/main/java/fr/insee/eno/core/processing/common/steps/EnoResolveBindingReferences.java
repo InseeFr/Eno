@@ -10,7 +10,10 @@ import fr.insee.eno.core.model.variable.CalculatedVariable;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.ProcessingStep;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /** Processing on the Eno-model calculated expressions concerning calculated variables.
  * When a calculated expression has a reference to a calculated variable, we want to retrieve the variables references
@@ -96,7 +99,7 @@ public class EnoResolveBindingReferences implements ProcessingStep<EnoQuestionna
      * @param bindingReferences References to be added in the expression binding references.
      * @param expression Expression being updated.
      */
-    private void insertReferences(Set<BindingReference> bindingReferences, CalculatedExpression expression) {
+    private void insertReferences(List<BindingReference> bindingReferences, CalculatedExpression expression) {
         for (BindingReference bindingReference : bindingReferences) {
             Variable variable = findVariable(bindingReference);
             if (Variable.CollectionType.CALCULATED.equals(variable.getCollectionType())) {
@@ -112,14 +115,14 @@ public class EnoResolveBindingReferences implements ProcessingStep<EnoQuestionna
         enoComponents.stream()
                 .map(EnoComponent::getComponentFilter)
                 .forEach(componentFilter -> {
-                    Set<BindingReference> references = resolveBindingReferences(componentFilter.getBindingReferences());
+                    List<BindingReference> references = resolveBindingReferences(componentFilter.getBindingReferences());
                     componentFilter.getResolvedBindingReferences().addAll(references);
                 } );
     }
 
     /** Update the binding references of the "min" and "max" expressions of the given loop. */
     private void updateStandaloneLoopReferences(StandaloneLoop standaloneLoop) {
-        Set<BindingReference> references = resolveBindingReferences(standaloneLoop.getMinIteration().getBindingReferences());
+        List<BindingReference> references = resolveBindingReferences(standaloneLoop.getMinIteration().getBindingReferences());
         standaloneLoop.getMinIteration().setBindingReferences(references);
 
         references = resolveBindingReferences(standaloneLoop.getMaxIteration().getBindingReferences());
@@ -131,9 +134,9 @@ public class EnoResolveBindingReferences implements ProcessingStep<EnoQuestionna
      * this method adds the references contained in these calculated variables.
      * @param bindingReferences Binding references to be updated.
      */
-    private Set<BindingReference> resolveBindingReferences(Set<BindingReference> bindingReferences) {
+    private List<BindingReference> resolveBindingReferences(List<BindingReference> bindingReferences) {
         // shallow copy
-        Set<BindingReference> resolvedBindingReferences = new HashSet<>(bindingReferences);
+        List<BindingReference> resolvedBindingReferences = new ArrayList<>(bindingReferences);
         //
         for (BindingReference bindingReference : bindingReferences) {
             Variable variable = findVariable(bindingReference);

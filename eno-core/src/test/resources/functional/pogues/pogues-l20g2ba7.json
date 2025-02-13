@@ -3354,8 +3354,8 @@
                 ],
                 "Dimension": [
                   {
+                    "dynamic": "NON_DYNAMIC",
                     "dimensionType": "PRIMARY",
-                    "dynamic": "0",
                     "CodeListReference": "jfjevykh"
                   },
                   {
@@ -3473,8 +3473,8 @@
                 ],
                 "Dimension": [
                   {
+                    "dynamic": "NON_DYNAMIC",
                     "dimensionType": "PRIMARY",
-                    "dynamic": "0",
                     "CodeListReference": "jfkxgkqx"
                   },
                   {
@@ -3600,8 +3600,8 @@
                 ],
                 "Dimension": [
                   {
+                    "dynamic": "NON_DYNAMIC",
                     "dimensionType": "PRIMARY",
-                    "dynamic": "0",
                     "CodeListReference": "jfjevykh"
                   },
                   {
@@ -3779,8 +3779,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "l8u7vv82"
               },
               {
@@ -3905,8 +3905,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "jfkxgkqx"
               },
               {
@@ -4079,8 +4079,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "jfkxgkqx"
               },
               {
@@ -4450,8 +4450,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "jfjevykh"
               },
               {
@@ -4955,8 +4955,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "jfkxc40e"
               },
               {
@@ -5071,8 +5071,10 @@
             ],
             "Dimension": [
               {
-                "dimensionType": "PRIMARY",
-                "dynamic": "1-5"
+                "dynamic": "DYNAMIC_LENGTH",
+                "MaxLines": "5",
+                "MinLines": "1",
+                "dimensionType": "PRIMARY"
               },
               {
                 "dimensionType": "MEASURE",

@@ -1,5 +1,6 @@
 package fr.insee.eno.core.converter;
 
+import fr.insee.eno.core.exceptions.technical.ConversionException;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.question.ComplexMultipleChoiceQuestion;
@@ -36,13 +37,16 @@ class PoguesMultipleChoiceQuestionConverter {
     private static EnoObject convertTable(QuestionType poguesQuestion) {
         if (isStaticTable(poguesQuestion))
             return new TableQuestion();
-        return new DynamicTableQuestion();
+        if (isDynamicTable(poguesQuestion))
+            return new DynamicTableQuestion();
+        throw new ConversionException("Unable to convert Pogues table '" + poguesQuestion.getId() + "'.");
     }
     private static boolean isStaticTable(QuestionType poguesQuestion) {
         // A Pogues table is a static table if all of its "dimensions" are non-dynamic.
-        return poguesQuestion.getResponseStructure().getDimension().stream()
-                .map(DimensionType::getDynamic)
-                .allMatch("0"::equals);
+        return poguesQuestion.getResponseStructure().getDimension().getFirst().getDynamic().equals("NON_DYNAMIC");
+    }
+    private static boolean isDynamicTable(QuestionType poguesQuestion) {
+        return poguesQuestion.getResponseStructure().getDimension().getFirst().getDynamic().equals("DYNAMIC_LENGTH");
     }
 
 }
