@@ -8,6 +8,7 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.common.EnoProcessing;
 import fr.insee.eno.core.processing.in.DDIInProcessing;
+import fr.insee.eno.core.processing.in.PoguesInProcessing;
 import fr.insee.eno.core.serialize.DDIDeserializer;
 import fr.insee.eno.core.serialize.PoguesDeserializer;
 import fr.insee.pogues.model.Questionnaire;
@@ -52,6 +53,7 @@ public class PoguesDDIToEno implements InToEno {
     public EnoQuestionnaire transform(EnoParameters enoParameters) {
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         new PoguesMapper().mapPoguesQuestionnaire(poguesQuestionnaire, enoQuestionnaire);
+        new PoguesInProcessing().applyProcessing(enoQuestionnaire);
         new DDIMapper().mapDDI(ddiQuestionnaire, enoQuestionnaire);
         new DDIInProcessing().applyProcessing(enoQuestionnaire);
         new EnoProcessing(enoParameters).applyProcessing(enoQuestionnaire);

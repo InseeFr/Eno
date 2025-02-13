@@ -25,6 +25,8 @@ public class DDIResolveSequencesStructure implements ProcessingStep<EnoQuestionn
     @Override
     public void apply(EnoQuestionnaire enoQuestionnaire) {
         this.enoQuestionnaire = enoQuestionnaire;
+        enoQuestionnaire.getSequences().forEach(sequence -> sequence.getSequenceStructure().clear());
+        enoQuestionnaire.getSubsequences().forEach(subsequence -> subsequence.getSequenceStructure().clear());
         for (Sequence sequence : enoQuestionnaire.getSequences()) {
             resolveSequenceStructure(sequence);
         }

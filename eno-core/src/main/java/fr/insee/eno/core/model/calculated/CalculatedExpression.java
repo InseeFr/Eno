@@ -12,8 +12,8 @@ import fr.insee.pogues.model.ExpressionType;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import static fr.insee.eno.core.annotations.Contexts.Context;
 
@@ -47,6 +47,6 @@ public class CalculatedExpression extends EnoObject {
     /** In DDI, the expression contains variable references instead of variables names.
      * This list contains the references of these variables. */
     @DDI("getInParameterList()")
-    private Set<BindingReference> bindingReferences = new HashSet<>();
+    private List<BindingReference> bindingReferences = new ArrayList<>();
 
 }
