@@ -10,9 +10,8 @@ import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /** Class that is very similar to the calculatedExpression class, designed to map the "conditionFilter"
  * property in Lunatic components.
@@ -37,10 +36,10 @@ public class ComponentFilter extends EnoObject {
     String type = LabelTypeEnum.VTL.value();
 
     @Getter
-    private final Set<BindingReference> bindingReferences = new HashSet<>();
+    private final List<BindingReference> bindingReferences = new ArrayList<>();
 
     @Getter
-    private final Set<BindingReference> resolvedBindingReferences = new HashSet<>();
+    private final List<BindingReference> resolvedBindingReferences = new ArrayList<>();
 
     /** Contrary to CalculatedExpression class, Lunatic binding dependencies are mapped in the condition filter
      * object. */

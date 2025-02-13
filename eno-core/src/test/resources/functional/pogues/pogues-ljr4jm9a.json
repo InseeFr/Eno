@@ -7208,8 +7208,8 @@
                 ],
                 "Dimension": [
                   {
+                    "dynamic": "NON_DYNAMIC",
                     "dimensionType": "PRIMARY",
-                    "dynamic": "0",
                     "CodeListReference": "l1214jho"
                   },
                   {
@@ -7445,8 +7445,8 @@
                 ],
                 "Dimension": [
                   {
+                    "dynamic": "NON_DYNAMIC",
                     "dimensionType": "PRIMARY",
-                    "dynamic": "0",
                     "CodeListReference": "l13e77ow"
                   },
                   {
@@ -7731,8 +7731,8 @@
                 ],
                 "Dimension": [
                   {
+                    "dynamic": "NON_DYNAMIC",
                     "dimensionType": "PRIMARY",
-                    "dynamic": "0",
                     "CodeListReference": "l13oddrm"
                   },
                   {
@@ -11913,8 +11913,8 @@
                 ],
                 "Dimension": [
                   {
+                    "dynamic": "NON_DYNAMIC",
                     "dimensionType": "PRIMARY",
-                    "dynamic": "0",
                     "CodeListReference": "libyau6k"
                   },
                   {
@@ -12316,8 +12316,8 @@
                 ],
                 "Dimension": [
                   {
+                    "dynamic": "NON_DYNAMIC",
                     "dimensionType": "PRIMARY",
-                    "dynamic": "0",
                     "CodeListReference": "libz1uqg"
                   },
                   {
@@ -12483,8 +12483,8 @@
                 ],
                 "Dimension": [
                   {
+                    "dynamic": "NON_DYNAMIC",
                     "dimensionType": "PRIMARY",
-                    "dynamic": "0",
                     "CodeListReference": "libyy6jr"
                   },
                   {
@@ -13397,8 +13397,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "lic0700g"
               },
               {

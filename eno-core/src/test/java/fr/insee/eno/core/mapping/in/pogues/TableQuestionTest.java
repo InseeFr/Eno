@@ -19,6 +19,9 @@ class TableQuestionTest {
         poguesTable.getLabel().add("Static table question.");
         ResponseStructureType responseStructure = new ResponseStructureType();
         poguesTable.setResponseStructure(responseStructure);
+        DimensionType dimensionType = new DimensionType();
+        dimensionType.setDynamic("NON_DYNAMIC");
+        poguesTable.getResponseStructure().getDimension().add(dimensionType);
 
         Questionnaire poguesQuestionnaire = new Questionnaire();
         SequenceType poguesSequence = new SequenceType();

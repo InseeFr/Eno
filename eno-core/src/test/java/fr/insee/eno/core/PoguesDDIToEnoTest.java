@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.insee.ddi.lifecycle33.instance.DDIInstanceDocument;
 import fr.insee.eno.core.exceptions.business.ParsingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.code.CodeItem;
+import fr.insee.eno.core.model.question.NumericQuestion;
+import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
@@ -65,9 +68,24 @@ class PoguesDDIToEnoTest {
      * "Pogues + DDI" vs. "DDI only".
      * @param enoQuestionnaire Eno questionnaire mapped from Pogues + DDI
      */
-    private static void removePoguesSpecificProperties(EnoQuestionnaire enoQuestionnaire) {
+    private void removePoguesSpecificProperties(EnoQuestionnaire enoQuestionnaire) {
         enoQuestionnaire.setAgency(null);
         enoQuestionnaire.setExpressionLanguage(null);
         enoQuestionnaire.setFilterMode(null);
+        enoQuestionnaire.getSingleResponseQuestions().stream()
+                .filter(question -> question.getResponse() != null)
+                .forEach(question -> question.getResponse().setVariableReference(null));
+        enoQuestionnaire.getSingleResponseQuestions().stream()
+                .filter(NumericQuestion.class::isInstance).map(NumericQuestion.class::cast)
+                .forEach(numericQuestion -> numericQuestion.setIsUnitDynamic(null));
+        enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .filter(SimpleMultipleChoiceQuestion.class::isInstance).map(SimpleMultipleChoiceQuestion.class::cast)
+                .forEach(question -> question.getCodeResponses()
+                        .forEach(codeResponse -> codeResponse.getResponse().setVariableReference(null)));
+        enoQuestionnaire.getCodeLists().forEach(codeList -> codeList.getCodeItems().forEach(this::removeCodeItemParentValues));
+    }
+    private void removeCodeItemParentValues(CodeItem codeItem) {
+        codeItem.setParentValue(null);
+        codeItem.getCodeItems().forEach(this::removeCodeItemParentValues);
     }
 }

@@ -8,6 +8,7 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.common.EnoProcessing;
 import fr.insee.eno.core.processing.in.DDIInProcessing;
+import fr.insee.eno.core.processing.in.PoguesInProcessing;
 import fr.insee.eno.core.serialize.DDIDeserializer;
 import fr.insee.eno.core.serialize.PoguesDeserializer;
 import fr.insee.pogues.model.Questionnaire;
@@ -43,7 +44,7 @@ public class PoguesDDIToEno implements InToEno {
      * @deprecated For this class, the old transform method is not implemented.
      */
     @Override
-    @Deprecated(since = "3.23.0", forRemoval = true)
+    @Deprecated(since = "3.33.0", forRemoval = true)
     public EnoQuestionnaire transform(InputStream inputStream, EnoParameters enoParameters) throws ParsingException {
         throw new UnsupportedOperationException("Use the other transform method.");
     }
@@ -52,6 +53,7 @@ public class PoguesDDIToEno implements InToEno {
     public EnoQuestionnaire transform(EnoParameters enoParameters) {
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         new PoguesMapper().mapPoguesQuestionnaire(poguesQuestionnaire, enoQuestionnaire);
+        new PoguesInProcessing().applyProcessing(enoQuestionnaire);
         new DDIMapper().mapDDI(ddiQuestionnaire, enoQuestionnaire);
         new DDIInProcessing().applyProcessing(enoQuestionnaire);
         new EnoProcessing(enoParameters).applyProcessing(enoQuestionnaire);
