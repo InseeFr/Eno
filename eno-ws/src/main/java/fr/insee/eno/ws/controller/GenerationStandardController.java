@@ -67,15 +67,13 @@ public class GenerationStandardController {
             @RequestPart(value="in") MultipartFile poguesFile,
             @RequestPart(value="specificTreatment", required = false) MultipartFile specificTreatment,
             @PathVariable Context context,
-            @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter,
-            @RequestParam(defaultValue = "false") boolean dsfr)
+            @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter)
             throws ModeParameterException, DDIToLunaticException, EnoControllerException, IOException {
         //
         if (EnoParameters.ModeParameter.PAPI.equals(modeParameter))
             throw new ModeParameterException("Lunatic format is not compatible with the mode 'PAPER'.");
         //
         EnoParameters enoParameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
-        enoParameters.getLunaticParameters().setDsfr(dsfr);
 
         //
         if (Boolean.TRUE.equals(directPoguesToLunatic))
@@ -100,15 +98,13 @@ public class GenerationStandardController {
             @RequestPart(value="in") MultipartFile ddiFile,
             @RequestPart(value="specificTreatment", required = false) MultipartFile specificTreatment,
             @PathVariable Context context,
-            @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter,
-            @RequestParam(defaultValue = "false") boolean dsfr)
+            @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter)
             throws ModeParameterException, DDIToLunaticException, EnoControllerException, IOException {
         //
         if (EnoParameters.ModeParameter.PAPI.equals(modeParameter))
             throw new ModeParameterException("Lunatic format is not compatible with the mode 'PAPER'.");
         //
         EnoParameters enoParameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
-        enoParameters.getLunaticParameters().setDsfr(dsfr);
         //
         return javaControllerUtils.transformToLunatic(ddiFile, enoParameters, specificTreatment, ddiToLunaticService);
     }
