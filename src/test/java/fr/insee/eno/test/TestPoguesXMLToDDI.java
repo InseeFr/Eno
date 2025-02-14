@@ -25,17 +25,32 @@ public class TestPoguesXMLToDDI {
 
 	@Test
 	public void simpleDiffTest() {
+		String basePath = "src/test/resources/pogues-xml-to-ddi";
+		testTransformationInOut(String.format("%s/in.xml", basePath), String.format("%s/out.xml", basePath));
+	}
+
+	@Test
+	public void arbitrarySuggesterResponseTest() {
+		String basePath = "src/test/resources/pogues-xml-to-ddi/suggester-arbitrary";
+		testTransformationInOut(String.format("%s/in.xml", basePath), String.format("%s/out.xml", basePath));
+	}
+
+	@Test
+	public void arbitrarySuggesterResponseInLoopTest() {
+		String basePath = "src/test/resources/pogues-xml-to-ddi/suggester-arbitrary";
+		testTransformationInOut(String.format("%s/in-loop.xml", basePath), String.format("%s/out-loop.xml", basePath));
+	}
+
+	private void testTransformationInOut(String inPath, String outPath){
 		try {
-			String basePath = "src/test/resources/pogues-xml-to-ddi";
-			
 			Preprocessor[] preprocessors = {
 					new PoguesXmlInsertFilterLoopIntoQuestionTree(),
 					new PoguesXMLPreprocessorGoToTreatment()};
 			Postprocessor[] postprocessors = {new NoopPostprocessor()};
-			
+
 			GenerationService genService = new GenerationService(preprocessors, poguesXML2DDI, postprocessors);
 
-			File in = new File(String.format("%s/in.xml", basePath));
+			File in = new File(inPath);
 			ByteArrayInputStream inputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(in));
 			File outputFile = createTempEnoFile();
 			ByteArrayOutputStream output = genService.generateQuestionnaire(inputStream, "xml-pogues-2-ddi-test");
@@ -43,9 +58,9 @@ public class TestPoguesXMLToDDI {
 				fos.write(output.toByteArray());
 			}
 			output.close();
-			File expectedFile = new File(String.format("%s/out.xml", basePath));
+			File expectedFile = new File(outPath);
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
-			Assertions.assertFalse(diff::hasDifferences, ()->getDiffMessage(diff, basePath));
+			Assertions.assertFalse(diff::hasDifferences, ()->getDiffMessage(diff));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -59,8 +74,8 @@ public class TestPoguesXMLToDDI {
 		}
 	}
 
-	private String getDiffMessage(Diff diff, String path) {
-		return String.format("Transformed output for %s should match expected XML document:\n %s", path,
+	private String getDiffMessage(Diff diff) {
+		return String.format("Transformed output should match expected XML document:\n %s",
 				diff.toString());
 	}
 }
