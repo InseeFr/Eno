@@ -1,5 +1,10 @@
 # Eno Releases note
 
+## [v2.12.3] - 2025-02-14
+### :bug: Bug Fixes
+- [`0e9e469`](https://github.com/InseeFr/Eno/commit/0e9e469af9df92d5921a3043a4a4b78a899f4dd5) - **pogues2ddi**: arbitrary response *(PR [#1206](https://github.com/InseeFr/Eno/pull/1206) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [v2.12.1] - 2024-12-11
 ### :bug: Bug Fixes
 - [`4273a60`](https://github.com/InseeFr/Eno/commit/4273a60dea22909b74b87ff0fbcaf1ba717536b6) - **dynamic unit**: controlledVocabularyName attribute *(PR [#1174](https://github.com/InseeFr/Eno/pull/1174) by [@nsenave](https://github.com/nsenave))*
@@ -385,3 +390,4 @@
 [v2.10.2]: https://github.com/InseeFr/Eno/compare/v2.10.1...v2.10.2
 [v2.11.0]: https://github.com/InseeFr/Eno/compare/v2.10.2...v2.11.0
 [v2.12.1]: https://github.com/InseeFr/Eno/compare/v2.12.0...v2.12.1
+[v2.12.3]: https://github.com/InseeFr/Eno/compare/v2.12.2...v2.12.3
