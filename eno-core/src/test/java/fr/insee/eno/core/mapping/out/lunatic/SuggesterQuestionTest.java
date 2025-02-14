@@ -13,10 +13,7 @@ import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.processing.in.steps.ddi.DDIDeserializeSuggesterConfiguration;
 import fr.insee.eno.core.serialize.DDIDeserializer;
-import fr.insee.lunatic.model.flat.ArbitraryType;
-import fr.insee.lunatic.model.flat.ComponentTypeEnum;
-import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.Suggester;
+import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -80,8 +77,13 @@ class SuggesterQuestionTest {
                 classLoader.getResourceAsStream("integration/ddi/ddi-suggester-arbitrary.xml"))
                 .transform(EnoParameters.of(Context.HOUSEHOLD, ModeParameter.CAWI, Format.LUNATIC));
         // Then
-        Suggester suggester1 = assertInstanceOf(Suggester.class, lunaticQuestionnaire.getComponents().get(1));
-        Suggester suggester2 = assertInstanceOf(Suggester.class, lunaticQuestionnaire.getComponents().get(2));
+        Question question1 = (Question) lunaticQuestionnaire.getComponents().get(1);
+        Question question2 = (Question) lunaticQuestionnaire.getComponents().get(2);
+        Suggester suggester1 = assertInstanceOf(Suggester.class, question1.getComponents().getFirst());
+        Suggester suggester2 = assertInstanceOf(Suggester.class, question2.getComponents().getFirst());
+//      Suggester suggester2 = assertInstanceOf(Suggester.class, lunaticQuestionnaire.getComponents().get(2));
+//      Suggester suggester1 = assertInstanceOf(Suggester.class, lunaticQuestionnaire.getComponents().get(1));
+//      Suggester suggester2 = assertInstanceOf(Suggester.class, lunaticQuestionnaire.getComponents().get(2));
         //
         assertEquals("COUNTRY", suggester1.getResponse().getName());
         assertNull(suggester1.getArbitrary());

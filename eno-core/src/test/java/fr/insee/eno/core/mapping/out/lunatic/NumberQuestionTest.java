@@ -24,6 +24,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -40,10 +41,22 @@ class NumberQuestionTest {
                 .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
         // Then
         // gather components to look at
-        List<InputNumber> inputNumbers = lunaticQuestionnaire.getComponents().stream()
-                .filter(componentType -> ComponentTypeEnum.INPUT_NUMBER.equals(componentType.getComponentType()))
-                .map(InputNumber.class::cast)
-                .toList();
+        List<InputNumber> inputNumbers = new ArrayList<>();
+
+        for (Object component : lunaticQuestionnaire.getComponents()) {
+            if (component instanceof Question question) {
+
+                inputNumbers.addAll(
+                        question.getComponents().stream()
+                                .filter(componentType -> ComponentTypeEnum.INPUT_NUMBER.equals(componentType.getComponentType()))
+                                .map(InputNumber.class::cast)
+                                .toList()
+                );
+            }}
+//        List<InputNumber> inputNumbers = lunaticQuestionnaire.getComponents().stream()
+//                .filter(componentType -> ComponentTypeEnum.INPUT_NUMBER.equals(componentType.getComponentType()))
+//                .map(InputNumber.class::cast)
+//                .toList();
         List<InputNumber> inputNumbersNoUnit = inputNumbers.stream()
                 .filter(inputNumber -> !"NUMBER_UNIT".equals(inputNumber.getResponse().getName()))
                 .toList();

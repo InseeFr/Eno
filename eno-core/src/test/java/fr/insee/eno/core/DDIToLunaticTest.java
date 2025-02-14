@@ -73,7 +73,7 @@ class DDIToLunaticTest {
         //
         assertNotNull(lunaticQuestionnaire);
         ComponentType componentThatShouldHaveDeclaration = lunaticQuestionnaire.getComponents().stream()
-                .filter(component -> "lsa7m4oz".equals(component.getId()))
+                .filter(component -> "question-lsa7m4oz".equals(component.getId()))
                 .findAny().orElse(null);
         assertNotNull(componentThatShouldHaveDeclaration);
         assertEquals(2, componentThatShouldHaveDeclaration.getDeclarations().size());
@@ -104,14 +104,14 @@ class DDIToLunaticTest {
         void testComponentsOrder() {
             List<ComponentTypeEnum> expectedComponentTypeSequence = List.of(
                     SEQUENCE,
-                    SUBSEQUENCE, INPUT, TEXTAREA,
-                    SUBSEQUENCE, INPUT_NUMBER, INPUT_NUMBER, INPUT_NUMBER,
-                    SUBSEQUENCE, DATEPICKER, DATEPICKER, DATEPICKER, DURATION, DURATION, CHECKBOX_BOOLEAN,
+                    SUBSEQUENCE, QUESTION, QUESTION,
+                    SUBSEQUENCE, QUESTION, QUESTION, QUESTION,
+                    SUBSEQUENCE, QUESTION, QUESTION, QUESTION, QUESTION, QUESTION, QUESTION,
                     SEQUENCE,
-                    SUBSEQUENCE, RADIO, CHECKBOX_ONE, CHECKBOX_ONE, CHECKBOX_ONE, INPUT, DROPDOWN, INPUT,
-                    SUBSEQUENCE, CHECKBOX_GROUP, TABLE, TABLE,
+                    SUBSEQUENCE, QUESTION, QUESTION, QUESTION, QUESTION, QUESTION, QUESTION, QUESTION,
+                    SUBSEQUENCE, QUESTION, QUESTION, QUESTION,
                     SEQUENCE,
-                    TABLE, TABLE, TABLE, TABLE, TABLE, ROSTER_FOR_LOOP,
+                    QUESTION, QUESTION, QUESTION, QUESTION, QUESTION, QUESTION,
                     SEQUENCE
                     // ...
                     );

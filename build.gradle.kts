@@ -16,7 +16,7 @@ java {
 
 allprojects {
     group = "fr.insee.eno"
-    version = "à définir selon l'ordre de la mise en recette"
+    version = "à définir selon l'ordre de la mise en recette"}
 
 subprojects {
     repositories {
