@@ -62,9 +62,9 @@ class EnoAddCommentSectionTest {
                 EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI);
         enoParameters.setCommentSection(true);
         //
-        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"),
-                enoParameters);
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"))
+                .transform(enoParameters);
         //
         Optional<Sequence> commentSequence = enoQuestionnaire.getSequences().stream()
                 .filter(sequence -> EnoAddCommentSection.COMMENT_SEQUENCE_ID.equals(sequence.getId()))
@@ -79,9 +79,9 @@ class EnoAddCommentSectionTest {
                 EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
         enoParameters.setCommentSection(true);
         //
-        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"),
-                enoParameters);
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"))
+                .transform(enoParameters);
         //
         Optional<fr.insee.lunatic.model.flat.Sequence> commentSequence = lunaticQuestionnaire.getComponents().stream()
                 .filter(fr.insee.lunatic.model.flat.Sequence.class::isInstance)

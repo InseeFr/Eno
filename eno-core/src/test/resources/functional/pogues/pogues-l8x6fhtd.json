@@ -1092,8 +1092,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "l988okev"
               },
               {
@@ -1244,8 +1244,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "l9nygs1y"
               },
               {
@@ -1410,8 +1410,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "l988nznm"
               },
               {

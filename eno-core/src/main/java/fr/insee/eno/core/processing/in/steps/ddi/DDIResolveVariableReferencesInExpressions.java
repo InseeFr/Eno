@@ -10,7 +10,10 @@ import fr.insee.eno.core.model.variable.CalculatedVariable;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.ProcessingStep;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
 
 public class DDIResolveVariableReferencesInExpressions implements ProcessingStep<EnoQuestionnaire> {
 
@@ -72,7 +75,7 @@ public class DDIResolveVariableReferencesInExpressions implements ProcessingStep
      * @param bindingReferences A set of binding references.
      * @return A list of the binding references, ordered by id.
      */
-    private static List<BindingReference> orderById(Set<BindingReference> bindingReferences) {
+    private static List<BindingReference> orderById(List<BindingReference> bindingReferences) {
         List<BindingReference> res = new ArrayList<>(bindingReferences);
         res.sort(Comparator.comparing(BindingReference::getId));
         return res;

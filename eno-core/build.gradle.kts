@@ -38,8 +38,6 @@ dependencies {
     // Jackson
     implementation("com.fasterxml.jackson.core:jackson-databind")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml") // imported for DDI "CDATA" suggester
-    // ModelMapper (used to copy objects, few usages)
-    implementation("org.modelmapper:modelmapper:$modelMapperVersion")
 
     // Logging
     implementation("org.slf4j:slf4j-api")

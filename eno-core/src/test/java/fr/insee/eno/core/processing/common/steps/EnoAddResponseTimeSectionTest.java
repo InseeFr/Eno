@@ -111,9 +111,9 @@ class EnoAddResponseTimeSectionTest {
                 EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI);
         enoParameters.setResponseTimeQuestion(true);
         //
-        EnoQuestionnaire enoQuestionnaire = new DDIToEno().transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"),
-                enoParameters);
+        EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"))
+                .transform(enoParameters);
         //
         Optional<Sequence> responseTimeSequence = enoQuestionnaire.getSequences().stream()
                 .filter(sequence -> EnoAddResponseTimeSection.RESPONSE_TIME_SEQUENCE_ID.equals(sequence.getId()))
@@ -128,9 +128,9 @@ class EnoAddResponseTimeSectionTest {
                 EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
         enoParameters.setResponseTimeQuestion(true);
         //
-        Questionnaire lunaticQuestionnaire = new DDIToLunatic().transform(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"),
-                enoParameters);
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-simple.xml"))
+                .transform(enoParameters);
         //
         Optional<fr.insee.lunatic.model.flat.Sequence> responseTimeSequence = lunaticQuestionnaire.getComponents()
                 .stream()

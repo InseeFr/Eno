@@ -1046,8 +1046,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "kz5b6im3"
               },
               {
@@ -1157,8 +1157,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "kz5b6im3"
               },
               {
@@ -1258,8 +1258,8 @@
             ],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "kzy4qkq6"
               },
               {
@@ -1447,8 +1447,10 @@
             ],
             "Dimension": [
               {
-                "dimensionType": "PRIMARY",
-                "dynamic": "4-4"
+                "dynamic": "DYNAMIC_LENGTH",
+                "MaxLines": "4",
+                "MinLines": "4",
+                "dimensionType": "PRIMARY"
               },
               {
                 "dimensionType": "MEASURE",
@@ -1518,8 +1520,10 @@
             ],
             "Dimension": [
               {
-                "dimensionType": "PRIMARY",
-                "dynamic": "1-10"
+                "dynamic": "DYNAMIC_LENGTH",
+                "MaxLines": "10",
+                "MinLines": "1",
+                "dimensionType": "PRIMARY"
               },
               {
                 "dimensionType": "MEASURE",
@@ -1606,8 +1610,10 @@
             ],
             "Dimension": [
               {
-                "dimensionType": "PRIMARY",
-                "dynamic": "1-10"
+                "dynamic": "DYNAMIC_LENGTH",
+                "MaxLines": "10",
+                "MinLines": "1",
+                "dimensionType": "PRIMARY"
               },
               {
                 "dimensionType": "MEASURE",
@@ -1820,8 +1826,10 @@
                 ],
                 "Dimension": [
                   {
-                    "dimensionType": "PRIMARY",
-                    "dynamic": "1-3"
+                    "dynamic": "DYNAMIC_LENGTH",
+                    "MaxLines": "3",
+                    "MinLines": "1",
+                    "dimensionType": "PRIMARY"
                   },
                   {
                     "dimensionType": "MEASURE",
@@ -2003,8 +2011,8 @@
                 ],
                 "Dimension": [
                   {
+                    "dynamic": "NON_DYNAMIC",
                     "dimensionType": "PRIMARY",
-                    "dynamic": "0",
                     "CodeListReference": "kzy4qkq6"
                   },
                   {
@@ -2320,8 +2328,8 @@
                 ],
                 "Dimension": [
                   {
+                    "dynamic": "NON_DYNAMIC",
                     "dimensionType": "PRIMARY",
-                    "dynamic": "0",
                     "CodeListReference": "kzy4qkq6"
                   },
                   {

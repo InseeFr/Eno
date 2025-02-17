@@ -13,17 +13,36 @@ import java.io.InputStream;
 
 public class PoguesToEno implements InToEno {
 
+    private Questionnaire poguesQuestionnaire;
+
+    private PoguesToEno(Questionnaire poguesQuestionnaire) {
+        this.poguesQuestionnaire = poguesQuestionnaire;
+    }
+
+    public static PoguesToEno fromInputStream(InputStream poguesInputStream) throws PoguesDeserializationException {
+        return new PoguesToEno(PoguesDeserializer.deserialize(poguesInputStream));
+    }
+
+    public static PoguesToEno fromObject(Questionnaire poguesQuestionnaire) {
+        return new PoguesToEno(poguesQuestionnaire);
+    }
+
     /**
      * Transform given Pogues input stream into a Eno questionnaire object using parameters given.
      * @param poguesInputStream Input stream of a Pogues json questionnaire.
      * @param enoParameters Eno parameters object.
      * @return Lunatic questionnaire object.
      * @throws PoguesDeserializationException if the input stream given cannot be parsed to a Pogues questionnaire.
+     * @deprecated use other transform method.
      */
+    @Deprecated(since = "3.33.0")
     public EnoQuestionnaire transform(InputStream poguesInputStream, EnoParameters enoParameters)
             throws PoguesDeserializationException {
-        //
-        Questionnaire poguesQuestionnaire = PoguesDeserializer.deserialize(poguesInputStream);
+        poguesQuestionnaire = PoguesDeserializer.deserialize(poguesInputStream);
+        return transform(enoParameters);
+    }
+
+    public EnoQuestionnaire transform(EnoParameters enoParameters) {
         //
         PoguesMapper poguesMapper = new PoguesMapper();
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();

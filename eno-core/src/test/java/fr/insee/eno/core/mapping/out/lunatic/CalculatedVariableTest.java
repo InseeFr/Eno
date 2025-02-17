@@ -7,6 +7,8 @@ import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.variable.CalculatedVariable;
 import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
@@ -120,7 +122,7 @@ class CalculatedVariableTest {
                     .forEach(variableType -> filterResultVariables.put(variableType.getName(), variableType));
         }
 
-            @Test
+        @Test
         void variablesCount() {
             assertEquals(9, filterResultVariables.size());
         }
