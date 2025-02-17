@@ -3,10 +3,7 @@ package fr.insee.eno.core.converter;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.question.*;
-import fr.insee.pogues.model.DatatypeTypeEnum;
-import fr.insee.pogues.model.QuestionType;
-import fr.insee.pogues.model.QuestionTypeEnum;
-import fr.insee.pogues.model.ResponseType;
+import fr.insee.pogues.model.*;
 
 class PoguesSingleResponseQuestionConversion {
 
@@ -18,7 +15,9 @@ class PoguesSingleResponseQuestionConversion {
         if (QuestionTypeEnum.SIMPLE.equals(questionType))
             return convertSimpleQuestion(poguesQuestion);
         if (QuestionTypeEnum.SINGLE_CHOICE.equals(questionType))
-            return new UniqueChoiceQuestion();
+            return convertUniqueChoiceQuestion(poguesQuestion);
+        if (QuestionTypeEnum.PAIRWISE.equals(questionType))
+            return new PairwiseQuestion();
         throw new MappingException("Unexpected single response question of type " + questionType + ".");
     }
 
@@ -32,6 +31,13 @@ class PoguesSingleResponseQuestionConversion {
             case DATE -> new DateQuestion();
             case DURATION -> new DurationQuestion();
         };
+    }
+
+    private static EnoObject convertUniqueChoiceQuestion(QuestionType poguesQuestion) {
+        if (poguesQuestion.getResponse().getFirst().getDatatype().getVisualizationHint()
+                .equals(VisualizationHintEnum.SUGGESTER))
+            return new SuggesterQuestion();
+        return new UniqueChoiceQuestion();
     }
 
 }

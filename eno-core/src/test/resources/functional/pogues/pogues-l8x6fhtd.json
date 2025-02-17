@@ -1,885 +1,39 @@
 {
-  "owner": "FAKEPERMISSION",
-  "FlowControl": [],
-  "ComponentGroup": [
-    {
-      "MemberReference": [
-        "l8x6ebv8",
-        "lc0cu6i6",
-        "l8x6akb3",
-        "l8y8ozno",
-        "l8y8wde3",
-        "l9nxvj6m",
-        "l9888jno",
-        "l988nifn",
-        "l9ny8wb8",
-        "l9sao32k",
-        "lbxg68fq",
-        "lcoxacye",
-        "lbxgigk8",
-        "lcox3rt2",
-        "lcoxana6",
-        "lc0c6j7f",
-        "lc0clxv1",
-        "lchfj2o1",
-        "lcq1pnud",
-        "lcq1esye",
-        "lcq1cyit",
-        "idendquest"
-      ],
-      "Label": [
-        "Components for page 1"
-      ],
-      "id": "l8x71lk7",
-      "Name": "PAGE_1"
-    }
-  ],
-  "agency": "fr.insee",
-  "genericName": "QUESTIONNAIRE",
-  "Label": [
-    "Sandbox Eno V3 Lunatic V2"
-  ],
-  "Name": "SANDBOXENO32",
-  "Variables": {
-    "Variable": [
-      {
-        "Formula": "cast(Q2, number) + 10.5",
-        "Label": "Variable calculée",
-        "id": "l8yleiwn",
-        "type": "CalculatedVariableType",
-        "Name": "VARCALC",
-        "Datatype": {
-          "Maximum": "200",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "Unit": "",
-          "type": "NumericDatatypeType",
-          "Decimals": "1"
-        }
-      },
-      {
-        "Label": "Q1 label",
-        "id": "l8x6a7my",
-        "type": "CollectedVariableType",
-        "Name": "Q1",
-        "Datatype": {
-          "Pattern": "",
-          "typeName": "TEXT",
-          "type": "TextDatatypeType",
-          "MaxLength": 249
-        }
-      },
-      {
-        "Label": "Q2 label",
-        "id": "l8y8txrp",
-        "type": "CollectedVariableType",
-        "Name": "Q2",
-        "Datatype": {
-          "Maximum": "100",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "Unit": "",
-          "type": "NumericDatatypeType",
-          "Decimals": "1"
-        }
-      },
-      {
-        "Label": "Q3 label",
-        "id": "l8y8zral",
-        "type": "CollectedVariableType",
-        "Name": "Q3",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "QCU_COMPLEXE label",
-        "id": "l9ny6ifi",
-        "type": "CollectedVariableType",
-        "CodeListReference": "l9ny0mef",
-        "Name": "QCU_COMPLEXE",
-        "Datatype": {
-          "Pattern": "",
-          "typeName": "TEXT",
-          "type": "TextDatatypeType",
-          "MaxLength": 1
-        }
-      },
-      {
-        "Label": "\"Code A\"-\"Colonne 1\"-\"Cases du tableau\"",
-        "id": "l988lnv3",
-        "type": "CollectedVariableType",
-        "Name": "TAB211",
-        "Datatype": {
-          "Maximum": "100",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "type": "NumericDatatypeType",
-          "Decimals": "0"
-        }
-      },
-      {
-        "Label": "\"Code B\"-\"Colonne 1\"-\"Cases du tableau\"",
-        "id": "l9892ulx",
-        "type": "CollectedVariableType",
-        "Name": "TAB221",
-        "Datatype": {
-          "Maximum": "100",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "type": "NumericDatatypeType",
-          "Decimals": "0"
-        }
-      },
-      {
-        "Label": "\"Code C\"-\"Colonne 1\"-\"Cases du tableau\"",
-        "id": "l988nhgh",
-        "type": "CollectedVariableType",
-        "Name": "TAB231",
-        "Datatype": {
-          "Maximum": "100",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "type": "NumericDatatypeType",
-          "Decimals": "0"
-        }
-      },
-      {
-        "Label": "\"Code D\"-\"Colonne 1\"-\"Cases du tableau\"",
-        "id": "l988ud4p",
-        "type": "CollectedVariableType",
-        "Name": "TAB241",
-        "Datatype": {
-          "Maximum": "100",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "type": "NumericDatatypeType",
-          "Decimals": "0"
-        }
-      },
-      {
-        "Label": "\"Code A\"-\"Colonne 2\"-\"Cases du tableau\"",
-        "id": "l988wv7v",
-        "type": "CollectedVariableType",
-        "Name": "TAB212",
-        "Datatype": {
-          "Maximum": "100",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "type": "NumericDatatypeType",
-          "Decimals": "0"
-        }
-      },
-      {
-        "Label": "\"Code B\"-\"Colonne 2\"-\"Cases du tableau\"",
-        "id": "l9895qbb",
-        "type": "CollectedVariableType",
-        "Name": "TAB222",
-        "Datatype": {
-          "Maximum": "100",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "type": "NumericDatatypeType",
-          "Decimals": "0"
-        }
-      },
-      {
-        "Label": "\"Code C\"-\"Colonne 2\"-\"Cases du tableau\"",
-        "id": "l988ti9h",
-        "type": "CollectedVariableType",
-        "Name": "TAB232",
-        "Datatype": {
-          "Maximum": "100",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "type": "NumericDatatypeType",
-          "Decimals": "0"
-        }
-      },
-      {
-        "Label": "\"Code D\"-\"Colonne 2\"-\"Cases du tableau\"",
-        "id": "l988pc6c",
-        "type": "CollectedVariableType",
-        "Name": "TAB242",
-        "Datatype": {
-          "Maximum": "100",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "type": "NumericDatatypeType",
-          "Decimals": "0"
-        }
-      },
-      {
-        "Label": "\"Modalité simple 1\"-\"Nombre tableau imbrications\"",
-        "id": "l9ny6hcn",
-        "type": "CollectedVariableType",
-        "Name": "TAB_IMBRIQ11",
-        "Datatype": {
-          "Maximum": "10",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "type": "NumericDatatypeType",
-          "Decimals": "0"
-        }
-      },
-      {
-        "Label": "\"Imbrication 1\"-\"Nombre tableau imbrications\"",
-        "id": "l9nyb01m",
-        "type": "CollectedVariableType",
-        "Name": "TAB_IMBRIQ21",
-        "Datatype": {
-          "Maximum": "10",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "type": "NumericDatatypeType",
-          "Decimals": "0"
-        }
-      },
-      {
-        "Label": "\"Sous-imbrication 1\"-\"Nombre tableau imbrications\"",
-        "id": "l9nyabku",
-        "type": "CollectedVariableType",
-        "Name": "TAB_IMBRIQ31",
-        "Datatype": {
-          "Maximum": "10",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "type": "NumericDatatypeType",
-          "Decimals": "0"
-        }
-      },
-      {
-        "Label": "\"Sous-imbrication 2\"-\"Nombre tableau imbrications\"",
-        "id": "l9ny1x8g",
-        "type": "CollectedVariableType",
-        "Name": "TAB_IMBRIQ41",
-        "Datatype": {
-          "Maximum": "10",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "type": "NumericDatatypeType",
-          "Decimals": "0"
-        }
-      },
-      {
-        "Label": "\"Imbrication 3\"-\"Nombre tableau imbrications\"",
-        "id": "l9nyc0lf",
-        "type": "CollectedVariableType",
-        "Name": "TAB_IMBRIQ51",
-        "Datatype": {
-          "Maximum": "10",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "type": "NumericDatatypeType",
-          "Decimals": "0"
-        }
-      },
-      {
-        "Label": "\"Colonne 1\"-\"En-tête 1\"-\"Cases tableau en-tête compliqué\"",
-        "id": "l9sb57mu",
-        "type": "CollectedVariableType",
-        "Name": "TAB_HEADER11",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "\"Colonne 2\"-\"En-tête 1\"-\"Cases tableau en-tête compliqué\"",
-        "id": "l9sb98hc",
-        "type": "CollectedVariableType",
-        "Name": "TAB_HEADER21",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "\"Colonne 1\"-\"En-tête 211\"-\"Cases tableau en-tête compliqué\"",
-        "id": "l9sbdpd3",
-        "type": "CollectedVariableType",
-        "Name": "TAB_HEADER12",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "\"Colonne 2\"-\"En-tête 211\"-\"Cases tableau en-tête compliqué\"",
-        "id": "l9sbcbqy",
-        "type": "CollectedVariableType",
-        "Name": "TAB_HEADER22",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "\"Colonne 1\"-\"En-tête 212\"-\"Cases tableau en-tête compliqué\"",
-        "id": "l9saykme",
-        "type": "CollectedVariableType",
-        "Name": "TAB_HEADER13",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "\"Colonne 2\"-\"En-tête 212\"-\"Cases tableau en-tête compliqué\"",
-        "id": "l9sb17f5",
-        "type": "CollectedVariableType",
-        "Name": "TAB_HEADER23",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "\"Colonne 1\"-\"En-tête 213\"-\"Cases tableau en-tête compliqué\"",
-        "id": "l9sbei4t",
-        "type": "CollectedVariableType",
-        "Name": "TAB_HEADER14",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "\"Colonne 2\"-\"En-tête 213\"-\"Cases tableau en-tête compliqué\"",
-        "id": "l9sbbdme",
-        "type": "CollectedVariableType",
-        "Name": "TAB_HEADER24",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "\"Colonne 1\"-\"En-tête 22\"-\"Cases tableau en-tête compliqué\"",
-        "id": "l9sbez1x",
-        "type": "CollectedVariableType",
-        "Name": "TAB_HEADER15",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "\"Colonne 2\"-\"En-tête 22\"-\"Cases tableau en-tête compliqué\"",
-        "id": "l9sbcwys",
-        "type": "CollectedVariableType",
-        "Name": "TAB_HEADER25",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "\"Colonne 1\"-\"En-tête 31\"-\"Cases tableau en-tête compliqué\"",
-        "id": "l9sauv6g",
-        "type": "CollectedVariableType",
-        "Name": "TAB_HEADER16",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "\"Colonne 2\"-\"En-tête 31\"-\"Cases tableau en-tête compliqué\"",
-        "id": "l9sayn9v",
-        "type": "CollectedVariableType",
-        "Name": "TAB_HEADER26",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "\"Colonne 1\"-\"En-tête 32\"-\"Cases tableau en-tête compliqué\"",
-        "id": "l9sb2zke",
-        "type": "CollectedVariableType",
-        "Name": "TAB_HEADER17",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "\"Colonne 2\"-\"En-tête 32\"-\"Cases tableau en-tête compliqué\"",
-        "id": "l9sb7bw3",
-        "type": "CollectedVariableType",
-        "Name": "TAB_HEADER27",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "\"Colonne 1\"-\"En-tête 331\"-\"Cases tableau en-tête compliqué\"",
-        "id": "l9sb54zs",
-        "type": "CollectedVariableType",
-        "Name": "TAB_HEADER18",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "\"Colonne 2\"-\"En-tête 331\"-\"Cases tableau en-tête compliqué\"",
-        "id": "l9sb21f4",
-        "type": "CollectedVariableType",
-        "Name": "TAB_HEADER28",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "\"Colonne 1\"-\"En-tête 332\"-\"Cases tableau en-tête compliqué\"",
-        "id": "l9sb60ci",
-        "type": "CollectedVariableType",
-        "Name": "TAB_HEADER19",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "\"Colonne 2\"-\"En-tête 332\"-\"Cases tableau en-tête compliqué\"",
-        "id": "l9sauv5n",
-        "type": "CollectedVariableType",
-        "Name": "TAB_HEADER29",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Scope": "lc0c5724",
-        "Label": "QSIMPLE label",
-        "id": "lchevode",
-        "type": "CollectedVariableType",
-        "Name": "QSIMPLE",
-        "Datatype": {
-          "Maximum": "10000",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "Unit": "http://id.insee.fr/unit/euro",
-          "type": "NumericDatatypeType",
-          "Decimals": ""
-        }
-      },
-      {
-        "Scope": "lc0c5724",
-        "Label": "UNEQUESTIO label",
-        "id": "lcowzlwd",
-        "type": "CollectedVariableType",
-        "Name": "UNEQUESTIO",
-        "Datatype": {
-          "Maximum": "100",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "Unit": "",
-          "type": "NumericDatatypeType",
-          "Decimals": ""
-        }
-      },
-      {
-        "Scope": "lc0c5724",
-        "Label": "LASUITE label",
-        "id": "lc0c6bs0",
-        "type": "CollectedVariableType",
-        "Name": "LASUITE",
-        "Datatype": {
-          "Pattern": "",
-          "typeName": "TEXT",
-          "type": "TextDatatypeType",
-          "MaxLength": 249
-        }
-      },
-      {
-        "Scope": "lcq19udk",
-        "Label": "TOTOA label",
-        "id": "lcq1m9zm",
-        "type": "CollectedVariableType",
-        "Name": "TOTOA",
-        "Datatype": {
-          "Maximum": "100",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "Unit": "",
-          "type": "NumericDatatypeType",
-          "Decimals": ""
-        }
-      },
-      {
-        "Scope": "lc0c5724",
-        "Label": "TOTOB label",
-        "id": "lcq1mg4s",
-        "type": "CollectedVariableType",
-        "Name": "TOTOB",
-        "Datatype": {
-          "Maximum": "100",
-          "Minimum": "0",
-          "typeName": "NUMERIC",
-          "Unit": "",
-          "type": "NumericDatatypeType",
-          "Decimals": ""
-        }
-      }
-    ]
-  },
-  "lastUpdatedDate": "Tue Jan 10 2023 15:56:26 GMT+0100 (heure normale d’Europe centrale)",
-  "DataCollection": [
-    {
-      "id": "esa-dc-2018",
-      "uri": "http://ddi:fr.insee:DataCollection.esa-dc-2018",
-      "Name": "Enquête sectorielle annuelle 2018"
-    }
-  ],
-  "final": false,
-  "flowLogic": "FILTER",
   "id": "l8x6fhtd",
-  "TargetMode": [
-    "CAPI",
-    "CATI",
-    "CAWI",
-    "PAPI"
-  ],
-  "CodeLists": {
-    "CodeList": [
-      {
-        "Label": "\"Liste de codes avec imbrications\"",
-        "id": "l9ny0mef",
-        "Code": [
-          {
-            "Parent": "",
-            "Label": "\"Modalité simple 1\"",
-            "Value": "m1"
-          },
-          {
-            "Parent": "",
-            "Label": "\"Modalité 2 avec imbrications\"",
-            "Value": "m2"
-          },
-          {
-            "Parent": "m2",
-            "Label": "\"Imbrication 1\"",
-            "Value": "m21"
-          },
-          {
-            "Parent": "m2",
-            "Label": "\"Imbrication 2\"",
-            "Value": "m22"
-          },
-          {
-            "Parent": "m22",
-            "Label": "\"Sous-imbrication 1\"",
-            "Value": "m221"
-          },
-          {
-            "Parent": "m22",
-            "Label": "\"Sous-imbrication 2\"",
-            "Value": "m222"
-          },
-          {
-            "Parent": "m2",
-            "Label": "\"Imbrication 3\"",
-            "Value": "m23"
-          }
-        ],
-        "Name": ""
-      },
-      {
-        "Label": "\"Liste de codes simple\"",
-        "id": "l988okev",
-        "Code": [
-          {
-            "Parent": "",
-            "Label": "\"Code A\"",
-            "Value": "codeA"
-          },
-          {
-            "Parent": "",
-            "Label": "\"Code B\"",
-            "Value": "codeB"
-          },
-          {
-            "Parent": "",
-            "Label": "\"Code C\"",
-            "Value": "codeC"
-          },
-          {
-            "Parent": "",
-            "Label": "\"Code D\"",
-            "Value": "codeD"
-          }
-        ],
-        "Name": ""
-      },
-      {
-        "Label": "\"Colonnes\"",
-        "id": "l988nznm",
-        "Code": [
-          {
-            "Parent": "",
-            "Label": "\"Colonne 1\"",
-            "Value": "col1"
-          },
-          {
-            "Parent": "",
-            "Label": "\"Colonne 2\"",
-            "Value": "col2"
-          }
-        ],
-        "Name": ""
-      },
-      {
-        "Label": "\"Liste de codes avec imbrications copie\"",
-        "id": "l9nygs1y",
-        "Code": [
-          {
-            "Parent": "",
-            "Label": "\"Modalité simple 1\"",
-            "Value": "m1"
-          },
-          {
-            "Parent": "",
-            "Label": "\"Modalité 2 avec imbrications\"",
-            "Value": "m2"
-          },
-          {
-            "Parent": "m2",
-            "Label": "\"Imbrication 1\"",
-            "Value": "m21"
-          },
-          {
-            "Parent": "m2",
-            "Label": "\"Imbrication 2\"",
-            "Value": "m22"
-          },
-          {
-            "Parent": "m22",
-            "Label": "\"Sous-imbrication 1\"",
-            "Value": "m221"
-          },
-          {
-            "Parent": "m22",
-            "Label": "\"Sous-imbrication 2\"",
-            "Value": "m222"
-          },
-          {
-            "Parent": "m2",
-            "Label": "\"Imbrication 3\"",
-            "Value": "m23"
-          }
-        ],
-        "Name": ""
-      },
-      {
-        "Label": "\"En-tête compliqué\"",
-        "id": "l9sb1gqt",
-        "Code": [
-          {
-            "Parent": "",
-            "Label": "\"En-tête 1\"",
-            "Value": "h1"
-          },
-          {
-            "Parent": "",
-            "Label": "\"En-tête 2\"",
-            "Value": "h2"
-          },
-          {
-            "Parent": "h2",
-            "Label": "\"En-tête 21\"",
-            "Value": "h21"
-          },
-          {
-            "Parent": "h21",
-            "Label": "\"En-tête 211\"",
-            "Value": "h211"
-          },
-          {
-            "Parent": "h21",
-            "Label": "\"En-tête 212\"",
-            "Value": "h212"
-          },
-          {
-            "Parent": "h21",
-            "Label": "\"En-tête 213\"",
-            "Value": "h213"
-          },
-          {
-            "Parent": "h2",
-            "Label": "\"En-tête 22\"",
-            "Value": "h22"
-          },
-          {
-            "Parent": "",
-            "Label": "\"En-tête 3\"",
-            "Value": "h3"
-          },
-          {
-            "Parent": "h3",
-            "Label": "\"En-tête 31\"",
-            "Value": "h31"
-          },
-          {
-            "Parent": "h3",
-            "Label": "\"En-tête 32\"",
-            "Value": "h32"
-          },
-          {
-            "Parent": "h3",
-            "Label": "\"En-tête 33\"",
-            "Value": "h33"
-          },
-          {
-            "Parent": "h33",
-            "Label": "\"En-tête 331\"",
-            "Value": "h331"
-          },
-          {
-            "Parent": "h33",
-            "Label": "\"En-tête 332\"",
-            "Value": "h332"
-          }
-        ],
-        "Name": ""
-      }
-    ]
-  },
-  "Iterations": {
-    "Iteration": [
-      {
-        "Maximum": "5",
-        "Minimum": "1",
-        "MemberReference": [
-          "lcoxacye",
-          "lcox3rt2"
-        ],
-        "Label": "BOUTON_BOUCLE",
-        "id": "lc0c5724",
-        "Step": "1",
-        "type": "DynamicIterationType",
-        "Name": "BOUCLE1"
-      },
-      {
-        "MemberReference": [
-          "lc0c6j7f"
-        ],
-        "id": "lc0cefvn",
-        "type": "DynamicIterationType",
-        "Name": "BOUCLE2",
-        "IterableReference": "lc0c5724"
-      },
-      {
-        "Maximum": "10",
-        "Minimum": "1",
-        "MemberReference": [
-          "lchfj2o1"
-        ],
-        "id": "lcq19udk",
-        "Step": "1",
-        "type": "DynamicIterationType",
-        "Name": "BOUCLEA"
-      },
-      {
-        "MemberReference": [
-          "lcq1esye"
-        ],
-        "id": "lcq1cpki",
-        "type": "DynamicIterationType",
-        "Name": "BOUCLEB_BASE1",
-        "IterableReference": "lc0c5724"
-      }
-    ]
-  },
-  "formulasLanguage": "VTL",
+  "Name": "SANDBOXENO32",
   "Child": [
     {
-      "Control": [],
-      "depth": 1,
-      "FlowControl": [],
-      "genericName": "MODULE",
-      "Label": [
-        "Première séquence"
-      ],
       "id": "l8x6ebv8",
-      "TargetMode": [
-        "CAPI",
-        "CATI",
-        "CAWI",
-        "PAPI"
-      ],
-      "Declaration": [
-        {
-          "declarationType": "HELP",
-          "Text": "\"Bonjour\"",
-          "id": "l8x6k5lj",
-          "position": "AFTER_QUESTION_TEXT",
-          "DeclarationMode": [
-            "CAPI",
-            "CATI",
-            "CAWI",
-            "PAPI"
-          ]
-        }
-      ],
+      "Name": "SEQ1",
       "type": "SequenceType",
       "Child": [
         {
-          "Control": [],
-          "depth": 2,
-          "FlowControl": [],
-          "genericName": "SUBMODULE",
-          "Label": [
-            "\"Première sous-séquence\""
-          ],
           "id": "lc0cu6i6",
-          "TargetMode": [
-            "CAPI",
-            "CATI",
-            "CAWI",
-            "PAPI"
-          ],
-          "Declaration": [
-            {
-              "declarationType": "CODECARD",
-              "Text": "\"Hello avec une carte code\"",
-              "id": "lc0coxz7",
-              "position": "AFTER_QUESTION_TEXT",
-              "DeclarationMode": [
-                "CAPI",
-                "CATI"
-              ]
-            }
-          ],
+          "Name": "SOUS_SEQ11",
           "type": "SequenceType",
           "Child": [
             {
-              "Response": [
-                {
-                  "CollectedVariableReference": "l8x6a7my",
-                  "id": "l8x6x5ia",
-                  "mandatory": false,
-                  "Datatype": {
-                    "Pattern": "",
-                    "typeName": "TEXT",
-                    "type": "TextDatatypeType",
-                    "MaxLength": 249
-                  }
-                }
-              ],
-              "Control": [],
-              "depth": 3,
-              "FlowControl": [],
+              "id": "l8x6akb3",
+              "Name": "Q1",
+              "type": "QuestionType",
               "Label": [
                 "\"Première question\""
               ],
-              "id": "l8x6akb3",
+              "depth": 3,
+              "Control": [],
+              "Response": [
+                {
+                  "id": "l8x6x5ia",
+                  "Datatype": {
+                    "type": "TextDatatypeType",
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "MaxLength": 249
+                  },
+                  "mandatory": false,
+                  "CollectedVariableReference": "l8x6a7my"
+                }
+              ],
               "TargetMode": [
                 "CAPI",
                 "CATI",
@@ -888,67 +42,67 @@
               ],
               "Declaration": [
                 {
-                  "declarationType": "HELP",
-                  "Text": "\"Bienvenue\"",
                   "id": "l8x6lv3v",
+                  "Text": "\"Bienvenue\"",
                   "position": "AFTER_QUESTION_TEXT",
                   "DeclarationMode": [
                     "CAPI",
                     "CATI",
                     "CAWI",
                     "PAPI"
-                  ]
+                  ],
+                  "declarationType": "HELP"
                 },
                 {
-                  "declarationType": "INSTRUCTION",
-                  "Text": "\"Instruction consigne pour la première question.\"",
                   "id": "l8x6hd7l",
+                  "Text": "\"Instruction consigne pour la première question.\"",
                   "position": "BEFORE_QUESTION_TEXT",
                   "DeclarationMode": [
                     "CAPI",
                     "CATI",
                     "CAWI",
                     "PAPI"
-                  ]
+                  ],
+                  "declarationType": "INSTRUCTION"
                 }
               ],
-              "type": "QuestionType",
-              "questionType": "SIMPLE",
-              "Name": "Q1"
+              "FlowControl": [],
+              "questionType": "SIMPLE"
             },
             {
-              "Response": [
-                {
-                  "CollectedVariableReference": "l8y8txrp",
-                  "id": "l8yannjg",
-                  "mandatory": false,
-                  "Datatype": {
-                    "Maximum": "100",
-                    "Minimum": "0",
-                    "typeName": "NUMERIC",
-                    "Unit": "",
-                    "type": "NumericDatatypeType",
-                    "Decimals": "1"
-                  }
-                }
-              ],
-              "Control": [
-                {
-                  "post_collect": false,
-                  "Description": "Inférieur à 30",
-                  "Expression": "cast(Q2, number) > 30",
-                  "during_collect": false,
-                  "criticity": "WARN",
-                  "FailMessage": "\"Valeur renseignée = \" || cast(Q2, string) || \" (> 30).\"",
-                  "id": "l8y8q2ij"
-                }
-              ],
-              "depth": 3,
-              "FlowControl": [],
+              "id": "l8y8ozno",
+              "Name": "Q2",
+              "type": "QuestionType",
               "Label": [
                 "\"Numérique avec contrôle\""
               ],
-              "id": "l8y8ozno",
+              "depth": 3,
+              "Control": [
+                {
+                  "id": "l8y8q2ij",
+                  "criticity": "WARN",
+                  "Expression": "cast(Q2, number) > 30",
+                  "Description": "Inférieur à 30",
+                  "FailMessage": "\"Valeur renseignée = \" || cast(Q2, string) || \" (> 30).\"",
+                  "post_collect": false,
+                  "during_collect": false
+                }
+              ],
+              "Response": [
+                {
+                  "id": "l8yannjg",
+                  "Datatype": {
+                    "Unit": "",
+                    "type": "NumericDatatypeType",
+                    "Maximum": "100",
+                    "Minimum": "0",
+                    "Decimals": "1",
+                    "typeName": "NUMERIC"
+                  },
+                  "mandatory": false,
+                  "CollectedVariableReference": "l8y8txrp"
+                }
+              ],
               "TargetMode": [
                 "CAPI",
                 "CATI",
@@ -956,29 +110,29 @@
                 "PAPI"
               ],
               "Declaration": [],
-              "type": "QuestionType",
-              "questionType": "SIMPLE",
-              "Name": "Q2"
+              "FlowControl": [],
+              "questionType": "SIMPLE"
             },
             {
-              "Response": [
-                {
-                  "CollectedVariableReference": "l8y8zral",
-                  "id": "l8yac8z3",
-                  "mandatory": false,
-                  "Datatype": {
-                    "typeName": "BOOLEAN",
-                    "type": "BooleanDatatypeType"
-                  }
-                }
-              ],
-              "Control": [],
-              "depth": 3,
-              "FlowControl": [],
+              "id": "l8y8wde3",
+              "Name": "Q3",
+              "type": "QuestionType",
               "Label": [
                 "\"Booléenne\""
               ],
-              "id": "l8y8wde3",
+              "depth": 3,
+              "Control": [],
+              "Response": [
+                {
+                  "id": "l8yac8z3",
+                  "Datatype": {
+                    "type": "BooleanDatatypeType",
+                    "typeName": "BOOLEAN"
+                  },
+                  "mandatory": false,
+                  "CollectedVariableReference": "l8y8zral"
+                }
+              ],
               "TargetMode": [
                 "CAPI",
                 "CATI",
@@ -986,34 +140,33 @@
                 "PAPI"
               ],
               "Declaration": [],
-              "type": "QuestionType",
-              "questionType": "SIMPLE",
-              "Name": "Q3"
+              "FlowControl": [],
+              "questionType": "SIMPLE"
             },
             {
-              "Response": [
-                {
-                  "CollectedVariableReference": "l9ny6ifi",
-                  "id": "l9nydtw0",
-                  "mandatory": false,
-                  "CodeListReference": "l9ny0mef",
-                  "Datatype": {
-                    "Pattern": "",
-                    "typeName": "TEXT",
-                    "visualizationHint": "RADIO",
-                    "type": "TextDatatypeType",
-                    "MaxLength": 1
-                  }
-                }
-              ],
-              "Control": [],
-              "depth": 3,
-              "FlowControl": [],
+              "id": "l9nxvj6m",
+              "Name": "QCU_COMPLEXE",
+              "type": "QuestionType",
               "Label": [
                 "\"QCU avec liste de codes imbriqués\""
               ],
-              "ClarificationQuestion": [],
-              "id": "l9nxvj6m",
+              "depth": 3,
+              "Control": [],
+              "Response": [
+                {
+                  "id": "l9nydtw0",
+                  "Datatype": {
+                    "type": "TextDatatypeType",
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "MaxLength": 1,
+                    "visualizationHint": "RADIO"
+                  },
+                  "mandatory": false,
+                  "CodeListReference": "l9ny0mef",
+                  "CollectedVariableReference": "l9ny6ifi"
+                }
+              ],
               "TargetMode": [
                 "CAPI",
                 "CATI",
@@ -1021,41 +174,180 @@
                 "PAPI"
               ],
               "Declaration": [],
-              "type": "QuestionType",
+              "FlowControl": [],
               "questionType": "SINGLE_CHOICE",
-              "Name": "QCU_COMPLEXE"
+              "ClarificationQuestion": []
             }
           ],
-          "Name": "SOUS_SEQ11"
+          "Label": [
+            "\"Première sous-séquence\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "id": "lc0coxz7",
+              "Text": "\"Hello avec une carte code\"",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI"
+              ],
+              "declarationType": "CODECARD"
+            }
+          ],
+          "FlowControl": [],
+          "genericName": "SUBMODULE"
         }
       ],
-      "Name": "SEQ1"
-    },
-    {
-      "Control": [],
-      "depth": 1,
-      "FlowControl": [],
-      "genericName": "MODULE",
       "Label": [
-        "Tableaux"
+        "Première séquence"
       ],
-      "id": "l9888jno",
+      "depth": 1,
+      "Control": [],
       "TargetMode": [
         "CAPI",
         "CATI",
         "CAWI",
         "PAPI"
       ],
-      "Declaration": [],
+      "Declaration": [
+        {
+          "id": "l8x6k5lj",
+          "Text": "\"Bonjour\"",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "declarationType": "HELP"
+        }
+      ],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "l9888jno",
+      "Name": "TABLEAUX",
       "type": "SequenceType",
       "Child": [
         {
-          "FlowControl": [],
+          "id": "l988nifn",
+          "Name": "TAB2",
+          "type": "QuestionType",
           "Label": [
             "\"Tableau liste de codes + 2 colonnes\""
           ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "l98a9uow",
+              "Datatype": {
+                "type": "NumericDatatypeType",
+                "Maximum": "100",
+                "Minimum": "0",
+                "Decimals": "0",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "l988lnv3"
+            },
+            {
+              "id": "l98aeyfq",
+              "Datatype": {
+                "type": "NumericDatatypeType",
+                "Maximum": "100",
+                "Minimum": "0",
+                "Decimals": "0",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "l9892ulx"
+            },
+            {
+              "id": "l98aadol",
+              "Datatype": {
+                "type": "NumericDatatypeType",
+                "Maximum": "100",
+                "Minimum": "0",
+                "Decimals": "0",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "l988nhgh"
+            },
+            {
+              "id": "l98adzsy",
+              "Datatype": {
+                "type": "NumericDatatypeType",
+                "Maximum": "100",
+                "Minimum": "0",
+                "Decimals": "0",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "l988ud4p"
+            },
+            {
+              "id": "l98akz5o",
+              "Datatype": {
+                "type": "NumericDatatypeType",
+                "Maximum": "100",
+                "Minimum": "0",
+                "Decimals": "0",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "l988wv7v"
+            },
+            {
+              "id": "l98aceo5",
+              "Datatype": {
+                "type": "NumericDatatypeType",
+                "Maximum": "100",
+                "Minimum": "0",
+                "Decimals": "0",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "l9895qbb"
+            },
+            {
+              "id": "l98a7b6m",
+              "Datatype": {
+                "type": "NumericDatatypeType",
+                "Maximum": "100",
+                "Minimum": "0",
+                "Decimals": "0",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "l988ti9h"
+            },
+            {
+              "id": "l98a6v1m",
+              "Datatype": {
+                "type": "NumericDatatypeType",
+                "Maximum": "100",
+                "Minimum": "0",
+                "Decimals": "0",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "l988pc6c"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "TABLE",
           "ResponseStructure": {
-            "Attribute": [],
             "Mapping": [
               {
                 "MappingSource": "l98a9uow",
@@ -1090,120 +382,93 @@
                 "MappingTarget": "4 2"
               }
             ],
+            "Attribute": [],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "l988okev"
               },
               {
-                "dimensionType": "SECONDARY",
                 "dynamic": "0",
+                "dimensionType": "SECONDARY",
                 "CodeListReference": "l988nznm"
               },
               {
-                "dimensionType": "MEASURE",
                 "Label": "\"Cases du tableau\"",
-                "dynamic": "0"
+                "dynamic": "0",
+                "dimensionType": "MEASURE"
               }
             ]
           },
+          "ClarificationQuestion": []
+        },
+        {
+          "id": "l9ny8wb8",
+          "Name": "TAB_IMBRIQ",
           "type": "QuestionType",
-          "Name": "TAB2",
+          "Label": [
+            "\"Tableau avec liste de codes imbriqués\""
+          ],
+          "depth": 2,
+          "Control": [],
           "Response": [
             {
-              "CollectedVariableReference": "l988lnv3",
-              "id": "l98a9uow",
+              "id": "l9nyjkq7",
               "Datatype": {
-                "Maximum": "100",
-                "Minimum": "0",
-                "typeName": "NUMERIC",
                 "type": "NumericDatatypeType",
-                "Decimals": "0"
-              }
+                "Maximum": "10",
+                "Minimum": "0",
+                "Decimals": "0",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "l9ny6hcn"
             },
             {
-              "CollectedVariableReference": "l9892ulx",
-              "id": "l98aeyfq",
+              "id": "l9nyfqio",
               "Datatype": {
-                "Maximum": "100",
-                "Minimum": "0",
-                "typeName": "NUMERIC",
                 "type": "NumericDatatypeType",
-                "Decimals": "0"
-              }
+                "Maximum": "10",
+                "Minimum": "0",
+                "Decimals": "0",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "l9nyb01m"
             },
             {
-              "CollectedVariableReference": "l988nhgh",
-              "id": "l98aadol",
+              "id": "l9nylh0w",
               "Datatype": {
-                "Maximum": "100",
-                "Minimum": "0",
-                "typeName": "NUMERIC",
                 "type": "NumericDatatypeType",
-                "Decimals": "0"
-              }
+                "Maximum": "10",
+                "Minimum": "0",
+                "Decimals": "0",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "l9nyabku"
             },
             {
-              "CollectedVariableReference": "l988ud4p",
-              "id": "l98adzsy",
+              "id": "l9nycx2s",
               "Datatype": {
-                "Maximum": "100",
-                "Minimum": "0",
-                "typeName": "NUMERIC",
                 "type": "NumericDatatypeType",
-                "Decimals": "0"
-              }
+                "Maximum": "10",
+                "Minimum": "0",
+                "Decimals": "0",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "l9ny1x8g"
             },
             {
-              "CollectedVariableReference": "l988wv7v",
-              "id": "l98akz5o",
+              "id": "l9nyglkt",
               "Datatype": {
-                "Maximum": "100",
-                "Minimum": "0",
-                "typeName": "NUMERIC",
                 "type": "NumericDatatypeType",
-                "Decimals": "0"
-              }
-            },
-            {
-              "CollectedVariableReference": "l9895qbb",
-              "id": "l98aceo5",
-              "Datatype": {
-                "Maximum": "100",
+                "Maximum": "10",
                 "Minimum": "0",
-                "typeName": "NUMERIC",
-                "type": "NumericDatatypeType",
-                "Decimals": "0"
-              }
-            },
-            {
-              "CollectedVariableReference": "l988ti9h",
-              "id": "l98a7b6m",
-              "Datatype": {
-                "Maximum": "100",
-                "Minimum": "0",
-                "typeName": "NUMERIC",
-                "type": "NumericDatatypeType",
-                "Decimals": "0"
-              }
-            },
-            {
-              "CollectedVariableReference": "l988pc6c",
-              "id": "l98a6v1m",
-              "Datatype": {
-                "Maximum": "100",
-                "Minimum": "0",
-                "typeName": "NUMERIC",
-                "type": "NumericDatatypeType",
-                "Decimals": "0"
-              }
+                "Decimals": "0",
+                "typeName": "NUMERIC"
+              },
+              "CollectedVariableReference": "l9nyc0lf"
             }
           ],
-          "Control": [],
-          "depth": 2,
-          "ClarificationQuestion": [],
-          "id": "l988nifn",
           "TargetMode": [
             "CAPI",
             "CATI",
@@ -1211,15 +476,9 @@
             "PAPI"
           ],
           "Declaration": [],
-          "questionType": "TABLE"
-        },
-        {
           "FlowControl": [],
-          "Label": [
-            "\"Tableau avec liste de codes imbriqués\""
-          ],
+          "questionType": "TABLE",
           "ResponseStructure": {
-            "Attribute": [],
             "Mapping": [
               {
                 "MappingSource": "l9nyjkq7",
@@ -1242,82 +501,177 @@
                 "MappingTarget": "5 1"
               }
             ],
+            "Attribute": [],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "l9nygs1y"
               },
               {
-                "dimensionType": "MEASURE",
                 "Label": "\"Nombre tableau imbrications\"",
-                "dynamic": "0"
+                "dynamic": "0",
+                "dimensionType": "MEASURE"
               }
             ]
           },
+          "ClarificationQuestion": []
+        },
+        {
+          "id": "l9sao32k",
+          "Name": "TAB_HEADER",
           "type": "QuestionType",
-          "Name": "TAB_IMBRIQ",
+          "Label": [
+            "\"Tableau avec en-tête compliqué\""
+          ],
+          "depth": 2,
+          "Control": [],
           "Response": [
             {
-              "CollectedVariableReference": "l9ny6hcn",
-              "id": "l9nyjkq7",
+              "id": "l9scc1ws",
               "Datatype": {
-                "Maximum": "10",
-                "Minimum": "0",
-                "typeName": "NUMERIC",
-                "type": "NumericDatatypeType",
-                "Decimals": "0"
-              }
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "l9sb57mu"
             },
             {
-              "CollectedVariableReference": "l9nyb01m",
-              "id": "l9nyfqio",
+              "id": "l9scgf6q",
               "Datatype": {
-                "Maximum": "10",
-                "Minimum": "0",
-                "typeName": "NUMERIC",
-                "type": "NumericDatatypeType",
-                "Decimals": "0"
-              }
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "l9sb98hc"
             },
             {
-              "CollectedVariableReference": "l9nyabku",
-              "id": "l9nylh0w",
+              "id": "l9scehfq",
               "Datatype": {
-                "Maximum": "10",
-                "Minimum": "0",
-                "typeName": "NUMERIC",
-                "type": "NumericDatatypeType",
-                "Decimals": "0"
-              }
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "l9sbdpd3"
             },
             {
-              "CollectedVariableReference": "l9ny1x8g",
-              "id": "l9nycx2s",
+              "id": "l9scbs40",
               "Datatype": {
-                "Maximum": "10",
-                "Minimum": "0",
-                "typeName": "NUMERIC",
-                "type": "NumericDatatypeType",
-                "Decimals": "0"
-              }
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "l9sbcbqy"
             },
             {
-              "CollectedVariableReference": "l9nyc0lf",
-              "id": "l9nyglkt",
+              "id": "l9sc5fv8",
               "Datatype": {
-                "Maximum": "10",
-                "Minimum": "0",
-                "typeName": "NUMERIC",
-                "type": "NumericDatatypeType",
-                "Decimals": "0"
-              }
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "l9saykme"
+            },
+            {
+              "id": "l9sbx6ql",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "l9sb17f5"
+            },
+            {
+              "id": "l9scffnq",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "l9sbei4t"
+            },
+            {
+              "id": "l9sc9zik",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "l9sbbdme"
+            },
+            {
+              "id": "l9sc5pd6",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "l9sbez1x"
+            },
+            {
+              "id": "l9sc88m0",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "l9sbcwys"
+            },
+            {
+              "id": "l9sc6uvk",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "l9sauv6g"
+            },
+            {
+              "id": "l9sc4gho",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "l9sayn9v"
+            },
+            {
+              "id": "l9sc875l",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "l9sb2zke"
+            },
+            {
+              "id": "l9scdx94",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "l9sb7bw3"
+            },
+            {
+              "id": "l9sbxeve",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "l9sb54zs"
+            },
+            {
+              "id": "l9sc9vnz",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "l9sb21f4"
+            },
+            {
+              "id": "l9sc8pte",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "l9sb60ci"
+            },
+            {
+              "id": "l9scfl2z",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "l9sauv5n"
             }
           ],
-          "Control": [],
-          "depth": 2,
-          "ClarificationQuestion": [],
-          "id": "l9ny8wb8",
           "TargetMode": [
             "CAPI",
             "CATI",
@@ -1325,15 +679,9 @@
             "PAPI"
           ],
           "Declaration": [],
-          "questionType": "TABLE"
-        },
-        {
           "FlowControl": [],
-          "Label": [
-            "\"Tableau avec en-tête compliqué\""
-          ],
+          "questionType": "TABLE",
           "ResponseStructure": {
-            "Attribute": [],
             "Mapping": [
               {
                 "MappingSource": "l9scc1ws",
@@ -1408,569 +756,33 @@
                 "MappingTarget": "2 9"
               }
             ],
+            "Attribute": [],
             "Dimension": [
               {
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
                 "CodeListReference": "l988nznm"
               },
               {
-                "dimensionType": "SECONDARY",
                 "dynamic": "0",
+                "dimensionType": "SECONDARY",
                 "CodeListReference": "l9sb1gqt"
               },
               {
-                "dimensionType": "MEASURE",
                 "Label": "\"Cases tableau en-tête compliqué\"",
-                "dynamic": "0"
+                "dynamic": "0",
+                "dimensionType": "MEASURE"
               }
             ]
           },
-          "type": "QuestionType",
-          "Name": "TAB_HEADER",
-          "Response": [
-            {
-              "CollectedVariableReference": "l9sb57mu",
-              "id": "l9scc1ws",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "l9sb98hc",
-              "id": "l9scgf6q",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "l9sbdpd3",
-              "id": "l9scehfq",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "l9sbcbqy",
-              "id": "l9scbs40",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "l9saykme",
-              "id": "l9sc5fv8",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "l9sb17f5",
-              "id": "l9sbx6ql",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "l9sbei4t",
-              "id": "l9scffnq",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "l9sbbdme",
-              "id": "l9sc9zik",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "l9sbez1x",
-              "id": "l9sc5pd6",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "l9sbcwys",
-              "id": "l9sc88m0",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "l9sauv6g",
-              "id": "l9sc6uvk",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "l9sayn9v",
-              "id": "l9sc4gho",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "l9sb2zke",
-              "id": "l9sc875l",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "l9sb7bw3",
-              "id": "l9scdx94",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "l9sb54zs",
-              "id": "l9sbxeve",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "l9sb21f4",
-              "id": "l9sc9vnz",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "l9sb60ci",
-              "id": "l9sc8pte",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "l9sauv5n",
-              "id": "l9scfl2z",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            }
-          ],
-          "Control": [],
-          "depth": 2,
-          "ClarificationQuestion": [],
-          "id": "l9sao32k",
-          "TargetMode": [
-            "CAPI",
-            "CATI",
-            "CAWI",
-            "PAPI"
-          ],
-          "Declaration": [],
-          "questionType": "TABLE"
+          "ClarificationQuestion": []
         }
       ],
-      "Name": "TABLEAUX"
-    },
-    {
-      "Control": [],
-      "depth": 1,
-      "FlowControl": [],
-      "genericName": "MODULE",
       "Label": [
-        "Séquence boucle"
+        "Tableaux"
       ],
-      "id": "lbxg68fq",
-      "TargetMode": [
-        "CAPI",
-        "CATI",
-        "CAWI",
-        "PAPI"
-      ],
-      "Declaration": [
-        {
-          "declarationType": "HELP",
-          "Text": "\"Séquence boucle\"",
-          "id": "lbxg5q0i",
-          "position": "AFTER_QUESTION_TEXT",
-          "DeclarationMode": [
-            "CAPI",
-            "CATI",
-            "CAWI",
-            "PAPI"
-          ]
-        }
-      ],
-      "type": "SequenceType",
-      "Child": [
-        {
-          "Control": [],
-          "depth": 2,
-          "FlowControl": [],
-          "genericName": "SUBMODULE",
-          "Label": [
-            "\"Sous séquence bouclée 1\""
-          ],
-          "id": "lcoxacye",
-          "TargetMode": [
-            "CAPI",
-            "CATI",
-            "CAWI",
-            "PAPI"
-          ],
-          "Declaration": [
-            {
-              "declarationType": "HELP",
-              "Text": "\"Sous-séquence 1 de la boucle\"",
-              "id": "lcoxcd5s",
-              "position": "AFTER_QUESTION_TEXT",
-              "DeclarationMode": [
-                "CAPI",
-                "CATI",
-                "CAWI",
-                "PAPI"
-              ]
-            }
-          ],
-          "type": "SequenceType",
-          "Child": [
-            {
-              "Response": [
-                {
-                  "CollectedVariableReference": "lchevode",
-                  "id": "lbxl2fv1",
-                  "mandatory": false,
-                  "Datatype": {
-                    "Maximum": "10000",
-                    "Minimum": "0",
-                    "typeName": "NUMERIC",
-                    "Unit": "http://id.insee.fr/unit/euro",
-                    "type": "NumericDatatypeType",
-                    "Decimals": ""
-                  }
-                }
-              ],
-              "Control": [],
-              "depth": 3,
-              "FlowControl": [],
-              "Label": [
-                "\"Question simple\""
-              ],
-              "id": "lbxgigk8",
-              "TargetMode": [
-                "CAPI",
-                "CATI",
-                "CAWI",
-                "PAPI"
-              ],
-              "Declaration": [],
-              "type": "QuestionType",
-              "questionType": "SIMPLE",
-              "Name": "QSIMPLE"
-            }
-          ],
-          "Name": "SOUS_SEQ21"
-        },
-        {
-          "Control": [],
-          "depth": 2,
-          "FlowControl": [],
-          "genericName": "SUBMODULE",
-          "Label": [
-            "\"Sous-séquence bouclée 2\""
-          ],
-          "id": "lcox3rt2",
-          "TargetMode": [
-            "CAPI",
-            "CATI",
-            "CAWI",
-            "PAPI"
-          ],
-          "Declaration": [
-            {
-              "declarationType": "HELP",
-              "Text": "\"Sous-séquence de la boucle 2\"",
-              "id": "lcoxfv3j",
-              "position": "AFTER_QUESTION_TEXT",
-              "DeclarationMode": [
-                "CAPI",
-                "CATI",
-                "CAWI",
-                "PAPI"
-              ]
-            }
-          ],
-          "type": "SequenceType",
-          "Child": [
-            {
-              "Response": [
-                {
-                  "CollectedVariableReference": "lcowzlwd",
-                  "id": "lcozv5an",
-                  "mandatory": false,
-                  "Datatype": {
-                    "Maximum": "100",
-                    "Minimum": "0",
-                    "typeName": "NUMERIC",
-                    "Unit": "",
-                    "type": "NumericDatatypeType",
-                    "Decimals": ""
-                  }
-                }
-              ],
-              "Control": [],
-              "depth": 3,
-              "FlowControl": [],
-              "Label": [
-                "\"Question simple 2\""
-              ],
-              "id": "lcoxana6",
-              "TargetMode": [
-                "CAPI",
-                "CATI",
-                "CAWI",
-                "PAPI"
-              ],
-              "Declaration": [],
-              "type": "QuestionType",
-              "questionType": "SIMPLE",
-              "Name": "QSIMPLE2"
-            }
-          ],
-          "Name": "SOUS_SEQ22"
-        }
-      ],
-      "Name": "SEQ_BOUCLE"
-    },
-    {
-      "Control": [],
       "depth": 1,
-      "FlowControl": [],
-      "genericName": "MODULE",
-      "Label": [
-        "\"Séquence boucle 2\""
-      ],
-      "id": "lc0c6j7f",
-      "TargetMode": [
-        "CAPI",
-        "CATI",
-        "CAWI",
-        "PAPI"
-      ],
-      "Declaration": [
-        {
-          "declarationType": "HELP",
-          "Text": "\"Séquence boucle 2\"",
-          "id": "lc0c74gh",
-          "position": "AFTER_QUESTION_TEXT",
-          "DeclarationMode": [
-            "CAPI",
-            "CATI",
-            "CAWI",
-            "PAPI"
-          ]
-        }
-      ],
-      "type": "SequenceType",
-      "Child": [
-        {
-          "Response": [
-            {
-              "CollectedVariableReference": "lc0c6bs0",
-              "id": "lc0cy9v5",
-              "mandatory": false,
-              "Datatype": {
-                "Pattern": "",
-                "typeName": "TEXT",
-                "type": "TextDatatypeType",
-                "MaxLength": 249
-              }
-            }
-          ],
-          "Control": [],
-          "depth": 2,
-          "FlowControl": [],
-          "Label": [
-            "\"La suite\""
-          ],
-          "id": "lc0clxv1",
-          "TargetMode": [
-            "CAPI",
-            "CATI",
-            "CAWI",
-            "PAPI"
-          ],
-          "Declaration": [],
-          "type": "QuestionType",
-          "questionType": "SIMPLE",
-          "Name": "LASUITE"
-        }
-      ],
-      "Name": "SEQ_BOUCLE2"
-    },
-    {
       "Control": [],
-      "depth": 1,
-      "FlowControl": [],
-      "genericName": "MODULE",
-      "Label": [
-        "\"Séquence A\""
-      ],
-      "id": "lchfj2o1",
-      "TargetMode": [
-        "CAPI",
-        "CATI",
-        "CAWI",
-        "PAPI"
-      ],
-      "Declaration": [
-        {
-          "declarationType": "HELP",
-          "Text": "\"Séquence A\"",
-          "id": "lcq1hfbm",
-          "position": "AFTER_QUESTION_TEXT",
-          "DeclarationMode": [
-            "CAPI",
-            "CATI",
-            "CAWI",
-            "PAPI"
-          ]
-        }
-      ],
-      "type": "SequenceType",
-      "Child": [
-        {
-          "Response": [
-            {
-              "CollectedVariableReference": "lcq1m9zm",
-              "id": "lcq1f9ce",
-              "mandatory": false,
-              "Datatype": {
-                "Maximum": "100",
-                "Minimum": "0",
-                "typeName": "NUMERIC",
-                "Unit": "",
-                "type": "NumericDatatypeType",
-                "Decimals": ""
-              }
-            }
-          ],
-          "Control": [],
-          "depth": 2,
-          "FlowControl": [],
-          "Label": [
-            "\"Toto A\""
-          ],
-          "id": "lcq1pnud",
-          "TargetMode": [
-            "CAPI",
-            "CATI",
-            "CAWI",
-            "PAPI"
-          ],
-          "Declaration": [],
-          "type": "QuestionType",
-          "questionType": "SIMPLE",
-          "Name": "TOTOA"
-        }
-      ],
-      "Name": "SEQA"
-    },
-    {
-      "Control": [],
-      "depth": 1,
-      "FlowControl": [],
-      "genericName": "MODULE",
-      "Label": [
-        "\"Séquence B\""
-      ],
-      "id": "lcq1esye",
-      "TargetMode": [
-        "CAPI",
-        "CATI",
-        "CAWI",
-        "PAPI"
-      ],
-      "Declaration": [
-        {
-          "declarationType": "HELP",
-          "Text": "\"Séquence B\"",
-          "id": "lcq1ogvx",
-          "position": "AFTER_QUESTION_TEXT",
-          "DeclarationMode": [
-            "CAPI",
-            "CATI",
-            "CAWI",
-            "PAPI"
-          ]
-        }
-      ],
-      "type": "SequenceType",
-      "Child": [
-        {
-          "Response": [
-            {
-              "CollectedVariableReference": "lcq1mg4s",
-              "id": "lcq1rajz",
-              "mandatory": false,
-              "Datatype": {
-                "Maximum": "100",
-                "Minimum": "0",
-                "typeName": "NUMERIC",
-                "Unit": "",
-                "type": "NumericDatatypeType",
-                "Decimals": ""
-              }
-            }
-          ],
-          "Control": [],
-          "depth": 2,
-          "FlowControl": [],
-          "Label": [
-            "\"Toto B\""
-          ],
-          "id": "lcq1cyit",
-          "TargetMode": [
-            "CAPI",
-            "CATI",
-            "CAWI",
-            "PAPI"
-          ],
-          "Declaration": [],
-          "type": "QuestionType",
-          "questionType": "SIMPLE",
-          "Name": "TOTOB"
-        }
-      ],
-      "Name": "SEQB"
-    },
-    {
-      "Control": [],
-      "depth": 1,
-      "FlowControl": [],
-      "genericName": "MODULE",
-      "Label": [
-        "QUESTIONNAIRE_END"
-      ],
-      "id": "idendquest",
       "TargetMode": [
         "CAPI",
         "CATI",
@@ -1978,9 +790,1197 @@
         "PAPI"
       ],
       "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "lbxg68fq",
+      "Name": "SEQ_BOUCLE",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "lcoxacye",
+          "Name": "SOUS_SEQ21",
+          "type": "SequenceType",
+          "Child": [
+            {
+              "id": "lbxgigk8",
+              "Name": "QSIMPLE",
+              "type": "QuestionType",
+              "Label": [
+                "\"Question simple\""
+              ],
+              "depth": 3,
+              "Control": [],
+              "Response": [
+                {
+                  "id": "lbxl2fv1",
+                  "Datatype": {
+                    "Unit": "http://id.insee.fr/unit/euro",
+                    "type": "NumericDatatypeType",
+                    "Maximum": "10000",
+                    "Minimum": "0",
+                    "Decimals": "",
+                    "typeName": "NUMERIC"
+                  },
+                  "mandatory": false,
+                  "CollectedVariableReference": "lchevode"
+                }
+              ],
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "FlowControl": [],
+              "questionType": "SIMPLE"
+            }
+          ],
+          "Label": [
+            "\"Sous séquence bouclée 1\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "id": "lcoxcd5s",
+              "Text": "\"Sous-séquence 1 de la boucle\"",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "declarationType": "HELP"
+            }
+          ],
+          "FlowControl": [],
+          "genericName": "SUBMODULE"
+        },
+        {
+          "id": "lcox3rt2",
+          "Name": "SOUS_SEQ22",
+          "type": "SequenceType",
+          "Child": [
+            {
+              "id": "lcoxana6",
+              "Name": "QSIMPLE2",
+              "type": "QuestionType",
+              "Label": [
+                "\"Question simple 2\""
+              ],
+              "depth": 3,
+              "Control": [],
+              "Response": [
+                {
+                  "id": "lcozv5an",
+                  "Datatype": {
+                    "Unit": "",
+                    "type": "NumericDatatypeType",
+                    "Maximum": "100",
+                    "Minimum": "0",
+                    "Decimals": "",
+                    "typeName": "NUMERIC"
+                  },
+                  "mandatory": false,
+                  "CollectedVariableReference": "lcowzlwd"
+                }
+              ],
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "Declaration": [],
+              "FlowControl": [],
+              "questionType": "SIMPLE"
+            }
+          ],
+          "Label": [
+            "\"Sous-séquence bouclée 2\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "id": "lcoxfv3j",
+              "Text": "\"Sous-séquence de la boucle 2\"",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "declarationType": "HELP"
+            }
+          ],
+          "FlowControl": [],
+          "genericName": "SUBMODULE"
+        }
+      ],
+      "Label": [
+        "Séquence boucle"
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "id": "lbxg5q0i",
+          "Text": "\"Séquence boucle\"",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "declarationType": "HELP"
+        }
+      ],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "lc0c6j7f",
+      "Name": "SEQ_BOUCLE2",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "lc0clxv1",
+          "Name": "LASUITE",
+          "type": "QuestionType",
+          "Label": [
+            "\"La suite\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "lc0cy9v5",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "lc0c6bs0"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"Séquence boucle 2\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "id": "lc0c74gh",
+          "Text": "\"Séquence boucle 2\"",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "declarationType": "HELP"
+        }
+      ],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "lchfj2o1",
+      "Name": "SEQA",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "lcq1pnud",
+          "Name": "TOTOA",
+          "type": "QuestionType",
+          "Label": [
+            "\"Toto A\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "lcq1f9ce",
+              "Datatype": {
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Maximum": "100",
+                "Minimum": "0",
+                "Decimals": "",
+                "typeName": "NUMERIC"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "lcq1m9zm"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"Séquence A\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "id": "lcq1hfbm",
+          "Text": "\"Séquence A\"",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "declarationType": "HELP"
+        }
+      ],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "lcq1esye",
+      "Name": "SEQB",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "lcq1cyit",
+          "Name": "TOTOB",
+          "type": "QuestionType",
+          "Label": [
+            "\"Toto B\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "lcq1rajz",
+              "Datatype": {
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Maximum": "100",
+                "Minimum": "0",
+                "Decimals": "",
+                "typeName": "NUMERIC"
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "lcq1mg4s"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        }
+      ],
+      "Label": [
+        "\"Séquence B\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "id": "lcq1ogvx",
+          "Text": "\"Séquence B\"",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "declarationType": "HELP"
+        }
+      ],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "idendquest",
+      "Name": "QUESTIONNAIRE_END",
       "type": "SequenceType",
       "Child": [],
-      "Name": "QUESTIONNAIRE_END"
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
     }
-  ]
+  ],
+  "Label": [
+    "Sandbox Eno V3 Lunatic V2"
+  ],
+  "final": false,
+  "owner": "FAKEPERMISSION",
+  "agency": "fr.insee",
+  "CodeLists": {
+    "CodeList": [
+      {
+        "id": "l9ny0mef",
+        "Code": [
+          {
+            "Label": "\"Modalité simple 1\"",
+            "Value": "m1",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Modalité 2 avec imbrications\"",
+            "Value": "m2",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Imbrication 1\"",
+            "Value": "m21",
+            "Parent": "m2"
+          },
+          {
+            "Label": "\"Imbrication 2\"",
+            "Value": "m22",
+            "Parent": "m2"
+          },
+          {
+            "Label": "\"Sous-imbrication 1\"",
+            "Value": "m221",
+            "Parent": "m22"
+          },
+          {
+            "Label": "\"Sous-imbrication 2\"",
+            "Value": "m222",
+            "Parent": "m22"
+          },
+          {
+            "Label": "\"Imbrication 3\"",
+            "Value": "m23",
+            "Parent": "m2"
+          }
+        ],
+        "Name": "",
+        "Label": "\"Liste de codes avec imbrications\""
+      },
+      {
+        "id": "l988okev",
+        "Code": [
+          {
+            "Label": "\"Code A\"",
+            "Value": "codeA",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Code B\"",
+            "Value": "codeB",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Code C\"",
+            "Value": "codeC",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Code D\"",
+            "Value": "codeD",
+            "Parent": ""
+          }
+        ],
+        "Name": "",
+        "Label": "\"Liste de codes simple\""
+      },
+      {
+        "id": "l988nznm",
+        "Code": [
+          {
+            "Label": "\"Colonne 1\"",
+            "Value": "col1",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Colonne 2\"",
+            "Value": "col2",
+            "Parent": ""
+          }
+        ],
+        "Name": "",
+        "Label": "\"Colonnes\""
+      },
+      {
+        "id": "l9nygs1y",
+        "Code": [
+          {
+            "Label": "\"Modalité simple 1\"",
+            "Value": "m1",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Modalité 2 avec imbrications\"",
+            "Value": "m2",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Imbrication 1\"",
+            "Value": "m21",
+            "Parent": "m2"
+          },
+          {
+            "Label": "\"Imbrication 2\"",
+            "Value": "m22",
+            "Parent": "m2"
+          },
+          {
+            "Label": "\"Sous-imbrication 1\"",
+            "Value": "m221",
+            "Parent": "m22"
+          },
+          {
+            "Label": "\"Sous-imbrication 2\"",
+            "Value": "m222",
+            "Parent": "m22"
+          },
+          {
+            "Label": "\"Imbrication 3\"",
+            "Value": "m23",
+            "Parent": "m2"
+          }
+        ],
+        "Name": "",
+        "Label": "\"Liste de codes avec imbrications copie\""
+      },
+      {
+        "id": "l9sb1gqt",
+        "Code": [
+          {
+            "Label": "\"En-tête 1\"",
+            "Value": "h1",
+            "Parent": ""
+          },
+          {
+            "Label": "\"En-tête 2\"",
+            "Value": "h2",
+            "Parent": ""
+          },
+          {
+            "Label": "\"En-tête 21\"",
+            "Value": "h21",
+            "Parent": "h2"
+          },
+          {
+            "Label": "\"En-tête 211\"",
+            "Value": "h211",
+            "Parent": "h21"
+          },
+          {
+            "Label": "\"En-tête 212\"",
+            "Value": "h212",
+            "Parent": "h21"
+          },
+          {
+            "Label": "\"En-tête 213\"",
+            "Value": "h213",
+            "Parent": "h21"
+          },
+          {
+            "Label": "\"En-tête 22\"",
+            "Value": "h22",
+            "Parent": "h2"
+          },
+          {
+            "Label": "\"En-tête 3\"",
+            "Value": "h3",
+            "Parent": ""
+          },
+          {
+            "Label": "\"En-tête 31\"",
+            "Value": "h31",
+            "Parent": "h3"
+          },
+          {
+            "Label": "\"En-tête 32\"",
+            "Value": "h32",
+            "Parent": "h3"
+          },
+          {
+            "Label": "\"En-tête 33\"",
+            "Value": "h33",
+            "Parent": "h3"
+          },
+          {
+            "Label": "\"En-tête 331\"",
+            "Value": "h331",
+            "Parent": "h33"
+          },
+          {
+            "Label": "\"En-tête 332\"",
+            "Value": "h332",
+            "Parent": "h33"
+          }
+        ],
+        "Name": "",
+        "Label": "\"En-tête compliqué\""
+      }
+    ]
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "l8yleiwn",
+        "Name": "VARCALC",
+        "type": "CalculatedVariableType",
+        "Label": "Variable calculée",
+        "Formula": "cast(Q2, number) + 10.5",
+        "Datatype": {
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Maximum": "200",
+          "Minimum": "0",
+          "Decimals": "1",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "l8x6a7my",
+        "Name": "Q1",
+        "type": "CollectedVariableType",
+        "Label": "Q1 label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "l8y8txrp",
+        "Name": "Q2",
+        "type": "CollectedVariableType",
+        "Label": "Q2 label",
+        "Datatype": {
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Maximum": "100",
+          "Minimum": "0",
+          "Decimals": "1",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "l8y8zral",
+        "Name": "Q3",
+        "type": "CollectedVariableType",
+        "Label": "Q3 label",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "l9ny6ifi",
+        "Name": "QCU_COMPLEXE",
+        "type": "CollectedVariableType",
+        "Label": "QCU_COMPLEXE label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 1
+        },
+        "CodeListReference": "l9ny0mef"
+      },
+      {
+        "id": "l988lnv3",
+        "Name": "TAB211",
+        "type": "CollectedVariableType",
+        "Label": "\"Code A\"-\"Colonne 1\"-\"Cases du tableau\"",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "100",
+          "Minimum": "0",
+          "Decimals": "0",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "l9892ulx",
+        "Name": "TAB221",
+        "type": "CollectedVariableType",
+        "Label": "\"Code B\"-\"Colonne 1\"-\"Cases du tableau\"",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "100",
+          "Minimum": "0",
+          "Decimals": "0",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "l988nhgh",
+        "Name": "TAB231",
+        "type": "CollectedVariableType",
+        "Label": "\"Code C\"-\"Colonne 1\"-\"Cases du tableau\"",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "100",
+          "Minimum": "0",
+          "Decimals": "0",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "l988ud4p",
+        "Name": "TAB241",
+        "type": "CollectedVariableType",
+        "Label": "\"Code D\"-\"Colonne 1\"-\"Cases du tableau\"",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "100",
+          "Minimum": "0",
+          "Decimals": "0",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "l988wv7v",
+        "Name": "TAB212",
+        "type": "CollectedVariableType",
+        "Label": "\"Code A\"-\"Colonne 2\"-\"Cases du tableau\"",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "100",
+          "Minimum": "0",
+          "Decimals": "0",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "l9895qbb",
+        "Name": "TAB222",
+        "type": "CollectedVariableType",
+        "Label": "\"Code B\"-\"Colonne 2\"-\"Cases du tableau\"",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "100",
+          "Minimum": "0",
+          "Decimals": "0",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "l988ti9h",
+        "Name": "TAB232",
+        "type": "CollectedVariableType",
+        "Label": "\"Code C\"-\"Colonne 2\"-\"Cases du tableau\"",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "100",
+          "Minimum": "0",
+          "Decimals": "0",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "l988pc6c",
+        "Name": "TAB242",
+        "type": "CollectedVariableType",
+        "Label": "\"Code D\"-\"Colonne 2\"-\"Cases du tableau\"",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "100",
+          "Minimum": "0",
+          "Decimals": "0",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "l9ny6hcn",
+        "Name": "TAB_IMBRIQ11",
+        "type": "CollectedVariableType",
+        "Label": "\"Modalité simple 1\"-\"Nombre tableau imbrications\"",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "10",
+          "Minimum": "0",
+          "Decimals": "0",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "l9nyb01m",
+        "Name": "TAB_IMBRIQ21",
+        "type": "CollectedVariableType",
+        "Label": "\"Imbrication 1\"-\"Nombre tableau imbrications\"",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "10",
+          "Minimum": "0",
+          "Decimals": "0",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "l9nyabku",
+        "Name": "TAB_IMBRIQ31",
+        "type": "CollectedVariableType",
+        "Label": "\"Sous-imbrication 1\"-\"Nombre tableau imbrications\"",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "10",
+          "Minimum": "0",
+          "Decimals": "0",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "l9ny1x8g",
+        "Name": "TAB_IMBRIQ41",
+        "type": "CollectedVariableType",
+        "Label": "\"Sous-imbrication 2\"-\"Nombre tableau imbrications\"",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "10",
+          "Minimum": "0",
+          "Decimals": "0",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "l9nyc0lf",
+        "Name": "TAB_IMBRIQ51",
+        "type": "CollectedVariableType",
+        "Label": "\"Imbrication 3\"-\"Nombre tableau imbrications\"",
+        "Datatype": {
+          "type": "NumericDatatypeType",
+          "Maximum": "10",
+          "Minimum": "0",
+          "Decimals": "0",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "l9sb57mu",
+        "Name": "TAB_HEADER11",
+        "type": "CollectedVariableType",
+        "Label": "\"Colonne 1\"-\"En-tête 1\"-\"Cases tableau en-tête compliqué\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "l9sb98hc",
+        "Name": "TAB_HEADER21",
+        "type": "CollectedVariableType",
+        "Label": "\"Colonne 2\"-\"En-tête 1\"-\"Cases tableau en-tête compliqué\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "l9sbdpd3",
+        "Name": "TAB_HEADER12",
+        "type": "CollectedVariableType",
+        "Label": "\"Colonne 1\"-\"En-tête 211\"-\"Cases tableau en-tête compliqué\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "l9sbcbqy",
+        "Name": "TAB_HEADER22",
+        "type": "CollectedVariableType",
+        "Label": "\"Colonne 2\"-\"En-tête 211\"-\"Cases tableau en-tête compliqué\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "l9saykme",
+        "Name": "TAB_HEADER13",
+        "type": "CollectedVariableType",
+        "Label": "\"Colonne 1\"-\"En-tête 212\"-\"Cases tableau en-tête compliqué\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "l9sb17f5",
+        "Name": "TAB_HEADER23",
+        "type": "CollectedVariableType",
+        "Label": "\"Colonne 2\"-\"En-tête 212\"-\"Cases tableau en-tête compliqué\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "l9sbei4t",
+        "Name": "TAB_HEADER14",
+        "type": "CollectedVariableType",
+        "Label": "\"Colonne 1\"-\"En-tête 213\"-\"Cases tableau en-tête compliqué\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "l9sbbdme",
+        "Name": "TAB_HEADER24",
+        "type": "CollectedVariableType",
+        "Label": "\"Colonne 2\"-\"En-tête 213\"-\"Cases tableau en-tête compliqué\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "l9sbez1x",
+        "Name": "TAB_HEADER15",
+        "type": "CollectedVariableType",
+        "Label": "\"Colonne 1\"-\"En-tête 22\"-\"Cases tableau en-tête compliqué\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "l9sbcwys",
+        "Name": "TAB_HEADER25",
+        "type": "CollectedVariableType",
+        "Label": "\"Colonne 2\"-\"En-tête 22\"-\"Cases tableau en-tête compliqué\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "l9sauv6g",
+        "Name": "TAB_HEADER16",
+        "type": "CollectedVariableType",
+        "Label": "\"Colonne 1\"-\"En-tête 31\"-\"Cases tableau en-tête compliqué\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "l9sayn9v",
+        "Name": "TAB_HEADER26",
+        "type": "CollectedVariableType",
+        "Label": "\"Colonne 2\"-\"En-tête 31\"-\"Cases tableau en-tête compliqué\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "l9sb2zke",
+        "Name": "TAB_HEADER17",
+        "type": "CollectedVariableType",
+        "Label": "\"Colonne 1\"-\"En-tête 32\"-\"Cases tableau en-tête compliqué\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "l9sb7bw3",
+        "Name": "TAB_HEADER27",
+        "type": "CollectedVariableType",
+        "Label": "\"Colonne 2\"-\"En-tête 32\"-\"Cases tableau en-tête compliqué\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "l9sb54zs",
+        "Name": "TAB_HEADER18",
+        "type": "CollectedVariableType",
+        "Label": "\"Colonne 1\"-\"En-tête 331\"-\"Cases tableau en-tête compliqué\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "l9sb21f4",
+        "Name": "TAB_HEADER28",
+        "type": "CollectedVariableType",
+        "Label": "\"Colonne 2\"-\"En-tête 331\"-\"Cases tableau en-tête compliqué\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "l9sb60ci",
+        "Name": "TAB_HEADER19",
+        "type": "CollectedVariableType",
+        "Label": "\"Colonne 1\"-\"En-tête 332\"-\"Cases tableau en-tête compliqué\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "l9sauv5n",
+        "Name": "TAB_HEADER29",
+        "type": "CollectedVariableType",
+        "Label": "\"Colonne 2\"-\"En-tête 332\"-\"Cases tableau en-tête compliqué\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "lchevode",
+        "Name": "QSIMPLE",
+        "type": "CollectedVariableType",
+        "Label": "QSIMPLE label",
+        "Scope": "lc0c5724",
+        "Datatype": {
+          "Unit": "http://id.insee.fr/unit/euro",
+          "type": "NumericDatatypeType",
+          "Maximum": "10000",
+          "Minimum": "0",
+          "Decimals": "",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "lcowzlwd",
+        "Name": "UNEQUESTIO",
+        "type": "CollectedVariableType",
+        "Label": "UNEQUESTIO label",
+        "Scope": "lc0c5724",
+        "Datatype": {
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Maximum": "100",
+          "Minimum": "0",
+          "Decimals": "",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "lc0c6bs0",
+        "Name": "LASUITE",
+        "type": "CollectedVariableType",
+        "Label": "LASUITE label",
+        "Scope": "lc0c5724",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "lcq1m9zm",
+        "Name": "TOTOA",
+        "type": "CollectedVariableType",
+        "Label": "TOTOA label",
+        "Scope": "lcq19udk",
+        "Datatype": {
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Maximum": "100",
+          "Minimum": "0",
+          "Decimals": "",
+          "typeName": "NUMERIC"
+        }
+      },
+      {
+        "id": "lcq1mg4s",
+        "Name": "TOTOB",
+        "type": "CollectedVariableType",
+        "Label": "TOTOB label",
+        "Scope": "lc0c5724",
+        "Datatype": {
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Maximum": "100",
+          "Minimum": "0",
+          "Decimals": "",
+          "typeName": "NUMERIC"
+        }
+      }
+    ]
+  },
+  "flowLogic": "FILTER",
+  "Iterations": {
+    "Iteration": [
+      {
+        "id": "lc0c5724",
+        "Name": "BOUCLE1",
+        "Step": "1",
+        "type": "DynamicIterationType",
+        "Label": "BOUTON_BOUCLE",
+        "Maximum": "5",
+        "Minimum": "1",
+        "MemberReference": [
+          "lcoxacye",
+          "lcox3rt2"
+        ]
+      },
+      {
+        "id": "lc0cefvn",
+        "Name": "BOUCLE2",
+        "type": "DynamicIterationType",
+        "MemberReference": [
+          "lc0c6j7f"
+        ],
+        "IterableReference": "lc0c5724"
+      },
+      {
+        "id": "lcq19udk",
+        "Name": "BOUCLEA",
+        "Step": "1",
+        "type": "DynamicIterationType",
+        "Maximum": "10",
+        "Minimum": "1",
+        "MemberReference": [
+          "lchfj2o1"
+        ]
+      },
+      {
+        "id": "lcq1cpki",
+        "Name": "BOUCLEB_BASE1",
+        "type": "DynamicIterationType",
+        "MemberReference": [
+          "lcq1esye"
+        ],
+        "IterableReference": "lc0c5724"
+      }
+    ]
+  },
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "FlowControl": [],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "l8x71lk7",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "l8x6ebv8",
+        "lc0cu6i6",
+        "l8x6akb3",
+        "l8y8ozno",
+        "l8y8wde3",
+        "l9nxvj6m",
+        "l9888jno",
+        "l988nifn",
+        "l9ny8wb8",
+        "l9sao32k",
+        "lbxg68fq",
+        "lcoxacye",
+        "lbxgigk8",
+        "lcox3rt2",
+        "lcoxana6",
+        "lc0c6j7f",
+        "lc0clxv1",
+        "lchfj2o1",
+        "lcq1pnud",
+        "lcq1esye",
+        "lcq1cyit",
+        "idendquest"
+      ]
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "esa-dc-2018",
+      "uri": "http://ddi:fr.insee:DataCollection.esa-dc-2018",
+      "Name": "Enquête sectorielle annuelle 2018"
+    }
+  ],
+  "lastUpdatedDate": "Tue Jan 10 2023 15:56:26 GMT+0100 (heure normale d’Europe centrale)",
+  "formulasLanguage": "VTL"
 }
