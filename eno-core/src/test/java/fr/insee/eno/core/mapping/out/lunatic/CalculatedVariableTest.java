@@ -7,8 +7,6 @@ import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.variable.CalculatedVariable;
 import fr.insee.eno.core.parameter.EnoParameters;
-import fr.insee.eno.core.parameter.EnoParameters.Context;
-import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
@@ -106,14 +104,11 @@ class CalculatedVariableTest {
                 throw new FileNotFoundException("Resource not found: " + resourcePath);
             }
 
-            Questionnaire lunaticQuestionnaire;
-            if (isDDI) {
-                lunaticQuestionnaire = new DDIToLunatic().transform(resourceStream,
-                        EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
-            } else {
-                lunaticQuestionnaire = new PoguesToLunatic().transform(resourceStream,
-                        EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
-            }
+            Questionnaire lunaticQuestionnaire = isDDI
+                    ? DDIToLunatic.fromInputStream(resourceStream).transform(
+                            EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC))
+                    : PoguesToLunatic.fromInputStream(resourceStream).transform(
+                            EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
 
             lunaticQuestionnaire.getVariables().stream()
                     .filter(CalculatedVariableType.class::isInstance)
@@ -211,10 +206,10 @@ class CalculatedVariableTest {
             assertNotNull(resourceStream, "Resource not found: " + resourcePath);
 
             Questionnaire lunaticQuestionnaire = isDDI
-                    ? new DDIToLunatic().transform(resourceStream,
-                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC))
-                    : new PoguesToLunatic().transform(resourceStream,
-                    EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+                    ? DDIToLunatic.fromInputStream(resourceStream).transform(
+                            EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC))
+                    : PoguesToLunatic.fromInputStream(resourceStream).transform(
+                            EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
 
             Optional<CalculatedVariableType> lunaticVariable1 = lunaticQuestionnaire.getVariables().stream()
                     .filter(variableType -> "CALCULATED1".equals(variableType.getName()))

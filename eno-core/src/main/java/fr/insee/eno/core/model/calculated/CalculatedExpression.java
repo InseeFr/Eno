@@ -12,7 +12,9 @@ import fr.insee.pogues.model.ExpressionType;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -80,5 +82,5 @@ public class CalculatedExpression extends EnoObject {
     @Pogues("T(fr.insee.eno.core.model.calculated.CalculatedExpression).extractBindingReferences(" +
             "getValue())")
     @DDI("getInParameterList()")
-    private Set<BindingReference> bindingReferences = new HashSet<>();
+    private List<BindingReference> bindingReferences = new ArrayList<>();
 }
