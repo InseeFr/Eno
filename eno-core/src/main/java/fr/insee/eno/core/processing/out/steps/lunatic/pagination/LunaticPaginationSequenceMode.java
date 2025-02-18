@@ -1,6 +1,7 @@
  package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 
  import fr.insee.eno.core.exceptions.business.LunaticLoopException;
+ import fr.insee.eno.core.parameter.LunaticParameters;
  import fr.insee.lunatic.model.flat.*;
 
  import java.util.List;
@@ -11,7 +12,7 @@
 public class LunaticPaginationSequenceMode extends LunaticPaginationAllModes {
 
     public LunaticPaginationSequenceMode() {
-        super(false, "sequence");
+        super(false, LunaticParameters.LunaticPaginationMode.SEQUENCE);
     }
 
     /**
