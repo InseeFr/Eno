@@ -27,7 +27,7 @@ abstract class ControlTest {
     private Map<String, ComponentType> lunaticComponents;
 
     @BeforeAll
-    void ddiToLunaticMapping() throws ParsingException {
+    void inputToLunaticMapping() throws ParsingException {
         //
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         EnoQuestionnaire enoQuestionnaire = mapInput();
