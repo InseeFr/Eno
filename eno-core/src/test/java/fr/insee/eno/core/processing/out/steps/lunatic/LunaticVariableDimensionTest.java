@@ -26,11 +26,11 @@ class LunaticVariableDimensionTest {
 
     @BeforeAll
     void integrationTestFromDDI() throws DDIParsingException {
-
+        //
         Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
-                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-dimensions.xml")).transform(
-                        EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
-
+                this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-dimensions.xml"))
+                .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
+        //
         lunaticVariables = new HashMap<>();
         lunaticQuestionnaire.getVariables().forEach(variableType ->
                 lunaticVariables.put(variableType.getName(), variableType));
