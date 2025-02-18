@@ -1,5 +1,6 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 
+import fr.insee.eno.core.parameter.LunaticParameters;
 import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Loop;
@@ -11,7 +12,7 @@ import fr.insee.lunatic.model.flat.Subsequence;
 public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
 
     public LunaticPaginationQuestionMode() {
-        super(true, "question");
+        super(true, LunaticParameters.LunaticPaginationMode.QUESTION);
     }
 
     /**
