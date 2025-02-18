@@ -55,7 +55,6 @@ public class GenerationStandardController {
             throw new ModeParameterException("Lunatic format is not compatible with the mode 'PAPER'.");
         //
         EnoParameters enoParameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
-
         //
         LunaticPostProcessing lunaticPostProcessing = specificTreatmentsService.generateFrom(specificTreatment);
         //

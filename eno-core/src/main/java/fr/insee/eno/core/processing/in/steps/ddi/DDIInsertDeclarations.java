@@ -31,6 +31,10 @@ public class DDIInsertDeclarations implements ProcessingStep<EnoQuestionnaire> {
      * (Declarations are placed before the object they belong to in the sequence items lists.) */
     @Override
     public void apply(EnoQuestionnaire enoQuestionnaire) {
+        // to avoid clashes with eventual previous Pogues mapping
+        enoQuestionnaire.getSingleResponseQuestions().forEach(question -> question.getDeclarations().clear());
+        enoQuestionnaire.getMultipleResponseQuestions().forEach(question -> question.getDeclarations().clear());
+        // class logic below
         for (Sequence sequence : enoQuestionnaire.getSequences()) {
             List<String> declarationIdStack = new ArrayList<>();
             insertDeclarationsFromSequence(sequence, declarationIdStack);

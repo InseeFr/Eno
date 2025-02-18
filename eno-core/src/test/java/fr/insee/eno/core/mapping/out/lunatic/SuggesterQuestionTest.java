@@ -81,9 +81,6 @@ class SuggesterQuestionTest {
         Question question2 = (Question) lunaticQuestionnaire.getComponents().get(2);
         Suggester suggester1 = assertInstanceOf(Suggester.class, question1.getComponents().getFirst());
         Suggester suggester2 = assertInstanceOf(Suggester.class, question2.getComponents().getFirst());
-//      Suggester suggester2 = assertInstanceOf(Suggester.class, lunaticQuestionnaire.getComponents().get(2));
-//      Suggester suggester1 = assertInstanceOf(Suggester.class, lunaticQuestionnaire.getComponents().get(1));
-//      Suggester suggester2 = assertInstanceOf(Suggester.class, lunaticQuestionnaire.getComponents().get(2));
         //
         assertEquals("COUNTRY", suggester1.getResponse().getName());
         assertNull(suggester1.getArbitrary());
