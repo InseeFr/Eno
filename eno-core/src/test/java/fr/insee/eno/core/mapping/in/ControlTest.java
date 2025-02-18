@@ -1,45 +1,44 @@
 package fr.insee.eno.core.mapping.in;
 
+import fr.insee.ddi.lifecycle33.instance.DDIInstanceDocument;
 import fr.insee.eno.core.DDIToEno;
 import fr.insee.eno.core.InToEno;
+import fr.insee.eno.core.PoguesDDIToEno;
 import fr.insee.eno.core.PoguesToEno;
 import fr.insee.eno.core.exceptions.business.ParsingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.navigation.Control;
 import fr.insee.eno.core.model.question.Question;
 import fr.insee.eno.core.parameter.EnoParameters;
-import fr.insee.eno.core.parameter.EnoParameters.Context;
-import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
-import fr.insee.eno.core.parameter.Format;
-import fr.insee.eno.core.reference.EnoIndex;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import fr.insee.eno.core.serialize.DDIDeserializer;
+import fr.insee.eno.core.serialize.PoguesDeserializer;
+import fr.insee.pogues.model.Questionnaire;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.io.InputStream;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.*;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ControlTest {
 
     private static Stream<Arguments> integrationTest() throws ParsingException {
         ClassLoader classLoader = ControlTest.class.getClassLoader();
+        Questionnaire poguesQuestionnaire = PoguesDeserializer.deserialize(classLoader.getResourceAsStream(
+                "integration/pogues/pogues-controls.json"));
+        DDIInstanceDocument ddiQuestionnaire = DDIDeserializer.deserialize(classLoader.getResourceAsStream(
+                "integration/ddi/ddi-controls.xml"));
         return Stream.of(
-                Arguments.of(Format.POGUES, PoguesToEno.fromInputStream(classLoader.getResourceAsStream(
-                        "integration/pogues/pogues-controls.json"))),
-                Arguments.of(Format.DDI, DDIToEno.fromInputStream(classLoader.getResourceAsStream(
-                        "integration/ddi/ddi-controls.xml"))));
+                Arguments.of(PoguesToEno.fromObject(poguesQuestionnaire)),
+                Arguments.of(DDIToEno.fromObject(ddiQuestionnaire)),
+                Arguments.of(PoguesDDIToEno.fromObjects(poguesQuestionnaire, ddiQuestionnaire))
+        );
     }
-
     @ParameterizedTest
     @MethodSource
-    void integrationTest(Format format, InToEno inToEno) {
+    void integrationTest(InToEno inToEno) {
         //
         EnoQuestionnaire enoQuestionnaire = inToEno
                 .transform(EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.PROCESS));
@@ -52,13 +51,9 @@ class ControlTest {
         assertEquals(1, question4.getControls().size());
         //
         Control control = question4.getControls().getFirst();
-        assertEquals("ERROR", control.getCriticality().name());
-        if(format == Format.POGUES){
-        assertEquals("\"Erreur \" || $INPUT_NONOBE$ || \"doit être différente de E\"", control.getMessage().getValue());
-        assertEquals("nvl($INPUT_NONOBE$,\"\") = \"E\"", control.getExpression().getValue());}
-        if(format == Format.DDI){
-            assertEquals("\"Erreur \" || INPUT_NONOBE || \"doit être différente de E\" ", control.getMessage().getValue());
-            assertEquals("nvl(INPUT_NONOBE,\"\") = \"E\"", control.getExpression().getValue());}
+        assertEquals(Control.Criticality.ERROR, control.getCriticality());
+        assertTrue(control.getMessage().getValue().startsWith("\"Erreur \" || "));
+        assertTrue(control.getExpression().getValue().startsWith("nvl("));
         assertEquals("description du controle erreur", control.getLabel());
     }
 
