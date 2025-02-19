@@ -1,5 +1,6 @@
 package fr.insee.eno.core.processing.in.steps.ddi;
 
+import fr.insee.eno.core.DDIToEno;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.mappers.DDIMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
@@ -8,9 +9,13 @@ import fr.insee.eno.core.model.label.Label;
 import fr.insee.eno.core.model.question.EnoTable;
 import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.SingleResponseQuestion;
+import fr.insee.eno.core.model.question.TableQuestion;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.variable.CollectedVariable;
 import fr.insee.eno.core.model.variable.Variable;
+import fr.insee.eno.core.parameter.EnoParameters;
+import fr.insee.eno.core.parameter.EnoParameters.Context;
+import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.eno.core.serialize.DDIDeserializer;
 import org.junit.jupiter.api.BeforeAll;
@@ -205,6 +210,19 @@ class DDIResolveVariableReferencesInLabelsTest {
         assertEquals("Q1", tableQuestions.get(1).getNoDataCells().get(1).getCellLabel().getValue().stripTrailing());
         assertEquals("Q1", tableQuestions.get(2).getNoDataCells().get(1).getCellLabel().getValue().stripTrailing());
         // strip trailing since extra whitespace can be added at some point which is not a problem
+    }
+
+    @Test
+    void tableHeaderTest() throws DDIParsingException {
+        //
+        EnoQuestionnaire enoQuestionnaire = DDIToEno
+                .fromInputStream(this.getClass().getClassLoader().getResourceAsStream(
+                        "integration/ddi/ddi-table-custom-header.xml"))
+                .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI));
+        //
+        TableQuestion tableQuestion = (TableQuestion) enoQuestionnaire.getMultipleResponseQuestions().getFirst();
+        assertEquals("\"Text column with collected value: \" || cast(Q_NUMBER, string)",
+                tableQuestion.getHeader().getCodeItems().getFirst().getLabel().getValue().trim());
     }
 
 }
