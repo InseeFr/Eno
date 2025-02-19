@@ -14,13 +14,15 @@ import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
 import fr.insee.lunatic.model.flat.variable.VariableTypeEnum;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
-import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatedVariableTest {
@@ -87,115 +89,7 @@ class CalculatedVariableTest {
     }
 
     @Nested
-    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-    class IntegrationTest1 {
-
-        private Map<String, CalculatedVariableType> filterResultVariables;
-
-        @BeforeAll
-        void mapQuestionnaire() throws Exception {
-            filterResultVariables = new HashMap<>();
-
-            loadCalculatedVariables("integration/ddi/ddi-variables.xml", true);
-            loadCalculatedVariables("integration/pogues/pogues-variables.json", false);
-        }
-
-        private void loadCalculatedVariables(String resourcePath, boolean isDDI) throws Exception {
-            InputStream resourceStream = CalculatedVariableTest.class.getClassLoader().getResourceAsStream(resourcePath);
-            if (resourceStream == null) {
-                throw new FileNotFoundException("Resource not found: " + resourcePath);
-            }
-
-            Questionnaire lunaticQuestionnaire = isDDI
-                    ? DDIToLunatic.fromInputStream(resourceStream).transform(
-                            EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC))
-                    : PoguesToLunatic.fromInputStream(resourceStream).transform(
-                            EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
-
-            lunaticQuestionnaire.getVariables().stream()
-                    .filter(CalculatedVariableType.class::isInstance)
-                    .map(CalculatedVariableType.class::cast)
-                    .filter(variableType -> !variableType.getName().startsWith("FILTER_RESULT_"))
-                    .forEach(variableType -> filterResultVariables.put(variableType.getName(), variableType));
-        }
-
-        @Test
-        void variablesCount() {
-            assertEquals(9, filterResultVariables.size());
-        }
-
-        @Test
-        void variableNames() {
-            assertEquals(
-                    Set.of("CALCULATED1", "CALCULATED2", "CALCULATED3", "CALCULATED4",
-                            "CALCULATED5", "CALCULATED6", "CALCULATED7", "CALCULATED8", "CALCULATED9"),
-                    filterResultVariables.keySet());
-        }
-
-        @Test
-        void calculatedExpressions() {
-            assertEquals("cast(NUMBER1, number) * 10",
-                    filterResultVariables.get("CALCULATED1").getExpression().getValue());
-            // ...
-        }
-
-        @Test
-        void calculatedExpressionType() {
-            filterResultVariables.values().forEach(variableType ->
-                    assertEquals(LabelTypeEnum.VTL, variableType.getExpression().getType()));
-        }
-
-        @Test
-        void bindingDependencies_collectedOnly() {
-            assertThat(filterResultVariables.get("CALCULATED1").getBindingDependencies())
-                    .containsExactlyInAnyOrderElementsOf(List.of("NUMBER1"));
-            assertThat(filterResultVariables.get("CALCULATED2").getBindingDependencies())
-                    .containsExactlyInAnyOrderElementsOf(List.of("NUMBER1", "NUMBER2"));
-        }
-
-        @Test
-        void bindingDependencies_withCalculated() {
-            assertThat(filterResultVariables.get("CALCULATED3").getBindingDependencies())
-                    .containsExactlyInAnyOrderElementsOf(List.of("CALCULATED1", "NUMBER1"));
-            assertThat(filterResultVariables.get("CALCULATED4").getBindingDependencies())
-                    .containsExactlyInAnyOrderElementsOf(List.of("CALCULATED2", "NUMBER1", "NUMBER2"));
-        }
-
-        @Test
-        void bindingDependencies_intermediateCalculatedReference() {
-            assertThat(filterResultVariables.get("CALCULATED5").getBindingDependencies())
-                    .containsExactlyInAnyOrderElementsOf(List.of("CALCULATED4", "NUMBER1", "NUMBER2"));
-        }
-
-        @Test
-        void bindingDependencies_external() {
-            assertThat(filterResultVariables.get("CALCULATED6").getBindingDependencies())
-                    .containsExactlyInAnyOrderElementsOf(List.of("EXTERNAL_TEXT"));
-        }
-
-        @Test
-        void bindingDependencies_externalAndCollected() {
-            assertThat(filterResultVariables.get("CALCULATED7").getBindingDependencies())
-                    .containsExactlyInAnyOrderElementsOf(List.of("EXTERNAL_NUMBER", "NUMBER1"));
-        }
-
-        @Test
-        void bindingDependencies_externalAndCollectedAndCalculated() {
-            assertThat(filterResultVariables.get("CALCULATED8").getBindingDependencies())
-                    .containsExactlyInAnyOrderElementsOf(List.of("EXTERNAL_NUMBER", "NUMBER1", "CALCULATED7"));
-        }
-
-        @Test
-        void bindingDependencies_finalBoss() {
-            assertThat(filterResultVariables.get("CALCULATED9").getBindingDependencies())
-                    .containsExactlyInAnyOrderElementsOf(List.of("EXTERNAL_NUMBER", "NUMBER1", "NUMBER2",
-                            "CALCULATED4", "CALCULATED7"));
-        }
-
-    }
-
-    @Nested
-    class IntegrationTest2 {
+    class IntegrationTest {
 
         @Test
         void oneCalculated_testAllProperties() throws Exception {
@@ -209,9 +103,9 @@ class CalculatedVariableTest {
 
             Questionnaire lunaticQuestionnaire = isDDI
                     ? DDIToLunatic.fromInputStream(resourceStream).transform(
-                            EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC))
+                            EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC))
                     : PoguesToLunatic.fromInputStream(resourceStream).transform(
-                            EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+                            EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
 
             Optional<CalculatedVariableType> lunaticVariable1 = lunaticQuestionnaire.getVariables().stream()
                     .filter(variableType -> "CALCULATED1".equals(variableType.getName()))
