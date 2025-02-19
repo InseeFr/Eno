@@ -45,11 +45,12 @@ class EnoAddIdentificationSectionTest {
         assertEquals(ComponentTypeEnum.SEQUENCE, identificationSequence.getComponentType());
         assertEquals(EnoAddIdentificationSection.IDENTIFICATION_SEQUENCE_ID, identificationSequence.getId());
         //
-        Question question1 = (Question) lunaticQuestionnaire.getComponents().get(2);
-        Textarea identificationQuestion = question1.getComponents().stream()
-//        Textarea identificationQuestion = lunaticQuestionnaire.getComponents().stream()
-                .filter(Textarea.class::isInstance).map(Textarea.class::cast)
-                .filter(component -> "COMMENT-UE-QUESTION".equals(component.getId())).findAny().orElse(null);
+        Textarea identificationQuestion = lunaticQuestionnaire.getComponents().stream()
+                .filter(Question.class::isInstance)
+                .map(Question.class::cast)
+                .filter(question -> question.getComponents().getFirst() instanceof Textarea)
+                .map(question -> (Textarea) question.getComponents().getFirst())
+                .findAny().orElse(null);
         assertNotNull(identificationQuestion);
         assertEquals("COMMENT_UE", identificationQuestion.getResponse().getName());
         //

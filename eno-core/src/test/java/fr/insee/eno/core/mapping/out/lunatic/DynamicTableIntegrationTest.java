@@ -41,27 +41,15 @@ class DynamicTableIntegrationTest {
 
         // Then
         // There is one roster for loop component
-        List<RosterForLoop> rosterForLoopList = new ArrayList<>();
+        List<RosterForLoop> rosterForLoopList = lunaticQuestionnaire.getComponents().stream()
+                .filter(Question.class::isInstance)
+                .map(Question.class::cast)
+                .filter(question -> question.getComponents().getFirst() instanceof RosterForLoop)
+                .map(question -> (RosterForLoop) question.getComponents().getFirst())
+                .toList();
 
-        for (Object component : lunaticQuestionnaire.getComponents()) {
-            if (component instanceof Question question) {
+        assertEquals(1, rosterForLoopList.size());
 
-                rosterForLoopList.addAll(
-                        question.getComponents().stream()
-                                .filter(RosterForLoop.class::isInstance)
-                                .map(RosterForLoop.class::cast)
-                                .toList()
-                );
-            }}
-
-            assertEquals(1, rosterForLoopList.size());
-
-//        Question question = (Question) lunaticQuestionnaire.getComponents().get(1);
-//        List<RosterForLoop> rosterForLoopList = question.getComponents().stream()
-//                .filter(RosterForLoop.class::isInstance)
-//                .map(RosterForLoop.class::cast)
-//                .toList();
-//        assertEquals(1, rosterForLoopList.size());
         // Roster component has two "column" components
         RosterForLoop rosterForLoop = rosterForLoopList.getFirst();
         assertEquals(2, rosterForLoop.getComponents().size());
