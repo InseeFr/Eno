@@ -69,8 +69,8 @@ abstract class LunaticFilterResultIntegrationTest {
         Questionnaire mapInputToLunatic() throws ParsingException {
             return PoguesDDIToLunatic
                     .fromInputStreams(
-                            classLoader.getResourceAsStream("integration/ddi/ddi-variables.xml"),
-                            classLoader.getResourceAsStream("integration/pogues/pogues-variables.json"))
+                            classLoader.getResourceAsStream("integration/pogues/pogues-variables.json"),
+                            classLoader.getResourceAsStream("integration/ddi/ddi-variables.xml"))
                     .transform(enoParameters);
         }
     }
