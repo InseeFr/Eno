@@ -42,7 +42,6 @@ class DDIToLunaticTest {
     void transformQuestionnaire_nonNullOutput(String questionnaireId) throws DDIParsingException {
         //
         EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
-        enoParameters.getLunaticParameters().setDsfr(true);
         Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
                 this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-" +questionnaireId+".xml"))
                 .transform(enoParameters);
