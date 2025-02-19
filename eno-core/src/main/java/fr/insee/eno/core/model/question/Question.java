@@ -36,23 +36,30 @@ public abstract class Question extends EnoIdentifiableObject implements EnoCompo
      * Business name of the question.
      * Attribute is defined here to factor toString methods,
      * but DDI mapping is done in subclasses since DDI classes are different. */
-    String name;
+    private String name;
 
     @Pogues("getLabel().getFirst()")
     @DDI("getQuestionTextArray(0)")
     @Lunatic("setLabel(#param)")
-    DynamicLabel label;
+    private DynamicLabel label;
 
+    /**
+     * In DDI, declarations are mapped in EnoQuestionnaire and inserted here with a processing.
+     * @see fr.insee.eno.core.processing.in.steps.ddi.DDIInsertDeclarations
+     */
+    @Pogues("getDeclaration().?[#this.getPosition().value() == 'BEFORE_QUESTION_TEXT']")
     @Lunatic("getDeclarations()")
     private final List<Declaration> declarations = new ArrayList<>();
 
+    @Pogues("getDeclaration().?[#this.getPosition().value() == 'AFTER_QUESTION_TEXT']")
     @DDI("getInterviewerInstructionReferenceList().![#index.get(#this.getIDArray(0).getStringValue())]")
     @Lunatic("getDeclarations()")
-    List<Instruction> instructions = new ArrayList<>();
+    private final List<Instruction> instructions = new ArrayList<>();
 
     /** Controls applied to the question.
      * In DDI, the controls are mapped in the questionnaire object, and are put here through a processing.
      * In Lunatic, the question components have a list of controls. */
+    @Pogues("getControl()")
     @Lunatic("getControls()")
     private final List<Control> controls = new ArrayList<>();
 
