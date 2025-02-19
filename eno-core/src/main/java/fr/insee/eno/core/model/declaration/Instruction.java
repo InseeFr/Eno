@@ -3,6 +3,7 @@ package fr.insee.eno.core.model.declaration;
 import fr.insee.ddi.lifecycle33.datacollection.InstructionType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.mode.Mode;
@@ -19,6 +20,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 /** Text displayed after a question or sequence. */
 @Getter
 @Setter
+@Context(format = Format.POGUES, type = fr.insee.pogues.model.DeclarationType.class)
 @Context(format = Format.DDI, type = InstructionType.class)
 @Context(format = Format.LUNATIC, type = DeclarationType.class)
 public class Instruction extends EnoIdentifiableObject implements DeclarationInterface {
@@ -32,19 +34,26 @@ public class Instruction extends EnoIdentifiableObject implements DeclarationInt
      * then there should be only remaining instruction name which the one we want.
      * TODO: conversion between DDI and Lunatic using toUpperCase works, but is weak, dedicated static methods in the class would be better.
      */
+    @Pogues("getDeclarationType().value()")
     @DDI("getInstructionNameList()" +
             ".?[!T(fr.insee.eno.core.model.mode.Mode).isDDIMode(#this.getStringArray(0).getStringValue())].get(0)" +
             ".getStringArray(0).getStringValue()")
     @Lunatic("setDeclarationType(T(fr.insee.lunatic.model.flat.DeclarationTypeEnum).valueOf(#param.toUpperCase()))")
-    String declarationType;
+    private String declarationType;
 
+    @Pogues("getText()")
     @DDI("getInstructionTextArray(0)")
     @Lunatic("setLabel(#param)")
-    DynamicLabel label;
+    private DynamicLabel label;
 
+    /** An instruction is systematically associated with the position 'AFTER_QUESTION_TEXT':
+     * this information is therefore hardcoded. Conversely, a declaration always follows
+     * the assertion 'BEFORE_QUESTION_TEXT'. */
     @Lunatic("setPosition(T(fr.insee.lunatic.model.flat.DeclarationPositionEnum).valueOf(#param))")
-    String position = "AFTER_QUESTION_TEXT";
+    private String position = "AFTER_QUESTION_TEXT";
 
+    @Pogues("getDeclarationMode()"+
+            ".![T(fr.insee.eno.core.model.mode.Mode).convertSurveyModeEnumMode(#this)]")
     @DDI("getInstructionNameList()" +
             ".?[T(fr.insee.eno.core.model.mode.Mode).isDDIMode(#this.getStringArray(0).getStringValue())]" +
             ".![T(fr.insee.eno.core.model.mode.Mode).convertDDIMode(#this.getStringArray(0).getStringValue())]")

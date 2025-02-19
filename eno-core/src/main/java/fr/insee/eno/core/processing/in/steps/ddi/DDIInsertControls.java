@@ -24,6 +24,10 @@ public class DDIInsertControls implements ProcessingStep<EnoQuestionnaire> {
      * (Controls are placed after the object they belong to in the sequence items lists.)
      * Concerned objects : sequences, subsequences and questions. */
     public void apply(EnoQuestionnaire enoQuestionnaire) {
+        // to avoid clashes with eventual previous Pogues mapping
+        enoQuestionnaire.getSingleResponseQuestions().forEach(question -> question.getControls().clear());
+        enoQuestionnaire.getMultipleResponseQuestions().forEach(question -> question.getControls().clear());
+        //
         for (Sequence sequence : enoQuestionnaire.getSequences()) {
             List<ItemReference> sequenceItems = sequence.getSequenceItems();
             insertControlsInReferencedItems(enoQuestionnaire, sequenceItems);
@@ -83,6 +87,9 @@ public class DDIInsertControls implements ProcessingStep<EnoQuestionnaire> {
     private void insertControlsInRoundabout(RoundaboutSequence roundaboutSequence,
                                             EnoQuestionnaire enoQuestionnaire,
                                             Map<String, Control> controlMap) {
+        // to avoid clashes with eventual previous Pogues mapping
+        roundaboutSequence.getControls().clear();
+        //
         insertRoundaboutLevelControls(roundaboutSequence, controlMap);
         insertRowLevelControls(roundaboutSequence, enoQuestionnaire, controlMap);
     }
