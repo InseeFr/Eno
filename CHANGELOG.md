@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.33.1] - 2025-02-19
+### :bug: Bug Fixes
+- [`80dc6f1`](https://github.com/InseeFr/Eno/commit/80dc6f1e38d40427f541966ba07d1f3582740be3) - CVE netty *(PR [#1216](https://github.com/InseeFr/Eno/pull/1216) by [@laurentC35](https://github.com/laurentC35))*
+
+
 ## [3.33.0] - 2025-02-18
 ### :sparkles: New Features
 - [`0941dbc`](https://github.com/InseeFr/Eno/commit/0941dbc86140ab4e728b9b64f7c2bb96acc0352e) - **eno core**: pogues plus ddi mapping *(PR [#1199](https://github.com/InseeFr/Eno/pull/1199) by [@nsenave](https://github.com/nsenave))*
@@ -448,3 +453,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.32.1]: https://github.com/InseeFr/Eno/compare/3.31.5...3.32.1
 [3.32.1]: https://github.com/InseeFr/Eno/compare/3.32.1...3.32.2
 [3.33.0]: https://github.com/InseeFr/Eno/compare/3.32.2...3.33.0
+[3.33.1]: https://github.com/InseeFr/Eno/compare/3.33.0...3.33.1
