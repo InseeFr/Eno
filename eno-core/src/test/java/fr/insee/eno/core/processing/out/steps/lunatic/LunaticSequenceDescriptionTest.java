@@ -18,7 +18,6 @@ class LunaticSequenceDescriptionTest {
         //
         EnoParameters enoParameters = EnoParameters.of(
                 EnoParameters.Context.HOUSEHOLD, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
-        enoParameters.getLunaticParameters().setDsfr(true);
         Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
                 this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-declarations.xml"))
                 .transform(enoParameters);
