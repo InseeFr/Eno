@@ -1,0 +1,277 @@
+{
+  "id": "m7c35znr",
+  "Name": "NS_BUG_HEADER",
+  "Child": [
+    {
+      "id": "m7c2r6mw",
+      "Name": "S1",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m7c2udvm",
+          "Name": "Q_NUMBER",
+          "type": "QuestionType",
+          "Label": [
+            "\"Number question\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m7c3b3m5",
+              "Datatype": {
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Maximum": "10",
+                "Minimum": "0",
+                "Decimals": "",
+                "typeName": "NUMERIC",
+                "IsDynamicUnit": false
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m7c34mb5"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
+          "id": "m7c2p1tx",
+          "Name": "Q_TABLE",
+          "type": "QuestionType",
+          "Label": [
+            "\"Table question\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m7c36qja",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "m7c2ys7d"
+            },
+            {
+              "id": "m7c34pah",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "m7c3926p"
+            },
+            {
+              "id": "m7c38v8t",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "m7c2ypvg"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "TABLE",
+          "ResponseStructure": {
+            "Mapping": [
+              {
+                "MappingSource": "m7c36qja",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "m7c34pah",
+                "MappingTarget": "2 1"
+              },
+              {
+                "MappingSource": "m7c38v8t",
+                "MappingTarget": "3 1"
+              }
+            ],
+            "Attribute": [],
+            "Dimension": [
+              {
+                "dynamic": "NON_DYNAMIC",
+                "dimensionType": "PRIMARY",
+                "CodeListReference": "m7c2ury8"
+              },
+              {
+                "Label": "\"Text column with collected value: \" || cast($Q_NUMBER$, string)",
+                "dimensionType": "MEASURE"
+              }
+            ]
+          },
+          "ClarificationQuestion": []
+        }
+      ],
+      "Label": [
+        "\"Sequence\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "idendquest",
+      "Name": "QUESTIONNAIRE_END",
+      "type": "SequenceType",
+      "Child": [],
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    }
+  ],
+  "Label": [
+    "NS - Bug libellés persos dans les headers"
+  ],
+  "final": false,
+  "owner": "DR59-SNDI59",
+  "agency": "fr.insee",
+  "CodeLists": {
+    "CodeList": [
+      {
+        "id": "m7c2ury8",
+        "Code": [
+          {
+            "Label": "\"Foo\"",
+            "Value": "FOO",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Bar\"",
+            "Value": "BAR",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Baz\"",
+            "Value": "BAZ",
+            "Parent": ""
+          }
+        ],
+        "Label": "FOO_CODE_LIST"
+      }
+    ]
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "m7c2ys7d",
+        "Name": "Q_TABLE11",
+        "type": "CollectedVariableType",
+        "Label": "Foo-Text column with collected value:  || cast($Q_NUMBER$, string)",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m7c3926p",
+        "Name": "Q_TABLE21",
+        "type": "CollectedVariableType",
+        "Label": "Bar-Text column with collected value:  || cast($Q_NUMBER$, string)",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m7c2ypvg",
+        "Name": "Q_TABLE31",
+        "type": "CollectedVariableType",
+        "Label": "Baz-Text column with collected value:  || cast($Q_NUMBER$, string)",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m7c34mb5",
+        "Name": "Q_NUMBER",
+        "type": "CollectedVariableType",
+        "Label": "Q_NUMBER label",
+        "Datatype": {
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Maximum": "10",
+          "Minimum": "0",
+          "Decimals": "",
+          "typeName": "NUMERIC",
+          "IsDynamicUnit": false
+        }
+      }
+    ]
+  },
+  "flowLogic": "FILTER",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI"
+  ],
+  "FlowControl": [],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "m7c2x1oh",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "idendquest",
+        "m7c2r6mw",
+        "m7c2udvm",
+        "m7c2p1tx"
+      ]
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "s2193-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2193-dc",
+      "Name": "Enquête capacité à innover et stratégie 2024"
+    }
+  ],
+  "lastUpdatedDate": "Wed Feb 19 2025 16:37:17 GMT+0100 (heure normale d’Europe centrale)",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": []
+}
