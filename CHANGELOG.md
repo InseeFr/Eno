@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.33.1] - 2025-02-19
+### :bug: Bug Fixes
+- [`80dc6f1`](https://github.com/InseeFr/Eno/commit/80dc6f1e38d40427f541966ba07d1f3582740be3) - CVE netty *(PR [#1216](https://github.com/InseeFr/Eno/pull/1216) by [@laurentC35](https://github.com/laurentC35))*
+
+
+## [3.33.0] - 2025-02-18
+### :sparkles: New Features
+- [`0941dbc`](https://github.com/InseeFr/Eno/commit/0941dbc86140ab4e728b9b64f7c2bb96acc0352e) - **eno core**: pogues plus ddi mapping *(PR [#1199](https://github.com/InseeFr/Eno/pull/1199) by [@nsenave](https://github.com/nsenave))*
+- [`e53793a`](https://github.com/InseeFr/Eno/commit/e53793ab6845a4f639ce3b276d820694501294be) - **eno-ws**: pogues plus ddi transformation *(PR [#1204](https://github.com/InseeFr/Eno/pull/1204) by [@nsenave](https://github.com/nsenave))*
+- [`12e2f5c`](https://github.com/InseeFr/Eno/commit/12e2f5c6d607fe257e01e75497074b754e528447) - suggester arbitrary response *(PR [#1209](https://github.com/InseeFr/Eno/pull/1209) by [@nsenave](https://github.com/nsenave))*
+
+### :bug: Bug Fixes
+- [`7e0724b`](https://github.com/InseeFr/Eno/commit/7e0724bea20573e23b058247eec3907a6271bf85) - **deps**: update all minor dependencies *(PR [#1194](https://github.com/InseeFr/Eno/pull/1194) by [@renovate[bot]](https://github.com/apps/renovate))*
+- [`50bc6c1`](https://github.com/InseeFr/Eno/commit/50bc6c1cbfe7e13324cc9cdb37289bb688a94136) - pogues plus ddi mapping *(PR [#1208](https://github.com/InseeFr/Eno/pull/1208) by [@nsenave](https://github.com/nsenave))*
+
+### :recycle: Refactors
+- [`a2bae37`](https://github.com/InseeFr/Eno/commit/a2bae378af21b301d2fa1d2a3c385792359d51d5) - **eno-ws**: controller and service layers *(PR [#1203](https://github.com/InseeFr/Eno/pull/1203) by [@nsenave](https://github.com/nsenave))*
+
+### :construction_worker: Build System
+- [`3aa409d`](https://github.com/InseeFr/Eno/commit/3aa409d939ca2d05c80af6852463a204f7da1ff8) - separate job for changelog commit [skip ci] *(commit by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.32.2] - 2025-02-03
 ### :bug: Bug Fixes
 - [`3824f68`](https://github.com/InseeFr/Eno/commit/3824f68d7dc886f5fee1c58a3c7ea20ef381f9c0) - loop attributes change according to pagination *(PR [#1197](https://github.com/InseeFr/Eno/pull/1197) by [@laurentC35](https://github.com/laurentC35))*
@@ -430,3 +452,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.31.5]: https://github.com/InseeFr/Eno/compare/3.31.2...3.31.5
 [3.32.1]: https://github.com/InseeFr/Eno/compare/3.31.5...3.32.1
 [3.32.1]: https://github.com/InseeFr/Eno/compare/3.32.1...3.32.2
+[3.33.0]: https://github.com/InseeFr/Eno/compare/3.32.2...3.33.0
+[3.33.1]: https://github.com/InseeFr/Eno/compare/3.33.0...3.33.1
