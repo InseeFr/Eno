@@ -5,12 +5,9 @@ import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.converter.PoguesConverter;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.eno.core.reference.PoguesIndex;
 import fr.insee.pogues.model.Questionnaire;
-import fr.insee.pogues.model.VariableType;
 import org.springframework.core.convert.TypeDescriptor;
-
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class PoguesMapper extends InMapper {
 
@@ -28,10 +25,10 @@ public class PoguesMapper extends InMapper {
             return;
         if (poguesQuestionnaire.getVariables() == null)
             return;
-        // For now only index variables of Pogues questionnaire
-        Map<String, VariableType> variableIndex = poguesQuestionnaire.getVariables().getVariable().stream()
-                .collect(Collectors.toMap(VariableType::getId, poguesVariable -> poguesVariable));
-        spelEngine.getContext().setVariable("poguesIndex", variableIndex);
+        // Pogues index (for now only index variables of the Pogues questionnaire)
+        PoguesIndex poguesIndex = new PoguesIndex();
+        poguesIndex.indexVariables(poguesQuestionnaire);
+        spelEngine.getContext().setVariable("poguesIndex", poguesIndex);
     }
 
     @Override

@@ -38,7 +38,6 @@ class LunaticSuggesterSpecificTreatmentTest {
     void suggesterTest_lunaticV3() throws DDIParsingException {
         //
         EnoParameters enoParameters = EnoParameters.of(Context.HOUSEHOLD, ModeParameter.CAWI, Format.LUNATIC);
-        enoParameters.getLunaticParameters().setDsfr(true);
         Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
                 this.getClass().getClassLoader().getResourceAsStream("suggester-treatment/ddi-lgl1kmol.xml"))
                 .transform(enoParameters);
@@ -58,7 +57,6 @@ class LunaticSuggesterSpecificTreatmentTest {
     void suggesterTest_lunaticV3_roundabout() throws DDIParsingException {
         //
         EnoParameters enoParameters = EnoParameters.of(Context.HOUSEHOLD, ModeParameter.CAWI, Format.LUNATIC);
-        enoParameters.getLunaticParameters().setDsfr(true);
         Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
                 this.getClass().getClassLoader().getResourceAsStream("suggester-treatment/ddi-m0p3wmjl.xml"))
                 .transform(enoParameters);
