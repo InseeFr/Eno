@@ -12,10 +12,16 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.time.Duration;
 
 /**
  * Processing adding format controls to components
@@ -68,6 +74,10 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
 
                     if(componentType instanceof Datepicker datepicker) {
                         createFormatControlsForDatepicker(datepicker);
+                    }
+
+                    if (componentType instanceof fr.insee.lunatic.model.flat.Duration duration){
+                        createFormatControlsForDuration(duration);
                     }
                 });
     }
@@ -319,4 +329,190 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
     private String formatDoubleValue(Double value, int decimalCount) {
         return BigDecimal.valueOf(value).setScale(decimalCount, RoundingMode.CEILING).toPlainString();
     }
+
+    /**
+     * Create controls for a duration component
+     * @param duration to process
+     */
+
+    private void createFormatControlsForDuration(fr.insee.lunatic.model.flat.Duration duration) {
+        String id = duration.getId();
+        String minValue = duration.getMin();
+        String maxValue = duration.getMax();
+        DurationFormat format = duration.getFormat();
+        String responseName = duration.getResponse().getName();
+
+        List<ControlType> controls = duration.getControls();
+
+        Optional<ControlType> controlBounds = getFormatControlFromDurationAttributes(id, minValue, maxValue, format, responseName);
+
+        controlBounds.ifPresent(controls::addFirst);
+    }
+
+    /**
+     * Validates and converts a duration string based on the specified format.
+     *
+     * @param duration The duration string to validate and convert.
+     * @param format   The expected format of the duration (YEARS_MONTHS or HOURS_MINUTES).
+     * @return An optional containing the validated duration string or empty if null.
+     * @throws InvalidValueException If the duration does not match the expected format or cannot be parsed.
+     */
+
+    private Optional<String> validateAndConvertDuration(String duration, @NonNull DurationFormat format) {
+        if (duration == null) {
+            return Optional.empty();
+        }
+
+        boolean isValid = switch (format) {
+            case YEARS_MONTHS -> duration.matches("^P\\d+Y\\d+M$");
+            case HOURS_MINUTES -> duration.matches("^PT\\d+H\\d+M$");
+        };
+
+        if (!isValid) {
+            throw new InvalidValueException("Invalid duration value '" + duration + "' for format '" + format.value() + "'.");
+        }
+
+        try {
+            parseDuration(duration, format);
+        } catch (Exception e) {
+            throw new InvalidValueException(("Invalid duration parsing: '" + duration + "' for format '" +
+                    format.value() + "'. Cause: " + e.getMessage()));
+        }
+
+        return Optional.of(duration);
+    }
+
+    /**
+     * Creates a format validation control for duration attributes.
+     *
+     * @param id           The unique identifier for the duration component.
+     * @param minValue     The minimum allowed duration (nullable).
+     * @param maxValue     The maximum allowed duration (nullable).
+     * @param format       The expected format of the duration.
+     * @param responseName The name of the response field.
+     * @return An optional containing a validation control if constraints exist, otherwise empty.
+     * @throws RequiredPropertyException If the format is missing.
+     */
+
+    private Optional<ControlType> getFormatControlFromDurationAttributes(
+            String id, String minValue, String maxValue, DurationFormat format, String responseName) {
+
+        if (format == null) {
+            throw new RequiredPropertyException("Format is missing in duration question '" + id + "'");
+        }
+
+        String controlIdPrefix = id + "-format-duration";
+
+        String formattedMinValue = validateAndConvertDuration(minValue, format).orElse(null);
+        String formattedMaxValue = validateAndConvertDuration(maxValue, format).orElse(null);
+
+        if (formattedMinValue != null && formattedMaxValue != null) {
+            validateMinMaxValues(formattedMinValue, formattedMaxValue, format);
+        }
+
+        String minCondition = buildCondition(formattedMinValue, responseName, format, true);
+        String maxCondition = buildCondition(formattedMaxValue, responseName, format, false);
+
+        if (minCondition != null || maxCondition != null) {
+            String conditions = Stream.of(minCondition, maxCondition)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.joining(" or "));
+
+            String controlExpression = String.format("not(not(isnull(%s)) and (%s))", responseName, conditions);
+            String controlErrorMessage = buildErrorMessage(formattedMinValue, formattedMaxValue);
+
+            return Optional.of(createFormatControl(controlIdPrefix + "-bounds", controlExpression, controlErrorMessage));
+        }
+
+        return Optional.empty();
+    }
+
+    /**
+     * Validates that the minimum duration is not greater than the maximum duration.
+     *
+     * @param minValue The minimum duration value.
+     * @param maxValue The maximum duration value.
+     * @param format   The format of the duration.
+     * @throws InvalidValueException If minValue is greater than maxValue.
+     */
+
+    private void validateMinMaxValues(String minValue, String maxValue, DurationFormat format) {
+        Duration minDuration = parseDuration(minValue, format);
+        Duration maxDuration = parseDuration(maxValue, format);
+
+        if (minDuration.compareTo(maxDuration) > 0) {
+            throw new InvalidValueException("Min value '" + minValue + "' cannot be greater than max value '" + maxValue + "'.");
+        }
+    }
+
+    /**
+     * Builds a validation condition for a duration comparison.
+     *
+     * @param value       The duration value used for comparison.
+     * @param responseName The name of the response field.
+     * @param format      The format of the duration.
+     * @param isMin       Whether the condition is for a minimum value (true) or maximum (false).
+     * @return A string representing the condition, or null if no value is provided.
+     */
+
+    private String buildCondition(String value, String responseName, DurationFormat format, boolean isMin) {
+        if (value == null) return null;
+        return String.format(
+                "cast(%s, duration, \"%s\") %s cast(\"%s\", duration, \"%s\")",
+                responseName, format.value(), isMin ? "<" : ">", value, format.value()
+        );
+    }
+
+    /**
+     * Generates an error message based on the provided minimum and maximum values.
+     *
+     * @param formattedMinValue The formatted minimum duration value.
+     * @param formattedMaxValue The formatted maximum duration value.
+     * @return A formatted error message indicating the valid duration range.
+     */
+
+    private String buildErrorMessage(String formattedMinValue, String formattedMaxValue) {
+        if (formattedMinValue != null && formattedMaxValue != null) {
+            return String.format("\"La durée saisie doit être comprise entre %s et %s.\"", formattedMinValue, formattedMaxValue);
+        } else if (formattedMaxValue != null) {
+            return String.format("\"La durée saisie doit être inférieure à %s.\"", formattedMaxValue);
+        } else {
+            return String.format("\"La durée saisie doit être supérieure à %s.\"", formattedMinValue);
+        }
+    }
+
+    /**
+     * Parses a duration string into a {@link Duration} object based on the format.
+     *
+     * @param duration The duration string to parse.
+     * @param format   The expected format of the duration.
+     * @return A {@link Duration} object representing the parsed duration.
+     * @throws IllegalArgumentException If the duration format is invalid.
+     */
+
+    private Duration parseDuration(String duration, DurationFormat format) {
+        try {
+            return switch (format) {
+                case YEARS_MONTHS -> parseYearsMonths(duration);
+                case HOURS_MINUTES -> Duration.parse(duration);
+            };
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Invalid duration format: " + duration, e);
+        }
+    }
+
+    /**
+     * Converts a duration in years and months (ISO-8601 format) into a {@link Duration} object.
+     *
+     * @param duration The duration string in the format "PnYnM".
+     * @return A {@link Duration} object representing the duration in days.
+     */
+
+    private Duration parseYearsMonths(String duration) {
+        Period period = Period.parse(duration);
+        LocalDate startDate = LocalDate.of(2000, 1, 1);
+        LocalDate targetDate = startDate.plus(period);
+        return Duration.between(startDate.atStartOfDay(), targetDate.atStartOfDay());
+    }
+
 }
