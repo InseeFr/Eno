@@ -124,6 +124,7 @@ public class EnoCatalog {
                 .map(EnoTable.class::cast).map(EnoTable::getNoDataCells).forEach(this::gatherLabelsFromNoDataCells);
         // Code lists
         enoQuestionnaire.getCodeLists().stream().map(CodeList::getCodeItems).forEach(this::gatherLabelsFromCodeItems);
+        enoQuestionnaire.getFakeCodeLists().stream().map(CodeList::getCodeItems).forEach(this::gatherLabelsFromCodeItems);
     }
 
     private void gatherLabelsFromCodeItems(List<CodeItem> codeItems) {
