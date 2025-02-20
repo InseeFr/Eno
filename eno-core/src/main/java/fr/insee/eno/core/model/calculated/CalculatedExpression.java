@@ -4,8 +4,10 @@ import fr.insee.ddi.lifecycle33.reusable.CommandType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.annotations.Pogues;
+import fr.insee.eno.core.exceptions.business.IllegalPoguesElementException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.eno.core.reference.PoguesIndex;
 import fr.insee.lunatic.model.flat.LabelType;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.pogues.model.ExpressionType;
@@ -13,7 +15,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static fr.insee.eno.core.annotations.Contexts.Context;
 
@@ -26,6 +32,8 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @Context(format = Format.LUNATIC, type = LabelType.class)
 public class CalculatedExpression extends EnoObject {
 
+    private static final Pattern POGUES_VARIABLE_PATTERN = Pattern.compile("\\$(\\w+)\\$");
+
     public static CalculatedExpression defaultExpression() {
         CalculatedExpression res = new CalculatedExpression();
         res.setValue("true");
@@ -33,20 +41,58 @@ public class CalculatedExpression extends EnoObject {
         return res;
     }
 
-    /** Expression. */
-    @Pogues("getValue()")
+    /**
+     * Expression.
+     */
+    @Pogues("T(fr.insee.eno.core.model.calculated.CalculatedExpression).removeSurroundingDollarSigns(" +
+            "getValue())")
     @DDI("getCommandContent()")
     @Lunatic("setValue(#param)")
     private String value;
 
-    /** For now, Lunatic type in label objects does not come from metadata, but is hardcoded here in Eno.
-     * See labels documentation. */
+    /**
+     * For now, Lunatic type in label objects does not come from metadata, but is hardcoded here in Eno.
+     * See labels documentation.
+     */
     @Lunatic("setType(T(fr.insee.lunatic.model.flat.LabelTypeEnum).fromValue(#param))")
     String type = LabelTypeEnum.VTL.value();
 
-    /** In DDI, the expression contains variable references instead of variables names.
-     * This list contains the references of these variables. */
+    /**
+     * In DDI, the expression contains variable references instead of variables names.
+     * This list contains the references of these variables.
+     */
+    @Pogues("T(fr.insee.eno.core.model.calculated.CalculatedExpression).extractBindingReferences(" +
+            "getValue(), #poguesIndex)")
     @DDI("getInParameterList()")
     private List<BindingReference> bindingReferences = new ArrayList<>();
 
+    /** The method "extractBindingReferences" allows, from the expression of a "CalculatedVariable",
+     * to construct the associated "BindingReferences". Note that the identifier (a concept derived from DDI)
+     * is null for each reference. */
+    public static Set<BindingReference> extractBindingReferences(String expression, PoguesIndex poguesIndex) {
+        Set<BindingReference> references = new LinkedHashSet<>(); // linked hash set to have consistent order
+        Matcher matcher = POGUES_VARIABLE_PATTERN.matcher(expression);
+
+        while (matcher.find()) {
+            String variableName = matcher.group(1);
+            validatePoguesReference(expression, variableName, poguesIndex);
+            references.add(new BindingReference(null, variableName));
+        }
+
+        return references;
+    }
+
+    private static void validatePoguesReference(String expression, String variableName, PoguesIndex poguesIndex) {
+        if (! poguesIndex.containsVariable(variableName))
+            throw new IllegalPoguesElementException(String.format(
+                    "Name '%s' used in expression:%n%s%n" +
+                            "does not match any variable.",
+                    variableName, expression));
+    }
+
+    /** The removeSurroundingDollarSigns method removes the "$" symbols surrounding the reference to
+     * a variable in the expression of the "CalculatedVariable". */
+    public static String removeSurroundingDollarSigns(String expression) {
+        return expression.replaceAll(POGUES_VARIABLE_PATTERN.pattern(), "$1");
+    }
 }

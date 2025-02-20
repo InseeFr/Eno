@@ -20,7 +20,7 @@ tasks.named<Jar>("jar") {
     enabled = false
 }
 
-val springdocVersion = "2.8.4"
+val springdocVersion = "2.8.5"
 
 dependencies { 
     //
@@ -33,7 +33,12 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     // Web Client
     // since Spring MVC RestTemplate class is deprecated, the webflux dependency is added to import WebClient
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    // TODO: remove when spring-boot-starter-parent upgrade this dependency with CVE
+    implementation("org.springframework.boot:spring-boot-starter-webflux"){
+        exclude("io.netty:netty-handler")
+    }
+    // TODO: remove when spring-boot-starter-parent upgrade this dependency with CVE
+    implementation("io.netty:netty-handler:4.1.118.Final")
     // Open API
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocVersion")
     // Lombok

@@ -41,8 +41,10 @@ class NumberQuestionTest {
         // Then
         // gather components to look at
         List<InputNumber> inputNumbers = lunaticQuestionnaire.getComponents().stream()
-                .filter(componentType -> ComponentTypeEnum.INPUT_NUMBER.equals(componentType.getComponentType()))
-                .map(InputNumber.class::cast)
+                .filter(Question.class::isInstance)
+                .map(Question.class::cast)
+                .filter(question -> question.getComponents().getFirst() instanceof InputNumber)
+                .map(question -> (InputNumber) question.getComponents().getFirst())
                 .toList();
         List<InputNumber> inputNumbersNoUnit = inputNumbers.stream()
                 .filter(inputNumber -> !"NUMBER_UNIT".equals(inputNumber.getResponse().getName()))
@@ -66,8 +68,6 @@ class NumberQuestionTest {
                 "integration/pogues/pogues-dynamic-unit.json"));
         return Stream.of(
                 Arguments.of(DDIToEno.fromObject(ddiQuestionnaire))
-                //,Arguments.of(new PoguesToEno(), "integration/pogues/pogues-dynamic-unit.json")
-                // disabled while questionnaire's structure is not fully mapped in Pogues
                 ,Arguments.of(PoguesDDIToEno.fromObjects(poguesQuestionnaire, ddiQuestionnaire))
         );
     }
