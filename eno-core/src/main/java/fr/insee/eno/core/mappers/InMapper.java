@@ -197,12 +197,9 @@ public abstract class InMapper extends Mapper {
         int collectionSize = inputCollection.size();
         // Get the Eno model collection
         List<Object> modelCollection = readList(propertyDescriptor, enoObject);
-        boolean initiallyEmpty = modelCollection.isEmpty();
+        boolean createNewObjects = createNewObjectsCondition(modelCollection, inputCollection, propertyName);
         // Get the content type of the model collection
         Class<?> modelTargetType = typeDescriptor.getResolvableType().getGeneric(0).getRawClass();
-        // If the model collection is not empty, it should have the same length as the input collection
-        if (!initiallyEmpty && modelCollection.size() != collectionSize)
-            throw new IllegalStateException("Inconsistent list size between inputs.");
         // Collection of simple types
         if (isSimpleType(modelTargetType)) {
             modelCollection.clear();
@@ -221,7 +218,7 @@ public abstract class InMapper extends Mapper {
                             propertyDescription(propertyName, modelContextType.getSimpleName()));
                 // Instantiate an Eno object per input object and add it in the model collection
                 EnoObject converted = convert(inputObject2, modelTargetType);
-                if (initiallyEmpty) {
+                if (createNewObjects) {
                     // Add the created instance in the model collection
                     modelCollection.add(converted);
                     // Recursive call on these instances
@@ -238,6 +235,26 @@ public abstract class InMapper extends Mapper {
         else {
             unknownTypeException(modelTargetType, propertyDescriptor, modelContextType);
         }
+    }
+
+    /** List of properties that are allowed to have a different size between Pogues and DDI mapping. */
+    private static final List<String> LIST_PROPERTIES_EXCEPTIONS = List.of("codeResponses");
+
+    /** Returns the condition that determines if the mapper should iterate on existing objects of the Eno collection
+     * or create new ones.
+     * @throws MappingException if size of both collections differ and if the property has not a special rule. */
+    private static boolean createNewObjectsCondition(
+            Collection<Object> enoModelCollection, Collection<?> inputCollection, String propertyName) {
+        if (enoModelCollection.isEmpty())
+            return true; // if the Eno list is initially empty: create new objects
+        if (enoModelCollection.size() == inputCollection.size())
+            return false; // if it has the same size as the input collection: iterate
+        // if the size is not the same, something is wrong: throw an exception
+        if (! LIST_PROPERTIES_EXCEPTIONS.contains(propertyName))
+            throw new MappingException("Inconsistent list size between inputs on property '" + propertyName + "'.");
+        // except if it is allowed for this property, then remove the existing objects and create new ones
+        enoModelCollection.clear();
+        return true;
     }
 
     private EnoObject getEnoModelObject(Object enoParentObject, PropertyDescriptor propertyDescriptor, Object inObject) {
