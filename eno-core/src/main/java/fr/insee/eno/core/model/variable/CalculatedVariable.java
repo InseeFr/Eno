@@ -15,6 +15,7 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Context(format = Format.POGUES, type = fr.insee.pogues.model.CalculatedVariableType.class)
 @Context(format = Format.DDI, type = fr.insee.ddi.lifecycle33.logicalproduct.VariableType.class)
 @Context(format = Format.LUNATIC, type = CalculatedVariableType.class)
 public class CalculatedVariable extends Variable implements EnoObjectWithExpression {
