@@ -35,18 +35,14 @@ class PoguesMultipleChoiceQuestionConverter {
     }
 
     private static EnoObject convertTable(QuestionType poguesQuestion) {
-        if (isStaticTable(poguesQuestion))
-            return new TableQuestion();
-        if (isDynamicTable(poguesQuestion))
-            return new DynamicTableQuestion();
-        throw new ConversionException("Unable to convert Pogues table '" + poguesQuestion.getId() + "'.");
-    }
-    private static boolean isStaticTable(QuestionType poguesQuestion) {
-        // A Pogues table is a static table if all of its "dimensions" are non-dynamic.
-        return poguesQuestion.getResponseStructure().getDimension().getFirst().getDynamic().equals("NON_DYNAMIC");
-    }
-    private static boolean isDynamicTable(QuestionType poguesQuestion) {
-        return poguesQuestion.getResponseStructure().getDimension().getFirst().getDynamic().equals("DYNAMIC_LENGTH");
+        String dynamic = poguesQuestion.getResponseStructure().getDimension().getFirst().getDynamic();
+        return switch (dynamic) {
+            case "NON_DYNAMIC" -> new TableQuestion();
+            case "DYNAMIC_LENGTH", "FIXED_LENGTH" -> new DynamicTableQuestion();
+            default -> throw new ConversionException(
+                    "Unable to convert Pogues table '" + poguesQuestion.getId() + "'.");
+        };
+        // Note: "FIXED_LENGTH" is for a dynamic table, whose size is defined by a VTL expression.
     }
 
 }
