@@ -62,9 +62,7 @@ public class GenerationCustomController {
 				poguesToLunaticService.transform(poguesFile, enoParameters, lunaticPostProcessing));
 	}
 
-	/**
-	 * @deprecated Some features are not fully described in DDI. The Pogues to Lunatic endpoint should be used instead.
-	 * */
+	//@deprecated Some features are not fully described in DDI. The Pogues to Lunatic endpoint should be used instead.
 	@Operation(
 			summary = "[Eno Java service] Lunatic questionnaire generation from DDI.",
 			description= "**This endpoint is deprecated: use the `pogues-2-lunatic` endpoint.** " +
@@ -73,7 +71,7 @@ public class GenerationCustomController {
 					"You can get a parameters file by using the endpoint `/parameters/java/{context}/LUNATIC/{mode}`")
 	@PostMapping(value = "ddi-2-lunatic-json",
 			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	@Deprecated(since = "3.33.0")
+	//@Deprecated(since = "3.33.0")
 	public ResponseEntity<byte[]> generateLunaticCustomParams(
 			@RequestPart(value="in") MultipartFile ddiFile,
 			@RequestPart(value="params") MultipartFile parametersFile,

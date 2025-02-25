@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.33.4] - 2025-02-25
+### :bug: Bug Fixes
+- [`cf7695e`](https://github.com/InseeFr/Eno/commit/cf7695e8de38f5511f2b45170716550fd7dd15f9) - no data cell variables *(PR [#1226](https://github.com/InseeFr/Eno/pull/1226) by [@nsenave](https://github.com/nsenave))*
+
+
+## [3.33.3] - 2025-02-21
+### :bug: Bug Fixes
+- [`64ccf5e`](https://github.com/InseeFr/Eno/commit/64ccf5ef08137dc9d2c2dceb0e9110eb71354783) - **pogues**: conversion error for vtl size tables *(PR [#1223](https://github.com/InseeFr/Eno/pull/1223) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.33.2] - 2025-02-20
 ### :bug: Bug Fixes
 - [`8cef9b0`](https://github.com/InseeFr/Eno/commit/8cef9b085a0c4d8e70835863c044dd95a0765296) - custom label in table headers *(PR [#1219](https://github.com/InseeFr/Eno/pull/1219) by [@nsenave](https://github.com/nsenave))*
@@ -461,3 +471,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.33.0]: https://github.com/InseeFr/Eno/compare/3.32.2...3.33.0
 [3.33.1]: https://github.com/InseeFr/Eno/compare/3.33.0...3.33.1
 [3.33.2]: https://github.com/InseeFr/Eno/compare/3.33.1...3.33.2
+[3.33.2]: https://github.com/InseeFr/Eno/compare/3.33.1...3.33.2
+[3.33.3]: https://github.com/InseeFr/Eno/compare/3.33.2...3.33.3
+[3.33.4]: https://github.com/InseeFr/Eno/compare/3.33.3...3.33.4

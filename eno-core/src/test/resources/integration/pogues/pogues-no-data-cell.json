@@ -164,7 +164,7 @@
             ],
             "Dimension": [
               {
-                "dynamic": "0",
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
                 "CodeListReference": "lx1j7nb1"
               },
@@ -281,7 +281,9 @@
             ],
             "Dimension": [
               {
-                "dynamic": "4-4",
+                "dynamic": "DYNAMIC_LENGTH",
+                "MaxLines": 4,
+                "MinLines": 4,
                 "dimensionType": "PRIMARY"
               },
               {
@@ -402,7 +404,9 @@
             ],
             "Dimension": [
               {
-                "dynamic": "1-5",
+                "dynamic": "DYNAMIC_LENGTH",
+                "MaxLines": 5,
+                "MinLines": 1,
                 "dimensionType": "PRIMARY"
               },
               {

@@ -288,7 +288,7 @@
             "Dimension": [
               {
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
+                "dynamic": "NON_DYNAMIC",
                 "CodeListReference": "lpgv54ab"
               },
               {
@@ -350,7 +350,7 @@
             "Dimension": [
               {
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
+                "dynamic": "NON_DYNAMIC",
                 "CodeListReference": "lpgv54ab"
               },
               {
