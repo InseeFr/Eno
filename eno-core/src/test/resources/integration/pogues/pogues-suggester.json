@@ -768,7 +768,7 @@
             "Dimension": [
               {
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
+                "dynamic": "NON_DYNAMIC",
                 "CodeListReference": "lruelai2"
               },
               {
@@ -842,8 +842,10 @@
             ],
             "Dimension": [
               {
-                "dimensionType": "PRIMARY",
-                "dynamic": "1-5"
+                "dynamic": "DYNAMIC_LENGTH",
+                "MaxLines": 5,
+                "MinLines": 1,
+                "dimensionType": "PRIMARY"
               },
               {
                 "dimensionType": "MEASURE",
@@ -918,7 +920,7 @@
             "Dimension": [
               {
                 "dimensionType": "PRIMARY",
-                "dynamic": "0",
+                "dynamic": "NON_DYNAMIC",
                 "CodeListReference": "lruelai2"
               },
               {
@@ -993,8 +995,10 @@
             ],
             "Dimension": [
               {
-                "dimensionType": "PRIMARY",
-                "dynamic": "1-2"
+                "dynamic": "DYNAMIC_LENGTH",
+                "MaxLines": 2,
+                "MinLines": 1,
+                "dimensionType": "PRIMARY"
               },
               {
                 "dimensionType": "MEASURE",

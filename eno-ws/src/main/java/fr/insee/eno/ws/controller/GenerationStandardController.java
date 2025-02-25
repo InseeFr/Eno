@@ -64,9 +64,7 @@ public class GenerationStandardController {
                 poguesToLunaticService.transform(poguesFile, enoParameters, lunaticPostProcessing));
     }
 
-    /**
-     * @deprecated Some features are not fully described in DDI. The Pogues to Lunatic endpoint should be used instead.
-     * */
+    //@deprecated Some features are not fully described in DDI. The Pogues to Lunatic endpoint should be used instead.
     @Operation(
             summary = "[Eno Java service] Lunatic questionnaire generation from DDI.",
             description = "**This endpoint is deprecated: use the `pogues-2-lunatic` endpoint.** " +
@@ -74,7 +72,7 @@ public class GenerationStandardController {
                     "in function of context and mode. An optional specific treatment `json` file can be added.")
     @PostMapping(value = "{context}/lunatic-json/{mode}",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Deprecated(since = "3.33.0")
+    //@Deprecated(since = "3.33.0")
     public ResponseEntity<byte[]> generateLunatic(
             @RequestPart(value="in") MultipartFile ddiFile,
             @RequestPart(value="specificTreatment", required = false) MultipartFile specificTreatment,

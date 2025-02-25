@@ -1,330 +1,36 @@
 {
-  "owner": "ENO-INTEGRATION-TESTS",
-  "FlowControl": [],
-  "ComponentGroup": [
-    {
-      "MemberReference": [
-        "idendquest",
-        "lutkf97g",
-        "lutkqj7u",
-        "lutkmu5x",
-        "lutkxex2"
-      ],
-      "Label": [
-        "Components for page 1"
-      ],
-      "id": "lutle9w5",
-      "Name": "PAGE_1"
-    }
-  ],
-  "agency": "fr.insee",
-  "genericName": "QUESTIONNAIRE",
-  "Label": [
-    "Eno - Other please specify"
-  ],
-  "childQuestionnaireRef": [],
-  "Name": "ENO_OTHER",
-  "Variables": {
-    "Variable": [
-      {
-        "Label": "UCQ_RADIO label",
-        "id": "lutkscmh",
-        "type": "CollectedVariableType",
-        "CodeListReference": "lutkfklf",
-        "Name": "UCQ_RADIO",
-        "Datatype": {
-          "Pattern": "",
-          "typeName": "TEXT",
-          "type": "TextDatatypeType",
-          "MaxLength": 1
-        }
-      },
-      {
-        "Label": "UCQ_codeC radio detail",
-        "id": "lutl57n5",
-        "type": "CollectedVariableType",
-        "CodeListReference": "lutkfklf",
-        "Name": "UCQ_codeC_RADIO",
-        "Datatype": {
-          "Pattern": "",
-          "typeName": "TEXT",
-          "type": "TextDatatypeType",
-          "MaxLength": "20"
-        }
-      },
-      {
-        "Label": "UCQ_codeD radio detail",
-        "id": "lutkv69x",
-        "type": "CollectedVariableType",
-        "Name": "UCQ_codeD_RADIO",
-        "Datatype": {
-          "Pattern": "",
-          "typeName": "TEXT",
-          "type": "TextDatatypeType",
-          "MaxLength": "30"
-        }
-      },
-      {
-        "Label": "UCQ_CHECKBOX label",
-        "id": "lutkwsd5",
-        "type": "CollectedVariableType",
-        "CodeListReference": "lutkfklf",
-        "Name": "UCQ_CHECKBOX",
-        "Datatype": {
-          "Pattern": "",
-          "typeName": "TEXT",
-          "type": "TextDatatypeType",
-          "MaxLength": 1
-        }
-      },
-      {
-        "Label": "UCQ_codeC checkbox detail",
-        "id": "lutksrhg",
-        "type": "CollectedVariableType",
-        "Name": "UCQ_codeC_CHECKBOX",
-        "Datatype": {
-          "Pattern": "",
-          "typeName": "TEXT",
-          "type": "TextDatatypeType",
-          "MaxLength": "20"
-        }
-      },
-      {
-        "Label": "UCQ_codeD checkbox detail",
-        "id": "lutl4rut",
-        "type": "CollectedVariableType",
-        "Name": "UCQ_codeD_CHECKBOX",
-        "Datatype": {
-          "Pattern": "",
-          "typeName": "TEXT",
-          "type": "TextDatatypeType",
-          "MaxLength": "30"
-        }
-      },
-      {
-        "Label": "codeA - \"Option A\"",
-        "id": "lutlk4q5",
-        "type": "CollectedVariableType",
-        "Name": "MCQ1",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "codeB - \"Option B\"",
-        "id": "lutli99v",
-        "type": "CollectedVariableType",
-        "Name": "MCQ2",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "codeC - \"Option C (with detail)\"",
-        "id": "lutlbath",
-        "type": "CollectedVariableType",
-        "Name": "MCQ3",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "codeD - \"Option D (with detail)\"",
-        "id": "lutl7oi1",
-        "type": "CollectedVariableType",
-        "Name": "MCQ4",
-        "Datatype": {
-          "typeName": "BOOLEAN",
-          "type": "BooleanDatatypeType"
-        }
-      },
-      {
-        "Label": "MCQ_codeC detail",
-        "id": "lutl5z5d",
-        "type": "CollectedVariableType",
-        "Name": "MCQ_codeC",
-        "Datatype": {
-          "Pattern": "",
-          "typeName": "TEXT",
-          "type": "TextDatatypeType",
-          "MaxLength": "20"
-        }
-      },
-      {
-        "Label": "MCQ_codeD detail",
-        "id": "lutlhxbn",
-        "type": "CollectedVariableType",
-        "Name": "MCQ_codeD",
-        "Datatype": {
-          "Pattern": "",
-          "typeName": "TEXT",
-          "type": "TextDatatypeType",
-          "MaxLength": "30"
-        }
-      }
-    ]
-  },
-  "lastUpdatedDate": "Wed Apr 10 2024 11:02:36 GMT+0200 (heure d’été d’Europe centrale)",
-  "DataCollection": [
-    {
-      "id": "esa-dc-2018",
-      "uri": "http://ddi:fr.insee:DataCollection.esa-dc-2018",
-      "Name": "Enquête sectorielle annuelle 2018"
-    }
-  ],
-  "final": false,
-  "flowLogic": "FILTER",
   "id": "lutk9kue",
-  "TargetMode": [
-    "CAPI",
-    "CATI",
-    "CAWI",
-    "PAPI"
-  ],
-  "CodeLists": {
-    "CodeList": [
-      {
-        "Label": "CODE_LIST_WITH_DETAIL",
-        "id": "lutkfklf",
-        "Code": [
-          {
-            "Parent": "",
-            "Label": "\"Option A\"",
-            "Value": "codeA"
-          },
-          {
-            "Parent": "",
-            "Label": "\"Option B\"",
-            "Value": "codeB"
-          },
-          {
-            "Parent": "",
-            "Label": "\"Option C (with detail)\"",
-            "Value": "codeC"
-          },
-          {
-            "Parent": "",
-            "Label": "\"Option D (with detail)\"",
-            "Value": "codeD"
-          }
-        ],
-        "Name": ""
-      }
-    ]
-  },
-  "formulasLanguage": "VTL",
+  "Name": "ENO_OTHER",
   "Child": [
     {
-      "Control": [],
-      "depth": 1,
-      "FlowControl": [],
-      "genericName": "MODULE",
-      "Label": [
-        "\"Sequence\""
-      ],
       "id": "lutkf97g",
-      "TargetMode": [
-        "CAPI",
-        "CATI",
-        "CAWI",
-        "PAPI"
-      ],
-      "Declaration": [],
+      "Name": "SEQUENCE",
       "type": "SequenceType",
       "Child": [
         {
-          "Response": [
-            {
-              "CollectedVariableReference": "lutkscmh",
-              "id": "lutl1gyc",
-              "mandatory": false,
-              "CodeListReference": "lutkfklf",
-              "Datatype": {
-                "Pattern": "",
-                "typeName": "TEXT",
-                "visualizationHint": "RADIO",
-                "type": "TextDatatypeType",
-                "MaxLength": 1
-              }
-            }
-          ],
-          "Control": [],
-          "depth": 2,
-          "FlowControl": [
-            {
-              "Description": "$UCQ_RADIO$ = 'codeC' : UCQ_codeC_RADIO",
-              "Expression": "$UCQ_RADIO$ = 'codeC'",
-              "flowControlType": "CLARIFICATION",
-              "id": "lutlkx3g",
-              "IfTrue": "lutljq3k"
-            },
-            {
-              "Description": "$UCQ_RADIO$ = 'codeD' : UCQ_codeD_RADIO",
-              "Expression": "$UCQ_RADIO$ = 'codeD'",
-              "flowControlType": "CLARIFICATION",
-              "id": "lutlcitc",
-              "IfTrue": "lutl6vl0"
-            }
-          ],
+          "id": "lutkqj7u",
+          "Name": "UCQ_RADIO",
+          "type": "QuestionType",
           "Label": [
             "\"Unique choice question (radio buttons)\""
           ],
-          "ClarificationQuestion": [
+          "depth": 2,
+          "Control": [],
+          "Response": [
             {
-              "Response": [
-                {
-                  "CollectedVariableReference": "lutl57n5",
-                  "id": "lutliibb",
-                  "mandatory": false,
-                  "Datatype": {
-                    "Pattern": "",
-                    "typeName": "TEXT",
-                    "type": "TextDatatypeType",
-                    "MaxLength": "20"
-                  }
-                }
-              ],
-              "Label": "\"Please, specify about option C:\"",
-              "id": "lutljq3k",
-              "TargetMode": [
-                "CAPI",
-                "CATI",
-                "CAWI",
-                "PAPI"
-              ],
-              "questionType": "SIMPLE",
-              "Name": "UCQ_codeC"
-            },
-            {
-              "Response": [
-                {
-                  "CollectedVariableReference": "lutkv69x",
-                  "id": "lutl1qhv",
-                  "mandatory": false,
-                  "Datatype": {
-                    "Pattern": "",
-                    "typeName": "TEXT",
-                    "type": "TextDatatypeType",
-                    "MaxLength": "30"
-                  }
-                }
-              ],
-              "Label": "\"Please, specify about option D:\"",
-              "id": "lutl6vl0",
-              "TargetMode": [
-                "CAPI",
-                "CATI",
-                "CAWI",
-                "PAPI"
-              ],
-              "questionType": "SIMPLE",
-              "Name": "UCQ_codeD"
+              "id": "lutl1gyc",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 1,
+                "visualizationHint": "RADIO"
+              },
+              "mandatory": false,
+              "CodeListReference": "lutkfklf",
+              "CollectedVariableReference": "lutkscmh"
             }
           ],
-          "id": "lutkqj7u",
           "TargetMode": [
             "CAPI",
             "CATI",
@@ -332,100 +38,100 @@
             "PAPI"
           ],
           "Declaration": [],
-          "type": "QuestionType",
-          "questionType": "SINGLE_CHOICE",
-          "Name": "UCQ_RADIO"
-        },
-        {
-          "Response": [
-            {
-              "CollectedVariableReference": "lutkwsd5",
-              "id": "lutlkq28",
-              "mandatory": false,
-              "CodeListReference": "lutkfklf",
-              "Datatype": {
-                "Pattern": "",
-                "typeName": "TEXT",
-                "visualizationHint": "CHECKBOX",
-                "type": "TextDatatypeType",
-                "MaxLength": 1
-              }
-            }
-          ],
-          "Control": [],
-          "depth": 2,
           "FlowControl": [
             {
-              "Description": "$UCQ_CHECKBOX$ = 'codeC' : UCQ_codeC_CHECKBOX",
-              "Expression": "$UCQ_CHECKBOX$ = 'codeC'",
-              "flowControlType": "CLARIFICATION",
-              "id": "lutl3gi6",
-              "IfTrue": "lutl5tm8"
+              "id": "lutlkx3g",
+              "IfTrue": "lutljq3k",
+              "Expression": "$UCQ_RADIO$ = 'codeC'",
+              "Description": "$UCQ_RADIO$ = 'codeC' : UCQ_codeC_RADIO",
+              "flowControlType": "CLARIFICATION"
             },
             {
-              "Description": "$UCQ_CHECKBOX$ = 'codeD' : UCQ_codeD_CHECKBOX",
-              "Expression": "$UCQ_CHECKBOX$ = 'codeD'",
-              "flowControlType": "CLARIFICATION",
-              "id": "lutl8ym1",
-              "IfTrue": "lutl8zv7"
+              "id": "lutlcitc",
+              "IfTrue": "lutl6vl0",
+              "Expression": "$UCQ_RADIO$ = 'codeD'",
+              "Description": "$UCQ_RADIO$ = 'codeD' : UCQ_codeD_RADIO",
+              "flowControlType": "CLARIFICATION"
             }
           ],
+          "questionType": "SINGLE_CHOICE",
+          "ClarificationQuestion": [
+            {
+              "id": "lutljq3k",
+              "Name": "UCQ_codeC",
+              "Label": "\"Please, specify about option C:\"",
+              "Response": [
+                {
+                  "id": "lutliibb",
+                  "Datatype": {
+                    "type": "TextDatatypeType",
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "MaxLength": "20"
+                  },
+                  "mandatory": false,
+                  "CollectedVariableReference": "lutl57n5"
+                }
+              ],
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "questionType": "SIMPLE"
+            },
+            {
+              "id": "lutl6vl0",
+              "Name": "UCQ_codeD",
+              "Label": "\"Please, specify about option D:\"",
+              "Response": [
+                {
+                  "id": "lutl1qhv",
+                  "Datatype": {
+                    "type": "TextDatatypeType",
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "MaxLength": "30"
+                  },
+                  "mandatory": false,
+                  "CollectedVariableReference": "lutkv69x"
+                }
+              ],
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "questionType": "SIMPLE"
+            }
+          ]
+        },
+        {
+          "id": "lutkmu5x",
+          "Name": "UCQ_CHECKBOX",
+          "type": "QuestionType",
           "Label": [
             "\"Unique choice question (checkbox buttons)\""
           ],
-          "ClarificationQuestion": [
+          "depth": 2,
+          "Control": [],
+          "Response": [
             {
-              "Response": [
-                {
-                  "CollectedVariableReference": "lutksrhg",
-                  "id": "lutlazew",
-                  "mandatory": false,
-                  "Datatype": {
-                    "Pattern": "",
-                    "typeName": "TEXT",
-                    "type": "TextDatatypeType",
-                    "MaxLength": "20"
-                  }
-                }
-              ],
-              "Label": "\"Please, specify about option C:\"",
-              "id": "lutl5tm8",
-              "TargetMode": [
-                "CAPI",
-                "CATI",
-                "CAWI",
-                "PAPI"
-              ],
-              "questionType": "SIMPLE",
-              "Name": "UCQ_codeC"
-            },
-            {
-              "Response": [
-                {
-                  "CollectedVariableReference": "lutl4rut",
-                  "id": "lutl9djy",
-                  "mandatory": false,
-                  "Datatype": {
-                    "Pattern": "",
-                    "typeName": "TEXT",
-                    "type": "TextDatatypeType",
-                    "MaxLength": "30"
-                  }
-                }
-              ],
-              "Label": "\"Please, specify about option D:\"",
-              "id": "lutl8zv7",
-              "TargetMode": [
-                "CAPI",
-                "CATI",
-                "CAWI",
-                "PAPI"
-              ],
-              "questionType": "SIMPLE",
-              "Name": "UCQ_codeD"
+              "id": "lutlkq28",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "Pattern": "",
+                "typeName": "TEXT",
+                "MaxLength": 1,
+                "visualizationHint": "CHECKBOX"
+              },
+              "mandatory": false,
+              "CodeListReference": "lutkfklf",
+              "CollectedVariableReference": "lutkwsd5"
             }
           ],
-          "id": "lutkmu5x",
           "TargetMode": [
             "CAPI",
             "CATI",
@@ -433,32 +139,144 @@
             "PAPI"
           ],
           "Declaration": [],
-          "type": "QuestionType",
-          "questionType": "SINGLE_CHOICE",
-          "Name": "UCQ_CHECKBOX"
-        },
-        {
           "FlowControl": [
             {
-              "Description": "$MCQ3$ = '1' : MCQ_codeC",
-              "Expression": "$MCQ3$ = '1'",
-              "flowControlType": "CLARIFICATION",
-              "id": "lutlmafr",
-              "IfTrue": "lutlm64y"
+              "id": "lutl3gi6",
+              "IfTrue": "lutl5tm8",
+              "Expression": "$UCQ_CHECKBOX$ = 'codeC'",
+              "Description": "$UCQ_CHECKBOX$ = 'codeC' : UCQ_codeC_CHECKBOX",
+              "flowControlType": "CLARIFICATION"
             },
             {
-              "Description": "$MCQ4$ = '1' : MCQ_codeD",
-              "Expression": "$MCQ4$ = '1'",
-              "flowControlType": "CLARIFICATION",
-              "id": "lutlj6si",
-              "IfTrue": "lutl9ech"
+              "id": "lutl8ym1",
+              "IfTrue": "lutl8zv7",
+              "Expression": "$UCQ_CHECKBOX$ = 'codeD'",
+              "Description": "$UCQ_CHECKBOX$ = 'codeD' : UCQ_codeD_CHECKBOX",
+              "flowControlType": "CLARIFICATION"
             }
           ],
+          "questionType": "SINGLE_CHOICE",
+          "ClarificationQuestion": [
+            {
+              "id": "lutl5tm8",
+              "Name": "UCQ_codeC",
+              "Label": "\"Please, specify about option C:\"",
+              "Response": [
+                {
+                  "id": "lutlazew",
+                  "Datatype": {
+                    "type": "TextDatatypeType",
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "MaxLength": "20"
+                  },
+                  "mandatory": false,
+                  "CollectedVariableReference": "lutksrhg"
+                }
+              ],
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "questionType": "SIMPLE"
+            },
+            {
+              "id": "lutl8zv7",
+              "Name": "UCQ_codeD",
+              "Label": "\"Please, specify about option D:\"",
+              "Response": [
+                {
+                  "id": "lutl9djy",
+                  "Datatype": {
+                    "type": "TextDatatypeType",
+                    "Pattern": "",
+                    "typeName": "TEXT",
+                    "MaxLength": "30"
+                  },
+                  "mandatory": false,
+                  "CollectedVariableReference": "lutl4rut"
+                }
+              ],
+              "TargetMode": [
+                "CAPI",
+                "CATI",
+                "CAWI",
+                "PAPI"
+              ],
+              "questionType": "SIMPLE"
+            }
+          ]
+        },
+        {
+          "id": "lutkxex2",
+          "Name": "MCQ",
+          "type": "QuestionType",
           "Label": [
             "\"Multiple choice question\""
           ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "lutll481",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "lutlk4q5"
+            },
+            {
+              "id": "lutlkzqn",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "lutli99v"
+            },
+            {
+              "id": "lutlf2kj",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "lutlbath"
+            },
+            {
+              "id": "lutlg1iw",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "lutl7oi1"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CATI",
+            "CAWI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [
+            {
+              "id": "lutlmafr",
+              "IfTrue": "lutlm64y",
+              "Expression": "$MCQ3$ = '1'",
+              "Description": "$MCQ3$ = '1' : MCQ_codeC",
+              "flowControlType": "CLARIFICATION"
+            },
+            {
+              "id": "lutlj6si",
+              "IfTrue": "lutl9ech",
+              "Expression": "$MCQ4$ = '1'",
+              "Description": "$MCQ4$ = '1' : MCQ_codeD",
+              "flowControlType": "CLARIFICATION"
+            }
+          ],
+          "questionType": "MULTIPLE_CHOICE",
           "ResponseStructure": {
-            "Attribute": [],
             "Mapping": [
               {
                 "MappingSource": "lutll481",
@@ -477,130 +295,78 @@
                 "MappingTarget": "4"
               }
             ],
+            "Attribute": [],
             "Dimension": [
               {
-                "dimensionType": "PRIMARY",
                 "dynamic": "0",
+                "dimensionType": "PRIMARY",
                 "CodeListReference": "lutkfklf"
               },
               {
-                "dimensionType": "MEASURE",
-                "dynamic": "0"
+                "dynamic": "0",
+                "dimensionType": "MEASURE"
               }
             ]
           },
-          "type": "QuestionType",
-          "Name": "MCQ",
-          "Response": [
-            {
-              "CollectedVariableReference": "lutlk4q5",
-              "id": "lutll481",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "lutli99v",
-              "id": "lutlkzqn",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "lutlbath",
-              "id": "lutlf2kj",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            },
-            {
-              "CollectedVariableReference": "lutl7oi1",
-              "id": "lutlg1iw",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              }
-            }
-          ],
-          "Control": [],
-          "depth": 2,
           "ClarificationQuestion": [
             {
+              "id": "lutlm64y",
+              "Name": "UCQ_codeC",
+              "Label": "\"Please, specify about option C:\"",
               "Response": [
                 {
-                  "CollectedVariableReference": "lutl5z5d",
                   "id": "lutlfn9e",
-                  "mandatory": false,
                   "Datatype": {
+                    "type": "TextDatatypeType",
                     "Pattern": "",
                     "typeName": "TEXT",
-                    "type": "TextDatatypeType",
                     "MaxLength": "20"
-                  }
+                  },
+                  "mandatory": false,
+                  "CollectedVariableReference": "lutl5z5d"
                 }
               ],
-              "Label": "\"Please, specify about option C:\"",
-              "id": "lutlm64y",
               "TargetMode": [
                 "CAPI",
                 "CATI",
                 "CAWI",
                 "PAPI"
               ],
-              "questionType": "SIMPLE",
-              "Name": "UCQ_codeC"
+              "questionType": "SIMPLE"
             },
             {
+              "id": "lutl9ech",
+              "Name": "UCQ_codeD",
+              "Label": "\"Please, specify about option D:\"",
               "Response": [
                 {
-                  "CollectedVariableReference": "lutlhxbn",
                   "id": "lutl3cfc",
-                  "mandatory": false,
                   "Datatype": {
+                    "type": "TextDatatypeType",
                     "Pattern": "",
                     "typeName": "TEXT",
-                    "type": "TextDatatypeType",
                     "MaxLength": "30"
-                  }
+                  },
+                  "mandatory": false,
+                  "CollectedVariableReference": "lutlhxbn"
                 }
               ],
-              "Label": "\"Please, specify about option D:\"",
-              "id": "lutl9ech",
               "TargetMode": [
                 "CAPI",
                 "CATI",
                 "CAWI",
                 "PAPI"
               ],
-              "questionType": "SIMPLE",
-              "Name": "UCQ_codeD"
+              "questionType": "SIMPLE"
             }
-          ],
-          "id": "lutkxex2",
-          "TargetMode": [
-            "CAPI",
-            "CATI",
-            "CAWI",
-            "PAPI"
-          ],
-          "Declaration": [],
-          "questionType": "MULTIPLE_CHOICE"
+          ]
         }
       ],
-      "Name": "SEQUENCE"
-    },
-    {
-      "Control": [],
-      "depth": 1,
-      "FlowControl": [],
-      "genericName": "MODULE",
       "Label": [
-        "QUESTIONNAIRE_END"
+        "\"Sequence\""
       ],
-      "id": "idendquest",
+      "depth": 1,
+      "Control": [],
       "TargetMode": [
         "CAPI",
         "CATI",
@@ -608,9 +374,243 @@
         "PAPI"
       ],
       "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "idendquest",
+      "Name": "QUESTIONNAIRE_END",
       "type": "SequenceType",
       "Child": [],
-      "Name": "QUESTIONNAIRE_END"
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CATI",
+        "CAWI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
     }
-  ]
+  ],
+  "Label": [
+    "Eno - Other please specify"
+  ],
+  "final": false,
+  "owner": "ENO-INTEGRATION-TESTS",
+  "agency": "fr.insee",
+  "CodeLists": {
+    "CodeList": [
+      {
+        "id": "lutkfklf",
+        "Code": [
+          {
+            "Label": "\"Option A\"",
+            "Value": "codeA",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Option B\"",
+            "Value": "codeB",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Option C (with detail)\"",
+            "Value": "codeC",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Option D (with detail)\"",
+            "Value": "codeD",
+            "Parent": ""
+          }
+        ],
+        "Name": "",
+        "Label": "CODE_LIST_WITH_DETAIL"
+      }
+    ]
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "lutkscmh",
+        "Name": "UCQ_RADIO",
+        "type": "CollectedVariableType",
+        "Label": "UCQ_RADIO label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 1
+        },
+        "CodeListReference": "lutkfklf"
+      },
+      {
+        "id": "lutl57n5",
+        "Name": "UCQ_codeC_RADIO",
+        "type": "CollectedVariableType",
+        "Label": "UCQ_codeC radio detail",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": "20"
+        },
+        "CodeListReference": "lutkfklf"
+      },
+      {
+        "id": "lutkv69x",
+        "Name": "UCQ_codeD_RADIO",
+        "type": "CollectedVariableType",
+        "Label": "UCQ_codeD radio detail",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": "30"
+        }
+      },
+      {
+        "id": "lutkwsd5",
+        "Name": "UCQ_CHECKBOX",
+        "type": "CollectedVariableType",
+        "Label": "UCQ_CHECKBOX label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": 1
+        },
+        "CodeListReference": "lutkfklf"
+      },
+      {
+        "id": "lutksrhg",
+        "Name": "UCQ_codeC_CHECKBOX",
+        "type": "CollectedVariableType",
+        "Label": "UCQ_codeC checkbox detail",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": "20"
+        }
+      },
+      {
+        "id": "lutl4rut",
+        "Name": "UCQ_codeD_CHECKBOX",
+        "type": "CollectedVariableType",
+        "Label": "UCQ_codeD checkbox detail",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": "30"
+        }
+      },
+      {
+        "id": "lutlk4q5",
+        "Name": "MCQ1",
+        "type": "CollectedVariableType",
+        "Label": "codeA - \"Option A\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "lutli99v",
+        "Name": "MCQ2",
+        "type": "CollectedVariableType",
+        "Label": "codeB - \"Option B\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "lutlbath",
+        "Name": "MCQ3",
+        "type": "CollectedVariableType",
+        "Label": "codeC - \"Option C (with detail)\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "lutl7oi1",
+        "Name": "MCQ4",
+        "type": "CollectedVariableType",
+        "Label": "codeD - \"Option D (with detail)\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "lutl5z5d",
+        "Name": "MCQ_codeC",
+        "type": "CollectedVariableType",
+        "Label": "MCQ_codeC detail",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": "20"
+        }
+      },
+      {
+        "id": "lutlhxbn",
+        "Name": "MCQ_codeD",
+        "type": "CollectedVariableType",
+        "Label": "MCQ_codeD detail",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "Pattern": "",
+          "typeName": "TEXT",
+          "MaxLength": "30"
+        }
+      }
+    ]
+  },
+  "flowLogic": "FILTER",
+  "TargetMode": [
+    "CAPI",
+    "CATI",
+    "CAWI",
+    "PAPI"
+  ],
+  "FlowControl": [],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "lutle9w5",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "idendquest",
+        "lutkf97g",
+        "lutkqj7u",
+        "lutkmu5x",
+        "lutkxex2"
+      ]
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "esa-dc-2018",
+      "uri": "http://ddi:fr.insee:DataCollection.esa-dc-2018",
+      "Name": "Enquête sectorielle annuelle 2018"
+    }
+  ],
+  "lastUpdatedDate": "Wed Apr 10 2024 11:02:36 GMT+0200 (heure d’été d’Europe centrale)",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": []
 }
