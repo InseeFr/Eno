@@ -81,7 +81,7 @@
             "Attribute": [],
             "Dimension": [
               {
-                "dynamic": "0",
+                "dynamic": "NON_DYNAMIC",
                 "dimensionType": "PRIMARY",
                 "CodeListReference": "m2kmcbtl"
               },
@@ -136,7 +136,9 @@
             "Attribute": [],
             "Dimension": [
               {
-                "dynamic": "1-5",
+                "dynamic": "DYNAMIC_LENGTH",
+                "MaxLines": 5,
+                "MinLines": 1,
                 "dimensionType": "PRIMARY"
               },
               {
