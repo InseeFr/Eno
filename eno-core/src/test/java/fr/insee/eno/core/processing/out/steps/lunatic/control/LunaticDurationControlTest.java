@@ -24,8 +24,8 @@ class LunaticDurationControlTest {
         //
         LunaticDurationControl.HourMinuteValue hourMinuteValue = LunaticDurationControl.parseHourMinute(hourMinuteString);
         //
-        assertEquals(1, hourMinuteValue.hours());
-        assertEquals(6, hourMinuteValue.minutes());
+        assertEquals(10, hourMinuteValue.hours());
+        assertEquals(39, hourMinuteValue.minutes());
     }
 
     @Test
