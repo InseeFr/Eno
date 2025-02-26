@@ -71,7 +71,7 @@ public class LunaticDurationControl {
                 " and cast(substr(VAR_DUREE, instr(VAR_DUREE, 'Y') + 1, instr(VAR_DUREE, 'M') - instr(VAR_DUREE, 'Y') - 1), integer) < " + minValue.month() + ")) " +
                 "or cast(substr(VAR_DUREE, 2, instr(VAR_DUREE, 'Y') - 2), integer) > " + maxValue.year() + " or " +
                 "(cast(substr(VAR_DUREE, 2, instr(VAR_DUREE, 'Y') - 2), integer) = " + maxValue.year() +
-                " and cast(substr(VAR_DUREE, instr(VAR_DUREE, 'Y') + 1, instr(VAR_DUREE, 'M') - instr(VAR_DUREE, 'Y') - 1), integer) > " + maxValue.month() + ")))";
+                " and cast(substr(VAR_DUREE, instrgenerateControlExpression(VAR_DUREE, 'Y') + 1, instr(VAR_DUREE, 'M') - instr(VAR_DUREE, 'Y') - 1), integer) > " + maxValue.month() + ")))";
     }
 
     static String generateControlExpression(HourMinuteValue hourMinuteValue) {
