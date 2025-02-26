@@ -40,4 +40,64 @@ class LunaticDurationControlTest {
         assertEquals(expected, result);
     }
 
+    @Test
+    void testMessageHourMinute() {
+        //
+        LunaticDurationControl.HourMinuteValue minValue = new LunaticDurationControl.HourMinuteValue(1, 30);
+        LunaticDurationControl.HourMinuteValue maxValue = new LunaticDurationControl.HourMinuteValue(3, 0);
+        //
+        String result = ""; // TODO
+        //
+        String expected = "La durée saisie doit être comprise entre 1 heure 30 minutes et 3 heures.";
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void testCastExpressionYear() {
+        //
+        String responseName = "DURATION_VAR";
+        //
+        String result = ""; // TODO
+        //
+        String expected = """
+                cast(substr(DURATION_VAR, 2, instr(VAR_DUREE, "Y") - 2), integer)""";
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void testCastExpressionMonth() {
+        //
+        String responseName = "DURATION_VAR";
+        //
+        String result = ""; // TODO
+        //
+        String expected = """
+                cast(substr(VAR_DUREE, instr(VAR_DUREE, "Y") + 1, instr(VAR_DUREE, "M") - instr(VAR_DUREE, "Y") - 1 ), integer)""";
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void testCastExpressionHour() {
+        //
+        String responseName = "DURATION_VAR";
+        //
+        String result = ""; // TODO
+        //
+        String expected = """
+                cast(substr(DURATION_VAR, 3, instr(VAR_DUREE, "H") - 3), integer)""";
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void testCastExpressionMinute() {
+        //
+        String responseName = "DURATION_VAR";
+        //
+        String result = ""; // TODO
+        //
+        String expected = """
+                cast(substr(VAR_DUREE, instr(VAR_DUREE, "H") + 1, instr(VAR_DUREE, "M") - instr(VAR_DUREE, "H") - 1 ), integer)""";
+        assertEquals(expected, result);
+    }
+
 }
