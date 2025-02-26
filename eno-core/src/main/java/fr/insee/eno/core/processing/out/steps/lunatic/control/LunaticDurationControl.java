@@ -137,7 +137,7 @@ public class LunaticDurationControl {
         int months = value.months();
 
         if (years > 0 && months > 0) {
-            return String.format("%d ans et %d mois", years, months);
+            return String.format("%d an%s et %d mois", years, years == 1 ? "" : "s", months);
         } else if (years > 0) {
             return years == 1 ? "1 an" : String.format("%d ans", years);
         } else {
@@ -150,14 +150,13 @@ public class LunaticDurationControl {
         int minutes = value.minutes();
 
         if (hours > 0 && minutes > 0) {
-            return String.format("%d heures et %d minutes", hours, minutes);
+            return String.format("%d heure%s et %d minute%s", hours, hours == 1 ? "" : "s", minutes, minutes == 1 ? "" : "s");
         } else if (hours > 0) {
             return hours == 1 ? "1 heure" : String.format("%d heures", hours);
         } else {
             return minutes == 1 ? "1 minute" : String.format("%d minutes", minutes);
         }
     }
-
 
     /**
      * The value of a duration is zero if both year and month are 0.

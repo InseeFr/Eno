@@ -2,9 +2,9 @@ package fr.insee.eno.core.processing.out.steps.lunatic.control;
 
 import fr.insee.eno.core.processing.out.steps.lunatic.control.LunaticDurationControl.HourMinuteValue;
 import fr.insee.eno.core.processing.out.steps.lunatic.control.LunaticDurationControl.YearMonthValue;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static fr.insee.eno.core.processing.out.steps.lunatic.control.LunaticDurationControl.generateControlMessage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -17,8 +17,8 @@ class LunaticDurationControlTest {
         //
         YearMonthValue yearMonthValue = LunaticDurationControl.parseYearMonth(yearMonthString);
         //
-        assertEquals(1, yearMonthValue.year());
-        assertEquals(6, yearMonthValue.month());
+        assertEquals(1, yearMonthValue.years());
+        assertEquals(6, yearMonthValue.months());
     }
 
     @Test
@@ -38,9 +38,9 @@ class LunaticDurationControlTest {
         YearMonthValue minValue = new YearMonthValue(1, 6);
         YearMonthValue maxValue = new YearMonthValue(3, 1);
         //
-        String result = ""; // TODO
+        String result = generateControlMessage(minValue, maxValue)    ;
         //
-        String expected = "La durée saisie doit être comprise entre 1 an et 6 mois et 3 ans et 1 mois.";
+        String expected = "\"La durée saisie doit être comprise entre 1 an et 6 mois et 3 ans et 1 mois.\"";
         assertEquals(expected, result);
     }
 
@@ -50,9 +50,9 @@ class LunaticDurationControlTest {
         HourMinuteValue minValue = new HourMinuteValue(1, 30);
         HourMinuteValue maxValue = new HourMinuteValue(3, 0);
         //
-        String result = ""; // TODO
+        String result = generateControlMessage(minValue, maxValue);
         //
-        String expected = "La durée saisie doit être comprise entre 1 heure 30 minutes et 3 heures.";
+        String expected = "\"La durée saisie doit être comprise entre 1 heure et 30 minutes et 3 heures.\"";
         assertEquals(expected, result);
     }
 
