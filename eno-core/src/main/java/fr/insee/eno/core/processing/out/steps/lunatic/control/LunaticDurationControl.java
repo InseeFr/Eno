@@ -65,7 +65,7 @@ public class LunaticDurationControl {
     }
 
     static String generateControlExpression(YearMonthValue minValue, YearMonthValue maxValue) {
-        return null
+        return null;
     }
 
     static String generateControlExpression(HourMinuteValue hourMinuteValue) {
@@ -73,11 +73,35 @@ public class LunaticDurationControl {
     }
 
     static String generateControlMessage(YearMonthValue minValue, YearMonthValue maxValue) {
-        if (minValue.year() == 0 && minValue.month() == 0) {
+        if (isZeroDuration(minValue)) {
             return String.format("\"La durée saisie doit être inférieure à %s.\"", formatDuration(maxValue));
+        }
+        if (isZeroDuration(maxValue)) {
+            throw new IllegalArgumentException("TODO"); // TODO
         }
         return String.format("\"La durée saisie doit être comprise entre %s et %s.\"",
                 formatDuration(minValue), formatDuration(maxValue));
+    }
+
+    private static String formatDuration(YearMonthValue yearMonthValue) {
+        Integer year = yearMonthValue.year();
+        String yearString = year + " " + (year == 1 ? "an" : "ans");
+        Integer month = yearMonthValue.month();
+        String monthString = month + " mois";
+        if (month == 0)
+            return yearString;
+        if (year == 0)
+            return monthString;
+        return yearString + " et " + monthString;
+    }
+
+    private static String formatDuration(HourMinuteValue yearMonthValue) {
+        return null;
+    }
+
+    /** The value of a duration is zero if both year and month are 0. */
+    private static boolean isZeroDuration(YearMonthValue minValue) {
+        return minValue.year() == 0 && minValue.month() == 0;
     }
 
     static String generateControlMessage(HourMinuteValue hourMinuteValue) {
