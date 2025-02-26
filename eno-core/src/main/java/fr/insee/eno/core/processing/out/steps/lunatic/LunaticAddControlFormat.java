@@ -514,5 +514,4 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
         LocalDate targetDate = startDate.plus(period);
         return Duration.between(startDate.atStartOfDay(), targetDate.atStartOfDay());
     }
-
 }
