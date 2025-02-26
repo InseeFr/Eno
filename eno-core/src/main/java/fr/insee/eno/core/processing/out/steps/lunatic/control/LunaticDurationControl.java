@@ -18,16 +18,22 @@ public class LunaticDurationControl {
         String max = lunaticDurationComponent.getMax();
         DurationFormat format = lunaticDurationComponent.getFormat();
         if (min == null || max == null || format == null)
-            throw new RequiredPropertyException("TODO");
+            throw new RequiredPropertyException("Min, Max ou Format manquant dans l'entrée.");
+
+        YearMonthValue minValue = parseYearMonth(min);
+        YearMonthValue maxValue = parseYearMonth(max);
+
+        String controlExpression = generateControlExpression(minValue, maxValue);
+        String controlMessage = generateControlMessage(minValue, maxValue);
 
         ControlType lunaticControl = new ControlType();
 
         lunaticControl.setControl(new LabelType());
-        lunaticControl.getControl().setValue("TODO");
+        lunaticControl.getControl().setValue(controlExpression);
         lunaticControl.getControl().setType(LabelTypeEnum.VTL);
 
         lunaticControl.setErrorMessage(new LabelType());
-        lunaticControl.getErrorMessage().setValue("TODO");
+        lunaticControl.getErrorMessage().setValue(controlMessage);
         lunaticControl.getErrorMessage().setType(LabelTypeEnum.VTL);
 
         return lunaticControl;
@@ -40,7 +46,7 @@ public class LunaticDurationControl {
         Matcher matcher = LUNATIC_YEAR_MONTH_PATTERN.matcher(yearMonthString);
 
         if (! (matcher.find() && matcher.groupCount() == 2))
-            throw new IllegalArgumentException("TODO");
+            throw new IllegalArgumentException("Format invalide pour la durée année/mois.");
 
         Integer year = Integer.parseInt(matcher.group(1));
         Integer month = Integer.parseInt(matcher.group(2));
@@ -51,14 +57,14 @@ public class LunaticDurationControl {
         Matcher matcher = LUNATIC_HOURS_MINUTES_PATTERN.matcher(hourMinuteString);
 
         if (! (matcher.find() && matcher.groupCount() == 2))
-            throw new IllegalArgumentException("TODO");
+            throw new IllegalArgumentException("Format invalide pour la durée heure/minute.");
 
         Integer hour = Integer.parseInt(matcher.group(1));
         Integer minute = Integer.parseInt(matcher.group(2));
         return new HourMinuteValue(hour, minute);
     }
 
-    static String generateControlExpression(YearMonthValue yearMonthValue) {
+    static String generateControlExpression(YearMonthValue minValue, YearMonthValue maxValue) {
         return null
     }
 
@@ -66,18 +72,15 @@ public class LunaticDurationControl {
         return null;
     }
 
-    static String generateControlMessage(YearMonthValue yearMonthValue) {
-        if ( != null &&  != null) {
-            return String.format("\"La durée saisie doit être comprise entre %s et %s.\"", , );
-        } else if ( != null) {
-            return String.format("\"La durée saisie doit être inférieure à %s.\"", );
-        } else {
-            return String.format("\"La durée saisie doit être supérieure à %s.\"", );
+    static String generateControlMessage(YearMonthValue minValue, YearMonthValue maxValue) {
+        if (minValue.year() == 0 && minValue.month() == 0) {
+            return String.format("\"La durée saisie doit être inférieure à %s.\"", formatDuration(maxValue));
         }
+        return String.format("\"La durée saisie doit être comprise entre %s et %s.\"",
+                formatDuration(minValue), formatDuration(maxValue));
     }
 
     static String generateControlMessage(HourMinuteValue hourMinuteValue) {
         return null;
     }
-
 }
