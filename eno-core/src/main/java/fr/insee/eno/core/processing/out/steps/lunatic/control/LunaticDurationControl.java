@@ -79,16 +79,16 @@ public class LunaticDurationControl {
 
     static String generateControlExpression(YearMonthValue minValue, YearMonthValue maxValue) {
         return String.format("""
-        not(
-            not(isnull(VAR_DUREE)) and (
-                cast(substr(VAR_DUREE, 2, instr(VAR_DUREE, 'Y') - 2), integer) < %d
-                or (cast(substr(VAR_DUREE, 2, instr(VAR_DUREE, 'Y') - 2), integer) = %d
-                    and cast(substr(VAR_DUREE, instr(VAR_DUREE, 'Y') + 1, instr(VAR_DUREE, 'M') - instr(VAR_DUREE, 'Y') - 1), integer) < %d))
-                or cast(substr(VAR_DUREE, 2, instr(VAR_DUREE, 'Y') - 2), integer) > %d
-                or (cast(substr(VAR_DUREE, 2, instr(VAR_DUREE, 'Y') - 2), integer) = %d
-                    and cast(substr(VAR_DUREE, instr(VAR_DUREE, 'Y') + 1, instr(VAR_DUREE, 'M') - instr(VAR_DUREE, 'Y') - 1), integer) > %d)
-            )
-        )""",
+    not(
+        not(isnull(VAR_DUREE)) and (
+            cast(substr(VAR_DUREE, 2, instr(VAR_DUREE, "Y") - 2), integer) < %d
+            or (cast(substr(VAR_DUREE, 2, instr(VAR_DUREE, "Y") - 2), integer) = %d
+                and cast(substr(VAR_DUREE, instr(VAR_DUREE, "Y") + 1, instr(VAR_DUREE, "M") - instr(VAR_DUREE, "Y") - 1), integer) < %d))
+            or cast(substr(VAR_DUREE, 2, instr(VAR_DUREE, "Y") - 2), integer) > %d
+            or (cast(substr(VAR_DUREE, 2, instr(VAR_DUREE, "Y") - 2), integer) = %d
+                and cast(substr(VAR_DUREE, instr(VAR_DUREE, "Y") + 1, instr(VAR_DUREE, "M") - instr(VAR_DUREE, "Y") - 1), integer) > %d)
+        )
+    )""",
                 minValue.years(), minValue.years(), minValue.months(),
                 maxValue.years(), maxValue.years(), maxValue.months()
         );
@@ -132,7 +132,7 @@ public class LunaticDurationControl {
         return String.format("\"La durée saisie doit être comprise entre %s et %s.\"", formatDuration(minValue), formatDuration(maxValue));
     }
 
-    private static String formatDuration(YearMonthValue value) {
+    static String formatDuration(YearMonthValue value) {
         int years = value.years();
         int months = value.months();
 
@@ -145,7 +145,7 @@ public class LunaticDurationControl {
         }
     }
 
-    private static String formatDuration(HourMinuteValue value) {
+    static String formatDuration(HourMinuteValue value) {
         int hours = value.hours();
         int minutes = value.minutes();
 

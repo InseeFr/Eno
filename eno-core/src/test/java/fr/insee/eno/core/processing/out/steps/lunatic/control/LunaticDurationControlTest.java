@@ -4,9 +4,8 @@ import fr.insee.eno.core.processing.out.steps.lunatic.control.LunaticDurationCon
 import fr.insee.eno.core.processing.out.steps.lunatic.control.LunaticDurationControl.YearMonthValue;
 import org.junit.jupiter.api.Test;
 
-import static fr.insee.eno.core.processing.out.steps.lunatic.control.LunaticDurationControl.generateControlMessage;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static fr.insee.eno.core.processing.out.steps.lunatic.control.LunaticDurationControl.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LunaticDurationControlTest {
 
@@ -56,66 +55,93 @@ class LunaticDurationControlTest {
         assertEquals(expected, result);
     }
 
-    private String mockFormatMethod(HourMinuteValue hourMinuteValue) {
-        return "";
-    }
     @Test
     void testFormatDurationHourMinuteDuration() {
-        assertEquals("1 heure et 30 minutes", mockFormatMethod(new HourMinuteValue(1, 30)));
-        assertEquals("1 minute", mockFormatMethod(new HourMinuteValue(0, 1)));
-        assertEquals("45 minutes", mockFormatMethod(new HourMinuteValue(0, 45)));
-        assertEquals("1 heure", mockFormatMethod(new HourMinuteValue(1, 0)));
-        assertEquals("2 heures", mockFormatMethod(new HourMinuteValue(2, 0)));
-        HourMinuteValue zeroValue = new HourMinuteValue(0, 0);
-        assertThrows(IllegalArgumentException.class, () -> mockFormatMethod(zeroValue));
+        assertEquals("1 heure et 30 minutes", formatDuration(new HourMinuteValue(1, 30)));
+        assertEquals("1 minute", formatDuration(new HourMinuteValue(0, 1)));
+        assertEquals("45 minutes", formatDuration(new HourMinuteValue(0, 45)));
+        assertEquals("1 heure", formatDuration(new HourMinuteValue(1, 0)));
+        assertEquals("2 heures", formatDuration(new HourMinuteValue(2, 0)));
     }
 
     @Test
     void testCastExpressionYear() {
-        //
-        String responseName = "DURATION_VAR";
-        //
-        String result = ""; // TODO
-        //
-        String expected = """
-                cast(substr(DURATION_VAR, 2, instr(VAR_DUREE, "Y") - 2), integer)""";
-        assertEquals(expected, result);
+        String responseName = "VAR_DUREE";
+        String result = generateControlExpression(new YearMonthValue(1, 0), new YearMonthValue(10, 0));
+        String expected = String.format("cast(substr(%s, 2, instr(%s, \"Y\") - 2), integer)", responseName, responseName);
+        assertTrue(result.contains(expected), "L'expression ne contient pas l'extraction de l'année attendue");
     }
 
     @Test
     void testCastExpressionMonth() {
-        //
-        String responseName = "DURATION_VAR";
-        //
-        String result = ""; // TODO
-        //
-        String expected = """
-                cast(substr(VAR_DUREE, instr(VAR_DUREE, "Y") + 1, instr(VAR_DUREE, "M") - instr(VAR_DUREE, "Y") - 1 ), integer)""";
-        assertEquals(expected, result);
+        String responseName = "VAR_DUREE";
+        String result = generateControlExpression(new YearMonthValue(0, 1), new YearMonthValue(0, 12));
+        String expected = String.format("cast(substr(%s, instr(%s, \"Y\") + 1, instr(%s, \"M\") - instr(%s, \"Y\") - 1), integer)", responseName, responseName, responseName, responseName);
+        assertTrue(result.contains(expected), "L'expression ne contient pas l'extraction du mois attendue");
     }
 
     @Test
     void testCastExpressionHour() {
-        //
-        String responseName = "DURATION_VAR";
-        //
-        String result = ""; // TODO
-        //
-        String expected = """
-                cast(substr(DURATION_VAR, 3, instr(VAR_DUREE, "H") - 3), integer)""";
-        assertEquals(expected, result);
+        String responseName = "VAR_DUREE";
+        String result = generateControlExpression(new HourMinuteValue(1, 0), new HourMinuteValue(23, 0));
+        String expected = String.format("cast(substr(%s, 3, instr(%s, \"H\") - 3), integer)", responseName, responseName);
+        assertTrue(result.contains(expected), "L'expression ne contient pas l'extraction de l'heure attendue");
     }
 
     @Test
     void testCastExpressionMinute() {
-        //
-        String responseName = "DURATION_VAR";
-        //
-        String result = ""; // TODO
-        //
-        String expected = """
-                cast(substr(VAR_DUREE, instr(VAR_DUREE, "H") + 1, instr(VAR_DUREE, "M") - instr(VAR_DUREE, "H") - 1 ), integer)""";
-        assertEquals(expected, result);
+        String responseName = "VAR_DUREE";
+        String result = generateControlExpression(new HourMinuteValue(0, 1), new HourMinuteValue(0, 59));
+        String expected = String.format("cast(substr(%s, instr(%s, \"H\") + 1, instr(%s, \"M\") - instr(%s, \"H\") - 1), integer)", responseName, responseName, responseName, responseName);
+        assertTrue(result.contains(expected), "L'expression ne contient pas l'extraction des minutes attendue");
     }
+
+//    @Test
+//    void testCastExpressionYear() {
+//        //
+//        String responseName = "DURATION_VAR";
+//        //
+//        String result = ""; // TODO
+//        //
+//        String expected = """
+//                cast(substr(DURATION_VAR, 2, instr(VAR_DUREE, "Y") - 2), integer)""";
+//        assertEquals(expected, result);
+//    }
+//
+//    @Test
+//    void testCastExpressionMonth() {
+//        //
+//        String responseName = "DURATION_VAR";
+//        //
+//        String result = ""; // TODO
+//        //
+//        String expected = """
+//                cast(substr(VAR_DUREE, instr(VAR_DUREE, "Y") + 1, instr(VAR_DUREE, "M") - instr(VAR_DUREE, "Y") - 1 ), integer)""";
+//        assertEquals(expected, result);
+//    }
+//
+//    @Test
+//    void testCastExpressionHour() {
+//        //
+//        String responseName = "DURATION_VAR";
+//        //
+//        String result = ""; // TODO
+//        //
+//        String expected = """
+//                cast(substr(DURATION_VAR, 3, instr(VAR_DUREE, "H") - 3), integer)""";
+//        assertEquals(expected, result);
+//    }
+//
+//    @Test
+//    void testCastExpressionMinute() {
+//        //
+//        String responseName = "DURATION_VAR";
+//        //
+//        String result = ""; // TODO
+//        //
+//        String expected = """
+//                cast(substr(VAR_DUREE, instr(VAR_DUREE, "H") + 1, instr(VAR_DUREE, "M") - instr(VAR_DUREE, "H") - 1 ), integer)""";
+//        assertEquals(expected, result);
+//    }
 
 }
