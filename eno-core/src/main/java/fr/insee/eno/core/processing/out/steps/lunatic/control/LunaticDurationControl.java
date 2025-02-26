@@ -20,13 +20,23 @@ public class LunaticDurationControl {
         if (min == null || max == null || format == null)
             throw new RequiredPropertyException("Min, Max ou Format manquant dans l'entrée.");
 
-        YearMonthValue minValue = parseYearMonth(min);
-        YearMonthValue maxValue = parseYearMonth(max);
-
-        String controlExpression = generateControlExpression(minValue, maxValue);
-        String controlMessage = generateControlMessage(minValue, maxValue);
-
         ControlType lunaticControl = new ControlType();
+        String controlExpression;
+        String controlMessage;
+
+        if (format == DurationFormat.YEARS_MONTHS) {
+            YearMonthValue minValue = parseYearMonth(min);
+            YearMonthValue maxValue = parseYearMonth(max);
+
+            controlExpression = generateControlExpression(minValue, maxValue);
+            controlMessage = generateControlMessage(minValue, maxValue);
+        } else {
+            HourMinuteValue minValue = parseHourMinute(min);
+            HourMinuteValue maxValue = parseHourMinute(max);
+
+            controlExpression = generateControlExpression(minValue, maxValue);
+            controlMessage = generateControlMessage(minValue, maxValue);
+        }
 
         lunaticControl.setControl(new LabelType());
         lunaticControl.getControl().setValue(controlExpression);
@@ -39,13 +49,16 @@ public class LunaticDurationControl {
         return lunaticControl;
     }
 
-    record YearMonthValue(Integer year, Integer month){}
-    record HourMinuteValue(Integer hours, Integer minutes){}
+    record YearMonthValue(Integer years, Integer months) {
+    }
+
+    record HourMinuteValue(Integer hours, Integer minutes) {
+    }
 
     static YearMonthValue parseYearMonth(String yearMonthString) {
         Matcher matcher = LUNATIC_YEAR_MONTH_PATTERN.matcher(yearMonthString);
 
-        if (! (matcher.find() && matcher.groupCount() == 2))
+        if (!(matcher.find() && matcher.groupCount() == 2))
             throw new IllegalArgumentException("Format invalide pour la durée année/mois.");
 
         Integer year = Integer.parseInt(matcher.group(1));
@@ -56,7 +69,7 @@ public class LunaticDurationControl {
     static HourMinuteValue parseHourMinute(String hourMinuteString) {
         Matcher matcher = LUNATIC_HOURS_MINUTES_PATTERN.matcher(hourMinuteString);
 
-        if (! (matcher.find() && matcher.groupCount() == 2))
+        if (!(matcher.find() && matcher.groupCount() == 2))
             throw new IllegalArgumentException("Format invalide pour la durée heure/minute.");
 
         Integer hour = Integer.parseInt(matcher.group(1));
@@ -65,17 +78,37 @@ public class LunaticDurationControl {
     }
 
     static String generateControlExpression(YearMonthValue minValue, YearMonthValue maxValue) {
-        return "not(not(isnull(VAR_DUREE)) and (" +
-                "cast(substr(VAR_DUREE, 2, instr(VAR_DUREE, 'Y') - 2), integer) < " + minValue.year() + " or " +
-                "(cast(substr(VAR_DUREE, 2, instr(VAR_DUREE, 'Y') - 2), integer) = " + minValue.year() +
-                " and cast(substr(VAR_DUREE, instr(VAR_DUREE, 'Y') + 1, instr(VAR_DUREE, 'M') - instr(VAR_DUREE, 'Y') - 1), integer) < " + minValue.month() + ")) " +
-                "or cast(substr(VAR_DUREE, 2, instr(VAR_DUREE, 'Y') - 2), integer) > " + maxValue.year() + " or " +
-                "(cast(substr(VAR_DUREE, 2, instr(VAR_DUREE, 'Y') - 2), integer) = " + maxValue.year() +
-                " and cast(substr(VAR_DUREE, instrgenerateControlExpression(VAR_DUREE, 'Y') + 1, instr(VAR_DUREE, 'M') - instr(VAR_DUREE, 'Y') - 1), integer) > " + maxValue.month() + ")))";
+        return String.format("""
+        not(
+            not(isnull(VAR_DUREE)) and (
+                cast(substr(VAR_DUREE, 2, instr(VAR_DUREE, 'Y') - 2), integer) < %d
+                or (cast(substr(VAR_DUREE, 2, instr(VAR_DUREE, 'Y') - 2), integer) = %d
+                    and cast(substr(VAR_DUREE, instr(VAR_DUREE, 'Y') + 1, instr(VAR_DUREE, 'M') - instr(VAR_DUREE, 'Y') - 1), integer) < %d))
+                or cast(substr(VAR_DUREE, 2, instr(VAR_DUREE, 'Y') - 2), integer) > %d
+                or (cast(substr(VAR_DUREE, 2, instr(VAR_DUREE, 'Y') - 2), integer) = %d
+                    and cast(substr(VAR_DUREE, instr(VAR_DUREE, 'Y') + 1, instr(VAR_DUREE, 'M') - instr(VAR_DUREE, 'Y') - 1), integer) > %d)
+            )
+        )""",
+                minValue.years(), minValue.years(), minValue.months(),
+                maxValue.years(), maxValue.years(), maxValue.months()
+        );
     }
 
-    static String generateControlExpression(HourMinuteValue hourMinuteValue) {
-        return null;
+    static String generateControlExpression(HourMinuteValue minValue, HourMinuteValue maxValue) {
+        return String.format("""
+            not(
+                not(isnull(VAR_DUREE)) and (
+                    cast(substr(VAR_DUREE, 3, instr(VAR_DUREE, "H") - 3), integer) < %d
+                    or (cast(substr(VAR_DUREE, 3, instr(VAR_DUREE, "H") - 3), integer) = %d
+                        and cast(substr(VAR_DUREE, instr(VAR_DUREE, "H") + 1, instr(VAR_DUREE, "M") - instr(VAR_DUREE, "H") - 1), integer) < %d))
+                    or cast(substr(VAR_DUREE, 3, instr(VAR_DUREE, "H") - 3), integer) > %d
+                    or (cast(substr(VAR_DUREE, 3, instr(VAR_DUREE, "H") - 3), integer) = %d
+                        and cast(substr(VAR_DUREE, instr(VAR_DUREE, "H") + 1, instr(VAR_DUREE, "M") - instr(VAR_DUREE, "H") - 1), integer) > %d)
+                )
+            )""",
+                minValue.hours(), minValue.hours(), minValue.minutes(),
+                maxValue.hours(), maxValue.hours(), maxValue.minutes()
+        );
     }
 
     static String generateControlMessage(YearMonthValue minValue, YearMonthValue maxValue) {
@@ -83,46 +116,59 @@ public class LunaticDurationControl {
             return String.format("\"La durée saisie doit être inférieure à %s.\"", formatDuration(maxValue));
         }
         if (isZeroDuration(maxValue)) {
-            throw new IllegalArgumentException("TODO"); // TODO
+            throw new IllegalArgumentException("La durée maximale ne peut pas être zéro.");
         }
         return String.format("\"La durée saisie doit être comprise entre %s et %s.\"",
                 formatDuration(minValue), formatDuration(maxValue));
     }
 
-    private static String formatDuration(YearMonthValue yearMonthValue) {
-        Integer year = yearMonthValue.year();
-        String yearString = year + " " + (year == 1 ? "an" : "ans");
-        Integer month = yearMonthValue.month();
-        String monthString = month + " mois";
-        if (month == 0)
-            return yearString;
-        if (year == 0)
-            return monthString;
-        return yearString + " et " + monthString;
+    static String generateControlMessage(HourMinuteValue minValue, HourMinuteValue maxValue) {
+        if (isZeroDuration(minValue)) {
+            return String.format("\"La durée saisie doit être inférieure à %s.\"", formatDuration(maxValue));
+        }
+        if (isZeroDuration(maxValue)) {
+            throw new IllegalArgumentException("La durée maximale ne peut pas être zéro.");
+        }
+        return String.format("\"La durée saisie doit être comprise entre %s et %s.\"", formatDuration(minValue), formatDuration(maxValue));
     }
 
-    // AUTRE POSSIBILITE A PARTIR D'UN CODE TROUVE SUR INTERNET ET ADAPTE"
-//    static String formatDuration(YearMonthValue value) {
-//        if (value.year() > 0 && value.month() > 0) {
-//            return String.format("%d ans et %d mois", value.year(), value.month());
-//        } else if (value.year() > 0) {
-//            return value.year() == 1 ? "1 an" : String.format("%d ans", value.year());
-//        } else {
-//            return String.format("%d mois", value.month());
-//        }
-//    }
-//}
+    private static String formatDuration(YearMonthValue value) {
+        int years = value.years();
+        int months = value.months();
 
-    private static String formatDuration(HourMinuteValue yearMonthValue) {
-        return null;
+        if (years > 0 && months > 0) {
+            return String.format("%d ans et %d mois", years, months);
+        } else if (years > 0) {
+            return years == 1 ? "1 an" : String.format("%d ans", years);
+        } else {
+            return String.format("%d mois", months);
+        }
     }
 
-    /** The value of a duration is zero if both year and month are 0. */
+    private static String formatDuration(HourMinuteValue value) {
+        int hours = value.hours();
+        int minutes = value.minutes();
+
+        if (hours > 0 && minutes > 0) {
+            return String.format("%d heures et %d minutes", hours, minutes);
+        } else if (hours > 0) {
+            return hours == 1 ? "1 heure" : String.format("%d heures", hours);
+        } else {
+            return minutes == 1 ? "1 minute" : String.format("%d minutes", minutes);
+        }
+    }
+
+
+    /**
+     * The value of a duration is zero if both year and month are 0.
+     */
     private static boolean isZeroDuration(YearMonthValue minValue) {
-        return minValue.year() == 0 && minValue.month() == 0;
+        return minValue.years() == 0 && minValue.months() == 0;
     }
 
-    static String generateControlMessage(HourMinuteValue hourMinuteValue) {
-        return null;
+    private static boolean isZeroDuration(HourMinuteValue value) {
+        return value.hours() == 0 && value.minutes() == 0;
     }
+
 }
+
