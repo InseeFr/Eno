@@ -1,5 +1,6 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 
+import fr.insee.eno.core.parameter.LunaticParameters;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.lunatic.model.flat.*;
 
@@ -14,16 +15,30 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
 
     private final boolean isQuestionnairePaginated;
 
-    private final String paginationMode;
+    private final LunaticParameters.LunaticPaginationMode paginationMode;
 
-    protected LunaticPaginationAllModes(boolean isQuestionnairePaginated, String paginationMode) {
+    protected LunaticPaginationAllModes(
+            boolean isQuestionnairePaginated, LunaticParameters.LunaticPaginationMode paginationMode) {
         this.isQuestionnairePaginated = isQuestionnairePaginated;
         this.paginationMode = paginationMode;
     }
 
+    /**
+     * Converts the Eno parameter pagination value to the corresponding Lunatic-Model value.
+     * @param paginationParameter Lunatic pagination parameter.
+     * @return Lunatic-Model pagination.
+     */
+    private static Pagination toLunaticEnum(LunaticParameters.LunaticPaginationMode paginationParameter) {
+        return switch (paginationParameter) {
+            case SEQUENCE -> Pagination.SEQUENCE;
+            case QUESTION -> Pagination.QUESTION;
+            case NONE -> Pagination.NONE;
+        };
+    }
+
     @Override
     public void apply(Questionnaire questionnaire) {
-        questionnaire.setPagination(paginationMode);
+        questionnaire.setPagination(toLunaticEnum(paginationMode));
         List<ComponentType> components = questionnaire.getComponents();
         applyNumPageOnComponents(components, "", 0, isQuestionnairePaginated);
         String maxPage = components.getLast().getPage();

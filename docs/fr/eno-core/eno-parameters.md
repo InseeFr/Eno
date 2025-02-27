@@ -26,7 +26,6 @@ Suite au passage en java de la transformation DDI2Lunatic, les paramètres ont �
 |filterResult | true, false | génération des variables filter_result|
 |filterDescription| true, false | génération des filterDescription|
 |lunaticPaginationMode| QUESTION, SEQUENCE, NONE| découpage une question par page, 1 séquence par page|
-|DSFR | true, false | génération format DSFR|
 	 
 
 ## Paramètres Eno-Xml
