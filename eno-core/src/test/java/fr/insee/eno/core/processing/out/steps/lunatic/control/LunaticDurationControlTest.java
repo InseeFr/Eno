@@ -1,10 +1,16 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.control;
 
-import fr.insee.eno.core.processing.out.steps.lunatic.control.LunaticDurationControl.HourMinuteValue;
-import fr.insee.eno.core.processing.out.steps.lunatic.control.LunaticDurationControl.YearMonthValue;
+import fr.insee.eno.core.exceptions.business.RequiredPropertyException;
+import fr.insee.eno.core.processing.out.steps.lunatic.LunaticAddControlFormat;
+import fr.insee.lunatic.model.flat.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static fr.insee.eno.core.processing.out.steps.lunatic.control.LunaticDurationControl.*;
+import static fr.insee.eno.core.processing.out.steps.lunatic.pagination.LunaticAddPageNumbersUtils.buildResponse;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LunaticDurationControlTest {
@@ -114,6 +120,143 @@ class LunaticDurationControlTest {
         String expectedMinute = String.format("cast(substr(%s, instr(%s, \"H\") + 1, instr(%s, \"M\") - instr(%s, \"H\") - 1), integer)", responseName, responseName, responseName, responseName);
         assertTrue(result.contains(expectedHour), "L'expression ne contient pas l'extraction de l'heure attendue");
         assertTrue(result.contains(expectedMinute), "L'expression ne contient pas l'extraction des minutes attendue");
+    }
+
+    private Questionnaire lunaticQuestionnaire;
+    Duration duration;
+    LunaticAddControlFormat processing;
+
+    @BeforeEach
+    void init() {
+        processing = new LunaticAddControlFormat();
+        duration = new Duration();
+        duration.setComponentType(ComponentTypeEnum.DURATION);
+        duration.setId("duration-id");
+        duration.setResponse(buildResponse("DURATION_VAR"));
+    }
+
+    @Test
+    @DisplayName("Duration: no format, should throw exception")
+    void durationNoFormatNorMinMax() {
+        lunaticQuestionnaire = new Questionnaire();
+        lunaticQuestionnaire.getComponents().add(duration);
+        assertThrows(RequiredPropertyException.class, () -> processing.apply(lunaticQuestionnaire));
+    }
+
+    @Test
+    @DisplayName("Duration: valid format, no min/max, should throw exception")
+    void durationValidFormatNoMinMax() {
+        duration.setFormat(DurationFormat.YEARS_MONTHS);
+
+        lunaticQuestionnaire = new Questionnaire();
+        lunaticQuestionnaire.getComponents().add(duration);
+
+        assertThrows(RequiredPropertyException.class, () -> processing.apply(lunaticQuestionnaire));
+    }
+
+    @Test
+    @DisplayName("Duration: valid format with valid min and max")
+    void durationValidFormatWithMinMax() {
+        duration.setFormat(DurationFormat.YEARS_MONTHS);
+        duration.setMin("P1Y2M");
+        duration.setMax("P5Y10M");
+
+        lunaticQuestionnaire = new Questionnaire();
+        lunaticQuestionnaire.getComponents().add(duration);
+
+        assertDoesNotThrow(() -> processing.apply(lunaticQuestionnaire));
+    }
+
+    @Test
+    @DisplayName("Duration: invalid min format, should throw exception")
+    void durationInvalidMinFormat() {
+        duration.setFormat(DurationFormat.YEARS_MONTHS);
+        duration.setMin("1Y2M"); // "P" is missing
+
+        lunaticQuestionnaire = new Questionnaire();
+        lunaticQuestionnaire.getComponents().add(duration);
+
+        assertThrows(RequiredPropertyException.class, () -> processing.apply(lunaticQuestionnaire));
+    }
+
+
+    @Test
+    @DisplayName("Duration: invalid max format, should throw exception")
+    void durationInvalidMaxFormat() {
+        duration.setFormat(DurationFormat.YEARS_MONTHS);
+        duration.setMax("PT10H20M"); // Incorrect format (here hours and minutes)
+
+        lunaticQuestionnaire = new Questionnaire();
+        lunaticQuestionnaire.getComponents().add(duration);
+
+        assertThrows(RequiredPropertyException.class, () -> processing.apply(lunaticQuestionnaire));
+    }
+
+    @Test
+    @DisplayName("Duration: invalid min and max formats, should throw exception")
+    void durationInvalidMinMaxFormats() {
+        duration.setFormat(DurationFormat.YEARS_MONTHS);
+        duration.setMin("10Y"); // Incorrect format
+        duration.setMax("5Y5M"); // "P" is missing
+
+        lunaticQuestionnaire = new Questionnaire();
+        lunaticQuestionnaire.getComponents().add(duration);
+
+        assertThrows(IllegalArgumentException.class, () -> processing.apply(lunaticQuestionnaire));
+    }
+
+
+    @Test
+    @DisplayName("Duration: entered value out of bounds, should trigger control error for both min and max")
+    void durationEnteredValueLessThanMin() {
+
+        ResponseType response = new ResponseType();
+        response.setName("P1Y0M");
+
+        duration.setFormat(DurationFormat.YEARS_MONTHS);
+        duration.setMin("P2Y6M");
+        duration.setMax("P3Y0M");
+        duration.setResponse(response);
+
+        lunaticQuestionnaire = new Questionnaire();
+        lunaticQuestionnaire.getComponents().add(duration);
+
+        processing.apply(lunaticQuestionnaire);
+
+        List<ControlType> controls = duration.getControls();
+        assertEquals(1, controls.size());
+        ControlType control = controls.getFirst();
+
+        String expectedErrorMessage = "\"La durée saisie doit être comprise entre 2 ans et 6 mois et 3 ans.\"";
+        assertEquals(expectedErrorMessage, control.getErrorMessage().getValue());
+    }
+
+    @Test
+    @DisplayName("Duration: entered value out of bounds, should trigger control error for both min and max")
+    void durationEnteredValueOutOfBounds() {
+
+        ResponseType response = new ResponseType();
+        response.setName("P6Y0M");
+
+        duration.setFormat(DurationFormat.YEARS_MONTHS);
+        duration.setMin("P0Y0M");
+        duration.setMax("P5Y10M");
+        duration.setResponse(response);
+
+        lunaticQuestionnaire = new Questionnaire();
+        lunaticQuestionnaire.getComponents().add(duration);
+
+        processing.apply(lunaticQuestionnaire);
+
+        List<ControlType> controls = duration.getControls();
+        assertEquals(1, controls.size());
+
+        ControlType control = controls.getFirst();
+
+        String actualErrorMessage = control.getErrorMessage().getValue();
+
+        String expectedErrorMessage = "\"La durée saisie doit être inférieure à 5 ans et 10 mois.\"";
+        assertEquals(expectedErrorMessage, actualErrorMessage);
     }
 
 }

@@ -6,6 +6,7 @@ import fr.insee.eno.core.i18n.date.DateFormatter;
 import fr.insee.eno.core.model.question.DateQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.ProcessingStep;
+import fr.insee.eno.core.processing.out.steps.lunatic.control.LunaticDurationControl;
 import fr.insee.lunatic.model.flat.*;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-
-import static fr.insee.eno.core.processing.out.steps.lunatic.control.LunaticDurationControl.generateDurationFormatControl;
 
 /**
  * Processing adding format controls to components
@@ -73,7 +72,8 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
                     }
 
                     if (componentType instanceof Duration duration){
-                        generateDurationFormatControl(duration);
+                        ControlType control = LunaticDurationControl.generateDurationFormatControl(duration);
+                        duration.getControls().add(control);
                     }
                 });
     }
