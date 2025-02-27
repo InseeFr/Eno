@@ -7,10 +7,7 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.lunatic.model.flat.ComponentType;
-import fr.insee.lunatic.model.flat.ComponentTypeEnum;
-import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.Textarea;
+import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -49,8 +46,11 @@ class EnoAddIdentificationSectionTest {
         assertEquals(EnoAddIdentificationSection.IDENTIFICATION_SEQUENCE_ID, identificationSequence.getId());
         //
         Textarea identificationQuestion = lunaticQuestionnaire.getComponents().stream()
-                .filter(Textarea.class::isInstance).map(Textarea.class::cast)
-                .filter(component -> "COMMENT-UE-QUESTION".equals(component.getId())).findAny().orElse(null);
+                .filter(Question.class::isInstance)
+                .map(Question.class::cast)
+                .filter(question -> question.getComponents().getFirst() instanceof Textarea)
+                .map(question -> (Textarea) question.getComponents().getFirst())
+                .findAny().orElse(null);
         assertNotNull(identificationQuestion);
         assertEquals("COMMENT_UE", identificationQuestion.getResponse().getName());
         //

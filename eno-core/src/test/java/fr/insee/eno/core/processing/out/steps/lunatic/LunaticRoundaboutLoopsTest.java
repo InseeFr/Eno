@@ -51,11 +51,16 @@ class LunaticRoundaboutLoopsTest {
             List<ComponentType> components = lunaticQuestionnaire.getComponents();
             assertEquals(6, components.size());
             assertEquals(SEQUENCE, components.get(0).getComponentType());
-            assertEquals(INPUT, components.get(1).getComponentType());
+            assertEquals(QUESTION, components.get(1).getComponentType());
             assertEquals(LOOP, components.get(2).getComponentType());
             assertEquals(ROUNDABOUT, components.get(3).getComponentType());
             assertEquals(SEQUENCE, components.get(4).getComponentType());
-            assertEquals(CHECKBOX_BOOLEAN, components.get(5).getComponentType());
+            assertEquals(QUESTION, components.get(5).getComponentType());
+            //
+            Question question1 = (Question) components.get(1);
+            assertEquals(INPUT, question1.getComponents().getFirst().getComponentType());
+            Question question2 = (Question) components.get(5);
+            assertEquals(CHECKBOX_BOOLEAN, question2.getComponents().getFirst().getComponentType());
         }
 
         @Test
@@ -91,9 +96,12 @@ class LunaticRoundaboutLoopsTest {
         void roundaboutComponents() {
             assertEquals(2, roundabout.getComponents().size());
             assertEquals(SEQUENCE, roundabout.getComponents().get(0).getComponentType());
-            assertEquals(INPUT, roundabout.getComponents().get(1).getComponentType());
+            assertEquals(QUESTION, roundabout.getComponents().get(1).getComponentType());
             roundabout.getComponents().forEach(component ->
                     assertEquals("true", component.getConditionFilter().getValue()));
+            //
+            Question question = (Question) roundabout.getComponents().get(1);
+            assertEquals(INPUT, question.getComponents().getFirst().getComponentType());
         }
 
         @Test
@@ -139,11 +147,16 @@ class LunaticRoundaboutLoopsTest {
             List<ComponentType> components = lunaticQuestionnaire.getComponents();
             assertEquals(6, components.size());
             assertEquals(SEQUENCE, components.get(0).getComponentType());
-            assertEquals(INPUT_NUMBER, components.get(1).getComponentType());
+            assertEquals(QUESTION, components.get(1).getComponentType());
             assertEquals(LOOP, components.get(2).getComponentType());
             assertEquals(ROUNDABOUT, components.get(3).getComponentType());
             assertEquals(SEQUENCE, components.get(4).getComponentType());
-            assertEquals(INPUT, components.get(5).getComponentType());
+            assertEquals(QUESTION, components.get(5).getComponentType());
+            //
+            Question question1 = (Question) components.get(1);
+            assertEquals(INPUT_NUMBER, question1.getComponents().getFirst().getComponentType());
+            Question question2 = (Question) components.get(5);
+            assertEquals(INPUT, question2.getComponents().getFirst().getComponentType());
         }
 
         @Test
@@ -173,9 +186,12 @@ class LunaticRoundaboutLoopsTest {
         void roundaboutComponents() {
             assertEquals(2, roundabout.getComponents().size());
             assertEquals(SUBSEQUENCE, roundabout.getComponents().get(0).getComponentType());
-            assertEquals(INPUT, roundabout.getComponents().get(1).getComponentType());
+            assertEquals(QUESTION, roundabout.getComponents().get(1).getComponentType());
             roundabout.getComponents().forEach(component ->
                     assertEquals("true", component.getConditionFilter().getValue()));
+            //
+            Question question = (Question) roundabout.getComponents().get(1);
+            assertEquals(INPUT, question.getComponents().getFirst().getComponentType());
         }
 
         @Test
