@@ -1,6 +1,12 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
+import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.navigation.Filter;
+import fr.insee.eno.core.model.sequence.ItemReference;
+import fr.insee.eno.core.model.variable.CalculatedVariable;
+import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.ProcessingStep;
+import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.variable.VariableType;
 import fr.insee.lunatic.model.flat.variable.VariableTypeEnum;
@@ -21,6 +27,71 @@ import java.util.*;
 @Slf4j
 public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire> {
 
+    private final EnoQuestionnaire enoQuestionnaire;
+    private final EnoIndex enoIndex;
+    private HashMap<String, Filter> filterIndex;
+    private HashMap<String, Variable> variableIndex;
+
+
+    public LunaticAddCleaningVariables(EnoQuestionnaire enoQuestionnaire) {
+        this.enoQuestionnaire = enoQuestionnaire;
+        this.enoIndex = enoQuestionnaire.getIndex();
+        enoQuestionnaire.getVariables().forEach(v -> this.variableIndex.put(v.getName(),v));
+        enoQuestionnaire.getFilters().forEach(f -> this.filterIndex.put(f.getId(),f));
+    }
+
+    private List<String> getCollectedVariablesInFilter(Object filter, Map<String, List<String>> collectedVarsByQuestion){
+        List<String> collectedVarForFilter = new ArrayList<>();
+        filter.getFilterItems().forEach(
+                itemReference -> {
+                    if(ItemReference.ItemType.FILTER.equals(itemReference.getType())){
+                        collectedVarForFilter.addAll(
+                                getCollectedVariablesInFilter(itemReference, collectedVarsByQuestion)
+                        )
+                    }
+                }
+        );
+    }
+
+    private Map<String,List<String>> getCollectedVariablesByQuestion(Questionnaire lunaticQuestionnaire) {
+        Map<String, List<String>> questionCollectedVarIndex = new HashMap<>();
+        lunaticQuestionnaire.getComponents().forEach(componentType -> {
+            String questionId = componentType.getId();
+            List<String> collectedVars = new ArrayList<>();
+            if (componentType instanceof ComponentSimpleResponseType) {
+                collectedVars = List.of(((ComponentSimpleResponseType) componentType).getResponse().getName());
+            }
+            if (componentType instanceof ComponentMultipleResponseType) {
+                switch(componentType.getComponentType()) {
+                    case TABLE -> collectedVars = ((Table) componentType).getBodyLines().stream()
+                            .map(BodyLine::getBodyCells)
+                            .flatMap(Collection::stream)
+                            .map(BodyCell::getResponse)
+                            .filter(Objects::nonNull)
+                            .map(ResponseType::getName)
+                            .toList();
+
+                    case ROSTER_FOR_LOOP ->
+                            collectedVars = ((RosterForLoop) componentType).getComponents().stream()
+                                    .map(BodyCell::getResponse)
+                                    .filter(Objects::nonNull)
+                                    .map(ResponseType::getName)
+                                    .toList();
+
+                    case CHECKBOX_GROUP ->
+                            collectedVars = ((CheckboxGroup) componentType).getResponses().stream()
+                                    .map(ResponseCheckboxGroup::getResponse)
+                                    .map(ResponseType::getName)
+                                    .toList();
+                    default -> collectedVars = List.of();
+                }
+            }
+
+            questionCollectedVarIndex.put(questionId, collectedVars);
+        });
+        return questionCollectedVarIndex;
+    }
+
     /**
      * Create the 'cleaning' block in the given Lunatic questionnaire. (See class documentation for details.)
      * @param lunaticQuestionnaire A Lunatic questionnaire object.
@@ -29,6 +100,41 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
     public void apply(Questionnaire lunaticQuestionnaire) {
         List<ComponentType> components = lunaticQuestionnaire.getComponents();
         List<CleaningVariableEntry> cleaningVariables = createCleaningVariables(components, lunaticQuestionnaire);
+
+        enoQuestionnaire.getFilters().stream().forEach(
+                filter -> {
+                    System.out.println("==========");
+                    System.out.println("Expression");
+                    System.out.println("----------");
+                    System.out.println(filter.getExpression().getValue());
+                    System.out.println("----------");
+                    System.out.println("BindingReferences");
+                    System.out.println("----------");
+                    filter.getExpression().getBindingReferences().stream()
+                                    .map(b->b.getVariableName())
+                                    .map(id -> enoQuestionnaire.getVariables()
+                                            .stream()
+                                            .filter(v->id.equals(v.getName()))
+                                            .findFirst().get())
+                                    .forEach(variable -> {
+                                                if(variable instanceof CalculatedVariable){
+                                                    System.out.println("Calculated "+variable.getName());
+                                                }
+                                                /* else if (variable instanceof ExternalVariable) {
+                                                    System.out.println("External "+variable.getName());
+                                                } else  System.out.println("Collected "+variable.getName());
+                                            */
+                                            }
+
+                                        )
+                                    ;
+                    System.out.println("Items filtered");
+                    System.out.println("----------");
+                    filter.getFilterItems().forEach(
+                            itemReference -> System.out.println(itemReference.getId() + " " + itemReference.getType())
+                    );
+                }
+        );
 
         if(cleaningVariables.isEmpty()) {
             return;

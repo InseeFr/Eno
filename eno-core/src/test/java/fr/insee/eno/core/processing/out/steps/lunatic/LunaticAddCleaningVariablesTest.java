@@ -39,7 +39,7 @@ class LunaticAddCleaningVariablesTest {
         input = buildInput("input-id", "SHORT_TEXT");
         loop = buildLoop("loop-id", List.of(dropdown, inputNumber));
         //
-        processing = new LunaticAddCleaningVariables();
+        processing = new LunaticAddCleaningVariables(null);
     }
 
     @Test
