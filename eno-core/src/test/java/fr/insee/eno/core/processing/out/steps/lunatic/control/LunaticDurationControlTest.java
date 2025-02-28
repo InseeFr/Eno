@@ -83,7 +83,7 @@ class LunaticDurationControlTest {
         String responseName = "VAR_DUREE";
         String result = generateControlExpression(new YearMonthValue(0, 1), new YearMonthValue(0, 12));
         String expected = String.format("cast(substr(%s, instr(%s, \"Y\") + 1, instr(%s, \"M\") - instr(%s, \"Y\") - 1), integer)", responseName, responseName, responseName, responseName);
-        assertTrue(result.contains(expected), "L'expression ne contient pas l'extraction du mois attendue");
+        assertTrue(result.contains(expected), "The expression does not contain the expected month extraction.");
     }
 
     @Test
@@ -91,7 +91,7 @@ class LunaticDurationControlTest {
         String responseName = "VAR_DUREE";
         String result = generateControlExpression(new HourMinuteValue(1, 0), new HourMinuteValue(23, 0));
         String expected = String.format("cast(substr(%s, 3, instr(%s, \"H\") - 3), integer)", responseName, responseName);
-        assertTrue(result.contains(expected), "L'expression ne contient pas l'extraction de l'heure attendue");
+        assertTrue(result.contains(expected), "The expression does not contain the expected hour extraction.");
     }
 
     @Test
@@ -99,7 +99,7 @@ class LunaticDurationControlTest {
         String responseName = "VAR_DUREE";
         String result = generateControlExpression(new HourMinuteValue(0, 1), new HourMinuteValue(0, 59));
         String expected = String.format("cast(substr(%s, instr(%s, \"H\") + 1, instr(%s, \"M\") - instr(%s, \"H\") - 1), integer)", responseName, responseName, responseName, responseName);
-        assertTrue(result.contains(expected), "L'expression ne contient pas l'extraction des minutes attendue");
+        assertTrue(result.contains(expected), "The expression does not contain the expected minute extraction.");
     }
 
     @Test
@@ -108,8 +108,8 @@ class LunaticDurationControlTest {
         String result = generateControlExpression(new YearMonthValue(1, 6), new YearMonthValue(10, 11));
         String expectedYear = String.format("cast(substr(%s, 2, instr(%s, \"Y\") - 2), integer)", responseName, responseName);
         String expectedMonth = String.format("cast(substr(%s, instr(%s, \"Y\") + 1, instr(%s, \"M\") - instr(%s, \"Y\") - 1), integer)", responseName, responseName, responseName, responseName);
-        assertTrue(result.contains(expectedYear), "L'expression ne contient pas l'extraction de l'année attendue");
-        assertTrue(result.contains(expectedMonth), "L'expression ne contient pas l'extraction du mois attendue");
+        assertTrue(result.contains(expectedYear), "The expression does not contain the expected year extraction.");
+        assertTrue(result.contains(expectedMonth), "The expression does not contain the expected month extraction.");
     }
 
     @Test
@@ -118,8 +118,8 @@ class LunaticDurationControlTest {
         String result = generateControlExpression(new HourMinuteValue(1, 30), new HourMinuteValue(23, 45));
         String expectedHour = String.format("cast(substr(%s, 3, instr(%s, \"H\") - 3), integer)", responseName, responseName);
         String expectedMinute = String.format("cast(substr(%s, instr(%s, \"H\") + 1, instr(%s, \"M\") - instr(%s, \"H\") - 1), integer)", responseName, responseName, responseName, responseName);
-        assertTrue(result.contains(expectedHour), "L'expression ne contient pas l'extraction de l'heure attendue");
-        assertTrue(result.contains(expectedMinute), "L'expression ne contient pas l'extraction des minutes attendue");
+        assertTrue(result.contains(expectedHour), "The expression does not contain the expected hour extraction.");
+        assertTrue(result.contains(expectedMinute), "The expression does not contain the expected minute extraction.");
     }
 
     private Questionnaire lunaticQuestionnaire;
@@ -179,7 +179,6 @@ class LunaticDurationControlTest {
         assertThrows(RequiredPropertyException.class, () -> processing.apply(lunaticQuestionnaire));
     }
 
-
     @Test
     @DisplayName("Duration: invalid max format, should throw exception")
     void durationInvalidMaxFormat() {
@@ -204,7 +203,6 @@ class LunaticDurationControlTest {
 
         assertThrows(IllegalArgumentException.class, () -> processing.apply(lunaticQuestionnaire));
     }
-
 
     @Test
     @DisplayName("Duration: entered value out of bounds, should trigger control error for both min and max")

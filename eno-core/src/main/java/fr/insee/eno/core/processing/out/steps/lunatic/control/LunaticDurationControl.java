@@ -7,6 +7,10 @@ import lombok.NonNull;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * A class responsible for controlling the validity of durations, ensuring that they fall within specified minimum and maximum values.
+ * This class handles durations in two formats: years and months, or hours and minutes.
+ */
 public class LunaticDurationControl {
 
     public static void createFormatControlsForDuration(Duration duration) {
