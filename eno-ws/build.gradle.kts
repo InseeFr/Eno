@@ -38,7 +38,7 @@ dependencies {
         exclude("io.netty:netty-handler")
     }
     // TODO: remove when spring-boot-starter-parent upgrade this dependency with CVE
-    implementation("io.netty:netty-handler:4.1.118.Final")
+    implementation("io.netty:netty-handler:4.1.119.Final")
     // Open API
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocVersion")
     // Lombok
