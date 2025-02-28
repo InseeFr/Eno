@@ -1,6 +1,8 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.cleaning.CleaningType;
+import fr.insee.lunatic.model.flat.cleaning.CleaningVariableEntry;
 import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
 import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
 import fr.insee.lunatic.model.flat.variable.ExternalVariableType;

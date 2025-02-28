@@ -78,6 +78,22 @@ class DDIToLunaticTest {
         assertEquals(2, componentThatShouldHaveDeclaration.getDeclarations().size());
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "m7oqvx8y",
+//            "ljo1cbeo",
+//            "lk6x162e",
+//            "edt-v13"
+    })
+    void transformQuestion_cleaning(String questionnaireId) throws DDIParsingException {
+        EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
+                        this.getClass().getClassLoader().getResourceAsStream("functional/ddi/cleaning/ddi-" +questionnaireId+".xml"))
+                .transform(enoParameters);
+        //
+        assertNotNull(lunaticQuestionnaire);
+    }
+
     @Nested
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @DisplayName("DDI to Lunatic, functional test with 'l20g2ba7'")
