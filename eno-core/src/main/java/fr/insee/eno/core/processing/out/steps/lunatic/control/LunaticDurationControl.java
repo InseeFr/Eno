@@ -9,6 +9,11 @@ import java.util.regex.Pattern;
 
 public class LunaticDurationControl {
 
+    public static void createFormatControlsForDuration(Duration duration) {
+        ControlType durationControl = LunaticDurationControl.generateDurationFormatControl(duration);
+        duration.getControls().addFirst(durationControl);
+    }
+
     private static final Pattern LUNATIC_YEAR_MONTH_PATTERN = Pattern.compile("P(\\d+)Y(\\d+)M");
     private static final Pattern LUNATIC_HOURS_MINUTES_PATTERN = Pattern.compile("PT(\\d+)H(\\d+)M");
 
@@ -21,6 +26,8 @@ public class LunaticDurationControl {
             throw new RequiredPropertyException("Min, Max ou Format manquant dans l'entrée.");
 
         ControlType lunaticControl = new ControlType();
+        lunaticControl.setTypeOfControl(ControlTypeEnum.FORMAT);
+        lunaticControl.setCriticality(ControlCriticalityEnum.ERROR);
         String controlExpression;
         String controlMessage;
 
