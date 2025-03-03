@@ -13,6 +13,7 @@ import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.cleaning.*;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
@@ -28,6 +29,7 @@ import java.util.*;
  * determine if the variable has to be cleaned or not).
  */
 @Slf4j
+@Getter
 public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire> {
 
     private final EnoQuestionnaire enoQuestionnaire;
@@ -40,13 +42,17 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
     public LunaticAddCleaningVariables(EnoQuestionnaire enoQuestionnaire) {
         this.enoQuestionnaire = enoQuestionnaire;
         this.enoIndex = enoQuestionnaire.getIndex();
-        enoQuestionnaire.getVariables().forEach(v -> this.variableIndex.put(v.getName(), v));
+        enoQuestionnaire.getVariables().forEach(v -> variableIndex.put(v.getName(), v));
         List<Filter> sortedFilters = new ArrayList<>(enoQuestionnaire.getFilters());
         Collections.sort(sortedFilters, filterComparator);
-        sortedFilters.forEach(f -> this.filterIndex.put(f.getId(), f));
+        sortedFilters.forEach(f -> filterIndex.put(f.getId(), f));
     }
 
-    private List<String> getCollectedVariablesInFilter(Filter filter) {
+    public void preProcessVariables(Questionnaire lunaticQuestionnaire){
+        variablesByQuestion = getCollectedVariablesByQuestion(lunaticQuestionnaire);
+    }
+
+    public List<String> getCollectedVariablesInFilter(Filter filter) {
         List<String> collectedVarForFilter = new ArrayList<>();
         filter.getFilterScope().forEach(
                 itemReference -> {
@@ -62,7 +68,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
         return collectedVarForFilter;
     }
 
-    private List<String> getCollectedVarsInSequence(AbstractSequence abstractSequence) {
+    public List<String> getCollectedVarsInSequence(AbstractSequence abstractSequence) {
         List<String> collectedVarInSequence = new ArrayList<>();
         abstractSequence.getSequenceStructure().stream().forEach(itemReference -> {
                     if (StructureItemReference.StructureItemType.QUESTION.equals(itemReference.getType())) {
@@ -75,7 +81,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
         return collectedVarInSequence;
     }
 
-    private List<String> getFinalBindingReferences(CalculatedExpression expression) {
+    public List<String> getFinalBindingReferences(CalculatedExpression expression) {
         return expression.getBindingReferences().stream()
                 .map(b -> b.getVariableName())
                 .map(vName -> variableIndex.get(vName))
@@ -91,15 +97,15 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                 .toList();
     }
 
-    private Comparator<Filter> filterComparator = (filter1, filter2) -> {
-        boolean isParentOfFilter2 = filter1.getFilterItems().stream().map(f -> f.getId()).toList().contains(filter2.getId());
-        boolean isChildOfFilter2 = filter2.getFilterItems().stream().map(f -> f.getId()).toList().contains(filter1.getId());
+    public Comparator<Filter> filterComparator = (filter1, filter2) -> {
+        boolean isParentOfFilter2 = filter1.getFilterItems().stream().map(i->i.getId()).toList().contains(filter2.getId());
+        boolean isChildOfFilter2 = filter2.getFilterItems().stream().map(i->i.getId()).toList().contains(filter1.getId());
         if(isParentOfFilter2) return -1;
         if(isChildOfFilter2) return 1;
         return 0;
     };
 
-    private Map<String, List<String>> getCollectedVariablesByQuestion(Questionnaire lunaticQuestionnaire) {
+    public Map<String, List<String>> getCollectedVariablesByQuestion(Questionnaire lunaticQuestionnaire) {
         Map<String, List<String>> questionCollectedVarIndex = new HashMap<>();
         lunaticQuestionnaire.getComponents().stream()
                 .map(componentType -> {
@@ -177,7 +183,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
      */
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
-        variablesByQuestion = getCollectedVariablesByQuestion(lunaticQuestionnaire);
+        preProcessVariables(lunaticQuestionnaire);
         CleaningType2 cleaning = new CleaningType2();
         filterIndex.forEach((filterId, filter) -> {
             CalculatedExpression filterExpression = filter.getExpression();
