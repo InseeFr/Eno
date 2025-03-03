@@ -62,7 +62,7 @@ class VariableTest {
             assertEquals("cast(lk6qier3-IP-1, number) * 10",
                     calculatedVariables.get("CALCULATED1").getExpression().getValue());
         if (format == Format.POGUES)
-            assertEquals("cast($NUMBER1$, number) * 10",
+            assertEquals("cast(NUMBER1, number) * 10",
                     calculatedVariables.get("CALCULATED1").getExpression().getValue());
     }
 

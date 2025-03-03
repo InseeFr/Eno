@@ -15,19 +15,13 @@ import fr.insee.eno.core.processing.in.steps.ddi.DDIInsertCodeLists;
 import fr.insee.eno.core.processing.in.steps.ddi.DDIInsertResponseInTableCells;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
 import fr.insee.eno.core.serialize.DDIDeserializer;
-import fr.insee.lunatic.model.flat.BodyCell;
-import fr.insee.lunatic.model.flat.ComponentTypeEnum;
-import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.RosterForLoop;
+import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
 import fr.insee.lunatic.model.flat.variable.CollectedVariableValues;
 import fr.insee.lunatic.model.flat.variable.VariableType;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -48,10 +42,14 @@ class DynamicTableIntegrationTest {
         // Then
         // There is one roster for loop component
         List<RosterForLoop> rosterForLoopList = lunaticQuestionnaire.getComponents().stream()
-                .filter(RosterForLoop.class::isInstance)
-                .map(RosterForLoop.class::cast)
+                .filter(Question.class::isInstance)
+                .map(Question.class::cast)
+                .filter(question -> question.getComponents().getFirst() instanceof RosterForLoop)
+                .map(question -> (RosterForLoop) question.getComponents().getFirst())
                 .toList();
+
         assertEquals(1, rosterForLoopList.size());
+
         // Roster component has two "column" components
         RosterForLoop rosterForLoop = rosterForLoopList.getFirst();
         assertEquals(2, rosterForLoop.getComponents().size());

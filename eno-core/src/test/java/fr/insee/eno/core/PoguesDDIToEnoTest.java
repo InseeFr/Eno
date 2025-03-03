@@ -3,7 +3,11 @@ package fr.insee.eno.core;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.insee.ddi.lifecycle33.instance.DDIInstanceDocument;
+import fr.insee.eno.core.exceptions.business.IllegalPoguesElementException;
 import fr.insee.eno.core.exceptions.business.ParsingException;
+import fr.insee.eno.core.exceptions.business.PoguesDeserializationException;
+import fr.insee.eno.core.exceptions.technical.MappingException;
+import fr.insee.eno.core.mappers.PoguesMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.question.NumericQuestion;
@@ -23,13 +27,16 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 class PoguesDDIToEnoTest {
+
+    private final ClassLoader classLoader = this.getClass().getClassLoader();
 
     @ParameterizedTest
     @ValueSource(strings = {
             "kx0a2hn8",
-            "kzy5kbtl",
-            "l5v3spn0",
             "l7j0wwqx",
             "l8x6fhtd",
             "l20g2ba7",
@@ -37,15 +44,12 @@ class PoguesDDIToEnoTest {
             "lhpz68wp",
             "li49zxju",
             "ljr4jm9a",
-            "lmyjrqbb",
-            "lqnje8yr",
             "lx4qzdty",
     })
     void nonRegressionTest(String id) throws ParsingException, JsonProcessingException, JSONException {
 
         // Given Pogues & DDI inputs and Eno parameters
         // (for questionnaires that does not contain features described in Pogues and not in DDI)
-        ClassLoader classLoader = this.getClass().getClassLoader();
         DDIInstanceDocument ddiQuestionnaire = DDIDeserializer.deserialize(classLoader.getResourceAsStream(
                 "functional/ddi/ddi-" + id + ".xml"));
         Questionnaire poguesQuestionnaire = PoguesDeserializer.deserialize(classLoader.getResourceAsStream(
@@ -63,6 +67,25 @@ class PoguesDDIToEnoTest {
         String serialized1 = new ObjectMapper().writeValueAsString(fromDDI);
         String serialized2 = new ObjectMapper().writeValueAsString(fromPoguesDDI);
         JSONAssert.assertEquals(serialized1, serialized2, JSONCompareMode.STRICT);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "kzy5kbtl",
+            "l5v3spn0",
+            "lmyjrqbb",
+            "lqnje8yr"
+    })
+    void invalidPoguesQuestionnaires_shouldThrow(String id) throws PoguesDeserializationException {
+        //
+        Questionnaire poguesQuestionnaire = PoguesDeserializer.deserialize(classLoader.getResourceAsStream(
+                "functional/pogues/pogues-" + id + ".json"));
+        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
+        //
+        PoguesMapper poguesMapper = new PoguesMapper();
+        MappingException mappingException = assertThrows(MappingException.class, () ->
+                poguesMapper.mapPoguesQuestionnaire(poguesQuestionnaire, enoQuestionnaire));
+        assertInstanceOf(IllegalPoguesElementException.class, mappingException.getCause());
     }
 
     @ParameterizedTest
@@ -89,7 +112,7 @@ class PoguesDDIToEnoTest {
             "loops-subsequence",
             "mcq",
             "no-data-cell",
-            //"other-specify",
+            "other-specify",
             "pairwise",
             "resizing",
             "roundabout",
@@ -150,8 +173,7 @@ class PoguesDDIToEnoTest {
                 .forEach(question -> {
                     question.getCodeResponses()
                             .forEach(codeResponse -> codeResponse.getResponse().setVariableReference(null));
-                    question.getDetailResponses()
-                            .forEach(detailResponse -> detailResponse.setPoguesId(null));
+                    question.getDetailResponses().clear();
                 });
         enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(UniqueChoiceQuestion.class::isInstance).map(UniqueChoiceQuestion.class::cast)

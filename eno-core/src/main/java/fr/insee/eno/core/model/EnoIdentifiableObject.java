@@ -26,7 +26,7 @@ public abstract class EnoIdentifiableObject extends EnoObject {
     @DDI("getIDArray(0).getStringValue()")
     @Pogues("getId()")
     @Lunatic("setId(#param)")
-    String id;
+    private String id;
 
     @Override
     public String toString() {
