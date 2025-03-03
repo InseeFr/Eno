@@ -10,9 +10,9 @@ import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
-import fr.insee.lunatic.model.flat.cleaning.CleanedVariableEntry2;
-import fr.insee.lunatic.model.flat.cleaning.CleaningType2;
-import fr.insee.lunatic.model.flat.cleaning.CleaningVariableEntry2;
+import fr.insee.lunatic.model.flat.cleaning.CleanedVariableEntry;
+import fr.insee.lunatic.model.flat.cleaning.CleaningType;
+import fr.insee.lunatic.model.flat.cleaning.CleaningVariableEntry;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -184,7 +184,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
         preProcessVariables(lunaticQuestionnaire);
-        CleaningType2 cleaning = new CleaningType2();
+        CleaningType cleaning = new CleaningType();
         filterIndex.forEach((filterId, filter) -> {
             CalculatedExpression filterExpression = filter.getExpression();
             List<String> variablesWhichInfluenceFilterExpression = getFinalBindingReferences(filterExpression);
@@ -193,24 +193,24 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                     variableName -> {
                         boolean isExistCleaningVariableEntry = cleaning.getCleaningVariableNames().contains(variableName);
                         if (!isExistCleaningVariableEntry){
-                            CleaningVariableEntry2 cleaningVariableEntry = new CleaningVariableEntry2(variableName);
+                            CleaningVariableEntry cleaningVariableEntry = new CleaningVariableEntry(variableName);
                             variablesCollectedInsideFilter.forEach(variableToClean -> {
-                                CleanedVariableEntry2 cleanedVariableEntry = new CleanedVariableEntry2(variableToClean);
+                                CleanedVariableEntry cleanedVariableEntry = new CleanedVariableEntry(variableToClean);
                                 cleanedVariableEntry.getFilterExpressions().add(filterExpression.getValue());
                                 cleaningVariableEntry.addCleanedVariable(cleanedVariableEntry);
                             });
                             cleaning.addCleaningEntry(cleaningVariableEntry);
                         }
                         else {
-                            CleaningVariableEntry2 existingCleaningVariableEntry = cleaning.getCleaningEntry(variableName);
+                            CleaningVariableEntry existingCleaningVariableEntry = cleaning.getCleaningEntry(variableName);
                             variablesCollectedInsideFilter.forEach(variableToClean -> {
                                 boolean isExistCleanedVariableEntry = existingCleaningVariableEntry.getCleanedVariableNames().contains(variableToClean);
                                 if(!isExistCleanedVariableEntry){
-                                    CleanedVariableEntry2 cleanedVariableEntry = new CleanedVariableEntry2(variableToClean);
+                                    CleanedVariableEntry cleanedVariableEntry = new CleanedVariableEntry(variableToClean);
                                     cleanedVariableEntry.getFilterExpressions().add(filterExpression.getValue());
                                     cleaning.getCleaningEntry(variableName).addCleanedVariable(cleanedVariableEntry);
                                 } else {
-                                    CleanedVariableEntry2 existingCleanedVariableEntry = existingCleaningVariableEntry.getCleanedVariable(variableToClean);
+                                    CleanedVariableEntry existingCleanedVariableEntry = existingCleaningVariableEntry.getCleanedVariable(variableToClean);
                                     existingCleanedVariableEntry.getFilterExpressions().add(filter.getExpression().getValue());
                                     cleaning.getCleaningEntry(variableName).addCleanedVariable(existingCleanedVariableEntry);
                                 }
@@ -219,7 +219,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                     }
             );
         });
-        lunaticQuestionnaire.setCleaning2(cleaning);
+        lunaticQuestionnaire.setCleaning(cleaning);
     }
 
 
