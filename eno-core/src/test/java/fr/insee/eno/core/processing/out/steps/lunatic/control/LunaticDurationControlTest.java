@@ -1,17 +1,15 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.control;
 
 import fr.insee.eno.core.exceptions.business.RequiredPropertyException;
-import fr.insee.lunatic.model.flat.ControlType;
-import fr.insee.lunatic.model.flat.Duration;
-import fr.insee.lunatic.model.flat.DurationFormat;
-import fr.insee.lunatic.model.flat.ResponseType;
+import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static fr.insee.eno.core.processing.out.steps.lunatic.control.LunaticDurationControl.HourMinuteValue;
 import static fr.insee.eno.core.processing.out.steps.lunatic.control.LunaticDurationControl.YearMonthValue;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LunaticDurationControlTest {
 
@@ -83,6 +81,7 @@ class LunaticDurationControlTest {
     void generateControl_yearMonth() {
         //
         Duration lunaticDuration = new Duration();
+        lunaticDuration.setId("duration-id");
         lunaticDuration.setResponse(new ResponseType());
         lunaticDuration.getResponse().setName("DURATION_VAR");
         lunaticDuration.setMin("P0Y3M");
@@ -91,7 +90,32 @@ class LunaticDurationControlTest {
         //
         ControlType generatedControl = LunaticDurationControl.generateDurationFormatControl(lunaticDuration);
         //
-        assertNotNull(generatedControl);
+        commonPropsTest(generatedControl);
+        // Note: message and expression are already thoroughly tested in dedicated classes
+    }
+    @Test
+    void generateControl_hourMinute() {
+        //
+        Duration lunaticDuration = new Duration();
+        lunaticDuration.setId("duration-id");
+        lunaticDuration.setResponse(new ResponseType());
+        lunaticDuration.getResponse().setName("DURATION_VAR");
+        lunaticDuration.setMin("PT0H15M");
+        lunaticDuration.setMax("PT1H30M");
+        lunaticDuration.setFormat(DurationFormat.HOURS_MINUTES);
+        //
+        ControlType generatedControl = LunaticDurationControl.generateDurationFormatControl(lunaticDuration);
+        //
+        commonPropsTest(generatedControl);
+        // Note: message and expression are already thoroughly tested in dedicated classes
+    }
+    private void commonPropsTest(ControlType generatedControl) {
+        assertEquals("duration-id-format", generatedControl.getId());
+        assertEquals(ControlContextType.SIMPLE, generatedControl.getType());
+        assertEquals(ControlTypeEnum.FORMAT, generatedControl.getTypeOfControl());
+        assertEquals(ControlCriticalityEnum.ERROR, generatedControl.getCriticality());
+        assertEquals(LabelTypeEnum.VTL_MD, generatedControl.getErrorMessage().getType());
+        assertEquals(LabelTypeEnum.VTL, generatedControl.getControl().getType());
     }
 
 }
