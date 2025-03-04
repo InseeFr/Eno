@@ -11,8 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static fr.insee.eno.core.processing.out.steps.lunatic.control.LunaticDurationControl.HourMinuteValue;
 import static fr.insee.eno.core.processing.out.steps.lunatic.control.LunaticDurationControl.YearMonthValue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LunaticDurationControlTest {
 
@@ -92,8 +91,7 @@ class LunaticDurationControlTest {
         //
         ControlType generatedControl = LunaticDurationControl.generateDurationFormatControl(lunaticDuration);
         //
-        assertEquals();
+        assertNotNull(generatedControl);
     }
 
 }
-
