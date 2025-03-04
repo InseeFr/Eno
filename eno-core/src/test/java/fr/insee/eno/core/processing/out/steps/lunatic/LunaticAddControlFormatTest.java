@@ -371,6 +371,24 @@ class LunaticAddControlFormatTest {
         roster.getControls().forEach(control -> assertEquals(ControlContextType.ROW, control.getType()));
     }
 
+    /** Nominal case. Edge cases etc. are unit tested in dedicated classes. */
+    @Test
+    void durationFormatControl() {
+        lunaticQuestionnaire = new Questionnaire();
+
+        duration.setMin("P1Y2M");
+        duration.setMax("P2Y1M");
+        duration.setFormat(DurationFormat.YEARS_MONTHS);
+
+        lunaticQuestionnaire.getComponents().add(duration);
+        processing.apply(lunaticQuestionnaire);
+
+        assertEquals(1, duration.getControls().size());
+    }
+
+
+    // ----- Utility test methods below -----
+
     private ResponseType buildResponse(String name) {
         ResponseType response = new ResponseType();
         response.setName(name);
