@@ -23,7 +23,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LunaticAddCleaningVariablesTest {
 
@@ -40,7 +39,7 @@ class LunaticAddCleaningVariablesTest {
     }
 
     @Test
-    public void testGetCollectedVarsInSequence() throws DDIParsingException {
+    void testGetCollectedVarsInSequence() throws DDIParsingException {
         prepareQuestionnaireTest("functional/ddi/cleaning/ddi-m7oqvx8y.xml");
         AbstractSequence firstSeq = (AbstractSequence) enoQuestionnaire.getIndex().get("m7oqve1l");
         List<String> collectedVarsInFirstSeq = cleaningProcessing.getCollectedVarsInSequence(firstSeq);
@@ -53,7 +52,7 @@ class LunaticAddCleaningVariablesTest {
 
 
     @Test
-    public void testGetCollectedVarsInFilter() throws DDIParsingException {
+    void testGetCollectedVarsInFilter() throws DDIParsingException {
         prepareQuestionnaireTest("functional/ddi/cleaning/ddi-m7oqvx8y.xml");
         Filter majFilter = (Filter) enoQuestionnaire.getIndex().get("m7oqxnxe");
         List<String> collectedVarsMajFilter = cleaningProcessing.getCollectedVariablesInFilter(majFilter);
@@ -65,7 +64,7 @@ class LunaticAddCleaningVariablesTest {
     }
 
     @Test
-    public void testGetFinalBindingReferences() throws DDIParsingException {
+    void testGetFinalBindingReferences() throws DDIParsingException {
         prepareQuestionnaireTest("functional/ddi/cleaning/ddi-m7oqvx8y.xml");
         Filter calculatedFilter = (Filter) enoQuestionnaire.getIndex().get("m7oqxnxe");
         List<String> finalBindingsDeps = cleaningProcessing.getFinalBindingReferences(calculatedFilter.getExpression());
@@ -74,7 +73,7 @@ class LunaticAddCleaningVariablesTest {
     }
 
 
-    public void prepareQuestionnaireTest(String questionnaireTestUrl) throws DDIParsingException {
+    void prepareQuestionnaireTest(String questionnaireTestUrl) throws DDIParsingException {
         EnoParameters enoParameters = EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
         DDIInstanceDocument ddiQuestionnaire = DDIDeserializer.deserialize(
                 this.getClass().getClassLoader().getResourceAsStream(questionnaireTestUrl));

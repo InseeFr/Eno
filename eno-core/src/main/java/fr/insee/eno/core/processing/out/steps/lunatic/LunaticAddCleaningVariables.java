@@ -38,6 +38,14 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
     private Map<String, Variable> variableIndex = new LinkedHashMap<>();
     private Map<String, List<String>> variablesByQuestion;
 
+    public static final Comparator<Filter> filterComparator = (filter1, filter2) -> {
+        boolean isParentOfFilter2 = filter1.getFilterItems().stream().map(i->i.getId()).toList().contains(filter2.getId());
+        boolean isChildOfFilter2 = filter2.getFilterItems().stream().map(i->i.getId()).toList().contains(filter1.getId());
+        if(isParentOfFilter2) return -1;
+        if(isChildOfFilter2) return 1;
+        return 0;
+    };
+
 
     public LunaticAddCleaningVariables(EnoQuestionnaire enoQuestionnaire) {
         this.enoQuestionnaire = enoQuestionnaire;
@@ -97,44 +105,36 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                 .toList();
     }
 
-    public Comparator<Filter> filterComparator = (filter1, filter2) -> {
-        boolean isParentOfFilter2 = filter1.getFilterItems().stream().map(i->i.getId()).toList().contains(filter2.getId());
-        boolean isChildOfFilter2 = filter2.getFilterItems().stream().map(i->i.getId()).toList().contains(filter1.getId());
-        if(isParentOfFilter2) return -1;
-        if(isChildOfFilter2) return 1;
-        return 0;
-    };
+
 
     public Map<String, List<String>> getCollectedVariablesByQuestion(Questionnaire lunaticQuestionnaire) {
         Map<String, List<String>> questionCollectedVarIndex = new HashMap<>();
         lunaticQuestionnaire.getComponents().stream()
                 .map(componentType -> {
-                    if (componentType instanceof Loop) return ((Loop) componentType).getComponents();
+                    if (componentType instanceof Loop loop) return loop.getComponents();
                     return List.of(componentType);
                 })
                 .flatMap(Collection::stream)
                 .forEach(componentType -> {
                     String questionId = componentType.getId();
                     List<String> collectedVars = new ArrayList<>();
-                    if (componentType instanceof ComponentSimpleResponseType) {
-                        collectedVars.add(((ComponentSimpleResponseType) componentType).getResponse().getName());
-                        if (componentType instanceof Suggester) {
-                            if(((Suggester) componentType).getArbitrary() != null){
-                                collectedVars.add(((Suggester) componentType).getArbitrary().getResponse().getName());
-                            }
+                    if (componentType instanceof ComponentSimpleResponseType simpleResponseType) {
+                        collectedVars.add(simpleResponseType.getResponse().getName());
+                        if (componentType instanceof Suggester suggester && suggester.getArbitrary() != null) {
+                                collectedVars.add(suggester.getArbitrary().getResponse().getName());
                         }
-                        if (componentType instanceof CheckboxOne) {
-                            collectedVars.addAll(((CheckboxOne) componentType).getOptions().stream()
+                        if (componentType instanceof CheckboxOne checkboxOne) {
+                            collectedVars.addAll(checkboxOne.getOptions().stream()
                                     .filter(o -> o.getDetail() != null && o.getDetail().getResponse() != null)
                                     .map(o -> o.getDetail().getResponse().getName()).toList());
                         }
-                        if (componentType instanceof Radio) {
-                            collectedVars.addAll(((Radio) componentType).getOptions().stream()
+                        if (componentType instanceof Radio radio) {
+                            collectedVars.addAll(radio.getOptions().stream()
                                     .filter(o -> o.getDetail() != null && o.getDetail().getResponse() != null)
                                     .map(o -> o.getDetail().getResponse().getName()).toList());
                         }
-                        if (componentType instanceof Dropdown) {
-                            collectedVars.addAll(((Dropdown) componentType).getOptions().stream()
+                        if (componentType instanceof Dropdown dropdown) {
+                            collectedVars.addAll(dropdown.getOptions().stream()
                                     .filter(o -> o.getDetail() != null && o.getDetail().getResponse() != null)
                                     .map(o -> o.getDetail().getResponse().getName()).toList());
                         }
