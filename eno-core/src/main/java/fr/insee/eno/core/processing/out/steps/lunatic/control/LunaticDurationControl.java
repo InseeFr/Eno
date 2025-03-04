@@ -66,7 +66,7 @@ public class LunaticDurationControl implements LunaticFormatControl<Duration> {
         if (lunaticDurationComponent.getMin() == null)
             throw new RequiredPropertyException(String.format(exceptionMessage, id, "min"));
         if (lunaticDurationComponent.getMax() == null)
-            throw new RequiredPropertyException(String.format(exceptionMessage, id, "format"));
+            throw new RequiredPropertyException(String.format(exceptionMessage, id, "max"));
     }
 
     interface DurationValue {}

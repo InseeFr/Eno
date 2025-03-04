@@ -17,26 +17,32 @@ class LunaticDurationControlTest {
     @Test
     void durationWithNoMin() {
         Duration lunaticDuration = new Duration();
+        lunaticDuration.setId("duration-id");
         lunaticDuration.setMax("P1Y0M");
         lunaticDuration.setFormat(DurationFormat.YEARS_MONTHS);
-        assertThrows(RequiredPropertyException.class, () ->
+        RequiredPropertyException exception = assertThrows(RequiredPropertyException.class, () ->
                 LunaticDurationControl.generateDurationFormatControl(lunaticDuration));
+        assertEquals("Duration component 'duration-id' has a null min.", exception.getMessage());
     }
     @Test
     void durationWithNoMax() {
         Duration lunaticDuration = new Duration();
+        lunaticDuration.setId("duration-id");
         lunaticDuration.setMin("P1Y0M");
         lunaticDuration.setFormat(DurationFormat.YEARS_MONTHS);
-        assertThrows(RequiredPropertyException.class, () ->
+        RequiredPropertyException exception = assertThrows(RequiredPropertyException.class, () ->
                 LunaticDurationControl.generateDurationFormatControl(lunaticDuration));
+        assertEquals("Duration component 'duration-id' has a null max.", exception.getMessage());
     }
     @Test
     void durationWithNoFormat() {
         Duration lunaticDuration = new Duration();
+        lunaticDuration.setId("duration-id");
         lunaticDuration.setMin("P0Y0M");
         lunaticDuration.setMax("P1Y0M");
-        assertThrows(RequiredPropertyException.class, () ->
+        RequiredPropertyException exception = assertThrows(RequiredPropertyException.class, () ->
                 LunaticDurationControl.generateDurationFormatControl(lunaticDuration));
+        assertEquals("Duration component 'duration-id' has a null format.", exception.getMessage());
     }
 
 
