@@ -7,7 +7,7 @@ import fr.insee.eno.core.processing.out.steps.lunatic.control.LunaticDurationCon
  * Class that contains the logic for generating error messages for duration format controls.
  * Template method for different durations formats.
  * */
-abstract class DurationControlMessage<T extends DurationValue> {
+public abstract class DurationControlMessage<T extends DurationValue> {
 
     String generateControlMessage(T minValue, T maxValue) {
         if (isZeroDuration(maxValue)) {
@@ -23,7 +23,7 @@ abstract class DurationControlMessage<T extends DurationValue> {
     abstract boolean isZeroDuration(T durationValue);
     abstract String formatDuration(T durationValue);
 
-    static class YearMonthControlMessage extends DurationControlMessage<YearMonthValue> {
+    public static class YearMonthControlMessage extends DurationControlMessage<YearMonthValue> {
 
         @Override
         boolean isZeroDuration(YearMonthValue durationValue) {
@@ -42,15 +42,15 @@ abstract class DurationControlMessage<T extends DurationValue> {
                 return formatMonths(months);
             throw new IllegalArgumentException("Invalid duration: " + durationValue);
         }
-        private static String formatYears(int years) {
+        public static String formatYears(int years) {
             return years == 1 ? "1 an" : String.format("%d ans", years);
         }
-        private static String formatMonths(int months) {
+        public static String formatMonths(int months) {
             return String.format("%d mois", months);
         }
     }
 
-    static class HourMinuteControlMessage extends DurationControlMessage<LunaticDurationControl.HourMinuteValue> {
+    public static class HourMinuteControlMessage extends DurationControlMessage<LunaticDurationControl.HourMinuteValue> {
 
         @Override
         boolean isZeroDuration(LunaticDurationControl.HourMinuteValue durationValue) {
@@ -62,17 +62,17 @@ abstract class DurationControlMessage<T extends DurationValue> {
             int hours = durationValue.hours();
             int minutes = durationValue.minutes();
             if (hours > 0 && minutes > 0)
-                return formatHours(hours) + " " + formatMinutes(minutes);
+                return formatHours(hours) + "et" + formatMinutes(minutes);
             if (hours > 0)
                 return formatHours(hours);
             if (minutes > 0)
                 return formatMinutes(minutes);
             throw new IllegalArgumentException("Invalid duration: " + durationValue);
         }
-        private static String formatMinutes(int minutes) {
+        public static String formatMinutes(int minutes) {
             return minutes == 1 ? "1 minute" : String.format("%d minutes", minutes);
         }
-        private static String formatHours(int hours) {
+        public static String formatHours(int hours) {
             return hours == 1 ? "1 heure" : String.format("%d heures", hours);
         }
     }
