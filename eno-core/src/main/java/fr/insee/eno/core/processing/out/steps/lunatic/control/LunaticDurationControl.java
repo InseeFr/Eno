@@ -6,6 +6,7 @@ import fr.insee.eno.core.processing.out.steps.lunatic.control.DurationControlMes
 import fr.insee.lunatic.model.flat.*;
 import lombok.NonNull;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,17 +14,17 @@ import java.util.regex.Pattern;
  * A class responsible for controlling the validity of durations, ensuring that they fall within specified minimum and maximum values.
  * This class handles durations in two formats: years and months, or hours and minutes.
  */
-public class LunaticDurationControl {
+public class LunaticDurationControl implements LunaticFormatControl<Duration> {
 
     private static final Pattern LUNATIC_YEAR_MONTH_PATTERN = Pattern.compile("P(\\d+)Y(\\d+)M");
     private static final Pattern LUNATIC_HOURS_MINUTES_PATTERN = Pattern.compile("PT(\\d+)H(\\d+)M");
 
-    public static void createFormatControlsForDuration(Duration duration) {
-        ControlType durationControl = LunaticDurationControl.generateDurationFormatControl(duration);
-        duration.getControls().addFirst(durationControl);
+    @Override
+    public List<ControlType> generateFormatControls(Duration lunaticDuration) {
+        return List.of(generateDurationFormatControl(lunaticDuration));
     }
 
-    public static ControlType generateDurationFormatControl(@NonNull Duration lunaticDurationComponent) {
+    static ControlType generateDurationFormatControl(@NonNull Duration lunaticDurationComponent) {
 
         checkNonNullProperties(lunaticDurationComponent);
         String min = lunaticDurationComponent.getMin();
@@ -31,9 +32,8 @@ public class LunaticDurationControl {
         DurationFormat format = lunaticDurationComponent.getFormat();
         String responseName = lunaticDurationComponent.getResponse().getName();
 
-        ControlType lunaticControl = new ControlType();
-        lunaticControl.setTypeOfControl(ControlTypeEnum.FORMAT);
-        lunaticControl.setCriticality(ControlCriticalityEnum.ERROR);
+        String id = lunaticDurationComponent.getId() + "-format";
+
         String controlExpression;
         String controlMessage;
 
@@ -55,15 +55,7 @@ public class LunaticDurationControl {
             throw new IllegalArgumentException("Unknown duration format: " + format);
         }
 
-        lunaticControl.setControl(new LabelType());
-        lunaticControl.getControl().setValue(controlExpression);
-        lunaticControl.getControl().setType(LabelTypeEnum.VTL);
-
-        lunaticControl.setErrorMessage(new LabelType());
-        lunaticControl.getErrorMessage().setValue(controlMessage);
-        lunaticControl.getErrorMessage().setType(LabelTypeEnum.VTL);
-
-        return lunaticControl;
+        return LunaticFormatControl.createFormatControl(id, controlExpression, controlMessage);
     }
 
     private static void checkNonNullProperties(@NonNull Duration lunaticDurationComponent) {
