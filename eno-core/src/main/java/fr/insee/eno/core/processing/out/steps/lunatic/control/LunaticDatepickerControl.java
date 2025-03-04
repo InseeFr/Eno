@@ -10,6 +10,7 @@ import fr.insee.lunatic.model.flat.Datepicker;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +36,7 @@ public class LunaticDatepickerControl implements LunaticFormatControl<Datepicker
         String format = datepicker.getDateFormat();
         String responseName = datepicker.getResponse().getName();
 
-        List<ControlType> controls = datepicker.getControls();
+        List<ControlType> controls = new ArrayList<>();
 
         Optional<ControlType> controlYearFormat = generateDatepickerYearControl(id, format, responseName);
         Optional<ControlType> controlBounds = getFormatControlFromDatepickerAttributes(id, minValue, maxValue, format, responseName);
