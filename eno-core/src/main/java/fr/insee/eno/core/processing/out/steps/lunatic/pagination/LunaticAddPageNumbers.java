@@ -2,6 +2,7 @@ package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 
 import fr.insee.eno.core.parameter.LunaticParameters;
 import fr.insee.eno.core.processing.ProcessingStep;
+import fr.insee.lunatic.model.flat.Pagination;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,12 +37,11 @@ public class LunaticAddPageNumbers implements ProcessingStep<Questionnaire> {
         }
     }
 
-    // TODO: enum in Lunatic-Model for this...
-    public static String lunaticNumberingMode(LunaticParameters.LunaticPaginationMode paginationMode) {
+    private static Pagination lunaticNumberingMode(LunaticParameters.LunaticPaginationMode paginationMode) {
         return switch (paginationMode) {
-            case NONE -> "none";
-            case SEQUENCE -> "sequence";
-            case QUESTION -> "question";
+            case NONE -> Pagination.NONE;
+            case SEQUENCE -> Pagination.SEQUENCE;
+            case QUESTION -> Pagination.QUESTION;
         };
     }
 
