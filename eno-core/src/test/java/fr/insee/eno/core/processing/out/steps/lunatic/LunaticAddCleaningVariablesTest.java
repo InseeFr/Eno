@@ -23,6 +23,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class LunaticAddCleaningVariablesTest {
 
@@ -67,8 +69,26 @@ class LunaticAddCleaningVariablesTest {
     void testGetFinalBindingReferences() throws DDIParsingException {
         prepareQuestionnaireTest("functional/ddi/cleaning/ddi-m7oqvx8y.xml");
         Filter calculatedFilter = (Filter) enoQuestionnaire.getIndex().get("m7oqxnxe");
-        List<String> finalBindingsDeps = cleaningProcessing.getFinalBindingReferences(calculatedFilter.getExpression());
+        List<String> finalBindingsDeps = cleaningProcessing.removeCalculatedVariables(
+                cleaningProcessing.getFinalBindingReferencesWithCalculatedVariables(calculatedFilter.getExpression()));
         assertThat(finalBindingsDeps).containsExactly("AGE");
+
+    }
+
+    @Test
+    void testGetShapeFromOfFilter() throws DDIParsingException {
+        String filterLoopLevel = "m7u9l9c0-ITE";
+        prepareQuestionnaireTest("functional/ddi/cleaning/ddi-m7oqvx8y.xml");
+        assertEquals("PRENOMS", cleaningProcessing.getShapeFromOfFilter(
+                cleaningProcessing.getFilterIndex().get(filterLoopLevel)
+        ));;
+        String filterDeepInsideLoop = "m7w3rt8q";
+        assertEquals("PRENOMS", cleaningProcessing.getShapeFromOfFilter(
+                cleaningProcessing.getFilterIndex().get(filterDeepInsideLoop)
+        ));
+        String filterOutOfLoop = "m7oqml84";
+        assertNull(cleaningProcessing.getShapeFromOfFilter(cleaningProcessing.getFilterIndex().get(filterOutOfLoop)));
+
 
     }
 
@@ -106,8 +126,7 @@ class LunaticAddCleaningVariablesTest {
                 .then(new LunaticSuggesterOptionResponses())
                 .then(new LunaticAddResizing(enoQuestionnaire))
                 .then(new LunaticAddPageNumbers((LunaticParameters.LunaticPaginationMode.QUESTION)))
-                .then(new LunaticResponseTimeQuestionPagination())
-                .then(new LunaticAddCleaningVariables(enoQuestionnaire));
+                .then(new LunaticResponseTimeQuestionPagination());;
     }
 
 }

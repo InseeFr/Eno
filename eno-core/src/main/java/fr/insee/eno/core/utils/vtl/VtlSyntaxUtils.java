@@ -45,7 +45,7 @@ public class VtlSyntaxUtils {
     public static boolean isAggregatorUsedInsideExpression(String expression){
         List<Integer> tokensInExpression = getVTLTokenIdUsedInExpression(expression);
         if(tokensInExpression == null || tokensInExpression.isEmpty()) return false;
-        return VTL_AGR_FUNCTIONS_ID.stream().anyMatch(f -> tokensInExpression.contains(f));
+        return VTL_AGR_FUNCTIONS_ID.stream().anyMatch(tokensInExpression::contains);
     }
 
     public static final String LEFT_JOIN_OPERATOR = getVTLTokenName(VtlTokens.LEFT_JOIN);
