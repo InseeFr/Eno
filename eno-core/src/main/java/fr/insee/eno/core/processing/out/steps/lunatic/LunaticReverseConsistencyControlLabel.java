@@ -1,7 +1,7 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.processing.ProcessingStep;
-import fr.insee.eno.core.utils.VtlSyntaxUtils;
+import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.*;
 
 import java.util.Collection;
