@@ -15,7 +15,6 @@ import static fr.insee.eno.core.processing.out.steps.lunatic.control.DurationCon
 
 /**
  * Generate a description for duration input components.
- * This must be processed before wrapping components in Question components.
  */
 public class LunaticDurationDescription implements ProcessingStep<Questionnaire> {
 
@@ -40,12 +39,10 @@ public class LunaticDurationDescription implements ProcessingStep<Questionnaire>
         DurationFormat format = duration.getFormat();
 
         String generatedDescription;
-        if (format == DurationFormat.YEARS_MONTHS) {
-            generatedDescription = generateYearMonthDescription(min, max);
-        } else if (format == DurationFormat.HOURS_MINUTES) {
-            generatedDescription = generateHourMinuteDescription(min, max);
-        } else {
-            throw new IllegalArgumentException("Unknown duration format: " + format);
+        switch (format) {
+            case DurationFormat.YEARS_MONTHS -> generatedDescription = generateYearMonthDescription(min, max);
+            case DurationFormat.HOURS_MINUTES -> generatedDescription = generateHourMinuteDescription(min, max);
+            default -> throw new IllegalArgumentException("Unknown duration format: " + format);
         }
 
         LabelType description = new LabelType();
@@ -59,9 +56,9 @@ public class LunaticDurationDescription implements ProcessingStep<Questionnaire>
         YearMonthValue maxValue = LunaticDurationControl.parseYearMonth(max);
 
         if (minValue.years() == 0 && minValue.months() == 0) {
-            return String.format("Jusqu'à %s", formatYearMonth(maxValue));
+            return String.format("\"Jusqu'à %s.\"", formatYearMonth(maxValue));
         }
-        return String.format("De %s à %s", formatYearMonth(minValue), formatYearMonth(maxValue));
+        return String.format("\"De %s à %s.\"", formatYearMonth(minValue), formatYearMonth(maxValue));
     }
 
     private String generateHourMinuteDescription(String min, String max) {
@@ -69,9 +66,9 @@ public class LunaticDurationDescription implements ProcessingStep<Questionnaire>
         HourMinuteValue maxValue = LunaticDurationControl.parseHourMinute(max);
 
         if (minValue.hours() == 0 && minValue.minutes() == 0) {
-            return String.format("Jusqu'à %s", formatHourMinute(maxValue));
+            return String.format("\"Jusqu'à %s.\"", formatHourMinute(maxValue));
         }
-        return String.format("De %s à %s", formatHourMinute(minValue), formatHourMinute(maxValue));
+        return String.format("\"De %s à %s.\"", formatHourMinute(minValue), formatHourMinute(maxValue));
     }
 
     String formatYearMonth(YearMonthValue value) {
