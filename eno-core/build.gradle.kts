@@ -30,7 +30,7 @@ dependencies {
     implementation(libs.pogues.model)
     // Lunatic
     implementation(libs.lunatic.model)
-    //vtl-engin
+    // Vtl-parser
     implementation("fr.insee.trevas:vtl-parser:${trevasVersion}")
 
     // Spring
