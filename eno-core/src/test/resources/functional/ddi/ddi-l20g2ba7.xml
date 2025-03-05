@@ -3302,6 +3302,7 @@ never cared for what they say never cared for games they play never cared for wh
                <r:DateFieldFormat>PTnHnM</r:DateFieldFormat>
                <r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV">duration</r:DateTypeCode>
                <r:Range>
+                  <r:MinimumValue included="true">PT0H0M</r:MinimumValue>
                   <r:MaximumValue included="true">PT200H59M</r:MaximumValue>
                </r:Range>
                <r:OutParameter isArray="false">
@@ -3349,6 +3350,7 @@ never cared for what they say never cared for games they play never cared for wh
                <r:DateFieldFormat>PnYnM</r:DateFieldFormat>
                <r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV">duration</r:DateTypeCode>
                <r:Range>
+                  <r:MinimumValue included="true">P0Y0M</r:MinimumValue>
                   <r:MaximumValue included="true">P5Y11M</r:MaximumValue>
                </r:Range>
                <r:OutParameter isArray="false">
@@ -12624,6 +12626,7 @@ ligne 3</r:Content>
                   <r:DateFieldFormat>PTnHnM</r:DateFieldFormat>
                   <r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV">duration</r:DateTypeCode>
                   <r:Range>
+                     <r:MinimumValue included="true">PT0H0M</r:MinimumValue>
                      <r:MaximumValue included="true">PT200H59M</r:MaximumValue>
                   </r:Range>
                </r:DateTimeRepresentation>
@@ -12656,6 +12659,7 @@ ligne 3</r:Content>
                   <r:DateFieldFormat>PnYnM</r:DateFieldFormat>
                   <r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV">duration</r:DateTypeCode>
                   <r:Range>
+                     <r:MinimumValue included="true">PT0H0M</r:MinimumValue>
                      <r:MaximumValue included="true">P5Y11M</r:MaximumValue>
                   </r:Range>
                </r:DateTimeRepresentation>
