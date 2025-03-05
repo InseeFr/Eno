@@ -70,10 +70,10 @@ public class LunaticDurationControl implements LunaticFormatControl<Duration> {
     }
 
     interface DurationValue {}
-    record YearMonthValue(Integer years, Integer months) implements DurationValue {}
-    record HourMinuteValue(Integer hours, Integer minutes) implements DurationValue {}
+    public record YearMonthValue(Integer years, Integer months) implements DurationValue {}
+    public record HourMinuteValue(Integer hours, Integer minutes) implements DurationValue {}
 
-    static YearMonthValue parseYearMonth(String yearMonthString) {
+    public static YearMonthValue parseYearMonth(String yearMonthString) {
         Matcher matcher = LUNATIC_YEAR_MONTH_PATTERN.matcher(yearMonthString);
 
         if (!(matcher.find() && matcher.groupCount() == 2))
@@ -84,7 +84,7 @@ public class LunaticDurationControl implements LunaticFormatControl<Duration> {
         return new YearMonthValue(year, month);
     }
 
-    static HourMinuteValue parseHourMinute(String hourMinuteString) {
+    public static HourMinuteValue parseHourMinute(String hourMinuteString) {
         Matcher matcher = LUNATIC_HOURS_MINUTES_PATTERN.matcher(hourMinuteString);
 
         if (!(matcher.find() && matcher.groupCount() == 2))
