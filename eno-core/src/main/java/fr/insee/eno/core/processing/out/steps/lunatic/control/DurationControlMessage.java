@@ -16,10 +16,14 @@ abstract class DurationControlMessage<T extends DurationValue> {
         if (isZeroDuration(minValue)) {
             return String.format("\"La durée saisie doit être inférieure à %s.\"", formatDuration(maxValue));
         }
-        return String.format("\"La durée saisie doit être comprise entre %s et %s.\"",
+        if (isGreaterThan(minValue, maxValue)) {
+            throw new IllegalArgumentException("The minimum duration cannot be greater than the maximum duration.");
+        }
+        return String.format("\"La durée saisie doit être comprise entre %s minimum et %s maximum.\"",
                 formatDuration(minValue), formatDuration(maxValue));
     }
 
+    abstract boolean isGreaterThan(T minValue, T maxValue);
     abstract boolean isZeroDuration(T durationValue);
     abstract String formatDuration(T durationValue);
 
@@ -28,6 +32,12 @@ abstract class DurationControlMessage<T extends DurationValue> {
         @Override
         boolean isZeroDuration(YearMonthValue durationValue) {
             return durationValue.years() == 0 && durationValue.months() == 0;
+        }
+
+        @Override
+        boolean isGreaterThan(YearMonthValue min, YearMonthValue max) {
+            if (min.years() > max.years()) return true;
+            return min.years().equals(max.years()) && min.months() > max.months();
         }
 
         @Override
@@ -58,11 +68,17 @@ abstract class DurationControlMessage<T extends DurationValue> {
         }
 
         @Override
+        boolean isGreaterThan(LunaticDurationControl.HourMinuteValue min, LunaticDurationControl.HourMinuteValue max) {
+            if (min.hours() > max.hours()) return true;
+            return min.hours().equals(max.hours()) && min.minutes() > max.minutes();
+        }
+
+        @Override
         String formatDuration(LunaticDurationControl.HourMinuteValue durationValue) {
             int hours = durationValue.hours();
             int minutes = durationValue.minutes();
             if (hours > 0 && minutes > 0)
-                return formatHours(hours) + " " + formatMinutes(minutes);
+                return formatHours(hours) + " et " + formatMinutes(minutes);
             if (hours > 0)
                 return formatHours(hours);
             if (minutes > 0)
