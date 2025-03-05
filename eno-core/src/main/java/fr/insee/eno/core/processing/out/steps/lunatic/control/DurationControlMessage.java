@@ -62,7 +62,7 @@ public abstract class DurationControlMessage<T extends DurationValue> {
             int hours = durationValue.hours();
             int minutes = durationValue.minutes();
             if (hours > 0 && minutes > 0)
-                return formatHours(hours) + "et" + formatMinutes(minutes);
+                return formatHours(hours) + " " + formatMinutes(minutes);
             if (hours > 0)
                 return formatHours(hours);
             if (minutes > 0)
