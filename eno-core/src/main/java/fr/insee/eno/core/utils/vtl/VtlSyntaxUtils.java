@@ -17,10 +17,20 @@ public class VtlSyntaxUtils {
 
     // See: http://www.trevas.info/fr/user-guide/coverage/aggregate-operators
     private static final List<Integer> VTL_AGR_FUNCTIONS_ID = List.of(
-            VtlTokens.COUNT, VtlTokens.MIN,  VtlTokens.MAX, VtlTokens.MEDIAN,
-            VtlTokens.SUM,  VtlTokens.AVG,
+            // Simple aggregator functions
+            VtlTokens.COUNT, VtlTokens.MIN,  VtlTokens.MAX, VtlTokens.SUM,
+            // Statistical functions
+            VtlTokens.AVG, VtlTokens.MEDIAN,
             VtlTokens.STDDEV_POP, VtlTokens.STDDEV_SAMP,
-            VtlTokens.VAR_POP,  VtlTokens.VAR_SAMP);
+            VtlTokens.VAR_POP,  VtlTokens.VAR_SAMP,
+            // Next operators are found in VTL documentation usage in Pogues
+            //  - https://inseefr.github.io/Bowie/1._Pogues/Le%20VTL%20dans%20Pogues/fonctions-vtl/
+            //  - https://inseefr.github.io/Bowie/1._Pogues/Le%20VTL%20dans%20Pogues/vtl/
+            // "in" operator is used to check in value is present in vector, returns boolean
+            // example: VARIABLE in ENSEMBLE
+            VtlTokens.IN,
+            // example: first_value(PRENOM over()) -> return first value of PRENOM vector, returns scalar
+            VtlTokens.FIRST_VALUE, VtlTokens.LAST_VALUE);
 
     private static final String DUMMY_AFFECTATION = "d"+getVTLTokenName(VtlTokens.ASSIGN);
 
