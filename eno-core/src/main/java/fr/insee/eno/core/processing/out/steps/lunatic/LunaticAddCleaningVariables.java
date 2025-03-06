@@ -1,6 +1,7 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
@@ -8,6 +9,7 @@ import fr.insee.eno.core.model.sequence.ItemReference;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.model.variable.CalculatedVariable;
 import fr.insee.eno.core.model.variable.Variable;
+import fr.insee.eno.core.model.variable.VariableGroup;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
@@ -65,7 +67,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
             Filter filter = (Filter) enoIndex.get(itemReference.getId());
             filterIds.addAll(
                     filter.getFilterItems().stream()
-                            .map(i->getFilterItemInside(i))
+                            .map(this::getFilterItemInside)
                             .flatMap(Collection::stream)
                             .toList()
             );
@@ -74,7 +76,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
             AbstractSequence sequence = (AbstractSequence) enoIndex.get(itemReference.getId());
             filterIds.addAll(
                     sequence.getSequenceItems().stream()
-                            .map(i->getFilterItemInside(i))
+                            .map(this::getFilterItemInside)
                             .flatMap(Collection::stream)
                             .toList()
             );
@@ -96,7 +98,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
         // Create Filter hierarchy Index (Filter which include other filter)
         enoQuestionnaire.getFilters().forEach(filter -> {
             List<String> filterIdsInside = filter.getFilterItems().stream()
-                    .map(itemReference -> getFilterItemInside(itemReference))
+                    .map(this::getFilterItemInside)
                     .flatMap(Collection::stream)
                     .toList();
             filterHierarchyIndex.put(filter.getId(), filterIdsInside);
@@ -117,7 +119,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                 affectedFilterIds.forEach(filterId -> {
                     String shapeFrom = enoQuestionnaire.getVariableGroups().stream()
                             .filter(variableGroup -> variableGroup.getLoopReferences().contains(loopId))
-                            .map(variableGroup -> variableGroup.getVariables())
+                            .map(VariableGroup::getVariables)
                             .flatMap(Collection::stream)
                             .filter(variable -> !(variable instanceof CalculatedVariable))
                             .findFirst().get().getName();
@@ -182,7 +184,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
 
     public List<String> getFinalBindingReferencesWithCalculatedVariables(CalculatedExpression expression) {
         return expression.getBindingReferences().stream()
-                .map(b -> b.getVariableName())
+                .map(BindingReference::getVariableName)
                 .map(vName -> variableIndex.get(vName))
                 .map(variable -> {
                     List<String> variablesNames = new ArrayList<>(List.of(variable.getName()));
@@ -210,8 +212,9 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
         if(VtlSyntaxUtils.isAggregatorUsedInsideExpression(filterExpression)) return true;
         for(String vName: allVariableNamesForFilter){
             Variable variable = variableIndex.get(vName);
-            if(variable instanceof CalculatedVariable calculatedVariable){
-                if(VtlSyntaxUtils.isAggregatorUsedInsideExpression(calculatedVariable.getExpression().getValue())) return true;
+            if(variable instanceof CalculatedVariable calculatedVariable &&
+                    VtlSyntaxUtils.isAggregatorUsedInsideExpression(calculatedVariable.getExpression().getValue())) {
+                    return true;
             }
         }
         return false;

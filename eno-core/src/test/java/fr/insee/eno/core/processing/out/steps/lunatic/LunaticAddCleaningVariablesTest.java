@@ -81,7 +81,7 @@ class LunaticAddCleaningVariablesTest {
         prepareQuestionnaireTest("functional/ddi/cleaning/ddi-m7oqvx8y.xml");
         assertEquals("PRENOMS", cleaningProcessing.getShapeFromOfFilter(
                 cleaningProcessing.getFilterIndex().get(filterLoopLevel)
-        ));;
+        ));
         String filterDeepInsideLoop = "m7w3rt8q";
         assertEquals("PRENOMS", cleaningProcessing.getShapeFromOfFilter(
                 cleaningProcessing.getFilterIndex().get(filterDeepInsideLoop)
@@ -126,7 +126,7 @@ class LunaticAddCleaningVariablesTest {
                 .then(new LunaticSuggesterOptionResponses())
                 .then(new LunaticAddResizing(enoQuestionnaire))
                 .then(new LunaticAddPageNumbers((LunaticParameters.LunaticPaginationMode.QUESTION)))
-                .then(new LunaticResponseTimeQuestionPagination());;
+                .then(new LunaticResponseTimeQuestionPagination());
     }
 
 }
