@@ -22,7 +22,7 @@ public class VtlSyntaxUtils {
             VtlTokens.STDDEV_POP, VtlTokens.STDDEV_SAMP,
             VtlTokens.VAR_POP,  VtlTokens.VAR_SAMP);
 
-    private static String DUMMY_AFFECTATION = "d"+getVTLTokenName(VtlTokens.ASSIGN);
+    private static final String DUMMY_AFFECTATION = "d"+getVTLTokenName(VtlTokens.ASSIGN);
 
     public static String getVTLTokenName(int tokenId){
         String token = VtlTokens.VOCABULARY.getLiteralName(tokenId);
