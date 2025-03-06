@@ -73,7 +73,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                             .flatMap(Collection::stream)
                             .toList()
             );
-        };
+        }
         if(ItemReference.ItemType.SEQUENCE.equals(itemReference.getType()) || ItemReference.ItemType.SUBSEQUENCE.equals(itemReference.getType())){
             AbstractSequence sequence = (AbstractSequence) enoIndex.get(itemReference.getId());
             filterIds.addAll(
@@ -125,12 +125,11 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                 String filterIdOfLoop = loop.getOccurrenceFilterId();
                 List<String> affectedFilterIds = new ArrayList<>(filterHierarchyIndex.getOrDefault(filterIdOfLoop,List.of()));
                 affectedFilterIds.add(filterIdOfLoop);
-                
+
                 String firstCollectedVariableName;
-                switch (lunaticLoopOrRoster.getComponentType()){
-                    case LOOP -> firstCollectedVariableName = LunaticUtils.getCollectedVariablesInLoop((Loop) lunaticLoopOrRoster).getFirst();
-                    default -> firstCollectedVariableName = LunaticUtils.getDirectResponseNames(lunaticLoopOrRoster).getFirst();
-                }
+                if(ComponentTypeEnum.LOOP.equals(lunaticLoopOrRoster.getComponentType())){
+                    firstCollectedVariableName = LunaticUtils.getCollectedVariablesInLoop((Loop) lunaticLoopOrRoster).getFirst();
+                } else firstCollectedVariableName = LunaticUtils.getDirectResponseNames(lunaticLoopOrRoster).getFirst();
                 affectedFilterIds.forEach(filterId -> filterShapeFromIndex.put(filterId, firstCollectedVariableName));
             }
         });
@@ -144,7 +143,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
      */
     public String getShapeFromOfFilter(Filter filter){
         return filterShapeFromIndex.get(filter.getId());
-    };
+    }
 
     /**
      *
@@ -224,7 +223,6 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
     }
 
     public static List<String> getCollectedVariablesByComponent(ComponentType componentType){
-        String questionId = componentType.getId();
         List<String> collectedVars = new ArrayList<>();
         if (componentType instanceof ComponentSimpleResponseType simpleResponseType) {
             collectedVars.add(simpleResponseType.getResponse().getName());
