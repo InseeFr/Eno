@@ -117,16 +117,20 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
         // Create filter shapeFrom index based on filterHierarchyIndex and loop
         enoQuestionnaire.getLoops().forEach(loop -> {
             String loopScopeId = (loop instanceof LinkedLoop linkedLoop) ? linkedLoop.getReference() : loop.getId();
-            Loop lunaticScopeLoop = (Loop) lunaticQuestionnaire.getComponents().stream()
+            ComponentType lunaticLoopOrRoster = lunaticQuestionnaire.getComponents().stream()
                     .filter(componentType -> loopScopeId.equals(componentType.getId()))
                     .findFirst()
                     .orElse(null);
-            if (lunaticScopeLoop != null) {
+            if (lunaticLoopOrRoster != null) {
                 String filterIdOfLoop = loop.getOccurrenceFilterId();
                 List<String> affectedFilterIds = new ArrayList<>(filterHierarchyIndex.getOrDefault(filterIdOfLoop,List.of()));
                 affectedFilterIds.add(filterIdOfLoop);
-
-                String firstCollectedVariableName = LunaticUtils.getCollectedVariablesInLoop(lunaticScopeLoop).getFirst();;
+                
+                String firstCollectedVariableName;
+                switch (lunaticLoopOrRoster.getComponentType()){
+                    case LOOP -> firstCollectedVariableName = LunaticUtils.getCollectedVariablesInLoop((Loop) lunaticLoopOrRoster).getFirst();
+                    default -> firstCollectedVariableName = LunaticUtils.getDirectResponseNames(lunaticLoopOrRoster).getFirst();
+                }
                 affectedFilterIds.forEach(filterId -> filterShapeFromIndex.put(filterId, firstCollectedVariableName));
             }
         });

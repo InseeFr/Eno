@@ -81,9 +81,9 @@ class DDIToLunaticTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
-//            "edt-v13",
-//            "lk6x162e",
-//            "m7oqvx8y",
+            "edt-v13",
+            "lk6x162e",
+            "m7oqvx8y",
             "srcv"
     })
     void transformQuestion_cleaning(String questionnaireId) throws DDIParsingException {
@@ -92,7 +92,6 @@ class DDIToLunaticTest {
                         this.getClass().getClassLoader().getResourceAsStream("functional/ddi/cleaning/ddi-" +questionnaireId+".xml"))
                 .transform(enoParameters);
         //
-        System.out.println(LunaticSerializer.serializeToJson(lunaticQuestionnaire));
         assertNotNull(lunaticQuestionnaire);
     }
 
