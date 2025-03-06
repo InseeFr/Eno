@@ -27,6 +27,7 @@ class VtlSyntaxUtilsTest {
         assertEquals("(", VtlSyntaxUtils.getVTLTokenName(VtlTokens.LPAREN));
         assertEquals(")", VtlSyntaxUtils.getVTLTokenName(VtlTokens.RPAREN));
         assertEquals(";", VtlSyntaxUtils.getVTLTokenName(VtlTokens.EOL));
+        assertEquals(":=", VtlSyntaxUtils.getVTLTokenName(VtlTokens.ASSIGN));
     }
 
     @Test
@@ -35,6 +36,8 @@ class VtlSyntaxUtilsTest {
         assertTrue(VtlSyntaxUtils.isAggregatorUsedInsideExpression(expressionWithAgg));
         String expressionWithoutAgg = "\"Bonjour\" || PRENOM";
         assertFalse(VtlSyntaxUtils.isAggregatorUsedInsideExpression(expressionWithoutAgg));
+        String trickyExpressionWithoutAgg = "\"count(PRENOM)\" || PRENOM";
+        assertFalse(VtlSyntaxUtils.isAggregatorUsedInsideExpression(trickyExpressionWithoutAgg));
     }
 
 }
