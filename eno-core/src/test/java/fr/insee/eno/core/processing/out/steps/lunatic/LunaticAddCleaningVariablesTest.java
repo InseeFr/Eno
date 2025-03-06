@@ -102,7 +102,7 @@ class LunaticAddCleaningVariablesTest {
         lunaticQuestionnaire = new Questionnaire();
         preProcessQuestionnaire(lunaticQuestionnaire, enoQuestionnaire);
         applyProcessingBeforeCleaning(lunaticQuestionnaire, enoQuestionnaire);
-        cleaningProcessing.preProcessVariables(lunaticQuestionnaire);
+        cleaningProcessing.preProcessVariablesAndShapeFrom(lunaticQuestionnaire);
     }
 
     static void preProcessQuestionnaire(Questionnaire lunaticQuestionnaire, EnoQuestionnaire enoQuestionnaire){

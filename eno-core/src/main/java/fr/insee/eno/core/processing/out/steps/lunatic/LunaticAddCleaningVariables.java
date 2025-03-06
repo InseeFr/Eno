@@ -4,6 +4,7 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.navigation.Filter;
+import fr.insee.eno.core.model.navigation.LinkedLoop;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.sequence.ItemReference;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
@@ -12,6 +13,7 @@ import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.model.variable.VariableGroup;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoIndex;
+import fr.insee.eno.core.utils.LunaticUtils;
 import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.cleaning.CleanedVariableEntry;
@@ -108,29 +110,26 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
         Collections.sort(sortedFilters, filterComparator);
         sortedFilters.forEach(f -> filterIndex.put(f.getId(), f));
 
-        // Create Filter shapeFrom index based on filterHierarchyIndex and loop
-        enoQuestionnaire.getLoops().forEach(loop -> {
-            String loopId = loop.getId();
-            String filterOfLoopId = loop.getOccurrenceFilterId();
-            if (filterOfLoopId != null) {
-                List<String> affectedFilterIds = new ArrayList<>();
-                affectedFilterIds.add(filterOfLoopId);
-                affectedFilterIds.addAll(filterHierarchyIndex.get(filterOfLoopId));
-                affectedFilterIds.forEach(filterId -> {
-                    String shapeFrom = enoQuestionnaire.getVariableGroups().stream()
-                            .filter(variableGroup -> variableGroup.getLoopReferences().contains(loopId))
-                            .map(VariableGroup::getVariables)
-                            .flatMap(Collection::stream)
-                            .filter(variable -> !(variable instanceof CalculatedVariable))
-                            .findFirst().get().getName();
-                    filterShapeFromIndex.put(filterId, shapeFrom);
-                });
-            }
-        });
     }
 
-    public void preProcessVariables(Questionnaire lunaticQuestionnaire){
+    public void preProcessVariablesAndShapeFrom(Questionnaire lunaticQuestionnaire){
         variablesByQuestion = getCollectedVariablesByQuestion(lunaticQuestionnaire);
+        // Create filter shapeFrom index based on filterHierarchyIndex and loop
+        enoQuestionnaire.getLoops().forEach(loop -> {
+            String loopScopeId = (loop instanceof LinkedLoop linkedLoop) ? linkedLoop.getReference() : loop.getId();
+            Loop lunaticScopeLoop = (Loop) lunaticQuestionnaire.getComponents().stream()
+                    .filter(componentType -> loopScopeId.equals(componentType.getId()))
+                    .findFirst()
+                    .orElse(null);
+            if (lunaticScopeLoop != null) {
+                String filterIdOfLoop = loop.getOccurrenceFilterId();
+                List<String> affectedFilterIds = new ArrayList<>(filterHierarchyIndex.getOrDefault(filterIdOfLoop,List.of()));
+                affectedFilterIds.add(filterIdOfLoop);
+
+                String firstCollectedVariableName = LunaticUtils.getCollectedVariablesInLoop(lunaticScopeLoop).getFirst();;
+                affectedFilterIds.forEach(filterId -> filterShapeFromIndex.put(filterId, firstCollectedVariableName));
+            }
+        });
     }
 
 
@@ -146,7 +145,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
     /**
      *
      * @param filter
-     * @return List of variable Name collected inside the scope of Filer
+     * @return List of variable Name collected inside the scope of filter
      */
     public List<String> getCollectedVariablesInFilter(Filter filter) {
         List<String> collectedVarForFilter = new ArrayList<>();
@@ -220,10 +219,69 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
         return false;
     }
 
+    public static List<String> getCollectedVariablesByComponent(ComponentType componentType){
+        String questionId = componentType.getId();
+        List<String> collectedVars = new ArrayList<>();
+        if (componentType instanceof ComponentSimpleResponseType simpleResponseType) {
+            collectedVars.add(simpleResponseType.getResponse().getName());
+            if (componentType instanceof Suggester suggester && suggester.getArbitrary() != null) {
+                collectedVars.add(suggester.getArbitrary().getResponse().getName());
+            }
+            if (componentType instanceof CheckboxOne checkboxOne) {
+                collectedVars.addAll(checkboxOne.getOptions().stream()
+                        .filter(o -> o.getDetail() != null && o.getDetail().getResponse() != null)
+                        .map(o -> o.getDetail().getResponse().getName()).toList());
+            }
+            if (componentType instanceof Radio radio) {
+                collectedVars.addAll(radio.getOptions().stream()
+                        .filter(o -> o.getDetail() != null && o.getDetail().getResponse() != null)
+                        .map(o -> o.getDetail().getResponse().getName()).toList());
+            }
+            if (componentType instanceof Dropdown dropdown) {
+                collectedVars.addAll(dropdown.getOptions().stream()
+                        .filter(o -> o.getDetail() != null && o.getDetail().getResponse() != null)
+                        .map(o -> o.getDetail().getResponse().getName()).toList());
+            }
+        }
+        if (componentType instanceof ComponentMultipleResponseType) {
+            switch (componentType.getComponentType()) {
+                case TABLE -> collectedVars.addAll(((Table) componentType).getBodyLines().stream()
+                        .map(BodyLine::getBodyCells)
+                        .flatMap(Collection::stream)
+                        .map(BodyCell::getResponse)
+                        .filter(Objects::nonNull)
+                        .map(ResponseType::getName)
+                        .toList());
+
+                case ROSTER_FOR_LOOP ->
+                        collectedVars.addAll(((RosterForLoop) componentType).getComponents().stream()
+                                .map(BodyCell::getResponse)
+                                .filter(Objects::nonNull)
+                                .map(ResponseType::getName)
+                                .toList());
+
+                case CHECKBOX_GROUP -> {
+                    collectedVars.addAll(((CheckboxGroup) componentType).getResponses().stream()
+                            .map(ResponseCheckboxGroup::getResponse)
+                            .map(ResponseType::getName)
+                            .toList());
+
+                    collectedVars.addAll(((CheckboxGroup) componentType).getResponses().stream()
+                            .map(ResponseCheckboxGroup::getDetail)
+                            .filter(Objects::nonNull)
+                            .map(DetailResponse::getResponse)
+                            .map(ResponseType::getName)
+                            .toList());
+                }
+            }
+        }
+        return collectedVars;
+    }
+
     /**
      *
      * @param lunaticQuestionnaire
-     * @return A map of QuestionName: List<
+     * @return A map of QuestionName: List of collected variables in the question.
      */
     public Map<String, List<String>> getCollectedVariablesByQuestion(Questionnaire lunaticQuestionnaire) {
         Map<String, List<String>> questionCollectedVarIndex = new HashMap<>();
@@ -235,61 +293,8 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                 .flatMap(Collection::stream)
                 .forEach(componentType -> {
                     String questionId = componentType.getId();
-                    List<String> collectedVars = new ArrayList<>();
-                    if (componentType instanceof ComponentSimpleResponseType simpleResponseType) {
-                        collectedVars.add(simpleResponseType.getResponse().getName());
-                        if (componentType instanceof Suggester suggester && suggester.getArbitrary() != null) {
-                                collectedVars.add(suggester.getArbitrary().getResponse().getName());
-                        }
-                        if (componentType instanceof CheckboxOne checkboxOne) {
-                            collectedVars.addAll(checkboxOne.getOptions().stream()
-                                    .filter(o -> o.getDetail() != null && o.getDetail().getResponse() != null)
-                                    .map(o -> o.getDetail().getResponse().getName()).toList());
-                        }
-                        if (componentType instanceof Radio radio) {
-                            collectedVars.addAll(radio.getOptions().stream()
-                                    .filter(o -> o.getDetail() != null && o.getDetail().getResponse() != null)
-                                    .map(o -> o.getDetail().getResponse().getName()).toList());
-                        }
-                        if (componentType instanceof Dropdown dropdown) {
-                            collectedVars.addAll(dropdown.getOptions().stream()
-                                    .filter(o -> o.getDetail() != null && o.getDetail().getResponse() != null)
-                                    .map(o -> o.getDetail().getResponse().getName()).toList());
-                        }
-                    }
-                    if (componentType instanceof ComponentMultipleResponseType) {
-                        switch (componentType.getComponentType()) {
-                            case TABLE -> collectedVars.addAll(((Table) componentType).getBodyLines().stream()
-                                    .map(BodyLine::getBodyCells)
-                                    .flatMap(Collection::stream)
-                                    .map(BodyCell::getResponse)
-                                    .filter(Objects::nonNull)
-                                    .map(ResponseType::getName)
-                                    .toList());
-
-                            case ROSTER_FOR_LOOP ->
-                                    collectedVars.addAll(((RosterForLoop) componentType).getComponents().stream()
-                                            .map(BodyCell::getResponse)
-                                            .filter(Objects::nonNull)
-                                            .map(ResponseType::getName)
-                                            .toList());
-
-                            case CHECKBOX_GROUP -> {
-                                collectedVars.addAll(((CheckboxGroup) componentType).getResponses().stream()
-                                        .map(ResponseCheckboxGroup::getResponse)
-                                        .map(ResponseType::getName)
-                                        .toList());
-
-                                collectedVars.addAll(((CheckboxGroup) componentType).getResponses().stream()
-                                        .map(ResponseCheckboxGroup::getDetail)
-                                        .filter(Objects::nonNull)
-                                        .map(DetailResponse::getResponse)
-                                        .map(ResponseType::getName)
-                                        .toList());
-                            }
-                        }
-                    }
-                    questionCollectedVarIndex.put(questionId, collectedVars);
+                    List<String> collectedVariables = getCollectedVariablesByComponent(componentType);
+                    questionCollectedVarIndex.put(questionId, collectedVariables);
                 });
         return questionCollectedVarIndex;
     }
@@ -301,7 +306,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
      */
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
-        preProcessVariables(lunaticQuestionnaire);
+        preProcessVariablesAndShapeFrom(lunaticQuestionnaire);
         CleaningType cleaning = new CleaningType();
         filterIndex.forEach((filterId, filter) -> {
             CalculatedExpression filterExpression = filter.getExpression();
