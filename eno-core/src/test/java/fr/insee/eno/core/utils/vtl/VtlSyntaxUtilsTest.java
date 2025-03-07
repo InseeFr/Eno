@@ -1,6 +1,5 @@
-package fr.insee.eno.core.utils;
+package fr.insee.eno.core.utils.vtl;
 
-import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
 import fr.insee.vtl.parser.VtlTokens;
 import org.junit.jupiter.api.Test;
 
@@ -32,11 +31,11 @@ class VtlSyntaxUtilsTest {
 
     @Test
     void testVTAggregatorFunction(){
-        String expressionWithAgg = "count(PRENOM) + max(TEST) || \"bonjour\"";
+        String expressionWithAgg = "count(FIRST_NAME) + max(TEST) || \"bonjour\"";
         assertTrue(VtlSyntaxUtils.isAggregatorUsedInsideExpression(expressionWithAgg));
-        String expressionWithoutAgg = "\"Bonjour\" || PRENOM";
+        String expressionWithoutAgg = "\"Bonjour\" || FIRST_NAME";
         assertFalse(VtlSyntaxUtils.isAggregatorUsedInsideExpression(expressionWithoutAgg));
-        String trickyExpressionWithoutAgg = "\"count(PRENOM)\" || PRENOM";
+        String trickyExpressionWithoutAgg = "\"count(FIRST_NAME)\" || FIRST_NAME"; // here 'count' is not an operator since it is in a string
         assertFalse(VtlSyntaxUtils.isAggregatorUsedInsideExpression(trickyExpressionWithoutAgg));
     }
 
