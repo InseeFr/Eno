@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
+import static fr.insee.eno.core.model.calculated.CalculatedExpression.removeSurroundingDollarSigns;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatedExpressionTest {
@@ -70,6 +71,21 @@ class CalculatedExpressionTest {
                 mappingException.getCause());
         assertTrue(exception.getMessage().startsWith("Name 'FOO' used in expression:"));
         assertTrue(exception.getMessage().contains(expression));
+    }
+
+    @Test
+    void removeSurroundingDollarSignsTest1(){
+        String expression = "\"\\\"I - \\\" || \\\"$Adresse$\\\"\",";
+        String expressionWithout = removeSurroundingDollarSigns(expression);
+        assertEquals("\"\\\"I - \\\" || \\\"Adresse\\\"\",", expressionWithout);
+    }
+
+    @Test
+    void removeSurroundingDollarSignsTest2(){
+        String expression = "cast(nvl($EXT_NOM_FAMILLE$,\"toto\"), string) || \" \" cast(nvl($CALC_CONCAC_Q5_Q6$, string)";
+        String expressionWithout = removeSurroundingDollarSigns(expression);
+        assertEquals("cast(nvl(EXT_NOM_FAMILLE,\"toto\"), string) || \" \" cast(nvl(CALC_CONCAC_Q5_Q6, string)"
+                , expressionWithout);
     }
 
 }
