@@ -32,7 +32,7 @@ public class VtlSyntaxUtils {
      * @return A VTL expression that concatenates both VTL string expressions given.
      */
     public static String concatenateStrings(String vtlString1, String vtlString2) {
-        return vtlString1 + " " + VtlSyntaxUtils.getVTLTokenName(VtlTokens.CONCAT) + " " + vtlString2;
+        return vtlString1 + " " + getVTLTokenName(VtlTokens.CONCAT) + " " + vtlString2;
     }
 
     /**
@@ -120,7 +120,7 @@ public class VtlSyntaxUtils {
     /**
      * Wraps the given VTL expression in a valid statement (by assigning it to an inline variable).
      * @param expression VTL expression (e.g. "1 + 1").
-     * @return VTL statement (e.g. "d := 1 + 1").
+     * @return VTL statement (e.g. "d := 1 + 1;").
      */
     private static String wrapIntoVTLStatement(String expression){
         return "d"+getVTLTokenName(VtlTokens.ASSIGN) + expression + getVTLTokenName(VtlTokens.EOL);
