@@ -3,6 +3,7 @@ package fr.insee.eno.core.utils.vtl;
 import fr.insee.vtl.parser.VtlLexer;
 import fr.insee.vtl.parser.VtlParser;
 import fr.insee.vtl.parser.VtlTokens;
+import lombok.NonNull;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CodePointCharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -76,7 +77,7 @@ public class VtlSyntaxUtils {
      * @param expression VTL expression.
      * @return True if the VTL expression uses an aggregation operator.
      */
-    public static boolean isAggregatorUsedInsideExpression(String expression){
+    public static boolean isAggregatorUsedInsideExpression(@NonNull String expression){
         List<Integer> tokensInExpression = getVTLTokenIdUsedInExpression(expression);
         if (tokensInExpression == null || tokensInExpression.isEmpty())
             return false;
