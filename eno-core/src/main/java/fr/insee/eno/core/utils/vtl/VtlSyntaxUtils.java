@@ -3,6 +3,7 @@ package fr.insee.eno.core.utils.vtl;
 import fr.insee.vtl.parser.VtlLexer;
 import fr.insee.vtl.parser.VtlParser;
 import fr.insee.vtl.parser.VtlTokens;
+import lombok.NonNull;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CodePointCharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -11,59 +12,18 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import java.util.List;
 
 /**
- * Utility class that provide methods for writing VTL expressions.
+ * Utility class that provide methods for analyzing/writing VTL expressions.
  */
 public class VtlSyntaxUtils {
 
-    // See: http://www.trevas.info/fr/user-guide/coverage/aggregate-operators
-    private static final List<Integer> VTL_AGR_FUNCTIONS_ID = List.of(
-            // Simple aggregator functions
-            VtlTokens.COUNT, VtlTokens.MIN,  VtlTokens.MAX, VtlTokens.SUM,
-            // Statistical functions
-            VtlTokens.AVG, VtlTokens.MEDIAN,
-            VtlTokens.STDDEV_POP, VtlTokens.STDDEV_SAMP,
-            VtlTokens.VAR_POP,  VtlTokens.VAR_SAMP,
-            // Next operators are found in VTL documentation usage in Pogues
-            //  - https://inseefr.github.io/Bowie/1._Pogues/Le%20VTL%20dans%20Pogues/fonctions-vtl/
-            //  - https://inseefr.github.io/Bowie/1._Pogues/Le%20VTL%20dans%20Pogues/vtl/
-            // "in" operator is used to check in value is present in vector, returns boolean
-            // example: VARIABLE in ENSEMBLE
-            VtlTokens.IN,
-            // example: first_value(PRENOM over()) -> return first value of PRENOM vector, returns scalar
-            VtlTokens.FIRST_VALUE, VtlTokens.LAST_VALUE);
+    private VtlSyntaxUtils() {}
 
-    private static final String DUMMY_AFFECTATION = "d"+getVTLTokenName(VtlTokens.ASSIGN);
-
-    public static String getVTLTokenName(int tokenId){
-        String token = VtlTokens.VOCABULARY.getLiteralName(tokenId);
-        if (token.startsWith("'") && token.endsWith("'")) return token.substring(1, token.length() - 1);
-        return token;
-    }
-
-    private static String wrapIntoValidVTLExpression(String expression){
-        return DUMMY_AFFECTATION + expression + getVTLTokenName(VtlTokens.EOL);
-    }
-
-    private static List<Integer> getVTLTokenIdUsedInExpression(String expression){
-        String validExpression = wrapIntoValidVTLExpression(expression);
-        VtlParser parser = lexeAndParse(validExpression);
-        Listener listener = new Listener();
-        new ParseTreeWalker().walk(listener, parser.start());
-        return listener.getTokenIdInExpressions();
-    }
-
-    public static boolean isAggregatorUsedInsideExpression(String expression){
-        List<Integer> tokensInExpression = getVTLTokenIdUsedInExpression(expression);
-        if(tokensInExpression == null || tokensInExpression.isEmpty()) return false;
-        return VTL_AGR_FUNCTIONS_ID.stream().anyMatch(tokensInExpression::contains);
-    }
+    // ----- VTL syntax elements used in Eno
 
     public static final String LEFT_JOIN_OPERATOR = getVTLTokenName(VtlTokens.LEFT_JOIN);
     public static final String USING_KEYWORD = getVTLTokenName(VtlTokens.USING);
 
-    private VtlSyntaxUtils() {}
-
-    private static final String VTL_CONCATENATION_OPERATOR = VtlSyntaxUtils.getVTLTokenName(VtlTokens.CONCAT);
+    // ----- VTL syntax methods used in Eno
 
     /**
      * Returns a VTL expression that concatenates both VTL string expressions given.
@@ -72,7 +32,7 @@ public class VtlSyntaxUtils {
      * @return A VTL expression that concatenates both VTL string expressions given.
      */
     public static String concatenateStrings(String vtlString1, String vtlString2) {
-        return vtlString1 + " " + VTL_CONCATENATION_OPERATOR + " " + vtlString2;
+        return vtlString1 + " " + getVTLTokenName(VtlTokens.CONCAT) + " " + vtlString2;
     }
 
     /**
@@ -83,13 +43,98 @@ public class VtlSyntaxUtils {
      */
     public static String invertBooleanExpression(String expression) {
         return getVTLTokenName(VtlTokens.NOT) +
-                    getVTLTokenName(VtlTokens.LPAREN) +
-                        expression +
-                    getVTLTokenName(VtlTokens.RPAREN);
+                getVTLTokenName(VtlTokens.LPAREN) +
+                expression +
+                getVTLTokenName(VtlTokens.RPAREN);
     }
 
-    private static VtlParser lexeAndParse(String expression) {
-        CodePointCharStream stream = CharStreams.fromString(expression);
+    /** List of Trevas token ids for VTL aggregation operators. */
+    private static final List<Integer> VTL_AGR_FUNCTIONS_ID = List.of(
+            // Simple aggregator functions
+            VtlTokens.COUNT, VtlTokens.MIN,  VtlTokens.MAX, VtlTokens.SUM,
+            // Statistical functions
+            VtlTokens.AVG, VtlTokens.MEDIAN,
+            VtlTokens.STDDEV_POP, VtlTokens.STDDEV_SAMP,
+            VtlTokens.VAR_POP,  VtlTokens.VAR_SAMP,
+            // "in" operator is used to check in value is present in vector, returns boolean
+            // example: VARIABLE in VECTOR
+            VtlTokens.IN,
+            // operators to get a scalar value from a vector
+            // example: first_value(FIRST_NAME over())
+            VtlTokens.FIRST_VALUE, VtlTokens.LAST_VALUE);
+
+    /**
+     * Parses the given VTL expression to determine if a VTL aggregation is used.
+     * See:
+     * <ul>
+     *   <li><a href="https://www.trevas.info/fr/user-guide/coverage/aggregate-operators">
+     *       Trevas docs</a></li>
+     *   <li><a href="https://inseefr.github.io/Bowie/1._Pogues/Le%20VTL%20dans%20Pogues/vtl/">
+     *       Pogues VTL docs</a></li>
+     *   <li><a href="https://inseefr.github.io/Bowie/1._Pogues/Le%20VTL%20dans%20Pogues/fonctions-vtl/">
+     *       Pogues VTL functions docs</a></li>
+     * </ul> .
+     * @param expression VTL expression.
+     * @return True if the VTL expression uses an aggregation operator.
+     */
+    public static boolean isAggregatorUsedInsideExpression(@NonNull String expression){
+        List<Integer> tokensInExpression = getVTLTokenIdUsedInExpression(expression);
+        if (tokensInExpression == null || tokensInExpression.isEmpty())
+            return false;
+        return VTL_AGR_FUNCTIONS_ID.stream().anyMatch(tokensInExpression::contains);
+    }
+
+
+
+    // ----- Private methods for this class implementation
+
+    /**
+     * Returns the VTL token that corresponds to the given Trevas id.
+     * To be used with <code>VtlTokens<code/> values.
+     * @param tokenId Identifier of the VTL token in the Trevas lib.
+     * @return String VTL token.
+     * @throws IllegalArgumentException if there is no token registered for the given id.
+     */
+    static String getVTLTokenName(int tokenId){ // method is package-private to be tested in isolation
+        String token = VtlTokens.VOCABULARY.getLiteralName(tokenId);
+        if (token == null)
+            throw new IllegalArgumentException("Invalid VTL token id: " + tokenId);
+        if (token.startsWith("'") && token.endsWith("'"))
+            return token.substring(1, token.length() - 1);
+        return token;
+    }
+
+    /**
+     * Returns the list of VTL tokens present in the given expression.
+     * @param expression VTL expression.
+     * @return Trevas VTL token ids.
+     */
+    private static List<Integer> getVTLTokenIdUsedInExpression(String expression){
+        String validExpression = wrapIntoVTLStatement(expression);
+        VtlParser parser = lexAndParse(validExpression);
+        VtlTokensListener listener = new VtlTokensListener();
+        new ParseTreeWalker().walk(listener, parser.start());
+        return listener.getTokenIdInExpressions();
+    }
+
+    /**
+     * Wraps the given VTL expression in a valid statement (by assigning it to an inline variable).
+     * @param expression VTL expression (e.g. "1 + 1").
+     * @return VTL statement (e.g. "d := 1 + 1;").
+     */
+    private static String wrapIntoVTLStatement(String expression){
+        return "d"+getVTLTokenName(VtlTokens.ASSIGN) + expression + getVTLTokenName(VtlTokens.EOL);
+    }
+
+    /**
+     * Calls Trevas lexer to parse the given VTL statement.
+     * Note: The given string must be a valid VTL statement (not an expression,
+     * see the <code>wrapIntoVTLStatement</code> method).
+     * @param vtlStatement VTL statement.
+     * @return Trevas VTL parser for the given statement.
+     */
+    private static VtlParser lexAndParse(String vtlStatement) {
+        CodePointCharStream stream = CharStreams.fromString(vtlStatement);
         VtlLexer lexer = new VtlLexer(stream);
         return new VtlParser(new CommonTokenStream(lexer));
     }

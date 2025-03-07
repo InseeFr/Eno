@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class Listener extends VtlBaseListener {
+class VtlTokensListener extends VtlBaseListener {
 
-    private List<Integer> tokenIdInExpressions = new ArrayList<>();
+    private final List<Integer> tokenIdInExpressions = new ArrayList<>();
 
     @Override
     public void visitTerminal(TerminalNode node) {
@@ -21,4 +21,5 @@ public class Listener extends VtlBaseListener {
     public void visitErrorNode(ErrorNode node) {
         tokenIdInExpressions.add(node.getSymbol().getType());
     }
+
 }
