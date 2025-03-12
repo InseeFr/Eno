@@ -41,6 +41,12 @@ public class TestPoguesXMLToDDI {
 		testTransformationInOut(String.format("%s/in-loop.xml", basePath), String.format("%s/out-loop.xml", basePath));
 	}
 
+	@Test
+	public void rowControlsTest() {
+		String basePath = "src/test/resources/pogues-xml-to-ddi/row-controls";
+		testTransformationInOut(String.format("%s/in.xml", basePath), String.format("%s/out.xml", basePath));
+	}
+
 	private void testTransformationInOut(String inPath, String outPath){
 		try {
 			Preprocessor[] preprocessors = {
