@@ -3,6 +3,7 @@ package fr.insee.eno.core.model.calculated;
 import fr.insee.ddi.lifecycle33.reusable.InParameterType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,7 @@ public class BindingReference extends EnoObject {
     private String id;
 
     /** Name of the referenced variable. */
+    @Pogues("getVariableName()")
     @DDI("getParameterNameArray(0).getStringArray(0).getStringValue()")
     private String variableName;
 
