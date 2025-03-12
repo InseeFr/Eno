@@ -178,63 +178,79 @@ public abstract class InMapper extends Mapper {
 
     private void collectionMapping(Object inputObject, EnoObject enoObject, PropertyDescriptor propertyDescriptor, TypeDescriptor typeDescriptor, Expression expression, boolean allowNullList, boolean debug) {
         // Local variables used for logging purposes
-        Class<?> modelContextType = enoObject.getClass();
+        Class<?> enoContextType = enoObject.getClass();
         String propertyName = propertyDescriptor.getName();
         // Get the input collection instance by evaluating the expression
-        List<?> inputCollection = spelEngine.evaluateToList(expression, inputObject, modelContextType, propertyName);
+        List<?> inputCollection = spelEngine.evaluateToList(expression, inputObject, enoContextType, propertyName);
         // If the input collection is null and null is not allowed by the annotation, exception
         if (inputCollection == null && !allowNullList) {
             log.error("Incoherent expression in field of {} annotation {}", format,
-                    propertyDescription(propertyName, modelContextType.getName()));
+                    propertyDescription(propertyName, enoContextType.getName()));
             log.error("If the {} collection can actually be null, use the annotation property to allow it.", format);
             throw new MappingException(format+" collection mapped by the annotation is null "
-                    + propertyDescription(propertyName, modelContextType.getName()));
+                    + propertyDescription(propertyName, enoContextType.getName()));
         }
         // If the input collection is null and null is allowed, do nothing
         if (inputCollection == null)
             return;
         // Else
-        int collectionSize = inputCollection.size();
+        int inputCollectionSize = inputCollection.size();
         // Get the Eno model collection
-        List<Object> modelCollection = readList(propertyDescriptor, enoObject);
-        boolean createNewObjects = createNewObjectsCondition(modelCollection, inputCollection, propertyName);
+        List<Object> enoCollection = readList(propertyDescriptor, enoObject);
+        boolean areSameSize = enoCollection.size() == inputCollectionSize;
         // Get the content type of the model collection
         Class<?> modelTargetType = typeDescriptor.getResolvableType().getGeneric(0).getRawClass();
         // Collection of simple types
         if (isSimpleType(modelTargetType)) {
-            modelCollection.clear();
-            modelCollection.addAll(inputCollection);
+            clearEnoCollection(enoCollection, areSameSize, propertyName);
+            enoCollection.addAll(inputCollection);
             if (debug)
-                log.debug("{} values set {}", collectionSize,
-                        propertyDescription(propertyName, modelContextType.getSimpleName()));
+                log.debug("{} values set {}", inputCollectionSize,
+                        propertyDescription(propertyName, enoContextType.getSimpleName()));
         }
         // Collection of complex types
         else if (EnoObject.class.isAssignableFrom(modelTargetType)) {
+            // Determine if the mapper should re-use existing Eno objects or create new ones
+            boolean shouldCreateNewObjects = createNewObjectsCondition(enoCollection, areSameSize, propertyName);
             // Iterate on the input collection
             for (int i = 0; i < inputCollection.size(); i ++) {
                 Object inputObject2 = inputCollection.get(i);
                 if (debug)
-                    log.debug("Iterating on {} {} objects {}", collectionSize, format,
-                            propertyDescription(propertyName, modelContextType.getSimpleName()));
+                    log.debug("Iterating on {} {} objects {}", inputCollectionSize, format,
+                            propertyDescription(propertyName, enoContextType.getSimpleName()));
                 // Instantiate an Eno object per input object and add it in the model collection
                 EnoObject converted = convert(inputObject2, modelTargetType);
-                if (createNewObjects) {
+                if (shouldCreateNewObjects) {
                     // Add the created instance in the model collection
-                    modelCollection.add(converted);
+                    enoCollection.add(converted);
                     // Recursive call on these instances
                     recursiveMapping(inputObject2, converted);
                     continue;
                 }
                 // If the Eno model collection is already filled by a previous mapping, iterate on it
-                EnoObject enoObject2 = (EnoObject) modelCollection.get(i);
+                EnoObject enoObject2 = (EnoObject) enoCollection.get(i);
                 checkTypesEquality(enoObject2, converted);
                 recursiveMapping(inputObject2, enoObject2);
             }
         }
         //
         else {
-            unknownTypeException(modelTargetType, propertyDescriptor, modelContextType);
+            unknownTypeException(modelTargetType, propertyDescriptor, enoContextType);
         }
+    }
+
+    /**
+     * Clears the collection given.
+     * @param enoCollection Collection from the Eno model.
+     * @param propertyName Property name (passed for logging purposes).
+     * @throws MappingException if the collection does not match the given size.
+     */
+    private static void clearEnoCollection(Collection<Object> enoCollection, boolean areSameSize, String propertyName) {
+        if (enoCollection.isEmpty())
+            return;
+        if (! (areSameSize || LIST_PROPERTIES_EXCEPTIONS.contains(propertyName)))
+            throwInconsistentSizeException(propertyName);
+        enoCollection.clear();
     }
 
     /** List of properties that are allowed to have a different size between Pogues and DDI mapping. */
@@ -244,17 +260,16 @@ public abstract class InMapper extends Mapper {
      * or create new ones.
      * @throws MappingException if size of both collections differ and if the property has not a special rule. */
     private static boolean createNewObjectsCondition(
-            Collection<Object> enoModelCollection, Collection<?> inputCollection, String propertyName) {
-        if (enoModelCollection.isEmpty())
-            return true; // if the Eno list is initially empty: create new objects
-        if (enoModelCollection.size() == inputCollection.size())
+            Collection<Object> enoModelCollection, boolean areSameSize, String propertyName) {
+        if (areSameSize)
             return false; // if it has the same size as the input collection: iterate
-        // if the size is not the same, something is wrong: throw an exception
-        if (! LIST_PROPERTIES_EXCEPTIONS.contains(propertyName))
-            throw new MappingException("Inconsistent list size between inputs on property '" + propertyName + "'.");
-        // except if it is allowed for this property, then remove the existing objects and create new ones
-        enoModelCollection.clear();
+        // otherwise remove the existing objects and create new ones
+        clearEnoCollection(enoModelCollection, false, propertyName);
         return true;
+    }
+
+    private static void throwInconsistentSizeException(String propertyName) {
+        throw new MappingException("Inconsistent list size between inputs on property '" + propertyName + "'.");
     }
 
     private EnoObject getEnoModelObject(Object enoParentObject, PropertyDescriptor propertyDescriptor, Object inObject) {
