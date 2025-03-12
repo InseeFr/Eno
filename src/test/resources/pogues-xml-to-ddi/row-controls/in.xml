@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Questionnaire xmlns="http://xml.insee.fr/schema/applis/pogues" id="m1huj5dt" genericName="QUESTIONNAIRE" agency="fr.insee" final="false" flowLogic="FILTER" formulasLanguage="VTL" lastUpdatedDate="Wed Mar 12 2025 16:14:31 GMT+0100 (heure normale d’Europe centrale)" owner="DR59-SNDI59">
+    <Name>RONPTQR</Name>
+    <Label>Test Rond-point - QR</Label>
+    <TargetMode>CAPI</TargetMode>
+    <TargetMode>CATI</TargetMode>
+    <TargetMode>CAWI</TargetMode>
+    <TargetMode>PAPI</TargetMode>
+    <Child id="m0kqzuue" depth="1" genericName="MODULE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SequenceType">
+        <Name>SEQ1</Name>
+        <Label>Séquence 1</Label>
+        <TargetMode>CAPI</TargetMode>
+        <TargetMode>CATI</TargetMode>
+        <TargetMode>CAWI</TargetMode>
+        <TargetMode>PAPI</TargetMode>
+        <Child id="m0krsung" questionType="SIMPLE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="QuestionType">
+            <Name>NBIND</Name>
+            <Label>Combien d'individus y a t-il dans le ménage?</Label>
+            <TargetMode>CAPI</TargetMode>
+            <TargetMode>CATI</TargetMode>
+            <TargetMode>CAWI</TargetMode>
+            <TargetMode>PAPI</TargetMode>
+            <Response id="m0ksbkd5" mandatory="false">
+                <Datatype typeName="NUMERIC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="NumericDatatypeType">
+                    <Minimum>1</Minimum>
+                    <Maximum>10</Maximum>
+                    <Decimals>1</Decimals>
+                    <Unit>
+                    </Unit>
+                </Datatype>
+                <CollectedVariableReference>m0ks16hf</CollectedVariableReference>
+            </Response>
+        </Child>
+        <Child id="m0ks9op8" depth="2" genericName="SUBMODULE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SequenceType">
+            <Name>SOUSSQUENC</Name>
+            <Label>Sous séquence</Label>
+            <TargetMode>CAPI</TargetMode>
+            <TargetMode>CATI</TargetMode>
+            <TargetMode>CAWI</TargetMode>
+            <TargetMode>PAPI</TargetMode>
+            <Child id="m0kraxei" questionType="SIMPLE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="QuestionType">
+                <Name>PRENOM</Name>
+                <Label>Quel est votre prénom?</Label>
+                <Control id="m1hux0gg" criticity="INFO" scope="whole">
+                    <Description>Contrôle sur prénom vide</Description>
+                    <Expression>$PRENOM$ = ''</Expression>
+                    <FailMessage>Prénom vide</FailMessage>
+                </Control>
+                <TargetMode>CAPI</TargetMode>
+                <TargetMode>CATI</TargetMode>
+                <TargetMode>CAWI</TargetMode>
+                <TargetMode>PAPI</TargetMode>
+                <Response id="m0ksdakz" mandatory="false">
+                    <Datatype typeName="TEXT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+                        <MaxLength>249</MaxLength>
+                        <Pattern>
+                        </Pattern>
+                    </Datatype>
+                    <CollectedVariableReference>m0kr7m5i</CollectedVariableReference>
+                </Response>
+            </Child>
+            <Child id="m20lvngp" questionType="SIMPLE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="QuestionType">
+                <Name>NOM</Name>
+                <Label>Noms</Label>
+                <TargetMode>CAPI</TargetMode>
+                <TargetMode>CATI</TargetMode>
+                <TargetMode>CAWI</TargetMode>
+                <TargetMode>PAPI</TargetMode>
+                <Response id="m20lv6rm" mandatory="false">
+                    <Datatype typeName="TEXT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+                        <MaxLength>249</MaxLength>
+                        <Pattern>
+                        </Pattern>
+                    </Datatype>
+                    <CollectedVariableReference>m20m3jeh</CollectedVariableReference>
+                </Response>
+            </Child>
+            <Child id="m28uj7dc" questionType="SIMPLE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="QuestionType">
+                <Name>ESTPARTI</Name>
+                <Label>&quot;Est parti du logement ?&quot;</Label>
+                <TargetMode>CAPI</TargetMode>
+                <TargetMode>CATI</TargetMode>
+                <TargetMode>CAWI</TargetMode>
+                <TargetMode>PAPI</TargetMode>
+                <Response id="m28upar0" mandatory="true">
+                    <Datatype typeName="BOOLEAN" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="BooleanDatatypeType"/>
+                    <CollectedVariableReference>m28udv86</CollectedVariableReference>
+                </Response>
+            </Child>
+        </Child>
+    </Child>
+    <Child id="m0krk1a2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="RoundaboutType">
+        <Name>RDPTIND</Name>
+        <Label>RondPoint Individu</Label>
+        <Control id="m862crla" criticity="INFO" scope="occurrence">
+            <Description>Contrôle age</Description>
+            <Expression>$QUELGEAVEZ$ &lt; 18</Expression>
+            <FailMessage>&quot;Vous devez être majeur pour répondre !&quot;</FailMessage>
+        </Control>
+        <Control id="m862dk3x" criticity="WARN" scope="whole">
+            <Description>age moyen > 20</Description>
+            <Expression>$MOY_AGE$ > 20</Expression>
+            <FailMessage>&quot;Vous avez plus de 20 ans en moyenne&quot;</FailMessage>
+        </Control>
+        <TargetMode>CAPI</TargetMode>
+        <TargetMode>CATI</TargetMode>
+        <TargetMode>CAWI</TargetMode>
+        <TargetMode>PAPI</TargetMode>
+        <OccurrenceLabel>$PRENOM$</OccurrenceLabel>
+        <OccurrenceDescription>
+        </OccurrenceDescription>
+        <Locked>false</Locked>
+        <Loop>
+            <Name>RONDPOINT</Name>
+            <MemberReference>m0kriatz</MemberReference>
+            <MemberReference>m0kriatz</MemberReference>
+            <IterableReference>m0krfx72</IterableReference>
+            <Filter>ESTPARTI</Filter>
+        </Loop>
+    </Child>
+    <Child id="m0kriatz" depth="1" genericName="MODULE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SequenceType">
+        <Name>SEQ2</Name>
+        <Label>&quot;Séquence 2 de &quot; || $PRENOM$</Label>
+        <TargetMode>CAPI</TargetMode>
+        <TargetMode>CATI</TargetMode>
+        <TargetMode>CAWI</TargetMode>
+        <TargetMode>PAPI</TargetMode>
+        <Child id="m0krjtgb" questionType="SIMPLE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="QuestionType">
+            <Name>QUELGEAVEZ</Name>
+            <Label>&quot;Quel âge a &quot; || $PRENOM$ || &quot; ?&quot;</Label>
+            <TargetMode>CAPI</TargetMode>
+            <TargetMode>CATI</TargetMode>
+            <TargetMode>CAWI</TargetMode>
+            <TargetMode>PAPI</TargetMode>
+            <Response id="m0ks1mzy" mandatory="false">
+                <Datatype typeName="NUMERIC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="NumericDatatypeType">
+                    <Minimum>0</Minimum>
+                    <Maximum>150</Maximum>
+                    <Decimals>1</Decimals>
+                    <Unit>http://id.insee.fr/unit/an</Unit>
+                </Datatype>
+                <CollectedVariableReference>m0krgu6f</CollectedVariableReference>
+            </Response>
+        </Child>
+    </Child>
+    <Child id="m0ks3w7z" depth="1" genericName="MODULE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SequenceType">
+        <Name>SEQ3</Name>
+        <Label>Séquence 3</Label>
+        <TargetMode>CAPI</TargetMode>
+        <TargetMode>CATI</TargetMode>
+        <TargetMode>CAWI</TargetMode>
+        <TargetMode>PAPI</TargetMode>
+    </Child>
+    <Child id="idendquest" depth="1" genericName="MODULE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SequenceType">
+        <Name>QUESTIONNAIRE_END</Name>
+        <Label>QUESTIONNAIRE_END</Label>
+        <TargetMode>CAPI</TargetMode>
+        <TargetMode>CATI</TargetMode>
+        <TargetMode>CAWI</TargetMode>
+        <TargetMode>PAPI</TargetMode>
+    </Child>
+    <DataCollection id="s2114-dc" uri="http://ddi:fr.insee:DataCollection.s2114-dc"/>
+    <ComponentGroup id="m0ks00qa">
+        <Name>PAGE_1</Name>
+        <Label>Components for page 1</Label>
+        <MemberReference>m0kqzuue</MemberReference>
+        <MemberReference>m0krsung</MemberReference>
+        <MemberReference>m0ks9op8</MemberReference>
+        <MemberReference>m0kraxei</MemberReference>
+        <MemberReference>m20lvngp</MemberReference>
+        <MemberReference>m28uj7dc</MemberReference>
+        <MemberReference>m0kriatz</MemberReference>
+        <MemberReference>m0krjtgb</MemberReference>
+        <MemberReference>m0ks3w7z</MemberReference>
+        <MemberReference>idendquest</MemberReference>
+    </ComponentGroup>
+    <CodeLists/>
+    <Variables>
+        <Variable id="m862tky0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CalculatedVariableType">
+            <Datatype typeName="NUMERIC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="NumericDatatypeType">
+                <Minimum>0</Minimum>
+                <Maximum>200</Maximum>
+                <IsDynamicUnit>false</IsDynamicUnit>
+                <Unit>
+                </Unit>
+            </Datatype>
+            <Name>MOY_AGE</Name>
+            <Label>moyenne_age</Label>
+            <Formula>avg($QUELGEAVEZ$)</Formula>
+        </Variable>
+        <Variable id="m0ks16hf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CollectedVariableType">
+            <Datatype typeName="NUMERIC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="NumericDatatypeType">
+                <Minimum>1</Minimum>
+                <Maximum>10</Maximum>
+                <Decimals>1</Decimals>
+                <Unit>
+                </Unit>
+            </Datatype>
+            <Name>NBIND</Name>
+            <Label>NBIND label</Label>
+        </Variable>
+        <Variable id="m0kr7m5i" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CollectedVariableType">
+            <Datatype typeName="TEXT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+                <MaxLength>249</MaxLength>
+                <Pattern>
+                </Pattern>
+            </Datatype>
+            <Name>PRENOM</Name>
+            <Label>PRENOM label</Label>
+            <Scope>m0krfx72</Scope>
+        </Variable>
+        <Variable id="m20m3jeh" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CollectedVariableType">
+            <Datatype typeName="TEXT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextDatatypeType">
+                <MaxLength>249</MaxLength>
+                <Pattern>
+                </Pattern>
+            </Datatype>
+            <Name>NOM</Name>
+            <Label>NOM label</Label>
+            <Scope>m0krfx72</Scope>
+        </Variable>
+        <Variable id="m28udv86" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CollectedVariableType">
+            <Datatype typeName="BOOLEAN" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="BooleanDatatypeType"/>
+            <Name>ESTPARTI</Name>
+            <Label>ESTPARTI label</Label>
+            <Scope>m0krfx72</Scope>
+        </Variable>
+        <Variable id="m0krgu6f" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CollectedVariableType">
+            <Datatype typeName="NUMERIC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="NumericDatatypeType">
+                <Minimum>0</Minimum>
+                <Maximum>150</Maximum>
+                <Decimals>1</Decimals>
+                <Unit>http://id.insee.fr/unit/an</Unit>
+            </Datatype>
+            <Name>QUELGEAVEZ</Name>
+            <Label>QUELGEAVEZ label</Label>
+            <Scope>m0krfx72</Scope>
+        </Variable>
+    </Variables>
+    <Iterations>
+        <Iteration id="m0krfx72" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="DynamicIterationType">
+            <Name>BOUCLE_IND</Name>
+            <MemberReference>m0ks9op8</MemberReference>
+            <MemberReference>m0ks9op8</MemberReference>
+            <Minimum>$NBIND$</Minimum>
+            <Maximum>$NBIND$</Maximum>
+            <Step>1</Step>
+        </Iteration>
+    </Iterations>
+</Questionnaire>
