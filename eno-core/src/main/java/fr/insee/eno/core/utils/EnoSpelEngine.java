@@ -79,9 +79,11 @@ public class EnoSpelEngine {
         try {
             return expression.getValue(context, rootObject, desiredResultType);
         } catch (Exception e) {
-            log.error("Evaluation of following SpEL expression failed:");
+            log.error(errorMessage(rootObject, enoContextType, propertyName));
+            log.error("Evaluation of following SpEL expression that failed:");
             log.error(expression.getExpressionString());
-            throw new MappingException(errorMessage(rootObject, enoContextType, propertyName), e);
+            // The cause is generally closer to what's actually happening here:
+            throw new MappingException(e.getMessage(), e);
         }
     }
 

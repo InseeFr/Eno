@@ -112,7 +112,7 @@ class PoguesDDIToEnoTest {
             "loops-subsequence",
             "mcq",
             "no-data-cell",
-            //"other-specify",
+            "other-specify",
             "pairwise",
             "resizing",
             "roundabout",
@@ -173,8 +173,7 @@ class PoguesDDIToEnoTest {
                 .forEach(question -> {
                     question.getCodeResponses()
                             .forEach(codeResponse -> codeResponse.getResponse().setVariableReference(null));
-                    question.getDetailResponses()
-                            .forEach(detailResponse -> detailResponse.setPoguesId(null));
+                    question.getDetailResponses().clear();
                 });
         enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(UniqueChoiceQuestion.class::isInstance).map(UniqueChoiceQuestion.class::cast)
