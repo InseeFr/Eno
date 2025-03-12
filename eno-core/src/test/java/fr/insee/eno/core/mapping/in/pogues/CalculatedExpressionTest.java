@@ -73,19 +73,19 @@ class CalculatedExpressionTest {
         assertTrue(exception.getMessage().contains(expression));
     }
 
-    @Test
-    void removeSurroundingDollarSignsTest1(){
-        String expression = "\"\\\"I - \\\" || \\\"$Adresse$\\\"\",";
+    @Test // dynamic label-like expression
+    void removeSurroundingDollarSignsTest1() {
+        String expression = "\"II - \" || $FIRST_NAME$";
         String expressionWithout = removeSurroundingDollarSigns(expression);
-        assertEquals("\"\\\"I - \\\" || \\\"Adresse\\\"\",", expressionWithout);
+        assertEquals("\"II - \" || FIRST_NAME", expressionWithout);
     }
 
-    @Test
-    void removeSurroundingDollarSignsTest2(){
-        String expression = "cast(nvl($EXT_NOM_FAMILLE$,\"toto\"), string) || \" \" cast(nvl($CALC_CONCAC_Q5_Q6$, string)";
+    @Test // calculated expression-like expression
+    void removeSurroundingDollarSignsTest2() {
+        String expression = "cast(nvl($LAST_NAME$, \"X\"), string) || \" \" || cast(nvl($CALC_VAR$, \"\"), string)";
         String expressionWithout = removeSurroundingDollarSigns(expression);
-        assertEquals("cast(nvl(EXT_NOM_FAMILLE,\"toto\"), string) || \" \" cast(nvl(CALC_CONCAC_Q5_Q6, string)"
-                , expressionWithout);
+        assertEquals("cast(nvl(LAST_NAME, \"X\"), string) || \" \" || cast(nvl(CALC_VAR, \"\"), string)",
+                expressionWithout);
     }
 
 }
