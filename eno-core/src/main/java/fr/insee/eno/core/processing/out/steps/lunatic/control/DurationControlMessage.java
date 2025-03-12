@@ -24,13 +24,13 @@ public abstract class DurationControlMessage<T extends DurationValue> {
     }
 
     abstract boolean isGreaterThan(T minValue, T maxValue);
-    abstract boolean isZeroDuration(T durationValue);
-    abstract String formatDuration(T durationValue);
+    public abstract boolean isZeroDuration(T durationValue);
+    public abstract String formatDuration(T durationValue);
 
     public static class YearMonthControlMessage extends DurationControlMessage<YearMonthValue> {
 
         @Override
-        boolean isZeroDuration(YearMonthValue durationValue) {
+        public boolean isZeroDuration(YearMonthValue durationValue) {
             return durationValue.years() == 0 && durationValue.months() == 0;
         }
 
@@ -41,7 +41,7 @@ public abstract class DurationControlMessage<T extends DurationValue> {
         }
 
         @Override
-        String formatDuration(YearMonthValue durationValue) {
+        public String formatDuration(YearMonthValue durationValue) {
             int years = durationValue.years();
             int months = durationValue.months();
             if (years > 0 && months > 0)
@@ -52,10 +52,10 @@ public abstract class DurationControlMessage<T extends DurationValue> {
                 return formatMonths(months);
             throw new IllegalArgumentException("Invalid duration: " + durationValue);
         }
-        public static String formatYears(int years) {
+        private static String formatYears(int years) {
             return years == 1 ? "1 an" : String.format("%d ans", years);
         }
-        public static String formatMonths(int months) {
+        private static String formatMonths(int months) {
             return String.format("%d mois", months);
         }
     }
@@ -63,7 +63,7 @@ public abstract class DurationControlMessage<T extends DurationValue> {
     public static class HourMinuteControlMessage extends DurationControlMessage<LunaticDurationControl.HourMinuteValue> {
 
         @Override
-        boolean isZeroDuration(LunaticDurationControl.HourMinuteValue durationValue) {
+        public boolean isZeroDuration(LunaticDurationControl.HourMinuteValue durationValue) {
             return durationValue.hours() == 0 && durationValue.minutes() == 0;
         }
 
@@ -74,7 +74,7 @@ public abstract class DurationControlMessage<T extends DurationValue> {
         }
 
         @Override
-        String formatDuration(LunaticDurationControl.HourMinuteValue durationValue) {
+        public String formatDuration(LunaticDurationControl.HourMinuteValue durationValue) {
             int hours = durationValue.hours();
             int minutes = durationValue.minutes();
             if (hours > 0 && minutes > 0)
@@ -85,10 +85,10 @@ public abstract class DurationControlMessage<T extends DurationValue> {
                 return formatMinutes(minutes);
             throw new IllegalArgumentException("Invalid duration: " + durationValue);
         }
-        public static String formatMinutes(int minutes) {
+        private static String formatMinutes(int minutes) {
             return minutes == 1 ? "1 minute" : String.format("%d minutes", minutes);
         }
-        public static String formatHours(int hours) {
+        private static String formatHours(int hours) {
             return hours == 1 ? "1 heure" : String.format("%d heures", hours);
         }
     }

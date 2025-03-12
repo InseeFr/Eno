@@ -69,7 +69,7 @@ public class LunaticDurationControl implements LunaticFormatControl<Duration> {
             throw new RequiredPropertyException(String.format(exceptionMessage, id, "max"));
     }
 
-    interface DurationValue {}
+    public interface DurationValue {}
     public record YearMonthValue(Integer years, Integer months) implements DurationValue {}
     public record HourMinuteValue(Integer hours, Integer minutes) implements DurationValue {}
 
