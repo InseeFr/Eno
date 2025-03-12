@@ -10,6 +10,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Reminder: all label objects are actually "dynamic labels"
+ * (i.e. labels that can be dynamically interpreted using VTL variables)
+ * There is several label objects due to DDI modeling.
+ * @see DynamicLabelTest
+ */
 class LabelTest {
 
     @Test
