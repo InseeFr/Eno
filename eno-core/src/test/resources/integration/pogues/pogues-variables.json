@@ -290,11 +290,13 @@
         }
       },
       {
-        "Label": "DURATION label",
+        "Label": "DURATION_BOUNDED label",
         "id": "lk6qeybx",
         "type": "CollectedVariableType",
-        "Name": "DURATION",
+        "Name": "DURATION_BOUNDED_1",
         "Datatype": {
+          "Maximum": "PT11H0M",
+          "Minimum": "PT3H40M",
           "Format": "PTnHnM",
           "typeName": "DURATION",
           "type": "DurationDatatypeType"
@@ -304,7 +306,7 @@
         "Label": "DURATION_BOUNDED label",
         "id": "lk6qocnd",
         "type": "CollectedVariableType",
-        "Name": "DURATION_BOUNDED",
+        "Name": "DURATION_BOUNDED_2",
         "Datatype": {
           "Maximum": "PT10H0M",
           "Minimum": "PT1H30M",
@@ -669,6 +671,8 @@
               "id": "lk6ruckh",
               "mandatory": false,
               "Datatype": {
+                "Maximum": "PT11H0M",
+                "Minimum": "PT3H40M",
                 "Format": "PTnHnM",
                 "typeName": "DURATION",
                 "type": "DurationDatatypeType"
