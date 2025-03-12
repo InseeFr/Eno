@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.34.4] - 2025-03-12
+### :sparkles: New Features
+- [`dadd7c8`](https://github.com/InseeFr/Eno/commit/dadd7c8101d6f39a92f7c39b0e0de8f9e9f9ac9f) - **pogues mapping**: declarations *(PR [#1198](https://github.com/InseeFr/Eno/pull/1198) by [@RemiVerriez](https://github.com/RemiVerriez))*
+- [`212e68e`](https://github.com/InseeFr/Eno/commit/212e68efd2c139cb21c353cfc03e6dd6a5c6d54f) - **pogues mapping**: controls *(PR [#1201](https://github.com/InseeFr/Eno/pull/1201) by [@RemiVerriez](https://github.com/RemiVerriez))*
+- [`dfeb720`](https://github.com/InseeFr/Eno/commit/dfeb7207000dba8d8e8ef097f82c19c7e015f418) - **pogues mapping**: calculated variable dependencies *(PR [#1213](https://github.com/InseeFr/Eno/pull/1213) by [@nsenave](https://github.com/nsenave))*
+- [`c83fda0`](https://github.com/InseeFr/Eno/commit/c83fda0eaa85767075c76ab953ad7c72c669b5d2) - internal dsfr logic *(PR [#1214](https://github.com/InseeFr/Eno/pull/1214) by [@nsenave](https://github.com/nsenave))*
+- [`9007bad`](https://github.com/InseeFr/Eno/commit/9007bad194d5524a384bc749966155172f0e823a) - **lunatic**: remove unused edited forced etc values *(PR [#1217](https://github.com/InseeFr/Eno/pull/1217) by [@nsenave](https://github.com/nsenave))*
+
+### :bug: Bug Fixes
+- [`1c8fa0e`](https://github.com/InseeFr/Eno/commit/1c8fa0ec8b35748810e5d30e77e4c8f637c8f46a) - **deps**: update dependency springdoc-openapi-starter-webmvc-ui to v2.8.5 *(PR [#1205](https://github.com/InseeFr/Eno/pull/1205) by [@renovate[bot]](https://github.com/apps/renovate))*
+- [`84d7c6d`](https://github.com/InseeFr/Eno/commit/84d7c6d25917a6190d97706631b0e291cb190f23) - **deps**: update all minor dependencies *(PR [#1224](https://github.com/InseeFr/Eno/pull/1224) by [@renovate[bot]](https://github.com/apps/renovate))*
+
+### :recycle: Refactors
+- [`33dfd6e`](https://github.com/InseeFr/Eno/commit/33dfd6e7092044e07d5d26290d63c1dd1cd017c9) - lunatic pagination parameter *(commit by [@nsenave](https://github.com/nsenave))*
+- [`2729f08`](https://github.com/InseeFr/Eno/commit/2729f08b3c9aae16dbc177c0d490ef4876761e5f) - **exceptions**: clearer mapping error message *(commit by [@nsenave](https://github.com/nsenave))*
+- [`4990c48`](https://github.com/InseeFr/Eno/commit/4990c48fab099847f9cd62ea71ed3debe6af71c5) - **exceptions**: clearer mapping error message *(commit by [@nsenave](https://github.com/nsenave))*
+- [`57e7ce6`](https://github.com/InseeFr/Eno/commit/57e7ce64d90e9c342b45f6beec77fefc347e2973) - list size checks in input mapper *(PR [#1230](https://github.com/InseeFr/Eno/pull/1230) by [@nsenave](https://github.com/nsenave))*
+
+### :white_check_mark: Tests
+- [`25aac5b`](https://github.com/InseeFr/Eno/commit/25aac5bfb77892131548d648396d0721e95bfcdc) - refactor pogues ddi control test *(commit by [@RemiVerriez](https://github.com/RemiVerriez))*
+- [`dd0ef2e`](https://github.com/InseeFr/Eno/commit/dd0ef2e61474ef3b9d371bee4e3a695fb141dcdd) - **pogues plus ddi**: add non regression tests *(commit by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.33.4] - 2025-02-25
 ### :bug: Bug Fixes
 - [`cf7695e`](https://github.com/InseeFr/Eno/commit/cf7695e8de38f5511f2b45170716550fd7dd15f9) - no data cell variables *(PR [#1226](https://github.com/InseeFr/Eno/pull/1226) by [@nsenave](https://github.com/nsenave))*
@@ -474,3 +497,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.33.2]: https://github.com/InseeFr/Eno/compare/3.33.1...3.33.2
 [3.33.3]: https://github.com/InseeFr/Eno/compare/3.33.2...3.33.3
 [3.33.4]: https://github.com/InseeFr/Eno/compare/3.33.3...3.33.4
+[3.34.4]: https://github.com/InseeFr/Eno/compare/3.33.4...3.34.4
