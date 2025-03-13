@@ -49,8 +49,7 @@ public class PoguesDeserializer {
         JSONDeserializer poguesDeserializer = new JSONDeserializer();
         log.info("Deserializing Pogues json questionnaire from URL {}.", poguesFileUrl);
         try {
-            Questionnaire poguesQuestionnaire = poguesDeserializer.deserialize(
-                    Path.of(poguesFileUrl.toURI()).toString());
+            Questionnaire poguesQuestionnaire = poguesDeserializer.deserialize(poguesFileUrl.openStream());
             log.info("Successfully deserialized Pogues questionnaire from URL {}.", poguesFileUrl);
             return poguesQuestionnaire;
         } catch (JAXBException e) {
