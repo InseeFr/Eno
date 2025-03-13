@@ -28,7 +28,7 @@ public class EnoWsApplication {
 
 	@Bean
 	public UriComponentsBuilder uriBuilderWithBaseUrl(@Value("${eno.legacy.ws.url}") String baseUrl) {
-		return UriComponentsBuilder.fromHttpUrl(baseUrl);
+		return UriComponentsBuilder.fromUriString(baseUrl);
 	}
 
 	@Bean
