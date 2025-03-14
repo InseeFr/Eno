@@ -1,5 +1,10 @@
 # Eno Releases note
 
+## [v2.12.6] - 2025-03-14
+### :bug: Bug Fixes
+- [`e5982db`](https://github.com/InseeFr/Eno/commit/e5982db43d7c3ecacced96cfaf6d1997370b7456) - **deps**: update all minor dependencies *(PR [#1225](https://github.com/InseeFr/Eno/pull/1225) by [@renovate[bot]](https://github.com/apps/renovate))*
+
+
 ## [v2.12.4] - 2025-03-12
 ### :bug: Bug Fixes
 - [`8fc256c`](https://github.com/InseeFr/Eno/commit/8fc256ce8314ac8309f1c6de06e1952d574e99f6) - row level controls *(PR [#1239](https://github.com/InseeFr/Eno/pull/1239) by [@laurentC35](https://github.com/laurentC35))*
@@ -397,3 +402,4 @@
 [v2.12.1]: https://github.com/InseeFr/Eno/compare/v2.12.0...v2.12.1
 [v2.12.3]: https://github.com/InseeFr/Eno/compare/v2.12.2...v2.12.3
 [v2.12.4]: https://github.com/InseeFr/Eno/compare/v2.12.3...v2.12.4
+[v2.12.6]: https://github.com/InseeFr/Eno/compare/v2.12.5...v2.12.6
