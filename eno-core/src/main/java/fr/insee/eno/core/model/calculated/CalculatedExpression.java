@@ -13,6 +13,7 @@ import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.pogues.model.ExpressionType;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -27,6 +28,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
  * calculated variables, controls, filters. */
 @Getter
 @Setter
+@Slf4j
 @Context(format = Format.POGUES, type = ExpressionType.class)
 @Context(format = Format.DDI, type = CommandType.class)
 @Context(format = Format.LUNATIC, type = LabelType.class)
@@ -83,11 +85,14 @@ public class CalculatedExpression extends EnoObject {
     }
 
     private static void validatePoguesReference(String expression, String variableName, PoguesIndex poguesIndex) {
-        if (! poguesIndex.containsVariable(variableName))
-            throw new IllegalPoguesElementException(String.format(
+        if (! poguesIndex.containsVariable(variableName)) {
+            String message = String.format(
                     "Name '%s' used in expression:%n%s%n" +
                             "does not match any variable.",
-                    variableName, expression));
+                    variableName, expression);
+            log.warn(message);
+            // should be an exception, yet Pogues composition feature creates cases where this is allowed
+        }
     }
 
     /** The removeSurroundingDollarSigns method removes the "$" symbols surrounding the reference to
