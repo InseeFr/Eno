@@ -22,6 +22,7 @@ import fr.insee.eno.core.serialize.DDIDeserializer;
 import fr.insee.eno.core.serialize.PoguesDeserializer;
 import fr.insee.pogues.model.Questionnaire;
 import org.json.JSONException;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -76,6 +77,7 @@ class PoguesDDIToEnoTest {
             "lmyjrqbb",
             "lqnje8yr"
     })
+    @Disabled("Exception for unknown variables temporary replaced by a warning")
     void invalidPoguesQuestionnaires_shouldThrow(String id) throws PoguesDeserializationException {
         //
         Questionnaire poguesQuestionnaire = PoguesDeserializer.deserialize(classLoader.getResourceAsStream(
