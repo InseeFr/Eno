@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.36.1] - 2025-03-14
+### :bug: Bug Fixes
+- [`6da64bb`](https://github.com/InseeFr/Eno/commit/6da64bb74a0a3e0e665d90b31068170fbeb49833) - **pogues mapping**: remove dollar signs in labels *(PR [#1237](https://github.com/InseeFr/Eno/pull/1237) by [@RemiVerriez](https://github.com/RemiVerriez))*
+
+### :recycle: Refactors
+- [`d4d4a12`](https://github.com/InseeFr/Eno/commit/d4d4a12be480daae8a01daa9956e090c7c1e430f) - deprecated pogues deserializer method *(commit by [@nsenave](https://github.com/nsenave))*
+- [`b637eb1`](https://github.com/InseeFr/Eno/commit/b637eb1048753d61e2edd0fab6599e168e6dbfd1) - **ws**: spring deprecated method *(commit by [@nsenave](https://github.com/nsenave))*
+- [`2cdb783`](https://github.com/InseeFr/Eno/commit/2cdb783a550d4fe597da8a65d5d80a990b6fd3f9) - **pogues mapping**: allow unknown variables *(commit by [@nsenave](https://github.com/nsenave))*
+
+### :white_check_mark: Tests
+- [`9ada8cd`](https://github.com/InseeFr/Eno/commit/9ada8cd4bad1232aea088269319b83c950e57bb2) - update tests for unknown variables *(commit by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.36.0] - 2025-03-13
 ### :sparkles: New Features
 - [`9e3ec6f`](https://github.com/InseeFr/Eno/commit/9e3ec6f44e6c829a54bdf140fba83858ab3cb3e0) - **lunatic**: format control and description for duration *(PR [#1229](https://github.com/InseeFr/Eno/pull/1229) by [@RemiVerriez](https://github.com/RemiVerriez))*
@@ -504,3 +517,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.33.4]: https://github.com/InseeFr/Eno/compare/3.33.3...3.33.4
 [3.34.4]: https://github.com/InseeFr/Eno/compare/3.33.4...3.34.4
 [3.36.0]: https://github.com/InseeFr/Eno/compare/3.34.4...3.36.0
+[3.36.1]: https://github.com/InseeFr/Eno/compare/3.36.0...3.36.1
