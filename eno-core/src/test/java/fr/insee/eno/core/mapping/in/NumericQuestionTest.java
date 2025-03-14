@@ -65,7 +65,7 @@ class NumericQuestionTest {
 
         assertNull(numericQuestion1.getUnit());
         if (inFormat == Format.POGUES) assertEquals("€", numericQuestion2.getUnit().getValue());
-        if (inFormat == Format.POGUES) assertEquals("$WHICH_UNIT$", numericQuestion3.getUnit().getValue());
+        if (inFormat == Format.POGUES) assertEquals("WHICH_UNIT", numericQuestion3.getUnit().getValue());
 
         assertEquals("NUMBER_NO_UNIT", numericQuestion1.getResponse().getVariableName());
         assertEquals("NUMBER_FIXED_UNIT", numericQuestion2.getResponse().getVariableName());

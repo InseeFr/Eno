@@ -30,7 +30,7 @@ public class Label extends EnoObject implements EnoLabel {
     /** Text content of the label, which can be either static or dynamic.
      * In DDI, if the label contains variables, their names are replaced by references.
      * There is a processing class to resolve the references and put back variable names instead. */
-    @Pogues("#this")
+    @Pogues("T(fr.insee.eno.core.model.calculated.CalculatedExpression).removeSurroundingDollarSigns(#this)")
     @DDI("getContentArray(0).getStringValue()")
     @Lunatic("setValue(#param)")
     String value;
