@@ -41,11 +41,11 @@
             <Roster>
                 <Row>
                     <MinimumEmpty>1</MinimumEmpty>
-                    <DefaultSize>10</DefaultSize>
+                    <DefaultSize>5</DefaultSize>
                 </Row>
             </Roster>
             <Loop>
-                <DefaultOccurrence>5</DefaultOccurrence>
+                <DefaultOccurrence>2</DefaultOccurrence>
                 <MinimumEmptyOccurrence>1</MinimumEmptyOccurrence>
             </Loop>
             <TextArea>
@@ -59,7 +59,7 @@
                 </Row>
             </Table>
             <Capture>
-                <Numeric>optical</Numeric>
+                <Numeric>manual</Numeric>
             </Capture>
             <PageBreakBetween/>
             <AccompanyingMail/>
