@@ -73,14 +73,4 @@ public class EnoXmlClient {
         return result;
     }
 
-    public ResponseEntity<String> sendPostRequest(URI uri) {
-        String result = webClient.post()
-                .uri(uri)
-                .exchangeToMono(clientResponse -> clientResponse.bodyToMono(String.class))
-                .block();
-        if (result == null)
-            throw new EnoRedirectionException("null response got from Eno Xml service.");
-        return ResponseEntity.ok().body(result);
-    }
-
 }
