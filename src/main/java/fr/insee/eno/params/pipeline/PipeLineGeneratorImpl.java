@@ -5,7 +5,6 @@ import fr.insee.eno.parameters.*;
 import fr.insee.eno.postprocessing.NoopPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.postprocessing.fo.*;
-import fr.insee.eno.postprocessing.lunaticxml.*;
 import fr.insee.eno.postprocessing.xforms.*;
 import fr.insee.eno.preprocessing.*;
 import fr.insee.eno.service.GenerationService;
@@ -24,8 +23,6 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	private IdentityGenerator identityGenerator = new IdentityGenerator();
 	
 	private DDI2XFORMSGenerator ddi2xformsGenerator = new DDI2XFORMSGenerator();
-
-	private DDI2LunaticXMLGenerator ddi2lunaticXmlGenerator = new DDI2LunaticXMLGenerator();
 
 	private DDI2FODTGenerator ddi2fodtGenerator = new DDI2FODTGenerator();
 
@@ -87,21 +84,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	private FOSpecificTreatmentPostprocessor foSpecificTreatment = new FOSpecificTreatmentPostprocessor();
 	
 	private FOTableColumnPostprocessorFake foTableColumn = new FOTableColumnPostprocessorFake();
-	
-	private LunaticXMLSpecificTreatmentPostprocessor lunaticXmlSpecificTreatment = new LunaticXMLSpecificTreatmentPostprocessor();
-	
-	private LunaticXMLInsertGenericQuestionsPostprocessor lunaticXmlInsertGenericQuestions = new LunaticXMLInsertGenericQuestionsPostprocessor();
 
-	private LunaticXMLPaginationPostprocessor lunaticXMLPaginationPostprocessor = new LunaticXMLPaginationPostprocessor();
-	
-	private LunaticXMLExternalizeVariablesAndDependenciesPostprocessor lunaticXMLExternalizeVariablesAndDependencies = new LunaticXMLExternalizeVariablesAndDependenciesPostprocessor();
-	
-	private LunaticXMLInsertCleaningBlockPostprocessor lunaticXMLInsertCleaningBlock = new LunaticXMLInsertCleaningBlockPostprocessor();
-	
-	private LunaticXMLSortComponentsPostprocessor lunaticXmlSortComponents = new LunaticXMLSortComponentsPostprocessor();
-	
-	private LunaticXMLVTLParserPostprocessor lunaticXmlvtlParser = new LunaticXMLVTLParserPostprocessor();
-	
 	private NoopPostprocessor noop = new NoopPostprocessor();
 	
 
@@ -156,9 +139,6 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 				break;
 			case XFORMS:
 				generator = ddi2xformsGenerator;
-				break;
-			case LUNATIC_XML:
-				generator = ddi2lunaticXmlGenerator;
 				break;
 			case FODT:
 				generator = ddi2fodtGenerator;
@@ -239,27 +219,6 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 			break;
 		case FO_TABLE_COLUMN:
 			postprocessor = foTableColumn;
-			break;
-		case LUNATIC_XML_PAGINATION:
-			postprocessor = lunaticXMLPaginationPostprocessor;
-			break;
-		case LUNATIC_XML_EXTERNALIZE_VARIABLES:
-			postprocessor = lunaticXMLExternalizeVariablesAndDependencies;
-			break;
-		case LUNATIC_XML_INSERT_CLEANING_BLOCK:
-			postprocessor = lunaticXMLInsertCleaningBlock;
-			break;
-		case LUNATIC_XML_INSERT_GENERIC_QUESTIONS:
-			postprocessor= lunaticXmlInsertGenericQuestions;
-			break;
-		case LUNATIC_XML_SORT_COMPONENTS:
-			postprocessor = lunaticXmlSortComponents;
-			break;
-		case LUNATIC_XML_VTL_PARSER:
-			postprocessor = lunaticXmlvtlParser;
-			break;
-		case LUNATIC_XML_SPECIFIC_TREATMENT:
-			postprocessor = lunaticXmlSpecificTreatment;
 			break;
 		case DDI_SPECIFIC_TREATMENT:
 			postprocessor = noop;

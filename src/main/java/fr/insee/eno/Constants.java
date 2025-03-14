@@ -48,7 +48,6 @@ public final class Constants {
 	public static final String CONFIG_DDI2FODT = CONFIG_FOLDER + "/ddi2fodt.xml";
 	public static final String CONFIG_DDI2FO = CONFIG_FOLDER + "/ddi2fo.xml";
 	public static final String CONFIG_POGUES_XML2DDI = CONFIG_FOLDER + "/pogues-xml2ddi.xml";
-	public static final String CONFIG_DDI2LUNATIC_XML = CONFIG_FOLDER + "/ddi2lunatic-xml.xml";
 	public static final String PARAMETERS_DEFAULT = PARAMS_DEFAULT_FOLDER_PATH + "/parameters.xml";
 	public static final String METADATA_DEFAULT = PARAMS_DEFAULT_FOLDER_PATH + "/metadata.xml";
 	public static final String MAPPING_DEFAULT = PARAMS_DEFAULT_FOLDER_PATH + "/mapping.xml";
@@ -95,41 +94,34 @@ public final class Constants {
 	public static final String TRANSFORMATIONS_DDI2FO_DDI2FO_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fo/ddi2fo.xsl";
 	public static final String TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/pogues-xml2ddi.xsl";
 	public static final String TRANSFORMATIONS_DDI2POGUES_XML_XSL = TRANSFORMATIONS_FOLDER + "/ddi2pogues-xml/ddi2pogues-xml.xsl";
-	public static final String TRANSFORMATIONS_DDI2LUNATIC_XML_DDI2LUNATIC_XML_XSL = TRANSFORMATIONS_FOLDER + "/ddi2lunatic-xml/ddi2lunatic-xml.xsl";
 
 	public static final String TRANSFORMATIONS_DDI2XFORMS_DRIVERS_FODS = TRANSFORMATIONS_FOLDER + "/ddi2xforms/drivers.fods";
 	public static final String TRANSFORMATIONS_DDI2FODT_DRIVERS_FODS = TRANSFORMATIONS_FOLDER + "/ddi2fodt/drivers.fods";
 	public static final String TRANSFORMATIONS_DDI2FO_DRIVERS_FODS = TRANSFORMATIONS_FOLDER + "/ddi2fo/drivers.fods";
 	public static final String TRANSFORMATIONS_POGUES_XML2DDI_DRIVERS_FODS = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/drivers.fods";
-	public static final String TRANSFORMATIONS_DDI2LUNATIC_XML_DRIVERS_FODS = TRANSFORMATIONS_FOLDER + "/ddi2lunatic-xml/drivers.fods";
 
 	public static final String TRANSFORMATIONS_DDI2XFORMS_FUNCTIONS_FODS = TRANSFORMATIONS_FOLDER	+ "/ddi2xforms/functions.fods";
 	public static final String TRANSFORMATIONS_DDI2FODT_FUNCTIONS_FODS = TRANSFORMATIONS_FOLDER	+ "/ddi2fodt/functions.fods";
 	public static final String TRANSFORMATIONS_DDI2FO_FUNCTIONS_FODS = TRANSFORMATIONS_FOLDER	+ "/ddi2fo/functions.fods";
 	public static final String TRANSFORMATIONS_POGUES_XML2DDI_FUNCTIONS_FODS = TRANSFORMATIONS_FOLDER	+ "/pogues-xml2ddi/functions.fods";
-	public static final String TRANSFORMATIONS_DDI2LUNATIC_XML_FUNCTIONS_FODS = TRANSFORMATIONS_FOLDER	+ "/ddi2lunatic-xml/functions.fods";
 
 	public static final String TRANSFORMATIONS_DDI2XFORMS_FUNCTIONS_XSL = TRANSFORMATIONS_FOLDER + "/ddi2xforms/functions.xsl";
 	public static final String TRANSFORMATIONS_DDI2FODT_FUNCTIONS_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fodt/functions.xsl";
 	public static final String TRANSFORMATIONS_DDI2FO_FUNCTIONS_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fo/functions.xsl";
 	public static final String TRANSFORMATIONS_POGUES_XML2DDI_FUNCTIONS_XSL = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/functions.xsl";
-	public static final String TRANSFORMATIONS_DDI2LUNATIC_XML_FUNCTIONS_XSL = TRANSFORMATIONS_FOLDER + "/ddi2lunatic-xml/functions.xsl";
 
 	public static final String TRANSFORMATIONS_DDI2XFORMS_TREE_NAVIGATION_FODS = TRANSFORMATIONS_FOLDER + "/ddi2xforms/tree-navigation.fods";
 	public static final String TRANSFORMATIONS_DDI2FODT_TREE_NAVIGATION_FODS = TRANSFORMATIONS_FOLDER + "/ddi2fodt/tree-navigation.fods";
 	public static final String TRANSFORMATIONS_DDI2FO_TREE_NAVIGATION_FODS = TRANSFORMATIONS_FOLDER + "/ddi2fo/tree-navigation.fods";
 	public static final String TRANSFORMATIONS_POGUES_XML2DDI_TREE_NAVIGATION_FODS = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/tree-navigation.fods";
-	public static final String TRANSFORMATIONS_DDI2LUNATIC_XML_TREE_NAVIGATION_FODS = TRANSFORMATIONS_FOLDER + "/ddi2lunatic-xml/tree-navigation.fods";
 	public static final String TRANSFORMATIONS_DDI2XFORMS_TREE_NAVIGATION_XSL = TRANSFORMATIONS_FOLDER + "/ddi2xforms/tree-navigation.xsl";
 	public static final String TRANSFORMATIONS_DDI2FODT_TREE_NAVIGATION_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fodt/tree-navigation.xsl";
 	public static final String TRANSFORMATIONS_DDI2FO_TREE_NAVIGATION_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fo/tree-navigation.xsl";
 	public static final String TRANSFORMATIONS_POGUES_XML2DDI_TREE_NAVIGATION_XSL = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/tree-navigation.xsl";
-	public static final String TRANSFORMATIONS_DDI2LUNATIC_XML_TREE_NAVIGATION_XSL = TRANSFORMATIONS_FOLDER + "/ddi2lunatic-xml/tree-navigation.xsl";
 
 	public static final String TRANSFORMATIONS_DDI2XFORMS_DDI2XFORMS_FIXED_XSL = TRANSFORMATIONS_FOLDER + "/ddi2xforms/ddi2xforms-fixed.xsl";
 	public static final String TRANSFORMATIONS_DDI2FODT_DDI2FODT_FIXED_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fodt/ddi2fodt-fixed.xsl";
 	public static final String TRANSFORMATIONS_DDI2FO_DDI2FO_FIXED_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fo/ddi2fo-fixed.xsl";
-	public static final String TRANSFORMATIONS_DDI2LUNATIC_XML_DDI2LUNATIC_XML_FIXED_XSL = TRANSFORMATIONS_FOLDER + "/ddi2lunatic-xml/ddi2lunatic-xml-fixed.xsl";
 	public static final String TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_FIXED_XSL = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/pogues-xml2ddi-fixed.xsl";
 
 	// ---------- 
@@ -158,7 +150,6 @@ public final class Constants {
 	/********************************************************/
 	public static final String OUPUTS_FOLDER = "/xslt/outputs/fo";
 	public static final String POST_PROCESSING_FOLDER_FO = "/xslt/post-processing/fo";
-	public static final String POST_PROCESSING_FOLDER_LUNATIC_XML = "/xslt/post-processing/lunatic-xml";
 	public static final String POST_PROCESSING_FOLDER_XFORMS = "/xslt/post-processing/xforms";
 	public static final String TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF =  OUPUTS_FOLDER + "/publipostage.xsl";
 
@@ -169,14 +160,7 @@ public final class Constants {
 	public static final String TRANSFORMATIONS_COVER_PAGE_FO_4PDF =  POST_PROCESSING_FOLDER_FO + "/insert-cover-page.xsl";
 	public static final String TRANSFORMATIONS_END_QUESTION_FO_4PDF =  POST_PROCESSING_FOLDER_FO + "/insert-end-questions.xsl";
 	public static final String TRANSFORMATIONS_EDIT_STRUCTURE_PAGES_FO_4PDF =  POST_PROCESSING_FOLDER_FO + "/edit-structure-page.xsl";
-	
-	/********************* JS/XML-Lunatic - Post-processing ******************/
-	public static final String TRANSFORMATIONS_SORT_COMPONENTS_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/sort-components.xsl";
-	public static final String TRANSFORMATIONS_EXTERNALIZE_VARIABLES_AND_DEPENDENCIES_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/externalize-variables-and-dependencies.xsl";
-	public static final String TRANSFORMATIONS_INSERT_CLEANING_BLOCK_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/insert-cleaning-block.xsl";
-	public static final String TRANSFORMATIONS_INSERT_GENERIC_QUESTIONS_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/insert-generic-questions.xsl";
-	public static final String TRANSFORMATIONS_PAGINATION_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/pagination.xsl";
-	
+
 	/********************* FR/Xform Post-processing ******************/
 	public static final String UTIL_XFORMS_BROWSING_XSL = POST_PROCESSING_FOLDER_XFORMS + "/browsing.xsl";
 	public static final String UTIL_XFORMS_FIX_ADHERENCE_XSL = POST_PROCESSING_FOLDER_XFORMS + "/fix-adherence.xsl";
@@ -213,22 +197,18 @@ public final class Constants {
 	public static final File TRANSFORMATIONS_DDI2FODT_DDI2FODT_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fodt/ddi2fodt.xsl");
 	public static final File TRANSFORMATIONS_DDI2FO_DDI2FO_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fo/ddi2fo.xsl");
 	public static final File TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/pogues-xml2ddi/pogues-xml2ddi.xsl");
-	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_DDI2LUNATIC_XML_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2lunatic-xml/ddi2lunatic-xml.xsl");
 	public static final File TRANSFORMATIONS_DDI2XFORMS_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2xforms/drivers.xsl");
 	public static final File TRANSFORMATIONS_DDI2FODT_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fodt/drivers.xsl");
 	public static final File TRANSFORMATIONS_DDI2FO_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fo/drivers.xsl");
 	public static final File TRANSFORMATIONS_POGUES_XML2DDI_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/pogues-xml2ddi/drivers.xsl");
-	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2lunatic-xml/drivers.xsl");
 	public static final File TRANSFORMATIONS_DDI2XFORMS_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2xforms/functions.xsl");
 	public static final File TRANSFORMATIONS_DDI2FODT_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fodt/functions.xsl");
 	public static final File TRANSFORMATIONS_DDI2FO_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fo/functions.xsl");
 	public static final File TRANSFORMATIONS_POGUES_XML2DDI_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/pogues-xml2ddi/functions.xsl");
-	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2lunatic-xml/functions.xsl");
 	public static final File TRANSFORMATIONS_DDI2XFORMS_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2xforms/tree-navigation.xsl");
 	public static final File TRANSFORMATIONS_DDI2FODT_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fodt/tree-navigation.xsl");
 	public static final File TRANSFORMATIONS_DDI2FO_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2fo/tree-navigation.xsl");
 	public static final File TRANSFORMATIONS_POGUES_XML2DDI_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/pogues-xml2ddi/tree-navigation.xsl");
-	public static final File TRANSFORMATIONS_DDI2LUNATIC_XML_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi2lunatic-xml/tree-navigation.xsl");
 
 	public static final File INPUTS_DDI_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi/functions.xsl");
 	public static final File INPUTS_DDI_TEMPLATES_XSL_TMP = getFileOrDirectoryFromPath(ENO_TEMP_FOLDER_PATH + "/ddi/templates.xsl");
