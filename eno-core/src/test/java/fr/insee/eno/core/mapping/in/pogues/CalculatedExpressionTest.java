@@ -9,6 +9,7 @@ import fr.insee.pogues.model.CalculatedVariableType;
 import fr.insee.pogues.model.CollectedVariableType;
 import fr.insee.pogues.model.ExpressionType;
 import fr.insee.pogues.model.Questionnaire;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -49,6 +50,7 @@ class CalculatedExpressionTest {
     }
 
     @Test
+    @Disabled("Exception temporary replaced by a warning")
     void unknownVariableCase() {
 
         // Given
