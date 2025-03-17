@@ -254,7 +254,11 @@ public abstract class InMapper extends Mapper {
     }
 
     /** List of properties that are allowed to have a different size between Pogues and DDI mapping. */
-    private static final List<String> LIST_PROPERTIES_EXCEPTIONS = List.of("codeResponses", "variables");
+    private static final List<String> LIST_PROPERTIES_EXCEPTIONS = List.of(
+            "codeResponses", // due to DDI modeling of "please specify" fields of MCQ modalities
+            "variables", // temporary, due to non-collected cells in tables
+            "bindingReferences" // due to the fact that Pogues allows reference of non-existing variables in expressions
+    );
 
     /** Returns the condition that determines if the mapper should iterate on existing objects of the Eno collection
      * or create new ones.
