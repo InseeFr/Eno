@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.36.2] - 2025-03-18
+### :bug: Bug Fixes
+- [`2f819b3`](https://github.com/InseeFr/Eno/commit/2f819b329c5efdff7fb33f01809c1a64d89ad1f4) - **pogues mapping**: ghost variables error *(PR [#1245](https://github.com/InseeFr/Eno/pull/1245) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.36.1] - 2025-03-14
 ### :bug: Bug Fixes
 - [`6da64bb`](https://github.com/InseeFr/Eno/commit/6da64bb74a0a3e0e665d90b31068170fbeb49833) - **pogues mapping**: remove dollar signs in labels *(PR [#1237](https://github.com/InseeFr/Eno/pull/1237) by [@RemiVerriez](https://github.com/RemiVerriez))*
@@ -518,3 +523,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.34.4]: https://github.com/InseeFr/Eno/compare/3.33.4...3.34.4
 [3.36.0]: https://github.com/InseeFr/Eno/compare/3.34.4...3.36.0
 [3.36.1]: https://github.com/InseeFr/Eno/compare/3.36.0...3.36.1
+[3.36.2]: https://github.com/InseeFr/Eno/compare/3.36.1...3.36.2
