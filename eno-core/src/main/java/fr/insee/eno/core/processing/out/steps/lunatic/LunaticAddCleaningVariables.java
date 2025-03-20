@@ -1,5 +1,6 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
@@ -44,11 +45,10 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
     private final EnoIndex enoIndex;
     // String: filterId - Filter: enoFilter
     private final Map<String, Filter> filterIndex = new LinkedHashMap<>();
-    // String: filterId - String: shapeFrom
-    private final Map<String, String> filterShapeFromIndex = new LinkedHashMap<>();
     // String: filterId - List<String> list of filterID inside
     private final Map<String, List<String>> filterHierarchyIndex = new LinkedHashMap<>();
     private final Map<String, VariableType> variableIndex = new LinkedHashMap<>();
+    private final Map<String, String> variableShapeFromIndex = new LinkedHashMap<>();
     private Map<String, List<String>> variablesByQuestion;
 
     /**
@@ -94,16 +94,8 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
         this.preProcessUtilsIndex();
     }
 
-    private void indexVariables(Questionnaire lunaticQuestionnaire) {
-        lunaticQuestionnaire.getVariables().stream()
-                .forEach(variableType -> variableIndex.put(variableType.getName(), variableType));
-    }
 
     private void preProcessUtilsIndex(){
-        // Create variable Index
-        // enoQuestionnaire.getVariables().forEach(v -> variableIndex.put(v.getName(), v));
-
-
         // Create Filter hierarchy Index (Filter which include other filter)
         enoQuestionnaire.getFilters().forEach(filter -> {
             List<String> filterIdsInside = filter.getFilterItems().stream()
@@ -122,34 +114,25 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
     public void preProcessVariablesAndShapeFrom(Questionnaire lunaticQuestionnaire){
         variablesByQuestion = getCollectedVariablesByQuestion(lunaticQuestionnaire);
         // Create filter shapeFrom index based on filterHierarchyIndex and loop
-        enoQuestionnaire.getLoops().forEach(loop -> {
-            String loopScopeId = (loop instanceof LinkedLoop linkedLoop) ? linkedLoop.getReference() : loop.getId();
-            ComponentType lunaticLoopOrRoster = lunaticQuestionnaire.getComponents().stream()
-                    .filter(componentType -> loopScopeId.equals(componentType.getId()))
-                    .findFirst()
-                    .orElse(null);
-            if (lunaticLoopOrRoster != null) {
-                String filterIdOfLoop = loop.getOccurrenceFilterId();
-                List<String> affectedFilterIds = new ArrayList<>(filterHierarchyIndex.getOrDefault(filterIdOfLoop,List.of()));
-                affectedFilterIds.add(filterIdOfLoop);
-
-                String firstCollectedVariableName;
-                if(ComponentTypeEnum.LOOP.equals(lunaticLoopOrRoster.getComponentType())){
-                    firstCollectedVariableName = LunaticUtils.getCollectedVariablesInLoop((Loop) lunaticLoopOrRoster).getFirst();
-                } else firstCollectedVariableName = LunaticUtils.getDirectResponseNames(lunaticLoopOrRoster).getFirst();
-                affectedFilterIds.forEach(filterId -> filterShapeFromIndex.put(filterId, firstCollectedVariableName));
-            }
-        });
+        lunaticQuestionnaire.getVariables().stream()
+                .forEach(variableType -> {
+                    variableIndex.put(variableType.getName(), variableType);
+                    variableShapeFromIndex.put(variableType.getName(), getShapeFromOfVariable(lunaticQuestionnaire, variableType.getName()));
+                });
     }
-
-
     /**
      *
-     * @param filter
+     * @param variableName
      * @return ShapeFrom: the variable Name of filter scope
      */
-    public String getShapeFromOfFilter(Filter filter){
-        return filterShapeFromIndex.get(filter.getId());
+    public String getShapeFromOfVariable(Questionnaire lunaticQuestionnaire, String variableName){
+        VariableType variableType = variableIndex.get(variableName);
+        Optional<ComponentType> iterationComponent = lunaticQuestionnaire.getComponents().stream()
+                .filter(component -> variableType.getIterationReference() != null
+                        && variableType.getIterationReference().equals(component.getId()))
+                .findAny();
+        if (iterationComponent.isEmpty()) return null;
+        return LunaticUtils.getResponseNames(iterationComponent.get()).getFirst();
     }
 
     /**
@@ -323,7 +306,6 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
             List<String> allVariablesThatInfluenceFilterExpression = getFinalBindingReferencesWithCalculatedVariables(filterExpression);
             List<String> variablesCollectedInsideFilter = getCollectedVariablesInFilter(filter);
             boolean isAggregatorUsedOfFilter = isAggregatorUsedInFilter(filter, allVariablesThatInfluenceFilterExpression);
-            String shapeFromOfFilter = getShapeFromOfFilter(filter);
             removeCalculatedVariables(allVariablesThatInfluenceFilterExpression).stream().forEach(
                     variableName -> {
                         boolean isExistCleaningVariableEntry = cleaning.getCleaningVariableNames().contains(variableName);
@@ -331,11 +313,10 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                             CleaningVariableEntry cleaningVariableEntry = new CleaningVariableEntry(variableName);
                             variablesCollectedInsideFilter.forEach(variableToClean -> {
                                 CleanedVariableEntry cleanedVariableEntry = new CleanedVariableEntry(variableToClean);
-                                String newShapeFrom = variableIndex.get(variableToClean).getIterationReference() /// TODO: f
                                 cleanedVariableEntry.getCleaningExpressions().add(
                                         new CleaningExpression(
                                                 filterExpression.getValue(),
-                                                shapeFromOfFilter,
+                                                variableShapeFromIndex.get(variableToClean),
                                                 isAggregatorUsedOfFilter)
                                 );
                                 cleaningVariableEntry.addCleanedVariable(cleanedVariableEntry);
@@ -350,14 +331,14 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                                     CleanedVariableEntry cleanedVariableEntry = new CleanedVariableEntry(variableToClean);
                                     cleanedVariableEntry.getCleaningExpressions().add(new CleaningExpression(
                                             filterExpression.getValue(),
-                                            shapeFromOfFilter,
+                                            variableShapeFromIndex.get(variableToClean),
                                             isAggregatorUsedOfFilter));
                                     cleaning.getCleaningEntry(variableName).addCleanedVariable(cleanedVariableEntry);
                                 } else {
                                     CleanedVariableEntry existingCleanedVariableEntry = existingCleaningVariableEntry.getCleanedVariable(variableToClean);
                                     existingCleanedVariableEntry.getCleaningExpressions().add(new CleaningExpression(
                                             filterExpression.getValue(),
-                                            shapeFromOfFilter,
+                                            variableShapeFromIndex.get(variableToClean),
                                             isAggregatorUsedOfFilter));
                                     cleaning.getCleaningEntry(variableName).addCleanedVariable(existingCleanedVariableEntry);
                                 }

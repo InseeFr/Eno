@@ -76,20 +76,12 @@ class LunaticAddCleaningVariablesTest {
     }
 
     @Test
-    void testGetShapeFromOfFilter() throws DDIParsingException {
-        String filterLoopLevel = "m7u9l9c0-ITE";
+    void testGetShapeFromOfVariable() throws DDIParsingException {
         prepareQuestionnaireTest("functional/ddi/cleaning/ddi-m7oqvx8y.xml");
-        assertEquals("PRENOMS", cleaningProcessing.getShapeFromOfFilter(
-                cleaningProcessing.getFilterIndex().get(filterLoopLevel)
-        ));
-        String filterDeepInsideLoop = "m7w3rt8q";
-        assertEquals("PRENOMS", cleaningProcessing.getShapeFromOfFilter(
-                cleaningProcessing.getFilterIndex().get(filterDeepInsideLoop)
-        ));
-        String filterOutOfLoop = "m7oqml84";
-        assertNull(cleaningProcessing.getShapeFromOfFilter(cleaningProcessing.getFilterIndex().get(filterOutOfLoop)));
-
-
+        String variableInsideLoop = "TEMPS";
+        assertEquals("PRENOMS", cleaningProcessing.getVariableShapeFromIndex().get(variableInsideLoop));
+        String variableOutOfLoop = "TEST";
+        assertNull(cleaningProcessing.getVariableShapeFromIndex().get(variableOutOfLoop));
     }
 
 
