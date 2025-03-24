@@ -44,7 +44,7 @@ public class LunaticParameters {
         this.setFilterResult(isWeb || isProcess);
         this.setMissingVariables(isInterview || isProcess);
         this.setLunaticPaginationMode(paginationValue(context, modeParameter));
-        this.setQuestionWrapping(false);
+        this.setQuestionWrapping(true);
     }
 
     private LunaticPaginationMode paginationValue(EnoParameters.Context context, EnoParameters.ModeParameter modeParameter) {

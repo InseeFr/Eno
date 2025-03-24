@@ -9,6 +9,7 @@ import fr.insee.eno.ws.exception.*;
 import fr.insee.eno.ws.legacy.parameters.CaptureEnum;
 import fr.insee.eno.ws.service.*;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -49,7 +50,8 @@ public class GenerationStandardController {
             @RequestPart(value="specificTreatment", required = false) MultipartFile specificTreatment,
             @PathVariable Context context,
             @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter,
-            @RequestParam(defaultValue = "false") boolean questionWrapping)
+            @Parameter(description = "Temporary parameter for question wrapping, may be removed in future versions.")
+            @RequestParam(defaultValue = "true") boolean questionWrapping)
             throws ModeParameterException, DDIToLunaticException, EnoControllerException, IOException {
         //
         if (EnoParameters.ModeParameter.PAPI.equals(modeParameter))
@@ -78,7 +80,8 @@ public class GenerationStandardController {
             @RequestPart(value="specificTreatment", required = false) MultipartFile specificTreatment,
             @PathVariable Context context,
             @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter,
-            @RequestParam(defaultValue = "false") boolean questionWrapping)
+            @Parameter(description = "Temporary parameter for question wrapping, may be removed in future versions.")
+            @RequestParam(defaultValue = "true") boolean questionWrapping)
             throws ModeParameterException, DDIToLunaticException, EnoControllerException, IOException {
         //
         if (EnoParameters.ModeParameter.PAPI.equals(modeParameter))
