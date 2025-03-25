@@ -20,7 +20,7 @@ tasks.named<Jar>("jar") {
     enabled = false
 }
 
-val springdocVersion = "2.8.5"
+val springdocVersion = "2.8.6"
 
 dependencies { 
     //
