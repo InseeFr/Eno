@@ -76,11 +76,6 @@ public class TestValorizatorParametersImpl {
 		xformsParameters.setNumericExample(true);
 
 		parameters.setXformsParameters(xformsParameters);
-		
-		LunaticXMLParameters lunaticXMLParameters = new LunaticXMLParameters();
-		lunaticXMLParameters.setFilterDescription(true);
-		
-		parameters.setLunaticXmlParameters(lunaticXMLParameters);
 
 
 		complexeEnoParameters.setParameters(parameters);

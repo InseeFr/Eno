@@ -95,29 +95,6 @@ public class TestValidator {
 		//Assertions.assertTrue(valid4.isValid());
 	}
 	
-	
-	@Test
-	public void validateModeLunatic() {
-		ValidationMessage valid0 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.CAWI);
-		ValidationMessage valid1 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.PAPI);
-		ValidationMessage valid2 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.CAPI);
-		ValidationMessage valid3 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.CATI);
-		ValidationMessage valid4 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.ALL);
-		ValidationMessage valid5 = validator.validateMode(OutFormat.LUNATIC_XML,Mode.PROCESS);
-		ValidationMessage valid6 = validator.validateMode(OutFormat.LUNATIC_XML,null);	
-		
-		
-		Assertions.assertTrue(valid0.isValid());
-		Assertions.assertFalse(valid1.isValid());
-		Assertions.assertTrue(valid2.isValid());
-		Assertions.assertTrue(valid3.isValid());
-		Assertions.assertFalse(valid4.isValid());
-		Assertions.assertTrue(valid5.isValid());
-		Assertions.assertFalse(valid6.isValid());
-		
-	}
-	
-	
 	@Test
 	public void validateModeDDI() {
 		

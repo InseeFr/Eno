@@ -160,10 +160,8 @@ public class ValidatorImpl implements Validator {
 				isValid = mode.equals(Mode.CAWI);
 				break;
 			case LUNATIC_XML:
-				isValid = mode.equals(Mode.CAPI)
-				||mode.equals(Mode.CATI)
-				||mode.equals(Mode.CAWI)
-				||mode.equals(Mode.PROCESS);
+				message += "Lunatic output is not supported. ";
+				isValid = false;
 				break;
 			default:
 				isValid=false;
