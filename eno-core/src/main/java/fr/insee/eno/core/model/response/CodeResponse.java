@@ -43,4 +43,8 @@ public class CodeResponse extends EnoIdentifiableObject {
     @Lunatic("setDetail(#param)")
     DetailResponse detailResponse;
 
+    /** */
+    @Lunatic("setConditionFilter(#param)")
+    CodeFilter conditionFilter;
+
 }
