@@ -2,6 +2,8 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.code.CodeList;
+import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import fr.insee.eno.core.model.response.CodeFilter;
 import fr.insee.eno.core.processing.ProcessingStep;
@@ -9,6 +11,8 @@ import fr.insee.lunatic.model.flat.*;
 
 import java.util.List;
 import java.util.Optional;
+
+import static fr.insee.eno.core.model.calculated.CalculatedExpression.removeSurroundingDollarSigns;
 
 public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
 
@@ -29,6 +33,12 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
                 .map(UniqueChoiceQuestion.class::cast)
                 .filter(uniqueChoiceQuestion -> !uniqueChoiceQuestion.getCodeFilters().isEmpty())
                 .forEach(this::insertFilterInOptions);
+
+        enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .filter(SimpleMultipleChoiceQuestion.class::isInstance)
+                .map(SimpleMultipleChoiceQuestion.class::cast)
+                .filter(simpleMultipleChoiceQuestion -> !simpleMultipleChoiceQuestion.getCodeFilters().isEmpty())
+                .forEach(this::insertFilterInCheckbox);
     }
 
     /**
@@ -41,12 +51,14 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
             throw new MappingException("Cannot find Lunatic component for " + enoUniqueChoiceQuestion + ".");
         enoUniqueChoiceQuestion.getCodeFilters().forEach(enoCodeFilter -> {
 
-            // Insert it in the right option (only Radio and CheckboxOne are concerned)
+            // Insert it in the right option (only Radio, CheckboxOne and Dropdown are concerned)
             boolean mappingError = false;
             if (lunaticComponent.get() instanceof Radio radio)
                 mappingError = insertCodeFilterInOption(enoCodeFilter, radio.getOptions());
             if (lunaticComponent.get() instanceof CheckboxOne checkboxOne)
                 mappingError = insertCodeFilterInOption(enoCodeFilter, checkboxOne.getOptions());
+            if (lunaticComponent.get() instanceof Dropdown dropdown)
+                mappingError = insertCodeFilterInOption(enoCodeFilter, dropdown.getOptions());
             if (mappingError)
                 throw new MappingException(String.format(
                         "Cannot link detail field with an option of value '%s' in Lunatic unique choice component '%s'.",
@@ -67,6 +79,40 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
         conditionFilter.setValue(codeFilter.getConditionFilter());
         conditionFilter.setType(LabelTypeEnum.VTL);
         correspondingOption.get().setConditionFilter(conditionFilter);
+        correspondingOption.get().getConditionFilter().setValue(removeSurroundingDollarSigns(conditionFilter.getValue()));
+        return false;
+    }
+
+    private void insertFilterInCheckbox(SimpleMultipleChoiceQuestion enoSimpleMultipleChoiceQuestion) {
+        // Find corresponding Lunatic component
+        String questionId = enoSimpleMultipleChoiceQuestion.getId();
+        Optional<ComponentType> lunaticComponent = findComponentById(lunaticQuestionnaire, questionId);
+        if (lunaticComponent.isEmpty())
+            throw new MappingException("Cannot find Lunatic component for " + enoSimpleMultipleChoiceQuestion + ".");
+        enoSimpleMultipleChoiceQuestion.getCodeFilters().forEach(enoCodeFilter -> {
+            // Insert it in the right response (only CheckboxGroup ie concerned)
+            boolean mappingError = false;
+            if (lunaticComponent.get() instanceof CheckboxGroup checkboxGroup)
+                mappingError = insertCodeFilterInResponse(enoCodeFilter, checkboxGroup.getResponses());
+            if (mappingError)
+                throw new MappingException(String.format(
+                        "Cannot link detail field with an option of value '%s' in Lunatic unique choice component '%s'.",
+                        enoCodeFilter.getCodeValue(), questionId));
+        });
+    }
+
+    private static boolean insertCodeFilterInResponse(CodeFilter codeFilter, List<ResponseCheckboxGroup> responseCheckboxGroupList) {
+        // Note: 'Options' class name should be singular in Lunatic-Model...
+        Optional<ResponseCheckboxGroup> correspondingResponseCheckboxGroup = responseCheckboxGroupList.stream()
+                .filter(responseCheckboxGroup -> codeFilter.getCodeValue().equals(responseCheckboxGroup.getId()))
+                .findAny();
+        if (correspondingResponseCheckboxGroup.isEmpty())
+            return true;
+        ConditionFilterType conditionFilter = new ConditionFilterType();
+        conditionFilter.setValue(codeFilter.getConditionFilter());
+        conditionFilter.setType(LabelTypeEnum.VTL);
+        correspondingResponseCheckboxGroup.get().setConditionFilter(conditionFilter);
+        correspondingResponseCheckboxGroup.get().getConditionFilter().setValue(removeSurroundingDollarSigns(conditionFilter.getValue()));
         return false;
     }
 
@@ -91,5 +137,4 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
     private static Optional<ComponentType> findComponentInList(String id, List<ComponentType> componentList) {
         return componentList.stream().filter(component -> id.equals(component.getId())).findAny();
     }
-
 }

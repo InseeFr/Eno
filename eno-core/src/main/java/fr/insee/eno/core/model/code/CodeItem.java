@@ -7,7 +7,6 @@ import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.label.Label;
-import fr.insee.eno.core.model.response.CodeFilter;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.BodyCell;
 import fr.insee.lunatic.model.flat.HeaderType;
@@ -83,11 +82,4 @@ public class CodeItem extends EnoObject {
     public int size() {
         return codeItems.size();
     }
-
-    /** */
-    @Lunatic("setConditionFilter(#param)")
-    CodeFilter conditionFilter;
-
-
-
 }
