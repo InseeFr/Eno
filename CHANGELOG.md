@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.37.0] - 2025-03-25
+### :sparkles: New Features
+- [`6fac5eb`](https://github.com/InseeFr/Eno/commit/6fac5ebac78bcba3ced9f935b0e8e2b0e1c02394) - adding parameter question wrapping *(PR [#1248](https://github.com/InseeFr/Eno/pull/1248) by [@RemiVerriez](https://github.com/RemiVerriez))*
+
+
 ## [3.36.2] - 2025-03-18
 ### :bug: Bug Fixes
 - [`2f819b3`](https://github.com/InseeFr/Eno/commit/2f819b329c5efdff7fb33f01809c1a64d89ad1f4) - **pogues mapping**: ghost variables error *(PR [#1245](https://github.com/InseeFr/Eno/pull/1245) by [@nsenave](https://github.com/nsenave))*
@@ -524,3 +529,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.36.0]: https://github.com/InseeFr/Eno/compare/3.34.4...3.36.0
 [3.36.1]: https://github.com/InseeFr/Eno/compare/3.36.0...3.36.1
 [3.36.2]: https://github.com/InseeFr/Eno/compare/3.36.1...3.36.2
+[3.37.0]: https://github.com/InseeFr/Eno/compare/3.36.2...3.37.0
