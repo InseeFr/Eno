@@ -1,0 +1,408 @@
+{
+  "id": "m8hgkyw0",
+  "label": {
+    "type": "VTL|MD",
+    "value": "[LC] Modalités filtrées QCU & QCM"
+  },
+  "modele": "LCMODALITS",
+  "maxPage": "5",
+  "resizing": {},
+  "variables": [
+    {
+      "name": "RADIO_OUI_NON",
+      "values": {
+        "COLLECTED": null
+      },
+      "dimension": 0,
+      "variableType": "COLLECTED"
+    },
+    {
+      "name": "DROPDOWN_OUI_NON",
+      "values": {
+        "COLLECTED": null
+      },
+      "dimension": 0,
+      "variableType": "COLLECTED"
+    },
+    {
+      "name": "CHEXBOXMULTI_OUI_NON1",
+      "values": {
+        "COLLECTED": null
+      },
+      "dimension": 0,
+      "variableType": "COLLECTED"
+    },
+    {
+      "name": "CHEXBOXMULTI_OUI_NON2",
+      "values": {
+        "COLLECTED": null
+      },
+      "dimension": 0,
+      "variableType": "COLLECTED"
+    },
+    {
+      "name": "CHEXBOXMULTI_OUI_NON3",
+      "values": {
+        "COLLECTED": null
+      },
+      "dimension": 0,
+      "variableType": "COLLECTED"
+    },
+    {
+      "name": "CHEXBOXMULTI_OUI_NON4",
+      "values": {
+        "COLLECTED": null
+      },
+      "dimension": 0,
+      "variableType": "COLLECTED"
+    },
+    {
+      "name": "AGE",
+      "values": {
+        "COLLECTED": null
+      },
+      "dimension": 0,
+      "variableType": "COLLECTED"
+    },
+    {
+      "name": "FILTER_RESULT_AGE",
+      "dimension": 0,
+      "expression": {
+        "type": "VTL",
+        "value": "true"
+      },
+      "variableType": "CALCULATED"
+    },
+    {
+      "name": "FILTER_RESULT_RADIO_OUI_NON",
+      "dimension": 0,
+      "expression": {
+        "type": "VTL",
+        "value": "true"
+      },
+      "variableType": "CALCULATED"
+    },
+    {
+      "name": "FILTER_RESULT_DROPDOWN_OUI_NON",
+      "dimension": 0,
+      "expression": {
+        "type": "VTL",
+        "value": "true"
+      },
+      "variableType": "CALCULATED"
+    },
+    {
+      "name": "FILTER_RESULT_CHEXBOXMULTI_OUI_NON1",
+      "dimension": 0,
+      "expression": {
+        "type": "VTL",
+        "value": "true"
+      },
+      "variableType": "CALCULATED"
+    },
+    {
+      "name": "FILTER_RESULT_CHEXBOXMULTI_OUI_NON2",
+      "dimension": 0,
+      "expression": {
+        "type": "VTL",
+        "value": "true"
+      },
+      "variableType": "CALCULATED"
+    },
+    {
+      "name": "FILTER_RESULT_CHEXBOXMULTI_OUI_NON3",
+      "dimension": 0,
+      "expression": {
+        "type": "VTL",
+        "value": "true"
+      },
+      "variableType": "CALCULATED"
+    },
+    {
+      "name": "FILTER_RESULT_CHEXBOXMULTI_OUI_NON4",
+      "dimension": 0,
+      "expression": {
+        "type": "VTL",
+        "value": "true"
+      },
+      "variableType": "CALCULATED"
+    }
+  ],
+  "components": [
+    {
+      "id": "m8hgcut0",
+      "page": "1",
+      "label": {
+        "type": "VTL",
+        "value": "\"I - \" || \"S1\""
+      },
+      "componentType": "Sequence",
+      "conditionFilter": {
+        "type": "VTL",
+        "value": "true"
+      }
+    },
+    {
+      "id": "question-m8hgkwpr",
+      "page": "2",
+      "label": {
+        "type": "VTL|MD",
+        "value": "\"Age ?\""
+      },
+      "components": [
+        {
+          "id": "m8hgkwpr",
+          "max": 150.0,
+          "min": 0.0,
+          "page": "2",
+          "unit": {
+            "type": "VTL",
+            "value": "\"ans\""
+          },
+          "controls": [
+            {
+              "id": "m8hgkwpr-format-borne-inf-sup",
+              "type": "SIMPLE",
+              "control": {
+                "type": "VTL",
+                "value": "not(not(isnull(AGE)) and (0>AGE or 150<AGE))"
+              },
+              "criticality": "ERROR",
+              "errorMessage": {
+                "type": "VTL|MD",
+                "value": "\" La valeur doit être comprise entre 0 et 150.\""
+              },
+              "typeOfControl": "FORMAT"
+            },
+            {
+              "id": "m8hgkwpr-format-decimal",
+              "type": "SIMPLE",
+              "control": {
+                "type": "VTL",
+                "value": "not(not(isnull(AGE))  and round(AGE,0)<>AGE)"
+              },
+              "criticality": "ERROR",
+              "errorMessage": {
+                "type": "VTL|MD",
+                "value": "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\""
+              },
+              "typeOfControl": "FORMAT"
+            }
+          ],
+          "decimals": 0,
+          "response": {
+            "name": "AGE"
+          },
+          "mandatory": false,
+          "description": {
+            "type": "VTL",
+            "value": "\"Format attendu : un nombre en \" || \"ans\" || \" entre 0 et 150\""
+          },
+          "componentType": "InputNumber"
+        }
+      ],
+      "componentType": "Question",
+      "conditionFilter": {
+        "type": "VTL",
+        "value": "true"
+      }
+    },
+    {
+      "id": "question-m8hgctb4",
+      "page": "3",
+      "label": {
+        "type": "VTL|MD",
+        "value": "\"RADIO: Oui ou non ?\""
+      },
+      "components": [
+        {
+          "id": "m8hgctb4",
+          "page": "3",
+          "options": [
+            {
+              "label": {
+                "type": "VTL|MD",
+                "value": "\"Oui\""
+              },
+              "value": "1"
+            },
+            {
+              "label": {
+                "type": "VTL|MD",
+                "value": "\"Non\""
+              },
+              "value": "2"
+            },
+            {
+              "label": {
+                "type": "VTL|MD",
+                "value": "\"Peut-être\""
+              },
+              "value": "3",
+              "conditionFilter": {
+                "value": "nvl(AGE, 0) > 18",
+                "type": "VTL"
+              }
+            },
+            {
+              "label": {
+                "type": "VTL|MD",
+                "value": "\"Mais encore...\""
+              },
+              "value": "4",
+              "conditionFilter": {
+                "value": "nvl(AGE, 0) > 50",
+                "type": "VTL"
+              }
+            }
+          ],
+          "response": {
+            "name": "RADIO_OUI_NON"
+          },
+          "mandatory": false,
+          "orientation": "vertical",
+          "componentType": "Radio"
+        }
+      ],
+      "componentType": "Question",
+      "conditionFilter": {
+        "type": "VTL",
+        "value": "true"
+      }
+    },
+    {
+      "id": "question-m8hg7uqd",
+      "page": "4",
+      "label": {
+        "type": "VTL|MD",
+        "value": "\"DROPDOWN: Oui ou non ?\""
+      },
+      "components": [
+        {
+          "id": "m8hg7uqd",
+          "page": "4",
+          "options": [
+            {
+              "label": {
+                "type": "VTL",
+                "value": "\"Oui\""
+              },
+              "value": "1"
+            },
+            {
+              "label": {
+                "type": "VTL",
+                "value": "\"Non\""
+              },
+              "value": "2"
+            },
+            {
+              "label": {
+                "type": "VTL",
+                "value": "\"Peut-être\""
+              },
+              "value": "3",
+              "conditionFilter": {
+                "value": "nvl(AGE, 0) > 18",
+                "type": "VTL"
+              }
+            },
+            {
+              "label": {
+                "type": "VTL",
+                "value": "\"Mais encore...\""
+              },
+              "value": "4"
+            }
+          ],
+          "response": {
+            "name": "DROPDOWN_OUI_NON"
+          },
+          "mandatory": false,
+          "componentType": "Dropdown"
+        }
+      ],
+      "componentType": "Question",
+      "conditionFilter": {
+        "type": "VTL",
+        "value": "true"
+      }
+    },
+    {
+      "id": "question-m8hgrsnb",
+      "page": "5",
+      "label": {
+        "type": "VTL|MD",
+        "value": "\"CHEXBOXMULTI: Oui ou non ?\""
+      },
+      "components": [
+        {
+          "id": "m8hgrsnb",
+          "page": "5",
+          "responses": [
+            {
+              "id": "m8hgrsnb-QOP-m8hh3ll9",
+              "label": {
+                "type": "VTL|MD",
+                "value": "\"Oui\""
+              },
+              "response": {
+                "name": "CHEXBOXMULTI_OUI_NON1"
+              }
+            },
+            {
+              "id": "m8hgrsnb-QOP-m8hh3ixc",
+              "label": {
+                "type": "VTL|MD",
+                "value": "\"Non\""
+              },
+              "response": {
+                "name": "CHEXBOXMULTI_OUI_NON2"
+              }
+            },
+            {
+              "id": "m8hgrsnb-QOP-m8hguxbs",
+              "label": {
+                "type": "VTL|MD",
+                "value": "\"Peut-être\""
+              },
+              "conditionFilter": {
+                "value": "nvl(AGE, 0) > 18",
+                "type": "VTL"
+              },
+              "response": {
+                "name": "CHEXBOXMULTI_OUI_NON3"
+              }
+            },
+            {
+              "id": "m8hgrsnb-QOP-m8hgl8jh",
+              "label": {
+                "type": "VTL|MD",
+                "value": "\"Mais encore...\""
+              },
+              "conditionFilter": {
+                "value": "nvl(AGE, 0) > 50",
+                "type": "VTL"
+              },
+              "response": {
+                "name": "CHEXBOXMULTI_OUI_NON4"
+              }
+            }
+          ],
+          "orientation": "vertical",
+          "componentType": "CheckboxGroup"
+        }
+      ],
+      "componentType": "Question",
+      "conditionFilter": {
+        "type": "VTL",
+        "value": "true"
+      }
+    }
+  ],
+  "pagination": "question",
+  "componentType": "Questionnaire",
+  "enoCoreVersion": "3.36.3-SNAPSHOT",
+  "generatingDate": "20-03-2025 14:40:36",
+  "lunaticModelVersion": "4.1.0"
+}

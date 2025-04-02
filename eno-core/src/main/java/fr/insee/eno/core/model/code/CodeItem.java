@@ -82,5 +82,4 @@ public class CodeItem extends EnoObject {
     public int size() {
         return codeItems.size();
     }
-
 }

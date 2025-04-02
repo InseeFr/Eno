@@ -11,6 +11,7 @@ import fr.insee.eno.core.exceptions.technical.ConversionException;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.navigation.Binding;
+import fr.insee.eno.core.model.response.CodeFilter;
 import fr.insee.eno.core.model.response.DetailResponse;
 import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.parameter.Format;
@@ -99,6 +100,11 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     @Pogues("getClarificationQuestion()")
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDetailResponses(#this)")
     List<DetailResponse> detailResponses = new ArrayList<>();
+
+    /**  */
+    @Pogues("getCodeFilters()")
+    List<CodeFilter> codeFilters = new ArrayList<>();
+
 
     public static DisplayFormat convertPoguesVisualizationHint(ResponseType poguesResponse) {
         return switch (poguesResponse.getDatatype().getVisualizationHint()) {
