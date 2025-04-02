@@ -9,7 +9,9 @@ import fr.insee.eno.core.model.response.CodeFilter;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.lunatic.model.flat.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static fr.insee.eno.core.model.calculated.CalculatedExpression.removeSurroundingDollarSigns;
@@ -18,9 +20,12 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
 
     private final EnoQuestionnaire enoQuestionnaire;
     private Questionnaire lunaticQuestionnaire;
+    private final Map<String, CodeList> codeListIndex = new HashMap<>();
 
     public LunaticInsertCodeFilters(EnoQuestionnaire enoQuestionnaire) {
         this.enoQuestionnaire = enoQuestionnaire;
+        enoQuestionnaire.getCodeLists().forEach( codeList -> codeListIndex.put(codeList.getId(), codeList));
+
     }
 
     /**
@@ -67,6 +72,10 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
     }
 
     /**
+     *
+     * @param codeFilter
+     * @param optionsList
+     * @return
      */
     private static boolean insertCodeFilterInOption(CodeFilter codeFilter, List<Option> optionsList) {
         // Note: 'Options' class name should be singular in Lunatic-Model...
@@ -83,6 +92,23 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
         return false;
     }
 
+    /**
+     * This method is usefully to find position of codeValue in codeList.
+     * Whe need this position because in LunaticModel, there is not codeValue in ResponseList
+     * We assume that codeList remain in same order all along generation.
+     * We use this position to add the corresponding conditionFilter in the response of responseList
+     * @param simpleMultipleChoiceQuestion
+     * @param codeValue
+     * @return always position of codeValue in corresponding codeList, null if codeValue doesn't exist in codeList (should not happen),
+     */
+    private Integer findIndexOfCodeValue(SimpleMultipleChoiceQuestion simpleMultipleChoiceQuestion, String codeValue){
+        CodeList codeListOfQuestion = codeListIndex.get(simpleMultipleChoiceQuestion.getCodeListReference());
+        for(int position=0; position < codeListOfQuestion.getCodeItems().size(); position++){
+            if(codeValue.equals(codeListOfQuestion.getCodeItems().get(position).getValue())) return position;
+        }
+        return null;
+    }
+
     private void insertFilterInCheckbox(SimpleMultipleChoiceQuestion enoSimpleMultipleChoiceQuestion) {
         // Find corresponding Lunatic component
         String questionId = enoSimpleMultipleChoiceQuestion.getId();
@@ -92,8 +118,9 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
         enoSimpleMultipleChoiceQuestion.getCodeFilters().forEach(enoCodeFilter -> {
             // Insert it in the right response (only CheckboxGroup ie concerned)
             boolean mappingError = false;
+            Integer positionOfCodeValueInCodeList = findIndexOfCodeValue(enoSimpleMultipleChoiceQuestion, enoCodeFilter.getCodeValue());
             if (lunaticComponent.get() instanceof CheckboxGroup checkboxGroup)
-                mappingError = insertCodeFilterInResponse(enoCodeFilter, checkboxGroup.getResponses());
+                mappingError = insertCodeFilterInResponse(enoCodeFilter.getConditionFilter(), checkboxGroup.getResponses(), positionOfCodeValueInCodeList);
             if (mappingError)
                 throw new MappingException(String.format(
                         "Cannot link detail field with an option of value '%s' in Lunatic unique choice component '%s'.",
@@ -101,18 +128,17 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
         });
     }
 
-    private static boolean insertCodeFilterInResponse(CodeFilter codeFilter, List<ResponseCheckboxGroup> responseCheckboxGroupList) {
+    private static boolean insertCodeFilterInResponse(String conditionFilterOfCodeFilter,
+                                                      List<ResponseCheckboxGroup> responseCheckboxGroupList,
+                                                      Integer indexOfCodeValueInCodeList) {
         // Note: 'Options' class name should be singular in Lunatic-Model...
-        Optional<ResponseCheckboxGroup> correspondingResponseCheckboxGroup = responseCheckboxGroupList.stream()
-                .filter(responseCheckboxGroup -> codeFilter.getCodeValue().equals(responseCheckboxGroup.getId()))
-                .findAny();
-        if (correspondingResponseCheckboxGroup.isEmpty())
-            return true;
+        if(indexOfCodeValueInCodeList >= responseCheckboxGroupList.size()) return true;
+        ResponseCheckboxGroup correspondingResponseCheckboxGroup = responseCheckboxGroupList.get(indexOfCodeValueInCodeList);
         ConditionFilterType conditionFilter = new ConditionFilterType();
-        conditionFilter.setValue(codeFilter.getConditionFilter());
+        conditionFilter.setValue(conditionFilterOfCodeFilter);
         conditionFilter.setType(LabelTypeEnum.VTL);
-        correspondingResponseCheckboxGroup.get().setConditionFilter(conditionFilter);
-        correspondingResponseCheckboxGroup.get().getConditionFilter().setValue(removeSurroundingDollarSigns(conditionFilter.getValue()));
+        correspondingResponseCheckboxGroup.setConditionFilter(conditionFilter);
+        correspondingResponseCheckboxGroup.getConditionFilter().setValue(removeSurroundingDollarSigns(conditionFilter.getValue()));
         return false;
     }
 

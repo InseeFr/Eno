@@ -61,10 +61,8 @@ class LunaticInsertCodeFiltersTest {
                 .findAny().orElse(null);
         assertNotNull(checkboxGroup);
         assertEquals("m8hgrsnb", checkboxGroup.getId());
-        assertEquals("nvl(AGE, 0) > 18", checkboxGroup.getResponses().stream()
-                .filter(c -> "3".equals(c.getId()))
-                .toList()
-                .getFirst()
+        assertEquals("nvl(AGE, 0) > 50", checkboxGroup
+                .getResponses().get(3)
                 .getConditionFilter().getValue());
     }
 }
