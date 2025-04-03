@@ -1,5 +1,6 @@
-package fr.insee.eno.core;
+package fr.insee.eno.core.mapping.out.lunatic;
 
+import fr.insee.eno.core.PoguesDDIToLunatic;
 import fr.insee.eno.core.exceptions.business.ParsingException;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
@@ -13,13 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-abstract class CodeFiltersTest { // TODO: move this class somewhere
+abstract class CodeFilterTest {
 
     private Questionnaire lunaticQuestionnaire;
 
     abstract Questionnaire mapQuestionnaire(EnoParameters enoParameters) throws ParsingException;
 
-    static class PoguesDDITest extends CodeFiltersTest {
+    static class PoguesDDITest extends CodeFilterTest {
         @Override
         Questionnaire mapQuestionnaire(EnoParameters enoParameters) throws ParsingException {
             ClassLoader classLoader = this.getClass().getClassLoader();
@@ -29,16 +30,6 @@ abstract class CodeFiltersTest { // TODO: move this class somewhere
                     .transform(enoParameters);
         }
     }
-
-    /*static class PoguesOnlyTest extends CodeFiltersTest {
-        @Override
-        Questionnaire mapQuestionnaire(EnoParameters enoParameters) throws PoguesDeserializationException {
-            ClassLoader classLoader = this.getClass().getClassLoader();
-            return PoguesToLunatic.fromInputStream(
-                    classLoader.getResourceAsStream("integration/pogues/pogues-code-filter.json"))
-                    .transform(enoParameters);
-        }
-    }*/
 
     @BeforeAll
     void integrationTest_fromPoguesOnly() throws ParsingException {
