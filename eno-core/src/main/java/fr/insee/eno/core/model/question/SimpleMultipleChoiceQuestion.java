@@ -71,7 +71,9 @@ public class SimpleMultipleChoiceQuestion extends MultipleResponseQuestion {
     @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     String lunaticComponentType = "CHECKBOX_GROUP";
 
-    /**  */
+    /**
+     * List of conditions for the modalities to be filtered by previous responses or external data.
+     *  In Lunatic, they are inserted in code response objects through a processing. */
     @Pogues("getCodeFilters()")
     List<CodeFilter> codeFilters = new ArrayList<>();
 

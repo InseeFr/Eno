@@ -43,7 +43,8 @@ public class CodeResponse extends EnoIdentifiableObject {
     @Lunatic("setDetail(#param)")
     DetailResponse detailResponse;
 
-    /** */
+    /** Condition for filtering the modality.
+     * In Pogues, it is mapped at the question level and inserted here in a processing step. */
     @Lunatic("setConditionFilter(#param)")
     CodeFilter conditionFilter;
 

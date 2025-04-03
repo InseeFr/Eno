@@ -101,7 +101,9 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDetailResponses(#this)")
     List<DetailResponse> detailResponses = new ArrayList<>();
 
-    /**  */
+    /**
+     * List of conditions for the modalities to be filtered by previous responses or external data.
+     * In Lunatic, they are inserted in option through a processing. */
     @Pogues("getCodeFilters()")
     List<CodeFilter> codeFilters = new ArrayList<>();
 
