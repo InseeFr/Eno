@@ -16,6 +16,10 @@ import java.util.Optional;
 
 import static fr.insee.eno.core.model.calculated.CalculatedExpression.removeSurroundingDollarSigns;
 
+/**
+ * The filters (for the modalities of QCU and QCM) are at the question level in the Eno model.
+ * This processing step aims to insert these filters in the right place.
+ */
 public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
 
     private final EnoQuestionnaire enoQuestionnaire;
@@ -29,6 +33,9 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
     }
 
     /**
+     * Inserts filters into the options of unique-choice components (Radio, CheckboxOne, and Dropdown).
+     * Inserts filters into the responses of multiple-choice components (CheckboxGroup).
+     * @param lunaticQuestionnaire Lunatic questionnaire.
      */
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
@@ -47,6 +54,9 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
     }
 
     /**
+     * From the given Eno unique-choice question object, retrieves the corresponding Lunatic component,
+     * and inserts code filters into its options.
+     * @param enoUniqueChoiceQuestion Eno unique-choice question.
      */
     private void insertFilterInOptions(UniqueChoiceQuestion enoUniqueChoiceQuestion) {
         // Find corresponding Lunatic component
@@ -72,10 +82,12 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
     }
 
     /**
-     *
-     * @param codeFilter
-     * @param optionsList
-     * @return
+     * Inserts the code filter object into the correct option, using its value to determine the target.
+     * This method does not have enough information to throw an exception with a precise message,
+     * so it returns a boolean to indicate whether the insertion failed.
+     * @param codeFilter Lunatic code filter object.
+     * @param optionsList List of Lunatic unique-choice options.
+     * @return True if the insertion failed.
      */
     private static boolean insertCodeFilterInOption(CodeFilter codeFilter, List<Option> optionsList) {
         // Note: 'Options' class name should be singular in Lunatic-Model...
@@ -93,13 +105,14 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
     }
 
     /**
-     * This method is usefully to find position of codeValue in codeList.
-     * Whe need this position because in LunaticModel, there is not codeValue in ResponseList
-     * We assume that codeList remain in same order all along generation.
-     * We use this position to add the corresponding conditionFilter in the response of responseList
-     * @param simpleMultipleChoiceQuestion
-     * @param codeValue
-     * @return always position of codeValue in corresponding codeList, null if codeValue doesn't exist in codeList (should not happen),
+     * This method is useful for finding the position of a codeValue in the codeList.
+     * We need this position because, in the LunaticModel, there is no codeValue in the ResponseList.
+     * We assume that the codeList remains in the same order throughout the generation process.
+     * We use this position to add the corresponding conditionFilter to the response in the ResponseList.
+     * @param simpleMultipleChoiceQuestion Eno multiple choices question.
+     * @param codeValue Code value of the modality in the list.
+     * @return Always returns the position of the codeValue in the corresponding codeList,
+     * or null if the codeValue does not exist in the codeList (this should not happen).
      */
     private Integer findIndexOfCodeValue(SimpleMultipleChoiceQuestion simpleMultipleChoiceQuestion, String codeValue){
         CodeList codeListOfQuestion = codeListIndex.get(simpleMultipleChoiceQuestion.getCodeListReference());
@@ -109,6 +122,11 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
         return null;
     }
 
+    /**
+     * From the given Eno multiple-choice question object, retrieves the corresponding Lunatic component
+     * and inserts code filters into its responses.
+     * @param enoSimpleMultipleChoiceQuestion Eno multiple-choice question.
+     */
     private void insertFilterInCheckbox(SimpleMultipleChoiceQuestion enoSimpleMultipleChoiceQuestion) {
         // Find corresponding Lunatic component
         String questionId = enoSimpleMultipleChoiceQuestion.getId();
@@ -128,6 +146,17 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
         });
     }
 
+    /**
+     * Inserts a code filter into the corresponding response of a CheckboxGroup, based on the provided index.
+     * The filter is applied to the response at the specified index in the responseCheckboxGroupList.
+     * The filter value is sanitized by removing surrounding dollar signs before being set.
+     *
+     * @param conditionFilterOfCodeFilter The condition filter value to be applied.
+     * @param responseCheckboxGroupList The list of ResponseCheckboxGroup objects to which the filter will be applied.
+     * @param indexOfCodeValueInCodeList The index in the code list that determines which response to apply the filter to.
+     * @return {@code true} if the index is out of bounds (greater than or equal to the size of responseCheckboxGroupList);
+     *         {@code false} otherwise (filter successfully inserted).
+     */
     private static boolean insertCodeFilterInResponse(String conditionFilterOfCodeFilter,
                                                       List<ResponseCheckboxGroup> responseCheckboxGroupList,
                                                       Integer indexOfCodeValueInCodeList) {
