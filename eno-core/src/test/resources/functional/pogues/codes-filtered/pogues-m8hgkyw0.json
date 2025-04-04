@@ -98,12 +98,10 @@
           "codeFilters": [
             {
               "codeValue": "3",
-              "codeListId": "m8hggqii",
               "conditionFilter": "nvl($AGE$, 0) > 18"
             },
             {
               "codeValue": "4",
-              "codeListId": "m8hggqii",
               "conditionFilter": "nvl($AGE$, 0) > 50"
             }
           ],
@@ -141,7 +139,6 @@
           "codeFilters": [
             {
               "codeValue": "3",
-              "codeListId": "m8hggqii",
               "conditionFilter": "nvl($AGE$, 0) > 18"
             }
           ],
@@ -179,12 +176,10 @@
           "codeFilters": [
             {
               "codeValue": "3",
-              "codeListId": "m8hggqii",
               "conditionFilter": "nvl($AGE$, 0) > 18"
             },
             {
               "codeValue": "4",
-              "codeListId": "m8hggqii",
               "conditionFilter": "nvl($AGE$, 0) > 50"
             }
           ],
