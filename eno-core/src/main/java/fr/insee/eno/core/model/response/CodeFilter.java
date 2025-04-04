@@ -17,10 +17,6 @@ import lombok.Setter;
 @Context(format = Format.POGUES, type = fr.insee.pogues.model.CodeFilter.class)
 public class CodeFilter extends EnoObject {
 
-    /** Identifier of the reference code list. */
-    @Pogues("getCodeListId()")
-    String codeListId;
-
     /** Code value of the modality concerned by the filtering. */
     @Pogues("getCodeValue()")
     String codeValue;
