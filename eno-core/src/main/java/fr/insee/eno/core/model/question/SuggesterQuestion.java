@@ -30,4 +30,10 @@ public class SuggesterQuestion extends SingleResponseQuestion {
     @Lunatic("setArbitrary(#param)")
     private ArbitraryResponse arbitraryResponse;
 
+    /** Indicates whether the response is mandatory for this component. */
+    @DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
+            "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
+    @Lunatic("setMandatory(#param)")
+    boolean mandatory;
+
 }

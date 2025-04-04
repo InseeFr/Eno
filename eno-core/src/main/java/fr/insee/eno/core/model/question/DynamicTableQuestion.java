@@ -50,11 +50,6 @@ public class DynamicTableQuestion extends MultipleResponseQuestion implements En
     @Lunatic("setPositioning(#param)")
     private String positioning = "HORIZONTAL";
 
-    @DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
-            "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
-    @Lunatic("setMandatory(#param)")
-    boolean mandatory;
-
     /** Maximum number of lines of the dynamic table.
      * Note: In DDI, for some reason, if this information is missing in the xml file, the default value is 1.
      * In Lunatic, this property is set in a processing class.
