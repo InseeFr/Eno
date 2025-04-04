@@ -6,6 +6,7 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.navigation.Binding;
+import fr.insee.eno.core.model.response.CodeFilter;
 import fr.insee.eno.core.model.response.CodeResponse;
 import fr.insee.eno.core.model.response.DetailResponse;
 import fr.insee.eno.core.model.response.ModalityAttachment;
@@ -69,5 +70,11 @@ public class SimpleMultipleChoiceQuestion extends MultipleResponseQuestion {
      * This should be inserted by Lunatic-Model serializer later on. */
     @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     String lunaticComponentType = "CHECKBOX_GROUP";
+
+    /**
+     * List of conditions for the modalities to be filtered by previous responses or external data.
+     *  In Lunatic, they are inserted in code response objects through a processing. */
+    @Pogues("getCodeFilters()")
+    List<CodeFilter> codeFilters = new ArrayList<>();
 
 }

@@ -1,0 +1,389 @@
+{
+  "owner": "DR59-SNDI59",
+  "final": false,
+  "id": "m8hgkyw0",
+  "Label": [
+    "[LC] Modalités filtrées QCU & QCM"
+  ],
+  "Name": "LCMODALITS",
+  "lastUpdatedDate": "Thu Mar 20 2025 15:40:23 GMT+0100 (heure normale d’Europe centrale)",
+  "DataCollection": [],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "m8hg5145",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "m8hgcut0",
+        "m8hgkwpr",
+        "m8hgctb4",
+        "m8hg7uqd",
+        "m8hgrsnb",
+        "idendquest"
+      ]
+    }
+  ],
+  "agency": "fr.insee",
+  "TargetMode": [
+    "CAWI"
+  ],
+  "flowLogic": "FILTER",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": [],
+  "Child": [
+    {
+      "id": "m8hgcut0",
+      "depth": 1,
+      "Name": "S1",
+      "Label": [
+        "\"S1\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAWI"
+      ],
+      "type": "SequenceType",
+      "genericName": "MODULE",
+      "Child": [
+        {
+          "id": "m8hgkwpr",
+          "depth": 2,
+          "Name": "AGE",
+          "Label": [
+            "\"Age ?\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAWI"
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Response": [
+            {
+              "id": "m8hh1aj4",
+              "Datatype": {
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Minimum": "0",
+                "Maximum": "150",
+                "Decimals": "",
+                "IsDynamicUnit": false,
+                "Unit": "http://id.insee.fr/unit/an"
+              },
+              "CollectedVariableReference": "m8hgz508",
+              "mandatory": false
+            }
+          ]
+        },
+        {
+          "id": "m8hgctb4",
+          "depth": 2,
+          "Name": "RADIO_OUI_NON",
+          "Label": [
+            "\"RADIO: Oui ou non ?\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAWI"
+          ],
+          "codeFilters": [
+            {
+              "codeValue": "3",
+              "conditionFilter": "nvl($AGE$, 0) > 18"
+            },
+            {
+              "codeValue": "4",
+              "conditionFilter": "nvl($AGE$, 0) > 50"
+            }
+          ],
+          "ClarificationQuestion": [],
+          "type": "QuestionType",
+          "questionType": "SINGLE_CHOICE",
+          "Response": [
+            {
+              "id": "m8hgkgmn",
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "visualizationHint": "RADIO",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "m8hg8eox",
+              "CodeListReference": "m8hggqii",
+              "mandatory": false
+            }
+          ]
+        },
+        {
+          "id": "m8hg7uqd",
+          "depth": 2,
+          "Name": "DROPDOWN_OUI_NON",
+          "Label": [
+            "\"DROPDOWN: Oui ou non ?\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAWI"
+          ],
+          "codeFilters": [
+            {
+              "codeValue": "3",
+              "conditionFilter": "nvl($AGE$, 0) > 18"
+            }
+          ],
+          "ClarificationQuestion": [],
+          "type": "QuestionType",
+          "questionType": "SINGLE_CHOICE",
+          "Response": [
+            {
+              "id": "m8hgibu9",
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "visualizationHint": "DROPDOWN",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "m8hghi0c",
+              "CodeListReference": "m8hggqii",
+              "mandatory": false
+            }
+          ]
+        },
+        {
+          "id": "m8hgrsnb",
+          "depth": 2,
+          "Name": "CHEXBOXMULTI_OUI_NON",
+          "Label": [
+            "\"CHEXBOXMULTI: Oui ou non ?\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAWI"
+          ],
+          "codeFilters": [
+            {
+              "codeValue": "3",
+              "conditionFilter": "nvl($AGE$, 0) > 18"
+            },
+            {
+              "codeValue": "4",
+              "conditionFilter": "nvl($AGE$, 0) > 50"
+            }
+          ],
+          "ClarificationQuestion": [],
+          "type": "QuestionType",
+          "questionType": "MULTIPLE_CHOICE",
+          "ResponseStructure": {
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "CodeListReference": "m8hggqii",
+                "dynamic": "NON_DYNAMIC"
+              },
+              {
+                "dimensionType": "MEASURE"
+              }
+            ],
+            "Mapping": [
+              {
+                "MappingSource": "m8hgmxip",
+                "MappingTarget": "1"
+              },
+              {
+                "MappingSource": "m8hgx6hf",
+                "MappingTarget": "2"
+              },
+              {
+                "MappingSource": "m8hgrls2",
+                "MappingTarget": "3"
+              },
+              {
+                "MappingSource": "m8hh5b2o",
+                "MappingTarget": "4"
+              }
+            ],
+            "Attribute": []
+          },
+          "Response": [
+            {
+              "id": "m8hgmxip",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "m8hggd46"
+            },
+            {
+              "id": "m8hgx6hf",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "m8hge6n1"
+            },
+            {
+              "id": "m8hgrls2",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "m8hgwtsb"
+            },
+            {
+              "id": "m8hh5b2o",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "m8hgdo74"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "idendquest",
+      "depth": 1,
+      "Name": "QUESTIONNAIRE_END",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "Declaration": [],
+      "genericName": "MODULE",
+      "Control": [],
+      "FlowControl": [],
+      "type": "SequenceType",
+      "Child": [],
+      "TargetMode": [
+        "CAWI"
+      ]
+    }
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "id": "m8hggqii",
+        "Label": "Oui / non",
+        "Code": [
+          {
+            "Label": "\"Oui\"",
+            "Value": "1",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Non\"",
+            "Value": "2",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Peut-être\"",
+            "Value": "3",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Mais encore...\"",
+            "Value": "4",
+            "Parent": ""
+          }
+        ]
+      }
+    ]
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "m8hg8eox",
+        "Name": "RADIO_OUI_NON",
+        "Label": "RADIO_OUI_NON label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        },
+        "CodeListReference": "m8hggqii"
+      },
+      {
+        "id": "m8hghi0c",
+        "Name": "DROPDOWN_OUI_NON",
+        "Label": "DROPDOWN_OUI_NON label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        },
+        "CodeListReference": "m8hggqii"
+      },
+      {
+        "id": "m8hggd46",
+        "Name": "CHEXBOXMULTI_OUI_NON1",
+        "Label": "1 - \"Oui\"",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "id": "m8hge6n1",
+        "Name": "CHEXBOXMULTI_OUI_NON2",
+        "Label": "2 - \"Non\"",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "id": "m8hgwtsb",
+        "Name": "CHEXBOXMULTI_OUI_NON3",
+        "Label": "3 - \"Peut-être\"",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "id": "m8hgdo74",
+        "Name": "CHEXBOXMULTI_OUI_NON4",
+        "Label": "4 - \"Mais encore...\"",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "id": "m8hgz508",
+        "Name": "AGE",
+        "Label": "AGE label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Minimum": "0",
+          "Maximum": "150",
+          "Decimals": "",
+          "IsDynamicUnit": false,
+          "Unit": "http://id.insee.fr/unit/an"
+        }
+      }
+    ]
+  },
+  "FlowControl": []
+}
