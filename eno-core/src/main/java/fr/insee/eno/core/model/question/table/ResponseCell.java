@@ -1,13 +1,16 @@
 package fr.insee.eno.core.model.question.table;
 
+import fr.insee.eno.core.annotations.Contexts;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoObjectWithId;
+import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.lunatic.model.flat.BodyCell;
 import fr.insee.pogues.model.ResponseType;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Context(format = Format.POGUES, type = ResponseType.class)
+@Contexts.Context(format = Format.LUNATIC, type = BodyCell.class)
 public abstract class ResponseCell extends EnoObject implements TableCell, EnoObjectWithId {
 
     /** Source parameter id from DDI **/
@@ -38,5 +42,9 @@ public abstract class ResponseCell extends EnoObject implements TableCell, EnoOb
     @Pogues("#this")
     @Lunatic("setResponse(#param)")
     Response response;
+
+    @Pogues("T(fr.insee.eno.core.utils.PoguesUtils).convertPoguesFilterToComponentFilter(getConditionFilter())")
+    @Lunatic("setConditionFilter(#param)")
+    private ComponentFilter componentFilter;
 
 }
