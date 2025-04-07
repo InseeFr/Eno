@@ -43,7 +43,7 @@ public abstract class ResponseCell extends EnoObject implements TableCell, EnoOb
     @Lunatic("setResponse(#param)")
     Response response;
 
-    @Pogues("T(fr.insee.eno.core.utils.PoguesUtils).convertPoguesFilterToComponentFilter(getConditionFilter())")
+    @Pogues("getConditionFilter()")
     @Lunatic("setConditionFilter(#param)")
     private ComponentFilter componentFilter;
 

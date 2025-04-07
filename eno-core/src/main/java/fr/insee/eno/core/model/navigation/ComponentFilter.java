@@ -2,6 +2,7 @@ package fr.insee.eno.core.model.navigation;
 
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.parameter.Format;
@@ -16,6 +17,7 @@ import java.util.List;
 /** Class that is very similar to the calculatedExpression class, designed to map the "conditionFilter"
  * property in Lunatic components.
  * The class contain methods to concatenate expressions that come from filters. */
+@Context(format = Format.POGUES, type = String.class)
 @Context(format = Format.LUNATIC, type = ConditionFilterType.class)
 public class ComponentFilter extends EnoObject {
 
@@ -23,6 +25,7 @@ public class ComponentFilter extends EnoObject {
 
     /** Expression initialized with the default value. */
     @Getter @Setter
+    @Pogues("T(fr.insee.eno.core.model.calculated.CalculatedExpression).removeSurroundingDollarSigns(#this)")
     @Lunatic("setValue(#param)")
     private String value = DEFAULT_FILTER_VALUE;
 
@@ -77,4 +80,12 @@ public class ComponentFilter extends EnoObject {
         this.getBindingReferences().addAll(filter.getExpression().getBindingReferences());
     }
 
+    @Override
+    public String toString() {
+        return "ComponentFilter{" +
+                "value='" + value + '\'' +
+                ", isValueAtDefault=" + isValueAtDefault +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }
