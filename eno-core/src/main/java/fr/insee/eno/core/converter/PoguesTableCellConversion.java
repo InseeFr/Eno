@@ -5,6 +5,8 @@ import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.question.table.*;
 import fr.insee.pogues.model.DatatypeTypeEnum;
 import fr.insee.pogues.model.ResponseType;
+import fr.insee.pogues.model.VisualizationHintEnum;
+
 
 class PoguesTableCellConversion {
 
@@ -17,9 +19,12 @@ class PoguesTableCellConversion {
                 return new NumericCell();
             }
             case TEXT -> {
-                if (poguesResponse.getCodeListReference() != null)
-                    // TODO: fix me, I can be SuggesterCell
+                if (poguesResponse.getCodeListReference() != null) {
+                    if (VisualizationHintEnum.SUGGESTER.equals(poguesResponse.getDatatype().getVisualizationHint())) {
+                        return new SuggesterCell();
+                    }
                     return new UniqueChoiceCell();
+                }
                 return new TextCell();
             }
             case DATE -> {
