@@ -25,7 +25,8 @@ public class ComponentFilter extends EnoObject {
 
     /** Expression initialized with the default value. */
     @Getter @Setter
-    @Pogues("T(fr.insee.eno.core.model.calculated.CalculatedExpression).removeSurroundingDollarSigns(#this)")
+    @Pogues("T(fr.insee.eno.core.model.calculated.CalculatedExpression)" +
+            ".removeSurroundingDollarSigns(#this)")
     @Lunatic("setValue(#param)")
     private String value = DEFAULT_FILTER_VALUE;
 
@@ -39,6 +40,8 @@ public class ComponentFilter extends EnoObject {
     String type = LabelTypeEnum.VTL.value();
 
     @Getter
+    @Pogues("T(fr.insee.eno.core.model.calculated.CalculatedExpression)" +
+            ".extractBindingReferences(#this, #poguesIndex)")
     private final List<BindingReference> bindingReferences = new ArrayList<>();
 
     @Getter
