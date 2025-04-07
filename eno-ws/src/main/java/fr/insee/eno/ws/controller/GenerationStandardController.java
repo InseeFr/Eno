@@ -9,6 +9,7 @@ import fr.insee.eno.ws.exception.*;
 import fr.insee.eno.ws.legacy.parameters.CaptureEnum;
 import fr.insee.eno.ws.service.*;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -48,13 +49,16 @@ public class GenerationStandardController {
             @RequestPart(value="in") MultipartFile poguesFile,
             @RequestPart(value="specificTreatment", required = false) MultipartFile specificTreatment,
             @PathVariable Context context,
-            @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter)
+            @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter,
+            @Parameter(description = "Temporary parameter for question wrapping, may be removed in future versions.")
+            @RequestParam(defaultValue = "true") boolean questionWrapping)
             throws ModeParameterException, DDIToLunaticException, EnoControllerException, IOException {
         //
         if (EnoParameters.ModeParameter.PAPI.equals(modeParameter))
             throw new ModeParameterException("Lunatic format is not compatible with the mode 'PAPER'.");
         //
         EnoParameters enoParameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
+        enoParameters.getLunaticParameters().setQuestionWrapping(questionWrapping);
         //
         LunaticPostProcessing lunaticPostProcessing = specificTreatmentsService.generateFrom(specificTreatment);
         //
@@ -75,13 +79,16 @@ public class GenerationStandardController {
             @RequestPart(value="in") MultipartFile ddiFile,
             @RequestPart(value="specificTreatment", required = false) MultipartFile specificTreatment,
             @PathVariable Context context,
-            @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter)
+            @PathVariable(name = "mode") EnoParameters.ModeParameter modeParameter,
+            @Parameter(description = "Temporary parameter for question wrapping, may be removed in future versions.")
+            @RequestParam(defaultValue = "true") boolean questionWrapping)
             throws ModeParameterException, DDIToLunaticException, EnoControllerException, IOException {
         //
         if (EnoParameters.ModeParameter.PAPI.equals(modeParameter))
             throw new ModeParameterException("Lunatic format is not compatible with the mode 'PAPER'.");
         //
         EnoParameters enoParameters = EnoParameters.of(context, modeParameter, Format.LUNATIC);
+        enoParameters.getLunaticParameters().setQuestionWrapping(questionWrapping);
         //
         LunaticPostProcessing lunaticPostProcessing = specificTreatmentsService.generateFrom(specificTreatment);
         //

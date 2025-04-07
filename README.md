@@ -58,13 +58,13 @@ with your proxy information:
 systemProp.http.proxyHost=www.somehost.org
 systemProp.http.proxyPort=8080
 systemProp.http.proxyUser=userid
-systemProp.http.proxyPassword=password
+systemProp.http.proxyPassword=
 systemProp.http.nonProxyHosts=*.nonproxyrepos.com|localhost
 # HTTPS
 systemProp.https.proxyHost=www.somehost.org
 systemProp.https.proxyPort=8080
 systemProp.https.proxyUser=userid
-systemProp.https.proxyPassword=password
+systemProp.https.proxyPassword=
 # Non proxy hosts
 systemProp.http.nonProxyHosts=*.nonproxyrepos.com|localhost
 ```

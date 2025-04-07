@@ -31,6 +31,7 @@ public class DurationQuestion extends SingleResponseQuestion {
             "getResponseDomain().getRangeArray(0)?.getMinimumValue()?.getStringValue() : " +
             "#index.get(#this.getResponseDomainReference().getIDArray(0).getStringValue())" +
             ".getRangeArray(0)?.getMinimumValue()?.getStringValue()")
+    @Lunatic("setMin(#param)")
     private String minValue;
 
     /**
@@ -42,6 +43,7 @@ public class DurationQuestion extends SingleResponseQuestion {
             "getResponseDomain().getRangeArray(0)?.getMaximumValue()?.getStringValue() : " +
             "#index.get(#this.getResponseDomainReference().getIDArray(0).getStringValue())" +
             ".getRangeArray(0)?.getMaximumValue()?.getStringValue()")
+    @Lunatic("setMax(#param)")
     private String maxValue;
 
     /**

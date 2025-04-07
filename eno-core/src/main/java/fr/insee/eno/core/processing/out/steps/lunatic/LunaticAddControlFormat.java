@@ -1,21 +1,12 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
-import fr.insee.eno.core.exceptions.business.InvalidValueException;
-import fr.insee.eno.core.exceptions.business.RequiredPropertyException;
-import fr.insee.eno.core.i18n.date.DateFormatter;
-import fr.insee.eno.core.model.question.DateQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.ProcessingStep;
+import fr.insee.eno.core.processing.out.steps.lunatic.control.*;
 import fr.insee.lunatic.model.flat.*;
-import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 /**
  * Processing adding format controls to components
@@ -24,15 +15,16 @@ import java.util.Optional;
 @Slf4j
 public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
 
-    private final DateFormatter dateFormatter;
+    private final EnoParameters.Language language;
 
-    /** Using french as default value for date formatting. */
+    /** Using french as default value.
+     * Note: for the moment, not all messages are internationalised. */
     public LunaticAddControlFormat() {
-        dateFormatter = DateFormatter.Factory.forLanguage(EnoParameters.Language.FR);
+        this.language = EnoParameters.Language.FR;
     }
 
     public LunaticAddControlFormat(EnoParameters.Language language) {
-        dateFormatter = DateFormatter.Factory.forLanguage(language);
+        this.language = language;
     }
 
     /**
@@ -47,276 +39,34 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
         components
                 .forEach(componentType -> {
                     if(componentType instanceof ComponentNestingType componentNesting) {
-                        processComponents(componentNesting.getComponents());
+                        processComponents(componentNesting.getComponents()); // recursive call
                         return;
                     }
 
                     if(componentType instanceof Table table) {
-                        createFormatControlsForTable(table);
+                        new LunaticTableControls().insertFormatControls(table);
                         return;
                     }
 
                     if(componentType instanceof RosterForLoop roster) {
-                        createFormatControlsForRoster(roster);
+                        new LunaticRosterControl().insertFormatControls(roster);
                         return;
                     }
 
                     if(componentType instanceof InputNumber number) {
-                        createFormatControlsForInputNumber(number);
+                        new LunaticInputNumberControl().insertFormatControls(number);
                         return;
                     }
 
                     if(componentType instanceof Datepicker datepicker) {
-                        createFormatControlsForDatepicker(datepicker);
+                        new LunaticDatepickerControl(language).insertFormatControls(datepicker);
+                        return;
+                    }
+
+                    if (componentType instanceof Duration duration){
+                        new LunaticDurationControl().insertFormatControls(duration);
                     }
                 });
     }
 
-    private void createFormatControlsForTable(Table table) {
-        List<ControlType> controls = table.getControls();
-        for(BodyLine bodyLine : table.getBodyLines()) {
-            controls.addAll(0, getFormatControlsForBodyCells(bodyLine.getBodyCells()));
-        }
-    }
-
-    private void createFormatControlsForRoster(RosterForLoop roster) {
-        List<ControlType> controls = getFormatControlsForBodyCells(roster.getComponents());
-
-        // The format controls of a roster for loop (dynamic table) are row-level controls
-        controls.forEach(control -> control.setType(ControlContextType.ROW));
-
-        roster.getControls().addAll(0, controls);
-    }
-
-    private List<ControlType> getFormatControlsForBodyCells(List<BodyCell> bodyCells) {
-        List<ControlType> controls = new ArrayList<>();
-
-        bodyCells.stream()
-                .filter(Objects::nonNull)
-                .forEach(bodyCell -> {
-                    if(ComponentTypeEnum.INPUT_NUMBER.equals(bodyCell.getComponentType())) {
-                        controls.addAll(
-                            getFormatControlsFromInputNumberAttributes(bodyCell.getId(), bodyCell.getMin(), bodyCell.getMax(),
-                                    bodyCell.getDecimals().intValue(), bodyCell.getResponse().getName())
-                        );
-                    }
-
-                    // TODO: Implements date pickers components correctly in tables/rosters
-                    /*
-                    if(ComponentTypeEnum.DATEPICKER.equals(bodyCell.getComponentType())) {
-                        controls.add(
-                                getFormatControlFromDatepickerAttributes(bodyCell.getId(), bodyCell.getMin(), bodyCell.getMax(),
-                                        bodyCell.getDecimals().intValue(), bodyCell.getResponse().getName()));
-                    }*/
-        });
-        return controls;
-    }
-
-    // TODO: internationalization of the generated messages
-
-    /**
-     * Create controls for an input number component
-     * @param number input number to process
-     */
-    private void createFormatControlsForInputNumber(InputNumber number) {
-        number.getControls().addAll(0, getFormatControlsFromInputNumberAttributes(number.getId(),
-                number.getMin(), number.getMax(), number.getDecimals().intValue(), number.getResponse().getName()));
-    }
-
-    /**
-     * Create controls from input number attributes
-     * @param id input number id
-     * @param min min value
-     * @param max max value
-     * @param decimalsCount number of decimals allowed
-     * @param responseName input number reponse attribute
-     */
-    private List<ControlType> getFormatControlsFromInputNumberAttributes(String id, Double min, Double max, int decimalsCount, String responseName) {
-        String controlIdPrefix = id + "-format";
-        List<ControlType> controls = new ArrayList<>();
-
-        if(min != null && max != null) {
-            String minValue = formatDoubleValue(min, decimalsCount);
-            String maxValue = formatDoubleValue(max, decimalsCount);
-            String controlExpression = String.format("not(not(isnull(%s)) and (%s>%s or %s<%s))", responseName, minValue, responseName, maxValue, responseName);
-            String controlErrorMessage = String.format("\" La valeur doit être comprise entre %s et %s.\"", minValue, maxValue);
-            controls.addFirst(createFormatControl(controlIdPrefix+"-borne-inf-sup", controlExpression, controlErrorMessage));
-        }
-
-        if(min == null && max != null) {
-            String maxValue = formatDoubleValue(max, decimalsCount);
-            String controlExpression = String.format("not(not(isnull(%s)) and %s<%s)", responseName, maxValue, responseName);
-            String controlErrorMessage = String.format("\" La valeur doit être inférieure à %s.\"", maxValue);
-            controls.addFirst(createFormatControl(controlIdPrefix+"-borne-sup", controlExpression, controlErrorMessage));
-        }
-
-        if(min != null && max == null) {
-            String minValue = formatDoubleValue(min, decimalsCount);
-            String controlExpression = String.format("not(not(isnull(%s)) and %s>%s)", responseName, minValue, responseName);
-            String controlErrorMessage = String.format("\" La valeur doit être supérieure à %s.\"", minValue);
-            controls.addFirst(createFormatControl(controlIdPrefix+"-borne-inf", controlExpression, controlErrorMessage));
-        }
-
-        controls.add(createDecimalsFormatControl(controlIdPrefix, responseName, decimalsCount));
-        return controls;
-    }
-
-    /**
-     * Create controls for a date picker component
-     * @param datepicker date picker to process
-     */
-    private void createFormatControlsForDatepicker(Datepicker datepicker) {
-        String id = datepicker.getId();
-        String minValue = datepicker.getMin();
-        String maxValue = datepicker.getMax();
-        String format = datepicker.getDateFormat();
-        String responseName = datepicker.getResponse().getName();
-
-        List<ControlType> controls = datepicker.getControls();
-
-        Optional<ControlType> controlYearFormat = generateDatepickerYearControl(id, format, responseName);
-        Optional<ControlType> controlBounds = getFormatControlFromDatepickerAttributes(id, minValue, maxValue, format, responseName);
-        controlBounds.ifPresent(controls::addFirst);
-        controlYearFormat.ifPresent(controls::addFirst);
-        // Note: it's important that the year format is added in first position, since in some cases only the message
-        // of the first control is displayed.
-    }
-
-    private Optional<DateFormatter.Result> validateAndConvertDate(String date, @NonNull String format) {
-        if (date == null)
-            return Optional.empty(); // The min/max date properties can eventually be null (not 'required' in Pogues)
-        DateFormatter.Result result = switch (format) {
-            case DateQuestion.YEAR_MONTH_DAY_FORMAT -> dateFormatter.convertYearMontDayDate(date);
-            case DateQuestion.YEAR_MONTH_FORMAT -> dateFormatter.convertYearMontDate(date);
-            case DateQuestion.YEAR_FORMAT -> dateFormatter.convertYearDate(date);
-            default -> throw new InvalidValueException("Date format '" + format + "' is invalid.");
-        };
-        return Optional.of(result);
-    }
-
-    /**
-     * Create controls from date picker attributes
-     * @param id date picker id
-     * @param minValue min value
-     * @param maxValue max value
-     * @param format format string
-     * @param responseName date picker response attribute
-     */
-    private Optional<ControlType> getFormatControlFromDatepickerAttributes(String id, String minValue, String maxValue, String format, String responseName) {
-        if (format == null)
-            throw new RequiredPropertyException("Format is missing in date question '" + id + "'");
-
-        String controlIdPrefix = id + "-format-date";
-
-        Optional<DateFormatter.Result> formattedMinValue = validateAndConvertDate(minValue, format);
-        if (formattedMinValue.isPresent() && !formattedMinValue.get().isValid()) {
-            String message = "Invalid value for min date of question '" + id + "': " + formattedMinValue.get().errorMessage();
-            log.error(message);
-            throw new InvalidValueException(message);
-        }
-        Optional<DateFormatter.Result> formattedMaxValue = validateAndConvertDate(maxValue, format);
-        if (formattedMaxValue.isPresent() && !formattedMaxValue.get().isValid()) {
-            // Due to a bug in the Pogues -> DDI transformation, an invalid max date doesn't throw an exception for now
-            log.warn("Invalid value for max date of question '" + id + "': " + maxValue);
-        }
-
-        boolean generateMin = formattedMinValue.isPresent(); // always valid when reached
-        boolean generateMax = formattedMaxValue.isPresent() && formattedMaxValue.get().isValid(); // can be invalid
-
-        if (generateMin && generateMax) {
-            String controlExpression = String.format(
-                    "not(not(isnull(%s)) and " +
-                            "(cast(%s, date, \"%s\")<cast(\"%s\", date, \"%s\") or " +
-                            "cast(%s, date, \"%s\")>cast(\"%s\", date, \"%s\")))",
-                    responseName, responseName, format, minValue, format, responseName, format, maxValue, format
-            );
-            String controlErrorMessage = String.format(
-                    "\"La date saisie doit être comprise entre %s et %s.\"",
-                    formattedMinValue.get().value(), formattedMaxValue.get().value()
-            );
-            return Optional.of(createFormatControl(controlIdPrefix + "-borne-inf-sup", controlExpression, controlErrorMessage));
-        }
-
-        if (generateMax) {
-            String controlExpression = String.format(
-                    "not(not(isnull(%s)) and (cast(%s, date, \"%s\")>cast(\"%s\", date, \"%s\")))",
-                    responseName, responseName, format, maxValue, format
-            );
-            String controlErrorMessage = String.format(
-                    "\"La date saisie doit être antérieure à %s.\"",
-                    formattedMaxValue.get().value()
-            );
-            return Optional.of(createFormatControl(controlIdPrefix + "-borne-sup", controlExpression, controlErrorMessage));
-        }
-
-        if (generateMin) {
-            String controlExpression = String.format(
-                    "not(not(isnull(%s)) and (cast(%s, date, \"%s\")<cast(\"%s\", date, \"%s\")))",
-                    responseName, responseName, format, minValue, format
-            );
-            String controlErrorMessage = String.format(
-                    "\"La date saisie doit être postérieure à %s.\"",
-                    formattedMinValue.get().value()
-            );
-            return Optional.of(createFormatControl(controlIdPrefix + "-borne-inf", controlExpression, controlErrorMessage));
-        }
-
-        return Optional.empty();
-    }
-    private Optional<ControlType> generateDatepickerYearControl(String id, String format, String responseName) {
-        if (format == null || !format.contains("YYYY")) {
-            log.warn("Datepicker '{}' (id={}) format is {} which doesn't have the year (YYYY).",
-                    responseName, id, format);
-            return Optional.empty();
-        }
-        String controlId = id + "-format-year";
-        String expression = String.format("not(not(isnull(%s)) and (" +
-                        "cast(cast(cast(%s, date, \"%s\"), string, \"YYYY\"), integer) <= 999 or " +
-                        "cast(cast(cast(%s, date, \"%s\"), string, \"YYYY\"), integer) > 9999))",
-                responseName, responseName, format, responseName, format);
-        String message = "\"L'année doit être saisie avec 4 chiffres.\"";
-        return Optional.of(createFormatControl(controlId, expression, message));
-    }
-
-    /**
-     *
-     * @param controlId control id
-     * @param responseName component response name
-     * @param decimalsCount decimals count allowed after semicolon
-     * @return control for a decimal count
-     */
-    private ControlType createDecimalsFormatControl(String controlId, String responseName, int decimalsCount) {
-        String controlExpression = String.format("not(not(isnull(%s))  and round(%s,%d)<>%s)", responseName, responseName, decimalsCount, responseName);
-        String controlErrorMessage = String.format("\"Le nombre doit comporter au maximum %d chiffre(s) après la virgule.\"", decimalsCount);
-        return createFormatControl(controlId+"-decimal", controlExpression, controlErrorMessage);
-    }
-
-    /**
-     *
-     * @param id control id
-     * @param controlExpression vtl expression for the control
-     * @param controlErrorMessage error message for the control
-     * @return a control format
-     */
-    private ControlType createFormatControl(String id, String controlExpression, String controlErrorMessage) {
-        ControlType control = new ControlType();
-        control.setTypeOfControl(ControlTypeEnum.FORMAT);
-        control.setId(id);
-        control.setCriticality(ControlCriticalityEnum.ERROR);
-
-        LabelType controlLabel = new LabelType();
-        controlLabel.setType(LabelTypeEnum.VTL);
-        controlLabel.setValue(controlExpression);
-        control.setControl(controlLabel);
-
-        LabelType controlErrorLabel = new LabelType();
-        controlErrorLabel.setType(LabelTypeEnum.VTL_MD);
-        controlErrorLabel.setValue(controlErrorMessage);
-        control.setErrorMessage(controlErrorLabel);
-        return control;
-    }
-    
-    private String formatDoubleValue(Double value, int decimalCount) {
-        return BigDecimal.valueOf(value).setScale(decimalCount, RoundingMode.CEILING).toPlainString();
-    }
 }

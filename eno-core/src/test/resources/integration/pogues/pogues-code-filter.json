@@ -1,0 +1,979 @@
+{
+  "id": "m8wuv78g",
+  "Name": "ENO_CODE_FILTER",
+  "Child": [
+    {
+      "id": "m8wuuw90",
+      "Name": "S1",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m8x1vk55",
+          "Name": "AGE",
+          "type": "QuestionType",
+          "Label": [
+            "\"Age\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m8x2l26e",
+              "Datatype": {
+                "Unit": "",
+                "type": "NumericDatatypeType",
+                "Maximum": 140,
+                "Minimum": 0,
+                "typeName": "NUMERIC",
+                "IsDynamicUnit": false
+              },
+              "mandatory": false,
+              "CollectedVariableReference": "m8x1p2hx"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SIMPLE"
+        },
+        {
+          "id": "m8wzyam9",
+          "Name": "UCQ1_RADIO",
+          "type": "QuestionType",
+          "Label": [
+            "\"Unique choice question (radio)\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m8x2j0ey",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "typeName": "TEXT",
+                "MaxLength": 1,
+                "visualizationHint": "RADIO"
+              },
+              "mandatory": false,
+              "CodeListReference": "m8wuyfhj",
+              "CollectedVariableReference": "m8x2j75g"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "id": "m8x1r5r1",
+              "Text": "\"'Baz' modality is filtered if AGE < 18\"",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CAWI",
+                "CATI",
+                "PAPI"
+              ],
+              "declarationType": "HELP"
+            }
+          ],
+          "FlowControl": [],
+          "questionType": "SINGLE_CHOICE",
+          "codeFilters": [
+            {
+              "codeValue": "3",
+              "conditionFilter": "nvl($AGE$, 0) > 18"
+            }
+          ],
+          "ClarificationQuestion": []
+        },
+        {
+          "id": "m8x0j2y7",
+          "Name": "UCQ1_DROPDOWN",
+          "type": "QuestionType",
+          "Label": [
+            "\"Unique choice question (dropdown)\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m8x2ti9t",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "typeName": "TEXT",
+                "MaxLength": 1,
+                "visualizationHint": "DROPDOWN"
+              },
+              "mandatory": false,
+              "CodeListReference": "m8wuyfhj",
+              "CollectedVariableReference": "m8x2aqqm"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "id": "m8x1n1yj",
+              "Text": "\"'Baz' modality is filtered if AGE < 18\"",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CAWI",
+                "CATI",
+                "PAPI"
+              ],
+              "declarationType": "HELP"
+            }
+          ],
+          "FlowControl": [],
+          "questionType": "SINGLE_CHOICE",
+          "codeFilters": [
+            {
+              "codeValue": "3",
+              "conditionFilter": "nvl($AGE$, 0) > 18"
+            }
+          ],
+          "ClarificationQuestion": []
+        },
+        {
+          "id": "m8x0tvs6",
+          "Name": "MCQ1",
+          "type": "QuestionType",
+          "Label": [
+            "\"Multiple choice question\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m8x2fu4a",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "m8x26fa6"
+            },
+            {
+              "id": "m8x2km20",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "m8x22cr5"
+            },
+            {
+              "id": "m8x2u56m",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "m8x2l366"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Declaration": [
+            {
+              "id": "m8x20p0i",
+              "Text": "\"'Baz' modality is filtered if AGE < 18\"",
+              "position": "AFTER_QUESTION_TEXT",
+              "DeclarationMode": [
+                "CAPI",
+                "CAWI",
+                "CATI",
+                "PAPI"
+              ],
+              "declarationType": "HELP"
+            }
+          ],
+          "FlowControl": [],
+          "questionType": "MULTIPLE_CHOICE",
+          "ResponseStructure": {
+            "Mapping": [
+              {
+                "MappingSource": "m8x2fu4a",
+                "MappingTarget": "1"
+              },
+              {
+                "MappingSource": "m8x2km20",
+                "MappingTarget": "2"
+              },
+              {
+                "MappingSource": "m8x2u56m",
+                "MappingTarget": "3"
+              }
+            ],
+            "Attribute": [],
+            "Dimension": [
+              {
+                "dynamic": "NON_DYNAMIC",
+                "dimensionType": "PRIMARY",
+                "CodeListReference": "m8wuyfhj"
+              },
+              {
+                "dimensionType": "MEASURE"
+              }
+            ]
+          },
+          "codeFilters": [
+            {
+              "codeValue": "3",
+              "conditionFilter": "nvl($AGE$, 0) > 18"
+            }
+          ],
+          "ClarificationQuestion": []
+        }
+      ],
+      "Label": [
+        "\"Sequence 1\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "id": "m8x2dwa5",
+          "Text": "\"Filtered modalities using a simple question response\"",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "declarationType": "HELP"
+        }
+      ],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "m8x2lrgf",
+      "Name": "S2",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m8x2ofib",
+          "Name": "MCQ2",
+          "type": "QuestionType",
+          "Label": [
+            "\"Multiple choice question (no filter)\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m8x2v96v",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "m8x2d78g"
+            },
+            {
+              "id": "m8x2izl6",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "m8x26nhi"
+            },
+            {
+              "id": "m8x2kisy",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "m8x2ispn"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "MULTIPLE_CHOICE",
+          "ResponseStructure": {
+            "Mapping": [
+              {
+                "MappingSource": "m8x2v96v",
+                "MappingTarget": "1"
+              },
+              {
+                "MappingSource": "m8x2izl6",
+                "MappingTarget": "2"
+              },
+              {
+                "MappingSource": "m8x2kisy",
+                "MappingTarget": "3"
+              }
+            ],
+            "Attribute": [],
+            "Dimension": [
+              {
+                "dynamic": "NON_DYNAMIC",
+                "dimensionType": "PRIMARY",
+                "CodeListReference": "m8wuyfhj"
+              },
+              {
+                "dimensionType": "MEASURE"
+              }
+            ]
+          },
+          "ClarificationQuestion": []
+        },
+        {
+          "id": "m8x2g04j",
+          "Name": "UCQ2",
+          "type": "QuestionType",
+          "Label": [
+            "\"Which of these is your favourite?\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m8x2c6ko",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "typeName": "TEXT",
+                "MaxLength": 1,
+                "visualizationHint": "RADIO"
+              },
+              "mandatory": false,
+              "CodeListReference": "m8wuyfhj",
+              "CollectedVariableReference": "m8x2ares"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SINGLE_CHOICE",
+          "codeFilters": [
+            {
+              "codeValue": "1",
+              "conditionFilter": "$MCQ21$"
+            },
+            {
+              "codeValue": "2",
+              "conditionFilter": "$MCQ22$"
+            },
+            {
+              "codeValue": "3",
+              "conditionFilter": "$MCQ23$"
+            }
+          ],
+          "ClarificationQuestion": []
+        }
+      ],
+      "Label": [
+        "\"Sequence 2\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "id": "m8x2g15f",
+          "Text": "\"Filtered modalities using another choice question response, with the same code list.\"",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "declarationType": "HELP"
+        }
+      ],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "m8x2cgvf",
+      "Name": "S3",
+      "type": "SequenceType",
+      "Child": [
+        {
+          "id": "m8x2mpa8",
+          "Name": "YES_NO",
+          "type": "QuestionType",
+          "Label": [
+            "\"Activate filter on the 'please, specify' modality?\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m8x3irym",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "typeName": "TEXT",
+                "MaxLength": 1,
+                "visualizationHint": "RADIO"
+              },
+              "mandatory": false,
+              "CodeListReference": "m8x2rrtz",
+              "CollectedVariableReference": "m8x2t879"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [],
+          "questionType": "SINGLE_CHOICE",
+          "ClarificationQuestion": []
+        },
+        {
+          "id": "m8x2pwdr",
+          "Name": "UCQ3",
+          "type": "QuestionType",
+          "Label": [
+            "\"Unique choice question with detail on 'Baz' (if not filtered)\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m8x2u4ol",
+              "Datatype": {
+                "type": "TextDatatypeType",
+                "typeName": "TEXT",
+                "MaxLength": 1,
+                "visualizationHint": "RADIO"
+              },
+              "mandatory": false,
+              "CodeListReference": "m8wuyfhj",
+              "CollectedVariableReference": "m8x2sucy"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [
+            {
+              "id": "m8x2ij2s",
+              "IfTrue": "m8x2hfja",
+              "Expression": "$UCQ3$ = '3'",
+              "Description": "$UCQ3$ = '3' : UCQ33CL",
+              "flowControlType": "CLARIFICATION"
+            }
+          ],
+          "questionType": "SINGLE_CHOICE",
+          "codeFilters": [
+            {
+              "codeValue": "3",
+              "conditionFilter": "$YES_NO$ = \"2\""
+            }
+          ],
+          "ClarificationQuestion": [
+            {
+              "id": "m8x2hfja",
+              "Name": "UCQ33CL",
+              "Label": "\"Please, specify: \"",
+              "Response": [
+                {
+                  "id": "m8x2jiyr",
+                  "Datatype": {
+                    "type": "TextDatatypeType",
+                    "typeName": "TEXT",
+                    "MaxLength": 249
+                  },
+                  "mandatory": false,
+                  "CollectedVariableReference": "m8x2oo9p"
+                }
+              ],
+              "TargetMode": [
+                "CAPI",
+                "CAWI",
+                "CATI",
+                "PAPI"
+              ],
+              "questionType": "SIMPLE"
+            }
+          ]
+        },
+        {
+          "id": "m8x2wm3z",
+          "Name": "MCQ3",
+          "type": "QuestionType",
+          "Label": [
+            "\"Multiple choice question with detail on 'Baz' (if not filtered)\""
+          ],
+          "depth": 2,
+          "Control": [],
+          "Response": [
+            {
+              "id": "m8x3um7d",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "m8x2t214"
+            },
+            {
+              "id": "m8x3dkwi",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "m8x2x0rq"
+            },
+            {
+              "id": "m8x3ohka",
+              "Datatype": {
+                "type": "BooleanDatatypeType",
+                "typeName": "BOOLEAN"
+              },
+              "CollectedVariableReference": "m8x2nq7y"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Declaration": [],
+          "FlowControl": [
+            {
+              "id": "m8x3g3x0",
+              "IfTrue": "m8x3t4aq",
+              "Expression": "$MCQ33$ = '1'",
+              "Description": "$MCQ33$ = '1' : MCQ33CL",
+              "flowControlType": "CLARIFICATION"
+            }
+          ],
+          "questionType": "MULTIPLE_CHOICE",
+          "ResponseStructure": {
+            "Mapping": [
+              {
+                "MappingSource": "m8x3um7d",
+                "MappingTarget": "1"
+              },
+              {
+                "MappingSource": "m8x3dkwi",
+                "MappingTarget": "2"
+              },
+              {
+                "MappingSource": "m8x3ohka",
+                "MappingTarget": "3"
+              }
+            ],
+            "Attribute": [],
+            "Dimension": [
+              {
+                "dynamic": "NON_DYNAMIC",
+                "dimensionType": "PRIMARY",
+                "CodeListReference": "m8wuyfhj"
+              },
+              {
+                "dimensionType": "MEASURE"
+              }
+            ]
+          },
+          "codeFilters": [
+            {
+              "codeValue": "3",
+              "conditionFilter": "$YES_NO$ = \"2\""
+            }
+          ],
+          "ClarificationQuestion": [
+            {
+              "id": "m8x3t4aq",
+              "Name": "MCQ33CL",
+              "Label": "\"Please, specify: \"",
+              "Response": [
+                {
+                  "id": "m8x3n8ue",
+                  "Datatype": {
+                    "type": "TextDatatypeType",
+                    "typeName": "TEXT",
+                    "MaxLength": 249
+                  },
+                  "mandatory": false,
+                  "CollectedVariableReference": "m8x2g5jl"
+                }
+              ],
+              "TargetMode": [
+                "CAPI",
+                "CAWI",
+                "CATI",
+                "PAPI"
+              ],
+              "questionType": "SIMPLE"
+            }
+          ]
+        }
+      ],
+      "Label": [
+        "\"Sequence 3\""
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Declaration": [
+        {
+          "id": "m8x2aedb",
+          "Text": "\"Filtered modalities in combination with 'please, specify' fields.\"",
+          "position": "AFTER_QUESTION_TEXT",
+          "DeclarationMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "declarationType": "HELP"
+        }
+      ],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    },
+    {
+      "id": "idendquest",
+      "Name": "QUESTIONNAIRE_END",
+      "type": "SequenceType",
+      "Child": [],
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "depth": 1,
+      "Control": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Declaration": [],
+      "FlowControl": [],
+      "genericName": "MODULE"
+    }
+  ],
+  "Label": [
+    "Eno - Code filter"
+  ],
+  "final": false,
+  "owner": "ENO-INTEGRATION-TESTS",
+  "agency": "fr.insee",
+  "CodeLists": {
+    "CodeList": [
+      {
+        "id": "m8wuyfhj",
+        "Code": [
+          {
+            "Label": "\"Foo\"",
+            "Value": "1",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Bar\"",
+            "Value": "2",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Baz\"",
+            "Value": "3",
+            "Parent": ""
+          }
+        ],
+        "Label": "FOO_CODE_LIST"
+      },
+      {
+        "id": "m8x2rrtz",
+        "Code": [
+          {
+            "Label": "\"Yes\"",
+            "Value": "1",
+            "Parent": ""
+          },
+          {
+            "Label": "\"No\"",
+            "Value": "2",
+            "Parent": ""
+          }
+        ],
+        "Label": "YES_NO_CODE_LIST"
+      }
+    ]
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "m8x1p2hx",
+        "Name": "AGE",
+        "type": "CollectedVariableType",
+        "Label": "AGE label",
+        "Datatype": {
+          "Unit": "",
+          "type": "NumericDatatypeType",
+          "Maximum": 140,
+          "Minimum": 0,
+          "typeName": "NUMERIC",
+          "IsDynamicUnit": false
+        }
+      },
+      {
+        "id": "m8x2j75g",
+        "Name": "UCQ1_RADIO",
+        "type": "CollectedVariableType",
+        "Label": "UCQ1_RADIO label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "typeName": "TEXT",
+          "MaxLength": 1
+        },
+        "CodeListReference": "m8wuyfhj"
+      },
+      {
+        "id": "m8x2aqqm",
+        "Name": "UCQ1_DROPDOWN",
+        "type": "CollectedVariableType",
+        "Label": "UCQ1_DROPDOWN label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "typeName": "TEXT",
+          "MaxLength": 1
+        },
+        "CodeListReference": "m8wuyfhj"
+      },
+      {
+        "id": "m8x26fa6",
+        "Name": "MCQ11",
+        "type": "CollectedVariableType",
+        "Label": "1 - \"Foo\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "m8x22cr5",
+        "Name": "MCQ12",
+        "type": "CollectedVariableType",
+        "Label": "2 - \"Bar\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "m8x2l366",
+        "Name": "MCQ13",
+        "type": "CollectedVariableType",
+        "Label": "3 - \"Baz\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "m8x2d78g",
+        "Name": "MCQ21",
+        "type": "CollectedVariableType",
+        "Label": "1 - \"Foo\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "m8x26nhi",
+        "Name": "MCQ22",
+        "type": "CollectedVariableType",
+        "Label": "2 - \"Bar\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "m8x2ispn",
+        "Name": "MCQ23",
+        "type": "CollectedVariableType",
+        "Label": "3 - \"Baz\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "m8x2ares",
+        "Name": "UCQ2",
+        "type": "CollectedVariableType",
+        "Label": "UCQ2 label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "typeName": "TEXT",
+          "MaxLength": 1
+        },
+        "CodeListReference": "m8wuyfhj"
+      },
+      {
+        "id": "m8x2sucy",
+        "Name": "UCQ3",
+        "type": "CollectedVariableType",
+        "Label": "UCQ3 label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "typeName": "TEXT",
+          "MaxLength": 1
+        },
+        "CodeListReference": "m8wuyfhj"
+      },
+      {
+        "id": "m8x2oo9p",
+        "Name": "UCQ33CL",
+        "type": "CollectedVariableType",
+        "Label": "UCQ33CL label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m8x2t879",
+        "Name": "YES_NO",
+        "type": "CollectedVariableType",
+        "Label": "YES_NO label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "typeName": "TEXT",
+          "MaxLength": 1
+        },
+        "CodeListReference": "m8x2rrtz"
+      },
+      {
+        "id": "m8x2t214",
+        "Name": "MCQ31",
+        "type": "CollectedVariableType",
+        "Label": "1 - \"Foo\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "m8x2x0rq",
+        "Name": "MCQ32",
+        "type": "CollectedVariableType",
+        "Label": "2 - \"Bar\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "m8x2nq7y",
+        "Name": "MCQ33",
+        "type": "CollectedVariableType",
+        "Label": "3 - \"Baz\"",
+        "Datatype": {
+          "type": "BooleanDatatypeType",
+          "typeName": "BOOLEAN"
+        }
+      },
+      {
+        "id": "m8x2g5jl",
+        "Name": "MCQ33CL",
+        "type": "CollectedVariableType",
+        "Label": "MCQ33CL label",
+        "Datatype": {
+          "type": "TextDatatypeType",
+          "typeName": "TEXT",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "flowLogic": "FILTER",
+  "TargetMode": [
+    "CAPI",
+    "CAWI",
+    "CATI",
+    "PAPI"
+  ],
+  "FlowControl": [],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "m8wuper8",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "m8wuuw90",
+        "m8x1vk55",
+        "m8wzyam9",
+        "m8x0j2y7",
+        "m8x0tvs6",
+        "m8x2lrgf",
+        "m8x2ofib",
+        "m8x2g04j",
+        "m8x2cgvf",
+        "m8x2mpa8",
+        "m8x2pwdr",
+        "m8x2wm3z",
+        "idendquest"
+      ]
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "s2106-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2106-dc"
+    }
+  ],
+  "lastUpdatedDate": "Mon Mar 31 2025 15:12:20 GMT+0200 (heure d’été d’Europe centrale)",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": []
+}

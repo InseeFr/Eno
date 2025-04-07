@@ -41,6 +41,7 @@ public class LunaticProcessing {
                 .then(new LunaticLoopResolution(enoQuestionnaire))
                 .then(new LunaticTableProcessing(enoQuestionnaire))
                 .then(new LunaticInsertUniqueChoiceDetails(enoQuestionnaire))
+                .then(new LunaticInsertCodeFilters(enoQuestionnaire))
                 .then(new LunaticEditLabelTypes()) // this step should be temporary
                 .then(new LunaticSuggestersConfiguration(enoQuestionnaire))
                 .then(new LunaticVariablesDimension(enoQuestionnaire))
@@ -58,7 +59,8 @@ public class LunaticProcessing {
                 .then(new LunaticShapeFrom())
                 .thenIf(enoParameters.getModeParameter().equals(EnoParameters.ModeParameter.CAWI), new LunaticSequenceDescription())
                 .then(new LunaticInputNumberDescription(enoParameters.getLanguage()))
-                .then(new LunaticQuestionComponent())
+                .then(new LunaticDurationDescription())
+                .thenIf(lunaticParameters.isQuestionWrapping(), new LunaticQuestionComponent())
                 .then(new LunaticRoundaboutLoops(enoQuestionnaire));
     }
 
