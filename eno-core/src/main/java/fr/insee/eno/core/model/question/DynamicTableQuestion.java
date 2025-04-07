@@ -79,11 +79,12 @@ public class DynamicTableQuestion extends MultipleResponseQuestion implements En
     List<Binding> bindings = new ArrayList<>();
 
     @DDI("getStructuredMixedGridResponseDomain().getGridResponseDomainInMixedList()")
-    @Pogues("getResponse()")
+    @Pogues("T(fr.insee.eno.core.utils.PoguesUtils).getPoguesTableResponseCells(#this)")
     List<ResponseCell> responseCells = new ArrayList<>();
 
     /** No data cells */
     @DDI("getStructuredMixedGridResponseDomain().getNoDataByDefinitionList()")
+    @Pogues("T(fr.insee.eno.core.utils.PoguesUtils).getPoguesTableNoDataCells(#this)")
     List<NoDataCell> noDataCells = new ArrayList<>();
 
     /** Labels for cells that contain no response data or that have a conditional label.

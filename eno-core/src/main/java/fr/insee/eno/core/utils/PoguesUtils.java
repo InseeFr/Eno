@@ -1,8 +1,10 @@
 package fr.insee.eno.core.utils;
 
-import fr.insee.pogues.model.QuestionType;
-import fr.insee.pogues.model.SequenceType;
+import fr.insee.pogues.model.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 /**
@@ -32,4 +34,28 @@ public class PoguesUtils {
                 .filter(QuestionType.class::isInstance).map(QuestionType.class::cast);
     }
 
+    private static List<ResponseType> getPoguesTableResponse(QuestionType tableQuestion, boolean noDataCells){
+        List<String> coordinateOfNoDataCells = tableQuestion.getResponseStructure()
+                .getAttribute().stream()
+                .filter(a ->"NoDataByDefinition".equals(a.getAttributeValue()))
+                .map(AttributeType::getAttributeTarget)
+                .toList();
+        List<MappingType> mappings = tableQuestion.getResponseStructure().getMapping();
+        Map<String, String> indexResponse = new HashMap<>();
+        mappings.forEach(mappingType -> indexResponse.put(mappingType.getMappingSource(), mappingType.getMappingTarget()));
+        return tableQuestion.getResponse().stream()
+                .filter(responseType -> {
+                    String cord = indexResponse.get(responseType.getId());
+                    if(noDataCells) return coordinateOfNoDataCells.contains(cord);
+                    return !coordinateOfNoDataCells.contains(cord);
+                }).toList();
+    }
+
+    public static List<ResponseType> getPoguesTableNoDataCells(QuestionType tableQuestion){
+       return getPoguesTableResponse(tableQuestion, false);
+    }
+
+    public static List<ResponseType> getPoguesTableResponseCells(QuestionType tableQuestion){
+        return getPoguesTableResponse(tableQuestion, true);
+    }
 }
