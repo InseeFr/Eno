@@ -65,9 +65,4 @@ public class DateQuestion extends SingleResponseQuestion {
     @Lunatic("setMandatory(#param)")
     boolean mandatory;
 
-    /** Lunatic component type property.
-     * This should be inserted by Lunatic-Model serializer later on. */
-    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
-    String lunaticComponentType = "DATEPICKER";
-
 }
