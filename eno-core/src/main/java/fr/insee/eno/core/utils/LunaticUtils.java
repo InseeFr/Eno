@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Utility class that provide some methods for Lunatic-Model objects.
@@ -191,6 +192,27 @@ public class LunaticUtils {
             throw new LunaticPairwiseException(String.format(
                     "Lunatic pairwise must contain exactly 1 component. Pairwise object '%s' contains %s.",
                     pairwiseLinks.getId(), pairwiseComponentsSize));
+    }
+
+    public static Optional<ComponentType> findComponentById(Questionnaire lunaticQuestionnaire, String id) {
+        // Search in questionnaire components
+        List<ComponentType> components = lunaticQuestionnaire.getComponents();
+        Optional<ComponentType> searchedComponent = findComponentInList(id, components);
+        if (searchedComponent.isPresent())
+            return searchedComponent;
+        // If not found, may be in a nesting component (such as loop, roundabout, pairwise)
+        return lunaticQuestionnaire.getComponents().stream()
+                .filter(ComponentNestingType.class::isInstance)
+                .map(ComponentNestingType.class::cast)
+                .map(ComponentNestingType::getComponents)
+                .map(componentList -> findComponentInList(id, componentList))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .findAny();
+    }
+
+    private static Optional<ComponentType> findComponentInList(String id, List<ComponentType> componentList) {
+        return componentList.stream().filter(component -> id.equals(component.getId())).findAny();
     }
 
 }

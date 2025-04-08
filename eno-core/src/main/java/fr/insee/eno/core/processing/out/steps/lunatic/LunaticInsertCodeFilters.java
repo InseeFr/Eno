@@ -2,19 +2,21 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import fr.insee.eno.core.model.response.CodeFilter;
 import fr.insee.eno.core.processing.ProcessingStep;
+import fr.insee.eno.core.reference.EnoVariableIndex;
+import fr.insee.eno.core.reference.VariableIndex;
 import fr.insee.lunatic.model.flat.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
+import static fr.insee.eno.core.model.calculated.CalculatedExpression.extractBindingReferences;
 import static fr.insee.eno.core.model.calculated.CalculatedExpression.removeSurroundingDollarSigns;
+import static fr.insee.eno.core.utils.LunaticUtils.findComponentById;
 
 /**
  * The filters (for the modalities of QCU and QCM) are at the question level in the Eno model.
@@ -25,11 +27,14 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
     private final EnoQuestionnaire enoQuestionnaire;
     private Questionnaire lunaticQuestionnaire;
     private final Map<String, CodeList> codeListIndex = new HashMap<>();
+    private final VariableIndex variableIndex;
 
     public LunaticInsertCodeFilters(EnoQuestionnaire enoQuestionnaire) {
         this.enoQuestionnaire = enoQuestionnaire;
+        EnoVariableIndex enoVariableIndex = new EnoVariableIndex();
+        enoVariableIndex.indexVariables(enoQuestionnaire);
+        this.variableIndex = enoVariableIndex;
         enoQuestionnaire.getCodeLists().forEach( codeList -> codeListIndex.put(codeList.getId(), codeList));
-
     }
 
     /**
@@ -89,7 +94,7 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
      * @param optionsList List of Lunatic unique-choice options.
      * @return True if the insertion failed.
      */
-    private static boolean insertCodeFilterInOption(CodeFilter codeFilter, List<Option> optionsList) {
+    private boolean insertCodeFilterInOption(CodeFilter codeFilter, List<Option> optionsList) {
         // Note: 'Options' class name should be singular in Lunatic-Model...
         Optional<Option> correspondingOption = optionsList.stream()
                 .filter(option -> codeFilter.getCodeValue().equals(option.getValue()))
@@ -97,10 +102,11 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
         if (correspondingOption.isEmpty())
             return true;
         ConditionFilterType conditionFilter = new ConditionFilterType();
-        conditionFilter.setValue(codeFilter.getConditionFilter());
+        conditionFilter.setValue(removeSurroundingDollarSigns(codeFilter.getConditionFilter()));
+        Set<BindingReference> binds = extractBindingReferences(conditionFilter.getValue(),variableIndex);
+        conditionFilter.setBindingDependencies(binds.stream().map(BindingReference::getVariableName).toList());
         conditionFilter.setType(LabelTypeEnum.VTL);
         correspondingOption.get().setConditionFilter(conditionFilter);
-        correspondingOption.get().getConditionFilter().setValue(removeSurroundingDollarSigns(conditionFilter.getValue()));
         return false;
     }
 
@@ -157,39 +163,18 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
      * @return {@code true} if the index is out of bounds (greater than or equal to the size of responseCheckboxGroupList);
      *         {@code false} otherwise (filter successfully inserted).
      */
-    private static boolean insertCodeFilterInResponse(String conditionFilterOfCodeFilter,
+    private boolean insertCodeFilterInResponse(String conditionFilterOfCodeFilter,
                                                       List<ResponseCheckboxGroup> responseCheckboxGroupList,
                                                       Integer indexOfCodeValueInCodeList) {
         // Note: 'Options' class name should be singular in Lunatic-Model...
         if(indexOfCodeValueInCodeList >= responseCheckboxGroupList.size()) return true;
         ResponseCheckboxGroup correspondingResponseCheckboxGroup = responseCheckboxGroupList.get(indexOfCodeValueInCodeList);
         ConditionFilterType conditionFilter = new ConditionFilterType();
-        conditionFilter.setValue(conditionFilterOfCodeFilter);
+        conditionFilter.setValue(removeSurroundingDollarSigns(conditionFilterOfCodeFilter));
+        Set<BindingReference> binds = extractBindingReferences(conditionFilter.getValue(), variableIndex);
+        conditionFilter.setBindingDependencies(binds.stream().map(BindingReference::getVariableName).toList());
         conditionFilter.setType(LabelTypeEnum.VTL);
         correspondingResponseCheckboxGroup.setConditionFilter(conditionFilter);
-        correspondingResponseCheckboxGroup.getConditionFilter().setValue(removeSurroundingDollarSigns(conditionFilter.getValue()));
         return false;
-    }
-
-    // May be refactored in Lunatic utils at some point
-    private static Optional<ComponentType> findComponentById(Questionnaire lunaticQuestionnaire, String id) {
-        // Search in questionnaire components
-        List<ComponentType> components = lunaticQuestionnaire.getComponents();
-        Optional<ComponentType> searchedComponent = findComponentInList(id, components);
-        if (searchedComponent.isPresent())
-            return searchedComponent;
-        // If not found, may be in a nesting component (such as loop, roundabout, pairwise)
-        return lunaticQuestionnaire.getComponents().stream()
-                .filter(ComponentNestingType.class::isInstance)
-                .map(ComponentNestingType.class::cast)
-                .map(ComponentNestingType::getComponents)
-                .map(componentList -> findComponentInList(id, componentList))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .findAny();
-    }
-
-    private static Optional<ComponentType> findComponentInList(String id, List<ComponentType> componentList) {
-        return componentList.stream().filter(component -> id.equals(component.getId())).findAny();
     }
 }
