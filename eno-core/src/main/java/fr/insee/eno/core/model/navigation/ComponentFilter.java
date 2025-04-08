@@ -39,16 +39,29 @@ public class ComponentFilter extends EnoObject {
     @Lunatic("setType(T(fr.insee.lunatic.model.flat.LabelTypeEnum).fromValue(#param))")
     String type = LabelTypeEnum.VTL.value();
 
+    /**
+     * Reference of variables that are directly mentioned in the expression.
+     * See the "resolved" binding references attribute.
+     * */
     @Getter
     @Pogues("T(fr.insee.eno.core.model.calculated.CalculatedExpression)" +
             ".extractBindingReferences(#this, #poguesIndex)")
     private final List<BindingReference> bindingReferences = new ArrayList<>();
 
+    /**
+     * Reference of all variables on which the expression is dependent.
+     * A processing step uses the "raw" binding references to compute the "resolved" references.
+     * @see fr.insee.eno.core.processing.common.steps.EnoResolveBindingReferences
+     */
     @Getter
     private final List<BindingReference> resolvedBindingReferences = new ArrayList<>();
 
-    /** Contrary to CalculatedExpression class, Lunatic binding dependencies are mapped in the condition filter
-     * object. */
+    /**
+     * Contrary to CalculatedExpression class, Lunatic binding dependencies are mapped in the condition filter object.
+     * NOTE: In Lunatic, "conditionFilter" don't have "bindingDependencies" anymore. Thus, this attribute should be
+     * removed here in the Eno model. Yet, it is currently used in some processing steps, these have to be refactored.
+     * Then we will be able to remove this attribute safely.
+     * */
     @Lunatic("getBindingDependencies()")
     private List<String> lunaticBindingDependencies;
 
