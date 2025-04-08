@@ -39,4 +39,24 @@ class VtlSyntaxUtilsTest {
         assertFalse(VtlSyntaxUtils.isAggregatorUsedInsideExpression(trickyExpressionWithoutAgg));
     }
 
+    @Test
+    void testSurroundByParenthesis(){
+        assertEquals("(FIRST_NAME = \"Laurent\")", VtlSyntaxUtils.surroundByParenthesis("FIRST_NAME = \"Laurent\""));
+        assertEquals("((NB >= 15))", VtlSyntaxUtils.surroundByParenthesis("(NB >= 15)"));
+    }
+
+    @Test
+    void testJoinByANDLogicExpression_should_addAndVtlBetweenExpression(){
+        String expectedExpression = "(FIRST_NAME = \"Laurent\") and (NB >= 15)";
+        assertEquals(expectedExpression, VtlSyntaxUtils.joinByANDLogicExpression("FIRST_NAME = \"Laurent\"", "NB >= 15"));
+    }
+
+    @Test
+    void testJoinByANDLogicExpression_should_not_addExtraParen_when_AddAndVtlBetweenExpression(){
+        String expectedExpression = "(FIRST_NAME = \"Laurent\") and (NB >= 15)";
+        assertEquals(expectedExpression, VtlSyntaxUtils.joinByANDLogicExpression(
+                VtlSyntaxUtils.surroundByParenthesis("FIRST_NAME = \"Laurent\""),
+                VtlSyntaxUtils.surroundByParenthesis("NB >= 15")));
+    }
+
 }

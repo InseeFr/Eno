@@ -5,6 +5,7 @@ import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.ConditionFilterType;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import lombok.Getter;
@@ -64,13 +65,13 @@ public class ComponentFilter extends EnoObject {
     }
 
     private void addFilterExpression(Filter filter) {
-        String expressionToBeAdded = "(" + filter.getExpression().getValue() + ")";
+        String expressionToBeAdded = VtlSyntaxUtils.surroundByParenthesis(filter.getExpression().getValue());
         if (isValueAtDefault) {
             isValueAtDefault = false;
             this.setValue(expressionToBeAdded);
         }
         else
-            this.setValue(this.getValue() + " and " + expressionToBeAdded);
+            this.setValue(VtlSyntaxUtils.joinByANDLogicExpression(this.getValue(), expressionToBeAdded));
     }
 
     private void addFilterBindingReferences(Filter filter) {
