@@ -1,6 +1,5 @@
 package fr.insee.eno.core.model.question.table;
 
-import fr.insee.eno.core.annotations.Contexts;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
@@ -18,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Context(format = Format.POGUES, type = ResponseType.class)
-@Contexts.Context(format = Format.LUNATIC, type = BodyCell.class)
+@Context(format = Format.LUNATIC, type = BodyCell.class)
 public abstract class ResponseCell extends EnoObject implements TableCell, EnoObjectWithId {
 
     /** Source parameter id from DDI **/
