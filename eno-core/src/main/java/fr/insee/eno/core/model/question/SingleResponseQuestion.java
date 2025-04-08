@@ -28,9 +28,4 @@ public abstract class SingleResponseQuestion extends Question {
     @Lunatic("setResponse(#param)")
     Response response;
 
-    @DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
-            "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
-    @Lunatic("setMandatory(#param)")
-    boolean mandatory;
-
 }

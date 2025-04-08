@@ -2,10 +2,11 @@ package fr.insee.eno.core.converter;
 
 import fr.insee.eno.core.exceptions.technical.ConversionException;
 import fr.insee.eno.core.model.EnoObject;
-import fr.insee.eno.core.model.question.table.TextCell;
-import fr.insee.eno.core.model.question.table.UniqueChoiceCell;
+import fr.insee.eno.core.model.question.table.*;
 import fr.insee.pogues.model.DatatypeTypeEnum;
 import fr.insee.pogues.model.ResponseType;
+import fr.insee.pogues.model.VisualizationHintEnum;
+
 
 class PoguesTableCellConversion {
 
@@ -13,10 +14,25 @@ class PoguesTableCellConversion {
 
     static EnoObject instantiateFrom(ResponseType poguesResponse) {
         DatatypeTypeEnum typeName = poguesResponse.getDatatype().getTypeName();
-        if (DatatypeTypeEnum.TEXT.equals(typeName)) {
-            if (poguesResponse.getCodeListReference() != null)
-                return new UniqueChoiceCell();
-            return new TextCell();
+        switch (poguesResponse.getDatatype().getTypeName()){
+            case NUMERIC -> {
+                return new NumericCell();
+            }
+            case TEXT -> {
+                if (poguesResponse.getCodeListReference() != null) {
+                    if (VisualizationHintEnum.SUGGESTER.equals(poguesResponse.getDatatype().getVisualizationHint())) {
+                        return new SuggesterCell();
+                    }
+                    return new UniqueChoiceCell();
+                }
+                return new TextCell();
+            }
+            case DATE -> {
+                return new DateCell();
+            }
+            case BOOLEAN -> {
+                return new BooleanCell();
+            }
         }
         throw new ConversionException("Conversion of Pogues table cell of type " + typeName + " not implemented.");
     }

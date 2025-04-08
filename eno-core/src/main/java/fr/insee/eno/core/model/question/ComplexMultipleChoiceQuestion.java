@@ -40,13 +40,6 @@ public class ComplexMultipleChoiceQuestion extends MultipleResponseQuestion {
     @Lunatic("setPositioning(#param)")
     private String positioning = "HORIZONTAL";
 
-    /** Boolean property to tag the question as mandatory or not.
-     * Mapped in DDI and Lunatic, but unused for now. */
-    @DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
-            "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
-    @Lunatic("setMandatory(#param)")
-    boolean mandatory;
-
     @Pogues("getResponseStructure().getDimension().getFirst().getCodeListReference()")
     @DDI("#this.getGridDimensionList().?[#this.getRank().intValue() == 1].get(0)" +
             ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue()")
