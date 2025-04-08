@@ -42,6 +42,8 @@ public class ComponentFilter extends EnoObject {
     /**
      * Reference of variables that are directly mentioned in the expression.
      * See the "resolved" binding references attribute.
+     * In DDI, filters are mapped at questionnaire level in "Filter" objects of the Eno model,
+     * binding references of this list come from there.
      * */
     @Getter
     @Pogues("T(fr.insee.eno.core.model.calculated.CalculatedExpression)" +
