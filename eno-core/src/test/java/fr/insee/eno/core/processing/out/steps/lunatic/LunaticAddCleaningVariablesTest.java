@@ -2,7 +2,9 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.ddi.lifecycle33.instance.DDIInstanceDocument;
 import fr.insee.eno.core.DDIToEno;
+import fr.insee.eno.core.PoguesDDIToEno;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
+import fr.insee.eno.core.exceptions.business.PoguesDeserializationException;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.navigation.Filter;
@@ -16,6 +18,8 @@ import fr.insee.eno.core.processing.out.steps.lunatic.resizing.LunaticAddResizin
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.serialize.DDIDeserializer;
+import fr.insee.eno.core.serialize.LunaticSerializer;
+import fr.insee.eno.core.serialize.PoguesDeserializer;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -84,16 +88,41 @@ class LunaticAddCleaningVariablesTest {
         assertNull(cleaningProcessing.getVariableShapeFromIndex().get(variableOutOfLoop));
     }
 
+    @Test
+    void testCleaningOfCodeFilters() throws DDIParsingException, PoguesDeserializationException {
+        prepareQuestionnaireTest(
+                "functional/pogues/codes-filtered/pogues-m8hgkyw0.json",
+                "functional/ddi/codes-filtered/ddi-m8hgkyw0.xml");
+        cleaningProcessing.processCodeFilters(lunaticQuestionnaire);
 
-    void prepareQuestionnaireTest(String questionnaireTestUrl) throws DDIParsingException {
+        System.out.println(LunaticSerializer.serializeToJson(lunaticQuestionnaire));
+    }
+
+    void prepareQuestionnaireTest(String poguesQuestionnaireTestUrl, String ddiQuestionnaireTestUrl) throws DDIParsingException, PoguesDeserializationException {
+        EnoParameters enoParameters = EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
+        fr.insee.pogues.model.Questionnaire poguesQuestionnaire = PoguesDeserializer.deserialize(
+                this.getClass().getClassLoader().getResourceAsStream(poguesQuestionnaireTestUrl));
+        DDIInstanceDocument ddiQuestionnaire = DDIDeserializer.deserialize(
+                this.getClass().getClassLoader().getResourceAsStream(ddiQuestionnaireTestUrl));
+        enoQuestionnaire = PoguesDDIToEno.fromObjects(poguesQuestionnaire, ddiQuestionnaire).transform(enoParameters);
+        cleaningProcessing = new LunaticAddCleaningVariables(enoQuestionnaire);
+        lunaticQuestionnaire = new Questionnaire();
+        preProcessQuestionnaire(lunaticQuestionnaire, enoQuestionnaire);
+        applyProcessingBeforeCleaning(lunaticQuestionnaire, enoQuestionnaire);
+        cleaningProcessing.preProcessCleaning(lunaticQuestionnaire);
+        cleaningProcessing.preProcessVariablesAndShapeFrom(lunaticQuestionnaire);
+    }
+
+    void prepareQuestionnaireTest(String ddiQuestionnaireTestUrl) throws DDIParsingException {
         EnoParameters enoParameters = EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
         DDIInstanceDocument ddiQuestionnaire = DDIDeserializer.deserialize(
-                this.getClass().getClassLoader().getResourceAsStream(questionnaireTestUrl));
+                this.getClass().getClassLoader().getResourceAsStream(ddiQuestionnaireTestUrl));
         enoQuestionnaire = DDIToEno.fromObject(ddiQuestionnaire).transform(enoParameters);
         cleaningProcessing = new LunaticAddCleaningVariables(enoQuestionnaire);
         lunaticQuestionnaire = new Questionnaire();
         preProcessQuestionnaire(lunaticQuestionnaire, enoQuestionnaire);
         applyProcessingBeforeCleaning(lunaticQuestionnaire, enoQuestionnaire);
+        cleaningProcessing.preProcessCleaning(lunaticQuestionnaire);
         cleaningProcessing.preProcessVariablesAndShapeFrom(lunaticQuestionnaire);
     }
 

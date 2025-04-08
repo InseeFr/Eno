@@ -27,6 +27,7 @@ class VtlSyntaxUtilsTest {
         assertEquals(")", VtlSyntaxUtils.getVTLTokenName(VtlTokens.RPAREN));
         assertEquals(";", VtlSyntaxUtils.getVTLTokenName(VtlTokens.EOL));
         assertEquals(":=", VtlSyntaxUtils.getVTLTokenName(VtlTokens.ASSIGN));
+        assertEquals("<>", VtlSyntaxUtils.getVTLTokenName(VtlTokens.NEQ));
     }
 
     @Test
@@ -43,6 +44,12 @@ class VtlSyntaxUtilsTest {
     void testSurroundByParenthesis(){
         assertEquals("(FIRST_NAME = \"Laurent\")", VtlSyntaxUtils.surroundByParenthesis("FIRST_NAME = \"Laurent\""));
         assertEquals("((NB >= 15))", VtlSyntaxUtils.surroundByParenthesis("(NB >= 15)"));
+    }
+
+    @Test
+    void testJoinByORLogicExpression(){
+        String expectedExpression = "(FIRST_NAME = \"Laurent\") or (NB >= 15)";
+        assertEquals(expectedExpression, VtlSyntaxUtils.joinByORLogicExpression("FIRST_NAME = \"Laurent\"", "NB >= 15"));
     }
 
     @Test

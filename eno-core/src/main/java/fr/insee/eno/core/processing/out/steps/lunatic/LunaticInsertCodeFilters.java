@@ -103,7 +103,7 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
             return true;
         ConditionFilterType conditionFilter = new ConditionFilterType();
         conditionFilter.setValue(removeSurroundingDollarSigns(codeFilter.getConditionFilter()));
-        Set<BindingReference> binds = extractBindingReferences(conditionFilter.getValue(),variableIndex);
+        Set<BindingReference> binds = extractBindingReferences(codeFilter.getConditionFilter(), variableIndex);
         conditionFilter.setBindingDependencies(binds.stream().map(BindingReference::getVariableName).toList());
         conditionFilter.setType(LabelTypeEnum.VTL);
         correspondingOption.get().setConditionFilter(conditionFilter);
@@ -171,7 +171,7 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
         ResponseCheckboxGroup correspondingResponseCheckboxGroup = responseCheckboxGroupList.get(indexOfCodeValueInCodeList);
         ConditionFilterType conditionFilter = new ConditionFilterType();
         conditionFilter.setValue(removeSurroundingDollarSigns(conditionFilterOfCodeFilter));
-        Set<BindingReference> binds = extractBindingReferences(conditionFilter.getValue(), variableIndex);
+        Set<BindingReference> binds = extractBindingReferences(conditionFilterOfCodeFilter, variableIndex);
         conditionFilter.setBindingDependencies(binds.stream().map(BindingReference::getVariableName).toList());
         conditionFilter.setType(LabelTypeEnum.VTL);
         correspondingResponseCheckboxGroup.setConditionFilter(conditionFilter);

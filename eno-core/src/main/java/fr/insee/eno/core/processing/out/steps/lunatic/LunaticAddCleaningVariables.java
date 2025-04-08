@@ -29,7 +29,7 @@ import java.util.*;
 
 import static fr.insee.eno.core.model.navigation.ComponentFilter.DEFAULT_FILTER_VALUE;
 import static fr.insee.eno.core.utils.LunaticUtils.findComponentById;
-import static fr.insee.eno.core.utils.vtl.VtlSyntaxUtils.joinByANDLogicExpression;
+import static fr.insee.eno.core.utils.vtl.VtlSyntaxUtils.joinByORLogicExpression;
 
 /**
  * Processing step to add the 'cleaning' block in the Lunatic questionnaire.
@@ -114,6 +114,10 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
 
     }
 
+    public void preProcessCleaning(Questionnaire lunaticQuestionnaire){
+        lunaticQuestionnaire.setCleaning(new CleaningType());
+    }
+
     public void preProcessVariablesAndShapeFrom(Questionnaire lunaticQuestionnaire){
         variablesByQuestion = getCollectedVariablesByQuestion(lunaticQuestionnaire);
         // Create filter shapeFrom index based on filterHierarchyIndex and loop
@@ -156,28 +160,6 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                     }
                 }
         );
-        return collectedVarForFilter;
-    }
-
-    /**
-     *
-     * @param multipleChoiceQuestion
-     * @return List of variable Name collected inside the scope of filter
-     */
-    private List<String> getCollectedVariablesInCodeFilter(SimpleMultipleChoiceQuestion multipleChoiceQuestion) {
-        List<String> collectedVarForFilter = new ArrayList<>();
-
-        return collectedVarForFilter;
-    }
-
-    /**
-     *
-     * @param uniqueChoiceQuestion
-     * @return List of variable Name collected inside the scope of filter
-     */
-    private List<String> getCollectedVariablesInCodeFilter(UniqueChoiceQuestion uniqueChoiceQuestion) {
-        List<String> collectedVarForFilter = new ArrayList<>();
-
         return collectedVarForFilter;
     }
 
@@ -347,8 +329,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
         preProcessVariablesAndShapeFrom(lunaticQuestionnaire);
-        CleaningType cleaning = new CleaningType();
-        lunaticQuestionnaire.setCleaning(cleaning);
+        preProcessCleaning(lunaticQuestionnaire);
         processQuestionLevelFilter(lunaticQuestionnaire);
     }
 
@@ -411,7 +392,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
     }
 
 
-    private void processCodeFilters(Questionnaire lunaticQuestionnaire){
+    public void processCodeFilters(Questionnaire lunaticQuestionnaire){
         // 1. retrieve all codeFilters
         // 2. retrieve collectedVariable inside
         //   - UniqueChoiceQuestion: only DetailResponse Question variable
@@ -499,19 +480,21 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                     allVariablesThatInfluenceFilterExpression,
                     variablesCollectedInsideFilter
             );
-            // special step, add cleaning condition of Variable: if condition filter and optionValue is selected i.e variable = optionValue
+            // special step, add cleaning condition of Variable:
+            // if condition filter or optionValue is not selected i.e variable <> optionValue
+            // why ? expression of cleaning: if at least one is false -> should clean variable (brain fuck)
             // step 1: create new conditionFilter
             ConditionFilterType extraConditionFilter = new ConditionFilterType();
-            // example: CITY = "P" where P is codeValue of "Paris"
-            String conditionOfCodeSelected = String.format("%s = \"%s\"", uniqueResponseVariableName, option.getValue());
-            extraConditionFilter.setValue(joinByANDLogicExpression(conditionFilter.getValue(), conditionOfCodeSelected));
+            // example: CITY <> "P" where P is codeValue of "Paris"
+            String conditionOfCodeNotSelected = VtlSyntaxUtils.expressionNotEqualToOther(uniqueResponseVariableName, option.getValue());
+            extraConditionFilter.setValue(joinByORLogicExpression(conditionFilter.getValue(), conditionOfCodeNotSelected));
             List<String> allVariablesThatInfluenceExtraFilterExpression = new ArrayList<>(allVariablesThatInfluenceFilterExpression);
-            allVariablesThatInfluenceExtraFilterExpression.add(uniqueResponseVariableName);
+            allVariablesThatInfluenceFilterExpression.add(uniqueResponseVariableName);
             extraConditionFilter.setBindingDependencies(allVariablesThatInfluenceExtraFilterExpression);
             extraConditionFilter.setType(LabelTypeEnum.VTL);
             // cleaning variable of this question if codeValue is selected and there is conditionFilter evaluated to true on this option
             processCleaningForFilterExpression(
-                    cleaning, conditionFilter.getValue(),
+                    cleaning, extraConditionFilter.getValue(),
                     allVariablesThatInfluenceExtraFilterExpression,
                     List.of(uniqueResponseVariableName)
             );
