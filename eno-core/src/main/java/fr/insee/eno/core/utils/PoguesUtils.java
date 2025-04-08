@@ -52,10 +52,10 @@ public class PoguesUtils {
     }
 
     public static List<ResponseType> getPoguesTableNoDataCells(QuestionType tableQuestion){
-       return getPoguesTableResponse(tableQuestion, false);
+       return getPoguesTableResponse(tableQuestion, true);
     }
 
     public static List<ResponseType> getPoguesTableResponseCells(QuestionType tableQuestion){
-        return getPoguesTableResponse(tableQuestion, true);
+        return getPoguesTableResponse(tableQuestion, false);
     }
 }
