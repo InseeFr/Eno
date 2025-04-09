@@ -16,6 +16,7 @@ import java.util.*;
 
 import static fr.insee.eno.core.model.calculated.CalculatedExpression.extractBindingReferences;
 import static fr.insee.eno.core.model.calculated.CalculatedExpression.removeSurroundingDollarSigns;
+import static fr.insee.eno.core.utils.LunaticUtils.findComponentById;
 
 /**
  * The filters (for the modalities of QCU and QCM) are at the question level in the Eno model.
@@ -176,27 +177,5 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
         conditionFilter.setType(LabelTypeEnum.VTL);
         correspondingResponseCheckboxGroup.setConditionFilter(conditionFilter);
         return false;
-    }
-
-    // May be refactored in Lunatic utils at some point
-    private static Optional<ComponentType> findComponentById(Questionnaire lunaticQuestionnaire, String id) {
-        // Search in questionnaire components
-        List<ComponentType> components = lunaticQuestionnaire.getComponents();
-        Optional<ComponentType> searchedComponent = findComponentInList(id, components);
-        if (searchedComponent.isPresent())
-            return searchedComponent;
-        // If not found, may be in a nesting component (such as loop, roundabout, pairwise)
-        return lunaticQuestionnaire.getComponents().stream()
-                .filter(ComponentNestingType.class::isInstance)
-                .map(ComponentNestingType.class::cast)
-                .map(ComponentNestingType::getComponents)
-                .map(componentList -> findComponentInList(id, componentList))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .findAny();
-    }
-
-    private static Optional<ComponentType> findComponentInList(String id, List<ComponentType> componentList) {
-        return componentList.stream().filter(component -> id.equals(component.getId())).findAny();
     }
 }
