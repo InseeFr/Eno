@@ -6,7 +6,7 @@ import fr.insee.pogues.model.VariableType;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PoguesIndex {
+public class PoguesIndex implements VariableIndex {
 
     private final Map<String, Object> index = new HashMap<>();
 

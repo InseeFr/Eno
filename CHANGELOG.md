@@ -4,6 +4,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.38.0] - 2025-04-04
+### :sparkles: New Features
+- [`f32e9c4`](https://github.com/InseeFr/Eno/commit/f32e9c484a28fdbe3f67cd292d4281493bc55f2b) - code-list filters *(PR [#1247](https://github.com/InseeFr/Eno/pull/1247) by [@laurentC35](https://github.com/laurentC35))*
+
+
+## [3.37.0] - 2025-03-25
+### :sparkles: New Features
+- [`6fac5eb`](https://github.com/InseeFr/Eno/commit/6fac5ebac78bcba3ced9f935b0e8e2b0e1c02394) - adding parameter question wrapping *(PR [#1248](https://github.com/InseeFr/Eno/pull/1248) by [@RemiVerriez](https://github.com/RemiVerriez))*
+
+
+## [3.36.2] - 2025-03-18
+### :bug: Bug Fixes
+- [`2f819b3`](https://github.com/InseeFr/Eno/commit/2f819b329c5efdff7fb33f01809c1a64d89ad1f4) - **pogues mapping**: ghost variables error *(PR [#1245](https://github.com/InseeFr/Eno/pull/1245) by [@nsenave](https://github.com/nsenave))*
+
+
+## [3.36.1] - 2025-03-14
+### :bug: Bug Fixes
+- [`6da64bb`](https://github.com/InseeFr/Eno/commit/6da64bb74a0a3e0e665d90b31068170fbeb49833) - **pogues mapping**: remove dollar signs in labels *(PR [#1237](https://github.com/InseeFr/Eno/pull/1237) by [@RemiVerriez](https://github.com/RemiVerriez))*
+
+### :recycle: Refactors
+- [`d4d4a12`](https://github.com/InseeFr/Eno/commit/d4d4a12be480daae8a01daa9956e090c7c1e430f) - deprecated pogues deserializer method *(commit by [@nsenave](https://github.com/nsenave))*
+- [`b637eb1`](https://github.com/InseeFr/Eno/commit/b637eb1048753d61e2edd0fab6599e168e6dbfd1) - **ws**: spring deprecated method *(commit by [@nsenave](https://github.com/nsenave))*
+- [`2cdb783`](https://github.com/InseeFr/Eno/commit/2cdb783a550d4fe597da8a65d5d80a990b6fd3f9) - **pogues mapping**: allow unknown variables *(commit by [@nsenave](https://github.com/nsenave))*
+
+### :white_check_mark: Tests
+- [`9ada8cd`](https://github.com/InseeFr/Eno/commit/9ada8cd4bad1232aea088269319b83c950e57bb2) - update tests for unknown variables *(commit by [@nsenave](https://github.com/nsenave))*
+
+
+## [3.36.0] - 2025-03-13
+### :sparkles: New Features
+- [`9e3ec6f`](https://github.com/InseeFr/Eno/commit/9e3ec6f44e6c829a54bdf140fba83858ab3cb3e0) - **lunatic**: format control and description for duration *(PR [#1229](https://github.com/InseeFr/Eno/pull/1229) by [@RemiVerriez](https://github.com/RemiVerriez))*
+
+
 ## [3.34.4] - 2025-03-12
 ### :sparkles: New Features
 - [`dadd7c8`](https://github.com/InseeFr/Eno/commit/dadd7c8101d6f39a92f7c39b0e0de8f9e9f9ac9f) - **pogues mapping**: declarations *(PR [#1198](https://github.com/InseeFr/Eno/pull/1198) by [@RemiVerriez](https://github.com/RemiVerriez))*
@@ -498,3 +531,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.33.3]: https://github.com/InseeFr/Eno/compare/3.33.2...3.33.3
 [3.33.4]: https://github.com/InseeFr/Eno/compare/3.33.3...3.33.4
 [3.34.4]: https://github.com/InseeFr/Eno/compare/3.33.4...3.34.4
+[3.36.0]: https://github.com/InseeFr/Eno/compare/3.34.4...3.36.0
+[3.36.1]: https://github.com/InseeFr/Eno/compare/3.36.0...3.36.1
+[3.36.2]: https://github.com/InseeFr/Eno/compare/3.36.1...3.36.2
+[3.37.0]: https://github.com/InseeFr/Eno/compare/3.36.2...3.37.0
+[3.38.0]: https://github.com/InseeFr/Eno/compare/3.37.0...3.38.0

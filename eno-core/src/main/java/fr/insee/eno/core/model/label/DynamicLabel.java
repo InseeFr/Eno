@@ -28,7 +28,7 @@ public class DynamicLabel extends EnoObject implements EnoLabel {
     /** Label content.
      * @see Label for details.
      */
-    @Pogues("#this")
+    @Pogues("T(fr.insee.eno.core.model.calculated.CalculatedExpression).removeSurroundingDollarSigns(#this)")
     @DDI("getTextContentArray(0).getText().getStringValue()")
     @Lunatic("setValue(#param)")
     String value;

@@ -1,0 +1,146 @@
+{
+  "owner": "DR59-SNDI59",
+  "final": false,
+  "id": "m8d6lqf0",
+  "Label": [
+    "Eno - Ghost variables"
+  ],
+  "Name": "ENO_GHOST_VARIABLES",
+  "lastUpdatedDate": "Mon Mar 17 2025 16:15:37 GMT+0100 (heure normale d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "s2106-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2106-dc"
+    }
+  ],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "m8d6t3d1",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "m8d6h4uo",
+        "m8d6wjro",
+        "idendquest"
+      ]
+    }
+  ],
+  "agency": "fr.insee",
+  "TargetMode": [
+    "CAPI",
+    "CAWI",
+    "CATI",
+    "PAPI"
+  ],
+  "flowLogic": "FILTER",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": [],
+  "Child": [
+    {
+      "id": "m8d6h4uo",
+      "depth": 1,
+      "Name": "S1",
+      "Label": [
+        "\"Sequence label with \" || $GHOST$"
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "type": "SequenceType",
+      "genericName": "MODULE",
+      "Child": [
+        {
+          "id": "m8d6wjro",
+          "depth": 2,
+          "Name": "Q1",
+          "Label": [
+            "\"Foo question.\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Response": [
+            {
+              "id": "m8d6yrji",
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "m8d6n4gv",
+              "mandatory": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "idendquest",
+      "depth": 1,
+      "Name": "QUESTIONNAIRE_END",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "Declaration": [],
+      "genericName": "MODULE",
+      "Control": [],
+      "FlowControl": [],
+      "type": "SequenceType",
+      "Child": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ]
+    }
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "m8d6jb1a",
+        "Label": "Calculated using a ghost variable",
+        "Name": "CALCULATED1",
+        "Formula": "\"Value with \" || $ANOTHER_GHOST$",
+        "type": "CalculatedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m8d6n4gv",
+        "Name": "Q1",
+        "Label": "Q1 label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "FlowControl": []
+}

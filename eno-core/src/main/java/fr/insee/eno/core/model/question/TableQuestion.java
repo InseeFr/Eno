@@ -47,11 +47,6 @@ public class TableQuestion extends MultipleResponseQuestion implements EnoTable 
     @Lunatic("setPositioning(#param)")
     private String positioning = "HORIZONTAL";
 
-    @DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
-            "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
-    @Lunatic("setMandatory(#param)")
-    boolean mandatory;
-
     /** Lunatic component type property.
      * This should be inserted by Lunatic-Model serializer later on. */
     @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")

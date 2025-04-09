@@ -5,6 +5,7 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.LunaticParameters;
 import fr.insee.eno.core.processing.ProcessingPipeline;
 import fr.insee.eno.core.processing.out.steps.lunatic.*;
+import fr.insee.eno.core.processing.out.steps.lunatic.cleaning.LunaticAddCleaning;
 import fr.insee.eno.core.processing.out.steps.lunatic.pagination.LunaticAddPageNumbers;
 import fr.insee.eno.core.processing.out.steps.lunatic.resizing.LunaticAddResizing;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
@@ -41,6 +42,7 @@ public class LunaticProcessing {
                 .then(new LunaticLoopResolution(enoQuestionnaire))
                 .then(new LunaticTableProcessing(enoQuestionnaire))
                 .then(new LunaticInsertUniqueChoiceDetails(enoQuestionnaire))
+                .then(new LunaticInsertCodeFilters(enoQuestionnaire))
                 .then(new LunaticEditLabelTypes()) // this step should be temporary
                 .then(new LunaticSuggestersConfiguration(enoQuestionnaire))
                 .then(new LunaticVariablesDimension(enoQuestionnaire))
@@ -50,7 +52,7 @@ public class LunaticProcessing {
                 .then(new LunaticAddResizing(enoQuestionnaire))
                 .then(new LunaticAddPageNumbers(lunaticParameters.getLunaticPaginationMode()))
                 .then(new LunaticResponseTimeQuestionPagination())
-                .then(new LunaticAddCleaningVariables(enoQuestionnaire))
+                .then(new LunaticAddCleaning(enoQuestionnaire))
                 .thenIf(lunaticParameters.isControls(), new LunaticAddControlFormat())
                 .then(new LunaticReverseConsistencyControlLabel())
                 .then(new LunaticFinalizePairwise(enoQuestionnaire))
@@ -58,7 +60,8 @@ public class LunaticProcessing {
                 .then(new LunaticShapeFrom())
                 .thenIf(enoParameters.getModeParameter().equals(EnoParameters.ModeParameter.CAWI), new LunaticSequenceDescription())
                 .then(new LunaticInputNumberDescription(enoParameters.getLanguage()))
-                .then(new LunaticQuestionComponent())
+                .then(new LunaticDurationDescription())
+                .thenIf(lunaticParameters.isQuestionWrapping(), new LunaticQuestionComponent())
                 .then(new LunaticRoundaboutLoops(enoQuestionnaire));
     }
 

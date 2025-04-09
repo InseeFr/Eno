@@ -36,16 +36,73 @@ public class VtlSyntaxUtils {
     }
 
     /**
+     *
+     * @param vtlString1
+     * @param vtlString2
+     * @return (vtlString1) and (vtlString2)
+     */
+    public static String joinByANDLogicExpression(String vtlString1, String vtlString2){
+        return surroundByParenthesis(removeExtraParenthesis(vtlString1))
+                + " "  + getVTLTokenName(VtlTokens.AND) + " "
+                + surroundByParenthesis(removeExtraParenthesis(vtlString2));
+    }
+
+    public static String expressionNotEqualToOther(String expression1, String expression2){
+        return expression1 + " " +  getVTLTokenName(VtlTokens.NEQ) + " " + expression2;
+    }
+
+    /**
+     *
+     * @param vtlString1
+     * @param vtlString2
+     * @return (vtlString1) and (vtlString2)
+     */
+    public static String joinByORLogicExpression(String vtlString1, String vtlString2){
+        return surroundByParenthesis(removeExtraParenthesis(vtlString1))
+                + " "  + getVTLTokenName(VtlTokens.OR) + " "
+                + surroundByParenthesis(removeExtraParenthesis(vtlString2));
+    }
+
+    /**
+     *
+     * @param expression
+     * @return vtlExpression without parenthesis
+     * example: `(nvl(TEST, "") <> "")` should return `nvl(TEST, "") <> ""`
+     */
+    static String removeExtraParenthesis(String expression){ // method is package-private to be tested in isolation
+        if (expression.startsWith(getVTLTokenName(VtlTokens.LPAREN)) && expression.endsWith(getVTLTokenName(VtlTokens.RPAREN)))
+            return expression.substring(1, expression.length() - 1);
+        return expression;
+    }
+
+    /**
+     *
+     * @param expression
+     * @return the same expression surrounded by parenthesis
+     * example: `nvl(TEST, "") <> ""` become `(nvl(TEST, "") <> "")`
+     */
+    public static String surroundByParenthesis(String expression){
+        return getVTLTokenName(VtlTokens.LPAREN) + expression + getVTLTokenName(VtlTokens.RPAREN);
+    }
+
+    /**
+     *
+     * @param expression
+     * @return the same expression surrounded by parenthesis
+     * example: `05` become `"05"`
+     */
+    public static String surroundByDoubleQuotes(String expression){
+        return String.format("\"%s\"", expression);
+    }
+
+    /**
      * Inverts the given expression (which is supposed to be a VTL expression that returns a boolean)
      * by adding a 'not()' around it.
      * @param expression VTL boolean expression.
      * @return The inverted VTL expression.
      */
     public static String invertBooleanExpression(String expression) {
-        return getVTLTokenName(VtlTokens.NOT) +
-                getVTLTokenName(VtlTokens.LPAREN) +
-                expression +
-                getVTLTokenName(VtlTokens.RPAREN);
+        return getVTLTokenName(VtlTokens.NOT) + surroundByParenthesis(expression);
     }
 
     /** List of Trevas token ids for VTL aggregation operators. */

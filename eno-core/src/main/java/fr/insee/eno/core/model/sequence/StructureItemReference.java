@@ -56,6 +56,8 @@ public class StructureItemReference extends EnoObject {
                         "A questionnaire cannot be a child of another Pogues element");
                 case MODULE -> StructureItemType.SEQUENCE;
                 case SUBMODULE -> StructureItemType.SUBSEQUENCE;
+                // This case doesn't exist in this step (questionnaire is dereferenced)
+                case EXTERNAL_ELEMENT -> null;
             };
         if (poguesComponent instanceof QuestionType)
             return StructureItemType.QUESTION;
