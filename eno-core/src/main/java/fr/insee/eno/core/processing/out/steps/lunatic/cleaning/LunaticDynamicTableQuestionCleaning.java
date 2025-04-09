@@ -1,23 +1,18 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.cleaning;
 
-import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
 import fr.insee.eno.core.model.question.table.ResponseCell;
-import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.RosterForLoop;
 import fr.insee.lunatic.model.flat.cleaning.CleaningType;
 import fr.insee.lunatic.model.flat.variable.VariableType;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.getFinalBindingReferencesWithCalculatedVariables;
 import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.processCleaningForFilterExpression;
-import static fr.insee.eno.core.utils.LunaticUtils.findComponentById;
 import static fr.insee.eno.core.utils.LunaticUtils.isConditionFilterActive;
 
 public class LunaticDynamicTableQuestionCleaning {
