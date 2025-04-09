@@ -13,6 +13,7 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.parameter.LunaticParameters;
 import fr.insee.eno.core.processing.ProcessingPipeline;
+import fr.insee.eno.core.processing.out.steps.lunatic.cleaning.LunaticAddCleaning;
 import fr.insee.eno.core.processing.out.steps.lunatic.pagination.LunaticAddPageNumbers;
 import fr.insee.eno.core.processing.out.steps.lunatic.resizing.LunaticAddResizing;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
@@ -27,12 +28,11 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
-class LunaticAddCleaningVariablesTest {
+class LunaticAddCleaningTest {
 
-    LunaticAddCleaningVariables cleaningProcessing;
+    LunaticAddCleaning cleaningProcessing;
     Questionnaire lunaticQuestionnaire;
     EnoQuestionnaire enoQuestionnaire;
 
@@ -94,6 +94,40 @@ class LunaticAddCleaningVariablesTest {
                 "functional/pogues/codes-filtered/pogues-m8hgkyw0.json",
                 "functional/ddi/codes-filtered/ddi-m8hgkyw0.xml");
         cleaningProcessing.processCodeFilters(lunaticQuestionnaire);
+        assertNotNull(lunaticQuestionnaire.getCleaning().getCleaningEntry("AGE"));
+        assertThat(lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("AGE")
+                .getCleanedVariable("RADIO_OUI_NON")
+                .getCleaningExpressions())
+                .hasSize(2);
+        assertEquals("(nvl(AGE, 0) > 18) or (RADIO_OUI_NON <> \"3\")", lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("AGE")
+                .getCleanedVariable("RADIO_OUI_NON")
+                .getCleaningExpressions().get(0).getExpression());
+        assertEquals("(nvl(AGE, 0) > 50) or (RADIO_OUI_NON <> \"4\")", lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("AGE")
+                .getCleanedVariable("RADIO_OUI_NON")
+                .getCleaningExpressions().get(1).getExpression());
+
+        assertThat(lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("AGE")
+                .getCleanedVariable("DROPDOWN_OUI_NON")
+                .getCleaningExpressions())
+                .hasSize(1);
+        assertEquals("(nvl(AGE, 0) > 18) or (DROPDOWN_OUI_NON <> \"3\")", lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("AGE")
+                .getCleanedVariable("DROPDOWN_OUI_NON")
+                .getCleaningExpressions().get(0).getExpression());
+
+        assertThat(lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("AGE")
+                .getCleanedVariable("CHEXBOXMULTI_OUI_NON3")
+                .getCleaningExpressions())
+                .hasSize(1);
+        assertEquals("nvl(AGE, 0) > 18", lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("AGE")
+                .getCleanedVariable("CHEXBOXMULTI_OUI_NON3")
+                .getCleaningExpressions().get(0).getExpression());
 
         System.out.println(LunaticSerializer.serializeToJson(lunaticQuestionnaire));
     }
@@ -105,7 +139,7 @@ class LunaticAddCleaningVariablesTest {
         DDIInstanceDocument ddiQuestionnaire = DDIDeserializer.deserialize(
                 this.getClass().getClassLoader().getResourceAsStream(ddiQuestionnaireTestUrl));
         enoQuestionnaire = PoguesDDIToEno.fromObjects(poguesQuestionnaire, ddiQuestionnaire).transform(enoParameters);
-        cleaningProcessing = new LunaticAddCleaningVariables(enoQuestionnaire);
+        cleaningProcessing = new LunaticAddCleaning(enoQuestionnaire);
         lunaticQuestionnaire = new Questionnaire();
         preProcessQuestionnaire(lunaticQuestionnaire, enoQuestionnaire);
         applyProcessingBeforeCleaning(lunaticQuestionnaire, enoQuestionnaire);
@@ -118,7 +152,7 @@ class LunaticAddCleaningVariablesTest {
         DDIInstanceDocument ddiQuestionnaire = DDIDeserializer.deserialize(
                 this.getClass().getClassLoader().getResourceAsStream(ddiQuestionnaireTestUrl));
         enoQuestionnaire = DDIToEno.fromObject(ddiQuestionnaire).transform(enoParameters);
-        cleaningProcessing = new LunaticAddCleaningVariables(enoQuestionnaire);
+        cleaningProcessing = new LunaticAddCleaning(enoQuestionnaire);
         lunaticQuestionnaire = new Questionnaire();
         preProcessQuestionnaire(lunaticQuestionnaire, enoQuestionnaire);
         applyProcessingBeforeCleaning(lunaticQuestionnaire, enoQuestionnaire);

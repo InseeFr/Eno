@@ -1,20 +1,17 @@
-package fr.insee.eno.core.processing.out.steps.lunatic;
+package fr.insee.eno.core.processing.out.steps.lunatic.cleaning;
 
-import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
-import fr.insee.eno.core.model.response.CodeFilter;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.sequence.ItemReference;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.utils.LunaticUtils;
-import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.cleaning.CleanedVariableEntry;
 import fr.insee.lunatic.model.flat.cleaning.CleaningExpression;
@@ -28,8 +25,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.*;
 
 import static fr.insee.eno.core.model.navigation.ComponentFilter.DEFAULT_FILTER_VALUE;
-import static fr.insee.eno.core.utils.LunaticUtils.findComponentById;
-import static fr.insee.eno.core.utils.vtl.VtlSyntaxUtils.joinByORLogicExpression;
+import static fr.insee.eno.core.utils.LunaticUtils.getCollectedVariablesByQuestion;
+import static fr.insee.eno.core.utils.vtl.VtlSyntaxUtils.*;
 
 /**
  * Processing step to add the 'cleaning' block in the Lunatic questionnaire.
@@ -43,7 +40,7 @@ import static fr.insee.eno.core.utils.vtl.VtlSyntaxUtils.joinByORLogicExpression
  */
 @Slf4j
 @Getter
-public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire> {
+public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
 
     private final EnoQuestionnaire enoQuestionnaire;
     private final EnoIndex enoIndex;
@@ -51,9 +48,24 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
     private final Map<String, Filter> filterIndex = new LinkedHashMap<>();
     // String: filterId - List<String> list of filterID inside
     private final Map<String, List<String>> filterHierarchyIndex = new LinkedHashMap<>();
-    private final Map<String, VariableType> variableIndex = new LinkedHashMap<>();
+    private static final Map<String, VariableType> variableIndex = new LinkedHashMap<>();
     private final Map<String, String> variableShapeFromIndex = new LinkedHashMap<>();
     private Map<String, List<String>> variablesByQuestion;
+
+    /**
+     * Create the 'cleaning' block in the given Lunatic questionnaire. (See class documentation for details.)
+     *
+     * @param lunaticQuestionnaire A Lunatic questionnaire object.
+     */
+    @Override
+    public void apply(Questionnaire lunaticQuestionnaire) {
+        preProcessVariablesAndShapeFrom(lunaticQuestionnaire);
+        preProcessCleaning(lunaticQuestionnaire);
+        processQuestionLevelFilter(lunaticQuestionnaire);
+        processCodeFilters(lunaticQuestionnaire);
+    }
+
+
 
     /**
      * filter 1 is parent of filter2 if filter2 in inside filter 1
@@ -91,7 +103,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
         return filterIds;
     }
 
-    public LunaticAddCleaningVariables(EnoQuestionnaire enoQuestionnaire) {
+    public LunaticAddCleaning(EnoQuestionnaire enoQuestionnaire) {
         this.enoQuestionnaire = enoQuestionnaire;
         this.enoIndex = enoQuestionnaire.getIndex();
         this.preProcessUtilsIndex();
@@ -181,7 +193,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
         return collectedVarInSequence;
     }
 
-    public List<String> getFinalBindingReferencesWithCalculatedVariables(CalculatedExpression expression) {
+    public static List<String> getFinalBindingReferencesWithCalculatedVariables(CalculatedExpression expression) {
         return expression.getBindingReferences().stream()
                 .map(BindingReference::getVariableName)
                 .map(variableIndex::get)
@@ -196,7 +208,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
     }
 
 
-    public List<String> getFinalBindingReferencesWithCalculatedVariables(ConditionFilterType expression) {
+    public static List<String> getFinalBindingReferencesWithCalculatedVariables(ConditionFilterType expression) {
         return expression.getBindingDependencies().stream()
                 .map(variableIndex::get)
                 .map(variable -> {
@@ -208,7 +220,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                 .distinct()
                 .toList();
     }
-    public List<String> removeCalculatedVariables(List<String> variableNames){
+    public static List<String> removeCalculatedVariables(List<String> variableNames){
         return variableNames.stream()
                 .filter(vName -> !(variableIndex.get(vName) instanceof CalculatedVariableType))
                 .toList();
@@ -220,128 +232,37 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
      * @param allVariableNamesForFilter
      * @return true if an aggregator function of VTL language is used in filter (or in its dependencies)
      */
-    private boolean isAggregatorUsedInFilter(String filterExpression, List<String> allVariableNamesForFilter){
-        if(VtlSyntaxUtils.isAggregatorUsedInsideExpression(filterExpression)) return true;
+    private static boolean isAggregatorUsedInFilter(String filterExpression, List<String> allVariableNamesForFilter){
+        if(isAggregatorUsedInsideExpression(filterExpression)) return true;
         for(String vName: allVariableNamesForFilter){
             VariableType variable = variableIndex.get(vName);
             if(variable instanceof CalculatedVariableType calculatedVariable &&
-                    VtlSyntaxUtils.isAggregatorUsedInsideExpression(calculatedVariable.getExpression().getValue())) {
+                    isAggregatorUsedInsideExpression(calculatedVariable.getExpression().getValue())) {
                     return true;
             }
         }
         return false;
     }
 
-    public static List<String> getCollectedVariablesByComponent(ComponentType componentType){
-        List<String> collectedVars = new ArrayList<>();
-        if (componentType instanceof ComponentSimpleResponseType simpleResponseType) {
-            collectedVars.add(simpleResponseType.getResponse().getName());
-            if (componentType instanceof Suggester suggester && suggester.getArbitrary() != null) {
-                collectedVars.add(suggester.getArbitrary().getResponse().getName());
-            }
-            if (componentType instanceof CheckboxOne checkboxOne) {
-                collectedVars.addAll(checkboxOne.getOptions().stream()
-                        .filter(o -> o.getDetail() != null && o.getDetail().getResponse() != null)
-                        .map(o -> o.getDetail().getResponse().getName()).toList());
-            }
-            if (componentType instanceof Radio radio) {
-                collectedVars.addAll(radio.getOptions().stream()
-                        .filter(o -> o.getDetail() != null && o.getDetail().getResponse() != null)
-                        .map(o -> o.getDetail().getResponse().getName()).toList());
-            }
-            if (componentType instanceof Dropdown dropdown) {
-                collectedVars.addAll(dropdown.getOptions().stream()
-                        .filter(o -> o.getDetail() != null && o.getDetail().getResponse() != null)
-                        .map(o -> o.getDetail().getResponse().getName()).toList());
-            }
-        }
-        if (componentType instanceof ComponentMultipleResponseType) {
-            switch (componentType.getComponentType()) {
-                case TABLE -> collectedVars.addAll(((Table) componentType).getBodyLines().stream()
-                        .map(BodyLine::getBodyCells)
-                        .flatMap(Collection::stream)
-                        .map(BodyCell::getResponse)
-                        .filter(Objects::nonNull)
-                        .map(ResponseType::getName)
-                        .toList());
-
-                case ROSTER_FOR_LOOP ->
-                        collectedVars.addAll(((RosterForLoop) componentType).getComponents().stream()
-                                .map(BodyCell::getResponse)
-                                .filter(Objects::nonNull)
-                                .map(ResponseType::getName)
-                                .toList());
-
-                case CHECKBOX_GROUP -> {
-                    collectedVars.addAll(((CheckboxGroup) componentType).getResponses().stream()
-                            .map(ResponseCheckboxGroup::getResponse)
-                            .map(ResponseType::getName)
-                            .toList());
-
-                    collectedVars.addAll(((CheckboxGroup) componentType).getResponses().stream()
-                            .map(ResponseCheckboxGroup::getDetail)
-                            .filter(Objects::nonNull)
-                            .map(DetailResponse::getResponse)
-                            .map(ResponseType::getName)
-                            .toList());
-                }
-            }
-        }
-        return collectedVars;
-    }
-
-    /**
-     *
-     * @param lunaticQuestionnaire
-     * @return A map of QuestionName: List of collected variables in the question.
-     */
-    public Map<String, List<String>> getCollectedVariablesByQuestion(Questionnaire lunaticQuestionnaire) {
-        Map<String, List<String>> questionCollectedVarIndex = new HashMap<>();
-        lunaticQuestionnaire.getComponents().stream()
-                .map(componentType -> {
-                    if (componentType instanceof Loop loop) return loop.getComponents();
-                    return List.of(componentType);
-                })
-                .flatMap(Collection::stream)
-                .forEach(componentType -> {
-                    String questionId = componentType.getId();
-                    List<String> collectedVariables = getCollectedVariablesByComponent(componentType);
-                    questionCollectedVarIndex.put(questionId, collectedVariables);
-                });
-        return questionCollectedVarIndex;
-    }
-
     private static void addNewCleaningExpression(CleanedVariableEntry cleanedVariable,
                                           String filterExpression,
                                           String shapeFrom,
                                           boolean isAggregatorUsed){
-        cleanedVariable
-                .getCleaningExpressions()
-                .add(new CleaningExpression(filterExpression, shapeFrom, isAggregatorUsed)
-        );
+        cleanedVariable.getCleaningExpressions().add(new CleaningExpression(filterExpression, shapeFrom, isAggregatorUsed) );
     }
 
-    /**
-     * Create the 'cleaning' block in the given Lunatic questionnaire. (See class documentation for details.)
-     *
-     * @param lunaticQuestionnaire A Lunatic questionnaire object.
-     */
-    @Override
-    public void apply(Questionnaire lunaticQuestionnaire) {
-        preProcessVariablesAndShapeFrom(lunaticQuestionnaire);
-        preProcessCleaning(lunaticQuestionnaire);
-        processQuestionLevelFilter(lunaticQuestionnaire);
-    }
+
 
     /**
-     *
+     * Cleaning logic, update the cleaning object according to 3 params (filter, variables that influence filter, variables collected inside filter)
      * @param cleaning, the final cleaning object in lunatic-model to update
      * @param filterExpression, the expression of filter (as string expression)
      * @param allVariablesThatInfluenceFilterExpression, list of all variables that influence the filter
      * @param variablesCollectedInsideFilter, list of all variable that collected inside filter i.e that should be cleaned
      */
-    private void processCleaningForFilterExpression(
+    static void processCleaningForFilterExpression(
             CleaningType cleaning,
+            Map<String, String> shapeFromIndex,
             String filterExpression,
             List<String> allVariablesThatInfluenceFilterExpression,
             List<String> variablesCollectedInsideFilter){
@@ -355,7 +276,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                             CleanedVariableEntry cleanedVariableEntry = new CleanedVariableEntry(variableToClean);
                             addNewCleaningExpression(cleanedVariableEntry,
                                     filterExpression,
-                                    variableShapeFromIndex.get(variableToClean),
+                                    shapeFromIndex.get(variableToClean),
                                     isAggregatorUsedOfFilter);
                             cleaningVariableEntry.addCleanedVariable(cleanedVariableEntry);
                         });
@@ -369,7 +290,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                                     : new CleanedVariableEntry(variableToClean);
                             addNewCleaningExpression(cleanedVariableEntry,
                                     filterExpression,
-                                    variableShapeFromIndex.get(variableToClean),
+                                    shapeFromIndex.get(variableToClean),
                                     isAggregatorUsedOfFilter);
                             existingCleaningVariableEntry.addCleanedVariable(cleanedVariableEntry);
                         });
@@ -384,7 +305,7 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
             CalculatedExpression filterExpression = filter.getExpression();
             List<String> allVariablesThatInfluenceFilterExpression = getFinalBindingReferencesWithCalculatedVariables(filterExpression);
             List<String> variablesCollectedInsideFilter = getCollectedVariablesInFilter(filter);
-            processCleaningForFilterExpression(cleaning,
+            processCleaningForFilterExpression(cleaning, variableShapeFromIndex,
                     filter.getExpression().getValue(),
                     allVariablesThatInfluenceFilterExpression,
                     variablesCollectedInsideFilter);
@@ -393,6 +314,8 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
 
 
     public void processCodeFilters(Questionnaire lunaticQuestionnaire){
+        LunaticUniqueChoiceQuestionCleaning uniqueChoiceQuestionCleaning = new LunaticUniqueChoiceQuestionCleaning(lunaticQuestionnaire, variableShapeFromIndex);
+        LunaticMultipleChoiceQuestionCleaning multipleChoiceQuestionCleaning = new LunaticMultipleChoiceQuestionCleaning(lunaticQuestionnaire, variableShapeFromIndex);
         // 1. retrieve all codeFilters
         // 2. retrieve collectedVariable inside
         //   - UniqueChoiceQuestion: only DetailResponse Question variable
@@ -404,104 +327,24 @@ public class LunaticAddCleaningVariables implements ProcessingStep<Questionnaire
                 .filter(UniqueChoiceQuestion.class::isInstance)
                 .map(UniqueChoiceQuestion.class::cast)
                 .filter(uniqueChoiceQuestion -> !uniqueChoiceQuestion.getCodeFilters().isEmpty())
-                .forEach(uniqueChoiceQuestion -> processCleaningUniqueChoiceQuestion(lunaticQuestionnaire, uniqueChoiceQuestion));
+                .forEach(uniqueChoiceQuestionCleaning::processCleaningUniqueChoiceQuestion);
 
         enoQuestionnaire.getMultipleResponseQuestions().stream()
                 .filter(SimpleMultipleChoiceQuestion.class::isInstance)
                 .map(SimpleMultipleChoiceQuestion.class::cast)
                 .filter(simpleMultipleChoiceQuestion -> !simpleMultipleChoiceQuestion.getCodeFilters().isEmpty())
-                .forEach(multipleChoiceQuestion -> processCleaningMultipleChoiceQuestion(lunaticQuestionnaire, multipleChoiceQuestion));
+                .forEach(multipleChoiceQuestionCleaning::processCleaningMultipleChoiceQuestion);
     }
 
-    List<String> getResponseNameOfCheckboxResponse(ResponseCheckboxGroup responseCheckboxGroup){
-        List<String> variableNames = new ArrayList<>();
-        if(responseCheckboxGroup.getResponse() != null) variableNames.add(responseCheckboxGroup.getResponse().getName());
-        if(responseCheckboxGroup.getDetail() != null) variableNames.add(responseCheckboxGroup.getDetail().getResponse().getName());
-        return variableNames;
-    }
 
-    List<String> getResponseNameOfCheckboxResponse(Option option){
-        List<String> variableNames = new ArrayList<>();
-        if(option.getDetail() != null) variableNames.add(option.getDetail().getResponse().getName());
-        return variableNames;
-    }
-
-    private static boolean isConditionFilterActive(ConditionFilterType conditionFilter){
+    static boolean isConditionFilterActive(ConditionFilterType conditionFilter){
         if(conditionFilter == null) return false;
         if(conditionFilter.getValue().isEmpty()) return false;
         return !DEFAULT_FILTER_VALUE.equals(conditionFilter.getValue());
-
     }
 
-    // detail & response
-    private void processCleaningMultipleChoiceQuestion(Questionnaire lunaticQuestionnaire, SimpleMultipleChoiceQuestion enoMultipleChoiceQuestion){
-        CleaningType cleaning = lunaticQuestionnaire.getCleaning();
-        Optional<ComponentType> multipleChoiceQuestion = findComponentById(lunaticQuestionnaire, enoMultipleChoiceQuestion.getId());
-        if(multipleChoiceQuestion.isEmpty()){
-            throw new MappingException("Cannot find Lunatic component for " + enoMultipleChoiceQuestion + ".");
-        }
-        if(multipleChoiceQuestion.get() instanceof CheckboxGroup checkboxGroup){
-            checkboxGroup.getResponses().forEach(responseCheckboxGroup -> {
-                ConditionFilterType conditionFilter = responseCheckboxGroup.getConditionFilter();
-                if(isConditionFilterActive(conditionFilter)){
-                    List<String> allVariablesThatInfluenceFilterExpression = getFinalBindingReferencesWithCalculatedVariables(conditionFilter);
-                    List<String> variablesCollectedInsideFilter = getResponseNameOfCheckboxResponse(responseCheckboxGroup);
-                    processCleaningForFilterExpression(
-                            cleaning, conditionFilter.getValue(),
-                            allVariablesThatInfluenceFilterExpression,
-                            variablesCollectedInsideFilter
-                    );
-                }
-            });
-        }
-    }
 
-    private void processCleaningUniqueChoiceQuestion(Questionnaire lunaticQuestionnaire, UniqueChoiceQuestion enoUniqueChoiceQuestion){
-        Optional<ComponentType> uniqueChoiceQuestion = findComponentById(lunaticQuestionnaire, enoUniqueChoiceQuestion.getId());
-        if(uniqueChoiceQuestion.isEmpty()){
-            throw new MappingException("Cannot find Lunatic component for " + enoUniqueChoiceQuestion + ".");
-        }
-        if (uniqueChoiceQuestion.get() instanceof Radio radio)
-            radio.getOptions().forEach(option -> processCleaningOption(lunaticQuestionnaire, option, radio.getResponse().getName()));
-        if (uniqueChoiceQuestion.get() instanceof CheckboxOne checkboxOne)
-            checkboxOne.getOptions().forEach(option -> processCleaningOption(lunaticQuestionnaire, option, checkboxOne.getResponse().getName()));
-        if (uniqueChoiceQuestion.get() instanceof Dropdown dropdown)
-            dropdown.getOptions().forEach(option -> processCleaningOption(lunaticQuestionnaire, option, dropdown.getResponse().getName()));
-    }
-
-    private void processCleaningOption(Questionnaire lunaticQuestionnaire, Option option, String uniqueResponseVariableName){
-        CleaningType cleaning = lunaticQuestionnaire.getCleaning();
-        ConditionFilterType conditionFilter = option.getConditionFilter();
-        if(isConditionFilterActive(conditionFilter)){
-            List<String> allVariablesThatInfluenceFilterExpression = getFinalBindingReferencesWithCalculatedVariables(conditionFilter);
-            List<String> variablesCollectedInsideFilter = getResponseNameOfCheckboxResponse(option);
-            processCleaningForFilterExpression(
-                    cleaning, conditionFilter.getValue(),
-                    allVariablesThatInfluenceFilterExpression,
-                    variablesCollectedInsideFilter
-            );
-            // special step, add cleaning condition of Variable:
-            // if condition filter or optionValue is not selected i.e variable <> optionValue
-            // why ? expression of cleaning: if at least one is false -> should clean variable (brain fuck)
-            // step 1: create new conditionFilter
-            ConditionFilterType extraConditionFilter = new ConditionFilterType();
-            // example: CITY <> "P" where P is codeValue of "Paris"
-            String conditionOfCodeNotSelected = VtlSyntaxUtils.expressionNotEqualToOther(uniqueResponseVariableName, option.getValue());
-            extraConditionFilter.setValue(joinByORLogicExpression(conditionFilter.getValue(), conditionOfCodeNotSelected));
-            List<String> allVariablesThatInfluenceExtraFilterExpression = new ArrayList<>(allVariablesThatInfluenceFilterExpression);
-            allVariablesThatInfluenceFilterExpression.add(uniqueResponseVariableName);
-            extraConditionFilter.setBindingDependencies(allVariablesThatInfluenceExtraFilterExpression);
-            extraConditionFilter.setType(LabelTypeEnum.VTL);
-            // cleaning variable of this question if codeValue is selected and there is conditionFilter evaluated to true on this option
-            processCleaningForFilterExpression(
-                    cleaning, extraConditionFilter.getValue(),
-                    allVariablesThatInfluenceExtraFilterExpression,
-                    List.of(uniqueResponseVariableName)
-            );
-        }
-    }
-
-    private void processTableCellFilters(){
+    private void processDynamicTableCellFilters(){
         // ToDo
     }
 
