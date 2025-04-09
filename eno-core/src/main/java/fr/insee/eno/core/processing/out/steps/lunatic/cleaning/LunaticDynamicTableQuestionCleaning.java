@@ -36,15 +36,7 @@ public class LunaticDynamicTableQuestionCleaning {
 
 
     public void processCleaningDynamicTableQuestion(DynamicTableQuestion dynamicTableQuestion){
-        Optional<ComponentType> lunaticComponent = findComponentById(lunaticQuestionnaire, dynamicTableQuestion.getId());
-        if(lunaticComponent.isEmpty()){
-            throw new MappingException("Cannot find Lunatic component for " + dynamicTableQuestion + ".");
-        }
-        if(!(lunaticComponent.get() instanceof RosterForLoop rosterForLoop)){
-            throw new MappingException("Lunatic component for " + dynamicTableQuestion + " is not a RosterForLoop.");
-        }
-        dynamicTableQuestion.getResponseCells()
-                .forEach(this::processCleaningResponseCell);
+        dynamicTableQuestion.getResponseCells().forEach(this::processCleaningResponseCell);
     }
 
     private List<String> getCollectedVariablesName(ResponseCell responseCell){
