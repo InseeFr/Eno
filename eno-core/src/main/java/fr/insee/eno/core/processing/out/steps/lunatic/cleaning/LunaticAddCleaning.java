@@ -61,7 +61,7 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
         processQuestionLevelFilter(lunaticQuestionnaire);
         // filter of code (item of codeList)
         processCodeFiltered(lunaticQuestionnaire);
-        // filter in cell level in rosterForLoop
+        // filter in cell level in dynamicTable/rosterForLoop
         processCellsFiltered(lunaticQuestionnaire);
     }
 
@@ -234,7 +234,6 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                 .filter(DynamicTableQuestion.class::isInstance)
                 .map(DynamicTableQuestion.class::cast)
                 .forEach(dynamicTableQuestionCleaning::processCleaningDynamicTableQuestion);
-
     }
 
 }

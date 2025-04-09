@@ -309,15 +309,4 @@ public class LunaticUtils {
         return isConditionFilterActive(conditionFilter.getValue());
     }
 
-    /**
-     * isCollectedCell useful to know if the bodyCell collect data
-     * @param bodyCell
-     * @return true if BodyCell contains a object Response with a not empty name
-     */
-    public static boolean isCollectedCell(BodyCell bodyCell){
-        if(bodyCell.getResponse() == null) return false;
-        if(bodyCell.getResponse().getName() == null) return false;
-        return !bodyCell.getResponse().getName().isEmpty();
-    }
-
 }

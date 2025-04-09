@@ -35,7 +35,6 @@ public class LunaticInsertCodeFilters implements ProcessingStep<Questionnaire> {
         enoVariableIndex.indexVariables(enoQuestionnaire);
         this.variableIndex = enoVariableIndex;
         enoQuestionnaire.getCodeLists().forEach( codeList -> codeListIndex.put(codeList.getId(), codeList));
-
     }
 
     /**
