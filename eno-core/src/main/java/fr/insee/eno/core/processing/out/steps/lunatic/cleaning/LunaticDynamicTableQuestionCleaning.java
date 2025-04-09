@@ -38,6 +38,7 @@ public class LunaticDynamicTableQuestionCleaning {
         List<String> collectedVariables = new ArrayList<>();
         collectedVariables.add(responseCell.getResponse().getVariableName());
         // should add ARBITRARY response of suggester but is not implemented yet
+        // detailResponse (other, precise), or MultipleChoiceQuestion is not allowed in table
         return collectedVariables;
     }
 
