@@ -1,7 +1,6 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.cleaning;
 
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
@@ -221,12 +220,6 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                 .map(SimpleMultipleChoiceQuestion.class::cast)
                 .filter(simpleMultipleChoiceQuestion -> !simpleMultipleChoiceQuestion.getCodeFilters().isEmpty())
                 .forEach(multipleChoiceQuestionCleaning::processCleaningMultipleChoiceQuestion);
-    }
-
-
-
-    private void processDynamicTableCellFilters(){
-        // ToDo
     }
 
 }

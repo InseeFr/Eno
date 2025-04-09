@@ -19,6 +19,8 @@ import static fr.insee.eno.core.utils.vtl.VtlSyntaxUtils.isAggregatorUsedInsideE
 
 public class CleaningUtils {
 
+    private CleaningUtils(){}
+
     /**
      *
      * @param filterExpression
