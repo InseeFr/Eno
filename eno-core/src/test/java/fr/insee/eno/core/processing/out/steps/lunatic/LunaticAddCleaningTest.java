@@ -13,6 +13,7 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.parameter.LunaticParameters;
 import fr.insee.eno.core.processing.ProcessingPipeline;
+import fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils;
 import fr.insee.eno.core.processing.out.steps.lunatic.cleaning.LunaticAddCleaning;
 import fr.insee.eno.core.processing.out.steps.lunatic.pagination.LunaticAddPageNumbers;
 import fr.insee.eno.core.processing.out.steps.lunatic.resizing.LunaticAddResizing;
@@ -73,8 +74,9 @@ class LunaticAddCleaningTest {
     void testGetFinalBindingReferences() throws DDIParsingException {
         prepareQuestionnaireTest("functional/ddi/cleaning/ddi-m7oqvx8y.xml");
         Filter calculatedFilter = (Filter) enoQuestionnaire.getIndex().get("m7oqxnxe");
-        List<String> finalBindingsDeps = cleaningProcessing.removeCalculatedVariables(
-                cleaningProcessing.getFinalBindingReferencesWithCalculatedVariables(calculatedFilter.getExpression()));
+        List<String> finalBindingsDeps = CleaningUtils.removeCalculatedVariables(
+                CleaningUtils.getFinalBindingReferencesWithCalculatedVariables(calculatedFilter.getExpression(), cleaningProcessing.getVariableIndex()),
+                cleaningProcessing.getVariableIndex());
         assertThat(finalBindingsDeps).containsExactly("AGE");
 
     }

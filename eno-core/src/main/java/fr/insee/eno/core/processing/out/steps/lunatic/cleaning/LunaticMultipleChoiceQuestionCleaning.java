@@ -4,21 +4,29 @@ import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.cleaning.CleaningType;
+import fr.insee.lunatic.model.flat.variable.VariableType;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
-import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.LunaticAddCleaning.*;
+import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.getFinalBindingReferencesWithCalculatedVariables;
+import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.processCleaningForFilterExpression;
 import static fr.insee.eno.core.utils.LunaticUtils.findComponentById;
+import static fr.insee.eno.core.utils.LunaticUtils.isConditionFilterActive;
 
 @Slf4j
 public class LunaticMultipleChoiceQuestionCleaning {
 
     private final Questionnaire lunaticQuestionnaire;
+    private final Map<String, VariableType> variableIndex;
     private final Map<String, String> variableShapeFromIndex;
 
-    public LunaticMultipleChoiceQuestionCleaning(Questionnaire lunaticQuestionnaire, Map<String, String> variableShapeFromIndex){
+    public LunaticMultipleChoiceQuestionCleaning(
+            Questionnaire lunaticQuestionnaire,
+            Map<String, VariableType> variableIndex,
+            Map<String, String> variableShapeFromIndex){
         this.lunaticQuestionnaire = lunaticQuestionnaire;
+        this.variableIndex = variableIndex;
         this.variableShapeFromIndex = variableShapeFromIndex;
     }
 
@@ -39,9 +47,9 @@ public class LunaticMultipleChoiceQuestionCleaning {
             checkboxGroup.getResponses().forEach(responseCheckboxGroup -> {
                 ConditionFilterType conditionFilter = responseCheckboxGroup.getConditionFilter();
                 if(isConditionFilterActive(conditionFilter)){
-                    List<String> allVariablesThatInfluenceFilterExpression = getFinalBindingReferencesWithCalculatedVariables(conditionFilter);
+                    List<String> allVariablesThatInfluenceFilterExpression = getFinalBindingReferencesWithCalculatedVariables(conditionFilter, variableIndex);
                     List<String> variablesCollectedInsideFilter = getResponseNamesOfCheckboxResponse(responseCheckboxGroup);
-                    processCleaningForFilterExpression(cleaning, variableShapeFromIndex,
+                    processCleaningForFilterExpression(cleaning, variableIndex, variableShapeFromIndex,
                             conditionFilter.getValue(),
                             allVariablesThatInfluenceFilterExpression,
                             variablesCollectedInsideFilter

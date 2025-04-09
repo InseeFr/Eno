@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
+import static fr.insee.eno.core.model.navigation.ComponentFilter.DEFAULT_FILTER_VALUE;
+
 /**
  * Utility class that provide some methods for Lunatic-Model objects.
  */
@@ -288,6 +290,12 @@ public class LunaticUtils {
                     questionCollectedVarIndex.put(questionId, collectedVariables);
                 });
         return questionCollectedVarIndex;
+    }
+
+    public static boolean isConditionFilterActive(ConditionFilterType conditionFilter){
+        if(conditionFilter == null) return false;
+        if(conditionFilter.getValue().isEmpty()) return false;
+        return !DEFAULT_FILTER_VALUE.equals(conditionFilter.getValue());
     }
 
 }

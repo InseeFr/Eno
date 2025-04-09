@@ -4,6 +4,7 @@ import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.cleaning.CleaningType;
+import fr.insee.lunatic.model.flat.variable.VariableType;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -11,18 +12,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.LunaticAddCleaning.*;
+import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.getFinalBindingReferencesWithCalculatedVariables;
+import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.processCleaningForFilterExpression;
 import static fr.insee.eno.core.utils.LunaticUtils.findComponentById;
+import static fr.insee.eno.core.utils.LunaticUtils.isConditionFilterActive;
 import static fr.insee.eno.core.utils.vtl.VtlSyntaxUtils.*;
 
 @Slf4j
 public class LunaticUniqueChoiceQuestionCleaning {
 
     private final Questionnaire lunaticQuestionnaire;
+    private final Map<String, VariableType> variableIndex;
     private final Map<String, String> variableShapeFromIndex;
 
-    public LunaticUniqueChoiceQuestionCleaning(Questionnaire lunaticQuestionnaire, Map<String, String> variableShapeFromIndex){
+    public LunaticUniqueChoiceQuestionCleaning(Questionnaire lunaticQuestionnaire,
+                                               Map<String, VariableType> variableIndex,
+                                               Map<String, String> variableShapeFromIndex){
         this.lunaticQuestionnaire = lunaticQuestionnaire;
+        this.variableIndex = variableIndex;
         this.variableShapeFromIndex = variableShapeFromIndex;
     }
 
@@ -53,16 +60,16 @@ public class LunaticUniqueChoiceQuestionCleaning {
             Optional<String> detailResponseNameOfOption = getResponseNameOfDetailResponse(option);
             // cleaning detail response
             detailResponseNameOfOption.ifPresent(detailResponse -> processCleaningForFilterExpression(
-                    cleaning, variableShapeFromIndex,
+                    cleaning, variableIndex, variableShapeFromIndex,
                     conditionFilter.getValue(),
-                    getFinalBindingReferencesWithCalculatedVariables(conditionFilter),
+                    getFinalBindingReferencesWithCalculatedVariables(conditionFilter, variableIndex),
                     List.of(detailResponse)
             ));
             // cleaning only if value is selected and filtered
             ConditionFilterType extraCondition = buildExpressionForCleaningQCU(option, uniqueResponseVariableName);
-            processCleaningForFilterExpression(cleaning, variableShapeFromIndex,
+            processCleaningForFilterExpression(cleaning, variableIndex, variableShapeFromIndex,
                     extraCondition.getValue(),
-                    getFinalBindingReferencesWithCalculatedVariables(extraCondition),
+                    getFinalBindingReferencesWithCalculatedVariables(extraCondition, variableIndex),
                     List.of(uniqueResponseVariableName)
             );
         }
@@ -79,7 +86,7 @@ public class LunaticUniqueChoiceQuestionCleaning {
         String conditionOfCodeNotSelected = expressionNotEqualToOther(variableName, surroundByDoubleQuotes(option.getValue()));
         extraConditionFilter.setValue(joinByORLogicExpression(option.getConditionFilter().getValue(), conditionOfCodeNotSelected));
         // update bindingsDeps
-        List<String> allVariablesThatInfluenceExpression = new ArrayList<>(getFinalBindingReferencesWithCalculatedVariables(option.getConditionFilter()));
+        List<String> allVariablesThatInfluenceExpression = new ArrayList<>(getFinalBindingReferencesWithCalculatedVariables(option.getConditionFilter(), variableIndex));
         allVariablesThatInfluenceExpression.add(variableName);
         extraConditionFilter.setBindingDependencies(allVariablesThatInfluenceExpression);
         return extraConditionFilter;
