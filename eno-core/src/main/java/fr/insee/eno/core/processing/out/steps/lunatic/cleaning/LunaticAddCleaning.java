@@ -56,8 +56,10 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
     public void apply(Questionnaire lunaticQuestionnaire) {
         preProcessVariablesAndShapeFrom(lunaticQuestionnaire);
         preProcessCleaning(lunaticQuestionnaire);
+        // classic filter
         processQuestionLevelFilter(lunaticQuestionnaire);
-        processCodeFilters(lunaticQuestionnaire);
+        // filter of code (item of codeList)
+        processCodeFiltered(lunaticQuestionnaire);
     }
 
     /**
@@ -199,7 +201,7 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
     }
 
 
-    public void processCodeFilters(Questionnaire lunaticQuestionnaire){
+    public void processCodeFiltered(Questionnaire lunaticQuestionnaire){
         LunaticUniqueChoiceQuestionCleaning uniqueChoiceQuestionCleaning = new LunaticUniqueChoiceQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
         LunaticMultipleChoiceQuestionCleaning multipleChoiceQuestionCleaning = new LunaticMultipleChoiceQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
         // 1. retrieve all codeFilters

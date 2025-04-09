@@ -21,10 +21,9 @@ public class LunaticMultipleChoiceQuestionCleaning {
     private final Map<String, VariableType> variableIndex;
     private final Map<String, String> variableShapeFromIndex;
 
-    public LunaticMultipleChoiceQuestionCleaning(
-            Questionnaire lunaticQuestionnaire,
-            Map<String, VariableType> variableIndex,
-            Map<String, String> variableShapeFromIndex){
+    public LunaticMultipleChoiceQuestionCleaning(Questionnaire lunaticQuestionnaire,
+                                                 Map<String, VariableType> variableIndex,
+                                                 Map<String, String> variableShapeFromIndex){
         this.lunaticQuestionnaire = lunaticQuestionnaire;
         this.variableIndex = variableIndex;
         this.variableShapeFromIndex = variableShapeFromIndex;

@@ -95,7 +95,7 @@ class LunaticAddCleaningTest {
         prepareQuestionnaireTest(
                 "functional/pogues/codes-filtered/pogues-m8hgkyw0.json",
                 "functional/ddi/codes-filtered/ddi-m8hgkyw0.xml");
-        cleaningProcessing.processCodeFilters(lunaticQuestionnaire);
+        cleaningProcessing.processCodeFiltered(lunaticQuestionnaire);
         assertNotNull(lunaticQuestionnaire.getCleaning().getCleaningEntry("AGE"));
         assertThat(lunaticQuestionnaire.getCleaning()
                 .getCleaningEntry("AGE")
