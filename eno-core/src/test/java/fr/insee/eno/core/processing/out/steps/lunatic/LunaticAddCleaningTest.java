@@ -20,9 +20,9 @@ import fr.insee.eno.core.processing.out.steps.lunatic.resizing.LunaticAddResizin
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.serialize.DDIDeserializer;
-import fr.insee.eno.core.serialize.LunaticSerializer;
 import fr.insee.eno.core.serialize.PoguesDeserializer;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.cleaning.CleaningExpression;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -130,8 +130,27 @@ class LunaticAddCleaningTest {
                 .getCleaningEntry("AGE")
                 .getCleanedVariable("CHEXBOXMULTI_OUI_NON3")
                 .getCleaningExpressions().get(0).getExpression());
+    }
 
-        System.out.println(LunaticSerializer.serializeToJson(lunaticQuestionnaire));
+    @Test
+    void testCleaningOfCellsFiltered() throws DDIParsingException, PoguesDeserializationException {
+        prepareQuestionnaireTest(
+                "functional/pogues/cells-filtered/pogues-m92r209h.json",
+                "functional/ddi/cells-filtered/ddi-m92r209h.xml");
+        cleaningProcessing.processCellsFiltered(lunaticQuestionnaire);
+
+        assertNotNull(lunaticQuestionnaire.getCleaning().getCleaningEntry("AGE"));
+        assertThat(lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("AGE")
+                .getCleanedVariable("NB_BOULOT")
+                .getCleaningExpressions())
+                .hasSize(1);
+        CleaningExpression cleaningExpression =  lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("AGE")
+                .getCleanedVariable("NB_BOULOT")
+                .getCleaningExpressions().get(0);
+        assertEquals("AGE >= 18", cleaningExpression.getExpression());
+        assertEquals("PRENOM", cleaningExpression.getShapeFrom());
     }
 
     void prepareQuestionnaireTest(String poguesQuestionnaireTestUrl, String ddiQuestionnaireTestUrl) throws DDIParsingException, PoguesDeserializationException {
@@ -146,7 +165,6 @@ class LunaticAddCleaningTest {
         preProcessQuestionnaire(lunaticQuestionnaire, enoQuestionnaire);
         applyProcessingBeforeCleaning(lunaticQuestionnaire, enoQuestionnaire);
         cleaningProcessing.preProcessCleaning(lunaticQuestionnaire);
-        cleaningProcessing.preProcessVariablesAndShapeFrom(lunaticQuestionnaire);
     }
 
     void prepareQuestionnaireTest(String ddiQuestionnaireTestUrl) throws DDIParsingException {
@@ -159,7 +177,6 @@ class LunaticAddCleaningTest {
         preProcessQuestionnaire(lunaticQuestionnaire, enoQuestionnaire);
         applyProcessingBeforeCleaning(lunaticQuestionnaire, enoQuestionnaire);
         cleaningProcessing.preProcessCleaning(lunaticQuestionnaire);
-        cleaningProcessing.preProcessVariablesAndShapeFrom(lunaticQuestionnaire);
     }
 
     static void preProcessQuestionnaire(Questionnaire lunaticQuestionnaire, EnoQuestionnaire enoQuestionnaire){

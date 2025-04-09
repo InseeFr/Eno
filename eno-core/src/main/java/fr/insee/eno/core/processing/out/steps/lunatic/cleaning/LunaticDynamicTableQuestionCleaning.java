@@ -1,12 +1,16 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.cleaning;
 
 import fr.insee.eno.core.exceptions.technical.MappingException;
+import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
 import fr.insee.eno.core.model.question.table.ResponseCell;
-import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.ComponentType;
+import fr.insee.lunatic.model.flat.Questionnaire;
+import fr.insee.lunatic.model.flat.RosterForLoop;
 import fr.insee.lunatic.model.flat.cleaning.CleaningType;
 import fr.insee.lunatic.model.flat.variable.VariableType;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -31,7 +35,7 @@ public class LunaticDynamicTableQuestionCleaning {
     }
 
 
-    public void processCleaningRosterForLoopQuestion(DynamicTableQuestion dynamicTableQuestion){
+    public void processCleaningDynamicTableQuestion(DynamicTableQuestion dynamicTableQuestion){
         Optional<ComponentType> lunaticComponent = findComponentById(lunaticQuestionnaire, dynamicTableQuestion.getId());
         if(lunaticComponent.isEmpty()){
             throw new MappingException("Cannot find Lunatic component for " + dynamicTableQuestion + ".");
@@ -39,19 +43,27 @@ public class LunaticDynamicTableQuestionCleaning {
         if(!(lunaticComponent.get() instanceof RosterForLoop rosterForLoop)){
             throw new MappingException("Lunatic component for " + dynamicTableQuestion + " is not a RosterForLoop.");
         }
-        rosterForLoop.getComponents().forEach(this::processCleaningForBodyCellComponent);
+        dynamicTableQuestion.getResponseCells()
+                .forEach(this::processCleaningResponseCell);
     }
 
-    private void processCleaningForBodyCellComponent(BodyCell bodyCell){
+    private List<String> getCollectedVariablesName(ResponseCell responseCell){
+        List<String> collectedVariables = new ArrayList<>();
+        collectedVariables.add(responseCell.getResponse().getVariableName());
+        // should add ARBITRARY response of suggester but is not implemented yet
+        return collectedVariables;
+    }
+
+    private void processCleaningResponseCell(ResponseCell responseCell){
         CleaningType cleaning = lunaticQuestionnaire.getCleaning();
-        String variableToClean = bodyCell.getResponse().getName();
-        ConditionFilterType conditionFilter = bodyCell.getConditionFilter();
-        if(isConditionFilterActive(bodyCell.getConditionFilter())){
+        List<String> variablesToClean = getCollectedVariablesName(responseCell);
+        ComponentFilter componentFilter = responseCell.getComponentFilter();
+        if(isConditionFilterActive(componentFilter)){
             processCleaningForFilterExpression(
                     cleaning, variableIndex, variableShapeFromIndex,
-                    conditionFilter.getValue(),
-                    getFinalBindingReferencesWithCalculatedVariables(conditionFilter, variableIndex),
-                    List.of(variableToClean));
+                    componentFilter.getValue(),
+                    getFinalBindingReferencesWithCalculatedVariables(componentFilter, variableIndex),
+                    variablesToClean);
         }
     }
 }
