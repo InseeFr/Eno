@@ -86,6 +86,16 @@ public class VtlSyntaxUtils {
     }
 
     /**
+     *
+     * @param expression
+     * @return the same expression surrounded by parenthesis
+     * example: `05` become `"05"`
+     */
+    public static String surroundByDoubleQuotes(String expression){
+        return String.format("\"%s\"", expression);
+    }
+
+    /**
      * Inverts the given expression (which is supposed to be a VTL expression that returns a boolean)
      * by adding a 'not()' around it.
      * @param expression VTL boolean expression.

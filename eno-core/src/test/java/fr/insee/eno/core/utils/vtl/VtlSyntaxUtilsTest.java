@@ -47,6 +47,11 @@ class VtlSyntaxUtilsTest {
     }
 
     @Test
+    void testSurroundByDoubleQuotes(){
+        assertEquals("\"FIRST_NAME\"", VtlSyntaxUtils.surroundByDoubleQuotes("FIRST_NAME"));
+    }
+
+    @Test
     void testJoinByORLogicExpression(){
         String expectedExpression = "(FIRST_NAME = \"Laurent\") or (NB >= 15)";
         assertEquals(expectedExpression, VtlSyntaxUtils.joinByORLogicExpression("FIRST_NAME = \"Laurent\"", "NB >= 15"));
