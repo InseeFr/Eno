@@ -34,6 +34,6 @@ public abstract class SingleResponseQuestion extends Question {
     @Pogues("getResponse().getFirst().isMandatory()")
     @DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
             "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
-    @Lunatic("setMandatory(#param)")
+    @Lunatic("!(#this instanceof T(fr.insee.lunatic.model.flat.PairwiseLinks)) ? setMandatory(#param) : null")
     boolean mandatory;
 }

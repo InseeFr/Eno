@@ -32,6 +32,7 @@ class TextQuestionTest {
         textDatatype.setTypeName(DatatypeTypeEnum.TEXT);
         textDatatype.setMaxLength(BigInteger.valueOf(249));
         poguesQuestion.getResponse().getFirst().setDatatype(textDatatype);
+        poguesQuestion.getResponse().getFirst().setMandatory(Boolean.FALSE);
     }
 
     @Test

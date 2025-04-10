@@ -33,8 +33,9 @@ class NumericQuestionTest {
         numericDatatypeType.setTypeName(DatatypeTypeEnum.NUMERIC);
         numericDatatypeType.setMinimum(BigDecimal.ZERO);
         numericDatatypeType.setMaximum(BigDecimal.TEN);
-        numericDatatypeType.setUnit("http://id.insee.fr/unit/euro"); // :(
+        numericDatatypeType.setUnit("http://id.insee.fr/unit/euro");
         poguesQuestion.getResponse().getFirst().setDatatype(numericDatatypeType);
+        poguesQuestion.getResponse().getFirst().setMandatory(Boolean.FALSE);
     }
 
     @Test

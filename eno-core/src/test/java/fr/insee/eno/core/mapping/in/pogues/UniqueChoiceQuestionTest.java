@@ -30,6 +30,7 @@ class UniqueChoiceQuestionTest {
         datatype.setVisualizationHint(VisualizationHintEnum.RADIO);
         response.setDatatype(datatype);
         poguesUCQ.getResponse().add(response);
+        poguesUCQ.getResponse().getFirst().setMandatory(Boolean.FALSE);
     }
 
     @Test
