@@ -6,7 +6,7 @@ import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.utils.RomanNumber;
-import fr.insee.eno.core.utils.VtlSyntaxUtils;
+import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
 
 public class EnoAddNumberingInSequences implements ProcessingStep<EnoQuestionnaire> {
 

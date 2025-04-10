@@ -6,6 +6,7 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.eno.core.serialize.LunaticSerializer;
 import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Loop;
@@ -76,6 +77,22 @@ class DDIToLunaticTest {
                 .findAny().orElse(null);
         assertNotNull(componentThatShouldHaveDeclaration);
         assertEquals(2, componentThatShouldHaveDeclaration.getDeclarations().size());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "edt-v13",
+            "lk6x162e",
+            "m7oqvx8y",
+            "srcv"
+    })
+    void transformQuestion_cleaning(String questionnaireId) throws DDIParsingException {
+        EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
+        Questionnaire lunaticQuestionnaire = DDIToLunatic.fromInputStream(
+                        this.getClass().getClassLoader().getResourceAsStream("functional/ddi/cleaning/ddi-" +questionnaireId+".xml"))
+                .transform(enoParameters);
+        //
+        assertNotNull(lunaticQuestionnaire);
     }
 
     @Nested
