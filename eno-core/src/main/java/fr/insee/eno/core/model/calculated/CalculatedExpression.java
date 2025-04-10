@@ -7,7 +7,6 @@ import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.exceptions.business.IllegalPoguesElementException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.eno.core.reference.PoguesIndex;
 import fr.insee.eno.core.reference.VariableIndex;
 import fr.insee.lunatic.model.flat.LabelType;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
@@ -85,7 +84,7 @@ public class CalculatedExpression extends EnoObject {
         return references;
     }
 
-    private static void validatePoguesReference(String expression, String variableName, VariableIndex variableIndex) {
+   private static void validatePoguesReference(String expression, String variableName, VariableIndex variableIndex) {
         if (!variableIndex.containsVariable(variableName)) {
             String message = String.format(
                     "Name '%s' used in expression:%n%s%n" +
