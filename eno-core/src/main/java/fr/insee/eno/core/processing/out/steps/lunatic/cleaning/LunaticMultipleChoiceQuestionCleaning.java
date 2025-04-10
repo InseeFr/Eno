@@ -7,7 +7,10 @@ import fr.insee.lunatic.model.flat.cleaning.CleaningType;
 import fr.insee.lunatic.model.flat.variable.VariableType;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.getFinalBindingReferencesWithCalculatedVariables;
 import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.processCleaningForFilterExpression;
@@ -21,10 +24,9 @@ public class LunaticMultipleChoiceQuestionCleaning {
     private final Map<String, VariableType> variableIndex;
     private final Map<String, String> variableShapeFromIndex;
 
-    public LunaticMultipleChoiceQuestionCleaning(
-            Questionnaire lunaticQuestionnaire,
-            Map<String, VariableType> variableIndex,
-            Map<String, String> variableShapeFromIndex){
+    public LunaticMultipleChoiceQuestionCleaning(Questionnaire lunaticQuestionnaire,
+                                                 Map<String, VariableType> variableIndex,
+                                                 Map<String, String> variableShapeFromIndex){
         this.lunaticQuestionnaire = lunaticQuestionnaire;
         this.variableIndex = variableIndex;
         this.variableShapeFromIndex = variableShapeFromIndex;

@@ -3,6 +3,7 @@ package fr.insee.eno.core.processing.out.steps.lunatic.cleaning;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.navigation.Filter;
+import fr.insee.eno.core.model.question.DynamicTableQuestion;
 import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
@@ -11,7 +12,8 @@ import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.utils.LunaticUtils;
-import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.ComponentType;
+import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.cleaning.CleaningType;
 import fr.insee.lunatic.model.flat.variable.VariableType;
 import lombok.Getter;
@@ -54,10 +56,13 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
      */
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
-        preProcessVariablesAndShapeFrom(lunaticQuestionnaire);
         preProcessCleaning(lunaticQuestionnaire);
+        // classic filter
         processQuestionLevelFilter(lunaticQuestionnaire);
-        processCodeFilters(lunaticQuestionnaire);
+        // filter of code (item of codeList)
+        processCodeFiltered(lunaticQuestionnaire);
+        // filter in cell level in dynamicTable/rosterForLoop
+        processCellsFiltered(lunaticQuestionnaire);
     }
 
     /**
@@ -121,9 +126,10 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
 
     public void preProcessCleaning(Questionnaire lunaticQuestionnaire){
         lunaticQuestionnaire.setCleaning(new CleaningType());
+        this.preProcessVariablesAndShapeFrom(lunaticQuestionnaire);
     }
 
-    public void preProcessVariablesAndShapeFrom(Questionnaire lunaticQuestionnaire){
+    private void preProcessVariablesAndShapeFrom(Questionnaire lunaticQuestionnaire){
         variablesByQuestion = getCollectedVariablesByQuestion(lunaticQuestionnaire);
         // Create filter shapeFrom index based on filterHierarchyIndex and loop
         lunaticQuestionnaire.getVariables()
@@ -199,7 +205,7 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
     }
 
 
-    public void processCodeFilters(Questionnaire lunaticQuestionnaire){
+    public void processCodeFiltered(Questionnaire lunaticQuestionnaire){
         LunaticUniqueChoiceQuestionCleaning uniqueChoiceQuestionCleaning = new LunaticUniqueChoiceQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
         LunaticMultipleChoiceQuestionCleaning multipleChoiceQuestionCleaning = new LunaticMultipleChoiceQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
         // 1. retrieve all codeFilters
@@ -220,6 +226,14 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                 .map(SimpleMultipleChoiceQuestion.class::cast)
                 .filter(simpleMultipleChoiceQuestion -> !simpleMultipleChoiceQuestion.getCodeFilters().isEmpty())
                 .forEach(multipleChoiceQuestionCleaning::processCleaningMultipleChoiceQuestion);
+    }
+
+    public void processCellsFiltered(Questionnaire lunaticQuestionnaire){
+        LunaticDynamicTableQuestionCleaning dynamicTableQuestionCleaning = new LunaticDynamicTableQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
+        enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .filter(DynamicTableQuestion.class::isInstance)
+                .map(DynamicTableQuestion.class::cast)
+                .forEach(dynamicTableQuestionCleaning::processCleaningDynamicTableQuestion);
     }
 
 }

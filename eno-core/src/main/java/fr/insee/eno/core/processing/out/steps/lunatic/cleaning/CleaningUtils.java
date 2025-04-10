@@ -2,6 +2,7 @@ package fr.insee.eno.core.processing.out.steps.lunatic.cleaning;
 
 import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
+import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.lunatic.model.flat.ConditionFilterType;
 import fr.insee.lunatic.model.flat.cleaning.CleanedVariableEntry;
 import fr.insee.lunatic.model.flat.cleaning.CleaningExpression;
@@ -53,9 +54,8 @@ public class CleaningUtils {
                 .toList();
     }
 
-    public static List<String> getFinalBindingReferencesWithCalculatedVariables(CalculatedExpression expression, Map<String, VariableType> variableIndex) {
-        return expression.getBindingReferences().stream()
-                .map(BindingReference::getVariableName)
+    private static List<String> getFinalBindingReferencesWithCalculatedVariables(List<String> variablesOfExpression, Map<String, VariableType> variableIndex){
+        return variablesOfExpression.stream()
                 .map(variableIndex::get)
                 .map(variable -> {
                     List<String> variablesNames = new ArrayList<>(List.of(variable.getName()));
@@ -67,17 +67,20 @@ public class CleaningUtils {
                 .toList();
     }
 
+    public static List<String> getFinalBindingReferencesWithCalculatedVariables(CalculatedExpression expression, Map<String, VariableType> variableIndex) {
+        return getFinalBindingReferencesWithCalculatedVariables(
+                expression.getBindingReferences().stream().map(BindingReference::getVariableName).toList(),
+                variableIndex);
+    }
+
+    public static List<String> getFinalBindingReferencesWithCalculatedVariables(ComponentFilter expression, Map<String, VariableType> variableIndex) {
+        return getFinalBindingReferencesWithCalculatedVariables(
+                expression.getBindingReferences().stream().map(BindingReference::getVariableName).toList(),
+                variableIndex);
+    }
+
     public static List<String> getFinalBindingReferencesWithCalculatedVariables(ConditionFilterType expression, Map<String, VariableType> variableIndex) {
-        return expression.getBindingDependencies().stream()
-                .map(variableIndex::get)
-                .map(variable -> {
-                    List<String> variablesNames = new ArrayList<>(List.of(variable.getName()));
-                    if ((variable instanceof CalculatedVariableType calculatedVariable)) variablesNames.addAll(calculatedVariable.getBindingDependencies());
-                    return variablesNames;
-                })
-                .flatMap(Collection::stream)
-                .distinct()
-                .toList();
+        return getFinalBindingReferencesWithCalculatedVariables(expression.getBindingDependencies(), variableIndex);
     }
 
     /**

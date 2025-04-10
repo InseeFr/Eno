@@ -3,6 +3,7 @@ package fr.insee.eno.core.utils;
 import fr.insee.eno.core.exceptions.business.LunaticLoopException;
 import fr.insee.eno.core.exceptions.technical.LunaticPairwiseException;
 import fr.insee.eno.core.exceptions.technical.MappingException;
+import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.lunatic.model.flat.*;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -292,10 +293,20 @@ public class LunaticUtils {
         return questionCollectedVarIndex;
     }
 
+    public static boolean isConditionFilterActive(String expression){
+        if(expression == null) return false;
+        if(expression.isEmpty()) return false;
+        return !DEFAULT_FILTER_VALUE.equals(expression);
+    }
+
+    public static boolean isConditionFilterActive(ComponentFilter componentFilter){
+        if(componentFilter == null) return false;
+        return isConditionFilterActive(componentFilter.getValue());
+    }
+
     public static boolean isConditionFilterActive(ConditionFilterType conditionFilter){
         if(conditionFilter == null) return false;
-        if(conditionFilter.getValue().isEmpty()) return false;
-        return !DEFAULT_FILTER_VALUE.equals(conditionFilter.getValue());
+        return isConditionFilterActive(conditionFilter.getValue());
     }
 
 }
