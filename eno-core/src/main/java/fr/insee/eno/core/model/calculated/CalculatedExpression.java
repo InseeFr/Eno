@@ -7,7 +7,7 @@ import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.exceptions.business.IllegalPoguesElementException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.eno.core.reference.PoguesIndex;
+import fr.insee.eno.core.reference.VariableIndex;
 import fr.insee.lunatic.model.flat.LabelType;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.pogues.model.ExpressionType;
@@ -71,21 +71,21 @@ public class CalculatedExpression extends EnoObject {
     /** The method "extractBindingReferences" allows, from the expression of a "CalculatedVariable",
      * to construct the associated "BindingReferences". Note that the identifier (a concept derived from DDI)
      * is null for each reference. */
-    public static Set<BindingReference> extractBindingReferences(String expression, PoguesIndex poguesIndex) {
+    public static Set<BindingReference> extractBindingReferences(String expression, VariableIndex variableIndex) {
         Set<BindingReference> references = new LinkedHashSet<>(); // linked hash set to have consistent order
         Matcher matcher = POGUES_VARIABLE_PATTERN.matcher(expression);
 
         while (matcher.find()) {
             String variableName = matcher.group(1);
-            validatePoguesReference(expression, variableName, poguesIndex);
+            validatePoguesReference(expression, variableName, variableIndex);
             references.add(new BindingReference(null, variableName));
         }
 
         return references;
     }
 
-    private static void validatePoguesReference(String expression, String variableName, PoguesIndex poguesIndex) {
-        if (! poguesIndex.containsVariable(variableName)) {
+   private static void validatePoguesReference(String expression, String variableName, VariableIndex variableIndex) {
+        if (!variableIndex.containsVariable(variableName)) {
             String message = String.format(
                     "Name '%s' used in expression:%n%s%n" +
                             "does not match any variable.",
