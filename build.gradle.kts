@@ -16,7 +16,7 @@ java {
 
 allprojects {
     group = "fr.insee.eno"
-    version = "3.39.0-SNAPSHOT"
+    version = "3.40.0"
 }
 
 subprojects {
