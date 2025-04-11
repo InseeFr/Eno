@@ -20,7 +20,7 @@ tasks.named<Jar>("jar") {
 }
 
 val ddiJavaLibVersion = "1.1.0"
-val modelMapperVersion = "3.2.2"
+val trevasVersion = "1.8.0"
 
 dependencies {
     // DDI
@@ -29,6 +29,8 @@ dependencies {
     implementation(libs.pogues.model)
     // Lunatic
     implementation(libs.lunatic.model)
+    // Vtl-parser
+    implementation("fr.insee.trevas:vtl-parser:${trevasVersion}")
 
     // Spring
     implementation("org.springframework:spring-core")

@@ -3,13 +3,14 @@ package fr.insee.eno.core.utils;
 import fr.insee.eno.core.exceptions.business.LunaticLoopException;
 import fr.insee.eno.core.exceptions.technical.LunaticPairwiseException;
 import fr.insee.eno.core.exceptions.technical.MappingException;
+import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.lunatic.model.flat.*;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+
+import static fr.insee.eno.core.model.navigation.ComponentFilter.DEFAULT_FILTER_VALUE;
 
 /**
  * Utility class that provide some methods for Lunatic-Model objects.
@@ -191,6 +192,121 @@ public class LunaticUtils {
             throw new LunaticPairwiseException(String.format(
                     "Lunatic pairwise must contain exactly 1 component. Pairwise object '%s' contains %s.",
                     pairwiseLinks.getId(), pairwiseComponentsSize));
+    }
+
+    public static Optional<ComponentType> findComponentById(Questionnaire lunaticQuestionnaire, String id) {
+        // Search in questionnaire components
+        List<ComponentType> components = lunaticQuestionnaire.getComponents();
+        Optional<ComponentType> searchedComponent = findComponentInList(id, components);
+        if (searchedComponent.isPresent())
+            return searchedComponent;
+        // If not found, may be in a nesting component (such as loop, roundabout, pairwise)
+        return lunaticQuestionnaire.getComponents().stream()
+                .filter(ComponentNestingType.class::isInstance)
+                .map(ComponentNestingType.class::cast)
+                .map(ComponentNestingType::getComponents)
+                .map(componentList -> findComponentInList(id, componentList))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .findAny();
+    }
+
+    private static Optional<ComponentType> findComponentInList(String id, List<ComponentType> componentList) {
+        return componentList.stream().filter(component -> id.equals(component.getId())).findAny();
+    }
+    public static List<String> getCollectedVariablesByComponent(ComponentType componentType){
+        List<String> collectedVars = new ArrayList<>();
+        if (componentType instanceof ComponentSimpleResponseType simpleResponseType) {
+            collectedVars.add(simpleResponseType.getResponse().getName());
+            if (componentType instanceof Suggester suggester && suggester.getArbitrary() != null) {
+                collectedVars.add(suggester.getArbitrary().getResponse().getName());
+            }
+            if (componentType instanceof CheckboxOne checkboxOne) {
+                collectedVars.addAll(checkboxOne.getOptions().stream()
+                        .filter(o -> o.getDetail() != null && o.getDetail().getResponse() != null)
+                        .map(o -> o.getDetail().getResponse().getName()).toList());
+            }
+            if (componentType instanceof Radio radio) {
+                collectedVars.addAll(radio.getOptions().stream()
+                        .filter(o -> o.getDetail() != null && o.getDetail().getResponse() != null)
+                        .map(o -> o.getDetail().getResponse().getName()).toList());
+            }
+            if (componentType instanceof Dropdown dropdown) {
+                collectedVars.addAll(dropdown.getOptions().stream()
+                        .filter(o -> o.getDetail() != null && o.getDetail().getResponse() != null)
+                        .map(o -> o.getDetail().getResponse().getName()).toList());
+            }
+        }
+        if (componentType instanceof ComponentMultipleResponseType) {
+            switch (componentType.getComponentType()) {
+                case TABLE -> collectedVars.addAll(((Table) componentType).getBodyLines().stream()
+                        .map(BodyLine::getBodyCells)
+                        .flatMap(Collection::stream)
+                        .map(BodyCell::getResponse)
+                        .filter(Objects::nonNull)
+                        .map(ResponseType::getName)
+                        .toList());
+
+                case ROSTER_FOR_LOOP ->
+                        collectedVars.addAll(((RosterForLoop) componentType).getComponents().stream()
+                                .map(BodyCell::getResponse)
+                                .filter(Objects::nonNull)
+                                .map(ResponseType::getName)
+                                .toList());
+
+                case CHECKBOX_GROUP -> {
+                    collectedVars.addAll(((CheckboxGroup) componentType).getResponses().stream()
+                            .map(ResponseCheckboxGroup::getResponse)
+                            .map(ResponseType::getName)
+                            .toList());
+
+                    collectedVars.addAll(((CheckboxGroup) componentType).getResponses().stream()
+                            .map(ResponseCheckboxGroup::getDetail)
+                            .filter(Objects::nonNull)
+                            .map(DetailResponse::getResponse)
+                            .map(ResponseType::getName)
+                            .toList());
+                }
+            }
+        }
+        return collectedVars;
+    }
+
+    /**
+     *
+     * @param lunaticQuestionnaire
+     * @return A map of QuestionName: List of collected variables in the question.
+     */
+    public static Map<String, List<String>> getCollectedVariablesByQuestion(Questionnaire lunaticQuestionnaire) {
+        Map<String, List<String>> questionCollectedVarIndex = new HashMap<>();
+        lunaticQuestionnaire.getComponents().stream()
+                .map(componentType -> {
+                    if (componentType instanceof Loop loop) return loop.getComponents();
+                    return List.of(componentType);
+                })
+                .flatMap(Collection::stream)
+                .forEach(componentType -> {
+                    String questionId = componentType.getId();
+                    List<String> collectedVariables = getCollectedVariablesByComponent(componentType);
+                    questionCollectedVarIndex.put(questionId, collectedVariables);
+                });
+        return questionCollectedVarIndex;
+    }
+
+    public static boolean isConditionFilterActive(String expression){
+        if(expression == null) return false;
+        if(expression.isEmpty()) return false;
+        return !DEFAULT_FILTER_VALUE.equals(expression);
+    }
+
+    public static boolean isConditionFilterActive(ComponentFilter componentFilter){
+        if(componentFilter == null) return false;
+        return isConditionFilterActive(componentFilter.getValue());
+    }
+
+    public static boolean isConditionFilterActive(ConditionFilterType conditionFilter){
+        if(conditionFilter == null) return false;
+        return isConditionFilterActive(conditionFilter.getValue());
     }
 
 }

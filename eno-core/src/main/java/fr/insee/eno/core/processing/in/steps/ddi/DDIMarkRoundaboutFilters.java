@@ -7,7 +7,7 @@ import fr.insee.eno.core.model.navigation.Loop;
 import fr.insee.eno.core.model.sequence.ItemReference;
 import fr.insee.eno.core.model.sequence.RoundaboutSequence;
 import fr.insee.eno.core.processing.ProcessingStep;
-import fr.insee.eno.core.utils.VtlSyntaxUtils;
+import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
 
 import java.util.Optional;
 

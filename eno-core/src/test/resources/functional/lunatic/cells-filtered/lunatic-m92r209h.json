@@ -1,0 +1,251 @@
+{
+  "id": "m92r209h",
+  "label": {
+    "type": "VTL|MD",
+    "value": "[LC]: Cases de tableaux filtrées"
+  },
+  "modele": "LCCASESDET",
+  "maxPage": "2",
+  "resizing": {},
+  "variables": [
+    {
+      "name": "PRENOM",
+      "values": {
+        "COLLECTED": []
+      },
+      "dimension": 1,
+      "variableType": "COLLECTED",
+      "iterationReference": "m92rg22g"
+    },
+    {
+      "name": "AGE",
+      "values": {
+        "COLLECTED": []
+      },
+      "dimension": 1,
+      "variableType": "COLLECTED",
+      "iterationReference": "m92rg22g"
+    },
+    {
+      "name": "NB_BOULOT",
+      "values": {
+        "COLLECTED": []
+      },
+      "dimension": 1,
+      "variableType": "COLLECTED",
+      "iterationReference": "m92rg22g"
+    },
+    {
+      "name": "FILTER_RESULT_PRENOM",
+      "dimension": 1,
+      "shapeFrom": [
+        "PRENOM",
+        "AGE",
+        "NB_BOULOT"
+      ],
+      "expression": {
+        "type": "VTL",
+        "value": "true"
+      },
+      "variableType": "CALCULATED",
+      "iterationReference": "m92rg22g"
+    },
+    {
+      "name": "FILTER_RESULT_AGE",
+      "dimension": 1,
+      "shapeFrom": [
+        "PRENOM",
+        "AGE",
+        "NB_BOULOT"
+      ],
+      "expression": {
+        "type": "VTL",
+        "value": "true"
+      },
+      "variableType": "CALCULATED",
+      "iterationReference": "m92rg22g"
+    },
+    {
+      "name": "FILTER_RESULT_NB_BOULOT",
+      "dimension": 1,
+      "shapeFrom": [
+        "PRENOM",
+        "AGE",
+        "NB_BOULOT"
+      ],
+      "expression": {
+        "type": "VTL",
+        "value": "true"
+      },
+      "variableType": "CALCULATED",
+      "iterationReference": "m92rg22g"
+    }
+  ],
+  "components": [
+    {
+      "id": "m92r5lsm",
+      "page": "1",
+      "label": {
+        "type": "VTL",
+        "value": "\"I - \" || \"S1\""
+      },
+      "componentType": "Sequence",
+      "conditionFilter": {
+        "type": "VTL",
+        "value": "true"
+      }
+    },
+    {
+      "id": "question-m92rg22g",
+      "page": "2",
+      "label": {
+        "type": "VTL|MD",
+        "value": "\"Tableau dynamique avec cases filtrées\""
+      },
+      "components": [
+        {
+          "id": "m92rg22g",
+          "page": "2",
+          "lines": {
+            "max": {
+              "type": "VTL",
+              "value": "10"
+            },
+            "min": {
+              "type": "VTL",
+              "value": "1"
+            }
+          },
+          "header": [
+            {
+              "label": {
+                "type": "VTL|MD",
+                "value": "\"Prénom\""
+              }
+            },
+            {
+              "label": {
+                "type": "VTL|MD",
+                "value": "\"Age\""
+              }
+            },
+            {
+              "label": {
+                "type": "VTL|MD",
+                "value": "\"Combien de boulot avez-vous eu ? (si AGE >= 18)\""
+              }
+            }
+          ],
+          "controls": [
+            {
+              "id": "m92rg22g-RDOP-m92rntz8-format-borne-inf-sup",
+              "type": "ROW",
+              "control": {
+                "type": "VTL",
+                "value": "not(not(isnull(AGE)) and (0>AGE or 150<AGE))"
+              },
+              "criticality": "ERROR",
+              "errorMessage": {
+                "type": "VTL|MD",
+                "value": "\" La valeur doit être comprise entre 0 et 150.\""
+              },
+              "typeOfControl": "FORMAT"
+            },
+            {
+              "id": "m92rg22g-RDOP-m92rntz8-format-decimal",
+              "type": "ROW",
+              "control": {
+                "type": "VTL",
+                "value": "not(not(isnull(AGE))  and round(AGE,0)<>AGE)"
+              },
+              "criticality": "ERROR",
+              "errorMessage": {
+                "type": "VTL|MD",
+                "value": "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\""
+              },
+              "typeOfControl": "FORMAT"
+            },
+            {
+              "id": "m92rg22g-RDOP-m92rcdj6-format-borne-inf-sup",
+              "type": "ROW",
+              "control": {
+                "type": "VTL",
+                "value": "not(not(isnull(NB_BOULOT)) and (0>NB_BOULOT or 10<NB_BOULOT))"
+              },
+              "criticality": "ERROR",
+              "errorMessage": {
+                "type": "VTL|MD",
+                "value": "\" La valeur doit être comprise entre 0 et 10.\""
+              },
+              "typeOfControl": "FORMAT"
+            },
+            {
+              "id": "m92rg22g-RDOP-m92rcdj6-format-decimal",
+              "type": "ROW",
+              "control": {
+                "type": "VTL",
+                "value": "not(not(isnull(NB_BOULOT))  and round(NB_BOULOT,0)<>NB_BOULOT)"
+              },
+              "criticality": "ERROR",
+              "errorMessage": {
+                "type": "VTL|MD",
+                "value": "\"Le nombre doit comporter au maximum 0 chiffre(s) après la virgule.\""
+              },
+              "typeOfControl": "FORMAT"
+            }
+          ],
+          "components": [
+            {
+              "id": "m92rg22g-RDOP-m92ruk51",
+              "response": {
+                "name": "PRENOM"
+              },
+              "maxLength": 249,
+              "componentType": "Input"
+            },
+            {
+              "id": "m92rg22g-RDOP-m92rntz8",
+              "max": 150.0,
+              "min": 0.0,
+              "unit": {
+                "type": "VTL",
+                "value": "\"ans\""
+              },
+              "decimals": 0,
+              "response": {
+                "name": "AGE"
+              },
+              "componentType": "InputNumber"
+            },
+            {
+              "id": "m92rg22g-RDOP-m92rcdj6",
+              "max": 10.0,
+              "min": 0.0,
+              "decimals": 0,
+              "response": {
+                "name": "NB_BOULOT"
+              },
+              "componentType": "InputNumber",
+              "conditionFilter": {
+                "type": "VTL",
+                "value": "AGE >= 18"
+              }
+            }
+          ],
+          "positioning": "HORIZONTAL",
+          "componentType": "RosterForLoop"
+        }
+      ],
+      "componentType": "Question",
+      "conditionFilter": {
+        "type": "VTL",
+        "value": "true"
+      }
+    }
+  ],
+  "pagination": "question",
+  "componentType": "Questionnaire",
+  "enoCoreVersion": "3.38.0-SNAPSHOT.0",
+  "generatingDate": "04-04-2025 16:09:15",
+  "lunaticModelVersion": "4.1.0"
+}

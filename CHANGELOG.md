@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.40.0] - 2025-04-11
+### :sparkles: New Features
+- [`b65b5e4`](https://github.com/InseeFr/Eno/commit/b65b5e4e4d076d2ab362b3515106c1b326efb36c) - table dynamic cell filters *(PR [#1252](https://github.com/InseeFr/Eno/pull/1252) by [@laurentC35](https://github.com/laurentC35))*
+- [`0d1cfdb`](https://github.com/InseeFr/Eno/commit/0d1cfdb0fd8fcc0c05af65ae327c5af2c5a21790) - **lunatic**: optimize cleaning *(PR [#1232](https://github.com/InseeFr/Eno/pull/1232) by [@laurentC35](https://github.com/laurentC35))*
+
+
 ## [3.38.0] - 2025-04-04
 ### :sparkles: New Features
 - [`f32e9c4`](https://github.com/InseeFr/Eno/commit/f32e9c484a28fdbe3f67cd292d4281493bc55f2b) - code-list filters *(PR [#1247](https://github.com/InseeFr/Eno/pull/1247) by [@laurentC35](https://github.com/laurentC35))*
@@ -536,3 +542,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.36.2]: https://github.com/InseeFr/Eno/compare/3.36.1...3.36.2
 [3.37.0]: https://github.com/InseeFr/Eno/compare/3.36.2...3.37.0
 [3.38.0]: https://github.com/InseeFr/Eno/compare/3.37.0...3.38.0
+[3.40.0]: https://github.com/InseeFr/Eno/compare/3.38.0...3.40.0

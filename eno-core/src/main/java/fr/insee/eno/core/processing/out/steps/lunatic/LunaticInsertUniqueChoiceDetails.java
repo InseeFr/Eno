@@ -10,6 +10,8 @@ import fr.insee.lunatic.model.flat.*;
 import java.util.List;
 import java.util.Optional;
 
+import static fr.insee.eno.core.utils.LunaticUtils.findComponentById;
+
 /**
  * Unique choice modality details are at the question level in Eno model.
  * This processing step is aimed to insert the detail response of unique choice questions at the right place.
@@ -86,26 +88,6 @@ public class LunaticInsertUniqueChoiceDetails implements ProcessingStep<Question
         return false;
     }
 
-    // May be refactored in Lunatic utils at some point
-    private static Optional<ComponentType> findComponentById(Questionnaire lunaticQuestionnaire, String id) {
-        // Search in questionnaire components
-        List<ComponentType> components = lunaticQuestionnaire.getComponents();
-        Optional<ComponentType> searchedComponent = findComponentInList(id, components);
-        if (searchedComponent.isPresent())
-            return searchedComponent;
-        // If not found, may be in a nesting component (such as loop, roundabout, pairwise)
-        return lunaticQuestionnaire.getComponents().stream()
-                .filter(ComponentNestingType.class::isInstance)
-                .map(ComponentNestingType.class::cast)
-                .map(ComponentNestingType::getComponents)
-                .map(componentList -> findComponentInList(id, componentList))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .findAny();
-    }
 
-    private static Optional<ComponentType> findComponentInList(String id, List<ComponentType> componentList) {
-        return componentList.stream().filter(component -> id.equals(component.getId())).findAny();
-    }
 
 }
