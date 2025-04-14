@@ -72,7 +72,7 @@ Vous trouverez le paramétrage par défaut via le web-service d'Eno-WS :
 |               Table/Row/DefaultSize| *champ nombre entier*|  19|Nombre de lignes maximum par page pour les tableaux et tableaux dynamiques.|
 |            Capture/Numeric|manual, optical|default : manual, business et household : optical|Saisie optique (précasage) ou manuelle (champ unique pour les numériques, sans distinction du nombre de positions).|
 |         PageBreakBetween||vide |Saut de page : après chaque module ou sans saut de page « forcé »|
-|         AccompanyingMail|vide ou entreeCOL, ouvertureCOL, relanceCOL, medCOL, cnrCOL, accompagnementCOL et depuis avril 2025 pour Platine entreeCOLT, accompagnementCOLT, medCOLT, cnrCOLT, relenceCOLT, ouvertureCOLT |vide |Entreprises : choix du courrier d’accompagnement|
+|         AccompanyingMail|vide ou entreeCOL, ouvertureCOL, relanceCOL, medCOL, cnrCOL, accompagnementCOL et _depuis avril 2025 pour Platine_ entreeCOLT, accompagnementCOLT, medCOLT, cnrCOLT, relenceCOLT, ouvertureCOLT |vide |Entreprises, ménages : choix du courrier d’accompagnement|
 |         Style||vide |Exceptionnel : appliquer un style|
 
 ### Paramètres spécifiques au pipeline ddi2xforms (`<xforms-parameters/>`)
