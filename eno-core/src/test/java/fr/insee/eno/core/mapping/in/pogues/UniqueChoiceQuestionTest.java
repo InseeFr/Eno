@@ -10,8 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.*;
 
 class UniqueChoiceQuestionTest {
 
@@ -60,6 +59,7 @@ class UniqueChoiceQuestionTest {
         assertEquals("Unique choice question label.", enoUCQ.getLabel().getValue());
         assertEquals(UniqueChoiceQuestion.DisplayFormat.RADIO, enoUCQ.getDisplayFormat());
         assertEquals("code-list-id", enoUCQ.getCodeListReference());
+        assertFalse(enoUCQ.isMandatory());
     }
 
 }
