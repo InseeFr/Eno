@@ -1,0 +1,178 @@
+{
+  "owner": "ENO-INTEGRATION-TESTS",
+  "final": true,
+  "id": "m9in873b",
+  "Label": [
+    "Eno - Mandatory question"
+  ],
+  "Name": "ENO_MANDATORY",
+  "lastUpdatedDate": "Tue Apr 15 2025 17:01:12 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "s2106-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2106-dc",
+      "Name": "Enquête capacité à innover et stratégie 2022"
+    }
+  ],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "m9imxhsu",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "idendquest",
+        "m9imr8z2",
+        "m9ims2z4",
+        "m9ina0zi"
+      ]
+    }
+  ],
+  "agency": "fr.insee",
+  "TargetMode": [
+    "CAPI",
+    "CAWI",
+    "CATI",
+    "PAPI"
+  ],
+  "flowLogic": "FILTER",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": [],
+  "Child": [
+    {
+      "id": "m9imr8z2",
+      "depth": 1,
+      "Name": "S1",
+      "Label": [
+        "\"Sequence\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "type": "SequenceType",
+      "genericName": "MODULE",
+      "Child": [
+        {
+          "id": "m9ims2z4",
+          "depth": 2,
+          "Name": "Q_REGULAR",
+          "Label": [
+            "\"Regular question\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Response": [
+            {
+              "id": "m9imyc69",
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "m9in9dix",
+              "mandatory": false
+            }
+          ]
+        },
+        {
+          "id": "m9ina0zi",
+          "depth": 2,
+          "Name": "Q_MANDATORY",
+          "Label": [
+            "\"Mandatory question\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Response": [
+            {
+              "id": "m9in4cvq",
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "m9in1g7e",
+              "mandatory": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "idendquest",
+      "depth": 1,
+      "Name": "QUESTIONNAIRE_END",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "Declaration": [],
+      "genericName": "MODULE",
+      "Control": [],
+      "FlowControl": [],
+      "type": "SequenceType",
+      "Child": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ]
+    }
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "m9in9dix",
+        "Name": "Q_REGULAR",
+        "Label": "Q_REGULAR label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m9in1g7e",
+        "Name": "Q_MANDATORY",
+        "Label": "Q_MANDATORY label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "FlowControl": []
+}
