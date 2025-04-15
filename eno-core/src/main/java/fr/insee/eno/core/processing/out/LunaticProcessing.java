@@ -53,6 +53,7 @@ public class LunaticProcessing {
                 .then(new LunaticResponseTimeQuestionPagination())
                 .then(new LunaticAddCleaningVariables())
                 .thenIf(lunaticParameters.isControls(), new LunaticAddControlFormat())
+                .thenIf(lunaticParameters.isMandatoryControls(), new LunaticAddControlMandatory())
                 .then(new LunaticReverseConsistencyControlLabel())
                 .then(new LunaticFinalizePairwise(enoQuestionnaire))
                 .thenIf(lunaticParameters.isFilterResult(), new LunaticFilterResult(enoIndex))
