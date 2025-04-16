@@ -52,7 +52,7 @@ class LunaticAddControlMandatoryTest {
         assertEquals(ControlContextType.SIMPLE, mandatoryControl.getType());
         assertEquals(ControlTypeEnum.FORMAT, mandatoryControl.getTypeOfControl());
         assertEquals(ControlCriticalityEnum.ERROR, mandatoryControl.getCriticality());
-        assertEquals("nvl(FOO_VAR, \"\") = \"\"", mandatoryControl.getControl().getValue());
+        assertEquals("not(nvl(FOO_VAR, \"\") = \"\")", mandatoryControl.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, mandatoryControl.getControl().getType());
         assertEquals("La réponse à cette question est obligatoire.", mandatoryControl.getErrorMessage().getValue());
         assertEquals(LabelTypeEnum.TXT, mandatoryControl.getErrorMessage().getType());
@@ -72,7 +72,7 @@ class LunaticAddControlMandatoryTest {
         new LunaticAddControlMandatory().apply(lunaticQuestionnaire);
         //
         ControlType mandatoryControl = lunaticInputNumber.getControls().getFirst();
-        assertEquals("isnull(FOO_VAR)", mandatoryControl.getControl().getValue());
+        assertEquals("not(isnull(FOO_VAR))", mandatoryControl.getControl().getValue());
     }
 
     @Test
@@ -148,21 +148,21 @@ class LunaticAddControlMandatoryTest {
 
         @Test
         void mandatoryControlsExpression() {
-            assertEquals("isnull(CHECK_MANDATORY)",
+            assertEquals("not(isnull(CHECK_MANDATORY))",
                     getComponentAtIndex(lunaticQuestionnaire, 1).getControls().getFirst().getControl().getValue());
-            assertEquals("nvl(Q_TEXT1_MANDATORY, \"\") = \"\"",
+            assertEquals("not(nvl(Q_TEXT1_MANDATORY, \"\") = \"\")",
                     getComponentAtIndex(lunaticQuestionnaire, 3).getControls().getFirst().getControl().getValue());
-            assertEquals("nvl(Q_TEXT2_MANDATORY, \"\") = \"\"",
+            assertEquals("not(nvl(Q_TEXT2_MANDATORY, \"\") = \"\")",
                     getComponentAtIndex(lunaticQuestionnaire, 4).getControls().getFirst().getControl().getValue());
-            assertEquals("isnull(Q_NUMBER_MANDATORY)",
+            assertEquals("not(isnull(Q_NUMBER_MANDATORY))",
                     getComponentAtIndex(lunaticQuestionnaire, 5).getControls().getFirst().getControl().getValue());
-            assertEquals("isnull(Q_DATE_MANDATORY)",
+            assertEquals("not(isnull(Q_DATE_MANDATORY))",
                     getComponentAtIndex(lunaticQuestionnaire, 6).getControls().getFirst().getControl().getValue());
-            assertEquals("isnull(Q_DURATION_MANDATORY)",
+            assertEquals("not(isnull(Q_DURATION_MANDATORY))",
                     getComponentAtIndex(lunaticQuestionnaire, 7).getControls().getFirst().getControl().getValue());
-            assertEquals("isnull(Q_RADIO_MANDATORY)",
+            assertEquals("not(isnull(Q_RADIO_MANDATORY))",
                     getComponentAtIndex(lunaticQuestionnaire, 8).getControls().getFirst().getControl().getValue());
-            assertEquals("isnull(Q_DROPDOWN_MANDATORY)",
+            assertEquals("not(isnull(Q_DROPDOWN_MANDATORY))",
                     getComponentAtIndex(lunaticQuestionnaire, 9).getControls().getFirst().getControl().getValue());
         }
 

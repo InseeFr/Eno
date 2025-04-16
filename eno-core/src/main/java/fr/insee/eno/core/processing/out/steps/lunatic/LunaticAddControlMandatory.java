@@ -73,13 +73,13 @@ public class LunaticAddControlMandatory implements ProcessingStep<Questionnaire>
         String responseName = ((ComponentSimpleResponseType) lunaticComponent).getResponse().getName();
         return switch (lunaticComponent.getComponentType()) {
             case INPUT, TEXTAREA ->
-                    Optional.of(String.format("nvl(%s, \"\") = \"\"", responseName));
+                    Optional.of(String.format("not(nvl(%s, \"\") = \"\")", responseName));
             case INPUT_NUMBER,
                     DATEPICKER,
                     DURATION,
                     RADIO, DROPDOWN, CHECKBOX_ONE,
                     CHECKBOX_BOOLEAN ->
-                    Optional.of(String.format("isnull(%s)", responseName));
+                    Optional.of(String.format("not(isnull(%s))", responseName));
             default -> Optional.empty();
         };
     }
