@@ -11,10 +11,7 @@ import fr.insee.lunatic.model.flat.cleaning.CleaningVariableEntry;
 import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
 import fr.insee.lunatic.model.flat.variable.VariableType;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static fr.insee.eno.core.utils.vtl.VtlSyntaxUtils.isAggregatorUsedInsideExpression;
 
@@ -57,6 +54,7 @@ public class CleaningUtils {
     private static List<String> getFinalBindingReferencesWithCalculatedVariables(List<String> variablesOfExpression, Map<String, VariableType> variableIndex){
         return variablesOfExpression.stream()
                 .map(variableIndex::get)
+                .filter(Objects::nonNull)
                 .map(variable -> {
                     List<String> variablesNames = new ArrayList<>(List.of(variable.getName()));
                     if ((variable instanceof CalculatedVariableType calculatedVariable)) variablesNames.addAll(calculatedVariable.getBindingDependencies());

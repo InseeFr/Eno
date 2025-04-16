@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.40.1] - 2025-04-16
+### :bug: Bug Fixes
+- [`57baab9`](https://github.com/InseeFr/Eno/commit/57baab9d7e004e303dfe198d3c63e9c9e8538322) - NPE cleaning utils *(PR [#1259](https://github.com/InseeFr/Eno/pull/1259) by [@RemiVerriez](https://github.com/RemiVerriez))*
+
+
 ## [3.40.0] - 2025-04-11
 ### :sparkles: New Features
 - [`b65b5e4`](https://github.com/InseeFr/Eno/commit/b65b5e4e4d076d2ab362b3515106c1b326efb36c) - table dynamic cell filters *(PR [#1252](https://github.com/InseeFr/Eno/pull/1252) by [@laurentC35](https://github.com/laurentC35))*
@@ -543,3 +548,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.37.0]: https://github.com/InseeFr/Eno/compare/3.36.2...3.37.0
 [3.38.0]: https://github.com/InseeFr/Eno/compare/3.37.0...3.38.0
 [3.40.0]: https://github.com/InseeFr/Eno/compare/3.38.0...3.40.0
+[3.40.1]: https://github.com/InseeFr/Eno/compare/3.40.0...3.40.1
