@@ -28,7 +28,11 @@ public class LunaticAddControlMandatory implements ProcessingStep<Questionnaire>
      * @param language Language for error message in generated controls.
      */
     public LunaticAddControlMandatory(EnoParameters.Language language) {
-        this.language = EnoParameters.Language.FR;
+        switch (language) {
+            case FR, EN -> this.language = language;
+            case null -> this.language = EnoParameters.Language.FR; // null => default
+            default -> this.language = EnoParameters.Language.EN; // non-translated cases => english
+        }
     }
 
     /** Generates "mandatory" controls for components that have the "mandatory" attribute set to true. */
@@ -69,11 +73,12 @@ public class LunaticAddControlMandatory implements ProcessingStep<Questionnaire>
         String responseName = ((ComponentSimpleResponseType) lunaticComponent).getResponse().getName();
         return switch (lunaticComponent.getComponentType()) {
             case INPUT, TEXTAREA ->
-                    Optional.of(String.format("nvl(%s,\"\") = \"\"", responseName));
+                    Optional.of(String.format("nvl(%s, \"\") = \"\"", responseName));
             case INPUT_NUMBER,
                     DATEPICKER,
                     DURATION,
-                    RADIO, DROPDOWN, CHECKBOX_ONE ->
+                    RADIO, DROPDOWN, CHECKBOX_ONE,
+                    CHECKBOX_BOOLEAN ->
                     Optional.of(String.format("isnull(%s)", responseName));
             default -> Optional.empty();
         };
