@@ -5,6 +5,7 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.LunaticParameters;
 import fr.insee.eno.core.processing.ProcessingPipeline;
 import fr.insee.eno.core.processing.out.steps.lunatic.*;
+import fr.insee.eno.core.processing.out.steps.lunatic.cleaning.LunaticAddCleaning;
 import fr.insee.eno.core.processing.out.steps.lunatic.pagination.LunaticAddPageNumbers;
 import fr.insee.eno.core.processing.out.steps.lunatic.resizing.LunaticAddResizing;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
@@ -51,7 +52,7 @@ public class LunaticProcessing {
                 .then(new LunaticAddResizing(enoQuestionnaire))
                 .then(new LunaticAddPageNumbers(lunaticParameters.getLunaticPaginationMode()))
                 .then(new LunaticResponseTimeQuestionPagination())
-                .then(new LunaticAddCleaningVariables())
+                .then(new LunaticAddCleaning(enoQuestionnaire))
                 .thenIf(lunaticParameters.isControls(), new LunaticAddControlFormat())
                 .thenIf(lunaticParameters.isMandatoryControls(), new LunaticAddControlMandatory())
                 .then(new LunaticReverseConsistencyControlLabel())

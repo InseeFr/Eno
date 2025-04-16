@@ -86,6 +86,7 @@ class NumericQuestionTest {
         assertEquals(BigInteger.ZERO, enoQuestion.getNumberOfDecimals());
         assertEquals("€", enoQuestion.getUnit().getValue());
         assertFalse(enoQuestion.getIsUnitDynamic());
+        assertFalse(enoQuestion.isMandatory());
     }
 
 }

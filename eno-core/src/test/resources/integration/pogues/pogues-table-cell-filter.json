@@ -1,0 +1,178 @@
+{
+  "id": "m92r208h",
+  "genericName": "QUESTIONNAIRE",
+  "agency": "fr.insee",
+  "final": false,
+  "flowLogic": "FILTER",
+  "formulasLanguage": "VTL",
+  "lastUpdatedDate": "Wed Apr 09 2025 16:28:13 GMT+0200 (heure d’été d’Europe centrale)",
+  "owner": "ENO-INTEGRATION-TESTS",
+  "Name": "ENO_FILTER_CELLS",
+  "Label": [
+    "Eno - Table with filtered cells"
+  ],
+  "Control": [],
+  "FlowControl": [],
+  "TargetMode": [
+    "CAWI",
+    "CAPI",
+    "CATI",
+    "PAPI"
+  ],
+  "Child": [
+    {
+      "id": "m92r5lsm",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "S1",
+      "Label": [
+        "\"Sequence\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAWI"
+      ],
+      "Child": [
+        {
+          "id": "m92rg22g",
+          "questionType": "TABLE",
+          "type": "QuestionType",
+          "Name": "DYNAMIC_TABLE",
+          "Label": [
+            "\"Dynamic table with filtered cells\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAWI"
+          ],
+          "Response": [
+            {
+              "id": "m9a0yg48",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "m9a1cl40"
+            },
+            {
+              "id": "m9a1bk2k",
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "m9a19zj8",
+              "conditionFilter": "$DYNAMIC_TABLE1$"
+            }
+          ],
+          "ResponseStructure": {
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "DYNAMIC_LENGTH",
+                "MinLines": 1,
+                "MaxLines": 10
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Display next column?\""
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Filtered column\""
+              }
+            ],
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "m9a0yg48",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "m9a1bk2k",
+                "MappingTarget": "1 2"
+              }
+            ]
+          },
+          "ClarificationQuestion": []
+        }
+      ]
+    },
+    {
+      "id": "idendquest",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "QUESTIONNAIRE_END",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAWI",
+        "CAPI",
+        "CATI",
+        "PAPI"
+      ],
+      "Child": []
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "s2106-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2106-dc"
+    }
+  ],
+  "ComponentGroup": [
+    {
+      "id": "m92rufsl",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "m92r5lsm",
+        "m92rg22g",
+        "idendquest"
+      ]
+    }
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "m9a1cl40",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        },
+        "Name": "DYNAMIC_TABLE1",
+        "Label": "Display next column?",
+        "Scope": "m92rg22g"
+      },
+      {
+        "id": "m9a19zj8",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        },
+        "Name": "DYNAMIC_TABLE2",
+        "Label": "Filtered column",
+        "Scope": "m92rg22g"
+      }
+    ]
+  },
+  "childQuestionnaireRef": []
+}

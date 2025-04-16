@@ -7,6 +7,7 @@ import fr.insee.ddi.lifecycle33.reusable.CommandType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.exceptions.business.IllegalDDIElementException;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.code.CodeList;
@@ -16,6 +17,7 @@ import fr.insee.eno.core.model.question.table.NoDataCell;
 import fr.insee.eno.core.model.question.table.ResponseCell;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.RosterForLoop;
+import fr.insee.pogues.model.QuestionType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,6 +33,7 @@ import java.util.List;
  */
 @Getter
 @Setter
+@Context(format = Format.POGUES, type = QuestionType.class)
 @Context(format = Format.DDI, type = QuestionGridType.class)
 @Context(format = Format.LUNATIC, type = RosterForLoop.class)
 public class DynamicTableQuestion extends MultipleResponseQuestion implements EnoTable {
@@ -76,10 +79,12 @@ public class DynamicTableQuestion extends MultipleResponseQuestion implements En
     List<Binding> bindings = new ArrayList<>();
 
     @DDI("getStructuredMixedGridResponseDomain().getGridResponseDomainInMixedList()")
+    @Pogues("T(fr.insee.eno.core.utils.PoguesUtils).getPoguesTableResponseCells(#this)")
     List<ResponseCell> responseCells = new ArrayList<>();
 
     /** No data cells */
     @DDI("getStructuredMixedGridResponseDomain().getNoDataByDefinitionList()")
+    @Pogues("T(fr.insee.eno.core.utils.PoguesUtils).getPoguesTableNoDataCells(#this)")
     List<NoDataCell> noDataCells = new ArrayList<>();
 
     /** Labels for cells that contain no response data or that have a conditional label.
