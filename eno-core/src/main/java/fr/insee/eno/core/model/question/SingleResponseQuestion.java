@@ -28,4 +28,17 @@ public abstract class SingleResponseQuestion extends Question {
     @Lunatic("setResponse(#param)")
     Response response;
 
+    /**
+     * Indicates whether the response is mandatory for this component.
+     *
+     * <p> Note:{PairwiseQuestion} inherits from {SingleResponseQuestion},
+     * but it is not intended to handle the {mandatory} parameter directly.
+     * As a result, the SpEL expression used in the Lunatic mapping is intentionally complex,
+     * but required to properly work around this limitation.
+     */
+    @Pogues("getResponse().getFirst().isMandatory()")
+    @DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
+            "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
+    @Lunatic("!(#this instanceof T(fr.insee.lunatic.model.flat.PairwiseLinks)) ? setMandatory(#param) : null")
+    boolean mandatory;
 }

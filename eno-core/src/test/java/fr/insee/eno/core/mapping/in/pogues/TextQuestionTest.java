@@ -32,6 +32,7 @@ class TextQuestionTest {
         textDatatype.setTypeName(DatatypeTypeEnum.TEXT);
         textDatatype.setMaxLength(BigInteger.valueOf(249));
         poguesQuestion.getResponse().getFirst().setDatatype(textDatatype);
+        poguesQuestion.getResponse().getFirst().setMandatory(Boolean.FALSE);
     }
 
     @Test
@@ -79,6 +80,7 @@ class TextQuestionTest {
         assertEquals("\"Question label.\"", enoQuestion.getLabel().getValue());
         assertEquals(BigInteger.valueOf(249), enoQuestion.getMaxLength());
         assertEquals(TextQuestion.LengthType.SHORT, enoQuestion.getLengthType());
+        assertFalse(enoQuestion.isMandatory());
     }
 
 }
