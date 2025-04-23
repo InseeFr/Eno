@@ -52,18 +52,18 @@ public class LunaticDateDescription implements ProcessingStep<Questionnaire> {
     }
 
     private String generateYearMonthDescription(String min, String max) {
-        return generateDescriptionSafe(min, max, enoParameters.getLanguage(), DateQuestion.YEAR_MONTH_FORMAT);
+        return generateDescription(min, max, enoParameters.getLanguage(), DateQuestion.YEAR_MONTH_FORMAT);
     }
 
     private String generateYearDescription(String min, String max) {
-        return generateDescriptionSafe(min, max, enoParameters.getLanguage(), DateQuestion.YEAR_FORMAT);
+        return generateDescription(min, max, enoParameters.getLanguage(), DateQuestion.YEAR_FORMAT);
     }
 
     private String generateYearMonthDayDescription(String min, String max) {
-        return generateDescriptionSafe(min, max, enoParameters.getLanguage(), DateQuestion.YEAR_MONTH_DAY_FORMAT);
+        return generateDescription(min, max, enoParameters.getLanguage(), DateQuestion.YEAR_MONTH_DAY_FORMAT);
     }
 
-    private String generateDescriptionSafe(String min, String max, EnoParameters.Language lang, String dateFormat) {
+    private String generateDescription(String min, String max, EnoParameters.Language lang, String dateFormat) {
         if ((min == null || min.isEmpty()) && (max == null || max.isEmpty())) {
             return null;
         }
@@ -93,11 +93,11 @@ public class LunaticDateDescription implements ProcessingStep<Questionnaire> {
         String minFormatted = (minResult != null) ? minResult.value() : null;
         String maxFormatted = (maxResult != null) ? maxResult.value() : null;
 
-        return generateDateRangeDescription(minFormatted, maxFormatted);
+        return dateDescriptionValue(minFormatted, maxFormatted);
     }
 
 
-    private String generateDateRangeDescription(String minFormatted, String maxFormatted) {
+    private String dateDescriptionValue(String minFormatted, String maxFormatted) {
         if (minFormatted == null || minFormatted.isEmpty()) return String.format("Avant %s.",maxFormatted);
         if (maxFormatted == null || maxFormatted.isEmpty()) return String.format("Après %s.",minFormatted);
         return String.format("Entre %s et %s.", minFormatted, maxFormatted);
