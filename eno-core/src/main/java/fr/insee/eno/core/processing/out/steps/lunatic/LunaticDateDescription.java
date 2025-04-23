@@ -96,7 +96,6 @@ public class LunaticDateDescription implements ProcessingStep<Questionnaire> {
         return dateDescriptionValue(minFormatted, maxFormatted);
     }
 
-
     private String dateDescriptionValue(String minFormatted, String maxFormatted) {
         if (minFormatted == null || minFormatted.isEmpty()) return String.format("Avant %s.",maxFormatted);
         if (maxFormatted == null || maxFormatted.isEmpty()) return String.format("Après %s.",minFormatted);
