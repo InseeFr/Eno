@@ -117,6 +117,65 @@ class LunaticDateDescriptionTest {
     }
 
     @Test
+    void minAndNoMaxYearMonth() {
+        //
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
+        Datepicker datepicker = new Datepicker();
+        datepicker.setDateFormat(DateQuestion.YEAR_MONTH_FORMAT);
+        datepicker.setMin("2021-12");
+        lunaticQuestionnaire.getComponents().add(datepicker);
+        //
+        EnoParameters enoParameters = EnoParameters.emptyValues();
+        enoParameters.setLanguage(EnoParameters.Language.FR);
+        //
+        LunaticDateDescription processing = new LunaticDateDescription(enoParameters);
+        processing.apply(lunaticQuestionnaire);
+        //
+        LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
+        assertEquals("Après 12/2021.", description.getValue());
+        assertEquals(LabelTypeEnum.TXT, description.getType());
+    }
+
+    @Test
+    void maxAndNoMinYearMonth() {
+        //
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
+        Datepicker datepicker = new Datepicker();
+        datepicker.setDateFormat(DateQuestion.YEAR_MONTH_FORMAT);
+        datepicker.setMax("2025-06");
+        lunaticQuestionnaire.getComponents().add(datepicker);
+        //
+        EnoParameters enoParameters = EnoParameters.emptyValues();
+        enoParameters.setLanguage(EnoParameters.Language.FR);
+        //
+        LunaticDateDescription processing = new LunaticDateDescription(enoParameters);
+        processing.apply(lunaticQuestionnaire);
+        //
+        LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
+        assertEquals("Avant 06/2025.", description.getValue());
+        assertEquals(LabelTypeEnum.TXT, description.getType());
+    }
+
+    @Test
+    void noMinAndNoMaxYearMonth() {
+        //
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
+        Datepicker datepicker = new Datepicker();
+        datepicker.setDateFormat(DateQuestion.YEAR_MONTH_FORMAT);
+        lunaticQuestionnaire.getComponents().add(datepicker);
+        //
+        EnoParameters enoParameters = EnoParameters.emptyValues();
+        enoParameters.setLanguage(EnoParameters.Language.FR);
+        //
+        LunaticDateDescription processing = new LunaticDateDescription(enoParameters);
+        processing.apply(lunaticQuestionnaire);
+        //
+        LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
+        assertNull(description.getValue());
+        assertEquals(LabelTypeEnum.TXT, description.getType());
+    }
+
+    @Test
     void minAndMaxYear() {
         //
         Questionnaire lunaticQuestionnaire = new Questionnaire();
@@ -138,6 +197,65 @@ class LunaticDateDescriptionTest {
     }
 
     @Test
+    void minAndNoMaxYear() {
+        //
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
+        Datepicker datepicker = new Datepicker();
+        datepicker.setDateFormat(DateQuestion.YEAR_FORMAT);
+        datepicker.setMin("2021");
+        lunaticQuestionnaire.getComponents().add(datepicker);
+        //
+        EnoParameters enoParameters = EnoParameters.emptyValues();
+        enoParameters.setLanguage(EnoParameters.Language.FR);
+        //
+        LunaticDateDescription processing = new LunaticDateDescription(enoParameters);
+        processing.apply(lunaticQuestionnaire);
+        //
+        LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
+        assertEquals("Après 2021.", description.getValue());
+        assertEquals(LabelTypeEnum.TXT, description.getType());
+    }
+
+    @Test
+    void maxAndNoMinYear() {
+        //
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
+        Datepicker datepicker = new Datepicker();
+        datepicker.setDateFormat(DateQuestion.YEAR_FORMAT);
+        datepicker.setMax("2025");
+        lunaticQuestionnaire.getComponents().add(datepicker);
+        //
+        EnoParameters enoParameters = EnoParameters.emptyValues();
+        enoParameters.setLanguage(EnoParameters.Language.FR);
+        //
+        LunaticDateDescription processing = new LunaticDateDescription(enoParameters);
+        processing.apply(lunaticQuestionnaire);
+        //
+        LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
+        assertEquals("Avant 2025.", description.getValue());
+        assertEquals(LabelTypeEnum.TXT, description.getType());
+    }
+
+    @Test
+    void noMinAndNoMaxYear() {
+        //
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
+        Datepicker datepicker = new Datepicker();
+        datepicker.setDateFormat(DateQuestion.YEAR_FORMAT);
+        lunaticQuestionnaire.getComponents().add(datepicker);
+        //
+        EnoParameters enoParameters = EnoParameters.emptyValues();
+        enoParameters.setLanguage(EnoParameters.Language.FR);
+        //
+        LunaticDateDescription processing = new LunaticDateDescription(enoParameters);
+        processing.apply(lunaticQuestionnaire);
+        //
+        LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
+        assertNull(description.getValue());
+        assertEquals(LabelTypeEnum.TXT, description.getType());
+    }
+
+    @Test
     void integrationTest() throws ParsingException {
         // Given
         EnoQuestionnaire enoQuestionnaire = PoguesToEno.fromInputStream(
@@ -155,17 +273,24 @@ class LunaticDateDescriptionTest {
 
         // Then
         Datepicker date0 = (Datepicker) lunaticQuestionnaire.getComponents().get(3);
-        Datepicker date1 = (Datepicker) lunaticQuestionnaire.getComponents().get(4);
-        Datepicker date2 = (Datepicker) lunaticQuestionnaire.getComponents().get(5);
-        assertEquals("Entre 01/01/1950 et 01/01/2050.",
-                date0.getDescription().getValue());
-        assertEquals("Entre 01/1950 et 01/2050.",
+        Datepicker date1 = (Datepicker) lunaticQuestionnaire.getComponents().get(6);
+        Datepicker date2 = (Datepicker) lunaticQuestionnaire.getComponents().get(7);
+        Datepicker date3 = (Datepicker) lunaticQuestionnaire.getComponents().get(8);
+        Datepicker date4 = (Datepicker) lunaticQuestionnaire.getComponents().get(13);
+        assertNull(date0.getDescription().getValue());
+        assertEquals("Après 01/01/1950.",
                 date1.getDescription().getValue());
-        assertEquals("Entre 1950 et 2050.",
+        assertEquals("Avant 01/01/2050.",
                 date2.getDescription().getValue());
+        assertEquals("Après 01/1950.",
+                date3.getDescription().getValue());
+        assertEquals("Entre 01/01/1950 et 01/01/2050.",
+                date4.getDescription().getValue());
         assertEquals(LabelTypeEnum.TXT, date0.getDescription().getType());
         assertEquals(LabelTypeEnum.TXT, date1.getDescription().getType());
         assertEquals(LabelTypeEnum.TXT, date2.getDescription().getType());
+        assertEquals(LabelTypeEnum.TXT, date3.getDescription().getType());
+        assertEquals(LabelTypeEnum.TXT, date4.getDescription().getType());
     }
 
 }
