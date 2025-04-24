@@ -38,10 +38,8 @@ public class LunaticDatepickerControl implements LunaticFormatControl<Datepicker
 
         List<ControlType> controls = new ArrayList<>();
 
-        Optional<ControlType> controlYearFormat = generateDatepickerYearControl(id, format, responseName);
         Optional<ControlType> controlBounds = getFormatControlFromDatepickerAttributes(id, minValue, maxValue, format, responseName);
         controlBounds.ifPresent(controls::addFirst);
-        controlYearFormat.ifPresent(controls::addFirst);
         // Note: it's important that the year format is added in first position, since in some cases only the message
         // of the first control is displayed.
         return controls;
@@ -130,20 +128,6 @@ public class LunaticDatepickerControl implements LunaticFormatControl<Datepicker
         }
 
         return Optional.empty();
-    }
-    private Optional<ControlType> generateDatepickerYearControl(String id, String format, String responseName) {
-        if (format == null || !format.contains("YYYY")) {
-            log.warn("Datepicker '{}' (id={}) format is {} which doesn't have the year (YYYY).",
-                    responseName, id, format);
-            return Optional.empty();
-        }
-        String controlId = id + "-format-year";
-        String expression = String.format("not(not(isnull(%s)) and (" +
-                        "cast(cast(cast(%s, date, \"%s\"), string, \"YYYY\"), integer) <= 999 or " +
-                        "cast(cast(cast(%s, date, \"%s\"), string, \"YYYY\"), integer) > 9999))",
-                responseName, responseName, format, responseName, format);
-        String message = "\"L'année doit être saisie avec 4 chiffres.\"";
-        return Optional.of(LunaticFormatControl.createFormatControl(controlId, expression, message));
     }
 
 }
