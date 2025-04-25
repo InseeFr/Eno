@@ -59,10 +59,9 @@ public class LunaticAddControlMandatory implements ProcessingStep<Questionnaire>
 
     private void addMandatoryControl(ComponentType lunaticComponent) {
         Optional<String> expression = generateMandatoryControlExpression(lunaticComponent);
-        if (expression.isEmpty())
-            return;
-        lunaticComponent.getControls().addFirst(
-                createMandatoryControl(lunaticComponent.getId() + "-mandatory-check", expression.get()));
+        expression.ifPresent(expr ->
+                lunaticComponent.getControls().addFirst(
+                    createMandatoryControl(lunaticComponent.getId() + "-mandatory-check", expr)));
     }
 
     /** Generates a "mandatory" control expression in function of the component type.
