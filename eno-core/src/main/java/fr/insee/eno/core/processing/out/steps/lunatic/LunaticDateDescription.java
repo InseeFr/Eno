@@ -45,10 +45,12 @@ public class LunaticDateDescription implements ProcessingStep<Questionnaire> {
             default -> throw new InvalidValueException("Date format '" + format + "' is invalid.");
         }
 
-        LabelType description = new LabelType();
-        description.setValue(generatedDescription);
-        description.setType(LabelTypeEnum.TXT);
-        datepicker.setDescription(description);
+        if (generatedDescription != null) {
+            LabelType description = new LabelType();
+            description.setValue(generatedDescription);
+            description.setType(LabelTypeEnum.TXT);
+            datepicker.setDescription(description);
+        }
     }
 
     private String generateYearMonthDescription(String min, String max) {
