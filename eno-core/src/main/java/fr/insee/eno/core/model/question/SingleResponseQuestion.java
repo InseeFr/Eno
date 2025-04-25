@@ -40,5 +40,5 @@ public abstract class SingleResponseQuestion extends Question {
     @DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
             "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
     @Lunatic("!(#this instanceof T(fr.insee.lunatic.model.flat.PairwiseLinks)) ? setMandatory(#param) : null")
-    boolean mandatory;
+    Boolean mandatory;
 }
