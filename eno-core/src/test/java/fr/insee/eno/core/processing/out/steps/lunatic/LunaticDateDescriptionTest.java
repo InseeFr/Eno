@@ -32,7 +32,7 @@ class LunaticDateDescriptionTest {
         processing.apply(lunaticQuestionnaire);
         //
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
-        assertEquals("Entre 02/12/2021 et 04/06/2025.", description.getValue());
+        assertEquals("Entre 02/12/2021 et 04/06/2025", description.getValue());
         assertEquals(LabelTypeEnum.TXT, description.getType());
     }
 
@@ -52,7 +52,7 @@ class LunaticDateDescriptionTest {
         processing.apply(lunaticQuestionnaire);
         //
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
-        assertEquals("Après 02/12/2021.", description.getValue());
+        assertEquals("Après 02/12/2021", description.getValue());
         assertEquals(LabelTypeEnum.TXT, description.getType());
     }
 
@@ -72,7 +72,7 @@ class LunaticDateDescriptionTest {
         processing.apply(lunaticQuestionnaire);
         //
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
-        assertEquals("Avant 04/06/2025.", description.getValue());
+        assertEquals("Avant 04/06/2025", description.getValue());
         assertEquals(LabelTypeEnum.TXT, description.getType());
     }
 
@@ -110,7 +110,7 @@ class LunaticDateDescriptionTest {
         processing.apply(lunaticQuestionnaire);
         //
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
-        assertEquals("Entre 12/2021 et 06/2025.", description.getValue());
+        assertEquals("Entre 12/2021 et 06/2025", description.getValue());
         assertEquals(LabelTypeEnum.TXT, description.getType());
     }
 
@@ -130,7 +130,7 @@ class LunaticDateDescriptionTest {
         processing.apply(lunaticQuestionnaire);
         //
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
-        assertEquals("Après 12/2021.", description.getValue());
+        assertEquals("Après 12/2021", description.getValue());
         assertEquals(LabelTypeEnum.TXT, description.getType());
     }
 
@@ -150,7 +150,7 @@ class LunaticDateDescriptionTest {
         processing.apply(lunaticQuestionnaire);
         //
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
-        assertEquals("Avant 06/2025.", description.getValue());
+        assertEquals("Avant 06/2025", description.getValue());
         assertEquals(LabelTypeEnum.TXT, description.getType());
     }
 
@@ -188,7 +188,7 @@ class LunaticDateDescriptionTest {
         processing.apply(lunaticQuestionnaire);
         //
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
-        assertEquals("Entre 2021 et 2025.", description.getValue());
+        assertEquals("Entre 2021 et 2025", description.getValue());
         assertEquals(LabelTypeEnum.TXT, description.getType());
     }
 
@@ -208,7 +208,7 @@ class LunaticDateDescriptionTest {
         processing.apply(lunaticQuestionnaire);
         //
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
-        assertEquals("Après 2021.", description.getValue());
+        assertEquals("Après 2021", description.getValue());
         assertEquals(LabelTypeEnum.TXT, description.getType());
     }
 
@@ -228,7 +228,7 @@ class LunaticDateDescriptionTest {
         processing.apply(lunaticQuestionnaire);
         //
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
-        assertEquals("Avant 2025.", description.getValue());
+        assertEquals("Avant 2025", description.getValue());
         assertEquals(LabelTypeEnum.TXT, description.getType());
     }
 
@@ -272,13 +272,13 @@ class LunaticDateDescriptionTest {
         Datepicker date3 = (Datepicker) lunaticQuestionnaire.getComponents().get(8);
         Datepicker date4 = (Datepicker) lunaticQuestionnaire.getComponents().get(13);
         assertNull(date0.getDescription());
-        assertEquals("Après 01/01/1950.",
+        assertEquals("Après 01/01/1950",
                 date1.getDescription().getValue());
-        assertEquals("Avant 01/01/2050.",
+        assertEquals("Avant 01/01/2050",
                 date2.getDescription().getValue());
-        assertEquals("Après 01/1950.",
+        assertEquals("Après 01/1950",
                 date3.getDescription().getValue());
-        assertEquals("Entre 01/01/1950 et 01/01/2050.",
+        assertEquals("Entre 01/01/1950 et 01/01/2050",
                 date4.getDescription().getValue());
         assertEquals(LabelTypeEnum.TXT, date1.getDescription().getType());
         assertEquals(LabelTypeEnum.TXT, date2.getDescription().getType());
