@@ -65,9 +65,9 @@ public class LunaticDurationDescription implements ProcessingStep<Questionnaire>
 
     private static <T extends DurationValue> String durationDescriptionValue(T minValue, T maxValue, DurationControlMessage<T> durationFormatter) {
         if (durationFormatter.isZeroDuration(minValue)) {
-            return String.format("Jusqu'à %s.", durationFormatter.formatDuration(maxValue));
+            return String.format("Jusqu'à %s", durationFormatter.formatDuration(maxValue));
         }
-        return String.format("De %s à %s.", durationFormatter.formatDuration(minValue), durationFormatter.formatDuration(maxValue));
+        return String.format("De %s à %s", durationFormatter.formatDuration(minValue), durationFormatter.formatDuration(maxValue));
     }
 
 }
