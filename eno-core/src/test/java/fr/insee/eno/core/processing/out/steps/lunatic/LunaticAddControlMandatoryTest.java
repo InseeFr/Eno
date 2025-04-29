@@ -148,7 +148,7 @@ class LunaticAddControlMandatoryTest {
 
         @Test
         void mandatoryControlsExpression() {
-            assertEquals("not(isnull(CHECK_MANDATORY))",
+            assertEquals("not(nvl(CHECK_MANDATORY, false) = false)",
                     getComponentAtIndex(lunaticQuestionnaire, 1).getControls().getFirst().getControl().getValue());
             assertEquals("not(nvl(Q_TEXT1_MANDATORY, \"\") = \"\")",
                     getComponentAtIndex(lunaticQuestionnaire, 3).getControls().getFirst().getControl().getValue());

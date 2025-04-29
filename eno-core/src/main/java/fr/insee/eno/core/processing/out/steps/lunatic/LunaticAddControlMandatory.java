@@ -73,11 +73,12 @@ public class LunaticAddControlMandatory implements ProcessingStep<Questionnaire>
         return switch (lunaticComponent.getComponentType()) {
             case INPUT, TEXTAREA ->
                     Optional.of(String.format("not(nvl(%s, \"\") = \"\")", responseName));
+            case CHECKBOX_BOOLEAN ->
+                    Optional.of(String.format("not(nvl(%s, false) = false)", responseName));
             case INPUT_NUMBER,
                     DATEPICKER,
                     DURATION,
-                    RADIO, DROPDOWN, CHECKBOX_ONE,
-                    CHECKBOX_BOOLEAN ->
+                    RADIO, DROPDOWN, CHECKBOX_ONE ->
                     Optional.of(String.format("not(isnull(%s))", responseName));
             default -> Optional.empty();
         };
