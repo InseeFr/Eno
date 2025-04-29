@@ -72,7 +72,7 @@ public class LunaticAddControlMandatory implements ProcessingStep<Questionnaire>
         String responseName = ((ComponentSimpleResponseType) lunaticComponent).getResponse().getName();
         return switch (lunaticComponent.getComponentType()) {
             case INPUT, TEXTAREA ->
-                    Optional.of(String.format("not(nvl(%s, \"\") = \"\")", responseName));
+                    Optional.of(String.format("not(trim(nvl(%s, \"\")) = \"\")", responseName));
             case CHECKBOX_BOOLEAN ->
                     Optional.of(String.format("not(nvl(%s, false) = false)", responseName));
             case INPUT_NUMBER,

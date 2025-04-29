@@ -52,7 +52,7 @@ class LunaticAddControlMandatoryTest {
         assertEquals(ControlContextType.SIMPLE, mandatoryControl.getType());
         assertEquals(ControlTypeEnum.FORMAT, mandatoryControl.getTypeOfControl());
         assertEquals(ControlCriticalityEnum.ERROR, mandatoryControl.getCriticality());
-        assertEquals("not(nvl(FOO_VAR, \"\") = \"\")", mandatoryControl.getControl().getValue());
+        assertEquals("not(trim(nvl(FOO_VAR, \"\")) = \"\")", mandatoryControl.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, mandatoryControl.getControl().getType());
         assertEquals("La réponse à cette question est obligatoire.", mandatoryControl.getErrorMessage().getValue());
         assertEquals(LabelTypeEnum.TXT, mandatoryControl.getErrorMessage().getType());
@@ -150,9 +150,9 @@ class LunaticAddControlMandatoryTest {
         void mandatoryControlsExpression() {
             assertEquals("not(nvl(CHECK_MANDATORY, false) = false)",
                     getComponentAtIndex(lunaticQuestionnaire, 1).getControls().getFirst().getControl().getValue());
-            assertEquals("not(nvl(Q_TEXT1_MANDATORY, \"\") = \"\")",
+            assertEquals("not(trim(nvl(Q_TEXT1_MANDATORY, \"\")) = \"\")",
                     getComponentAtIndex(lunaticQuestionnaire, 3).getControls().getFirst().getControl().getValue());
-            assertEquals("not(nvl(Q_TEXT2_MANDATORY, \"\") = \"\")",
+            assertEquals("not(trim(nvl(Q_TEXT2_MANDATORY, \"\")) = \"\")",
                     getComponentAtIndex(lunaticQuestionnaire, 4).getControls().getFirst().getControl().getValue());
             assertEquals("not(isnull(Q_NUMBER_MANDATORY))",
                     getComponentAtIndex(lunaticQuestionnaire, 5).getControls().getFirst().getControl().getValue());
