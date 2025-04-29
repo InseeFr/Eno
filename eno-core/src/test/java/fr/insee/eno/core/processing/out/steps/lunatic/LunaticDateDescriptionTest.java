@@ -28,7 +28,7 @@ class LunaticDateDescriptionTest {
         EnoParameters enoParameters = EnoParameters.emptyValues();
         enoParameters.setLanguage(EnoParameters.Language.FR);
         //
-        LunaticDateDescription processing = new LunaticDateDescription(enoParameters);
+        LunaticDateDescription processing = new LunaticDateDescription(enoParameters.getLanguage());
         processing.apply(lunaticQuestionnaire);
         //
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
@@ -48,7 +48,7 @@ class LunaticDateDescriptionTest {
         EnoParameters enoParameters = EnoParameters.emptyValues();
         enoParameters.setLanguage(EnoParameters.Language.FR);
         //
-        LunaticDateDescription processing = new LunaticDateDescription(enoParameters);
+        LunaticDateDescription processing = new LunaticDateDescription(enoParameters.getLanguage());
         processing.apply(lunaticQuestionnaire);
         //
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
@@ -68,7 +68,7 @@ class LunaticDateDescriptionTest {
         EnoParameters enoParameters = EnoParameters.emptyValues();
         enoParameters.setLanguage(EnoParameters.Language.FR);
         //
-        LunaticDateDescription processing = new LunaticDateDescription(enoParameters);
+        LunaticDateDescription processing = new LunaticDateDescription(enoParameters.getLanguage());
         processing.apply(lunaticQuestionnaire);
         //
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
@@ -87,7 +87,7 @@ class LunaticDateDescriptionTest {
         EnoParameters enoParameters = EnoParameters.emptyValues();
         enoParameters.setLanguage(EnoParameters.Language.FR);
         //
-        LunaticDateDescription processing = new LunaticDateDescription(enoParameters);
+        LunaticDateDescription processing = new LunaticDateDescription(enoParameters.getLanguage());
         processing.apply(lunaticQuestionnaire);
         //
         assertNull(lunaticQuestionnaire.getComponents().getFirst().getDescription());
@@ -106,7 +106,7 @@ class LunaticDateDescriptionTest {
         EnoParameters enoParameters = EnoParameters.emptyValues();
         enoParameters.setLanguage(EnoParameters.Language.FR);
         //
-        LunaticDateDescription processing = new LunaticDateDescription(enoParameters);
+        LunaticDateDescription processing = new LunaticDateDescription(enoParameters.getLanguage());
         processing.apply(lunaticQuestionnaire);
         //
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
@@ -126,7 +126,7 @@ class LunaticDateDescriptionTest {
         EnoParameters enoParameters = EnoParameters.emptyValues();
         enoParameters.setLanguage(EnoParameters.Language.FR);
         //
-        LunaticDateDescription processing = new LunaticDateDescription(enoParameters);
+        LunaticDateDescription processing = new LunaticDateDescription(enoParameters.getLanguage());
         processing.apply(lunaticQuestionnaire);
         //
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
@@ -146,7 +146,7 @@ class LunaticDateDescriptionTest {
         EnoParameters enoParameters = EnoParameters.emptyValues();
         enoParameters.setLanguage(EnoParameters.Language.FR);
         //
-        LunaticDateDescription processing = new LunaticDateDescription(enoParameters);
+        LunaticDateDescription processing = new LunaticDateDescription(enoParameters.getLanguage());
         processing.apply(lunaticQuestionnaire);
         //
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
@@ -165,7 +165,7 @@ class LunaticDateDescriptionTest {
         EnoParameters enoParameters = EnoParameters.emptyValues();
         enoParameters.setLanguage(EnoParameters.Language.FR);
         //
-        LunaticDateDescription processing = new LunaticDateDescription(enoParameters);
+        LunaticDateDescription processing = new LunaticDateDescription(enoParameters.getLanguage());
         processing.apply(lunaticQuestionnaire);
         //
         assertNull(lunaticQuestionnaire.getComponents().getFirst().getDescription());
@@ -184,7 +184,7 @@ class LunaticDateDescriptionTest {
         EnoParameters enoParameters = EnoParameters.emptyValues();
         enoParameters.setLanguage(EnoParameters.Language.FR);
         //
-        LunaticDateDescription processing = new LunaticDateDescription(enoParameters);
+        LunaticDateDescription processing = new LunaticDateDescription(enoParameters.getLanguage());
         processing.apply(lunaticQuestionnaire);
         //
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
@@ -204,7 +204,7 @@ class LunaticDateDescriptionTest {
         EnoParameters enoParameters = EnoParameters.emptyValues();
         enoParameters.setLanguage(EnoParameters.Language.FR);
         //
-        LunaticDateDescription processing = new LunaticDateDescription(enoParameters);
+        LunaticDateDescription processing = new LunaticDateDescription(enoParameters.getLanguage());
         processing.apply(lunaticQuestionnaire);
         //
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
@@ -224,7 +224,7 @@ class LunaticDateDescriptionTest {
         EnoParameters enoParameters = EnoParameters.emptyValues();
         enoParameters.setLanguage(EnoParameters.Language.FR);
         //
-        LunaticDateDescription processing = new LunaticDateDescription(enoParameters);
+        LunaticDateDescription processing = new LunaticDateDescription(enoParameters.getLanguage());
         processing.apply(lunaticQuestionnaire);
         //
         LabelType description = lunaticQuestionnaire.getComponents().getFirst().getDescription();
@@ -243,7 +243,7 @@ class LunaticDateDescriptionTest {
         EnoParameters enoParameters = EnoParameters.emptyValues();
         enoParameters.setLanguage(EnoParameters.Language.FR);
         //
-        LunaticDateDescription processing = new LunaticDateDescription(enoParameters);
+        LunaticDateDescription processing = new LunaticDateDescription(enoParameters.getLanguage());
         processing.apply(lunaticQuestionnaire);
         //
         assertNull(lunaticQuestionnaire.getComponents().getFirst().getDescription());
@@ -263,7 +263,7 @@ class LunaticDateDescriptionTest {
         // When
         EnoParameters enoParameters = EnoParameters.emptyValues();
         enoParameters.setLanguage(EnoParameters.Language.FR);
-        new LunaticDateDescription(enoParameters).apply(lunaticQuestionnaire);
+        new LunaticDateDescription(enoParameters.getLanguage()).apply(lunaticQuestionnaire);
 
         // Then
         Datepicker date0 = (Datepicker) lunaticQuestionnaire.getComponents().get(3);
