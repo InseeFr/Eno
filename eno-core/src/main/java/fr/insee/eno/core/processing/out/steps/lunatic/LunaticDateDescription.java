@@ -11,10 +11,10 @@ import java.util.List;
 
 public class LunaticDateDescription implements ProcessingStep<Questionnaire> {
 
-    private final EnoParameters enoParameters;
+    private final EnoParameters.Language language;
 
-    public LunaticDateDescription(EnoParameters enoParameters) {
-        this.enoParameters = enoParameters;
+    public LunaticDateDescription(EnoParameters.Language language) {
+        this.language = language;
     }
 
     @Override
@@ -54,15 +54,15 @@ public class LunaticDateDescription implements ProcessingStep<Questionnaire> {
     }
 
     private String generateYearMonthDescription(String min, String max) {
-        return generateDescription(min, max, enoParameters.getLanguage(), DateQuestion.YEAR_MONTH_FORMAT);
+        return generateDescription(min, max, language, DateQuestion.YEAR_MONTH_FORMAT);
     }
 
     private String generateYearDescription(String min, String max) {
-        return generateDescription(min, max, enoParameters.getLanguage(), DateQuestion.YEAR_FORMAT);
+        return generateDescription(min, max, language, DateQuestion.YEAR_FORMAT);
     }
 
     private String generateYearMonthDayDescription(String min, String max) {
-        return generateDescription(min, max, enoParameters.getLanguage(), DateQuestion.YEAR_MONTH_DAY_FORMAT);
+        return generateDescription(min, max, language, DateQuestion.YEAR_MONTH_DAY_FORMAT);
     }
 
     private String generateDescription(String min, String max, EnoParameters.Language lang, String dateFormat) {

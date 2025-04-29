@@ -61,7 +61,7 @@ public class LunaticProcessing {
                 .thenIf(enoParameters.getModeParameter().equals(EnoParameters.ModeParameter.CAWI), new LunaticSequenceDescription())
                 .then(new LunaticInputNumberDescription(enoParameters.getLanguage()))
                 .then(new LunaticDurationDescription())
-                .then(new LunaticDateDescription(enoParameters))
+                .then(new LunaticDateDescription(enoParameters.getLanguage()))
                 .thenIf(lunaticParameters.isQuestionWrapping(), new LunaticQuestionComponent())
                 .then(new LunaticRoundaboutLoops(enoQuestionnaire));
     }
