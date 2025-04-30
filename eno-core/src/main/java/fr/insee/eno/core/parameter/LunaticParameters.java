@@ -12,6 +12,10 @@ public class LunaticParameters {
     public enum LunaticPaginationMode {NONE, SEQUENCE, QUESTION}
 
     private boolean controls;
+
+    /** Generate or not blocking checks for "mandatory" questions. */
+    private boolean mandatoryControls = true;
+
     private boolean toolTip; // Not implemented yet in Lunatic
     private boolean missingVariables;
     private boolean filterResult;

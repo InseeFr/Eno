@@ -6,7 +6,6 @@ import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticSortComponents;
-import fr.insee.eno.core.serialize.LunaticSerializer;
 import fr.insee.lunatic.model.flat.ComponentSimpleResponseType;
 import fr.insee.lunatic.model.flat.PairwiseLinks;
 import fr.insee.lunatic.model.flat.Questionnaire;
