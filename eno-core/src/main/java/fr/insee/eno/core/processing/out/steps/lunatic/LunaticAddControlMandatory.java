@@ -80,7 +80,9 @@ public class LunaticAddControlMandatory implements ProcessingStep<Questionnaire>
                     DURATION,
                     RADIO, DROPDOWN, CHECKBOX_ONE ->
                     Optional.of(String.format("not(isnull(%s))", responseName));
-            default -> Optional.empty();
+            case QUESTIONNAIRE, SEQUENCE, SUBSEQUENCE, QUESTION, ROSTER_FOR_LOOP, LOOP, ROUNDABOUT, TABLE,
+                    PAIRWISE_LINKS, CHECKBOX_GROUP, SUGGESTER, TEXT, ACCORDION ->
+                    Optional.empty();
         };
     }
 
