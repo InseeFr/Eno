@@ -195,7 +195,6 @@
             {
               "CollectedVariableReference": "lo9u3tv1",
               "id": "lo9uemwq",
-              "mandatory": false,
               "CodeListReference": "lo9tv7s6",
               "Datatype": {
                 "Pattern": "",
