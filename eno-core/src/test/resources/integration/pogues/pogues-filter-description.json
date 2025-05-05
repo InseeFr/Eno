@@ -1,0 +1,384 @@
+{
+  "owner": "ENO-INTEGRATION-TESTS",
+  "final": false,
+  "id": "maasw8ay",
+  "Label": [
+    "Eno - Filter description"
+  ],
+  "Name": "ENOFILTERD",
+  "lastUpdatedDate": "Mon May 05 2025 10:10:28 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "maasjrik",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "maasnlcr",
+        "maat1j0o",
+        "maasv5hf",
+        "idendquest",
+        "maasrxii",
+        "maaswktn",
+        "maat3ijc",
+        "maaso9j3",
+        "maasscrn"
+      ]
+    }
+  ],
+  "agency": "fr.insee",
+  "TargetMode": [
+    "CAPI",
+    "CAWI",
+    "CATI",
+    "PAPI"
+  ],
+  "flowLogic": "FILTER",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": [],
+  "Child": [
+    {
+      "id": "maasnlcr",
+      "depth": 1,
+      "Name": "S1",
+      "Label": [
+        "\"Filter triggers\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "type": "SequenceType",
+      "genericName": "MODULE",
+      "Child": [
+        {
+          "id": "maat1j0o",
+          "depth": 2,
+          "Name": "TRIGGER1",
+          "Label": [
+            "\"Activate first filter?\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "ClarificationQuestion": [],
+          "codeFilters": [],
+          "type": "QuestionType",
+          "questionType": "SINGLE_CHOICE",
+          "Response": [
+            {
+              "id": "maathk5q",
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "visualizationHint": "RADIO",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "maat8iaw",
+              "CodeListReference": "maasshym",
+              "mandatory": false
+            }
+          ]
+        },
+        {
+          "id": "maasv5hf",
+          "depth": 2,
+          "Name": "TRIGGER2",
+          "Label": [
+            "\"Activate second filter?\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "ClarificationQuestion": [],
+          "codeFilters": [],
+          "type": "QuestionType",
+          "questionType": "SINGLE_CHOICE",
+          "Response": [
+            {
+              "id": "maatczrx",
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "visualizationHint": "RADIO",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "maasw2yj",
+              "CodeListReference": "maasshym",
+              "mandatory": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "maasrxii",
+      "depth": 1,
+      "Name": "S2",
+      "Label": [
+        "\"Filtered questions\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "type": "SequenceType",
+      "genericName": "MODULE",
+      "Child": [
+        {
+          "id": "maaswktn",
+          "depth": 2,
+          "Name": "Q1",
+          "Label": [
+            "\"Question 1\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Response": [
+            {
+              "id": "maat3z16",
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "maaswlb1",
+              "mandatory": false
+            }
+          ]
+        },
+        {
+          "id": "maat3ijc",
+          "depth": 2,
+          "Name": "Q2",
+          "Label": [
+            "\"Question 2\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Response": [
+            {
+              "id": "maat8n85",
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "maat09vl",
+              "mandatory": false
+            }
+          ]
+        },
+        {
+          "id": "maaso9j3",
+          "depth": 2,
+          "Name": "Q3",
+          "Label": [
+            "\"Question 3\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Response": [
+            {
+              "id": "maatfnqq",
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "maat4q0u",
+              "mandatory": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "maasscrn",
+      "depth": 1,
+      "Name": "END",
+      "Label": [
+        "\"The end\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "type": "SequenceType",
+      "genericName": "MODULE",
+      "Child": []
+    },
+    {
+      "id": "idendquest",
+      "depth": 1,
+      "Name": "QUESTIONNAIRE_END",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "Declaration": [],
+      "genericName": "MODULE",
+      "Control": [],
+      "FlowControl": [],
+      "type": "SequenceType",
+      "Child": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ]
+    }
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "id": "maasshym",
+        "Label": "YES_NO_CODE_LIST",
+        "Code": [
+          {
+            "Label": "\"Yes\"",
+            "Value": "1",
+            "Parent": ""
+          },
+          {
+            "Label": "\"No\"",
+            "Value": "2",
+            "Parent": ""
+          }
+        ]
+      }
+    ]
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "maat8iaw",
+        "Name": "TRIGGER1",
+        "Label": "TRIGGER1 label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        },
+        "CodeListReference": "maasshym"
+      },
+      {
+        "id": "maasw2yj",
+        "Name": "TRIGGER2",
+        "Label": "TRIGGER2 label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        },
+        "CodeListReference": "maasshym"
+      },
+      {
+        "id": "maaswlb1",
+        "Name": "Q1",
+        "Label": "Q1 label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "maat09vl",
+        "Name": "Q2",
+        "Label": "Q2 label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "maat4q0u",
+        "Name": "Q3",
+        "Label": "Q3 label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "FlowControl": [
+    {
+      "id": "maass4b0",
+      "Description": "Filter for questions 1 to 3",
+      "Expression": "not($TRIGGER1$ = \"1\")",
+      "IfTrue": "maaswktn-maaso9j3"
+    },
+    {
+      "id": "maatbfkm",
+      "Description": "Filter for question 2",
+      "Expression": "not($TRIGGER2$ = \"1\")",
+      "IfTrue": "maat3ijc-maat3ijc"
+    }
+  ]
+}
