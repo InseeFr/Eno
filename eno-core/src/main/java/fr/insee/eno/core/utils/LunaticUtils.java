@@ -33,7 +33,7 @@ public class LunaticUtils {
     public static boolean isResponseComponent(@NonNull ComponentType component) {
         nonNullTypeCheck(component);
         return switch (component.getComponentType()) {
-            case QUESTIONNAIRE, LOOP, ROUNDABOUT, SEQUENCE, SUBSEQUENCE, TEXT, ACCORDION -> false;
+            case QUESTIONNAIRE, LOOP, ROUNDABOUT, SEQUENCE, SUBSEQUENCE, TEXT, FILTER_DESCRIPTION, ACCORDION -> false;
             case CHECKBOX_BOOLEAN, INPUT, TEXTAREA, SUGGESTER, INPUT_NUMBER, DATEPICKER, DURATION,
                     DROPDOWN, RADIO, CHECKBOX_ONE,
                     CHECKBOX_GROUP, TABLE, ROSTER_FOR_LOOP, PAIRWISE_LINKS,

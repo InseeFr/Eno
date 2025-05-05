@@ -2,10 +2,7 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.processing.ProcessingStep;
-import fr.insee.lunatic.model.flat.FilterDescription;
-import fr.insee.lunatic.model.flat.LabelType;
-import fr.insee.lunatic.model.flat.LabelTypeEnum;
-import fr.insee.lunatic.model.flat.Questionnaire;
+import fr.insee.lunatic.model.flat.*;
 
 import java.util.List;
 
@@ -40,8 +37,8 @@ public class LunaticAddFilterDescription implements ProcessingStep<Questionnaire
     }
 
     private int findStartIndex(Filter enoFilter, Questionnaire lunaticQuestionnaire) {
-        // TODO
-        return -1;
+        String startId = enoFilter.getFilterScope().getFirst().getId();
+        return lunaticQuestionnaire.getComponents().stream().map(ComponentType::getId).toList().indexOf(startId);
     }
 
     private FilterDescription generateFilterDescriptionComponent(Filter enoFilter) {

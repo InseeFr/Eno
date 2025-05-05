@@ -43,7 +43,7 @@ public class LunaticParameters {
         boolean isProcess = EnoParameters.ModeParameter.PROCESS.equals(modeParameter);
         this.setControls(isWeb || isProcess);
         this.setToolTip(isWeb || isProcess);
-        this.setFilterDescription(isProcess);
+        this.setFilterDescription(true);
         this.setFilterResult(isWeb || isProcess);
         this.setMissingVariables(isInterview || isProcess);
         this.setLunaticPaginationMode(paginationValue(context, modeParameter));
