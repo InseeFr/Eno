@@ -124,7 +124,7 @@
                <r:Content xml:lang="fr-FR">A définir</r:Content>
             </r:Label>
             <r:Description>
-               <r:Content xml:lang="fr-FR">"Filter for questions 1 to 3"</r:Content>
+               <r:Content xml:lang="fr-FR">Filter for questions 1 to 3</r:Content>
             </r:Description>
             <d:TypeOfIfThenElse controlledVocabularyID="INSEE-TOITE-CL-1">hideable</d:TypeOfIfThenElse>
             <d:IfCondition>
@@ -197,7 +197,7 @@
                <r:Content xml:lang="fr-FR">A définir</r:Content>
             </r:Label>
             <r:Description>
-               <r:Content xml:lang="fr-FR">"Filter for question 2"</r:Content>
+               <r:Content xml:lang="fr-FR">Filter for question 2</r:Content>
             </r:Description>
             <d:TypeOfIfThenElse controlledVocabularyID="INSEE-TOITE-CL-1">hideable</d:TypeOfIfThenElse>
             <d:IfCondition>

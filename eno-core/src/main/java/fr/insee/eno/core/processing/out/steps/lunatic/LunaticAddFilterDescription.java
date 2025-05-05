@@ -1,5 +1,6 @@
 package fr.insee.eno.core.processing.out.steps.lunatic;
 
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.lunatic.model.flat.*;
@@ -27,18 +28,37 @@ public class LunaticAddFilterDescription implements ProcessingStep<Questionnaire
      * (just before the first filtered component). */
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
-        enoFilters.forEach(enoFilter -> {
-            // TODO: manage case when the filter starts on a loop component
-            // TODO: manage 'special' filter objects (if any)
-            int index = findStartIndex(enoFilter, lunaticQuestionnaire);
-            FilterDescription filterDescriptionComponent = generateFilterDescriptionComponent(enoFilter);
-            lunaticQuestionnaire.getComponents().add(index, filterDescriptionComponent);
+        enoFilters.stream()
+                .filter(enoFilter -> enoFilter.getDescription() != null && !enoFilter.getDescription().isEmpty())
+                    // No description => no filter description component
+                .forEach(enoFilter -> {
+
+            // Search in questionnaire-level components
+            if (insertFilterDescription(enoFilter, lunaticQuestionnaire.getComponents()))
+                return;
+
+            // If not found, search in loops
+            List<Loop> lunaticLoops = lunaticQuestionnaire.getComponents().stream()
+                    .filter(Loop.class::isInstance).map(Loop.class::cast).toList();
+            for (Loop lunaticLoop : lunaticLoops) {
+                if (insertFilterDescription(enoFilter, lunaticLoop.getComponents()))
+                    return;
+            }
+
+            // If still not found, something got wrong
+            throw new MappingException("Cannot find first element of filter " + enoFilter);
         });
     }
 
-    private int findStartIndex(Filter enoFilter, Questionnaire lunaticQuestionnaire) {
+    private boolean insertFilterDescription(Filter enoFilter, List<ComponentType> lunaticComponents) {
         String startId = enoFilter.getFilterScope().getFirst().getId();
-        return lunaticQuestionnaire.getComponents().stream().map(ComponentType::getId).toList().indexOf(startId);
+        int index = lunaticComponents.stream().map(ComponentType::getId).toList().indexOf(startId);
+        if (index != -1) {
+            FilterDescription filterDescriptionComponent = generateFilterDescriptionComponent(enoFilter);
+            lunaticComponents.add(index, filterDescriptionComponent);
+            return true;
+        }
+        return false;
     }
 
     private FilterDescription generateFilterDescriptionComponent(Filter enoFilter) {

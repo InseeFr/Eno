@@ -370,13 +370,13 @@
   "FlowControl": [
     {
       "id": "maass4b0",
-      "Description": "\"Filter for questions 1 to 3\"",
+      "Description": "Filter for questions 1 to 3",
       "Expression": "not($TRIGGER1$ = \"1\")",
       "IfTrue": "maaswktn-maaso9j3"
     },
     {
       "id": "maatbfkm",
-      "Description": "\"Filter for question 2\"",
+      "Description": "Filter for question 2",
       "Expression": "not($TRIGGER2$ = \"1\")",
       "IfTrue": "maat3ijc-maat3ijc"
     }
