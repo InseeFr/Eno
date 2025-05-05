@@ -88,9 +88,6 @@ class LunaticAddFilterDescriptionTest {
         assertEquals("Foo filter description", filterDescription.getLabel().getValue());
     }
 
-    // Question: what if there is several filters that start on the same component?
-    // (if it is possible)
-
     @Test
     void unitTest_loop() {
         // Given

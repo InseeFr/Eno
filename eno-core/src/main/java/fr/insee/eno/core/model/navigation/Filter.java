@@ -28,7 +28,7 @@ public class Filter extends EnoIdentifiableObject implements EnoObjectWithExpres
 
     /** Description of the filter, defined by the questionnaire's designer. */
     @DDI("getDescription().getContentArray(0).getStringValue()")
-    private String description; // TODO: DDI and/or Pogues mapping + maybe change type
+    private String description;
 
     /** Filter expression. */
     @DDI("getIfCondition().getCommandArray(0)")
