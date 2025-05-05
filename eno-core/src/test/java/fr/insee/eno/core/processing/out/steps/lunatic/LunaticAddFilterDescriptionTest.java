@@ -19,15 +19,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LunaticAddFilterDescriptionTest {
 
-
-        /* Note: cases to handle:
-        - filter on sequence
-        - filter on subsequence
-        - filter on question
-        - filter in a loop
-        - make sure occurrence filters does not generate filter description components
-         */
-
     @Test
     void unitTest_sequence() {
         // Given

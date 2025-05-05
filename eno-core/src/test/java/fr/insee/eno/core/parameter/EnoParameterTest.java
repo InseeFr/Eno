@@ -4,7 +4,6 @@ import fr.insee.eno.core.exceptions.business.EnoParametersException;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -39,7 +38,7 @@ class EnoParameterTest {
         LunaticParameters lunaticParameters = enoParameters.getLunaticParameters();
         assertTrue(lunaticParameters.isControls());
         assertTrue(lunaticParameters.isToolTip());
-        assertFalse(lunaticParameters.isFilterDescription());
+        assertTrue(lunaticParameters.isFilterDescription());
         assertTrue(lunaticParameters.isFilterResult());
         assertFalse(lunaticParameters.isMissingVariables());
         assertEquals(LunaticParameters.LunaticPaginationMode.QUESTION, lunaticParameters.getLunaticPaginationMode());
