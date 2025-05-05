@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.43.0] - 2025-04-30
+### :sparkles: New Features
+- [`ba5c872`](https://github.com/InseeFr/Eno/commit/ba5c872ce234f1907a1446d874fe3a4864b49437) - date question description *(PR [#1263](https://github.com/InseeFr/Eno/pull/1263) by [@RemiVerriez](https://github.com/RemiVerriez))*
+
+
 ## [3.41.0] - 2025-04-16
 ### :sparkles: New Features
 - [`b3b1b01`](https://github.com/InseeFr/Eno/commit/b3b1b018836c1cfe450f1ef06ee367873ca6f548) - mandatory prop for single response components *(PR [#1256](https://github.com/InseeFr/Eno/pull/1256) by [@RemiVerriez](https://github.com/RemiVerriez))*
@@ -555,3 +560,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.40.0]: https://github.com/InseeFr/Eno/compare/3.38.0...3.40.0
 [3.40.1]: https://github.com/InseeFr/Eno/compare/3.40.0...3.40.1
 [3.41.0]: https://github.com/InseeFr/Eno/compare/3.40.1...3.41.0
+[3.43.0]: https://github.com/InseeFr/Eno/compare/3.41.0...3.43.0

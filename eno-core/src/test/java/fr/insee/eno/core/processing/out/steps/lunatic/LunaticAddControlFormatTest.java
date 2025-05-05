@@ -11,7 +11,8 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LunaticAddControlFormatTest {
 
@@ -158,30 +159,6 @@ class LunaticAddControlFormatTest {
     }
 
     @Test
-    @DisplayName("Datepicker: year format control only")
-    void datepickerYearFormatControl() {
-        lunaticQuestionnaire = new Questionnaire();
-        lunaticQuestionnaire.getComponents().add(datePicker);
-        datePicker.setDateFormat("YYYY-MM-DD");
-
-        processing.apply(lunaticQuestionnaire);
-
-        List<ControlType> controls = datePicker.getControls();
-        assertEquals(1, controls.size());
-        ControlType yearControl = controls.getFirst();
-
-        assertEquals("datepicker-id-format-year", yearControl.getId());
-        String expected = "not(not(isnull(DATE_VAR)) and (" +
-                "cast(cast(cast(DATE_VAR, date, \"YYYY-MM-DD\"), string, \"YYYY\"), integer) <= 999 or " +
-                "cast(cast(cast(DATE_VAR, date, \"YYYY-MM-DD\"), string, \"YYYY\"), integer) > 9999))";
-        assertEquals(expected, yearControl.getControl().getValue());
-        assertEquals(LabelTypeEnum.VTL, yearControl.getControl().getType());
-        assertEquals(LabelTypeEnum.VTL_MD, yearControl.getErrorMessage().getType());
-        assertEquals(ControlTypeEnum.FORMAT, yearControl.getTypeOfControl());
-        assertEquals(ControlCriticalityEnum.ERROR, yearControl.getCriticality());
-    }
-
-    @Test
     @DisplayName("Datepicker: min and max format control")
     void datepickerMinMaxFormatControl() {
         lunaticQuestionnaire = new Questionnaire();
@@ -192,8 +169,8 @@ class LunaticAddControlFormatTest {
         processing.apply(lunaticQuestionnaire);
 
         List<ControlType> controls = datePicker.getControls();
-        assertEquals(2, controls.size());
-        ControlType control = controls.get(1);
+        assertEquals(1, controls.size());
+        ControlType control = controls.getFirst();
 
         assertEquals("datepicker-id-format-date-borne-inf-sup", control.getId());
         String expected = "not(not(isnull(DATE_VAR)) and " +
@@ -217,9 +194,7 @@ class LunaticAddControlFormatTest {
         datePicker.setDateFormat("YYYY-MM-DD");
         processing.apply(lunaticQuestionnaire);
 
-        // Only year format control should be present
-        assertEquals(1, datePicker.getControls().size());
-        assertNotEquals("datepicker-id-format-date-borne-sup", datePicker.getControls().getFirst().getId());
+        assertEquals(0, datePicker.getControls().size());
     }
 
     @Test
@@ -232,8 +207,8 @@ class LunaticAddControlFormatTest {
         processing.apply(lunaticQuestionnaire);
 
         List<ControlType> controls = datePicker.getControls();
-        assertEquals(2, controls.size());
-        ControlType control = controls.get(1);
+        assertEquals(1, controls.size());
+        ControlType control = controls.getFirst();
 
         assertEquals("datepicker-id-format-date-borne-inf", control.getId());
         String expected = "not(not(isnull(DATE_VAR)) and " +
@@ -268,8 +243,8 @@ class LunaticAddControlFormatTest {
         processing.apply(lunaticQuestionnaire);
 
         List<ControlType> controls = datePicker.getControls();
-        assertEquals(2, controls.size());
-        ControlType boundsControl = controls.get(1);
+        assertEquals(1, controls.size());
+        ControlType boundsControl = controls.getFirst();
 
         assertEquals("datepicker-id-format-date-borne-sup", boundsControl.getId());
         String expected = "not(not(isnull(DATE_VAR)) " +
@@ -293,11 +268,9 @@ class LunaticAddControlFormatTest {
         processing.apply(lunaticQuestionnaire);
 
         List<ControlType> controls = datePicker.getControls();
-        assertEquals(2, controls.size());
-        ControlType yearControl = controls.get(0);
-        ControlType boundsControl = controls.get(1);
+        assertEquals(1, controls.size());
+        ControlType boundsControl = controls.getFirst();
         // Only testing ids here to check that the order is right, content is tested in other tests
-        assertEquals("datepicker-id-format-year", yearControl.getId());
         assertEquals("datepicker-id-format-date-borne-sup", boundsControl.getId());
     }
 
@@ -317,7 +290,7 @@ class LunaticAddControlFormatTest {
 
         processing.apply(lunaticQuestionnaire);
 
-        assertEquals(2, datePicker.getControls().size());
+        assertEquals(1, datePicker.getControls().size());
         assertEquals(2, number.getControls().size());
     }
 
@@ -336,7 +309,12 @@ class LunaticAddControlFormatTest {
 
         bodyCells = new ArrayList<>();
         bodyCells.add(buildBodyCell("line2"));
-        bodyCells.add(buildBodyCell(table.getId()+"-number", "NUMBER_VAR", ComponentTypeEnum.INPUT_NUMBER, BigInteger.TWO, 2.0, 5.0));
+        bodyCells.add(buildNumberCell(table.getId()+"-number", "NUMBER_VAR", BigInteger.TWO, 2.0, 5.0));
+        bodyLines.add(buildBodyLine(bodyCells));
+
+        bodyCells = new ArrayList<>();
+        bodyCells.add(buildBodyCell("line3"));
+        bodyCells.add(buildDateCell(table.getId()+"-date", "DATE_VAR", "YYYY", "1950", "2050"));
         bodyLines.add(buildBodyLine(bodyCells));
 
         lunaticQuestionnaire = new Questionnaire();
@@ -344,9 +322,10 @@ class LunaticAddControlFormatTest {
 
         processing.apply(lunaticQuestionnaire);
 
-        assertEquals(2, table.getControls().size());
+        assertEquals(3, table.getControls().size());
         assertEquals("table-id-number-format-borne-inf-sup", table.getControls().get(0).getId());
         assertEquals("table-id-number-format-decimal", table.getControls().get(1).getId());
+        assertEquals("table-id-date-format-date-borne-inf-sup", table.getControls().get(2).getId());
     }
 
     @Test
@@ -357,7 +336,7 @@ class LunaticAddControlFormatTest {
 
         List<BodyCell> bodyCells = roster.getComponents();
         bodyCells.add(buildBodyCell("line1"));
-        bodyCells.add(buildBodyCell(roster.getId()+"-number", "NUMBER_VAR", ComponentTypeEnum.INPUT_NUMBER, BigInteger.TWO, 2.0, 5.0));
+        bodyCells.add(buildNumberCell(roster.getId()+"-number", "NUMBER_VAR", BigInteger.TWO, 2.0, 5.0));
         bodyCells.add(buildBodyCell(roster.getId()+"-co", "CHECKBOX_VAR", ComponentTypeEnum.CHECKBOX_ONE));
 
         lunaticQuestionnaire = new Questionnaire();
@@ -403,9 +382,17 @@ class LunaticAddControlFormatTest {
         return bodyCell;
     }
 
-    private BodyCell buildBodyCell(String id, String name, ComponentTypeEnum componentType, BigInteger decimals, Double min, Double max) {
-        BodyCell bodyCell = buildBodyCell(id, name, componentType);
+    private BodyCell buildNumberCell(String id, String name, BigInteger decimals, Double min, Double max) {
+        BodyCell bodyCell = buildBodyCell(id, name, ComponentTypeEnum.INPUT_NUMBER);
         bodyCell.setDecimals(decimals);
+        bodyCell.setMin(min);
+        bodyCell.setMax(max);
+        return bodyCell;
+    }
+
+    private BodyCell buildDateCell(String id, String name, String dateFormat, String min, String max) {
+        BodyCell bodyCell = buildBodyCell(id, name, ComponentTypeEnum.DATEPICKER);
+        bodyCell.setDateFormat(dateFormat);
         bodyCell.setMin(min);
         bodyCell.setMax(max);
         return bodyCell;

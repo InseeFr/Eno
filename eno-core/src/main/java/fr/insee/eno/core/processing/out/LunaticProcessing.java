@@ -55,6 +55,7 @@ public class LunaticProcessing {
                 .then(new LunaticResponseTimeQuestionPagination())
                 .then(new LunaticAddCleaning(enoQuestionnaire))
                 .thenIf(lunaticParameters.isControls(), new LunaticAddControlFormat())
+                .thenIf(lunaticParameters.isMandatoryControls(), new LunaticAddControlMandatory())
                 .then(new LunaticReverseConsistencyControlLabel())
                 .then(new LunaticFinalizePairwise(enoQuestionnaire))
                 .thenIf(lunaticParameters.isFilterResult(), new LunaticFilterResult(enoIndex))
@@ -62,6 +63,7 @@ public class LunaticProcessing {
                 .thenIf(enoParameters.getModeParameter().equals(EnoParameters.ModeParameter.CAWI), new LunaticSequenceDescription())
                 .then(new LunaticInputNumberDescription(enoParameters.getLanguage()))
                 .then(new LunaticDurationDescription())
+                .then(new LunaticDateDescription(enoParameters.getLanguage()))
                 .thenIf(lunaticParameters.isQuestionWrapping(), new LunaticQuestionComponent())
                 .then(new LunaticRoundaboutLoops(enoQuestionnaire));
     }
