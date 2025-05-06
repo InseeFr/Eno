@@ -96,7 +96,7 @@ public class LunaticAddControlMandatory implements ProcessingStep<Questionnaire>
         ControlType lunaticControl = new ControlType();
         lunaticControl.setId(id);
         lunaticControl.setType(ControlContextType.SIMPLE);
-        lunaticControl.setTypeOfControl(ControlTypeEnum.FORMAT);
+        lunaticControl.setTypeOfControl(ControlTypeEnum.MANDATORY);
         lunaticControl.setCriticality(ControlCriticalityEnum.ERROR);
         lunaticControl.setControl(new LabelType());
         lunaticControl.getControl().setValue(expression);
