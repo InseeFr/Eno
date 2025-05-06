@@ -50,7 +50,7 @@ class LunaticAddControlMandatoryTest {
         ControlType mandatoryControl = lunaticInput.getControls().getFirst();
         assertEquals("input-id-mandatory-check", mandatoryControl.getId());
         assertEquals(ControlContextType.SIMPLE, mandatoryControl.getType());
-        assertEquals(ControlTypeEnum.FORMAT, mandatoryControl.getTypeOfControl());
+        assertEquals(ControlTypeEnum.MANDATORY, mandatoryControl.getTypeOfControl());
         assertEquals(ControlCriticalityEnum.ERROR, mandatoryControl.getCriticality());
         assertEquals("not(trim(nvl(FOO_VAR, \"\")) = \"\")", mandatoryControl.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, mandatoryControl.getControl().getType());
@@ -141,7 +141,7 @@ class LunaticAddControlMandatoryTest {
                 // Mandatory control is expected to be the first in the list
                 ControlType mandatoryControl = getComponentAtIndex(lunaticQuestionnaire, index).getControls().getFirst();
                 assertEquals(ControlContextType.SIMPLE, mandatoryControl.getType());
-                assertEquals(ControlTypeEnum.FORMAT, mandatoryControl.getTypeOfControl());
+                assertEquals(ControlTypeEnum.MANDATORY, mandatoryControl.getTypeOfControl());
                 assertEquals(ControlCriticalityEnum.ERROR, mandatoryControl.getCriticality());
             });
         }
