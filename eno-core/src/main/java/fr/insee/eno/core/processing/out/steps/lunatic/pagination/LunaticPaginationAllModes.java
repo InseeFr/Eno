@@ -68,6 +68,10 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
                     Subsequence subsequence = (Subsequence) component;
                     applyNumPageOnSubsequence(subsequence, numPagePrefix, pageCount, isParentPaginated);
                 }
+                case FILTER_DESCRIPTION -> {
+                    FilterDescription filterDescription = (FilterDescription) component;
+                    applyNumPageOnFilterDescription(filterDescription, numPagePrefix, pageCount);
+                }
                 case LOOP -> applyNumPageOnLoop((Loop) component, numPagePrefix, pageCount);
                 case ROUNDABOUT -> applyNumPageOnRoundabout((Roundabout) component, numPagePrefix, pageCount);
                 case PAIRWISE_LINKS -> applyNumPageOnPairwiseLinks((PairwiseLinks) component, numPagePrefix, pageCount);
@@ -96,6 +100,14 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
      * @param isParentPaginated is the parent component paginated or not
      */
     public abstract void applyNumPageOnSubsequence(Subsequence subsequence, String numPagePrefix, int pageCount, boolean isParentPaginated);
+
+    /**
+     * Apply the numpage of a filter description component
+     * @param filterDescription filter description component
+     * @param numPagePrefix     numpage prefix (if subsequence in a loop)
+     * @param pageCount         page count of the sequence in his parent component
+     */
+    public abstract void applyNumPageOnFilterDescription(FilterDescription filterDescription, String numPagePrefix, int pageCount);
 
     public void applyNumPageOnQuestion(Question question, String numPagePrefix, int pageCount) {
         String pageNumber = numPagePrefix + pageCount;

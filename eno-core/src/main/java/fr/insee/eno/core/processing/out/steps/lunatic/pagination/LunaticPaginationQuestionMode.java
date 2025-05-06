@@ -1,13 +1,10 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 
 import fr.insee.eno.core.parameter.LunaticParameters;
-import fr.insee.lunatic.model.flat.ComponentType;
-import fr.insee.lunatic.model.flat.ComponentTypeEnum;
-import fr.insee.lunatic.model.flat.Loop;
-import fr.insee.lunatic.model.flat.Subsequence;
+import fr.insee.lunatic.model.flat.*;
 
 /**
- * Post processing of a lunatic questionnaire. With this processing, one question is displayed on each page.
+ * Post-processing of a lunatic questionnaire. With this processing, one question is displayed on each page.
  */
 public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
 
@@ -27,10 +24,12 @@ public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
             return false;
         }
 
-        // if component is a subsequence and has no declarations set, it will regroup with next component, so no
-        // increment in this specific case
-        return !component.getComponentType().equals(ComponentTypeEnum.SUBSEQUENCE) ||
-                hasDeclarationOrDescription(component);
+        // If component is a subsequence and has no declarations set, it will regroup with next component, so no
+        // increment in this specific case.
+        // Same rule for filter description components.
+        return (!component.getComponentType().equals(ComponentTypeEnum.SUBSEQUENCE) ||
+                hasDeclarationOrDescription(component))
+                && !component.getComponentType().equals(ComponentTypeEnum.FILTER_DESCRIPTION);
     }
 
     @Override
@@ -64,6 +63,13 @@ public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
         if (!isParentPaginated || hasDeclarationOrDescription(subsequence)) {
             subsequence.setPage(numPage);
         }
+    }
+
+    @Override
+    public void applyNumPageOnFilterDescription(
+            FilterDescription filterDescription, String numPagePrefix, int pageCount) {
+        String numPage = numPagePrefix + (pageCount + 1);
+        filterDescription.setPage(numPage);
     }
 
     /**
