@@ -65,7 +65,7 @@ public class LunaticDatepickerControl implements LunaticFormatControl<Datepicker
      * @param format format string
      * @param responseName date picker response attribute
      */
-    private Optional<ControlType> getFormatControlFromDatepickerAttributes(String id, String minValue, String maxValue, String format, String responseName) {
+    Optional<ControlType> getFormatControlFromDatepickerAttributes(String id, String minValue, String maxValue, String format, String responseName) {
         if (format == null)
             throw new RequiredPropertyException("Format is missing in date question '" + id + "'");
 

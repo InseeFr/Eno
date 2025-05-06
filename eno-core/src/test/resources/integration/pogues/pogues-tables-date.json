@@ -1,0 +1,272 @@
+{
+  "owner": "ENO-INTEGRATION-TESTS",
+  "final": false,
+  "id": "ma6xjgap",
+  "Label": [
+    "Eno - Tables with date"
+  ],
+  "Name": "ENO_TABLES_DATES",
+  "lastUpdatedDate": "Fri May 02 2025 16:57:12 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "s2106-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2106-dc"
+    }
+  ],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "ma6x8vhb",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "ma6xcco7",
+        "ma6x3728",
+        "ma6xff10",
+        "idendquest"
+      ]
+    }
+  ],
+  "agency": "fr.insee",
+  "TargetMode": [
+    "CAPI",
+    "CAWI",
+    "CATI",
+    "PAPI"
+  ],
+  "flowLogic": "FILTER",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": [],
+  "Child": [
+    {
+      "id": "ma6xcco7",
+      "depth": 1,
+      "Name": "S1",
+      "Label": [
+        "\"Sequence\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "type": "SequenceType",
+      "genericName": "MODULE",
+      "Child": [
+        {
+          "id": "ma6x3728",
+          "depth": 2,
+          "Name": "TABLE",
+          "Label": [
+            "\"Table\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "ClarificationQuestion": [],
+          "type": "QuestionType",
+          "questionType": "TABLE",
+          "ResponseStructure": {
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "CodeListReference": "ma6xkpum",
+                "dynamic": "NON_DYNAMIC"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Date column\""
+              }
+            ],
+            "Mapping": [
+              {
+                "MappingSource": "ma6x8d9z",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "ma6xfseu",
+                "MappingTarget": "2 1"
+              }
+            ],
+            "Attribute": []
+          },
+          "Response": [
+            {
+              "id": "ma6x8d9z",
+              "Datatype": {
+                "typeName": "DATE",
+                "type": "DateDatatypeType",
+                "Minimum": "1950",
+                "Maximum": "2050",
+                "Format": "YYYY"
+              },
+              "CollectedVariableReference": "ma6xcvxi"
+            },
+            {
+              "id": "ma6xfseu",
+              "Datatype": {
+                "typeName": "DATE",
+                "type": "DateDatatypeType",
+                "Minimum": "1950",
+                "Maximum": "2050",
+                "Format": "YYYY"
+              },
+              "CollectedVariableReference": "ma6xhx4d"
+            }
+          ]
+        },
+        {
+          "id": "ma6xff10",
+          "depth": 2,
+          "Name": "DYNAMIC_TABLE",
+          "Label": [
+            "\"Dynamic table\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "ClarificationQuestion": [],
+          "type": "QuestionType",
+          "questionType": "TABLE",
+          "ResponseStructure": {
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "MinLines": "1",
+                "MaxLines": "5",
+                "dynamic": "DYNAMIC_LENGTH"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Date dynamic column\""
+              }
+            ],
+            "Mapping": [
+              {
+                "MappingSource": "ma6xkih8",
+                "MappingTarget": "1 1"
+              }
+            ],
+            "Attribute": []
+          },
+          "Response": [
+            {
+              "id": "ma6xkih8",
+              "Datatype": {
+                "typeName": "DATE",
+                "type": "DateDatatypeType",
+                "Minimum": "2025",
+                "Maximum": "2030",
+                "Format": "YYYY"
+              },
+              "CollectedVariableReference": "ma6xg8i1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "idendquest",
+      "depth": 1,
+      "Name": "QUESTIONNAIRE_END",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "Declaration": [],
+      "genericName": "MODULE",
+      "Control": [],
+      "FlowControl": [],
+      "type": "SequenceType",
+      "Child": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ]
+    }
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "id": "ma6xkpum",
+        "Label": "FOO_CODE_LIST",
+        "Code": [
+          {
+            "Label": "\"Foo\"",
+            "Value": "1",
+            "Parent": ""
+          },
+          {
+            "Label": "\"Bar\"",
+            "Value": "2",
+            "Parent": ""
+          }
+        ]
+      }
+    ]
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "ma6xcvxi",
+        "Name": "TABLE11",
+        "Label": "Foo-Date column",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "DATE",
+          "type": "DateDatatypeType",
+          "Minimum": "1950",
+          "Maximum": "2050",
+          "Format": "YYYY"
+        }
+      },
+      {
+        "id": "ma6xhx4d",
+        "Name": "TABLE21",
+        "Label": "Bar-Date column",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "DATE",
+          "type": "DateDatatypeType",
+          "Minimum": "1950",
+          "Maximum": "2050",
+          "Format": "YYYY"
+        }
+      },
+      {
+        "id": "ma6xg8i1",
+        "Name": "DYNAMIC_TABLE1",
+        "Label": "Date dynamic column",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "DATE",
+          "type": "DateDatatypeType",
+          "Minimum": "2025",
+          "Maximum": "2030",
+          "Format": "YYYY"
+        },
+        "Scope": "ma6xff10"
+      }
+    ]
+  },
+  "FlowControl": []
+}
