@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class LunaticPaginationWithFilterDescriptionTest {
 
@@ -62,23 +63,24 @@ class LunaticPaginationWithFilterDescriptionTest {
 
         new LunaticPaginationQuestionMode().apply(lunaticQuestionnaire);
 
-        //assertEquals("1", lunaticQuestionnaire.getComponents().get(0).getPage());
+        assertEquals("1", lunaticQuestionnaire.getComponents().get(0).getPage());
         assertEquals("1", lunaticQuestionnaire.getComponents().get(1).getPage());
         assertEquals("2", lunaticQuestionnaire.getComponents().get(2).getPage());
         assertEquals("2", lunaticQuestionnaire.getComponents().get(3).getPage());
         assertEquals("2", lunaticQuestionnaire.getComponents().get(4).getPage());
+        assertEquals("2", ((Subsequence) lunaticQuestionnaire.getComponents().get(4)).getGoToPage());
         assertEquals("3", lunaticQuestionnaire.getComponents().get(5).getPage());
         assertEquals("3", lunaticQuestionnaire.getComponents().get(6).getPage());
         assertEquals("3", lunaticQuestionnaire.getComponents().get(7).getPage());
         assertEquals("3", lunaticQuestionnaire.getComponents().get(8).getPage());
         Loop loop = (Loop) lunaticQuestionnaire.getComponents().get(9);
         assertEquals("4", loop.getPage());
-        assertEquals("4.1", loop.getComponents().get(0).getPage());
-        assertEquals("4.1", loop.getComponents().get(1).getPage());
-        assertEquals("4.2", loop.getComponents().get(2).getPage());
-        assertEquals("4.2", loop.getComponents().get(3).getPage());
-        assertEquals("4.3", loop.getComponents().get(4).getPage());
-        assertEquals("4.3", loop.getComponents().get(5).getPage());
+        assertEquals("4", loop.getComponents().get(0).getPage());
+        assertEquals("4", loop.getComponents().get(1).getPage());
+        assertEquals("4", loop.getComponents().get(2).getPage());
+        assertEquals("4", loop.getComponents().get(3).getPage());
+        assertEquals("4", loop.getComponents().get(4).getPage());
+        assertEquals("4", loop.getComponents().get(5).getPage());
     }
 
     @Test
@@ -86,23 +88,24 @@ class LunaticPaginationWithFilterDescriptionTest {
 
         new LunaticPaginationQuestionMode().apply(lunaticQuestionnaire);
 
-        //assertEquals("1", lunaticQuestionnaire.getComponents().get(0).getPage());
+        assertEquals("1", lunaticQuestionnaire.getComponents().get(0).getPage());
         assertEquals("1", lunaticQuestionnaire.getComponents().get(1).getPage());
-        //assertEquals("1", lunaticQuestionnaire.getComponents().get(2).getPage());
-        //assertEquals("2", lunaticQuestionnaire.getComponents().get(3).getPage());
-        //assertEquals("2", lunaticQuestionnaire.getComponents().get(4).getPage());
+        assertEquals("2", lunaticQuestionnaire.getComponents().get(2).getPage());
+        assertEquals("2", lunaticQuestionnaire.getComponents().get(3).getPage());
+        assertNull(lunaticQuestionnaire.getComponents().get(4).getPage());
+        assertEquals("2", ((Subsequence) lunaticQuestionnaire.getComponents().get(4)).getGoToPage());
         assertEquals("2", lunaticQuestionnaire.getComponents().get(5).getPage());
         assertEquals("2", lunaticQuestionnaire.getComponents().get(6).getPage());
         assertEquals("2", lunaticQuestionnaire.getComponents().get(7).getPage());
         assertEquals("2", lunaticQuestionnaire.getComponents().get(8).getPage());
         Loop loop = (Loop) lunaticQuestionnaire.getComponents().get(9);
         assertEquals("3", loop.getPage());
-        assertEquals("3.1", loop.getComponents().get(0).getPage());
-        assertEquals("3.1", loop.getComponents().get(1).getPage());
-        //assertEquals("3.1", loop.getComponents().get(2).getPage());
-        //assertEquals("3.1", loop.getComponents().get(3).getPage());
-        assertEquals("3.2", loop.getComponents().get(4).getPage());
-        assertEquals("3.2", loop.getComponents().get(5).getPage());
+        assertEquals("3", loop.getComponents().get(0).getPage());
+        assertEquals("3", loop.getComponents().get(1).getPage());
+        assertEquals("3", loop.getComponents().get(2).getPage());
+        assertEquals("3", loop.getComponents().get(3).getPage());
+        assertEquals("3", loop.getComponents().get(4).getPage());
+        assertEquals("3", loop.getComponents().get(5).getPage());
     }
 
     @Test

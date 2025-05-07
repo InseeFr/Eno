@@ -67,8 +67,8 @@ public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
 
     @Override
     public void applyNumPageOnFilterDescription(
-            FilterDescription filterDescription, String numPagePrefix, int pageCount) {
-        String numPage = numPagePrefix + (pageCount + 1);
+            FilterDescription filterDescription, String numPagePrefix, int pageCount, boolean isParentPaginated) {
+        String numPage = isParentPaginated ? numPagePrefix + (pageCount + 1) : numPagePrefix + pageCount;
         filterDescription.setPage(numPage);
     }
 

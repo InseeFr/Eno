@@ -47,7 +47,10 @@ public class LunaticPaginationSequenceMode extends LunaticPaginationAllModes {
     }
 
     @Override
-    public void applyNumPageOnFilterDescription(FilterDescription filterDescription, String numPagePrefix, int pageCount) {
+    public void applyNumPageOnFilterDescription(
+            FilterDescription filterDescription, String numPagePrefix, int pageCount, boolean isParentPaginated) {
+        // The first questionnaire sequence may be filtered (e.g. using an external variable),
+        // so the first element can be a filter description
         if (pageCount == 0) pageCount ++;
         String numPage = numPagePrefix + pageCount;
         filterDescription.setPage(numPage);
