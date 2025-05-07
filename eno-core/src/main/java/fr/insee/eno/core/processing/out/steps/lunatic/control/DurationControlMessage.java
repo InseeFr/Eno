@@ -14,12 +14,12 @@ public abstract class DurationControlMessage<T extends DurationValue> {
             throw new IllegalArgumentException("A duration question maximum value cannot be zero.");
         }
         if (isZeroDuration(minValue)) {
-            return String.format("\"La durée saisie doit être inférieure à %s.\"", formatDuration(maxValue));
+            return String.format("\"La durée saisie doit être inférieure à %s\"", formatDuration(maxValue));
         }
         if (isGreaterThan(minValue, maxValue)) {
             throw new IllegalArgumentException("The minimum duration cannot be greater than the maximum duration.");
         }
-        return String.format("\"La durée saisie doit être comprise entre %s minimum et %s maximum.\"",
+        return String.format("\"La durée saisie doit être comprise entre %s minimum et %s maximum\"",
                 formatDuration(minValue), formatDuration(maxValue));
     }
 

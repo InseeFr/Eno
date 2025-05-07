@@ -178,7 +178,7 @@ class LunaticAddControlFormatTest {
                 "cast(DATE_VAR, date, \"YYYY-MM-DD\")>cast(\"2023-01-01\", date, \"YYYY-MM-DD\")))";
         assertEquals(expected, control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
-        assertEquals("\"La date saisie doit être comprise entre 01/01/2020 et 01/01/2023.\"",
+        assertEquals("\"La date saisie doit être comprise entre 01/01/2020 et 01/01/2023\"",
                 control.getErrorMessage().getValue());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getType());
         assertEquals(ControlTypeEnum.FORMAT, control.getTypeOfControl());
@@ -215,7 +215,7 @@ class LunaticAddControlFormatTest {
                 "(cast(DATE_VAR, date, \"YYYY-MM-DD\")<cast(\"2020-01-01\", date, \"YYYY-MM-DD\")))";
         assertEquals(expected, control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
-        assertEquals("\"La date saisie doit être postérieure à 01/01/2020.\"",
+        assertEquals("\"La date saisie doit être postérieure à 01/01/2020\"",
                 control.getErrorMessage().getValue());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getType());
         assertEquals(ControlTypeEnum.FORMAT, control.getTypeOfControl());
@@ -251,7 +251,7 @@ class LunaticAddControlFormatTest {
                 "and (cast(DATE_VAR, date, \"YYYY-MM-DD\")>cast(\"2023-01-01\", date, \"YYYY-MM-DD\")))";
         assertEquals(expected, boundsControl.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, boundsControl.getControl().getType());
-        assertEquals("\"La date saisie doit être antérieure à 01/01/2023.\"",
+        assertEquals("\"La date saisie doit être antérieure à 01/01/2023\"",
                 boundsControl.getErrorMessage().getValue());
         assertEquals(LabelTypeEnum.VTL_MD, boundsControl.getErrorMessage().getType());
         assertEquals(ControlTypeEnum.FORMAT, boundsControl.getTypeOfControl());
