@@ -40,7 +40,7 @@ public class LunaticInputNumberControl implements LunaticFormatControl<InputNumb
             String minValue = formatDoubleValue(min, decimalsCount);
             String maxValue = formatDoubleValue(max, decimalsCount);
             String controlExpression = String.format("not(not(isnull(%s)) and (%s>%s or %s<%s))", responseName, minValue, responseName, maxValue, responseName);
-            String controlErrorMessage = String.format("\" La valeur doit être comprise entre %s et %s.\"", minValue, maxValue);
+            String controlErrorMessage = String.format("\" La valeur doit être comprise entre %s et %s\"", minValue, maxValue);
             controls.addFirst(LunaticFormatControl.createFormatControl(
                     controlIdPrefix+"-borne-inf-sup", controlExpression, controlErrorMessage));
         }
@@ -48,7 +48,7 @@ public class LunaticInputNumberControl implements LunaticFormatControl<InputNumb
         if(min == null && max != null) {
             String maxValue = formatDoubleValue(max, decimalsCount);
             String controlExpression = String.format("not(not(isnull(%s)) and %s<%s)", responseName, maxValue, responseName);
-            String controlErrorMessage = String.format("\" La valeur doit être inférieure à %s.\"", maxValue);
+            String controlErrorMessage = String.format("\" La valeur doit être inférieure à %s\"", maxValue);
             controls.addFirst(LunaticFormatControl.createFormatControl(
                     controlIdPrefix+"-borne-sup", controlExpression, controlErrorMessage));
         }
@@ -56,7 +56,7 @@ public class LunaticInputNumberControl implements LunaticFormatControl<InputNumb
         if(min != null && max == null) {
             String minValue = formatDoubleValue(min, decimalsCount);
             String controlExpression = String.format("not(not(isnull(%s)) and %s>%s)", responseName, minValue, responseName);
-            String controlErrorMessage = String.format("\" La valeur doit être supérieure à %s.\"", minValue);
+            String controlErrorMessage = String.format("\" La valeur doit être supérieure à %s\"", minValue);
             controls.addFirst(LunaticFormatControl.createFormatControl(
                     controlIdPrefix+"-borne-inf", controlExpression, controlErrorMessage));
         }
@@ -74,7 +74,7 @@ public class LunaticInputNumberControl implements LunaticFormatControl<InputNumb
      */
     private static ControlType createDecimalsFormatControl(String controlId, String responseName, int decimalsCount) {
         String controlExpression = String.format("not(not(isnull(%s))  and round(%s,%d)<>%s)", responseName, responseName, decimalsCount, responseName);
-        String controlErrorMessage = String.format("\"Le nombre doit comporter au maximum %d chiffre(s) après la virgule.\"", decimalsCount);
+        String controlErrorMessage = String.format("\"Le nombre doit comporter au maximum %d chiffre(s) après la virgule\"", decimalsCount);
         return LunaticFormatControl.createFormatControl(
                 controlId+"-decimal", controlExpression, controlErrorMessage);
     }
