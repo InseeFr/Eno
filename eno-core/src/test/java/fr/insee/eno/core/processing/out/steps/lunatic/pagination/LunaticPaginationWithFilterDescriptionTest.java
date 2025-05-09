@@ -16,9 +16,9 @@ class LunaticPaginationWithFilterDescriptionTest {
         return sequence;
     }
     private Subsequence createSubsequence() {
-        Subsequence subsequence = new Subsequence();
-        subsequence.setComponentType(ComponentTypeEnum.SUBSEQUENCE);
-        return subsequence;
+        Subsequence newSubsequence = new Subsequence();
+        newSubsequence.setComponentType(ComponentTypeEnum.SUBSEQUENCE);
+        return newSubsequence;
     }
 
     private Questionnaire lunaticQuestionnaire;
@@ -115,7 +115,7 @@ class LunaticPaginationWithFilterDescriptionTest {
 
         new LunaticPaginationSequenceMode().apply(lunaticQuestionnaire);
 
-        //assertEquals("1", lunaticQuestionnaire.getComponents().get(0).getPage());
+        assertEquals("1", lunaticQuestionnaire.getComponents().get(0).getPage());
         assertEquals("1", lunaticQuestionnaire.getComponents().get(1).getPage());
         assertEquals("1", lunaticQuestionnaire.getComponents().get(2).getPage());
         assertEquals("1", lunaticQuestionnaire.getComponents().get(3).getPage());
@@ -139,7 +139,7 @@ class LunaticPaginationWithFilterDescriptionTest {
 
         new LunaticPaginationSequenceMode().apply(lunaticQuestionnaire);
 
-        //assertEquals("1", lunaticQuestionnaire.getComponents().get(0).getPage());
+        assertEquals("1", lunaticQuestionnaire.getComponents().get(0).getPage());
         assertEquals("1", lunaticQuestionnaire.getComponents().get(1).getPage());
         assertEquals("1", lunaticQuestionnaire.getComponents().get(2).getPage());
         assertEquals("1", lunaticQuestionnaire.getComponents().get(3).getPage());
