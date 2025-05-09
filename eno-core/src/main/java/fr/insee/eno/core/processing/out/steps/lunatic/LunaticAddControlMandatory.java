@@ -2,11 +2,13 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.processing.ProcessingStep;
+import fr.insee.eno.core.utils.LunaticUtils;
+import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 /** Processing step to add blocking checks for components marked as "mandatory". */
 public class LunaticAddControlMandatory implements ProcessingStep<Questionnaire> {
@@ -54,36 +56,74 @@ public class LunaticAddControlMandatory implements ProcessingStep<Questionnaire>
                 .filter(ComponentSimpleResponseType::getMandatory)
                 // re-cast as a Lunatic component object
                 .map(ComponentType.class::cast)
-                .forEach(this::addMandatoryControl);
+                .forEach(this::addMandatoryControls);
     }
 
-    private void addMandatoryControl(ComponentType lunaticComponent) {
-        Optional<String> expression = generateMandatoryControlExpression(lunaticComponent);
-        expression.ifPresent(expr ->
-                lunaticComponent.getControls().addFirst(
-                    createMandatoryControl(lunaticComponent.getId() + "-mandatory-check", expr)));
+    private void addMandatoryControls(ComponentType lunaticComponent) {
+        List<String> expressions = generateMandatoryControlExpressions(lunaticComponent);
+        for (int i = expressions.size() - 1; i >= 0; i--) {
+            // iterate in reverse order to have detail response checks (if any) after the "main" one
+            String expression = expressions.get(i);
+            String id = lunaticComponent.getId() + "-mandatory-check";
+            if (expressions.size() > 1)
+                id += "-" + (i + 1);
+            lunaticComponent.getControls().addFirst(
+                    createMandatoryControl(id, expression));
+        }
     }
 
     /** Generates a "mandatory" control expression in function of the component type.
      * If the component is not concerned by the "mandatory" property, the returned value is empty. */
-    private Optional<String> generateMandatoryControlExpression(ComponentType lunaticComponent) {
+    private List<String> generateMandatoryControlExpressions(ComponentType lunaticComponent) {
         if (lunaticComponent.getComponentType() == null)
             throw new IllegalArgumentException("Component " + lunaticComponent.getId() + " has no type defined.");
+        List<String> expressions = new ArrayList<>();
         String responseName = ((ComponentSimpleResponseType) lunaticComponent).getResponse().getName();
-        return switch (lunaticComponent.getComponentType()) {
+        switch (lunaticComponent.getComponentType()) {
             case INPUT, TEXTAREA ->
-                    Optional.of(String.format("not(trim(nvl(%s, \"\")) = \"\")", responseName));
+                    expressions.add(textMandatoryExpression(responseName));
             case CHECKBOX_BOOLEAN ->
-                    Optional.of(String.format("not(nvl(%s, false) = false)", responseName));
-            case INPUT_NUMBER,
-                    DATEPICKER,
-                    DURATION,
-                    RADIO, DROPDOWN, CHECKBOX_ONE ->
-                    Optional.of(String.format("not(isnull(%s))", responseName));
+                    expressions.add(booleanMandatoryExpression(responseName));
+            case INPUT_NUMBER, DATEPICKER, DURATION ->
+                    expressions.add(defaultMandatoryExpression(responseName));
+            case RADIO, DROPDOWN, CHECKBOX_ONE -> {
+                expressions.add(defaultMandatoryExpression(responseName));
+                expressions.addAll(uniqueChoiceDetailExpressions(responseName, LunaticUtils.getOptions(lunaticComponent)));
+            }
             case QUESTIONNAIRE, SEQUENCE, SUBSEQUENCE, QUESTION, ROSTER_FOR_LOOP, LOOP, ROUNDABOUT, TABLE,
                     PAIRWISE_LINKS, CHECKBOX_GROUP, SUGGESTER, TEXT, FILTER_DESCRIPTION, ACCORDION ->
-                    Optional.empty();
-        };
+                    doNothing();
+        }
+        // Note: in Lunatic control expressions must be logically inverted
+        return expressions.stream().map(VtlSyntaxUtils::invertBooleanExpression).toList();
+    }
+    private static String defaultMandatoryExpression(String responseName) {
+        return String.format("isnull(%s)", responseName);
+    }
+    private static String booleanMandatoryExpression(String responseName) {
+        return String.format("nvl(%s, false) = false", responseName);
+    }
+    private static String textMandatoryExpression(String responseName) {
+        return String.format("trim(nvl(%s, \"\")) = \"\"", responseName);
+    }
+    private static void doNothing() {
+        /* No-op method */
+    }
+    private static List<String> uniqueChoiceDetailExpressions(String responseName, List<Option> lunaticUniqueChoiceOptions) {
+        return lunaticUniqueChoiceOptions.stream()
+                .filter(option -> option.getDetail() != null)
+                .map(option -> uniqueChoiceDetailExpression(responseName, option))
+                .toList();
+    }
+    /** For a unique choice with a detail response, the control condition is: "the option is checked and the detail
+     * field has content". */
+    private static String uniqueChoiceDetailExpression(String responseName, Option lunaticUniqueChoiceOption) {
+        assert lunaticUniqueChoiceOption.getDetail() != null;
+        String optionValue = lunaticUniqueChoiceOption.getValue();
+        String detailResponseName = lunaticUniqueChoiceOption.getDetail().getResponse().getName();
+        return VtlSyntaxUtils.joinByANDLogicExpression(
+                String.format("%s = \"%s\"", responseName, optionValue),
+                textMandatoryExpression(detailResponseName));
     }
 
     /**
