@@ -100,6 +100,7 @@ class LunaticAddControlMandatoryTest {
         //
         new LunaticAddControlMandatory().apply(lunaticQuestionnaire);
         //
+        assertEquals(2, lunaticRadioComponent.getControls().size());
         ControlType mandatoryControl = lunaticRadioComponent.getControls().getFirst();
         assertEquals("not(isnull(FOO_VAR))", mandatoryControl.getControl().getValue());
         ControlType detailMandatoryControl = lunaticRadioComponent.getControls().get(1);
