@@ -76,37 +76,6 @@ class LunaticAddControlMandatoryTest {
     }
 
     @Test
-    @DisplayName("Unique choice component with detail response.")
-    void ucqComponentWithDetail() {
-        //
-        Radio lunaticRadioComponent = new Radio();
-        lunaticRadioComponent.setId("input-number-id");
-        lunaticRadioComponent.setMandatory(true);
-        lunaticRadioComponent.setResponse(new ResponseType());
-        lunaticRadioComponent.getResponse().setName("FOO_VAR");
-        Option option1 = new Option();
-        Option option2 = new Option();
-        Option optionOther = new Option();
-        option1.setValue("1");
-        option2.setValue("2");
-        optionOther.setValue("9");
-        optionOther.setDetail(new DetailResponse());
-        optionOther.getDetail().setResponse(new ResponseType());
-        optionOther.getDetail().getResponse().setName("DETAIL_VAR");
-        lunaticRadioComponent.getOptions().add(option1);
-        lunaticRadioComponent.getOptions().add(option2);
-        lunaticRadioComponent.getOptions().add(optionOther);
-        lunaticQuestionnaire.getComponents().add(lunaticRadioComponent);
-        //
-        new LunaticAddControlMandatory().apply(lunaticQuestionnaire);
-        //
-        ControlType mandatoryControl = lunaticRadioComponent.getControls().getFirst();
-        assertEquals("not(isnull(FOO_VAR))", mandatoryControl.getControl().getValue());
-        ControlType detailMandatoryControl = lunaticRadioComponent.getControls().get(1);
-        assertEquals("not((FOO_VAR = \"9\") and (trim(nvl(DETAIL_VAR, \"\")) = \"\"))", detailMandatoryControl.getControl().getValue());
-    }
-
-    @Test
     @DisplayName("Internationalized control error message.")
     void i18nErrorMessage() {
         //
@@ -152,14 +121,14 @@ class LunaticAddControlMandatoryTest {
 
         @Test
         void mandatoryProp() {
-            List.of(1,3,4,5,6,7,8,9).forEach(index ->
+            List.of(1,3,4,5,6,7,8,9,10).forEach(index ->
                     assertTrue(getResponseComponentAtIndex(lunaticQuestionnaire, index).getMandatory()));
             assertFalse(getResponseComponentAtIndex(lunaticQuestionnaire, 2).getMandatory());
         }
 
         @Test
         void mandatoryControlsId() {
-            List.of(1,3,4,5,6,7,8,9).forEach(index -> {
+            List.of(1,3,4,5,6,7,8,9,10).forEach(index -> {
                 // Mandatory control is expected to be the first in the list
                 ControlType mandatoryControl = getComponentAtIndex(lunaticQuestionnaire, index).getControls().getFirst();
                 assertTrue(mandatoryControl.getId().contains("-mandatory-check"));
@@ -168,7 +137,7 @@ class LunaticAddControlMandatoryTest {
 
         @Test
         void mandatoryControlsTypology() {
-            List.of(1,3,4,5,6,7,8,9).forEach(index -> {
+            List.of(1,3,4,5,6,7,8,9,10).forEach(index -> {
                 // Mandatory control is expected to be the first in the list
                 ControlType mandatoryControl = getComponentAtIndex(lunaticQuestionnaire, index).getControls().getFirst();
                 assertEquals(ControlContextType.SIMPLE, mandatoryControl.getType());
@@ -193,13 +162,15 @@ class LunaticAddControlMandatoryTest {
                     getComponentAtIndex(lunaticQuestionnaire, 7).getControls().getFirst().getControl().getValue());
             assertEquals("not(isnull(Q_RADIO_MANDATORY))",
                     getComponentAtIndex(lunaticQuestionnaire, 8).getControls().getFirst().getControl().getValue());
-            assertEquals("not(isnull(Q_DROPDOWN_MANDATORY))",
+            assertEquals("not(isnull(Q_RADIO_MANDATORY_DETAIL))",
                     getComponentAtIndex(lunaticQuestionnaire, 9).getControls().getFirst().getControl().getValue());
+            assertEquals("not(isnull(Q_DROPDOWN_MANDATORY))",
+                    getComponentAtIndex(lunaticQuestionnaire, 10).getControls().getFirst().getControl().getValue());
         }
 
         @Test
         void mandatoryControlsExpressionType() {
-            List.of(1,3,4,5,6,7,8,9).forEach(index -> {
+            List.of(1,3,4,5,6,7,8,9,10).forEach(index -> {
                 ControlType mandatoryControl = getComponentAtIndex(lunaticQuestionnaire, index).getControls().getFirst();
                 assertEquals(LabelTypeEnum.VTL, mandatoryControl.getControl().getType());
             });
@@ -207,7 +178,7 @@ class LunaticAddControlMandatoryTest {
 
         @Test
         void mandatoryControlsMessage_defaultLanguage() {
-            List.of(1,3,4,5,6,7,8,9).forEach(index -> {
+            List.of(1,3,4,5,6,7,8,9,10).forEach(index -> {
                 ControlType mandatoryControl = getComponentAtIndex(lunaticQuestionnaire, index).getControls().getFirst();
                 assertEquals("La réponse à cette question est obligatoire.", mandatoryControl.getErrorMessage().getValue());
                 assertEquals(LabelTypeEnum.TXT, mandatoryControl.getErrorMessage().getType());

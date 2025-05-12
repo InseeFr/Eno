@@ -48,12 +48,6 @@ public class TextQuestion extends SingleResponseQuestion {
             "T(fr.insee.eno.core.model.question.TextQuestion).lengthTypeToLunatic(#param))")
     LengthType lengthType;
 
-    /** Indicates whether the response is mandatory for this component. */
-    @DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
-            "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
-    @Lunatic("setMandatory(#param)")
-    boolean mandatory;
-
     /**
      * Qualifies the length of the question using the dedicated enum.
      * @param maxLength Maximum length of the question.
