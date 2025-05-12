@@ -71,12 +71,6 @@ public class NumericQuestion extends SingleResponseQuestion {
             "getResponse().getFirst().getDatatype().isIsDynamicUnit() : false")
     private Boolean isUnitDynamic;
 
-    /** Indicates whether the response is mandatory for this component. */
-    @DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
-            "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
-    @Lunatic("setMandatory(#param)")
-    boolean mandatory;
-
     /** Lunatic component type property.
      * This should be inserted by Lunatic-Model serializer later on. */
     @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
