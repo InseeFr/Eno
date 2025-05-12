@@ -37,8 +37,9 @@ public abstract class SingleResponseQuestion extends Question {
      * but required to properly work around this limitation.
      */
     @Pogues("getResponse().getFirst().isMandatory()")
-    @DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
-            "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
+    //@DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
+    //        "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
+    // Note: disabled due to a bug when there is an "other specify" for unique choice questions
     @Lunatic("!(#this instanceof T(fr.insee.lunatic.model.flat.PairwiseLinks)) ? setMandatory(#param) : null")
     Boolean mandatory;
 }
