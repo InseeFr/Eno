@@ -54,20 +54,31 @@ public class LunaticAddFilterDescription implements ProcessingStep<Questionnaire
         String startId = enoFilter.getFilterScope().getFirst().getId();
         int index = lunaticComponents.stream().map(ComponentType::getId).toList().indexOf(startId);
         if (index != -1) {
-            FilterDescription filterDescriptionComponent = generateFilterDescriptionComponent(enoFilter);
+            FilterDescription filterDescriptionComponent = generateFilterDescriptionComponent(
+                    enoFilter, lunaticComponents.get(index).getConditionFilter());
             lunaticComponents.add(index, filterDescriptionComponent);
             return true;
         }
         return false;
     }
 
-    private FilterDescription generateFilterDescriptionComponent(Filter enoFilter) {
+    /**
+     * Generates the filter description component from given data.
+     * @param enoFilter Eno filter object (contains the user "description" of the filter).
+     * @param lunaticComponentFilter Filtered applied on the Lunatic component before which the filter description
+     *                               should be inserted.
+     * @return Lunatic filter description component.
+     */
+    private FilterDescription generateFilterDescriptionComponent(
+            Filter enoFilter, ConditionFilterType lunaticComponentFilter) {
         FilterDescription lunaticFilterDescription = new FilterDescription();
         lunaticFilterDescription.setId(enoFilter.getId() + FILTER_DESCRIPTION_ID_SUFFIX);
         // Note: page number is added by the pagination processing step
         lunaticFilterDescription.setLabel(new LabelType());
         lunaticFilterDescription.getLabel().setValue(enoFilter.getDescription());
         lunaticFilterDescription.getLabel().setType(LabelTypeEnum.TXT);
+        // A filter description share the same filter as the component it is associated with
+        lunaticFilterDescription.setConditionFilter(lunaticComponentFilter);
         return lunaticFilterDescription;
     }
 

@@ -154,6 +154,10 @@ class LunaticAddFilterDescriptionTest {
         assertEquals("Filter for question 2", filterDescription2.getLabel().getValue());
         assertEquals(LabelTypeEnum.TXT, filterDescription1.getLabel().getType());
         assertEquals(LabelTypeEnum.TXT, filterDescription2.getLabel().getType());
+        assertEquals(lunaticQuestionnaire.getComponents().get(5).getConditionFilter().getValue(),
+                filterDescription1.getConditionFilter().getValue());
+        assertEquals(lunaticQuestionnaire.getComponents().get(7).getConditionFilter().getValue(),
+                filterDescription2.getConditionFilter().getValue());
     }
 
     @ParameterizedTest
