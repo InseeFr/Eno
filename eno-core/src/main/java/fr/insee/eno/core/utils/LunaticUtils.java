@@ -309,4 +309,21 @@ public class LunaticUtils {
         return isConditionFilterActive(conditionFilter.getValue());
     }
 
+    /**
+     * Lunatic-Model doesn't do polymorphism on unique choice question components.
+     * This utility method returns the list of options of such a component (e.g. Radio)
+     * @param lunaticComponent Lunatic component.
+     * @return List of unique choice option objects.
+     * @throws IllegalArgumentException if given component is not a unique choice component.
+     */
+    public static List<Option> getOptions(ComponentType lunaticComponent) {
+        if (lunaticComponent instanceof Radio radio)
+            return radio.getOptions();
+        if (lunaticComponent instanceof Dropdown dropdown)
+            return dropdown.getOptions();
+        if (lunaticComponent instanceof CheckboxOne checkboxOne)
+            return checkboxOne.getOptions();
+        throw new IllegalArgumentException("Component " + lunaticComponent + " is not a unique choice component.");
+    }
+
 }

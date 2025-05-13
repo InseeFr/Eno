@@ -10,7 +10,7 @@
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
-             isMaintainable="true"><!--Eno version : 2.12.6. Generation date : 12/05/2025 - 10:12:38-->
+             isMaintainable="true"><!--Eno version : 2.12.6. Generation date : 16/04/2025 - 8:39:27-->
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-m9in873b</r:ID>
    <r:Version>1</r:Version>
@@ -106,12 +106,6 @@
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>m9joa7yo-QC</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
-            </d:ControlConstructReference>
-            <d:ControlConstructReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>makxe3yi-QC</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
             </d:ControlConstructReference>
@@ -230,20 +224,6 @@
             <r:QuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>m9joa7yo</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </r:QuestionReference>
-         </d:QuestionConstruct>
-         <d:QuestionConstruct>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>makxe3yi-QC</r:ID>
-            <r:Version>1</r:Version>
-            <d:ConstructName>
-               <r:String xml:lang="fr-FR">Q_RADIO_MANDATORY_DETAIL</r:String>
-            </d:ConstructName>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>makxe3yi</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
@@ -612,7 +592,7 @@
             </d:QuestionItemName>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m9joa7yo-QOP-m9jorr1u</r:ID>
+               <r:ID>m9joa7yo-QOP-m9jou3rb</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">Q_RADIO_MANDATORY</r:String>
@@ -621,13 +601,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m9joa7yo-RDOP-m9jorr1u</r:ID>
+                  <r:ID>m9joa7yo-RDOP-m9jou3rb</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m9joa7yo-QOP-m9jorr1u</r:ID>
+                  <r:ID>m9joa7yo-QOP-m9jou3rb</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -647,7 +627,7 @@
                </r:CodeListReference>
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m9joa7yo-RDOP-m9jorr1u</r:ID>
+                  <r:ID>m9joa7yo-RDOP-m9jou3rb</r:ID>
                   <r:Version>1</r:Version>
                   <r:CodeRepresentation>
                      <r:CodeListReference>
@@ -663,114 +643,6 @@
          </d:QuestionItem>
          <d:QuestionItem>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>makxe3yi</r:ID>
-            <r:Version>1</r:Version>
-            <d:QuestionItemName>
-               <r:String xml:lang="fr-FR">Q_RADIO_MANDATORY_DETAIL</r:String>
-            </d:QuestionItemName>
-            <r:OutParameter isArray="false">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>makxe3yi-QOP-makxlt9f</r:ID>
-               <r:Version>1</r:Version>
-               <r:ParameterName>
-                  <r:String xml:lang="fr-FR">Q_RADIO_MANDATORY_DETAIL</r:String>
-               </r:ParameterName>
-            </r:OutParameter>
-            <r:OutParameter isArray="false">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>makxeuv7-QOP-makxmazi</r:ID>
-               <r:Version>1</r:Version>
-               <r:ParameterName>
-                  <r:String xml:lang="fr-FR">Q_RADIO_MANDATORY_DETAIL3CL</r:String>
-               </r:ParameterName>
-            </r:OutParameter>
-            <r:Binding>
-               <r:SourceParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>makxe3yi-RDOP-makxlt9f</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:SourceParameterReference>
-               <r:TargetParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>makxe3yi-QOP-makxlt9f</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:TargetParameterReference>
-            </r:Binding>
-            <r:Binding>
-               <r:SourceParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>makxeuv7-RDOP-makxmazi</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:SourceParameterReference>
-               <r:TargetParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>makxeuv7-QOP-makxmazi</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:TargetParameterReference>
-            </r:Binding>
-            <d:QuestionText>
-               <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">"Mandatory unique choice question (radio), with 'please specify'"</d:Text>
-               </d:LiteralText>
-            </d:QuestionText>
-            <d:StructuredMixedResponseDomain>
-               <d:ResponseDomainInMixed attachmentBase="1">
-                  <d:CodeDomain>
-                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
-                     <r:CodeListReference>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>m9joihim</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TypeOfObject>CodeList</r:TypeOfObject>
-                     </r:CodeListReference>
-                     <r:OutParameter isArray="false">
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>makxe3yi-RDOP-makxlt9f</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:CodeRepresentation>
-                           <r:CodeListReference>
-                              <r:Agency>fr.insee</r:Agency>
-                              <r:ID>m9joihim</r:ID>
-                              <r:Version>1</r:Version>
-                              <r:TypeOfObject>CodeList</r:TypeOfObject>
-                           </r:CodeListReference>
-                        </r:CodeRepresentation>
-                     </r:OutParameter>
-                     <r:ResponseCardinality maximumResponses="1"/>
-                  </d:CodeDomain>
-               </d:ResponseDomainInMixed>
-               <d:ResponseDomainInMixed>
-                  <d:TextDomain maxLength="249">
-                     <r:Label>
-                        <r:Content xml:lang="fr-FR">"Please specify: "</r:Content>
-                     </r:Label>
-                     <r:OutParameter isArray="false">
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>makxeuv7-RDOP-makxmazi</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TextRepresentation maxLength="249"/>
-                     </r:OutParameter>
-                  </d:TextDomain>
-                  <d:AttachmentLocation>
-                     <d:DomainSpecificValue attachmentDomain="1">
-                        <r:Value>3</r:Value>
-                     </d:DomainSpecificValue>
-                     <r:CodeReference>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>m9joihim-3</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TypeOfObject>Code</r:TypeOfObject>
-                     </r:CodeReference>
-                  </d:AttachmentLocation>
-               </d:ResponseDomainInMixed>
-            </d:StructuredMixedResponseDomain>
-         </d:QuestionItem>
-         <d:QuestionItem>
-            <r:Agency>fr.insee</r:Agency>
             <r:ID>m9jojxfa</r:ID>
             <r:Version>1</r:Version>
             <d:QuestionItemName>
@@ -778,7 +650,7 @@
             </d:QuestionItemName>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m9jojxfa-QOP-m9joo13m</r:ID>
+               <r:ID>m9jojxfa-QOP-m9jop7o1</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">Q_DROPDOWN_MANDATORY</r:String>
@@ -787,13 +659,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m9jojxfa-RDOP-m9joo13m</r:ID>
+                  <r:ID>m9jojxfa-RDOP-m9jop7o1</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m9jojxfa-QOP-m9joo13m</r:ID>
+                  <r:ID>m9jojxfa-QOP-m9jop7o1</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -813,7 +685,7 @@
                </r:CodeListReference>
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m9jojxfa-RDOP-m9joo13m</r:ID>
+                  <r:ID>m9jojxfa-RDOP-m9jop7o1</r:ID>
                   <r:Version>1</r:Version>
                   <r:CodeRepresentation>
                      <r:CodeListReference>
@@ -1189,7 +1061,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m9joa7yo-QOP-m9jorr1u</r:ID>
+               <r:ID>m9joa7yo-QOP-m9jou3rb</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -1222,7 +1094,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m9jojxfa-QOP-m9joo13m</r:ID>
+               <r:ID>m9jojxfa-QOP-m9jop7o1</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -1241,65 +1113,6 @@
                      <r:TypeOfObject>CodeList</r:TypeOfObject>
                   </r:CodeListReference>
                </r:CodeRepresentation>
-            </l:VariableRepresentation>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>makxgnhr</r:ID>
-            <r:Version>1</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="fr-FR">Q_RADIO_MANDATORY_DETAIL</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">Q_RADIO_MANDATORY_DETAIL label </r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>makxe3yi-QOP-makxlt9f</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>makxe3yi</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:CodeRepresentation>
-                  <r:CodeListReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>m9joihim</r:ID>
-                     <r:Version>1</r:Version>
-                     <r:TypeOfObject>CodeList</r:TypeOfObject>
-                  </r:CodeListReference>
-               </r:CodeRepresentation>
-            </l:VariableRepresentation>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>makxh1t8</r:ID>
-            <r:Version>1</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="fr-FR">Q_RADIO_MANDATORY_DETAIL3CL</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">Q_RADIO_MANDATORY_DETAIL3CL label </r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>makxeuv7-QOP-makxmazi</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>makxe3yi</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:TextRepresentation maxLength="249"/>
             </l:VariableRepresentation>
          </l:Variable>
          <l:VariableGroup>
@@ -1369,18 +1182,6 @@
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>m9jom50t</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>Variable</r:TypeOfObject>
-            </r:VariableReference>
-            <r:VariableReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>makxgnhr</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>Variable</r:TypeOfObject>
-            </r:VariableReference>
-            <r:VariableReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>makxh1t8</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
