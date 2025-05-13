@@ -121,7 +121,7 @@ public class LunaticUtils {
                 case CHECKBOX_BOOLEAN, INPUT_NUMBER, INPUT, TEXTAREA, SUGGESTER, DATEPICKER, DURATION, RADIO,
                         CHECKBOX_ONE, DROPDOWN, CHECKBOX_GROUP, TABLE ->
                         result.addAll(getDirectResponseNames(component));
-                case QUESTIONNAIRE, SEQUENCE, SUBSEQUENCE, TEXT, ACCORDION ->
+                case QUESTIONNAIRE, SEQUENCE, SUBSEQUENCE, TEXT, FILTER_DESCRIPTION, ACCORDION ->
                         doNothing();
                 case QUESTION ->
                         throw new IllegalStateException("This method does not support the question component.");
