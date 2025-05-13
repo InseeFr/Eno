@@ -12,10 +12,17 @@ public class LunaticParameters {
     public enum LunaticPaginationMode {NONE, SEQUENCE, QUESTION}
 
     private boolean controls;
+
+    /** Generate or not blocking checks for "mandatory" questions. */
+    private boolean mandatoryControls = true;
+
     private boolean toolTip; // Not implemented yet in Lunatic
     private boolean missingVariables;
     private boolean filterResult;
+
+    /** Generate or not "filter description" components. */
     private boolean filterDescription;
+
     private LunaticPaginationMode lunaticPaginationMode;
 
     /** Parameter to include or exclude the question component (temporary modification) */
@@ -40,7 +47,7 @@ public class LunaticParameters {
         boolean isProcess = EnoParameters.ModeParameter.PROCESS.equals(modeParameter);
         this.setControls(isWeb || isProcess);
         this.setToolTip(isWeb || isProcess);
-        this.setFilterDescription(isProcess);
+        this.setFilterDescription(true);
         this.setFilterResult(isWeb || isProcess);
         this.setMissingVariables(isInterview || isProcess);
         this.setLunaticPaginationMode(paginationValue(context, modeParameter));

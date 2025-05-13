@@ -44,12 +44,12 @@ public class LunaticAddControlFormat implements ProcessingStep<Questionnaire> {
                     }
 
                     if(componentType instanceof Table table) {
-                        new LunaticTableControls().insertFormatControls(table);
+                        new LunaticTableControls(language).insertFormatControls(table);
                         return;
                     }
 
                     if(componentType instanceof RosterForLoop roster) {
-                        new LunaticRosterControl().insertFormatControls(roster);
+                        new LunaticRosterControl(language).insertFormatControls(roster);
                         return;
                     }
 

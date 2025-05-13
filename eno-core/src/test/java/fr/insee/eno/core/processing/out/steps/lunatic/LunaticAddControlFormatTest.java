@@ -11,7 +11,8 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LunaticAddControlFormatTest {
 
@@ -177,7 +178,7 @@ class LunaticAddControlFormatTest {
                 "cast(DATE_VAR, date, \"YYYY-MM-DD\")>cast(\"2023-01-01\", date, \"YYYY-MM-DD\")))";
         assertEquals(expected, control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
-        assertEquals("\"La date saisie doit être comprise entre 01/01/2020 et 01/01/2023.\"",
+        assertEquals("\"La date saisie doit être comprise entre 01/01/2020 et 01/01/2023\"",
                 control.getErrorMessage().getValue());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getType());
         assertEquals(ControlTypeEnum.FORMAT, control.getTypeOfControl());
@@ -214,7 +215,7 @@ class LunaticAddControlFormatTest {
                 "(cast(DATE_VAR, date, \"YYYY-MM-DD\")<cast(\"2020-01-01\", date, \"YYYY-MM-DD\")))";
         assertEquals(expected, control.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
-        assertEquals("\"La date saisie doit être postérieure à 01/01/2020.\"",
+        assertEquals("\"La date saisie doit être postérieure à 01/01/2020\"",
                 control.getErrorMessage().getValue());
         assertEquals(LabelTypeEnum.VTL_MD, control.getErrorMessage().getType());
         assertEquals(ControlTypeEnum.FORMAT, control.getTypeOfControl());
@@ -250,7 +251,7 @@ class LunaticAddControlFormatTest {
                 "and (cast(DATE_VAR, date, \"YYYY-MM-DD\")>cast(\"2023-01-01\", date, \"YYYY-MM-DD\")))";
         assertEquals(expected, boundsControl.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, boundsControl.getControl().getType());
-        assertEquals("\"La date saisie doit être antérieure à 01/01/2023.\"",
+        assertEquals("\"La date saisie doit être antérieure à 01/01/2023\"",
                 boundsControl.getErrorMessage().getValue());
         assertEquals(LabelTypeEnum.VTL_MD, boundsControl.getErrorMessage().getType());
         assertEquals(ControlTypeEnum.FORMAT, boundsControl.getTypeOfControl());
@@ -308,7 +309,12 @@ class LunaticAddControlFormatTest {
 
         bodyCells = new ArrayList<>();
         bodyCells.add(buildBodyCell("line2"));
-        bodyCells.add(buildBodyCell(table.getId()+"-number", "NUMBER_VAR", ComponentTypeEnum.INPUT_NUMBER, BigInteger.TWO, 2.0, 5.0));
+        bodyCells.add(buildNumberCell(table.getId()+"-number", "NUMBER_VAR", BigInteger.TWO, 2.0, 5.0));
+        bodyLines.add(buildBodyLine(bodyCells));
+
+        bodyCells = new ArrayList<>();
+        bodyCells.add(buildBodyCell("line3"));
+        bodyCells.add(buildDateCell(table.getId()+"-date", "DATE_VAR", "YYYY", "1950", "2050"));
         bodyLines.add(buildBodyLine(bodyCells));
 
         lunaticQuestionnaire = new Questionnaire();
@@ -316,9 +322,10 @@ class LunaticAddControlFormatTest {
 
         processing.apply(lunaticQuestionnaire);
 
-        assertEquals(2, table.getControls().size());
+        assertEquals(3, table.getControls().size());
         assertEquals("table-id-number-format-borne-inf-sup", table.getControls().get(0).getId());
         assertEquals("table-id-number-format-decimal", table.getControls().get(1).getId());
+        assertEquals("table-id-date-format-date-borne-inf-sup", table.getControls().get(2).getId());
     }
 
     @Test
@@ -329,7 +336,7 @@ class LunaticAddControlFormatTest {
 
         List<BodyCell> bodyCells = roster.getComponents();
         bodyCells.add(buildBodyCell("line1"));
-        bodyCells.add(buildBodyCell(roster.getId()+"-number", "NUMBER_VAR", ComponentTypeEnum.INPUT_NUMBER, BigInteger.TWO, 2.0, 5.0));
+        bodyCells.add(buildNumberCell(roster.getId()+"-number", "NUMBER_VAR", BigInteger.TWO, 2.0, 5.0));
         bodyCells.add(buildBodyCell(roster.getId()+"-co", "CHECKBOX_VAR", ComponentTypeEnum.CHECKBOX_ONE));
 
         lunaticQuestionnaire = new Questionnaire();
@@ -375,9 +382,17 @@ class LunaticAddControlFormatTest {
         return bodyCell;
     }
 
-    private BodyCell buildBodyCell(String id, String name, ComponentTypeEnum componentType, BigInteger decimals, Double min, Double max) {
-        BodyCell bodyCell = buildBodyCell(id, name, componentType);
+    private BodyCell buildNumberCell(String id, String name, BigInteger decimals, Double min, Double max) {
+        BodyCell bodyCell = buildBodyCell(id, name, ComponentTypeEnum.INPUT_NUMBER);
         bodyCell.setDecimals(decimals);
+        bodyCell.setMin(min);
+        bodyCell.setMax(max);
+        return bodyCell;
+    }
+
+    private BodyCell buildDateCell(String id, String name, String dateFormat, String min, String max) {
+        BodyCell bodyCell = buildBodyCell(id, name, ComponentTypeEnum.DATEPICKER);
+        bodyCell.setDateFormat(dateFormat);
         bodyCell.setMin(min);
         bodyCell.setMax(max);
         return bodyCell;

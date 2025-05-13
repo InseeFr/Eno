@@ -23,7 +23,7 @@ class DurationControlMessageTest {
             //
             String result = logicClass.generateControlMessage(minValue, maxValue);
             //
-            String expected = "\"La durée saisie doit être comprise entre 1 an et 6 mois minimum et 3 ans et 1 mois maximum.\"";
+            String expected = "\"La durée saisie doit être comprise entre 1 an et 6 mois minimum et 3 ans et 1 mois maximum\"";
             assertEquals(expected, result);
         }
 
@@ -34,7 +34,7 @@ class DurationControlMessageTest {
             //
             String result = logicClass.generateControlMessage(minValue, maxValue);
             //
-            String expected = "\"La durée saisie doit être comprise entre 2 ans et 6 mois minimum et 3 ans maximum.\"";
+            String expected = "\"La durée saisie doit être comprise entre 2 ans et 6 mois minimum et 3 ans maximum\"";
             assertEquals(expected, result);
         }
 
@@ -45,7 +45,7 @@ class DurationControlMessageTest {
             //
             String result = logicClass.generateControlMessage(minValue, maxValue);
             //
-            String expected = "\"La durée saisie doit être inférieure à 5 ans.\"";
+            String expected = "\"La durée saisie doit être inférieure à 5 ans\"";
             assertEquals(expected, result);
         }
 
@@ -101,7 +101,7 @@ class DurationControlMessageTest {
             //
             String result = logicClass.generateControlMessage(minValue, maxValue);
             //
-            String expected = "\"La durée saisie doit être comprise entre 1 heure et 30 minutes minimum et 3 heures maximum.\"";
+            String expected = "\"La durée saisie doit être comprise entre 1 heure et 30 minutes minimum et 3 heures maximum\"";
             assertEquals(expected, result);
         }
 
@@ -113,7 +113,7 @@ class DurationControlMessageTest {
             //
             String result = logicClass.generateControlMessage(minValue, maxValue);
             //
-            String expected = "\"La durée saisie doit être inférieure à 12 heures.\"";
+            String expected = "\"La durée saisie doit être inférieure à 12 heures\"";
             assertEquals(expected, result);
         }
 
