@@ -91,7 +91,7 @@ abstract class ControlTest {
                 lunaticComponents.get("ltx6cof9").getControls().getFirst().getCriticality());
         assertEquals(ControlCriticalityEnum.WARN,
                 lunaticComponents.get("lu6xrmto").getControls().getFirst().getCriticality());
-        assertEquals(ControlCriticalityEnum.WARN,
+        assertEquals(ControlCriticalityEnum.ERROR,
                 lunaticComponents.get("lu6y5e4z").getControls().getFirst().getCriticality());
     }
 
@@ -101,7 +101,7 @@ abstract class ControlTest {
         Input lunaticInput = assertInstanceOf(Input.class, lunaticComponents.get("lu6y5e4z"));
         assertEquals(1, lunaticInput.getControls().size());
         assertNotEquals("lu6y5e4z", lunaticInput.getControls().getFirst().getId());
-        assertEquals("WARN", lunaticInput.getControls().getFirst().getCriticality().name());
+        assertEquals("ERROR", lunaticInput.getControls().getFirst().getCriticality().name());
         assertTrue(lunaticInput.getControls().getFirst().getErrorMessage().getValue().startsWith("\"Erreur \" || "));
         assertTrue(lunaticInput.getControls().getFirst().getControl().getValue().startsWith("nvl("));
         assertEquals(ControlTypeEnum.CONSISTENCY, lunaticInput.getControls().getFirst().getTypeOfControl());
