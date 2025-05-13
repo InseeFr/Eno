@@ -26,7 +26,7 @@ public class LunaticTableControls implements LunaticFormatControl<Table> {
                     if(ComponentTypeEnum.INPUT_NUMBER.equals(bodyCell.getComponentType())) {
                         controls.addAll(
                                 LunaticInputNumberControl.getFormatControlsFromInputNumberAttributes(
-                                        bodyCell.getId(), bodyCell.getMin(), bodyCell.getMax(),
+                                        bodyCell.getId(), (Double) bodyCell.getMin(), (Double) bodyCell.getMax(),
                                         bodyCell.getDecimals().intValue(), bodyCell.getResponse().getName())
                         );
                     }
