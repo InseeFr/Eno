@@ -59,7 +59,7 @@ class UniqueChoiceQuestionTest {
         assertEquals("Unique choice question label.", enoUCQ.getLabel().getValue());
         assertEquals(UniqueChoiceQuestion.DisplayFormat.RADIO, enoUCQ.getDisplayFormat());
         assertEquals("code-list-id", enoUCQ.getCodeListReference());
-        assertFalse(enoUCQ.getMandatory());
+        assertFalse(enoUCQ.isMandatory());
     }
 
 }

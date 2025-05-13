@@ -6,7 +6,7 @@
     "Eno - Mandatory question"
   ],
   "Name": "ENO_MANDATORY_QUESTIONS",
-  "lastUpdatedDate": "Mon May 12 2025 12:12:35 GMT+0200 (heure d’été d’Europe centrale)",
+  "lastUpdatedDate": "Wed Apr 16 2025 10:39:22 GMT+0200 (heure d’été d’Europe centrale)",
   "DataCollection": [
     {
       "id": "s2106-dc",
@@ -31,7 +31,6 @@
         "m9joc216",
         "m9jo28zy",
         "m9joa7yo",
-        "makxe3yi",
         "m9jojxfa",
         "idendquest"
       ]
@@ -312,7 +311,7 @@
           "questionType": "SINGLE_CHOICE",
           "Response": [
             {
-              "id": "m9jorr1u",
+              "id": "m9jp3k1l",
               "Datatype": {
                 "typeName": "TEXT",
                 "type": "TextDatatypeType",
@@ -320,74 +319,6 @@
                 "MaxLength": 1
               },
               "CollectedVariableReference": "m9joev4j",
-              "CodeListReference": "m9joihim",
-              "mandatory": true
-            }
-          ]
-        },
-        {
-          "id": "makxe3yi",
-          "depth": 2,
-          "Name": "Q_RADIO_MANDATORY_DETAIL",
-          "Label": [
-            "\"Mandatory unique choice question (radio), with 'please specify'\""
-          ],
-          "Declaration": [],
-          "Control": [],
-          "FlowControl": [
-            {
-              "id": "makxugnv",
-              "Description": "$Q_RADIO_MANDATORY_DETAIL$ = '3' : Q_RADIO_MANDATORY_DETAIL3CL",
-              "Expression": "$Q_RADIO_MANDATORY_DETAIL$ = '3'",
-              "IfTrue": "makxwemu",
-              "flowControlType": "CLARIFICATION"
-            }
-          ],
-          "TargetMode": [
-            "CAPI",
-            "CAWI",
-            "CATI",
-            "PAPI"
-          ],
-          "ClarificationQuestion": [
-            {
-              "id": "makxwemu",
-              "questionType": "SIMPLE",
-              "Name": "Q_RADIO_MANDATORY_DETAIL3CL",
-              "Label": "\"Please specify: \"",
-              "TargetMode": [
-                "CAPI",
-                "CAWI",
-                "CATI",
-                "PAPI"
-              ],
-              "Response": [
-                {
-                  "id": "makxkecx",
-                  "Datatype": {
-                    "typeName": "TEXT",
-                    "type": "TextDatatypeType",
-                    "MaxLength": 249
-                  },
-                  "CollectedVariableReference": "makxh1t8",
-                  "mandatory": false
-                }
-              ]
-            }
-          ],
-          "codeFilters": [],
-          "type": "QuestionType",
-          "questionType": "SINGLE_CHOICE",
-          "Response": [
-            {
-              "id": "makxlt9f",
-              "Datatype": {
-                "typeName": "TEXT",
-                "type": "TextDatatypeType",
-                "visualizationHint": "RADIO",
-                "MaxLength": 1
-              },
-              "CollectedVariableReference": "makxgnhr",
               "CodeListReference": "m9joihim",
               "mandatory": true
             }
@@ -415,7 +346,7 @@
           "questionType": "SINGLE_CHOICE",
           "Response": [
             {
-              "id": "m9joo13m",
+              "id": "m9joqzgo",
               "Datatype": {
                 "typeName": "TEXT",
                 "type": "TextDatatypeType",
@@ -584,29 +515,6 @@
           "MaxLength": 1
         },
         "CodeListReference": "m9joihim"
-      },
-      {
-        "id": "makxgnhr",
-        "Name": "Q_RADIO_MANDATORY_DETAIL",
-        "Label": "Q_RADIO_MANDATORY_DETAIL label",
-        "type": "CollectedVariableType",
-        "Datatype": {
-          "typeName": "TEXT",
-          "type": "TextDatatypeType",
-          "MaxLength": 1
-        },
-        "CodeListReference": "m9joihim"
-      },
-      {
-        "id": "makxh1t8",
-        "Name": "Q_RADIO_MANDATORY_DETAIL3CL",
-        "Label": "Q_RADIO_MANDATORY_DETAIL3CL label",
-        "type": "CollectedVariableType",
-        "Datatype": {
-          "typeName": "TEXT",
-          "type": "TextDatatypeType",
-          "MaxLength": 249
-        }
       }
     ]
   },

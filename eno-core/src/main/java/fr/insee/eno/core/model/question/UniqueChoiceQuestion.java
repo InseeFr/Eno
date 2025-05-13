@@ -107,6 +107,12 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     @Pogues("getCodeFilters()")
     List<CodeFilter> codeFilters = new ArrayList<>();
 
+    /** Indicates whether the response is mandatory for this component. */
+    @DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
+            "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
+    @Lunatic("setMandatory(#param)")
+    boolean mandatory;
+
     public static DisplayFormat convertPoguesVisualizationHint(ResponseType poguesResponse) {
         return switch (poguesResponse.getDatatype().getVisualizationHint()) {
             case CHECKBOX -> DisplayFormat.CHECKBOX;

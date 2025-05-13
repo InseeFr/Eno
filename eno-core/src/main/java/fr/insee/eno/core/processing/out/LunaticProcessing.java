@@ -60,8 +60,7 @@ public class LunaticProcessing {
                 .then(new LunaticFinalizePairwise(enoQuestionnaire))
                 .thenIf(lunaticParameters.isFilterResult(), new LunaticFilterResult(enoIndex))
                 .then(new LunaticShapeFrom())
-                .thenIf(enoParameters.getModeParameter().equals(EnoParameters.ModeParameter.CAWI),
-                        new LunaticSequenceDescription())
+                .thenIf(enoParameters.getModeParameter().equals(EnoParameters.ModeParameter.CAWI), new LunaticSequenceDescription())
                 .then(new LunaticInputNumberDescription(enoParameters.getLanguage()))
                 .then(new LunaticDurationDescription())
                 .then(new LunaticDateDescription(enoParameters.getLanguage()))
