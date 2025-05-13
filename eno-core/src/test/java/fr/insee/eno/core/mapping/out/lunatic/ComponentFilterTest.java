@@ -52,10 +52,12 @@ class ComponentFilterTest {
 
         @BeforeAll
         void mapQuestionnaire() throws DDIParsingException {
+            EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
+            enoParameters.getLunaticParameters().setFilterDescription(false);
             lunaticQuestionnaire = DDIToLunatic.fromInputStream(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-filters-simple.xml"))
-                    .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
+                    .transform(enoParameters);
         }
 
         @Test
@@ -124,10 +126,12 @@ class ComponentFilterTest {
 
         @BeforeAll
         void mapQuestionnaire() throws DDIParsingException {
+            EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
+            enoParameters.getLunaticParameters().setFilterDescription(false);
             lunaticQuestionnaire = DDIToLunatic.fromInputStream(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-filters-extended.xml"))
-                    .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
+                    .transform(enoParameters);
         }
 
         @Test
@@ -168,10 +172,12 @@ class ComponentFilterTest {
 
         @BeforeAll
         void mapQuestionnaire() throws DDIParsingException {
+            EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
+            enoParameters.getLunaticParameters().setFilterDescription(false);
             lunaticQuestionnaire = DDIToLunatic.fromInputStream(
                     ComponentFilterTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-filters-calculated.xml"))
-                    .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
+                    .transform(enoParameters);
         }
 
         @ParameterizedTest
