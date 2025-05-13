@@ -18,13 +18,12 @@ public class DateCell extends ResponseCell {
     @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
     String lunaticComponentType = "DATEPICKER";
 
-    // Note: with current Lunatic-Model implementation, it is impossible to set min & max in this case.
-    // TODO: issue sent to Lunatic-Model, come back here when the issue has been solved.
-
     @DDI("getResponseDomain().getRangeArray(0).getMinimumValue().getStringValue()")
+    @Lunatic("setMin(#param)")
     private String minValue;
 
     @DDI("getResponseDomain().getRangeArray(0).getMaximumValue().getStringValue()")
+    @Lunatic("setMax(#param)")
     private String maxValue;
 
     @DDI("getResponseDomain().getDateFieldFormat().getStringValue()")
