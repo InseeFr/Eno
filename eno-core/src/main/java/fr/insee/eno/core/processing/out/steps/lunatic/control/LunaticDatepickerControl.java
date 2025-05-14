@@ -65,7 +65,7 @@ public class LunaticDatepickerControl implements LunaticFormatControl<Datepicker
      * @param format format string
      * @param responseName date picker response attribute
      */
-    private Optional<ControlType> getFormatControlFromDatepickerAttributes(String id, String minValue, String maxValue, String format, String responseName) {
+    Optional<ControlType> getFormatControlFromDatepickerAttributes(String id, String minValue, String maxValue, String format, String responseName) {
         if (format == null)
             throw new RequiredPropertyException("Format is missing in date question '" + id + "'");
 
@@ -94,7 +94,7 @@ public class LunaticDatepickerControl implements LunaticFormatControl<Datepicker
                     responseName, responseName, format, minValue, format, responseName, format, maxValue, format
             );
             String controlErrorMessage = String.format(
-                    "\"La date saisie doit être comprise entre %s et %s.\"",
+                    "\"La date saisie doit être comprise entre %s et %s\"",
                     formattedMinValue.get().value(), formattedMaxValue.get().value()
             );
             return Optional.of(LunaticFormatControl.createFormatControl(
@@ -107,7 +107,7 @@ public class LunaticDatepickerControl implements LunaticFormatControl<Datepicker
                     responseName, responseName, format, maxValue, format
             );
             String controlErrorMessage = String.format(
-                    "\"La date saisie doit être antérieure à %s.\"",
+                    "\"La date saisie doit être antérieure à %s\"",
                     formattedMaxValue.get().value()
             );
             return Optional.of(LunaticFormatControl.createFormatControl(
@@ -120,7 +120,7 @@ public class LunaticDatepickerControl implements LunaticFormatControl<Datepicker
                     responseName, responseName, format, minValue, format
             );
             String controlErrorMessage = String.format(
-                    "\"La date saisie doit être postérieure à %s.\"",
+                    "\"La date saisie doit être postérieure à %s\"",
                     formattedMinValue.get().value()
             );
             return Optional.of(LunaticFormatControl.createFormatControl(

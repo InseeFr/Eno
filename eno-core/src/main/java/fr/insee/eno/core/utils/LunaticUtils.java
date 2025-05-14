@@ -33,8 +33,7 @@ public class LunaticUtils {
     public static boolean isResponseComponent(@NonNull ComponentType component) {
         nonNullTypeCheck(component);
         return switch (component.getComponentType()) {
-            case FILTER_DESCRIPTION -> false;
-            case QUESTIONNAIRE, LOOP, ROUNDABOUT, SEQUENCE, SUBSEQUENCE, TEXT, ACCORDION -> false;
+            case QUESTIONNAIRE, LOOP, ROUNDABOUT, SEQUENCE, SUBSEQUENCE, TEXT, FILTER_DESCRIPTION, ACCORDION -> false;
             case CHECKBOX_BOOLEAN, INPUT, TEXTAREA, SUGGESTER, INPUT_NUMBER, DATEPICKER, DURATION,
                     DROPDOWN, RADIO, CHECKBOX_ONE,
                     CHECKBOX_GROUP, TABLE, ROSTER_FOR_LOOP, PAIRWISE_LINKS,
@@ -122,7 +121,7 @@ public class LunaticUtils {
                 case CHECKBOX_BOOLEAN, INPUT_NUMBER, INPUT, TEXTAREA, SUGGESTER, DATEPICKER, DURATION, RADIO,
                         CHECKBOX_ONE, DROPDOWN, CHECKBOX_GROUP, TABLE ->
                         result.addAll(getDirectResponseNames(component));
-                case QUESTIONNAIRE, SEQUENCE, SUBSEQUENCE, TEXT, ACCORDION ->
+                case QUESTIONNAIRE, SEQUENCE, SUBSEQUENCE, TEXT, FILTER_DESCRIPTION, ACCORDION ->
                         doNothing();
                 case QUESTION ->
                         throw new IllegalStateException("This method does not support the question component.");

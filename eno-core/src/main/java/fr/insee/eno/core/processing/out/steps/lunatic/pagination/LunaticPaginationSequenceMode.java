@@ -46,13 +46,27 @@ public class LunaticPaginationSequenceMode extends LunaticPaginationAllModes {
         subsequence.setPage(numPage);
     }
 
+    @Override
+    public void applyNumPageOnFilterDescription(
+            FilterDescription filterDescription, String numPagePrefix, int pageCount, boolean isParentPaginated) {
+        // The first questionnaire sequence may be filtered (e.g. using an external variable),
+        // so the first element can be a filter description
+        if (pageCount == 0) pageCount ++;
+        String numPage = numPagePrefix + pageCount;
+        filterDescription.setPage(numPage);
+    }
+
     private boolean shouldLoopBePaginated(Loop loop) {
         List<ComponentType> loopComponents = loop.getComponents();
         if(loopComponents == null || loopComponents.isEmpty()) {
             throw new LunaticLoopException(String.format("Loop %s should have components inside", loop.getId()));
         }
-
-        return loopComponents.get(0).getComponentType().equals(ComponentTypeEnum.SEQUENCE);
+        // A loop on a sequence should be paginated, a loop on a subsequence should not
+        int i = 0;
+        while (loopComponents.get(i).getComponentType() != ComponentTypeEnum.SEQUENCE
+                && loopComponents.get(i).getComponentType() != ComponentTypeEnum.SUBSEQUENCE)
+            i++;
+        return loopComponents.get(i).getComponentType().equals(ComponentTypeEnum.SEQUENCE);
     }
 
     /**

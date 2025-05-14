@@ -50,10 +50,12 @@ public class LunaticProcessing {
                 .thenIf(lunaticParameters.isMissingVariables(),
                         new LunaticAddMissingVariables(enoCatalog, lunaticParameters.isMissingVariables()))
                 .then(new LunaticAddResizing(enoQuestionnaire))
+                .thenIf(lunaticParameters.isFilterDescription(), new LunaticAddFilterDescription(enoQuestionnaire.getFilters()))
                 .then(new LunaticAddPageNumbers(lunaticParameters.getLunaticPaginationMode()))
                 .then(new LunaticResponseTimeQuestionPagination())
                 .then(new LunaticAddCleaning(enoQuestionnaire))
                 .thenIf(lunaticParameters.isControls(), new LunaticAddControlFormat())
+                .thenIf(lunaticParameters.isMandatoryControls(), new LunaticAddControlMandatory())
                 .then(new LunaticReverseConsistencyControlLabel())
                 .then(new LunaticFinalizePairwise(enoQuestionnaire))
                 .thenIf(lunaticParameters.isFilterResult(), new LunaticFilterResult(enoIndex))
