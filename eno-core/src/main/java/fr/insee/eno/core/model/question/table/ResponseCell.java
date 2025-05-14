@@ -46,4 +46,8 @@ public abstract class ResponseCell extends EnoObject implements TableCell, EnoOb
     @Lunatic("setConditionFilter(#param)")
     private ComponentFilter componentFilter;
 
+    @Pogues("getConditionReadOnly()")
+    @Lunatic("setConditionReadOnly(#param)")
+    private ComponentFilter componentReadOnly;
+
 }
