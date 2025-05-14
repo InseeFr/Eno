@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.47.0] - 2025-05-14
+### :sparkles: New Features
+- [`2ea17f4`](https://github.com/InseeFr/Eno/commit/2ea17f4064392c4533bd7f1c9c47c67f34433406) - **lunatic**: mandatory question checks *(PR [#1260](https://github.com/InseeFr/Eno/pull/1260) by [@nsenave](https://github.com/nsenave))*
+- [`8b77d72`](https://github.com/InseeFr/Eno/commit/8b77d7252ff80c719896397ccfa499354d5af747) - **lunatic**: date format controls in tables *(PR [#1265](https://github.com/InseeFr/Eno/pull/1265) by [@nsenave](https://github.com/nsenave))*
+- [`07f40f9`](https://github.com/InseeFr/Eno/commit/07f40f9a0307fa6f8bfee0389a85e63525115d37) - **lunatic**: filter description components *(PR [#1262](https://github.com/InseeFr/Eno/pull/1262) by [@nsenave](https://github.com/nsenave))*
+- [`f964d2f`](https://github.com/InseeFr/Eno/commit/f964d2fcb9fc336e4a7c9a6be71758050768c8cb) - **lunatic**: activate 'error' level checks *(PR [#1266](https://github.com/InseeFr/Eno/pull/1266) by [@nsenave](https://github.com/nsenave))*
+
+### :bug: Bug Fixes
+- [`05a3d4b`](https://github.com/InseeFr/Eno/commit/05a3d4bd93f65b91acd0267b274a4713d07f6ae2) - **deps**: update all minor dependencies (v3-main) *(PR [#1243](https://github.com/InseeFr/Eno/pull/1243) by [@renovate[bot]](https://github.com/apps/renovate))*
+
+
 ## [3.43.0] - 2025-04-30
 ### :sparkles: New Features
 - [`ba5c872`](https://github.com/InseeFr/Eno/commit/ba5c872ce234f1907a1446d874fe3a4864b49437) - date question description *(PR [#1263](https://github.com/InseeFr/Eno/pull/1263) by [@RemiVerriez](https://github.com/RemiVerriez))*
@@ -561,3 +572,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.40.1]: https://github.com/InseeFr/Eno/compare/3.40.0...3.40.1
 [3.41.0]: https://github.com/InseeFr/Eno/compare/3.40.1...3.41.0
 [3.43.0]: https://github.com/InseeFr/Eno/compare/3.41.0...3.43.0
+[3.47.0]: https://github.com/InseeFr/Eno/compare/3.43.0...3.47.0
