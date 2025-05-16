@@ -1748,6 +1748,7 @@
 		    </xsl:if>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
+			    <xsl:with-param name="mandatory" select="enoddi33:get-ci-type($source-context)" tunnel="yes"/>
 			</xsl:apply-templates>
 		    <xsl:if test="ancestor::Clarification">
 		        <d:AttachmentLocation>
