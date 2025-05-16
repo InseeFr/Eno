@@ -351,13 +351,19 @@
     <xs:simpleType name="AccompanyingMail">
         <xs:restriction base="xs:token">
             <xs:enumeration value=""/>
+            <xs:enumeration value="accompagnementCOL"/>
+            <xs:enumeration value="accompagnementCOLT"/>
             <xs:enumeration value="cnrCOL"/>
+            <xs:enumeration value="cnrCOLT"/>
             <xs:enumeration value="entreeCOL"/>
+            <xs:enumeration value="entreeCOLT"/>
             <xs:enumeration value="medCOL"/>
+            <xs:enumeration value="medCOLT"/>
             <xs:enumeration value="ouvertureCOL"/>
+            <xs:enumeration value="ouvertureCOLT"/>
             <xs:enumeration value="relanceCOL"/>
             <xs:enumeration value="relanceCOLEM"/>
-            <xs:enumeration value="accompagnementCOL"/>
+            <xs:enumeration value="relanceCOLT"/>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
