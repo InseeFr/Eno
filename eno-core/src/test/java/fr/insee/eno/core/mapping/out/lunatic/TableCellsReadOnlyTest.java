@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TableCellsFilterTest {
+class TableCellsReadOnlyTest {
 
     private final ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -21,27 +21,15 @@ class TableCellsFilterTest {
             EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
 
     @Test
-    @DisplayName("Component filter for InputNumber in RosterForLoop.")
-    void functionalTest_fromPoguesPlusDDI() throws ParsingException {
-        Questionnaire lunaticQuestionnaire = PoguesDDIToLunatic
-                .fromInputStreams(
-                        classLoader.getResourceAsStream("functional/pogues/cells-filtered/pogues-m92r209h.json"),
-                        classLoader.getResourceAsStream("functional/ddi/cells-filtered/ddi-m92r209h.xml"))
-                .transform(enoParameters);
-        RosterForLoop rosterForLoop = (RosterForLoop) ((Question) lunaticQuestionnaire.getComponents().get(1)).getComponents().getFirst();
-        assertEquals("AGE >= 18", rosterForLoop.getComponents().get(2).getConditionFilter().getValue());
-    }
-
-    @Test
-    @DisplayName("Dynamic table with filtered column.")
+    @DisplayName("Dynamic table with ReadOnly")
     void integrationTest_fromPoguesPlusDDI() throws ParsingException {
         Questionnaire lunaticQuestionnaire = PoguesDDIToLunatic
                 .fromInputStreams(
-                        classLoader.getResourceAsStream("integration/pogues/pogues-table-cell-filter.json"),
-                        classLoader.getResourceAsStream("integration/ddi/ddi-table-cell-filter.xml"))
+                        classLoader.getResourceAsStream("integration/pogues/pogues-dynamic-table-read-only.json"),
+                        classLoader.getResourceAsStream("integration/ddi/ddi-dynamic-table-read-only.xml"))
                 .transform(enoParameters);
         RosterForLoop rosterForLoop = (RosterForLoop) ((Question) lunaticQuestionnaire.getComponents().get(1)).getComponents().getFirst();
-        assertEquals("DYNAMIC_TABLE1", rosterForLoop.getComponents().get(1).getConditionFilter().getValue());
+        assertEquals("TABLEAUDYN1 = \"bob\"", rosterForLoop.getComponents().get(2).getConditionReadOnly().getValue());
     }
 
 }
