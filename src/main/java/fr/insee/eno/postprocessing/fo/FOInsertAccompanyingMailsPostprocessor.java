@@ -36,8 +36,8 @@ public class FOInsertAccompanyingMailsPostprocessor implements Postprocessor {
 			saxonService.transformFOToStep4FO(inputStream, byteArrayOutputStream, xslIS, surveyName, surveyName, parameters);
 
 		}catch(Exception e) {
-			String errorMessage = String.format("An error was occured during the %s transformation. %s : %s",
-					toString(),
+			String errorMessage = String.format("An error has occurred during the %s transformation. %s : %s",
+					this,
 					e.getMessage(),
 					Utils.getErrorLocation(styleSheetPath,e));
 			logger.error(errorMessage);
