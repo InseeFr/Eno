@@ -6,6 +6,7 @@ import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.TextQuestion;
+import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType;
@@ -45,6 +46,9 @@ class LunaticLoopResolutionTest {
         enoQuestionnaire.getSequences().add(sequence);
         TextQuestion textQuestion = new TextQuestion();
         textQuestion.setId(QUESTION_ID);
+        Response response = new Response();
+        response.setVariableName("var1");
+        textQuestion.setResponse(response);
         enoQuestionnaire.getSingleResponseQuestions().add(textQuestion);
         //
         EnoIndex enoIndex = new EnoIndex();
@@ -109,14 +113,14 @@ class LunaticLoopResolutionTest {
         @BeforeAll
         void mapLunaticQuestionnaire() throws DDIParsingException {
             // Given: a mapped and sorted Lunatic questionnaire
-            EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
+            EnoQuestionnaire enoQuestionnaire1 = DDIToEno.fromInputStream(LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-loops-sequence.xml"))
                     .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
             LunaticMapper lunaticMapper = new LunaticMapper();
-            lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
-            new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);
+            lunaticMapper.mapQuestionnaire(enoQuestionnaire1, lunaticQuestionnaire);
+            new LunaticSortComponents(enoQuestionnaire1).apply(lunaticQuestionnaire);
             // When: applying loop resolution
-            new LunaticLoopResolution(enoQuestionnaire).apply(lunaticQuestionnaire);
+            new LunaticLoopResolution(enoQuestionnaire1).apply(lunaticQuestionnaire);
             // Then
             lunaticLoops = lunaticQuestionnaire.getComponents().stream()
                     .filter(Loop.class::isInstance).map(Loop.class::cast).toList();
@@ -128,7 +132,7 @@ class LunaticLoopResolutionTest {
             assertEquals(9, lunaticQuestionnaire.getComponents().size());
             assertEquals(4, lunaticLoops.size());
             //
-            assertEquals(ComponentTypeEnum.LOOP, lunaticQuestionnaire.getComponents().get(0).getComponentType());
+            assertEquals(ComponentTypeEnum.LOOP, lunaticQuestionnaire.getComponents().getFirst().getComponentType());
             assertEquals(ComponentTypeEnum.LOOP, lunaticQuestionnaire.getComponents().get(1).getComponentType());
             assertEquals(ComponentTypeEnum.SEQUENCE, lunaticQuestionnaire.getComponents().get(2).getComponentType());
             assertEquals(ComponentTypeEnum.INPUT_NUMBER, lunaticQuestionnaire.getComponents().get(3).getComponentType());
@@ -150,9 +154,9 @@ class LunaticLoopResolutionTest {
         @Test
         void loopDependencies() {
             // Main loops
-            assertTrue(lunaticLoops.get(0).getLoopDependencies().isEmpty());
+            assertEquals(List.of("Q1A"), lunaticLoops.getFirst().getLoopDependencies());
             assertThat(lunaticLoops.get(2).getLoopDependencies())
-                    .containsExactlyInAnyOrderElementsOf(Set.of("MIN_OCC", "MAX_OCC"));
+                    .containsExactlyInAnyOrderElementsOf(Set.of("MIN_OCC", "MAX_OCC", "Q3A"));
             // Linked loops
             assertEquals(List.of("Q1A"), lunaticLoops.get(1).getLoopDependencies());
             assertEquals(List.of("Q3A"), lunaticLoops.get(3).getLoopDependencies());
@@ -173,20 +177,20 @@ class LunaticLoopResolutionTest {
         @Test
         void loopsStructure() {
             //
-            assertEquals(2, lunaticLoops.get(0).getComponents().size());
-            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLoops.get(0).getComponents().get(0).getComponentType());
-            assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.get(0).getComponents().get(1).getComponentType());
+            assertEquals(2, lunaticLoops.getFirst().getComponents().size());
+            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLoops.getFirst().getComponents().getFirst().getComponentType());
+            assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.getFirst().getComponents().get(1).getComponentType());
             //
             assertEquals(2, lunaticLoops.get(1).getComponents().size());
-            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLoops.get(1).getComponents().get(0).getComponentType());
+            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLoops.get(1).getComponents().getFirst().getComponentType());
             assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.get(1).getComponents().get(1).getComponentType());
             //
             assertEquals(2, lunaticLoops.get(2).getComponents().size());
-            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLoops.get(2).getComponents().get(0).getComponentType());
+            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLoops.get(2).getComponents().getFirst().getComponentType());
             assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.get(2).getComponents().get(1).getComponentType());
             //
             assertEquals(2, lunaticLoops.get(3).getComponents().size());
-            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLoops.get(3).getComponents().get(0).getComponentType());
+            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLoops.get(3).getComponents().getFirst().getComponentType());
             assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.get(3).getComponents().get(1).getComponentType());
         }
 
@@ -202,15 +206,15 @@ class LunaticLoopResolutionTest {
         @BeforeAll
         void mapLunaticQuestionnaire() throws DDIParsingException {
             // Given: a mapped and sorted Lunatic questionnaire
-            EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
+            EnoQuestionnaire enoQuestionnaire2 = DDIToEno.fromInputStream(
                     LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-loops-subsequence.xml"))
                     .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
             LunaticMapper lunaticMapper = new LunaticMapper();
-            lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
-            new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);
+            lunaticMapper.mapQuestionnaire(enoQuestionnaire2, lunaticQuestionnaire);
+            new LunaticSortComponents(enoQuestionnaire2).apply(lunaticQuestionnaire);
             // When: applying loop resolution
-            new LunaticLoopResolution(enoQuestionnaire).apply(lunaticQuestionnaire);
+            new LunaticLoopResolution(enoQuestionnaire2).apply(lunaticQuestionnaire);
             // Then
             lunaticLoops = lunaticQuestionnaire.getComponents().stream()
                     .filter(Loop.class::isInstance).map(Loop.class::cast).toList();
@@ -222,7 +226,7 @@ class LunaticLoopResolutionTest {
             assertEquals(10, lunaticQuestionnaire.getComponents().size());
             assertEquals(4, lunaticLoops.size());
             //
-            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticQuestionnaire.getComponents().get(0).getComponentType());
+            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticQuestionnaire.getComponents().getFirst().getComponentType());
             assertEquals(ComponentTypeEnum.LOOP, lunaticQuestionnaire.getComponents().get(1).getComponentType());
             assertEquals(ComponentTypeEnum.LOOP, lunaticQuestionnaire.getComponents().get(2).getComponentType());
             assertEquals(ComponentTypeEnum.SEQUENCE, lunaticQuestionnaire.getComponents().get(3).getComponentType());
@@ -245,9 +249,9 @@ class LunaticLoopResolutionTest {
         @Test
         void loopDependencies() {
             // Main loops
-            assertTrue(lunaticLoops.get(0).getLoopDependencies().isEmpty());
+            assertEquals(List.of("Q1A"), lunaticLoops.getFirst().getLoopDependencies());
             assertThat(lunaticLoops.get(2).getLoopDependencies())
-                    .containsExactlyInAnyOrderElementsOf(Set.of("MIN_OCC", "MAX_OCC"));
+                    .containsExactlyInAnyOrderElementsOf(Set.of("MIN_OCC", "MAX_OCC", "Q2A"));
             // Linked loops
             assertEquals(List.of("Q1A"), lunaticLoops.get(1).getLoopDependencies());
             assertEquals(List.of("Q2A"), lunaticLoops.get(3).getLoopDependencies());
@@ -256,20 +260,20 @@ class LunaticLoopResolutionTest {
         @Test
         void loopsStructure() {
             //
-            assertEquals(2, lunaticLoops.get(0).getComponents().size());
-            assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticLoops.get(0).getComponents().get(0).getComponentType());
-            assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.get(0).getComponents().get(1).getComponentType());
+            assertEquals(2, lunaticLoops.getFirst().getComponents().size());
+            assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticLoops.getFirst().getComponents().getFirst().getComponentType());
+            assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.getFirst().getComponents().get(1).getComponentType());
             //
             assertEquals(2, lunaticLoops.get(1).getComponents().size());
-            assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticLoops.get(1).getComponents().get(0).getComponentType());
+            assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticLoops.get(1).getComponents().getFirst().getComponentType());
             assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.get(1).getComponents().get(1).getComponentType());
             //
             assertEquals(2, lunaticLoops.get(2).getComponents().size());
-            assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticLoops.get(2).getComponents().get(0).getComponentType());
+            assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticLoops.get(2).getComponents().getFirst().getComponentType());
             assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.get(2).getComponents().get(1).getComponentType());
             //
             assertEquals(2, lunaticLoops.get(3).getComponents().size());
-            assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticLoops.get(3).getComponents().get(0).getComponentType());
+            assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticLoops.get(3).getComponents().getFirst().getComponentType());
             assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.get(3).getComponents().get(1).getComponentType());
         }
 
@@ -285,15 +289,15 @@ class LunaticLoopResolutionTest {
         @BeforeAll
         void mapLunaticQuestionnaire() throws DDIParsingException {
             // Given: a mapped and sorted Lunatic questionnaire
-            EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
+            EnoQuestionnaire enoQuestionnaire3 = DDIToEno.fromInputStream(
                     LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-loops-extended-sequence.xml"))
                     .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
             LunaticMapper lunaticMapper = new LunaticMapper();
-            lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
-            new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);
+            lunaticMapper.mapQuestionnaire(enoQuestionnaire3, lunaticQuestionnaire);
+            new LunaticSortComponents(enoQuestionnaire3).apply(lunaticQuestionnaire);
             // When: applying loop resolution
-            new LunaticLoopResolution(enoQuestionnaire).apply(lunaticQuestionnaire);
+            new LunaticLoopResolution(enoQuestionnaire3).apply(lunaticQuestionnaire);
             // Then
             lunaticLoops = lunaticQuestionnaire.getComponents().stream()
                     .filter(Loop.class::isInstance).map(Loop.class::cast).toList();
@@ -305,7 +309,7 @@ class LunaticLoopResolutionTest {
             assertEquals(4, lunaticQuestionnaire.getComponents().size());
             assertEquals(2, lunaticLoops.size());
             //
-            assertEquals(ComponentTypeEnum.LOOP, lunaticQuestionnaire.getComponents().get(0).getComponentType());
+            assertEquals(ComponentTypeEnum.LOOP, lunaticQuestionnaire.getComponents().getFirst().getComponentType());
             assertEquals(ComponentTypeEnum.LOOP, lunaticQuestionnaire.getComponents().get(1).getComponentType());
             assertEquals(ComponentTypeEnum.SEQUENCE, lunaticQuestionnaire.getComponents().get(2).getComponentType());
             assertEquals(ComponentTypeEnum.CHECKBOX_BOOLEAN, lunaticQuestionnaire.getComponents().get(3).getComponentType());
@@ -319,7 +323,7 @@ class LunaticLoopResolutionTest {
         @Test
         void loopDependencies() {
             // Main loop
-            assertThat(lunaticLoops.get(0).getLoopDependencies()).isEmpty();
+            assertEquals(List.of("Q1"), lunaticLoops.getFirst().getLoopDependencies());
             // Linked loop
             assertEquals(List.of("Q1"), lunaticLoops.get(1).getLoopDependencies());
             assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(1).getIterations().getType());
@@ -328,16 +332,16 @@ class LunaticLoopResolutionTest {
         @Test
         void loopsStructure() {
             //
-            assertEquals(6, lunaticLoops.get(0).getComponents().size());
-            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLoops.get(0).getComponents().get(0).getComponentType());
-            assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.get(0).getComponents().get(1).getComponentType());
-            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLoops.get(0).getComponents().get(2).getComponentType());
-            assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.get(0).getComponents().get(3).getComponentType());
-            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLoops.get(0).getComponents().get(4).getComponentType());
-            assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.get(0).getComponents().get(5).getComponentType());
+            assertEquals(6, lunaticLoops.getFirst().getComponents().size());
+            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLoops.getFirst().getComponents().getFirst().getComponentType());
+            assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.getFirst().getComponents().get(1).getComponentType());
+            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLoops.getFirst().getComponents().get(2).getComponentType());
+            assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.getFirst().getComponents().get(3).getComponentType());
+            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLoops.getFirst().getComponents().get(4).getComponentType());
+            assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.getFirst().getComponents().get(5).getComponentType());
             //
             assertEquals(6, lunaticLoops.get(1).getComponents().size());
-            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLoops.get(1).getComponents().get(0).getComponentType());
+            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLoops.get(1).getComponents().getFirst().getComponentType());
             assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.get(1).getComponents().get(1).getComponentType());
             assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLoops.get(1).getComponents().get(2).getComponentType());
             assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.get(1).getComponents().get(3).getComponentType());
@@ -357,15 +361,15 @@ class LunaticLoopResolutionTest {
         @BeforeAll
         void mapLunaticQuestionnaire() throws DDIParsingException {
             // Given: a mapped and sorted Lunatic questionnaire
-            EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
+            EnoQuestionnaire enoQuestionnaire4 = DDIToEno.fromInputStream(
                     LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-loops-extended-subsequence.xml"))
                     .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
             LunaticMapper lunaticMapper = new LunaticMapper();
-            lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
-            new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);
+            lunaticMapper.mapQuestionnaire(enoQuestionnaire4, lunaticQuestionnaire);
+            new LunaticSortComponents(enoQuestionnaire4).apply(lunaticQuestionnaire);
             // When: applying loop resolution
-            new LunaticLoopResolution(enoQuestionnaire).apply(lunaticQuestionnaire);
+            new LunaticLoopResolution(enoQuestionnaire4).apply(lunaticQuestionnaire);
             // Then
             lunaticLoops = lunaticQuestionnaire.getComponents().stream()
                     .filter(Loop.class::isInstance).map(Loop.class::cast).toList();
@@ -377,7 +381,7 @@ class LunaticLoopResolutionTest {
             assertEquals(6, lunaticQuestionnaire.getComponents().size());
             assertEquals(2, lunaticLoops.size());
             //
-            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticQuestionnaire.getComponents().get(0).getComponentType());
+            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticQuestionnaire.getComponents().getFirst().getComponentType());
             assertEquals(ComponentTypeEnum.LOOP, lunaticQuestionnaire.getComponents().get(1).getComponentType());
             assertEquals(ComponentTypeEnum.SEQUENCE, lunaticQuestionnaire.getComponents().get(2).getComponentType());
             assertEquals(ComponentTypeEnum.LOOP, lunaticQuestionnaire.getComponents().get(3).getComponentType());
@@ -393,7 +397,7 @@ class LunaticLoopResolutionTest {
         @Test
         void loopDependencies() {
             // Main loop
-            assertThat(lunaticLoops.get(0).getLoopDependencies()).isEmpty();
+            assertEquals(List.of("Q11"), lunaticLoops.getFirst().getLoopDependencies());
             // Linked loop
             assertEquals(List.of("Q11"), lunaticLoops.get(1).getLoopDependencies());
             assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(1).getIterations().getType());
@@ -402,16 +406,16 @@ class LunaticLoopResolutionTest {
         @Test
         void loopsStructure() {
             //
-            assertEquals(6, lunaticLoops.get(0).getComponents().size());
-            assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticLoops.get(0).getComponents().get(0).getComponentType());
-            assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.get(0).getComponents().get(1).getComponentType());
-            assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticLoops.get(0).getComponents().get(2).getComponentType());
-            assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.get(0).getComponents().get(3).getComponentType());
-            assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticLoops.get(0).getComponents().get(4).getComponentType());
-            assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.get(0).getComponents().get(5).getComponentType());
+            assertEquals(6, lunaticLoops.getFirst().getComponents().size());
+            assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticLoops.getFirst().getComponents().getFirst().getComponentType());
+            assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.getFirst().getComponents().get(1).getComponentType());
+            assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticLoops.getFirst().getComponents().get(2).getComponentType());
+            assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.getFirst().getComponents().get(3).getComponentType());
+            assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticLoops.getFirst().getComponents().get(4).getComponentType());
+            assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.getFirst().getComponents().get(5).getComponentType());
             //
             assertEquals(6, lunaticLoops.get(1).getComponents().size());
-            assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticLoops.get(1).getComponents().get(0).getComponentType());
+            assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticLoops.get(1).getComponents().getFirst().getComponentType());
             assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.get(1).getComponents().get(1).getComponentType());
             assertEquals(ComponentTypeEnum.SUBSEQUENCE, lunaticLoops.get(1).getComponents().get(2).getComponentType());
             assertEquals(ComponentTypeEnum.INPUT, lunaticLoops.get(1).getComponents().get(3).getComponentType());
@@ -428,21 +432,21 @@ class LunaticLoopResolutionTest {
         @DisplayName("Questionnaire 'l20g2ba7': loops are inserted and contain the right components")
         void largeCoverageQuestionnaire() throws DDIParsingException {
             // Given
-            EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
+            EnoQuestionnaire enoQuestionnaire5 = DDIToEno.fromInputStream(
                     this.getClass().getClassLoader().getResourceAsStream("functional/ddi/ddi-l20g2ba7.xml"))
                     .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
-            Questionnaire lunaticQuestionnaire = new Questionnaire();
+            Questionnaire lunaticQuestionnaire1 = new Questionnaire();
             LunaticMapper lunaticMapper = new LunaticMapper();
-            lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
-            LunaticSortComponents lunaticSortComponents = new LunaticSortComponents(enoQuestionnaire);
-            lunaticSortComponents.apply(lunaticQuestionnaire);
+            lunaticMapper.mapQuestionnaire(enoQuestionnaire5, lunaticQuestionnaire1);
+            LunaticSortComponents lunaticSortComponents = new LunaticSortComponents(enoQuestionnaire5);
+            lunaticSortComponents.apply(lunaticQuestionnaire1);
 
             // When
-            LunaticLoopResolution lunaticLoopResolution = new LunaticLoopResolution(enoQuestionnaire);
-            lunaticLoopResolution.apply(lunaticQuestionnaire);
+            LunaticLoopResolution lunaticLoopResolution = new LunaticLoopResolution(enoQuestionnaire5);
+            lunaticLoopResolution.apply(lunaticQuestionnaire1);
 
             // Then
-            List<Loop> loops = lunaticQuestionnaire.getComponents().stream()
+            List<Loop> loops = lunaticQuestionnaire1.getComponents().stream()
                     .filter(componentType -> componentType instanceof Loop)
                     .map(Loop.class::cast)
                     .toList();
@@ -451,10 +455,10 @@ class LunaticLoopResolutionTest {
             Optional<Loop> loop2 = loops.stream().filter(loop -> loop.getComponents().size() == 2).findAny();
             assertTrue(loop1.isPresent());
             assertTrue(loop2.isPresent());
-            assertInstanceOf(Subsequence.class, loop1.get().getComponents().get(0));
+            assertInstanceOf(Subsequence.class, loop1.get().getComponents().getFirst());
             assertInstanceOf(Input.class, loop1.get().getComponents().get(1));
             assertInstanceOf(InputNumber.class, loop1.get().getComponents().get(2));
-            assertInstanceOf(Subsequence.class, loop2.get().getComponents().get(0));
+            assertInstanceOf(Subsequence.class, loop2.get().getComponents().getFirst());
             assertInstanceOf(InputNumber.class, loop2.get().getComponents().get(1));
         }
 
@@ -466,23 +470,23 @@ class LunaticLoopResolutionTest {
         @Test
         void componentsInLinkedLoopShouldHaveFilter() throws DDIParsingException {
             // Given
-            EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
+            EnoQuestionnaire enoQuestionnaire6 = DDIToEno.fromInputStream(
                     this.getClass().getClassLoader().getResourceAsStream("integration/ddi/ddi-loop-except.xml"))
                     .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
-            Questionnaire lunaticQuestionnaire = new Questionnaire();
+            Questionnaire lunaticQuestionnaire2 = new Questionnaire();
             LunaticMapper lunaticMapper = new LunaticMapper();
-            lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
-            LunaticSortComponents lunaticSortComponents = new LunaticSortComponents(enoQuestionnaire);
-            lunaticSortComponents.apply(lunaticQuestionnaire);
+            lunaticMapper.mapQuestionnaire(enoQuestionnaire6, lunaticQuestionnaire2);
+            LunaticSortComponents lunaticSortComponents = new LunaticSortComponents(enoQuestionnaire6);
+            lunaticSortComponents.apply(lunaticQuestionnaire2);
 
             // When
-            LunaticLoopResolution lunaticLoopResolution = new LunaticLoopResolution(enoQuestionnaire);
-            lunaticLoopResolution.apply(lunaticQuestionnaire);
+            LunaticLoopResolution lunaticLoopResolution = new LunaticLoopResolution(enoQuestionnaire6);
+            lunaticLoopResolution.apply(lunaticQuestionnaire2);
 
             // Then
-            assertEquals(ComponentTypeEnum.LOOP, lunaticQuestionnaire.getComponents().get(3).getComponentType());
-            Loop lunaticLinkedLoop = (Loop) lunaticQuestionnaire.getComponents().get(3);
-            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLinkedLoop.getComponents().get(0).getComponentType());
+            assertEquals(ComponentTypeEnum.LOOP, lunaticQuestionnaire2.getComponents().get(3).getComponentType());
+            Loop lunaticLinkedLoop = (Loop) lunaticQuestionnaire2.getComponents().get(3);
+            assertEquals(ComponentTypeEnum.SEQUENCE, lunaticLinkedLoop.getComponents().getFirst().getComponentType());
             assertEquals(ComponentTypeEnum.CHECKBOX_BOOLEAN, lunaticLinkedLoop.getComponents().get(1).getComponentType());
             //
             lunaticLinkedLoop.getComponents().forEach(component -> {
@@ -499,23 +503,23 @@ class LunaticLoopResolutionTest {
         @Test
         void mapLunaticQuestionnaire() throws DDIParsingException {
             // Given: a mapped and sorted Lunatic questionnaire
-            EnoQuestionnaire enoQuestionnaire = DDIToEno.fromInputStream(
+            EnoQuestionnaire enoQuestionnaire7 = DDIToEno.fromInputStream(
                     LunaticLoopResolutionTest.class.getClassLoader().getResourceAsStream(
                             "integration/ddi/ddi-dynamic-table.xml"))
                     .transform(EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC));
-            Questionnaire lunaticQuestionnaire = new Questionnaire();
+            Questionnaire lunaticQuestionnaire3 = new Questionnaire();
             LunaticMapper lunaticMapper = new LunaticMapper();
-            lunaticMapper.mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
-            new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);
+            lunaticMapper.mapQuestionnaire(enoQuestionnaire7, lunaticQuestionnaire3);
+            new LunaticSortComponents(enoQuestionnaire7).apply(lunaticQuestionnaire3);
 
             // When: applying loop resolution
-            new LunaticLoopResolution(enoQuestionnaire).apply(lunaticQuestionnaire);
+            new LunaticLoopResolution(enoQuestionnaire7).apply(lunaticQuestionnaire3);
 
             // Then
-            List<Loop> lunaticLoops = lunaticQuestionnaire.getComponents().stream()
+            List<Loop> lunaticLoops = lunaticQuestionnaire3.getComponents().stream()
                     .filter(Loop.class::isInstance).map(Loop.class::cast).toList();
             assertEquals(1, lunaticLoops.size());
-            Loop lunaticLinkedLoop = lunaticLoops.get(0);
+            Loop lunaticLinkedLoop = lunaticLoops.getFirst();
             assertEquals(List.of("DYNAMIC_TABLE1", "DYNAMIC_TABLE2", "DYNAMIC_TABLE3"),
                     lunaticLinkedLoop.getLoopDependencies());
             assertEquals("count(DYNAMIC_TABLE1)", lunaticLinkedLoop.getIterations().getValue());
