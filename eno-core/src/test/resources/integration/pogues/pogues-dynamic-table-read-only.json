@@ -1,0 +1,239 @@
+{
+  "owner": "DR59-SNDI59",
+  "final": false,
+  "id": "m92r209h",
+  "Label": [
+    "[cr] cases tableau dynamique en lecture seule"
+  ],
+  "Name": "LCCASESDET",
+  "lastUpdatedDate": "Wed May 14 2025 10:57:55 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [
+    {
+      "id": "s2106-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2106-dc"
+    }
+  ],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "m92rufsl",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "m92r5lsm",
+        "m92rg22g",
+        "idendquest"
+      ]
+    }
+  ],
+  "agency": "fr.insee",
+  "TargetMode": [
+    "CAWI"
+  ],
+  "flowLogic": "FILTER",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": [],
+  "Child": [
+    {
+      "id": "m92r5lsm",
+      "depth": 1,
+      "Name": "S1",
+      "Label": [
+        "S1"
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAWI"
+      ],
+      "type": "SequenceType",
+      "genericName": "MODULE",
+      "Child": [
+        {
+          "id": "m92rg22g",
+          "depth": 2,
+          "Name": "TABLEAUDYN",
+          "Label": [
+            "\"Tableau dynamique avec cases filtrées\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAWI"
+          ],
+          "ClarificationQuestion": [],
+          "type": "QuestionType",
+          "questionType": "TABLE",
+          "ResponseStructure": {
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "MinLines": 1,
+                "MaxLines": 10,
+                "dynamic": "DYNAMIC_LENGTH"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Prénom\""
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Age\""
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Combien de boulot avez-vous eu ? (si AGE >= 18)\""
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Pas filtré\""
+              }
+            ],
+            "Mapping": [
+              {
+                "MappingSource": "m9bftg3x",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "m9bfm7bk",
+                "MappingTarget": "1 2"
+              },
+              {
+                "MappingSource": "m9bg0d8c",
+                "MappingTarget": "1 3"
+              },
+              {
+                "MappingSource": "m9bfqvh1",
+                "MappingTarget": "1 4"
+              }
+            ],
+            "Attribute": []
+          },
+          "Response": [
+            {
+              "id": "m9bftg3x",
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "m9bfq73v"
+            },
+            {
+              "id": "m9bfm7bk",
+              "Datatype": {
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Minimum": 0,
+                "Maximum": 150,
+                "Unit": "http://id.insee.fr/unit/an"
+              },
+              "CollectedVariableReference": "m9bfrzvr"
+            },
+            {
+              "id": "m9bg0d8c",
+              "Datatype": {
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Minimum": 0,
+                "Maximum": 10
+              },
+              "CollectedVariableReference": "m9bfweyb",
+              "conditionFilter": "nvl($AGE$, 0) >= 18",
+              "conditionReadOnly": "$TABLEAUDYN1$ = \"bob\""
+            },
+            {
+              "id": "m9bfqvh1",
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "m9bfm5ym"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "idendquest",
+      "depth": 1,
+      "Name": "QUESTIONNAIRE_END",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "Declaration": [],
+      "genericName": "MODULE",
+      "Control": [],
+      "FlowControl": [],
+      "type": "SequenceType",
+      "Child": [],
+      "TargetMode": [
+        "CAWI"
+      ]
+    }
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "m9bfq73v",
+        "Name": "TABLEAUDYN1",
+        "Label": "Prénom",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        },
+        "Scope": "m92rg22g"
+      },
+      {
+        "id": "m9bfrzvr",
+        "Name": "AGE",
+        "Label": "Age",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Minimum": 0,
+          "Maximum": 150,
+          "Unit": "http://id.insee.fr/unit/an"
+        },
+        "Scope": "m92rg22g"
+      },
+      {
+        "id": "m9bfweyb",
+        "Name": "TABLEAUDYN3",
+        "Label": "Combien de boulot avez-vous eu ? (si AGE >= 18)",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Minimum": 0,
+          "Maximum": 10
+        },
+        "Scope": "m92rg22g"
+      },
+      {
+        "id": "m9bfm5ym",
+        "Name": "TABLEAUDYN4",
+        "Label": "Pas filtré",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        },
+        "Scope": "m92rg22g"
+      }
+    ]
+  },
+  "FlowControl": []
+}
