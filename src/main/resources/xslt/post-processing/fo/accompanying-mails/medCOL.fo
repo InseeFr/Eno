@@ -46,7 +46,7 @@
                 <fo:block-container absolute-position="absolute" left="5mm" top="2mm" width="180mm" height="25mm">
                     <fo:block>
                         #if(${logo} == "1")
-                        <fo:external-graphic src="logo_INSEE_M_SP.png" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
+                        <fo:external-graphic src="${Enq_ImageLogos}" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
                         #end
                         #if(${logo} == "2")
                         <fo:external-graphic src="logo_DARES_M_SP.png" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
@@ -133,7 +133,7 @@
                         Objet&#160;: Enquête statistique#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddFrequence}!='')) ${BddFrequence}#end ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddPeriode}!='')) ${BddPeriode}#end ${BddAnneeReference}
                     </fo:block>
                     <fo:block>
-                        Unité enquêtée&#160;: ${BddRaisonSociale} (Votre ${BddLabelUniteEnquetee}&#160;: ${BddIdentifiantUniteEnquetee})
+                        Unité enquêtée&#160;: ${BddRaisonSociale} (Votre ${BddLabelUniteEnquetee}&#160;: ${IdMetier})
                     </fo:block>
                     
                     <fo:block margin-top="3mm">
