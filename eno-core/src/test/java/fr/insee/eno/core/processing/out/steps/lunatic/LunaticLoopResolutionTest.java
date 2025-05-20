@@ -92,11 +92,11 @@ class LunaticLoopResolutionTest {
 
         // Then
         assertEquals(1, lunaticQuestionnaire.getComponents().size());
-        assertInstanceOf(Loop.class, lunaticQuestionnaire.getComponents().get(0));
-        assertEquals(LOOP_ID, lunaticQuestionnaire.getComponents().get(0).getId());
-        assertEquals(2, ((Loop) lunaticQuestionnaire.getComponents().get(0)).getComponents().size());
-        assertEquals(SEQUENCE_ID, ((Loop) lunaticQuestionnaire.getComponents().get(0)).getComponents().get(0).getId());
-        assertInstanceOf(Input.class, ((Loop) lunaticQuestionnaire.getComponents().get(0)).getComponents().get(1));
+        assertInstanceOf(Loop.class, lunaticQuestionnaire.getComponents().getFirst());
+        assertEquals(LOOP_ID, lunaticQuestionnaire.getComponents().getFirst().getId());
+        assertEquals(2, ((Loop) lunaticQuestionnaire.getComponents().getFirst()).getComponents().size());
+        assertEquals(SEQUENCE_ID, ((Loop) lunaticQuestionnaire.getComponents().getFirst()).getComponents().getFirst().getId());
+        assertInstanceOf(Input.class, ((Loop) lunaticQuestionnaire.getComponents().getFirst()).getComponents().get(1));
     }
 
     @Nested
