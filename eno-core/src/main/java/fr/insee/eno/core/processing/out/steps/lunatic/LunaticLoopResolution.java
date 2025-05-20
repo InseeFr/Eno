@@ -180,6 +180,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
                 enoLinkedLoop.getId(), reference));
     }
 
+    /** Lunatic Standalone loops now have an "iterations" property. */
     private void setStandaloneLoopIterations(Loop lunaticLoop, StandaloneLoop enoStandaloneLoop) {
         String variableName = findFirstResponseNameOfLoop(
                 enoStandaloneLoop,
