@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.48.0] - 2025-05-21
+### :sparkles: New Features
+- [`6285bf2`](https://github.com/InseeFr/Eno/commit/6285bf25722b3d14011ea5aee6cbf256b72af38b) - **lunatic**: readonly table cells *(PR [#1267](https://github.com/InseeFr/Eno/pull/1267) by [@RemiVerriez](https://github.com/RemiVerriez))*
+
+
 ## [3.47.0] - 2025-05-14
 ### :sparkles: New Features
 - [`2ea17f4`](https://github.com/InseeFr/Eno/commit/2ea17f4064392c4533bd7f1c9c47c67f34433406) - **lunatic**: mandatory question checks *(PR [#1260](https://github.com/InseeFr/Eno/pull/1260) by [@nsenave](https://github.com/nsenave))*
@@ -573,3 +578,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.41.0]: https://github.com/InseeFr/Eno/compare/3.40.1...3.41.0
 [3.43.0]: https://github.com/InseeFr/Eno/compare/3.41.0...3.43.0
 [3.47.0]: https://github.com/InseeFr/Eno/compare/3.43.0...3.47.0
+[3.48.0]: https://github.com/InseeFr/Eno/compare/3.47.0...3.48.0
