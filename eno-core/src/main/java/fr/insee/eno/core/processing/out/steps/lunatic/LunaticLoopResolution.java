@@ -22,6 +22,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import static fr.insee.eno.core.utils.vtl.VtlSyntaxUtils.countVariable;
+
 /** Lunatic technical processing for loops.
  * Requires: sorted components. */
 @Slf4j
@@ -29,8 +31,6 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
 
     private final EnoQuestionnaire enoQuestionnaire;
     private EnoIndex enoIndex;
-    private static final String VTL_COUNT_PREFIX = "count(";
-    private static final String VTL_COUNT_SUFFIX = ")";
 
     public LunaticLoopResolution(EnoQuestionnaire enoQuestionnaire) {
         this.enoQuestionnaire = enoQuestionnaire;
@@ -159,7 +159,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
         if (reference instanceof StandaloneLoop enoReferenceLoop) {
             String variableName = findFirstVariableOfReference(enoLinkedLoop, enoReferenceLoop, enoIndex);
             lunaticLoop.setIterations(new LabelType());
-            lunaticLoop.getIterations().setValue(VTL_COUNT_PREFIX + variableName + VTL_COUNT_SUFFIX);
+            lunaticLoop.getIterations().setValue(countVariable(variableName));
             lunaticLoop.getIterations().setType(LabelTypeEnum.VTL);
             lunaticLoop.getLoopDependencies().add(variableName);
             return;
@@ -167,7 +167,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
         if (reference instanceof DynamicTableQuestion enoDynamicTable) {
             String variableName = enoDynamicTable.getVariableNames().getFirst();
             lunaticLoop.setIterations(new LabelType());
-            lunaticLoop.getIterations().setValue(VTL_COUNT_PREFIX + variableName + VTL_COUNT_SUFFIX);
+            lunaticLoop.getIterations().setValue(countVariable(variableName));
             lunaticLoop.getIterations().setType(LabelTypeEnum.VTL);
             // For a dynamic table: insert all variables of the table in loop dependencies
             // Note: done this way since Eno xml does it like this),
@@ -188,7 +188,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
                 "Cannot compute 'iterations' for standalone loop '" + enoStandaloneLoop.getId() + "'."
         );
         lunaticLoop.setIterations(new LabelType());
-        lunaticLoop.getIterations().setValue(VTL_COUNT_PREFIX + variableName + VTL_COUNT_SUFFIX);
+        lunaticLoop.getIterations().setValue(countVariable(variableName));
         lunaticLoop.getIterations().setType(LabelTypeEnum.VTL);
         lunaticLoop.getLoopDependencies().add(variableName);
     }
