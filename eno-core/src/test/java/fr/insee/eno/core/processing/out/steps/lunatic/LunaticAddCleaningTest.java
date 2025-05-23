@@ -153,6 +153,15 @@ class LunaticAddCleaningTest {
         assertEquals("PRENOM", cleaningExpression.getShapeFrom());
     }
 
+
+    @Test
+    void testCleaningOfPairwise() throws DDIParsingException, PoguesDeserializationException {
+        prepareQuestionnaireTest("integration/ddi/ddi-pairwise.xml");
+        cleaningProcessing.processPairwiseCleaning(lunaticQuestionnaire);
+
+    }
+
+
     void prepareQuestionnaireTest(String poguesQuestionnaireTestUrl, String ddiQuestionnaireTestUrl) throws DDIParsingException, PoguesDeserializationException {
         EnoParameters enoParameters = EnoParameters.of(EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
         fr.insee.pogues.model.Questionnaire poguesQuestionnaire = PoguesDeserializer.deserialize(
