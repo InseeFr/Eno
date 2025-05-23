@@ -5,6 +5,7 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.PairwiseQuestion;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoIndex;
+import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
 
@@ -22,6 +23,9 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
     public LunaticFinalizePairwise(EnoQuestionnaire enoQuestionnaire) {
         this.enoIndex = enoQuestionnaire.getIndex();
     }
+
+    private static final String X_AXIS = "xAxis";
+    private static final String Y_AXIS = "yAxis";
 
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
@@ -49,9 +53,22 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
 
         // Filter is hold by the pairwise component only
         ComponentType pairwiseSubComponent = pairwiseLinks.getComponents().getFirst();
-        pairwiseSubComponent.setConditionFilter(null);
-
+        pairwiseSubComponent.setConditionFilter(buildConditionFilterForSimpleComponent());
         lunaticQuestionnaire.getVariables().addAll(createCalculatedAxisVariables(pairwiseLinks));
+    }
+
+    private ConditionFilterType buildConditionFilterForSimpleComponent(){
+        ConditionFilterType conditionFilter = new ConditionFilterType();
+        conditionFilter.setType(LabelTypeEnum.VTL);
+        String nvlXAxisNotEqualEmpty = VtlSyntaxUtils.expressionNotEqualToOther(
+                VtlSyntaxUtils.nvlDefaultValue(X_AXIS, "\"\""),
+                "\"\"");
+        String nvlYAxisNotEqualEmpty = VtlSyntaxUtils.expressionNotEqualToOther(
+                VtlSyntaxUtils.nvlDefaultValue(Y_AXIS, "\"\""),
+                "\"\"");
+        conditionFilter.setValue(VtlSyntaxUtils.joinByANDLogicExpression(nvlXAxisNotEqualEmpty, nvlYAxisNotEqualEmpty));
+        conditionFilter.setBindingDependencies(List.of(X_AXIS, Y_AXIS));
+        return conditionFilter;
     }
 
     /**
@@ -86,7 +103,7 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
 
         List<CalculatedVariableType> variables = new ArrayList<>();
 
-        List<String> calculatedVariableNames = List.of("xAxis", "yAxis");
+        List<String> calculatedVariableNames = List.of(X_AXIS, Y_AXIS);
 
         // create calculated variables
         for(String calculatedVariableName : calculatedVariableNames) {
