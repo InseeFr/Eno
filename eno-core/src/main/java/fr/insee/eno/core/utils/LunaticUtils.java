@@ -272,6 +272,9 @@ public class LunaticUtils {
         return collectedVars;
     }
 
+    // TODO: fix iterationReference for PAIRWISE_QUESTION (should be the same than PAIRWISE_SOURCE)
+    // The cleaning of PAIRWISE_QUESTION should have a shapeFrom
+
     /**
      *
      * @param lunaticQuestionnaire
@@ -281,7 +284,8 @@ public class LunaticUtils {
         Map<String, List<String>> questionCollectedVarIndex = new HashMap<>();
         lunaticQuestionnaire.getComponents().stream()
                 .map(componentType -> {
-                    if (componentType instanceof Loop loop) return loop.getComponents();
+                    if(componentType instanceof Loop loop) return loop.getComponents();
+                    if(componentType instanceof PairwiseLinks pairwiseLinks) return pairwiseLinks.getComponents();
                     return List.of(componentType);
                 })
                 .flatMap(Collection::stream)
