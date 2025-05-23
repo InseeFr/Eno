@@ -41,7 +41,7 @@
             <!-- ZONE LOGOS -->
             <fo:block-container absolute-position="absolute" left="15mm" top="12mm" width="180mm" height="25mm">
                <fo:block>
-                  <fo:external-graphic src="logo_INSEE_M_SP.png" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
+                  <fo:external-graphic src="${Enq_ImageLogos}" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
                </fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute"
@@ -53,7 +53,7 @@
                <fo:block margin-top="3mm" margin-left="1mm">
                   <fo:inline-container>
                      <fo:block font-weight="bold">Unité enquêtée</fo:block>
-                     <fo:block>Identifiant : ${BddIdentifiantUniteEnquetee}</fo:block>
+                     <fo:block>Identifiant : ${IdMetier}</fo:block>
                       <fo:block>Raison sociale :  </fo:block>
                       <fo:block>${BddRaisonSociale}</fo:block>
                   </fo:inline-container>
@@ -255,7 +255,7 @@
                   <fo:block>
                      <fo:instream-foreign-object>
                         <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                           message="${BddIdentifiantUniteEnquetee}"
+                           message="${IdMetier}"
                            orientation="0">
                            <barcode:code39>
                               <barcode:height>10mm</barcode:height>
@@ -293,7 +293,7 @@
          <fo:block page-break-inside="avoid">
             <fo:block-container absolute-position="absolute" left="15mm" top="10mm" width="250mm" height="10mm">
                <fo:block>
-                  <fo:external-graphic src="logo_INSEE_M_SP.png" width="100%" height="80%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
+                  <fo:external-graphic src="${Enq_ImageLogos}" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
                </fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute" left="15mm" top="40mm" width="115mm"
@@ -301,7 +301,7 @@
                <fo:block margin-top="3mm" margin-left="1mm">
                   <fo:inline-container>
                      <fo:block font-weight="bold">Unité enquêtée</fo:block>
-                     <fo:block>Identifiant : ${BddIdentifiantUniteEnquetee}</fo:block>
+                     <fo:block>Identifiant : ${IdMetier}</fo:block>
                      <fo:block>Raison sociale : ${BddRaisonSociale}</fo:block>
                   </fo:inline-container>
                </fo:block>
