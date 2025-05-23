@@ -184,7 +184,7 @@
                                 height="25mm">
                <fo:block>
                         #if(${logo} == "1")
-                        <fo:external-graphic src="logo_INSEE_M_SP.png"
+                        <fo:external-graphic src="${Enq_ImageLogos}"
                                        width="100%"
                                        height="100%"
                                        content-height="scale-to-fit"
@@ -328,7 +328,7 @@
                         Objet : Enquête statistique#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddFrequence}!='')) ${BddFrequence}#end ${BddLibelleLong} ${BddAnneeReference}
                     </fo:block>
                <fo:block>
-                        Unité enquêtée : ${BddRaisonSociale} (Votre ${BddLabelUniteEnquetee} : ${BddIdentifiantUniteEnquetee})
+                        Unité enquêtée : ${BddRaisonSociale} (Votre ${BddLabelUniteEnquetee} : ${IdMetier})
                     </fo:block>
                <fo:block margin-top="3mm">
                         Identifiant de connexion : <fo:inline font-weight="bold">${BddIdentifiantContact}</fo:inline> (voir modalités au verso de ce courrier)
@@ -482,7 +482,7 @@
                                 width="180mm" 
                                 height="25mm">
                <fo:block>
-                  <fo:external-graphic src="logo_INSEE_M_SP.png" 
+                  <fo:external-graphic src="${Enq_ImageLogos}" 
                                        width="100%" 
                                        height="100%" 
                                        content-height="scale-to-fit" 
@@ -499,7 +499,7 @@
                <fo:block margin-top="3mm" margin-left="1mm">
                   <fo:inline-container>
                      <fo:block font-weight="bold">Unité enquêtée</fo:block>
-                     <fo:block>Identifiant : ${BddIdentifiantUniteEnquetee}</fo:block>
+                     <fo:block>Identifiant : ${IdMetier}</fo:block>
                      <fo:block>Raison sociale :  </fo:block>
                      <fo:block>${BddRaisonSociale}</fo:block>
                   </fo:inline-container>
@@ -705,7 +705,7 @@
                   <fo:block>
                      <fo:instream-foreign-object>
                         <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                                          message="${BddIdentifiantUniteEnquetee}"
+                                          message="${IdMetier}"
                                           orientation="0">
                            <barcode:code39>
                               <barcode:height>10mm</barcode:height>
@@ -771,7 +771,7 @@
             <fo:block>
                <fo:instream-foreign-object>
                   <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                                    message="${BddIdentifiantUniteEnquetee}">
+                                    message="${IdMetier}">
                      <barcode:code128>
                         <barcode:height>10mm</barcode:height>
                         <barcode:human-readable>
