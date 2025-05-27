@@ -70,7 +70,7 @@ jobs:
 
       - name: Check version
         run: |
-          echo ""
+          echo "Versions must be equal"
           echo "Main branch version:    ${{ steps.main-version.outputs.version }}"
           echo "Current branch version: ${{ steps.branch-version.outputs.version }}"
 
@@ -96,26 +96,26 @@ jobs:
       - name: Image tag is ${{ needs.check-version.outputs.image-tag }}
         run: echo "${{ needs.check-version.outputs.image-tag }}"
 
-#      - name: Set up JDK
-#        uses: actions/setup-java@v4
-#        with:
-#          distribution: 'temurin'
-#          java-version: ${{ env.JAVA_VERSION }}
-#
-#      - name: Setup Gradle
-#        uses: gradle/actions/setup-gradle@v3
-#
-#      - name: Build Eno modules
-#        run: ./gradlew build
-#
-#      - name: Publish to Docker Hub
-#        uses: elgohr/Publish-Docker-Github-Action@v5
-#        with:
-#          name: inseefr/eno-ws
-#          username: ${{ secrets.DOCKERHUB_USERNAME }}
-#          password: ${{ secrets.DOCKERHUB_TOKEN }}
-#          default_branch: ${{ github.ref }}
-#          tags: ${{ needs.check-version.outputs.image-tag }}
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Build Eno modules
+        run: ./gradlew build
+
+      - name: Publish to Docker Hub
+        uses: elgohr/Publish-Docker-Github-Action@v5
+        with:
+          name: inseefr/eno-ws
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          default_branch: ${{ github.ref }}
+          tags: ${{ needs.check-version.outputs.image-tag }}
 
   write-comment:
     needs: [ check-version, publish-docker ]
