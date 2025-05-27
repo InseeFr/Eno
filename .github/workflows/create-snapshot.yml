@@ -73,9 +73,9 @@ jobs:
           echo "Main branch version:    ${{ steps.main-version.outputs.version }}"
           echo "Current branch version: ${{ steps.branch-version.outputs.version }}"
 
-          if [[ "${{ steps.main-version.outputs.exists }}" != "true" ]]; then
+          if [[ ${{ steps.main-version.outputs.exists }} != ${{ steps.branch-version.outputs.version }} ]]; then
             echo "Current version does not match the main branch version."
-            ehco "Update your code to align with the '${{ github.event.repository.default_branch }}' branch."
+            echo "Update your code to align with the '${{ github.event.repository.default_branch }}' branch."
             exit 1
           fi
 
