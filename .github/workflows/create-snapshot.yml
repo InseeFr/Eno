@@ -9,7 +9,6 @@ on:
       - 'CHANGELOG.md'
       - 'README**.md'
       - 'Dockerfile'
-      - '.github/**'
 
 # TL;DR: Don't touch the version number, 
 # put the 'deploy-snapshot' label on a GitHub PR,
