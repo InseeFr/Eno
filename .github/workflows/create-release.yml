@@ -11,6 +11,20 @@ on:
       - 'README**.md'
       - 'Dockerfile'
 
+# TL;DR: Do conventional commits,
+# don't touch the version number, 
+# enjoy.
+
+# This workflow is triggered when changes are pushed on the main branch.
+# It computes the version number based on conventional commits, 
+# if the version has not been changed since last tag/release.
+# From the new version, if creates a tag, a GitHub release, a changelog 
+# (also based on conventional commits), and publishes an image on Docker Hub.
+
+# If you didn't do conventional commits and you want to set the version number manually, 
+# you can change the version and push it on the main branch.concurrency. 
+# This version will be used to publish a release and deploy an image on Docker Hub.
+
 env:
   RELEASE_NOTE_EXCLUDED_TYPES: docs,style,chore,other
 
