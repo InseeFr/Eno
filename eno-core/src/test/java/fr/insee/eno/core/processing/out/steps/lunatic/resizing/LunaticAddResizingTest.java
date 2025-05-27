@@ -59,7 +59,7 @@ class LunaticAddResizingTest {
     @Test
     void loopResizing() {
         //
-        assertEquals("nvl(NUMBER, 1)", resizingType.getResizingEntry("NUMBER").getSize());
+        assertEquals("1", resizingType.getResizingEntry("NUMBER").getSize());
         assertThat(resizingType.getResizingEntry("NUMBER").getVariables())
                 .containsExactlyInAnyOrderElementsOf(List.of("Q2", "PAIRWISE_SOURCE"));
         //
