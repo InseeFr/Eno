@@ -21,11 +21,12 @@ on:
 # From the new version, if creates a tag, a GitHub release, a changelog 
 # (also based on conventional commits), and publishes an image on Docker Hub.
 
-# If you didn't do conventional commits and you want to set the version number manually, 
-# you can change the version and push it on the main branch.concurrency. 
+# If you didn't do conventional commits or you want to set the version number manually, 
+# you can change the version and push it on the main branch. 
 # This version will be used to publish a release and deploy an image on Docker Hub.
 
 env:
+  JAVA_VERSION: '21'
   RELEASE_NOTE_EXCLUDED_TYPES: docs,style,chore,other
 
 jobs:
@@ -33,16 +34,15 @@ jobs:
   check-version:
     runs-on: ubuntu-latest
     outputs:
-      release-version: ${{ steps.version-step.outputs.version }}
+      release-version: ${{ steps.version-number.outputs.value }}
     steps:
-      - name: Set up JDK 21
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '21'
-
-      - name: Checkout Eno repo
-        uses: actions/checkout@v4
+          java-version: ${{ env.JAVA_VERSION }}
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
@@ -53,36 +53,66 @@ jobs:
           ./gradlew # (load the gradle wrapper, required for the get version step)
           echo "version=$(./gradlew printVersion --console=plain -q)" >> $GITHUB_OUTPUT
 
-      - name: Print Eno Version
-        run: echo ${{ steps.version-step.outputs.version }}
+      - name: Get previous final release tag
+        id: previousTag
+        run: echo "previousTag=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | grep "^[3-9]\.[0-9]\+\.[0-9]\+$" | tail -1)" >> $GITHUB_OUTPUT
+        # Note: the regex works for single digit major version, to be updated if the version goes 10.0.0 or more
 
-      - uses: mukunku/tag-exists-action@v1.6.0
-        name: Check tag existence
+      - name: Compare version to previous release tag
+        id: compare-step
+        run: |
+          echo ""
+          echo "Eno version:  ${{ steps.version-step.outputs.version }}"
+          echo "Previous tag: ${{ steps.previousTag.outputs.previousTag }}"
+
+          yesOrNo="no"
+          if [[ ${{steps.version-step.outputs.version != steps.previousTag.outputs.previousTag}} ]]; then
+            yesOrNo="yes"
+          fi
+          echo "Was the version changed? $yesOrNo"
+          echo "hasVersionChanged=$yesOrNo" >> $GITHUB_OUTPUT
+
+      - name: (Manual version) Check tag existence
+        if: ${{ steps.compare-step.outputs.hasVersionChanged == 'yes' }}
         id: check-tag-exists
+        uses: mukunku/tag-exists-action@v1.6.0
         with:
           tag: ${{ steps.version-step.outputs.version }}
 
-      - name: Tag verification
-        id: check-tag
+      - name: (Manual version) Tag verification
+        if: ${{ steps.compare-step.outputs.hasVersionChanged == 'yes' }}
         run: |
           if [[ "${{ steps.check-tag-exists.outputs.exists }}" == "true" ]]; then
-            echo "Nothing to tag/release, the tag ${{ steps.version-step.outputs.version }} already exists"
+            echo "Version ${{ steps.version-step.outputs.version }} cannot be released, tag already exists"
             exit 1
           fi
 
           if ! [[ "${{ steps.version-step.outputs.version }}" =~ ^[0-9]+.[0-9]+.[0-9]+$ ]]; then
-            echo "Nothing to tag/release, the tag ${{ steps.version-step.outputs.version }} is not in correct format X.Y.Z"
+            echo "The version ${{ steps.version-step.outputs.version }} is not in correct release format X.Y.Z"
             exit 1
           fi
+
+      - name: (Semantic version) Calculate release version
+        if: ${{ steps.compare-step.outputs.hasVersionChanged == 'no' }}
+        id: compute-version
+        uses: foo
+       
+      - name: Output release version number
+        id: version-number
+        run: |
+          versionNumber=${{ steps.compute-version.outputs.value }} # TODO
+          if [[ ${{steps.compare-step.outputs.hasVersionChanged}} == "yes" ]]; then
+            versionNumber=${{ steps.version-step.outputs.version }}
+          echo "value=$versionNumber" >> $GITHUB_OUTPUT
 
   sonar:
     name: Sonar analysis
     runs-on: ubuntu-latest
     steps:
-      - name: Set up JDK 21
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 21
+          java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
 
       - uses: actions/checkout@v4
@@ -117,11 +147,11 @@ jobs:
     needs: sonar
     runs-on: ubuntu-latest
     steps:
-      - name: Set up JDK 21
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '21'
+          java-version: ${{ env.JAVA_VERSION }}
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
