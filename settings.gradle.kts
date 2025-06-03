@@ -8,7 +8,7 @@ pluginManagement {
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
-            version("lunatic-model", "5.2.2-SNAPSHOT")
+            version("lunatic-model", "5.4.0-SNAPSHOT")
             version("pogues-model", "1.7.2-SNAPSHOT")
             library("lunatic-model", "fr.insee.lunatic", "lunatic-model").versionRef("lunatic-model")
             library("pogues-model", "fr.insee.pogues", "pogues-model").versionRef("pogues-model")
