@@ -12,18 +12,13 @@ on:
       - 'Dockerfile'
 
 # TL;DR: Do conventional commits,
-# don't touch the version number, 
-# enjoy.
+# bump the version before pushing on main, 
+# the workflow will publish a release.
 
 # This workflow is triggered when changes are pushed on the main branch.
-# It computes the version number based on conventional commits, 
-# if the version has not been changed since last tag/release.
+# It checks that the version is valid, and has not already been release.
 # From the new version, if creates a tag, a GitHub release, a changelog 
 # (also based on conventional commits), and publishes an image on Docker Hub.
-
-# If you didn't do conventional commits or you want to set the version number manually, 
-# you can change the version and push it on the main branch. 
-# This version will be used to publish a release and deploy an image on Docker Hub.
 
 env:
   JAVA_VERSION: '21'
@@ -31,10 +26,11 @@ env:
 
 jobs:
 
-  check-version:
+  version:
     runs-on: ubuntu-latest
     outputs:
       release-version: ${{ steps.version-number.outputs.value }}
+      previous-version: ${{ steps.previousTag.outputs.previousTag }}
     steps:
       - uses: actions/checkout@v4
 
@@ -72,38 +68,41 @@ jobs:
           echo "Was the version changed? $yesOrNo"
           echo "hasVersionChanged=$yesOrNo" >> $GITHUB_OUTPUT
 
-      - name: (Manual version) Check tag existence
-        if: ${{ steps.compare-step.outputs.hasVersionChanged == 'yes' }}
+      - name: (Semantic version) Calculate release version
+        if: ${{ steps.compare-step.outputs.hasVersionChanged == 'no' }}
+        id: compute-version
+        #uses: TODO: find an action that does the job
+        run: |
+          echo "Semantic version is not implemented yet ❌️"
+          echo "Bump the version to trigger the release workflow."
+          exit 1
+
+      - name: Release version number
+        id: version-number
+        run: |
+          versionNumber=${{ steps.compute-version.outputs.value }} # update this when semantic version is done
+          if [[ ${{steps.compare-step.outputs.hasVersionChanged}} == "yes" ]]; then
+            versionNumber=${{ steps.version-step.outputs.version }}
+          echo "Version to be released: $versionNumber"
+          echo "value=$versionNumber" >> $GITHUB_OUTPUT
+
+      - name: Check tag existence
         id: check-tag-exists
         uses: mukunku/tag-exists-action@v1.6.0
         with:
           tag: ${{ steps.version-step.outputs.version }}
 
-      - name: (Manual version) Tag verification
-        if: ${{ steps.compare-step.outputs.hasVersionChanged == 'yes' }}
+      - name: Tag verification
         run: |
-          if [[ "${{ steps.check-tag-exists.outputs.exists }}" == "true" ]]; then
-            echo "Version ${{ steps.version-step.outputs.version }} cannot be released, tag already exists"
+          if [[ "${{ steps.version-number.outputs.value }}" == "true" ]]; then
+            echo "Version ${{ steps.version-number.outputs.value }} cannot be released, tag already exists"
             exit 1
           fi
 
-          if ! [[ "${{ steps.version-step.outputs.version }}" =~ ^[0-9]+.[0-9]+.[0-9]+$ ]]; then
-            echo "The version ${{ steps.version-step.outputs.version }} is not in correct release format X.Y.Z"
+          if ! [[ "${{ steps.version-number.outputs.value }}" =~ ^[0-9]+.[0-9]+.[0-9]+$ ]]; then
+            echo "The version ${{ steps.version-number.outputs.value }} is not in correct release format X.Y.Z"
             exit 1
           fi
-
-      - name: (Semantic version) Calculate release version
-        if: ${{ steps.compare-step.outputs.hasVersionChanged == 'no' }}
-        id: compute-version
-        uses: foo
-       
-      - name: Output release version number
-        id: version-number
-        run: |
-          versionNumber=${{ steps.compute-version.outputs.value }} # TODO
-          if [[ ${{steps.compare-step.outputs.hasVersionChanged}} == "yes" ]]; then
-            versionNumber=${{ steps.version-step.outputs.version }}
-          echo "value=$versionNumber" >> $GITHUB_OUTPUT
 
   sonar:
     name: Sonar analysis
@@ -144,7 +143,7 @@ jobs:
         run: ./gradlew clean build sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr
 
   build-sources:
-    needs: sonar
+    needs: [ version, sonar ]
     runs-on: ubuntu-latest
     steps:
       - name: Set up JDK
@@ -169,12 +168,10 @@ jobs:
           path: ./eno-ws/build/libs/eno-ws.jar
 
   create-release:
-    needs: [ check-version, build-sources ]
+    needs: [ version, build-sources ]
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    outputs:
-      previous-release-tag: ${{ steps.previousTag.outputs.previousTag }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -182,22 +179,17 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get previous final release tag
-        id: previousTag
-        run: echo "previousTag=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | grep "^[3-9]\.[0-9]\+\.[0-9]\+$" | tail -1)" >> $GITHUB_OUTPUT
-        # Note: the regex works for single digit major version, to be updated if the version goes 10.0.0 or more
-
       - name: Create tag
         uses: rickstaa/action-create-tag@v1
         with:
-          tag: ${{ needs.check-version.outputs.release-version }}
+          tag: ${{ needs.version.outputs.release-version }}
 
       - name: Create release note
         id: changelog
         uses: requarks/changelog-action@v1
         with:
-          fromTag: ${{ needs.check-version.outputs.release-version }}
-          toTag: ${{ steps.previousTag.outputs.previousTag}}
+          fromTag: ${{ needs.version.outputs.release-version }}
+          toTag: ${{ needs.version.outputs.previous-version }}
           excludeTypes: ${{ env.RELEASE_NOTE_EXCLUDED_TYPES }}
           token: ${{ secrets.GITHUB_TOKEN }}
           writeToFile: false
@@ -212,9 +204,9 @@ jobs:
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ needs.check-version.outputs.release-version }}
+          tag_name: ${{ needs.version.outputs.release-version }}
           target_commitish: ${{ github.head_ref || github.ref }}
-          name: ${{ needs.check-version.outputs.release-version }}
+          name: ${{ needs.version.outputs.release-version }}
           body: ${{ steps.changelog.outputs.changes }}
           files: eno-ws/build/libs/eno-ws.jar
         env:
@@ -222,7 +214,7 @@ jobs:
 
   # Separate job for committing in the changelog file since I got bored that auto commit action randomly fails
   commit-changelog:
-    needs: [ check-version, create-release ]
+    needs: [ version, create-release ]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -237,8 +229,8 @@ jobs:
         id: changelog
         uses: requarks/changelog-action@v1
         with:
-          fromTag: ${{ needs.check-version.outputs.release-version }}
-          toTag: ${{ needs.create-release.outputs.previous-release-tag }}
+          fromTag: ${{ needs.version.outputs.release-version }}
+          toTag: ${{ needs.version.outputs.previous-version }}
           excludeTypes: ${{ env.RELEASE_NOTE_EXCLUDED_TYPES }}
           token: ${{ secrets.GITHUB_TOKEN }}
           writeToFile: true
@@ -248,11 +240,11 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           branch: 'v3-main'
-          commit_message: 'docs(changelog): ${{ needs.check-version.outputs.release-version }} update [skip ci]'
+          commit_message: 'docs(changelog): ${{ needs.version.outputs.release-version }} update [skip ci]'
           file_pattern: 'CHANGELOG.md'
 
   publish-docker:
-    needs: [ check-version, build-sources ]
+    needs: [ version, build-sources ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -270,4 +262,4 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           default_branch: ${{ github.ref }}
-          tags: "latest,${{ needs.check-version.outputs.release-version }}"
+          tags: "latest,${{ needs.version.outputs.release-version }}"
