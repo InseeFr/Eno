@@ -3,7 +3,6 @@ package fr.insee.eno.core.model.variable;
 import fr.insee.ddi.lifecycle33.logicalproduct.VariableGroupType;
 import fr.insee.ddi.lifecycle33.logicalproduct.VariableSchemeType;
 import fr.insee.ddi.lifecycle33.logicalproduct.VariableType;
-import fr.insee.ddi.lifecycle33.reusable.AbstractIdentifiableType;
 import fr.insee.ddi.lifecycle33.reusable.ReferenceType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
@@ -15,7 +14,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 

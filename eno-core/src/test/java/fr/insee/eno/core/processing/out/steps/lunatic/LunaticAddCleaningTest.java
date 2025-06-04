@@ -155,7 +155,7 @@ class LunaticAddCleaningTest {
 
 
     @Test
-    void testCleaningOfPairwise() throws DDIParsingException, PoguesDeserializationException {
+    void testCleaningOfPairwise() throws DDIParsingException {
         prepareQuestionnaireTest("integration/ddi/ddi-pairwise.xml");
         cleaningProcessing.processPairwiseCleaning(lunaticQuestionnaire);
 

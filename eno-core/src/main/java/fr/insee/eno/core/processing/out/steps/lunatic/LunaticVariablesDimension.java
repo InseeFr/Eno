@@ -2,15 +2,10 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.model.variable.VariableGroup;
 import fr.insee.eno.core.processing.ProcessingStep;
-import fr.insee.eno.core.utils.LunaticUtils;
-import fr.insee.lunatic.model.flat.Loop;
-import fr.insee.lunatic.model.flat.PairwiseLinks;
 import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.RosterForLoop;
 import fr.insee.lunatic.model.flat.variable.*;
 
 import java.util.*;
