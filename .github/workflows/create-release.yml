@@ -16,7 +16,7 @@ on:
 # the workflow will publish a release.
 
 # This workflow is triggered when changes are pushed on the main branch.
-# It checks that the version is valid, and has not already been release.
+# It checks that the version is valid, and has not already been released.
 # From the new version, if creates a tag, a GitHub release, a changelog 
 # (also based on conventional commits), and publishes an image on Docker Hub.
 
