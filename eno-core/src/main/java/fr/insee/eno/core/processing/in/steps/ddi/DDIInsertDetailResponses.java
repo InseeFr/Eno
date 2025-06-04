@@ -99,6 +99,7 @@ public class DDIInsertDetailResponses implements ProcessingStep<EnoQuestionnaire
         DetailResponse detailResponse = new DetailResponse();
         detailResponse.setLabel(detailAttachment.getLabel());
         detailResponse.setResponse(detailCodeResponse.getResponse());
+        detailResponse.setMaxLength(detailAttachment.getMaxLength());
 
         // Attach the detail response to the code response it belongs
         ModalityAttachment.CodeAttachment codeAttachment = codeAttachmentMap.get(detailAttachment.getAttachmentDomain());
