@@ -133,6 +133,25 @@ class LunaticAddCleaningTest {
     }
 
     @Test
+    void testCleaningOfDetailResponse() throws DDIParsingException, PoguesDeserializationException {
+        prepareQuestionnaireTest(
+                "functional/pogues/clarification/pogues-m9bcc8mc.json",
+                "functional/ddi/clarification/ddi-m9bcc8mc.xml");
+        cleaningProcessing.processClarificationFiltered(lunaticQuestionnaire);
+        assertNotNull(lunaticQuestionnaire.getCleaning().getCleaningEntry("QCU"));
+        assertThat(lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("QCU")
+                .getCleanedVariable("QCU2CL")
+                .getCleaningExpressions())
+                .hasSize(1);
+        CleaningExpression cleaningExpression =  lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("QCU")
+                .getCleanedVariable("QCU2CL")
+                .getCleaningExpressions().get(0);
+        assertEquals("$QCU$ = '2'", cleaningExpression.getExpression());
+    }
+
+    @Test
     void testCleaningOfCellsFiltered() throws DDIParsingException, PoguesDeserializationException {
         prepareQuestionnaireTest(
                 "functional/pogues/cells-filtered/pogues-m92r209h.json",

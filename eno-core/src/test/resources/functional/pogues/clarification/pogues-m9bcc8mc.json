@@ -1,0 +1,224 @@
+{
+  "owner": "DR59-SNDI59",
+  "final": false,
+  "id": "m9bcc8mc",
+  "Label": ["autre préciser - QR"],
+  "Name": "AUTREPRCIS",
+  "lastUpdatedDate": "Wed Jun 04 2025 15:08:19 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "m9bcm821",
+      "Name": "PAGE_1",
+      "Label": ["Components for page 1"],
+      "MemberReference": ["m9bcp2ki", "m9bcqx7v", "idendquest"]
+    }
+  ],
+  "agency": "fr.insee",
+  "TargetMode": ["CAPI", "CAWI", "CATI", "PAPI"],
+  "flowLogic": "FILTER",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": [],
+  "Child": [
+    {
+      "id": "m9bcp2ki",
+      "depth": 1,
+      "Name": "S1",
+      "Label": ["S1"],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": ["CAPI", "CAWI", "CATI", "PAPI"],
+      "type": "SequenceType",
+      "genericName": "MODULE",
+      "Child": [
+        {
+          "id": "m9bcqx7v",
+          "depth": 2,
+          "Name": "QCU",
+          "Label": ["qcu"],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [
+            {
+              "id": "m9bdq6ed",
+              "Description": "$QCU$ = '2' : QCU2CL",
+              "Expression": "$QCU$ = '2'",
+              "IfTrue": "m9bdtrfw",
+              "flowControlType": "CLARIFICATION"
+            },
+            {
+              "id": "m9bdjcou",
+              "Description": "$QCU$ = '3' : QCU3CL",
+              "Expression": "$QCU$ = '3'",
+              "IfTrue": "m9bdgh3x",
+              "flowControlType": "CLARIFICATION"
+            }
+          ],
+          "TargetMode": ["CAPI", "CAWI", "CATI", "PAPI"],
+          "ClarificationQuestion": [
+            {
+              "id": "m9bdtrfw",
+              "questionType": "SIMPLE",
+              "Name": "QCU2CL",
+              "Label": "Préciser :",
+              "TargetMode": ["CAPI", "CAWI", "CATI", "PAPI"],
+              "Response": [
+                {
+                  "id": "m9bdjiyd",
+                  "Datatype": {
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  },
+                  "CollectedVariableReference": "m9bd1tsa",
+                  "mandatory": false
+                }
+              ]
+            },
+            {
+              "id": "m9bdgh3x",
+              "questionType": "SIMPLE",
+              "Name": "QCU3CL",
+              "Label": "Préciser :",
+              "TargetMode": ["CAPI", "CAWI", "CATI", "PAPI"],
+              "Response": [
+                {
+                  "id": "m9bdaxw0",
+                  "Datatype": {
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  },
+                  "CollectedVariableReference": "m9bcr69k",
+                  "mandatory": false
+                }
+              ]
+            }
+          ],
+          "codeFilters": [],
+          "type": "QuestionType",
+          "questionType": "SINGLE_CHOICE",
+          "Response": [
+            {
+              "id": "m9bdtgh0",
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "visualizationHint": "RADIO",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "m9bia0bv",
+              "CodeListReference": "m9bcxv8i",
+              "mandatory": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "idendquest",
+      "depth": 1,
+      "Name": "QUESTIONNAIRE_END",
+      "Label": ["QUESTIONNAIRE_END"],
+      "Declaration": [],
+      "genericName": "MODULE",
+      "Control": [],
+      "FlowControl": [],
+      "type": "SequenceType",
+      "Child": [],
+      "TargetMode": ["CAPI", "CAWI", "CATI", "PAPI"]
+    }
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "id": "m9bcxv8i",
+        "Label": "super liste",
+        "Code": [
+          {
+            "Label": "\"modalite 1\"",
+            "Value": "1",
+            "Parent": ""
+          },
+          {
+            "Label": "\"modalite 2\"",
+            "Value": "2",
+            "Parent": ""
+          },
+          {
+            "Label": "\"modalite 3\"",
+            "Value": "3",
+            "Parent": ""
+          },
+          {
+            "Label": "\"modalite 4\"",
+            "Value": "4",
+            "Parent": ""
+          }
+        ]
+      },
+      {
+        "id": "m9cstsi9",
+        "Label": "oui_non",
+        "Code": [
+          {
+            "Label": "oui",
+            "Value": "1",
+            "Parent": ""
+          },
+          {
+            "Label": "non",
+            "Value": "2",
+            "Parent": ""
+          },
+          {
+            "Label": "pe",
+            "Value": "3",
+            "Parent": ""
+          }
+        ]
+      }
+    ]
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "m9bia0bv",
+        "Name": "QCU",
+        "Label": "QCU label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        },
+        "CodeListReference": "m9bcxv8i"
+      },
+      {
+        "id": "m9bd1tsa",
+        "Name": "QCU2CL",
+        "Label": "QCU2CL label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m9bcr69k",
+        "Name": "QCU3CL",
+        "Label": "QCU3CL label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      }
+    ]
+  },
+  "FlowControl": []
+}

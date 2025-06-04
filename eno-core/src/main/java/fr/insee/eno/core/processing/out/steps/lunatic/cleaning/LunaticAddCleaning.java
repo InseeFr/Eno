@@ -63,6 +63,8 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
         processCodeFiltered(lunaticQuestionnaire);
         // filter in cell level in dynamicTable/rosterForLoop
         processCellsFiltered(lunaticQuestionnaire);
+        // filter of clarification questions
+        processClarificationFiltered(lunaticQuestionnaire);
     }
 
     /**
@@ -226,6 +228,23 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                 .map(SimpleMultipleChoiceQuestion.class::cast)
                 .filter(simpleMultipleChoiceQuestion -> !simpleMultipleChoiceQuestion.getCodeFilters().isEmpty())
                 .forEach(multipleChoiceQuestionCleaning::processCleaningMultipleChoiceQuestion);
+    }
+
+    public void processClarificationFiltered(Questionnaire lunaticQuestionnaire){
+        CleaningType cleaning = lunaticQuestionnaire.getCleaning();
+        enoQuestionnaire.getSingleResponseQuestions().stream()
+                .filter(UniqueChoiceQuestion.class::isInstance)
+                .map(UniqueChoiceQuestion.class::cast)
+                .filter(uniqueChoiceQuestion -> !uniqueChoiceQuestion.getDetailResponses().isEmpty())
+                .forEach(uniqueChoiceQuestion ->{
+                    String responseVariable = uniqueChoiceQuestion.getResponse().getVariableName();
+                    String clarificationVariable = uniqueChoiceQuestion.getDetailResponses().get(0).getResponse().getVariableName();
+                    processCleaningForFilterExpression(cleaning, variableIndex, variableShapeFromIndex,
+                            "$" + responseVariable + "$ = '" + uniqueChoiceQuestion.getDetailResponses().get(0).getValue() + "'",
+                            Arrays.asList(responseVariable),
+                            Arrays.asList(clarificationVariable));
+                        }
+                );
     }
 
     public void processCellsFiltered(Questionnaire lunaticQuestionnaire){
