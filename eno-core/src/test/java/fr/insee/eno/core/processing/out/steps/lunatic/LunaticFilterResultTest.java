@@ -195,7 +195,7 @@ class LunaticFilterResultTest {
         CalculatedVariableType filterResultVariable = assertInstanceOf(CalculatedVariableType.class, variable);
         assertEquals(List.of("VAR1"), filterResultVariable.getBindingDependencies());
         assertEquals("VAR1 < 10", filterResultVariable.getExpression().getValue());
-        assertEquals(true, filterResultVariable.getIsIgnoredByLunatic());
+        assertTrue(filterResultVariable.getIsIgnoredByLunatic());
     }
 
     private void testTableFilterResult(VariableType variable, String responseName) {
@@ -204,7 +204,7 @@ class LunaticFilterResultTest {
         CalculatedVariableType filterResultVariable = assertInstanceOf(CalculatedVariableType.class, variable);
         assertEquals(List.of("VAR21", "VAR22"), filterResultVariable.getBindingDependencies());
         assertEquals("VAR21 + VAR22 < 100", filterResultVariable.getExpression().getValue());
-        assertEquals(true, filterResultVariable.getIsIgnoredByLunatic());
+        assertTrue(filterResultVariable.getIsIgnoredByLunatic());
     }
 
 }
