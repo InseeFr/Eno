@@ -2,12 +2,14 @@ package fr.insee.eno.core.processing.out.steps.lunatic.cleaning;
 
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
+import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.cleaning.CleaningType;
 import fr.insee.lunatic.model.flat.variable.VariableType;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -32,6 +34,7 @@ public class LunaticMultipleChoiceQuestionCleaning {
         this.variableShapeFromIndex = variableShapeFromIndex;
     }
 
+    /** Get the variable names associated to the option (response and clarification). */
     private static List<String> getResponseNamesOfCheckboxResponse(ResponseCheckboxGroup responseCheckboxGroup){
         List<String> variableNames = new ArrayList<>();
         if(responseCheckboxGroup.getResponse() != null) variableNames.add(responseCheckboxGroup.getResponse().getName());
@@ -39,6 +42,7 @@ public class LunaticMultipleChoiceQuestionCleaning {
         return variableNames;
     }
 
+    /** Add a cleaning for responses for which a condition filter exists. */
     public void processCleaningMultipleChoiceQuestion(SimpleMultipleChoiceQuestion enoMultipleChoiceQuestion){
         CleaningType cleaning = lunaticQuestionnaire.getCleaning();
         Optional<ComponentType> multipleChoiceQuestion = findComponentById(lunaticQuestionnaire, enoMultipleChoiceQuestion.getId());
@@ -56,6 +60,28 @@ public class LunaticMultipleChoiceQuestionCleaning {
                             allVariablesThatInfluenceFilterExpression,
                             variablesCollectedInsideFilter
                     );
+                }
+            });
+        }
+    }
+
+    /** Add a cleaning for clarification question that are displayed only when a specific option is checked. */
+    public void processCleaningMultipleChoiceQuestionClarification(SimpleMultipleChoiceQuestion enoMultipleChoiceQuestion){
+        CleaningType cleaning = lunaticQuestionnaire.getCleaning();
+        Optional<ComponentType> multipleChoiceQuestion = findComponentById(lunaticQuestionnaire, enoMultipleChoiceQuestion.getId());
+        if(multipleChoiceQuestion.isEmpty()){
+            throw new MappingException("Cannot find Lunatic component for " + enoMultipleChoiceQuestion + ".");
+        }
+        if(multipleChoiceQuestion.get() instanceof CheckboxGroup checkboxGroup){
+            checkboxGroup.getResponses().forEach(responseCheckboxGroup -> {
+                DetailResponse detailResponse = responseCheckboxGroup.getDetail();
+                if (detailResponse != null) {
+                    String clarificationVariable = detailResponse.getResponse().getName();
+                    String responseVariable = responseCheckboxGroup.getResponse().getName();
+                    processCleaningForFilterExpression(cleaning, variableIndex, variableShapeFromIndex,
+                        VtlSyntaxUtils.nvlDefaultValue(responseVariable, "false"),
+                        Arrays.asList(responseVariable),
+                        Arrays.asList(clarificationVariable));
                 }
             });
         }

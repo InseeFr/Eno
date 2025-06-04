@@ -104,6 +104,13 @@ public class VtlSyntaxUtils {
         return String.format("\"%s\"", expression);
     }
 
+    public static String nvlDefaultValue(String variableName, String defaultValue){
+        return String.format("%s(%s, %s)",
+                getVTLTokenName(VtlTokens.NVL),
+                variableName,
+                defaultValue);
+    }
+
     /**
      * Inverts the given expression (which is supposed to be a VTL expression that returns a boolean)
      * by adding a 'not()' around it.

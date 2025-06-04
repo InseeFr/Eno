@@ -231,21 +231,22 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                 .forEach(multipleChoiceQuestionCleaning::processCleaningMultipleChoiceQuestion);
     }
 
+    /** Handle cleaning for detail responses that can be found in QCU and QCM. */
     public void processClarificationFiltered(Questionnaire lunaticQuestionnaire){
-        CleaningType cleaning = lunaticQuestionnaire.getCleaning();
+        LunaticUniqueChoiceQuestionCleaning uniqueChoiceQuestionCleaning = new LunaticUniqueChoiceQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
+        LunaticMultipleChoiceQuestionCleaning multipleChoiceQuestionCleaning = new LunaticMultipleChoiceQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
+
         enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(UniqueChoiceQuestion.class::isInstance)
                 .map(UniqueChoiceQuestion.class::cast)
                 .filter(uniqueChoiceQuestion -> !uniqueChoiceQuestion.getDetailResponses().isEmpty())
-                .forEach(uniqueChoiceQuestion -> {
-                    String responseVariable = uniqueChoiceQuestion.getResponse().getVariableName();
-                    String clarificationVariable = uniqueChoiceQuestion.getDetailResponses().get(0).getResponse().getVariableName();
-                    String clarificationValue = uniqueChoiceQuestion.getDetailResponses().get(0).getValue();
-                    processCleaningForFilterExpression(cleaning, variableIndex, variableShapeFromIndex,
-                        VtlSyntaxUtils.expressionEqualToOther("$" + responseVariable + "$", "'" + clarificationValue + "'"),
-                        Arrays.asList(responseVariable),
-                        Arrays.asList(clarificationVariable));
-                });
+                .forEach(uniqueChoiceQuestionCleaning::processCleaningUniqueChoiceQuestionClarification);
+
+        enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .filter(SimpleMultipleChoiceQuestion.class::isInstance)
+                .map(SimpleMultipleChoiceQuestion.class::cast)
+                .filter(simpleMultipleChoiceQuestion -> !simpleMultipleChoiceQuestion.getDetailResponses().isEmpty())
+                .forEach(multipleChoiceQuestionCleaning::processCleaningMultipleChoiceQuestionClarification);
     }
 
     public void processCellsFiltered(Questionnaire lunaticQuestionnaire){

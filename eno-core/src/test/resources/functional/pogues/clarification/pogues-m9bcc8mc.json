@@ -4,7 +4,7 @@
   "id": "m9bcc8mc",
   "Label": ["autre préciser - QR"],
   "Name": "AUTREPRCIS",
-  "lastUpdatedDate": "Wed Jun 04 2025 15:08:19 GMT+0200 (heure d’été d’Europe centrale)",
+  "lastUpdatedDate": "Wed Jun 04 2025 16:24:06 GMT+0200 (heure d’été d’Europe centrale)",
   "DataCollection": [],
   "genericName": "QUESTIONNAIRE",
   "ComponentGroup": [
@@ -12,7 +12,7 @@
       "id": "m9bcm821",
       "Name": "PAGE_1",
       "Label": ["Components for page 1"],
-      "MemberReference": ["m9bcp2ki", "m9bcqx7v", "idendquest"]
+      "MemberReference": ["m9bcp2ki", "m9bcqx7v", "m9cti4hw", "idendquest"]
     }
   ],
   "agency": "fr.insee",
@@ -114,6 +114,139 @@
               "mandatory": true
             }
           ]
+        },
+        {
+          "id": "m9cti4hw",
+          "depth": 2,
+          "Name": "QCM",
+          "Label": ["QCM"],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [
+            {
+              "id": "m9cwlcg4",
+              "Description": "$QCM2$ = '1' : QCM2CL",
+              "Expression": "$QCM2$ = '1'",
+              "IfTrue": "m9cwotub",
+              "flowControlType": "CLARIFICATION"
+            },
+            {
+              "id": "m9cwgssb",
+              "Description": "$QCM3$ = '1' : QCM3CL",
+              "Expression": "$QCM3$ = '1'",
+              "IfTrue": "m9cwpzae",
+              "flowControlType": "CLARIFICATION"
+            }
+          ],
+          "TargetMode": ["CAPI", "CAWI", "CATI", "PAPI"],
+          "ClarificationQuestion": [
+            {
+              "id": "m9cwotub",
+              "questionType": "SIMPLE",
+              "Name": "QCM2CL",
+              "Label": "Préciser :",
+              "TargetMode": ["CAPI", "CAWI", "CATI", "PAPI"],
+              "Response": [
+                {
+                  "id": "m9cwu8kr",
+                  "Datatype": {
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  },
+                  "CollectedVariableReference": "m9ctdb0t",
+                  "mandatory": false
+                }
+              ]
+            },
+            {
+              "id": "m9cwpzae",
+              "questionType": "SIMPLE",
+              "Name": "QCM3CL",
+              "Label": "Préciser :",
+              "TargetMode": ["CAPI", "CAWI", "CATI", "PAPI"],
+              "Response": [
+                {
+                  "id": "m9cwigl0",
+                  "Datatype": {
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  },
+                  "CollectedVariableReference": "m9cthafo",
+                  "mandatory": false
+                }
+              ]
+            }
+          ],
+          "codeFilters": [],
+          "type": "QuestionType",
+          "questionType": "MULTIPLE_CHOICE",
+          "ResponseStructure": {
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "CodeListReference": "m9bcxv8i",
+                "dynamic": "NON_DYNAMIC"
+              },
+              {
+                "dimensionType": "MEASURE"
+              }
+            ],
+            "Mapping": [
+              {
+                "MappingSource": "m9cwil3y",
+                "MappingTarget": "1"
+              },
+              {
+                "MappingSource": "m9cwn7hk",
+                "MappingTarget": "2"
+              },
+              {
+                "MappingSource": "m9cwsld1",
+                "MappingTarget": "3"
+              },
+              {
+                "MappingSource": "m9cwl5rt",
+                "MappingTarget": "4"
+              }
+            ],
+            "Attribute": []
+          },
+          "Response": [
+            {
+              "id": "m9cwil3y",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "m9ct3qvf"
+            },
+            {
+              "id": "m9cwn7hk",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "m9cszpgh"
+            },
+            {
+              "id": "m9cwsld1",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "m9ctfiup"
+            },
+            {
+              "id": "m9cwl5rt",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "m9ctdynd"
+            }
+          ]
         }
       ]
     },
@@ -211,6 +344,68 @@
         "id": "m9bcr69k",
         "Name": "QCU3CL",
         "Label": "QCU3CL label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m9ct3qvf",
+        "Name": "QCM1",
+        "Label": "1 - \"modalite 1\"",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "id": "m9cszpgh",
+        "Name": "QCM2",
+        "Label": "2 - \"modalite 2\"",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "id": "m9ctfiup",
+        "Name": "QCM3",
+        "Label": "3 - \"modalite 3\"",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "id": "m9ctdynd",
+        "Name": "QCM4",
+        "Label": "4 - \"modalite 4\"",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        }
+      },
+      {
+        "id": "m9ctdb0t",
+        "Name": "QCM2CL",
+        "Label": "QCM2CL label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        }
+      },
+      {
+        "id": "m9cthafo",
+        "Name": "QCM3CL",
+        "Label": "QCM3CL label",
         "type": "CollectedVariableType",
         "Datatype": {
           "typeName": "TEXT",
