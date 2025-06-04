@@ -12,6 +12,7 @@ import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.utils.LunaticUtils;
+import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.cleaning.CleaningType;
@@ -236,15 +237,15 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                 .filter(UniqueChoiceQuestion.class::isInstance)
                 .map(UniqueChoiceQuestion.class::cast)
                 .filter(uniqueChoiceQuestion -> !uniqueChoiceQuestion.getDetailResponses().isEmpty())
-                .forEach(uniqueChoiceQuestion ->{
+                .forEach(uniqueChoiceQuestion -> {
                     String responseVariable = uniqueChoiceQuestion.getResponse().getVariableName();
                     String clarificationVariable = uniqueChoiceQuestion.getDetailResponses().get(0).getResponse().getVariableName();
+                    String clarificationValue = uniqueChoiceQuestion.getDetailResponses().get(0).getValue();
                     processCleaningForFilterExpression(cleaning, variableIndex, variableShapeFromIndex,
-                            "$" + responseVariable + "$ = '" + uniqueChoiceQuestion.getDetailResponses().get(0).getValue() + "'",
-                            Arrays.asList(responseVariable),
-                            Arrays.asList(clarificationVariable));
-                        }
-                );
+                        VtlSyntaxUtils.expressionEqualToOther("$" + responseVariable + "$", "'" + clarificationValue + "'"),
+                        Arrays.asList(responseVariable),
+                        Arrays.asList(clarificationVariable));
+                });
     }
 
     public void processCellsFiltered(Questionnaire lunaticQuestionnaire){
