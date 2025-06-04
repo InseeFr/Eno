@@ -159,6 +159,19 @@ class LunaticAddCleaningTest {
         prepareQuestionnaireTest("integration/ddi/ddi-pairwise.xml");
         cleaningProcessing.processPairwiseCleaning(lunaticQuestionnaire);
 
+        assertThat(lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("PAIRWISE_SOURCE")
+                .getCleanedVariable("PAIRWISE_QUESTION")
+                .getCleaningExpressions())
+                .hasSize(1);
+        CleaningExpression cleaningExpression =  lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("PAIRWISE_SOURCE")
+                .getCleanedVariable("PAIRWISE_QUESTION")
+                .getCleaningExpressions().getFirst();
+
+        assertEquals("PAIRWISE_SOURCE <> \"\"", cleaningExpression.getExpression());
+        assertEquals("PAIRWISE_SOURCE", cleaningExpression.getShapeFrom());
+
     }
 
 

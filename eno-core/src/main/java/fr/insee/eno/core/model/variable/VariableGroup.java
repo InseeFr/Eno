@@ -1,16 +1,21 @@
 package fr.insee.eno.core.model.variable;
 
 import fr.insee.ddi.lifecycle33.logicalproduct.VariableGroupType;
+import fr.insee.ddi.lifecycle33.logicalproduct.VariableSchemeType;
+import fr.insee.ddi.lifecycle33.logicalproduct.VariableType;
+import fr.insee.ddi.lifecycle33.reusable.AbstractIdentifiableType;
 import fr.insee.ddi.lifecycle33.reusable.ReferenceType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.exceptions.business.IllegalDDIElementException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.eno.core.reference.DDIIndex;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,13 +61,13 @@ public class VariableGroup extends EnoObject {
     private Type type;
 
     /** List of variables that belong to the variable group. */
-    @DDI("getVariableReferenceList().![#index.get(#this.getIDArray(0).getStringValue())]")
+    @DDI("T(fr.insee.eno.core.model.variable.VariableGroup).getVariables(#this, #index)")
     private final List<Variable> variables = new ArrayList<>();
 
     /** Ordered list of iterable (i.e. loop or dynamic table) identifiers that correspond to this variable group.
      * The first reference is either a "main" loop or a dynamic table, the others are linked loops.
      * If the variable group corresponds to questionnaire-level variables, this list is empty. */
-    @DDI("T(fr.insee.eno.core.model.variable.VariableGroup).getDDILoopReferences(#this)")
+    @DDI("T(fr.insee.eno.core.model.variable.VariableGroup).getDDILoopReferences(#this, #index)")
     private final List<String> loopReferences = new ArrayList<>();
 
     public Optional<Variable> getVariableByName(String variableName) {
@@ -71,11 +76,24 @@ public class VariableGroup extends EnoObject {
                 .findFirst();
     }
 
-    public static List<String> getDDILoopReferences(VariableGroupType ddiVariableGroup) {
+    public static List<String> getDDILoopReferences(VariableGroupType ddiVariableGroup, DDIIndex ddiIndex) {
         if (DDI_QUESTIONNAIRE_TYPE.equals(ddiVariableGroup.getTypeOfVariableGroup().getStringValue()))
             return new ArrayList<>();
+
         // iterable means either loop or dynamic table
         List<String> iterableReferences = new ArrayList<>();
+        if(DDI_PAIRWISE_TYPE.equals(ddiVariableGroup.getTypeOfVariableGroup().getStringValue())){
+            String variableGroupId = ddiVariableGroup.getIDArray(0).getStringValue();
+            VariableSchemeType variableSchemeType = (VariableSchemeType) ddiIndex.getParent(variableGroupId);
+            Optional<VariableGroupType> optionalVariableGroupOrigin = variableSchemeType.getVariableGroupList().stream()
+                    .filter(variableGroupType -> variableGroupType.getVariableGroupReferenceList().stream()
+                            .anyMatch(ref->variableGroupId.equals(ref.getIDArray(0).getStringValue()))
+            ).findFirst();
+            if(optionalVariableGroupOrigin.isPresent()){
+                VariableGroupType variableGroupOrigin = optionalVariableGroupOrigin.get();
+                return getDDILoopReferences(variableGroupOrigin, ddiIndex);
+            }
+        }
         for (ReferenceType reference : ddiVariableGroup.getBasedOnObject().getBasedOnReferenceList()) {
             iterableReferences.add(reference.getIDArray(0).getStringValue());
         }
@@ -92,6 +110,21 @@ public class VariableGroup extends EnoObject {
                     "Invalid type of variable group '%s' in DDI variable group '%s'.",
                     ddiTypeOfGroup, ddiVariableGroup.getIDArray(0).getStringValue()));
         };
+    }
+
+    public static List<VariableType> getVariables(VariableGroupType ddiVariableGroup, DDIIndex ddiIndex){
+        List<VariableType> variables = new ArrayList<>(ddiVariableGroup.getVariableReferenceList().stream()
+                .map(varRef -> ddiIndex.get(varRef.getIDArray(0).getStringValue()))
+                .map(VariableType.class::cast)
+                .toList());
+
+        ddiVariableGroup.getVariableGroupReferenceList().forEach( vgRef -> {
+            VariableGroupType variableGroupInside = (VariableGroupType) ddiIndex.get(vgRef.getIDArray(0).getStringValue());
+            String ddiTypeOfGroupInside = variableGroupInside.getTypeOfVariableGroup().getStringValue();
+            if(DDI_PAIRWISE_TYPE.equals(ddiTypeOfGroupInside)) variables.addAll(getVariables(variableGroupInside, ddiIndex));
+        });
+        return variables;
+
     }
 
 }

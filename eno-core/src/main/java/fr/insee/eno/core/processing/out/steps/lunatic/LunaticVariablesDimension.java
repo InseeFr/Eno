@@ -2,6 +2,7 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.eno.core.model.variable.VariableGroup;
 import fr.insee.eno.core.processing.ProcessingStep;
@@ -12,9 +13,7 @@ import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.RosterForLoop;
 import fr.insee.lunatic.model.flat.variable.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Processing that sets the variable properties that are relative to their dimension,
@@ -42,16 +41,28 @@ public class LunaticVariablesDimension implements ProcessingStep<Questionnaire> 
         lunaticQuestionnaire.getVariables().forEach(variableType ->
                 lunaticVariables.put(variableType.getName(), variableType));
         //
-        enoQuestionnaire.getVariableGroups().forEach(variableGroup -> {
-            switch (variableGroup.getType()) {
-                case VariableGroup.Type.QUESTIONNAIRE -> setQuestionnaireVariablesDimension(variableGroup);
-                case VariableGroup.Type.LOOP -> setLoopVariablesDimension(variableGroup);
-                case VariableGroup.Type.PAIRWISE_LINKS -> setPairwiseVariablesDimension(variableGroup);
-                default -> throw new MappingException(String.format(
-                        "Variable group '%s' has not its type set.", variableGroup.getName()));
-            }
+        enoQuestionnaire.getVariableGroups().stream().sorted(variableGroupComparator)
+                .forEach(variableGroup -> {
+                    switch (variableGroup.getType()) {
+                        case VariableGroup.Type.QUESTIONNAIRE -> setQuestionnaireVariablesDimension(variableGroup);
+                        case VariableGroup.Type.LOOP -> setLoopVariablesDimension(variableGroup);
+                        case VariableGroup.Type.PAIRWISE_LINKS -> setPairwiseVariablesDimension(variableGroup);
+                        default -> throw new MappingException(String.format(
+                                "Variable group '%s' has not its type set.", variableGroup.getName()));
+                    }
         });
     }
+
+    /**
+     * Implement Java Comparator for VariableGroup
+     * The goal is to do the treatment of PairwiseLink at the end during a stream of VariableGroup
+     */
+    public static final Comparator<VariableGroup> variableGroupComparator = (variableGroup1, variableGroup2) -> {
+        if(VariableGroup.Type.PAIRWISE_LINKS.equals(variableGroup1.getType()) && VariableGroup.Type.PAIRWISE_LINKS.equals(variableGroup2.getType())) return 0;
+        if(VariableGroup.Type.PAIRWISE_LINKS.equals(variableGroup1.getType())) return 1;
+        if(VariableGroup.Type.PAIRWISE_LINKS.equals(variableGroup2.getType())) return -1;
+        return 0;
+    };
 
     private void setQuestionnaireVariablesDimension(VariableGroup questionnaireVariableGroup) {
         questionnaireVariableGroup.getVariables().stream().map(Variable::getName).forEach(variableName ->
