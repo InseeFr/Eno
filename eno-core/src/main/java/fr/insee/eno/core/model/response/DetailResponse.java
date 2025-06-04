@@ -1,5 +1,6 @@
 package fr.insee.eno.core.model.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.insee.ddi.lifecycle33.datacollection.ResponseDomainInMixedType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
@@ -11,6 +12,8 @@ import fr.insee.eno.core.parameter.Format;
 import fr.insee.pogues.model.QuestionType;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.math.BigInteger;
 
 /**
  * Unique/multiple choice question modalities can have an additional field for a detailed response.
@@ -50,6 +53,12 @@ public class DetailResponse extends EnoObject {
     /** DDI reference of the response name. Can be used to retrieve the response name through DDI bindings. */
     @DDI("getResponseDomain().getOutParameter().getIDArray(0).getStringValue()")
     String responseReference;
+
+    /** Maximum length allowed for the text value, if applicable. */
+    @Pogues("getResponse().getFirst().getDatatype().getMaxLength()")
+    @DDI("getResponseDomain().getMaxLength()")
+    @Lunatic("setMaxLength(#param)")
+    BigInteger maxLength;
 
     @Override
     public String toString() {
