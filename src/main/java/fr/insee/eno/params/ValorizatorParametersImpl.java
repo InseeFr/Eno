@@ -2,6 +2,7 @@ package fr.insee.eno.params;
 
 import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
+import fr.insee.eno.exception.EnoParametersException;
 import fr.insee.eno.exception.Utils;
 import fr.insee.eno.parameters.ENOParameters;
 import fr.insee.eno.transform.xsl.XslTransformation;
@@ -43,7 +44,7 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		try {
 			saxonService.mergeEnoParameters(inputStream, outputStream, PARAM_XSL);
 		}catch(Exception e) {
-			String errorMessage = "An error was occured during the valorisation of parameters. "+e.getMessage();
+			String errorMessage = "An error has occurred during the valorisation of parameters. "+e.getMessage();
 			LOGGER.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
@@ -113,12 +114,19 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 		unmarshaller.setListener(new UnmarshallLogger());
 
-		ENOParameters enoParameters = (ENOParameters) unmarshaller.unmarshal(inputStream);
+		ENOParameters enoParameters;
+		try {
+			enoParameters = (ENOParameters) unmarshaller.unmarshal(inputStream);
+		} catch (Exception e) {
+			String message = "Failed to parse parameters from given input.";
+			LOGGER.error(message);
+			throw new EnoParametersException(message, e);
+		}
 
 		return enoParameters;
 	}
 
-	public ENOParameters getParameters(StreamSource xmlStream) throws JAXBException, UnsupportedEncodingException {
+	public ENOParameters getParameters(StreamSource xmlStream) throws JAXBException {
 
 		if (xmlStream == null)
 			return null;
@@ -129,7 +137,14 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 		unmarshaller.setListener(new UnmarshallLogger());
 
-		ENOParameters enoParameters = (ENOParameters) unmarshaller.unmarshal(xmlStream);
+		ENOParameters enoParameters;
+		try {
+			enoParameters = (ENOParameters) unmarshaller.unmarshal(xmlStream);
+		} catch (Exception e) {
+			String message = "Failed to parse parameters from given xml stream.";
+			LOGGER.error(message);
+			throw new EnoParametersException(message, e);
+		}
 
 		return enoParameters;
 	}

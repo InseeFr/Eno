@@ -10,4 +10,8 @@ public class EnoParametersException extends RuntimeException {
     public EnoParametersException(String message) {
         super(message);
     }
+
+    public EnoParametersException(String message, Exception e) {
+        super(message, e);
+    }
 }
