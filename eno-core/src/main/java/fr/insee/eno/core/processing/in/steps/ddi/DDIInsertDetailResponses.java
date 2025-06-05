@@ -11,6 +11,7 @@ import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.processing.ProcessingStep;
 
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -99,6 +100,10 @@ public class DDIInsertDetailResponses implements ProcessingStep<EnoQuestionnaire
         DetailResponse detailResponse = new DetailResponse();
         detailResponse.setLabel(detailAttachment.getLabel());
         detailResponse.setResponse(detailCodeResponse.getResponse());
+
+        // Add the detail response to the question
+        List<DetailResponse> detailResponses = simpleMultipleChoiceQuestion.getDetailResponses();
+        detailResponses.add(detailResponse);
 
         // Attach the detail response to the code response it belongs
         ModalityAttachment.CodeAttachment codeAttachment = codeAttachmentMap.get(detailAttachment.getAttachmentDomain());
