@@ -107,6 +107,7 @@ public class LunaticFilterResult implements ProcessingStep<Questionnaire> {
         assert component.getConditionFilter() != null ; // Safety check (should never happen by design)
         CalculatedVariableType filterResultVariable = new CalculatedVariableType();
         filterResultVariable.setVariableType(VariableTypeEnum.CALCULATED);
+        filterResultVariable.setIsIgnoredByLunatic(true);
         setName(filterResultVariable, responseName);
         setExpression(filterResultVariable, component.getConditionFilter());
         setBindingDependencies(filterResultVariable, findEnoFilter(component));
