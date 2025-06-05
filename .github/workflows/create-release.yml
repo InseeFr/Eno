@@ -94,7 +94,7 @@ jobs:
 
       - name: Tag verification
         run: |
-          if [[ "${{ steps.version-number.outputs.value }}" == "true" ]]; then
+          if [[ "${{ steps.check-tag-exists.outputs.exists }}" == "true" ]]; then
             echo "Version ${{ steps.version-number.outputs.value }} cannot be released, tag already exists"
             exit 1
           fi
