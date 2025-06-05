@@ -13,6 +13,7 @@ on:
 # TL;DR: Don't touch the version number, 
 # put the 'deploy-snapshot' label on a GitHub PR,
 # an image will be published on Docker Hub.
+# To bump the version, do it just before merging on the main branch.
 
 # This workflow is triggered when the 'deploy-snapshot' label is put on a PR.
 # It checks that the number version has not been changed (in comparison to the main branch).
@@ -22,7 +23,7 @@ on:
 
 # If the workflow fails because of the version number, 
 # make sure that your branch is up-to-date with the main branch.
-# If you have manually changed the version number, change it back.
+# If you have manually changed the version number, change it back before calling this workflow.
 
 env:
   JAVA_VERSION: '21'
