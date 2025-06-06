@@ -2,8 +2,8 @@ name: Build release
 
 on:
   push:
-#    branches:
-#      - 'v3-main'
+    branches:
+      - 'v3-main'
     paths-ignore:
       - 'logo/**'
       - 'docs/**'
@@ -110,162 +110,162 @@ jobs:
             exit 1
           fi
 
-  # sonar:
-  #   name: Sonar analysis
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Set up JDK
-  #       uses: actions/setup-java@v4
-  #       with:
-  #         java-version: ${{ env.JAVA_VERSION }}
-  #         distribution: 'temurin'
+  sonar:
+    name: Sonar analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
 
-  #     - uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-  #     - name: Cache SonarCloud packages
-  #       uses: actions/cache@v4
-  #       with:
-  #         path: ~/.sonar/cache
-  #         key: ${{ runner.os }}-sonar
-  #         restore-keys: ${{ runner.os }}-sonar
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
 
-  #     - name: Cache Gradle packages
-  #       uses: actions/cache@v4
-  #       with:
-  #         path: ~/.gradle/caches
-  #         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-  #         restore-keys: ${{ runner.os }}-gradle
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
 
-  #     - name: Setup Gradle
-  #       uses: gradle/actions/setup-gradle@v3
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
 
-  #     - name: Build and analyze
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #         SONAR_HOST_URL: "https://sonarcloud.io"
-  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  #       run: ./gradlew clean build sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_HOST_URL: "https://sonarcloud.io"
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew clean build sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr
 
-  # build-sources:
-  #   needs: [ version, sonar ]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Set up JDK
-  #       uses: actions/setup-java@v4
-  #       with:
-  #         distribution: 'temurin'
-  #         java-version: ${{ env.JAVA_VERSION }}
+  build-sources:
+    needs: [ version, sonar ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: ${{ env.JAVA_VERSION }}
 
-  #     - name: Setup Gradle
-  #       uses: gradle/actions/setup-gradle@v3
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
 
-  #     - uses: actions/checkout@v4
-  #     - name: Build Eno modules
-  #       run: |
-  #         ./gradlew build -x test
-  #         mv ./eno-ws/build/libs/*.jar ./eno-ws/build/libs/eno-ws.jar
+      - uses: actions/checkout@v4
+      - name: Build Eno modules
+        run: |
+          ./gradlew build -x test
+          mv ./eno-ws/build/libs/*.jar ./eno-ws/build/libs/eno-ws.jar
 
-  #     - name: Upload Eno-WS jar
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: eno-ws-jar
-  #         path: ./eno-ws/build/libs/eno-ws.jar
+      - name: Upload Eno-WS jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: eno-ws-jar
+          path: ./eno-ws/build/libs/eno-ws.jar
 
-  # create-release:
-  #   needs: [ version, build-sources ]
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: write
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #       with:
-  #         ref: ${{ github.ref }}
-  #         fetch-depth: 0
-  #         token: ${{ secrets.GITHUB_TOKEN }}
+  create-release:
+    needs: [ version, build-sources ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-  #     - name: Create tag
-  #       uses: rickstaa/action-create-tag@v1
-  #       with:
-  #         tag: ${{ needs.version.outputs.release-version }}
+      - name: Create tag
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: ${{ needs.version.outputs.release-version }}
 
-  #     - name: Create release note
-  #       id: changelog
-  #       uses: requarks/changelog-action@v1
-  #       with:
-  #         fromTag: ${{ needs.version.outputs.release-version }}
-  #         toTag: ${{ needs.version.outputs.previous-version }}
-  #         excludeTypes: ${{ env.RELEASE_NOTE_EXCLUDED_TYPES }}
-  #         token: ${{ secrets.GITHUB_TOKEN }}
-  #         writeToFile: false
+      - name: Create release note
+        id: changelog
+        uses: requarks/changelog-action@v1
+        with:
+          fromTag: ${{ needs.version.outputs.release-version }}
+          toTag: ${{ needs.version.outputs.previous-version }}
+          excludeTypes: ${{ env.RELEASE_NOTE_EXCLUDED_TYPES }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          writeToFile: false
 
-  #     - name: Download build
-  #       id: download
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         name: eno-ws-jar
-  #         path: eno-ws/build/libs/
+      - name: Download build
+        id: download
+        uses: actions/download-artifact@v4
+        with:
+          name: eno-ws-jar
+          path: eno-ws/build/libs/
 
-  #     - name: Create GitHub release
-  #       uses: softprops/action-gh-release@v2
-  #       with:
-  #         tag_name: ${{ needs.version.outputs.release-version }}
-  #         target_commitish: ${{ github.head_ref || github.ref }}
-  #         name: ${{ needs.version.outputs.release-version }}
-  #         body: ${{ steps.changelog.outputs.changes }}
-  #         files: eno-ws/build/libs/eno-ws.jar
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.version.outputs.release-version }}
+          target_commitish: ${{ github.head_ref || github.ref }}
+          name: ${{ needs.version.outputs.release-version }}
+          body: ${{ steps.changelog.outputs.changes }}
+          files: eno-ws/build/libs/eno-ws.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  # # Separate job for committing in the changelog file since I got bored that auto commit action randomly fails
-  # commit-changelog:
-  #   needs: [ version, create-release ]
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: write
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #       with:
-  #         ref: ${{ github.ref }}
-  #         fetch-depth: 0
-  #         token: ${{ secrets.GITHUB_TOKEN }}
+  # Separate job for committing in the changelog file since I got bored that auto commit action randomly fails
+  commit-changelog:
+    needs: [ version, create-release ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-  #     - name: Create release note
-  #       id: changelog
-  #       uses: requarks/changelog-action@v1
-  #       with:
-  #         fromTag: ${{ needs.version.outputs.release-version }}
-  #         toTag: ${{ needs.version.outputs.previous-version }}
-  #         excludeTypes: ${{ env.RELEASE_NOTE_EXCLUDED_TYPES }}
-  #         token: ${{ secrets.GITHUB_TOKEN }}
-  #         writeToFile: true
-  #         changelogFilePath: 'CHANGELOG.md'
+      - name: Create release note
+        id: changelog
+        uses: requarks/changelog-action@v1
+        with:
+          fromTag: ${{ needs.version.outputs.release-version }}
+          toTag: ${{ needs.version.outputs.previous-version }}
+          excludeTypes: ${{ env.RELEASE_NOTE_EXCLUDED_TYPES }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          writeToFile: true
+          changelogFilePath: 'CHANGELOG.md'
 
-  #     - name: Commit changelog file
-  #       uses: stefanzweifel/git-auto-commit-action@v5
-  #       with:
-  #         branch: 'v3-main'
-  #         commit_message: 'docs(changelog): ${{ needs.version.outputs.release-version }} update [skip ci]'
-  #         file_pattern: 'CHANGELOG.md'
+      - name: Commit changelog file
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: 'v3-main'
+          commit_message: 'docs(changelog): ${{ needs.version.outputs.release-version }} update [skip ci]'
+          file_pattern: 'CHANGELOG.md'
 
-  # publish-docker:
-  #   needs: [ version, build-sources ]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
+  publish-docker:
+    needs: [ version, build-sources ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-  #     - name: Download Eno-WS jar
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         name: eno-ws-jar
-  #         path: ./eno-ws/build/libs
+      - name: Download Eno-WS jar
+        uses: actions/download-artifact@v4
+        with:
+          name: eno-ws-jar
+          path: ./eno-ws/build/libs
 
-  #     - name: Publish to Docker Hub
-  #       uses: elgohr/Publish-Docker-Github-Action@v5
-  #       with:
-  #         name: inseefr/eno-ws
-  #         username: ${{ secrets.DOCKERHUB_USERNAME }}
-  #         password: ${{ secrets.DOCKERHUB_TOKEN }}
-  #         default_branch: ${{ github.ref }}
-  #         tags: "latest,${{ needs.version.outputs.release-version }}"
+      - name: Publish to Docker Hub
+        uses: elgohr/Publish-Docker-Github-Action@v5
+        with:
+          name: inseefr/eno-ws
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          default_branch: ${{ github.ref }}
+          tags: "latest,${{ needs.version.outputs.release-version }}"
