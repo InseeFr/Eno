@@ -42,6 +42,8 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-disabled: true # actually slows down the process due to timeouts
 
       - name: Get Eno Version
         id: version-step
