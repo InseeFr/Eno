@@ -85,6 +85,7 @@ jobs:
           versionNumber="undefined" # update this when semantic version is done
           if [[ ${{steps.compare-step.outputs.hasVersionChanged}} == "yes" ]]; then
             versionNumber=${{ steps.version-step.outputs.version }}
+          fi
           echo "Version to be released: $versionNumber"
           echo "value=$versionNumber" >> $GITHUB_OUTPUT
 
