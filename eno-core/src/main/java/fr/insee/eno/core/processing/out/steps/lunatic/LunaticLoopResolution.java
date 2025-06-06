@@ -15,6 +15,7 @@ import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.lunatic.model.flat.*;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigInteger;
@@ -127,14 +128,18 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
         lunaticLoop.getComponents().add(searchedComponent);
     }
 
-    private void setOtherLoopProperties(Loop lunaticLoop, fr.insee.eno.core.model.navigation.Loop enoLoop) {
+    private void setOtherLoopProperties(Loop lunaticLoop, @NonNull fr.insee.eno.core.model.navigation.Loop enoLoop) {
         lunaticLoop.setDepth(BigInteger.ONE);
         setLunaticLoopFilter(lunaticLoop);
         if (enoLoop instanceof LinkedLoop enoLinkedLoop) {
             setLinkedLoopIterations(lunaticLoop, enoLinkedLoop);
-        } else if (enoLoop instanceof StandaloneLoop enoStandaloneLoop) {
-            setStandaloneLoopIterations(lunaticLoop, enoStandaloneLoop);
+            return;
         }
+        if (enoLoop instanceof StandaloneLoop enoStandaloneLoop) {
+            setStandaloneLoopIterations(lunaticLoop, enoStandaloneLoop);
+            return;
+        }
+        throw new IllegalStateException("Unexpected loop type: " + enoLoop.getClass().getSimpleName());
     }
 
     /** Condition filter of the loop is the same as its first component. */
@@ -170,7 +175,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
             lunaticLoop.getIterations().setValue(countVariable(variableName));
             lunaticLoop.getIterations().setType(LabelTypeEnum.VTL);
             // For a dynamic table: insert all variables of the table in loop dependencies
-            // Note: done this way since Eno xml does it like this),
+            // Note: done this way since Eno xml does it like this,
             // but the loop dependency property doesn't really matter
             lunaticLoop.getLoopDependencies().addAll(enoDynamicTable.getVariableNames());
             return;
