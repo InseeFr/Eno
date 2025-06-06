@@ -46,6 +46,7 @@ public abstract class ResponseCell extends EnoObject implements TableCell, EnoOb
     @Lunatic("setConditionFilter(#param)")
     private ComponentFilter componentFilter;
 
+    /** Table response cells can be dynamically marked as "read only", based on a VTL expression. */
     @Pogues("getConditionReadOnly()")
     @Lunatic("setConditionReadOnly(#param)")
     private ComponentFilter componentReadOnly;
