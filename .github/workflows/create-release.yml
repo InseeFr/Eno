@@ -33,6 +33,9 @@ jobs:
       previous-version: ${{ steps.previousTag.outputs.previousTag }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0 # needed to get previous tag
 
       - name: Set up JDK
         uses: actions/setup-java@v4
@@ -42,6 +45,8 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-disabled: true # actually slows down the process due to timeouts
 
       - name: Get Eno Version
         id: version-step
@@ -80,9 +85,10 @@ jobs:
       - name: Release version number
         id: version-number
         run: |
-          versionNumber=${{ steps.compute-version.outputs.value }} # update this when semantic version is done
+          versionNumber="undefined" # update this when semantic version is done
           if [[ ${{steps.compare-step.outputs.hasVersionChanged}} == "yes" ]]; then
             versionNumber=${{ steps.version-step.outputs.version }}
+          fi
           echo "Version to be released: $versionNumber"
           echo "value=$versionNumber" >> $GITHUB_OUTPUT
 
