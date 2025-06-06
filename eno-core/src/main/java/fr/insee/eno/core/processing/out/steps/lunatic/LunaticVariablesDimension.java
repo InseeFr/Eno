@@ -52,12 +52,8 @@ public class LunaticVariablesDimension implements ProcessingStep<Questionnaire> 
      * Implement Java Comparator for VariableGroup
      * The goal is to do the treatment of PairwiseLink at the end during a stream of VariableGroup
      */
-    public static final Comparator<VariableGroup> variableGroupComparator = (variableGroup1, variableGroup2) -> {
-        if(VariableGroup.Type.PAIRWISE_LINKS.equals(variableGroup1.getType()) && VariableGroup.Type.PAIRWISE_LINKS.equals(variableGroup2.getType())) return 0;
-        if(VariableGroup.Type.PAIRWISE_LINKS.equals(variableGroup1.getType())) return 1;
-        if(VariableGroup.Type.PAIRWISE_LINKS.equals(variableGroup2.getType())) return -1;
-        return 0;
-    };
+    public static final Comparator<VariableGroup> variableGroupComparator = Comparator.comparingInt(
+            variableGroup -> VariableGroup.Type.PAIRWISE_LINKS.equals(variableGroup.getType()) ? 1 : 0);
 
     private void setQuestionnaireVariablesDimension(VariableGroup questionnaireVariableGroup) {
         questionnaireVariableGroup.getVariables().stream().map(Variable::getName).forEach(variableName ->
