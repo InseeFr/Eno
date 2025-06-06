@@ -33,6 +33,9 @@ jobs:
       previous-version: ${{ steps.previousTag.outputs.previousTag }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0 # needed to get previous tag
 
       - name: Set up JDK
         uses: actions/setup-java@v4
@@ -53,11 +56,7 @@ jobs:
 
       - name: Get previous final release tag
         id: previousTag
-        run: |
-          echo ""
-          echo "previousTag=$(git --no-pager tag --sort=creatordate --merged v3-main | grep "^[3-9]\.[0-9]\+\.[0-9]\+$" | tail -1)" >> $GITHUB_OUTPUT
-          echo $previousTag
-          echo $GITHUB_OUTPUT
+        run: echo "previousTag=$(git --no-pager tag --sort=creatordate --merged v3-main | grep "^[3-9]\.[0-9]\+\.[0-9]\+$" | tail -1)" >> $GITHUB_OUTPUT
         # Note: the regex works for single digit major version, to be updated if the version goes 10.0.0 or more
 
       - name: Compare version to previous release tag
