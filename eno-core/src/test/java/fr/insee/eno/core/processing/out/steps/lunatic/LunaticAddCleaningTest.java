@@ -169,7 +169,7 @@ class LunaticAddCleaningTest {
                 .getCleanedVariable("PAIRWISE_QUESTION")
                 .getCleaningExpressions().getFirst();
 
-        assertEquals("PAIRWISE_SOURCE <> \"\"", cleaningExpression.getExpression());
+        assertEquals("nvl(PAIRWISE_SOURCE, \"\") <> \"\"", cleaningExpression.getExpression());
         assertEquals("PAIRWISE_SOURCE", cleaningExpression.getShapeFrom());
 
     }
