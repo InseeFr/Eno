@@ -2431,7 +2431,7 @@
             <d:Roster baseCodeValue="1" codeIterationValue="1">
                 <xsl:variable name="minimumRequired" select="enoddi33:get-minimum-lines($source-context)"/>
                 <xsl:variable name="maximumAllowed" select="enoddi33:get-maximum-lines($source-context)"/>
-                <xsl:variable name="ConditionForContinuation" select="enoddi33:get-fixed-lines($source-context)"/>
+                <xsl:variable name="ConditionForContinuation" select="enoddi33:get-condition-for-continuation($source-context)"/>
                 <xsl:if test="$minimumRequired != ''">
                     <xsl:attribute name="minimumRequired">
                         <xsl:value-of select="$minimumRequired"/>

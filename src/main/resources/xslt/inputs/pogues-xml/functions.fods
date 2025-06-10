@@ -748,7 +748,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce21" office:value-type="string" calcext:value-type="string">
-      <text:p>enopogues:get-fixed-lines</text:p>
+      <text:p>enopogues:get-condition-for-continuation</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
      <table:table-cell table:style-name="ce24" office:value-type="string" calcext:value-type="string">
