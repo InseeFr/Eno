@@ -9,7 +9,6 @@ import fr.insee.lunatic.model.flat.variable.VariableType;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -80,8 +79,8 @@ public class LunaticMultipleChoiceQuestionCleaning {
                     String responseVariable = responseCheckboxGroup.getResponse().getName();
                     processCleaningForFilterExpression(cleaning, variableIndex, variableShapeFromIndex,
                         VtlSyntaxUtils.nvlDefaultValue(responseVariable, "false"),
-                        Arrays.asList(responseVariable),
-                        Arrays.asList(clarificationVariable));
+                        List.of(responseVariable),
+                        List.of(clarificationVariable));
                 }
             });
         }

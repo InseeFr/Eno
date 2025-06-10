@@ -8,7 +8,6 @@ import fr.insee.lunatic.model.flat.cleaning.CleaningType;
 import fr.insee.lunatic.model.flat.variable.VariableType;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -57,8 +56,8 @@ public class LunaticUniqueChoiceQuestionCleaning {
 
             processCleaningForFilterExpression(lunaticQuestionnaire.getCleaning(), variableIndex, variableShapeFromIndex,
                 VtlSyntaxUtils.expressionEqualToOther(responseVariable, VtlSyntaxUtils.surroundByDoubleQuotes(clarificationValue)),
-                Arrays.asList(responseVariable),
-                Arrays.asList(clarificationVariable));
+                List.of(responseVariable),
+                List.of(clarificationVariable));
             });
     }
 
