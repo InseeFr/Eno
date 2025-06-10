@@ -10,6 +10,7 @@ on:
       - 'CHANGELOG.md'
       - 'README**.md'
       - 'Dockerfile'
+      - '.github/**'
 
 # TL;DR: Do conventional commits,
 # bump the version before pushing on main, 
