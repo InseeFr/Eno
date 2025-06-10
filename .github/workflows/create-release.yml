@@ -147,7 +147,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_HOST_URL: "https://sonarcloud.io"
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew clean build sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr
+        run: ./gradlew clean build sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr -Dsonar.branch.name=${{ github.ref_name }}
 
   build-sources:
     needs: [ version, sonar ]
