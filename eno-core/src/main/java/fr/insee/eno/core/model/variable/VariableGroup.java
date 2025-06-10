@@ -7,6 +7,7 @@ import fr.insee.ddi.lifecycle33.reusable.ReferenceType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.exceptions.business.IllegalDDIElementException;
+import fr.insee.eno.core.exceptions.business.VariableGroupException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.DDIIndex;
@@ -74,24 +75,39 @@ public class VariableGroup extends EnoObject {
                 .findFirst();
     }
 
-    public static List<String> getDDILoopReferences(VariableGroupType ddiVariableGroup, DDIIndex ddiIndex) {
+    public static List<String> getDDILoopReferences(VariableGroupType ddiVariableGroup, DDIIndex ddiIndex) throws VariableGroupException {
         if (DDI_QUESTIONNAIRE_TYPE.equals(ddiVariableGroup.getTypeOfVariableGroup().getStringValue()))
             return new ArrayList<>();
 
-        // iterable means either loop or dynamic table
-        List<String> iterableReferences = new ArrayList<>();
         if(DDI_PAIRWISE_TYPE.equals(ddiVariableGroup.getTypeOfVariableGroup().getStringValue())){
-            String variableGroupId = ddiVariableGroup.getIDArray(0).getStringValue();
-            VariableSchemeType variableSchemeType = (VariableSchemeType) ddiIndex.getParent(variableGroupId);
-            Optional<VariableGroupType> optionalVariableGroupOrigin = variableSchemeType.getVariableGroupList().stream()
-                    .filter(variableGroupType -> variableGroupType.getVariableGroupReferenceList().stream()
-                            .anyMatch(ref->variableGroupId.equals(ref.getIDArray(0).getStringValue()))
-            ).findFirst();
-            if(optionalVariableGroupOrigin.isPresent()){
-                VariableGroupType variableGroupOrigin = optionalVariableGroupOrigin.get();
-                return getDDILoopReferences(variableGroupOrigin, ddiIndex);
-            }
+            return getDDILoopReferencesForPairwise(ddiVariableGroup, ddiIndex);
         }
+        return getDDILoopReferencesForIterableObject(ddiVariableGroup);
+
+    }
+
+    public static List<String> getDDILoopReferencesForPairwise(VariableGroupType ddiPairwiseVariableGroup, DDIIndex ddiIndex) throws VariableGroupException {
+        String variableGroupId = ddiPairwiseVariableGroup.getIDArray(0).getStringValue();
+        VariableSchemeType variableSchemeType = (VariableSchemeType) ddiIndex.getParent(variableGroupId);
+        Optional<VariableGroupType> optionalVariableGroupOrigin = variableSchemeType.getVariableGroupList().stream()
+                .filter(variableGroupType -> variableGroupType.getVariableGroupReferenceList().stream()
+                        .anyMatch(ref->variableGroupId.equals(ref.getIDArray(0).getStringValue()))
+                ).findFirst();
+        if(optionalVariableGroupOrigin.isPresent()){
+            VariableGroupType variableGroupOrigin = optionalVariableGroupOrigin.get();
+            return getDDILoopReferences(variableGroupOrigin, ddiIndex);
+        }
+        throw new VariableGroupException(String.format(
+                "The pairwise variableGroup (id: '%s'), must belongs to another variable group (the variable group of variableSource of pairwise", variableGroupId));
+    }
+
+    /**
+     * Iterable means either loop or dynamic table
+     * @param ddiVariableGroup
+     * @return
+     */
+    public static List<String> getDDILoopReferencesForIterableObject(VariableGroupType ddiVariableGroup) {
+        List<String> iterableReferences = new ArrayList<>();
         for (ReferenceType reference : ddiVariableGroup.getBasedOnObject().getBasedOnReferenceList()) {
             iterableReferences.add(reference.getIDArray(0).getStringValue());
         }
@@ -119,6 +135,7 @@ public class VariableGroup extends EnoObject {
         ddiVariableGroup.getVariableGroupReferenceList().forEach( vgRef -> {
             VariableGroupType variableGroupInside = (VariableGroupType) ddiIndex.get(vgRef.getIDArray(0).getStringValue());
             String ddiTypeOfGroupInside = variableGroupInside.getTypeOfVariableGroup().getStringValue();
+            // If a pairwise variable group belongs to another variable group, variables of pairwise must belong to variable group parent.
             if(DDI_PAIRWISE_TYPE.equals(ddiTypeOfGroupInside)) variables.addAll(getVariables(variableGroupInside, ddiIndex));
         });
         return variables;

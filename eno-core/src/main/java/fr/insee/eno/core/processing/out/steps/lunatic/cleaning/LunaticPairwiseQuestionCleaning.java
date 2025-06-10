@@ -14,6 +14,12 @@ import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUt
 import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.processCleaningForFilterExpression;
 import static fr.insee.eno.core.utils.LunaticUtils.findComponentById;
 
+/**
+ * This class is used to implement a cleaning logic to improve ergonomics for respondents.
+ * When the cleaning source variable is null (typically, the current condition for saying that a respondents no longer lives in the house),
+ * we want to empty the corresponding response fields of the 2 by 2 links.
+ * So this steps add a cleaning expression to clean the response of links variable according to static expression. (source var not empty)
+ */
 public class LunaticPairwiseQuestionCleaning {
 
     private final Questionnaire lunaticQuestionnaire;
@@ -36,7 +42,9 @@ public class LunaticPairwiseQuestionCleaning {
             String loopVariableNameBasedOn = pairwiseQuestion.getLoopVariableName();
             ConditionFilterType specialConditionFilter = new ConditionFilterType();
             specialConditionFilter.setType(LabelTypeEnum.VTL);
-            String loopVariableNameNotEmpty = VtlSyntaxUtils.expressionNotEqualToOther(loopVariableNameBasedOn, "\"\"");
+            String loopVariableNameNotEmpty = VtlSyntaxUtils.expressionNotEqualToOther(
+                    VtlSyntaxUtils.nvlDefaultValue(loopVariableNameBasedOn, "\"\""),
+                    "\"\"");
             specialConditionFilter.setValue(loopVariableNameNotEmpty);
             specialConditionFilter.setBindingDependencies(List.of(loopVariableNameBasedOn));
 

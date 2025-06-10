@@ -57,6 +57,13 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
         lunaticQuestionnaire.getVariables().addAll(createCalculatedAxisVariables(pairwiseLinks));
     }
 
+    /**
+     * This method create filter to avoid asking unnecessary questions to people who aren't concerned.
+     *
+     * The expression must be equal (replacing variableSource with X_AXIS/Y_AXIS) to the Pairwise cleaning expression.
+     * (see LunaticPairwiseQuestionCleaning)
+     * @return the conditionFilter for inner component
+     */
     private ConditionFilterType buildConditionFilterForSimpleComponent(){
         ConditionFilterType conditionFilter = new ConditionFilterType();
         conditionFilter.setType(LabelTypeEnum.VTL);
