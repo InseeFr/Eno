@@ -6,6 +6,7 @@ import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
 import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
+import fr.insee.eno.core.model.response.CodeResponse;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.sequence.ItemReference;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
@@ -49,9 +50,15 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
     private final Map<String, String> variableShapeFromIndex = new LinkedHashMap<>();
     private Map<String, List<String>> variablesByQuestion;
 
+
+    public LunaticAddCleaning(EnoQuestionnaire enoQuestionnaire, EnoIndex enoIndex) {
+        this.enoQuestionnaire = enoQuestionnaire;
+        this.enoIndex = enoIndex;
+    }
+
+
     /**
      * Create the 'cleaning' block in the given Lunatic questionnaire. (See class documentation for details.)
-     *
      * @param lunaticQuestionnaire A Lunatic questionnaire object.
      */
     @Override
@@ -67,17 +74,28 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
         processClarificationFiltered(lunaticQuestionnaire);
     }
 
-    /**
-     * filter 1 is parent of filter2 if filter2 in inside filter 1
-     * This comparator method needs filterHierarchyIndex
-     */
-    public final Comparator<Filter> filterComparator = (filter1, filter2) -> {
-        boolean isParentOfFilter2 = filterHierarchyIndex.get(filter1.getId()).contains(filter2.getId());
-        boolean isChildOfFilter2 = filterHierarchyIndex.get(filter2.getId()).contains(filter1.getId());
-        if(isParentOfFilter2) return -1;
-        if(isChildOfFilter2) return 1;
-        return 0;
-    };
+
+    /** Method made package-private to be unit tested. */
+    void preProcessCleaning(Questionnaire lunaticQuestionnaire){
+        lunaticQuestionnaire.setCleaning(new CleaningType());
+        this.preProcessUtilsIndex();
+        this.preProcessVariablesAndShapeFrom(lunaticQuestionnaire);
+    }
+
+    private void preProcessUtilsIndex(){
+        // Create Filter hierarchy Index (Filter which include other filter)
+        enoQuestionnaire.getFilters().forEach(filter -> {
+            List<String> filterIdsInside = filter.getFilterItems().stream()
+                    .map(this::getFilterItemInside)
+                    .flatMap(Collection::stream)
+                    .toList();
+            filterHierarchyIndex.put(filter.getId(), filterIdsInside);
+        });
+        // Create order filter Index (only Filter), based on hierarchy
+        List<Filter> sortedFilters = new ArrayList<>(enoQuestionnaire.getFilters());
+        sortedFilters.sort(filterComparator);
+        sortedFilters.forEach(f -> filterIndex.put(f.getId(), f));
+    }
 
     private List<String> getFilterItemInside(ItemReference itemReference){
         List<String> filterIds = new ArrayList<>();
@@ -103,33 +121,17 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
         return filterIds;
     }
 
-    public LunaticAddCleaning(EnoQuestionnaire enoQuestionnaire) {
-        this.enoQuestionnaire = enoQuestionnaire;
-        this.enoIndex = enoQuestionnaire.getIndex();
-        this.preProcessUtilsIndex();
-    }
-
-
-    private void preProcessUtilsIndex(){
-        // Create Filter hierarchy Index (Filter which include other filter)
-        enoQuestionnaire.getFilters().forEach(filter -> {
-            List<String> filterIdsInside = filter.getFilterItems().stream()
-                    .map(this::getFilterItemInside)
-                    .flatMap(Collection::stream)
-                    .toList();
-            filterHierarchyIndex.put(filter.getId(), filterIdsInside);
-        });
-        // Create order filter Index (only Filter), based on hierarchy
-        List<Filter> sortedFilters = new ArrayList<>(enoQuestionnaire.getFilters());
-        sortedFilters.sort(filterComparator);
-        sortedFilters.forEach(f -> filterIndex.put(f.getId(), f));
-
-    }
-
-    public void preProcessCleaning(Questionnaire lunaticQuestionnaire){
-        lunaticQuestionnaire.setCleaning(new CleaningType());
-        this.preProcessVariablesAndShapeFrom(lunaticQuestionnaire);
-    }
+    /**
+     * filter 1 is parent of filter2 if filter2 in inside filter 1
+     * This comparator method needs filterHierarchyIndex
+     */
+    private final Comparator<Filter> filterComparator = (filter1, filter2) -> {
+        boolean isParentOfFilter2 = filterHierarchyIndex.get(filter1.getId()).contains(filter2.getId());
+        boolean isChildOfFilter2 = filterHierarchyIndex.get(filter2.getId()).contains(filter1.getId());
+        if(isParentOfFilter2) return -1;
+        if(isChildOfFilter2) return 1;
+        return 0;
+    };
 
     private void preProcessVariablesAndShapeFrom(Questionnaire lunaticQuestionnaire){
         variablesByQuestion = getCollectedVariablesByQuestion(lunaticQuestionnaire);
@@ -140,12 +142,13 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                     variableShapeFromIndex.put(lunaticVariable.getName(), getShapeFromOfVariable(lunaticQuestionnaire, lunaticVariable.getName()));
                 });
     }
+
     /**
-     *
-     * @param variableName
-     * @return ShapeFrom: the variable Name of filter scope
+     * Note: method made package-private to be unit tested.
+     * @param variableName Name of a variable in the questionnaire.
+     * @return ShapeFrom: the variable Name of filter scope. null if no corresponding iteration is found.
      */
-    public String getShapeFromOfVariable(Questionnaire lunaticQuestionnaire, String variableName){
+    String getShapeFromOfVariable(Questionnaire lunaticQuestionnaire, String variableName){
         VariableType variableType = variableIndex.get(variableName);
         Optional<ComponentType> iterationComponent = lunaticQuestionnaire.getComponents().stream()
                 .filter(component -> variableType.getIterationReference() != null
@@ -156,11 +159,11 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
     }
 
     /**
-     *
-     * @param filter
+     * Note: method made package-private to be unit tested.
+     * @param filter Eno-model filter object.
      * @return List of variable Name collected inside the scope of filter
      */
-    public List<String> getCollectedVariablesInFilter(Filter filter) {
+    List<String> getCollectedVariablesInFilter(Filter filter) {
         List<String> collectedVarForFilter = new ArrayList<>();
         filter.getFilterScope().forEach(
                 itemReference -> {
@@ -177,22 +180,26 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
     }
 
     /**
-     *
-     * @param abstractSequence
+     * Note: method made package-private to be unit tested.
+     * @param sequence Eno-model sequence or subsequence object.
      * @return List of variable Name collected inside the scope of sequence or subsequence
      */
-    public List<String> getCollectedVarsInSequence(AbstractSequence abstractSequence) {
+    List<String> getCollectedVarsInSequence(AbstractSequence sequence) {
         List<String> collectedVarInSequence = new ArrayList<>();
-        abstractSequence.getSequenceStructure().stream().forEach(itemReference -> {
+        sequence.getSequenceStructure().forEach(itemReference -> {
                     if (StructureItemReference.StructureItemType.QUESTION.equals(itemReference.getType())) {
                         collectedVarInSequence.addAll(variablesByQuestion.get(itemReference.getId()));
-                    } else {
-                        collectedVarInSequence.addAll(getCollectedVarsInSequence((AbstractSequence) enoIndex.get(itemReference.getId())));
+                        return;
                     }
+                    collectedVarInSequence.addAll(getCollectedVarsInSequence((AbstractSequence) enoIndex.get(itemReference.getId())));
+
                 }
         );
         return collectedVarInSequence;
     }
+
+
+    /** Handle cleaning for 'regular' question components. */
     private void processQuestionLevelFilter(Questionnaire lunaticQuestionnaire){
         CleaningType cleaning = lunaticQuestionnaire.getCleaning();
         filterIndex.forEach((filterId, filter) -> {
@@ -206,8 +213,8 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
         });
     }
 
-
-    public void processCodeFiltered(Questionnaire lunaticQuestionnaire){
+    /** Handle cleaning for filtered code responses that can be found in MCQ. */
+    void processCodeFiltered(Questionnaire lunaticQuestionnaire){
         LunaticUniqueChoiceQuestionCleaning uniqueChoiceQuestionCleaning = new LunaticUniqueChoiceQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
         LunaticMultipleChoiceQuestionCleaning multipleChoiceQuestionCleaning = new LunaticMultipleChoiceQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
         // 1. retrieve all codeFilters
@@ -230,8 +237,8 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                 .forEach(multipleChoiceQuestionCleaning::processCleaningMultipleChoiceQuestion);
     }
 
-    /** Handle cleaning for detail responses that can be found in QCU and QCM. */
-    public void processClarificationFiltered(Questionnaire lunaticQuestionnaire){
+    /** Handle cleaning for detail responses that can be found in UCQ and MCQ. */
+    void processClarificationFiltered(Questionnaire lunaticQuestionnaire){
         LunaticUniqueChoiceQuestionCleaning uniqueChoiceQuestionCleaning = new LunaticUniqueChoiceQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
         LunaticMultipleChoiceQuestionCleaning multipleChoiceQuestionCleaning = new LunaticMultipleChoiceQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
 
@@ -248,7 +255,8 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                 .forEach(multipleChoiceQuestionCleaning::processCleaningMultipleChoiceQuestionClarification);
     }
 
-    public void processCellsFiltered(Questionnaire lunaticQuestionnaire){
+    /** Handle cleaning for filtered table cells. */
+    void processCellsFiltered(Questionnaire lunaticQuestionnaire){
         LunaticDynamicTableQuestionCleaning dynamicTableQuestionCleaning = new LunaticDynamicTableQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
         enoQuestionnaire.getMultipleResponseQuestions().stream()
                 .filter(DynamicTableQuestion.class::isInstance)
