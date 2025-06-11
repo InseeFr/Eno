@@ -67,22 +67,24 @@ public class LunaticMultipleChoiceQuestionCleaning {
     /** Add a cleaning for clarification question that are displayed only when a specific option is checked. */
     public void processCleaningMultipleChoiceQuestionClarification(SimpleMultipleChoiceQuestion enoMultipleChoiceQuestion){
         CleaningType cleaning = lunaticQuestionnaire.getCleaning();
-        Optional<ComponentType> multipleChoiceQuestion = findComponentById(lunaticQuestionnaire, enoMultipleChoiceQuestion.getId());
-        if(multipleChoiceQuestion.isEmpty()){
+        Optional<ComponentType> lunaticComponent = findComponentById(lunaticQuestionnaire, enoMultipleChoiceQuestion.getId());
+        if(lunaticComponent.isEmpty()){
             throw new MappingException("Cannot find Lunatic component for " + enoMultipleChoiceQuestion + ".");
         }
-        if(multipleChoiceQuestion.get() instanceof CheckboxGroup checkboxGroup){
-            checkboxGroup.getResponses().forEach(responseCheckboxGroup -> {
-                DetailResponse detailResponse = responseCheckboxGroup.getDetail();
-                if (detailResponse != null) {
-                    String clarificationVariable = detailResponse.getResponse().getName();
-                    String responseVariable = responseCheckboxGroup.getResponse().getName();
-                    processCleaningForFilterExpression(cleaning, variableIndex, variableShapeFromIndex,
-                        VtlSyntaxUtils.nvlDefaultValue(responseVariable, "false"),
-                        List.of(responseVariable),
-                        List.of(clarificationVariable));
-                }
-            });
+        if(! (lunaticComponent.get() instanceof CheckboxGroup checkboxGroup)) {
+            throw new MappingException("Lunatic component " + lunaticComponent.get() + " is not a checkbox group.");
         }
+        checkboxGroup.getResponses().forEach(responseCheckboxGroup -> {
+            DetailResponse detailResponse = responseCheckboxGroup.getDetail();
+            if (detailResponse == null)
+                return;
+            String clarificationVariable = detailResponse.getResponse().getName();
+            String responseVariable = responseCheckboxGroup.getResponse().getName();
+            processCleaningForFilterExpression(cleaning, variableIndex, variableShapeFromIndex,
+                VtlSyntaxUtils.nvlDefaultValue(responseVariable, "false"),
+                List.of(responseVariable),
+                List.of(clarificationVariable));
+        });
     }
+
 }
