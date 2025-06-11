@@ -251,7 +251,8 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
         enoQuestionnaire.getMultipleResponseQuestions().stream()
                 .filter(SimpleMultipleChoiceQuestion.class::isInstance)
                 .map(SimpleMultipleChoiceQuestion.class::cast)
-                .filter(simpleMultipleChoiceQuestion -> !simpleMultipleChoiceQuestion.getDetailResponses().isEmpty())
+                .filter(simpleMultipleChoiceQuestion ->
+                        simpleMultipleChoiceQuestion.getCodeResponses().stream().map(CodeResponse::getDetailResponse).anyMatch(Objects::nonNull))
                 .forEach(multipleChoiceQuestionCleaning::processCleaningMultipleChoiceQuestionClarification);
     }
 

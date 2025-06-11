@@ -52,8 +52,12 @@ public class SimpleMultipleChoiceQuestion extends MultipleResponseQuestion {
 
     /**
      * Detail responses for modalities that have a "please specify" field.
-     * In DDI, this information is mapped in a processing step.
-     * In Lunatic, they are inserted in code response objects through a processing.
+     * In DDI, this information is inserted directly at the 'right place' i.e. in CodeResponse objects through a
+     * processing step.
+     * @see fr.insee.eno.core.processing.in.steps.ddi.DDIInsertDetailResponses
+     * In Pogues, this information is at the question level. It is mapped here, then inserted in CodeResponse objects
+     * through a processing step.
+     * @see fr.insee.eno.core.processing.in.steps.pogues.PoguesCodeResponseDetails
      */
     @Pogues("getClarificationQuestion()")
     List<DetailResponse> detailResponses = new ArrayList<>();

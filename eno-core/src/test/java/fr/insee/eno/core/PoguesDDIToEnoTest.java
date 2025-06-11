@@ -175,7 +175,7 @@ class PoguesDDIToEnoTest {
                 .forEach(question -> {
                     question.getCodeResponses()
                             .forEach(codeResponse -> codeResponse.getResponse().setVariableReference(null));
-                    question.getDetailResponses().removeIf(detailResponse -> detailResponse.getPoguesId() != null);
+                    question.getDetailResponses().clear();
                 });
         enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(UniqueChoiceQuestion.class::isInstance).map(UniqueChoiceQuestion.class::cast)
