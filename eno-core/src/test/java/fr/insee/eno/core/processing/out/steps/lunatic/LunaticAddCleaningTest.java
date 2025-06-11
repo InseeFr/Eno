@@ -23,6 +23,7 @@ import fr.insee.eno.core.serialize.DDIDeserializer;
 import fr.insee.eno.core.serialize.PoguesDeserializer;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.cleaning.CleaningExpression;
+import fr.insee.lunatic.model.flat.cleaning.CleaningVariableEntry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -135,55 +136,54 @@ class LunaticAddCleaningTest {
     @Test
     void testCleaningOfDetailResponse() throws DDIParsingException, PoguesDeserializationException {
         prepareQuestionnaireTest(
-                "functional/pogues/clarification/pogues-m9bcc8mc.json",
-                "functional/ddi/clarification/ddi-m9bcc8mc.xml");
+                "integration/pogues/pogues-other-specify.json",
+                "integration/ddi/ddi-other-specify.xml");
 
         cleaningProcessing.processClarificationFiltered(lunaticQuestionnaire);
 
-        assertNotNull(lunaticQuestionnaire.getCleaning().getCleaningEntry("QCU"));
-        assertThat(lunaticQuestionnaire.getCleaning()
-                .getCleaningEntry("QCU")
-                .getCleanedVariable("QCU2CL")
+        CleaningVariableEntry cleaningEntryUCQ = lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("UCQ_RADIO");
+        assertNotNull(cleaningEntryUCQ);
+        assertThat(cleaningEntryUCQ
+                .getCleanedVariable("UCQ_codeC_RADIO")
                 .getCleaningExpressions())
                 .hasSize(1);
-        CleaningExpression cleaningExpression1 =  lunaticQuestionnaire.getCleaning()
-                .getCleaningEntry("QCU")
-                .getCleanedVariable("QCU2CL")
-                .getCleaningExpressions().get(0);
-        assertEquals("QCU = \"2\"", cleaningExpression1.getExpression());
-        assertThat(lunaticQuestionnaire.getCleaning()
-                .getCleaningEntry("QCU")
-                .getCleanedVariable("QCU3CL")
+        CleaningExpression cleaningExpression1 =  cleaningEntryUCQ
+                .getCleanedVariable("UCQ_codeC_RADIO")
+                .getCleaningExpressions().getFirst();
+        assertEquals("UCQ_RADIO = \"codeC\"", cleaningExpression1.getExpression());
+        assertThat(cleaningEntryUCQ
+                .getCleanedVariable("UCQ_codeD_RADIO")
                 .getCleaningExpressions())
                 .hasSize(1);
-        CleaningExpression cleaningExpression2 =  lunaticQuestionnaire.getCleaning()
-                .getCleaningEntry("QCU")
-                .getCleanedVariable("QCU3CL")
-                .getCleaningExpressions().get(0);
-        assertEquals("QCU = \"3\"", cleaningExpression2.getExpression());
+        CleaningExpression cleaningExpression2 =  cleaningEntryUCQ
+                .getCleanedVariable("UCQ_codeD_RADIO")
+                .getCleaningExpressions().getFirst();
+        assertEquals("UCQ_RADIO = \"codeD\"", cleaningExpression2.getExpression());
 
-        assertNotNull(lunaticQuestionnaire.getCleaning().getCleaningEntry("QCM2"));
-        assertThat(lunaticQuestionnaire.getCleaning()
-                .getCleaningEntry("QCM2")
-                .getCleanedVariable("QCM2CL")
+        CleaningVariableEntry cleaningEntryMCQ3 = lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("MCQ3");
+        assertNotNull(cleaningEntryMCQ3);
+        assertThat(cleaningEntryMCQ3
+                .getCleanedVariable("MCQ_codeC")
                 .getCleaningExpressions())
                 .hasSize(1);
-        CleaningExpression cleaningExpressionQCM2 =  lunaticQuestionnaire.getCleaning()
-                .getCleaningEntry("QCM2")
-                .getCleanedVariable("QCM2CL")
-                .getCleaningExpressions().get(0);
-        assertEquals("nvl(QCM2, false)", cleaningExpressionQCM2.getExpression());
-        assertNotNull(lunaticQuestionnaire.getCleaning().getCleaningEntry("QCM3"));
-        assertThat(lunaticQuestionnaire.getCleaning()
-                .getCleaningEntry("QCM3")
-                .getCleanedVariable("QCM3CL")
+        CleaningExpression cleaningExpressionQCM2 =  cleaningEntryMCQ3
+                .getCleanedVariable("MCQ_codeC")
+                .getCleaningExpressions().getFirst();
+        assertEquals("nvl(MCQ3, false)", cleaningExpressionQCM2.getExpression());
+
+        CleaningVariableEntry cleaningEntryMCQ4 = lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("MCQ4");
+        assertNotNull(cleaningEntryMCQ4);
+        assertThat(cleaningEntryMCQ4
+                .getCleanedVariable("MCQ_codeD")
                 .getCleaningExpressions())
                 .hasSize(1);
-        CleaningExpression cleaningExpressionQCM3 =  lunaticQuestionnaire.getCleaning()
-                .getCleaningEntry("QCM3")
-                .getCleanedVariable("QCM3CL")
-                .getCleaningExpressions().get(0);
-        assertEquals("nvl(QCM3, false)", cleaningExpressionQCM3.getExpression());
+        CleaningExpression cleaningExpressionQCM3 =  cleaningEntryMCQ4
+                .getCleanedVariable("MCQ_codeD")
+                .getCleaningExpressions().getFirst();
+        assertEquals("nvl(MCQ4, false)", cleaningExpressionQCM3.getExpression());
     }
 
     @Test
