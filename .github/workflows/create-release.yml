@@ -215,7 +215,6 @@ jobs:
           target_commitish: ${{ github.head_ref || github.ref }}
           name: ${{ needs.version.outputs.release-version }}
           body: ${{ steps.changelog.outputs.changes }}
-          files: eno-ws/build/libs/eno-ws.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
